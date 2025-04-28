@@ -7,11 +7,19 @@ export default function CardSelection({
   cardIssuer,
   error,
   onBlur,
+  selectRef,
+  onComplete,
 }: {
   cardIssuer: string;
   error: ErrorProps;
   onBlur: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  selectRef: React.Ref<HTMLSelectElement>;
+  onComplete: () => void;
 }) {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onBlur(e);
+    onComplete?.();
+  };
   return (
     <S.CardInfoMainSection>
       <div>
@@ -21,7 +29,7 @@ export default function CardSelection({
       <S.CardInfoSubSection>
         <S.CardInfoInputContainer>
           {
-            <S.CardSelection value={cardIssuer} onChange={onBlur} name='cardIssuer'>
+            <S.CardSelection value={cardIssuer} onChange={handleChange} name='cardIssuer' ref={selectRef}>
               <option value='' disabled hidden>
                 카드사를 선택해주세요
               </option>

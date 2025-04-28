@@ -11,9 +11,13 @@ const inputArr = [
 export default function CardExpirationDateSection({
   error,
   onBlur,
+  selectRef,
+  onComplete,
 }: {
   error: ErrorProps;
   onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  selectRef: React.Ref<HTMLInputElement>;
+  onComplete: () => void;
 }) {
   const isError =
     error && error['cardExpirationDateError'].errorIndex !== -1 && error['cardExpirationDateError'].errorMessage !== '';
@@ -21,11 +25,21 @@ export default function CardExpirationDateSection({
 
   const createInputRef = (index: number) => (el: HTMLInputElement | null) => {
     inputRefs.current[index] = el;
+
+    if (index === 0 && selectRef) {
+      if (typeof selectRef === 'function') {
+        selectRef(el);
+      } else if (selectRef && 'current' in selectRef) {
+        (selectRef as React.RefObject<HTMLInputElement | null>).current = el;
+      }
+    }
   };
 
   const handleRef = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 2 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1]?.focus();
+    } else if (e.target.value.length === 2 && !inputRefs.current[index + 1]) {
+      onComplete?.();
     }
   };
 

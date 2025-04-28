@@ -13,9 +13,11 @@ const inputArr = [
 export default function CardNumberSection({
   error,
   onBlur,
+  onComplete,
 }: {
   error: ErrorProps;
   onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onComplete: () => void;
 }) {
   const isError = error && error['cardNumberError'].errorIndex !== -1 && error['cardNumberError'].errorMessage !== '';
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -27,6 +29,8 @@ export default function CardNumberSection({
   const handleRef = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 4 && inputRefs.current[index + 1]) {
       inputRefs.current[index + 1]?.focus();
+    } else if (e.target.value.length === 4 && !inputRefs.current[index + 1]) {
+      onComplete?.();
     }
   };
 

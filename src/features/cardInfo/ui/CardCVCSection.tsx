@@ -2,16 +2,26 @@ import * as S from './CardInfoSection.styles';
 import { ErrorProps } from '../../../shared/model/types';
 import CustomInput from '../../../shared/ui/CustomInput';
 
-const inputArr = [{ type: 'text', placeholder: '123', name: 'cardCVC' }];
+const inputArr = { type: 'text', placeholder: '123', name: 'cardCVC' };
 
 export default function CardCVCSection({
   error,
   onBlur,
+  selectRef,
+  onComplete,
 }: {
   error: ErrorProps;
   onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  selectRef: React.Ref<HTMLInputElement | null>;
+  onComplete: () => void;
 }) {
   const isError = error && error['cardCVCError'].errorIndex !== -1 && error['cardCVCError'].errorMessage !== '';
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 3) {
+      onComplete?.();
+    }
+  };
 
   return (
     <S.CardInfoMainSection>
@@ -22,15 +32,15 @@ export default function CardCVCSection({
       <S.CardInfoSubSection>
         <S.CardInfoSubTitle>CVC</S.CardInfoSubTitle>
         <S.CardInfoInputContainer>
-          {inputArr.map((input, index: number) => (
-            <CustomInput
-              key={`cardExpirationDate-custom-input-${index}`}
-              {...input}
-              onBlur={onBlur}
-              maxLength={3}
-              error={isError}
-            />
-          ))}
+          <CustomInput
+            key={`cardExpirationDate-custom-input`}
+            {...inputArr}
+            onBlur={onBlur}
+            maxLength={3}
+            error={isError}
+            ref={selectRef}
+            onChange={handleChange}
+          />
         </S.CardInfoInputContainer>
         <S.CardInfoError>{error && error['cardCVCError'].errorMessage}</S.CardInfoError>
       </S.CardInfoSubSection>
