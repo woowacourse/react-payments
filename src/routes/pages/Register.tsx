@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import { AppLayout } from '../../components/common/AppLayout';
 import { Flex } from '../../components/common/Flex';
 import { SubmitButton } from '../../components/features/Buttons/SubmitButton';
@@ -12,9 +10,9 @@ import { CardPreview } from '../../components/features/CardPreview';
 import { useBrandSelectInput } from '../../hooks/useBrandSelectInput';
 import { useCardInput } from '../../hooks/useCardInput';
 import { useExpireDateInput } from '../../hooks/useExpireDateInput';
+import { useFormStep } from '@/hooks/useFormStep';
 
 export const Register = () => {
-  const [step, setStep] = useState(0);
   const {
     value: cardNumbers,
     errorMessage: cardErrorMessage,
@@ -35,7 +33,7 @@ export const Register = () => {
     errorMessage: expireDateErrorMessage,
     handleChange: handleExpireDateChange,
     handleBlur: handleExpireDateBlur,
-    isAllValid: isAllValidExpireDate,
+    isAllValidAndFilled: canMoveNextFromExpireDate,
   } = useExpireDateInput();
 
   const {
@@ -54,39 +52,19 @@ export const Register = () => {
     isAllValidAndFilled: canMoveNextFromPassword,
   } = useCardInput('password');
 
-  useEffect(() => {
-    if (step === 3 && canMoveNextFromCVC) {
-      setStep(step + 1);
-      return;
-    }
-
-    if (step === 2 && isAllValidExpireDate) {
-      setStep(step + 1);
-      return;
-    }
-
-    if (step === 1 && selectedBrand) {
-      setStep(step + 1);
-      return;
-    }
-
-    if (step === 0 && canMoveNextFromCardNumber) {
-      setStep(step + 1);
-      return;
-    }
-  }, [
+  const { step } = useFormStep({
     canMoveNextFromCardNumber,
     canMoveNextFromCVC,
-    isAllValidExpireDate,
+    canMoveNextFromExpireDate,
     selectedBrand,
     canMoveNextFromPassword,
-  ]);
+  });
 
   const isAllClearInput =
     step >= 4 &&
     canMoveNextFromPassword &&
     canMoveNextFromCVC &&
-    isAllValidExpireDate &&
+    canMoveNextFromExpireDate &&
     canMoveNextFromCardNumber &&
     selectedBrand !== null;
 
