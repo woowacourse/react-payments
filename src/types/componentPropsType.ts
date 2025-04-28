@@ -38,10 +38,6 @@ export type SelectFormSectionProps<T extends Extract<keyof CardInformationType, 
   fieldData: SelectProps<T>;
 };
 
-export type FormSectionProps =
-  | InputFormSectionProps<Exclude<keyof CardInformationType, "company">>
-  | SelectFormSectionProps<Extract<keyof CardInformationType, "company">>;
-
 export type FormSectionBaseProps = { title: string; description: string; children: React.ReactNode };
 
 export type InputFieldProps<T extends Exclude<keyof CardInformationType, "company">> = {
@@ -59,8 +55,6 @@ export type InputFieldProps<T extends Exclude<keyof CardInformationType, "compan
   state: CardInformationType[T];
   /** 카드 정보 상태 변경 함수 */
   setState: React.Dispatch<React.SetStateAction<CardInformationType[T]>>;
-  // /** 이 필드가 담당하는 카드 정보 타입 */
-  // informationType: T;
   /** 해당 필드에 대한 개별 유효성 검사 */
   eachValidation: Omit<useEachValidationType, "isComplete">;
 };
@@ -103,8 +97,6 @@ export type SelectProps<T extends Extract<keyof CardInformationType, "company">>
   options: CompanyType[];
   /** select 초기에 보여질 텍스트 라벨 */
   placeholder: string;
-  /** 이 필드가 담당하는 카드 정보 타입 */
-  // informationType: CardInformationType[T];
   /** 카드 정보 상태 변경 함수 */
   setState: React.Dispatch<React.SetStateAction<CardInformationType[T]>>;
 };

@@ -12,7 +12,6 @@ export type useValidationType = {
   isErrorCompletes: isErrorCompletesType;
 };
 
-// 🔥 새로 추가
 export type validationFieldType = {
   [K in Exclude<cardInformationKey, "company">]: Exclude<useEachValidationType, "isComplete">;
 };
