@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PARSE_RULE, CVC_RULE, ERROR_MESSAGE } from '../constants/cardCVC';
 
-function useCardCVC() {
+const useCardCVC = () => {
   const [cardCVC, setCardCVC] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -32,6 +32,6 @@ function useCardCVC() {
     onChangeCVC,
     errorMessage,
   };
-}
+};
 
 export default useCardCVC;

@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { validateCardValidityPeriod } from '../validations/cardValidityPeriod';
 import { PARSE_RULE } from '../constants/cardValidityPeriod';
 
-function useCardValidityPeriod() {
+const useCardValidityPeriod = () => {
   const [cardValidityPeriod, setCardValidityPeriod] = useState({
     month: '',
     year: '',
@@ -88,6 +88,6 @@ function useCardValidityPeriod() {
     errorMessage,
     setInputRef,
   };
-}
+};
 
 export default useCardValidityPeriod;

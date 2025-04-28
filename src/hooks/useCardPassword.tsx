@@ -5,7 +5,7 @@ import {
   ERROR_MESSAGE,
 } from '../constants/cardPassword';
 
-function useCardPassword() {
+const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -36,6 +36,6 @@ function useCardPassword() {
     onChangeCardPassword,
     errorMessage,
   };
-}
+};
 
 export default useCardPassword;

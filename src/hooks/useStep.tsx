@@ -16,12 +16,12 @@ interface StepState {
   [STEP.CardPassword]: boolean;
 }
 
-function useStep({
+const useStep = ({
   cardNumberOkay,
   cardCompanyOkay,
   cardValidityPeriodOkay,
   cardCVCOkay,
-}: UseStepProps) {
+}: UseStepProps) => {
   const [step, setStep] = useState<StepState>({
     [STEP.CardNumber]: true,
     [STEP.CardCompany]: false,
@@ -57,6 +57,6 @@ function useStep({
   ]);
 
   return { step, STEP_NAME: STEP };
-}
+};
 
 export default useStep;

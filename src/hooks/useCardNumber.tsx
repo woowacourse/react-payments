@@ -5,7 +5,7 @@ import {
   ERROR_MESSAGE,
 } from '../constants/cardNumber';
 
-function useCardNumber() {
+const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState(['', '', '', '']);
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -70,6 +70,6 @@ function useCardNumber() {
     errorMessage,
     setInputRef,
   };
-}
+};
 
 export default useCardNumber;
