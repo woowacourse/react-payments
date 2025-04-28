@@ -15,7 +15,7 @@ export function createMockFormState(overrides?: Partial<CardFormProps>): CardFor
       year: { value: '', errorMessage: '' }
     },
     company: '',
-    componyRef: { current: null },
+
     onCardNumbersChange: () => {},
     cardInputRefs: {
       first: { current: null },
@@ -32,10 +32,10 @@ export function createMockFormState(overrides?: Partial<CardFormProps>): CardFor
     handleCompanySelect: () => {},
     cvc: { value: '', errorMessage: '' },
     handleCvcChange: () => {},
-    cvcRef: { current: null },
+
     password: { value: '', errorMessage: '' },
     handlePasswordChange: () => {},
-    passwordRef: { current: null },
+
     ...overrides
   };
 }

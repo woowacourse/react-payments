@@ -1,4 +1,4 @@
-import { RefObject, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { INITIAL_CARD_NUMBER } from '../constants';
 import { CardNumberType } from '../types';
 import { isNumber } from '../utils/isNumber';
@@ -8,6 +8,7 @@ const isValidCardNumberLength = (value: string) => value.length === 0 || value.l
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);
+
   const cardInputRefs = {
     first: useRef<HTMLInputElement>(null),
     second: useRef<HTMLInputElement>(null),

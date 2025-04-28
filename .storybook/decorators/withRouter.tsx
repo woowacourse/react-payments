@@ -1,4 +1,3 @@
-// .storybook/decorators/withRouter.tsx
 import * as React from 'react';
 import { MemoryRouter } from 'react-router';
 
