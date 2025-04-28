@@ -7,6 +7,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   regexString?: RegExp;
   autoFocus?: boolean;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 interface InputWrapperProps

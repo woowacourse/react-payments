@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
+import useInputFocus from '../../../hooks/useInputFocus';
 
 interface CardNumberFieldProps {
   cardNumber: string[];
@@ -12,6 +13,12 @@ function CardNumberField({
   isError,
   onChange,
 }: CardNumberFieldProps) {
+  const { inputRef } = useInputFocus<string[]>({
+    inputCount: 4,
+    inputValueLength: 4,
+    changeValue: cardNumber,
+  });
+
   return (
     <div>
       <Label htmlFor="cardNumber-0" id="cardNumber">
@@ -20,6 +27,11 @@ function CardNumberField({
       <InputWrapper>
         {cardNumber.map((v, index) => (
           <Input
+            ref={(el) => {
+              if (el) {
+                inputRef.current[index] = el;
+              }
+            }}
             isError={isError[index]}
             type="tel"
             name="cardNumber"

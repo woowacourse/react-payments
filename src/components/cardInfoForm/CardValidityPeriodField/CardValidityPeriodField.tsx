@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
 import { useId } from 'react';
+import useInputFocus from '../../../hooks/useInputFocus';
 
 type CardValidityPeriodType = {
   month: string;
@@ -30,6 +31,13 @@ function CardValidityPeriodField({
   const { month: isErrorMonth, year: isErrorYear } = isError;
 
   const id = useId();
+
+  const { inputRef } = useInputFocus<CardValidityPeriodType>({
+    inputCount: 2,
+    inputValueLength: 2,
+    changeValue: cardValidityPeriod,
+  });
+
   return (
     <div>
       <Label htmlFor={`cardValidityPeriod-${id}-${month}`}>유효기간</Label>
@@ -46,6 +54,11 @@ function CardValidityPeriodField({
           maxLength={2}
           regexString={/^\d*$/}
           autoFocus={true}
+          ref={(el) => {
+            if (el) {
+              inputRef.current[0] = el;
+            }
+          }}
         />
         <Input
           isError={isErrorYear}
@@ -58,6 +71,11 @@ function CardValidityPeriodField({
           placeholder="YY"
           maxLength={2}
           regexString={/^\d*$/}
+          ref={(el) => {
+            if (el) {
+              inputRef.current[1] = el;
+            }
+          }}
         />
       </InputWrapper>
     </div>
