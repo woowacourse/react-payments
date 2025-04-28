@@ -5,6 +5,7 @@ import {
   validateYear,
 } from "../../validation";
 import { CardInfo } from "../../../../hooks/useCardInfo";
+import { EXPIRATION_DATE } from "../constants";
 
 function useCardExpirationField(
   cardInfo: CardInfo,
@@ -40,7 +41,10 @@ function useCardExpirationField(
 
     if (value.length === maxLength) {
       const monthNum = parseInt(value, 10);
-      if (monthNum >= 1 && monthNum <= 12) {
+      if (
+        monthNum >= EXPIRATION_DATE.MONTH.MIN &&
+        monthNum <= EXPIRATION_DATE.MONTH.MAX
+      ) {
         yearInputRef.current?.focus();
       }
     }
