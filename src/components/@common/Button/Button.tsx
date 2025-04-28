@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
+import { ComponentProps } from "react";
 
-interface ButtonProps {
+interface ButtonProps extends ComponentProps<"button"> {
   children: React.ReactNode;
 }
 
-function Button({ children }: ButtonProps) {
-  return <StyledButton>{children}</StyledButton>;
+function Button({ children, ...props }: ButtonProps) {
+  return <StyledButton {...props}>{children}</StyledButton>;
 }
 
 export default Button;
