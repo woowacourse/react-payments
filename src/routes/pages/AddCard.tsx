@@ -12,10 +12,10 @@ const AddCard = () => {
   const { cardInformationState, setCardInformationState, isStateCompletes } = useCardInformation();
   const { validation, isErrorCompletes } = useValidation();
 
-  // 1. 카드번호 상태 + 유효성 검증
+  // 1. 카드번호 상태 + 유효성 검증 -> 기반으로 현재 step 표현
   const step = useStep(isStateCompletes, isErrorCompletes);
 
-  // 2. 카드번호 상태 + 유효성 검증 완료 되었을때, 버튼 띄우기
+  // 2. 카드번호 상태 + 유효성 검증 완료 되었을때, 완료 버튼 띄우기
   const complete = useAllComplete(isStateCompletes, isErrorCompletes);
 
   const handleComplete = (e: React.FormEvent<HTMLFormElement>) => {

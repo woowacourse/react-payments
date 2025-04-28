@@ -58,5 +58,5 @@
 - [ ] type 공통화 (UIformData, 컴포넌트 props)
 - [ ] 타입 위치 재정립
 - [ ] react.memo 사용 컴포넌트 최적화
-- [ ] 컴포넌트 props 네이밍 변경 및 통일 (setter-> setState로 변경)
+- [x] 컴포넌트 props 네이밍 변경 및 통일 (setter-> setState로 변경)
 - [x] 공통 훅 common폴더 분리

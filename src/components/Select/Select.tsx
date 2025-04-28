@@ -12,7 +12,7 @@ const arrow = {
 const Select = <T extends Extract<keyof CardInformationType, "company">>({
   options,
   placeholder,
-  setCardInformation /** 이 필드가 담당하는 카드 정보 타입 */,
+  setState,
 }: SelectProps<T>) => {
   // 모달 열고 닫기 상태
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +30,7 @@ const Select = <T extends Extract<keyof CardInformationType, "company">>({
     setIsOpen(false);
 
     // 상태 업데이트
-    setCardInformation(item);
+    setState(item);
   };
 
   // 외부 클릭 시 닫기

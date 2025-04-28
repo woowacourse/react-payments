@@ -11,8 +11,8 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
   label,
   inputNumber,
   inputProps,
-  cardInformation,
-  setCardInformation,
+  state,
+  setState,
   eachValidation,
 }: InputFieldProps<T>) => {
   const { isError, errorMessage, validateInput } = eachValidation;
@@ -21,7 +21,7 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
   const handleChange = (index: number, value: string) => {
     validateInput(index, value);
 
-    setCardInformation((prev) => {
+    setState((prev) => {
       const updated = [...prev];
       updated[index] = value;
       return updated as CardInformationType[T];
@@ -40,7 +40,7 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
             ref={(el) => {
               if (el) inputRefs.current[index] = el;
             }}
-            value={cardInformation[index] ?? ""}
+            value={state[index] ?? ""}
             onChange={(v) => handleChange(index, v)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}

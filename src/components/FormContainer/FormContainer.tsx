@@ -30,7 +30,7 @@ const FormContainer = ({
                 description={formSectionData.description}
                 fieldData={{
                   ...formSectionData.fieldData,
-                  setCardInformation: setState,
+                  setState,
                 }}
               />
             );
@@ -50,8 +50,8 @@ const FormContainer = ({
                 description={formSectionData.description}
                 fieldData={{
                   ...formSectionData.fieldData,
-                  cardInformation: state,
-                  setCardInformation: setState,
+                  state,
+                  setState,
                   eachValidation,
                 }}
               />

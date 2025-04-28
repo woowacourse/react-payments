@@ -56,9 +56,9 @@ export type InputFieldProps<T extends Exclude<keyof CardInformationType, "compan
     masking?: boolean;
   };
   /** 카드 정보 상태값 */
-  cardInformation: CardInformationType[T];
+  state: CardInformationType[T];
   /** 카드 정보 상태 변경 함수 */
-  setCardInformation: React.Dispatch<React.SetStateAction<CardInformationType[T]>>;
+  setState: React.Dispatch<React.SetStateAction<CardInformationType[T]>>;
   // /** 이 필드가 담당하는 카드 정보 타입 */
   // informationType: T;
   /** 해당 필드에 대한 개별 유효성 검사 */
@@ -106,7 +106,7 @@ export type SelectProps<T extends Extract<keyof CardInformationType, "company">>
   /** 이 필드가 담당하는 카드 정보 타입 */
   // informationType: CardInformationType[T];
   /** 카드 정보 상태 변경 함수 */
-  setCardInformation: React.Dispatch<React.SetStateAction<CardInformationType[T]>>;
+  setState: React.Dispatch<React.SetStateAction<CardInformationType[T]>>;
 };
 
 export type ButtonProps = {
