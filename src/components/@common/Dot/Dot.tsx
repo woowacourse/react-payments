@@ -2,22 +2,34 @@
 import {css, Interpolation, Theme} from '@emotion/react';
 import theme from "../../../styles/theme";
 
+export type DotType = 'white' | 'black';
+
 type DotProps = {
   value?: string | number | null;
   css?: Interpolation<Theme> | Interpolation<Theme>[];
+  color?: DotType;
 }
 
-function Dot({value, css: customCss}: DotProps) {
+function Dot({value, css: customCss, color = 'black'}: DotProps) {
   const length = value?.toString().length || 0;
 
   const masked = '*'.repeat(length);
 
-  return <span css={[dotStyle, customCss]}>{masked}</span>;
+  const colorStyle = color === 'white' ? dotWhite : dotBlack;
+
+  return <span css={[dotStyle, colorStyle, customCss]}>{masked}</span>;
 }
 
 const dotStyle = css`
-  color: ${theme.color.white};
   ${theme.font.card.number};
+`;
+
+const dotWhite = css`
+  color: ${theme.color.white};
+`;
+
+const dotBlack = css`
+  color: ${theme.color.black};
 `;
 
 export default Dot;

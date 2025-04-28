@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { MasterCard, Visa } from '../../asset/image';
+import Dot from '../@common/Dot/Dot';
+import {MasterCard, Visa} from '../../asset/image';
 import {
   cardContainer,
   cardSection,
@@ -10,10 +11,9 @@ import {
   cardLayout,
   cardType,
 } from './Card.style';
-import { CARD_TYPE } from '../../constants';
-import { CardBrandType, CardExpirationDate, CardNumber } from "../../types";
-import { css, useTheme } from "@emotion/react";
-import Dot from '../@common/Dot/Dot';
+import {CARD_TYPE} from '../../constants';
+import {CardBrandType, CardExpirationDate, CardNumber} from "../../types";
+import {css, useTheme} from "@emotion/react";
 
 type CardProps = {
   cardNumber: CardNumber;
@@ -47,6 +47,7 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
 
   const hasFilledExpirationField = Boolean(cardExpirationDate.month || cardExpirationDate.year);
 
+  const dotStyle = brand === '카카오뱅크' ? 'black' : 'white';
   const fontColor = brand === '카카오뱅크' ? css`color: ${theme.color.black};` : undefined;
   const brandBackground = brand ? css`background-color: ${theme.color.cardBrand[brand]};` : undefined;
 
@@ -65,8 +66,8 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
           <div css={cardContent}>
             <span css={[cardContentText, fontColor]}>{first}</span>
             <span css={[cardContentText, fontColor]}>{second}</span>
-            <Dot value={third} css={[cardContentText, fontColor]} />
-            <Dot value={forth} css={[cardContentText, fontColor]} />
+            <Dot value={third} css={fontColor} color={dotStyle}/>
+            <Dot value={forth} css={fontColor} color={dotStyle}/>
           </div>
           <div css={cardContent}>
             {hasFilledExpirationField && (
