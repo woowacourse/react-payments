@@ -25,10 +25,6 @@ const useCardNumbers = () => {
       [field]: { value, isError: !isValidCardNumberLength(value) }
     }));
 
-    if (field == 'fourth' || value.length !== 4) {
-      return;
-    }
-
     const keys = Object.keys(cardInputRefs);
 
     focusNextInputIfFilled({ refs: Object.values(cardInputRefs), currentIndex: keys.indexOf(field), value, maxLength: 4 });
