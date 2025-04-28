@@ -1,25 +1,21 @@
+import { ChangeEvent, ComponentProps, FocusEvent } from "react";
 import { COLORS } from "../../styles/colors";
 import styled from "styled-components";
 
-type Props = {
-	type?: string;
-	placeholder?: string;
+interface InputProps extends ComponentProps<"input"> {
 	isError?: boolean;
-	value?: string;
-	maxLength?: number;
-	onChange?: (value: string) => void;
-	onBlur?: (value: string) => void;
-};
+}
 
-const Input = ({ placeholder, isError = false, value, maxLength, onChange, onBlur, type = "text" }: Props) => {
+const Input = ({ placeholder, isError = false, value, maxLength, onChange, onBlur, type = "text", ref }: InputProps) => {
 	return (
 		<TextInput
+			ref={ref}
 			type={type}
 			maxLength={maxLength}
 			value={value}
 			placeholder={placeholder}
-			onChange={onChange && ((e) => onChange(e.target.value))}
-			onBlur={onBlur && ((e) => onBlur(e.target.value))}
+			onChange={onChange && ((e: ChangeEvent<HTMLInputElement>) => onChange(e))}
+			onBlur={onBlur && ((e: FocusEvent<HTMLInputElement>) => onBlur(e))}
 			$isError={isError}
 		/>
 	);
