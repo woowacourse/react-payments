@@ -40,4 +40,18 @@ export const validate = {
       message: '',
     };
   },
+
+  combineValidity: (
+    validity: boolean | boolean[] | Record<string, boolean>
+  ) => {
+    if (Array.isArray(validity)) {
+      return validity.every((valid) => valid);
+    }
+
+    if (typeof validity === 'object') {
+      return Object.values(validity).every((valid) => valid);
+    }
+
+    return validity;
+  },
 };
