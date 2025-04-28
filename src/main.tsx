@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { HashRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import PaymentInputPage from "./pages/add-card/payment-input/PaymentInputPage.tsx";
 import { PAGE_URL } from "./constants/pageUrl.ts";
 import AddCardSuccessPage from "./pages/add-card/success/AddCardSuccessPage.tsx";
@@ -10,7 +10,7 @@ import NotFoundPage from "./pages/not-found/NotFoundPage.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter basename={import.meta.env.VITE_PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path={PAGE_URL.ADD_CARD} element={<PaymentInputPage />} />
@@ -20,6 +20,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
