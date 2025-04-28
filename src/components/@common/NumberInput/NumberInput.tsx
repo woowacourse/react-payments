@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { forwardRef } from "react";
+import { ComponentProps } from "react";
 
-interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface NumberInputProps extends ComponentProps<"input"> {
   value: string;
   setValue: (value: string) => void;
   maxLength: number;
@@ -9,39 +9,42 @@ interface NumberInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onComplete?: () => void;
 }
 
-const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
-  function NumberInput(
-    { value, setValue, maxLength, isError = false, onComplete, ...rest },
-    ref
-  ) {
-    function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
-      const newValue = e.target.value;
-      const numericRegex = /^[0-9]*$/;
+function NumberInput({
+  value,
+  setValue,
+  maxLength,
+  isError = false,
+  onComplete,
+  ref,
+  ...rest
+}: NumberInputProps) {
+  function handleValue(e: React.ChangeEvent<HTMLInputElement>) {
+    const newValue = e.target.value;
+    const numericRegex = /^[0-9]*$/;
 
-      if (numericRegex.test(newValue)) {
-        setValue(newValue);
+    if (numericRegex.test(newValue)) {
+      setValue(newValue);
 
-        if (newValue.length === maxLength && onComplete) {
-          onComplete();
-        }
+      if (newValue.length === maxLength && onComplete) {
+        onComplete();
       }
     }
-
-    return (
-      <Input
-        ref={ref}
-        type="text"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        value={value}
-        maxLength={maxLength}
-        isError={isError}
-        onChange={handleValue}
-        {...rest}
-      />
-    );
   }
-);
+
+  return (
+    <Input
+      ref={ref}
+      type="text"
+      inputMode="numeric"
+      pattern="[0-9]*"
+      value={value}
+      maxLength={maxLength}
+      isError={isError}
+      onChange={handleValue}
+      {...rest}
+    />
+  );
+}
 
 export default NumberInput;
 
