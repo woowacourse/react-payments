@@ -3,35 +3,31 @@ type isValidType = boolean | boolean[];
 
 export interface RenderItemProps {
   isValid: isValidType;
-  setIsValid: React.Dispatch<React.SetStateAction<isValidType>>;
 }
 
-export interface RenderItem {
-  Component: ComponentType;
-  props: RenderItemProps;
-  formRef: React.RefObject<HTMLFormElement>;
+export interface RenderItem<T> {
+  Component: ComponentType<T>;
+  props: T;
+  isInputValid: boolean;
 }
-
-// export interface RenderItem {
-//   Component: ComponentType;
-//   props: any;
-// }
 
 const START_INDEX = 0;
 
-function useRender(
-  renderItems: RenderItem[],
-  ref: React.RefObject<HTMLFormElement>
+function useRender<T>(
+  renderItems: RenderItem<T>[],
+  ref: React.RefObject<HTMLFormElement | null>
 ) {
-  const [renderList, setRenderList] = useState<RenderItem[]>([
+  const [renderList, setRenderList] = useState<RenderItem<T>[]>([
     renderItems[START_INDEX],
   ]);
   const [order, setOrder] = useState(START_INDEX);
 
   useEffect(() => {
     const currentItem = renderItems[order];
+
     if (
-      currentItem.props.isValid &&
+      currentItem.isInputValid &&
+      ref.current &&
       ref.current.checkValidity() &&
       order < renderItems.length - 1
     ) {
