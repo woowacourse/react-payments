@@ -70,7 +70,7 @@ export const Register = () => {
 
   return (
     <AppLayout>
-      <Flex padding="20px 0">
+      <Flex padding="20px 0" flex={0}>
         <CardPreview cardNumbers={cardNumbers} expireDate={expireDate} cardBrand={selectedBrand} />
       </Flex>
       <Flex direction="column" gap="10px" margin="30px 0" flex={0}>
