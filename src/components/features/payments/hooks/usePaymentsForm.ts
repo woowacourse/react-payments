@@ -10,6 +10,7 @@ import { INPUT_STEP } from '../config/step';
 
 function usePaymentsForm() {
   const [inputStep, setInputStep] = useState(INPUT_STEP.cardNumber);
+  const navigate = useNavigate();
   const {
     inputValues: cardNumberInputValues,
     inputRefs: cardNumberInputRefs,
@@ -17,7 +18,7 @@ function usePaymentsForm() {
     cardType,
     isInputComplete: isCardNumberInputComplete,
     handleValue: handleCardNumberInputValue,
-    handleBlur: onCardNumberBlur,
+    handleBlur: handleCardNumberBlur,
   } = useCardNumberValidation();
 
   const [cardBankValue, setCardBankValue] = useState<DropdownOptionType | null>(
@@ -30,7 +31,7 @@ function usePaymentsForm() {
     inputRefs: expirationDateInputRefs,
     isInputComplete: isExpirationDateInputComplete,
     handleInputValue: handleExpirationDateInputValue,
-    handleBlur: onExpirationDateBlur,
+    handleBlur: handleExpirationDateBlur,
   } = useExpirationDateValidation();
 
   const {
@@ -39,7 +40,7 @@ function usePaymentsForm() {
     errorType: CVCErrorType,
     isInputComplete: isCVCInputComplete,
     handleInputValue: handleCVCInputValue,
-    handleBlur: onCVCInputBlur,
+    handleBlur: handleCVCInputBlur,
   } = useCVCValidation();
 
   const {
@@ -48,10 +49,8 @@ function usePaymentsForm() {
     errorType: cardPasswordErrorType,
     isInputComplete: isCardPasswordInputComplete,
     handleInputValue: handleCardPasswordInputValue,
-    handleBlur: onCardPasswordInputBlur,
+    handleBlur: handleCardPasswordInputBlur,
   } = useCardPasswordValidation();
-
-  const navigate = useNavigate();
 
   const paymentsFormValues = {
     cardNumber: cardNumberInputValues,
@@ -83,10 +82,10 @@ function usePaymentsForm() {
   };
 
   const paymentFormBlurHandlers = {
-    cardNumber: onCardNumberBlur,
-    expirationDate: onExpirationDateBlur,
-    CVC: onCVCInputBlur,
-    cardPassword: onCardPasswordInputBlur,
+    cardNumber: handleCardNumberBlur,
+    expirationDate: handleExpirationDateBlur,
+    CVC: handleCVCInputBlur,
+    cardPassword: handleCardPasswordInputBlur,
   };
 
   const allInputComplete = useMemo(() => {
