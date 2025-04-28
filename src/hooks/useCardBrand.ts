@@ -1,5 +1,7 @@
 import {ChangeEvent, useRef, useState} from "react";
-import {CardBrandType} from "../types";
+import {CardBrands, CardBrandType} from "../types";
+
+export const cardBrandOptions: CardBrandType[] = Object.values(CardBrands);
 
 export const useCardBrand = (onComplete?: () => void) => {
   const [brand, setBrand] = useState<CardBrandType | null>(null);
@@ -28,6 +30,7 @@ export const useCardBrand = (onComplete?: () => void) => {
     brand,
     brandRef,
     onChange,
+    options: cardBrandOptions,
     resetBrand,
     isBrandSelected,
     isValid: isBrandSelected(),

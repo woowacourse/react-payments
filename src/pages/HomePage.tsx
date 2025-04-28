@@ -31,12 +31,13 @@ function HomePage() {
     isValid: isCardNumberValid,
   } = useCardNumber(() => {
     showBrandStep();
-    setTimeout(() => brandRef.current?.focus(), 1);
+    setTimeout(() => brandRef.current?.focus(), 100);
   });
 
   const {
     brand,
     brandRef,
+    options,
     onChange,
     isValid: isCardBrandValid,
   } = useCardBrand(() => {
@@ -74,7 +75,6 @@ function HomePage() {
     cardPasswordError,
     passwordRef,
     handleCardPasswordChange,
-    getCardPasswordErrorMessage,
     isValid: isCardPasswordValid,
   } = useCardPassword();
 
@@ -89,9 +89,9 @@ function HomePage() {
         {showCardPassword &&
           <CardPasswordInput
             cardPassword={cardPassword}
-            erorr={cardPasswordError}
+            error={cardPasswordError}
+            passwordRef={passwordRef}
             onChange={handleCardPasswordChange}
-            getCardPasswordErrorMessage={getCardPasswordErrorMessage}
             tabIndex={9}
           />
         }
@@ -124,8 +124,8 @@ function HomePage() {
           <CardBrand
             value={brand}
             onChange={onChange}
+            options={options}
             brandRef={brandRef}
-            error={cardNumberError}
             tabIndex={5}
           />
         }

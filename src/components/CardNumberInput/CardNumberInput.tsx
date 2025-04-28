@@ -10,9 +10,10 @@ import { inputContainer, inputSection } from '../../styles/@common/inputContaine
 type CardNumberInputProps = {
   cardNumber: CardNumber;
   error: CardNumberError;
-  inputRefs: Array<React.RefObject<HTMLInputElement>>;
+  inputRefs: Array<React.RefObject<HTMLInputElement | null>>;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   tabIndex?: number;
   autoFocus?: boolean;
 };
@@ -23,6 +24,7 @@ function CardNumberInput({
   inputRefs,
   onChange,
   onKeyDown,
+  onBlur,
   tabIndex,
   autoFocus,
 }: CardNumberInputProps) {
@@ -41,9 +43,10 @@ function CardNumberInput({
                 type="text"
                 name="first"
                 maxLength={CARD_NUMBER.maxLength}
-                value={cardNumber.first?.toString()}
+                value={cardNumber.first}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
+                onBlur={onBlur}
                 css={error.first ? errorInputStyle : undefined}
                 tabIndex={tabIndex ? tabIndex + 1: undefined}
                 autoFocus={autoFocus}
@@ -55,9 +58,10 @@ function CardNumberInput({
                 type="text"
                 name="second"
                 maxLength={CARD_NUMBER.maxLength}
-                value={cardNumber.second?.toString()}
+                value={cardNumber.second}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
+                onBlur={onBlur}
                 css={error.second ? errorInputStyle : undefined}
                 tabIndex={tabIndex ? tabIndex + 2: undefined}
               />
@@ -68,9 +72,10 @@ function CardNumberInput({
                 type="text"
                 name="third"
                 maxLength={CARD_NUMBER.maxLength}
-                value={cardNumber.third?.toString()}
+                value={cardNumber.third}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
+                onBlur={onBlur}
                 css={error.third ? errorInputStyle : undefined}
                 tabIndex={tabIndex ? tabIndex + 3: undefined}
               />
@@ -81,9 +86,10 @@ function CardNumberInput({
                 type="text"
                 name="forth"
                 maxLength={CARD_NUMBER.maxLength}
-                value={cardNumber.forth?.toString()}
+                value={cardNumber.forth}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
+                onBlur={onBlur}
                 css={error.forth ? errorInputStyle : undefined}
                 tabIndex={tabIndex ? tabIndex + 4: undefined}
               />

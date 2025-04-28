@@ -1,27 +1,28 @@
 import Title from "../@common/Title/Title";
 import Dropdown from "../@common/Dropdown/Dropdown";
-import {CardBrands, CardBrandType} from "../../types";
+import { ChangeEvent } from "react";
+import {CardBrandType} from "../../types";
 import {cardPeriodInputLayout} from "../CardPeriod/CardPeriodInput.style";
-
-const cardBrandOptions: CardBrandType[] = Object.values(CardBrands);
 
 type CardBrandProps = {
   value: CardBrandType | null;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  brandRef: React.RefObject<HTMLSelectElement>;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  brandRef: React.RefObject<HTMLSelectElement | null>;
+  options: CardBrandType[];
+  placeholder?: string;
   tabIndex: number;
 }
 
-function CardBrand({value, onChange, brandRef, tabIndex}: CardBrandProps) {
-
+function CardBrand({value, onChange, brandRef, options, placeholder, tabIndex}: CardBrandProps) {
   return (
     <div css={cardPeriodInputLayout}>
       <Title title='카드사를 선택해 주세요' subTitle='현재 국내 카드사만 가능합니다.'/>
       <Dropdown
         ref={brandRef}
-        options={cardBrandOptions}
+        options={options}
         value={value ?? ''}
         onChange={onChange}
+        placeholder={placeholder}
         tabIndex={tabIndex}
       />
     </div>

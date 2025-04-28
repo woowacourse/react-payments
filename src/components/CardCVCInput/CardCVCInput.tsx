@@ -44,7 +44,7 @@ function CardCVCInput({
               type="text"
               name="cvc"
               maxLength={CARD_CVC.maxLength}
-              value={cardCVC?.toString()}
+              value={cardCVC}
               onChange={onChange}
               css={error ? errorInputStyle : undefined}
               tabIndex={tabIndex}

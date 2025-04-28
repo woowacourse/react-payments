@@ -38,7 +38,7 @@ function CardPasswordInput({cardPassword, error, onChange, passwordRef, tabIndex
               type="password"
               name="password"
               maxLength={CARD_PASSWORD.maxLength}
-              value={cardPassword?.toString()}
+              value={cardPassword}
               onChange={onChange}
               css={error ? errorInputStyle : undefined}
               tabIndex={tabIndex}
