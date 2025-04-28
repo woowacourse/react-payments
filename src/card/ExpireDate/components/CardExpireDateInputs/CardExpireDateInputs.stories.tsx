@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
 import CardExpireDateInputs from "./CardExpireDateInputs";
 import { INITIAL_EXPIRE_DATE_STATE } from "../../constants";
-
 import { userEvent, expect, within } from "@storybook/test";
 import useControlledExpireDate from "../../hooks/useControlledExpireDate";
 
@@ -12,9 +10,8 @@ const meta = {
   args: {
     expireDate: INITIAL_EXPIRE_DATE_STATE,
     expireDateInputRefs: { MM: { current: null }, YY: { current: null } },
-    handleExpireYearChange: () => {},
     handleExpireMonthBlur: () => {},
-    handleExpireMonthChange: () => {},
+    handleExpireChange: () => {},
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof CardExpireDateInputs>;
@@ -39,8 +36,7 @@ export const WithValidationTest: Story = {
     const {
       expireDate,
       expireDateInputRefs,
-      handleExpireYearChange,
-      handleExpireMonthChange,
+      handleExpireChange,
       handleExpireMonthBlur,
     } = useControlledExpireDate();
 
@@ -48,8 +44,7 @@ export const WithValidationTest: Story = {
       <CardExpireDateInputs
         expireDate={expireDate}
         expireDateInputRefs={expireDateInputRefs}
-        handleExpireYearChange={handleExpireYearChange}
-        handleExpireMonthChange={handleExpireMonthChange}
+        handleExpireChange={handleExpireChange}
         handleExpireMonthBlur={handleExpireMonthBlur}
       />
     );
