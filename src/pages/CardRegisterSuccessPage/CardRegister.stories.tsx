@@ -30,7 +30,7 @@ const Template = () => {
   );
 };
 
-export const emptyInput: Story = {
+export const RegisterSuccessPage: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
