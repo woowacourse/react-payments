@@ -1,20 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import CardRegisterPage from './pages/card-register/CardRegisterPage';
-import CardRegisterCompletePage from './pages/card-register-complete/CardRegisterCompletePage';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes/routes';
 
 const App = () => {
-  return (
-    <BrowserRouter basename='/react-payments'>
-      <Routes>
-        <Route path='/' element={<Navigate to='/card-register' replace />} />
-        <Route path='/card-register' element={<CardRegisterPage />} />
-        <Route
-          path='/card-register-complete'
-          element={<CardRegisterCompletePage />}
-        />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
