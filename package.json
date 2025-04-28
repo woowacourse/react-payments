@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_5f958ba22a51970",
-    "deploy": "vite build --base=/react-payments && cp dist/index.html dist/404.html && npx gh-pages -d dist"
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
   "homepage": "https://rosielsh.github.io/react-payments",
   "dependencies": {
