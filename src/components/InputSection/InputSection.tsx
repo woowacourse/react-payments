@@ -13,10 +13,7 @@ import { InputErrorType } from "../../hooks/useInputError";
 
 export interface InputSectionProps {
   type: InputType;
-  onComplete: (
-    value: string,
-    position?: CardPositionType | PeriodPositionType
-  ) => void;
+
   error: InputErrorType;
   validators: {
     validateCardNumber: (value: string, position: CardPositionType) => void;
@@ -53,12 +50,7 @@ const subTitleVariants = {
   [INPUT_TYPE.password]: "비밀번호 앞 2자리",
 };
 
-function InputSection({
-  type,
-  onComplete,
-  error,
-  validators,
-}: InputSectionProps) {
+function InputSection({ type, error, validators }: InputSectionProps) {
   const getErrorMessage = (type: InputType) => {
     if (type === INPUT_TYPE.cardNumbers) {
       return (
@@ -95,7 +87,6 @@ function InputSection({
         validateExpirationPeriod={validators.validateExpirationPeriod}
         validateCvcNumber={validators.validateCvcNumber}
         validatePassword={validators.validatePassword}
-        onComplete={onComplete}
       />
       <Error errorMessage={getErrorMessage(type)} />
     </>

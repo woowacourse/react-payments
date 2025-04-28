@@ -1,6 +1,4 @@
-import InputSection from "../../components/InputSection/InputSection";
 import { INPUT_TYPE } from "../../constants/constants";
-import { useCompletion } from "../../hooks/useCompletion";
 import { useInputError } from "../../hooks/useInputError";
 import Preview from "../../components/Preview/Preview";
 import { PaymentsCSS } from "./Payments.styled";
@@ -9,28 +7,28 @@ import { useMemo } from "react";
 import Button from "../../components/Button/Button";
 import { useCard } from "../../hooks/useCard";
 import { useNavigate } from "react-router-dom";
-function Payments() {
-  const {
-    isComplete,
-    updateCardNumberIsComplete,
-    updateCardBrandIsComplete,
-    updateExpirationPeriodIsComplete,
-    updateCvcIsComplete,
-    updatePasswordIsComplete,
-  } = useCompletion();
-  const visible = useVisibleSteps(isComplete);
+import InputSection from "../../components/\bInputSection/InputSection";
 
+function Payments() {
   const { error, validators } = useInputError();
+  const { cardNumbers, cardBrand, expirationPeriod, cvcNumber, password } =
+    useCard();
+  const visible = useVisibleSteps({
+    cardNumbers,
+    cardBrand,
+    expirationPeriod,
+    cvcNumber,
+    password,
+  });
   const navigate = useNavigate();
-  const { cardNumbers, cardBrand } = useCard();
 
   const isButtonShowing = useMemo(() => {
     const isAllComplete =
-      Object.values(isComplete.cardNumbers).every(Boolean) &&
-      isComplete.cardBrand &&
-      Object.values(isComplete.expirationPeriod).every(Boolean) &&
-      isComplete.cvcNumber &&
-      isComplete.password;
+      Object.values(cardNumbers).every((num) => num.length === 4) &&
+      cardBrand !== "" &&
+      Object.values(expirationPeriod).every((val) => val.length === 2) &&
+      cvcNumber.length === 3 &&
+      password.length === 2;
     const isAllErrorFree = [
       ...Object.values(error.cardNumbers),
       ...Object.values(error.expirationPeriod),
@@ -38,10 +36,9 @@ function Payments() {
       error.cardBrand,
       error.password,
     ].every((v) => v === null);
-    return isAllComplete && isAllErrorFree;
-  }, [isComplete, error]);
 
-  const showButton = isButtonShowing;
+    return isAllComplete && isAllErrorFree;
+  }, [cardNumbers, cardBrand, expirationPeriod, cvcNumber, password, error]);
 
   const handleClick = () => {
     navigate("/success", {
@@ -59,7 +56,6 @@ function Payments() {
         {visible.password && (
           <InputSection
             type={INPUT_TYPE.password}
-            onComplete={updatePasswordIsComplete}
             error={error}
             validators={validators}
           />
@@ -67,7 +63,6 @@ function Payments() {
         {visible.cvcNumber && (
           <InputSection
             type={INPUT_TYPE.cvcNumber}
-            onComplete={updateCvcIsComplete}
             error={error}
             validators={validators}
           />
@@ -75,7 +70,6 @@ function Payments() {
         {visible.expirationPeriod && (
           <InputSection
             type={INPUT_TYPE.expirationPeriod}
-            onComplete={updateExpirationPeriodIsComplete}
             error={error}
             validators={validators}
           />
@@ -83,20 +77,19 @@ function Payments() {
         {visible.cardBrand && (
           <InputSection
             type={INPUT_TYPE.cardBrand}
-            onComplete={updateCardBrandIsComplete}
             error={error}
             validators={validators}
           />
         )}
         <InputSection
           type={INPUT_TYPE.cardNumbers}
-          onComplete={updateCardNumberIsComplete}
           error={error}
           validators={validators}
         />
-        {showButton && <Button variant="home" onClick={handleClick} />}
+        {isButtonShowing && <Button onClick={handleClick} variant="home" />}
       </form>
     </PaymentsCSS>
   );
 }
+
 export default Payments;

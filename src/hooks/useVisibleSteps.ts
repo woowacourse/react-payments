@@ -1,7 +1,21 @@
 import { useEffect, useState } from "react";
-import { CompletionState } from "./useCompletion";
+import { CardPositionType, PeriodPositionType } from "../constants/constants";
 
-export function useVisibleSteps(isComplete: CompletionState) {
+interface UseVisibleStepsProps {
+  cardNumbers: Record<CardPositionType, string>;
+  cardBrand: string;
+  expirationPeriod: Record<PeriodPositionType, string>;
+  cvcNumber: string;
+  password: string;
+}
+
+export function useVisibleSteps({
+  cardNumbers,
+  cardBrand,
+  expirationPeriod,
+  cvcNumber,
+  password,
+}: UseVisibleStepsProps) {
   const [visible, setVisible] = useState({
     cardBrand: false,
     expirationPeriod: false,
@@ -9,20 +23,27 @@ export function useVisibleSteps(isComplete: CompletionState) {
     password: false,
   });
 
+  const isCardNumberComplete = Object.values(cardNumbers).every(
+    (num) => num.length === 4
+  );
+  const isExpirationComplete =
+    expirationPeriod.month.length === 2 && expirationPeriod.year.length === 2;
+  const isCvcComplete = cvcNumber.length === 3;
+
   useEffect(() => {
-    if (Object.values(isComplete.cardNumbers).every(Boolean)) {
+    if (isCardNumberComplete) {
       setVisible((prev) => ({ ...prev, cardBrand: true }));
     }
-    if (isComplete.cardBrand) {
+    if (cardBrand) {
       setVisible((prev) => ({ ...prev, expirationPeriod: true }));
     }
-    if (Object.values(isComplete.expirationPeriod).every(Boolean)) {
+    if (isExpirationComplete) {
       setVisible((prev) => ({ ...prev, cvcNumber: true }));
     }
-    if (isComplete.cvcNumber) {
+    if (isCvcComplete) {
       setVisible((prev) => ({ ...prev, password: true }));
     }
-  }, [isComplete]);
+  }, [cardNumbers, cardBrand, expirationPeriod, cvcNumber, password]);
 
   return visible;
 }
