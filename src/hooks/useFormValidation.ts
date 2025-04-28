@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { InputFieldState } from './useCardInputHooks';
+import { InputFieldState } from '../types/models';
 
 export interface FormValidationParams {
   numberFields: InputFieldState[];
