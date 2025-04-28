@@ -33,10 +33,7 @@ export const useCardInput = (type: CardFormFiledType) => {
     }))
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const isAllValid = value.every(
-    (item) => item.isValid && item.value.length === CardInputTypeOptions[type].valueLength
-  );
+  const isAllValidAndFilled = canMoveNextInput(value, type);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
@@ -64,8 +61,6 @@ export const useCardInput = (type: CardFormFiledType) => {
 
       return newArr;
     });
-
-    setErrorMessage(null);
   };
 
   const validateInput = (value: string) => {
@@ -76,7 +71,6 @@ export const useCardInput = (type: CardFormFiledType) => {
       return isValid;
     }
 
-    setErrorMessage(null);
     return isValid;
   };
 
@@ -96,5 +90,30 @@ export const useCardInput = (type: CardFormFiledType) => {
     });
   };
 
-  return { value, errorMessage, handleChange, handleBlur, isAllValid };
+  return {
+    value,
+    errorMessage,
+    handleChange,
+    handleBlur,
+    isAllValidAndFilled,
+  };
 };
+
+function isAllValidInput(value: CardInputType[]) {
+  return value.every((item) => item.isValid);
+}
+
+function isAllFilledInput(value: CardInputType[], type: CardFormFiledType) {
+  return value.every((item) => item.value.length === CardInputTypeOptions[type].valueLength);
+}
+
+function canMoveNextInput(value: CardInputType[], type: CardFormFiledType) {
+  const isAllValid = isAllValidInput(value);
+  const isAllFilled = isAllFilledInput(value, type);
+
+  if (isAllValid && isAllFilled) {
+    return true;
+  }
+
+  return false;
+}

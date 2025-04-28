@@ -21,11 +21,7 @@ export const useExpireDateInput = () => {
     year: { value: '', isValid: true },
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const isAllValid =
-    value.month.isValid &&
-    value.year.isValid &&
-    value.month.value.length === 2 &&
-    value.year.value.length === 2;
+  const isAllValidAndFilled = canMoveNextStep(value);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, key: ExpireDateInputKey) => {
     const inputValue = e.target.value;
@@ -79,9 +75,27 @@ export const useExpireDateInput = () => {
       return isValid;
     }
 
-    setErrorMessage(null);
     return isValid;
   };
 
-  return { value, errorMessage, handleChange, handleBlur, isAllValid };
+  return { value, errorMessage, handleChange, handleBlur, isAllValidAndFilled };
 };
+
+function isAllValidDate(value: ExpireDateInputType) {
+  return value.month.isValid && value.year.isValid;
+}
+
+function isAllFilledDate(value: ExpireDateInputType) {
+  return value.month.value.length === 2 && value.year.value.length === 2;
+}
+
+function canMoveNextStep(value: ExpireDateInputType) {
+  const isAllValid = isAllValidDate(value);
+  const isAllFilled = isAllFilledDate(value);
+
+  if (isAllValid && isAllFilled) {
+    return true;
+  }
+
+  return false;
+}
