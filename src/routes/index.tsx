@@ -1,14 +1,16 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import AddCard from "./pages/AddCard";
 import CompleteCard from "./pages/CompleteCard";
 
-const router = createBrowserRouter([
-  { path: "/", element: <AddCard /> },
-  { path: "/complete", element: <CompleteCard /> },
-]);
-
 const Router = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <Routes>
+        <Route path="/" element={<AddCard />} />
+        <Route path="/complete" element={<CompleteCard />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default Router;
