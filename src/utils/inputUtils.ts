@@ -9,6 +9,7 @@ export const handleAutoFocus = (
     const nextInput = document.querySelector(
       `input[name="${fieldMappings[name]}"]`
     );
+
     if (nextInput instanceof HTMLInputElement) {
       nextInput.focus();
     }

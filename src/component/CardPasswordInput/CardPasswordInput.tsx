@@ -11,10 +11,11 @@ import {
 import { Button } from '../@common/Button/Button';
 import Input from '../@common/Input/Input';
 import Title from '../@common/Title/Title';
-import { useCallback } from 'react';
+import { useCallback, useId } from 'react';
 import useEasyNavigate from '../../hooks/useEasyNavigate';
 
 function CardPasswordInput() {
+  const id = useId();
   const { goPage } = useEasyNavigate();
   const {
     cardPassword,
@@ -42,9 +43,9 @@ function CardPasswordInput() {
         <Title.Text>카드 비밀번호를 입력해 주세요</Title.Text>
         <Title.SubTitle>앞의 2자리를 입력해주세요</Title.SubTitle>
       </Title>
-      <Input.Group id="card-password">
+      <Input.Group id={`card-password-${id}`}>
         <div css={inputContainer}>
-          <Input.Label>비밀번호</Input.Label>
+          <Input.Label htmlFor={`card-password-${id}`}>비밀번호</Input.Label>
           <article css={inputSection}>
             <Input
               type="password"
