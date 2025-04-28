@@ -1,5 +1,5 @@
 import styles from "./AddCardForm.module.css";
-import CardInputBox from "@card/CardInputBox/CardInputBox";
+import FormField from "@/components/FormField/FormField";
 import CardNumberInputs, {
   type CardNumberInputsProps,
 } from "@card/CardNumber/components/CardNumberInput";
@@ -87,46 +87,41 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
               value={step}
               caseBy={{
                 [ADD_CARD_FORM_STEPS.CARD_NUMBER]: () => (
-                  <CardInputBox
+                  <FormField
                     title="결제할 카드 번호를 입력해 주세요"
                     guideText="본인 명의의 카드만 결제 가능합니다."
-                    InputComponent={
-                      <CardNumberInputs {...controlledCardNumber} />
-                    }
-                  />
+                  >
+                    <CardNumberInputs {...controlledCardNumber} />
+                  </FormField>
                 ),
                 [ADD_CARD_FORM_STEPS.CARD_TYPE]: () => (
-                  <CardInputBox
+                  <FormField
                     title="카드사를 선택해 주세요"
                     guideText="현재 국내 카드사만 가능합니다."
-                    InputComponent={
-                      <CardTypeDropdown {...controlledCardType} />
-                    }
-                  />
+                  >
+                    <CardTypeDropdown {...controlledCardType} />
+                  </FormField>
                 ),
                 [ADD_CARD_FORM_STEPS.EXPIRE_DATE]: () => (
-                  <CardInputBox
+                  <FormField
                     title="카드 유효기간을 입력해 주세요"
                     guideText="월/년도(MMYY)를 순서대로 입력해 주세요."
-                    InputComponent={
-                      <CardExpireDateInputs {...controlledExpireDate} />
-                    }
-                  />
+                  >
+                    <CardExpireDateInputs {...controlledExpireDate} />
+                  </FormField>
                 ),
                 [ADD_CARD_FORM_STEPS.CVC]: () => (
-                  <CardInputBox
-                    title="CVC 번호를 입력해 주세요"
-                    InputComponent={<CVCInput {...controlledCVC} />}
-                  />
+                  <FormField title="CVC 번호를 입력해 주세요">
+                    <CVCInput {...controlledCVC} />
+                  </FormField>
                 ),
                 [ADD_CARD_FORM_STEPS.CARD_PASSWORD]: () => (
-                  <CardInputBox
+                  <FormField
                     title="비밀번호를 입력해 주세요"
                     guideText="앞의 2자리를 입력해 주세요"
-                    InputComponent={
-                      <CardPasswordInput {...controlledCardPassword} />
-                    }
-                  />
+                  >
+                    <CardPasswordInput {...controlledCardPassword} />
+                  </FormField>
                 ),
               }}
             />

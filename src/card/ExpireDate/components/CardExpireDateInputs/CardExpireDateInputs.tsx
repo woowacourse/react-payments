@@ -7,11 +7,16 @@ import type {
   ExpireDateInputRefs,
   ExpireDateState,
 } from "../../types";
+import { validateMonth, validateYear } from "../../validation";
 
 export interface CardExpireDateInputsProps {
   expireDate: ExpireDateState;
   expireDateInputRefs: ExpireDateInputRefs;
-  handleExpireChange: (key: ExpireDateInputKey, value: string) => void;
+  handleExpireChange: (
+    key: ExpireDateInputKey,
+    value: string,
+    validateFn: (value: string) => string
+  ) => void;
   handleExpireMonthBlur: (value: string) => void;
 }
 
@@ -21,6 +26,11 @@ function CardExpireDateInputs({
   handleExpireChange,
   handleExpireMonthBlur,
 }: CardExpireDateInputsProps) {
+  const validation = {
+    MM: validateMonth,
+    YY: validateYear,
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.expireDateInputContainer}>
@@ -42,7 +52,13 @@ function CardExpireDateInputs({
                 placeholder={expireKey}
                 isError={Boolean(expireDate[expireKey].errorMessage)}
                 value={expireDate[expireKey].value}
-                onChange={(e) => handleExpireChange(expireKey, e.target.value)}
+                onChange={(e) =>
+                  handleExpireChange(
+                    expireKey,
+                    e.target.value,
+                    validation[expireKey]
+                  )
+                }
                 onBlur={
                   expireKey === "MM"
                     ? (e) => handleExpireMonthBlur(e.target.value)

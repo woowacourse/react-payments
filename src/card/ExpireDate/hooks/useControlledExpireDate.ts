@@ -1,7 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { EXPIRE_DATE_KEYS, INITIAL_EXPIRE_DATE_STATE } from "../constants";
 import { ExpireDateInputKey, ExpireDateState } from "../types";
-import { validateMonth, validateYear } from "../validation";
 import { handleNextInputFocus } from "@/utils/handleNextInputFocus";
 
 const useControlledExpireDate = () => {
@@ -14,13 +13,16 @@ const useControlledExpireDate = () => {
   };
 
   const handleExpireChange = useCallback(
-    (key: ExpireDateInputKey, value: string) => {
+    (
+      key: ExpireDateInputKey,
+      value: string,
+      validationFn: (value: string) => string
+    ) => {
       if (value.length > 2) {
         return;
       }
 
-      const errorMessage =
-        key === "MM" ? validateMonth(value) : validateYear(value);
+      const errorMessage = validationFn(value);
       setExpireDate((prevState) => ({
         ...prevState,
         [key]: {

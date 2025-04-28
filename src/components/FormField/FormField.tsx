@@ -1,20 +1,20 @@
-import styles from "./CardInputBox.module.css";
+import styles from "./FormField.module.css";
 import { ReactNode } from "react";
 
-interface CardInputBoxProps {
+interface FormFieldProps {
   title: string;
   guideText?: string;
-  InputComponent: ReactNode;
+  children: ReactNode;
 }
 
-function CardInputBox({ title, guideText, InputComponent }: CardInputBoxProps) {
+function FormField({ title, guideText, children }: FormFieldProps) {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>{title}</h3>
       {guideText && <p className={styles.guideText}>{guideText}</p>}
-      {InputComponent}
+      {children}
     </div>
   );
 }
 
-export default CardInputBox;
+export default FormField;
