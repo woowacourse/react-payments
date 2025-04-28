@@ -19,9 +19,16 @@ const useControlledCardPassword = () => {
     });
   }, []);
 
+  const checkPasswordNextStep = useCallback(
+    ({ value, errorMessage }: CardPasswordState) =>
+      value.length === 2 && errorMessage === "",
+    []
+  );
+
   return {
     cardPasswordState,
     handleCardPasswordChange,
+    isNextStep: checkPasswordNextStep(cardPasswordState),
   };
 };
 

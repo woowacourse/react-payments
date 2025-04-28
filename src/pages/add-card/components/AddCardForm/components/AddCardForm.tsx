@@ -33,7 +33,7 @@ interface AddCardFormProps {
     controlledCardType: CardTypeDropdownProps & NextStepIndicator;
     controlledExpireDate: CardExpireDateInputsProps & NextStepIndicator;
     controlledCVC: CVCInputsProps & NextStepIndicator;
-    controlledCardPassword: CardPasswordInputProps;
+    controlledCardPassword: CardPasswordInputProps & NextStepIndicator;
   };
 }
 
@@ -48,9 +48,9 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
   const { cardNumberState, isNextStep: isCardNumberNextStep } =
     controlledCardNumber;
   const { cardType, isNextStep: isCardTypeNextStep } = controlledCardType;
-  const { expireDate, isNextStep: isExpireDateNextStep } = controlledExpireDate;
-  const { CVCState, isNextStep: isCVCNextStep } = controlledCVC;
-  const { cardPasswordState } = controlledCardPassword;
+  const { isNextStep: isExpireDateNextStep } = controlledExpireDate;
+  const { isNextStep: isCVCNextStep } = controlledCVC;
+  const { isNextStep: isPasswordNextStep } = controlledCardPassword;
 
   const addCardFormSteps = useAddCardFormStep([
     isCardNumberNextStep,
@@ -70,13 +70,12 @@ function AddCardForm({ addCardState }: AddCardFormProps) {
     });
   };
 
-  const isAddFormSubmit = getIsAddFormSubmit({
-    cardNumberState,
-    cardType,
-    expireDate,
-    CVCState,
-    cardPasswordState,
-  });
+  const isAddFormSubmit =
+    isCardNumberNextStep &&
+    isCardTypeNextStep &&
+    isExpireDateNextStep &&
+    isCVCNextStep &&
+    isPasswordNextStep;
 
   return (
     <form className={styles.form} onSubmit={handleAddCardFormSubmit}>
