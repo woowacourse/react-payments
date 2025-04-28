@@ -6,19 +6,18 @@ import { InputFieldProps } from "../../types/componentPropsType";
 const meta = {
   title: "MyComponent/MyInputField",
   component: InputField,
-} satisfies Meta<InputFieldProps>;
+} satisfies Meta<InputFieldProps<"uniqueNumber" | "expirationDate" | "cvcNumber" | "password">>;
 
 export default meta;
 
-type Story = StoryObj<InputFieldProps>;
+type Story = StoryObj<InputFieldProps<"uniqueNumber" | "expirationDate" | "cvcNumber" | "password">>;
 
 export const UniqueNumberInputField: Story = {
   args: {
     label: "카드번호",
     inputNumber: 4,
     inputProps: { placeholder: ["1234", "1234", "1234", "1234"], maxLength: 4 },
-    cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""], password: [""] },
-    informationType: "uniqueNumber",
+    cardInformation: ["", "", "", ""],
     eachValidation: {
       isError: [false, false, false, false],
       errorMessage: "",
@@ -34,7 +33,6 @@ export const UniqueNumberInputField: Story = {
         inputProps={args.inputProps}
         cardInformation={value}
         setCardInformation={setCardInformation}
-        informationType={args.informationType}
         eachValidation={args.eachValidation}
       />
     );
@@ -46,8 +44,7 @@ export const ExpirationDateInputField: Story = {
     label: "유효기간",
     inputNumber: 2,
     inputProps: { placeholder: ["MM", "YY"], maxLength: 2 },
-    cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""], password: [""] },
-    informationType: "expirationDate",
+    cardInformation: ["", ""],
     eachValidation: {
       isError: [false, false],
       errorMessage: "",
@@ -63,7 +60,6 @@ export const ExpirationDateInputField: Story = {
         inputProps={args.inputProps}
         cardInformation={value}
         setCardInformation={setCardInformation}
-        informationType={args.informationType}
         eachValidation={args.eachValidation}
       />
     );
@@ -75,8 +71,7 @@ export const CvcNumberInputField: Story = {
     label: "cvc",
     inputNumber: 1,
     inputProps: { placeholder: ["123"], maxLength: 3 },
-    cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""], password: [""] },
-    informationType: "cvcNumber",
+    cardInformation: [""],
     eachValidation: {
       isError: [false, false],
       errorMessage: "",
@@ -92,7 +87,6 @@ export const CvcNumberInputField: Story = {
         inputProps={args.inputProps}
         cardInformation={value}
         setCardInformation={setCardInformation}
-        informationType={args.informationType}
         eachValidation={args.eachValidation}
       />
     );
@@ -104,8 +98,7 @@ export const PasswordInputField: Story = {
     label: "비밀번호 앞 2자리",
     inputNumber: 1,
     inputProps: { placeholder: [""], maxLength: 2 },
-    cardInformation: { uniqueNumber: ["", "", "", ""], expirationDate: ["", ""], cvcNumber: [""], password: [""] },
-    informationType: "password",
+    cardInformation: [""],
     eachValidation: {
       isError: [false, false],
       errorMessage: "",
@@ -121,7 +114,6 @@ export const PasswordInputField: Story = {
         inputProps={args.inputProps}
         cardInformation={value}
         setCardInformation={setCardInformation}
-        informationType={args.informationType}
         eachValidation={args.eachValidation}
       />
     );

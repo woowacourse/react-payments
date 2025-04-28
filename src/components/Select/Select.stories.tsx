@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import Select from "./Select";
-import { CardInformationType } from "../../types/CardInformationType";
 import { SelectProps } from "../../types/componentPropsType";
+import { CompanyType } from "../../types";
 
 const meta = {
   title: "MyComponent/MySelect",
   component: Select,
-} satisfies Meta<SelectProps>;
+} satisfies Meta<SelectProps<"company">>;
 
 export default meta;
 
-type Story = StoryObj<SelectProps>;
+type Story = StoryObj<SelectProps<"company">>;
 
 export const Primary: Story = {
   args: {
@@ -19,12 +19,7 @@ export const Primary: Story = {
     placeholder: "카드사를 선택해주세요",
   },
   render: (args) => {
-    const [value, setCardInformation] = useState<CardInformationType>({
-      uniqueNumber: ["", "", "", ""],
-      expirationDate: ["", ""],
-      cvcNumber: [""],
-      password: [""],
-    });
+    const [value, setCardInformation] = useState<CompanyType>("");
 
     return <Select options={args.options} placeholder={args.placeholder} setCardInformation={setCardInformation} />;
   },

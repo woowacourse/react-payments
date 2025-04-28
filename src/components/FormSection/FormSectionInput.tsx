@@ -13,5 +13,4 @@ const FormSectionInput = <T extends Exclude<keyof CardInformationType, "company"
   );
 };
 
-export default React.memo(FormSectionInput);
-// export default FormSectionInput;
+export default React.memo(FormSectionInput) as typeof FormSectionInput;

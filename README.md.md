@@ -45,6 +45,7 @@
   - [x] autoFocus 기능 이용 (필드 이동)
 - [x] 폼 제출 -> 확인 버튼 FormContainer 내부로 이동
 - [x] completeIcon 이미지 추가
+- [x] 스토리북 수정
 
 ---
 
@@ -56,3 +57,4 @@
 - [ ] type 공통화 (UIformData, 컴포넌트 props)
 - [ ] 타입 위치 재정립
 - [ ] react.memo 사용 컴포넌트 최적화
+- [ ] 컴포넌트 props 네이밍 변경 및 통일 (setter-> setState로 변경)

@@ -2,8 +2,11 @@ import FormSection from "./FormSection";
 import Select from "../Select/Select";
 import { SelectFormSectionProps } from "../../types/componentPropsType";
 import React from "react";
+import { CardInformationType } from "../../types/CardInformationType";
 
-const FormSectionSelect = (props: SelectFormSectionProps<any>) => {
+const FormSectionSelect = <T extends Extract<keyof CardInformationType, "company">>(
+  props: SelectFormSectionProps<T>,
+) => {
   const { title, description, fieldData } = props;
 
   return (
@@ -13,5 +16,5 @@ const FormSectionSelect = (props: SelectFormSectionProps<any>) => {
   );
 };
 
-export default React.memo(FormSectionSelect);
+export default React.memo(FormSectionSelect) as typeof FormSectionSelect;
 // export default FormSectionSelect;

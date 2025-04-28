@@ -28,6 +28,7 @@ export const Primary: Story = {
         value={value}
         onChange={setValue}
         error={false}
+        autoFocus={true}
       />
     );
   },

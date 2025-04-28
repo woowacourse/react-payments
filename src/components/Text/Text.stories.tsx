@@ -38,3 +38,10 @@ export const ErrorText: Story = {
     text: "숫자만 입력 가능합니다.",
   },
 };
+
+export const CompleteText: Story = {
+  args: {
+    type: "complete",
+    text: "5511로 시작하는 BC카드가 등록되었어요.",
+  },
+};
