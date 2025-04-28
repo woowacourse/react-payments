@@ -19,8 +19,8 @@ export const Primary: Story = {
     placeholder: "카드사를 선택해주세요",
   },
   render: (args) => {
-    const [value, setCardInformation] = useState<CompanyType>("");
+    const [value, setState] = useState<CompanyType>("");
 
-    return <Select options={args.options} placeholder={args.placeholder} setCardInformation={setCardInformation} />;
+    return <Select options={args.options} placeholder={args.placeholder} setState={setState} />;
   },
 };

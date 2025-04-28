@@ -23,8 +23,8 @@ export const Default: Story = {
       label: "카드번호",
       inputNumber: 4,
       inputProps: { placeholder: ["1234", "1234", "1234", "1234"], maxLength: 4 },
-      cardInformation: ["", "", "", ""],
-      setCardInformation: () => {},
+      state: ["", "", "", ""],
+      setState: () => {},
       eachValidation: {
         isError: [false, false, false, false],
         errorMessage: "",
@@ -33,14 +33,14 @@ export const Default: Story = {
     },
   },
   render: (args) => {
-    const [cardInformation, setCardInformation] = useState<UniqueNumberType>(["", "", "", ""]);
+    const [state, setState] = useState<UniqueNumberType>(["", "", "", ""]);
     return (
       <FormSectionInput<"uniqueNumber">
         {...args}
         fieldData={{
           ...args.fieldData,
-          cardInformation,
-          setCardInformation, // ✅ 여기
+          state,
+          setState,
         }}
       />
     );
