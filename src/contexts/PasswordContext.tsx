@@ -43,9 +43,11 @@ export const PasswordProvider: React.FC<{ children: ReactNode }> = ({
 
 export function usePasswordContext(): PasswordContextValue {
   const ctx = useContext(PasswordContext);
-  if (!ctx)
-    throw new Error(
+  if (!ctx) {
+    alert(
       'usePasswordContext는 PasswordContextProvider 내에서 사용되어야 합니다.'
     );
+    return {} as PasswordContextValue;
+  }
   return ctx;
 }

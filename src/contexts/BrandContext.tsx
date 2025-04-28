@@ -36,9 +36,8 @@ export const BrandProvider: React.FC<{ children: ReactNode }> = ({
 export function useBrandContext(): BrandContextValue {
   const ctx = useContext(BrandContext);
   if (!ctx) {
-    throw new Error(
-      'useBrandContext는 BrandContextProvider 내에서 사용되어야 합니다.'
-    );
+    alert('useBrandContext는 BrandContextProvider 내에서 사용되어야 합니다.');
+    return {} as BrandContextValue; // Return a default value to avoid TypeScript error
   }
   return ctx;
 }

@@ -45,9 +45,11 @@ export const NumbersProvider: React.FC<{ children: ReactNode }> = ({
 
 export function useNumbersContext(): NumbersContextValue {
   const ctx = useContext(NumbersContext);
-  if (!ctx)
-    throw new Error(
+  if (!ctx) {
+    alert(
       'useNumbersContext는 NumbersContextProvider 내에서 사용되어야 합니다.'
     );
+    return {} as NumbersContextValue;
+  }
   return ctx;
 }

@@ -39,9 +39,9 @@ export const CvcProvider: React.FC<{ children: ReactNode }> = ({
 
 export function useCvcContext(): CvcContextValue {
   const ctx = useContext(CvcContext);
-  if (!ctx)
-    throw new Error(
-      'useCvcContext는 CvcContextProvider 내에서 사용되어야 합니다.'
-    );
+  if (!ctx) {
+    alert('useCvcContext는 CvcContextProvider 내에서 사용되어야 합니다.');
+    return {} as CvcContextValue;
+  }
   return ctx;
 }
