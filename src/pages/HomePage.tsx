@@ -15,13 +15,6 @@ function HomePage() {
   const [brand, setBrand] = useState<CardBrandType | null>(null);
 
   const {
-    cardPassword,
-    cardPasswordError,
-    handleCardPasswordChange,
-    getCardPasswordErrorMessage,
-  } = useCardPassword();
-
-  const {
     value: cardNumber,
     error: cardNumberError,
     inputRefs,
@@ -41,6 +34,13 @@ function HomePage() {
   } = useCardExpiration({});
 
   const {cardCVC, error, cvcRef, handleCardCVCChange} = useCardCVC({});
+
+  const {
+    cardPassword,
+    cardPasswordError,
+    handleCardPasswordChange,
+    getCardPasswordErrorMessage,
+  } = useCardPassword({});
 
   const isAllInputFilled = useMemo(() => {
     return (
@@ -62,9 +62,10 @@ function HomePage() {
       <section css={cardLayout}>
         <CardPasswordInput
           cardPassword={cardPassword}
+          erorr={cardPasswordError}
           onChange={handleCardPasswordChange}
-          hasError={cardPasswordError}
           getCardPasswordErrorMessage={getCardPasswordErrorMessage}
+          tabIndex={9}
         />
         <CardCVCInput
           cardCVC={cardCVC}

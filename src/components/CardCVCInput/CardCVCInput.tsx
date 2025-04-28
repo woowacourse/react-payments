@@ -26,8 +26,8 @@ function CardCVCInput({
     if (error === CARD_CVC_ERROR.onlyNumbers) {
       return CARD_CVC_ERROR.onlyNumbers;
     }
-    if (error === CARD_CVC_ERROR.invalidFormat) {
-      return CARD_CVC_ERROR.invalidFormat;
+    if (error === CARD_CVC_ERROR.invalidLength) {
+      return CARD_CVC_ERROR.invalidLength;
     }
     return '';
   }

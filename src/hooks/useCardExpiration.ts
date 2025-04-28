@@ -100,7 +100,7 @@ export const useCardExpiration = (onComplete?: () => void) => {
     if (value.length < CARD_EXPIRATION.maxLength) {
       setError({
         ...error,
-        [name]: CARD_EXPIRATION_ERROR.invalidFormat,
+        [name]: CARD_EXPIRATION_ERROR.invalidLength,
       });
     }
   }

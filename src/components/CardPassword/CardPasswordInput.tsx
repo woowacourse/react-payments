@@ -5,21 +5,25 @@ import {errorInputStyle, errorMessageStyle} from "../../styles/@common/text.styl
 import {cardPeriodInputLayout} from "../CardPeriod/CardPeriodInput.style";
 import {CARD_PASSWORD, CARD_PASSWORD_ERROR} from "../../constants";
 import {ChangeEvent} from "react";
-import {CardPassword} from "../../types";
+import {CardPassword, CardPasswordError} from "../../types";
 
 type CardPasswordInputProps = {
   cardPassword: CardPassword;
+  error: CardPasswordError;
+  passwordRef: React.RefObject<HTMLInputElement | null>;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  hasError: boolean;
-  getCardPasswordErrorMessage?: () => string | null;
+  tabIndex: number;
 }
 
-function CardPasswordInput({cardPassword, onChange, hasError, getCardPasswordErrorMessage}: CardPasswordInputProps) {
-  const getErrorMessage = (): string => {
-    if (getCardPasswordErrorMessage) {
-      return getCardPasswordErrorMessage() || CARD_PASSWORD_ERROR.onlyNumbers;
+function CardPasswordInput({cardPassword, error, onChange, passwordRef, tabIndex}: CardPasswordInputProps) {
+  const getErrorMessage = () => {
+    if (error === CARD_PASSWORD_ERROR.onlyNumbers) {
+      return CARD_PASSWORD_ERROR.onlyNumbers;
     }
-    return CARD_PASSWORD_ERROR.onlyNumbers;
+    if (error === CARD_PASSWORD_ERROR.invalidLength) {
+      return CARD_PASSWORD_ERROR.invalidLength;
+    }
+    return '';
   }
 
   return (
@@ -30,15 +34,17 @@ function CardPasswordInput({cardPassword, onChange, hasError, getCardPasswordErr
           <Input.Label>비밀번호 앞 2자리</Input.Label>
           <article css={inputSection}>
             <Input
+              ref={passwordRef}
               type="password"
               name="password"
               maxLength={CARD_PASSWORD.maxLength}
               value={cardPassword?.toString()}
               onChange={onChange}
-              css={hasError ? errorInputStyle : undefined}
+              css={error ? errorInputStyle : undefined}
+              tabIndex={tabIndex}
             />
           </article>
-          {hasError && <div css={errorMessageStyle}>{getErrorMessage()}</div>}
+          {error && <div css={errorMessageStyle}>{getErrorMessage()}</div>}
         </div>
       </Input.Group>
     </div>
