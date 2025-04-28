@@ -1,3 +1,4 @@
+import { useCardInfoContext } from '../context/CardInfoContext';
 import {
   MASTERCARD_FIRST_DIGIT,
   MASTERCARD_MAX_SECOND_DIGIT,
@@ -77,5 +78,37 @@ export const cardCVCValidator = (input: string) => {
   if (!isNumber(input)) {
     return [0, 'CVC는 숫자만 입력 가능합니다.'];
   }
+  if (input.length !== 3) {
+    return [0, 'CVC는 3자리 숫자여야 합니다.'];
+  }
   return [NO_ERROR, ''];
+};
+
+export const cardIssuerValidator = (input: string) => {
+  if (input.length === 0) {
+    return [0, '카드사를 선택해 주세요.'];
+  }
+  return [NO_ERROR, ''];
+};
+
+export const cardPasswordValidator = (input: string) => {
+  if (!isNumber(input)) {
+    return [0, '카드 비밀번호는 숫자만 입력 가능합니다.'];
+  }
+  if (input.length !== 2) {
+    return [0, '카드 비밀번호 앞 2자리를 입력해 주세요.'];
+  }
+  return [NO_ERROR, ''];
+};
+
+export const confirmButtonValidator = () => {
+  const { cardInfo } = useCardInfoContext();
+
+  return (
+    cardNumberValidator(cardInfo.cardNumber)[0] === NO_ERROR &&
+    cardExpirationDateValidator(cardInfo.cardExpirationDate)[0] === NO_ERROR &&
+    cardCVCValidator(cardInfo.cardCVC)[0] === NO_ERROR &&
+    cardIssuerValidator(cardInfo.cardIssuer)[0] === NO_ERROR &&
+    cardPasswordValidator(cardInfo.cardPassword)[0] === NO_ERROR
+  );
 };

@@ -1,6 +1,7 @@
 import * as S from './CardInfoSection.styles';
 import { ErrorProps } from '../../../shared/model/types';
 import CustomInput from '../../../shared/ui/CustomInput';
+import { useRef } from 'react';
 
 const inputArr = [
   { type: 'text', placeholder: '1234', name: 'cardNumber-0' },
@@ -11,12 +12,27 @@ const inputArr = [
 
 export default function CardNumberSection({
   error,
-  onChange,
+  onBlur,
+  onComplete,
 }: {
   error: ErrorProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onComplete: () => void;
 }) {
   const isError = error && error['cardNumberError'].errorIndex !== -1 && error['cardNumberError'].errorMessage !== '';
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const createInputRef = (index: number) => (el: HTMLInputElement | null) => {
+    inputRefs.current[index] = el;
+  };
+
+  const handleRef = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 4 && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1]?.focus();
+    } else if (e.target.value.length === 4 && !inputRefs.current[index + 1]) {
+      onComplete?.();
+    }
+  };
 
   return (
     <S.CardInfoMainSection>
@@ -31,9 +47,11 @@ export default function CardNumberSection({
             <CustomInput
               key={`cardNumber-custom-input-${index}`}
               {...input}
-              onChange={onChange}
+              onBlur={onBlur}
+              handleRef={handleRef(index)}
               maxLength={4}
               error={isError && error['cardNumberError'].errorIndex === index}
+              ref={createInputRef(index)}
             />
           ))}
         </S.CardInfoInputContainer>

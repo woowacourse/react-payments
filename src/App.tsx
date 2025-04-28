@@ -1,18 +1,12 @@
-import './App.css';
-import Preview from './features/preview/ui/Preview';
-import CardInfoContainer from './features/cardInfo/ui/CardInfoContainer';
-import useCardInfo from './features/cardInfo/hooks/useCardInfo';
+import { RouterProvider } from 'react-router';
+import { router } from './app/routes/routes';
+import { CardInfoProvider } from './features/cardInfo/context/CardInfoContext';
 
 function App() {
-  const { cardNumber, cardExpirationDate, handleCardInfoChange, error } = useCardInfo();
-
   return (
-    <div className='app-container'>
-      <main className='card-container'>
-        <Preview cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
-        <CardInfoContainer onChange={handleCardInfoChange} error={error} />
-      </main>
-    </div>
+    <CardInfoProvider>
+      <RouterProvider router={router} />
+    </CardInfoProvider>
   );
 }
 

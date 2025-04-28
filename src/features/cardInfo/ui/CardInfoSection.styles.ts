@@ -19,6 +19,7 @@ export const CardInfoDescription = styled.span`
 `;
 
 export const CardInfoSubSection = styled.div`
+  min-height: 80px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -41,4 +42,10 @@ export const CardInfoError = styled.span`
   color: #ff3d3d;
   font-size: 9.5px;
   font-weight: 400;
+`;
+
+export const CardSelection = styled.select`
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
 `;

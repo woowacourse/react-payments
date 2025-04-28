@@ -1,15 +1,24 @@
+import React from 'react';
 import { CustomInputProps } from '../model/types';
 import * as S from './customInput.styles';
 
-export default function CustomInput({ type, placeholder, name, onChange, maxLength, error }: CustomInputProps) {
+interface CustomInputAllProps extends CustomInputProps {
+  ref?: React.Ref<HTMLInputElement>;
+}
+
+export default function CustomInput({ onBlur, handleRef, error, onChange, ref, ...props }: CustomInputAllProps) {
   return (
     <S.CustomInput
-      type={type}
-      placeholder={placeholder}
-      name={name}
-      onChange={onChange}
-      maxLength={maxLength}
       error={error}
+      ref={ref}
+      onChange={(e) => {
+        handleRef?.(e);
+        onChange?.(e);
+      }}
+      onBlur={(e) => {
+        onBlur?.(e);
+      }}
+      {...props}
     />
   );
 }

@@ -1,6 +1,7 @@
 import * as S from './CardInfoSection.styles';
 import { ErrorProps } from '../../../shared/model/types';
 import CustomInput from '../../../shared/ui/CustomInput';
+import { useRef } from 'react';
 
 const inputArr = [
   { type: 'text', placeholder: 'MM', name: 'cardExpirationDate-month' },
@@ -9,13 +10,38 @@ const inputArr = [
 
 export default function CardExpirationDateSection({
   error,
-  onChange,
+  onBlur,
+  selectRef,
+  onComplete,
 }: {
   error: ErrorProps;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  selectRef: React.Ref<HTMLInputElement>;
+  onComplete: () => void;
 }) {
   const isError =
     error && error['cardExpirationDateError'].errorIndex !== -1 && error['cardExpirationDateError'].errorMessage !== '';
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const createInputRef = (index: number) => (el: HTMLInputElement | null) => {
+    inputRefs.current[index] = el;
+
+    if (index === 0 && selectRef) {
+      if (typeof selectRef === 'function') {
+        selectRef(el);
+      } else if (selectRef && 'current' in selectRef) {
+        (selectRef as React.RefObject<HTMLInputElement | null>).current = el;
+      }
+    }
+  };
+
+  const handleRef = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 2 && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1]?.focus();
+    } else if (e.target.value.length === 2 && !inputRefs.current[index + 1]) {
+      onComplete?.();
+    }
+  };
 
   return (
     <S.CardInfoMainSection>
@@ -30,7 +56,9 @@ export default function CardExpirationDateSection({
             <CustomInput
               key={`cardExpirationDate-custom-input-${index}`}
               {...input}
-              onChange={onChange}
+              onBlur={onBlur}
+              handleRef={handleRef(index)}
+              ref={createInputRef(index)}
               maxLength={2}
               error={isError && error['cardExpirationDateError'].errorIndex === index}
             />

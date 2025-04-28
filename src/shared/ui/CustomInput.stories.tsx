@@ -17,7 +17,7 @@ const meta: Meta<typeof CustomInput> = {
     type: { control: 'text' },
     placeholder: { control: 'text' },
     name: { control: 'text' },
-    onChange: { action: 'changed' },
+    onBlur: { action: 'changed' },
     maxLength: { control: 'number' },
   },
 };
@@ -51,7 +51,7 @@ export const Default: Story = {
               placeholder='1234'
               name={`cardNumber-${index}`}
               maxLength={4}
-              onChange={handleChange}
+              onBlur={handleChange}
               error={error[0] === index}
             />
           ))}
@@ -86,7 +86,7 @@ export const ExpirationDateInput: Story = {
             placeholder='MM'
             name='cardExpirationDate-month'
             maxLength={2}
-            onChange={handleChange}
+            onBlur={handleChange}
             error={error[0] === MONTH_ERROR}
           />
           <CustomInput
@@ -94,7 +94,7 @@ export const ExpirationDateInput: Story = {
             placeholder='YY'
             name='cardExpirationDate-year'
             maxLength={2}
-            onChange={handleChange}
+            onBlur={handleChange}
             error={error[0] === YEAR_ERROR}
           />
         </S.CardInfoInputContainer>
@@ -129,7 +129,7 @@ export const CVCInput: Story = {
           placeholder='CVC 입력'
           name='cardCVC'
           maxLength={3}
-          onChange={handleChange}
+          onBlur={handleChange}
           error={isError}
         />
         {isError && <S.CardInfoError>{message}</S.CardInfoError>}
