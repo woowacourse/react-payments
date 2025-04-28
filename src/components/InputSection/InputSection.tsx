@@ -1,6 +1,5 @@
 import {
   CardPositionType,
-  ERROR_MESSAGE,
   INPUT_TYPE,
   InputType,
   PeriodPositionType,
@@ -10,12 +9,7 @@ import Error from "../Error/Error";
 import InputGroup from "../InputGroup/InputGroup";
 import Subtitle from "../Subtitle/Subtitle";
 import Title from "../Title/Title";
-import Button from "../Button/Button";
-import { CompletionState } from "../../hooks/useCompletion";
-import { useEffect, useMemo, useState } from "react";
 import { InputErrorType } from "../../hooks/useInputError";
-import { useCard } from "../../hooks/useCard";
-import { useNavigate } from "react-router-dom";
 
 export interface InputSectionProps {
   type: InputType;
@@ -23,7 +17,6 @@ export interface InputSectionProps {
     value: string,
     position?: CardPositionType | PeriodPositionType
   ) => void;
-  isComplete: CompletionState;
   error: InputErrorType;
   validators: {
     validateCardNumber: (value: string, position: CardPositionType) => void;
@@ -63,13 +56,9 @@ const subTitleVariants = {
 function InputSection({
   type,
   onComplete,
-  isComplete,
   error,
   validators,
 }: InputSectionProps) {
-  const { cardNumbers, cardBrand } = useCard();
-  const navigate = useNavigate();
-
   const getErrorMessage = (type: InputType) => {
     if (type === INPUT_TYPE.cardNumbers) {
       return (
@@ -94,34 +83,6 @@ function InputSection({
     return null;
   };
 
-  const handleClick = () => {
-    navigate("/success", {
-      state: {
-        cardNumber: `${cardNumbers.first}`,
-        cardBrand: `${cardBrand}`,
-      },
-    });
-  };
-
-  const isButtonShowing = useMemo(() => {
-    const isAllComplete =
-      Object.values(isComplete.cardNumbers).every(Boolean) &&
-      isComplete.cardBrand &&
-      Object.values(isComplete.expirationPeriod).every(Boolean) &&
-      isComplete.cvcNumber &&
-      isComplete.password;
-    const isAllErrorFree = [
-      ...Object.values(error.cardNumbers),
-      ...Object.values(error.expirationPeriod),
-      error.cvcNumber,
-      error.cardBrand,
-      error.password,
-    ].every((v) => v === null);
-    return isAllComplete && isAllErrorFree;
-  }, [isComplete, error]);
-
-  const showButton = isButtonShowing && type === INPUT_TYPE.password;
-
   return (
     <>
       <Title title={titleVariants[type]} />
@@ -137,7 +98,6 @@ function InputSection({
         onComplete={onComplete}
       />
       <Error errorMessage={getErrorMessage(type)} />
-      {showButton && <Button variant="home" onClick={handleClick} />}
     </>
   );
 }

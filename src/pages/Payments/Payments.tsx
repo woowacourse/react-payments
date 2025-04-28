@@ -5,6 +5,10 @@ import { useInputError } from "../../hooks/useInputError";
 import Preview from "../../components/Preview/Preview";
 import { PaymentsCSS } from "./Payments.styled";
 import { useVisibleSteps } from "../../hooks/useVisibleSteps";
+import { useMemo } from "react";
+import Button from "../../components/Button/Button";
+import { useCard } from "../../hooks/useCard";
+import { useNavigate } from "react-router-dom";
 function Payments() {
   const {
     isComplete,
@@ -17,6 +21,36 @@ function Payments() {
   const visible = useVisibleSteps(isComplete);
 
   const { error, validators } = useInputError();
+  const navigate = useNavigate();
+  const { cardNumbers, cardBrand } = useCard();
+
+  const isButtonShowing = useMemo(() => {
+    const isAllComplete =
+      Object.values(isComplete.cardNumbers).every(Boolean) &&
+      isComplete.cardBrand &&
+      Object.values(isComplete.expirationPeriod).every(Boolean) &&
+      isComplete.cvcNumber &&
+      isComplete.password;
+    const isAllErrorFree = [
+      ...Object.values(error.cardNumbers),
+      ...Object.values(error.expirationPeriod),
+      error.cvcNumber,
+      error.cardBrand,
+      error.password,
+    ].every((v) => v === null);
+    return isAllComplete && isAllErrorFree;
+  }, [isComplete, error]);
+
+  const showButton = isButtonShowing;
+
+  const handleClick = () => {
+    navigate("/success", {
+      state: {
+        cardNumber: `${cardNumbers.first}`,
+        cardBrand: `${cardBrand}`,
+      },
+    });
+  };
 
   return (
     <PaymentsCSS>
@@ -26,7 +60,6 @@ function Payments() {
           <InputSection
             type={INPUT_TYPE.password}
             onComplete={updatePasswordIsComplete}
-            isComplete={isComplete}
             error={error}
             validators={validators}
           />
@@ -35,7 +68,6 @@ function Payments() {
           <InputSection
             type={INPUT_TYPE.cvcNumber}
             onComplete={updateCvcIsComplete}
-            isComplete={isComplete}
             error={error}
             validators={validators}
           />
@@ -44,7 +76,6 @@ function Payments() {
           <InputSection
             type={INPUT_TYPE.expirationPeriod}
             onComplete={updateExpirationPeriodIsComplete}
-            isComplete={isComplete}
             error={error}
             validators={validators}
           />
@@ -53,7 +84,6 @@ function Payments() {
           <InputSection
             type={INPUT_TYPE.cardBrand}
             onComplete={updateCardBrandIsComplete}
-            isComplete={isComplete}
             error={error}
             validators={validators}
           />
@@ -61,10 +91,10 @@ function Payments() {
         <InputSection
           type={INPUT_TYPE.cardNumbers}
           onComplete={updateCardNumberIsComplete}
-          isComplete={isComplete}
           error={error}
           validators={validators}
         />
+        {showButton && <Button variant="home" onClick={handleClick} />}
       </form>
     </PaymentsCSS>
   );
