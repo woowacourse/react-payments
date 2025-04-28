@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const ButtonCSS = styled.button`
+interface ButtonCSSProps {
+  variant: "success" | "home";
+}
+
+export const ButtonCSS = styled.button<ButtonCSSProps>`
   height: 52px;
 
   font-weight: 700;
@@ -11,13 +15,7 @@ export const ButtonCSS = styled.button`
 
   cursor: pointer;
 
-  &.success {
-    width: 100%;
-  }
-
-  &.home {
-    position: fixed;
-    width: 30%;
-    bottom: 0;
-  }
+  width: ${({ variant }) => (variant === "home" ? "30%" : "100%")};
+  position: ${({ variant }) => (variant === "home" ? "fixed" : null)};
+  bottom: ${({ variant }) => (variant === "home" ? "0" : "auto")};
 `;

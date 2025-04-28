@@ -7,7 +7,7 @@ interface ButtonProps {
 
 function Button({ onClick, variant }: ButtonProps) {
   return (
-    <ButtonCSS type="button" className={variant} onClick={onClick}>
+    <ButtonCSS type="button" onClick={onClick} variant={variant}>
       확인
     </ButtonCSS>
   );
