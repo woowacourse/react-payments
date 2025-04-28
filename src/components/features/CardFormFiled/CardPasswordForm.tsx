@@ -38,6 +38,7 @@ export const CardPasswordForm = ({
             onBlur={(e) => onCardInputBlur(e, index)}
             isValid={password.isValid}
             ref={refs[index]}
+            autoComplete="off"
           />
         ))}
         <Text
