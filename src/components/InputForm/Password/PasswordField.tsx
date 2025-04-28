@@ -33,6 +33,7 @@ function PasswordField({
       <Label htmlFor="password">비밀번호 앞 2자리</Label>
       <NumberInputContainer>
         <NumberInput
+          autoFocus
           type="password"
           id="password"
           value={cardInfo.password}

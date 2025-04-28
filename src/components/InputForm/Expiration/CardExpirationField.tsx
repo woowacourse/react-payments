@@ -32,6 +32,7 @@ function CardExpirationField({
       </Label>
       <NumberInputContainer role="group" aria-labelledby="expiration-label">
         <NumberInput
+          autoFocus
           id="expiration-month"
           value={cardInfo.month}
           setValue={handleMonthChange}

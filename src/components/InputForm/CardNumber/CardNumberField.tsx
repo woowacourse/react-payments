@@ -40,6 +40,7 @@ function CardNumberField({
           ] as const
         ).map((key, index) => (
           <NumberInput
+            autoFocus={index === 0}
             key={key}
             id={index === 0 ? "first-number" : undefined}
             value={cardInfo[key]}

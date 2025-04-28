@@ -24,6 +24,7 @@ function CardBrandField({ cardInfo, handleCardInfo }: CardBrandFieldProps) {
   return (
     <DropdownContainer ref={dropdownRef}>
       <DropdownButton
+        autoFocus
         type="button"
         isOpen={isOpen}
         isSelected={!!cardInfo.cardBrand}
@@ -36,7 +37,13 @@ function CardBrandField({ cardInfo, handleCardInfo }: CardBrandFieldProps) {
         <DropdownList>
           {CARD_BRAND_LIST.map((brand) => (
             <DropdownItem
+              tabIndex={0}
               key={brand}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  selectBrand(brand);
+                }
+              }}
               onClick={() => selectBrand(brand)}
               isSelected={cardInfo.cardBrand === brand}
             >

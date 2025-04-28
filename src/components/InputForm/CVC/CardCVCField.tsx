@@ -33,6 +33,7 @@ function CardCVCField({
       <Label htmlFor="cvc">CVC</Label>
       <NumberInputContainer>
         <NumberInput
+          autoFocus
           id="cvc"
           value={cardInfo.cvc}
           setValue={(value) => handleCardInfo("cvc", value)}
