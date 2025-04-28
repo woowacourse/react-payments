@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPreview from './CardPreview';
 
 const meta: Meta<typeof CardPreview> = {
+  title: 'Components/CardPreview',
   component: CardPreview,
   tags: ['autodocs'],
 };
@@ -20,7 +21,7 @@ export const Default: Story = {
       month: '',
       year: '',
     },
-    cardType: 'none',
+    cardType: null,
   },
   render: function Render(args) {
     return <CardPreview {...args} />;
