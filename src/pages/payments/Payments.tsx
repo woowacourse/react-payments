@@ -48,6 +48,7 @@ function Payments() {
 
   const {
     inputValue: CVCInputValue,
+    inputRef: CVCInputRef,
     errorType: CVCErrorType,
     isInputComplete: isCVCInputComplete,
     handleInputValue: handleCVCInputValue,
@@ -56,6 +57,7 @@ function Payments() {
 
   const {
     inputValue: cardPasswordInputValue,
+    inputRef: cardPasswordInputRef,
     errorType: cardPasswordErrorType,
     isInputComplete: isCardPasswordInputComplete,
     handleInputValue: handleCardPasswordInputValue,
@@ -104,8 +106,19 @@ function Payments() {
     cardBankSelected,
     isExpirationDateInputComplete,
     isCVCInputComplete,
-    isCardPasswordInputComplete,
   ]);
+
+  useEffect(() => {
+    if (inputStep === INPUT_STEP.cardNumber) {
+      cardNumberInputRefs.cardNumberPart1.current?.focus();
+    } else if (inputStep === INPUT_STEP.expirationDate) {
+      expirationDateInputRefs.month.current?.focus();
+    } else if (inputStep === INPUT_STEP.CVC) {
+      CVCInputRef.current?.focus();
+    } else if (inputStep === INPUT_STEP.cardPassword) {
+      cardPasswordInputRef.current?.focus();
+    }
+  }, [inputStep]);
 
   return (
     <MobileLayoutContainer>
@@ -124,6 +137,7 @@ function Payments() {
             >
               <CardPasswordInputField
                 inputValue={cardPasswordInputValue}
+                inputRef={cardPasswordInputRef}
                 errorTypes={cardPasswordErrorType}
                 handleInputValue={handleCardPasswordInputValue}
                 onBlur={onCardPasswordInputBlur}
@@ -135,6 +149,7 @@ function Payments() {
             <InputSection title="CVC 번호를 입력해 주세요">
               <CVCInputField
                 inputValue={CVCInputValue}
+                inputRef={CVCInputRef}
                 errorTypes={CVCErrorType}
                 handleInputValue={handleCVCInputValue}
                 onBlur={onCVCInputBlur}

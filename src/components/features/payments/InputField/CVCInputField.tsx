@@ -1,10 +1,11 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, RefObject } from 'react';
 import BaseInputField from '../../../common/BaseInputField/BaseInputField';
 import Input from '../../../common/Input/Input';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 
 interface CVCInputFieldProps {
   inputValue: string;
+  inputRef: RefObject<HTMLInputElement | null>;
   errorTypes: ErrorType[];
   handleInputValue: (value: string) => void;
   onBlur: (e: ChangeEvent) => void;
@@ -12,6 +13,7 @@ interface CVCInputFieldProps {
 
 function CVCInputField({
   inputValue,
+  inputRef,
   errorTypes,
   handleInputValue,
   onBlur,
@@ -25,6 +27,7 @@ function CVCInputField({
         inputType="number"
         placeholder="123"
         name="CVC"
+        ref={inputRef}
         value={inputValue}
         onChange={({ value }) => handleInputValue(value)}
         onBlur={onBlur}

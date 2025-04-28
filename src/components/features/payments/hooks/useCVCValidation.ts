@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { CVC } from '../config/card';
 import { ERROR_TYPE, ErrorType } from '../config/error';
 
@@ -6,6 +6,7 @@ function useCVCValidation() {
   const [inputValue, setInputValue] = useState('');
   const [errorType, setErrorType] = useState<ErrorType[]>([]);
   const [isInputComplete, setIsInputComplete] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const updateCardError = ({
     errorType,
@@ -39,7 +40,14 @@ function useCVCValidation() {
     });
   };
 
-  return { inputValue, errorType, isInputComplete, handleInputValue, onBlur };
+  return {
+    inputValue,
+    inputRef,
+    errorType,
+    isInputComplete,
+    handleInputValue,
+    onBlur,
+  };
 }
 
 export default useCVCValidation;

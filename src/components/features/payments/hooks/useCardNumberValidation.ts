@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { CARD_NUMBER, CardType } from '../config/card';
 import { ERROR_TYPE, ErrorType } from '../config/error';
 import {
@@ -101,12 +101,6 @@ function useCardNumberValidation() {
 
     focusNextInput<CardNumberInputType>(key, inputRefs);
   };
-
-  useEffect(() => {
-    if (inputRefs.cardNumberPart1.current) {
-      inputRefs.cardNumberPart1.current.focus();
-    }
-  }, []);
 
   return {
     inputValues,

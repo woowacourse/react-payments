@@ -1,10 +1,11 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, RefObject } from 'react';
 import BaseInputField from '../../../common/BaseInputField/BaseInputField';
 import Input from '../../../common/Input/Input';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 
 interface CardPasswordInputFieldProps {
   inputValue: string;
+  inputRef: RefObject<HTMLInputElement | null>;
   errorTypes: ErrorType[];
   handleInputValue: (value: string) => void;
   onBlur: (e: ChangeEvent) => void;
@@ -12,6 +13,7 @@ interface CardPasswordInputFieldProps {
 
 function CardPasswordInputField({
   inputValue,
+  inputRef,
   errorTypes,
   handleInputValue,
   onBlur,
@@ -24,6 +26,7 @@ function CardPasswordInputField({
       <Input
         inputType="password"
         name="CardPassword"
+        ref={inputRef}
         value={inputValue}
         onChange={({ value }) => handleInputValue(value)}
         onBlur={onBlur}
