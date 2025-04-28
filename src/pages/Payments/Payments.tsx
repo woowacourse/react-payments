@@ -1,4 +1,4 @@
-import { INPUT_TYPE } from "../../constants/constants";
+import { INPUT_TYPE, MAGIC_NUMBER } from "../../constants/constants";
 import { useInputError } from "../../hooks/useInputError";
 import Preview from "../../components/Preview/Preview";
 import { PaymentsCSS } from "./Payments.styled";
@@ -24,11 +24,15 @@ function Payments() {
 
   const isButtonShowing = useMemo(() => {
     const isAllComplete =
-      Object.values(cardNumbers).every((num) => num.length === 4) &&
+      Object.values(cardNumbers).every(
+        (num) => num.length === MAGIC_NUMBER.maxLength.cardNumber
+      ) &&
       cardBrand !== "" &&
-      Object.values(expirationPeriod).every((val) => val.length === 2) &&
-      cvcNumber.length === 3 &&
-      password.length === 2;
+      Object.values(expirationPeriod).every(
+        (val) => val.length === MAGIC_NUMBER.maxLength.expirationPeriod
+      ) &&
+      cvcNumber.length === MAGIC_NUMBER.maxLength.cvcNumber &&
+      password.length === MAGIC_NUMBER.maxLength.password;
     const isAllErrorFree = [
       ...Object.values(error.cardNumbers),
       ...Object.values(error.expirationPeriod),

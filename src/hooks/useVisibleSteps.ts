@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { CardPositionType, PeriodPositionType } from "../constants/constants";
+import {
+  CardPositionType,
+  MAGIC_NUMBER,
+  PeriodPositionType,
+} from "../constants/constants";
 
 interface UseVisibleStepsProps {
   cardNumbers: Record<CardPositionType, string>;
@@ -24,11 +28,12 @@ export function useVisibleSteps({
   });
 
   const isCardNumberComplete = Object.values(cardNumbers).every(
-    (num) => num.length === 4
+    (num) => num.length === MAGIC_NUMBER.maxLength.cardNumber
   );
   const isExpirationComplete =
-    expirationPeriod.month.length === 2 && expirationPeriod.year.length === 2;
-  const isCvcComplete = cvcNumber.length === 3;
+    expirationPeriod.month.length === MAGIC_NUMBER.maxLength.expirationPeriod &&
+    expirationPeriod.year.length === MAGIC_NUMBER.maxLength.expirationPeriod;
+  const isCvcComplete = cvcNumber.length === MAGIC_NUMBER.maxLength.cvcNumber;
 
   useEffect(() => {
     if (isCardNumberComplete) {
