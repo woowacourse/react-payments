@@ -12,6 +12,7 @@ import CardNumberInputs from "../CardNumberInputs/CardNumberInputs";
 import CvcInput from "../CvcInput/CvcInput";
 import CardBrandInput from "../CardBrandInput/CardBrandInput";
 import PasswordInput from "../PasswordInput/PasswordInput";
+import InputFieldRenderer from "../InputRenderer/InputRenderer";
 
 export interface InputGroupProps {
   type: InputType;
@@ -88,40 +89,22 @@ function InputGroup({
 
   return (
     <InputGroupCSS>
-      {type === INPUT_TYPE.cardNumbers && (
-        <CardNumberInputs
-          cardNumbers={cardNumbers}
-          error={error}
-          handleCardNumberChange={handleCardNumberChange}
-        />
-      )}
-      {type === INPUT_TYPE.expirationPeriod && (
-        <ExpirationPeriodInputs
-          expirationPeriod={expirationPeriod}
-          error={error.expirationPeriod}
-          handleExpirationPeriodChange={handleExpirationPeriodChange}
-        />
-      )}
-      {type === INPUT_TYPE.cvcNumber && (
-        <CvcInput
-          value={cvcNumber}
-          error={error.cvcNumber}
-          handleCvcNumberChange={handleCvcNumberChange}
-        />
-      )}
-      {type === INPUT_TYPE.cardBrand && (
-        <CardBrandInput
-          value={cardBrand}
-          handleCardBrandChange={handleCardBrandChange}
-        />
-      )}
-      {type === INPUT_TYPE.password && (
-        <PasswordInput
-          value={password}
-          error={error.password}
-          handlePasswordChange={handlePasswordChange}
-        />
-      )}
+      <InputFieldRenderer
+        type={type}
+        error={error}
+        cardNumbers={cardNumbers}
+        expirationPeriod={expirationPeriod}
+        cvcNumber={cvcNumber}
+        cardBrand={cardBrand}
+        password={password}
+        handlers={{
+          handleCardNumberChange,
+          handleExpirationPeriodChange,
+          handleCvcNumberChange,
+          handleCardBrandChange,
+          handlePasswordChange,
+        }}
+      />
     </InputGroupCSS>
   );
 }
