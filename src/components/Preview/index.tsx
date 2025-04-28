@@ -1,4 +1,7 @@
-import { useCardForm } from '../../contexts/CardFormContext';
+import { useBrandContext } from '../../contexts/BrandContext';
+import { useExpiryDateContext } from '../../contexts/ExpiryDateContext';
+import { useNumbersContext } from '../../contexts/NumbersContext';
+import { useFormUiLogic } from '../../hooks/useFormUiLogic';
 import { theme } from '../../styles/theme';
 import PreviewView from './PreviewView';
 
@@ -8,8 +11,11 @@ const MASTERCARD_PREFIX_RANGE = { MIN: 51, MAX: 55 } as const;
 type ColorKey = keyof typeof theme.colors.cardBrandColors;
 
 const Preview = () => {
-  const { numberFields, expiryFields, brand, isPeriodSeparatorShowing } =
-    useCardForm();
+  const { showSep } = useFormUiLogic();
+
+  const { numberFields } = useNumbersContext();
+  const { expiryFields } = useExpiryDateContext();
+  const { brand } = useBrandContext();
 
   const numbers = numberFields.map((field) => field.value);
   const period = expiryFields.map((field) => field.value);
@@ -44,7 +50,7 @@ const Preview = () => {
       numbers={numbers}
       period={period}
       cardBrandColor={getCardBrandColor()}
-      isPeriodSeparatorShowing={isPeriodSeparatorShowing}
+      isPeriodSeparatorShowing={showSep}
       cardMethodSrc={getCardMethodSrc()}
     />
   );

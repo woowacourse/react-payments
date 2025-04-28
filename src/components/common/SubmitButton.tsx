@@ -1,9 +1,9 @@
-import { useCardForm } from '../../contexts/CardFormContext';
 import styled from '@emotion/styled';
 import { Button } from './Styled';
+import { useFormUiLogic } from '../../hooks/useFormUiLogic';
 
 const SubmitButton = () => {
-  const { isFormValid } = useCardForm();
+  const { isFormValid } = useFormUiLogic();
   return (
     <>{isFormValid && <ConfirmButton type="submit">확인</ConfirmButton>}</>
   );
