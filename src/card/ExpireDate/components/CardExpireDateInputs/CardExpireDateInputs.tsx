@@ -2,28 +2,25 @@ import styles from "./CardExpireDateInputs.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
 import { EXPIRE_DATE_KEYS } from "../../constants";
-import type { ExpireDateInputRefs, ExpireDateState } from "../../types";
+import type {
+  ExpireDateInputKey,
+  ExpireDateInputRefs,
+  ExpireDateState,
+} from "../../types";
 
 export interface CardExpireDateInputsProps {
   expireDate: ExpireDateState;
   expireDateInputRefs: ExpireDateInputRefs;
-  handleExpireMonthChange: (value: string) => void;
-  handleExpireYearChange: (value: string) => void;
+  handleExpireChange: (key: ExpireDateInputKey, value: string) => void;
   handleExpireMonthBlur: (value: string) => void;
 }
 
 function CardExpireDateInputs({
   expireDate,
   expireDateInputRefs,
-  handleExpireMonthChange,
-  handleExpireYearChange,
+  handleExpireChange,
   handleExpireMonthBlur,
 }: CardExpireDateInputsProps) {
-  const changeEvent = {
-    MM: handleExpireMonthChange,
-    YY: handleExpireYearChange,
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.expireDateInputContainer}>
@@ -45,7 +42,7 @@ function CardExpireDateInputs({
                 placeholder={expireKey}
                 isError={Boolean(expireDate[expireKey].errorMessage)}
                 value={expireDate[expireKey].value}
-                onChange={(e) => changeEvent[expireKey](e.target.value)}
+                onChange={(e) => handleExpireChange(expireKey, e.target.value)}
                 onBlur={
                   expireKey === "MM"
                     ? (e) => handleExpireMonthBlur(e.target.value)

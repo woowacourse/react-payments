@@ -24,26 +24,29 @@ const useControlledExpireDate = () => {
     const index = EXPIRE_DATE_KEYS.indexOf(key);
     const nextKey = EXPIRE_DATE_KEYS[index + 1] as ExpireDateInputKey;
     const nextInputRef = expireDateInputRefs[nextKey];
-    if (nextInputRef.current) {
-      nextInputRef.current.focus();
-    }
+    nextInputRef.current?.focus();
   };
 
-  const handleExpireMonthChange = useCallback((value: string) => {
-    if (value.length > 2) {
-      return;
-    }
+  const handleExpireChange = useCallback(
+    (key: ExpireDateInputKey, value: string) => {
+      if (value.length > 2) {
+        return;
+      }
 
-    const errorMessage = validateMonth(value);
-    setExpireDate((prevState) => ({
-      ...prevState,
-      MM: {
-        value,
-        errorMessage,
-      },
-    }));
-    handleNextInputFocus("MM", value, Boolean(errorMessage));
-  }, []);
+      const errorMessage =
+        key === "MM" ? validateMonth(value) : validateYear(value);
+      setExpireDate((prevState) => ({
+        ...prevState,
+        [key]: {
+          value,
+          errorMessage,
+        },
+      }));
+
+      handleNextInputFocus(key, value, Boolean(errorMessage));
+    },
+    []
+  );
 
   const handleExpireMonthBlur = useCallback((value: string) => {
     if (value.length !== 1) {
@@ -61,27 +64,14 @@ const useControlledExpireDate = () => {
     }
   }, []);
 
-  const handleExpireYearChange = useCallback((value: string) => {
-    if (value.length > 2) {
-      return;
-    }
-
-    const errorMessage = validateYear(value);
-    setExpireDate((prevState) => ({
-      ...prevState,
-      YY: {
-        value,
-        errorMessage,
-      },
-    }));
-  }, []);
-
   const checkExpireDateNextStep = useCallback((expireDate: ExpireDateState) => {
     const expireDateValues = Object.values(expireDate);
     const isValidLength = expireDateValues.every(
-      (item) => item.value.length === 2
+      ({ value }) => value.length === 2
     );
-    const isValid = expireDateValues.every((item) => item.errorMessage === "");
+    const isValid = expireDateValues.every(
+      ({ errorMessage }) => errorMessage === ""
+    );
     const isValidExpireDate = isValidLength && isValid;
 
     if (!isValidExpireDate) {
@@ -94,8 +84,7 @@ const useControlledExpireDate = () => {
   return {
     expireDate,
     expireDateInputRefs,
-    handleExpireMonthChange,
-    handleExpireYearChange,
+    handleExpireChange,
     handleExpireMonthBlur,
     isNextStep: checkExpireDateNextStep(expireDate),
   };
