@@ -54,7 +54,9 @@
 - [ ] 유효성 검증 숫자만 입력할 수 있게 변경? (토스 ui 레퍼런스)
   - [ ] 아에 한글을 입력 못하게 막는것도 좋은 방법일듯
 - [ ] cvcNumber, password 현재 배열로 관리 -> 일반 string으로 변경
+  - [ ] -> inputfield의 onChange 다 넘겨줘야함.
 - [ ] type 공통화 (UIformData, 컴포넌트 props)
 - [ ] 타입 위치 재정립
 - [ ] react.memo 사용 컴포넌트 최적화
 - [ ] 컴포넌트 props 네이밍 변경 및 통일 (setter-> setState로 변경)
+- [x] 공통 훅 common폴더 분리

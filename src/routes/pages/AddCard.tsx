@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
 import useCardInformation from "../../hooks/useCardInformation/useCardInformation";
 import useValidation from "../../hooks/useValidation/useValidation";
-import useStep from "../../hooks/useStep";
-import useAllComplete from "../../hooks/useAllComplete";
 import PreviewCard from "../../components/PreviewCard/PreviewCard";
 import FormContainer from "../../components/FormContainer/FormContainer";
 import { useNavigate } from "react-router";
+import useStep from "../../hooks/common/useStep";
+import useAllComplete from "../../hooks/common/useAllComplete";
 
 const AddCard = () => {
   const navigate = useNavigate();

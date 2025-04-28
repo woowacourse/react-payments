@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import { CardInformationType } from "../../types/CardInformationType";
-import useCardType from "../../hooks/useCardType";
 import { CompanyType } from "../../types";
 import { CARD_COMPANY_COLORS } from "../../constants/constant";
+import useCardType from "../../hooks/common/useCardType";
 
 const separateCard = {
   visa: "Visa.png",

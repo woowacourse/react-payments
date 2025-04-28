@@ -2,7 +2,7 @@ import { useState } from "react";
 import { errorStateType, ExpirationValidationType } from "../../types";
 import { validateExpirationDate } from "../../utils/validation";
 import { useEachValidationType } from "../../types/useValidationType";
-import useErrorCheckComplete from "../useErrorCheckComplete";
+import useErrorCheckComplete from "../common/useErrorCheckComplete";
 
 const useExpirationDateValidation = (): useEachValidationType => {
   const [isError, setIsError] = useState<errorStateType>([false, false]);

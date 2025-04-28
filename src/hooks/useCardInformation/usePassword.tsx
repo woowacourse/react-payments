@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PasswordType } from "../../types/CardInformationType";
-import useCheckLengthComplete from "../useCheckLengthComplete";
 import { PASSWORD_MAX_LENGTH } from "../../constants/constant";
+import useCheckLengthComplete from "../common/useCheckLengthComplete";
 
 const usePassword = () => {
   const [password, setPassword] = useState<PasswordType>([""]);

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { errorStateType } from "../types";
+import { errorStateType } from "../../types";
 
 const useErrorCheckComplete = (isError: errorStateType) => {
   return useMemo(() => {

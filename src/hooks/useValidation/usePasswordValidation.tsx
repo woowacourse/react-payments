@@ -2,7 +2,7 @@ import { useState } from "react";
 import { errorStateType } from "../../types";
 import { validateNumberOnly } from "../../utils/validation";
 import { useEachValidationType } from "../../types/useValidationType";
-import useErrorCheckComplete from "../useErrorCheckComplete";
+import useErrorCheckComplete from "../common/useErrorCheckComplete";
 
 const usePasswordValidation = (): useEachValidationType => {
   const [isError, setIsError] = useState<errorStateType>([false]);
