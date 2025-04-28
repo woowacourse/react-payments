@@ -6,9 +6,6 @@ import { useCardFormContext } from '../../context/CardFormContext';
 const CVCInput = () => {
   const { CVC, updateCVC, CVCErrors, CVCErrorMessage } = useCardFormContext();
 
-  // if (!inputsState.CVC.isVisible) {
-  //   return;
-  // }
   return (
     <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>
       <h4 className="label">CVC</h4>

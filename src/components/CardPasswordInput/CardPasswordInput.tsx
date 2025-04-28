@@ -5,9 +5,6 @@ const CardPasswordInput = () => {
   const { password, updatePassword, passwordError, passwordErrorMessage } =
     useCardFormContext();
 
-  // if (!inputsState.password.isVisible) {
-  //   return;
-  // }
   return (
     <InputContainer
       title="비밀번호를 입력해 주세요"

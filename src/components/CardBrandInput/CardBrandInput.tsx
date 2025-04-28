@@ -6,9 +6,6 @@ import { useCardFormContext } from '../../context/CardFormContext';
 const CardBrandInput = () => {
   const { brand, updateBrand } = useCardFormContext();
 
-  // if (!inputsState.brand.isVisible) {
-  //   return;
-  // }
   return (
     <InputContainer
       title={INPUT_CONTAINER.CARD_BRAND.TITLE}
