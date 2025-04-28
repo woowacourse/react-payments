@@ -22,6 +22,14 @@ function Payments() {
   });
   const navigate = useNavigate();
 
+  const inputSections = [
+    { type: INPUT_TYPE.password, visible: visible.password },
+    { type: INPUT_TYPE.cvcNumber, visible: visible.cvcNumber },
+    { type: INPUT_TYPE.expirationPeriod, visible: visible.expirationPeriod },
+    { type: INPUT_TYPE.cardBrand, visible: visible.cardBrand },
+    { type: INPUT_TYPE.cardNumbers, visible: true },
+  ];
+
   const isButtonShowing = useMemo(() => {
     const isAllComplete =
       Object.values(cardNumbers).every(
@@ -57,39 +65,12 @@ function Payments() {
     <PaymentsCSS>
       <Preview />
       <form>
-        {visible.password && (
-          <InputSection
-            type={INPUT_TYPE.password}
-            error={error}
-            validators={validators}
-          />
+        {inputSections.map(
+          ({ type, visible }) =>
+            visible && (
+              <InputSection type={type} error={error} validators={validators} />
+            )
         )}
-        {visible.cvcNumber && (
-          <InputSection
-            type={INPUT_TYPE.cvcNumber}
-            error={error}
-            validators={validators}
-          />
-        )}
-        {visible.expirationPeriod && (
-          <InputSection
-            type={INPUT_TYPE.expirationPeriod}
-            error={error}
-            validators={validators}
-          />
-        )}
-        {visible.cardBrand && (
-          <InputSection
-            type={INPUT_TYPE.cardBrand}
-            error={error}
-            validators={validators}
-          />
-        )}
-        <InputSection
-          type={INPUT_TYPE.cardNumbers}
-          error={error}
-          validators={validators}
-        />
         {isButtonShowing && <Button onClick={handleClick} variant="home" />}
       </form>
     </PaymentsCSS>
