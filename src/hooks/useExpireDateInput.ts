@@ -89,13 +89,17 @@ function isAllFilledDate(value: ExpireDateInputType) {
   return value.month.value.length === 2 && value.year.value.length === 2;
 }
 
+function isAllInRange(value: ExpireDateInputType) {
+  const isMonthInRange = parseInt(value.month.value) >= 1 && parseInt(value.month.value) <= 12;
+  const isYearInRange = parseInt(value.year.value) >= new Date().getFullYear() % 100;
+
+  return isMonthInRange && isYearInRange;
+}
+
 function canMoveNextStep(value: ExpireDateInputType) {
   const isAllValid = isAllValidDate(value);
   const isAllFilled = isAllFilledDate(value);
+  const isAllDateInRange = isAllInRange(value);
 
-  if (isAllValid && isAllFilled) {
-    return true;
-  }
-
-  return false;
+  return isAllValid && isAllFilled && isAllDateInRange;
 }
