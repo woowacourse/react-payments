@@ -6,6 +6,7 @@ import {
 } from '../config/inputField';
 import CardInfoBox from './CardInfoBox';
 import { DropdownOptionType } from '../../../../types/dropdown';
+import { memo } from 'react';
 
 interface CardPreviewProps {
   cardNumberInputValue: Record<CardNumberInputType, string>;
@@ -14,7 +15,7 @@ interface CardPreviewProps {
   cardBank: DropdownOptionType | null;
 }
 
-function CardPreview({
+const CardPreview = memo(function CardPreview({
   cardNumberInputValue,
   expirationDateInputValue,
   cardType,
@@ -30,7 +31,7 @@ function CardPreview({
       />
     </Card>
   );
-}
+});
 
 const Card = styled.div<{ $cardBank: DropdownOptionType | null }>`
   position: relative;
