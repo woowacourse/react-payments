@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { ExpirationKey, ExpirationType } from '../types';
 import { INITIAL_EXPIRATION } from '../constants';
 import { isNumber } from '../utils/isNumber';
+import focusNextInputIfFilled from '../utils/focusNextInputIfFilled';
 
 const useExpiration = () => {
   const [expiration, setExpiration] = useState<ExpirationType>(INITIAL_EXPIRATION);
@@ -17,6 +18,8 @@ const useExpiration = () => {
     if (field === 'month' && value.length === EXPIRATION_RULES.MONTH_LENGTH) {
       expirationRef.year.current?.focus();
     }
+
+    focusNextInputIfFilled({ refs: Object.values(expirationRef), maxLength: 2, value, currentIndex: Object.keys(expirationRef).indexOf(field) });
 
     if (!isNumber(value) && value !== '') {
       return;

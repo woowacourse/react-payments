@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import { INITIAL_CARD_NUMBER } from '../constants';
 import { CardNumberType } from '../types';
 import { isNumber } from '../utils/isNumber';
+import focusNextInputIfFilled from '../utils/focusNextInputIfFilled';
 
 const isValidCardNumberLength = (value: string) => value.length === 0 || value.length === 4;
 
@@ -27,13 +28,9 @@ const useCardNumbers = () => {
       return;
     }
 
-    handleFocusMove(field);
-  };
-
-  const handleFocusMove = (field: keyof CardNumberType) => {
     const keys = Object.keys(cardInputRefs);
-    const nextKey = keys[keys.indexOf(field) + 1] as keyof typeof cardInputRefs;
-    cardInputRefs[nextKey].current!.focus();
+
+    focusNextInputIfFilled({ refs: Object.values(cardInputRefs), currentIndex: keys.indexOf(field), value, maxLength: 4 });
   };
 
   const getCardNumberErrorMessage = (cardNumbers: CardNumberType) => {
