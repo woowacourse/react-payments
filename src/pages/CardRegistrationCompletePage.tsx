@@ -1,5 +1,4 @@
 import Button from "../components/@common/Button/Button";
-import {Complete} from "../asset/image";
 import {completeImage, pageContainer, title} from "./CardRegistrationCompletePage.style";
 import {Link, Navigate, useLocation} from "react-router-dom";
 import {CardNumber} from "../types";

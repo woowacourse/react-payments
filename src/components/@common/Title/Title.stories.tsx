@@ -8,6 +8,9 @@ const meta: Meta<typeof Title> = {
     title: {control: 'text'},
     subTitle: {control: 'text'},
   },
+  parameters: {
+    layout: 'centered',
+  },
 };
 
 export default meta;
