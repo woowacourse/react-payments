@@ -18,7 +18,7 @@ import useControlledExpireDate, {
 import type { CardType } from "../types";
 import type { ExpireDateState } from "@/card/ExpireDate/types";
 
-interface AddCardState {
+export interface AddCardState {
   controlledCardNumber: ControlledCardNumber;
   controlledCardType: ControlledCardType;
   controlledExpireDate: ControlledExpireDate;

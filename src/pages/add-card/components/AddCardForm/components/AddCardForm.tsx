@@ -1,18 +1,10 @@
 import styles from "./AddCardForm.module.css";
 import FormField from "@/components/FormField/FormField";
-import CardNumberInputs, {
-  type CardNumberInputsProps,
-} from "@card/CardNumber/components/CardNumberInput";
-import CardExpireDateInputs, {
-  type CardExpireDateInputsProps,
-} from "@card/ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
-import CVCInput, { type CVCInputsProps } from "@/card/CVC/components/CVCInput";
-import CardTypeDropdown, {
-  CardTypeDropdownProps,
-} from "@card/CardType/components/CardTypeDropdown";
-import CardPasswordInput, {
-  CardPasswordInputProps,
-} from "@/card/CardPassword/components/CardPasswordInput";
+import CardNumberInputs from "@card/CardNumber/components/CardNumberInput";
+import CardExpireDateInputs from "@card/ExpireDate/components/CardExpireDateInputs/CardExpireDateInputs";
+import CVCInput from "@/card/CVC/components/CVCInput";
+import CardTypeDropdown from "@card/CardType/components/CardTypeDropdown";
+import CardPasswordInput from "@/card/CardPassword/components/CardPasswordInput";
 import useAddCardFormStep, {
   ADD_CARD_FORM_STEPS,
 } from "../hooks/useAddCardFormStep";
@@ -21,20 +13,10 @@ import SwitchCase from "@/components/SwitchCase/SwitchCase";
 import { useNavigate } from "react-router";
 import { PAGE_URL } from "@/constants/pageUrl";
 import { FormEvent } from "react";
-import { getIsAddFormSubmit } from "../validation";
-
-interface NextStepIndicator {
-  isNextStep: boolean;
-}
+import { AddCardState } from "@/pages/add-card/hooks/useAddCard";
 
 interface AddCardFormProps {
-  addCardState: {
-    controlledCardNumber: CardNumberInputsProps & NextStepIndicator;
-    controlledCardType: CardTypeDropdownProps & NextStepIndicator;
-    controlledExpireDate: CardExpireDateInputsProps & NextStepIndicator;
-    controlledCVC: CVCInputsProps & NextStepIndicator;
-    controlledCardPassword: CardPasswordInputProps & NextStepIndicator;
-  };
+  addCardState: AddCardState;
 }
 
 function AddCardForm({ addCardState }: AddCardFormProps) {
