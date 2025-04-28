@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
-import { useCardInfoContext } from '../../features/cardInfo/context/CardInfoContext';
 import CustomLinkButton from '../../shared/ui/CustomLinkButton';
-``;
 import * as S from './RegisterPage.styles';
+import { useCardInfoContext } from '../../features/cardInfo/context/CardInfoContext';
 
 export default function RegisterPage() {
   const { cardInfo } = useCardInfoContext();
 
   return (
-    <S.RegisterPageContainer>
+    <>
       <S.RegisterImageContainer>
         <S.RegisterCircle>
           <img src='./complete.svg' alt='complete' />
@@ -26,6 +25,6 @@ export default function RegisterPage() {
           border-radius: 5px;
         `}
       />
-    </S.RegisterPageContainer>
+    </>
   );
 }

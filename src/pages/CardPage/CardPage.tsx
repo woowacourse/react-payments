@@ -8,23 +8,21 @@ import { ROUTES } from '../../shared/constants/routeConstants';
 
 function CardPage() {
   return (
-    <S.AppContainer>
-      <S.CardContainer>
-        <Preview />
-        <CardInfoContainer />
-        {confirmButtonValidator() && (
-          <CustomLinkButton
-            path={ROUTES.REGISTER}
-            css={css`
-              position: fixed;
-              bottom: 0;
-              left: 0;
-              right: 0;
-            `}
-          />
-        )}
-      </S.CardContainer>
-    </S.AppContainer>
+    <S.CardContainer>
+      <Preview />
+      <CardInfoContainer />
+      {confirmButtonValidator() && (
+        <CustomLinkButton
+          path={ROUTES.REGISTER}
+          css={css`
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          `}
+        />
+      )}
+    </S.CardContainer>
   );
 }
 
