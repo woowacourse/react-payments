@@ -6,13 +6,20 @@ import CardBrand from "../components/CardBrand/CardBrand";
 import CardNumberInput from "../components/CardNumberInput/CardNumberInput";
 import Button from "../components/@common/Button/Button";
 import {Link} from "react-router-dom";
-import {useMemo, useState} from "react";
-import {CardBrandType} from "../types";
-import {useCardCVC, useCardExpiration, useCardNumber, useCardPassword} from "../hooks";
+import {useCardBrand, useCardCVC, useCardExpiration, useCardNumber, useCardPassword, useProgressForm} from "../hooks";
 import {cardLayout, mainLayout} from "../App.style";
 
 function HomePage() {
-  const [brand, setBrand] = useState<CardBrandType | null>(null);
+  const {
+    showCardBrand,
+    showCardPeriod,
+    showCardCVC,
+    showCardPassword,
+    showBrandStep,
+    showPeriodStep,
+    showCVCStep,
+    showPasswordStep
+  } = useProgressForm();
 
   const {
     value: cardNumber,
@@ -21,40 +28,61 @@ function HomePage() {
     onChange: handleCardNumberChange,
     onKeyDown: handleCardNumberKeyDown,
     onBlur: handleCardNumberBlur,
-  } = useCardNumber({});
+    isValid: iscardNumberValid,
+  } = useCardNumber(() => {
+    showBrandStep();
+    setTimeout(() => brandRef.current?.focus(), 1);
+  });
+
+  const {
+    brand,
+    brandRef,
+    onChange,
+    isValid: isCardBrandValid,
+  } = useCardBrand(() => {
+    showPeriodStep();
+    setTimeout(() => monthRef.current?.focus(), 100);
+  });
 
   const {
     value: cardExpirationDate,
-    error: cardExpirationDateError,
+    cardExpirationDateError: cardExpirationDateError,
     monthRef,
     yearRef,
     onChange: handleCardExpirationChange,
     onYearKeyDown: handleCardExpirationKeyDown,
     onBlur: handleCardExpirationBlur,
-  } = useCardExpiration({});
+    isValid: isCardExpirationValid,
+  } = useCardExpiration(() => {
+    showCVCStep();
+    setTimeout(() => cvcRef.current?.focus(), 100);
+  });
 
-  const {cardCVC, error, cvcRef, handleCardCVCChange} = useCardCVC({});
+  const {
+    cardCVC,
+    cardCVCError,
+    cvcRef,
+    handleCardCVCChange,
+    isValid: isCardCVCValid,
+  } = useCardCVC(() => {
+    showPasswordStep();
+    setTimeout(() => passwordRef.current?.focus(), 100);
+  });
 
   const {
     cardPassword,
     cardPasswordError,
+    passwordRef,
     handleCardPasswordChange,
     getCardPasswordErrorMessage,
-  } = useCardPassword({});
+    isValid: isCardPasswordValid,
+  } = useCardPassword();
 
-  const isAllInputFilled = useMemo(() => {
-    return (
-      cardNumber.first !== null &&
-      cardNumber.second !== null &&
-      cardNumber.third !== null &&
-      cardNumber.forth !== null &&
-      cardExpirationDate.month !== null &&
-      cardExpirationDate.year !== null &&
-      cardCVC !== null &&
-      cardPassword !== null
-    );
-  }, [cardNumber, cardExpirationDate, cardCVC, cardPassword]);
+  const showConfirmButton = (
+    iscardNumberValid && isCardBrandValid && isCardExpirationValid && isCardCVCValid && isCardPasswordValid
+  );
 
+  console.log(showConfirmButton);
 
   return (
     <main css={mainLayout}>
@@ -69,7 +97,7 @@ function HomePage() {
         />
         <CardCVCInput
           cardCVC={cardCVC}
-          error={error}
+          error={cardCVCError}
           cvcRef={cvcRef}
           onChange={handleCardCVCChange}
           tabIndex={8}
@@ -87,7 +115,10 @@ function HomePage() {
         />
         <CardBrand
           value={brand}
-          onChange={(newBrand) => setBrand(newBrand)}
+          onChange={onChange}
+          brandRef={brandRef}
+          error={cardNumberError}
+          tabIndex={2}
         />
         <CardNumberInput
           cardNumber={cardNumber}
@@ -100,7 +131,7 @@ function HomePage() {
           autoFocus
         />
       </section>
-      {isAllInputFilled && (
+      {showConfirmButton && (
         <Link to='/complete'>
           <Button content='확인' style="bottom"/>
         </Link>

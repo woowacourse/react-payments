@@ -140,7 +140,7 @@ export const useCardExpiration = (onComplete?: () => void) => {
 
   return {
     value: cardExpirationDate,
-    error,
+    cardExpirationDateError: error,
     monthRef,
     yearRef,
     onChange,

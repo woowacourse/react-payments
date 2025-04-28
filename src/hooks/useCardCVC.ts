@@ -1,6 +1,6 @@
 import {useState, ChangeEvent, useRef} from 'react';
-import { CardCVC } from '../types';
-import { isOnlyDigits } from '../utils/validateNumber';
+import {CardCVC} from '../types';
+import {isOnlyDigits} from '../utils/validateNumber';
 import {CARD_CVC, CARD_CVC_ERROR} from '../constants';
 
 export const useCardCVC = (onComplete?: () => void) => {
@@ -10,7 +10,7 @@ export const useCardCVC = (onComplete?: () => void) => {
   const cvcRef = useRef<HTMLInputElement>(null);
 
   const handleCardCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const {value} = e.target;
     const isNumber = isOnlyDigits(value);
 
     if (!isNumber && value !== '') {
@@ -36,10 +36,10 @@ export const useCardCVC = (onComplete?: () => void) => {
 
   return {
     cardCVC,
-    error,
+    cardCVCError: error,
     cvcRef,
     handleCardCVCChange,
     resetCardCVC,
-    isValid: isCardCVCValid,
+    isValid: isCardCVCValid(),
   };
 };

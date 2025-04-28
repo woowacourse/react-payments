@@ -1,11 +1,13 @@
-import { useState, ChangeEvent } from 'react';
-import {CARD_CVC, CARD_PASSWORD_ERROR} from "../constants";
+import {useState, ChangeEvent, useRef} from 'react';
+import {CARD_CVC, CARD_PASSWORD, CARD_PASSWORD_ERROR} from "../constants";
 import {isOnlyDigits} from "../utils/validateNumber.ts";
 import {CardPassword, CardPasswordError} from "../types";
 
 export const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState<CardPassword>('');
   const [cardPasswordError, setCardPasswordError] = useState<CardPasswordError>('');
+
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleCardPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -38,12 +40,18 @@ export const useCardPassword = () => {
     return CARD_PASSWORD_ERROR.onlyNumbers;
   };
 
+  const isPasswordValid = () => {
+    return cardPassword.length === CARD_PASSWORD.maxLength;
+  };
+
   return {
     cardPassword,
     cardPasswordError,
+    passwordRef,
     handleCardPasswordChange,
     resetCardPassword,
     isCardPasswordValid,
     getCardPasswordErrorMessage,
+    isValid: isPasswordValid(),
   };
 };
