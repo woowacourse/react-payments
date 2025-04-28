@@ -29,16 +29,28 @@ export const useExpireDateInput = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, key: ExpireDateInputKey) => {
     const inputValue = e.target.value;
-    const { isValid, errorMessage } = validateInputChange(inputValue);
+    const { isValid: isValidChange, errorMessage } = validateInputChange(inputValue);
 
-    if (!isValid) {
+    if (!isValidChange) {
       setErrorMessage(errorMessage);
-      return isValid;
+
+      setValue((prev) => {
+        const newDateObj = { ...prev };
+        newDateObj[key].isValid = isValidChange;
+        return newDateObj;
+      });
+
+      return;
     }
 
     setValue((prev) => {
       const newDateObj = { ...prev };
       newDateObj[key].value = inputValue;
+
+      if (isAllValidDate(newDateObj)) {
+        setErrorMessage(null);
+      }
+
       return newDateObj;
     });
   };
@@ -50,6 +62,11 @@ export const useExpireDateInput = () => {
     setValue((prev) => {
       const newDateObj = { ...prev };
       newDateObj[key].isValid = isValidate;
+
+      if (isAllValidDate(newDateObj)) {
+        setErrorMessage(null);
+      }
+
       return newDateObj;
     });
   };

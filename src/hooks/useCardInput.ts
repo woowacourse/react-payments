@@ -40,14 +40,14 @@ export const useCardInput = (type: CardFormFiledType) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const { isValid, errorMessage } = validateInputChange(inputValue);
+    const { isValid: isValidChange, errorMessage } = validateInputChange(inputValue);
 
-    if (!isValid) {
+    if (!isValidChange) {
       setErrorMessage(errorMessage);
 
       setValue((prev) => {
         const newArr = [...prev];
-        newArr[index].isValid = isValid;
+        newArr[index].isValid = isValidChange;
         return newArr;
       });
 
@@ -57,6 +57,11 @@ export const useCardInput = (type: CardFormFiledType) => {
     setValue((prev) => {
       const newArr = [...prev];
       newArr[index].value = inputValue;
+
+      if (isAllValidInput(newArr)) {
+        setErrorMessage(null);
+      }
+
       return newArr;
     });
 
@@ -82,6 +87,11 @@ export const useCardInput = (type: CardFormFiledType) => {
     setValue((prev) => {
       const newArr = [...prev];
       newArr[index].isValid = isValidate;
+
+      if (isAllValidInput(newArr)) {
+        setErrorMessage(null);
+      }
+
       return newArr;
     });
   };
