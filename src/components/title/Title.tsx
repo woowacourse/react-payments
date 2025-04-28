@@ -8,6 +8,6 @@ const Title = ({ children }: { children: ReactNode }) => {
 export default Title;
 
 const TitleText = styled.h2`
-	font-size: 19px;
+	font-size: 18px;
 	font-weight: 700;
 `;
