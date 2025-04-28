@@ -6,7 +6,9 @@ import {
   ErrorText,
 } from "../styles/CardField.styles";
 import { CardInfo } from "../../../hooks/useCardInfo";
-import useCardNumberField from "./hooks/useCardNumberField";
+import useFieldFocus from "../hooks/useFiledFocus";
+import useFieldValidation from "../hooks/useFieldValidation";
+import { validateSegmentLength } from "../validation";
 
 interface CardNumberFieldProps {
   cardInfo: CardInfo;
@@ -22,8 +24,23 @@ function CardNumberField({
   handleCardInfo,
   maxLength,
 }: CardNumberFieldProps) {
-  const { refs, focusHandlers, segmentValidations, errorMessage } =
-    useCardNumberField(cardInfo, maxLength);
+  const fieldKeys = [
+    "firstNumber",
+    "secondNumber",
+    "thirdNumber",
+    "fourthNumber",
+  ] as const;
+
+  const { fieldRefs, focusField } = useFieldFocus<HTMLInputElement>(
+    fieldKeys.length
+  );
+
+  const fields = fieldKeys.map((key) => cardInfo[key]);
+  const { validations, errorMessage } = useFieldValidation(
+    fields,
+    validateSegmentLength,
+    maxLength
+  );
 
   return (
     <NumberInputField>
@@ -31,14 +48,7 @@ function CardNumberField({
         카드 번호
       </Label>
       <NumberInputContainer role="group" aria-labelledby="number-label">
-        {(
-          [
-            "firstNumber",
-            "secondNumber",
-            "thirdNumber",
-            "fourthNumber",
-          ] as const
-        ).map((key, index) => (
+        {fieldKeys.map((key, index) => (
           <NumberInput
             autoFocus={index === 0}
             key={key}
@@ -47,24 +57,10 @@ function CardNumberField({
             setValue={(value) => handleCardInfo(key, value)}
             maxLength={maxLength}
             placeholder="1234"
-            isError={!segmentValidations[index].isValid}
-            ref={
-              index === 1
-                ? refs.second
-                : index === 2
-                ? refs.third
-                : index === 3
-                ? refs.fourth
-                : undefined
-            }
-            onComplete={
-              index === 0
-                ? focusHandlers.second
-                : index === 1
-                ? focusHandlers.third
-                : index === 2
-                ? focusHandlers.fourth
-                : undefined
+            isError={!validations[index].isValid}
+            ref={fieldRefs[index]}
+            onComplete={() =>
+              index < fieldKeys.length - 1 && focusField(index + 1)
             }
           />
         ))}
