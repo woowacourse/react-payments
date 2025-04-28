@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardCVCField from './CardCVCField';
-import { useState } from 'react';
+import useCardCVC from '../../../hooks/useCardCVC';
 
 const meta = {
   title: 'CardCVCField',
@@ -18,27 +18,17 @@ export const Default: Story = {
     onChange: () => {},
   },
   render: (args) => {
-    const [cardCVC, setCardCVC] = useState('123');
-    const [isCardCVCError, setIsCardCVCError] = useState(false);
+    const {
+      cardCVC,
+      onChangeCVC,
+      errorMessage: cardCVCErrorMessage,
+    } = useCardCVC();
 
-    const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-
-      if (value.length > 3) {
-        return;
-      }
-
-      const isNotValid =
-        value.length < 3 || value.length > 3 || Number(value) < 0;
-
-      setIsCardCVCError(isNotValid);
-      setCardCVC(value);
-    };
     return (
       <CardCVCField
         {...args}
         cardCVC={cardCVC}
-        isError={isCardCVCError}
+        isError={Boolean(cardCVCErrorMessage)}
         onChange={onChangeCVC}
       />
     );
@@ -52,30 +42,6 @@ export const Error: Story = {
     onChange: () => {},
   },
   render: (args) => {
-    const [cardCVC, setCardCVC] = useState('12');
-    const [isCardCVCError, setIsCardCVCError] = useState(true);
-
-    const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-
-      if (value.length > 3) {
-        return;
-      }
-
-      const isNotValid =
-        value.length < 3 || value.length > 3 || Number(value) < 0;
-
-      setIsCardCVCError(isNotValid);
-      setCardCVC(value);
-    };
-
-    return (
-      <CardCVCField
-        {...args}
-        cardCVC={cardCVC}
-        isError={isCardCVCError}
-        onChange={onChangeCVC}
-      />
-    );
+    return <CardCVCField {...args} />;
   },
 };
