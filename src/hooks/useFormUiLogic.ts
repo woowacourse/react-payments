@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import useSequentialReveal from './useSequentialReveal';
 import useFormValidation from './useFormValidation';
 import { useBrandContext } from '../contexts/BrandContext';
@@ -37,7 +37,7 @@ function useFormUiLogic() {
 
   const prevRef = useRef<boolean[]>(revealFlags);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const prev = prevRef.current;
     const newIdx = revealFlags.findIndex((on, i) => on && !prev[i]);
     if (newIdx >= 0) {
