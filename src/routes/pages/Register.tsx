@@ -10,6 +10,7 @@ import { CardPreview } from '../../components/features/CardPreview';
 import { useBrandSelectInput } from '../../hooks/useBrandSelectInput';
 import { useCardInput } from '../../hooks/useCardInput';
 import { useExpireDateInput } from '../../hooks/useExpireDateInput';
+import { CardFormLayout } from '@/components/features/CardFormLayout';
 import { useFormStep } from '@/hooks/useFormStep';
 
 export const Register = () => {
@@ -73,7 +74,7 @@ export const Register = () => {
       <Flex padding="20px 0" flex={0}>
         <CardPreview cardNumbers={cardNumbers} expireDate={expireDate} cardBrand={selectedBrand} />
       </Flex>
-      <Flex direction="column" gap="10px" margin="30px 0" flex={0}>
+      <CardFormLayout>
         {step >= 4 && (
           <CardPasswordForm
             password={password}
@@ -116,7 +117,7 @@ export const Register = () => {
           onCardInputChange={handleChange}
           onCardInputBlur={handleBlur}
         />
-      </Flex>
+      </CardFormLayout>
       {isAllClearInput && (
         <SubmitButton
           cardType={selectedBrand}
