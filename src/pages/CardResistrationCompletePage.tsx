@@ -16,8 +16,8 @@ const CardResistrationCompletePage = () => {
     <div css={AppStyle}>
       <img css={IconStyle} src={"check.svg"} />
       <div css={TextWrapper}>
-        <Text text={`${cardState.uniqueNumber[0]}로 시작하는`} weight={"700"} size={"30px"} />
-        <Text text={`${cardState.cardIssuer}가 등록되었어요.`} weight={"700"} size={"30px"} />
+        <Text text={`${cardState.uniqueNumber[0]}로 시작하는`} weight={"700"} size={"25px"} />
+        <Text text={`${cardState.cardIssuer}가 등록되었어요.`} weight={"700"} size={"25px"} />
       </div>
       <Button text={"확인"} rounded={true} onClick={handleButtonClick} />
     </div>
@@ -28,14 +28,14 @@ export default CardResistrationCompletePage;
 
 const AppStyle = css`
   width: 376px;
-  height: 590px;
+  height: 650px;
+  padding: 20px 30px;
   background-color: #ffffff;
-  padding:10px; 8px 20px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 45px;
+  gap: 30px;
   border-radius: 20px;
   position: relative;
 `;
@@ -48,5 +48,5 @@ const TextWrapper = css`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 `;

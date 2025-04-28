@@ -38,9 +38,4 @@ const buttonStyle = (rounded: boolean) => css`
   &:active {
     background-color: gray;
   }
-
-  &:disabled {
-    background-color: #c4c4c4;
-    cursor: not-allowed;
-  }
 `;

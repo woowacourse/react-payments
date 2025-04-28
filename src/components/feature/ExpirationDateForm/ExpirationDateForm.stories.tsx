@@ -13,6 +13,14 @@ type Story = StoryObj<typeof ExpirationDateForm>;
 
 export const Primary: Story = {
   render: () => {
-    return <ExpirationDateForm expirationDateState={["", ""]} dispatch={() => {}} />;
+    return (
+      <ExpirationDateForm
+        expirationDateState={["", ""]}
+        dispatch={() => {}}
+        errorState={[false, false]}
+        dispatchError={() => {}}
+        openNextForm={() => {}}
+      />
+    );
   },
 };

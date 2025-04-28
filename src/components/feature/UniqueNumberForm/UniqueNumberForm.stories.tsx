@@ -12,5 +12,13 @@ export default meta;
 type Story = StoryObj<typeof UniqueNumberForm>;
 
 export const Primary: Story = {
-  render: () => <UniqueNumberForm uniqueNumberState={["", "", "", ""]} dispatch={() => {}} />,
+  render: () => (
+    <UniqueNumberForm
+      uniqueNumberState={["", "", "", ""]}
+      dispatch={() => {}}
+      errorState={[false, false, false, false]}
+      dispatchError={() => {}}
+      openNextForm={() => {}}
+    />
+  ),
 };

@@ -31,14 +31,3 @@ export const Rounded: Story = {
     return <Button text={args.text} rounded={args.rounded} />;
   },
 };
-
-export const Disabled: Story = {
-  args: {
-    text: "확인",
-    disabled: true,
-  },
-
-  render: (args: any) => {
-    return <Button text={args.text} disabled={args.disabled} />;
-  },
-};
