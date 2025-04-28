@@ -1,12 +1,13 @@
-import { useCardForm } from '../../contexts/CardFormContext';
+import { usePasswordContext } from '../../contexts/PasswordContext';
 import PasswordInputView from './PasswordInputView';
 
 const PasswordInput = () => {
-  const { passwordField, handlePasswordFieldChange, passwordInputRef } = useCardForm();
+  const { passwordField, handlePasswordChange, passwordInputRef } =
+    usePasswordContext();
   return (
     <PasswordInputView
       passwordInfo={passwordField}
-      handleInputChange={handlePasswordFieldChange}
+      handleInputChange={handlePasswordChange}
       inputRef={passwordInputRef}
     />
   );

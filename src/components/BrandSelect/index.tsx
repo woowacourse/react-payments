@@ -1,13 +1,13 @@
-import { useCardForm } from '../../contexts/CardFormContext';
+import { useBrandContext } from '../../contexts/BrandContext';
 import CardBrandSelectView from './BrandSelectView';
 
 const BrandSelect = () => {
-  const { brand, handleBrandSelectChange, brandSelectRef } = useCardForm();
+  const { brand, handleBrandChange, brandSelectRef } = useBrandContext();
 
   return (
     <CardBrandSelectView
       brand={brand}
-      handleSelectChange={handleBrandSelectChange}
+      handleSelectChange={handleBrandChange}
       inputRef={brandSelectRef}
     />
   );

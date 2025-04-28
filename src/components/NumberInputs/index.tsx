@@ -1,13 +1,14 @@
-import { useCardForm } from '../../contexts/CardFormContext';
+import { useNumbersContext } from '../../contexts/NumbersContext';
 import NumberInputsView from './NumberInputsView';
 
 const NumberInputs = () => {
-  const { numberFields, handleNumberFieldChange, numberInputRefs } = useCardForm();
+  const { numberFields, handleNumbersChange, numberInputRefs } =
+    useNumbersContext();
 
   return (
     <NumberInputsView
       numbersInfo={numberFields}
-      handleInputChange={handleNumberFieldChange}
+      handleInputChange={handleNumbersChange}
       numberInputRefs={numberInputRefs}
     />
   );

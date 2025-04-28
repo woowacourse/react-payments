@@ -1,19 +1,16 @@
-import { useCardForm } from '../../contexts/CardFormContext';
+import { useExpiryDateContext } from '../../contexts/ExpiryDateContext';
+import { useFormUiLogic } from '../../hooks/useFormUiLogic';
 import ExpiryDateInputsView from './ExpiryDateInputsView';
 
 const ExpiryDateInputs = () => {
-  const {
-    expiryFields,
-    handleExpiryFieldChange,
-    expiryInputRefs,
-    showPeriodSeparator,
-    hidePeriodSeparator,
-  } = useCardForm();
+  const { expiryFields, handleExpiryChange, expiryInputRefs } =
+    useExpiryDateContext();
+  const { showPeriodSeparator, hidePeriodSeparator } = useFormUiLogic();
 
   return (
     <ExpiryDateInputsView
       expiryDateInfo={expiryFields}
-      handleInputChange={handleExpiryFieldChange}
+      handleInputChange={handleExpiryChange}
       expiryInputRefs={expiryInputRefs}
       onFocus={showPeriodSeparator}
       onBlur={hidePeriodSeparator}
