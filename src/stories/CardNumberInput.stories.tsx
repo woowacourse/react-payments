@@ -17,6 +17,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    handleCardNumbersChange: (cardNumbers) => {},
+    onSuccessValidate: (isValid) => {},
+    onSuccessNextInput: () => {},
+  },
   render: () => {
     const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
 
@@ -43,6 +48,11 @@ export const Default: Story = {
 };
 
 export const Error: Story = {
+  args: {
+    handleCardNumbersChange: (cardNumbers) => {},
+    onSuccessValidate: (isValid) => {},
+    onSuccessNextInput: () => {},
+  },
   render: Default.render,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
