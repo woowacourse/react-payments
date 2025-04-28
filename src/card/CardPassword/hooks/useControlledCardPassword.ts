@@ -3,7 +3,13 @@ import { INITIAL_CARD_PASSWORD_SATE } from "../constants";
 import type { CardPasswordState } from "../types";
 import { validateCardPassword } from "../validation";
 
-const useControlledCardPassword = () => {
+export interface ControlledCardPassword {
+  cardPasswordState: CardPasswordState;
+  handleCardPasswordChange: (value: string) => void;
+  isNextStep: boolean;
+}
+
+const useControlledCardPassword = (): ControlledCardPassword => {
   const [cardPasswordState, setCardPasswordState] = useState<CardPasswordState>(
     INITIAL_CARD_PASSWORD_SATE
   );

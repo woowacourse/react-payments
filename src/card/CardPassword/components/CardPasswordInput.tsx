@@ -2,6 +2,8 @@ import styles from "./CardPasswordInput.module.css";
 import Input from "@/components/Input/Input";
 import Label from "@/components/Label/Label";
 import { CardPasswordState } from "../types";
+import type { OmitIsNextStep } from "@/types";
+import { type ControlledCardPassword } from "../hooks/useControlledCardPassword";
 
 export interface CardPasswordInputProps {
   cardPasswordState: CardPasswordState;
@@ -11,7 +13,7 @@ export interface CardPasswordInputProps {
 function CardPasswordInput({
   cardPasswordState,
   handleCardPasswordChange,
-}: CardPasswordInputProps) {
+}: OmitIsNextStep<ControlledCardPassword>) {
   return (
     <div className={styles.container}>
       <Label htmlFor="card-owner-input">비밀번호 앞 2자리</Label>

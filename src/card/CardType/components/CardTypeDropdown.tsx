@@ -1,17 +1,13 @@
 import styles from "./CardTypeDropdown.module.css";
 import { CARD_TYPE_LIST } from "@/card/CardType/constants";
 import Dropdown from "@/components/Dropdown/Dropdown";
-import type { CardType } from "@/pages/add-card/types";
-
-export interface CardTypeDropdownProps {
-  cardType: CardType | null;
-  handleCardTypeChange: (value: CardType) => void;
-}
+import { type ControlledCardType } from "../hooks/useControlledCardType";
+import type { OmitIsNextStep } from "@/types";
 
 function CardTypeDropdown({
   cardType,
   handleCardTypeChange,
-}: CardTypeDropdownProps) {
+}: OmitIsNextStep<ControlledCardType>) {
   return (
     <div className={styles.container}>
       <Dropdown

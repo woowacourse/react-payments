@@ -2,30 +2,16 @@ import styles from "./CardExpireDateInputs.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
 import { EXPIRE_DATE_KEYS } from "../../constants";
-import type {
-  ExpireDateInputKey,
-  ExpireDateInputRefs,
-  ExpireDateState,
-} from "../../types";
 import { validateMonth, validateYear } from "../../validation";
-
-export interface CardExpireDateInputsProps {
-  expireDate: ExpireDateState;
-  expireDateInputRefs: ExpireDateInputRefs;
-  handleExpireChange: (
-    key: ExpireDateInputKey,
-    value: string,
-    validateFn: (value: string) => string
-  ) => void;
-  handleExpireMonthBlur: (value: string) => void;
-}
+import type { OmitIsNextStep } from "@/types";
+import { type ControlledExpireDate } from "../../hooks/useControlledExpireDate";
 
 function CardExpireDateInputs({
   expireDate,
   expireDateInputRefs,
   handleExpireChange,
   handleExpireMonthBlur,
-}: CardExpireDateInputsProps) {
+}: OmitIsNextStep<ControlledExpireDate>) {
   const validation = {
     MM: validateMonth,
     YY: validateYear,

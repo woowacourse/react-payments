@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { RefObject, useCallback, useRef, useState } from "react";
 import { isNaN } from "@/utils/isNaN";
 import type { CardNumberInputKey, CardNumberState } from "../types";
 import {
@@ -7,7 +7,19 @@ import {
 } from "../constants";
 import { handleNextInputFocus } from "@/utils/handleNextInputFocus";
 
-const useControlledCardNumber = () => {
+export interface ControlledCardNumber {
+  cardNumberState: CardNumberState;
+  cardNumberInputRefs: {
+    first: RefObject<HTMLInputElement | null>;
+    second: RefObject<HTMLInputElement | null>;
+    third: RefObject<HTMLInputElement | null>;
+    fourth: RefObject<HTMLInputElement | null>;
+  };
+  handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
+  isNextStep: boolean;
+}
+
+const useControlledCardNumber = (): ControlledCardNumber => {
   const [cardNumberState, setCardNumberState] = useState<CardNumberState>(
     INITIAL_CARD_NUMBER_STATE
   );

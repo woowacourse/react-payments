@@ -5,7 +5,13 @@ export interface CVCState {
   isError: boolean;
 }
 
-const useControlledCVC = () => {
+export interface ControlledCVC {
+  CVCState: CVCState;
+  handleCVCChange: (value: string) => void;
+  isNextStep: boolean;
+}
+
+const useControlledCVC = (): ControlledCVC => {
   const [CVCState, setCVCState] = useState<CVCState>({
     value: "",
     isError: false,

@@ -1,7 +1,13 @@
 import { useCallback, useState } from "react";
 import type { CardType } from "@/pages/add-card/types";
 
-const useControlledCardType = () => {
+export interface ControlledCardType {
+  cardType: CardType | null;
+  handleCardTypeChange: (value: CardType) => void;
+  isNextStep: boolean;
+}
+
+const useControlledCardType = (): ControlledCardType => {
   const [cardType, setCardType] = useState<CardType | null>(null);
 
   const handleCardTypeChange = useCallback((value: CardType) => {

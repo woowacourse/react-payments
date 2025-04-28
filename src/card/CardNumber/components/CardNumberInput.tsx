@@ -2,24 +2,15 @@ import styles from "./CardNumberInput.module.css";
 import Label from "@components/Label/Label";
 import Input from "@components/Input/Input";
 import { isAnyTrue } from "@utils/isAnyTrue";
-import type {
-  CardNumberInputKey,
-  CardNumberInputRefs,
-  CardNumberState,
-} from "../types";
 import { CARD_NUMBER_INPUT_KEYS } from "../constants";
-
-export interface CardNumberInputsProps {
-  cardNumberState: CardNumberState;
-  cardNumberInputRefs: CardNumberInputRefs;
-  handleCardNumberChange: (key: CardNumberInputKey, value: string) => void;
-}
+import { type ControlledCardNumber } from "../hooks/useControlledCardNumber";
+import type { OmitIsNextStep } from "@/types";
 
 function CardNumberInputs({
   cardNumberState,
   cardNumberInputRefs,
   handleCardNumberChange,
-}: CardNumberInputsProps) {
+}: OmitIsNextStep<ControlledCardNumber>) {
   const { first, second, third, fourth } = cardNumberState;
   const isCardNumberValid = isAnyTrue(
     first.isError,

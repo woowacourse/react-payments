@@ -1,13 +1,13 @@
 import styles from "./CVCInput.module.css";
 import Input from "@components/Input/Input";
 import Label from "@components/Label/Label";
+import type { OmitIsNextStep } from "@/types";
+import { type ControlledCVC } from "../hooks/useControlledCVC";
 
-export interface CVCInputsProps {
-  CVCState: { value: string; isError: boolean };
-  handleCVCChange: (value: string) => void;
-}
-
-function CVCInput({ CVCState, handleCVCChange }: CVCInputsProps) {
+function CVCInput({
+  CVCState,
+  handleCVCChange,
+}: OmitIsNextStep<ControlledCVC>) {
   return (
     <div className={styles.container}>
       <Label htmlFor="cvc-input">CVC</Label>
