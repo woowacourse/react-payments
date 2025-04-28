@@ -21,7 +21,6 @@ export function AddCardForm({
   handleCardInfo,
   isFormsCompleted,
 }: AddCardFormProps) {
-  const visibleSteps = [];
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -29,21 +28,21 @@ export function AddCardForm({
     navigate("/success", { state: { cardInfo } });
   };
 
-  for (let i = currentStepIndex; i >= 0; i--) {
-    const step = STEPS[i];
-    const StepComponent = step.component;
-
-    visibleSteps.push(
-      <div key={step.id}>
-        <Announcement main={step.messageMain} caption={step.messageCaption} />
-        <StepComponent
-          cardInfo={cardInfo}
-          handleCardInfo={handleCardInfo}
-          maxLength={step.maxLength ?? 0}
-        />
-      </div>
-    );
-  }
+  const visibleSteps = STEPS.slice(0, currentStepIndex + 1)
+    .reverse()
+    .map((step) => {
+      const StepComponent = step.component;
+      return (
+        <div key={step.id}>
+          <Announcement main={step.messageMain} caption={step.messageCaption} />
+          <StepComponent
+            cardInfo={cardInfo}
+            handleCardInfo={handleCardInfo}
+            maxLength={step.maxLength ?? 0}
+          />
+        </div>
+      );
+    });
 
   return (
     <InputForm onSubmit={handleSubmit}>
