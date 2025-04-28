@@ -10,6 +10,7 @@ interface PreviewViewProps {
 
 const NUMBER_VISIBLE_THRESHOLD = 2;
 const SEPARATOR = '/';
+const NUMBER_SHADE = '•';
 
 const PreviewView = ({
   numbers,
@@ -34,7 +35,7 @@ const PreviewView = ({
             <CardNumber key={index}>
               {index < NUMBER_VISIBLE_THRESHOLD
                 ? number
-                : '•'.repeat(number.length)}
+                : NUMBER_SHADE.repeat(number.length)}
             </CardNumber>
           ))}
         </CardNumberArea>
