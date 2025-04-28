@@ -10,7 +10,7 @@ import { DropdownOptionType } from '../../../../types/dropdown';
 interface CardPreviewProps {
   cardNumberInputValue: Record<CardNumberInputType, string>;
   expirationDateInputValue: Record<ExpirationDateInputType, string>;
-  cardType: CardType;
+  cardType: CardType | null;
   cardBank: DropdownOptionType | null;
 }
 
@@ -59,8 +59,8 @@ const CardChip = styled.div`
   background: #ddcd78;
 `;
 
-const CardTypeBadge = styled.img<{ $cardType: CardType }>`
-  visibility: ${(props) => (props.$cardType === 'none' ? 'hidden' : 'visible')};
+const CardTypeBadge = styled.img<{ $cardType: CardType | null }>`
+  visibility: ${(props) => (props.$cardType === null ? 'hidden' : 'visible')};
   position: absolute;
   width: 36px;
   height: 22px;

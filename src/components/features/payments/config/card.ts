@@ -1,7 +1,6 @@
 export const CARD_TYPE = {
   visa: 'visa',
   master: 'master',
-  none: 'none',
 } as const;
 export type CardType = keyof typeof CARD_TYPE;
 

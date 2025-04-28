@@ -1,10 +1,13 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { CARD_NUMBER, CardType } from '../config/card';
+import { ERROR_TYPE, ErrorType } from '../config/error';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
 } from '../config/inputField';
-import { ERROR_TYPE, ErrorType } from '../config/error';
-import { CARD_NUMBER, CARD_TYPE, CardType } from '../config/card';
+import { getCardTypeFromPrefix } from '../utils/cardType';
+import { addError, removeError } from '../utils/error';
+import { focusNextInput } from '../utils/focus';
 
 function useCardNumberValidation() {
   const [inputValues, setInputValues] = useState<
@@ -23,12 +26,15 @@ function useCardNumberValidation() {
     cardNumberPart3: [],
     cardNumberPart4: [],
   });
-  const [cardType, setCardType] = useState<CardType>(CARD_TYPE.none);
-  const inputRefs = {
-    cardNumberPart1: useRef<HTMLInputElement | null>(null),
-    cardNumberPart2: useRef<HTMLInputElement | null>(null),
-    cardNumberPart3: useRef<HTMLInputElement | null>(null),
-    cardNumberPart4: useRef<HTMLInputElement | null>(null),
+  const [cardType, setCardType] = useState<CardType | null>(null);
+  const inputRefs: Record<
+    CardNumberInputType,
+    React.RefObject<HTMLInputElement | null>
+  > = {
+    cardNumberPart1: useRef<HTMLInputElement>(null),
+    cardNumberPart2: useRef<HTMLInputElement>(null),
+    cardNumberPart3: useRef<HTMLInputElement>(null),
+    cardNumberPart4: useRef<HTMLInputElement>(null),
   };
   const [isInputComplete, setIsInputComplete] = useState(false);
 
@@ -37,29 +43,12 @@ function useCardNumberValidation() {
     errorStatus: { errorType: ErrorType; isError: boolean }
   ) => {
     if (errorStatus.isError) {
-      setErrorTypes((prev) => ({
-        ...prev,
-        [inputName]: [...prev[inputName], errorStatus.errorType],
-      }));
+      setErrorTypes((prev) => addError(prev, inputName, errorStatus.errorType));
     } else {
-      setErrorTypes((prev) => ({
-        ...prev,
-        [inputName]: prev[inputName].filter(
-          (errorType) => errorType !== errorStatus.errorType
-        ),
-      }));
+      setErrorTypes((prev) =>
+        removeError(prev, inputName, errorStatus.errorType)
+      );
     }
-  };
-
-  const checkCardTypeFromPrefix = (value: string) => {
-    if (value.length > CARD_NUMBER.length.prefix) {
-      return cardType === CARD_TYPE.none;
-    }
-
-    if (value[0] === '4') setCardType(CARD_TYPE.visa);
-    else if (value >= '51' && value <= '55') setCardType(CARD_TYPE.master);
-    else setCardType(CARD_TYPE.none);
-    return false;
   };
 
   const handleValue = ({
@@ -72,7 +61,11 @@ function useCardNumberValidation() {
     if (value.length > CARD_NUMBER.length.max) return;
 
     if (name === CARD_NUMBER_INPUT_TYPE.cardNumberPart1) {
-      const isError = checkCardTypeFromPrefix(value);
+      const detectedType = getCardTypeFromPrefix(value);
+      setCardType(detectedType);
+      const isError =
+        value.length > CARD_NUMBER.length.prefix && detectedType === null;
+
       updateCardError(CARD_NUMBER_INPUT_TYPE.cardNumberPart1, {
         errorType: ERROR_TYPE.noneCardType,
         isError,
@@ -87,7 +80,7 @@ function useCardNumberValidation() {
       value.length === CARD_NUMBER.length.max
     )
       setIsInputComplete(true);
-    handleNextInputFocus(name, value);
+    handleFocusNextInput(name, value);
   };
 
   const onBlur = (e: ChangeEvent) => {
@@ -101,22 +94,12 @@ function useCardNumberValidation() {
     });
   };
 
-  const handleNextInputFocus = (key: CardNumberInputType, value: string) => {
-    if (
-      value.length !== CARD_NUMBER.length.max ||
-      key === 'cardNumberPart4' ||
-      errorTypes[key].length !== 0
-    ) {
-      return;
-    }
-    const keyArray = Object.keys(CARD_NUMBER_INPUT_TYPE);
+  const handleFocusNextInput = (key: CardNumberInputType, value: string) => {
+    if (key === CARD_NUMBER_INPUT_TYPE.cardNumberPart4) return;
+    if (value.length !== CARD_NUMBER.length.max) return;
+    if (errorTypes[key].length !== 0) return;
 
-    const currentKeyIndex = keyArray.indexOf(key);
-    const nextInputKey = keyArray[currentKeyIndex + 1] as CardNumberInputType;
-    const nextInputRef = inputRefs[nextInputKey];
-    if (nextInputRef.current) {
-      nextInputRef.current.focus();
-    }
+    focusNextInput<CardNumberInputType>(key, inputRefs);
   };
 
   useEffect(() => {
