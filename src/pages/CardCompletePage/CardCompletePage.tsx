@@ -3,14 +3,12 @@ import { useCardRouter } from '../../hooks/useCardRouter';
 import { StyledCardCompletePage, StyledIcon, StyledTitle } from './CardCompletePage.styles';
 
 const CardCompletePage = () => {
-  const basename = import.meta.env.MODE === 'production' ? '/react-payments' : '';
-
   const { cardInfo, navigateToHome } = useCardRouter();
   const { cardNumber, cardCompany } = cardInfo;
 
   return (
     <StyledCardCompletePage>
-      <StyledIcon src={`${basename}/check.png`} />
+      <StyledIcon src="./check.png" />
       <StyledTitle>
         {cardNumber && cardNumber[0]}로 시작하는 <br />
         {cardCompany}가 등록되었어요.
