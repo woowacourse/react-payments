@@ -61,6 +61,6 @@ export const Error: Story = {
     await userEvent.type(firstInput, "abcd");
     expect(firstInput.className).toContain(styles.isNotValid);
 
-    expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeVisible();
+    expect(canvas.getByText("숫자를 입력해주세요")).toBeVisible();
   },
 };

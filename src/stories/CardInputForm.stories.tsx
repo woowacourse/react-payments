@@ -14,6 +14,16 @@ const meta = {
       </MemoryRouter>
     ),
   ],
+  args: {
+    cardInfo: {
+      cardNumbers: ["", "", "", ""],
+      expirationDate: ["", ""],
+      brandName: "",
+    },
+    handleCardNumbersChange: () => {},
+    handleExpirationDateChange: () => {},
+    handleBrandNameChange: () => {},
+  },
   parameters: {
     layout: "centered",
   },

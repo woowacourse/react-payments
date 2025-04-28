@@ -6,25 +6,27 @@ import styles from "../components/common/inputField/input/Input.module.css";
 const meta = {
   title: "Components/CardCVCInput",
   component: CardCVCInput,
-  tags: ["autodocs"], // 스토리북 문서 자동생성 지원
+  tags: ["autodocs"],
+  args: {
+    onSuccessValidate: () => {},
+    onSuccessNextInput: () => {},
+  },
 } satisfies Meta<typeof CardCVCInput>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Default: Story = {};
 
 export const ErrorState: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = await canvas.getByPlaceholderText("123");
+    const input = canvas.getByPlaceholderText("123");
 
     await userEvent.type(input, "abc");
     expect(input.className).toContain(styles.isNotValid);
 
-    await expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeVisible();
+    await expect(canvas.getByText("숫자를 입력해주세요")).toBeVisible();
   },
 };

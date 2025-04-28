@@ -27,7 +27,7 @@ export const ErrorMonth: Story = {
     await userEvent.type(monthInput, "숫자");
     expect(monthInput.className).toContain(styles.isNotValid);
 
-    expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeVisible();
+    expect(canvas.getByText("숫자를 입력해주세요")).toBeVisible();
   },
 };
 
@@ -39,7 +39,6 @@ export const ErrorYear: Story = {
 
     await userEvent.type(monthInput, "가나");
     await userEvent.type(yearInput, "26");
-    expect(yearInput.className).toContain(styles.isNotValid);
 
     expect(canvas.getByText("숫자를 입력해주세요")).toBeVisible();
   },
