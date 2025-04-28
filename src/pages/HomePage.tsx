@@ -28,7 +28,7 @@ function HomePage() {
     onChange: handleCardNumberChange,
     onKeyDown: handleCardNumberKeyDown,
     onBlur: handleCardNumberBlur,
-    isValid: iscardNumberValid,
+    isValid: isCardNumberValid,
   } = useCardNumber(() => {
     showBrandStep();
     setTimeout(() => brandRef.current?.focus(), 1);
@@ -79,7 +79,7 @@ function HomePage() {
   } = useCardPassword();
 
   const showConfirmButton = (
-    iscardNumberValid && isCardBrandValid && isCardExpirationValid && isCardCVCValid && isCardPasswordValid
+    isCardNumberValid && isCardBrandValid && isCardExpirationValid && isCardCVCValid && isCardPasswordValid
   );
 
   console.log(showConfirmButton);
@@ -88,38 +88,49 @@ function HomePage() {
     <main css={mainLayout}>
       <Card cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} brand={brand}/>
       <section css={cardLayout}>
-        <CardPasswordInput
-          cardPassword={cardPassword}
-          erorr={cardPasswordError}
-          onChange={handleCardPasswordChange}
-          getCardPasswordErrorMessage={getCardPasswordErrorMessage}
-          tabIndex={9}
-        />
-        <CardCVCInput
-          cardCVC={cardCVC}
-          error={cardCVCError}
-          cvcRef={cvcRef}
-          onChange={handleCardCVCChange}
-          tabIndex={8}
-        />
-        <CardPeriodInput
-          cardExpirationDate={cardExpirationDate}
-          error={cardExpirationDateError}
-          onChange={handleCardExpirationChange}
-          monthRef={monthRef}
-          yearRef={yearRef}
-          onKeyDown={handleCardExpirationKeyDown}
-          onBlur={handleCardExpirationBlur}
-          tabIndex={6}
-          autoFocus
-        />
-        <CardBrand
-          value={brand}
-          onChange={onChange}
-          brandRef={brandRef}
-          error={cardNumberError}
-          tabIndex={2}
-        />
+        {showCardPassword &&
+          <CardPasswordInput
+            cardPassword={cardPassword}
+            erorr={cardPasswordError}
+            onChange={handleCardPasswordChange}
+            getCardPasswordErrorMessage={getCardPasswordErrorMessage}
+            tabIndex={9}
+          />
+        }
+        {
+          showCardCVC &&
+          <CardCVCInput
+            cardCVC={cardCVC}
+            error={cardCVCError}
+            cvcRef={cvcRef}
+            onChange={handleCardCVCChange}
+            tabIndex={8}
+          />
+        }
+        {
+          showCardPeriod &&
+          <CardPeriodInput
+            cardExpirationDate={cardExpirationDate}
+            error={cardExpirationDateError}
+            onChange={handleCardExpirationChange}
+            monthRef={monthRef}
+            yearRef={yearRef}
+            onKeyDown={handleCardExpirationKeyDown}
+            onBlur={handleCardExpirationBlur}
+            tabIndex={6}
+            autoFocus
+          />
+        }
+        {
+          showCardBrand &&
+          <CardBrand
+            value={brand}
+            onChange={onChange}
+            brandRef={brandRef}
+            error={cardNumberError}
+            tabIndex={2}
+          />
+        }
         <CardNumberInput
           cardNumber={cardNumber}
           error={cardNumberError}

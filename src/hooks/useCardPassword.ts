@@ -3,19 +3,23 @@ import {CARD_CVC, CARD_PASSWORD, CARD_PASSWORD_ERROR} from "../constants";
 import {isOnlyDigits} from "../utils/validateNumber.ts";
 import {CardPassword, CardPasswordError} from "../types";
 
-export const useCardPassword = () => {
+export const useCardPassword = (onComplete?: () => void) => {
   const [cardPassword, setCardPassword] = useState<CardPassword>('');
   const [cardPasswordError, setCardPasswordError] = useState<CardPasswordError>('');
 
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleCardPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const {value} = e.target;
     const isNumber = isOnlyDigits(value);
 
     if (isNumber) {
       setCardPassword(value);
       setCardPasswordError('');
+
+      if (value.length === CARD_PASSWORD.maxLength && onComplete) {
+        setTimeout(() => onComplete(), 100);
+      }
     } else {
       setCardPasswordError('');
     }

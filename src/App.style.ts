@@ -8,7 +8,7 @@ export const appLayout = css`
     
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 430px;
   height: 750px;

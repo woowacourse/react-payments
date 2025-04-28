@@ -54,6 +54,7 @@ export const useCardExpiration = (onComplete?: () => void) => {
 
       if (name === 'year' && value.length === CARD_EXPIRATION.monthLength) {
         const yearValue = Number(value);
+
         if (yearValue < CARD_EXPIRATION.minYear) {
           setError({
             ...error,
@@ -63,7 +64,26 @@ export const useCardExpiration = (onComplete?: () => void) => {
             ...cardExpirationDate,
             year: value,
           });
+
           return;
+        }
+
+        if (value.length === CARD_EXPIRATION.yearLength) {
+          const monthValue = cardExpirationDate.month;
+
+          if (monthValue && monthValue.length === CARD_EXPIRATION.monthLength) {
+            const month = Number(monthValue);
+            const year = Number(value);
+
+            if (
+              month >= CARD_EXPIRATION.minMonth &&
+              month <= CARD_EXPIRATION.maxMonth &&
+              year >= CARD_EXPIRATION.minYear &&
+              !error.month
+            ) {
+              setTimeout(() => onComplete?.(), 100);
+            }
+          }
         }
       }
 

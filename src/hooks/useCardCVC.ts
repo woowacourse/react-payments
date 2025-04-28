@@ -20,6 +20,10 @@ export const useCardCVC = (onComplete?: () => void) => {
 
     setCardCVC(value === '' ? '' : value);
     setError('');
+
+    if (value.length === CARD_CVC.maxLength) {
+      setTimeout(() => onComplete?.(), 100);
+    }
   };
 
   const resetCardCVC = () => {

@@ -9,6 +9,11 @@ export const useCardBrand = (onComplete?: () => void) => {
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedBrand = e.target.value as CardBrandType;
     setBrand(selectedBrand || null);
+
+    // 카드사 선택 완료 시 onComplete 호출
+    if (selectedBrand && onComplete) {
+      setTimeout(() => onComplete(), 100);
+    }
   }
 
   const resetBrand = () => {
