@@ -1,5 +1,5 @@
 import { SelectHTMLAttributes } from 'react';
-import styles from '../InputField/InputField.module.css';
+import styles from '../InputField/inputField.module.css';
 
 type SelectFieldProps = SelectHTMLAttributes<HTMLSelectElement> & {
   isError?: boolean;
