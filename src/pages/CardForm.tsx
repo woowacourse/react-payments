@@ -7,7 +7,7 @@ import { CardNumberForm } from '@/components/features/CardFormFiled/CardNumberFo
 import { CVCForm } from '@/components/features/CardFormFiled/CVCForm';
 import { ExpireDateForm } from '@/components/features/CardFormFiled/ExpireDateForm';
 import { PassWordForm } from '@/components/features/CardFormFiled/PassWordForm';
-import { CardFormLayout } from '@/components/features/CardFormLayout'; // Adjust the path as necessary
+import { CardFormLayout } from '@/components/features/CardFormLayout';
 import { CardPreview } from '@/components/features/CardPreview';
 import { STEPS, StepType } from '@/constants/stackStep';
 import { useStack } from '@/hooks/useStack';
