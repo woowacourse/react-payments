@@ -8,6 +8,7 @@ import CardBrandSelector from '../../components/CardBrand/CardBrandSelector';
 import CardPassword from '../../components/CardPassword';
 import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import CardRegisterForm from '../../components/CardRegisterForm/CardRegisterForm';
+import { COLORS } from '../../styles/colors';
 
 type CardNumber = {
   first: string;
@@ -127,7 +128,7 @@ const Main = styled.div`
   width: 376px;
   height: auto;
   min-height: 100dvh;
-  background-color: #f9f9f9;
+  background-color: ${COLORS.BACKGROUND};
   gap: 24px;
   padding-bottom: 52px;
 `;

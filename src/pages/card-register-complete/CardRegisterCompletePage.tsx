@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Image from '../../components/common/Image';
 import ConfirmButton from '../../components/ConfirmButton/ConfirmButton';
 import { useEffect } from 'react';
+import { COLORS } from '../../styles/colors';
 
 interface CardRegisterCompleteInfo {
   cardFirstPartNumbers: string;
@@ -49,7 +50,7 @@ const Main = styled.div`
   width: 376px;
   height: auto;
   min-height: 100dvh;
-  background-color: #f9f9f9;
+  background-color: ${COLORS.BACKGROUND};
   gap: 24px;
   display: flex;
   justify-content: center;

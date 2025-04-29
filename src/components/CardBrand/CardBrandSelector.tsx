@@ -2,16 +2,17 @@ import styled from '@emotion/styled';
 import FormLabel from '../common/FormLabel';
 import SingleSelect from '../common/SingleSelect';
 import { useEffect, useState } from 'react';
+import { COLORS } from '../../styles/colors';
 
 const options = [
-  { id: 1, name: 'BC카드', color: '#F04651' },
-  { id: 2, name: '신한카드', color: '#0046FF' },
-  { id: 3, name: '카카오뱅크', color: '#FFE600' },
-  { id: 4, name: '현대카드', color: '#000000' },
-  { id: 5, name: '우리카드', color: '#007BC8' },
-  { id: 6, name: '롯데카드', color: '#ED1C24' },
-  { id: 7, name: '하나카드', color: '#009490' },
-  { id: 8, name: '국민카드', color: '#6A6056' },
+  { id: 1, name: 'BC카드', color: `${COLORS.BC_CARD}` },
+  { id: 2, name: '신한카드', color: `${COLORS.SHINHAN_CARD}` },
+  { id: 3, name: '카카오뱅크', color: `${COLORS.KAKAO_BANK}` },
+  { id: 4, name: '현대카드', color: `${COLORS.HYUNDAI_CARD}` },
+  { id: 5, name: '우리카드', color: `${COLORS.WOORI_CARD}` },
+  { id: 6, name: '롯데카드', color: `${COLORS.LOTTE_CARD}` },
+  { id: 7, name: '하나카드', color: `${COLORS.HANA_CARD}` },
+  { id: 8, name: '국민카드', color: `${COLORS.KB_CARD}` },
 ];
 
 interface CardBrandSelectorProps {

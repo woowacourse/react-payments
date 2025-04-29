@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { COLORS } from '../../styles/colors';
 
 type CardNumber = {
   first: string;
@@ -108,7 +109,7 @@ const CardNumber = styled.span`
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${COLORS.WHITE};
 `;
 
 const CardPeriodArea = styled.div`
@@ -129,7 +130,7 @@ const CardPeriod = styled.span`
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${COLORS.WHITE};
 `;
 
 const Separator = styled.span`
@@ -138,7 +139,7 @@ const Separator = styled.span`
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${COLORS.WHITE};
 `;
 
 const CardMethod = styled.img`
