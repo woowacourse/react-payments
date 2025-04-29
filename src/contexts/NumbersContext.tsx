@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { InputFieldState } from '../types/models';
 import { useMultipleInputFields } from '../hooks/useCardInputHooks';
-import { isValidNumberSegment } from '../utils/cardValidation';
+import { validateNumbers } from '../utils/cardValidation';
 
 interface NumbersContextValue {
   numberFields: InputFieldState[];
@@ -31,7 +31,7 @@ export const NumbersProvider: React.FC<{ children: ReactNode }> = ({
       initialValues: ['', '', '', ''],
       placeholders: NUMBER_PLACEHOLDERS as unknown as string[],
       maximumLength: NUMBER_SEGMENT_LENGTH,
-      validationFunction: isValidNumberSegment,
+      validationFunction: validateNumbers,
     });
 
   return (

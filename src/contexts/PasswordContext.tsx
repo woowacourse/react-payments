@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { InputFieldState } from '../types/models';
 import { useInputField } from '../hooks/useCardInputHooks';
-import { validatePasswordSegment } from '../utils/cardValidation';
+import { validatePassword } from '../utils/cardValidation';
 
 interface PasswordContextValue {
   passwordField: InputFieldState;
@@ -28,7 +28,7 @@ export const PasswordProvider: React.FC<{ children: ReactNode }> = ({
       initialValue: '',
       placeholder: PASSWORD_PLACEHOLDER,
       maximumLength: PASSWORD_MAX_LENGTH,
-      validationFunction: validatePasswordSegment,
+      validationFunction: validatePassword,
     }
   );
 

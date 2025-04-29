@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { InputFieldState } from '../types/models';
 import { useMultipleInputFields } from '../hooks/useCardInputHooks';
-import { isValidExpirationSegment } from '../utils/cardValidation';
+import { validateExpiryDate } from '../utils/cardValidation';
 
 interface ExpiryDateContextValue {
   expiryFields: InputFieldState[];
@@ -33,7 +33,7 @@ export const ExpiryDateProvider: React.FC<{ children: ReactNode }> = ({
       initialValues: ['', ''],
       placeholders: EXPIRY_PLACEHOLDERS as unknown as string[],
       maximumLength: EXPIRY_SEGMENT_LENGTH,
-      validationFunction: isValidExpirationSegment,
+      validationFunction: validateExpiryDate,
     });
 
   const [showSep, setShowSep] = useState<boolean>(false);
