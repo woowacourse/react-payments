@@ -1,4 +1,3 @@
-import styles from './CardNumberSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
 import { CardNumberKey, CardNumberType } from '../../types';
@@ -18,14 +17,14 @@ export type CardNumberSectionProp = {
 
 export default function CardNumberSection({ cardNumbers, onCardNumbersChange, cardInputRefs, getCardNumberErrorMessage }: CardNumberSectionProp) {
   return (
-    <div className={styles.sectionContainer}>
+    <div>
       <InputSection.TitleWrapper>
         <InputSection.Title title="결제할 카드 번호를 입력해 주세요" />
         <InputSection.SubTitle title="본인 명의의 카드만 입력 가능합니다." />
       </InputSection.TitleWrapper>
-      <div className={styles.inputSection}>
+      <div>
         <InputSection.Label text="카드번호" />
-        <div className={styles.inputWrapper}>
+        <InputSection.InputWrapper>
           {(Object.keys(cardNumbers) as CardNumberKey[]).map((inputKey, index) => (
             <Input
               pattern="[0-9]{4}"
@@ -42,7 +41,7 @@ export default function CardNumberSection({ cardNumbers, onCardNumbersChange, ca
               maxLength={4}
             />
           ))}
-        </div>
+        </InputSection.InputWrapper>
 
         <InputSection.Error message={getCardNumberErrorMessage(cardNumbers)} />
       </div>

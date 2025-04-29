@@ -1,7 +1,6 @@
 import { CvcType } from '../../types';
 import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
-import styles from './CvcSection.module.css';
 
 type CvcSection = {
   cvc: CvcType;
@@ -10,11 +9,11 @@ type CvcSection = {
 
 export default function CvcSection({ cvc, handleCvcChange }: CvcSection) {
   return (
-    <div className={styles.sectionContainer}>
+    <div>
       <InputSection.TitleWrapper>
         <InputSection.Title title="CVC 번호를 입력해 주세요" />
       </InputSection.TitleWrapper>
-      <div className={styles.inputSection}>
+      <div>
         <InputSection.Label text="CVC" />
 
         <Input

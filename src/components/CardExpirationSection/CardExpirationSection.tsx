@@ -12,16 +12,16 @@ export default function CardExpirationSection({ expiration, expirationRef, handl
   const isError = expiration.month.errorMessage || expiration.year.errorMessage;
 
   return (
-    <div className={styles.sectionContainer}>
+    <div>
       <InputSection.TitleWrapper>
         <InputSection.Title title="카드 유효기간을 입력해 주세요" />
         <InputSection.SubTitle title="월/년도(MMYY)를 순서대로 입력해 주세요." />
       </InputSection.TitleWrapper>
 
-      <div className={styles.inputSection}>
+      <div>
         <InputSection.Label text="유효기간" />
 
-        <div className={styles.inputWrapper}>
+        <InputSection.InputWrapper>
           <Input
             pattern="[0-9]{2}"
             required
@@ -43,7 +43,7 @@ export default function CardExpirationSection({ expiration, expirationRef, handl
             maxLength={2}
             ref={expirationRef.year}
           />
-        </div>
+        </InputSection.InputWrapper>
 
         {isError && <InputSection.Error message={expiration.month.errorMessage || expiration.year.errorMessage} />}
       </div>
