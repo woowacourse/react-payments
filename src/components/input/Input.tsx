@@ -7,34 +7,8 @@ type Props = {
 } & ComponentProps<'input'>;
 
 const Input = forwardRef(
-  (
-    {
-      name,
-      type,
-      placeholder,
-      isError = false,
-      value,
-      maxLength,
-      autoFocus,
-      onChange,
-      onBlur,
-    }: Props,
-    ref: Ref<HTMLInputElement>
-  ) => {
-    return (
-      <TextInput
-        ref={ref}
-        name={name}
-        type={type}
-        maxLength={maxLength}
-        value={value}
-        placeholder={placeholder}
-        autoFocus={autoFocus}
-        onChange={onChange}
-        onBlur={onBlur}
-        $isError={isError}
-      />
-    );
+  ({isError = false, ...props}: Props, ref: Ref<HTMLInputElement>) => {
+    return <TextInput ref={ref} {...props} $isError={isError} />;
   }
 );
 
