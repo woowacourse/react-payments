@@ -6,7 +6,7 @@ export const CVC_MAX_LENGTH = 3;
 export const CARD_MAX_LENGTH = 4;
 export const PASSWORD_MAX_LENGTH = 2;
 
-export const getCurrentYear = () => new Date().getFullYear() % 100;
+const getCurrentYear = () => new Date().getFullYear() % 100;
 
 export const isNumberWithinRange = (value: string, maxLength: number): boolean => {
 	const regex = new RegExp(`^(?:\\d{1,${maxLength}})?$`);
@@ -26,7 +26,7 @@ export const isValidYear = (value: string): boolean => {
 	return year >= currentYear || year === 0;
 };
 
-export const isValidExpirationDate = (date: { month: string; year: string }) => {
+const isValidExpirationDate = (date: { month: string; year: string }) => {
 	return isValidMonth(date.month) && isValidYear(date.year);
 };
 
