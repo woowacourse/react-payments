@@ -22,7 +22,7 @@ const RENDERING_STEP = {
 	password: 4,
 };
 
-function App() {
+function CardInfo() {
 	const navigate = useNavigate();
 	const cardNumberHook = useCardNumber();
 	const cardCompanyHook = useCardCompany();
@@ -60,7 +60,7 @@ function App() {
 	);
 }
 
-export default App;
+export default CardInfo;
 
 const MainContainer = styled.div`
 	width: 376px;
