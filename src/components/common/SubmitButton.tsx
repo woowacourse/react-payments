@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { Button } from './Styled';
-import useFormUiLogic from '../../hooks/useFormUiLogic';
+import useSequentialReveal from '../../hooks/useSequentialReveal';
 
 const SubmitButton = () => {
-  const { isFormValid } = useFormUiLogic();
+  const { isFormValid } = useSequentialReveal();
   return (
     <>{isFormValid && <ConfirmButton type="submit">확인</ConfirmButton>}</>
   );

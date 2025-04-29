@@ -10,13 +10,13 @@ import PasswordInput from '../components/PasswordInput';
 import SubmitButton from '../components/common/SubmitButton';
 import { useNumbersContext } from '../contexts/NumbersContext';
 import { useBrandContext } from '../contexts/BrandContext';
-import useFormUiLogic from '../hooks/useFormUiLogic';
+import useSequentialReveal from '../hooks/useSequentialReveal';
 
 const HomePage = () => {
   const navigate = useNavigate();
   const { numberFields } = useNumbersContext();
   const { brand } = useBrandContext();
-  const { revealFlags } = useFormUiLogic();
+  const { revealFlags } = useSequentialReveal();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
