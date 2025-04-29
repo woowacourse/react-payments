@@ -5,7 +5,7 @@ import { MESSAGE } from "../components/form/constants/error";
 const useCardPassword = () => {
 	const [cardPassword, setCardPassword] = useState<string>("");
 	const [error, setError] = useState<string>("");
-	const isComplete = cardPassword.length === 2 && isNumberWithinRange(cardPassword, 2);
+	const isComplete = cardPassword.length === PASSWORD_MAX_LENGTH && isNumberWithinRange(cardPassword, 2);
 
 	const onChange = (value: string) => {
 		setCardPassword(value);
