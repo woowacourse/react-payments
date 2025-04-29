@@ -1,15 +1,25 @@
 export const CARD_NUMBER_MESSAGE = {
-  main: "결제할 카드 번호를 입력해 주세요",
-  caption: "본인 명의의 카드만 결제 가능합니다.",
+  MAIN: "결제할 카드 번호를 입력해 주세요",
+  CAPTION: "본인 명의의 카드만 결제 가능합니다.",
 };
 
 export const EXPIRATION_MESSAGE = {
-  main: "카드 유효기간을 입력해 주세요",
-  caption: "월/년도(MMYY)를 순서대로 입력해 주세요.",
+  MAIN: "카드 유효기간을 입력해 주세요",
+  CAPTION: "월/년도(MMYY)를 순서대로 입력해 주세요.",
 };
 
 export const CVC_MESSAGE = {
-  main: "CVC 번호를 입력해 주세요",
+  MAIN: "CVC 번호를 입력해 주세요",
+};
+
+export const CARD_BRAND_MESSAGE = {
+  MAIN: "카드사를 선택해 주세요",
+  CAPTION: "현재 국내 카드사만 가능합니다.",
+};
+
+export const PASSWORD_MESSAGE = {
+  MAIN: "비밀번호를 입력해 주세요",
+  CAPTION: "앞의 2자리를 입력해주세요",
 };
 
 export const ERROR_MESSAGE = {
