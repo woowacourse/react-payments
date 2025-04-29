@@ -1,4 +1,4 @@
-import { ComponentProps } from "react";
+import React, { ComponentProps } from "react";
 import { CompanyType } from ".";
 import { CardInformationType, setCardInformationType } from "./CardInformationType";
 import { useEachValidationType, validationFieldType } from "./useValidationType";
@@ -74,6 +74,8 @@ export type InputProps = {
   masking?: boolean;
   /** 자동 포커스 처리 */
   autoFocus: boolean;
+  /** 외부에서 input 요소에 접근하기 위한 ref */
+  ref: React.Ref<HTMLInputElement>;
 };
 
 export type errorMessageProps = {
