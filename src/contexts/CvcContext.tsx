@@ -13,6 +13,7 @@ interface CvcContextValue {
   cvcField: InputFieldState;
   handleCvcChange: (e: ChangeEvent<HTMLInputElement>) => void;
   cvcInputRef: RefObject<HTMLInputElement | null>;
+  resetCvc: () => void;
 }
 
 const CvcContext = createContext<CvcContextValue | null>(null);
@@ -23,7 +24,7 @@ const CVC_MAX_LENGTH = 3;
 export const CvcProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [cvcField, handleCvcChange, cvcInputRef] = useInputField({
+  const [cvcField, handleCvcChange, cvcInputRef, resetCvc] = useInputField({
     initialValue: '',
     placeholder: CVC_PLACEHOLDER,
     maximumLength: CVC_MAX_LENGTH,
@@ -31,7 +32,9 @@ export const CvcProvider: React.FC<{ children: ReactNode }> = ({
   });
 
   return (
-    <CvcContext.Provider value={{ cvcField, handleCvcChange, cvcInputRef }}>
+    <CvcContext.Provider
+      value={{ cvcField, handleCvcChange, cvcInputRef, resetCvc }}
+    >
       {children}
     </CvcContext.Provider>
   );

@@ -16,7 +16,8 @@ interface UseInputFieldParams {
 type UseInputFieldReturn = [
   InputFieldState,
   (event: ChangeEvent<HTMLInputElement>) => void,
-  RefObject<HTMLInputElement | null>
+  RefObject<HTMLInputElement | null>,
+  () => void
 ];
 
 function useInputField({
@@ -45,6 +46,15 @@ function useInputField({
     }
   };
 
+  const reset = () => {
+    setValue(initialValue);
+    setHasError(false);
+    setErrorMessage('');
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  };
+
   const fieldState: InputFieldState = {
     value,
     hasError,
@@ -53,7 +63,7 @@ function useInputField({
     maximumLength,
   };
 
-  return [fieldState, handleChange, inputRef];
+  return [fieldState, handleChange, inputRef, reset];
 }
 
 interface ValidationResult {
@@ -75,7 +85,8 @@ interface UseInputFieldsParams {
 type UseInputFieldsReturn = [
   InputFieldState[],
   (event: ChangeEvent<HTMLInputElement>, index: number) => void,
-  RefObject<HTMLInputElement | null>[]
+  RefObject<HTMLInputElement | null>[],
+  () => void
 ];
 
 function useMultipleInputFields({
@@ -121,6 +132,14 @@ function useMultipleInputFields({
     }
   };
 
+  const reset = () => {
+    setValues(initialValues);
+    setErrors(initialValues.map(() => ({ hasError: false, errorMessage: '' })));
+    inputRefs.forEach((ref) => {
+      if (ref.current) ref.current.blur();
+    });
+  };
+
   const fieldStates: InputFieldState[] = values.map((value, i) => ({
     value,
     hasError: errors[i].hasError,
@@ -129,7 +148,7 @@ function useMultipleInputFields({
     maximumLength,
   }));
 
-  return [fieldStates, handleChange, inputRefs];
+  return [fieldStates, handleChange, inputRefs, reset];
 }
 
 export { useInputField, useMultipleInputFields };

@@ -16,6 +16,7 @@ interface NumbersContextValue {
     index: number
   ) => void;
   numberInputRefs: RefObject<HTMLInputElement | null>[];
+  resetNumbers: () => void;
 }
 
 const NumbersContext = createContext<NumbersContextValue | null>(null);
@@ -26,7 +27,7 @@ const NUMBER_SEGMENT_LENGTH = 4;
 export const NumbersProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [numberFields, handleNumbersChange, numberInputRefs] =
+  const [numberFields, handleNumbersChange, numberInputRefs, resetNumbers] =
     useMultipleInputFields({
       initialValues: ['', '', '', ''],
       placeholders: NUMBER_PLACEHOLDERS as unknown as string[],
@@ -36,7 +37,12 @@ export const NumbersProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <NumbersContext.Provider
-      value={{ numberFields, handleNumbersChange, numberInputRefs }}
+      value={{
+        numberFields,
+        handleNumbersChange,
+        numberInputRefs,
+        resetNumbers,
+      }}
     >
       {children}
     </NumbersContext.Provider>

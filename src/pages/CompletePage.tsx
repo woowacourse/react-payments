@@ -1,16 +1,30 @@
 import styled from '@emotion/styled';
 import { Button } from '../components/common/Styled';
 import { useNavigate } from 'react-router-dom';
+import { useBrandContext } from '../contexts/BrandContext';
+import { useNumbersContext } from '../contexts/NumbersContext';
+import { useExpiryDateContext } from '../contexts/ExpiryDateContext';
+import { useCvcContext } from '../contexts/CvcContext';
+import { usePasswordContext } from '../contexts/PasswordContext';
 
 const CompletePage = () => {
   const navigate = useNavigate();
   const params = new URLSearchParams(window.location.search);
   const brand = params.get('brand') || '';
   const number = params.get('number') || '';
+  const { resetBrand } = useBrandContext();
+  const { resetNumbers } = useNumbersContext();
+  const { resetExpiryDate } = useExpiryDateContext();
+  const { resetCvc } = useCvcContext();
+  const { resetPassword } = usePasswordContext();
 
   const onClick = () => {
+    resetBrand();
+    resetNumbers();
+    resetExpiryDate();
+    resetCvc();
+    resetPassword();
     navigate('/');
-    window.location.reload();
   };
 
   return (

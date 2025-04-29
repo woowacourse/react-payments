@@ -13,6 +13,7 @@ interface PasswordContextValue {
   passwordField: InputFieldState;
   handlePasswordChange: (e: ChangeEvent<HTMLInputElement>) => void;
   passwordInputRef: RefObject<HTMLInputElement | null>;
+  resetPassword: () => void;
 }
 
 const PasswordContext = createContext<PasswordContextValue | null>(null);
@@ -23,18 +24,22 @@ const PASSWORD_MAX_LENGTH = 2;
 export const PasswordProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [passwordField, handlePasswordChange, passwordInputRef] = useInputField(
-    {
+  const [passwordField, handlePasswordChange, passwordInputRef, resetPassword] =
+    useInputField({
       initialValue: '',
       placeholder: PASSWORD_PLACEHOLDER,
       maximumLength: PASSWORD_MAX_LENGTH,
       validationFunction: validatePassword,
-    }
-  );
+    });
 
   return (
     <PasswordContext.Provider
-      value={{ passwordField, handlePasswordChange, passwordInputRef }}
+      value={{
+        passwordField,
+        handlePasswordChange,
+        passwordInputRef,
+        resetPassword,
+      }}
     >
       {children}
     </PasswordContext.Provider>

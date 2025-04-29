@@ -18,6 +18,7 @@ interface ExpiryDateContextValue {
   showPeriodSeparator: () => void;
   hidePeriodSeparator: () => void;
   expiryInputRefs: RefObject<HTMLInputElement | null>[];
+  resetExpiryDate: () => void;
 }
 
 const ExpiryDateContext = createContext<ExpiryDateContextValue | null>(null);
@@ -28,13 +29,18 @@ const EXPIRY_SEGMENT_LENGTH = 2;
 export const ExpiryDateProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [expiryFields, handleExpiryChange, expiryInputRefs] =
+  const [expiryFields, handleExpiryChange, expiryInputRefs, reset] =
     useMultipleInputFields({
       initialValues: ['', ''],
       placeholders: EXPIRY_PLACEHOLDERS as unknown as string[],
       maximumLength: EXPIRY_SEGMENT_LENGTH,
       validationFunction: validateExpiryDate,
     });
+
+  const resetExpiryDate = useCallback(() => {
+    reset();
+    setShowSep(false);
+  }, [reset]);
 
   const [showSep, setShowSep] = useState<boolean>(false);
   const showPeriodSeparator = useCallback(() => {
@@ -54,6 +60,7 @@ export const ExpiryDateProvider: React.FC<{ children: ReactNode }> = ({
         showSep,
         showPeriodSeparator,
         hidePeriodSeparator,
+        resetExpiryDate,
       }}
     >
       {children}
