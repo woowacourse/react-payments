@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useRef, useState } from "react";
+import { RefObject, useCallback, useMemo, useRef, useState } from "react";
 import { isNaN } from "@/utils/isNaN";
 import type { CardNumberInputKey, CardNumberState } from "../types";
 import {
@@ -84,7 +84,10 @@ const useControlledCardNumber = (): ControlledCardNumber => {
     cardNumberState,
     cardNumberInputRefs,
     handleCardNumberChange,
-    isNextStep: checkCardNumberNextStep(cardNumberState),
+    isNextStep: useMemo(
+      () => checkCardNumberNextStep(cardNumberState),
+      [cardNumberState]
+    ),
   };
 };
 

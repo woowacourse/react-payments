@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { CardType } from "@/pages/add-card/types";
 
 export interface ControlledCardType {
@@ -25,7 +25,7 @@ const useControlledCardType = (): ControlledCardType => {
   return {
     cardType,
     handleCardTypeChange,
-    isNextStep: checkCardTypeNextStep(cardType),
+    isNextStep: useMemo(() => checkCardTypeNextStep(cardType), [cardType]),
   };
 };
 

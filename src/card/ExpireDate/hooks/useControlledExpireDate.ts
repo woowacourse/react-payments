@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useRef, useState } from "react";
+import { RefObject, useCallback, useMemo, useRef, useState } from "react";
 import { EXPIRE_DATE_KEYS, INITIAL_EXPIRE_DATE_STATE } from "../constants";
 import { ExpireDateInputKey, ExpireDateState } from "../types";
 import { handleNextInputFocus } from "@/utils/handleNextInputFocus";
@@ -97,7 +97,10 @@ const useControlledExpireDate = (): ControlledExpireDate => {
     expireDateInputRefs,
     handleExpireChange,
     handleExpireMonthBlur,
-    isNextStep: checkExpireDateNextStep(expireDate),
+    isNextStep: useMemo(
+      () => checkExpireDateNextStep(expireDate),
+      [expireDate]
+    ),
   };
 };
 

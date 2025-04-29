@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export interface CVCState {
   value: string;
@@ -39,7 +39,7 @@ const useControlledCVC = (): ControlledCVC => {
   return {
     CVCState,
     handleCVCChange,
-    isNextStep: checkCVCNextStep(CVCState),
+    isNextStep: useMemo(() => checkCVCNextStep(CVCState), [CVCState]),
   };
 };
 

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { INITIAL_CARD_PASSWORD_SATE } from "../constants";
 import type { CardPasswordState } from "../types";
 import { validateCardPassword } from "../validation";
@@ -34,7 +34,10 @@ const useControlledCardPassword = (): ControlledCardPassword => {
   return {
     cardPasswordState,
     handleCardPasswordChange,
-    isNextStep: checkPasswordNextStep(cardPasswordState),
+    isNextStep: useMemo(
+      () => checkPasswordNextStep(cardPasswordState),
+      [cardPasswordState]
+    ),
   };
 };
 
