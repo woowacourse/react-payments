@@ -17,4 +17,3 @@ const FormSectionSelect = <T extends Extract<keyof CardInformationType, "company
 };
 
 export default React.memo(FormSectionSelect) as typeof FormSectionSelect;
-// export default FormSectionSelect;
