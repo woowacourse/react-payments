@@ -8,7 +8,7 @@ function App() {
     <Routes>
       <Route path="/complete" element={<AddCardComplete />} />
       <Route path="/" element={<AddCard />} />
-      <Route path={'*'} element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
