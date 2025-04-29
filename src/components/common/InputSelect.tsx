@@ -1,6 +1,17 @@
 import styled from '@emotion/styled';
 import { ChangeEvent, RefObject } from 'react';
 
+const SELECT_OPTIONS = [
+  { value: 'BC', label: 'BC카드' },
+  { value: '신한', label: '신한카드' },
+  { value: '카카오', label: '카카오뱅크' },
+  { value: '현대', label: '현대카드' },
+  { value: '우리', label: '우리카드' },
+  { value: '롯데', label: '롯데카드' },
+  { value: '하나', label: '하나카드' },
+  { value: '국민', label: '국민카드' },
+] as const;
+
 interface InputSelectProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
@@ -15,14 +26,11 @@ const InputSelect = ({ value, onChange, inputRef }: InputSelectProps) => {
           <option value="" disabled hidden>
             카드사를 선택해주세요
           </option>
-          <option value="BC">BC카드</option>
-          <option value="신한">신한카드</option>
-          <option value="카카오">카카오뱅크</option>
-          <option value="현대">현대카드</option>
-          <option value="우리">우리카드</option>
-          <option value="롯데">롯데카드</option>
-          <option value="하나">하나카드</option>
-          <option value="국민">국민카드</option>
+          {SELECT_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </Select>
       </Row>
     </InputSelectContainer>
