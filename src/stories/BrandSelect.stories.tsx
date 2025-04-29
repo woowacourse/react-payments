@@ -1,22 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from '../styles/theme';
 import { within, userEvent, expect } from '@storybook/test';
 import BrandSelect from '../components/BrandSelect';
-import { BrandProvider } from '../contexts/BrandContext';
 
 const meta = {
   title: 'Components/BrandSelect',
   component: BrandSelect,
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <BrandProvider>
-          <Story />
-        </BrandProvider>
-      </ThemeProvider>
-    ),
-  ],
+  tags: ['autodocs'],
 } satisfies Meta<typeof BrandSelect>;
 
 export default meta;

@@ -1,23 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from '../styles/theme';
 import { within, userEvent, expect } from '@storybook/test';
 import NumberInputs from '../components/NumberInputs';
-import { NumbersProvider } from '../contexts/NumbersContext';
 import { ERROR_MESSAGE } from '../utils/cardValidation';
 
 const meta = {
   title: 'Components/NumberInputs',
   component: NumberInputs,
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <NumbersProvider>
-          <Story />
-        </NumbersProvider>
-      </ThemeProvider>
-    ),
-  ],
+  tags: ['autodocs'],
 } satisfies Meta<typeof NumberInputs>;
 
 export default meta;

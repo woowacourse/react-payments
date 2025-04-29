@@ -1,35 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from '../styles/theme';
 import { within, userEvent, expect } from '@storybook/test';
 import ExpiryDateInputs from '../components/ExpiryDateInputs';
-import { NumbersProvider } from '../contexts/NumbersContext';
-import { BrandProvider } from '../contexts/BrandContext';
-import { ExpiryDateProvider } from '../contexts/ExpiryDateContext';
-import { CvcProvider } from '../contexts/CvcContext';
-import { PasswordProvider } from '../contexts/PasswordContext';
 import { ERROR_MESSAGE } from '../utils/cardValidation';
 
 const meta = {
   title: 'Components/ExpiryDateInputs',
   component: ExpiryDateInputs,
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <NumbersProvider>
-          <BrandProvider>
-            <ExpiryDateProvider>
-              <CvcProvider>
-                <PasswordProvider>
-                  <Story />
-                </PasswordProvider>
-              </CvcProvider>
-            </ExpiryDateProvider>
-          </BrandProvider>
-        </NumbersProvider>
-      </ThemeProvider>
-    ),
-  ],
+  tags: ['autodocs'],
 } satisfies Meta<typeof ExpiryDateInputs>;
 
 export default meta;

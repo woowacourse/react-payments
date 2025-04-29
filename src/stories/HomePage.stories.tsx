@@ -1,37 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from '../styles/theme';
-import { MemoryRouter } from 'react-router-dom';
 import { within, userEvent, expect } from '@storybook/test';
 import HomePage from '../pages/HomePage';
-import { NumbersProvider } from '../contexts/NumbersContext';
-import { BrandProvider } from '../contexts/BrandContext';
-import { ExpiryDateProvider } from '../contexts/ExpiryDateContext';
-import { CvcProvider } from '../contexts/CvcContext';
-import { PasswordProvider } from '../contexts/PasswordContext';
 
 const meta = {
   title: 'Pages/HomePage',
   component: HomePage,
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <MemoryRouter initialEntries={['/']}>
-          <NumbersProvider>
-            <BrandProvider>
-              <ExpiryDateProvider>
-                <CvcProvider>
-                  <PasswordProvider>
-                    <Story />
-                  </PasswordProvider>
-                </CvcProvider>
-              </ExpiryDateProvider>
-            </BrandProvider>
-          </NumbersProvider>
-        </MemoryRouter>
-      </ThemeProvider>
-    ),
-  ],
+  tags: ['autodocs'],
 } satisfies Meta<typeof HomePage>;
 
 export default meta;

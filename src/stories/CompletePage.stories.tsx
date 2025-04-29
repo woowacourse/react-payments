@@ -1,22 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { within, expect } from '@storybook/test';
-import { MemoryRouter } from 'react-router-dom';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from '../styles/theme';
 import CompletePage from '../pages/CompletePage';
 
 const meta = {
   title: 'Pages/CompletePage',
   component: CompletePage,
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <MemoryRouter initialEntries={['/complete?brand=BC&number=1234']}>
-          <Story />
-        </MemoryRouter>
-      </ThemeProvider>
-    ),
-  ],
+  tags: ['autodocs'],
 } satisfies Meta<typeof CompletePage>;
 
 export default meta;

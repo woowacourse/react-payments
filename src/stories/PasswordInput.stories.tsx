@@ -1,23 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from '../styles/theme';
 import { within, userEvent, expect } from '@storybook/test';
 import PasswordInput from '../components/PasswordInput';
-import { PasswordProvider } from '../contexts/PasswordContext';
 import { ERROR_MESSAGE } from '../utils/cardValidation';
 
 const meta = {
   title: 'Components/PasswordInput',
   component: PasswordInput,
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <PasswordProvider>
-          <Story />
-        </PasswordProvider>
-      </ThemeProvider>
-    ),
-  ],
+  tags: ['autodocs'],
 } satisfies Meta<typeof PasswordInput>;
 
 export default meta;
