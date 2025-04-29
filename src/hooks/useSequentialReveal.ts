@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import useFormValidation from './useFormValidation';
 import { useBrandContext } from '../contexts/BrandContext';
 import { useNumbersContext } from '../contexts/NumbersContext';
 import { useExpiryDateContext } from '../contexts/ExpiryDateContext';
@@ -10,16 +9,8 @@ function useSequentialReveal() {
   const { numberFields, numberInputRefs } = useNumbersContext();
   const { expiryFields, expiryInputRefs } = useExpiryDateContext();
   const { cvcField, cvcInputRef } = useCvcContext();
-  const { passwordField, passwordInputRef } = usePasswordContext();
+  const { passwordInputRef } = usePasswordContext();
   const { brand, brandSelectRef } = useBrandContext();
-
-  const isFormValid = useFormValidation({
-    numberFields,
-    expiryFields,
-    cvcField,
-    passwordField,
-    selectedBrand: brand,
-  });
 
   const triggers = [
     true,
@@ -70,7 +61,6 @@ function useSequentialReveal() {
   const revealFlags = triggers.map((_, i) => i <= maxIndex);
 
   return {
-    isFormValid,
     revealFlags,
   };
 }

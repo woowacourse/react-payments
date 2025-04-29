@@ -6,4 +6,12 @@ interface InputFieldState {
   errorMessage: string;
 }
 
-export type { InputFieldState };
+interface FormFieldState {
+  brand: string;
+  numberFields: InputFieldState[];
+  expiryFields: InputFieldState[];
+  cvcField: InputFieldState;
+  passwordField: InputFieldState;
+}
+
+export type { InputFieldState, FormFieldState };
