@@ -25,25 +25,32 @@ function useInputField({
   maximumLength,
   validationFunction,
 }: UseInputFieldParams): UseInputFieldReturn {
-  const [fieldState, setFieldState] = useState<InputFieldState>({
-    value: initialValue,
-    hasError: false,
-    placeholder,
-    maximumLength,
-    errorMessage: '',
-  });
+  const [value, setValue] = useState(initialValue);
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const inputValue = event.target.value;
-    const { isValid, errorMessage } = validationFunction(inputValue);
-    setFieldState((prev) => ({
-      ...prev,
-      value: isValid ? inputValue : prev.value,
-      hasError: !isValid,
-      errorMessage: isValid ? '' : errorMessage,
-    }));
+    const next = event.target.value;
+    const { isValid, errorMessage } = validationFunction(next);
+
+    if (isValid) {
+      setValue(next);
+      setHasError(false);
+      setErrorMessage('');
+    } else {
+      setHasError(true);
+      setErrorMessage(errorMessage);
+    }
+  };
+
+  const fieldState: InputFieldState = {
+    value,
+    hasError,
+    errorMessage,
+    placeholder,
+    maximumLength,
   };
 
   return [fieldState, handleChange, inputRef];
@@ -77,15 +84,10 @@ function useMultipleInputFields({
   maximumLength,
   validationFunction,
 }: UseInputFieldsParams): UseInputFieldsReturn {
-  const [fieldStates, setFieldStates] = useState<InputFieldState[]>(() =>
-    initialValues.map((value, idx) => ({
-      value,
-      hasError: false,
-      placeholder: placeholders[idx] || '',
-      maximumLength,
-      errorMessage: '',
-    }))
-  );
+  const [values, setValues] = useState<string[]>(initialValues);
+  const [errors, setErrors] = useState<
+    { hasError: boolean; errorMessage: string }[]
+  >(initialValues.map(() => ({ hasError: false, errorMessage: '' })));
 
   const inputRefs = useRef<RefObject<HTMLInputElement | null>[]>(
     initialValues.map(() => createRef<HTMLInputElement>())
@@ -95,33 +97,37 @@ function useMultipleInputFields({
     event: ChangeEvent<HTMLInputElement>,
     index: number
   ): void => {
-    const inputValue = event.target.value;
+    const next = event.target.value;
     const { isValid, errorMessage } = validationFunction(
-      inputValue,
+      next,
       index,
       maximumLength
     );
 
-    setFieldStates((prev) =>
-      prev.map((state, i) =>
+    setValues((prev) =>
+      prev.map((value, i) => (i === index && isValid ? next : value))
+    );
+    setErrors((prev) =>
+      prev.map((error, i) =>
         i === index
-          ? {
-              ...state,
-              value: isValid ? inputValue : state.value,
-              hasError: !isValid,
-              errorMessage: isValid ? '' : errorMessage,
-            }
-          : state
+          ? { hasError: !isValid, errorMessage: isValid ? '' : errorMessage }
+          : error
       )
     );
 
-    if (isValid && inputValue.length === maximumLength) {
+    if (isValid && next.length === maximumLength) {
       const nextRef = inputRefs[index + 1];
-      if (nextRef && nextRef.current) {
-        nextRef.current.focus();
-      }
+      if (nextRef?.current) nextRef.current.focus();
     }
   };
+
+  const fieldStates: InputFieldState[] = values.map((value, i) => ({
+    value,
+    hasError: errors[i].hasError,
+    errorMessage: errors[i].errorMessage,
+    placeholder: placeholders[i] ?? '',
+    maximumLength,
+  }));
 
   return [fieldStates, handleChange, inputRefs];
 }
