@@ -1,6 +1,7 @@
 import { useMemo } from "react";
+import { ValidCardTuple } from "../../types/CardInformationType";
 
-export const useCheckLengthComplete = <T extends { length: number }>(state: T[], maxLength: number): boolean => {
+export const useCheckLengthComplete = (state: ValidCardTuple, maxLength: number): boolean => {
   return useMemo(() => {
     return state.every((item) => item.length === maxLength);
   }, [state]);

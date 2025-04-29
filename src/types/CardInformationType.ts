@@ -8,6 +8,8 @@ export type CardInformationType = {
   company: CompanyType;
 };
 
+export type ValidCardTuple = UniqueNumberType | ExpirationDateType | CvcNumberType | PasswordType;
+
 export type UniqueNumberType = [string, string, string, string];
 export type ExpirationDateType = [string, string];
 export type CvcNumberType = [string];

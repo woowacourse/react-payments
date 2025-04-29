@@ -57,7 +57,7 @@
 - [ ] component props 타입 해당 컴포넌트에서 관리하기
 - [ ] Select 컴포넌트 불필요한 isSelect 상태 제거
 - [ ] hook 확장자 명 ts 수정
-- [ ] useCheckLengthComplete 인자 state 타입 명시적으로 변경
+- [x] useCheckLengthComplete 인자 state 타입 명시적으로 변경
 - [x] Input 컴포넌트 forwardRef 제거
 - [ ] useAllComplete 훅 every 메소드 bool 네이밍 명시적으로 변경
 - [ ] formContainer의 formUIControllerData useMemo로 메모이제이션하기
