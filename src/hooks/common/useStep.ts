@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { STEP_ORDER } from "../../constants/constant";
 import { isStateCompletesType } from "../../types/CardInformationType";
 import { isErrorCompletesType } from "../../types/useValidationType";
@@ -6,20 +6,21 @@ import { isErrorCompletesType } from "../../types/useValidationType";
 const useStep = (isStateCompletes: isStateCompletesType, isErrorCompletes: isErrorCompletesType) => {
   const [step, setStep] = useState(0);
 
-  useEffect(() => {
-    const currentKey = STEP_ORDER[step];
-    const isStateComplete = isStateCompletes[currentKey];
-    const isErrorComplete = currentKey === "company" ? true : isErrorCompletes[currentKey];
+  const checkCurrentStep = useCallback(
+    (step: number) => {
+      if (STEP_ORDER.length - 1 <= step) return false;
+      const currentKey = STEP_ORDER[step];
+      const isStateComplete = isStateCompletes[currentKey];
+      const isErrorComplete = currentKey === "company" || isErrorCompletes[currentKey];
 
-    if (isStateComplete && isErrorComplete) {
-      setStep((prev) => {
-        if (prev < STEP_ORDER.length - 1) {
-          return prev + 1;
-        }
-        return prev;
-      });
-    }
-  }, [isStateCompletes, isErrorCompletes]);
+      return isStateComplete && isErrorComplete;
+    },
+    [isStateCompletes, isErrorCompletes],
+  );
+
+  useEffect(() => {
+    if (checkCurrentStep(step)) setStep(step + 1);
+  }, [checkCurrentStep]);
 
   return step;
 };
