@@ -59,7 +59,6 @@ const Main = styled.div`
 const InfoMessage = styled.p`
   width: 338px;
   height: 100px;
-  font-family: Noto Sans KR;
   font-weight: 700;
   font-size: 25px;
   line-height: 150%;

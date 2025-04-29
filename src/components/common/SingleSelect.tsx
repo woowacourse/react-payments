@@ -41,7 +41,6 @@ const Select = styled.select<{ isPlaceholder: boolean }>`
   padding: 8px;
   border: 1px solid #ccc;
 
-  font-family: Inter;
   font-weight: 400;
   font-size: 10px;
   line-height: 14px;
@@ -57,7 +56,6 @@ const Option = styled.option<{ isPlaceholder?: boolean }>`
   gap: 6px;
   padding: 7px 73px 7px 10px;
 
-  font-family: Inter;
   font-weight: 400;
   font-size: 10px;
   line-height: 14px;

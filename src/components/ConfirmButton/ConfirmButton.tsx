@@ -36,7 +36,6 @@ const StyledSingleButton = styled(SingleButton)`
   margin: 0 auto;
   display: block;
   border-radius: 5px;
-  font-family: Noto Sans KR;
   font-weight: 700;
   font-size: 16px;
   line-height: 12px;

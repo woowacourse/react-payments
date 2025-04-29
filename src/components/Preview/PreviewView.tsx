@@ -103,7 +103,6 @@ const CardNumberArea = styled.div`
 
 const CardNumber = styled.span`
   width: 38px;
-  font-family: 'Inter';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -125,7 +124,6 @@ const CardPeriodArea = styled.div`
 
 const CardPeriod = styled.span`
   width: 16px;
-  font-family: 'Inter';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -135,7 +133,6 @@ const CardPeriod = styled.span`
 `;
 
 const Separator = styled.span`
-  font-family: 'Inter';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
