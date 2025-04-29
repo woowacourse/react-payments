@@ -7,7 +7,7 @@ const useCardCompany = () => {
 		setCardCompany(value);
 	};
 
-	return { cardCompany, setCardCompany, isComplete, onChange };
+	return { cardCompany, isComplete, onChange };
 };
 
 export default useCardCompany;

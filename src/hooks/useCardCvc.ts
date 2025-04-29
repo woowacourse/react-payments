@@ -22,7 +22,7 @@ const useCardCvc = () => {
 		if (value.length < CVC_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(CVC_MAX_LENGTH));
 	};
 
-	return { cvcNumber, setCvcNumber, error, setError, isComplete, onChange, onBlur };
+	return { cvcNumber, error, isComplete, onChange, onBlur };
 };
 
 export default useCardCvc;

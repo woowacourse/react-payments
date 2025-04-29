@@ -22,7 +22,7 @@ const useCardPassword = () => {
 		if (value.length < PASSWORD_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(PASSWORD_MAX_LENGTH));
 	};
 
-	return { cardPassword, setCardPassword, error, setError, isComplete, onChange, onBlur };
+	return { cardPassword, error, isComplete, onChange, onBlur };
 };
 
 export default useCardPassword;

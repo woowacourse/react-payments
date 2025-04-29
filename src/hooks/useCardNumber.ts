@@ -34,6 +34,6 @@ const useCardNumber = () => {
 		if (value.length < CARD_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.INPUT_LENGTH_LIMIT(CARD_MAX_LENGTH) });
 	};
 
-	return { cardNumber, setCardNumber, error, setError, isComplete, onChange, onBlur };
+	return { cardNumber, error, isComplete, onChange, onBlur };
 };
 export default useCardNumber;

@@ -64,7 +64,7 @@ const useExpirationDate = () => {
 		if (value.length < EXPIRATION_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.MONTH_FORMAT });
 	};
 
-	return { expirationDate, setExpirationDate, error, setError, isComplete, onChange, onBlur };
+	return { expirationDate, error, isComplete, onChange, onBlur };
 };
 
 export default useExpirationDate;
