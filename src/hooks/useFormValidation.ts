@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { InputFieldState } from '../types/models';
 
 interface FormValidationParams {
@@ -9,25 +8,14 @@ interface FormValidationParams {
   selectedBrand: string;
 }
 
-function useFormValidation({
-  numberFields,
-  expiryFields,
-  cvcField,
-  passwordField,
-  selectedBrand,
-}: FormValidationParams): boolean {
-  return useMemo(() => {
-    if (!selectedBrand) return false;
-    const allFields = [
-      ...numberFields,
-      ...expiryFields,
-      cvcField,
-      passwordField,
-    ];
-    return allFields.every(
-      (field) => !field.hasError && field.value.length === field.maximumLength
-    );
-  }, [numberFields, expiryFields, cvcField, passwordField, selectedBrand]);
+function useFormValidation(params: FormValidationParams): boolean {
+  const { numberFields, expiryFields, cvcField, passwordField, selectedBrand } =
+    params;
+  if (!selectedBrand) return false;
+  const allFields = [...numberFields, ...expiryFields, cvcField, passwordField];
+  return allFields.every(
+    (f) => !f.hasError && f.value.length === f.maximumLength
+  );
 }
 
 export default useFormValidation;
