@@ -18,8 +18,6 @@ const CardRegisterCompletePage = () => {
   useEffect(() => {
     if (!cardInfo) {
       navigate('/card-register', { replace: true });
-    } else {
-      window.history.replaceState(null, '', window.location.href);
     }
   }, []);
 
