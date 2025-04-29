@@ -59,7 +59,7 @@
 - [x] hook 확장자 명 ts 수정
 - [x] useCheckLengthComplete 인자 state 타입 명시적으로 변경
 - [x] Input 컴포넌트 forwardRef 제거
-- [ ] useAllComplete 훅 every 메소드 bool 네이밍 명시적으로 변경
+- [x] useAllComplete 훅 every 메소드 bool 네이밍 명시적으로 변경
 - [ ] formContainer의 formUIControllerData useMemo로 메모이제이션하기
 - [ ] FormSectionInput, FormSectionSelect 컴포넌트 export 구문 주석제거
 - [ ] useStep 훅의 useEffect 내부 로직 useCallback으로 분리
