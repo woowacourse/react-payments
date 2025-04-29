@@ -17,16 +17,13 @@ const Select = <T extends Extract<keyof CardInformationType, "company">>({
   // 모달 열고 닫기 상태
   const [isOpen, setIsOpen] = useState(false);
 
-  // 카드 선택이 되었을 때 상태
-  const [isSelect, setIsSelect] = useState(false);
-
   // select의 라벨에 보여줄 데이터
   const [selected, setSelected] = useState(placeholder);
   const selectRef = useRef<HTMLDivElement>(null);
+  const isSelect = selected !== placeholder;
 
   const handleSelect = (item: CompanyType) => {
     setSelected(item);
-    setIsSelect(true);
     setIsOpen(false);
 
     // 상태 업데이트

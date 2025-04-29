@@ -55,7 +55,7 @@
 - [ ] cardInformation 단일 값 분리 (cvc, password)
   - [ ] InputField에서 공통 인터페이스 관리 및 실제 업데이트 로직 상위에서 제공받기
 - [ ] component props 타입 해당 컴포넌트에서 관리하기
-- [ ] Select 컴포넌트 불필요한 isSelect 상태 제거
+- [x] Select 컴포넌트 불필요한 isSelect 상태 제거
 - [x] hook 확장자 명 ts 수정
 - [x] useCheckLengthComplete 인자 state 타입 명시적으로 변경
 - [x] Input 컴포넌트 forwardRef 제거
