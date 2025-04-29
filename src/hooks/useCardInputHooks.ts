@@ -1,154 +1,30 @@
-import { useState, useRef, ChangeEvent, createRef, RefObject } from 'react';
-import { InputFieldState } from '../types/models';
+import { ChangeEvent } from 'react';
+import { UseInputFieldParams, UseInputFieldReturn } from '../types/models';
+import { useInputFieldArray } from './useInputFieldArray';
 
-interface ValidationResult {
-  isValid: boolean;
-  errorMessage: string;
-}
-
-interface UseInputFieldParams {
-  initialValue: string;
-  placeholder: string;
-  maximumLength: number;
-  validationFunction: (value: string) => ValidationResult;
-}
-
-type UseInputFieldReturn = [
-  InputFieldState,
-  (event: ChangeEvent<HTMLInputElement>) => void,
-  RefObject<HTMLInputElement | null>,
-  () => void
-];
-
-function useInputField({
+export function useInputField({
   initialValue,
   placeholder,
   maximumLength,
   validationFunction,
 }: UseInputFieldParams): UseInputFieldReturn {
-  const [value, setValue] = useState(initialValue);
-  const [hasError, setHasError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const next = event.target.value;
-    const { isValid, errorMessage } = validationFunction(next);
-
-    if (isValid) {
-      setValue(next);
-      setHasError(false);
-      setErrorMessage('');
-    } else {
-      setHasError(true);
-      setErrorMessage(errorMessage);
-    }
-  };
-
-  const reset = () => {
-    setValue(initialValue);
-    setHasError(false);
-    setErrorMessage('');
-    if (inputRef.current) {
-      inputRef.current.blur();
-    }
-  };
-
-  const fieldState: InputFieldState = {
-    value,
-    hasError,
-    errorMessage,
-    placeholder,
+  const [fields, handleChange, [ref], resetArray] = useInputFieldArray({
+    initialValues: [initialValue],
+    placeholders: [placeholder],
     maximumLength,
-  };
+    validationFunction: (v) => validationFunction(v),
+  });
 
-  return [fieldState, handleChange, inputRef, reset];
+  const handleSingleChange = (e: ChangeEvent<HTMLInputElement>) =>
+    handleChange(e, 0);
+
+  const reset = () => resetArray();
+
+  return [fields[0], handleSingleChange, ref, reset];
 }
 
-interface ValidationResult {
-  isValid: boolean;
-  errorMessage: string;
-}
+export type UseMultipleInputFieldsReturn = ReturnType<
+  typeof useInputFieldArray
+>;
 
-interface UseInputFieldsParams {
-  initialValues: string[];
-  placeholders: string[];
-  maximumLength: number;
-  validationFunction: (
-    value: string,
-    index: number,
-    maximumLength: number
-  ) => ValidationResult;
-}
-
-type UseInputFieldsReturn = [
-  InputFieldState[],
-  (event: ChangeEvent<HTMLInputElement>, index: number) => void,
-  RefObject<HTMLInputElement | null>[],
-  () => void
-];
-
-function useMultipleInputFields({
-  initialValues,
-  placeholders,
-  maximumLength,
-  validationFunction,
-}: UseInputFieldsParams): UseInputFieldsReturn {
-  const [values, setValues] = useState<string[]>(initialValues);
-  const [errors, setErrors] = useState<
-    { hasError: boolean; errorMessage: string }[]
-  >(initialValues.map(() => ({ hasError: false, errorMessage: '' })));
-
-  const inputRefs = useRef<RefObject<HTMLInputElement | null>[]>(
-    initialValues.map(() => createRef<HTMLInputElement>())
-  ).current;
-
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ): void => {
-    const next = event.target.value;
-    const { isValid, errorMessage } = validationFunction(
-      next,
-      index,
-      maximumLength
-    );
-
-    setValues((prev) =>
-      prev.map((value, i) => (i === index && isValid ? next : value))
-    );
-    setErrors((prev) =>
-      prev.map((error, i) =>
-        i === index
-          ? { hasError: !isValid, errorMessage: isValid ? '' : errorMessage }
-          : error
-      )
-    );
-
-    if (isValid && next.length === maximumLength) {
-      const nextRef = inputRefs[index + 1];
-      if (nextRef?.current) nextRef.current.focus();
-    }
-  };
-
-  const reset = () => {
-    setValues(initialValues);
-    setErrors(initialValues.map(() => ({ hasError: false, errorMessage: '' })));
-    inputRefs.forEach((ref) => {
-      if (ref.current) ref.current.blur();
-    });
-  };
-
-  const fieldStates: InputFieldState[] = values.map((value, i) => ({
-    value,
-    hasError: errors[i].hasError,
-    errorMessage: errors[i].errorMessage,
-    placeholder: placeholders[i] ?? '',
-    maximumLength,
-  }));
-
-  return [fieldStates, handleChange, inputRefs, reset];
-}
-
-export { useInputField, useMultipleInputFields };
+export const useMultipleInputFields = useInputFieldArray;
