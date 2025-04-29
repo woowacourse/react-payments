@@ -18,7 +18,7 @@ export default function CvcSection({ cvc, handleCvcChange }: CvcSection) {
         <InputSection.Label text="CVC" />
 
         <Input
-          pattern="[0-9]{4}"
+          pattern="[0-9]{3}"
           required
           autoFocus={cvc.value === ''}
           onChange={(e) => handleCvcChange(e.target.value)}
