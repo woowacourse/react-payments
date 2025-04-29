@@ -23,10 +23,6 @@ export const Default: Story = {
 	render: (args) => {
 		const [selectedCompany, setSelectedCompany] = useState(args.cardCompany);
 
-		return (
-			<>
-				<Select options={args.options} cardCompany={selectedCompany} onChange={(value) => setSelectedCompany(value)} />
-			</>
-		);
+		return <Select options={args.options} cardCompany={selectedCompany} onChange={(value) => setSelectedCompany(value)} />;
 	},
 };
