@@ -14,7 +14,7 @@ const InputField = ({ label, children, errorMessage }: Props) => {
 		<Container>
 			<Label>{label}</Label>
 			<InputWrapper>{children}</InputWrapper>
-			<Description color={COLORS.ERROR}>{errorMessage && errorMessage}</Description>
+			<Description color={COLORS.ERROR}>{errorMessage}</Description>
 		</Container>
 	);
 };
