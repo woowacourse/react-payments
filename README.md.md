@@ -49,6 +49,21 @@
 
 ---
 
+## 피드백 바탕 리팩토링 사항1
+
+- [ ] Inputfield 컴포넌트 moveFocusOrBlur 훅으로 분리 (ref 전달하기 때문에)
+- [ ] cardInformation 단일 값 분리 (cvc, password)
+  - [ ] InputField에서 공통 인터페이스 관리 및 실제 업데이트 로직 상위에서 제공받기
+- [ ] component props 타입 해당 컴포넌트에서 관리하기
+- [ ] Select 컴포넌트 불필요한 isSelect 상태 제거
+- [ ] hook 확장자 명 ts 수정
+- [ ] useCheckLengthComplete 인자 state 타입 명시적으로 변경
+- [ ] Input 컴포넌트 forwardRef 제거
+- [ ] useAllComplete 훅 every 메소드 bool 네이밍 명시적으로 변경
+- [ ] formContainer의 formUIControllerData useMemo로 메모이제이션하기
+- [ ] FormSectionInput, FormSectionSelect 컴포넌트 export 구문 주석제거
+- [ ] useStep 훅의 useEffect 내부 로직 useCallback으로 분리
+
 추후 반영
 
 - [ ] 유효성 검증 숫자만 입력할 수 있게 변경? (토스 ui 레퍼런스)
