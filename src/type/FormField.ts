@@ -14,8 +14,3 @@ export type FormFieldProps<T, K> = {
   ) => void;
   errorMessage: T;
 };
-
-export type ValidationRule<T, K extends keyof T> = {
-  error: string;
-  validate: (value: string, order: K) => boolean;
-};

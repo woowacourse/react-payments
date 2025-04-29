@@ -8,11 +8,20 @@ import CardCvcSection from '../components/form/CardCvcSection';
 import Button from '../components/button/Button';
 import CardPreview from '../components/cardPreview/CardPreview';
 
-import {CardForm} from '../type/Card';
+import {CardNumber, ExpirationDate} from '../type/Card';
 import {useNavigate} from 'react-router';
 import PATH from '../router/path';
 import useInput from '../hooks/useInput';
 import useErrors from '../hooks/useErrors';
+import {CARD_COMPANY} from '../components/constants/card';
+
+type CardForm = {
+  cardNumber: CardNumber;
+  expirationDate: ExpirationDate;
+  cvcNumber: string;
+  cardCompany: keyof typeof CARD_COMPANY | '';
+  password: string;
+};
 
 const INIT_CARD_NUMBER = {
   first: '',
