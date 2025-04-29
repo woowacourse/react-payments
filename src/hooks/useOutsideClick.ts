@@ -20,7 +20,7 @@ const useOutsideClick = <T extends HTMLElement>(
     return () => {
       document.removeEventListener("click", handleDocumentClick);
     };
-  }, [ref]);
+  }, []);
 
   return ref;
 };
