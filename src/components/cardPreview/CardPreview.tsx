@@ -49,6 +49,12 @@ const formatDate = (expirationDate: ExpirationDate) => {
   return `${month} / ${year}`;
 };
 
+const formatCardNumbers = (section: string, value: string) => {
+  if (section === 'third' || section === 'fourth')
+    return '•'.repeat(value?.length);
+  return value;
+};
+
 const CardPreview = ({cardNumbers, expirationDate, cardCompany}: Props) => {
   const matchedCard = cardBrandRules.find((rule) =>
     rule.validate(cardNumbers.first)
@@ -66,9 +72,7 @@ const CardPreview = ({cardNumbers, expirationDate, cardCompany}: Props) => {
       <CardInfoWrap>
         {Object.entries(cardNumbers).map(([key, value]) => (
           <CardNumbers key={key} $blind={key === 'third' || key === 'fourth'}>
-            {key === 'third' || key === 'fourth'
-              ? '•'.repeat(value?.length)
-              : value}
+            {formatCardNumbers(key, value)}
           </CardNumbers>
         ))}
       </CardInfoWrap>
