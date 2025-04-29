@@ -20,6 +20,8 @@ function CardBrandField({ cardInfo, handleCardInfo }: CardBrandFieldProps) {
   };
 
   const displayText = cardInfo.cardBrand || "카드사를 선택해주세요";
+  const labelId = "card-brand-label";
+  const listboxId = "card-brand-list";
 
   return (
     <DropdownContainer ref={dropdownRef}>
@@ -29,16 +31,23 @@ function CardBrandField({ cardInfo, handleCardInfo }: CardBrandFieldProps) {
         isOpen={isOpen}
         isSelected={!!cardInfo.cardBrand}
         onClick={toggleDropdown}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-labelledby={labelId}
+        aria-controls={listboxId}
       >
         {displayText}
       </DropdownButton>
 
       {isOpen && (
-        <DropdownList>
+        <DropdownList role="listbox" id={listboxId}>
           {CARD_BRAND_LIST.map((brand) => (
             <DropdownItem
               tabIndex={0}
               key={brand}
+              id={`brand-${brand}`}
+              role="option"
+              aria-selected={cardInfo.cardBrand === brand}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   selectBrand(brand);
