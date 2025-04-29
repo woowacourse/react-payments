@@ -1,11 +1,8 @@
 import styled from '@emotion/styled';
 
-interface SingleButtonProps {
-  type?: 'submit' | 'reset' | 'button';
+interface SingleButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-  className?: string;
 }
 
 const SingleButton = ({
