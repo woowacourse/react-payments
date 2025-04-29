@@ -1,10 +1,10 @@
-import * as S from './AddCard.styles';
+import * as S from './AddCardPage.styles';
 import CardPreview from './components/CardPreview/CardPreview';
 import Spacing from '../../components/Spacing/Spacing';
 import AddCardForm from './components/AddCardForm/AddCardForm';
 import { useControlledAddCardState } from './hooks/useControlledAddCardState';
 
-export default function AddCard() {
+export default function AddCardPage() {
   const addFormState = useControlledAddCardState();
   return (
     <S.Wrapper>

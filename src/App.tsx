@@ -1,14 +1,14 @@
-import AddCard from './pages/AddCard/AddCard';
-import AddCardComplete from './pages/AddCardComplete/AddCardComplete';
+import AddCardPage from './pages/AddCard/AddCardPage';
+import AddCardCompletePage from './pages/AddCardComplete/AddCardCompletePage';
+import NotFoundPage from './pages/NotFound/NotFoundPage';
 import { Route, Routes } from 'react-router';
-import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
     <Routes>
-      <Route path="/complete" element={<AddCardComplete />} />
-      <Route path="/" element={<AddCard />} />
-      <Route path="*" element={<NotFound />} />
+      <Route path="/complete" element={<AddCardCompletePage />} />
+      <Route path="/" element={<AddCardPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

@@ -1,10 +1,10 @@
-import NotFound from './NotFound';
+import NotFoundPage from './NotFoundPage';
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router';
 
 const meta = {
-  title: 'Pages/NotFound',
-  component: NotFound,
+  title: 'Pages/NotFoundPage',
+  component: NotFoundPage,
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -20,7 +20,7 @@ const meta = {
       </BrowserRouter>
     ),
   ],
-} satisfies Meta<typeof NotFound>;
+} satisfies Meta<typeof NotFoundPage>;
 
 export default meta;
 

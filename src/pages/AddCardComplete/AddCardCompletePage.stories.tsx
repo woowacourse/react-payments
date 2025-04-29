@@ -1,4 +1,4 @@
-import AddCardComplete from './AddCardComplete';
+import AddCardCompletePage from './AddCardCompletePage';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 
@@ -21,8 +21,8 @@ const withRouter =
   };
 
 const meta = {
-  title: 'Pages/AddCardComplete',
-  component: AddCardComplete,
+  title: 'Pages/AddCardCompletePage',
+  component: AddCardCompletePage,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -33,7 +33,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof AddCardComplete>;
+} satisfies Meta<typeof AddCardCompletePage>;
 
 export default meta;
 

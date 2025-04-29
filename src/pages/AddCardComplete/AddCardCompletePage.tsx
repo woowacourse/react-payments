@@ -1,10 +1,10 @@
-import * as S from './AddCardComplete.styles';
+import * as S from './AddCardCompletePage.styles';
 import CompleteIcon from '../../components/Icon/CompleteIcon';
 import Button from '../../components/Button/Button';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-export default function AddCardComplete() {
+export default function AddCardCompletePage() {
   const location = useLocation();
   const { cardNumber, cardBrandTypeState } = { ...location.state };
   const navigate = useNavigate();

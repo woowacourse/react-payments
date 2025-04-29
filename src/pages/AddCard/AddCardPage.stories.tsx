@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import AddCard from './AddCard';
+import AddCardPage from './AddCardPage';
 import { BrowserRouter } from 'react-router';
 
 const meta = {
-  title: 'Pages/AddCard',
-  component: AddCard,
+  title: 'Pages/AddCardPage',
+  component: AddCardPage,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -21,7 +21,7 @@ const meta = {
       </BrowserRouter>
     ),
   ],
-} satisfies Meta<typeof AddCard>;
+} satisfies Meta<typeof AddCardPage>;
 
 export default meta;
 

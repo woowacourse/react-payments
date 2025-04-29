@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router';
-import * as S from './NotFound.styles';
+import * as S from './NotFoundPage.styles';
 import Button from '../../components/Button/Button';
 
-export default function NotFound() {
+export default function NotFoundPage() {
   const navigate = useNavigate();
   const redirectToHome = () => {
     navigate('/');
