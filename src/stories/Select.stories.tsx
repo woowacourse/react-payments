@@ -3,7 +3,6 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Flex } from '@/components/common/Flex';
-import { Input } from '@/components/common/Input';
 import { Select } from '@/components/common/Select';
 
 const meta = {
@@ -17,7 +16,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof Input>;
+} satisfies Meta<typeof Select>;
 
 export default meta;
 
