@@ -5,7 +5,7 @@ import CardExpirationDate from '../../../../domain/card/CardExpirationDate/CardE
 import CardCVCNumber from '../../../../domain/card/CardCVCNumber/CardCVCNumber';
 import CardPasswordNumber from '../../../../domain/card/CardPasswordNumber/CardPasswordNumber';
 import Button from '../../../../components/Button/Button';
-import { AddCardFormProps } from '../../types';
+import { AddCardFormProps, CardStepKey } from '../../types';
 import { Fragment, ReactNode, useEffect, useState } from 'react';
 import { CARD_STEP, CARD_STEPS } from '../../constants';
 import { useNavigate } from 'react-router';
@@ -41,7 +41,6 @@ export default function AddCardForm({
     handleCardPasswordInputChange,
   } = addFormState;
 
-  type CardStepKey = keyof typeof CARD_STEPS;
   const [steps, setSteps] = useState<(typeof CARD_STEPS)[CardStepKey][]>(
     (_testModeSteps as (typeof CARD_STEPS)[CardStepKey][]) || [CARD_STEP[0]],
   );
