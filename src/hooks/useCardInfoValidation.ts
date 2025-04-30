@@ -25,7 +25,7 @@ function useCardInfoValidation(cardInfo: CardInfo) {
 
   return (
     isCardNumberError.some((isError) => isError) ||
-    isCardExpirationError.some((isError) => isError) ||
+    Object.values(isCardExpirationError).some((isError) => isError) ||
     isCardCVCError ||
     isCardPasswordError ||
     isSomeEmptyValue

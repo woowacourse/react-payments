@@ -23,7 +23,7 @@ function useDynamicRenderingStep(cardInfo: CardInfo) {
     !isCardNumberError.some((isError) => isError) &&
       !Object.values(cardInfo.number).some((value) => value === ''),
     cardInfo.company !== '',
-    !isCardExpirationError.some((isError) => isError) &&
+    !Object.values(isCardExpirationError).some((isError) => isError) &&
       !Object.values(cardInfo.expiration).some((value) => value === ''),
     !isCardCVCError && cardInfo.cvc !== '',
     !isCardPasswordError && cardInfo.passwordFront,
