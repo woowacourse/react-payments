@@ -11,8 +11,10 @@ interface DropdownInputProps {
 
 function DropdownInput({ value, setValue, options, placeholder }: DropdownInputProps) {
   const [isOpen, setIsOpen] = useState(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   useClickOutsideHandler(dropdownRef, () => setIsOpen(false), isOpen);
+
   const isPlaceholder = value === '';
 
   return (
