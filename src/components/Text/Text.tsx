@@ -1,10 +1,8 @@
 import React from "react";
 import styles from "./Text.module.css";
 
-export type TextType = "title" | "subtitle" | "description" | "error";
-
 interface TextProps {
-  textType?: TextType;
+  textType?: string;
   children: React.ReactNode;
 }
 

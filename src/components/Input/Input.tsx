@@ -2,15 +2,13 @@ import React from "react";
 import styles from "./Input.module.css";
 
 type InputProps = {
-  textType?: TextType;
+  textType?: string;
   onChange: (value: string) => void;
   value: string;
   placeholder?: string;
   errorMessage?: string;
   autoFocus?: boolean;
 };
-
-export type TextType = "text" | "password";
 
 const DEFAULT_PLACEHOLDER = "1234";
 const DEFAULT_ERROR_MESSAGE = "";
