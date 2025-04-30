@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 import { CardFormProps, FormData } from './CardFormFiled.types';
 
 import { CardInputLayout } from '../../common/CardInputLayout';
@@ -21,7 +23,15 @@ export const BrandForm = ({ context, onNext }: Props<CardForm['brand']>) => {
       headerText="카드사를 선택해 주세요."
       description="현재 국내 카드사만 가능합니다."
     >
-      <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
+      <Flex
+        direction="column"
+        alignItems="flex-start"
+        width="100%"
+        gap="4px"
+        css={css`
+          margin-bottom: 20px;
+        `}
+      >
         <Select selectedOptions={brandFormData ?? '전체'}>
           {categories.map((category) => (
             <Select.Option
