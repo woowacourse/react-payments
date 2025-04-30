@@ -2,11 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import ResultPage from "./pages/ResultPage/ResultPage";
 import CardFormPage from "./pages/CardFormPage/CardFormPage";
-
-const PAYMENTS_ROUTE = {
-  CARD_FORM: "/",
-  RESULT: "/result",
-};
+import { PAYMENTS_ROUTE } from "./constants/PaymentsRoute";
 
 function App() {
   return (

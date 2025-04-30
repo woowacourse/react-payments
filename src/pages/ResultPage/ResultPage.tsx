@@ -2,10 +2,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Text from "../../components/Text/Text";
 import styles from "./ResultPage.module.css";
+import { PAYMENTS_ROUTE } from "../../constants/PaymentsRoute";
 
 export default function ResultPage() {
   const location = useLocation();
   const navigate = useNavigate();
+  if (!location.state) {
+    return <div>올바른 접근이 아닙니다.</div>;
+  }
   const { firstCardNumber, cardBrand } = location.state;
 
   return (
@@ -20,7 +24,7 @@ export default function ResultPage() {
       <Button
         text="확인"
         onClick={() => {
-          navigate("/");
+          navigate(PAYMENTS_ROUTE.CARD_FORM);
         }}
       />
     </div>

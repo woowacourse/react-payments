@@ -14,6 +14,7 @@ import useCardBrandSelect from "../../hooks/useCardBrandSelect";
 import useCardPasswordInput from "../../hooks/useCardPasswordInput";
 import useStep from "../../hooks/useStep";
 import { CARD_STEP } from "../../constants/CardStep";
+import { PAYMENTS_ROUTE } from "../../constants/PaymentsRoute";
 
 export default function CardFormPage() {
   const { cardNumbers, cardNumbersError, onCardNumberChange } =
@@ -32,7 +33,7 @@ export default function CardFormPage() {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    navigate("/result", {
+    navigate(PAYMENTS_ROUTE.RESULT, {
       state: {
         firstCardNumber: cardNumbers.FIRST,
         cardBrand: cardBrand,
