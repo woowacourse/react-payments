@@ -3,12 +3,17 @@ import "./App.css";
 import ResultPage from "./pages/ResultPage/ResultPage";
 import CardFormPage from "./pages/CardFormPage/CardFormPage";
 
+const PAYMENTS_ROUTE = {
+  CARD_FORM: "/",
+  RESULT: "/result",
+};
+
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<CardFormPage />} />
-        <Route path="/result" element={<ResultPage />} />
+        <Route path={PAYMENTS_ROUTE.CARD_FORM} element={<CardFormPage />} />
+        <Route path={PAYMENTS_ROUTE.RESULT} element={<ResultPage />} />
       </Routes>
     </div>
   );
