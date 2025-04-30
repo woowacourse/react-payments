@@ -1,5 +1,5 @@
 import Input from "../../../components/Input/Input";
-import styles from "./CardExpirationDate.module.css";
+import styles from "./CardExpirationDateInput.module.css";
 import {
   EXPIRATION_FIELDS,
   type ExpirationKey,
@@ -8,7 +8,6 @@ import { indexToExpirationKey } from "../../../utils/indexToExpirationKey";
 import Text from "../../../components/Text/Text";
 import { useRef } from "react";
 import { moveFocusToNextInput } from "../../../utils/moveFocusToNextInput";
-import { EXPIRATION_DATE } from "../../../hooks/useExpirationDateInput";
 import { CARD_STEP } from "../../../constants/CardStep";
 import { CARD_INPUT_LIMIT } from "../../../constants/CardInputLimit";
 
@@ -28,7 +27,7 @@ const EXPIRATION_DATE_LABEL = {
   PLACE_HOLDER_MOMTH: "MM",
 } as const;
 
-export default function CardExpirationDate({
+export default function CardExpirationDateInput({
   handleChange,
   handleStep,
   step,

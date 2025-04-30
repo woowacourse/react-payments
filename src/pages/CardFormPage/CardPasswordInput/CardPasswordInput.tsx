@@ -1,4 +1,4 @@
-import styles from "./CardPassword.module.css";
+import styles from "./CardPasswordInput.module.css";
 import Input from "../../../components/Input/Input";
 import Text from "../../../components/Text/Text";
 import { CARD_STEP } from "../../../constants/CardStep";
@@ -18,7 +18,7 @@ const CARD_PASSWORD_LABEL = {
   SUBTITLE: `비밀번호 앞 ${CARD_INPUT_LIMIT.PASSWORD_MAX_LENGTH}자리`,
 } as const;
 
-export default function CardPassword({
+export default function CardPasswordInput({
   handleChange,
   handleStep,
   step,

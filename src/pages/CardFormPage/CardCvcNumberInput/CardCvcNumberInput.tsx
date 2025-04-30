@@ -1,4 +1,4 @@
-import styles from "./CardCvcNumber.module.css";
+import styles from "./CardCvcNumberInput.module.css";
 import Input from "../../../components/Input/Input";
 import Text from "../../../components/Text/Text";
 import { CARD_STEP } from "../../../constants/CardStep";
@@ -18,7 +18,7 @@ const CARD_CVC_NUMBER_LABEL = {
   PLACE_HOLDER: "123",
 } as const;
 
-export default function CardCvcNumber({
+export default function CardCvcNumberInput({
   handleChange,
   handleStep,
   step,

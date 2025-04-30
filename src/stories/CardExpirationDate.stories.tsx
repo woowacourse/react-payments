@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardExpirationDate from "../pages/CardFormPage/CardExpirationDate/CardExpirationDate";
+import CardExpirationDate from "../pages/CardFormPage/CardExpirationDateInput/CardExpirationDateInput";
 
 const meta: Meta<typeof CardExpirationDate> = {
   title: "Example/CardExpirationDate",

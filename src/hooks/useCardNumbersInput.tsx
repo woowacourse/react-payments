@@ -3,9 +3,10 @@ import { isNumber, isUnderMaxLength } from "../validation/validate";
 import { indexToCardNumberKey } from "../utils/indexToCardNumberKey";
 import type { CardKey } from "../types/cardKeyTypes";
 import { useError } from "./useError";
+import { CARD_INPUT_LIMIT } from "../constants/CardInputLimit";
 
 const CARD_NUMBER_ERROR_MESSAGE = {
-  INVALID_LENGTH_ERROR: `카드 번호는 자리 ${CARD_NUMBER_LIMIT.CARD_NUMBER_MAX_LENGTH}숫자여야 합니다.`,
+  INVALID_LENGTH_ERROR: `카드 번호는 자리 ${CARD_INPUT_LIMIT.CARD_NUMBER_MAX_LENGTH}숫자여야 합니다.`,
   NOT_NUMBERIC_ERROR: "숫자만 입력 가능합니다.",
 } as const;
 
@@ -43,7 +44,7 @@ export default function useCardNumbersInput() {
 }
 
 const validateCardNumbers = (value: string, key: CardKey) => {
-  if (!isUnderMaxLength(value.length, CARD_NUMBER_LIMIT.CARD_NUMBER_MAX_LENGTH))
+  if (!isUnderMaxLength(value.length, CARD_INPUT_LIMIT.CARD_NUMBER_MAX_LENGTH))
     return {
       errorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH_ERROR,
       key: key,

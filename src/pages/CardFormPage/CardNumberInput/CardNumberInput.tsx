@@ -1,5 +1,5 @@
 import Input from "../../../components/Input/Input";
-import styles from "./CardNumber.module.css";
+import styles from "./CardNumberInput.module.css";
 import { indexToCardNumberKey } from "../../../utils/indexToCardNumberKey";
 import { CARD_NUMBER_FIELDS, type CardKey } from "../../../types/cardKeyTypes";
 import Text from "../../../components/Text/Text";
@@ -22,7 +22,7 @@ const CARD_NUMBER_LABEL = {
   SUBTITLE: "카드 번호",
 } as const;
 
-export default function CardNumber({
+export default function CardNumberInput({
   handleChange,
   handleStep,
   step,

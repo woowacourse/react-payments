@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardPassword from "../pages/CardFormPage/CardPassword/CardPassword";
+import CardPassword from "../pages/CardFormPage/CardPasswordInput/CardPasswordInput";
 
 const meta: Meta<typeof CardPassword> = {
   title: "Example/CardPassword",

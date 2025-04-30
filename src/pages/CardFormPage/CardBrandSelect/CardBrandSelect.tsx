@@ -1,4 +1,4 @@
-import styles from "./CardBrand.module.css";
+import styles from "./CardBrandSelect.module.css";
 import Text from "../../../components/Text/Text";
 import Select from "../../../components/Select/select";
 import { CARD_BRAND_INFO } from "../../../constants/CardBrandInfo";
@@ -17,7 +17,7 @@ const CARD_NUMBER_LABEL = {
   PLACEHOLDER: "카드 번호",
 } as const;
 
-export default function CardBrand({
+export default function CardBrandSelect({
   handleChange,
   step,
   handleStep,
