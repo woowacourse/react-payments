@@ -26,11 +26,13 @@ export const useSingleCardInput = ({ state, setState, onValid, valueLength }: Pr
     setState(updatedState);
     if (!isValid) return setError(validateErrorMessage);
 
-    checkAndProceed(updatedState);
+    if (state.value.length === valueLength) {
+      handleNextStep(updatedState);
+    }
   };
 
-  const checkAndProceed = (state: CardInputItem) => {
-    if (state.value.length === valueLength && state.isValid) {
+  const handleNextStep = (state: CardInputItem) => {
+    if (state.isValid) {
       onValid();
     }
   };

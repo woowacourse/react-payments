@@ -28,6 +28,16 @@ export const useCardNumber = ({ cardNumbers, setCardNumbers, onValid }: Props) =
     [cardNumbers.length]
   );
 
+  const isAllFieldsValid = (updatedCardNumbers: CardInputItem[]) => {
+    return updatedCardNumbers.every((cardNumber) => cardNumber.isValid);
+  };
+
+  const isAllFieldsFilled = (updatedCardNumbers: CardInputItem[]) => {
+    return updatedCardNumbers.every(
+      (cardNumber) => cardNumber.value.length === CARD_FILED_CONFIG.cardNumber.valueLength
+    );
+  };
+
   const handleChange = useCallback(
     (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
@@ -44,23 +54,12 @@ export const useCardNumber = ({ cardNumbers, setCardNumbers, onValid }: Props) =
       if (newValue.length === CARD_FILED_CONFIG.cardNumber.valueLength) {
         moveFocusToNext(index);
       }
-      checkAndProceed(updatedCardNumbers);
-    },
-    [cardNumbers]
-  );
 
-  const checkAndProceed = useCallback(
-    (updatedCardNumbers: CardInputItem[]) => {
-      const isValid = updatedCardNumbers.every((cardNumber) => cardNumber.isValid);
-      const allFilled = updatedCardNumbers.every(
-        (cardNumber) => cardNumber.value.length === CARD_FILED_CONFIG.cardNumber.valueLength
-      );
-
-      if (isValid && allFilled && onValid) {
+      if (isAllFieldsValid(updatedCardNumbers) && isAllFieldsFilled(updatedCardNumbers)) {
         onValid();
       }
     },
-    [onValid]
+    [cardNumbers]
   );
 
   const setInputRef = useCallback((el: HTMLInputElement | null, index: number) => {

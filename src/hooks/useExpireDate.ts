@@ -33,6 +33,14 @@ export const useExpireDate = ({ expireDates, setExpireDates, onValid }: Props) =
     [expireDates.length]
   );
 
+  const isAllFieldsValid = (fields: CardInputItem[]): boolean => {
+    return fields.every((field) => field.isValid);
+  };
+
+  const isAllFieldsFilled = (fields: CardInputItem[]): boolean => {
+    return fields.every((field) => field.value.length === CARD_FILED_CONFIG.expireDate.valueLength);
+  };
+
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
       const newValue = e.target.value;
@@ -43,12 +51,16 @@ export const useExpireDate = ({ expireDates, setExpireDates, onValid }: Props) =
       updatedCardNumbers[index].isValid = isValid;
 
       setExpireDates(updatedCardNumbers);
+
       if (!isValid) return setError(errorMessage);
 
       if (newValue.length === CARD_FILED_CONFIG.expireDate.valueLength) {
         moveFocusToNext(index);
       }
-      checkAndProceed(updatedCardNumbers);
+
+      if (isAllFieldsValid(updatedCardNumbers) && isAllFieldsFilled(updatedCardNumbers)) {
+        onValid();
+      }
     },
     [expireDates]
   );
@@ -90,20 +102,6 @@ export const useExpireDate = ({ expireDates, setExpireDates, onValid }: Props) =
 
     return { isValid: true, errorMessage: '' };
   };
-
-  const checkAndProceed = useCallback(
-    (updatedCardNumbers: CardInputItem[]) => {
-      const isValid = updatedCardNumbers.every((cardNumber) => cardNumber.isValid);
-      const allFilled = updatedCardNumbers.every(
-        (cardNumber) => cardNumber.value.length === CARD_FILED_CONFIG.expireDate.valueLength
-      );
-
-      if (isValid && allFilled && onValid) {
-        onValid();
-      }
-    },
-    [onValid]
-  );
 
   const setInputRef = (el: HTMLInputElement | null, index: number) => {
     if (el) inputRefs.current[index] = el;
