@@ -142,7 +142,6 @@ export default Main;
 
 const MainContainer = styled.div`
   width: 376px;
-  height: calc(100vh - 30) px;
   padding: 77px 30px 20px;
   margin: auto;
 `;

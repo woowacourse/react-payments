@@ -5,9 +5,9 @@ type Props = {
   bgColor?: string;
 } & ComponentProps<'button'>;
 
-const Button = ({children, bgColor = '#333', onClick, ...props}: Props) => {
+const Button = ({children, bgColor = '#333', ...props}: Props) => {
   return (
-    <Container onClick={onClick} bgColor={bgColor} {...props}>
+    <Container bgColor={bgColor} {...props}>
       {children}
     </Container>
   );
