@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import AddCardPage from './AddCardPage';
-import { BrowserRouter } from 'react-router';
 
 const meta = {
   title: 'Pages/AddCardPage',
@@ -14,13 +13,6 @@ const meta = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    ),
-  ],
 } satisfies Meta<typeof AddCardPage>;
 
 export default meta;
@@ -28,5 +20,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  name: '기본 모바일 화면',
+  parameters: {
+    initialEntries: [
+      {
+        state: {},
+      },
+    ],
+  },
 };

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import AddCardForm from './AddCardForm';
-import { BrowserRouter } from 'react-router';
 import { CARD_STEPS } from '../../constants';
 import { useState } from 'react';
 
@@ -8,13 +7,6 @@ const meta = {
   title: 'Pages/AddCard/AddCardForm',
   component: AddCardForm,
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    ),
-  ],
 } satisfies Meta<typeof AddCardForm>;
 
 export default meta;
@@ -22,6 +14,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  parameters: {
+    initialEntries: [
+      {
+        state: {},
+      },
+    ],
+  },
   args: {
     addFormState: {
       cardNumber: {
