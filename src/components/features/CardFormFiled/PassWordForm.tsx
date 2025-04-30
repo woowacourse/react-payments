@@ -10,7 +10,7 @@ import { CardForm } from '@/hooks/useCardFormState';
 import { useSingleCardInput } from '@/hooks/useSingleCardInput';
 
 type Props<T> = CardFormProps & FormData<T>;
-export const PassWordForm = ({ context, onNext }: Props<CardForm['cvc']>) => {
+export const PassWordForm = ({ context, onNext }: Props<CardForm['password']>) => {
   const { state: passWordFormData, setState: setPassWordFormData } = context;
 
   const {
