@@ -1,6 +1,8 @@
 import styles from "./CardPassword.module.css";
 import Input from "../../../components/Input/Input";
 import Text from "../../../components/Text/Text";
+import { CARD_STEP } from "../../../constants/CardStep";
+import { CARD_INPUT_LIMIT } from "../../../constants/CardInputLimit";
 
 interface CardPasswordProps {
   handleChange: (value: string) => void;
@@ -12,8 +14,8 @@ interface CardPasswordProps {
 
 const CARD_PASSWORD_LABEL = {
   TITLE: "비밀번호를 입력해주세요",
-  DESCRIPTION: "앞의 2자리를 입력해주세요",
-  SUBTITLE: "비밀번호 앞 2자리",
+  DESCRIPTION: `앞의 ${CARD_INPUT_LIMIT.PASSWORD_MAX_LENGTH}자리를 입력해주세요`,
+  SUBTITLE: `비밀번호 앞 ${CARD_INPUT_LIMIT.PASSWORD_MAX_LENGTH}자리`,
 } as const;
 
 export default function CardPassword({
@@ -53,5 +55,9 @@ function canGoToNextStep(
   value: string,
   errorMessage: string
 ) {
-  return currentStep === 4 && value.length === 2 && errorMessage === "";
+  return (
+    currentStep === CARD_STEP.PASSWORD &&
+    value.length === CARD_INPUT_LIMIT.PASSWORD_MAX_LENGTH &&
+    errorMessage === ""
+  );
 }

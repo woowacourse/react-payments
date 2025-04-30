@@ -2,6 +2,7 @@ import styles from "./CardBrand.module.css";
 import Text from "../../../components/Text/Text";
 import Select from "../../../components/Select/select";
 import { CARD_BRAND_INFO } from "../../../constants/CardBrandInfo";
+import { CARD_STEP } from "../../../constants/CardStep";
 
 interface CardBrandProps {
   handleChange: (brand: string) => void;
@@ -24,7 +25,7 @@ export default function CardBrand({
 }: CardBrandProps) {
   const handleSelectChange = (value: string) => {
     handleChange(value);
-    if (value && step === 0) {
+    if (value && step === CARD_STEP.BRAND) {
       handleStep();
     }
   };

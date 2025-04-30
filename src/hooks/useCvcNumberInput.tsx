@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { isNumber, isUnderMaxLength } from "../validation/validate";
-
-const CVC_NUMBER_LIMIT = {
-  MAX_LENGTH: 3,
-} as const;
+import { CARD_INPUT_LIMIT } from "../constants/CardInputLimit";
 
 const CVC_NUMBER_ERROR_MESSAGE = {
-  INVALID_LENGTH_ERROR: `CVC 번호는 ${CVC_NUMBER_LIMIT.MAX_LENGTH}자리 숫자여야 합니다.`,
+  INVALID_LENGTH_ERROR: `CVC 번호는 ${CARD_INPUT_LIMIT.CVC_NUMBER_MAX_LENGTH}자리 숫자여야 합니다.`,
   NOT_NUMBERIC_ERROR: "숫자만 입력 가능합니다.",
 };
 
@@ -19,7 +16,7 @@ export default function useCvcNumberInput() {
     setCvcError(errorMesssage);
 
     if (errorMesssage) return;
-    setCardCvcNumbers(value.slice(0, CVC_NUMBER_LIMIT.MAX_LENGTH));
+    setCardCvcNumbers(value.slice(0, CARD_INPUT_LIMIT.CVC_NUMBER_MAX_LENGTH));
   };
 
   return {
@@ -30,7 +27,7 @@ export default function useCvcNumberInput() {
 }
 
 const validateCvcNumbers = (value: string) => {
-  if (!isUnderMaxLength(value.length, CVC_NUMBER_LIMIT.MAX_LENGTH))
+  if (!isUnderMaxLength(value.length, CARD_INPUT_LIMIT.CVC_NUMBER_MAX_LENGTH))
     return CVC_NUMBER_ERROR_MESSAGE.INVALID_LENGTH_ERROR;
 
   if (!isNumber(value)) return CVC_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC_ERROR;

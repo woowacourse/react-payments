@@ -1,6 +1,8 @@
 import styles from "./CardCvcNumber.module.css";
 import Input from "../../../components/Input/Input";
 import Text from "../../../components/Text/Text";
+import { CARD_STEP } from "../../../constants/CardStep";
+import { CARD_INPUT_LIMIT } from "../../../constants/CardInputLimit";
 
 interface CardCvcNumberProps {
   handleChange: (value: string) => void;
@@ -51,5 +53,9 @@ function canGoToNextStep(
   value: string,
   errorMessage: string
 ) {
-  return currentStep === 3 && value.length === 3 && errorMessage === "";
+  return (
+    currentStep === CARD_STEP.CVC &&
+    value.length === CARD_INPUT_LIMIT.CVC_NUMBER_MAX_LENGTH &&
+    errorMessage === ""
+  );
 }

@@ -7,7 +7,10 @@ import {
 import { indexToExpirationKey } from "../../../utils/indexToExpirationKey";
 import Text from "../../../components/Text/Text";
 import { useRef } from "react";
-import { moveFocusToNextInput } from "../../../utils/moveFoucseToNextInput";
+import { moveFocusToNextInput } from "../../../utils/moveFocusToNextInput";
+import { EXPIRATION_DATE } from "../../../hooks/useExpirationDateInput";
+import { CARD_STEP } from "../../../constants/CardStep";
+import { CARD_INPUT_LIMIT } from "../../../constants/CardInputLimit";
 
 interface CardExpirationDateProps {
   handleChange: (value: string, index: number) => void;
@@ -42,7 +45,7 @@ export default function CardExpirationDate({
   const handleInputChange = (value: string, index: number) => {
     handleChange(value, index);
 
-    if (value.length < 2) return;
+    if (value.length < CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH) return;
 
     moveFocusToNextInput(inputRefs, EXPIRATION_FIELDS.length, index);
 
@@ -85,9 +88,9 @@ function canGoToNextStep(
   errorMessage: string
 ) {
   return (
-    currentStep === 2 &&
+    currentStep === CARD_STEP.EXPIRATION &&
     index === EXPIRATION_FIELDS.length - 1 &&
-    value.length === 2 &&
+    value.length === CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH &&
     errorMessage === ""
   );
 }

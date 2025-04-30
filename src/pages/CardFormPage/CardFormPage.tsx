@@ -13,6 +13,7 @@ import PreviewCardLayout from "../../components/PreviewCard/PreviewCardLayout";
 import useCardBrandSelect from "../../hooks/useCardBrandSelect";
 import useCardPasswordInput from "../../hooks/useCardPasswordInput";
 import useStep from "../../hooks/useStep";
+import { CARD_STEP } from "../../constants/CardStep";
 
 export default function CardFormPage() {
   const { cardNumbers, cardNumbersError, onCardNumberChange } =
@@ -57,7 +58,7 @@ export default function CardFormPage() {
         cardExpirationDate={cardExpirationDate}
       />
       <form className={styles["card-form"]}>
-        {step > 3 && (
+        {step >= CARD_STEP.PASSWORD && (
           <CardPassword
             handleChange={onPasswordChange}
             step={step}
@@ -66,7 +67,7 @@ export default function CardFormPage() {
             errorMessage={passwordError}
           />
         )}
-        {step > 2 && (
+        {step >= CARD_STEP.CVC && (
           <CardCvcNumber
             handleChange={onCvcNumberChange}
             step={step}
@@ -75,7 +76,7 @@ export default function CardFormPage() {
             errorMessage={cvcNumbersError}
           />
         )}
-        {step > 1 && (
+        {step >= CARD_STEP.EXPIRATION && (
           <CardExpirationDate
             handleChange={onExpirationDateChange}
             step={step}
@@ -84,7 +85,7 @@ export default function CardFormPage() {
             errorMessage={cardExpirationDateError}
           />
         )}
-        {step > 0 && (
+        {step >= CARD_STEP.NUMBER && (
           <CardNumber
             handleChange={onCardNumberChange}
             step={step}
@@ -100,7 +101,9 @@ export default function CardFormPage() {
           errorMessage={cardBrandError}
         />
       </form>
-      {step > 4 && !hasError && <Button text="확인" onClick={handleSubmit} />}
+      {step >= CARD_STEP.CONFIRM && !hasError && (
+        <Button text="확인" onClick={handleSubmit} />
+      )}
     </div>
   );
 }

@@ -7,16 +7,12 @@ import {
 import type { ExpirationKey } from "../types/cardKeyTypes";
 import { indexToExpirationKey } from "../utils/indexToExpirationKey";
 import { useError } from "./useError";
+import { CARD_INPUT_LIMIT } from "../constants/CardInputLimit";
 
-const EXPIRATION_DATE_LIMIT = {
-  MAX_LENGTH: 2,
-  MIN_MONTH: 1,
-  MAX_MONTH: 12,
-};
 const EXPIRATION_DATE_ERROR_MESSAGE = {
-  INVALID_LENGTH_ERROR: `${EXPIRATION_DATE_LIMIT.MAX_LENGTH}자리까지 입력 가능합니다.`,
+  INVALID_LENGTH_ERROR: `${CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH}자리까지 입력 가능합니다.`,
   NOT_NUMBERIC_ERROR: "숫자만 입력 가능합니다.",
-  MONTH_RANGE_ERROR: `${EXPIRATION_DATE_LIMIT.MIN_MONTH}부터 ${EXPIRATION_DATE_LIMIT.MAX_MONTH} 사이의 숫자를 입력하세요.`,
+  MONTH_RANGE_ERROR: `${CARD_INPUT_LIMIT.EXPIRATION_DATE_MIN_MONTH}부터 ${CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_MONTH} 사이의 숫자를 입력하세요.`,
 } as const;
 
 export const EXPIRATION_DATE: Record<ExpirationKey, string> = {
@@ -53,7 +49,9 @@ export default function useExpirationDateInput() {
 }
 
 const validateExpirationDate = (value: string, key: ExpirationKey) => {
-  if (!isUnderMaxLength(value.length, EXPIRATION_DATE_LIMIT.MAX_LENGTH)) {
+  if (
+    !isUnderMaxLength(value.length, CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH)
+  ) {
     return {
       errorMessage: EXPIRATION_DATE_ERROR_MESSAGE.INVALID_LENGTH_ERROR,
       key: key,
@@ -69,7 +67,7 @@ const validateExpirationDate = (value: string, key: ExpirationKey) => {
 
   if (
     key === "MONTH" &&
-    value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH &&
+    value.length === CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH &&
     !isValidMonth(Number(value))
   ) {
     return {
@@ -78,7 +76,10 @@ const validateExpirationDate = (value: string, key: ExpirationKey) => {
     };
   }
 
-  if (key === "YEAR" && value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH) {
+  if (
+    key === "YEAR" &&
+    value.length === CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH
+  ) {
     const currentYear = new Date().getFullYear() % 100;
     if (Number(value) < currentYear) {
       return {

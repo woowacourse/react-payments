@@ -4,7 +4,9 @@ import { indexToCardNumberKey } from "../../../utils/indexToCardNumberKey";
 import { CARD_NUMBER_FIELDS, type CardKey } from "../../../types/cardKeyTypes";
 import Text from "../../../components/Text/Text";
 import { useRef } from "react";
-import { moveFocusToNextInput } from "../../../utils/moveFoucseToNextInput";
+import { moveFocusToNextInput } from "../../../utils/moveFocusToNextInput";
+import { CARD_STEP } from "../../../constants/CardStep";
+import { CARD_INPUT_LIMIT } from "../../../constants/CardInputLimit";
 
 interface CardNumberProps {
   handleChange: (value: string, index: number) => void;
@@ -37,7 +39,7 @@ export default function CardNumber({
   const handleInputChange = (value: string, index: number) => {
     handleChange(value, index);
 
-    if (value.length < 4) return;
+    if (value.length < CARD_INPUT_LIMIT.CARD_NUMBER_MAX_LENGTH) return;
 
     moveFocusToNextInput(inputRefs, CARD_NUMBER_FIELDS.length, index);
 
@@ -77,9 +79,9 @@ const canGoToNextStep = (
   errorMessage: string
 ) => {
   return (
-    currentStep === 1 &&
+    currentStep === CARD_STEP.NUMBER &&
     index === CARD_NUMBER_FIELDS.length - 1 &&
-    value.length === 4 &&
+    value.length === CARD_INPUT_LIMIT.CARD_NUMBER_MAX_LENGTH &&
     errorMessage === ""
   );
 };
