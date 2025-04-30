@@ -1,38 +1,41 @@
 import styled from '@emotion/styled';
 
-export interface PreviewViewProps {
-  cardNumbers: string[];
+interface PreviewViewProps {
+  numbers: string[];
   period: string[];
+  cardBrandColor: string;
   isPeriodSeparatorShowing: boolean;
   cardMethodSrc: string | null;
 }
 
-const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
+const NUMBER_VISIBLE_THRESHOLD = 2;
 const SEPARATOR = '/';
+const NUMBER_SHADE = '•';
 
 const PreviewView = ({
-  cardNumbers,
+  numbers,
   period,
+  cardBrandColor,
   isPeriodSeparatorShowing,
   cardMethodSrc,
 }: PreviewViewProps) => {
   return (
     <PreviewContainer data-testid="preview-component">
-      <CardFrame>
+      <CardFrame backgroundColor={cardBrandColor}>
         <ICChip />
         {cardMethodSrc && (
-          <CardMethod
+          <CardBrand
             src={cardMethodSrc}
             data-testid="card-method"
             alt="Card Method"
           />
         )}
         <CardNumberArea>
-          {cardNumbers.map((number, index) => (
+          {numbers.map((number, index) => (
             <CardNumber key={index}>
-              {index < CARD_NUMBER_VISIBLE_THRESHOLD
+              {index < NUMBER_VISIBLE_THRESHOLD
                 ? number
-                : '•'.repeat(number.length)}
+                : NUMBER_SHADE.repeat(number.length)}
             </CardNumber>
           ))}
         </CardNumberArea>
@@ -57,7 +60,7 @@ const PreviewContainer = styled.div`
   padding: 34px 0 45px;
 `;
 
-const CardFrame = styled.div`
+const CardFrame = styled.div<{ backgroundColor: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +68,7 @@ const CardFrame = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.colors.cardBackground};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   box-shadow: 3px 3px 5px 0px #00000040;
   position: relative;
 `;
@@ -135,7 +138,7 @@ const Separator = styled.span`
   color: ${({ theme }) => theme.colors.cardText};
 `;
 
-const CardMethod = styled.img`
+const CardBrand = styled.img`
   width: 36px;
   height: 22px;
   position: absolute;

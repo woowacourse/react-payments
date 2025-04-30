@@ -1,28 +1,28 @@
 import styled from '@emotion/styled';
-import { useCallback } from 'react';
-import {
-  CardNumberInfo,
-  CVCNumberInfo,
-  ExpirationPeriodInfo,
-} from '../../types/models';
+import { ChangeEvent, FocusEvent, RefObject, useCallback } from 'react';
+import { InputFieldState } from '../../types/models';
 
 interface InputTextsProps {
   label: string;
-  dataModels: CardNumberInfo[] | ExpirationPeriodInfo[] | CVCNumberInfo;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  dataModels: InputFieldState | InputFieldState[];
+  inputRefs: RefObject<HTMLInputElement | null>[];
+  onChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  type?: string;
 }
 
 const InputTexts = ({
   label,
   dataModels,
+  inputRefs,
   onChange,
   onFocus,
   onBlur,
+  type = 'text',
 }: InputTextsProps) => {
   const onChangeAt = useCallback(
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       onChange(e, index);
     },
     []
@@ -36,26 +36,28 @@ const InputTexts = ({
           dataModels.map((data, index) => (
             <Input
               key={index}
-              type="text"
+              ref={inputRefs ? inputRefs[index] : null}
+              type={type}
               placeholder={data.placeholder}
-              maxLength={data.numberSegmentLength}
-              value={data.number}
+              maxLength={data.maximumLength}
+              value={data.value}
               onChange={onChangeAt(index)}
               onFocus={onFocus}
               onBlur={onBlur}
-              isError={data.isError}
+              isError={data.hasError}
+              autoComplete="off"
             />
           ))
         ) : (
           <Input
-            type="text"
+            type={type}
             placeholder={dataModels.placeholder}
-            maxLength={dataModels.numberSegmentLength}
-            value={dataModels.number}
+            ref={inputRefs ? inputRefs[0] : null}
+            maxLength={dataModels.maximumLength}
+            value={dataModels.value}
             onChange={onChangeAt(0)}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            isError={dataModels.isError}
+            isError={dataModels.hasError}
+            autoComplete="off"
           />
         )}
       </Row>

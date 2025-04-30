@@ -1,34 +1,25 @@
-import { useState } from 'react';
-import CVCNumberInputView from './CVCNumberInputView';
-import { isNumeric, isValidSegment } from '../../utils/cardValidation';
-import { CVCNumberInfo } from '../../types/models';
-
-const CVC_NUMBERS_LENGTH = 3;
+import InputAreaHeader from '../common/InputAreaHeader';
+import InputTexts from '../common/InputTexts';
+import { Container, ErrorMessage } from '../common/Styled';
+import { ERROR_MESSAGE } from '../../utils/cardValidation';
+import { useCvcContext } from '../../contexts/CvcContext';
 
 const CVCNumberInput = () => {
-  const [cvcNumberInfo, setCvcNumberInfo] = useState<CVCNumberInfo>(() => ({
-    number: '',
-    isError: false,
-    placeholder: '123',
-    numberSegmentLength: CVC_NUMBERS_LENGTH,
-  }));
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const valid = isNumeric(value) && isValidSegment(value, CVC_NUMBERS_LENGTH);
-
-    setCvcNumberInfo((prev) => ({
-      ...prev,
-      number: valid ? value : prev.number,
-      isError: !valid,
-    }));
-  };
+  const { cvcField, handleCvcChange, cvcInputRef } = useCvcContext();
 
   return (
-    <CVCNumberInputView
-      cvcNumberInfo={cvcNumberInfo}
-      handleInputChange={handleInputChange}
-    />
+    <Container data-testid="cvcnumbers-component">
+      <InputAreaHeader title="CVC 번호를 입력해 주세요" />
+      <InputTexts
+        dataModels={cvcField}
+        inputRefs={[cvcInputRef]}
+        label="CVC"
+        onChange={handleCvcChange}
+      />
+      <ErrorMessage>
+        {cvcField.hasError ? ERROR_MESSAGE.INVALID_CHARACTER : ''}
+      </ErrorMessage>
+    </Container>
   );
 };
 
