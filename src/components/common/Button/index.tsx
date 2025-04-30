@@ -6,13 +6,12 @@ import { Text } from '../Text';
 
 export type Props = {
   /**
-   * Sets the button type
-   * @default button
+   * Controls button shape
+   * @default false
    */
   isRounded?: boolean;
-
   /**
-   * Sets the button type
+   * Button content children
    */
   children: React.ReactNode;
 } & ComponentProps<'button'>;
