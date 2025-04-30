@@ -33,30 +33,32 @@ export default function useCardNumbersInput() {
   const { error: cardNumbersError, setErrorMessage } =
     useError<CardKey>(CARD_NUMBERS_ERROR);
 
-  const validateCardNumbers = (value: string, key: CardKey) => {
-    if (
-      !isUnderMaxLength(value.length, CARD_NUMBER_LIMIT.CARD_NUMBER_MAX_LENGTH)
-    ) {
-      setErrorMessage(CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH_ERROR, key);
-      return false;
-    }
-
-    if (!isNumber(value)) {
-      setErrorMessage(CARD_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC_ERROR, key);
-      return false;
-    }
-
-    setErrorMessage("", key);
-    return true;
-  };
-
   const onCardNumberChange = (value: string, index: number) => {
-    const key = indexToCardNumberKey(index);
-    if (!validateCardNumbers(value, key)) return;
+    const cardNumberKey = indexToCardNumberKey(index);
 
+    const { errorMessage, key } = validateCardNumbers(value, cardNumberKey);
+    setErrorMessage(errorMessage, key);
+
+    if (errorMessage) return;
     const newCardNumbers = { ...cardNumbers, [key]: value };
     setCardNumbers(newCardNumbers);
   };
 
   return { cardNumbers, cardNumbersError, onCardNumberChange };
 }
+
+const validateCardNumbers = (value: string, key: CardKey) => {
+  if (!isUnderMaxLength(value.length, CARD_NUMBER_LIMIT.CARD_NUMBER_MAX_LENGTH))
+    return {
+      errorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH_ERROR,
+      key: key,
+    };
+
+  if (!isNumber(value))
+    return {
+      errorMessage: CARD_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC_ERROR,
+      key: key,
+    };
+
+  return { errorMessage: "", key: key };
+};

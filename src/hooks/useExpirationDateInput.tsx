@@ -34,44 +34,13 @@ export default function useExpirationDateInput() {
   const { error: cardExpirationDateError, setErrorMessage } =
     useError<ExpirationKey>(EXPIRATION_DATE_ERROR);
 
-  const validateExpirationDate = (value: string, key: ExpirationKey) => {
-    if (!isUnderMaxLength(value.length, EXPIRATION_DATE_LIMIT.MAX_LENGTH)) {
-      setErrorMessage(EXPIRATION_DATE_ERROR_MESSAGE.INVALID_LENGTH_ERROR, key);
-      return false;
-    }
-
-    if (!isNumber(value)) {
-      setErrorMessage(EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMBERIC_ERROR, key);
-      return false;
-    }
-
-    if (
-      key === "MONTH" &&
-      value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH &&
-      !isValidMonth(Number(value))
-    ) {
-      setErrorMessage(EXPIRATION_DATE_ERROR_MESSAGE.MONTH_RANGE_ERROR, key);
-      return false;
-    }
-
-    if (key === "YEAR" && value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH) {
-      const currentYear = new Date().getFullYear() % 100;
-      if (Number(value) < currentYear) {
-        setErrorMessage(
-          `유효한 년도가 아닙니다. ${currentYear}년 이후의 년도를 입력하세요.`,
-          key
-        );
-        return false;
-      }
-    }
-
-    setErrorMessage("", key);
-    return true;
-  };
-
   const onExpirationDateChange = (value: string, index: number) => {
-    const key = indexToExpirationKey(index);
-    if (!validateExpirationDate(value, key)) return;
+    const expirationKey = indexToExpirationKey(index);
+
+    const { errorMessage, key } = validateExpirationDate(value, expirationKey);
+    setErrorMessage(errorMessage, key);
+    if (errorMessage) return;
+
     const newDate = { ...cardExpirationDate, [key]: value };
     setcardExpirationDate(newDate);
   };
@@ -82,3 +51,42 @@ export default function useExpirationDateInput() {
     onExpirationDateChange,
   };
 }
+
+const validateExpirationDate = (value: string, key: ExpirationKey) => {
+  if (!isUnderMaxLength(value.length, EXPIRATION_DATE_LIMIT.MAX_LENGTH)) {
+    return {
+      errorMessage: EXPIRATION_DATE_ERROR_MESSAGE.INVALID_LENGTH_ERROR,
+      key: key,
+    };
+  }
+
+  if (!isNumber(value)) {
+    return {
+      errorMessage: EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMBERIC_ERROR,
+      key: key,
+    };
+  }
+
+  if (
+    key === "MONTH" &&
+    value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH &&
+    !isValidMonth(Number(value))
+  ) {
+    return {
+      errorMessage: EXPIRATION_DATE_ERROR_MESSAGE.MONTH_RANGE_ERROR,
+      key: key,
+    };
+  }
+
+  if (key === "YEAR" && value.length === EXPIRATION_DATE_LIMIT.MAX_LENGTH) {
+    const currentYear = new Date().getFullYear() % 100;
+    if (Number(value) < currentYear) {
+      return {
+        errorMessage: `유효한 년도가 아닙니다. ${currentYear}년 이후의 년도를 입력하세요.`,
+        key: key,
+      };
+    }
+  }
+
+  return { errorMessage: "", key: key };
+};

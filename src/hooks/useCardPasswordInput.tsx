@@ -14,25 +14,22 @@ export default function useCardPasswordInput() {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const validatePassword = (value: string) => {
-    if (!isUnderMaxLength(value.length, PASSWORD_LIMIT.MAX_LENGTH)) {
-      setPasswordError(PASSWORD_ERROR_MESSAGE.INVALID_LENGTH_ERROR);
-      return false;
-    }
-
-    if (!isNumber(value)) {
-      setPasswordError(PASSWORD_ERROR_MESSAGE.NOT_NUMBERIC_ERROR);
-      return false;
-    }
-
-    setPasswordError("");
-    return true;
-  };
-
   const onPasswordChange = (value: string) => {
-    if (!validatePassword(value)) return;
+    const errorMesssage = validatePassword(value);
+    setPasswordError(errorMesssage);
+
+    if (errorMesssage) return;
     setPassword(value.slice(0, PASSWORD_LIMIT.MAX_LENGTH));
   };
 
   return { password, passwordError, onPasswordChange };
 }
+
+const validatePassword = (value: string) => {
+  if (!isUnderMaxLength(value.length, PASSWORD_LIMIT.MAX_LENGTH))
+    return PASSWORD_ERROR_MESSAGE.INVALID_LENGTH_ERROR;
+
+  if (!isNumber(value)) return PASSWORD_ERROR_MESSAGE.NOT_NUMBERIC_ERROR;
+
+  return "";
+};
