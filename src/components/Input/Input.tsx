@@ -35,7 +35,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         className={`${styles[`input-text`]} ${
           errorMessage ? styles["error"] : DEFAULT_ERROR_MESSAGE
         }`}
-        type={textType === "password" ? "password" : "text"}
+        type={textType}
         placeholder={placeholder}
         value={value}
         onChange={handleInputChange}
