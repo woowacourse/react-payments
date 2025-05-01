@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
@@ -12,7 +13,7 @@ export const Wrapper = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   padding: 72px 40px;
-  background: #ffffff;
+  background: ${theme.colors.white};
   box-shadow:
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;

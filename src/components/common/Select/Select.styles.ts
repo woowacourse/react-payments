@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 
 export const SelectWrapper = styled.div`
@@ -50,7 +51,7 @@ export const DropdownList = styled.ul<{ isOpen: boolean }>`
   margin-top: 4px;
   padding: 8px 0;
   background-color: white;
-  border: 1px solid #d7d7d7;
+  border: 1px solid ${theme.colors.border.default};
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   list-style: none;

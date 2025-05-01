@@ -9,6 +9,7 @@ const colors = {
   text: {
     primary: '#333333',
     secondary: '#8b95a1',
+    error: '#ff3d3d;',
   },
   border: {
     default: '#d7d7d7',

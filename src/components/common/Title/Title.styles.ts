@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 
 export const TitleBox = styled.div`
@@ -14,6 +15,6 @@ export const Title = styled.h1`
 `;
 
 export const Description = styled.p`
-  color: #8b95a1;
+  color: ${theme.colors.text.secondary};
   font-size: 0.8rem;
 `;
