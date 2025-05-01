@@ -1,7 +1,6 @@
 import Card from '../component/card/Card';
 import styled from 'styled-components';
 import { justifyBrandLogo } from '../util/justifyBrandLogo';
-import { getFirstErrorMessage } from '../util/getFirstErrorMessage';
 import CardDescriptiveInput from '../component/input/CardDescriptiveInput';
 import DESCRIPTION_TEXT from '../constants/descriptionText';
 import useForm from '../hook/useForm';
@@ -19,7 +18,9 @@ const AddCardPage = () => {
   const { cardInput, handleCardInput, errorMessages } = useForm();
   const { stepIndex, handleStepIndex } = useCardFormStep({ cardInput, errorMessages });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     navigate(PATH.SUCCESS, {
       state: {
         cardFirstNumber: cardInput.first,
@@ -35,10 +36,10 @@ const AddCardPage = () => {
   return (
     <>
       <Card cardInput={cardInput} cardType={cardInput.first ? justifyBrandLogo(cardInput.first) : 'default'} />
-      <Form>
+      <Form onSubmit={handleSubmit}>
         {stepIndex >= 5 && (
           <ButtonContainer>
-            <Button text="확인" handleClick={handleSubmit} />
+            <Button text="확인" type="submit" />
           </ButtonContainer>
         )}
 

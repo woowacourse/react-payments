@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 interface ButtonProps extends ComponentProps<'button'> {
   text: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 const Button = ({ text, handleClick, ...restProps }: ButtonProps) => {
   return (
-    <ButtonContainer type="button" onClick={handleClick} {...restProps}>
+    <ButtonContainer type={restProps.type} onClick={handleClick} {...restProps}>
       {text}
     </ButtonContainer>
   );
