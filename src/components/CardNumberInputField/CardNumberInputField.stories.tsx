@@ -1,7 +1,7 @@
 import { CardNumberInputField } from '@/components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useForm } from '@/hooks';
-import { CardNumberInputType } from '@/types/input';
+import { CardNumberInput } from '@/types/input';
 
 const meta = {
   title: 'Components/CardNumberInputField',
@@ -22,7 +22,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const CardNumberWrapper = ({ errors = { first: '', second: '', third: '', fourth: '' } }) => {
-  const { register, errors: formErrors } = useForm<CardNumberInputType>({
+  const { register, errors: formErrors } = useForm<CardNumberInput>({
     defaultValues: {
       first: '',
       second: '',
@@ -73,13 +73,13 @@ export const WithErrors: Story = {
 export const Filled: Story = {
   args: {
     cardNumberErrors: { first: '', second: '', third: '', fourth: '' },
-    register: (key: keyof CardNumberInputType) => ({
+    register: (key: keyof CardNumberInput) => ({
       value: key === 'first' ? '1234' : key === 'second' ? '5678' : key === 'third' ? '9012' : '3456',
       onChange: () => {},
     }),
   },
   render: () => {
-    const { register } = useForm<CardNumberInputType>({
+    const { register } = useForm<CardNumberInput>({
       defaultValues: {
         first: '1234',
         second: '5678',

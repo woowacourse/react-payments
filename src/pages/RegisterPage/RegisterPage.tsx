@@ -12,11 +12,11 @@ import {
 import { CARD_COMPANIES } from '@/constants';
 import { useForm } from '@/hooks';
 import {
-  CardCompanyInputType,
-  CardCVCNumberInputType,
-  CardExpirationDateInputType,
-  CardNumberInputType,
-  CardPasswordInputType,
+  CardCompanyInput,
+  CardCVCNumberInput,
+  CardExpirationDateInput,
+  CardNumberInput,
+  CardPasswordInput,
 } from '@/types';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +37,7 @@ export default function RegisterPage() {
     errors: cardNumberErrors,
     register: cardNumberRegister,
     isValid: isCardNumberIsValid,
-  } = useForm<CardNumberInputType>({
+  } = useForm<CardNumberInput>({
     defaultValues: {
       first: '',
       second: '',
@@ -51,7 +51,7 @@ export default function RegisterPage() {
     value: { company: selectedCompany },
     register: cardCompanyRegister,
     isValid: isCardCompanyValid,
-  } = useForm<CardCompanyInputType>({
+  } = useForm<CardCompanyInput>({
     defaultValues: {
       company: '',
     },
@@ -63,7 +63,7 @@ export default function RegisterPage() {
     errors: cardExpirationDateErrors,
     register: cardExpirationDateRegister,
     isValid: isExpirationDateValid,
-  } = useForm<CardExpirationDateInputType>({
+  } = useForm<CardExpirationDateInput>({
     defaultValues: {
       month: '',
       year: '',
@@ -76,7 +76,7 @@ export default function RegisterPage() {
     errors: cardCVCNumberErrors,
     register: cardCVCNumberRegister,
     isValid: isCVCNumberValid,
-  } = useForm<CardCVCNumberInputType>({
+  } = useForm<CardCVCNumberInput>({
     defaultValues: {
       cvc: '',
     },
@@ -87,7 +87,7 @@ export default function RegisterPage() {
     errors: cardPasswordErrors,
     register: cardPasswordRegister,
     isValid: isPasswordValid,
-  } = useForm<CardPasswordInputType>({
+  } = useForm<CardPasswordInput>({
     defaultValues: {
       password: '',
     },

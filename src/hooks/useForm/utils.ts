@@ -1,6 +1,6 @@
-import { ValidationType } from './types';
+import { Validation } from './types';
 
-export function validate(validation: ValidationType, value: string) {
+export function validate(validation: Validation, value: string) {
   if (validation.required && !value) {
     return validation.errorMessage;
   }

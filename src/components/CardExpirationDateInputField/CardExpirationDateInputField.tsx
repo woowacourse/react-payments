@@ -1,13 +1,13 @@
 import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
-import { RegisterType } from '@/hooks';
-import { CardExpirationDateInputType } from '@/types';
+import { Register } from '@/hooks';
+import { CardExpirationDateInput } from '@/types';
 import { getErrorMessageFromObject } from '@/utils/message';
 import * as S from './CardExpirationDateInputField.styles';
 
 interface CardExpirationDateProps {
-  register: RegisterType<CardExpirationDateInputType>;
-  cardExpirationDateErrors: CardExpirationDateInputType;
+  register: Register<CardExpirationDateInput>;
+  cardExpirationDateErrors: CardExpirationDateInput;
 }
 
 export default function CardExpirationDate({ register, cardExpirationDateErrors }: CardExpirationDateProps) {

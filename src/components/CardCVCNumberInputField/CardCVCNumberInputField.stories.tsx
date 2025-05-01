@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useForm } from '@/hooks';
-import { CardCVCNumberInputType } from '@/types/input';
+import { CardCVCNumberInput } from '@/types/input';
 import { CardCVCNumberInputField } from '..';
 
 const meta = {
@@ -21,7 +21,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const CardCVCNumberInputFieldWrapper = ({ errors = { cvc: '' } }) => {
-  const { register, errors: formErrors } = useForm<CardCVCNumberInputType>({
+  const { register, errors: formErrors } = useForm<CardCVCNumberInput>({
     defaultValues: {
       cvc: '',
     },
@@ -80,7 +80,7 @@ export const Filled: Story = {
     onBlur: () => {},
   },
   render: () => {
-    const { register } = useForm<CardCVCNumberInputType>({
+    const { register } = useForm<CardCVCNumberInput>({
       defaultValues: {
         cvc: '123',
       },

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ValidationType } from './types';
+import { Validation } from './types';
 import { validate } from './utils';
 
 export default function useForm<T extends Record<string, string>>({ defaultValues }: { defaultValues: T }) {
@@ -10,7 +10,7 @@ export default function useForm<T extends Record<string, string>>({ defaultValue
     currentKey: keyof T,
     options?: {
       onChange?: (event: React.ChangeEvent<E>) => void;
-      validation: ValidationType;
+      validation: Validation;
       inputRegex?: RegExp;
     },
   ) => {

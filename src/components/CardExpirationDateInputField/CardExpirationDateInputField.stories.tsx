@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CardExpirationDateInputField } from '@/components';
 import { useForm } from '@/hooks';
-import { CardExpirationDateInputType } from '@/types/input';
+import { CardExpirationDateInput } from '@/types/input';
 
 const meta = {
   title: 'Components/CardExpirationDateInputField',
@@ -21,7 +21,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const CardExpirationDateInputFieldWrapper = ({ errors = { month: '', year: '' } }) => {
-  const { register, errors: formErrors } = useForm<CardExpirationDateInputType>({
+  const { register, errors: formErrors } = useForm<CardExpirationDateInput>({
     defaultValues: {
       month: '',
       year: '',
@@ -66,13 +66,13 @@ export const WithErrors: Story = {
 export const Filled: Story = {
   args: {
     cardExpirationDateErrors: { month: '', year: '' },
-    register: (key: keyof CardExpirationDateInputType) => ({
+    register: (key: keyof CardExpirationDateInput) => ({
       value: key === 'month' ? '12' : '25',
       onChange: () => {},
     }),
   },
   render: () => {
-    const { register } = useForm<CardExpirationDateInputType>({
+    const { register } = useForm<CardExpirationDateInput>({
       defaultValues: {
         month: '12',
         year: '25',

@@ -1,12 +1,12 @@
 import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
-import { RegisterType } from '@/hooks';
-import { CardNumberInputType } from '@/types/input';
+import { Register } from '@/hooks';
+import { CardNumberInput } from '@/types/input';
 import { getErrorMessageFromObject } from '@/utils/message';
 import * as S from './CardNumberInputField.styles';
 
 interface CardNumberProps {
-  cardNumberErrors: CardNumberInputType;
-  register: RegisterType<CardNumberInputType>;
+  cardNumberErrors: CardNumberInput;
+  register: Register<CardNumberInput>;
 }
 
 export default function CardNumber({ register, cardNumberErrors }: CardNumberProps) {

@@ -1,11 +1,11 @@
 import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
-import { RegisterType } from '@/hooks';
-import { CardCVCNumberInputType } from '@/types/input';
+import { Register } from '@/hooks';
+import { CardCVCNumberInput } from '@/types/input';
 
 interface CardCVCNumberProps {
-  register: RegisterType<CardCVCNumberInputType>;
-  cardCVCNumberErrors: CardCVCNumberInputType;
+  register: Register<CardCVCNumberInput>;
+  cardCVCNumberErrors: CardCVCNumberInput;
   onFocus: () => void;
   onBlur: () => void;
 }

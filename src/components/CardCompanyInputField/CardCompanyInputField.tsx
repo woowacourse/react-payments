@@ -1,10 +1,10 @@
 import { Label, Select, Spacing, Title } from '@/components';
 import { CARD_COMPANIES } from '@/constants';
-import { RegisterType } from '@/hooks';
-import { CardCompanyInputType } from '@/types';
+import { Register } from '@/hooks';
+import { CardCompanyInput } from '@/types';
 
 interface CardCompanyProps {
-  register: RegisterType<CardCompanyInputType>;
+  register: Register<CardCompanyInput>;
 }
 
 export default function CardCompany({ register }: CardCompanyProps) {

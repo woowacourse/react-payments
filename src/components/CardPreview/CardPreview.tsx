@@ -1,15 +1,15 @@
 import { CARD_COMPANIES, MASKING } from '@/constants';
-import { CardCompanyType, CardCVCNumberInputType, CardExpirationDateInputType, CardNumberInputType } from '@/types';
+import { CardCompany, CardCVCNumberInput, CardExpirationDateInput, CardNumberInput } from '@/types';
 import { useTheme } from '@emotion/react';
 import * as S from './CardPreview.styles';
 import { getCardType } from './utils';
 import { MasterCard, VisaCard } from '../common/icons';
 
 interface CardPreviewProps {
-  cardNumber: CardNumberInputType;
-  cardExpirationDate: CardExpirationDateInputType;
-  selectedCompany: CardCompanyType;
-  cardCVCNumber: CardCVCNumberInputType;
+  cardNumber: CardNumberInput;
+  cardExpirationDate: CardExpirationDateInput;
+  selectedCompany: CardCompany;
+  cardCVCNumber: CardCVCNumberInput;
   isFlipped: boolean;
 }
 

@@ -1,11 +1,11 @@
 import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
 import { ERROR_MESSAGE } from '@/constants';
-import { RegisterType } from '@/hooks';
-import { CardPasswordInputType } from '@/types/input';
+import { Register } from '@/hooks';
+import { CardPasswordInput } from '@/types/input';
 import * as S from './CardPasswordInputField.styles';
 interface CardPasswordProps {
-  register: RegisterType<CardPasswordInputType>;
-  cardPasswordErrors: CardPasswordInputType;
+  register: Register<CardPasswordInput>;
+  cardPasswordErrors: CardPasswordInput;
 }
 
 export default function CardPassword({ register, cardPasswordErrors }: CardPasswordProps) {

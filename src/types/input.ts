@@ -1,7 +1,7 @@
-import { CardCompanyType, CardExpirationDateType, CardNumberSequenceType } from '@/types';
+import { CardCompany, CardExpirationDate, CardNumberSequence } from '@/types';
 
-export type CardNumberInputType = Record<CardNumberSequenceType, string>;
-export type CardExpirationDateInputType = Record<CardExpirationDateType, string>;
-export type CardCVCNumberInputType = Record<'cvc', string>;
-export type CardPasswordInputType = Record<'password', string>;
-export type CardCompanyInputType = Record<'company', CardCompanyType>;
+export type CardNumberInput = Record<CardNumberSequence, string>;
+export type CardExpirationDateInput = Record<CardExpirationDate, string>;
+export type CardCVCNumberInput = Record<'cvc', string>;
+export type CardPasswordInput = Record<'password', string>;
+export type CardCompanyInput = Record<'company', CardCompany>;
