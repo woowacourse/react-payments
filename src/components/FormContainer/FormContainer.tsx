@@ -6,6 +6,16 @@ import FormSectionInput from "../FormSection/FormSectionInput";
 import { CardInformationType } from "../../types/CardInformationType";
 import Button from "../Button/Button";
 
+const formType: Record<"select" | "input", React.FC<any>> = {
+  input: FormSectionInput,
+  select: FormSectionSelect,
+};
+
+const FieldRenderer = ({ type, ...rest }: { type: "select" | "input" }) => {
+  const FieldComponent = formType[type];
+  return <FieldComponent {...rest} />;
+};
+
 const FormContainer = ({
   cardInformationState,
   setCardInformationState,
@@ -20,43 +30,34 @@ const FormContainer = ({
         .slice(0, step + 1)
         .reverse()
         .map((formSectionData) => {
-          if (formSectionData.key === "company") {
-            const setState = setCardInformationState.company;
-            return (
-              <FormSectionSelect
-                key="company"
-                type="select"
-                title={formSectionData.title}
-                description={formSectionData.description}
-                fieldData={{
-                  ...formSectionData.fieldData,
-                  setState,
-                }}
-              />
-            );
-          } else {
-            // key가 'uniqueNumber' | 'expirationDate' | 'cvcNumber' | 'password'
-            const key = formSectionData.key;
-            const state = cardInformationState[key];
-            const setState = setCardInformationState[key] as React.Dispatch<
-              React.SetStateAction<CardInformationType[typeof key]>
-            >;
-            const eachValidation = validation[key];
-            return (
-              <FormSectionInput
-                key={key}
-                type="input"
-                title={formSectionData.title}
-                description={formSectionData.description}
-                fieldData={{
-                  ...formSectionData.fieldData,
-                  state,
-                  setState,
-                  eachValidation,
-                }}
-              />
-            );
-          }
+          const { key, type, title, description, fieldData } = formSectionData;
+
+          const props =
+            type === "select"
+              ? {
+                  type,
+                  title,
+                  description,
+                  fieldData: {
+                    ...fieldData,
+                    setState: setCardInformationState.company,
+                  },
+                }
+              : {
+                  type,
+                  title,
+                  description,
+                  fieldData: {
+                    ...fieldData,
+                    state: cardInformationState[key],
+                    setState: setCardInformationState[key] as React.Dispatch<
+                      React.SetStateAction<CardInformationType[typeof key]>
+                    >,
+                    eachValidation: validation[key],
+                  },
+                };
+
+          return <FieldRenderer key={key} {...props} />;
         })}
       <div css={ButtonWrapperStyle}>{complete && <Button type="submit" text="완료" />}</div>
     </form>
