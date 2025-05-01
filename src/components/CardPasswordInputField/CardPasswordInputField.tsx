@@ -1,0 +1,43 @@
+import { ErrorMessage, Input, Label, Spacing, Title } from '@/components';
+import { ERROR_MESSAGE } from '@/constants';
+import { Register } from '@/hooks';
+import { CardPasswordInput } from '@/types/input';
+import * as S from './CardPasswordInputField.styles';
+interface CardPasswordProps {
+  register: Register<CardPasswordInput>;
+  cardPasswordErrors: CardPasswordInput;
+}
+
+export default function CardPassword({ register, cardPasswordErrors }: CardPasswordProps) {
+  return (
+    <div>
+      <Title description="앞의 2자리를 입력해주세요">비밀번호를 입력해 주세요</Title>
+      <Spacing size={24} />
+      <Label id="card-password">비밀번호 앞 2자리</Label>
+      <Spacing size={8} />
+      <S.InputWrapper>
+        <Input
+          autoFocus
+          type="password"
+          placeholder="**"
+          maxLength={2}
+          isError={!!cardPasswordErrors.password}
+          aria-label="비밀번호 앞 2자리"
+          inputMode="numeric"
+          autoComplete="current-password"
+          data-sequence="9"
+          {...register('password', {
+            inputRegex: /^[0-9]*$/,
+            validation: {
+              required: true,
+              length: 2,
+              errorMessage: ERROR_MESSAGE.cardPassword?.length || '비밀번호는 2자여야 합니다.',
+            },
+          })}
+        />
+      </S.InputWrapper>
+      <Spacing size={8} />
+      <ErrorMessage>{cardPasswordErrors.password}</ErrorMessage>
+    </div>
+  );
+}

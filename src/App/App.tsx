@@ -1,69 +1,20 @@
-import { CardCVCNumber, CardExpirationDate, CardNumber, CardPreview, Spacing } from '@/components';
-import global from '@/styles/global';
-import { DateType, SequenceType } from '@/types';
-import { Global } from '@emotion/react';
-import { useState } from 'react';
-import * as S from './App.styles';
-import { getCardType } from './utils';
+import { CompletePage, RegisterPage } from '@/pages';
+import { Global, ThemeProvider } from '@emotion/react';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import global from '../styles/global';
+import { theme } from '../styles/theme';
 
 function App() {
-  // 카드 번호
-  const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
-  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<Record<SequenceType, string>>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
-
-  // 카드 유효기간
-  const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
-    month: '',
-    year: '',
-  });
-  const [cardExpirationDateErrorMessage, setCardExpirationDateErrorMessage] = useState<Record<DateType, string>>({
-    month: '',
-    year: '',
-  });
-
-  // 카드 CVC 번호
-  const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
-  const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
-
-  const cardType = getCardType(cardNumber.first);
   return (
-    <S.Wrapper>
+    <ThemeProvider theme={theme}>
       <Global styles={global} />
-      <S.CardPreviewWrapper>
-        <CardPreview cardType={cardType} cardNumber={cardNumber} cardExpirationDate={cardExpirationDate} />
-      </S.CardPreviewWrapper>
-      <Spacing size={60} />
-      <S.CardInfoForm>
-        <CardNumber
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-          cardNumberErrorMessage={cardNumberErrorMessage}
-          setCardNumberErrorMessage={setCardNumberErrorMessage}
-        />
-        <CardExpirationDate
-          cardExpirationDate={cardExpirationDate}
-          setCardExpirationDate={setCardExpirationDate}
-          cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-          setCardExpirationDateErrorMessage={setCardExpirationDateErrorMessage}
-        />
-        <CardCVCNumber
-          cardCVCNumber={cardCVCNumber}
-          setCardCVCNumber={setCardCVCNumber}
-          cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
-          setCardCVCNumberErrorMessage={setCardCVCNumberErrorMessage}
-        />
-      </S.CardInfoForm>
-    </S.Wrapper>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<RegisterPage />} />
+          <Route path="/complete" element={<CompletePage />} />
+        </Routes>
+      </HashRouter>
+    </ThemeProvider>
   );
 }
 
