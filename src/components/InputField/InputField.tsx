@@ -4,8 +4,7 @@ import Input from "../Input/Input";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { InputFieldProps } from "../../types/componentPropsType";
 import { CardInformationType } from "../../types/CardInformationType";
-import { useRef } from "react";
-import moveFocusOrBlur from "../../utils/moveFocusOrBlur";
+import useFocusManager from "../../hooks/common/useFocusManager";
 
 const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
   label,
@@ -16,7 +15,7 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
   eachValidation,
 }: InputFieldProps<T>) => {
   const { isError, errorMessage, validateInput } = eachValidation;
-  const inputRefs = useRef<HTMLInputElement[]>([]);
+  const { setRef, moveFocusOrBlur } = useFocusManager(inputNumber);
 
   const handleChange = (index: number, value: string) => {
     validateInput(index, value);
@@ -27,7 +26,7 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
       return updated as CardInformationType[T];
     });
 
-    moveFocusOrBlur({ index, value, maxLength: inputProps.maxLength, inputRefs: inputRefs.current });
+    moveFocusOrBlur({ index, value, maxLength: inputProps.maxLength });
   };
 
   return (
@@ -37,9 +36,7 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
         {Array.from({ length: inputNumber }).map((_, index) => (
           <Input
             key={index}
-            ref={(el) => {
-              if (el) inputRefs.current[index] = el;
-            }}
+            ref={setRef(index)}
             value={state[index] ?? ""}
             onChange={(v) => handleChange(index, v)}
             placeholder={inputProps.placeholder[index]}
