@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   /* design token */
@@ -8,6 +8,16 @@ const GlobalStyles = createGlobalStyle`
     --color-gray: #8b95a1;
     --color-white: #ffffff;
     --color-red: #ff3d3d;
+
+    --color-bc-card: #F04651;
+    --color-shinhan-card: #0046FF;
+    --color-kakao-bank: #FFE600;
+    --color-hyundai-card:#000000;
+    --color-woori-card: #007BC8;
+    --color-lotte-card: #ED1C24;
+    --color-hana-card: #009490;
+    --color-gu-min-card: #6A6056;
+    
 
     --font-size-header: 18px;
     --font-size-body: 11px;

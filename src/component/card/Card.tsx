@@ -1,30 +1,32 @@
-import styled from "styled-components";
-import cardBrandLogo from "../../constants/cardBrandLogo";
-import type { CardInputProps } from "../../types/CardInputTypes";
-import CardNumber from "../CardNumber";
+import styled from 'styled-components';
+import type { CardInputProps } from '../../types/CardInputTypes';
+import CardNumber from './CardNumber';
+import { cardNetworkLogos, cardBrandsColors } from '../../constants/cardConstants';
 
 interface CardProps {
-  cardNumber: CardInputProps | null;
-  cardType: "visa" | "mastercard" | "default";
+  cardInput: CardInputProps;
+  cardType: 'visa' | 'mastercard' | 'default';
 }
 
-const Card = ({ cardNumber, cardType }: CardProps) => {
+const Card = ({ cardInput, cardType }: CardProps) => {
+  const DEFAULT_CARD_COLOR = 'var(--color-black)';
+
   return (
-    <CardContainer>
+    <CardContainer $backgroundColor={cardInput.cardBrand ? cardBrandsColors[cardInput.cardBrand] : DEFAULT_CARD_COLOR}>
       <ChipContainer>
         <CardGoldChip />
-        <CardBrandLogo src={cardBrandLogo[cardType]} />
+        <CardNetworkLogo src={cardNetworkLogos[cardType]} />
       </ChipContainer>
-      {cardNumber ? <CardNumber cardNumber={cardNumber} /> : null}
+      {cardInput ? <CardNumber cardInput={cardInput} /> : null}
     </CardContainer>
   );
 };
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ $backgroundColor: string }>`
   box-sizing: border-box;
   width: 212px;
   height: 132px;
-  background-color: var(--color-black);
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.1);
   padding: 8px 12px;
@@ -44,7 +46,7 @@ const CardGoldChip = styled.div`
   box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.1);
 `;
 
-const CardBrandLogo = styled.img`
+const CardNetworkLogo = styled.img`
   width: 36px;
   height: 22px;
 `;

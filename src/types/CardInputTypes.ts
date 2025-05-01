@@ -1,9 +1,13 @@
+import type { cardBrandsColors } from '../constants/cardConstants';
+
 export interface CardInputProps {
-  first: number | null;
-  second: number | null;
-  third: number | null;
-  fourth: number | null;
-  MM: number | null;
-  YY: number | null;
-  CVC: number | null;
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+  MM: string;
+  YY: string;
+  CVC: string;
+  password: string;
+  cardBrand: keyof typeof cardBrandsColors;
 }

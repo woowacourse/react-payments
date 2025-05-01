@@ -1,28 +1,28 @@
-import { maskingNumber } from "../util/maskingNumber";
-import styled from "styled-components";
-import type { CardInputProps } from "../types/CardInputTypes";
+import { maskingNumber } from '../../util/maskingNumber';
+import styled from 'styled-components';
+import type { CardInputProps } from '../../types/CardInputTypes';
 
 interface CardNumberProps {
-  cardNumber: CardInputProps;
+  cardInput: CardInputProps;
 }
 
-const CardNumber = ({ cardNumber }: CardNumberProps) => {
+const CardNumber = ({ cardInput }: CardNumberProps) => {
   return (
     <>
       <CardNumberContainer>
-        <CardInformation>{cardNumber.first}</CardInformation>
-        <CardInformation>{cardNumber.second}</CardInformation>
+        <CardInformation>{cardInput.first}</CardInformation>
+        <CardInformation>{cardInput.second}</CardInformation>
         <CardMaskingInformation>
-          {cardNumber.third && maskingNumber(String(cardNumber.third).length)}
+          {cardInput.third ? maskingNumber(String(cardInput.third).length) : null}
         </CardMaskingInformation>
         <CardMaskingInformation>
-          {cardNumber.fourth && maskingNumber(String(cardNumber.fourth).length)}
+          {cardInput.fourth ? maskingNumber(String(cardInput.fourth).length) : null}
         </CardMaskingInformation>
       </CardNumberContainer>
 
       <CardInformation>
-        {cardNumber.MM && `${cardNumber.MM}`}
-        {cardNumber.YY && `/${cardNumber.YY}`}
+        {cardInput.MM ? `${cardInput.MM}` : null}
+        {cardInput.YY ? `/${cardInput.YY}` : null}
       </CardInformation>
     </>
   );

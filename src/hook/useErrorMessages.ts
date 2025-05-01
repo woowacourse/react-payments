@@ -1,22 +1,20 @@
-import { useState } from "react";
-import type { ErrorMessagesProps } from "../types/ErrorMessagesType";
-
-export const useErrorMessages = () => {
-  const [errorMessages, setErrorMessages] = useState<ErrorMessagesProps>({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-    MM: "",
-    YY: "",
-    CVC: "",
+import { useState } from 'react';
+import type { CardInputProps } from '../types/CardInputTypes';
+const useErrorMessages = () => {
+  const [errorMessages, setErrorMessages] = useState<CardInputProps>({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+    MM: '',
+    YY: '',
+    CVC: '',
+    password: '',
+    cardBrand: '',
   });
 
-  const handleErrorMessages = (
-    key: keyof ErrorMessagesProps,
-    message: string
-  ) => {
-    setErrorMessages((prev: ErrorMessagesProps) => ({
+  const handleErrorMessages = (key: keyof CardInputProps, message: string) => {
+    setErrorMessages((prev: CardInputProps) => ({
       ...prev,
       [key]: message,
     }));
@@ -24,3 +22,5 @@ export const useErrorMessages = () => {
 
   return { errorMessages, handleErrorMessages };
 };
+
+export default useErrorMessages;

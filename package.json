@@ -12,11 +12,13 @@
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_179054950321022",
     "predeploy": "npm run build",
+    "postbuild": "cp dist/index.html dist/404.html",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.5.2",
     "styled-components": "^6.1.17"
   },
   "devDependencies": {

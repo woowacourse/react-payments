@@ -1,30 +1,26 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-interface InputGroupProps {
+interface FormFieldProps {
   label: string;
   children: React.ReactNode;
-  errorMessages: string;
+  errorMessage: string;
   id: string;
 }
 
-const InputGroup = ({
-  label,
-  children,
-  errorMessages,
-  id,
-}: InputGroupProps) => {
+const FormField = ({ label, children, errorMessage, id }: FormFieldProps) => {
   return (
     <Container>
       <Label htmlFor={id}>{label}</Label>
       <InputContainer>{children}</InputContainer>
       <ErrorMessageContainer>
-        <ErrorMessage>{errorMessages}</ErrorMessage>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </ErrorMessageContainer>
     </Container>
   );
 };
 
 export const InputContainer = styled.div`
+  width: 100%;
   display: flex;
   gap: 10px;
 `;
@@ -36,6 +32,7 @@ const Label = styled.label`
 `;
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -53,4 +50,4 @@ const ErrorMessageContainer = styled.div`
   gap: 4px;
 `;
 
-export default InputGroup;
+export default FormField;
