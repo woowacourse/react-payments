@@ -2,6 +2,7 @@ import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
 import { CardNumberKey, CardNumberType } from '../../types';
 import { RefObject } from 'react';
+import { getCardNumbersErrorMessage } from '../../validation/validateCardNumbers';
 
 export type CardNumberSectionProp = {
   cardNumbers: CardNumberType;
@@ -12,10 +13,9 @@ export type CardNumberSectionProp = {
     third: RefObject<HTMLInputElement | null>;
     fourth: RefObject<HTMLInputElement | null>;
   };
-  getCardNumberErrorMessage: (cardNumbers: CardNumberType) => string;
 };
 
-export default function CardNumberSection({ cardNumbers, onCardNumbersChange, cardInputRefs, getCardNumberErrorMessage }: CardNumberSectionProp) {
+export default function CardNumberSection({ cardNumbers, onCardNumbersChange, cardInputRefs }: CardNumberSectionProp) {
   return (
     <div>
       <InputSection.TitleWrapper>
@@ -43,7 +43,7 @@ export default function CardNumberSection({ cardNumbers, onCardNumbersChange, ca
           ))}
         </InputSection.InputWrapper>
 
-        <InputSection.Error message={getCardNumberErrorMessage(cardNumbers)} />
+        <InputSection.Error message={getCardNumbersErrorMessage(cardNumbers)} />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { validateCardNumber } from '../validation/validateCardNumbers';
+import { getCardNumbersErrorMessage } from '../validation/validateCardNumbers';
 import { useCardNumbersState } from './cardNumbers/useCardNumbersState';
 import { useExpirationState } from './expiration/useExpirationState';
 import useCompany from './useCompany';
@@ -7,10 +7,7 @@ import usePassword from './usePassword';
 
 const useValues = () => {
   const { handleCardNumbersChange, cardNumbers, inputRefs: cardInputRefs } = useCardNumbersState();
-  const { getErrorMessage: getCardNumberErrorMessage } = validateCardNumber(cardNumbers);
-
   const { expiration, handleExpirationChange, expirationRef } = useExpirationState();
-
   const { company, handleCompanySelect } = useCompany();
   const { cvc, handleCvcChange } = useCvc();
   const { password, handlePasswordChange } = usePassword();
@@ -25,8 +22,7 @@ const useValues = () => {
       cardNumbers: {
         cardNumbers,
         onCardNumbersChange: handleCardNumbersChange,
-        cardInputRefs,
-        getCardNumberErrorMessage
+        cardInputRefs
       },
 
       company: {
