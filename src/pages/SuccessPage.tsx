@@ -3,7 +3,7 @@ import Button from '../component/Button';
 import { slideDown } from '../animation/animation';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const Success = () => {
+const SuccessPage = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -44,4 +44,4 @@ const Message = styled.p`
   line-height: 28px;
 `;
 
-export default Success;
+export default SuccessPage;

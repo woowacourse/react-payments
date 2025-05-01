@@ -12,7 +12,7 @@ import CardDescriptiveSelect from '../component/select/CardDescriptiveSelect';
 import Button from '../component/Button';
 import { useNavigate } from 'react-router-dom';
 
-const AddCard = () => {
+const AddCardPage = () => {
   const navigate = useNavigate();
 
   const { cardInput, handleCardInput, errorMessages, isError } = useForm();
@@ -123,4 +123,4 @@ const ButtonContainer = styled.div`
   background-color: var(--color-black);
 `;
 
-export default AddCard;
+export default AddCardPage;

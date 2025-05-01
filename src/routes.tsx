@@ -1,6 +1,6 @@
-import AddCard from './pages/AddCard';
+import AddCardPage from './pages/AddCardPage';
 import { createBrowserRouter } from 'react-router-dom';
-import Success from './pages/Success';
+import SuccessPage from './pages/SuccessPage';
 import Layout from './pages/Layout';
 
 const router = createBrowserRouter(
@@ -9,8 +9,8 @@ const router = createBrowserRouter(
       path: '/',
       element: <Layout />,
       children: [
-        { path: '/', element: <AddCard /> },
-        { path: '/success', element: <Success /> },
+        { path: '/', element: <AddCardPage /> },
+        { path: '/success', element: <SuccessPage /> },
       ],
     },
   ],
