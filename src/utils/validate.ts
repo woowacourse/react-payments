@@ -7,12 +7,9 @@ export const validate = {
       : { isValid: false, message: '숫자만 입력 가능합니다.' };
   },
 
-  checkExpiryDate: (month: string, year: string) => {
-    if (month.length !== 2 || year.length !== 2) {
-      return {
-        isValid: { month: true, year: true },
-        message: '',
-      };
+  checkExpiryMonth: (month: string) => {
+    if (!precise.isNumber(month)) {
+      return { isValid: false, message: '숫자만 입력 가능합니다.' };
     }
 
     if (
@@ -23,12 +20,23 @@ export const validate = {
       })
     ) {
       return {
-        isValid: { month: false, year: true },
+        isValid: false,
         message: '유효하지 않은 월 형식입니다. 유효 기간을 확인해주세요.',
       };
     }
 
-    if (!precise.hasNotExpired({ month, year })) {
+    return {
+      isValid: true,
+      message: '',
+    };
+  },
+
+  checkExpiryDate: (month: string, year: string) => {
+    if (
+      month.length === 2 &&
+      year.length === 2 &&
+      !precise.hasNotExpired({ month, year })
+    ) {
       return {
         isValid: { month: false, year: false },
         message: '유효하지 않은 카드입니다. 유효 기간을 확인해주세요.',

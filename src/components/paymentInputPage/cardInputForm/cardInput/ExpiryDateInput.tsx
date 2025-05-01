@@ -21,25 +21,6 @@ function CardExpiryDateInput({
   const { expiryDate, setExpiryDate } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
-  function handleCardNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const target = e.target;
-    const { name, value } = target;
-
-    setExpiryDate({ ...expiryDate, [name]: value });
-    checkIsValidInput(name, value);
-  }
-
-  function checkIsValidInput(name: string, value: string) {
-    const { isValid, message } = validate.checkNumberInput(value);
-    if (!isValid) {
-      setFeedbackMessage(message);
-      setIsValid((prev) => ({ ...prev, [name]: isValid }));
-      return;
-    }
-
-    checkIsValidExpiry(name, value);
-  }
-
   function checkIsValidExpiry(name: string, value: string) {
     const { month, year } = expiryDate;
     const targetMonth = name === 'month' ? value : month;
@@ -51,6 +32,34 @@ function CardExpiryDateInput({
 
     setFeedbackMessage(message);
     setIsValid(isValid);
+  }
+
+  function handleMonthChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target;
+    setExpiryDate({ ...expiryDate, month: value });
+
+    const validateResult = validate.checkExpiryMonth(value);
+    if (!validateResult.isValid) {
+      setIsValid((prev) => ({ ...prev, month: false }));
+      setFeedbackMessage(validateResult.message);
+      return;
+    }
+
+    checkIsValidExpiry('month', value);
+  }
+
+  function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target;
+    setExpiryDate({ ...expiryDate, year: value });
+
+    const validateResult = validate.checkNumberInput(value);
+    if (!validateResult.isValid) {
+      setIsValid((prev) => ({ ...prev, year: false }));
+      setFeedbackMessage(validateResult.message);
+      return;
+    }
+
+    checkIsValidExpiry('year', value);
   }
 
   return (
@@ -66,7 +75,7 @@ function CardExpiryDateInput({
           name='month'
           placeholder='MM'
           value={expiryDate.month}
-          handleInputChange={handleCardNumberChange}
+          handleInputChange={handleMonthChange}
           minLength={2}
           maxLength={2}
           autoFocus={true}
@@ -78,7 +87,7 @@ function CardExpiryDateInput({
           name='year'
           placeholder='YY'
           value={expiryDate.year}
-          handleInputChange={handleCardNumberChange}
+          handleInputChange={handleYearChange}
           minLength={2}
           maxLength={2}
           isRequired={true}
