@@ -1,24 +1,10 @@
-import { useReducer } from 'react';
+import React, { createContext, PropsWithChildren, useReducer } from 'react';
 
-import { CardBrand } from '@/constants/brandColors';
+import { Action, CardForm } from '@/components/features/CardFormFiled/CardFormFiled.types';
 
-type Action = 'CARD_NUMBER' | 'BRAND' | 'EXPIRE_DATE' | 'CVC' | 'PASSWORD';
-
-export type CardInputItem = {
-  value: string;
-  isValid: boolean;
-};
-export type CardForm = {
-  cardNumber: CardInputItem[];
-  brand: CardBrand | null;
-  expireDate: CardInputItem[];
-  cvc: CardInputItem;
-  password: CardInputItem;
-};
-
-export const useCardFormState = () => {
-  const [formData, dispatch] = useReducer(reducer, createInitialFormState());
-  return [formData, dispatch] as const;
+type CardFormContextType = {
+  formData: CardForm;
+  dispatch: React.Dispatch<{ type: Action; payload: CardForm }>;
 };
 
 const createInitialFormState = (): CardForm => ({
@@ -65,4 +51,17 @@ const reducer = (state: CardForm, action: { type: Action; payload: CardForm }) =
     default:
       return state;
   }
+};
+
+export const CardFormContext = createContext<CardFormContextType>({
+  formData: createInitialFormState(),
+  dispatch: () => {},
+});
+
+export const CardFormProvider = ({ children }: PropsWithChildren) => {
+  const [formData, dispatch] = useReducer(reducer, createInitialFormState());
+
+  return (
+    <CardFormContext.Provider value={{ formData, dispatch }}>{children}</CardFormContext.Provider>
+  );
 };
