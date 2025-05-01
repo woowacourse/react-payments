@@ -108,19 +108,19 @@ export default function RegisterPage() {
     });
   };
 
-  useEffect(() => {
-    const currentFocusedInput = document.activeElement;
+  useEffect(
+    function handleNextInputFocus() {
+      const currentFocusedInput = document.activeElement;
+      if (!isInputElement(currentFocusedInput)) return;
+      if (currentFocusedInput.value?.length < currentFocusedInput?.maxLength) return;
 
-    if (!isInputElement(currentFocusedInput)) return;
+      const currentSequenceNumber = Number(currentFocusedInput.getAttribute('data-sequence'));
+      const nextInput = $<HTMLInputElement | HTMLSelectElement>(`[data-sequence="${currentSequenceNumber + 1}"]`);
 
-    const currentSequenceNumber = Number(currentFocusedInput.getAttribute('data-sequence'));
-
-    if (currentFocusedInput.value?.length < currentFocusedInput?.maxLength) return;
-
-    const nextInput = $<HTMLInputElement | HTMLSelectElement>(`[data-sequence="${currentSequenceNumber + 1}"]`);
-
-    if (nextInput) nextInput.focus();
-  }, [cardNumber, cardExpirationDate, cardCVCNumber]);
+      if (nextInput) nextInput.focus();
+    },
+    [cardNumber, cardExpirationDate, cardCVCNumber],
+  );
 
   useEffect(() => {
     if (!isCardNumberIsValid) setCurrentStep(1);
