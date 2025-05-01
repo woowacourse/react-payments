@@ -96,7 +96,7 @@ export default function RegisterPage() {
   // 카드 뒤집기 상태
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleCardRegisterFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const selectedCardCompany = CARD_COMPANIES.find((company) => company.id === selectedCompany);
@@ -147,7 +147,7 @@ export default function RegisterPage() {
 
       <Spacing size={30} />
 
-      <S.CardInfoForm onSubmit={handleSubmit}>
+      <S.CardInfoForm onSubmit={handleCardRegisterFormSubmit}>
         <If condition={currentStep === 6}>
           <Button type="submit" isFixed>
             확인
