@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  height: 90px;
+}
+
+.expireDateInputContainer {
+  display: flex;
+  gap: 0.62rem;
+}
+
+.expireDateBox {
+  width: 50%;
+}
+
+.expireDateInputBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  height: 80px;
+  padding-bottom: 0.5rem;
+}
+
+.errorMessage {
+  color: #ff3d3d;
+  font-family: "Noto Sans KR";
+  font-size: 0.75rem;
+  height: 15px;
+}

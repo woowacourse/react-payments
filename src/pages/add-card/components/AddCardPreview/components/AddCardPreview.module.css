@@ -1,0 +1,105 @@
+.previewCard {
+  margin: 0 auto;
+  width: 340px;
+  height: 210px;
+  background-color: #333333;
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.previewHeader {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.chip {
+  width: 3.125rem;
+  height: 2.125rem;
+  background-color: #ddcd78;
+  border-radius: 4px;
+}
+
+.cardNumbers {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.125rem;
+  font-weight: 500;
+  height: 20px;
+}
+
+.cardNumber {
+  width: 55px;
+  letter-spacing: 5px;
+}
+
+.dot {
+  display: flex;
+  gap: 0.65rem;
+  width: 65px;
+  padding-bottom: 0.25rem;
+}
+
+.expire {
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  height: 20px;
+}
+
+.expire > span {
+  display: inline-block;
+  width: 25px;
+}
+
+.expire > span:nth-child(2) {
+  width: auto;
+  padding-right: 0.25rem;
+}
+
+.cardOwner {
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  height: 20px;
+}
+
+.BC카드 {
+  background-color: #f04651;
+}
+
+.신한카드 {
+  background-color: #0046ff;
+}
+
+.카카오뱅크 {
+  background-color: #ffe600;
+}
+
+.현대카드 {
+  background-color: #000;
+}
+
+.우리카드 {
+  background-color: #007bc8;
+}
+
+.롯데카드 {
+  background-color: #ed1c24;
+}
+
+.하나카드 {
+  background-color: #009490;
+}
+
+.국민카드 {
+  background-color: #6a6056;
+}
