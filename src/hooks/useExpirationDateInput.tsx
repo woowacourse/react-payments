@@ -4,10 +4,12 @@ import {
   isUnderMaxLength,
   isValidMonth,
 } from "../validation/validate";
-import type { ExpirationKey } from "../types/cardKeyTypes";
+import { EXPIRATION_FIELDS, type ExpirationKey } from "../types/cardKeyTypes";
 import { indexToExpirationKey } from "../utils/indexToExpirationKey";
 import { useError } from "./useError";
 import { CARD_INPUT_LIMIT } from "../constants/CardInputLimit";
+import { moveFocusToNextInput } from "../utils/moveFocusToNextInput";
+import { CARD_STEP } from "../constants/CardStep";
 
 const EXPIRATION_DATE_ERROR_MESSAGE = {
   INVALID_LENGTH_ERROR: `${CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH}자리까지 입력 가능합니다.`,
@@ -25,12 +27,17 @@ const EXPIRATION_DATE_ERROR: Record<ExpirationKey, string> = {
   MONTH: "",
 };
 
-export default function useExpirationDateInput() {
+export default function useExpirationDateInput(handleStep: () => void) {
   const [cardExpirationDate, setcardExpirationDate] = useState(EXPIRATION_DATE);
   const { error: cardExpirationDateError, setErrorMessage } =
     useError<ExpirationKey>(EXPIRATION_DATE_ERROR);
 
-  const onExpirationDateChange = (value: string, index: number) => {
+  const onExpirationDateChange = (
+    value: string,
+    index: number,
+    step: number,
+    inputRefs: React.MutableRefObject<HTMLInputElement[]>
+  ) => {
     const expirationKey = indexToExpirationKey(index);
 
     const { errorMessage, key } = validateExpirationDate(value, expirationKey);
@@ -39,6 +46,18 @@ export default function useExpirationDateInput() {
 
     const newDate = { ...cardExpirationDate, [key]: value };
     setcardExpirationDate(newDate);
+
+    if (value.length < CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH) return;
+
+    moveFocusToNextInput(inputRefs, EXPIRATION_FIELDS.length, index);
+
+    const canStepForward =
+      step === CARD_STEP.EXPIRATION &&
+      index === EXPIRATION_FIELDS.length - 1 &&
+      Object.values(cardExpirationDateError).every((msg) => msg === "") &&
+      value.length === CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH;
+
+    if (canStepForward) handleStep();
   };
 
   return {

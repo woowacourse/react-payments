@@ -7,13 +7,14 @@ import {
 import { indexToExpirationKey } from "../../../utils/indexToExpirationKey";
 import Text from "../../../components/Text/Text";
 import { useRef } from "react";
-import { moveFocusToNextInput } from "../../../utils/moveFocusToNextInput";
-import { CARD_STEP } from "../../../constants/CardStep";
-import { CARD_INPUT_LIMIT } from "../../../constants/CardInputLimit";
 
 interface CardExpirationDateProps {
-  handleChange: (value: string, index: number) => void;
-  handleStep: () => void;
+  handleChange: (
+    value: string,
+    index: number,
+    step: number,
+    inputRefs: React.MutableRefObject<HTMLInputElement[]>
+  ) => void;
   step: number;
   cardExpirationDate: Record<ExpirationKey, string>;
   errorMessage: Record<ExpirationKey, string>;
@@ -29,7 +30,6 @@ const EXPIRATION_DATE_LABEL = {
 
 export default function CardExpirationDateInput({
   handleChange,
-  handleStep,
   step,
   cardExpirationDate,
   errorMessage,
@@ -40,18 +40,6 @@ export default function CardExpirationDateInput({
     EXPIRATION_FIELDS.map(
       (_, idx) => errorMessage[indexToExpirationKey(idx)]
     ).find((msg) => msg) || "";
-
-  const handleInputChange = (value: string, index: number) => {
-    handleChange(value, index);
-
-    if (value.length < CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH) return;
-
-    moveFocusToNextInput(inputRefs, EXPIRATION_FIELDS.length, index);
-
-    if (canGoToNextStep(step, index, value, firstError)) {
-      handleStep();
-    }
-  };
 
   return (
     <section className="card-expiration-date">
@@ -66,7 +54,7 @@ export default function CardExpirationDateInput({
             ref={(el) => {
               inputRefs.current[idx] = el!;
             }}
-            onChange={(value) => handleInputChange(value, idx)}
+            onChange={(value) => handleChange(value, idx, step, inputRefs)}
             value={cardExpirationDate[indexToExpirationKey(idx)]}
             errorMessage={errorMessage[indexToExpirationKey(idx)]}
             placeholder="12"
@@ -77,19 +65,5 @@ export default function CardExpirationDateInput({
 
       <Text textType="error">{firstError}</Text>
     </section>
-  );
-}
-
-function canGoToNextStep(
-  currentStep: number,
-  index: number,
-  value: string,
-  errorMessage: string
-) {
-  return (
-    currentStep === CARD_STEP.EXPIRATION &&
-    index === EXPIRATION_FIELDS.length - 1 &&
-    value.length === CARD_INPUT_LIMIT.EXPIRATION_DATE_MAX_LENGTH &&
-    errorMessage === ""
   );
 }

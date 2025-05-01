@@ -2,11 +2,9 @@ import styles from "./CardBrandSelect.module.css";
 import Text from "../../../components/Text/Text";
 import Select from "../../../components/Select/select";
 import { CARD_BRAND_INFO } from "../../../constants/CardBrandInfo";
-import { CARD_STEP } from "../../../constants/CardStep";
 
 interface CardBrandProps {
-  handleChange: (brand: string) => void;
-  handleStep: () => void;
+  handleChange: (brand: string, step: number) => void;
   step: number;
   errorMessage: string;
 }
@@ -20,16 +18,8 @@ const CARD_NUMBER_LABEL = {
 export default function CardBrandSelect({
   handleChange,
   step,
-  handleStep,
   errorMessage,
 }: CardBrandProps) {
-  const handleSelectChange = (value: string) => {
-    handleChange(value);
-    if (value && step === CARD_STEP.BRAND) {
-      handleStep();
-    }
-  };
-
   return (
     <section className={styles["card-brand"]}>
       <Text textType="title">{CARD_NUMBER_LABEL.TITLE}</Text>
@@ -38,7 +28,7 @@ export default function CardBrandSelect({
         <Select
           title={CARD_NUMBER_LABEL.TITLE}
           options={Object.keys(CARD_BRAND_INFO)}
-          handleChange={handleSelectChange}
+          handleChange={(value) => handleChange(value, step)}
         ></Select>
       </div>
       <Text textType="error">{errorMessage}</Text>

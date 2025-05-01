@@ -1,12 +1,10 @@
 import styles from "./CardPasswordInput.module.css";
 import Input from "../../../components/Input/Input";
 import Text from "../../../components/Text/Text";
-import { CARD_STEP } from "../../../constants/CardStep";
 import { CARD_INPUT_LIMIT } from "../../../constants/CardInputLimit";
 
 interface CardPasswordProps {
-  handleChange: (value: string) => void;
-  handleStep: () => void;
+  handleChange: (value: string, step: number) => void;
   step: number;
   password: string;
   errorMessage: string;
@@ -20,25 +18,17 @@ const CARD_PASSWORD_LABEL = {
 
 export default function CardPasswordInput({
   handleChange,
-  handleStep,
   step,
   password,
   errorMessage,
 }: CardPasswordProps) {
-  const handleInputChange = (value: string) => {
-    handleChange(value);
-    if (canGoToNextStep(step, value, errorMessage)) {
-      handleStep();
-    }
-  };
-
   return (
     <section className={styles["card-password"]}>
       <Text textType="title">{CARD_PASSWORD_LABEL.TITLE}</Text>
       <Text textType="description">{CARD_PASSWORD_LABEL.DESCRIPTION}</Text>
       <Text textType="subtitle">{CARD_PASSWORD_LABEL.SUBTITLE}</Text>
       <Input
-        onChange={handleInputChange}
+        onChange={(value) => handleChange(value, step)}
         value={password}
         textType="password"
         placeholder=""
@@ -47,17 +37,5 @@ export default function CardPasswordInput({
       />
       <Text textType="error">{errorMessage}</Text>
     </section>
-  );
-}
-
-function canGoToNextStep(
-  currentStep: number,
-  value: string,
-  errorMessage: string
-) {
-  return (
-    currentStep === CARD_STEP.PASSWORD &&
-    value.length === CARD_INPUT_LIMIT.PASSWORD_MAX_LENGTH &&
-    errorMessage === ""
   );
 }

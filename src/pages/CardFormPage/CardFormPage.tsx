@@ -17,18 +17,20 @@ import { CARD_STEP } from "../../constants/CardStep";
 import { PAYMENTS_ROUTE } from "../../constants/PaymentsRoute";
 
 export default function CardFormPage() {
-  const { cardNumbers, cardNumbersError, onCardNumberChange } =
-    useCardNumbersInput();
+  const { step, nextStep } = useStep();
+  let { cardNumbers, cardNumbersError, onCardNumberChange } =
+    useCardNumbersInput(nextStep);
   const {
     cardExpirationDate,
     cardExpirationDateError,
     onExpirationDateChange,
-  } = useExpirationDateInput();
+  } = useExpirationDateInput(nextStep);
   const { cvcNumbers, cvcNumbersError, onCvcNumberChange } =
-    useCvcNumberInput();
-  const { cardBrand, cardBrandError, onCardBrandChange } = useCardBrandSelect();
-  const { password, passwordError, onPasswordChange } = useCardPasswordInput();
-  const { step, nextStep } = useStep();
+    useCvcNumberInput(nextStep);
+  const { cardBrand, cardBrandError, onCardBrandChange } =
+    useCardBrandSelect(nextStep);
+  const { password, passwordError, onPasswordChange } =
+    useCardPasswordInput(nextStep);
 
   const navigate = useNavigate();
 
@@ -63,7 +65,6 @@ export default function CardFormPage() {
           <CardPasswordInput
             handleChange={onPasswordChange}
             step={step}
-            handleStep={nextStep}
             password={password}
             errorMessage={passwordError}
           />
@@ -72,7 +73,6 @@ export default function CardFormPage() {
           <CardCvcNumberInput
             handleChange={onCvcNumberChange}
             step={step}
-            handleStep={nextStep}
             cvcNumbers={cvcNumbers}
             errorMessage={cvcNumbersError}
           />
@@ -81,7 +81,6 @@ export default function CardFormPage() {
           <CardExpirationDateInput
             handleChange={onExpirationDateChange}
             step={step}
-            handleStep={nextStep}
             cardExpirationDate={cardExpirationDate}
             errorMessage={cardExpirationDateError}
           />
@@ -90,7 +89,6 @@ export default function CardFormPage() {
           <CardNumberInput
             handleChange={onCardNumberChange}
             step={step}
-            handleStep={nextStep}
             cardNumbers={cardNumbers}
             errorMessage={cardNumbersError}
           />
@@ -98,7 +96,6 @@ export default function CardFormPage() {
         <CardBrandSelect
           handleChange={onCardBrandChange}
           step={step}
-          handleStep={nextStep}
           errorMessage={cardBrandError}
         />
       </form>

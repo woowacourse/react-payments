@@ -4,13 +4,13 @@ import { indexToCardNumberKey } from "../../../utils/indexToCardNumberKey";
 import { CARD_NUMBER_FIELDS, type CardKey } from "../../../types/cardKeyTypes";
 import Text from "../../../components/Text/Text";
 import { useRef } from "react";
-import { moveFocusToNextInput } from "../../../utils/moveFocusToNextInput";
-import { CARD_STEP } from "../../../constants/CardStep";
-import { CARD_INPUT_LIMIT } from "../../../constants/CardInputLimit";
-
 interface CardNumberProps {
-  handleChange: (value: string, index: number) => void;
-  handleStep: () => void;
+  handleChange: (
+    value: string,
+    index: number,
+    step: number,
+    inputRefs: React.MutableRefObject<HTMLInputElement[]>
+  ) => void;
   step: number;
   cardNumbers: Record<CardKey, string>;
   errorMessage: Record<CardKey, string>;
@@ -24,7 +24,6 @@ const CARD_NUMBER_LABEL = {
 
 export default function CardNumberInput({
   handleChange,
-  handleStep,
   step,
   cardNumbers,
   errorMessage,
@@ -35,18 +34,6 @@ export default function CardNumberInput({
     CARD_NUMBER_FIELDS.map(
       (_, idx) => errorMessage[indexToCardNumberKey(idx)]
     ).find((msg) => msg) || "";
-
-  const handleInputChange = (value: string, index: number) => {
-    handleChange(value, index);
-
-    if (value.length < CARD_INPUT_LIMIT.CARD_NUMBER_MAX_LENGTH) return;
-
-    moveFocusToNextInput(inputRefs, CARD_NUMBER_FIELDS.length, index);
-
-    if (canGoToNextStep(step, index, value, firstError)) {
-      handleStep();
-    }
-  };
 
   return (
     <section className={styles["card-number"]}>
@@ -62,7 +49,7 @@ export default function CardNumberInput({
             key={key}
             value={cardNumbers[key]}
             errorMessage={errorMessage[key]}
-            onChange={(value) => handleInputChange(value, idx)}
+            onChange={(value) => handleChange(value, idx, step, inputRefs)}
             autoFocus={idx === 0}
           />
         ))}
@@ -71,17 +58,3 @@ export default function CardNumberInput({
     </section>
   );
 }
-
-const canGoToNextStep = (
-  currentStep: number,
-  index: number,
-  value: string,
-  errorMessage: string
-) => {
-  return (
-    currentStep === CARD_STEP.NUMBER &&
-    index === CARD_NUMBER_FIELDS.length - 1 &&
-    value.length === CARD_INPUT_LIMIT.CARD_NUMBER_MAX_LENGTH &&
-    errorMessage === ""
-  );
-};
