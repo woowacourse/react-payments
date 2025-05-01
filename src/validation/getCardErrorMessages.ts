@@ -8,7 +8,9 @@ import {
 } from './validateConditions';
 
 export const getCardNumberErrorMessage = (cardNumber: string) => {
-  if (cardNumber.length === 0) return;
+  if (cardNumber.length === 0) {
+    return;
+  }
   if (isNumber(cardNumber)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
@@ -17,8 +19,12 @@ export const getCardNumberErrorMessage = (cardNumber: string) => {
 };
 
 export const getCardExpirationMMErrorMessage = (expirationDate: string) => {
-  if (expirationDate.length === 0) return;
-  if (expirationDate === '0') return;
+  if (expirationDate.length === 0) {
+    return;
+  }
+  if (expirationDate === '0') {
+    return;
+  }
 
   if (!isValidFormatMonth(expirationDate)) {
     return ERROR_MESSAGE.INVALID_EXPIRATION_FORMAT;
@@ -34,8 +40,12 @@ export const getCardExpirationMMErrorMessage = (expirationDate: string) => {
 };
 
 export const getCardExpirationYYErrorMessage = (expirationDate: string) => {
-  if (expirationDate.length === 0) return;
-  if (!isValidLengthYear(expirationDate)) return;
+  if (expirationDate.length === 0) {
+    return;
+  }
+  if (!isValidLengthYear(expirationDate)) {
+    return;
+  }
 
   if (isNumber(expirationDate)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
@@ -48,7 +58,9 @@ export const getCardExpirationYYErrorMessage = (expirationDate: string) => {
 };
 
 export const getCardCVCErrorMessage = (cvc: string) => {
-  if (cvc.length === 0) return;
+  if (cvc.length === 0) {
+    return;
+  }
   if (isNumber(cvc)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
@@ -57,7 +69,9 @@ export const getCardCVCErrorMessage = (cvc: string) => {
 };
 
 export const getCardPasswordErrorMessage = (password: string) => {
-  if (password.length === 0) return;
+  if (password.length === 0) {
+    return;
+  }
   if (isNumber(password)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }

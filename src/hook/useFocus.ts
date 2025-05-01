@@ -13,7 +13,9 @@ const useFocus = (inputKeys: string[]) => {
   const handleFocus = (key: keyof CardInputProps, maxLength: number) => {
     const currentIndex = inputKeys.indexOf(key);
     const nextKey = inputKeys[currentIndex + 1];
-    if (!nextKey) return;
+    if (!nextKey) {
+      return;
+    }
 
     if (inputRefsObject[key].current.value.length === maxLength) {
       inputRefsObject[nextKey].current?.focus();

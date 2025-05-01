@@ -35,7 +35,9 @@ const useForm = () => {
   const { errorMessages, handleErrorMessages } = useErrorMessages();
 
   const handleCardInput = (inputKey: keyof CardInputProps, value: string) => {
-    if (!validateCardInputs(inputKey, value)) return;
+    if (!validateCardInputs(inputKey, value)) {
+      return;
+    }
 
     handleErrorMessages(inputKey, '');
     setIsError((prev) => ({
@@ -50,7 +52,9 @@ const useForm = () => {
   };
 
   const validateCardInputs = (inputKey: keyof CardInputProps, value: string) => {
-    if (inputKey === 'cardBrand') return true;
+    if (inputKey === 'cardBrand') {
+      return true;
+    }
 
     const errorMessage = matchingErrorMessageFunc[inputKey](value);
     if (errorMessage && errorMessage.length > 0) {
