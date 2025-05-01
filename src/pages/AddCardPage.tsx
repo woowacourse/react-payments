@@ -11,7 +11,7 @@ import useCardFormStep from '../hook/useCardFormStep';
 import CardDescriptiveSelect from '../component/select/CardDescriptiveSelect';
 import Button from '../component/Button';
 import { useNavigate } from 'react-router-dom';
-import { PATH } from '../constants/paths';
+import PATH from '../constants/paths';
 
 const AddCardPage = () => {
   const navigate = useNavigate();

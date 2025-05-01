@@ -11,7 +11,7 @@ export const getCardNumberErrorMessage = (cardNumber: string) => {
   if (cardNumber.length === 0) {
     return;
   }
-  if (isNumber(cardNumber)) {
+  if (!isNumber(cardNumber)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
 
@@ -29,7 +29,7 @@ export const getCardExpirationMMErrorMessage = (expirationDate: string) => {
   if (!isValidFormatMonth(expirationDate)) {
     return ERROR_MESSAGE.INVALID_EXPIRATION_FORMAT;
   }
-  if (isNumber(expirationDate)) {
+  if (!isNumber(expirationDate)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
   if (!isValidMonthRange(expirationDate)) {
@@ -47,7 +47,7 @@ export const getCardExpirationYYErrorMessage = (expirationDate: string) => {
     return;
   }
 
-  if (isNumber(expirationDate)) {
+  if (!isNumber(expirationDate)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
   if (!isValidYearRange(expirationDate)) {
@@ -61,7 +61,7 @@ export const getCardCVCErrorMessage = (cvc: string) => {
   if (cvc.length === 0) {
     return;
   }
-  if (isNumber(cvc)) {
+  if (!isNumber(cvc)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
 
@@ -72,7 +72,7 @@ export const getCardPasswordErrorMessage = (password: string) => {
   if (password.length === 0) {
     return;
   }
-  if (isNumber(password)) {
+  if (!isNumber(password)) {
     return ERROR_MESSAGE.NOT_A_NUMBER;
   }
 

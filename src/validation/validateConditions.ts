@@ -6,7 +6,7 @@ import {
 } from '../constants/cardConstants';
 
 export const isNumber = (input: string) => {
-  return Number.isNaN(Number(input));
+  return !Number.isNaN(Number(input));
 };
 
 export const isValidYearRange = (expirationDate: string) => {
