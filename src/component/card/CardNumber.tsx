@@ -13,16 +13,16 @@ const CardNumber = ({ cardInput }: CardNumberProps) => {
         <CardInformation>{cardInput.first}</CardInformation>
         <CardInformation>{cardInput.second}</CardInformation>
         <CardMaskingInformation>
-          {cardInput.third && maskingNumber(String(cardInput.third).length)}
+          {cardInput.third ? maskingNumber(String(cardInput.third).length) : null}
         </CardMaskingInformation>
         <CardMaskingInformation>
-          {cardInput.fourth && maskingNumber(String(cardInput.fourth).length)}
+          {cardInput.fourth ? maskingNumber(String(cardInput.fourth).length) : null}
         </CardMaskingInformation>
       </CardNumberContainer>
 
       <CardInformation>
-        {cardInput.MM && `${cardInput.MM}`}
-        {cardInput.YY && `/${cardInput.YY}`}
+        {cardInput.MM ? `${cardInput.MM}` : null}
+        {cardInput.YY ? `/${cardInput.YY}` : null}
       </CardInformation>
     </>
   );
