@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Button from '../component/Button';
 import { slideDown } from '../animation/animation';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import PATH from '../constants/paths';
 const SuccessPage = () => {
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const SuccessPage = () => {
         {cardFirstNumber}로 시작하는 <br />
         {cardBrand}가 등록되었어요
       </Message>
-      <Button text="확인" handleClick={() => navigate('/')} />
+      <Button text="확인" handleClick={() => navigate(PATH.ADD_CARD)} />
     </Container>
   );
 };
