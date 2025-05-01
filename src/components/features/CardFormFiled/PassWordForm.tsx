@@ -1,25 +1,29 @@
 import { css } from '@emotion/react';
 
-import { CARD_FILED_CONFIG, CardFormProps, FormData } from './CardFormFiled.types';
+import { CARD_FILED_CONFIG, CardFormProps } from './CardFormFiled.types';
 
 import { CardInputLayout } from '../../common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
-import { CardForm } from '@/hooks/useCardFormState';
+import { useCardForm } from '@/hooks/useCardForm';
 import { useSingleCardInput } from '@/hooks/useSingleCardInput';
 
-type Props<T> = CardFormProps & FormData<T>;
-export const PassWordForm = ({ context, onNext }: Props<CardForm['password']>) => {
-  const { state: passWordFormData, setState: setPassWordFormData } = context;
+export const PassWordForm = ({ onNext }: CardFormProps) => {
+  const { formData, dispatch } = useCardForm();
 
   const {
     state: passWord,
     error,
     handleChange,
   } = useSingleCardInput({
-    state: passWordFormData,
-    setState: setPassWordFormData,
+    state: formData.password,
+    setState: (passWord) => {
+      dispatch({
+        type: 'PASSWORD',
+        payload: { ...formData, password: passWord },
+      });
+    },
     onValid: onNext,
     valueLength: CARD_FILED_CONFIG.password.valueLength,
   });

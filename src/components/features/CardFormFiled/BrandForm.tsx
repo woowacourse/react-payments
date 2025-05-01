@@ -1,20 +1,23 @@
 import { css } from '@emotion/react';
 
-import { CardFormProps, FormData } from './CardFormFiled.types';
+import { CardFormProps } from './CardFormFiled.types';
 
 import { CardInputLayout } from '../../common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Select } from '@/components/common/Select';
 import { CARD_BRAND_COLORS, CardBrand } from '@/constants/brandColors';
-import { CardForm } from '@/hooks/useCardFormState';
+import { useCardForm } from '@/hooks/useCardForm';
 
 const categories = Object.keys(CARD_BRAND_COLORS);
-type Props<T> = CardFormProps & FormData<T>;
-export const BrandForm = ({ context, onNext }: Props<CardForm['brand']>) => {
-  const { state: brandFormData, setState: setBrandFormData } = context;
+
+export const BrandForm = ({ onNext }: CardFormProps) => {
+  const { formData: brandFormData, dispatch: setBrandFormData } = useCardForm();
 
   const handleClickOption = (option: CardBrand) => {
-    setBrandFormData(option);
+    setBrandFormData({
+      type: 'BRAND',
+      payload: { ...brandFormData, brand: option },
+    });
     onNext();
   };
 
@@ -32,7 +35,7 @@ export const BrandForm = ({ context, onNext }: Props<CardForm['brand']>) => {
           margin-bottom: 20px;
         `}
       >
-        <Select selectedOptions={brandFormData ?? '전체'}>
+        <Select selectedOptions={brandFormData.brand ?? '전체'}>
           {categories.map((category) => (
             <Select.Option
               key={category}

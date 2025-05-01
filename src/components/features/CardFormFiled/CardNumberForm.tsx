@@ -1,21 +1,24 @@
 import { css } from '@emotion/react';
 
-import { CardFormProps, FormData } from './CardFormFiled.types';
+import { CardFormProps } from './CardFormFiled.types';
 
 import { CardInputLayout } from '../../common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
-import { CardForm } from '@/hooks/useCardFormState';
+import { useCardForm } from '@/hooks/useCardForm';
 import { useCardNumber } from '@/hooks/useCardNumber';
 
-type Props<T> = CardFormProps & FormData<T>;
-export const CardNumberForm = ({ context, onNext }: Props<CardForm['cardNumber']>) => {
-  const { state: cardNumberFormData, setState: setCardNumberFormData } = context;
+export const CardNumberForm = ({ onNext }: CardFormProps) => {
+  const { formData, dispatch } = useCardForm();
 
   const { cardNumbers, error, handleChange, setInputRef } = useCardNumber({
-    cardNumbers: cardNumberFormData,
-    setCardNumbers: setCardNumberFormData,
+    cardNumbers: formData.cardNumber,
+    setCardNumbers: (cardNumber) =>
+      dispatch({
+        type: 'CARD_NUMBER',
+        payload: { ...formData, cardNumber },
+      }),
     onValid: onNext,
   });
 

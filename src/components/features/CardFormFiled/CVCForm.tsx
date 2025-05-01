@@ -1,25 +1,28 @@
 import { css } from '@emotion/react';
 
-import { CARD_FILED_CONFIG, CardFormProps, FormData } from './CardFormFiled.types';
+import { CARD_FILED_CONFIG, CardFormProps } from './CardFormFiled.types';
 
 import { CardInputLayout } from '../../common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
-import { CardForm } from '@/hooks/useCardFormState';
+import { useCardForm } from '@/hooks/useCardForm';
 import { useSingleCardInput } from '@/hooks/useSingleCardInput';
 
-type Props<T> = CardFormProps & FormData<T>;
-export const CVCForm = ({ context, onNext }: Props<CardForm['cvc']>) => {
-  const { state: cvcNumberFormData, setState: setCVCNumberFormData } = context;
+export const CVCForm = ({ onNext }: CardFormProps) => {
+  const { formData, dispatch } = useCardForm();
 
   const {
     state: CVCNumber,
     error,
     handleChange,
   } = useSingleCardInput({
-    state: cvcNumberFormData,
-    setState: setCVCNumberFormData,
+    state: formData.cvc,
+    setState: (cvc) =>
+      dispatch({
+        type: 'CVC',
+        payload: { ...formData, cvc },
+      }),
     onValid: onNext,
     valueLength: CARD_FILED_CONFIG.cvc.valueLength,
   });

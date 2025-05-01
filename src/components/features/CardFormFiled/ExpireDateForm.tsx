@@ -1,23 +1,27 @@
 import { css } from '@emotion/react';
 
-import { CardFormProps, FormData } from './CardFormFiled.types';
+import { CardFormProps } from './CardFormFiled.types';
 
 import { CardInputLayout } from '../../common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
-import { CardForm } from '@/hooks/useCardFormState';
+import { useCardForm } from '@/hooks/useCardForm';
 import { useExpireDate } from '@/hooks/useExpireDate';
 
 const ExpireDatePlaceholder = ['MM', 'YY'];
 
-type Props<T> = CardFormProps & FormData<T>;
-export const ExpireDateForm = ({ context, onNext }: Props<CardForm['expireDate']>) => {
-  const { state: expireDateFormData, setState: setExpireDateFormData } = context;
+export const ExpireDateForm = ({ onNext }: CardFormProps) => {
+  const { formData, dispatch } = useCardForm();
 
   const { expireDates, error, handleChange, setInputRef } = useExpireDate({
-    expireDates: expireDateFormData,
-    setExpireDates: setExpireDateFormData,
+    expireDates: formData.expireDate,
+    setExpireDates: (expireDate) => {
+      dispatch({
+        type: 'EXPIRE_DATE',
+        payload: { ...formData, expireDate },
+      });
+    },
     onValid: onNext,
   });
 
