@@ -7,16 +7,18 @@ interface LocationState {
   cardCompany: string;
 }
 
+const hasLocationState = (state: any): state is LocationState => state?.firstCardNumber && state?.cardCompany;
+
 export default function CompletePage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as LocationState;
+  const state = location.state;
 
   const handleClick = () => {
     navigate('/', { replace: true });
   };
 
-  if (!state?.firstCardNumber || !state?.cardCompany) return <Navigate to="/" replace />;
+  if (!hasLocationState(state)) return <Navigate to="/" replace />;
   return (
     <S.Wrapper>
       <S.IconWrapper>
