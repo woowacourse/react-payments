@@ -5,29 +5,30 @@ import {
   NumberInputContainer,
   ErrorText,
 } from '../../styles/CardForm.styles';
-import useCardCVCValidation from '../../hooks/Validation/useCardCVCValidation';
+import useCardPasswordValidation from '../../hooks/Validation/useCardPasswordValidation';
 
-interface CardCVCFormProps {
+interface CardPasswordProps {
   cardInfo: CardInfo;
   handleCardInfo: (field: keyof CardInfo, value: string) => void;
   maxLength: number;
 }
 
-function CardCVCForm({ cardInfo, handleCardInfo, maxLength }: CardCVCFormProps) {
-  const { isCardCVCError, errorText } = useCardCVCValidation(cardInfo, maxLength);
+function CardPasswordForm({ cardInfo, handleCardInfo, maxLength }: CardPasswordProps) {
+  const { isCardPasswordError, errorText } = useCardPasswordValidation(cardInfo, maxLength);
 
   return (
     <NumberInputForm>
-      <Label>CVC</Label>
+      <Label>비밀번호 앞 2자리</Label>
       <NumberInputContainer>
         <NumberInput
-          value={cardInfo.cvc}
+          value={cardInfo.passwordFront}
           setValue={(value) => {
-            handleCardInfo('cvc', value);
+            handleCardInfo('passwordFront', value);
           }}
           maxLength={maxLength}
-          placeholder="123"
-          isError={isCardCVCError}
+          placeholder="**"
+          isHidden={true}
+          isError={isCardPasswordError}
           autoFocus={true}
         />
       </NumberInputContainer>
@@ -36,4 +37,4 @@ function CardCVCForm({ cardInfo, handleCardInfo, maxLength }: CardCVCFormProps) 
   );
 }
 
-export default CardCVCForm;
+export default CardPasswordForm;

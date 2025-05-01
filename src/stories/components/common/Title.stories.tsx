@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Announcement from '../components/common/Announcement';
+import Title from '../../../components/common/Title';
 
 const meta = {
-  title: 'Announcement',
-  component: Announcement,
+  title: 'Components/common/Title',
+  component: Title,
   tags: ['autodocs'],
-} satisfies Meta<typeof Announcement>;
+} satisfies Meta<typeof Title>;
 
 export default meta;
 

@@ -1,13 +1,12 @@
+import { useRef } from 'react';
 import NumberInput from '../common/NumberInput';
-import { useState, useEffect } from 'react';
-import isZeroOrExactLength from '../../utils/isExactLength';
-import { ERROR_MESSAGE } from '../../constants/guide';
 import {
   NumberInputForm,
   Label,
   NumberInputContainer,
   ErrorText,
 } from '../../styles/CardForm.styles';
+import useCardNumberValidation from '../../hooks/Validation/useCardNumberValidation';
 
 interface CardNumberFormProps {
   cardInfo: CardInfo;
@@ -20,31 +19,14 @@ interface CardNumberFormProps {
 }
 
 function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormProps) {
-  const [errorText, setErrorText] = useState('');
-
-  useEffect(() => {
-    const condition = [
-      cardInfo.number.first,
-      cardInfo.number.second,
-      cardInfo.number.third,
-      cardInfo.number.fourth,
-    ].some((number) => {
-      if (isZeroOrExactLength(number, maxLength)) return false;
-      return true;
-    });
-    if (condition) setErrorText(ERROR_MESSAGE.GET_LENGTH_TEXT(maxLength));
-    else setErrorText('');
-  }, [
-    cardInfo.number.first,
-    cardInfo.number.second,
-    cardInfo.number.third,
-    cardInfo.number.fourth,
-  ]);
+  const { isCardNumberError, errorText } = useCardNumberValidation(cardInfo, maxLength);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const NumberInputInfo = [
     {
       value: cardInfo.number.first,
       setValue: (value: string) => handleCardInfo('number', value, 'first'),
+      autoFocus: true,
     },
     {
       value: cardInfo.number.second,
@@ -60,6 +42,25 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
     },
   ];
 
+  function handleChange(value: string, index: number) {
+    NumberInputInfo[index].setValue(value);
+
+    const updatedCardNumber = {
+      ...cardInfo.number,
+      [['first', 'second', 'third', 'fourth'][index]]: value,
+    };
+
+    const { isCardNumberError } = useCardNumberValidation(
+      { ...cardInfo, number: updatedCardNumber },
+      maxLength
+    );
+
+    if (value.length === maxLength && !isCardNumberError[index]) {
+      if (index === inputRefs.current.length - 1) inputRefs.current[index]?.blur();
+      else inputRefs.current[index + 1]?.focus();
+    }
+  }
+
   return (
     <NumberInputForm>
       <Label>카드 번호</Label>
@@ -68,9 +69,12 @@ function CardNumberForm({ cardInfo, handleCardInfo, maxLength }: CardNumberFormP
           <NumberInput
             key={index}
             value={inputInfo.value}
-            setValue={inputInfo.setValue}
+            setValue={(value: string) => handleChange(value, index)}
             maxLength={maxLength}
             placeholder="1234"
+            isError={isCardNumberError[index]}
+            inputRef={(element) => (inputRefs.current[index] = element)}
+            autoFocus={inputInfo.autoFocus}
           />
         ))}
       </NumberInputContainer>

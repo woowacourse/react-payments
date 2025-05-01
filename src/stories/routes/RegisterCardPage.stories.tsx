@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import App from '../App';
+import RegisterCardPage from '../../routes/RegisterCardPage';
 import { MemoryRouter } from 'react-router-dom';
-import { ROUTER_PATH } from '../constants/setting';
+import { ROUTER_PATH } from '../../constants/setting';
 
 const meta = {
-  title: 'App',
-  component: App,
+  title: 'Routes/RegisterCardPage',
+  component: RegisterCardPage,
   tags: ['autodocs'],
   decorators: [
     (Story) => (
@@ -14,7 +14,7 @@ const meta = {
       </MemoryRouter>
     ),
   ],
-} satisfies Meta<typeof App>;
+} satisfies Meta<typeof RegisterCardPage>;
 
 export default meta;
 
