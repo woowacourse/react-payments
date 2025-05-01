@@ -11,7 +11,7 @@ export const precise = {
     min?: number;
     max?: number;
   }) => value >= min && value <= max,
-  hasNotExpired: ({ month, year }: { month: string; year: string }) => {
+  isExpiredDate: ({ month, year }: { month: string; year: string }) => {
     const today = new Date();
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth() + 1;
@@ -19,8 +19,8 @@ export const precise = {
     const expiryYear = 2000 + Number(year);
     const expiryMonth = Number(month);
 
-    if (expiryYear > currentYear) return true;
-    if (expiryYear === currentYear && expiryMonth >= currentMonth) return true;
-    return false;
+    if (expiryYear > currentYear) return false;
+    if (expiryYear === currentYear && expiryMonth >= currentMonth) return false;
+    return true;
   },
 };

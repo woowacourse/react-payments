@@ -35,7 +35,7 @@ export const validate = {
     if (
       month.length === 2 &&
       year.length === 2 &&
-      !precise.hasNotExpired({ month, year })
+      precise.isExpiredDate({ month, year })
     ) {
       return {
         isValid: { month: false, year: false },
