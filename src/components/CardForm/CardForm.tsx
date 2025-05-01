@@ -8,10 +8,10 @@ import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router';
 import { useStack } from '../../hooks/useStack';
 import { useStepFlow } from '../../hooks/useStepFlow';
-import { isFormValid } from '../../validation/isFormValid';
 import { STEPS } from '../../constants';
 import styles from '../../../src/pages/HomePage/HomePage.module.css';
 import useValues from '../../hooks/useValues';
+import { useFormValid } from '../../hooks/useFormValid';
 
 type CardFormProps = ReturnType<typeof useValues>['cardForm'];
 
@@ -29,12 +29,12 @@ export function CardForm(props: CardFormProps) {
     navigate('/complete', {
       state: {
         firstCardNumber: cardNumbers.cardNumbers.first.value,
-        company
+        company: company.company
       }
     });
   };
 
-  const buttonVisible = isFormValid({
+  const buttonVisible = useFormValid({
     cardNumbers: cardNumbers.cardNumbers,
     expiration: expiration.expiration,
     cvc: cvc.cvc,
