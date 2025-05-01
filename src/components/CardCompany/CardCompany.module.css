@@ -39,7 +39,7 @@
 li {
   display: flex;
   align-items: center;
-  color: var(--color-gray2);
+  color: var(--color-gray);
   width: 316px;
   height: 31px;
   padding: 7px 73px 7px 10px;
