@@ -6,3 +6,7 @@ export const $ = <TElement extends Element = HTMLElement, USelector extends stri
 
   return target!;
 };
+
+export const isInputElement = (element: Element | null): element is HTMLInputElement => {
+  return element instanceof HTMLInputElement;
+};

@@ -21,7 +21,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './RegisterPage.styles';
-import { $ } from '@/utils';
+import { $, isInputElement } from '@/utils';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -109,7 +109,10 @@ export default function RegisterPage() {
   };
 
   useEffect(() => {
-    const currentFocusedInput = document.activeElement as HTMLInputElement;
+    const currentFocusedInput = document.activeElement;
+
+    if (!isInputElement(currentFocusedInput)) return;
+
     const currentSequenceNumber = Number(currentFocusedInput.getAttribute('data-sequence'));
 
     if (currentFocusedInput.value?.length < currentFocusedInput?.maxLength) return;
