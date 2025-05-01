@@ -1,12 +1,23 @@
+import { CardBrand } from '@/constants/brandColors';
+
+export type Action = 'CARD_NUMBER' | 'BRAND' | 'EXPIRE_DATE' | 'CVC' | 'PASSWORD';
+
+export type CardInputItem = {
+  value: string;
+  isValid: boolean;
+};
+export type CardForm = {
+  cardNumber: CardInputItem[];
+  brand: CardBrand | null;
+  expireDate: CardInputItem[];
+  cvc: CardInputItem;
+  password: CardInputItem;
+};
+
 export type CardFormFiledProps = {
   errorMessage?: string;
   onChange: (index: number, e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (index: number, e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-export type CardInputType = {
-  value: string;
-  isValid: boolean;
 };
 
 export const CARD_FILED_CONFIG = {
@@ -34,11 +45,4 @@ export type CardFormProps = {
    * Function to be called when moving to the next step.
    */
   onNext: (value?: string) => void;
-};
-
-export type FormData<T> = {
-  /**
-   * The state of the form field.
-   */
-  context: { state: T; setState: (newState: T) => void };
 };
