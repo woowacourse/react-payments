@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import type { ErrorMessagesProps } from '../types/ErrorMessagesType';
-
+import type { CardInputProps } from '../types/CardInputTypes';
 const useErrorMessages = () => {
-  const [errorMessages, setErrorMessages] = useState<ErrorMessagesProps>({
+  const [errorMessages, setErrorMessages] = useState<CardInputProps>({
     first: '',
     second: '',
     third: '',
@@ -14,8 +13,8 @@ const useErrorMessages = () => {
     cardBrand: '',
   });
 
-  const handleErrorMessages = (key: keyof ErrorMessagesProps, message: string) => {
-    setErrorMessages((prev: ErrorMessagesProps) => ({
+  const handleErrorMessages = (key: keyof CardInputProps, message: string) => {
+    setErrorMessages((prev: CardInputProps) => ({
       ...prev,
       [key]: message,
     }));

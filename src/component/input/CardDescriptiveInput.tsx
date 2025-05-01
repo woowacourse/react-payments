@@ -8,8 +8,8 @@ interface ValueProps {
   [key: string]: string | string;
 }
 
-interface IsErrorProps {
-  [key: string]: boolean;
+interface ErrorMessageProps {
+  [key: keyof ErrorMessageProps]: string;
 }
 
 interface DescriptionTextProps {
@@ -21,8 +21,7 @@ interface CardDescriptiveInputProps {
   config: CardInputConfig;
   descriptionText: DescriptionTextProps;
   value: ValueProps;
-  errorMessage: string;
-  isErrors: IsErrorProps;
+  errorMessages: ErrorMessageProps;
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
 }
 
@@ -30,20 +29,13 @@ const CardDescriptiveInput = ({
   config,
   descriptionText,
   value,
-  errorMessage,
-  isErrors,
+  errorMessages,
   handleCardInput,
 }: CardDescriptiveInputProps) => {
   return (
     <FormSectionContainer>
       <Description headText={descriptionText.headText} detailText={descriptionText.detailText} />
-      <CardLabeledInput
-        config={config}
-        value={value}
-        errorMessage={errorMessage}
-        handleCardInput={handleCardInput}
-        isErrors={isErrors}
-      />
+      <CardLabeledInput config={config} value={value} errorMessages={errorMessages} handleCardInput={handleCardInput} />
     </FormSectionContainer>
   );
 };

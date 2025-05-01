@@ -16,8 +16,8 @@ import PATH from '../constants/paths';
 const AddCardPage = () => {
   const navigate = useNavigate();
 
-  const { cardInput, handleCardInput, errorMessages, isError } = useForm();
-  const { stepIndex, handleStepIndex } = useCardFormStep({ cardInput, isError });
+  const { cardInput, handleCardInput, errorMessages } = useForm();
+  const { stepIndex, handleStepIndex } = useCardFormStep({ cardInput, errorMessages });
 
   const handleSubmit = () => {
     navigate(PATH.SUCCESS, {
@@ -30,15 +30,7 @@ const AddCardPage = () => {
 
   useEffect(() => {
     handleStepIndex();
-  }, [cardInput, isError]);
-
-  const cardNumberErrorMessage = getFirstErrorMessage([
-    errorMessages.first,
-    errorMessages.second,
-    errorMessages.third,
-    errorMessages.fourth,
-  ]);
-  const expirationDateErrorMessage = getFirstErrorMessage([errorMessages.MM, errorMessages.YY]);
+  }, [cardInput]);
 
   return (
     <>
@@ -55,8 +47,9 @@ const AddCardPage = () => {
             config={CARD_LABEL_INPUT_CONFIG.password}
             descriptionText={DESCRIPTION_TEXT.password}
             value={{ password: cardInput.password }}
-            errorMessage={errorMessages.password}
-            isErrors={{ password: isError.password }}
+            errorMessages={{
+              password: errorMessages.password,
+            }}
             handleCardInput={handleCardInput}
           />
         )}
@@ -66,8 +59,9 @@ const AddCardPage = () => {
             config={CARD_LABEL_INPUT_CONFIG.CVC}
             descriptionText={DESCRIPTION_TEXT.CVC}
             value={{ CVC: cardInput.CVC }}
-            errorMessage={errorMessages.CVC}
-            isErrors={{ CVC: isError.CVC }}
+            errorMessages={{
+              CVC: errorMessages.CVC,
+            }}
             handleCardInput={handleCardInput}
           />
         )}
@@ -77,8 +71,10 @@ const AddCardPage = () => {
             config={CARD_LABEL_INPUT_CONFIG.expirationDate}
             descriptionText={DESCRIPTION_TEXT.expirationDate}
             value={{ MM: cardInput.MM, YY: cardInput.YY }}
-            errorMessage={expirationDateErrorMessage}
-            isErrors={{ MM: isError.MM, YY: isError.YY }}
+            errorMessages={{
+              MM: errorMessages.MM,
+              YY: errorMessages.YY,
+            }}
             handleCardInput={handleCardInput}
           />
         )}
@@ -95,8 +91,12 @@ const AddCardPage = () => {
               third: cardInput.third,
               fourth: cardInput.fourth,
             }}
-            errorMessage={cardNumberErrorMessage}
-            isErrors={{ first: isError.first, second: isError.second, third: isError.third, fourth: isError.fourth }}
+            errorMessages={{
+              first: errorMessages.first,
+              second: errorMessages.second,
+              third: errorMessages.third,
+              fourth: errorMessages.fourth,
+            }}
             handleCardInput={handleCardInput}
           />
         )}

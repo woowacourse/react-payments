@@ -19,7 +19,7 @@ type Story = StoryObj<typeof CardLabeledInput>;
 
 export const CardNumberDefault: Story = {
   render: () => {
-    const { handleCardInput, errorMessages, isError } = useForm();
+    const { handleCardInput, errorMessages } = useForm();
 
     return (
       <CardLabeledInput
@@ -31,7 +31,6 @@ export const CardNumberDefault: Story = {
           errorMessages.fourth,
         ])}
         handleCardInput={handleCardInput}
-        isErrors={{ first: isError.first, second: isError.second, third: isError.third, fourth: isError.fourth }}
         value={{ first: '1111', second: '2222', third: '3333', fourth: '4444' }}
       />
     );

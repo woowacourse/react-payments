@@ -22,16 +22,6 @@ const useForm = () => {
     cardBrand: '',
   });
 
-  const [isError, setIsError] = useState({
-    first: false,
-    second: false,
-    third: false,
-    fourth: false,
-    MM: false,
-    YY: false,
-    CVC: false,
-    password: false,
-  });
   const { errorMessages, handleErrorMessages } = useErrorMessages();
 
   const handleCardInput = (inputKey: keyof CardInputProps, value: string) => {
@@ -40,10 +30,6 @@ const useForm = () => {
     }
 
     handleErrorMessages(inputKey, '');
-    setIsError((prev) => ({
-      ...prev,
-      [inputKey]: false,
-    }));
 
     setCardInput((prev: CardInputProps) => ({
       ...prev,
@@ -59,10 +45,6 @@ const useForm = () => {
     const errorMessage = matchingErrorMessageFunc[inputKey](value);
     if (errorMessage && errorMessage.length > 0) {
       handleErrorMessages(inputKey, errorMessage);
-      setIsError((prev) => ({
-        ...prev,
-        [inputKey]: true,
-      }));
 
       return false;
     }
@@ -81,7 +63,7 @@ const useForm = () => {
     password: getCardPasswordErrorMessage,
   };
 
-  return { cardInput, handleCardInput, isError, errorMessages };
+  return { cardInput, handleCardInput, errorMessages };
 };
 
 export default useForm;

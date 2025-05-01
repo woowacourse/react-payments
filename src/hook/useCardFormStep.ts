@@ -4,10 +4,10 @@ import type { CardInputProps } from '../types/CardInputTypes';
 
 interface UseCardFormStepProps {
   cardInput: CardInputProps;
-  isError: { [key: string]: boolean };
+  errorMessages: CardInputProps;
 }
 
-const useCardFormStep = ({ cardInput, isError }: UseCardFormStepProps) => {
+const useCardFormStep = ({ cardInput, errorMessages }: UseCardFormStepProps) => {
   const [stepIndex, setStepIndex] = useState(0);
 
   const isFormInputComplete = (maxLength: number, inputKeys: (keyof CardInputProps)[]) => {
@@ -19,7 +19,7 @@ const useCardFormStep = ({ cardInput, isError }: UseCardFormStepProps) => {
   };
 
   const isFormValid = () => {
-    return Object.values(isError).every((error) => error === false);
+    return Object.values(errorMessages).every((error) => error.length === 0);
   };
 
   const cardNumbersInputKeys: (keyof CardInputProps)[] = CARD_LABEL_INPUT_CONFIG.cardNumber.inputKeys;
