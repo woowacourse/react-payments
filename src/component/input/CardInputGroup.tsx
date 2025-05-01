@@ -20,7 +20,7 @@ interface CardInputGroupProps {
   value: ValueProps;
 }
 
-const CardLabeledInput = ({ config, errorMessages, handleCardInput, value }: CardInputGroupProps) => {
+const CardInputGroup = ({ config, errorMessages, handleCardInput, value }: CardInputGroupProps) => {
   const { inputRefsObject, handleFocus } = useFocus(config.inputKeys);
 
   return (
@@ -44,4 +44,4 @@ const CardLabeledInput = ({ config, errorMessages, handleCardInput, value }: Car
   );
 };
 
-export default CardLabeledInput;
+export default CardInputGroup;

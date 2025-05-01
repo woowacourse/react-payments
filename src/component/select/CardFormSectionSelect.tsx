@@ -5,12 +5,12 @@ import DESCRIPTION_TEXT from '../../constants/descriptionText';
 import type { CardInputProps } from '../../types/CardInputTypes';
 import { FormSectionContainer } from '../../styles/FormSectionStyle';
 
-interface CardDescriptiveSelectProps {
+interface CardFormSectionSelectProps {
   cardInput: CardInputProps;
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
 }
 
-const CardDescriptiveSelect = ({ cardInput, handleCardInput }: CardDescriptiveSelectProps) => {
+const CardFormSectionSelect = ({ cardInput, handleCardInput }: CardFormSectionSelectProps) => {
   return (
     <FormSectionContainer>
       <Description headText={DESCRIPTION_TEXT.cardBrand.headText} detailText={DESCRIPTION_TEXT.cardBrand.detailText} />
@@ -23,4 +23,4 @@ const CardDescriptiveSelect = ({ cardInput, handleCardInput }: CardDescriptiveSe
   );
 };
 
-export default CardDescriptiveSelect;
+export default CardFormSectionSelect;

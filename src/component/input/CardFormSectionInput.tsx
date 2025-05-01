@@ -1,5 +1,5 @@
 import Description from '../Description';
-import CardLabeledInput from './CardLabeledInput';
+import CardInputGroup from './CardInputGroup';
 import type { CardInputProps } from '../../types/CardInputTypes';
 import type { CardInputConfig } from '../../types/CardConfigTypes';
 import { FormSectionContainer } from '../../styles/FormSectionStyle';
@@ -8,16 +8,16 @@ interface ValueProps {
   [key: string]: string;
 }
 
-type ErrorMessageProps = {
-  [K in keyof CardInputProps]: string;
-};
+interface ErrorMessageProps {
+  [key: string]: string;
+}
 
 interface DescriptionTextProps {
   headText: string;
   detailText: string;
 }
 
-interface CardDescriptiveInputProps {
+interface CardFormSectionInputProps {
   config: CardInputConfig;
   descriptionText: DescriptionTextProps;
   value: ValueProps;
@@ -25,19 +25,19 @@ interface CardDescriptiveInputProps {
   handleCardInput: (inputKey: keyof CardInputProps, value: string) => void;
 }
 
-const CardDescriptiveInput = ({
+const CardFormSectionInput = ({
   config,
   descriptionText,
   value,
   errorMessages,
   handleCardInput,
-}: CardDescriptiveInputProps) => {
+}: CardFormSectionInputProps) => {
   return (
     <FormSectionContainer>
       <Description headText={descriptionText.headText} detailText={descriptionText.detailText} />
-      <CardLabeledInput config={config} value={value} errorMessages={errorMessages} handleCardInput={handleCardInput} />
+      <CardInputGroup config={config} value={value} errorMessages={errorMessages} handleCardInput={handleCardInput} />
     </FormSectionContainer>
   );
 };
 
-export default CardDescriptiveInput;
+export default CardFormSectionInput;

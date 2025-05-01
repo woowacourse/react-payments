@@ -1,13 +1,13 @@
 import Card from '../component/card/Card';
 import styled from 'styled-components';
 import { justifyBrandLogo } from '../util/justifyBrandLogo';
-import CardDescriptiveInput from '../component/input/CardDescriptiveInput';
+import CardFormSectionInput from '../component/input/CardFormSectionInput';
 import DESCRIPTION_TEXT from '../constants/descriptionText';
 import useForm from '../hook/useForm';
 import CARD_LABEL_INPUT_CONFIG from '../constants/cardLabeledInputConfig';
 import { useEffect } from 'react';
 import useCardFormStep from '../hook/useCardFormStep';
-import CardDescriptiveSelect from '../component/select/CardDescriptiveSelect';
+import CardFormSectionSelect from '../component/select/CardFormSectionSelect';
 import Button from '../component/Button';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../constants/paths';
@@ -44,7 +44,7 @@ const AddCardPage = () => {
         )}
 
         {stepIndex >= 4 && (
-          <CardDescriptiveInput
+          <CardFormSectionInput
             config={CARD_LABEL_INPUT_CONFIG.password}
             descriptionText={DESCRIPTION_TEXT.password}
             value={{ password: cardInput.password }}
@@ -56,7 +56,7 @@ const AddCardPage = () => {
         )}
 
         {stepIndex >= 3 && (
-          <CardDescriptiveInput
+          <CardFormSectionInput
             config={CARD_LABEL_INPUT_CONFIG.CVC}
             descriptionText={DESCRIPTION_TEXT.CVC}
             value={{ CVC: cardInput.CVC }}
@@ -68,7 +68,7 @@ const AddCardPage = () => {
         )}
 
         {stepIndex >= 2 && (
-          <CardDescriptiveInput
+          <CardFormSectionInput
             config={CARD_LABEL_INPUT_CONFIG.expirationDate}
             descriptionText={DESCRIPTION_TEXT.expirationDate}
             value={{ MM: cardInput.MM, YY: cardInput.YY }}
@@ -80,10 +80,10 @@ const AddCardPage = () => {
           />
         )}
 
-        {stepIndex >= 1 && <CardDescriptiveSelect cardInput={cardInput} handleCardInput={handleCardInput} />}
+        {stepIndex >= 1 && <CardFormSectionSelect cardInput={cardInput} handleCardInput={handleCardInput} />}
 
         {stepIndex >= 0 && (
-          <CardDescriptiveInput
+          <CardFormSectionInput
             config={CARD_LABEL_INPUT_CONFIG.cardNumber}
             descriptionText={DESCRIPTION_TEXT.cardNumber}
             value={{
