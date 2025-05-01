@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { CardInputItem } from './useCardFormState';
-
+import { CardInputItem } from '@/components/features/CardFormFiled/CardFormFiled.types';
 import { validationCardInfo } from '@/utils/validation';
 
 type Props = {
@@ -26,13 +25,13 @@ export const useSingleCardInput = ({ state, setState, onValid, valueLength }: Pr
     setState(updatedState);
     if (!isValid) return setError(validateErrorMessage);
 
-    if (state.value.length === valueLength) {
+    if (newValue.length === valueLength) {
       handleNextStep(updatedState);
     }
   };
 
-  const handleNextStep = (state: CardInputItem) => {
-    if (state.isValid) {
+  const handleNextStep = (updatedState: CardInputItem) => {
+    if (updatedState.isValid) {
       onValid();
     }
   };
