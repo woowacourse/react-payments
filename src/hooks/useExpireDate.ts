@@ -1,8 +1,9 @@
 import { useCallback, useRef, useState } from 'react';
 
-import { CardInputItem } from './useCardFormState';
-
-import { CARD_FILED_CONFIG } from '@/components/features/CardFormFiled/CardFormFiled.types';
+import {
+  CARD_FILED_CONFIG,
+  CardInputItem,
+} from '@/components/features/CardFormFiled/CardFormFiled.types';
 
 type Props = {
   expireDates: CardInputItem[];

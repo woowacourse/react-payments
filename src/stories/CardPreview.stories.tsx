@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { CardInputType } from '@/components/features/CardFormFiled/CardFormFiled.types';
+import { CardInputItem } from '@/components/features/CardFormFiled/CardFormFiled.types';
 import { CardPreview } from '@/components/features/CardPreview';
 
 const meta = {
@@ -20,7 +20,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const createCardNumbers = (count: number, value: string): CardInputType[] => {
+const createCardNumbers = (count: number, value: string): CardInputItem[] => {
   return Array.from({ length: count }, () => ({ value, isValid: true }));
 };
 
