@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { MemoryRouter } from 'react-router-dom';
-import AnnounceForm from './AnnounceForm';
 import { CardInfoProvider } from '../../main-page/CardInfoContext';
+import AnnounceContainer from './AnnounceContainer';
 
 const meta = {
-  title: 'Forms/AddNewCardForm',
-  component: AnnounceForm,
+  title: 'AnnounceContainer',
+  component: AnnounceContainer,
   decorators: [
     (Story) => (
       <MemoryRouter initialEntries={['/']}>
@@ -17,7 +16,7 @@ const meta = {
       </MemoryRouter>
     ),
   ],
-} satisfies Meta<typeof AnnounceForm>;
+} satisfies Meta<typeof AnnounceContainer>;
 
 export default meta;
 

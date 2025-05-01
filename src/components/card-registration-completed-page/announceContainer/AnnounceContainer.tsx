@@ -14,7 +14,7 @@ const StyledFrame = styled.div`
   box-sizing: border-box;
 `;
 
-export default function AnnounceForm() {
+export default function AnnounceContainer() {
   return (
     <StyledFrame>
       <AnnounceSection />
