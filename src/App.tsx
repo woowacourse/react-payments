@@ -5,18 +5,24 @@ import AnnounceForm from './components/card-registration-completed-page/announce
 import { CardInfoProvider } from './components/main-page/CardInfoContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+const PAGE_TITLES = {
+  'Main Page': '/',
+  'Add New Card': '/add-card',
+  'Announce Card': '/announce',
+};
+
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: PAGE_TITLES['Main Page'],
     element: <AddNewCardForm />,
   },
 
   {
-    path: '/add-card',
+    path: PAGE_TITLES['Add New Card'],
     element: <AddNewCardForm />,
   },
   {
-    path: '/announce',
+    path: PAGE_TITLES['Announce Card'],
     element: <AnnounceForm />,
   },
 ]);
