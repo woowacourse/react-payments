@@ -19,6 +19,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrors 
       <Spacing size={8} />
       <S.InputWrapper>
         <Input
+          autoFocus
           placeholder="MM"
           maxLength={2}
           isError={cardExpirationDateErrors.month !== ''}

@@ -19,6 +19,7 @@ export default function CardCVCNumber({ register, cardCVCNumberErrors, onFocus, 
       <Spacing size={8} />
       <div>
         <Input
+          autoFocus
           placeholder="123"
           maxLength={3}
           isError={cardCVCNumberErrors.cvc !== ''}

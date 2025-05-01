@@ -120,11 +120,6 @@ export default function RegisterPage() {
   }, [cardNumber, cardExpirationDate, cardCVCNumber]);
 
   useEffect(() => {
-    const firstInput = $<HTMLInputElement>('input[data-sequence="1"]');
-    if (firstInput) firstInput.focus();
-  }, []);
-
-  useEffect(() => {
     if (!isCardNumberIsValid) setCurrentStep(1);
     else if (!isCardCompanyValid) setCurrentStep(2);
     else if (!isExpirationDateValid) setCurrentStep(3);

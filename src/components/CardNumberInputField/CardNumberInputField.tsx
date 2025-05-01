@@ -18,6 +18,7 @@ export default function CardNumber({ register, cardNumberErrors }: CardNumberPro
       <Spacing size={8} />
       <S.InputWrapper>
         <Input
+          autoFocus
           placeholder="1234"
           maxLength={4}
           isError={!!cardNumberErrors.first}

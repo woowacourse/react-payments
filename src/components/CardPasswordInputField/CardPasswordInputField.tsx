@@ -17,6 +17,7 @@ export default function CardPassword({ register, cardPasswordErrors }: CardPassw
       <Spacing size={8} />
       <S.InputWrapper>
         <Input
+          autoFocus
           type="password"
           placeholder="**"
           maxLength={2}
