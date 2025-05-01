@@ -4,8 +4,9 @@ import { colors } from '@/styles/global';
 
 export const StyledSelectContainer = styled.div`
   position: relative;
-  display: inline-block;
   width: 100%;
+  box-sizing: border-box;
+  max-width: 500px;
   border: 1px solid ${colors.GY2};
   border-radius: 4px;
   padding: 8px 12px;
