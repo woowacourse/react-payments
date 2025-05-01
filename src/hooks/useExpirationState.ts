@@ -1,15 +1,17 @@
-import { useState } from 'react';
-import { ExpirationKey, ExpirationType } from '../../types';
-import { INITIAL_EXPIRATION } from '../../constants';
-import focusNextInputIfFilled from '../../utils/focusNextInputIfFilled';
-import { isNumber } from '../../utils/isNumber';
-import { useExpirationRef } from './useExpirationRef';
-import { validateExpiration } from '../../validation/validateExpiration';
+import { useRef, useState } from 'react';
+import { ExpirationKey, ExpirationType } from '../types';
+import { INITIAL_EXPIRATION } from '../constants';
+import focusNextInputIfFilled from '../utils/focusNextInputIfFilled';
+import { isNumber } from '../utils/isNumber';
+import { validateExpiration } from '../validation/validateExpiration';
 
 export const useExpirationState = () => {
   const [expiration, setExpiration] = useState<ExpirationType>(INITIAL_EXPIRATION);
 
-  const expirationRef = useExpirationRef();
+  const expirationRef = {
+    month: useRef<HTMLInputElement>(null),
+    year: useRef<HTMLInputElement>(null)
+  };
 
   const handleExpirationChange = (field: ExpirationKey, value: string) => {
     const errorMessage = validateExpiration(field, value);

@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import { CardNumberType } from '../../types';
-import { INITIAL_CARD_NUMBER } from '../../constants';
-import { isNumber } from '../../utils/isNumber';
-import focusNextInputIfFilled from '../../utils/focusNextInputIfFilled';
-import { isValidCardNumber, isValidCardNumbers } from '../../validation/validateCardNumbers';
+import { CardNumberType } from '../types';
+import { INITIAL_CARD_NUMBER } from '../constants';
+import { isNumber } from '../utils/isNumber';
+import focusNextInputIfFilled from '../utils/focusNextInputIfFilled';
+import { isValidCardNumber } from '../validation/validateCardNumbers';
 
 export const useCardNumbersState = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);

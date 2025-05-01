@@ -1,6 +1,5 @@
-import { getCardNumbersErrorMessage } from '../validation/validateCardNumbers';
-import { useCardNumbersState } from './cardNumbers/useCardNumbersState';
-import { useExpirationState } from './expiration/useExpirationState';
+import { useCardNumbersState } from './useCardNumbersState';
+import { useExpirationState } from './useExpirationState';
 import useCompany from './useCompany';
 import useCvc from './useCvc';
 import usePassword from './usePassword';

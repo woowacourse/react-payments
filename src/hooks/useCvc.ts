@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CvcType } from '../types';
 import { INITIAL_CVC } from '../constants';
 import { isNumber } from '../utils/isNumber';
+import { getCvcErrorMessage } from '../validation/validateCvc';
 
 const useCvc = () => {
   const [cvc, setCvc] = useState<CvcType>(INITIAL_CVC);
@@ -17,10 +18,4 @@ const useCvc = () => {
   return { cvc, handleCvcChange };
 };
 
-const getCvcErrorMessage = (value: string) => {
-  if (value !== '' && value.length !== 3) {
-    return 'CVC는 3자리여야 합니다.';
-  }
-  return '';
-};
 export default useCvc;
