@@ -5,12 +5,12 @@ import type { CardInputConfig } from '../../types/CardConfigTypes';
 import { FormSectionContainer } from '../../styles/FormSectionStyle';
 
 interface ValueProps {
-  [key: string]: string | string;
+  [key: string]: string;
 }
 
-interface ErrorMessageProps {
-  [key: keyof ErrorMessageProps]: string;
-}
+type ErrorMessageProps = {
+  [K in keyof CardInputProps]: string;
+};
 
 interface DescriptionTextProps {
   headText: string;
