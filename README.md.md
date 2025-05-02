@@ -53,7 +53,7 @@
 
 - [x] Inputfield 컴포넌트 moveFocusOrBlur 훅으로 분리 (ref 전달하기 때문에)
 - [x] cardInformation 단일 값 분리 (cvc, password)
-  - [ ] InputField에서 공통 인터페이스 관리 및 실제 업데이트 로직 상위에서 제공받기
+  - [x] InputField에서 공통 인터페이스 관리 및 실제 업데이트 로직 상위에서 제공받기
 - [ ] component props 타입 해당 컴포넌트에서 관리하기
 - [x] FieldRenderer 컴포넌트 제작 후, FormContainer 로직 제어
 - [x] Select 컴포넌트 불필요한 isSelect 상태 제거

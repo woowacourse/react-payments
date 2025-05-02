@@ -17,15 +17,9 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
   const { isError, errorMessage, validateInput } = eachValidation;
   const { setRef, moveFocusOrBlur } = useFocusManager(inputNumber);
 
-  const handleChange = (index: number, value: string) => {
+  const handleChange = (value: string, index: number) => {
     validateInput(index, value);
-
-    setState((prev) => {
-      const updated = [...prev];
-      updated[index] = value;
-      return updated as CardInformationType[T];
-    });
-
+    setState(value, index);
     moveFocusOrBlur({ index, value, maxLength: inputProps.maxLength });
   };
 
@@ -37,8 +31,8 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
           <Input
             key={index}
             ref={setRef(index)}
-            value={state[index] ?? ""}
-            onChange={(v) => handleChange(index, v)}
+            value={Array.isArray(state) ? state[index] : state}
+            onChange={(v) => handleChange(v, index)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
             error={isError[index]}

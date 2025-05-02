@@ -12,14 +12,16 @@ export type ValidCardTuple = UniqueNumberType | ExpirationDateType | CvcNumberTy
 
 export type UniqueNumberType = [string, string, string, string];
 export type ExpirationDateType = [string, string];
-export type CvcNumberType = [string];
-export type PasswordType = [string];
+export type CvcNumberType = string;
+export type PasswordType = string;
+
+export type SetValueFn<T> = (value: T, index?: number) => void;
 
 export type setCardInformationType = {
-  uniqueNumber: React.Dispatch<React.SetStateAction<UniqueNumberType>>;
-  expirationDate: React.Dispatch<React.SetStateAction<ExpirationDateType>>;
-  cvcNumber: React.Dispatch<React.SetStateAction<CvcNumberType>>;
-  password: React.Dispatch<React.SetStateAction<PasswordType>>;
+  uniqueNumber: SetValueFn<UniqueNumberType[number]>;
+  expirationDate: SetValueFn<ExpirationDateType[number]>;
+  cvcNumber: SetValueFn<CvcNumberType>;
+  password: SetValueFn<PasswordType>;
   company: React.Dispatch<React.SetStateAction<CompanyType>>;
 };
 export type CardType = "visa" | "master" | "none";

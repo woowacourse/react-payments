@@ -54,7 +54,7 @@ export type InputFieldProps<T extends Exclude<keyof CardInformationType, "compan
   /** 카드 정보 상태값 */
   state: CardInformationType[T];
   /** 카드 정보 상태 변경 함수 */
-  setState: React.Dispatch<React.SetStateAction<CardInformationType[T]>>;
+  setState: setCardInformationType[T];
   /** 해당 필드에 대한 개별 유효성 검사 */
   eachValidation: Omit<useEachValidationType, "isComplete">;
 };
