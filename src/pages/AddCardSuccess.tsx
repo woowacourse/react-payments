@@ -5,13 +5,18 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import check from '/check.png';
 import { useEffect } from 'react';
+import { PARSE_RULE as CARD_NUMBER_PARSE_RULE } from '../constants/cardNumber';
 
 function AddCardSuccess() {
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (!location.state) {
+    if (
+      !location.state ||
+      location.state.selectedCard === null ||
+      location.state.firstCardNumber.length !== CARD_NUMBER_PARSE_RULE.length
+    ) {
       navigate(PAGE_URL.NOT_FOUND);
       return;
     }
