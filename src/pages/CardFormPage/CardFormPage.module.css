@@ -1,0 +1,20 @@
+.card-form-page {
+  max-width: 300px;
+  width: 100%;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0;
+}
+
+.card-form {
+  width: 100%;
+  justify-self: center;
+  height: 400px;
+  overflow: scroll;
+  margin: 20px 0 0 0;
+}
+
+.card-form::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

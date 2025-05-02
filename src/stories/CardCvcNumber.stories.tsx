@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardCvcNumber from "../CardCvcNumber/CardCvcNumber";
+import CardCvcNumber from "../pages/CardFormPage/CardCvcNumberInput/CardCvcNumberInput";
 
 const meta: Meta<typeof CardCvcNumber> = {
   title: "Example/CardCvcNumber",
@@ -12,7 +12,7 @@ type Story = StoryObj<typeof CardCvcNumber>;
 export const Primary: Story = {
   args: {
     handleChange: () => {},
-    cvcNumbers: "",
+    cvcNumbers: "123",
     errorMessage: "",
   },
 };

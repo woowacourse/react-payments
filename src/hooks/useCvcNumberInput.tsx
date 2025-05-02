@@ -1,37 +1,30 @@
 import { useState } from "react";
 import { isNumber, isUnderMaxLength } from "../validation/validate";
-
-const CVC_NUMBER_LIMIT = {
-  MAX_CVC_LENGTH: 3,
-} as const;
+import { CARD_INPUT_LIMIT } from "../constants/CardInputLimit";
+import { CARD_STEP } from "../constants/CardStep";
 
 const CVC_NUMBER_ERROR_MESSAGE = {
-  INVALID_LENGTH_ERROR: `CVC 번호는 ${CVC_NUMBER_LIMIT.MAX_CVC_LENGTH}자리 숫자여야 합니다.`,
+  INVALID_LENGTH_ERROR: `CVC 번호는 ${CARD_INPUT_LIMIT.CVC_NUMBER_MAX_LENGTH}자리 숫자여야 합니다.`,
   NOT_NUMBERIC_ERROR: "숫자만 입력 가능합니다.",
 };
 
-export default function useCvcNumberInput() {
+export default function useCvcNumberInput(handleStep: () => void) {
   const [cvcNumbers, setCardCvcNumbers] = useState("");
-  const [cvcNumbersError, setError] = useState("");
+  const [cvcNumbersError, setCvcError] = useState("");
 
-  const validateCvcNumbers = (value: string) => {
-    if (!isUnderMaxLength(value.length, CVC_NUMBER_LIMIT.MAX_CVC_LENGTH)) {
-      setError(CVC_NUMBER_ERROR_MESSAGE.INVALID_LENGTH_ERROR);
-      return false;
-    }
+  const onCvcNumberChange = (value: string, step: number) => {
+    const errorMesssage = validateCvcNumbers(value);
+    setCvcError(errorMesssage);
 
-    if (!isNumber(value)) {
-      setError(CVC_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC_ERROR);
-      return false;
-    }
+    if (errorMesssage) return;
+    setCardCvcNumbers(value.slice(0, CARD_INPUT_LIMIT.CVC_NUMBER_MAX_LENGTH));
 
-    setError("");
-    return true;
-  };
+    const canStepForward =
+      step === CARD_STEP.CVC &&
+      value.length === CARD_INPUT_LIMIT.CVC_NUMBER_MAX_LENGTH &&
+      cvcNumbersError === "";
 
-  const onCvcNumberChange = (value: string) => {
-    if (!validateCvcNumbers(value)) return;
-    setCardCvcNumbers(value.slice(0, CVC_NUMBER_LIMIT.MAX_CVC_LENGTH));
+    if (canStepForward) handleStep();
   };
 
   return {
@@ -40,3 +33,12 @@ export default function useCvcNumberInput() {
     onCvcNumberChange,
   };
 }
+
+const validateCvcNumbers = (value: string) => {
+  if (!isUnderMaxLength(value.length, CARD_INPUT_LIMIT.CVC_NUMBER_MAX_LENGTH))
+    return CVC_NUMBER_ERROR_MESSAGE.INVALID_LENGTH_ERROR;
+
+  if (!isNumber(value)) return CVC_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC_ERROR;
+
+  return "";
+};

@@ -1,33 +1,48 @@
+import React from "react";
 import styles from "./Input.module.css";
 
 type InputProps = {
+  textType?: string;
   onChange: (value: string) => void;
   value: string;
   placeholder?: string;
   errorMessage?: string;
+  autoFocus?: boolean;
 };
 
 const DEFAULT_PLACEHOLDER = "1234";
 const DEFAULT_ERROR_MESSAGE = "";
 
-export default function Input({
-  value,
-  onChange,
-  placeholder = DEFAULT_PLACEHOLDER,
-  errorMessage = DEFAULT_ERROR_MESSAGE,
-}: InputProps) {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-  };
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      textType = "text",
+      value,
+      onChange,
+      placeholder = DEFAULT_PLACEHOLDER,
+      errorMessage = DEFAULT_ERROR_MESSAGE,
+      autoFocus = false,
+    },
+    ref
+  ) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.value);
+    };
 
-  return (
-    <input
-      className={`${styles["input-number"]} ${
-        errorMessage ? styles["error"] : DEFAULT_ERROR_MESSAGE
-      }`}
-      placeholder={placeholder}
-      value={value}
-      onChange={handleInputChange}
-    />
-  );
-}
+    return (
+      <input
+        ref={ref}
+        className={`${styles[`input-text`]} ${
+          errorMessage ? styles["error"] : DEFAULT_ERROR_MESSAGE
+        }`}
+        type={textType}
+        placeholder={placeholder}
+        value={value}
+        onChange={handleInputChange}
+        autoFocus={autoFocus}
+      />
+    );
+  }
+);
+
+export default Input;

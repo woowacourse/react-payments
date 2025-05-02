@@ -1,4 +1,5 @@
 const CARD_TYPE = {
+  NUMBER_SLICE: 2,
   VISA: {
     NAME: "visa",
     START_NUMBER: 40,
@@ -14,7 +15,8 @@ const CARD_TYPE = {
   },
 } as const;
 
-export function getCardType(firstTwoDigits: number) {
+export function getCardType(cardNumber: string) {
+  const firstTwoDigits = Number(cardNumber.slice(0, CARD_TYPE.NUMBER_SLICE));
   if (
     firstTwoDigits >= CARD_TYPE.VISA.START_NUMBER &&
     firstTwoDigits <= CARD_TYPE.VISA.END_NUMBER
