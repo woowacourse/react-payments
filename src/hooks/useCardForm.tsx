@@ -42,14 +42,7 @@ const useCardForm = () => {
   } = useCardPassword();
 
   const getErrorMessageFromList = (errorMessageList: string[]) => {
-    const filteredErrorMessageList = errorMessageList.filter(
-      (errorMessage) => errorMessage !== '',
-    );
-
-    if (filteredErrorMessageList.length === 0) {
-      return '';
-    }
-    return filteredErrorMessageList[0];
+    return errorMessageList.find((errorMessage) => errorMessage !== '') ?? '';
   };
 
   const formStatus = {
