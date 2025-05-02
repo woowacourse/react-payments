@@ -34,10 +34,10 @@ export const isValidCardNumber = (cardNumber: CardNumberType) => {
 	return Object.values(cardNumber).every((value) => value.length === CARD_MAX_LENGTH && isNumberWithinRange(value, 4));
 };
 
-export const isValidateExpirationDate = (expirationDate: ExpirationDateType) => {
+export const isValidFullExpirationDate = (expirationDate: ExpirationDateType) => {
 	return expirationDate.month.length === EXPIRATION_MAX_LENGTH && expirationDate.year.length === EXPIRATION_MAX_LENGTH && isValidExpirationDate(expirationDate);
 };
 
-export const isValidateCvc = (cvcNumber: string) => {
+export const isValidCvc = (cvcNumber: string) => {
 	return cvcNumber.length === CVC_MAX_LENGTH && isNumberWithinRange(cvcNumber, 3);
 };
