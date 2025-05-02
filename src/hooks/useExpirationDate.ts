@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EXPIRATION_MAX_LENGTH, isNumberWithinRange, isValidateExpirationDate, isValidMonth, isValidYear } from "../utils/validation";
+import { EXPIRATION_MAX_LENGTH, isNumberWithinRange, isValidFullExpirationDate, isValidMonth, isValidYear } from "../utils/validation";
 import { MESSAGE } from "../components/form/constants/error";
 
 export interface ExpirationDateType {
@@ -13,7 +13,7 @@ const useExpirationDate = () => {
 		year: "",
 	});
 	const [error, setError] = useState({ month: "", year: "" });
-	const isComplete = isValidateExpirationDate(expirationDate);
+	const isComplete = isValidFullExpirationDate(expirationDate);
 	const CURRENT_YEAR = new Date().getFullYear() % 100;
 
 	const updateExpirationDate = (order: keyof ExpirationDateType, value: string) => {

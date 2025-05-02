@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { CVC_MAX_LENGTH, isNumberWithinRange, isValidateCvc } from "../utils/validation";
+import { CVC_MAX_LENGTH, isNumberWithinRange, isValidCvc } from "../utils/validation";
 import { MESSAGE } from "../components/form/constants/error";
 
 const useCardCvc = () => {
 	const [cvcNumber, setCvcNumber] = useState<string>("");
 	const [error, setError] = useState<string>("");
-	const isComplete = isValidateCvc(cvcNumber);
+	const isComplete = isValidCvc(cvcNumber);
 
 	const onChange = (value: string) => {
 		setCvcNumber(value);
