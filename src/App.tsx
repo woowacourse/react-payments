@@ -3,13 +3,15 @@ import CardPreview from "./components/CardPreview/CardPreview";
 import "./App.css";
 import CardRegisterForm from "./pages/CardRegisterForm/CardRegisterForm";
 import CardRegisterComplete from "./pages/CardRegisterComplete/CardRegisterComplete";
+import { ROUTE } from "./constants/route";
 
 function App() {
   return (
-    <BrowserRouter basename="/react-payments">
+    // <BrowserRouter basename="/react-payments">
+    <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path={ROUTE.HOME}
           element={
             <div className="app">
               <CardPreview />
@@ -18,7 +20,7 @@ function App() {
           }
         />
         <Route
-          path="/card/register/complete"
+          path={ROUTE.CARD_REGISTER.COMPLETE}
           element={<CardRegisterComplete />}
         />
       </Routes>

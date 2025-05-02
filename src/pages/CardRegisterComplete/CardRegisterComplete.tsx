@@ -4,6 +4,7 @@ import { CARD_COMPANIES } from "../../constants/cardCompanyInfo";
 import RegisterAnotherCardButton from "../../components/RegisterAnotherCardButton/RegisterAnotherCardButton";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { ROUTE } from "../../constants/route";
 
 const CardRegisterComplete = () => {
   const { cardNumbers, cardColor, isSubmitted } = useCardContext();
@@ -15,7 +16,7 @@ const CardRegisterComplete = () => {
   )?.name;
 
   useEffect(() => {
-    if (!isSubmitted) navigate("/");
+    if (!isSubmitted) navigate(ROUTE.HOME);
   }, [isSubmitted, navigate]);
 
   useEffect(() => {
