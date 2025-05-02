@@ -53,12 +53,12 @@ const HomePage = () => {
     <div className="app">
       <CardPreview />
       <form onSubmit={handleSubmit}>
-        {cardPasswordDisplay ? <CardPasswordInput /> : ''}
-        {cardCVCDisplay ? <CVCInput /> : ''}
-        {cardExpiryDisplay ? <CardExpiryInput /> : ''}
-        {cardBrandDisplay ? <CardBrandInput /> : ''}
+        {cardPasswordDisplay && <CardPasswordInput />}
+        {cardCVCDisplay && <CVCInput />}
+        {cardExpiryDisplay && <CardExpiryInput />}
+        {cardBrandDisplay && <CardBrandInput />}
         <CardNumbersInput />
-        {isFormComplete ? <Button text="확인" /> : ''}
+        {isFormComplete && <Button text="확인" />}
       </form>
     </div>
   );
