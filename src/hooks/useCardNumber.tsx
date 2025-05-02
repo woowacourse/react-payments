@@ -6,7 +6,7 @@ import {
 } from '../constants/cardNumber';
 import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
-const useCardNumber = () => {
+const useCardNumber = ({ handleNextStep }: { handleNextStep: () => void }) => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState(['', '', '', '']);
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -57,12 +57,29 @@ const useCardNumber = () => {
       return newCardNumber;
     });
 
-    if (
+    const isCurrentCardNumberValid =
       value.length === PARSE_RULE.length &&
-      checkValidCardNumber(value) === false
-    ) {
-      focusNextInput(n);
+      checkValidCardNumber(value) === false;
+
+    if (!isCurrentCardNumberValid) {
+      return;
     }
+
+    focusNextInput(n);
+
+    if (n !== cardNumber.length - 1) {
+      return;
+    }
+
+    const areAllPreviousCardNumberValid =
+      cardNumber.slice(0, n).every((value) => value !== '') &&
+      !getErrorMessageFromList(errorMessage.slice(0, n));
+
+    if (!areAllPreviousCardNumberValid) {
+      return;
+    }
+
+    handleNextStep();
   };
 
   return {

@@ -3,7 +3,11 @@ import { validateCardValidityPeriod } from '../validations/cardValidityPeriod';
 import { PARSE_RULE } from '../constants/cardValidityPeriod';
 import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
-const useCardValidityPeriod = () => {
+const useCardValidityPeriod = ({
+  handleNextStep,
+}: {
+  handleNextStep: () => void;
+}) => {
   const [cardValidityPeriod, setCardValidityPeriod] = useState({
     month: '',
     year: '',
@@ -40,10 +44,12 @@ const useCardValidityPeriod = () => {
       return;
     }
 
-    setCardValidityPeriod((prev) => ({
-      ...prev,
+    const newCardValidityPeriod = {
+      ...cardValidityPeriod,
       month: value,
-    }));
+    };
+
+    setCardValidityPeriod(newCardValidityPeriod);
 
     const newErrorMessage = validateCardValidityPeriod({
       month: value,
@@ -55,6 +61,16 @@ const useCardValidityPeriod = () => {
     if (value !== '' && newErrorMessage.month === '') {
       focusNextInput(0);
     }
+
+    const isCardValidityPeriodValid =
+      Object.values(newCardValidityPeriod).every((value) => value !== '') &&
+      !getErrorMessageFromList(Object.values(newErrorMessage));
+
+    if (!isCardValidityPeriodValid) {
+      return;
+    }
+
+    handleNextStep();
   };
 
   const onChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,10 +85,12 @@ const useCardValidityPeriod = () => {
       return;
     }
 
-    setCardValidityPeriod((prev) => ({
-      ...prev,
+    const newCardValidityPeriod = {
+      ...cardValidityPeriod,
       year: value,
-    }));
+    };
+
+    setCardValidityPeriod(newCardValidityPeriod);
 
     const newErrorMessage = validateCardValidityPeriod({
       month: cardValidityPeriod.month,
@@ -80,6 +98,16 @@ const useCardValidityPeriod = () => {
     });
 
     setErrorMessage(newErrorMessage);
+
+    const isCardValidityPeriodValid =
+      Object.values(newCardValidityPeriod).every((value) => value !== '') &&
+      !getErrorMessageFromList(Object.values(newErrorMessage));
+
+    if (!isCardValidityPeriodValid) {
+      return;
+    }
+
+    handleNextStep();
   };
 
   return {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PARSE_RULE, CVC_RULE, ERROR_MESSAGE } from '../constants/cardCVC';
 
-const useCardCVC = () => {
+const useCardCVC = ({ handleNextStep }: { handleNextStep: () => void }) => {
   const [cardCVC, setCardCVC] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -22,9 +22,17 @@ const useCardCVC = () => {
       value.length > PARSE_RULE.length ||
       Number(value) < CVC_RULE.min;
 
-    setErrorMessage(isNotValid ? ERROR_MESSAGE.CARD_CVC_LENGTH : '');
+    const newErrorMessage = isNotValid ? ERROR_MESSAGE.CARD_CVC_LENGTH : '';
+    setErrorMessage(newErrorMessage);
 
     setCardCVC(value);
+
+    const isCardCVCValid = value !== '' && newErrorMessage === '';
+    if (!isCardCVCValid) {
+      return;
+    }
+
+    handleNextStep();
   };
 
   return {

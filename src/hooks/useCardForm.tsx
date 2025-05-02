@@ -7,13 +7,17 @@ import useStep from './useStep';
 import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
 const useCardForm = () => {
+  const { step, STEP_NAME, handleNextStep } = useStep();
+
   const {
     cardNumber,
     onChangeCardNumber,
     errorMessage: cardNumberErrorMessage,
     setInputRef: setCardNumberInputRef,
     isCardNumberValid,
-  } = useCardNumber();
+  } = useCardNumber({
+    handleNextStep: () => handleNextStep(STEP_NAME.CardCompany),
+  });
 
   const {
     cardValidityPeriod,
@@ -22,14 +26,18 @@ const useCardForm = () => {
     errorMessage: cardValidityPeriodErrorMessage,
     setInputRef: setCardValidityPeriodInputRef,
     isCardValidityPeriodValid,
-  } = useCardValidityPeriod();
+  } = useCardValidityPeriod({
+    handleNextStep: () => handleNextStep(STEP_NAME.CardCVC),
+  });
 
   const {
     cardCVC,
     onChangeCVC,
     errorMessage: cardCVCErrorMessage,
     isCardCVCValid,
-  } = useCardCVC();
+  } = useCardCVC({
+    handleNextStep: () => handleNextStep(STEP_NAME.CardPassword),
+  });
 
   const {
     selectedCard,
@@ -38,7 +46,9 @@ const useCardForm = () => {
     CARD_COMPANY_PLACEHOLDER,
     onClickCardCompany,
     isCardCompanyValid,
-  } = useCardCompany();
+  } = useCardCompany({
+    handleNextStep: () => handleNextStep(STEP_NAME.CardValidityPeriod),
+  });
 
   const {
     cardPassword,
@@ -53,13 +63,6 @@ const useCardForm = () => {
     isCardValidityPeriodValid &&
     isCardCVCValid &&
     isCardPasswordValid;
-
-  const { step, STEP_NAME } = useStep({
-    isCardNumberValid,
-    isCardCompanyValid,
-    isCardValidityPeriodValid,
-    isCardCVCValid,
-  });
 
   return {
     formData: {
