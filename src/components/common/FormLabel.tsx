@@ -1,22 +1,22 @@
 import styled from '@emotion/styled';
 
-interface InputLabelsProps {
+interface FormLabelsProps {
   title: string;
   caption?: string;
 }
 
-const InputLabels = ({ title, caption }: InputLabelsProps) => {
+const FormLabel = ({ title, caption }: FormLabelsProps) => {
   return (
-    <InputLabelsContainer>
+    <FormLabelsContainer>
       <Title>{title}</Title>
       <Caption>{caption || ''}</Caption>
-    </InputLabelsContainer>
+    </FormLabelsContainer>
   );
 };
 
-export default InputLabels;
+export default FormLabel;
 
-const InputLabelsContainer = styled.div`
+const FormLabelsContainer = styled.div`
   width: 100%;
   margin-bottom: 16px;
 `;

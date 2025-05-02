@@ -1,20 +1,36 @@
-import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import CVCNumbers from '../components/CVCNumbers';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
+import CVCNumbers from '../../components/CVCNumbers';
+import { useState } from 'react';
 
 const meta: Meta<typeof CVCNumbers> = {
-  title: 'Components/CVCNumbers Container',
+  title: 'Components/CVCNumbers',
   component: CVCNumbers,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'CVC 번호 3자리를 입력받는 컴포넌트입니다. 숫자만 입력할 수 있으며, 입력 검증 기능이 포함되어 있습니다.',
+      },
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof CVCNumbers>;
 
 const Wrapper = () => {
-  const [cvcNumbers, setCvcNumbers] = useState<string>('');
-  return <CVCNumbers cvcNumbers={cvcNumbers} setCvcNumbers={setCvcNumbers} />;
+  const [cvcNumbers, setCvcNumbers] = useState('');
+  const [error, setError] = useState(false);
+
+  return (
+    <CVCNumbers
+      cvcNumbers={cvcNumbers}
+      setCvcNumbers={setCvcNumbers}
+      setCvcError={setError}
+    />
+  );
 };
 
 export const ValidInput: Story = {

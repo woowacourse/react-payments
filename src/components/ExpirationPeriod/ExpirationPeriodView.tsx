@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import InputLabels from '../common/InputLabels';
+import FormLabel from '../common/FormLabel';
 import InputTexts from '../common/InputTexts';
 
 export interface ExpirationPeriodViewProps {
@@ -13,6 +13,7 @@ export interface ExpirationPeriodViewProps {
   ) => void;
   onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onComplete?: () => void;
 }
 
 const ExpirationPeriodView = ({
@@ -22,10 +23,11 @@ const ExpirationPeriodView = ({
   handleInputChange,
   onFocus,
   onBlur,
+  onComplete,
 }: ExpirationPeriodViewProps) => {
   return (
     <Container data-testid='expiration-component'>
-      <InputLabels
+      <FormLabel
         title='카드 유효기간을 입력해 주세요'
         caption='월/년도(MMYY)를 순서대로 입력해 주세요.'
       />
@@ -35,8 +37,10 @@ const ExpirationPeriodView = ({
         state={period}
         eventHandler={handleInputChange}
         errors={errors}
+        type='text'
         onFocus={onFocus}
         onBlur={onBlur}
+        onComplete={onComplete}
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>

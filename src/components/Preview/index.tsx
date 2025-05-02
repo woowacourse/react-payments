@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PreviewView from './PreviewView';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+import { CardNumber } from '../../types';
 
 interface PreviewProps {
   cardNumbers: CardNumber;
   period: { month: string; year: string };
   separatorRef?: React.RefObject<HTMLDivElement | null>;
+  cardFrameColor: string;
 }
 
 const VISA_CARD_PREFIXES = '4';
@@ -20,7 +15,12 @@ const MASTERCARD_CARD_PREFIXES = {
   MAX: 55,
 } as const;
 
-const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
+const Preview = ({
+  cardNumbers,
+  period,
+  separatorRef,
+  cardFrameColor,
+}: PreviewProps) => {
   const [cardMethodSrc, setCardMethodSrc] = useState<string>('');
 
   const isVisa = (firstInput: string) => {
@@ -38,9 +38,9 @@ const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
   useEffect(() => {
     const firstInputValue = cardNumbers.first;
     if (isVisa(firstInputValue)) {
-      setCardMethodSrc(`${import.meta.env.BASE_URL}/images/visa.svg`);
+      setCardMethodSrc(`${import.meta.env.BASE_URL}images/visa.svg`);
     } else if (isMastercard(firstInputValue)) {
-      setCardMethodSrc(`${import.meta.env.BASE_URL}/images/Mastercard.svg`);
+      setCardMethodSrc(`${import.meta.env.BASE_URL}images/Mastercard.svg`);
     } else {
       setCardMethodSrc('');
     }
@@ -52,6 +52,7 @@ const Preview = ({ cardNumbers, period, separatorRef }: PreviewProps) => {
       period={period}
       separatorRef={separatorRef}
       cardMethodSrc={cardMethodSrc}
+      cardFrameColor={cardFrameColor}
     />
   );
 };

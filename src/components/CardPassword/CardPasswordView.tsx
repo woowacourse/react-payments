@@ -3,39 +3,39 @@ import styled from '@emotion/styled';
 import FormLabel from '../common/FormLabel';
 import InputTexts from '../common/InputTexts';
 
-export interface CVCNumbersViewProps {
-  cvcNumbers: string;
+export interface CardPasswordViewProps {
+  passwordNumbers: string;
   errorMessage: string;
   error: boolean;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onComplete?: () => void;
 }
 
-const CVCNumbersView = ({
-  cvcNumbers,
+const CardPasswordView = ({
+  passwordNumbers,
   errorMessage,
   error,
   handleInputChange,
-  onComplete,
-}: CVCNumbersViewProps) => {
+}: CardPasswordViewProps) => {
   return (
-    <Container data-testid='cvcnumbers-component'>
-      <FormLabel title='CVC 번호를 입력해 주세요' />
+    <Container data-testid='cardpassword-component'>
+      <FormLabel
+        title='비밀번호를 입력해 주세요'
+        caption='앞의 2자리를 입력해주세요'
+      />
       <InputTexts
-        label='CVC'
-        placeholder={['123']}
-        state={cvcNumbers}
+        label='비밀번호 앞 2자리'
+        placeholder={['00']}
+        state={passwordNumbers}
         eventHandler={handleInputChange}
         errors={[error]}
-        type='text'
-        onComplete={onComplete}
+        type='password'
       />
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </Container>
   );
 };
 
-export default CVCNumbersView;
+export default CardPasswordView;
 
 const Container = styled.div`
   display: flex;

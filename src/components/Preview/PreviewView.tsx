@@ -1,18 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+import { COLORS } from '../../styles/colors';
+import type { CardNumber } from '../../types';
 
 export interface PreviewViewProps {
   cardNumbers: CardNumber;
   period: { month: string; year: string };
   separatorRef?: React.RefObject<HTMLDivElement | null>;
   cardMethodSrc: string;
+  cardFrameColor: string;
 }
 
 const CARD_NUMBER_VISIBLE_THRESHOLD = 2;
@@ -22,10 +18,11 @@ const PreviewView = ({
   period,
   separatorRef,
   cardMethodSrc,
+  cardFrameColor,
 }: PreviewViewProps) => {
   return (
     <PreviewContainer data-testid='preview-component'>
-      <CardFrame>
+      <CardFrame cardFrameColor={cardFrameColor}>
         <ICChip />
         {cardMethodSrc && (
           <CardMethod
@@ -65,7 +62,7 @@ const PreviewContainer = styled.div`
   padding: 34px 0 45px;
 `;
 
-const CardFrame = styled.div`
+const CardFrame = styled.div<{ cardFrameColor: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,7 +70,7 @@ const CardFrame = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${({ cardFrameColor }) => cardFrameColor};
   box-shadow: 3px 3px 5px 0px #00000040;
   position: relative;
 `;
@@ -101,13 +98,12 @@ const CardNumberArea = styled.div`
 
 const CardNumber = styled.span`
   width: 38px;
-  font-family: 'Inter';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${COLORS.WHITE};
 `;
 
 const CardPeriodArea = styled.div`
@@ -123,23 +119,21 @@ const CardPeriodArea = styled.div`
 
 const CardPeriod = styled.span`
   width: 16px;
-  font-family: 'Inter';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${COLORS.WHITE};
 `;
 
 const Separator = styled.span`
-  font-family: 'Inter';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 2px;
   vertical-align: middle;
-  color: #ffffff;
+  color: ${COLORS.WHITE};
 `;
 
 const CardMethod = styled.img`

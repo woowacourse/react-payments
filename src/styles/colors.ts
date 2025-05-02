@@ -1,0 +1,14 @@
+export const COLORS = {
+  WHITE: '#ffffff',
+  BACKGROUND: '#f9f9f9',
+  TEXT_PRIMARY: '#333333',
+
+  BC_CARD: '#F04651',
+  SHINHAN_CARD: '#0046FF',
+  KAKAO_BANK: '#FFE600',
+  HYUNDAI_CARD: '#000000',
+  WOORI_CARD: '#007BC8',
+  LOTTE_CARD: '#ED1C24',
+  HANA_CARD: '#009490',
+  KB_CARD: '#6A6056',
+};
