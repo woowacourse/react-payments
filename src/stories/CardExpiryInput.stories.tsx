@@ -14,7 +14,7 @@ const meta: Meta<typeof CardExpiryInput> = {
       description: {
         component:
           "📆 `CardExpiryInput` 컴포넌트는 카드의 유효 기간을 MM / YY 형식으로 입력받는 UI입니다.\n\n" +
-          "- 월(MM): 01~12 사이의 두 자리 숫자만 허용됩니다.\n" +
+          `- 월(MM): ${CARD_VALIDATION_INFO.MIN_VALID_MONTH}~${CARD_VALIDATION_INFO.MAX_VALID_MONTH} 사이의 ${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}자리 숫자만 허용됩니다.\n` +
           "- 연도(YY): 현재 연도 이상만 허용됩니다. 예를 들어, 현재 연도가 2025년이라면 YY는 최소 `25` 이상이어야 합니다.\n\n" +
           "입력값에 따라 형식 오류, 범위 오류를 검증하며, 숫자만 허용되도록 유효성 검사를 수행합니다.",
       },

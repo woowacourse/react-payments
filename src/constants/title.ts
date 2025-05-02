@@ -1,3 +1,5 @@
+import { CARD_VALIDATION_INFO } from "./cardValidationInfo";
+
 export const INPUT_CONTAINER = {
   EXPIRE: {
     TITLE: "카드 유효기간을 입력해 주세요",
@@ -17,6 +19,6 @@ export const INPUT_CONTAINER = {
   },
   PASSWORD: {
     TITLE: "비밀번호를 입력해 주세요",
-    SUBTITLE: "앞의 2자리를 입력해주세요",
+    SUBTITLE: `앞의 ${CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH}자리를 입력해주세요`,
   },
 };

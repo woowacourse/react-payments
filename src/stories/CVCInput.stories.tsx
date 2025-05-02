@@ -13,13 +13,13 @@ const meta: Meta<typeof CVCInput> = {
     docs: {
       description: {
         component:
-          "💳 CVCInput은 3자리 숫자만 입력 가능한 카드 보안코드 필드입니다. 숫자가 아닌 값 입력, 자릿수 부족 등의 예외 처리를 포함하고 있습니다.",
+          `💳 CVCInput은 ${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}자리 숫자만 입력 가능한 카드 보안코드 필드입니다. 숫자가 아닌 값 입력, 자릿수 부족 등의 예외 처리를 포함하고 있습니다.`,
       },
     },
   },
   argTypes: {
     CVC: {
-      description: "현재 입력된 CVC 값 (최대 3자리 숫자)",
+      description: `현재 입력된 CVC 값 (최대 ${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}자리 숫자)`,
       control: false,
     },
     setCVC: {

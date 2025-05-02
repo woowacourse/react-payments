@@ -14,8 +14,8 @@ const meta: Meta<typeof CardNumbersInput> = {
       description: {
         component:
           "💳 `CardNumbersInput` 컴포넌트는 카드 번호를 입력받는 UI로, 일반적으로 4자리씩 나누어진 4개의 입력 필드로 구성됩니다.\n\n" +
-          "- 총 16자리 숫자 입력 (4자리 * 4칸)\n" +
-          "- 각 칸은 최대 4자리 숫자만 허용되며, 숫자가 아닌 값 또는 자릿수 부족 입력 시 에러 메시지가 표시됩니다.\n" +
+          `- 총 16자리 숫자 입력 (${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}자리 * 4칸)\n` +
+          `- 각 칸은 최대 ${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}자리 숫자만 허용되며, 숫자가 아닌 값 또는 자릿수 부족 입력 시 에러 메시지가 표시됩니다.\n` +
           "- 첫 번째 블록의 입력값을 기준으로 카드사를 식별할 수 있도록 처리할 수 있습니다 (예: 4로 시작하면 VISA 등).\n",
       },
     },
@@ -23,7 +23,7 @@ const meta: Meta<typeof CardNumbersInput> = {
   argTypes: {
     cardNumbers: {
       description:
-        "각 입력 칸에 입력된 카드 번호 배열 (총 4개, 각각 최대 4자리 숫자)",
+        `각 입력 칸에 입력된 카드 번호 배열 (총 4개, 각각 최대 ${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}자리 숫자)`,
       control: false,
     },
     setCardNumbers: {
