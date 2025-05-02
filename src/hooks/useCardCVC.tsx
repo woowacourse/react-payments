@@ -31,6 +31,7 @@ const useCardCVC = () => {
     cardCVC,
     onChangeCVC,
     errorMessage,
+    isCardCVCValid: cardCVC !== '' && errorMessage === '',
   };
 };
 

@@ -47,6 +47,7 @@ const useCardCompany = () => {
         : CARD_COMPANY_COLORS[selectedCard],
     CARD_COMPANY_PLACEHOLDER,
     onClickCardCompany,
+    isCardCompanyValid: selectedCard !== null,
   };
 };
 

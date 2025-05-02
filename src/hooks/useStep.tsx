@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { StepType, STEP } from '../constants/step';
 
 interface UseStepProps {
-  cardNumberOkay: boolean;
-  cardCompanyOkay: boolean;
-  cardValidityPeriodOkay: boolean;
-  cardCVCOkay: boolean;
+  isCardNumberValid: boolean;
+  isCardCompanyValid: boolean;
+  isCardValidityPeriodValid: boolean;
+  isCardCVCValid: boolean;
 }
 
 interface StepState {
@@ -17,10 +17,10 @@ interface StepState {
 }
 
 const useStep = ({
-  cardNumberOkay,
-  cardCompanyOkay,
-  cardValidityPeriodOkay,
-  cardCVCOkay,
+  isCardNumberValid,
+  isCardCompanyValid,
+  isCardValidityPeriodValid,
+  isCardCVCValid,
 }: UseStepProps) => {
   const [step, setStep] = useState<StepState>({
     [STEP.CardNumber]: true,
@@ -36,10 +36,10 @@ const useStep = ({
 
   const checkAndAdvanceStep = () => {
     const stepTransitions = [
-      { condition: cardNumberOkay, nextStep: STEP.CardCompany },
-      { condition: cardCompanyOkay, nextStep: STEP.CardValidityPeriod },
-      { condition: cardValidityPeriodOkay, nextStep: STEP.CardCVC },
-      { condition: cardCVCOkay, nextStep: STEP.CardPassword },
+      { condition: isCardNumberValid, nextStep: STEP.CardCompany },
+      { condition: isCardCompanyValid, nextStep: STEP.CardValidityPeriod },
+      { condition: isCardValidityPeriodValid, nextStep: STEP.CardCVC },
+      { condition: isCardCVCValid, nextStep: STEP.CardPassword },
     ];
 
     stepTransitions.forEach(({ condition, nextStep }) => {
@@ -50,10 +50,10 @@ const useStep = ({
   };
 
   useEffect(checkAndAdvanceStep, [
-    cardNumberOkay,
-    cardCompanyOkay,
-    cardValidityPeriodOkay,
-    cardCVCOkay,
+    isCardNumberValid,
+    isCardCompanyValid,
+    isCardValidityPeriodValid,
+    isCardCVCValid,
   ]);
 
   return { step, STEP_NAME: STEP };

@@ -12,6 +12,7 @@ const useCardForm = () => {
     onChangeCardNumber,
     errorMessage: cardNumberErrorMessage,
     setInputRef: setCardNumberInputRef,
+    isCardNumberValid,
   } = useCardNumber();
 
   const {
@@ -20,12 +21,14 @@ const useCardForm = () => {
     onChangeYear,
     errorMessage: cardValidityPeriodErrorMessage,
     setInputRef: setCardValidityPeriodInputRef,
+    isCardValidityPeriodValid,
   } = useCardValidityPeriod();
 
   const {
     cardCVC,
     onChangeCVC,
     errorMessage: cardCVCErrorMessage,
+    isCardCVCValid,
   } = useCardCVC();
 
   const {
@@ -34,40 +37,28 @@ const useCardForm = () => {
     CARD_COMPANY_COLORS,
     CARD_COMPANY_PLACEHOLDER,
     onClickCardCompany,
+    isCardCompanyValid,
   } = useCardCompany();
 
   const {
     cardPassword,
     onChangeCardPassword,
     errorMessage: cardPasswordErrorMessage,
+    isCardPasswordValid,
   } = useCardPassword();
 
-  const formStatus = {
-    cardNumberOkay:
-      cardNumber.every((value) => value !== '') &&
-      !getErrorMessageFromList(cardNumberErrorMessage),
-    cardCompanyOkay: selectedCard !== null,
-    cardValidityPeriodOkay:
-      Object.values(cardValidityPeriod).every((value) => value !== '') &&
-      !getErrorMessageFromList(Object.values(cardValidityPeriodErrorMessage)),
-    cardCVCOkay: cardCVC !== '' && !cardCVCErrorMessage,
-    cardPasswordOkay: cardPassword !== '' && !cardPasswordErrorMessage,
-  };
-
-  const {
-    cardNumberOkay,
-    cardCompanyOkay,
-    cardValidityPeriodOkay,
-    cardCVCOkay,
-  } = formStatus;
-
-  const canSubmit = Object.values(formStatus).every(Boolean);
+  const canSubmit =
+    isCardNumberValid &&
+    isCardCompanyValid &&
+    isCardValidityPeriodValid &&
+    isCardCVCValid &&
+    isCardPasswordValid;
 
   const { step, STEP_NAME } = useStep({
-    cardCVCOkay,
-    cardCompanyOkay,
-    cardNumberOkay,
-    cardValidityPeriodOkay,
+    isCardNumberValid,
+    isCardCompanyValid,
+    isCardValidityPeriodValid,
+    isCardCVCValid,
   });
 
   return {

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { validateCardValidityPeriod } from '../validations/cardValidityPeriod';
 import { PARSE_RULE } from '../constants/cardValidityPeriod';
+import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
 const useCardValidityPeriod = () => {
   const [cardValidityPeriod, setCardValidityPeriod] = useState({
@@ -87,6 +88,9 @@ const useCardValidityPeriod = () => {
     onChangeYear,
     errorMessage,
     setInputRef,
+    isCardValidityPeriodValid:
+      Object.values(cardValidityPeriod).every((value) => value !== '') &&
+      !getErrorMessageFromList(Object.values(errorMessage)),
   };
 };
 

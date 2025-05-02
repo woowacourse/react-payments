@@ -4,6 +4,7 @@ import {
   CARD_NUMBER_RULE,
   ERROR_MESSAGE,
 } from '../constants/cardNumber';
+import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
@@ -69,6 +70,9 @@ const useCardNumber = () => {
     onChangeCardNumber,
     errorMessage,
     setInputRef,
+    isCardNumberValid:
+      cardNumber.every((value) => value !== '') &&
+      !getErrorMessageFromList(errorMessage),
   };
 };
 
