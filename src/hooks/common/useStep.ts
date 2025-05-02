@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { STEP_ORDER } from "../../constants/constant";
-import { isStateCompletesType } from "../../types/CardInformationType";
-import { isErrorCompletesType } from "../../types/useValidationType";
+import { isErrorCompletesType, isStateCompletesType } from "../../types/CardInformationType";
 
 const useStep = (isStateCompletes: isStateCompletesType, isErrorCompletes: isErrorCompletesType) => {
   const [step, setStep] = useState(0);

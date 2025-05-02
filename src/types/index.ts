@@ -1,4 +1,5 @@
-export type errorStateType = boolean[];
+export type SingleErrorType = boolean;
+export type ListErrorType = boolean[];
 
 export type ExpirationValidationType = "MM" | "YY";
 

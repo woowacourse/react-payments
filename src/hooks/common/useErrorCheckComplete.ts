@@ -1,9 +1,10 @@
 import { useMemo } from "react";
-import { errorStateType } from "../../types";
+import { ListErrorType, SingleErrorType } from "../../types";
 
-const useErrorCheckComplete = (isError: errorStateType) => {
+const useErrorCheckComplete = (isError: SingleErrorType | ListErrorType) => {
   return useMemo(() => {
-    return isError.every((error) => !error);
+    if (Array.isArray(isError)) return isError.every((error) => !error);
+    return !isError;
   }, [isError]);
 };
 

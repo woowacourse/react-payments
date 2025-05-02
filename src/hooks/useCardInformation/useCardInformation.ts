@@ -5,12 +5,12 @@ import usePassword from "./usePassword";
 import useCompany from "./useCompany";
 import {
   CardInformationType,
+  isErrorCompletesType,
   isStateCompletesType,
   KeysWithout,
   setCardInformationType,
   ValidationType,
 } from "../../types/CardInformationType";
-import { isErrorCompletesType } from "../../types/useValidationType";
 
 const useCardInformation = () => {
   const uniqueNumber = useUniqueNumber();

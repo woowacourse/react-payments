@@ -1,4 +1,4 @@
-import { CompanyType, errorStateType } from ".";
+import { cardInformationKey, CompanyType, ListErrorType, SingleErrorType } from ".";
 
 export type CardInformationType = {
   uniqueNumber: UniqueNumberType;
@@ -34,18 +34,26 @@ export type UseHookReturn<T extends keyof CardInformationType> = {
   state: CardInformationType[T];
   setState: setCardInformationType[T];
   validateInput?: (value: string, index: number) => void;
-  isError?: errorStateType;
+  isError?: SingleErrorType | ListErrorType;
   errorMessage?: string;
   isComplete: boolean;
   isErrorComplete?: boolean;
 };
 
 export type useEachValidationType = {
-  isError: errorStateType;
+  isError: SingleErrorType | ListErrorType;
   errorMessage: string;
-  validateInput: (value: string, index: number) => void;
+  validateInput: (value: string, index?: number) => void;
 };
 
 export type ValidationType = {
   [T in KeysWithout<CardInformationType, "company">]: useEachValidationType;
+};
+
+export type validationFieldType = {
+  [K in Exclude<cardInformationKey, "company">]: Exclude<useEachValidationType, "isComplete">;
+};
+
+export type isErrorCompletesType = {
+  [K in Exclude<cardInformationKey, "company">]: Extract<useEachValidationType, "isComplete">;
 };

@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import { isStateCompletesType } from "../../types/CardInformationType";
-import { isErrorCompletesType } from "../../types/useValidationType";
+import { isErrorCompletesType, isStateCompletesType } from "../../types/CardInformationType";
 
 const useAllComplete = (isStateCompletes: isStateCompletesType, isErrorCompletes: isErrorCompletesType) => {
   return useMemo(() => {

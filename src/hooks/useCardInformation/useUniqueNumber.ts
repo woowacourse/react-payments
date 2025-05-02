@@ -2,14 +2,14 @@ import { useState } from "react";
 import { SetValueFn, UniqueNumberType, UseHookReturn } from "../../types/CardInformationType";
 import { UNIQUE_NUMBER_MAX_LENGTH } from "../../constants/constant";
 import useCheckLengthComplete from "../common/useCheckLengthComplete";
-import { errorStateType } from "../../types";
+import { ListErrorType } from "../../types";
 import { validateNumberOnly } from "../../utils/validation";
 import useErrorCheckComplete from "../common/useErrorCheckComplete";
 
 const useUniqueNumber = (): UseHookReturn<"uniqueNumber"> => {
   /** 상태 및 변수 관리 */
   const [uniqueNumber, setUniqueNumberState] = useState<UniqueNumberType>(["", "", "", ""]);
-  const [isError, setIsError] = useState<errorStateType>([false, false, false, false]);
+  const [isError, setIsError] = useState<ListErrorType>([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState("");
 
   /** setter(상태업데이트) */

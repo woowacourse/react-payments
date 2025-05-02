@@ -2,13 +2,13 @@ import { useState } from "react";
 import { ExpirationDateType, SetValueFn, UseHookReturn } from "../../types/CardInformationType";
 import { EXPIRATION_DATE_MAX_LENGTH } from "../../constants/constant";
 import useCheckLengthComplete from "../common/useCheckLengthComplete";
-import { errorStateType, ExpirationValidationType } from "../../types";
+import { ExpirationValidationType, ListErrorType } from "../../types";
 import { validateExpirationDate } from "../../utils/validation";
 import useErrorCheckComplete from "../common/useErrorCheckComplete";
 
 const useExpirationDate = (): UseHookReturn<"expirationDate"> => {
   const [expirationDate, setExpirationDateState] = useState<ExpirationDateType>(["", ""]);
-  const [isError, setIsError] = useState<errorStateType>([false, false]);
+  const [isError, setIsError] = useState<ListErrorType>([false, false]);
   const [errorMessage, setErrorMessage] = useState("");
 
   const setExpirationDate: SetValueFn<ExpirationDateType[number]> = (value, index) => {

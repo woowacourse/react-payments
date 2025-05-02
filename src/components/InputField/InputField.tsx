@@ -35,13 +35,16 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
             onChange={(v) => handleChange(v, index)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
-            error={isError[index]}
+            error={Array.isArray(isError) ? isError[index] : isError}
             masking={inputProps.masking}
             autoFocus={index === 0}
           />
         ))}
       </div>
-      <ErrorMessage error={isError.some((bool) => bool === true)} message={errorMessage} />
+      <ErrorMessage
+        error={Array.isArray(isError) ? isError.some((bool) => bool === true) : isError}
+        message={errorMessage}
+      />
     </div>
   );
 };
