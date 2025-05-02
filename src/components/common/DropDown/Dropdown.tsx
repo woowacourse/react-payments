@@ -9,8 +9,12 @@ interface DropdownProps<T> {
   onClick: (value: T) => void;
 }
 
-function Dropdown<T extends string>(props: DropdownProps<T>) {
-  const { placeholder, items, selectedValue, onClick } = props;
+function Dropdown<T extends string>({
+  placeholder,
+  items,
+  selectedValue,
+  onClick,
+}: DropdownProps<T>) {
   const [toggleOpen, setToggleOpen] = useState(false);
 
   const toggleDropdownState = () => {
