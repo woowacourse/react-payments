@@ -5,11 +5,11 @@ import useExpirationDateValidation from './useExpirationDateValidation';
 import useCVCValidation from './useCVCValidation';
 import useCardPasswordValidation from './useCardPasswordValidation';
 import { useNavigate } from 'react-router';
-import { INPUT_STEP } from '../config/step';
+import { INPUT_STEP, InputNameType } from '../config/step';
 import { ROUTE_PATH } from '../../../../constants/route';
 
 function usePaymentsForm() {
-  const [inputStep, setInputStep] = useState(INPUT_STEP.cardNumber);
+  const [inputStep, setInputStep] = useState<InputNameType>(INPUT_STEP[0]);
   const navigate = useNavigate();
   const {
     inputValues: cardNumberInputValues,
@@ -96,7 +96,7 @@ function usePaymentsForm() {
         isExpirationDateInputComplete,
         isCVCInputComplete,
         isCardPasswordInputComplete,
-      ].every((value) => !value),
+      ].every((value) => value),
     [
       isCardNumberInputComplete,
       cardBankSelected,
@@ -108,6 +108,7 @@ function usePaymentsForm() {
 
   const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
+    if (!allInputComplete) return;
 
     navigate(ROUTE_PATH.complete, {
       state: {
@@ -117,16 +118,24 @@ function usePaymentsForm() {
     });
   };
 
+  const isStepCompleteMap: Record<InputNameType, boolean> = {
+    cardNumber: isCardNumberInputComplete,
+    cardBank: cardBankSelected,
+    expirationDate: isExpirationDateInputComplete,
+    CVC: isCVCInputComplete,
+    cardPassword: isCardPasswordInputComplete, // 마지막 단계는 사용 안 해도 됨
+  };
+
   useEffect(
     function moveToNextInputStep() {
-      if (inputStep === INPUT_STEP.cardNumber) {
-        if (isCardNumberInputComplete) setInputStep(INPUT_STEP.cardBank);
-      } else if (inputStep === INPUT_STEP.cardBank) {
-        if (cardBankSelected) setInputStep(INPUT_STEP.expirationDate);
-      } else if (inputStep === INPUT_STEP.expirationDate) {
-        if (isExpirationDateInputComplete) setInputStep(INPUT_STEP.CVC);
-      } else if (inputStep === INPUT_STEP.CVC) {
-        if (isCVCInputComplete) setInputStep(INPUT_STEP.cardPassword);
+      const currentIndex = INPUT_STEP.indexOf(inputStep);
+      const currentStep = INPUT_STEP[currentIndex];
+
+      if (isStepCompleteMap[currentStep]) {
+        const nextStep = INPUT_STEP[currentIndex + 1];
+        if (nextStep) {
+          setInputStep(nextStep);
+        }
       }
     },
     [
@@ -137,20 +146,18 @@ function usePaymentsForm() {
     ]
   );
 
-  useEffect(
-    function switchInputFieldFocus() {
-      if (inputStep === INPUT_STEP.cardNumber) {
-        cardNumberInputRefs.cardNumberPart1.current?.focus();
-      } else if (inputStep === INPUT_STEP.expirationDate) {
-        expirationDateInputRefs.month.current?.focus();
-      } else if (inputStep === INPUT_STEP.CVC) {
-        CVCInputRef.current?.focus();
-      } else if (inputStep === INPUT_STEP.cardPassword) {
-        cardPasswordInputRef.current?.focus();
-      }
-    },
-    [inputStep]
-  );
+  const focusMap: Partial<
+    Record<InputNameType, React.RefObject<HTMLInputElement | null>>
+  > = {
+    cardNumber: cardNumberInputRefs.cardNumberPart1,
+    expirationDate: expirationDateInputRefs.month,
+    CVC: CVCInputRef,
+    cardPassword: cardPasswordInputRef,
+  };
+
+  useEffect(() => {
+    focusMap[inputStep]?.current?.focus();
+  }, [inputStep]);
 
   return {
     paymentsFormValues,

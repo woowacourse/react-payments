@@ -7,10 +7,10 @@ export const INPUT_NAME = {
 } as const;
 export type InputNameType = keyof typeof INPUT_NAME;
 
-export const INPUT_STEP: Record<InputNameType, number> = {
-  cardNumber: 1,
-  cardBank: 2,
-  expirationDate: 3,
-  CVC: 4,
-  cardPassword: 5,
-} as const;
+export const INPUT_STEP = [
+  'cardNumber',
+  'cardBank',
+  'expirationDate',
+  'CVC',
+  'cardPassword',
+] as const;

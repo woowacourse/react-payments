@@ -13,7 +13,8 @@ import {
   CardNumberInputType,
   ExpirationDateInputType,
 } from '../config/inputField';
-import { INPUT_STEP } from '../config/step';
+import { InputNameType } from '../config/step';
+import { getStepIndex } from '../utils/step';
 import PaymentsSubmitButton from './PaymentsSubmitButton';
 
 type PaymentsFormFieldsProps = {
@@ -63,7 +64,7 @@ type PaymentsFormFieldsProps = {
     CVC: (e: React.ChangeEvent) => void;
     cardPassword: (e: React.ChangeEvent) => void;
   };
-  inputStep: number;
+  inputStep: InputNameType;
   allInputComplete: boolean;
   handleSubmit: React.MouseEventHandler<HTMLButtonElement>;
 };
@@ -80,7 +81,7 @@ function PaymentsFormFields({
 }: PaymentsFormFieldsProps) {
   return (
     <PaymentsInputForm>
-      {inputStep >= INPUT_STEP.cardPassword && (
+      {getStepIndex(inputStep) >= getStepIndex('cardPassword') && (
         <InputSection
           title="비밀번호를 입력해 주세요"
           caption="앞의 2자리를 입력해주세요"
@@ -95,7 +96,7 @@ function PaymentsFormFields({
         </InputSection>
       )}
 
-      {inputStep >= INPUT_STEP.CVC && (
+      {getStepIndex(inputStep) >= getStepIndex('CVC') && (
         <InputSection title="CVC 번호를 입력해 주세요">
           <CVCInputField
             inputValue={paymentsFormValues.CVC}
@@ -107,7 +108,7 @@ function PaymentsFormFields({
         </InputSection>
       )}
 
-      {inputStep >= INPUT_STEP.expirationDate && (
+      {getStepIndex(inputStep) >= getStepIndex('expirationDate') && (
         <InputSection
           title="카드 유효기간을 입력해 주세요"
           caption="월/년도(MMYY)를 순서대로 입력해 주세요."
@@ -121,7 +122,7 @@ function PaymentsFormFields({
         </InputSection>
       )}
 
-      {inputStep >= INPUT_STEP.cardBank && (
+      {getStepIndex(inputStep) >= getStepIndex('cardBank') && (
         <InputSection
           title="카드사를 선택해 주세요"
           caption="현재 국내 카드사만 가능합니다."
