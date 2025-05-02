@@ -11,7 +11,7 @@ import CardPreview from '../components/cardPreview/CardPreview';
 import {useNavigate} from 'react-router';
 import PATH from '../router/path';
 import useInput from '../hooks/useInput';
-import useErrors from '../hooks/useErrors';
+import useCardValidations from '../hooks/useCardValidations';
 import useAutoStep, {CardForm} from '../hooks/useAutoStep';
 
 const INIT_CARD_NUMBER = {
@@ -36,7 +36,7 @@ const INIT_FORM_DATA: CardForm = {
 
 const Main = () => {
   const {formData, onChange} = useInput(INIT_FORM_DATA);
-  const {isErrors, errorMessages, onValidate, onFocusout} = useErrors(
+  const {isErrors, errorMessages, onValidate, onFocusout} = useCardValidations(
     {
       cardNumber: false,
       expirationDate: false,

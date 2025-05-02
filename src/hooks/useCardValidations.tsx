@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from 'react';
 
-const useErrors = <
+const useCardValidations = <
   T extends Record<string, boolean>,
   M extends Record<string, any>
 >(
@@ -88,4 +88,4 @@ const useErrors = <
   return {isErrors, onError, onValidate, onFocusout, errorMessages};
 };
 
-export default useErrors;
+export default useCardValidations;
