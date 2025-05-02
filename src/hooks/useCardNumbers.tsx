@@ -1,92 +1,71 @@
-import React, { useRef } from 'react';
 import { useState } from 'react';
-import { CARD_VALIDATION_INFO } from '../constants/cardValidationInfo';
-import {
-  validateCardNumbers,
-  validateFirstCardNumbers,
-} from '../domain/validate';
-import CustomCardNumbersError from '../error/CustomCardNumbersError';
 
-export const useCardNumbers = (): {
-  cardNumbers: string[];
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
-  updateCardNumber: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => void;
-  cardNumbersRef: React.RefObject<HTMLInputElement[]>;
-  isErrors: boolean[];
+const CARD_NUMBER_RULE = {
+  INVALID_LENGTH_ERROR: '카드 번호는 4자리로 입력해 주세요.',
+  NOT_A_NUMBER: '카드 번호는 숫자로 입력해 주세요.',
+  MAX_LENGTH: 4,
+} as const;
+
+type ValitationResult = {
+  numbers: string[];
+  error: errorType[];
+  validate: (value: string, index: number) => void;
+};
+
+type errorType = {
+  isValidate: boolean;
   errorMessage: string;
-  isComplete: boolean;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
-  isDisplay: boolean;
-  setIsDisplay: React.Dispatch<React.SetStateAction<boolean>>;
-} => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [isErrors, setIsErrors] = useState([false, false, false, false]);
-  const [errorMessage, setErrorMessage] = useState('');
-  const cardNumbersRef = useRef<HTMLInputElement[]>([]);
-  const [isComplete, setIsComplete] = useState(false);
-  const [isDisplay, setIsDisplay] = useState<boolean>(false);
+};
+
+const initialDate = {
+  isValidate: false,
+  errorMessage: '',
+};
+
+export function useCardNumbers(): ValitationResult {
+  const [numbers, setNumbers] = useState(['', '', '', '']);
+  const [error, setError] = useState<errorType[]>(
+    Array.from({ length: CARD_NUMBER_RULE.MAX_LENGTH }, () => initialDate)
+  );
 
   const updateCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
+    isError: boolean,
+    message: string
   ) => {
-    const newCardNumbers = [...cardNumbers];
-    newCardNumbers[index] = e.target.value;
-    setCardNumbers(newCardNumbers);
+    setError((prev) => {
+      prev[index] = {
+        isValidate: isError,
+        errorMessage: message,
+      };
+      return prev;
+    });
+  };
 
-    validate(newCardNumbers, index);
+  const validate = (value: string, index: number) => {
+    if (value.length > CARD_NUMBER_RULE.MAX_LENGTH) return;
 
-    const isValid = newCardNumbers.every(
-      (number) => number.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
-    );
-    setIsComplete(isValid);
-    if (isValid) setIsDisplay(true);
+    setNumbers((prev) => {
+      const newNumbers = [...prev];
+      newNumbers[index] = value;
+      return newNumbers;
+    });
 
-    if (e.target.value.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH) {
-      cardNumbersRef.current[index + 1]?.focus();
+    if (value === '') {
+      updateCardNumber(index, false, '');
+      return;
     }
-  };
 
-  const validate = (value: string[], index: number) => {
-    try {
-      if (value[index].length === 0) {
-        setIsErrors((prevErrors) => {
-          const newErrors = [...prevErrors];
-          newErrors[index] = false;
-          return newErrors;
-        });
-        setErrorMessage('');
-        return;
-      }
-      validateFirstCardNumbers(value[0]);
-      validateCardNumbers(value, CARD_VALIDATION_INFO.CARD_MAX_LENGTH);
-      setErrorMessage('');
-      setIsErrors([false, false, false, false]);
-    } catch (error: unknown) {
-      if (error instanceof CustomCardNumbersError) {
-        setIsErrors((prevErrors) => {
-          const newErrors = [...prevErrors];
-          newErrors[error.index] = true;
-          return newErrors;
-        });
-        setErrorMessage(error.message);
-      }
+    if (!/^\d*$/.test(value)) {
+      updateCardNumber(index, true, CARD_NUMBER_RULE.NOT_A_NUMBER);
+      return;
     }
+    if (value.length < CARD_NUMBER_RULE.MAX_LENGTH) {
+      updateCardNumber(index, true, CARD_NUMBER_RULE.INVALID_LENGTH_ERROR);
+      return;
+    }
+    updateCardNumber(index, false, '');
   };
 
-  return {
-    cardNumbers,
-    setCardNumbers,
-    updateCardNumber,
-    cardNumbersRef,
-    isErrors,
-    errorMessage,
-    isComplete,
-    setIsComplete,
-    isDisplay,
-    setIsDisplay,
-  };
-};
+  return { numbers, error, validate };
+}
