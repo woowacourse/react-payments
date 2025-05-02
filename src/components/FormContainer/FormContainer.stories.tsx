@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import FormContainer from "./FormContainer";
 import { FormContainerProps } from "../../types/componentPropsType";
-import useValidation from "../../hooks/useValidation/useValidation";
 import useCardInformation from "../../hooks/useCardInformation/useCardInformation";
 
 const meta = {
@@ -15,8 +14,7 @@ type Story = StoryObj<FormContainerProps>;
 
 export const Primary: Story = {
   render: () => {
-    const { cardInformationState, setCardInformationState } = useCardInformation();
-    const { validation } = useValidation();
+    const { cardInformationState, setCardInformationState, validation } = useCardInformation();
 
     return (
       <FormContainer

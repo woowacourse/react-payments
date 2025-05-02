@@ -71,7 +71,7 @@ export const CvcNumberInputField: Story = {
     label: "cvc",
     inputNumber: 1,
     inputProps: { placeholder: ["123"], maxLength: 3 },
-    state: [""],
+    state: "",
     eachValidation: {
       isError: [false, false],
       errorMessage: "",
@@ -98,7 +98,7 @@ export const PasswordInputField: Story = {
     label: "비밀번호 앞 2자리",
     inputNumber: 1,
     inputProps: { placeholder: [""], maxLength: 2 },
-    state: [""],
+    state: "",
     eachValidation: {
       isError: [false, false],
       errorMessage: "",

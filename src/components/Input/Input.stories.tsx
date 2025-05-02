@@ -23,6 +23,7 @@ export const Primary: Story = {
 
     return (
       <Input
+        ref={() => {}}
         placeholder={args.placeholder}
         maxLength={args.maxLength}
         value={value}
