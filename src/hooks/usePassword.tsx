@@ -1,55 +1,44 @@
-import React from 'react';
 import { useState } from 'react';
-import { validateCardPassword } from '../domain/validate';
-import { CARD_VALIDATION_INFO } from '../constants/cardValidationInfo';
 
-export const usePassword = (): {
+const PASSWORD_RULE = {
+  INVALID_LENGTH_ERROR: '카드 비밀번호는 2자리로 입력해 주세요.',
+  NOT_A_NUMBER: '카드 비밀번호는 숫자로 입력해 주세요.',
+  MAX_LENGTH: 2,
+} as const;
+
+type ValitationResult = {
   password: string;
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
-  updatePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isError: boolean;
-  errorMessage: string;
-  isComplete: boolean;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
-} => {
-  const [password, setPassword] = useState<string>('');
-  const [isError, setIsError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [isComplete, setIsComplete] = useState<boolean>(false);
+  error: { isValid: boolean; errorMessage: string };
+  validate: (value: string) => void;
+};
 
-  const updatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setPassword(value);
-    validate(value);
-
-    const isValid = value.length === 2;
-    setIsComplete(isValid);
-  };
+export default function usePassword(): ValitationResult {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState({ isValid: false, errorMessage: '' });
 
   const validate = (value: string) => {
-    try {
-      setIsError(false);
-      if (value.length === 0) {
-        setErrorMessage('');
-        return;
-      }
-      validateCardPassword(value, CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH);
-      setErrorMessage('');
-    } catch (error) {
-      if (error instanceof Error) {
-        setIsError(true);
-        setErrorMessage(error.message);
-      }
+    if (value.length > PASSWORD_RULE.MAX_LENGTH) return;
+
+    setPassword(value);
+
+    if (value === '') {
+      setError({ isValid: false, errorMessage: '' });
+      return;
     }
+
+    if (!/^\d*$/.test(value)) {
+      setError({ isValid: true, errorMessage: PASSWORD_RULE.NOT_A_NUMBER });
+      return;
+    }
+    if (value.length < PASSWORD_RULE.MAX_LENGTH) {
+      setError({
+        isValid: true,
+        errorMessage: PASSWORD_RULE.INVALID_LENGTH_ERROR,
+      });
+      return;
+    }
+    setError({ isValid: false, errorMessage: '' });
   };
 
-  return {
-    password,
-    setPassword,
-    updatePassword,
-    isError,
-    errorMessage,
-    isComplete,
-    setIsComplete,
-  };
-};
+  return { password, error, validate };
+}
