@@ -29,26 +29,26 @@ function CardInfo() {
 	const expirationDateHook = useExpirationDate();
 	const cardCvcHook = useCardCvc();
 	const cardPasswordHook = useCardPassword();
-	const { step, maxStep } = useFormStepControl({
+	const isComplete = {
 		cardNumber: cardNumberHook.isComplete,
 		company: cardCompanyHook.isComplete,
 		expirationDate: expirationDateHook.isComplete,
 		cvc: cardCvcHook.isComplete,
 		password: cardPasswordHook.isComplete,
-	});
+	};
+	const { step } = useFormStepControl(isComplete);
 
 	return (
 		<MainContainer>
 			<form>
 				<Card cardNumbers={cardNumberHook.cardNumber} cardCompany={cardCompanyHook.cardCompany} expirationDate={expirationDateHook.expirationDate} />
 
-				{maxStep >= RENDERING_STEP.password && <CardPassword {...cardPasswordHook} />}
-				{maxStep >= RENDERING_STEP.cvc && <CardCvc {...cardCvcHook} />}
-				{maxStep >= RENDERING_STEP.expirationDate && <ExpirationDate {...expirationDateHook} />}
-				{maxStep >= RENDERING_STEP.company && <CardCompany {...cardCompanyHook} />}
-				{maxStep >= RENDERING_STEP.cardNumber && <CardNumber {...cardNumberHook} />}
-
-				{step === 5 && (
+				{step >= RENDERING_STEP.password && <CardPassword {...cardPasswordHook} />}
+				{step >= RENDERING_STEP.cvc && <CardCvc {...cardCvcHook} />}
+				{step >= RENDERING_STEP.expirationDate && <ExpirationDate {...expirationDateHook} />}
+				{step >= RENDERING_STEP.company && <CardCompany {...cardCompanyHook} />}
+				{step >= RENDERING_STEP.cardNumber && <CardNumber {...cardNumberHook} />}
+				{Object.values(isComplete).every((step) => step) && (
 					<ButtonWrap>
 						<Button type="button" onClick={() => navigate("/addSuccess", { state: { firstCardNumber: cardNumberHook.cardNumber.first, cardCompany: cardCompanyHook.cardCompany } })}>
 							확인

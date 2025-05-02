@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface IsComplete {
 	cardNumber: boolean;
@@ -9,14 +9,22 @@ interface IsComplete {
 }
 
 const useFormStepControl = (isComplete: IsComplete) => {
-	const [maxStep, setMaxStep] = useState(0);
-	const step = Object.values(isComplete).filter(Boolean).length;
+	const [step, setStep] = useState(0);
+
+	const checkVariationStep = useCallback(
+		(currentStep: number) => {
+			const key = Object.keys(isComplete)[currentStep] as keyof IsComplete;
+			if (isComplete[key]) return true;
+			return false;
+		},
+		[isComplete]
+	);
 
 	useEffect(() => {
-		setMaxStep((prev) => Math.max(prev, step));
-	}, [step]);
+		if (checkVariationStep(step)) setStep(step + 1);
+	}, [checkVariationStep]);
 
-	return { step, maxStep };
+	return { step };
 };
 
 export default useFormStepControl;
