@@ -56,13 +56,14 @@ function Dropdown<T extends string>({
   }, [selectedValue]);
 
   return (
-    <Wrapper
-      tabIndex={0}
-      onClick={onClickDropdown}
-      onKeyDown={onEnterDropdown}
-      ref={wrapperRef}
-    >
-      <Select toggleOpen={toggleOpen}>
+    <Wrapper>
+      <Select
+        toggleOpen={toggleOpen}
+        tabIndex={0}
+        onClick={onClickDropdown}
+        onKeyDown={onEnterDropdown}
+        ref={wrapperRef}
+      >
         {selectedValue === null ? placeholder : selectedValue}
         <DropdownIcon toggleOpen={toggleOpen} />
       </Select>
