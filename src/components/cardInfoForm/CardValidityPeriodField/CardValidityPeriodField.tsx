@@ -6,14 +6,14 @@ type CardValidityPeriodType = {
   year: string;
 };
 
-type IsErrorType = {
+type ErrorStateObjectType = {
   month: boolean;
   year: boolean;
 };
 
 interface CardValidityPeriodFieldProps {
   cardValidityPeriod: CardValidityPeriodType;
-  isError: IsErrorType;
+  errorStateObject: ErrorStateObjectType;
   onChangeMonth: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setCardValidityPeriodInputRef: (
@@ -24,13 +24,13 @@ interface CardValidityPeriodFieldProps {
 
 function CardValidityPeriodField({
   cardValidityPeriod,
-  isError,
+  errorStateObject,
   onChangeMonth,
   onChangeYear,
   setCardValidityPeriodInputRef,
 }: CardValidityPeriodFieldProps) {
   const { month, year } = cardValidityPeriod;
-  const { month: isErrorMonth, year: isErrorYear } = isError;
+  const { month: hasErrorMonth, year: hasErrorYear } = errorStateObject;
 
   return (
     <div>
@@ -39,7 +39,7 @@ function CardValidityPeriodField({
       </Label>
       <InputWrapper>
         <Input
-          isError={isErrorMonth}
+          hasError={hasErrorMonth}
           type="tel"
           name="cardValidityPeriod"
           id="cardValidityPeriod-month"
@@ -50,10 +50,10 @@ function CardValidityPeriodField({
           min={0}
           max={99}
           ref={(el) => setCardValidityPeriodInputRef(el, 0)}
-          autoFocus={month.length === 0 && !isErrorMonth}
+          autoFocus={month.length === 0 && !hasErrorMonth}
         />
         <Input
-          isError={isErrorYear}
+          hasError={hasErrorYear}
           type="tel"
           name="cardValidityPeriod"
           id="cardValidityPeriod-year"

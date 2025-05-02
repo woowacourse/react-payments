@@ -75,7 +75,7 @@ function AddCard() {
         >
           <CardNumberField
             cardNumber={cardNumber}
-            isError={cardNumberErrorMessage.map((errorMessage) =>
+            errorStateList={cardNumberErrorMessage.map((errorMessage) =>
               Boolean(errorMessage),
             )}
             onChange={onChangeCardNumber}
@@ -105,7 +105,7 @@ function AddCard() {
         >
           <CardValidityPeriodField
             cardValidityPeriod={cardValidityPeriod}
-            isError={{
+            errorStateObject={{
               month: Boolean(cardValidityPeriodErrorMessage.month),
               year: Boolean(cardValidityPeriodErrorMessage.year),
             }}
@@ -121,7 +121,7 @@ function AddCard() {
         >
           <CardCVCField
             cardCVC={cardCVC}
-            isError={Boolean(cardCVCErrorMessage)}
+            hasError={Boolean(cardCVCErrorMessage)}
             onChange={onChangeCVC}
           />
         </CardInputSection>
@@ -133,7 +133,7 @@ function AddCard() {
         >
           <CardPasswordField
             cardPassword={cardPassword}
-            isError={Boolean(cardPasswordErrorMessage)}
+            hasError={Boolean(cardPasswordErrorMessage)}
             onChange={onChangeCardPassword}
           />
         </CardInputSection>

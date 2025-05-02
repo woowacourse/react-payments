@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     cardCVC: '',
-    isError: false,
+    hasError: false,
     onChange: () => {},
   },
   render: (args) => {
@@ -28,7 +28,7 @@ export const Default: Story = {
       <CardCVCField
         {...args}
         cardCVC={cardCVC}
-        isError={Boolean(cardCVCErrorMessage)}
+        hasError={Boolean(cardCVCErrorMessage)}
         onChange={onChangeCVC}
       />
     );
@@ -38,7 +38,7 @@ export const Default: Story = {
 export const Error: Story = {
   args: {
     cardCVC: '',
-    isError: true,
+    hasError: true,
     onChange: () => {},
   },
   render: (args) => {

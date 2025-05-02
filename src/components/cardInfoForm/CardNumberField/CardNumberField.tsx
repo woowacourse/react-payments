@@ -3,14 +3,14 @@ import Input from '../../common/Input/Input';
 
 interface CardNumberFieldProps {
   cardNumber: string[];
-  isError: boolean[];
+  errorStateList: boolean[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   setInputRef: (el: HTMLInputElement | null, index: number) => void;
 }
 
 function CardNumberField({
   cardNumber,
-  isError,
+  errorStateList,
   onChange,
   setInputRef,
 }: CardNumberFieldProps) {
@@ -22,7 +22,7 @@ function CardNumberField({
       <InputWrapper>
         {cardNumber.map((v, index) => (
           <Input
-            isError={isError[index]}
+            hasError={errorStateList[index]}
             type="tel"
             name="cardNumber"
             id={`cardNumber-${index}`}

@@ -3,17 +3,17 @@ import Input from '../../common/Input/Input';
 
 interface CardCVCFieldProps {
   cardCVC: string;
-  isError: boolean;
+  hasError: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
+function CardCVCField({ hasError, cardCVC, onChange }: CardCVCFieldProps) {
   return (
     <div>
       <Label htmlFor="CardCVC">CVC</Label>
       <InputWrapper>
         <Input
-          isError={isError}
+          hasError={hasError}
           type="tel"
           name="CardCVC"
           id="CardCVC"
@@ -22,7 +22,7 @@ function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
           placeholder="123"
           min={0}
           max={999}
-          autoFocus={cardCVC.length === 0 && !isError}
+          autoFocus={cardCVC.length === 0 && !hasError}
         />
       </InputWrapper>
     </div>

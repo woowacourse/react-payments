@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    isError: false,
+    hasError: false,
     type: 'number',
     placeholder: '카드번호를 입력하세요',
     value: '',
@@ -33,7 +33,7 @@ export const Default: Story = {
 
 export const Error: Story = {
   args: {
-    isError: true,
+    hasError: true,
     type: 'number',
     placeholder: '카드번호를 입력하세요',
     value: '',

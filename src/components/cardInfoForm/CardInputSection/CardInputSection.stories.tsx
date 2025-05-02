@@ -55,7 +55,7 @@ export const CardNumber: Story = {
       >
         <CardNumberField
           cardNumber={cardNumber}
-          isError={cardNumberErrorMessage.map((errorMessage) =>
+          errorStateList={cardNumberErrorMessage.map((errorMessage) =>
             Boolean(errorMessage),
           )}
           onChange={onChangeCardNumber}
@@ -91,7 +91,7 @@ export const CardValidityPeriod: Story = {
       >
         <CardValidityPeriodField
           cardValidityPeriod={cardValidityPeriod}
-          isError={{
+          errorStateObject={{
             month: Boolean(cardValidityPeriodErrorMessage.month),
             year: Boolean(cardValidityPeriodErrorMessage.year),
           }}
@@ -127,7 +127,7 @@ export const CardCVC: Story = {
       >
         <CardCVCField
           cardCVC={cardCVC}
-          isError={Boolean(cardCVCErrorMessage)}
+          hasError={Boolean(cardCVCErrorMessage)}
           onChange={onChangeCVC}
         />
       </CardInputSection>

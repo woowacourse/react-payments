@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     cardNumber: ['', '', '', ''],
-    isError: [false, false, false, false],
+    errorStateList: [false, false, false, false],
     onChange: () => {},
     setInputRef: () => {},
   },
@@ -30,7 +30,7 @@ export const Default: Story = {
       <CardNumberField
         {...args}
         cardNumber={cardNumber}
-        isError={cardNumberErrorMessage.map((errorMessage) =>
+        errorStateList={cardNumberErrorMessage.map((errorMessage) =>
           Boolean(errorMessage),
         )}
         onChange={onChangeCardNumber}
@@ -43,7 +43,7 @@ export const Default: Story = {
 export const Error: Story = {
   args: {
     cardNumber: ['', '', '', ''],
-    isError: [true, true, true, true],
+    errorStateList: [true, true, true, true],
     onChange: () => {},
     setInputRef: () => {},
   },

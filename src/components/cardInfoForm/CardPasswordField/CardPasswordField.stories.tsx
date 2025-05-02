@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     cardPassword: '',
-    isError: false,
+    hasError: false,
     onChange: () => {},
   },
   render: (args) => {
@@ -28,7 +28,7 @@ export const Default: Story = {
       <CardPassword
         {...args}
         cardPassword={cardPassword}
-        isError={Boolean(cardPasswordErrorMessage)}
+        hasError={Boolean(cardPasswordErrorMessage)}
         onChange={onChangeCardPassword}
       />
     );
@@ -38,7 +38,7 @@ export const Default: Story = {
 export const Error: Story = {
   args: {
     cardPassword: '',
-    isError: true,
+    hasError: true,
     onChange: () => {},
   },
   render: (args) => {

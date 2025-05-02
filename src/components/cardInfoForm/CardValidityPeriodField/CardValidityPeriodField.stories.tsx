@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     cardValidityPeriod: { month: '0', year: '0' },
-    isError: { month: false, year: false },
+    errorStateObject: { month: false, year: false },
     onChangeMonth: () => {},
     onChangeYear: () => {},
     setCardValidityPeriodInputRef: () => {},
@@ -31,7 +31,7 @@ export const Default: Story = {
     return (
       <CardValidityPeriodField
         cardValidityPeriod={cardValidityPeriod}
-        isError={{
+        errorStateObject={{
           month: Boolean(cardValidityPeriodErrorMessage.month),
           year: Boolean(cardValidityPeriodErrorMessage.year),
         }}
@@ -46,7 +46,7 @@ export const Default: Story = {
 export const Error: Story = {
   args: {
     cardValidityPeriod: { month: '13', year: '26' },
-    isError: { month: true, year: true },
+    errorStateObject: { month: true, year: true },
     onChangeMonth: () => {},
     onChangeYear: () => {},
     setCardValidityPeriodInputRef: () => {},

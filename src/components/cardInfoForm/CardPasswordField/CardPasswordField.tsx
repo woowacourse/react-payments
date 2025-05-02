@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
 
 interface CardPasswordFieldProps {
-  isError: boolean;
+  hasError: boolean;
   cardPassword: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function CardPasswordField({
-  isError,
+  hasError,
   cardPassword,
   onChange,
 }: CardPasswordFieldProps) {
@@ -17,7 +17,7 @@ function CardPasswordField({
       <Label htmlFor="CardPassword">비밀번호 앞 2자리</Label>
       <InputWrapper>
         <Input
-          isError={isError}
+          hasError={hasError}
           type="password"
           name="CardPassword"
           id="CardPassword"
@@ -26,7 +26,7 @@ function CardPasswordField({
           placeholder="12"
           min={0}
           max={99}
-          autoFocus={cardPassword.length === 0 && !isError}
+          autoFocus={cardPassword.length === 0 && !hasError}
         />
       </InputWrapper>
     </div>
