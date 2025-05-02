@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router';
 import Button from '../components/common/Button/Button';
 import { PAGE_URL } from '../constants/pageUrl';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 function Notfound() {
   const navigate = useNavigate();
@@ -38,19 +39,18 @@ const Layout = styled.main`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
 `;
 
-const NotFoundButton = {
-  width: '100%',
-  padding: '12px 0',
-  backgroundColor: '#000000ba',
-  color: '#ffffff',
-  border: 'none',
-  transition: 'background-color 0.3s ease-in-out',
-  cursor: 'pointer',
-  borderRadius: '4px',
-  fontSize: '16px',
-  fontWeight: '700',
-
-  ':hover': {
-    backgroundColor: '#000000',
-  },
-};
+const NotFoundButton = css`
+  width: 100%;
+  padding: 12px 0;
+  background-color: #000000ba;
+  color: #ffffff;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  &:hover {
+    background-color: #000000;
+  }
+`;

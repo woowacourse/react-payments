@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import Button from '../common/Button/Button';
 import { StepType } from '../../constants/step';
 import { useNavigate } from 'react-router';
@@ -72,16 +73,16 @@ const CardFormButtonWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-const cardFormButtonStyle = {
-  width: '376px',
-  height: '50px',
-  backgroundColor: '#000000ba',
-  color: '#ffffff',
-  border: 'none',
-  transition: 'background-color 0.3s ease-in-out',
-  cursor: 'pointer',
+const cardFormButtonStyle = css`
+  width: 376px;
+  height: 50px;
+  background-color: #000000ba;
+  color: #ffffff;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
 
-  ':hover': {
-    backgroundColor: '#000000',
-  },
-};
+  &:hover {
+    background-color: #000000;
+  }
+`;

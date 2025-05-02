@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { PAGE_URL } from '../constants/pageUrl';
 import Button from '../components/common/Button/Button';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import check from '/check.png';
 import { useEffect } from 'react';
 
@@ -71,19 +72,19 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const addCardSuccessButtonStyle = {
-  width: '100%',
-  padding: '12px 0',
-  backgroundColor: '#000000ba',
-  color: '#ffffff',
-  border: 'none',
-  transition: 'background-color 0.3s ease-in-out',
-  cursor: 'pointer',
-  borderRadius: '4px',
-  fontSize: '16px',
-  fontWeight: '700',
+const addCardSuccessButtonStyle = css`
+  width: 100%;
+  padding: 12px 0;
+  background-color: #000000ba;
+  color: #ffffff;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
 
-  ':hover': {
-    backgroundColor: '#000000',
-  },
-};
+  &:hover {
+    background-color: #000000;
+  }
+`;
