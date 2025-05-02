@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { PasswordType } from "../../types/CardInformationType";
+import { PasswordType, SetValueFn } from "../../types/CardInformationType";
 import { PASSWORD_MAX_LENGTH } from "../../constants/constant";
 import useCheckLengthComplete from "../common/useCheckLengthComplete";
 
 const usePassword = () => {
-  const [password, setPassword] = useState<PasswordType>([""]);
-
+  const [password, setPasswordState] = useState<PasswordType>("");
+  const setPassword: SetValueFn<PasswordType> = (value) => setPasswordState(value);
   const isPasswordComplete = useCheckLengthComplete(password, PASSWORD_MAX_LENGTH);
 
   return { password, setPassword, isPasswordComplete };
