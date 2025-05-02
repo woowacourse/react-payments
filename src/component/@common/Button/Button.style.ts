@@ -1,6 +1,6 @@
 import { Theme, css } from '@emotion/react';
 
-export const buttonStyle = css`
+export const buttonDefaultStyle = css`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,6 +8,17 @@ export const buttonStyle = css`
 
   cursor: pointer;
 `;
+
+export const buttonStyle = (theme: Theme) => ({
+  black: css`
+    color: ${theme.color.white};
+    background-color: ${theme.color.cardBlack};
+  `,
+  gray: css`
+    color: ${theme.color.cardBlack};
+    background-color: ${theme.color.gray};
+  `,
+});
 
 export const buttonSize = {
   large: (theme: Theme) => css`
@@ -17,8 +28,14 @@ export const buttonSize = {
 
     border-radius: 10px;
 
-    color: ${theme.color.white};
-    background-color: ${theme.color.cardBlack};
+    ${theme.font.button.text2}
+  `,
+  small: (theme: Theme) => css`
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
+
+    border-radius: 10px;
 
     ${theme.font.button.text2}
   `,

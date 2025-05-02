@@ -1,16 +1,26 @@
 import { ButtonHTMLAttributes } from 'react';
-import { buttonSize, buttonStyle } from './Button.style';
+import { buttonSize, buttonDefaultStyle, buttonStyle } from './Button.style';
+import theme from '../../../styles/theme';
 
-type ButtonVariant = 'large';
+type ButtonVariant = 'large' | 'small';
+type ButtonColorVariant = 'black' | 'gray';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: ButtonVariant;
+  colorVariant?: ButtonColorVariant;
 }
 
 const Button = (props: ButtonProps) => {
-  const { children, variant, ...rest } = props;
+  const { children, variant, colorVariant = 'black', ...rest } = props;
   return (
-    <button css={[buttonStyle, buttonSize[variant]]} {...rest}>
+    <button
+      css={[
+        buttonDefaultStyle,
+        buttonSize[variant],
+        buttonStyle(theme)[colorVariant],
+      ]}
+      {...rest}
+    >
       {children}
     </button>
   );
