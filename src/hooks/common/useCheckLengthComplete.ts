@@ -3,7 +3,8 @@ import { ValidCardTuple } from "../../types/CardInformationType";
 
 export const useCheckLengthComplete = (state: ValidCardTuple, maxLength: number): boolean => {
   return useMemo(() => {
-    return state.every((item) => item.length === maxLength);
+    if (Array.isArray(state)) return state.every((item) => item.length === maxLength);
+    return state.length === maxLength;
   }, [state]);
 };
 
