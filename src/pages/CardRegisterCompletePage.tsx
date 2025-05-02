@@ -1,11 +1,11 @@
 import { MouseEventHandler, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
-import { FooterButton } from '../../components/common/FooterButton';
-import { MobileLayoutContainer } from '../../components/common/MobileLayoutContainer';
-import { ROUTE_PATH } from '../../constants/route';
+import { FooterButton } from '../components/common/FooterButton';
+import { MobileLayoutContainer } from '../components/common/MobileLayoutContainer';
+import { ROUTE_PATH } from '../constants/route';
 
-function Complete() {
+function CardRegisterCompletePage() {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ function Complete() {
 
   return (
     <MobileLayoutContainer>
-      <CompleteContainer>
+      <CompletePageContainer>
         <img src="./img/circle_check.png" />
         {location.state && (
           <InfoText>
@@ -30,12 +30,12 @@ function Complete() {
         <FooterButton size="middle" onClick={handleGoHome}>
           확인
         </FooterButton>
-      </CompleteContainer>
+      </CompletePageContainer>
     </MobileLayoutContainer>
   );
 }
 
-const CompleteContainer = styled.div`
+const CompletePageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,4 +54,4 @@ const InfoText = styled.p`
   white-space: pre-wrap;
 `;
 
-export default Complete;
+export default CardRegisterCompletePage;

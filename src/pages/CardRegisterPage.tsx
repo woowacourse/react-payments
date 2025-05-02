@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { MobileLayoutContainer } from '../../components/common/MobileLayoutContainer';
-import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
-import usePaymentsForm from '../../components/features/payments/hooks/usePaymentsForm';
-import PaymentsFormFields from '../../components/features/payments/PaymentsForm/PaymentsFormFields';
+import { MobileLayoutContainer } from '../components/common/MobileLayoutContainer';
+import CardPreview from '../components/features/payments/CardPreview/CardPreview';
+import usePaymentsForm from '../components/features/payments/hooks/usePaymentsForm';
+import PaymentsFormFields from '../components/features/payments/PaymentsForm/PaymentsFormFields';
 
-function Payments() {
+function CardRegisterPage() {
   const {
     paymentsFormValues,
     paymentsFormInputRefs,
@@ -19,7 +19,7 @@ function Payments() {
 
   return (
     <MobileLayoutContainer>
-      <PaymentsContainer>
+      <RegisterPageContainer>
         <CardPreview
           cardNumberInputValue={paymentsFormValues.cardNumber}
           cardBank={paymentsFormValues.cardBank}
@@ -36,12 +36,12 @@ function Payments() {
           allInputComplete={allInputComplete}
           handleSubmit={handleSubmit}
         />
-      </PaymentsContainer>
+      </RegisterPageContainer>
     </MobileLayoutContainer>
   );
 }
 
-const PaymentsContainer = styled.div`
+const RegisterPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,4 +51,4 @@ const PaymentsContainer = styled.div`
   min-height: 100vh;
 `;
 
-export default Payments;
+export default CardRegisterPage;
