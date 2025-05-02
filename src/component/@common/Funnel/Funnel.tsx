@@ -3,7 +3,6 @@ import {
   isValidElement,
   PropsWithChildren,
   ReactElement,
-  useEffect,
 } from 'react';
 import { NonEmptyArray } from '../../../../types/types';
 import { assert } from '../../../utils/error';
@@ -40,11 +39,7 @@ export const Funnel = <Steps extends NonEmptyArray<string>>(
 };
 
 export const Step = <T extends NonEmptyArray<string>>(props: StepProps<T>) => {
-  const { onNext, children } = props;
-
-  useEffect(() => {
-    onNext?.();
-  }, [onNext]);
+  const { children } = props;
 
   return children;
 };
