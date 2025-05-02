@@ -4,6 +4,7 @@ import useCardCVC from './useCardCVC';
 import useCardCompany from './useCardCompany';
 import useCardPassword from './useCardPassword';
 import useStep from './useStep';
+import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
 const useCardForm = () => {
   const {
@@ -40,10 +41,6 @@ const useCardForm = () => {
     onChangeCardPassword,
     errorMessage: cardPasswordErrorMessage,
   } = useCardPassword();
-
-  const getErrorMessageFromList = (errorMessageList: string[]) => {
-    return errorMessageList.find((errorMessage) => errorMessage !== '') ?? '';
-  };
 
   const formStatus = {
     cardNumberOkay:
