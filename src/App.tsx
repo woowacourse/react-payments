@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router";
 import CardInfo from "./components/page/CardInfo";
 import CardCompletePage from "./components/page/CardAddSuccess";
 
