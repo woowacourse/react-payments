@@ -1,9 +1,8 @@
 import InputContainer from '../InputContainer/InputContainer';
-import { useCardFormContext } from '../../context/CardFormContext';
+import usePassword from '../../hooks/usePassword';
 
 const CardPasswordInput = () => {
-  const { password, updatePassword, passwordError, passwordErrorMessage } =
-    useCardFormContext();
+  const { password, error, validate } = usePassword();
 
   return (
     <InputContainer
@@ -15,15 +14,15 @@ const CardPasswordInput = () => {
         <input
           type="password"
           value={password}
-          onChange={updatePassword}
+          onChange={(e) => validate(e.target.value)}
           name="password"
           maxLength={2}
           placeholder="비밀번호 앞 2자리"
-          className={`input ${passwordError ? 'errorInput' : ''}`}
+          className={`input ${error.isValid ? 'errorInput' : ''}`}
         />
       </div>
       <p className="helperText" data-testid="helper-text">
-        {passwordErrorMessage}
+        {error.errorMessage}
       </p>
     </InputContainer>
   );

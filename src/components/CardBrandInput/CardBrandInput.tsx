@@ -1,10 +1,10 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { CARD_BRANDS, OPTION_MESSAGE } from '../../constants/cardBrand';
 import { INPUT_CONTAINER } from '../../constants/title';
-import { useCardFormContext } from '../../context/CardFormContext';
+import useBrand from '../../hooks/useBrand';
 
 const CardBrandInput = () => {
-  const { brand, updateBrand } = useCardFormContext();
+  const { brand, error, validate } = useBrand();
 
   return (
     <InputContainer
@@ -15,7 +15,7 @@ const CardBrandInput = () => {
         data-testid="card-brand-select"
         className="card-brand-selector"
         value={brand}
-        onChange={updateBrand}
+        onChange={(e) => validate(e.target.value)}
       >
         <option value="" disabled hidden>
           {OPTION_MESSAGE.SELECT_CARD_BRAND}
