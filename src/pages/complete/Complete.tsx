@@ -3,17 +3,18 @@ import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import FooterButton from '../../components/common/FooterButton/FooterButton';
 import MobileLayoutContainer from '../../components/common/MobileLayoutContainer/MobileLayoutContainer';
+import { ROUTE_PATH } from '../../constants/route';
 
 function Complete() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleGoHome: MouseEventHandler<HTMLButtonElement> = () => {
-    navigate('/');
+    navigate(ROUTE_PATH.home);
   };
 
   useEffect(() => {
-    if (!location.state) navigate('/');
+    if (!location.state) navigate(ROUTE_PATH.home);
   }, []);
 
   return (

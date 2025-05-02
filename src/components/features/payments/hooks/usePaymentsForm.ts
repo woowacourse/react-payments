@@ -7,6 +7,7 @@ import useCardPasswordValidation from './useCardPasswordValidation';
 import { isAllTrue } from '../../../../utils/array';
 import { useNavigate } from 'react-router';
 import { INPUT_STEP } from '../config/step';
+import { ROUTE_PATH } from '../../../../constants/route';
 
 function usePaymentsForm() {
   const [inputStep, setInputStep] = useState(INPUT_STEP.cardNumber);
@@ -107,7 +108,7 @@ function usePaymentsForm() {
   const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
 
-    navigate('/complete', {
+    navigate(ROUTE_PATH.complete, {
       state: {
         cardNumberPart1: cardNumberInputValues.cardNumberPart1,
         cardBank: cardBankValue?.label,
