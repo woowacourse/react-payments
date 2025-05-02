@@ -5,7 +5,7 @@ export const INITIAL_CARD_NUMBER = {
   fourth: { value: '', isError: false }
 } as const;
 
-export const INITIAL_EXPIRATION = { year: { value: '', errorMessage: '' }, month: { value: '', errorMessage: '' } } as const;
+export const INITIAL_EXPIRATION = { year: { value: '', errorMessage: '' }, month: { value: '', errorMessage: '' } };
 
 export const INITIAL_CVC = { value: '', errorMessage: '' };
 
