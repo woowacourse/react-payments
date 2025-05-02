@@ -1,13 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { COLORS } from '../../styles/colors';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+import type { CardNumber } from '../../types';
 
 export interface PreviewViewProps {
   cardNumbers: CardNumber;

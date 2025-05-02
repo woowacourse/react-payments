@@ -1,12 +1,6 @@
 import CardNumbersView from './CardNumbersView';
 import { useCardNumbers } from '../../hooks/useCardNumbers';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+import { CardNumber } from '../../types';
 
 export interface CardNumbersProps {
   cardNumbers: CardNumber;

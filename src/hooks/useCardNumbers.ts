@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
 import { useErrorMessage } from './useErrorMessage';
+import { CardNumber } from '../types';
 
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
 export interface CardNumbersProps {
@@ -33,7 +28,6 @@ export const useCardNumbers = ({
     const hasError =
       errors.some((error) => error === true) ||
       !isCardNumbersLengthValid(cardNumbers);
-
     setCardNumbersError(hasError);
   }, [errors, cardNumbers, setCardNumbersError]);
 

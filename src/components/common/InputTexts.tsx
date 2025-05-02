@@ -2,18 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import SingleInput from './SingleInput';
 import { useFocusGroup } from '../../hooks/useFocusGroup';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
-
-type Period = {
-  month: string;
-  year: string;
-};
+import { CardNumber, Period } from '../../types';
 
 type InputType = 'text' | 'password';
 

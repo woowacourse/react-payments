@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PreviewView from './PreviewView';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+import { CardNumber } from '../../types';
 
 interface PreviewProps {
   cardNumbers: CardNumber;

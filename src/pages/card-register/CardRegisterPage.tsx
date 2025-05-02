@@ -9,18 +9,7 @@ import CardPassword from '../../components/CardPassword';
 import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import CardRegisterForm from '../../components/CardRegisterForm/CardRegisterForm';
 import { COLORS } from '../../styles/colors';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
-
-type Period = {
-  month: string;
-  year: string;
-};
+import { CardNumber, Period } from '../../types';
 
 const CardRegisterPage = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>({

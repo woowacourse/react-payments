@@ -2,13 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import FormLabel from '../common/FormLabel';
 import InputTexts from '../common/InputTexts';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+import { CardNumber } from '../../types';
 
 export interface CardNumbersViewProps {
   cardNumbers: CardNumber;
