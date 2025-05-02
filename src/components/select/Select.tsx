@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
-type Props = {
+interface SelectProps {
 	options: string[];
-	cardCompany: string;
+	value: string;
 	onChange?: (value: string) => void;
-};
+	placeholder: string;
+}
 
-const Select = ({ options, cardCompany, onChange }: Props) => {
+const Select = ({ options, value, onChange, placeholder }: SelectProps) => {
 	return (
-		<SelectContainer $cardCompany={cardCompany} onChange={onChange && ((e) => onChange(e.target.value))}>
+		<SelectContainer value={value} onChange={onChange && ((e) => onChange(e.target.value))}>
 			<Option value="" hidden>
-				카드사를 선택해주세요.
+				{placeholder}
 			</Option>
 			{options.map((option) => {
 				return (
@@ -25,12 +26,12 @@ const Select = ({ options, cardCompany, onChange }: Props) => {
 
 export default Select;
 
-const SelectContainer = styled.select<{ $cardCompany: string }>`
+const SelectContainer = styled.select<{ value: string }>`
 	width: 100%;
 	padding: 8px;
 	border: 1px solid #acacac;
 	border-radius: 3px;
-	color: ${(props) => (props.$cardCompany === "" ? "#acacac" : "#000")};
+	color: ${(props) => (props.value === "" ? "#acacac" : "#000")};
 
 	&:focus {
 		outline: none;

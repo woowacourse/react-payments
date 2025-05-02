@@ -16,7 +16,7 @@ const CardCompany = React.memo(({ cardCompany, onChange }: CardCompanyProps) => 
 		<CardNumberWrap>
 			<Title>카드사를 선택해 주세요</Title>
 			<Description>현재 국내 카드사만 가능합니다.</Description>
-			<Select options={CARD_COMPANIES} cardCompany={cardCompany} onChange={onChange} />
+			<Select options={CARD_COMPANIES} value={cardCompany} onChange={onChange} placeholder="카드사를 선택해주세요." />
 		</CardNumberWrap>
 	);
 });
