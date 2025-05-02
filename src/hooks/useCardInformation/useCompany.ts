@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { CompanyType } from "../../types";
+import { UseHookReturn } from "../../types/CardInformationType";
 
-const useCompany = () => {
+const useCompany = (): UseHookReturn<"company"> => {
   const [company, setCompany] = useState<CompanyType>("");
 
-  const isCompanyComplete = company !== "";
+  const isComplete = company !== "";
 
-  return { company, setCompany, isCompanyComplete };
+  return { state: company, setState: setCompany, isComplete };
 };
 
 export default useCompany;

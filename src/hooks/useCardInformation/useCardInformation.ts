@@ -3,40 +3,60 @@ import useExpirationDate from "./useExpirationDate";
 import useCvcNumber from "./useCvcNumber";
 import usePassword from "./usePassword";
 import useCompany from "./useCompany";
-import { CardInformationType, isStateCompletesType, setCardInformationType } from "../../types/CardInformationType";
+import {
+  CardInformationType,
+  isStateCompletesType,
+  KeysWithout,
+  setCardInformationType,
+  ValidationType,
+} from "../../types/CardInformationType";
+import { isErrorCompletesType } from "../../types/useValidationType";
 
 const useCardInformation = () => {
-  const { uniqueNumber, setUniqueNumber, isUniqueNumberComplete } = useUniqueNumber();
-  const { expirationDate, setExpirationDate, isExpirationDateComplete } = useExpirationDate();
-  const { cvcNumber, setCvcNumber, isCvcNumberComplete } = useCvcNumber();
-  const { password, setPassword, isPasswordComplete } = usePassword();
-  const { company, setCompany, isCompanyComplete } = useCompany();
+  const uniqueNumber = useUniqueNumber();
+  const expirationDate = useExpirationDate();
+  const cvcNumber = useCvcNumber();
+  const password = usePassword();
+  const company = useCompany();
 
-  const cardInformationState: CardInformationType = {
+  const cardInformation = {
     uniqueNumber,
     expirationDate,
     cvcNumber,
     password,
     company,
-  };
+  } as const;
 
-  const setCardInformationState: setCardInformationType = {
-    uniqueNumber: setUniqueNumber,
-    expirationDate: setExpirationDate,
-    cvcNumber: setCvcNumber,
-    password: setPassword,
-    company: setCompany,
-  };
+  const cardInformationState = Object.fromEntries(
+    Object.entries(cardInformation).map(([key, { state }]) => [key, state]),
+  ) as CardInformationType;
 
-  const isStateCompletes: isStateCompletesType = {
-    uniqueNumber: isUniqueNumberComplete,
-    expirationDate: isExpirationDateComplete,
-    cvcNumber: isCvcNumberComplete,
-    password: isPasswordComplete,
-    company: isCompanyComplete,
-  };
+  const setCardInformationState = Object.fromEntries(
+    Object.entries(cardInformation).map(([key, { setState }]) => [key, setState]),
+  ) as setCardInformationType;
 
-  return { cardInformationState, setCardInformationState, isStateCompletes };
+  const validation = Object.fromEntries(
+    (Object.keys(cardInformation) as KeysWithout<typeof cardInformation, "company">[]).map((key) => [
+      key,
+      {
+        isError: cardInformation[key].isError,
+        errorMessage: cardInformation[key].errorMessage,
+        validateInput: cardInformation[key].validateInput,
+      },
+    ]),
+  ) as ValidationType;
+
+  const isCompletes = Object.fromEntries(
+    Object.entries(cardInformation).map(([key, { isComplete }]) => [key, isComplete]),
+  ) as isStateCompletesType;
+
+  const isErrorCompletes = Object.fromEntries(
+    Object.keys(cardInformation)
+      .filter((key): key is KeysWithout<typeof cardInformation, "company"> => key !== "company")
+      .map((key) => [key, cardInformation[key].isErrorComplete]),
+  ) as isErrorCompletesType;
+
+  return { cardInformationState, setCardInformationState, validation, isCompletes, isErrorCompletes };
 };
 
 export default useCardInformation;

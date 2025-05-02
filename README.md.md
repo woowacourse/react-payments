@@ -65,6 +65,11 @@
 - [x] FormSectionInput, FormSectionSelect 컴포넌트 export 구문 주석제거
 - [x] useStep 훅의 useEffect 내부 로직 useCallback으로 분리
 
+추가 리팩토링 사항 1
+
+- [x] 훅 결합 (상태 훅 + 에러 훅 결합)
+- [ ] 에러 상태 단일값 cvc, password -> 변경
+
 추후 반영
 
 - [ ] 유효성 검증 숫자만 입력할 수 있게 변경? (토스 ui 레퍼런스)

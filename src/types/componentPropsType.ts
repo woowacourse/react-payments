@@ -1,7 +1,11 @@
 import React, { ComponentProps } from "react";
 import { CompanyType } from ".";
-import { CardInformationType, setCardInformationType } from "./CardInformationType";
-import { useEachValidationType, validationFieldType } from "./useValidationType";
+import {
+  CardInformationType,
+  setCardInformationType,
+  useEachValidationType,
+  ValidationType,
+} from "./CardInformationType";
 
 export type FormContainerProps = {
   /** 카드 정보 상태값 */
@@ -9,7 +13,7 @@ export type FormContainerProps = {
   /** 카드 정보 상태 변경 함수 */
   setCardInformationState: setCardInformationType;
   /** 입력값에 대한 유효성 검사 훅을 담은 배열 */
-  validation: validationFieldType;
+  validation: ValidationType;
   /** 단계별 step */
   step: number;
   /** 버튼 여부 띄우기 */
@@ -56,7 +60,7 @@ export type InputFieldProps<T extends Exclude<keyof CardInformationType, "compan
   /** 카드 정보 상태 변경 함수 */
   setState: setCardInformationType[T];
   /** 해당 필드에 대한 개별 유효성 검사 */
-  eachValidation: Omit<useEachValidationType, "isComplete">;
+  eachValidation: useEachValidationType;
 };
 
 export type InputProps = {

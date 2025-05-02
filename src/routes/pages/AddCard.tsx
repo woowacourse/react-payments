@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 import useCardInformation from "../../hooks/useCardInformation/useCardInformation";
-import useValidation from "../../hooks/useValidation/useValidation";
 import PreviewCard from "../../components/PreviewCard/PreviewCard";
 import FormContainer from "../../components/FormContainer/FormContainer";
 import { useNavigate } from "react-router";
@@ -9,14 +8,14 @@ import useAllComplete from "../../hooks/common/useAllComplete";
 
 const AddCard = () => {
   const navigate = useNavigate();
-  const { cardInformationState, setCardInformationState, isStateCompletes } = useCardInformation();
-  const { validation, isErrorCompletes } = useValidation();
+  const { cardInformationState, setCardInformationState, validation, isCompletes, isErrorCompletes } =
+    useCardInformation();
 
   // 1. 카드번호 상태 + 유효성 검증 -> 기반으로 현재 step 표현
-  const step = useStep(isStateCompletes, isErrorCompletes);
+  const step = useStep(isCompletes, isErrorCompletes);
 
   // 2. 카드번호 상태 + 유효성 검증 완료 되었을때, 완료 버튼 띄우기
-  const complete = useAllComplete(isStateCompletes, isErrorCompletes);
+  const complete = useAllComplete(isCompletes, isErrorCompletes);
 
   const handleComplete = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

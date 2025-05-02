@@ -18,7 +18,7 @@ const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
   const { setRef, moveFocusOrBlur } = useFocusManager(inputNumber);
 
   const handleChange = (value: string, index: number) => {
-    validateInput(index, value);
+    validateInput(value, index);
     setState(value, index);
     moveFocusOrBlur({ index, value, maxLength: inputProps.maxLength });
   };
