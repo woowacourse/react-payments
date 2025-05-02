@@ -1,4 +1,3 @@
-import { useFunnel } from '../../hooks/useFunnel';
 import CardNumberInput from '../../component/CardNumberInput/CardNumberInput';
 import { Dropdown } from '../../component/@common/Dropdown/Dropdown';
 import CardPeriodInput from '../../component/CardPeriod/CardPeriodInput';
@@ -12,6 +11,9 @@ import {
   cardPaymentLayout,
 } from './CardPayment.style';
 import { CardBrand, useCard } from '../../context/CardContext';
+import useEasyNavigate from '../../hooks/useEasyNavigate';
+import { Button } from '../../component/@common/Button/Button';
+import { useFunnel } from '../../component/@common/Funnel/hooks/useFunnel';
 
 const CardPaymentPage = () => {
   const { Funnel, setStep } = useFunnel<typeof STEPS>({
@@ -20,14 +22,30 @@ const CardPaymentPage = () => {
   });
 
   const { cardBrand } = useCard();
+  const { goHome } = useEasyNavigate();
+
+  const handleBackButtonClick = (stepNumber: number) => {
+    const stepIndex = stepNumber - 1;
+
+    if (stepIndex === 0) {
+      goHome();
+    } else {
+      const prevStep = STEPS[stepIndex - 1];
+      setStep(() => prevStep);
+    }
+  };
 
   return (
     <div css={cardPaymentLayout}>
       <div css={cardPaymentContentContainer}>
         <Card />
+
         <Funnel>
           <Funnel.Step name={STEPS[0]}>
-            <CardNumberInput onNext={() => setStep(STEPS[1])} />
+            <CardNumberInput
+              onNext={() => setStep(STEPS[1])}
+              onClickBackButton={() => handleBackButtonClick(1)}
+            />
           </Funnel.Step>
 
           <Funnel.Step name={STEPS[1]}>
@@ -49,18 +67,36 @@ const CardPaymentPage = () => {
               <Dropdown.Option value="hana">하나카드</Dropdown.Option>
               <Dropdown.Option value="kb">국민카드</Dropdown.Option>
             </Dropdown>
+            <Button variant="small" onClick={() => handleBackButtonClick(2)}>
+              뒤로가기
+            </Button>
+            <Button
+              variant="small"
+              colorVariant="gray"
+              onClick={() => setStep(STEPS[2])}
+            >
+              다음
+            </Button>
           </Funnel.Step>
 
           <Funnel.Step name={STEPS[2]}>
-            <CardPeriodInput onNext={() => setStep(STEPS[3])} />
+            <CardPeriodInput
+              onNext={() => setStep(STEPS[3])}
+              onClickBackButton={() => handleBackButtonClick(3)}
+            />
           </Funnel.Step>
 
           <Funnel.Step name={STEPS[3]} onNext={() => {}}>
-            <CardCVCInput onNext={() => setStep(STEPS[4])} />
+            <CardCVCInput
+              onNext={() => setStep(STEPS[4])}
+              onClickBackButton={() => handleBackButtonClick(4)}
+            />
           </Funnel.Step>
 
           <Funnel.Step name={STEPS[4]}>
-            <CardPasswordInput />
+            <CardPasswordInput
+              onClickBackButton={() => handleBackButtonClick(5)}
+            />
           </Funnel.Step>
         </Funnel>
       </div>
