@@ -38,7 +38,6 @@ const Dropdown = ({
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.target.value;
     onChange?.(newValue);
-    onNext?.();
   };
 
   return (

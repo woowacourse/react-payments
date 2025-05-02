@@ -14,7 +14,11 @@ import Title from '../@common/Title/Title';
 import { useCallback, useId } from 'react';
 import useEasyNavigate from '../../hooks/useEasyNavigate';
 
-function CardPasswordInput() {
+interface CardPasswordInputProps {
+  onClickBackButton: () => void;
+}
+
+function CardPasswordInput({ onClickBackButton }: CardPasswordInputProps) {
   const id = useId();
   const { goPage } = useEasyNavigate();
   const { cardPassword, cardNumber, cardBrand } = useCard();
@@ -57,15 +61,21 @@ function CardPasswordInput() {
           )}
         </div>
       </Input.Group>
-      {isCompleteForm && (
-        <Button
-          variant="large"
-          onClick={handlePaymentComplete}
-          disabled={!cardPassword.isValid()}
-        >
-          확인
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        {isCompleteForm && (
+          <Button
+            variant="large"
+            onClick={handlePaymentComplete}
+            disabled={!cardPassword.isValid()}
+            colorVariant="gray"
+          >
+            확인
+          </Button>
+        )}
+        <Button variant="small" onClick={onClickBackButton}>
+          뒤로가기
         </Button>
-      )}
+      </div>
     </>
   );
 }

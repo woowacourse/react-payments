@@ -12,20 +12,17 @@ import {
 import Title from '../@common/Title/Title';
 import { useCard } from '../../context/CardContext';
 import { handleAutoFocus } from '../../utils';
+import { Button } from '../@common/Button/Button';
 
 interface CardPeriodInputProps {
   onNext?: () => void;
+  onClickBackButton: () => void;
 }
 
 function CardPeriodInput(props: CardPeriodInputProps) {
-  const { onNext } = props;
+  const { onNext, onClickBackButton } = props;
   const { cardExpiration } = useCard();
 
-  if (cardExpiration.isValid()) {
-    onNext?.();
-  }
-
-  // 월(month) 입력 핸들러
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     cardExpiration.onChange.month(e.target.value);
     const fieldMappings = {
@@ -78,6 +75,12 @@ function CardPeriodInput(props: CardPeriodInputProps) {
           )}
         </div>
       </Input.Group>
+      <Button variant="small" onClick={onClickBackButton}>
+        뒤로가기
+      </Button>
+      <Button variant="small" onClick={onNext} colorVariant="gray">
+        다음
+      </Button>
     </>
   );
 }

@@ -11,13 +11,15 @@ import {
 import Title from '../@common/Title/Title';
 import { useCard } from '../../context/CardContext';
 import { handleAutoFocus } from '../../utils';
+import { Button } from '../@common/Button/Button';
 
 interface CardNumberInputProps {
   onNext: () => void;
+  onClickBackButton: () => void;
 }
 
 function CardNumberInput(props: CardNumberInputProps) {
-  const { onNext } = props;
+  const { onNext, onClickBackButton } = props;
   const { cardNumber } = useCard();
 
   const hasError =
@@ -25,10 +27,6 @@ function CardNumberInput(props: CardNumberInputProps) {
     cardNumber.error.second ||
     cardNumber.error.third ||
     cardNumber.error.forth;
-
-  if (cardNumber.isValid()) {
-    onNext();
-  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     cardNumber.onChange(e);
@@ -99,6 +97,12 @@ function CardNumberInput(props: CardNumberInputProps) {
           )}
         </div>
       </Input.Group>
+      <Button variant="small" onClick={() => onClickBackButton()}>
+        뒤로가기
+      </Button>
+      <Button variant="small" onClick={onNext} colorVariant="gray">
+        다음
+      </Button>
     </>
   );
 }

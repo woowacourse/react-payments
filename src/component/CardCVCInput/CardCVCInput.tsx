@@ -10,18 +10,16 @@ import {
 } from '../../styles/@common/inputContainer.style';
 import Title from '../@common/Title/Title';
 import { useCard } from '../../context/CardContext';
+import { Button } from '../@common/Button/Button';
 
 interface CardCVCInputProps {
   onNext?: () => void;
+  onClickBackButton: () => void;
 }
 
 function CardCVCInput(props: CardCVCInputProps) {
-  const { onNext } = props;
+  const { onNext, onClickBackButton } = props;
   const { cardCVC } = useCard();
-
-  if (cardCVC.isValid()) {
-    onNext?.();
-  }
 
   return (
     <>
@@ -47,6 +45,12 @@ function CardCVCInput(props: CardCVCInputProps) {
           )}
         </div>
       </Input.Group>
+      <Button variant="small" onClick={onClickBackButton}>
+        뒤로가기
+      </Button>
+      <Button variant="small" onClick={onNext} colorVariant="gray">
+        다음
+      </Button>
     </>
   );
 }
