@@ -17,7 +17,7 @@ function CardInputSection({
   name,
 }: CardInputSectionProps) {
   return (
-    <Wrapper id={name}>
+    <Wrapper $name={name}>
       <Title>{title}</Title>
       {description && <Description>{description}</Description>}
       {children}
@@ -28,9 +28,9 @@ function CardInputSection({
 
 export default CardInputSection;
 
-const Wrapper = styled.section<{ id: StepType }>`
+const Wrapper = styled.section<{ $name: StepType }>`
   width: 100%;
-  height: ${({ id }) => (id === 'CardCompany' ? '84' : '114')}px;
+  height: ${({ $name }) => ($name === 'CardCompany' ? '84' : '114')}px;
 `;
 
 const Title = styled.p`
