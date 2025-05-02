@@ -31,6 +31,14 @@ function CardPeriodInput(props: CardPeriodInputProps) {
     handleAutoFocus(e, CARD_EXPIRATION.monthLength, fieldMappings);
   };
 
+  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    cardExpiration.onChange.year(e.target.value);
+    const prevFieldMappings = {
+      year: 'month',
+    };
+    handleAutoFocus(e, CARD_EXPIRATION.yearLength, {}, prevFieldMappings);
+  };
+
   return (
     <>
       <Title>
@@ -58,7 +66,7 @@ function CardPeriodInput(props: CardPeriodInputProps) {
                 name="year"
                 maxLength={CARD_EXPIRATION.yearLength}
                 value={cardExpiration.value.year}
-                onChange={(e) => cardExpiration.onChange.year(e.target.value)}
+                onChange={handleYearChange}
                 css={cardExpiration.error.year ? errorInputStyle : undefined}
               />
             </Input.Group>

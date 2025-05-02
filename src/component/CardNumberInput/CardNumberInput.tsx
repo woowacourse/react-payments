@@ -37,7 +37,13 @@ function CardNumberInput(props: CardNumberInputProps) {
       third: 'forth',
     };
 
-    handleAutoFocus(e, CARD_NUMBER.maxLength, fieldMappings);
+    const prevFieldMappings = {
+      second: 'first',
+      third: 'second',
+      forth: 'third',
+    };
+
+    handleAutoFocus(e, CARD_NUMBER.maxLength, fieldMappings, prevFieldMappings);
   };
 
   return (

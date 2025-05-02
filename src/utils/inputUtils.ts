@@ -1,9 +1,11 @@
 export const handleAutoFocus = (
   e: React.ChangeEvent<HTMLInputElement>,
   maxLength: number,
-  fieldMappings: Record<string, string>
+  fieldMappings: Record<string, string>,
+  prevFieldMappings?: Record<string, string>
 ): void => {
   const { name, value } = e.target;
+  const prevValue = e.target.dataset.prevValue;
 
   if (value.length === maxLength && fieldMappings[name]) {
     const nextInput = document.querySelector(
@@ -14,6 +16,23 @@ export const handleAutoFocus = (
       nextInput.focus();
     }
   }
+
+  if (
+    prevValue?.length === 1 &&
+    value.length === 0 &&
+    prevFieldMappings &&
+    prevFieldMappings[name]
+  ) {
+    const prevInput = document.querySelector(
+      `input[name="${prevFieldMappings[name]}"]`
+    );
+
+    if (prevInput instanceof HTMLInputElement) {
+      prevInput.focus();
+    }
+  }
+
+  e.target.dataset.prevValue = value;
 };
 
 export const maskCardValue = (
