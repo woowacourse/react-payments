@@ -1,4 +1,4 @@
-import {ChangeEvent, useRef} from 'react';
+import {ChangeEvent, useEffect, useRef} from 'react';
 import Description from '../description/Description';
 import Input from '../input/Input';
 import InputField from '../inputField/InputField';
@@ -42,18 +42,23 @@ const CardNumberSection = ({
     order: keyof CardNumber
   ) => {
     onChange(e, order);
-
     onValidate(errorRule, e, order);
+  };
 
-    const refIndex = ORDER_LABEL.findIndex((i) => i === order);
+  useEffect(() => {
+    const activeElement = document.activeElement;
+    const focusedIndex = inputRefs.findIndex(
+      (ref) => ref.current === activeElement
+    );
+
+    const order = ORDER_LABEL[focusedIndex];
 
     if (
-      errorMessage[order].length === 0 &&
-      e.target.value.length === INPUT_MAX_LENGTH &&
-      inputRefs[refIndex + 1]
+      errorMessage[order]?.length === 0 &&
+      value[order]?.length === INPUT_MAX_LENGTH
     )
-      inputRefs[refIndex + 1].current?.focus();
-  };
+      inputRefs[focusedIndex + 1]?.current?.focus();
+  }, [errorMessage, value]);
 
   return (
     <CardNumberWrap>
