@@ -1,7 +1,18 @@
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
+import { useCardContext } from "../../contexts/CardContext";
+import { ROUTE } from "../../constants/route";
 
 const RegisterCardButton = () => {
-  return <Button name="register" />;
+  const navigate = useNavigate();
+  const { setIsSubmitted } = useCardContext();
+
+  const handleClick = () => {
+    setIsSubmitted(true);
+    navigate(ROUTE.CARD_REGISTER.COMPLETE);
+  };
+
+  return <Button variant="register" onClick={handleClick}>확인</Button>;
 };
 
 export default RegisterCardButton;

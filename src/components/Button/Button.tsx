@@ -1,47 +1,24 @@
 import styles from "./Button.module.css";
-import { useNavigate } from "react-router-dom";
-import { useCardContext } from "../../contexts/CardContext";
-import { forwardRef } from "react";
-import { ROUTE } from "../../constants/route";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 
 type ButtonProps = {
-  name: "register" | "another";
-};
+  variant?: "register" | "another";
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ name }, ref) => {
-  const navigate = useNavigate();
-  const { resetCardForm, setIsSubmitted } = useCardContext();
-
-  const handleRegisterCard = () => {
-    navigate(ROUTE.CARD_REGISTER.COMPLETE);
-    setIsSubmitted(true);
-  };
-
-  const handleRegisterAnotherCard = () => {
-    resetCardForm();
-
-    navigate(ROUTE.HOME);
-    location.reload();
-    setIsSubmitted(false);
-  };
-
-  return (
-    <button
-      className={
-        name === "register"
-          ? styles.registerCardButton
-          : styles.registerAnotherCardButton
-      }
-      onClick={
-        name === "register"
-          ? () => handleRegisterCard()
-          : () => handleRegisterAnotherCard()
-      }
-      ref={ref}
-    >
-      확인
-    </button>
-  );
-});
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = "register", className, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={
+          variant === "register"
+            ? styles.registerCardButton
+            : styles.registerAnotherCardButton
+        }
+        {...props}
+      />
+    );
+  }
+);
 
 export default Button;
