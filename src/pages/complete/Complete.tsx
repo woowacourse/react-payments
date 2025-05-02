@@ -1,8 +1,8 @@
 import { MouseEventHandler, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
-import FooterButton from '../../components/common/FooterButton/FooterButton';
-import MobileLayoutContainer from '../../components/common/MobileLayoutContainer/MobileLayoutContainer';
+import { FooterButton } from '../../components/common/FooterButton';
+import { MobileLayoutContainer } from '../../components/common/MobileLayoutContainer';
 import { ROUTE_PATH } from '../../constants/route';
 
 function Complete() {

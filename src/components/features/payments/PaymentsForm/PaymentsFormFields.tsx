@@ -1,7 +1,7 @@
 import { RefObject } from 'react';
 import styled from 'styled-components';
 import { DropdownOptionType } from '../../../../types/dropdown';
-import Dropdown from '../../../common/Dropdown/Dropdown';
+import { Dropdown } from '../../../common/Dropdown';
 import CVCInputField from '../InputField/CVCInputField';
 import CardNumberInputField from '../InputField/CardNumberInputField';
 import CardPasswordInputField from '../InputField/CardPasswordInputField';

@@ -1,5 +1,5 @@
 import { ChangeEvent, RefObject } from 'react';
-import BaseInputField from '../../../common/BaseInputField/BaseInputField';
+import { BaseInputField } from '../../../common/BaseInputField';
 import Input from '../../../common/Input/Input';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
 

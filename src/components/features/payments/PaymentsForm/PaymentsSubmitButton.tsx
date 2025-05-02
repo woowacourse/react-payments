@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import FooterButton from '../../../common/FooterButton/FooterButton';
+import { FooterButton } from '../../../common/FooterButton';
 
 function PaymentsSubmitButton({
   handleSubmit,

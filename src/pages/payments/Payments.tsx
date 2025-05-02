@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MobileLayoutContainer from '../../components/common/MobileLayoutContainer/MobileLayoutContainer';
+import { MobileLayoutContainer } from '../../components/common/MobileLayoutContainer';
 import CardPreview from '../../components/features/payments/CardPreview/CardPreview';
 import usePaymentsForm from '../../components/features/payments/hooks/usePaymentsForm';
 import PaymentsFormFields from '../../components/features/payments/PaymentsForm/PaymentsFormFields';

@@ -1,6 +1,6 @@
 import { ChangeEvent, RefObject } from 'react';
-import BaseInputField from '../../../common/BaseInputField/BaseInputField';
-import Input from '../../../common/Input/Input';
+import { BaseInputField } from '../../../common/BaseInputField';
+import { Input } from '../../../common/Input';
 import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
