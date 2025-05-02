@@ -14,9 +14,13 @@ interface CardInfoFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   selectedCard: CardCompanyName | null;
 }
 
-function CardInfoForm(props: CardInfoFormProps) {
-  const { canSubmit, children, step, cardNumber, selectedCard } = props;
-
+function CardInfoForm({
+  canSubmit,
+  children,
+  step,
+  cardNumber,
+  selectedCard,
+}: CardInfoFormProps) {
   const completedSteps = new Set(
     Object.entries(step)
       .map(([componentName, isCompleted]) => {
