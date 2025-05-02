@@ -1,60 +1,41 @@
 import { useState } from 'react';
-import { validateCVC } from '../domain/validate';
-import { CARD_VALIDATION_INFO } from '../constants/cardValidationInfo';
 
-export const useCVC = (): {
+const CVC_RULE = {
+  INVALID_LENGTH_ERROR: 'CVC는 3자리로 입력해 주세요.',
+  NOT_A_NUMBER: 'CVC는 숫자로 입력해 주세요.',
+  MAX_LENGTH: 3,
+} as const;
+
+type ValitationResult = {
   CVC: string;
-  setCVC: React.Dispatch<React.SetStateAction<string>>;
-  updateCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isErrors: boolean;
-  errorMessage: string;
-  isComplete: boolean;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
-  isDisplay: boolean;
-  setIsDisplay: React.Dispatch<React.SetStateAction<boolean>>;
-} => {
-  const [CVC, setCVC] = useState<string>('');
-  const [isErrors, setIsErrors] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [isComplete, setIsComplete] = useState<boolean>(false);
-  const [isDisplay, setIsDisplay] = useState<boolean>(false);
+  error: { isValid: boolean; errorMessage: string };
+  validate: (value: string) => void;
+};
 
-  const updateCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setCVC(value);
-    validate(e.target.value);
-
-    const isValid = value.length === CARD_VALIDATION_INFO.CVC_MAX_LENGTH;
-    setIsComplete(isValid);
-    if (isValid) setIsDisplay(true);
-  };
+export default function useCVCNumber(): ValitationResult {
+  const [CVC, setCVC] = useState('');
+  const [error, setError] = useState({ isValid: false, errorMessage: '' });
 
   const validate = (value: string) => {
-    try {
-      setIsErrors(false);
-      if (value.length === 0) {
-        setErrorMessage('');
-        return;
-      }
-      validateCVC(value, CARD_VALIDATION_INFO.CVC_MAX_LENGTH);
-      setErrorMessage('');
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setIsErrors(true);
-        setErrorMessage(error.message);
-      }
+    if (value.length > 3) return;
+
+    setCVC(value);
+
+    if (value === '') {
+      setError({ isValid: true, errorMessage: '' });
+      return;
     }
+
+    if (!/^\d*$/.test(value)) {
+      setError({ isValid: true, errorMessage: CVC_RULE.NOT_A_NUMBER });
+      return;
+    }
+    if (value.length < CVC_RULE.MAX_LENGTH) {
+      setError({ isValid: true, errorMessage: CVC_RULE.INVALID_LENGTH_ERROR });
+      return;
+    }
+    setError({ isValid: false, errorMessage: '' });
   };
 
-  return {
-    CVC,
-    setCVC,
-    updateCVC,
-    isErrors,
-    errorMessage,
-    isComplete,
-    setIsComplete,
-    isDisplay,
-    setIsDisplay,
-  };
-};
+  return { CVC, error, validate };
+}
