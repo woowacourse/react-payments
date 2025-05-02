@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import ExpirationPeriod from '../../components/ExpirationPeriod';
 import { useState, useRef } from 'react';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
+import { Period } from '../../types';
 
 const meta: Meta<typeof ExpirationPeriod> = {
   title: 'Components/ExpirationPeriod',
@@ -19,11 +20,6 @@ const meta: Meta<typeof ExpirationPeriod> = {
 
 export default meta;
 type Story = StoryObj<typeof ExpirationPeriod>;
-
-type Period = {
-  month: string;
-  year: string;
-};
 
 const Wrapper = () => {
   const [period, setPeriod] = useState<Period>({

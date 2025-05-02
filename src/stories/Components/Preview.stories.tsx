@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Preview from '../../components/Preview';
 import { within, waitFor, expect } from '@storybook/test';
+import { CardNumber, Period } from '../../types';
 
 const meta: Meta<typeof Preview> = {
   title: 'Components/Preview Container',
@@ -19,17 +20,6 @@ const meta: Meta<typeof Preview> = {
 
 export default meta;
 type Story = StoryObj<typeof Preview>;
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
-
-type Period = {
-  month: string;
-  year: string;
-};
 
 const Wrapper = ({
   initialCardNumbers,

@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent, expect, waitFor } from '@storybook/test';
 import CardNumbers from '../../components/CardNumbers';
 import { useState } from 'react';
+import { CardNumber } from '../../types';
 
 const meta: Meta<typeof CardNumbers> = {
   title: 'Components/CardNumbers',
@@ -19,13 +20,6 @@ const meta: Meta<typeof CardNumbers> = {
 
 export default meta;
 type Story = StoryObj<typeof CardNumbers>;
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
 
 const Wrapper = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>({
