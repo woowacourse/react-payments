@@ -8,19 +8,11 @@ import CardCvcSection from '../components/form/CardCvcSection';
 import Button from '../components/button/Button';
 import CardPreview from '../components/cardPreview/CardPreview';
 
-import {CardCompany, CardNumber, ExpirationDate} from '../type/Card';
 import {useNavigate} from 'react-router';
 import PATH from '../router/path';
 import useInput from '../hooks/useInput';
 import useErrors from '../hooks/useErrors';
-
-type CardForm = {
-  cardNumber: CardNumber;
-  expirationDate: ExpirationDate;
-  cvcNumber: string;
-  cardCompany: CardCompany | '';
-  password: string;
-};
+import useAutoStep, {CardForm} from '../hooks/useAutoStep';
 
 const INIT_CARD_NUMBER = {
   first: '',
@@ -34,7 +26,7 @@ const INIT_EXPIRATION_DATE = {
   year: '',
 };
 
-const INIT_FORM_DATA = {
+const INIT_FORM_DATA: CardForm = {
   cardNumber: INIT_CARD_NUMBER,
   expirationDate: INIT_EXPIRATION_DATE,
   cvcNumber: '',
@@ -57,17 +49,7 @@ const Main = () => {
 
   const navigate = useNavigate();
 
-  const isVisible = (section: keyof CardForm, maxLength: number) => {
-    if (isErrors[section]) return false;
-
-    if (typeof formData[section] === 'string') {
-      return formData[section]?.length >= maxLength;
-    }
-
-    return Object.values(formData[section]).every(
-      (value) => value?.length === maxLength
-    );
-  };
+  const {step, isButtonVisible} = useAutoStep(formData, isErrors);
 
   return (
     <MainContainer>
@@ -77,7 +59,7 @@ const Main = () => {
         cardCompany={formData.cardCompany}
       />
 
-      {isVisible('cvcNumber', 3) && (
+      {step >= 5 && (
         <PasswordSection
           value={formData.password}
           onChange={onChange}
@@ -87,7 +69,7 @@ const Main = () => {
         />
       )}
 
-      {isVisible('expirationDate', 2) && (
+      {step >= 4 && (
         <CardCvcSection
           value={formData.cvcNumber}
           onChange={onChange}
@@ -97,7 +79,7 @@ const Main = () => {
         />
       )}
 
-      {isVisible('cardCompany', 1) && (
+      {step >= 3 && (
         <ExpirationDateSection
           value={formData.expirationDate}
           onChange={onChange}
@@ -107,19 +89,21 @@ const Main = () => {
         />
       )}
 
-      {isVisible('cardNumber', 4) && (
+      {step >= 2 && (
         <CardCompanySection onChange={onChange} name="cardCompany" />
       )}
 
-      <CardNumberSection
-        value={formData.cardNumber}
-        onChange={onChange}
-        onValidate={onValidate}
-        onFocusout={onFocusout}
-        errorMessage={errorMessages.cardNumber}
-      />
+      {step >= 1 && (
+        <CardNumberSection
+          value={formData.cardNumber}
+          onChange={onChange}
+          onValidate={onValidate}
+          onFocusout={onFocusout}
+          errorMessage={errorMessages.cardNumber}
+        />
+      )}
 
-      {isVisible('password', 2) && (
+      {isButtonVisible && (
         <Button
           onClick={() =>
             navigate(PATH.CONFIRM, {
