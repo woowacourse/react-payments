@@ -4,7 +4,6 @@ import { DropdownOptionType } from '../../../../types/dropdown';
 import useExpirationDateValidation from './useExpirationDateValidation';
 import useCVCValidation from './useCVCValidation';
 import useCardPasswordValidation from './useCardPasswordValidation';
-import { isAllTrue } from '../../../../utils/array';
 import { useNavigate } from 'react-router';
 import { INPUT_STEP } from '../config/step';
 import { ROUTE_PATH } from '../../../../constants/route';
@@ -89,21 +88,23 @@ function usePaymentsForm() {
     cardPassword: handleCardPasswordInputBlur,
   };
 
-  const allInputComplete = useMemo(() => {
-    return isAllTrue([
+  const allInputComplete = useMemo(
+    () =>
+      [
+        isCardNumberInputComplete,
+        cardBankSelected,
+        isExpirationDateInputComplete,
+        isCVCInputComplete,
+        isCardPasswordInputComplete,
+      ].every((value) => !value),
+    [
       isCardNumberInputComplete,
       cardBankSelected,
       isExpirationDateInputComplete,
       isCVCInputComplete,
       isCardPasswordInputComplete,
-    ]);
-  }, [
-    isCardNumberInputComplete,
-    cardBankSelected,
-    isExpirationDateInputComplete,
-    isCVCInputComplete,
-    isCardPasswordInputComplete,
-  ]);
+    ]
+  );
 
   const handleSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
