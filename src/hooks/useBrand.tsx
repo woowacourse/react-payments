@@ -1,36 +1,25 @@
-import React from 'react';
 import { useState } from 'react';
 
-export const useBrand = (): {
+type ValitationResult = {
   brand: string;
-  setBrand: React.Dispatch<React.SetStateAction<string>>;
-  updateBrand: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  isComplete: boolean;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
-  isDisplay: boolean;
-  setIsDisplay: React.Dispatch<React.SetStateAction<boolean>>;
-} => {
+  error: { isValid: boolean; errorMessage: string };
+  validate: (value: string) => void;
+};
+
+export default function useBrand(): ValitationResult {
   const [brand, setBrand] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
-  const [isDisplay, setIsDisplay] = useState<boolean>(false);
+  const [error, setError] = useState({ isValid: false, errorMessage: '' });
 
-  const updateBrand = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-
+  const validate = (value: string) => {
     setBrand(value);
 
-    const isValid = value !== '';
-    setIsComplete(isValid);
-    if (isValid) setIsDisplay(true);
+    if (value === '') {
+      setError({ isValid: false, errorMessage: '' });
+      return;
+    }
+
+    setError({ isValid: false, errorMessage: '' });
   };
 
-  return {
-    brand,
-    setBrand,
-    updateBrand,
-    isComplete,
-    setIsComplete,
-    isDisplay,
-    setIsDisplay,
-  };
-};
+  return { brand, error, validate };
+}
