@@ -9,7 +9,7 @@ const CardRegistrationComplete = () => {
   const location = useLocation();
   const { cardFirstNumber } = location.state as { cardFirstNumber: string };
 
-  const clickConfirmButton = () => {
+  const handleClickConfirmButton = () => {
     nav(ROUTES.HOME);
   };
 
@@ -24,7 +24,7 @@ const CardRegistrationComplete = () => {
         <ConfirmButton
           type="button"
           text="확인"
-          onClick={clickConfirmButton}
+          onClick={handleClickConfirmButton}
           className={buttonStyle.finish}
         />
       </div>
