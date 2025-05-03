@@ -3,6 +3,7 @@ import { CardRegisterSuccessPage } from './CardRegisterSuccessPage';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { CardFormProvider } from '../../context/CardFormContext';
 
 const meta: Meta<typeof CardRegisterSuccessPage> = {
   title: 'Pages/CardRegisterSuccessPage',
@@ -14,19 +15,21 @@ export default meta;
 type Story = StoryObj<typeof CardRegisterSuccessPage>;
 
 const mockLocationState = {
-  cardNumbers: ['4556', '5678', '****', '****'],
+  numbers: ['4556', '5678', '****', '****'],
   brand: 'BC',
 };
 
 const Template = () => {
   return (
-    <MemoryRouter
-      initialEntries={[{ pathname: '/success', state: mockLocationState }]}
-    >
-      <Routes>
-        <Route path="/success" element={<CardRegisterSuccessPage />} />
-      </Routes>
-    </MemoryRouter>
+    <CardFormProvider>
+      <MemoryRouter
+        initialEntries={[{ pathname: '/success', state: mockLocationState }]}
+      >
+        <Routes>
+          <Route path="/success" element={<CardRegisterSuccessPage />} />
+        </Routes>
+      </MemoryRouter>
+    </CardFormProvider>
   );
 };
 

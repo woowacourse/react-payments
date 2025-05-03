@@ -6,14 +6,13 @@ import CardBrandInput from '../../components/CardBrandInput/CardBrandInput';
 import CardPasswordInput from '../../components/CardPasswordInput/CardPasswordInput';
 import { useCardFormContext } from '../../context/CardFormContext';
 import Button from '../../components/common/Button/Button';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../App.css';
 
 const CardRegisterPage = () => {
   const { cardNumbers, cardBrand, expiryDate, CVCNumber, isFormComplete } =
     useCardFormContext();
   const navigate = useNavigate();
-  // const location = useLocation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +20,7 @@ const CardRegisterPage = () => {
       numbers: cardNumbers.numbers,
       brand: cardBrand.brand,
     };
-    navigate('/react-payments/complete', { state: formData });
+    navigate('/payments/complete/', { state: formData });
   };
 
   return (

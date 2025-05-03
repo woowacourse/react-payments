@@ -19,6 +19,7 @@ type CardFormContextType = {
   password: ReturnType<typeof usePassword>;
 
   isFormComplete: boolean;
+  resetForm: () => void;
 };
 
 const CardFormContext = createContext<CardFormContextType | null>(null);
@@ -53,7 +54,16 @@ export const CardFormProvider = ({
       passwordComplete
     );
   };
+
   const isFormComplete = updateFormComplete();
+
+  const resetForm = () => {
+    cardNumbers.reset();
+    cardBrand.reset();
+    expiryDate.reset();
+    CVCNumber.reset();
+    password.reset();
+  };
 
   const value = {
     cardNumbers,
@@ -63,6 +73,7 @@ export const CardFormProvider = ({
     password,
 
     isFormComplete,
+    resetForm,
   };
 
   return (
