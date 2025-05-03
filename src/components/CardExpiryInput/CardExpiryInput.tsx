@@ -1,6 +1,6 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
-import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { EXPIRYDATE_RULE } from '../../constants/cardValidationRule';
 import useExpiryDate from '../../hooks/useExpiry';
 import { useRef } from 'react';
 
@@ -14,7 +14,7 @@ const CardExpiryInput = () => {
   ) => {
     const { value } = e.target;
     validate(value, dateName);
-    if (value.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH) {
+    if (value.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
       expiryRef.current[1]?.focus();
     }
   };
@@ -33,7 +33,7 @@ const CardExpiryInput = () => {
           value={date.month}
           onChange={(e) => handleExpiryDate(e, 'month')}
           className={`input ${error[0].isValidate ? 'errorInput' : ''}`}
-          maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
+          maxLength={EXPIRYDATE_RULE.DATE_MAX_LENGTH}
           ref={(element) => {
             if (element) {
               expiryRef.current[0] = element;
@@ -47,7 +47,7 @@ const CardExpiryInput = () => {
           value={date.year}
           onChange={(e) => handleExpiryDate(e, 'year')}
           className={`input ${error[1].isValidate ? 'errorInput' : ''}`}
-          maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
+          maxLength={EXPIRYDATE_RULE.DATE_MAX_LENGTH}
           ref={(element) => {
             if (element) {
               expiryRef.current[1] = element;

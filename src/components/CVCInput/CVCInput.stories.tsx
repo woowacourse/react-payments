@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CVCInput from './CVCInput';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import ERROR from '../../constants/errorMessage';
-import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { CVC_ERROR } from '../../constants/errorMessage';
 import { CardFormProvider } from '../../context/CardFormContext';
 
 const meta: Meta<typeof CVCInput> = {
@@ -61,7 +60,7 @@ export const Invalid_NonNumeric: Story = {
     await userEvent.type(CVCInput, 'ab');
 
     const helperText = canvas.getByTestId('helper-text');
-    expect(helperText.textContent).toBe(ERROR.REQUIRE.NUMBER);
+    expect(helperText.textContent).toBe(CVC_ERROR.NOT_A_NUMBER);
   },
 };
 
@@ -75,8 +74,6 @@ export const Invalid_NumberLength: Story = {
     await userEvent.type(CVCInput, '12');
 
     const helperText = canvas.getByTestId('helper-text');
-    expect(helperText.textContent).toBe(
-      `${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
-    );
+    expect(helperText.textContent).toBe(`${CVC_ERROR.INVALID_LENGTH}`);
   },
 };

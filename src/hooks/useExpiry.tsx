@@ -1,17 +1,6 @@
 import { useState } from 'react';
-
-const EXPIRYDATE_RULE = {
-  INVALID_YEAR_LENGTH_ERROR: '연도는 2자리로 입력해 주세요.',
-  INVALID_MONTH_LENGTH_ERROR: '월은 2자리로 입력해 주세요.',
-  YEAR_IS_NOT_A_NUMBER: '연도는 숫자로 입력해 주세요.',
-  MONTH_IS_NOT_A_NUMBER: '월은 숫자로 입력해 주세요.',
-  INVALID_YEAR: '유효하지 않은 연도입니다.',
-  INVALID_MONTH: '유효하지 않은 월입니다.',
-  DATE_MAX_LENGTH: 2,
-  DATE_MONTH_MIN: 1,
-  DATE_MONTH_MAX: 12,
-  DATE_YEAR_MIN: 25,
-} as const;
+import { EXPIRYDATE_RULE } from '../constants/cardValidationRule';
+import { EXPIRYDATE_ERROR } from '../constants/errorMessage';
 
 type ValitationResult = {
   date: dateType;
@@ -65,18 +54,18 @@ export default function useExpiryDate(): ValitationResult {
       }
 
       if (!/^\d*$/.test(value)) {
-        updateDate(0, true, EXPIRYDATE_RULE.MONTH_IS_NOT_A_NUMBER);
+        updateDate(0, true, EXPIRYDATE_ERROR.MONTH_IS_NOT_A_NUMBER);
         return;
       }
       if (value.length < EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
-        updateDate(0, true, EXPIRYDATE_RULE.INVALID_MONTH_LENGTH_ERROR);
+        updateDate(0, true, EXPIRYDATE_ERROR.INVALID_MONTH_LENGTH_ERROR);
         return;
       }
       if (
         Number(value) < EXPIRYDATE_RULE.DATE_MONTH_MIN ||
         Number(value) > EXPIRYDATE_RULE.DATE_MONTH_MAX
       ) {
-        updateDate(0, true, EXPIRYDATE_RULE.INVALID_MONTH);
+        updateDate(0, true, EXPIRYDATE_ERROR.INVALID_MONTH);
         return;
       }
       updateDate(0, false, '');
@@ -92,15 +81,15 @@ export default function useExpiryDate(): ValitationResult {
       }
 
       if (!/^\d*$/.test(value)) {
-        updateDate(1, true, EXPIRYDATE_RULE.YEAR_IS_NOT_A_NUMBER);
+        updateDate(1, true, EXPIRYDATE_ERROR.YEAR_IS_NOT_A_NUMBER);
         return;
       }
       if (value.length < EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
-        updateDate(1, true, EXPIRYDATE_RULE.INVALID_YEAR_LENGTH_ERROR);
+        updateDate(1, true, EXPIRYDATE_ERROR.INVALID_YEAR_LENGTH_ERROR);
         return;
       }
       if (Number(value) < EXPIRYDATE_RULE.DATE_YEAR_MIN) {
-        updateDate(1, true, EXPIRYDATE_RULE.INVALID_YEAR);
+        updateDate(1, true, EXPIRYDATE_ERROR.INVALID_YEAR);
         return;
       }
       updateDate(1, false, '');

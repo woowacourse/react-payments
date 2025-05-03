@@ -1,6 +1,6 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
-import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { CARD_NUMBER_RULE } from '../../constants/cardValidationRule';
 import { useCardNumbers } from '../../hooks/useCardNumbers';
 import { useRef } from 'react';
 
@@ -13,7 +13,7 @@ const CardNumbersInput = () => {
     index: number
   ) => {
     validate(e.target.value, index);
-    if (e.target.value.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH) {
+    if (e.target.value.length === CARD_NUMBER_RULE.MAX_LENGTH) {
       if (index < numbers.length - 1) {
         cardNumbersRef.current[index + 1]?.focus();
       }
@@ -35,7 +35,7 @@ const CardNumbersInput = () => {
             value={number}
             onChange={(e) => handleCardNumbers(e, index)}
             className={`input ${error[index].isValidate && 'errorInput'}`}
-            maxLength={CARD_VALIDATION_INFO.CARD_MAX_LENGTH}
+            maxLength={CARD_NUMBER_RULE.MAX_LENGTH}
             ref={(element) => {
               if (element) {
                 cardNumbersRef.current[index] = element;

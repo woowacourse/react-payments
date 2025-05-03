@@ -3,6 +3,7 @@ import { CardFormProvider } from '../../context/CardFormContext';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CardPasswordInput from './CardPasswordInput';
+import { PASSWORD_ERROR } from '../../constants/errorMessage';
 
 const meta: Meta<typeof CardPasswordInput> = {
   title: 'Components/CardPasswordInput',
@@ -58,7 +59,7 @@ export const Invalid_NonNumeric: Story = {
     await userEvent.type(passwordInput, '1a');
 
     const helperText = canvas.getByTestId('helper-text');
-    expect(helperText.textContent).toBe('숫자를 입력해주세요.');
+    expect(helperText.textContent).toBe(PASSWORD_ERROR.NOT_A_NUMBER);
   },
 };
 
@@ -72,6 +73,6 @@ export const Invalid_TooLong: Story = {
     await userEvent.type(passwordInput, '1');
 
     const helperText = canvas.getByTestId('helper-text');
-    expect(helperText.textContent).toBe('2자리로 입력해주세요.');
+    expect(helperText.textContent).toBe(PASSWORD_ERROR.INVALID_LENGTH);
   },
 };

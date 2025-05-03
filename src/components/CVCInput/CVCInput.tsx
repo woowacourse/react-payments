@@ -1,6 +1,6 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
-import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { CVC_RULE } from '../../constants/cardValidationRule';
 import useCvcNumber from '../../hooks/useCVC';
 
 const CVCInput = () => {
@@ -16,7 +16,7 @@ const CVCInput = () => {
           value={CVC}
           onChange={(e) => validate(e.target.value)}
           className={`input ${error.isValid ? 'errorInput' : ''}`}
-          maxLength={CARD_VALIDATION_INFO.CVC_MAX_LENGTH}
+          maxLength={CVC_RULE.MAX_LENGTH}
         />
       </div>
       <p className="helperText" data-testid="helper-text">

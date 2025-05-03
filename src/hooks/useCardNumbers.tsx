@@ -1,10 +1,6 @@
 import { useState } from 'react';
-
-const CARD_NUMBER_RULE = {
-  INVALID_LENGTH_ERROR: '카드 번호는 4자리로 입력해 주세요.',
-  NOT_A_NUMBER: '카드 번호는 숫자로 입력해 주세요.',
-  MAX_LENGTH: 4,
-} as const;
+import { CARD_NUMBER_RULE } from '../constants/cardValidationRule';
+import { CARD_NUMBER_ERROR } from '../constants/errorMessage';
 
 type ValitationResult = {
   numbers: string[];
@@ -56,12 +52,21 @@ export function useCardNumbers(): ValitationResult {
       return;
     }
 
+    if (
+      Number(value[0]) !== CARD_NUMBER_RULE.VISA_START_NUMBER &&
+      index === 0 &&
+      (Number(value.slice(0, 2)) < CARD_NUMBER_RULE.MASTER_MIN_NUMBER ||
+        Number(value.slice(0, 2)) > CARD_NUMBER_RULE.MASTER_MAX_NUMBER)
+    ) {
+      updateCardNumber(index, true, CARD_NUMBER_ERROR.INVALID_CARD_NUMBER);
+      return;
+    }
     if (!/^\d*$/.test(value)) {
-      updateCardNumber(index, true, CARD_NUMBER_RULE.NOT_A_NUMBER);
+      updateCardNumber(index, true, CARD_NUMBER_ERROR.NOT_A_NUMBER);
       return;
     }
     if (value.length < CARD_NUMBER_RULE.MAX_LENGTH) {
-      updateCardNumber(index, true, CARD_NUMBER_RULE.INVALID_LENGTH_ERROR);
+      updateCardNumber(index, true, CARD_NUMBER_ERROR.INVALID_LENGTH);
       return;
     }
     updateCardNumber(index, false, '');

@@ -1,12 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardExpiryInput from './CardExpiryInput';
-// import { useState } from 'react';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import ERROR from '../../constants/errorMessage';
+import { EXPIRYDATE_ERROR } from '../../constants/errorMessage';
 import { CardFormProvider } from '../../context/CardFormContext';
-import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
-// import { ConfirmButtonProvider } from '../../context/confirmButtonContext';
 
 const meta: Meta<typeof CardExpiryInput> = {
   title: 'Components/CardExpiryInput',
@@ -67,7 +64,7 @@ export const InvalidMonth_NonNumeric: Story = {
     await userEvent.type(monthInput, 'ab');
 
     const helperText = canvas.getByTestId('helper-text');
-    expect(helperText.textContent).toBe(ERROR.REQUIRE.NUMBER);
+    expect(helperText.textContent).toBe(EXPIRYDATE_ERROR.MONTH_IS_NOT_A_NUMBER);
   },
 };
 
@@ -82,7 +79,7 @@ export const InvalidMonth_TooShort: Story = {
 
     const helperText = canvas.getByTestId('helper-text');
     expect(helperText.textContent).toBe(
-      `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
+      `${EXPIRYDATE_ERROR.INVALID_MONTH_LENGTH_ERROR}`
     );
   },
 };
@@ -101,7 +98,7 @@ export const InvalidYear_NonNumeric: Story = {
     await userEvent.type(yearInput, 'ㅁㅁ');
 
     const helperText = canvas.getByTestId('helper-text');
-    expect(helperText.textContent).toBe(ERROR.REQUIRE.NUMBER);
+    expect(helperText.textContent).toBe(EXPIRYDATE_ERROR.YEAR_IS_NOT_A_NUMBER);
   },
 };
 
@@ -120,7 +117,7 @@ export const InvalidYear_TooShort: Story = {
 
     const helperText = canvas.getByTestId('helper-text');
     expect(helperText.textContent).toBe(
-      `${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}${ERROR.REQUIRE.SPECIFIC_LENGTH}`
+      `${EXPIRYDATE_ERROR.INVALID_YEAR_LENGTH_ERROR}`
     );
   },
 };
