@@ -11,13 +11,12 @@ import { ErrorMessagesType } from '../types/ErrorMessagesType';
 import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
 import { SecretNumberInput } from '../component/cardDetails/SecretNumberInput';
 import { SubmitButton } from '../component/SubmitButton';
+
 import {
-  isCardNumberComplete,
-  isCardBrandComplete,
-  isExpiryDateComplete,
-  isCVCComplete,
-  isFormComplete,
-} from '../validation/validationCardCompleting';
+  validateCardForm,
+  getCardNumberErrorMessage,
+  getExpiryDateErrorMessage,
+} from '../services/cardFormService';
 
 export const Wrap = styled.div`
   display: flex;
@@ -75,7 +74,6 @@ const AddCard = () => {
     secretNumber: '',
   });
 
-  // 각 섹션에 대한 ref를 객체로 관리
   const sectionRefs = {
     cardNumber: useRef<HTMLDivElement>(null),
     cardBrand: useRef<HTMLDivElement>(null),
@@ -92,6 +90,8 @@ const AddCard = () => {
     secretNumber: false,
   });
 
+  const validation = validateCardForm(cardInput, errorMessages);
+
   const handleErrorMessages = (
     key: keyof ErrorMessagesType,
     message: string,
@@ -102,22 +102,10 @@ const AddCard = () => {
     }));
   };
 
-  const handleCardNumberErrorMessages = () => {
-    const filterErrorMessage = [
-      errorMessages.first,
-      errorMessages.second,
-      errorMessages.third,
-      errorMessages.fourth,
-    ].filter(message => message.length !== 0);
-    return filterErrorMessage[0];
-  };
-
-  const handlePeriodErrorMessages = () => {
-    const filterErrorMessage = [errorMessages.YY, errorMessages.MM].filter(
-      message => message.length !== 0,
-    );
-    return filterErrorMessage[0];
-  };
+  const handleCardNumberErrorMessages = () =>
+    getCardNumberErrorMessage(errorMessages);
+  const handlePeriodErrorMessages = () =>
+    getExpiryDateErrorMessage(errorMessages);
 
   const formSteps = [
     {
@@ -135,7 +123,7 @@ const AddCard = () => {
     },
     {
       key: 'cardBrand',
-      condition: () => isCardNumberComplete(cardInput, errorMessages),
+      condition: () => validation.isCardNumberComplete,
       component: (
         <CardBrandSelect
           setCardInput={setCardInput}
@@ -152,8 +140,7 @@ const AddCard = () => {
     {
       key: 'expiryDate',
       condition: () =>
-        isCardNumberComplete(cardInput, errorMessages) &&
-        isCardBrandComplete(cardInput, errorMessages),
+        validation.isCardNumberComplete && validation.isCardBrandComplete,
       component: (
         <ExpiryDateInput
           cardInput={cardInput}
@@ -167,9 +154,9 @@ const AddCard = () => {
     {
       key: 'cvc',
       condition: () =>
-        isCardNumberComplete(cardInput, errorMessages) &&
-        isCardBrandComplete(cardInput, errorMessages) &&
-        isExpiryDateComplete(cardInput, errorMessages),
+        validation.isCardNumberComplete &&
+        validation.isCardBrandComplete &&
+        validation.isExpiryDateComplete,
       component: (
         <CVCInput
           cardInput={cardInput}
@@ -182,10 +169,10 @@ const AddCard = () => {
     {
       key: 'secretNumber',
       condition: () =>
-        isCardNumberComplete(cardInput, errorMessages) &&
-        isCardBrandComplete(cardInput, errorMessages) &&
-        isExpiryDateComplete(cardInput, errorMessages) &&
-        isCVCComplete(cardInput, errorMessages),
+        validation.isCardNumberComplete &&
+        validation.isCardBrandComplete &&
+        validation.isExpiryDateComplete &&
+        validation.isCVCComplete,
       component: (
         <SecretNumberInput
           cardInput={cardInput}
@@ -250,7 +237,7 @@ const AddCard = () => {
           })}
         </Form>
       </Wrap>
-      {isFormComplete(cardInput, errorMessages) && (
+      {validation.isFormComplete && (
         <SubmitButton
           cardNumber={cardInput.first}
           cardBrand={selectedCardBrand}
