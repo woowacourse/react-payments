@@ -30,8 +30,16 @@ const CardPage = () => {
   const { updateValidity, isAllValid } = useTotalInputValidation(5);
   const { navigateToCardComplete } = useCardRouter();
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigateToCardComplete({
+      cardNumber,
+      cardCompany,
+    });
+  };
+
   return (
-    <StyledCardPage>
+    <StyledCardPage onSubmit={handleSubmit}>
       <PreviewCard
         cardNumber={cardNumber}
         expirationDate={expirationDate}
@@ -98,16 +106,7 @@ const CardPage = () => {
       )}
       {isAllValid() && (
         <ButtonContainer>
-          <Button
-            onClick={() =>
-              navigateToCardComplete({
-                cardNumber,
-                cardCompany,
-              })
-            }
-          >
-            확인
-          </Button>
+          <Button type="submit">확인</Button>
         </ButtonContainer>
       )}
     </StyledCardPage>

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const StyledCardPage = styled.div`
+const StyledCardPage = styled.form`
   width: 40%;
   min-width: 400px;
   height: 100vh;
