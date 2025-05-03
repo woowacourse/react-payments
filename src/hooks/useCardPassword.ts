@@ -1,17 +1,8 @@
 import { MouseEventHandler, useState } from 'react';
 import useError from './useError';
-import isNumber from './validate/isNumber';
 import isInteger from './validate/isInteger';
 import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
 import isValidStringLength from './validate/isValidStringLength';
-// export type useCardCVCNumberOptions = {
-//   cardCVCNumber: string;
-//   setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
-//   handleCardCVCBlur: () => void;
-//   isError: IsError;
-//   errorMessage: string;
-//   resetCardCVCNumber: () => void;
-// };
 
 export type CardPasswordOptions = {
   cardPassword: string;
@@ -47,7 +38,7 @@ const useCardPassword = (): CardPasswordOptions => {
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardPasswordChangeValidationResult = (input: string) => {
-    if (!isNumber(input) || !isInteger(input)) {
+    if (!isInteger(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
 

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import useError from './useError';
 import isValidStringLength from './validate/isValidStringLength';
-import isNumber from './validate/isNumber';
 import isValidNumberRange from './validate/isValidNumberRange';
 import CardExpirationDate from '../types/CardExpirationDate';
 import {
@@ -42,13 +41,13 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
     target: CardExpirationDateKeys,
     input: string
   ) => {
-    if (input.length === 1 && !isNumber(input))
+    if (input.length === 1 && !isInteger(input))
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
 
     if (input.length < MAX_INPUT_LENGTH)
       return { isError: false, errorMessage: '' };
 
-    if (!isNumber(input) || !isInteger(input)) {
+    if (!isInteger(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import useError from './useError';
-import isNumber from './validate/isNumber';
 import isValidStringLength from './validate/isValidStringLength';
 import {
   CardNumbers,
@@ -32,7 +31,7 @@ const useCardNumbers = (): CardNumbersOptions => {
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardNumbersValidationResult = (input: string) => {
-    if (!isNumber(input) || !isInteger(input)) {
+    if (!isInteger(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
 

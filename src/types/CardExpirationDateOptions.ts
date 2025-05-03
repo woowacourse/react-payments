@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import CardExpirationDate from './CardExpirationDate';
 
 export type CardExpirationDateKeys = 'month' | 'year';
@@ -19,7 +20,7 @@ export type CardExpirationDateInputSectionProps = {
     month: React.RefObject<HTMLInputElement | null>;
     year: React.RefObject<HTMLInputElement | null>;
   };
-  handleMouseDown: (event: React.MouseEventHandler<HTMLInputElement>) => void;
+  handleMouseDown: MouseEventHandler<HTMLInputElement>;
 };
 
 export type CardExpirationDateOptions = CardExpirationDateInputSectionProps & {
