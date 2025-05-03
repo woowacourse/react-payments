@@ -32,7 +32,7 @@ function CardValidityPeriodField({
 
   const id = useId();
 
-  const { inputRef, handleChange } = useInputFocus({
+  const { inputRef, handleChange, handleKeyDown } = useInputFocus({
     inputValueLength: 2,
   });
 
@@ -51,6 +51,7 @@ function CardValidityPeriodField({
             onChange(e, 'month');
             handleChange(0);
           }}
+          onKeyDown={(e) => handleKeyDown(e, 0)}
           placeholder="MM"
           maxLength={2}
           regexString={/^\d*$/}
@@ -72,6 +73,7 @@ function CardValidityPeriodField({
             onChange(e, 'year');
             handleChange(1);
           }}
+          onKeyDown={(e) => handleKeyDown(e, 1)}
           placeholder="YY"
           maxLength={2}
           regexString={/^\d*$/}

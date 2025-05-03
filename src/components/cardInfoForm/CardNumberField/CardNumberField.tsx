@@ -14,7 +14,7 @@ function CardNumberField({
   isError,
   onChange,
 }: CardNumberFieldProps) {
-  const { inputRef, handleChange } = useInputFocus({
+  const { inputRef, handleChange, handleKeyDown } = useInputFocus({
     inputValueLength: 4,
   });
 
@@ -43,6 +43,7 @@ function CardNumberField({
               onChange(e, index);
               handleChange(index);
             }}
+            onKeyDown={(e) => handleKeyDown(e, index)}
             placeholder="1234"
             maxLength={4}
             regexString={/^\d*$/}
