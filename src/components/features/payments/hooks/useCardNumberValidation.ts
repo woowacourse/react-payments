@@ -6,8 +6,11 @@ import {
   CardNumberInputType,
 } from '../config/inputField';
 import { getCardTypeFromPrefix } from '../utils/cardType';
-import { addError, removeError } from '../utils/error';
 import { focusNextInput } from '../utils/focus';
+import {
+  addItemToRecordArray,
+  removeItemFromRecordArray,
+} from '../../../../utils/recordArrayUtils';
 
 function useCardNumberValidation() {
   const [inputValues, setInputValues] = useState<
@@ -43,10 +46,12 @@ function useCardNumberValidation() {
     errorStatus: { errorType: ErrorType; isError: boolean }
   ) => {
     if (errorStatus.isError) {
-      setErrorTypes((prev) => addError(prev, inputName, errorStatus.errorType));
+      setErrorTypes((prev) =>
+        addItemToRecordArray(prev, inputName, errorStatus.errorType)
+      );
     } else {
       setErrorTypes((prev) =>
-        removeError(prev, inputName, errorStatus.errorType)
+        removeItemFromRecordArray(prev, inputName, errorStatus.errorType)
       );
     }
   };
