@@ -13,6 +13,7 @@ import useFieldCompletion from '@/hooks/useFieldCompletion';
 import CardPasswordInputSection from '@/components/InputSection/CardPasswordInputSection';
 import useCardFormFlow from '@/hooks/useCardFormFlow';
 import useCardForm from '@/hooks/useCardForm';
+import { ROUTES } from '@/constants/routes';
 
 const CardFormPages = () => {
   const {
@@ -37,7 +38,7 @@ const CardFormPages = () => {
   const handleSubmit = () => {
     setIsUserFocusing(false);
     resetFieldCompletetion();
-    nav('/complete', {
+    nav(ROUTES.COMPLETE, {
       state: { cardFirstNumber: cardNumbersForm.cardNumbers.firstNumber },
     });
   };

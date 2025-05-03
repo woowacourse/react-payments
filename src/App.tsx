@@ -3,6 +3,7 @@ import CardFormPages from './pages/CardFormPages';
 import CardRegistrationComplete from './pages/CardRegistrationComplete';
 import styles from './css/main.module.css';
 import './css/index.css';
+import { ROUTES } from './constants/routes';
 
 function App() {
   return (
@@ -10,8 +11,8 @@ function App() {
       <BrowserRouter basename="/react-payments">
         <div className={styles.main}>
           <Routes>
-            <Route path="/" element={<CardFormPages />} />
-            <Route path="/complete" element={<CardRegistrationComplete />} />
+            <Route path={ROUTES.COMPLETE} element={<CardFormPages />} />
+            <Route path={ROUTES.HOME} element={<CardRegistrationComplete />} />
           </Routes>
         </div>
       </BrowserRouter>

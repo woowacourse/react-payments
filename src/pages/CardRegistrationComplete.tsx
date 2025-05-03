@@ -3,13 +3,14 @@ import CheckIcon from '@assets/checkIcon.png';
 import buttonStyle from '../css/button.module.css';
 import styles from './cardRegistrationComplete.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/constants/routes';
 const CardRegistrationComplete = () => {
   const nav = useNavigate();
   const location = useLocation();
   const { cardFirstNumber } = location.state as { cardFirstNumber: string };
 
   const clickConfirmButton = () => {
-    nav('/');
+    nav(ROUTES.HOME);
   };
 
   return (
