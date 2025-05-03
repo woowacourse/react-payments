@@ -1,11 +1,12 @@
 import { ChangeEvent, RefObject } from 'react';
 import { BaseInputField } from '../../../common/BaseInputField';
 import { Input } from '../../../common/Input';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
+import { ErrorType } from '../config/error';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
 } from '../config/inputField';
+import { getFirstErrorMessage } from '../utils/error';
 
 interface CardNumberInputFieldProps {
   inputValues: Record<CardNumberInputType, string>;
@@ -32,10 +33,7 @@ function CardNumberInputField({
     (errorStatus) => errorStatus.length
   );
 
-  const errorMessage =
-    errorStatus && errorStatus?.length !== 0
-      ? ERROR_TYPE_TO_MESSAGE[errorStatus[0]]
-      : '';
+  const errorMessage = getFirstErrorMessage(errorStatus);
 
   return (
     <BaseInputField label="카드 번호" errorMessage={errorMessage}>

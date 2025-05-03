@@ -1,7 +1,8 @@
 import { ChangeEvent, RefObject } from 'react';
 import { BaseInputField } from '../../../common/BaseInputField';
 import { Input } from '../../../common/Input';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
+import { ErrorType } from '../config/error';
+import { getFirstErrorMessage } from '../utils/error';
 
 interface CardPasswordInputFieldProps {
   inputValue: string;
@@ -18,8 +19,7 @@ function CardPasswordInputField({
   handleInputValue,
   onBlur,
 }: CardPasswordInputFieldProps) {
-  const errorMessage =
-    errorTypes.length !== 0 ? ERROR_TYPE_TO_MESSAGE[errorTypes[0]] : '';
+  const errorMessage = getFirstErrorMessage(errorTypes);
 
   return (
     <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>

@@ -1,7 +1,8 @@
 import { ChangeEvent, RefObject } from 'react';
 import { BaseInputField } from '../../../common/BaseInputField';
 import Input from '../../../common/Input/Input';
-import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
+import { ErrorType } from '../config/error';
+import { getFirstErrorMessage } from '../utils/error';
 
 interface CVCInputFieldProps {
   inputValue: string;
@@ -18,8 +19,7 @@ function CVCInputField({
   handleInputValue,
   onBlur,
 }: CVCInputFieldProps) {
-  const errorMessage =
-    errorTypes.length !== 0 ? ERROR_TYPE_TO_MESSAGE[errorTypes[0]] : '';
+  const errorMessage = getFirstErrorMessage(errorTypes);
 
   return (
     <BaseInputField label="CVC" errorMessage={errorMessage}>
