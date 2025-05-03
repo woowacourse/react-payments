@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CardRegistration from '../pages/cardRegistration/CardRegistration';
 import CardComplete from '../pages/cardComplete/CardComplete';
-import { ROUTES } from './routes';
+import { ROUTES } from '../shared/config/routes';
 
 function App() {
   return (

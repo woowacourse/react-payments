@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../app/routes';
+import { ROUTES } from '../../shared/config/routes';
 import useCardInfo from '../../features/cardInfo/hooks/useCardInfo';
 import Preview from '../../features/preview/ui/Preview';
 import CardInfoContainer from '../../features/cardInfo/ui/CardInfoContainer';
