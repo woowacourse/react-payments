@@ -5,7 +5,7 @@ import { withCustomCardValidationProvider } from "../../../.storybook/utils/with
 import CardForm from "./CardForm";
 
 const meta = {
-  title: "CardForm",
+  title: "pages/CardForm",
   component: CardForm,
   tags: ["autodocs"],
   decorators: [

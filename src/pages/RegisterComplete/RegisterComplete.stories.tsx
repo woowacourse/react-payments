@@ -3,7 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import RegisterComplete from "./RegisterComplete";
 
 const meta = {
-  title: "RegisterComplete",
+  title: "pages/RegisterComplete",
   component: RegisterComplete,
   tags: ["autodocs"],
   decorators: [
