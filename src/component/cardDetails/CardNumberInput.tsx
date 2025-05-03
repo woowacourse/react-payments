@@ -73,13 +73,8 @@ export const CardNumberInput: React.FC<CardNumberInputProps> = ({
             key={key}
             maxLength={4}
             placeholder={placeholder}
-            value={cardNumberValues[key as keyof typeof cardNumberValues]}
-            onChange={value =>
-              handleCardNumberChange(
-                key as keyof typeof cardNumberValues,
-                value,
-              )
-            }
+            value={cardNumberValues[key]}
+            onChange={value => handleCardNumberChange(key, value)}
             isError={!!errorMessages[key as keyof ErrorMessagesType]}
             onComplete={() => {}}
             name={`cardNumber-${key}`}
