@@ -44,11 +44,11 @@ export const CardNumberInput: React.FC<CardNumberInputProps> = ({
 
       const errorMessage = validateCardNumber(value);
       if (errorMessage) {
-        handleErrorMessages(fieldKey as keyof ErrorMessagesType, errorMessage);
+        handleErrorMessages(fieldKey, errorMessage);
         return;
       }
 
-      handleErrorMessages(fieldKey as keyof ErrorMessagesType, '');
+      handleErrorMessages(fieldKey, '');
 
       setCardInput(prev => ({
         ...prev,
