@@ -27,7 +27,7 @@ const CardPage = () => {
   const [password, handlePasswordInput] = useInput(['']);
 
   const { goToNextStep, isPassedStep } = useStep();
-  const { updateValidity, isAllValid } = useTotalInputValidation(5);
+  const { updateValidity, isAllValid } = useTotalInputValidation(InputStep.PASSWORD);
   const { navigateToCardComplete } = useCardRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
