@@ -8,8 +8,7 @@ export type CardCompany =
   | '우리카드'
   | '롯데카드'
   | '하나카드'
-  | '국민카드'
-  | '';
+  | '국민카드';
 
 export type CardExpiration = {
   month: string;
