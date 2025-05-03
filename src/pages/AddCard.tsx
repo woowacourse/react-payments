@@ -1,22 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import Card from '../component/card/Card';
 import styled from 'styled-components';
-import { CardInputProps } from '../types/CardInputTypes';
 
 import { justifyBrandLogo } from './util/justifyBrandLogo';
 import { CardNumberInput } from '../component/cardDetails/CardNumberInput';
 import { ExpiryDateInput } from '../component/cardDetails/ExpiryDateInput';
 import { CVCInput } from '../component/cardDetails/CVCInput';
-import { ErrorMessagesType } from '../types/ErrorMessagesType';
 import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
 import { SecretNumberInput } from '../component/cardDetails/SecretNumberInput';
 import { SubmitButton } from '../component/SubmitButton';
 
-import {
-  validateCardForm,
-  getCardNumberErrorMessage,
-  getExpiryDateErrorMessage,
-} from '../services/cardFormService';
+// 도메인 서비스 및 커스텀 훅 import
+import { validateCardForm } from '../services/cardFormService';
+import { useCardForm } from '../hooks/useCardForm';
+import { useFormSteps } from '../hooks/useFormSteps';
 
 export const Wrap = styled.div`
   display: flex;
@@ -50,62 +47,18 @@ const FormSection = styled.div<{ isVisible: boolean }>`
 `;
 
 const AddCard = () => {
-  const [cardInput, setCardInput] = useState<CardInputProps>({
-    first: null,
-    second: null,
-    third: null,
-    fourth: null,
-    MM: null,
-    YY: null,
-    CVC: null,
-    secretNumber: null,
-  });
-  const [selectedCardBrand, setSelectedCardBrand] = useState<string>('');
-
-  const [errorMessages, setErrorMessages] = useState<ErrorMessagesType>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-    MM: '',
-    YY: '',
-    CVC: '',
-    cardBrand: '',
-    secretNumber: '',
-  });
-
-  const sectionRefs = {
-    cardNumber: useRef<HTMLDivElement>(null),
-    cardBrand: useRef<HTMLDivElement>(null),
-    expiryDate: useRef<HTMLDivElement>(null),
-    cvc: useRef<HTMLDivElement>(null),
-    secretNumber: useRef<HTMLDivElement>(null),
-  };
-
-  const [visibleSteps, setVisibleSteps] = useState({
-    cardNumber: true,
-    cardBrand: false,
-    expiryDate: false,
-    cvc: false,
-    secretNumber: false,
-  });
+  const {
+    cardInput,
+    setCardInput,
+    selectedCardBrand,
+    errorMessages,
+    handleErrorMessages,
+    handleCardNumberErrorMessages,
+    handlePeriodErrorMessages,
+    handleCardBrandChange,
+  } = useCardForm();
 
   const validation = validateCardForm(cardInput, errorMessages);
-
-  const handleErrorMessages = (
-    key: keyof ErrorMessagesType,
-    message: string,
-  ) => {
-    setErrorMessages(prev => ({
-      ...prev,
-      [key]: message,
-    }));
-  };
-
-  const handleCardNumberErrorMessages = () =>
-    getCardNumberErrorMessage(errorMessages);
-  const handlePeriodErrorMessages = () =>
-    getExpiryDateErrorMessage(errorMessages);
 
   const formSteps = [
     {
@@ -127,13 +80,7 @@ const AddCard = () => {
       component: (
         <CardBrandSelect
           setCardInput={setCardInput}
-          onColorChange={(color, brand) => {
-            setCardInput(prev => ({
-              ...prev,
-              cardBrand: color,
-            }));
-            setSelectedCardBrand(brand);
-          }}
+          onColorChange={handleCardBrandChange}
         />
       ),
     },
@@ -184,31 +131,11 @@ const AddCard = () => {
     },
   ];
 
-  useEffect(() => {
-    formSteps.forEach(({ key, condition }) => {
-      if (condition() && !visibleSteps[key as keyof typeof visibleSteps]) {
-        setVisibleSteps(prev => ({ ...prev, [key]: true }));
-
-        setTimeout(() => {
-          const input =
-            sectionRefs[key as keyof typeof sectionRefs].current?.querySelector(
-              'input, select',
-            );
-          if (input) {
-            (input as HTMLElement).focus();
-          }
-        }, 300);
-      }
-    });
-  }, [cardInput, errorMessages, visibleSteps]);
-
-  const renderOrder = [
-    'secretNumber',
-    'cvc',
-    'expiryDate',
-    'cardBrand',
-    'cardNumber',
-  ];
+  const { sectionRefs, visibleSteps, renderOrder } = useFormSteps(
+    cardInput,
+    errorMessages,
+    formSteps,
+  );
 
   return (
     <>
