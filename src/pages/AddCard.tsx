@@ -10,6 +10,13 @@ import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
 import { SecretNumberInput } from '../component/cardDetails/SecretNumberInput';
 import { SubmitButton } from '../component/SubmitButton';
 
+import {
+  validateCardNumber,
+  validateCardExpirationDateMM,
+  validateCardExpirationDateYY,
+  validateCardCVC,
+  validateCardSecretNumber,
+} from '../validation/validation';
 import { validateCardForm } from '../services/cardFormService';
 import { useCardForm } from '../hooks/useCardForm';
 import { useFormSteps } from '../hooks/useFormSteps';
@@ -50,58 +57,137 @@ const AddCard = () => {
     cardInput,
     setCardInput,
     selectedCardBrand,
+    setSelectedCardBrand,
     errorMessages,
     handleErrorMessages,
-    handleCardNumberErrorMessages,
-    handlePeriodErrorMessages,
-    handleCardBrandChange,
   } = useCardForm();
 
   const validation = validateCardForm(cardInput, errorMessages);
 
+  const handleCardNumberChange = (
+    field: 'first' | 'second' | 'third' | 'fourth',
+    value: string,
+  ) => {
+    const errorMessage =
+      value.length === 4 ? validateCardNumber(value) || '' : '';
+    handleErrorMessages(field, errorMessage);
+
+    setCardInput(prev => ({
+      ...prev,
+      [field]: value === '' ? null : Number(value),
+    }));
+  };
+
+  const handleCardBrandChange = (brand: string, color: string) => {
+    setSelectedCardBrand(brand);
+    setCardInput(prev => ({
+      ...prev,
+      cardBrand: color,
+    }));
+  };
+
+  const handleExpiryDateChange = (field: 'MM' | 'YY', value: string) => {
+    let errorMessage = '';
+
+    if (field === 'MM') {
+      errorMessage =
+        value.length === 2 ? validateCardExpirationDateMM(value) || '' : '';
+    } else {
+      errorMessage =
+        value.length === 2
+          ? validateCardExpirationDateYY(
+              value,
+              cardInput.MM?.toString() || '',
+            ) || ''
+          : '';
+    }
+
+    handleErrorMessages(field, errorMessage);
+
+    setCardInput(prev => ({
+      ...prev,
+      [field]: value === '' ? null : Number(value),
+    }));
+  };
+
+  const handleCVCChange = (value: string) => {
+    const errorMessage = value.length === 3 ? validateCardCVC(value) || '' : '';
+    handleErrorMessages('CVC', errorMessage);
+
+    setCardInput(prev => ({
+      ...prev,
+      CVC: value === '' ? null : Number(value),
+    }));
+  };
+
+  const handleSecretNumberChange = (value: string) => {
+    const errorMessage =
+      value.length === 2 || value.length === 4
+        ? validateCardSecretNumber(value) || ''
+        : '';
+    handleErrorMessages('secretNumber', errorMessage);
+
+    setCardInput(prev => ({
+      ...prev,
+      secretNumber: value === '' ? null : Number(value),
+    }));
+  };
+
   const formSteps = [
     {
-      key: 'cardNumber' as const,
+      key: 'cardNumber',
       order: 5,
       condition: () => true,
       component: (
         <CardNumberInput
-          cardInput={cardInput}
-          setCardInput={setCardInput}
-          errorMessages={errorMessages}
-          handleErrorMessages={handleErrorMessages}
-          handleCardNumberErrorMessages={handleCardNumberErrorMessages}
+          cardNumberValues={{
+            first: cardInput.first?.toString() || '',
+            second: cardInput.second?.toString() || '',
+            third: cardInput.third?.toString() || '',
+            fourth: cardInput.fourth?.toString() || '',
+          }}
+          errorMessages={{
+            first: errorMessages.first,
+            second: errorMessages.second,
+            third: errorMessages.third,
+            fourth: errorMessages.fourth,
+          }}
+          onCardNumberChange={handleCardNumberChange}
         />
       ),
     },
     {
-      key: 'cardBrand' as const,
+      key: 'cardBrand',
       order: 4,
       condition: () => validation.isCardNumberComplete,
       component: (
         <CardBrandSelect
-          setCardInput={setCardInput}
-          onColorChange={handleCardBrandChange}
+          selectedBrand={selectedCardBrand}
+          onBrandChange={handleCardBrandChange}
         />
       ),
     },
     {
-      key: 'expiryDate' as const,
+      key: 'expiryDate',
       order: 3,
       condition: () =>
         validation.isCardNumberComplete && validation.isCardBrandComplete,
       component: (
         <ExpiryDateInput
-          cardInput={cardInput}
-          errorMessages={errorMessages}
-          handlePeriodErrorMessages={handlePeriodErrorMessages}
-          setCardInput={setCardInput}
-          handleErrorMessages={handleErrorMessages}
+          expiryValues={{
+            MM: cardInput.MM?.toString() || '',
+            YY: cardInput.YY?.toString() || '',
+          }}
+          errorMessages={{
+            MM: errorMessages.MM,
+            YY: errorMessages.YY,
+          }}
+          onExpiryDateChange={handleExpiryDateChange}
         />
       ),
     },
     {
-      key: 'cvc' as const,
+      key: 'cvc',
       order: 2,
       condition: () =>
         validation.isCardNumberComplete &&
@@ -109,15 +195,14 @@ const AddCard = () => {
         validation.isExpiryDateComplete,
       component: (
         <CVCInput
-          cardInput={cardInput}
-          errorMessages={errorMessages}
-          setCardInput={setCardInput}
-          handleErrorMessages={handleErrorMessages}
+          cvcValue={cardInput.CVC?.toString() || ''}
+          errorMessage={errorMessages.CVC}
+          onCVCChange={handleCVCChange}
         />
       ),
     },
     {
-      key: 'secretNumber' as const,
+      key: 'secretNumber',
       order: 1,
       condition: () =>
         validation.isCardNumberComplete &&
@@ -126,16 +211,15 @@ const AddCard = () => {
         validation.isCVCComplete,
       component: (
         <SecretNumberInput
-          cardInput={cardInput}
-          errorMessages={errorMessages}
-          setCardInput={setCardInput}
-          handleErrorMessages={handleErrorMessages}
+          secretValue={cardInput.secretNumber?.toString() || ''}
+          errorMessage={errorMessages.secretNumber}
+          onSecretNumberChange={handleSecretNumberChange}
         />
       ),
     },
   ] as const;
 
-  const { sectionRefs, visibleSteps, getSortedSteps } = useFormSteps(
+  const { sectionRefs, visibleSteps, sortedStepKeys } = useFormSteps(
     cardInput,
     errorMessages,
     formSteps,
@@ -152,8 +236,10 @@ const AddCard = () => {
           cardColor={cardInput.cardBrand}
         />
         <Form>
-          {getSortedSteps().map(step => {
-            if (!visibleSteps[step.key]) return null;
+          {sortedStepKeys.map(stepKey => {
+            const step = formSteps.find(s => s.key === stepKey);
+            if (!step || !visibleSteps[step.key]) return null;
+
             return (
               <FormSection
                 key={step.key}

@@ -1,55 +1,44 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Description from '../Description';
 import Input from '../Input';
 import InputGroup from '../InputGroup';
-import { ErrorMessagesType } from '../../types/ErrorMessagesType';
-import { CardInputProps } from '../../types/CardInputTypes';
-import { validateCardCVC } from '../../validation/validation';
+
 interface CVCInputProps {
-  handleErrorMessages: (key: keyof ErrorMessagesType, message: string) => void;
-  setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
-  errorMessages: ErrorMessagesType;
-  cardInput: CardInputProps;
+  cvcValue: string;
+  errorMessage: string;
+  onCVCChange: (value: string) => void;
 }
 
 export const CVCInput: React.FC<CVCInputProps> = ({
-  handleErrorMessages,
-  errorMessages,
-  setCardInput,
-  cardInput,
+  cvcValue,
+  errorMessage,
+  onCVCChange,
 }) => {
-  const [cvcValue, setCvcValue] = useState(cardInput.CVC?.toString() ?? '');
+  const [localValue, setLocalValue] = useState(cvcValue);
 
-  const handleCVCChange = useCallback(
-    (value: string) => {
-      setCvcValue(value);
+  useEffect(() => {
+    setLocalValue(cvcValue);
+  }, [cvcValue]);
 
-      const errorMessage = validateCardCVC(value);
-      if (errorMessage) {
-        handleErrorMessages('CVC', errorMessage);
-        return;
-      }
+  const handleLocalCVCChange = (value: string) => {
+    if (value !== '' && !/^\d+$/.test(value)) {
+      return;
+    }
 
-      handleErrorMessages('CVC', '');
-
-      setCardInput(prev => ({
-        ...prev,
-        CVC: value === '' ? null : Number(value),
-      }));
-    },
-    [setCardInput, handleErrorMessages, validateCardCVC],
-  );
+    setLocalValue(value);
+    onCVCChange(value);
+  };
 
   return (
     <>
       <Description headText="CVC 번호를 입력해 주세요" />
-      <InputGroup label="CVC" errorMessages={errorMessages.CVC}>
+      <InputGroup label="CVC" errorMessages={errorMessage}>
         <Input
           maxLength={3}
           placeholder="123"
-          value={cvcValue}
-          onChange={handleCVCChange}
-          isError={!!errorMessages.CVC}
+          value={localValue}
+          onChange={handleLocalCVCChange}
+          isError={!!errorMessage}
           name="cvcNumber"
         />
       </InputGroup>

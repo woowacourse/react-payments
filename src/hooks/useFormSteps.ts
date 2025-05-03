@@ -1,24 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
 import { CardInputProps } from '../types/CardInputTypes';
 import { ErrorMessagesType } from '../types/ErrorMessagesType';
-import { validateCardForm } from '../services/cardFormService';
 
-type FormStepKey =
-  | 'cardNumber'
-  | 'cardBrand'
-  | 'expiryDate'
-  | 'cvc'
-  | 'secretNumber';
+type FormStep = {
+  readonly key: string;
+  readonly order: number;
+  readonly condition: () => boolean;
+  readonly component: React.ReactNode;
+};
 
 export const useFormSteps = (
   cardInput: CardInputProps,
   errorMessages: ErrorMessagesType,
-  formSteps: ReadonlyArray<{
-    readonly key: FormStepKey;
-    readonly order: number;
-    readonly condition: () => boolean;
-    readonly component: React.ReactNode;
-  }>,
+  formSteps: ReadonlyArray<FormStep>,
 ) => {
   const sectionRefs = {
     cardNumber: useRef<HTMLDivElement>(null),
@@ -28,9 +22,7 @@ export const useFormSteps = (
     secretNumber: useRef<HTMLDivElement>(null),
   };
 
-  const [visibleSteps, setVisibleSteps] = useState<
-    Record<FormStepKey, boolean>
-  >({
+  const [visibleSteps, setVisibleSteps] = useState({
     cardNumber: true,
     cardBrand: false,
     expiryDate: false,
@@ -40,12 +32,14 @@ export const useFormSteps = (
 
   useEffect(() => {
     formSteps.forEach(({ key, condition }) => {
-      if (condition() && !visibleSteps[key]) {
+      if (condition() && !visibleSteps[key as keyof typeof visibleSteps]) {
         setVisibleSteps(prev => ({ ...prev, [key]: true }));
 
         setTimeout(() => {
           const input =
-            sectionRefs[key].current?.querySelector('input, select');
+            sectionRefs[key as keyof typeof sectionRefs].current?.querySelector(
+              'input, select',
+            );
           if (input) {
             (input as HTMLElement).focus();
           }
@@ -54,13 +48,14 @@ export const useFormSteps = (
     });
   }, [cardInput, errorMessages, visibleSteps, formSteps]);
 
-  const getSortedSteps = () => {
-    return [...formSteps].sort((a, b) => a.order - b.order);
-  };
+  const sortedStepKeys = formSteps
+    .slice()
+    .sort((a, b) => a.order - b.order)
+    .map(step => step.key);
 
   return {
     sectionRefs,
     visibleSteps,
-    getSortedSteps,
+    sortedStepKeys,
   };
 };

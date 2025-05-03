@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CardInputProps } from '../../types/CardInputTypes';
 import Description from '../Description';
 
 interface CardBrandSelectProps {
-  setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
-  onColorChange: (color: string, brand: string) => void;
+  selectedBrand: string;
+  onBrandChange: (brand: string, color: string) => void;
 }
 
 const CardBrandsColor = {
@@ -44,21 +43,14 @@ const StyledOption = styled.option<{ $isPlaceholder?: boolean }>`
 `;
 
 export const CardBrandSelect: React.FC<CardBrandSelectProps> = ({
-  setCardInput,
-  onColorChange,
+  selectedBrand,
+  onBrandChange,
 }) => {
   const handleCardBrandChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedBrand = e.target.value;
-    const selectedColor =
-      CardBrandsColor[selectedBrand as keyof typeof CardBrandsColor] ||
-      '#000000';
-
-    onColorChange(selectedColor, selectedBrand);
-
-    setCardInput((prev: CardInputProps) => ({
-      ...prev,
-      cardBrand: CardBrandsColor[selectedBrand as keyof typeof CardBrandsColor],
-    }));
+    const brand = e.target.value;
+    const color =
+      CardBrandsColor[brand as keyof typeof CardBrandsColor] || '#000000';
+    onBrandChange(brand, color);
   };
 
   return (
@@ -71,6 +63,7 @@ export const CardBrandSelect: React.FC<CardBrandSelectProps> = ({
         <StyledSelect
           name="cardBrand"
           id="cardBrand"
+          value={selectedBrand}
           onChange={handleCardBrandChange}
         >
           <StyledOption value="" $isPlaceholder>

@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { CardInputProps } from '../types/CardInputTypes';
 import { ErrorMessagesType } from '../types/ErrorMessagesType';
-import {
-  getCardNumberErrorMessage,
-  getExpiryDateErrorMessage,
-} from '../services/cardFormService';
 
 export const useCardForm = () => {
   const [cardInput, setCardInput] = useState<CardInputProps>({
@@ -42,27 +38,12 @@ export const useCardForm = () => {
     }));
   };
 
-  const handleCardNumberErrorMessages = () =>
-    getCardNumberErrorMessage(errorMessages);
-  const handlePeriodErrorMessages = () =>
-    getExpiryDateErrorMessage(errorMessages);
-
-  const handleCardBrandChange = (color: string, brand: string) => {
-    setCardInput(prev => ({
-      ...prev,
-      cardBrand: color,
-    }));
-    setSelectedCardBrand(brand);
-  };
-
   return {
     cardInput,
     setCardInput,
     selectedCardBrand,
+    setSelectedCardBrand,
     errorMessages,
     handleErrorMessages,
-    handleCardNumberErrorMessages,
-    handlePeriodErrorMessages,
-    handleCardBrandChange,
   };
 };
