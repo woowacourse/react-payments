@@ -1,18 +1,31 @@
-import { Route, Routes } from "react-router";
+import { RouterProvider, createBrowserRouter } from "react-router";
 import "./App.css";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import AddCardSuccessPage from "./pages/AddCardSuccessPage/AddCardSuccessPage";
-import { BrowserRouter } from "react-router";
+
+const PAGE_PATH = {
+  ADD_CARD: "/",
+  ADD_CARD_SUCCESS: "/success",
+};
+
+const router = createBrowserRouter(
+  [
+    {
+      path: PAGE_PATH.ADD_CARD,
+      element: <AddCardPage />,
+    },
+    {
+      path: PAGE_PATH.ADD_CARD_SUCCESS,
+      element: <AddCardSuccessPage />,
+    },
+  ],
+  {
+    basename: "/react-payments",
+  }
+);
 
 function App() {
-  return (
-    <BrowserRouter basename="/react-payments">
-      <Routes>
-        <Route path="/" element={<AddCardPage />} />
-        <Route path="/success" element={<AddCardSuccessPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

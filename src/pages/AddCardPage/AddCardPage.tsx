@@ -5,7 +5,7 @@ import CardCvcNumber from "../../components/CardCvcNumber/CardCvcNumber";
 import CardExpirationDate from "../../components/CardExpirationDate/CardExpirationDate";
 import CardNumber from "../../components/CardNumber/CardNumber";
 import CardPassword from "../../components/CardPassword/CardPassword";
-import CheckButton from "../../components/CheckButton";
+import CheckButton from "../../components/CheckButton/CheckButton";
 import PreviewCardLayout from "../../components/PreviewCard/PreviewCardLayout";
 import useCardCompanyState from "../../hooks/useCardCompany/useCardCompanyState";
 import useCardNumbersState from "../../hooks/useCardNumber/useCardNumberState";

@@ -1,7 +1,7 @@
 import React from "react";
 import Group54 from "/Group-54.svg";
 import styles from "./AddCardSuccessPage.module.css";
-import CheckButton from "../../components/CheckButton";
+import CheckButton from "../../components/CheckButton/CheckButton";
 import { useLocation, useNavigate } from "react-router";
 
 interface CardState {
