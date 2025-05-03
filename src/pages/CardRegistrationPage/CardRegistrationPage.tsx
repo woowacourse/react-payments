@@ -13,7 +13,7 @@ import { useCvcInput } from '../../hooks/useCvcInput';
 import { handleCardLogoChange } from '../../utils/cardLogoUtils.ts';
 import { useCardPasswordInput } from '../../hooks/useCardPasswordInput.ts';
 import Button from '../../components/common/Button/Button.tsx';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 type Props = {
   cardNumbers: CardNumber;
@@ -23,13 +23,10 @@ type Props = {
   handleSelectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
 
-export default function CardRegistrationPage({
-  cardNumbers,
-  handleCardNumberChange,
-  cardNumberError,
-  cardCompany,
-  handleSelectChange
-}: Props) {
+export default function CardRegistrationPage() {
+  const { cardNumbers, handleCardNumberChange, cardNumberError, cardCompany, handleSelectChange } =
+    useOutletContext<Props>();
+
   const { cardExpiration, handleCardExpirationChange, cardExpirationError } = useCardExpirationInput();
   const { cvc, handleCvcChange, cvcError } = useCvcInput();
   const { cardPassword, handleCardPasswordChange, cardPasswordError } = useCardPasswordInput();

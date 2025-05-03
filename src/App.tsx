@@ -1,31 +1,43 @@
-import { Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import CardRegistrationPage from './pages/CardRegistrationPage/CardRegistrationPage';
 import CardRegistrationCompletedPage from './pages/CardRegistrationCompletedPage/CardRegistrationCompletedPage';
 import { useCardNumberInput } from './hooks/useCardNumberInput';
 import { useCardCompanySelect } from './hooks/useCardCompanySelect';
 
-export default function App() {
+function RootLayout() {
   const { cardNumbers, handleCardNumberChange, cardNumberError } = useCardNumberInput();
   const { cardCompany, handleSelectChange } = useCardCompanySelect();
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <CardRegistrationPage
-            cardNumbers={cardNumbers}
-            handleCardNumberChange={handleCardNumberChange}
-            cardNumberError={cardNumberError}
-            cardCompany={cardCompany}
-            handleSelectChange={handleSelectChange}
-          />
-        }
-      />
-      <Route
-        path="/card-registration-completed"
-        element={<CardRegistrationCompletedPage cardNumbers={cardNumbers} cardCompany={cardCompany} />}
-      />
-    </Routes>
+    <Outlet
+      context={{
+        cardNumbers,
+        cardCompany,
+        handleCardNumberChange,
+        cardNumberError,
+        handleSelectChange
+      }}
+    />
   );
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <CardRegistrationPage />
+      },
+      {
+        path: 'card-registration-completed',
+        element: <CardRegistrationCompletedPage />
+      }
+    ]
+  }
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }

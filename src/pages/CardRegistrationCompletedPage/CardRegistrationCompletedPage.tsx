@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import Button from '../../components/common/Button/Button';
 import styles from './CardRegistrationCompletedPage.module.css';
 import { FaCircleCheck } from 'react-icons/fa6';
@@ -9,7 +9,8 @@ type Props = {
   cardCompany: CardCompany | '';
 };
 
-export default function CardRegistrationCompletedPage({ cardNumbers, cardCompany }: Props) {
+export default function CardRegistrationCompletedPage() {
+  const { cardNumbers, cardCompany } = useOutletContext<Props>();
   const navigate = useNavigate();
 
   const handleGoToCardRegistrationPage = () => {
