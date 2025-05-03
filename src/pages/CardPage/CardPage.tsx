@@ -67,7 +67,7 @@ const CardPage = () => {
     navigate(`/registered`, {
       state: {
         cardNumber: `${cardNumber.values[0]}`,
-        cardCompany: `${cardCompany}`,
+        cardCompany: `${cardCompany.values[0]}`,
       },
     });
   };
@@ -97,13 +97,13 @@ const CardPage = () => {
       title: CARD_PAGE_TEXT.CARD_COMPANY_TITLE,
       subtitle: CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE,
       shouldShow: () => cardNumber.isValid,
-      component: <Dropdown selected={cardCompany} onChange={handleCardCompanySelect} />,
+      component: <Dropdown selected={cardCompany.values[0]} onChange={handleCardCompanySelect} />,
     },
     {
       id: 'expirationDate',
       title: CARD_PAGE_TEXT.EXPIRATION_TITLE,
       subtitle: CARD_PAGE_TEXT.EXPIRATION_SUBTITLE,
-      shouldShow: () => cardNumber.isValid && cardCompany !== '',
+      shouldShow: () => cardNumber.isValid && cardCompany.values[0] !== '',
       component: (
         <ExpirationDateInput
           values={expirationDate.values}
@@ -116,7 +116,8 @@ const CardPage = () => {
       id: 'cvc',
       title: CARD_PAGE_TEXT.CVC_TITLE,
       subtitle: '',
-      shouldShow: () => cardNumber.isValid && cardCompany !== '' && expirationDate.isValid,
+      shouldShow: () =>
+        cardNumber.isValid && cardCompany.values[0] !== '' && expirationDate.isValid,
       component: (
         <CVCInput values={cvc.values} onChange={cvc.handleInput} onValidChange={cvc.setIsValid} />
       ),
@@ -126,7 +127,7 @@ const CardPage = () => {
       title: CARD_PAGE_TEXT.PASSWORD_TITLE,
       subtitle: CARD_PAGE_TEXT.PASSWORD_SUBTITLE,
       shouldShow: () =>
-        cardNumber.isValid && cardCompany !== '' && expirationDate.isValid && cvc.isValid,
+        cardNumber.isValid && cardCompany.values[0] !== '' && expirationDate.isValid && cvc.isValid,
       component: (
         <PasswordInput
           values={password.values}
@@ -142,7 +143,7 @@ const CardPage = () => {
       <PreviewCard
         cardNumber={cardNumber.values}
         expirationDate={expirationDate.values}
-        cardCompany={cardCompany}
+        cardCompany={cardCompany.values[0]}
       />
 
       {formSteps

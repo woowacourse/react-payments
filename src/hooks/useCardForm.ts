@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import useFormField from './useFormField';
 
 const INPUTARRAY_LENGTH = {
@@ -6,6 +5,7 @@ const INPUTARRAY_LENGTH = {
   EXPIRATION: 2,
   CVC: 1,
   PASSWORD: 1,
+  CARD_COMPANY: 1,
 };
 
 function useCardForm() {
@@ -13,15 +13,18 @@ function useCardForm() {
   const expirationDate = useFormField(INPUTARRAY_LENGTH.EXPIRATION);
   const cvc = useFormField(INPUTARRAY_LENGTH.CVC);
   const password = useFormField(INPUTARRAY_LENGTH.PASSWORD);
-
-  const [cardCompany, setCardCompany] = useState('');
+  const cardCompany = useFormField(INPUTARRAY_LENGTH.CARD_COMPANY);
 
   const handleCardCompanySelect = (value: string) => {
-    setCardCompany(value);
-  };
+    const newValues = [...cardCompany.values];
+    newValues[0] = value;
+    cardCompany.values[0] = value;
 
-  const getIsAllFormValid = () => {
-    return cardNumber.isValid && expirationDate.isValid && cvc.isValid && password.isValid;
+    if (value) {
+      cardCompany.setIsValid(true);
+    } else {
+      cardCompany.setIsValid(false);
+    }
   };
 
   return {
@@ -31,7 +34,12 @@ function useCardForm() {
     password,
     cardCompany,
     handleCardCompanySelect,
-    isFormValid: getIsAllFormValid(),
+    isFormValid:
+      cardNumber.isValid &&
+      expirationDate.isValid &&
+      cvc.isValid &&
+      password.isValid &&
+      cardCompany.isValid,
   };
 }
 
