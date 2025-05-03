@@ -5,22 +5,20 @@ import {
   ExpirationDateInputType,
 } from '../config/inputField';
 import { focusNextInput } from '../utils/focus';
+import { createInitialValues } from '../utils/initialValueUtils';
 
 function useExpirationDateValidation() {
   const [inputValues, setInputValues] = useState<
     Record<ExpirationDateInputType, string>
-  >({
-    month: '',
-    year: '',
-  });
+  >(() => createInitialValues(EXPIRATION_DATE_INPUT_TYPE, ''));
+  const [isInputComplete, setIsInputComplete] = useState(false);
   const inputRefs: Record<
     ExpirationDateInputType,
     RefObject<HTMLInputElement | null>
   > = {
-    month: useRef<HTMLInputElement | null>(null),
-    year: useRef<HTMLInputElement | null>(null),
+    month: useRef<HTMLInputElement>(null),
+    year: useRef<HTMLInputElement>(null),
   };
-  const [isInputComplete, setIsInputComplete] = useState(false);
 
   const handleInputValue = ({
     name,

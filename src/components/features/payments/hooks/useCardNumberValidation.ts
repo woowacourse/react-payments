@@ -11,25 +11,17 @@ import {
   addItemToRecordArray,
   removeItemFromRecordArray,
 } from '../../../../utils/recordArrayUtils';
+import { createInitialValues } from '../utils/initialValueUtils';
 
 function useCardNumberValidation() {
   const [inputValues, setInputValues] = useState<
     Record<CardNumberInputType, string>
-  >({
-    cardNumberPart1: '',
-    cardNumberPart2: '',
-    cardNumberPart3: '',
-    cardNumberPart4: '',
-  });
+  >(() => createInitialValues(CARD_NUMBER_INPUT_TYPE, ''));
   const [errorTypes, setErrorTypes] = useState<
     Record<CardNumberInputType, ErrorType[]>
-  >({
-    cardNumberPart1: [],
-    cardNumberPart2: [],
-    cardNumberPart3: [],
-    cardNumberPart4: [],
-  });
+  >(() => createInitialValues(CARD_NUMBER_INPUT_TYPE, []));
   const [cardType, setCardType] = useState<CardType | null>(null);
+  const [isInputComplete, setIsInputComplete] = useState(false);
   const inputRefs: Record<
     CardNumberInputType,
     React.RefObject<HTMLInputElement | null>
@@ -39,7 +31,8 @@ function useCardNumberValidation() {
     cardNumberPart3: useRef<HTMLInputElement>(null),
     cardNumberPart4: useRef<HTMLInputElement>(null),
   };
-  const [isInputComplete, setIsInputComplete] = useState(false);
+
+  console.log(inputValues, errorTypes, inputRefs);
 
   const updateCardError = (
     inputName: CardNumberInputType,
