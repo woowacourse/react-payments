@@ -18,8 +18,8 @@ const CardCompanySelectBox = ({
 }: CardCompanySelectProps) => {
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     onChange({ value: e.target.value });
-    onComplete && onComplete();
-    onValidityChange && onValidityChange(true);
+    onComplete?.();
+    onValidityChange?.(true);
   };
 
   return (

@@ -40,12 +40,10 @@ const CardNumberInput = ({
 
     const isValid = validateAll(updatedValues).every((isError) => !isError);
 
-    if (onValidityChange) {
-      onValidityChange(isValid);
-    }
+    onValidityChange?.(isValid);
 
-    if (onComplete && isValid) {
-      onComplete();
+    if (isValid) {
+      onComplete?.();
     }
 
     if (value.length === CARD_NUMBER.MAX_LENGTH) {
