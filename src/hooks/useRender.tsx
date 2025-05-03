@@ -17,9 +17,6 @@ function useRender<T>(
   renderItems: RenderItem<T>[],
   ref: React.RefObject<HTMLFormElement | null>
 ) {
-  const [renderList, setRenderList] = useState<RenderItem<T>[]>([
-    renderItems[START_INDEX],
-  ]);
   const [order, setOrder] = useState(START_INDEX);
 
   useEffect(() => {
@@ -27,16 +24,14 @@ function useRender<T>(
 
     if (
       currentItem.isInputValid &&
-      ref.current &&
-      ref.current.checkValidity() &&
+      ref.current?.checkValidity() &&
       order < renderItems.length - 1
     ) {
-      setRenderList((prev) => [...prev, renderItems[order + 1]]);
       setOrder((prev) => prev + 1);
     }
-  }, [renderItems, order]);
+  }, [renderItems, order, setOrder]);
 
-  return renderList;
+  return order;
 }
 
 export default useRender;

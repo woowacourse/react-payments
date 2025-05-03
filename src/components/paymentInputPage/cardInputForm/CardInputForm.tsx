@@ -97,10 +97,12 @@ function CardInputForm() {
     },
   ];
 
-  const renderList = useRender<CardInputProps>(
+  const order = useRender<CardInputProps>(
     inputs as RenderItem<CardInputProps>[],
     ref
   );
+
+  const renderList = inputs.slice(0, order + 1) as RenderItem<CardInputProps>[];
 
   return (
     <form
