@@ -6,7 +6,7 @@ import { useCardFormContext } from '../../context/CardFormContext';
 
 const CardNumbersInput = () => {
   const {
-    cardNumbers: { numbers, error, validate },
+    cardNumbers: { numbers, error, updateCardNumbers },
   } = useCardFormContext();
   const cardNumbersRef = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -14,7 +14,7 @@ const CardNumbersInput = () => {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    validate(e.target.value, index);
+    updateCardNumbers(e.target.value, index);
     if (e.target.value.length === CARD_NUMBER_RULE.MAX_LENGTH) {
       if (index < numbers.length - 1) {
         cardNumbersRef.current[index + 1]?.focus();

@@ -3,12 +3,22 @@ import { useState } from 'react';
 type ValitationResult = {
   brand: string;
   error: { isValid: boolean; errorMessage: string };
-  validate: (value: string) => void;
+  updateCardBrand: (value: string) => void;
+  isComplete: boolean;
 };
 
 export default function useCardBrand(): ValitationResult {
   const [brand, setBrand] = useState('');
   const [error, setError] = useState({ isValid: false, errorMessage: '' });
+  const [isComplete, setIsComplete] = useState(false);
+
+  const updateCardBrand = (value: string) => {
+    setBrand(value);
+
+    validate(value);
+
+    if (value !== '') setIsComplete(true);
+  };
 
   const validate = (value: string) => {
     setBrand(value);
@@ -21,5 +31,5 @@ export default function useCardBrand(): ValitationResult {
     setError({ isValid: false, errorMessage: '' });
   };
 
-  return { brand, error, validate };
+  return { brand, error, updateCardBrand, isComplete };
 }

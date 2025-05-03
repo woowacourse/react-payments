@@ -5,7 +5,7 @@ import { useCardFormContext } from '../../context/CardFormContext';
 
 const CardBrandInput = () => {
   const {
-    cardBrand: { brand, error, validate },
+    cardBrand: { brand, error, updateCardBrand },
   } = useCardFormContext();
 
   return (
@@ -17,7 +17,7 @@ const CardBrandInput = () => {
         data-testid="card-brand-select"
         className="card-brand-selector"
         value={brand}
-        onChange={(e) => validate(e.target.value)}
+        onChange={(e) => updateCardBrand(e.target.value)}
       >
         <option value="" disabled hidden>
           {OPTION_MESSAGE.SELECT_CARD_BRAND}

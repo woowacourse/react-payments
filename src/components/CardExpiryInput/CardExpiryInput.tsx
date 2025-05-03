@@ -6,7 +6,7 @@ import { useCardFormContext } from '../../context/CardFormContext';
 
 const CardExpiryInput = () => {
   const {
-    expiryDate: { date, error, validate },
+    expiryDate: { date, error, updateDate },
   } = useCardFormContext();
   const expiryRef = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -15,7 +15,7 @@ const CardExpiryInput = () => {
     dateName: string
   ) => {
     const { value } = e.target;
-    validate(value, dateName);
+    updateDate(value, dateName);
     if (value.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
       expiryRef.current[1]?.focus();
     }

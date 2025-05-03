@@ -5,7 +5,7 @@ import { useCardFormContext } from '../../context/CardFormContext';
 
 const CVCInput = () => {
   const {
-    CVCNumber: { CVC, error, validate },
+    CVCNumber: { CVC, error, udpateCVC },
   } = useCardFormContext();
 
   return (
@@ -16,7 +16,7 @@ const CVCInput = () => {
           name="cvc"
           placeholder="123"
           value={CVC}
-          onChange={(e) => validate(e.target.value)}
+          onChange={(e) => udpateCVC(e.target.value)}
           className={`input ${error.isValid ? 'errorInput' : ''}`}
           maxLength={CVC_RULE.MAX_LENGTH}
         />

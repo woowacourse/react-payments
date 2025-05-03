@@ -5,18 +5,26 @@ import { CVC_ERROR } from '../constants/errorMessage';
 type ValitationResult = {
   CVC: string;
   error: { isValid: boolean; errorMessage: string };
-  validate: (value: string) => void;
+  udpateCVC: (value: string) => void;
+  isComplete: boolean;
 };
 
 export default function useCVCNumber(): ValitationResult {
   const [CVC, setCVC] = useState('');
   const [error, setError] = useState({ isValid: false, errorMessage: '' });
+  const [isComplete, setIsComplete] = useState(false);
 
-  const validate = (value: string) => {
-    if (value.length > 3) return;
+  const udpateCVC = (value: string) => {
+    if (value.length > CVC_RULE.MAX_LENGTH) return;
 
     setCVC(value);
 
+    validate(value);
+
+    if (value.length === CVC_RULE.MAX_LENGTH) setIsComplete(true);
+  };
+
+  const validate = (value: string) => {
     if (value === '') {
       setError({ isValid: true, errorMessage: '' });
       return;
@@ -33,5 +41,5 @@ export default function useCVCNumber(): ValitationResult {
     setError({ isValid: false, errorMessage: '' });
   };
 
-  return { CVC, error, validate };
+  return { CVC, error, udpateCVC, isComplete };
 }

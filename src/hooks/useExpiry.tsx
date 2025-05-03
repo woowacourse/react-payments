@@ -5,7 +5,8 @@ import { EXPIRYDATE_ERROR } from '../constants/errorMessage';
 type ValitationResult = {
   date: dateType;
   error: errorType[];
-  validate: (value: string, dateName: string) => void;
+  updateDate: (value: string, dateName: string) => void;
+  isComplete: boolean;
 };
 
 type dateType = {
@@ -32,8 +33,9 @@ const initialDate = [
 export default function useExpiryDate(): ValitationResult {
   const [date, setDate] = useState<dateType>({ month: '', year: '' });
   const [error, setError] = useState<errorType[]>(initialDate);
+  const [isComplete, setIsComplete] = useState(false);
 
-  const updateDate = (index: number, isError: boolean, message: string) => {
+  const updateError = (index: number, isError: boolean, message: string) => {
     setError((prev) => {
       prev[index] = {
         isValidate: isError,
@@ -43,58 +45,85 @@ export default function useExpiryDate(): ValitationResult {
     });
   };
 
-  const validate = (value: string, dateName: string) => {
+  const updateDate = (value: string, dateName: string) => {
     if (dateName === 'month') {
       if (value.length > EXPIRYDATE_RULE.DATE_MAX_LENGTH) return;
+
       setDate((prev) => ({ ...prev, month: value }));
 
-      if (value === '') {
-        updateDate(0, false, '');
-        return;
-      }
+      validateMonth(value);
 
-      if (!/^\d*$/.test(value)) {
-        updateDate(0, true, EXPIRYDATE_ERROR.MONTH_IS_NOT_A_NUMBER);
-        return;
-      }
-      if (value.length < EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
-        updateDate(0, true, EXPIRYDATE_ERROR.INVALID_MONTH_LENGTH_ERROR);
-        return;
-      }
       if (
-        Number(value) < EXPIRYDATE_RULE.DATE_MONTH_MIN ||
-        Number(value) > EXPIRYDATE_RULE.DATE_MONTH_MAX
+        value.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH &&
+        date.year.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH
       ) {
-        updateDate(0, true, EXPIRYDATE_ERROR.INVALID_MONTH);
-        return;
+        setIsComplete(true);
       }
-      updateDate(0, false, '');
     }
 
     if (dateName === 'year') {
       if (value.length > EXPIRYDATE_RULE.DATE_MAX_LENGTH) return;
+
       setDate((prev) => ({ ...prev, year: value }));
 
-      if (value === '') {
-        updateDate(1, false, '');
-        return;
-      }
+      validateYear(value);
+    }
 
-      if (!/^\d*$/.test(value)) {
-        updateDate(1, true, EXPIRYDATE_ERROR.YEAR_IS_NOT_A_NUMBER);
-        return;
-      }
-      if (value.length < EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
-        updateDate(1, true, EXPIRYDATE_ERROR.INVALID_YEAR_LENGTH_ERROR);
-        return;
-      }
-      if (Number(value) < EXPIRYDATE_RULE.DATE_YEAR_MIN) {
-        updateDate(1, true, EXPIRYDATE_ERROR.INVALID_YEAR);
-        return;
-      }
-      updateDate(1, false, '');
+    if (
+      value.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH &&
+      date.month.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH
+    ) {
+      setIsComplete(true);
     }
   };
 
-  return { date, error, validate };
+  const validateMonth = (value: string) => {
+    if (value === '') {
+      updateError(0, false, '');
+      return;
+    }
+
+    if (!/^\d*$/.test(value)) {
+      updateError(0, true, EXPIRYDATE_ERROR.MONTH_IS_NOT_A_NUMBER);
+      return;
+    }
+    if (value.length < EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
+      updateError(0, true, EXPIRYDATE_ERROR.INVALID_MONTH_LENGTH_ERROR);
+      return;
+    }
+    if (
+      Number(value) < EXPIRYDATE_RULE.DATE_MONTH_MIN ||
+      Number(value) > EXPIRYDATE_RULE.DATE_MONTH_MAX
+    ) {
+      updateError(0, true, EXPIRYDATE_ERROR.INVALID_MONTH);
+      return;
+    }
+    updateError(0, false, '');
+  };
+
+  const validateYear = (value: string) => {
+    if (value.length > EXPIRYDATE_RULE.DATE_MAX_LENGTH) return;
+    setDate((prev) => ({ ...prev, year: value }));
+
+    if (value === '') {
+      updateError(1, false, '');
+      return;
+    }
+
+    if (!/^\d*$/.test(value)) {
+      updateError(1, true, EXPIRYDATE_ERROR.YEAR_IS_NOT_A_NUMBER);
+      return;
+    }
+    if (value.length < EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
+      updateError(1, true, EXPIRYDATE_ERROR.INVALID_YEAR_LENGTH_ERROR);
+      return;
+    }
+    if (Number(value) < EXPIRYDATE_RULE.DATE_YEAR_MIN) {
+      updateError(1, true, EXPIRYDATE_ERROR.INVALID_YEAR);
+      return;
+    }
+    updateError(1, false, '');
+  };
+
+  return { date, error, updateDate, isComplete };
 }

@@ -3,7 +3,7 @@ import { useCardFormContext } from '../../context/CardFormContext';
 
 const CardPasswordInput = () => {
   const {
-    password: { password, error, validate },
+    password: { password, error, updatePassword },
   } = useCardFormContext();
 
   return (
@@ -16,7 +16,7 @@ const CardPasswordInput = () => {
         <input
           type="password"
           value={password}
-          onChange={(e) => validate(e.target.value)}
+          onChange={(e) => updatePassword(e.target.value)}
           name="password"
           maxLength={2}
           placeholder="비밀번호 앞 2자리"
