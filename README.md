@@ -60,5 +60,5 @@
 
 ### Page
 
-- [x] HomePage : 처음 페이지
+- [x] CardRegisterPage : 처음 페이지
 - [x] CardRegisterSuccessPage : 카드 등록 완료 페이지

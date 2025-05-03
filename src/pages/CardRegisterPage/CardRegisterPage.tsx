@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import CardNumbersInput from '../../components/CardNumbersInput/CardNumbersInput';
 import CardExpiryInput from '../../components/CardExpiryInput/CardExpiryInput';
 import CVCInput from '../../components/CVCInput/CVCInput';
-import CardPreview from '../../components/CardPreview/CardPreview';
+// import CardPreview from '../../components/CardPreview/CardPreview';
 import CardBrandInput from '../../components/CardBrandInput/CardBrandInput';
 import CardPasswordInput from '../../components/CardPasswordInput/CardPasswordInput';
 import Button from '../../components/common/Button/Button';
@@ -10,20 +10,20 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../../App.css';
 import { useCardFormContext } from '../../context/CardFormContext';
 
-const HomePage = () => {
+const CardRegisterPage = () => {
   const {
-    cardNumbers,
-    brand,
+    // cardNumbers,
+    // brand,
     resetForm,
-    cardNumberComplete,
-    brandComplete,
-    expireComplete,
-    CVCComplete,
-    passwordComplete,
-    cardBrandDisplay,
-    cardExpiryDisplay,
-    cardCVCDisplay,
-    cardPasswordDisplay,
+    // cardNumberComplete,
+    // brandComplete,
+    // expireComplete,
+    // CVCComplete,
+    // passwordComplete,
+    // cardBrandDisplay,
+    // cardExpiryDisplay,
+    // cardCVCDisplay,
+    // cardPasswordDisplay,
   } = useCardFormContext();
 
   const navigate = useNavigate();
@@ -32,8 +32,8 @@ const HomePage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = {
-      cardNumbers,
-      brand,
+      // cardNumbers,
+      // brand,
     };
     navigate('/react-payments/complete', { state: formData });
   };
@@ -42,26 +42,23 @@ const HomePage = () => {
     resetForm();
   }, [location.state]);
 
-  const isFormComplete =
-    cardNumberComplete &&
-    brandComplete &&
-    expireComplete &&
-    CVCComplete &&
-    passwordComplete;
+  // const isFormComplete =
+  // cardNumberComplete &&
+  // brandComplete;
 
   return (
     <div className="app">
-      <CardPreview />
+      {/* <CardPreview /> */}
       <form onSubmit={handleSubmit}>
-        {cardPasswordDisplay && <CardPasswordInput />}
-        {cardCVCDisplay && <CVCInput />}
-        {cardExpiryDisplay && <CardExpiryInput />}
-        {cardBrandDisplay && <CardBrandInput />}
+        {<CardPasswordInput />}
+        {<CVCInput />}
+        {<CardExpiryInput />}
+        {<CardBrandInput />}
         <CardNumbersInput />
-        {isFormComplete && <Button text="확인" />}
+        {<Button text="확인" />}
       </form>
     </div>
   );
 };
 
-export default HomePage;
+export default CardRegisterPage;
