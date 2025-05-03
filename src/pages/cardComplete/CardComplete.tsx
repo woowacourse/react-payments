@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ROUTES } from '../../../app/routes';
-import { ICON_PATH } from '../../../shared/constants/cardImagePaths';
+import { ROUTES } from '../../app/routes';
+import { ICON_PATH } from '../../shared/constants/cardImagePaths';
 import './cardComplete.css';
 
 const CardComplete = () => {

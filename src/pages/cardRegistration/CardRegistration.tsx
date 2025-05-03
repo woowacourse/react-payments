@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../app/routes';
-import useCardInfo from '../../cardInfo/hooks/useCardInfo';
-import Preview from '../../preview/ui/Preview';
-import CardInfoContainer from '../../cardInfo/ui/CardInfoContainer';
+import { ROUTES } from '../../app/routes';
+import useCardInfo from '../../features/cardInfo/hooks/useCardInfo';
+import Preview from '../../features/preview/ui/Preview';
+import CardInfoContainer from '../../features/cardInfo/ui/CardInfoContainer';
 import './cardRegistration.css';
 
 const CardRegistration = () => {
