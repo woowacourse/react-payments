@@ -16,10 +16,14 @@ const StyledButton = styled.button`
 
 type ButtonProps = {
   onClick: () => void;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-function Button({ onClick }: ButtonProps) {
-  return <StyledButton onClick={onClick}>확인</StyledButton>;
+function Button({ onClick, ...rest }: ButtonProps) {
+  return (
+    <StyledButton onClick={onClick} {...rest}>
+      확인
+    </StyledButton>
+  );
 }
 
 export default Button;
