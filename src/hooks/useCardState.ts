@@ -13,6 +13,9 @@ export interface CardContextType {
   password: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
 
+  cardCompany: string;
+  setCardCompany: React.Dispatch<React.SetStateAction<string>>;
+
   expiryHelperText: string;
   setExpiryHelperText: React.Dispatch<React.SetStateAction<string>>;
   expiryErrorIndex: number | null;
@@ -35,6 +38,8 @@ export interface CardContextType {
 
   cardColor: string;
   setCardColor: React.Dispatch<React.SetStateAction<string>>;
+  isOpenSelectCardCompany: boolean;
+  setIsOpenSelectCardCompany: React.Dispatch<React.SetStateAction<boolean>>;
 
   showCardCompanySelect: boolean;
   setShowCardCompanySelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -72,7 +77,9 @@ export const useCardState = (): CardContextType => {
   const [CVC, setCVC] = useState("");
   const [password, setPassword] = useState("");
 
+  const [cardCompany, setCardCompany] = useState("");
   const [cardColor, setCardColor] = useState("#333333");
+  const [isOpenSelectCardCompany, setIsOpenSelectCardCompany] = useState(false);
 
   const [expiryHelperText, setExpiryHelperText] = useState("");
   const [expiryErrorIndex, setExpiryErrorIndex] = useState<number | null>(null);
@@ -104,7 +111,6 @@ export const useCardState = (): CardContextType => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // ✅ resetCardForm 추가
   const resetCardForm = () => {
     setCardNumbers(Array(CARD_VALIDATION_INFO.TOTAL_CARD_INPUTS).fill(""));
     setMonth("");
@@ -187,5 +193,9 @@ export const useCardState = (): CardContextType => {
     isSubmitted,
     setIsSubmitted,
     resetCardForm,
+    cardCompany,
+    setCardCompany,
+    isOpenSelectCardCompany,
+    setIsOpenSelectCardCompany,
   };
 };
