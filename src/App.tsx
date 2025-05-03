@@ -9,7 +9,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/payments"
+          path="/payments/"
           element={
             <CardFormProvider>
               <CardRegisterPage />
@@ -18,7 +18,7 @@ const App = () => {
         />
 
         <Route
-          path="/payments/complete"
+          path="/payments/complete/"
           element={<CardRegisterSuccessPage />}
         />
       </Routes>
