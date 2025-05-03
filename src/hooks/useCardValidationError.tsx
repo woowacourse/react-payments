@@ -97,12 +97,11 @@ function formReducer(state: FormState, action: Action): FormState {
   switch (action.type) {
     case 'VALIDATE_CARD_NUMBER': {
       const nums = action.payload.cardNumber || [];
-      const errors = nums.map((v) => v !== '' && v.length !== 4);
+      const errors = nums.map((v) => v.length !== 4);
 
       const message = errors.some(Boolean)
         ? '카드 번호는 4자리씩 입력해야 합니다.'
         : '';
-      // 아 그러면 저 위에 로직을 주고,
       return {
         ...state,
         isCardNumberError: errors,
