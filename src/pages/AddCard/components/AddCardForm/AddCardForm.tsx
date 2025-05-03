@@ -9,6 +9,9 @@ import { AddCardFormProps, CardStepKey } from '../../types';
 import { Fragment, ReactNode, useEffect, useState } from 'react';
 import { CARD_STEP, CARD_STEPS } from '../../constants';
 import { useNavigate } from 'react-router';
+import { SequenceType } from '../../../../domain/card/CardNumber/types';
+import { DateType } from '../../../../domain/card/CardExpirationDate/types';
+import { validateErrorMessages } from '../../../../utils';
 
 export default function AddCardForm({
   addFormState,
@@ -106,16 +109,18 @@ export default function AddCardForm({
     ),
   };
 
-  const isCardNumberError = Object.values(cardNumberErrorMessage).every((message) => message === '');
-  const isCardExpirationDateError = Object.values(cardExpirationDateErrorMessage).every((message) => message === '');
-  const isCardCVCNumberError = Object.values(cardCVCNumberErrorMessage).every((message) => message === '');
-  const isCardPasswordError = Object.values(cardPasswordErrorMessage).every((message) => message === '');
+  const isCardNumberValid = validateErrorMessages<SequenceType, Record<SequenceType, string>>(cardNumberErrorMessage);
+  const isCardExpirationDateValid = validateErrorMessages<DateType, Record<DateType, string>>(
+    cardExpirationDateErrorMessage,
+  );
+  const isCardCVCNumberValid = validateErrorMessages<string, string>(cardCVCNumberErrorMessage);
+  const isCardPasswordValid = validateErrorMessages<string, string>(cardPasswordErrorMessage);
 
   const button = isCardPasswordNextStep &&
-    isCardNumberError &&
-    isCardExpirationDateError &&
-    isCardCVCNumberError &&
-    isCardPasswordError && (
+    isCardNumberValid &&
+    isCardExpirationDateValid &&
+    isCardCVCNumberValid &&
+    isCardPasswordValid && (
       <S.CardAddFromButtonWrapper>
         <Button type={'submit'}>확인</Button>
       </S.CardAddFromButtonWrapper>

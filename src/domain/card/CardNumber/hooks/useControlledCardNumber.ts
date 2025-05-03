@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import { HandleInputChangeProps, SequenceType } from '../types';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
 import { CARD_NUMBER_ERROR_MESSAGE, CARD_NUMBER_MAX_LENGTH } from '../constants';
+import { validateErrorMessages } from '../../../../utils';
 
 export const useControlledCardNumber = () => {
   const [isCardNumberNextStep, setIsCardNumberNextStep] = useState(false);
@@ -46,8 +47,8 @@ export const useControlledCardNumber = () => {
   }, []);
 
   const isCardNumberFill = Object.values(cardNumber).every((number) => number.length === CARD_NUMBER_MAX_LENGTH);
-  const isError = Object.values(cardNumberErrorMessage).every((message) => message === '');
-  if (isCardNumberFill && isError && !isCardNumberNextStep) setIsCardNumberNextStep(true);
+  const isValid = validateErrorMessages<SequenceType, Record<SequenceType, string>>(cardNumberErrorMessage);
+  if (isCardNumberFill && isValid && !isCardNumberNextStep) setIsCardNumberNextStep(true);
 
   return { cardNumber, cardNumberErrorMessage, isCardNumberNextStep, cardNumberRefs, handleCardNumberInputChange };
 };

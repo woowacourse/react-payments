@@ -8,6 +8,7 @@ import {
 } from '../../../../constants';
 import { DateType, HandleInputChangeProps } from '../types';
 import { EXPIRATION_DATE_ERROR_MESSAGE, EXPIRATION_DATE_MAX_LENGTH } from '../constants';
+import { validateErrorMessages } from '../../../../utils';
 
 export const useControlledCardExpirationDate = () => {
   const [isCardExpirationDateNextStep, setIsCardExpirationDateNextStep] = useState(false);
@@ -87,8 +88,8 @@ export const useControlledCardExpirationDate = () => {
   const isCardNumberFill = Object.values(cardExpirationDate).every(
     (number) => number.length === EXPIRATION_DATE_MAX_LENGTH,
   );
-  const isError = Object.values(cardExpirationDateErrorMessage).every((message) => message === '');
-  if (isCardNumberFill && isError && !isCardExpirationDateNextStep) setIsCardExpirationDateNextStep(true);
+  const isValid = validateErrorMessages<DateType, Record<DateType, string>>(cardExpirationDateErrorMessage);
+  if (isCardNumberFill && isValid && !isCardExpirationDateNextStep) setIsCardExpirationDateNextStep(true);
 
   return {
     cardExpirationDate,
