@@ -4,9 +4,8 @@ import Input from '../Input';
 import InputGroup from '../InputGroup';
 import { ErrorMessagesType } from '../../types/ErrorMessagesType';
 import { CardInputProps } from '../../types/CardInputTypes';
-
+import { validateCardCVC } from '../../validation/validation';
 interface CVCInputProps {
-  validateCardCVC: (value: string) => string | undefined;
   handleErrorMessages: (key: keyof ErrorMessagesType, message: string) => void;
   setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
   errorMessages: ErrorMessagesType;
@@ -14,7 +13,6 @@ interface CVCInputProps {
 }
 
 export const CVCInput: React.FC<CVCInputProps> = ({
-  validateCardCVC,
   handleErrorMessages,
   errorMessages,
   setCardInput,

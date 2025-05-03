@@ -2,11 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Card from '../component/card/Card';
 import styled from 'styled-components';
 import { CardInputProps } from '../types/CardInputTypes';
-import {
-  validateCardExpirationDateMM,
-  validateCardExpirationDateYY,
-  validateCardCVC,
-} from '../validation/validation';
+
 import { justifyBrandLogo } from './util/justifyBrandLogo';
 import { CardNumberInput } from '../component/cardDetails/CardNumberInput';
 import { ExpiryDateInput } from '../component/cardDetails/ExpiryDateInput';
@@ -15,7 +11,6 @@ import { ErrorMessagesType } from '../types/ErrorMessagesType';
 import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
 import { SecretNumberInput } from '../component/cardDetails/SecretNumberInput';
 import { SubmitButton } from '../component/SubmitButton';
-
 import {
   isCardNumberComplete,
   isCardBrandComplete,
@@ -164,8 +159,6 @@ const AddCard = () => {
           cardInput={cardInput}
           errorMessages={errorMessages}
           handlePeriodErrorMessages={handlePeriodErrorMessages}
-          validateCardExpirationDateMM={validateCardExpirationDateMM}
-          validateCardExpirationDateYY={validateCardExpirationDateYY}
           setCardInput={setCardInput}
           handleErrorMessages={handleErrorMessages}
         />
@@ -181,7 +174,6 @@ const AddCard = () => {
         <CVCInput
           cardInput={cardInput}
           errorMessages={errorMessages}
-          validateCardCVC={validateCardCVC}
           setCardInput={setCardInput}
           handleErrorMessages={handleErrorMessages}
         />
