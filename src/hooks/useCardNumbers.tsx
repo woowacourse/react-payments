@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CARD_NUMBER_RULE } from '../constants/cardValidationRule';
 import { CARD_NUMBER_ERROR } from '../constants/errorMessage';
 
@@ -44,11 +44,13 @@ export function useCardNumbers(): ValitationResult {
     setNumbers(newNumbers);
 
     validate(value, index);
+  };
 
-    newNumbers.every(
+  useEffect(() => {
+    numbers.every(
       (numbers) => numbers.length === CARD_NUMBER_RULE.MAX_LENGTH
     ) && setIsComplete(true);
-  };
+  }, [numbers]);
 
   const validate = (value: string, index: number) => {
     if (value === '') {

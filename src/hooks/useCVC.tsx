@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CVC_RULE } from '../constants/cardValidationRule';
 import { CVC_ERROR } from '../constants/errorMessage';
 
@@ -20,9 +20,11 @@ export default function useCVCNumber(): ValitationResult {
     setCVC(value);
 
     validate(value);
-
-    if (value.length === CVC_RULE.MAX_LENGTH) setIsComplete(true);
   };
+
+  useEffect(() => {
+    if (CVC.length === CVC_RULE.MAX_LENGTH) setIsComplete(true);
+  }, [CVC]);
 
   const validate = (value: string) => {
     if (value === '') {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { EXPIRYDATE_RULE } from '../constants/cardValidationRule';
 import { EXPIRYDATE_ERROR } from '../constants/errorMessage';
 
@@ -52,13 +52,6 @@ export default function useExpiryDate(): ValitationResult {
       setDate((prev) => ({ ...prev, month: value }));
 
       validateMonth(value);
-
-      if (
-        value.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH &&
-        date.year.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH
-      ) {
-        setIsComplete(true);
-      }
     }
 
     if (dateName === 'year') {
@@ -68,14 +61,16 @@ export default function useExpiryDate(): ValitationResult {
 
       validateYear(value);
     }
+  };
 
+  useEffect(() => {
     if (
-      value.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH &&
-      date.month.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH
+      date.month.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH &&
+      date.year.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH
     ) {
       setIsComplete(true);
     }
-  };
+  }, [date]);
 
   const validateMonth = (value: string) => {
     if (value === '') {

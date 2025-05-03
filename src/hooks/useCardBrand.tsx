@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type ValitationResult = {
   brand: string;
@@ -16,9 +16,11 @@ export default function useCardBrand(): ValitationResult {
     setBrand(value);
 
     validate(value);
-
-    if (value !== '') setIsComplete(true);
   };
+
+  useEffect(() => {
+    if (brand !== '') setIsComplete(true);
+  }, [brand]);
 
   const validate = (value: string) => {
     setBrand(value);
