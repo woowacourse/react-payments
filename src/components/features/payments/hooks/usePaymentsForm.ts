@@ -118,18 +118,17 @@ function usePaymentsForm() {
     });
   };
 
-  const isStepCompleteMap: Record<InputNameType, boolean> = {
+  const isStepCompleteMap: Partial<Record<InputNameType, boolean>> = {
     cardNumber: isCardNumberInputComplete,
     cardBank: cardBankSelected,
     expirationDate: isExpirationDateInputComplete,
     CVC: isCVCInputComplete,
-    cardPassword: isCardPasswordInputComplete, // 마지막 단계는 사용 안 해도 됨
   };
 
   useEffect(
     function moveToNextInputStep() {
       const currentIndex = INPUT_STEP.indexOf(inputStep);
-      const currentStep = INPUT_STEP[currentIndex];
+      const currentStep = inputStep;
 
       if (isStepCompleteMap[currentStep]) {
         const nextStep = INPUT_STEP[currentIndex + 1];
