@@ -8,7 +8,7 @@ const meta = {
   component: AnnounceContainer,
   decorators: [
     (Story) => (
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/announce']}>
         {' '}
         <CardInfoProvider>
           <Story />
