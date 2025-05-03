@@ -6,10 +6,10 @@ import { validateCardForm } from '../services/cardFormService';
 export const useFormSteps = (
   cardInput: CardInputProps,
   errorMessages: ErrorMessagesType,
-  formSteps: Array<{
-    key: string;
-    condition: () => boolean;
-    component: React.ReactNode;
+  formSteps: ReadonlyArray<{
+    readonly key: string;
+    readonly condition: () => boolean;
+    readonly component: React.ReactNode;
   }>,
 ) => {
   const sectionRefs = {

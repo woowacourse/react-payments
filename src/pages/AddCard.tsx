@@ -129,7 +129,7 @@ const AddCard = () => {
         />
       ),
     },
-  ];
+  ] as const;
 
   const { sectionRefs, visibleSteps, renderOrder } = useFormSteps(
     cardInput,
@@ -155,8 +155,8 @@ const AddCard = () => {
             return (
               <FormSection
                 key={step.key}
-                isVisible={visibleSteps[step.key as keyof typeof visibleSteps]}
-                ref={sectionRefs[step.key as keyof typeof sectionRefs]}
+                isVisible={visibleSteps[step.key]}
+                ref={sectionRefs[step.key]}
               >
                 {step.component}
               </FormSection>
