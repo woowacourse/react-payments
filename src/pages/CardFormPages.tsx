@@ -3,40 +3,27 @@ import CardNumbersInputSection from '@InputSectionComponents/CardNumbersInputSec
 import CardExpirationDateInputSection from '@InputSectionComponents/CardExpirationDateInputSection';
 import CardDisplay from '@CardDisplayComponents/CardDisplay';
 import styles from './cardForm.module.css';
-import {  useState } from 'react';
+import { useState } from 'react';
 import buttonStyle from '../css/button.module.css';
 import CardCompanySelectSection from '@/components/SelectSection/CardCompanySelectSection';
 import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
 import { useNavigate } from 'react-router-dom';
-import { CardNumbersOptions } from '@/types/CardNumbers';
-import { CardExpirationDateOptions } from '@/types/CardExpirationDateOptions';
-import { useCardCVCNumberOptions } from '@/hooks/useCardCVCNumber';
 import useFieldCompletion from '@/hooks/useFieldCompletion';
-import { CardPasswordOptions } from '@/hooks/useCardPassword';
+
 import CardPasswordInputSection from '@/components/InputSection/CardPasswordInputSection';
 import useCardFormFlow from '@/hooks/useCardFormFlow';
+import useCardForm from '@/hooks/useCardForm';
 
-type CardFormPagesProps = {
-  cardNumbersForm: CardNumbersOptions;
-  cardCVCNumberForm: useCardCVCNumberOptions;
-  cardCompanyForm: {
-    cardCompany: string;
-    setCardCompany: (company: string) => void;
-  };
+const CardFormPages = () => {
+  const {
+    cardNumbersForm,
+    cardCVCNumberForm,
+    cardCompanyForm,
+    cardExpirationDateForm,
+    cardPasswordForm,
+    canSubmit,
+  } = useCardForm();
 
-  cardExpirationDateForm: CardExpirationDateOptions;
-  cardPasswordForm: CardPasswordOptions;
-  canSubmit: () => boolean;
-};
-
-const CardFormPages = ({
-  cardNumbersForm,
-  cardCVCNumberForm,
-  cardCompanyForm,
-  cardExpirationDateForm,
-  cardPasswordForm,
-  canSubmit,
-}: CardFormPagesProps) => {
   const [isUserFocusing, setIsUserFocusing] = useState(false);
 
   const { isFieldCompletetion, resetFieldCompletetion } = useFieldCompletion({
@@ -50,7 +37,9 @@ const CardFormPages = ({
   const handleSubmit = () => {
     setIsUserFocusing(false);
     resetFieldCompletetion();
-    nav('/complete');
+    nav('/complete', {
+      state: { cardFirstNumber: cardNumbersForm.cardNumbers.firstNumber },
+    });
   };
 
   const {

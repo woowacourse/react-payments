@@ -2,18 +2,13 @@ import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
 import CheckIcon from '@assets/checkIcon.png';
 import buttonStyle from '../css/button.module.css';
 import styles from './cardRegistrationComplete.module.css';
-import { useNavigate } from 'react-router-dom';
-const CardRegistrationComplete = ({
-  firstNumber,
-  resetForm,
-}: {
-  firstNumber: string;
-  resetForm: () => void;
-}) => {
+import { useLocation, useNavigate } from 'react-router-dom';
+const CardRegistrationComplete = () => {
   const nav = useNavigate();
+  const location = useLocation();
+  const { cardFirstNumber } = location.state as { cardFirstNumber: string };
 
   const clickConfirmButton = () => {
-    resetForm();
     nav('/');
   };
 
@@ -21,7 +16,7 @@ const CardRegistrationComplete = ({
     <div className={styles.container}>
       <img src={CheckIcon} alt="체크 아이콘" className={styles.checkIcon} />
       <div className={styles.text}>
-        {firstNumber}로 시작하는
+        {cardFirstNumber}로 시작하는
         <br /> BC카드가 등록되었어요
       </div>
       <div className={buttonStyle.buttonContainer}>

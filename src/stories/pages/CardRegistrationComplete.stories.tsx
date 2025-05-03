@@ -21,9 +21,4 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    firstNumber: '1234',
-    resetForm: () => {},
-  },
-};
+export const Default: Story = {};
