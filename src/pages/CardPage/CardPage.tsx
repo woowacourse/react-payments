@@ -10,7 +10,7 @@ import PasswordInput from './components/PasswordInput/PasswordInput';
 import { useSelect } from '../../hooks/useSelect';
 import Button from '../../components/Button/Button';
 import useTotalInputValidation from '../../hooks/useTotalInputValidation';
-import useStep from '../../hooks/useStep';
+import useStep, { InputStep } from '../../hooks/useStep';
 import { useCardRouter } from '../../hooks/useCardRouter';
 import { ButtonContainer, StyledCardPage } from './CardPage.styles';
 
@@ -26,7 +26,7 @@ const CardPage = () => {
   const [cvc, handleCVCInput] = useInput(['']);
   const [password, handlePasswordInput] = useInput(['']);
 
-  const { goToNextStep, isPassedStep, InputStep } = useStep();
+  const { goToNextStep, isPassedStep } = useStep();
   const { updateValidity, isAllValid } = useTotalInputValidation(5);
   const { navigateToCardComplete } = useCardRouter();
 

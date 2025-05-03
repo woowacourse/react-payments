@@ -24,8 +24,7 @@ function useStep(initialStep: InputStep = InputStep.CARD_NUMBER) {
   return {
     currentStep,
     goToNextStep,
-    isPassedStep,
-    InputStep,
+    isPassedStep
   };
 }
 
