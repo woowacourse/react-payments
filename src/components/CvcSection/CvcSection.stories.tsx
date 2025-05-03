@@ -20,7 +20,7 @@ export const Default: Story = {
     const [cvc, setCvc] = useState(initialCvc);
     const [cvcError, setCvcError] = useState('');
 
-    const handleCvcChange = (key: string, value: string) => {
+    const handleCvcChange = (_: string, value: string) => {
       setCvc(value);
       setCvcError('');
     };
@@ -38,7 +38,7 @@ export const Valid: Story = {
     const [cvc, setCvc] = useState(initialCvc);
     const [cvcError, setCvcError] = useState('');
 
-    const handleCvcChange = (key: string, value: string) => {
+    const handleCvcChange = (_: string, value: string) => {
       setCvc(value);
       setCvcError('');
     };
@@ -56,7 +56,7 @@ export const InValid: Story = {
     const [cvc, setCvc] = useState(initialCvc);
     const [cvcError, setCvcError] = useState(initialError);
 
-    const handleCvcChange = (key: string, value: string) => {
+    const handleCvcChange = (_: string, value: string) => {
       setCvc(value);
       setCvcError('');
     };
