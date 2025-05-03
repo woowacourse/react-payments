@@ -1,7 +1,7 @@
 import { useId } from 'react';
-import Input from '../../common/Input/Input';
-import useInputFocus from '../../../hooks/useInputFocus';
-import LabeledInput from '../../common/LabeledInput/LabeledInput';
+import Input from '../../../common/Input/Input';
+import useInputFocus from '../../../../hooks/useInputFocus';
+import LabeledInput from '../../../common/LabeledInput/LabeledInput';
 
 interface CardNumberFieldProps {
   cardNumber: string[];

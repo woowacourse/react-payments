@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
-import { CARD_COMPANY, CARD_COMPANY_NAME } from '../../constants/cardCompany';
+import {
+  CARD_COMPANY,
+  CARD_COMPANY_NAME,
+} from '../../../constants/cardCompany';
 
 interface CardCompanySelectProps {
   cardCompany: keyof typeof CARD_COMPANY_NAME | undefined;

@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import CardInputSection from '../CardInputSection/CardInputSection';
-import CardNumberField from '../CardNumberField/CardNumberField';
+import CardInputSection from '../cardInfoInputSections/CardInputSection/CardInputSection';
+import CardNumberField from '../cardInfoFields/CardNumberField/CardNumberField';
 import { CARD_COMPANY_NAME } from '../../constants/cardCompany';
-import CardValidityPeriodField from '../CardValidityPeriodField/CardValidityPeriodField';
+import CardValidityPeriodField from '../cardInfoFields/CardValidityPeriodField/CardValidityPeriodField';
 import useCardValidationError from '../../../hooks/useCardValidationError';
-import CardCompanySection from '../CardCompanySection/CardCompanySection';
-import CardCVCSection from '../CardCVCSection/CardCVCSection';
-import CardPasswordSection from '../CardPasswordSection/CardPasswordSection';
+import CardCompanySection from '../cardInfoInputSections/CardCompanySection/CardCompanySection';
+import CardCVCSection from '../cardInfoInputSections/CardCVCSection/CardCVCSection';
+import CardPasswordSection from '../cardInfoInputSections/CardPasswordSection/CardPasswordSection';
 
 interface CardFormProps {
   cardNumber: string[];

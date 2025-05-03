@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import CardInputSection from '../CardInputSection/CardInputSection';
-import CardCVCField from '../CardCVCField/CardCVCField';
+import CardCVCField from '../../cardInfoFields/CardCVCField/CardCVCField';
 
 interface CardCVCSectionProps {
   cardCVC: string;

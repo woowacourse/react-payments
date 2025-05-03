@@ -1,6 +1,6 @@
 import { useId } from 'react';
-import Input from '../../common/Input/Input';
-import LabeledInput from '../../common/LabeledInput/LabeledInput';
+import Input from '../../../common/Input/Input';
+import LabeledInput from '../../../common/LabeledInput/LabeledInput';
 
 interface CardCVCFieldProps {
   cardCVC: string;

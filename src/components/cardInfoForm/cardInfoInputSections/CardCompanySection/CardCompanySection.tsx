@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import CardInputSection from '../CardInputSection/CardInputSection';
-import CardCompanySelect from '../CardCompanySelect/CardCompanySelect';
+import CardCompanySelect from '../../cardInfoFields/CardCompanySelect/CardCompanySelect';
 
 interface CardCompanySectionProps {
   cardCompany:

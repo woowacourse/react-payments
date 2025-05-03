@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import CardInputSection from '../CardInputSection/CardInputSection';
-import CardPasswordField from '../CardPasswordField/CardPasswordField';
+import CardPasswordField from '../../cardInfoFields/CardPasswordField/CardPasswordField';
 
 interface CardPasswordSectionProps {
   cardPassword: string;
