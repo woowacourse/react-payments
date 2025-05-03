@@ -17,7 +17,6 @@ import styles from "../css/cardForm.module.css";
 import Button from "./common/Button/Button";
 import NewCard from "../types/NewCard";
 
-
 const COMPANIES = [
   { value: "BC카드", label: "BC카드", color: "#F04651" },
   { value: "신한카드", label: "신한카드", color: "#0046FF" },
@@ -42,7 +41,7 @@ const isFulledInput = (items: { [key: string]: string }, condition: number) => {
 };
 
 interface CardProps {
-  setNewCard: (cardData: NewCard | {}) => void;
+  setNewCard: (cardData: NewCard | object) => void;
 }
 
 function Card({ setNewCard }: CardProps) {
@@ -74,12 +73,12 @@ function Card({ setNewCard }: CardProps) {
     errorMessage: cardPasswordErrorMessage,
   } = useCardPassword();
 
-  const { 
-    cardCVCNumber, 
+  const {
+    cardCVCNumber,
     handleCardCVCNumberChange,
-     isError: isCardCVCError,
-    errorMessage: cardCVCErrorMessage, 
-    } = useCardCVCNumber();
+    isError: isCardCVCError,
+    errorMessage: cardCVCErrorMessage,
+  } = useCardCVCNumber();
 
   const isFulledForm =
     isFulledInput(cardNumbers, 4) &&
@@ -120,12 +119,13 @@ function Card({ setNewCard }: CardProps) {
           )}
           {isFulledInput(cardExpirationDate, 2) && (
             <CardCVCNumberInputSection
-            cardCVCNumber={cardCVCNumber}
-            handleCardCVCNumberChange={handleCardCVCNumberChange}
-            isError={isCardCVCError}
-            errorMessage={cardCVCErrorMessage}
-            setRef={setRef}
-            moveFocus={moveFocus} />
+              cardCVCNumber={cardCVCNumber}
+              handleCardCVCNumberChange={handleCardCVCNumberChange}
+              isError={isCardCVCError}
+              errorMessage={cardCVCErrorMessage}
+              setRef={setRef}
+              moveFocus={moveFocus}
+            />
           )}
           {cardCompany.length > 0 && (
             <CardExpirationDateInputSection

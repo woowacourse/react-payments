@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useAutoFocus } from "../../hooks/useAutoFocus";
 import { CardNumbersKeys, CardNumbersOptions } from "../../types/CardNumbers";
 import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputField from "../common/InputField/InputField";
@@ -18,14 +20,6 @@ const CardNumbersInputSection = ({
   setRef,
   moveFocus,
 }: CardNumbersInputSectionProps) => {
-  const handleChange =
-    (field: CardNumbersKeys, index: number) => (value: string) => {
-      handleCardNumbersChange(field)(value);
-      if (cardNumbers[field].length === 4) {
-        moveFocus(index);
-      }
-    };
-
   return (
     <>
       <InputSection
@@ -43,7 +37,13 @@ const CardNumbersInputSection = ({
             key={index}
             id={index}
             value={cardNumbers[field as CardNumbersKeys]}
-            onChange={handleChange(field as CardNumbersKeys, index)}
+            onChange={(value: string) =>
+              handleCardNumbersChange(field as CardNumbersKeys)(
+                value,
+                index,
+                moveFocus
+              )
+            }
             isError={isError[field as CardNumbersKeys]}
             placeholder="1234"
             setRef={setRef}
