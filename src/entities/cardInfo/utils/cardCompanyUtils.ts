@@ -4,10 +4,12 @@ import {
   CARD_COMPANIES_DEFAULT_COLOR,
 } from '../constants/cardCompanyConstants';
 
-export const getCardCompanyKey = (companyName: string): keyof typeof CARD_COMPANIES | undefined => {
+type CardCompanyKey = keyof typeof CARD_COMPANIES;
+
+export const getCardCompanyKey = (companyName: string): CardCompanyKey | undefined => {
   const companyKey = Object.keys(CARD_COMPANIES).find(
-    (key) => CARD_COMPANIES[key as keyof typeof CARD_COMPANIES] === companyName,
-  ) as keyof typeof CARD_COMPANIES | undefined;
+    (key) => CARD_COMPANIES[key as CardCompanyKey] === companyName,
+  ) as CardCompanyKey | undefined;
 
   return companyKey;
 };
