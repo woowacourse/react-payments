@@ -18,7 +18,7 @@ function CardExpirationPeriodInputs({
 
   return (
     <StyledContainer>
-      <label htmlFor="">유효 기간</label>
+      <label>유효 기간</label>
       <form>
         <StyledInputWrap>
           {inputKeys.map((key) => (
