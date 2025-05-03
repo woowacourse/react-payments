@@ -14,7 +14,7 @@ export function useCvcInput() {
     return '';
   }, [cvc]);
 
-  const handleCvcChange = (key: string, value: string) => {
+  const handleCvcChange = (_: string, value: string) => {
     setCvc(value);
   };
 

@@ -4,7 +4,7 @@ import styles from './CvcSection.module.css';
 
 type Props = {
   cvc: string;
-  handleCvcChange: (key: string, value: string) => void;
+  handleCvcChange: (_: string, value: string) => void;
   cvcError: string;
 };
 
