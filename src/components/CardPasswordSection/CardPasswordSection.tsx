@@ -4,7 +4,7 @@ import styles from './CardPasswordSection.module.css';
 
 type Props = {
   cardPassword: string;
-  handleCardPasswordChange: (key: string, value: string) => void;
+  handleCardPasswordChange: (_: string, value: string) => void;
   cardPasswordError: string;
 };
 

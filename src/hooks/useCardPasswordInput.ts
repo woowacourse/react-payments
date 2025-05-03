@@ -14,7 +14,7 @@ export function useCardPasswordInput() {
     return '';
   }, [cardPassword]);
 
-  const handleCardPasswordChange = (key: string, value: string) => {
+  const handleCardPasswordChange = (_: string, value: string) => {
     setCardPassword(value);
   };
 

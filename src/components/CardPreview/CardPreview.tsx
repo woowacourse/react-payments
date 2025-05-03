@@ -4,7 +4,7 @@ import styles from './CardPreview.module.css';
 type Props = {
   numbers: CardNumber;
   cardLogo: CardLogo;
-  cardCompany: CardCompany;
+  cardCompany: CardCompany | '';
   cardExpiration: CardExpiration;
 };
 

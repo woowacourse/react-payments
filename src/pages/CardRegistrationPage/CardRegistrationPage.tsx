@@ -19,7 +19,7 @@ type Props = {
   cardNumbers: CardNumber;
   handleCardNumberChange: (key: keyof CardNumber, value: string) => void;
   cardNumberError: string;
-  cardCompany: CardCompany;
+  cardCompany: CardCompany | '';
   handleSelectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
 

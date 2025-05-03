@@ -4,7 +4,7 @@ import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
 import { CardCompany } from '../../types/card';
 
 type Props = {
-  cardCompany: CardCompany;
+  cardCompany: CardCompany | '';
   handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 

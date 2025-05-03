@@ -6,7 +6,7 @@ import { CardCompany, CardNumber } from '../../types/card';
 
 type Props = {
   cardNumbers: CardNumber;
-  cardCompany: CardCompany;
+  cardCompany: CardCompany | '';
 };
 
 export default function CardRegistrationCompletedPage({ cardNumbers, cardCompany }: Props) {
