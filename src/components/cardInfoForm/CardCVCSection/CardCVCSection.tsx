@@ -1,0 +1,45 @@
+import { useRef } from 'react';
+import CardInputSection from '../CardInputSection/CardInputSection';
+import CardCVCField from '../CardCVCField/CardCVCField';
+
+interface CardCVCSectionProps {
+  cardCVC: string;
+  onChangeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isError: boolean;
+  errorMessage: string;
+  isValid: () => void;
+}
+
+function CardCVCSection({
+  cardCVC,
+  onChangeCardCVC,
+  isError,
+  errorMessage,
+  isValid,
+}: CardCVCSectionProps) {
+  const showRef = useRef(false);
+
+  if (!showRef.current && isValid()) {
+    showRef.current = true;
+  }
+  const show = showRef.current;
+
+  return (
+    <>
+      {show ? (
+        <CardInputSection
+          title="CVC 번호를 입력해 주세요"
+          errorMessage={errorMessage}
+        >
+          <CardCVCField
+            cardCVC={cardCVC}
+            isError={isError}
+            onChange={onChangeCardCVC}
+          />
+        </CardInputSection>
+      ) : null}
+    </>
+  );
+}
+
+export default CardCVCSection;

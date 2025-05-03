@@ -1,6 +1,5 @@
-import { useEffect, useReducer } from 'react';
+import { useReducer } from 'react';
 import { checkValideDate } from '../utils/checkValideDate';
-import { CARD_IFNO_INPUT_STEP } from '../App';
 
 interface Action {
   type:
@@ -103,6 +102,7 @@ function formReducer(state: FormState, action: Action): FormState {
       const message = errors.some(Boolean)
         ? '카드 번호는 4자리씩 입력해야 합니다.'
         : '';
+      // 아 그러면 저 위에 로직을 주고,
       return {
         ...state,
         isCardNumberError: errors,
@@ -153,22 +153,7 @@ function formReducer(state: FormState, action: Action): FormState {
   }
 }
 
-interface useCardValidationErrorProps {
-  cardNumber: string[];
-  cardCVC: string;
-  cardValidityPeriod: {
-    month: string;
-    year: string;
-  };
-  showNextStep: (step: keyof typeof CARD_IFNO_INPUT_STEP) => void;
-}
-
-function useCardValidationError({
-  cardNumber,
-  cardCVC,
-  cardValidityPeriod,
-  showNextStep,
-}: useCardValidationErrorProps) {
+function useCardValidationError() {
   const [state, dispatch] = useReducer(formReducer, initialState);
 
   const validateCardNumber = (cardNumber: string[]) =>
@@ -199,34 +184,6 @@ function useCardValidationError({
       payload: { cardPassword },
     });
   };
-
-  useEffect(() => {
-    if (
-      state.isCardNumberError.every((e) => !e) &&
-      cardNumber.every((e) => e !== '')
-    ) {
-      showNextStep(CARD_IFNO_INPUT_STEP.cardCompany);
-    }
-
-    if (
-      Object.values(state.isErrorCardValidityPeriod).every((e) => !e) &&
-      Object.values(cardValidityPeriod).every((e) => e !== '')
-    ) {
-      showNextStep(CARD_IFNO_INPUT_STEP.cvc);
-    }
-
-    if (cardCVC !== '' && !state.isCardCVCError) {
-      showNextStep(CARD_IFNO_INPUT_STEP.password);
-    }
-  }, [
-    cardNumber,
-    cardValidityPeriod,
-    cardCVC,
-    state.isCardNumberError,
-    state.isErrorCardValidityPeriod,
-    state.isCardCVCError,
-    showNextStep,
-  ]);
 
   return {
     state,

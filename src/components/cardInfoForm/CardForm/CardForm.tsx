@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import CardInputSection from '../CardInputSection/CardInputSection';
 import CardNumberField from '../CardNumberField/CardNumberField';
-import CardCVCField from '../CardCVCField/CardCVCField';
-import { CARD_IFNO_INPUT_STEP } from '../../../App';
-import CardCompanySelect from '../CardCompanySelect/CardCompanySelect';
 import { CARD_COMPANY_NAME } from '../../constants/cardCompany';
 import CardValidityPeriodField from '../CardValidityPeriodField/CardValidityPeriodField';
-import CardPasswordField from '../CardPasswordField/CardPasswordField';
 import useCardValidationError from '../../../hooks/useCardValidationError';
-import { useNavigate } from 'react-router-dom';
+import CardCompanySection from '../CardCompanySection/CardCompanySection';
+import CardCVCSection from '../CardCVCSection/CardCVCSection';
+import CardPasswordSection from '../CardPasswordSection/CardPasswordSection';
 
 interface CardFormProps {
   cardNumber: string[];
@@ -41,30 +39,13 @@ function CardForm({
   setCardValidityPeriod,
   setCardPassword,
 }: CardFormProps) {
-  const [show, setShow] = useState({
-    cardCompany: false,
-    cvc: false,
-    password: false,
-  });
-
-  const showNextStep = (step: keyof typeof CARD_IFNO_INPUT_STEP) => {
-    if (show[step]) return;
-
-    setShow((prev) => ({ ...prev, [step]: true }));
-  };
-
   const {
     state,
     validateCardNumber,
     validateCardCVC,
     validatePeriod,
     validatePassword,
-  } = useCardValidationError({
-    cardNumber,
-    cardCVC,
-    cardValidityPeriod,
-    showNextStep,
-  });
+  } = useCardValidationError();
 
   const onChangeCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -146,33 +127,40 @@ function CardForm({
     return !isError && !isNoneValue;
   };
 
+  const isCardNumberValid = () => {
+    return (
+      state.isCardNumberError.every((e) => !e) &&
+      cardNumber.every((e) => e !== '')
+    );
+  };
+
+  const isCardValidityPeriodValid = () => {
+    return (
+      Object.values(state.isErrorCardValidityPeriod).every((e) => !e) &&
+      Object.values(cardValidityPeriod).every((e) => e !== '')
+    );
+  };
+
+  const isCardCVCValid = () => {
+    return cardCVC !== '' && !state.isCardCVCError;
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
-      {show.password && (
-        <CardInputSection
-          title="비밀번호를 입력해 주세요"
-          description="앞의 2자리를 입력해주세요"
-          errorMessage={state.cardPasswordErrorMessage}
-        >
-          <CardPasswordField
-            cardPassword={cardPassword}
-            isError={state.isErrorCardPassword}
-            onChange={onChangeCardPassword}
-          />
-        </CardInputSection>
-      )}
-      {show.cvc && (
-        <CardInputSection
-          title="CVC 번호를 입력해 주세요"
-          errorMessage={state.cardCVCErrorMessage}
-        >
-          <CardCVCField
-            cardCVC={cardCVC}
-            isError={state.isCardCVCError}
-            onChange={onChangeCardCVC}
-          />
-        </CardInputSection>
-      )}
+      <CardPasswordSection
+        cardPassword={cardPassword}
+        onChangeCardPassword={onChangeCardPassword}
+        isError={state.isErrorCardPassword}
+        errorMessage={state.cardPasswordErrorMessage}
+        isValid={isCardCVCValid}
+      />
+      <CardCVCSection
+        cardCVC={cardCVC}
+        onChangeCardCVC={onChangeCardCVC}
+        isError={state.isCardCVCError}
+        errorMessage={state.cardCVCErrorMessage}
+        isValid={isCardValidityPeriodValid}
+      />
       {cardCompany && (
         <CardInputSection
           title="카드 유효기간을 입력해 주세요"
@@ -186,18 +174,11 @@ function CardForm({
           />
         </CardInputSection>
       )}
-      {show.cardCompany && (
-        <CardInputSection
-          title="카드사를 선택해 주세요"
-          description="현재 국내 카드사만 가능합니다."
-          errorMessage={''}
-        >
-          <CardCompanySelect
-            cardCompany={cardCompany}
-            onChange={handleChangeCardCompany}
-          />
-        </CardInputSection>
-      )}
+      <CardCompanySection
+        cardCompany={cardCompany}
+        handleChangeCardCompany={handleChangeCardCompany}
+        isValid={isCardNumberValid}
+      />
       <CardInputSection
         title="결제할 카드 번호 입력"
         errorMessage={state.cardNumberErrorMessage}
