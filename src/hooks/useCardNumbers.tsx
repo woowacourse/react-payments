@@ -6,7 +6,7 @@ type ValitationResult = {
   numbers: string[];
   error: errorType[];
   updateCardNumbers: (value: string, index: number) => void;
-  isComplete: boolean;
+  isDisplay: boolean;
 };
 
 type errorType = {
@@ -24,7 +24,7 @@ export function useCardNumbers(): ValitationResult {
   const [error, setError] = useState<errorType[]>(
     Array.from({ length: CARD_NUMBER_RULE.MAX_LENGTH }, () => initialDate)
   );
-  const [isComplete, setIsComplete] = useState(false);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   const updateError = (index: number, isError: boolean, message: string) => {
     setError((prev) => {
@@ -49,7 +49,7 @@ export function useCardNumbers(): ValitationResult {
   useEffect(() => {
     numbers.every(
       (numbers) => numbers.length === CARD_NUMBER_RULE.MAX_LENGTH
-    ) && setIsComplete(true);
+    ) && setIsDisplay(true);
   }, [numbers]);
 
   const validate = (value: string, index: number) => {
@@ -78,5 +78,5 @@ export function useCardNumbers(): ValitationResult {
     updateError(index, false, '');
   };
 
-  return { numbers, error, updateCardNumbers, isComplete };
+  return { numbers, error, updateCardNumbers, isDisplay };
 }

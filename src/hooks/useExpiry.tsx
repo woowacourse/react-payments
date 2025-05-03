@@ -6,7 +6,7 @@ type ValitationResult = {
   date: dateType;
   error: errorType[];
   updateDate: (value: string, dateName: string) => void;
-  isComplete: boolean;
+  isDisplay: boolean;
 };
 
 type dateType = {
@@ -33,7 +33,7 @@ const initialDate = [
 export default function useExpiryDate(): ValitationResult {
   const [date, setDate] = useState<dateType>({ month: '', year: '' });
   const [error, setError] = useState<errorType[]>(initialDate);
-  const [isComplete, setIsComplete] = useState(false);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   const updateError = (index: number, isError: boolean, message: string) => {
     setError((prev) => {
@@ -68,7 +68,7 @@ export default function useExpiryDate(): ValitationResult {
       date.month.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH &&
       date.year.length === EXPIRYDATE_RULE.DATE_MAX_LENGTH
     ) {
-      setIsComplete(true);
+      setIsDisplay(true);
     }
   }, [date]);
 
@@ -120,5 +120,5 @@ export default function useExpiryDate(): ValitationResult {
     updateError(1, false, '');
   };
 
-  return { date, error, updateDate, isComplete };
+  return { date, error, updateDate, isDisplay };
 }

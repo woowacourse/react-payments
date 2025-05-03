@@ -13,33 +13,25 @@ const CardRegisterPage = () => {
   const { cardNumbers, cardBrand, expiryDate, CVCNumber, isFormComplete } =
     useCardFormContext();
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = {
-      // cardNumbers,
-      // brand,
+      numbers: cardNumbers.numbers,
+      brand: cardBrand.brand,
     };
     navigate('/react-payments/complete', { state: formData });
   };
-
-  // useEffect(() => {
-  //   resetForm();
-  // }, [location.state]);
-
-  // const isFormComplete =
-  // cardNumberComplete &&
-  // brandComplete; -> Context
 
   return (
     <div className="app">
       <CardPreview />
       <form onSubmit={handleSubmit}>
-        {CVCNumber.isComplete && <CardPasswordInput />}
-        {expiryDate.isComplete && <CVCInput />}
-        {cardBrand.isComplete && <CardExpiryInput />}
-        {cardNumbers.isComplete && <CardBrandInput />}
+        {CVCNumber.isDisplay && <CardPasswordInput />}
+        {expiryDate.isDisplay && <CVCInput />}
+        {cardBrand.isDisplay && <CardExpiryInput />}
+        {cardNumbers.isDisplay && <CardBrandInput />}
         <CardNumbersInput />
         {isFormComplete && <Button text="확인" />}
       </form>

@@ -6,13 +6,13 @@ type ValitationResult = {
   CVC: string;
   error: { isValid: boolean; errorMessage: string };
   udpateCVC: (value: string) => void;
-  isComplete: boolean;
+  isDisplay: boolean;
 };
 
 export default function useCVCNumber(): ValitationResult {
   const [CVC, setCVC] = useState('');
   const [error, setError] = useState({ isValid: false, errorMessage: '' });
-  const [isComplete, setIsComplete] = useState(false);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   const udpateCVC = (value: string) => {
     if (value.length > CVC_RULE.MAX_LENGTH) return;
@@ -23,7 +23,7 @@ export default function useCVCNumber(): ValitationResult {
   };
 
   useEffect(() => {
-    if (CVC.length === CVC_RULE.MAX_LENGTH) setIsComplete(true);
+    if (CVC.length === CVC_RULE.MAX_LENGTH) setIsDisplay(true);
   }, [CVC]);
 
   const validate = (value: string) => {
@@ -43,5 +43,5 @@ export default function useCVCNumber(): ValitationResult {
     setError({ isValid: false, errorMessage: '' });
   };
 
-  return { CVC, error, udpateCVC, isComplete };
+  return { CVC, error, udpateCVC, isDisplay };
 }

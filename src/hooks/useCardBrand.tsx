@@ -4,13 +4,13 @@ type ValitationResult = {
   brand: string;
   error: { isValid: boolean; errorMessage: string };
   updateCardBrand: (value: string) => void;
-  isComplete: boolean;
+  isDisplay: boolean;
 };
 
 export default function useCardBrand(): ValitationResult {
   const [brand, setBrand] = useState('');
   const [error, setError] = useState({ isValid: false, errorMessage: '' });
-  const [isComplete, setIsComplete] = useState(false);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   const updateCardBrand = (value: string) => {
     setBrand(value);
@@ -19,7 +19,7 @@ export default function useCardBrand(): ValitationResult {
   };
 
   useEffect(() => {
-    if (brand !== '') setIsComplete(true);
+    if (brand !== '') setIsDisplay(true);
   }, [brand]);
 
   const validate = (value: string) => {
@@ -33,5 +33,5 @@ export default function useCardBrand(): ValitationResult {
     setError({ isValid: false, errorMessage: '' });
   };
 
-  return { brand, error, updateCardBrand, isComplete };
+  return { brand, error, updateCardBrand, isDisplay };
 }
