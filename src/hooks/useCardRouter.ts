@@ -6,22 +6,37 @@ type CardInfo = {
   cardCompany?: string;
 };
 
-export const useCardRouter = () => {
+export const useRouter = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const cardInfo = (location.state as CardInfo) || {};
-
-  const navigateToCardComplete = (info: CardInfo) => {
-    navigate(ROUTER.COMPLETE, { state: info });
-  };
 
   const navigateToHome = () => {
     navigate(ROUTER.DEFAULT);
   };
 
   return {
-    cardInfo,
-    navigateToCardComplete,
     navigateToHome,
+  };
+};
+
+export const useCardPageRouter = () => {
+  const navigate = useNavigate();
+
+  const navigateToCardComplete = (info: CardInfo) => {
+    navigate(ROUTER.COMPLETE, { state: info });
+  };
+
+  return {
+    navigateToCardComplete,
+  };
+};
+
+export const useCompletePageRouter = () => {
+  const location = useLocation();
+  const cardInfo = (location.state as CardInfo) || {};
+  const router = useRouter();
+
+  return {
+    cardInfo,
+    ...router,
   };
 };

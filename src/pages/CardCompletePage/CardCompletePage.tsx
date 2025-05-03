@@ -1,9 +1,9 @@
 import Button from '../../components/Button/Button';
-import { useCardRouter } from '../../hooks/useCardRouter';
+import { useCompletePageRouter } from '../../hooks/useCardRouter';
 import { StyledCardCompletePage, StyledIcon, StyledTitle } from './CardCompletePage.styles';
 
 const CardCompletePage = () => {
-  const { cardInfo, navigateToHome } = useCardRouter();
+  const { cardInfo, navigateToHome } = useCompletePageRouter();
   const { cardNumber, cardCompany } = cardInfo;
 
   return (

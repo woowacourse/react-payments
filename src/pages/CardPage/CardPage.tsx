@@ -11,7 +11,7 @@ import { useSelect } from '../../hooks/useSelect';
 import Button from '../../components/Button/Button';
 import useTotalInputValidation from '../../hooks/useTotalInputValidation';
 import useStep, { InputStep } from '../../hooks/useStep';
-import { useCardRouter } from '../../hooks/useCardRouter';
+import { useCardPageRouter } from '../../hooks/useCardRouter';
 import { ButtonContainer, StyledCardPage } from './CardPage.styles';
 
 export type HandleInputParams = {
@@ -28,7 +28,7 @@ const CardPage = () => {
 
   const { goToNextStep, isPassedStep } = useStep();
   const { updateValidity, isAllValid } = useTotalInputValidation(InputStep.PASSWORD);
-  const { navigateToCardComplete } = useCardRouter();
+  const { navigateToCardComplete } = useCardPageRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
