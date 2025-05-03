@@ -29,7 +29,7 @@ const CardExpirationDateInputSection = ({
           id={5}
           value={cardExpirationDate.month}
           onChange={(value) => {
-            handleCardExpirationDateChange("month")(value);
+            handleCardExpirationDateChange("month")(value, 5, moveFocus);
             if (cardExpirationDate["month"].length === 2) moveFocus(5);
           }}
           isError={isError.month}
@@ -40,7 +40,7 @@ const CardExpirationDateInputSection = ({
           id={6}
           value={cardExpirationDate.year}
           onChange={(value) => {
-            handleCardExpirationDateChange("year")(value);
+            handleCardExpirationDateChange("year")(value, 6, moveFocus);
             if (cardExpirationDate["year"].length === 2) moveFocus(6);
           }}
           isError={isError.year}

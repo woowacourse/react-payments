@@ -64,7 +64,8 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
   };
 
   const handleCardExpirationDateChange =
-    (target: CardExpirationDateKeys) => (value: string) => {
+    (target: CardExpirationDateKeys) =>
+    (value: string, index: number, moveFocus: (index: number) => void) => {
       const { isError, errorMessage } = getCardExpirationDateValidationResult(
         target,
         value.trim()
@@ -79,6 +80,10 @@ const useCardExpirationDate = (): CardExpirationDateOptions => {
         ...cardExpirationDate,
         [target]: value.trim(),
       });
+
+      if (value.trim().length === 2) {
+        moveFocus(index);
+      }
     };
 
   return {

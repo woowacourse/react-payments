@@ -3,7 +3,11 @@ import useError from "./useError";
 
 type useCardCompanyOptions = {
   cardCompany: string;
-  handleCardCompanyChange: (value: string) => void;
+  handleCardCompanyChange: (
+    value: string,
+    index: number,
+    moveFocus: (index: number) => void
+  ) => void;
   isError: IsError;
   errorMessage: string;
 };
@@ -27,7 +31,11 @@ const useCardCompany = (): useCardCompanyOptions => {
   const [cardCompany, setCardCompany] = useState<string>("");
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
-  const handleCardCompanyChange = (value: string) => {
+  const handleCardCompanyChange = (
+    value: string,
+    index: number,
+    moveFocus: (index: number) => void
+  ) => {
     const { isError, errorMessage } = getCardCompanyChangeValidationResult(
       value.trim()
     );
@@ -39,6 +47,10 @@ const useCardCompany = (): useCardCompanyOptions => {
 
     clearError("cardCompany");
     setCardCompany(value.trim());
+
+    if (value.trim().length > 1) {
+      moveFocus(index);
+    }
   };
 
   return {

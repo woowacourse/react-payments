@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useAutoFocus } from "../../hooks/useAutoFocus";
 import { CardNumbersKeys, CardNumbersOptions } from "../../types/CardNumbers";
 import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputField from "../common/InputField/InputField";
