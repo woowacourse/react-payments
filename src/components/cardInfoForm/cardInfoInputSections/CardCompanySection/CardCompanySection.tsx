@@ -14,7 +14,7 @@ interface CardCompanySectionProps {
     | '국민카드'
     | undefined;
   handleChangeCardCompany: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  isValid: () => void;
+  isValid: () => boolean;
 }
 
 function CardCompanySection({

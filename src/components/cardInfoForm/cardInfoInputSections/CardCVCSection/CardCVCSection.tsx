@@ -7,7 +7,7 @@ interface CardCVCSectionProps {
   onChangeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isError: boolean;
   errorMessage: string;
-  isValid: () => void;
+  isValid: () => boolean;
 }
 
 function CardCVCSection({
