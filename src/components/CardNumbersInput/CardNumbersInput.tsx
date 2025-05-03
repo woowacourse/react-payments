@@ -7,9 +7,8 @@ import { useEffect } from "react";
 
 const CardNumbersInput = () => {
   const {
-    cardNumbers,
-    cardNumbersHelperText,
-    cardNumbersErrorIndex,
+    formValues,
+    formErrors,
     cardNumbersInputRefs,
     handleCardNumbers,
   } = useCardContext();
@@ -25,7 +24,7 @@ const CardNumbersInput = () => {
     >
       <label className="label">카드 번호</label>
       <div className="inputContainer">
-        {cardNumbers.map((value, index) => (
+        {formValues.cardNumbers.map((value, index) => (
           <Input
             key={index}
             placeholder="1234"
@@ -33,14 +32,14 @@ const CardNumbersInput = () => {
             value={value}
             onChange={handleCardNumbers(index)}
             ref={(element) => {
-              cardNumbersInputRefs.current.push(element);
+              cardNumbersInputRefs.current[index] = element;
             }}
-            error={index === cardNumbersErrorIndex}
+            error={index === formErrors.cardNumbers.index}
             maxLength={CARD_VALIDATION_INFO.CARD_MAX_LENGTH}
           />
         ))}
       </div>
-      <p className={`helperText`}>{cardNumbersHelperText}</p>
+      <p className="helperText">{formErrors.cardNumbers.message}</p>
     </InputContainer>
   );
 };

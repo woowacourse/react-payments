@@ -7,9 +7,16 @@ import { CARD_COMPANIES } from "../../constants/cardCompanyInfo";
 const CARD_OPTIONS = CARD_COMPANIES.map((company) => company.name);
 
 const CardCompanySelect = () => {
-  const { isOpenSelectCardCompany, setIsOpenSelectCardCompany, cardCompany, handleCardCompany } = useCardContext();
+  const {
+    formValues,
+    isOpenSelectCardCompany,
+    setIsOpenSelectCardCompany,
+    handleCardCompany,
+  } = useCardContext();
 
-  const toggleOpen = () => setIsOpenSelectCardCompany(!isOpenSelectCardCompany);
+  const toggleOpen = () => {
+    setIsOpenSelectCardCompany((prev) => !prev);
+  };
 
   return (
     <InputContainer
@@ -18,8 +25,12 @@ const CardCompanySelect = () => {
     >
       <div className={styles.wrapper}>
         <div className={styles.selectBox} onClick={toggleOpen} tabIndex={0}>
-          <span className={cardCompany ? styles.selected : styles.placeholder}>
-            {cardCompany || INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER}
+          <span
+            className={
+              formValues.cardCompany ? styles.selected : styles.placeholder
+            }
+          >
+            {formValues.cardCompany || INPUT_CONTAINER.CARD_COMPANY.PLACEHOLDER}
           </span>
           <span className={styles.arrow}>▾</span>
         </div>

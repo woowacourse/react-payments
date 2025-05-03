@@ -8,65 +8,49 @@ import {
   isCardCompanySelected,
 } from "../domain/validate";
 import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
-import { CardContextType } from "./useCardState";
+import { useCardState } from "./useCardState";
 import { CARD_COMPANIES } from "../constants/cardCompanyInfo";
 
-export const useCardInputHandlers = (cardState: CardContextType) => {
+export const useCardInputHandlers = (
+  cardState: ReturnType<typeof useCardState>
+) => {
   const {
-    cardNumbers,
-    setCardNumbers,
-    setCardNumbersHelperText,
-    setCardNumbersErrorIndex,
+    formValues,
+    setFormValues,
+    setFormErrors,
     cardNumbersInputRefs,
-    setMonth,
-    month,
-    setYear,
-    year,
-    setExpiryHelperText,
-    setExpiryErrorIndex,
     expiryInputRefs,
-    setCVC,
-    setCVCHelperText,
-    setPassword,
-    setPasswordHelperText,
-    setIsValidCardNumbers,
     setShowCardCompanySelect,
-    setIsValidExpiry,
+    setShowExpiryInput,
     setShowCVCInput,
     setShowPasswordInput,
-    setCardColor,
-    setCardCompany,
+    setIsValidForm,
     setIsOpenSelectCardCompany,
-    setShowExpiryInput,
-    setIsValidCardCompany,
-    setIsValidCVC,
-    setIsValidPassword,
   } = cardState;
 
   const handleCardNumbers =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
-
-      const newCardNumbers = [...cardNumbers];
+      const newCardNumbers = [...formValues.cardNumbers];
       newCardNumbers[index] = value;
-      setCardNumbers(newCardNumbers);
 
       const { isValid, errorIndex, helperText } = validateCardNumbers(
         newCardNumbers,
         CARD_VALIDATION_INFO.CARD_MAX_LENGTH
       );
 
-      setCardNumbersHelperText(helperText);
-      setCardNumbersErrorIndex(errorIndex);
+      setFormValues((prev) => ({ ...prev, cardNumbers: newCardNumbers }));
+      setFormErrors((prev) => ({
+        ...prev,
+        cardNumbers: { message: helperText, index: errorIndex },
+      }));
 
-      if (errorIndex !== null)
+      if (errorIndex !== null) {
         cardNumbersInputRefs.current[errorIndex]?.focus();
+      }
 
       if (isValid && isCardNumbersValid(newCardNumbers, helperText)) {
-        setIsValidCardNumbers(true);
         setShowCardCompanySelect(true);
-      } else {
-        setIsValidCardNumbers(false);
       }
 
       if (
@@ -79,86 +63,101 @@ export const useCardInputHandlers = (cardState: CardContextType) => {
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    const { expirationDate } = formValues;
+    let nextMonth = expirationDate.month;
+    let nextYear = expirationDate.year;
 
-    let nextMonth = month;
-    let nextYear = year;
-
-    if (name === "month") {
-      nextMonth = value;
-      setMonth(value);
-    } else if (name === "year") {
-      nextYear = value;
-      setYear(value);
-    }
+    if (name === "month") nextMonth = value;
+    if (name === "year") nextYear = value;
 
     const { isMonthValid, monthHelperText } = validateMonth(
       nextMonth,
       CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH
     );
-
     const { isYearValid, yearHelperText } = validateYear(
       nextYear,
       CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH
     );
 
-    if (isMonthValid) expiryInputRefs.current[1]?.focus();
+    setFormValues((prev) => ({
+      ...prev,
+      expirationDate: { month: nextMonth, year: nextYear },
+    }));
+
     if (!isMonthValid) {
-      setExpiryHelperText(monthHelperText);
-      setExpiryErrorIndex(0);
-      setIsValidExpiry(false);
-    } else if (!isYearValid) {
-      setExpiryHelperText(yearHelperText);
-      setExpiryErrorIndex(1);
-      setIsValidExpiry(false);
-    } else {
-      setExpiryHelperText("");
-      setExpiryErrorIndex(null);
-      setIsValidExpiry(true);
-      setShowCVCInput(true);
+      expiryInputRefs.current[0]?.focus();
+      setFormErrors((prev) => ({
+        ...prev,
+        expiry: { message: monthHelperText, index: 0 },
+      }));
+      return;
     }
+
+    if (!isYearValid) {
+      expiryInputRefs.current[1]?.focus();
+      setFormErrors((prev) => ({
+        ...prev,
+        expiry: { message: yearHelperText, index: 1 },
+      }));
+      return;
+    }
+
+    setFormErrors((prev) => ({
+      ...prev,
+      expiry: { message: "", index: null },
+    }));
+
+    setShowCVCInput(true);
   };
 
   const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCVC(e.target.value);
+    const value = e.target.value;
     const { isValid, helperText } = validateCVC(
-      e.target.value,
+      value,
       CARD_VALIDATION_INFO.CVC_MAX_LENGTH
     );
+
+    setFormValues((prev) => ({ ...prev, CVC: value }));
+
     if (!isValid) {
-      setCVCHelperText(helperText);
-      setIsValidCVC(false);
+      setFormErrors((prev) => ({ ...prev, CVC: helperText }));
     } else {
-      setCVCHelperText("");
-      setIsValidCVC(true);
+      setFormErrors((prev) => ({ ...prev, CVC: "" }));
       setShowPasswordInput(true);
     }
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    const value = e.target.value;
     const { isValid, helperText } = validatePassword(
-      e.target.value,
+      value,
       CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH
     );
+
+    setFormValues((prev) => ({ ...prev, password: value }));
+
     if (!isValid) {
-      setPasswordHelperText(helperText);
-      setIsValidPassword(false);
+      setFormErrors((prev) => ({ ...prev, password: helperText }));
     } else {
-      setPasswordHelperText("");
-      setIsValidPassword(true);
+      setFormErrors((prev) => ({ ...prev, password: "" }));
+      setIsValidForm(true);
     }
   };
 
   const handleCardCompany = (option: string) => {
-    setCardCompany(option);
-    setIsOpenSelectCardCompany(false);
-
     const selectedCompany = CARD_COMPANIES.find(
       (company) => company.name === option
     );
-    if (selectedCompany) setCardColor(selectedCompany.color);
+
+    setFormValues((prev) => ({
+      ...prev,
+      cardCompany: option,
+      cardColor: selectedCompany?.color || "#333333",
+    }));
+
+    setIsOpenSelectCardCompany(false);
+
     if (isCardCompanySelected(option)) {
-      setIsValidCardCompany(true);
       setShowExpiryInput(true);
     }
   };

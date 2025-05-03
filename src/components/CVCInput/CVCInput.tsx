@@ -6,7 +6,12 @@ import Input from "../Input/Input";
 import { useEffect } from "react";
 
 const CVCInput = () => {
-  const { CVC, CVCHelperText, CVCInputRef, handleCVC } = useCardContext();
+  const {
+    formValues,
+    formErrors,
+    CVCInputRef,
+    handleCVC,
+  } = useCardContext();
 
   useEffect(() => {
     CVCInputRef.current?.focus();
@@ -19,16 +24,16 @@ const CVCInput = () => {
         <Input
           name="cvc"
           placeholder="123"
-          value={CVC}
+          value={formValues.CVC}
           onChange={handleCVC}
           ref={(element) => {
             CVCInputRef.current = element;
           }}
-          error={CVCHelperText !== ""}
+          error={formErrors.CVC !== ""}
           maxLength={CARD_VALIDATION_INFO.CVC_MAX_LENGTH}
         />
       </div>
-      <p className="helperText">{CVCHelperText}</p>
+      <p className="helperText">{formErrors.CVC}</p>
     </InputContainer>
   );
 };

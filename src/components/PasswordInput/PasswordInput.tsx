@@ -6,12 +6,17 @@ import { useEffect } from "react";
 import { INPUT_CONTAINER } from "../../constants/title";
 
 const PasswordInput = () => {
-  const { password, passwordHelperText, passwordInputRef, handlePassword } =
-    useCardContext();
+  const {
+    formValues,
+    formErrors,
+    passwordInputRef,
+    handlePassword,
+  } = useCardContext();
 
   useEffect(() => {
     passwordInputRef.current?.focus();
   }, []);
+
   return (
     <InputContainer
       title={INPUT_CONTAINER.PASSWORD.TITLE}
@@ -23,16 +28,16 @@ const PasswordInput = () => {
           type="password"
           name="password"
           placeholder="12"
-          value={password}
+          value={formValues.password}
           onChange={handlePassword}
           ref={(element) => {
             passwordInputRef.current = element;
           }}
-          error={passwordHelperText !== ""}
+          error={formErrors.password !== ""}
           maxLength={CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH}
         />
       </div>
-      <p className="helperText">{passwordHelperText}</p>
+      <p className="helperText">{formErrors.password}</p>
     </InputContainer>
   );
 };

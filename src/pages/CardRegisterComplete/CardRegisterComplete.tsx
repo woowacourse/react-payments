@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { ROUTE } from "../../constants/route";
 
 const CardRegisterComplete = () => {
-  const { cardNumbers, cardColor, isSubmitted } = useCardContext();
+  const { formValues, isSubmitted } = useCardContext();
   const navigate = useNavigate();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const selectedCompany = CARD_COMPANIES.find(
-    (company) => company.color === cardColor,
+    (company) => company.color === formValues.cardColor
   )?.name;
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const CardRegisterComplete = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key == "Enter") {
+      if (e.key === "Enter") {
         buttonRef.current?.click();
       }
     };
@@ -41,7 +41,7 @@ const CardRegisterComplete = () => {
         className={styles.completeIcon}
       />
       <h2 className={styles.registerCardText}>
-        {`${cardNumbers[0]}로 시작하는`} <br />{" "}
+        {`${formValues.cardNumbers[0]}로 시작하는`} <br />
         {`${selectedCompany}가 등록되었어요.`}
       </h2>
       <RegisterAnotherCardButton ref={buttonRef} />

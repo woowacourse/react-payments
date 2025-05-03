@@ -1,17 +1,15 @@
+import { useEffect } from "react";
 import { useCardContext } from "../../contexts/CardContext";
 import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import InputContainer from "../InputContainer/InputContainer";
 import Input from "../Input/Input";
-import { useEffect } from "react";
 
 const CardExpiryInput = () => {
   const {
-    month,
-    year,
+    formValues,
+    formErrors,
     handleDate,
-    expiryHelperText,
-    expiryErrorIndex,
     expiryInputRefs,
   } = useCardContext();
 
@@ -27,33 +25,33 @@ const CardExpiryInput = () => {
       <label htmlFor="" className="label">
         유효기간
       </label>
-      <div className={`inputContainer`}>
+      <div className="inputContainer">
         <Input
           type="text"
           name="month"
           placeholder="MM"
-          value={month}
+          value={formValues.expirationDate.month}
           onChange={handleDate}
           ref={(element) => {
             expiryInputRefs.current[0] = element;
           }}
-          error={expiryErrorIndex === 0}
+          error={formErrors.expiry.index === 0}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
         <Input
           type="text"
           name="year"
           placeholder="YY"
-          value={year}
+          value={formValues.expirationDate.year}
           onChange={handleDate}
           ref={(element) => {
             expiryInputRefs.current[1] = element;
           }}
-          error={expiryErrorIndex === 0}
+          error={formErrors.expiry.index === 1}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
         />
       </div>
-      <p className="helperText">{expiryHelperText}</p>
+      <p className="helperText">{formErrors.expiry.message}</p>
     </InputContainer>
   );
 };
