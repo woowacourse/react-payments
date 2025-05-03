@@ -15,7 +15,6 @@ export interface InputProps {
 
 export interface InputRef {
   focus: () => void;
-  getValue: () => string;
 }
 
 const InputField = styled.input<{ $isError: boolean }>`
@@ -54,7 +53,6 @@ const Input = forwardRef<InputRef, InputProps>(
       focus: () => {
         inputRef.current?.focus();
       },
-      getValue: () => value,
     }));
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
