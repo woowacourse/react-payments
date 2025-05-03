@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
+import { useId } from 'react';
 
 interface CardPasswordFieldProps {
   cardPassword: string;
@@ -12,15 +13,17 @@ function CardPasswordField({
   cardPassword,
   onChange,
 }: CardPasswordFieldProps) {
+  const id = useId();
+
   return (
     <div>
-      <Label htmlFor="cardPassword">비밀번호 앞 2자리</Label>
+      <Label htmlFor={`cardPassword-${id}`}>비밀번호 앞 2자리</Label>
       <InputWrapper>
         <Input
           isError={isError}
           type="password"
           name="cardPassword"
-          id="cardPassword"
+          id={`cardPassword-${id}`}
           value={cardPassword}
           onChange={onChange}
           maxLength={2}

@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
 import useInputFocus from '../../../hooks/useInputFocus';
@@ -17,9 +18,10 @@ function CardNumberField({
     inputValueLength: 4,
   });
 
+  const id = useId();
   return (
     <div>
-      <Label htmlFor="cardNumber-0" id="cardNumber">
+      <Label htmlFor={`cardNumber-0-${id}`} id="cardNumber">
         카드 번호
       </Label>
       <InputWrapper>
@@ -33,7 +35,7 @@ function CardNumberField({
             isError={isError[index]}
             type="tel"
             name="cardNumber"
-            id={`cardNumber-${index}`}
+            id={`cardNumber-${index}-${id}`}
             value={v}
             key={index}
             aria-labelledby="cardNumber"

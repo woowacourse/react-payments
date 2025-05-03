@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
+import { useId } from 'react';
 
 interface CardCVCFieldProps {
   cardCVC: string;
@@ -8,15 +9,17 @@ interface CardCVCFieldProps {
 }
 
 function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
+  const id = useId();
+
   return (
     <div>
-      <Label htmlFor="CardCVC">CVC</Label>
+      <Label htmlFor={`CardCVC-${id}`}>CVC</Label>
       <InputWrapper>
         <Input
           isError={isError}
           type="tel"
           name="CardCVC"
-          id="CardCVC"
+          id={`CardCVC-${id}`}
           value={cardCVC}
           aria-labelledby="CardCVC"
           onChange={onChange}
