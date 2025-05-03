@@ -10,6 +10,6 @@ export const POSITION = {
 } as const;
 
 export const EXPIRATION_PERIOD = {
-  MONTH: 'month',
-  YEAR: 'year',
+  month: 'month',
+  year: 'year',
 } as const;
