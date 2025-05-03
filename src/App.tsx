@@ -3,6 +3,7 @@ import CardRegistrationPage from './pages/CardRegistrationPage/CardRegistrationP
 import CardRegistrationCompletedPage from './pages/CardRegistrationCompletedPage/CardRegistrationCompletedPage';
 import { useCardNumberInput } from './hooks/useCardNumberInput';
 import { useCardCompanySelect } from './hooks/useCardCompanySelect';
+import { ROUTE_PATH } from './constants/constants';
 
 function RootLayout() {
   const { cardNumbers, handleCardNumberChange, cardNumberError } = useCardNumberInput();
@@ -23,7 +24,7 @@ function RootLayout() {
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTE_PATH.ROOT,
     element: <RootLayout />,
     children: [
       {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         element: <CardRegistrationPage />
       },
       {
-        path: 'card-registration-completed',
+        path: ROUTE_PATH.CARD_REGISTRATION_COMPLETED,
         element: <CardRegistrationCompletedPage />
       }
     ]
