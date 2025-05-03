@@ -32,19 +32,15 @@ export const validate = {
   },
 
   checkExpiryDate: (month: string, year: string) => {
-    if (
-      month.length === 2 &&
-      year.length === 2 &&
-      precise.isExpiredDate({ month, year })
-    ) {
+    if (precise.isExpiredDate({ month, year })) {
       return {
-        isValid: { month: false, year: false },
+        isValid: false,
         message: '유효하지 않은 카드입니다. 유효 기간을 확인해주세요.',
       };
     }
 
     return {
-      isValid: { month: true, year: true },
+      isValid: true,
       message: '',
     };
   },

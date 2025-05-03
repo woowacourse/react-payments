@@ -31,37 +31,34 @@ function CardExpiryDateInput({
     );
 
     setFeedbackMessage(message);
-    setIsValid(isValid);
+    setIsValid({ month: isValid, year: isValid });
   }
 
   function handleMonthChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
-    setExpiryDate({ ...expiryDate, month: value });
+    setExpiryDate((prev) => ({ ...prev, month: value }));
 
-    const validateResult = validate.checkExpiryMonth(value);
-    if (!validateResult.isValid) {
-      setIsValid((prev) => ({ ...prev, month: false }));
-      setFeedbackMessage(validateResult.message);
-      return;
+    const { isValid, message } = validate.checkExpiryMonth(value);
+    setIsValid((prev) => ({ ...prev, month: isValid }));
+    setFeedbackMessage(message);
+
+    if (isValid) {
+      checkIsValidExpiry('month', value);
     }
-
-    checkIsValidExpiry('month', value);
   }
 
   function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.target;
-    setExpiryDate({ ...expiryDate, year: value });
+    const value = e.target.value;
+    setExpiryDate((prev) => ({ ...prev, year: value }));
 
-    const validateResult = validate.checkNumberInput(value);
-    if (!validateResult.isValid) {
-      setIsValid((prev) => ({ ...prev, year: false }));
-      setFeedbackMessage(validateResult.message);
-      return;
+    const { isValid, message } = validate.checkNumberInput(value);
+    setIsValid((prev) => ({ ...prev, year: isValid }));
+    setFeedbackMessage(message);
+
+    if (isValid) {
+      checkIsValidExpiry('year', value);
     }
-
-    checkIsValidExpiry('year', value);
   }
-
   return (
     <>
       <InputForm
