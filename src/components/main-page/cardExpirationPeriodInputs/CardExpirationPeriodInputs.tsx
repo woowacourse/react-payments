@@ -26,7 +26,7 @@ function CardExpirationPeriodInputs({
               key={key}
               value={expirationPeriod[key]}
               onChange={(e) => {
-                changeExpirationPeriod(EXPIRATION_PERIOD[key.toUpperCase() as 'MONTH' | 'YEAR'], e.target.value);
+                changeExpirationPeriod(EXPIRATION_PERIOD[key], e.target.value);
                 autoFocusToNext(e, EXPIRATION_PERIOD_LENGTH);
 
                 if (key === 'year') {
