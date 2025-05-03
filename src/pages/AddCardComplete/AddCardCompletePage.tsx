@@ -3,13 +3,14 @@ import CompleteIcon from '../../components/Icon/CompleteIcon';
 import Button from '../../components/Button/Button';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
+import { PAGE_ROUTES } from '../../constants';
 
 export default function AddCardCompletePage() {
   const location = useLocation();
   const { cardNumber, cardBrandTypeState } = { ...location.state };
   const navigate = useNavigate();
   const redirectToHome = () => {
-    navigate('/');
+    navigate(PAGE_ROUTES.DEFAULT);
   };
   useEffect(() => {
     if (!location.state) {

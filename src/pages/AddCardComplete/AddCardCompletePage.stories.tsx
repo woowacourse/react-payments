@@ -1,5 +1,6 @@
 import AddCardCompletePage from './AddCardCompletePage';
 import type { Meta, StoryObj } from '@storybook/react';
+import { PAGE_ROUTES } from '../../constants';
 
 const meta = {
   title: 'Pages/AddCardCompletePage',
@@ -24,7 +25,7 @@ export const Default: Story = {
   parameters: {
     initialEntries: [
       {
-        pathname: '/complete',
+        pathname: PAGE_ROUTES.COMPLETE,
         state: {
           cardNumber: {
             first: '5134',
@@ -43,7 +44,7 @@ export const 국민카드: Story = {
   parameters: {
     initialEntries: [
       {
-        pathname: '/complete',
+        pathname: PAGE_ROUTES.COMPLETE,
         state: {
           cardNumber: {
             first: '9876',
@@ -62,7 +63,7 @@ export const 신한카드: Story = {
   parameters: {
     initialEntries: [
       {
-        pathname: '/complete',
+        pathname: PAGE_ROUTES.COMPLETE,
         state: {
           cardNumber: {
             first: '1234',

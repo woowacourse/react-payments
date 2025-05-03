@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router';
 import { SequenceType } from '../../../../domain/card/CardNumber/types';
 import { DateType } from '../../../../domain/card/CardExpirationDate/types';
 import { validateErrorMessages } from '../../../../utils';
+import { PAGE_ROUTES } from '../../../../constants';
 
 export default function AddCardForm({
   addFormState,
@@ -128,7 +129,7 @@ export default function AddCardForm({
     <S.CardAddFrom
       onSubmit={(e) => {
         e.preventDefault();
-        navigate('/complete', {
+        navigate(PAGE_ROUTES.COMPLETE, {
           state: {
             cardNumber,
             cardBrandTypeState,

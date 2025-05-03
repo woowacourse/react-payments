@@ -1,11 +1,12 @@
-import { useNavigate } from 'react-router';
 import * as S from './NotFoundPage.styles';
 import Button from '../../components/Button/Button';
+import { useNavigate } from 'react-router';
+import { PAGE_ROUTES } from '../../constants';
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
   const redirectToHome = () => {
-    navigate('/');
+    navigate(PAGE_ROUTES.DEFAULT);
   };
 
   return (
