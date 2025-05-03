@@ -14,4 +14,4 @@ const StyledSelectBox = styled.select<SelectBoxProps>`
   }
 `;
 
-export default StyledSelectBox;
+export { StyledSelectBox };

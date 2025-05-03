@@ -1,4 +1,4 @@
-import StyledHelperText from './HelperText.styles';
+import { StyledHelperText } from './HelperText.styles';
 
 export type HelperTextProps = {
   text?: string;

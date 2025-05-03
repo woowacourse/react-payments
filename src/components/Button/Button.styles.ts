@@ -16,4 +16,4 @@ const StyledButton = styled.button<ButtonProps>`
   }
 `;
 
-export default StyledButton;
+export { StyledButton };

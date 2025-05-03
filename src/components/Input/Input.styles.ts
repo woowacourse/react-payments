@@ -26,4 +26,4 @@ const StyledInput = styled.input<InputProps>`
   }
 `;
 
-export default StyledInput;
+export { StyledInput} ;

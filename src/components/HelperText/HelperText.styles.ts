@@ -14,4 +14,4 @@ const StyledHelperText = styled.div<HelperTextProps>`
   }};
 `;
 
-export default StyledHelperText;
+export { StyledHelperText };

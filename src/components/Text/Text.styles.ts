@@ -28,4 +28,4 @@ const StyledText = styled.div<TextProps>`
   }};
 `;
 
-export default StyledText;
+export { StyledText };

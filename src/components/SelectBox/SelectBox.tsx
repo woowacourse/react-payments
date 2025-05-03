@@ -1,4 +1,4 @@
-import StyledSelectBox from './SelectBox.styles';
+import { StyledSelectBox } from './SelectBox.styles';
 
 export type SelectBoxProps = React.SelectHTMLAttributes<HTMLElement> & {
   placeHolder?: string;

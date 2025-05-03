@@ -1,4 +1,4 @@
-import StyledText from './Text.styles';
+import { StyledText } from './Text.styles';
 
 export type TextProps = {
   text?: string;

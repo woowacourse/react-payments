@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import StyledInput from './Input.styles';
+import { StyledInput } from './Input.styles';
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   isError?: boolean;
