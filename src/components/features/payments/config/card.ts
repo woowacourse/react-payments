@@ -16,11 +16,16 @@ export const CARD_BANK = {
 } as const;
 export type CardBankType = keyof typeof CARD_BANK;
 
+export const CARD_PREFIX = {
+  length: 2,
+  visa: '4',
+  master: { min: 51, max: 55 },
+};
+
 export const CARD_NUMBER = {
   length: {
     min: 0,
     max: 4,
-    prefix: 2,
   },
 };
 

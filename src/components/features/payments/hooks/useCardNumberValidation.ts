@@ -1,5 +1,5 @@
 import { ChangeEvent, useRef, useState } from 'react';
-import { CARD_NUMBER, CardType } from '../config/card';
+import { CARD_NUMBER, CARD_PREFIX, CardType } from '../config/card';
 import { ERROR_TYPE, ErrorType } from '../config/error';
 import {
   CARD_NUMBER_INPUT_TYPE,
@@ -69,7 +69,7 @@ function useCardNumberValidation() {
       const detectedType = getCardTypeFromPrefix(value);
       setCardType(detectedType);
       const isError =
-        value.length > CARD_NUMBER.length.prefix && detectedType === null;
+        value.length > CARD_PREFIX.length && detectedType === null;
 
       updateCardError(CARD_NUMBER_INPUT_TYPE.cardNumberPart1, {
         errorType: ERROR_TYPE.noneCardType,
