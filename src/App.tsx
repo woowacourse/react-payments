@@ -11,8 +11,11 @@ function App() {
       <BrowserRouter basename="/react-payments">
         <div className={styles.main}>
           <Routes>
-            <Route path={ROUTES.COMPLETE} element={<CardFormPages />} />
-            <Route path={ROUTES.HOME} element={<CardRegistrationComplete />} />
+            <Route path={ROUTES.HOME} element={<CardFormPages />} />
+            <Route
+              path={ROUTES.COMPLETE}
+              element={<CardRegistrationComplete />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
