@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../../App.css';
 
 const CardRegisterPage = () => {
-  const { cardNumbers, cardBrand, expiryDate, CVCNumber } =
+  const { cardNumbers, cardBrand, expiryDate, CVCNumber, isFormComplete } =
     useCardFormContext();
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,7 +41,7 @@ const CardRegisterPage = () => {
         {cardBrand.isComplete && <CardExpiryInput />}
         {cardNumbers.isComplete && <CardBrandInput />}
         <CardNumbersInput />
-        {<Button text="확인" />}
+        {isFormComplete && <Button text="확인" />}
       </form>
     </div>
   );
