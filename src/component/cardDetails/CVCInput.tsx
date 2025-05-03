@@ -20,7 +20,7 @@ export const CVCInput: React.FC<CVCInputProps> = ({
   setCardInput,
   cardInput,
 }) => {
-  const [cvcValue, setCvcValue] = useState(cardInput.CVC?.toString() || '');
+  const [cvcValue, setCvcValue] = useState(cardInput.CVC?.toString() ?? '');
 
   const handleCVCChange = useCallback(
     (value: string) => {
