@@ -11,6 +11,10 @@ import useCardCompanyState from "../../hooks/useCardCompany/useCardCompanyState"
 import useCardNumbersState from "../../hooks/useCardNumber/useCardNumberState";
 import useExpirationDateState from "../../hooks/useExpirationDate/useExpirationDateState";
 import { useNavigate } from "react-router";
+import {
+  CARD_NUMBER_KEYS,
+  CardNumberKey,
+} from "../../hooks/useCardNumber/useCardNumberInputHandler";
 
 function AddCardPage() {
   const { cardNumbers, cardType, cardNumbersError, handleChange } =
@@ -18,6 +22,13 @@ function AddCardPage() {
   const { cardExpirationDate, cardExpirationDateError, dateValidate } =
     useExpirationDateState();
   const { selectedCompany, selectCompany } = useCardCompanyState();
+
+  const cardNumbersRecord = {} as Record<CardNumberKey, string>;
+  const cardNumbersErrorRecord = {} as Record<CardNumberKey, string>;
+  CARD_NUMBER_KEYS.forEach((key, index) => {
+    cardNumbersRecord[key] = cardNumbers[index] ?? "";
+    cardNumbersErrorRecord[key] = cardNumbersError[index] ?? "";
+  });
 
   const [cvcCompleted, setCvcCompleted] = useState(false);
   const [passwordCompleted, setPasswordCompleted] = useState(false);
@@ -28,6 +39,7 @@ function AddCardPage() {
   };
 
   const isAllCompleted =
+    Object.values(cardNumbersErrorRecord).every((e) => e === "") &&
     cardNumbersError.every((e) => e === "") &&
     cardExpirationDateError.every((e) => e === "") &&
     cvcCompleted &&
@@ -49,20 +61,18 @@ function AddCardPage() {
     <div className={styles.AddCardPage}>
       <PreviewCardLayout
         selectedCompany={selectedCompany?.value ?? ""}
-        cardNumbers={{
-          first: cardNumbers[0],
-          second: cardNumbers[1],
-          third: cardNumbers[2],
-          fourth: cardNumbers[3],
-        }}
+        cardNumbers={cardNumbersRecord}
         cardType={cardType}
         cardExpirationDate={cardExpirationDate}
       />
       <div className={styles["card-input"]}>
         <CardNumber
-          handleChange={handleChange}
-          cardNumbers={cardNumbers}
-          errorMessage={cardNumbersError}
+          handleChange={(value, key) => {
+            const idx = CARD_NUMBER_KEYS.indexOf(key);
+            handleChange(value, idx);
+          }}
+          cardNumbers={cardNumbersRecord}
+          errorMessage={cardNumbersErrorRecord}
           onComplete={() => goToStep(2)}
         />
         {step >= 2 && (

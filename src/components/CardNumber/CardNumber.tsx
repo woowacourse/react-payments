@@ -3,11 +3,13 @@ import InputText from "../InputText/InputText";
 import InputErrorMessage from "../Input/InputErrorMessage";
 import styles from "./CardNumber.module.css";
 import useCardNumberInputHandler from "../../hooks/useCardNumber/useCardNumberInputHandler";
+import { CARD_NUMBER_KEYS } from "../../hooks/useCardNumber/useCardNumberInputHandler";
+import { CardNumberKey } from "../../hooks/useCardNumber/useCardNumberInputHandler";
 
 interface Props {
-  handleChange: (value: string, index: number) => void;
-  cardNumbers: string[];
-  errorMessage: string[];
+  handleChange: (value: string, key: CardNumberKey) => void;
+  cardNumbers: Record<CardNumberKey, string>;
+  errorMessage: Record<CardNumberKey, string>;
   onComplete: () => void;
 }
 
@@ -36,21 +38,21 @@ export default function CardNumber({
       <InputText inputValue={CARD_NUMBER.DESCRIPTION} variant="description" />
       <InputText inputValue={CARD_NUMBER.SUBTITLE} variant="subtitle" />
       <div className={styles["card-number__input"]}>
-        {["", "", "", ""].map((_, index) => (
+        {CARD_NUMBER_KEYS.map((key) => (
           <NumberInput
+            key={key}
             ref={(el) => {
-              inputRefs.current[index] = el;
+              inputRefs.current[key] = el;
             }}
-            key={index}
-            value={cardNumbers[index]}
-            errorMessage={errorMessage[index]}
-            onChange={(value) => handleCardNumberChange(value, index)}
+            value={cardNumbers[key]}
+            errorMessage={errorMessage[key]}
+            onChange={(value) => handleCardNumberChange(value, key)}
             type="text"
           />
         ))}
       </div>
       <InputErrorMessage
-        message={errorMessage.find((msg) => msg !== "") ?? ""}
+        message={Object.values(errorMessage).find((msg) => msg) ?? ""}
       />
     </section>
   );
