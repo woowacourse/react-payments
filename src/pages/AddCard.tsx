@@ -10,7 +10,6 @@ import CardBrandSelect from '../component/cardDetails/CardBrandSelect';
 import { SecretNumberInput } from '../component/cardDetails/SecretNumberInput';
 import { SubmitButton } from '../component/SubmitButton';
 
-// 도메인 서비스 및 커스텀 훅 import
 import { validateCardForm } from '../services/cardFormService';
 import { useCardForm } from '../hooks/useCardForm';
 import { useFormSteps } from '../hooks/useFormSteps';
@@ -62,7 +61,8 @@ const AddCard = () => {
 
   const formSteps = [
     {
-      key: 'cardNumber',
+      key: 'cardNumber' as const,
+      order: 5,
       condition: () => true,
       component: (
         <CardNumberInput
@@ -75,7 +75,8 @@ const AddCard = () => {
       ),
     },
     {
-      key: 'cardBrand',
+      key: 'cardBrand' as const,
+      order: 4,
       condition: () => validation.isCardNumberComplete,
       component: (
         <CardBrandSelect
@@ -85,7 +86,8 @@ const AddCard = () => {
       ),
     },
     {
-      key: 'expiryDate',
+      key: 'expiryDate' as const,
+      order: 3,
       condition: () =>
         validation.isCardNumberComplete && validation.isCardBrandComplete,
       component: (
@@ -99,7 +101,8 @@ const AddCard = () => {
       ),
     },
     {
-      key: 'cvc',
+      key: 'cvc' as const,
+      order: 2,
       condition: () =>
         validation.isCardNumberComplete &&
         validation.isCardBrandComplete &&
@@ -114,7 +117,8 @@ const AddCard = () => {
       ),
     },
     {
-      key: 'secretNumber',
+      key: 'secretNumber' as const,
+      order: 1,
       condition: () =>
         validation.isCardNumberComplete &&
         validation.isCardBrandComplete &&
@@ -131,7 +135,7 @@ const AddCard = () => {
     },
   ] as const;
 
-  const { sectionRefs, visibleSteps, renderOrder } = useFormSteps(
+  const { sectionRefs, visibleSteps, getSortedSteps } = useFormSteps(
     cardInput,
     errorMessages,
     formSteps,
@@ -148,10 +152,8 @@ const AddCard = () => {
           cardColor={cardInput.cardBrand}
         />
         <Form>
-          {renderOrder.map(stepKey => {
-            const step = formSteps.find(s => s.key === stepKey);
-            if (!step) return null;
-
+          {getSortedSteps().map(step => {
+            if (!visibleSteps[step.key]) return null;
             return (
               <FormSection
                 key={step.key}

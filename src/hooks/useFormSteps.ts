@@ -3,11 +3,19 @@ import { CardInputProps } from '../types/CardInputTypes';
 import { ErrorMessagesType } from '../types/ErrorMessagesType';
 import { validateCardForm } from '../services/cardFormService';
 
+type FormStepKey =
+  | 'cardNumber'
+  | 'cardBrand'
+  | 'expiryDate'
+  | 'cvc'
+  | 'secretNumber';
+
 export const useFormSteps = (
   cardInput: CardInputProps,
   errorMessages: ErrorMessagesType,
   formSteps: ReadonlyArray<{
-    readonly key: string;
+    readonly key: FormStepKey;
+    readonly order: number;
     readonly condition: () => boolean;
     readonly component: React.ReactNode;
   }>,
@@ -20,7 +28,9 @@ export const useFormSteps = (
     secretNumber: useRef<HTMLDivElement>(null),
   };
 
-  const [visibleSteps, setVisibleSteps] = useState({
+  const [visibleSteps, setVisibleSteps] = useState<
+    Record<FormStepKey, boolean>
+  >({
     cardNumber: true,
     cardBrand: false,
     expiryDate: false,
@@ -30,14 +40,12 @@ export const useFormSteps = (
 
   useEffect(() => {
     formSteps.forEach(({ key, condition }) => {
-      if (condition() && !visibleSteps[key as keyof typeof visibleSteps]) {
+      if (condition() && !visibleSteps[key]) {
         setVisibleSteps(prev => ({ ...prev, [key]: true }));
 
         setTimeout(() => {
           const input =
-            sectionRefs[key as keyof typeof sectionRefs].current?.querySelector(
-              'input, select',
-            );
+            sectionRefs[key].current?.querySelector('input, select');
           if (input) {
             (input as HTMLElement).focus();
           }
@@ -46,17 +54,13 @@ export const useFormSteps = (
     });
   }, [cardInput, errorMessages, visibleSteps, formSteps]);
 
-  const renderOrder = [
-    'secretNumber',
-    'cvc',
-    'expiryDate',
-    'cardBrand',
-    'cardNumber',
-  ];
+  const getSortedSteps = () => {
+    return [...formSteps].sort((a, b) => a.order - b.order);
+  };
 
   return {
     sectionRefs,
     visibleSteps,
-    renderOrder,
+    getSortedSteps,
   };
 };
