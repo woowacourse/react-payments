@@ -7,7 +7,9 @@ function useInputValidation(initialErrorState: boolean[], validLength: number) {
   const { errorState, updateErrorState } = useErrorArrayState(initialErrorState.length, () =>
     setErrorMessage('')
   );
+
   const [errorMessage, setErrorMessage] = useState('');
+  const error = { state: errorState, message: errorMessage };
 
   const validate = ({ e, idx }: HandleInputParams) => {
     try {
@@ -22,8 +24,7 @@ function useInputValidation(initialErrorState: boolean[], validLength: number) {
   };
 
   return {
-    errorState,
-    errorMessage,
+    error,
     validate,
   };
 }

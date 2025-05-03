@@ -31,10 +31,9 @@ const INITIAL_ERROR_STATES = [false];
 const VALID_LENGTH = 2;
 
 const PasswordInput = ({ values, onChange, onValidChange }: InputProps) => {
-  const { errorState, errorMessage, validate } = useInputValidation(
-    INITIAL_ERROR_STATES,
-    VALID_LENGTH
-  );
+  const { error, validate } = useInputValidation(INITIAL_ERROR_STATES, VALID_LENGTH);
+
+  const { state: errorState, message: errorMessage } = error;
 
   useEffect(() => {
     const isValid =
