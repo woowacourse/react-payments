@@ -33,10 +33,17 @@ function AddCardPage() {
   const [cvcCompleted, setCvcCompleted] = useState(false);
   const [passwordCompleted, setPasswordCompleted] = useState(false);
 
-  const [step, setStep] = useState(1);
-  const goToStep = (targetStep: number) => {
-    setStep(targetStep);
-  };
+  enum Step {
+    CardNumber = 1,
+    CardCompany,
+    CardExpirationDate,
+    CardCvcNumber,
+    CardPassword,
+    CheckButton,
+  }
+
+  const [step, setStep] = useState<Step>(Step.CardNumber);
+  const goToStep = (next: Step) => setStep(next);
 
   const isAllCompleted =
     Object.values(cardNumbersErrorRecord).every((e) => e === "") &&
@@ -73,34 +80,34 @@ function AddCardPage() {
           }}
           cardNumbers={cardNumbersRecord}
           errorMessage={cardNumbersErrorRecord}
-          onComplete={() => goToStep(2)}
+          onComplete={() => goToStep(Step.CardCompany)}
         />
-        {step >= 2 && (
+        {step >= Step.CardCompany && (
           <CardCompanyPicker
             selectedCompany={selectedCompany}
             selectCompany={selectCompany}
-            onComplete={() => goToStep(3)}
+            onComplete={() => goToStep(Step.CardExpirationDate)}
           />
         )}
-        {step >= 3 && (
+        {step >= Step.CardExpirationDate && (
           <CardExpirationDate
             handleChange={dateValidate}
             cardExpirationDate={cardExpirationDate}
             errorMessage={cardExpirationDateError}
-            onComplete={() => goToStep(4)}
+            onComplete={() => goToStep(Step.CardCvcNumber)}
           />
         )}
-        {step >= 4 && (
+        {step >= Step.CardCvcNumber && (
           <CardCvcNumber
             setCompleted={setCvcCompleted}
-            onComplete={() => goToStep(5)}
+            onComplete={() => goToStep(Step.CardPassword)}
           />
         )}
 
-        {step >= 5 && (
+        {step >= Step.CardPassword && (
           <CardPassword
             setCompleted={setPasswordCompleted}
-            onComplete={() => goToStep(6)}
+            onComplete={() => goToStep(Step.CheckButton)}
           />
         )}
       </div>
