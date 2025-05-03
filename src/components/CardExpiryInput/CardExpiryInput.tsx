@@ -1,11 +1,13 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
 import { EXPIRYDATE_RULE } from '../../constants/cardValidationRule';
-import useExpiryDate from '../../hooks/useExpiry';
 import { useRef } from 'react';
+import { useCardFormContext } from '../../context/CardFormContext';
 
 const CardExpiryInput = () => {
-  const { date, error, validate } = useExpiryDate();
+  const {
+    expiryDate: { date, error, validate },
+  } = useCardFormContext();
   const expiryRef = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleExpiryDate = (

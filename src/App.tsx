@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { CardRegisterSuccessPage } from './pages/CardRegisterSuccessPage/CardRegisterSuccessPage';
-import CardRegisterPage from './pages/HomePage/CardRegisterPage';
+import CardRegisterPage from './pages/CardRegisterPage/CardRegisterPage';
 
 const App = () => {
   return (

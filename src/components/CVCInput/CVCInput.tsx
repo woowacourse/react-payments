@@ -1,10 +1,12 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
 import { CVC_RULE } from '../../constants/cardValidationRule';
-import useCvcNumber from '../../hooks/useCVC';
+import { useCardFormContext } from '../../context/CardFormContext';
 
 const CVCInput = () => {
-  const { CVC, error, validate } = useCvcNumber();
+  const {
+    CVCNumber: { CVC, error, validate },
+  } = useCardFormContext();
 
   return (
     <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>

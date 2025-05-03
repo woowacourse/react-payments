@@ -6,7 +6,7 @@ type ValitationResult = {
   validate: (value: string) => void;
 };
 
-export default function useBrand(): ValitationResult {
+export default function useCardBrand(): ValitationResult {
   const [brand, setBrand] = useState('');
   const [error, setError] = useState({ isValid: false, errorMessage: '' });
 

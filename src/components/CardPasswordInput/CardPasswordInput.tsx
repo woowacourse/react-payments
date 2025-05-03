@@ -1,8 +1,10 @@
 import InputContainer from '../InputContainer/InputContainer';
-import usePassword from '../../hooks/usePassword';
+import { useCardFormContext } from '../../context/CardFormContext';
 
 const CardPasswordInput = () => {
-  const { password, error, validate } = usePassword();
+  const {
+    password: { password, error, validate },
+  } = useCardFormContext();
 
   return (
     <InputContainer

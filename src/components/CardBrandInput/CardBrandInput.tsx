@@ -1,10 +1,12 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { CARD_BRANDS, OPTION_MESSAGE } from '../../constants/cardBrand';
 import { INPUT_CONTAINER } from '../../constants/title';
-import useBrand from '../../hooks/useBrand';
+import { useCardFormContext } from '../../context/CardFormContext';
 
 const CardBrandInput = () => {
-  const { brand, error, validate } = useBrand();
+  const {
+    cardBrand: { brand, error, validate },
+  } = useCardFormContext();
 
   return (
     <InputContainer

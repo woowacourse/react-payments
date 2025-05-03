@@ -1,11 +1,13 @@
 import InputContainer from '../InputContainer/InputContainer';
 import { INPUT_CONTAINER } from '../../constants/title';
 import { CARD_NUMBER_RULE } from '../../constants/cardValidationRule';
-import { useCardNumbers } from '../../hooks/useCardNumbers';
 import { useRef } from 'react';
+import { useCardFormContext } from '../../context/CardFormContext';
 
 const CardNumbersInput = () => {
-  const { numbers, error, validate } = useCardNumbers();
+  const {
+    cardNumbers: { numbers, error, validate },
+  } = useCardFormContext();
   const cardNumbersRef = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleCardNumbers = (
