@@ -115,16 +115,13 @@ export default function AddCardForm({
   );
   const isCardCVCNumberValid = validateErrorMessages<string, string>(cardCVCNumberErrorMessage);
   const isCardPasswordValid = validateErrorMessages<string, string>(cardPasswordErrorMessage);
+  const isFormValid = isCardNumberValid && isCardExpirationDateValid && isCardCVCNumberValid && isCardPasswordValid;
 
-  const button = isCardPasswordNextStep &&
-    isCardNumberValid &&
-    isCardExpirationDateValid &&
-    isCardCVCNumberValid &&
-    isCardPasswordValid && (
-      <S.CardAddFromButtonWrapper>
-        <Button type={'submit'}>확인</Button>
-      </S.CardAddFromButtonWrapper>
-    );
+  const button = isCardPasswordNextStep && isFormValid && (
+    <S.CardAddFromButtonWrapper>
+      <Button type={'submit'}>확인</Button>
+    </S.CardAddFromButtonWrapper>
+  );
 
   const navigate = useNavigate();
   return (
