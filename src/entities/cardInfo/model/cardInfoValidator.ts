@@ -1,8 +1,5 @@
 import { isValidCardType } from '../utils/cardTypeUtils';
-import {
-  CARD_INFO_VALID_RULE,
-  CardInfoType,
-} from '../../../entities/cardInfo/constants/cardInfoTypeConstants';
+import { CARD_INFO_VALID_RULE, CardInfoType } from '../constants/cardInfoTypeConstants';
 import { NO_ERROR, ERROR_MESSAGES } from '../constants/cardErrorConstants';
 
 export interface InputValidationResultProps {
