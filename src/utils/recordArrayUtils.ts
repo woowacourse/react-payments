@@ -13,5 +13,5 @@ export const removeItemFromRecordArray = <T extends string, U extends string>(
   item: U
 ) => ({
   ...prev,
-  [key]: prev[key].filter((e) => e !== item),
+  [key]: prev[key].filter((prevItem) => prevItem !== item),
 });
