@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
-import Input from '../../common/Input/Input';
 import { useId } from 'react';
+import Input from '../../common/Input/Input';
+import LabeledInput from '../../common/LabeledInput/LabeledInput';
 
 interface CardCVCFieldProps {
   cardCVC: string;
@@ -12,34 +12,22 @@ function CardCVCField({ isError, cardCVC, onChange }: CardCVCFieldProps) {
   const id = useId();
 
   return (
-    <div>
-      <Label htmlFor={`CardCVC-${id}`}>CVC</Label>
-      <InputWrapper>
-        <Input
-          isError={isError}
-          type="tel"
-          name="CardCVC"
-          id={`CardCVC-${id}`}
-          value={cardCVC}
-          aria-labelledby="CardCVC"
-          onChange={onChange}
-          placeholder="123"
-          maxLength={3}
-          regexString={/^\d*$/}
-          autoFocus={true}
-        />
-      </InputWrapper>
-    </div>
+    <LabeledInput htmlFor={`CardCVC-${id}`} label="CVC" isMultiple={false}>
+      <Input
+        isError={isError}
+        type="tel"
+        name="CardCVC"
+        id={`CardCVC-${id}`}
+        value={cardCVC}
+        aria-labelledby="CardCVC"
+        onChange={onChange}
+        placeholder="123"
+        maxLength={3}
+        regexString={/^\d*$/}
+        autoFocus={true}
+      />
+    </LabeledInput>
   );
 }
 
 export default CardCVCField;
-
-const InputWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-`;
-const Label = styled.label`
-  font-size: 12px;
-`;

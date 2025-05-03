@@ -1,7 +1,7 @@
 import { useId } from 'react';
-import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
 import useInputFocus from '../../../hooks/useInputFocus';
+import LabeledInput from '../../common/LabeledInput/LabeledInput';
 
 interface CardNumberFieldProps {
   cardNumber: string[];
@@ -20,11 +20,8 @@ function CardNumberField({
 
   const id = useId();
   return (
-    <div>
-      <Label htmlFor={`cardNumber-0-${id}`} id="cardNumber">
-        카드 번호
-      </Label>
-      <InputWrapper>
+    <LabeledInput htmlFor={`cardNumber-0-${id}`} label="카드 번호" isMultiple>
+      <>
         {cardNumber.map((v, index) => (
           <Input
             ref={(el) => {
@@ -50,18 +47,9 @@ function CardNumberField({
             autoFocus={index === 0 ? true : false}
           />
         ))}
-      </InputWrapper>
-    </div>
+      </>
+    </LabeledInput>
   );
 }
 
 export default CardNumberField;
-
-const InputWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-`;
-const Label = styled.label`
-  font-size: 12px;
-`;

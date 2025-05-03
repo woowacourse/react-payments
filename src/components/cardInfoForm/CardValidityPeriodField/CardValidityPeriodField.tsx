@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
-import Input from '../../common/Input/Input';
 import { useId } from 'react';
+import Input from '../../common/Input/Input';
 import useInputFocus from '../../../hooks/useInputFocus';
+import LabeledInput from '../../common/LabeledInput/LabeledInput';
 
 type CardValidityPeriodType = {
   month: string;
@@ -37,9 +37,12 @@ function CardValidityPeriodField({
   });
 
   return (
-    <div>
-      <Label htmlFor={`cardValidityPeriod-${id}-${month}`}>유효기간</Label>
-      <InputWrapper>
+    <LabeledInput
+      htmlFor={`cardValidityPeriod-${id}-${month}`}
+      label="유효기간"
+      isMultiple
+    >
+      <>
         <Input
           isError={isErrorMonth}
           type="tel"
@@ -83,18 +86,9 @@ function CardValidityPeriodField({
             }
           }}
         />
-      </InputWrapper>
-    </div>
+      </>
+    </LabeledInput>
   );
 }
 
 export default CardValidityPeriodField;
-
-const InputWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-`;
-const Label = styled.label`
-  font-size: 12px;
-`;

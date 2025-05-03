@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
-import Input from '../../common/Input/Input';
 import { useId } from 'react';
+import Input from '../../common/Input/Input';
+import LabeledInput from '../../common/LabeledInput/LabeledInput';
 
 interface CardPasswordFieldProps {
   cardPassword: string;
@@ -16,32 +16,24 @@ function CardPasswordField({
   const id = useId();
 
   return (
-    <div>
-      <Label htmlFor={`cardPassword-${id}`}>비밀번호 앞 2자리</Label>
-      <InputWrapper>
-        <Input
-          isError={isError}
-          type="password"
-          name="cardPassword"
-          id={`cardPassword-${id}`}
-          value={cardPassword}
-          onChange={onChange}
-          maxLength={2}
-          regexString={/^\d*$/}
-          autoFocus={true}
-        />
-      </InputWrapper>
-    </div>
+    <LabeledInput
+      htmlFor={`cardPassword-${id}`}
+      label="비밀번호"
+      isMultiple={false}
+    >
+      <Input
+        isError={isError}
+        type="password"
+        name="cardPassword"
+        id={`cardPassword-${id}`}
+        value={cardPassword}
+        onChange={onChange}
+        maxLength={2}
+        regexString={/^\d*$/}
+        autoFocus={true}
+      />
+    </LabeledInput>
   );
 }
 
 export default CardPasswordField;
-
-const InputWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-`;
-const Label = styled.label`
-  font-size: 12px;
-`;
