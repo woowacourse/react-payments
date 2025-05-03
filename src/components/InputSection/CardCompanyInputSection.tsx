@@ -10,7 +10,11 @@ type Option = {
 type CardCompanyOptions = {
   companies: Option[];
   selectedOption: string;
-  handleCardNumbersChange: (selected: string) => void;
+  handleCardNumbersChange: (
+    selected: string,
+    index: number,
+    moveFocus: (index: number) => void
+  ) => void;
   errorMessage: string;
   setRef: (
     index: number
@@ -35,8 +39,7 @@ const CardCompanyInputSection = ({
         <SelectField
           value={selectedOption}
           onChange={(value) => {
-            handleCardNumbersChange(value);
-            moveFocus(4);
+            handleCardNumbersChange(value, 4, moveFocus);
           }}
           options={companies}
           ref={setRef(4)}

@@ -4,7 +4,11 @@ import InputSection from "../common/InputSection/InputSection";
 
 type CardCVCNumberInputSectionProps = {
   cardCVCNumber: string;
-  handleCardCVCNumberChange: (value: string) => void;
+  handleCardCVCNumberChange: (
+    value: string,
+    index: number,
+    moveFocus: (index: number) => void
+  ) => void;
   isError: {
     cvcNumber: boolean;
   };
@@ -23,7 +27,6 @@ const CardCVCNumberInputSection = ({
   setRef,
   moveFocus,
 }: CardCVCNumberInputSectionProps) => {
-
   return (
     <>
       <InputSection
@@ -34,10 +37,7 @@ const CardCVCNumberInputSection = ({
         <InputField
           id={7}
           value={cardCVCNumber}
-          onChange={(value) => {
-            handleCardCVCNumberChange(value);
-            if (cardCVCNumber.length === 3) moveFocus(7);
-          }}
+          onChange={(value) => handleCardCVCNumberChange(value, 7, moveFocus)}
           isError={isError.cvcNumber}
           placeholder="123"
           setRef={setRef}
