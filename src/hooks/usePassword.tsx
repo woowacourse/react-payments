@@ -6,6 +6,7 @@ type ValitationResult = {
   password: string;
   error: { isValid: boolean; errorMessage: string };
   updatePassword: (value: string) => void;
+  reset: () => void;
 };
 
 export default function usePassword(): ValitationResult {
@@ -40,5 +41,5 @@ export default function usePassword(): ValitationResult {
     setError({ isValid: false, errorMessage: '' });
   };
 
-  return { password, error, updatePassword };
+  return { password, error, updatePassword, reset: () => setPassword('') };
 }

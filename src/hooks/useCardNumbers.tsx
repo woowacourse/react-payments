@@ -7,6 +7,7 @@ type ValitationResult = {
   error: errorType[];
   updateCardNumbers: (value: string, index: number) => void;
   isDisplay: boolean;
+  reset: () => void;
 };
 
 type errorType = {
@@ -78,5 +79,11 @@ export function useCardNumbers(): ValitationResult {
     updateError(index, false, '');
   };
 
-  return { numbers, error, updateCardNumbers, isDisplay };
+  return {
+    numbers,
+    error,
+    updateCardNumbers,
+    isDisplay,
+    reset: () => setNumbers(['', '', '', '']),
+  };
 }

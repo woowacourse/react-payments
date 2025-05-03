@@ -7,6 +7,7 @@ type ValitationResult = {
   error: errorType[];
   updateDate: (value: string, dateName: string) => void;
   isDisplay: boolean;
+  reset: () => void;
 };
 
 type dateType = {
@@ -120,5 +121,11 @@ export default function useExpiryDate(): ValitationResult {
     updateError(1, false, '');
   };
 
-  return { date, error, updateDate, isDisplay };
+  return {
+    date,
+    error,
+    updateDate,
+    isDisplay,
+    reset: () => setDate({ month: '', year: '' }),
+  };
 }

@@ -7,6 +7,7 @@ type ValitationResult = {
   error: { isValid: boolean; errorMessage: string };
   udpateCVC: (value: string) => void;
   isDisplay: boolean;
+  reset: () => void;
 };
 
 export default function useCVCNumber(): ValitationResult {
@@ -43,5 +44,5 @@ export default function useCVCNumber(): ValitationResult {
     setError({ isValid: false, errorMessage: '' });
   };
 
-  return { CVC, error, udpateCVC, isDisplay };
+  return { CVC, error, udpateCVC, isDisplay, reset: () => setCVC('') };
 }

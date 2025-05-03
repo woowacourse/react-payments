@@ -5,6 +5,7 @@ type ValitationResult = {
   error: { isValid: boolean; errorMessage: string };
   updateCardBrand: (value: string) => void;
   isDisplay: boolean;
+  reset: () => void;
 };
 
 export default function useCardBrand(): ValitationResult {
@@ -23,8 +24,6 @@ export default function useCardBrand(): ValitationResult {
   }, [brand]);
 
   const validate = (value: string) => {
-    setBrand(value);
-
     if (value === '') {
       setError({ isValid: false, errorMessage: '' });
       return;
@@ -33,5 +32,11 @@ export default function useCardBrand(): ValitationResult {
     setError({ isValid: false, errorMessage: '' });
   };
 
-  return { brand, error, updateCardBrand, isDisplay };
+  return {
+    brand,
+    error,
+    updateCardBrand,
+    isDisplay,
+    reset: () => setBrand(''),
+  };
 }

@@ -2,18 +2,25 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button/Button';
 import styles from './CardRegisterSuccessPage.module.css';
 import { CARD_BRANDS } from '../../constants/cardBrand';
+import { useCardFormContext } from '../../context/CardFormContext';
+
+type CardBrandKey = keyof typeof CARD_BRANDS;
+
+type CardRegisterSuccessState = {
+  numbers: string[];
+  brand: CardBrandKey;
+};
 
 export const CardRegisterSuccessPage = () => {
+  const { resetForm } = useCardFormContext();
   const navigate = useNavigate();
   const location = useLocation();
-  const { cardNumbers, brand } = location.state as {
-    cardNumbers: string[];
-    brand: keyof typeof CARD_BRANDS;
-  };
-  const firstCardNumbers = cardNumbers[0];
+  const { numbers, brand } = location.state as CardRegisterSuccessState;
+  const firstCardNumbers = numbers[0];
 
   const handleClick = () => {
-    navigate('/react-payments/');
+    resetForm();
+    navigate('/payments/');
   };
 
   return (
