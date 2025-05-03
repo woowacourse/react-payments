@@ -7,21 +7,16 @@ import { CardFormProvider } from './context/CardFormContext';
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/payments/"
-          element={
-            <CardFormProvider>
-              <CardRegisterPage />
-            </CardFormProvider>
-          }
-        />
+      <CardFormProvider>
+        <Routes>
+          <Route path="/payments/" element={<CardRegisterPage />} />
 
-        <Route
-          path="/payments/complete/"
-          element={<CardRegisterSuccessPage />}
-        />
-      </Routes>
+          <Route
+            path="/payments/complete/"
+            element={<CardRegisterSuccessPage />}
+          />
+        </Routes>
+      </CardFormProvider>
     </BrowserRouter>
   );
 };
