@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
+import { CARD_BRAND_COLORS, CardBrand } from '@/constants/brandColors';
 import { colors } from '@/styles/global';
 
-export const StyledCardContainer = styled.div`
+export const StyledCardContainer = styled.div<{ cardBrand?: CardBrand | null }>`
   position: relative;
-  background-color: ${colors.GY3};
+  background-color: ${({ cardBrand }) => (cardBrand ? CARD_BRAND_COLORS[cardBrand] : colors.GY3)};
   border-radius: 12px;
   width: 350px;
   height: 200px;

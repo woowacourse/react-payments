@@ -1,19 +1,28 @@
 import { css } from '@emotion/react';
 
-import { CardFormFiledProps } from './CardFormFiled.types';
+import { CardFormProps } from './CardFormFiled.types';
 
 import { CardInputLayout } from '../../common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
-import { CardInputType } from '@/hooks/useCardInput';
+import { useCardForm } from '@/hooks/useCardForm';
+import { useCardNumber } from '@/hooks/useCardNumber';
 
-type Props = {
-  cardNumbers: CardInputType[];
-} & CardFormFiledProps;
+export const CardNumberForm = ({ onNext }: CardFormProps) => {
+  const { formData, dispatch } = useCardForm();
 
-export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: Props) => {
-  const isInvalidCardNumber = cardNumbers.some((cardNumber) => !cardNumber.isValid);
+  const { cardNumbers, error, handleChange, setInputRef } = useCardNumber({
+    cardNumbers: formData.cardNumber,
+    setCardNumbers: (cardNumber) =>
+      dispatch({
+        type: 'CARD_NUMBER',
+        payload: { ...formData, cardNumber },
+      }),
+    onValid: onNext,
+  });
+
+  const isValid = cardNumbers.every((cardNumber) => cardNumber.isValid);
 
   return (
     <CardInputLayout
@@ -25,13 +34,17 @@ export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: 
         <Flex gap="8px">
           {cardNumbers.map((cardNumber, index) => (
             <Input
+              autoFocus={index === 0 && cardNumber.value.length === 0}
               key={`card-${index}`}
               type={index >= 2 ? 'password' : 'tel'}
               value={cardNumber.value}
-              onChange={(e) => onChange(index, e)}
-              onBlur={(e) => onBlur(index, e)}
+              maxLength={4}
+              onChange={(e) => handleChange(index, e)}
               isValid={cardNumber.isValid}
               placeholder="1234"
+              ref={(el) => {
+                if (el) setInputRef(el, index);
+              }}
             />
           ))}
         </Flex>
@@ -42,7 +55,7 @@ export const CardNumberForm = ({ cardNumbers, errorMessage, onChange, onBlur }: 
             height: 20px;
           `}
         >
-          {isInvalidCardNumber ? errorMessage : ''}
+          {!isValid ? error : ''}
         </Text>
       </Flex>
     </CardInputLayout>

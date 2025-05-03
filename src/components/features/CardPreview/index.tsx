@@ -8,28 +8,19 @@ import {
 
 import { Flex } from '@/components/common/Flex';
 import { Text } from '@/components/common/Text';
-import { CardInputType } from '@/hooks/useCardInput';
+import { useCardForm } from '@/hooks/useCardForm';
 
-type Props = {
-  /**
-   * 카드 번호를 입력받는 배열입니다.
-   */
-  cardNumbers: CardInputType[];
-  /**
-   * 카드 유효기간을 입력받는 배열입니다.
-   */
-  expireDate: CardInputType[];
-};
+export const CardPreview = () => {
+  const { formData } = useCardForm();
 
-export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
   const cardTypeCheck = (() => {
-    if (cardNumbers[0].value.startsWith('4')) {
+    if (formData.cardNumber[0].value.startsWith('4')) {
       return './images/Visa.png';
     }
 
     if (
-      Number(cardNumbers[0].value.slice(0, 2)) >= 51 &&
-      Number(cardNumbers[0].value.slice(0, 2)) <= 55
+      Number(formData.cardNumber[0].value.slice(0, 2)) >= 51 &&
+      Number(formData.cardNumber[0].value.slice(0, 2)) <= 55
     ) {
       return './images/Master.png';
     }
@@ -42,12 +33,12 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
   };
 
   return (
-    <StyledCardContainer>
+    <StyledCardContainer cardBrand={formData.brand}>
       <StyledICCheapContainer />
       {cardTypeCheck && <StyledCardTypeIcon src={cardTypeCheck} alt="cardType" />}
       <Flex direction="column" alignItems="flex-start" padding="70px 25px 0px 25px" gap="10px">
         <Flex gap="20px">
-          {cardNumbers.map((str, index) => (
+          {formData.cardNumber.map((str, index) => (
             <div
               key={`card-number-${index}`}
               css={css`
@@ -72,7 +63,9 @@ export const CardPreview = ({ cardNumbers, expireDate }: Props) => {
             text-align: left;
           `}
         >
-          {expireDate[0].value ? expireDate.map((date) => date.value).join(' / ') : ''}
+          {formData.expireDate[0]?.value
+            ? formData.expireDate?.map((date) => date.value).join(' / ')
+            : ''}
         </Text>
       </Flex>
     </StyledCardContainer>

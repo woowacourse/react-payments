@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { CardInputItem } from '@/components/features/CardFormFiled/CardFormFiled.types';
 import { CardPreview } from '@/components/features/CardPreview';
-import { CardInputType } from '@/hooks/useCardInput';
 
 const meta = {
   title: 'features/CardPreview',
@@ -20,7 +20,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const createCardNumbers = (count: number, value: string): CardInputType[] => {
+const createCardNumbers = (count: number, value: string): CardInputItem[] => {
   return Array.from({ length: count }, () => ({ value, isValid: true }));
 };
 
@@ -31,6 +31,7 @@ export const Default: Story = {
       { value: '12', isValid: true },
       { value: '34', isValid: true },
     ],
+    cardBrand: 'BC카드',
   },
   argTypes: {
     cardNumbers: {
@@ -38,6 +39,10 @@ export const Default: Story = {
     },
     expireDate: {
       control: false,
+    },
+    cardBrand: {
+      control: { type: 'select' },
+      options: ['BC카드', '신한카드', '삼성카드', '현대카드', '롯데카드', '우리카드'],
     },
   },
 };
