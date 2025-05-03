@@ -7,18 +7,19 @@ import isNumberWithinRange from '../../utils/isNumberWithinRange';
 import {MESSAGE} from '../constants/error';
 import {FormFieldProps} from '../../type/FormField';
 
-const INPUT_MAX_LENGTH = 3;
+const INPUT_MAX_LENGTH = 2;
 
 type Props = FormFieldProps<string, string>;
 
 const errorRule = [
   {
     error: MESSAGE.INVALID_NUMBER,
-    validate: (cvc: string) => !isNumberWithinRange(cvc, INPUT_MAX_LENGTH),
+    validate: (password: string) =>
+      !isNumberWithinRange(password, INPUT_MAX_LENGTH),
   },
 ];
 
-const CardCvcSection = ({
+const PasswordSection = ({
   value,
   onChange,
   onValidate,
@@ -32,13 +33,14 @@ const CardCvcSection = ({
 
   return (
     <CardNumberWrap>
-      <Title>CVC 번호를 입력해 주세요</Title>
-      <InputField label="CVC" errorMessage={errorMessage}>
+      <Title>비밀번호를 입력해 주세요</Title>
+      <InputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>
         <Input
-          name="cvcNumber"
+          name="password"
+          type="password"
           maxLength={INPUT_MAX_LENGTH}
           isError={errorMessage.length > 0}
-          placeholder="123"
+          placeholder="**"
           value={value}
           autoFocus
           onChange={handleInput}
@@ -55,7 +57,7 @@ const CardCvcSection = ({
   );
 };
 
-export default CardCvcSection;
+export default PasswordSection;
 
 const CardNumberWrap = styled.div`
   height: 130px;

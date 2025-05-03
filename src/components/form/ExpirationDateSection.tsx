@@ -1,21 +1,20 @@
-import {useState} from 'react';
+import {ChangeEvent, useEffect, useRef} from 'react';
 import Description from '../description/Description';
 import InputField from '../inputField/InputField';
 import Title from '../title/Title';
 import Input from '../input/Input';
 import findErrorOrder from '../../utils/findErrorOrder';
 import isNumberWithinRange from '../../utils/isNumberWithinRange';
-import {MESSAGE} from './constants/error';
 import styled from 'styled-components';
 import {ExpirationDate} from '../../type/Card';
+import {MESSAGE} from '../constants/error';
+import {FormFieldProps} from '../../type/FormField';
 
 const INPUT_MAX_LENGTH = 2;
 const ORDER_LABEL = ['month', 'year'] as const;
+const CURRENT_YEAR = new Date().getFullYear() % 100;
 
-type Props = {
-  expirationDate: ExpirationDate;
-  onExpirationDateChange: (order: keyof ExpirationDate, value: string) => void;
-};
+type Props = FormFieldProps<ExpirationDate, keyof ExpirationDate>;
 
 const expirationErrorRule = [
   {
@@ -32,62 +31,70 @@ const expirationErrorRule = [
     },
   },
   {
-    error: (nowYear: number) => MESSAGE.YEAR_RANGE(nowYear),
-    validate: (date: string, order: keyof ExpirationDate, nowYear: number) => {
+    error: MESSAGE.YEAR_RANGE(CURRENT_YEAR),
+    validate: (date: string, order: keyof ExpirationDate) => {
       if (order === 'year') {
         const year = Number(date);
-        return year < nowYear && year >= 0;
+        return year < CURRENT_YEAR && year >= 0;
       }
     },
   },
 ];
 
 const ExpirationDateSection = ({
-  expirationDate,
-  onExpirationDateChange,
+  value,
+  onChange,
+  onValidate,
+  onFocusout,
+  errorMessage,
 }: Props) => {
-  const [error, setError] = useState({
-    month: '',
-    year: '',
-  });
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
-  const nowYear = new Date().getFullYear() % 100;
+  const handleInput = (
+    e: ChangeEvent<HTMLInputElement>,
+    order: keyof ExpirationDate
+  ) => {
+    onChange(e, order);
+    onValidate(expirationErrorRule, e, order);
+  };
 
-  const handleInput = (order: keyof ExpirationDate, value: string) => {
-    onExpirationDateChange(order, value);
-
-    const matchedError = expirationErrorRule.find((rule) =>
-      rule.validate(value, order, nowYear)
+  useEffect(() => {
+    const activeElement = document.activeElement;
+    const focusedIndex = inputRefs.findIndex(
+      (ref) => ref.current === activeElement
     );
 
-    setError((prev) => ({
-      ...prev,
-      [order]: matchedError
-        ? typeof matchedError.error === 'function'
-          ? matchedError.error(nowYear)
-          : matchedError.error
-        : '',
-    }));
-  };
+    const order = ORDER_LABEL[focusedIndex];
 
-  const handleFocusout = (order: keyof ExpirationDate, value: string) => {
-    if (value.length < INPUT_MAX_LENGTH)
-      setError((prev) => ({...prev, [order]: MESSAGE.MONTH_FORMAT}));
-  };
+    if (
+      errorMessage[order]?.length === 0 &&
+      value[order]?.length === INPUT_MAX_LENGTH
+    )
+      inputRefs[focusedIndex + 1]?.current?.focus();
+  }, [errorMessage, value]);
 
   return (
     <CardNumberWrap>
       <Title>카드 유효기간을 입력해 주세요</Title>
       <Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
-      <InputField label="유효기간" errorMessage={findErrorOrder(error)}>
-        {ORDER_LABEL.map((label) => (
+      <InputField label="유효기간" errorMessage={findErrorOrder(errorMessage)}>
+        {ORDER_LABEL.map((label, idx) => (
           <Input
-            isError={error[label].length > 0}
+            key={label}
+            ref={inputRefs[idx]}
+            name="expirationDate"
+            isError={errorMessage[label].length > 0}
             placeholder={label === 'month' ? 'MM' : 'YY'}
-            value={expirationDate[label]}
+            value={value[label]}
             maxLength={INPUT_MAX_LENGTH}
-            onChange={(e) => handleInput(label, e.target.value)}
-            onBlur={(e) => handleFocusout(label, e.target.value)}
+            autoFocus={label === 'month'}
+            onChange={(e) => handleInput(e, label)}
+            onBlur={(e) =>
+              onFocusout(e, INPUT_MAX_LENGTH, MESSAGE.MONTH_FORMAT, label)
+            }
           />
         ))}
       </InputField>

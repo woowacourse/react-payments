@@ -1,0 +1,131 @@
+import styled from 'styled-components';
+
+import PasswordSection from '../components/form/PasswordSection';
+import CardCompanySection from '../components/form/CardCompanySection';
+import CardNumberSection from '../components/form/CardNumberSection';
+import ExpirationDateSection from '../components/form/ExpirationDateSection';
+import CardCvcSection from '../components/form/CardCvcSection';
+import Button from '../components/button/Button';
+import CardPreview from '../components/cardPreview/CardPreview';
+
+import {useNavigate} from 'react-router';
+import PATH from '../router/path';
+import useInput from '../hooks/useInput';
+import useCardValidations from '../hooks/useCardValidations';
+import useAutoStep, {CardForm} from '../hooks/useAutoStep';
+
+const INIT_CARD_NUMBER = {
+  first: '',
+  second: '',
+  third: '',
+  fourth: '',
+};
+
+const INIT_EXPIRATION_DATE = {
+  month: '',
+  year: '',
+};
+
+const INIT_FORM_DATA: CardForm = {
+  cardNumber: INIT_CARD_NUMBER,
+  expirationDate: INIT_EXPIRATION_DATE,
+  cvcNumber: '',
+  cardCompany: '',
+  password: '',
+};
+
+const Main = () => {
+  const {formData, onChange} = useInput(INIT_FORM_DATA);
+  const {isErrors, errorMessages, onValidate, onFocusout} = useCardValidations(
+    {
+      cardNumber: false,
+      expirationDate: false,
+      cvcNumber: false,
+      cardCompany: false,
+      password: false,
+    },
+    INIT_FORM_DATA
+  );
+
+  const navigate = useNavigate();
+
+  const {step, isButtonVisible} = useAutoStep(formData, isErrors);
+
+  return (
+    <MainContainer>
+      <CardPreview
+        cardNumbers={formData.cardNumber}
+        expirationDate={formData.expirationDate}
+        cardCompany={formData.cardCompany}
+      />
+
+      {step >= 5 && (
+        <PasswordSection
+          value={formData.password}
+          onChange={onChange}
+          onValidate={onValidate}
+          onFocusout={onFocusout}
+          errorMessage={errorMessages.password}
+        />
+      )}
+
+      {step >= 4 && (
+        <CardCvcSection
+          value={formData.cvcNumber}
+          onChange={onChange}
+          onValidate={onValidate}
+          onFocusout={onFocusout}
+          errorMessage={errorMessages.cvcNumber}
+        />
+      )}
+
+      {step >= 3 && (
+        <ExpirationDateSection
+          value={formData.expirationDate}
+          onChange={onChange}
+          onValidate={onValidate}
+          onFocusout={onFocusout}
+          errorMessage={errorMessages.expirationDate}
+        />
+      )}
+
+      {step >= 2 && (
+        <CardCompanySection onChange={onChange} name="cardCompany" />
+      )}
+
+      {step >= 1 && (
+        <CardNumberSection
+          value={formData.cardNumber}
+          onChange={onChange}
+          onValidate={onValidate}
+          onFocusout={onFocusout}
+          errorMessage={errorMessages.cardNumber}
+        />
+      )}
+
+      {isButtonVisible && (
+        <Button
+          onClick={() =>
+            navigate(PATH.CONFIRM, {
+              state: {
+                firstSection: formData.cardNumber.first,
+                cardCompany: formData.cardCompany,
+              },
+            })
+          }
+          style={{position: 'fixed', left: 0, bottom: 0}}
+        >
+          확인
+        </Button>
+      )}
+    </MainContainer>
+  );
+};
+
+export default Main;
+
+const MainContainer = styled.div`
+  width: 376px;
+  padding: 77px 30px 20px;
+  margin: auto;
+`;

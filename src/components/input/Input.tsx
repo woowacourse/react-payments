@@ -1,30 +1,16 @@
-import {InputHTMLAttributes} from 'react';
+import {ComponentProps, forwardRef, Ref} from 'react';
 import {COLORS} from '../../styles/colors';
 import styled from 'styled-components';
 
 type Props = {
   isError?: boolean;
-} & InputHTMLAttributes<HTMLInputElement>;
+} & ComponentProps<'input'>;
 
-const Input = ({
-  placeholder,
-  isError = false,
-  value,
-  maxLength,
-  onChange,
-  onBlur,
-}: Props) => {
-  return (
-    <TextInput
-      maxLength={maxLength}
-      value={value}
-      placeholder={placeholder}
-      onChange={onChange}
-      onBlur={onBlur}
-      $isError={isError}
-    />
-  );
-};
+const Input = forwardRef(
+  ({isError = false, ...props}: Props, ref: Ref<HTMLInputElement>) => {
+    return <TextInput ref={ref} {...props} $isError={isError} />;
+  }
+);
 
 const TextInput = styled.input<{$isError: boolean}>(
   (props) => `

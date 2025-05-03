@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import {CardNumber, ExpirationDate} from '../../type/Card';
+import {CardCompany, CardNumber, ExpirationDate} from '../../type/Card';
+import {CARD_COMPANY} from '../constants/card';
 
 type Props = {
   cardNumbers: CardNumber;
   expirationDate: ExpirationDate;
+  cardCompany: CardCompany | string;
 };
 
 const BADGE_BRAND = {
@@ -31,27 +33,35 @@ const cardBrandRules = [
 ];
 
 const badgeImagePath = (badgeBrand: number) => {
-  if (badgeBrand === 1) return './images/Mastercard.png';
-  if (badgeBrand === 2) return './images/Visa.png';
-
-  return '';
+  return (
+    {
+      1: './images/Mastercard.png',
+      2: './images/Visa.png',
+    }[badgeBrand] ?? ''
+  );
 };
 
 const formatDate = (expirationDate: ExpirationDate) => {
   const {month, year} = expirationDate;
 
-  if (month === '' && year === '') return;
+  if (month === '' && year === '') return '';
   if (year === '') return month;
   return `${month} / ${year}`;
 };
 
-const Card = ({cardNumbers, expirationDate}: Props) => {
+const formatCardNumbers = (section: string, value: string) => {
+  if (section === 'third' || section === 'fourth')
+    return '•'.repeat(value?.length);
+  return value;
+};
+
+const CardPreview = ({cardNumbers, expirationDate, cardCompany}: Props) => {
   const matchedCard = cardBrandRules.find((rule) =>
     rule.validate(cardNumbers.first)
   );
 
   return (
-    <Container>
+    <Container background={CARD_COMPANY[cardCompany as CardCompany]?.color}>
       <Wrap>
         <Chip />
         <BrandBadge
@@ -61,10 +71,8 @@ const Card = ({cardNumbers, expirationDate}: Props) => {
 
       <CardInfoWrap>
         {Object.entries(cardNumbers).map(([key, value]) => (
-          <CardNumbers key={key} blind={key === 'third' || key === 'fourth'}>
-            {key === 'third' || key === 'fourth'
-              ? '•'.repeat(value?.length)
-              : value}
+          <CardNumbers key={key} $blind={key === 'third' || key === 'fourth'}>
+            {formatCardNumbers(key, value)}
           </CardNumbers>
         ))}
       </CardInfoWrap>
@@ -74,15 +82,15 @@ const Card = ({cardNumbers, expirationDate}: Props) => {
   );
 };
 
-export default Card;
+export default CardPreview;
 
-const Container = styled.div`
+const Container = styled.div<{background: string}>`
   width: 212px;
   height: 132px;
   margin: 0 auto 45px;
   padding: 8px 12px;
   border-radius: 4px;
-  background: #333;
+  background: ${(props) => (props.background ? props.background : '#333')};
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
 
@@ -114,6 +122,6 @@ const CardInfoWrap = styled.div`
   color: #fff;
 `;
 
-const CardNumbers = styled.p<{blind: boolean}>`
-  letter-spacing: ${(props) => (props.blind ? '' : '2.24px')};
+const CardNumbers = styled.p<{$blind: boolean}>`
+  letter-spacing: ${(props) => (props.$blind ? '' : '2.24px')};
 `;
