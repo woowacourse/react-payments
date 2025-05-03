@@ -7,7 +7,7 @@ function useTotalInputValidation(stepsCount: number) {
   const updateValidity = (step: InputStep, isValid: boolean) => {
     setIsValidInput((prev) => {
       const updated = [...prev];
-      updated[step] = isValid;
+      updated[step - 1] = isValid;
       return updated;
     });
   };

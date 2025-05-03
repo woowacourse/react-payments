@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
 export enum InputStep {
-  CARD_NUMBER = 0,
-  CARD_COMPANY = 1,
-  EXPIRATION_DATE = 2,
-  CVC = 3,
-  PASSWORD = 4,
-  COMPLETED = 5,
+  CARD_NUMBER = 1,
+  CARD_COMPANY = 2,
+  EXPIRATION_DATE = 3,
+  CVC = 4,
+  PASSWORD = 5,
 }
 
 function useStep(initialStep: InputStep = InputStep.CARD_NUMBER) {
@@ -14,7 +13,7 @@ function useStep(initialStep: InputStep = InputStep.CARD_NUMBER) {
 
   const goToNextStep = (step: number) => {
     if (currentStep > step) return;
-    setCurrentStep((prev) => (prev < InputStep.COMPLETED ? prev + 1 : prev));
+    setCurrentStep((prev) => (prev < InputStep.PASSWORD + 1 ? prev + 1 : prev));
   };
 
   const isPassedStep = (step: InputStep) => {
@@ -22,9 +21,8 @@ function useStep(initialStep: InputStep = InputStep.CARD_NUMBER) {
   };
 
   return {
-    currentStep,
     goToNextStep,
-    isPassedStep
+    isPassedStep,
   };
 }
 
