@@ -26,10 +26,6 @@ const CardNumbersInputSection = ({
 }: CardNumbersInputSectionProps) => {
   const { focusFirst, focusNext } = useRefFocus(Object.values(inputRef));
 
-  useEffect(() => {
-    focusFirst();
-  }, []);
-
   const handleChangeInput =
     (key: CardNumbersKeys) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setCardNumbers(key)(e);
@@ -41,6 +37,10 @@ const CardNumbersInputSection = ({
         focusNext();
       }
     };
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
 
   return (
     <>

@@ -26,16 +26,6 @@ const CardExpirationDateInputSection = ({
 }: CardExpirationDateInputSectionProps) => {
   const { focusFirst, focusNext } = useRefFocus(Object.values(inputRef));
 
-  useEffect(() => {
-    focusFirst();
-  }, []);
-
-  useEffect(() => {
-    if (cardExpirationDate.month.length === 2) {
-      inputRef.year.current?.focus();
-    }
-  }, [cardExpirationDate.month]);
-
   const handleMonthInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardExpirationDate('month')(e);
     if (e.target.value.length === 2) {
@@ -49,6 +39,16 @@ const CardExpirationDateInputSection = ({
       goNextStep({ time: 'once', key: 'cardExpirationDate' });
     }
   };
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
+
+  useEffect(() => {
+    if (cardExpirationDate.month.length === 2) {
+      inputRef.year.current?.focus();
+    }
+  }, [cardExpirationDate.month]);
 
   return (
     <>

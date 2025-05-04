@@ -34,10 +34,6 @@ const CardCVCNumberInputSection = ({
 }: CardCVCNumberInputSectionProps) => {
   const { focusFirst } = useRefFocus([inputRef]);
 
-  useEffect(() => {
-    focusFirst();
-  }, []);
-
   const handleCVCNumberInputChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -46,6 +42,10 @@ const CardCVCNumberInputSection = ({
       goNextStep({ time: 'once', key: 'cardCVCNumber' });
     }
   };
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
 
   return (
     <>

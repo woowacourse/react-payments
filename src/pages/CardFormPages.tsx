@@ -16,6 +16,8 @@ import useStep from '@/hooks/useStep';
 import StepStack from '@/components/common/StepStack/StepStack';
 
 const CardFormPages = () => {
+  const nav = useNavigate();
+
   const {
     cardNumbersForm,
     cardCVCNumberForm,
@@ -26,22 +28,12 @@ const CardFormPages = () => {
   } = useCardForm();
 
   const [isUserFocusing, setIsUserFocusing] = useState(false);
-
   const { currentStep, goNextStep } = useStep();
-
-  const nav = useNavigate();
-  const handleSubmit = () => {
-    setIsUserFocusing(false);
-    nav(ROUTES.COMPLETE, {
-      state: { cardFirstNumber: cardNumbersForm.cardNumbers.firstNumber },
-    });
-  };
 
   const firstNumber = useRef<HTMLInputElement>(null);
   const secondNumber = useRef<HTMLInputElement>(null);
   const thirdNumber = useRef<HTMLInputElement>(null);
   const fourthNumber = useRef<HTMLInputElement>(null);
-
   const cardNumbersInputRef = useMemo(
     () => ({
       firstNumber,
@@ -51,10 +43,8 @@ const CardFormPages = () => {
     }),
     []
   );
-
   const month = useRef<HTMLInputElement>(null);
   const year = useRef<HTMLInputElement>(null);
-
   const cardExpirationDateInputRef = useMemo(
     () => ({
       month,
@@ -62,9 +52,15 @@ const CardFormPages = () => {
     }),
     []
   );
-
   const cardCVCInputRef = useRef<HTMLInputElement>(null);
   const cardPasswordInputRef = useRef<HTMLInputElement>(null);
+  
+  const handleSubmit = () => {
+    setIsUserFocusing(false);
+    nav(ROUTES.COMPLETE, {
+      state: { cardFirstNumber: cardNumbersForm.cardNumbers.firstNumber },
+    });
+  };
 
   return (
     <>
