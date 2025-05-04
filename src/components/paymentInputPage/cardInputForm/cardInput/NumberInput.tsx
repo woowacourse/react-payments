@@ -53,6 +53,7 @@ function NumberInput({
         autoFocus={index === 0}
         isRequired={true}
         dataInputId={index}
+        key={index}
       />
     );
   });
