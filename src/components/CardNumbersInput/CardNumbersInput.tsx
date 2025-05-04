@@ -1,53 +1,23 @@
-import { useRef, useState } from 'react';
 import InputContainer from '../InputContainer/InputContainer';
-import {
-  validateCardNumbers,
-  validateFirstCardNumbers,
-} from '../../domain/validate';
-import CustomCardNumbersError from '../../error/CustomCardNumbersError';
 import { INPUT_CONTAINER } from '../../constants/title';
-import ERROR from '../../constants/errorMessage';
-import { CARD_VALIDATION_INFO } from '../../constants/cardValidationInfo';
+import { CARD_NUMBER_RULE } from '../../constants/cardValidationRule';
+import { useRef } from 'react';
+import { useCardFormContext } from '../../context/CardFormContext';
 
-type CardNumbersInputProps = {
-  cardNumbers: string[];
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
-};
+const CardNumbersInput = () => {
+  const {
+    cardNumbers: { numbers, error, updateCardNumbers },
+  } = useCardFormContext();
+  const cardNumbersRef = useRef<(HTMLInputElement | null)[]>([]);
 
-const CardNumbersInput = ({
-  cardNumbers,
-  setCardNumbers,
-}: CardNumbersInputProps) => {
-  const [helperText, setHelperText] = useState('');
-  const [errorIndex, setErrorIndex] = useState<number | null>(null);
-  const inputRefs = useRef<(HTMLElement | null)[]>([]);
-
-  const handleCardNumberInput = (
+  const handleCardNumbers = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    try {
-      const newCardNumbers = [...cardNumbers];
-      newCardNumbers[index] = e.target.value;
-      setCardNumbers(newCardNumbers);
-
-      validateFirstCardNumbers(newCardNumbers[0]);
-      validateCardNumbers(newCardNumbers, CARD_VALIDATION_INFO.CARD_MAX_LENGTH);
-      if (helperText !== '') {
-        inputRefs.current[index]?.focus();
-      }
-      setHelperText('');
-      setErrorIndex(null);
-    } catch (error: unknown) {
-      if (error instanceof CustomCardNumbersError) {
-        if (error.message === ERROR.CARD_NUMBER.INVALID) {
-          inputRefs.current[0]?.focus();
-          setErrorIndex(0);
-        } else {
-          inputRefs.current[error.index]?.focus();
-          setErrorIndex(error.index);
-        }
-        setHelperText(error.message);
+    updateCardNumbers(e.target.value, index);
+    if (e.target.value.length === CARD_NUMBER_RULE.MAX_LENGTH) {
+      if (index < numbers.length - 1) {
+        cardNumbersRef.current[index + 1]?.focus();
       }
     }
   };
@@ -59,23 +29,25 @@ const CardNumbersInput = ({
     >
       <h4 className="label">카드 번호</h4>
       <div className="inputContainer">
-        {cardNumbers.map((value, index) => (
+        {numbers.map((number, index) => (
           <input
             key={index}
             placeholder="1234"
             name={`card${index + 1}`}
-            value={value}
-            onChange={(e) => handleCardNumberInput(e, index)}
+            value={number}
+            onChange={(e) => handleCardNumbers(e, index)}
+            className={`input ${error[index].isValidate && 'errorInput'}`}
+            maxLength={CARD_NUMBER_RULE.MAX_LENGTH}
             ref={(element) => {
-              inputRefs.current.push(element);
+              if (element) {
+                cardNumbersRef.current[index] = element;
+              }
             }}
-            className={`input ${index === errorIndex && 'errorInput'}`}
-            maxLength={CARD_VALIDATION_INFO.CARD_MAX_LENGTH}
           />
         ))}
       </div>
       <p className={`helperText`} data-testid="helper-text">
-        {helperText}
+        {error.find((error) => error.errorMessage !== '')?.errorMessage ?? ''}
       </p>
     </InputContainer>
   );

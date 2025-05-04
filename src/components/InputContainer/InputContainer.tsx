@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./InputContainer.module.css";
+import React from 'react';
+import styles from './InputContainer.module.css';
 
 type propsType = {
   children: React.ReactNode;
