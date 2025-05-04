@@ -99,7 +99,9 @@ function CardInputForm() {
     ref
   );
 
-  const renderList = inputs.slice(0, order + 1) as RenderItem<CardInputProps>[];
+  const renderList = inputs
+    .slice(0, order + 1)
+    .reverse() as RenderItem<CardInputProps>[];
   const isCardValid =
     isCardNumberValid &&
     isIssuerValid &&
