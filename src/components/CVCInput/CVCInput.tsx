@@ -1,15 +1,9 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
-import { HandleInputParams } from '../CardPage/CardPage';
-import { inputValidation } from '../../validators/inputValidator';
 import HelperText from '../HelperText/HelperText';
-import useInputValidation from '../../hooks/useInputValidation';
-import { useCallback } from 'react';
-
-type CVCInputProps = {
-  values: string[];
-  onChange: ({ e, idx }: HandleInputParams) => void;
-};
+import { useEffect } from 'react';
+import { HandleInputParams, InputProps } from '../../types/input';
+import useValidation from '../../hooks/useValidation';
 
 const StyledCVCInput = styled.div`
   width: 100%;
@@ -33,26 +27,37 @@ const StyledHelperTextWrapper = styled.div`
   height: 30px;
 `;
 
-const CVCInput = ({ values, onChange }: CVCInputProps) => {
-  const validationCallback = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => inputValidation(e, 3),
-    []
-  );
-  const { isError, errorMessage, validate } = useInputValidation([false], validationCallback);
+const INITIAL_ERROR_STATES = [false];
+const VALID_LENGTH = 3;
+
+const CVCInput = ({ values, onChange, onValidChange }: InputProps) => {
+  const { error, validate } = useValidation(INITIAL_ERROR_STATES, VALID_LENGTH);
+
+  const { state: errorState, message: errorMessage } = error;
+
+  useEffect(() => {
+    const isValid =
+      errorState.every((error) => error === false) && values.every((value) => value.length === 3);
+    onValidChange(isValid);
+  }, [errorState, values, onValidChange]);
+
+  const handleChange = ({ e, idx }: HandleInputParams) => {
+    onChange({ e, idx });
+    validate({ e, idx });
+  };
 
   return (
     <StyledCVCInput>
       <StyledLabel>CVC</StyledLabel>
       <StyledInputWrapper>
-        {values.map((value: string, idx: number) => (
+        {values.map((value, idx) => (
           <Input
             key={idx}
             value={value}
-            onChange={(e) => onChange({ e, idx })}
-            onBlur={(e) => validate({ e, idx })}
+            onChange={(e) => handleChange({ e, idx })}
             maxLength={3}
             placeholder={'123'}
-            isError={isError[idx]}
+            errorState={errorState[idx]}
           />
         ))}
       </StyledInputWrapper>

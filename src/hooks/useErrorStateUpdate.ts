@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 const useErrorArrayState = (length: number, onAllValid?: () => void) => {
-  const [isError, setIsError] = useState<boolean[]>(() => Array(length).fill(false));
+  const [errorState, setErrorState] = useState(() => Array(length).fill(false));
 
   const updateErrorState = (idx: number, hasError: boolean) => {
-    setIsError((prev) => {
+    setErrorState((prev) => {
       const updated = [...prev];
       updated[idx] = hasError;
 
-      const allValid = updated.every((error) => error === false);
+      const allValid = updated.every((error) => !error);
       if (!hasError && allValid && onAllValid) {
         onAllValid();
       }
@@ -18,7 +18,7 @@ const useErrorArrayState = (length: number, onAllValid?: () => void) => {
   };
 
   return {
-    isError,
+    errorState,
     updateErrorState,
   };
 };

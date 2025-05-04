@@ -1,4 +1,4 @@
-import { HandleInputParams } from '../components/CardPage/CardPage';
+import { HandleInputParams } from '../types/input';
 import { ERROR_MESSAGES } from './errorMessages';
 import { checkNumber, checkValidLength } from './inputValidator';
 
@@ -44,6 +44,7 @@ export const expirationDateValidation = (
   } else if (idx === 1) {
     checkValidYear(expDateValue);
   }
+
   const updatedValues = [...values];
   updatedValues[idx] = expDateValue;
 

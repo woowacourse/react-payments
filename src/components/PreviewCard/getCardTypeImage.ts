@@ -3,7 +3,9 @@ const MASTERCARD = {
   END: 55,
 };
 
-const useCardTypeImage = (firstCardInput: string) => {
+type CardImage = './Visa.png' | './Mastercard.png' | null;
+
+const getCardTypeImage = (firstCardInput: string): CardImage => {
   if (firstCardInput[0] === '4') return './Visa.png';
 
   const cardTypePrefix = Number(firstCardInput.slice(0, 2));
@@ -13,4 +15,4 @@ const useCardTypeImage = (firstCardInput: string) => {
   return null;
 };
 
-export default useCardTypeImage;
+export default getCardTypeImage;
