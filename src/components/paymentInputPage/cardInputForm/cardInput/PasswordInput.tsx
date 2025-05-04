@@ -50,4 +50,5 @@ function PasswordInput({ isValid, setIsValid }: PasswordInputProps) {
     </>
   );
 }
+
 export default PasswordInput;

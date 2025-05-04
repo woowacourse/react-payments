@@ -56,6 +56,7 @@ function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
       checkIsValidExpiry('year', value);
     }
   }
+
   return (
     <>
       <InputForm
@@ -91,4 +92,5 @@ function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
     </>
   );
 }
+
 export default ExpiryDateInput;
