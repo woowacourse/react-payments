@@ -3,7 +3,20 @@ import useErrorArrayState from './useErrorStateUpdate';
 import { HandleInputParams } from '../types/input';
 import { inputValidation } from '../validators/inputValidator';
 
-function useInputValidation(initialErrorState: boolean[], validLength: number) {
+type ExpDateValidationFn = (
+  values: string[],
+  params: HandleInputParams,
+  validLength: number
+) => void;
+
+function useValidation(
+  initialErrorState: boolean[],
+  validLength: number,
+  options?: {
+    values: string[];
+    expDateValidationFn: ExpDateValidationFn;
+  }
+) {
   const { errorState, updateErrorState } = useErrorArrayState(initialErrorState.length, () =>
     setErrorMessage('')
   );
@@ -11,12 +24,16 @@ function useInputValidation(initialErrorState: boolean[], validLength: number) {
   const [errorMessage, setErrorMessage] = useState('');
   const error = { state: errorState, message: errorMessage };
 
-  const validate = ({ e, idx }: HandleInputParams) => {
+  const validate = (params: HandleInputParams) => {
     try {
-      inputValidation(e, validLength);
-      updateErrorState(idx, false);
+      if (options) {
+        options.expDateValidationFn(options.values, params, validLength);
+      } else {
+        inputValidation(params.e, validLength);
+      }
+      updateErrorState(params.idx, false);
     } catch (error) {
-      updateErrorState(idx, true);
+      updateErrorState(params.idx, true);
       if (error instanceof Error) {
         setErrorMessage(error.message);
       }
@@ -29,4 +46,4 @@ function useInputValidation(initialErrorState: boolean[], validLength: number) {
   };
 }
 
-export default useInputValidation;
+export default useValidation;
