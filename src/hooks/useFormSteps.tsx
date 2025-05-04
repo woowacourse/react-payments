@@ -4,13 +4,23 @@ import Dropdown from '../components/Dropdown/Dropdown';
 import ExpirationDateInput from '../components/ExpirationDateInput/ExpirationDateInput';
 import CVCInput from '../components/CVCInput/CVCInput';
 import PasswordInput from '../components/PasswordInput/PasswordInput';
+import { HandleInputParams } from '../types/input';
+
+interface FormField {
+  values: string[];
+  isValid: boolean;
+  setIsValid: (isValid: boolean) => void;
+  handleInput: (params: HandleInputParams) => void;
+}
 
 type UseFormStepsProps = {
-  cardNumber: any;
-  cardCompany: any;
-  expirationDate: any;
-  cvc: any;
-  password: any;
+  cardNumber: FormField;
+  cardCompany: {
+    values: string[];
+  };
+  expirationDate: FormField;
+  cvc: FormField;
+  password: FormField;
   handleCardCompanySelect: (value: string) => void;
 };
 
