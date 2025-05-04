@@ -81,7 +81,7 @@ function ExpiryDateInput({
           minLength={2}
           maxLength={2}
           pattern='\d{2}'
-          autoFocus={true}
+          autoFocus={expiryDate.month === ''}
           isRequired={true}
           isValidInput={isExpiryDateValid.month}
         />

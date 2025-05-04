@@ -43,7 +43,7 @@ function CVCInput({ isCVCValid, setIsCVCValid }: CVCInputProps) {
           pattern='\d{3}'
           value={cardCVC}
           handleInputChange={handleCVCNumberChange}
-          autoFocus={true}
+          autoFocus={cardCVC === ''}
           isRequired={true}
           isValidInput={isCVCValid}
         />

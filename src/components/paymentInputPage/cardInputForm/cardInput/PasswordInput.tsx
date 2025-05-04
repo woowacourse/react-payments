@@ -46,7 +46,7 @@ function PasswordInput({
           minLength={2}
           maxLength={2}
           pattern='\d{2}'
-          autoFocus={true}
+          autoFocus={password === ''}
           isRequired={true}
           isValidInput={isPasswordValid}
         />

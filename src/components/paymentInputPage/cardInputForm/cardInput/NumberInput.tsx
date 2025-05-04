@@ -51,7 +51,7 @@ function NumberInput({
         value={cardNumbers[index]}
         handleInputChange={handleCardNumberChange}
         isValidInput={isCardNumberValid[index]}
-        autoFocus={index === 0}
+        autoFocus={index === 0 && cardNumbers[index] === ''}
         isRequired={true}
         dataInputId={index}
         key={index}
