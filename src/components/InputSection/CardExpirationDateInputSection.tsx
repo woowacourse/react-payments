@@ -1,7 +1,10 @@
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
-import { CardExpirationDateInputSectionProps } from '../../types/CardExpirationDateOptions';
+import {
+  CardExpirationDateInputSectionProps,
+  CardExpirationDateKeys,
+} from '../../types/CardExpirationDateOptions';
 import { useEffect } from 'react';
 
 export const CARD_EXPIRATION_DATE_TEXT = {
@@ -18,13 +21,20 @@ const CardExpirationDateInputSection = ({
   errorMessage,
   inputRef,
   handleMouseDown,
+  setNextStep,
 }: CardExpirationDateInputSectionProps) => {
   useEffect(() => {
     if (cardExpirationDate.month.length === 2) {
-      console.log('month', cardExpirationDate.month);
       inputRef.year.current?.focus();
     }
   }, [cardExpirationDate.month]);
+
+  const handleYearInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardExpirationDate('year')(e);
+    if (e.target.value.length === 2) {
+      setNextStep({ time: 'once', key: 'cardExpirationDate' });
+    }
+  };
 
   return (
     <>
@@ -46,7 +56,7 @@ const CardExpirationDateInputSection = ({
         <InputField
           value={cardExpirationDate.year}
           name="expirationDateYear"
-          onChange={setCardExpirationDate('year')}
+          onChange={handleYearInputChange}
           isError={isError.year}
           placeholder="YY"
           onBlur={() => handleCardExpirationDateBlur('year')}

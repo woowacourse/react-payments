@@ -3,6 +3,7 @@ import useError from './useError';
 import isInteger from './validate/isInteger';
 import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
 import isValidStringLength from './validate/isValidStringLength';
+import { NextStepArgs } from './useStep';
 
 export type CardPasswordOptions = {
   cardPassword: string;
@@ -21,6 +22,7 @@ export type CardPasswordInputSectionProps = {
   errorMessage: string;
   inputRef: React.RefObject<HTMLInputElement | null>;
   handleMouseDown: MouseEventHandler<HTMLInputElement>;
+  setNextStep: (args: NextStepArgs) => void;
 };
 
 type IsError = {

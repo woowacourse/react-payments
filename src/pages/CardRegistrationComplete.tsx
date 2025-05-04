@@ -1,4 +1,4 @@
-import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
+import ConfirmButton from '@/components/common/ConfirmButton/ConfirmButton';
 import CheckIcon from '@assets/checkIcon.png';
 import buttonStyle from '../css/button.module.css';
 import styles from './cardRegistrationComplete.module.css';

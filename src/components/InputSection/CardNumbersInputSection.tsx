@@ -1,4 +1,7 @@
-import { CardNumbersInputSectionProps } from '../../types/CardNumbers';
+import {
+  CardNumbersInputSectionProps,
+  CardNumbersKeys,
+} from '../../types/CardNumbers';
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
@@ -17,7 +20,16 @@ const CardNumbersInputSection = ({
   errorMessage,
   inputRef,
   handleMouseDown,
+  setNextStep,
 }: CardNumbersInputSectionProps) => {
+  const handleChangeInput =
+    (key: CardNumbersKeys) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setCardNumbers(key)(e);
+      if (key === 'fourthNumber' && e.target.value.length === 4) {
+        setNextStep({ time: 'once', key: 'cardNumbers' });
+      }
+    };
+
   return (
     <>
       <InputSection
@@ -37,7 +49,7 @@ const CardNumbersInputSection = ({
             key={key}
             value={cardNumbers[key]}
             name={`card${key}`}
-            onChange={setCardNumbers(key)}
+            onChange={handleChangeInput(key)}
             onBlur={() => handleCardNumbersBlur(key)}
             isError={isError[key]}
             placeholder="1234"

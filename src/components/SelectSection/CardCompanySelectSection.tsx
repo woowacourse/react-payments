@@ -1,3 +1,4 @@
+import { NextStepArgs } from '@/hooks/useStep';
 import InputSection from '../common/InputSection/InputSection';
 import SelectField from '../common/SelectField/SelectField';
 import { MouseEventHandler } from 'react';
@@ -26,6 +27,7 @@ type CardCompanySelectSectionProps = {
   setCardCompany: (value: string) => void;
   handleMouseDown: MouseEventHandler<HTMLSelectElement>;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  setNextStep: (args: NextStepArgs) => void;
 };
 
 const CardCompanySelectSection = ({
@@ -33,10 +35,12 @@ const CardCompanySelectSection = ({
   setCardCompany,
   handleMouseDown,
   onChange,
+  setNextStep,
 }: CardCompanySelectSectionProps) => {
   const changeCardCompany = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCardCompany(e.target.value);
     onChange(e);
+    setNextStep({ time: 'once', key: 'cardCompany' });
   };
 
   return (

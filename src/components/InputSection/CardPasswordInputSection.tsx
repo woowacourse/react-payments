@@ -17,7 +17,17 @@ const CardPasswordInputSection = ({
   errorMessage,
   inputRef,
   handleMouseDown,
+  setNextStep,
 }: CardPasswordInputSectionProps) => {
+  const handleCardPasswordInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setCardPassword(e);
+    if (e.target.value.length === 2) {
+      setNextStep({ time: 'once', key: 'cardPassword' });
+    }
+  };
+
   return (
     <>
       <InputSection
@@ -29,7 +39,7 @@ const CardPasswordInputSection = ({
           type="password"
           value={cardPassword}
           name="cardPassword"
-          onChange={setCardPassword}
+          onChange={handleCardPasswordInputChange}
           isError={isError.password}
           placeholder="12"
           onBlur={handleCardPasswordBlur}

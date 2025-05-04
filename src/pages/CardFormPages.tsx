@@ -6,14 +6,15 @@ import styles from './cardForm.module.css';
 import { useState } from 'react';
 import buttonStyle from '../css/button.module.css';
 import CardCompanySelectSection from '@/components/SelectSection/CardCompanySelectSection';
-import ConfirmButton from '@/components/common/ComfirmButton/ConfirmButton';
+import ConfirmButton from '@/components/common/ConfirmButton/ConfirmButton';
 import { useNavigate } from 'react-router-dom';
-import useFieldCompletion from '@/hooks/useFieldCompletion';
 
 import CardPasswordInputSection from '@/components/InputSection/CardPasswordInputSection';
 import useCardFormFlow from '@/hooks/useCardFormFlow';
 import useCardForm from '@/hooks/useCardForm';
 import { ROUTES } from '@/constants/routes';
+import useStep from '@/hooks/useStep';
+import StepStack from '@/components/common/NextField/NextField';
 
 const CardFormPages = () => {
   const {
@@ -27,17 +28,11 @@ const CardFormPages = () => {
 
   const [isUserFocusing, setIsUserFocusing] = useState(false);
 
-  const { isFieldCompletion, resetFieldCompletion } = useFieldCompletion({
-    cardNumbersForm,
-    cardCompanyForm,
-    cardExpirationDateForm,
-    cardCVCNumberForm,
-  });
+  const { currentStep, setNextStep } = useStep();
 
   const nav = useNavigate();
   const handleSubmit = () => {
     setIsUserFocusing(false);
-    resetFieldCompletion();
     nav(ROUTES.COMPLETE, {
       state: { cardFirstNumber: cardNumbersForm.cardNumbers.firstNumber },
     });
@@ -49,7 +44,7 @@ const CardFormPages = () => {
     cardCVCInputRef,
     cardPasswordInputRef,
   } = useCardFormFlow({
-    isFieldCompletion,
+    isFieldCompletion: [],
     cardNumbersForm,
     cardExpirationDateForm,
     cardCVCNumberForm,
@@ -65,40 +60,38 @@ const CardFormPages = () => {
       />
 
       <div className={styles.cardForm}>
-        {isFieldCompletion[3] && (
-          <CardPasswordInputSection
-            {...cardPasswordForm}
-            inputRef={cardPasswordInputRef}
+        <StepStack currentStep={currentStep}>
+          <CardNumbersInputSection
+            {...cardNumbersForm}
+            inputRef={cardNumbersInputRef}
             handleMouseDown={() => setIsUserFocusing(true)}
+            setNextStep={setNextStep}
           />
-        )}
-
-        {isFieldCompletion[2] && (
-          <CardCVCNumberInputSection
-            {...cardCVCNumberForm}
-            inputRef={cardCVCInputRef}
-            handleMouseDown={() => setIsUserFocusing(true)}
-          />
-        )}
-        {isFieldCompletion[1] && (
-          <CardExpirationDateInputSection
-            {...cardExpirationDateForm}
-            inputRef={cardExpirationDateInputRef}
-            handleMouseDown={() => setIsUserFocusing(true)}
-          />
-        )}
-        {isFieldCompletion[0] && (
           <CardCompanySelectSection
             {...cardCompanyForm}
             handleMouseDown={() => setIsUserFocusing(true)}
             onChange={() => setIsUserFocusing(false)}
+            setNextStep={setNextStep}
           />
-        )}
-        <CardNumbersInputSection
-          {...cardNumbersForm}
-          inputRef={cardNumbersInputRef}
-          handleMouseDown={() => setIsUserFocusing(true)}
-        />
+          <CardExpirationDateInputSection
+            {...cardExpirationDateForm}
+            inputRef={cardExpirationDateInputRef}
+            handleMouseDown={() => setIsUserFocusing(true)}
+            setNextStep={setNextStep}
+          />
+          <CardCVCNumberInputSection
+            {...cardCVCNumberForm}
+            inputRef={cardCVCInputRef}
+            handleMouseDown={() => setIsUserFocusing(true)}
+            setNextStep={setNextStep}
+          />
+          <CardPasswordInputSection
+            {...cardPasswordForm}
+            inputRef={cardPasswordInputRef}
+            handleMouseDown={() => setIsUserFocusing(true)}
+            setNextStep={setNextStep}
+          />
+        </StepStack>
       </div>
       {canSubmit() && (
         <ConfirmButton

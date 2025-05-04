@@ -41,8 +41,11 @@ const useCardForm = () => {
       canSubmitByLength(cardPasswordForm.cardPassword, 2) &&
       isErrorFree(cardPasswordForm.isError);
 
+    const canCardCompanySubmit = cardCompanyForm.cardCompany !== '';
+
     return (
       canCardNumbersSubmit &&
+      canCardCompanySubmit &&
       canCardCVCNumberSubmit &&
       canCardExpirationDateSubmit &&
       canCardPasswordSubmit

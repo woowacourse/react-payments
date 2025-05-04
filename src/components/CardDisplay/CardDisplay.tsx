@@ -3,6 +3,7 @@ import { CardNumbers } from '@/types/CardNumbers';
 import CardBody from './CardBody/CardBody';
 import styles from './cardDisplay.module.css';
 import CardHeader from './CardHeader/CardHeader';
+import { NextStepArgs } from '@/hooks/useStep';
 
 type CardDisplayProps = {
   cardNumbers: CardNumbers;

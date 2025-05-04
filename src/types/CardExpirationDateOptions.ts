@@ -1,5 +1,6 @@
 import { MouseEventHandler } from 'react';
 import CardExpirationDate from './CardExpirationDate';
+import { NextStepArgs } from '@/hooks/useStep';
 
 export type CardExpirationDateKeys = 'month' | 'year';
 
@@ -21,6 +22,7 @@ export type CardExpirationDateInputSectionProps = {
     year: React.RefObject<HTMLInputElement | null>;
   };
   handleMouseDown: MouseEventHandler<HTMLInputElement>;
+  setNextStep: (args: NextStepArgs) => void;
 };
 
 export type CardExpirationDateOptions = CardExpirationDateInputSectionProps & {

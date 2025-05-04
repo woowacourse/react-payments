@@ -1,3 +1,4 @@
+import { NextStepArgs } from '@/hooks/useStep';
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
@@ -17,6 +18,7 @@ type CardCVCNumberInputSectionProps = {
   errorMessage: string;
   inputRef: React.RefObject<HTMLInputElement | null>;
   handleMouseDown: MouseEventHandler<HTMLInputElement>;
+  setNextStep: (args: NextStepArgs) => void;
 };
 
 const CardCVCNumberInputSection = ({
@@ -27,7 +29,17 @@ const CardCVCNumberInputSection = ({
   errorMessage,
   inputRef,
   handleMouseDown,
+  setNextStep,
 }: CardCVCNumberInputSectionProps) => {
+  const handleCVCNumberInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setCardCVCNumber(e);
+    if (e.target.value.length === 3) {
+      setNextStep({ time: 'once', key: 'cardCVCNumber' });
+    }
+  };
+
   return (
     <>
       <InputSection
@@ -38,7 +50,7 @@ const CardCVCNumberInputSection = ({
         <InputField
           value={cardCVCNumber}
           name="cvcNumber"
-          onChange={setCardCVCNumber}
+          onChange={handleCVCNumberInputChange}
           isError={isError.cvcNumber}
           placeholder="123"
           onBlur={handleCardCVCBlur}
