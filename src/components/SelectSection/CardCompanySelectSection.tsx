@@ -27,7 +27,7 @@ type CardCompanySelectSectionProps = {
   setCardCompany: (value: string) => void;
   handleMouseDown: MouseEventHandler<HTMLSelectElement>;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  goNextStep: () => void;
+  goNextStep: (args: NextStepArgs) => void;
 };
 
 const CardCompanySelectSection = ({
@@ -40,7 +40,7 @@ const CardCompanySelectSection = ({
   const changeCardCompany = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCardCompany(e.target.value);
     onChange(e);
-    goNextStep();
+    goNextStep({ time: 'once', key: 'cardCompany' });
   };
 
   return (

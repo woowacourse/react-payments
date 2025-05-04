@@ -86,9 +86,7 @@ const CardFormPages = () => {
             {...cardCompanyForm}
             handleMouseDown={() => setIsUserFocusing(true)}
             onChange={() => setIsUserFocusing(false)}
-            goNextStep={() => {
-              goNextStep({ time: 'once', key: 'cardCompany' });
-            }}
+            goNextStep={goNextStep}
           />
           <CardExpirationDateInputSection
             {...cardExpirationDateForm}
