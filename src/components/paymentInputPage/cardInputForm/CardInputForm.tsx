@@ -123,7 +123,7 @@ function CardInputForm() {
     ref
   );
 
-  const renderList = inputs
+  const renderItems = inputs
     .slice(0, order + 1)
     .reverse() as RenderItem<CardInputProps>[];
   const isCardValid =
@@ -140,7 +140,7 @@ function CardInputForm() {
       onInput={changeValidation}
       ref={ref}
     >
-      {renderList.map(({ Component, props }, index) => {
+      {renderItems.map(({ Component, props }, index) => {
         return <Component key={index} {...props} />;
       })}
 
