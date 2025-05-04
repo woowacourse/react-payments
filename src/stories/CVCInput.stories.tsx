@@ -37,7 +37,7 @@ const Template = () => {
   return <CVCInput />;
 };
 
-export const Valid_CVCInput: Story = {
+export const ValidCVCInput: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -58,7 +58,7 @@ export const Valid_CVCInput: Story = {
   },
 };
 
-export const Invalid_NonNumeric: Story = {
+export const InvalidNonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -73,7 +73,7 @@ export const Invalid_NonNumeric: Story = {
   },
 };
 
-export const Invalid_NumberLength: Story = {
+export const InvalidNumberLength: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

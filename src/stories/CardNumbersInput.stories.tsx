@@ -40,7 +40,7 @@ const Template = () => {
   return <CardNumbersInput />;
 };
 
-export const Valid_CardNumbersInput: Story = {
+export const ValidCardNumbersInput: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -80,7 +80,7 @@ export const InvalidCardPrefix: Story = {
   },
 };
 
-export const InvalidCard_NonNumeric: Story = {
+export const InvalidCardNonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -95,7 +95,7 @@ export const InvalidCard_NonNumeric: Story = {
   },
 };
 
-export const InvalidCard_TooShort_FirstBlock: Story = {
+export const InvalidCardTooShortFirstBlock: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -112,7 +112,7 @@ export const InvalidCard_TooShort_FirstBlock: Story = {
   },
 };
 
-export const InvalidCard_TooShort_ThirdBlock: Story = {
+export const InvalidCardTooShortThirdBlock: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

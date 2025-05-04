@@ -30,7 +30,7 @@ const Template = () => {
   return <CardCompanySelect />;
 };
 
-export const Valid_CardCompanySelect: Story = {
+export const ValidCardCompanySelect: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

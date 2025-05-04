@@ -27,7 +27,7 @@ const Template = () => {
   return <PasswordInput />;
 };
 
-export const Valid_PasswordInput: Story = {
+export const ValidPasswordInput: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -48,7 +48,7 @@ export const Valid_PasswordInput: Story = {
   },
 };
 
-export const Invalid_NonNumeric: Story = {
+export const InvalidNonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -63,7 +63,7 @@ export const Invalid_NonNumeric: Story = {
   },
 };
 
-export const Invalid_NumberLength: Story = {
+export const InvalidNumberLength: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

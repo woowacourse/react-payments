@@ -47,7 +47,7 @@ const Template = () => {
   return <CardExpiryInput />;
 };
 
-export const Valid_CardExpiryInput: Story = {
+export const ValidCardExpiryInput: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -69,7 +69,7 @@ export const Valid_CardExpiryInput: Story = {
   },
 };
 
-export const InvalidMonth_NonNumeric: Story = {
+export const InvalidMonthNonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -84,7 +84,7 @@ export const InvalidMonth_NonNumeric: Story = {
   },
 };
 
-export const InvalidMonth_TooShort: Story = {
+export const InvalidMonthTooShort: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -101,7 +101,7 @@ export const InvalidMonth_TooShort: Story = {
   },
 };
 
-export const InvalidYear_NonNumeric: Story = {
+export const InvalidYearNonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -120,7 +120,7 @@ export const InvalidYear_NonNumeric: Story = {
   },
 };
 
-export const InvalidYear_TooShort: Story = {
+export const InvalidYearTooShort: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -141,7 +141,7 @@ export const InvalidYear_TooShort: Story = {
   },
 };
 
-export const InvalidYear_BelowCurrentYear: Story = {
+export const InvalidYearBelowCurrentYear: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
