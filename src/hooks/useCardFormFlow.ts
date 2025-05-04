@@ -4,7 +4,7 @@ import { CardExpirationDateOptions } from '@/types/CardExpirationDateOptions';
 import { useCardCVCNumberOptions } from '@/hooks/useCardCVCNumber';
 
 type Props = {
-  isFieldCompletetion: boolean[];
+  isFieldCompletion: boolean[];
   cardNumbersForm: CardNumbersOptions;
   cardExpirationDateForm: CardExpirationDateOptions;
   cardCVCNumberForm: useCardCVCNumberOptions;
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const useCardFormFlow = ({
-  isFieldCompletetion,
+  isFieldCompletion,
   cardNumbersForm,
   cardExpirationDateForm,
   cardCVCNumberForm,
@@ -34,15 +34,15 @@ export const useCardFormFlow = ({
   useEffect(() => {
     if (isUserFocusing) return;
 
-    if (isFieldCompletetion[3]) {
+    if (isFieldCompletion[3]) {
       cardPasswordInputRef.current?.focus();
       return;
     }
-    if (isFieldCompletetion[2]) {
+    if (isFieldCompletion[2]) {
       cardCVCInputRef.current?.focus();
       return;
     }
-    if (isFieldCompletetion[1]) {
+    if (isFieldCompletion[1]) {
       if (cardExpirationDateForm.cardExpirationDate.month.length < 2) {
         cardExpirationDateInputRef.month.current?.focus();
       } else {
@@ -50,7 +50,7 @@ export const useCardFormFlow = ({
       }
       return;
     }
-    if (isFieldCompletetion[0]) {
+    if (isFieldCompletion[0]) {
       cardNumbersInputRef.fourthNumber.current?.blur();
       return;
     }
@@ -68,7 +68,7 @@ export const useCardFormFlow = ({
     }
     cardNumbersInputRef.firstNumber.current?.focus();
   }, [
-    isFieldCompletetion,
+    isFieldCompletion,
     cardNumbersForm.cardNumbers,
     cardExpirationDateForm.cardExpirationDate,
     cardCVCNumberForm.cardCVCNumber,

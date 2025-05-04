@@ -27,7 +27,7 @@ const CardFormPages = () => {
 
   const [isUserFocusing, setIsUserFocusing] = useState(false);
 
-  const { isFieldCompletetion, resetFieldCompletetion } = useFieldCompletion({
+  const { isFieldCompletion, resetFieldCompletion } = useFieldCompletion({
     cardNumbersForm,
     cardCompanyForm,
     cardExpirationDateForm,
@@ -37,7 +37,7 @@ const CardFormPages = () => {
   const nav = useNavigate();
   const handleSubmit = () => {
     setIsUserFocusing(false);
-    resetFieldCompletetion();
+    resetFieldCompletion();
     nav(ROUTES.COMPLETE, {
       state: { cardFirstNumber: cardNumbersForm.cardNumbers.firstNumber },
     });
@@ -49,7 +49,7 @@ const CardFormPages = () => {
     cardCVCInputRef,
     cardPasswordInputRef,
   } = useCardFormFlow({
-    isFieldCompletetion,
+    isFieldCompletion,
     cardNumbersForm,
     cardExpirationDateForm,
     cardCVCNumberForm,
@@ -65,7 +65,7 @@ const CardFormPages = () => {
       />
 
       <div className={styles.cardForm}>
-        {isFieldCompletetion[3] && (
+        {isFieldCompletion[3] && (
           <CardPasswordInputSection
             {...cardPasswordForm}
             inputRef={cardPasswordInputRef}
@@ -73,21 +73,21 @@ const CardFormPages = () => {
           />
         )}
 
-        {isFieldCompletetion[2] && (
+        {isFieldCompletion[2] && (
           <CardCVCNumberInputSection
             {...cardCVCNumberForm}
             inputRef={cardCVCInputRef}
             handleMouseDown={() => setIsUserFocusing(true)}
           />
         )}
-        {isFieldCompletetion[1] && (
+        {isFieldCompletion[1] && (
           <CardExpirationDateInputSection
             {...cardExpirationDateForm}
             inputRef={cardExpirationDateInputRef}
             handleMouseDown={() => setIsUserFocusing(true)}
           />
         )}
-        {isFieldCompletetion[0] && (
+        {isFieldCompletion[0] && (
           <CardCompanySelectSection
             {...cardCompanyForm}
             handleMouseDown={() => setIsUserFocusing(true)}

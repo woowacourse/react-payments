@@ -19,7 +19,7 @@ const useFieldCompletion = ({
   cardExpirationDateForm,
   cardCVCNumberForm,
 }: UseFieldCompletionProps) => {
-  const [isFieldCompletetion, setIsFieldCompletetion] = useState([
+  const [isFieldCompletion, setIsFieldCompletion] = useState([
     false,
     false,
     false,
@@ -32,7 +32,7 @@ const useFieldCompletion = ({
         (value) => value.length === 4
       )
     ) {
-      setIsFieldCompletetion((prev) => {
+      setIsFieldCompletion((prev) => {
         const newArray = [...prev];
         newArray[0] = true;
         return newArray;
@@ -40,7 +40,7 @@ const useFieldCompletion = ({
     }
 
     if (cardCompanyForm.cardCompany !== '') {
-      setIsFieldCompletetion((prev) => {
+      setIsFieldCompletion((prev) => {
         const newArray = [...prev];
         newArray[1] = true;
         return newArray;
@@ -51,14 +51,14 @@ const useFieldCompletion = ({
         (value) => value.length === 2
       )
     ) {
-      setIsFieldCompletetion((prev) => {
+      setIsFieldCompletion((prev) => {
         const newArray = [...prev];
         newArray[2] = true;
         return newArray;
       });
     }
     if (Object.values(cardCVCNumberForm.cardCVCNumber).length === 3) {
-      setIsFieldCompletetion((prev) => {
+      setIsFieldCompletion((prev) => {
         const newArray = [...prev];
         newArray[3] = true;
         return newArray;
@@ -71,11 +71,11 @@ const useFieldCompletion = ({
     cardNumbersForm.cardNumbers,
   ]);
 
-  const resetFieldCompletetion = () => {
-    setIsFieldCompletetion([false, false, false, false]);
+  const resetFieldCompletion = () => {
+    setIsFieldCompletion([false, false, false, false]);
   };
 
-  return { isFieldCompletetion, resetFieldCompletetion };
+  return { isFieldCompletion, resetFieldCompletion };
 };
 
 export default useFieldCompletion;
