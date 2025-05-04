@@ -14,7 +14,7 @@ import useCardFormFlow from '@/hooks/useCardFormFlow';
 import useCardForm from '@/hooks/useCardForm';
 import { ROUTES } from '@/constants/routes';
 import useStep from '@/hooks/useStep';
-import StepStack from '@/components/common/NextField/NextField';
+import StepStack from '@/components/common/StepStack/StepStack';
 
 const CardFormPages = () => {
   const {
