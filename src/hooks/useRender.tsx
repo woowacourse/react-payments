@@ -1,4 +1,4 @@
-import { ComponentType, useEffect, useState } from 'react';
+import { ComponentType, useState } from 'react';
 type isValidType = boolean | boolean[];
 
 export interface RenderItemProps {
@@ -18,18 +18,14 @@ function useRender<T>(
   ref: React.RefObject<HTMLFormElement | null>
 ) {
   const [order, setOrder] = useState(START_INDEX);
-
-  useEffect(() => {
-    const currentItem = renderItems[order];
-
-    if (
-      currentItem.isInputValid &&
-      ref.current?.checkValidity() &&
-      order < renderItems.length - 1
-    ) {
-      setOrder((prev) => prev + 1);
-    }
-  }, [renderItems, order, setOrder]);
+  const currentItem = renderItems[order];
+  if (
+    currentItem.isInputValid &&
+    ref.current?.checkValidity() &&
+    order < renderItems.length - 1
+  ) {
+    setOrder((prev) => prev + 1);
+  }
 
   return order;
 }
