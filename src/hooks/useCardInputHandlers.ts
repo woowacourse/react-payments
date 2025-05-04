@@ -26,6 +26,11 @@ export const useCardInputHandlers = (
     setShowPasswordInput,
     setIsValidForm,
     setIsOpenSelectCardCompany,
+    setIsValidCardNumbers,
+    setIsValidCardCompany,
+    setIsValidExpiry,
+    setIsValidCVC,
+    setIsValidPassword,
   } = cardState;
 
   const handleCardNumbers =
@@ -49,7 +54,10 @@ export const useCardInputHandlers = (
         cardNumbersInputRefs.current[errorIndex]?.focus();
       }
 
+      if (!isValid) setIsValidCardNumbers(false);
+
       if (isValid && isCardNumbersValid(newCardNumbers, helperText)) {
+        setIsValidCardNumbers(true);
         setShowCardCompanySelect(true);
       }
 
@@ -90,6 +98,7 @@ export const useCardInputHandlers = (
         ...prev,
         expiry: { message: monthHelperText, index: 0 },
       }));
+      setIsValidExpiry(false);
       return;
     }
 
@@ -99,8 +108,11 @@ export const useCardInputHandlers = (
         ...prev,
         expiry: { message: yearHelperText, index: 1 },
       }));
+      setIsValidExpiry(false);
       return;
     }
+
+    if (isMonthValid && isYearValid) setIsValidExpiry(true);
 
     setFormErrors((prev) => ({
       ...prev,
@@ -121,9 +133,11 @@ export const useCardInputHandlers = (
 
     if (!isValid) {
       setFormErrors((prev) => ({ ...prev, CVC: helperText }));
+      setIsValidCVC(false);
     } else {
       setFormErrors((prev) => ({ ...prev, CVC: "" }));
       setShowPasswordInput(true);
+      setIsValidCVC(true);
     }
   };
 
@@ -138,9 +152,10 @@ export const useCardInputHandlers = (
 
     if (!isValid) {
       setFormErrors((prev) => ({ ...prev, password: helperText }));
+      setIsValidPassword(false);
     } else {
       setFormErrors((prev) => ({ ...prev, password: "" }));
-      setIsValidForm(true);
+      setIsValidPassword(true);
     }
   };
 
@@ -156,6 +171,7 @@ export const useCardInputHandlers = (
 
     if (isCardCompanySelected(option)) {
       setShowExpiryInput(true);
+      setIsValidCardCompany(true);
     }
   };
 
