@@ -8,13 +8,14 @@ import IssuerSelector, {
   IssuerSelectorProps,
 } from './cardInput/IssuerSelector';
 import CardSubmitButton from './CardSubmitButton';
-import { ROUTER } from '../../../global/constants';
+import { INITIAL_CARD, ROUTER } from '../../../global/constants';
 import { useNavigate } from 'react-router-dom';
 import useValidateForm from '../../../hooks/useValidateForm';
 import PasswordInput, { PasswordInputProps } from './cardInput/PasswordInput';
 import { useState } from 'react';
 import useRender, { RenderItem } from '../../../hooks/useRender';
 import { validate } from '../../../utils/validate';
+import useCardContext from '../../../hooks/useCardContext';
 
 type CardInputProps =
   | NumberInputProps
@@ -24,6 +25,13 @@ type CardInputProps =
   | PasswordInputProps;
 
 function CardInputForm() {
+  const {
+    setCardNumbers,
+    setCardIssuer,
+    setExpiryDate,
+    setCardCVC,
+    setPassword,
+  } = useCardContext();
   const {
     isCardNumberValid,
     setIsCardNumberValid,
@@ -39,11 +47,19 @@ function CardInputForm() {
   } = useValidateForm();
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const { cardNumbers, cardIssuer } = useCardContext();
   const navigate = useNavigate();
   function submitCardInfo(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    navigate(ROUTER.registerComplete);
+    navigate(ROUTER.registerComplete, {
+      state: {
+        cardNumbers: cardNumbers,
+        cardIssuer: cardIssuer,
+      },
+    });
+
+    initForm();
   }
 
   function changeValidation() {
@@ -52,6 +68,14 @@ function CardInputForm() {
     if (target) {
       setIsFormValid(target.checkValidity());
     }
+  }
+
+  function initForm() {
+    setCardNumbers(INITIAL_CARD.cardNumbers);
+    setCardIssuer(INITIAL_CARD.cardIssuer);
+    setExpiryDate(INITIAL_CARD.expiryDate);
+    setCardCVC(INITIAL_CARD.cardCVC);
+    setPassword(INITIAL_CARD.password);
   }
 
   const inputs = [
