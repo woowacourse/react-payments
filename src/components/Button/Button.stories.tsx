@@ -6,7 +6,7 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    text: {
+    children: {
       control: 'object',
       description: '값',
     },
@@ -18,6 +18,6 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    text: '버튼',
+    children: '버튼',
   },
 };

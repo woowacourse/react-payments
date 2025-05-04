@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { forwardRef } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 type ButtonProps = {
-  text: string;
+  children: ReactNode;
   onClick: () => void;
 };
 
@@ -17,10 +17,11 @@ const StyledButton = styled.button`
   cursor: pointer;
   margin-top: 20px;
 `;
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ text, onClick }, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, onClick }, ref) => {
+  console.log(children);
   return (
     <StyledButton ref={ref} onClick={onClick}>
-      {text}
+      {children}
     </StyledButton>
   );
 });
