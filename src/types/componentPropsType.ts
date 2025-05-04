@@ -1,5 +1,5 @@
 import React, { ComponentProps } from "react";
-import { CompanyType } from ".";
+import { CompanyType, formSectionData } from ".";
 import {
   CardInformationType,
   setCardInformationType,
@@ -19,6 +19,13 @@ export type FormContainerProps = {
   /** 버튼 여부 띄우기 */
   complete: boolean;
 } & ComponentProps<"form">;
+
+export type FieldRendererProps = {
+  field: formSectionData;
+  cardInformationState: CardInformationType;
+  setCardInformationState: setCardInformationType;
+  validation: ValidationType;
+};
 
 export type InputFormSectionProps<T extends Exclude<keyof CardInformationType, "company">> = {
   /** 섹션 제목 */

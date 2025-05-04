@@ -1,21 +1,9 @@
 import { css } from "@emotion/react";
 import { FormContainerProps } from "../../types/componentPropsType";
-import formUIControllerData from "../../constants/formUIControllerData";
-import FormSectionSelect from "../FormSection/FormSectionSelect";
-import FormSectionInput from "../FormSection/FormSectionInput";
-import { CardInformationType } from "../../types/CardInformationType";
 import Button from "../Button/Button";
 import { useMemo } from "react";
-
-const formType: Record<"select" | "input", React.FC<any>> = {
-  input: FormSectionInput,
-  select: FormSectionSelect,
-};
-
-const FieldRenderer = ({ type, ...rest }: { type: "select" | "input" }) => {
-  const FieldComponent = formType[type];
-  return <FieldComponent {...rest} />;
-};
+import formUIControllerData from "../../constants/formUIControllerData";
+import FieldRenderer from "./FieldRenderer";
 
 const FormContainer = ({
   cardInformationState,
@@ -31,35 +19,16 @@ const FormContainer = ({
 
   return (
     <form css={FormContainerStyle} onSubmit={onSubmit}>
-      {visibleFields.map((formSectionData) => {
-        const { key, type, title, description, fieldData } = formSectionData;
-
-        const props =
-          type === "select"
-            ? {
-                type,
-                title,
-                description,
-                fieldData: {
-                  ...fieldData,
-                  setState: setCardInformationState.company,
-                },
-              }
-            : {
-                type,
-                title,
-                description,
-                fieldData: {
-                  ...fieldData,
-                  state: cardInformationState[key],
-                  setState: setCardInformationState[key] as React.Dispatch<
-                    React.SetStateAction<CardInformationType[typeof key]>
-                  >,
-                  eachValidation: validation[key],
-                },
-              };
-
-        return <FieldRenderer key={key} {...props} />;
+      {visibleFields.map((field) => {
+        return (
+          <FieldRenderer
+            key={field.key}
+            field={field}
+            cardInformationState={cardInformationState}
+            setCardInformationState={setCardInformationState}
+            validation={validation}
+          />
+        );
       })}
       <div css={ButtonWrapperStyle}>{complete && <Button type="submit" text="완료" />}</div>
     </form>
