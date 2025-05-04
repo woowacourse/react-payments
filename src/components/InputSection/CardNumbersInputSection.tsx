@@ -1,14 +1,23 @@
-import { CardNumbersOptions } from "../../types/CardNumbers";
+import { CardNumbersKeys, CardNumbersOptions } from "../../types/CardNumbers";
 import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputField from "../common/InputField/InputField";
 import InputSection from "../common/InputSection/InputSection";
+
+type CardNumbersInputSectionProps = {
+  setRef: (
+    index: number
+  ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
+  moveFocus: (index: number) => void;
+} & CardNumbersOptions;
 
 const CardNumbersInputSection = ({
   cardNumbers,
   handleCardNumbersChange,
   isError,
   errorMessage,
-}: CardNumbersOptions) => {
+  setRef,
+  moveFocus,
+}: CardNumbersInputSectionProps) => {
   return (
     <>
       <InputSection
@@ -16,30 +25,28 @@ const CardNumbersInputSection = ({
         description="본인 명의의 카드만 결제 가능합니다"
         subtitle="카드번호"
       >
-        <InputField
-          value={cardNumbers.firstNumber}
-          onChange={handleCardNumbersChange("firstNumber")}
-          isError={isError.firstNumber}
-          placeholder="1234"
-        ></InputField>
-        <InputField
-          value={cardNumbers.secondNumber}
-          onChange={handleCardNumbersChange("secondNumber")}
-          isError={isError.secondNumber}
-          placeholder="1234"
-        ></InputField>
-        <InputField
-          value={cardNumbers.thirdNumber}
-          onChange={handleCardNumbersChange("thirdNumber")}
-          isError={isError.thirdNumber}
-          placeholder="1234"
-        ></InputField>
-        <InputField
-          value={cardNumbers.fourthNumber}
-          onChange={handleCardNumbersChange("fourthNumber")}
-          isError={isError.fourthNumber}
-          placeholder="1234"
-        ></InputField>
+        {[
+          { field: "firstNumber", index: 0 },
+          { field: "secondNumber", index: 1 },
+          { field: "thirdNumber", index: 2 },
+          { field: "fourthNumber", index: 3 },
+        ].map(({ field, index }) => (
+          <InputField
+            key={index}
+            id={index}
+            value={cardNumbers[field as CardNumbersKeys]}
+            onChange={(value: string) =>
+              handleCardNumbersChange(field as CardNumbersKeys)(
+                value,
+                index,
+                moveFocus
+              )
+            }
+            isError={isError[field as CardNumbersKeys]}
+            placeholder="1234"
+            setRef={setRef}
+          />
+        ))}
       </InputSection>
       <ErrorMessage message={errorMessage} />
     </>

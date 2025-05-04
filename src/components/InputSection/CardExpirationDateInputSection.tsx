@@ -3,12 +3,21 @@ import InputField from "../common/InputField/InputField";
 import InputSection from "../common/InputSection/InputSection";
 import { CardExpirationDateOptions } from "../../types/CardExpirationDateOptions";
 
+type CardExpirationDateInputSectionProps = {
+  setRef: (
+    index: number
+  ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
+  moveFocus: (index: number) => void;
+} & CardExpirationDateOptions;
+
 const CardExpirationDateInputSection = ({
   cardExpirationDate,
   handleCardExpirationDateChange,
   isError,
   errorMessage,
-}: CardExpirationDateOptions) => {
+  setRef,
+  moveFocus,
+}: CardExpirationDateInputSectionProps) => {
   return (
     <>
       <InputSection
@@ -17,17 +26,25 @@ const CardExpirationDateInputSection = ({
         subtitle="유효기간"
       >
         <InputField
+          id={5}
           value={cardExpirationDate.month}
-          onChange={handleCardExpirationDateChange("month")}
+          onChange={(value) => {
+            handleCardExpirationDateChange("month")(value, 5, moveFocus);
+          }}
           isError={isError.month}
           placeholder="MM"
-        ></InputField>
+          setRef={setRef}
+        />
         <InputField
+          id={6}
           value={cardExpirationDate.year}
-          onChange={handleCardExpirationDateChange("year")}
+          onChange={(value) => {
+            handleCardExpirationDateChange("year")(value, 6, moveFocus);
+          }}
           isError={isError.year}
           placeholder="YY"
-        ></InputField>
+          setRef={setRef}
+        />
       </InputSection>
       <ErrorMessage message={errorMessage} />
     </>

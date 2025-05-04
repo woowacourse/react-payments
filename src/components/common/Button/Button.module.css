@@ -1,0 +1,17 @@
+.button {
+    width: 375px;
+    height: 52px;
+    background-color: #000000;
+    font-size: 15px;    
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #333333;
+}
+
+
+.link {
+    text-decoration: none;
+}

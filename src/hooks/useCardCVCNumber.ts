@@ -5,7 +5,11 @@ import isValidStringLength from "./validate/isValidStringLength";
 
 type useCardCVCNumberOptions = {
   cardCVCNumber: string;
-  handleCardCVCNumberChange: (value: string) => void;
+  handleCardCVCNumberChange: (
+    value: string,
+    index: number,
+    moveFocus: (index: number) => void
+  ) => void;
   isError: IsError;
   errorMessage: string;
 };
@@ -33,9 +37,13 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
     return { isError: false, errorMessage: "" };
   };
 
-  const handleCardCVCNumberChange = (value: string) => {
+  const handleCardCVCNumberChange = (
+    value: string,
+    index: number,
+    moveFocus: (index: number) => void
+  ) => {
     const { isError, errorMessage } = getCardCVCNumberChangeValidationResult(
-      value.trim(),
+      value.trim()
     );
     if (isError) {
       setErrorField("cvcNumber", errorMessage);
@@ -43,10 +51,14 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
     }
     clearError("cvcNumber");
     setCardCVCNumber(value.trim());
+
+    if (value.trim().length === 3) {
+      moveFocus(index);
+    }
   };
 
   return {
-    cardCVCNumber: cardCVCNumber,
+    cardCVCNumber,
     handleCardCVCNumberChange,
     isError: error.isError,
     errorMessage: error.errorMessage,

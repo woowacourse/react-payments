@@ -4,7 +4,13 @@ export type CardNumbersOptions = {
 
 export type CardNumbersOptionsWithoutErrormessage = {
   cardNumbers: CardNumbers;
-  handleCardNumbersChange: (target: CardNumbersKeys) => (value: string) => void;
+  handleCardNumbersChange: (
+    target: CardNumbersKeys
+  ) => (
+    value: string,
+    index: number,
+    moveFocus: (index: number) => void
+  ) => void;
   isError: IsError;
 };
 

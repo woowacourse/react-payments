@@ -11,11 +11,15 @@
   box-shadow: 3px 3px 5px 0px #00000040;
 }
 .cardBody {
-  margin: 4px;
+  margin: 13px 4px 13px 4px;
 }
 .cardNumber {
   display: flex;
   gap: 5px;
+}
+
+.box {
+  height: 20px;
   margin-bottom: 8px;
 }
 
@@ -40,5 +44,5 @@
 .cardNumberDisplay {
   width: 44px;
   height: 18px;
-  margin: 8px 0 8px 0;
+  margin: 0px;
 }

@@ -31,7 +31,7 @@ const useCardNumbers = (): CardNumbersOptions => {
     if (!isNumber(input)) {
       return { isError: true, errorMessage: "숫자만 입력 가능합니다" };
     }
-    //TODO: focus out 시 카드번호 검증 로직 추가
+
     if (!isValidStringLength({ value: input, maxLength: 4 })) {
       return { isError: true, errorMessage: "4자리 숫자만 입력 가능합니다" };
     }
@@ -40,9 +40,10 @@ const useCardNumbers = (): CardNumbersOptions => {
   };
 
   const handleCardNumbersChange =
-    (target: CardNumbersKeys) => (value: string) => {
+    (target: CardNumbersKeys) =>
+    (value: string, index: number, moveFocus: (index: number) => void) => {
       const { isError, errorMessage } = getCardNumbersValidationResult(
-        value.trim(),
+        value.trim()
       );
       if (isError) {
         setErrorField(target, errorMessage);
@@ -54,6 +55,10 @@ const useCardNumbers = (): CardNumbersOptions => {
         ...cardNumbers,
         [target]: value.trim(),
       });
+
+      if (value.trim().length === 4) {
+        moveFocus(index);
+      }
     };
 
   return {

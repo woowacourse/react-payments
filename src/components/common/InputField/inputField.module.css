@@ -2,7 +2,8 @@
   border: 1px solid #acacac;
   &:focus {
     outline: none;
-    border: 2px solid black;
+    box-shadow: 0 0 0 2px #000;
+    border-color: transparent;
   }
 }
 

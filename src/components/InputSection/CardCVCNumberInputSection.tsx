@@ -1,12 +1,32 @@
-import useCardCVCNumber from "../../hooks/useCardCVCNumber";
 import ErrorMessage from "../common/ErrorMessage/ErrorMessage";
 import InputField from "../common/InputField/InputField";
 import InputSection from "../common/InputSection/InputSection";
 
-const CardCVCNumberInputSection = () => {
-  const { cardCVCNumber, handleCardCVCNumberChange, isError, errorMessage } =
-    useCardCVCNumber();
+type CardCVCNumberInputSectionProps = {
+  cardCVCNumber: string;
+  handleCardCVCNumberChange: (
+    value: string,
+    index: number,
+    moveFocus: (index: number) => void
+  ) => void;
+  isError: {
+    cvcNumber: boolean;
+  };
+  errorMessage: string;
+  setRef: (
+    index: number
+  ) => (el: HTMLInputElement | HTMLSelectElement | null) => void;
+  moveFocus: (index: number) => void;
+};
 
+const CardCVCNumberInputSection = ({
+  cardCVCNumber,
+  handleCardCVCNumberChange,
+  isError,
+  errorMessage,
+  setRef,
+  moveFocus,
+}: CardCVCNumberInputSectionProps) => {
   return (
     <>
       <InputSection
@@ -15,11 +35,13 @@ const CardCVCNumberInputSection = () => {
         subtitle="CVC"
       >
         <InputField
+          id={7}
           value={cardCVCNumber}
-          onChange={handleCardCVCNumberChange}
+          onChange={(value) => handleCardCVCNumberChange(value, 7, moveFocus)}
           isError={isError.cvcNumber}
           placeholder="123"
-        ></InputField>
+          setRef={setRef}
+        />
       </InputSection>
       <ErrorMessage message={errorMessage} />
     </>

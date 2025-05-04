@@ -1,15 +1,16 @@
 import styles from "./inputSection.module.css";
+
 type InputSectionProps = {
   title: string;
   description: string;
-  subtitle: string;
+  subtitle?: string;
   children: React.ReactNode;
 };
 
 const InputSection = ({
   title,
   description,
-  subtitle,
+  subtitle = "",
   children,
 }: InputSectionProps) => {
   return (

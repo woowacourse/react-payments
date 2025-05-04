@@ -1,50 +1,25 @@
-import CardNumbersInputSection from "./components/InputSection/CardNumbersInputSection";
-import CardExpirationDateInputSection from "./components/InputSection/CardExpirationDateInputSection";
-import CardCVCNumberInputSection from "./components/InputSection/CardCVCNumberInputSection";
-import styles from "./css/cardForm.module.css";
-import useCardNumbers from "./hooks/useCardNumbers";
-import useCardExpirationDate from "./hooks/useCardExpirationDate";
-import CardDisplay from "./components/CardDisplay/CardDisplay";
+import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
+import Card from "./components/Card";
+import CardComplete from "./components/Complete/CardComplete";
 
 function App() {
-  const {
-    cardNumbers,
-    handleCardNumbersChange,
-    isError: isCardNumbersError,
-    errorMessage: cardNumbersErrorMessage,
-  } = useCardNumbers();
-
-  const {
-    cardExpirationDate,
-    handleCardExpirationDateChange,
-    isError: isCardExpirationDateError,
-    errorMessage: cardExpirationDateErrorMessage,
-  } = useCardExpirationDate();
+  const [newCard, setNewCard] = useState({});
 
   return (
-    <>
-      <div className={styles.main}>
-        <CardDisplay
-          cardNumbers={cardNumbers}
-          cardExpirationDate={cardExpirationDate}
+    <div>
+      <Routes>
+        <Route
+          path="react-payments/"
+          element={<Card setNewCard={setNewCard} />}
         />
-        <div className={styles.cardForm}>
-          <CardNumbersInputSection
-            cardNumbers={cardNumbers}
-            handleCardNumbersChange={handleCardNumbersChange}
-            isError={isCardNumbersError}
-            errorMessage={cardNumbersErrorMessage}
-          />
-          <CardExpirationDateInputSection
-            cardExpirationDate={cardExpirationDate}
-            handleCardExpirationDateChange={handleCardExpirationDateChange}
-            isError={isCardExpirationDateError}
-            errorMessage={cardExpirationDateErrorMessage}
-          />
-          <CardCVCNumberInputSection />
-        </div>
-      </div>
-    </>
+        <Route
+          path="react-payments/complete/"
+          element={<CardComplete newCard={newCard} />}
+        />
+      </Routes>
+    </div>
   );
 }
 

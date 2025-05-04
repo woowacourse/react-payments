@@ -1,4 +1,4 @@
-import CardExpirationDate from "../../types/CardExpirationDate";
+import CardExpirationDate from "src/types/CardExpirationDate";
 import { CardNumbers } from "../../types/CardNumbers";
 import CardBody from "./CardBody";
 import styles from "./cardDisplay.module.css";
@@ -7,11 +7,19 @@ import CardHeader from "./CardHeader";
 type CardDisplayProps = {
   cardNumbers: CardNumbers;
   cardExpirationDate: CardExpirationDate;
+  backgroundColor?: string;
 };
 
-const CardDisplay = ({ cardNumbers, cardExpirationDate }: CardDisplayProps) => {
+const CardDisplay = ({
+  cardNumbers,
+  cardExpirationDate,
+  backgroundColor,
+}: CardDisplayProps) => {
   return (
-    <div className={`${styles.card} ${styles.basic}`}>
+    <div
+      className={`${styles.card} ${styles.basic}`}
+      style={{ backgroundColor }}
+    >
       <CardHeader cardNumbers={cardNumbers} />
       <CardBody
         cardNumbers={cardNumbers}

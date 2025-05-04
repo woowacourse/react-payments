@@ -8,35 +8,44 @@ type CardNetworkProps = {
   cardNumbers: CardNumbers;
 };
 
-const CARD_NETWORKS = [
-  {
-    prefixes: ["40", "41", "42", "43", "44", "45", "46", "47", "48", "49"],
-    name: "visa",
-    image: Visa,
+
+const CARD_NETWORKS  = {
+  Visa: {
+    image: Visa
   },
-  {
-    prefixes: ["51", "52", "53", "54", "55"],
-    name: "master",
-    image: MasterCard,
-  },
-];
+  Master: {
+    image: MasterCard
+  }
+};
+
+type CardNetwork = 'Visa' | 'Master' | 'Unknown';
+
+const getCardNetwork = (number: string): CardNetwork => {
+  const prefix = parseInt(number.slice(0, 2), 10);
+
+  if (prefix >= 40 && prefix <= 49) { // 문제없이 visa를 찾음!
+    return 'Visa';
+  }
+  if (prefix >= 51 && prefix <= 55) { // 문제없이 master를 찾음!
+    return 'Master';
+  }
+  return 'Unknown';
+};
 
 const CardNetwork = ({ cardNumbers }: CardNetworkProps) => {
-  const getCardNetwork = (number: string) => {
-    return CARD_NETWORKS.find((network) => network.prefixes.includes(number));
-  };
+
 
   const cardNetwork = getCardNetwork(
     String(cardNumbers.firstNumber).slice(0, 2),
   );
 
-  if (!cardNetwork) {
+  if (cardNetwork === 'Unknown') {
     return null;
   }
 
   return (
     <img
-      src={cardNetwork.image}
+      src={CARD_NETWORKS[cardNetwork].image}
       alt="mastercard"
       className={styles.cardNetwork}
     />
