@@ -18,9 +18,7 @@ const meta = {
       return (
         <BrowserRouter>
           <CardProvider>
-            <CardProvider>
-              <Story />
-            </CardProvider>
+            <Story />
           </CardProvider>
         </BrowserRouter>
       );
