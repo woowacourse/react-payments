@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import CardDisplay from "./CardDisplay/CardDisplay";
-
 import CardNumbersInputSection from "./InputSection/CardNumbersInputSection";
 import CardExpirationDateInputSection from "./InputSection/CardExpirationDateInputSection";
 import CardCVCNumberInputSection from "./InputSection/CardCVCNumberInputSection";
@@ -35,9 +35,7 @@ const extractCardCompanyColor = (company: string) => {
 };
 
 const isFulledInput = (items: { [key: string]: string }, condition: number) => {
-  return Object.values(items).every((item) => {
-    return item.length >= condition;
-  });
+  return Object.values(items).every((item) => item.length >= condition);
 };
 
 interface CardProps {
@@ -98,76 +96,107 @@ function Card({ setNewCard }: CardProps) {
 
   const { setRef, moveFocus } = useAutoFocus();
 
-  return (
-    <>
-      <div className={styles.main}>
-        <CardDisplay
-          cardNumbers={cardNumbers}
-          cardExpirationDate={cardExpirationDate}
-          backgroundColor={extractCardCompanyColor(cardCompany)}
-        />
+  const [companyVisible, setCompanyVisible] = useState(false);
+  const [expirationVisible, setExpirationVisible] = useState(false);
+  const [cvcVisible, setCvcVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-        <div className={styles.cardForm}>
-          {cardCVCNumber.length === 3 && (
-            <CardPasswordInputSection
-              cardPassword={cardPassword}
-              handleCardPasswordChange={handleCardPasswordChange}
-              isError={isCardPasswordError}
-              errorMessage={cardPasswordErrorMessage}
-              setRef={setRef}
-            />
-          )}
-          {isFulledInput(cardExpirationDate, 2) && (
-            <CardCVCNumberInputSection
-              cardCVCNumber={cardCVCNumber}
-              handleCardCVCNumberChange={handleCardCVCNumberChange}
-              isError={isCardCVCError}
-              errorMessage={cardCVCErrorMessage}
-              setRef={setRef}
-              moveFocus={moveFocus}
-            />
-          )}
-          {cardCompany.length > 0 && (
-            <CardExpirationDateInputSection
-              cardExpirationDate={cardExpirationDate}
-              handleCardExpirationDateChange={handleCardExpirationDateChange}
-              isError={isCardExpirationDateError}
-              errorMessage={cardExpirationDateErrorMessage}
-              setRef={setRef}
-              moveFocus={moveFocus}
-            />
-          )}
-          {isFulledInput(cardNumbers, 4) && (
-            <CardCompanyInputSection
-              companies={COMPANIES}
-              selectedOption={cardCompany}
-              handleCardNumbersChange={handleCardCompanyChange}
-              errorMessage={cardCompanyErrorMessage}
-              setRef={setRef}
-              moveFocus={moveFocus}
-            />
-          )}
-          <CardNumbersInputSection
-            cardNumbers={cardNumbers}
-            handleCardNumbersChange={handleCardNumbersChange}
-            isError={isCardNumbersError}
-            errorMessage={cardNumbersErrorMessage}
+  useEffect(() => {
+    if (isFulledInput(cardNumbers, 4)) {
+      setCompanyVisible(true);
+    }
+  }, [cardNumbers]);
+
+  useEffect(() => {
+    if (cardCompany.length > 0) {
+      setExpirationVisible(true);
+    }
+  }, [cardCompany]);
+
+  useEffect(() => {
+    if (isFulledInput(cardExpirationDate, 2)) {
+      setCvcVisible(true);
+    }
+  }, [cardExpirationDate]);
+
+  useEffect(() => {
+    if (cardCVCNumber.length === 3) {
+      setPasswordVisible(true);
+    }
+  }, [cardCVCNumber]);
+
+  return (
+    <div className={styles.main}>
+      <CardDisplay
+        cardNumbers={cardNumbers}
+        cardExpirationDate={cardExpirationDate}
+        backgroundColor={extractCardCompanyColor(cardCompany)}
+      />
+
+      <div className={styles.cardForm}>
+        {passwordVisible && (
+          <CardPasswordInputSection
+            cardPassword={cardPassword}
+            handleCardPasswordChange={handleCardPasswordChange}
+            isError={isCardPasswordError}
+            errorMessage={cardPasswordErrorMessage}
+            setRef={setRef}
+          />
+        )}
+
+        {cvcVisible && (
+          <CardCVCNumberInputSection
+            cardCVCNumber={cardCVCNumber}
+            handleCardCVCNumberChange={handleCardCVCNumberChange}
+            isError={isCardCVCError}
+            errorMessage={cardCVCErrorMessage}
             setRef={setRef}
             moveFocus={moveFocus}
           />
-        </div>
+        )}
 
-        <div>
-          {isFulledForm && (
-            <Button
-              text="확인"
-              link="/react-payments/complete/"
-              onClick={onClick}
-            />
-          )}
-        </div>
+        {expirationVisible && (
+          <CardExpirationDateInputSection
+            cardExpirationDate={cardExpirationDate}
+            handleCardExpirationDateChange={handleCardExpirationDateChange}
+            isError={isCardExpirationDateError}
+            errorMessage={cardExpirationDateErrorMessage}
+            setRef={setRef}
+            moveFocus={moveFocus}
+          />
+        )}
+
+        {companyVisible && (
+          <CardCompanyInputSection
+            companies={COMPANIES}
+            selectedOption={cardCompany}
+            handleCardNumbersChange={handleCardCompanyChange}
+            errorMessage={cardCompanyErrorMessage}
+            setRef={setRef}
+            moveFocus={moveFocus}
+          />
+        )}
+
+        <CardNumbersInputSection
+          cardNumbers={cardNumbers}
+          handleCardNumbersChange={handleCardNumbersChange}
+          isError={isCardNumbersError}
+          errorMessage={cardNumbersErrorMessage}
+          setRef={setRef}
+          moveFocus={moveFocus}
+        />
       </div>
-    </>
+
+      <div>
+        {isFulledForm && (
+          <Button
+            text="확인"
+            link="/react-payments/complete/"
+            onClick={onClick}
+          />
+        )}
+      </div>
+    </div>
   );
 }
 
