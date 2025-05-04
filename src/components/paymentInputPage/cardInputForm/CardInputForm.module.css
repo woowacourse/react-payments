@@ -1,14 +1,16 @@
 .cardInputForm {
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 26px;
 }
 
 .submitButton {
-  width: calc(390px + 57px);
+  width: calc(100% + 56px);
   position: sticky;
 
   bottom: 0;
-  margin: -28px;
+  margin-bottom: -28px;
 }
