@@ -2,7 +2,6 @@ import Input from "../Input/Input";
 import InputContainer from "../InputContainer/InputContainer";
 import { useCardContext } from "../../contexts/CardContext";
 import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
-import { useEffect } from "react";
 import { INPUT_CONTAINER } from "../../constants/title";
 
 const PasswordInput = () => {
@@ -12,10 +11,6 @@ const PasswordInput = () => {
     passwordInputRef,
     handlePassword,
   } = useCardContext();
-
-  useEffect(() => {
-    passwordInputRef.current?.focus();
-  }, []);
 
   return (
     <InputContainer
@@ -35,6 +30,7 @@ const PasswordInput = () => {
           }}
           error={formErrors.password !== ""}
           maxLength={CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH}
+          autoFocus
         />
       </div>
       <p className="helperText">{formErrors.password}</p>

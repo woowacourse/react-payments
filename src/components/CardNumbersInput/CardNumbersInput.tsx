@@ -3,7 +3,6 @@ import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import Input from "../Input/Input";
 import InputContainer from "../InputContainer/InputContainer";
-import { useEffect } from "react";
 
 const CardNumbersInput = () => {
   const {
@@ -12,10 +11,6 @@ const CardNumbersInput = () => {
     cardNumbersInputRefs,
     handleCardNumbers,
   } = useCardContext();
-
-  useEffect(() => {
-    cardNumbersInputRefs.current[0]?.focus();
-  }, []);
 
   return (
     <InputContainer
@@ -36,6 +31,7 @@ const CardNumbersInput = () => {
             }}
             error={index === formErrors.cardNumbers.index}
             maxLength={CARD_VALIDATION_INFO.CARD_MAX_LENGTH}
+            autoFocus={index === 0}
           />
         ))}
       </div>

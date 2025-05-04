@@ -3,7 +3,6 @@ import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import InputContainer from "../InputContainer/InputContainer";
 import Input from "../Input/Input";
-import { useEffect } from "react";
 
 const CVCInput = () => {
   const {
@@ -12,10 +11,6 @@ const CVCInput = () => {
     CVCInputRef,
     handleCVC,
   } = useCardContext();
-
-  useEffect(() => {
-    CVCInputRef.current?.focus();
-  }, []);
 
   return (
     <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>
@@ -31,6 +26,7 @@ const CVCInput = () => {
           }}
           error={formErrors.CVC !== ""}
           maxLength={CARD_VALIDATION_INFO.CVC_MAX_LENGTH}
+          autoFocus
         />
       </div>
       <p className="helperText">{formErrors.CVC}</p>

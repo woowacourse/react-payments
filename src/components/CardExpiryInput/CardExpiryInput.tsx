@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useCardContext } from "../../contexts/CardContext";
 import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
@@ -12,10 +11,6 @@ const CardExpiryInput = () => {
     handleDate,
     expiryInputRefs,
   } = useCardContext();
-
-  useEffect(() => {
-    expiryInputRefs.current[0]?.focus();
-  }, []);
 
   return (
     <InputContainer
@@ -37,6 +32,7 @@ const CardExpiryInput = () => {
           }}
           error={formErrors.expiry.index === 0}
           maxLength={CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}
+          autoFocus
         />
         <Input
           type="text"
