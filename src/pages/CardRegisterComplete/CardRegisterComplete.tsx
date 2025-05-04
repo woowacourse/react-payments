@@ -1,7 +1,7 @@
 import styles from "./CardRegisterComplete.module.css";
 import { useCardContext } from "../../contexts/CardContext";
 import { CARD_COMPANIES } from "../../constants/cardCompanyInfo";
-import RegisterAnotherCardButton from "../../components/RegisterAnotherCardButton/RegisterAnotherCardButton";
+import CardRegisterConfirmButton from "../../components/CardRegisterConfirmButton/CardRegisterConfirmButton";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTE } from "../../constants/route";
@@ -44,7 +44,7 @@ const CardRegisterComplete = () => {
         {`${formValues.cardNumbers[0]}로 시작하는`} <br />
         {`${selectedCompany ?? "알 수 없는 카드사"}가 등록되었어요.`}
       </h2>
-      <RegisterAnotherCardButton ref={buttonRef} />
+      <CardRegisterConfirmButton ref={buttonRef} />
     </div>
   );
 };

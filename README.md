@@ -44,4 +44,4 @@
 - CardRegisterForm: 카드 등록 폼
 - Button
   - RegisterCardButton: 등록 버튼
-  - RegisterAnotherCardButton: 등록 완료 후 카드 등록 페이지로 돌아가는 버튼
+  - CardRegisterConfirmButton: 등록 완료 후 카드 등록 페이지로 돌아가는 버튼
