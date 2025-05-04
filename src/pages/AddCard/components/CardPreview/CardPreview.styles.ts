@@ -28,17 +28,16 @@ export const ICChip = styled.div`
 
 export const CardPreviewMiddle = styled.div`
   display: flex;
-  gap: 32px;
+  gap: 20px;
   align-items: center;
   text-align: center;
   vertical-align: middle;
-  padding-left: 10px;
 `;
 
 export const CardPreviewMiddleText = styled.span<{ CardBrandType?: CardBrandType | null }>`
   display: flex;
   gap: 4px;
-  font-size: 22px;
+  font-size: 20px;
   ${(props) => `color:${props.CardBrandType === '카카오뱅크' ? '#000;' : '#fff;'}`}
   letter-spacing: 0.2rem;
 `;
@@ -49,10 +48,9 @@ export const CardPreviewDateBox = styled.div`
   align-items: center;
   text-align: center;
   vertical-align: middle;
-  padding-left: 10px;
 `;
 
 export const CardPreviewDateBoxText = styled.span<{ CardBrandType: CardBrandType | null }>`
-  font-size: 22px;
+  font-size: 20px;
   ${(props) => `color:${props.CardBrandType === '카카오뱅크' ? '#000;' : '#fff;'}`}
 `;
