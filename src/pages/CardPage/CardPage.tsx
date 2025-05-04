@@ -1,16 +1,12 @@
 import styled from '@emotion/styled';
-import CVCInput from '../../components/CVCInput/CVCInput';
-import CardNumberInput from '../../components/CardNumberInput/CardNumberInput';
-import ExpirationDateInput from '../../components/ExpirationDateInput/ExpirationDateInput';
 import PreviewCard from '../../components/PreviewCard/PreviewCard';
 import { CARD_PAGE_TEXT } from './cardPageText';
-import PasswordInput from '../../components/PasswordInput/PasswordInput';
-import Dropdown from '../../components/Dropdown/Dropdown';
 import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import FormSection from '../../components/FormSection/FormSection';
 import useCardForm from '../../hooks/useCardForm';
 import { useRef } from 'react';
+import useFormSteps from '../../hooks/useFormSteps';
 
 const StyledCardPage = styled.div`
   width: 40%;
@@ -77,66 +73,74 @@ const CardPage = () => {
   const handleScrollToConfirm = () => {
     confirmButtonRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+  const formSteps = useFormSteps({
+    cardNumber,
+    cardCompany,
+    expirationDate,
+    cvc,
+    password,
+    handleCardCompanySelect,
+  });
 
-  const formSteps = [
-    {
-      id: 'cardNumber',
-      title: CARD_PAGE_TEXT.CARD_NUMBER_TITLE,
-      subtitle: CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE,
-      shouldShow: () => true,
-      component: (
-        <CardNumberInput
-          values={cardNumber.values}
-          onChange={cardNumber.handleInput}
-          onValidChange={cardNumber.setIsValid}
-        />
-      ),
-    },
-    {
-      id: 'cardCompany',
-      title: CARD_PAGE_TEXT.CARD_COMPANY_TITLE,
-      subtitle: CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE,
-      shouldShow: () => cardNumber.isValid,
-      component: <Dropdown selected={cardCompany.values[0]} onChange={handleCardCompanySelect} />,
-    },
-    {
-      id: 'expirationDate',
-      title: CARD_PAGE_TEXT.EXPIRATION_TITLE,
-      subtitle: CARD_PAGE_TEXT.EXPIRATION_SUBTITLE,
-      shouldShow: () => cardNumber.isValid && cardCompany.values[0] !== '',
-      component: (
-        <ExpirationDateInput
-          values={expirationDate.values}
-          onChange={expirationDate.handleInput}
-          onValidChange={expirationDate.setIsValid}
-        />
-      ),
-    },
-    {
-      id: 'cvc',
-      title: CARD_PAGE_TEXT.CVC_TITLE,
-      subtitle: '',
-      shouldShow: () =>
-        cardNumber.isValid && cardCompany.values[0] !== '' && expirationDate.isValid,
-      component: (
-        <CVCInput values={cvc.values} onChange={cvc.handleInput} onValidChange={cvc.setIsValid} />
-      ),
-    },
-    {
-      id: 'password',
-      title: CARD_PAGE_TEXT.PASSWORD_TITLE,
-      subtitle: CARD_PAGE_TEXT.PASSWORD_SUBTITLE,
-      shouldShow: () =>
-        cardNumber.isValid && cardCompany.values[0] !== '' && expirationDate.isValid && cvc.isValid,
-      component: (
-        <PasswordInput
-          values={password.values}
-          onChange={password.handleInput}
-          onValidChange={password.setIsValid}
-        />
-      ),
-    },
-  ];
+  // const formSteps = [
+  //   {
+  //     id: 'cardNumber',
+  //     title: CARD_PAGE_TEXT.CARD_NUMBER_TITLE,
+  //     subtitle: CARD_PAGE_TEXT.CARD_NUMBER_SUBTITLE,
+  //     shouldShow: () => true,
+  //     component: (
+  //       <CardNumberInput
+  //         values={cardNumber.values}
+  //         onChange={cardNumber.handleInput}
+  //         onValidChange={cardNumber.setIsValid}
+  //       />
+  //     ),
+  //   },
+  //   {
+  //     id: 'cardCompany',
+  //     title: CARD_PAGE_TEXT.CARD_COMPANY_TITLE,
+  //     subtitle: CARD_PAGE_TEXT.CARD_COMPANY_SUBTITLE,
+  //     shouldShow: () => cardNumber.isValid,
+  //     component: <Dropdown selected={cardCompany.values[0]} onChange={handleCardCompanySelect} />,
+  //   },
+  //   {
+  //     id: 'expirationDate',
+  //     title: CARD_PAGE_TEXT.EXPIRATION_TITLE,
+  //     subtitle: CARD_PAGE_TEXT.EXPIRATION_SUBTITLE,
+  //     shouldShow: () => cardNumber.isValid && cardCompany.values[0] !== '',
+  //     component: (
+  //       <ExpirationDateInput
+  //         values={expirationDate.values}
+  //         onChange={expirationDate.handleInput}
+  //         onValidChange={expirationDate.setIsValid}
+  //       />
+  //     ),
+  //   },
+  //   {
+  //     id: 'cvc',
+  //     title: CARD_PAGE_TEXT.CVC_TITLE,
+  //     subtitle: '',
+  //     shouldShow: () =>
+  //       cardNumber.isValid && cardCompany.values[0] !== '' && expirationDate.isValid,
+  //     component: (
+  //       <CVCInput values={cvc.values} onChange={cvc.handleInput} onValidChange={cvc.setIsValid} />
+  //     ),
+  //   },
+  //   {
+  //     id: 'password',
+  //     title: CARD_PAGE_TEXT.PASSWORD_TITLE,
+  //     subtitle: CARD_PAGE_TEXT.PASSWORD_SUBTITLE,
+  //     shouldShow: () =>
+  //       cardNumber.isValid && cardCompany.values[0] !== '' && expirationDate.isValid && cvc.isValid,
+  //     component: (
+  //       <PasswordInput
+  //         values={password.values}
+  //         onChange={password.handleInput}
+  //         onValidChange={password.setIsValid}
+  //       />
+  //     ),
+  //   },
+  // ];
 
   return (
     <StyledCardPage>
@@ -164,11 +168,9 @@ const CardPage = () => {
           <StyledFloatingButton onClick={handleScrollToConfirm}>
             <StyledArrowImage src="./arrow.png"></StyledArrowImage>
           </StyledFloatingButton>
-          <Button
-            ref={confirmButtonRef}
-            text={CARD_PAGE_TEXT.CHECK}
-            onClick={navigateToSuccessPage}
-          ></Button>
+          <Button ref={confirmButtonRef} onClick={navigateToSuccessPage}>
+            {CARD_PAGE_TEXT.CHECK}
+          </Button>
         </>
       )}
     </StyledCardPage>
