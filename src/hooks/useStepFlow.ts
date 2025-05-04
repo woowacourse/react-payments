@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-
 import { STEPS } from './../constants';
 import { CardNumberType, CvcType, ExpirationType } from '../types';
+import { validateCardNumbers, validateCompany, validateCvc, validateExpiration } from '../validation/validator';
 
 type StepName = (typeof STEPS)[number];
 
@@ -18,15 +18,14 @@ export function useStepFlow({
   company: string;
   cvc: CvcType;
 }) {
-  console.log(Object.values(cardNumbers));
-  const isCardNumbersValid = Object.values(cardNumbers).every(({ value, errorMessage }) => value.length === 4 && !errorMessage);
-  const isExpirationValid = Object.values(expiration).every(({ value, errorMessage }) => value.length === 2 && errorMessage === '');
-  const isCompanyValid = company !== '';
-  const isCvcValid = cvc.value.length === 3 && cvc.errorMessage === '';
+  const isCardNumberValid = validateCardNumbers(cardNumbers);
+  const isCompanyValid = validateCompany(company);
+  const isExpirationValid = validateExpiration(expiration);
+  const isCvcValid = validateCvc(cvc);
 
   useEffect(() => {
-    if (isCardNumbersValid) setStep('카드사');
-  }, [isCardNumbersValid]);
+    if (isCardNumberValid) setStep('카드사');
+  }, [isCardNumberValid]);
 
   useEffect(() => {
     if (isCompanyValid) setStep('유효기간');
