@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import {
   DECIMAL_RADIX,
   ERROR_MESSAGE,
@@ -24,65 +24,59 @@ export const useControlledCardExpirationDate = () => {
     month: null,
     year: null,
   });
-  const handleCardExpirationDateInputChange = ({ index, value, dateType }: HandleInputChangeProps) => {
-    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
-    setCardExpirationDateErrorMessage({
-      ...cardExpirationDateErrorMessage,
-      [dateType]: '',
-    });
 
+  const getErrorMessage = (value: string, dateType: DateType) => {
     if (!ONLY_NUMBER_PATTERN.test(value)) {
-      setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.onlyNumber });
-      return;
+      return ERROR_MESSAGE.onlyNumber;
     }
 
     if (value.length < EXPIRATION_DATE_MAX_LENGTH) {
-      setCardExpirationDateErrorMessage({
-        ...cardExpirationDateErrorMessage,
-        [dateType]: EXPIRATION_DATE_ERROR_MESSAGE.minLength,
-      });
-      return;
+      return EXPIRATION_DATE_ERROR_MESSAGE.minLength;
     }
 
     const valueAsNumber = parseInt(value, DECIMAL_RADIX);
 
     if (dateType === 'month') {
       if (valueAsNumber < MIN_VALID_MONTH || valueAsNumber > MAX_VALID_MONTH) {
-        setCardExpirationDateErrorMessage({ ...cardExpirationDateErrorMessage, [dateType]: ERROR_MESSAGE.validMonth });
+        return ERROR_MESSAGE.validMonth;
       }
 
       if (
         Number(cardExpirationDate.year) === Number(String(new Date().getFullYear()).slice(2)) &&
         valueAsNumber < new Date().getMonth() + 1
       ) {
-        setCardExpirationDateErrorMessage({
-          ...cardExpirationDateErrorMessage,
-          [dateType]: ERROR_MESSAGE.pastYear,
-        });
+        return ERROR_MESSAGE.pastYear;
       }
     }
 
     if (dateType === 'year') {
       if (valueAsNumber < Number(String(new Date().getFullYear()).slice(2))) {
-        setCardExpirationDateErrorMessage({
-          ...cardExpirationDateErrorMessage,
-          [dateType]: ERROR_MESSAGE.pastYear,
-        });
+        return ERROR_MESSAGE.pastYear;
       }
 
       if (
         valueAsNumber === Number(String(new Date().getFullYear()).slice(2)) &&
         Number(cardExpirationDate.month) < new Date().getMonth() + 1
       ) {
-        setCardExpirationDateErrorMessage({
-          ...cardExpirationDateErrorMessage,
-          [dateType]: ERROR_MESSAGE.pastYear,
-        });
+        return ERROR_MESSAGE.pastYear;
       }
     }
+    return '';
+  };
 
+  const handleInputFocus = useCallback((index: number) => {
     const nextSequence = Object.keys(cardExpirationDateRefs.current)[index + 1] as DateType;
     cardExpirationDateRefs.current[nextSequence]?.focus();
+  }, []);
+
+  const handleCardExpirationDateInputChange = ({ index, value, dateType }: HandleInputChangeProps) => {
+    const errorMessage = getErrorMessage(value, dateType);
+    setCardExpirationDate({ ...cardExpirationDate, [dateType]: value });
+    setCardExpirationDateErrorMessage((prev) => ({
+      ...prev,
+      [dateType]: errorMessage,
+    }));
+    if (errorMessage === '') handleInputFocus(index);
   };
 
   const isCardNumberFill = Object.values(cardExpirationDate).every(

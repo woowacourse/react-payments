@@ -1,18 +1,18 @@
 import { useCallback, useRef, useState } from 'react';
-import { HandleInputChangeProps, SequenceType } from '../types';
+import { CardNumberType, HandleInputChangeProps, SequenceType } from '../types';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
 import { CARD_NUMBER_ERROR_MESSAGE, CARD_NUMBER_MAX_LENGTH } from '../constants';
 import { validateErrorMessages } from '../../../../utils';
 
 export const useControlledCardNumber = () => {
   const [isCardNumberNextStep, setIsCardNumberNextStep] = useState(false);
-  const [cardNumber, setCardNumber] = useState<Record<SequenceType, string>>({
+  const [cardNumber, setCardNumber] = useState<CardNumberType>({
     first: '',
     second: '',
     third: '',
     fourth: '',
   });
-  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<Record<SequenceType, string>>({
+  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<CardNumberType>({
     first: '',
     second: '',
     third: '',
@@ -26,7 +26,7 @@ export const useControlledCardNumber = () => {
     fourth: null,
   });
 
-  const getErrorMessage = (value: string, index: number) => {
+  const getErrorMessage = (value: string) => {
     if (!ONLY_NUMBER_PATTERN.test(value)) {
       return ERROR_MESSAGE.onlyNumber;
     }
@@ -35,19 +35,23 @@ export const useControlledCardNumber = () => {
       return CARD_NUMBER_ERROR_MESSAGE.minLength;
     }
 
-    const nextSequence = Object.keys(cardNumberRefs.current)[index + 1] as SequenceType;
-    cardNumberRefs.current[nextSequence]?.focus();
-
     return '';
   };
 
+  const handleInputFocus = useCallback((index: number) => {
+    const nextSequence = Object.keys(cardNumberRefs.current)[index + 1] as SequenceType;
+    cardNumberRefs.current[nextSequence]?.focus();
+  }, []);
+
   const handleCardNumberInputChange = useCallback(({ index, value, sequence }: HandleInputChangeProps) => {
+    const errorMessage = getErrorMessage(value);
     setCardNumber((prev) => ({ ...prev, [sequence]: value }));
-    setCardNumberErrorMessage((prev) => ({ ...prev, [sequence]: getErrorMessage(value, index) }));
+    setCardNumberErrorMessage((prev) => ({ ...prev, [sequence]: errorMessage }));
+    if (errorMessage === '') handleInputFocus(index);
   }, []);
 
   const isCardNumberFill = Object.values(cardNumber).every((number) => number.length === CARD_NUMBER_MAX_LENGTH);
-  const isValid = validateErrorMessages<SequenceType, Record<SequenceType, string>>(cardNumberErrorMessage);
+  const isValid = validateErrorMessages<SequenceType, CardNumberType>(cardNumberErrorMessage);
   if (isCardNumberFill && isValid && !isCardNumberNextStep) setIsCardNumberNextStep(true);
 
   return { cardNumber, cardNumberErrorMessage, isCardNumberNextStep, cardNumberRefs, handleCardNumberInputChange };

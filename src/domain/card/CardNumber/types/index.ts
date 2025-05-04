@@ -6,9 +6,11 @@ export interface HandleInputChangeProps {
   sequence: SequenceType;
 }
 
+export type CardNumberType = Record<SequenceType, string>;
+
 export interface CardNumberProps {
   cardNumberRefs: React.RefObject<{ [key in SequenceType]: HTMLInputElement | null }>;
-  cardNumber: Record<SequenceType, string>;
-  cardNumberErrorMessage: Record<SequenceType, string>;
+  cardNumber: CardNumberType;
+  cardNumberErrorMessage: CardNumberType;
   handleCardNumberInputChange: ({ index, value, sequence }: HandleInputChangeProps) => void;
 }
