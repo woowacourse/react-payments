@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { CardNumberType, CvcType, ExpirationType, PasswordType } from '../types';
+import { FIELD_LENGTH } from '../constants';
 
 type UseFormValidParams = {
   cardNumbers: CardNumberType;
@@ -11,19 +12,19 @@ type UseFormValidParams = {
 
 export const useFormValid = ({ cardNumbers, expiration, cvc, password, company }: UseFormValidParams) => {
   const isCardNumbersValid = useMemo(() => {
-    return Object.values(cardNumbers).every(({ value, isError }) => value.length === 4 && !isError);
+    return Object.values(cardNumbers).every(({ value, errorMessage }) => value.length === FIELD_LENGTH.cardNumber && errorMessage === '');
   }, [cardNumbers]);
 
   const isExpirationValid = useMemo(() => {
-    return Object.values(expiration).every(({ value, errorMessage }) => value.length === 2 && errorMessage === '');
+    return Object.values(expiration).every(({ value, errorMessage }) => value.length === FIELD_LENGTH.expiration && errorMessage === '');
   }, [expiration]);
 
   const isCvcValid = useMemo(() => {
-    return cvc.value.length === 3 && cvc.errorMessage === '';
+    return cvc.value.length === FIELD_LENGTH.cvc && cvc.errorMessage === '';
   }, [cvc]);
 
   const isPasswordValid = useMemo(() => {
-    return password.value.length === 2 && password.errorMessage === '';
+    return password.value.length === FIELD_LENGTH.password && password.errorMessage === '';
   }, [password]);
 
   const isCompanyValid = useMemo(() => {

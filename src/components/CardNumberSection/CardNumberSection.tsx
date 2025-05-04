@@ -31,7 +31,7 @@ export default function CardNumberSection({ cardNumbers, onCardNumbersChange, ca
               required
               key={inputKey}
               value={cardNumbers[inputKey].value}
-              isError={cardNumbers[inputKey].isError}
+              isError={Boolean(cardNumbers[inputKey].errorMessage)}
               placeholder={'1234'}
               onChange={(e) => {
                 onCardNumbersChange(inputKey, e.target.value);

@@ -17,4 +17,3 @@ export default function CardCompanySection({ company, handleCompanySelect }: Car
     </div>
   );
 }
-1;

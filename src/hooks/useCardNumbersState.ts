@@ -20,7 +20,7 @@ export const useCardNumbersState = () => {
     }
     setCardNumbers((prev) => ({
       ...prev,
-      [field]: { value, isError: !isValidCardNumber(value) }
+      [field]: { value, errorMessage: !isValidCardNumber(value) }
     }));
 
     const keys = Object.keys(inputRefs);
