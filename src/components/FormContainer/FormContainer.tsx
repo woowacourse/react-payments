@@ -5,6 +5,7 @@ import FormSectionSelect from "../FormSection/FormSectionSelect";
 import FormSectionInput from "../FormSection/FormSectionInput";
 import { CardInformationType } from "../../types/CardInformationType";
 import Button from "../Button/Button";
+import { useMemo } from "react";
 
 const formType: Record<"select" | "input", React.FC<any>> = {
   input: FormSectionInput,
@@ -24,41 +25,42 @@ const FormContainer = ({
   complete,
   onSubmit,
 }: FormContainerProps) => {
+  const visibleFields = useMemo(() => {
+    return formUIControllerData.slice(0, step + 1).reverse();
+  }, [step]);
+
   return (
     <form css={FormContainerStyle} onSubmit={onSubmit}>
-      {formUIControllerData
-        .slice(0, step + 1)
-        .reverse()
-        .map((formSectionData) => {
-          const { key, type, title, description, fieldData } = formSectionData;
+      {visibleFields.map((formSectionData) => {
+        const { key, type, title, description, fieldData } = formSectionData;
 
-          const props =
-            type === "select"
-              ? {
-                  type,
-                  title,
-                  description,
-                  fieldData: {
-                    ...fieldData,
-                    setState: setCardInformationState.company,
-                  },
-                }
-              : {
-                  type,
-                  title,
-                  description,
-                  fieldData: {
-                    ...fieldData,
-                    state: cardInformationState[key],
-                    setState: setCardInformationState[key] as React.Dispatch<
-                      React.SetStateAction<CardInformationType[typeof key]>
-                    >,
-                    eachValidation: validation[key],
-                  },
-                };
+        const props =
+          type === "select"
+            ? {
+                type,
+                title,
+                description,
+                fieldData: {
+                  ...fieldData,
+                  setState: setCardInformationState.company,
+                },
+              }
+            : {
+                type,
+                title,
+                description,
+                fieldData: {
+                  ...fieldData,
+                  state: cardInformationState[key],
+                  setState: setCardInformationState[key] as React.Dispatch<
+                    React.SetStateAction<CardInformationType[typeof key]>
+                  >,
+                  eachValidation: validation[key],
+                },
+              };
 
-          return <FieldRenderer key={key} {...props} />;
-        })}
+        return <FieldRenderer key={key} {...props} />;
+      })}
       <div css={ButtonWrapperStyle}>{complete && <Button type="submit" text="완료" />}</div>
     </form>
   );
