@@ -48,7 +48,7 @@ function CardExpiryDateInput({
   }
 
   function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
+    const { value } = e.target;
     setExpiryDate((prev) => ({ ...prev, year: value }));
 
     const { isValid, message } = validate.checkNumberInput(value);
