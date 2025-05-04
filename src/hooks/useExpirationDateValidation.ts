@@ -12,7 +12,7 @@ function useExpirationDateValidation(values: string[]) {
   const [isErrorStates, setIsErrorStates] = useState([false, false]);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const checkValidExpirationDate = ({ value, idx }: HandleInputParams) => {
+  const validate = ({ value, idx }: HandleInputParams) => {
     try {
       checkNumber(value);
 
@@ -62,10 +62,30 @@ function useExpirationDateValidation(values: string[]) {
     }
   };
 
+  const validateAll = (inputValues: string[] = values) => {
+    if (inputValues[0].length !== 2 || inputValues[1].length !== 2) {
+      return [true, true];
+    }
+
+    try {
+      checkValidMonth(inputValues[0]);
+      checkValidYear(inputValues[1]);
+      checkTotalExpirationDate(inputValues[0], inputValues[1]);
+      return [false, false];
+    } catch (error) {
+      if (error instanceof TotalDateError) {
+        return [true, true];
+      }
+
+      return [true, false];
+    }
+  };
+
   return {
     isErrorStates,
     errorMessage,
-    checkValidExpirationDate,
+    validate,
+    validateAll,
   };
 }
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Input from './Input';
 
 const meta: Meta<typeof Input> = {
-  title: 'Components/Input',
+  title: 'Common/Input',
   component: Input,
   tags: ['autodocs'],
   argTypes: {
@@ -27,6 +27,18 @@ const meta: Meta<typeof Input> = {
 
 export default meta;
 type Story = StoryObj<typeof Input>;
+
+export const Default: Story = {
+  args: {
+    value: '1234',
+    maxLength: 4,
+    placeholder: '1234',
+    isError: false,
+  },
+  render: (args) => {
+    return <Input {...args} />;
+  },
+};
 
 export const CardNumberInput: Story = {
   args: {

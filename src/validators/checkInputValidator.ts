@@ -5,6 +5,10 @@ export const checkInputValidation = (inputValue: string, validLength: number) =>
   checkValidLength(inputValue, validLength);
 };
 
+export const checkPasswordValidation = (inputValue: string, validLength: number) => {
+  checkValidLength(inputValue, validLength);
+};
+
 export const checkNumber = (value: string) => {
   if (!Number.isInteger(Number(value))) throw new Error(`${ERROR_MESSAGES.IS_NOT_NUM}`);
 };

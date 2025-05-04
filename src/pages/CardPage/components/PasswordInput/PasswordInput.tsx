@@ -2,15 +2,14 @@ import Input from '../../../../components/Input/Input';
 import HelperText from '../../../../components/HelperText/HelperText';
 import useInputValidation from '../../../../hooks/useInputValidation';
 import { HandleInputParams } from '../../CardPage';
-import { checkInputValidation } from '../../../../validators/checkInputValidator';
-import { CARD_NUMBER } from '../../../../constants/settings';
-import useInputRef from '../../../../hooks/useInputRef';
+import { checkPasswordValidation } from '../../../../validators/checkInputValidator';
+import { PASSWORD } from '../../../../constants/settings';
 import {
   StyledCardNumberInput,
   StyledHelperTextWrapper,
   StyledInputWrapper,
   StyledLabel,
-} from './CardNumberInput.styles';
+} from './PasswordInput.styles';
 
 type CardNumberInputProps = {
   values: string[];
@@ -19,16 +18,15 @@ type CardNumberInputProps = {
   onValidityChange?: (isValid: boolean) => void;
 };
 
-const CardNumberInput = ({
+const PasswordInput = ({
   values,
   onChange,
   onComplete,
   onValidityChange,
 }: CardNumberInputProps) => {
-  const { setInputRef, focusNextInput } = useInputRef(CARD_NUMBER.FIELDS_COUNT);
   const { isErrorStates, errorMessage, validate, validateAll } = useInputValidation(
-    Array.from({ length: CARD_NUMBER.FIELDS_COUNT }, () => false),
-    (value) => checkInputValidation(value, CARD_NUMBER.MAX_LENGTH)
+    Array.from({ length: PASSWORD.FIELDS_COUNT }, () => false),
+    (value) => checkPasswordValidation(value, PASSWORD.MAX_LENGTH)
   );
 
   const handleChange = ({ value, idx }: { value: string; idx: number }) => {
@@ -45,26 +43,21 @@ const CardNumberInput = ({
     if (isValid) {
       onComplete?.();
     }
-
-    if (value.length === CARD_NUMBER.MAX_LENGTH) {
-      focusNextInput(idx);
-    }
   };
 
   return (
     <StyledCardNumberInput>
-      <StyledLabel htmlFor="number-card-0">카드 번호</StyledLabel>
+      <StyledLabel htmlFor="password">비밀번호 앞 2자리</StyledLabel>
       <StyledInputWrapper>
         {values.map((value: string, idx: number) => (
           <Input
             key={idx}
             value={value}
+            type="password"
             onChange={(e) => handleChange({ value: e.target.value, idx })}
-            maxLength={CARD_NUMBER.MAX_LENGTH}
-            placeholder={CARD_NUMBER.PLACEHOLDER}
+            maxLength={PASSWORD.MAX_LENGTH}
             isError={isErrorStates[idx]}
-            id={`number-card-${idx}`}
-            ref={(el) => setInputRef(el, idx)}
+            id="password"
           />
         ))}
       </StyledInputWrapper>
@@ -75,4 +68,4 @@ const CardNumberInput = ({
   );
 };
 
-export default CardNumberInput;
+export default PasswordInput;

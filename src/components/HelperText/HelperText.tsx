@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import { StyledHelperText } from './HelperText.styles';
 
-type HelperTextProps = {
+export type HelperTextProps = {
   text?: string;
   type: 'isError' | 'isValid';
 };
@@ -10,16 +10,3 @@ const HelperText = ({ text, type }: HelperTextProps) => {
 };
 
 export default HelperText;
-
-const StyledHelperText = styled.div<HelperTextProps>`
-  font-size: 10px;
-  margin-top: 10px;
-  color: ${(props) => {
-    switch (props.type) {
-      case 'isError':
-        return '#FF3D3D';
-      case 'isValid':
-        return '#15fc04';
-    }
-  }};
-`;

@@ -1,12 +1,18 @@
-import CardPage from './pages/CardPage/CardPage';
 import GlobalStyles from './styles/GlobalStyles';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import CardPage from './pages/CardPage/CardPage';
+import CardCompletePage from './pages/CardCompletePage/CardCompletePage';
+import { PRODUCTION_BASE_URL, ROUTER } from './constants/router';
 
 function App() {
   return (
-    <>
+    <BrowserRouter basename={PRODUCTION_BASE_URL}>
       <GlobalStyles />
-      <CardPage />
-    </>
+      <Routes>
+        <Route path={ROUTER.DEFAULT} element={<CardPage />} />
+        <Route path={ROUTER.COMPLETE} element={<CardCompletePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

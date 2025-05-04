@@ -1,29 +1,27 @@
-import styled from '@emotion/styled';
-import { CARD_PREFIX } from '../../../../constants/settings';
+import { checkCardType } from './checkCardType';
+import { CARD_COLOR } from '../../../../constants/settings';
+import {
+  StyledCardHeader,
+  StyledCardNumber,
+  StyledCardNumberWrapper,
+  StyledCardType,
+  StyledExpirationDate,
+  StyledICChip,
+  StyledPreviewCard,
+} from './Preview.styles';
 
 type PreviewCardProps = {
   cardNumber: string[];
   expirationDate: string[];
+  cardCompany: string;
 };
 
-const checkCardType = (firstCardInput: string) => {
-  if (Number(firstCardInput[0]) === CARD_PREFIX.VISA) return './Visa.png';
-
-  const cardTypePrefix = Number(firstCardInput.slice(0, 2));
-  if (
-    cardTypePrefix >= CARD_PREFIX.MASTERCARD_MIN &&
-    cardTypePrefix <= CARD_PREFIX.MASTERCARD_MAX
-  ) {
-    return './Mastercard.png';
-  }
-  return null;
-};
-
-const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
+const PreviewCard = ({ cardNumber, expirationDate, cardCompany }: PreviewCardProps) => {
   const cardType = checkCardType(cardNumber[0]);
+  const cardColor = CARD_COLOR[cardCompany] || CARD_COLOR[''];
 
   return (
-    <StyledPreviewCard>
+    <StyledPreviewCard backgroundColor={cardColor}>
       <StyledCardHeader>
         <StyledICChip />
         {cardType && <StyledCardType src={cardType} />}
@@ -44,59 +42,3 @@ const PreviewCard = ({ cardNumber, expirationDate }: PreviewCardProps) => {
 };
 
 export default PreviewCard;
-
-const StyledPreviewCard = styled.div`
-  width: 212px;
-  height: 120px;
-  border-radius: 4px;
-  box-shadow: 3px 3px 5px 0px rgb(0, 0, 0, 0.25);
-  background-color: #333333;
-  display: flex;
-  flex-direction: column;
-  padding: 0.8rem;
-  margin: 30px auto;
-`;
-
-const StyledCardHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 30%;
-`;
-
-const StyledICChip = styled.div`
-  width: 2.5rem;
-  height: 1.5rem;
-  border-radius: 3px;
-  background-color: #ddcd78;
-  z-index: 100;
-`;
-
-const StyledCardType = styled.img`
-  width: 2.5rem;
-  height: 1.5rem;
-  border-radius: 3px;
-  z-index: 100;
-`;
-
-const StyledCardNumberWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-  place-items: center;
-`;
-
-const StyledCardNumber = styled.div`
-  color: white;
-  font-size: 14px;
-  font-family: 'Inter';
-  letter-spacing: 2.5px;
-`;
-
-const StyledExpirationDate = styled.div`
-  color: white;
-  font-size: 14px;
-  margin: 10px 2px;
-  font-family: 'Inter';
-  letter-spacing: 2.5px;
-`;
