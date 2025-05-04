@@ -1,38 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Description from '../Description';
 import Input from '../Input';
 import InputGroup from '../InputGroup';
-import { ErrorMessagesType } from '../../types/ErrorMessagesType';
-import { CardInputProps } from '../../types/CardInputTypes';
 
 interface CVCInputProps {
-  validateCardCVC: (value: string) => string | undefined;
-  handleErrorMessages: (key: keyof ErrorMessagesType, message: string) => void;
-  setCardInput: React.Dispatch<React.SetStateAction<CardInputProps>>;
-  errorMessages: ErrorMessagesType;
+  cvcValue: string;
+  errorMessage: string;
+  onCVCChange: (value: string) => void;
 }
 
 export const CVCInput: React.FC<CVCInputProps> = ({
-  validateCardCVC,
-  handleErrorMessages,
-  errorMessages,
-  setCardInput,
+  cvcValue,
+  errorMessage,
+  onCVCChange,
 }) => {
+  const [localValue, setLocalValue] = useState(cvcValue);
+
+  useEffect(() => {
+    setLocalValue(cvcValue);
+  }, [cvcValue]);
+
+  const handleLocalCVCChange = (value: string) => {
+    if (value !== '' && !/^\d+$/.test(value)) {
+      return;
+    }
+
+    setLocalValue(value);
+    onCVCChange(value);
+  };
+
   return (
     <>
       <Description headText="CVC 번호를 입력해 주세요" />
-      <InputGroup label="CVC" errorMessages={errorMessages.CVC}>
+      <InputGroup label="CVC" errorMessages={errorMessage}>
         <Input
           maxLength={3}
           placeholder="123"
-          validate={validateCardCVC}
-          onChange={value => {
-            setCardInput((prev: CardInputProps) => ({
-              ...prev,
-              CVC: value === '' ? null : Number(value),
-            }));
-          }}
-          handleErrorMessage={message => handleErrorMessages('CVC', message)}
+          value={localValue}
+          onChange={handleLocalCVCChange}
+          isError={!!errorMessage}
+          name="cvcNumber"
         />
       </InputGroup>
     </>

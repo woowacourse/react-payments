@@ -1,12 +1,20 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 
-interface InputProps {
+export interface InputProps {
   maxLength: number;
   placeholder: string;
-  validate: (value: string) => string | undefined;
-  handleErrorMessage: (input: string) => void;
+  value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
+  type?: string;
+  name?: string;
+  isError?: boolean;
+  onComplete?: () => void;
+}
+
+export interface InputRef {
+  focus: () => void;
 }
 
 const InputField = styled.input<{ $isError: boolean }>`
@@ -24,39 +32,54 @@ const InputField = styled.input<{ $isError: boolean }>`
   }
 `;
 
-const Input = ({
-  maxLength,
-  placeholder,
-  validate,
-  handleErrorMessage,
-  onChange,
-}: InputProps) => {
-  const [isError, setIsError] = useState(false);
+const Input = forwardRef<InputRef, InputProps>(
+  (
+    {
+      maxLength,
+      placeholder,
+      value,
+      onChange,
+      onBlur,
+      onComplete,
+      type = 'text',
+      name,
+      isError = false,
+    },
+    ref,
+  ) => {
+    const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const errorMessage = validate(value);
-    if (errorMessage && errorMessage.length > 0) {
-      handleErrorMessage(errorMessage);
-      setIsError(true);
-      return;
-    }
+    useImperativeHandle(ref, () => ({
+      focus: () => {
+        inputRef.current?.focus();
+      },
+    }));
 
-    handleErrorMessage('');
-    setIsError(false);
-    onChange(value);
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = e.target.value;
+      onChange(inputValue);
 
-  return (
-    <InputField
-      placeholder={placeholder}
-      maxLength={maxLength}
-      onChange={handleCardNumber}
-      inputMode="numeric"
-      pattern="[0-9]*"
-      $isError={isError}
-    />
-  );
-};
+      if (inputValue.length === maxLength && onComplete) {
+        onComplete();
+      }
+    };
+
+    return (
+      <InputField
+        ref={inputRef}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        onChange={handleChange}
+        value={value}
+        onBlur={onBlur}
+        inputMode="numeric"
+        pattern="[0-9]*"
+        $isError={isError}
+        type={type}
+        name={name}
+      />
+    );
+  },
+);
 
 export default Input;

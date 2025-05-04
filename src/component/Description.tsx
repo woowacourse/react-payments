@@ -15,12 +15,14 @@ const HeaderText = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.header};
   font-weight: ${({ theme }) => theme.fontWeights.header};
   color: ${({ theme }) => theme.colors.black};
+  margin-bottom: 4px;
 `;
 
 const DetailText = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.caption};
   font-weight: ${({ theme }) => theme.fontWeights.caption};
   color: ${({ theme }) => theme.colors.gray};
+  margin-bottom: 16px;
 `;
 
 const Description = ({ headText, detailText }: DescriptionProps) => {

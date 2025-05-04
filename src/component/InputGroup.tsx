@@ -1,4 +1,13 @@
 import styled from 'styled-components';
+import React, {
+  useRef,
+  Children,
+  isValidElement,
+  cloneElement,
+  ComponentPropsWithRef,
+} from 'react';
+import type { InputRef, InputProps } from './Input'; // Input 컴포넌트의 ref 타입 임포트
+import Input from './Input';
 
 interface InputGroupProps {
   label: string;
@@ -21,6 +30,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 `;
 
 const ErrorMessage = styled.p`
@@ -36,10 +46,33 @@ const ErrorMessageContainer = styled.div`
 `;
 
 const InputGroup = ({ label, children, errorMessages }: InputGroupProps) => {
+  const inputRefs = useRef<InputRef[]>([]);
+
+  const enhancedChildren = Children.map(children, (child, index) => {
+    if (isValidElement<InputProps>(child)) {
+      return cloneElement(child, {
+        ref: (instance: InputRef | null) => {
+          if (instance) {
+            inputRefs.current[index] = instance;
+          }
+        },
+        onComplete: () => {
+          const nextIndex = index + 1;
+          if (nextIndex < Children.count(children)) {
+            setTimeout(() => {
+              inputRefs.current[nextIndex]?.focus();
+            }, 0);
+          }
+        },
+      } as ComponentPropsWithRef<typeof Input>);
+    }
+    return child;
+  });
+
   return (
     <Container>
       <Label>{label}</Label>
-      <InputContainer>{children}</InputContainer>
+      <InputContainer>{enhancedChildren}</InputContainer>
       <ErrorMessageContainer>
         <ErrorMessage>{errorMessages}</ErrorMessage>
       </ErrorMessageContainer>

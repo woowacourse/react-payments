@@ -102,6 +102,7 @@ export const CardNumberInputGroup: Story = {
         MM: 0,
         YY: 0,
         CVC: 0,
+        secretNumber: null,
       });
       const [errorMessages, setErrorMessages] = useState<
         Record<string, string>
@@ -151,6 +152,7 @@ export const ExpiryDateInputGroup: Story = {
         MM: 0,
         YY: 0,
         CVC: 0,
+        secretNumber: null,
       });
       const [errorMessages, setErrorMessages] = useState<
         Record<string, string>
@@ -197,6 +199,7 @@ export const CVCInputGroup: Story = {
         MM: 0,
         YY: 0,
         CVC: 0,
+        secretNumber: null,
       });
       const [errorMessages, setErrorMessages] = useState<
         Record<string, string>
@@ -261,6 +264,7 @@ export const PaymentFormExample: Story = {
         MM: 0,
         YY: 0,
         CVC: 0,
+        secretNumber: null,
       });
       const [errorMessages, setErrorMessages] = useState<
         Record<string, string>

@@ -61,3 +61,14 @@ export const validateCardCVC = (cvc: string): string | undefined => {
   }
   return undefined;
 };
+
+export const validateCardSecretNumber = (
+  secretNumber: string,
+): string | undefined => {
+  if (secretNumber.length === 0) return;
+
+  if (isNaN(Number(secretNumber))) {
+    return ERROR_MESSAGE.NOT_A_NUMBER;
+  }
+  return undefined;
+};
