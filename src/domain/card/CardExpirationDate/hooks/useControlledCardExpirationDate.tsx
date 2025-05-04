@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import {
   DECIMAL_RADIX,
   ERROR_MESSAGE,
@@ -11,7 +11,6 @@ import { EXPIRATION_DATE_ERROR_MESSAGE, EXPIRATION_DATE_MAX_LENGTH } from '../co
 import { validateErrorMessages } from '../../../../utils';
 
 export const useControlledCardExpirationDate = () => {
-  const [isCardExpirationDateNextStep, setIsCardExpirationDateNextStep] = useState(false);
   const [cardExpirationDate, setCardExpirationDate] = useState<Record<DateType, string>>({
     month: '',
     year: '',
@@ -79,11 +78,14 @@ export const useControlledCardExpirationDate = () => {
     if (errorMessage === '') handleInputFocus(index);
   };
 
-  const isCardNumberFill = Object.values(cardExpirationDate).every(
-    (number) => number.length === EXPIRATION_DATE_MAX_LENGTH,
-  );
-  const isValid = validateErrorMessages<DateType, Record<DateType, string>>(cardExpirationDateErrorMessage);
-  if (isCardNumberFill && isValid && !isCardExpirationDateNextStep) setIsCardExpirationDateNextStep(true);
+  const isCardExpirationDateNextStep = useMemo(() => {
+    const isCardNumberFill = Object.values(cardExpirationDate).every(
+      (number) => number.length === EXPIRATION_DATE_MAX_LENGTH,
+    );
+    const isValid = validateErrorMessages<DateType, Record<DateType, string>>(cardExpirationDateErrorMessage);
+
+    return isCardNumberFill && isValid;
+  }, [cardExpirationDate, cardExpirationDateErrorMessage]);
 
   return {
     cardExpirationDate,

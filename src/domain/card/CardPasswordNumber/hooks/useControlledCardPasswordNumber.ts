@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
 import { CARD_PASSWORD_NUMBER_ERROR_MESSAGE, CARD_PASSWORD_NUMBER_MAX_LENGTH } from '../constants';
 
 export const useControlledCardPasswordNumber = () => {
-  const [isCardPasswordNextStep, setIsCardPasswordNextStep] = useState<boolean>(false);
   const [cardPassword, setCardPassword] = useState<string>('');
   const [cardPasswordErrorMessage, setCardPasswordErrorMessage] = useState<string>('');
 
@@ -24,11 +23,9 @@ export const useControlledCardPasswordNumber = () => {
     setCardPasswordErrorMessage((prev) => (prev = getErrorMessage(value)));
   };
 
-  if (
-    cardPassword.length === CARD_PASSWORD_NUMBER_MAX_LENGTH &&
-    cardPasswordErrorMessage === '' &&
-    !isCardPasswordNextStep
-  )
-    setIsCardPasswordNextStep(true);
+  const isCardPasswordNextStep = useMemo(() => {
+    return cardPassword.length === CARD_PASSWORD_NUMBER_MAX_LENGTH && cardPasswordErrorMessage === '';
+  }, [cardPassword.length, cardPasswordErrorMessage]);
+
   return { cardPassword, cardPasswordErrorMessage, isCardPasswordNextStep, handleCardPasswordInputChange };
 };

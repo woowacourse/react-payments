@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
 import { CVC_ERROR_MESSAGE, CVC_NUMBER_MAX_LENGTH } from '../constants';
 
 export const useControlledCardCVCNumber = () => {
-  const [isCardCVCNumberNextStep, setIsCardCVCNumberNextStep] = useState<boolean>(false);
   const [cardCVCNumber, setCardCVCNumber] = useState<string>('');
   const [cardCVCNumberErrorMessage, setCardCVCNumberErrorMessage] = useState<string>('');
 
@@ -23,8 +22,10 @@ export const useControlledCardCVCNumber = () => {
     setCardCVCNumber((prev) => (prev = value));
     setCardCVCNumberErrorMessage((prev) => (prev = getErrorMessage(value)));
   };
-  if (cardCVCNumber.length === CVC_NUMBER_MAX_LENGTH && cardCVCNumberErrorMessage === '' && !isCardCVCNumberNextStep)
-    setIsCardCVCNumberNextStep(true);
+
+  const isCardCVCNumberNextStep = useMemo(() => {
+    return cardCVCNumber.length === CVC_NUMBER_MAX_LENGTH && cardCVCNumberErrorMessage === '';
+  }, [cardCVCNumber.length, cardCVCNumberErrorMessage]);
 
   return { cardCVCNumber, cardCVCNumberErrorMessage, isCardCVCNumberNextStep, handleCardCVCNumberInputChange };
 };

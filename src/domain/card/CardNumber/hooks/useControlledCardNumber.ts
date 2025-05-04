@@ -1,11 +1,10 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { CardNumberType, HandleInputChangeProps, SequenceType } from '../types';
 import { ERROR_MESSAGE, ONLY_NUMBER_PATTERN } from '../../../../constants';
 import { CARD_NUMBER_ERROR_MESSAGE, CARD_NUMBER_MAX_LENGTH } from '../constants';
 import { validateErrorMessages } from '../../../../utils';
 
 export const useControlledCardNumber = () => {
-  const [isCardNumberNextStep, setIsCardNumberNextStep] = useState(false);
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     first: '',
     second: '',
@@ -50,9 +49,12 @@ export const useControlledCardNumber = () => {
     if (errorMessage === '') handleInputFocus(index);
   }, []);
 
-  const isCardNumberFill = Object.values(cardNumber).every((number) => number.length === CARD_NUMBER_MAX_LENGTH);
-  const isValid = validateErrorMessages<SequenceType, CardNumberType>(cardNumberErrorMessage);
-  if (isCardNumberFill && isValid && !isCardNumberNextStep) setIsCardNumberNextStep(true);
+  const isCardNumberNextStep = useMemo(() => {
+    const isCardNumberFill = Object.values(cardNumber).every((number) => number.length === CARD_NUMBER_MAX_LENGTH);
+    const isValid = validateErrorMessages<SequenceType, CardNumberType>(cardNumberErrorMessage);
+
+    return isCardNumberFill && isValid;
+  }, [cardNumber, cardNumberErrorMessage]);
 
   return { cardNumber, cardNumberErrorMessage, isCardNumberNextStep, cardNumberRefs, handleCardNumberInputChange };
 };
