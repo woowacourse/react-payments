@@ -5,12 +5,8 @@ import Input from "../Input/Input";
 import InputContainer from "../InputContainer/InputContainer";
 
 const CardNumbersInput = () => {
-  const {
-    formValues,
-    formErrors,
-    cardNumbersInputRefs,
-    handleCardNumbers,
-  } = useCardContext();
+  const { formValues, formErrors, cardNumbersInputRefs, handleCardNumbers } =
+    useCardContext();
 
   return (
     <InputContainer

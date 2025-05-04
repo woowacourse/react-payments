@@ -22,8 +22,7 @@ const meta: Meta<typeof CardNumbersInput> = {
   },
   argTypes: {
     cardNumbers: {
-      description:
-        `각 입력 칸에 입력된 카드 번호 배열 (총 4개, 각각 최대 ${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}자리 숫자)`,
+      description: `각 입력 칸에 입력된 카드 번호 배열 (총 4개, 각각 최대 ${CARD_VALIDATION_INFO.CARD_MAX_LENGTH}자리 숫자)`,
       control: false,
     },
     setCardNumbers: {

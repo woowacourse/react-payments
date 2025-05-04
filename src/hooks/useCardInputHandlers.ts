@@ -12,7 +12,7 @@ import { useCardState } from "./useCardState";
 import { CARD_COMPANIES } from "../constants/cardCompanyInfo";
 
 export const useCardInputHandlers = (
-  cardState: ReturnType<typeof useCardState>
+  cardState: ReturnType<typeof useCardState>,
 ) => {
   const {
     formValues,
@@ -24,7 +24,6 @@ export const useCardInputHandlers = (
     setShowExpiryInput,
     setShowCVCInput,
     setShowPasswordInput,
-    setIsValidForm,
     setIsOpenSelectCardCompany,
     setIsValidCardNumbers,
     setIsValidCardCompany,
@@ -41,7 +40,7 @@ export const useCardInputHandlers = (
 
       const { isValid, errorIndex, helperText } = validateCardNumbers(
         newCardNumbers,
-        CARD_VALIDATION_INFO.CARD_MAX_LENGTH
+        CARD_VALIDATION_INFO.CARD_MAX_LENGTH,
       );
 
       setFormValues((prev) => ({ ...prev, cardNumbers: newCardNumbers }));
@@ -80,11 +79,11 @@ export const useCardInputHandlers = (
 
     const { isMonthValid, monthHelperText } = validateMonth(
       nextMonth,
-      CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH
+      CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH,
     );
     const { isYearValid, yearHelperText } = validateYear(
       nextYear,
-      CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH
+      CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH,
     );
 
     setFormValues((prev) => ({
@@ -126,7 +125,7 @@ export const useCardInputHandlers = (
     const value = e.target.value;
     const { isValid, helperText } = validateCVC(
       value,
-      CARD_VALIDATION_INFO.CVC_MAX_LENGTH
+      CARD_VALIDATION_INFO.CVC_MAX_LENGTH,
     );
 
     setFormValues((prev) => ({ ...prev, CVC: value }));
@@ -145,7 +144,7 @@ export const useCardInputHandlers = (
     const value = e.target.value;
     const { isValid, helperText } = validatePassword(
       value,
-      CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH
+      CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH,
     );
 
     setFormValues((prev) => ({ ...prev, password: value }));

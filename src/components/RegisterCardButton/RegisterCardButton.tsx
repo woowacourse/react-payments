@@ -12,7 +12,11 @@ const RegisterCardButton = () => {
     navigate(ROUTE.CARD_REGISTER.COMPLETE);
   };
 
-  return <Button variant="register" onClick={handleRegister}>확인</Button>;
+  return (
+    <Button variant="register" onClick={handleRegister}>
+      확인
+    </Button>
+  );
 };
 
 export default RegisterCardButton;

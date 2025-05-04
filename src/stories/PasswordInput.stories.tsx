@@ -12,8 +12,7 @@ const meta: Meta<typeof PasswordInput> = {
   parameters: {
     docs: {
       description: {
-        component:
-          `🕵🏻‍♀️ PasswordInput은 ${CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH}자리 숫자만 입력 가능한 카드 비밀번호 앞 두 자리 필드입니다. 숫자가 아닌 값 입력, 자릿수 부족 등의 예외 처리를 포함하고 있습니다.`,
+        component: `🕵🏻‍♀️ PasswordInput은 ${CARD_VALIDATION_INFO.PASSWORD_MAX_LENGTH}자리 숫자만 입력 가능한 카드 비밀번호 앞 두 자리 필드입니다. 숫자가 아닌 값 입력, 자릿수 부족 등의 예외 처리를 포함하고 있습니다.`,
       },
     },
   },

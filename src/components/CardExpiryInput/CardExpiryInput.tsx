@@ -5,12 +5,8 @@ import InputContainer from "../InputContainer/InputContainer";
 import Input from "../Input/Input";
 
 const CardExpiryInput = () => {
-  const {
-    formValues,
-    formErrors,
-    handleDate,
-    expiryInputRefs,
-  } = useCardContext();
+  const { formValues, formErrors, handleDate, expiryInputRefs } =
+    useCardContext();
 
   return (
     <InputContainer

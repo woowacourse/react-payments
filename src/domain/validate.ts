@@ -41,7 +41,7 @@ const isValidYear = (year: string) => {
 
 export const validateCardNumbers = (
   cardNumbers: string[],
-  length: number
+  length: number,
 ): { isValid: boolean; errorIndex: number | null; helperText: string } => {
   for (let i = 0; i < cardNumbers.length; i++) {
     const num = cardNumbers[i];
@@ -77,7 +77,7 @@ export const validateCardNumbers = (
 };
 
 export const validateFirstCardNumbers = (
-  number: string
+  number: string,
 ): { isValid: boolean; errorIndex: number | null; helperText: string } => {
   if (!isValidCardStartNumber(number))
     return {
@@ -94,7 +94,7 @@ export const validateFirstCardNumbers = (
 
 export const validateMonth = (
   month: string,
-  length: number
+  length: number,
 ): { isMonthValid: boolean; monthHelperText: string } => {
   if (!isNumber(month))
     return { isMonthValid: false, monthHelperText: ERROR.REQUIRE.NUMBER };
@@ -110,7 +110,7 @@ export const validateMonth = (
 
 export const validateYear = (
   year: string,
-  length: number
+  length: number,
 ): { isYearValid: boolean; yearHelperText: string } => {
   if (!isNumber(year))
     return { isYearValid: false, yearHelperText: ERROR.REQUIRE.NUMBER };
@@ -131,7 +131,7 @@ export const validateYear = (
 
 export const validateCVC = (
   number: string,
-  length: number
+  length: number,
 ): { isValid: boolean; helperText: string } => {
   if (!isNumber(number))
     return { isValid: false, helperText: ERROR.REQUIRE.NUMBER };
@@ -145,7 +145,7 @@ export const validateCVC = (
 
 export const validatePassword = (
   number: string,
-  length: number
+  length: number,
 ): { isValid: boolean; helperText: string } => {
   if (!isNumber(number))
     return { isValid: false, helperText: ERROR.REQUIRE.NUMBER };
@@ -159,10 +159,10 @@ export const validatePassword = (
 
 export const isCardNumbersValid = (
   cardNumbers: string[],
-  cardNumbersHelperText: string
+  cardNumbersHelperText: string,
 ): boolean => {
   const isAllFilled = cardNumbers.every(
-    (num) => num.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH
+    (num) => num.length === CARD_VALIDATION_INFO.CARD_MAX_LENGTH,
   );
   return isAllFilled && cardNumbersHelperText === "";
 };

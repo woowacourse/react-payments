@@ -5,12 +5,7 @@ import InputContainer from "../InputContainer/InputContainer";
 import Input from "../Input/Input";
 
 const CVCInput = () => {
-  const {
-    formValues,
-    formErrors,
-    CVCInputRef,
-    handleCVC,
-  } = useCardContext();
+  const { formValues, formErrors, CVCInputRef, handleCVC } = useCardContext();
 
   return (
     <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>

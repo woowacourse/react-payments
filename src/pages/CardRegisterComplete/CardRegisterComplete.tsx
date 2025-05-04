@@ -12,7 +12,7 @@ const CardRegisterComplete = () => {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const selectedCompany = Object.values(CARD_COMPANIES).find(
-    (company) => company.color === formValues.cardColor
+    (company) => company.color === formValues.cardColor,
   )?.name;
 
   useEffect(() => {

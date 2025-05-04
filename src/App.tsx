@@ -7,8 +7,7 @@ import { ROUTE } from "./constants/route";
 
 function App() {
   return (
-    // <BrowserRouter basename="/react-payments">
-    <BrowserRouter>
+    <BrowserRouter basename="/react-payments">
       <Routes>
         <Route
           path={ROUTE.HOME}

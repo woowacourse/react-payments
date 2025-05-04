@@ -4,7 +4,9 @@ import { useCardContext } from "../../contexts/CardContext";
 import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_COMPANIES } from "../../constants/cardCompanyInfo";
 
-const CARD_OPTIONS = Object.keys(CARD_COMPANIES) as (keyof typeof CARD_COMPANIES)[];
+const CARD_OPTIONS = Object.keys(
+  CARD_COMPANIES,
+) as (keyof typeof CARD_COMPANIES)[];
 
 const CardCompanySelect = () => {
   const {

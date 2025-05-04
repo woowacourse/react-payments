@@ -5,12 +5,8 @@ import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import { INPUT_CONTAINER } from "../../constants/title";
 
 const PasswordInput = () => {
-  const {
-    formValues,
-    formErrors,
-    passwordInputRef,
-    handlePassword,
-  } = useCardContext();
+  const { formValues, formErrors, passwordInputRef, handlePassword } =
+    useCardContext();
 
   return (
     <InputContainer

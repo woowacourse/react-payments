@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useCardState } from "./useCardState";
 
 export const useCardValidation = (
-  cardState: ReturnType<typeof useCardState>
+  cardState: ReturnType<typeof useCardState>,
 ) => {
   const {
     isValidCardNumbers,
