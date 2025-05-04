@@ -99,7 +99,7 @@ export default function AddCardForm({
       })}
       {isCardPasswordNextStep && isFormValid && (
         <S.CardAddFromButtonWrapper>
-          <Button type={'submit'}>확인</Button>
+          <Button type="submit">확인</Button>
         </S.CardAddFromButtonWrapper>
       )}
     </S.CardAddFrom>
