@@ -11,3 +11,7 @@ export const CARD_EXPIRATION_ERROR = {
 export const CARD_CVC_ERROR = {
   onlyNumbers: '숫자만 입력 가능합니다.',
 };
+
+export const CARD_PASSWORD_ERROR = {
+  emptyValue: '비밀번호를 입력해 주세요.',
+};

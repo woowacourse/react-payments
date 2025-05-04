@@ -6,8 +6,9 @@ export interface ValidationConfig {
   maxValue?: number;
   requiredLength?: number;
   errorMessages: {
-    onlyNumbers: string;
+    onlyNumbers?: string;
     invalidValue?: string;
+    emptyValue?: string;
   };
 }
 
@@ -70,7 +71,7 @@ export const useCardField = (validationConfig: ValidationConfig) => {
     const numValue = Number(value);
 
     if (!value || isNaN(numValue)) {
-      return validationConfig.errorMessages.onlyNumbers;
+      return validationConfig.errorMessages.onlyNumbers ?? null;
     }
 
     if (

@@ -2,45 +2,49 @@ import Input from '../@common/Input/Input';
 import {
   errorInputStyle,
   errorMessageStyle,
-} from '../../styles/@common/text/text.style';
+} from '../../styles/@common/text.style';
 
-import { cardPeriodInputLayout } from './CardPeriodInput.style';
 import { CARD_EXPIRATION } from '../../constants';
 import {
   inputContainer,
   inputSection,
 } from '../../styles/@common/inputContainer.style';
-import {
-  CardExpirationDate,
-  CardExpirationDateError,
-} from '../../../types/types';
 import Title from '../@common/Title/Title';
+import { useCard } from '../../context/CardContext';
+import { handleAutoFocus } from '../../utils';
+import { Button } from '../@common/Button/Button';
 
-type CardPeriodInputProps = {
-  cardExpirationDate: CardExpirationDate;
-  onChange: {
-    month: (value: string) => void;
-    year: (value: string) => void;
+interface CardPeriodInputProps {
+  onNext?: () => void;
+  onClickBackButton: () => void;
+}
+
+function CardPeriodInput(props: CardPeriodInputProps) {
+  const { onNext, onClickBackButton } = props;
+  const { cardExpiration } = useCard();
+
+  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    cardExpiration.onChange.month(e.target.value);
+    const fieldMappings = {
+      month: 'year',
+    };
+    handleAutoFocus(e, CARD_EXPIRATION.monthLength, fieldMappings);
   };
-  errorState: CardExpirationDateError;
-  getMonthErrorMessage?: () => string | null | undefined;
-  getYearErrorMessage?: () => string | null | undefined;
-};
 
-function CardPeriodInput({
-  cardExpirationDate,
-  onChange,
-  errorState,
-  getMonthErrorMessage,
-  getYearErrorMessage,
-}: CardPeriodInputProps) {
+  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    cardExpiration.onChange.year(e.target.value);
+    const prevFieldMappings = {
+      year: 'month',
+    };
+    handleAutoFocus(e, CARD_EXPIRATION.yearLength, {}, prevFieldMappings);
+  };
+
   return (
-    <div css={cardPeriodInputLayout}>
+    <>
       <Title>
         <Title.Text>카드 유효기간을 입력해 주세요</Title.Text>
         <Title.SubTitle>월/년도(MMYY)를 순서대로 입력해 주세요.</Title.SubTitle>
       </Title>
-
       <Input.Group id="card-expiration">
         <div css={inputContainer}>
           <Input.Label>유효기간</Input.Label>
@@ -50,9 +54,10 @@ function CardPeriodInput({
                 type="text"
                 name="month"
                 maxLength={CARD_EXPIRATION.monthLength}
-                value={cardExpirationDate.month}
-                onChange={(e) => onChange.month(e.target.value)}
-                css={errorState.month ? errorInputStyle : undefined}
+                autoFocus
+                value={cardExpiration.value.month}
+                onChange={handleMonthChange}
+                css={cardExpiration.error.month ? errorInputStyle : undefined}
               />
             </Input.Group>
             <Input.Group id="card-expiration-year">
@@ -60,21 +65,31 @@ function CardPeriodInput({
                 type="text"
                 name="year"
                 maxLength={CARD_EXPIRATION.yearLength}
-                value={cardExpirationDate.year}
-                onChange={(e) => onChange.year(e.target.value)}
-                css={errorState.year ? errorInputStyle : undefined}
+                value={cardExpiration.value.year}
+                onChange={handleYearChange}
+                css={cardExpiration.error.year ? errorInputStyle : undefined}
               />
             </Input.Group>
           </article>
-          {errorState.month && (
-            <div css={errorMessageStyle}>{getMonthErrorMessage?.()}</div>
+          {cardExpiration.error.month && (
+            <div css={errorMessageStyle}>
+              {cardExpiration.getMonthErrorMessage()}
+            </div>
           )}
-          {errorState.year && !errorState.month && (
-            <div css={errorMessageStyle}>{getYearErrorMessage?.()}</div>
+          {cardExpiration.error.year && !cardExpiration.error.month && (
+            <div css={errorMessageStyle}>
+              {cardExpiration.getYearErrorMessage()}
+            </div>
           )}
         </div>
       </Input.Group>
-    </div>
+      <Button variant="small" onClick={onClickBackButton}>
+        뒤로가기
+      </Button>
+      <Button variant="small" onClick={onNext} colorVariant="gray">
+        다음
+      </Button>
+    </>
   );
 }
 

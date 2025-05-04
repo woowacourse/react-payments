@@ -1,4 +1,4 @@
-import { CARD_CVC, CARD_CVC_ERROR } from '../constants';
+import { CARD_CVC_ERROR, CARD_LENGTH } from '../constants';
 import { useCardField } from './useCardField';
 import { CardCVC } from '../../types/types';
 
@@ -11,7 +11,7 @@ export const useCardCVC = () => {
     isValid: isCardCVCValid,
     getErrorMessage: getCardCVCErrorMessage,
   } = useCardField({
-    requiredLength: CARD_CVC.maxLength,
+    requiredLength: CARD_LENGTH.cvc,
     errorMessages: {
       onlyNumbers: CARD_CVC_ERROR.onlyNumbers,
     },

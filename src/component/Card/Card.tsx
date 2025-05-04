@@ -5,19 +5,17 @@ import {
   cardContentContainer,
   cardContentText,
   cardFrame,
-  cardLayout,
   cardType,
+  dynamicCardStyle,
 } from './Card.style';
-import { CardExpirationDate, CardNumber } from '../../../types/types';
+import { useCard } from '../../context/CardContext';
 import { identifyCardType } from '../../utils/cardTypeUtils';
+import { maskCardValue } from '../../utils';
 
-type CardProps = {
-  cardNumber: CardNumber;
-  cardExpirationDate: CardExpirationDate;
-};
+function Card() {
+  const { cardNumber, cardExpiration, cardBrand } = useCard();
 
-function Card({ cardNumber, cardExpirationDate }: CardProps) {
-  const cardTypeId = identifyCardType(cardNumber);
+  const cardTypeId = identifyCardType(cardNumber.value);
 
   const getCardTypeImage = () => {
     if (cardTypeId === 'mastercard') return MasterCard;
@@ -28,10 +26,18 @@ function Card({ cardNumber, cardExpirationDate }: CardProps) {
   const cardTypeImage = getCardTypeImage();
 
   const hasCardExpirationDate =
-    cardExpirationDate.month || cardExpirationDate.year;
+    cardExpiration.value.month || cardExpiration.value.year;
+
+  const getDisplayCardValue = (
+    value: string | undefined,
+    fieldName: string
+  ) => {
+    const shouldMask = fieldName === 'third' || fieldName === 'forth';
+    return maskCardValue(value, shouldMask);
+  };
 
   return (
-    <section css={cardLayout}>
+    <section css={dynamicCardStyle(cardBrand.color)}>
       <div css={cardContainer}>
         <div css={cardFrame}></div>
         {cardTypeImage && (
@@ -42,16 +48,16 @@ function Card({ cardNumber, cardExpirationDate }: CardProps) {
       </div>
       <div css={cardContentContainer}>
         <div css={cardContent}>
-          {Object.values(cardNumber).map((value, index) => (
+          {Object.entries(cardNumber.value).map(([fieldName, value], index) => (
             <span key={index} css={cardContentText}>
-              {value}
+              {getDisplayCardValue(value?.toString(), fieldName)}
             </span>
           ))}
         </div>
         <div css={cardContent}>
           {hasCardExpirationDate && (
             <span css={cardContentText}>
-              {cardExpirationDate.month}/{cardExpirationDate.year}
+              {cardExpiration.value.month}/{cardExpiration.value.year}
             </span>
           )}
         </div>
