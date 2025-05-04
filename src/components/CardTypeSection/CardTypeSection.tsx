@@ -1,9 +1,7 @@
 import styles from './CardTypeSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 
-type Props = {};
-
-export default function CardTypeSection({}: Props) {
+export default function CardTypeSection() {
   return (
     <div className={styles.sectionContainer}>
       <InputSection.TitleWrapper>

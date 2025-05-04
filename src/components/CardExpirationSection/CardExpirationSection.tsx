@@ -1,4 +1,3 @@
-import styles from './CardExpirationSection.module.css';
 import { InputSection } from '../InputSection/InputSection';
 import Input from '../Input/Input';
 import { ExpirationKey, ExpirationType } from '../../types';

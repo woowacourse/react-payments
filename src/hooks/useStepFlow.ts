@@ -18,7 +18,8 @@ export function useStepFlow({
   company: string;
   cvc: CvcType;
 }) {
-  const isCardNumbersValid = Object.values(cardNumbers).every(({ value, errorMessage }) => value.length === 4 && errorMessage === '');
+  console.log(Object.values(cardNumbers));
+  const isCardNumbersValid = Object.values(cardNumbers).every(({ value, errorMessage }) => value.length === 4 && !errorMessage);
   const isExpirationValid = Object.values(expiration).every(({ value, errorMessage }) => value.length === 2 && errorMessage === '');
   const isCompanyValid = company !== '';
   const isCvcValid = cvc.value.length === 3 && cvc.errorMessage === '';
