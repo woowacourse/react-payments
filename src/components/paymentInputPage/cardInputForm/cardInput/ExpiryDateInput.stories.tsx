@@ -8,8 +8,8 @@ const meta = {
   title: 'ExpiryDateInput',
   component: ExpiryDateInput,
   args: {
-    isValid: { month: true, year: true },
-    setIsValid: () => {},
+    isExpiryDateValid: { month: true, year: true },
+    setIsExpiryDateValid: () => {},
   },
   decorators: [
     (Story) => (
@@ -40,7 +40,7 @@ export const Default: Story = {
 
 export const ErrorMonth: Story = {
   args: {
-    isValid: { month: false, year: true },
+    isExpiryDateValid: { month: false, year: true },
   },
 
   play: async ({ canvasElement }) => {
@@ -56,7 +56,7 @@ export const ErrorMonth: Story = {
 
 export const ErrorYear: Story = {
   args: {
-    isValid: { month: true, year: false },
+    isExpiryDateValid: { month: true, year: false },
   },
 
   play: async ({ canvasElement }) => {
@@ -74,7 +74,7 @@ export const ErrorYear: Story = {
 
 export const ErrorDuration: Story = {
   args: {
-    isValid: { month: false, year: false },
+    isExpiryDateValid: { month: false, year: false },
   },
 
   play: async ({ canvasElement }) => {

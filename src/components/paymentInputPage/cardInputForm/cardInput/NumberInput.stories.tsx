@@ -8,8 +8,8 @@ const meta = {
   title: 'NumberInput',
   component: NumberInput,
   args: {
-    isValid: [true, true, true, true],
-    setIsValid: () => {},
+    isCardNumberValid: [true, true, true, true],
+    setIsCardNumberValid: () => {},
   },
   decorators: [
     (Story) => (

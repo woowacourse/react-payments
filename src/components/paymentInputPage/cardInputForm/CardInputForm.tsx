@@ -59,37 +59,37 @@ function CardInputForm() {
     {
       Component: NumberInput,
       props: {
-        isValid: isCardNumberValid,
-        setIsValid: setIsCardNumberValid,
+        isCardNumberValid,
+        setIsCardNumberValid,
       },
       isInputValid: validate.combineValidity(isCardNumberValid),
     },
     {
       Component: IssuerSelector,
-      props: { isValid: isIssuerValid, setIsValid: setIsIssuerValid },
+      props: { isIssuerValid, setIsIssuerValid },
       isInputValid: validate.combineValidity(isIssuerValid),
     },
     {
       Component: ExpiryDateInput,
       props: {
-        isValid: isExpiryDateValid,
-        setIsValid: setIsExpiryDateValid,
+        isExpiryDateValid,
+        setIsExpiryDateValid,
       },
       isInputValid: validate.combineValidity(isExpiryDateValid),
     },
     {
       Component: CVCInput,
       props: {
-        isValid: isCVCValid,
-        setIsValid: setIsCVCValid,
+        isCVCValid,
+        setIsCVCValid,
       },
       isInputValid: validate.combineValidity(isCVCValid),
     },
     {
       Component: PasswordInput,
       props: {
-        isValid: isPasswordValid,
-        setIsValid: setIsPasswordValid,
+        isPasswordValid,
+        setIsPasswordValid,
       },
       isInputValid: validate.combineValidity(isPasswordValid),
     },

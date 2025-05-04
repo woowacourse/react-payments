@@ -8,8 +8,8 @@ const meta = {
   title: 'CVCInput',
   component: CVCInput,
   args: {
-    isValid: true,
-    setIsValid: () => {},
+    isCVCValid: true,
+    setIsCVCValid: () => {},
   },
   decorators: [
     (Story) => (
@@ -28,7 +28,7 @@ export const Default: Story = {};
 
 export const Error: Story = {
   args: {
-    isValid: false,
+    isCVCValid: false,
   },
 
   play: async ({ canvasElement }) => {

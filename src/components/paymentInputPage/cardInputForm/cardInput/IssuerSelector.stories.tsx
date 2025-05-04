@@ -7,8 +7,8 @@ const meta = {
   title: 'IssuerSelector',
   component: IssuerSelector,
   args: {
-    isValid: true,
-    setIsValid: () => {},
+    isIssuerValid: true,
+    setIsIssuerValid: () => {},
   },
   decorators: [
     (Story) => (
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    isValid: false,
+    isIssuerValid: false,
   },
 
   play: async ({ canvasElement }) => {

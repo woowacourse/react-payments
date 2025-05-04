@@ -8,8 +8,8 @@ const meta = {
   title: 'PasswordInput',
   component: PasswordInput,
   args: {
-    isValid: true,
-    setIsValid: () => {},
+    isPasswordValid: true,
+    setIsPasswordValid: () => {},
   },
   decorators: [
     (Story) => (
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    isValid: true,
+    isPasswordValid: true,
   },
 
   play: async ({ canvasElement }) => {
@@ -45,7 +45,7 @@ export const Default: Story = {
 
 export const Error: Story = {
   args: {
-    isValid: false,
+    isPasswordValid: false,
   },
 
   play: async ({ canvasElement }) => {

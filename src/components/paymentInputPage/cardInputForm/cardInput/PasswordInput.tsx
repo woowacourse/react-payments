@@ -5,11 +5,14 @@ import { validate } from '../../../../utils/validate';
 import useCardContext from '../../../../hooks/useCardContext';
 
 export interface PasswordInputProps {
-  isValid: boolean;
-  setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+  isPasswordValid: boolean;
+  setIsPasswordValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function PasswordInput({ isValid, setIsValid }: PasswordInputProps) {
+function PasswordInput({
+  isPasswordValid,
+  setIsPasswordValid,
+}: PasswordInputProps) {
   const { password, setPassword } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
@@ -24,7 +27,7 @@ function PasswordInput({ isValid, setIsValid }: PasswordInputProps) {
   function checkIsValidType(passwordInput: string) {
     const { isValid, message } = validate.checkNumberInput(passwordInput);
     setFeedbackMessage(message);
-    setIsValid(isValid);
+    setIsPasswordValid(isValid);
   }
 
   return (
@@ -44,7 +47,7 @@ function PasswordInput({ isValid, setIsValid }: PasswordInputProps) {
           maxLength={2}
           autoFocus={true}
           isRequired={true}
-          isValidInput={isValid}
+          isValidInput={isPasswordValid}
         />
       </InputForm>
     </>

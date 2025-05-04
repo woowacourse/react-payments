@@ -14,20 +14,23 @@ export const ISSUER_LIST = new Map([
 ]);
 
 export interface IssuerSelectorProps {
-  isValid: boolean;
-  setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+  isIssuerValid: boolean;
+  setIsIssuerValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function IssuerSelector({ isValid, setIsValid }: IssuerSelectorProps) {
+function IssuerSelector({
+  isIssuerValid,
+  setIsIssuerValid,
+}: IssuerSelectorProps) {
   const { cardIssuer, setCardIssuer } = useCardContext();
 
   function validateIssuerChange(e: React.MouseEvent<HTMLLIElement>) {
     const targetIssuer = e.currentTarget.textContent as string;
 
     if (!ISSUER_LIST.has(targetIssuer)) {
-      setIsValid(false);
+      setIsIssuerValid(false);
     } else {
-      setIsValid(true);
+      setIsIssuerValid(true);
     }
   }
 

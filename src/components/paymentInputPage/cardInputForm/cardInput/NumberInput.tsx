@@ -5,11 +5,14 @@ import { precise } from '../../../../utils/precise';
 import useCardContext from '../../../../hooks/useCardContext';
 
 export interface NumberInputProps {
-  isValid: boolean[];
-  setIsValid: React.Dispatch<React.SetStateAction<boolean[]>>;
+  isCardNumberValid: boolean[];
+  setIsCardNumberValid: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
-function NumberInput({ isValid, setIsValid }: NumberInputProps) {
+function NumberInput({
+  isCardNumberValid,
+  setIsCardNumberValid,
+}: NumberInputProps) {
   const { cardNumbers, setCardNumbers } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
@@ -32,16 +35,18 @@ function NumberInput({ isValid, setIsValid }: NumberInputProps) {
 
   function validateCardNumber(inputCardNumber: string, dataInputId: number) {
     if (!precise.isNumber(inputCardNumber)) {
-      isValid[dataInputId] = false;
-      setIsValid([...isValid]);
+      isCardNumberValid[dataInputId] = false;
+      setIsCardNumberValid([...isCardNumberValid]);
     } else {
-      isValid[dataInputId] = true;
-      setIsValid([...isValid]);
+      isCardNumberValid[dataInputId] = true;
+      setIsCardNumberValid([...isCardNumberValid]);
     }
   }
 
   function decideShowFeedback() {
-    const hasInvalidInput = isValid.some((isValidInput) => !isValidInput);
+    const hasInvalidInput = isCardNumberValid.some(
+      (isValidInput) => !isValidInput
+    );
     if (hasInvalidInput) {
       setFeedbackMessage('숫자만 입력 가능합니다.');
     } else {
@@ -59,7 +64,7 @@ function NumberInput({ isValid, setIsValid }: NumberInputProps) {
         maxLength={4}
         value={cardNumbers[index]}
         handleInputChange={handleCardNumberChange}
-        isValidInput={isValid[index]}
+        isValidInput={isCardNumberValid[index]}
         autoFocus={index === 0}
         isRequired={true}
         dataInputId={index}

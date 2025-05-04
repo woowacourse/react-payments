@@ -10,11 +10,14 @@ export interface IsValidType {
 }
 
 export interface ExpiryDateInputProps {
-  isValid: IsValidType;
-  setIsValid: React.Dispatch<React.SetStateAction<IsValidType>>;
+  isExpiryDateValid: IsValidType;
+  setIsExpiryDateValid: React.Dispatch<React.SetStateAction<IsValidType>>;
 }
 
-function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
+function ExpiryDateInput({
+  isExpiryDateValid,
+  setIsExpiryDateValid,
+}: ExpiryDateInputProps) {
   const { expiryDate, setExpiryDate } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
@@ -28,7 +31,7 @@ function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
     );
 
     setFeedbackMessage(message);
-    setIsValid({ month: isValid, year: isValid });
+    setIsExpiryDateValid({ month: isValid, year: isValid });
   }
 
   function handleMonthChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -36,7 +39,7 @@ function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
     setExpiryDate((prev) => ({ ...prev, month: value }));
 
     const { isValid, message } = validate.checkExpiryMonth(value);
-    setIsValid((prev) => ({ ...prev, month: isValid }));
+    setIsExpiryDateValid((prev) => ({ ...prev, month: isValid }));
     setFeedbackMessage(message);
 
     if (isValid) {
@@ -49,7 +52,7 @@ function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
     setExpiryDate((prev) => ({ ...prev, year: value }));
 
     const { isValid, message } = validate.checkNumberInput(value);
-    setIsValid((prev) => ({ ...prev, year: isValid }));
+    setIsExpiryDateValid((prev) => ({ ...prev, year: isValid }));
     setFeedbackMessage(message);
 
     if (isValid) {
@@ -75,7 +78,7 @@ function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
           maxLength={2}
           autoFocus={true}
           isRequired={true}
-          isValidInput={isValid.month}
+          isValidInput={isExpiryDateValid.month}
         />
         <Input
           type='tel'
@@ -86,7 +89,7 @@ function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
           minLength={2}
           maxLength={2}
           isRequired={true}
-          isValidInput={isValid.year}
+          isValidInput={isExpiryDateValid.year}
         />
       </InputForm>
     </>
