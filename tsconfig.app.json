@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", ".storybook/utils/withCustomCardProvider.tsx"]
+  "include": ["src", ".storybook/utils"]
 }

@@ -1,12 +1,10 @@
-import { ErrorCSS } from "./Error.styled";
+import { ErrorStyles } from "./Error.styled";
 
 export interface ErrorProps {
-  errorMessage: string;
+  errorMessage: string | null;
   isVisible: boolean;
 }
 
-function Error({ errorMessage, isVisible }: ErrorProps) {
-  return isVisible && <ErrorCSS>{errorMessage}</ErrorCSS>;
+export default function Error({ errorMessage, isVisible }: ErrorProps) {
+  return isVisible && errorMessage && <ErrorStyles>{errorMessage}</ErrorStyles>;
 }
-
-export default Error;

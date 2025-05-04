@@ -15,7 +15,6 @@ const defaultArgs = {
   placeholder: "1234",
   maxLength: 4,
   value: "1234",
-  onChange: () => {},
 };
 
 export const Default: Story = {

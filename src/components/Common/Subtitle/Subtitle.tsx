@@ -1,11 +1,9 @@
-import { SubtitleCSS } from "./Subtitle.styled";
+import { SubtitleStyles } from "./Subtitle.styled";
 
 export interface SubtitleProps {
-  subtitle: string;
+  subtitle: string | null;
 }
 
-function Subtitle({ subtitle }: SubtitleProps) {
-  return <SubtitleCSS>{subtitle}</SubtitleCSS>;
+export default function Subtitle({ subtitle }: SubtitleProps) {
+  return subtitle !== null && <SubtitleStyles>{subtitle}</SubtitleStyles>;
 }
-
-export default Subtitle;
