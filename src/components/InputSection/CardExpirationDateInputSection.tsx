@@ -44,12 +44,6 @@ const CardExpirationDateInputSection = ({
     focusFirst();
   }, []);
 
-  useEffect(() => {
-    if (cardExpirationDate.month.length === 2) {
-      inputRef.year.current?.focus();
-    }
-  }, [cardExpirationDate.month]);
-
   return (
     <>
       <InputSection
