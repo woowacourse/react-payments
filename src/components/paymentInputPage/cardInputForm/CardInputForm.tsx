@@ -35,7 +35,6 @@ function CardInputForm() {
     setIsCVCValid,
     isPasswordValid,
     setIsPasswordValid,
-    isDataValid,
     ref,
   } = useValidateForm();
   const [isFormValid, setIsFormValid] = useState(false);
@@ -101,6 +100,12 @@ function CardInputForm() {
   );
 
   const renderList = inputs.slice(0, order + 1) as RenderItem<CardInputProps>[];
+  const isCardValid =
+    isCardNumberValid &&
+    isIssuerValid &&
+    isExpiryDateValid &&
+    isCVCValid &&
+    isPasswordValid;
 
   return (
     <form
@@ -113,7 +118,7 @@ function CardInputForm() {
         return <Component key={index} {...props} />;
       })}
 
-      {isDataValid && isFormValid && <CardSubmitButton />}
+      {isCardValid && isFormValid && <CardSubmitButton />}
     </form>
   );
 }
