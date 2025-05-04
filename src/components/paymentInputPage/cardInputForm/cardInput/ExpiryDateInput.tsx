@@ -38,12 +38,14 @@ function ExpiryDateInput({
     const { value } = e.target;
     setExpiryDate((prev) => ({ ...prev, month: value }));
 
-    const { isValid, message } = validate.checkExpiryMonth(value);
-    setIsExpiryDateValid((prev) => ({ ...prev, month: isValid }));
-    setFeedbackMessage(message);
+    if (value.length === 2) {
+      const { isValid, message } = validate.checkExpiryMonth(value);
+      setIsExpiryDateValid((prev) => ({ ...prev, month: isValid }));
+      setFeedbackMessage(message);
 
-    if (isValid) {
-      checkIsValidExpiry('month', value);
+      if (isValid) {
+        checkIsValidExpiry('month', value);
+      }
     }
   }
 
@@ -51,12 +53,14 @@ function ExpiryDateInput({
     const { value } = e.target;
     setExpiryDate((prev) => ({ ...prev, year: value }));
 
-    const { isValid, message } = validate.checkNumberInput(value);
-    setIsExpiryDateValid((prev) => ({ ...prev, year: isValid }));
-    setFeedbackMessage(message);
+    if (value.length === 2) {
+      const { isValid, message } = validate.checkNumberInput(value);
+      setIsExpiryDateValid((prev) => ({ ...prev, year: isValid }));
+      setFeedbackMessage(message);
 
-    if (isValid) {
-      checkIsValidExpiry('year', value);
+      if (isValid) {
+        checkIsValidExpiry('year', value);
+      }
     }
   }
 
