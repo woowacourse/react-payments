@@ -46,7 +46,6 @@ const ErrorMessageContainer = styled.div`
 `;
 
 const InputGroup = ({ label, children, errorMessages }: InputGroupProps) => {
-  // 각 Input 컴포넌트에 대한 ref 배열 생성
   const inputRefs = useRef<InputRef[]>([]);
 
   const enhancedChildren = Children.map(children, (child, index) => {
