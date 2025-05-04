@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
 import HelperText from '../HelperText/HelperText';
-import useInputValidation from '../../hooks/useInputValidation';
 import { useEffect } from 'react';
 import { HandleInputParams, InputProps } from '../../types/input';
+import useValidation from '../../hooks/useValidation';
 
 const StyledPasswordInput = styled.div`
   width: 100%;
@@ -31,7 +31,7 @@ const INITIAL_ERROR_STATES = [false];
 const VALID_LENGTH = 2;
 
 const PasswordInput = ({ values, onChange, onValidChange }: InputProps) => {
-  const { error, validate } = useInputValidation(INITIAL_ERROR_STATES, VALID_LENGTH);
+  const { error, validate } = useValidation(INITIAL_ERROR_STATES, VALID_LENGTH);
 
   const { state: errorState, message: errorMessage } = error;
 

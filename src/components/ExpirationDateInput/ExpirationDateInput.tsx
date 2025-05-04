@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import Input from '../Input/Input';
 import HelperText from '../HelperText/HelperText';
-import useExpDateValidation from '../../hooks/useExpDateValidation';
 import { expirationDateValidation } from '../../validators/expirationDateValidator';
 import { useEffect, useRef } from 'react';
 import { HandleInputParams, InputProps } from '../../types/input';
+import useValidation from '../../hooks/useValidation';
 
 const StyledExpirationDateInput = styled.div`
   width: 100%;
@@ -30,17 +30,14 @@ const StyledHelperTextWrapper = styled.div`
 
 const INITIAL_ERROR_STATES = [false, false];
 
-const validationCallback = (values: string[], params: HandleInputParams, validLength: number) =>
-  expirationDateValidation(values, params, validLength);
-
 const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) => {
   const placeHolders = ['MM', 'YY'];
 
-  const { errorState, errorMessage, validateExpirationDate } = useExpDateValidation(
-    INITIAL_ERROR_STATES,
-    values,
-    validationCallback
-  );
+  const { error, validate } = useValidation(INITIAL_ERROR_STATES, 2, {
+    values: values,
+    expDateValidationFn: expirationDateValidation,
+  });
+  const { state: errorState, message: errorMessage } = error;
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
@@ -52,7 +49,7 @@ const ExpirationDateInput = ({ values, onChange, onValidChange }: InputProps) =>
 
   const handleChange = ({ e, idx }: HandleInputParams) => {
     onChange({ e, idx });
-    validateExpirationDate({ e, idx });
+    validate({ e, idx });
     if (e.target.value.length === 2 && idx < 1) {
       inputRefs.current[idx + 1]?.focus();
     }
