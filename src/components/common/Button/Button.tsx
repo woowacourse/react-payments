@@ -12,11 +12,11 @@ const Button = ({
   onClick?: () => void;
 }) => {
   return (
-    <button className={styles.button} onClick={onClick}>
-      <Link to={{ pathname: link }} className={styles.link}>
+    <Link to={{ pathname: link }} className={styles.link}>
+      <button className={styles.button} onClick={onClick}>
         {text}
-      </Link>
-    </button>
+      </button>
+    </Link>
   );
 };
 
