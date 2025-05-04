@@ -6,13 +6,10 @@ import CardCVCNumber from '../../../../domain/card/CardCVCNumber/CardCVCNumber';
 import CardPasswordNumber from '../../../../domain/card/CardPasswordNumber/CardPasswordNumber';
 import Button from '../../../../components/Button/Button';
 import { AddCardFormProps, CardStepKey } from '../../types';
-import { Fragment, ReactNode, useEffect, useState } from 'react';
-import { CARD_STEP, CARD_STEPS } from '../../constants';
-import { useNavigate } from 'react-router';
-import { SequenceType } from '../../../../domain/card/CardNumber/types';
-import { DateType } from '../../../../domain/card/CardExpirationDate/types';
-import { validateErrorMessages } from '../../../../utils';
-import { PAGE_ROUTES } from '../../../../constants';
+import { Fragment, ReactNode } from 'react';
+import { CARD_STEPS } from '../../constants';
+import { useCardFormStep } from './hooks/useCardFormStep';
+import { useCardFormSubmit } from './hooks/useCardFormSubmit';
 
 export default function AddCardForm({
   addFormState,
@@ -45,36 +42,21 @@ export default function AddCardForm({
     handleCardPasswordInputChange,
   } = addFormState;
 
-  const [steps, setSteps] = useState<(typeof CARD_STEPS)[CardStepKey][]>(
-    (_testModeSteps as (typeof CARD_STEPS)[CardStepKey][]) || [CARD_STEP[0]],
+  const nextStepFlags = useCardFormStep(
+    [isCardNumberNextStep, isCardBrandNextStep, isCardExpirationDateNextStep, isCardCVCNumberNextStep],
+    _testModeSteps,
   );
 
-  useEffect(() => {
-    if (_testModeSteps) return;
+  const { isFormValid, handleFormSubmit } = useCardFormSubmit({
+    cardNumber,
+    cardBrandTypeState,
+    cardNumberErrorMessage,
+    cardExpirationDateErrorMessage,
+    cardCVCNumberErrorMessage,
+    cardPasswordErrorMessage,
+  });
 
-    const currentStepIndex = steps.length - 1;
-    const stepProgression = [
-      isCardNumberNextStep,
-      isCardBrandNextStep,
-      isCardExpirationDateNextStep,
-      isCardCVCNumberNextStep,
-      isCardPasswordNextStep,
-    ];
-    const currentStepProgression = stepProgression[currentStepIndex];
-    if (!currentStepProgression) {
-      return;
-    }
-
-    setSteps((prev) => [Object.values(CARD_STEPS)[steps.length], ...prev]);
-  }, [
-    isCardNumberNextStep,
-    isCardBrandNextStep,
-    isCardExpirationDateNextStep,
-    isCardCVCNumberNextStep,
-    isCardPasswordNextStep,
-  ]);
-
-  const stepComponents: Record<(typeof CARD_STEPS)[CardStepKey], ReactNode> = {
+  const componentsMap: Record<(typeof CARD_STEPS)[CardStepKey], ReactNode> = {
     [CARD_STEPS.CARD_NUMBERS]: (
       <CardNumber
         cardNumberRefs={cardNumberRefs}
@@ -110,37 +92,16 @@ export default function AddCardForm({
     ),
   };
 
-  const isCardNumberValid = validateErrorMessages<SequenceType, Record<SequenceType, string>>(cardNumberErrorMessage);
-  const isCardExpirationDateValid = validateErrorMessages<DateType, Record<DateType, string>>(
-    cardExpirationDateErrorMessage,
-  );
-  const isCardCVCNumberValid = validateErrorMessages<string, string>(cardCVCNumberErrorMessage);
-  const isCardPasswordValid = validateErrorMessages<string, string>(cardPasswordErrorMessage);
-  const isFormValid = isCardNumberValid && isCardExpirationDateValid && isCardCVCNumberValid && isCardPasswordValid;
-
-  const button = isCardPasswordNextStep && isFormValid && (
-    <S.CardAddFromButtonWrapper>
-      <Button type={'submit'}>확인</Button>
-    </S.CardAddFromButtonWrapper>
-  );
-
-  const navigate = useNavigate();
   return (
-    <S.CardAddFrom
-      onSubmit={(e) => {
-        e.preventDefault();
-        navigate(PAGE_ROUTES.COMPLETE, {
-          state: {
-            cardNumber,
-            cardBrandTypeState,
-          },
-        });
-      }}
-    >
-      {steps.map((step) => {
-        return <Fragment key={step}>{stepComponents[step]}</Fragment>;
+    <S.CardAddFrom onSubmit={handleFormSubmit}>
+      {nextStepFlags.map((step) => {
+        return <Fragment key={step}>{componentsMap[step]}</Fragment>;
       })}
-      {button}
+      {isCardPasswordNextStep && isFormValid && (
+        <S.CardAddFromButtonWrapper>
+          <Button type={'submit'}>확인</Button>
+        </S.CardAddFromButtonWrapper>
+      )}
     </S.CardAddFrom>
   );
 }
