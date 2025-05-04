@@ -144,11 +144,8 @@ export const useCardInputHandlers = (
     }
   };
 
-  const handleCardCompany = (option: string) => {
-    const selectedCompany = CARD_COMPANIES.find(
-      (company) => company.name === option
-    );
-
+  const handleCardCompany = (option: keyof typeof CARD_COMPANIES) => {
+    const selectedCompany = CARD_COMPANIES[option];
     setFormValues((prev) => ({
       ...prev,
       cardCompany: option,

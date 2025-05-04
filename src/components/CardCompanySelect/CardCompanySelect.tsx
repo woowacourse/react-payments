@@ -4,7 +4,7 @@ import { useCardContext } from "../../contexts/CardContext";
 import { INPUT_CONTAINER } from "../../constants/title";
 import { CARD_COMPANIES } from "../../constants/cardCompanyInfo";
 
-const CARD_OPTIONS = CARD_COMPANIES.map((company) => company.name);
+const CARD_OPTIONS = Object.keys(CARD_COMPANIES) as (keyof typeof CARD_COMPANIES)[];
 
 const CardCompanySelect = () => {
   const {
@@ -42,7 +42,7 @@ const CardCompanySelect = () => {
                 className={styles.option}
                 onClick={() => handleCardCompany(option)}
               >
-                {option}
+                {CARD_COMPANIES[option].name}
               </li>
             ))}
           </ul>

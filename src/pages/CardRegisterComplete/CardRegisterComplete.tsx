@@ -11,7 +11,7 @@ const CardRegisterComplete = () => {
   const navigate = useNavigate();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const selectedCompany = CARD_COMPANIES.find(
+  const selectedCompany = Object.values(CARD_COMPANIES).find(
     (company) => company.color === formValues.cardColor
   )?.name;
 
@@ -42,7 +42,7 @@ const CardRegisterComplete = () => {
       />
       <h2 className={styles.registerCardText}>
         {`${formValues.cardNumbers[0]}로 시작하는`} <br />
-        {`${selectedCompany}가 등록되었어요.`}
+        {`${selectedCompany ?? "알 수 없는 카드사"}가 등록되었어요.`}
       </h2>
       <RegisterAnotherCardButton ref={buttonRef} />
     </div>
