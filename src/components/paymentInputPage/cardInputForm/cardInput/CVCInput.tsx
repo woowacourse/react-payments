@@ -1,7 +1,8 @@
 import Input from '../../../common/inputForm/input/Input';
 import InputForm from '../../../common/inputForm/InputForm';
-import { precise } from '../../../../utils/precise';
 import useCardContext from '../../../../hooks/useCardContext';
+import { validate } from '../../../../utils/validate';
+import { useState } from 'react';
 
 export interface CVCInputProps {
   isCVCValid: boolean;
@@ -10,6 +11,7 @@ export interface CVCInputProps {
 
 function CVCInput({ isCVCValid, setIsCVCValid }: CVCInputProps) {
   const { cardCVC, setCardCVC } = useCardContext();
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
   function handleCVCNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target;
@@ -20,15 +22,9 @@ function CVCInput({ isCVCValid, setIsCVCValid }: CVCInputProps) {
   }
 
   function validateCVCnumber(cvcNumber: string) {
-    if (!checkIsValidCVC(cvcNumber)) {
-      setIsCVCValid(false);
-    } else {
-      setIsCVCValid(true);
-    }
-  }
-
-  function checkIsValidCVC(cvcNumber: string) {
-    return precise.isNumber(cvcNumber);
+    const { isValid, message } = validate.checkNumberInput(cvcNumber);
+    setIsCVCValid(isValid);
+    setFeedbackMessage(message);
   }
 
   return (
@@ -36,7 +32,7 @@ function CVCInput({ isCVCValid, setIsCVCValid }: CVCInputProps) {
       <InputForm
         title='CVC 번호를 입력해 주세요.'
         label='CVC'
-        feedbackMessage={isCVCValid ? '' : '숫자만 입력 가능합니다.'}
+        feedbackMessage={feedbackMessage}
       >
         <Input
           type='tel'

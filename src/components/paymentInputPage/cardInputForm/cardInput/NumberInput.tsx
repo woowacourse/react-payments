@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import InputForm from '../../../common/inputForm/InputForm';
 import Input from '../../../common/inputForm/input/Input';
-import { precise } from '../../../../utils/precise';
 import useCardContext from '../../../../hooks/useCardContext';
+import { validate } from '../../../../utils/validate';
 
 export interface NumberInputProps {
   isCardNumberValid: boolean[];
@@ -23,7 +23,6 @@ function NumberInput({
 
     updateCardNumber(value, dataInputId);
     validateCardNumber(value, dataInputId);
-    decideShowFeedback();
   }
 
   function updateCardNumber(inputCardNumber: string, dataInputId: number) {
@@ -34,24 +33,10 @@ function NumberInput({
   }
 
   function validateCardNumber(inputCardNumber: string, dataInputId: number) {
-    if (!precise.isNumber(inputCardNumber)) {
-      isCardNumberValid[dataInputId] = false;
-      setIsCardNumberValid([...isCardNumberValid]);
-    } else {
-      isCardNumberValid[dataInputId] = true;
-      setIsCardNumberValid([...isCardNumberValid]);
-    }
-  }
-
-  function decideShowFeedback() {
-    const hasInvalidInput = isCardNumberValid.some(
-      (isValidInput) => !isValidInput
-    );
-    if (hasInvalidInput) {
-      setFeedbackMessage('숫자만 입력 가능합니다.');
-    } else {
-      setFeedbackMessage('');
-    }
+    const { isValid, message } = validate.checkNumberInput(inputCardNumber);
+    isCardNumberValid[dataInputId] = isValid;
+    setIsCardNumberValid([...isCardNumberValid]);
+    setFeedbackMessage(message);
   }
 
   const inputs = Array.from({ length: 4 }).map((_, index) => {
