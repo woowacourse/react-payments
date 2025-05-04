@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Payments from './pages/payments/Payments';
-import PaymentsComplete from './pages/paymentsComplete/PaymentsComplete';
+import AddCard from './pages/payments/AddCard';
+import AddCardComplete from './pages/payments/AddCardComplete';
 
 function App() {
   return (
     <BrowserRouter basename="/react-payments">
       <Routes>
-        <Route path="/" element={<Payments />} />
-        <Route path="/payments" element={<Payments />} />
-        <Route path="/payments/complete/" element={<PaymentsComplete />} />
+        <Route path="/" element={<AddCard />} />
+        <Route path="/addCard" element={<AddCard />} />
+        <Route path="/addCard/complete/" element={<AddCardComplete />} />
       </Routes>
     </BrowserRouter>
   );

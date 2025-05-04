@@ -20,7 +20,7 @@ import PasswordInputField from '../../components/feature/InputField/PasswordInpu
 import Button from '../../components/ui/Button/Button';
 import InputSection from '../../components/ui/InputSection/InputSection';
 
-function Payments() {
+function AddCard() {
   const navigate = useNavigate();
 
   const [cardNumberInputValue, setCardNumberInputValue] = useState<
@@ -95,8 +95,8 @@ function Payments() {
   );
 
   return (
-    <PaymentsLayout>
-      <PaymentsContainer>
+    <AddCardLayout>
+      <AddCardContainer>
         <CardPreview
           cardNumberInputValue={cardNumberInputValue}
           expirationDateInputValue={expirationDateInputValue}
@@ -175,7 +175,7 @@ function Payments() {
             />
           </InputSection>
         )}
-      </PaymentsContainer>
+      </AddCardContainer>
 
       {step >= 6 && isAllFieldComplete && (
         <ButtonContainer>
@@ -184,7 +184,7 @@ function Payments() {
             buttonText="확인"
             buttonType="default"
             onClick={() =>
-              navigate(`/payments/complete`, {
+              navigate(`/addCard/complete`, {
                 state: {
                   cardNumber: cardNumberInputValue.cardNumberPart1,
                   cardIssuer,
@@ -194,7 +194,7 @@ function Payments() {
           />
         </ButtonContainer>
       )}
-    </PaymentsLayout>
+    </AddCardLayout>
   );
 }
 
@@ -205,7 +205,7 @@ const ButtonContainer = styled.div`
   width: 376px;
 `;
 
-const PaymentsLayout = styled.div`
+const AddCardLayout = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -213,7 +213,7 @@ const PaymentsLayout = styled.div`
   height: 100vh;
 `;
 
-const PaymentsContainer = styled.div`
+const AddCardContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -229,4 +229,4 @@ const PaymentsContainer = styled.div`
   overflow: auto;
 `;
 
-export default Payments;
+export default AddCard;

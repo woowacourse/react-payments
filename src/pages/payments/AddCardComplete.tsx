@@ -2,18 +2,18 @@ import styled from 'styled-components';
 import Button from '../../components/ui/Button/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function PaymentsComplete() {
+function AddCardComplete() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleRestart = () => {
-    navigate(`/payments`);
+    navigate(`/addCard`);
   };
 
   const { cardNumber, cardIssuer } = location.state;
   return (
-    <PaymentsLayout>
-      <PaymentsCompleteContainer>
+    <AddCardLayout>
+      <AddCardCompleteContainer>
         <CheckIcon src="/img/check-filled.png" />
         <SuccessMessage>
           {`${cardNumber}로 시작하는`}
@@ -26,8 +26,8 @@ function PaymentsComplete() {
           buttonType="default"
           onClick={handleRestart}
         />
-      </PaymentsCompleteContainer>
-    </PaymentsLayout>
+      </AddCardCompleteContainer>
+    </AddCardLayout>
   );
 }
 
@@ -41,7 +41,7 @@ const SuccessMessage = styled.p`
   font-size: 25px;
 `;
 
-const PaymentsCompleteContainer = styled.div`
+const AddCardCompleteContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +57,7 @@ const PaymentsCompleteContainer = styled.div`
   overflow: auto;
 `;
 
-const PaymentsLayout = styled.div`
+const AddCardLayout = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -65,4 +65,4 @@ const PaymentsLayout = styled.div`
   height: 100vh;
 `;
 
-export default PaymentsComplete;
+export default AddCardComplete;
