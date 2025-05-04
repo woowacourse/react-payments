@@ -6,6 +6,7 @@ import {
   CardExpirationDateKeys,
 } from '../../types/CardExpirationDateOptions';
 import { useEffect } from 'react';
+import useRefFocus from '@/hooks/useRefFocus';
 
 export const CARD_EXPIRATION_DATE_TEXT = {
   title: '카드 유효기간을 입력해 주세요',
@@ -21,18 +22,31 @@ const CardExpirationDateInputSection = ({
   errorMessage,
   inputRef,
   handleMouseDown,
-  setNextStep,
+  goNextStep,
 }: CardExpirationDateInputSectionProps) => {
+  const { focusFirst, focusNext } = useRefFocus(Object.values(inputRef));
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
+
   useEffect(() => {
     if (cardExpirationDate.month.length === 2) {
       inputRef.year.current?.focus();
     }
   }, [cardExpirationDate.month]);
 
+  const handleMonthInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardExpirationDate('month')(e);
+    if (e.target.value.length === 2) {
+      focusNext();
+    }
+  };
+
   const handleYearInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardExpirationDate('year')(e);
     if (e.target.value.length === 2) {
-      setNextStep({ time: 'once', key: 'cardExpirationDate' });
+      goNextStep({ time: 'once', key: 'cardExpirationDate' });
     }
   };
 
@@ -46,7 +60,7 @@ const CardExpirationDateInputSection = ({
         <InputField
           value={cardExpirationDate.month}
           name="expirationDateMonth"
-          onChange={setCardExpirationDate('month')}
+          onChange={handleMonthInputChange}
           isError={isError.month}
           placeholder="MM"
           onBlur={() => handleCardExpirationDateBlur('month')}

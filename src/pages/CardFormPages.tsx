@@ -3,14 +3,13 @@ import CardNumbersInputSection from '@InputSectionComponents/CardNumbersInputSec
 import CardExpirationDateInputSection from '@InputSectionComponents/CardExpirationDateInputSection';
 import CardDisplay from '@CardDisplayComponents/CardDisplay';
 import styles from './cardForm.module.css';
-import { useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import buttonStyle from '../css/button.module.css';
 import CardCompanySelectSection from '@/components/SelectSection/CardCompanySelectSection';
 import ConfirmButton from '@/components/common/ConfirmButton/ConfirmButton';
 import { useNavigate } from 'react-router-dom';
 
 import CardPasswordInputSection from '@/components/InputSection/CardPasswordInputSection';
-import useCardFormFlow from '@/hooks/useCardFormFlow';
 import useCardForm from '@/hooks/useCardForm';
 import { ROUTES } from '@/constants/routes';
 import useStep from '@/hooks/useStep';
@@ -28,7 +27,7 @@ const CardFormPages = () => {
 
   const [isUserFocusing, setIsUserFocusing] = useState(false);
 
-  const { currentStep, setNextStep } = useStep();
+  const { currentStep, goNextStep } = useStep();
 
   const nav = useNavigate();
   const handleSubmit = () => {
@@ -38,18 +37,34 @@ const CardFormPages = () => {
     });
   };
 
-  const {
-    cardNumbersInputRef,
-    cardExpirationDateInputRef,
-    cardCVCInputRef,
-    cardPasswordInputRef,
-  } = useCardFormFlow({
-    isFieldCompletion: [],
-    cardNumbersForm,
-    cardExpirationDateForm,
-    cardCVCNumberForm,
-    isUserFocusing,
-  });
+  const firstNumber = useRef<HTMLInputElement>(null);
+  const secondNumber = useRef<HTMLInputElement>(null);
+  const thirdNumber = useRef<HTMLInputElement>(null);
+  const fourthNumber = useRef<HTMLInputElement>(null);
+
+  const cardNumbersInputRef = useMemo(
+    () => ({
+      firstNumber,
+      secondNumber,
+      thirdNumber,
+      fourthNumber,
+    }),
+    []
+  );
+
+  const month = useRef<HTMLInputElement>(null);
+  const year = useRef<HTMLInputElement>(null);
+
+  const cardExpirationDateInputRef = useMemo(
+    () => ({
+      month,
+      year,
+    }),
+    []
+  );
+
+  const cardCVCInputRef = useRef<HTMLInputElement>(null);
+  const cardPasswordInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -65,31 +80,33 @@ const CardFormPages = () => {
             {...cardNumbersForm}
             inputRef={cardNumbersInputRef}
             handleMouseDown={() => setIsUserFocusing(true)}
-            setNextStep={setNextStep}
+            goNextStep={goNextStep}
           />
           <CardCompanySelectSection
             {...cardCompanyForm}
             handleMouseDown={() => setIsUserFocusing(true)}
             onChange={() => setIsUserFocusing(false)}
-            setNextStep={setNextStep}
+            goNextStep={() => {
+              goNextStep({ time: 'once', key: 'cardCompany' });
+            }}
           />
           <CardExpirationDateInputSection
             {...cardExpirationDateForm}
             inputRef={cardExpirationDateInputRef}
             handleMouseDown={() => setIsUserFocusing(true)}
-            setNextStep={setNextStep}
+            goNextStep={goNextStep}
           />
           <CardCVCNumberInputSection
             {...cardCVCNumberForm}
             inputRef={cardCVCInputRef}
             handleMouseDown={() => setIsUserFocusing(true)}
-            setNextStep={setNextStep}
+            goNextStep={goNextStep}
           />
           <CardPasswordInputSection
             {...cardPasswordForm}
             inputRef={cardPasswordInputRef}
             handleMouseDown={() => setIsUserFocusing(true)}
-            setNextStep={setNextStep}
+            goNextStep={goNextStep}
           />
         </StepStack>
       </div>

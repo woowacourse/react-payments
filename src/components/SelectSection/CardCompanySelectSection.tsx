@@ -1,7 +1,7 @@
 import { NextStepArgs } from '@/hooks/useStep';
 import InputSection from '../common/InputSection/InputSection';
 import SelectField from '../common/SelectField/SelectField';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 
 const CARD_COMPANY_SELECT_TEXT = {
   title: '카드사를 선택해주세요',
@@ -27,7 +27,7 @@ type CardCompanySelectSectionProps = {
   setCardCompany: (value: string) => void;
   handleMouseDown: MouseEventHandler<HTMLSelectElement>;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  setNextStep: (args: NextStepArgs) => void;
+  goNextStep: () => void;
 };
 
 const CardCompanySelectSection = ({
@@ -35,12 +35,12 @@ const CardCompanySelectSection = ({
   setCardCompany,
   handleMouseDown,
   onChange,
-  setNextStep,
+  goNextStep,
 }: CardCompanySelectSectionProps) => {
   const changeCardCompany = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCardCompany(e.target.value);
     onChange(e);
-    setNextStep({ time: 'once', key: 'cardCompany' });
+    goNextStep();
   };
 
   return (

@@ -1,3 +1,4 @@
+import useRefFocus from '@/hooks/useRefFocus';
 import {
   CardNumbersInputSectionProps,
   CardNumbersKeys,
@@ -5,6 +6,7 @@ import {
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
+import { useEffect, useState } from 'react';
 
 const CARD_NUMBERS_TEXT = {
   title: '카드번호를 입력해 주세요',
@@ -20,13 +22,23 @@ const CardNumbersInputSection = ({
   errorMessage,
   inputRef,
   handleMouseDown,
-  setNextStep,
+  goNextStep,
 }: CardNumbersInputSectionProps) => {
+  const { focusFirst, focusNext } = useRefFocus(Object.values(inputRef));
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
+
   const handleChangeInput =
     (key: CardNumbersKeys) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setCardNumbers(key)(e);
       if (key === 'fourthNumber' && e.target.value.length === 4) {
-        setNextStep({ time: 'once', key: 'cardNumbers' });
+        goNextStep({ time: 'once', key: 'cardNumbers' });
+      }
+
+      if (e.target.value.length === 4) {
+        focusNext();
       }
     };
 

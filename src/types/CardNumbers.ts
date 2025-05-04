@@ -16,7 +16,7 @@ export type CardNumbersInputSectionProps = {
     fourthNumber: React.RefObject<HTMLInputElement | null>;
   };
   handleMouseDown: MouseEventHandler<HTMLInputElement>;
-  setNextStep: (args: NextStepArgs) => void;
+  goNextStep: (args: NextStepArgs) => void;
 };
 
 export type CardNumbersOptions = {

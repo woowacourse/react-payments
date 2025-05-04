@@ -2,6 +2,8 @@ import { CardPasswordInputSectionProps } from '@/hooks/useCardPassword';
 import ErrorMessage from '../common/ErrorMessage/ErrorMessage';
 import InputField from '../common/InputField/InputField';
 import InputSection from '../common/InputSection/InputSection';
+import { useEffect } from 'react';
+import useRefFocus from '@/hooks/useRefFocus';
 
 const CARD_PASSWORD_TEXT = {
   title: '카드 비밀번호를 입력해 주세요',
@@ -17,14 +19,20 @@ const CardPasswordInputSection = ({
   errorMessage,
   inputRef,
   handleMouseDown,
-  setNextStep,
+  goNextStep,
 }: CardPasswordInputSectionProps) => {
+  const { focusFirst } = useRefFocus([inputRef]);
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
+
   const handleCardPasswordInputChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setCardPassword(e);
     if (e.target.value.length === 2) {
-      setNextStep({ time: 'once', key: 'cardPassword' });
+      goNextStep({ time: 'once', key: 'cardPassword' });
     }
   };
 

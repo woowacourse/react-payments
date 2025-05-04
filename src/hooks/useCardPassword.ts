@@ -22,7 +22,7 @@ export type CardPasswordInputSectionProps = {
   errorMessage: string;
   inputRef: React.RefObject<HTMLInputElement | null>;
   handleMouseDown: MouseEventHandler<HTMLInputElement>;
-  setNextStep: (args: NextStepArgs) => void;
+  goNextStep: (args: NextStepArgs) => void;
 };
 
 type IsError = {

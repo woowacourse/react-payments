@@ -9,7 +9,7 @@ const useStep = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const keysRef = useRef<Set<string>>(new Set());
 
-  const setNextStep = ({ time, key }: NextStepArgs) => {
+  const goNextStep = ({ time, key }: NextStepArgs) => {
     if (time === 'once' && keysRef.current.has(key)) {
       return;
     }
@@ -21,14 +21,9 @@ const useStep = () => {
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
-  const setPrevStep = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
-  };
-
   return {
     currentStep,
-    setNextStep,
-    setPrevStep,
+    goNextStep,
   };
 };
 
