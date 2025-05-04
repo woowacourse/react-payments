@@ -1,50 +1,35 @@
-import styled from "styled-components";
+import React from "react";
 import Title from "../title/Title";
 import InputField from "../inputField/InputField";
 import Input from "../input/Input";
-import { Dispatch, SetStateAction, useState } from "react";
-import isNumberWithinRange from "../../utils/isNumberWithinRange";
-import { MESSAGE } from "./constants/error";
+import { CVC_MAX_LENGTH } from "../../utils/validation";
+import useAutoFocus from "../../hooks/useAutoFocus";
+import styled from "styled-components";
 
-const INPUT_MAX_LENGTH = 3;
-
-type Props = {
+interface CardCvcProps {
 	cvcNumber: string;
-	setCvcNumber: Dispatch<SetStateAction<string>>;
-};
+	onChange: (value: string) => void;
+	onBlur: (value: string) => void;
+	error: string;
+}
 
-const CardCvc = ({ cvcNumber, setCvcNumber }: Props) => {
-	const [error, setError] = useState("");
+const INPUT_COUNT = 1;
 
-	const onChange = (value: string) => {
-		setCvcNumber(value);
-
-		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
-			setError(MESSAGE.INVALID_NUMBER);
-			return;
-		}
-
-		setError("");
-	};
-
-	const onBlur = (value: string) => {
-		if (value.length < INPUT_MAX_LENGTH) setError(MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH));
-	};
+const CardCvc = React.memo(({ cvcNumber, onChange, onBlur, error }: CardCvcProps) => {
+	const { inputRef } = useAutoFocus(INPUT_COUNT, CVC_MAX_LENGTH);
 
 	return (
 		<CardNumberWrap>
 			<Title>CVC 번호를 입력해 주세요</Title>
-			<InputField
-				label="CVC"
-				inputs={[<Input maxLength={INPUT_MAX_LENGTH} isError={!!error} placeholder="123" value={cvcNumber} onChange={(value) => onChange(value)} onBlur={(value) => onBlur(value)} />]}
-				errorMessage={error}
-			/>
+			<InputField label="CVC" errorMessage={error}>
+				<Input ref={inputRef[0]} maxLength={CVC_MAX_LENGTH} isError={!!error} placeholder="123" value={cvcNumber} onChange={(e) => onChange(e.target.value)} onBlur={(e) => onBlur(e.target.value)} />
+			</InputField>
 		</CardNumberWrap>
 	);
-};
+});
 
 export default CardCvc;
 
 const CardNumberWrap = styled.div`
-	height: 130px;
+	height: 120px;
 `;

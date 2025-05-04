@@ -5,16 +5,16 @@ import styled from "styled-components";
 
 type Props = {
 	label: string;
-	inputs: ReactNode[];
+	children: ReactNode;
 	errorMessage?: ReactNode;
 };
 
-const InputField = ({ label, inputs, errorMessage }: Props) => {
+const InputField = ({ label, children, errorMessage }: Props) => {
 	return (
 		<Container>
 			<Label>{label}</Label>
-			<InputWrapper>{...inputs}</InputWrapper>
-			<Description color={COLORS.ERROR}>{errorMessage && errorMessage}</Description>
+			<InputWrapper>{children}</InputWrapper>
+			<Description color={COLORS.ERROR}>{errorMessage}</Description>
 		</Container>
 	);
 };

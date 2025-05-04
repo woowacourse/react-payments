@@ -21,3 +21,9 @@ export const Error: Story = {
 		isError: true,
 	},
 };
+
+export const Password: Story = {
+	args: {
+		type: "password",
+	},
+};

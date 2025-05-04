@@ -1,65 +1,51 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import React from "react";
 import Description from "../description/Description";
 import Input from "../input/Input";
 import InputField from "../inputField/InputField";
 import Title from "../title/Title";
 import findErrorOrder from "../../utils/findErrorOrder";
-import { cardNumber } from "../../App";
-import isNumberWithinRange from "../../utils/isNumberWithinRange";
-import { MESSAGE } from "./constants/error";
+import { CardNumberType } from "../../hooks/useCardNumber";
+import { CARD_MAX_LENGTH } from "../../utils/validation";
 import styled from "styled-components";
+import useAutoFocus from "../../hooks/useAutoFocus";
 
-const INPUT_MAX_LENGTH = 4;
+interface CardNumberProps {
+	cardNumber: CardNumberType;
+	onChange: (order: keyof CardNumberType, value: string) => void;
+	onBlur: (order: keyof CardNumberType, value: string) => void;
+	error: CardNumberType;
+}
 
-type Props = {
-	cardNumber: cardNumber;
-	setCardNumber: Dispatch<SetStateAction<cardNumber>>;
-};
+const INPUT_COUNT = 4;
 
-const CardNumber = ({ cardNumber, setCardNumber }: Props) => {
-	const [error, setError] = useState({
-		first: "",
-		second: "",
-		third: "",
-		fourth: "",
-	});
+const CardNumber = React.memo(({ cardNumber, onChange, onBlur, error }: CardNumberProps) => {
 	const orderLabels = ["first", "second", "third", "fourth"] as const;
-
-	const onChange = (order: keyof cardNumber, value: string) => {
-		setCardNumber({ ...cardNumber, [order]: value });
-
-		if (!isNumberWithinRange(value, INPUT_MAX_LENGTH)) {
-			setError({ ...error, [order]: MESSAGE.INVALID_NUMBER });
-			return;
-		}
-
-		setError({ ...error, [order]: "" });
-	};
-
-	const onBlur = (order: keyof cardNumber, value: string) => {
-		if (value.length < INPUT_MAX_LENGTH) setError({ ...error, [order]: MESSAGE.INPUT_LENGTH_LIMIT(INPUT_MAX_LENGTH) });
-	};
-
-	const inputs = orderLabels.map((label: keyof cardNumber) => (
-		<Input
-			key={label}
-			isError={!!error[label]}
-			placeholder="1234"
-			value={cardNumber[label]}
-			maxLength={INPUT_MAX_LENGTH}
-			onChange={(numbers) => onChange(label, numbers)}
-			onBlur={(numbers) => onBlur(label, numbers)}
-		/>
-	));
+	const { inputRef, moveFocus } = useAutoFocus(INPUT_COUNT, CARD_MAX_LENGTH);
 
 	return (
 		<CardNumberWrap>
 			<Title>결제할 카드 번호를 입력해 주세요</Title>
 			<Description>본인 명의의 카드만 결제 가능합니다.</Description>
-			<InputField label="카드 번호" inputs={inputs} errorMessage={findErrorOrder(error)} />
+			<InputField label="카드 번호" errorMessage={findErrorOrder(error as unknown as Record<string, string>)}>
+				{orderLabels.map((label: keyof CardNumberType, index: number) => (
+					<Input
+						key={label}
+						ref={inputRef[index]}
+						isError={!!error[label]}
+						placeholder="1234"
+						value={cardNumber[label]}
+						maxLength={CARD_MAX_LENGTH}
+						onChange={(e) => {
+							onChange(label, e.target.value);
+							moveFocus(index, e.target.value);
+						}}
+						onBlur={(e) => onBlur(label, e.target.value)}
+					/>
+				))}
+			</InputField>
 		</CardNumberWrap>
 	);
-};
+});
 
 export default CardNumber;
 

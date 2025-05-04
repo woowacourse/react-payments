@@ -1,49 +1,16 @@
-import styled from "styled-components";
-import Card from "./components/card/Card";
-import { useState } from "react";
-import CardNumber from "./components/form/CardNumber";
-import ExpirationDate from "./components/form/ExpirationDate";
-import CardCvc from "./components/form/CardCvc";
-
-export type cardNumber = {
-	first: string;
-	second: string;
-	third: string;
-	fourth: string;
-};
-
-export type date = {
-	month: string;
-	year: string;
-};
+import { BrowserRouter, Route, Routes } from "react-router";
+import CardInfo from "./components/page/CardInfo";
+import CardCompletePage from "./components/page/CardAddSuccess";
 
 function App() {
-	const [cardNumber, setCardNumber] = useState<cardNumber>({
-		first: "",
-		second: "",
-		third: "",
-		fourth: "",
-	});
-	const [expirationDate, setExpirationDate] = useState<date>({
-		month: "",
-		year: "",
-	});
-	const [cvcNumber, setCvcNumber] = useState<string>("");
-
 	return (
-		<MainContainer>
-			<Card cardNumbers={cardNumber} expirationDate={expirationDate} />
-			<CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
-			<ExpirationDate expirationDate={expirationDate} setExpirationDate={setExpirationDate} />
-			<CardCvc cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
-		</MainContainer>
+		<BrowserRouter basename="/react-payments/">
+			<Routes>
+				<Route path="/" element={<CardInfo />} />
+				<Route path="/addSuccess" element={<CardCompletePage />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
 export default App;
-
-const MainContainer = styled.div`
-	width: 376px;
-	padding: 77px 30px 20px;
-	margin: auto;
-`;
