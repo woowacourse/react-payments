@@ -7,7 +7,7 @@ function AddCardComplete() {
   const navigate = useNavigate();
 
   const handleRestart = () => {
-    navigate(`/addCard`);
+    navigate(`/cards/new`);
   };
 
   const { cardNumber, cardIssuer } = location.state;

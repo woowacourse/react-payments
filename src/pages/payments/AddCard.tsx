@@ -184,7 +184,7 @@ function AddCard() {
             buttonText="확인"
             buttonType="default"
             onClick={() =>
-              navigate(`/addCard/complete`, {
+              navigate(`/cards/complete`, {
                 state: {
                   cardNumber: cardNumberInputValue.cardNumberPart1,
                   cardIssuer,
