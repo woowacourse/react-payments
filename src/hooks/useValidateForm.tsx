@@ -2,18 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 
 function useValidateForm() {
   const [isCardNumberValid, setIsCardNumberValid] = useState<boolean[]>([
-    true,
-    true,
-    true,
-    true,
+    false,
+    false,
+    false,
+    false,
   ]);
   const [isIssuerValid, setIsIssuerValid] = useState(false);
   const [isExpiryDateValid, setIsExpiryDateValid] = useState({
-    month: true,
-    year: true,
+    month: false,
+    year: false,
   });
-  const [isCVCValid, setIsCVCValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isCVCValid, setIsCVCValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isDataValid, setIsDataValid] = useState(false);
   const ref = useRef<HTMLFormElement>(null);
 
