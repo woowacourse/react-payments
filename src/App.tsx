@@ -1,50 +1,31 @@
+import { RouterProvider, createBrowserRouter } from "react-router";
 import "./App.css";
-import CardNumber from "./CardNumber/CardNumber";
-import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
-import CardCvcNumber from "./CardCvcNumber/CardCvcNumber";
-import PreviewCardLayout from "./components/PreviewCard/PreviewCardLayout";
-import useExpirationDate from "./hooks/useExpirationDate";
-import useCvcNumber from "./hooks/useCvcNumber";
-import useCardNumbers from "./hooks/useCardNumbers";
+import AddCardPage from "./pages/AddCardPage/AddCardPage";
+import AddCardSuccessPage from "./pages/AddCardSuccessPage/AddCardSuccessPage";
+
+const PAGE_PATH = {
+  ADD_CARD: "/",
+  ADD_CARD_SUCCESS: "/success",
+};
+
+const router = createBrowserRouter(
+  [
+    {
+      path: PAGE_PATH.ADD_CARD,
+      element: <AddCardPage />,
+    },
+    {
+      path: PAGE_PATH.ADD_CARD_SUCCESS,
+      element: <AddCardSuccessPage />,
+    },
+  ],
+  {
+    basename: "/react-payments",
+  }
+);
 
 function App() {
-  const { cardNumbers, cardType, cardNumbersError, cardNumbersValidate } =
-    useCardNumbers();
-  const { cardExpirationDate, cardExpirationDateError, dateValidate } =
-    useExpirationDate();
-  const { cvcNumbers, cvcNumbersError, cvcNumbersValidate } = useCvcNumber();
-
-  return (
-    <div className="App">
-      <PreviewCardLayout
-        cardNumbers={{
-          first: cardNumbers[0],
-          second: cardNumbers[1],
-          third: cardNumbers[2],
-          fourth: cardNumbers[3],
-        }}
-        cardType={cardType}
-        cardExpirationDate={cardExpirationDate}
-      />
-      <div className="card-input">
-        <CardNumber
-          handleChange={cardNumbersValidate}
-          cardNumbers={cardNumbers}
-          errorMessage={cardNumbersError}
-        />
-        <CardExpirationDate
-          handleChange={dateValidate}
-          cardExpirationDate={cardExpirationDate}
-          errorMessage={cardExpirationDateError}
-        />
-        <CardCvcNumber
-          handleChange={cvcNumbersValidate}
-          cvcNumbers={cvcNumbers}
-          errorMessage={cvcNumbersError}
-        />
-      </div>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

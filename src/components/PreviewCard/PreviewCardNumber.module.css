@@ -15,4 +15,9 @@
   width: 40px;
   height: 25px;
   padding: 10px 0 0 0;
+  letter-spacing: 1.5px;
+}
+
+.card-layout-expiration-number {
+  letter-spacing: 1.5px;
 }

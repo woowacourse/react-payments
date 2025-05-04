@@ -6,30 +6,25 @@ interface PreviewCardNumberProps {
     third: string;
     fourth: string;
   };
-  cardExpirationDate: {
-    month: string;
-    year: string;
-  };
+  cardExpirationDate: string[];
 }
 
 export default function PreviewCardNumber({
-  cardNumbers,
-  cardExpirationDate,
+  cardNumbers: { first, second, third, fourth },
+  cardExpirationDate: [month, year],
 }: PreviewCardNumberProps) {
-  const { month, year } = cardExpirationDate;
-
-  const expiration = month === "" ? year : `${year}/${month}`;
+  const expiration = month === "" ? year : `${month} / ${year}`;
 
   return (
     <div className={styles["card-layout-number-container"]}>
       <div className={styles["card-layout-number-wrapper"]}>
-        <div className={styles["card-layout-number"]}>{cardNumbers.first}</div>
-        <div className={styles["card-layout-number"]}>{cardNumbers.second}</div>
+        <div className={styles["card-layout-number"]}>{first}</div>
+        <div className={styles["card-layout-number"]}>{second}</div>
         <div className={styles["card-layout-number"]}>
-          {"·".repeat(cardNumbers.third.length)}
+          {"·".repeat(third.length)}
         </div>
         <div className={styles["card-layout-number"]}>
-          {"·".repeat(cardNumbers.fourth.length)}
+          {"·".repeat(fourth.length)}
         </div>
       </div>
       <div className={styles["card-layout-expiration-number"]}>
