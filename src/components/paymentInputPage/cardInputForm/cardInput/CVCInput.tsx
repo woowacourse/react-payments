@@ -3,12 +3,12 @@ import InputForm from '../../../common/inputForm/InputForm';
 import { precise } from '../../../../utils/precise';
 import useCardContext from '../../../../hooks/useCardContext';
 
-export interface CardCVCInputProps {
+export interface CVCInputProps {
   isValid: boolean;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CardCVCInput({ isValid, setIsValid }: CardCVCInputProps) {
+function CVCInput({ isValid, setIsValid }: CVCInputProps) {
   const { cardCVC, setCardCVC } = useCardContext();
 
   function handleCVCNumberChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -55,4 +55,4 @@ function CardCVCInput({ isValid, setIsValid }: CardCVCInputProps) {
   );
 }
 
-export default CardCVCInput;
+export default CVCInput;

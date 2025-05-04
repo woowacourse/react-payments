@@ -4,12 +4,12 @@ import Input from '../../../common/inputForm/input/Input';
 import { precise } from '../../../../utils/precise';
 import useCardContext from '../../../../hooks/useCardContext';
 
-export interface CardNumberInputProps {
+export interface NumberInputProps {
   isValid: boolean[];
   setIsValid: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
-function CardNumberInput({ isValid, setIsValid }: CardNumberInputProps) {
+function NumberInput({ isValid, setIsValid }: NumberInputProps) {
   const { cardNumbers, setCardNumbers } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
@@ -81,4 +81,4 @@ function CardNumberInput({ isValid, setIsValid }: CardNumberInputProps) {
   );
 }
 
-export default CardNumberInput;
+export default NumberInput;

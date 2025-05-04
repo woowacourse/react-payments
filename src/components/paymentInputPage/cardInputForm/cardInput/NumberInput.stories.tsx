@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardNumberInput from './NumberInput';
+import NumberInput from './NumberInput';
 import { userEvent, expect, within } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
 import { CardProvider } from '../../../../contexts/CardContext';
 
 const meta = {
-  title: 'CardNumberInput',
-  component: CardNumberInput,
+  title: 'NumberInput',
+  component: NumberInput,
   args: {
     isValid: [true, true, true, true],
     setIsValid: () => {},
@@ -18,7 +18,7 @@ const meta = {
       </CardProvider>
     ),
   ],
-} satisfies Meta<typeof CardNumberInput>;
+} satisfies Meta<typeof NumberInput>;
 
 export default meta;
 

@@ -9,15 +9,12 @@ export interface IsValidType {
   year: boolean;
 }
 
-export interface CardExpiryDateInputProps {
+export interface ExpiryDateInputProps {
   isValid: IsValidType;
   setIsValid: React.Dispatch<React.SetStateAction<IsValidType>>;
 }
 
-function CardExpiryDateInput({
-  isValid,
-  setIsValid,
-}: CardExpiryDateInputProps) {
+function ExpiryDateInput({ isValid, setIsValid }: ExpiryDateInputProps) {
   const { expiryDate, setExpiryDate } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
@@ -94,4 +91,4 @@ function CardExpiryDateInput({
     </>
   );
 }
-export default CardExpiryDateInput;
+export default ExpiryDateInput;

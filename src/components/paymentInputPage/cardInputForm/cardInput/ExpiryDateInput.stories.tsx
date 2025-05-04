@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardExpiryDateInput from './ExpiryDateInput';
+import ExpiryDateInput from './ExpiryDateInput';
 import { expect, userEvent, within } from '@storybook/test';
 import styles from '../../../common/inputForm/input/Input.module.css';
 import { CardProvider } from '../../../../contexts/CardContext';
 
 const meta = {
-  title: 'CardExpiryDateInput',
-  component: CardExpiryDateInput,
+  title: 'ExpiryDateInput',
+  component: ExpiryDateInput,
   args: {
     isValid: { month: true, year: true },
     setIsValid: () => {},
@@ -18,7 +18,7 @@ const meta = {
       </CardProvider>
     ),
   ],
-} satisfies Meta<typeof CardExpiryDateInput>;
+} satisfies Meta<typeof ExpiryDateInput>;
 
 export default meta;
 

@@ -4,12 +4,12 @@ import InputForm from '../../../common/inputForm/InputForm';
 import { validate } from '../../../../utils/validate';
 import useCardContext from '../../../../hooks/useCardContext';
 
-export interface CardPasswordInputProps {
+export interface PasswordInputProps {
   isValid: boolean;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CardPasswordInput({ isValid, setIsValid }: CardPasswordInputProps) {
+function PasswordInput({ isValid, setIsValid }: PasswordInputProps) {
   const { password, setPassword } = useCardContext();
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
@@ -50,4 +50,4 @@ function CardPasswordInput({ isValid, setIsValid }: CardPasswordInputProps) {
     </>
   );
 }
-export default CardPasswordInput;
+export default PasswordInput;

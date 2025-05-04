@@ -1,29 +1,27 @@
-import CardCVCInput, { CardCVCInputProps } from './cardInput/CVCInput';
-import CardExpiryDateInput, {
-  CardExpiryDateInputProps,
+import CVCInput, { CVCInputProps } from './cardInput/CVCInput';
+import ExpiryDateInput, {
+  ExpiryDateInputProps,
 } from './cardInput/ExpiryDateInput';
-import CardNumberInput, { CardNumberInputProps } from './cardInput/NumberInput';
+import NumberInput, { NumberInputProps } from './cardInput/NumberInput';
 import styles from './cardInputForm.module.css';
-import CardIssuerSelector, {
-  CardIssuerSelectorProps,
+import IssuerSelector, {
+  IssuerSelectorProps,
 } from './cardInput/IssuerSelector';
 import CardSubmitButton from './CardSubmitButton';
 import { ROUTER } from '../../../global/constants';
 import { useNavigate } from 'react-router-dom';
 import useValidateForm from '../../../hooks/useValidateForm';
-import CardPasswordInput, {
-  CardPasswordInputProps,
-} from './cardInput/PasswordInput';
+import PasswordInput, { PasswordInputProps } from './cardInput/PasswordInput';
 import { useState } from 'react';
 import useRender, { RenderItem } from '../../../hooks/useRender';
 import { validate } from '../../../utils/validate';
 
 type CardInputProps =
-  | CardNumberInputProps
-  | CardIssuerSelectorProps
-  | CardExpiryDateInputProps
-  | CardCVCInputProps
-  | CardPasswordInputProps;
+  | NumberInputProps
+  | IssuerSelectorProps
+  | ExpiryDateInputProps
+  | CVCInputProps
+  | PasswordInputProps;
 
 function CardInputForm() {
   const {
@@ -59,7 +57,7 @@ function CardInputForm() {
 
   const inputs = [
     {
-      Component: CardNumberInput,
+      Component: NumberInput,
       props: {
         isValid: isCardNumberValid,
         setIsValid: setIsCardNumberValid,
@@ -67,12 +65,12 @@ function CardInputForm() {
       isInputValid: validate.combineValidity(isCardNumberValid),
     },
     {
-      Component: CardIssuerSelector,
+      Component: IssuerSelector,
       props: { isValid: isIssuerValid, setIsValid: setIsIssuerValid },
       isInputValid: validate.combineValidity(isIssuerValid),
     },
     {
-      Component: CardExpiryDateInput,
+      Component: ExpiryDateInput,
       props: {
         isValid: isExpiryDateValid,
         setIsValid: setIsExpiryDateValid,
@@ -80,7 +78,7 @@ function CardInputForm() {
       isInputValid: validate.combineValidity(isExpiryDateValid),
     },
     {
-      Component: CardCVCInput,
+      Component: CVCInput,
       props: {
         isValid: isCVCValid,
         setIsValid: setIsCVCValid,
@@ -88,7 +86,7 @@ function CardInputForm() {
       isInputValid: validate.combineValidity(isCVCValid),
     },
     {
-      Component: CardPasswordInput,
+      Component: PasswordInput,
       props: {
         isValid: isPasswordValid,
         setIsValid: setIsPasswordValid,

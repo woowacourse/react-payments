@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from '@storybook/test';
-import CardIssuerSelector from './IssuerSelector';
+import IssuerSelector from './IssuerSelector';
 import { CardProvider } from '../../../../contexts/CardContext';
 
 const meta = {
-  title: 'CardIssuerSelector',
-  component: CardIssuerSelector,
+  title: 'IssuerSelector',
+  component: IssuerSelector,
   args: {
     isValid: true,
     setIsValid: () => {},
@@ -17,7 +17,7 @@ const meta = {
       </CardProvider>
     ),
   ],
-} satisfies Meta<typeof CardIssuerSelector>;
+} satisfies Meta<typeof IssuerSelector>;
 
 export default meta;
 

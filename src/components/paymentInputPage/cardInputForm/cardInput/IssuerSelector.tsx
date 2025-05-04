@@ -13,12 +13,12 @@ export const ISSUER_LIST = new Map([
   ['국민카드', 'kb'],
 ]);
 
-export interface CardIssuerSelectorProps {
+export interface IssuerSelectorProps {
   isValid: boolean;
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function CardIssuerSelector({ isValid, setIsValid }: CardIssuerSelectorProps) {
+function IssuerSelector({ isValid, setIsValid }: IssuerSelectorProps) {
   const { cardIssuer, setCardIssuer } = useCardContext();
 
   function validateIssuerChange(e: React.MouseEvent<HTMLLIElement>) {
@@ -51,4 +51,4 @@ function CardIssuerSelector({ isValid, setIsValid }: CardIssuerSelectorProps) {
   );
 }
 
-export default CardIssuerSelector;
+export default IssuerSelector;
