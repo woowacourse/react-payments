@@ -40,6 +40,7 @@ function CVCInput({ isCVCValid, setIsCVCValid }: CVCInputProps) {
           placeholder='123'
           minLength={3}
           maxLength={3}
+          pattern='\d{3}'
           value={cardCVC}
           handleInputChange={handleCVCNumberChange}
           autoFocus={true}

@@ -80,6 +80,7 @@ function ExpiryDateInput({
           handleInputChange={handleMonthChange}
           minLength={2}
           maxLength={2}
+          pattern='\d{2}'
           autoFocus={true}
           isRequired={true}
           isValidInput={isExpiryDateValid.month}
@@ -92,6 +93,7 @@ function ExpiryDateInput({
           handleInputChange={handleYearChange}
           minLength={2}
           maxLength={2}
+          pattern='\d{2}'
           isRequired={true}
           isValidInput={isExpiryDateValid.year}
         />

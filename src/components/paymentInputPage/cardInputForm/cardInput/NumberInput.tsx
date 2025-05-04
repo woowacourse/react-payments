@@ -47,6 +47,7 @@ function NumberInput({
         placeholder='1234'
         minLength={4}
         maxLength={4}
+        pattern='\d{4}'
         value={cardNumbers[index]}
         handleInputChange={handleCardNumberChange}
         isValidInput={isCardNumberValid[index]}

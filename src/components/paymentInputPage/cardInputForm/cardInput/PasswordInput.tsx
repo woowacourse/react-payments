@@ -45,6 +45,7 @@ function PasswordInput({
           handleInputChange={handlePasswordChange}
           minLength={2}
           maxLength={2}
+          pattern='\d{2}'
           autoFocus={true}
           isRequired={true}
           isValidInput={isPasswordValid}
