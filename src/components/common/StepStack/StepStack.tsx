@@ -4,7 +4,7 @@ type StepStackProps = {
 };
 
 const StepStack = ({ children, currentStep }: StepStackProps) => {
-  return <>{children.slice(0, currentStep + 1).reverse()}</>;
+  return <>{children.slice(0, currentStep + 1)}</>;
 };
 
 export default StepStack;
