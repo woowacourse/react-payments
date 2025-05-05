@@ -12,6 +12,7 @@ import { handleCardLogoChange } from '../../utils/cardLogoUtils.ts';
 import Button from '../../components/common/Button/Button.tsx';
 import { useNavigate } from 'react-router-dom';
 import { CardContext } from '../../contexts/CardContext.tsx';
+import { ROUTE_PATH } from '../../constants/constants.ts';
 
 export default function CardRegistrationPage() {
   const {
@@ -36,7 +37,7 @@ export default function CardRegistrationPage() {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    navigate('/card-registration-completed');
+    navigate(ROUTE_PATH.CARD_REGISTRATION_COMPLETED);
   };
 
   const isCardNumberValid = Object.values(cardNumbers).every((value) => value !== '') && !cardNumberError;

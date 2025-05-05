@@ -4,6 +4,7 @@ import styles from './CardRegistrationCompletedPage.module.css';
 import { FaCircleCheck } from 'react-icons/fa6';
 import { useContext } from 'react';
 import { CardContext } from '../../contexts/CardContext';
+import { ROUTE_PATH } from '../../constants/constants';
 
 export default function CardRegistrationCompletedPage() {
   const { cardNumbers, cardCompany, resetAllCardData } = useContext(CardContext);
@@ -11,7 +12,7 @@ export default function CardRegistrationCompletedPage() {
 
   const handleGoToCardRegistrationPage = () => {
     resetAllCardData();
-    navigate('/');
+    navigate(ROUTE_PATH.ROOT);
   };
 
   return (
