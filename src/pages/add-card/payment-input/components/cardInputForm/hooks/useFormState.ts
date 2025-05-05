@@ -29,76 +29,27 @@ export function useFormState() {
     setIsVisibleSubmitButton(isAllValid);
   }, [validState]);
 
-  const activateInput = useCallback((inputName: ActivatedInputKey) => {
+  const handleActivateInput = useCallback((inputName: ActivatedInputKey) => {
     setActivatedInputs((prev) => ({
       ...prev,
       [inputName]: true,
     }));
   }, []);
 
-  const handleActivateCardBrandSelect = useCallback(
-    () => activateInput("cardBrandSelect"),
-    [activateInput]
+  const handleValidInput = useCallback(
+    (inputName: ActivatedInputKey, isValid: boolean) => {
+      setValidState((prev) => ({
+        ...prev,
+        [inputName]: isValid,
+      }));
+    },
+    []
   );
-  const handleActivateExpirationDateInput = useCallback(
-    () => activateInput("cardExpirationDateInput"),
-    [activateInput]
-  );
-  const handleActivateCVCInput = useCallback(
-    () => activateInput("cardCVCInput"),
-    [activateInput]
-  );
-  const handleActivatePasswordInput = useCallback(
-    () => activateInput("cardPasswordInput"),
-    [activateInput]
-  );
-
-  const handleSetValidCardNumberInput = useCallback((isValid: boolean) => {
-    setValidState((prev) => ({
-      ...prev,
-      cardNumberInput: isValid,
-    }));
-  }, []);
-
-  const handleSetValidCardBrandSelect = useCallback((isValid: boolean) => {
-    setValidState((prev) => ({
-      ...prev,
-      cardBrandSelect: isValid,
-    }));
-  }, []);
-
-  const handleSetValidExpirationDateInput = useCallback((isValid: boolean) => {
-    setValidState((prev) => ({
-      ...prev,
-      cardExpirationDateInput: isValid,
-    }));
-  }, []);
-
-  const handleSetValidCVCInput = useCallback((isValid: boolean) => {
-    setValidState((prev) => ({
-      ...prev,
-      cardCVCInput: isValid,
-    }));
-  }, []);
-
-  const handleSetValidPasswordInput = useCallback((isValid: boolean) => {
-    setValidState((prev) => ({
-      ...prev,
-      cardPasswordInput: isValid,
-    }));
-  }, []);
 
   return {
     activatedInputs,
     isVisibleSubmitButton,
-    handleActivateCardBrandSelect,
-    handleActivateExpirationDateInput,
-    handleActivateCVCInput,
-    handleActivatePasswordInput,
-    handleSetValidCardNumberInput,
-    handleSetValidCardBrandSelect,
-    handleSetValidExpirationDateInput,
-    handleSetValidCVCInput,
-    handleSetValidPasswordInput,
+    handleActivateInput,
+    handleValidInput,
   };
 }

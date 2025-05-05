@@ -29,16 +29,10 @@ function CardInputForm({
   const {
     activatedInputs,
     isVisibleSubmitButton,
-    handleActivateCardBrandSelect,
-    handleActivateExpirationDateInput,
-    handleActivateCVCInput,
-    handleActivatePasswordInput,
-    handleSetValidCardNumberInput,
-    handleSetValidCardBrandSelect,
-    handleSetValidExpirationDateInput,
-    handleSetValidCVCInput,
-    handleSetValidPasswordInput,
+    handleActivateInput,
+    handleValidInput,
   } = useFormState();
+
   const navigate = useNavigate();
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -55,39 +49,51 @@ function CardInputForm({
     <form className={styles.cardInputForm} onSubmit={onSubmitHandler}>
       <div className={styles.inputBoxWrapper}>
         <div className={styles.inputBox}>
-          {activatedInputs.cardPasswordInput && (
-            <CardPasswordInput
-              onSuccessValidate={handleSetValidPasswordInput}
-            />
-          )}
-
           {activatedInputs.cardCVCInput && (
-            <CardCVCInput
-              onSuccessValidate={handleSetValidCVCInput}
-              onSuccessNextInput={handleActivatePasswordInput}
+            <CardPasswordInput
+              onSuccessValidate={(isValid) =>
+                handleValidInput("cardPasswordInput", isValid)
+              }
             />
           )}
 
           {activatedInputs.cardExpirationDateInput && (
-            <CardExpirationDateInput
-              handleExpirationDateChange={handleExpirationDateChange}
-              onSuccessValidate={handleSetValidExpirationDateInput}
-              onSuccessNextInput={handleActivateCVCInput}
+            <CardCVCInput
+              onSuccessValidate={(isValid) =>
+                handleValidInput("cardCVCInput", isValid)
+              }
+              onSuccessNextInput={() => handleActivateInput("cardCVCInput")}
             />
           )}
 
           {activatedInputs.cardBrandSelect && (
+            <CardExpirationDateInput
+              handleExpirationDateChange={handleExpirationDateChange}
+              onSuccessValidate={(isValid) =>
+                handleValidInput("cardExpirationDateInput", isValid)
+              }
+              onSuccessNextInput={() =>
+                handleActivateInput("cardExpirationDateInput")
+              }
+            />
+          )}
+
+          {activatedInputs.cardNumberInput && (
             <CardBrandSelect
               handleBrandNameChange={handleBrandNameChange}
-              onSuccessValidate={handleSetValidCardBrandSelect}
-              onSuccessNextInput={handleActivateExpirationDateInput}
+              onSuccessValidate={(isValid) =>
+                handleValidInput("cardBrandSelect", isValid)
+              }
+              onSuccessNextInput={() => handleActivateInput("cardBrandSelect")}
             />
           )}
 
           <CardNumberInput
             handleCardNumbersChange={handleCardNumbersChange}
-            onSuccessValidate={handleSetValidCardNumberInput}
-            onSuccessNextInput={handleActivateCardBrandSelect}
+            onSuccessValidate={(isValid) =>
+              handleValidInput("cardNumberInput", isValid)
+            }
+            onSuccessNextInput={() => handleActivateInput("cardNumberInput")}
           />
         </div>
         <div className={styles.fadeBottom}></div>
