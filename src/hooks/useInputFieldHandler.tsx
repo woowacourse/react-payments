@@ -25,7 +25,6 @@ const MAX_VALID_MONTH = 12;
 interface useInputFieldHandlerProps<T extends InputFieldType> {
   fieldName: FieldName;
   inputRefs: RefObject<(HTMLInputElement | null)[]>;
-  hasError: boolean;
   validateInputError?: (
     inputName: T,
     errorStatus: { errorType: ErrorType; isError: boolean }
@@ -36,7 +35,6 @@ interface useInputFieldHandlerProps<T extends InputFieldType> {
 export function useInputFieldHandler<T extends InputFieldType>({
   fieldName,
   inputRefs,
-  hasError,
   validateInputError,
   setInputValue,
 }: useInputFieldHandlerProps<T>) {
@@ -62,7 +60,7 @@ export function useInputFieldHandler<T extends InputFieldType>({
 
     if (value.length === maxLength) {
       const inputPart = Number(name.match(/\d+/)?.[0]) - 1;
-      if (inputPart < inputFieldLength && !hasError)
+      if (inputPart < inputFieldLength)
         inputRefs.current[inputPart + 1]?.focus();
     }
   };

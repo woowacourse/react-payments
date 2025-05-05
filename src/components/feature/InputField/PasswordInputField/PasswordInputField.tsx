@@ -25,7 +25,6 @@ function PasswordInputField({
   });
 
   const { onChange, onBlur } = useInputFieldHandler({
-    hasError: Boolean(errorMessage),
     fieldName: 'password',
     inputRefs,
     setInputValue,

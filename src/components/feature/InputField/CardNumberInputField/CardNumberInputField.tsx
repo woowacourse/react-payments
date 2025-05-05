@@ -32,7 +32,6 @@ function CardNumberInputField({
   });
 
   const { onChange, onBlur } = useInputFieldHandler({
-    hasError: Boolean(errorMessage),
     fieldName: 'cardNumber',
     inputRefs,
     validateInputError,

@@ -25,7 +25,6 @@ function CVCInputField({
   });
 
   const { onChange, onBlur } = useInputFieldHandler({
-    hasError: Boolean(errorMessage),
     fieldName: 'CVC',
     inputRefs,
     validateInputError,

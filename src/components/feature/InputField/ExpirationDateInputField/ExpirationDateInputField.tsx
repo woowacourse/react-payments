@@ -27,7 +27,6 @@ function ExpirationDateInputField({
   });
 
   const { onChange } = useInputFieldHandler({
-    hasError: false,
     fieldName: 'expirationDate',
     inputRefs,
     setInputValue,
