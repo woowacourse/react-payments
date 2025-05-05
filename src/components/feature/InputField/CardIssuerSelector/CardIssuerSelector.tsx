@@ -4,6 +4,7 @@ import {
   CardIssuerSelectorType,
 } from '../../../../config/inputField';
 import Selector from '../../../ui/Selector/Selector';
+import InputSection from '../../../ui/InputSection/InputSection';
 
 interface CardIssuerSelectorProps {
   isFocused: boolean;
@@ -25,15 +26,20 @@ function CardIssuerSelector({
   });
 
   return (
-    <Selector
-      ref={inputRef}
-      dropDownOptions={[...CARD_ISSUER_TYPE]}
-      placeholder="카드사를 선택해주세요"
-      onSelectChange={(value: CardIssuerSelectorType) => {
-        setCardIssuer(value);
-        onComplete?.();
-      }}
-    />
+    <InputSection
+      title="카드사를 선택해 주세요"
+      caption="현재 국내 카드사만 가능합니다."
+    >
+      <Selector
+        ref={inputRef}
+        dropDownOptions={[...CARD_ISSUER_TYPE]}
+        placeholder="카드사를 선택해주세요"
+        onSelectChange={(value: CardIssuerSelectorType) => {
+          setCardIssuer(value);
+          onComplete?.();
+        }}
+      />
+    </InputSection>
   );
 }
 

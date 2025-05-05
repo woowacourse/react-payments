@@ -10,6 +10,7 @@ import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../InputfieldProps';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
+import InputSection from '../../../ui/InputSection/InputSection';
 
 function ExpirationDateInputField({
   isFocused,
@@ -45,25 +46,30 @@ function ExpirationDateInputField({
   }, []);
 
   return (
-    <BaseInputField label="유효기간">
-      {EXPIRATION_DATE_INPUT_TYPE.map((inputType, index) => (
-        <InputWrapper key={inputType}>
-          <Label htmlFor={`expiration-date-${inputType}`} />
-          <Input
-            ref={(el) => {
-              inputRefs.current[index] = el;
-            }}
-            id={`expiration-date-${inputType}`}
-            inputType="number"
-            placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
-            value={inputValue[inputType]}
-            onChange={onChange}
-            name={inputType}
-            onBlur={onExpirationDateBlur}
-          />
-        </InputWrapper>
-      ))}
-    </BaseInputField>
+    <InputSection
+      title="카드 유효기간을 입력해 주세요"
+      caption="월/년도(MMYY)를 순서대로 입력해 주세요."
+    >
+      <BaseInputField label="유효기간">
+        {EXPIRATION_DATE_INPUT_TYPE.map((inputType, index) => (
+          <InputWrapper key={inputType}>
+            <Label htmlFor={`expiration-date-${inputType}`} />
+            <Input
+              ref={(el) => {
+                inputRefs.current[index] = el;
+              }}
+              id={`expiration-date-${inputType}`}
+              inputType="number"
+              placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
+              value={inputValue[inputType]}
+              onChange={onChange}
+              name={inputType}
+              onBlur={onExpirationDateBlur}
+            />
+          </InputWrapper>
+        ))}
+      </BaseInputField>
+    </InputSection>
   );
 }
 

@@ -10,6 +10,7 @@ import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../InputfieldProps';
+import InputSection from '../../../ui/InputSection/InputSection';
 
 interface onCardNumberChangeProps {
   name: string;
@@ -61,26 +62,31 @@ function CardNumberInputField({
   }, []);
 
   return (
-    <BaseInputField label="카드 번호" errorMessage={errorMessage}>
-      {CARD_NUMBER_INPUT_TYPE.map((inputType, index) => (
-        <InputWrapper key={inputType}>
-          <Label htmlFor={`card-number-input-${inputType}`} />
-          <Input
-            ref={(el) => {
-              inputRefs.current[index] = el;
-            }}
-            id={`card-number-input-${inputType}`}
-            inputType="number"
-            placeholder="1234"
-            value={inputValue[inputType]}
-            onChange={onCardNumberChange}
-            onBlur={onBlur}
-            name={inputType}
-            isError={Boolean(errorTypes[inputType].length)}
-          />
-        </InputWrapper>
-      ))}
-    </BaseInputField>
+    <InputSection
+      title="결제할 카드 번호를 입력해 주세요"
+      caption="본인 명의의 카드만 결제 가능합니다."
+    >
+      <BaseInputField label="카드 번호" errorMessage={errorMessage}>
+        {CARD_NUMBER_INPUT_TYPE.map((inputType, index) => (
+          <InputWrapper key={inputType}>
+            <Label htmlFor={`card-number-input-${inputType}`} />
+            <Input
+              ref={(el) => {
+                inputRefs.current[index] = el;
+              }}
+              id={`card-number-input-${inputType}`}
+              inputType="number"
+              placeholder="1234"
+              value={inputValue[inputType]}
+              onChange={onCardNumberChange}
+              onBlur={onBlur}
+              name={inputType}
+              isError={Boolean(errorTypes[inputType].length)}
+            />
+          </InputWrapper>
+        ))}
+      </BaseInputField>
+    </InputSection>
   );
 }
 

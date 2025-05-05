@@ -10,6 +10,7 @@ import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../InputfieldProps';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useEffect, useRef } from 'react';
+import InputSection from '../../../ui/InputSection/InputSection';
 
 function CVCInputField({
   isFocused,
@@ -45,26 +46,28 @@ function CVCInputField({
   }, []);
 
   return (
-    <BaseInputField label="CVC" errorMessage={errorMessage}>
-      {CVC_INPUT_TYPE.map((inputType, index) => (
-        <InputWrapper key={inputType}>
-          <Label htmlFor="CVC-input" />
-          <Input
-            ref={(el) => {
-              inputRefs.current[index] = el;
-            }}
-            id="CVC-input"
-            inputType="number"
-            placeholder="123"
-            value={inputValue.CVCPart1}
-            onChange={onChange}
-            name="CVCPart1"
-            onBlur={onBlur}
-            isError={Boolean(errorTypes[inputType].length)}
-          />
-        </InputWrapper>
-      ))}
-    </BaseInputField>
+    <InputSection title="CVC 번호를 입력해 주세요">
+      <BaseInputField label="CVC" errorMessage={errorMessage}>
+        {CVC_INPUT_TYPE.map((inputType, index) => (
+          <InputWrapper key={inputType}>
+            <Label htmlFor="CVC-input" />
+            <Input
+              ref={(el) => {
+                inputRefs.current[index] = el;
+              }}
+              id="CVC-input"
+              inputType="number"
+              placeholder="123"
+              value={inputValue.CVCPart1}
+              onChange={onChange}
+              name="CVCPart1"
+              onBlur={onBlur}
+              isError={Boolean(errorTypes[inputType].length)}
+            />
+          </InputWrapper>
+        ))}
+      </BaseInputField>
+    </InputSection>
   );
 }
 

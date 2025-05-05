@@ -10,6 +10,7 @@ import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../InputfieldProps';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useEffect, useRef } from 'react';
+import InputSection from '../../../ui/InputSection/InputSection';
 
 function PasswordInputField({
   isFocused,
@@ -45,26 +46,31 @@ function PasswordInputField({
   }, []);
 
   return (
-    <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>
-      {PASSWORD_INPUT_TYPE.map((inputType, index) => (
-        <InputWrapper key={inputType}>
-          <Label htmlFor="password-input" />
-          <Input
-            ref={(el) => {
-              inputRefs.current[index] = el;
-            }}
-            id="password-input"
-            inputType="password"
-            placeholder="비밀번호 앞 2자리"
-            value={inputValue.passwordPart1}
-            onChange={onChange}
-            name="passwordPart1"
-            onBlur={onBlur}
-            isError={Boolean(errorTypes[inputType].length)}
-          />
-        </InputWrapper>
-      ))}
-    </BaseInputField>
+    <InputSection
+      title="비밀번호를 입력해 주세요"
+      caption="앞의 2자리를 입력해주세요"
+    >
+      <BaseInputField label="비밀번호 앞 2자리" errorMessage={errorMessage}>
+        {PASSWORD_INPUT_TYPE.map((inputType, index) => (
+          <InputWrapper key={inputType}>
+            <Label htmlFor="password-input" />
+            <Input
+              ref={(el) => {
+                inputRefs.current[index] = el;
+              }}
+              id="password-input"
+              inputType="password"
+              placeholder="비밀번호 앞 2자리"
+              value={inputValue.passwordPart1}
+              onChange={onChange}
+              name="passwordPart1"
+              onBlur={onBlur}
+              isError={Boolean(errorTypes[inputType].length)}
+            />
+          </InputWrapper>
+        ))}
+      </BaseInputField>
+    </InputSection>
   );
 }
 
