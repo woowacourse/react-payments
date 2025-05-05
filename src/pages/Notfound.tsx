@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
 import { useNavigate } from 'react-router';
 import Button from '../components/common/Button/Button';
 import { PAGE_URL } from '../constants/pageUrl';
