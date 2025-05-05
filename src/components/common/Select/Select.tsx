@@ -69,8 +69,8 @@ const selectedValueTextStyle = (isSelected: boolean) => css`
 `;
 
 const iconStyle = css`
-  width: 8px;
-  height: 4px;
+  width: 16px;
+  height: 8px;
   padding: 0 8px 0 0;
 `;
 
