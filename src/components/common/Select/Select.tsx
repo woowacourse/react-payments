@@ -22,7 +22,7 @@ const Select = ({ optionList, value, setValue }: SelectPropsType) => {
     <div tabIndex={0} onBlur={closeDropdown} css={selectBoxStyle}>
       <div css={selectedValueStyle(idDropdownOpened)} onClick={toggleDropdownOpened}>
         <div css={selectedValueTextStyle(Boolean(value))}>{value ?? "선택해 주세요."}</div>
-        <img css={iconStyle} src={idDropdownOpened ? "chevron-down.svg" : "chevron-up.svg"} />
+        <img css={iconStyle} src={idDropdownOpened ? "chevron-up.svg" : "chevron-down.svg"} />
       </div>
 
       {idDropdownOpened && (
