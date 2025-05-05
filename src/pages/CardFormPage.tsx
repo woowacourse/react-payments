@@ -8,34 +8,11 @@ import CvcNumberForm from "../components/feature/CvcNumberForm/CvcNumberForm.tsx
 import PasswordForm from "../components/feature/PasswordForm/PasswordForm.tsx";
 import CardIssuerForm from "../components/feature/CardIssuerForm/CardIssuerForm.tsx";
 import Button from "../components/common/Button/Button.tsx";
-import useOpenForm from "../hooks/useOpenForm.tsx";
-import useCardError from "../hooks/useCardError.tsx";
 import { useNavigate } from "react-router";
 
 function CardFormPage() {
-  const {
-    cardState,
-    dispatch,
-    allComplete,
-    uniqueNumberComplete,
-    expirationDateComplete,
-    cvcNumberComplete,
-    cardIssuerComplete,
-  } = useCardInformation();
+  const { cardState, dispatch } = useCardInformation();
   const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
-  const { cardErrorState, dispatchError, allClear, uniqueNumberClear, expirationDateClear, cvcNumberClear } =
-    useCardError();
-  const { isFormOpen } = useOpenForm({
-    cardState,
-    cardErrorState,
-    uniqueNumberComplete,
-    expirationDateComplete,
-    cvcNumberComplete,
-    cardIssuerComplete,
-    uniqueNumberClear,
-    expirationDateClear,
-    cvcNumberClear,
-  });
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
@@ -51,43 +28,17 @@ function CardFormPage() {
           cardIssuer={cardState.cardIssuer}
         />
         <div css={FormContainerStyle}>
-          {isFormOpen("password") && (
-            <PasswordForm
-              passwordState={password}
-              dispatch={dispatch}
-              errorState={cardErrorState.password}
-              dispatchError={dispatchError}
-            />
-          )}
-          {isFormOpen("cvcNumber") && (
-            <CvcNumberForm
-              cvcNumberState={cvcNumber}
-              dispatch={dispatch}
-              errorState={cardErrorState.cvcNumber}
-              dispatchError={dispatchError}
-            />
-          )}
-          {isFormOpen("expirationDate") && (
-            <ExpirationDateForm
-              expirationDateState={expirationDate}
-              dispatch={dispatch}
-              errorState={cardErrorState.expirationDate}
-              dispatchError={dispatchError}
-            />
-          )}
-          {isFormOpen("cardIssuer") && <CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />}
-          <UniqueNumberForm
-            uniqueNumberState={uniqueNumber}
-            dispatch={dispatch}
-            errorState={cardErrorState.uniqueNumber}
-            dispatchError={dispatchError}
-          />
+          {<PasswordForm passwordState={password} dispatch={dispatch} />}
+          {<CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />}
+          {<ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />}
+          {<CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />}
+          <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
         </div>
-        {isFormOpen("password") && allComplete() && allClear() && (
+        {
           <div css={ButtonContainerStyle}>
             <Button text={"확인"} onClick={handleButtonClick} />
           </div>
-        )}
+        }
       </div>
     </div>
   );

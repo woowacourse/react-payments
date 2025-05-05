@@ -8,9 +8,9 @@ import useExpirationDate from "../../../hooks/useExpirationDate";
 
 const { title, description, inputFieldData } = expirationDateSpec;
 
-const ExpirationDateForm = ({ expirationDateState, dispatch, errorState, dispatchError }: ExpirationDateStateType) => {
+const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
   const inputRefs = useInputFocus();
-  const { errorMessage, handleChange } = useExpirationDate({ dispatch, dispatchError, inputRefs });
+  const { error, errorMessage, handleChange } = useExpirationDate({ dispatch, inputRefs });
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -32,7 +32,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch, errorState, dispatc
                 value={expirationDateState[index]}
                 onChange={(v) => handleChange(v, index)}
                 maxLength={maxLength}
-                error={errorState[index]}
+                error={error[index]}
                 ref={(el) => {
                   inputRefs.current[index] = el;
                 }}
@@ -40,7 +40,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch, errorState, dispatc
             );
           })}
         </div>
-        <div css={errorTextWrapperStyle(errorState[0] || errorState[1])}>
+        <div css={errorTextWrapperStyle(error[0] || error[1])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

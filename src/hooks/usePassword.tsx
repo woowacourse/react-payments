@@ -1,39 +1,32 @@
 import { useState } from "react";
-import { ErrorAction, Action } from "../types/CardInformationType";
 import { Dispatch } from "react";
 import isSameLength from "../utils/isSameLength";
 import isTypeNumber from "../utils/isTypeNumber";
-import { setErrorTrue, setErrorFalse } from "../utils/setError";
+import { Action } from "../types/CardInformationType";
 
-const usePassword = ({
-  dispatch,
-  dispatchError,
-}: {
-  dispatch: Dispatch<Action>;
-  dispatchError: Dispatch<ErrorAction>;
-}) => {
+const usePassword = (dispatch: Dispatch<Action>) => {
+  const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const type = "SET_PASSWORD_ERROR";
 
   const handleChange = (v: string) => {
     if (!isTypeNumber(v)) {
-      setErrorTrue(type, 0, dispatchError);
+      setError(true);
       setErrorMessage("숫자만 입력해 주세요.");
       return;
     }
-    setErrorFalse(type, 0, dispatchError);
+    setError(false);
 
     if (isSameLength(v, 2)) {
-      setErrorFalse(type, 0, dispatchError);
+      setError(false);
     } else {
-      setErrorTrue(type, 0, dispatchError);
+      setError(true);
       setErrorMessage("2글자를 입력해 주세요.");
     }
 
     dispatch({ type: "SET_PASSWORD", value: v });
   };
 
-  return { errorMessage, handleChange };
+  return { error, errorMessage, handleChange };
 };
 
 export default usePassword;

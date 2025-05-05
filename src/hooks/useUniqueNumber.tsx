@@ -1,34 +1,39 @@
 import { useState } from "react";
-import { ErrorAction, Action } from "../types/CardInformationType";
+import { Action } from "../types/CardInformationType";
 import { Dispatch } from "react";
 import isSameLength from "../utils/isSameLength";
 import isTypeNumber from "../utils/isTypeNumber";
-import { setErrorTrue, setErrorFalse } from "../utils/setError";
 
 const useUniqueNumber = ({
   dispatch,
-  dispatchError,
   inputRefs,
 }: {
   dispatch: Dispatch<Action>;
-  dispatchError: Dispatch<ErrorAction>;
   inputRefs: React.RefObject<(HTMLInputElement | null)[]>;
 }) => {
+  const [error, setError] = useState([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState("");
-  const type = "SET_UNIQUE_NUMBER_ERROR";
 
   const handleChange = (v: string, index: number) => {
     if (!isTypeNumber(v)) {
-      setErrorTrue(type, index, dispatchError);
+      const updatedError = [...error];
+      updatedError[index] = true;
+      setError(updatedError);
       setErrorMessage("숫자만 입력해 주세요.");
       return;
     }
-    setErrorFalse(type, index, dispatchError);
+    const updatedError = [...error];
+    updatedError[index] = false;
+    setError(updatedError);
 
     if (isSameLength(v, 4)) {
-      setErrorFalse(type, index, dispatchError);
+      const updatedError = [...error];
+      updatedError[index] = false;
+      setError(updatedError);
     } else {
-      setErrorTrue(type, index, dispatchError);
+      const updatedError = [...error];
+      updatedError[index] = true;
+      setError(updatedError);
       setErrorMessage("4글자를 입력해 주세요.");
     }
 
@@ -39,7 +44,7 @@ const useUniqueNumber = ({
     }
   };
 
-  return { errorMessage, handleChange };
+  return { error, errorMessage, handleChange };
 };
 
 export default useUniqueNumber;
