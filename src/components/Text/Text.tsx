@@ -7,6 +7,7 @@ const Text = ({ type, text }: TextProps) => {
     description: descriptionStyle,
     label: labelStyle,
     error: errorStyle,
+    complete: completeStyle,
   };
 
   return <span css={matchType[type]}>{text}</span>;
@@ -44,4 +45,14 @@ const errorStyle = css`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+`;
+
+const completeStyle = css`
+  color: #353c49;
+  text-align: center;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  white-space: pre-wrap;
 `;

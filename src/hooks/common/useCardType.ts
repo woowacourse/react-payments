@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { CardType } from "../types/CardInformationType";
+import { CardType } from "../../types/CardInformationType";
 
 const useCardType = (input: string): CardType => {
   return useMemo(() => {

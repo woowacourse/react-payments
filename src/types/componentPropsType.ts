@@ -1,28 +1,72 @@
-import { CardInformationType, setCardInformationType } from "./CardInformationType";
-import { useEachValidationType, useValidationType } from "./useValidationType";
+import React, { ComponentProps } from "react";
+import { CompanyType, formSectionData } from ".";
+import {
+  CardInformationType,
+  setCardInformationType,
+  useEachValidationType,
+  ValidationType,
+} from "./CardInformationType";
 
 export type FormContainerProps = {
+  /** 카드 정보 상태값 */
+  cardInformationState: CardInformationType;
+  /** 카드 정보 상태 변경 함수 */
+  setCardInformationState: setCardInformationType;
+  /** 입력값에 대한 유효성 검사 훅을 담은 배열 */
+  validation: ValidationType;
+  /** 단계별 step */
+  step: number;
+  /** 버튼 여부 띄우기 */
+  complete: boolean;
+} & ComponentProps<"form">;
+
+export type FieldRendererProps = {
+  field: formSectionData;
   cardInformationState: CardInformationType;
   setCardInformationState: setCardInformationType;
-  validation: useValidationType;
+  validation: ValidationType;
 };
 
-export type FormSectionProps = {
+export type InputFormSectionProps<T extends Exclude<keyof CardInformationType, "company">> = {
+  /** 섹션 제목 */
+  title: string;
+  /** 섹션 설명 */
+  description: string;
+  /** 필드 타입 */
+  type: "input";
+  /** key  타입 */
+  key: T;
+  /** 입력 필드에 대한 설정 정보 */
+  fieldData: InputFieldProps<T>;
+};
+
+export type SelectFormSectionProps<T extends Extract<keyof CardInformationType, "company">> = {
   title: string;
   description: string;
-  inputFieldData: InputFieldProps;
+  type: "select";
+  /** key  타입 */
+  key: T;
+  fieldData: SelectProps<T>;
 };
 
-export type InputFieldProps = {
+export type FormSectionBaseProps = { title: string; description: string; children: React.ReactNode };
+
+export type InputFieldProps<T extends Exclude<keyof CardInformationType, "company">> = {
+  /** 입력 필드 라벨 */
   label: string;
+  /** 필드 내 input 개수 */
   inputNumber: number;
+  /** 개별 input 필드 설정 */
   inputProps: {
     placeholder: string[];
     maxLength: number;
+    masking?: boolean;
   };
-  cardInformation: CardInformationType;
-  setCardInformation: setCardInformationType;
-  informationType: keyof CardInformationType;
+  /** 카드 정보 상태값 */
+  state: CardInformationType[T];
+  /** 카드 정보 상태 변경 함수 */
+  setState: setCardInformationType[T];
+  /** 해당 필드에 대한 개별 유효성 검사 */
   eachValidation: useEachValidationType;
 };
 
@@ -37,12 +81,40 @@ export type InputProps = {
   error: boolean;
   /** 입력값이 변경될 때 호출되는 콜백 함수 */
   onChange: (value: string) => void;
+  /** 입력값이 마스킹 처리가 되어야하는 경우 */
+  masking?: boolean;
+  /** 자동 포커스 처리 */
+  autoFocus: boolean;
+  /** 외부에서 input 요소에 접근하기 위한 ref */
+  ref: React.Ref<HTMLInputElement>;
 };
 
 export type errorMessageProps = {
+  /** 에러 여부 */
   error: boolean;
+  /** 에러 메시지 텍스트 */
   message: string;
 };
 
-type TextType = "title" | "description" | "label" | "error";
-export type TextProps = { type: TextType; text: string };
+type TextType = "title" | "description" | "label" | "error" | "complete";
+export type TextProps = {
+  /** 텍스트 유형 */
+  type: TextType;
+  /** 실제 텍스트 내용 */
+  text: string;
+};
+
+// 🔥 select 전용
+export type SelectProps<T extends Extract<keyof CardInformationType, "company">> = {
+  /** select 옵션에 들어갈 데이터들 */
+  options: CompanyType[];
+  /** select 초기에 보여질 텍스트 라벨 */
+  placeholder: string;
+  /** 카드 정보 상태 변경 함수 */
+  setState: React.Dispatch<React.SetStateAction<CardInformationType[T]>>;
+};
+
+export type ButtonProps = {
+  /** 버튼에 들어갈 텍스트 내용 */
+  text: string;
+} & ComponentProps<"button">;

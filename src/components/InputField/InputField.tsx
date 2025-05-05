@@ -3,26 +3,24 @@ import Text from "../Text/Text";
 import Input from "../Input/Input";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { InputFieldProps } from "../../types/componentPropsType";
+import { CardInformationType } from "../../types/CardInformationType";
+import useFocusManager from "../../hooks/common/useFocusManager";
 
-const InputField = ({
+const InputField = <T extends Exclude<keyof CardInformationType, "company">>({
   label,
   inputNumber,
   inputProps,
-  cardInformation,
-  setCardInformation,
-  informationType,
+  state,
+  setState,
   eachValidation,
-}: InputFieldProps) => {
+}: InputFieldProps<T>) => {
   const { isError, errorMessage, validateInput } = eachValidation;
+  const { setRef, moveFocusOrBlur } = useFocusManager(inputNumber);
 
-  const handleChange = (index: number, value: string) => {
-    validateInput(index, value);
-
-    setCardInformation((prev) => {
-      const updated = prev[informationType];
-      updated[index] = value;
-      return { ...prev, [informationType]: updated };
-    });
+  const handleChange = (value: string, index: number) => {
+    validateInput(value, index);
+    setState(value, index);
+    moveFocusOrBlur({ index, value, maxLength: inputProps.maxLength });
   };
 
   return (
@@ -32,15 +30,21 @@ const InputField = ({
         {Array.from({ length: inputNumber }).map((_, index) => (
           <Input
             key={index}
-            value={cardInformation[informationType][index] ?? ""}
-            onChange={(v) => handleChange(index, v)}
+            ref={setRef(index)}
+            value={Array.isArray(state) ? state[index] : state}
+            onChange={(v) => handleChange(v, index)}
             placeholder={inputProps.placeholder[index]}
             maxLength={inputProps.maxLength}
-            error={isError[index]}
+            error={Array.isArray(isError) ? isError[index] : isError}
+            masking={inputProps.masking}
+            autoFocus={index === 0}
           />
         ))}
       </div>
-      <ErrorMessage error={isError.some((bool) => bool === true)} message={errorMessage} />
+      <ErrorMessage
+        error={Array.isArray(isError) ? isError.some((bool) => bool === true) : isError}
+        message={errorMessage}
+      />
     </div>
   );
 };

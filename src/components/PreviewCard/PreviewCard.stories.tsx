@@ -15,7 +15,9 @@ export const NoneCard: Story = {
     cardInformationState: {
       uniqueNumber: ["1234", "1234", "1234", "1234"],
       expirationDate: ["12", "25"],
-      cvcNumber: ["123"],
+      cvcNumber: "123",
+      password: "12",
+      company: "",
     },
   },
 };
@@ -25,7 +27,9 @@ export const VisaCard: Story = {
     cardInformationState: {
       uniqueNumber: ["4234", "1234", "1234", "1234"],
       expirationDate: ["12", "25"],
-      cvcNumber: ["123"],
+      cvcNumber: "123",
+      password: "12",
+      company: "",
     },
   },
 };
@@ -35,7 +39,9 @@ export const MasterCard: Story = {
     cardInformationState: {
       uniqueNumber: ["5134", "1234", "1234", "1234"],
       expirationDate: ["12", "25"],
-      cvcNumber: ["123"],
+      cvcNumber: "123",
+      password: "12",
+      company: "",
     },
   },
 };

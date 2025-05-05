@@ -23,11 +23,13 @@ export const Primary: Story = {
 
     return (
       <Input
+        ref={() => {}}
         placeholder={args.placeholder}
         maxLength={args.maxLength}
         value={value}
         onChange={setValue}
         error={false}
+        autoFocus={true}
       />
     );
   },
