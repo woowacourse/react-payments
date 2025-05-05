@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router';
 import { CardForm } from '../components/CardForm/CardForm';
 
 const meta: Meta<typeof CardForm> = {
-  title: 'Pages/CardForm',
+  title: 'Feature/CardForm',
   component: CardForm,
   decorators: [
     (Story) => (
