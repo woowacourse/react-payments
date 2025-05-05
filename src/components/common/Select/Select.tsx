@@ -8,24 +8,24 @@ type SelectPropsType = {
 };
 
 const Select = ({ optionList, value, setValue }: SelectPropsType) => {
-  const [dropdownOpen, setdropdownOpen] = useState(false);
+  const [idDropdownOpened, setIsDropdownOpened] = useState(false);
 
-  const toggleDropdownOpen = () => setdropdownOpen((prev) => !prev);
-  const closeDropdown = () => setdropdownOpen(false);
+  const toggleDropdownOpened = () => setIsDropdownOpened((prev) => !prev);
+  const closeDropdown = () => setIsDropdownOpened(false);
 
   const handleOption = (v: string) => {
     setValue(v);
-    setdropdownOpen(false);
+    setIsDropdownOpened(false);
   };
 
   return (
     <div tabIndex={0} onBlur={closeDropdown} css={selectBoxStyle}>
-      <div css={selectedValueStyle(dropdownOpen)} onClick={toggleDropdownOpen}>
+      <div css={selectedValueStyle(idDropdownOpened)} onClick={toggleDropdownOpened}>
         <div css={selectedValueTextStyle(Boolean(value))}>{value ?? "선택해 주세요."}</div>
-        <img css={iconStyle} src={dropdownOpen ? "chevron-down.svg" : "chevron-up.svg"} />
+        <img css={iconStyle} src={idDropdownOpened ? "chevron-down.svg" : "chevron-up.svg"} />
       </div>
 
-      {dropdownOpen && (
+      {idDropdownOpened && (
         <ul css={optionListStyle}>
           {optionList.map((opt, idx) => (
             <li key={idx} css={optionStyle} onClick={() => handleOption(opt)}>
@@ -50,14 +50,14 @@ const selectBoxStyle = css`
   margin-bottom: 10px;
 `;
 
-const selectedValueStyle = (dropdowndropdownOpen: boolean) => css`
+const selectedValueStyle = (idDropdownOpened: boolean) => css`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 0px;
-  border: 1px solid ${dropdowndropdownOpen ? "#000000" : "#acacac"};
+  border: 1px solid ${idDropdownOpened ? "#000000" : "#acacac"};
   border-radius: 5px;
   cursor: pointer;
 `;
