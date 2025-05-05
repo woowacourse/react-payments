@@ -43,24 +43,34 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const TemplateVisa = () => {
-  const { setCardNumbers, setMonth, setYear } = useCardContext();
+  const { setFormValues } = useCardContext();
 
   useEffect(() => {
-    setCardNumbers(["4234", "5678", "3333", "4444"]);
-    setMonth("12");
-    setYear("30");
+    setFormValues((prev) => ({
+      ...prev,
+      cardNumbers: ["4234", "5678", "3333", "4444"],
+      expirationDate: {
+        month: "12",
+        year: "30",
+      },
+    }));
   }, []);
 
   return <CardPreview />;
 };
 
 const TemplateMaster = () => {
-  const { setCardNumbers, setMonth, setYear } = useCardContext();
+  const { setFormValues } = useCardContext();
 
   useEffect(() => {
-    setCardNumbers(["5134", "5678", "3333", "4444"]);
-    setMonth("12");
-    setYear("30");
+    setFormValues((prev) => ({
+      ...prev,
+      cardNumbers: ["5134", "5678", "3333", "4444"],
+      expirationDate: {
+        month: "12",
+        year: "30",
+      },
+    }));
   }, []);
 
   return <CardPreview />;

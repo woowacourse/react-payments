@@ -1,5 +1,5 @@
 import { useCardContext } from "../../contexts/CardContext";
-import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import styles from "./CardPreview.module.css";
 
 const displayCardNumber = (blockValue: string, index: number) => {
@@ -18,21 +18,22 @@ const displayCardNumber = (blockValue: string, index: number) => {
 };
 
 const CardPreview = () => {
-  const { cardNumbers, month, year } = useCardContext();
+  const { formValues } = useCardContext();
+  const { cardNumbers, expirationDate, cardColor } = formValues;
+
+  const firstDigit = Number(cardNumbers[0][0]);
+  const firstTwoDigits = Number(cardNumbers[0].slice(0, 2));
 
   return (
-    <div className={styles.preview}>
+    <div className={styles.preview} style={{ backgroundColor: cardColor }}>
       <img src="./magnetic.png" alt="magnetic" className={styles.magnetic} />
 
-      {Number(cardNumbers[0][0]) ===
-        CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER && (
+      {firstDigit === CARD_VALIDATION_INFO.VISA_CARD_START_NUMBER && (
         <img src="./Visa.png" alt="visa" className={styles.visa} />
       )}
 
-      {Number(cardNumbers[0].slice(0, 2)) >=
-        CARD_VALIDATION_INFO.MASTER_CARD_MIN_START_NUMBER &&
-        Number(cardNumbers[0].slice(0, 2)) <=
-          CARD_VALIDATION_INFO.MASTER_CARD_MAX_START_NUMBER && (
+      {firstTwoDigits >= CARD_VALIDATION_INFO.MASTER_CARD_MIN_START_NUMBER &&
+        firstTwoDigits <= CARD_VALIDATION_INFO.MASTER_CARD_MAX_START_NUMBER && (
           <img
             src="./Mastercard.png"
             alt="mastercard"
@@ -50,10 +51,10 @@ const CardPreview = () => {
         </div>
         <div className={styles.date}>
           <p>
-            {month}
-            {month.length === CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH &&
-              "/"}
-            {year}
+            {expirationDate.month}
+            {expirationDate.month.length ===
+              CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH && "/"}
+            {expirationDate.year}
           </p>
         </div>
       </div>

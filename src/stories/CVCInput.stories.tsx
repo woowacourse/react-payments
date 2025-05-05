@@ -3,7 +3,7 @@ import CVCInput from "../components/CVCInput/CVCInput";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import ERROR from "../constants/errorMessage";
-import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
 
 const meta: Meta<typeof CVCInput> = {
   title: "Components/CVCInput",
@@ -12,14 +12,13 @@ const meta: Meta<typeof CVCInput> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "💳 CVCInput은 3자리 숫자만 입력 가능한 카드 보안코드 필드입니다. 숫자가 아닌 값 입력, 자릿수 부족 등의 예외 처리를 포함하고 있습니다.",
+        component: `💳 CVCInput은 ${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}자리 숫자만 입력 가능한 카드 보안코드 필드입니다. 숫자가 아닌 값 입력, 자릿수 부족 등의 예외 처리를 포함하고 있습니다.`,
       },
     },
   },
   argTypes: {
     CVC: {
-      description: "현재 입력된 CVC 값 (최대 3자리 숫자)",
+      description: `현재 입력된 CVC 값 (최대 ${CARD_VALIDATION_INFO.CVC_MAX_LENGTH}자리 숫자)`,
       control: false,
     },
     setCVC: {
@@ -37,7 +36,7 @@ const Template = () => {
   return <CVCInput />;
 };
 
-export const Valid_CVCInput: Story = {
+export const ValidCVCInput: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -58,7 +57,7 @@ export const Valid_CVCInput: Story = {
   },
 };
 
-export const Invalid_NonNumeric: Story = {
+export const InvalidNonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -73,7 +72,7 @@ export const Invalid_NonNumeric: Story = {
   },
 };
 
-export const Invalid_NumberLength: Story = {
+export const InvalidNumberLength: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

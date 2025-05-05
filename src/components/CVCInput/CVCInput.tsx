@@ -1,11 +1,11 @@
 import { useCardContext } from "../../contexts/CardContext";
 import { INPUT_CONTAINER } from "../../constants/title";
-import { CARD_VALIDATION_INFO } from "../../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../../constants/cardValidationInfo";
 import InputContainer from "../InputContainer/InputContainer";
 import Input from "../Input/Input";
 
 const CVCInput = () => {
-  const { CVC, CVCHelperText, CVCInputRef, handleCVC } = useCardContext();
+  const { formValues, formErrors, CVCInputRef, handleCVC } = useCardContext();
 
   return (
     <InputContainer title={INPUT_CONTAINER.CVC.TITLE}>
@@ -14,16 +14,17 @@ const CVCInput = () => {
         <Input
           name="cvc"
           placeholder="123"
-          value={CVC}
+          value={formValues.CVC}
           onChange={handleCVC}
           ref={(element) => {
             CVCInputRef.current = element;
           }}
-          error={CVCHelperText !== ""}
+          error={formErrors.CVC !== ""}
           maxLength={CARD_VALIDATION_INFO.CVC_MAX_LENGTH}
+          autoFocus
         />
       </div>
-      <p className="helperText">{CVCHelperText}</p>
+      <p className="helperText">{formErrors.CVC}</p>
     </InputContainer>
   );
 };

@@ -3,7 +3,7 @@ import CardExpiryInput from "../components/CardExpiryInput/CardExpiryInput";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import ERROR from "../constants/errorMessage";
-import { CARD_VALIDATION_INFO } from "../constants/CardValidationInfo";
+import { CARD_VALIDATION_INFO } from "../constants/cardValidationInfo";
 
 const meta: Meta<typeof CardExpiryInput> = {
   title: "Components/CardExpiryInput",
@@ -14,7 +14,7 @@ const meta: Meta<typeof CardExpiryInput> = {
       description: {
         component:
           "📆 `CardExpiryInput` 컴포넌트는 카드의 유효 기간을 MM / YY 형식으로 입력받는 UI입니다.\n\n" +
-          "- 월(MM): 01~12 사이의 두 자리 숫자만 허용됩니다.\n" +
+          `- 월(MM): ${CARD_VALIDATION_INFO.MIN_VALID_MONTH}~${CARD_VALIDATION_INFO.MAX_VALID_MONTH} 사이의 ${CARD_VALIDATION_INFO.EXPIRE_DATE_MAX_LENGTH}자리 숫자만 허용됩니다.\n` +
           "- 연도(YY): 현재 연도 이상만 허용됩니다. 예를 들어, 현재 연도가 2025년이라면 YY는 최소 `25` 이상이어야 합니다.\n\n" +
           "입력값에 따라 형식 오류, 범위 오류를 검증하며, 숫자만 허용되도록 유효성 검사를 수행합니다.",
       },
@@ -47,7 +47,7 @@ const Template = () => {
   return <CardExpiryInput />;
 };
 
-export const Valid_CardExpiryInput: Story = {
+export const ValidCardExpiryInput: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -69,7 +69,7 @@ export const Valid_CardExpiryInput: Story = {
   },
 };
 
-export const InvalidMonth_NonNumeric: Story = {
+export const InvalidMonthNonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -84,7 +84,7 @@ export const InvalidMonth_NonNumeric: Story = {
   },
 };
 
-export const InvalidMonth_TooShort: Story = {
+export const InvalidMonthTooShort: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -101,7 +101,7 @@ export const InvalidMonth_TooShort: Story = {
   },
 };
 
-export const InvalidYear_NonNumeric: Story = {
+export const InvalidYearNonNumeric: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -120,7 +120,7 @@ export const InvalidYear_NonNumeric: Story = {
   },
 };
 
-export const InvalidYear_TooShort: Story = {
+export const InvalidYearTooShort: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -141,7 +141,7 @@ export const InvalidYear_TooShort: Story = {
   },
 };
 
-export const InvalidYear_BelowCurrentYear: Story = {
+export const InvalidYearBelowCurrentYear: Story = {
   render: Template,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
