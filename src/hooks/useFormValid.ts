@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { CardNumberType, CvcType, ExpirationType, PasswordType } from '../types';
+import { CardCompanyType, CardNumberType, CvcType, ExpirationType, PasswordType } from '../types';
 import { validateCardNumbers, validateCompany, validateCvc, validateExpiration, validatePassword } from '../validation/validator';
 
 type UseFormValidParams = {
@@ -7,7 +7,7 @@ type UseFormValidParams = {
   expiration: ExpirationType;
   cvc: CvcType;
   password: PasswordType;
-  company: string;
+  company: CardCompanyType | null;
 };
 
 export const useFormValid = ({ cardNumbers, expiration, cvc, password, company }: UseFormValidParams) => {
@@ -28,7 +28,9 @@ export const useFormValid = ({ cardNumbers, expiration, cvc, password, company }
   }, [password]);
 
   const isCompanyValid = useMemo(() => {
-    return validateCompany(company);
+    if (company) {
+      return validateCompany(company);
+    }
   }, [company]);
 
   const isFormValid = isCardNumbersValid && isExpirationValid && isCvcValid && isPasswordValid && isCompanyValid;

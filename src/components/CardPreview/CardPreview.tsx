@@ -1,9 +1,17 @@
 import { CARD_BRANDS } from '../../constants';
-import { CardNumberType, ExpirationType } from '../../types';
+import { CardNumberType, ExpirationType, CardCompanyType } from '../../types';
 import Dot from '../Dot/Dot';
 import styles from './CardPreview.module.css';
 
-export default function CardPreview({ cardNumbers, expiration, company }: { cardNumbers: CardNumberType; expiration: ExpirationType; company: string }) {
+export default function CardPreview({
+  cardNumbers,
+  expiration,
+  company
+}: {
+  cardNumbers: CardNumberType;
+  expiration: ExpirationType;
+  company: CardCompanyType | null;
+}) {
   const cardLogo = getCardBrand(cardNumbers.first.value);
   return (
     <div className={`${styles.card} ${styles[getCardColorClass(company)]}`}>
@@ -38,8 +46,10 @@ export default function CardPreview({ cardNumbers, expiration, company }: { card
   );
 }
 
-export function getCardColorClass(company: string) {
-  const CARD_INFO: Record<string, string> = {
+export function getCardColorClass(company: CardCompanyType | null) {
+  if (!company) return '';
+
+  const CARD_INFO: Record<CardCompanyType, string> = {
     BC카드: 'bc',
     신한카드: 'shinhan',
     카카오뱅크: 'kakao',
@@ -50,7 +60,7 @@ export function getCardColorClass(company: string) {
     국민카드: 'kookmin'
   };
 
-  return CARD_INFO[company] ?? '';
+  return CARD_INFO[company];
 }
 const getCardBrand = (value: string) => {
   const brand = Object.values(CARD_BRANDS).find(({ match }) => match(value));

@@ -2,15 +2,15 @@ import { useState } from 'react';
 import styles from './Dropdown.module.css';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
-export default function Dropdown({
+export default function Dropdown<T extends string>({
   list,
   value,
   onSelect,
   placeholder
 }: {
-  list: string[];
-  value: string;
-  onSelect: (value: string) => void;
+  list: T[];
+  value: T | null;
+  onSelect: (value: T) => void;
   placeholder: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +18,11 @@ export default function Dropdown({
   const handleToggle = () => setIsOpen((prev) => !prev);
 
   const ref = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
+
+  const handleSelect = (item: T) => {
+    onSelect(item);
+    setIsOpen(false);
+  };
 
   return (
     <div className={styles.wrapper} ref={ref}>
@@ -31,16 +36,9 @@ export default function Dropdown({
       </button>
       {isOpen && (
         <ul className={styles.list}>
-          {list.map((company) => (
-            <li
-              key={company}
-              className={styles.item}
-              onClick={() => {
-                onSelect(company);
-                setIsOpen((prev) => !prev);
-              }}
-            >
-              {company}
+          {list.map((item) => (
+            <li key={item} className={styles.item} onClick={() => handleSelect(item)}>
+              {item}
             </li>
           ))}
         </ul>

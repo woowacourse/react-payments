@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { CardCompanyType } from '../types';
 
 const useCompany = () => {
-  const [company, setCompany] = useState<string>('');
+  const [company, setCompany] = useState<CardCompanyType | null>(null);
 
-  const handleCompanySelect = (value: string) => {
+  const handleCompanySelect = (value: CardCompanyType) => {
     setCompany(value);
   };
 

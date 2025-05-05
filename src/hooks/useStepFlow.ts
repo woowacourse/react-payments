@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { STEPS } from './../constants';
-import { CardNumberType, CvcType, ExpirationType } from '../types';
+import { CardCompanyType, CardNumberType, CvcType, ExpirationType } from '../types';
 import { validateCardNumbers, validateCompany, validateCvc, validateExpiration } from '../validation/validator';
 
 type StepName = (typeof STEPS)[number];
@@ -15,7 +15,7 @@ export function useStepFlow({
   setStep: (step: StepName) => void;
   cardNumbers: CardNumberType;
   expiration: ExpirationType;
-  company: string;
+  company: CardCompanyType | null;
   cvc: CvcType;
 }) {
   const isCardNumberValid = validateCardNumbers(cardNumbers);
