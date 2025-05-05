@@ -40,12 +40,10 @@ const useCardValidityPeriod = ({ onComplete }: { onComplete: () => void }) => {
       return;
     }
 
-    const newCardValidityPeriod = {
-      ...cardValidityPeriod,
+    setCardValidityPeriod((prev) => ({
+      ...prev,
       month: value,
-    };
-
-    setCardValidityPeriod(newCardValidityPeriod);
+    }));
 
     const newErrorMessage = validateCardValidityPeriod({
       month: value,
@@ -59,7 +57,10 @@ const useCardValidityPeriod = ({ onComplete }: { onComplete: () => void }) => {
     }
 
     const isCardValidityPeriodValid =
-      Object.values(newCardValidityPeriod).every((value) => value !== '') &&
+      Object.values({
+        ...cardValidityPeriod,
+        month: value,
+      }).every((value) => value !== '') &&
       !getErrorMessageFromList(Object.values(newErrorMessage));
 
     if (!isCardValidityPeriodValid) {
@@ -81,12 +82,10 @@ const useCardValidityPeriod = ({ onComplete }: { onComplete: () => void }) => {
       return;
     }
 
-    const newCardValidityPeriod = {
-      ...cardValidityPeriod,
+    setCardValidityPeriod((prev) => ({
+      ...prev,
       year: value,
-    };
-
-    setCardValidityPeriod(newCardValidityPeriod);
+    }));
 
     const newErrorMessage = validateCardValidityPeriod({
       month: cardValidityPeriod.month,
@@ -96,7 +95,10 @@ const useCardValidityPeriod = ({ onComplete }: { onComplete: () => void }) => {
     setErrorMessage(newErrorMessage);
 
     const isCardValidityPeriodValid =
-      Object.values(newCardValidityPeriod).every((value) => value !== '') &&
+      Object.values({
+        ...cardValidityPeriod,
+        year: value,
+      }).every((value) => value !== '') &&
       !getErrorMessageFromList(Object.values(newErrorMessage));
 
     if (!isCardValidityPeriodValid) {
