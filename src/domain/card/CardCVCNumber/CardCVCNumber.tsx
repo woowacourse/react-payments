@@ -3,13 +3,11 @@ import Input from '../../../components/Input/Input';
 import Label from '../../../components/Label/Label';
 import Spacing from '../../../components/Spacing/Spacing';
 import Title from '../../../components/Title/Title';
-import { CardCVCNumberProps } from './types';
+import { useCardFormContext } from '../../../pages/AddCard/context/useCardFormContext';
 
-export default function CardCVCNumber({
-  cardCVCNumber,
-  cardCVCNumberErrorMessage,
-  handleCardCVCNumberInputChange,
-}: CardCVCNumberProps) {
+export default function CardCVCNumber() {
+  const { cardCVCNumber, cardCVCNumberErrorMessage, handleCardCVCNumberInputChange } = useCardFormContext();
+
   return (
     <div>
       <Title>CVC 번호를 입력해 주세요</Title>

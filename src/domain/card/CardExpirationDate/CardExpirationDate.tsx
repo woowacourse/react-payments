@@ -1,19 +1,21 @@
 import * as S from './CardExpirationDate.styles';
 import { getFirstErrorMessage } from '../../../utils';
-import { CardExpirationDateProps, DateType } from './types';
+import { DateType } from './types';
 import Title from '../../../components/Title/Title';
 import Spacing from '../../../components/Spacing/Spacing';
 import Label from '../../../components/Label/Label';
 import Input from '../../../components/Input/Input';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
+import { useCardFormContext } from '../../../pages/AddCard/context/useCardFormContext';
 
-export default function CardExpirationDate({
-  cardExpirationDateRefs,
-  cardExpirationDate,
-  cardExpirationDateErrorMessage,
-  handleCardExpirationDateInputChange,
-}: CardExpirationDateProps) {
+export default function CardExpirationDate() {
   const CardExpirationDateInputTypes: DateType[] = ['month', 'year'];
+  const {
+    cardExpirationDateRefs,
+    cardExpirationDate,
+    cardExpirationDateErrorMessage,
+    handleCardExpirationDateInputChange,
+  } = useCardFormContext();
 
   return (
     <div>

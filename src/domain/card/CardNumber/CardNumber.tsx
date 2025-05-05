@@ -5,15 +5,12 @@ import Label from '../../../components/Label/Label';
 import Input from '../../../components/Input/Input';
 import ErrorMessage from '../../../components/ErrorMessage/ErrorMessage';
 import { getFirstErrorMessage } from '../../../utils';
-import { CardNumberProps } from './types';
 import { cardNumberInputSequences } from './constants';
+import { useCardFormContext } from '../../../pages/AddCard/context/useCardFormContext';
 
-export default function CardNumber({
-  cardNumberRefs,
-  cardNumber,
-  cardNumberErrorMessage,
-  handleCardNumberInputChange,
-}: CardNumberProps) {
+export default function CardNumber() {
+  const { cardNumberRefs, cardNumber, cardNumberErrorMessage, handleCardNumberInputChange } = useCardFormContext();
+
   return (
     <div>
       <Title description="본인 명의의 카드만 결제 가능합니다.">결제할 카드 번호를 입력해 주세요</Title>

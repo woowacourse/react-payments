@@ -2,11 +2,12 @@ import * as S from './CardPreview.styles';
 import VisaCard from '../../../../components/Icon/VisaCard';
 import MasterCard from '../../../../components/Icon/MasterCard';
 import Masking from './components/Masking';
-import { CardPreviewProps } from './type';
 import { getCardType } from '../../../../utils';
 import { DATE_SEPARATOR } from './constants';
+import { useCardFormContext } from '../../context/useCardFormContext';
 
-export default function CardPreview({ cardNumber, cardExpirationDate, CardBrandType }: CardPreviewProps) {
+export default function CardPreview() {
+  const { cardNumber, cardExpirationDate, cardBrandTypeState } = useCardFormContext();
   const cardType = () => {
     switch (getCardType(cardNumber.first)) {
       case 'visa':
@@ -19,28 +20,28 @@ export default function CardPreview({ cardNumber, cardExpirationDate, CardBrandT
   };
 
   return (
-    <S.CardPreviewWrapper CardBrandType={CardBrandType}>
+    <S.CardPreviewWrapper CardBrandType={cardBrandTypeState}>
       <S.CardPreviewTop>
         <S.ICChip />
         {cardType()}
       </S.CardPreviewTop>
       <S.CardPreviewMiddle>
-        <S.CardPreviewMiddleText CardBrandType={CardBrandType}>{cardNumber.first}</S.CardPreviewMiddleText>
-        <S.CardPreviewMiddleText CardBrandType={CardBrandType}>{cardNumber.second}</S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText CardBrandType={cardBrandTypeState}>{cardNumber.first}</S.CardPreviewMiddleText>
+        <S.CardPreviewMiddleText CardBrandType={cardBrandTypeState}>{cardNumber.second}</S.CardPreviewMiddleText>
         <S.CardPreviewMiddleText>
           {Array.from({ length: cardNumber.third.length }, (_, index) => (
-            <Masking key={`third-masking-${index}`} CardBrandType={CardBrandType} />
+            <Masking key={`third-masking-${index}`} CardBrandType={cardBrandTypeState} />
           ))}
         </S.CardPreviewMiddleText>
         <S.CardPreviewMiddleText>
           {Array.from({ length: cardNumber.fourth.length }, (_, index) => (
-            <Masking key={`fourth-masking-${index}`} CardBrandType={CardBrandType} />
+            <Masking key={`fourth-masking-${index}`} CardBrandType={cardBrandTypeState} />
           ))}
         </S.CardPreviewMiddleText>
       </S.CardPreviewMiddle>
       <S.CardPreviewDateBox>
         <S.CardPreviewDateBoxText
-          CardBrandType={CardBrandType}
+          CardBrandType={cardBrandTypeState}
         >{`${cardExpirationDate.month}${cardExpirationDate.year && DATE_SEPARATOR}${cardExpirationDate.year}`}</S.CardPreviewDateBoxText>
       </S.CardPreviewDateBox>
     </S.CardPreviewWrapper>

@@ -4,24 +4,18 @@ import { SequenceType } from '../../../../../domain/card/CardNumber/types';
 import { validateErrorMessages } from '../../../../../utils';
 import { PAGE_ROUTES } from '../../../../../constants';
 import { FormEvent } from 'react';
+import { useCardFormContext } from '../../../context/useCardFormContext';
 
-interface UseCardFormSubmitProps {
-  cardNumber: Record<SequenceType, string>;
-  cardBrandTypeState: string | null;
-  cardNumberErrorMessage: Record<SequenceType, string>;
-  cardExpirationDateErrorMessage: Record<DateType, string>;
-  cardCVCNumberErrorMessage: string;
-  cardPasswordErrorMessage: string;
-}
+export const useCardFormSubmit = () => {
+  const {
+    cardNumber,
+    cardBrandTypeState,
+    cardNumberErrorMessage,
+    cardExpirationDateErrorMessage,
+    cardCVCNumberErrorMessage,
+    cardPasswordErrorMessage,
+  } = useCardFormContext();
 
-export const useCardFormSubmit = ({
-  cardNumber,
-  cardBrandTypeState,
-  cardNumberErrorMessage,
-  cardExpirationDateErrorMessage,
-  cardCVCNumberErrorMessage,
-  cardPasswordErrorMessage,
-}: UseCardFormSubmitProps) => {
   const navigate = useNavigate();
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

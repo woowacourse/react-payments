@@ -3,13 +3,11 @@ import Input from '../../../components/Input/Input';
 import Label from '../../../components/Label/Label';
 import Spacing from '../../../components/Spacing/Spacing';
 import Title from '../../../components/Title/Title';
-import { CardPasswordProps } from './types';
+import { useCardFormContext } from '../../../pages/AddCard/context/useCardFormContext';
 
-export default function CardPasswordNumber({
-  cardPassword,
-  cardPasswordErrorMessage,
-  handleCardPasswordInputChange,
-}: CardPasswordProps) {
+export default function CardPasswordNumber() {
+  const { cardPassword, cardPasswordErrorMessage, handleCardPasswordInputChange } = useCardFormContext();
+
   return (
     <div>
       <Title description="앞의 2자리를 입력해주세요">비밀번호를 입력해 주세요</Title>
