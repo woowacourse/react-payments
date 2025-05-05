@@ -18,5 +18,9 @@ export function useCvcInput() {
     setCvc(value);
   };
 
-  return { cvc, handleCvcChange, cvcError };
+  const resetCvc = () => {
+    setCvc('');
+  };
+
+  return { cvc, handleCvcChange, cvcError, resetCvc };
 }

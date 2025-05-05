@@ -36,5 +36,9 @@ export function useCardExpirationInput() {
     setCardExpiration((prev) => ({ ...prev, [key]: value }));
   };
 
-  return { cardExpiration, handleCardExpirationChange, cardExpirationError };
+  const resetCardExpiration = () => {
+    setCardExpiration({ month: '', year: '' });
+  };
+
+  return { cardExpiration, handleCardExpirationChange, cardExpirationError, resetCardExpiration };
 }

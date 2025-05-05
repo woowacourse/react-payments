@@ -1,25 +1,11 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import CardRegistrationPage from './pages/CardRegistrationPage/CardRegistrationPage';
 import CardRegistrationCompletedPage from './pages/CardRegistrationCompletedPage/CardRegistrationCompletedPage';
-import { useCardNumberInput } from './hooks/useCardNumberInput';
-import { useCardCompanySelect } from './hooks/useCardCompanySelect';
 import { ROUTE_PATH } from './constants/constants';
+import { CardProvider } from './contexts/CardContext';
 
 function RootLayout() {
-  const { cardNumbers, handleCardNumberChange, cardNumberError } = useCardNumberInput();
-  const { cardCompany, handleSelectChange } = useCardCompanySelect();
-
-  return (
-    <Outlet
-      context={{
-        cardNumbers,
-        cardCompany,
-        handleCardNumberChange,
-        cardNumberError,
-        handleSelectChange
-      }}
-    />
-  );
+  return <Outlet />;
 }
 
 const router = createBrowserRouter([
@@ -40,5 +26,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <CardProvider>
+      <RouterProvider router={router} />
+    </CardProvider>
+  );
 }

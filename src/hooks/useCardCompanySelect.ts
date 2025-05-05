@@ -7,5 +7,9 @@ export function useCardCompanySelect() {
     setCardCompany(e.target.value as CardCompany);
   };
 
-  return { cardCompany, handleSelectChange };
+  const resetCardCompany = () => {
+    setCardCompany('');
+  };
+
+  return { cardCompany, handleSelectChange, resetCardCompany };
 }

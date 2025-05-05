@@ -1,35 +1,36 @@
-import { ChangeEvent, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import '../../styles/index.css';
 import styles from './CardRegistrationPage.module.css';
 import CardNumberSection from '../../components/CardNumberSection/CardNumberSection';
 import CardExpirationSection from '../../components/CardExpirationSection/CardExpirationSection';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import CvcSection from '../../components/CvcSection/CvcSection';
-import { CardCompany, CardLogo, CardNumber } from '../../types/card';
+import { CardLogo } from '../../types/card';
 import CardCompanySection from '../../components/CardCompanySection/CardCompanySection';
 import CardPasswordSection from '../../components/CardPasswordSection/CardPasswordSection';
-import { useCardExpirationInput } from '../../hooks/useCardExpirationInput';
-import { useCvcInput } from '../../hooks/useCvcInput';
 import { handleCardLogoChange } from '../../utils/cardLogoUtils.ts';
-import { useCardPasswordInput } from '../../hooks/useCardPasswordInput.ts';
 import Button from '../../components/common/Button/Button.tsx';
-import { useNavigate, useOutletContext } from 'react-router-dom';
-
-type Props = {
-  cardNumbers: CardNumber;
-  handleCardNumberChange: (key: keyof CardNumber, value: string) => void;
-  cardNumberError: string;
-  cardCompany: CardCompany | '';
-  handleSelectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-};
+import { useNavigate } from 'react-router-dom';
+import { CardContext } from '../../contexts/CardContext.tsx';
 
 export default function CardRegistrationPage() {
-  const { cardNumbers, handleCardNumberChange, cardNumberError, cardCompany, handleSelectChange } =
-    useOutletContext<Props>();
+  const {
+    cardNumbers,
+    handleCardNumberChange,
+    cardNumberError,
+    cardCompany,
+    handleSelectChange,
+    cardExpiration,
+    handleCardExpirationChange,
+    cardExpirationError,
+    cvc,
+    handleCvcChange,
+    cvcError,
+    cardPassword,
+    handleCardPasswordChange,
+    cardPasswordError
+  } = useContext(CardContext);
 
-  const { cardExpiration, handleCardExpirationChange, cardExpirationError } = useCardExpirationInput();
-  const { cvc, handleCvcChange, cvcError } = useCvcInput();
-  const { cardPassword, handleCardPasswordChange, cardPasswordError } = useCardPasswordInput();
   const cardLogo = useMemo<CardLogo>(() => handleCardLogoChange(cardNumbers.first), [cardNumbers.first]);
 
   const navigate = useNavigate();

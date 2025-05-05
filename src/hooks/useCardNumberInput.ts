@@ -23,5 +23,9 @@ export function useCardNumberInput() {
     setCardNumbers((prev) => ({ ...prev, [key]: value }));
   };
 
-  return { cardNumbers, handleCardNumberChange, cardNumberError };
+  const resetCardNumbers = () => {
+    setCardNumbers({ first: '', second: '', third: '', fourth: '' });
+  };
+
+  return { cardNumbers, handleCardNumberChange, cardNumberError, resetCardNumbers };
 }

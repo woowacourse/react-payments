@@ -1,19 +1,16 @@
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button/Button';
 import styles from './CardRegistrationCompletedPage.module.css';
 import { FaCircleCheck } from 'react-icons/fa6';
-import { CardCompany, CardNumber } from '../../types/card';
-
-type Props = {
-  cardNumbers: CardNumber;
-  cardCompany: CardCompany | '';
-};
+import { useContext } from 'react';
+import { CardContext } from '../../contexts/CardContext';
 
 export default function CardRegistrationCompletedPage() {
-  const { cardNumbers, cardCompany } = useOutletContext<Props>();
+  const { cardNumbers, cardCompany, resetAllCardData } = useContext(CardContext);
   const navigate = useNavigate();
 
   const handleGoToCardRegistrationPage = () => {
+    resetAllCardData();
     navigate('/');
   };
 

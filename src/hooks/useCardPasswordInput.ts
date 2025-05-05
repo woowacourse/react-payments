@@ -18,5 +18,9 @@ export function useCardPasswordInput() {
     setCardPassword(value);
   };
 
-  return { cardPassword, handleCardPasswordChange, cardPasswordError };
+  const resetCardPassword = () => {
+    setCardPassword('');
+  };
+
+  return { cardPassword, handleCardPasswordChange, cardPasswordError, resetCardPassword };
 }
