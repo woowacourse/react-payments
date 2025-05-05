@@ -9,10 +9,12 @@ import PasswordForm from "../components/feature/PasswordForm/PasswordForm.tsx";
 import CardIssuerForm from "../components/feature/CardIssuerForm/CardIssuerForm.tsx";
 import Button from "../components/common/Button/Button.tsx";
 import { useNavigate } from "react-router";
+import useOpenForm from "../hooks/useOpenForm.tsx";
 
 function CardFormPage() {
   const { cardState, dispatch } = useCardInformation();
   const { uniqueNumber, expirationDate, cvcNumber, password, cardIssuer } = cardState;
+  const { isFormOpen, openNextForm } = useOpenForm();
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
@@ -28,11 +30,35 @@ function CardFormPage() {
           cardIssuer={cardState.cardIssuer}
         />
         <div css={FormContainerStyle}>
-          {<PasswordForm passwordState={password} dispatch={dispatch} />}
-          {<CvcNumberForm cvcNumberState={cvcNumber} dispatch={dispatch} />}
-          {<ExpirationDateForm expirationDateState={expirationDate} dispatch={dispatch} />}
-          {<CardIssuerForm cardIssuerState={cardIssuer} dispatch={dispatch} />}
-          <UniqueNumberForm uniqueNumberState={uniqueNumber} dispatch={dispatch} />
+          {isFormOpen("password") && <PasswordForm passwordState={password} dispatch={dispatch} />}
+          {isFormOpen("cvcNumber") && (
+            <CvcNumberForm
+              cvcNumberState={cvcNumber}
+              dispatch={dispatch}
+              openNextForm={() => openNextForm("cvcNumber")}
+            />
+          )}
+          {isFormOpen("expirationDate") && (
+            <ExpirationDateForm
+              expirationDateState={expirationDate}
+              dispatch={dispatch}
+              openNextForm={() => openNextForm("expirationDate")}
+            />
+          )}
+          {isFormOpen("cardIssuer") && (
+            <CardIssuerForm
+              cardIssuerState={cardIssuer}
+              dispatch={dispatch}
+              openNextForm={() => openNextForm("cardIssuer")}
+            />
+          )}
+          {isFormOpen("uniqueNumber") && (
+            <UniqueNumberForm
+              uniqueNumberState={uniqueNumber}
+              dispatch={dispatch}
+              openNextForm={() => openNextForm("uniqueNumber")}
+            />
+          )}
         </div>
         {
           <div css={ButtonContainerStyle}>

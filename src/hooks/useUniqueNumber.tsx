@@ -7,9 +7,13 @@ import isTypeNumber from "../utils/isTypeNumber";
 const useUniqueNumber = ({
   dispatch,
   inputRefs,
+  openNextForm,
+  uniqueNumberState,
 }: {
   dispatch: Dispatch<Action>;
   inputRefs: React.RefObject<(HTMLInputElement | null)[]>;
+  openNextForm: () => void;
+  uniqueNumberState: string[];
 }) => {
   const [error, setError] = useState([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,6 +34,10 @@ const useUniqueNumber = ({
       const updatedError = [...error];
       updatedError[index] = false;
       setError(updatedError);
+
+      if (updatedError.every((v) => !v) && uniqueNumberState.every((v) => v !== "")) {
+        openNextForm();
+      }
     } else {
       const updatedError = [...error];
       updatedError[index] = true;

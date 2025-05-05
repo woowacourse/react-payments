@@ -4,7 +4,7 @@ import cardIssuerSpec from "./CardIssuerSpec";
 import Select from "../../common/Select/Select";
 import { CardIssuerStateType } from "../../../types/CardInformationType";
 
-const CardIssuerForm = ({ cardIssuerState, dispatch }: CardIssuerStateType) => {
+const CardIssuerForm = ({ cardIssuerState, dispatch, openNextForm }: CardIssuerStateType) => {
   const { title, description, optionList } = cardIssuerSpec;
 
   return (
@@ -16,7 +16,10 @@ const CardIssuerForm = ({ cardIssuerState, dispatch }: CardIssuerStateType) => {
       <div css={inputFieldStyle}>
         <Select
           value={cardIssuerState[0]}
-          setValue={(value) => dispatch({ type: "SET_CARD_ISSUER", value: value })}
+          setValue={(value) => {
+            dispatch({ type: "SET_CARD_ISSUER", value: value });
+            openNextForm();
+          }}
           optionList={optionList}
         />
       </div>

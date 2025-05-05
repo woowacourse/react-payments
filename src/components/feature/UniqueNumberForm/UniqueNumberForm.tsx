@@ -6,13 +6,15 @@ import uniqueNumberSpec from "./uniqueNumberSpec";
 import useInputFocus from "../../../hooks/useInputFocus";
 import useUniqueNumber from "../../../hooks/useUniqueNumber";
 
-const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
+const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueNumberStateType) => {
   const { title, description, inputFieldData } = uniqueNumberSpec;
   const { label, inputNumber, inputProps } = inputFieldData;
   const inputRefs = useInputFocus();
   const { error, errorMessage, handleChange } = useUniqueNumber({
     dispatch,
     inputRefs,
+    openNextForm,
+    uniqueNumberState,
   });
 
   return (

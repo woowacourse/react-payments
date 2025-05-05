@@ -4,7 +4,7 @@ import { Dispatch } from "react";
 import isSameLength from "../utils/isSameLength";
 import isTypeNumber from "../utils/isTypeNumber";
 
-const useCvcNumber = (dispatch: Dispatch<Action>) => {
+const useCvcNumber = (dispatch: Dispatch<Action>, openNextForm: () => void) => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -18,6 +18,7 @@ const useCvcNumber = (dispatch: Dispatch<Action>) => {
 
     if (isSameLength(v, 3)) {
       setError(false);
+      openNextForm();
     } else {
       setError(true);
       setErrorMessage("3글자를 입력해 주세요.");

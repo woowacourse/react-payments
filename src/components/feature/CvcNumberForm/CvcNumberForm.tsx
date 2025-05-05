@@ -6,11 +6,11 @@ import cvcNumberSpec from "./cvcNumberSpec";
 import useInputFocus from "../../../hooks/useInputFocus";
 import useCvcNumber from "../../../hooks/useCvcNumber";
 
-const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
+const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm }: CvcNumberStateType) => {
   const { title, description, inputFieldData } = cvcNumberSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
-  const { error, errorMessage, handleChange } = useCvcNumber(dispatch);
+  const { error, errorMessage, handleChange } = useCvcNumber(dispatch, openNextForm);
   const inputRefs = useInputFocus();
 
   return (

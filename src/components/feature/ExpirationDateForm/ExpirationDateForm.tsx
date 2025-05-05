@@ -8,9 +8,14 @@ import useExpirationDate from "../../../hooks/useExpirationDate";
 
 const { title, description, inputFieldData } = expirationDateSpec;
 
-const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
+const ExpirationDateForm = ({ expirationDateState, dispatch, openNextForm }: ExpirationDateStateType) => {
   const inputRefs = useInputFocus();
-  const { error, errorMessage, handleChange } = useExpirationDate({ dispatch, inputRefs });
+  const { error, errorMessage, handleChange } = useExpirationDate({
+    dispatch,
+    inputRefs,
+    openNextForm,
+    expirationDateState,
+  });
 
   return (
     <div css={FormSectionWrapperStyle}>

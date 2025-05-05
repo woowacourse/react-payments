@@ -40,36 +40,9 @@ function reducer(state: CardInformationType, action: Action): CardInformationTyp
 const useCardInformation = () => {
   const [cardState, dispatch] = useReducer(reducer, initialCardInfo);
 
-  const allComplete = () => {
-    return Object.values(cardState).every((field) => field.every((value) => value !== ""));
-  };
-
-  const uniqueNumberComplete = () => {
-    return cardState.uniqueNumber.every((value) => value !== "");
-  };
-  const expirationDateComplete = () => {
-    return cardState.expirationDate.every((value) => value !== "");
-  };
-
-  const cvcNumberComplete = () => {
-    return cardState.cvcNumber[0] !== "";
-  };
-  const passwordComplete = () => {
-    return cardState.password[0] !== "";
-  };
-  const cardIssuerComplete = () => {
-    return cardState.cardIssuer[0] !== null;
-  };
-
   return {
     cardState,
     dispatch,
-    allComplete,
-    uniqueNumberComplete,
-    expirationDateComplete,
-    cvcNumberComplete,
-    passwordComplete,
-    cardIssuerComplete,
   };
 };
 
