@@ -1,14 +1,4 @@
-import { useState } from 'react';
-
 import styled from 'styled-components';
-import {
-  CardIssuerSelectorType,
-  CardNumberInputType,
-  CVCInputValueType,
-  ExpirationDateInputType,
-  FieldName,
-  PasswordInputType,
-} from '../../config/inputField';
 
 import { useNavigate } from 'react-router-dom';
 import CardPreview from '../../components/feature/CardPreviw/CardPreview';
@@ -19,87 +9,40 @@ import ExpirationDateInputField from '../../components/feature/InputField/Expira
 import PasswordInputField from '../../components/feature/InputField/PasswordInputField/PasswordInputField';
 import Button from '../../components/ui/Button/Button';
 import InputSection from '../../components/ui/InputSection/InputSection';
+import { useCardCompletion } from '../../hooks/useCardCompletion';
+import { useState } from 'react';
+import { useCardFormInputs } from '../../hooks/useCardFormInputs';
 
 function AddCard() {
   const navigate = useNavigate();
 
-  const [cardNumberInputValue, setCardNumberInputValue] = useState<
-    Record<CardNumberInputType, string>
-  >({
-    cardNumberPart1: '',
-    cardNumberPart2: '',
-    cardNumberPart3: '',
-    cardNumberPart4: '',
-  });
-
-  const [expirationDateInputValue, setExpirationDateInputValue] = useState<
-    Record<ExpirationDateInputType, string>
-  >({
-    expirationDatePart1: '',
-    expirationDatePart2: '',
-  });
-
-  const [CVCInputValue, setCVCInputValue] = useState<
-    Record<CVCInputValueType, string>
-  >({
-    CVCPart1: '',
-  });
-
-  const [passwordInputValue, setPasswordInputValue] = useState<
-    Record<PasswordInputType, string>
-  >({
-    passwordPart1: '',
-  });
-
-  const [cardIssuer, setCardIssuer] = useState<CardIssuerSelectorType | null>(
-    null
-  );
+  const {
+    cardNumber,
+    setCardNumber,
+    expirationDate,
+    setExpirationDate,
+    CVC,
+    setCVC,
+    password,
+    setPassword,
+    cardIssuer,
+    setCardIssuer,
+    cardType,
+  } = useCardFormInputs();
 
   const [step, setStep] = useState(1);
 
-  const [isFieldComplete, setIsFieldComplete] = useState({
-    cardNumber: false,
-    expirationDate: false,
-    CVC: false,
-    password: false,
+  const { markFieldComplete, isFormComplete } = useCardCompletion({
+    step,
+    setStep,
   });
-
-  const updateCompleteStatus = ({
-    isComplete,
-    fieldName,
-    targetStep,
-  }: {
-    isComplete: boolean;
-    fieldName: FieldName;
-    targetStep: number;
-  }) => {
-    if (isFieldComplete[fieldName] === isComplete) return;
-    if (step === targetStep && isComplete) setStep(targetStep + 1);
-
-    setIsFieldComplete((prev) => ({
-      ...prev,
-      [fieldName]: isComplete,
-    }));
-  };
-
-  const checkCardType = (value: string) => {
-    if (value[0] === '4') return 'visa';
-    else if (Number(value) >= 51 && Number(value) <= 55) return 'master';
-    return null;
-  };
-  const cardType = checkCardType(cardNumberInputValue.cardNumberPart1);
-
-  const isAllFieldComplete = !Boolean(
-    Object.values(isFieldComplete).filter((isComplete) => isComplete === false)
-      .length
-  );
 
   return (
     <AddCardLayout>
       <AddCardContainer>
         <CardPreview
-          cardNumberInputValue={cardNumberInputValue}
-          expirationDateInputValue={expirationDateInputValue}
+          cardNumberInputValue={cardNumber}
+          expirationDateInputValue={expirationDate}
           cardType={cardType}
           cardIssuer={cardIssuer}
         />
@@ -110,10 +53,10 @@ function AddCard() {
           >
             <PasswordInputField
               isFocused={step === 5}
-              inputValue={passwordInputValue}
-              setInputValue={setPasswordInputValue}
+              inputValue={password}
+              setInputValue={setPassword}
               onComplete={(state) =>
-                updateCompleteStatus({ ...state, targetStep: 5 })
+                markFieldComplete({ ...state, targetStep: 5 })
               }
             />
           </InputSection>
@@ -122,10 +65,10 @@ function AddCard() {
           <InputSection title="CVC 번호를 입력해 주세요">
             <CVCInputField
               isFocused={step === 4}
-              inputValue={CVCInputValue}
-              setInputValue={setCVCInputValue}
+              inputValue={CVC}
+              setInputValue={setCVC}
               onComplete={(state) =>
-                updateCompleteStatus({ ...state, targetStep: 4 })
+                markFieldComplete({ ...state, targetStep: 4 })
               }
             />
           </InputSection>
@@ -137,10 +80,10 @@ function AddCard() {
           >
             <ExpirationDateInputField
               isFocused={step === 3}
-              inputValue={expirationDateInputValue}
-              setInputValue={setExpirationDateInputValue}
+              inputValue={expirationDate}
+              setInputValue={setExpirationDate}
               onComplete={(state) =>
-                updateCompleteStatus({ ...state, targetStep: 3 })
+                markFieldComplete({ ...state, targetStep: 3 })
               }
             />
           </InputSection>
@@ -166,18 +109,18 @@ function AddCard() {
           >
             <CardNumberInputField
               isFocused={step === 1}
-              inputValue={cardNumberInputValue}
-              setInputValue={setCardNumberInputValue}
+              inputValue={cardNumber}
+              setInputValue={setCardNumber}
               cardType={cardType}
               onComplete={(state) =>
-                updateCompleteStatus({ ...state, targetStep: 1 })
+                markFieldComplete({ ...state, targetStep: 1 })
               }
             />
           </InputSection>
         )}
       </AddCardContainer>
 
-      {step >= 6 && isAllFieldComplete && (
+      {step >= 6 && isFormComplete && (
         <ButtonContainer>
           <Button
             isFocused={step === 6}
@@ -186,7 +129,7 @@ function AddCard() {
             onClick={() =>
               navigate(`/cards/complete`, {
                 state: {
-                  cardNumber: cardNumberInputValue.cardNumberPart1,
+                  cardNumber: cardNumber.cardNumberPart1,
                   cardIssuer,
                 },
               })
