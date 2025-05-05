@@ -20,6 +20,8 @@ const FIELD_UNIT_COUNT: Record<FieldName, number> = {
   password: 1,
 };
 
+const MAX_VALID_MONTH = 12;
+
 interface useInputFieldHandlerProps<T extends InputFieldType> {
   fieldName: FieldName;
   inputRefs: RefObject<(HTMLInputElement | null)[]>;
@@ -52,7 +54,7 @@ export function useInputFieldHandler<T extends InputFieldType>({
     if (
       fieldName === 'expirationDate' &&
       name === 'expirationDatePart1' &&
-      Number(value) > 12
+      Number(value) > MAX_VALID_MONTH
     )
       return;
 
