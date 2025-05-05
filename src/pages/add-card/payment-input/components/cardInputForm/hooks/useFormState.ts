@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 export type ActivatedInputKey =
   | "cardNumberInput"
@@ -20,13 +20,9 @@ export function useFormState() {
     useState<Record<ActivatedInputKey, boolean>>(INITIAL_VALID_STATE);
   const [activatedInputs, setActivatedInputs] =
     useState<Record<ActivatedInputKey, boolean>>(INITIAL_VALID_STATE);
-  const [isVisibleSubmitButton, setIsVisibleSubmitButton] = useState(false);
 
-  useEffect(() => {
-    const isAllValid = Object.values(validState).every(
-      (condition) => condition
-    );
-    setIsVisibleSubmitButton(isAllValid);
+  const isVisibleSubmitButton = useMemo(() => {
+    return Object.values(validState).every(Boolean);
   }, [validState]);
 
   const handleActivateInput = useCallback((inputName: ActivatedInputKey) => {
