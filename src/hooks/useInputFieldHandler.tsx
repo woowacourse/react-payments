@@ -67,11 +67,10 @@ export function useInputFieldHandler<T extends InputFieldType>({
 
   const onBlur = (e: ChangeEvent) => {
     const { name, value } = e.target as HTMLInputElement;
-    validateInputError &&
-      validateInputError(name as T, {
-        errorType: INPUT_ERROR_TYPE[fieldName],
-        isError: value.length < maxLength,
-      });
+    validateInputError?.(name as T, {
+      errorType: INPUT_ERROR_TYPE[fieldName],
+      isError: value.length < maxLength,
+    });
   };
 
   return { onChange, onBlur };
