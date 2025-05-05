@@ -51,6 +51,7 @@ function Selector<T extends CardIssuerSelectorType | string>({
         $isDefaultValue={selectedValue === placeholder}
         onClick={() => setIsOpen((prev) => !prev)}
         onKeyDown={handleKeyDown}
+        type="button"
       >
         {selectedValue}
       </DropDownDefault>

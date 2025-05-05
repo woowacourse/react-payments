@@ -134,25 +134,27 @@ function AddCard() {
             />
           </InputSection>
         )}
-      </AddCardContainer>
 
-      {step >= FORM_STEP.COMPLETE_BUTTON && isFormComplete && (
-        <ButtonContainer>
-          <Button
-            isFocused={step === FORM_STEP.COMPLETE_BUTTON}
-            buttonText="확인"
-            buttonType="default"
-            onClick={() =>
-              navigate(`/cards/complete`, {
-                state: {
-                  cardNumber: cardNumber.cardNumberPart1,
-                  cardIssuer,
-                },
-              })
-            }
-          />
-        </ButtonContainer>
-      )}
+        {step >= FORM_STEP.COMPLETE_BUTTON && isFormComplete && (
+          <ButtonContainer>
+            <Button
+              isFocused={step === FORM_STEP.COMPLETE_BUTTON}
+              buttonText="확인"
+              buttonType="default"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/cards/complete`, {
+                  state: {
+                    cardNumber: cardNumber.cardNumberPart1,
+                    cardIssuer,
+                  },
+                });
+              }}
+              type="submit"
+            />
+          </ButtonContainer>
+        )}
+      </AddCardContainer>
     </AddCardLayout>
   );
 }
@@ -172,7 +174,7 @@ const AddCardLayout = styled.div`
   height: 100vh;
 `;
 
-const AddCardContainer = styled.div`
+const AddCardContainer = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;

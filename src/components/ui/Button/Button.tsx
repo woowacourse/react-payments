@@ -7,7 +7,13 @@ interface ButtonProps extends ComponentProps<'button'> {
   buttonType: 'default';
 }
 
-function Button({ isFocused, buttonText, buttonType, onClick }: ButtonProps) {
+function Button({
+  isFocused,
+  buttonText,
+  buttonType,
+  onClick,
+  type,
+}: ButtonProps) {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   let color = '';
   let background = '';
@@ -33,6 +39,7 @@ function Button({ isFocused, buttonText, buttonType, onClick }: ButtonProps) {
       $color={color}
       $background={background}
       onClick={onClick}
+      type={type}
     >
       {buttonText}
     </StyledButton>

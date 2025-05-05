@@ -25,6 +25,7 @@ function AddCardComplete() {
           buttonText="확인"
           buttonType="default"
           onClick={handleRestart}
+          type="button"
         />
       </AddCardCompleteContainer>
     </AddCardLayout>
