@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/" element={<App />} />
         <Route path={PAGE_URL.ADD_CARD} element={<PaymentInputPage />} />
         <Route
-          path={PAGE_URL.ADD_CARD_SUCCES}
+          path={PAGE_URL.ADD_CARD_SUCCESS}
           element={<AddCardSuccessPage />}
         />
         <Route path="*" element={<NotFoundPage />} />
