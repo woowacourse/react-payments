@@ -38,6 +38,16 @@ export default function CardRegistrationPage() {
     navigate('/card-registration-completed');
   };
 
+  const isCardNumberValid = Object.values(cardNumbers).every((value) => value !== '') && !cardNumberError;
+  const isCardCompanySelected = !!cardCompany;
+  const isExpirationValid =
+    Object.values(cardExpiration).every((value) => value !== '') &&
+    Object.values(cardExpirationError).every((value) => value === '');
+  const isCvcValid = !!cvc && !cvcError;
+  const isPasswordValid = !!cardPassword && !cardPasswordError;
+  const isFormComplete =
+    isCardNumberValid && isCardCompanySelected && isExpirationValid && isCvcValid && isPasswordValid;
+
   return (
     <div className={styles.container}>
       <CardPreview
@@ -46,39 +56,36 @@ export default function CardRegistrationPage() {
         cardCompany={cardCompany}
         cardExpiration={cardExpiration}
       />
-      {cvc && !cvcError && (
+
+      {isCardNumberValid && isCardCompanySelected && isExpirationValid && isCvcValid && (
         <CardPasswordSection
           cardPassword={cardPassword}
           handleCardPasswordChange={handleCardPasswordChange}
           cardPasswordError={cardPasswordError}
         />
       )}
-      {Object.values(cardExpiration).every((value) => value !== '') &&
-        Object.values(cardExpirationError).every((value) => value === '') && (
-          <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />
-        )}
-      {cardCompany && (
+
+      {isCardNumberValid && isCardCompanySelected && isExpirationValid && (
+        <CvcSection cvc={cvc} handleCvcChange={handleCvcChange} cvcError={cvcError} />
+      )}
+
+      {isCardNumberValid && isCardCompanySelected && (
         <CardExpirationSection
           cardExpiration={cardExpiration}
           handleCardExpirationChange={handleCardExpirationChange}
           cardExpirationError={cardExpirationError}
         />
       )}
-      {Object.values(cardNumbers).every((value) => value !== '') && !cardNumberError && (
-        <CardCompanySection cardCompany={cardCompany} handleSelectChange={handleSelectChange} />
-      )}
+
+      {isCardNumberValid && <CardCompanySection cardCompany={cardCompany} handleSelectChange={handleSelectChange} />}
+
       <CardNumberSection
         cardNumbers={cardNumbers}
         handleCardNumberChange={handleCardNumberChange}
         cardNumberError={cardNumberError}
       />
-      {Object.values(cardNumbers).every((value) => value !== '') &&
-        !cardNumberError &&
-        cardCompany &&
-        cvc &&
-        !cvcError &&
-        cardPassword &&
-        !cardPasswordError && <Button text="확인" height="52px" onClick={handleSubmit} />}
+
+      {isFormComplete && <Button text="확인" height="52px" onClick={handleSubmit} />}
     </div>
   );
 }
