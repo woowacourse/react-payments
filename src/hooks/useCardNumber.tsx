@@ -6,7 +6,7 @@ import {
 } from '../constants/cardNumber';
 import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
-const useCardNumber = ({ handleNextStep }: { handleNextStep: () => void }) => {
+const useCardNumber = ({ onComplete }: { onComplete: () => void }) => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState(['', '', '', '']);
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -79,7 +79,7 @@ const useCardNumber = ({ handleNextStep }: { handleNextStep: () => void }) => {
       return;
     }
 
-    handleNextStep();
+    onComplete();
   };
 
   return {

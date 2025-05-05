@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PARSE_RULE, CVC_RULE, ERROR_MESSAGE } from '../constants/cardCVC';
 
-const useCardCVC = ({ handleNextStep }: { handleNextStep: () => void }) => {
+const useCardCVC = ({ onComplete }: { onComplete: () => void }) => {
   const [cardCVC, setCardCVC] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -32,7 +32,7 @@ const useCardCVC = ({ handleNextStep }: { handleNextStep: () => void }) => {
       return;
     }
 
-    handleNextStep();
+    onComplete();
   };
 
   return {

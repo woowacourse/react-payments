@@ -3,11 +3,7 @@ import { validateCardValidityPeriod } from '../validations/cardValidityPeriod';
 import { PARSE_RULE } from '../constants/cardValidityPeriod';
 import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
-const useCardValidityPeriod = ({
-  handleNextStep,
-}: {
-  handleNextStep: () => void;
-}) => {
+const useCardValidityPeriod = ({ onComplete }: { onComplete: () => void }) => {
   const [cardValidityPeriod, setCardValidityPeriod] = useState({
     month: '',
     year: '',
@@ -70,7 +66,7 @@ const useCardValidityPeriod = ({
       return;
     }
 
-    handleNextStep();
+    onComplete();
   };
 
   const onChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,7 +103,7 @@ const useCardValidityPeriod = ({
       return;
     }
 
-    handleNextStep();
+    onComplete();
   };
 
   return {

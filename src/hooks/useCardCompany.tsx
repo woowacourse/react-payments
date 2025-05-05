@@ -29,7 +29,7 @@ const CARD_COMPANY_NAMES = [
 
 const CARD_COMPANY_PLACEHOLDER = '카드사를 선택해주세요';
 
-const useCardCompany = ({ handleNextStep }: { handleNextStep: () => void }) => {
+const useCardCompany = ({ onComplete }: { onComplete: () => void }) => {
   const [selectedCard, setSelectedCard] = useState<CardCompanyName | null>(
     null,
   );
@@ -41,7 +41,7 @@ const useCardCompany = ({ handleNextStep }: { handleNextStep: () => void }) => {
       return;
     }
 
-    handleNextStep();
+    onComplete();
   };
 
   return {

@@ -16,7 +16,7 @@ const useCardForm = () => {
     setInputRef: setCardNumberInputRef,
     isCardNumberValid,
   } = useCardNumber({
-    handleNextStep: () => handleNextStep(STEP_NAME.CardCompany),
+    onComplete: () => handleNextStep(STEP_NAME.CardCompany),
   });
 
   const {
@@ -27,7 +27,7 @@ const useCardForm = () => {
     setInputRef: setCardValidityPeriodInputRef,
     isCardValidityPeriodValid,
   } = useCardValidityPeriod({
-    handleNextStep: () => handleNextStep(STEP_NAME.CardCVC),
+    onComplete: () => handleNextStep(STEP_NAME.CardCVC),
   });
 
   const {
@@ -36,7 +36,7 @@ const useCardForm = () => {
     errorMessage: cardCVCErrorMessage,
     isCardCVCValid,
   } = useCardCVC({
-    handleNextStep: () => handleNextStep(STEP_NAME.CardPassword),
+    onComplete: () => handleNextStep(STEP_NAME.CardPassword),
   });
 
   const {
@@ -47,7 +47,7 @@ const useCardForm = () => {
     onClickCardCompany,
     isCardCompanyValid,
   } = useCardCompany({
-    handleNextStep: () => handleNextStep(STEP_NAME.CardValidityPeriod),
+    onComplete: () => handleNextStep(STEP_NAME.CardValidityPeriod),
   });
 
   const {
