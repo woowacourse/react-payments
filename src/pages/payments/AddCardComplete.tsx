@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import Button from '../../components/ui/Button/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../constants/routes';
 
 function AddCardComplete() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleRestart = () => {
-    navigate(`/cards/new`);
+    navigate(ROUTES.CARD_NEW);
   };
 
   const { cardNumber, cardIssuer } = location.state;

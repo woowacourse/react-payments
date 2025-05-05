@@ -12,6 +12,7 @@ import InputSection from '../../components/ui/InputSection/InputSection';
 import { useCardCompletion } from '../../hooks/useCardCompletion';
 import { useState } from 'react';
 import { useCardFormInputs } from '../../hooks/useCardFormInputs';
+import { ROUTES } from '../../constants/routes';
 
 function AddCard() {
   const navigate = useNavigate();
@@ -143,7 +144,7 @@ function AddCard() {
               buttonType="default"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`/cards/complete`, {
+                navigate(ROUTES.CARD_COMPLETE, {
                   state: {
                     cardNumber: cardNumber.cardNumberPart1,
                     cardIssuer,
