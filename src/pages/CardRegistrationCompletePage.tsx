@@ -4,7 +4,7 @@ import Text from "../components/common/Text/Text";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
 
-const CardResistrationCompletePage = () => {
+const CardRegistrationCompletePage = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
     navigate("/");
@@ -24,7 +24,7 @@ const CardResistrationCompletePage = () => {
   );
 };
 
-export default CardResistrationCompletePage;
+export default CardRegistrationCompletePage;
 
 const AppStyle = css`
   width: 376px;
