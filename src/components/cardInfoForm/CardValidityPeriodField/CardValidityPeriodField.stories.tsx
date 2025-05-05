@@ -15,15 +15,15 @@ export const Default: Story = {
   args: {
     cardValidityPeriod: { month: '0', year: '0' },
     errorStateObject: { month: false, year: false },
-    onChangeMonth: () => {},
-    onChangeYear: () => {},
+    handleChangeMonth: () => {},
+    handleChangeYear: () => {},
     setCardValidityPeriodInputRef: () => {},
   },
   render: () => {
     const {
       cardValidityPeriod,
-      onChangeMonth,
-      onChangeYear,
+      handleChangeMonth,
+      handleChangeYear,
       errorMessage: cardValidityPeriodErrorMessage,
       setInputRef,
     } = useCardValidityPeriod({ onComplete: () => {} });
@@ -35,8 +35,8 @@ export const Default: Story = {
           month: Boolean(cardValidityPeriodErrorMessage.month),
           year: Boolean(cardValidityPeriodErrorMessage.year),
         }}
-        onChangeMonth={onChangeMonth}
-        onChangeYear={onChangeYear}
+        handleChangeMonth={handleChangeMonth}
+        handleChangeYear={handleChangeYear}
         setCardValidityPeriodInputRef={setInputRef}
       />
     );
@@ -47,8 +47,8 @@ export const Error: Story = {
   args: {
     cardValidityPeriod: { month: '13', year: '26' },
     errorStateObject: { month: true, year: true },
-    onChangeMonth: () => {},
-    onChangeYear: () => {},
+    handleChangeMonth: () => {},
+    handleChangeYear: () => {},
     setCardValidityPeriodInputRef: () => {},
   },
   render: (args) => {

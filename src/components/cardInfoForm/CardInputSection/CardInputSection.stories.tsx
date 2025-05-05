@@ -77,8 +77,8 @@ export const CardValidityPeriod: Story = {
   render: (args) => {
     const {
       cardValidityPeriod,
-      onChangeMonth,
-      onChangeYear,
+      handleChangeMonth,
+      handleChangeYear,
       errorMessage: cardValidityPeriodErrorMessage,
       setInputRef: setCardValidityPeriodInputRef,
     } = useCardValidityPeriod({ onComplete: () => {} });
@@ -95,8 +95,8 @@ export const CardValidityPeriod: Story = {
             month: Boolean(cardValidityPeriodErrorMessage.month),
             year: Boolean(cardValidityPeriodErrorMessage.year),
           }}
-          onChangeMonth={onChangeMonth}
-          onChangeYear={onChangeYear}
+          handleChangeMonth={handleChangeMonth}
+          handleChangeYear={handleChangeYear}
           setCardValidityPeriodInputRef={setCardValidityPeriodInputRef}
         />
       </CardInputSection>

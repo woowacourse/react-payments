@@ -28,7 +28,7 @@ const useCardValidityPeriod = ({ onComplete }: { onComplete: () => void }) => {
     }
   };
 
-  const onChangeMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
     const isNumeric = value === '' || /^[0-9]+$/.test(value);
@@ -69,7 +69,7 @@ const useCardValidityPeriod = ({ onComplete }: { onComplete: () => void }) => {
     onComplete();
   };
 
-  const onChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
     const isNumeric = value === '' || /^[0-9]+$/.test(value);
@@ -108,8 +108,8 @@ const useCardValidityPeriod = ({ onComplete }: { onComplete: () => void }) => {
 
   return {
     cardValidityPeriod,
-    onChangeMonth,
-    onChangeYear,
+    handleChangeMonth,
+    handleChangeYear,
     errorMessage,
     setInputRef,
     isCardValidityPeriodValid:

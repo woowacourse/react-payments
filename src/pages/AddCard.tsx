@@ -29,8 +29,8 @@ function AddCard() {
 
   const {
     handleChangeCardNumber,
-    onChangeMonth,
-    onChangeYear,
+    handleChangeMonth,
+    handleChangeYear,
     onChangeCVC,
     onClickCardCompany,
     onChangeCardPassword,
@@ -109,8 +109,8 @@ function AddCard() {
               month: Boolean(cardValidityPeriodErrorMessage.month),
               year: Boolean(cardValidityPeriodErrorMessage.year),
             }}
-            onChangeMonth={onChangeMonth}
-            onChangeYear={onChangeYear}
+            handleChangeMonth={handleChangeMonth}
+            handleChangeYear={handleChangeYear}
             setCardValidityPeriodInputRef={setCardValidityPeriodInputRef}
           />
         </CardInputSection>
