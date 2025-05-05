@@ -62,7 +62,7 @@ function CardFormPage() {
         </div>
         {
           <div css={ButtonContainerStyle}>
-            <Button text={"확인"} onClick={handleButtonClick} />
+            <Button onClick={handleButtonClick}>확인</Button>
           </div>
         }
       </div>

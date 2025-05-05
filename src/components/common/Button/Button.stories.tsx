@@ -12,22 +12,17 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Basic: Story = {
-  args: {
-    text: "확인",
-  },
-
-  render: (args: any) => {
-    return <Button text={args.text} />;
+  render: () => {
+    return <Button>확인</Button>;
   },
 };
 
 export const Rounded: Story = {
   args: {
-    text: "확인",
     rounded: true,
   },
 
   render: (args: any) => {
-    return <Button text={args.text} rounded={args.rounded} />;
+    return <Button rounded={args.rounded}>모서리가 둥근 버튼</Button>;
   },
 };

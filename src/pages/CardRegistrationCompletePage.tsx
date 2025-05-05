@@ -19,7 +19,9 @@ const CardRegistrationCompletePage = () => {
         <Text text={`${cardState.uniqueNumber[0]}로 시작하는`} weight={"700"} size={"25px"} />
         <Text text={`${cardState.cardIssuer}가 등록되었어요.`} weight={"700"} size={"25px"} />
       </div>
-      <Button text={"확인"} rounded={true} onClick={handleButtonClick} />
+      <Button rounded={true} onClick={handleButtonClick}>
+        확인
+      </Button>
     </div>
   );
 };

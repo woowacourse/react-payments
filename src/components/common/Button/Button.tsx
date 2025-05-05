@@ -1,15 +1,15 @@
 import { css } from "@emotion/react";
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 type ButtonPropsType = {
-  text: string;
+  children: ReactNode;
   rounded?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ text, disabled = false, onClick, rounded = false, ...rest }: ButtonPropsType) => {
+const Button = ({ children, disabled = false, onClick, rounded = false, ...rest }: ButtonPropsType) => {
   return (
     <button css={buttonStyle(rounded)} disabled={disabled} onClick={onClick} {...rest}>
-      {text}
+      {children}
     </button>
   );
 };
@@ -18,7 +18,8 @@ export default Button;
 
 const buttonStyle = (rounded: boolean) => css`
   width: 100%;
-  height: 44px;
+  min-height: 44px;
+  height: fit-content;
   background-color: #333333;
   display: flex;
   justify-content: center;
