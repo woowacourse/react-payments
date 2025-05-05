@@ -1,11 +1,12 @@
 import { ChangeEvent, ComponentProps } from 'react';
 import styled from 'styled-components';
 import { InputFieldType } from '../../../config/inputField';
+import { onChangeProps } from '../../../hooks/useInputFieldHandler';
 
 interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   isError?: boolean;
   inputType: 'number' | 'text' | 'password';
-  onChange: ({ name, value }: { name: InputFieldType; value: string }) => void;
+  onChange: ({ name, value }: onChangeProps) => void;
 }
 
 function Input({

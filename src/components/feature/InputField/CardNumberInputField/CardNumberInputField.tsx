@@ -3,20 +3,17 @@ import styled from 'styled-components';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
-  InputFieldType,
 } from '../../../../config/inputField';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useInputError } from '../../../../hooks/useInputError';
-import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
+import {
+  onChangeProps,
+  useInputFieldHandler,
+} from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
-import { InputFieldProps } from '../InputfieldProps';
 import InputSection from '../../../ui/InputSection/InputSection';
-
-interface onCardNumberChangeProps {
-  name: InputFieldType;
-  value: string;
-}
+import { InputFieldProps } from '../InputfieldProps';
 
 function CardNumberInputField({
   isFocused,
@@ -45,7 +42,7 @@ function CardNumberInputField({
     onComplete,
   });
 
-  const onCardNumberChange = ({ name, value }: onCardNumberChangeProps) => {
+  const onCardNumberChange = ({ name, value }: onChangeProps) => {
     onChange({ name, value });
     if (name === CARD_NUMBER_INPUT_TYPE[0]) {
       validateInputError(name, {

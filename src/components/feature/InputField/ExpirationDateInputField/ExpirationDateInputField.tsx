@@ -1,16 +1,22 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
+  InputFieldType,
 } from '../../../../config/inputField';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
-import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
+import {
+  onChangeProps,
+  useInputFieldHandler,
+} from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import InputSection from '../../../ui/InputSection/InputSection';
 import { InputFieldProps } from '../InputfieldProps';
+
+const MAX_VALID_MONTH = 12;
 
 function ExpirationDateInputField({
   isFocused,
@@ -32,15 +38,23 @@ function ExpirationDateInputField({
     setInputValue,
   });
 
+  const onExpirationDateChange = ({ value, name }: onChangeProps) => {
+    if (name === 'expirationDatePart1' && Number(value) > MAX_VALID_MONTH)
+      return;
+    onChange({ value, name });
+  };
+
   const onExpirationDateBlur = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
     if (value.length === 1)
       setInputValue((prevValue) => ({ ...prevValue, [name]: `0${value}` }));
   };
 
-  if (isFocused) {
-    inputRefs.current[0]?.focus();
-  }
+  useEffect(() => {
+    if (isFocused) {
+      inputRefs.current[0]?.focus();
+    }
+  }, []);
 
   return (
     <InputSection
@@ -59,7 +73,7 @@ function ExpirationDateInputField({
               inputType="number"
               placeholder={EXPIRATION_DATE_INPUT_PLACEHOLDER[inputType]}
               value={inputValue[inputType]}
-              onChange={onChange}
+              onChange={onExpirationDateChange}
               name={inputType}
               onBlur={onExpirationDateBlur}
             />

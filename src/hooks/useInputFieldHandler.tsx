@@ -13,14 +13,21 @@ const INPUT_ERROR_TYPE: Record<FieldName, ErrorType> = {
   password: 'shortPasswordSegment',
 };
 
-const FIELD_UNIT_COUNT: Record<FieldName, number> = {
-  cardNumber: 4,
-  CVC: 1,
-  expirationDate: 2,
-  password: 1,
+const INPUT_NAME_TO_INDEX: Record<InputFieldType, number> = {
+  cardNumberPart1: 0,
+  cardNumberPart2: 1,
+  cardNumberPart3: 2,
+  cardNumberPart4: 3,
+  CVCPart1: 0,
+  expirationDatePart1: 0,
+  expirationDatePart2: 1,
+  passwordPart1: 0,
 };
 
-const MAX_VALID_MONTH = 12;
+export interface onChangeProps {
+  name: InputFieldType;
+  value: string;
+}
 
 interface useInputFieldHandlerProps<T extends InputFieldType> {
   fieldName: FieldName;
@@ -39,29 +46,16 @@ export function useInputFieldHandler<T extends InputFieldType>({
   setInputValue,
 }: useInputFieldHandlerProps<T>) {
   const maxLength = INPUT_FIELD_MAX_LENGTH[fieldName];
-  const inputFieldLength = FIELD_UNIT_COUNT[fieldName];
 
-  const onChange = ({
-    name,
-    value,
-  }: {
-    name: InputFieldType;
-    value: string;
-  }) => {
+  const onChange = ({ name, value }: onChangeProps) => {
     if (value.length > maxLength) return;
-    if (
-      fieldName === 'expirationDate' &&
-      name === 'expirationDatePart1' &&
-      Number(value) > MAX_VALID_MONTH
-    )
-      return;
-
     setInputValue((prevValue) => ({ ...prevValue, [name]: value }));
 
+    const nextIndex = INPUT_NAME_TO_INDEX[name] + 1;
+    if (!inputRefs.current[nextIndex]) return;
+
     if (value.length === maxLength) {
-      const inputPart = Number(name.match(/\d+/)?.[0]) - 1;
-      if (inputPart < inputFieldLength)
-        inputRefs.current[inputPart + 1]?.focus();
+      inputRefs.current[INPUT_NAME_TO_INDEX[name] + 1]?.focus();
     }
   };
 
