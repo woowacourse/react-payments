@@ -1,8 +1,10 @@
 import { useLocation, useNavigate } from "react-router";
 import styles from "./AddCardSuccessPage.module.css";
 import CheckCircleIcon from "../../../components/common/icon/CheckCircleIcon";
-import { CARD_BACKGROUND_COLOR } from "../payment-input/components/cardPreview/constants/DisplayData";
-import { TCardBrand } from "../payment-input/components/cardPreview/constants/DisplayData";
+import {
+  CARD_BACKGROUND_COLOR,
+  TCardBrand,
+} from "../payment-input/components/cardPreview/constants/DisplayData";
 
 function AddCardSuccessPage() {
   const navigate = useNavigate();
