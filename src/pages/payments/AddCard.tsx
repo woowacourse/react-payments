@@ -37,6 +37,15 @@ function AddCard() {
     setStep,
   });
 
+  const FORM_STEP = {
+    CARD_NUMBER: 1,
+    CARD_ISSUER: 2,
+    EXPIRATION_DATE: 3,
+    CVC: 4,
+    PASSWORD: 5,
+    COMPLETE_BUTTON: 6,
+  };
+
   return (
     <AddCardLayout>
       <AddCardContainer>
@@ -46,84 +55,91 @@ function AddCard() {
           cardType={cardType}
           cardIssuer={cardIssuer}
         />
-        {step >= 5 && (
+        {step >= FORM_STEP.PASSWORD && (
           <InputSection
             title="비밀번호를 입력해 주세요"
             caption="앞의 2자리를 입력해주세요"
           >
             <PasswordInputField
-              isFocused={step === 5}
+              isFocused={step === FORM_STEP.PASSWORD}
               inputValue={password}
               setInputValue={setPassword}
               onComplete={(state) =>
-                markFieldComplete({ ...state, targetStep: 5 })
+                markFieldComplete({ ...state, targetStep: FORM_STEP.PASSWORD })
               }
             />
           </InputSection>
         )}
-        {step >= 4 && (
+        {step >= FORM_STEP.CVC && (
           <InputSection title="CVC 번호를 입력해 주세요">
             <CVCInputField
-              isFocused={step === 4}
+              isFocused={step === FORM_STEP.CVC}
               inputValue={CVC}
               setInputValue={setCVC}
               onComplete={(state) =>
-                markFieldComplete({ ...state, targetStep: 4 })
+                markFieldComplete({ ...state, targetStep: FORM_STEP.CVC })
               }
             />
           </InputSection>
         )}
-        {step >= 3 && (
+        {step >= FORM_STEP.EXPIRATION_DATE && (
           <InputSection
             title="카드 유효기간을 입력해 주세요"
             caption="월/년도(MMYY)를 순서대로 입력해 주세요."
           >
             <ExpirationDateInputField
-              isFocused={step === 3}
+              isFocused={step === FORM_STEP.EXPIRATION_DATE}
               inputValue={expirationDate}
               setInputValue={setExpirationDate}
               onComplete={(state) =>
-                markFieldComplete({ ...state, targetStep: 3 })
+                markFieldComplete({
+                  ...state,
+                  targetStep: FORM_STEP.EXPIRATION_DATE,
+                })
               }
             />
           </InputSection>
         )}
-        {step >= 2 && (
+        {step >= FORM_STEP.CARD_ISSUER && (
           <InputSection
             title="카드사를 선택해 주세요"
             caption="현재 국내 카드사만 가능합니다."
           >
             <CardIssuerSelector
-              isFocused={step === 2}
+              isFocused={step === FORM_STEP.CARD_ISSUER}
               setCardIssuer={setCardIssuer}
               onComplete={() => {
-                if (step === 2) setStep(3);
+                if (step === FORM_STEP.CARD_ISSUER)
+                  setStep(FORM_STEP.EXPIRATION_DATE);
               }}
             />
           </InputSection>
         )}
-        {step >= 1 && (
+        {step >= FORM_STEP.CARD_NUMBER && (
           <InputSection
             title="결제할 카드 번호를 입력해 주세요"
             caption="본인 명의의 카드만 결제 가능합니다."
           >
             <CardNumberInputField
-              isFocused={step === 1}
+              isFocused={step === FORM_STEP.CARD_NUMBER}
               inputValue={cardNumber}
               setInputValue={setCardNumber}
               cardType={cardType}
               onComplete={(state) =>
-                markFieldComplete({ ...state, targetStep: 1 })
+                markFieldComplete({
+                  ...state,
+                  targetStep: FORM_STEP.CARD_NUMBER,
+                })
               }
             />
           </InputSection>
         )}
       </AddCardContainer>
 
-      {step >= 6 && isFormComplete && (
+      {step >= FORM_STEP.COMPLETE_BUTTON && isFormComplete && (
         <ButtonContainer>
           <Button
-            isFocused={step === 6}
+            isFocused={step === FORM_STEP.COMPLETE_BUTTON}
             buttonText="확인"
             buttonType="default"
             onClick={() =>
