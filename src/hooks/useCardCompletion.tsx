@@ -32,10 +32,7 @@ export function useCardCompletion({ step, setStep }: useCardCompletionProps) {
     }));
   };
 
-  const isFormComplete = !Boolean(
-    Object.values(isFieldComplete).filter((isComplete) => isComplete === false)
-      .length
-  );
+  const isFormComplete = Object.values(isFieldComplete).every(Boolean);
 
   return { markFieldComplete, isFormComplete };
 }
