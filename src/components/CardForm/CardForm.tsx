@@ -65,7 +65,7 @@ export function CardForm(props: CardFormProps) {
           <PasswordSection {...password} />
         </Stack.Step>
       </Stack>
-      {buttonVisible && <Button>확인</Button>}
+      {buttonVisible && <Button type="submit">확인</Button>}
     </form>
   );
 }
