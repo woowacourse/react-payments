@@ -3,14 +3,13 @@ import {
   PASSWORD_INPUT_TYPE,
   PasswordInputType,
 } from '../../../../config/inputField';
-import { useInputError } from '../../../../hooks/useInputError';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../InputfieldProps';
-import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useEffect, useRef } from 'react';
 import InputSection from '../../../ui/InputSection/InputSection';
+import { useFieldValidation } from '../../../../hooks/useFieldValidation';
 
 function PasswordInputField({
   isFocused,
@@ -20,8 +19,10 @@ function PasswordInputField({
 }: InputFieldProps<PasswordInputType>) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const { errorTypes, errorMessage, validateInputError } = useInputError({
+  const { errorTypes, errorMessage, validateInputError } = useFieldValidation({
     inputValue,
+    fieldName: 'password',
+    onComplete,
   });
 
   const { onChange, onBlur } = useInputFieldHandler({
@@ -29,13 +30,6 @@ function PasswordInputField({
     inputRefs,
     setInputValue,
     validateInputError,
-  });
-
-  useFieldCompletion({
-    fieldName: 'password',
-    inputValue,
-    errorMessage,
-    onComplete,
   });
 
   useEffect(() => {

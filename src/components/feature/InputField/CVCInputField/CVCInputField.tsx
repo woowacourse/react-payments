@@ -3,14 +3,13 @@ import {
   CVC_INPUT_TYPE,
   CVCInputValueType,
 } from '../../../../config/inputField';
-import { useInputError } from '../../../../hooks/useInputError';
 import { useInputFieldHandler } from '../../../../hooks/useInputFieldHandler';
 import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import { InputFieldProps } from '../InputfieldProps';
-import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useEffect, useRef } from 'react';
 import InputSection from '../../../ui/InputSection/InputSection';
+import { useFieldValidation } from '../../../../hooks/useFieldValidation';
 
 function CVCInputField({
   isFocused,
@@ -20,8 +19,10 @@ function CVCInputField({
 }: InputFieldProps<CVCInputValueType>) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const { errorTypes, errorMessage, validateInputError } = useInputError({
+  const { errorTypes, errorMessage, validateInputError } = useFieldValidation({
     inputValue,
+    fieldName: 'CVC',
+    onComplete,
   });
 
   const { onChange, onBlur } = useInputFieldHandler({
@@ -29,13 +30,6 @@ function CVCInputField({
     inputRefs,
     validateInputError,
     setInputValue,
-  });
-
-  useFieldCompletion({
-    fieldName: 'CVC',
-    errorMessage,
-    inputValue,
-    onComplete,
   });
 
   useEffect(() => {

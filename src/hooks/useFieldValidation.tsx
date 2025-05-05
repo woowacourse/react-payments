@@ -1,14 +1,24 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ERROR_TYPE_TO_MESSAGE, ErrorType } from '../config/error';
-import { InputFieldType } from '../config/inputField';
+import {
+  FieldName,
+  INPUT_FIELD_MAX_LENGTH,
+  InputFieldType,
+} from '../config/inputField';
 
 interface useInputErrorProps<T extends InputFieldType> {
   inputValue: Record<T, string>;
+  fieldName: FieldName;
+  onComplete: (params: { isComplete: boolean; fieldName: FieldName }) => void;
 }
 
-export function useInputError<T extends InputFieldType>({
+export function useFieldValidation<T extends InputFieldType>({
   inputValue,
+  fieldName,
+  onComplete,
 }: useInputErrorProps<T>) {
+  const maxLength = INPUT_FIELD_MAX_LENGTH[fieldName];
+
   const [errorTypes, setErrorTypes] = useState<Record<T, ErrorType[]>>(
     (Object.keys(inputValue) as T[]).reduce(
       (acc, key) => {
@@ -25,9 +35,16 @@ export function useInputError<T extends InputFieldType>({
     ).find((arr) => arr.length > 0);
 
     const currentErrorType = currentErrorStatus?.[0];
-
     return currentErrorType ? ERROR_TYPE_TO_MESSAGE[currentErrorType] : '';
   }, [errorTypes]);
+
+  const isComplete = useMemo(() => {
+    return !Boolean(
+      (Object.values(inputValue) as string[]).filter(
+        (value) => value.length !== maxLength
+      ).length
+    );
+  }, [inputValue]);
 
   const validateInputError = (
     inputName: T,
@@ -49,6 +66,13 @@ export function useInputError<T extends InputFieldType>({
       };
     });
   };
+
+  useEffect(() => {
+    onComplete({
+      isComplete: isComplete && !Boolean(errorMessage),
+      fieldName,
+    });
+  }, [isComplete, errorMessage]);
 
   return { errorTypes, errorMessage, validateInputError };
 }

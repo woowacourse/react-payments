@@ -4,9 +4,8 @@ import {
   EXPIRATION_DATE_INPUT_PLACEHOLDER,
   EXPIRATION_DATE_INPUT_TYPE,
   ExpirationDateInputType,
-  InputFieldType,
 } from '../../../../config/inputField';
-import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
+
 import {
   onChangeProps,
   useInputFieldHandler,
@@ -15,6 +14,7 @@ import BaseInputField from '../../../ui/BaseInputField/BaseInputField';
 import Input from '../../../ui/Input/Input';
 import InputSection from '../../../ui/InputSection/InputSection';
 import { InputFieldProps } from '../InputfieldProps';
+import { useFieldValidation } from '../../../../hooks/useFieldValidation';
 
 const MAX_VALID_MONTH = 12;
 
@@ -26,7 +26,7 @@ function ExpirationDateInputField({
 }: InputFieldProps<ExpirationDateInputType>) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  useFieldCompletion({
+  useFieldValidation({
     fieldName: 'expirationDate',
     inputValue,
     onComplete,
