@@ -1,15 +1,14 @@
 import { css } from "@emotion/react";
+import { ButtonHTMLAttributes } from "react";
 
 type ButtonPropsType = {
   text: string;
-  disabled?: boolean;
-  onClick?: () => void;
   rounded?: boolean;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ text, disabled = false, onClick, rounded = false }: ButtonPropsType) => {
+const Button = ({ text, disabled = false, onClick, rounded = false, ...rest }: ButtonPropsType) => {
   return (
-    <button css={buttonStyle(rounded)} disabled={disabled} onClick={onClick}>
+    <button css={buttonStyle(rounded)} disabled={disabled} onClick={onClick} {...rest}>
       {text}
     </button>
   );
