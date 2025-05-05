@@ -1,0 +1,67 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import CardPreview from './CardPreview';
+
+const meta: Meta<typeof CardPreview> = {
+  title: 'Components/CardPreview',
+  component: CardPreview,
+  tags: ['autodocs'],
+};
+export default meta;
+type Story = StoryObj<typeof CardPreview>;
+
+export const Default: Story = {
+  args: {
+    cardNumberInputValue: {
+      cardNumberPart1: '',
+      cardNumberPart2: '',
+      cardNumberPart3: '',
+      cardNumberPart4: '',
+    },
+    expirationDateInputValue: {
+      month: '',
+      year: '',
+    },
+    cardType: null,
+  },
+  render: function Render(args) {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const Visa: Story = {
+  args: {
+    cardNumberInputValue: {
+      cardNumberPart1: '4567',
+      cardNumberPart2: '4567',
+      cardNumberPart3: '4567',
+      cardNumberPart4: '4567',
+    },
+    expirationDateInputValue: {
+      month: '02',
+      year: '25',
+    },
+    cardType: 'visa',
+  },
+  render: function Render(args) {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const Master: Story = {
+  args: {
+    cardNumberInputValue: {
+      cardNumberPart1: '5123',
+      cardNumberPart2: '5123',
+      cardNumberPart3: '5123',
+      cardNumberPart4: '5123',
+    },
+    expirationDateInputValue: {
+      month: '02',
+      year: '25',
+    },
+    cardType: 'master',
+  },
+  render: function Render(args) {
+    return <CardPreview {...args} />;
+  },
+};
