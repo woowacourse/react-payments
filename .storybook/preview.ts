@@ -1,7 +1,4 @@
-// .storybook/preview.tsx
-import { withRouter } from './decorators/withRouter';
-import '../src/styles/color.css';
-
+import '../src/styles/index.css';
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { action } from '@storybook/addon-actions';
 import Input from '../components/Input/Input';
 
 const meta: Meta<typeof Input> = {
@@ -24,8 +23,7 @@ export const EmptyInput: Story = {
   args: {
     ...baseArgs,
     value: '',
-    isError: false,
-    onChange: action('onChange')
+    isError: false
   }
 };
 
@@ -34,8 +32,7 @@ export const ValidInput: Story = {
   args: {
     ...baseArgs,
     value: '1234',
-    isError: false,
-    onChange: action('onChange')
+    isError: false
   }
 };
 
@@ -44,12 +41,14 @@ export const InvalidInput: Story = {
   args: {
     ...baseArgs,
     value: 'abcd',
-    isError: true,
-    onChange: action('onChange')
+    isError: true
   }
 };
 
 export const InteractiveInput: Story = {
+  args: {
+    ...baseArgs
+  },
   render: (args) => {
     const [value, setValue] = useState('');
 
@@ -68,13 +67,9 @@ export const InteractiveInput: Story = {
 };
 export const FocusedInput: Story = {
   args: {
-    value: '',
-    placeholder: '1234',
+    ...baseArgs,
     isError: false,
-    maxLength: 4
-  },
-  play: async ({ canvasElement }) => {
-    const input = canvasElement.querySelector('input') as HTMLInputElement;
-    input.focus();
+    maxLength: 4,
+    autoFocus: true
   }
 };

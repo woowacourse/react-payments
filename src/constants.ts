@@ -3,7 +3,7 @@ export const INITIAL_CARD_NUMBER = {
   second: { value: '', errorMessage: '' },
   third: { value: '', errorMessage: '' },
   fourth: { value: '', errorMessage: '' }
-} as const;
+};
 
 export const INITIAL_EXPIRATION = { year: { value: '', errorMessage: '' }, month: { value: '', errorMessage: '' } };
 

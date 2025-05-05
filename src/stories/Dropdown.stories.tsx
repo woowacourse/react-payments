@@ -1,21 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { useState } from 'react';
 import Dropdown from '../components/Dropdown/Dropdown';
+import { CARD_COMPANY } from '../constants';
 
-const meta: Meta<typeof Dropdown> = {
-  title: 'Common/Dropdown',
+type CardCompany = (typeof CARD_COMPANY)[number];
+
+const meta: Meta<typeof Dropdown<CardCompany>> = {
+  title: 'Components/Dropdown',
   component: Dropdown,
-  tags: ['autodocs'],
-  args: {
-    list: ['BC카드', '신한카드', '카카오뱅크', '국민카드', '우리카드'],
-    placeholder: '카드를 선택해주세요'
-  },
-  argTypes: {
-    list: { control: 'object' },
-    placeholder: { control: 'text' },
-    onSelect: { action: 'onSelect' }
-  }
+  tags: ['autodocs']
 };
 
 export default meta;
@@ -23,19 +16,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => {
-    const [selectedValue, setSelectedValue] = useState('');
+  render: () => {
+    const [selected, setSelected] = useState<CardCompany | null>(null);
 
-    return (
-      <Dropdown
-        list={args.list}
-        placeholder={args.placeholder}
-        value={selectedValue}
-        onSelect={(company) => {
-          args.onSelect?.(company);
-          setSelectedValue(company);
-        }}
-      />
-    );
+    return <Dropdown list={CARD_COMPANY} value={selected} onSelect={setSelected} placeholder="카드사를 선택해주세요" />;
   }
 };

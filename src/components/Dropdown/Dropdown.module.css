@@ -29,6 +29,8 @@
   border: 1px solid var(--color-gray-10);
   border-radius: 4px;
   background-color: var(--color-white);
+  overflow-y: auto;
+  max-height: 200px;
 }
 
 .item {
