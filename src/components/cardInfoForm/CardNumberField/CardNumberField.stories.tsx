@@ -24,7 +24,7 @@ export const Default: Story = {
       handleChangeCardNumber,
       errorMessage: cardNumberErrorMessage,
       setInputRef,
-    } = useCardNumber();
+    } = useCardNumber({ onComplete: () => {} });
 
     return (
       <CardNumberField
