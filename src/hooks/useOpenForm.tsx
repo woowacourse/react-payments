@@ -24,11 +24,11 @@ const useOpenForm = () => {
     return OPEN_SEQUENCE[OPEN_SEQUENCE.indexOf(currentForm) + 1];
   };
 
-  const isFormOpen = (currentForm: FormKeyType) => {
+  const isFormOpened = (currentForm: FormKeyType) => {
     return openForm[currentForm];
   };
 
-  return { isFormOpen, openNextForm, openForm };
+  return { isFormOpened, openNextForm, openForm };
 };
 
 export default useOpenForm;

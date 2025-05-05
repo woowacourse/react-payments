@@ -9,23 +9,31 @@ export type CvcNumberStateType = {
   cvcNumberState: string[];
   dispatch: Dispatch<Action>;
   openNextForm: () => void;
+  errorState: boolean[];
+  dispatchError: Dispatch<ErrorAction>;
 };
 
 export type ExpirationDateStateType = {
   expirationDateState: string[];
   dispatch: Dispatch<Action>;
   openNextForm: () => void;
+  errorState: boolean[];
+  dispatchError: Dispatch<ErrorAction>;
 };
 
 export type UniqueNumberStateType = {
   uniqueNumberState: string[];
   dispatch: Dispatch<Action>;
   openNextForm: () => void;
+  errorState: boolean[];
+  dispatchError: Dispatch<ErrorAction>;
 };
 
 export type PasswordStateType = {
   passwordState: string[];
   dispatch: Dispatch<Action>;
+  errorState: boolean[];
+  dispatchError: Dispatch<ErrorAction>;
 };
 
 export type CardIssuerStateType = {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Action } from "../types/CardInformationType";
+import { Action, ErrorAction } from "../types/CardInformationType";
 import { Dispatch } from "react";
 import isMonth from "../utils/isMonth";
 import isTypeNumber from "../utils/isTypeNumber";
@@ -9,13 +9,14 @@ const useExpirationDate = ({
   inputRefs,
   openNextForm,
   expirationDateState,
+  dispatchError,
 }: {
   dispatch: Dispatch<Action>;
   inputRefs: React.RefObject<(HTMLInputElement | null)[]>;
   openNextForm: () => void;
   expirationDateState: string[];
+  dispatchError: Dispatch<ErrorAction>;
 }) => {
-  const [error, setError] = useState([false, false]);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (v: string, index: number) => {
@@ -24,15 +25,11 @@ const useExpirationDate = ({
     const currentMonth = current.getMonth() + 1;
 
     if (!isTypeNumber(v)) {
-      const updatedError = [...error];
-      updatedError[index] = true;
-      setError(updatedError);
+      dispatchError({ type: "SET_EXPIRATION_DATE_ERROR", index, value: true });
       setErrorMessage("숫자만 입력해 주세요.");
       return;
     }
-    const updatedError = [...error];
-    updatedError[index] = false;
-    setError(updatedError);
+    dispatchError({ type: "SET_EXPIRATION_DATE_ERROR", index, value: false });
     dispatch({ type: "SET_EXPIRATION_DATE", index: index, value: v });
 
     if (index === 0) {
@@ -40,17 +37,13 @@ const useExpirationDate = ({
       const month = Number(v);
 
       if (!isMonth(Number(v))) {
-        const updatedError = [...error];
-        updatedError[index] = true;
-        setError(updatedError);
+        dispatchError({ type: "SET_EXPIRATION_DATE_ERROR", index, value: true });
         setErrorMessage("1~12 사이의 숫자를 입력해 주세요.");
         return;
       }
 
       if (year !== "" && Number(year) === currentYear && month < currentMonth) {
-        const updatedError = [...error];
-        updatedError[index] = true;
-        setError(updatedError);
+        dispatchError({ type: "SET_EXPIRATION_DATE_ERROR", index, value: true });
         setErrorMessage("유효 기간이 만료된 카드입니다.");
         return;
       }
@@ -65,17 +58,13 @@ const useExpirationDate = ({
       const month = expirationDateState[0];
 
       if (year < currentYear) {
-        const updatedError = [...error];
-        updatedError[index] = true;
-        setError(updatedError);
+        dispatchError({ type: "SET_EXPIRATION_DATE_ERROR", index, value: true });
         setErrorMessage("유효 기간이 만료된 카드입니다.");
         return;
       }
 
       if (month !== "" && currentMonth > Number(month) && year === currentYear) {
-        const updatedError = [...error];
-        updatedError[index] = true;
-        setError(updatedError);
+        dispatchError({ type: "SET_EXPIRATION_DATE_ERROR", index, value: true });
         setErrorMessage("유효 기간이 만료된 카드입니다.");
         return;
       }
@@ -91,7 +80,7 @@ const useExpirationDate = ({
     return;
   };
 
-  return { error, errorMessage, handleChange };
+  return { errorMessage, handleChange };
 };
 
 export default useExpirationDate;

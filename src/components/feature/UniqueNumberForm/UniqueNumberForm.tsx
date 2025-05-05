@@ -6,15 +6,23 @@ import uniqueNumberSpec from "./uniqueNumberSpec";
 import useInputFocus from "../../../hooks/useInputFocus";
 import useUniqueNumber from "../../../hooks/useUniqueNumber";
 
-const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueNumberStateType) => {
+const UniqueNumberForm = ({
+  uniqueNumberState,
+  dispatch,
+  openNextForm,
+  errorState,
+  dispatchError,
+}: UniqueNumberStateType) => {
   const { title, description, inputFieldData } = uniqueNumberSpec;
   const { label, inputNumber, inputProps } = inputFieldData;
   const inputRefs = useInputFocus();
-  const { error, errorMessage, handleChange } = useUniqueNumber({
+  const { errorMessage, handleChange } = useUniqueNumber({
     dispatch,
     inputRefs,
     openNextForm,
     uniqueNumberState,
+    errorState,
+    dispatchError,
   });
 
   return (
@@ -36,7 +44,7 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueN
                 value={uniqueNumberState[index]}
                 maxLength={maxLength}
                 onChange={(e) => handleChange(e.target.value, index)}
-                error={error[index]}
+                error={errorState[index]}
                 type={index > 1 ? "password" : "text"}
                 ref={(el) => {
                   inputRefs.current[index] = el;
@@ -46,7 +54,7 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueN
           })}
         </div>
 
-        <div css={errorTextWrapperStyle(error.some((bool) => bool === true))}>
+        <div css={errorTextWrapperStyle(errorState.some((bool) => bool === true))}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

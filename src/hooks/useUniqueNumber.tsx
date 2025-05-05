@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Action } from "../types/CardInformationType";
+import { Action, ErrorAction } from "../types/CardInformationType";
 import { Dispatch } from "react";
 import isSameLength from "../utils/isSameLength";
 import isTypeNumber from "../utils/isTypeNumber";
@@ -9,39 +9,34 @@ const useUniqueNumber = ({
   inputRefs,
   openNextForm,
   uniqueNumberState,
+  errorState,
+  dispatchError,
 }: {
   dispatch: Dispatch<Action>;
   inputRefs: React.RefObject<(HTMLInputElement | null)[]>;
   openNextForm: () => void;
   uniqueNumberState: string[];
+  errorState: boolean[];
+  dispatchError: Dispatch<ErrorAction>;
 }) => {
-  const [error, setError] = useState([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (v: string, index: number) => {
     if (!isTypeNumber(v)) {
-      const updatedError = [...error];
-      updatedError[index] = true;
-      setError(updatedError);
+      dispatchError({ type: "SET_UNIQUE_NUMBER_ERROR", index, value: true });
       setErrorMessage("숫자만 입력해 주세요.");
       return;
     }
-    const updatedError = [...error];
-    updatedError[index] = false;
-    setError(updatedError);
+    dispatchError({ type: "SET_UNIQUE_NUMBER_ERROR", index, value: false });
 
     if (isSameLength(v, 4)) {
-      const updatedError = [...error];
-      updatedError[index] = false;
-      setError(updatedError);
+      dispatchError({ type: "SET_UNIQUE_NUMBER_ERROR", index, value: false });
 
-      if (updatedError.every((v) => !v) && uniqueNumberState.every((v) => v !== "")) {
+      if (errorState.every((v, i) => i === index || !v) && uniqueNumberState.every((v, i) => i === index || v !== "")) {
         openNextForm();
       }
     } else {
-      const updatedError = [...error];
-      updatedError[index] = true;
-      setError(updatedError);
+      dispatchError({ type: "SET_UNIQUE_NUMBER_ERROR", index, value: true });
       setErrorMessage("4글자를 입력해 주세요.");
     }
 
@@ -52,7 +47,7 @@ const useUniqueNumber = ({
     }
   };
 
-  return { error, errorMessage, handleChange };
+  return { errorMessage, handleChange };
 };
 
 export default useUniqueNumber;

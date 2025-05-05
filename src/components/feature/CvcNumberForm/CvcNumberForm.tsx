@@ -6,11 +6,11 @@ import cvcNumberSpec from "./cvcNumberSpec";
 import useInputFocus from "../../../hooks/useInputFocus";
 import useCvcNumber from "../../../hooks/useCvcNumber";
 
-const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm }: CvcNumberStateType) => {
+const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm, errorState, dispatchError }: CvcNumberStateType) => {
   const { title, description, inputFieldData } = cvcNumberSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
-  const { error, errorMessage, handleChange } = useCvcNumber(dispatch, openNextForm);
+  const { errorMessage, handleChange } = useCvcNumber(dispatch, openNextForm, dispatchError);
   const inputRefs = useInputFocus();
 
   return (
@@ -28,13 +28,13 @@ const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm }: CvcNumberStat
             maxLength={maxLength}
             value={cvcNumberState[0]}
             onChange={(e) => handleChange(e.target.value)}
-            error={error}
+            error={errorState[0]}
             ref={(el) => {
               inputRefs.current[0] = el;
             }}
           />
         </div>
-        <div css={errorTextWrapperStyle(error)}>
+        <div css={errorTextWrapperStyle(errorState[0])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

@@ -6,12 +6,12 @@ import { css } from "@emotion/react";
 import useInputFocus from "../../../hooks/useInputFocus";
 import usePassword from "../../../hooks/usePassword";
 
-const PasswordForm = ({ passwordState, dispatch }: PasswordStateType) => {
+const PasswordForm = ({ passwordState, dispatch, errorState, dispatchError }: PasswordStateType) => {
   const { title, description, inputFieldData } = passwordSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
   const inputRefs = useInputFocus();
-  const { error, errorMessage, handleChange } = usePassword(dispatch);
+  const { errorMessage, handleChange } = usePassword(dispatch, dispatchError);
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -28,14 +28,14 @@ const PasswordForm = ({ passwordState, dispatch }: PasswordStateType) => {
             maxLength={maxLength}
             value={passwordState[0]}
             onChange={(e) => handleChange(e.target.value)}
-            error={error}
+            error={errorState[0]}
             type="password"
             ref={(el) => {
               inputRefs.current[0] = el;
             }}
           />
         </div>
-        <div css={errorTextWrapperStyle(error)}>
+        <div css={errorTextWrapperStyle(errorState[0])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>
