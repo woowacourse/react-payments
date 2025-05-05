@@ -38,7 +38,7 @@ export function useCardFormInputs() {
   );
 
   const checkCardType = (value: string) => {
-    if (value[0] === '4') return 'visa';
+    if (value.startsWith('4')) return 'visa';
     else if (Number(value) >= 51 && Number(value) <= 55) return 'master';
     return null;
   };
