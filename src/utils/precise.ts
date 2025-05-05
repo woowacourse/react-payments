@@ -1,4 +1,4 @@
-export const validatorUtils = {
+export const precise = {
   isNotEmpty: (value: string) => value.trim() !== '',
   isNumber: (value: string) => !Number.isNaN(Number(value)),
   isValidLength: (value: string, length: number) => value.length === length,
@@ -11,17 +11,16 @@ export const validatorUtils = {
     min?: number;
     max?: number;
   }) => value >= min && value <= max,
-  isValidExpirationDate: ({ month, year }: { month: string; year: string }) => {
+  isExpiredDate: ({ month, year }: { month: string; year: string }) => {
     const today = new Date();
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth() + 1;
 
-    const expirationYear = 2000 + Number(year);
-    const expirationMonth = Number(month);
+    const expiryYear = 2000 + Number(year);
+    const expiryMonth = Number(month);
 
-    return (
-      expirationYear > currentYear ||
-      (expirationYear === currentYear && expirationMonth >= currentMonth)
-    );
+    if (expiryYear > currentYear) return false;
+    if (expiryYear === currentYear && expiryMonth >= currentMonth) return false;
+    return true;
   },
 };

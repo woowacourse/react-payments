@@ -1,0 +1,49 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import NumberInput from './NumberInput';
+import { userEvent, expect, within } from '@storybook/test';
+import styles from '../../../common/inputForm/input/Input.module.css';
+import { CardProvider } from '../../../../contexts/CardContext';
+
+const meta = {
+  title: 'NumberInput',
+  component: NumberInput,
+  args: {
+    isCardNumberValid: [true, true, true, true],
+    setIsCardNumberValid: () => {},
+  },
+  decorators: [
+    (Story) => (
+      <CardProvider>
+        <Story />
+      </CardProvider>
+    ),
+  ],
+} satisfies Meta<typeof NumberInput>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const firstInput = canvas.getAllByPlaceholderText('1234')[0];
+
+    await userEvent.type(firstInput, '1523');
+    expect(firstInput.className).not.toContain(styles.isNotValid);
+
+    expect(canvas.queryByText('숫자만 입력 가능합니다.')).toBeNull();
+  },
+};
+
+export const Error: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const firstInput = canvas.getAllByPlaceholderText('1234')[0];
+
+    await userEvent.type(firstInput, 'abc');
+    expect(firstInput.className).toContain(styles.isNotValid);
+
+    expect(canvas.getByText('숫자만 입력 가능합니다.')).toBeVisible();
+  },
+};

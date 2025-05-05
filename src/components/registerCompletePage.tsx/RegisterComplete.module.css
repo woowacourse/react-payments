@@ -1,18 +1,23 @@
 .section {
   display: flex;
   width: 100%;
-  justify-content: center;
   height: 100vh;
+  justify-content: center;
 }
 .container {
   width: 390px;
   height: 100%;
-  min-height: fit-content;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   border: 1px solid var(--grey);
   border-radius: 4px;
   padding: 28px;
   gap: 40px;
+}
+
+.goToMainButton {
+  width: 100%;
+  border-radius: 5px;
 }

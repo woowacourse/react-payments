@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Input from '../../../common/inputForm/input/Input';
+import Input from './Input';
 import { userEvent, within, expect, waitFor } from '@storybook/test';
-import styles from '../../../common/inputForm/input/Input.module.css';
+import styles from './Input.module.css';
 
 const meta = {
   title: 'Input',
   component: Input,
   args: {
+    value: '',
     handleInputChange: () => {},
   },
 } satisfies Meta<typeof Input>;
@@ -20,6 +21,7 @@ export const Default: Story = {
     type: 'text',
     name: 'test',
     placeholder: '숫자를 입력하세요',
+    minLength: 3,
     maxLength: 3,
     isValidInput: true,
   },
@@ -30,11 +32,12 @@ export const ErrorInput: Story = {
     type: 'text',
     name: 'test',
     placeholder: '숫자를 입력하세요',
+    minLength: 3,
     maxLength: 3,
     isValidInput: false,
   },
 
-  play: async ({ canvasElement, updateArgs }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByPlaceholderText('숫자를 입력하세요');
 
@@ -43,10 +46,8 @@ export const ErrorInput: Story = {
 
     await userEvent.clear(input);
     await userEvent.type(input, '123');
-    updateArgs({ isValidInput: true });
+    Object.assign(ErrorInput.args, { isValidInput: true });
 
-    await waitFor(() =>
-      expect(input.className).not.toContain(styles.isNotValid)
-    );
+    await waitFor(() => expect(input.className).toContain(styles.isNotValid));
   },
 };

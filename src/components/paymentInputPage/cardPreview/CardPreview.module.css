@@ -35,13 +35,41 @@
   border-radius: 4px;
 }
 
-.pCardNumber {
+.cardNumber {
   width: 40px;
   letter-spacing: 2px;
 }
 
-.pMaskingCardNumber {
+.maskingCardNumber {
   font-size: 21px;
   letter-spacing: -8px;
   line-height: 0.7;
+}
+
+.lotte {
+  background-color: var(--lotte);
+}
+
+.shinhan {
+  background-color: var(--shinhan);
+}
+
+.kakao {
+  background-color: var(--kakao);
+}
+
+.hyundai {
+  background-color: var(--hyundai);
+}
+
+.woori {
+  background-color: var(--woori);
+}
+
+.hana {
+  background-color: var(--hana);
+}
+
+.kb {
+  background-color: var(--kb);
 }

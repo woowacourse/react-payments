@@ -1,0 +1,65 @@
+.selectBox {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.selectedInputContainer {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.selectedInput {
+  width: 100%;
+  padding: 12px 8px;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  color: var(--black);
+  &::placeholder {
+    color: var(--grey);
+  }
+
+  &:focus {
+    border: 1px solid var(--black);
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.selectedIcon {
+  position: absolute;
+  top: 18px;
+  right: 11px;
+}
+
+.optionBox {
+  position: absolute;
+  top: 110%;
+
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  background-color: var(--white);
+  color: var(--grey-2);
+  &::placeholder {
+    color: var(--grey);
+  }
+}
+
+.optionList {
+  width: 100%;
+  padding: 8px 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  display: none;
+}

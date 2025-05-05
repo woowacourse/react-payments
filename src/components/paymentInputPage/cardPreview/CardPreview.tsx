@@ -1,18 +1,16 @@
-import { ExpirationDateType } from '../PaymentInputPage';
+import useCardContext from '../../../hooks/useCardContext';
+import { ISSUER_LIST } from '../cardInputForm/cardInput/IssuerSelector';
 import styles from './CardPreview.module.css';
 
-export type CardInformationType = {
-  cardNumbers: string[];
-  expirationDate: ExpirationDateType;
+export const BRAND_IMAGE = {
+  visa: `${import.meta.env.BASE_URL}/Visa.png`,
+  master: `${import.meta.env.BASE_URL}/Mastercard.png`,
 };
 
-const BRAND_IMAGE = {
-  visa: './Visa.png',
-  master: './Mastercard.png',
-};
-
-function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
-  const inputCardNumber = cardNumbers.join('');
+function CardPreview() {
+  const { cardNumbers, cardIssuer, expiryDate } = useCardContext();
+  const issuerClassName = ISSUER_LIST.get(cardIssuer);
+  const inputCardNumber = cardNumbers[0];
   const brand = determineBrand(inputCardNumber);
 
   const displayCardNumbers = cardNumbers.map((number, index) => {
@@ -37,20 +35,29 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
   }
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        issuerClassName ? styles[issuerClassName] : ''
+      }`}
+    >
       <div className={styles.logoContainer}>
         <div className={styles.goldBox}></div>
 
         {brand === '' ? null : (
-          <img src={BRAND_IMAGE[brand]} className={styles.logoBrand} />
+          <img
+            src={BRAND_IMAGE[brand]}
+            alt={`${brand} 로고 이미지`}
+            className={styles.logoBrand}
+          />
         )}
       </div>
       <div className={`${styles.cardNumberBox} tx-md`}>
         {displayCardNumbers.map((number, index) => {
           return (
             <p
-              className={`${styles.pCardNumber} ${
-                index >= 2 ? styles.pMaskingCardNumber : ''
+              key={`card-number-${index}`}
+              className={`${styles.cardNumber} ${
+                index >= 2 ? styles.maskingCardNumber : ''
               }`}
             >
               {number}
@@ -58,9 +65,9 @@ function CardPreview({ cardNumbers, expirationDate }: CardInformationType) {
           );
         })}
       </div>
-      <p className={`${styles.pCardNumber} tx-md`}>
-        {expirationDate.month !== '' || expirationDate.year !== ''
-          ? `${expirationDate.month}/${expirationDate.year}`
+      <p className={`${styles.cardNumber} tx-md`}>
+        {expiryDate.month !== '' || expiryDate.year !== ''
+          ? `${expiryDate.month}/${expiryDate.year}`
           : ''}
       </p>
     </div>
