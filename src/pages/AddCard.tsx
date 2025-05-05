@@ -109,8 +109,8 @@ function AddCard() {
               month: Boolean(cardValidityPeriodErrorMessage.month),
               year: Boolean(cardValidityPeriodErrorMessage.year),
             }}
-            handleChangeMonth={handleChangeMonth}
-            handleChangeYear={handleChangeYear}
+            onChangeMonth={handleChangeMonth}
+            onChangeYear={handleChangeYear}
             setCardValidityPeriodInputRef={setCardValidityPeriodInputRef}
           />
         </CardInputSection>

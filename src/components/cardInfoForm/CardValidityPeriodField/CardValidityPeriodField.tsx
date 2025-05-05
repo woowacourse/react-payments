@@ -14,8 +14,8 @@ type ErrorStateObjectType = {
 interface CardValidityPeriodFieldProps {
   cardValidityPeriod: CardValidityPeriodType;
   errorStateObject: ErrorStateObjectType;
-  handleChangeMonth: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeMonth: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setCardValidityPeriodInputRef: (
     el: HTMLInputElement | null,
     index: number,
@@ -25,8 +25,8 @@ interface CardValidityPeriodFieldProps {
 function CardValidityPeriodField({
   cardValidityPeriod,
   errorStateObject,
-  handleChangeMonth,
-  handleChangeYear,
+  onChangeMonth,
+  onChangeYear,
   setCardValidityPeriodInputRef,
 }: CardValidityPeriodFieldProps) {
   const { month, year } = cardValidityPeriod;
@@ -45,7 +45,7 @@ function CardValidityPeriodField({
           id="cardValidityPeriod-month"
           value={month}
           aria-labelledby="cardValidityPeriod"
-          onChange={handleChangeMonth}
+          onChange={onChangeMonth}
           placeholder="MM"
           min={0}
           max={99}
@@ -59,7 +59,7 @@ function CardValidityPeriodField({
           id="cardValidityPeriod-year"
           value={year}
           aria-labelledby="cardValidityPeriod"
-          onChange={handleChangeYear}
+          onChange={onChangeYear}
           placeholder="YY"
           min={0}
           max={99}
