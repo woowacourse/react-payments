@@ -10,8 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "prettier . --write",
-    "deploy": "vite build --minify=false && npx gh-pages -d dist"
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
   "homepage": "https://jin123457.github.io/react-payments",
   "dependencies": {
