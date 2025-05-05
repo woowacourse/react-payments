@@ -1,8 +1,8 @@
 import CardBrand from './CardBrand';
 import type { Meta } from '@storybook/react';
-import { useState } from 'storybook/internal/preview-api';
-import { useControlledCardBrand } from './hooks/useControlledCardBrand';
-import { CardBrandType } from './types';
+import { AddCardFormContext } from '../../../pages/AddCard/context/useCardFormContext';
+import { useControlledAddCardState } from '../../../pages/AddCard/hooks/useControlledAddCardState';
+import { AddCardFormProps } from '../../../pages/AddCard/types';
 
 const meta = {
   title: 'card/CardBrand',
@@ -10,15 +10,11 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => {
-      const { cardBrandTypeState, handleDropdownChange } = useControlledCardBrand();
-
+      const addFormState = useControlledAddCardState();
       return (
-        <Story
-          args={{
-            cardBrandTypeState,
-            handleDropdownChange,
-          }}
-        />
+        <AddCardFormContext.Provider value={addFormState}>
+          <Story />
+        </AddCardFormContext.Provider>
       );
     },
   ],
@@ -26,14 +22,23 @@ const meta = {
 
 export default meta;
 
-export const Default = {};
+export const Default = {
+  name: '초기 상태의 UI',
+};
 
-export const Valid = {
+export const valid = {
+  name: '국민카드를 선택한 후의 UI',
   render: function Render() {
-    const { handleDropdownChange } = useControlledCardBrand();
+    const addFormState = useControlledAddCardState();
+    const mockData = {
+      ...addFormState,
+      cardBrandTypeState: '국민카드',
+    };
 
-    const [cardBrandTypeState] = useState<CardBrandType>('BC카드');
-
-    return <CardBrand cardBrandTypeState={cardBrandTypeState} handleDropdownChange={handleDropdownChange} />;
+    return (
+      <AddCardFormContext.Provider value={mockData as AddCardFormProps}>
+        <CardBrand />
+      </AddCardFormContext.Provider>
+    );
   },
 };

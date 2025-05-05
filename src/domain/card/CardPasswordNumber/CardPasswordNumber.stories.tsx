@@ -1,8 +1,8 @@
 import CardPasswordNumber from './CardPasswordNumber';
 import type { Meta } from '@storybook/react';
-import { useState } from '@storybook/preview-api';
 import { ERROR_MESSAGE } from '../../../constants';
-import { useControlledCardPasswordNumber } from './hooks/useControlledCardPasswordNumber';
+import { useControlledAddCardState } from '../../../pages/AddCard/hooks/useControlledAddCardState';
+import { AddCardFormContext } from '../../../pages/AddCard/context/useCardFormContext';
 
 const meta = {
   title: 'card/CardPasswordNumber',
@@ -10,17 +10,12 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => {
-      const { cardPassword, cardPasswordErrorMessage, handleCardPasswordInputChange } =
-        useControlledCardPasswordNumber();
+      const addFormState = useControlledAddCardState();
 
       return (
-        <Story
-          args={{
-            cardPassword,
-            cardPasswordErrorMessage,
-            handleCardPasswordInputChange,
-          }}
-        />
+        <AddCardFormContext.Provider value={addFormState}>
+          <Story />
+        </AddCardFormContext.Provider>
       );
     },
   ],
@@ -28,40 +23,40 @@ const meta = {
 
 export default meta;
 
-export const Default = {};
+export const Default = {
+  name: '초기 상태의 UI',
+};
 
 export const Valid = {
+  name: '유효한 카드 비밀번호 입력 후의 UI',
   render: function Render() {
-    const { handleCardPasswordInputChange } = useControlledCardPasswordNumber();
-
-    const [cardPassword] = useState('31');
-
-    const [cardPasswordErrorMessage] = useState('');
+    const addFormState = useControlledAddCardState();
+    const mockData = {
+      ...addFormState,
+      cardPassword: '31',
+    };
 
     return (
-      <CardPasswordNumber
-        cardPassword={cardPassword}
-        cardPasswordErrorMessage={cardPasswordErrorMessage}
-        handleCardPasswordInputChange={handleCardPasswordInputChange}
-      />
+      <AddCardFormContext.Provider value={mockData}>
+        <CardPasswordNumber />
+      </AddCardFormContext.Provider>
     );
   },
 };
 
 export const Error = {
+  name: '유효하지 않은 카드 비밀번호 입력 후의 UI',
   render: function Render() {
-    const { handleCardPasswordInputChange } = useControlledCardPasswordNumber();
-
-    const [cardPassword] = useState('3d');
-
-    const [cardPasswordErrorMessage] = useState(ERROR_MESSAGE.onlyNumber);
-
+    const addFormState = useControlledAddCardState();
+    const mockData = {
+      ...addFormState,
+      cardPassword: '3d',
+      cardPasswordErrorMessage: ERROR_MESSAGE.onlyNumber,
+    };
     return (
-      <CardPasswordNumber
-        cardPassword={cardPassword}
-        cardPasswordErrorMessage={cardPasswordErrorMessage}
-        handleCardPasswordInputChange={handleCardPasswordInputChange}
-      />
+      <AddCardFormContext.Provider value={mockData}>
+        <CardPasswordNumber />
+      </AddCardFormContext.Provider>
     );
   },
 };

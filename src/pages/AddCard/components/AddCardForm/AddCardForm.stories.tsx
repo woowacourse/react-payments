@@ -1,12 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import AddCardForm from './AddCardForm';
+import type { Meta, StoryObj } from '@storybook/react';
 import { CARD_STEPS } from '../../constants';
 import { useState } from 'react';
+import { AddCardFormContext } from '../../context/useCardFormContext';
+import { useControlledAddCardState } from '../../hooks/useControlledAddCardState';
 
 const meta = {
   title: 'Pages/AddCard/AddCardForm',
   component: AddCardForm,
   tags: ['autodocs'],
+  parameters: {
+    initialEntries: [
+      {
+        state: {},
+      },
+    ],
+    docs: {
+      description: {
+        component: '카드 정보 입력 폼 컴포넌트입니다. 각 카드 정보 입력 단계에 따라 다른 UI를 보여줍니다.',
+      },
+    },
+  },
 } satisfies Meta<typeof AddCardForm>;
 
 export default meta;
@@ -14,68 +28,29 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    initialEntries: [
-      {
-        state: {},
-      },
-    ],
-  },
-  args: {
-    addFormState: {
+  name: '마지막 단계까지 다 생성된 UI',
+  render: () => {
+    const addFormState = useControlledAddCardState();
+    const mockData = {
+      ...addFormState,
       cardNumber: {
         first: '1234',
         second: '1234',
         third: '1234',
         fourth: '1234',
       },
-      cardNumberErrorMessage: {
-        first: '',
-        second: '',
-        third: '',
-        fourth: '',
-      },
-      isCardNumberNextStep: true,
       cardBrandTypeState: 'BC카드',
-      isCardBrandNextStep: true,
+      isCardNumberNextStep: true,
       cardExpirationDate: {
         month: '12',
         year: '33',
       },
       isCardExpirationDateNextStep: true,
-      cardExpirationDateErrorMessage: {
-        month: '',
-        year: '',
-      },
       cardCVCNumber: '123',
-      cardCVCNumberErrorMessage: '',
       isCardCVCNumberNextStep: true,
       cardPassword: '12',
-      cardPasswordErrorMessage: '',
       isCardPasswordNextStep: true,
-      handleCardNumberInputChange: () => {},
-      handleDropdownChange: () => {},
-      handleCardExpirationDateInputChange: () => {},
-      handleCardCVCNumberInputChange: () => {},
-      handleCardPasswordInputChange: () => {},
-      cardNumberRefs: {
-        current: {
-          first: null,
-          second: null,
-          third: null,
-          fourth: null,
-        },
-      },
-      cardExpirationDateRefs: {
-        current: {
-          month: null,
-          year: null,
-        },
-      },
-    },
-    _testModeSteps: [],
-  },
-  render: (args) => {
+    };
     const [steps] = useState([
       CARD_STEPS.CARD_PASSWORD,
       CARD_STEPS.CARD_CVC_NUMBER,
@@ -84,6 +59,10 @@ export const Default: Story = {
       CARD_STEPS.CARD_NUMBERS,
     ]);
 
-    return <AddCardForm addFormState={args.addFormState} _testModeSteps={steps} />;
+    return (
+      <AddCardFormContext.Provider value={mockData as any}>
+        <AddCardForm _testModeSteps={steps} />
+      </AddCardFormContext.Provider>
+    );
   },
 };

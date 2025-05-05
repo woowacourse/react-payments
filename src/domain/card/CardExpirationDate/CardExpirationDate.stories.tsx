@@ -1,8 +1,8 @@
 import CardExpirationDate from './CardExpirationDate';
 import type { Meta } from '@storybook/react';
-import { useState } from 'storybook/internal/preview-api';
 import { ERROR_MESSAGE } from '../../../constants';
-import { useControlledCardExpirationDate } from './hooks/useControlledCardExpirationDate';
+import { AddCardFormContext } from '../../../pages/AddCard/context/useCardFormContext';
+import { useControlledAddCardState } from '../../../pages/AddCard/hooks/useControlledAddCardState';
 
 const meta = {
   title: 'card/CardExpirationDate',
@@ -10,22 +10,11 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => {
-      const {
-        cardExpirationDate,
-        cardExpirationDateErrorMessage,
-        cardExpirationDateRefs,
-        handleCardExpirationDateInputChange,
-      } = useControlledCardExpirationDate();
-
+      const addFormState = useControlledAddCardState();
       return (
-        <Story
-          args={{
-            cardExpirationDateRefs,
-            cardExpirationDate,
-            cardExpirationDateErrorMessage,
-            handleCardExpirationDateInputChange,
-          }}
-        />
+        <AddCardFormContext.Provider value={addFormState}>
+          <Story />
+        </AddCardFormContext.Provider>
       );
     },
   ],
@@ -33,54 +22,50 @@ const meta = {
 
 export default meta;
 
-export const Default = {};
+export const Default = {
+  name: '초기 상태의 UI',
+};
 
 export const Valid = {
+  name: '유효한 카드 만료일 입력 후의 UI',
   render: function Render() {
-    const { cardExpirationDateRefs, handleCardExpirationDateInputChange } = useControlledCardExpirationDate();
-
-    const [cardExpirationDate] = useState({
-      month: '12',
-      year: '25',
-    });
-
-    const [cardExpirationDateErrorMessage] = useState({
-      month: '',
-      year: '',
-    });
+    const addFormState = useControlledAddCardState();
+    const mockData = {
+      ...addFormState,
+      cardExpirationDate: {
+        month: '12',
+        year: '25',
+      },
+    };
 
     return (
-      <CardExpirationDate
-        cardExpirationDateRefs={cardExpirationDateRefs}
-        cardExpirationDate={cardExpirationDate}
-        cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-        handleCardExpirationDateInputChange={handleCardExpirationDateInputChange}
-      />
+      <AddCardFormContext.Provider value={mockData}>
+        <CardExpirationDate />
+      </AddCardFormContext.Provider>
     );
   },
 };
 
 export const Error = {
+  name: '유효하지 않은 카드 만료일 입력 후의 UI',
   render: function Render() {
-    const { cardExpirationDateRefs, handleCardExpirationDateInputChange } = useControlledCardExpirationDate();
-
-    const [cardExpirationDate] = useState({
-      month: '13',
-      year: '24',
-    });
-
-    const [cardExpirationDateErrorMessage] = useState({
-      month: ERROR_MESSAGE.validMonth,
-      year: ERROR_MESSAGE.pastYear,
-    });
+    const addFormState = useControlledAddCardState();
+    const mockData = {
+      ...addFormState,
+      cardExpirationDate: {
+        month: '13',
+        year: '24',
+      },
+      cardExpirationDateErrorMessage: {
+        month: ERROR_MESSAGE.validMonth,
+        year: ERROR_MESSAGE.pastYear,
+      },
+    };
 
     return (
-      <CardExpirationDate
-        cardExpirationDateRefs={cardExpirationDateRefs}
-        cardExpirationDate={cardExpirationDate}
-        cardExpirationDateErrorMessage={cardExpirationDateErrorMessage}
-        handleCardExpirationDateInputChange={handleCardExpirationDateInputChange}
-      />
+      <AddCardFormContext.Provider value={mockData}>
+        <CardExpirationDate />
+      </AddCardFormContext.Provider>
     );
   },
 };

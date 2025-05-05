@@ -1,8 +1,8 @@
 import CardCVCNumber from './CardCVCNumber';
 import type { Meta } from '@storybook/react';
-import { useState } from '@storybook/preview-api';
 import { ERROR_MESSAGE } from '../../../constants';
-import { useControlledCardCVCNumber } from './hooks/useControlledCardCVCNumber';
+import { AddCardFormContext } from '../../../pages/AddCard/context/useCardFormContext';
+import { useControlledAddCardState } from '../../../pages/AddCard/hooks/useControlledAddCardState';
 
 const meta = {
   title: 'card/CardCVCNumber',
@@ -10,16 +10,12 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => {
-      const { cardCVCNumber, cardCVCNumberErrorMessage, handleCardCVCNumberInputChange } = useControlledCardCVCNumber();
+      const addFormState = useControlledAddCardState();
 
       return (
-        <Story
-          args={{
-            cardCVCNumber,
-            cardCVCNumberErrorMessage,
-            handleCardCVCNumberInputChange,
-          }}
-        />
+        <AddCardFormContext.Provider value={addFormState}>
+          <Story />
+        </AddCardFormContext.Provider>
       );
     },
   ],
@@ -27,40 +23,41 @@ const meta = {
 
 export default meta;
 
-export const Default = {};
+export const Default = {
+  name: '초기 상태의 UI',
+};
 
 export const Valid = {
+  name: '유효한 CVC 번호 입력 후의 UI',
   render: function Render() {
-    const { handleCardCVCNumberInputChange } = useControlledCardCVCNumber();
-
-    const [cardCVCNumber] = useState('313');
-
-    const [cardCVCNumberErrorMessage] = useState('');
+    const addFormState = useControlledAddCardState();
+    const mockData = {
+      ...addFormState,
+      cardCVCNumber: '313',
+    };
 
     return (
-      <CardCVCNumber
-        cardCVCNumber={cardCVCNumber}
-        cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
-        handleCardCVCNumberInputChange={handleCardCVCNumberInputChange}
-      />
+      <AddCardFormContext.Provider value={mockData}>
+        <CardCVCNumber />
+      </AddCardFormContext.Provider>
     );
   },
 };
 
 export const Error = {
+  name: '유효하지 않은 CVC 번호 입력 후의 UI',
   render: function Render() {
-    const { handleCardCVCNumberInputChange } = useControlledCardCVCNumber();
-
-    const [cardCVCNumber] = useState('우테코');
-
-    const [cardCVCNumberErrorMessage] = useState(ERROR_MESSAGE.onlyNumber);
+    const addFormState = useControlledAddCardState();
+    const mockData = {
+      ...addFormState,
+      cardCVCNumber: '우테코',
+      cardCVCNumberErrorMessage: ERROR_MESSAGE.onlyNumber,
+    };
 
     return (
-      <CardCVCNumber
-        cardCVCNumber={cardCVCNumber}
-        cardCVCNumberErrorMessage={cardCVCNumberErrorMessage}
-        handleCardCVCNumberInputChange={handleCardCVCNumberInputChange}
-      />
+      <AddCardFormContext.Provider value={mockData}>
+        <CardCVCNumber />
+      </AddCardFormContext.Provider>
     );
   },
 };
