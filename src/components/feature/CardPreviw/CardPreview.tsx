@@ -6,6 +6,10 @@ import {
   ExpirationDateInputType,
 } from '../../../config/inputField';
 import { CardType } from '../../../config/card';
+import {
+  CARD_ISSUER_COLORS,
+  DEFAULT_CARD_COLOR,
+} from '../../../constants/cardIssuerColors';
 
 interface CardPreviewProps {
   cardNumberInputValue: Record<CardNumberInputType, string>;
@@ -20,20 +24,11 @@ function CardPreview({
   cardType,
   cardIssuer,
 }: CardPreviewProps) {
-  const issuerBackground = {
-    BC카드: '#F04651',
-    신한카드: '#0046FF',
-    카카오뱅크: '#FFE600',
-    현대카드: '#000000',
-    우리카드: '#007BC8',
-    롯데카드: '#ED1C24',
-    하나카드: '#009490',
-    국민카드: '#6A6056',
-  };
-
   return (
     <Card
-      $cardBackground={cardIssuer ? issuerBackground[cardIssuer] : '#333333'}
+      $cardBackground={
+        cardIssuer ? CARD_ISSUER_COLORS[cardIssuer] : DEFAULT_CARD_COLOR
+      }
     >
       <CardChip />
       <CardTypeBadge src={`./img/${cardType}.png`} $cardType={cardType} />
