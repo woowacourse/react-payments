@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import { useNavigate } from 'react-router';
 import Button from '../components/common/Button/Button';
 import { PAGE_URL } from '../constants/pageUrl';
@@ -15,7 +17,7 @@ function Notfound() {
     <Layout>
       유효하지 않은 페이지입니다!
       <Button
-        customStyle={NotFoundButton}
+        css={NotFoundButton}
         text="카드 추가하기"
         type="button"
         onClick={navigateToAddCard}

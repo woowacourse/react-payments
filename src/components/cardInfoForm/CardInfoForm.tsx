@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import Button from '../common/Button/Button';
@@ -54,7 +56,7 @@ function CardInfoForm({
       {filteredChildren}
       {canSubmit && (
         <CardFormButtonWrapper>
-          <Button customStyle={cardFormButtonStyle} text="확인" type="submit" />
+          <Button css={cardFormButtonStyle} text="확인" type="submit" />
         </CardFormButtonWrapper>
       )}
     </CardForm>

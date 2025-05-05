@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import { useLocation, useNavigate } from 'react-router';
 import { PAGE_URL } from '../constants/pageUrl';
 import Button from '../components/common/Button/Button';
@@ -35,7 +37,7 @@ function AddCardSuccess() {
           <p>{location.state?.selectedCard}가 등록되었어요.</p>
         </Title>
         <Button
-          customStyle={addCardSuccessButtonStyle}
+          css={addCardSuccessButtonStyle}
           text="확인"
           type="button"
           onClick={navigateToAddCard}
