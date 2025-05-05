@@ -35,21 +35,18 @@ export function useInputError<T extends InputFieldType>({
   ) => {
     setErrorTypes((prevValue) => {
       const currentErrorType = errorTypes[inputName];
+      const set = new Set(currentErrorType).add(errorType);
 
-      if (isError) {
-        const set = new Set(currentErrorType).add(errorType);
-        return {
-          ...prevValue,
-          [inputName]: Array.from(set),
-        };
-      } else {
-        return {
-          ...prevValue,
-          [inputName]: currentErrorType.filter(
-            (errorType) => errorType !== errorType
-          ),
-        };
-      }
+      const newArray = isError
+        ? Array.from(set)
+        : currentErrorType.filter(
+            (currErrorType) => currErrorType !== errorType
+          );
+
+      return {
+        ...prevValue,
+        [inputName]: newArray,
+      };
     });
   };
 
