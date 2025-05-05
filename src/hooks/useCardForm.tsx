@@ -44,7 +44,7 @@ const useCardForm = () => {
     CARD_COMPANY_NAMES,
     CARD_COMPANY_COLORS,
     CARD_COMPANY_PLACEHOLDER,
-    onClickCardCompany,
+    handleClickCardCompany,
     isCardCompanyValid,
   } = useCardCompany({
     onComplete: () => handleNextStep(STEP_NAME.CardValidityPeriod),
@@ -78,7 +78,7 @@ const useCardForm = () => {
       handleChangeMonth,
       handleChangeYear,
       handleChangeCVC,
-      onClickCardCompany,
+      handleClickCardCompany,
       onChangeCardPassword,
     },
 

@@ -34,7 +34,7 @@ const useCardCompany = ({ onComplete }: { onComplete: () => void }) => {
     null,
   );
 
-  const onClickCardCompany = (name: CardCompanyName) => {
+  const handleClickCardCompany = (name: CardCompanyName) => {
     setSelectedCard(name);
 
     if (name === null) {
@@ -52,7 +52,7 @@ const useCardCompany = ({ onComplete }: { onComplete: () => void }) => {
         ? CARD_COMPANY_COLORS['기본']
         : CARD_COMPANY_COLORS[selectedCard],
     CARD_COMPANY_PLACEHOLDER,
-    onClickCardCompany,
+    handleClickCardCompany,
     isCardCompanyValid: selectedCard !== null,
   };
 };

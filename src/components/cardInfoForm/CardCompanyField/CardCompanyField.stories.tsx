@@ -26,14 +26,14 @@ export const Default: Story = {
       '국민카드',
     ],
     CARD_COMPANY_PLACEHOLDER: '카드사를 선택해주세요',
-    onClickCardCompany: () => {},
+    handleClickCardCompany: () => {},
   },
   render: (args) => {
     const {
       selectedCard,
       CARD_COMPANY_NAMES,
       CARD_COMPANY_PLACEHOLDER,
-      onClickCardCompany,
+      handleClickCardCompany,
     } = useCardCompany({ onComplete: () => {} });
 
     return (
@@ -42,7 +42,7 @@ export const Default: Story = {
         selectedCard={selectedCard}
         CARD_COMPANY_NAMES={CARD_COMPANY_NAMES}
         CARD_COMPANY_PLACEHOLDER={CARD_COMPANY_PLACEHOLDER}
-        onClickCardCompany={onClickCardCompany}
+        handleClickCardCompany={handleClickCardCompany}
       />
     );
   },

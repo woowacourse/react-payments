@@ -32,7 +32,7 @@ function AddCard() {
     handleChangeMonth,
     handleChangeYear,
     handleChangeCVC,
-    onClickCardCompany,
+    handleClickCardCompany,
     onChangeCardPassword,
   } = eventHandlers;
 
@@ -92,7 +92,7 @@ function AddCard() {
             selectedCard={selectedCard}
             CARD_COMPANY_NAMES={CARD_COMPANY_NAMES}
             CARD_COMPANY_PLACEHOLDER={CARD_COMPANY_PLACEHOLDER}
-            onClickCardCompany={onClickCardCompany}
+            handleClickCardCompany={handleClickCardCompany}
           />
         </CardInputSection>
         <CardInputSection

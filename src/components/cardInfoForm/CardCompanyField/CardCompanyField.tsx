@@ -5,21 +5,21 @@ interface CardCompanyFieldProps {
   selectedCard: CardCompanyName | null;
   CARD_COMPANY_NAMES: readonly CardCompanyName[];
   CARD_COMPANY_PLACEHOLDER: string;
-  onClickCardCompany: (name: CardCompanyName) => void;
+  handleClickCardCompany: (name: CardCompanyName) => void;
 }
 
 function CardCompanyField({
   selectedCard,
   CARD_COMPANY_NAMES,
   CARD_COMPANY_PLACEHOLDER,
-  onClickCardCompany,
+  handleClickCardCompany,
 }: CardCompanyFieldProps) {
   return (
     <Dropdown<CardCompanyName>
       placeholder={CARD_COMPANY_PLACEHOLDER}
       items={[...CARD_COMPANY_NAMES]}
       selectedValue={selectedCard}
-      onClick={onClickCardCompany}
+      onClick={handleClickCardCompany}
     />
   );
 }
