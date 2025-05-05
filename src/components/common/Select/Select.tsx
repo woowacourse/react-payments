@@ -27,9 +27,9 @@ const Select = ({ optionList, value, setValue }: SelectPropsType) => {
 
       {idDropdownOpened && (
         <ul css={optionListStyle}>
-          {optionList.map((opt, idx) => (
-            <li key={idx} css={optionStyle} onClick={() => handleOption(opt)}>
-              {opt}
+          {optionList.map((option) => (
+            <li key={option} css={optionStyle} onClick={() => handleOption(option)}>
+              {option}
             </li>
           ))}
         </ul>
