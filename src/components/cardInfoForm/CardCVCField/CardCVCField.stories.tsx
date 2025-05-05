@@ -22,7 +22,7 @@ export const Default: Story = {
       cardCVC,
       onChangeCVC,
       errorMessage: cardCVCErrorMessage,
-    } = useCardCVC();
+    } = useCardCVC({ onComplete: () => {} });
 
     return (
       <CardCVCField

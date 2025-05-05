@@ -41,10 +41,10 @@ export const CardNumber: Story = {
   render: (args) => {
     const {
       cardNumber,
-      onChangeCardNumber,
+      handleChangeCardNumber,
       errorMessage: cardNumberErrorMessage,
       setInputRef,
-    } = useCardNumber();
+    } = useCardNumber({ onComplete: () => {} });
 
     return (
       <CardInputSection
@@ -58,7 +58,7 @@ export const CardNumber: Story = {
           errorStateList={cardNumberErrorMessage.map((errorMessage) =>
             Boolean(errorMessage),
           )}
-          onChange={onChangeCardNumber}
+          onChange={handleChangeCardNumber}
           setInputRef={setInputRef}
         />
       </CardInputSection>
@@ -81,7 +81,7 @@ export const CardValidityPeriod: Story = {
       onChangeYear,
       errorMessage: cardValidityPeriodErrorMessage,
       setInputRef: setCardValidityPeriodInputRef,
-    } = useCardValidityPeriod();
+    } = useCardValidityPeriod({ onComplete: () => {} });
     return (
       <CardInputSection
         {...args}
@@ -116,7 +116,7 @@ export const CardCVC: Story = {
       cardCVC,
       onChangeCVC,
       errorMessage: cardCVCErrorMessage,
-    } = useCardCVC();
+    } = useCardCVC({ onComplete: () => {} });
 
     return (
       <CardInputSection

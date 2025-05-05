@@ -21,7 +21,7 @@ export const Default: Story = {
   render: (args) => {
     const {
       cardNumber,
-      onChangeCardNumber,
+      handleChangeCardNumber,
       errorMessage: cardNumberErrorMessage,
       setInputRef,
     } = useCardNumber();
@@ -33,7 +33,7 @@ export const Default: Story = {
         errorStateList={cardNumberErrorMessage.map((errorMessage) =>
           Boolean(errorMessage),
         )}
-        onChange={onChangeCardNumber}
+        onChange={handleChangeCardNumber}
         setInputRef={setInputRef}
       />
     );

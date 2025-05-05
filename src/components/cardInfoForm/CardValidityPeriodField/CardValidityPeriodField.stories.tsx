@@ -26,7 +26,7 @@ export const Default: Story = {
       onChangeYear,
       errorMessage: cardValidityPeriodErrorMessage,
       setInputRef,
-    } = useCardValidityPeriod();
+    } = useCardValidityPeriod({ onComplete: () => {} });
 
     return (
       <CardValidityPeriodField

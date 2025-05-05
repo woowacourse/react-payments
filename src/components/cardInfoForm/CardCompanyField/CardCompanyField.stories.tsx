@@ -34,7 +34,7 @@ export const Default: Story = {
       CARD_COMPANY_NAMES,
       CARD_COMPANY_PLACEHOLDER,
       onClickCardCompany,
-    } = useCardCompany();
+    } = useCardCompany({ onComplete: () => {} });
 
     return (
       <CardCompanyField
