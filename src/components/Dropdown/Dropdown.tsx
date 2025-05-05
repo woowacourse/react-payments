@@ -8,7 +8,7 @@ export default function Dropdown<T extends string>({
   onSelect,
   placeholder
 }: {
-  list: T[];
+  list: readonly T[];
   value: T | null;
   onSelect: (value: T) => void;
   placeholder: string;

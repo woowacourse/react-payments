@@ -14,7 +14,7 @@ export default function CardCompanySection({ company, handleCompanySelect }: Car
         <InputSection.Title title="카드사를 선택해 주세요" />
         <InputSection.SubTitle title="현재 국내 카드사만 가능합니다." />
       </InputSection.TitleWrapper>
-      <Dropdown placeholder="카드사를 선택해주세요" list={[...CARD_COMPANY]} value={company} onSelect={handleCompanySelect} />
+      <Dropdown placeholder="카드사를 선택해주세요" list={CARD_COMPANY} value={company} onSelect={handleCompanySelect} />
     </div>
   );
 }
