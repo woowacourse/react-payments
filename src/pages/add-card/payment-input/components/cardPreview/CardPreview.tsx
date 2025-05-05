@@ -35,11 +35,11 @@ function CardPreview({ cardInfo }: CardPreviewProps) {
 
   return (
     <div
-      style={
-        brandName === ""
-          ? {}
-          : { backgroundColor: CARD_BACKGROUND_COLOR[brandName] }
-      }
+      style={{
+        backgroundColor: brandName
+          ? CARD_BACKGROUND_COLOR[brandName]
+          : undefined,
+      }}
       className={styles.container}
     >
       <div className={styles.logoContainer}>
