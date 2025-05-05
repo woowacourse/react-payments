@@ -31,7 +31,7 @@ function AddCard() {
     handleChangeCardNumber,
     handleChangeMonth,
     handleChangeYear,
-    onChangeCVC,
+    handleChangeCVC,
     onClickCardCompany,
     onChangeCardPassword,
   } = eventHandlers;
@@ -122,7 +122,7 @@ function AddCard() {
           <CardCVCField
             cardCVC={cardCVC}
             hasError={Boolean(cardCVCErrorMessage)}
-            onChange={onChangeCVC}
+            onChange={handleChangeCVC}
           />
         </CardInputSection>
         <CardInputSection

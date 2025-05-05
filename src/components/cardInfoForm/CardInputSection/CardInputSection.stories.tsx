@@ -114,7 +114,7 @@ export const CardCVC: Story = {
   render: (args) => {
     const {
       cardCVC,
-      onChangeCVC,
+      handleChangeCVC,
       errorMessage: cardCVCErrorMessage,
     } = useCardCVC({ onComplete: () => {} });
 
@@ -128,7 +128,7 @@ export const CardCVC: Story = {
         <CardCVCField
           cardCVC={cardCVC}
           hasError={Boolean(cardCVCErrorMessage)}
-          onChange={onChangeCVC}
+          onChange={handleChangeCVC}
         />
       </CardInputSection>
     );

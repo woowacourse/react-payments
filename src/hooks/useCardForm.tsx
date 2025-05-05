@@ -32,7 +32,7 @@ const useCardForm = () => {
 
   const {
     cardCVC,
-    onChangeCVC,
+    handleChangeCVC,
     errorMessage: cardCVCErrorMessage,
     isCardCVCValid,
   } = useCardCVC({
@@ -77,7 +77,7 @@ const useCardForm = () => {
       handleChangeCardNumber,
       handleChangeMonth,
       handleChangeYear,
-      onChangeCVC,
+      handleChangeCVC,
       onClickCardCompany,
       onChangeCardPassword,
     },

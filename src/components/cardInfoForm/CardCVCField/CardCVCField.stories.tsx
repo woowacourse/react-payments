@@ -20,7 +20,7 @@ export const Default: Story = {
   render: (args) => {
     const {
       cardCVC,
-      onChangeCVC,
+      handleChangeCVC,
       errorMessage: cardCVCErrorMessage,
     } = useCardCVC({ onComplete: () => {} });
 
@@ -29,7 +29,7 @@ export const Default: Story = {
         {...args}
         cardCVC={cardCVC}
         hasError={Boolean(cardCVCErrorMessage)}
-        onChange={onChangeCVC}
+        onChange={handleChangeCVC}
       />
     );
   },

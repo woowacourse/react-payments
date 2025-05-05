@@ -5,7 +5,7 @@ const useCardCVC = ({ onComplete }: { onComplete: () => void }) => {
   const [cardCVC, setCardCVC] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
     const isNumeric = value === '' || /^[0-9]+$/.test(value);
@@ -37,7 +37,7 @@ const useCardCVC = ({ onComplete }: { onComplete: () => void }) => {
 
   return {
     cardCVC,
-    onChangeCVC,
+    handleChangeCVC,
     errorMessage,
     isCardCVCValid: cardCVC !== '' && errorMessage === '',
   };
