@@ -1,9 +1,5 @@
 const isSameLength = (v: string, maxLength: number) => {
-  if (v.length === maxLength) {
-    return true;
-  }
-
-  return false;
+  return v.length === maxLength;
 };
 
 export default isSameLength;
