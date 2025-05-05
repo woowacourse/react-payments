@@ -52,7 +52,7 @@ const useCardForm = () => {
 
   const {
     cardPassword,
-    onChangeCardPassword,
+    handleChangeCardPassword,
     errorMessage: cardPasswordErrorMessage,
     isCardPasswordValid,
   } = useCardPassword();
@@ -79,7 +79,7 @@ const useCardForm = () => {
       handleChangeYear,
       handleChangeCVC,
       handleClickCardCompany,
-      onChangeCardPassword,
+      handleChangeCardPassword,
     },
 
     cardCompany: {

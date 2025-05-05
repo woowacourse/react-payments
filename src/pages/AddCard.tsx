@@ -33,7 +33,7 @@ function AddCard() {
     handleChangeYear,
     handleChangeCVC,
     handleClickCardCompany,
-    onChangeCardPassword,
+    handleChangeCardPassword,
   } = eventHandlers;
 
   const {
@@ -134,7 +134,7 @@ function AddCard() {
           <CardPasswordField
             cardPassword={cardPassword}
             hasError={Boolean(cardPasswordErrorMessage)}
-            onChange={onChangeCardPassword}
+            onChange={handleChangeCardPassword}
           />
         </CardInputSection>
       </CardInfoForm>

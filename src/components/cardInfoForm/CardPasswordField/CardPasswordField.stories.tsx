@@ -20,7 +20,7 @@ export const Default: Story = {
   render: (args) => {
     const {
       cardPassword,
-      onChangeCardPassword,
+      handleChangeCardPassword,
       errorMessage: cardPasswordErrorMessage,
     } = useCardPassword();
 
@@ -29,7 +29,7 @@ export const Default: Story = {
         {...args}
         cardPassword={cardPassword}
         hasError={Boolean(cardPasswordErrorMessage)}
-        onChange={onChangeCardPassword}
+        onChange={handleChangeCardPassword}
       />
     );
   },

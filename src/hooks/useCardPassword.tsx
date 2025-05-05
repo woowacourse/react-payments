@@ -9,7 +9,7 @@ const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onChangeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
     const isNumeric = value === '' || /^[0-9]+$/.test(value);
@@ -33,7 +33,7 @@ const useCardPassword = () => {
 
   return {
     cardPassword,
-    onChangeCardPassword,
+    handleChangeCardPassword,
     errorMessage,
     isCardPasswordValid: cardPassword !== '' && errorMessage === '',
   };
