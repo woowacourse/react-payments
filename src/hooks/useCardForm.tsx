@@ -11,7 +11,7 @@ const useCardForm = () => {
 
   const {
     cardNumber,
-    onChangeCardNumber,
+    handleChangeCardNumber,
     errorMessage: cardNumberErrorMessage,
     setInputRef: setCardNumberInputRef,
     isCardNumberValid,
@@ -74,7 +74,7 @@ const useCardForm = () => {
     },
 
     eventHandlers: {
-      onChangeCardNumber,
+      handleChangeCardNumber,
       onChangeMonth,
       onChangeYear,
       onChangeCVC,

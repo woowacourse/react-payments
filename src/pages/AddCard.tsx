@@ -28,7 +28,7 @@ function AddCard() {
   } = formData;
 
   const {
-    onChangeCardNumber,
+    handleChangeCardNumber,
     onChangeMonth,
     onChangeYear,
     onChangeCVC,
@@ -78,7 +78,7 @@ function AddCard() {
             errorStateList={cardNumberErrorMessage.map((errorMessage) =>
               Boolean(errorMessage),
             )}
-            onChange={onChangeCardNumber}
+            onChange={handleChangeCardNumber}
             setInputRef={setCardNumberInputRef}
           />
         </CardInputSection>

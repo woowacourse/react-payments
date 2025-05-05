@@ -23,7 +23,7 @@ const useCardNumber = ({ onComplete }: { onComplete: () => void }) => {
     }
   };
 
-  const onChangeCardNumber = (
+  const handleChangeCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
     n: number,
   ) => {
@@ -84,7 +84,7 @@ const useCardNumber = ({ onComplete }: { onComplete: () => void }) => {
 
   return {
     cardNumber,
-    onChangeCardNumber,
+    handleChangeCardNumber,
     errorMessage,
     setInputRef,
     isCardNumberValid:
