@@ -42,12 +42,12 @@ export default Select;
 
 const selectBoxStyle = css`
   width: 100%;
-  height: 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 7px;
   margin-bottom: 10px;
+  position: relative;
 `;
 
 const selectedValueStyle = (idDropdownOpened: boolean) => css`
@@ -79,6 +79,10 @@ const optionListStyle = css`
   border: 1px solid #acacac;
   border-radius: 5.31px;
   z-index: 200;
+  height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  top: 120%;
 `;
 
 const optionStyle = css`
