@@ -13,7 +13,7 @@ const INPUT_ERROR_TYPE: Record<FieldName, ErrorType> = {
   password: 'shortPasswordSegment',
 };
 
-const INPUT_FIELD_LENGTH: Record<FieldName, number> = {
+const FIELD_UNIT_COUNT: Record<FieldName, number> = {
   cardNumber: 4,
   CVC: 1,
   expirationDate: 2,
@@ -39,7 +39,7 @@ export function useInputFieldHandler<T extends InputFieldType>({
   setInputValue,
 }: useInputFieldHandlerProps<T>) {
   const maxLength = INPUT_FIELD_MAX_LENGTH[fieldName];
-  const inputFieldLength = INPUT_FIELD_LENGTH[fieldName];
+  const inputFieldLength = FIELD_UNIT_COUNT[fieldName];
 
   const onChange = ({
     name,
