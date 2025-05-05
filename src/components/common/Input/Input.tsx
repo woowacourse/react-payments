@@ -1,26 +1,23 @@
 import { css } from "@emotion/react";
 import { forwardRef } from "react";
+import { InputHTMLAttributes } from "react";
 
 type InputProps = {
-  placeholder: string;
-  maxLength: number;
-  value: string;
   error: boolean;
-  onChange: (value: string) => void;
-  type?: string;
-};
+} & InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ placeholder, maxLength, value, error, onChange, type = "text" }, ref) => {
+  ({ placeholder, maxLength, value, error, onChange, type = "text", ...rest }, ref) => {
     return (
       <input
         ref={ref}
         css={inputStyle(error)}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         value={value}
         placeholder={placeholder}
         maxLength={maxLength}
         type={type}
+        {...rest}
       />
     );
   },

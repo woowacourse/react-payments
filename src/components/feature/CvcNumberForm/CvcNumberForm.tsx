@@ -27,7 +27,7 @@ const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm }: CvcNumberStat
             placeholder={placeholder[0]}
             maxLength={maxLength}
             value={cvcNumberState[0]}
-            onChange={(v) => handleChange(v)}
+            onChange={(e) => handleChange(e.target.value)}
             error={error}
             ref={(el) => {
               inputRefs.current[0] = el;

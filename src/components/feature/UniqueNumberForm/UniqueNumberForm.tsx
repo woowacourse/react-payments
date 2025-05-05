@@ -35,7 +35,7 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch, openNextForm }: UniqueN
                 placeholder={placeholder[index]}
                 value={uniqueNumberState[index]}
                 maxLength={maxLength}
-                onChange={(v) => handleChange(v, index)}
+                onChange={(e) => handleChange(e.target.value, index)}
                 error={error[index]}
                 type={index > 1 ? "password" : "text"}
                 ref={(el) => {

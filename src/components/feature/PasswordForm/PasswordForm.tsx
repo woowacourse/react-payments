@@ -27,7 +27,7 @@ const PasswordForm = ({ passwordState, dispatch }: PasswordStateType) => {
             placeholder={placeholder[0]}
             maxLength={maxLength}
             value={passwordState[0]}
-            onChange={(v) => handleChange(v)}
+            onChange={(e) => handleChange(e.target.value)}
             error={error}
             type="password"
             ref={(el) => {

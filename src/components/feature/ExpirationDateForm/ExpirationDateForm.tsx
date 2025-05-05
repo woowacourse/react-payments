@@ -35,7 +35,7 @@ const ExpirationDateForm = ({ expirationDateState, dispatch, openNextForm }: Exp
                 key={index}
                 placeholder={placeholder[index]}
                 value={expirationDateState[index]}
-                onChange={(v) => handleChange(v, index)}
+                onChange={(e) => handleChange(e.target.value, index)}
                 maxLength={maxLength}
                 error={error[index]}
                 ref={(el) => {
