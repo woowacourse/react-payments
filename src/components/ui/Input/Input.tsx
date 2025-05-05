@@ -1,10 +1,11 @@
 import { ChangeEvent, ComponentProps } from 'react';
 import styled from 'styled-components';
+import { InputFieldType } from '../../../config/inputField';
 
 interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   isError?: boolean;
   inputType: 'number' | 'text' | 'password';
-  onChange: ({ name, value }: { name: string; value: string }) => void;
+  onChange: ({ name, value }: { name: InputFieldType; value: string }) => void;
 }
 
 function Input({
@@ -23,10 +24,10 @@ function Input({
 
     if (inputType === 'number') {
       const numericValue = value.replace(/[^0-9]/g, '');
-      return onChange({ value: numericValue, name });
+      return onChange({ value: numericValue, name: name as InputFieldType });
     }
 
-    return onChange({ value, name });
+    return onChange({ value, name: name as InputFieldType });
   };
 
   return (

@@ -41,7 +41,13 @@ export function useInputFieldHandler<T extends InputFieldType>({
   const maxLength = INPUT_FIELD_MAX_LENGTH[fieldName];
   const inputFieldLength = INPUT_FIELD_LENGTH[fieldName];
 
-  const onChange = ({ name, value }: { name: string; value: string }) => {
+  const onChange = ({
+    name,
+    value,
+  }: {
+    name: InputFieldType;
+    value: string;
+  }) => {
     if (value.length > maxLength) return;
     if (
       fieldName === 'expirationDate' &&

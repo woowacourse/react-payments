@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {
   CARD_NUMBER_INPUT_TYPE,
   CardNumberInputType,
+  InputFieldType,
 } from '../../../../config/inputField';
 import { useFieldCompletion } from '../../../../hooks/useFieldCompletion';
 import { useInputError } from '../../../../hooks/useInputError';
@@ -13,7 +14,7 @@ import { InputFieldProps } from '../InputfieldProps';
 import InputSection from '../../../ui/InputSection/InputSection';
 
 interface onCardNumberChangeProps {
-  name: string;
+  name: InputFieldType;
   value: string;
 }
 
