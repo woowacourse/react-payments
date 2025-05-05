@@ -1,8 +1,7 @@
 import { ComponentProps } from 'react';
 import styles from './Button.module.css';
-type ButtonType = {} & ComponentProps<'button'>;
 
-export default function Button({ children, ...props }: ButtonType) {
+export default function Button({ children, ...props }: ComponentProps<'button'>) {
   return (
     <button {...props} className={styles.button}>
       {children}
