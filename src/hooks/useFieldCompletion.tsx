@@ -29,9 +29,7 @@ export function useFieldCompletion<T extends InputFieldType>({
   }, [inputValue]);
 
   useEffect(() => {
-    if (!onComplete) return;
-
-    onComplete?.({
+    onComplete({
       isComplete: isComplete && !Boolean(errorMessage),
       fieldName,
     });
