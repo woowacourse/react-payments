@@ -10,10 +10,41 @@ import { useStack } from '../../hooks/useStack';
 import { useStepFlow } from '../../hooks/useStepFlow';
 import { STEPS } from '../../constants';
 import styles from '../../../src/pages/HomePage/HomePage.module.css';
-import useValues from '../../hooks/useValues';
 import { useFormValid } from '../../hooks/useFormValid';
+import { CardNumberType, ExpirationType, CvcType, PasswordType, CardCompanyType } from '../../types';
 
-type CardFormProps = ReturnType<typeof useValues>['cardForm'];
+type CardFormProps = {
+  cardNumbers: {
+    cardNumbers: CardNumberType;
+    onCardNumbersChange: (field: keyof CardNumberType, value: string) => void;
+    cardInputRefs: {
+      first: React.RefObject<HTMLInputElement | null>;
+      second: React.RefObject<HTMLInputElement | null>;
+      third: React.RefObject<HTMLInputElement | null>;
+      fourth: React.RefObject<HTMLInputElement | null>;
+    };
+  };
+  company: {
+    company: CardCompanyType | null;
+    handleCompanySelect: (company: CardCompanyType) => void;
+  };
+  expiration: {
+    expiration: ExpirationType;
+    expirationRef: {
+      month: React.RefObject<HTMLInputElement | null>;
+      year: React.RefObject<HTMLInputElement | null>;
+    };
+    handleExpirationChange: (field: keyof ExpirationType, value: string) => void;
+  };
+  cvc: {
+    cvc: CvcType;
+    handleCvcChange: (value: string) => void;
+  };
+  password: {
+    password: PasswordType;
+    handlePasswordChange: (value: string) => void;
+  };
+};
 
 export function CardForm(props: CardFormProps) {
   const { Stack, setStep } = useStack<(typeof STEPS)[number]>('카드번호');
