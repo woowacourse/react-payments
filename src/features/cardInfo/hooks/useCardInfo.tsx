@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
-import CardInfo from '../../../entities/cardInfo/model/CardInfo';
 import { cardInfoSectionConfig } from '../config/cardInfoSectionConfig';
 import { NO_ERROR, ErrorKey } from '../../../entities/cardInfo/constants/cardErrorConstants';
 import {
@@ -8,6 +7,7 @@ import {
   CARD_INFO_VALID_RULE,
   SECTION_ORDER,
 } from '../../../entities/cardInfo/constants/cardInfoTypeConstants';
+import CardInfo from '../../../entities/cardInfo/types/CardInfo';
 
 export default function useCardInfo() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({

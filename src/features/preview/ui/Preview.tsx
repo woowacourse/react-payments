@@ -1,4 +1,4 @@
-import CardInfo from '../../../entities/cardInfo/model/CardInfo';
+import CardInfo from '../../../entities/cardInfo/types/CardInfo';
 import { PREVIEW_CLASS_NAMES } from '../constants/previewClassName';
 import { getCardImagePath } from '../../../entities/cardInfo/utils/cardTypeUtils';
 import { getCardCompanyColor } from '../../../entities/cardInfo/utils/cardCompanyUtils';

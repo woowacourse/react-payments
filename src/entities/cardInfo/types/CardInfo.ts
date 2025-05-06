@@ -1,7 +1,12 @@
 export default interface CardInfo {
   cardNumber: string[];
   cardCompany: string;
-  cardExpirationDate: { month: string; year: string };
+  cardExpirationDate: ExpDateType;
   cardCVC: string;
   cardPassword: string;
+}
+
+export interface ExpDateType {
+  month: string;
+  year: string;
 }
