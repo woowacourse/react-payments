@@ -1,23 +1,15 @@
-import { useState } from 'react';
-import './styles/index.css';
-import styles from './App.module.css';
-import CardNumberSection from './components/CardNumberSection/CardNumberSection';
-import CardExpirationSection from './components/CardExpirationSection/CardExpirationSection';
-import Card from './components/Card/Card';
-import CvcSection from './components/CvcSection/CvcSection';
+import { Route, Routes } from 'react-router';
+import HomePage from './pages/HomePage/HomePage';
+import CompletePage from './pages/CompletePage/CompletePage';
+import MobileLayout from './components/MobileLayout/MobileLayout';
 
 export default function App() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [cardLogo, setCardLogo] = useState<'visa' | 'master' | ''>('');
-  const [expiration, setExpiration] = useState<string[]>(['', '']);
-  const [cvc, setCvc] = useState<string>('');
-
   return (
-    <div className={styles.appContainer}>
-      <Card numbers={cardNumbers} cardLogo={cardLogo} expiration={expiration} />
-      <CardNumberSection cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} setCardLogo={setCardLogo} />
-      <CardExpirationSection expiration={expiration} setExpiration={setExpiration} />
-      <CvcSection cvc={cvc} setCvc={setCvc} />
-    </div>
+    <Routes>
+      <Route element={<MobileLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="/complete" element={<CompletePage />} />
+      </Route>
+    </Routes>
   );
 }

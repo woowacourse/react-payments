@@ -1,7 +1,18 @@
 :root {
   --color-white: #ffffff;
+
   --color-black: #000000;
   --color-gray-10: #acacac;
   --color-gray-20: #8b95a1;
+  --color-gray-30: #4f4f4f;
+
   --color-red: #ff3d3d;
+  --color-bc: #f04651; /* BC카드 */
+  --color-shinhan: #0046ff; /* 신한카드 */
+  --color-kakao: #ffe600; /* 카카오뱅크 */
+  --color-hyundai: #000000; /* 현대카드 */
+  --color-woori: #007bc8; /* 우리카드 */
+  --color-lotte: #ed1c24; /* 롯데카드 */
+  --color-hana: #009490; /* 하나카드 */
+  --color-kookmin: #6a6056; /* 국민카드 */
 }

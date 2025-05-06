@@ -1,40 +1,33 @@
+import { CvcType } from '../../types';
+import Input from '../Input/Input';
 import { InputSection } from '../InputSection/InputSection';
-import styles from './CvcSection.module.css';
-import { Dispatch, SetStateAction, useState } from 'react';
 
-type Props = {
-  cvc: string;
-  setCvc: Dispatch<SetStateAction<string>>;
+type CvcSection = {
+  cvc: CvcType;
+  handleCvcChange: (value: string) => void;
 };
 
-export default function CvcSection({ cvc, setCvc }: Props) {
-  const [cvcError, setCvcError] = useState<string>('');
-
-  const handleCvcChange = (value: string) => {
-    let errorMsg = '';
-    if (!/^[0-9]*$/.test(value)) {
-      errorMsg = '숫자만 입력 가능합니다.';
-    } else if (value !== '' && value.length !== 3) {
-      errorMsg = 'CVC는 3자리여야 합니다.';
-    }
-    setCvc(value);
-    setCvcError(errorMsg);
-  };
+export default function CvcSection({ cvc, handleCvcChange }: CvcSection) {
   return (
-    <div className={styles.sectionContainer}>
+    <div>
       <InputSection.TitleWrapper>
         <InputSection.Title title="CVC 번호를 입력해 주세요" />
       </InputSection.TitleWrapper>
-      <div className={styles.inputSection}>
+      <div>
         <InputSection.Label text="CVC" />
-        <InputSection.InputWrapper
-          numbers={[cvc]}
-          onChange={(_index, value) => handleCvcChange(value)}
-          valid={[cvcError === '']}
-          placeholders={['123']}
+
+        <Input
+          pattern="[0-9]{3}"
+          required
+          autoFocus={cvc.value === ''}
+          onChange={(e) => handleCvcChange(e.target.value)}
+          value={cvc.value}
+          placeholder="123"
+          isError={Boolean(cvc.errorMessage)}
           maxLength={3}
         />
-        {cvcError && <InputSection.Error message={cvcError} />}
+
+        {cvc.errorMessage && <InputSection.Error message={cvc.errorMessage} />}
       </div>
     </div>
   );

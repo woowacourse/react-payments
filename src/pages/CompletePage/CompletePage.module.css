@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.icon {
+  width: 76px;
+  height: 76px;
+}
+
+.text {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+}

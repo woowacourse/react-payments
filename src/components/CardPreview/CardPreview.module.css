@@ -1,13 +1,46 @@
 .card {
   width: 212px;
-  height: 132px;
+  min-height: 132px;
   border-radius: 4px;
   background: var(--color-black);
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   gap: 14px;
+
   margin: 0px auto;
+}
+
+.bc {
+  background-color: var(--color-bc); /* #f04651 */
+}
+
+.shinhan {
+  background-color: var(--color-shinhan); /* #0046ff */
+}
+
+.kakao {
+  background-color: var(--color-kakao); /* #ffe600 */
+}
+
+.hyundai {
+  background-color: var(--color-hyundai); /* #000000 */
+}
+
+.woori {
+  background-color: var(--color-woori); /* #007bc8 */
+}
+
+.lotte {
+  background-color: var(--color-lotte); /* #ed1c24 */
+}
+
+.hana {
+  background-color: var(--color-hana); /* #009490 */
+}
+
+.kookmin {
+  background-color: var(--color-kookmin); /* #6a6056 */
 }
 
 .numberWrapper {
@@ -52,11 +85,4 @@
 .dotWrapper {
   display: flex;
   gap: 4px;
-}
-
-.dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 100%;
-  background-color: white;
 }
