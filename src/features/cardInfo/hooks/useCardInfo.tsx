@@ -36,43 +36,164 @@ export default function useCardInfo() {
     [CardInfoType.PASSWORD]: false,
   });
 
-  const changeCardNumber = (index: number, value: string) => {
+  const updateCardNumber = (index: number, value: string) => {
     setCardInfo((prev) => {
       const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
-      validateCardNumber(updatedNumbers);
       return { ...prev, cardNumber: updatedNumbers };
     });
   };
 
-  const changeCardCompany = (value: string) => {
-    setCardInfo((prev) => {
-      if (value) {
-        completeSection(CardInfoType.COMPANY);
-      }
-      return { ...prev, cardCompany: value };
-    });
+  const updateCardCompany = (value: string) => {
+    setCardInfo((prev) => ({ ...prev, cardCompany: value }));
   };
 
-  const changeCardExpDate = (key: 'month' | 'year', value: string) => {
+  const updateCardExpDate = (key: 'month' | 'year', value: string) => {
     setCardInfo((prev) => {
       const updateDate = { ...prev.cardExpirationDate, [key]: value };
-      validateExpDate(updateDate);
       return { ...prev, cardExpirationDate: updateDate };
     });
   };
 
+  const updateCardCVC = (value: string) => {
+    setCardInfo((prev) => ({ ...prev, cardCVC: value }));
+  };
+
+  const updateCardPassword = (value: string) => {
+    setCardInfo((prev) => ({ ...prev, cardPassword: value }));
+  };
+
+  const validateField = (id: string, value: any): boolean => {
+    const configItem = cardInfoSectionConfig.find((item) => item.id === id);
+    if (!configItem || !configItem.validator) return false;
+
+    const [errorIndex, errorMessage] = configItem.validator(value);
+    setError((prevError) => ({
+      ...prevError,
+      [configItem.errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : NO_ERROR,
+    }));
+    return errorIndex === -1;
+  };
+
+  const validateCardNumber = (cardNumber: string[]): boolean => {
+    return validateField(CardInfoType.NUMBER, cardNumber);
+  };
+
+  const validateExpDate = (expirationDate: { month: string; year: string }): boolean => {
+    return validateField(CardInfoType.EXPDATE, expirationDate);
+  };
+
+  const validateCVC = (cvc: string): boolean => {
+    return validateField(CardInfoType.CVC, cvc);
+  };
+
+  const validatePassword = (password: string): boolean => {
+    return validateField(CardInfoType.PASSWORD, password);
+  };
+
+  const isCardNumberComplete = (cardNumber: string[]): boolean => {
+    return cardNumber.every(
+      (num) => num.length === CARD_INFO_VALID_RULE[CardInfoType.NUMBER].MAX_LENGTH,
+    );
+  };
+
+  const isExpDateComplete = (expirationDate: { month: string; year: string }): boolean => {
+    return (
+      expirationDate.month.length === CARD_INFO_VALID_RULE[CardInfoType.EXPDATE].MAX_LENGTH &&
+      expirationDate.year.length === CARD_INFO_VALID_RULE[CardInfoType.EXPDATE].MAX_LENGTH
+    );
+  };
+
+  const isCVCComplete = (cvc: string): boolean => {
+    return cvc.length === CARD_INFO_VALID_RULE[CardInfoType.CVC].MAX_LENGTH;
+  };
+
+  const isPasswordComplete = (password: string): boolean => {
+    return password.length === CARD_INFO_VALID_RULE[CardInfoType.PASSWORD].MAX_LENGTH;
+  };
+
+  const setSectionState = (sectionType: CardInfoType, state: boolean) => {
+    setCompletedSections((prev) => ({
+      ...prev,
+      [sectionType]: state,
+    }));
+  };
+
+  const completeSection = (sectionType: CardInfoType) => {
+    setSectionState(sectionType, true);
+
+    const currentSectionIndex = SECTION_ORDER.indexOf(sectionType);
+    if (currentSectionIndex === SECTION_ORDER.length - 1) return;
+
+    const nextSection = SECTION_ORDER[currentSectionIndex + 1];
+
+    if (
+      !completedSections[nextSection] &&
+      SECTION_ORDER.indexOf(currentSection) <= currentSectionIndex
+    ) {
+      setCurrentSection(nextSection);
+    }
+  };
+
+  const changeCardNumber = (index: number, value: string) => {
+    updateCardNumber(index, value);
+
+    const updatedNumbers = cardInfo.cardNumber.map((num, i) => (i === index ? value : num));
+    const isValid = validateCardNumber(updatedNumbers);
+
+    if (isValid && isCardNumberComplete(updatedNumbers)) {
+      completeSection(CardInfoType.NUMBER);
+    } else if (!isValid) {
+      setSectionState(CardInfoType.NUMBER, false);
+    }
+  };
+
+  const changeCardCompany = (value: string) => {
+    updateCardCompany(value);
+
+    if (value) {
+      completeSection(CardInfoType.COMPANY);
+    }
+  };
+
+  const changeCardExpDate = (key: 'month' | 'year', value: string) => {
+    updateCardExpDate(key, value);
+
+    const updatedDate = {
+      ...cardInfo.cardExpirationDate,
+      [key]: value,
+    };
+
+    const isValid = validateExpDate(updatedDate);
+
+    if (isValid && isExpDateComplete(updatedDate)) {
+      completeSection(CardInfoType.EXPDATE);
+    } else if (!isValid) {
+      setSectionState(CardInfoType.EXPDATE, false);
+    }
+  };
+
   const changeCardCVC = (value: string) => {
-    setCardInfo((prev) => {
-      validateCVC(value);
-      return { ...prev, cardCVC: value };
-    });
+    updateCardCVC(value);
+
+    const isValid = validateCVC(value);
+
+    if (isValid && isCVCComplete(value)) {
+      completeSection(CardInfoType.CVC);
+    } else if (!isValid) {
+      setSectionState(CardInfoType.CVC, false);
+    }
   };
 
   const changeCardPassword = (value: string) => {
-    setCardInfo((prev) => {
-      validatePassword(value);
-      return { ...prev, cardPassword: value };
-    });
+    updateCardPassword(value);
+
+    const isValid = validatePassword(value);
+
+    if (isValid && isPasswordComplete(value)) {
+      completeSection(CardInfoType.PASSWORD);
+    } else if (!isValid) {
+      setSectionState(CardInfoType.PASSWORD, false);
+    }
   };
 
   const handleCardInfo = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -103,103 +224,6 @@ export default function useCardInfo() {
     if (name.startsWith(CardInfoType.PASSWORD)) {
       changeCardPassword(value);
       return;
-    }
-
-    setCardInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const validateCardNumber = (cardNumber: string[]) => {
-    if (validateField(CardInfoType.NUMBER, cardNumber)) {
-      checkCardNumberComplete(cardNumber);
-    } else {
-      setSectionState(CardInfoType.NUMBER, false);
-    }
-  };
-
-  const validateExpDate = (expirationDate: { month: string; year: string }) => {
-    if (validateField(CardInfoType.EXPDATE, expirationDate)) {
-      checkExpDateComplete(expirationDate);
-    } else {
-      setSectionState(CardInfoType.EXPDATE, false);
-    }
-  };
-
-  const validateCVC = (cvc: string) => {
-    if (validateField(CardInfoType.CVC, cvc)) {
-      checkCVCComplete(cvc);
-    } else {
-      setSectionState(CardInfoType.CVC, false);
-    }
-  };
-
-  const validatePassword = (password: string) => {
-    if (validateField(CardInfoType.PASSWORD, password)) {
-      checkPasswordComplete(password);
-    } else {
-      setSectionState(CardInfoType.PASSWORD, false);
-    }
-  };
-
-  const validateField = (id: string, value: any) => {
-    const configItem = cardInfoSectionConfig.find((item) => item.id === id);
-    if (!configItem || !configItem.validator) return;
-
-    const [errorIndex, errorMessage] = configItem.validator(value);
-    setError((prevError) => ({
-      ...prevError,
-      [configItem.errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : NO_ERROR,
-    }));
-    return errorIndex === -1;
-  };
-
-  const checkCardNumberComplete = (cardNumber: string[]) => {
-    if (
-      cardNumber.every((num) => num.length === CARD_INFO_VALID_RULE[CardInfoType.NUMBER].MAX_LENGTH)
-    )
-      completeSection(CardInfoType.NUMBER);
-  };
-
-  const checkExpDateComplete = (expirationDate: { month: string; year: string }) => {
-    if (
-      expirationDate.month.length === CARD_INFO_VALID_RULE[CardInfoType.EXPDATE].MAX_LENGTH &&
-      expirationDate.year.length === CARD_INFO_VALID_RULE[CardInfoType.EXPDATE].MAX_LENGTH
-    )
-      completeSection(CardInfoType.EXPDATE);
-  };
-
-  const checkCVCComplete = (cvc: string) => {
-    if (cvc.length === CARD_INFO_VALID_RULE[CardInfoType.CVC].MAX_LENGTH)
-      completeSection(CardInfoType.CVC);
-  };
-
-  const checkPasswordComplete = (password: string) => {
-    if (password.length === CARD_INFO_VALID_RULE[CardInfoType.PASSWORD].MAX_LENGTH)
-      completeSection(CardInfoType.PASSWORD);
-  };
-
-  const setSectionState = (sectionType: CardInfoType, state: boolean) => {
-    setCompletedSections((prev) => ({
-      ...prev,
-      [sectionType]: state,
-    }));
-  };
-
-  const completeSection = (sectionType: CardInfoType) => {
-    setSectionState(sectionType, true);
-
-    const currentSectionIndex = SECTION_ORDER.indexOf(sectionType);
-    if (currentSectionIndex === SECTION_ORDER.length - 1) return;
-
-    const nextSection = SECTION_ORDER[currentSectionIndex + 1];
-
-    if (
-      !completedSections[nextSection] &&
-      SECTION_ORDER.indexOf(currentSection) <= currentSectionIndex
-    ) {
-      setCurrentSection(nextSection);
     }
   };
 
