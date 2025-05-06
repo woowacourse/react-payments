@@ -62,14 +62,22 @@
   - [x] ExpirationDateForm 스토리북 생성
   - [x] CvcNumberForm 컴포넌트 구현
   - [x] CvcNumberForm 스토리북 생성
-  - [x] FormContainer 컴포넌트 구현
-  - [x] FormContainer 컴포넌트 스토리북 생성
-  - [x] PreviewContainer 컴포넌트 구현
+  - [x] PasswordForm 컴포넌트 구현
+  - [x] CardIssuerForm 컴포넌트 구현
+  - [x] Select 컴포넌트 구현
+  - [x] Select 스토리북 생성
   - [x] PreviewComponent 컴포넌트 퍼블리싱
   - [x] PreviewCard 컴포넌트 스토리북 생성 -> 버전 (비자, 마스터카드)
   - [x] PreviewCard APP 컴포넌트 합성 -> 상태 공유
   - [x] App 컴포넌트 퍼블리싱
   - [x] 카드 타입 판별 기능 구현
   - [x] text 컴포넌트 구현
+  - [x] Button 컴포넌트 구현
+  - [x] Button 스토리북 생성
 - [x] domain 상태 관리 (preview, form 상태 동기화)
 - [x] text 컴포넌트 스토리북 생성
+- [x] 입력 완료 시 다음 필드로 이동
+- [x] 카드사 선택에 따른 카드 색상 변경
+- [x] 확인 버튼 활성화
+- [x] 카드 등록 완료 페이지 이동
+- [x] 포커스 자동 이동

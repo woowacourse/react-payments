@@ -1,21 +1,17 @@
 import { css } from "@emotion/react";
-import Input from "../Input/Input";
-import Text from "../Text/Text";
-import { CvcNumberStateType } from "../../types/CardInformationType";
-import useError from "../../hooks/useError";
-import cvcNumberSpec from "./CvcNumberSpec";
+import Input from "../../common/Input/Input";
+import Text from "../../common/Text/Text";
+import { CvcNumberStateType } from "../../../types/CardInformationType";
+import cvcNumberSpec from "./cvcNumberSpec";
+import useInputFocus from "../../../hooks/useInputFocus";
+import useCvcNumber from "../../../hooks/useCvcNumber";
 
-const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
-  const { error, errorMessage, validateInputType } = useError([false]);
+const CvcNumberForm = ({ cvcNumberState, dispatch, openNextForm, errorState, dispatchError }: CvcNumberStateType) => {
   const { title, description, inputFieldData } = cvcNumberSpec;
   const { label, inputProps } = inputFieldData;
   const { placeholder, maxLength } = inputProps;
-
-  const handleChange = (value: string) => {
-    if (validateInputType(value, 0)) {
-      dispatch({ type: "SET_CVC_NUMBER", value: value });
-    }
-  };
+  const { errorMessage, handleChange } = useCvcNumber(dispatch, openNextForm, dispatchError);
+  const inputRefs = useInputFocus();
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -31,11 +27,14 @@ const CvcNumberForm = ({ cvcNumberState, dispatch }: CvcNumberStateType) => {
             placeholder={placeholder[0]}
             maxLength={maxLength}
             value={cvcNumberState[0]}
-            onChange={(v) => handleChange(v)}
-            error={error[0]}
+            onChange={(e) => handleChange(e.target.value)}
+            error={errorState[0]}
+            ref={(el) => {
+              inputRefs.current[0] = el;
+            }}
           />
         </div>
-        <div css={errorTextWrapperStyle(error[0])}>
+        <div css={errorTextWrapperStyle(errorState[0])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

@@ -15,6 +15,7 @@ export const NoneCard: Story = {
   args: {
     uniqueNumber: ["1234", "1234", "1234", "1234"],
     expirationDate: ["12", "25"],
+    cardIssuer: [null],
   },
 };
 
@@ -22,6 +23,7 @@ export const VisaCard: Story = {
   args: {
     uniqueNumber: ["4234", "1234", "1234", "1234"],
     expirationDate: ["12", "25"],
+    cardIssuer: [null],
   },
 };
 
@@ -29,5 +31,6 @@ export const MasterCard: Story = {
   args: {
     uniqueNumber: ["5234", "1234", "1234", "1234"],
     expirationDate: ["12", "25"],
+    cardIssuer: [null],
   },
 };

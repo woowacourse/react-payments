@@ -1,22 +1,28 @@
 import { css } from "@emotion/react";
-import Input from "../Input/Input";
-import Text from "../Text/Text";
-import { ExpirationDateStateType } from "../../types/CardInformationType";
-import useError from "../../hooks/useError";
-import expirationDateSpec from "./ExpirationDateSpec";
+import Input from "../../common/Input/Input";
+import Text from "../../common/Text/Text";
+import { ExpirationDateStateType } from "../../../types/CardInformationType";
+import expirationDateSpec from "./expirationDateSpec";
+import useInputFocus from "../../../hooks/useInputFocus";
+import useExpirationDate from "../../../hooks/useExpirationDate";
 
 const { title, description, inputFieldData } = expirationDateSpec;
 
-const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateStateType) => {
-  const { error, errorMessage, validateInputType, validateMonth } = useError([false, false]);
-
-  const handleChange = (v: string, index: number) => {
-    if (validateInputType(v, index)) {
-      if (index === 0) validateMonth(v);
-      dispatch({ type: "SET_EXPIRATION_DATE", index: index, value: v });
-      return;
-    }
-  };
+const ExpirationDateForm = ({
+  expirationDateState,
+  dispatch,
+  openNextForm,
+  errorState,
+  dispatchError,
+}: ExpirationDateStateType) => {
+  const inputRefs = useInputFocus();
+  const { errorMessage, handleChange } = useExpirationDate({
+    dispatch,
+    inputRefs,
+    openNextForm,
+    expirationDateState,
+    dispatchError,
+  });
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -33,16 +39,20 @@ const ExpirationDateForm = ({ expirationDateState, dispatch }: ExpirationDateSta
 
             return (
               <Input
+                key={index}
                 placeholder={placeholder[index]}
                 value={expirationDateState[index]}
-                onChange={(v) => handleChange(v, index)}
+                onChange={(e) => handleChange(e.target.value, index)}
                 maxLength={maxLength}
-                error={error[index]}
+                error={errorState[index]}
+                ref={(el) => {
+                  inputRefs.current[index] = el;
+                }}
               />
             );
           })}
         </div>
-        <div css={errorTextWrapperStyle(error[0] || error[1])}>
+        <div css={errorTextWrapperStyle(errorState[0] || errorState[1])}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>

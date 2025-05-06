@@ -1,34 +1,45 @@
-import { useState } from "react";
-const MONTH_MIN = 1;
-const MONTH_MAX = 12;
+import { useReducer } from "react";
+import { CardErrorType, ErrorAction } from "../types/CardInformationType";
 
-const useError = (initialErrorState: boolean[]) => {
-  const [error, setError] = useState(initialErrorState);
-  const [errorMessage, setErrorMessage] = useState("");
+const initialCardInfo: CardErrorType = {
+  uniqueNumber: [false, false, false, false],
+  expirationDate: [false, false],
+  cvcNumber: [false],
+  password: [false],
+};
 
-  const validateInputType = (v: string, index: number) => {
-    if (/^[0-9]*$/.test(v)) {
-      setError((prev) => prev.map((item, i) => (i === index ? false : item)));
-      return true;
+function reducer(state: CardErrorType, action: ErrorAction): CardErrorType {
+  switch (action.type) {
+    case "SET_UNIQUE_NUMBER_ERROR": {
+      const updated = [...state.uniqueNumber];
+      updated[action.index] = action.value;
+      return { ...state, uniqueNumber: updated };
     }
 
-    setError((prev) => prev.map((item, i) => (i === index ? true : item)));
-    setErrorMessage("숫자만 입력해 주세요.");
-    return false;
-  };
-
-  const validateMonth = (v: string) => {
-    const month = parseInt(v);
-    if (month >= MONTH_MIN && month <= MONTH_MAX) {
-      setError([false, error[1]]);
-      return;
+    case "SET_EXPIRATION_DATE_ERROR": {
+      const updated = [...state.expirationDate];
+      updated[action.index] = action.value;
+      return { ...state, expirationDate: updated };
     }
 
-    setError([true, error[1]]);
-    setErrorMessage("1~12 사이의 숫자를 입력해 주세요.");
-  };
+    case "SET_CVC_NUMBER_ERROR":
+      return { ...state, cvcNumber: [action.value] };
 
-  return { error, errorMessage, validateMonth, validateInputType };
+    case "SET_PASSWORD_ERROR":
+      return { ...state, password: [action.value] };
+
+    default:
+      return state;
+  }
+}
+
+const useError = () => {
+  const [cardErrorState, dispatchError] = useReducer(reducer, initialCardInfo);
+
+  return {
+    cardErrorState,
+    dispatchError,
+  };
 };
 
 export default useError;

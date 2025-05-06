@@ -5,19 +5,38 @@ const seperateCard = {
   master: "Mastercard.png",
 };
 
-const PreviewCard = ({ uniqueNumber, expirationDate }: { uniqueNumber: string[]; expirationDate: string[] }) => {
+const cardColor = {
+  null: "#333333",
+  BC카드: "#F04651",
+  신한카드: "#0046FF",
+  카카오뱅크: "#FFE600",
+  현대카드: "#000000",
+  우리카드: "#007BC8",
+  롯데카드: "#ED1C24",
+  하나카드: "#009490",
+  국민카드: "#6A6056",
+};
+
+const PreviewCard = ({
+  uniqueNumber,
+  expirationDate,
+  cardIssuer,
+}: {
+  uniqueNumber: string[];
+  expirationDate: string[];
+  cardIssuer: (string | null)[];
+}) => {
   function getCardType(cardNumber: string) {
     const bin = cardNumber.slice(0, 2);
     if (cardNumber.startsWith("4")) return "visa";
     if (/^5[1-5]/.test(bin)) return "master";
     return "none";
   }
-  //utils로 분리
 
   const cardType = getCardType(uniqueNumber[0]);
 
   return (
-    <div css={previewCardStyle}>
+    <div css={previewCardStyle(cardIssuer[0])}>
       <div css={TopStyle}>
         <div css={magneticStyle}></div>
         {cardType !== "none" && <img css={cardImageStyle} src={seperateCard[cardType]} alt={cardType} />}
@@ -48,11 +67,11 @@ const PreviewCard = ({ uniqueNumber, expirationDate }: { uniqueNumber: string[];
 
 export default PreviewCard;
 
-const previewCardStyle = css`
+const previewCardStyle = (cardIssuer: string | null) => css`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background: #333;
+  background-color: ${cardColor[cardIssuer as keyof typeof cardColor]};
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
   padding: 8px 12px;
   display: flex;
@@ -88,7 +107,7 @@ const cardInformationStyle = css`
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px;
   letter-spacing: 2.24px;
 `;
 

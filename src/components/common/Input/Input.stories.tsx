@@ -26,7 +26,7 @@ export const Basic: Story = {
         placeholder={args.placeholder}
         maxLength={args.maxLength}
         value={value}
-        setValue={setValue}
+        onChange={setValue}
         error={false}
       />
     );
@@ -43,7 +43,7 @@ export const Error: Story = {
     const [value, setValue] = useState(args.value);
 
     return (
-      <Input placeholder={args.placeholder} maxLength={args.maxLength} value={value} setValue={setValue} error={true} />
+      <Input placeholder={args.placeholder} maxLength={args.maxLength} value={value} onChange={setValue} error={true} />
     );
   },
 };

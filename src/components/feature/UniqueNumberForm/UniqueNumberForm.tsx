@@ -1,20 +1,29 @@
 import { css } from "@emotion/react";
-import Input from "../Input/Input";
-import Text from "../Text/Text";
-import { UniqueNumberStateType } from "../../types/CardInformationType";
-import useError from "../../hooks/useError";
-import uniqueNumberSpec from "./UniqueNumberSpec";
+import Input from "../../common/Input/Input";
+import Text from "../../common/Text/Text";
+import { UniqueNumberStateType } from "../../../types/CardInformationType";
+import uniqueNumberSpec from "./uniqueNumberSpec";
+import useInputFocus from "../../../hooks/useInputFocus";
+import useUniqueNumber from "../../../hooks/useUniqueNumber";
 
-const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType) => {
-  const { error, errorMessage, validateInputType } = useError([false, false, false, false]);
+const UniqueNumberForm = ({
+  uniqueNumberState,
+  dispatch,
+  openNextForm,
+  errorState,
+  dispatchError,
+}: UniqueNumberStateType) => {
   const { title, description, inputFieldData } = uniqueNumberSpec;
   const { label, inputNumber, inputProps } = inputFieldData;
-
-  const handleChange = (v: string, index: number) => {
-    if (validateInputType(v, index)) {
-      dispatch({ type: "SET_UNIQUE_NUMBER", index, value: v });
-    }
-  };
+  const inputRefs = useInputFocus();
+  const { errorMessage, handleChange } = useUniqueNumber({
+    dispatch,
+    inputRefs,
+    openNextForm,
+    uniqueNumberState,
+    errorState,
+    dispatchError,
+  });
 
   return (
     <div css={FormSectionWrapperStyle}>
@@ -34,15 +43,18 @@ const UniqueNumberForm = ({ uniqueNumberState, dispatch }: UniqueNumberStateType
                 placeholder={placeholder[index]}
                 value={uniqueNumberState[index]}
                 maxLength={maxLength}
-                onChange={(v) => handleChange(v, index)}
-                error={error[index]}
+                onChange={(e) => handleChange(e.target.value, index)}
+                error={errorState[index]}
                 type={index > 1 ? "password" : "text"}
+                ref={(el) => {
+                  inputRefs.current[index] = el;
+                }}
               />
             );
           })}
         </div>
 
-        <div css={errorTextWrapperStyle(error.some((bool) => bool === true))}>
+        <div css={errorTextWrapperStyle(errorState.some((bool) => bool === true))}>
           <Text text={errorMessage} size="9.5px" color="#ff3d3d" weight={400} lineHeight="normal" />
         </div>
       </div>
