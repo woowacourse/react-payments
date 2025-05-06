@@ -15,7 +15,7 @@ function AddCardComplete() {
   return (
     <AddCardLayout>
       <AddCardCompleteContainer>
-        <CheckIcon src="/img/check-filled.png" />
+        <CheckIcon src="/react-payments/img/check-filled.png" />
         <SuccessMessage>
           {`${cardNumber}로 시작하는`}
           <br />

@@ -56,7 +56,7 @@ function Selector<T extends CardIssuerSelectorType | string>({
         {selectedValue}
       </DropDownDefault>
       <DropDownIcon
-        src={`./img/${!isOpen ? 'chevron-up' : 'chevron-down'}.png`}
+        src={`/react-payments/img/${!isOpen ? 'chevron-up' : 'chevron-down'}.png`}
       />
       {isOpen && (
         <DropDownContainer onClick={(e) => handleSelectedOption(e)}>

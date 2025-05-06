@@ -31,7 +31,10 @@ function CardPreview({
       }
     >
       <CardChip />
-      <CardTypeBadge src={`./img/${cardType}.png`} $cardType={cardType} />
+      <CardTypeBadge
+        src={`/react-payments/img/${cardType}.png`}
+        $cardType={cardType}
+      />
       <CardInfoBox
         cardNumber={cardNumberInputValue}
         expirationDate={expirationDateInputValue}
