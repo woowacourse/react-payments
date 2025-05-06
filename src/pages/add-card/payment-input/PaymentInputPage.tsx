@@ -1,7 +1,7 @@
 import CardPreview from "./components/cardPreview/CardPreview";
 import CardInputForm from "./components/cardInputForm/CardInputForm";
 import styles from "./PaymentInputPage.module.css";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { TCardBrand } from "./components/cardPreview/constants/DisplayData";
 export interface CardInfo {
   cardNumbers: string[];
@@ -16,25 +16,15 @@ function PaymentInputPage() {
     brandName: "",
   });
 
-  const handleCardNumbersChange = (newCardNumbers: string[]) => {
-    setCardInfo((prev) => ({
-      ...prev,
-      cardNumbers: newCardNumbers,
-    }));
-  };
-
-  const handleExpirationDateChange = (newExpirationDate: string[]) => {
-    setCardInfo((prev) => ({
-      ...prev,
-      expirationDate: newExpirationDate,
-    }));
-  };
-  const handleBrandNameChange = (newBrandName: TCardBrand | "") => {
-    setCardInfo((prev) => ({
-      ...prev,
-      brandName: newBrandName,
-    }));
-  };
+  const handleInputChange = useCallback(
+    <K extends keyof CardInfo>(inputName: K, value: CardInfo[K]) => {
+      setCardInfo((prev) => ({
+        ...prev,
+        [inputName]: value,
+      }));
+    },
+    []
+  );
 
   return (
     <section className={styles.section}>
@@ -42,9 +32,15 @@ function PaymentInputPage() {
         <CardPreview cardInfo={cardInfo} />
         <CardInputForm
           cardInfo={cardInfo}
-          handleCardNumbersChange={handleCardNumbersChange}
-          handleExpirationDateChange={handleExpirationDateChange}
-          handleBrandNameChange={handleBrandNameChange}
+          handleCardNumbersChange={(value) =>
+            handleInputChange("cardNumbers", value)
+          }
+          handleExpirationDateChange={(value) =>
+            handleInputChange("expirationDate", value)
+          }
+          handleBrandNameChange={(value) =>
+            handleInputChange("brandName", value)
+          }
         />
       </div>
     </section>
