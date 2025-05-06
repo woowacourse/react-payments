@@ -27,5 +27,13 @@
   }
 }
 
-/* 가운데 정렬  */
-/* input box 사이즈, gap */
+.select {
+  /* ///.input 포함 */
+  height: 38px;
+  color: black;
+  font-size: 16px;
+  min-width: 0;
+  border-radius: 5px;
+  flex-grow: 1;
+}
+

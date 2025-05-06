@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import useError from './useError';
-import isNumber from './validate/isNumber';
 import isValidStringLength from './validate/isValidStringLength';
 import { COMMON_ERROR_MESSAGE } from './message/commonErrorMessage';
 import isInteger from './validate/isInteger';
 
-type useCardCVCNumberOptions = {
+export type useCardCVCNumberOptions = {
   cardCVCNumber: string;
   setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleCardCVCBlur: () => void;
   isError: IsError;
   errorMessage: string;
+  resetCardCVCNumber: () => void;
 };
 
 type IsError = {
@@ -28,7 +28,7 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardCVCNumberChangeValidationResult = (input: string) => {
-    if (!isNumber(input) || !isInteger(input)) {
+    if (!isInteger(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
     if (!isValidStringLength({ value: input, maxLength: MAX_CVC_LENGTH })) {
@@ -60,12 +60,17 @@ const useCardCVCNumber = (): useCardCVCNumberOptions => {
     clearError('cvcNumber');
   };
 
+  const resetCardCVCNumber = () => {
+    setCardCVCNumber('');
+  };
+
   return {
     cardCVCNumber: cardCVCNumber,
     setCardCVCNumber: handleCardCVCNumberChange,
     handleCardCVCBlur,
     isError: error.isError,
     errorMessage: error.errorMessage,
+    resetCardCVCNumber,
   };
 };
 

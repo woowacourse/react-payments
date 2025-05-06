@@ -1,7 +1,9 @@
-import useCardCVCNumber from '../../hooks/useCardCVCNumber';
+import useRefFocus from '@/hooks/useRefFocus';
+import { NextStepArgs } from '@/hooks/useStep';
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
+import { MouseEventHandler, useEffect } from 'react';
 
 const CARD_CVC_NUMBER_TEXT = {
   title: '카드 CVC 번호를 입력해 주세요',
@@ -9,14 +11,41 @@ const CARD_CVC_NUMBER_TEXT = {
   subtitle: 'CVC',
 };
 
-const CardCVCNumberInputSection = () => {
-  const {
-    cardCVCNumber,
-    setCardCVCNumber,
-    handleCardCVCBlur,
-    isError,
-    errorMessage,
-  } = useCardCVCNumber();
+type CardCVCNumberInputSectionProps = {
+  cardCVCNumber: string;
+  setCardCVCNumber: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardCVCBlur: () => void;
+  isError: { cvcNumber: boolean };
+  errorMessage: string;
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  handleMouseDown: MouseEventHandler<HTMLInputElement>;
+  goNextStep: (args: NextStepArgs) => void;
+};
+
+const CardCVCNumberInputSection = ({
+  cardCVCNumber,
+  setCardCVCNumber,
+  handleCardCVCBlur,
+  isError,
+  errorMessage,
+  inputRef,
+  handleMouseDown,
+  goNextStep,
+}: CardCVCNumberInputSectionProps) => {
+  const { focusFirst } = useRefFocus([inputRef]);
+
+  const handleCVCNumberInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setCardCVCNumber(e);
+    if (e.target.value.length === 3) {
+      goNextStep({ time: 'once', key: 'cardCVCNumber' });
+    }
+  };
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
 
   return (
     <>
@@ -28,10 +57,12 @@ const CardCVCNumberInputSection = () => {
         <InputField
           value={cardCVCNumber}
           name="cvcNumber"
-          onChange={setCardCVCNumber}
+          onChange={handleCVCNumberInputChange}
           isError={isError.cvcNumber}
           placeholder="123"
           onBlur={handleCardCVCBlur}
+          onMouseDown={handleMouseDown}
+          ref={inputRef}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

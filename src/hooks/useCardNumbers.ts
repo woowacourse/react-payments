@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import useError from './useError';
-import isNumber from './validate/isNumber';
 import isValidStringLength from './validate/isValidStringLength';
 import {
   CardNumbers,
@@ -29,11 +28,10 @@ const MAX_INPUT_LENGTH = 4;
 
 const useCardNumbers = (): CardNumbersOptions => {
   const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
-
   const { error, setErrorField, clearError } = useError(INITIAL_IS_ERROR);
 
   const getCardNumbersValidationResult = (input: string) => {
-    if (!isNumber(input) || !isInteger(input)) {
+    if (!isInteger(input)) {
       return { isError: true, errorMessage: COMMON_ERROR_MESSAGE.ONLY_NUMBER };
     }
 
@@ -71,12 +69,17 @@ const useCardNumbers = (): CardNumbersOptions => {
     clearError(target);
   };
 
+  const resetCardNumbers = () => {
+    setCardNumbers(INITIAL_CARD_NUMBER);
+  };
+
   return {
     cardNumbers,
     setCardNumbers: handleCardNumbersChange,
     handleCardNumbersBlur,
     isError: error.isError,
     errorMessage: error.errorMessage,
+    resetCardNumbers,
   };
 };
 export default useCardNumbers;

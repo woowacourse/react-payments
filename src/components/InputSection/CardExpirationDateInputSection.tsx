@@ -1,7 +1,12 @@
 import ErrorMessage from '@commonComponents/ErrorMessage/ErrorMessage';
 import InputField from '@commonComponents/InputField/InputField';
 import InputSection from '@commonComponents/InputSection/InputSection';
-import { CardExpirationDateOptions } from '../../types/CardExpirationDateOptions';
+import {
+  CardExpirationDateInputSectionProps,
+  CardExpirationDateKeys,
+} from '../../types/CardExpirationDateOptions';
+import { useEffect } from 'react';
+import useRefFocus from '@/hooks/useRefFocus';
 
 export const CARD_EXPIRATION_DATE_TEXT = {
   title: '카드 유효기간을 입력해 주세요',
@@ -15,7 +20,30 @@ const CardExpirationDateInputSection = ({
   handleCardExpirationDateBlur,
   isError,
   errorMessage,
-}: CardExpirationDateOptions) => {
+  inputRef,
+  handleMouseDown,
+  goNextStep,
+}: CardExpirationDateInputSectionProps) => {
+  const { focusFirst, focusNext } = useRefFocus(Object.values(inputRef));
+
+  const handleMonthInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardExpirationDate('month')(e);
+    if (e.target.value.length === 2) {
+      focusNext();
+    }
+  };
+
+  const handleYearInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardExpirationDate('year')(e);
+    if (e.target.value.length === 2) {
+      goNextStep({ time: 'once', key: 'cardExpirationDate' });
+    }
+  };
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
+
   return (
     <>
       <InputSection
@@ -26,18 +54,22 @@ const CardExpirationDateInputSection = ({
         <InputField
           value={cardExpirationDate.month}
           name="expirationDateMonth"
-          onChange={setCardExpirationDate('month')}
+          onChange={handleMonthInputChange}
           isError={isError.month}
           placeholder="MM"
           onBlur={() => handleCardExpirationDateBlur('month')}
+          ref={inputRef.month}
+          onMouseDown={handleMouseDown}
         ></InputField>
         <InputField
           value={cardExpirationDate.year}
           name="expirationDateYear"
-          onChange={setCardExpirationDate('year')}
+          onChange={handleYearInputChange}
           isError={isError.year}
           placeholder="YY"
           onBlur={() => handleCardExpirationDateBlur('year')}
+          ref={inputRef.year}
+          onMouseDown={handleMouseDown}
         ></InputField>
       </InputSection>
       <ErrorMessage message={errorMessage} />

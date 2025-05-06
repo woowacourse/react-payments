@@ -3,15 +3,25 @@ import { CardNumbers } from '@/types/CardNumbers';
 import CardBody from './CardBody/CardBody';
 import styles from './cardDisplay.module.css';
 import CardHeader from './CardHeader/CardHeader';
+import { NextStepArgs } from '@/hooks/useStep';
 
 type CardDisplayProps = {
   cardNumbers: CardNumbers;
   cardExpirationDate: CardExpirationDate;
+  cardCompany: string;
 };
 
-const CardDisplay = ({ cardNumbers, cardExpirationDate }: CardDisplayProps) => {
+const CardDisplay = ({
+  cardNumbers,
+  cardExpirationDate,
+  cardCompany,
+}: CardDisplayProps) => {
   return (
-    <div className={`${styles.card} ${styles.basic}`}>
+    <div
+      className={`${styles.card} ${styles.basic} ${
+        cardCompany && styles[cardCompany]
+      }`}
+    >
       <CardHeader cardNumbers={cardNumbers} />
       <CardBody
         cardNumbers={cardNumbers}
