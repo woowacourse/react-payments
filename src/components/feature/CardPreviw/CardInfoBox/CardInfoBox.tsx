@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {
   CardNumberInputType,
   ExpirationDateInputType,
-} from '../../../config/inputField';
+} from '../../../../config/inputField';
 
 interface CardInfoBoxProps {
   cardNumber: Record<CardNumberInputType, string>;

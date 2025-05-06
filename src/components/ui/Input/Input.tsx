@@ -1,11 +1,12 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent, ComponentProps } from 'react';
 import styled from 'styled-components';
+import { InputFieldType } from '../../../config/inputField';
+import { onChangeProps } from '../../../hooks/useInputFieldHandler';
 
-interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+interface InputProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   isError?: boolean;
-  inputType: 'number' | 'text';
-  onChange: ({ name, value }: { name: string; value: string }) => void;
+  inputType: 'number' | 'text' | 'password';
+  onChange: ({ name, value }: onChangeProps) => void;
 }
 
 function Input({
@@ -17,20 +18,22 @@ function Input({
   inputType,
   onChange,
   onBlur,
+  ref,
 }: InputProps) {
   const handleTypeChange = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement;
 
     if (inputType === 'number') {
       const numericValue = value.replace(/[^0-9]/g, '');
-      return onChange({ value: numericValue, name });
+      return onChange({ value: numericValue, name: name as InputFieldType });
     }
 
-    return onChange({ value, name });
+    return onChange({ value, name: name as InputFieldType });
   };
 
   return (
     <StyledInput
+      ref={ref}
       id={id}
       placeholder={placeholder}
       value={value}
@@ -38,7 +41,7 @@ function Input({
       $isError={isError ?? false}
       onChange={handleTypeChange}
       name={name}
-      type="text"
+      type={inputType === 'password' ? 'password' : 'text'}
       onBlur={onBlur}
     />
   );

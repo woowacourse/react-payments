@@ -1,26 +1,40 @@
 import styled from 'styled-components';
-import { CardType } from '../../config/card';
+import CardInfoBox from './CardInfoBox/CardInfoBox';
 import {
+  CardIssuerSelectorType,
   CardNumberInputType,
   ExpirationDateInputType,
-} from '../../config/inputField';
-import CardInfoBox from './CardInfoBox/CardInfoBox';
+} from '../../../config/inputField';
+import { CardType } from '../../../config/card';
+import {
+  CARD_ISSUER_COLORS,
+  DEFAULT_CARD_COLOR,
+} from '../../../constants/cardIssuerColors';
 
 interface CardPreviewProps {
   cardNumberInputValue: Record<CardNumberInputType, string>;
   expirationDateInputValue: Record<ExpirationDateInputType, string>;
   cardType: CardType;
+  cardIssuer: CardIssuerSelectorType | null;
 }
 
 function CardPreview({
   cardNumberInputValue,
   expirationDateInputValue,
   cardType,
+  cardIssuer,
 }: CardPreviewProps) {
   return (
-    <Card>
+    <Card
+      $cardBackground={
+        cardIssuer ? CARD_ISSUER_COLORS[cardIssuer] : DEFAULT_CARD_COLOR
+      }
+    >
       <CardChip />
-      <CardTypeBadge src={`./img/${cardType}.png`} $cardType={cardType} />
+      <CardTypeBadge
+        src={`/react-payments/img/${cardType}.png`}
+        $cardType={cardType}
+      />
       <CardInfoBox
         cardNumber={cardNumberInputValue}
         expirationDate={expirationDateInputValue}
@@ -29,7 +43,7 @@ function CardPreview({
   );
 }
 
-const Card = styled.div`
+const Card = styled.div<{ $cardBackground: string }>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -37,7 +51,8 @@ const Card = styled.div`
   margin: 40px 0px;
   width: 212px;
   height: 132px;
-  background: #333333;
+  min-height: 132px;
+  background: ${(props) => props.$cardBackground};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px #00000040;
   box-sizing: border-box;
