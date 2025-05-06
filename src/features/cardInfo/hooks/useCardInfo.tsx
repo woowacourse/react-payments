@@ -36,7 +36,7 @@ export default function useCardInfo() {
     [CardInfoType.PASSWORD]: false,
   });
 
-  const handleCardNumberChange = (index: number, value: string) => {
+  const changeCardNumber = (index: number, value: string) => {
     setCardInfo((prev) => {
       const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
       validateCardNumber(updatedNumbers);
@@ -44,7 +44,7 @@ export default function useCardInfo() {
     });
   };
 
-  const handleCardCompanyChange = (value: string) => {
+  const changeCardCompany = (value: string) => {
     setCardInfo((prev) => {
       if (value) {
         completeSection(CardInfoType.COMPANY);
@@ -53,7 +53,7 @@ export default function useCardInfo() {
     });
   };
 
-  const handleExpDateChange = (key: 'month' | 'year', value: string) => {
+  const changeCardExpDate = (key: 'month' | 'year', value: string) => {
     setCardInfo((prev) => {
       const updateDate = { ...prev.cardExpirationDate, [key]: value };
       validateExpDate(updateDate);
@@ -61,47 +61,47 @@ export default function useCardInfo() {
     });
   };
 
-  const handleCVCChange = (value: string) => {
+  const changeCardCVC = (value: string) => {
     setCardInfo((prev) => {
       validateCVC(value);
       return { ...prev, cardCVC: value };
     });
   };
 
-  const handlePasswordChange = (value: string) => {
+  const changeCardPassword = (value: string) => {
     setCardInfo((prev) => {
       validatePassword(value);
       return { ...prev, cardPassword: value };
     });
   };
 
-  const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleCardInfo = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
     if (name.startsWith(CardInfoType.NUMBER)) {
       const index = Number(name[name.length - 1]);
-      handleCardNumberChange(index, value);
+      changeCardNumber(index, value);
       return;
     }
 
     if (name === CardInfoType.COMPANY) {
-      handleCardCompanyChange(value);
+      changeCardCompany(value);
       return;
     }
 
     if (name.startsWith(CardInfoType.EXPDATE)) {
       const key = name.split('-')[1] as 'month' | 'year';
-      handleExpDateChange(key, value);
+      changeCardExpDate(key, value);
       return;
     }
 
     if (name.startsWith(CardInfoType.CVC)) {
-      handleCVCChange(value);
+      changeCardCVC(value);
       return;
     }
 
     if (name.startsWith(CardInfoType.PASSWORD)) {
-      handlePasswordChange(value);
+      changeCardPassword(value);
       return;
     }
 
@@ -207,7 +207,7 @@ export default function useCardInfo() {
 
   return {
     cardInfo,
-    handleCardInfoChange,
+    handleCardInfo,
     error,
     currentSection,
     isAllSectionsCompleted,

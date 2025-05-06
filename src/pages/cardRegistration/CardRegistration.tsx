@@ -6,8 +6,7 @@ import CardInfoContainer from '../../features/cardInfo/ui/CardInfoContainer';
 import './cardRegistration.css';
 
 const CardRegistration = () => {
-  const { cardInfo, handleCardInfoChange, error, currentSection, isAllSectionsCompleted } =
-    useCardInfo();
+  const { cardInfo, handleCardInfo, error, currentSection, isAllSectionsCompleted } = useCardInfo();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,7 +24,7 @@ const CardRegistration = () => {
       <form onSubmit={handleSubmit} className="card-content">
         <Preview cardInfo={cardInfo} />
         <CardInfoContainer
-          onChange={handleCardInfoChange}
+          onChange={handleCardInfo}
           error={error}
           currentSection={currentSection}
         />
