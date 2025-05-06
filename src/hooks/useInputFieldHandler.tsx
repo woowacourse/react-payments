@@ -55,7 +55,7 @@ export function useInputFieldHandler<T extends InputFieldType>({
     if (!inputRefs.current[nextIndex]) return;
 
     if (value.length === maxLength) {
-      inputRefs.current[INPUT_NAME_TO_INDEX[name] + 1]?.focus();
+      inputRefs.current[nextIndex]?.focus();
     }
   };
 

@@ -37,13 +37,13 @@ function CardNumberInputField({
   });
 
   const onCardNumberChange = ({ name, value }: onChangeProps) => {
-    onChange({ name, value });
     if (name === CARD_NUMBER_INPUT_TYPE[0]) {
       validateInputError(name, {
         errorType: 'noneCardType',
         isError: cardType === null,
       });
     }
+    onChange({ name, value });
   };
 
   useEffect(() => {
