@@ -22,12 +22,8 @@ export const Register = () => {
     isAllValidAndFilled: canMoveNextFromCardNumber,
   } = useCardInput('cardNumber');
 
-  const {
-    isOpen,
-    selectedItem: selectedBrand,
-    handleItemSelect: handleBrandSelect,
-    handleToggleSelect,
-  } = useBrandSelectInput();
+  const { selectedItem: selectedBrand, handleItemSelect: handleBrandSelect } =
+    useBrandSelectInput();
 
   const {
     value: expireDate,
@@ -103,12 +99,7 @@ export const Register = () => {
         )}
 
         {step >= 1 && (
-          <CardBrandSelectForm
-            isOpen={isOpen}
-            selectedItem={selectedBrand}
-            onItemSelect={handleBrandSelect}
-            onToggle={handleToggleSelect}
-          />
+          <CardBrandSelectForm selectedItem={selectedBrand} onItemSelect={handleBrandSelect} />
         )}
 
         <CardNumberForm

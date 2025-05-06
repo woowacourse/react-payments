@@ -11,10 +11,7 @@ const cardBrandOptions = [
   '국민카드',
 ];
 
-export type CardBrandSelectFormProps = Pick<
-  SelectProps,
-  'isOpen' | 'selectedItem' | 'onItemSelect' | 'onToggle'
->;
+export type CardBrandSelectFormProps = Pick<SelectProps, 'selectedItem' | 'onItemSelect'>;
 
 export const CardBrandSelectForm = (props: CardBrandSelectFormProps) => {
   return (

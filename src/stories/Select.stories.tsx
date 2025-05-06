@@ -25,10 +25,8 @@ export const Default: Story = {
   args: {
     options: ['option1', 'option2', 'option3', 'option4', 'option5'],
     placeholder: 'placeholder',
-    isOpen: false,
     selectedItem: null,
     onItemSelect: () => {},
-    onToggle: () => {},
   },
   argTypes: {
     options: {
@@ -36,26 +34,18 @@ export const Default: Story = {
     },
   },
   render: (args) => {
-    const [isOpen, setIsOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
     const handleItemSelect = (value: string) => {
       setSelectedItem(value);
-      setIsOpen(false);
-    };
-
-    const handleToggle = () => {
-      setIsOpen(!isOpen);
     };
 
     return (
       <Select
         options={args.options}
         placeholder={args.placeholder}
-        isOpen={isOpen}
         selectedItem={selectedItem}
         onItemSelect={handleItemSelect}
-        onToggle={handleToggle}
       />
     );
   },
