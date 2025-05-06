@@ -38,7 +38,7 @@ function CardNumberInput({
           value={number}
           placeholder="1234"
           maxLength={CARD_INFO.NUMBER_LENGTH_PART}
-          onChange={onChangeHandler}
+          onChange={(e) => onChangeHandler(e, i)}
           isValid={cardNumberInfo.feedbackMessages[i] === ""}
           autoFocus={i === 0}
         />

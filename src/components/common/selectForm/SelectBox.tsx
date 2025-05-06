@@ -42,7 +42,6 @@ const SelectBox = <T extends {}>({
       onSelectHandler(selectState.selectedOption);
     }
   }, [selectState.selectedOption]);
-  console.log(styles.selected);
 
   return (
     <div className={styles.container}>

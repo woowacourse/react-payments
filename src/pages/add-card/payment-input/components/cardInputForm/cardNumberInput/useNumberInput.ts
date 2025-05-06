@@ -19,44 +19,54 @@ export function useCardNumberInput(
     null,
   ]);
 
-  function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target;
-    const index = Number(name.split("-")[1]);
-
+  function updateCardState(index: number, value: string) {
     const updatedNumbers = [...cardNumberInfo.cardNumbers];
     const updatedMessages = [...cardNumberInfo.feedbackMessages];
 
     updatedNumbers[index] = value;
-
-    const errorResult = validateNumberString(value);
-    const errorMessage = getFirstErrorMessage(errorResult, "NUMBER");
-    updatedMessages[index] = errorMessage;
+    updatedMessages[index] = getFirstErrorMessage(
+      validateNumberString(value),
+      "NUMBER"
+    );
 
     setCardNumberInfo({
       cardNumbers: updatedNumbers,
       feedbackMessages: updatedMessages,
     });
-
     handleCardNumbersChange(updatedNumbers);
 
-    if (
-      value.length === 4 &&
-      index < 3 &&
-      updatedNumbers.some((number) => number.length !== 4)
-    ) {
-      inputRefs.current[index + 1]?.focus();
-    } else if (
-      updatedNumbers.every((number) => number.length === 4) &&
-      updatedMessages.every((message) => message === "")
-    ) {
+    return { updatedNumbers, updatedMessages };
+  }
+
+  function handleFocusMove(index: number, value: string, numbers: string[]) {
+    const shouldMove =
+      value.length === 4 && index < 3 && numbers.some((n) => n.length !== 4);
+    if (shouldMove) inputRefs.current[index + 1]?.focus();
+  }
+
+  function handleValidationCheck(numbers: string[], messages: string[]) {
+    const isAllValid =
+      numbers.every((n) => n.length === 4) && messages.every((m) => m === "");
+    const isStillInvalid =
+      numbers.some((n) => n.length < 4) || messages.some((m) => m !== "");
+
+    if (isAllValid) {
       onSuccessValidate(true);
       onSuccessNextInput();
-    } else if (
-      value.length < 4 ||
-      updatedMessages.some((message) => message !== "")
-    ) {
+    } else if (isStillInvalid) {
       onSuccessValidate(false);
     }
+  }
+
+  function onChangeHandler(
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) {
+    const { value } = e.target;
+    const { updatedNumbers, updatedMessages } = updateCardState(index, value);
+
+    handleFocusMove(index, value, updatedNumbers);
+    handleValidationCheck(updatedNumbers, updatedMessages);
   }
 
   return {
