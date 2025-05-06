@@ -5,9 +5,6 @@ interface ArrowSvgProp {
   color: string;
 }
 
-// 디렉션으로 방향 받기
-// 컬러 받기
-
 const ArrowSvg = ({ isOpened, color }: ArrowSvgProp) => {
   return (
     <svg

@@ -42,6 +42,7 @@ const SelectBox = <T extends {}>({
       onSelectHandler(selectState.selectedOption);
     }
   }, [selectState.selectedOption]);
+  console.log(styles.selected);
 
   return (
     <div className={styles.container}>
@@ -54,7 +55,9 @@ const SelectBox = <T extends {}>({
       <button
         type="button"
         onClick={onClickHandler}
-        className={styles.selector}
+        className={`${styles.selector} ${
+          selectState.selectedOption === null ? "" : styles.selected
+        }`}
         autoFocus={autoFocus}
       >
         <span>
