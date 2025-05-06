@@ -6,57 +6,64 @@ type CardValidityPeriodType = {
   year: string;
 };
 
-type IsErrorType = {
+type ErrorStateObjectType = {
   month: boolean;
   year: boolean;
 };
 
 interface CardValidityPeriodFieldProps {
   cardValidityPeriod: CardValidityPeriodType;
-  isError: IsErrorType;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: 'month' | 'year',
+  errorStateObject: ErrorStateObjectType;
+  onChangeMonth: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setCardValidityPeriodInputRef: (
+    el: HTMLInputElement | null,
+    index: number,
   ) => void;
 }
 
 function CardValidityPeriodField({
   cardValidityPeriod,
-  isError,
-  onChange,
+  errorStateObject,
+  onChangeMonth,
+  onChangeYear,
+  setCardValidityPeriodInputRef,
 }: CardValidityPeriodFieldProps) {
   const { month, year } = cardValidityPeriod;
-  const { month: isErrorMonth, year: isErrorYear } = isError;
+  const { month: hasErrorMonth, year: hasErrorYear } = errorStateObject;
 
   return (
     <div>
-      <Label htmlFor={`cardValidityPeriod-${month}`} id="cardValidityPeriod">
+      <Label htmlFor="cardValidityPeriod-month" id="cardValidityPeriod">
         유효기간
       </Label>
       <InputWrapper>
         <Input
-          isError={isErrorMonth}
+          hasError={hasErrorMonth}
           type="tel"
           name="cardValidityPeriod"
-          id={`cardValidityPeriod-${month}`}
+          id="cardValidityPeriod-month"
           value={month}
           aria-labelledby="cardValidityPeriod"
-          onChange={(e) => onChange(e, 'month')}
+          onChange={onChangeMonth}
           placeholder="MM"
           min={0}
           max={99}
+          ref={(el) => setCardValidityPeriodInputRef(el, 0)}
+          autoFocus={month.length === 0 && !hasErrorMonth}
         />
         <Input
-          isError={isErrorYear}
+          hasError={hasErrorYear}
           type="tel"
           name="cardValidityPeriod"
-          id={`cardValidityPeriod-${year}`}
+          id="cardValidityPeriod-year"
           value={year}
           aria-labelledby="cardValidityPeriod"
-          onChange={(e) => onChange(e, 'year')}
+          onChange={onChangeYear}
           placeholder="YY"
           min={0}
           max={99}
+          ref={(el) => setCardValidityPeriodInputRef(el, 1)}
         />
       </InputWrapper>
     </div>

@@ -1,35 +1,39 @@
 import styled from '@emotion/styled';
 import Input from '../../common/Input/Input';
 
-interface CardCVCFieldProps {
-  cardCVC: string;
+interface CardPasswordFieldProps {
   hasError: boolean;
+  cardPassword: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function CardCVCField({ hasError, cardCVC, onChange }: CardCVCFieldProps) {
+function CardPasswordField({
+  hasError,
+  cardPassword,
+  onChange,
+}: CardPasswordFieldProps) {
   return (
     <div>
-      <Label htmlFor="CardCVC">CVC</Label>
+      <Label htmlFor="CardPassword">비밀번호 앞 2자리</Label>
       <InputWrapper>
         <Input
           hasError={hasError}
-          type="tel"
-          name="CardCVC"
-          id="CardCVC"
-          value={cardCVC}
+          type="password"
+          name="CardPassword"
+          id="CardPassword"
+          value={cardPassword}
           onChange={onChange}
-          placeholder="123"
+          placeholder="12"
           min={0}
-          max={999}
-          autoFocus={cardCVC.length === 0 && !hasError}
+          max={99}
+          autoFocus={cardPassword.length === 0 && !hasError}
         />
       </InputWrapper>
     </div>
   );
 }
 
-export default CardCVCField;
+export default CardPasswordField;
 
 const InputWrapper = styled.div`
   display: flex;

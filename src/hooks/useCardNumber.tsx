@@ -1,15 +1,32 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   PARSE_RULE,
   CARD_NUMBER_RULE,
   ERROR_MESSAGE,
 } from '../constants/cardNumber';
+import getErrorMessageFromList from '../utils/getErrorMessageFromList';
 
-function useCardNumber() {
+const useCardNumber = ({ onComplete }: { onComplete: () => void }) => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [errorMessage, setErrorMessage] = useState(['', '', '', '']);
+  const inputRefs = useRef<HTMLInputElement[]>([]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
+  const setInputRef = (el: HTMLInputElement | null, index: number) => {
+    if (el) {
+      inputRefs.current[index] = el;
+    }
+  };
+
+  const focusNextInput = (index: number) => {
+    if (index < cardNumber.length - 1) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleChangeCardNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    n: number,
+  ) => {
     const { value } = e.target;
 
     const isNumeric = value === '' || /^[0-9]+$/.test(value);
@@ -39,13 +56,41 @@ function useCardNumber() {
       newCardNumber[n] = value;
       return newCardNumber;
     });
+
+    const isCurrentCardNumberValid =
+      value.length === PARSE_RULE.length &&
+      checkValidCardNumber(value) === false;
+
+    if (!isCurrentCardNumberValid) {
+      return;
+    }
+
+    focusNextInput(n);
+
+    if (n !== cardNumber.length - 1) {
+      return;
+    }
+
+    const areAllPreviousCardNumberValid =
+      cardNumber.slice(0, n).every((value) => value !== '') &&
+      !getErrorMessageFromList(errorMessage.slice(0, n));
+
+    if (!areAllPreviousCardNumberValid) {
+      return;
+    }
+
+    onComplete();
   };
 
   return {
     cardNumber,
-    onChange,
+    handleChangeCardNumber,
     errorMessage,
+    setInputRef,
+    isCardNumberValid:
+      cardNumber.every((value) => value !== '') &&
+      !getErrorMessageFromList(errorMessage),
   };
-}
+};
 
 export default useCardNumber;

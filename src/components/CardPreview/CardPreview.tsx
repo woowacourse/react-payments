@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { CardCompanyColor } from '../../hooks/useCardCompany';
 
 interface CardPreviewProps {
   cardNumber: string[];
@@ -6,6 +7,7 @@ interface CardPreviewProps {
     month: string;
     year: string;
   };
+  CARD_COMPANY_COLORS: CardCompanyColor;
 }
 
 const isCardType = (cardType: string): cardType is CardType => {
@@ -39,23 +41,27 @@ const CARD_PREVIEW_RULE = {
   SENSITIVE_INFO: 2,
 } as const;
 
-function CardPreview({ cardNumber, cardValidityPeriod }: CardPreviewProps) {
+function CardPreview({
+  cardNumber,
+  cardValidityPeriod,
+  CARD_COMPANY_COLORS,
+}: CardPreviewProps) {
   const { month, year } = cardValidityPeriod;
 
   const cardType = getCardType(cardNumber.join(''));
   const imgPath = CARD_TYPE_IMAGES_PATH[cardType];
 
   return (
-    <Card>
+    <Card CARD_COMPANY_COLORS={CARD_COMPANY_COLORS}>
       <IcChip />
-      <CardInfoWrapper>
+      <CardInfoWrapper CARD_COMPANY_COLORS={CARD_COMPANY_COLORS}>
         <CardNumberWrapper>
           {cardNumber.map((number, index) => {
             if (index < CARD_PREVIEW_RULE.SENSITIVE_INFO) {
               return <CardNumber key={index}>{number}</CardNumber>;
             }
             return (
-              <CardNumber key={index}>{'*'.repeat(number.length)}</CardNumber>
+              <CardNumber key={index}>{'⦁'.repeat(number.length)}</CardNumber>
             );
           })}
         </CardNumberWrapper>
@@ -71,11 +77,11 @@ function CardPreview({ cardNumber, cardValidityPeriod }: CardPreviewProps) {
 
 export default CardPreview;
 
-const Card = styled.div`
-  width: 212px;
-  height: 132px;
+const Card = styled.div<{ CARD_COMPANY_COLORS: CardCompanyColor }>`
+  width: 252px;
+  height: 152px;
   border-radius: 4px;
-  background: #333333;
+  background: ${({ CARD_COMPANY_COLORS }) => CARD_COMPANY_COLORS};
   box-shadow: 3px 3px 5px 0px #00000040;
   position: relative;
   align-self: center;
@@ -92,7 +98,8 @@ const IcChip = styled.div`
   position: absolute;
 `;
 
-const CardInfoWrapper = styled.div`
+const CardInfoWrapper = styled.div<{ CARD_COMPANY_COLORS: CardCompanyColor }>`
+  width: 100%;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -102,7 +109,9 @@ const CardInfoWrapper = styled.div`
 
   font-size: 14px;
   font-weight: 500;
-  color: #ffffff;
+  color: ${({ CARD_COMPANY_COLORS }) =>
+    CARD_COMPANY_COLORS === '#FFE600' ? '#000000' : ' #ffffff'};
+  letter-spacing: 2px;
 `;
 
 const CardNumberWrapper = styled.div`
@@ -111,7 +120,7 @@ const CardNumberWrapper = styled.div`
 `;
 
 const CardNumber = styled.span`
-  width: 34px;
+  width: auto;
   height: 20px;
   font-weight: 500;
   font-size: 14px;

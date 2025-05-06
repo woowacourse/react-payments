@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardValidityPeriodField from './CardValidityPeriodField';
-import React, { useState } from 'react';
+import useCardValidityPeriod from '../../../hooks/useCardValidityPeriod';
 
 const meta = {
   title: 'CardValidityPeriodField',
@@ -14,65 +14,30 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     cardValidityPeriod: { month: '0', year: '0' },
-    isError: { month: false, year: false },
-    onChange: () => {},
+    errorStateObject: { month: false, year: false },
+    handleChangeMonth: () => {},
+    handleChangeYear: () => {},
+    setCardValidityPeriodInputRef: () => {},
   },
-  render: (args) => {
-    const [cardValidityPeriod, setCardValidityPeriod] = useState({
-      month: '1',
-      year: '25',
-    });
-    const [isErrorCardValidityPeriod, setIsErrorCardValidityPeriod] = useState({
-      month: false,
-      year: false,
-    });
-    const onChangeCardValidityPeriod = (
-      e: React.ChangeEvent<HTMLInputElement>,
-      type: 'month' | 'year',
-    ) => {
-      const { value } = e.target;
-
-      if (type === 'month') {
-        if (Number.parseInt(value, 10) > 12 || Number.parseInt(value, 10) < 1) {
-          setIsErrorCardValidityPeriod((prev) => ({
-            ...prev,
-            month: true,
-          }));
-        } else {
-          setIsErrorCardValidityPeriod((prev) => ({
-            ...prev,
-            month: false,
-          }));
-        }
-      } else if (type === 'year') {
-        if (
-          Number.parseInt(value, 10) <
-          Number.parseInt(new Date().getFullYear().toString().slice(2), 10)
-        ) {
-          setIsErrorCardValidityPeriod((prev) => ({
-            ...prev,
-            year: true,
-          }));
-        } else {
-          setIsErrorCardValidityPeriod((prev) => ({
-            ...prev,
-            year: false,
-          }));
-        }
-      }
-
-      setCardValidityPeriod((prev) => ({
-        ...prev,
-        [type]: value.slice(0, 2),
-      }));
-    };
+  render: () => {
+    const {
+      cardValidityPeriod,
+      handleChangeMonth,
+      handleChangeYear,
+      errorMessage: cardValidityPeriodErrorMessage,
+      setInputRef,
+    } = useCardValidityPeriod({ onComplete: () => {} });
 
     return (
       <CardValidityPeriodField
-        {...args}
         cardValidityPeriod={cardValidityPeriod}
-        isError={isErrorCardValidityPeriod}
-        onChange={onChangeCardValidityPeriod}
+        errorStateObject={{
+          month: Boolean(cardValidityPeriodErrorMessage.month),
+          year: Boolean(cardValidityPeriodErrorMessage.year),
+        }}
+        handleChangeMonth={handleChangeMonth}
+        handleChangeYear={handleChangeYear}
+        setCardValidityPeriodInputRef={setInputRef}
       />
     );
   },
@@ -81,66 +46,12 @@ export const Default: Story = {
 export const Error: Story = {
   args: {
     cardValidityPeriod: { month: '13', year: '26' },
-    isError: { month: false, year: false },
-    onChange: () => {},
+    errorStateObject: { month: true, year: true },
+    handleChangeMonth: () => {},
+    handleChangeYear: () => {},
+    setCardValidityPeriodInputRef: () => {},
   },
   render: (args) => {
-    const [cardValidityPeriod, setCardValidityPeriod] = useState({
-      month: '13',
-      year: '26',
-    });
-    const [isErrorCardValidityPeriod, setIsErrorCardValidityPeriod] = useState({
-      month: true,
-      year: true,
-    });
-    const onChangeCardValidityPeriod = (
-      e: React.ChangeEvent<HTMLInputElement>,
-      type: 'month' | 'year',
-    ) => {
-      const { value } = e.target;
-
-      if (type === 'month') {
-        if (Number.parseInt(value, 10) > 12 || Number.parseInt(value, 10) < 1) {
-          setIsErrorCardValidityPeriod((prev) => ({
-            ...prev,
-            month: true,
-          }));
-        } else {
-          setIsErrorCardValidityPeriod((prev) => ({
-            ...prev,
-            month: false,
-          }));
-        }
-      } else if (type === 'year') {
-        if (
-          Number.parseInt(value, 10) <
-          Number.parseInt(new Date().getFullYear().toString().slice(2), 10)
-        ) {
-          setIsErrorCardValidityPeriod((prev) => ({
-            ...prev,
-            year: true,
-          }));
-        } else {
-          setIsErrorCardValidityPeriod((prev) => ({
-            ...prev,
-            year: false,
-          }));
-        }
-      }
-
-      setCardValidityPeriod((prev) => ({
-        ...prev,
-        [type]: value.slice(0, 2),
-      }));
-    };
-
-    return (
-      <CardValidityPeriodField
-        {...args}
-        cardValidityPeriod={cardValidityPeriod}
-        isError={isErrorCardValidityPeriod}
-        onChange={onChangeCardValidityPeriod}
-      />
-    );
+    return <CardValidityPeriodField {...args} />;
   },
 };

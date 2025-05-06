@@ -3,14 +3,16 @@ import Input from '../../common/Input/Input';
 
 interface CardNumberFieldProps {
   cardNumber: string[];
-  isError: boolean[];
+  errorStateList: boolean[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  setInputRef: (el: HTMLInputElement | null, index: number) => void;
 }
 
 function CardNumberField({
   cardNumber,
-  isError,
+  errorStateList,
   onChange,
+  setInputRef,
 }: CardNumberFieldProps) {
   return (
     <div>
@@ -20,7 +22,7 @@ function CardNumberField({
       <InputWrapper>
         {cardNumber.map((v, index) => (
           <Input
-            isError={isError[index]}
+            hasError={errorStateList[index]}
             type="tel"
             name="cardNumber"
             id={`cardNumber-${index}`}
@@ -31,6 +33,8 @@ function CardNumberField({
             placeholder="1234"
             min={0}
             max={9999}
+            ref={(el) => setInputRef(el, index)}
+            autoFocus={index === 0 && v.length === 0}
           />
         ))}
       </InputWrapper>

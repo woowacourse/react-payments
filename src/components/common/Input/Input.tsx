@@ -1,14 +1,7 @@
 import styled from '@emotion/styled';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  isError: boolean;
-  type?: string;
-  placeholder?: string;
-  value: string;
-  name: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+interface InputProps extends React.ComponentProps<'input'> {
+  hasError: boolean;
 }
 
 function Input(props: InputProps) {
@@ -19,13 +12,13 @@ export default Input;
 
 const InputWrapper = styled.input<InputProps>`
   width: 100%;
-  border: 1px solid ${(props) => (props.isError ? 'red' : 'gray')};
+  border: 1px solid ${(props) => (props.hasError ? 'red' : 'gray')};
   border-radius: 2px;
   padding: 8px;
   font-size: 11px;
   outline: none;
 
   &:focus {
-    border-color: ${(props) => !props.isError && 'black'};
+    border-color: ${(props) => !props.hasError && 'black'};
   }
 `;
