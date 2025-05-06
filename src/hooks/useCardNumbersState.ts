@@ -1,12 +1,15 @@
 import { useRef, useState } from 'react';
 import { CardNumberType } from '../types';
 import { INITIAL_CARD_NUMBER } from '../constants';
-import { isNumber } from '../utils/isNumber';
 import focusNextInputIfFilled from '../utils/focusNextInputIfFilled';
 import { isValidCardNumber } from '../validation/validateCardNumbers';
 
 export const useCardNumbersState = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumberType>(INITIAL_CARD_NUMBER);
+  return { cardNumbers, setCardNumbers };
+};
+
+export const useCardNumbersFocus = () => {
   const inputRefs = {
     first: useRef<HTMLInputElement>(null),
     second: useRef<HTMLInputElement>(null),
@@ -14,18 +17,21 @@ export const useCardNumbersState = () => {
     fourth: useRef<HTMLInputElement>(null)
   };
 
-  const handleCardNumbersChange = (field: keyof CardNumberType, value: string) => {
-    if (value !== '' && !isNumber(value)) {
-      return;
-    }
-    setCardNumbers((prev) => ({
-      ...prev,
-      [field]: { value, errorMessage: !isValidCardNumber(value) }
-    }));
-
+  const focusIfNeeded = (field: keyof CardNumberType, value: string) => {
     const keys = Object.keys(inputRefs);
-
-    focusNextInputIfFilled({ refs: Object.values(inputRefs), currentIndex: keys.indexOf(field), value, maxLength: 4 });
+    focusNextInputIfFilled({
+      refs: Object.values(inputRefs),
+      currentIndex: keys.indexOf(field),
+      value,
+      maxLength: 4
+    });
   };
-  return { cardNumbers, handleCardNumbersChange, inputRefs };
+
+  return { inputRefs, focusIfNeeded };
+};
+export const useCardNumbersValidation = () => {
+  const validate = (value: string) => {
+    return isValidCardNumber(value);
+  };
+  return { validate };
 };
