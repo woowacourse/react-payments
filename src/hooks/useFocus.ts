@@ -5,7 +5,7 @@ export const useFocus = (length: number) => {
 
   //TODO: 다음 input으로 이동
 
-  useEffect(() => {
+  useEffect(function focusOnFirstRef() {
     if (refs[0].current) {
       refs[0].current.focus();
     }
