@@ -1,17 +1,12 @@
-import { useNavigate } from 'react-router';
-
 import { Button } from '@/components/common/Button';
 import { Text } from '@/components/common/Text';
 
 type SubmitButtonProps = {
-  cardType: string;
-  cardNumber: string;
-  buttonText: string;
+  children: React.ReactNode;
+  onSubmit: () => void;
 };
 
-export const SubmitButton = ({ cardType, cardNumber, buttonText }: SubmitButtonProps) => {
-  const navigate = useNavigate();
-
+export const SubmitButton = ({ children, onSubmit }: SubmitButtonProps) => {
   return (
     <Button
       height="60px"
@@ -20,10 +15,10 @@ export const SubmitButton = ({ cardType, cardNumber, buttonText }: SubmitButtonP
       left="0"
       right="0"
       bottom="0"
-      onClick={() => navigate('/result', { state: { cardType, cardNumber } })}
+      onClick={onSubmit}
     >
       <Text variant="Title" fontWeight="bold" color="white">
-        {buttonText}
+        {children}
       </Text>
     </Button>
   );

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router';
+
 import { AppLayout } from '../../components/common/AppLayout';
 import { Flex } from '../../components/common/Flex';
 import { SubmitButton } from '../../components/features/Buttons/SubmitButton';
@@ -15,6 +17,8 @@ import { CardBrandsType } from '@/components/features/CardPreview/cardBrand.type
 import { useFormStep } from '@/hooks/useFormStep';
 
 export const Register = () => {
+  const navigate = useNavigate();
+
   const {
     value: cardNumbers,
     errorMessage: cardErrorMessage,
@@ -66,6 +70,10 @@ export const Register = () => {
     canMoveNextFromCardNumber &&
     selectedBrand !== null;
 
+  const handleSubmit = (cardType: CardBrandsType, cardNumber: string) => {
+    navigate('/result', { state: { cardType, cardNumber } });
+  };
+
   return (
     <AppLayout>
       <Flex padding="20px 0" flex={0}>
@@ -116,10 +124,10 @@ export const Register = () => {
       </CardFormLayout>
       {isAllClearInput && (
         <SubmitButton
-          cardType={selectedBrand}
-          cardNumber={cardNumbers[0].value}
-          buttonText="확인"
-        />
+          onSubmit={() => handleSubmit(selectedBrand as CardBrandsType, cardNumbers[0].value)}
+        >
+          확인
+        </SubmitButton>
       )}
     </AppLayout>
   );
