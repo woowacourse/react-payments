@@ -27,7 +27,7 @@ export default function useStep({ cardInfo, errorInfo }: CardInfoFormProps) {
   stepRef.current = Math.max(stepRef.current, calculatedStep);
 
   function isCompletedCardInfo() {
-    return stepRef.current === 5;
+    return calculatedStep === 5;
   }
 
   return { step: stepRef.current, canSubmit: isCompletedCardInfo() };
