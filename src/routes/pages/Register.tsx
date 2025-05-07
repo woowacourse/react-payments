@@ -62,13 +62,14 @@ export const Register = () => {
     canMoveNextFromPassword,
   });
 
-  const isAllClearInput =
-    step >= 4 &&
+  const isAllValidInput =
     canMoveNextFromPassword &&
     canMoveNextFromCVC &&
     canMoveNextFromExpireDate &&
     canMoveNextFromCardNumber &&
     selectedBrand !== null;
+
+  const isUserCanSubmit = step >= 4 && isAllValidInput;
 
   const handleSubmit = (cardType: CardBrandsType, cardNumber: string) => {
     navigate('/result', { state: { cardType, cardNumber } });
@@ -122,7 +123,7 @@ export const Register = () => {
           onCardInputBlur={handleBlur}
         />
       </CardFormLayout>
-      {isAllClearInput && (
+      {isUserCanSubmit && (
         <SubmitButton
           onSubmit={() => handleSubmit(selectedBrand as CardBrandsType, cardNumbers[0].value)}
         >
