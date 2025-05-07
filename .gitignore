@@ -1,6 +1,9 @@
 # Vite
 .vite
 
+.env
+.env.production
+
 # Logs
 logs
 *.log
@@ -27,3 +30,4 @@ dist-ssr
 *.sw?
 
 *storybook.log
+*storybook-static

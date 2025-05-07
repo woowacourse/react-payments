@@ -1,7 +1,7 @@
 import "./App.css";
-import PaymentInputPage from "./components/paymentInputPage/PaymentInputPage";
+import CardRegistrationStartPage from "./pages/home/CardRegistrationStartPage";
 function App() {
-  return <PaymentInputPage />;
+  return <CardRegistrationStartPage />;
 }
 
 export default App;

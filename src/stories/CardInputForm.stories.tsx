@@ -1,13 +1,31 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import CardInputForm from '../components/paymentInputPage/cardInputForm/CardInputForm';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import CardInputForm from "../pages/add-card/payment-input/components/cardInputForm/CardInputForm";
+import { CardInfo } from "../pages/add-card/payment-input/PaymentInputPage";
+import { MemoryRouter } from "react-router";
 
 const meta = {
-  title: 'CardInputForm',
+  title: "Components/CardInputForm",
   component: CardInputForm,
+  decorators: [
+    (Story) => (
+      <MemoryRouter initialEntries={["/"]}>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
   args: {
-    setCardNumbers: () => {},
-    setExpirationDate: () => {},
+    cardInfo: {
+      cardNumbers: ["", "", "", ""],
+      expirationDate: ["", ""],
+      brandName: "",
+    },
+    handleCardNumbersChange: () => {},
+    handleExpirationDateChange: () => {},
+    handleBrandNameChange: () => {},
+  },
+  parameters: {
+    layout: "centered",
   },
 } satisfies Meta<typeof CardInputForm>;
 
@@ -17,12 +35,30 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => {
-    const [cardNumbers, setCardNumbers] = useState<string[]>([]);
-    const [expirationDate, setExpirationDate] = useState<string[]>([]);
+    const [cardInfo, setCardInfo] = useState<CardInfo>({
+      cardNumbers: ["", "", "", ""],
+      expirationDate: ["", ""],
+      brandName: "",
+    });
+
+    function handleCardNumbersChange(cardNumbers: string[]) {
+      setCardInfo((prev) => ({ ...prev, cardNumbers }));
+    }
+
+    function handleExpirationDateChange(expirationDate: string[]) {
+      setCardInfo((prev) => ({ ...prev, expirationDate }));
+    }
+
+    function handleBrandNameChange(brandName: CardInfo["brandName"]) {
+      setCardInfo((prev) => ({ ...prev, brandName }));
+    }
+
     return (
       <CardInputForm
-        setCardNumbers={setCardNumbers}
-        setExpirationDate={setExpirationDate}
+        cardInfo={cardInfo}
+        handleCardNumbersChange={handleCardNumbersChange}
+        handleExpirationDateChange={handleExpirationDateChange}
+        handleBrandNameChange={handleBrandNameChange}
       />
     );
   },

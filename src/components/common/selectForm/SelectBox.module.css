@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.titleBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.description {
+  color: var(--grey);
+}
+
+.selector {
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  color: var(--grey);
+  padding: 12px 8px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  &.selected {
+    color: var(--black);
+  }
+}

@@ -1,0 +1,29 @@
+.tx-3xl {
+  font-size: 64px;
+  font-weight: 800;
+}
+
+.tx-2xl {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.tx-xl {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.tx-lg {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tx-md {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.tx-sm {
+  font-size: 10px;
+  font-weight: 400;
+}

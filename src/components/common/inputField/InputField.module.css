@@ -1,0 +1,44 @@
+.container {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.inputForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  color: var(--black);
+}
+
+.titleBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  & p {
+    color: var(--grey);
+  }
+}
+
+.feedbackMessage {
+  color: var(--red);
+}
