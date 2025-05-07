@@ -1,4 +1,4 @@
-import { INITIALIZE_VALUE, NO_ERROR } from "../../../shared/constants/constant";
+import { INITIALIZE_VALUE, NO_ERROR } from "../../../shared/constants/values";
 import { ERROR_MESSAGE } from "../constants/CardPasswordInputs.constant";
 import { isValidLength, isValidNumber } from "../../../shared/util/validation";
 

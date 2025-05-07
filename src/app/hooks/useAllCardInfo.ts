@@ -1,5 +1,5 @@
 import useCardInfo from "./useCardInfo";
-import { INITIALIZE_VALUE } from "../../shared/constants/constant";
+import { INITIALIZE_VALUE } from "../../shared/constants/values";
 import { CardTypeList } from "../../shared/types/index.types";
 
 export default function useAllCardInfo() {

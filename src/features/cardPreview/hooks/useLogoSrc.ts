@@ -1,7 +1,7 @@
 import { CardNumberPosition } from "../../../shared/types/index.types";
 import { useMemo } from "react";
 import { getIdentifyFns } from "../domains/CardPreview.domain";
-import { INITIALIZE_VALUE } from "../../../shared/constants/constant";
+import { INITIALIZE_VALUE } from "../../../shared/constants/values";
 
 export default function useLogoSrc(
   cardNumber: Record<CardNumberPosition, string>

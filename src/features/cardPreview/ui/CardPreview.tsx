@@ -8,7 +8,7 @@ import {
   StyledExpirationPeriod,
 } from "../css/CardPreview.css";
 import { CardPreviewProps } from "../types/CardPreview.types";
-import { INITIALIZE_VALUE } from "../../../shared/constants/constant";
+import { INITIALIZE_VALUE } from "../../../shared/constants/values";
 import useLogoSrc from "../hooks/useLogoSrc";
 
 function CardPreview({

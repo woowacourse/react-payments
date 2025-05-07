@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from "../constants/CardExpirationPeriodInputs.constant";
-import { INITIALIZE_VALUE, NO_ERROR } from "../../../shared/constants/constant";
+import { INITIALIZE_VALUE, NO_ERROR } from "../../../shared/constants/values";
 import {
   isValidLength,
   isValidNumber,

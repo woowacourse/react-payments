@@ -1,5 +1,5 @@
 import Input from "../../../shared/input/ui/Input";
-import { NO_ERROR } from "../../../shared/constants/constant";
+import { NO_ERROR } from "../../../shared/constants/values.ts";
 import {
   EXPIRATION_PERIOD,
   EXPIRATION_PERIOD_LENGTH,

@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardPasswordSection from "../ui/CardPasswordSection";
 import useCardInfo from "../../../app/hooks/useCardInfo";
-import { INITIALIZE_VALUE } from "../../../shared/constants/constant";
+import { INITIALIZE_VALUE } from "../../../shared/constants/values";
 
 const meta = {
   title: "CardPasswordSection",

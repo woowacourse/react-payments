@@ -1,5 +1,5 @@
 import { CardNumberPosition } from "../../../shared/types/index.types";
-import { NO_ERROR } from "../../../shared/constants/constant";
+import { NO_ERROR } from "../../../shared/constants/values";
 import useError from "./useError";
 import { getCardNumberValidationFns } from "../../../entities/cardNumberInputs/domains/CardNumberInputs.domain";
 import {

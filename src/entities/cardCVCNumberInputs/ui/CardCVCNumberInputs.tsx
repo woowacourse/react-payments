@@ -1,5 +1,5 @@
 import Input from "../../../shared/input/ui/Input";
-import { CVC_NUMBER_LENGTH } from "../constants/CardCVCNumberInputs.constant";
+import { CVC_NUMBER_LENGTH } from "../constants";
 import { CardCVCNumberSectionProps } from "../types/CardCVCNumber.types";
 import {
   StyledContainer,
@@ -41,6 +41,7 @@ function CardCVCNumberInputs({
           placeholder="123"
         />
       </StyledInputWrap>
+
       {errorMessage ? (
         <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
       ) : null}

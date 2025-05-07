@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NO_ERROR } from "../../../shared/constants/constant";
+import { NO_ERROR } from "../../../shared/constants/values";
 
 type checkValidationType<T> = {
   length: number;
