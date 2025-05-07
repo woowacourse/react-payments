@@ -19,7 +19,7 @@ export const CardPasswordForm = ({
   onCardInputChange,
   onCardInputBlur,
 }: Props) => {
-  const { refs } = useFocus(password.length);
+  const { refs } = useFocus(1);
 
   return (
     <CardInputLayout
@@ -28,19 +28,15 @@ export const CardPasswordForm = ({
       label="비밀번호 앞 2자리"
     >
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
-        {password.map((password, index) => (
-          <Input
-            type="password"
-            key={`password-${index}`}
-            maxLength={2}
-            value={password.value}
-            onChange={(e) => onCardInputChange(e, index)}
-            onBlur={(e) => onCardInputBlur(e, index)}
-            isValid={password.isValid}
-            ref={refs[index]}
-            autoComplete="off"
-          />
-        ))}
+        <Input
+          type="password"
+          maxLength={2}
+          onChange={(e) => onCardInputChange(e, 0)}
+          onBlur={(e) => onCardInputBlur(e, 0)}
+          isValid={password[0].isValid}
+          ref={refs[0]}
+          autoComplete="off"
+        />
         <Text
           variant="Caption"
           color="red"
