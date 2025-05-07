@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 
+import { CardBrandsType } from './cardBrand.types';
 import {
   StyledCardContainer,
   StyledCardTypeIcon,
@@ -10,7 +11,6 @@ import { Flex } from '@/components/common/Flex';
 import { Text } from '@/components/common/Text';
 import { CardInputType } from '@/hooks/useCardInput';
 import { ExpireDateInputType } from '@/hooks/useExpireDateInput';
-
 type Props = {
   /**
    * 카드 번호를 입력받는 배열입니다.
@@ -23,7 +23,7 @@ type Props = {
   /**
    * 카드 브랜드를 입력받는 배열입니다.
    */
-  cardBrand: string | null;
+  cardBrand: CardBrandsType;
 };
 
 export const CardPreview = ({ cardNumbers, expireDate, cardBrand }: Props) => {
