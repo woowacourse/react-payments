@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import CardInputSection from '../CardInputSection/CardInputSection';
 import CardCVCField from '../../cardInfoFields/CardCVCField/CardCVCField';
 
@@ -7,7 +6,7 @@ interface CardCVCSectionProps {
   onChangeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isError: boolean;
   errorMessage: string;
-  isValid: () => boolean;
+  show: boolean;
 }
 
 function CardCVCSection({
@@ -15,15 +14,8 @@ function CardCVCSection({
   onChangeCardCVC,
   isError,
   errorMessage,
-  isValid,
+  show,
 }: CardCVCSectionProps) {
-  const showRef = useRef(false);
-
-  if (!showRef.current && isValid()) {
-    showRef.current = true;
-  }
-  const show = showRef.current;
-
   return (
     <>
       {show ? (

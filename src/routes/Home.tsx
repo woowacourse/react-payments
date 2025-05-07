@@ -5,16 +5,29 @@ import CardForm from '../components/cardInfoForm/CardForm/CardForm';
 import CardPreview from '../components/CardPreview/CardPreview';
 
 function Home() {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+  const [cardNumber, setCardNumber] = useState({
+    value: ['', '', '', ''],
+    isErrors: [false, false, false, false],
+    errorMessage: '',
+  });
   const [cardCompany, setCardCompany] = useState<
     keyof typeof CARD_COMPANY_NAME | undefined
   >();
   const [cardValidityPeriod, setCardValidityPeriod] = useState({
-    month: '',
-    year: '',
+    value: { month: '', year: '' },
+    isError: { month: false, year: false },
+    errorMessage: '',
   });
-  const [cardCVC, setCardCVC] = useState('');
-  const [cardPassword, setCardPassword] = useState('');
+  const [cardCVC, setCardCVC] = useState({
+    value: '',
+    isError: false,
+    errorMessage: '',
+  });
+  const [cardPassword, setCardPassword] = useState({
+    value: '',
+    isError: false,
+    errorMessage: '',
+  });
 
   const isCardCompany = (v: string): v is keyof typeof CARD_COMPANY_NAME => {
     return v in CARD_COMPANY_NAME;
@@ -39,8 +52,8 @@ function Home() {
   return (
     <AppLayout>
       <CardPreview
-        cardNumber={cardNumber}
-        cardValidityPeriod={cardValidityPeriod}
+        cardNumber={cardNumber.value}
+        cardValidityPeriod={cardValidityPeriod.value}
         cardCompany={cardCompany}
       />
       <CardForm

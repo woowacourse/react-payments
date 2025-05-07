@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import CardInputSection from '../CardInputSection/CardInputSection';
 import CardCompanySelect from '../../cardInfoFields/CardCompanySelect/CardCompanySelect';
 
@@ -14,21 +13,14 @@ interface CardCompanySectionProps {
     | '국민카드'
     | undefined;
   handleChangeCardCompany: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  isValid: () => boolean;
+  show: boolean;
 }
 
 function CardCompanySection({
   cardCompany,
   handleChangeCardCompany,
-  isValid,
+  show,
 }: CardCompanySectionProps) {
-  const showRef = useRef(false);
-
-  if (!showRef.current && isValid()) {
-    showRef.current = true;
-  }
-  const show = showRef.current;
-
   return (
     <>
       {show ? (

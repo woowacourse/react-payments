@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import CardInputSection from '../CardInputSection/CardInputSection';
 import CardPasswordField from '../../cardInfoFields/CardPasswordField/CardPasswordField';
 
@@ -7,7 +7,7 @@ interface CardPasswordSectionProps {
   onChangeCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isError: boolean;
   errorMessage: string;
-  isValid: () => boolean;
+  show: boolean;
 }
 
 function CardPasswordSection({
@@ -15,15 +15,8 @@ function CardPasswordSection({
   onChangeCardPassword,
   isError,
   errorMessage,
-  isValid,
+  show,
 }: CardPasswordSectionProps) {
-  const showRef = useRef(false);
-
-  if (!showRef.current && isValid()) {
-    showRef.current = true;
-  }
-  const show = showRef.current;
-
   return (
     <>
       {show ? (

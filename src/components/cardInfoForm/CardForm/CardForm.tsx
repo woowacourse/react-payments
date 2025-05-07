@@ -1,30 +1,72 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import CardInputSection from '../cardInfoInputSections/CardInputSection/CardInputSection';
 import CardNumberField from '../cardInfoFields/CardNumberField/CardNumberField';
 import { CARD_COMPANY_NAME } from '../../constants/cardCompany';
 import CardValidityPeriodField from '../cardInfoFields/CardValidityPeriodField/CardValidityPeriodField';
-import useCardValidationError from '../../../hooks/useCardValidationError';
 import CardCompanySection from '../cardInfoInputSections/CardCompanySection/CardCompanySection';
 import CardCVCSection from '../cardInfoInputSections/CardCVCSection/CardCVCSection';
 import CardPasswordSection from '../cardInfoInputSections/CardPasswordSection/CardPasswordSection';
+import { validateExpiry } from '../../../utils/validateExpiry';
 
 interface CardFormProps {
-  cardNumber: string[];
-  cardCompany: keyof typeof CARD_COMPANY_NAME | undefined;
-  cardCVC: string;
-  cardValidityPeriod: {
-    month: string;
-    year: string;
+  cardNumber: {
+    value: string[];
+    isErrors: boolean[];
+    errorMessage: string;
   };
-  cardPassword: string;
-  setCardNumber: (cardNumber: string[]) => void;
+  cardCompany: keyof typeof CARD_COMPANY_NAME | undefined;
+  cardValidityPeriod: {
+    value: {
+      month: string;
+      year: string;
+    };
+    isError: {
+      month: boolean;
+      year: boolean;
+    };
+    errorMessage: string;
+  };
+  cardCVC: {
+    value: string;
+    isError: boolean;
+    errorMessage: string;
+  };
+  cardPassword: {
+    value: string;
+    isError: boolean;
+    errorMessage: string;
+  };
+  setCardNumber: (cardNumber: {
+    value: string[];
+    isErrors: boolean[];
+    errorMessage: string;
+  }) => void;
   handleChangeCardCompany: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   setCardValidityPeriod: React.Dispatch<
-    React.SetStateAction<{ month: string; year: string }>
+    React.SetStateAction<{
+      value: {
+        month: string;
+        year: string;
+      };
+      isError: {
+        month: boolean;
+        year: boolean;
+      };
+      errorMessage: string;
+    }>
   >;
-  setCardCVC: (cvc: string) => void;
-  setCardPassword: (password: string) => void;
+  setCardCVC: (cvc: {
+    value: string;
+    isError: boolean;
+    errorMessage: string;
+  }) => void;
+  setCardPassword: (password: {
+    value: string;
+    isError: boolean;
+    errorMessage: string;
+  }) => void;
 }
 
 function CardForm({
@@ -39,54 +81,101 @@ function CardForm({
   setCardValidityPeriod,
   setCardPassword,
 }: CardFormProps) {
-  const {
-    state,
-    validateCardNumber,
-    validateCardCVC,
-    validatePeriod,
-    validatePassword,
-  } = useCardValidationError();
+  const [stepShow, setStepShow] = useState({
+    cardCompany: false,
+    cardCVC: false,
+    cardPassword: false,
+  });
+
+  const onChangeStep = (step: 'cardCompany' | 'cardCVC' | 'cardPassword') => {
+    setStepShow((prev) => ({ ...prev, [step]: true }));
+  };
 
   const onChangeCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
     i: number,
   ) => {
-    const copy = [...cardNumber];
+    const copy = [...cardNumber.value];
     copy[i] = e.target.value;
 
-    setCardNumber(copy);
-    validateCardNumber(copy);
+    const errors = copy.map((v) => v.length !== 4);
+    const message = errors.some(Boolean)
+      ? '카드 번호는 4자리씩 입력해야 합니다.'
+      : '';
+
+    setCardNumber({
+      value: copy,
+      isErrors: errors,
+      errorMessage: message,
+    });
+
+    if (!errors.some(Boolean)) {
+      onChangeStep('cardCompany');
+    }
   };
 
   const onChangeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    setCardCVC(value);
-    validateCardCVC(value);
+    const isError = value.length !== 3;
+    const message = isError ? 'CVC는 3자리 숫자여야 합니다.' : '';
+
+    setCardCVC({
+      value: value,
+      isError: isError,
+      errorMessage: message,
+    });
+    if (!isError) {
+      onChangeStep('cardPassword');
+    }
   };
 
   const onChangeCardValidityPeriod = (
     e: React.ChangeEvent<HTMLInputElement>,
     type: 'month' | 'year',
   ) => {
-    const copy = { ...cardValidityPeriod };
+    const copy = { ...cardValidityPeriod.value };
     const { value } = e.target;
 
     if (type === 'month') copy.month = value;
     if (type === 'year') copy.year = value;
 
+    const { message, field } = validateExpiry(copy.month, copy.year, type);
+
+    const isError = field
+      ? {
+          month: type === 'month' ? false : false,
+          year: false,
+          [field]: true,
+        }
+      : { month: false, year: false };
+
     setCardValidityPeriod((prev) => ({
       ...prev,
-      [type]: value,
+      value: {
+        ...prev.value,
+        [type]: value,
+      },
+      isError: isError,
+      errorMessage: message,
     }));
-    validatePeriod(copy.year, copy.month, type);
+
+    if (!isError.month && !isError.year) {
+      onChangeStep('cardCVC');
+    }
   };
 
   const onChangeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    setCardPassword(value);
-    validatePassword(value);
+    const isError = value.length > 0 && value.length < 2;
+    const message = isError ? '비밀번호는 두자리 입니다.' : '';
+
+    setCardPassword({
+      value: value,
+      isError: isError,
+      errorMessage: message,
+    });
   };
 
   const navigate = useNavigate();
@@ -97,7 +186,7 @@ function CardForm({
     if (isValid) {
       navigate('/Completion', {
         state: {
-          startCardNumber: cardNumber[0],
+          startCardNumber: cardNumber.value[0],
           cardCompany: cardCompany,
         },
       });
@@ -106,20 +195,20 @@ function CardForm({
 
   const checkIsValid = () => {
     const errorMessages = [
-      state.cardCVCErrorMessage,
-      state.cardNumberErrorMessage,
-      state.cardPasswordErrorMessage,
-      state.cardValidityMessage,
+      cardNumber.errorMessage,
+      cardValidityPeriod.errorMessage,
+      cardCVC.errorMessage,
+      cardPassword.errorMessage,
     ];
     const isError = errorMessages.some((e) => e !== '');
 
     const values = [
-      ...cardNumber,
+      ...cardNumber.value,
       cardCompany,
-      cardValidityPeriod.month,
-      cardValidityPeriod.year,
-      cardCVC,
-      cardPassword,
+      cardValidityPeriod.value.month,
+      cardValidityPeriod.value.year,
+      cardCVC.value,
+      cardPassword.value,
     ];
 
     const isNoneValue = values.some((e) => !e);
@@ -127,49 +216,31 @@ function CardForm({
     return !isError && !isNoneValue;
   };
 
-  const isCardNumberValid = () => {
-    return (
-      state.isCardNumberError.every((e) => !e) &&
-      cardNumber.every((e) => e !== '')
-    );
-  };
-
-  const isCardValidityPeriodValid = () => {
-    return (
-      Object.values(state.isErrorCardValidityPeriod).every((e) => !e) &&
-      Object.values(cardValidityPeriod).every((e) => e !== '')
-    );
-  };
-
-  const isCardCVCValid = () => {
-    return cardCVC !== '' && !state.isCardCVCError;
-  };
-
   return (
     <Form onSubmit={handleSubmit}>
       <CardPasswordSection
-        cardPassword={cardPassword}
+        cardPassword={cardPassword.value}
         onChangeCardPassword={onChangeCardPassword}
-        isError={state.isErrorCardPassword}
-        errorMessage={state.cardPasswordErrorMessage}
-        isValid={isCardCVCValid}
+        isError={cardPassword.isError}
+        errorMessage={cardPassword.errorMessage}
+        show={stepShow.cardPassword}
       />
       <CardCVCSection
-        cardCVC={cardCVC}
+        cardCVC={cardCVC.value}
         onChangeCardCVC={onChangeCardCVC}
-        isError={state.isCardCVCError}
-        errorMessage={state.cardCVCErrorMessage}
-        isValid={isCardValidityPeriodValid}
+        isError={cardCVC.isError}
+        errorMessage={cardCVC.errorMessage}
+        show={stepShow.cardCVC}
       />
       {cardCompany && (
         <CardInputSection
           title="카드 유효기간을 입력해 주세요"
           description="월/년도(MMYY)를 순서대로 입력해 주세요."
-          errorMessage={state.cardValidityMessage}
+          errorMessage={cardValidityPeriod.errorMessage}
         >
           <CardValidityPeriodField
-            cardValidityPeriod={cardValidityPeriod}
-            isError={state.isErrorCardValidityPeriod}
+            cardValidityPeriod={cardValidityPeriod.value}
+            isError={cardValidityPeriod.isError}
             onChange={onChangeCardValidityPeriod}
           />
         </CardInputSection>
@@ -177,15 +248,15 @@ function CardForm({
       <CardCompanySection
         cardCompany={cardCompany}
         handleChangeCardCompany={handleChangeCardCompany}
-        isValid={isCardNumberValid}
+        show={stepShow.cardCompany}
       />
       <CardInputSection
         title="결제할 카드 번호 입력"
-        errorMessage={state.cardNumberErrorMessage}
+        errorMessage={cardNumber.errorMessage}
       >
         <CardNumberField
-          cardNumber={cardNumber}
-          isError={state.isCardNumberError}
+          cardNumber={cardNumber.value}
+          isError={cardNumber.isErrors}
           onChange={onChangeCardNumber}
         />
       </CardInputSection>
