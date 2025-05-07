@@ -32,7 +32,7 @@ export const Default: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
-    cardBrand: '',
+    cardBrand: null,
   },
   argTypes: {
     cardNumbers: {
@@ -55,7 +55,7 @@ export const VisaCard: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
-    cardBrand: '',
+    cardBrand: null,
   },
   argTypes: {
     cardNumbers: {
@@ -78,7 +78,7 @@ export const MasterCard: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
-    cardBrand: '',
+    cardBrand: null,
   },
   argTypes: {
     cardNumbers: {
