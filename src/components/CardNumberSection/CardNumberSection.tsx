@@ -1,71 +1,71 @@
 import styles from './CardNumberSection.module.css';
-import { InputSection } from '../common/InputSection/InputSection';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { CardLogo, CardNumber } from '../../types/card';
-
+import { FieldGroup } from '../common/FieldGroup/FieldGroup';
+import { CardNumber } from '../../types/card';
+import { InputWrapper } from '../common/InputWrapper/InputWrapper';
+import { useRef } from 'react';
 type Props = {
   cardNumbers: CardNumber;
-  setCardLogo: Dispatch<SetStateAction<CardLogo>>;
-  setCardNumbers: Dispatch<SetStateAction<CardNumber>>;
+  handleCardNumberChange: (key: keyof CardNumber, value: string) => void;
+  cardNumberError: string;
 };
 
-export default function CardNumberSection({ cardNumbers, setCardNumbers, setCardLogo }: Props) {
-  const [cardValidity, setCardValidity] = useState<Record<keyof CardNumber, boolean>>({
-    first: true,
-    second: true,
-    third: true,
-    fourth: true
-  });
+export default function CardNumberSection({ cardNumbers, handleCardNumberChange, cardNumberError }: Props) {
+  const firstInputRef = useRef<HTMLInputElement>(null);
+  const secondInputRef = useRef<HTMLInputElement>(null);
+  const thirdInputRef = useRef<HTMLInputElement>(null);
+  const fourthInputRef = useRef<HTMLInputElement>(null);
 
-  const handleCardNumberChange = (key: keyof CardNumber, value: string) => {
-    setCardNumbers((prev) => ({ ...prev, [key]: value }));
-
-    const isValidNumber = validateNumberValidity(value);
-    setCardValidity((prev) => ({ ...prev, [key]: isValidNumber }));
-
-    const first = key === 'first' ? value : cardNumbers.first;
-    updateCardLogoFromNumbers(first);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, currentField: string) => {
+    if (e.key === 'Backspace' && e.currentTarget.value === '') {
+      if (currentField === 'second') firstInputRef.current?.focus();
+      if (currentField === 'third') secondInputRef.current?.focus();
+      if (currentField === 'fourth') thirdInputRef.current?.focus();
+    }
   };
 
-  function validateNumberValidity(value: string): boolean {
-    return /^[0-9]*$/.test(value);
-  }
+  const hasAnyInput = Object.values(cardNumbers).some((value) => value.length > 0);
 
-  function updateCardLogoFromNumbers(numbers: string) {
-    if (numbers.startsWith('4')) {
-      setCardLogo('visa');
-      return;
-    }
-    if (51 <= Number(numbers.slice(0, 2)) && Number(numbers.slice(0, 2)) <= 55) {
-      setCardLogo('master');
-      return;
-    }
+  const isEachTouched = {
+    first: cardNumbers.first.length > 0,
+    second: cardNumbers.second.length > 0,
+    third: cardNumbers.third.length > 0,
+    fourth: cardNumbers.fourth.length > 0
+  };
 
-    return setCardLogo('');
-  }
+  const isEachValid = {
+    first: !isEachTouched.first || (cardNumbers.first.length === 4 && /^[0-9]+$/.test(cardNumbers.first)),
+    second: !isEachTouched.second || (cardNumbers.second.length === 4 && /^[0-9]+$/.test(cardNumbers.second)),
+    third: !isEachTouched.third || (cardNumbers.third.length === 4 && /^[0-9]+$/.test(cardNumbers.third)),
+    fourth: !isEachTouched.fourth || (cardNumbers.fourth.length === 4 && /^[0-9]+$/.test(cardNumbers.fourth))
+  };
+
+  const handleKeyChange = (key: keyof CardNumber, value: string) => {
+    handleCardNumberChange(key, value);
+
+    if (value.length === 4) {
+      if (key === 'first') secondInputRef.current?.focus();
+      else if (key === 'second') thirdInputRef.current?.focus();
+      else if (key === 'third') fourthInputRef.current?.focus();
+    }
+  };
 
   return (
     <div className={styles.sectionContainer}>
-      <InputSection.TitleWrapper>
-        <InputSection.Title title="결제할 카드 번호를 입력해 주세요" />
-        <InputSection.SubTitle title="본인 명의의 카드만 입력 가능합니다." />
-      </InputSection.TitleWrapper>
-      <div className={styles.inputSection}>
-        <InputSection.Label text="카드번호" />
-        <InputSection.InputWrapper<keyof CardNumber>
+      <FieldGroup.TitleWrapper>
+        <FieldGroup.Title title="결제할 카드 번호를 입력해 주세요" />
+        <FieldGroup.SubTitle title="본인 명의의 카드만 입력 가능합니다." />
+      </FieldGroup.TitleWrapper>
+      <div className={styles.FieldGroup}>
+        <FieldGroup.Label text="카드번호" />
+        <InputWrapper<keyof CardNumber>
           fields={[
             { key: 'first', value: cardNumbers.first },
             { key: 'second', value: cardNumbers.second },
             { key: 'third', value: cardNumbers.third },
             { key: 'fourth', value: cardNumbers.fourth }
           ]}
-          onChange={handleCardNumberChange}
-          valid={{
-            first: cardValidity.first,
-            second: cardValidity.second,
-            third: cardValidity.third,
-            fourth: cardValidity.fourth
-          }}
+          onChange={handleKeyChange}
+          valid={isEachValid}
           placeholders={{
             first: '1234',
             second: '1234',
@@ -73,8 +73,15 @@ export default function CardNumberSection({ cardNumbers, setCardNumbers, setCard
             fourth: '1234'
           }}
           maxLength={4}
+          inputRefs={{
+            first: firstInputRef,
+            second: secondInputRef,
+            third: thirdInputRef,
+            fourth: fourthInputRef
+          }}
+          onKeyDown={handleKeyDown}
         />
-        <InputSection.Error message={Object.values(cardValidity).every((v) => v) ? '' : '숫자만 입력 가능합니다.'} />
+        {hasAnyInput && cardNumberError && <FieldGroup.Error message={cardNumberError} />}
       </div>
     </div>
   );

@@ -1,12 +1,3 @@
-.inputWrapper {
-  display: flex;
-  gap: 10px;
-}
-
-.inputTitle {
-  font-size: 12px;
-}
-
 .hidden {
   visibility: hidden;
 }
@@ -26,4 +17,8 @@
   font-size: 9.5px;
   color: var(--color-gray-20);
   margin-bottom: 16px;
+}
+
+.fieldLabel {
+  font-size: 12px;
 }

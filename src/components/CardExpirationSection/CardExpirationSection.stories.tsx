@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CardExpirationSection from './CardExpirationSection';
+import { CardExpiration } from '../../types/card';
 
 const meta: Meta<typeof CardExpirationSection> = {
   title: 'CardExpirationSection',
@@ -12,30 +13,72 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    expiration: { month: '', year: '' }
+    cardExpiration: { month: '', year: '' },
+    cardExpirationError: { month: '', year: '' }
   },
-  render: ({ expiration }) => {
-    const [exp, setExp] = useState(expiration);
-    return <CardExpirationSection expiration={exp} setExpiration={setExp} />;
+  render: ({ cardExpiration: initialExpiration }) => {
+    const [cardExpiration, setCardExpiration] = useState<CardExpiration>(initialExpiration);
+    const [cardExpirationError, setCardExpirationError] = useState<CardExpiration>({ month: '', year: '' });
+
+    const handleCardExpirationChange = (key: keyof CardExpiration, value: string) => {
+      setCardExpiration((prev) => ({ ...prev, [key]: value }));
+      setCardExpirationError((prev) => ({ ...prev, [key]: '' }));
+    };
+
+    return (
+      <CardExpirationSection
+        cardExpiration={cardExpiration}
+        handleCardExpirationChange={handleCardExpirationChange}
+        cardExpirationError={cardExpirationError}
+      />
+    );
   }
 };
 
 export const Valid: Story = {
   args: {
-    expiration: { month: '12', year: '28' }
+    cardExpiration: { month: '12', year: '28' },
+    cardExpirationError: { month: '', year: '' }
   },
-  render: ({ expiration }) => {
-    const [exp, setExp] = useState(expiration);
-    return <CardExpirationSection expiration={exp} setExpiration={setExp} />;
+  render: ({ cardExpiration: initialExpiration }) => {
+    const [cardExpiration, setCardExpiration] = useState<CardExpiration>(initialExpiration);
+    const [cardExpirationError, setCardExpirationError] = useState<CardExpiration>({ month: '', year: '' });
+
+    const handleCardExpirationChange = (key: keyof CardExpiration, value: string) => {
+      setCardExpiration((prev) => ({ ...prev, [key]: value }));
+      setCardExpirationError((prev) => ({ ...prev, [key]: '' }));
+    };
+
+    return (
+      <CardExpirationSection
+        cardExpiration={cardExpiration}
+        handleCardExpirationChange={handleCardExpirationChange}
+        cardExpirationError={cardExpirationError}
+      />
+    );
   }
 };
 
 export const InValid: Story = {
   args: {
-    expiration: { month: 'aq', year: '12' }
+    cardExpiration: { month: 'aq', year: '12' },
+    cardExpirationError: { month: '숫자만 입력해 주세요.', year: '' }
   },
-  render: ({ expiration }) => {
-    const [exp, setExp] = useState(expiration);
-    return <CardExpirationSection expiration={exp} setExpiration={setExp} />;
+  render: ({ cardExpiration: initialExpiration, cardExpirationError: initialError }) => {
+    const [cardExpiration, setCardExpiration] = useState<CardExpiration>(initialExpiration);
+    const [cardExpirationError, setCardExpirationError] = useState<CardExpiration>(initialError);
+
+    const handleCardExpirationChange = (key: keyof CardExpiration, value: string) => {
+      setCardExpiration((prev) => ({ ...prev, [key]: value }));
+      setCardExpirationError((prev) => ({ ...prev, [key]: '' }));
+    };
+
+    return (
+      <CardExpirationSection
+        cardExpiration={cardExpiration}
+        handleCardExpirationChange={handleCardExpirationChange}
+        cardExpirationError={cardExpirationError}
+      />
+    );
   }
 };
