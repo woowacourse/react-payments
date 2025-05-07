@@ -6,10 +6,10 @@ export enum CardType {
 
 export const CARD_TYPE_RULE = Object.freeze({
   [CardType.VISA]: {
-    FIRST_DIGIT: '4',
+    FIRST_DIGIT: 4,
   },
   [CardType.MASTERCARD]: {
-    FIRST_DIGIT: '5',
+    FIRST_DIGIT: 5,
     SECOND_DIGIT_MIN: 1,
     SECOND_DIGIT_MAX: 5,
   },

@@ -1,0 +1,22 @@
+.cardInfo-select {
+  width: 100%;
+  border-radius: 2px;
+  border:
+    1.015px solid,
+    #acacac;
+  padding: 0.5rem;
+}
+
+.cardInfo-select > option:first-child {
+  color: #acacac;
+}
+
+.cardInfo-select:focus {
+  border:
+    1.015px solid,
+    black;
+}
+
+.cardInfo-select-error {
+  border: 1.015px solid #ff3d3d;
+}

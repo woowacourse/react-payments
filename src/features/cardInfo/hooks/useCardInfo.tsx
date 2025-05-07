@@ -1,85 +1,92 @@
-import { useState } from 'react';
-import {
-  cardNumberValidator,
-  cardExpirationDateValidator,
-  cardCVCValidator,
-} from '../../../entities/cardInfo/model/cardInfoValidator';
-import { InputValidationResultProps } from '../../../entities/cardInfo/model/cardInfoValidator';
-import CardInfo from '../../../entities/cardInfo/model/CardInfo';
-
-const VALIDATORS = {
-  cardNumber: cardNumberValidator,
-  cardExpirationDate: cardExpirationDateValidator,
-  cardCVC: cardCVCValidator,
-};
-
-const ERROR_KEYS = {
-  cardNumber: 'cardNumberError',
-  cardExpirationDate: 'cardExpirationDateError',
-  cardCVC: 'cardCVCError',
-};
+import CardInfo from '../../../entities/cardInfo/types/CardInfo';
+import { CardInfoType } from '../../../entities/cardInfo/constants/cardInfoTypeConstants';
+import { useCardNumber } from './useCardNumber';
+import { useCardCompany } from './useCardCompany';
+import { useCardExpDate } from './useCardExpDate';
+import { useCardCVC } from './useCardCVC';
+import { useCardPassword } from './useCardPassword';
+import { useSectionManager } from './useSectionManager';
+import { useErrorHandler } from './useErrorHandler';
 
 export default function useCardInfo() {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({
-    cardNumber: ['', '', '', ''],
-    cardExpirationDate: { month: '', year: '' },
-    cardCVC: '',
+  const { currentSection, isAllSectionsCompleted, getSectionState, completeSection } =
+    useSectionManager();
+
+  const { error, getErrorState } = useErrorHandler();
+
+  const { cardNumber, changeCardNumber } = useCardNumber({
+    sectionState: getSectionState(CardInfoType.NUMBER),
+    sectionNavigation: { completeSection },
+    errorState: getErrorState(),
   });
-  const [error, setError] = useState<InputValidationResultProps>({
-    cardNumberError: [-1, ''],
-    cardExpirationDateError: [-1, ''],
-    cardCVCError: [-1, ''],
+
+  const { cardCompany, changeCardCompany } = useCardCompany({
+    sectionState: getSectionState(CardInfoType.COMPANY),
+    sectionNavigation: { completeSection },
   });
 
-  const handleCardInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const { cardExpirationDate, changeCardExpDate } = useCardExpDate({
+    sectionState: getSectionState(CardInfoType.EXPDATE),
+    sectionNavigation: { completeSection },
+    errorState: getErrorState(),
+  });
 
-    if (name.startsWith('cardNumber')) {
-      const index = Number(name[name.length - 1]);
-      setCardInfo((prev) => {
-        const updatedNumbers = prev.cardNumber.map((num, i) => (i === index ? value : num));
-        validateAndSetError('cardNumber', updatedNumbers, setError);
-        return { ...prev, cardNumber: updatedNumbers };
-      });
-      return;
-    }
+  const { cardCVC, changeCardCVC } = useCardCVC({
+    sectionState: getSectionState(CardInfoType.CVC),
+    sectionNavigation: { completeSection },
+    errorState: getErrorState(),
+  });
 
-    if (name.startsWith('cardExpirationDate')) {
-      const key = name.split('-')[1] as 'month' | 'year';
-      setCardInfo((prev) => {
-        const updateDate = { ...prev.cardExpirationDate, [key]: value };
-        validateAndSetError('cardExpirationDate', updateDate, setError);
-        return { ...prev, cardExpirationDate: updateDate };
-      });
-      return;
-    }
+  const { cardPassword, changeCardPassword } = useCardPassword({
+    sectionState: getSectionState(CardInfoType.PASSWORD),
+    sectionNavigation: { completeSection },
+    errorState: getErrorState(),
+  });
 
-    if (name.startsWith('cardCVC')) {
-      setCardInfo((prev) => {
-        validateAndSetError('cardCVC', value, setError);
-        return { ...prev, cardCVC: value };
-      });
-      return;
-    }
-
-    setCardInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const cardInfo: CardInfo = {
+    [CardInfoType.NUMBER]: cardNumber,
+    [CardInfoType.COMPANY]: cardCompany,
+    [CardInfoType.EXPDATE]: cardExpirationDate,
+    [CardInfoType.CVC]: cardCVC,
+    [CardInfoType.PASSWORD]: cardPassword,
   };
 
-  return { cardInfo, setCardInfo, handleCardInfoChange, error };
-}
+  const handleCardInfo = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
 
-const validateAndSetError = (key: keyof typeof VALIDATORS, value: any, setError: any) => {
-  const validator = VALIDATORS[key];
-  const errorKey = ERROR_KEYS[key] as keyof InputValidationResultProps;
-  const [errorIndex, errorMessage] = validator(value);
-  setError(
-    (prevError: any) =>
-      ({
-        ...prevError,
-        [errorKey]: errorIndex !== -1 ? [errorIndex, errorMessage] : [-1, ''],
-      }) as InputValidationResultProps,
-  );
-};
+    if (name.startsWith(CardInfoType.NUMBER)) {
+      const index = Number(name[name.length - 1]);
+      changeCardNumber(index, value);
+      return;
+    }
+
+    if (name === CardInfoType.COMPANY) {
+      changeCardCompany(value);
+      return;
+    }
+
+    if (name.startsWith(CardInfoType.EXPDATE)) {
+      const key = name.split('-')[1] as 'month' | 'year';
+      changeCardExpDate(key, value);
+      return;
+    }
+
+    if (name.startsWith(CardInfoType.CVC)) {
+      changeCardCVC(value);
+      return;
+    }
+
+    if (name.startsWith(CardInfoType.PASSWORD)) {
+      changeCardPassword(value);
+      return;
+    }
+  };
+
+  return {
+    cardInfo,
+    handleCardInfo,
+    error,
+    currentSection,
+    isAllSectionsCompleted,
+  };
+}

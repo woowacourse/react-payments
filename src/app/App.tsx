@@ -1,18 +1,16 @@
-import './App.css';
-import Preview from '../features/preview/ui/Preview';
-import CardInfoContainer from '../features/cardInfo/ui/CardInfoContainer';
-import useCardInfo from '../features/cardInfo/hooks/useCardInfo';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CardRegistration from '../pages/cardRegistration/CardRegistration';
+import CardComplete from '../pages/cardComplete/CardComplete';
+import { ROUTES } from '../shared/config/routes';
 
 function App() {
-  const { cardInfo, handleCardInfoChange, error } = useCardInfo();
-
   return (
-    <div className="app-container">
-      <main className="card-container">
-        <Preview cardInfo={cardInfo} />
-        <CardInfoContainer onChange={handleCardInfoChange} error={error} />
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path={ROUTES.CARD_REGISTRATION} element={<CardRegistration />} />
+        <Route path={ROUTES.CARD_COMPLETE} element={<CardComplete />} />
+      </Routes>
+    </Router>
   );
 }
 

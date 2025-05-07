@@ -2,11 +2,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .card-info-title {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
 }
 
@@ -19,11 +19,11 @@
 .card-info-sub-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .card-info-subtitle {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   line-height: 15px;
 }
@@ -31,7 +31,7 @@
 .card-info-input-container {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 0.625rem;
   width: 100%;
 }
 
@@ -41,12 +41,9 @@
   box-sizing: border-box;
 }
 
-/* flex: 1 1 0 → 남는 공간 비례 배분 + 줄어드는 것도 허용
-min-width: 0 → 이거 없으면 기본 최소 너비 때문에 shrink가 안 되기도 함
-box-sizing: border-box → padding 포함한 너비 계산 */
-
 .card-info-error {
   color: #ff3d3d;
   font-size: 9.5px;
   font-weight: 400;
+  height: 9.5px;
 }

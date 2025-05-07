@@ -1,54 +1,112 @@
-import { isValidCardType } from './cardType';
+import { isValidCardType } from '../utils/cardTypeUtils';
+import { CARD_INFO_VALID_RULE, CardInfoType } from '../constants/cardInfoTypeConstants';
+import { NO_ERROR, ERROR_MESSAGES } from '../constants/cardErrorConstants';
 
 export interface InputValidationResultProps {
   [key: string]: [number, string];
 }
 
 export const cardNumberValidator = (inputs: string[]) => {
-  for (let index = 0; index < inputs.length; index++) {
-    const input = inputs[index];
-    if (!isNumeric(input)) {
-      return [index, '카드 번호는 숫자만 입력 가능합니다.'];
-    }
-    if (!isFourDigit(Number(input))) {
-      return [index, '카드 번호는 4자리어야 합니다.'];
-    }
-    if (index === 0 && !isValidCardType(input)) {
-      return [0, '카드 번호는 4 또는 51~55로 시작해야 합니다.'];
-    }
-  }
+  const validations = [
+    {
+      check: (input: string) => !isNumeric(input),
+      message: ERROR_MESSAGES.CARD_NUMBER.NOT_NUMERIC,
+    },
+    {
+      check: (input: string) =>
+        !isExactDigitLength(input, CARD_INFO_VALID_RULE[CardInfoType.NUMBER].MAX_LENGTH),
+      message: ERROR_MESSAGES.CARD_NUMBER.NOT_FOUR_DIGIT,
+    },
+    {
+      check: (input: string, index: number) => index === 0 && !isValidCardType(input),
+      message: ERROR_MESSAGES.CARD_NUMBER.INVALID_TYPE,
+    },
+  ];
 
-  return [-1, ''];
+  const errorIndex = inputs.findIndex((input, index) =>
+    validations.some((validation) => validation.check(input, index)),
+  );
+
+  if (errorIndex !== -1) {
+    const input = inputs[errorIndex];
+    const error = validations.find((validation) => validation.check(input, errorIndex));
+    return [errorIndex, error?.message || ''];
+  }
+  return NO_ERROR;
 };
 
 export const cardExpirationDateValidator = (date: { month: string; year: string }) => {
-  if (!isNumeric(date.month)) {
-    return [0, '유효 월은 숫자만 입력 가능합니다.'];
-  }
+  const validations = [
+    {
+      check: () => !isNumeric(date.month),
+      index: 0,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.MONTH_NOT_NUMERIC,
+    },
+    {
+      check: () => !isValidExpirationMonth(date.month),
+      index: 0,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.MONTH_INVALID_RANGE,
+    },
+    {
+      check: () =>
+        !isExactDigitLength(date.month, CARD_INFO_VALID_RULE[CardInfoType.EXPDATE].MAX_LENGTH),
+      index: 0,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.MONTH_NOT_TWO_DIGIT,
+    },
+    {
+      check: () => !isNumeric(date.year),
+      index: 1,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.YEAR_NOT_NUMERIC,
+    },
+    {
+      check: () =>
+        !isExactDigitLength(date.year, CARD_INFO_VALID_RULE[CardInfoType.EXPDATE].MAX_LENGTH),
+      index: 1,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.YEAR_NOT_TWO_DIGIT,
+    },
+    {
+      check: () => !isValidYear(date.year),
+      index: 1,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.YEAR_INVALID,
+    },
+    {
+      check: () => !isValidMonth(date.month, date.year),
+      index: 0,
+      message: ERROR_MESSAGES.CARD_EXPIRATION_DATE.MONTH_INVALID,
+    },
+  ];
 
-  if (!isValidExpirationMonth(date.month)) {
-    return [0, '유효 월은 1월과 12월 사이만 입력 가능합니다.'];
-  }
-
-  if (!isTwoDigit(date.month)) {
-    return [0, '유효 월은 2자리 숫자여야 합니다.'];
-  }
-
-  if (!isNumeric(date.year)) {
-    return [1, '유효 연도는 숫자만 입력 가능합니다.'];
-  }
-
-  if (!isTwoDigit(date.year)) {
-    return [1, '유효 연도는 2자리 숫자여야 합니다.'];
-  }
-  return [-1, ''];
+  const failedValidation = validations.find((validation) => validation.check());
+  return failedValidation ? [failedValidation.index, failedValidation.message] : NO_ERROR;
 };
 
 export const cardCVCValidator = (input: string) => {
-  if (!isNumeric(input)) {
-    return [0, 'CVC는 숫자만 입력 가능합니다.'];
-  }
-  return [-1, ''];
+  const validations = [
+    { check: () => !isNumeric(input), index: 0, message: ERROR_MESSAGES.CARD_CVC.NOT_NUMERIC },
+    {
+      check: () => !isExactDigitLength(input, CARD_INFO_VALID_RULE[CardInfoType.CVC].MAX_LENGTH),
+      index: 0,
+      message: ERROR_MESSAGES.CARD_CVC.NOT_THREE_DIGIT,
+    },
+  ];
+
+  const failedValidation = validations.find((validation) => validation.check());
+  return failedValidation ? [failedValidation.index, failedValidation.message] : NO_ERROR;
+};
+
+export const cardPasswordValidator = (input: string) => {
+  const validations = [
+    { check: () => !isNumeric(input), index: 0, message: ERROR_MESSAGES.CARD_PASSWORD.NOT_NUMERIC },
+    {
+      check: () =>
+        !isExactDigitLength(input, CARD_INFO_VALID_RULE[CardInfoType.PASSWORD].MAX_LENGTH),
+      index: 0,
+      message: ERROR_MESSAGES.CARD_PASSWORD.NOT_TWO_DIGIT,
+    },
+  ];
+
+  const failedValidation = validations.find((validation) => validation.check());
+  return failedValidation ? [failedValidation.index, failedValidation.message] : NO_ERROR;
 };
 
 const isNumeric = (input: string) => {
@@ -56,8 +114,8 @@ const isNumeric = (input: string) => {
   return numericRegex.test(input);
 };
 
-const isFourDigit = (cardNumber: number) => {
-  return String(cardNumber).length === 4;
+const isExactDigitLength = (input: string, length: number) => {
+  return input.length === length;
 };
 
 const isValidExpirationMonth = (month: string) => {
@@ -65,6 +123,15 @@ const isValidExpirationMonth = (month: string) => {
   return num >= 1 && num <= 12;
 };
 
-const isTwoDigit = (input: string) => {
-  return input.length === 2;
+const isValidYear = (year: string) => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear().toString().slice(-2);
+  return year >= currentYear;
+};
+
+const isValidMonth = (month: string, year: string) => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear().toString().slice(-2);
+  const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  return year > currentYear || (year === currentYear && month >= currentMonth);
 };
