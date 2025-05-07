@@ -33,7 +33,7 @@ export const useCardInput = (type: CardFormFiledType) => {
     }))
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const isAllValidAndFilled = canMoveNextInput(value, type);
+  const isAllValidAndFilled = checkCanMoveNextInput(value, type);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
@@ -107,7 +107,7 @@ function isAllFilledInput(value: CardInputType[], type: CardFormFiledType) {
   return value.every((item) => item.value.length === CardInputTypeOptions[type].valueLength);
 }
 
-function canMoveNextInput(value: CardInputType[], type: CardFormFiledType) {
+function checkCanMoveNextInput(value: CardInputType[], type: CardFormFiledType) {
   const isAllValid = isAllValidInput(value);
   const isAllFilled = isAllFilledInput(value, type);
 

@@ -21,7 +21,7 @@ export const useExpireDateInput = () => {
     year: { value: '', isValid: true },
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const isAllValidAndFilled = canMoveNextStep(value);
+  const isAllValidAndFilled = checkCanMoveNextStep(value);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, key: ExpireDateInputKey) => {
     const inputValue = e.target.value;
@@ -96,7 +96,7 @@ function isAllInRange(value: ExpireDateInputType) {
   return isMonthInRange && isYearInRange;
 }
 
-function canMoveNextStep(value: ExpireDateInputType) {
+function checkCanMoveNextStep(value: ExpireDateInputType) {
   const isAllValid = isAllValidDate(value);
   const isAllFilled = isAllFilledDate(value);
   const isAllDateInRange = isAllInRange(value);
