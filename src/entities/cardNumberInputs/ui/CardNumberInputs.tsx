@@ -19,8 +19,14 @@ const cardInputConfig = [
   CARD_NUMBER_POSITION.FOURTH,
 ];
 
-function CardNumberInputs({ cardNumber, cardNumberError }: CardNumberProps) {
-  const errorMessage = cardNumberError.getErrorMessage();
+function CardNumberInputs({
+  values,
+  changeValues,
+  checkValidation,
+  firstErrorMessage,
+  errorMessages,
+}: CardNumberProps) {
+  const error = firstErrorMessage;
 
   const { inputRefs, handleAutoFocus } = useAutoFocus({
     inputCount: cardInputConfig.length,
@@ -35,26 +41,24 @@ function CardNumberInputs({ cardNumber, cardNumberError }: CardNumberProps) {
           <Input
             key={position}
             ref={inputRefs[idx]}
-            value={cardNumber.values[position]}
+            value={values[position]}
             onChange={(e) => {
-              cardNumberError.checkValidation({
+              checkValidation({
                 length: CARD_NUMBER_LENGTH,
                 value: e.target.value,
                 type: position,
               });
-              cardNumber.changeValues(position, e.target?.value);
+              changeValues(position, e.target?.value);
               handleAutoFocus(e, idx);
             }}
             width="25%"
             maxLength={CARD_NUMBER_LENGTH}
             placeholder="1234"
-            isError={cardNumberError.error[position] !== NO_ERROR}
+            isError={errorMessages[position] !== NO_ERROR}
           />
         ))}
       </StyledInputWrap>
-      {errorMessage ? (
-        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
-      ) : null}
+      {errorMessages ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
     </StyledContainer>
   );
 }

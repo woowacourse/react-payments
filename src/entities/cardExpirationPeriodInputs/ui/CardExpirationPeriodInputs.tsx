@@ -13,12 +13,13 @@ import {
 import useAutoFocus from "../../hooks/useAutoFocus.ts";
 
 function CardExpirationPeriodInputs({
-  expirationPeriod,
-  monthError,
-  yearError,
+  values,
+  changeValues,
+  error,
+  monthCheckValidation,
+  yearCheckValidation,
 }: ExpirationPeriodProps) {
-  const errorMessage =
-    monthError.getErrorMessage() || yearError.getErrorMessage();
+  const errorMessage = error.month || error.year;
 
   const { inputRefs, handleAutoFocus } = useAutoFocus({
     inputCount: 2,
@@ -31,43 +32,37 @@ function CardExpirationPeriodInputs({
       <StyledInputWrap>
         <Input
           ref={inputRefs[0]}
-          value={expirationPeriod.values.month}
+          value={values.month}
           onChange={(e) => {
-            monthError.checkValidation({
+            monthCheckValidation({
               length: EXPIRATION_PERIOD_LENGTH,
               value: e.target.value,
               type: "month",
             });
-            expirationPeriod.changeValues(
-              EXPIRATION_PERIOD.MONTH,
-              e.target.value
-            );
+            changeValues(EXPIRATION_PERIOD.MONTH, e.target.value);
             handleAutoFocus(e, 0);
           }}
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="MM"
-          isError={monthError.error.month !== NO_ERROR}
+          isError={error.month !== NO_ERROR}
         ></Input>
         <Input
           ref={inputRefs[1]}
-          value={expirationPeriod.values.year}
+          value={values.year}
           onChange={(e) => {
-            yearError.checkValidation({
+            yearCheckValidation({
               length: EXPIRATION_PERIOD_LENGTH,
               value: e.target.value,
               type: "year",
             });
-            expirationPeriod.changeValues(
-              EXPIRATION_PERIOD.YEAR,
-              e.target.value
-            );
+            changeValues(EXPIRATION_PERIOD.YEAR, e.target.value);
             handleAutoFocus(e, 1);
           }}
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="YY"
-          isError={yearError.error.year !== NO_ERROR}
+          isError={error.year !== NO_ERROR}
         />
       </StyledInputWrap>
       {errorMessage ? (

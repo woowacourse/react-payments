@@ -9,10 +9,13 @@ import {
 import useAutoFocus from "../../hooks/useAutoFocus";
 
 function CardCVCNumberInputs({
-  CVCNumber,
-  CVCError,
+  values,
+  changeValues,
+  checkValidation,
+  errorMessages,
+  isError,
 }: CardCVCNumberSectionProps) {
-  const errorMessage = CVCError.getErrorMessage();
+  const error = errorMessages.CVCNumber;
 
   const { inputRefs, handleAutoFocus } = useAutoFocus({
     inputCount: 1,
@@ -25,26 +28,24 @@ function CardCVCNumberInputs({
       <StyledInputWrap>
         <Input
           ref={inputRefs[0]}
-          value={CVCNumber.values.CVCNumber}
+          value={values.CVCNumber}
           onChange={(e) => {
-            CVCNumber.changeValues("CVCNumber", e.target.value);
-            CVCError.checkValidation({
+            changeValues("CVCNumber", e.target.value);
+            checkValidation({
               length: CVC_NUMBER_LENGTH,
               value: e.target.value,
               type: "CVCNumber",
             });
             handleAutoFocus(e, 0);
           }}
-          isError={CVCError.isError()}
+          isError={isError()}
           width="100%"
           maxLength={CVC_NUMBER_LENGTH}
           placeholder="123"
         />
       </StyledInputWrap>
 
-      {errorMessage ? (
-        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
-      ) : null}
+      {errorMessages ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
     </StyledContainer>
   );
 }

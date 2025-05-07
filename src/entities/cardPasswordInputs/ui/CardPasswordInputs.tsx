@@ -8,10 +8,13 @@ import Input from "../../../shared/input/ui/Input";
 import useAutoFocus from "../../hooks/useAutoFocus";
 
 export default function CardPasswordInputs({
-  password,
-  passwordError,
+  values,
+  changeValues,
+  errorMessages,
+  checkValidation,
+  isError,
 }: CardPasswordInputsProps) {
-  const errorMessage = passwordError.getErrorMessage();
+  const error = errorMessages.password;
 
   const { inputRefs } = useAutoFocus({
     inputCount: 1,
@@ -24,25 +27,23 @@ export default function CardPasswordInputs({
       <StyledInputWrap>
         <Input
           ref={inputRefs[0]}
-          value={password.values.password}
+          value={values.password}
           onChange={(e) => {
-            password.changeValues("password", e.target.value);
-            passwordError.checkValidation({
+            changeValues("password", e.target.value);
+            checkValidation({
               length: 2,
               value: e.target.value,
               type: "password",
             });
           }}
-          isError={passwordError.isError()}
+          isError={isError()}
           width="100%"
           maxLength={2}
           placeholder="비밀번호 앞 2자리"
           type="password"
         />
       </StyledInputWrap>
-      {errorMessage ? (
-        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
-      ) : null}
+      {error ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
     </StyledContainer>
   );
 }

@@ -15,9 +15,13 @@ function CardExpirationPeriodSection({
         subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."
       />
       <CardExpirationPeriodInputs
-        expirationPeriod={expirationPeriod}
-        monthError={monthError}
-        yearError={yearError}
+        {...expirationPeriod}
+        error={{
+          month: monthError.errorMessages.month,
+          year: yearError.errorMessages.year,
+        }}
+        monthCheckValidation={monthError.checkValidation}
+        yearCheckValidation={yearError.checkValidation}
       />
     </StyledContainer>
   );

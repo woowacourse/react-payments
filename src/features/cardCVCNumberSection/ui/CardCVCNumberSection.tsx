@@ -10,7 +10,7 @@ function CardCVCNumberSection({
   return (
     <StyledContainer>
       <SectionTitle title="CVC 번호를 입력해 주세요" />
-      <CardCVCNumberInputs CVCNumber={CVCNumber} CVCError={CVCError} />
+      <CardCVCNumberInputs {...CVCNumber} {...CVCError} />
     </StyledContainer>
   );
 }

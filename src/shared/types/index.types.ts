@@ -20,12 +20,12 @@ export type State<KeyType extends string, ValueType> = {
 };
 
 export type Error<KeyType extends string> = {
-  error: Record<KeyType, string>;
+  errorMessages: Record<KeyType, string>;
   checkValidation: (args: {
     length: number;
     value: string;
     type: KeyType;
   }) => void;
-  getErrorMessage: () => string | undefined;
+  firstErrorMessage: string | null;
   isError: () => boolean;
 };

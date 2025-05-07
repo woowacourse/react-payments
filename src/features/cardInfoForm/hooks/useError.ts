@@ -53,5 +53,10 @@ export default function useError<T extends {}>({
     return !!findFirstError(error);
   }
 
-  return { error, checkValidation, getErrorMessage, isError };
+  return {
+    errorMessages: error,
+    checkValidation,
+    firstErrorMessage: getErrorMessage(),
+    isError,
+  };
 }
