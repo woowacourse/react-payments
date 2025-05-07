@@ -11,6 +11,7 @@ import { useBrandSelectInput } from '../../hooks/useBrandSelectInput';
 import { useCardInput } from '../../hooks/useCardInput';
 import { useExpireDateInput } from '../../hooks/useExpireDateInput';
 import { CardFormLayout } from '@/components/features/CardFormLayout';
+import { CardBrandsType } from '@/components/features/CardPreview/cardBrand.types';
 import { useFormStep } from '@/hooks/useFormStep';
 
 export const Register = () => {
@@ -68,7 +69,11 @@ export const Register = () => {
   return (
     <AppLayout>
       <Flex padding="20px 0" flex={0}>
-        <CardPreview cardNumbers={cardNumbers} expireDate={expireDate} cardBrand={selectedBrand} />
+        <CardPreview
+          cardNumbers={cardNumbers}
+          expireDate={expireDate}
+          cardBrand={selectedBrand as CardBrandsType}
+        />
       </Flex>
       <CardFormLayout>
         {step >= 4 && (
