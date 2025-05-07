@@ -14,7 +14,6 @@ export type SelectProps = {
 
 export const Select = ({ options, placeholder, selectedItem, onItemSelect }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const arrowIconSrc = isOpen ? './icon/chevron-down.png' : './icon/chevron-up.png';
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -27,11 +26,7 @@ export const Select = ({ options, placeholder, selectedItem, onItemSelect }: Sel
 
   return (
     <StyledSelectContainer isOpen={isOpen} onClick={handleToggle}>
-      <SelectedPreview
-        selectedItem={selectedItem}
-        arrowIconSrc={arrowIconSrc}
-        placeholder={placeholder}
-      />
+      <SelectedPreview selectedItem={selectedItem} isOpen={isOpen} placeholder={placeholder} />
       {isOpen && (
         <StyledSelectBox>
           {options.map((option) => (
