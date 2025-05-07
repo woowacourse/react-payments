@@ -78,28 +78,28 @@ export const useExpireDateInput = () => {
     return isValid;
   };
 
+  function isAllValidDate(value: ExpireDateInputType) {
+    return value.month.isValid && value.year.isValid;
+  }
+
+  function isAllFilledDate(value: ExpireDateInputType) {
+    return value.month.value.length === 2 && value.year.value.length === 2;
+  }
+
+  function isAllInRange(value: ExpireDateInputType) {
+    const isMonthInRange = parseInt(value.month.value) >= 1 && parseInt(value.month.value) <= 12;
+    const isYearInRange = parseInt(value.year.value) >= new Date().getFullYear() % 100;
+
+    return isMonthInRange && isYearInRange;
+  }
+
+  function checkCanMoveNextStep(value: ExpireDateInputType) {
+    const isAllValid = isAllValidDate(value);
+    const isAllFilled = isAllFilledDate(value);
+    const isAllDateInRange = isAllInRange(value);
+
+    return isAllValid && isAllFilled && isAllDateInRange;
+  }
+
   return { value, errorMessage, handleChange, handleBlur, isAllValidAndFilled };
 };
-
-function isAllValidDate(value: ExpireDateInputType) {
-  return value.month.isValid && value.year.isValid;
-}
-
-function isAllFilledDate(value: ExpireDateInputType) {
-  return value.month.value.length === 2 && value.year.value.length === 2;
-}
-
-function isAllInRange(value: ExpireDateInputType) {
-  const isMonthInRange = parseInt(value.month.value) >= 1 && parseInt(value.month.value) <= 12;
-  const isYearInRange = parseInt(value.year.value) >= new Date().getFullYear() % 100;
-
-  return isMonthInRange && isYearInRange;
-}
-
-function checkCanMoveNextStep(value: ExpireDateInputType) {
-  const isAllValid = isAllValidDate(value);
-  const isAllFilled = isAllFilledDate(value);
-  const isAllDateInRange = isAllInRange(value);
-
-  return isAllValid && isAllFilled && isAllDateInRange;
-}

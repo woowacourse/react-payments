@@ -90,6 +90,21 @@ export const useCardInput = (type: CardFormFiledType) => {
     });
   };
 
+  function isAllValidInput(value: CardInputType[]) {
+    return value.every((item) => item.isValid);
+  }
+
+  function isAllFilledInput(value: CardInputType[], type: CardFormFiledType) {
+    return value.every((item) => item.value.length === CardInputTypeOptions[type].valueLength);
+  }
+
+  function checkCanMoveNextInput(value: CardInputType[], type: CardFormFiledType) {
+    const isAllValid = isAllValidInput(value);
+    const isAllFilled = isAllFilledInput(value, type);
+
+    return isAllValid && isAllFilled;
+  }
+
   return {
     value,
     errorMessage,
@@ -98,18 +113,3 @@ export const useCardInput = (type: CardFormFiledType) => {
     isAllValidAndFilled,
   };
 };
-
-function isAllValidInput(value: CardInputType[]) {
-  return value.every((item) => item.isValid);
-}
-
-function isAllFilledInput(value: CardInputType[], type: CardFormFiledType) {
-  return value.every((item) => item.value.length === CardInputTypeOptions[type].valueLength);
-}
-
-function checkCanMoveNextInput(value: CardInputType[], type: CardFormFiledType) {
-  const isAllValid = isAllValidInput(value);
-  const isAllFilled = isAllFilledInput(value, type);
-
-  return isAllValid && isAllFilled;
-}
