@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { CardPreview } from '@/components/features/CardPreview';
+import { cardBrandOptions } from '@/components/features/CardPreview/cardBrand';
 import { CardInputType } from '@/hooks/useCardInput';
 
 const meta = {
@@ -31,7 +32,7 @@ export const Default: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
-    cardBrand: '현대카드',
+    cardBrand: '',
   },
   argTypes: {
     cardNumbers: {
@@ -39,6 +40,10 @@ export const Default: Story = {
     },
     expireDate: {
       control: false,
+    },
+    cardBrand: {
+      control: 'select',
+      options: cardBrandOptions,
     },
   },
 };
@@ -50,7 +55,7 @@ export const VisaCard: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
-    cardBrand: '현대카드',
+    cardBrand: '',
   },
   argTypes: {
     cardNumbers: {
@@ -58,6 +63,10 @@ export const VisaCard: Story = {
     },
     expireDate: {
       control: false,
+    },
+    cardBrand: {
+      control: 'select',
+      options: cardBrandOptions,
     },
   },
 };
@@ -69,7 +78,7 @@ export const MasterCard: Story = {
       month: { value: '12', isValid: true },
       year: { value: '34', isValid: true },
     },
-    cardBrand: '현대카드',
+    cardBrand: '',
   },
   argTypes: {
     cardNumbers: {
@@ -77,6 +86,10 @@ export const MasterCard: Story = {
     },
     expireDate: {
       control: false,
+    },
+    cardBrand: {
+      control: 'select',
+      options: cardBrandOptions,
     },
   },
 };
