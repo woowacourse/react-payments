@@ -10,6 +10,7 @@ import {
 import { CardPreviewProps } from "../types/CardPreview.types";
 import { INITIALIZE_VALUE } from "../../../shared/constants/values";
 import useLogoSrc from "../hooks/useLogoSrc";
+import { LOGO_STYLES } from "../constants/CardPreview.constant";
 
 function CardPreview({
   cardNumber,
@@ -24,11 +25,7 @@ function CardPreview({
         <StyledMagnetic></StyledMagnetic>
         {logoSrc !== INITIALIZE_VALUE ? (
           <StyledLogoWrap>
-            <img
-              src={logoSrc}
-              alt="logo"
-              style={{ width: "100%", height: "100%" }}
-            />
+            <img src={logoSrc} alt="logo" style={LOGO_STYLES} />
           </StyledLogoWrap>
         ) : null}
       </StyledIconWrap>

@@ -5,3 +5,8 @@ export const CARD_IDENTIFYING_NUMBER = {
     MAX: 55,
   },
 };
+
+export const LOGO_STYLES = {
+  width: "100%",
+  height: "100%",
+};
