@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const FORM_STEP_MATCH = {
+export const FORM_STEP_NUMBERS = {
   cardNumber: 0,
   brand: 1,
   expireDate: 2,
   cvc: 3,
+  password: 4,
 };
 
 type UseFormStepProps = {
@@ -25,22 +26,22 @@ export const useFormStep = ({
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    if (step === FORM_STEP_MATCH.cvc && canMoveNextFromCVC) {
+    if (step === FORM_STEP_NUMBERS.cvc && canMoveNextFromCVC) {
       setStep(step + 1);
       return;
     }
 
-    if (step === FORM_STEP_MATCH.expireDate && canMoveNextFromExpireDate) {
+    if (step === FORM_STEP_NUMBERS.expireDate && canMoveNextFromExpireDate) {
       setStep(step + 1);
       return;
     }
 
-    if (step === FORM_STEP_MATCH.brand && selectedBrand) {
+    if (step === FORM_STEP_NUMBERS.brand && selectedBrand) {
       setStep(step + 1);
       return;
     }
 
-    if (step === FORM_STEP_MATCH.cardNumber && canMoveNextFromCardNumber) {
+    if (step === FORM_STEP_NUMBERS.cardNumber && canMoveNextFromCardNumber) {
       setStep(step + 1);
       return;
     }
