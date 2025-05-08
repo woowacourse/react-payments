@@ -54,6 +54,7 @@ export const useCardInput = (type: CardFormFiledType) => {
     setValue((prev) => {
       const newArr = [...prev];
       newArr[index].value = inputValue;
+      newArr[index].isValid = isValidChange;
 
       if (isAllValidInput(newArr)) {
         setErrorMessage(null);
