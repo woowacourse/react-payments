@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { CardFormFiledType } from '@/components/features/CardFormFiled/CardFormFiled.types';
-import { validateCardNumbers } from '@/validations/validateCardNumbers';
+import { validateCardNumbers, validateInputChange } from '@/validations/validateCardNumbers';
 
 export type CardInputType = {
   value: string;
@@ -18,6 +18,11 @@ export const CardInputTypeOptions = {
     valueLength: 3,
     arrLength: 1,
   },
+
+  password: {
+    valueLength: 2,
+    arrLength: 1,
+  },
 };
 
 export const useCardInput = (type: CardFormFiledType) => {
@@ -28,37 +33,72 @@ export const useCardInput = (type: CardFormFiledType) => {
     }))
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const isAllValidAndFilled = checkCanMoveNextInput(value, type);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    setValue((prev) => {
-      const newArr = [...prev];
-      newArr[index].value = e.target.value;
-      return newArr;
-    });
-  };
+    const inputValue = e.target.value;
+    const { isValid: isValidChange, errorMessage } = validateInputChange(inputValue);
 
-  const validateInput = (value: string) => {
-    const { isValid, errorMessage } = validateCardNumbers(value, type);
-
-    if (!isValid) {
+    if (!isValidChange) {
       setErrorMessage(errorMessage);
-      return isValid;
+
+      setValue((prev) => {
+        const newArr = [...prev];
+        newArr[index].isValid = isValidChange;
+        return newArr;
+      });
+
+      return;
     }
 
-    setErrorMessage(null);
-    return isValid;
+    setValue((prev) => {
+      const newArr = [...prev];
+      newArr[index].value = inputValue;
+      newArr[index].isValid = isValidChange;
+
+      if (isAllValidInput(newArr)) {
+        setErrorMessage(null);
+      }
+
+      return newArr;
+    });
   };
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const isValidate = validateInput(inputValue);
+    const { isValid, errorMessage } = validateCardNumbers(inputValue, type);
 
-    setValue((prev) => {
-      const newArr = [...prev];
-      newArr[index].isValid = isValidate;
-      return newArr;
-    });
+    if (!isValid) {
+      setErrorMessage(errorMessage);
+
+      setValue((prev) => {
+        const newArr = [...prev];
+        newArr[index].isValid = isValid;
+        return newArr;
+      });
+    }
   };
 
-  return { value, errorMessage, handleChange, handleBlur };
+  function isAllValidInput(value: CardInputType[]) {
+    return value.every((item) => item.isValid);
+  }
+
+  function isAllFilledInput(value: CardInputType[], type: CardFormFiledType) {
+    return value.every((item) => item.value.length === CardInputTypeOptions[type].valueLength);
+  }
+
+  function checkCanMoveNextInput(value: CardInputType[], type: CardFormFiledType) {
+    const isAllValid = isAllValidInput(value);
+    const isAllFilled = isAllFilledInput(value, type);
+
+    return isAllValid && isAllFilled;
+  }
+
+  return {
+    value,
+    errorMessage,
+    handleChange,
+    handleBlur,
+    isAllValidAndFilled,
+  };
 };
