@@ -16,12 +16,14 @@ function CardExpirationPeriodSection({
       />
       <CardExpirationPeriodInputs
         {...expirationPeriod}
-        error={{
+        errorMessages={{
           month: monthError.errorMessages.month,
           year: yearError.errorMessages.year,
         }}
         monthCheckValidation={monthError.checkValidation}
         yearCheckValidation={yearError.checkValidation}
+        isMonthError={monthError.isError}
+        isYearError={yearError.isError}
       />
     </StyledContainer>
   );

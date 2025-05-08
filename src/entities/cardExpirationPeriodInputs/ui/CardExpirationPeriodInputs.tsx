@@ -1,5 +1,4 @@
 import Input from "../../../shared/input/ui/Input";
-import { NO_ERROR } from "../../../shared/constants/values.ts";
 import {
   EXPIRATION_PERIOD,
   EXPIRATION_PERIOD_LENGTH,
@@ -15,11 +14,13 @@ import useAutoFocus from "../../hooks/useAutoFocus.ts";
 function CardExpirationPeriodInputs({
   values,
   changeValues,
-  error,
+  errorMessages,
   monthCheckValidation,
   yearCheckValidation,
+  isMonthError,
+  isYearError,
 }: ExpirationPeriodProps) {
-  const errorMessage = error.month || error.year;
+  const errorMessage = errorMessages.month || errorMessages.year;
 
   const { inputRefs, handleAutoFocus } = useAutoFocus({
     inputCount: 2,
@@ -45,7 +46,7 @@ function CardExpirationPeriodInputs({
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="MM"
-          isError={error.month !== NO_ERROR}
+          isError={isMonthError()}
         ></Input>
         <Input
           ref={inputRefs[1]}
@@ -62,7 +63,7 @@ function CardExpirationPeriodInputs({
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="YY"
-          isError={error.year !== NO_ERROR}
+          isError={isYearError()}
         />
       </StyledInputWrap>
       {errorMessage ? (

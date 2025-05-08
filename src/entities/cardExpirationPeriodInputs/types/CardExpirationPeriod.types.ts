@@ -1,7 +1,7 @@
 import { ExpirationPeriod, State } from "../../../shared/types/index.types";
 
 export type ExpirationPeriodProps = State<ExpirationPeriod, string> & {
-  error: {
+  errorMessages: {
     month: string;
     year: string;
   };
@@ -15,4 +15,6 @@ export type ExpirationPeriodProps = State<ExpirationPeriod, string> & {
     value: string;
     type: "year";
   }) => void;
+  isMonthError: () => boolean;
+  isYearError: () => boolean;
 };
