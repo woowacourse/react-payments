@@ -29,6 +29,7 @@ export const CardPasswordForm = ({
     >
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
         <Input
+          value={password[0].value}
           type="password"
           maxLength={2}
           onChange={(e) => onCardInputChange(e, 0)}
