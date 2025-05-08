@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { NO_ERROR } from "../../../shared/constants/values";
 
 type checkValidationType<T> = {
@@ -21,12 +21,12 @@ export default function useError<T extends {}>({
   initError,
   getValidationFns,
 }: UseErrorProps<T>) {
-  const [error, setError] = useState<T>(initError);
+  const [errorMessages, setErrorMessages] = useState<T>(initError);
 
   function checkValidation({ length, value, type }: checkValidationType<T>) {
     const validationFns = getValidationFns(length, value);
     const validation = validationFns.find((v) => v.condition());
-    setError((prev) => {
+    setErrorMessages((prev) => {
       return {
         ...prev,
         [type]: validation?.errorMsg || NO_ERROR,
@@ -34,27 +34,26 @@ export default function useError<T extends {}>({
     });
   }
 
-  function findFirstError(errorObj: Record<string, string>) {
-    for (const key in errorObj) {
-      const typedKey = key as keyof typeof errorObj;
-      if (errorObj[typedKey] !== NO_ERROR) {
-        return { key: typedKey, value: errorObj[typedKey] };
+  const firstErrorMessage = useMemo(() => {
+    for (const key in errorMessages) {
+      const typedKey = key as keyof typeof errorMessages;
+      if (errorMessages[typedKey] !== NO_ERROR) {
+        return errorMessages[typedKey];
       }
     }
     return null;
-  }
+  }, [errorMessages]);
 
   function getErrorMessage() {
-    const result = findFirstError(error);
-    return result?.value;
+    return firstErrorMessage;
   }
 
   function isError() {
-    return !!findFirstError(error);
+    return !!firstErrorMessage;
   }
 
   return {
-    errorMessages: error,
+    errorMessages,
     checkValidation,
     firstErrorMessage: getErrorMessage(),
     isError,
