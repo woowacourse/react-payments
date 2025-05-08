@@ -26,24 +26,20 @@ export const useFormStep = ({
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    if (step === FORM_STEP_NUMBERS.cvc && canMoveNextFromCVC) {
-      setStep(step + 1);
-      return;
-    }
+    const stepCompletes = [
+      { stepNumber: FORM_STEP_NUMBERS.cvc, isCompleted: canMoveNextFromCVC },
+      { stepNumber: FORM_STEP_NUMBERS.expireDate, isCompleted: canMoveNextFromExpireDate },
+      { stepNumber: FORM_STEP_NUMBERS.brand, isCompleted: selectedBrand },
+      { stepNumber: FORM_STEP_NUMBERS.cardNumber, isCompleted: canMoveNextFromCardNumber },
+      { stepNumber: FORM_STEP_NUMBERS.password, isCompleted: canMoveNextFromPassword },
+    ];
 
-    if (step === FORM_STEP_NUMBERS.expireDate && canMoveNextFromExpireDate) {
-      setStep(step + 1);
-      return;
-    }
+    const currentStep = stepCompletes.find((stepComplete) => stepComplete.stepNumber === step);
 
-    if (step === FORM_STEP_NUMBERS.brand && selectedBrand) {
-      setStep(step + 1);
-      return;
-    }
+    if (!currentStep) return;
 
-    if (step === FORM_STEP_NUMBERS.cardNumber && canMoveNextFromCardNumber) {
+    if (currentStep.isCompleted) {
       setStep(step + 1);
-      return;
     }
   }, [
     canMoveNextFromCardNumber,
