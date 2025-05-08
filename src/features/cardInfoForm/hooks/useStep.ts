@@ -2,6 +2,8 @@ import { useMemo, useRef } from "react";
 import {
   CardNumberPosition,
   ExpirationPeriod,
+  State,
+  Error,
 } from "../../../shared/types/index.types";
 
 export default function useStep({ cardInfo, errorInfo }: CardInfoFormProps) {
@@ -72,55 +74,17 @@ function isPasswordOk(
 
 type CardInfoFormProps = {
   cardInfo: {
-    cardNumber: {
-      values: Record<CardNumberPosition, string>;
-      changeValues: (
-        cardNumberPosition: CardNumberPosition,
-        cardNumber: string
-      ) => void;
-      isFullFilled: () => boolean;
-    };
-    expirationPeriod: {
-      values: Record<ExpirationPeriod, string>;
-      changeValues: (expirationPeriod: ExpirationPeriod, date: string) => void;
-      isFullFilled: () => boolean;
-    };
-    CVCNumber: {
-      values: { CVCNumber: string };
-      changeValues: (type: "CVCNumber", CVCNumber: string) => void;
-      isFullFilled: () => boolean;
-    };
-    password: {
-      values: { password: string };
-      changeValues: (type: "password", password: string) => void;
-      isFullFilled: () => boolean;
-    };
-    cardType: {
-      values: { cardType: string };
-      changeValues: (type: "cardType", cardType: string) => void;
-      isFullFilled: () => boolean;
-    };
+    cardNumber: State<CardNumberPosition, string>;
+    expirationPeriod: State<ExpirationPeriod, string>;
+    CVCNumber: State<"CVCNumber", string>;
+    password: State<"password", string>;
+    cardType: State<"cardType", string>;
   };
   errorInfo: {
-    cardNumberError: {
-      error: Record<CardNumberPosition, string>;
-      isError: () => boolean;
-    };
-    yearError: {
-      error: Record<"year", string>;
-      isError: () => boolean;
-    };
-    monthError: {
-      error: Record<"month", string>;
-      isError: () => boolean;
-    };
-    CVCError: {
-      error: Record<"CVCNumber", string>;
-      isError: () => boolean;
-    };
-    passwordError: {
-      error: Record<"password", string>;
-      isError: () => boolean;
-    };
+    cardNumberError: Error<CardNumberPosition>;
+    yearError: Error<"year">;
+    monthError: Error<"month">;
+    CVCError: Error<"CVCNumber">;
+    passwordError: Error<"password">;
   };
 };
