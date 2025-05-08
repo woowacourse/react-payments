@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardPasswordSection from "../ui/CardPasswordSection";
-import useCardInfo from "../../../app/hooks/useCardInfo";
+import useCardInfo from "../../../app/hooks/useInput";
 import { INITIALIZE_VALUE } from "../../../shared/constants/values";
 
 const meta = {

@@ -1,4 +1,4 @@
-import useCardInfo from "./useCardInfo";
+import useCardInfo from "./useInput";
 import { INITIALIZE_VALUE } from "../../shared/constants/values";
 import { CardTypeList } from "../../shared/types/index.types";
 
