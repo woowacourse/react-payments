@@ -15,6 +15,14 @@ import { useExpireDateInput } from '../../hooks/useExpireDateInput';
 import { CardFormLayout } from '@/components/features/CardFormLayout';
 import { CardBrandsType } from '@/components/features/CardPreview/cardBrand.types';
 import { useFormStep } from '@/hooks/useFormStep';
+import { FORM_STEP_NUMBERS } from '@/hooks/useFormStep';
+
+type FormStepItem<T = any> = {
+  id: string;
+  Component: React.ComponentType<T>;
+  props: T;
+  stepNumber: number;
+};
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -75,6 +83,59 @@ export const Register = () => {
     navigate('/result', { state: { cardType, cardNumber } });
   };
 
+  const formSteps: FormStepItem[] = [
+    {
+      id: 'cardNumber',
+      Component: CardNumberForm,
+      props: {
+        cardNumbers,
+        errorMessage: cardErrorMessage,
+        onCardInputChange: handleChange,
+        onCardInputBlur: handleBlur,
+      },
+      stepNumber: FORM_STEP_NUMBERS.cardNumber,
+    },
+    {
+      id: 'brand',
+      Component: CardBrandSelectForm,
+      props: { selectedItem: selectedBrand, onItemSelect: handleBrandSelect },
+      stepNumber: FORM_STEP_NUMBERS.brand,
+    },
+    {
+      id: 'expireDate',
+      Component: ExpireDateForm,
+      props: {
+        expireDate,
+        errorMessage: expireDateErrorMessage,
+        onCardExpireDateInputChange: handleExpireDateChange,
+        onCardExpireDateInputBlur: handleExpireDateBlur,
+      },
+      stepNumber: FORM_STEP_NUMBERS.expireDate,
+    },
+    {
+      id: 'cvc',
+      Component: CVCForm,
+      props: {
+        cvcNumber,
+        errorMessage: cvcErrorMessage,
+        onCardInputChange: handleCVCChange,
+        onCardInputBlur: handleCVCBlur,
+      },
+      stepNumber: FORM_STEP_NUMBERS.cvc,
+    },
+    {
+      id: 'password',
+      Component: CardPasswordForm,
+      props: {
+        password,
+        errorMessage: passwordErrorMessage,
+        onCardInputChange: handlePasswordChange,
+        onCardInputBlur: handlePasswordBlur,
+      },
+      stepNumber: FORM_STEP_NUMBERS.password,
+    },
+  ];
+
   return (
     <AppLayout>
       <Flex padding="20px 0" flex={0}>
@@ -85,43 +146,12 @@ export const Register = () => {
         />
       </Flex>
       <CardFormLayout>
-        {step >= 4 && (
-          <CardPasswordForm
-            password={password}
-            errorMessage={passwordErrorMessage}
-            onCardInputChange={handlePasswordChange}
-            onCardInputBlur={handlePasswordBlur}
-          />
-        )}
-
-        {step >= 3 && (
-          <CVCForm
-            cvcNumber={cvcNumber}
-            errorMessage={cvcErrorMessage}
-            onCardInputChange={handleCVCChange}
-            onCardInputBlur={handleCVCBlur}
-          />
-        )}
-
-        {step >= 2 && (
-          <ExpireDateForm
-            expireDate={expireDate}
-            errorMessage={expireDateErrorMessage}
-            onCardExpireDateInputChange={handleExpireDateChange}
-            onCardExpireDateInputBlur={handleExpireDateBlur}
-          />
-        )}
-
-        {step >= 1 && (
-          <CardBrandSelectForm selectedItem={selectedBrand} onItemSelect={handleBrandSelect} />
-        )}
-
-        <CardNumberForm
-          cardNumbers={cardNumbers}
-          errorMessage={cardErrorMessage}
-          onCardInputChange={handleChange}
-          onCardInputBlur={handleBlur}
-        />
+        {formSteps
+          .sort((a, b) => b.stepNumber - a.stepNumber)
+          .filter((formStep) => formStep.stepNumber <= step)
+          .map((formStep) => {
+            return <formStep.Component key={formStep.id} {...formStep.props} />;
+          })}
       </CardFormLayout>
       {isUserCanSubmit && (
         <SubmitButton
