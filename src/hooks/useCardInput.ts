@@ -64,31 +64,19 @@ export const useCardInput = (type: CardFormFiledType) => {
     });
   };
 
-  const validateInput = (value: string) => {
-    const { isValid, errorMessage } = validateCardNumbers(value, type);
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const inputValue = e.target.value;
+    const { isValid, errorMessage } = validateCardNumbers(inputValue, type);
 
     if (!isValid) {
       setErrorMessage(errorMessage);
-      return isValid;
+
+      setValue((prev) => {
+        const newArr = [...prev];
+        newArr[index].isValid = isValid;
+        return newArr;
+      });
     }
-
-    return isValid;
-  };
-
-  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const inputValue = e.target.value;
-    const isValidate = validateInput(inputValue);
-
-    setValue((prev) => {
-      const newArr = [...prev];
-      newArr[index].isValid = isValidate;
-
-      if (isAllValidInput(newArr)) {
-        setErrorMessage(null);
-      }
-
-      return newArr;
-    });
   };
 
   function isAllValidInput(value: CardInputType[]) {

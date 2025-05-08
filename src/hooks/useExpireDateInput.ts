@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { validateInputChange } from '@/validations/validateCardNumbers';
+import { validateExpireDateInputChange } from '@/validations/validateExpireDate';
 import { validateExpireDate } from '@/validations/validateExpireDate';
 
 type ExpireDateInputValueType = {
@@ -25,7 +25,7 @@ export const useExpireDateInput = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, key: ExpireDateInputKey) => {
     const inputValue = e.target.value;
-    const { isValid: isValidChange, errorMessage } = validateInputChange(inputValue);
+    const { isValid: isValidChange, errorMessage } = validateExpireDateInputChange(inputValue, key);
 
     if (!isValidChange) {
       setErrorMessage(errorMessage);
@@ -42,6 +42,7 @@ export const useExpireDateInput = () => {
     setValue((prev) => {
       const newDateObj = { ...prev };
       newDateObj[key].value = inputValue;
+      newDateObj[key].isValid = isValidChange;
 
       if (isAllValidDate(newDateObj)) {
         setErrorMessage(null);
@@ -53,29 +54,17 @@ export const useExpireDateInput = () => {
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>, key: ExpireDateInputKey) => {
     const inputValue = e.target.value;
-    const isValidate = validateInput(inputValue, key);
-
-    setValue((prev) => {
-      const newDateObj = { ...prev };
-      newDateObj[key].isValid = isValidate;
-
-      if (isAllValidDate(newDateObj)) {
-        setErrorMessage(null);
-      }
-
-      return newDateObj;
-    });
-  };
-
-  const validateInput = (value: string, key: ExpireDateInputKey) => {
-    const { isValid, errorMessage } = validateExpireDate(value, key);
+    const { isValid, errorMessage } = validateExpireDate(inputValue);
 
     if (!isValid) {
       setErrorMessage(errorMessage);
-      return isValid;
-    }
 
-    return isValid;
+      setValue((prev) => {
+        const newDateObj = { ...prev };
+        newDateObj[key].isValid = isValid;
+        return newDateObj;
+      });
+    }
   };
 
   function isAllValidDate(value: ExpireDateInputType) {
