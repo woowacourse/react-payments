@@ -1,5 +1,5 @@
 import { INITIALIZE_VALUE, NO_ERROR } from "../../../shared/constants/values";
-import { ERROR_MESSAGE } from "../constants";
+import { ERROR_MESSAGE } from "../constants/CardCVCNumberInputs.constant";
 import { isValidLength, isValidNumber } from "../../../shared/util/validation";
 
 export function getCVCValidationFns(length: number, CVCNumber: string) {
