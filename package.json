@@ -9,12 +9,17 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
+  "homepage": "https://yeongipark.github.io/react-payments",
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "styled-components": "^6.1.17"
+    "react-router-dom": "^7.5.1",
+    "styled-components": "^6.1.17",
+    "woody-card-info": "^0.0.1",
+    "woody-modal": "^0.0.2"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
