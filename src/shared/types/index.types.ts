@@ -22,5 +22,5 @@ export type Error<KeyType extends string> = {
     type: KeyType;
   }) => void;
   firstErrorMessage: string | null;
-  isError: () => boolean;
+  isError: boolean;
 };

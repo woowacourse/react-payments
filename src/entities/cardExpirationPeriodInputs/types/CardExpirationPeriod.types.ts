@@ -15,6 +15,6 @@ export type ExpirationPeriodProps = State<ExpirationPeriod, string> & {
     value: string;
     type: "year";
   }) => void;
-  isMonthError: () => boolean;
-  isYearError: () => boolean;
+  isMonthError: boolean;
+  isYearError: boolean;
 };

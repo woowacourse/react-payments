@@ -56,6 +56,6 @@ export default function useError<T extends {}>({
     errorMessages,
     checkValidation,
     firstErrorMessage: getErrorMessage(),
-    isError,
+    isError: isError(),
   };
 }

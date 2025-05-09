@@ -37,9 +37,9 @@ export default function useStep({ cardInfo, errorInfo }: CardInfoFormProps) {
 
 function isCardNumberOk(
   cardNumber: { isFullFilled: () => boolean },
-  cardNumberError: { isError: () => boolean }
+  cardNumberError: { isError: boolean }
 ) {
-  return cardNumber.isFullFilled() && cardNumberError.isError() === false;
+  return cardNumber.isFullFilled() && cardNumberError.isError === false;
 }
 
 function isCardTypeOk(cardType: { isFullFilled: () => boolean }) {
@@ -48,28 +48,28 @@ function isCardTypeOk(cardType: { isFullFilled: () => boolean }) {
 
 function isExpirationOk(
   expirationPeriod: { isFullFilled: () => boolean },
-  year: { isError: () => boolean },
-  month: { isError: () => boolean }
+  year: { isError: boolean },
+  month: { isError: boolean }
 ) {
   return (
     expirationPeriod.isFullFilled() &&
-    year.isError() === false &&
-    month.isError() === false
+    year.isError === false &&
+    month.isError === false
   );
 }
 
 function isCVCNumberOk(
   CVCNumber: { isFullFilled: () => boolean },
-  CVCError: { isError: () => boolean }
+  CVCError: { isError: boolean }
 ) {
-  return CVCNumber.isFullFilled() && CVCError.isError() === false;
+  return CVCNumber.isFullFilled() && CVCError.isError === false;
 }
 
 function isPasswordOk(
   password: { isFullFilled: () => boolean },
-  passwordError: { isError: () => boolean }
+  passwordError: { isError: boolean }
 ) {
-  return password.isFullFilled() && passwordError.isError() === false;
+  return password.isFullFilled() && passwordError.isError === false;
 }
 
 type CardInfoFormProps = {
