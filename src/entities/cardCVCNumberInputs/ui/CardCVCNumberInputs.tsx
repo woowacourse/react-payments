@@ -38,7 +38,7 @@ function CardCVCNumberInputs({
             });
             handleAutoFocus(e, 0);
           }}
-          isError={isError}
+          error={isError}
           width="100%"
           maxLength={CVC_NUMBER_LENGTH}
           placeholder="123"

@@ -7,7 +7,7 @@ type InputProps = ComponentProps<"input"> & {
   width?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  isError: boolean;
+  error: boolean;
 };
 
 function Input(props: InputProps) {

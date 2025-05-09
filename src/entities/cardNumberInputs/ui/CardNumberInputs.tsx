@@ -54,7 +54,7 @@ function CardNumberInputs({
             width="25%"
             maxLength={CARD_NUMBER_LENGTH}
             placeholder="1234"
-            isError={errorMessages[position] !== NO_ERROR}
+            error={errorMessages[position] !== NO_ERROR}
           />
         ))}
       </StyledInputWrap>

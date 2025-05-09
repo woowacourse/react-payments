@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const StyledInput = styled.input.withConfig({
   shouldForwardProp: (prop) => prop !== "isError",
-})<{ width?: string; isError: boolean }>`
+})<{ width?: string; error: boolean }>`
   width: ${(props) => props.width || "100%"};
   border-radius: 2px;
-  border: 1.015px solid ${(props) => (props.isError ? "red" : "#acacac")};
+  border: 1.015px solid ${(props) => (props.error ? "red" : "#acacac")};
   display: flex;
   height: 32px;
   padding: 8px;

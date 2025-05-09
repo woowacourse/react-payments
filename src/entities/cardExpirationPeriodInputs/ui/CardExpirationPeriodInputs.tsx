@@ -46,7 +46,7 @@ function CardExpirationPeriodInputs({
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="MM"
-          isError={isMonthError}
+          error={isMonthError}
         />
         <Input
           ref={inputRefs[1]}
@@ -63,7 +63,7 @@ function CardExpirationPeriodInputs({
           width="50%"
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="YY"
-          isError={isYearError}
+          error={isYearError}
         />
       </StyledInputWrap>
       {errorMessage && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}

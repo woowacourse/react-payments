@@ -36,7 +36,7 @@ export default function CardPasswordInputs({
               type: "password",
             });
           }}
-          isError={isError}
+          error={isError}
           width="100%"
           maxLength={2}
           placeholder="비밀번호 앞 2자리"
