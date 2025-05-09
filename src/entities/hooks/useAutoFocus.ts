@@ -6,7 +6,7 @@ type useAutoFocusType = {
 };
 
 export default function useAutoFocus({
-  inputCount,
+  inputCount = 1,
   inputMaxLength,
 }: useAutoFocusType) {
   const inputRefs = Array.from({ length: inputCount }, () =>
