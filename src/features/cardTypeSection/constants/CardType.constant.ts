@@ -7,4 +7,4 @@ export const CARD_TYPES = {
   롯데카드: "롯데카드",
   하나카드: "하나카드",
   국민카드: "국민카드",
-};
+} as const;
