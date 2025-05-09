@@ -43,7 +43,7 @@ export default function CardPasswordInputs({
           type="password"
         />
       </StyledInputWrap>
-      {error ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
+      {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
     </StyledContainer>
   );
 }

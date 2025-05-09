@@ -66,9 +66,7 @@ function CardExpirationPeriodInputs({
           isError={isYearError()}
         />
       </StyledInputWrap>
-      {errorMessage ? (
-        <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
-      ) : null}
+      {errorMessage && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
     </StyledContainer>
   );
 }

@@ -45,7 +45,7 @@ function CardCVCNumberInputs({
         />
       </StyledInputWrap>
 
-      {errorMessages ? <StyledErrorMessage>{error}</StyledErrorMessage> : null}
+      {errorMessages && <StyledErrorMessage>{error}</StyledErrorMessage>}
     </StyledContainer>
   );
 }
