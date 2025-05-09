@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { CARD_COMPANY_NAME, CARD_COMPANY } from '../constants/cardCompany';
 
 interface CardPreviewProps {
   cardNumber: string[];
@@ -6,6 +7,7 @@ interface CardPreviewProps {
     month: string;
     year: string;
   };
+  cardCompany: keyof typeof CARD_COMPANY_NAME | undefined;
 }
 
 const isCardType = (cardType: string): cardType is CardType => {
@@ -35,14 +37,18 @@ const CARD_TYPE_IMAGES_PATH = {
 
 type CardType = keyof typeof CARD_TYPE_IMAGES_PATH;
 
-function CardPreview({ cardNumber, cardValidityPeriod }: CardPreviewProps) {
+function CardPreview({
+  cardNumber,
+  cardValidityPeriod,
+  cardCompany,
+}: CardPreviewProps) {
   const { month, year } = cardValidityPeriod;
 
   const cardType = getCardType(cardNumber.join(''));
   const imgPath = CARD_TYPE_IMAGES_PATH[cardType];
 
   return (
-    <Card>
+    <Card color={CARD_COMPANY.find((e) => e.name === cardCompany)?.color}>
       <IcChip />
       <CardInfoWrapper>
         <CardNumberWrapper>
@@ -71,10 +77,10 @@ const Card = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background: #333333;
   box-shadow: 3px 3px 5px 0px #00000040;
   position: relative;
   align-self: center;
+  background-color: ${(props) => props.color ?? '#333333'};
 `;
 
 const IcChip = styled.div`

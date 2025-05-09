@@ -5,15 +5,40 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  regexString?: RegExp;
+  autoFocus?: boolean;
+  ref?: React.Ref<HTMLInputElement>;
+}
+
+interface InputWrapperProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  isError: boolean;
+  value: string;
+  name: string;
 }
 
 function Input(props: InputProps) {
-  return <InputWrapper {...props} />;
+  const { regexString, onChange, ...rest } = props;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    if (!regexString) {
+      onChange(e);
+      return;
+    }
+
+    const regex = new RegExp(regexString);
+    if (regex.test(value)) {
+      onChange(e);
+    }
+  };
+  return <InputWrapper {...rest} onChange={handleChange} />;
 }
 
 export default Input;
 
-const InputWrapper = styled.input<InputProps>`
+const InputWrapper = styled.input<InputWrapperProps>`
   width: 100%;
   border: 1px solid ${(props) => (props.isError ? 'red' : 'gray')};
   border-radius: 2px;

@@ -1,6 +1,7 @@
-import styled from '@emotion/styled';
-import Input from '../../common/Input/Input';
 import { useId } from 'react';
+import Input from '../../../common/Input/Input';
+import useInputFocus from '../../../../hooks/useInputFocus';
+import LabeledInput from '../../../common/LabeledInput/LabeledInput';
 
 type CardValidityPeriodType = {
   month: string;
@@ -30,46 +31,64 @@ function CardValidityPeriodField({
   const { month: isErrorMonth, year: isErrorYear } = isError;
 
   const id = useId();
+
+  const { inputRef, handleChange, handleKeyDown } = useInputFocus({
+    inputValueLength: 2,
+  });
+
   return (
-    <div>
-      <Label htmlFor={`cardValidityPeriod-${id}-${month}`}>유효기간</Label>
-      <InputWrapper>
+    <LabeledInput
+      htmlFor={`cardValidityPeriod-${id}-${month}`}
+      label="유효기간"
+      isMultiple
+    >
+      <>
         <Input
           isError={isErrorMonth}
-          type="number"
+          type="tel"
           name="cardValidityPeriod"
           id={`cardValidityPeriod-${id}-${month}`}
           value={month}
           aria-labelledby="cardValidityPeriod"
-          onChange={(e) => onChange(e, 'month')}
+          onChange={(e) => {
+            onChange(e, 'month');
+            handleChange(0);
+          }}
+          onKeyDown={(e) => handleKeyDown(e, 0)}
           placeholder="MM"
-          min={0}
-          max={99}
+          maxLength={2}
+          regexString={/^\d*$/}
+          autoFocus={true}
+          ref={(el) => {
+            if (el) {
+              inputRef.current[0] = el;
+            }
+          }}
         />
         <Input
           isError={isErrorYear}
-          type="number"
+          type="tel"
           name="cardValidityPeriod"
           id={`cardValidityPeriod-${id}-${year}`}
           value={year}
           aria-labelledby="cardValidityPeriod"
-          onChange={(e) => onChange(e, 'year')}
+          onChange={(e) => {
+            onChange(e, 'year');
+            handleChange(1);
+          }}
+          onKeyDown={(e) => handleKeyDown(e, 1)}
           placeholder="YY"
-          min={0}
-          max={99}
+          maxLength={2}
+          regexString={/^\d*$/}
+          ref={(el) => {
+            if (el) {
+              inputRef.current[1] = el;
+            }
+          }}
         />
-      </InputWrapper>
-    </div>
+      </>
+    </LabeledInput>
   );
 }
 
 export default CardValidityPeriodField;
-
-const InputWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-`;
-const Label = styled.label`
-  font-size: 12px;
-`;

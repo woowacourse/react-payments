@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardInputSection from './CardInputSection';
-import CardNumberField from '../CardNumberField/CardNumberField';
-import CardValidityPeriodField from '../CardValidityPeriodField/CardValidityPeriodField';
-import CardCVCField from '../CardCVCField/CardCVCField';
+import CardNumberField from '../../cardInfoFields/CardNumberField/CardNumberField';
+import CardValidityPeriodField from '../../cardInfoFields/CardValidityPeriodField/CardValidityPeriodField';
+import CardCVCField from '../../cardInfoFields/CardCVCField/CardCVCField';
 import React, { useState } from 'react';
 
 const meta = {
