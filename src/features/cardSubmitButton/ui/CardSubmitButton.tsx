@@ -1,13 +1,13 @@
 import Button from "../../../shared/button/ui/Button";
-import { CardTypeList } from "../../../shared/types/index.types";
 import {
   StyledButtonContainer,
   StyledEmpty,
 } from "../css/CardSubmitButton.css";
+import { CardTypes } from "../../../shared/types/index.types";
 import { useNavigate } from "react-router-dom";
 
 type CardSubmitButtonProps = {
-  cardType: keyof CardTypeList | "";
+  cardType: CardTypes | "";
   firstCardNumber: string;
 };
 

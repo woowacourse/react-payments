@@ -1,8 +1,8 @@
 import {
   CardNumberPosition,
-  CardTypeList,
   ExpirationPeriod,
   State,
+  CardTypes,
 } from "../../../shared/types/index.types";
 
 export type CardInfoFormProps = {
@@ -11,7 +11,7 @@ export type CardInfoFormProps = {
   CVCNumber: State<"CVCNumber", string>;
   password: State<"password", string>;
   cardType: {
-    values: { cardType: keyof CardTypeList | "" };
+    values: { cardType: CardTypes | "" };
     changeValues: (type: "cardType", cardType: string) => void;
     isFullFilled: () => boolean;
   };

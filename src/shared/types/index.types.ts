@@ -6,6 +6,8 @@ export type ExpirationPeriod = "month" | "year";
 
 export type CardTypeList = typeof CARD_TYPES;
 
+export type CardTypes = keyof CardTypeList;
+
 export type State<KeyType extends string, ValueType> = {
   values: Record<KeyType, ValueType>;
   changeValues: (key: KeyType, value: ValueType) => void;
