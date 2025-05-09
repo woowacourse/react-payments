@@ -47,7 +47,7 @@ function CardExpirationPeriodInputs({
           maxLength={EXPIRATION_PERIOD_LENGTH}
           placeholder="MM"
           isError={isMonthError()}
-        ></Input>
+        />
         <Input
           ref={inputRefs[1]}
           value={values.year}
