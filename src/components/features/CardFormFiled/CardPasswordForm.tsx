@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { CardFormFiledProps } from './CardFormFiled.types';
 
-import { CardInputLayout } from '../../common/CardInputLayout';
+import { CardInputLayout } from '@/components/common/CardInputLayout';
 import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
@@ -10,37 +10,34 @@ import { CardInputType } from '@/hooks/useCardInput';
 import { useFocus } from '@/hooks/useFocus';
 
 type Props = {
-  cardNumbers: CardInputType[];
+  password: CardInputType[];
 } & CardFormFiledProps;
 
-export const CardNumberForm = ({
-  cardNumbers,
+export const CardPasswordForm = ({
+  password,
   errorMessage,
   onCardInputChange,
   onCardInputBlur,
 }: Props) => {
-  const { refs } = useFocus(cardNumbers.length);
+  const { refs } = useFocus(1);
 
   return (
     <CardInputLayout
-      headerText="결제할 카드 번호를 입력해 주세요."
-      description="본인 명의의 카드만 결제 가능합니다."
-      label="카드 번호"
+      headerText="비밀번호를 입력해 주세요."
+      description="앞의 2자리를 입력해 주세요."
+      label="비밀번호 앞 2자리"
     >
       <Flex direction="column" alignItems="flex-start" width="100%" gap="4px">
-        <Flex gap="8px">
-          {cardNumbers.map((cardNumber, index) => (
-            <Input
-              key={`card-${index}`}
-              value={cardNumber.value}
-              onChange={(e) => onCardInputChange(e, index)}
-              onBlur={(e) => onCardInputBlur(e, index)}
-              isValid={cardNumber.isValid}
-              placeholder="1234"
-              ref={refs[index]}
-            />
-          ))}
-        </Flex>
+        <Input
+          value={password[0].value}
+          type="password"
+          maxLength={2}
+          onChange={(e) => onCardInputChange(e, 0)}
+          onBlur={(e) => onCardInputBlur(e, 0)}
+          isValid={password[0].isValid}
+          ref={refs[0]}
+          autoComplete="off"
+        />
         <Text
           variant="Caption"
           color="red"

@@ -7,6 +7,7 @@ import { Flex } from '@/components/common/Flex';
 import { Input } from '@/components/common/Input';
 import { Text } from '@/components/common/Text';
 import { ExpireDateInputType, ExpireDateInputKey } from '@/hooks/useExpireDateInput';
+import { useFocus } from '@/hooks/useFocus';
 
 type Props = {
   expireDate: ExpireDateInputType;
@@ -20,6 +21,7 @@ export const ExpireDateForm = ({
   onCardExpireDateInputChange,
   onCardExpireDateInputBlur,
 }: Props) => {
+  const { refs } = useFocus(2);
   const expireDateKeys = Object.keys(expireDate) as ExpireDateInputKey[];
 
   return (
@@ -39,6 +41,7 @@ export const ExpireDateForm = ({
               onBlur={(e) => onCardExpireDateInputBlur(e, key)}
               isValid={expireDate[key].isValid}
               placeholder={ExpireDatePlaceholder[index]}
+              ref={refs[index]}
             />
           ))}
         </Flex>
