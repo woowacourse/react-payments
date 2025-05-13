@@ -11,7 +11,7 @@ import {
   cardLayout,
   cardType,
 } from './Card.style';
-import {CARD_TYPE} from '../../constants';
+import {CARD_BRAND_COLOR, CARD_TYPE} from '../../constants';
 import {CardBrandType, CardExpirationDate, CardNumber} from "../../types";
 import {css, useTheme} from "@emotion/react";
 
@@ -49,7 +49,7 @@ function Card({cardNumber, cardExpirationDate, brand}: CardProps) {
 
   const dotStyle = brand === '카카오뱅크' ? 'black' : 'white';
   const fontColor = brand === '카카오뱅크' ? css`color: ${theme.color.black};` : undefined;
-  const brandBackground = brand ? css`background-color: ${theme.color.cardBrand[brand]};` : undefined;
+  const brandBackground = brand ? css`background-color: ${CARD_BRAND_COLOR[brand]};` : undefined;
 
   return (
     <section css={cardLayout}>
