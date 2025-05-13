@@ -5,11 +5,10 @@ import {errorInputStyle, errorMessageStyle} from "../../styles/@common/text.styl
 import {cardPeriodInputLayout} from "../CardPeriod/CardPeriodInput.style";
 import {CARD_PASSWORD, CARD_PASSWORD_ERROR} from "../../constants";
 import {ChangeEvent} from "react";
-import {CardPassword, CardPasswordError} from "../../types";
 
 type CardPasswordInputProps = {
-  cardPassword: CardPassword;
-  error: CardPasswordError;
+  cardPassword: string;
+  error: string;
   passwordRef: React.RefObject<HTMLInputElement | null>;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   tabIndex: number;

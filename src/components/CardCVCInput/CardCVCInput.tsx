@@ -5,11 +5,10 @@ import {cardPeriodInputLayout} from '../CardPeriod/CardPeriodInput.style';
 import {CARD_CVC_ERROR, CARD_CVC} from '../../constants';
 import {errorInputStyle, errorMessageStyle} from '../../styles/@common/text.style';
 import {inputContainer, inputSection} from '../../styles/@common/inputContainer.style';
-import {CardCVC, CardCVCError} from "../../types";
 
 type CardCVCInputProps = {
-  cardCVC: CardCVC;
-  error: CardCVCError;
+  cardCVC: string;
+  error: string;
   cvcRef: React.RefObject<HTMLInputElement | null>;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   tabIndex: number;

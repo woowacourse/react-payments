@@ -8,12 +8,6 @@ export type CardNumberError = Record<CardNumberKey, string>;
 export type CardExpirationDate = Record<CardPeriodKey, string>
 export type CardExpirationDateError = Record<CardPeriodKey, string>
 
-export type CardCVC = string;
-export type CardCVCError = string;
-
-export type CardPassword = string;
-export type CardPasswordError = string;
-
 export enum CardBrands {
   BC카드 = 'BC카드',
   신한카드 = '신한카드',

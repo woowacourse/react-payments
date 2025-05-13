@@ -6,9 +6,7 @@ const meta: Meta<typeof CardPasswordInput> = {
   component: CardPasswordInput,
   argTypes: {
     cardPassword: { control: 'text' },
-    hasError: { control: 'boolean' },
     onChange: { action: 'changed' },
-    getCardPasswordErrorMessage: { table: { disable: true } },
   },
   parameters: {
     layout: 'centered',
@@ -21,13 +19,11 @@ type Story = StoryObj<typeof CardPasswordInput>;
 export const Default: Story = {
   args: {
     cardPassword: '',
-    hasError: false,
   },
 };
 
 export const Error: Story = {
   args: {
     cardPassword: '1',
-    hasError: true,
   },
 };
