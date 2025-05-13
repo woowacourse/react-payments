@@ -6,7 +6,7 @@ const meta: Meta<typeof Button> = {
   component: Button,
   argTypes: {
     content: { control: 'text' },
-    style: {
+    variant: {
       control: 'select',
       options: ['rounded', 'full'],
     },
@@ -19,13 +19,13 @@ type Story = StoryObj<typeof Button>;
 export const Rounded: Story = {
   args: {
     content: '확인',
-    style: 'rounded',
+    variant: 'rounded',
   },
 };
 
 export const Full: Story = {
   args: {
     content: '확인',
-    style: 'full',
+    variant: 'full',
   },
 };

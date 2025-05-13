@@ -142,7 +142,7 @@ function HomePage() {
       </section>
       {showConfirmButton && (
         <Link to='/complete' state={{cardNumber, brand}}>
-          <Button content='확인' style="rounded"/>
+          <Button content='확인' variant="rounded"/>
         </Link>
       )}
     </main>

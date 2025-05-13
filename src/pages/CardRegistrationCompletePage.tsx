@@ -25,7 +25,7 @@ function CardRegistrationCompletePage() {
         {brand}가 등록되었어요.
       </h1>
       <Link to="/">
-        <Button content='확인' style="full"/>
+        <Button content='확인' variant="full"/>
       </Link>
     </div>
   );

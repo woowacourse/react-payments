@@ -1,12 +1,13 @@
+import { ReactNode } from "react";
 import { roundedButton, fullButton, buttonContainer } from "./Button.style";
 
 type ButtonProps = {
-  content: string;
-  style?: "rounded" | "full";
+  content: ReactNode;
+  variant?: "rounded" | "full";
 }
 
-function Button({content, style}: ButtonProps) {
-  const buttonStyle = style === "full" ? fullButton : roundedButton;
+function Button({content, variant}: ButtonProps) {
+  const buttonStyle = variant === "full" ? fullButton : roundedButton;
 
   return (
     <div css={buttonContainer}>
