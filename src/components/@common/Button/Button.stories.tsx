@@ -8,7 +8,7 @@ const meta: Meta<typeof Button> = {
     content: { control: 'text' },
     style: {
       control: 'select',
-      options: ['default', 'bottom'],
+      options: ['rounded', 'full'],
     },
   },
 };
@@ -16,16 +16,16 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {
+export const Rounded: Story = {
   args: {
     content: '확인',
-    style: 'default',
+    style: 'rounded',
   },
 };
 
-export const Bottom: Story = {
+export const Full: Story = {
   args: {
     content: '확인',
-    style: 'bottom',
+    style: 'full',
   },
 };

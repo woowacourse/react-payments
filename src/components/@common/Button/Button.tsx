@@ -1,12 +1,12 @@
-import { defaultButton, bottomButton, buttonContainer } from "./Button.style";
+import { roundedButton, fullButton, buttonContainer } from "./Button.style";
 
 type ButtonProps = {
   content: string;
-  style?: "default" | "bottom";
+  style?: "rounded" | "full";
 }
 
 function Button({content, style}: ButtonProps) {
-  const buttonStyle = style === "bottom" ? bottomButton : defaultButton;
+  const buttonStyle = style === "full" ? fullButton : roundedButton;
 
   return (
     <div css={buttonContainer}>

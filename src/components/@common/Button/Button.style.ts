@@ -13,7 +13,7 @@ export const buttonContainer = css`
     z-index: 100;
 `;
 
-export const defaultButton = css`
+export const roundedButton = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,7 +29,7 @@ export const defaultButton = css`
     border-radius: 5px;
 `;
 
-export const bottomButton = css`
+export const fullButton = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
