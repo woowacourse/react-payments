@@ -12,6 +12,7 @@
     "build-storybook": "storybook build",
     "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
+  "homepage": "https://shinjungoh.github.io/react-payments/",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "gh-pages": "^6.3.0",

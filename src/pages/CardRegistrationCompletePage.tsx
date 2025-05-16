@@ -14,7 +14,7 @@ function CardRegistrationCompletePage() {
   const {cardNumber, brand} = (location.state as LocationState) || {};
 
   if (!cardNumber || !brand) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/*" replace />;
   }
 
   return (
