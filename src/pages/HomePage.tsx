@@ -141,7 +141,7 @@ function HomePage() {
         />
       </section>
       {showConfirmButton && (
-        <Link to='/complete' state={{cardNumber, brand}}>
+        <Link to='/complete' state={{cardNumber, brand}} style={{ position: 'sticky', bottom: 0 }}>
           <Button content='확인' variant="full"/>
         </Link>
       )}

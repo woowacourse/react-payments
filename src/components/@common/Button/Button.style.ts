@@ -1,18 +1,6 @@
 import { css } from '@emotion/react';
 import theme from "../../../styles/theme";
 
-export const buttonContainer = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    position: relative;
-    width: 100%;
-    gap: 16px;
-    z-index: 100;
-`;
-
 export const roundedButton = css`
     display: flex;
     flex-direction: column;

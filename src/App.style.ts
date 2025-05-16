@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 
 export const appLayout = css`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-    
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -35,6 +35,10 @@ const GlobalStyle = css`
   }
 
   #root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     min-width: var(--min-width);
     max-width: var(--max-width);
