@@ -9,11 +9,10 @@ type CardBrandDropdownProps = {
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   brandRef: React.RefObject<HTMLSelectElement | null>;
   options: CardBrandType[];
-  placeholder?: string;
   tabIndex: number;
 }
 
-function CardBrandDropdown({value, onChange, brandRef, options, placeholder, tabIndex}: CardBrandDropdownProps) {
+function CardBrandDropdown({value, onChange, brandRef, options, tabIndex}: CardBrandDropdownProps) {
   return (
     <div css={cardPeriodInputLayout}>
       <Title title='카드사를 선택해 주세요' subTitle='현재 국내 카드사만 가능합니다.'/>
@@ -22,7 +21,7 @@ function CardBrandDropdown({value, onChange, brandRef, options, placeholder, tab
         options={options}
         value={value ?? ''}
         onChange={onChange}
-        placeholder={placeholder}
+        placeholder="카드사를 선택해 주세요"
         tabIndex={tabIndex}
       />
     </div>
