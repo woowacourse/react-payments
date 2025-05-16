@@ -22,7 +22,7 @@ export const Default: Story = {
   },
 };
 
-export const Error: Story = {
+export const ErrorState: Story = {
   args: {
     cardPassword: '1',
   },
