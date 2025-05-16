@@ -31,7 +31,7 @@ function CardPasswordInput({cardPassword, error, onChange, passwordRef, tabIndex
       <Input.Group id="password">
         <div css={inputContainer}>
           <Input.Label>비밀번호 앞 2자리</Input.Label>
-          <article css={inputSection}>
+          <fieldset css={inputSection}>
             <Input
               ref={passwordRef}
               type="password"
@@ -42,7 +42,7 @@ function CardPasswordInput({cardPassword, error, onChange, passwordRef, tabIndex
               css={error ? errorInputStyle : undefined}
               tabIndex={tabIndex}
             />
-          </article>
+          </fieldset>
           {error && <div css={errorMessageStyle}>{getErrorMessage()}</div>}
         </div>
       </Input.Group>

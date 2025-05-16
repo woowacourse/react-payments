@@ -36,7 +36,7 @@ function CardNumberInput({
       <Input.Group id="card-number">
         <div css={inputContainer}>
           <Input.Label>카드 번호</Input.Label>
-          <article css={inputSection}>
+          <fieldset css={inputSection}>
             <Input.Group id="card-number">
               <Input
                 ref={inputRefs?.[0]}
@@ -94,7 +94,7 @@ function CardNumberInput({
                 tabIndex={tabIndex ? tabIndex + 4: undefined}
               />
             </Input.Group>
-          </article>
+          </fieldset>
           {
             errorMessage && (
             <div css={errorMessageStyle}>{errorMessage}</div>

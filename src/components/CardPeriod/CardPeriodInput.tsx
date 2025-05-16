@@ -37,7 +37,7 @@ function CardPeriodInput({
       <Input.Group id="card-expiration">
         <div css={inputContainer}>
           <Input.Label>유효기간</Input.Label>
-          <article css={inputSection}>
+          <fieldset css={inputSection}>
             <Input.Group id="card-expiration">
               <Input
                 ref={monthRef}
@@ -65,7 +65,7 @@ function CardPeriodInput({
                 tabIndex={tabIndex ? tabIndex + 2: undefined}
               />
             </Input.Group>
-          </article>
+          </fieldset>
           {
             errorMessage && (
             <div css={errorMessageStyle}>{errorMessage}</div>)

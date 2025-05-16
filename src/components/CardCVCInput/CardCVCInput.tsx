@@ -37,7 +37,7 @@ function CardCVCInput({
       <Input.Group id="card-cvc">
         <div css={inputContainer}>
           <Input.Label>CVC</Input.Label>
-          <article css={inputSection}>
+          <fieldset css={inputSection}>
             <Input
               ref={cvcRef}
               type="text"
@@ -48,7 +48,7 @@ function CardCVCInput({
               css={error ? errorInputStyle : undefined}
               tabIndex={tabIndex}
             />
-          </article>
+          </fieldset>
           {error && <div css={errorMessageStyle}>{errorMessage()}</div>}
         </div>
       </Input.Group>
