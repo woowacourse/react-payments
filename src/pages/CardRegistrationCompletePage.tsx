@@ -1,8 +1,9 @@
 import Button from "../components/@common/Button/Button";
 import {completeImage, pageContainer, title} from "./CardRegistrationCompletePage.style";
-import {Navigate, useLocation} from "react-router-dom";
+import {Navigate, useLocation, useNavigate} from "react-router-dom";
 import {CardNumber} from "../types";
 import {Complete} from "../asset/image";
+import {PATHS} from "../constants/routes.ts";
 
 type LocationState = {
   cardNumber?: CardNumber;
@@ -11,10 +12,15 @@ type LocationState = {
 
 function CardRegistrationCompletePage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const {cardNumber, brand} = (location.state as LocationState) || {};
 
   if (!cardNumber || !brand) {
-    return <Navigate to="/*" replace />;
+    return <Navigate to={PATHS.HOME} replace />;
+  }
+
+  const handleNavigateHome = () => {
+    navigate(PATHS.HOME, { replace: true });
   }
 
   return (
@@ -28,7 +34,7 @@ function CardRegistrationCompletePage() {
       <Button
         content='확인'
         variant="rounded"
-        onClick={() => window.location.href = '/'}
+        onClick={handleNavigateHome}
       />
     </div>
   );
