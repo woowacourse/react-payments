@@ -2,7 +2,7 @@ import Card from "../components/Card/Card";
 import CardPasswordInput from "../components/CardPassword/CardPasswordInput";
 import CardCVCInput from "../components/CardCVCInput/CardCVCInput";
 import CardPeriodInput from "../components/CardPeriod/CardPeriodInput";
-import CardBrand from "../components/CardBrand/CardBrand";
+import CardBrandDropdown from "../components/CardBrand/CardBrandDropdown.tsx";
 import CardNumberInput from "../components/CardNumberInput/CardNumberInput";
 import Button from "../components/@common/Button/Button";
 import {Link} from "react-router-dom";
@@ -121,7 +121,7 @@ function HomePage() {
         }
         {
           showCardBrand &&
-          <CardBrand
+          <CardBrandDropdown
             value={brand}
             onChange={onChange}
             options={options}

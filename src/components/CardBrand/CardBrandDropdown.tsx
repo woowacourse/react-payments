@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 import {CardBrandType} from "../../types";
 import {cardPeriodInputLayout} from "../CardPeriod/CardPeriodInput.style";
 
-type CardBrandProps = {
+type CardBrandDropdownProps = {
   value: CardBrandType | null;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   brandRef: React.RefObject<HTMLSelectElement | null>;
@@ -13,7 +13,7 @@ type CardBrandProps = {
   tabIndex: number;
 }
 
-function CardBrand({value, onChange, brandRef, options, placeholder, tabIndex}: CardBrandProps) {
+function CardBrandDropdown({value, onChange, brandRef, options, placeholder, tabIndex}: CardBrandDropdownProps) {
   return (
     <div css={cardPeriodInputLayout}>
       <Title title='카드사를 선택해 주세요' subTitle='현재 국내 카드사만 가능합니다.'/>
@@ -29,4 +29,4 @@ function CardBrand({value, onChange, brandRef, options, placeholder, tabIndex}: 
   );
 }
 
-export default CardBrand;
+export default CardBrandDropdown;

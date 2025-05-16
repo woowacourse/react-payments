@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import CardBrand from './CardBrand';
 import { CardBrands } from '../../types';
+import CardBrandDropdown from "./CardBrandDropdown.tsx";
+import CardBrand from './CardBrandDropdown.tsx';
 
 const cardBrandOptions = Object.values(CardBrands);
 
 const meta: Meta<typeof CardBrand> = {
-  title: 'Components/CardBrand',
-  component: CardBrand,
+  title: 'Components/CardBrandDropdown',
+  component: CardBrandDropdown,
   argTypes: {
     value: {
       control: {
