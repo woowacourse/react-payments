@@ -48,7 +48,7 @@ function CardNumberInput({
                 onKeyDown={onKeyDown}
                 onBlur={onBlur}
                 css={error.first ? errorInputStyle : undefined}
-                tabIndex={tabIndex ? tabIndex + 1: undefined}
+                tabIndex={tabIndex}
                 autoFocus={autoFocus}
               />
             </Input.Group>
@@ -63,7 +63,7 @@ function CardNumberInput({
                 onKeyDown={onKeyDown}
                 onBlur={onBlur}
                 css={error.second ? errorInputStyle : undefined}
-                tabIndex={tabIndex ? tabIndex + 2: undefined}
+                tabIndex={tabIndex ? tabIndex + 1: undefined}
               />
             </Input.Group>
             <Input.Group id="card-number-third">
@@ -77,7 +77,7 @@ function CardNumberInput({
                 onKeyDown={onKeyDown}
                 onBlur={onBlur}
                 css={error.third ? errorInputStyle : undefined}
-                tabIndex={tabIndex ? tabIndex + 3: undefined}
+                tabIndex={tabIndex ? tabIndex + 2: undefined}
               />
             </Input.Group>
             <Input.Group id="card-number-forth">
@@ -91,7 +91,7 @@ function CardNumberInput({
                 onKeyDown={onKeyDown}
                 onBlur={onBlur}
                 css={error.forth ? errorInputStyle : undefined}
-                tabIndex={tabIndex ? tabIndex + 4: undefined}
+                tabIndex={tabIndex ? tabIndex + 3: undefined}
               />
             </Input.Group>
           </fieldset>

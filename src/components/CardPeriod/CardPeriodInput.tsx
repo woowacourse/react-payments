@@ -48,7 +48,7 @@ function CardPeriodInput({
                 onChange={onChange}
                 onKeyDown={onKeyDown}
                 css={error.month ? errorInputStyle : undefined}
-                tabIndex={tabIndex ? tabIndex + 1: undefined}
+                tabIndex={tabIndex}
                 autoFocus={autoFocus}
               />
             </Input.Group>
@@ -62,7 +62,7 @@ function CardPeriodInput({
                 onChange={onChange}
                 onKeyDown={onKeyDown}
                 css={error.year ? errorInputStyle : undefined}
-                tabIndex={tabIndex ? tabIndex + 2: undefined}
+                tabIndex={tabIndex ? tabIndex + 1: undefined}
               />
             </Input.Group>
           </fieldset>
