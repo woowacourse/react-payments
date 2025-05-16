@@ -2,7 +2,6 @@ import Button from "../components/@common/Button/Button";
 import {completeImage, pageContainer, title} from "./CardRegistrationCompletePage.style";
 import {Navigate, useLocation, useNavigate} from "react-router-dom";
 import {CardNumber} from "../types";
-import {Complete} from "../asset/image";
 import {PATHS} from "../constants/routes.ts";
 
 type LocationState = {
@@ -25,7 +24,7 @@ function CardRegistrationCompletePage() {
 
   return (
     <div css={pageContainer}>
-      <img src={Complete} alt="완료" css={completeImage} />
+      <div css={completeImage} />
       <h1 css={title}>
         {cardNumber.first}로 시작하는
         <br/>
