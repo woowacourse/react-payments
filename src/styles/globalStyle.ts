@@ -35,19 +35,16 @@ const GlobalStyle = css`
   }
 
   #root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     min-width: var(--min-width);
     max-width: var(--max-width);
     min-height: 100dvh;
     background-color: #fff;
     margin: 0 auto;
-  }
-
-  @media (min-width: 430px) {
-    #root {
-      max-width: var(--max-width);
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-    }
   }
 
   ::-webkit-scrollbar {

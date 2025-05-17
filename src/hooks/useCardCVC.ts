@@ -1,49 +1,49 @@
-import { useState, ChangeEvent } from 'react';
-import { CardCVC } from '../types/types.ts';
-import { isOnlyDigits } from '../utils/validateNumber';
-import { CARD_CVC_ERROR, CARD_CVC } from '../constants';
+import {useState, ChangeEvent, useRef} from 'react';
+import {CardCVC} from '../types';
+import {isOnlyDigits} from '../utils/validateNumber';
+import {CARD_CVC, CARD_CVC_ERROR} from '../constants';
 
-export const useCardCVC = () => {
-  const [cardCVC, setCardCVC] = useState<CardCVC>(null);
-  const [cardCVCError, setCardCVCError] = useState(false);
+export const useCardCVC = (onComplete?: () => void) => {
+  const [cardCVC, setCardCVC] = useState<CardCVC>('');
+  const [error, setError] = useState('');
+
+  const cvcRef = useRef<HTMLInputElement>(null);
 
   const handleCardCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const {value} = e.target;
     const isNumber = isOnlyDigits(value);
 
-    if (isNumber) {
-      setCardCVC(value === '' ? null : Number(value));
-      setCardCVCError(false);
-    } else {
-      setCardCVCError(true);
+    if (!isNumber && value !== '') {
+      setError(CARD_CVC_ERROR.onlyNumbers);
+      return;
+    }
+
+    setCardCVC(value === '' ? '' : value);
+    setError('');
+
+    if (value.length === CARD_CVC.maxLength) {
+      setTimeout(() => onComplete?.(), 100);
     }
   };
 
   const resetCardCVC = () => {
-    setCardCVC(null);
-    setCardCVCError(false);
+    setCardCVC('');
+    setError('');
   };
 
   const isCardCVCValid = () => {
     return (
-      cardCVC !== null &&
-      cardCVC.toString().length === CARD_CVC.maxLength &&
-      !cardCVCError
+      cardCVC !== '' &&
+      cardCVC?.length === CARD_CVC.maxLength
     );
-  };
-
-  const getCardCVCErrorMessage = (): string | null => {
-    if (!cardCVCError) return null;
-
-    return CARD_CVC_ERROR.onlyNumbers;
   };
 
   return {
     cardCVC,
-    cardCVCError,
+    cardCVCError: error,
+    cvcRef,
     handleCardCVCChange,
     resetCardCVC,
-    isCardCVCValid,
-    getCardCVCErrorMessage,
+    isValid: isCardCVCValid(),
   };
 };

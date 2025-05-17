@@ -1,0 +1,33 @@
+import { css } from '@emotion/react';
+import theme from "../../../styles/theme";
+
+export const roundedButton = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: ${theme.color.cardBlack};
+    color: ${theme.color.white};
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+
+    width: 320px;
+    height: 44px;
+    border-radius: 5px;
+`;
+
+export const fullButton = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: ${theme.color.cardBlack};
+    color: ${theme.color.white};
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    
+    width: 428px;
+    height: 52px;
+`;

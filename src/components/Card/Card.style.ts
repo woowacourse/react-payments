@@ -4,13 +4,21 @@ import theme from '../../styles/theme';
 export const cardLayout = css`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 77px 0 45px 0;
+`;
 
-  width: 21.2rem;
-  height: 13.2rem;
-  margin-top: 7.7rem;
+export const cardSection = css`
+  display: flex;
+  flex-direction: column;
+  width: 212px;
+  height: 132px;
 
   border-radius: 5px;
   background-color: ${theme.color.cardBlack};
+  box-shadow: 3px 3px 5px 0 #00000040;
 `;
 
 export const cardContainer = css`
@@ -38,9 +46,12 @@ export const cardType = css`
 export const cardContentContainer = css`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 0.8rem;
+  width: 212px;
+  height: 132px;
+  margin: 8px 0 0 0;
 `;
 
 export const cardContent = css`
