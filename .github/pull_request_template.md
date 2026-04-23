@@ -9,9 +9,15 @@
 
 ### 2단계
 - 다양한 Form 구성 요소들간의 상태를 효율적으로 관리한다.
-- hooks API를 이용하여 상태 관리 로직을 구현하한다.
+- hooks API를 이용하여 상태 관리 로직을 구현한다.
 - custom hooks를 생성하여 Form 관리 로직을 컴포넌트에서 분리하고 재사용한다.
 - Controlled & Uncontrolled Components에 입각하여 Form을 핸들링한다.
+
+### 3단계
+- MSW로 네트워크 경계를 모킹하고, 프론트엔드가 보는 서버의 모습을 설계한다.
+- 비동기 상태를 `idle | loading | success | error` 네 가지로 명시적으로 관리한다.
+- 실제 서버에 보낼 요청·받을 응답 형식을 설계하여 서버-클라이언트 계약을 경험한다.
+- React Testing Library와 MSW로 사용자 관점의 통합 테스트를 작성한다.
 
 ---
 
@@ -57,3 +63,10 @@
 
 - 모든 필드가 유효할 때만 확인 버튼이 **정확히 활성화/비활성화**되는가?
 - 유효성 검사의 기준이 명확하고, **상태 변경에 따른 UI 반응**이 잘 연결되어 있는가?
+
+### 5. 비동기 상태 · 네트워크 경계 · 통합 테스트
+
+- 비동기 상태를 `idle | loading | success | error` 네 가지로 **명시적으로** 관리하고, `isLoading`/`error`를 별도 boolean으로 쪼개지 않았는가?
+- MSW handler가 `POST/GET/DELETE /cards`와 400 시나리오까지 포함하여 **네트워크 경계**에서 동작하는가?
+- 통합 테스트가 `fetch`·`axios`를 모킹하지 않고, **MSW + RTL**로 사용자 관점에서 작성되었는가?
+- RTL 요소 탐색이 `getByRole → getByText → getByLabelText → getByTestId` 우선순위를 따르고, 비동기 요소에 `findBy*`를 사용했는가?
