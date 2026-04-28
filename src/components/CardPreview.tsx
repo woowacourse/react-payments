@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 interface CardPrivewProps {
   cardnumber: string;
-  expiredMonth: string;
-  expiredYear: string;
+  expiryMonth: string;
+  expiryYear: string;
 }
 
 function CardPreview(props: CardPrivewProps) {
@@ -37,9 +37,9 @@ function CardPreview(props: CardPrivewProps) {
         ))}
       </div>
       <div>
-        <span>{props.expiredMonth}</span>
-        {!!props.expiredYear.length && <span>/</span>}
-        <span>{props.expiredYear}</span>
+        <span>{props.expiryMonth}</span>
+        {!!props.expiryYear.length && <span>/</span>}
+        <span>{props.expiryYear}</span>
       </div>
     </div>
   );
