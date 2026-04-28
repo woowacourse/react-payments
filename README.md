@@ -1,15 +1,16 @@
 # 페이먼츠 미션
 
-우아한테크코스 레벨2 **페이먼츠** 미션 저장소이다.
+## 기능 요구 사항
 
-이 저장소는 일부러 비어 있다. 크루는 프로젝트 부트스트랩부터 라이브러리 선택·설치·설정까지 직접 수행한다. "왜 이 라이브러리를 골랐는가"가 곧 학습이다.
+- 카드번호 입력
+  - [] 카드번호 입력값 검증
+    - [] 숫자만 입력 검증
+    - [] 첫째, 둘째 입력 검증(Visa: 4로 시작하는 16자리 숫자 MasterCard: 51~55로 시작하는 16자리 숫자)
+  - [] 유효기간 입력 검증
+    - [] MM(01 ~ 12) 입력 검증
+  - [] CVC 입력 검증
+    - [] 자릿수 검증
+    - [] 숫자 입력 검증
 
-## 프로젝트 초기화
-
-[React — Build a React app from scratch](https://react.dev/learn/build-a-react-app-from-scratch)
-
-```sh
-npm create vite@latest my-app -- --template react-ts
-npm install
-npm run dev
-```
+- 실시간 프리뷰
+  - [] 입력값을 기반으로 카드 UI가 변경되도록 한다.
