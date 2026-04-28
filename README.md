@@ -13,3 +13,46 @@ npm create vite@latest my-app -- --template react-ts
 npm install
 npm run dev
 ```
+
+## 공통
+
+### 컨벤션
+폴더명: camelCase
+컴포넌트 파일명: PascalCase
+
+### tools
+prettier, eslint
+
+### 버전
+package 관리: npm
+node: 22.22.2
+
+### 기술 스택
+- design libary: CSS Module
+  - 디자인 담당인 css와 js를 완전히 분리하기 위해서
+  - 현재 미션에서 속성명이 축약형인 것보다 표준 css 속성 사용을 하기 위해서
+
+### 폴더 구조
+```
+/src
+  /core
+    /components
+      /input
+      /creditCard
+      /formGroup
+    /hooks
+      /useOutside
+   /features
+     /payments
+        /components
+          /CVC
+          /카드번호
+          /유효기간
+        /hooks
+          /usePayments.tsx
+        /api
+          /degueAPI.tsx
+          /asdsad
+  /pages
+    /payments
+```
