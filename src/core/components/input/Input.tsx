@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import styles from './Input.module.css';
 
 interface InputProps {
@@ -11,7 +12,7 @@ interface InputProps {
 export const Input = ({ placeholder, maxLength, isError, value, onChange }: InputProps) => {
   return (
     <input
-      className={`${styles.input} ${isError && styles.isError}`}
+      className={cn(styles.input, isError && styles.isError)}
       placeholder={placeholder}
       maxLength={maxLength}
       value={value}

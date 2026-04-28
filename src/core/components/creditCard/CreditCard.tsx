@@ -1,6 +1,6 @@
+import cn from 'classnames';
 import styles from './CreditCard.module.css';
 
-import DefaultCardImage from '@/core/assets/defaultCardImage.png';
 import MastercardSvg from '@/core/assets/Mastercard.svg?react';
 import VisaSvg from '@/core/assets/Visa.svg?react';
 
@@ -25,14 +25,14 @@ export const CreditCard = ({
   expirationDate,
 }: DefaultCreditCardProps) => {
   return (
-    <div className={styles.creditCard}>
-      <div className={styles.creditCardBrand}>{cardBrand === 'mastercard' ? <MastercardSvg /> : <VisaSvg />}</div>
-      <div className={styles.creditCardNumber}>
+    <div className={cn(styles.creditCard, bank === 'default' ? 'default' : '')}>
+      <div className={cn(styles.creditCardBrand)}>{cardBrand === 'mastercard' ? <MastercardSvg /> : <VisaSvg />}</div>
+      <div className={cn(styles.creditCardNumber)}>
         {cardNumberList?.map((number, index) => (
           <span key={index}>{index > 1 ? STAR.repeat(number.length) : number}</span>
         ))}
       </div>
-      <div className={styles.creditCardExpirationDate}>
+      <div className={cn(styles.creditCardExpirationDate)}>
         {expirationDate?.map((number, index) => (
           <span key={index}>{number}</span>
         ))}
