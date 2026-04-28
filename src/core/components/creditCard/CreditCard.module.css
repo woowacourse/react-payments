@@ -1,0 +1,50 @@
+.creditCard {
+  display: inline-block;
+  position: relative;
+  width: 212px;
+  height: 132px;
+  background-color: #333333;
+  border-radius: 4px;
+  padding-left: 17px;
+  padding-right: 17px;
+  box-sizing: border-box;
+}
+
+.creditCard:after {
+  content: "";
+  position: absolute;
+  width: 36px;
+  height: 22px;
+  top: 8px;
+  left: 12px;
+  opacity: 1;
+  border: 0.5px solid #DDCD781A;
+  border-radius: 4px;
+  background-color: #DDCD78;
+  
+}
+.creditCardBrand {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 36px;
+}
+
+.creditCardBrand svg {
+  width: 100%;
+  height: auto;
+}
+
+.creditCardNumber {
+  padding-top: 44px;
+  color: #ffffff;
+  font-size: 14px;
+}
+.creditCardNumber span {
+  padding-right: 10px;
+}
+.creditCardExpirationDate {
+  padding-top: 8px;
+  color: #ffffff;
+  font-size: 14px;
+}
