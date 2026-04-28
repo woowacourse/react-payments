@@ -1,4 +1,4 @@
 export const isCVCNumber = (CVCNumber: string) => {
-    if (Number.isNaN(CVCNumber)) return false;
-    return CVCNumber.length === 3;
+    if (Number.isNaN(Number(CVCNumber))) return false;
+    return CVCNumber.length >= 4;
 };
