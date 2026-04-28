@@ -1,73 +1,24 @@
-# React + TypeScript + Vite
+# 페이먼츠 1단계 - Component & Storybook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 기능 구현 목록
 
-Currently, two official plugins are available:
+- 결제할 카드 번호입력
+  - 결제할 번호를 4자리 씩, 총 16개 입력한다.
+  - 지원하지 않는 카드 브랜드의 구분 숫자일 경우, 에러 메세지를 띄운다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 카드 유효기간 입력
+  - 월 두자리 01~12 범위의 숫자를 입력받는다.
+  - 년도 두자리 숫자를 입력받는다.
+  - 유효하지 않는 숫자를 입력할 경우, 에러 메세지를 띄운다.
 
-## React Compiler
+- cvc 번호 입력
+  - 세 자리 숫자를 입력받는다.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 카드 브랜드 구분
+  - Visa: 4로 시작하는 16자리 숫자
+  - MasterCard: 51-55로 시작하는 16자리 숫자
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- 카드 UI
+  - 입력하는 카드 번호를 실시간으로 반영한다. 단, 9자리 부터는 "." 으로 대체한다.
+  - 구분 숫자에 해당하는 브랜드의 로고를 반영한다.
+  
