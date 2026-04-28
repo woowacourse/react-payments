@@ -1,4 +1,4 @@
 export const isYearNumber = (yearNumber: string) => {
-    if (Number.isNaN(yearNumber)) return false;
+    if (Number.isNaN(Number(yearNumber))) return false;
     return yearNumber.length === 2;
 };
