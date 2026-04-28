@@ -1,69 +1,122 @@
-import styled from "@emotion/styled";
-import { useState } from "react";
-import CardInfoSection from "./components/CardInfoSection";
-import CardPreview from "./components/Card/CardPreview";
-import CardNumberInputWrapper from "./components/InputWrapper/CardNumberInputWrapper";
-import EXPInputWrapper from "./components/InputWrapper/EXPInputWrapper";
-import CVCInputWrapper from "./components/InputWrapper/CVCInputWrapper";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import heroImg from './assets/hero.png'
+import './App.css'
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
-  const [EXPNumbers, setEXPNumbers] = useState({ mm: "", yy: "" });
-
-  const [cvc, setCVC] = useState("");
+  const [count, setCount] = useState(0)
 
   return (
-    <MainContainer>
-      <CardPreview cardNumbers={cardNumbers} EXP={EXPNumbers} />
-      <InputSectionContainer>
-        <CardInfoSection
-          title="결제할 카드 번호를 입력해 주세요"
-          caption="본인 명의의 카드만 결제 가능합니다."
-          inputLabel="카드 번호"
+    <>
+      <section id="center">
+        <div className="hero">
+          <img src={heroImg} className="base" width="170" height="179" alt="" />
+          <img src={reactLogo} className="framework" alt="React logo" />
+          <img src={viteLogo} className="vite" alt="Vite logo" />
+        </div>
+        <div>
+          <h1>Get started</h1>
+          <p>
+            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+          </p>
+        </div>
+        <button
+          type="button"
+          className="counter"
+          onClick={() => setCount((count) => count + 1)}
         >
-          <CardNumberInputWrapper
-            setCardNumber={setCardNumbers}
-            value={cardNumbers}
-          />
-        </CardInfoSection>
+          Count is {count}
+        </button>
+      </section>
 
-        <CardInfoSection
-          title="카드 유효기간을 입력해 주세요"
-          caption="월/년도(MMYY)를 순서대로 입력해 주세요"
-          inputLabel="유효기간"
-        >
-          <EXPInputWrapper setEXPNumber={setEXPNumbers} value={EXPNumbers} />
-        </CardInfoSection>
+      <div className="ticks"></div>
 
-        <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC">
-          <CVCInputWrapper setCVCNumber={setCVC} value={cvc} />
-        </CardInfoSection>
-      </InputSectionContainer>
-    </MainContainer>
-  );
+      <section id="next-steps">
+        <div id="docs">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#documentation-icon"></use>
+          </svg>
+          <h2>Documentation</h2>
+          <p>Your questions, answered</p>
+          <ul>
+            <li>
+              <a href="https://vite.dev/" target="_blank">
+                <img className="logo" src={viteLogo} alt="" />
+                Explore Vite
+              </a>
+            </li>
+            <li>
+              <a href="https://react.dev/" target="_blank">
+                <img className="button-icon" src={reactLogo} alt="" />
+                Learn more
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="social">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#social-icon"></use>
+          </svg>
+          <h2>Connect with us</h2>
+          <p>Join the Vite community</p>
+          <ul>
+            <li>
+              <a href="https://github.com/vitejs/vite" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#github-icon"></use>
+                </svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://chat.vite.dev/" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#discord-icon"></use>
+                </svg>
+                Discord
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/vite_js" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#x-icon"></use>
+                </svg>
+                X.com
+              </a>
+            </li>
+            <li>
+              <a href="https://bsky.app/profile/vite.dev" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#bluesky-icon"></use>
+                </svg>
+                Bluesky
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div className="ticks"></div>
+      <section id="spacer"></section>
+    </>
+  )
 }
 
-export default App;
-
-const InputSectionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const MainContainer = styled.main`
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 45px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
+export default App
