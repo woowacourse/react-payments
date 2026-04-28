@@ -13,6 +13,6 @@ type Story = StoryObj<typeof Input>;
 export const Default: Story = {
     render: () => {
         const [value, setValue] = useState('');
-        return <Input value={value} type={{ type: 'cvc' }} setValue={setValue} />;
+        return <Input value={value} type={{ type: 'exp', expType: 'month' }} setValue={setValue} />;
     },
 };
