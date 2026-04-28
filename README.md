@@ -29,7 +29,7 @@
 
 ### 환경 설정
 
-- [ ] vite + typescript + react 환경 구축
+- [x] vite + typescript + react 환경 구축
 - [ ] emotion 환경 구축
 - [ ] 보일러 플래이트 제거
 
