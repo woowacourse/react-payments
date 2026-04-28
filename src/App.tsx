@@ -1,5 +1,7 @@
+import { CreditCard } from './core/components/creditCard/CreditCard';
+
 function App() {
-  return 'Hello';
+  return <CreditCard />;
 }
 
 export default App;
