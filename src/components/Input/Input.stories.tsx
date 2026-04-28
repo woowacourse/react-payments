@@ -10,5 +10,5 @@ export default meta;
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
-    args: { value: 1234, type: 'CVC' },
+    args: { value: 1234, type: 'cvc' },
 };

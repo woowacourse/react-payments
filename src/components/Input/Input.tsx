@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 
 interface InputProps {
     value?: number;
-    setValue?: (value: number) => void;
-    type: 'card-number' | 'exp' | 'CVC';
+    setValue?: (value: string) => void;
+    type: 'card-number' | 'exp' | 'cvc';
 }
 
 export default function Input({ value, setValue, type }: InputProps) {
-    return <InputStyle value={value} onChange={setValue} type={type} />;
+    return <InputStyle value={value} onChange={(e) => setValue(e.target.value)} type={type} />;
 }
 
 const InputStyle = styled.input<InputProps>`
@@ -20,7 +20,7 @@ const InputStyle = styled.input<InputProps>`
     width: ${({ type }) => {
         if (type === 'card-number') return '71px';
         if (type === 'exp') return '152px';
-        if (type === 'CVC') return '315px';
+        if (type === 'cvc') return '315px';
     }};
     padding: 8px;
 `;
