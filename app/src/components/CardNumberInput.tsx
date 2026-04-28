@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 
 export function CardNumberInputContainer() {
   return (
-    <fieldset>
-      <legend>카드 번호</legend>
+    <CardNumberFieldset>
+      <CardNumberLegend>카드 번호</CardNumberLegend>
       <CardNumberInput
         type="number"
         minLength={1}
@@ -28,15 +28,26 @@ export function CardNumberInputContainer() {
         maxLength={4}
         placeholder="1234"
       />
-    </fieldset>
+    </CardNumberFieldset>
   );
 }
+
+const CardNumberFieldset = styled.fieldset`
+  border: none;
+  display: flex;
+  gap: 0.625rem;
+`;
+
+const CardNumberLegend = styled.legend`
+  font-size: 12px;
+`;
 
 const CardNumberInput = styled.input`
   border: solid 1px #acacac;
   border-radius: 2px;
   padding: 0.5rem;
   font-size: 11px;
+  height: 32px;
   -moz-appearance: textfield;
   &::placeholder {
     color: #acacac;
