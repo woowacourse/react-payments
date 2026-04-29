@@ -21,6 +21,7 @@ const AddNewCardPage = () => {
   const [validityPeriod, setValidityPeriod] = useState<ValidityPeriod>(
     DEFAULT_VALIDITY_PERIOD,
   );
+  const [CVC, setCVC] = useState("");
 
   return (
     <PageWrapper>
@@ -40,7 +41,12 @@ const AddNewCardPage = () => {
             setValidityPeriod(input);
           }}
         />
-        <CardCVCInputField />
+        <CardCVCInputField
+          CVC={CVC}
+          onChange={(input) => {
+            setCVC(input);
+          }}
+        />
       </CardInfoForm>
     </PageWrapper>
   );
