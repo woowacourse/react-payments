@@ -1,17 +1,17 @@
 import styled from "@emotion/styled";
 import masterCard from "../assets/Mastercard.png";
-import { splitCardNumber } from "../utils/card";
+// import { splitCardNumber } from "../utils/card";
+import type { CardNumberUnits } from "../pages/AddNewCardPage";
 
 interface CardProps {
-  cardNumber: number;
+  cardNumberUnits: CardNumberUnits;
   validityPeriod: {
     month: number;
     year: number;
   };
 }
 
-const Card = ({ cardNumber, validityPeriod }: CardProps) => {
-  const cardNumberUnitArr = splitCardNumber(cardNumber);
+const Card = ({ cardNumberUnits, validityPeriod }: CardProps) => {
   const { month, year } = validityPeriod;
   const CardValidityPeriodUnitString = `${month < 10 ? "0" + month : month}/${year}`;
 
@@ -22,7 +22,7 @@ const Card = ({ cardNumber, validityPeriod }: CardProps) => {
         <MasterCardImg src={masterCard} />
       </ChipWrapper>
       <CardNumberWrapper>
-        {cardNumberUnitArr.map((cardNumberUnit) => (
+        {cardNumberUnits.map((cardNumberUnit) => (
           <CardNumberUnit>{cardNumberUnit}</CardNumberUnit>
         ))}
       </CardNumberWrapper>
@@ -62,7 +62,8 @@ const MasterCardImg = styled.img`
 `;
 
 const CardNumberWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   padding-inline: 1rem;
   justify-content: space-between;
   margin-top: 0.875rem;

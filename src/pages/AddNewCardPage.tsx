@@ -3,18 +3,32 @@ import Card from "../components/Card";
 import CardCVCInputField from "../components/CardCVCInputField";
 import CardNumberInputField from "../components/CardNumberInputField";
 import CardValidityPeriodInputField from "../components/CardValidityPeriodInputField";
+import { useState } from "react";
+
+export type CardNumberUnits = [string, string, string, string];
+
+const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 
 const AddNewCardPage = () => {
+  const [cardNumber, setCardNumber] = useState<CardNumberUnits>(
+    DEFAULT_CARD_NUMBER_UNITS,
+  );
+
   return (
     <PageWrapper>
       <CardWrapper>
         <Card
-          cardNumber={1234567812345678}
+          cardNumberUnits={cardNumber}
           validityPeriod={{ month: 4, year: 26 }}
         />
       </CardWrapper>
       <CardInfoForm>
-        <CardNumberInputField />
+        <CardNumberInputField
+          cardNumberUnits={cardNumber}
+          onChange={(input) => {
+            setCardNumber(input);
+          }}
+        />
         <CardValidityPeriodInputField />
         <CardCVCInputField />
       </CardInfoForm>
