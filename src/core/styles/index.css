@@ -1,6 +1,6 @@
-@import url("modern-normalize.css");
-@import url("fonts.css");
-@import url("variables.css");
+@import "./mordern-normalize.css";
+@import "./fonts.css";
+@import "./variables.css";
 
 body {
   font-family: 'Noto Sans', sans-serif;
