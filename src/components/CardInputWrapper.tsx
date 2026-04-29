@@ -8,10 +8,9 @@ interface CardInputWrapperProps {
 
 export default function CardInputWrapper({ validator, value, children }: CardInputWrapperProps) {
     const errorMessage = validator(value);
-
     return (
         <CardInputWrapperStyle>
-            {children}
+            <CardInputArranger>{children}</CardInputArranger>
             {errorMessage && <ErrorMessageStyle>{errorMessage}</ErrorMessageStyle>}
         </CardInputWrapperStyle>
     );
@@ -21,6 +20,11 @@ const CardInputWrapperStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
+`;
+
+const CardInputArranger = styled.div`
+    display: flex;
+    gap: 10px;
 `;
 
 const ErrorMessageStyle = styled.p`
