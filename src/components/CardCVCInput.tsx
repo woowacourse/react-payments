@@ -1,32 +1,38 @@
-import { useState } from 'react';
+import { type ComponentProps } from 'react';
+import ValidationInput from './ValidationInput';
+import { validateCVC, validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
 
-interface CardCVCInputProps {
-  cvc: string;
-  setCVC: (value: string) => void;
-}
+type CardCVCInputProps = Pick<ComponentProps<typeof ValidationInput>, 'value' | 'onChange'>;
 
 function CardCVCInput(props: CardCVCInputProps) {
-  const [isCVCError, setIsCVCError] = useState<null | string>(null);
-
-  const validateCVC = () => {
-    if (props.cvc.length < 3) return setIsCVCError('CVC는 3자리로 입력해주세요');
-    return setIsCVCError(null);
-  };
-
   return (
-    <div>
-      <input
-        type="number"
-        min={0}
-        max={999}
-        placeholder="CVC"
-        value={props.cvc}
-        onChange={(e) => props.setCVC(e.target.value)}
-        onBlur={() => validateCVC()}
-        style={isCVCError ? { borderColor: 'red' } : {}}
-      />
-      <p>{isCVCError}</p>
-    </div>
+    <ValidationInput
+      {...props}
+      type="text"
+      placeholder="CVC"
+      validations={[
+        {
+          type: 'limit',
+          validator: validateNumberString,
+          message: '숫자만 입력 가능합니다.',
+        },
+        {
+          type: 'limit',
+          validator: (input: string) => validateStringMaxLength(input, 3),
+          message: '3자리까지 입력 가능합니다.',
+        },
+        {
+          type: 'check',
+          validator: (input: string) => validateStringLength(input, 3),
+          message: '3자리수를 입력하세요.',
+        },
+        {
+          type: 'check',
+          validator: validateCVC,
+          message: '유효한 CVC를 입력해주세요',
+        },
+      ]}
+    />
   );
 }
 
