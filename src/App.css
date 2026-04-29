@@ -24,3 +24,11 @@
   --color-brand-hana-card: #009490;
   --color-brand-kb-card: #6A6056;
 }
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
