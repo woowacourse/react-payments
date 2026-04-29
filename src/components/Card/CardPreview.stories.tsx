@@ -9,37 +9,23 @@ const meta: Meta<typeof CardPreview> = {
 export default meta;
 type Story = StoryObj<typeof CardPreview>;
 
+export const Default: Story = {
+    args: {
+        cardNumbers: ['1234', '5678', '9012', '3456'],
+        EXP: ['12', '26'],
+    },
+};
+
 export const Empty: Story = {
     args: {
-        cardNumbers: { first: '', second: '', third: '', fourth: '' },
-        EXP: { mm: '', yy: '' },
-    },
-};
-
-export const Full: Story = {
-    args: {
-        cardNumbers: { first: '1234', second: '1234', third: '1234', fourth: '1234' },
-        EXP: { mm: '12', yy: '55' },
-    },
-};
-
-export const VisaFull: Story = {
-    args: {
-        cardNumbers: { first: '4234', second: '1234', third: '1234', fourth: '1234' },
-        EXP: { mm: '12', yy: '55' },
-    },
-};
-
-export const MasterCardFull: Story = {
-    args: {
-        cardNumbers: { first: '5134', second: '1234', third: '1234', fourth: '1234' },
-        EXP: { mm: '12', yy: '55' },
+        cardNumbers: ['', '', '', ''],
+        EXP: ['', ''],
     },
 };
 
 export const Partial: Story = {
     args: {
-        cardNumbers: { first: '1234', second: '5678', third: '', fourth: '' },
-        EXP: { mm: '12', yy: '' },
+        cardNumbers: ['1234', '5678', '', ''],
+        EXP: ['12', ''],
     },
 };
