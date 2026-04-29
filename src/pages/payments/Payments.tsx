@@ -3,6 +3,8 @@ import { CreditCard } from '../../core/components/creditCard';
 import { FormGroup } from '../../core/components/formGroup';
 import { Input } from '../../core/components/input';
 
+import { useCVC } from './useCVC';
+
 export const Payments = () => {
   const [cardNumber, setCardNumber] = useState({
     '0': '',
@@ -14,18 +16,7 @@ export const Payments = () => {
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
 
-  const [cvc, setCVC] = useState('');
-  const cvcForm = {
-    value: cvc,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCVC(e.target.value),
-  };
-
-  const checkVadlidateCvc = (cvc: string) => {
-    if (cvc.length === 3) return true;
-    return false;
-  };
-
-  const isValidCvc = checkVadlidateCvc(cvc);
+  const cvcForm = useCVC();
 
   return (
     <>
@@ -55,8 +46,8 @@ export const Payments = () => {
         <Input value={month} onChange={(e) => setMonth(e.target.value)} />
       </FormGroup>
 
-      <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={isValidCvc ? '' : 'cvc 오류'}>
-        <Input {...cvcForm} />
+      <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={cvcForm.valid ? '' : 'cvc 오류'}>
+        <Input {...cvcForm.state.cvc} />
       </FormGroup>
     </>
   );
