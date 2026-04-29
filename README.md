@@ -3,16 +3,16 @@
 ## 기능 요구 사항
 
 - 컴포넌트
-  - [] CardInputContainer
+  - [x] CardForm
     - [x] CardSection
       - [x] CardNumberInputComponent
       - [x] CardExpiryDateInputComponent
       - [x] CardCVCInputComponent
   - [x] CardComponent
-    - [] CardNumberComponent
-    - [] NetworkBrandComponent
-    - [] ExpiryDateComponent
-    - [] CVCComponent
+    - [x] CardNumberComponent
+    - [x] NetworkBrandComponent
+    - [x] ExpiryDateComponent
+    - [x] CVCComponent
 
 - 카드번호 입력
   - [] 카드번호 입력값 검증
