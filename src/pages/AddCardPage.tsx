@@ -4,7 +4,12 @@ export default function AddCardPage() {
     return (
         <div css={mobileLayout}>
             <main >
-                ddd
+                {/* <Card /> */}
+                <form>
+                    {/* <CardNumbersField />
+                    <ExpirationPeriodField />
+                    <CVCField /> */}
+                </form>
             </main>
         </div>
     )

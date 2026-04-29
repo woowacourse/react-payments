@@ -26,7 +26,11 @@
 - <div>
     <main>
       <Card />
-      <Form />
+      <form>
+         <CardNumbersField />
+         <ExpirationPeriodField />
+         <CVCField />
+      </form>
     </main>
   </div>
 
@@ -50,11 +54,11 @@
 
 ## view
 
-- <div>
+- <form>
     <CardNumbersField />
     <ExpirationPeriodField />
     <CVCField />
-  </div>
+  </form>
 
 ---
 
