@@ -17,11 +17,7 @@ export const Payments = () => {
   const [cvc, setCVC] = useState('');
   const cvcForm = {
     value: cvc,
-    component: (
-      <>
-        <Input value={cvc} onChange={(e) => setCVC(e.target.value)} />
-      </>
-    ),
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCVC(e.target.value),
   };
 
   return (
@@ -53,7 +49,7 @@ export const Payments = () => {
       </FormGroup>
 
       <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage="errorMessage">
-        {cvcForm.component}
+        <Input {...cvcForm} />
       </FormGroup>
     </>
   );
