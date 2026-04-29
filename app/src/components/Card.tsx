@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { CardNetworkBrand } from "./CardNetworkBrand";
+import { CardNumber } from "./CardNumber";
 
 export function Card() {
   return (
@@ -8,6 +9,7 @@ export function Card() {
         <div className="ic-chip"></div>
         <CardNetworkBrand brand="visa" />
       </div>
+      <CardNumber />
     </CardContainer>
   );
 }
@@ -18,6 +20,7 @@ const CardContainer = styled.div`
   border-radius: 4px;
   background-color: #333333;
   padding: 8px 12px;
+  color: white;
 
   .ic-chip {
     height: 22px;
