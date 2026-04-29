@@ -18,7 +18,7 @@ export function CardNetworkBrand({ brand }: { brand: string }) {
 const CardNetworkBrandContainer = styled.div`
   height: 22px;
   width: 36px;
-  border-radius: 0.5px;
+  border-radius: 4px;
   background-color: #ffffff;
   display: flex;
   align-items: center;
