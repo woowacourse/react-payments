@@ -4,10 +4,10 @@
 
 - 컴포넌트
   - [] CardInputContainer
-    - [] CardSection
+    - [x] CardSection
       - [x] CardNumberInputComponent
-      - [] CardExpiryDateInputComponent
-      - [] CardCVCInputComponent
+      - [x] CardExpiryDateInputComponent
+      - [x] CardCVCInputComponent
   - [] CardComponent
     - [] CardNumberComponent
     - [] NetworkBrandComponent

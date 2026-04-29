@@ -36,10 +36,12 @@ const CardNumberFieldset = styled.fieldset`
   border: none;
   display: flex;
   gap: 0.625rem;
+  padding: 0;
 `;
 
 const CardNumberLegend = styled.legend`
   font-size: 12px;
+  margin: 8px 0;
 `;
 
 const CardNumberInput = styled.input`
