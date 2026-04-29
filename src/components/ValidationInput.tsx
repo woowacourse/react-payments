@@ -9,7 +9,8 @@ export default function ValidationInput({ validations, onChange, onBlur, ...prop
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const failedValidation = validations.find(
-      (validation) => validation.type === 'limit' && !validation.validator(event.target.value),
+      (validation) =>
+        event.target.value.length && validation.type === 'limit' && !validation.validator(event.target.value),
     );
 
     if (failedValidation) {
@@ -26,7 +27,10 @@ export default function ValidationInput({ validations, onChange, onBlur, ...prop
 
     const failedValidation = validations.find(
       (validation) =>
-        validation.type === 'check' && typeof props.value === 'string' && !validation.validator(props.value),
+        typeof props.value === 'string' &&
+        props.value.length &&
+        validation.type === 'check' &&
+        !validation.validator(props.value),
     );
 
     if (failedValidation) {
