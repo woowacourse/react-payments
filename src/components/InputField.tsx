@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 
 interface InputFieldProps {
   title: string;
-  caption: string;
+  caption?: string;
   label: string;
   inputPropsList: ComponentProps<typeof Input>[];
 }
@@ -18,7 +18,7 @@ const InputField = ({
   return (
     <Container>
       <Title>{title}</Title>
-      <Caption>{caption}</Caption>
+      {caption && <Caption>{caption}</Caption>}
       <Label>{label}</Label>
       <InputWrapper>
         {inputPropsList.map((inputProps) => (
