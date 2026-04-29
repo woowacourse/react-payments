@@ -1,39 +1,57 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
-type InputType = { type: 'card-number' } | { type: 'exp'; expType: 'month' | 'year' } | { type: 'cvc' };
+type InputType = 'card-number' | 'exp' | 'cvc';
 
 interface CardInfoInputProps {
     value: string;
     setValue: (value: string) => void;
-    // input에 더이상 입력이 되지 않게 하기 위한 용도의 validator를 추가로 받고 handleInputChange에서 validator 결과가 true일 때만 setValue 호출하도록
+    // input에 에러메세지가 등장할 수 있는 경우에 border 색을 변경해주기 위한 용도의 validator
     validator: (value: string) => boolean;
+    maxLength?: number;
     placeHolder?: string;
     type: InputType;
 }
 
 interface CardInfoInputStyleProps {
-    inputType: 'card-number' | 'exp' | 'cvc';
+    inputType: InputType;
+    isNotValidate: boolean;
 }
 
-export default function CardInfoInput({ value, setValue, validator, placeHolder, type }: CardInfoInputProps) {
+export default function CardInfoInput({
+    value,
+    setValue,
+    validator,
+    placeHolder,
+    type,
+    maxLength,
+}: CardInfoInputProps) {
+    const [isNotValidate, setIsNotValidate] = useState(false);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
         const tmpValue = e.target.value;
-        if (!validator(tmpValue)) return;
+        // blockOption을 props로 두는 방식이 더 범용성 측면에서 좋을 수도 있을 것 같아서 고민할 점..
+        if (Number.isNaN(Number(tmpValue))) return;
         setValue(tmpValue);
+        if (!validator(tmpValue)) setIsNotValidate(true);
+        else setIsNotValidate(false);
     };
 
     return (
         <InputStyle
+            isNotValidate={isNotValidate}
+            type="text"
             value={value}
             onChange={(e) => handleInputChange(e)}
-            inputType={type.type}
+            inputType={type}
             placeholder={placeHolder}
+            maxLength={maxLength}
         />
     );
 }
 
 const InputStyle = styled.input<CardInfoInputStyleProps>`
-    border: 1px solid #acacac;
+    border: 1px solid ${(props) => (props.isNotValidate ? '#FF3D3D' : '#acacac')};
     &::placeholder {
         color: #acacac;
     }
