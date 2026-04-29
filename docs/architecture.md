@@ -23,12 +23,12 @@
 
 ## view
 
-- <layout>
+- <div>
     <main>
       <Card />
       <Form />
     </main>
-  </layout>
+  </div>
 
 ---
 
