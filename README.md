@@ -8,7 +8,7 @@
       - [x] CardNumberInputComponent
       - [x] CardExpiryDateInputComponent
       - [x] CardCVCInputComponent
-  - [] CardComponent
+  - [x] CardComponent
     - [] CardNumberComponent
     - [] NetworkBrandComponent
     - [] ExpiryDateComponent
@@ -26,6 +26,10 @@
 
 - 실시간 프리뷰
   - [] 입력값을 기반으로 카드 UI가 변경되도록 한다.
+
+## UI
+
+- [] 카드번호, 카드 만료일 레이아웃 정렬
 
 ## 리팩토링 사항
 

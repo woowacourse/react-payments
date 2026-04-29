@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
+import { CardExpiryDate } from "./CardExpiryDate";
 
 export function Card() {
   return (
@@ -9,7 +10,10 @@ export function Card() {
         <div className="ic-chip"></div>
         <CardNetworkBrand brand="visa" />
       </div>
-      <CardNumber />
+      <div className="card-contents">
+        <CardNumber />
+        <CardExpiryDate />
+      </div>
     </CardContainer>
   );
 }
@@ -32,5 +36,13 @@ const CardContainer = styled.div`
   .card-meta {
     display: flex;
     justify-content: space-between;
+  }
+
+  .card-contents {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: center;
+    gap: 0.5rem;
   }
 `;

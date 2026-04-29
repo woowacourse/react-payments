@@ -14,12 +14,12 @@ export function CardNumber() {
 const CardNumberContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.625rem;
   width: 100%;
   span {
-    flex: 4 1;
-    text-align: center;
+    /* flex: 4 1;
+    text-align: center; */
     letter-spacing: 2px;
   }
   .secret {
