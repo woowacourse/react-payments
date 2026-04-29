@@ -20,6 +20,13 @@ export const Payments = () => {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCVC(e.target.value),
   };
 
+  const checkVadlidateCvc = (cvc: string) => {
+    if (cvc.length === 3) return true;
+    return false;
+  };
+
+  const isValidCvc = checkVadlidateCvc(cvc);
+
   return (
     <>
       <CreditCard bank="default" cardBrand="mastercard" cardNumberList={[]} expirationDate={[]} />
@@ -48,7 +55,7 @@ export const Payments = () => {
         <Input value={month} onChange={(e) => setMonth(e.target.value)} />
       </FormGroup>
 
-      <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage="errorMessage">
+      <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={isValidCvc ? '' : 'cvc 오류'}>
         <Input {...cvcForm} />
       </FormGroup>
     </>
