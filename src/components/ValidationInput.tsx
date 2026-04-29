@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type ComponentProps } from 'react';
 
 interface ValidationInputProps extends ComponentProps<'input'> {
-  validations: { type: 'limit' | 'check'; pattern: RegExp; message: string }[];
+  validations: { type: 'limit' | 'check'; validator: (input: string) => boolean; message: string }[];
 }
 
 export default function ValidationInput({ validations, onChange, onBlur, ...props }: ValidationInputProps) {
@@ -9,7 +9,7 @@ export default function ValidationInput({ validations, onChange, onBlur, ...prop
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const failedValidation = validations.find(
-      (validation) => validation.type === 'limit' && !validation.pattern.test(event.target.value),
+      (validation) => validation.type === 'limit' && !validation.validator(event.target.value),
     );
 
     if (failedValidation) {
@@ -26,7 +26,7 @@ export default function ValidationInput({ validations, onChange, onBlur, ...prop
 
     const failedValidation = validations.find(
       (validation) =>
-        validation.type === 'check' && typeof props.value === 'string' && !validation.pattern.test(props.value),
+        validation.type === 'check' && typeof props.value === 'string' && !validation.validator(props.value),
     );
 
     if (failedValidation) {
