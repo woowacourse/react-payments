@@ -23,27 +23,27 @@
   background-color: #DDCD78;
   
 }
-.creditCardBrand {
+.brand {
   position: absolute;
   top: 8px;
   right: 12px;
   width: 36px;
 }
 
-.creditCardBrand svg {
+.brand svg {
   width: 100%;
   height: auto;
 }
 
-.creditCardNumber {
+.number {
   padding-top: 44px;
   color: #ffffff;
   font-size: 14px;
 }
-.creditCardNumber span {
+.number span {
   padding-right: 10px;
 }
-.creditCardExpirationDate {
+.expirationDate {
   padding-top: 8px;
   color: #ffffff;
   font-size: 14px;

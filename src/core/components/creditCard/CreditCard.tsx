@@ -26,13 +26,13 @@ export const CreditCard = ({
 }: DefaultCreditCardProps) => {
   return (
     <div className={styles.creditCard}>
-      <div className={styles.creditCardBrand}>{cardBrand === 'mastercard' ? <MastercardSvg /> : <VisaSvg />}</div>
-      <div className={styles.creditCardNumber}>
+      <div className={styles.brand}>{cardBrand === 'mastercard' ? <MastercardSvg /> : <VisaSvg />}</div>
+      <div className={styles.number}>
         {cardNumberList?.map((number, index) => (
           <span key={index}>{index > 1 ? STAR.repeat(number.length) : number}</span>
         ))}
       </div>
-      <div className={styles.creditCardExpirationDate}>
+      <div className={styles.expirationDate}>
         {expirationDate?.map((number, index) => (
           <span key={index}>{number}</span>
         ))}
