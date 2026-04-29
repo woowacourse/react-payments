@@ -23,7 +23,8 @@ const CardContainer = styled.div`
   height: 132px;
   border-radius: 4px;
   background-color: #333333;
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
+  margin: 4.625rem auto 2.75rem auto;
   color: white;
 
   .ic-chip {
