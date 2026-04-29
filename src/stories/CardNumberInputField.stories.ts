@@ -11,5 +11,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    cardNumberUnits: ["1234", "1234", "1234", "1234"],
+    onChange: () => {},
+  },
+};
+
+export const Error: Story = {
+  args: {
+    cardNumberUnits: ["1234", "1234", "1234", "1234"],
+    onChange: () => {},
+  },
 };

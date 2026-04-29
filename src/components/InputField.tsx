@@ -7,6 +7,7 @@ interface InputFieldProps {
   caption?: string;
   label: string;
   inputPropsList: ComponentProps<typeof Input>[];
+  helperMessage?: string;
 }
 
 const InputField = ({
@@ -14,6 +15,7 @@ const InputField = ({
   caption,
   label,
   inputPropsList,
+  helperMessage,
 }: InputFieldProps) => {
   return (
     <Container>
@@ -25,6 +27,7 @@ const InputField = ({
           <Input {...inputProps} />
         ))}
       </InputWrapper>
+      {helperMessage && <HelperMessage>{helperMessage}</HelperMessage>}
     </Container>
   );
 };
@@ -56,6 +59,12 @@ const Label = styled.label`
   font-size: 0.75rem;
   color: #0a0d13;
   margin-top: 1rem;
+`;
+
+const HelperMessage = styled.p`
+  font-weight: 400;
+  font-size: 0.5rem;
+  color: #ff3d3d;
 `;
 
 export default InputField;

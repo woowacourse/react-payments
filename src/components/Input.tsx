@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 
 interface InputProps {
+  state?: "default" | "error";
   fullWidth?: boolean;
 }
 
 const Input = styled.input<InputProps>`
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
-  border: 1px solid #acacac;
+  border: 1px solid
+    ${({ state }) => (state === "error" ? "#FF3D3D" : "#acacac")};
   border-radius: 2px;
   &::placeholder {
     color: #acacac;
