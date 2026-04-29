@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# 💳 React Payments
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+카드 결제 정보를 입력하고 실시간으로 카드 프리뷰를 확인할 수 있는 React 애플리케이션입니다.
 
-Currently, two official plugins are available:
+## 🎯 학습 목표
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 재사용 가능한 Input Component 개발
+- Storybook을 활용한 컴포넌트 상태별 시각적 테스트
+- 카드 정보 렌더링을 위한 상태 관리 경험
 
-## React Compiler
+## 📋 기능 요구사항
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 카드 번호 입력 및 브랜드 식별
 
-## Expanding the ESLint configuration
+| 브랜드     | 식별 규칙                        |
+| ---------- | -------------------------------- |
+| Visa       | `4`로 시작하는 16자리 숫자       |
+| MasterCard | `51`~`55`로 시작하는 16자리 숫자 |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 숫자(0~9)만 입력 가능
+- 4자리씩 4개의 input으로 구성
+- 하나의 input에 4자리가 모두 입력되면 카드 프리뷰를 업데이트한다
+- 유효하지 않은 번호 입력 시 에러 피드백 제공
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 유효기간 입력
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- 월(MM): `01`~`12` 범위만 허용
+- 년(YY): `00`~`99` 범위 허용
+- 숫자만 입력 가능
+- 하나의 input에 2자리가 모두 입력되면 카드 프리뷰를 업데이트한다
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### CVC 입력
+
+- `000`~`999` 범위의 3자리 숫자
+- 3자리 입력이 완료되어도 카드 프리뷰를 업데이트하지 않는다
+
+### 실시간 프리뷰
+
+- 카드 번호, 유효기간 입력 시 카드 프리뷰가 동시에 업데이트된다
+- CVC는 프리뷰에 반영하지 않는다
+
+## 🔧 기술적 의사결정
+
+### 스타일링: Emotion
+
+CSS-in-JS 라이브러리 중 Emotion을 선택했다.
+
+- 카드 프리뷰에 동적으로 변경되는 정보(번호, 브랜드, 유효기간)를 반영할 때 props 기반 스타일링이 직관적이다
+- CSS Module 대비: 렌더링되는 styled 컴포넌트가 수백 개 이하 규모이므로 런타임 성능 차이는 무시할 수 있는 수준이다
+
+### 에러 메시지 상수화
+
+에러 메시지를 상수로 분리하여 관리한다.
+
+```
+constants/
+  errorMessages.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 동일한 에러 메시지의 중복 선언 방지
+- 메시지 변경 시 단일 지점에서 수정 가능
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 입력 제한 전략
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+`<input type="number">`가 아닌, `type="text"`에 `inputMode="numeric"`을 조합하고 onChange 핸들러에서 숫자 외 입력을 필터링하는 방식을 고려한다.
+
+> `type="number"`는 `e`, `+`, `-`, `.` 등의 입력을 허용하고, 앞자리 `0` 보존이 안 되는 등의 문제가 있어 카드 입력에는 적합하지 않을 수 있다.
+
+### 구현 가이드
+
+- [ ] 카드 정보 컨포넌트 제작
+- [ ] 카드 정보 입력 컨포넌트 제작
+- [ ] 카드 정보 컨포넌트를 재사용해서 유효기간과 cvc 컨포넌트 제작
+- [ ] 상단의 카드 프리뷰 컨포넌트 제작
+  - [ ] 입력한 카드 정보에 따라 카드 프리뷰 리렌더링
+    - [ ] 카드 정보 숫자의 16자리 중, 처음 8자리만 숫자로 표시되게 한다. 이후 나오는 숫자는 `*`로 처리한다.
+    - [ ] 유효 기간 정보의 달과 년도는 `달 / 년도`로 표시되게 한다.
+    - [ ] cvc 번호는 카드 프리뷰에 표시하지 않는다.
+- [ ] validation 컨포넌트 제작
+  - [ ] 공통 컴포넌트 부분을 고려하고 제작
