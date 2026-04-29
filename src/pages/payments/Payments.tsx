@@ -1,6 +1,6 @@
-import { CreditCard } from '../../components/creditCard';
-import { FormGroup } from '../../components/formGroup';
-import { Input } from '../../components/input';
+import { CreditCard } from '../../core/components/creditCard';
+import { FormGroup } from '../../core/components/formGroup';
+import { Input } from '../../core/components/input';
 
 export const Payments = () => {
   return (

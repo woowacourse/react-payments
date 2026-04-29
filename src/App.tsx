@@ -1,6 +1,6 @@
 import './core/styles/index.css';
 
-import { Payments } from './core/pages/payments';
+import { Payments } from './pages/payments';
 
 function App() {
   return <Payments />;
