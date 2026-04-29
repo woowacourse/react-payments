@@ -13,7 +13,17 @@ export const Payments = () => {
 
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
+
   const [cvc, setCVC] = useState('');
+  const cvcForm = {
+    value: cvc,
+    component: (
+      <>
+        <Input value={cvc} onChange={(e) => setCVC(e.target.value)} />
+      </>
+    ),
+  };
+
   return (
     <>
       <CreditCard bank="default" cardBrand="mastercard" cardNumberList={[]} expirationDate={[]} />
@@ -41,8 +51,9 @@ export const Payments = () => {
         <Input value={year} onChange={(e) => setYear(e.target.value)} />
         <Input value={month} onChange={(e) => setMonth(e.target.value)} />
       </FormGroup>
+
       <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage="errorMessage">
-        <Input value={cvc} onChange={(e) => setCVC(e.target.value)} />
+        {cvcForm.component}
       </FormGroup>
     </>
   );
