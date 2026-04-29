@@ -3,10 +3,11 @@ import { useState } from 'react';
 import CardInputWrapper from './components/CardInputWrapper';
 import { getCardNumberErrorMessage } from './utils/getCardNumberErrorMessage';
 import CardInfoInput from './components/Input/CardInfoInput';
-import { isCardNumber } from './utils/isCardNumber';
 import CardInfoSection from './components/CardInfoSection';
 import { getCVCumberErrorMessage } from './utils/getCVCNumberErrorMessage';
 import { getEXPNumberErrorMessage } from './utils/getEXPNumberErrorMessage';
+import { isLengthMatch } from './utils/isLengthMatch';
+import { isMonthMatch } from './utils/isMonthMatch';
 
 function App() {
     const [firstCardNumber, setFirstCardNumber] = useState('');
@@ -33,30 +34,34 @@ function App() {
                     <CardInfoInput
                         value={firstCardNumber}
                         setValue={setFirstCardNumber}
-                        type={{ type: 'card-number' }}
+                        type="card-number"
                         placeHolder="1234"
-                        validator={isCardNumber}
+                        validator={(value: string) => isLengthMatch(4, value)}
+                        maxLength={4}
                     />
                     <CardInfoInput
                         value={secondCardNumber}
                         setValue={setSecondCardNumber}
-                        type={{ type: 'card-number' }}
+                        type="card-number"
                         placeHolder="1234"
-                        validator={isCardNumber}
+                        validator={(value: string) => isLengthMatch(4, value)}
+                        maxLength={4}
                     />
                     <CardInfoInput
                         value={thirdCardNumber}
                         setValue={setThirdCardNumber}
-                        type={{ type: 'card-number' }}
+                        type="card-number"
                         placeHolder="1234"
-                        validator={isCardNumber}
+                        validator={(value: string) => isLengthMatch(4, value)}
+                        maxLength={4}
                     />
                     <CardInfoInput
                         value={fourthCardNumber}
                         setValue={setFourthCardNumber}
-                        type={{ type: 'card-number' }}
+                        type="card-number"
                         placeHolder="1234"
-                        validator={isCardNumber}
+                        validator={(value: string) => isLengthMatch(4, value)}
+                        maxLength={4}
                     />
                 </CardInputWrapper>
             </CardInfoSection>
@@ -70,16 +75,18 @@ function App() {
                     <CardInfoInput
                         value={expMonth}
                         setValue={setEXPMonth}
-                        type={{ type: 'exp', expType: 'month' }}
+                        type="exp"
                         placeHolder="MM"
-                        validator={isCardNumber}
+                        validator={(value: string) => isMonthMatch(value)}
+                        maxLength={2}
                     />
                     <CardInfoInput
                         value={expYear}
                         setValue={setEXPYear}
-                        type={{ type: 'exp', expType: 'year' }}
+                        type="exp"
                         placeHolder="YY"
-                        validator={isCardNumber}
+                        validator={(value: string) => isLengthMatch(2, value)}
+                        maxLength={2}
                     />
                 </CardInputWrapper>
             </CardInfoSection>
@@ -88,9 +95,10 @@ function App() {
                     <CardInfoInput
                         value={cvc}
                         setValue={setCVC}
-                        type={{ type: 'cvc' }}
+                        type="cvc"
                         placeHolder="123"
-                        validator={isCardNumber}
+                        validator={(value: string) => isLengthMatch(3, value)}
+                        maxLength={3}
                     />
                 </CardInputWrapper>
             </CardInfoSection>
