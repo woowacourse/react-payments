@@ -1,9 +1,9 @@
 import './core/styles/index.css';
 
-import { CreditCard } from './core/components/creditCard/CreditCard';
+import { Payments } from './core/pages/payments';
 
 function App() {
-  return <CreditCard />;
+  return <Payments />;
 }
 
 export default App;
