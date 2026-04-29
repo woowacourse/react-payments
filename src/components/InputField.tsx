@@ -29,7 +29,9 @@ const InputField = ({
   );
 };
 
-const Container = styled.section``;
+const Container = styled.section`
+  width: 100%;
+`;
 
 const Title = styled.h2`
   font-weight: 700;
