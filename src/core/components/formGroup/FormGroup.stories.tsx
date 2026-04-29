@@ -27,7 +27,9 @@ export const Default: Story = {
     title: '결제할 카드 번호를 입력해주세요',
     subTitle: '본인 명의의 카드만 결제 가능합니다.',
     label: '카드 번호',
-    chlidren: mocking,
+    children: mocking,
+    errorMessage: '숫자만 입력이 가능합니다',
+    isError: false,
   },
 };
 
@@ -36,7 +38,8 @@ export const IsError: Story = {
     title: '결제할 카드 번호를 입력해주세요',
     subTitle: '본인 명의의 카드만 결제 가능합니다.',
     label: '카드 번호',
-    chlidren: mocking,
+    children: mocking,
     errorMessage: '숫자만 입력이 가능합니다',
+    isError: true,
   },
 };
