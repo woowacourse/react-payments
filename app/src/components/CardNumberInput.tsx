@@ -37,6 +37,7 @@ const CardNumberFieldset = styled.fieldset`
   display: flex;
   gap: 0.625rem;
   padding: 0;
+  margin: 0;
 `;
 
 const CardNumberLegend = styled.legend`
