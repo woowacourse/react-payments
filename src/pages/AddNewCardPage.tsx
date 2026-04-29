@@ -6,21 +6,26 @@ import CardValidityPeriodInputField from "../components/CardValidityPeriodInputF
 import { useState } from "react";
 
 export type CardNumberUnits = [string, string, string, string];
+export type ValidityPeriod = {
+  month: string;
+  year: string;
+};
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
+const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
 
 const AddNewCardPage = () => {
   const [cardNumber, setCardNumber] = useState<CardNumberUnits>(
     DEFAULT_CARD_NUMBER_UNITS,
   );
+  const [validityPeriod, setValidityPeriod] = useState<ValidityPeriod>(
+    DEFAULT_VALIDITY_PERIOD,
+  );
 
   return (
     <PageWrapper>
       <CardWrapper>
-        <Card
-          cardNumberUnits={cardNumber}
-          validityPeriod={{ month: 4, year: 26 }}
-        />
+        <Card cardNumberUnits={cardNumber} validityPeriod={validityPeriod} />
       </CardWrapper>
       <CardInfoForm>
         <CardNumberInputField
@@ -29,7 +34,12 @@ const AddNewCardPage = () => {
             setCardNumber(input);
           }}
         />
-        <CardValidityPeriodInputField />
+        <CardValidityPeriodInputField
+          validityPeriod={validityPeriod}
+          onChange={(input) => {
+            setValidityPeriod(input);
+          }}
+        />
         <CardCVCInputField />
       </CardInfoForm>
     </PageWrapper>

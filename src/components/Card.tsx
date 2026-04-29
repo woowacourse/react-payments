@@ -1,19 +1,16 @@
 import styled from "@emotion/styled";
 import masterCard from "../assets/Mastercard.png";
 // import { splitCardNumber } from "../utils/card";
-import type { CardNumberUnits } from "../pages/AddNewCardPage";
+import type { CardNumberUnits, ValidityPeriod } from "../pages/AddNewCardPage";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;
-  validityPeriod: {
-    month: number;
-    year: number;
-  };
+  validityPeriod: ValidityPeriod;
 }
 
 const Card = ({ cardNumberUnits, validityPeriod }: CardProps) => {
   const { month, year } = validityPeriod;
-  const CardValidityPeriodUnitString = `${month < 10 ? "0" + month : month}/${year}`;
+  const CardValidityPeriodUnitString = `${+month < 10 ? "0" + month : month}/${year}`;
 
   return (
     <Wrapper>
