@@ -10,13 +10,9 @@ const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
 }: CardNumberInputFieldProps) => {
-  const handleCardNumberChange = (
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const input = e.target.value;
+  const handleCardNumberChange = (index: number, input: string) => {
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
-    newCardNumberUnits[index] = input;
+    newCardNumberUnits[index] = input.slice(0, 4);
     onChange(newCardNumberUnits);
   };
 
@@ -31,7 +27,8 @@ const CardNumberInputField = ({
           fullWidth: true,
           value: cardNumberUnits[0],
           onChange: (e) => {
-            handleCardNumberChange(0, e);
+            const input = e.target.value;
+            handleCardNumberChange(0, input);
           },
         },
         {
@@ -39,7 +36,8 @@ const CardNumberInputField = ({
           fullWidth: true,
           value: cardNumberUnits[1],
           onChange: (e) => {
-            handleCardNumberChange(1, e);
+            const input = e.target.value;
+            handleCardNumberChange(1, input);
           },
         },
         {
@@ -47,7 +45,8 @@ const CardNumberInputField = ({
           fullWidth: true,
           value: cardNumberUnits[2],
           onChange: (e) => {
-            handleCardNumberChange(2, e);
+            const input = e.target.value;
+            handleCardNumberChange(2, input);
           },
         },
 
@@ -56,7 +55,8 @@ const CardNumberInputField = ({
           fullWidth: true,
           value: cardNumberUnits[3],
           onChange: (e) => {
-            handleCardNumberChange(3, e);
+            const input = e.target.value;
+            handleCardNumberChange(3, input);
           },
         },
       ]}
