@@ -10,6 +10,16 @@ const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
 }: CardNumberInputFieldProps) => {
+  const handleCardNumberChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const input = e.target.value;
+    const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
+    newCardNumberUnits[index] = input;
+    onChange(newCardNumberUnits);
+  };
+
   return (
     <InputField
       title="결제할 카드 번호를 입력해 주세요"
@@ -21,13 +31,7 @@ const CardNumberInputField = ({
           fullWidth: true,
           value: cardNumberUnits[0],
           onChange: (e) => {
-            const input = e.target.value;
-            onChange([
-              input.slice(0, 4),
-              cardNumberUnits[1],
-              cardNumberUnits[2],
-              cardNumberUnits[3],
-            ]);
+            handleCardNumberChange(0, e);
           },
         },
         {
@@ -35,13 +39,7 @@ const CardNumberInputField = ({
           fullWidth: true,
           value: cardNumberUnits[1],
           onChange: (e) => {
-            const input = e.target.value;
-            onChange([
-              cardNumberUnits[0],
-              input.slice(0, 4),
-              cardNumberUnits[2],
-              cardNumberUnits[3],
-            ]);
+            handleCardNumberChange(1, e);
           },
         },
         {
@@ -49,13 +47,7 @@ const CardNumberInputField = ({
           fullWidth: true,
           value: cardNumberUnits[2],
           onChange: (e) => {
-            const input = e.target.value;
-            onChange([
-              cardNumberUnits[0],
-              cardNumberUnits[1],
-              input.slice(0, 4),
-              cardNumberUnits[3],
-            ]);
+            handleCardNumberChange(2, e);
           },
         },
 
@@ -64,13 +56,7 @@ const CardNumberInputField = ({
           fullWidth: true,
           value: cardNumberUnits[3],
           onChange: (e) => {
-            const input = e.target.value;
-            onChange([
-              cardNumberUnits[0],
-              cardNumberUnits[1],
-              cardNumberUnits[2],
-              input.slice(0, 4),
-            ]);
+            handleCardNumberChange(3, e);
           },
         },
       ]}
