@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 import masterCard from "../assets/Mastercard.png";
 import visa from "../assets/Visa.png";
-import type { CardNumberUnits, ValidityPeriod } from "../pages/AddNewCardPage";
+import type { CardNumberUnits } from "./CardNumberInputField";
+import type { ValidityPeriod } from "./CardValidityPeriodInputField";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;
   validityPeriod: ValidityPeriod;
-  brand?: "Visa" | "MasterCard";
+  brand?: "Visa" | "MasterCard" | null;
 }
 
 const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {

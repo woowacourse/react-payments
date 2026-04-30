@@ -1,14 +1,10 @@
-export const splitCardNumber = (cardNumber: number) => {
-  const result: string[] = [];
-  const output: string[] = [];
+import type { CardNumberUnits } from "../components/CardNumberInputField";
 
-  `${cardNumber}`.split("").forEach((n) => {
-    output.push(n);
-    if (output.length === 4) {
-      result.push(output.join(""));
-      output.length = 0;
-    }
-  });
+export const detectCardBrand = (cardNumber: CardNumberUnits) => {
+  if (cardNumber[0].startsWith("4")) return "Visa";
 
-  return result;
+  if (["51", "52", "53", "54", "55"].includes(cardNumber[0].slice(0, 2)))
+    return "MasterCard";
+
+  return null;
 };

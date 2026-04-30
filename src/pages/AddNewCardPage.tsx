@@ -8,6 +8,7 @@ import CardValidityPeriodInputField, {
   type ValidityPeriod,
 } from "../components/CardValidityPeriodInputField";
 import { useState } from "react";
+import { detectCardBrand } from "../utils/card";
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
@@ -27,15 +28,7 @@ const AddNewCardPage = () => {
         <Card
           cardNumberUnits={cardNumber}
           validityPeriod={validityPeriod}
-          brand={
-            cardNumber[0].startsWith("4")
-              ? "Visa"
-              : ["51", "52", "53", "54", "55"].includes(
-                    cardNumber[0].slice(0, 2),
-                  )
-                ? "MasterCard"
-                : undefined
-          }
+          brand={detectCardBrand(cardNumber)}
         />
       </CardWrapper>
       <CardInfoForm>
