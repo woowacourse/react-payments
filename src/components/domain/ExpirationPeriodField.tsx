@@ -18,8 +18,8 @@ export default function ExpirationPeriodField({ onUpdated }: { onUpdated: (value
                     유효기간
                 </legend>
                 <div css={inputGroupStyle}>
-                    <Input placeholder="MM" />
-                    <Input placeholder="YY" />
+                    <Input type="text" inputMode="numeric" placeholder="MM" maxLength={2} />
+                    <Input type="text" inputMode="numeric" placeholder="YY" maxLength={2} />
                 </div>
             </fieldset>
         </FormField>

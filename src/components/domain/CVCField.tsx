@@ -15,7 +15,7 @@ export default function CVCField({ onUpdated }: { onUpdated: (value: CardInfo["c
             <label htmlFor="cvc">
                 CVC
             </label>
-            <Input id="cvc" placeholder="123" />
+            <Input id="cvc" type="text" inputMode="numeric" placeholder="123" maxLength={3} />
         </FormField>
     )
 }

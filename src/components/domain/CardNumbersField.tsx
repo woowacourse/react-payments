@@ -18,10 +18,10 @@ export default function CardNumbersField({ onUpdated }: { onUpdated: (value: Car
                     카드 번호
                 </legend>
                 <div css={inputGroupStyle}>
-                    <Input placeholder="1234" />
-                    <Input placeholder="1234" />
-                    <Input placeholder="1234" />
-                    <Input placeholder="1234" />
+                    <Input type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
+                    <Input type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
+                    <Input type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
+                    <Input type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
                 </div>
             </fieldset>
         </FormField>
