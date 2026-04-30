@@ -41,7 +41,6 @@ export default function CardInfoInput({
             onError('숫자만 입력할 수 있습니다.');
             return;
         }
-        // TODO NaN 입력 시에도 border 빨개지게 수정
         setValue(tmpValue);
         onError(null);
         if (!validator(tmpValue)) setIsNotValidate(true);
