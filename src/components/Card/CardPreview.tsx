@@ -20,7 +20,7 @@ export default function CardPreview({ cardNumbers, EXP }: CardPreviewProps) {
             <CardNumberPosition>
                 {cardNumbers.map((number, index) =>
                     index > 1 ? (
-                        <CardNumber>
+                        <CardNumber key={`${number}-${index}`}>
                             {number.split('').map((num, bulletIndex) => (
                                 <BulletStyle key={`${num}-${index}-${bulletIndex}`} />
                             ))}
