@@ -21,3 +21,7 @@ export const validateYearRange = (year: number) => {
 export const validateCardNumberUnitRange = (cardNumberUnit: number) => {
   return validateRange(cardNumberUnit, 0, 9999);
 };
+
+export const validateCVCRange = (CVC: number) => {
+  return validateRange(CVC, 0, 999);
+};

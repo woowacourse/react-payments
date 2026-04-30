@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputField from "@components/InputField.tsx";
+import { checkIsInt, validateCVCRange } from "@/utils/validator";
 
 type InputStatus = "default" | "error";
 
@@ -8,23 +9,20 @@ interface CardCVCInputFieldProps {
   onChange: (CVC: string) => void;
 }
 
+const CVC_MAX_LENGTH = 3;
+
 const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
   const [status, setStatus] = useState<InputStatus>("default");
 
   const handelCVCChange = (input: string) => {
     if (input.length !== 0)
-      if (
-        Number.isNaN(+input) ||
-        +input < 0 ||
-        +input > 999 ||
-        +input !== +parseInt(input)
-      ) {
+      if (!checkIsInt(+input) || !validateCVCRange(+input)) {
         return setStatus("error");
       }
 
     setStatus("default");
 
-    onChange(input.slice(0, 3));
+    onChange(input.slice(0, CVC_MAX_LENGTH));
   };
 
   return (
