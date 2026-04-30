@@ -35,7 +35,7 @@ const CardNumberInputSection = ({
       }
       if (i === 0 && decideBrandName(value) === "") {
         errorIndex = i;
-        message = "이 카드 브랜드는 지원되지 않습니다.";
+        message = "이 카드 브랜드는 지원하지 않습니다.";
         break;
       }
     }
