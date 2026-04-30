@@ -18,6 +18,7 @@ export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPI
         setInputErrors((prev) => prev.with(index, message));
     };
 
+    // TODO 여기도 중복 로직 제거
     const inputError =
         inputErrors.find((err) => err !== null) ?? null
             ? inputErrors.find((err) => err !== null) ?? null
@@ -42,6 +43,7 @@ export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPI
                 validator={(value: string) => isLengthMatch(2, value)}
                 maxLength={2}
                 onError={setError(0)}
+                // TODO 연도(YY)라 setError(1) 이어야함
             />
         </CardInputWrapper>
     );
