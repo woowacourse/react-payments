@@ -7,3 +7,5 @@ export const getCardNumberErrorMessage = (values: string[]) => {
     if (values.some((value) => value.length !== 4)) return ERROR_MESSAGE;
     return null;
 };
+
+// TODO 마지막 input이 입력하는 중에 에러 나오는 거 해결
