@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ErrorMessage } from "./ErrorMessage";
 import styled from "@emotion/styled";
 
 export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
@@ -15,64 +16,96 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
     "fourth-digits": {
       state: false,
     },
+    message: "",
   });
 
-  const changeCardNumber = (e: any) => {
+  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
-    if (isNaN(value)) {
-      setError({ ...isError, [id]: { state: true } });
+    if (Number.isNaN(value)) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "숫자만 입력 가능합니다.",
+      });
       return;
     } else {
-      setError({ ...isError, [id]: { state: false } });
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    }
+    if (value !== "" && ![4, 5].includes(Number(value[0]))) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "유요한 카드 번호가 아닙니다.",
+      });
+      return;
+    } else {
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    }
+    if (
+      value.length === 2 &&
+      Number(value[0]) === 5 &&
+      ![1, 2, 3, 4, 5].includes(Number(value[1]))
+    ) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "유요한 마스터카드 번호가 아닙니다.",
+      });
+      return;
+    } else {
+      setError({ ...isError, [id]: { state: false }, message: "" });
     }
     setCardNumber({ ...cardNumber, [id]: value });
   };
 
   return (
-    <CardNumberFieldset>
-      <CardNumberLegend>카드 번호</CardNumberLegend>
-      <CardNumberInput
-        id="first-digits"
-        type="text"
-        maxLength={4}
-        inputMode="numeric"
-        value={cardNumber["first-digits"]}
-        onChange={changeCardNumber}
-        placeholder="1234"
-        isError={isError["first-digits"].state}
-      />
-      <CardNumberInput
-        id="second-digits"
-        type="text"
-        maxLength={4}
-        inputMode="numeric"
-        value={cardNumber["second-digits"]}
-        onChange={changeCardNumber}
-        placeholder="1234"
-        isError={isError["second-digits"].state}
-      />
-      <CardNumberInput
-        id="third-digits"
-        type="text"
-        maxLength={4}
-        inputMode="numeric"
-        value={cardNumber["third-digits"]}
-        onChange={changeCardNumber}
-        placeholder="1234"
-        isError={isError["third-digits"].state}
-      />
-      <CardNumberInput
-        id="fourth-digits"
-        type="text"
-        maxLength={4}
-        inputMode="numeric"
-        value={cardNumber["fourth-digits"]}
-        onChange={changeCardNumber}
-        placeholder="1234"
-        isError={isError["fourth-digits"].state}
-      />
-    </CardNumberFieldset>
+    <>
+      <CardNumberFieldset>
+        <CardNumberLegend>카드 번호</CardNumberLegend>
+        <CardNumberInput
+          id="first-digits"
+          type="text"
+          maxLength={4}
+          inputMode="numeric"
+          value={cardNumber["first-digits"]}
+          onChange={changeCardNumber}
+          placeholder="1234"
+          isError={isError["first-digits"].state}
+        />
+        <CardNumberInput
+          id="second-digits"
+          type="text"
+          maxLength={4}
+          inputMode="numeric"
+          value={cardNumber["second-digits"]}
+          onChange={changeCardNumber}
+          placeholder="1234"
+          isError={isError["second-digits"].state}
+        />
+        <CardNumberInput
+          id="third-digits"
+          type="text"
+          maxLength={4}
+          inputMode="numeric"
+          value={cardNumber["third-digits"]}
+          onChange={changeCardNumber}
+          placeholder="1234"
+          isError={isError["third-digits"].state}
+        />
+        <CardNumberInput
+          id="fourth-digits"
+          type="text"
+          maxLength={4}
+          inputMode="numeric"
+          value={cardNumber["fourth-digits"]}
+          onChange={changeCardNumber}
+          placeholder="1234"
+          isError={isError["fourth-digits"].state}
+        />
+      </CardNumberFieldset>
+      <ErrorMessage message={isError["message"]} />
+    </>
   );
 }
 

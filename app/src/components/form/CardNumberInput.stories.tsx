@@ -16,25 +16,34 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const defaultArgs = {
+  cardNumber: {
+    "first-digits": "",
+    "second-digits": "",
+    "third-digits": "",
+    "fourth-digits": "",
+  },
+  setCardNumber: null,
+};
+
+const renderWithState = (args: typeof defaultArgs) => {
+  const [cardNumber, setCardNumber] = useState(args.cardNumber);
+  return (
+    <CardNumberInputContainer
+      cardNumber={cardNumber}
+      setCardNumber={setCardNumber}
+    />
+  );
+};
+
+export const base: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+};
+
 export const invalidInput: Story = {
-  args: {
-    cardNumber: {
-      "first-digits": "",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
-    },
-    setCardNumber: null,
-  },
-  render: (args) => {
-    const [cardNumber, setCardNumber] = useState(args.cardNumber);
-    return (
-      <CardNumberInputContainer
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-      />
-    );
-  },
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole("textbox");
@@ -43,23 +52,24 @@ export const invalidInput: Story = {
   },
 };
 
-export const base: Story = {
-  args: {
-    cardNumber: {
-      "first-digits": "",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
-    },
-    setCardNumber: null,
+export const invalidCardNumber: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(firstInput, "1");
+    await userEvent.tab();
   },
-  render: (args) => {
-    const [cardNumber, setCardNumber] = useState(args.cardNumber);
-    return (
-      <CardNumberInputContainer
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-      />
-    );
+};
+
+export const invalidMastercard: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(firstInput, "56");
+    await userEvent.tab();
   },
 };
