@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import FormField, { type FormFieldProps } from "../ui/FormField";
+import Input from "../ui/Input";
 
 export default function CardNumbersField() {
     const formFieldProps: Omit<FormFieldProps, 'children'> = {
@@ -15,11 +16,11 @@ export default function CardNumbersField() {
                 <legend css={legendStyle}>
                     카드 번호
                 </legend>
-                <div>
-                    <input />
-                    <input />
-                    <input />
-                    <input />
+                <div css={inputGroupStyle}>
+                    <Input />
+                    <Input />
+                    <Input />
+                    <Input />
                 </div>
             </fieldset>
         </FormField>
@@ -28,4 +29,9 @@ export default function CardNumbersField() {
 
 const legendStyle = css`
     margin-bottom: 8px;
+`
+
+const inputGroupStyle = css`
+    display: flex;
+    gap: 10px;
 `

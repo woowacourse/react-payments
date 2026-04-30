@@ -3,6 +3,7 @@
 :root {
   --color-border-default: #ACACAC;
   --color-border-error: #FF3D3D;
+  --color-border-focus: #000000;
 
   --color-text-placeholder: #ACACAC;
   --color-text-default: #000000;
