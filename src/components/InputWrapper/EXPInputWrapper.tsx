@@ -1,52 +1,48 @@
-import { useState } from "react";
-import NumberInput from "../Input/NumberInput";
-import InputGroup from "./InputGroup";
-import { getEXPNumberErrorMessage } from "../../utils/getEXPNumberErrorMessage";
+import { useState } from 'react';
+import { isMonthMatch } from '../../utils/isMonthMatch';
 
-type EXPNumber = { mm: string; yy: string };
-interface Props {
-  setEXPNumber: (value: EXPNumber) => void;
-  value: EXPNumber;
+import { isLengthMatch } from '../../utils/isLengthMatch';
+import CardInfoInput from '../Input/CardInfoInput';
+import CardInputWrapper from './CardInputWrapper';
+
+interface EXPInputWrapperProps {
+    validator: (value: string[]) => string | null;
+    setEXPNumber: (index: number) => (value: string) => void;
+    value: string[];
 }
 
-export default function EXPInputWrapper({ setEXPNumber, value }: Props) {
-  const [inputErrors, setInputErrors] = useState<{
-    mm: string | null;
-    yy: string | null;
-  }>({
-    mm: null,
-    yy: null,
-  });
+export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPInputWrapperProps) {
+    const [inputErrors, setInputErrors] = useState<(string | null)[]>([null, null]);
 
-  const setError = (key: "mm" | "yy") => (message: string | null) => {
-    setInputErrors((prev) => ({ ...prev, [key]: message }));
-  };
+    const setError = (index: number) => (message: string | null) => {
+        setInputErrors((prev) => prev.with(index, message));
+    };
 
-  return (
-    <InputGroup
-      errorMessage={
-        Object.values(inputErrors).find((err) => err !== null) ?? null
-      }
-    >
-      {Object.entries(value).map(([expKey, expValue]) => (
-        <NumberInput
-          key={`${expKey}-input`}
-          value={expValue}
-          setValue={(newValue) =>
-            setEXPNumber({ ...value, [expKey]: newValue })
-          }
-          placeholder={expKey === "mm" ? "MM" : "YY"}
-          hasError={inputErrors[expKey as keyof EXPNumber] !== null}
-          maxLength={2}
-          onError={setError(expKey as keyof EXPNumber)}
-          onBlur={() => {
-            const result = getEXPNumberErrorMessage(value);
-            if (result && result.key === expKey)
-              setError(expKey as keyof EXPNumber)(result.message);
-          }}
-          style={{ width: "152px" }}
-        />
-      ))}
-    </InputGroup>
-  );
+    const inputError =
+        inputErrors.find((err) => err !== null) ?? null
+            ? inputErrors.find((err) => err !== null) ?? null
+            : validator(value);
+
+    return (
+        <CardInputWrapper errorMessage={inputError}>
+            <CardInfoInput
+                value={value[0]}
+                setValue={setEXPNumber(0)}
+                type="exp"
+                placeHolder="MM"
+                validator={(value: string) => isMonthMatch(value)}
+                maxLength={2}
+                onError={setError(0)}
+            />
+            <CardInfoInput
+                value={value[1]}
+                setValue={setEXPNumber(1)}
+                type="exp"
+                placeHolder="YY"
+                validator={(value: string) => isLengthMatch(2, value)}
+                maxLength={2}
+                onError={setError(0)}
+            />
+        </CardInputWrapper>
+    );
 }
