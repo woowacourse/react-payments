@@ -39,5 +39,6 @@ function App() {
 export default App;
 
 const AppContainer = styled.div`
-  height: 100vh;
+  margin-bottom: auto;
+  margin-top: auto;
 `;

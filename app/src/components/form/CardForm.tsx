@@ -43,4 +43,6 @@ const CardFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 24px 30px 20px 30px;
+  box-sizing: border-box;
 `;

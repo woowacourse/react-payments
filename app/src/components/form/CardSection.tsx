@@ -11,7 +11,7 @@ export function CardSection({ title, subTitle, children }: CardSectionProps) {
   return (
     <CardSectionContainer>
       <h2>{title}</h2>
-      <p>{subTitle}</p>
+      <p className="sub-title">{subTitle}</p>
       {children}
     </CardSectionContainer>
   );
@@ -22,7 +22,7 @@ const CardSectionContainer = styled.div`
     margin-bottom: 0.25rem;
   }
 
-  p {
+  .sub-title {
     font-size: 9.5px;
     color: #8b95a1;
     margin-bottom: 1rem;

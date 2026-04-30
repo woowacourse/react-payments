@@ -192,6 +192,7 @@ const CardNumberInput = styled.input<ErrorFlag>`
   padding: 0.5rem;
   font-size: 11px;
   height: 32px;
+  width: 100%;
   -moz-appearance: textfield;
   &::placeholder {
     color: #acacac;
