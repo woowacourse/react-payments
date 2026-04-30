@@ -11,3 +11,7 @@ export const EXPIRATION_PERIOD_ERROR_MESSAGES: Record<Exclude<ExpirationPeriodEr
   invalidMonth: '올바른 월을 입력하세요.',
   invalidYear: '올바른 연도를 입력하세요.',
 };
+
+export const CARD_NUMBER_LENGTH_PER_INPUT = 4;
+export const PERIOD_LENGTH_PER_INPUT = 2;
+export const CVC_LENGTH = 3;

@@ -5,7 +5,7 @@ import type { CardInfo } from '../../types';
 import { useState } from 'react';
 import type { ExpirationPeriodErrorStatus } from '../../types';
 import { isNumber, isValidMonth, isValidYear } from '../../utils';
-import { EXPIRATION_PERIOD_ERROR_MESSAGES } from '../../constants';
+import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
@@ -39,7 +39,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     // 2. invlid yy -> error status
     // 3. invalid mm/yy -> 같은 error status
 
-    if (inputValue.length < 2) {
+    if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
       return;
     }
 
@@ -66,7 +66,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
       return;
     }
 
-    if (inputValue.length < 2) {
+    if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
       setErrorStatus('invalidLength');
       return;
     }
@@ -90,7 +90,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
             type="text"
             inputMode="numeric"
             placeholder="MM"
-            maxLength={2}
+            maxLength={PERIOD_LENGTH_PER_INPUT}
             onChange={(e) => handleChange(0, e)}
             onBlur={(e) => handleBlur(0, e)}
           />
@@ -100,7 +100,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
             type="text"
             inputMode="numeric"
             placeholder="YY"
-            maxLength={2}
+            maxLength={PERIOD_LENGTH_PER_INPUT}
             onChange={(e) => handleChange(1, e)}
             onBlur={(e) => handleBlur(1, e)}
           />

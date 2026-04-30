@@ -4,7 +4,7 @@ import Input from '../ui/Input';
 import { useState } from 'react';
 import type { ErrorStatus } from '../../types';
 import { isNumber } from '../../utils';
-import { ERROR_MESSAGES } from '../../constants';
+import { CVC_LENGTH, ERROR_MESSAGES } from '../../constants';
 
 interface CVCFieldProps {
   value: CardInfo['cvc'];
@@ -29,7 +29,7 @@ export default function CVCField({ value, onUpdated }: CVCFieldProps) {
     onUpdated(newValue);
     setErrorStatus(inputValue === '' ? 'required' : null);
 
-    if (inputValue.length < 3) {
+    if (inputValue.length < CVC_LENGTH) {
       return;
     }
   };
@@ -45,7 +45,7 @@ export default function CVCField({ value, onUpdated }: CVCFieldProps) {
       return;
     }
 
-    if (inputValue.length < 3) {
+    if (inputValue.length < CVC_LENGTH) {
       setErrorStatus('invalidLength');
       return;
     }
@@ -68,7 +68,7 @@ export default function CVCField({ value, onUpdated }: CVCFieldProps) {
         type="text"
         inputMode="numeric"
         placeholder="123"
-        maxLength={3}
+        maxLength={CVC_LENGTH}
         onChange={handleChange}
         onBlur={handleBlur}
       />

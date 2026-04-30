@@ -4,7 +4,7 @@ import Input from '../ui/Input';
 import type { CardInfo, ErrorStatus } from '../../types';
 import { isNumber } from '../../utils';
 import { useState } from 'react';
-import { ERROR_MESSAGES } from '../../constants';
+import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
@@ -45,7 +45,7 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
       return;
     }
 
-    if (inputValue.length < 4) {
+    if (inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT) {
       setErrorStatus('invalidLength');
       return;
     }
@@ -71,7 +71,7 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
               type="text"
               inputMode="numeric"
               placeholder="1234"
-              maxLength={4}
+              maxLength={CARD_NUMBER_LENGTH_PER_INPUT}
               onChange={(e) => handleChange(index, e)}
               onBlur={(e) => handleBlur(index, e)}
             />
