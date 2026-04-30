@@ -1,7 +1,7 @@
-import type { ComponentProps } from 'react';
+import { useState, type ComponentProps } from 'react';
 import type { CardFormState } from '../types';
-import ValidationInput from './ValidationInput';
-import Flex from './Flex';
+import ValidationInput from './Common/ValidationInput';
+import Flex from './Common/Flex';
 import {
   validateMonth,
   validateNumberString,
@@ -9,7 +9,8 @@ import {
   validateStringMaxLength,
   validateYear,
 } from '../utils';
-import Label from './Label';
+import Label from './Common/Label';
+import InputErrorMessage from './Common/InputErrorMessage';
 
 interface CardExpiryDateInputProps {
   value: Pick<CardFormState, 'expiryMonth' | 'expiryYear'>;
@@ -17,6 +18,8 @@ interface CardExpiryDateInputProps {
 }
 
 export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
+  const [inputError, setInputError] = useState<Error | null>(null);
+
   return (
     <Flex direction="column" gap={10}>
       <Label>유효기간</Label>
@@ -29,6 +32,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           placeholder="MM"
           value={props.value.expiryMonth}
           onChange={props.onChange}
+          onChangeError={(error) => setInputError(error)}
           validations={[
             {
               type: 'limit',
@@ -84,6 +88,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           ]}
         />
       </Flex>
+      <InputErrorMessage>{inputError?.message}</InputErrorMessage>
     </Flex>
   );
 }

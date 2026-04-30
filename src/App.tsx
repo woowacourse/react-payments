@@ -10,7 +10,6 @@ const View = styled.div`
   max-width: 376px;
   margin: 0 auto;
   padding: 16px 32px;
-  border: 1px solid black;
 `;
 
 function App() {

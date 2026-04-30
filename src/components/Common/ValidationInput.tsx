@@ -1,6 +1,7 @@
-import { useState, type ChangeEvent, type ComponentProps } from 'react';
+import { useEffect, useState, type ChangeEvent, type ComponentProps } from 'react';
 import styled from '@emotion/styled';
 import Flex from './Flex';
+import InputErrorMessage from './InputErrorMessage';
 
 const Input = styled.input`
   width: 100%;
@@ -15,20 +16,18 @@ const Input = styled.input`
   }
 `;
 
-const ErrorMessage = styled.p`
-  color: var(--color-error);
-  font-size: 12px;
-  line-height: 14px;
-  height: 14px;
-  margin: 0;
-`;
-
 interface ValidationInputProps extends ComponentProps<'input'> {
   validations: { type: 'limit' | 'check'; validator: (input: string) => boolean; message: string }[];
+  onChangeError?: (error: Error | null) => void;
+  isShowError?: boolean;
 }
 
 export default function ValidationInput({ validations, onChange, onBlur, ...props }: ValidationInputProps) {
   const [inputError, setInputError] = useState<null | Error>(null);
+
+  useEffect(() => {
+    props.onChangeError?.(inputError);
+  }, [inputError]);
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const failedValidation = validations.find(
@@ -72,7 +71,7 @@ export default function ValidationInput({ validations, onChange, onBlur, ...prop
         onChange={handleOnChange}
         onBlur={handleOnBlur}
       />
-      {<ErrorMessage>{inputError?.message}</ErrorMessage>}
+      {props.isShowError && <InputErrorMessage>{inputError?.message}</InputErrorMessage>}
     </Flex>
   );
 }

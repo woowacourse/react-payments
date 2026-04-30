@@ -1,8 +1,8 @@
 import { type ComponentProps } from 'react';
-import ValidationInput from './ValidationInput';
+import ValidationInput from './Common/ValidationInput';
 import { validateCVC, validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
-import Flex from './Flex';
-import Label from './Label';
+import Flex from './Common/Flex';
+import Label from './Common/Label';
 
 type CardCVCInputProps = Pick<ComponentProps<typeof ValidationInput>, 'value' | 'onChange'>;
 
@@ -16,6 +16,7 @@ function CardCVCInput(props: CardCVCInputProps) {
         inputMode="numeric"
         autoComplete="cc-exp-csc"
         placeholder="CVC"
+        isShowError={true}
         validations={[
           {
             type: 'limit',

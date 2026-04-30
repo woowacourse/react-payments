@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import ValidationInput from '../components/ValidationInput';
+import ValidationInput from '../components/Common/ValidationInput';
 
 const meta = {
   title: 'Components/ValidationInput',

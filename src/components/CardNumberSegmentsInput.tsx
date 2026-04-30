@@ -1,9 +1,10 @@
-import { type ComponentProps } from 'react';
-import ValidationInput from './ValidationInput';
+import { useState, type ComponentProps } from 'react';
+import ValidationInput from './Common/ValidationInput';
 import { validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
 import type { CardNumberSegments } from '../types';
-import Flex from './Flex';
-import Label from './Label';
+import Flex from './Common/Flex';
+import Label from './Common/Label';
+import InputErrorMessage from './Common/InputErrorMessage';
 
 interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;
@@ -11,6 +12,8 @@ interface CardNumberSegmentsInputProps {
 }
 
 function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
+  const [inputError, setInputError] = useState<Error | null>(null);
+
   return (
     <Flex direction="column" gap={10}>
       <Label>카드 번호</Label>
@@ -24,6 +27,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             placeholder="1234"
             value={el}
             onChange={props.onChange}
+            onChangeError={(error) => setInputError(error)}
             validations={[
               {
                 type: 'limit',
@@ -44,6 +48,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
           />
         ))}
       </Flex>
+      <InputErrorMessage>{inputError?.message}</InputErrorMessage>
     </Flex>
   );
 }

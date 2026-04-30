@@ -2,7 +2,7 @@ import CardCVCInput from './CardCVCInput';
 import CardNumberSegmentsInput from './CardNumberSegmentsInput';
 import type { CardFormState } from '../types';
 import type { ChangeEvent } from 'react';
-import Flex from './Flex';
+import Flex from './Common/Flex';
 import styled from '@emotion/styled';
 import CardExpiryDateInput from './CardExpiryDateInput';
 

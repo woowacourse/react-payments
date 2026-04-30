@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import type { CardBrand, CardNumberSegments } from '../types';
-import Flex from './Flex';
+import Flex from './Common/Flex';
 
 const CardContainer = styled(Flex)`
   margin: 45px 0;
@@ -45,7 +45,7 @@ function CardPreview(props: CardPrivewProps) {
         </Flex>
         <Flex gap={10}>
           {props.cardNumberSegments.map((segments: string, index: number) => (
-            <CardText key={index}>{index < 2 ? segments : segments.replaceAll(/./g, '·')}</CardText>
+            <CardText key={index}>{index < 2 ? segments : segments.replaceAll(/./g, '•')}</CardText>
           ))}
         </Flex>
         <CardText>

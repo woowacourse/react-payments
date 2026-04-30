@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Flex from '../components/Flex';
+import Flex from '../components/Common/Flex';
 
 const meta = {
   title: 'Components/Flex',
