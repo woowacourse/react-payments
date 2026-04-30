@@ -1,66 +1,39 @@
-import { useState } from "react";
-import NumberInput from "../Input/NumberInput";
-import InputGroup from "./InputGroup";
-import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
+import { useState } from 'react';
+import { isLengthMatch } from '../../utils/isLengthMatch';
+import CardInfoInput from '../Input/CardInfoInput';
+import CardInputWrapper from './CardInputWrapper';
 
-type CardNumbers = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
-interface Props {
-  setCardNumber: (value: CardNumbers) => void;
-  value: CardNumbers;
+interface CardNumberInputWrapperProps {
+    validator: (value: string[]) => string | null;
+    setCardNumber: (index: number) => (value: string) => void;
+    value: string[];
 }
 
-export default function CardNumberInputWrapper({
-  setCardNumber,
-  value,
-}: Props) {
-  const [inputErrors, setInputErrors] = useState<{
-    first: string | null;
-    second: string | null;
-    third: string | null;
-    fourth: string | null;
-  }>({
-    first: null,
-    second: null,
-    third: null,
-    fourth: null,
-  });
+export default function CardNumberInputWrapper({ validator, setCardNumber, value }: CardNumberInputWrapperProps) {
+    const [inputErrors, setInputErrors] = useState<(string | null)[]>([null, null, null, null]);
 
-  const setError =
-    (key: "first" | "second" | "third" | "fourth") =>
-    (message: string | null) => {
-      setInputErrors((prev) => ({ ...prev, [key]: message }));
+    const setError = (index: number) => (message: string | null) => {
+        setInputErrors((prev) => prev.with(index, message));
     };
 
-  return (
-    <InputGroup
-      errorMessage={
-        Object.values(inputErrors).find((err) => err !== null) ?? null
-      }
-    >
-      {Object.entries(value).map(([cardKey, cardValue]) => (
-        <NumberInput
-          key={`${cardKey}-input`}
-          value={cardValue}
-          setValue={(newValue) =>
-            setCardNumber({ ...value, [cardKey]: newValue })
-          }
-          placeholder="1234"
-          hasError={inputErrors[cardKey as keyof CardNumbers] !== null}
-          maxLength={4}
-          onError={setError(cardKey as keyof CardNumbers)}
-          onBlur={() => {
-            const result = getCardNumberErrorMessage(value);
-            if (result && result.key === cardKey)
-              setError(cardKey as keyof CardNumbers)(result.message);
-          }}
-          style={{ width: "71px" }}
-        />
-      ))}
-    </InputGroup>
-  );
+    const inputError =
+        inputErrors.find((err) => err !== null) ?? null
+            ? inputErrors.find((err) => err !== null) ?? null
+            : validator(value);
+
+    return (
+        <CardInputWrapper errorMessage={inputError}>
+            {value.map((_, index) => (
+                <CardInfoInput
+                    value={value[index]}
+                    setValue={setCardNumber(index)}
+                    type="card-number"
+                    placeHolder="1234"
+                    validator={(value: string) => isLengthMatch(4, value)}
+                    maxLength={4}
+                    onError={setError(index)}
+                />
+            ))}
+        </CardInputWrapper>
+    );
 }

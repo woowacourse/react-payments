@@ -11,6 +11,8 @@ interface CardInfoInputProps {
     maxLength?: number;
     placeHolder?: string;
     type: InputType;
+    // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
+    onError: (message: string) => void;
 }
 
 interface CardInfoInputStyleProps {
@@ -25,14 +27,18 @@ export default function CardInfoInput({
     placeHolder,
     type,
     maxLength,
+    onError,
 }: CardInfoInputProps) {
     const [isNotValidate, setIsNotValidate] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
         const tmpValue = e.target.value;
-        // blockOption을 props로 두는 방식이 더 범용성 측면에서 좋을 수도 있을 것 같아서 고민할 점..
-        if (Number.isNaN(Number(tmpValue))) return;
+        if (Number.isNaN(Number(tmpValue))) {
+            onError('숫자만 입력할 수 있습니다.');
+            return;
+        }
         setValue(tmpValue);
+        onError(null);
         if (!validator(tmpValue)) setIsNotValidate(true);
         else setIsNotValidate(false);
     };
@@ -64,4 +70,8 @@ const InputStyle = styled.input<CardInfoInputStyleProps>`
     }};
     padding: 8px;
     box-sizing: border-box;
+    &:focus {
+        outline: none;
+        border-color: #000000 !important;
+    }
 `;
