@@ -16,6 +16,45 @@ export function CardExpiryDateInputContainer({
     message: "",
   });
 
+  const validateMonth = (value: string, id: string) => {
+    if (value.length === 1 && !["0", "1"].includes(value[0])) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "유효한 월이 아닙니다.",
+      });
+      return false;
+    }
+    if (value.length === 2) {
+      const month = Number(value);
+      if (month < 1 || month > 12) {
+        setError({
+          ...isError,
+          [id]: { state: true },
+          message: "유효한 월이 아닙니다.",
+        });
+        return false;
+      }
+    }
+    setError({ ...isError, [id]: { state: false }, message: "" });
+    return true;
+  };
+
+  const validateYear = (value: string, id: string): boolean => {
+    const currentYear = new Date().getFullYear().toString().slice(-2);
+    const year = value;
+    if (year.length === 2 && Number(year) < Number(currentYear)) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "유효한 년도가 아닙니다.",
+      });
+      return false;
+    }
+    setError({ ...isError, [id]: { state: false }, message: "" });
+    return true;
+  };
+
   const validateIsNumber = (value: string, id: string): boolean => {
     if (Number.isNaN(Number(value))) {
       setError({
@@ -30,10 +69,19 @@ export function CardExpiryDateInputContainer({
     return true;
   };
 
-  const changeCardExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
     if (!validateIsNumber(value, id)) return;
+    if (!validateMonth(value, id)) return;
+    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+  };
+
+  const changeCardExpiryYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    if (!validateIsNumber(value, id)) return;
+    if (!validateYear(value, id)) return;
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
@@ -45,7 +93,7 @@ export function CardExpiryDateInputContainer({
           type="text"
           inputMode="numeric"
           id="expiry-month"
-          onChange={changeCardExpiryDate}
+          onChange={changeCardExpiryMonth}
           maxLength={2}
           value={cardExpiryDate["expiry-month"]}
           isError={isError["expiry-month"].state}
@@ -55,7 +103,7 @@ export function CardExpiryDateInputContainer({
           type="text"
           inputMode="numeric"
           id="expiry-year"
-          onChange={changeCardExpiryDate}
+          onChange={changeCardExpiryYear}
           maxLength={2}
           value={cardExpiryDate["expiry-year"]}
           isError={isError["expiry-year"].state}

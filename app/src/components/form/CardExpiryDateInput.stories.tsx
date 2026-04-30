@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { userEvent, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
 
 import { CardExpiryDateInputContainer } from "./CardExpiryDateInput";
@@ -46,6 +46,29 @@ export const InvalidMonthInput: Story = {
     const canvas = within(canvasElement);
     const [monthInput] = canvas.getAllByRole("textbox");
     await userEvent.type(monthInput, "abc");
+    await expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeInTheDocument();
+  },
+};
+
+export const InvalidMonthStartDigit: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [monthInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(monthInput, "2");
+    await expect(canvas.getByText("유효한 월이 아닙니다.")).toBeInTheDocument();
+  },
+};
+
+export const InvalidMonthRange: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [monthInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(monthInput, "13");
+    await expect(canvas.getByText("유효한 월이 아닙니다.")).toBeInTheDocument();
   },
 };
 
@@ -56,5 +79,17 @@ export const InvalidYearInput: Story = {
     const canvas = within(canvasElement);
     const [, yearInput] = canvas.getAllByRole("textbox");
     await userEvent.type(yearInput, "abc");
+    await expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeInTheDocument();
+  },
+};
+
+export const InvalidPastYear: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [, yearInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(yearInput, "24");
+    await expect(canvas.getByText("유효한 년도가 아닙니다.")).toBeInTheDocument();
   },
 };
