@@ -1,4 +1,4 @@
-import { useState, type ComponentProps } from 'react';
+import { useState, useEffect, type ChangeEvent } from 'react';
 import type { CardFormState } from '../types';
 import ValidationInput from './Common/ValidationInput';
 import Flex from './Common/Flex';
@@ -14,11 +14,25 @@ import InputErrorMessage from './Common/InputErrorMessage';
 
 interface CardExpiryDateInputProps {
   value: Pick<CardFormState, 'expiryMonth' | 'expiryYear'>;
-  onChange: ComponentProps<typeof ValidationInput>['onChange'];
+  onChange: (value: [string, string]) => void;
 }
 
 export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
+  const [expiryMonth, setExpiryMonth] = useState(props.value.expiryMonth);
+  const [expiryYear, setExpiryYear] = useState(props.value.expiryYear);
   const [inputError, setInputError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    props.onChange([expiryMonth, expiryYear]);
+  }, [expiryMonth, expiryYear]);
+
+  const handleChangeMonth = (event: ChangeEvent<HTMLInputElement>) => {
+    setExpiryMonth(event.target.value);
+  };
+
+  const handleChangeYear = (event: ChangeEvent<HTMLInputElement>) => {
+    setExpiryYear(event.target.value);
+  };
 
   return (
     <Flex direction="column" gap={10}>
@@ -26,12 +40,11 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
       <Flex gap={10}>
         <ValidationInput
           type="text"
-          data-index={0}
           inputMode="numeric"
           autoComplete="cc-exp-month"
           placeholder="MM"
-          value={props.value.expiryMonth}
-          onChange={props.onChange}
+          value={expiryMonth}
+          onChange={handleChangeMonth}
           onChangeError={(error) => setInputError(error)}
           validations={[
             {
@@ -58,12 +71,11 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
         />
         <ValidationInput
           type="text"
-          data-index={1}
           inputMode="numeric"
           autoComplete="cc-exp-year"
           placeholder="YY"
-          value={props.value.expiryYear}
-          onChange={props.onChange}
+          value={expiryYear}
+          onChange={handleChangeYear}
           validations={[
             {
               type: 'limit',
