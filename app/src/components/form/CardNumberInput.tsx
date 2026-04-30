@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
+import { Validator } from "../../validators/CardValidator";
 import styled from "@emotion/styled";
 
 export function CardNumberInputContainer({
@@ -23,80 +24,6 @@ export function CardNumberInputContainer({
     message: "",
   });
 
-  const validateIsNetworkBrand = (value: string, id: string): boolean => {
-    if (value !== "" && !["4", "5"].includes(value[0])) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message:
-          "유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.",
-      });
-      return false;
-    }
-    if (
-      value.length === 2 &&
-      value[0] === "5" &&
-      !["1", "2", "3", "4", "5"].includes(value[1])
-    ) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.",
-      });
-      return false;
-    }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
-  };
-
-  const validateIsNumber = (value: string, id: string): boolean => {
-    if (Number.isNaN(Number(value))) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "카드 번호는 숫자만 입력 가능합니다.",
-      });
-      return false;
-    }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
-  };
-
-  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const id = e.target.id;
-    if (!validateIsNumber(value, id)) return;
-    setCardNumber({ ...cardNumber, [id]: value });
-  };
-
-  const changeFirstDigitsCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const value = e.target.value;
-    const id = e.target.id;
-    if (!validateIsNumber(value, id)) return;
-    if (!validateIsNetworkBrand(value, id)) return;
-    handleNetworkBrand(value);
-    setCardNumber({ ...cardNumber, [id]: value });
-  };
-
-  const validateCardNumberLength = (
-    value: string,
-    id: string,
-    limit: number,
-  ): boolean => {
-    if (![0, limit].includes(value.length)) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "카드 번호 각 항목은 4자리여야 합니다.",
-      });
-      return false;
-    }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
-  };
-
   const handleNetworkBrand = (value: string) => {
     if (value.startsWith("4")) {
       setNetworkBrand("visa");
@@ -109,10 +36,43 @@ export function CardNumberInputContainer({
     setNetworkBrand("");
   };
 
+  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    try {
+      Validator.isNumber(value);
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    } catch (err) {
+      setError({ ...isError, [id]: { state: true }, message: err.message });
+    }
+    setCardNumber({ ...cardNumber, [id]: value });
+  };
+
+  const changeFirstDigitsCardNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    try {
+      Validator.isNumber(value);
+      Validator.isValidNetworkBrand(value);
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    } catch (err) {
+      setError({ ...isError, [id]: { state: true }, message: err.message });
+    }
+    handleNetworkBrand(value);
+    setCardNumber({ ...cardNumber, [id]: value });
+  };
+
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
-    if (!validateCardNumberLength(value, id, e.target.maxLength)) return;
+    try {
+      Validator.isValidCardNumberLength(value, e.target.maxLength);
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    } catch (err) {
+      setError({ ...isError, [id]: { state: true }, message: err.message });
+    }
   };
 
   return (
