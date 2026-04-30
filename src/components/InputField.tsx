@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Input from "@components/Input.tsx";
 import type { ComponentProps } from "react";
+import { COLOR_PALETTE } from "@/styles/colorPalette";
 
 interface InputFieldProps {
   title: string;
@@ -44,7 +45,7 @@ const Title = styled.h2`
 const Caption = styled.p`
   font-weight: 400;
   font-size: 0.6rem;
-  color: #8b95a1;
+  color: ${COLOR_PALETTE.CAPTION};
   margin-top: 0.25rem;
 `;
 
@@ -57,14 +58,14 @@ const InputWrapper = styled.div`
 const Label = styled.label`
   font-weight: 500;
   font-size: 0.75rem;
-  color: #0a0d13;
+  color: ${COLOR_PALETTE.LABEL};
   margin-top: 1rem;
 `;
 
 const HelperMessage = styled.p`
   font-weight: 400;
   font-size: 0.5rem;
-  color: #ff3d3d;
+  color: ${COLOR_PALETTE.ERROR};
 `;
 
 export default InputField;

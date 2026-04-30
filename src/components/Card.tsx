@@ -6,6 +6,7 @@ import type { ValidityPeriod } from "@components/CardValidityPeriodInputField";
 import SwitchCase from "@components/SwitchCase";
 import styled from "@emotion/styled";
 import { detectCardBrand } from "@utils/card";
+import { COLOR_PALETTE } from "@/styles/colorPalette";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;
@@ -55,9 +56,9 @@ const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
 const Wrapper = styled.div`
   width: 13rem;
   height: 8rem;
-  background-color: #333;
+  background-color: ${COLOR_PALETTE["BLACK-800"]};
   border-radius: 0.25rem;
-  box-shadow: 3px 3px 5px 0px #00000040;
+  box-shadow: 3px 3px 5px 0px ${COLOR_PALETTE["BLACK-900"]}40;
 `;
 
 const ChipWrapper = styled.div`
@@ -69,7 +70,7 @@ const ChipWrapper = styled.div`
 const Chip = styled.div`
   width: 2.25rem;
   height: 1.5rem;
-  background-color: #ddcd78;
+  background-color: ${COLOR_PALETTE.YELLOW};
   border-radius: 0.2rem;
 `;
 
@@ -90,7 +91,7 @@ const CardNumberUnit = styled.span`
   font-weight: 500;
   font-style: Medium;
   font-size: 0.875rem;
-  color: #fff;
+  color: ${COLOR_PALETTE.WHITE};
   letter-spacing: 16%;
 `;
 
@@ -105,7 +106,7 @@ const CardValidityPeriodUnit = styled.span`
   font-weight: 500;
   font-style: Medium;
   font-size: 0.875rem;
-  color: #fff;
+  color: ${COLOR_PALETTE.WHITE};
   letter-spacing: 16%;
 `;
 

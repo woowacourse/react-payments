@@ -1,3 +1,4 @@
+import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
 
 interface InputProps {
@@ -8,16 +9,18 @@ interface InputProps {
 const Input = styled.input<InputProps>`
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
   border: 1px solid
-    ${({ state }) => (state === "error" ? "#FF3D3D" : "#acacac")};
+    ${({ state }) =>
+      state === "error" ? COLOR_PALETTE.ERROR : COLOR_PALETTE.GREY};
   border-radius: 2px;
   &::placeholder {
-    color: #acacac;
+    color: ${COLOR_PALETTE.GREY};
   }
   padding: 8px;
   &:focus {
     outline: none;
     border: 1px solid
-      ${({ state }) => (state === "error" ? "#FF3D3D" : "#000000")};
+      ${({ state }) =>
+        state === "error" ? COLOR_PALETTE.ERROR : COLOR_PALETTE["BLACK-900"]};
   }
 `;
 
