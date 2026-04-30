@@ -28,7 +28,8 @@ export function CardNumberInputContainer({
       setError({
         ...isError,
         [id]: { state: true },
-        message: "유요한 카드 번호가 아닙니다.",
+        message:
+          "유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.",
       });
       return false;
     }
@@ -40,7 +41,7 @@ export function CardNumberInputContainer({
       setError({
         ...isError,
         [id]: { state: true },
-        message: "유요한 마스터카드 번호가 아닙니다.",
+        message: "마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.",
       });
       return false;
     }
@@ -53,7 +54,7 @@ export function CardNumberInputContainer({
       setError({
         ...isError,
         [id]: { state: true },
-        message: "숫자만 입력 가능합니다.",
+        message: "카드 번호는 숫자만 입력 가능합니다.",
       });
       return false;
     }
@@ -88,7 +89,7 @@ export function CardNumberInputContainer({
       setError({
         ...isError,
         [id]: { state: true },
-        message: "각 항목은 4자리여야 합니다.",
+        message: "카드 번호 각 항목은 4자리여야 합니다.",
       });
       return false;
     }

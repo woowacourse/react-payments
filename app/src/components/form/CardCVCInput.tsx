@@ -15,7 +15,7 @@ export function CardCVCInputWrapper() {
       setError({
         ...isError,
         [id]: { state: true },
-        message: "숫자만 입력 가능합니다.",
+        message: "CVC는 숫자만 입력 가능합니다.",
       });
       return false;
     }
