@@ -48,7 +48,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
   };
 
   const validateIsNumber = (value: string, id: string): boolean => {
-    if (Number.isNaN(value)) {
+    if (Number.isNaN(Number(value))) {
       setError({
         ...isError,
         [id]: { state: true },
