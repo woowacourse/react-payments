@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Input from "./Input.tsx";
+import Input from "@components/Input.tsx";
 import type { ComponentProps } from "react";
 
 interface InputFieldProps {

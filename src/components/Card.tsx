@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import masterCard from "../assets/Mastercard.png";
-import visa from "../assets/Visa.png";
-import type { CardNumberUnits } from "./CardNumberInputField";
-import type { ValidityPeriod } from "./CardValidityPeriodInputField";
+import masterCard from "@assets/Mastercard.png";
+import visa from "@assets/Visa.png";
+import type { CardNumberUnits } from "@components/CardNumberInputField";
+import type { ValidityPeriod } from "@components/CardValidityPeriodInputField";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;
