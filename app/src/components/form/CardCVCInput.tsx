@@ -1,14 +1,24 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 
 export function CardCVCInputWrapper() {
+  const [cardCVC, setCardCVC] = useState("");
+
+  const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardCVC(e.target.value);
+  };
+
   return (
     <CardCVCContainer>
       <CardCVCLabel htmlFor="card-cvc-input">CVC</CardCVCLabel>
       <CardCVCInput
-        type="number"
+        type="text"
         maxLength={3}
+        inputMode="numeric"
         placeholder="123"
         id="card-cvc-input"
+        value={cardCVC}
+        onChange={changeCardCVC}
       />
     </CardCVCContainer>
   );
