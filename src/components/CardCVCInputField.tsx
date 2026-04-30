@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputField from "@components/InputField.tsx";
-import type { InputStatus } from "@components/CardNumberInputField.tsx";
+
+type InputStatus = "default" | "error";
 
 interface CardCVCInputFieldProps {
   CVC: string;

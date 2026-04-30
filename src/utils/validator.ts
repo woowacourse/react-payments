@@ -17,3 +17,7 @@ export const validateMonthRange = (month: number) => {
 export const validateYearRange = (year: number) => {
   return validateRange(year, 0, Infinity);
 };
+
+export const validateCardNumberUnitRange = (cardNumberUnit: number) => {
+  return validateRange(cardNumberUnit, 0, 9999);
+};

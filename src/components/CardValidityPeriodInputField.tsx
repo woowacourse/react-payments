@@ -3,10 +3,11 @@ import {
   validateMonthRange,
   validateYearRange,
 } from "@/utils/validator";
-import type { InputStatus } from "@components/CardNumberInputField.tsx";
 import InputField from "@components/InputField.tsx";
 import { formatValidityPeriod } from "@utils/card";
 import { useState } from "react";
+
+type InputStatus = "default" | "error";
 
 export type ValidityPeriod = {
   month: string;

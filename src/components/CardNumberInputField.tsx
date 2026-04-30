@@ -1,5 +1,6 @@
-import { useState } from "react";
 import InputField from "@components/InputField.tsx";
+import { checkIsInt, validateCardNumberUnitRange } from "@utils/validator";
+import { useState } from "react";
 
 export type CardNumberUnits = [string, string, string, string];
 interface CardNumberInputFieldProps {
@@ -7,7 +8,7 @@ interface CardNumberInputFieldProps {
   onChange: (input: CardNumberUnits) => void;
 }
 
-export type InputStatus = "default" | "error";
+type InputStatus = "default" | "error";
 
 type InputsStatuses = [InputStatus, InputStatus, InputStatus, InputStatus];
 
@@ -18,6 +19,8 @@ const INPUTS_STATUSES: InputsStatuses = [
   "default",
 ];
 
+const CARD_NUMBER_UNIT_MAX_LENGTH = 4;
+
 const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
@@ -26,7 +29,7 @@ const CardNumberInputField = ({
 
   const handleCardNumberChange = (index: number, input: string) => {
     if (input.length !== 0)
-      if (Number.isNaN(+input) || +input < 0 || +input !== +parseInt(input)) {
+      if (!checkIsInt(+input) || validateCardNumberUnitRange(+input)) {
         setStatus((prev) => {
           const newInputsStatuses: InputsStatuses = [...prev];
           newInputsStatuses[index] = "error";
@@ -39,7 +42,7 @@ const CardNumberInputField = ({
     setStatus(INPUTS_STATUSES);
 
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
-    newCardNumberUnits[index] = input.slice(0, 4);
+    newCardNumberUnits[index] = input.slice(0, CARD_NUMBER_UNIT_MAX_LENGTH);
     onChange(newCardNumberUnits);
   };
 
@@ -80,7 +83,6 @@ const CardNumberInputField = ({
           },
           state: status[2],
         },
-
         {
           placeholder: "1234",
           fullWidth: true,
