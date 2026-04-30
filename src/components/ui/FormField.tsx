@@ -15,13 +15,13 @@ export default function FormField({ title, caption, error, errorMessage, childre
         <div css={formFieldStyle}>
             <div css={formFieldTitleWrapperStyle}>
                 <FieldTitle>{title}</FieldTitle>
-                <FieldCaption>{caption}</FieldCaption>
+                {caption && <FieldCaption>{caption}</FieldCaption>}
             </div>
             <div css={formFieldInputWrapperStyle}>
                 {children}
                 <FieldCaption variant={"error"}>{error ? errorMessage : ''}</FieldCaption>
             </div>
-        </div>
+        </div >
     )
 }
 

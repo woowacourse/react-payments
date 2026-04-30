@@ -4,9 +4,9 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     variant?: 'default' | 'error'
 }
 
-export default function Input({ placeholder = "1234", value, type, onChange, variant = 'default' }: InputProps) {
+export default function Input({ placeholder = "1234", value, type, onChange, variant = 'default', ...props }: InputProps) {
     return (
-        <input placeholder={placeholder} value={value} type={type} onChange={onChange} css={[inputStyle, variants[variant]]} />
+        <input {...props} placeholder={placeholder} value={value} type={type} onChange={onChange} css={[inputStyle, variants[variant]]} />
     )
 }
 
