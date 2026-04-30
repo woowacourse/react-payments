@@ -40,6 +40,7 @@ const CardContainer = styled.div`
   padding: 0.5rem 0.75rem;
   margin: 4.625rem auto 2.75rem auto;
   color: white;
+  box-shadow: 3px 3px 5px 0px #00000040;
 
   .ic-chip {
     height: 22px;
