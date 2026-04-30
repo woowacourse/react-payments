@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import "./App.css";
 import type { CardInfo } from "./types.ts";
 import { useState } from "react";
 import Card from "./components/Card.tsx";
@@ -13,7 +12,7 @@ function App() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: [], brand: "" });
 
   useEffect(() => {
-    const brandName = cardInfo.numbers[0]?.length === 4 ? decideBrandName(cardInfo.numbers[0]) : "";
+    const brandName = decideBrandName(cardInfo.numbers[0]);
     setCardInfo((prev) => {
       return { ...prev, brand: brandName };
     });
@@ -48,17 +47,26 @@ function App() {
     >
       <div
         css={css`
-          width: 376px;
-          height: 700px;
+          width: 315px;
           margin: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 45px;
         `}
       >
         <Card cardInfo={cardInfo} />
-
-        {/* form */}
-        <CardNumberInputSection onValueHandler={cardNumberHandler} />
-        <ExpiryDateInputSection onValueHandler={expiryHandler} />
-        <CvcInputSection onValueHandler={cvcHandler} />
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+          `}
+        >
+          {/* form */}
+          <CardNumberInputSection onValueHandler={cardNumberHandler} />
+          <ExpiryDateInputSection onValueHandler={expiryHandler} />
+          <CvcInputSection onValueHandler={cvcHandler} />
+        </div>
       </div>
     </main>
   );

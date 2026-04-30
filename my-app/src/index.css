@@ -1,3 +1,10 @@
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
 /* :root {
   --text: #6b6375;
   --text-h: #08060d;
