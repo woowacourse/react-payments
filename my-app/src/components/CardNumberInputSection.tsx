@@ -33,14 +33,10 @@ const CardNumberInputSection = ({
         message = "숫자만 입력 가능합니다";
         break;
       }
-      if (i === 0) {
-        const brandName = decideBrandName(value);
-
-        if (brandName === "") {
-          errorIndex = i;
-          message = "이 카드 브랜드는 지원되지 않습니다.";
-          break;
-        }
+      if(i === 0 && decideBrandName(value) === "") {
+        errorIndex = i;
+        message = "이 카드 브랜드는 지원되지 않습니다.";
+        break;
       }
     }
 

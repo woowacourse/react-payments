@@ -35,7 +35,8 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             width: 36px;
             height: 22px;
           `}
-          src={cardInfo.brand === "master" ? masterLogo : visaLogo}
+          src={cardInfo.brand === "master" ? masterLogo : cardInfo.brand === "visa" ? visaLogo : undefined}
+
         ></img>
       </div>
 

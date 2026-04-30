@@ -9,6 +9,7 @@ const ExpiryDateInputSection = ({
 }) => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [errorIndex, setErrorIndex] = useState<number>(-1);
 
   const onChange = (index: number, value: string) => {
     const newValues = [...inputValues];
@@ -19,16 +20,27 @@ const ExpiryDateInputSection = ({
     onValueHandler(newValues);
   };
 
-  const validate = () => {
-    if (!/^\d+$/.test(inputValues.join(""))) {
-      setErrorMessage("숫자만 입력 가능합니다");
-      return;
+  const handleBlur = () => {
+    let errorIndex = -1;
+    let message = "";
+
+    for (let i = 0; i < inputValues.length; i++) {
+      const value = inputValues[i];
+      if (value === "" || value === undefined) continue;
+      if (!/^\d+$/.test(value)) {
+        errorIndex = i;
+        message = "숫자만 입력 가능합니다";
+        break;
+      }
+      if (i === 0 && !/^(0[1-9]|1[0-2])$/.test(value)) {
+        errorIndex = i;
+        message = "유효한 날짜를 입력해주세요";
+        break;
+      }
     }
 
-    const month = inputValues[0];
-    if (!/^(0[1-9]|1[0-2])$/.test(month)) {
-      setErrorMessage("유효하지 않은 날짜입니다.");
-    }
+    setErrorIndex(errorIndex);
+    setErrorMessage(message);
   };
 
   return (
@@ -39,8 +51,9 @@ const ExpiryDateInputSection = ({
     >
       <ValidatedInputGroup
         onChange={onChange}
-        onBlur={validate}
+        onBlur={handleBlur}
         errorMessage={errorMessage}
+        errorIndex={errorIndex}
         values={inputValues}
         inputOption={{ count: 2, maxLength: 2, placeHolder: ["MM", "YY"] }}
       />

@@ -9,6 +9,7 @@ const CvcInputSection = ({
 }) => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [errorIndex, setErrorIndex] = useState<number>(-1);
 
   const onChange = (index: number, value: string) => {
     const newValues = [...inputValues];
@@ -19,11 +20,22 @@ const CvcInputSection = ({
     onValueHandler(newValues);
   };
 
-  const validate = () => {
-    if (!/^\d+$/.test(inputValues.join(""))) {
-      setErrorMessage("숫자만 입력 가능합니다");
-      return;
+  const handleBlur = () => {
+    let errorIndex = -1;
+    let message = "";
+
+    for (let i = 0; i < inputValues.length; i++) {
+      const value = inputValues[i];
+      if (value === "" || value === undefined) continue;
+      if (!/^\d+$/.test(value)) {
+        errorIndex = i;
+        message = "숫자만 입력 가능합니다";
+        break;
+      }
     }
+
+    setErrorIndex(errorIndex);
+    setErrorMessage(message);
   };
 
   return (
@@ -34,8 +46,9 @@ const CvcInputSection = ({
     >
       <ValidatedInputGroup
         onChange={onChange}
-        onBlur={validate}
+        onBlur={handleBlur}
         errorMessage={errorMessage}
+        errorIndex={errorIndex}
         values={inputValues}
         inputOption={{ count: 1, maxLength: 3, placeHolder: ["123"] }}
       />
