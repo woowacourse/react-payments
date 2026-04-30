@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { CardNumberUnits } from "../pages/AddNewCardPage.tsx";
 import InputField from "./InputField.tsx";
 
@@ -6,11 +7,37 @@ interface CardNumberInputFieldProps {
   onChange: (input: CardNumberUnits) => void;
 }
 
+type InputStatus = "default" | "error";
+
+type InputsStatuses = [InputStatus, InputStatus, InputStatus, InputStatus];
+
+const INPUTS_STATUES: InputsStatuses = [
+  "default",
+  "default",
+  "default",
+  "default",
+];
+
 const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
 }: CardNumberInputFieldProps) => {
+  const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUES);
+
   const handleCardNumberChange = (index: number, input: string) => {
+    if (input.length !== 0)
+      if (Number.isNaN(+input) || +input < 0 || +input !== +parseInt(input)) {
+        setStatus((prev) => {
+          const newInputsStatuses: InputsStatuses = [...prev];
+          newInputsStatuses[index] = "error";
+          return newInputsStatuses;
+        });
+
+        return;
+      }
+
+    setStatus(INPUTS_STATUES);
+
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
     newCardNumberUnits[index] = input.slice(0, 4);
     onChange(newCardNumberUnits);
@@ -21,6 +48,7 @@ const CardNumberInputField = ({
       title="결제할 카드 번호를 입력해 주세요"
       caption="본인 명의의 카드만 결제 가능합니다."
       label="카드 번호"
+      helperMessage={status.includes("error") ? "숫자만 입력 가능합니다." : ""}
       inputPropsList={[
         {
           placeholder: "1234",
@@ -30,6 +58,7 @@ const CardNumberInputField = ({
             const input = e.target.value;
             handleCardNumberChange(0, input);
           },
+          state: status[0],
         },
         {
           placeholder: "1234",
@@ -39,6 +68,7 @@ const CardNumberInputField = ({
             const input = e.target.value;
             handleCardNumberChange(1, input);
           },
+          state: status[1],
         },
         {
           placeholder: "1234",
@@ -48,6 +78,7 @@ const CardNumberInputField = ({
             const input = e.target.value;
             handleCardNumberChange(2, input);
           },
+          state: status[2],
         },
 
         {
@@ -58,6 +89,7 @@ const CardNumberInputField = ({
             const input = e.target.value;
             handleCardNumberChange(3, input);
           },
+          state: status[3],
         },
       ]}
     />

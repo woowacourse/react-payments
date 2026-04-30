@@ -16,7 +16,8 @@ const Input = styled.input<InputProps>`
   padding: 8px;
   &:focus {
     outline: none;
-    border: 1px solid #000000;
+    border: 1px solid
+      ${({ state }) => (state === "error" ? "#FF3D3D" : "#000000")};
   }
 `;
 

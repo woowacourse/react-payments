@@ -15,7 +15,7 @@ const InputField = ({
   caption,
   label,
   inputPropsList,
-  helperMessage,
+  helperMessage = "",
 }: InputFieldProps) => {
   return (
     <Container>
@@ -27,7 +27,7 @@ const InputField = ({
           <Input {...inputProps} />
         ))}
       </InputWrapper>
-      {helperMessage && <HelperMessage>{helperMessage}</HelperMessage>}
+      <HelperMessage>{helperMessage}</HelperMessage>
     </Container>
   );
 };
