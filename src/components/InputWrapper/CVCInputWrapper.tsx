@@ -4,9 +4,9 @@ import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 
 interface CVCInputWrapperProps {
-    validator: (value: string[]) => string | null;
+    validator: (value: string) => string | null;
     setCVCNumber: (value: string) => void;
-    value: string[];
+    value: string;
 }
 
 export default function CVCInputWrapper({ validator, setCVCNumber, value }: CVCInputWrapperProps) {
