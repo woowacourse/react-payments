@@ -3,7 +3,12 @@ import FormField, { type FormFieldProps } from "../ui/FormField";
 import Input from "../ui/Input";
 import type { CardInfo } from "../../pages/AddCardPage";
 
-export default function ExpirationPeriodField({ onUpdated }: { onUpdated: (value: CardInfo["expirationPeriod"]) => void }) {
+interface ExpirationPeriodFieldProps {
+    value: CardInfo["expirationPeriod"];
+    onUpdated: (value: CardInfo["expirationPeriod"]) => void;
+}
+
+export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
     const formFieldProps: Omit<FormFieldProps, 'children'> = {
         title: '카드 유효기간을 입력해 주세요',
         caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
@@ -18,8 +23,8 @@ export default function ExpirationPeriodField({ onUpdated }: { onUpdated: (value
                     유효기간
                 </legend>
                 <div css={inputGroupStyle}>
-                    <Input type="text" inputMode="numeric" placeholder="MM" maxLength={2} />
-                    <Input type="text" inputMode="numeric" placeholder="YY" maxLength={2} />
+                    <Input value={value[0]} type="text" inputMode="numeric" placeholder="MM" maxLength={2} />
+                    <Input value={value[1]} type="text" inputMode="numeric" placeholder="YY" maxLength={2} />
                 </div>
             </fieldset>
         </FormField>

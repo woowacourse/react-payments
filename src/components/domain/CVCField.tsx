@@ -2,7 +2,12 @@ import type { CardInfo } from "../../pages/AddCardPage";
 import FormField, { type FormFieldProps } from "../ui/FormField";
 import Input from "../ui/Input";
 
-export default function CVCField({ onUpdated }: { onUpdated: (value: CardInfo["cvc"]) => void }) {
+interface CVCFieldProps {
+    value: CardInfo["cvc"];
+    onUpdated: (value: CardInfo["cvc"]) => void;
+}
+
+export default function CVCField({ value, onUpdated }: CVCFieldProps) {
     const formFieldProps: Omit<FormFieldProps, 'children'> = {
         title: 'CVC 번호를 입력해 주세요',
         caption: '',
@@ -15,7 +20,7 @@ export default function CVCField({ onUpdated }: { onUpdated: (value: CardInfo["c
             <label htmlFor="cvc">
                 CVC
             </label>
-            <Input id="cvc" type="text" inputMode="numeric" placeholder="123" maxLength={3} />
+            <Input value={value} id="cvc" type="text" inputMode="numeric" placeholder="123" maxLength={3} />
         </FormField>
     )
 }

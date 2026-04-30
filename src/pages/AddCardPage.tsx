@@ -60,9 +60,9 @@ export default function AddCardPage() {
             <main >
                 {/* <Card /> */}
                 <form css={formLayout}>
-                    <CardNumbersField onUpdated={handleCardNumbersUpdate} />
-                    <ExpirationPeriodField onUpdated={handleExpirationPeriodUpdate} />
-                    <CVCField onUpdated={handleCVCUpdate} />
+                    <CardNumbersField value={formValue.cardNumbers.value} onUpdated={handleCardNumbersUpdate} />
+                    <ExpirationPeriodField value={formValue.expirationPeriod.value} onUpdated={handleExpirationPeriodUpdate} />
+                    <CVCField value={formValue.cvc.value} onUpdated={handleCVCUpdate} />
                 </form>
             </main>
         </div>

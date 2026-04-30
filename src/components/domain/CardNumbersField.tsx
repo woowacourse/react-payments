@@ -3,7 +3,9 @@ import FormField, { type FormFieldProps } from "../ui/FormField";
 import Input from "../ui/Input";
 import type { CardInfo } from '../../pages/AddCardPage';
 
-export default function CardNumbersField({ onUpdated }: { onUpdated: (value: CardInfo["cardNumbers"]) => void }) {
+interface CardNumbersFieldProps { value: CardInfo["cardNumbers"], onUpdated: (value: CardInfo["cardNumbers"]) => void }
+
+export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
     const formFieldProps: Omit<FormFieldProps, 'children'> = {
         title: '결제할 카드 번호를 입력해 주세요',
         caption: '본인 명의의 카드만 결제 가능합니다.',
@@ -18,10 +20,9 @@ export default function CardNumbersField({ onUpdated }: { onUpdated: (value: Car
                     카드 번호
                 </legend>
                 <div css={inputGroupStyle}>
-                    <Input type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
-                    <Input type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
-                    <Input type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
-                    <Input type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
+                    {value.map((number, index) => (
+                        <Input key={index} value={number} type="text" inputMode="numeric" placeholder="1234" maxLength={4} />
+                    ))}
                 </div>
             </fieldset>
         </FormField>
