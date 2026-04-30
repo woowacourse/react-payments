@@ -186,6 +186,7 @@ const CardNumberLegend = styled.legend`
 `;
 
 const CardNumberInput = styled.input<ErrorFlag>`
+  flex: 4 1;
   border: solid 1px ${(props) => (props.isError ? "#FF3D3D" : "#acacac")};
   border-radius: 2px;
   padding: 0.5rem;

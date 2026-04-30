@@ -21,9 +21,10 @@ const CardNumberContainer = styled.div`
   justify-content: flex-start;
   gap: 0.625rem;
   width: 100%;
+  height: 1.25rem;
   span {
-    /* flex: 4 1;
-    text-align: center; */
+    flex: 4 1;
+    text-align: center;
     letter-spacing: 2px;
   }
   .secret {

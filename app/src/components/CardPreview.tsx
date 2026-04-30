@@ -63,5 +63,6 @@ const CardContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
+    width: 200px;
   }
 `;
