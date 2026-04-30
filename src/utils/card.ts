@@ -5,9 +5,12 @@ import type { CardNumberUnits } from "@components/CardNumberInputField";
 export const detectCardBrand = (
   cardNumber: CardNumberUnits,
 ): CardBrand | null => {
-  if (cardNumber[0].startsWith("4")) return "Visa";
+  const VISA_PREFIX = "4";
+  const MASTER_CARD_PREFIXES = ["51", "52", "53", "54", "55"];
 
-  if (["51", "52", "53", "54", "55"].includes(cardNumber[0].slice(0, 2)))
+  if (cardNumber[0].startsWith(VISA_PREFIX)) return "Visa";
+
+  if (MASTER_CARD_PREFIXES.includes(cardNumber[0].slice(0, 2)))
     return "MasterCard";
 
   return null;
