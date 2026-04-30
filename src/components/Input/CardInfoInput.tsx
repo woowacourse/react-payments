@@ -63,4 +63,5 @@ const InputStyle = styled.input<CardInfoInputStyleProps>`
         if (inputType === 'cvc') return '315px';
     }};
     padding: 8px;
+    box-sizing: border-box;
 `;
