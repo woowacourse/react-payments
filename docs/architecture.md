@@ -184,7 +184,7 @@
 
 ## props
 
-- extends FieldsetHTMLAttributes<HTMLFieldSetElement> { title: string; caption: string; error: boolean; errorMessage: string; children: React.Node??; }
+- { title: string; caption: string; error: boolean; errorMessage: string; children: React.Node??; }
 
 ## state
 
