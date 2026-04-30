@@ -52,5 +52,9 @@ const variants = {
   `,
   error: css`
     border-color: var(--color-border-error);
+
+    :focus {
+      border-color: var(--color-border-error);
+    }
   `,
 };

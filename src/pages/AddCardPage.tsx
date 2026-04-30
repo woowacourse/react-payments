@@ -26,29 +26,37 @@ type CardInfoFormValue = {
 
 export default function AddCardPage() {
   const [formValue, setFormValue] = useState<CardInfoFormValue>({
+    // default
     cardNumbers: { value: ['', '', '', ''] },
     expirationPeriod: { value: ['', ''] },
     cvc: { value: '' },
     cardBrand: { value: 'local' },
   });
 
-  const handleformValueUpdate = <K extends keyof CardInfo>(field: K, value: CardInfo[K]) => {
-    const updatedValue = { ...formValue, [field]: { value } };
-    setFormValue(updatedValue);
-  };
-
   const handleCardNumbersUpdate = (cardNumbers: CardInfo['cardNumbers']) => {
-    handleformValueUpdate('cardNumbers', cardNumbers);
     const cardBrand = categorizeCardBrand(cardNumbers);
-    handleformValueUpdate('cardBrand', cardBrand);
+    const newFormValue = {
+      ...formValue,
+      cardNumbers: { value: cardNumbers },
+      cardBrand: { value: cardBrand },
+    };
+    setFormValue(newFormValue);
   };
 
   const handleExpirationPeriodUpdate = (expirationPeriod: CardInfo['expirationPeriod']) => {
-    handleformValueUpdate('expirationPeriod', expirationPeriod);
+    const newFormValue = {
+      ...formValue,
+      expirationPeriod: { value: expirationPeriod },
+    };
+    setFormValue(newFormValue);
   };
 
   const handleCVCUpdate = (cvc: CardInfo['cvc']) => {
-    handleformValueUpdate('cvc', cvc);
+    const newFormValue = {
+      ...formValue,
+      cvc: { value: cvc },
+    };
+    setFormValue(newFormValue);
   };
 
   return (
