@@ -1,5 +1,11 @@
-import InputField from "@components/InputField.tsx";
+import {
+  checkIsInt,
+  validateMonthRange,
+  validateYearRange,
+} from "@/utils/validator";
 import type { InputStatus } from "@components/CardNumberInputField.tsx";
+import InputField from "@components/InputField.tsx";
+import { formatValidityPeriod } from "@utils/card";
 import { useState } from "react";
 
 export type ValidityPeriod = {
@@ -26,56 +32,29 @@ const CardValidityPeriodInputField = ({
 }: CardValidityPeriodInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
 
-  const formatMonth = (nextRaw: string, prev: string) => {
-    const onlyNumber = nextRaw.replace(/\D/g, "");
-
-    if (onlyNumber === "") return "";
-
-    if (onlyNumber.length === 1) {
-      if (onlyNumber === "0") return "0";
-
-      return `0${onlyNumber}`;
-    }
-
-    if (prev === "0") {
-      if (onlyNumber === "00") return "0";
-
-      return onlyNumber.slice(0, 2);
-    }
-
-    if (onlyNumber.startsWith("0")) {
-      return onlyNumber.slice(1, 3);
-    }
-
-    return onlyNumber.slice(0, 2);
-  };
-
   const handleValidityPeriodChange = (
     key: keyof ValidityPeriod,
     value: string,
   ) => {
+    const newValidityPeriod = { ...validityPeriod };
+
+    newValidityPeriod[key] = formatValidityPeriod(value, validityPeriod[key]);
+
     if (key === "month") {
-      if (value.length !== 0 && value.length <= 2)
-        if (
-          Number.isNaN(+value) ||
-          +value < 0 ||
-          +value > 12 ||
-          +value !== +parseInt(value)
-        )
+      const month = newValidityPeriod.month;
+      if (month.length !== 0)
+        if (!checkIsInt(+month) || !validateMonthRange(+month))
           return setStatus((prev) => ({ ...prev, month: "error" }));
       setStatus((prev) => ({ ...prev, month: "default" }));
     }
 
     if (key === "year") {
-      if (value.length !== 0)
-        if (Number.isNaN(+value) || +value < 0 || +value !== +parseInt(value))
+      const year = newValidityPeriod.year;
+      if (year.length !== 0)
+        if (!checkIsInt(+year) || !validateYearRange(+year))
           return setStatus((prev) => ({ ...prev, year: "error" }));
       setStatus((prev) => ({ ...prev, year: "default" }));
     }
-
-    const newValidityPeriod = { ...validityPeriod };
-
-    newValidityPeriod[key] = formatMonth(value, validityPeriod.month);
 
     onChange(newValidityPeriod);
   };
