@@ -14,3 +14,14 @@ export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardB
 export const isNumber = (value: string) => {
   return /^\d+$/.test(value);
 };
+
+export const isValidMonth = (value: string) => {
+  const num = Number(value);
+  return Number.isInteger(num) && num >= 1 && num <= 12;
+};
+
+export const isValidYear = (value: string) => {
+  const currentYear = new Date().getFullYear() % 100;
+  const num = Number(value);
+  return Number.isInteger(num) && num >= currentYear && num <= currentYear + 5;
+};
