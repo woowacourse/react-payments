@@ -3,12 +3,12 @@ import ValidationInput from './ValidationInput';
 import { validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
 import type { CardNumberSegments } from '../types';
 
-interface CardNumberInputProps {
+interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;
   onChange: ComponentProps<typeof ValidationInput>['onChange'];
 }
 
-function CardNumberInput(props: CardNumberInputProps) {
+function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
   return (
     <div>
       {props.value.map((el, index) => (
@@ -43,4 +43,4 @@ function CardNumberInput(props: CardNumberInputProps) {
   );
 }
 
-export default CardNumberInput;
+export default CardNumberSegmentsInput;
