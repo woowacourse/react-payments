@@ -17,10 +17,10 @@ export default function CardNumbersField() {
                     카드 번호
                 </legend>
                 <div css={inputGroupStyle}>
-                    <Input />
-                    <Input />
-                    <Input />
-                    <Input />
+                    <Input placeholder="1234" />
+                    <Input placeholder="1234" />
+                    <Input placeholder="1234" />
+                    <Input placeholder="1234" />
                 </div>
             </fieldset>
         </FormField>

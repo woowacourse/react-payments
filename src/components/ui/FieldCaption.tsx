@@ -1,4 +1,4 @@
-import { css, type SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 
 export default function FieldCaption({ variant = 'default', children }: { variant?: 'default' | 'error', children: React.ReactNode }) {
     return (
@@ -14,9 +14,9 @@ const fieldCaptionTypography = css`
 
 const variants = {
     default: css`
-    color: var(--color-text-caption);
+        color: var(--color-text-caption);
   `,
     error: css`
-    color: var(--color-text-error);
+        color: var(--color-text-error);
   `,
 };
