@@ -4,7 +4,7 @@ import { validateNumberString, validateStringLength, validateStringMaxLength } f
 
 interface CardNumberInputProps {
   value: [string, string, string, string];
-  onChange: ComponentProps<'input'>['onChange'];
+  onChange: ComponentProps<typeof ValidationInput>['onChange'];
 }
 
 function CardNumberInput(props: CardNumberInputProps) {
@@ -15,6 +15,7 @@ function CardNumberInput(props: CardNumberInputProps) {
           key={index}
           data-index={index}
           type="text"
+          inputMode="numeric"
           placeholder="1234"
           value={el}
           onChange={props.onChange}

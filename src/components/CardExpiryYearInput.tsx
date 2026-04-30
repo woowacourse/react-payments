@@ -9,6 +9,8 @@ export default function CardExpiryYearInput(props: CardExpiryYearInputProps) {
     <ValidationInput
       {...props}
       type="text"
+      inputMode="numeric"
+      autoComplete="cc-exp-year"
       placeholder="YY"
       validations={[
         {

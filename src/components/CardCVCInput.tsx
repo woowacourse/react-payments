@@ -9,6 +9,8 @@ function CardCVCInput(props: CardCVCInputProps) {
     <ValidationInput
       {...props}
       type="text"
+      inputMode="numeric"
+      autoComplete="cc-exp-csc"
       placeholder="CVC"
       validations={[
         {

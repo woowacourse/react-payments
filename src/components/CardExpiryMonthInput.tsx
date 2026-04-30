@@ -9,6 +9,8 @@ export default function CardExpiryMonthInput(props: CardExpiryMonthInputProps) {
     <ValidationInput
       {...props}
       type="text"
+      inputMode="numeric"
+      autoComplete="cc-exp-month"
       placeholder="MM"
       validations={[
         {
