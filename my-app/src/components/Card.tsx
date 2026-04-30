@@ -40,13 +40,15 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             border-radius: 4px;
           `}
         ></div>
-        <img
-          css={css`
-            width: 36px;
-            height: 22px;
-          `}
-          src={cardInfo.brand === "master" ? masterLogo : cardInfo.brand === "visa" ? visaLogo : undefined}
-        ></img>
+        {cardInfo.brand && (
+          <img
+            css={css`
+              width: 36px;
+              height: 22px;
+            `}
+            src={cardInfo.brand === "master" ? masterLogo : visaLogo}
+          />
+        )}
       </div>
 
       {/* 카드 정보 */}
