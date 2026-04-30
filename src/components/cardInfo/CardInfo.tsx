@@ -58,7 +58,7 @@ export default function CardInfo({
         <CardInfoInput inputTitle="카드 번호">
           {cardNumber.map((_: string, index: number) => (
             <InfoInput
-              key={index}
+              key={"card" + index}
               placeholder="1234"
               maxLength={4}
               value={cardNumber[index]}
@@ -73,17 +73,17 @@ export default function CardInfo({
           guide="카드 유효기간을 입력해 주세요"
           subGuide="월/년도(MMYY)를 순서대로 입력해 주세요."
         ></CardInfoHeader>
-        <CardInfoInput inputTitle="카드 번호">
+        <CardInfoInput inputTitle="유효기가">
           <InfoInput
             placeholder="MM"
             maxLength={2}
-            value={cardNumber[0]}
+            value={expireDate[0]}
             onChange={(e) => handleCardInfo(expireDate, setExpireDate, e, 0)}
           />
           <InfoInput
             placeholder="YY"
             maxLength={2}
-            value={cardNumber[1]}
+            value={expireDate[1]}
             onChange={(e) => handleCardInfo(expireDate, setExpireDate, e, 1)}
           />
         </CardInfoInput>
@@ -98,7 +98,7 @@ export default function CardInfo({
           <InfoInput
             placeholder="123"
             maxLength={3}
-            value={cardNumber[0]}
+            value={cvcNumber[0]}
             onChange={(e) => handleCardInfo(cvcNumber, setCvcNumber, e, 0)}
           />
         </CardInfoInput>
