@@ -2,6 +2,7 @@ const EXP_MONTH_RANGE_ERROR_MESSAGE = '유효기간 월은 1에서 12 사이의 
 const EXP_MONTH_LENGTH_ERROR_MESSAGE = '유효기간 월은 2개의 숫자로 이루어져야 합니다.';
 const EXP_YEAR_LENGTH_ERROR_MESSAGE = '유효기간 연도는 2개의 숫자로 이루어져야 합니다.';
 
+// TODO MM, YY중 하나 입력하면 에러 메세지 반환되게 조건문 수정
 export const getEXPNumberErrorMessage = (values: string[]) => {
     if (values.length !== 2) throw new Error('EXP 에러 메세지를 받기 위해선 length가 2인 배열이 필요합니다.');
 
