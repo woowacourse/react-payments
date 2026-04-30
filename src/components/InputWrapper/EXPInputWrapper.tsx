@@ -49,7 +49,6 @@ export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPI
                 onError={setError(1)}
                 onBlur={() => setHasTouched(true)}
                 onFocus={() => setHasTouched(false)}
-                // TODO 연도(YY)라 setError(1) 이어야함
             />
         </CardInputWrapper>
     );

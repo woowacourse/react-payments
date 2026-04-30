@@ -7,6 +7,7 @@ export const getEXPNumberErrorMessage = (values: string[]) => {
     if (values.length !== 2) throw new Error('EXP 에러 메세지를 받기 위해선 length가 2인 배열이 필요합니다.');
 
     if (values.some((value) => value === '')) return null;
+    // 이거 때문인 것 같은데 어떻게 처리하면 좋을까
 
     const monthString = values[0];
     const monthNumber = Number(values[0]);

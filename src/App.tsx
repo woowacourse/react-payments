@@ -22,7 +22,6 @@ function App() {
     };
 
     const [cvc, setCVC] = useState('');
-    // TODO 커링, useReducer 등의 상태 관리 방식 변경 고려
 
     return (
         <MainContainer>
