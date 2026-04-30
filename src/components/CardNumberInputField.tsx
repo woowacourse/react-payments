@@ -29,7 +29,7 @@ const CardNumberInputField = ({
 
   const handleCardNumberChange = (index: number, input: string) => {
     if (input.length !== 0)
-      if (!checkIsInt(+input) || validateCardNumberUnitRange(+input)) {
+      if (!checkIsInt(+input) || !validateCardNumberUnitRange(+input)) {
         setStatus((prev) => {
           const newInputsStatuses: InputsStatuses = [...prev];
           newInputsStatuses[index] = "error";
