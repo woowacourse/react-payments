@@ -1,23 +1,36 @@
 import { css } from "@emotion/react";
 import "./App.css";
-import Container from "./components/container";
 import type { CardInfo } from "./types.ts";
 import { useState } from "react";
 import Card from "./components/Card.tsx";
+import CardNumberInputSection from "../src/components/CardNumberInputSection.tsx";
+import CvcInputSection from "../src/components/CvcInputSection.tsx";
+import ExpiryDateInputSection from "../src/components/ExpiryDateInputSection.tsx";
+import { decideBrandName } from "./utils/decideBrandName.ts";
+import { useEffect } from "react";
 
 function App() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: [], brand: "" });
 
-  const cardNumberHandler = (cardInfo: string[], brand?: string) => {
+  useEffect(() => {
+    const brandName = cardInfo.numbers[0]?.length === 4 ? decideBrandName(cardInfo.numbers[0]) : "";
     setCardInfo((prev) => {
-      return { ...prev, numbers: cardInfo, brand: brand ?? "" };
+      return { ...prev, brand: brandName };
+    });
+  }, [cardInfo.numbers[0]]);
+
+  const cardNumberHandler = (cardInfo: string[]) => {
+    setCardInfo((prev) => {
+      return { ...prev, numbers: cardInfo };
     });
   };
+
   const expiryHandler = (cardInfo: string[]) => {
     setCardInfo((prev) => {
       return { ...prev, expiry: cardInfo };
     });
   };
+
   const cvcHandler = (cardInfo: string[]) => {
     setCardInfo((prev) => {
       return { ...prev, cvc: cardInfo };
@@ -41,10 +54,11 @@ function App() {
         `}
       >
         <Card cardInfo={cardInfo} />
+
         {/* form */}
-        <Container mode="CARD" onValueHandler={cardNumberHandler} />
-        <Container mode="EXP" onValueHandler={expiryHandler} />
-        <Container mode="CVC" onValueHandler={cvcHandler} />
+        <CardNumberInputSection onValueHandler={cardNumberHandler} />
+        <ExpiryDateInputSection onValueHandler={expiryHandler} />
+        <CvcInputSection onValueHandler={cvcHandler} />
       </div>
     </main>
   );
