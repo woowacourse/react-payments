@@ -3,21 +3,25 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import CardForm from '../components/CardForm';
 import type { CardFormState } from '../types';
 
-const meta = {
-  title: 'Components/CardForm',
-  component: CardForm,
-  tags: ['autodocs'],
-} satisfies Meta<typeof CardForm>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
 const emptyState: CardFormState = {
   cardNumberSegments: ['', '', '', ''],
   expiryMonth: '',
   expiryYear: '',
   cvc: '',
 };
+
+const meta = {
+  title: 'Components/CardForm',
+  component: CardForm,
+  tags: ['autodocs'],
+  args: {
+    formState: emptyState,
+    setFormState: () => {},
+  },
+} satisfies Meta<typeof CardForm>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 function Wrapper({ initialState }: { initialState: CardFormState }) {
   const [formState, setFormState] = useState<CardFormState>(initialState);

@@ -6,6 +6,10 @@ const meta = {
   title: 'Components/CardCVCInput',
   component: CardCVCInput,
   tags: ['autodocs'],
+  args: {
+    value: '',
+    onChange: () => {},
+  },
 } satisfies Meta<typeof CardCVCInput>;
 
 export default meta;

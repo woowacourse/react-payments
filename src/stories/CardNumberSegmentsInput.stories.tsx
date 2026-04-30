@@ -21,12 +21,7 @@ function Wrapper({ initialValue }: { initialValue: CardNumberSegments }) {
   return (
     <CardNumberSegmentsInput
       value={value}
-      onChange={(e) => {
-        const index = Number(e.currentTarget.dataset.index);
-        const next = [...value] as CardNumberSegments;
-        next[index] = e.target.value;
-        setValue(next);
-      }}
+      onChange={(newValue) => setValue(newValue)}
     />
   );
 }

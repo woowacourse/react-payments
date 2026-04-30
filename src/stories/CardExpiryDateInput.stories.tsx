@@ -6,6 +6,10 @@ const meta = {
   title: 'Components/CardExpiryDateInput',
   component: CardExpiryDateInput,
   tags: ['autodocs'],
+  args: {
+    value: { expiryMonth: '', expiryYear: '' },
+    onChange: () => {},
+  },
 } satisfies Meta<typeof CardExpiryDateInput>;
 
 export default meta;
@@ -15,16 +19,13 @@ function Wrapper({ initialMonth, initialYear }: { initialMonth: string; initialY
   const [expiryMonth, setExpiryMonth] = useState(initialMonth);
   const [expiryYear, setExpiryYear] = useState(initialYear);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const index = Number(e.currentTarget.dataset.index);
-    if (index === 0) setExpiryMonth(e.target.value);
-    else setExpiryYear(e.target.value);
-  };
-
   return (
     <CardExpiryDateInput
       value={{ expiryMonth, expiryYear }}
-      onChange={handleChange}
+      onChange={([month, year]) => {
+        setExpiryMonth(month);
+        setExpiryYear(year);
+      }}
     />
   );
 }
