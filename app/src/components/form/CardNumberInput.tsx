@@ -24,7 +24,7 @@ export function CardNumberInputContainer({
   });
 
   const validateIsNetworkBrand = (value: string, id: string): boolean => {
-    if (value !== "" && ![4, 5].includes(Number(value[0]))) {
+    if (value !== "" && !["4", "5"].includes(value[0])) {
       setError({
         ...isError,
         [id]: { state: true },
@@ -34,8 +34,8 @@ export function CardNumberInputContainer({
     }
     if (
       value.length === 2 &&
-      Number(value[0]) === 5 &&
-      ![1, 2, 3, 4, 5].includes(Number(value[1]))
+      value[0] === "5" &&
+      !["1", "2", "3", "4", "5"].includes(value[1])
     ) {
       setError({
         ...isError,
