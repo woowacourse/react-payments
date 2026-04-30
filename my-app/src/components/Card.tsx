@@ -35,21 +35,27 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             width: 36px;
             height: 22px;
           `}
-          src={cardInfo.brand === "MASTER" ? masterLogo : visaLogo}
+          src={cardInfo.brand === "master" ? masterLogo : visaLogo}
         ></img>
       </div>
 
       {/* 카드 정보 */}
       <div>
-        <p
+        <div
           css={css`
             color: #ffffff;
             font-size: 14px;
             font-weight: 500;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
           `}
         >
-          {cardInfo.numbers}
-        </p>
+          <span>{cardInfo.numbers[0]}</span>
+          <span>{cardInfo.numbers[1]}</span>
+          <span>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
+          <span>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
+        </div>
         <p
           css={css`
             color: #ffffff;
