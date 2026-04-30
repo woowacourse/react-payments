@@ -5,11 +5,10 @@ export default function PreviewCardExpireDate({
 }: {
   expireDate: string[];
 }) {
+  const formatted = expireDate.filter(Boolean).join("/");
   return (
     <CardNumberWrapper>
-      <CardNumberParagraph>
-        {expireDate[0] + "/" + expireDate[1]}
-      </CardNumberParagraph>
+      <CardNumberParagraph>{formatted}</CardNumberParagraph>
     </CardNumberWrapper>
   );
 }
