@@ -29,6 +29,10 @@ export function CardPreview({
 }
 
 const CardContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 212px;
   height: 132px;
   border-radius: 4px;
@@ -46,13 +50,17 @@ const CardContainer = styled.div`
 
   .card-meta {
     display: flex;
+    position: absolute;
+    box-sizing: border-box;
     justify-content: space-between;
+    width: 100%;
+    top: 0;
+    padding: 8px 12px;
   }
 
   .card-contents {
     display: flex;
     flex-direction: column;
-    height: 80%;
     justify-content: center;
     gap: 0.5rem;
   }
