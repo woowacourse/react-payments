@@ -52,8 +52,7 @@ function App() {
                 </CardInfoSection>
 
                 <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC">
-                    {/* TODO CVC value도 통일성을 위해 배열로 주는게 맞을까? */}
-                    <CVCInputWrapper setCVCNumber={setCVC} validator={getCVCumberErrorMessage} value={[cvc]} />
+                    <CVCInputWrapper setCVCNumber={setCVC} validator={getCVCumberErrorMessage} value={cvc} />
                 </CardInfoSection>
             </InputSectionContainer>
         </MainContainer>
