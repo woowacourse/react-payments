@@ -1,28 +1,21 @@
 import styled from "@emotion/styled";
+import { useContext } from "react";
+import { CardContext } from "../Card.tsx";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
-import type { CardNumberType } from "../../types/cardNumber.ts";
-import type { CardExpiryDateType } from "../../types/cardExpiryDate.ts";
 
-export function CardPreview({
-  cardNumber,
-  cardExpiryDate,
-  networkBrand,
-}: {
-  cardNumber: CardNumberType;
-  cardExpiryDate: CardExpiryDateType;
-  networkBrand: string;
-}) {
+export function CardPreview() {
+  const { networkBrand } = useContext(CardContext);
   return (
     <CardContainer>
       <div className="card-meta">
         <div className="ic-chip"></div>
-        {networkBrand && <CardNetworkBrand brand={networkBrand} />}
+        {networkBrand && <CardNetworkBrand networkBrand={networkBrand} />}
       </div>
       <div className="card-contents">
-        <CardNumber cardNumber={cardNumber} />
-        <CardExpiryDate cardExpiryDate={cardExpiryDate} />
+        <CardNumber />
+        <CardExpiryDate />
       </div>
     </CardContainer>
   );

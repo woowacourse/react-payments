@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { Validator } from "../../validators/CardValidator";
 import { CardFieldset, CardLegend, CardInput } from "../../style/CardInput";
+import { CardContext } from "../Card";
 
-export function CardNumberInputContainer({
-  cardNumber,
-  setCardNumber,
-  setNetworkBrand,
-}) {
+export function CardNumberInputContainer() {
+  const { cardNumber, setCardNumber, setNetworkBrand } =
+    useContext(CardContext);
+
   const [isError, setError] = useState({
     "first-digits": {
       state: false,

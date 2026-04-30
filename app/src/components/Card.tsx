@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import { CardPreview } from "./preview/CardPreview.tsx";
 import { CardForm } from "./form/CardForm.tsx";
 import styled from "@emotion/styled";
+
+export const CardContext = createContext(null);
 
 export function Card() {
   const [cardNumber, setCardNumber] = useState({
@@ -19,20 +21,21 @@ export function Card() {
   const [networkBrand, setNetworkBrand] = useState("");
 
   return (
-    <CardContainer>
-      <CardPreview
-        cardNumber={cardNumber}
-        cardExpiryDate={cardExpiryDate}
-        networkBrand={networkBrand}
-      />
-      <CardForm
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-        cardExpiryDate={cardExpiryDate}
-        setCardExpiryDate={setCardExpiryDate}
-        setNetworkBrand={setNetworkBrand}
-      />
-    </CardContainer>
+    <CardContext
+      value={{
+        cardNumber,
+        cardExpiryDate,
+        networkBrand,
+        setCardNumber,
+        setCardExpiryDate,
+        setNetworkBrand,
+      }}
+    >
+      <CardContainer>
+        <CardPreview />
+        <CardForm />
+      </CardContainer>
+    </CardContext>
   );
 }
 

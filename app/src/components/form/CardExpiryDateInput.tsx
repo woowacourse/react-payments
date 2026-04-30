@@ -1,12 +1,11 @@
 import { CardInput, CardFieldset, CardLegend } from "../../style/CardInput";
 import { Validator } from "../../validators/CardValidator";
-import { useState } from "react";
+import { CardContext } from "../Card";
+import { useState, useContext } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 
-export function CardExpiryDateInputContainer({
-  cardExpiryDate,
-  setCardExpiryDate,
-}) {
+export function CardExpiryDateInputContainer() {
+  const { cardExpiryDate, setCardExpiryDate } = useContext(CardContext);
   const [isError, setError] = useState({
     "expiry-month": {
       state: false,

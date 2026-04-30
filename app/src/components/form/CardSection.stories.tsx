@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { CardContext } from "../Card";
 
 import { CardSection } from "./CardSection";
 import { CardNumberInputContainer } from "./CardNumberInput";
@@ -28,16 +29,23 @@ export const CardNumberInputSection: Story = {
     });
     const [, setNetworkBrand] = useState("");
     return (
-      <CardSection
-        title="결제할 카드 번호를 입력해 주세요"
-        subTitle="본인 명의의 카드만 결제 가능합니다."
+      <CardContext
+        value={{
+          cardNumber,
+          setCardNumber,
+          networkBrand: "",
+          setNetworkBrand,
+          cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
+          setCardExpiryDate: () => {},
+        }}
       >
-        <CardNumberInputContainer
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-          setNetworkBrand={setNetworkBrand}
-        />
-      </CardSection>
+        <CardSection
+          title="결제할 카드 번호를 입력해 주세요"
+          subTitle="본인 명의의 카드만 결제 가능합니다."
+        >
+          <CardNumberInputContainer />
+        </CardSection>
+      </CardContext>
     );
   },
 };
@@ -50,15 +58,28 @@ export const CardExpiryDateInputSection: Story = {
       "expiry-year": "",
     });
     return (
-      <CardSection
-        title="카드 유효기간을 입력해 주세요"
-        subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."
+      <CardContext
+        value={{
+          cardNumber: {
+            "first-digits": "",
+            "second-digits": "",
+            "third-digits": "",
+            "fourth-digits": "",
+          },
+          setCardNumber: () => {},
+          networkBrand: "",
+          setNetworkBrand: () => {},
+          cardExpiryDate,
+          setCardExpiryDate,
+        }}
       >
-        <CardExpiryDateInputContainer
-          cardExpiryDate={cardExpiryDate}
-          setCardExpiryDate={setCardExpiryDate}
-        />
-      </CardSection>
+        <CardSection
+          title="카드 유효기간을 입력해 주세요"
+          subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."
+        >
+          <CardExpiryDateInputContainer />
+        </CardSection>
+      </CardContext>
     );
   },
 };

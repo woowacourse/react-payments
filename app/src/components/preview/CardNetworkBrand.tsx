@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import MasterCard from "../../assets/Mastercard.svg";
 import VisaCard from "../../assets/visa-logo.svg";
 
-export function CardNetworkBrand({ brand }: { brand: string }) {
+export function CardNetworkBrand({ networkBrand }) {
   const selectBrandImage = (brand: string) => {
     if (brand === "visa") return VisaCard;
     if (brand === "master") return MasterCard;
@@ -11,8 +11,8 @@ export function CardNetworkBrand({ brand }: { brand: string }) {
   return (
     <CardNetworkBrandContainer>
       <img
-        src={selectBrandImage(brand)}
-        alt={`${brand}-network-brand-logo`}
+        src={selectBrandImage(networkBrand)}
+        alt={`${networkBrand}-network-brand-logo`}
       ></img>
     </CardNetworkBrandContainer>
   );

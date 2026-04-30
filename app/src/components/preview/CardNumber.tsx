@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
+import { useContext } from "react";
+import { CardContext } from "../Card";
 
-export function CardNumber({ cardNumber }) {
+export function CardNumber() {
+  const { cardNumber } = useContext(CardContext);
+
   return (
     <CardNumberContainer>
       <span>{cardNumber["first-digits"]}</span>

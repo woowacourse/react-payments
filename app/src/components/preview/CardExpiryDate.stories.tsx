@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-
+import { CardContext } from "../Card";
 import { CardExpiryDate } from "./CardExpiryDate";
 
 const meta = {
@@ -9,42 +9,49 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  args: {
-    cardExpiryDate: {
-      "expiry-month": "",
-      "expiry-year": "",
-    },
-  },
 } satisfies Meta<typeof CardExpiryDate>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Empty: Story = {};
+const defaultCardNumber = {
+  "first-digits": "",
+  "second-digits": "",
+  "third-digits": "",
+  "fourth-digits": "",
+};
+
+const renderWithContext = (cardExpiryDate: {
+  "expiry-month": string;
+  "expiry-year": string;
+}) =>
+  () => (
+    <CardContext
+      value={{
+        cardNumber: defaultCardNumber,
+        cardExpiryDate,
+        networkBrand: "",
+        setCardNumber: () => {},
+        setCardExpiryDate: () => {},
+        setNetworkBrand: () => {},
+      }}
+    >
+      <CardExpiryDate />
+    </CardContext>
+  );
+
+export const Empty: Story = {
+  render: renderWithContext({ "expiry-month": "", "expiry-year": "" }),
+};
 
 export const MonthPartiallyFilled: Story = {
-  args: {
-    cardExpiryDate: {
-      "expiry-month": "1",
-      "expiry-year": "",
-    },
-  },
+  render: renderWithContext({ "expiry-month": "1", "expiry-year": "" }),
 };
 
 export const MonthFilledWithSlash: Story = {
-  args: {
-    cardExpiryDate: {
-      "expiry-month": "12",
-      "expiry-year": "",
-    },
-  },
+  render: renderWithContext({ "expiry-month": "12", "expiry-year": "" }),
 };
 
 export const FullyFilled: Story = {
-  args: {
-    cardExpiryDate: {
-      "expiry-month": "12",
-      "expiry-year": "26",
-    },
-  },
+  render: renderWithContext({ "expiry-month": "12", "expiry-year": "26" }),
 };

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
+import { CardContext } from "../Card";
 
 import { CardNumberInputContainer } from "./CardNumberInput";
 
@@ -16,37 +17,36 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultArgs = {
-  cardNumber: {
+const renderWithContext = () => {
+  const [cardNumber, setCardNumber] = useState({
     "first-digits": "",
     "second-digits": "",
     "third-digits": "",
     "fourth-digits": "",
-  },
-  setCardNumber: null,
-  setNetworkBrand: null,
-};
-
-const renderWithState = (args: typeof defaultArgs) => {
-  const [cardNumber, setCardNumber] = useState(args.cardNumber);
+  });
   const [, setNetworkBrand] = useState("");
   return (
-    <CardNumberInputContainer
-      cardNumber={cardNumber}
-      setCardNumber={setCardNumber}
-      setNetworkBrand={setNetworkBrand}
-    />
+    <CardContext
+      value={{
+        cardNumber,
+        setCardNumber,
+        networkBrand: "",
+        setNetworkBrand,
+        cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
+        setCardExpiryDate: () => {},
+      }}
+    >
+      <CardNumberInputContainer />
+    </CardContext>
   );
 };
 
 export const base: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
 };
 
 export const invalidInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole("textbox");
@@ -56,8 +56,7 @@ export const invalidInput: Story = {
 };
 
 export const invalidCardNumber: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole("textbox");
@@ -67,8 +66,7 @@ export const invalidCardNumber: Story = {
 };
 
 export const invalidMastercard: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole("textbox");
@@ -91,57 +89,55 @@ const createNoNetworkBrandValidationPlay =
   };
 
 export const noNetworkBrandValidationOnSecondInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: createNoNetworkBrandValidationPlay(1),
 };
 
 export const noNetworkBrandValidationOnThirdInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: createNoNetworkBrandValidationPlay(2),
 };
 
 export const noNetworkBrandValidationOnFourthInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: createNoNetworkBrandValidationPlay(3),
 };
 
 export const incompleteLengthOnBlur: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, secondInput] = canvas.getAllByRole("textbox");
     await userEvent.type(secondInput, "12");
     await userEvent.tab();
     await expect(
-      canvas.getByText("각 항목은 4자리여야 합니다."),
+      canvas.getByText("카드 번호 각 항목은 4자리여야 합니다."),
     ).toBeInTheDocument();
   },
 };
 
 export const emptyInputOnBlur: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, secondInput] = canvas.getAllByRole("textbox");
     await userEvent.click(secondInput);
     await userEvent.tab();
-    await expect(canvas.queryByText("각 항목은 4자리여야 합니다.")).toBeNull();
+    await expect(
+      canvas.queryByText("카드 번호 각 항목은 4자리여야 합니다."),
+    ).toBeNull();
   },
 };
 
 export const completeLengthOnBlur: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, secondInput] = canvas.getAllByRole("textbox");
     await userEvent.type(secondInput, "1234");
     await userEvent.tab();
-    await expect(canvas.queryByText("각 항목은 4자리여야 합니다.")).toBeNull();
+    await expect(
+      canvas.queryByText("카드 번호 각 항목은 4자리여야 합니다."),
+    ).toBeNull();
   },
 };

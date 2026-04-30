@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
+import { CardContext } from "../Card";
 
 import { CardExpiryDateInputContainer } from "./CardExpiryDateInput";
 
@@ -16,32 +17,38 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultArgs = {
-  cardExpiryDate: {
+const renderWithContext = () => {
+  const [cardExpiryDate, setCardExpiryDate] = useState({
     "expiry-month": "",
     "expiry-year": "",
-  },
-  setCardExpiryDate: null,
-};
-
-const renderWithState = (args: typeof defaultArgs) => {
-  const [cardExpiryDate, setCardExpiryDate] = useState(args.cardExpiryDate);
+  });
   return (
-    <CardExpiryDateInputContainer
-      cardExpiryDate={cardExpiryDate}
-      setCardExpiryDate={setCardExpiryDate}
-    />
+    <CardContext
+      value={{
+        cardNumber: {
+          "first-digits": "",
+          "second-digits": "",
+          "third-digits": "",
+          "fourth-digits": "",
+        },
+        setCardNumber: () => {},
+        networkBrand: "",
+        setNetworkBrand: () => {},
+        cardExpiryDate,
+        setCardExpiryDate,
+      }}
+    >
+      <CardExpiryDateInputContainer />
+    </CardContext>
   );
 };
 
 export const Base: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
 };
 
 export const InvalidMonthInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [monthInput] = canvas.getAllByRole("textbox");
@@ -51,8 +58,7 @@ export const InvalidMonthInput: Story = {
 };
 
 export const InvalidMonthStartDigit: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [monthInput] = canvas.getAllByRole("textbox");
@@ -62,8 +68,7 @@ export const InvalidMonthStartDigit: Story = {
 };
 
 export const InvalidMonthRange: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [monthInput] = canvas.getAllByRole("textbox");
@@ -73,8 +78,7 @@ export const InvalidMonthRange: Story = {
 };
 
 export const InvalidYearInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, yearInput] = canvas.getAllByRole("textbox");
@@ -84,8 +88,7 @@ export const InvalidYearInput: Story = {
 };
 
 export const InvalidPastYear: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, yearInput] = canvas.getAllByRole("textbox");
@@ -95,8 +98,7 @@ export const InvalidPastYear: Story = {
 };
 
 export const InvalidMonthLength: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [monthInput] = canvas.getAllByRole("textbox");
@@ -107,8 +109,7 @@ export const InvalidMonthLength: Story = {
 };
 
 export const InvalidYearLength: Story = {
-  args: defaultArgs,
-  render: renderWithState,
+  render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, yearInput] = canvas.getAllByRole("textbox");

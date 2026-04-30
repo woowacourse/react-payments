@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-
+import { CardContext } from "../Card";
 import { CardNumber } from "./CardNumber";
 
 const meta = {
@@ -9,61 +9,75 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  args: {
-    cardNumber: {
-      "first-digits": "",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
-    },
-  },
 } satisfies Meta<typeof CardNumber>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Empty: Story = {};
+const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
+
+const renderWithContext = (cardNumber: {
+  "first-digits": string;
+  "second-digits": string;
+  "third-digits": string;
+  "fourth-digits": string;
+}) =>
+  () => (
+    <CardContext
+      value={{
+        cardNumber,
+        cardExpiryDate: defaultCardExpiryDate,
+        networkBrand: "",
+        setCardNumber: () => {},
+        setCardExpiryDate: () => {},
+        setNetworkBrand: () => {},
+      }}
+    >
+      <CardNumber />
+    </CardContext>
+  );
+
+export const Empty: Story = {
+  render: renderWithContext({
+    "first-digits": "",
+    "second-digits": "",
+    "third-digits": "",
+    "fourth-digits": "",
+  }),
+};
 
 export const FirstGroupFilled: Story = {
-  args: {
-    cardNumber: {
-      "first-digits": "1234",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
-    },
-  },
+  render: renderWithContext({
+    "first-digits": "1234",
+    "second-digits": "",
+    "third-digits": "",
+    "fourth-digits": "",
+  }),
 };
 
 export const SecondGroupFilled: Story = {
-  args: {
-    cardNumber: {
-      "first-digits": "1234",
-      "second-digits": "5678",
-      "third-digits": "",
-      "fourth-digits": "",
-    },
-  },
+  render: renderWithContext({
+    "first-digits": "1234",
+    "second-digits": "5678",
+    "third-digits": "",
+    "fourth-digits": "",
+  }),
 };
 
 export const ThirdGroupMasked: Story = {
-  args: {
-    cardNumber: {
-      "first-digits": "1234",
-      "second-digits": "5678",
-      "third-digits": "9012",
-      "fourth-digits": "",
-    },
-  },
+  render: renderWithContext({
+    "first-digits": "1234",
+    "second-digits": "5678",
+    "third-digits": "9012",
+    "fourth-digits": "",
+  }),
 };
 
 export const FullyFilledAndMasked: Story = {
-  args: {
-    cardNumber: {
-      "first-digits": "1234",
-      "second-digits": "5678",
-      "third-digits": "9012",
-      "fourth-digits": "3456",
-    },
-  },
+  render: renderWithContext({
+    "first-digits": "1234",
+    "second-digits": "5678",
+    "third-digits": "9012",
+    "fourth-digits": "3456",
+  }),
 };
