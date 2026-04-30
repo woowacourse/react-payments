@@ -30,6 +30,29 @@ export function CardCVCInputWrapper() {
     setCardCVC(e.target.value);
   };
 
+  const validateCVCLength = (
+    value: string,
+    id: string,
+    limit: number,
+  ): boolean => {
+    if (![0, limit].includes(value.length)) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "CVC는 3자리여야 합니다.",
+      });
+      return false;
+    }
+    setError({ ...isError, [id]: { state: false }, message: "" });
+    return true;
+  };
+
+  const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    if (!validateCVCLength(value, id, e.target.maxLength)) return;
+  };
+
   return (
     <CardCVCContainer>
       <CardCVCLabel htmlFor="card-cvc-input">CVC</CardCVCLabel>
@@ -41,6 +64,7 @@ export function CardCVCInputWrapper() {
         id="card-cvc-input"
         value={cardCVC}
         onChange={changeCardCVC}
+        onBlur={handleBlurCVC}
       />
       <ErrorMessage message={isError["message"]} />
     </CardCVCContainer>

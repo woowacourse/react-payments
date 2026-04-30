@@ -84,6 +84,29 @@ export function CardExpiryDateInputContainer({
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
+  const validateCardExpiryDateLength = (
+    value: string,
+    id: string,
+    limit: number,
+  ): boolean => {
+    if (![0, limit].includes(value.length)) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "각 항목은 2자리여야 합니다.",
+      });
+      return false;
+    }
+    setError({ ...isError, [id]: { state: false }, message: "" });
+    return true;
+  };
+
+  const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    if (!validateCardExpiryDateLength(value, id, e.target.maxLength)) return;
+  };
+
   return (
     <>
       <CardExpiryDateFieldset>
@@ -93,6 +116,7 @@ export function CardExpiryDateInputContainer({
           inputMode="numeric"
           id="expiry-month"
           onChange={changeCardExpiryMonth}
+          onBlur={handleBlurCardExpiryDate}
           maxLength={2}
           value={cardExpiryDate["expiry-month"]}
           isError={isError["expiry-month"].state}
@@ -103,6 +127,7 @@ export function CardExpiryDateInputContainer({
           inputMode="numeric"
           id="expiry-year"
           onChange={changeCardExpiryYear}
+          onBlur={handleBlurCardExpiryDate}
           maxLength={2}
           value={cardExpiryDate["expiry-year"]}
           isError={isError["expiry-year"].state}

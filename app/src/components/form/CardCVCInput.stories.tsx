@@ -25,3 +25,13 @@ export const InvalidTypeInput: Story = {
     await expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeInTheDocument();
   },
 };
+
+export const InvalidCVCLength: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole("textbox");
+    await userEvent.type(input, "12");
+    await userEvent.tab();
+    await expect(canvas.getByText("CVC는 3자리여야 합니다.")).toBeInTheDocument();
+  },
+};
