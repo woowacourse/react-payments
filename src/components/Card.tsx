@@ -12,8 +12,8 @@ interface CardProps {
 const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
   const { month, year } = validityPeriod;
   const CardValidityPeriodUnitString = `${
-    month.length === 0 ? "" : +month < 10 ? "0" + month + "/" : month + "/"
-  }${year.length === 0 ? "" : +year < 10 ? "0" + year : year}`;
+    month ? month + "/" : ""
+  }${year ? year : ""}`;
 
   return (
     <Wrapper>

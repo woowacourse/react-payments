@@ -72,11 +72,8 @@ const CardValidityPeriodInputField = ({
 
     const newValidityPeriod = { ...validityPeriod };
 
-    if (key === "month") {
-      newValidityPeriod[key] = formatMonth(value, validityPeriod.month);
-    } else {
-      newValidityPeriod[key] = value.slice(0, 2);
-    }
+    newValidityPeriod[key] = formatMonth(value, validityPeriod.month);
+
     onChange(newValidityPeriod);
   };
 
