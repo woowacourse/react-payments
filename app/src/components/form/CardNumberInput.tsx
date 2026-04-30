@@ -74,6 +74,29 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
     setCardNumber({ ...cardNumber, [id]: value });
   };
 
+  const validateCardNumberLength = (
+    value: string,
+    id: string,
+    limit: number,
+  ): boolean => {
+    if (![0, limit].includes(value.length)) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "각 항목은 4자리여야 합니다.",
+      });
+      return false;
+    }
+    setError({ ...isError, [id]: { state: false }, message: "" });
+    return true;
+  };
+
+  const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    if (!validateCardNumberLength(value, id, e.target.maxLength)) return;
+  };
+
   return (
     <>
       <CardNumberFieldset>
@@ -85,6 +108,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
           inputMode="numeric"
           value={cardNumber["first-digits"]}
           onChange={changeFirstDigitsCardNumber}
+          onBlur={handleBlurCardNumber}
           placeholder="1234"
           isError={isError["first-digits"].state}
         />
@@ -95,6 +119,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
           inputMode="numeric"
           value={cardNumber["second-digits"]}
           onChange={changeCardNumber}
+          onBlur={handleBlurCardNumber}
           placeholder="1234"
           isError={isError["second-digits"].state}
         />
@@ -105,6 +130,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
           inputMode="numeric"
           value={cardNumber["third-digits"]}
           onChange={changeCardNumber}
+          onBlur={handleBlurCardNumber}
           placeholder="1234"
           isError={isError["third-digits"].state}
         />
@@ -115,6 +141,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
           inputMode="numeric"
           value={cardNumber["fourth-digits"]}
           onChange={changeCardNumber}
+          onBlur={handleBlurCardNumber}
           placeholder="1234"
           isError={isError["fourth-digits"].state}
         />

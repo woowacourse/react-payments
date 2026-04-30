@@ -104,3 +104,41 @@ export const noNetworkBrandValidationOnFourthInput: Story = {
   render: renderWithState,
   play: createNoNetworkBrandValidationPlay(3),
 };
+
+export const incompleteLengthOnBlur: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [, secondInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(secondInput, "12");
+    await userEvent.tab();
+    await expect(
+      canvas.getByText("각 항목은 4자리여야 합니다."),
+    ).toBeInTheDocument();
+  },
+};
+
+export const emptyInputOnBlur: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [, secondInput] = canvas.getAllByRole("textbox");
+    await userEvent.click(secondInput);
+    await userEvent.tab();
+    await expect(canvas.queryByText("각 항목은 4자리여야 합니다.")).toBeNull();
+  },
+};
+
+export const completeLengthOnBlur: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [, secondInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(secondInput, "1234");
+    await userEvent.tab();
+    await expect(canvas.queryByText("각 항목은 4자리여야 합니다.")).toBeNull();
+  },
+};
