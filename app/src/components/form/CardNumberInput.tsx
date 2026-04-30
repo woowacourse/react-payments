@@ -4,11 +4,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
   const changeCardNumber = (e: any) => {
     const value = e.target.value;
     const id = e.target.id;
-    const fourDigits = cardNumber[id];
-
-    if (fourDigits.length < 4) {
-      setCardNumber({ ...cardNumber, [id]: value });
-    }
+    setCardNumber({ ...cardNumber, [id]: value });
   };
 
   return (
@@ -16,36 +12,36 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
       <CardNumberLegend>카드 번호</CardNumberLegend>
       <CardNumberInput
         id="first-digits"
-        type="number"
-        minLength={1}
+        type="text"
         maxLength={4}
+        inputMode="numeric"
         value={cardNumber["first-digits"]}
         onChange={changeCardNumber}
         placeholder="1234"
       />
       <CardNumberInput
         id="second-digits"
-        type="number"
-        minLength={1}
+        type="text"
         maxLength={4}
+        inputMode="numeric"
         value={cardNumber["second-digits"]}
         onChange={changeCardNumber}
         placeholder="1234"
       />
       <CardNumberInput
         id="third-digits"
-        type="number"
-        minLength={1}
+        type="text"
         maxLength={4}
+        inputMode="numeric"
         value={cardNumber["third-digits"]}
         onChange={changeCardNumber}
         placeholder="1234"
       />
       <CardNumberInput
         id="fourth-digits"
-        type="number"
-        minLength={1}
+        type="text"
         maxLength={4}
+        inputMode="numeric"
         value={cardNumber["fourth-digits"]}
         onChange={changeCardNumber}
         placeholder="1234"

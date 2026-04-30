@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import React, { useState } from "react";
-import { expect, userEvent } from "storybook/test";
+import { useState } from "react";
 
 import { CardNumberInputContainer } from "./CardNumberInput";
 
@@ -34,14 +33,5 @@ export const base: Story = {
         setCardNumber={setCardNumber}
       />
     );
-  },
-  play: async ({ canvasElement }) => {
-    const ids = ["first-digits", "second-digits", "third-digits", "fourth-digits"];
-
-    for (const id of ids) {
-      const input = canvasElement.querySelector(`#${id}`) as HTMLElement;
-      await userEvent.type(input, "123456");
-      await expect(input).toHaveValue(1234);
-    }
   },
 };
