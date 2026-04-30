@@ -16,6 +16,7 @@ export default function CardNumberInputWrapper({ validator, setCardNumber, value
         setInputErrors((prev) => prev.with(index, message));
     };
 
+    // TODO 이거 중복되는 부분 없애기
     const inputError =
         inputErrors.find((err) => err !== null) ?? null
             ? inputErrors.find((err) => err !== null) ?? null
