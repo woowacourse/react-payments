@@ -11,12 +11,7 @@ type ExpirationDate = {
 };
 
 export const Payments = () => {
-  const [cardNumber, setCardNumber] = useState({
-    '0': '',
-    '1': '',
-    '2': '',
-    '3': '',
-  });
+  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
 
   // expirationDate 관련 상태값 -- start
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
@@ -36,6 +31,29 @@ export const Payments = () => {
     const regex = /^(0[1-9]|1[0-2])$/;
     return regex.test(month);
   };
+
+  // cardNumber --------------------------
+
+  const handleErrorMessageCardNumbers = (cardNumbers: string[]) => {
+    if (!cardNumbers.every(isNumericString)) return '숫자만 입력 가능합니다';
+    return '';
+  };
+
+  // 밸리데이터를 하면
+  // const checkValidateCardNumber = (value: string) => {
+  //   if (!isNumericString(value)) return
+  //   if (value.length > 4) return '카드 번호는 4자리로 입력해 주세요';
+  //   return null;
+  // };
+
+  const handleChangeCardNumber = (index: number, value: string) => {
+    // if (!checkValidateCardNumber(value)) return;
+    const next = [...cardNumbers];
+    next[index] = value;
+    setCardNumbers(next);
+  };
+
+  //--------------------------------
 
   const checkValidateExpirationDateMonth = (month: string) => {
     if (month.length !== 2) return false;
@@ -75,23 +93,22 @@ export const Payments = () => {
         title="결제할 카드 번호를 입력해 주세요"
         subTitle="본인 명의의 카드만 결제 가능합니다."
         label="카드 번호"
-        errorMessage="errorMessage"
+        errorMessage={handleErrorMessageCardNumbers(cardNumbers)}
       >
-        {Object.keys(cardNumber).map((key) => {
-          return (
-            <Input
-              value={cardNumber[key as keyof typeof cardNumber]}
-              onChange={(e) => setCardNumber({ ...cardNumber, [key]: e.target.value })}
-            />
-          );
-        })}
+        {cardNumbers.map((value, index) => (
+          <Input
+            key={index}
+            value={value}
+            maxLength={4}
+            onChange={(e) => handleChangeCardNumber(index, e.target.value)}
+          />
+        ))}
       </FormGroup>
       <FormGroup
         title="카드 유효기간을 입력해 주세요"
         subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
         label="유효기간"
-        isError={!isExpirationDateValid}
-        errorMessage={'날짜 오류'}
+        errorMessage={!isExpirationDateValid ? '날짜 오류' : ''}
       >
         <Input
           value={expirationDate.month}

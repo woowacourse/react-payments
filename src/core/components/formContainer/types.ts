@@ -4,5 +4,4 @@ export interface FormContainerProps {
   label?: string;
   children?: ReactNode;
   errorMessage?: string;
-  isError?: boolean;
 }

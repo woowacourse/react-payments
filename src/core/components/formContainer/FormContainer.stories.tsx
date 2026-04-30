@@ -26,8 +26,7 @@ export const Default: Story = {
   args: {
     label: '카드 번호',
     children: mocking,
-    errorMessage: '숫자만 입력이 가능합니다',
-    isError: false,
+    errorMessage: '',
   },
 };
 
@@ -36,6 +35,5 @@ export const IsError: Story = {
     label: '카드 번호',
     children: mocking,
     errorMessage: '숫자만 입력이 가능합니다',
-    isError: true,
   },
 };
