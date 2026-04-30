@@ -9,6 +9,7 @@ export function CardForm({
   setCardNumber,
   cardExpiryDate,
   setCardExpiryDate,
+  setNetworkBrand,
 }) {
   return (
     <CardFormContainer>
@@ -19,6 +20,7 @@ export function CardForm({
         <CardNumberInputContainer
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
+          setNetworkBrand={setNetworkBrand}
         />
       </CardSection>
       <CardSection

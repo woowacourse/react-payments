@@ -8,15 +8,17 @@ import type { CardExpiryDateType } from "../types/cardExpiryDate.ts";
 export function CardPreview({
   cardNumber,
   cardExpiryDate,
+  networkBrand,
 }: {
   cardNumber: CardNumberType;
   cardExpiryDate: CardExpiryDateType;
+  networkBrand: string;
 }) {
   return (
     <CardContainer>
       <div className="card-meta">
         <div className="ic-chip"></div>
-        <CardNetworkBrand brand="visa" />
+        {networkBrand && <CardNetworkBrand brand={networkBrand} />}
       </div>
       <div className="card-contents">
         <CardNumber cardNumber={cardNumber} />

@@ -17,15 +17,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const master: Story = {
+export const Master: Story = {
   args: {
     brand: "master",
   },
 };
 
-export const visa: Story = {
+export const Visa: Story = {
   args: {
     brand: "visa",
+  },
+};
+
+export const Unknown: Story = {
+  args: {
+    brand: "",
   },
 };

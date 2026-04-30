@@ -16,14 +16,21 @@ function App() {
     "expiry-year": "",
   });
 
+  const [networkBrand, setNetworkBrand] = useState("");
+
   return (
     <AppContainer>
-      <CardPreview cardNumber={cardNumber} cardExpiryDate={cardExpiryDate} />
+      <CardPreview
+        cardNumber={cardNumber}
+        cardExpiryDate={cardExpiryDate}
+        networkBrand={networkBrand}
+      />
       <CardForm
         cardNumber={cardNumber}
         setCardNumber={setCardNumber}
         cardExpiryDate={cardExpiryDate}
         setCardExpiryDate={setCardExpiryDate}
+        setNetworkBrand={setNetworkBrand}
       />
     </AppContainer>
   );

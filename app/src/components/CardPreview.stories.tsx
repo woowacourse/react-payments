@@ -20,6 +20,7 @@ const meta = {
       "expiry-month": "",
       "expiry-year": "",
     },
+    networkBrand: "",
   },
 } satisfies Meta<typeof CardPreview>;
 

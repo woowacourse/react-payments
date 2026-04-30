@@ -10,7 +10,10 @@ export function CardNetworkBrand({ brand }: { brand: string }) {
 
   return (
     <CardNetworkBrandContainer>
-      <img src={selectBrandImage(brand)}></img>
+      <img
+        src={selectBrandImage(brand)}
+        alt={`${brand}-network-brand-logo`}
+      ></img>
     </CardNetworkBrandContainer>
   );
 }

@@ -2,7 +2,11 @@ import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import styled from "@emotion/styled";
 
-export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
+export function CardNumberInputContainer({
+  cardNumber,
+  setCardNumber,
+  setNetworkBrand,
+}) {
   const [isError, setError] = useState({
     "first-digits": {
       state: false,
@@ -71,6 +75,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
     const id = e.target.id;
     if (!validateIsNumber(value, id)) return;
     if (!validateIsNetworkBrand(value, id)) return;
+    handleNetworkBrand(value);
     setCardNumber({ ...cardNumber, [id]: value });
   };
 
@@ -89,6 +94,18 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
     }
     setError({ ...isError, [id]: { state: false }, message: "" });
     return true;
+  };
+
+  const handleNetworkBrand = (value: string) => {
+    if (value.startsWith("4")) {
+      setNetworkBrand("visa");
+      return;
+    }
+    if (value.startsWith("5") && ["1", "2", "3", "4", "5"].includes(value[1])) {
+      setNetworkBrand("master");
+      return;
+    }
+    setNetworkBrand("");
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
