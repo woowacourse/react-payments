@@ -1,10 +1,32 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
+import { ErrorMessage } from "./ErrorMessage";
 
 export function CardCVCInputWrapper() {
   const [cardCVC, setCardCVC] = useState("");
 
+  const [isError, setError] = useState({
+    state: false,
+    message: "",
+  });
+
+  const validateIsNumber = (value: string, id: string): boolean => {
+    if (Number.isNaN(Number(value))) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "숫자만 입력 가능합니다.",
+      });
+      return false;
+    }
+    setError({ ...isError, [id]: { state: false }, message: "" });
+    return true;
+  };
+
   const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    if (!validateIsNumber(value, id)) return;
     setCardCVC(e.target.value);
   };
 
@@ -20,9 +42,14 @@ export function CardCVCInputWrapper() {
         value={cardCVC}
         onChange={changeCardCVC}
       />
+      <ErrorMessage message={isError["message"]} />
     </CardCVCContainer>
   );
 }
+
+type ErrorFlag = {
+  isError?: boolean;
+};
 
 const CardCVCContainer = styled.div`
   display: flex;
@@ -34,8 +61,8 @@ const CardCVCLabel = styled.label`
   font-size: 12px;
 `;
 
-const CardCVCInput = styled.input`
-  border: solid 1px #acacac;
+const CardCVCInput = styled.input<ErrorFlag>`
+  border: solid 1px ${(props) => (props.isError ? "#FF3D3D" : "#acacac")};
   border-radius: 2px;
   padding: 0.5rem;
   font-size: 11px;
