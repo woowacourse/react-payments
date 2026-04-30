@@ -18,7 +18,6 @@ type CardInfoFormValue = {
 
 export default function AddCardPage() {
   const [formValue, setFormValue] = useState<CardInfoFormValue>({
-    // default
     cardNumbers: { value: ['', '', '', ''] },
     expirationPeriod: { value: ['', ''] },
     cvc: { value: '' },
