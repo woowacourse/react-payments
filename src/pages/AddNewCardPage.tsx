@@ -14,12 +14,8 @@ const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
 
 const AddNewCardPage = () => {
-  const [cardNumber, setCardNumber] = useState<CardNumberUnits>(
-    DEFAULT_CARD_NUMBER_UNITS,
-  );
-  const [validityPeriod, setValidityPeriod] = useState<ValidityPeriod>(
-    DEFAULT_VALIDITY_PERIOD,
-  );
+  const [cardNumber, setCardNumber] = useState(DEFAULT_CARD_NUMBER_UNITS);
+  const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
   const [CVC, setCVC] = useState("");
 
   return (
