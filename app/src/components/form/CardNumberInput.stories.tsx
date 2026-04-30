@@ -24,14 +24,17 @@ const defaultArgs = {
     "fourth-digits": "",
   },
   setCardNumber: null,
+  setNetworkBrand: null,
 };
 
 const renderWithState = (args: typeof defaultArgs) => {
   const [cardNumber, setCardNumber] = useState(args.cardNumber);
+  const [, setNetworkBrand] = useState("");
   return (
     <CardNumberInputContainer
       cardNumber={cardNumber}
       setCardNumber={setCardNumber}
+      setNetworkBrand={setNetworkBrand}
     />
   );
 };
