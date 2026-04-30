@@ -10,6 +10,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {},
+export const Empty: Story = {
+  args: {
+    validityPeriod: { month: "", year: "" },
+    onChange: () => {},
+  },
+};
+
+export const Filled: Story = {
+  args: {
+    validityPeriod: { month: "04", year: "26" },
+    onChange: () => {},
+  },
 };

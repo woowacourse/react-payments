@@ -13,15 +13,22 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    placeholder: "placeholder",
+    placeholder: "입력해 주세요",
+  },
+};
+
+export const Error: Story = {
+  args: {
+    state: "error",
+    placeholder: "입력해 주세요",
   },
 };
 
 export const FullWidth: Story = {
   args: {
     fullWidth: true,
-    placeholder: "placeholder",
+    placeholder: "입력해 주세요",
   },
 };
