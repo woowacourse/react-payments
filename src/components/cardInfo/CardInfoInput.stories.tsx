@@ -1,4 +1,3 @@
-// CardInfoInput.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import styled from "@emotion/styled";
 import CardInfoInput from "./CardInfoInput";
