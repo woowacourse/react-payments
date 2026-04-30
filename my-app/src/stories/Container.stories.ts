@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Container from "../components/container";
+import type { Meta, StoryObj } from '@storybook/react';
+import Container from '../components/container';
 
 const meta = {
-  title: "Components/Container",
+  title: 'Components/Container',
   component: Container,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     mode: {
-      control: { type: "radio" }, 
-      options: ["CARD", "EXP", "CVC"],
-      description: "입력 필드 모드 선택",
+      control: { type: 'radio' },
+      options: ['CARD', 'EXP', 'CVC'],
+      description: '입력 필드 모드 선택',
     },
   },
 } satisfies Meta<typeof Container>;
@@ -19,18 +19,18 @@ type Story = StoryObj<typeof meta>;
 
 export const Card: Story = {
   args: {
-    mode: "CARD",
+    mode: 'CARD',
   },
 };
 
 export const Expiration: Story = {
   args: {
-    mode: "EXP",
+    mode: 'EXP',
   },
 };
 
 export const CVC: Story = {
   args: {
-    mode: "CVC",
+    mode: 'CVC',
   },
 };

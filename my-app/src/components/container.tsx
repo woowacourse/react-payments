@@ -1,10 +1,12 @@
 import { css } from "@emotion/react";
-import { useState } from "react";
+import ValidatedInputGroup from "./ValidatedInputGroup.tsx";
 
-type Mode = "CARD" | "EXP" | "CVC";
+import type { Mode } from "../types.ts";
 
-type ContainerMode = {
+// 이름 생각 필요
+export type ContainerMode = {
   mode: Mode;
+  onValueHandler: (cardInfo: string[], brand?: string) => void;
 };
 
 const LABEL_MAP = {
@@ -25,16 +27,8 @@ const LABEL_MAP = {
   },
 };
 
-const INPUT_FIELD_COUNT = {
-  CARD: 4,
-  EXP: 2,
-  CVC: 1,
-};
-
-const Container = ({ mode }: ContainerMode) => {
-  const [errorMessage, setErrorMessage] = useState("");
+const Container = ({ mode, onValueHandler }: ContainerMode) => {
   const label = LABEL_MAP[mode];
-  const inputFieldCount = INPUT_FIELD_COUNT[mode];
 
   return (
     <>
@@ -65,35 +59,7 @@ const Container = ({ mode }: ContainerMode) => {
       >
         {label.tag}
       </span>
-
-      {/* 인풋필드 4개*/}
-      <section
-        css={css`
-          display: flex;
-          flex-direction: row;
-          gap: 10px;
-        `}
-      >
-        {Array.from({ length: inputFieldCount }).map((_, i) => (
-          <input
-            key={i}
-            css={css`
-              width: 71.25px;
-              height: 32px;
-            `}
-          ></input>
-        ))}
-      </section>
-      <span
-        css={css`
-          font-size: 9.5px;
-          font-weight: 400;
-          color: #ff3d3d;
-          display: none;
-        `}
-      >
-        {errorMessage}
-      </span>
+      <ValidatedInputGroup mode={mode} onValueHandler={onValueHandler} />
     </>
   );
 };
