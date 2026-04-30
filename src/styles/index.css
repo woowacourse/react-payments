@@ -1,4 +1,4 @@
-@import url('https://unpkg.com/sanitize.css');
+@import url(reset.css);
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 
 html {
@@ -20,10 +20,16 @@ html {
     sans-serif;
 }
 
+html,
+body {
+  width: 100%;
+}
+
 :root {
   --color-card-background: #333333;
   --color-card-chip: #ddcd78;
-  --color-text: #000000;
+  --color-black: #000000;
+  --color-white: #ffffff;
   --color-description: #8b95a1;
   --color-border: #acacac;
   --color-error: #ff3d3d;
