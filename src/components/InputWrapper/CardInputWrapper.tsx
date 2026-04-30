@@ -1,13 +1,11 @@
 import styled from '@emotion/styled';
 
 interface CardInputWrapperProps {
-    validator: (value: string[]) => string | null;
-    value: string[];
+    errorMessage: string | null;
     children: React.ReactNode;
 }
 
-export default function CardInputWrapper({ validator, value, children }: CardInputWrapperProps) {
-    const errorMessage = validator(value);
+export default function CardInputWrapper({ errorMessage, children }: CardInputWrapperProps) {
     return (
         <CardInputWrapperStyle>
             <CardInputArranger>{children}</CardInputArranger>
