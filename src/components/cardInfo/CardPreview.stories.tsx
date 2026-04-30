@@ -11,7 +11,11 @@ export default meta;
 type Story = StoryObj<typeof CardPreview>;
 
 export const Default: Story = {
-  render: () => {
-    return <CardPreview></CardPreview>;
+  args: {
+    cardNumber: ["1234", "1234", "1234", "1234"],
+    expireDate: ["11", "11"],
+  },
+  render: (args) => {
+    return <CardPreview {...args} />;
   },
 };
