@@ -40,8 +40,8 @@ function CardPreview(props: CardPrivewProps) {
     <CardContainer justifyContent="center">
       <Card direction="column" gap={14}>
         <Flex justifyContent="space-between">
-          <CardImage src="/chip.svg" />
-          {props.cardBrand && <CardImage src={`/${props.cardBrand.toLowerCase()}.svg`} />}
+          <CardImage src={`${import.meta.env.BASE_URL}chip.svg`} />
+          {props.cardBrand && <CardImage src={`${import.meta.env.BASE_URL}${props.cardBrand.toLowerCase()}.svg`} />}
         </Flex>
         <Flex gap={10}>
           {props.cardNumberSegments.map((segments: string, index: number) => (
