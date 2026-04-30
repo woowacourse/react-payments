@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { userEvent, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
 
 import { CardNumberInputContainer } from "./CardNumberInput";
@@ -72,4 +72,35 @@ export const invalidMastercard: Story = {
     await userEvent.type(firstInput, "56");
     await userEvent.tab();
   },
+};
+
+const createNoNetworkBrandValidationPlay =
+  (inputIndex: number): Story["play"] =>
+  async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getAllByRole("textbox")[inputIndex];
+    await userEvent.type(input, "1");
+    await userEvent.tab();
+    await expect(canvas.queryByText("유요한 카드 번호가 아닙니다.")).toBeNull();
+    await expect(
+      canvas.queryByText("유요한 마스터카드 번호가 아닙니다."),
+    ).toBeNull();
+  };
+
+export const noNetworkBrandValidationOnSecondInput: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: createNoNetworkBrandValidationPlay(1),
+};
+
+export const noNetworkBrandValidationOnThirdInput: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: createNoNetworkBrandValidationPlay(2),
+};
+
+export const noNetworkBrandValidationOnFourthInput: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: createNoNetworkBrandValidationPlay(3),
 };

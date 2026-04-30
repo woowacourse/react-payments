@@ -19,26 +19,14 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
     message: "",
   });
 
-  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const id = e.target.id;
-    if (Number.isNaN(value)) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "숫자만 입력 가능합니다.",
-      });
-      return;
-    } else {
-      setError({ ...isError, [id]: { state: false }, message: "" });
-    }
+  const validateIsNetworkBrand = (value: string, id: string): boolean => {
     if (value !== "" && ![4, 5].includes(Number(value[0]))) {
       setError({
         ...isError,
         [id]: { state: true },
         message: "유요한 카드 번호가 아닙니다.",
       });
-      return;
+      return false;
     } else {
       setError({ ...isError, [id]: { state: false }, message: "" });
     }
@@ -52,10 +40,41 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
         [id]: { state: true },
         message: "유요한 마스터카드 번호가 아닙니다.",
       });
-      return;
+      return false;
     } else {
       setError({ ...isError, [id]: { state: false }, message: "" });
     }
+    return true;
+  };
+
+  const validateIsNumber = (value: string, id: string): boolean => {
+    if (Number.isNaN(value)) {
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: "숫자만 입력 가능합니다.",
+      });
+      return false;
+    } else {
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    }
+    return true;
+  };
+
+  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    if (!validateIsNumber(value, id)) return;
+    setCardNumber({ ...cardNumber, [id]: value });
+  };
+
+  const changeFirstDigitsCardNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    if (!validateIsNumber(value, id)) return;
+    if (!validateIsNetworkBrand(value, id)) return;
     setCardNumber({ ...cardNumber, [id]: value });
   };
 
@@ -69,7 +88,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
           maxLength={4}
           inputMode="numeric"
           value={cardNumber["first-digits"]}
-          onChange={changeCardNumber}
+          onChange={changeFirstDigitsCardNumber}
           placeholder="1234"
           isError={isError["first-digits"].state}
         />
