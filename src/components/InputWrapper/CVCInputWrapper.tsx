@@ -10,9 +10,12 @@ interface CVCInputWrapperProps {
 }
 
 export default function CVCInputWrapper({ validator, setCVCNumber, value }: CVCInputWrapperProps) {
-    const [inputError, setInputError] = useState<string | null>(validator(value));
+    const [inputError, setInputError] = useState<string | null>(null);
 
-    const errorMessage = inputError ?? validator(value);
+    const [hasTouched, setHasTouched] = useState(false);
+    const errorAfterCompleted = hasTouched ? validator(value) : null;
+    const errorMessage = inputError ?? errorAfterCompleted;
+
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             <CardInfoInput
@@ -23,6 +26,8 @@ export default function CVCInputWrapper({ validator, setCVCNumber, value }: CVCI
                 validator={(value: string) => isLengthMatch(3, value)}
                 maxLength={3}
                 onError={setInputError}
+                onBlur={() => setHasTouched(true)}
+                onFocus={() => setHasTouched(false)}
             />
         </CardInputWrapper>
     );

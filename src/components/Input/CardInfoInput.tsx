@@ -13,6 +13,8 @@ interface CardInfoInputProps {
     type: InputType;
     // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
     onError: (message: string) => void;
+    onBlur?: () => void;
+    onFocus?: () => void;
 }
 
 interface CardInfoInputStyleProps {
@@ -28,6 +30,8 @@ export default function CardInfoInput({
     type,
     maxLength,
     onError,
+    onBlur,
+    onFocus,
 }: CardInfoInputProps) {
     const [isNotValidate, setIsNotValidate] = useState(false);
 
@@ -53,6 +57,8 @@ export default function CardInfoInput({
             inputType={type}
             placeholder={placeHolder}
             maxLength={maxLength}
+            onBlur={() => onBlur?.()}
+            onFocus={() => onFocus?.()}
         />
     );
 }
