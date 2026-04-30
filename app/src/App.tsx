@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CardPreview } from "./components/CardPreview.tsx";
+import { CardPreview } from "./components/preview/CardPreview.tsx";
 import { CardForm } from "./components/form/CardForm.tsx";
 import styled from "@emotion/styled";
 

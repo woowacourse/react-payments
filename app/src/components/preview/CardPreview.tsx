@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
-import type { CardNumberType } from "../types/cardNumber.ts";
-import type { CardExpiryDateType } from "../types/cardExpiryDate.ts";
+import type { CardNumberType } from "../../types/cardNumber.ts";
+import type { CardExpiryDateType } from "../../types/cardExpiryDate.ts";
 
 export function CardPreview({
   cardNumber,
