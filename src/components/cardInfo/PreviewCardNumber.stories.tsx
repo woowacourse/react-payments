@@ -4,6 +4,13 @@ import PreviewCardNumber from "./PreviewCardNumber";
 const meta: Meta<typeof PreviewCardNumber> = {
   title: "Components/PreviewCardNumber",
   component: PreviewCardNumber,
+  decorators: [
+    (Story) => (
+      <div style={{ backgroundColor: "black" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
