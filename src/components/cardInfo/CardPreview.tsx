@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
+import PreviewCardNumber from "./PreviewCardNumber";
+import PreviewCardExpireDate from "./PreviewCardExpireDate";
 
-export default function CardPreview() {
+export default function CardPreview({
+  cardNumber,
+  expireDate,
+}: {
+  cardNumber: string[];
+  expireDate: string[];
+}) {
   return (
     <CardImageWrapper>
       <Card>
@@ -11,6 +19,11 @@ export default function CardPreview() {
             alt="payment method"
           />
         </Upper>
+
+        <CardImageInfoWrapper>
+          <PreviewCardNumber cardNumber={cardNumber} />
+          <PreviewCardExpireDate expireDate={expireDate} />
+        </CardImageInfoWrapper>
       </Card>
     </CardImageWrapper>
   );
@@ -49,4 +62,11 @@ const IC = styled.div`
 const PayMethodImage = styled.img`
   width: 36px;
   height: 22px;
+`;
+
+const CardImageInfoWrapper = styled.div`
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
