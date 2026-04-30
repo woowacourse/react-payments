@@ -3,6 +3,12 @@ import type { CardInfo } from "../types";
 import masterLogo from "../assets/masterLogo.png";
 import visaLogo from "../assets/visaLogo.png";
 
+const fixedCardNumberStyle = css`
+            display: inline-block;
+            min-width: 30px;
+            font-family: 'Inter';
+            `
+
 const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
   return (
     <div
@@ -52,10 +58,10 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             gap: 10px;
           `}
         >
-          <span>{cardInfo.numbers[0]}</span>
-          <span>{cardInfo.numbers[1]}</span>
-          <span>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
-          <span>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
+          <span css={fixedCardNumberStyle}>{cardInfo.numbers[0]}</span>
+          <span css={fixedCardNumberStyle}>{cardInfo.numbers[1]}</span>
+          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
+          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
         </div>
         <p
           css={css`
