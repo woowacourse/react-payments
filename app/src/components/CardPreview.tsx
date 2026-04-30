@@ -3,7 +3,7 @@ import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
 
-export function Card() {
+export function CardPreview() {
   return (
     <CardContainer>
       <div className="card-meta">

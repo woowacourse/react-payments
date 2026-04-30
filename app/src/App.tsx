@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card } from "./components/Card.tsx";
+import { CardPreview } from "./components/CardPreview.tsx";
 import { CardForm } from "./components/form/CardForm.tsx";
 import styled from "@emotion/styled";
 
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <AppContainer>
-      <Card />
+      <CardPreview />
       <CardForm
         cardNumber={cardNumber}
         setCardNumber={setCardNumber}
