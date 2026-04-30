@@ -7,8 +7,8 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     cardnumber: {
-      control: 'text',
-      description: '16자리 숫자 문자열',
+      control: 'object',
+      description: '4자리 숫자 문자열 4개로 이루어진 배열 (예: ["1234", "5678", "9012", "3456"])',
     },
     expiryMonth: {
       control: { type: 'select' },
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardnumber: '',
+    cardnumber: ['', '', '', ''],
     expiryMonth: '',
     expiryYear: '',
   },
@@ -35,7 +35,7 @@ export const Default: Story = {
 
 export const Visa: Story = {
   args: {
-    cardnumber: '4123456789012345',
+    cardnumber: ['4123', '4567', '8901', '2345'],
     expiryMonth: '12',
     expiryYear: '26',
   },
@@ -43,7 +43,7 @@ export const Visa: Story = {
 
 export const MasterCard: Story = {
   args: {
-    cardnumber: '5212345678901234',
+    cardnumber: ['5212', '3456', '7890', '1234'],
     expiryMonth: '08',
     expiryYear: '28',
   },
@@ -51,7 +51,7 @@ export const MasterCard: Story = {
 
 export const UnknownBrand: Story = {
   args: {
-    cardnumber: '9999123456789012',
+    cardnumber: ['9999', '1234', '5678', '9012'],
     expiryMonth: '03',
     expiryYear: '30',
   },
@@ -59,7 +59,7 @@ export const UnknownBrand: Story = {
 
 export const PartiallyFilled: Story = {
   args: {
-    cardnumber: '41234567',
+    cardnumber: ['4123', '4567', '', ''],
     expiryMonth: '12',
     expiryYear: '26',
   },

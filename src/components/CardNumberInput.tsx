@@ -1,9 +1,10 @@
 import { type ComponentProps } from 'react';
 import ValidationInput from './ValidationInput';
 import { validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
+import type { CardNumberSegments } from '../types';
 
 interface CardNumberInputProps {
-  value: [string, string, string, string];
+  value: CardNumberSegments;
   onChange: ComponentProps<typeof ValidationInput>['onChange'];
 }
 
