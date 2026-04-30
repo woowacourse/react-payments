@@ -25,6 +25,7 @@ export default function CardNumberInputWrapper({ validator, setCardNumber, value
         <CardInputWrapper errorMessage={inputError}>
             {value.map((_, index) => (
                 <CardInfoInput
+                    key={`${index}th-input`}
                     value={value[index]}
                     setValue={setCardNumber(index)}
                     type="card-number"
