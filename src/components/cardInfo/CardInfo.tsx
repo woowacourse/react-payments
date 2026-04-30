@@ -63,6 +63,7 @@ export default function CardInfo({
               maxLength={4}
               value={cardNumber[index]}
               onChange={(e) => handleCardNumber(e, index)}
+              inputMode="numeric"
             />
           ))}
         </CardInfoInput>
@@ -79,12 +80,14 @@ export default function CardInfo({
             maxLength={2}
             value={expireDate[0]}
             onChange={(e) => handleCardInfo(expireDate, setExpireDate, e, 0)}
+            inputMode="numeric"
           />
           <InfoInput
             placeholder="YY"
             maxLength={2}
             value={expireDate[1]}
             onChange={(e) => handleCardInfo(expireDate, setExpireDate, e, 1)}
+            inputMode="numeric"
           />
         </CardInfoInput>
       </CardInfoSection>
@@ -100,6 +103,7 @@ export default function CardInfo({
             maxLength={3}
             value={cvcNumber[0]}
             onChange={(e) => handleCardInfo(cvcNumber, setCvcNumber, e, 0)}
+            inputMode="numeric"
           />
         </CardInfoInput>
       </CardInfoSection>
