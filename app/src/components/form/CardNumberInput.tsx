@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { Validator } from "../../validators/CardValidator";
-import styled from "@emotion/styled";
+import { CardFieldset, CardLegend, CardInput } from "../../style/CardInput";
 
 export function CardNumberInputContainer({
   cardNumber,
@@ -74,9 +74,9 @@ export function CardNumberInputContainer({
 
   return (
     <>
-      <CardNumberFieldset>
-        <CardNumberLegend>카드 번호</CardNumberLegend>
-        <CardNumberInput
+      <CardFieldset>
+        <CardLegend>카드 번호</CardLegend>
+        <CardInput
           id="first-digits"
           type="text"
           maxLength={4}
@@ -87,7 +87,7 @@ export function CardNumberInputContainer({
           placeholder="1234"
           isError={isError["first-digits"].state}
         />
-        <CardNumberInput
+        <CardInput
           id="second-digits"
           type="text"
           maxLength={4}
@@ -98,7 +98,7 @@ export function CardNumberInputContainer({
           placeholder="1234"
           isError={isError["second-digits"].state}
         />
-        <CardNumberInput
+        <CardInput
           id="third-digits"
           type="text"
           maxLength={4}
@@ -109,7 +109,7 @@ export function CardNumberInputContainer({
           placeholder="1234"
           isError={isError["third-digits"].state}
         />
-        <CardNumberInput
+        <CardInput
           id="fourth-digits"
           type="text"
           maxLength={4}
@@ -120,45 +120,8 @@ export function CardNumberInputContainer({
           placeholder="1234"
           isError={isError["fourth-digits"].state}
         />
-      </CardNumberFieldset>
+      </CardFieldset>
       <ErrorMessage message={isError["message"]} />
     </>
   );
 }
-
-type ErrorFlag = {
-  isError?: boolean;
-};
-
-const CardNumberFieldset = styled.fieldset`
-  border: none;
-  display: flex;
-  gap: 0.625rem;
-  padding: 0;
-  margin: 0;
-`;
-
-const CardNumberLegend = styled.legend`
-  font-size: 12px;
-  margin: 8px 0;
-`;
-
-const CardNumberInput = styled.input<ErrorFlag>`
-  flex: 4 1;
-  border: solid 1px ${(props) => (props.isError ? "#FF3D3D" : "#acacac")};
-  border-radius: 2px;
-  padding: 0.5rem;
-  font-size: 11px;
-  height: 32px;
-  width: 100%;
-  -moz-appearance: textfield;
-  &::placeholder {
-    color: #acacac;
-  }
-
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-`;
