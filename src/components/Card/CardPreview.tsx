@@ -88,6 +88,7 @@ const CardNumber = styled.p`
     display: flex;
     gap: 5px;
     align-items: center;
+    min-width: 34px;
 `;
 
 const BulletStyle = styled.div`
