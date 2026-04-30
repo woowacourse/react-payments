@@ -63,9 +63,8 @@ export function CardExpiryDateInputContainer({
         message: "숫자만 입력 가능합니다.",
       });
       return false;
-    } else {
-      setError({ ...isError, [id]: { state: false }, message: "" });
     }
+    setError({ ...isError, [id]: { state: false }, message: "" });
     return true;
   };
 

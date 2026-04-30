@@ -27,8 +27,6 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
         message: "유요한 카드 번호가 아닙니다.",
       });
       return false;
-    } else {
-      setError({ ...isError, [id]: { state: false }, message: "" });
     }
     if (
       value.length === 2 &&
@@ -41,9 +39,8 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
         message: "유요한 마스터카드 번호가 아닙니다.",
       });
       return false;
-    } else {
-      setError({ ...isError, [id]: { state: false }, message: "" });
     }
+    setError({ ...isError, [id]: { state: false }, message: "" });
     return true;
   };
 
@@ -55,9 +52,8 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
         message: "숫자만 입력 가능합니다.",
       });
       return false;
-    } else {
-      setError({ ...isError, [id]: { state: false }, message: "" });
     }
+    setError({ ...isError, [id]: { state: false }, message: "" });
     return true;
   };
 
