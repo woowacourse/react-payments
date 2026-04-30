@@ -24,17 +24,17 @@ function CardNumberInput(props: CardNumberInputProps) {
             {
               type: 'limit',
               validator: validateNumberString,
-              message: '숫자만 입력 가능합니다',
+              message: '숫자만 입력 가능합니다.',
             },
             {
               type: 'limit',
               validator: (input: string) => validateStringMaxLength(input, 4),
-              message: '4자리까지만 입력 가능합니다',
+              message: '4자리까지만 입력 가능합니다.',
             },
             {
               type: 'check',
               validator: (input: string) => validateStringLength(input, 4),
-              message: '4자리를 입력하세요',
+              message: '4자리를 입력해주세요.',
             },
           ]}
         />

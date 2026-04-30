@@ -26,12 +26,12 @@ export default function CardExpiryMonthInput(props: CardExpiryMonthInputProps) {
         {
           type: 'check',
           validator: (input: string) => validateStringLength(input, 2),
-          message: '2자리수를 입력하세요.',
+          message: '2자리를 입력해주세요.',
         },
         {
           type: 'check',
           validator: validateMonth,
-          message: '유효한 월을 입력해주세요 (01 ~ 12)',
+          message: '유효한 월을 입력해주세요. (01 ~ 12)',
         },
       ]}
     />

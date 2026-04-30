@@ -26,12 +26,12 @@ function CardCVCInput(props: CardCVCInputProps) {
         {
           type: 'check',
           validator: (input: string) => validateStringLength(input, 3),
-          message: '3자리수를 입력하세요.',
+          message: '3자리를 입력해주세요.',
         },
         {
           type: 'check',
           validator: validateCVC,
-          message: '유효한 CVC를 입력해주세요',
+          message: '유효한 CVC를 입력해주세요.',
         },
       ]}
     />
