@@ -9,15 +9,14 @@ export default function CardPreview({
   cardNumber: string[];
   expireDate: string[];
 }) {
+  const cardSrc = getCardSrc(cardNumber[0]);
+
   return (
     <CardImageWrapper>
       <Card>
         <Upper>
           <IC />
-          <PayMethodImage
-            src="./src/assets/Mastercard.svg"
-            alt="payment method"
-          />
+          {cardSrc && <PayMethodImage src={cardSrc} alt="payment method" />}
         </Upper>
 
         <CardImageInfoWrapper>
@@ -27,6 +26,15 @@ export default function CardPreview({
       </Card>
     </CardImageWrapper>
   );
+}
+
+function getCardSrc(firstGroup: string): string {
+  if (firstGroup.startsWith("4")) return "./src/assets/Visa.svg";
+
+  const num = Number(firstGroup.slice(0, 2));
+  if (num >= 51 && num <= 55) return "./src/assets/Mastercard.svg";
+
+  return "";
 }
 
 const CardImageWrapper = styled.section`
