@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Validator } from "../../validators/CardValidator";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 
@@ -16,96 +17,41 @@ export function CardExpiryDateInputContainer({
     message: "",
   });
 
-  const validateMonth = (value: string, id: string) => {
-    if (value.length === 1 && !["0", "1"].includes(value[0])) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "유효하지 않은 날짜 형식입니다. 0 이나 1로 시작해야 합니다.",
-      });
-      return false;
-    }
-    if (value.length === 2) {
-      const month = Number(value);
-      if (month < 1 || month > 12) {
-        setError({
-          ...isError,
-          [id]: { state: true },
-          message:
-            "유효하지 않은 날짜 형식입니다. 1 ~ 12 이내 숫자여야 합니다.",
-        });
-        return false;
-      }
-    }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
-  };
-
-  const validateYear = (value: string, id: string): boolean => {
-    const currentYear = new Date().getFullYear().toString().slice(-2);
-    const year = value;
-    if (year.length === 2 && Number(year) < Number(currentYear)) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "유효기간이 만료된 연도입니다.",
-      });
-      return false;
-    }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
-  };
-
-  const validateIsNumber = (value: string, id: string): boolean => {
-    if (Number.isNaN(Number(value))) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "날짜는 숫자만 입력 가능합니다.",
-      });
-      return false;
-    }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
-  };
-
   const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
-    if (!validateIsNumber(value, id)) return;
-    if (!validateMonth(value, id)) return;
+    try {
+      Validator.isNumber(value);
+      Validator.isValidMonth(value);
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    } catch (err) {
+      setError({ ...isError, [id]: { state: true }, message: err.message });
+    }
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
   const changeCardExpiryYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
-    if (!validateIsNumber(value, id)) return;
-    if (!validateYear(value, id)) return;
-    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
-  };
-
-  const validateCardExpiryDateLength = (
-    value: string,
-    id: string,
-    limit: number,
-  ): boolean => {
-    if (![0, limit].includes(value.length)) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "날짜 각 항목은 2자리여야 합니다.",
-      });
-      return false;
+    try {
+      Validator.isNumber(value);
+      Validator.isValidYear(value);
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    } catch (err) {
+      setError({ ...isError, [id]: { state: true }, message: err.message });
     }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
+    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
-    if (!validateCardExpiryDateLength(value, id, e.target.maxLength)) return;
+    try {
+      Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    } catch (err) {
+      setError({ ...isError, [id]: { state: true }, message: err.message });
+    }
   };
 
   return (

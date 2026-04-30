@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { ErrorMessage } from "./ErrorMessage";
+import { Validator } from "../../validators/CardValidator";
 
 export function CardCVCInputWrapper() {
   const [cardCVC, setCardCVC] = useState("");
@@ -10,47 +11,27 @@ export function CardCVCInputWrapper() {
     message: "",
   });
 
-  const validateIsNumber = (value: string, id: string): boolean => {
-    if (Number.isNaN(Number(value))) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "CVC는 숫자만 입력 가능합니다.",
-      });
-      return false;
-    }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
-  };
-
   const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
-    if (!validateIsNumber(value, id)) return;
-    setCardCVC(e.target.value);
-  };
-
-  const validateCVCLength = (
-    value: string,
-    id: string,
-    limit: number,
-  ): boolean => {
-    if (![0, limit].includes(value.length)) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: "CVC는 3자리여야 합니다.",
-      });
-      return false;
+    try {
+      Validator.isNumber(value);
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    } catch (err) {
+      setError({ ...isError, [id]: { state: true }, message: err.message });
     }
-    setError({ ...isError, [id]: { state: false }, message: "" });
-    return true;
+    setCardCVC(e.target.value);
   };
 
   const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const id = e.target.id;
-    if (!validateCVCLength(value, id, e.target.maxLength)) return;
+    try {
+      Validator.isValidCardCVCLength(value, e.target.maxLength);
+      setError({ ...isError, [id]: { state: false }, message: "" });
+    } catch (err) {
+      setError({ ...isError, [id]: { state: true }, message: err.message });
+    }
   };
 
   return (
