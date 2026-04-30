@@ -74,3 +74,25 @@ h6 {
 #__next {
     isolation: isolate;
 }
+
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+legend {
+    all: unset;
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    padding: 0;
+    margin: 0;
+
+    font: inherit;
+    line-height: inherit;
+    color: inherit;
+}

@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import CardNumbersField from "../components/domain/CardNumbersField";
 
 export default function AddCardPage() {
     return (
@@ -6,8 +7,8 @@ export default function AddCardPage() {
             <main >
                 {/* <Card /> */}
                 <form>
-                    {/* <CardNumbersField />
-                    <ExpirationPeriodField />
+                    <CardNumbersField />
+                    {/*<ExpirationPeriodField />
                     <CVCField /> */}
                 </form>
             </main>

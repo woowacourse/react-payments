@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import FieldTitle from "./FieldTitle";
 import FieldCaption from "./FieldCaption";
 
-interface FormFieldProps {
+export interface FormFieldProps {
     title: string;
     caption: string;
     error: boolean;
@@ -41,4 +41,11 @@ const formFieldInputWrapperStyle = css`
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    legend, label {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        color: var(--color-text-label);
+    }
 `
