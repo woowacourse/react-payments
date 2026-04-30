@@ -18,8 +18,7 @@ export function CardExpiryDateInputContainer({
   });
 
   const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const id = e.target.id;
+    const { value, id } = e.target;
     try {
       Validator.isNumber(value);
       Validator.isValidMonth(value);
@@ -31,8 +30,7 @@ export function CardExpiryDateInputContainer({
   };
 
   const changeCardExpiryYear = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const id = e.target.id;
+    const { value, id } = e.target;
     try {
       Validator.isNumber(value);
       Validator.isValidYear(value);
@@ -44,8 +42,7 @@ export function CardExpiryDateInputContainer({
   };
 
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const id = e.target.id;
+    const { value, id } = e.target;
     try {
       Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
       setError({ ...isError, [id]: { state: false }, message: "" });

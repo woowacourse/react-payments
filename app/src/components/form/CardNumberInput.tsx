@@ -37,8 +37,7 @@ export function CardNumberInputContainer({
   };
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const id = e.target.id;
+    const { value, id } = e.target;
     try {
       Validator.isNumber(value);
       setError({ ...isError, [id]: { state: false }, message: "" });
@@ -51,8 +50,7 @@ export function CardNumberInputContainer({
   const changeFirstDigitsCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const value = e.target.value;
-    const id = e.target.id;
+    const { value, id } = e.target;
     try {
       Validator.isNumber(value);
       Validator.isValidNetworkBrand(value);
@@ -65,8 +63,7 @@ export function CardNumberInputContainer({
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const id = e.target.id;
+    const { value, id } = e.target;
     try {
       Validator.isValidCardNumberLength(value, e.target.maxLength);
       setError({ ...isError, [id]: { state: false }, message: "" });
