@@ -8,6 +8,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
+  tags: ['autodocs'],
   argTypes: {
     cardBrand: {
       control: 'inline-radio',
@@ -23,7 +24,9 @@ const meta = {
       description: '카드 유효기간 (MM/YY)',
     },
   },
-  tags: ['autodocs'],
+  args: {
+    cardBrand: 'local',
+  },
 } satisfies Meta<typeof Card>;
 
 export default meta;
@@ -33,7 +36,6 @@ export const Default: Story = {
   args: {
     cardNumber: ['1234', '1234', '1234', '1234'],
     expirationPeriod: ['05', '26'],
-    cardBrand: 'local',
   },
 };
 
@@ -41,6 +43,5 @@ export const Empty: Story = {
   args: {
     cardNumber: ['', '', '', ''],
     expirationPeriod: ['', ''],
-    cardBrand: 'local',
   },
 };

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Input from './Input';
-import { fn, within, userEvent } from 'storybook/test';
+import { fn } from 'storybook/test';
 
 const meta = {
   title: 'ui/Input',
@@ -9,8 +9,12 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  argTypes: {},
   tags: ['autodocs'],
+  args: {
+    placeholder: '1234',
+    type: 'text',
+    onChange: fn(),
+  },
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -18,10 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    placeholder: '1234',
     value: '1234',
-    type: 'text',
-    onChange: fn(),
     variant: 'default',
   },
   render: (args) => <Input {...args} />,
@@ -29,10 +30,7 @@ export const Default: Story = {
 
 export const Error: Story = {
   args: {
-    placeholder: '1234',
     value: '',
-    type: 'text',
-    onChange: fn(),
     variant: 'error',
   },
   render: (args) => <Input {...args} />,
@@ -40,10 +38,7 @@ export const Error: Story = {
 
 export const Focus: Story = {
   args: {
-    placeholder: '1234',
     value: '',
-    type: 'text',
-    onChange: fn(),
     variant: 'default',
   },
   render: (args) => <Input {...args} autoFocus />,
