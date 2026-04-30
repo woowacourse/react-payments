@@ -5,15 +5,15 @@ export function CardExpiryDateInputContainer() {
     <CardExpiryDateFieldset>
       <CardExpiryDateLegend>유효기간</CardExpiryDateLegend>
       <CardExpiryDateInput
-        type="number"
+        type="text"
+        inputMode="numeric"
         maxLength={2}
-        minLength={1}
         placeholder="MM"
       />
       <CardExpiryDateInput
-        type="number"
+        type="text"
+        inputMode="numeric"
         maxLength={2}
-        minLength={1}
         placeholder="YY"
       />
     </CardExpiryDateFieldset>
