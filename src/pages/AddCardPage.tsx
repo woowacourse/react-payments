@@ -5,6 +5,7 @@ import CVCField from '../components/domain/CVCField';
 import { useState } from 'react';
 import { categorizeCardBrand } from '../utils';
 import type { CardInfo } from '../types';
+import Card from '../components/ui/Card';
 
 interface FieldState<T> {
   value: T;
@@ -53,7 +54,13 @@ export default function AddCardPage() {
   return (
     <div css={mobileLayout}>
       <main>
-        {/* <Card /> */}
+        <div css={cardWrapperStyle}>
+          <Card
+            cardNumber={formValue.cardNumbers.value}
+            expirationPeriod={formValue.expirationPeriod.value}
+            cardBrand={formValue.cardBrand.value}
+          />
+        </div>
         <form css={formLayout}>
           <CardNumbersField value={formValue.cardNumbers.value} onUpdated={handleCardNumbersUpdate} />
           <ExpirationPeriodField value={formValue.expirationPeriod.value} onUpdated={handleExpirationPeriodUpdate} />
@@ -73,6 +80,12 @@ const mobileLayout = css`
   padding: 20px 30px;
   overflow: scroll;
   border-radius: 20px;
+`;
+
+const cardWrapperStyle = css`
+  display: flex;
+  justify-content: center;
+  margin: 45px auto;
 `;
 
 const formLayout = css`
