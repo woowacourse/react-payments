@@ -16,11 +16,14 @@ export default function CardNumberInputWrapper({ validator, setCardNumber, value
         setInputErrors((prev) => prev.with(index, message));
     };
 
+    const [hasTouched, setHasTouched] = useState(false);
+    const errorAfterCompleted = hasTouched ? validator(value) : null;
+
     // TODO 이거 중복되는 부분 없애기
     const inputError =
         inputErrors.find((err) => err !== null) ?? null
             ? inputErrors.find((err) => err !== null) ?? null
-            : validator(value);
+            : errorAfterCompleted;
 
     return (
         <CardInputWrapper errorMessage={inputError}>
@@ -33,6 +36,8 @@ export default function CardNumberInputWrapper({ validator, setCardNumber, value
                     validator={(value: string) => isLengthMatch(4, value)}
                     maxLength={4}
                     onError={setError(index)}
+                    onBlur={() => setHasTouched(true)}
+                    onFocus={() => setHasTouched(false)}
                 />
             ))}
         </CardInputWrapper>
