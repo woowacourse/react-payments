@@ -9,6 +9,7 @@ export default function FieldTitle({ children }: { children: React.ReactNode }) 
 const fieldTitleTypography = css`
     font-weight: bold;
     font-size: 18px;
+    line-height: 100%;
     padding: 2px 0;
     color: var(--color-text-title);
 `;

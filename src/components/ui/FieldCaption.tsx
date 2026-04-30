@@ -8,6 +8,7 @@ export default function FieldCaption({ children }: { children: React.ReactNode }
 
 const fieldCaptionTypography = css`
     font-size: 9.5px;
+    line-height: 100%;
     color: var(--color-text-caption);
     padding: 2px 0 1px 0;
 `;
