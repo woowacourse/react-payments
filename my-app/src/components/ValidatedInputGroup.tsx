@@ -37,10 +37,10 @@ const ValidatedInputGroup = ({
             onChange={(e) => onChange(i, e.target.value)}
             onBlur={() => onBlur(i)}
             css={css`
-              width: 71.25px;
+              flex: 1;
               height: 32px;
-              width: 71.25;
               border-radius: 2px;
+              min-width: 0;
               border-width: 1.01px;
               border-color: ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
             `}
