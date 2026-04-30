@@ -4,7 +4,7 @@ export function CardExpiryDate({ cardExpiryDate }) {
   return (
     <CardExpiryDateContainer>
       <span>{cardExpiryDate["expiry-month"]}</span>
-      <span>/</span>
+      {cardExpiryDate["expiry-month"].length === 2 && <>/</>}
       <span>{cardExpiryDate["expiry-year"]}</span>
     </CardExpiryDateContainer>
   );
