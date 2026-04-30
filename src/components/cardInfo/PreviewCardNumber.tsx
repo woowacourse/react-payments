@@ -14,6 +14,7 @@ export default function PreviewCardNumber({
   if (array[3] !== "") {
     array[3] = "*".repeat(array[3].length);
   }
+
   return (
     <CardNumberWrapper>
       <CardNumberParagraph>
