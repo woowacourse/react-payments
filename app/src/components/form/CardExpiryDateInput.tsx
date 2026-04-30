@@ -1,19 +1,34 @@
 import styled from "@emotion/styled";
 
-export function CardExpiryDateInputContainer() {
+export function CardExpiryDateInputContainer({
+  cardExpiryDate,
+  setCardExpiryDate,
+}) {
+  const changeCardExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const id = e.target.id;
+    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+  };
+
   return (
     <CardExpiryDateFieldset>
       <CardExpiryDateLegend>유효기간</CardExpiryDateLegend>
       <CardExpiryDateInput
         type="text"
         inputMode="numeric"
+        id="expiry-month"
+        onChange={changeCardExpiryDate}
         maxLength={2}
+        value={cardExpiryDate["expiry-month"]}
         placeholder="MM"
       />
       <CardExpiryDateInput
         type="text"
         inputMode="numeric"
+        id="expiry-year"
+        onChange={changeCardExpiryDate}
         maxLength={2}
+        value={cardExpiryDate["expiry-year"]}
         placeholder="YY"
       />
     </CardExpiryDateFieldset>

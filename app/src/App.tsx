@@ -11,10 +11,20 @@ function App() {
     "fourth-digits": "",
   });
 
+  const [cardExpiryDate, setCardExpiryDate] = useState({
+    "expiry-month": "",
+    "expiry-year": "",
+  });
+
   return (
     <AppContainer>
       <Card />
-      <CardForm cardNumber={cardNumber} setCardNumber={setCardNumber} />
+      <CardForm
+        cardNumber={cardNumber}
+        setCardNumber={setCardNumber}
+        cardExpiryDate={cardExpiryDate}
+        setCardExpiryDate={setCardExpiryDate}
+      />
     </AppContainer>
   );
 }

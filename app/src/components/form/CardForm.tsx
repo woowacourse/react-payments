@@ -4,7 +4,12 @@ import { CardNumberInputContainer } from "./CardNumberInput";
 import { CardExpiryDateInputContainer } from "./CardExpiryDateInput";
 import { CardCVCInputWrapper } from "./CardCVCInput";
 
-export function CardForm({ cardNumber, setCardNumber }) {
+export function CardForm({
+  cardNumber,
+  setCardNumber,
+  cardExpiryDate,
+  setCardExpiryDate,
+}) {
   return (
     <CardFormContainer>
       <CardSection
@@ -20,7 +25,10 @@ export function CardForm({ cardNumber, setCardNumber }) {
         title={"카드 유효기간을 입력해 주세요"}
         subTitle={"월/년도(MMYY)를 순서대로 입력해 주세요."}
       >
-        <CardExpiryDateInputContainer />
+        <CardExpiryDateInputContainer
+          cardExpiryDate={cardExpiryDate}
+          setCardExpiryDate={setCardExpiryDate}
+        />
       </CardSection>
       <CardSection title={"CVC 번호를 입력해 주세요"}>
         <CardCVCInputWrapper />
