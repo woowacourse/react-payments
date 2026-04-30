@@ -4,7 +4,7 @@ import { ErrorMessage } from "./ErrorMessage";
 import { CardInput } from "../../style/CardStyles";
 import { Validator } from "../../validators/CardValidator";
 
-export function CardCVCInputWrapper() {
+export function CardCVCInput() {
   const [cardCVC, setCardCVC] = useState("");
 
   const [isError, setError] = useState({

@@ -3,16 +3,16 @@ import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
 import { CardContext } from "../Card";
 
-import { CardExpiryDateInputContainer } from "./CardExpiryDateInput";
+import { CardExpiryDateInput } from "./CardExpiryDateInput";
 
 const meta = {
-  title: "CardExpiryDateInputContainer",
-  component: CardExpiryDateInputContainer,
+  title: "CardExpiryDateInput",
+  component: CardExpiryDateInput,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CardExpiryDateInputContainer>;
+} satisfies Meta<typeof CardExpiryDateInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -38,7 +38,7 @@ const renderWithContext = () => {
         setCardExpiryDate,
       }}
     >
-      <CardExpiryDateInputContainer />
+      <CardExpiryDateInput />
     </CardContext>
   );
 };
@@ -53,7 +53,9 @@ export const InvalidMonthInput: Story = {
     const canvas = within(canvasElement);
     const [monthInput] = canvas.getAllByRole("textbox");
     await userEvent.type(monthInput, "abc");
-    await expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText("숫자만 입력 가능합니다."),
+    ).toBeInTheDocument();
   },
 };
 
@@ -83,7 +85,9 @@ export const InvalidYearInput: Story = {
     const canvas = within(canvasElement);
     const [, yearInput] = canvas.getAllByRole("textbox");
     await userEvent.type(yearInput, "abc");
-    await expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText("숫자만 입력 가능합니다."),
+    ).toBeInTheDocument();
   },
 };
 
@@ -93,7 +97,9 @@ export const InvalidPastYear: Story = {
     const canvas = within(canvasElement);
     const [, yearInput] = canvas.getAllByRole("textbox");
     await userEvent.type(yearInput, "24");
-    await expect(canvas.getByText("유효한 년도가 아닙니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText("유효한 년도가 아닙니다."),
+    ).toBeInTheDocument();
   },
 };
 
@@ -104,7 +110,9 @@ export const InvalidMonthLength: Story = {
     const [monthInput] = canvas.getAllByRole("textbox");
     await userEvent.type(monthInput, "1");
     await userEvent.tab();
-    await expect(canvas.getByText("각 항목은 2자리여야 합니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText("각 항목은 2자리여야 합니다."),
+    ).toBeInTheDocument();
   },
 };
 
@@ -115,6 +123,8 @@ export const InvalidYearLength: Story = {
     const [, yearInput] = canvas.getAllByRole("textbox");
     await userEvent.type(yearInput, "2");
     await userEvent.tab();
-    await expect(canvas.getByText("각 항목은 2자리여야 합니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText("각 항목은 2자리여야 합니다."),
+    ).toBeInTheDocument();
   },
 };

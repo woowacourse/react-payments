@@ -3,16 +3,16 @@ import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
 import { CardContext } from "../Card";
 
-import { CardNumberInputContainer } from "./CardNumberInput";
+import { CardNumberInput } from "./CardNumberInput";
 
 const meta = {
-  title: "CardNumberInputContainer",
-  component: CardNumberInputContainer,
+  title: "CardNumberInput",
+  component: CardNumberInput,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CardNumberInputContainer>;
+} satisfies Meta<typeof CardNumberInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -36,7 +36,7 @@ const renderWithContext = () => {
         setCardExpiryDate: () => {},
       }}
     >
-      <CardNumberInputContainer />
+      <CardNumberInput />
     </CardContext>
   );
 };

@@ -4,7 +4,7 @@ import { Validator } from "../../validators/CardValidator";
 import { CardFieldset, CardLegend, CardInput } from "../../style/CardStyles";
 import { CardContext } from "../Card";
 
-export function CardNumberInputContainer() {
+export function CardNumberInput() {
   const { cardNumber, setCardNumber, setNetworkBrand } =
     useContext(CardContext);
 

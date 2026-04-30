@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { CardSection } from "./CardSection";
-import { CardNumberInputContainer } from "./CardNumberInput";
-import { CardExpiryDateInputContainer } from "./CardExpiryDateInput";
-import { CardCVCInputWrapper } from "./CardCVCInput";
+import { CardNumberInput } from "./CardNumberInput";
+import { CardExpiryDateInput } from "./CardExpiryDateInput";
+import { CardCVCInput } from "./CardCVCInput";
 
 export function CardForm() {
   return (
@@ -11,16 +11,16 @@ export function CardForm() {
         title={"결제할 카드 번호를 입력해 주세요"}
         subTitle={"본인 명의의 카드만 결제 가능합니다."}
       >
-        <CardNumberInputContainer />
+        <CardNumberInput />
       </CardSection>
       <CardSection
         title={"카드 유효기간을 입력해 주세요"}
         subTitle={"월/년도(MMYY)를 순서대로 입력해 주세요."}
       >
-        <CardExpiryDateInputContainer />
+        <CardExpiryDateInput />
       </CardSection>
       <CardSection title={"CVC 번호를 입력해 주세요"}>
-        <CardCVCInputWrapper />
+        <CardCVCInput />
       </CardSection>
     </CardFormContainer>
   );

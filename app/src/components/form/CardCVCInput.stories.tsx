@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 
-import { CardCVCInputWrapper } from "./CardCVCInput";
+import { CardCVCInput } from "./CardCVCInput";
 
 const meta = {
-  title: "CardCVCInputWrapper",
-  component: CardCVCInputWrapper,
+  title: "CardCVCInput",
+  component: CardCVCInput,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CardCVCInputWrapper>;
+} satisfies Meta<typeof CardCVCInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -22,7 +22,9 @@ export const InvalidTypeInput: Story = {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("textbox");
     await userEvent.type(input, "abc");
-    await expect(canvas.getByText("숫자만 입력 가능합니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText("숫자만 입력 가능합니다."),
+    ).toBeInTheDocument();
   },
 };
 
@@ -32,6 +34,8 @@ export const InvalidCVCLength: Story = {
     const input = canvas.getByRole("textbox");
     await userEvent.type(input, "12");
     await userEvent.tab();
-    await expect(canvas.getByText("CVC는 3자리여야 합니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText("CVC는 3자리여야 합니다."),
+    ).toBeInTheDocument();
   },
 };

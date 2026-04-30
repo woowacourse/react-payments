@@ -4,7 +4,7 @@ import { CardContext } from "../Card";
 import { useState, useContext } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 
-export function CardExpiryDateInputContainer() {
+export function CardExpiryDateInput() {
   const { cardExpiryDate, setCardExpiryDate } = useContext(CardContext);
   const [isError, setError] = useState({
     "expiry-month": {
