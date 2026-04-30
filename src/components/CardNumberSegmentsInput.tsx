@@ -4,7 +4,6 @@ import { validateNumberString, validateStringLength, validateStringMaxLength } f
 import type { CardNumberSegments } from '../types';
 import Flex from './Common/Flex';
 import Label from './Common/Label';
-import InputErrorMessage from './Common/InputErrorMessage';
 
 interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;
@@ -13,7 +12,6 @@ interface CardNumberSegmentsInputProps {
 
 function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
   const [segments, setSegments] = useState<CardNumberSegments>(props.value);
-  const [inputError, setInputError] = useState<Error | null>(null);
 
   useEffect(() => {
     props.onChange(segments);
@@ -39,7 +37,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             placeholder="1234"
             value={el}
             onChange={handleChange}
-            onChangeError={(error) => setInputError(error)}
+            isShowError={true}
             validations={[
               {
                 type: 'limit',
@@ -60,7 +58,6 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
           />
         ))}
       </Flex>
-      <InputErrorMessage>{inputError?.message}</InputErrorMessage>
     </Flex>
   );
 }

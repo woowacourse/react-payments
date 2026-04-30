@@ -10,7 +10,6 @@ import {
   validateYear,
 } from '../utils';
 import Label from './Common/Label';
-import InputErrorMessage from './Common/InputErrorMessage';
 
 interface CardExpiryDateInputProps {
   value: Pick<CardFormState, 'expiryMonth' | 'expiryYear'>;
@@ -20,7 +19,6 @@ interface CardExpiryDateInputProps {
 export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
   const [expiryMonth, setExpiryMonth] = useState(props.value.expiryMonth);
   const [expiryYear, setExpiryYear] = useState(props.value.expiryYear);
-  const [inputError, setInputError] = useState<Error | null>(null);
 
   useEffect(() => {
     props.onChange([expiryMonth, expiryYear]);
@@ -45,7 +43,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           placeholder="MM"
           value={expiryMonth}
           onChange={handleChangeMonth}
-          onChangeError={(error) => setInputError(error)}
+          isShowError={true}
           validations={[
             {
               type: 'limit',
@@ -76,6 +74,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           placeholder="YY"
           value={expiryYear}
           onChange={handleChangeYear}
+          isShowError={true}
           validations={[
             {
               type: 'limit',
@@ -100,7 +99,6 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           ]}
         />
       </Flex>
-      <InputErrorMessage>{inputError?.message}</InputErrorMessage>
     </Flex>
   );
 }
