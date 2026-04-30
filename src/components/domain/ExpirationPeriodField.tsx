@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 import FormField, { type FormFieldProps } from "../ui/FormField";
 import Input from "../ui/Input";
+import type { CardInfo } from "../../pages/AddCardPage";
 
-export default function ExpirationPeriodField() {
+export default function ExpirationPeriodField({ onUpdated }: { onUpdated: (value: CardInfo["expirationPeriod"]) => void }) {
     const formFieldProps: Omit<FormFieldProps, 'children'> = {
         title: '카드 유효기간을 입력해 주세요',
         caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',

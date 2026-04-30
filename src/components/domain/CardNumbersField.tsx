@@ -1,8 +1,9 @@
 import { css } from "@emotion/react";
 import FormField, { type FormFieldProps } from "../ui/FormField";
 import Input from "../ui/Input";
+import type { CardInfo } from '../../pages/AddCardPage';
 
-export default function CardNumbersField() {
+export default function CardNumbersField({ onUpdated }: { onUpdated: (value: CardInfo["cardNumbers"]) => void }) {
     const formFieldProps: Omit<FormFieldProps, 'children'> = {
         title: '결제할 카드 번호를 입력해 주세요',
         caption: '본인 명의의 카드만 결제 가능합니다.',
