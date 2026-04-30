@@ -1,15 +1,13 @@
 import styled from "@emotion/styled";
 import Card from "../components/Card";
 import CardCVCInputField from "../components/CardCVCInputField";
-import CardNumberInputField from "../components/CardNumberInputField";
-import CardValidityPeriodInputField from "../components/CardValidityPeriodInputField";
+import CardNumberInputField, {
+  type CardNumberUnits,
+} from "../components/CardNumberInputField";
+import CardValidityPeriodInputField, {
+  type ValidityPeriod,
+} from "../components/CardValidityPeriodInputField";
 import { useState } from "react";
-
-export type CardNumberUnits = [string, string, string, string];
-export type ValidityPeriod = {
-  month: string;
-  year: string;
-};
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };

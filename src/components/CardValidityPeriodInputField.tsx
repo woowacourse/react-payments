@@ -1,8 +1,11 @@
-import type { ValidityPeriod } from "../pages/AddNewCardPage.tsx";
 import InputField from "./InputField.tsx";
 import type { InputStatus } from "./CardNumberInputField.tsx";
 import { useState } from "react";
 
+export type ValidityPeriod = {
+  month: string;
+  year: string;
+};
 interface CardValidityPeriodInputFieldProps {
   validityPeriod: ValidityPeriod;
   onChange: (validityPeriod: ValidityPeriod) => void;

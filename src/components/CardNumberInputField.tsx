@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { CardNumberUnits } from "../pages/AddNewCardPage.tsx";
 import InputField from "./InputField.tsx";
 
+export type CardNumberUnits = [string, string, string, string];
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
   onChange: (input: CardNumberUnits) => void;
