@@ -1,4 +1,4 @@
-import type { CardInfo } from '../../pages/AddCardPage';
+import type { CardInfo } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 

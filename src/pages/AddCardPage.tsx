@@ -4,15 +4,7 @@ import ExpirationPeriodField from '../components/domain/ExpirationPeriodField';
 import CVCField from '../components/domain/CVCField';
 import { useState } from 'react';
 import { categorizeCardBrand } from '../utils';
-
-export type CardBrand = 'local' | 'visa' | 'mastercard';
-
-export interface CardInfo {
-  cardNumbers: string[];
-  expirationPeriod: string[];
-  cvc: string;
-  cardBrand: CardBrand;
-}
+import type { CardInfo } from '../types';
 
 interface FieldState<T> {
   value: T;

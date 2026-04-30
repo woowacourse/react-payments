@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo } from '../../pages/AddCardPage';
+import type { CardInfo } from '../../types';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];

@@ -1,4 +1,4 @@
-import type { CardBrand, CardInfo } from './pages/AddCardPage';
+import type { CardBrand, CardInfo } from './types';
 
 export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardBrand => {
   return 'visa';

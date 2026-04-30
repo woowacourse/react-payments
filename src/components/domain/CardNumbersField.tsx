@@ -1,22 +1,15 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo } from '../../pages/AddCardPage';
+import type { CardInfo, ErrorStatus } from '../../types';
 import { isNumber } from '../../utils';
 import { useState } from 'react';
+import { ERROR_MESSAGES } from '../../constants';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
   onUpdated: (value: CardInfo['cardNumbers']) => void;
 }
-
-export type ErrorStatus = null | 'required' | 'invalidLength' | 'numberOnly';
-
-export const ERROR_MESSAGES: Record<Exclude<ErrorStatus, null>, string> = {
-  required: '필수 입력 항목입니다.',
-  invalidLength: '입력 길이가 올바르지 않습니다.',
-  numberOnly: '숫자만 입력 가능합니다.',
-};
 
 export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
   const [errorStatus, setErrorStatus] = useState<ErrorStatus>(null);
