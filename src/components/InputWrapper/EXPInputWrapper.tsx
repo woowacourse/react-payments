@@ -20,11 +20,7 @@ export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPI
     const [hasTouched, setHasTouched] = useState<boolean>(false);
     const errorAfterCompleted = hasTouched ? validator(value) : null;
 
-    // TODO 여기도 중복 로직 제거
-    const inputError =
-        inputErrors.find((err) => err !== null) ?? null
-            ? inputErrors.find((err) => err !== null) ?? null
-            : errorAfterCompleted;
+    const inputError = inputErrors.find((err) => err !== null) ?? errorAfterCompleted;
 
     return (
         <CardInputWrapper errorMessage={inputError}>
