@@ -57,7 +57,15 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             font-weight: 500;
           `}
         >
-          {cardInfo.expiry[0]}/{cardInfo.expiry[1]}
+          {cardInfo.expiry[0]}
+          <span
+            css={css`
+              ${cardInfo.expiry[1] ? `visibility: visible` : `visibility: hidden`}
+            `}
+          >
+            /
+          </span>
+          {cardInfo.expiry[1]}
         </p>
       </div>
     </div>
