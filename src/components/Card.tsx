@@ -1,30 +1,42 @@
-import styled from "@emotion/styled";
+import { getFormattedValidityPeriodUnit } from "@utils/card";
 import masterCard from "@assets/Mastercard.png";
 import visa from "@assets/Visa.png";
 import type { CardNumberUnits } from "@components/CardNumberInputField";
 import type { ValidityPeriod } from "@components/CardValidityPeriodInputField";
+import SwitchCase from "@components/SwitchCase";
+import styled from "@emotion/styled";
+import { detectCardBrand } from "@utils/card";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;
   validityPeriod: ValidityPeriod;
-  brand?: "Visa" | "MasterCard" | null;
+  brand?: ReturnType<typeof detectCardBrand>;
 }
 
+export type CardBrand = "Visa" | "MasterCard";
+
 const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
-  const { month, year } = validityPeriod;
-  const CardValidityPeriodUnitString = `${
-    month ? month + "/" : ""
-  }${year ? year : ""}`;
+  const CardValidityPeriodUnitString =
+    getFormattedValidityPeriodUnit(validityPeriod);
 
   return (
     <Wrapper>
       <ChipWrapper>
         <Chip />
-        {brand && brand === "MasterCard" ? (
-          <CardBrandImg src={masterCard} />
-        ) : brand === "Visa" ? (
-          <CardBrandImg src={visa} />
-        ) : null}
+        <SwitchCase
+          value={brand}
+          caseBy={[
+            {
+              case: "MasterCard",
+              component: <CardBrandImg src={masterCard} />,
+            },
+            {
+              case: "Visa",
+              component: <CardBrandImg src={visa} />,
+            },
+          ]}
+          defaultCase={null}
+        />
       </ChipWrapper>
       <CardNumberWrapper>
         {cardNumberUnits.map((cardNumberUnit) => (
