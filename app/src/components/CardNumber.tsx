@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
 
-export function CardNumber() {
+export function CardNumber({ cardNumber }) {
   return (
     <CardNumberContainer>
-      <span>1111</span>
-      <span>2222</span>
-      <span className="secret">● ● ● ●</span>
-      <span className="secret">● ● ● ●</span>
+      <span>{cardNumber["first-digits"]}</span>
+      <span>{cardNumber["second-digits"]}</span>
+      <span className="secret">
+        {"●".repeat(cardNumber["third-digits"].length)}
+      </span>
+      <span className="secret">
+        {"●".repeat(cardNumber["fourth-digits"].length)}
+      </span>
     </CardNumberContainer>
   );
 }

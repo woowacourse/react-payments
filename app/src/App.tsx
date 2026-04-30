@@ -18,7 +18,7 @@ function App() {
 
   return (
     <AppContainer>
-      <CardPreview />
+      <CardPreview cardNumber={cardNumber} cardExpiryDate={cardExpiryDate} />
       <CardForm
         cardNumber={cardNumber}
         setCardNumber={setCardNumber}

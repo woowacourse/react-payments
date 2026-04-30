@@ -2,8 +2,16 @@ import styled from "@emotion/styled";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
+import type { CardNumberType } from "../types/cardNumber.ts";
+import type { CardExpiryDateType } from "../types/cardExpiryDate.ts";
 
-export function CardPreview() {
+export function CardPreview({
+  cardNumber,
+  cardExpiryDate,
+}: {
+  cardNumber: CardNumberType;
+  cardExpiryDate: CardExpiryDateType;
+}) {
   return (
     <CardContainer>
       <div className="card-meta">
@@ -11,8 +19,8 @@ export function CardPreview() {
         <CardNetworkBrand brand="visa" />
       </div>
       <div className="card-contents">
-        <CardNumber />
-        <CardExpiryDate />
+        <CardNumber cardNumber={cardNumber} />
+        <CardExpiryDate cardExpiryDate={cardExpiryDate} />
       </div>
     </CardContainer>
   );

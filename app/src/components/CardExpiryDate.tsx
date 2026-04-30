@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 
-export function CardExpiryDate() {
+export function CardExpiryDate({ cardExpiryDate }) {
   return (
     <CardExpiryDateContainer>
-      <span>04</span>
+      <span>{cardExpiryDate["expiry-month"]}</span>
       <span>/</span>
-      <span>21</span>
+      <span>{cardExpiryDate["expiry-year"]}</span>
     </CardExpiryDateContainer>
   );
 }

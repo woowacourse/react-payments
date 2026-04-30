@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { CardPreview } from "./CardPreview";
+import { CardNumber } from "./CardNumber";
 
 const meta = {
-  title: "CardPreview",
-  component: CardPreview,
+  title: "CardNumber",
+  component: CardNumber,
   parameters: {
     layout: "centered",
   },
@@ -16,19 +16,26 @@ const meta = {
       "third-digits": "",
       "fourth-digits": "",
     },
-    cardExpiryDate: {
-      "expiry-month": "",
-      "expiry-year": "",
-    },
   },
-} satisfies Meta<typeof CardPreview>;
+} satisfies Meta<typeof CardNumber>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Empty: Story = {};
 
-export const CardNumberPartiallyFilled: Story = {
+export const FirstGroupFilled: Story = {
+  args: {
+    cardNumber: {
+      "first-digits": "1234",
+      "second-digits": "",
+      "third-digits": "",
+      "fourth-digits": "",
+    },
+  },
+};
+
+export const SecondGroupFilled: Story = {
   args: {
     cardNumber: {
       "first-digits": "1234",
@@ -39,37 +46,24 @@ export const CardNumberPartiallyFilled: Story = {
   },
 };
 
-export const CardNumberFullyFilled: Story = {
+export const ThirdGroupMasked: Story = {
+  args: {
+    cardNumber: {
+      "first-digits": "1234",
+      "second-digits": "5678",
+      "third-digits": "9012",
+      "fourth-digits": "",
+    },
+  },
+};
+
+export const FullyFilledAndMasked: Story = {
   args: {
     cardNumber: {
       "first-digits": "1234",
       "second-digits": "5678",
       "third-digits": "9012",
       "fourth-digits": "3456",
-    },
-  },
-};
-
-export const ExpiryDateFilled: Story = {
-  args: {
-    cardExpiryDate: {
-      "expiry-month": "12",
-      "expiry-year": "26",
-    },
-  },
-};
-
-export const FullyFilled: Story = {
-  args: {
-    cardNumber: {
-      "first-digits": "1234",
-      "second-digits": "5678",
-      "third-digits": "9012",
-      "fourth-digits": "3456",
-    },
-    cardExpiryDate: {
-      "expiry-month": "12",
-      "expiry-year": "26",
     },
   },
 };
