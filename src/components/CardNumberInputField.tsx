@@ -7,11 +7,11 @@ interface CardNumberInputFieldProps {
   onChange: (input: CardNumberUnits) => void;
 }
 
-type InputStatus = "default" | "error";
+export type InputStatus = "default" | "error";
 
 type InputsStatuses = [InputStatus, InputStatus, InputStatus, InputStatus];
 
-const INPUTS_STATUES: InputsStatuses = [
+const INPUTS_STATUSES: InputsStatuses = [
   "default",
   "default",
   "default",
@@ -22,7 +22,7 @@ const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
 }: CardNumberInputFieldProps) => {
-  const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUES);
+  const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
 
   const handleCardNumberChange = (index: number, input: string) => {
     if (input.length !== 0)
@@ -36,7 +36,7 @@ const CardNumberInputField = ({
         return;
       }
 
-    setStatus(INPUTS_STATUES);
+    setStatus(INPUTS_STATUSES);
 
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
     newCardNumberUnits[index] = input.slice(0, 4);
