@@ -8,7 +8,7 @@ export default function AddCardPage() {
         <div css={mobileLayout}>
             <main >
                 {/* <Card /> */}
-                <form>
+                <form css={formLayout}>
                     <CardNumbersField />
                     <ExpirationPeriodField />
                     <CVCField />
@@ -23,5 +23,14 @@ const mobileLayout = css`
     flex-direction: column;
     width: 376px;
     height: 700px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    overflow: scroll;
+    border-radius: 20px;
 `;
 
+const formLayout = css`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+`
