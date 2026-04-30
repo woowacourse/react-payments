@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import MasterCard from "../assets/Mastercard.svg";
-import VisaCard from "../assets/visa-logo.svg";
+import MasterCard from "../../assets/Mastercard.svg";
+import VisaCard from "../../assets/visa-logo.svg";
 
 export function CardNetworkBrand({ brand }: { brand: string }) {
   const selectBrandImage = (brand: string) => {
