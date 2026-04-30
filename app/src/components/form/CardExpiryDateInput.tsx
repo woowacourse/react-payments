@@ -24,10 +24,10 @@ export function CardExpiryDateInputContainer({
       Validator.isNumber(value);
       Validator.isValidMonth(value);
       setError({ ...isError, [id]: { state: false }, message: "" });
+      setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     } catch (err) {
       setError({ ...isError, [id]: { state: true }, message: err.message });
     }
-    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
   const changeCardExpiryYear = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,10 +37,10 @@ export function CardExpiryDateInputContainer({
       Validator.isNumber(value);
       Validator.isValidYear(value);
       setError({ ...isError, [id]: { state: false }, message: "" });
+      setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     } catch (err) {
       setError({ ...isError, [id]: { state: true }, message: err.message });
     }
-    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {

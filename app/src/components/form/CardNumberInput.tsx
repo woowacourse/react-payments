@@ -42,10 +42,10 @@ export function CardNumberInputContainer({
     try {
       Validator.isNumber(value);
       setError({ ...isError, [id]: { state: false }, message: "" });
+      setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
       setError({ ...isError, [id]: { state: true }, message: err.message });
     }
-    setCardNumber({ ...cardNumber, [id]: value });
   };
 
   const changeFirstDigitsCardNumber = (
@@ -57,11 +57,11 @@ export function CardNumberInputContainer({
       Validator.isNumber(value);
       Validator.isValidNetworkBrand(value);
       setError({ ...isError, [id]: { state: false }, message: "" });
+      handleNetworkBrand(value);
+      setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
       setError({ ...isError, [id]: { state: true }, message: err.message });
     }
-    handleNetworkBrand(value);
-    setCardNumber({ ...cardNumber, [id]: value });
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {

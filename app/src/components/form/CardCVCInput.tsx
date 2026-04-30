@@ -17,10 +17,10 @@ export function CardCVCInputWrapper() {
     try {
       Validator.isNumber(value);
       setError({ ...isError, [id]: { state: false }, message: "" });
+      setCardCVC(e.target.value);
     } catch (err) {
       setError({ ...isError, [id]: { state: true }, message: err.message });
     }
-    setCardCVC(e.target.value);
   };
 
   const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
