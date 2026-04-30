@@ -9,8 +9,9 @@ import { decideBrandName } from "./utils/decideBrandName.ts";
 import { useEffect } from "react";
 
 function App() {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: [], brand: "" });
+  const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: "", brand: "" });
 
+  console.log(cardInfo);
   useEffect(() => {
     const brandName = decideBrandName(cardInfo.numbers[0]);
     setCardInfo((prev) => {
@@ -30,7 +31,7 @@ function App() {
     });
   };
 
-  const cvcHandler = (cardInfo: string[]) => {
+  const cvcHandler = (cardInfo: string) => {
     setCardInfo((prev) => {
       return { ...prev, cvc: cardInfo };
     });
