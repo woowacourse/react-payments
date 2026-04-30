@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { ErrorMessage } from "./ErrorMessage";
-import { CardInput } from "../../style/CardInput";
+import { CardInput } from "../../style/CardStyles";
 import { Validator } from "../../validators/CardValidator";
 
 export function CardCVCInputWrapper() {

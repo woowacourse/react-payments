@@ -1,4 +1,4 @@
-import { CardInput, CardFieldset, CardLegend } from "../../style/CardInput";
+import { CardInput, CardFieldset, CardLegend } from "../../style/CardStyles";
 import { Validator } from "../../validators/CardValidator";
 import { CardContext } from "../Card";
 import { useState, useContext } from "react";

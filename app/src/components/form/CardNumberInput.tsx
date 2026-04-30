@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { Validator } from "../../validators/CardValidator";
-import { CardFieldset, CardLegend, CardInput } from "../../style/CardInput";
+import { CardFieldset, CardLegend, CardInput } from "../../style/CardStyles";
 import { CardContext } from "../Card";
 
 export function CardNumberInputContainer() {
