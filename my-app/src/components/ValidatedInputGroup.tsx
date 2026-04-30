@@ -1,5 +1,12 @@
-// ValidatedInputGroup.tsx
 import { css } from "@emotion/react";
+
+const errorTextStyle = css`
+  position: absolute;
+  bottom: 2px;
+  font-size: 9.5px;
+  font-weight: 400;
+  color: #ff3d3d;
+`;
 
 const ValidatedInputGroup = ({
   onChange,
@@ -21,12 +28,12 @@ const ValidatedInputGroup = ({
   errorIndex: number;
 }) => {
   return (
-    <>
+    <div css={css`position: relative; padding-bottom: 20px;`}>
       <section
         css={css`
           display: flex;
           flex-direction: row;
-          gap: 10px;
+          gap: 8px;
         `}
       >
         {Array.from({ length: inputOption.count }).map((_, i) => (
@@ -41,24 +48,20 @@ const ValidatedInputGroup = ({
               height: 32px;
               border-radius: 2px;
               min-width: 0;
-              border-width: 1.01px;
-              border-color: ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
+              border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
+              padding: 8px;
+              box-sizing: border-box;
             `}
             placeholder={inputOption.placeHolder[i]}
           />
         ))}
       </section>
       <span
-        css={css`
-          font-size: 9.5px;
-          font-weight: 400;
-          color: #ff3d3d;
-          display: ${errorMessage ? "block" : "none"};
-        `}
+        css={[errorTextStyle, css`visibility: ${errorMessage ? "visible" : "hidden"};`]}
       >
         {errorMessage}
       </span>
-    </>
+    </div>
   );
 };
 

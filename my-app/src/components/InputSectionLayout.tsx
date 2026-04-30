@@ -1,7 +1,5 @@
 import { css } from "@emotion/react";
 
-// 현재 : ValidatedInputGroup을 감싸는 형태 => 자식으로 받는 형태 (합성)
-
 const InputSectionLayout = ({
   children,
   title,
@@ -25,7 +23,7 @@ const InputSectionLayout = ({
         css={css`
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 8px;
         `}
       >
         {/*제목*/}
@@ -33,6 +31,8 @@ const InputSectionLayout = ({
           css={css`
             font-size: 18px;
             font-weight: 700;
+            line-height: 1;
+            color: #000;
           `}
         >
           {title}
@@ -42,6 +42,8 @@ const InputSectionLayout = ({
           css={css`
             font-size: 9.5px;
             font-weight: 400;
+            line-height: 1;
+            color: #8b95a1;
           `}
         >
           {message}
@@ -59,6 +61,8 @@ const InputSectionLayout = ({
           css={css`
             font-size: 12px;
             font-weight: 500;
+            line-height: 15px;
+            color: #0a0d13;
           `}
         >
           {tag}

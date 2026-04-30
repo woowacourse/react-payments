@@ -4,10 +4,10 @@ import masterLogo from "../assets/masterLogo.png";
 import visaLogo from "../assets/visaLogo.png";
 
 const fixedCardNumberStyle = css`
-            display: inline-block;
-            min-width: 30px;
-            font-family: 'Inter';
-            `
+  display: inline-block;
+  min-width: 30px;
+  font-family: 'Inter';
+`
 
 const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
   return (
@@ -17,8 +17,11 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
         height: 132px;
         border-radius: 4px;
         background-color: #333333;
-        box-shadow: 3px 3px 5px 0px #00000040;
+        box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
         padding: 8px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
       `}
     >
       {/* 로고랑, IC칩 */}
@@ -34,6 +37,7 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             background-color: #ddcd78;
             width: 36px;
             height: 22px;
+            border-radius: 4px;
           `}
         ></div>
         <img
@@ -42,7 +46,6 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             height: 22px;
           `}
           src={cardInfo.brand === "master" ? masterLogo : cardInfo.brand === "visa" ? visaLogo : undefined}
-
         ></img>
       </div>
 
@@ -68,6 +71,7 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             color: #ffffff;
             font-size: 14px;
             font-weight: 500;
+            font-family: 'Inter';
           `}
         >
           {cardInfo.expiry[0]}

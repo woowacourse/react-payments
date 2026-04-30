@@ -41,23 +41,30 @@ function App() {
     <main
       css={css`
         display: flex;
-        height: 100vh;
+        min-height: 100vh;
         width: 100vw;
-        align-items: center;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 60px;
+        background-color: #f5f5f5;
       `}
     >
       <div
         css={css`
-          width: 315px;
-          margin: auto;
+          width: 376px;
+          padding: 77px 30px 20px;
+          background-color: #ffffff;
+          border-radius: 20px;
           display: flex;
           flex-direction: column;
+          align-items: center;
           gap: 45px;
         `}
       >
         <Card cardInfo={cardInfo} />
         <div
           css={css`
+            width: 100%;
             display: flex;
             flex-direction: column;
             gap: 16px;
