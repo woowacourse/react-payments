@@ -1,9 +1,31 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 
 export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
+  const [isError, setError] = useState({
+    "first-digits": {
+      state: false,
+    },
+    "second-digits": {
+      state: false,
+    },
+    "third-digits": {
+      state: false,
+    },
+    "fourth-digits": {
+      state: false,
+    },
+  });
+
   const changeCardNumber = (e: any) => {
     const value = e.target.value;
     const id = e.target.id;
+    if (isNaN(value)) {
+      setError({ ...isError, [id]: { state: true } });
+      return;
+    } else {
+      setError({ ...isError, [id]: { state: false } });
+    }
     setCardNumber({ ...cardNumber, [id]: value });
   };
 
@@ -18,6 +40,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
         value={cardNumber["first-digits"]}
         onChange={changeCardNumber}
         placeholder="1234"
+        isError={isError["first-digits"].state}
       />
       <CardNumberInput
         id="second-digits"
@@ -27,6 +50,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
         value={cardNumber["second-digits"]}
         onChange={changeCardNumber}
         placeholder="1234"
+        isError={isError["second-digits"].state}
       />
       <CardNumberInput
         id="third-digits"
@@ -36,6 +60,7 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
         value={cardNumber["third-digits"]}
         onChange={changeCardNumber}
         placeholder="1234"
+        isError={isError["third-digits"].state}
       />
       <CardNumberInput
         id="fourth-digits"
@@ -45,10 +70,15 @@ export function CardNumberInputContainer({ cardNumber, setCardNumber }) {
         value={cardNumber["fourth-digits"]}
         onChange={changeCardNumber}
         placeholder="1234"
+        isError={isError["fourth-digits"].state}
       />
     </CardNumberFieldset>
   );
 }
+
+type ErrorFlag = {
+  isError?: boolean;
+};
 
 const CardNumberFieldset = styled.fieldset`
   border: none;
@@ -63,8 +93,8 @@ const CardNumberLegend = styled.legend`
   margin: 8px 0;
 `;
 
-const CardNumberInput = styled.input`
-  border: solid 1px #acacac;
+const CardNumberInput = styled.input<ErrorFlag>`
+  border: solid 1px ${(props) => (props.isError ? "#FF3D3D" : "#acacac")};
   border-radius: 2px;
   padding: 0.5rem;
   font-size: 11px;
