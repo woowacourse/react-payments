@@ -19,7 +19,7 @@ export default function FormField({ title, caption, error, errorMessage, childre
       </div>
       <div css={formFieldInputWrapperStyle}>
         {children}
-        <FieldCaption variant={'error'}>{error ? errorMessage : ''}</FieldCaption>
+        <FieldCaption variant={'error'}>{error ? errorMessage : '\u00A0'}</FieldCaption>
       </div>
     </div>
   );
