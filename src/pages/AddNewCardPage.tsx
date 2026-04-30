@@ -26,7 +26,19 @@ const AddNewCardPage = () => {
   return (
     <PageWrapper>
       <CardWrapper>
-        <Card cardNumberUnits={cardNumber} validityPeriod={validityPeriod} />
+        <Card
+          cardNumberUnits={cardNumber}
+          validityPeriod={validityPeriod}
+          brand={
+            cardNumber[0].startsWith("4")
+              ? "Visa"
+              : ["51", "52", "53", "54", "55"].includes(
+                    cardNumber[0].slice(0, 2),
+                  )
+                ? "MasterCard"
+                : undefined
+          }
+        />
       </CardWrapper>
       <CardInfoForm>
         <CardNumberInputField
