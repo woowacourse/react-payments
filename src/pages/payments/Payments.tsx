@@ -95,19 +95,17 @@ export const Payments = () => {
   };
 
   const preventExpirationMonth = (month: string) => {
-    if (month === '') return false;
-    if (isNumericString(month)) return false;
-    if (month.length > 2) return false;
+    if (month !== '' && !isNumericString(month)) return true;
+    if (month.length > 2) return true;
 
-    return true;
+    return false;
   };
 
   const preventExpirationYear = (year: string) => {
-    if (year === '') return false;
-    if (isNumericString(year)) return false;
-    if (year.length > 2) return false;
+    if (year !== '' && !isNumericString(year)) return true;
+    if (year.length > 2) return true;
 
-    return true;
+    return false;
   };
 
   const renderErrorMessageExpirationDate = (expirationDate: ExpirationDate) => {
