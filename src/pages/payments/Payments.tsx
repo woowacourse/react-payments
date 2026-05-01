@@ -32,6 +32,9 @@ export const Payments = () => {
   };
 
   // cardNumber --------------------------
+  const renderErrorCardNumberInput = (cardNumber: string) => {
+    return onBlurCardNumber.includes(true) && !validateCardNumber(cardNumber);
+  };
 
   const preventCardNumber = (cardNumber: string) => {
     if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
@@ -45,10 +48,8 @@ export const Payments = () => {
     return '';
   };
 
-  // 개별 카드 번호 input 유효성 검사 확인 함수
-
   const handleChangeCardNumber = (index: number, value: string) => {
-    if (preventCardNumber(value)) return; // 여기 여기 여기 여기< <<<<<<
+    if (preventCardNumber(value)) return;
     const next = [...cardNumbers];
     next[index] = value;
     setCardNumbers(next);
@@ -144,7 +145,7 @@ export const Payments = () => {
             value={value}
             maxLength={4}
             placeholder="1234"
-            isError={onBlurCardNumber.includes(true) && !validateCardNumber(cardNumbers[index])}
+            isError={renderErrorCardNumberInput(cardNumbers[index])}
             onChange={(e) => handleChangeCardNumber(index, e.target.value)}
             onBlur={() => handleBlurCardNumber(index)}
           />
@@ -165,6 +166,7 @@ export const Payments = () => {
             handleBlurExpirationDate('month');
           }}
           isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.month}
+          placeholder="MM"
         />
         <Input
           type="tel"
@@ -175,6 +177,7 @@ export const Payments = () => {
             handleBlurExpirationDate('year');
           }}
           isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.year}
+          placeholder="YY"
         />
       </FormGroup>
 
