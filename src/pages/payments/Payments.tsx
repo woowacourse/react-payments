@@ -1,3 +1,6 @@
+import cn from 'classnames';
+import styles from './Payments.module.css';
+
 import { useState } from 'react';
 import { CreditCard } from '../../core/components/creditCard';
 import { FormGroup } from '../../core/components/formGroup';
@@ -125,7 +128,7 @@ export const Payments = () => {
   };
 
   return (
-    <>
+    <div className={cn(styles.payments)}>
       <CreditCard
         bank="default"
         cardBrand={renderBrandCard(cardNumbers)}
@@ -192,6 +195,6 @@ export const Payments = () => {
           onBlur={() => handleBlurCvc()}
         />
       </FormGroup>
-    </>
+    </div>
   );
 };
