@@ -39,9 +39,9 @@ export const CreditCard = ({
         ))}
       </div>
       <div className={styles.expirationDate}>
-        {expirationDate?.map((number, index) => (
-          <span key={index}>{number}</span>
-        ))}
+        {expirationDate?.map((number, index) =>
+          index === 0 ? <span key={index}>{number}</span> : number && <span key={index}>/{number}</span>,
+        )}
       </div>
     </div>
   );

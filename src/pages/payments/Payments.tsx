@@ -168,7 +168,7 @@ export const Payments = () => {
         bank="default"
         cardBrand={renderBrandCard(cardNumbers)}
         cardNumberList={cardNumbers}
-        expirationDate={[]}
+        expirationDate={[expirationDate.month, expirationDate.year]}
       />
       <FormGroup
         title="결제할 카드 번호를 입력해 주세요"
