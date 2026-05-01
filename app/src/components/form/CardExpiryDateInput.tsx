@@ -1,18 +1,14 @@
 import { CardInput, CardFieldset, CardLegend } from "../../style/CardStyles";
 import { Validator } from "../../validators/CardValidator";
-import { CardContext } from "../Card";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
+import { useCardContext } from "../../hooks/useCardContext";
 
 export function CardExpiryDateInput() {
-  const { cardExpiryDate, setCardExpiryDate } = useContext(CardContext);
+  const { cardExpiryDate, setCardExpiryDate } = useCardContext();
   const [isError, setError] = useState({
-    "expiry-month": {
-      state: false,
-    },
-    "expiry-year": {
-      state: false,
-    },
+    "expiry-month": { state: false },
+    "expiry-year": { state: false },
     message: "",
   });
 
@@ -24,7 +20,7 @@ export function CardExpiryDateInput() {
       setError({ ...isError, [id]: { state: false }, message: "" });
       setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({ ...isError, [id]: { state: true }, message: err instanceof Error ? err.message : "" });
     }
   };
 
@@ -36,7 +32,7 @@ export function CardExpiryDateInput() {
       setError({ ...isError, [id]: { state: false }, message: "" });
       setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({ ...isError, [id]: { state: true }, message: err instanceof Error ? err.message : "" });
     }
   };
 
@@ -46,7 +42,7 @@ export function CardExpiryDateInput() {
       Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
       setError({ ...isError, [id]: { state: false }, message: "" });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({ ...isError, [id]: { state: true }, message: err instanceof Error ? err.message : "" });
     }
   };
 
@@ -81,3 +77,5 @@ export function CardExpiryDateInput() {
     </>
   );
 }
+
+export { CardExpiryDateInput as CardExpiryDateInputContainer };

@@ -1,9 +1,8 @@
-import { createContext, useState } from "react";
+import { useState } from "react";
 import { CardPreview } from "./preview/CardPreview.tsx";
 import { CardForm } from "./form/CardForm.tsx";
 import styled from "@emotion/styled";
-
-export const CardContext = createContext(null);
+import { CardContext } from "../context/CardContext";
 
 export function Card() {
   const [cardNumber, setCardNumber] = useState({

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
-import { CardContext } from "../Card";
+import { CardContext } from "../../context/CardContext";
 
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
 

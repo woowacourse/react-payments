@@ -1,26 +1,17 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { Validator } from "../../validators/CardValidator";
 import { CardFieldset, CardLegend, CardInput } from "../../style/CardStyles";
-import { CardContext } from "../Card";
+import { useCardContext } from "../../hooks/useCardContext";
 
 export function CardNumberInput() {
-  const { cardNumber, setCardNumber, setNetworkBrand } =
-    useContext(CardContext);
+  const { cardNumber, setCardNumber, setNetworkBrand } = useCardContext();
 
   const [isError, setError] = useState({
-    "first-digits": {
-      state: false,
-    },
-    "second-digits": {
-      state: false,
-    },
-    "third-digits": {
-      state: false,
-    },
-    "fourth-digits": {
-      state: false,
-    },
+    "first-digits": { state: false },
+    "second-digits": { state: false },
+    "third-digits": { state: false },
+    "fourth-digits": { state: false },
     message: "",
   });
 
@@ -43,13 +34,11 @@ export function CardNumberInput() {
       setError({ ...isError, [id]: { state: false }, message: "" });
       setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({ ...isError, [id]: { state: true }, message: err instanceof Error ? err.message : "" });
     }
   };
 
-  const changeFirstDigitsCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const changeFirstDigitsCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
     try {
       Validator.isNumber(value);
@@ -58,7 +47,7 @@ export function CardNumberInput() {
       handleNetworkBrand(value);
       setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({ ...isError, [id]: { state: true }, message: err instanceof Error ? err.message : "" });
     }
   };
 
@@ -68,7 +57,7 @@ export function CardNumberInput() {
       Validator.isValidCardNumberLength(value, e.target.maxLength);
       setError({ ...isError, [id]: { state: false }, message: "" });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({ ...isError, [id]: { state: true }, message: err instanceof Error ? err.message : "" });
     }
   };
 
@@ -125,3 +114,5 @@ export function CardNumberInput() {
     </>
   );
 }
+
+export { CardNumberInput as CardNumberInputContainer };

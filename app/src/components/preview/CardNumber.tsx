@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
-import { useContext } from "react";
-import { CardContext } from "../Card";
+import { useCardContext } from "../../hooks/useCardContext";
 
 export function CardNumber() {
-  const { cardNumber } = useContext(CardContext);
+  const { cardNumber } = useCardContext();
 
   return (
     <CardNumberContainer>

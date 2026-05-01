@@ -1,12 +1,11 @@
 import styled from "@emotion/styled";
-import { useContext } from "react";
-import { CardContext } from "../Card.tsx";
+import { useCardContext } from "../../hooks/useCardContext";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
 
 export function CardPreview() {
-  const { networkBrand } = useContext(CardContext);
+  const { networkBrand } = useCardContext();
   return (
     <CardContainer>
       <div className="card-meta">

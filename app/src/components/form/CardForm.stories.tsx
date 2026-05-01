@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { CardContext } from "../Card";
+import { CardContext } from "../../context/CardContext";
 import { CardForm } from "./CardForm";
 
 const meta = {
