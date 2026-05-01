@@ -1,4 +1,4 @@
-import PaymentWidget from "./components/cardInfo/PaymentWidget";
+import PaymentWidget from "./components/PaymentWidget";
 import styled from "@emotion/styled";
 
 function App() {

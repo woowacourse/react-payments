@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CardInfo from "./CardInfo";
-import CardPreview from "./CardPreview";
-import styled from "@emotion/styled";
+import CardInfo from "./cardInfo/CardInfo";
+import CardPreview from "./cardPreview/CardPreview";
+import { CardPaymentWidgetWrapper } from "./PaymentWidget.styles";
 
 export default function PaymentWidget() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
@@ -25,9 +25,3 @@ export default function PaymentWidget() {
     </CardPaymentWidgetWrapper>
   );
 }
-
-const CardPaymentWidgetWrapper = styled.div`
-  background-color: white;
-  width: 376px;
-  border-radius: 10px;
-`;

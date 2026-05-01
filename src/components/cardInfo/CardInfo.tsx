@@ -1,8 +1,14 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
-import CardInfoHeader from "./CardInfoHeader";
-import CardInfoInput from "./CardInfoInput";
-import styled from "@emotion/styled";
-
+import { type Dispatch, type SetStateAction } from "react";
+import CardInfoHeader from "./cardInfoHeader/CardInfoHeader";
+import CardInfoInput from "./cardInfoInput/CardInfoInput";
+import {
+  CardInfoWrapper,
+  CardInfoSection,
+  InfoInput,
+  ErrorMessage,
+} from "./CardInfo.styles";
+import { useInputHandle } from "./useInputHandle";
+import { useExpireDate } from "./useExpireDate";
 interface CardInfoProps {
   cardNumber: string[];
   setCardNumber: Dispatch<SetStateAction<string[]>>;
@@ -20,83 +26,14 @@ export default function CardInfo({
   cvcNumber,
   setCvcNumber,
 }: CardInfoProps) {
-  const [cardNumberError, setCardNumberError] = useState("");
-  const [expireDateError, setExpireDateError] = useState("");
-  const [cvcNumberError, setCvcNumberError] = useState("");
-
-  const handleCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const newValue = e.target.value;
-
-    if (!/^\d+$/.test(newValue) && newValue) {
-      setCardNumberError("숫자만 입력 가능합니다.");
-      return;
-    }
-
-    setCardNumberError("");
-
-    setCardNumber(() => {
-      const newArray = [...cardNumber];
-      newArray[index] = newValue;
-      return newArray;
-    });
-  };
-
-  const handleExpireDate = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const newValue = e.target.value;
-
-    setExpireDateError("");
-
-    if (!/^\d+$/.test(newValue) && newValue) {
-      setExpireDateError("숫자만 입력 가능합니다.");
-      return;
-    }
-
-    if (index === 0 && newValue) {
-      const month = Number(newValue);
-
-      if (month > 12) {
-        setExpireDateError("1월~12월 사이를 입력해 주세요.");
-      } else if (newValue.length === 1) {
-        setExpireDateError("월을 01 ~ 12 형식으로 작성해주세요.");
-      } else if (newValue.length === 2 && month === 0) {
-        setExpireDateError("1월~12월 사이를 입력해 주세요.");
-      } else {
-        setExpireDateError("");
-      }
-    }
-
-    setExpireDate(() => {
-      const newArray = [...expireDate];
-      newArray[index] = newValue;
-      return newArray;
-    });
-  };
-
-  const handleCvcNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const newValue = e.target.value;
-
-    if (!/^\d+$/.test(newValue) && newValue) {
-      setCvcNumberError("숫자만 입력 가능합니다.");
-      return;
-    }
-
-    setCvcNumberError("");
-
-    setCvcNumber(() => {
-      const newArray = [...cvcNumber];
-      newArray[index] = newValue;
-      return newArray;
-    });
-  };
+  const { error: cardNumberError, handleNumber: handleCardNumber } =
+    useInputHandle(cardNumber, setCardNumber);
+  const { expireDateError, handleExpireDate } = useExpireDate(
+    expireDate,
+    setExpireDate,
+  );
+  const { error: cvcNumberError, handleNumber: handleCvcNumber } =
+    useInputHandle(cvcNumber, setCvcNumber);
 
   return (
     <CardInfoWrapper>
@@ -117,7 +54,7 @@ export default function CardInfo({
             />
           ))}
         </CardInfoInput>
-        <p>{cardNumberError}</p>
+        <ErrorMessage>{cardNumberError}</ErrorMessage>
       </CardInfoSection>
 
       <CardInfoSection>
@@ -141,7 +78,7 @@ export default function CardInfo({
             inputMode="numeric"
           />
         </CardInfoInput>
-        <p>{expireDateError}</p>
+        <ErrorMessage>{expireDateError}</ErrorMessage>
       </CardInfoSection>
 
       <CardInfoSection>
@@ -158,29 +95,8 @@ export default function CardInfo({
             inputMode="numeric"
           />
         </CardInfoInput>
-        <p>{cvcNumberError}</p>
+        <ErrorMessage>{cvcNumberError}</ErrorMessage>
       </CardInfoSection>
     </CardInfoWrapper>
   );
 }
-
-const CardInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 45px 30px 20px 30px;
-  gap: 16px;
-`;
-
-const CardInfoSection = styled.section`
-  display: flex;
-  flex-direction: column;
-`;
-
-const InfoInput = styled.input`
-  flex: 1;
-  min-width: 0;
-  height: 32px;
-  border: 1px solid rgba(172, 172, 172, 1);
-  border-radius: 6px;
-  padding: 4px;
-`;
