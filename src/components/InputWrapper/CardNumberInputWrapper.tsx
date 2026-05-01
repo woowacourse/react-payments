@@ -10,6 +10,7 @@ interface CardNumberInputWrapperProps {
 }
 
 export default function CardNumberInputWrapper({ validator, setCardNumber, value }: CardNumberInputWrapperProps) {
+    // TODO CVCInputWrapper, EXPInputWrapper에 존재하는 에러 다루기 위한 유사한 로직들 커스텀 훅으로 분리
     const [inputErrors, setInputErrors] = useState<(string | null)[]>([null, null, null, null]);
 
     const setError = (index: number) => (message: string | null) => {
