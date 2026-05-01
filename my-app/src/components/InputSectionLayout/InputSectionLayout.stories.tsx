@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import InputSectionLayout from "../components/InputSectionLayout";
+import InputSectionLayout from "./InputSectionLayout";
 
 const inputStyle = {
   width: "100%",

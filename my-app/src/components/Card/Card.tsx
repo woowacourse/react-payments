@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
-import type { CardInfo } from "../types";
-import masterLogo from "../assets/masterLogo.png";
-import visaLogo from "../assets/visaLogo.png";
+import type { CardInfo } from "../../types";
+import masterLogo from "./masterLogo.png";
+import visaLogo from "./visaLogo.png";
 
 const fixedCardNumberStyle = css`
   display: inline-block;

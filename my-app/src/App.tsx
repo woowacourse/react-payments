@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
 import type { CardInfo } from "./types.ts";
 import { useState } from "react";
-import Card from "./components/Card.tsx";
-import CardNumberInputSection from "../src/components/CardNumberInputSection.tsx";
-import CvcInputSection from "../src/components/CvcInputSection.tsx";
-import ExpiryDateInputSection from "../src/components/ExpiryDateInputSection.tsx";
+import Card from "./components/Card/Card";
+import CardNumberInputSection from "./components/CardNumberInputSection/CardNumberInputSection";
+import CvcInputSection from "./components/CvcInputSection/CvcInputSection";
+import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection";
 import { decideBrandName } from "./utils/decideBrandName.ts";
 import { useEffect } from "react";
 

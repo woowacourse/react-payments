@@ -1,6 +1,6 @@
 import { useState } from "react";
-import InputSectionLayout from "./InputSectionLayout";
-import ValidatedInputGroup from "./ValidatedInputGroup";
+import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
+import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 
 const CvcInputSection = ({ onValueHandler }: { onValueHandler: (cardInfo: string) => void }) => {
   const [inputValue, setInputValue] = useState<string>("");

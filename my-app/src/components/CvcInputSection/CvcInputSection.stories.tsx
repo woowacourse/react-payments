@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import CvcInputSection from "../components/CvcInputSection";
+import CvcInputSection from "./CvcInputSection";
 
 const meta = {
   title: "Components/CvcInputSection",

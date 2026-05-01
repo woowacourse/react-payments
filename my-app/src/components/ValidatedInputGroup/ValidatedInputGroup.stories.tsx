@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState } from "react";
 import type { ComponentProps } from "react";
 import { fn } from "storybook/test";
-import ValidatedInputGroup from "../components/ValidatedInputGroup";
+import ValidatedInputGroup from "./ValidatedInputGroup";
 
 type ValidatedInputGroupProps = ComponentProps<typeof ValidatedInputGroup>;
 
