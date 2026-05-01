@@ -42,7 +42,7 @@ export default function CardInfoInput({
             return;
         }
         setValue(tmpValue);
-        onError(null);
+        onError('');
         if (!validator(tmpValue)) setIsNotValidate(true);
         else setIsNotValidate(false);
     };
