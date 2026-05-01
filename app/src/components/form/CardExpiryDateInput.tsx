@@ -24,7 +24,11 @@ export function CardExpiryDateInput() {
       setError({ ...isError, [id]: { state: false }, message: "" });
       setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: (err as Error).message,
+      });
     }
   };
 
@@ -36,7 +40,11 @@ export function CardExpiryDateInput() {
       setError({ ...isError, [id]: { state: false }, message: "" });
       setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: (err as Error).message,
+      });
     }
   };
 
@@ -46,7 +54,11 @@ export function CardExpiryDateInput() {
       Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
       setError({ ...isError, [id]: { state: false }, message: "" });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: (err as Error).message,
+      });
     }
   };
 

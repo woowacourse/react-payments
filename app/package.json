@@ -9,8 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
   },
+  "homepage": "https://antoliny0919.github.io/react-payments",
   "dependencies": {
     "@emotion/styled": "^11.14.1",
     "react": "^19.2.5",

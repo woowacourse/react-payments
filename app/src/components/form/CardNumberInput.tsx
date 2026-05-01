@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
+import { CardContext } from "../Card";
 import { ErrorMessage } from "./ErrorMessage";
 import { Validator } from "../../validators/CardValidator";
 import { CardFieldset, CardLegend, CardInput } from "../../style/CardStyles";
-import { CardContext } from "../Card";
 
 export function CardNumberInput() {
   const { cardNumber, setCardNumber, setNetworkBrand } =
@@ -43,7 +43,11 @@ export function CardNumberInput() {
       setError({ ...isError, [id]: { state: false }, message: "" });
       setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: (err as Error).message,
+      });
     }
   };
 
@@ -58,7 +62,11 @@ export function CardNumberInput() {
       handleNetworkBrand(value);
       setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: (err as Error).message,
+      });
     }
   };
 
@@ -68,7 +76,11 @@ export function CardNumberInput() {
       Validator.isValidCardNumberLength(value, e.target.maxLength);
       setError({ ...isError, [id]: { state: false }, message: "" });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err.message });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: (err as Error).message,
+      });
     }
   };
 
