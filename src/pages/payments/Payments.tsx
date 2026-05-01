@@ -96,17 +96,17 @@ export const Payments = () => {
   };
 
   const preventExpirationMonth = (month: string) => {
-    if (!isNumericString(month)) return false;
+    if (month === '') return false;
+    if (isNumericString(month)) return false;
     if (month.length > 2) return false;
-
-    console.log('preventExpirationMonth', expirationDate.month);
 
     return true;
   };
 
-  const preventExpirationYear = (expirationDate: ExpirationDate) => {
-    if (!isNumericString(expirationDate.year)) return false;
-    if (expirationDate.year.length > 2) return false;
+  const preventExpirationYear = (year: string) => {
+    if (year === '') return false;
+    if (isNumericString(year)) return false;
+    if (year.length > 2) return false;
 
     return true;
   };
@@ -120,7 +120,7 @@ export const Payments = () => {
 
   const handleChangeExpirationDate = (key: keyof ExpirationDate, value: string) => {
     if (key === 'month' && preventExpirationMonth(value)) return;
-    // if (key === 'year' && preventExpirationYear({ ...expirationDate, [key]: value })) return;
+    if (key === 'year' && preventExpirationYear(value)) return;
 
     setExpirationDate({ ...expirationDate, [key]: value });
   };
