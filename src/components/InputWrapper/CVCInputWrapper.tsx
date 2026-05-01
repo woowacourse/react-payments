@@ -19,7 +19,7 @@ export default function CVCInputWrapper({ validator, setCVCNumber, value }: CVCI
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             <CardInfoInput
-                value={value[0]}
+                value={value}
                 setValue={setCVCNumber}
                 type="cvc"
                 placeHolder="123"
