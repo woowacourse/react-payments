@@ -44,7 +44,8 @@ export const Payments = () => {
   // cardNumber --------------------------
 
   const validateCardNumber = (cardNumber: string) => {
-    if (cardNumber.length !== 4) return false;
+    if (!isNumericString(cardNumber)) return false;
+    if (cardNumber.length > 4) return false;
     return true;
   };
 
@@ -64,7 +65,7 @@ export const Payments = () => {
   };
 
   const handleChangeCardNumber = (index: number, value: string) => {
-    if (value !== '' && !isNumericString(value)) return;
+    if (!validateCardNumber(value)) return;
     const next = [...cardNumbers];
     next[index] = value;
     setCardNumbers(next);
@@ -113,6 +114,7 @@ export const Payments = () => {
       >
         {cardNumbers.map((value, index) => (
           <Input
+            type="text"
             key={index}
             value={value}
             maxLength={4}
