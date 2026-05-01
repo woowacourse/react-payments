@@ -45,6 +45,12 @@ export const Payments = () => {
 
   const validateCardNumber = (cardNumber: string) => {
     if (!isNumericString(cardNumber)) return false;
+    if (cardNumber.length !== 4) return false;
+    return true;
+  };
+
+  const preventCardNumber = (cardNumber: string) => {
+    if (!isNumericString(cardNumber)) return false;
     if (cardNumber.length > 4) return false;
     return true;
   };
@@ -67,7 +73,7 @@ export const Payments = () => {
   };
 
   const handleChangeCardNumber = (index: number, value: string) => {
-    if (!validateCardNumber(value)) return;
+    if (!preventCardNumber(value)) return;
     const next = [...cardNumbers];
     next[index] = value;
     setCardNumbers(next);
