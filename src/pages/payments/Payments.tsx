@@ -12,6 +12,7 @@ type ExpirationDate = {
 
 export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const [onBlurCardNumber, setOnBlurCardNumber] = useState(false);
 
   // expirationDate 관련 상태값 -- start
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
@@ -34,20 +35,22 @@ export const Payments = () => {
 
   // cardNumber --------------------------
 
-  const handleErrorMessageCardNumbers = (cardNumbers: string[]) => {
-    if (!cardNumbers.every(isNumericString)) return '숫자만 입력 가능합니다';
-    return '';
+  const validateCardNumber = (cardNumber: string) => {
+    if (cardNumber.length !== 4) return false;
+    return true;
   };
 
-  // 밸리데이터를 하면
-  // const checkValidateCardNumber = (value: string) => {
-  //   if (!isNumericString(value)) return
-  //   if (value.length > 4) return '카드 번호는 4자리로 입력해 주세요';
-  //   return null;
-  // };
+  const checkErrorMessageCardNumbers = (cardNumbers: string[]) => {
+    if (!onBlurCardNumber) return { type: null, message: '' };
+
+    if (cardNumbers.some((number) => number.length !== 4))
+      return { type: 'length', message: '카드 번호를 전부 채워주세요' };
+    if (!cardNumbers.some(isNumericString)) return { type: 'numberString', message: '숫자만 입력하세요' };
+    return { type: null, message: '' };
+  };
 
   const handleChangeCardNumber = (index: number, value: string) => {
-    // if (!checkValidateCardNumber(value)) return;
+    if (value !== '' && !isNumericString(value)) return;
     const next = [...cardNumbers];
     next[index] = value;
     setCardNumbers(next);
@@ -88,19 +91,22 @@ export const Payments = () => {
 
   return (
     <>
-      <CreditCard bank="default" cardBrand="mastercard" cardNumberList={[]} expirationDate={[]} />
+      <CreditCard bank="default" cardBrand="mastercard" cardNumberList={cardNumbers} expirationDate={[]} />
       <FormGroup
         title="결제할 카드 번호를 입력해 주세요"
         subTitle="본인 명의의 카드만 결제 가능합니다."
         label="카드 번호"
-        errorMessage={handleErrorMessageCardNumbers(cardNumbers)}
+        errorMessage={checkErrorMessageCardNumbers(cardNumbers).message}
       >
         {cardNumbers.map((value, index) => (
           <Input
             key={index}
             value={value}
             maxLength={4}
+            placeholder="1234"
+            isError={onBlurCardNumber && !validateCardNumber(cardNumbers[index])}
             onChange={(e) => handleChangeCardNumber(index, e.target.value)}
+            onBlur={() => setOnBlurCardNumber(true)}
           />
         ))}
       </FormGroup>

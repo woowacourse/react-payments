@@ -7,9 +7,10 @@ interface InputProps {
   isError?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input = ({ placeholder, maxLength, isError, value, onChange }: InputProps) => {
+export const Input = ({ placeholder, maxLength, isError, value, onChange, onBlur }: InputProps) => {
   return (
     <input
       className={cn(styles.input, isError && styles.isError)}
@@ -17,6 +18,7 @@ export const Input = ({ placeholder, maxLength, isError, value, onChange }: Inpu
       maxLength={maxLength}
       value={value}
       onChange={onChange}
+      onBlur={onBlur}
     />
   );
 };
