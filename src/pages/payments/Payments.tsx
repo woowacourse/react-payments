@@ -12,29 +12,7 @@ export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [onBlurCardNumber, setOnBlurCardNumber] = useState([false, false, false, false]);
 
-  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
-    month: '',
-    year: '',
-  });
-  const [onBlurExpirationDate, setOnBlurExpirationDate] = useState({
-    month: false,
-    year: false,
-  });
-
-  const [cvc, setCvc] = useState('');
-  const [onBlurCvc, setOnBlurCvc] = useState(false);
-
-  // card Preview
-  const renderBrandCard = (cardNumbers: string[]) => {
-    if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
-    if (BRAND_NUMBER.mastercard.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'mastercard';
-    return 'default';
-  };
-
   // cardNumber --------------------------
-  const renderErrorCardNumberInput = (cardNumber: string) => {
-    return onBlurCardNumber.includes(true) && !validateCardNumber(cardNumber);
-  };
 
   const preventCardNumber = (cardNumber: string) => {
     if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
@@ -46,6 +24,10 @@ export const Payments = () => {
     if (onBlurCardNumber.every((blur) => !blur)) return '';
     if (cardNumbers.some((cardNumber) => cardNumber.length !== 4)) return '카드 번호를 전부 채워주세요';
     return '';
+  };
+
+  const renderErrorCardNumberInput = (cardNumber: string) => {
+    return onBlurCardNumber.includes(true) && !validateCardNumber(cardNumber);
   };
 
   const handleChangeCardNumber = (index: number, value: string) => {
@@ -61,7 +43,22 @@ export const Payments = () => {
     setOnBlurCardNumber(next);
   };
 
+  const renderBrandCard = (cardNumbers: string[]) => {
+    if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
+    if (BRAND_NUMBER.mastercard.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'mastercard';
+    return 'default';
+  };
+
   //--------------------------------
+
+  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
+    month: '',
+    year: '',
+  });
+  const [onBlurExpirationDate, setOnBlurExpirationDate] = useState({
+    month: false,
+    year: false,
+  });
 
   const preventExpirationMonth = (month: string) => {
     if (month !== '' && !isNumericString(month)) return true;
@@ -101,6 +98,9 @@ export const Payments = () => {
   // expirationDate 관련 상태값 -- end
 
   //cvc
+
+  const [cvc, setCvc] = useState('');
+  const [onBlurCvc, setOnBlurCvc] = useState(false);
 
   const preventCvc = (cvc: string) => {
     if (!isNumericString(cvc)) return false;
