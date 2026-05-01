@@ -2,39 +2,36 @@ import { useState } from 'react';
 import { CreditCard } from '../../core/components/creditCard';
 import { FormGroup } from '../../core/components/formGroup';
 import { Input } from '../../core/components/input';
+import { validateCardNumber, validateCvc, validateExpirationDate } from './validator';
+import { isNumericString } from '../../core/utils/validator';
 
-type ExpirationDate = {
-  year: string;
-  month: string;
-};
+import type { ExpirationDate } from './types';
+import { BRAND_NUMBER } from './constant';
 
 export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [onBlurCardNumber, setOnBlurCardNumber] = useState([false, false, false, false]);
 
+  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
+    month: '',
+    year: '',
+  });
+  const [onBlurExpirationDate, setOnBlurExpirationDate] = useState({
+    month: false,
+    year: false,
+  });
+
   const [cvc, setCvc] = useState('');
   const [onBlurCvc, setOnBlurCvc] = useState(false);
 
-  const isNumericString = (str: string) => {
-    const regex = /^\d+$/;
-    return regex.test(str);
-  };
-
   // card Preview
   const renderBrandCard = (cardNumbers: string[]) => {
-    if (cardNumbers[0].startsWith('4')) return 'visa';
-    if (['51', '52', '53', '54', '55'].some((brandNumber) => cardNumbers[0].startsWith(brandNumber)))
-      return 'mastercard';
+    if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
+    if (BRAND_NUMBER.mastercard.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'mastercard';
     return 'default';
   };
 
   // cardNumber --------------------------
-
-  const validateCardNumber = (cardNumber: string) => {
-    if (!isNumericString(cardNumber)) return false;
-    if (cardNumber.length !== 4) return false;
-    return true;
-  };
 
   const preventCardNumber = (cardNumber: string) => {
     if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
@@ -64,39 +61,6 @@ export const Payments = () => {
   };
 
   //--------------------------------
-
-  // expirationDate 관련 상태값 -- start
-  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
-    month: '',
-    year: '',
-  });
-
-  const [onBlurExpirationDate, setOnBlurExpirationDate] = useState({
-    month: false,
-    year: false,
-  });
-
-  const isValidMonth = (month: string) => {
-    // ^0[1-9] : 0으로 시작하고 뒤에 1~9가 오거나 (01~09)
-    // | : 또는
-    // ^1[0-2] : 1로 시작하고 뒤에 0~2가 오는 경우 (10~12)
-    const regex = /^(0[1-9]|1[0-2])$/;
-    return regex.test(month);
-  };
-
-  const validateExpirationMonth = (month: string) => {
-    return month.length === 2 && isNumericString(month);
-  };
-  const validateExpirationYear = (year: string) => {
-    return year.length === 2 && isNumericString(year) && isValidMonth(year);
-  };
-
-  const validateExpirationDate = (expirationDate: ExpirationDate) => {
-    return {
-      month: validateExpirationMonth(expirationDate.month),
-      year: validateExpirationYear(expirationDate.year),
-    };
-  };
 
   const preventExpirationMonth = (month: string) => {
     if (month !== '' && !isNumericString(month)) return true;
@@ -136,9 +100,6 @@ export const Payments = () => {
   // expirationDate 관련 상태값 -- end
 
   //cvc
-  const validateCvc = (cvc: string) => {
-    return cvc.length === 3 && isNumericString(cvc);
-  };
 
   const preventCvc = (cvc: string) => {
     if (!isNumericString(cvc)) return false;
