@@ -84,13 +84,17 @@ export const Payments = () => {
     return regex.test(month);
   };
 
+  const validateExpirationMonth = (month: string) => {
+    return month.length === 2 && isNumericString(month);
+  };
+  const validateExpirationYear = (year: string) => {
+    return year.length === 2 && isNumericString(year) && isValidMonth(year);
+  };
+
   const validateExpirationDate = (expirationDate: ExpirationDate) => {
     return {
-      month:
-        expirationDate.month.length === 2 &&
-        isNumericString(expirationDate.month) &&
-        isValidMonth(expirationDate.month),
-      year: expirationDate.year.length === 2 && isNumericString(expirationDate.year),
+      month: validateExpirationMonth(expirationDate.month),
+      year: validateExpirationYear(expirationDate.year),
     };
   };
 
@@ -109,9 +113,10 @@ export const Payments = () => {
   };
 
   const renderErrorMessageExpirationDate = (expirationDate: ExpirationDate) => {
-    // if (Object.values(onBlurExpirationDate).((blur) => !blur)) return '';
+    if (Object.values(onBlurExpirationDate).every((blur) => !blur)) return '';
 
-    if (!validateExpirationDate(expirationDate)) return '유효기간을 전부 채워주세요';
+    const isValidateExpirationDate = validateExpirationDate(expirationDate);
+    if (!Object.values(isValidateExpirationDate).every((valid) => valid)) return '유효기간을 전부 채워주세요';
     return '';
   };
 
