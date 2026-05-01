@@ -17,9 +17,23 @@ export const Empty: Story = {
   },
 };
 
+export const Partial: Story = {
+  args: {
+    validityPeriod: { month: "1", year: "" },
+    onChange: () => {},
+  },
+};
+
 export const Filled: Story = {
   args: {
     validityPeriod: { month: "04", year: "26" },
+    onChange: () => {},
+  },
+};
+
+export const FilledMaxMonth: Story = {
+  args: {
+    validityPeriod: { month: "12", year: "99" },
     onChange: () => {},
   },
 };

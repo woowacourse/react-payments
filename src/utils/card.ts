@@ -23,26 +23,11 @@ export const getFormattedValidityPeriodUnit = (
   return `${month ? month + "/" : ""}${year ? year : ""}`;
 };
 
-export const formatValidityPeriod = (nextRaw: string, prev: string) => {
-  const onlyNumber = nextRaw.replace(/\D/g, "");
+export const formatValidityPeriod = (nextRaw: string) => {
+  return nextRaw.replace(/\D/g, "").slice(0, 2);
+};
 
-  if (onlyNumber === "") return "";
-
-  if (onlyNumber.length === 1) {
-    if (onlyNumber === "0") return "0";
-
-    return `0${onlyNumber}`;
-  }
-
-  if (prev === "0") {
-    if (onlyNumber === "00") return "0";
-
-    return onlyNumber.slice(0, 2);
-  }
-
-  if (onlyNumber.startsWith("0")) {
-    return onlyNumber.slice(1, 3);
-  }
-
-  return onlyNumber.slice(0, 2);
+export const padValidityPeriodUnit = (value: string) => {
+  if (value.length === 1) return `0${value}`;
+  return value;
 };
