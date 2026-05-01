@@ -191,7 +191,7 @@ export const Payments = () => {
         errorMessage={renderErrorMessageExpirationDate(expirationDate)}
       >
         <Input
-          type="text"
+          type="tel"
           value={expirationDate.month}
           maxLength={2}
           onChange={(e) => handleChangeExpirationDate('month', e.target.value)}
@@ -201,7 +201,7 @@ export const Payments = () => {
           isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.month}
         />
         <Input
-          type="text"
+          type="tel"
           value={expirationDate.year}
           maxLength={2}
           onChange={(e) => handleChangeExpirationDate('year', e.target.value)}
