@@ -56,14 +56,11 @@ export const Payments = () => {
     return { type: null, message: '' };
   };
 
+  // 개별 카드 번호 input 유효성 검사 확인 함수
   const checkErrorMessageCardNumber = (cardNumber: string) => {
     if (cardNumber.length !== 4) return { type: 'length' };
-    // if (!onBlurCardNumber.includes(true)) return { type: null, message: '' };
 
-    // if (cardNumbers.some((number) => number.length !== 4))
-    //   return { type: 'length', message: '카드 번호를 전부 채워주세요' };
-    // if (!cardNumbers.some(isNumericString)) return { type: 'numberString', message: '숫자만 입력하세요' };
-    // return { type: null, message: '' };
+    return { type: '' };
   };
 
   const handleChangeCardNumber = (index: number, value: string) => {
