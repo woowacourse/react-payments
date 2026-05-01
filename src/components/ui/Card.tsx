@@ -12,8 +12,8 @@ export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardPr
     <div css={cardStyle}>
       <div css={cardHeaderStyle}>
         <div css={cardChipStyle} />
-        {cardBrand === 'visa' && <img css={cardBrandStyle} src="/visa.png" alt="visa" />}
-        {cardBrand === 'mastercard' && <img css={cardBrandStyle} src="/mastercard.png" alt="mastercard" />}
+        {cardBrand === 'visa' && <img css={cardBrandStyle} src="./visa.png" alt="visa" />}
+        {cardBrand === 'mastercard' && <img css={cardBrandStyle} src="./mastercard.png" alt="mastercard" />}
       </div>
 
       <div css={cardInfoWrapperStyle}>
