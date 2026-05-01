@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import styles from './CreditCard.module.css';
 
 import MastercardSvg from '@/core/assets/Mastercard.svg?react';
@@ -25,7 +24,7 @@ const BrandMap = {
 };
 
 export const CreditCard = ({
-  bank = 'default',
+  // bank = 'default',
   cardBrand = 'mastercard',
   cardNumberList,
   expirationDate,
