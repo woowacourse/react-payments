@@ -31,8 +31,8 @@ export const ERROR_MESSAGE = {
 export const CARD_BRAND = { VISA: 'VISA', MASTER_CARD: 'MASTER' } as const;
 
 export const BRAND_ICON_MAP = {
-  VISA: 'src/assets/visa.svg',
-  MASTER: '/src/assets/mastercard.svg',
+  VISA: 'public/visa.svg',
+  MASTER: 'public/mastercard.svg',
   NONE: '',
 } as const;
 
