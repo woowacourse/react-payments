@@ -12,7 +12,7 @@ interface CardInfoInputProps {
     placeHolder?: string;
     type: InputType;
     // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
-    onError: (message: string) => void;
+    onError: (message: string | null) => void;
     onBlur?: () => void;
     onFocus?: () => void;
 }
