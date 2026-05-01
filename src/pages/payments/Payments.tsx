@@ -3,8 +3,6 @@ import { CreditCard } from '../../core/components/creditCard';
 import { FormGroup } from '../../core/components/formGroup';
 import { Input } from '../../core/components/input';
 
-import { useCVC } from './useCVC';
-
 type ExpirationDate = {
   year: string;
   month: string;
@@ -19,6 +17,9 @@ export const Payments = () => {
     month: '',
     year: '',
   });
+
+  const [cvc, setCvc] = useState('');
+  const [onBlurCvc, setOnBlurCvc] = useState(false);
 
   const isNumericString = (str: string) => {
     const regex = /^\d+$/;
@@ -95,7 +96,32 @@ export const Payments = () => {
 
   // expirationDate 관련 상태값 -- end
 
-  const cvcForm = useCVC();
+  //cvc
+  const validateCvc = (cvc: string) => {
+    return cvc.length === 3 && isNumericString(cvc);
+  };
+
+  const preventCvc = (cvc: string) => {
+    if (!isNumericString(cvc)) return false;
+    if (cvc.length > 3) return false;
+    return true;
+  };
+
+  const renderErrorMessageCvc = (cvc: string) => {
+    if (!onBlurCvc) return '';
+    if (!validateCvc(cvc)) return 'CVC를 전부 채워주세요';
+    return '';
+  };
+
+  const handleChangeCvc = (value: string) => {
+    if (!preventCvc(value)) return;
+    setCvc(value);
+  };
+
+  const handleBlurCvc = () => {
+    preventCvc(cvc);
+    setOnBlurCvc(true);
+  };
 
   return (
     <>
@@ -144,8 +170,16 @@ export const Payments = () => {
         />
       </FormGroup>
 
-      <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={cvcForm.valid ? '' : 'cvc 오류'}>
-        <Input {...cvcForm.state.cvc} />
+      <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={renderErrorMessageCvc(cvc)}>
+        <Input
+          type="text"
+          value={cvc}
+          maxLength={3}
+          placeholder="123"
+          isError={onBlurCvc && !validateCvc(cvc)}
+          onChange={(e) => handleChangeCvc(e.target.value)}
+          onBlur={() => handleBlurCvc()}
+        />
       </FormGroup>
     </>
   );
