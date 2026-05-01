@@ -50,6 +50,8 @@ export const Payments = () => {
   };
 
   const renderErrorMessageCardNumbers = (cardNumbers: string[]) => {
+    if (onBlurCardNumber.every((blur) => !blur)) return { type: null, message: '' };
+
     const cardErrorMap = [...cardNumbers].map((cardNumber) => checkErrorMessageCardNumber(cardNumber)?.type);
     if (cardErrorMap.some((error) => error === 'length'))
       return { type: 'length', message: '카드 번호를 전부 채워주세요' };
