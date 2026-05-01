@@ -193,6 +193,7 @@ export const Payments = () => {
         <Input
           type="text"
           value={expirationDate.month}
+          maxLength={2}
           onChange={(e) => handleChangeExpirationDate('month', e.target.value)}
           onBlur={() => {
             handleBlurExpirationDate('month');
@@ -202,6 +203,7 @@ export const Payments = () => {
         <Input
           type="text"
           value={expirationDate.year}
+          maxLength={2}
           onChange={(e) => handleChangeExpirationDate('year', e.target.value)}
           onBlur={() => {
             handleBlurExpirationDate('year');
