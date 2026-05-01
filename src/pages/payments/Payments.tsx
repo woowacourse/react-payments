@@ -56,21 +56,12 @@ export const Payments = () => {
   };
 
   const renderErrorMessageCardNumbers = (cardNumbers: string[]) => {
-    if (onBlurCardNumber.every((blur) => !blur)) return { type: null, message: '' };
-
-    const cardErrorMap = [...cardNumbers].map((cardNumber) => checkErrorMessageCardNumber(cardNumber)?.type);
-    if (cardErrorMap.some((error) => error === 'length'))
-      return { type: 'length', message: '카드 번호를 전부 채워주세요' };
-
-    return { type: null, message: '' };
+    if (onBlurCardNumber.every((blur) => !blur)) return '';
+    if (cardNumbers.some((cardNumber) => cardNumber.length !== 4)) return '카드 번호를 전부 채워주세요';
+    return '';
   };
 
   // 개별 카드 번호 input 유효성 검사 확인 함수
-  const checkErrorMessageCardNumber = (cardNumber: string) => {
-    if (cardNumber.length !== 4) return { type: 'length' };
-
-    return { type: '' };
-  };
 
   const handleChangeCardNumber = (index: number, value: string) => {
     if (!preventCardNumber(value)) return;
@@ -118,7 +109,7 @@ export const Payments = () => {
         title="결제할 카드 번호를 입력해 주세요"
         subTitle="본인 명의의 카드만 결제 가능합니다."
         label="카드 번호"
-        errorMessage={renderErrorMessageCardNumbers(cardNumbers)?.message}
+        errorMessage={renderErrorMessageCardNumbers(cardNumbers)}
       >
         {cardNumbers.map((value, index) => (
           <Input
@@ -127,7 +118,7 @@ export const Payments = () => {
             value={value}
             maxLength={4}
             placeholder="1234"
-            isError={onBlurCardNumber[index] && !validateCardNumber(cardNumbers[index])}
+            isError={onBlurCardNumber.includes(true) && !validateCardNumber(cardNumbers[index])}
             onChange={(e) => handleChangeCardNumber(index, e.target.value)}
             onBlur={() => handleBlurCardNumber(index)}
           />
