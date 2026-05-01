@@ -51,7 +51,7 @@ function CardForm(props: CardFormProps) {
         </Flex>
         <CardCVCInput
           value={props.formState.cvc}
-          onChange={(e) => props.setFormState({ ...props.formState, cvc: e.target.value })}
+          onChange={(value) => props.setFormState({ ...props.formState, cvc: value })}
         />
       </Flex>
     </form>

@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 
 function Wrapper({ initialValue }: { initialValue: string }) {
   const [value, setValue] = useState(initialValue);
-  return <CardCVCInput value={value} onChange={(e) => setValue(e.target.value)} />;
+  return <CardCVCInput value={value} onChange={(v) => setValue(v)} />;
 }
 
 export const Empty: Story = {
