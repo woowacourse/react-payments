@@ -55,22 +55,12 @@ export const Payments = () => {
 
   //--------------------------------
   const checkValidateExpirationDate = (expirationDate: ExpirationDate) => {
-    const checkValidateExpirationDateMonth = (month: string) => {
-      if (month.length !== 2) return false;
-      if (!isNumericString(month)) return false;
-      if (!isValidMonth(month)) return false;
-      return true;
-    };
-
-    const checkValidateExpirationDateYear = (year: string) => {
-      if (year.length !== 2) return false;
-      if (!isNumericString(year)) return false;
-      return true;
-    };
-
     return {
-      month: checkValidateExpirationDateYear(expirationDate.month),
-      year: checkValidateExpirationDateMonth(expirationDate.year),
+      month:
+        expirationDate.month.length === 2 &&
+        isNumericString(expirationDate.month) &&
+        isValidMonth(expirationDate.month),
+      year: expirationDate.year.length === 2 && isNumericString(expirationDate.year),
     };
   };
 
