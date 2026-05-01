@@ -34,7 +34,7 @@ export const Payments = () => {
   };
 
   // card Preview
-  const renderBrandCard = () => {
+  const renderBrandCard = (cardNumbers: string[]) => {
     if (cardNumbers[0].startsWith('4')) return 'visa';
     if (['51', '52', '53', '54', '55'].some((brandNumber) => cardNumbers[0].startsWith(brandNumber)))
       return 'mastercard';
@@ -48,13 +48,22 @@ export const Payments = () => {
     return true;
   };
 
-  const checkErrorMessageCardNumbers = (cardNumbers: string[]) => {
-    if (!onBlurCardNumber.includes(true)) return { type: null, message: '' };
-
-    if (cardNumbers.some((number) => number.length !== 4))
+  const renderErrorMessageCardNumbers = (cardNumbers: string[]) => {
+    const cardErrorMap = [...cardNumbers].map((cardNumber) => checkErrorMessageCardNumber(cardNumber)?.type);
+    if (cardErrorMap.some((error) => error === 'length'))
       return { type: 'length', message: '카드 번호를 전부 채워주세요' };
-    if (!cardNumbers.some(isNumericString)) return { type: 'numberString', message: '숫자만 입력하세요' };
+
     return { type: null, message: '' };
+  };
+
+  const checkErrorMessageCardNumber = (cardNumber: string) => {
+    if (cardNumber.length !== 4) return { type: 'length' };
+    // if (!onBlurCardNumber.includes(true)) return { type: null, message: '' };
+
+    // if (cardNumbers.some((number) => number.length !== 4))
+    //   return { type: 'length', message: '카드 번호를 전부 채워주세요' };
+    // if (!cardNumbers.some(isNumericString)) return { type: 'numberString', message: '숫자만 입력하세요' };
+    // return { type: null, message: '' };
   };
 
   const handleChangeCardNumber = (index: number, value: string) => {
@@ -62,6 +71,12 @@ export const Payments = () => {
     const next = [...cardNumbers];
     next[index] = value;
     setCardNumbers(next);
+  };
+
+  const handleBlurCardNumber = (index: number) => {
+    const next = [...onBlurCardNumber];
+    next[index] = true;
+    setOnBlurCardNumber(next);
   };
 
   //--------------------------------
@@ -87,12 +102,17 @@ export const Payments = () => {
 
   return (
     <>
-      <CreditCard bank="default" cardBrand={renderBrandCard()} cardNumberList={cardNumbers} expirationDate={[]} />
+      <CreditCard
+        bank="default"
+        cardBrand={renderBrandCard(cardNumbers)}
+        cardNumberList={cardNumbers}
+        expirationDate={[]}
+      />
       <FormGroup
         title="결제할 카드 번호를 입력해 주세요"
         subTitle="본인 명의의 카드만 결제 가능합니다."
         label="카드 번호"
-        errorMessage={checkErrorMessageCardNumbers(cardNumbers).message}
+        errorMessage={renderErrorMessageCardNumbers(cardNumbers)?.message}
       >
         {cardNumbers.map((value, index) => (
           <Input
@@ -102,11 +122,7 @@ export const Payments = () => {
             placeholder="1234"
             isError={onBlurCardNumber[index] && !validateCardNumber(cardNumbers[index])}
             onChange={(e) => handleChangeCardNumber(index, e.target.value)}
-            onBlur={() => {
-              const next = [...onBlurCardNumber];
-              next[index] = true;
-              setOnBlurCardNumber(next);
-            }}
+            onBlur={() => handleBlurCardNumber(index)}
           />
         ))}
       </FormGroup>
