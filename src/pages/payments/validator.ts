@@ -9,10 +9,10 @@ export const validateCardNumber = (cardNumber: string) => {
 };
 
 const validateExpirationMonth = (month: string) => {
-  return month.length === 2 && isNumericString(month);
+  return month.length === 2 && isNumericString(month) && isValidMonth(month);
 };
 const validateExpirationYear = (year: string) => {
-  return year.length === 2 && isNumericString(year) && isValidMonth(year);
+  return year.length === 2 && isNumericString(year);
 };
 
 export const validateExpirationDate = (expirationDate: ExpirationDate) => {
