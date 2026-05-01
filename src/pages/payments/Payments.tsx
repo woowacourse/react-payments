@@ -99,11 +99,13 @@ export const Payments = () => {
         errorMessage={!(isExpirationDateValid.month && isExpirationDateValid.year) ? '날짜 오류' : ''}
       >
         <Input
+          type="tel"
           value={expirationDate.month}
           onChange={(e) => handleChangeExpirationDate('month', e.target.value)}
           isError={!isExpirationDateValid.month}
         />
         <Input
+          type="tel"
           value={expirationDate.year}
           onChange={(e) => handleChangeExpirationDate('year', e.target.value)}
           isError={!isExpirationDateValid.year}
