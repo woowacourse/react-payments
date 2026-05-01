@@ -1,4 +1,11 @@
+
 .creditCard {
+  padding-top: 77px;
+  padding-bottom: 45px;
+  text-align: center;
+}
+
+.card {
   display: inline-block;
   position: relative;
   width: 212px;
@@ -10,7 +17,7 @@
   box-sizing: border-box;
 }
 
-.creditCard:after {
+.card:after {
   content: "";
   position: absolute;
   width: 36px;
@@ -23,6 +30,7 @@
   background-color: #DDCD78;
   
 }
+
 .brand {
   position: absolute;
   top: 8px;
