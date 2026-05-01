@@ -12,7 +12,7 @@ type ExpirationDate = {
 
 export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [onBlurCardNumber, setOnBlurCardNumber] = useState(false);
+  const [onBlurCardNumber, setOnBlurCardNumber] = useState([false, false, false, false]);
 
   // expirationDate 관련 상태값 -- start
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
@@ -41,7 +41,7 @@ export const Payments = () => {
   };
 
   const checkErrorMessageCardNumbers = (cardNumbers: string[]) => {
-    if (!onBlurCardNumber) return { type: null, message: '' };
+    if (!onBlurCardNumber.includes(true)) return { type: null, message: '' };
 
     if (cardNumbers.some((number) => number.length !== 4))
       return { type: 'length', message: '카드 번호를 전부 채워주세요' };
@@ -92,9 +92,13 @@ export const Payments = () => {
             value={value}
             maxLength={4}
             placeholder="1234"
-            isError={onBlurCardNumber && !validateCardNumber(cardNumbers[index])}
+            isError={onBlurCardNumber[index] && !validateCardNumber(cardNumbers[index])}
             onChange={(e) => handleChangeCardNumber(index, e.target.value)}
-            onBlur={() => setOnBlurCardNumber(true)}
+            onBlur={() => {
+              const next = [...onBlurCardNumber];
+              next[index] = true;
+              setOnBlurCardNumber(next);
+            }}
           />
         ))}
       </FormGroup>
