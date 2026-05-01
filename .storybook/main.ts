@@ -13,11 +13,9 @@ const config: StorybookConfig = {
   viteFinal: async (config) => {
     const { mergeConfig } = await import('vite');
     return mergeConfig(config, {
-      plugins: [
-        (await import('@vitejs/plugin-react')).default({
-          jsxImportSource: '@emotion/react',
-        }),
-      ],
+      esbuild: {
+        jsxImportSource: '@emotion/react',
+      },
     });
   },
 };

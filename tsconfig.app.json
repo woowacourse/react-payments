@@ -26,6 +26,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
+    "src",
+    ".storybook/preview.ts"
   ]
 }
