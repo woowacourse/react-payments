@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import CardInfoHeader from "./CardInfoHeader";
 import CardInfoInput from "./CardInfoInput";
 import styled from "@emotion/styled";
@@ -20,11 +20,22 @@ export default function CardInfo({
   cvcNumber,
   setCvcNumber,
 }: CardInfoProps) {
+  const [cardNumberError, setCardNumberError] = useState("");
+  const [expireDateError, setExpireDateError] = useState("");
+  const [cvcNumberError, setCvcNumberError] = useState("");
+
   const handleCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
     const newValue = e.target.value;
+
+    if (!/^\d+$/.test(newValue) && newValue) {
+      setCardNumberError("숫자만 입력 가능합니다.");
+      return;
+    }
+
+    setCardNumberError("");
 
     setCardNumber(() => {
       const newArray = [...cardNumber];
@@ -33,16 +44,55 @@ export default function CardInfo({
     });
   };
 
-  const handleCardInfo = (
-    state: string[],
-    setState: Dispatch<SetStateAction<string[]>>,
+  const handleExpireDate = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
     const newValue = e.target.value;
 
-    setState(() => {
-      const newArray = [...state];
+    setExpireDateError("");
+
+    if (!/^\d+$/.test(newValue) && newValue) {
+      setExpireDateError("숫자만 입력 가능합니다.");
+      return;
+    }
+
+    if (index === 0 && newValue) {
+      const month = Number(newValue);
+
+      if (month > 12) {
+        setExpireDateError("1월~12월 사이를 입력해 주세요.");
+      } else if (newValue.length === 1) {
+        setExpireDateError("월을 01 ~ 12 형식으로 작성해주세요.");
+      } else if (newValue.length === 2 && month === 0) {
+        setExpireDateError("1월~12월 사이를 입력해 주세요.");
+      } else {
+        setExpireDateError("");
+      }
+    }
+
+    setExpireDate(() => {
+      const newArray = [...expireDate];
+      newArray[index] = newValue;
+      return newArray;
+    });
+  };
+
+  const handleCvcNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    const newValue = e.target.value;
+
+    if (!/^\d+$/.test(newValue) && newValue) {
+      setCvcNumberError("숫자만 입력 가능합니다.");
+      return;
+    }
+
+    setCvcNumberError("");
+
+    setCvcNumber(() => {
+      const newArray = [...cvcNumber];
       newArray[index] = newValue;
       return newArray;
     });
@@ -67,6 +117,7 @@ export default function CardInfo({
             />
           ))}
         </CardInfoInput>
+        <p>{cardNumberError}</p>
       </CardInfoSection>
 
       <CardInfoSection>
@@ -79,17 +130,18 @@ export default function CardInfo({
             placeholder="MM"
             maxLength={2}
             value={expireDate[0]}
-            onChange={(e) => handleCardInfo(expireDate, setExpireDate, e, 0)}
+            onChange={(e) => handleExpireDate(e, 0)}
             inputMode="numeric"
           />
           <InfoInput
             placeholder="YY"
             maxLength={2}
             value={expireDate[1]}
-            onChange={(e) => handleCardInfo(expireDate, setExpireDate, e, 1)}
+            onChange={(e) => handleExpireDate(e, 1)}
             inputMode="numeric"
           />
         </CardInfoInput>
+        <p>{expireDateError}</p>
       </CardInfoSection>
 
       <CardInfoSection>
@@ -102,10 +154,11 @@ export default function CardInfo({
             placeholder="123"
             maxLength={3}
             value={cvcNumber[0]}
-            onChange={(e) => handleCardInfo(cvcNumber, setCvcNumber, e, 0)}
+            onChange={(e) => handleCvcNumber(e, 0)}
             inputMode="numeric"
           />
         </CardInfoInput>
+        <p>{cvcNumberError}</p>
       </CardInfoSection>
     </CardInfoWrapper>
   );
