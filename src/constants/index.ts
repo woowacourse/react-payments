@@ -30,11 +30,11 @@ export const ERROR_MESSAGE = {
 
 export const CARD_BRAND = { VISA: 'VISA', MASTER_CARD: 'MASTER' } as const;
 
-export const BRAND_ICON_MAP = {
-  VISA: 'public/visa.svg',
-  MASTER: 'public/mastercard.svg',
+export const BRAND_ICON_MAP: Record<string, string> = {
+  VISA: `${import.meta.env.BASE_URL}visa.svg`,
+  MASTER: `${import.meta.env.BASE_URL}mastercard.svg`,
   NONE: '',
-} as const;
+};
 
 export const CARD_BRAND_RULE = {
   VISA: {
