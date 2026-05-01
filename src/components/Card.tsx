@@ -40,8 +40,10 @@ const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
         />
       </ChipWrapper>
       <CardNumberWrapper>
-        {cardNumberUnits.map((cardNumberUnit) => (
-          <CardNumberUnit>{cardNumberUnit}</CardNumberUnit>
+        {cardNumberUnits.map((cardNumberUnit, index) => (
+          <CardNumberUnit key={index}>
+            {index < 2 ? cardNumberUnit : "*".repeat(cardNumberUnit.length)}
+          </CardNumberUnit>
         ))}
       </CardNumberWrapper>
       <CardValidityPeriodWrapper>
