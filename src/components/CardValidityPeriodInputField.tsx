@@ -9,6 +9,9 @@ import { useState } from "react";
 
 type InputStatus = "default" | "error";
 
+const MONTH_MAX_LENGTH = 2;
+const YEAR_MAX_LENGTH = 2;
+
 export type ValidityPeriod = {
   month: string;
   year: string;
@@ -68,6 +71,7 @@ const CardValidityPeriodInputField = ({
       inputPropsList={[
         {
           placeholder: "MM",
+          maxLength: MONTH_MAX_LENGTH,
           fullWidth: true,
           value: validityPeriod.month,
           onChange: (e) => {
@@ -78,6 +82,7 @@ const CardValidityPeriodInputField = ({
         },
         {
           placeholder: "YY",
+          maxLength: YEAR_MAX_LENGTH,
           fullWidth: true,
           value: validityPeriod.year,
           onChange: (e) => {

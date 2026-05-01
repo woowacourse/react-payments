@@ -55,6 +55,7 @@ const CardNumberInputField = ({
       inputPropsList={[
         {
           placeholder: "1234",
+          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
           fullWidth: true,
           value: cardNumberUnits[0],
           onChange: (e) => {
@@ -65,6 +66,7 @@ const CardNumberInputField = ({
         },
         {
           placeholder: "1234",
+          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
           fullWidth: true,
           value: cardNumberUnits[1],
           onChange: (e) => {
@@ -75,6 +77,7 @@ const CardNumberInputField = ({
         },
         {
           placeholder: "1234",
+          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
           fullWidth: true,
           value: cardNumberUnits[2],
           onChange: (e) => {
@@ -85,6 +88,7 @@ const CardNumberInputField = ({
         },
         {
           placeholder: "1234",
+          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
           fullWidth: true,
           value: cardNumberUnits[3],
           onChange: (e) => {

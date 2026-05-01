@@ -33,6 +33,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
       inputPropsList={[
         {
           placeholder: "123",
+          maxLength: CVC_MAX_LENGTH,
           fullWidth: true,
           value: CVC,
           onChange: (e) => {
