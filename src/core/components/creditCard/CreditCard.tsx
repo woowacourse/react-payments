@@ -32,16 +32,18 @@ export const CreditCard = ({
 }: DefaultCreditCardProps) => {
   return (
     <div className={styles.creditCard}>
-      <div className={styles.brand}>{BrandMap[cardBrand]}</div>
-      <div className={styles.number}>
-        {cardNumberList?.map((number, index) => (
-          <span key={index}>{index > 1 ? STAR.repeat(number.length) : number}</span>
-        ))}
-      </div>
-      <div className={styles.expirationDate}>
-        {expirationDate?.map((number, index) =>
-          index === 0 ? <span key={index}>{number}</span> : number && <span key={index}>/{number}</span>,
-        )}
+      <div className={styles.card}>
+        <div className={styles.brand}>{BrandMap[cardBrand]}</div>
+        <div className={styles.number}>
+          {cardNumberList?.map((number, index) => (
+            <span key={index}>{index > 1 ? STAR.repeat(number.length) : number}</span>
+          ))}
+        </div>
+        <div className={styles.expirationDate}>
+          {expirationDate?.map((number, index) =>
+            index === 0 ? <span key={index}>{number}</span> : number && <span key={index}>/{number}</span>,
+          )}
+        </div>
       </div>
     </div>
   );
