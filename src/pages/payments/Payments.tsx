@@ -33,6 +33,14 @@ export const Payments = () => {
     return regex.test(month);
   };
 
+  // card Preview
+  const renderBrandCard = () => {
+    if (cardNumbers[0].startsWith('4')) return 'visa';
+    if (['51', '52', '53', '54', '55'].some((brandNumber) => cardNumbers[0].startsWith(brandNumber)))
+      return 'mastercard';
+    return 'default';
+  };
+
   // cardNumber --------------------------
 
   const validateCardNumber = (cardNumber: string) => {
@@ -79,7 +87,7 @@ export const Payments = () => {
 
   return (
     <>
-      <CreditCard bank="default" cardBrand="mastercard" cardNumberList={cardNumbers} expirationDate={[]} />
+      <CreditCard bank="default" cardBrand={renderBrandCard()} cardNumberList={cardNumbers} expirationDate={[]} />
       <FormGroup
         title="결제할 카드 번호를 입력해 주세요"
         subTitle="본인 명의의 카드만 결제 가능합니다."

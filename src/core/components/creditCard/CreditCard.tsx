@@ -5,7 +5,7 @@ import MastercardSvg from '@/core/assets/Mastercard.svg?react';
 import VisaSvg from '@/core/assets/Visa.svg?react';
 
 type Bank = 'default';
-type BrandType = 'visa' | 'mastercard';
+type BrandType = 'visa' | 'mastercard' | 'default';
 type CardNumberType = string[] | undefined;
 type ExpirationDate = string[] | undefined;
 
@@ -18,6 +18,12 @@ export interface DefaultCreditCardProps {
 
 const STAR = '·';
 
+const BrandMap = {
+  visa: <VisaSvg />,
+  mastercard: <MastercardSvg />,
+  default: undefined,
+};
+
 export const CreditCard = ({
   bank = 'default',
   cardBrand = 'mastercard',
@@ -26,7 +32,7 @@ export const CreditCard = ({
 }: DefaultCreditCardProps) => {
   return (
     <div className={styles.creditCard}>
-      <div className={styles.brand}>{cardBrand === 'mastercard' ? <MastercardSvg /> : <VisaSvg />}</div>
+      <div className={styles.brand}>{BrandMap[cardBrand]}</div>
       <div className={styles.number}>
         {cardNumberList?.map((number, index) => (
           <span key={index}>{index > 1 ? STAR.repeat(number.length) : number}</span>
