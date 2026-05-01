@@ -37,10 +37,9 @@ export const Payments = () => {
   };
 
   const preventCardNumber = (cardNumber: string) => {
-    if (cardNumber === '') return false;
-    if (isNumericString(cardNumber)) return false;
-    if (cardNumber.length > 4) return false;
-    return true;
+    if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
+    if (cardNumber.length > 4) return true;
+    return false;
   };
 
   const renderErrorMessageCardNumbers = (cardNumbers: string[]) => {
@@ -52,7 +51,7 @@ export const Payments = () => {
   // 개별 카드 번호 input 유효성 검사 확인 함수
 
   const handleChangeCardNumber = (index: number, value: string) => {
-    if (preventCardNumber(value)) return;
+    if (preventCardNumber(value)) return; // 여기 여기 여기 여기< <<<<<<
     const next = [...cardNumbers];
     next[index] = value;
     setCardNumbers(next);
