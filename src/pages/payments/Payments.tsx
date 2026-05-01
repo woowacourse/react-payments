@@ -54,32 +54,30 @@ export const Payments = () => {
   };
 
   //--------------------------------
-
-  const checkValidateExpirationDateMonth = (month: string) => {
-    if (month.length !== 2) return false;
-    if (!isNumericString(month)) return false;
-    if (!isValidMonth(month)) return false;
-    return true;
-  };
-
-  const checkValidateExpirationDateYear = (year: string) => {
-    if (year.length !== 2) return false;
-    if (!isNumericString(year)) return false;
-    return true;
-  };
-
   const checkValidateExpirationDate = (expirationDate: ExpirationDate) => {
-    if (!checkValidateExpirationDateMonth(expirationDate.month)) return false;
-    if (!checkValidateExpirationDateYear(expirationDate.year)) return false;
-    return true;
+    const checkValidateExpirationDateMonth = (month: string) => {
+      if (month.length !== 2) return false;
+      if (!isNumericString(month)) return false;
+      if (!isValidMonth(month)) return false;
+      return true;
+    };
+
+    const checkValidateExpirationDateYear = (year: string) => {
+      if (year.length !== 2) return false;
+      if (!isNumericString(year)) return false;
+      return true;
+    };
+
+    return {
+      month: checkValidateExpirationDateYear(expirationDate.month),
+      year: checkValidateExpirationDateMonth(expirationDate.year),
+    };
   };
 
   const handleChangeExpirationDate = (key: keyof ExpirationDate, value: string) => {
     setExpirationDate({ ...expirationDate, [key]: value });
   };
 
-  const isExpirationDateMonthValid = checkValidateExpirationDateMonth(expirationDate.month);
-  const isExpirationDateYearValid = checkValidateExpirationDateYear(expirationDate.year);
   const isExpirationDateValid = checkValidateExpirationDate(expirationDate);
 
   // expirationDate 관련 상태값 -- end
@@ -108,17 +106,17 @@ export const Payments = () => {
         title="카드 유효기간을 입력해 주세요"
         subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
         label="유효기간"
-        errorMessage={!isExpirationDateValid ? '날짜 오류' : ''}
+        errorMessage={!(isExpirationDateValid.month && isExpirationDateValid.year) ? '날짜 오류' : ''}
       >
         <Input
           value={expirationDate.month}
           onChange={(e) => handleChangeExpirationDate('month', e.target.value)}
-          isError={!isExpirationDateMonthValid}
+          isError={!isExpirationDateValid.month}
         />
         <Input
           value={expirationDate.year}
           onChange={(e) => handleChangeExpirationDate('year', e.target.value)}
-          isError={!isExpirationDateYearValid}
+          isError={!isExpirationDateValid.year}
         />
       </FormGroup>
 
