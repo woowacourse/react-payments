@@ -65,7 +65,11 @@ export const InvalidMonthStartDigit: Story = {
     const canvas = within(canvasElement);
     const [monthInput] = canvas.getAllByRole("textbox");
     await userEvent.type(monthInput, "2");
-    await expect(canvas.getByText("유효한 월이 아닙니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText(
+        "유효하지 않은 날짜 형식입니다. 0 이나 1로 시작해야 합니다.",
+      ),
+    ).toBeInTheDocument();
   },
 };
 
@@ -75,7 +79,11 @@ export const InvalidMonthRange: Story = {
     const canvas = within(canvasElement);
     const [monthInput] = canvas.getAllByRole("textbox");
     await userEvent.type(monthInput, "13");
-    await expect(canvas.getByText("유효한 월이 아닙니다.")).toBeInTheDocument();
+    await expect(
+      canvas.getByText(
+        "유효하지 않은 날짜 형식입니다. 1 ~ 12 이내 숫자여야 합니다.",
+      ),
+    ).toBeInTheDocument();
   },
 };
 
@@ -98,7 +106,7 @@ export const InvalidPastYear: Story = {
     const [, yearInput] = canvas.getAllByRole("textbox");
     await userEvent.type(yearInput, "24");
     await expect(
-      canvas.getByText("유효한 년도가 아닙니다."),
+      canvas.getByText("유효기간이 만료된 연도입니다."),
     ).toBeInTheDocument();
   },
 };
@@ -111,7 +119,7 @@ export const InvalidMonthLength: Story = {
     await userEvent.type(monthInput, "1");
     await userEvent.tab();
     await expect(
-      canvas.getByText("각 항목은 2자리여야 합니다."),
+      canvas.getByText("날짜 각 항목은 2자리여야 합니다."),
     ).toBeInTheDocument();
   },
 };
@@ -124,7 +132,7 @@ export const InvalidYearLength: Story = {
     await userEvent.type(yearInput, "2");
     await userEvent.tab();
     await expect(
-      canvas.getByText("각 항목은 2자리여야 합니다."),
+      canvas.getByText("날짜 각 항목은 2자리여야 합니다."),
     ).toBeInTheDocument();
   },
 };
