@@ -2,11 +2,13 @@ import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 
+type ExpiryDateInputSectionProps = {
+  onValueHandler: (cardInfo: string[]) => void;
+};
+
 const ExpiryDateInputSection = ({
   onValueHandler,
-}: {
-  onValueHandler: (cardInfo: string[], brand?: string) => void;
-}) => {
+}: ExpiryDateInputSectionProps) => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);

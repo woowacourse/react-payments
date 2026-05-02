@@ -6,10 +6,14 @@ import visaLogo from "./visaLogo.png";
 const fixedCardNumberStyle = css`
   display: inline-block;
   min-width: 30px;
-  font-family: 'Inter';
-`
+  font-family: "Inter";
+`;
 
-const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
+type CardProps = {
+  cardInfo: CardInfo;
+};
+
+const Card = ({ cardInfo }: CardProps) => {
   return (
     <div
       css={css`
@@ -65,21 +69,27 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
         >
           <span css={fixedCardNumberStyle}>{cardInfo.numbers[0]}</span>
           <span css={fixedCardNumberStyle}>{cardInfo.numbers[1]}</span>
-          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
-          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
+          <span css={fixedCardNumberStyle}>
+            {"•".repeat(cardInfo.numbers[2]?.length ?? 0)}
+          </span>
+          <span css={fixedCardNumberStyle}>
+            {"•".repeat(cardInfo.numbers[3]?.length ?? 0)}
+          </span>
         </div>
         <p
           css={css`
             color: #ffffff;
             font-size: 14px;
             font-weight: 500;
-            font-family: 'Inter';
+            font-family: "Inter";
           `}
         >
           {cardInfo.expiry[0]}
           <span
             css={css`
-              ${cardInfo.expiry[1] ? `visibility: visible` : `visibility: hidden`}
+              ${cardInfo.expiry[1]
+                ? `visibility: visible`
+                : `visibility: hidden`}
             `}
           >
             /

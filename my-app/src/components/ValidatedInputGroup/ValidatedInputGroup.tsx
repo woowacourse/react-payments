@@ -8,14 +8,7 @@ const errorTextStyle = css`
   color: #ff3d3d;
 `;
 
-const ValidatedInputGroup = ({
-  onChange,
-  onBlur,
-  errorMessage,
-  inputOption,
-  values,
-  errorIndex,
-}: {
+type ValidatedInputGroupProps = {
   onChange: (index: number, value: string) => void;
   onBlur: (i: number) => void;
   errorMessage: string;
@@ -26,9 +19,23 @@ const ValidatedInputGroup = ({
   };
   values: string[];
   errorIndex: number;
-}) => {
+};
+
+const ValidatedInputGroup = ({
+  onChange,
+  onBlur,
+  errorMessage,
+  inputOption,
+  values,
+  errorIndex,
+}: ValidatedInputGroupProps) => {
   return (
-    <div css={css`position: relative; padding-bottom: 20px;`}>
+    <div
+      css={css`
+        position: relative;
+        padding-bottom: 20px;
+      `}
+    >
       <section
         css={css`
           display: flex;
@@ -57,7 +64,12 @@ const ValidatedInputGroup = ({
         ))}
       </section>
       <span
-        css={[errorTextStyle, css`visibility: ${errorMessage ? "visible" : "hidden"};`]}
+        css={[
+          errorTextStyle,
+          css`
+            visibility: ${errorMessage ? "visible" : "hidden"};
+          `,
+        ]}
       >
         {errorMessage}
       </span>

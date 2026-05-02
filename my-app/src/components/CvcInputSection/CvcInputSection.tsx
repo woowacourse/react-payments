@@ -2,7 +2,11 @@ import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 
-const CvcInputSection = ({ onValueHandler }: { onValueHandler: (cardInfo: string) => void }) => {
+type CvcInputSectionProps = {
+  onValueHandler: (cardInfo: string) => void;
+};
+
+const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
 

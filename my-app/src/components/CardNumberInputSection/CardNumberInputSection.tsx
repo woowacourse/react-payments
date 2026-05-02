@@ -3,11 +3,13 @@ import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 import { useState } from "react";
 import { decideBrandName } from "../../utils/decideBrandName";
 
+type CardNumberInputSectionProps = {
+  onValueHandler: (cardInfo: string[], brand?: string) => void;
+};
+
 const CardNumberInputSection = ({
   onValueHandler,
-}: {
-  onValueHandler: (cardInfo: string[], brand?: string) => void;
-}) => {
+}: CardNumberInputSectionProps) => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
@@ -56,7 +58,11 @@ const CardNumberInputSection = ({
         errorMessage={errorMessage}
         errorIndex={errorIndex}
         values={inputValues}
-        inputOption={{ count: 4, maxLength: 4, placeHolder: ["1234", "1234", "1234", "1234"] }}
+        inputOption={{
+          count: 4,
+          maxLength: 4,
+          placeHolder: ["1234", "1234", "1234", "1234"],
+        }}
       />
     </InputSectionLayout>
   );

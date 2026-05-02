@@ -1,16 +1,18 @@
 import { css } from "@emotion/react";
 
+type InputSectionLayoutProps = {
+  children?: React.ReactNode;
+  title: string;
+  message: string;
+  tag: string;
+};
+
 const InputSectionLayout = ({
   children,
   title,
   message,
   tag,
-}: {
-  children?: React.ReactNode;
-  title: string;
-  message: string;
-  tag: string;
-}) => {
+}: InputSectionLayoutProps) => {
   return (
     <div
       css={css`
