@@ -1,12 +1,11 @@
-import Card from "@components/Card";
-import CardCVCInputField from "@components/CardCVCInputField";
-import CardNumberInputField, {
-  type CardNumberUnits,
-} from "@components/CardNumberInputField";
+import Card from "@/components/common/Card";
+import CardCVCInputField from "@/components/feature/CardCVCInputField";
+import CardNumberInputField from "@/components/feature/CardNumberInputField/CardNumberInputField";
 import CardValidityPeriodInputField, {
   type ValidityPeriod,
-} from "@components/CardValidityPeriodInputField";
+} from "@/components/feature/CardValidityPeriodInputField/CardValidityPeriodInputField";
 import styled from "@emotion/styled";
+import type { CardNumberUnits } from "@/types/card";
 import { detectCardBrand } from "@utils/card";
 import { useState } from "react";
 

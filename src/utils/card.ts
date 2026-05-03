@@ -1,5 +1,5 @@
 import type { CardNumberUnits } from "@/types/card";
-import type { CardBrand } from "@components/Card";
+import type { CardBrand } from "@/components/common/Card";
 import type { ValidityPeriod } from "@/components/feature/CardValidityPeriodInputField/CardValidityPeriodInputField";
 
 export const detectCardBrand = (

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import CardNumberInputField from "../components/CardNumberInputField";
+import CardNumberInputField from "../components/feature/CardNumberInputField/CardNumberInputField";
 
 const meta = {
   title: "CardNumberInputField",

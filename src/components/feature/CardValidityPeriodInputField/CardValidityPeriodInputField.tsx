@@ -1,4 +1,4 @@
-import InputField from "@components/InputField.tsx";
+import InputField from "@/components/common/InputField";
 import { padValidityPeriodUnit } from "@utils/card";
 import { useState } from "react";
 

@@ -1,12 +1,11 @@
-import { getFormattedValidityPeriodUnit } from "@utils/card";
+import { COLOR_PALETTE } from "@/styles/colorPalette";
+import type { CardNumberUnits } from "@/types/card";
 import masterCard from "@assets/Mastercard.png";
 import visa from "@assets/Visa.png";
-import type { CardNumberUnits } from "@components/CardNumberInputField";
-import type { ValidityPeriod } from "@components/CardValidityPeriodInputField";
-import SwitchCase from "@components/SwitchCase";
+import type { ValidityPeriod } from "@/components/feature/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import SwitchCase from "@/components/common/SwitchCase";
 import styled from "@emotion/styled";
-import { detectCardBrand } from "@utils/card";
-import { COLOR_PALETTE } from "@/styles/colorPalette";
+import { detectCardBrand, getFormattedValidityPeriodUnit } from "@utils/card";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;

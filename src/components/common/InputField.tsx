@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Input from "@components/Input.tsx";
+import Input from "@/components/common/Input";
 import type { ComponentProps } from "react";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 
