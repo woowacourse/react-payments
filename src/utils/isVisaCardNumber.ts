@@ -3,4 +3,5 @@ export const isVisaCardNumber = (cardNumbers: string[]) => {
         return false;
     }
     if (cardNumbers[0][0] === '4') return true;
+    return false;
 };
