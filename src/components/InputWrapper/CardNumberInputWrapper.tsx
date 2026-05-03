@@ -4,7 +4,7 @@ import CardInfoInput from "../Input/CardInfoInput";
 import CardInputWrapper from "./CardInputWrapper";
 
 interface Props {
-  validator: (value: string[]) => string | null;
+  validator: (value: string[]) => { message: string; index: number } | null;
   setCardNumber: (index: number) => (value: string) => void;
   value: string[];
 }
@@ -25,14 +25,10 @@ export default function CardNumberInputWrapper({
     setInputErrors((prev) => prev.with(index, message));
   };
 
-  const [hasTouched, setHasTouched] = useState(false);
-  const errorAfterCompleted = hasTouched ? validator(value) : null;
-
-  const inputError =
-    inputErrors.find((err) => err !== null) ?? errorAfterCompleted;
-
   return (
-    <CardInputWrapper errorMessage={inputError}>
+    <CardInputWrapper
+      errorMessage={inputErrors.find((err) => err !== null) ?? null}
+    >
       {value.map((_, index) => (
         <CardInfoInput
           key={`${index}th-input`}
@@ -42,8 +38,11 @@ export default function CardNumberInputWrapper({
           validator={(value: string) => isLengthMatch(4, value)}
           maxLength={4}
           onError={setError(index)}
-          onBlur={() => setHasTouched(true)}
-          onFocus={() => setHasTouched(false)}
+          onBlur={() => {
+            const result = validator(value);
+            if (result && result.index === index)
+              setError(index)(result.message);
+          }}
           style={{ width: "71px" }}
         />
       ))}
