@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import CardCVCInput from './CardCVCInput';
 import CardNumberSegmentsInput from './CardNumberSegmentsInput';
 import Flex from './Common/Flex';
@@ -19,7 +20,7 @@ const Description = styled.h3`
 
 interface CardFormProps {
   formState: CardFormState;
-  setFormState: (value: CardFormState) => void;
+  setFormState: Dispatch<SetStateAction<CardFormState>>;
 }
 
 function CardForm(props: CardFormProps) {
@@ -33,7 +34,7 @@ function CardForm(props: CardFormProps) {
         <CardNumberSegmentsInput
           value={props.formState.cardNumberSegments}
           onChange={(value: CardNumberSegments) =>
-            props.setFormState({ ...props.formState, cardNumberSegments: value })
+            props.setFormState((prev) => ({ ...prev, cardNumberSegments: value }))
           }
         />
         <Flex direction="column" gap={5}>
@@ -43,7 +44,7 @@ function CardForm(props: CardFormProps) {
         <CardExpiryDateInput
           value={{ expiryMonth: props.formState.expiryMonth, expiryYear: props.formState.expiryYear }}
           onChange={(value: [string, string]) =>
-            props.setFormState({ ...props.formState, expiryMonth: value[0], expiryYear: value[1] })
+            props.setFormState((prev) => ({ ...prev, expiryMonth: value[0], expiryYear: value[1] }))
           }
         />
         <Flex direction="column" gap={5}>
@@ -51,7 +52,9 @@ function CardForm(props: CardFormProps) {
         </Flex>
         <CardCVCInput
           value={props.formState.cvc}
-          onChange={(value) => props.setFormState({ ...props.formState, cvc: value })}
+          onChange={(value: string) => {
+            props.setFormState((prev) => ({ ...prev, cvc: value }));
+          }}
         />
       </Flex>
     </form>
