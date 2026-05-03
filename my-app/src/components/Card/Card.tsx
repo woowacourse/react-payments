@@ -3,70 +3,24 @@ import type { CardInfo } from "../../types";
 import masterLogo from "./masterLogo.png";
 import visaLogo from "./visaLogo.png";
 
-const fixedCardNumberStyle = css`
-  display: inline-block;
-  min-width: 30px;
-  font-family: "Inter";
-`;
-
 type CardProps = {
   cardInfo: CardInfo;
 };
 
 const Card = ({ cardInfo }: CardProps) => {
   return (
-    <div
-      css={css`
-        width: 212px;
-        height: 132px;
-        border-radius: 4px;
-        background-color: #333333;
-        box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
-        padding: 8px 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      `}
-    >
-      {/* 로고랑, IC칩 */}
-      <div
-        css={css`
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-        `}
-      >
-        <div
-          css={css`
-            background-color: #ddcd78;
-            width: 36px;
-            height: 22px;
-            border-radius: 4px;
-          `}
-        ></div>
+    <div css={cardStyle}>
+      <div css={cardHeaderStyle}>
+        <div css={chipStyle}></div>
         {cardInfo.brand && (
           <img
-            css={css`
-              width: 36px;
-              height: 22px;
-            `}
+            css={brandLogoStyle}
             src={cardInfo.brand === "master" ? masterLogo : visaLogo}
           />
         )}
       </div>
-
-      {/* 카드 정보 */}
       <div>
-        <div
-          css={css`
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-          `}
-        >
+        <div css={cardNumbersStyle}>
           <span css={fixedCardNumberStyle}>{cardInfo.numbers[0]}</span>
           <span css={fixedCardNumberStyle}>{cardInfo.numbers[1]}</span>
           <span css={fixedCardNumberStyle}>
@@ -76,28 +30,70 @@ const Card = ({ cardInfo }: CardProps) => {
             {"•".repeat(cardInfo.numbers[3]?.length ?? 0)}
           </span>
         </div>
-        <p
-          css={css`
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: "Inter";
-          `}
-        >
+        <p css={expiryStyle}>
           {cardInfo.expiry[0]}
-          <span
-            css={css`
-              ${cardInfo.expiry[1]
-                ? `visibility: visible`
-                : `visibility: hidden`}
-            `}
-          >
-            /
-          </span>
+          <span css={slashStyle(!!cardInfo.expiry[1])}>/</span>
           {cardInfo.expiry[1]}
         </p>
       </div>
     </div>
   );
 };
+
 export default Card;
+
+const cardStyle = css`
+  width: 212px;
+  height: 132px;
+  border-radius: 4px;
+  background-color: #333333;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+`;
+
+const cardHeaderStyle = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const chipStyle = css`
+  background-color: #ddcd78;
+  width: 36px;
+  height: 22px;
+  border-radius: 4px;
+`;
+
+const brandLogoStyle = css`
+  width: 36px;
+  height: 22px;
+`;
+
+const cardNumbersStyle = css`
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+const fixedCardNumberStyle = css`
+  display: inline-block;
+  min-width: 30px;
+  font-family: "Inter";
+`;
+
+const expiryStyle = css`
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Inter";
+`;
+
+const slashStyle = (visible: boolean) => css`
+  visibility: ${visible ? "visible" : "hidden"};
+`;
