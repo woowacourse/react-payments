@@ -3,7 +3,7 @@ import { isLengthMatch } from "../../utils/isLengthMatch";
 import CardInfoInput from "../Input/CardInfoInput";
 import CardInputWrapper from "./CardInputWrapper";
 
-interface CardNumberInputWrapperProps {
+interface Props {
   validator: (value: string[]) => string | null;
   setCardNumber: (index: number) => (value: string) => void;
   value: string[];
@@ -13,7 +13,7 @@ export default function CardNumberInputWrapper({
   validator,
   setCardNumber,
   value,
-}: CardNumberInputWrapperProps) {
+}: Props) {
   const [inputErrors, setInputErrors] = useState<(string | null)[]>([
     null,
     null,

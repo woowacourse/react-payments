@@ -1,14 +1,11 @@
 import styled from "@emotion/styled";
 
-interface CardInputWrapperProps {
+interface Props {
   errorMessage: string | null;
   children: React.ReactNode;
 }
 
-export default function CardInputWrapper({
-  errorMessage,
-  children,
-}: CardInputWrapperProps) {
+export default function CardInputWrapper({ errorMessage, children }: Props) {
   return (
     <CardInputContainer>
       <CardInputRow>{children}</CardInputRow>
