@@ -28,7 +28,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
   return (
     <InputField
       title="CVC 번호를 입력해 주세요"
-      label="카드 번호"
+      label="CVC"
       helperMessage={status === "error" ? "숫자만 입력 가능합니다." : ""}
       inputPropsList={[
         {
