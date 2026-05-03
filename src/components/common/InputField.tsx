@@ -22,12 +22,14 @@ const InputField = ({
     <Container>
       <Title>{title}</Title>
       {caption && <Caption>{caption}</Caption>}
-      <Label>{label}</Label>
-      <InputWrapper>
-        {inputPropsList.map((inputProps, index) => (
-          <Input key={`${index}-${inputProps.id}`} {...inputProps} />
-        ))}
-      </InputWrapper>
+      <InputGroup>
+        <Legend>{label}</Legend>
+        <InputWrapper>
+          {inputPropsList.map((inputProps, index) => (
+            <Input key={`${index}-${inputProps.id}`} {...inputProps} />
+          ))}
+        </InputWrapper>
+      </InputGroup>
       <HelperMessage>{helperMessage}</HelperMessage>
     </Container>
   );
@@ -49,17 +51,24 @@ const Caption = styled.p`
   margin-top: 0.25rem;
 `;
 
+const InputGroup = styled.fieldset`
+  border: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  min-width: 0;
+`;
+
+const Legend = styled.legend`
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: ${COLOR_PALETTE.LABEL};
+  padding: 0;
+`;
+
 const InputWrapper = styled.div`
   display: flex;
   gap: 0.625rem;
   margin-top: 0.5rem;
-`;
-
-const Label = styled.label`
-  font-weight: 500;
-  font-size: 0.75rem;
-  color: ${COLOR_PALETTE.LABEL};
-  margin-top: 1rem;
 `;
 
 const HelperMessage = styled.p`
