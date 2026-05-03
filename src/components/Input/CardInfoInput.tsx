@@ -3,18 +3,17 @@ import { useState } from "react";
 
 type InputType = "card-number" | "exp" | "cvc";
 
-interface CardInfoInputProps {
+interface CardInfoInputProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "type" | "onError"
+> {
   value: string;
   setValue: (value: string) => void;
   // input에 에러메세지가 등장할 수 있는 경우에 border 색을 변경해주기 위한 용도의 validator
   validator: (value: string) => boolean;
-  maxLength?: number;
-  placeHolder?: string;
   type: InputType;
   // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
   onError: (message: string | null) => void;
-  onBlur?: () => void;
-  onFocus?: () => void;
 }
 
 interface CardInfoInputStyleProps {
@@ -23,21 +22,15 @@ interface CardInfoInputStyleProps {
 }
 
 export default function CardInfoInput({
-  value,
   setValue,
   validator,
-  placeHolder,
   type,
-  maxLength,
   onError,
-  onBlur,
-  onFocus,
+  ...props
 }: CardInfoInputProps) {
   const [isNotValidate, setIsNotValidate] = useState(false);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>,
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const tmpValue = e.target.value;
     if (Number.isNaN(Number(tmpValue))) {
       onError("숫자만 입력할 수 있습니다.");
@@ -53,13 +46,9 @@ export default function CardInfoInput({
     <Input
       isNotValidate={isNotValidate}
       type="text"
-      value={value}
       onChange={(e) => handleInputChange(e)}
       inputType={type}
-      placeholder={placeHolder}
-      maxLength={maxLength}
-      onBlur={() => onBlur?.()}
-      onFocus={() => onFocus?.()}
+      {...props}
     />
   );
 }

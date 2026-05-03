@@ -39,7 +39,7 @@ export default function CardNumberInputWrapper({
           value={value[index]}
           setValue={setCardNumber(index)}
           type="card-number"
-          placeHolder="1234"
+          placeholder="1234"
           validator={(value: string) => isLengthMatch(4, value)}
           maxLength={4}
           onError={setError(index)}
