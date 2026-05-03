@@ -9,11 +9,10 @@
   border: none;
 }
 
-.titleContainer {
+.legend {
   display: flex;
   align-content: space-between;
   flex-direction: column;
-
   gap: 4px;
 }
 
@@ -33,6 +32,40 @@
   line-height: 100%;
   letter-spacing: 0%;
   vertical-align: middle;
-
   color: #8b95a1;
+}
+
+/* formContainer */
+.label {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.formWrapper {
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+  gap: 8px;
+}
+.children {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.errorMessage {
+  font-weight: 400;
+  font-size: 9.5px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  min-height: 20px;
+  color: #ff3d3d;
+}
+
+.hidden {
+  visibility: hidden;
 }
