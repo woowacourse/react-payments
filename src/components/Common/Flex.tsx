@@ -14,8 +14,8 @@ const Flex = styled.div<FlexProps>`
   ${(props) => (props.direction ? `flex-direction: ${props.direction};` : '')}
   ${(props) => (props.justifyContent ? `justify-content: ${props.justifyContent};` : '')}
   ${(props) => (props.gap ? `gap: ${props.gap}px;` : '')}
-  ${(props) => (props.gap ? `flex-grow: ${props.flexGrow};` : '')}
-  ${(props) => (props.gap ? `flex-shrink: ${props.flexShrink};` : '')}
+  ${(props) => (props.flexGrow ? `flex-grow: ${props.flexGrow};` : '')}
+  ${(props) => (props.flexShrink ? `flex-shrink: ${props.flexShrink};` : '')}
 `;
 
 export default Flex;
