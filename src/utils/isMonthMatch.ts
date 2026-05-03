@@ -1,5 +1,8 @@
-export const isMonthMatch = (value: string) => {
-    if (Number(value) > 12 || Number(value) < 1) return false;
-    if (2 !== value.length) return false;
-    return true;
+import { isNumeric } from './isNumeric';
+
+export const isMonthMatch = (value: string): string | null => {
+    const error = isNumeric(value);
+    if (error) return error;
+    if (value.length === 2 && (Number(value) > 12 || Number(value) < 1)) return '1~12 사이 월을 입력해주세요.';
+    return null;
 };
