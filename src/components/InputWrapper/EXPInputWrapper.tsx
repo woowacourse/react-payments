@@ -35,24 +35,24 @@ export default function EXPInputWrapper({
       <CardInfoInput
         value={value[0]}
         setValue={setEXPNumber(0)}
-        type="exp"
         placeholder="MM"
         validator={(value: string) => isMonthMatch(value)}
         maxLength={2}
         onError={setError(0)}
         onBlur={() => setHasTouched(true)}
         onFocus={() => setHasTouched(false)}
+        style={{ width: "152px" }}
       />
       <CardInfoInput
         value={value[1]}
         setValue={setEXPNumber(1)}
-        type="exp"
         placeholder="YY"
         validator={(value: string) => isLengthMatch(2, value)}
         maxLength={2}
         onError={setError(1)}
         onBlur={() => setHasTouched(true)}
         onFocus={() => setHasTouched(false)}
+        style={{ width: "152px" }}
       />
     </CardInputWrapper>
   );

@@ -38,13 +38,13 @@ export default function CardNumberInputWrapper({
           key={`${index}th-input`}
           value={value[index]}
           setValue={setCardNumber(index)}
-          type="card-number"
           placeholder="1234"
           validator={(value: string) => isLengthMatch(4, value)}
           maxLength={4}
           onError={setError(index)}
           onBlur={() => setHasTouched(true)}
           onFocus={() => setHasTouched(false)}
+          style={{ width: "71px" }}
         />
       ))}
     </CardInputWrapper>

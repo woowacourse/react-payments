@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 
-type InputType = "card-number" | "exp" | "cvc";
-
 interface CardInfoInputProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   "onChange" | "type" | "onError"
@@ -10,21 +8,17 @@ interface CardInfoInputProps extends Omit<
   value: string;
   setValue: (value: string) => void;
   // input에 에러메세지가 등장할 수 있는 경우에 border 색을 변경해주기 위한 용도의 validator
-  validator: (value: string) => boolean;
-  type: InputType;
-  // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
+  validator: (value: string) => boolean; // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
   onError: (message: string | null) => void;
 }
 
 interface CardInfoInputStyleProps {
-  inputType: InputType;
   isNotValidate: boolean;
 }
 
 export default function CardInfoInput({
   setValue,
   validator,
-  type,
   onError,
   ...props
 }: CardInfoInputProps) {
@@ -47,7 +41,6 @@ export default function CardInfoInput({
       isNotValidate={isNotValidate}
       type="text"
       onChange={(e) => handleInputChange(e)}
-      inputType={type}
       {...props}
     />
   );
@@ -60,11 +53,7 @@ const Input = styled.input<CardInfoInputStyleProps>`
   }
   border-radius: 2px;
   height: 32px;
-  width: ${({ inputType }) => {
-    if (inputType === "card-number") return "71px";
-    if (inputType === "exp") return "152px";
-    if (inputType === "cvc") return "315px";
-  }};
+
   padding: 8px;
   box-sizing: border-box;
   &:focus {
