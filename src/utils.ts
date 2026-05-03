@@ -1,7 +1,7 @@
 export function validateNumberString(input: string) {
-  const chars = input.split('');
-  return chars.every((char) => !isNaN(Number(char)));
+  return /^\d+$/.test(input);
 }
+
 export function validateStringMaxLength(input: string, maxLength: number,) {
   return input.length <= maxLength
 }
