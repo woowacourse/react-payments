@@ -11,7 +11,6 @@ import { useEffect } from "react";
 function App() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: "", brand: "" });
 
-  console.log(cardInfo);
   useEffect(() => {
     const brandName = decideBrandName(cardInfo.numbers[0]);
     setCardInfo((prev) => {
