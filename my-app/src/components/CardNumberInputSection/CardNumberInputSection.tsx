@@ -7,9 +7,7 @@ type CardNumberInputSectionProps = {
   onValueHandler: (cardInfo: string[], brand?: string) => void;
 };
 
-const CardNumberInputSection = ({
-  onValueHandler,
-}: CardNumberInputSectionProps) => {
+const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps) => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
@@ -23,26 +21,22 @@ const CardNumberInputSection = ({
     onValueHandler(newValues);
   };
 
-  const handleBlur = () => {
-    let errorIndex = -1;
-    let message = "";
-
-    for (let i = 0; i < inputValues.length; i++) {
-      const value = inputValues[i];
-      if (value === "" || value === undefined) continue;
+  const getValidationError = (values: string[]) => {
+    for (const [i, value] of values.entries()) {
+      if (!value) continue;
       if (!/^\d+$/.test(value)) {
-        errorIndex = i;
-        message = "숫자만 입력 가능합니다";
-        break;
+        return { index: i, message: "숫자만 입력 가능합니다" };
       }
       if (i === 0 && decideBrandName(value) === "") {
-        errorIndex = i;
-        message = "이 카드 브랜드는 지원하지 않습니다.";
-        break;
+        return { index: i, message: "이 카드 브랜드는 지원하지 않습니다." };
       }
     }
+    return { index: -1, message: "" };
+  };
 
-    setErrorIndex(errorIndex);
+  const handleBlur = () => {
+    const { index, message } = getValidationError(inputValues);
+    setErrorIndex(index);
     setErrorMessage(message);
   };
 

@@ -12,23 +12,14 @@ const Card = ({ cardInfo }: CardProps) => {
     <div css={cardStyle}>
       <div css={cardHeaderStyle}>
         <div css={chipStyle}></div>
-        {cardInfo.brand && (
-          <img
-            css={brandLogoStyle}
-            src={cardInfo.brand === "master" ? masterLogo : visaLogo}
-          />
-        )}
+        {cardInfo.brand && <img css={brandLogoStyle} src={cardInfo.brand === "master" ? masterLogo : visaLogo} />}
       </div>
       <div>
         <div css={cardNumbersStyle}>
           <span css={fixedCardNumberStyle}>{cardInfo.numbers[0]}</span>
           <span css={fixedCardNumberStyle}>{cardInfo.numbers[1]}</span>
-          <span css={fixedCardNumberStyle}>
-            {"•".repeat(cardInfo.numbers[2]?.length ?? 0)}
-          </span>
-          <span css={fixedCardNumberStyle}>
-            {"•".repeat(cardInfo.numbers[3]?.length ?? 0)}
-          </span>
+          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
+          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
         </div>
         <p css={expiryStyle}>
           {cardInfo.expiry[0]}

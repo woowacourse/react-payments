@@ -16,11 +16,14 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
     onValueHandler(value);
   };
 
-  const handleBlur = (_i: number) => {
-    if (inputValue === "" || inputValue === undefined) return;
-    if (!/^\d+$/.test(inputValue)) {
-      setErrorMessage("숫자만 입력 가능합니다");
-    }
+  const getValidationError = (value: string) => {
+    if (!value) return "";
+    if (!/^\d+$/.test(value)) return "숫자만 입력 가능합니다";
+    return "";
+  };
+
+  const handleBlur = () => {
+    setErrorMessage(getValidationError(inputValue));
   };
 
   return (

@@ -6,9 +6,7 @@ type ExpiryDateInputSectionProps = {
   onValueHandler: (cardInfo: string[]) => void;
 };
 
-const ExpiryDateInputSection = ({
-  onValueHandler,
-}: ExpiryDateInputSectionProps) => {
+const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps) => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
@@ -22,26 +20,22 @@ const ExpiryDateInputSection = ({
     onValueHandler(newValues);
   };
 
-  const handleBlur = () => {
-    let errorIndex = -1;
-    let message = "";
-
-    for (let i = 0; i < inputValues.length; i++) {
-      const value = inputValues[i];
-      if (value === "" || value === undefined) continue;
+  const getValidationError = (values: string[]) => {
+    for (const [i, value] of values.entries()) {
+      if (!value) continue;
       if (!/^\d+$/.test(value)) {
-        errorIndex = i;
-        message = "숫자만 입력 가능합니다";
-        break;
+        return { index: i, message: "숫자만 입력 가능합니다" };
       }
       if (i === 0 && !/^(0[1-9]|1[0-2])$/.test(value)) {
-        errorIndex = i;
-        message = "유효한 날짜를 입력해주세요";
-        break;
+        return { index: i, message: "유효한 날짜를 입력해주세요" };
       }
     }
+    return { index: -1, message: "" };
+  };
 
-    setErrorIndex(errorIndex);
+  const handleBlur = () => {
+    const { index, message } = getValidationError(inputValues);
+    setErrorIndex(index);
     setErrorMessage(message);
   };
 
