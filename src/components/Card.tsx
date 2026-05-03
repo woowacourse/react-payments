@@ -29,11 +29,11 @@ const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
           caseBy={[
             {
               case: "MasterCard",
-              component: <CardBrandImg src={masterCard} />,
+              component: <CardBrandImg src={masterCard} alt="MasterCard" />,
             },
             {
               case: "Visa",
-              component: <CardBrandImg src={visa} />,
+              component: <CardBrandImg src={visa} alt="Visa" />,
             },
           ]}
           defaultCase={null}
