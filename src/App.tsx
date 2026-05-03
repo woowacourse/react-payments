@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import CardPreview from './components/CardPreview';
 import CardForm from './components/CardForm';
-import { useCardBrand } from './hooks/useCardBrand';
 import type { CardNumberSegments } from './types';
 import styled from '@emotion/styled';
+import { getCardBrand } from './utils';
 
 const View = styled.div`
   width: 100%;
@@ -20,7 +20,7 @@ function App() {
     cvc: '',
   });
 
-  const brand = useCardBrand(formState.cardNumberSegments);
+  const brand = getCardBrand(formState.cardNumberSegments);
 
   return (
     <View>
