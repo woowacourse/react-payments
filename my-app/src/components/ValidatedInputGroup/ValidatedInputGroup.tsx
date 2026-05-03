@@ -36,9 +36,7 @@ const ValidatedInputGroup = ({
           />
         ))}
       </section>
-      <span css={[errorTextStyle, visibilityStyle(!!errorMessage)]}>
-        {errorMessage}
-      </span>
+      <span css={[errorTextStyle, visibilityStyle(!!errorMessage)]}>{errorMessage}</span>
     </div>
   );
 };

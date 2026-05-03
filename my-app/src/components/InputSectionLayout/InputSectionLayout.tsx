@@ -7,12 +7,7 @@ type InputSectionLayoutProps = {
   tag: string;
 };
 
-const InputSectionLayout = ({
-  children,
-  title,
-  message,
-  tag,
-}: InputSectionLayoutProps) => {
+const InputSectionLayout = ({ children, title, message, tag }: InputSectionLayoutProps) => {
   return (
     <div css={containerStyle}>
       <div css={columnStyle}>
