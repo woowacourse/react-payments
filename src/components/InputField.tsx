@@ -24,8 +24,8 @@ const InputField = ({
       {caption && <Caption>{caption}</Caption>}
       <Label>{label}</Label>
       <InputWrapper>
-        {inputPropsList.map((inputProps) => (
-          <Input {...inputProps} />
+        {inputPropsList.map((inputProps, index) => (
+          <Input key={`${index}-${inputProps.id}`} {...inputProps} />
         ))}
       </InputWrapper>
       <HelperMessage>{helperMessage}</HelperMessage>
