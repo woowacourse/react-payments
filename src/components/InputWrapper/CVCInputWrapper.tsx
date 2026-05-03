@@ -25,13 +25,13 @@ export default function CVCInputWrapper({
       <CardInfoInput
         value={value}
         setValue={setCVCNumber}
-        type="cvc"
         placeholder="123"
         validator={(value: string) => isLengthMatch(3, value)}
         maxLength={3}
         onError={setInputError}
         onBlur={() => setHasTouched(true)}
         onFocus={() => setHasTouched(false)}
+        style={{ width: "315px" }}
       />
     </CardInputWrapper>
   );
