@@ -7,7 +7,7 @@ interface InputFieldProps {
   title: string;
   caption?: string;
   label: string;
-  inputPropsList: ComponentProps<typeof Input>[];
+  inputPropsList: (ComponentProps<typeof Input> & { key: string })[];
   helperMessage?: string;
 }
 
@@ -25,8 +25,8 @@ const InputField = ({
       <InputGroup>
         <Legend>{label}</Legend>
         <InputWrapper>
-          {inputPropsList.map((inputProps, index) => (
-            <Input key={`${index}-${inputProps.id}`} {...inputProps} />
+          {inputPropsList.map(({ key, ...inputProps }) => (
+            <Input key={key} {...inputProps} />
           ))}
         </InputWrapper>
       </InputGroup>

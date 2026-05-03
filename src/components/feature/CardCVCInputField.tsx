@@ -32,6 +32,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
       helperMessage={status === "error" ? "숫자만 입력 가능합니다." : ""}
       inputPropsList={[
         {
+          key: "cvc",
           placeholder: "123",
           maxLength: CVC_MAX_LENGTH,
           fullWidth: true,

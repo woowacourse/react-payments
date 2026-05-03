@@ -66,6 +66,7 @@ const CardValidityPeriodInputField = ({
       label="유효기간"
       inputPropsList={[
         {
+          key: "month",
           placeholder: "MM",
           maxLength: MONTH_MAX_LENGTH,
           fullWidth: true,
@@ -75,6 +76,7 @@ const CardValidityPeriodInputField = ({
           state: status.month === "DEFAULT" ? "default" : "error",
         },
         {
+          key: "year",
           placeholder: "YY",
           maxLength: YEAR_MAX_LENGTH,
           fullWidth: true,
