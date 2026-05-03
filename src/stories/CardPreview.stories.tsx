@@ -21,7 +21,8 @@ const meta = {
       description: '1~12 사이의 숫자 문자열',
     },
     expiryYear: {
-      control: { type: 'number', min: 24, max: 40, step: 1 },
+      control: { type: 'select' },
+      options: Array.from({ length: 99 }, (_, i) => String(i).padStart(2, '0')),
       description: '2자리 연도 문자열 (예: 26)',
     },
   },
