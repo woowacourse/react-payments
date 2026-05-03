@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardInfoInput from './CardInfoInput';
 import { useState } from 'react';
+import CardInfoInput from './CardInfoInput';
+import { isNumeric } from '../../utils/isNumeric';
+import { isMonthMatch } from '../../utils/isMonthMatch';
 
 const meta: Meta<typeof CardInfoInput> = {
     title: 'Components/CardInfoInput',
@@ -19,8 +21,9 @@ export const CardNumber: Story = {
                 <CardInfoInput
                     value={value}
                     setValue={setValue}
-                    type="card-number"
-                    validator={(v) => v.length === 4}
+                    size="small"
+                    validator={isNumeric}
+                    isError={error !== null}
                     maxLength={4}
                     placeHolder="0000"
                     onError={setError}
@@ -31,7 +34,7 @@ export const CardNumber: Story = {
     },
 };
 
-export const EXP: Story = {
+export const EXPMonth: Story = {
     render: () => {
         const [value, setValue] = useState('');
         const [error, setError] = useState<string | null>(null);
@@ -40,10 +43,33 @@ export const EXP: Story = {
                 <CardInfoInput
                     value={value}
                     setValue={setValue}
-                    type="exp"
-                    validator={(v) => v.length === 2}
+                    size="medium"
+                    validator={isMonthMatch}
+                    isError={error !== null}
                     maxLength={2}
                     placeHolder="MM"
+                    onError={setError}
+                />
+                {error && <p style={{ color: 'red', fontSize: '12px' }}>{error}</p>}
+            </>
+        );
+    },
+};
+
+export const EXPYear: Story = {
+    render: () => {
+        const [value, setValue] = useState('');
+        const [error, setError] = useState<string | null>(null);
+        return (
+            <>
+                <CardInfoInput
+                    value={value}
+                    setValue={setValue}
+                    size="medium"
+                    validator={isNumeric}
+                    isError={error !== null}
+                    maxLength={2}
+                    placeHolder="YY"
                     onError={setError}
                 />
                 {error && <p style={{ color: 'red', fontSize: '12px' }}>{error}</p>}
@@ -61,8 +87,9 @@ export const CVC: Story = {
                 <CardInfoInput
                     value={value}
                     setValue={setValue}
-                    type="cvc"
-                    validator={(v) => v.length === 3}
+                    size="large"
+                    validator={isNumeric}
+                    isError={error !== null}
                     maxLength={3}
                     placeHolder="123"
                     onError={setError}
