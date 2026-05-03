@@ -1,7 +1,6 @@
 import { useEffect, useState, type ChangeEvent, type ComponentProps } from 'react';
 import styled from '@emotion/styled';
 import Flex from './Flex';
-import type { ValidationRule } from '../../types';
 
 const Input = styled.input<{ isError?: boolean }>`
   width: 100%;
