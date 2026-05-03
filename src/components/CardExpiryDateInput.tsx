@@ -1,8 +1,9 @@
-import { type ChangeEvent } from 'react';
-import type { CardFormState } from '../types';
+import { useState, type ChangeEvent } from 'react';
+import type { CardFormState, ErrorEntry } from '../types';
 import ValidationInput from './Common/ValidationInput';
 import Flex from './Common/Flex';
 import {
+  getLastError,
   validateMonth,
   validateNumberString,
   validateStringLength,
@@ -10,6 +11,7 @@ import {
   validateYear,
 } from '../utils';
 import Label from './Common/Label';
+import InputErrorMessage from './Common/InputErrorMessage';
 
 interface CardExpiryDateInputProps {
   value: Pick<CardFormState, 'expiryMonth' | 'expiryYear'>;
@@ -17,6 +19,16 @@ interface CardExpiryDateInputProps {
 }
 
 export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
+  const [inputErrors, setInputErrors] = useState<ErrorEntry[]>([null, null]);
+
+  const lastError = getLastError(inputErrors);
+
+  const handleChangeError = (index: number, error: Error | null) => {
+    const newArray = [...inputErrors];
+    newArray[index] = error ? { error, timestamp: Date.now() } : null;
+    setInputErrors(newArray);
+  };
+
   const handleChangeMonth = (event: ChangeEvent<HTMLInputElement>) => {
     props.onChange([event.target.value, props.value.expiryYear]);
   };
@@ -36,7 +48,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           placeholder="MM"
           value={props.value.expiryMonth}
           onChange={handleChangeMonth}
-          isShowError={true}
+          onChangeError={(error) => handleChangeError(0, error)}
           validations={[
             {
               type: 'limit',
@@ -67,7 +79,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           placeholder="YY"
           value={props.value.expiryYear}
           onChange={handleChangeYear}
-          isShowError={true}
+          onChangeError={(error) => handleChangeError(1, error)}
           validations={[
             {
               type: 'limit',
@@ -92,6 +104,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           ]}
         />
       </Flex>
+      {lastError && <InputErrorMessage>{lastError.message}</InputErrorMessage>}
     </Flex>
   );
 }

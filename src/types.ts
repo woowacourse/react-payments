@@ -8,3 +8,5 @@ export interface CardFormState {
   expiryYear: string;
   cvc: string;
 };
+
+export type ErrorEntry = { error: Error; timestamp: number } | null;

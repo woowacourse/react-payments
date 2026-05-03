@@ -1,8 +1,9 @@
-import { type ChangeEvent } from 'react';
+import { useState, type ChangeEvent } from 'react';
 import ValidationInput from './Common/ValidationInput';
 import { validateCVC, validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
 import Flex from './Common/Flex';
 import Label from './Common/Label';
+import InputErrorMessage from './Common/InputErrorMessage';
 
 interface CardCVCInputProps {
   value: string;
@@ -10,6 +11,8 @@ interface CardCVCInputProps {
 }
 
 function CardCVCInput(props: CardCVCInputProps) {
+  const [inputError, setInputError] = useState<Error | null>(null);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     props.onChange(event.target.value);
   };
@@ -24,7 +27,7 @@ function CardCVCInput(props: CardCVCInputProps) {
         inputMode="numeric"
         autoComplete="cc-exp-csc"
         placeholder="CVC"
-        isShowError={true}
+        onChangeError={(error) => setInputError(error)}
         validations={[
           {
             type: 'limit',
@@ -48,6 +51,7 @@ function CardCVCInput(props: CardCVCInputProps) {
           },
         ]}
       />
+      {inputError && <InputErrorMessage>{inputError.message}</InputErrorMessage>}
     </Flex>
   );
 }

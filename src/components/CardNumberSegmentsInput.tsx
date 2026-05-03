@@ -1,9 +1,10 @@
-import { type ChangeEvent } from 'react';
+import { useState, type ChangeEvent } from 'react';
 import ValidationInput from './Common/ValidationInput';
-import { validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
-import type { CardNumberSegments } from '../types';
+import { validateNumberString, validateStringLength, validateStringMaxLength, getLastError } from '../utils';
+import type { CardNumberSegments, ErrorEntry } from '../types';
 import Flex from './Common/Flex';
 import Label from './Common/Label';
+import InputErrorMessage from './Common/InputErrorMessage';
 
 interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;
@@ -11,11 +12,24 @@ interface CardNumberSegmentsInputProps {
 }
 
 function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
+  const [inputErrors, setInputErrors] = useState<ErrorEntry[]>(
+    Array.from({ length: props.value.length }).map(() => null),
+  );
+
+  const lastError = getLastError(inputErrors);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputIndex = Number(event.target.dataset.index);
     const newSegments = [...props.value] as CardNumberSegments;
     newSegments.splice(inputIndex, 1, event.target.value);
     props.onChange(newSegments);
+  };
+
+  const handleChangeError = (index: number, error: Error | null) => {
+    const newArray = [...inputErrors];
+    // eslint-disable-next-line react-hooks/purity
+    newArray[index] = error ? { error, timestamp: Date.now() } : null;
+    setInputErrors(newArray);
   };
 
   return (
@@ -31,7 +45,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             placeholder="1234"
             value={el}
             onChange={handleChange}
-            isShowError={true}
+            onChangeError={(error) => handleChangeError(index, error)}
             validations={[
               {
                 type: 'limit',
@@ -52,6 +66,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
           />
         ))}
       </Flex>
+      {lastError && <InputErrorMessage>{lastError.message}</InputErrorMessage>}
     </Flex>
   );
 }
