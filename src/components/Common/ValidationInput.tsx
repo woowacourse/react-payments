@@ -56,10 +56,10 @@ export default function ValidationInput({
 
     const failedValidation = validations.find(
       (validation) =>
-        typeof props.value === 'string' &&
-        props.value.length &&
+        typeof event.target.value === 'string' &&
+        event.target.value.length &&
         validation.type === 'check' &&
-        !validation.validator(props.value),
+        !validation.validator(event.target.value),
     );
 
     if (failedValidation) {
