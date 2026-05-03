@@ -50,9 +50,12 @@ const CardValidityPeriodInputField = ({
       return setStatus((prev) => ({ ...prev, [key]: "EMPTY" }));
 
     const padded = padValidityPeriodUnit(input);
-    // validityPeriodChange(key, padded);
 
     if (padded === input) return;
+    const state = checkCardNumberInputStatus(key, padded);
+    setStatus((prev) => ({ ...prev, [key]: state }));
+
+    if (state !== "DEFAULT") return;
     onChange({ ...validityPeriod, [key]: padded });
   };
 
