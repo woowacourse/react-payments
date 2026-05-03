@@ -1,4 +1,4 @@
-import { useState, useEffect, type ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 import ValidationInput from './Common/ValidationInput';
 import { validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
 import type { CardNumberSegments } from '../types';
@@ -11,24 +11,18 @@ interface CardNumberSegmentsInputProps {
 }
 
 function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
-  const [segments, setSegments] = useState<CardNumberSegments>(props.value);
-
-  useEffect(() => {
-    props.onChange(segments);
-  }, [segments]);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputIndex = Number(event.target.dataset.index);
-    const newSegments = [...segments] as CardNumberSegments;
+    const newSegments = [...props.value] as CardNumberSegments;
     newSegments.splice(inputIndex, 1, event.target.value);
-    setSegments(newSegments);
+    props.onChange(newSegments);
   };
 
   return (
     <Flex direction="column" gap={10}>
       <Label>카드 번호</Label>
       <Flex gap={10}>
-        {segments.map((el, index) => (
+        {props.value.map((el, index) => (
           <ValidationInput
             key={index}
             data-index={index}

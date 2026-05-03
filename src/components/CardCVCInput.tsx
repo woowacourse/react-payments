@@ -1,4 +1,4 @@
-import { useState, useEffect, type ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 import ValidationInput from './Common/ValidationInput';
 import { validateCVC, validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
 import Flex from './Common/Flex';
@@ -10,21 +10,15 @@ interface CardCVCInputProps {
 }
 
 function CardCVCInput(props: CardCVCInputProps) {
-  const [cvc, setCvc] = useState(props.value);
-
-  useEffect(() => {
-    props.onChange(cvc);
-  }, [cvc]);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setCvc(event.target.value);
+    props.onChange(event.target.value);
   };
 
   return (
     <Flex direction="column" gap={10}>
       <Label>CVC</Label>
       <ValidationInput
-        value={cvc}
+        value={props.value}
         onChange={handleChange}
         type="text"
         inputMode="numeric"

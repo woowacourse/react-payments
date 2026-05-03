@@ -1,4 +1,4 @@
-import { useState, useEffect, type ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 import type { CardFormState } from '../types';
 import ValidationInput from './Common/ValidationInput';
 import Flex from './Common/Flex';
@@ -17,19 +17,12 @@ interface CardExpiryDateInputProps {
 }
 
 export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
-  const [expiryMonth, setExpiryMonth] = useState(props.value.expiryMonth);
-  const [expiryYear, setExpiryYear] = useState(props.value.expiryYear);
-
-  useEffect(() => {
-    props.onChange([expiryMonth, expiryYear]);
-  }, [expiryMonth, expiryYear]);
-
   const handleChangeMonth = (event: ChangeEvent<HTMLInputElement>) => {
-    setExpiryMonth(event.target.value);
+    props.onChange([event.target.value, props.value.expiryYear]);
   };
 
   const handleChangeYear = (event: ChangeEvent<HTMLInputElement>) => {
-    setExpiryYear(event.target.value);
+    props.onChange([props.value.expiryMonth, event.target.value]);
   };
 
   return (
@@ -41,7 +34,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           inputMode="numeric"
           autoComplete="cc-exp-month"
           placeholder="MM"
-          value={expiryMonth}
+          value={props.value.expiryMonth}
           onChange={handleChangeMonth}
           isShowError={true}
           validations={[
@@ -72,7 +65,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           inputMode="numeric"
           autoComplete="cc-exp-year"
           placeholder="YY"
-          value={expiryYear}
+          value={props.value.expiryYear}
           onChange={handleChangeYear}
           isShowError={true}
           validations={[
