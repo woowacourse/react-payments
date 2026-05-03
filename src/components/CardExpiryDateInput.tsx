@@ -99,7 +99,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
             {
               type: 'onBlur',
               validator: validateYear,
-              message: '유효한 년도을 입력해주세요. (00 ~ 99)',
+              message: '유효한 년도를 입력해주세요. (00 ~ 99)',
             },
           ]}
         />
