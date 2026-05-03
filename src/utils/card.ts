@@ -1,6 +1,6 @@
+import type { CardNumberUnits } from "@/types/card";
 import type { CardBrand } from "@components/Card";
-import type { ValidityPeriod } from "@components/CardValidityPeriodInputField";
-import type { CardNumberUnits } from "@components/CardNumberInputField";
+import type { ValidityPeriod } from "@/components/feature/CardValidityPeriodInputField/CardValidityPeriodInputField";
 
 export const detectCardBrand = (
   cardNumber: CardNumberUnits,
@@ -21,10 +21,6 @@ export const getFormattedValidityPeriodUnit = (
 ) => {
   const { month, year } = validityPeriod;
   return `${month ? month + "/" : ""}${year ? year : ""}`;
-};
-
-export const formatValidityPeriod = (nextRaw: string) => {
-  return nextRaw.replace(/\D/g, "").slice(0, 2);
 };
 
 export const padValidityPeriodUnit = (value: string) => {
