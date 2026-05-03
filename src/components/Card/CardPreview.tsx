@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { isMasterCardNumber } from "../../utils/isMasterCardNumber";
-import { isVisaCardNumber } from "../../utils/isVisaCardNumber";
+import { getCardBrand } from "../../utils/getCardBrand";
 import Mastercard from "../../../public/Mastercard.svg";
 import Visa from "../../../public/Visa.svg";
 
@@ -14,8 +13,10 @@ export default function CardPreview({ cardNumbers, EXP }: CardPreviewProps) {
     <CardPreviewContainer>
       <IcChip />
       <CardBrandLogo>
-        {isMasterCardNumber(cardNumbers) && <CardBrandImage src={Mastercard} />}
-        {isVisaCardNumber(cardNumbers) && <CardBrandImage src={Visa} />}
+        {getCardBrand(cardNumbers) === "visa" && <CardBrandImage src={Visa} />}
+        {getCardBrand(cardNumbers) === "master" && (
+          <CardBrandImage src={Mastercard} />
+        )}
       </CardBrandLogo>
       <CardNumberList>
         {cardNumbers.map((number, index) =>
