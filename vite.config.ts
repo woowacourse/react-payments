@@ -55,15 +55,16 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: "@", replacement: resolve(__dirname, "src") },
-      { find: "@assets", replacement: resolve(__dirname, "src/assets") },
+      { find: "@", replacement: resolve(dirname, "src") },
+      { find: "@assets", replacement: resolve(dirname, "src/assets") },
       {
         find: "@components",
-        replacement: resolve(__dirname, "src/components"),
+        replacement: resolve(dirname, "src/components"),
       },
-      { find: "@pages", replacement: resolve(__dirname, "src/pages") },
-      { find: "@stories", replacement: resolve(__dirname, "src/stories") },
-      { find: "@utils", replacement: resolve(__dirname, "src/utils") },
+      { find: "@pages", replacement: resolve(dirname, "src/pages") },
+      { find: "@stories", replacement: resolve(dirname, "src/stories") },
+      { find: "@utils", replacement: resolve(dirname, "src/utils") },
+      { find: "@types", replacement: resolve(dirname, "src/types") },
     ],
   },
 });
