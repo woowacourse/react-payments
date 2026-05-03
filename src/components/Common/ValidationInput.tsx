@@ -22,11 +22,18 @@ interface ValidationInputProps extends ComponentProps<'input'> {
   isShowError?: boolean;
 }
 
-export default function ValidationInput({ validations, onChange, onBlur, ...props }: ValidationInputProps) {
+export default function ValidationInput({
+  validations,
+  onChange,
+  onBlur,
+  onChangeError,
+  isShowError,
+  ...props
+}: ValidationInputProps) {
   const [inputError, setInputError] = useState<null | Error>(null);
 
   useEffect(() => {
-    props.onChangeError?.(inputError);
+    onChangeError?.(inputError);
   }, [inputError]);
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +78,7 @@ export default function ValidationInput({ validations, onChange, onBlur, ...prop
         onChange={handleOnChange}
         onBlur={handleOnBlur}
       />
-      {props.isShowError && <InputErrorMessage>{inputError?.message}</InputErrorMessage>}
+      {isShowError && <InputErrorMessage>{inputError?.message}</InputErrorMessage>}
     </Flex>
   );
 }
