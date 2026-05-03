@@ -50,7 +50,7 @@ export default function CardInfoInput({
   };
 
   return (
-    <InputStyle
+    <Input
       isNotValidate={isNotValidate}
       type="text"
       value={value}
@@ -64,7 +64,7 @@ export default function CardInfoInput({
   );
 }
 
-const InputStyle = styled.input<CardInfoInputStyleProps>`
+const Input = styled.input<CardInfoInputStyleProps>`
   border: 1px solid ${(props) => (props.isNotValidate ? "#FF3D3D" : "#acacac")};
   &::placeholder {
     color: #acacac;

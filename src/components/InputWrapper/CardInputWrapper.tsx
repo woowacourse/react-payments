@@ -1,38 +1,43 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 interface CardInputWrapperProps {
-    errorMessage: string | null;
-    children: React.ReactNode;
+  errorMessage: string | null;
+  children: React.ReactNode;
 }
 
-export default function CardInputWrapper({ errorMessage, children }: CardInputWrapperProps) {
-    return (
-        <CardInputWrapperStyle>
-            <CardInputArranger>{children}</CardInputArranger>
-            <ErrorContainer>{errorMessage && <ErrorMessageStyle>{errorMessage}</ErrorMessageStyle>}</ErrorContainer>
-        </CardInputWrapperStyle>
-    );
+export default function CardInputWrapper({
+  errorMessage,
+  children,
+}: CardInputWrapperProps) {
+  return (
+    <CardInputContainer>
+      <CardInputRow>{children}</CardInputRow>
+      <ErrorContainer>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      </ErrorContainer>
+    </CardInputContainer>
+  );
 }
 
-const CardInputWrapperStyle = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+const CardInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
-const CardInputArranger = styled.div`
-    display: flex;
-    gap: 10px;
+const CardInputRow = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 const ErrorContainer = styled.div`
-    height: 14px;
+  height: 14px;
 `;
 
-const ErrorMessageStyle = styled.p`
-    font-size: 9.5px;
-    line-height: 100%;
-    font-weight: 400;
-    color: #ff3d3d;
-    margin: 0;
+const ErrorMessage = styled.p`
+  font-size: 9.5px;
+  line-height: 100%;
+  font-weight: 400;
+  color: #ff3d3d;
+  margin: 0;
 `;
