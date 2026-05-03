@@ -29,7 +29,7 @@ export default function CardNumberInputWrapper({ validator, setCardNumber, value
                     key={`${index}th-input`}
                     value={value[index]}
                     setValue={setCardNumber(index)}
-                    type="card-number"
+                    size="small"
                     placeHolder="1234"
                     validator={isNumeric}
                     isError={(hasTouched && value[index].length !== 4) || inputErrors[index] !== null}

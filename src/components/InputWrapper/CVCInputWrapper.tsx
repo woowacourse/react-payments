@@ -21,7 +21,7 @@ export default function CVCInputWrapper({ validator, setCVCNumber, value }: CVCI
             <CardInfoInput
                 value={value}
                 setValue={setCVCNumber}
-                type="cvc"
+                size="large"
                 placeHolder="123"
                 validator={isNumeric}
                 isError={(hasTouched && value.length !== 3) || inputError !== null}

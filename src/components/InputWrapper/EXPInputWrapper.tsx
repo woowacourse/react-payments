@@ -27,7 +27,7 @@ export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPI
             <CardInfoInput
                 value={value[0]}
                 setValue={setEXPNumber(0)}
-                type="exp"
+                size="medium"
                 placeHolder="MM"
                 validator={isMonthMatch}
                 isError={(hasTouched && value[0].length !== 2) || inputErrors[0] !== null}
@@ -39,7 +39,7 @@ export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPI
             <CardInfoInput
                 value={value[1]}
                 setValue={setEXPNumber(1)}
-                type="exp"
+                size="medium"
                 placeHolder="YY"
                 validator={isNumeric}
                 isError={(hasTouched && value[1].length !== 2) || inputErrors[1] !== null}
