@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { isLengthMatch } from '../../utils/isLengthMatch';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
+import { isNumeric } from '../../utils/isNumeric';
 
 interface CardNumberInputWrapperProps {
     validator: (value: string[]) => string | null;
@@ -31,7 +31,8 @@ export default function CardNumberInputWrapper({ validator, setCardNumber, value
                     setValue={setCardNumber(index)}
                     type="card-number"
                     placeHolder="1234"
-                    validator={(value: string) => isLengthMatch(4, value)}
+                    validator={isNumeric}
+                    isError={(hasTouched && value[index].length !== 4) || inputErrors[index] !== null}
                     maxLength={4}
                     onError={setError(index)}
                     onBlur={() => setHasTouched(true)}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { isLengthMatch } from '../../utils/isLengthMatch';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
+import { isNumeric } from '../../utils/isNumeric';
 
 interface CVCInputWrapperProps {
     validator: (value: string) => string | null;
@@ -23,7 +23,8 @@ export default function CVCInputWrapper({ validator, setCVCNumber, value }: CVCI
                 setValue={setCVCNumber}
                 type="cvc"
                 placeHolder="123"
-                validator={(value: string) => isLengthMatch(3, value)}
+                validator={isNumeric}
+                isError={(hasTouched && value.length !== 3) || inputError !== null}
                 maxLength={3}
                 onError={setInputError}
                 onBlur={() => setHasTouched(true)}

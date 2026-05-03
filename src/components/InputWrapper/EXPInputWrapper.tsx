@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { isMonthMatch } from '../../utils/isMonthMatch';
 
-import { isLengthMatch } from '../../utils/isLengthMatch';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
+import { isNumeric } from '../../utils/isNumeric';
 
 interface EXPInputWrapperProps {
     validator: (value: string[]) => string | null;
@@ -29,7 +29,8 @@ export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPI
                 setValue={setEXPNumber(0)}
                 type="exp"
                 placeHolder="MM"
-                validator={(value: string) => isMonthMatch(value)}
+                validator={isMonthMatch}
+                isError={(hasTouched && value[0].length !== 2) || inputErrors[0] !== null}
                 maxLength={2}
                 onError={setError(0)}
                 onBlur={() => setHasTouched(true)}
@@ -40,7 +41,8 @@ export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPI
                 setValue={setEXPNumber(1)}
                 type="exp"
                 placeHolder="YY"
-                validator={(value: string) => isLengthMatch(2, value)}
+                validator={isNumeric}
+                isError={(hasTouched && value[1].length !== 2) || inputErrors[1] !== null}
                 maxLength={2}
                 onError={setError(1)}
                 onBlur={() => setHasTouched(true)}
