@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import ValidationInput from '../components/Common/ValidationInput';
 
@@ -20,7 +20,7 @@ function Wrapper({
   placeholder,
 }: {
   initialValue: string;
-  validations: React.ComponentProps<typeof ValidationInput>['validations'];
+  validations: ComponentProps<typeof ValidationInput>['validations'];
   placeholder?: string;
 }) {
   const [value, setValue] = useState(initialValue);
