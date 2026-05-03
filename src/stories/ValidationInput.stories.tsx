@@ -50,12 +50,12 @@ export const WithLimitValidation: Story = {
       placeholder="숫자만 입력"
       validations={[
         {
-          type: 'limit',
+          type: 'onChange',
           validator: (input) => /^\d*$/.test(input),
           message: '숫자만 입력 가능합니다.',
         },
         {
-          type: 'limit',
+          type: 'onChange',
           validator: (input) => input.length <= 4,
           message: '4자리까지만 입력 가능합니다.',
         },
@@ -72,12 +72,12 @@ export const WithCheckValidation: Story = {
       placeholder="4자리 숫자"
       validations={[
         {
-          type: 'limit',
+          type: 'onChange',
           validator: (input) => /^\d*$/.test(input),
           message: '숫자만 입력 가능합니다.',
         },
         {
-          type: 'check',
+          type: 'onBlur',
           validator: (input) => input.length === 4,
           message: '4자리를 입력해주세요.',
         },

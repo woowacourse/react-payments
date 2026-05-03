@@ -1,6 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type ComponentProps } from 'react';
 import styled from '@emotion/styled';
 import Flex from './Flex';
+import type { ValidationRule } from '../../types';
 
 const Input = styled.input<{ isError?: boolean }>`
   width: 100%;
@@ -17,9 +18,15 @@ const Input = styled.input<{ isError?: boolean }>`
 `;
 
 interface ValidationInputProps extends ComponentProps<'input'> {
-  validations: { type: 'limit' | 'check'; validator: (input: string) => boolean; message: string }[];
+  validations: ValidationRule[];
   onChangeError?: (error: Error | null) => void;
 }
+
+type ValidationRule = {
+  type: 'onChange' | 'onBlur';
+  validator: (input: string) => boolean;
+  message: string;
+};
 
 export default function ValidationInput({
   validations,
@@ -37,7 +44,7 @@ export default function ValidationInput({
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const failedValidation = validations.find(
       (validation) =>
-        event.target.value.length && validation.type === 'limit' && !validation.validator(event.target.value),
+        event.target.value.length && validation.type === 'onChange' && !validation.validator(event.target.value),
     );
 
     if (failedValidation) {
@@ -56,7 +63,7 @@ export default function ValidationInput({
       (validation) =>
         typeof event.target.value === 'string' &&
         event.target.value.length &&
-        validation.type === 'check' &&
+        validation.type === 'onBlur' &&
         !validation.validator(event.target.value),
     );
 

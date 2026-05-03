@@ -30,22 +30,22 @@ function CardCVCInput(props: CardCVCInputProps) {
         onChangeError={(error) => setInputError(error)}
         validations={[
           {
-            type: 'limit',
+            type: 'onChange',
             validator: validateNumberString,
             message: '숫자만 입력 가능합니다.',
           },
           {
-            type: 'limit',
+            type: 'onChange',
             validator: (input: string) => validateStringMaxLength(input, 3),
             message: '3자리까지 입력 가능합니다.',
           },
           {
-            type: 'check',
+            type: 'onBlur',
             validator: (input: string) => validateStringLength(input, 3),
             message: '3자리를 입력해주세요.',
           },
           {
-            type: 'check',
+            type: 'onBlur',
             validator: validateCVC,
             message: '유효한 CVC를 입력해주세요.',
           },

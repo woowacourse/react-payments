@@ -51,22 +51,22 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           onChangeError={(error) => handleChangeError(0, error)}
           validations={[
             {
-              type: 'limit',
+              type: 'onChange',
               validator: validateNumberString,
               message: '숫자만 입력 가능합니다.',
             },
             {
-              type: 'limit',
+              type: 'onChange',
               validator: (input: string) => validateStringMaxLength(input, 2),
               message: '2자리까지 입력 가능합니다.',
             },
             {
-              type: 'check',
+              type: 'onBlur',
               validator: (input: string) => validateStringLength(input, 2),
               message: '2자리를 입력해주세요.',
             },
             {
-              type: 'check',
+              type: 'onBlur',
               validator: validateMonth,
               message: '유효한 월을 입력해주세요. (01 ~ 12)',
             },
@@ -82,22 +82,22 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           onChangeError={(error) => handleChangeError(1, error)}
           validations={[
             {
-              type: 'limit',
+              type: 'onChange',
               validator: validateNumberString,
               message: '숫자만 입력 가능합니다.',
             },
             {
-              type: 'limit',
+              type: 'onChange',
               validator: (input: string) => validateStringMaxLength(input, 2),
               message: '2자리까지 입력 가능합니다.',
             },
             {
-              type: 'check',
+              type: 'onBlur',
               validator: (input: string) => validateStringLength(input, 2),
               message: '2자리를 입력해주세요.',
             },
             {
-              type: 'check',
+              type: 'onBlur',
               validator: validateYear,
               message: '유효한 년도을 입력해주세요. (00 ~ 99)',
             },
