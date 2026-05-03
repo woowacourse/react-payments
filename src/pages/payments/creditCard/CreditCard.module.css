@@ -1,7 +1,6 @@
 .creditCard {
   display: flex;
   justify-content: center;
-
   padding-top: 77px;
   padding-bottom: 45px;
 }
@@ -46,7 +45,7 @@
 .number {
   padding-top: 44px;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 12px;
 }
 .number span {
   padding-right: 10px;
@@ -54,5 +53,5 @@
 .expirationDate {
   padding-top: 8px;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 12px;
 }

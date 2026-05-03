@@ -2,17 +2,17 @@ import cn from 'classnames';
 import styles from './Payments.module.css';
 
 import { useState } from 'react';
-import { CreditCard } from '../../core/components/creditCard';
+import { CreditCard } from './creditCard';
 import { FormGroup } from '../../core/components/formGroup';
 import { Input } from '../../core/components/input';
 import { validateCardNumber, validateCvc, validateExpirationDate } from './validator';
 import { isNumericString } from '../../core/utils/validator';
 
-import type { ExpirationDate } from './types';
+import type { CardNumbers, ExpirationDate } from './types';
 import { BRAND_NUMBER } from './constant';
 
 export const Payments = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const [cardNumbers, setCardNumbers] = useState<CardNumbers>({ first: '', second: '', third: '', fourth: '' });
   const [onBlurCardNumber, setOnBlurCardNumber] = useState([false, false, false, false]);
 
   // cardNumber --------------------------
