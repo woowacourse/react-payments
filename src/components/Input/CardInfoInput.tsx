@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 
-interface CardInfoInputProps extends Omit<
+interface Props extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   "onChange" | "type" | "onError"
 > {
@@ -21,7 +21,7 @@ export default function CardInfoInput({
   validator,
   onError,
   ...props
-}: CardInfoInputProps) {
+}: Props) {
   const [isNotValidate, setIsNotValidate] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

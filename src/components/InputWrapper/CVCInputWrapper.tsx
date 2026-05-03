@@ -3,7 +3,7 @@ import { isLengthMatch } from "../../utils/isLengthMatch";
 import CardInfoInput from "../Input/CardInfoInput";
 import CardInputWrapper from "./CardInputWrapper";
 
-interface CVCInputWrapperProps {
+interface Props {
   validator: (value: string) => string | null;
   setCVCNumber: (value: string) => void;
   value: string;
@@ -13,7 +13,7 @@ export default function CVCInputWrapper({
   validator,
   setCVCNumber,
   value,
-}: CVCInputWrapperProps) {
+}: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
   const [hasTouched, setHasTouched] = useState(false);

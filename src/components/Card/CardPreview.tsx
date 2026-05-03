@@ -3,12 +3,12 @@ import { getCardBrand } from "../../utils/getCardBrand";
 import Mastercard from "../../../public/Mastercard.svg";
 import Visa from "../../../public/Visa.svg";
 
-interface CardPreviewProps {
+interface Props {
   cardNumbers: string[];
   EXP: string[];
 }
 
-export default function CardPreview({ cardNumbers, EXP }: CardPreviewProps) {
+export default function CardPreview({ cardNumbers, EXP }: Props) {
   return (
     <CardPreviewContainer>
       <IcChip />

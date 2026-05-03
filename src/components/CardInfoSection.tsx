@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-interface CardSectionProps {
+interface Props {
   title: string;
   caption?: string;
   inputLabel: string;
@@ -12,7 +12,7 @@ export default function CardInfoSection({
   caption,
   inputLabel,
   children,
-}: CardSectionProps) {
+}: Props) {
   return (
     <CardSectionContainer>
       <Title>{title}</Title>

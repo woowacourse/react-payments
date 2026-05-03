@@ -5,7 +5,7 @@ import { isLengthMatch } from "../../utils/isLengthMatch";
 import CardInfoInput from "../Input/CardInfoInput";
 import CardInputWrapper from "./CardInputWrapper";
 
-interface EXPInputWrapperProps {
+interface Props {
   validator: (value: string[]) => string | null;
   setEXPNumber: (index: number) => (value: string) => void;
   value: string[];
@@ -15,7 +15,7 @@ export default function EXPInputWrapper({
   validator,
   setEXPNumber,
   value,
-}: EXPInputWrapperProps) {
+}: Props) {
   const [inputErrors, setInputErrors] = useState<(string | null)[]>([
     null,
     null,
