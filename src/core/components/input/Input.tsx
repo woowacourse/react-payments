@@ -1,14 +1,11 @@
 import cn from 'classnames';
 import styles from './Input.module.css';
 
-interface InputProps {
+import type { ComponentProps } from 'react';
+
+interface InputProps extends ComponentProps<'input'> {
   type?: 'text' | 'tel';
-  placeholder?: string;
-  maxLength?: number;
   isError?: boolean;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = ({ type = 'text', placeholder, maxLength, isError, value, onChange, onBlur }: InputProps) => {
