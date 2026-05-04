@@ -124,7 +124,6 @@ export const Payments = () => {
   };
 
   const handleBlurCvc = () => {
-    preventCvc(cvc);
     setOnBlurCvc(true);
   };
 
