@@ -39,7 +39,7 @@ export default function InputFieldForm<T extends CardNumbersType | ExpirationDat
       <Label htmlFor={id}>{label}</Label>
 
       <InputFieldWrapper>
-        {Array.from({ length: numberList.length }).map((_, index) => (
+        {numberList.map((_, index) => (
           <FormField
             key={`${label}-${index}`}
             id={index === 0 ? id : String(index)}
