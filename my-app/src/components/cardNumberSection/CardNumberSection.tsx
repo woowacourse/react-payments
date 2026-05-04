@@ -58,6 +58,7 @@ const CardNumberSection = ({ value, setValue }: Props) => {
           onChange={(v) => handleOnChange(v, index)}
           onBlur={(v)=>handleOnBlur(v, index)}
           placeholder="1234"
+          maxLength={4}
           isError={errors[index]}
         />
       ))}

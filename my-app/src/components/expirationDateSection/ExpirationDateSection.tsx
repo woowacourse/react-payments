@@ -68,6 +68,7 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         onBlur={(v) => handleOnBlur(v, 'month')}
         placeholder="MM"
         isError={errors.month}
+        maxLength={2}
         ref={(el) => {inputRefs.current[0] = el;}}
       />
       <NumberInput
@@ -76,6 +77,7 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         onBlur={(v) => handleOnBlur(v, 'year')}
         placeholder="YY"
         isError={errors.year}
+        maxLength={2}
         ref={(el) => {inputRefs.current[1] = el;}}
       />
     </CommonSection>

@@ -44,6 +44,7 @@ const CvcSection = ({ value, setValue }: Props) => {
         onBlur={handleOnBlur}
         placeholder="123"
         isError={error}
+        maxLength={3}
         ref={inputRef}
       />
     </CommonSection>

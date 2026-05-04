@@ -7,10 +7,11 @@ interface Props {
   onBlur: (value:string)=>void;
   placeholder: string;
   isError: boolean;
+  maxLength: number;
   ref: Ref<HTMLInputElement>;
 }
 
-const NumberInput = ({value, onChange, onBlur, placeholder, isError, ref}: Props) => {
+const NumberInput = ({value, onChange, onBlur, placeholder, isError, maxLength, ref}: Props) => {
 
   return (
     <StyledInput
@@ -21,6 +22,7 @@ const NumberInput = ({value, onChange, onBlur, placeholder, isError, ref}: Props
       onBlur={(e)=>onBlur(e.target.value)}
       placeholder={placeholder}
       isError={isError}
+      maxLength={maxLength}
       ref={ref}
     />
   );
