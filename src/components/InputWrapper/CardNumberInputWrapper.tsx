@@ -50,7 +50,7 @@ export default function CardNumberInputWrapper({
         value={value.first}
         setValue={(newValue) => setCardNumber({ ...value, first: newValue })}
         placeholder="1234"
-        validator={(value: string) => isLengthMatch(4, value)}
+        isValid={(value: string) => isLengthMatch(4, value)}
         maxLength={4}
         onError={setError("first")}
         onBlur={() => {
@@ -65,7 +65,7 @@ export default function CardNumberInputWrapper({
         value={value.second}
         setValue={(newValue) => setCardNumber({ ...value, second: newValue })}
         placeholder="1234"
-        validator={(value: string) => isLengthMatch(4, value)}
+        isValid={(value: string) => isLengthMatch(4, value)}
         maxLength={4}
         onError={setError("second")}
         onBlur={() => {
@@ -80,7 +80,7 @@ export default function CardNumberInputWrapper({
         value={value.third}
         setValue={(newValue) => setCardNumber({ ...value, third: newValue })}
         placeholder="1234"
-        validator={(value: string) => isLengthMatch(4, value)}
+        isValid={(value: string) => isLengthMatch(4, value)}
         maxLength={4}
         onError={setError("third")}
         onBlur={() => {
@@ -95,7 +95,7 @@ export default function CardNumberInputWrapper({
         value={value.fourth}
         setValue={(newValue) => setCardNumber({ ...value, fourth: newValue })}
         placeholder="1234"
-        validator={(value: string) => isLengthMatch(4, value)}
+        isValid={(value: string) => isLengthMatch(4, value)}
         maxLength={4}
         onError={setError("fourth")}
         onBlur={() => {

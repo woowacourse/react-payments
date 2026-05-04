@@ -7,8 +7,8 @@ interface Props extends Omit<
 > {
   value: string;
   setValue: (value: string) => void;
-  // input에 에러메세지가 등장할 수 있는 경우에 border 색을 변경해주기 위한 용도의 validator
-  validator: (value: string) => boolean;
+  // input에 에러메세지가 등장할 수 있는 경우에 border 색을 변경해주기 위한 용도의 isValid
+  isValid: (value: string) => boolean;
   // InputGroup에 에러 메세지 피드백 제공을 위한 함수
   onError: (message: string | null) => void;
 }
@@ -17,12 +17,7 @@ interface InputStyleProps {
   isNotValidate: boolean;
 }
 
-export default function Input({
-  setValue,
-  validator,
-  onError,
-  ...props
-}: Props) {
+export default function Input({ setValue, isValid, onError, ...props }: Props) {
   const [isNotValidate, setIsNotValidate] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +31,7 @@ export default function Input({
     }
     setValue(tmpValue);
     onError(null);
-    if (!validator(tmpValue)) setIsNotValidate(true);
+    if (!isValid(tmpValue)) setIsNotValidate(true);
     else setIsNotValidate(false);
   };
 

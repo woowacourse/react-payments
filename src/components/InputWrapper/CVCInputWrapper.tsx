@@ -22,7 +22,7 @@ export default function CVCInputWrapper({
         value={value}
         setValue={setCVCNumber}
         placeholder="123"
-        validator={(value: string) => isLengthMatch(3, value)}
+        isValid={(value: string) => isLengthMatch(3, value)}
         maxLength={3}
         onError={setInputError}
         onBlur={() => {

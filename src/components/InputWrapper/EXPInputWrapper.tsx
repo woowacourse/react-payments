@@ -39,7 +39,7 @@ export default function EXPInputWrapper({
         value={value.mm}
         setValue={(newValue) => setEXPNumber({ ...value, mm: newValue })}
         placeholder="MM"
-        validator={(value: string) => isMonthMatch(value)}
+        isValid={(value: string) => isMonthMatch(value)}
         maxLength={2}
         onError={setError("mm")}
         onBlur={() => {
@@ -52,7 +52,7 @@ export default function EXPInputWrapper({
         value={value.yy}
         setValue={(newValue) => setEXPNumber({ ...value, yy: newValue })}
         placeholder="YY"
-        validator={(value: string) => isLengthMatch(2, value)}
+        isValid={(value: string) => isLengthMatch(2, value)}
         maxLength={2}
         onError={setError("yy")}
         onBlur={() => {
