@@ -1,9 +1,10 @@
+import type { ValidityPeriod } from "@/types/card";
 import {
   checkIsInt,
   validateMonthRange,
   validateYearRange,
-} from "@/utils/validator";
-import type { ValidityPeriod } from "./CardValidityPeriodInputField";
+} from "@utils/validator";
+
 import { MONTH_MAX_LENGTH } from "./constants";
 import type { InputStatus } from "./errorMessage";
 

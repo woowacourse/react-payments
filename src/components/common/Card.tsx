@@ -1,9 +1,8 @@
 import { COLOR_PALETTE } from "@/styles/colorPalette";
-import type { CardNumberUnits } from "@/types/card";
+import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
 import masterCard from "@assets/Mastercard.png";
 import visa from "@assets/Visa.png";
-import type { ValidityPeriod } from "@/components/feature/CardValidityPeriodInputField/CardValidityPeriodInputField";
-import SwitchCase from "@/components/common/SwitchCase";
+import SwitchCase from "@components/common/SwitchCase";
 import styled from "@emotion/styled";
 import { detectCardBrand, getFormattedValidityPeriodUnit } from "@utils/card";
 
@@ -12,8 +11,6 @@ interface CardProps {
   validityPeriod: ValidityPeriod;
   brand?: ReturnType<typeof detectCardBrand>;
 }
-
-export type CardBrand = "Visa" | "MasterCard";
 
 const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
   const CardValidityPeriodUnitString =

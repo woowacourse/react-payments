@@ -1,4 +1,5 @@
 import { checkIsInt, validateCardNumberUnitRange } from "@/utils/validator";
+
 import type { InputStatus } from "./errorMessage";
 
 const CARD_NUMBER_UNIT_MAX_LENGTH = 4;
