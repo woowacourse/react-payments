@@ -19,3 +19,63 @@ export const Default: Story = {
     return <CardPreview {...args} />;
   },
 };
+
+export const Visa: Story = {
+  args: {
+    cardNumber: ["4123", "1234", "1234", "1234"],
+    expireDate: ["11", "11"],
+  },
+  render: (args) => {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const MasterCard51: Story = {
+  args: {
+    cardNumber: ["5123", "1234", "1234", "1234"],
+    expireDate: ["11", "11"],
+  },
+  render: (args) => {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const MasterCard52: Story = {
+  args: {
+    cardNumber: ["5223", "1234", "1234", "1234"],
+    expireDate: ["11", "11"],
+  },
+  render: (args) => {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const MasterCard53: Story = {
+  args: {
+    cardNumber: ["5323", "1234", "1234", "1234"],
+    expireDate: ["11", "11"],
+  },
+  render: (args) => {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const MasterCard54: Story = {
+  args: {
+    cardNumber: ["5423", "1234", "1234", "1234"],
+    expireDate: ["11", "11"],
+  },
+  render: (args) => {
+    return <CardPreview {...args} />;
+  },
+};
+
+export const MasterCard55: Story = {
+  args: {
+    cardNumber: ["5523", "1234", "1234", "1234"],
+    expireDate: ["11", "11"],
+  },
+  render: (args) => {
+    return <CardPreview {...args} />;
+  },
+};
