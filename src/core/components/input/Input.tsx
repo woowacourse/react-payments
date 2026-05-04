@@ -3,10 +3,12 @@ import styles from './Input.module.css';
 
 import type { ComponentProps } from 'react';
 
-interface InputProps extends ComponentProps<'input'> {
+interface InputOwnProps {
   type?: 'text' | 'tel';
   isError?: boolean;
 }
+
+interface InputProps extends ComponentProps<'input'>, InputOwnProps {}
 
 export const Input = ({ type = 'text', placeholder, maxLength, isError, value, onChange, onBlur }: InputProps) => {
   return (
