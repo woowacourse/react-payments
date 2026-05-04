@@ -32,8 +32,6 @@ const renderWithContext = () => {
           "fourth-digits": "",
         },
         setCardNumber: () => {},
-        networkBrand: "",
-        setNetworkBrand: () => {},
         cardExpiryDate,
         setCardExpiryDate,
       }}

@@ -22,20 +22,15 @@ const defaultCardNumber = {
 };
 const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
 
-const renderWithContext = (
-  cardNumber = defaultCardNumber,
-  cardExpiryDate = defaultCardExpiryDate,
-  networkBrand = "",
-) =>
+const renderWithContext =
+  (cardNumber = defaultCardNumber, cardExpiryDate = defaultCardExpiryDate) =>
   () => (
     <CardContext
       value={{
         cardNumber,
         cardExpiryDate,
-        networkBrand,
         setCardNumber: () => {},
         setCardExpiryDate: () => {},
-        setNetworkBrand: () => {},
       }}
     >
       <CardPreview />
@@ -85,16 +80,24 @@ export const FullyFilled: Story = {
 
 export const VisaBrand: Story = {
   render: renderWithContext(
-    { "first-digits": "4111", "second-digits": "", "third-digits": "", "fourth-digits": "" },
+    {
+      "first-digits": "4111",
+      "second-digits": "",
+      "third-digits": "",
+      "fourth-digits": "",
+    },
     defaultCardExpiryDate,
-    "visa",
   ),
 };
 
 export const MasterBrand: Story = {
   render: renderWithContext(
-    { "first-digits": "5111", "second-digits": "", "third-digits": "", "fourth-digits": "" },
+    {
+      "first-digits": "5111",
+      "second-digits": "",
+      "third-digits": "",
+      "fourth-digits": "",
+    },
     defaultCardExpiryDate,
-    "master",
   ),
 };

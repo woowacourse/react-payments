@@ -24,14 +24,11 @@ const renderWithContext = () => {
     "third-digits": "",
     "fourth-digits": "",
   });
-  const [, setNetworkBrand] = useState("");
   return (
     <CardContext
       value={{
         cardNumber,
         setCardNumber,
-        networkBrand: "",
-        setNetworkBrand,
         cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
         setCardExpiryDate: () => {},
       }}

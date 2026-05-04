@@ -1,17 +1,14 @@
 import styled from "@emotion/styled";
-import { useContext } from "react";
-import { CardContext } from "../Card.tsx";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
 
 export function CardPreview() {
-  const { networkBrand } = useContext(CardContext);
   return (
     <CardContainer>
       <div className="card-meta">
         <div className="ic-chip"></div>
-        {networkBrand && <CardNetworkBrand networkBrand={networkBrand} />}
+        <CardNetworkBrand />
       </div>
       <div className="card-contents">
         <CardNumber />

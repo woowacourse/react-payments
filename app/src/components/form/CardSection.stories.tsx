@@ -27,14 +27,11 @@ export const CardNumberInputSection: Story = {
       "third-digits": "",
       "fourth-digits": "",
     });
-    const [, setNetworkBrand] = useState("");
     return (
       <CardContext
         value={{
           cardNumber,
           setCardNumber,
-          networkBrand: "",
-          setNetworkBrand,
           cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
           setCardExpiryDate: () => {},
         }}
@@ -67,8 +64,6 @@ export const CardExpiryDateInputSection: Story = {
             "fourth-digits": "",
           },
           setCardNumber: () => {},
-          networkBrand: "",
-          setNetworkBrand: () => {},
           cardExpiryDate,
           setCardExpiryDate,
         }}

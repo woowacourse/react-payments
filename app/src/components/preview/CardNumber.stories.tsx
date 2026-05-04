@@ -16,21 +16,20 @@ type Story = StoryObj<typeof meta>;
 
 const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
 
-const renderWithContext = (cardNumber: {
-  "first-digits": string;
-  "second-digits": string;
-  "third-digits": string;
-  "fourth-digits": string;
-}) =>
+const renderWithContext =
+  (cardNumber: {
+    "first-digits": string;
+    "second-digits": string;
+    "third-digits": string;
+    "fourth-digits": string;
+  }) =>
   () => (
     <CardContext
       value={{
         cardNumber,
         cardExpiryDate: defaultCardExpiryDate,
-        networkBrand: "",
         setCardNumber: () => {},
         setCardExpiryDate: () => {},
-        setNetworkBrand: () => {},
       }}
     >
       <CardNumber />

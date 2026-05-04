@@ -18,10 +18,8 @@ interface CardNumberType {
 interface CardContextType {
   cardNumber: CardNumberType;
   cardExpiryDate: CardExpiryDateType;
-  networkBrand: string;
   setCardNumber: React.Dispatch<React.SetStateAction<CardNumberType>>;
   setCardExpiryDate: React.Dispatch<React.SetStateAction<CardExpiryDateType>>;
-  setNetworkBrand: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const CardContext = createContext<CardContextType>(null!);
@@ -39,17 +37,13 @@ export function Card() {
     "expiry-year": "",
   });
 
-  const [networkBrand, setNetworkBrand] = useState("");
-
   return (
     <CardContext
       value={{
         cardNumber,
         cardExpiryDate,
-        networkBrand,
         setCardNumber,
         setCardExpiryDate,
-        setNetworkBrand,
       }}
     >
       <CardContainer>

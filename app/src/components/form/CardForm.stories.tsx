@@ -27,7 +27,6 @@ export const CardNumberInputSection: Story = {
       "expiry-month": "",
       "expiry-year": "",
     });
-    const [networkBrand, setNetworkBrand] = useState("");
     return (
       <CardContext
         value={{
@@ -35,8 +34,6 @@ export const CardNumberInputSection: Story = {
           setCardNumber,
           cardExpiryDate,
           setCardExpiryDate,
-          networkBrand,
-          setNetworkBrand,
         }}
       >
         <CardForm />

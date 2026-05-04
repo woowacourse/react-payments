@@ -5,8 +5,7 @@ import { Validator } from "../../validators/CardValidator";
 import { CardFieldset, CardLegend, CardInput } from "../../style/CardStyles";
 
 export function CardNumberInput() {
-  const { cardNumber, setCardNumber, setNetworkBrand } =
-    useContext(CardContext);
+  const { cardNumber, setCardNumber } = useContext(CardContext);
 
   const [isError, setError] = useState({
     "first-digits": {
@@ -23,18 +22,6 @@ export function CardNumberInput() {
     },
     message: "",
   });
-
-  const handleNetworkBrand = (value: string) => {
-    if (value.startsWith("4")) {
-      setNetworkBrand("visa");
-      return;
-    }
-    if (value.startsWith("5") && ["1", "2", "3", "4", "5"].includes(value[1])) {
-      setNetworkBrand("master");
-      return;
-    }
-    setNetworkBrand("");
-  };
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
@@ -59,7 +46,6 @@ export function CardNumberInput() {
       Validator.isNumber(value);
       Validator.isValidNetworkBrand(value);
       setError({ ...isError, [id]: { state: false }, message: "" });
-      handleNetworkBrand(value);
       setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
       setError({

@@ -21,19 +21,14 @@ const defaultCardNumber = {
   "fourth-digits": "",
 };
 
-const renderWithContext = (cardExpiryDate: {
-  "expiry-month": string;
-  "expiry-year": string;
-}) =>
-  () => (
+const renderWithContext =
+  (cardExpiryDate: { "expiry-month": string; "expiry-year": string }) => () => (
     <CardContext
       value={{
         cardNumber: defaultCardNumber,
         cardExpiryDate,
-        networkBrand: "",
         setCardNumber: () => {},
         setCardExpiryDate: () => {},
-        setNetworkBrand: () => {},
       }}
     >
       <CardExpiryDate />
