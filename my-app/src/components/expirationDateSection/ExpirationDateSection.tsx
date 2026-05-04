@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { isInputValidate, isValidRange } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
@@ -14,12 +14,17 @@ interface Props {
 export default function ExpirationDateSection({ value, setValue }: Props) {
   const [errors, setErrors] = useState({ month: false, year: false });
   const [errorMessage, setErrorMessage] = useState('');
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   function handleOnChange(inputValue: string, type: 'month' | 'year') {
     if (!isInputValidate(inputValue, 2)) return;
 
     const newValue = { ...value, [type]: inputValue };
     setValue(newValue);
+
+    if (type === 'month' && inputValue.length === 2) {
+      inputRefs.current[1]?.focus();
+    }
   }
 
   function handleOnBlur(inputValue: string, type: 'month' | 'year') {
@@ -81,6 +86,7 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
         onBlur={(v) => handleOnBlur(v, 'month')}
         placeholder="MM"
         isError={errors.month}
+        ref={(el) => {inputRefs.current[0] = el;}}
       />
       <NumberInput
         value={value.year}
@@ -88,6 +94,7 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
         onBlur={(v) => handleOnBlur(v, 'year')}
         placeholder="YY"
         isError={errors.year}
+        ref={(el) => {inputRefs.current[1] = el;}}
       />
     </CommonSection>
   );
