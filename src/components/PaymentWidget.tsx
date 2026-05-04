@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CardInfo from "./cardInfo/CardInfo";
 import CardPreview from "./cardPreview/CardPreview";
-import { CardPaymentWidgetWrapper } from "./PaymentWidget.styles";
+import styled from "@emotion/styled";
 
 export default function PaymentWidget() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
@@ -10,10 +10,7 @@ export default function PaymentWidget() {
 
   return (
     <CardPaymentWidgetWrapper>
-      <CardPreview
-        cardNumber={cardNumber}
-        expireDate={expireDate}
-      ></CardPreview>
+      <CardPreview cardNumber={cardNumber} expireDate={expireDate} />
       <CardInfo
         cardNumber={cardNumber}
         setCardNumber={setCardNumber}
@@ -25,3 +22,10 @@ export default function PaymentWidget() {
     </CardPaymentWidgetWrapper>
   );
 }
+
+const CardPaymentWidgetWrapper = styled.div`
+  background-color: white;
+  width: 376px;
+  height: 750px;
+  border-radius: 10px;
+`;
