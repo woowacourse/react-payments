@@ -15,7 +15,11 @@ export const validateMonthRange = (month: number) => {
 };
 
 export const validateYearRange = (year: number) => {
-  return validateRange(year, 0, Infinity);
+  return validateRange(
+    year,
+    parseInt(`${new Date().getFullYear()}`.slice(2)),
+    Infinity,
+  );
 };
 
 export const validateCardNumberUnitRange = (cardNumberUnit: number) => {
