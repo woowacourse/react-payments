@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { isInputValidate, isValidRange } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
@@ -11,6 +11,7 @@ interface Props {
 export default function CardNumberSection({ value, setValue }: Props) {
   const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState('');
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   function handleOnChange(inputValue: string, index: number) {
     if (!isInputValidate(inputValue, 4)) return;
@@ -18,6 +19,10 @@ export default function CardNumberSection({ value, setValue }: Props) {
     const newValue = [...value];
     newValue[index] = inputValue;
     setValue(newValue);
+
+    if (inputValue.length === 4 && index < 3) {
+      inputRefs.current[index + 1]?.focus();
+    }
   }
 
   function handleOnBlur(inputValue:string, index: number) {
@@ -45,6 +50,7 @@ export default function CardNumberSection({ value, setValue }: Props) {
       {value.map((num, index) => (
         <NumberInput
           key={index}
+          ref={(el) => {inputRefs.current[index] = el;}}
           value={num}
           onChange={(v) => handleOnChange(v, index)}
           onBlur={(v)=>handleOnBlur(v, index)}
