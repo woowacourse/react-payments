@@ -3,10 +3,18 @@ import { isLengthMatch } from "../../utils/isLengthMatch";
 import CardInfoInput from "../Input/CardInfoInput";
 import CardInputWrapper from "./CardInputWrapper";
 
+type CardNumbers = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
 interface Props {
-  validator: (value: string[]) => { message: string; index: number } | null;
-  setCardNumber: (index: number) => (value: string) => void;
-  value: string[];
+  validator: (
+    value: CardNumbers,
+  ) => { message: string; key: "first" | "second" | "third" | "fourth" } | null;
+  setCardNumber: (value: CardNumbers) => void;
+  value: CardNumbers;
 }
 
 export default function CardNumberInputWrapper({
@@ -14,38 +22,89 @@ export default function CardNumberInputWrapper({
   setCardNumber,
   value,
 }: Props) {
-  const [inputErrors, setInputErrors] = useState<(string | null)[]>([
-    null,
-    null,
-    null,
-    null,
-  ]);
+  const [inputErrors, setInputErrors] = useState<{
+    first: string | null;
+    second: string | null;
+    third: string | null;
+    fourth: string | null;
+  }>({
+    first: null,
+    second: null,
+    third: null,
+    fourth: null,
+  });
 
-  const setError = (index: number) => (message: string | null) => {
-    setInputErrors((prev) => prev.with(index, message));
-  };
+  const setError =
+    (key: "first" | "second" | "third" | "fourth") =>
+    (message: string | null) => {
+      setInputErrors((prev) => ({ ...prev, [key]: message }));
+    };
 
   return (
     <CardInputWrapper
-      errorMessage={inputErrors.find((err) => err !== null) ?? null}
+      errorMessage={
+        Object.values(inputErrors).find((err) => err !== null) ?? null
+      }
     >
-      {value.map((_, index) => (
-        <CardInfoInput
-          key={`${index}th-input`}
-          value={value[index]}
-          setValue={setCardNumber(index)}
-          placeholder="1234"
-          validator={(value: string) => isLengthMatch(4, value)}
-          maxLength={4}
-          onError={setError(index)}
-          onBlur={() => {
-            const result = validator(value);
-            if (result && result.index === index)
-              setError(index)(result.message);
-          }}
-          style={{ width: "71px" }}
-        />
-      ))}
+      <CardInfoInput
+        value={value.first}
+        setValue={(newValue) => setCardNumber({ ...value, first: newValue })}
+        placeholder="1234"
+        validator={(value: string) => isLengthMatch(4, value)}
+        maxLength={4}
+        onError={setError("first")}
+        onBlur={() => {
+          const result = validator(value);
+          if (result && result.key === "first")
+            setError("first")(result.message);
+        }}
+        style={{ width: "71px" }}
+      />
+
+      <CardInfoInput
+        value={value.second}
+        setValue={(newValue) => setCardNumber({ ...value, second: newValue })}
+        placeholder="1234"
+        validator={(value: string) => isLengthMatch(4, value)}
+        maxLength={4}
+        onError={setError("second")}
+        onBlur={() => {
+          const result = validator(value);
+          if (result && result.key === "second")
+            setError("second")(result.message);
+        }}
+        style={{ width: "71px" }}
+      />
+
+      <CardInfoInput
+        value={value.third}
+        setValue={(newValue) => setCardNumber({ ...value, third: newValue })}
+        placeholder="1234"
+        validator={(value: string) => isLengthMatch(4, value)}
+        maxLength={4}
+        onError={setError("third")}
+        onBlur={() => {
+          const result = validator(value);
+          if (result && result.key === "third")
+            setError("third")(result.message);
+        }}
+        style={{ width: "71px" }}
+      />
+
+      <CardInfoInput
+        value={value.fourth}
+        setValue={(newValue) => setCardNumber({ ...value, fourth: newValue })}
+        placeholder="1234"
+        validator={(value: string) => isLengthMatch(4, value)}
+        maxLength={4}
+        onError={setError("fourth")}
+        onBlur={() => {
+          const result = validator(value);
+          if (result && result.key === "fourth")
+            setError("fourth")(result.message);
+        }}
+        style={{ width: "71px" }}
+      />
     </CardInputWrapper>
   );
 }

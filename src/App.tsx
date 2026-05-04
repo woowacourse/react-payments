@@ -10,12 +10,13 @@ import EXPInputWrapper from "./components/InputWrapper/EXPInputWrapper";
 import CVCInputWrapper from "./components/InputWrapper/CVCInputWrapper";
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
+  const [cardNumbers, setCardNumbers] = useState({
+    first: "",
+    second: "",
+    third: "",
+    fourth: "",
+  });
   const [EXPNumbers, setEXPNumbers] = useState({ mm: "", yy: "" });
-
-  const setCardNumber = (index: number) => (value: string) => {
-    setCardNumbers((prev) => prev.with(index, value));
-  };
 
   const [cvc, setCVC] = useState("");
 
@@ -29,7 +30,7 @@ function App() {
           inputLabel="카드 번호"
         >
           <CardNumberInputWrapper
-            setCardNumber={setCardNumber}
+            setCardNumber={setCardNumbers}
             validator={getCardNumberErrorMessage}
             value={cardNumbers}
           />
