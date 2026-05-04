@@ -6,7 +6,7 @@
   vertical-align: middle;
 }
 
-.formContainer {
+.field {
   display: flex;
   align-content: space-between;
   flex-direction: column;

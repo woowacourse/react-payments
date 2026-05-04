@@ -1,10 +1,10 @@
 import cn from 'classnames';
-import styles from './FormContainer.module.css';
-import type { FormContainerProps } from './types';
+import styles from './Field.module.css';
+import type { FieldProps } from './types';
 
-export const FormContainer = ({ label, children, errorMessage }: FormContainerProps) => {
+export const Field = ({ label, children, errorMessage }: FieldProps) => {
   return (
-    <div className={cn(styles.formContainer)}>
+    <div className={cn(styles.field)}>
       <label className={cn(styles.label)}>{label}</label>
       <div className={cn(styles.children)}>{children}</div>
       <div className={cn(styles.errorMessage, errorMessage === '' && styles.hidden)}>{errorMessage}</div>

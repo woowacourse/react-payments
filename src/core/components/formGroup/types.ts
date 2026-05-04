@@ -1,6 +1,7 @@
-import type { FormContainerProps } from '../formContainer';
+import type { ReactNode } from 'react';
 
-export interface FormGroupProps extends FormContainerProps {
+export interface FormGroupProps {
   title?: string;
   subTitle?: string;
+  children?: ReactNode;
 }

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export interface FormContainerProps {
+export interface FieldProps {
   label?: string;
   children?: ReactNode;
   errorMessage?: string;
