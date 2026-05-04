@@ -8,9 +8,15 @@ interface Props {
   setValue: (value: string[]) => void;
 }
 
-export default function CardNumberSection({ value, setValue }: Props) {
+const getCardNumberError = (cardNumber: string): string => {
+  if (cardNumber === '') return '';
+  if (isIncompleteRange(cardNumber, 4)) return '필요한 자릿수를 모두 입력해주세요!'
+
+  return '';
+}
+
+const CardNumberSection = ({ value, setValue }: Props) => {
   const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
-  const [errorMessage, setErrorMessage] = useState('');
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   function handleOnChange(inputValue: string, index: number) {
@@ -25,27 +31,24 @@ export default function CardNumberSection({ value, setValue }: Props) {
     }
   }
 
-  function handleOnBlur(inputValue:string, index: number) {
-    const newError = [...errors];
+  const handleOnBlur = (inputValue:string, index: number) => {
+    const isError = getCardNumberError(inputValue) !== '';
+    setErrors((prev) => {
+      const newErrors = [...prev];
+      newErrors[index] = isError;
+      return newErrors;
+    });
+  }
 
-    if (isIncompleteRange(inputValue, 4)) {
-      newError[index] = true;
-      setErrorMessage('필요한 자릿수를 모두 입력해주세요!'); 
-    } else {
-      newError[index] = false;
-      if(!newError.some((error) => error)) setErrorMessage('');
-    }
-
-    setErrors(newError);
-    }
+  const errorIndex = errors.findIndex((isError) => isError);
+  const finalErrorMessage = errorIndex !== -1 ? getCardNumberError(value[errorIndex]) : '';
   
-
   return (
     <CommonSection
       title="결제할 카드 번호를 입력해주세요"
       description="본인 명의의 카드만 결제 가능합니다"
       label="카드 번호"
-      errorMessage={errorMessage}
+      errorMessage={finalErrorMessage}
     >
       {value.map((num, index) => (
         <NumberInput
@@ -60,5 +63,6 @@ export default function CardNumberSection({ value, setValue }: Props) {
       ))}
     </CommonSection>
   );
-}
+};
 
+export default CardNumberSection;
