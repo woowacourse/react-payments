@@ -2,6 +2,12 @@ import { useState } from "react";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
+import {
+  isExceedTwoDigits,
+  isNumericInput,
+  isTwoDigits,
+  isValidMonth,
+} from "../../../../../validate";
 
 const ExpiryField = ({
   expiryMonth,
@@ -28,35 +34,55 @@ const ExpiryField = ({
   const handleMonthChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!/^\d*$/.test(value)) return;
-    if (value.length > 2) return;
-
-    if (value.length === 0) {
-      setExpiryMonth("");
+    if (!isNumericInput(value)) {
+      return;
+    }
+    if (isExceedTwoDigits(value)) {
       return;
     }
 
-    if (value.length === 2 && !isValidMonth(value)) return;
+    if (value.length === 2 && !isValidMonth(value)) {
+      updateErrorInfo(index, true, "월은 01~12 사이로 입력해주세요.");
+      return;
+    }
 
     setExpiryMonth(value);
-    clearErrorWhenComplete(index, value);
+
+    if (isTouched[index] && value.length === 2) {
+      updateErrorInfo(index, false);
+    }
   };
 
   const handleYearChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!/^\d*$/.test(value)) return;
-    if (value.length > 2) return;
+    if (!isNumericInput(value)) return;
+    if (isExceedTwoDigits(value)) return;
 
     setExpiryYear(value);
-    clearErrorWhenComplete(index, value);
+
+    if (isTouched[index] && value.length === 2) {
+      updateErrorInfo(index, false);
+    }
   };
-  const ERROR_MSG = "2자리를 입력해 주세요";
 
-  const isValidMonth = (value: string) => {
-    const month = Number(value);
+  const handleExpiryBlur = (
+    index: number,
+    eValue: string,
+    expiryType: "month" | "year",
+  ) => {
+    updateTouched(index);
 
-    return month >= 1 && month <= 12;
+    const filledNumber = fillZero(eValue, expiryType);
+
+    if (expiryType === "month") {
+      setExpiryMonth(filledNumber);
+    }
+    if (expiryType === "year") {
+      setExpiryYear(filledNumber);
+    }
+
+    updateErrorInfo(index, !isTwoDigits(filledNumber));
   };
 
   const fillZero = (value: string, expiryType: "month" | "year") => {
@@ -71,6 +97,8 @@ const ExpiryField = ({
         return `0${value}`;
       }
     }
+
+    return value;
   };
 
   const updateTouched = (index: number) => {
@@ -79,13 +107,11 @@ const ExpiryField = ({
     );
   };
 
-  const clearErrorWhenComplete = (index: number, value: string) => {
-    if (!isTouched[index] || value.length !== 2) return;
-
-    updateErrorInfo(index, false);
-  };
-
-  const updateErrorInfo = (index: number, hasError: boolean) => {
+  const updateErrorInfo = (
+    index: number,
+    hasError: boolean,
+    errorMessage = "2자리를 입력해 주세요",
+  ) => {
     const newFlag = errorInfo.flag.map((flag, i) =>
       i === index ? hasError : flag,
     );
@@ -93,38 +119,9 @@ const ExpiryField = ({
 
     setErrorInfo({
       flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MSG,
+      currentErrorMsg: firstErrorIdx === -1 ? "" : errorMessage,
     });
     onErrorChange(firstErrorIdx !== -1);
-  };
-
-  const validateError = (index: number, eValue: string) => {
-    const isValid = eValue.length === 2;
-
-    updateErrorInfo(index, !isValid);
-  };
-
-  const handleExpiryBlur = (
-    index: number,
-    eValue: string,
-    expiryType: "month" | "year",
-  ) => {
-    updateTouched(index);
-
-    const filledNumber = fillZero(eValue, expiryType);
-    if (!filledNumber) {
-      validateError(index, eValue);
-      return;
-    }
-
-    if (expiryType === "month") {
-      setExpiryMonth(filledNumber);
-    }
-    if (expiryType === "year") {
-      setExpiryYear(filledNumber);
-    }
-
-    validateError(index, filledNumber);
   };
 
   const firstErrorIdx = errorInfo.flag.indexOf(true);
