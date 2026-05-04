@@ -6,11 +6,11 @@ import styled from "styled-components";
 const CvcField = ({
   cvcNumber,
   setCvcNumber,
-  setIsError,
+  onErrorChange,
 }: {
   cvcNumber: string;
   setCvcNumber: (value: string) => void;
-  setIsError: (value: boolean) => void;
+  onErrorChange: (value: boolean) => void;
 }) => {
   const INPUT_COUNT = 1;
   const CVC_LENGTH = 3;
@@ -56,7 +56,7 @@ const CvcField = ({
       flag: newFlag,
       currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MSG,
     });
-    setIsError(firstErrorIdx !== -1);
+    onErrorChange(firstErrorIdx !== -1);
   };
 
   const handleCvcBlur = (index: number, eValue: string) => {

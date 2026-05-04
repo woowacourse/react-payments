@@ -17,14 +17,22 @@ const InfoInputSection = ({
   cardInfoHandlers: CardInfoHandlersType;
 }) => {
   const [cvcNumber, setCvcNumber] = useState("");
-  const [isError, setIsError] = useState(false);
-
+  const [formError, setFormError] = useState({
+    cardNumber: false,
+    expiryDate: false,
+    cvc: false,
+  });
   const { cardNumbers, expiryMonth, expiryYear } = cardInfo;
   const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardInfoHandlers;
 
-  if (isError) {
-    console.log("error");
-  }
+  // const hasFormError = Object.values(formError).some((value) => value);
+
+  const handleFieldErrorChange = (
+    fieldName: "cardNumber" | "expiryDate" | "cvc",
+    hasError: boolean,
+  ) => {
+    setFormError({ ...formError, [fieldName]: hasError });
+  };
 
   return (
     <Container>
@@ -35,7 +43,9 @@ const InfoInputSection = ({
         <NumberField
           cardNumbers={cardNumbers}
           setCardNumbers={setCardNumbers}
-          setIsError={setIsError}
+          onErrorChange={(hasError) =>
+            handleFieldErrorChange("cardNumber", hasError)
+          }
         />
       </InputContainer>
       <InputContainer
@@ -47,14 +57,16 @@ const InfoInputSection = ({
           expiryYear={expiryYear}
           setExpiryMonth={setExpiryMonth}
           setExpiryYear={setExpiryYear}
-          setIsError={setIsError}
+          onErrorChange={(hasError) =>
+            handleFieldErrorChange("expiryDate", hasError)
+          }
         />
       </InputContainer>
       <InputContainer title="CVC 번호를 입력해 주세요">
         <CvcField
           cvcNumber={cvcNumber}
           setCvcNumber={setCvcNumber}
-          setIsError={setIsError}
+          onErrorChange={(hasError) => handleFieldErrorChange("cvc", hasError)}
         />
       </InputContainer>
     </Container>

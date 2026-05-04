@@ -8,13 +8,13 @@ const ExpiryField = ({
   expiryYear,
   setExpiryMonth,
   setExpiryYear,
-  setIsError,
+  onErrorChange,
 }: {
   expiryMonth: string;
   expiryYear: string;
   setExpiryMonth: (value: string) => void;
   setExpiryYear: (value: string) => void;
-  setIsError: (value: boolean) => void;
+  onErrorChange: (value: boolean) => void;
 }) => {
   const INPUT_COUNT = 2;
   const createFlags = () => Array.from({ length: INPUT_COUNT }, () => false);
@@ -95,7 +95,7 @@ const ExpiryField = ({
       flag: newFlag,
       currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MSG,
     });
-    setIsError(firstErrorIdx !== -1);
+    onErrorChange(firstErrorIdx !== -1);
   };
 
   const validateError = (index: number, eValue: string) => {

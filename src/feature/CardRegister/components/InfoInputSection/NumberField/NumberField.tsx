@@ -7,11 +7,11 @@ import type { CardNumberChunkType } from "../../../../../common/types/CardInfoTy
 const NumberField = ({
   cardNumbers,
   setCardNumbers,
-  setIsError,
+  onErrorChange,
 }: {
   cardNumbers: CardNumberChunkType;
-  setCardNumbers: (value: string[]) => void;
-  setIsError: (value: boolean) => void;
+  setCardNumbers: (value: CardNumberChunkType) => void;
+  onErrorChange: (hasError: boolean) => void;
 }) => {
   const INPUT_COUNT = 4;
   const NUMBER_LENGTH = 4;
@@ -32,7 +32,7 @@ const NumberField = ({
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? value : chunk,
     );
-    setCardNumbers(newChunks);
+    setCardNumbers(newChunks as CardNumberChunkType);
     clearErrorWhenComplete(index, value);
   };
 
@@ -60,7 +60,7 @@ const NumberField = ({
       flag: newFlag,
       currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MSG,
     });
-    setIsError(firstErrorIdx !== -1);
+    onErrorChange(firstErrorIdx !== -1);
   };
 
   const handleNumbersBlur = (index: number, eValue: string) => {
