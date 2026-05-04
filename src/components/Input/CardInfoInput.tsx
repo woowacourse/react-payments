@@ -8,7 +8,8 @@ interface Props extends Omit<
   value: string;
   setValue: (value: string) => void;
   // input에 에러메세지가 등장할 수 있는 경우에 border 색을 변경해주기 위한 용도의 validator
-  validator: (value: string) => boolean; // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
+  validator: (value: string) => boolean;
+  // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
   onError: (message: string | null) => void;
 }
 
@@ -26,7 +27,7 @@ export default function CardInfoInput({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const tmpValue = e.target.value;
-    if (Number.isNaN(Number(tmpValue))) {
+    if (Number.isNaN(Number(tmpValue)) || tmpValue.trim() === "") {
       onError("숫자만 입력할 수 있습니다.");
       return;
     }
