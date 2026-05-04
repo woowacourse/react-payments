@@ -9,15 +9,15 @@ interface Props extends Omit<
   setValue: (value: string) => void;
   // input에 에러메세지가 등장할 수 있는 경우에 border 색을 변경해주기 위한 용도의 validator
   validator: (value: string) => boolean;
-  // CardInputWrapper에 에러 메세지 피드백 제공을 위한 함수
+  // InputGroup에 에러 메세지 피드백 제공을 위한 함수
   onError: (message: string | null) => void;
 }
 
-interface CardInfoInputStyleProps {
+interface InputStyleProps {
   isNotValidate: boolean;
 }
 
-export default function CardInfoInput({
+export default function Input({
   setValue,
   validator,
   onError,
@@ -41,7 +41,7 @@ export default function CardInfoInput({
   };
 
   return (
-    <Input
+    <StyledInput
       isNotValidate={isNotValidate}
       type="text"
       onChange={(e) => handleInputChange(e)}
@@ -50,7 +50,7 @@ export default function CardInfoInput({
   );
 }
 
-const Input = styled.input<CardInfoInputStyleProps>`
+const StyledInput = styled.input<InputStyleProps>`
   border: 1px solid ${(props) => (props.isNotValidate ? "#FF3D3D" : "#acacac")};
   &::placeholder {
     color: #acacac;

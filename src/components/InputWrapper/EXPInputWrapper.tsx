@@ -2,8 +2,8 @@ import { useState } from "react";
 import { isMonthMatch } from "../../utils/isMonthMatch";
 
 import { isLengthMatch } from "../../utils/isLengthMatch";
-import CardInfoInput from "../Input/CardInfoInput";
-import CardInputWrapper from "./CardInputWrapper";
+import Input from "../Input/Input";
+import InputGroup from "./InputGroup";
 
 type EXPNumber = { mm: string; yy: string };
 interface Props {
@@ -30,12 +30,12 @@ export default function EXPInputWrapper({
   };
 
   return (
-    <CardInputWrapper
+    <InputGroup
       errorMessage={
         Object.values(inputErrors).find((err) => err !== null) ?? null
       }
     >
-      <CardInfoInput
+      <Input
         value={value.mm}
         setValue={(newValue) => setEXPNumber({ ...value, mm: newValue })}
         placeholder="MM"
@@ -48,7 +48,7 @@ export default function EXPInputWrapper({
         }}
         style={{ width: "152px" }}
       />
-      <CardInfoInput
+      <Input
         value={value.yy}
         setValue={(newValue) => setEXPNumber({ ...value, yy: newValue })}
         placeholder="YY"
@@ -61,6 +61,6 @@ export default function EXPInputWrapper({
         }}
         style={{ width: "152px" }}
       />
-    </CardInputWrapper>
+    </InputGroup>
   );
 }

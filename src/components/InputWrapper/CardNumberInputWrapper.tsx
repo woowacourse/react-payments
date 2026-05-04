@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { isLengthMatch } from "../../utils/isLengthMatch";
-import CardInfoInput from "../Input/CardInfoInput";
-import CardInputWrapper from "./CardInputWrapper";
+import Input from "../Input/Input";
+import InputGroup from "./InputGroup";
 
 type CardNumbers = {
   first: string;
@@ -41,12 +41,12 @@ export default function CardNumberInputWrapper({
     };
 
   return (
-    <CardInputWrapper
+    <InputGroup
       errorMessage={
         Object.values(inputErrors).find((err) => err !== null) ?? null
       }
     >
-      <CardInfoInput
+      <Input
         value={value.first}
         setValue={(newValue) => setCardNumber({ ...value, first: newValue })}
         placeholder="1234"
@@ -61,7 +61,7 @@ export default function CardNumberInputWrapper({
         style={{ width: "71px" }}
       />
 
-      <CardInfoInput
+      <Input
         value={value.second}
         setValue={(newValue) => setCardNumber({ ...value, second: newValue })}
         placeholder="1234"
@@ -76,7 +76,7 @@ export default function CardNumberInputWrapper({
         style={{ width: "71px" }}
       />
 
-      <CardInfoInput
+      <Input
         value={value.third}
         setValue={(newValue) => setCardNumber({ ...value, third: newValue })}
         placeholder="1234"
@@ -91,7 +91,7 @@ export default function CardNumberInputWrapper({
         style={{ width: "71px" }}
       />
 
-      <CardInfoInput
+      <Input
         value={value.fourth}
         setValue={(newValue) => setCardNumber({ ...value, fourth: newValue })}
         placeholder="1234"
@@ -105,6 +105,6 @@ export default function CardNumberInputWrapper({
         }}
         style={{ width: "71px" }}
       />
-    </CardInputWrapper>
+    </InputGroup>
   );
 }
