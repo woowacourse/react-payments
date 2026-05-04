@@ -73,10 +73,11 @@ const NumberField = ({
 
   return (
     <StyledField>
-      <Label value="카드 번호" />
+      <Label value="카드 번호" htmlFor="card_number" />
       <InputWrapper>
         {cardNumbers.map((chunk, index) => (
           <CardNumberInput
+            id="card_number"
             key={index}
             value={chunk}
             placeholder="1234"

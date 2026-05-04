@@ -6,8 +6,8 @@ const StyledLabel = styled.label`
   color: #0a0d13;
 `;
 
-const Label = ({ value }: { value: string }) => {
-  return <StyledLabel>{value}</StyledLabel>;
+const Label = ({ value, htmlFor }: { value: string; htmlFor: string }) => {
+  return <StyledLabel htmlFor={htmlFor}>{value}</StyledLabel>;
 };
 
 export default Label;

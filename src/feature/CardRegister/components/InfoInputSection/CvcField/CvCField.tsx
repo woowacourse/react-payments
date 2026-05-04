@@ -70,9 +70,10 @@ const CvcField = ({
 
   return (
     <StyledField>
-      <Label value="CVC" />
+      <Label value="CVC" htmlFor="cvc" />
       <InputWrapper>
         <CvcInput
+          id="cvc"
           value={cvcNumber}
           maxLength={3}
           inputMode="numeric"

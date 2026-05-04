@@ -131,9 +131,10 @@ const ExpiryField = ({
 
   return (
     <StyledField>
-      <Label value="유효기간" />
+      <Label value="유효기간" htmlFor="expiry" />
       <InputWrapper>
         <ExpiryInput
+          id="expiry"
           value={expiryMonth}
           maxLength={2}
           inputMode="numeric"
