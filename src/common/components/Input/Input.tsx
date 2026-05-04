@@ -28,6 +28,14 @@ const StyledInput = styled.input<{ $strokeMode: StrokeModeType }>`
     border-color: ${(props) =>
       props.$strokeMode === "error" ? STROKE_MODE_COLOR.error : FOCUS_COLOR};
   }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 1.2px
+      ${(props) =>
+        props.$strokeMode === "error"
+          ? "rgba(255,61,61,0.25)"
+          : "rgba(0,0,0,0.2)"};
+  }
 `;
 
 const Input = ({
