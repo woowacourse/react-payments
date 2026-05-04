@@ -77,8 +77,8 @@ const createNoNetworkBrandValidationPlay =
     const input = canvas.getAllByRole('textbox')[inputIndex];
     await userEvent.type(input, '1');
     await userEvent.tab();
-    await expect(canvas.queryByText('유요한 카드 번호가 아닙니다.')).toBeNull();
-    await expect(canvas.queryByText('유요한 마스터카드 번호가 아닙니다.')).toBeNull();
+    await expect(canvas.queryByText('유효한 카드 번호가 아닙니다.')).toBeNull();
+    await expect(canvas.queryByText('유효한 마스터카드 번호가 아닙니다.')).toBeNull();
   };
 
 export const noNetworkBrandValidationOnSecondInput: Story = {
