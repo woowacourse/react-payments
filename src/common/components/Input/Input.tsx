@@ -27,6 +27,11 @@ const StyledInput = styled.input<{$strokeMode: StrokeModeType}>`
   &:focus {
     border-color: ${(props) => (props.$strokeMode === 'error' ? STROKE_MODE_COLOR.error : FOCUS_COLOR)};
   }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px
+      ${(props) => (props.$strokeMode === 'error' ? STROKE_MODE_COLOR.error : FOCUS_COLOR)};
+  }
 `;
 
 const Input = ({strokeMode = 'default', type = 'text', ...rest}: InputPropsType) => {
