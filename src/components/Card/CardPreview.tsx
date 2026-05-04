@@ -7,16 +7,15 @@ interface Props {
   cardNumbers: { first: string; second: string; third: string; fourth: string };
   EXP: { mm: string; yy: string };
 }
+const BRAND_LOGO = { visa: Visa, master: Mastercard };
 
 export default function CardPreview({ cardNumbers, EXP }: Props) {
+  const cardBrand = getCardBrand(cardNumbers);
   return (
     <CardPreviewContainer>
       <IcChip />
       <CardBrandLogo>
-        {getCardBrand(cardNumbers) === "visa" && <CardBrandImage src={Visa} />}
-        {getCardBrand(cardNumbers) === "master" && (
-          <CardBrandImage src={Mastercard} />
-        )}
+        {cardBrand && <CardBrandImage src={BRAND_LOGO[cardBrand]} />}
       </CardBrandLogo>
       <CardNumberList>
         <CardNumber>{cardNumbers.first}</CardNumber>
