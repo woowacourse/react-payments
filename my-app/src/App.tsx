@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import CardPreview from "./components/cardPreview/CardPreview";
 import CardNumberSection from "./components/cardNumberSection/CardNumberSection";
 import ExpirationDateSection from "./components/expirationDateSection/ExpirationDateSection";
@@ -10,10 +10,14 @@ function App() {
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
   const [cvc, setCvc] = useState('');
 
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  }
+
   return (
     <AppContainer>
       <CardPreview cardNumber={cardNumber} expirationDate={expirationDate} />
-      <FormLayout>
+      <FormLayout onSubmit={handleSubmit}>
         <CardNumberSection value={cardNumber} setValue = {setCardNumber} />
         <ExpirationDateSection value={expirationDate} setValue={setExpirationDate} />
         <CvcSection value={cvc} setValue={setCvc} />
