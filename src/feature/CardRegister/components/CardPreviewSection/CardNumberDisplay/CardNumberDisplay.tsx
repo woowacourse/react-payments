@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import type { CardNumberChunkType } from "../../../../../common/types/CardInfoType";
 
-const CardNumberDisplay = ({ cardNumbers }: { cardNumbers: string[] }) => {
+const CardNumberDisplay = ({
+  cardNumbers,
+}: {
+  cardNumbers: CardNumberChunkType;
+}) => {
   return (
     <Container>
       {cardNumbers.map((chunk, index) => {

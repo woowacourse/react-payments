@@ -1,5 +1,7 @@
+export type CardNumberChunkType = [string, string, string, string];
+
 export type CardInfoType = {
-  cardNumbers: string[];
+  cardNumbers: CardNumberChunkType;
   expiryMonth: string;
   expiryYear: string;
 };

@@ -2,13 +2,14 @@ import { useState } from "react";
 import Input from "../../../../../common/components/Input/Input";
 import Label from "../../../../../common/components/Label/Label";
 import styled from "styled-components";
+import type { CardNumberChunkType } from "../../../../../common/types/CardInfoType";
 
 const NumberField = ({
   cardNumbers,
   setCardNumbers,
   setIsError,
 }: {
-  cardNumbers: string[];
+  cardNumbers: CardNumberChunkType;
   setCardNumbers: (value: string[]) => void;
   setIsError: (value: boolean) => void;
 }) => {

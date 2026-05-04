@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import type { CardInfoType } from "../../../../../common/types/CardInfoType";
+import type {
+  CardInfoType,
+  CardNumberChunkType,
+} from "../../../../../common/types/CardInfoType";
 import CardBrandLogo from "../CardBrandLogo/CardBrandLogo";
 import CardExpiryDateDisplay from "../CardExpiryDateDisplay/CardExpiryDateDisplay";
 import CardNumberDisplay from "../CardNumberDisplay/CardNumberDisplay";
@@ -8,7 +11,7 @@ const CardPreviewContainer = ({ cardInfo }: { cardInfo: CardInfoType }) => {
   const { cardNumbers, expiryMonth, expiryYear } = cardInfo;
 
   const getBrandName = (
-    cardNumbers: string[],
+    cardNumbers: CardNumberChunkType,
   ): "visa" | "masterCard" | null => {
     const fullNumber = cardNumbers
       .map((chunk) => chunk.padEnd(4, "#"))
@@ -21,6 +24,8 @@ const CardPreviewContainer = ({ cardInfo }: { cardInfo: CardInfoType }) => {
 
     return null;
   };
+
+  // 유틸로 빼자
 
   return (
     <Container>
