@@ -106,7 +106,7 @@ export const Payments = () => {
   const [onBlurCvc, setOnBlurCvc] = useState(false);
 
   const preventCvc = (cvc: string) => {
-    if (!isNumericString(cvc)) return false;
+    if (cvc !== '' && !isNumericString(cvc)) return false;
     if (cvc.length > 3) return false;
     return true;
   };
