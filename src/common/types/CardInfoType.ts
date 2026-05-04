@@ -7,7 +7,7 @@ export type CardInfoType = {
 };
 
 export type CardInfoHandlersType = {
-  setCardNumbers: (value: string[]) => void;
+  setCardNumbers: (value: CardNumberChunkType) => void;
   setExpiryMonth: (value: string) => void;
   setExpiryYear: (value: string) => void;
 };
