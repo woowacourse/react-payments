@@ -3,7 +3,7 @@ import type { CardNumber } from "../../types/types";
 
 interface CardNumberProps {
   id: "cardNumber" | "expireNumber";
-  cardArray: CardNumber["cardArray"];
+  cardArray: CardNumber;
 }
 
 export default function CardPreviewNumber({ id, cardArray }: CardNumberProps) {
