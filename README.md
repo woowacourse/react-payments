@@ -118,7 +118,7 @@
 
 ## 폴더 구조
 
-```
+```text
 src/
 ├── common/
 │   ├── components/
