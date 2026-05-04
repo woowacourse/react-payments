@@ -14,7 +14,7 @@ type Story = StoryObj<typeof CardInfo>;
 export const Default: Story = {
   render: () => {
     const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-    const [expireDate, setExpireDate] = useState(["", ""]);
+    const [expireDate, setExpireDate] = useState({ month: "", year: "" });
     const [cvcNumber, setCvcNumber] = useState([""]);
 
     return (
