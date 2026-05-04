@@ -29,7 +29,8 @@ export default function CardInfoInput({
     const tmpValue = e.target.value;
     if (
       tmpValue !== "" &&
-      (Number.isNaN(Number(tmpValue)) || tmpValue.trim() === "")
+      (Number.isNaN(Number(tmpValue)) ||
+        (tmpValue !== "" && tmpValue.includes(" ")))
     ) {
       onError("숫자만 입력할 수 있습니다.");
       return;
