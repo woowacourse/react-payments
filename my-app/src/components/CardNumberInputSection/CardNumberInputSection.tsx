@@ -2,6 +2,7 @@ import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 import { useState } from "react";
 import { decideBrandName } from "../../utils/decideBrandName";
+import { inputStyle } from "../../styles/inputStyle";
 
 type CardNumberInputSectionProps = {
   onValueHandler: (cardInfo: string[], brand?: string) => void;
@@ -46,18 +47,19 @@ const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps)
       message="본인 명의의 카드만 결제 가능합니다."
       tag="카드 번호"
     >
-      <ValidatedInputGroup
-        onChange={onChange}
-        onBlur={handleBlur}
-        errorMessage={errorMessage}
-        errorIndex={errorIndex}
-        values={inputValues}
-        inputOption={{
-          count: 4,
-          maxLength: 4,
-          placeHolder: ["1234", "1234", "1234", "1234"],
-        }}
-      />
+      <ValidatedInputGroup errorMessage={errorMessage}>
+        {[0, 1, 2, 3].map((i) => (
+          <input
+            key={i}
+            maxLength={4}
+            value={inputValues[i] || ""}
+            onChange={(e) => onChange(i, e.target.value)}
+            onBlur={handleBlur}
+            css={inputStyle(errorIndex === i)}
+            placeholder="1234"
+          />
+        ))}
+      </ValidatedInputGroup>
     </InputSectionLayout>
   );
 };

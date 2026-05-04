@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
+import { inputStyle } from "../../styles/inputStyle";
 
 type CvcInputSectionProps = {
   onValueHandler: (cardInfo: string) => void;
@@ -10,7 +11,7 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const onChange = (_index: number, value: string) => {
+  const onChange = (value: string) => {
     setErrorMessage("");
     setInputValue(value);
     onValueHandler(value);
@@ -28,14 +29,16 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
 
   return (
     <InputSectionLayout title="CVC번호를 입력해 주세요" message="" tag="CVC">
-      <ValidatedInputGroup
-        onChange={onChange}
-        onBlur={handleBlur}
-        errorMessage={errorMessage}
-        values={[inputValue]}
-        errorIndex={errorMessage ? 0 : -1}
-        inputOption={{ count: 1, maxLength: 3, placeHolder: ["123"] }}
-      />
+      <ValidatedInputGroup errorMessage={errorMessage}>
+        <input
+          maxLength={3}
+          value={inputValue}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={handleBlur}
+          css={inputStyle(!!errorMessage)}
+          placeholder="123"
+        />
+      </ValidatedInputGroup>
     </InputSectionLayout>
   );
 };

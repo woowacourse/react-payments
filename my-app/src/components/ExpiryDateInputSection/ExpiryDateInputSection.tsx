@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
+import { inputStyle } from "../../styles/inputStyle";
 
 type ExpiryDateInputSectionProps = {
   onValueHandler: (cardInfo: string[]) => void;
@@ -45,14 +46,19 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
       message="월/년도(MMYY)를 순서대로 입력해 주세요."
       tag="유효기간"
     >
-      <ValidatedInputGroup
-        onChange={onChange}
-        onBlur={handleBlur}
-        errorMessage={errorMessage}
-        errorIndex={errorIndex}
-        values={inputValues}
-        inputOption={{ count: 2, maxLength: 2, placeHolder: ["MM", "YY"] }}
-      />
+      <ValidatedInputGroup errorMessage={errorMessage}>
+        {[0, 1].map((i) => (
+          <input
+            key={i}
+            maxLength={2}
+            value={inputValues[i] || ""}
+            onChange={(e) => onChange(i, e.target.value)}
+            onBlur={handleBlur}
+            css={inputStyle(errorIndex === i)}
+            placeholder={i === 0 ? "MM" : "YY"}
+          />
+        ))}
+      </ValidatedInputGroup>
     </InputSectionLayout>
   );
 };
