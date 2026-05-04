@@ -1,23 +1,18 @@
-import { useState } from "react";
-import { CardPreview } from "./preview/CardPreview.tsx";
-import { CardForm } from "./form/CardForm.tsx";
-import styled from "@emotion/styled";
-import { CardContext } from "../context/CardContext";
+import { useState } from 'react';
+import { CardPreview } from './preview/CardPreview.tsx';
+import { CardForm } from './form/CardForm.tsx';
+import styled from '@emotion/styled';
+import { CardContext } from '../context/CardContext';
 
 export function Card() {
-  const [cardNumber, setCardNumber] = useState({
-    "first-digits": "",
-    "second-digits": "",
-    "third-digits": "",
-    "fourth-digits": "",
-  });
+  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
 
   const [cardExpiryDate, setCardExpiryDate] = useState({
-    "expiry-month": "",
-    "expiry-year": "",
+    'expiry-month': '',
+    'expiry-year': '',
   });
 
-  const [networkBrand, setNetworkBrand] = useState("");
+  const [networkBrand, setNetworkBrand] = useState('');
 
   return (
     <CardContext

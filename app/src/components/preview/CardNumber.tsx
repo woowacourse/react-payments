@@ -1,19 +1,15 @@
-import styled from "@emotion/styled";
-import { useCardContext } from "../../hooks/useCardContext";
+import styled from '@emotion/styled';
+import { useCardContext } from '../../hooks/useCardContext';
 
 export function CardNumber() {
   const { cardNumber } = useCardContext();
 
   return (
     <CardNumberContainer>
-      <span>{cardNumber["first-digits"]}</span>
-      <span>{cardNumber["second-digits"]}</span>
-      <span className="secret">
-        {"●".repeat(cardNumber["third-digits"].length)}
-      </span>
-      <span className="secret">
-        {"●".repeat(cardNumber["fourth-digits"].length)}
-      </span>
+      <span>{cardNumber[0]}</span>
+      <span>{cardNumber[1]}</span>
+      <span className="secret">{'●'.repeat(cardNumber[2].length)}</span>
+      <span className="secret">{'●'.repeat(cardNumber[3].length)}</span>
     </CardNumberContainer>
   );
 }
