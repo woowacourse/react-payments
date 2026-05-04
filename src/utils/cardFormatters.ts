@@ -1,4 +1,4 @@
-export const makeCardNumber = (array: string[]) => {
+export const maskCardNumber = (array: string[]) => {
   return array.map((value, index) =>
     index < array.length / 2 ? value : "*".repeat(value.length),
   );

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { type CardPreviewProps } from "../../types/types";
-import { makeCardNumber, formatExpireDate } from "../../utils/cardFormatters";
+import { maskCardNumber, formatExpireDate } from "../../utils/cardFormatters";
 import CardPreviewNumber from "../common/CardPreviewNumber";
 
 export default function CardPreviewInfo({
@@ -11,7 +11,7 @@ export default function CardPreviewInfo({
     <CardImageInfoWrapper>
       <CardPreviewNumber
         id="cardNumber"
-        cardArray={makeCardNumber(cardNumber)}
+        cardArray={maskCardNumber(cardNumber)}
       />
       <CardPreviewNumber
         id="expireNumber"
