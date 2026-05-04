@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { CreditCard } from './CreditCard';
+import { CardPreview } from './CardPreview';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: 'Example/CreditCard',
-  component: CreditCard,
-} satisfies Meta<typeof CreditCard>;
+  component: CardPreview,
+} satisfies Meta<typeof CardPreview>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
