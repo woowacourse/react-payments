@@ -7,7 +7,12 @@ type BrandName = "visa" | "masterCard" | null;
 const CardBrandLogo = ({ brandName }: { brandName: BrandName }) => {
   if (brandName === null) return null;
 
-  return <BrandLogoImg src={brandName === "visa" ? visaImg : masterCardImg} />;
+  return (
+    <BrandLogoImg
+      src={brandName === "visa" ? visaImg : masterCardImg}
+      alt={`${brandName} 로고`}
+    />
+  );
 };
 
 const BrandLogoImg = styled.img`
