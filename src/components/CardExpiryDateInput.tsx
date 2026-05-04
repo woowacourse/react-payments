@@ -2,14 +2,7 @@ import { useState, type ChangeEvent } from 'react';
 import type { CardFormState, ErrorEntry } from '../types';
 import ValidationInput from './Common/ValidationInput';
 import Flex from './Common/Flex';
-import {
-  getLastError,
-  validateMonth,
-  validateNumberString,
-  validateStringLength,
-  validateStringMaxLength,
-  validateYear,
-} from '../utils';
+import { createDigitFieldValidations, getLastError, validateMonth, validateYear } from '../utils';
 import Label from './Common/Label';
 import InputErrorMessage from './Common/InputErrorMessage';
 
@@ -50,21 +43,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           onChange={handleChangeMonth}
           onChangeError={(error) => handleChangeError(0, error)}
           validations={[
-            {
-              type: 'onChange',
-              validator: validateNumberString,
-              message: '숫자만 입력 가능합니다.',
-            },
-            {
-              type: 'onChange',
-              validator: (input: string) => validateStringMaxLength(input, 2),
-              message: '2자리까지 입력 가능합니다.',
-            },
-            {
-              type: 'onBlur',
-              validator: (input: string) => validateStringLength(input, 2),
-              message: '2자리를 입력해주세요.',
-            },
+            ...createDigitFieldValidations(2),
             {
               type: 'onBlur',
               validator: validateMonth,
@@ -81,21 +60,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           onChange={handleChangeYear}
           onChangeError={(error) => handleChangeError(1, error)}
           validations={[
-            {
-              type: 'onChange',
-              validator: validateNumberString,
-              message: '숫자만 입력 가능합니다.',
-            },
-            {
-              type: 'onChange',
-              validator: (input: string) => validateStringMaxLength(input, 2),
-              message: '2자리까지 입력 가능합니다.',
-            },
-            {
-              type: 'onBlur',
-              validator: (input: string) => validateStringLength(input, 2),
-              message: '2자리를 입력해주세요.',
-            },
+            ...createDigitFieldValidations(2),
             {
               type: 'onBlur',
               validator: validateYear,

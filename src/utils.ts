@@ -1,15 +1,15 @@
-import type { CardNumberSegments, ErrorEntry } from './types';
+import type { CardNumberSegments, ErrorEntry, ValidationRule } from './types';
 
-export function validateNumberString(input: string) {
+export function validateDigits(input: string) {
   return /^\d+$/.test(input);
-}
-
-export function validateStringMaxLength(input: string, maxLength: number,) {
-  return input.length <= maxLength
 }
 
 export function validateStringLength(input: string, length: number,) {
   return input.length === length
+}
+
+export function validateStringMaxLength(input: string, maxLength: number,) {
+  return input.length <= maxLength
 }
 
 export function validateMonth(input: string) {
@@ -25,6 +25,26 @@ export function validateYear(input: string) {
 export function validateCVC(input: string) {
   const monthArray = Array.from({ length: 1000 }).map((_, index) => String(index).padStart(3, "0"));
   return monthArray.includes(input);
+}
+
+export function createDigitFieldValidations(length: number): ValidationRule[] {
+  return [
+    {
+      type: 'onChange',
+      validator: validateDigits,
+      message: '숫자만 입력 가능합니다.',
+    },
+    {
+      type: 'onChange',
+      validator: (input: string) => validateStringMaxLength(input, length),
+      message: `${length}자리까지 입력 가능합니다.`,
+    },
+    {
+      type: 'onBlur',
+      validator: (input: string) => validateStringLength(input, length),
+      message: `${length}자리를 입력해주세요.`,
+    },
+  ]
 }
 
 export function getCardBrand(cardNumberSegments: CardNumberSegments) {

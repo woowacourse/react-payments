@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from 'react';
 import ValidationInput from './Common/ValidationInput';
-import { validateNumberString, validateStringLength, validateStringMaxLength, getLastError } from '../utils';
+import { getLastError, createDigitFieldValidations } from '../utils';
 import type { CardNumberSegments, ErrorEntry } from '../types';
 import Flex from './Common/Flex';
 import Label from './Common/Label';
@@ -46,23 +46,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             value={el}
             onChange={handleChange}
             onChangeError={(error) => handleChangeError(index, error)}
-            validations={[
-              {
-                type: 'onChange',
-                validator: validateNumberString,
-                message: '숫자만 입력 가능합니다.',
-              },
-              {
-                type: 'onChange',
-                validator: (input: string) => validateStringMaxLength(input, 4),
-                message: '4자리까지만 입력 가능합니다.',
-              },
-              {
-                type: 'onBlur',
-                validator: (input: string) => validateStringLength(input, 4),
-                message: '4자리를 입력해주세요.',
-              },
-            ]}
+            validations={[...createDigitFieldValidations(4)]}
           />
         ))}
       </Flex>

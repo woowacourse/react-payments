@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from 'react';
 import ValidationInput from './Common/ValidationInput';
-import { validateCVC, validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
+import { createDigitFieldValidations, validateCVC } from '../utils';
 import Flex from './Common/Flex';
 import Label from './Common/Label';
 import InputErrorMessage from './Common/InputErrorMessage';
@@ -29,21 +29,7 @@ function CardCVCInput(props: CardCVCInputProps) {
         placeholder="CVC"
         onChangeError={(error) => setInputError(error)}
         validations={[
-          {
-            type: 'onChange',
-            validator: validateNumberString,
-            message: '숫자만 입력 가능합니다.',
-          },
-          {
-            type: 'onChange',
-            validator: (input: string) => validateStringMaxLength(input, 3),
-            message: '3자리까지 입력 가능합니다.',
-          },
-          {
-            type: 'onBlur',
-            validator: (input: string) => validateStringLength(input, 3),
-            message: '3자리를 입력해주세요.',
-          },
+          ...createDigitFieldValidations(3),
           {
             type: 'onBlur',
             validator: validateCVC,

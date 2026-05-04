@@ -1,6 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type ComponentProps } from 'react';
 import styled from '@emotion/styled';
 import Flex from './Flex';
+import type { ValidationRule } from '../../types';
 
 const Input = styled.input`
   width: 100%;
@@ -23,12 +24,6 @@ interface ValidationInputProps extends ComponentProps<'input'> {
   validations: ValidationRule[];
   onChangeError?: (error: Error | null) => void;
 }
-
-type ValidationRule = {
-  type: 'onChange' | 'onBlur';
-  validator: (input: string) => boolean;
-  message: string;
-};
 
 export default function ValidationInput({
   validations,

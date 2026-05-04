@@ -9,4 +9,10 @@ export interface CardFormState {
   cvc: string;
 };
 
+export interface ValidationRule {
+  type: 'onChange' | 'onBlur';
+  validator: (input: string) => boolean;
+  message: string;
+};
+
 export type ErrorEntry = { error: Error; timestamp: number } | null;
