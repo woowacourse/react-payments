@@ -14,7 +14,8 @@ export const BRAND_CARD_LENGTH = {
 
 export const getBrand = (cardNumber: string): Brand => {
   if (cardNumber.startsWith(BRAND_FORMAT.visa.toString())) return 'visa';
-  if (BRAND_FORMAT.mastercard.some((brandNumber) => cardNumber.startsWith(brandNumber))) return 'mastercard';
+  if (BRAND_FORMAT.mastercard.some((brandNumber) => cardNumber.startsWith(brandNumber)))
+    return 'mastercard';
 
   return 'default';
 };

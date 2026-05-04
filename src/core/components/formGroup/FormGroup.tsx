@@ -9,7 +9,13 @@ export interface FormGroupProps {
   errorMessage?: string;
 }
 
-export const FormGroup = ({ title, subTitle, label, errorMessage = '', children }: FormGroupProps) => {
+export const FormGroup = ({
+  title,
+  subTitle,
+  label,
+  errorMessage = '',
+  children,
+}: FormGroupProps) => {
   return (
     <fieldset className={styles.formGroup}>
       <legend className={styles.legend}>
