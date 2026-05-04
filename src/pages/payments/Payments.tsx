@@ -143,7 +143,7 @@ export const Payments = () => {
       >
         {cardNumbers.map((value, index) => (
           <Input
-            type="text"
+            type="tel"
             key={index}
             value={value}
             maxLength={4}
@@ -186,7 +186,7 @@ export const Payments = () => {
 
       <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={renderErrorMessageCvc(cvc)}>
         <Input
-          type="text"
+          type="tel"
           value={cvc}
           maxLength={3}
           placeholder="123"
