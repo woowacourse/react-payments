@@ -27,7 +27,10 @@ export default function CardInfoInput({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const tmpValue = e.target.value;
-    if (Number.isNaN(Number(tmpValue)) || tmpValue.trim() === "") {
+    if (
+      tmpValue !== "" &&
+      (Number.isNaN(Number(tmpValue)) || tmpValue.trim() === "")
+    ) {
       onError("숫자만 입력할 수 있습니다.");
       return;
     }
