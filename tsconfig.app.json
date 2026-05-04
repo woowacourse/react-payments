@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "jsxImportSource": "@emotion/react"
   },
-  "include": ["src"]
+  "include": ["src", "vitest.shims.d.ts"]
 }
