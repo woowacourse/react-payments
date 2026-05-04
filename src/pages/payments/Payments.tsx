@@ -106,9 +106,10 @@ export const Payments = () => {
   const [onBlurCvc, setOnBlurCvc] = useState(false);
 
   const preventCvc = (cvc: string) => {
-    if (cvc !== '' && !isNumericString(cvc)) return false;
-    if (cvc.length > 3) return false;
-    return true;
+    if (cvc !== '' && !isNumericString(cvc)) return true;
+    if (cvc.length > 3) return true;
+
+    return false;
   };
 
   const renderErrorMessageCvc = (cvc: string) => {
@@ -118,7 +119,7 @@ export const Payments = () => {
   };
 
   const handleChangeCvc = (value: string) => {
-    if (!preventCvc(value)) return;
+    if (preventCvc(value)) return;
     setCvc(value);
   };
 
