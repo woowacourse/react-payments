@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { isInputValidate, isValidRange } from '../../utils/Validation';
+import { isInputValidate, isIncompleteRange } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
 
@@ -28,7 +28,7 @@ export default function CardNumberSection({ value, setValue }: Props) {
   function handleOnBlur(inputValue:string, index: number) {
     const newError = [...errors];
 
-    if (!isValidRange(inputValue, 4)) {
+    if (isIncompleteRange(inputValue, 4)) {
       newError[index] = true;
       setErrorMessage('필요한 자릿수를 모두 입력해주세요!'); 
     } else {

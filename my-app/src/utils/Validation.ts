@@ -7,8 +7,6 @@ export function isInputValidate(value: string, maxLength: number): boolean {
   return true;
 }
 
-export function isValidRange(value: string, maxLength: number): boolean {
-  if(value.length < maxLength && value.length >= 0) return false;
-
-  return true;
+export function isIncompleteRange(value: string, maxLength: number): boolean {
+  return value.length < maxLength && value.length >= 0;
 }
