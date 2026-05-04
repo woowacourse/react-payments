@@ -2,17 +2,20 @@ import { useEffect, useState, type ChangeEvent, type ComponentProps } from 'reac
 import styled from '@emotion/styled';
 import Flex from './Flex';
 
-const Input = styled.input<{ isError?: boolean }>`
+const Input = styled.input`
   width: 100%;
   font-size: 13px;
   border-radius: 2px;
   padding: 8px 6px;
   border: 1px solid var(--color-border);
-  ${(props) => (props.isError ? 'border-color: var(--color-error);' : '')}
 
   :focus {
-    border: 1px solid var(--color-black);
+    border-color: 1px solid var(--color-black);
     outline: 0;
+  }
+
+  &[data-is-error='true'] {
+    border-color: var(--color-error);
   }
 `;
 
@@ -76,7 +79,7 @@ export default function ValidationInput({
 
   return (
     <Flex direction="column" gap={10}>
-      <Input {...props} isError={!!inputError} onChange={handleOnChange} onBlur={handleOnBlur} />
+      <Input {...props} data-is-error={!!inputError} onChange={handleOnChange} onBlur={handleOnBlur} />
     </Flex>
   );
 }
