@@ -7,6 +7,9 @@ import {
   INPUT_CARD_NUMBER_CONFIG,
 } from "./constants";
 import { type CardFormType } from "../../types/types";
+import { useCardNumberInput } from "../../hooks/useCardNumberInput";
+import { useExpireDateInput } from "../../hooks/useExpireDateInput";
+import { useCvcNumberInput } from "../../hooks/useCvcNumberInput";
 
 export default function CardInfo({
   cardNumber,
@@ -16,6 +19,13 @@ export default function CardInfo({
   cvcNumber,
   setCvcNumber,
 }: CardFormType) {
+  const { cardNumberError, handleCardNumberChange } =
+    useCardNumberInput(setCardNumber);
+  const { expireDateError, handleExpireDateChange } =
+    useExpireDateInput(setExpireDate);
+  const { cvcNumberError, handleCvcNumberChange } =
+    useCvcNumberInput(setCvcNumber);
+
   return (
     <CardInfoWrapper>
       <CardInfoSection>
@@ -27,9 +37,8 @@ export default function CardInfo({
           inputLabel="카드 번호"
           inputConfig={INPUT_CARD_NUMBER_CONFIG}
           inputValue={cardNumber}
-          setInputValue={setCardNumber}
-          // validate={validate}
-          // errorMessage={cardNumber}
+          handleChange={handleCardNumberChange}
+          errorMessage={cardNumberError}
         />
       </CardInfoSection>
 
@@ -41,8 +50,9 @@ export default function CardInfo({
         <CardInfoInput
           inputLabel="유효기간"
           inputConfig={INPUT_CARD_EXPIRE_NUMBER_CONFIG}
-          inputValue={expireDate}
-          setInputValue={setExpireDate}
+          inputValue={[expireDate.month, expireDate.year]}
+          handleChange={handleExpireDateChange}
+          errorMessage={expireDateError}
         />
       </CardInfoSection>
 
@@ -52,7 +62,8 @@ export default function CardInfo({
           inputLabel="CVC"
           inputConfig={INPUT_CVC_NUMBER_CONFIG}
           inputValue={cvcNumber}
-          setInputValue={setCvcNumber}
+          handleChange={handleCvcNumberChange}
+          errorMessage={cvcNumberError}
         />
       </CardInfoSection>
     </CardInfoWrapper>
