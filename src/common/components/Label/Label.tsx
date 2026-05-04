@@ -1,3 +1,4 @@
+import type {ComponentPropsWithoutRef} from 'react';
 import styled from 'styled-components';
 
 const StyledLabel = styled.label`
@@ -6,8 +7,8 @@ const StyledLabel = styled.label`
   color: #0a0d13;
 `;
 
-const Label = ({value}: {value: string}) => {
-  return <StyledLabel>{value}</StyledLabel>;
+const Label = ({value, ...rest}: {value: string} & ComponentPropsWithoutRef<'label'>) => {
+  return <StyledLabel {...rest}>{value}</StyledLabel>;
 };
 
 export default Label;
