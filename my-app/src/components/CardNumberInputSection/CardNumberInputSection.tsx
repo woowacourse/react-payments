@@ -51,7 +51,7 @@ const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps)
       message="본인 명의의 카드만 결제 가능합니다."
       tag="카드 번호"
     >
-      <ValidatedInputGroup errorMessage={errorMessage}>
+      <ValidatedInputGroup errorMessage={errorMessage} legend="카드 번호">
         {Array.from({ length: CARD_NUMBER_FIELD_COUNT }, (_, i) => (
           <input
             key={i}

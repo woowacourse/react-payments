@@ -32,7 +32,7 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
 
   return (
     <InputSectionLayout title="CVC번호를 입력해 주세요" message="" tag="CVC">
-      <ValidatedInputGroup errorMessage={errorMessage}>
+      <ValidatedInputGroup errorMessage={errorMessage} legend="CVC">
         <input
           maxLength={CVC_MAX_LENGTH}
           inputMode="numeric"

@@ -51,7 +51,7 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
       message="월/년도(MMYY)를 순서대로 입력해 주세요."
       tag="유효기간"
     >
-      <ValidatedInputGroup errorMessage={errorMessage}>
+      <ValidatedInputGroup errorMessage={errorMessage} legend="유효기간">
         {Array.from({ length: EXPIRY_FIELD_COUNT }, (_, i) => (
           <input
             key={i}
