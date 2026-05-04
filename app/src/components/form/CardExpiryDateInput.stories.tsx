@@ -134,3 +134,21 @@ export const InvalidYearLength: Story = {
     ).toBeInTheDocument();
   },
 };
+
+export const multipleErrorsInput: Story = {
+  render: renderWithContext,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [monthInput, yearInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(yearInput, "00");
+    await userEvent.type(monthInput, "7");
+    await expect(
+      canvas.queryByText(
+        "유효하지 않은 날짜 형식입니다. 0 이나 1로 시작해야 합니다.",
+      ),
+    ).toBeInTheDocument();
+    await expect(
+      canvas.queryByText("날짜 각 항목은 2자리여야 합니다."),
+    ).toBeInTheDocument();
+  },
+};

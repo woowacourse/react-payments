@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { CardContext } from "../Card";
 import { ErrorMessage } from "./ErrorMessage";
 import { Validator } from "../../validators/CardValidator";
+import { sanitizeErrors } from "../../Utils";
 import { CardFieldset, CardLegend, CardInput } from "../../style/CardStyles";
 
 export function CardNumberInput() {
@@ -10,30 +11,32 @@ export function CardNumberInput() {
   const [isError, setError] = useState({
     "first-digits": {
       state: false,
+      message: "",
     },
     "second-digits": {
       state: false,
+      message: "",
     },
     "third-digits": {
       state: false,
+      message: "",
     },
     "fourth-digits": {
       state: false,
+      message: "",
     },
-    message: "",
   });
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
     try {
       Validator.isNumber(value);
-      setError({ ...isError, [id]: { state: false }, message: "" });
+      setError({ ...isError, [id]: { state: false, message: "" } });
       setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
       setError({
         ...isError,
-        [id]: { state: true },
-        message: (err as Error).message,
+        [id]: { state: true, message: (err as Error).message },
       });
     }
   };
@@ -45,13 +48,12 @@ export function CardNumberInput() {
     try {
       Validator.isNumber(value);
       Validator.isValidNetworkBrand(value);
-      setError({ ...isError, [id]: { state: false }, message: "" });
+      setError({ ...isError, [id]: { state: false, message: "" } });
       setCardNumber({ ...cardNumber, [id]: value });
     } catch (err) {
       setError({
         ...isError,
-        [id]: { state: true },
-        message: (err as Error).message,
+        [id]: { state: true, message: (err as Error).message },
       });
     }
   };
@@ -60,12 +62,11 @@ export function CardNumberInput() {
     const { value, id } = e.target;
     try {
       Validator.isValidCardNumberLength(value, e.target.maxLength);
-      setError({ ...isError, [id]: { state: false }, message: "" });
+      setError({ ...isError, [id]: { state: false, message: "" } });
     } catch (err) {
       setError({
         ...isError,
-        [id]: { state: true },
-        message: (err as Error).message,
+        [id]: { state: true, message: (err as Error).message },
       });
     }
   };
@@ -119,7 +120,11 @@ export function CardNumberInput() {
           isError={isError["fourth-digits"].state}
         />
       </CardFieldset>
-      <ErrorMessage message={isError["message"]} />
+      <ErrorMessage
+        messages={sanitizeErrors(
+          Object.keys(isError).map((key) => isError[key]["message"]),
+        )}
+      />
     </>
   );
 }

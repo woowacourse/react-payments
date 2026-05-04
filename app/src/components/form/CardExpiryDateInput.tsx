@@ -1,5 +1,6 @@
 import { CardInput, CardFieldset, CardLegend } from "../../style/CardStyles";
 import { Validator } from "../../validators/CardValidator";
+import { sanitizeErrors } from "../../Utils";
 import { CardContext } from "../Card";
 import { useState, useContext } from "react";
 import { ErrorMessage } from "./ErrorMessage";
@@ -9,11 +10,12 @@ export function CardExpiryDateInput() {
   const [isError, setError] = useState({
     "expiry-month": {
       state: false,
+      message: "",
     },
     "expiry-year": {
       state: false,
+      message: "",
     },
-    message: "",
   });
 
   const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,13 +23,12 @@ export function CardExpiryDateInput() {
     try {
       Validator.isNumber(value);
       Validator.isValidMonth(value);
-      setError({ ...isError, [id]: { state: false }, message: "" });
+      setError({ ...isError, [id]: { state: false, message: "" } });
       setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     } catch (err) {
       setError({
         ...isError,
-        [id]: { state: true },
-        message: (err as Error).message,
+        [id]: { state: true, message: (err as Error).message },
       });
     }
   };
@@ -37,13 +38,12 @@ export function CardExpiryDateInput() {
     try {
       Validator.isNumber(value);
       Validator.isValidYear(value);
-      setError({ ...isError, [id]: { state: false }, message: "" });
+      setError({ ...isError, [id]: { state: false, message: "" } });
       setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     } catch (err) {
       setError({
         ...isError,
-        [id]: { state: true },
-        message: (err as Error).message,
+        [id]: { state: true, message: (err as Error).message },
       });
     }
   };
@@ -52,12 +52,11 @@ export function CardExpiryDateInput() {
     const { value, id } = e.target;
     try {
       Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
-      setError({ ...isError, [id]: { state: false }, message: "" });
+      setError({ ...isError, [id]: { state: false, message: "" } });
     } catch (err) {
       setError({
         ...isError,
-        [id]: { state: true },
-        message: (err as Error).message,
+        [id]: { state: true, message: (err as Error).message },
       });
     }
   };
@@ -89,7 +88,11 @@ export function CardExpiryDateInput() {
           placeholder="YY"
         />
       </CardFieldset>
-      <ErrorMessage message={isError["message"]} />
+      <ErrorMessage
+        messages={sanitizeErrors(
+          Object.keys(isError).map((key) => isError[key]["message"]),
+        )}
+      />
     </>
   );
 }

@@ -138,3 +138,36 @@ export const completeLengthOnBlur: Story = {
     ).toBeNull();
   },
 };
+
+export const perserveErrorMessageInput: Story = {
+  render: renderWithContext,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [_, secondInput, thirdInput, fourthInput] =
+      canvas.getAllByRole("textbox");
+    await userEvent.type(secondInput, "12");
+    await userEvent.type(thirdInput, "34");
+    await userEvent.type(fourthInput, "1");
+    await expect(
+      canvas.queryByText("카드 번호 각 항목은 4자리여야 합니다."),
+    ).toBeInTheDocument();
+  },
+};
+
+export const multipleErrorsInput: Story = {
+  render: renderWithContext,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput, secondInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(secondInput, "12");
+    await userEvent.type(firstInput, "7");
+    await expect(
+      canvas.queryByText(
+        "유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.",
+      ),
+    ).toBeInTheDocument();
+    await expect(
+      canvas.queryByText("카드 번호 각 항목은 4자리여야 합니다."),
+    ).toBeInTheDocument();
+  },
+};

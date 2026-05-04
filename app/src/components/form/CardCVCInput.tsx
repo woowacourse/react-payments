@@ -19,7 +19,11 @@ export function CardCVCInput() {
       setError({ ...isError, [id]: { state: false }, message: "" });
       setCardCVC(e.target.value);
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: (err as Error).message });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: (err as Error).message,
+      });
     }
   };
 
@@ -29,7 +33,11 @@ export function CardCVCInput() {
       Validator.isValidCardCVCLength(value, e.target.maxLength);
       setError({ ...isError, [id]: { state: false }, message: "" });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: (err as Error).message });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: (err as Error).message,
+      });
     }
   };
 
@@ -46,7 +54,7 @@ export function CardCVCInput() {
         onChange={changeCardCVC}
         onBlur={handleBlurCVC}
       />
-      <ErrorMessage message={isError["message"]} />
+      <ErrorMessage messages={[isError["message"]]} />
     </CardCVCContainer>
   );
 }
