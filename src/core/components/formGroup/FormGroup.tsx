@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 export interface FormGroupProps {
   title: string;
-  subTitle: string;
+  subTitle?: string;
   label: string;
   children: ReactNode;
   errorMessage?: string;
