@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 
 export default function PaymentWidget() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-  const [expireDate, setExpireDate] = useState(["", ""]);
+  const [expireDate, setExpireDate] = useState({ month: "", year: "" });
   const [cvcNumber, setCvcNumber] = useState([""]);
 
   return (
