@@ -11,7 +11,9 @@ export const FormGroup = ({ title, subTitle, label, children, errorMessage }: Fo
         <div className={cn(styles.title)}>{title}</div>
         <div className={cn(styles.subTitle)}>{subTitle}</div>
       </div>
-      <FormContainer label={label} children={children} errorMessage={errorMessage} />
+      <FormContainer label={label} errorMessage={errorMessage}>
+        {children}
+      </FormContainer>
     </fieldset>
   );
 };
