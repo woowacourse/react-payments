@@ -1,25 +1,29 @@
-import { useState } from "react";
-import styled from "@emotion/styled";
-import { ErrorMessage } from "./ErrorMessage";
-import { CardInput } from "../../style/CardStyles";
-import { Validator } from "../../validators/CardValidator";
+import { useState } from 'react';
+import styled from '@emotion/styled';
+import { ErrorMessage } from './ErrorMessage';
+import { CardInput } from '../../style/CardStyles';
+import { Validator } from '../../validators/CardValidator';
 
 export function CardCVCInput() {
-  const [cardCVC, setCardCVC] = useState("");
+  const [cardCVC, setCardCVC] = useState('');
 
   const [isError, setError] = useState({
     state: false,
-    message: "",
+    message: '',
   });
 
   const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
     try {
       Validator.isNumber(value);
-      setError({ ...isError, [id]: { state: false }, message: "" });
+      setError({ ...isError, [id]: { state: false }, message: '' });
       setCardCVC(e.target.value);
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err instanceof Error ? err.message : "" });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: err instanceof Error ? err.message : '',
+      });
     }
   };
 
@@ -27,9 +31,13 @@ export function CardCVCInput() {
     const { value, id } = e.target;
     try {
       Validator.isValidCardCVCLength(value, e.target.maxLength);
-      setError({ ...isError, [id]: { state: false }, message: "" });
+      setError({ ...isError, [id]: { state: false }, message: '' });
     } catch (err) {
-      setError({ ...isError, [id]: { state: true }, message: err instanceof Error ? err.message : "" });
+      setError({
+        ...isError,
+        [id]: { state: true },
+        message: err instanceof Error ? err.message : '',
+      });
     }
   };
 
@@ -45,8 +53,9 @@ export function CardCVCInput() {
         value={cardCVC}
         onChange={changeCardCVC}
         onBlur={handleBlurCVC}
+        isError={isError.state}
       />
-      <ErrorMessage message={isError["message"]} />
+      <ErrorMessage message={isError['message']} />
     </CardCVCContainer>
   );
 }
