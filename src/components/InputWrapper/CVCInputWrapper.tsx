@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { isLengthMatch } from "../../utils/isLengthMatch";
-import CardInfoInput from "../Input/CardInfoInput";
-import CardInputWrapper from "./CardInputWrapper";
+import Input from "../Input/Input";
+import InputGroup from "./InputGroup";
 
 interface Props {
   validator: (value: string) => string | null;
@@ -16,23 +16,20 @@ export default function CVCInputWrapper({
 }: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
-  const [hasTouched, setHasTouched] = useState(false);
-  const errorAfterCompleted = hasTouched ? validator(value) : null;
-  const errorMessage = inputError ?? errorAfterCompleted;
-
   return (
-    <CardInputWrapper errorMessage={errorMessage}>
-      <CardInfoInput
+    <InputGroup errorMessage={inputError}>
+      <Input
         value={value}
         setValue={setCVCNumber}
         placeholder="123"
         validator={(value: string) => isLengthMatch(3, value)}
         maxLength={3}
         onError={setInputError}
-        onBlur={() => setHasTouched(true)}
-        onFocus={() => setHasTouched(false)}
+        onBlur={() => {
+          setInputError(validator(value));
+        }}
         style={{ width: "315px" }}
       />
-    </CardInputWrapper>
+    </InputGroup>
   );
 }

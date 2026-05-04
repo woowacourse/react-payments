@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function CardInputWrapper({ errorMessage, children }: Props) {
+export default function InputGroup({ errorMessage, children }: Props) {
   return (
     <CardInputContainer>
       <CardInputRow>{children}</CardInputRow>
