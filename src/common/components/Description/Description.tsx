@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledDescription = styled.span`
   font-size: 9.5px;
@@ -6,7 +6,7 @@ const StyledDescription = styled.span`
   color: #8b95a1;
 `;
 
-const Description = ({value}: {value: string}) => {
+const Description = ({ value }: { value: string }) => {
   return <StyledDescription>{value}</StyledDescription>;
 };
 

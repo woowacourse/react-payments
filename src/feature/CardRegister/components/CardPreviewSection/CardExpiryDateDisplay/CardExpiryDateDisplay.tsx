@@ -1,9 +1,15 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const CardExpiryDateDisplay = ({expiryMonth, expiryYear}: {expiryMonth: string; expiryYear: string}) => {
-  let delimiter = '';
+const CardExpiryDateDisplay = ({
+  expiryMonth,
+  expiryYear,
+}: {
+  expiryMonth: string;
+  expiryYear: string;
+}) => {
+  let delimiter = "";
   if (expiryMonth.length === 2 || expiryYear.length === 2) {
-    delimiter = '/';
+    delimiter = "/";
   }
   return (
     <Container>
@@ -18,7 +24,7 @@ const Container = styled.div`
   display: flex;
   gap: 2px;
   height: 25px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 `;
 
 const Chunk = styled.div`

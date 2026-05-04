@@ -1,7 +1,7 @@
-import {useState} from 'react';
-import Input from '../../../../../common/components/Input/Input';
-import Label from '../../../../../common/components/Label/Label';
-import styled from 'styled-components';
+import { useState } from "react";
+import Input from "../../../../../common/components/Input/Input";
+import Label from "../../../../../common/components/Label/Label";
+import styled from "styled-components";
 
 const NumberField = ({
   cardNumbers,
@@ -14,11 +14,11 @@ const NumberField = ({
 }) => {
   const INPUT_COUNT = 4;
   const NUMBER_LENGTH = 4;
-  const createFlags = () => Array.from({length: INPUT_COUNT}, () => false);
+  const createFlags = () => Array.from({ length: INPUT_COUNT }, () => false);
 
   const [errorInfo, setErrorInfo] = useState({
     flag: createFlags(),
-    currentErrorMsg: '',
+    currentErrorMsg: "",
   });
   const [isTouched, setIsTouched] = useState(createFlags());
 
@@ -28,15 +28,19 @@ const NumberField = ({
     if (!/^\d*$/.test(value)) return;
     if (value.length > NUMBER_LENGTH) return;
 
-    const newChunks = cardNumbers.map((chunk, i) => (i === index ? value : chunk));
+    const newChunks = cardNumbers.map((chunk, i) =>
+      i === index ? value : chunk,
+    );
     setCardNumbers(newChunks);
     clearErrorWhenComplete(index, value);
   };
 
-  const ERROR_MSG = '카드 번호 4자리를 입력해 주세요';
+  const ERROR_MSG = "카드 번호 4자리를 입력해 주세요";
 
   const updateTouched = (index: number) => {
-    setIsTouched((prev) => prev.map((touched, i) => (i === index ? true : touched)));
+    setIsTouched((prev) =>
+      prev.map((touched, i) => (i === index ? true : touched)),
+    );
   };
 
   const clearErrorWhenComplete = (index: number, value: string) => {
@@ -46,12 +50,14 @@ const NumberField = ({
   };
 
   const updateErrorInfo = (index: number, hasError: boolean) => {
-    const newFlag = errorInfo.flag.map((flag, i) => (i === index ? hasError : flag));
+    const newFlag = errorInfo.flag.map((flag, i) =>
+      i === index ? hasError : flag,
+    );
     const firstErrorIdx = newFlag.indexOf(true);
 
     setErrorInfo({
       flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? '' : ERROR_MSG,
+      currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MSG,
     });
     setIsError(firstErrorIdx !== -1);
   };
@@ -67,16 +73,16 @@ const NumberField = ({
 
   return (
     <StyledField>
-      <Label value='카드 번호' />
+      <Label value="카드 번호" />
       <InputWrapper>
         {cardNumbers.map((chunk, index) => (
           <CardNumberInput
             key={index}
             value={chunk}
-            placeholder='1234'
-            inputMode='numeric'
+            placeholder="1234"
+            inputMode="numeric"
             maxLength={4}
-            strokeMode={index === firstErrorIdx ? 'error' : 'default'}
+            strokeMode={index === firstErrorIdx ? "error" : "default"}
             onChange={(e) => handleNumbersChange(index, e.target.value)}
             onBlur={(e) => handleNumbersBlur(index, e.target.value)}
           />

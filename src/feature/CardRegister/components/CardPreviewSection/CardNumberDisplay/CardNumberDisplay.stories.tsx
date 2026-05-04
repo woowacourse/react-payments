@@ -1,13 +1,13 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import CardNumberDisplay from './CardNumberDisplay';
+import CardNumberDisplay from "./CardNumberDisplay";
 
 const meta = {
-  title: 'feature/CardRegister/components/CardNumberDisplay',
+  title: "feature/CardRegister/components/CardNumberDisplay",
   component: CardNumberDisplay,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
-    cardNumbers: ['', '', '', ''],
+    cardNumbers: ["", "", "", ""],
   },
 } satisfies Meta<typeof CardNumberDisplay>;
 
@@ -18,12 +18,12 @@ export const Empty: Story = {};
 
 export const Partial: Story = {
   args: {
-    cardNumbers: ['1234', '56', '', ''],
+    cardNumbers: ["1234", "56", "", ""],
   },
 };
 
 export const Filled: Story = {
   args: {
-    cardNumbers: ['1234', '5678', '1234', '5678'],
+    cardNumbers: ["1234", "5678", "1234", "5678"],
   },
 };

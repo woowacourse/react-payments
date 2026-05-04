@@ -1,11 +1,11 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import CardBrandLogo from './CardBrandLogo';
+import CardBrandLogo from "./CardBrandLogo";
 
 const meta = {
-  title: 'feature/CardRegister/components/CardBrandLogo',
+  title: "feature/CardRegister/components/CardBrandLogo",
   component: CardBrandLogo,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     brandName: null,
   },
@@ -16,12 +16,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Visa: Story = {
   args: {
-    brandName: 'visa',
+    brandName: "visa",
   },
 };
 
 export const MasterCard: Story = {
   args: {
-    brandName: 'masterCard',
+    brandName: "masterCard",
   },
 };

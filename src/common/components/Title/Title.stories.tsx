@@ -1,13 +1,13 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import Title from './Title';
+import Title from "./Title";
 
 const meta = {
-  title: 'common/components/Title',
+  title: "common/components/Title",
   component: Title,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
-    value: '',
+    value: "",
   },
 } satisfies Meta<typeof Title>;
 
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: 'titleTest',
+    value: "titleTest",
   },
 };

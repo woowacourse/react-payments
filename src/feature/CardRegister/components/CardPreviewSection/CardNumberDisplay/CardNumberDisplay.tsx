@@ -1,11 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const CardNumberDisplay = ({cardNumbers}: {cardNumbers: string[]}) => {
+const CardNumberDisplay = ({ cardNumbers }: { cardNumbers: string[] }) => {
   return (
     <Container>
       {cardNumbers.map((chunk, index) => {
         if (index >= 2) {
-          return <MaskedChunk key={index}>{'·'.repeat(chunk.length)}</MaskedChunk>;
+          return (
+            <MaskedChunk key={index}>{"·".repeat(chunk.length)}</MaskedChunk>
+          );
         }
         return <Chunk key={index}>{chunk}</Chunk>;
       })}
@@ -17,7 +19,7 @@ const Container = styled.div`
   display: flex;
   gap: 10px;
   height: 25px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 `;
 
 const Chunk = styled.div`

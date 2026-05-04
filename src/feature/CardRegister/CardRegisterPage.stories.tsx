@@ -1,13 +1,13 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import CardRegisterPage from './CardRegisterPage';
+import CardRegisterPage from "./CardRegisterPage";
 
 const meta = {
-  title: 'feature/CardRegister/CardRegisterPage',
+  title: "feature/CardRegister/CardRegisterPage",
   component: CardRegisterPage,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
 } satisfies Meta<typeof CardRegisterPage>;
 

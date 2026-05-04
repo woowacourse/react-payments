@@ -1,16 +1,16 @@
-import {useState} from 'react';
-import type {Meta, StoryObj} from '@storybook/react-vite';
-import {fn} from 'storybook/test';
+import { useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 
-import ExpiryField from './ExpiryField';
+import ExpiryField from "./ExpiryField";
 
 const meta = {
-  title: 'feature/CardRegister/components/ExpiryField',
+  title: "feature/CardRegister/components/ExpiryField",
   component: ExpiryField,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
-    expiryMonth: '',
-    expiryYear: '',
+    expiryMonth: "",
+    expiryYear: "",
     setExpiryMonth: fn(),
     setExpiryYear: fn(),
     setIsError: fn(),
@@ -24,15 +24,15 @@ export const Empty: Story = {};
 
 export const Partial: Story = {
   args: {
-    expiryMonth: '12',
-    expiryYear: '',
+    expiryMonth: "12",
+    expiryYear: "",
   },
 };
 
 export const Filled: Story = {
   args: {
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryMonth: "12",
+    expiryYear: "30",
   },
 };
 

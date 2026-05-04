@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledLabel = styled.label`
   font-size: 12px;
@@ -6,7 +6,7 @@ const StyledLabel = styled.label`
   color: #0a0d13;
 `;
 
-const Label = ({value}: {value: string}) => {
+const Label = ({ value }: { value: string }) => {
   return <StyledLabel>{value}</StyledLabel>;
 };
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledTitle = styled.span`
   font-size: 18px;
@@ -6,7 +6,7 @@ const StyledTitle = styled.span`
   color: #000;
 `;
 
-const Title = ({value}: {value: string}) => {
+const Title = ({ value }: { value: string }) => {
   return <StyledTitle>{value}</StyledTitle>;
 };
 

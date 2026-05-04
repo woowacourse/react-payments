@@ -1,7 +1,7 @@
-import {useState} from 'react';
-import Label from '../../../../../common/components/Label/Label';
-import Input from '../../../../../common/components/Input/Input';
-import styled from 'styled-components';
+import { useState } from "react";
+import Label from "../../../../../common/components/Label/Label";
+import Input from "../../../../../common/components/Input/Input";
+import styled from "styled-components";
 
 const ExpiryField = ({
   expiryMonth,
@@ -17,11 +17,11 @@ const ExpiryField = ({
   setIsError: (value: boolean) => void;
 }) => {
   const INPUT_COUNT = 2;
-  const createFlags = () => Array.from({length: INPUT_COUNT}, () => false);
+  const createFlags = () => Array.from({ length: INPUT_COUNT }, () => false);
 
   const [errorInfo, setErrorInfo] = useState({
     flag: createFlags(),
-    currentErrorMsg: '',
+    currentErrorMsg: "",
   });
   const [isTouched, setIsTouched] = useState(createFlags());
 
@@ -32,7 +32,7 @@ const ExpiryField = ({
     if (value.length > 2) return;
 
     if (value.length === 0) {
-      setExpiryMonth('');
+      setExpiryMonth("");
       return;
     }
 
@@ -51,7 +51,7 @@ const ExpiryField = ({
     setExpiryYear(value);
     clearErrorWhenComplete(index, value);
   };
-  const ERROR_MSG = '2자리를 입력해 주세요';
+  const ERROR_MSG = "2자리를 입력해 주세요";
 
   const isValidMonth = (value: string) => {
     const month = Number(value);
@@ -59,14 +59,14 @@ const ExpiryField = ({
     return month >= 1 && month <= 12;
   };
 
-  const fillZero = (value: string, expiryType: 'month' | 'year') => {
-    if (expiryType === 'month') {
-      if (value.length === 1 && value !== '0') {
+  const fillZero = (value: string, expiryType: "month" | "year") => {
+    if (expiryType === "month") {
+      if (value.length === 1 && value !== "0") {
         return `0${value}`;
       }
     }
 
-    if (expiryType === 'year') {
+    if (expiryType === "year") {
       if (value.length === 1) {
         return `0${value}`;
       }
@@ -74,7 +74,9 @@ const ExpiryField = ({
   };
 
   const updateTouched = (index: number) => {
-    setIsTouched((prev) => prev.map((touched, i) => (i === index ? true : touched)));
+    setIsTouched((prev) =>
+      prev.map((touched, i) => (i === index ? true : touched)),
+    );
   };
 
   const clearErrorWhenComplete = (index: number, value: string) => {
@@ -84,12 +86,14 @@ const ExpiryField = ({
   };
 
   const updateErrorInfo = (index: number, hasError: boolean) => {
-    const newFlag = errorInfo.flag.map((flag, i) => (i === index ? hasError : flag));
+    const newFlag = errorInfo.flag.map((flag, i) =>
+      i === index ? hasError : flag,
+    );
     const firstErrorIdx = newFlag.indexOf(true);
 
     setErrorInfo({
       flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? '' : ERROR_MSG,
+      currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MSG,
     });
     setIsError(firstErrorIdx !== -1);
   };
@@ -100,7 +104,11 @@ const ExpiryField = ({
     updateErrorInfo(index, !isValid);
   };
 
-  const handleExpiryBlur = (index: number, eValue: string, expiryType: 'month' | 'year') => {
+  const handleExpiryBlur = (
+    index: number,
+    eValue: string,
+    expiryType: "month" | "year",
+  ) => {
     updateTouched(index);
 
     const filledNumber = fillZero(eValue, expiryType);
@@ -109,10 +117,10 @@ const ExpiryField = ({
       return;
     }
 
-    if (expiryType === 'month') {
+    if (expiryType === "month") {
       setExpiryMonth(filledNumber);
     }
-    if (expiryType === 'year') {
+    if (expiryType === "year") {
       setExpiryYear(filledNumber);
     }
 
@@ -123,25 +131,25 @@ const ExpiryField = ({
 
   return (
     <StyledField>
-      <Label value='유효기간' />
+      <Label value="유효기간" />
       <InputWrapper>
         <ExpiryInput
           value={expiryMonth}
           maxLength={2}
-          inputMode='numeric'
-          placeholder='MM'
-          strokeMode={0 === firstErrorIdx ? 'error' : 'default'}
+          inputMode="numeric"
+          placeholder="MM"
+          strokeMode={0 === firstErrorIdx ? "error" : "default"}
           onChange={(e) => handleMonthChange(0, e.target.value)}
-          onBlur={(e) => handleExpiryBlur(0, e.target.value, 'month')}
+          onBlur={(e) => handleExpiryBlur(0, e.target.value, "month")}
         />
         <ExpiryInput
           value={expiryYear}
           maxLength={2}
-          placeholder='YY'
-          inputMode='numeric'
-          strokeMode={1 === firstErrorIdx ? 'error' : 'default'}
+          placeholder="YY"
+          inputMode="numeric"
+          strokeMode={1 === firstErrorIdx ? "error" : "default"}
           onChange={(e) => handleYearChange(1, e.target.value)}
-          onBlur={(e) => handleExpiryBlur(1, e.target.value, 'year')}
+          onBlur={(e) => handleExpiryBlur(1, e.target.value, "year")}
         />
       </InputWrapper>
 

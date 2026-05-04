@@ -1,16 +1,16 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import CardPreviewSection from './CardPreviewSection';
+import CardPreviewSection from "./CardPreviewSection";
 
 const meta = {
-  title: 'feature/CardRegister/components/CardPreviewSection',
+  title: "feature/CardRegister/components/CardPreviewSection",
   component: CardPreviewSection,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     cardInfo: {
-      cardNumbers: ['', '', '', ''],
-      expiryMonth: '',
-      expiryYear: '',
+      cardNumbers: ["", "", "", ""],
+      expiryMonth: "",
+      expiryYear: "",
     },
   },
 } satisfies Meta<typeof CardPreviewSection>;
@@ -23,9 +23,9 @@ export const Empty: Story = {};
 export const Filled: Story = {
   args: {
     cardInfo: {
-      cardNumbers: ['4123', '5678', '1234', '5678'],
-      expiryMonth: '12',
-      expiryYear: '30',
+      cardNumbers: ["4123", "5678", "1234", "5678"],
+      expiryMonth: "12",
+      expiryYear: "30",
     },
   },
 };

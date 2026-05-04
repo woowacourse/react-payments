@@ -1,19 +1,23 @@
-import styled from 'styled-components';
-import type {CardInfoType} from '../../../../../common/types/CardInfoType';
-import CardBrandLogo from '../CardBrandLogo/CardBrandLogo';
-import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDisplay';
-import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
+import styled from "styled-components";
+import type { CardInfoType } from "../../../../../common/types/CardInfoType";
+import CardBrandLogo from "../CardBrandLogo/CardBrandLogo";
+import CardExpiryDateDisplay from "../CardExpiryDateDisplay/CardExpiryDateDisplay";
+import CardNumberDisplay from "../CardNumberDisplay/CardNumberDisplay";
 
-const CardPreviewContainer = ({cardInfo}: {cardInfo: CardInfoType}) => {
-  const {cardNumbers, expiryMonth, expiryYear} = cardInfo;
+const CardPreviewContainer = ({ cardInfo }: { cardInfo: CardInfoType }) => {
+  const { cardNumbers, expiryMonth, expiryYear } = cardInfo;
 
-  const getBrandName = (cardNumbers: string[]): 'visa' | 'masterCard' | null => {
-    const fullNumber = cardNumbers.map((chunk) => chunk.padEnd(4, '#')).join('');
+  const getBrandName = (
+    cardNumbers: string[],
+  ): "visa" | "masterCard" | null => {
+    const fullNumber = cardNumbers
+      .map((chunk) => chunk.padEnd(4, "#"))
+      .join("");
 
-    if (fullNumber.startsWith('4')) return 'visa';
+    if (fullNumber.startsWith("4")) return "visa";
 
     const prefix = Number(fullNumber.slice(0, 2));
-    if (prefix >= 51 && prefix <= 55) return 'masterCard';
+    if (prefix >= 51 && prefix <= 55) return "masterCard";
 
     return null;
   };
@@ -26,7 +30,10 @@ const CardPreviewContainer = ({cardInfo}: {cardInfo: CardInfoType}) => {
       </CardHeader>
       <CardBody>
         <CardNumberDisplay cardNumbers={cardNumbers} />
-        <CardExpiryDateDisplay expiryMonth={expiryMonth} expiryYear={expiryYear} />
+        <CardExpiryDateDisplay
+          expiryMonth={expiryMonth}
+          expiryYear={expiryYear}
+        />
       </CardBody>
     </Container>
   );

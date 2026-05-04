@@ -1,7 +1,7 @@
-import Label from '../../../../../common/components/Label/Label';
-import Input from '../../../../../common/components/Input/Input';
-import {useState} from 'react';
-import styled from 'styled-components';
+import Label from "../../../../../common/components/Label/Label";
+import Input from "../../../../../common/components/Input/Input";
+import { useState } from "react";
+import styled from "styled-components";
 
 const CvcField = ({
   cvcNumber,
@@ -14,11 +14,11 @@ const CvcField = ({
 }) => {
   const INPUT_COUNT = 1;
   const CVC_LENGTH = 3;
-  const createFlags = () => Array.from({length: INPUT_COUNT}, () => false);
+  const createFlags = () => Array.from({ length: INPUT_COUNT }, () => false);
 
   const [errorInfo, setErrorInfo] = useState({
     flag: createFlags(),
-    currentErrorMsg: '',
+    currentErrorMsg: "",
   });
   const [isTouched, setIsTouched] = useState(createFlags());
 
@@ -32,10 +32,12 @@ const CvcField = ({
     clearErrorWhenComplete(index, value);
   };
 
-  const ERROR_MSG = 'CVC 번호 3자리를 입력해 주세요';
+  const ERROR_MSG = "CVC 번호 3자리를 입력해 주세요";
 
   const updateTouched = (index: number) => {
-    setIsTouched((prev) => prev.map((touched, i) => (i === index ? true : touched)));
+    setIsTouched((prev) =>
+      prev.map((touched, i) => (i === index ? true : touched)),
+    );
   };
 
   const clearErrorWhenComplete = (index: number, value: string) => {
@@ -45,12 +47,14 @@ const CvcField = ({
   };
 
   const updateErrorInfo = (index: number, hasError: boolean) => {
-    const newFlag = errorInfo.flag.map((flag, i) => (i === index ? hasError : flag));
+    const newFlag = errorInfo.flag.map((flag, i) =>
+      i === index ? hasError : flag,
+    );
     const firstErrorIdx = newFlag.indexOf(true);
 
     setErrorInfo({
       flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? '' : ERROR_MSG,
+      currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MSG,
     });
     setIsError(firstErrorIdx !== -1);
   };
@@ -66,14 +70,14 @@ const CvcField = ({
 
   return (
     <StyledField>
-      <Label value='CVC' />
+      <Label value="CVC" />
       <InputWrapper>
         <CvcInput
           value={cvcNumber}
           maxLength={3}
-          inputMode='numeric'
-          placeholder='123'
-          strokeMode={0 === firstErrorIdx ? 'error' : 'default'}
+          inputMode="numeric"
+          placeholder="123"
+          strokeMode={0 === firstErrorIdx ? "error" : "default"}
           onChange={(e) => handleCvcNumberChange(0, e.target.value)}
           onBlur={(e) => handleCvcBlur(0, e.target.value)}
         />

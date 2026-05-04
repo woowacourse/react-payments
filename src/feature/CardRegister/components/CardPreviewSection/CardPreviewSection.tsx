@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import type {CardInfoType} from '../../../../common/types/CardInfoType';
-import CardPreviewContainer from './CardPreviewContainer/CardPreviewContainer';
+import styled from "styled-components";
+import type { CardInfoType } from "../../../../common/types/CardInfoType";
+import CardPreviewContainer from "./CardPreviewContainer/CardPreviewContainer";
 
-const CardPreviewSection = ({cardInfo}: {cardInfo: CardInfoType}) => {
+const CardPreviewSection = ({ cardInfo }: { cardInfo: CardInfoType }) => {
   return (
     <Container>
       <CardPreviewContainer cardInfo={cardInfo} />

@@ -1,18 +1,18 @@
-import {useState} from 'react';
-import type {Meta, StoryObj} from '@storybook/react-vite';
-import {fn} from 'storybook/test';
+import { useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 
-import InfoInputSection from './InfoInputSection';
+import InfoInputSection from "./InfoInputSection";
 
 const meta = {
-  title: 'feature/CardRegister/components/InfoInputSection',
+  title: "feature/CardRegister/components/InfoInputSection",
   component: InfoInputSection,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     cardInfo: {
-      cardNumbers: ['', '', '', ''],
-      expiryMonth: '',
-      expiryYear: '',
+      cardNumbers: ["", "", "", ""],
+      expiryMonth: "",
+      expiryYear: "",
     },
     cardInfoHandlers: {
       setCardNumbers: fn(),
@@ -30,9 +30,9 @@ export const Empty: Story = {};
 export const Partial: Story = {
   args: {
     cardInfo: {
-      cardNumbers: ['4123', '56', '', ''],
-      expiryMonth: '1',
-      expiryYear: '',
+      cardNumbers: ["4123", "56", "", ""],
+      expiryMonth: "1",
+      expiryYear: "",
     },
   },
 };
@@ -40,9 +40,9 @@ export const Partial: Story = {
 export const Filled: Story = {
   args: {
     cardInfo: {
-      cardNumbers: ['4123', '5678', '1234', '5678'],
-      expiryMonth: '12',
-      expiryYear: '30',
+      cardNumbers: ["4123", "5678", "1234", "5678"],
+      expiryMonth: "12",
+      expiryYear: "30",
     },
   },
 };
@@ -56,8 +56,8 @@ export const Interactive: Story = {
     return (
       <InfoInputSection
         {...args}
-        cardInfo={{cardNumbers, expiryMonth, expiryYear}}
-        cardInfoHandlers={{setCardNumbers, setExpiryMonth, setExpiryYear}}
+        cardInfo={{ cardNumbers, expiryMonth, expiryYear }}
+        cardInfoHandlers={{ setCardNumbers, setExpiryMonth, setExpiryYear }}
       />
     );
   },
