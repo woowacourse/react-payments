@@ -11,12 +11,28 @@ interface Props {
   setValue: (value: { month: string; year: string }) => void;
 }
 
-export default function ExpirationDateSection({ value, setValue }: Props) {
+const getMonthError = (month: string): string => {
+  if (month === '') return '';
+  if (isIncompleteRange(month, 2)) return '월/연은 2자리수여야 합니다!';
+
+  const monthNum = Number(month);
+  if (monthNum < 1 || monthNum > 12) return '월은 1월부터 12월 사이여야 합니다!';
+
+  return '';
+}
+
+const getYearError = (year: string): string => {
+  if (year === '') return '';
+  if (isIncompleteRange(year, 2)) return '월/연은 2자리수여야 합니다!';
+
+  return '';
+}
+
+const ExpirationDateSection = ({ value, setValue }: Props) => {
   const [errors, setErrors] = useState({ month: false, year: false });
-  const [errorMessage, setErrorMessage] = useState('');
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  function handleOnChange(inputValue: string, type: 'month' | 'year') {
+  const handleOnChange = (inputValue: string, type: 'month' | 'year') => {
     if (!isInputValidate(inputValue, 2)) return;
 
     const newValue = { ...value, [type]: inputValue };
@@ -27,58 +43,24 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
     }
   }
 
-  function handleOnBlur(inputValue: string, type: 'month' | 'year') {
-    const newError = { ...errors };
-    if (type === 'month') {
-      const monthNum = Number(inputValue);
-      if (isIncompleteRange(inputValue, 2) || monthNum < 1 || monthNum > 12) {
-        newError.month = true;
-      } else {
-        newError.month = false;
-      }
-    } else {
-      if (isIncompleteRange(inputValue, 2)) {
-        newError.year = true;
-      } else {
-        newError.year = false;
-      }
-    }
+  const handleOnBlur = (inputValue: string, type: 'month' | 'year') => {
+    const isError = type === 'month' 
+      ? getMonthError(inputValue) !== '' 
+      : getYearError(inputValue) !== '';
 
-    let monthErrMsg = '';
-    let yearErrMsg = '';
-
-    if (newError.month) {
-      const targetMonthStr = type === 'month' ? inputValue : value.month;
-      const targetMonthNum = Number(targetMonthStr);
-      if (isIncompleteRange(targetMonthStr, 2)) {
-        monthErrMsg = '월/연은 2자리수여야 합니다!';
-      } else if (targetMonthNum < 1 || targetMonthNum > 12) {
-        monthErrMsg = '월은 1월부터 12월 사이여야 합니다!';
-      }
-    }
-
-    if (newError.year) {
-      yearErrMsg = '월/연은 2자리수여야 합니다!';
-    }
-
-    let newErrorMessage = '';
-
-    if (type === 'month') {
-      newErrorMessage = monthErrMsg || yearErrMsg;
-    } else {
-      newErrorMessage = yearErrMsg || monthErrMsg;
-    }
-
-    setErrors(newError);
-    setErrorMessage(newErrorMessage);
+    setErrors(prev => ({ ...prev, [type]: isError }));
   }
+
+  const monthErrMsg = errors.month ? getMonthError(value.month) : '';
+  const yearErrMsg = errors.year ? getYearError(value.year) : '';
+  const finalErrorMessage = monthErrMsg || yearErrMsg;
 
   return (
     <CommonSection
       title="카드 유효기간을 입력해 주세요"
       description="월/년도(MMYY)를 순서대로 입력해 주세요."
       label="유효기간"
-      errorMessage={errorMessage}
+      errorMessage={finalErrorMessage}
     >
       <NumberInput
         value={value.month}
@@ -99,3 +81,5 @@ export default function ExpirationDateSection({ value, setValue }: Props) {
     </CommonSection>
   );
 }
+
+export default ExpirationDateSection;
