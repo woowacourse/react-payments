@@ -21,8 +21,8 @@ export default function EXPInputWrapper({
     mm: string | null;
     yy: string | null;
   }>({
-    mm: "",
-    yy: "",
+    mm: null,
+    yy: null,
   });
 
   const setError = (key: "mm" | "yy") => (message: string | null) => {

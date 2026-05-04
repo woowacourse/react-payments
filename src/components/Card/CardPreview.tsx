@@ -4,7 +4,7 @@ import Mastercard from "../../../public/Mastercard.svg";
 import Visa from "../../../public/Visa.svg";
 
 interface Props {
-  cardNumbers: string[];
+  cardNumbers: { first: string; second: string; third: string; fourth: string };
   EXP: { mm: string; yy: string };
 }
 
@@ -19,17 +19,18 @@ export default function CardPreview({ cardNumbers, EXP }: Props) {
         )}
       </CardBrandLogo>
       <CardNumberList>
-        {cardNumbers.map((number, index) =>
-          index > 1 ? (
-            <CardNumber key={`${number}-${index}`}>
-              {number.split("").map((num, bulletIndex) => (
-                <BulletStyle key={`${num}-${index}-${bulletIndex}`} />
-              ))}
-            </CardNumber>
-          ) : (
-            <CardNumber key={`${number}-${index}`}>{number}</CardNumber>
-          ),
-        )}
+        <CardNumber>{cardNumbers.first}</CardNumber>
+        <CardNumber>{cardNumbers.second}</CardNumber>
+        <CardNumber>
+          {cardNumbers.third.split("").map((_, bulletValue) => (
+            <BulletStyle key={bulletValue} />
+          ))}
+        </CardNumber>
+        <CardNumber>
+          {cardNumbers.fourth.split("").map((_, bulletValue) => (
+            <BulletStyle key={bulletValue} />
+          ))}
+        </CardNumber>
       </CardNumberList>
       <CardExpiry>
         <EXPNumber>{EXP.mm}</EXPNumber>
