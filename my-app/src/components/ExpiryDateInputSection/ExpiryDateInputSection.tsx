@@ -56,6 +56,7 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
           <input
             key={i}
             maxLength={EXPIRY_MAX_LENGTH}
+            inputMode="numeric"
             value={inputValues[i] || ""}
             onChange={(e) => onChange(i, e.target.value)}
             onBlur={handleBlur}

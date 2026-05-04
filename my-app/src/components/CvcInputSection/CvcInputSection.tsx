@@ -35,6 +35,7 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
       <ValidatedInputGroup errorMessage={errorMessage}>
         <input
           maxLength={CVC_MAX_LENGTH}
+          inputMode="numeric"
           value={inputValue}
           onChange={(e) => onChange(e.target.value)}
           onBlur={handleBlur}

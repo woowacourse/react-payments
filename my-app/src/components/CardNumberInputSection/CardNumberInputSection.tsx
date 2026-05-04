@@ -56,6 +56,7 @@ const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps)
           <input
             key={i}
             maxLength={CARD_NUMBER_MAX_LENGTH}
+            inputMode="numeric"
             value={inputValues[i] || ""}
             onChange={(e) => onChange(i, e.target.value)}
             onBlur={handleBlur}
