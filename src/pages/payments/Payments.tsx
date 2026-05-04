@@ -4,6 +4,7 @@ import styles from './Payments.module.css';
 import { useState } from 'react';
 import { CreditCard } from '../../core/components/creditCard';
 import { FormGroup } from '../../core/components/formGroup';
+import { Field } from '../../core/components/field';
 import { Input } from '../../core/components/input';
 import { validateCardNumber, validateCvc, validateExpirationDate } from './validator';
 import { isNumericString } from '../../core/utils/validator';
@@ -135,65 +136,61 @@ export const Payments = () => {
         cardNumberList={cardNumbers}
         expirationDate={[expirationDate.month, expirationDate.year]}
       />
-      <FormGroup
-        title="결제할 카드 번호를 입력해 주세요"
-        subTitle="본인 명의의 카드만 결제 가능합니다."
-        label="카드 번호"
-        errorMessage={renderErrorMessageCardNumbers(cardNumbers)}
-      >
-        {cardNumbers.map((value, index) => (
+      <FormGroup title="결제할 카드 번호를 입력해 주세요" subTitle="본인 명의의 카드만 결제 가능합니다.">
+        <Field label="카드 번호" errorMessage={renderErrorMessageCardNumbers(cardNumbers)}>
+          {cardNumbers.map((value, index) => (
+            <Input
+              type="tel"
+              key={index}
+              value={value}
+              maxLength={4}
+              placeholder="1234"
+              isError={renderErrorCardNumberInput(cardNumbers[index])}
+              onChange={(e) => handleChangeCardNumber(index, e.target.value)}
+              onBlur={() => handleBlurCardNumber(index)}
+            />
+          ))}
+        </Field>
+      </FormGroup>
+      <FormGroup title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요">
+        <Field label="유효기간" errorMessage={renderErrorMessageExpirationDate(expirationDate)}>
           <Input
             type="tel"
-            key={index}
-            value={value}
-            maxLength={4}
-            placeholder="1234"
-            isError={renderErrorCardNumberInput(cardNumbers[index])}
-            onChange={(e) => handleChangeCardNumber(index, e.target.value)}
-            onBlur={() => handleBlurCardNumber(index)}
+            value={expirationDate.month}
+            maxLength={2}
+            onChange={(e) => handleChangeExpirationDate('month', e.target.value)}
+            onBlur={() => {
+              handleBlurExpirationDate('month');
+            }}
+            isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.month}
+            placeholder="MM"
           />
-        ))}
-      </FormGroup>
-      <FormGroup
-        title="카드 유효기간을 입력해 주세요"
-        subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
-        label="유효기간"
-        errorMessage={renderErrorMessageExpirationDate(expirationDate)}
-      >
-        <Input
-          type="tel"
-          value={expirationDate.month}
-          maxLength={2}
-          onChange={(e) => handleChangeExpirationDate('month', e.target.value)}
-          onBlur={() => {
-            handleBlurExpirationDate('month');
-          }}
-          isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.month}
-          placeholder="MM"
-        />
-        <Input
-          type="tel"
-          value={expirationDate.year}
-          maxLength={2}
-          onChange={(e) => handleChangeExpirationDate('year', e.target.value)}
-          onBlur={() => {
-            handleBlurExpirationDate('year');
-          }}
-          isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.year}
-          placeholder="YY"
-        />
+          <Input
+            type="tel"
+            value={expirationDate.year}
+            maxLength={2}
+            onChange={(e) => handleChangeExpirationDate('year', e.target.value)}
+            onBlur={() => {
+              handleBlurExpirationDate('year');
+            }}
+            isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.year}
+            placeholder="YY"
+          />
+        </Field>
       </FormGroup>
 
-      <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={renderErrorMessageCvc(cvc)}>
-        <Input
-          type="tel"
-          value={cvc}
-          maxLength={3}
-          placeholder="123"
-          isError={onBlurCvc && !validateCvc(cvc)}
-          onChange={(e) => handleChangeCvc(e.target.value)}
-          onBlur={() => handleBlurCvc()}
-        />
+      <FormGroup title="CVC 번호를 입력해 주세요">
+        <Field label="CVC" errorMessage={renderErrorMessageCvc(cvc)}>
+          <Input
+            type="tel"
+            value={cvc}
+            maxLength={3}
+            placeholder="123"
+            isError={onBlurCvc && !validateCvc(cvc)}
+            onChange={(e) => handleChangeCvc(e.target.value)}
+            onBlur={() => handleBlurCvc()}
+          />
+        </Field>
       </FormGroup>
     </div>
   );
