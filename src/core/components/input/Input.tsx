@@ -8,7 +8,7 @@ interface InputOwnProps {
   isError?: boolean;
 }
 
-interface InputProps extends ComponentProps<'input'>, InputOwnProps {}
+interface InputProps extends Omit<ComponentProps<'input'>, keyof InputOwnProps>, InputOwnProps {}
 
 export const Input = ({ type = 'text', placeholder, maxLength, isError, value, onChange, onBlur }: InputProps) => {
   return (
