@@ -12,7 +12,13 @@ const Card = ({ cardInfo }: CardProps) => {
     <div css={cardStyle}>
       <div css={cardHeaderStyle}>
         <div css={chipStyle}></div>
-        {cardInfo.brand && <img css={brandLogoStyle} src={cardInfo.brand === "master" ? masterLogo : visaLogo} />}
+        {cardInfo.brand && (
+          <img
+            css={brandLogoStyle}
+            src={cardInfo.brand === "master" ? masterLogo : visaLogo}
+            alt={cardInfo.brand === "master" ? "Mastercard" : "Visa"}
+          />
+        )}
       </div>
       <div>
         <div css={cardNumbersStyle}>
