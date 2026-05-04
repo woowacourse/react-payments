@@ -5,7 +5,7 @@ import {
   validateYearRange,
 } from "@utils/validator";
 
-import { MONTH_MAX_LENGTH } from "./constants";
+import { MONTH_MAX_LENGTH, YEAR_MAX_LENGTH } from "./constants";
 import type { InputStatus } from "./errorMessage";
 
 export const checkCardNumberInputStatus = (
@@ -28,7 +28,9 @@ export const checkCardNumberInputStatus = (
   }
   if (key === "year") {
     if (value.length === 0) return "DEFAULT";
-    if (!validateYearRange(+value)) return "YEAR_RANGE_ERROR";
+    if (value.length === YEAR_MAX_LENGTH && !validateYearRange(+value)) {
+      return "YEAR_RANGE_ERROR";
+    }
     return "DEFAULT";
   }
   return "DEFAULT";
