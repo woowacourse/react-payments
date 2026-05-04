@@ -1,39 +1,23 @@
 import styled from "@emotion/styled";
-import {
-  type ChangeEvent,
-  type Dispatch,
-  type SetStateAction,
-  useId,
-} from "react";
+import { useId } from "react";
 
 interface CardInfoInputProps {
   inputLabel: string;
-  inputConfig: { placeholder: string; maxLength: number }[];
+  inputConfig: { name: string; placeholder: string; maxLength: number }[];
   inputValue: string[];
-  setInputValue: Dispatch<SetStateAction<string[]>>;
-  // validate: () => void;
-  // errorMessage: string;
+  handleChange: (index: number, value: string, name: string) => void;
+  errorMessage: string[];
 }
 
 export default function CardInfoInput({
   inputLabel,
   inputConfig,
   inputValue,
-  setInputValue,
-  // validate,
-  // errorMessage,
+  handleChange,
+  errorMessage,
 }: CardInfoInputProps) {
   const idPrefix = useId();
-
-  const handleChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    // validate();
-    setInputValue((prev) => {
-      const newArray = [...prev];
-      newArray[index] = newValue;
-      return newArray;
-    });
-  };
+  const displayError = errorMessage.find((value) => value !== "") || "";
 
   return (
     <CardInfoInputWrapper>
@@ -49,12 +33,13 @@ export default function CardInfoInput({
             id={`${idPrefix}-${index}`}
             {...config}
             value={inputValue[index]}
-            onChange={(e) => handleChange(index, e)}
+            onChange={(e) => handleChange(index, e.target.value, config.name)}
+            $hasError={!!errorMessage[index]}
           />
         ))}
       </InputContainer>
 
-      {/* {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>} */}
+      {displayError && <ErrorMessage>{displayError}</ErrorMessage>}
     </CardInfoInputWrapper>
   );
 }
@@ -81,22 +66,27 @@ const InputContainer = styled.div`
   width: 100%;
 `;
 
-const CardInfo = styled.input`
+const CardInfo = styled.input<{ $hasError: boolean }>`
   flex: 1;
   min-width: 0;
   height: 32px;
   border: 1px solid rgba(172, 172, 172, 1);
   border-radius: 6px;
   padding: 4px;
+  ${(props) =>
+    props.$hasError &&
+    `
+    border: 1px solid red;
+  `}
 `;
 
-// const ErrorMessage = styled.p`
-//   padding: 0;
-//   margin: 8px 0;
-//   font-size: 9.5px;
-//   font-weight: 400;
-//   line-height: 100%;
-//   letter-spacing: 0%;
-//   vertical-align: middle;
-//   color: rgba(255, 61, 61, 1);
-// `;
+const ErrorMessage = styled.p`
+  padding: 0;
+  margin: 0 0;
+  font-size: 9.5px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: rgba(255, 61, 61, 1);
+`;
