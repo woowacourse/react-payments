@@ -5,7 +5,7 @@ import Visa from "../../../public/Visa.svg";
 
 interface Props {
   cardNumbers: string[];
-  EXP: string[];
+  EXP: { mm: string; yy: string };
 }
 
 export default function CardPreview({ cardNumbers, EXP }: Props) {
@@ -32,8 +32,8 @@ export default function CardPreview({ cardNumbers, EXP }: Props) {
         )}
       </CardNumberList>
       <CardExpiry>
-        <EXPNumber>{EXP[0]}</EXPNumber>
-        {EXP[1] && <EXPNumber>/{EXP[1]}</EXPNumber>}
+        <EXPNumber>{EXP.mm}</EXPNumber>
+        {EXP.yy && <EXPNumber>/{EXP.yy}</EXPNumber>}
       </CardExpiry>
     </CardPreviewContainer>
   );
