@@ -5,6 +5,8 @@ import { inputStyle } from "../../styles/inputStyle";
 
 const NUMERIC_REGEX = /^\d+$/;
 const VALID_MONTH_REGEX = /^(0[1-9]|1[0-2])$/;
+const EXPIRY_MAX_LENGTH = 2;
+const EXPIRY_FIELD_COUNT = 2;
 
 type ExpiryDateInputSectionProps = {
   onValueHandler: (cardInfo: string[]) => void;
@@ -50,10 +52,10 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
       tag="유효기간"
     >
       <ValidatedInputGroup errorMessage={errorMessage}>
-        {[0, 1].map((i) => (
+        {Array.from({ length: EXPIRY_FIELD_COUNT }, (_, i) => (
           <input
             key={i}
-            maxLength={2}
+            maxLength={EXPIRY_MAX_LENGTH}
             value={inputValues[i] || ""}
             onChange={(e) => onChange(i, e.target.value)}
             onBlur={handleBlur}

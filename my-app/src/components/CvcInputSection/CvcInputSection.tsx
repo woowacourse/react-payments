@@ -4,6 +4,7 @@ import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 import { inputStyle } from "../../styles/inputStyle";
 
 const NUMERIC_REGEX = /^\d+$/;
+const CVC_MAX_LENGTH = 3;
 
 type CvcInputSectionProps = {
   onValueHandler: (cardInfo: string) => void;
@@ -33,7 +34,7 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
     <InputSectionLayout title="CVC번호를 입력해 주세요" message="" tag="CVC">
       <ValidatedInputGroup errorMessage={errorMessage}>
         <input
-          maxLength={3}
+          maxLength={CVC_MAX_LENGTH}
           value={inputValue}
           onChange={(e) => onChange(e.target.value)}
           onBlur={handleBlur}

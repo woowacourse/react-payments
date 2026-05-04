@@ -5,6 +5,8 @@ import { decideBrandName } from "../../utils/decideBrandName";
 import { inputStyle } from "../../styles/inputStyle";
 
 const NUMERIC_REGEX = /^\d+$/;
+const CARD_NUMBER_MAX_LENGTH = 4;
+const CARD_NUMBER_FIELD_COUNT = 4;
 
 type CardNumberInputSectionProps = {
   onValueHandler: (cardInfo: string[], brand?: string) => void;
@@ -50,10 +52,10 @@ const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps)
       tag="카드 번호"
     >
       <ValidatedInputGroup errorMessage={errorMessage}>
-        {[0, 1, 2, 3].map((i) => (
+        {Array.from({ length: CARD_NUMBER_FIELD_COUNT }, (_, i) => (
           <input
             key={i}
-            maxLength={4}
+            maxLength={CARD_NUMBER_MAX_LENGTH}
             value={inputValues[i] || ""}
             onChange={(e) => onChange(i, e.target.value)}
             onBlur={handleBlur}
