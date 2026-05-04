@@ -3,6 +3,8 @@ import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 import { inputStyle } from "../../styles/inputStyle";
 
+const NUMERIC_REGEX = /^\d+$/;
+
 type CvcInputSectionProps = {
   onValueHandler: (cardInfo: string) => void;
 };
@@ -19,7 +21,7 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
 
   const getValidationError = (value: string) => {
     if (!value) return "";
-    if (!/^\d+$/.test(value)) return "숫자만 입력 가능합니다";
+    if (!NUMERIC_REGEX.test(value)) return "숫자만 입력 가능합니다";
     return "";
   };
 

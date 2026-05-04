@@ -4,6 +4,8 @@ import { useState } from "react";
 import { decideBrandName } from "../../utils/decideBrandName";
 import { inputStyle } from "../../styles/inputStyle";
 
+const NUMERIC_REGEX = /^\d+$/;
+
 type CardNumberInputSectionProps = {
   onValueHandler: (cardInfo: string[], brand?: string) => void;
 };
@@ -25,7 +27,7 @@ const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps)
   const getValidationError = (values: string[]) => {
     for (const [i, value] of values.entries()) {
       if (!value) continue;
-      if (!/^\d+$/.test(value)) {
+      if (!NUMERIC_REGEX.test(value)) {
         return { index: i, message: "숫자만 입력 가능합니다" };
       }
       if (i === 0 && decideBrandName(value) === "") {

@@ -3,6 +3,9 @@ import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 import { inputStyle } from "../../styles/inputStyle";
 
+const NUMERIC_REGEX = /^\d+$/;
+const VALID_MONTH_REGEX = /^(0[1-9]|1[0-2])$/;
+
 type ExpiryDateInputSectionProps = {
   onValueHandler: (cardInfo: string[]) => void;
 };
@@ -24,10 +27,10 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
   const getValidationError = (values: string[]) => {
     for (const [i, value] of values.entries()) {
       if (!value) continue;
-      if (!/^\d+$/.test(value)) {
+      if (!NUMERIC_REGEX.test(value)) {
         return { index: i, message: "숫자만 입력 가능합니다" };
       }
-      if (i === 0 && !/^(0[1-9]|1[0-2])$/.test(value)) {
+      if (i === 0 && !VALID_MONTH_REGEX.test(value)) {
         return { index: i, message: "유효한 날짜를 입력해주세요" };
       }
     }
