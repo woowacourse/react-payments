@@ -9,12 +9,14 @@ interface Props {
   isError: boolean;
   maxLength: number;
   ref: Ref<HTMLInputElement>;
+  id: string;
 }
 
-const NumberInput = ({value, onChange, onBlur, placeholder, isError, maxLength, ref}: Props) => {
+const NumberInput = ({value, onChange, onBlur, placeholder, isError, maxLength, ref, id}: Props) => {
 
   return (
     <StyledInput
+      id={id}
       type="text"
       inputMode="numeric"
       value={value}

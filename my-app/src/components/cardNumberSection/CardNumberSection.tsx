@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { isInputValidate, isIncompleteRange } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
@@ -18,6 +18,7 @@ const getCardNumberError = (cardNumber: string): string => {
 const CardNumberSection = ({ value, setValue }: Props) => {
   const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const cardNumberIds = useId();
 
   function handleOnChange(inputValue: string, index: number) {
     if (!isInputValidate(inputValue, 4)) return;
@@ -49,10 +50,12 @@ const CardNumberSection = ({ value, setValue }: Props) => {
       description="본인 명의의 카드만 결제 가능합니다"
       label="카드 번호"
       errorMessage={finalErrorMessage}
+      htmlFor={`${cardNumberIds}-0`}
     >
       {value.map((num, index) => (
         <NumberInput
           key={index}
+          id={`${cardNumberIds}-${index}`}
           ref={(el) => {inputRefs.current[index] = el;}}
           value={num}
           onChange={(v) => handleOnChange(v, index)}

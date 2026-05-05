@@ -6,6 +6,7 @@ interface Props {
   label: string;
   children: React.ReactNode;
   errorMessage: string;
+  htmlFor: string;
 }
 
 export default function CommonSection({
@@ -14,6 +15,7 @@ export default function CommonSection({
   label,
   children,
   errorMessage,
+  htmlFor
 }: Props) {
   return (
     <Container>
@@ -22,7 +24,7 @@ export default function CommonSection({
         <Description>{description}</Description>
       </Header>
       <InputSection>
-        <Label>{label}</Label>
+        <Label htmlFor={htmlFor}>{label}</Label>
         <InputGroup>{children}</InputGroup>
         <Error>{errorMessage}</Error>
       </InputSection>

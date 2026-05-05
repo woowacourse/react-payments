@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { isIncompleteRange, isInputValidate } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
@@ -31,6 +31,7 @@ const getYearError = (year: string): string => {
 const ExpirationDateSection = ({ value, setValue }: Props) => {
   const [errors, setErrors] = useState({ month: false, year: false });
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const expirationDateIds = useId();
 
   const handleOnChange = (inputValue: string, type: 'month' | 'year') => {
     if (!isInputValidate(inputValue, 2)) return;
@@ -61,8 +62,10 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
       description="월/년도(MMYY)를 순서대로 입력해 주세요."
       label="유효기간"
       errorMessage={finalErrorMessage}
+      htmlFor={`${expirationDateIds}-month`}
     >
       <NumberInput
+        id={`${expirationDateIds}-month`}
         value={value.month}
         onChange={(v) => handleOnChange(v, 'month')}
         onBlur={(v) => handleOnBlur(v, 'month')}
@@ -72,6 +75,7 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         ref={(el) => {inputRefs.current[0] = el;}}
       />
       <NumberInput
+        id={`${expirationDateIds}-year`}
         value={value.year}
         onChange={(v) => handleOnChange(v, 'year')}
         onBlur={(v) => handleOnBlur(v, 'year')}
