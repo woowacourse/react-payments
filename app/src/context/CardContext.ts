@@ -1,8 +1,9 @@
 import { createContext } from 'react';
+import type { CardExpiryDateType } from '../types/cardExpiryDate';
 
 export type CardContextType = {
   cardNumber: string[];
-  cardExpiryDate: { 'expiry-month': string; 'expiry-year': string };
+  cardExpiryDate: CardExpiryDateType;
   networkBrand: string;
   setCardNumber: React.Dispatch<React.SetStateAction<CardContextType['cardNumber']>>;
   setCardExpiryDate: React.Dispatch<React.SetStateAction<CardContextType['cardExpiryDate']>>;
