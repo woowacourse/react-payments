@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { ErrorMessage } from "./ErrorMessage";
+import { sanitizeErrors } from "../../Utils";
 import { CardInput } from "../../style/CardStyles";
 import { Validator } from "../../validators/CardValidator";
 
@@ -12,33 +13,33 @@ export function CardCVCInput() {
     message: "",
   });
 
-  const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
+  const runValidation = (validators: (() => void)[]): boolean => {
     try {
-      Validator.isNumber(value);
-      setError({ ...isError, [id]: { state: false }, message: "" });
-      setCardCVC(e.target.value);
-    } catch (err) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: (err as Error).message,
+      validators.forEach((validate) => {
+        validate();
       });
+      setError({ state: false, message: "" });
+      return true;
+    } catch (err) {
+      setError({ state: true, message: (err as Error).message });
+      return false;
     }
   };
 
+  const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (!runValidation([() => Validator.isNumber(value)])) return;
+    setCardCVC(value);
+  };
+
   const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
-    try {
-      Validator.isValidCardCVCLength(value, e.target.maxLength);
-      setError({ ...isError, [id]: { state: false }, message: "" });
-    } catch (err) {
-      setError({
-        ...isError,
-        [id]: { state: true },
-        message: (err as Error).message,
-      });
-    }
+    const { value } = e.target;
+    if (
+      !runValidation([
+        () => Validator.isValidCardCVCLength(value, e.target.maxLength),
+      ])
+    )
+      return;
   };
 
   return (
@@ -54,7 +55,7 @@ export function CardCVCInput() {
         onChange={changeCardCVC}
         onBlur={handleBlurCVC}
       />
-      <ErrorMessage messages={[isError["message"]]} />
+      <ErrorMessage messages={sanitizeErrors([isError["message"]])} />
     </CardCVCContainer>
   );
 }

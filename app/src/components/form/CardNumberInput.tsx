@@ -27,48 +27,55 @@ export function CardNumberInput() {
     },
   });
 
-  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
+  const runValidation = (validators: (() => void)[], id: string): boolean => {
     try {
-      Validator.isNumber(value);
+      validators.forEach((validate) => {
+        validate();
+      });
       setError({ ...isError, [id]: { state: false, message: "" } });
-      setCardNumber({ ...cardNumber, [id]: value });
+      return true;
     } catch (err) {
       setError({
         ...isError,
         [id]: { state: true, message: (err as Error).message },
       });
+      return false;
     }
+  };
+
+  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, id } = e.target;
+    if (!runValidation([() => Validator.isNumber(value)], id)) return;
+    setCardNumber({ ...cardNumber, [id]: value });
   };
 
   const changeFirstDigitsCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const { value, id } = e.target;
-    try {
-      Validator.isNumber(value);
-      Validator.isValidNetworkBrand(value);
-      setError({ ...isError, [id]: { state: false, message: "" } });
-      setCardNumber({ ...cardNumber, [id]: value });
-    } catch (err) {
-      setError({
-        ...isError,
-        [id]: { state: true, message: (err as Error).message },
-      });
-    }
+    if (
+      !runValidation(
+        [
+          () => Validator.isNumber(value),
+          () => Validator.isValidNetworkBrand(value),
+        ],
+        id,
+      )
+    )
+      return;
+
+    setCardNumber({ ...cardNumber, [id]: value });
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    try {
-      Validator.isValidCardNumberLength(value, e.target.maxLength);
-      setError({ ...isError, [id]: { state: false, message: "" } });
-    } catch (err) {
-      setError({
-        ...isError,
-        [id]: { state: true, message: (err as Error).message },
-      });
-    }
+    if (
+      !runValidation(
+        [() => Validator.isValidCardNumberLength(value, e.target.maxLength)],
+        id,
+      )
+    )
+      return;
   };
 
   return (

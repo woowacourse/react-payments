@@ -18,47 +18,58 @@ export function CardExpiryDateInput() {
     },
   });
 
-  const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
+  const runValidation = (validators: (() => void)[], id: string): boolean => {
     try {
-      Validator.isNumber(value);
-      Validator.isValidMonth(value);
+      validators.forEach((validate) => {
+        validate();
+      });
       setError({ ...isError, [id]: { state: false, message: "" } });
-      setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+      return true;
     } catch (err) {
       setError({
         ...isError,
         [id]: { state: true, message: (err as Error).message },
       });
+      return false;
     }
+  };
+
+  const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, id } = e.target;
+    if (
+      !runValidation(
+        [() => Validator.isNumber(value), () => Validator.isValidMonth(value)],
+        id,
+      )
+    )
+      return;
+    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
   const changeCardExpiryYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    try {
-      Validator.isNumber(value);
-      Validator.isValidYear(value);
-      setError({ ...isError, [id]: { state: false, message: "" } });
-      setCardExpiryDate({ ...cardExpiryDate, [id]: value });
-    } catch (err) {
-      setError({
-        ...isError,
-        [id]: { state: true, message: (err as Error).message },
-      });
-    }
+    if (
+      !runValidation(
+        [() => Validator.isNumber(value), () => Validator.isValidYear(value)],
+        id,
+      )
+    )
+      return;
+    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    try {
-      Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
-      setError({ ...isError, [id]: { state: false, message: "" } });
-    } catch (err) {
-      setError({
-        ...isError,
-        [id]: { state: true, message: (err as Error).message },
-      });
-    }
+    if (
+      !runValidation(
+        [
+          () =>
+            Validator.isValidCardExpiryDateLength(value, e.target.maxLength),
+        ],
+        id,
+      )
+    )
+      return;
   };
 
   return (
