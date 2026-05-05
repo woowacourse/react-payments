@@ -1,4 +1,4 @@
-import { Validator } from "../src/validators/CardValidator";
+import { Validator } from "../validators/CardValidator";
 
 describe("카드 정보 검증기 테스트", () => {
   describe("카드값 타입 테스트", () => {

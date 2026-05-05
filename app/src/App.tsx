@@ -1,4 +1,4 @@
-import { Card } from "./components/Card.tsx";
+import { Card } from "./features/card/components/Card";
 
 function App() {
   return (
