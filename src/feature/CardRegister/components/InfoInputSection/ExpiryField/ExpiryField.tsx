@@ -8,6 +8,7 @@ import {
   isNumeric,
   isValidMonth,
 } from '../../../utils/validator';
+import { useState } from 'react';
 
 const ExpiryField = ({
   expiryMonth,
@@ -43,13 +44,20 @@ const ExpiryField = ({
     },
   });
 
+  const [monthErrorMessage, setMonthErrorMessage] = useState('');
+
   const handleMonthChange = (eValue: string) => {
     const value = eValue.trim();
 
     if (!isNumeric(value)) return;
     if (!isInMaxLength(value, EXPIRY_LENGTH)) return;
-    if (isMaxLength(value, EXPIRY_LENGTH) && !isValidMonth(value)) return;
+    if (isMaxLength(value, EXPIRY_LENGTH) && !isValidMonth(value)) {
+      setMonthErrorMessage('월은 01부터 12까지 입력해 주세요');
+      touch(0);
+      return;
+    }
 
+    setMonthErrorMessage('');
     setExpiryMonth(value);
   };
 
@@ -116,7 +124,7 @@ const ExpiryField = ({
         />
       </InputWrapper>
 
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage>{monthErrorMessage || errorMessage}</ErrorMessage>
     </StyledField>
   );
 };
