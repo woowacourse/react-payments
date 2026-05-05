@@ -17,10 +17,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
   // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. required
-  // 2. numberOnly -> update 제외됨.
-  // 3. MM -> 1-12인지
-  // 4. YY -> 오늘로부터 5년 이내인지.
+  // 1. numberOnly -> update 제외됨.
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setCurrentIndex(index);
@@ -30,33 +27,17 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
       return;
     }
 
-    const newValue = [...value];
+    const newValue = [...value] as CardInfo['expirationPeriod'];
     newValue[index] = inputValue;
     onUpdated(newValue);
-    setErrorStatus(inputValue === '' ? 'required' : null);
-
-    // 1. invalid mm -> error status
-    // 2. invlid yy -> error status
-    // 3. invalid mm/yy -> 같은 error status
-
-    if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
-      return;
-    }
-
-    if (index === 0 && !isValidMonth(inputValue)) {
-      setErrorStatus('invalidMonth');
-      return;
-    }
-
-    if (index === 1 && !isValidYear(inputValue)) {
-      setErrorStatus('invalidYear');
-      return;
-    }
+    setErrorStatus(null);
   };
 
   // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
   // 1. required
   // 2. invalidLength
+  // 3. MM -> 1-12인지
+  // 4. YY -> 오늘로부터 5년 이내인지.
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setCurrentIndex(index);
@@ -68,6 +49,16 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
 
     if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
       setErrorStatus('invalidLength');
+      return;
+    }
+
+    if (index === 0 && !isValidMonth(inputValue)) {
+      setErrorStatus('invalidMonth');
+      return;
+    }
+
+    if (index === 1 && !isValidYear(inputValue)) {
+      setErrorStatus('invalidYear');
       return;
     }
 
