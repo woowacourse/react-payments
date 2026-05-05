@@ -3,7 +3,6 @@ import styles from './Payments.module.css';
 import { useState } from 'react';
 
 import type { ExpirationDate } from '@/entities/card/types';
-import { getBrand } from '@/entities/card/brand';
 
 import type { CardInfo } from '@/features/cardPreview/CardPreview';
 import { CardPreview } from '@/features/cardPreview/CardPreview';
@@ -11,11 +10,10 @@ import { CardPreview } from '@/features/cardPreview/CardPreview';
 import { CvcFormGroup } from '@/features/cardFormGroup/CvcFormGroup';
 import { CardNumberFormGroup } from '@/features/cardFormGroup/CardNumberFormGroup';
 import { ExpirationDateFormGroup } from '@/features/cardFormGroup/ExpirationDateFormGroup';
+import { CARD_BRAND_FORMAT } from '@/entities/card/brand';
 
 export const Payments = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const brand = getBrand(cardNumbers.join(''));
-
+  const [cardNumbers, setCardNumbers] = useState(CARD_BRAND_FORMAT.default.map(() => ''));
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({ month: '', year: '' });
   const [cvc, setCvc] = useState('');
 
@@ -43,7 +41,6 @@ export const Payments = () => {
       <CardPreview info={cardInfo} />
       <form>
         <CardNumberFormGroup
-          brand={brand}
           cardNumbers={cardNumbers}
           handleChangeCardNumber={handleChangeCardNumber}
         />

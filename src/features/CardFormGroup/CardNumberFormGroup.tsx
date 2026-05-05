@@ -1,13 +1,12 @@
 import { FormGroup } from '@/core/components/formGroup/FormGroup';
 import { Input } from '@/core/components/input/Input';
-import { CARD_BRAND_FORMAT } from '@/entities/card/brand';
-import type { Brand } from '@/entities/card/brand';
-import { useState } from 'react';
 
+import { CARD_BRAND_FORMAT, getBrand } from '@/entities/card/brand';
+
+import { useState } from 'react';
 import { isNumericString } from '@/core/utils/validator';
 
 interface CardNumberFormGroupProps {
-  brand: Brand;
   cardNumbers: string[];
   handleChangeCardNumber: (value: string, index: number) => void;
   errorMessage?: string;
@@ -22,10 +21,10 @@ const ERROR_MESSAGE = {
 };
 
 export const CardNumberFormGroup = ({
-  brand,
   cardNumbers,
   handleChangeCardNumber,
 }: CardNumberFormGroupProps) => {
+  const brand = getBrand(cardNumbers.join(''));
   const INPUT_FORMAT = CARD_BRAND_FORMAT[brand];
   const [inputStates, setInputStates] = useState<InputState[]>(() =>
     INPUT_FORMAT.map(() => 'idle'),
@@ -78,7 +77,7 @@ export const CardNumberFormGroup = ({
         <Input
           type="text"
           inputMode="numeric"
-          key={`${brand}-card-number-${index}`}
+          key={`card-number-${index}`}
           value={cardNumbers[index]}
           placeholder="1234"
           maxLength={size}
