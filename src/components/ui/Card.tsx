@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import type { CardInfo } from '../../types';
+import visaLogo from '/visa.png';
+import mastercardLogo from '/mastercard.png';
 
 interface CardProps {
   cardNumber: CardInfo['cardNumbers'];
@@ -12,9 +14,9 @@ export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardPr
     <div css={cardStyle}>
       <div css={cardHeaderStyle}>
         <div css={cardChipStyle} />
-        {cardBrand === 'visa' && <img css={cardBrandStyle} src={`${import.meta.env.BASE_URL}visa.png`} alt="visa" />}
+        {cardBrand === 'visa' && <img css={cardBrandStyle} src={visaLogo} alt="visa" />}
         {cardBrand === 'mastercard' && (
-          <img css={cardBrandStyle} src={`${import.meta.env.BASE_URL}mastercard.png`} alt="mastercard" />
+          <img css={cardBrandStyle} src={mastercardLogo} alt="mastercard" />
         )}
       </div>
 
