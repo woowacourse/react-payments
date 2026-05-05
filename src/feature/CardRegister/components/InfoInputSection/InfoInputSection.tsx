@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import CvcField from './CvcField/CvCField';
 import ExpiryField from './ExpiryField/ExpiryField';
-import InputContainer from './InputContainer/InputContainer';
 import NumberField from './NumberField/NumberField';
 import type {
   CardInfoHandlersType,
   CardInfoType,
 } from '../../../../common/types/CardInfoType';
 import styled from 'styled-components';
+import FieldSection from './FieldSection/FieldSection';
 
 const InfoInputSection = ({
   cardInfo,
@@ -28,7 +28,7 @@ const InfoInputSection = ({
 
   return (
     <Container>
-      <InputContainer
+      <FieldSection
         title="결제할 카드 번호를 입력해 주세요"
         description="본인 명의의 카드만 결제 가능합니다."
       >
@@ -36,8 +36,8 @@ const InfoInputSection = ({
           cardNumbers={cardNumbers}
           setCardNumbers={setCardNumbers}
         />
-      </InputContainer>
-      <InputContainer
+      </FieldSection>
+      <FieldSection
         title="카드 유효기간을 입력해 주세요"
         description="월/년도(MMYY)를 순서대로 입력해 주세요."
       >
@@ -47,10 +47,10 @@ const InfoInputSection = ({
           setExpiryMonth={setExpiryMonth}
           setExpiryYear={setExpiryYear}
         />
-      </InputContainer>
-      <InputContainer title="CVC 번호를 입력해 주세요">
+      </FieldSection>
+      <FieldSection title="CVC 번호를 입력해 주세요">
         <CvcField cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
-      </InputContainer>
+      </FieldSection>
     </Container>
   );
 };
