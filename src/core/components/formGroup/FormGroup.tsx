@@ -1,7 +1,7 @@
 import styles from './FormGroup.module.css';
 import type { ReactNode } from 'react';
 
-export interface FormGroupProps {
+interface FormGroupProps {
   title: string;
   subTitle?: string;
   label: string;

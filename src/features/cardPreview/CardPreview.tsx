@@ -12,7 +12,7 @@ export interface CardInfo {
   cardNumbers: string[];
   expirationDate: ExpirationDate;
 }
-export interface CardPreviewProps {
+interface CardPreviewProps {
   info: CardInfo;
 }
 
