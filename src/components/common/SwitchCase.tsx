@@ -14,7 +14,7 @@ const SwitchCase = <T,>({ value, caseBy, defaultCase }: SwitchCaseProps<T>) => {
     ({ case: caseValue }) => caseValue === value,
   )?.component;
 
-  return <div>{caseComponent || defaultCase}</div>;
+  return <>{caseComponent || defaultCase}</>;
 };
 
 export default SwitchCase;
