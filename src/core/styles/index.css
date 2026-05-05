@@ -1,0 +1,7 @@
+@import "./mordern-normalize.css";
+@import "./fonts.css";
+@import "./variables.css";
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}

@@ -1,0 +1,38 @@
+.formGroup {
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+  margin: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+  gap: 16px;
+  border: none;
+}
+
+.titleContainer {
+  display: flex;
+  align-content: space-between;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.title {
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.subTitle {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 9.5px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+
+  color: #8b95a1;
+}
