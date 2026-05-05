@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
+import { validateExpiryDate } from "../../utils/validators";
 
 const ExpiryDateInputSection = ({
   onValueHandler,
@@ -21,24 +22,7 @@ const ExpiryDateInputSection = ({
   };
 
   const handleBlur = () => {
-    let errorIndex = -1;
-    let message = "";
-
-    for (let i = 0; i < inputValues.length; i++) {
-      const value = inputValues[i];
-      if (value === "" || value === undefined) continue;
-      if (!/^\d+$/.test(value)) {
-        errorIndex = i;
-        message = "숫자만 입력 가능합니다";
-        break;
-      }
-      if (i === 0 && !/^(0[1-9]|1[0-2])$/.test(value)) {
-        errorIndex = i;
-        message = "유효한 날짜를 입력해주세요";
-        break;
-      }
-    }
-
+    const { errorIndex, message } = validateExpiryDate(inputValues);
     setErrorIndex(errorIndex);
     setErrorMessage(message);
   };

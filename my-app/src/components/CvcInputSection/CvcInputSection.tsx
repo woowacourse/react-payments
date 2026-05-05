@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
+import { validateCvc } from "../../utils/validators";
 
 const CvcInputSection = ({ onValueHandler }: { onValueHandler: (cardInfo: string) => void }) => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -13,10 +14,8 @@ const CvcInputSection = ({ onValueHandler }: { onValueHandler: (cardInfo: string
   };
 
   const handleBlur = () => {
-    if (inputValue === "" || inputValue === undefined) return;
-    if (!/^\d+$/.test(inputValue)) {
-      setErrorMessage("숫자만 입력 가능합니다");
-    }
+    const { message } = validateCvc(inputValue);
+    setErrorMessage(message);
   };
 
   return (

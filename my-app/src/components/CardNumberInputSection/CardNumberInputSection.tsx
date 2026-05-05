@@ -1,7 +1,7 @@
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import { useState } from "react";
-import { decideBrandName } from "../../utils/decideBrandName";
 import { css } from "@emotion/react";
+import { validateCardNumber } from "../../utils/validators";
 
 const CardNumberInputSection = ({
   onValueHandler,
@@ -22,24 +22,7 @@ const CardNumberInputSection = ({
   };
 
   const handleBlur = () => {
-    let errorIndex = -1;
-    let message = "";
-
-    for (let i = 0; i < inputValues.length; i++) {
-      const value = inputValues[i];
-      if (value === "" || value === undefined) continue;
-      if (!/^\d+$/.test(value)) {
-        errorIndex = i;
-        message = "숫자만 입력 가능합니다";
-        break;
-      }
-      if (i === 0 && decideBrandName(value) === "") {
-        errorIndex = i;
-        message = "이 카드 브랜드는 지원하지 않습니다.";
-        break;
-      }
-    }
-
+    const { errorIndex, message } = validateCardNumber(inputValues);
     setErrorIndex(errorIndex);
     setErrorMessage(message);
   };
