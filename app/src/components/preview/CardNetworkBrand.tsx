@@ -1,19 +1,18 @@
-import styled from "@emotion/styled";
-import MasterCard from "../../assets/Mastercard.svg";
-import VisaCard from "../../assets/visa-logo.svg";
+import styled from '@emotion/styled';
+import MasterCard from '../../assets/Mastercard.svg';
+import VisaCard from '../../assets/visa-logo.svg';
 
-export function CardNetworkBrand({ networkBrand }: { networkBrand: string }) {
-  const selectBrandImage = (brand: string) => {
-    if (brand === "visa") return VisaCard;
-    if (brand === "master") return MasterCard;
+type NetworkBrand = 'visa' | 'master';
+
+export function CardNetworkBrand({ networkBrand }: { networkBrand: NetworkBrand }) {
+  const selectBrandImage = (brand: NetworkBrand) => {
+    if (brand === 'visa') return VisaCard;
+    if (brand === 'master') return MasterCard;
   };
 
   return (
     <CardNetworkBrandContainer>
-      <img
-        src={selectBrandImage(networkBrand)}
-        alt={`${networkBrand}-network-brand-logo`}
-      ></img>
+      <img src={selectBrandImage(networkBrand)} alt={`${networkBrand}-network-brand-logo`}></img>
     </CardNetworkBrandContainer>
   );
 }
