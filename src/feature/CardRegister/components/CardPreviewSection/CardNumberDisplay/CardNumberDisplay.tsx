@@ -5,6 +5,14 @@ import {
   CARD_NUMBER_MASK_START_INDEX,
 } from "../../../constants";
 
+const checkMaskCardNumberChunk = (index: number) => {
+  return index >= CARD_NUMBER_MASK_START_INDEX;
+};
+
+const maskCardNumberChunk = (chunk: string) => {
+  return CARD_NUMBER_MASK_CHAR.repeat(chunk.length);
+};
+
 const CardNumberDisplay = ({
   cardNumbers,
 }: {
@@ -13,11 +21,9 @@ const CardNumberDisplay = ({
   return (
     <Container>
       {cardNumbers.map((chunk, index) => {
-        if (index >= CARD_NUMBER_MASK_START_INDEX) {
+        if (checkMaskCardNumberChunk(index)) {
           return (
-            <MaskedChunk key={index}>
-              {CARD_NUMBER_MASK_CHAR.repeat(chunk.length)}
-            </MaskedChunk>
+            <MaskedChunk key={index}>{maskCardNumberChunk(chunk)}</MaskedChunk>
           );
         }
         return <Chunk key={index}>{chunk}</Chunk>;
