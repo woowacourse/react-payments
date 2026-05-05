@@ -12,14 +12,16 @@ export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardPr
     <div css={cardStyle}>
       <div css={cardHeaderStyle}>
         <div css={cardChipStyle} />
-        {cardBrand === 'visa' && <img css={cardBrandStyle} src="/visa.png" alt="visa" />}
-        {cardBrand === 'mastercard' && <img css={cardBrandStyle} src="/mastercard.png" alt="mastercard" />}
+        {cardBrand === 'visa' && <img css={cardBrandStyle} src={`${import.meta.env.BASE_URL}visa.png`} alt="visa" />}
+        {cardBrand === 'mastercard' && (
+          <img css={cardBrandStyle} src={`${import.meta.env.BASE_URL}mastercard.png`} alt="mastercard" />
+        )}
       </div>
 
       <div css={cardInfoWrapperStyle}>
         <div css={cardNumberWrapperStyle}>
           {cardNumber.map((num, index) => (
-            <span>{index < 2 ? num : <span css={hiddenNumberStyle}>{'∙'.repeat(num.length)}</span>}</span>
+            <span key={index}>{index < 2 ? num : <span css={hiddenNumberStyle}>{'∙'.repeat(num.length)}</span>}</span>
           ))}
         </div>
         <div>
