@@ -1,6 +1,6 @@
 export interface CardInfo {
-  cardNumbers: string[];
-  expirationPeriod: string[];
+  cardNumbers: [string, string, string, string];
+  expirationPeriod: [string, string];
   cvc: string;
   cardBrand: CardBrand;
 }
