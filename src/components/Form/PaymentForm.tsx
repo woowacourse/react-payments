@@ -33,52 +33,61 @@ export default function PaymentForm() {
   };
 
   return (
-    <FormContainer>
+    <Container>
       <CardPreview
         cardNumberList={cardNumbers}
         expirationDate={`${expirationDate['month']}/${expirationDate['year']}`}
       />
 
-      <InputFieldLayout
-        sectionTitle={INPUT_FIELD_CONFIG['CARD_NUMBERS'].sectionTitle}
-        hintText={INPUT_FIELD_CONFIG['CARD_NUMBERS'].hintText}
-      >
-        <InputFieldForm<CardNumbersType>
-          id="cardNumbers"
-          label={INPUT_FIELD_CONFIG['CARD_NUMBERS'].label}
-          placeholderArr={INPUT_FIELD_CONFIG['CARD_NUMBERS'].placeholder}
-          fieldMaxLength={4}
-          value={cardNumbers}
-          validator={cardNumbersValidator}
-          onChange={handleCardNumbersChange}
-        />
-      </InputFieldLayout>
+      <FormWrapper>
+        <InputFieldLayout
+          sectionTitle={INPUT_FIELD_CONFIG['CARD_NUMBERS'].sectionTitle}
+          hintText={INPUT_FIELD_CONFIG['CARD_NUMBERS'].hintText}
+        >
+          <InputFieldForm<CardNumbersType>
+            id="cardNumbers"
+            label={INPUT_FIELD_CONFIG['CARD_NUMBERS'].label}
+            placeholderArr={INPUT_FIELD_CONFIG['CARD_NUMBERS'].placeholder}
+            fieldMaxLength={4}
+            value={cardNumbers}
+            validator={cardNumbersValidator}
+            onChange={handleCardNumbersChange}
+          />
+        </InputFieldLayout>
 
-      <InputFieldLayout
-        sectionTitle={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].sectionTitle}
-        hintText={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].hintText}
-      >
-        <InputFieldForm<ExpirationDateType>
-          id="expirationDate"
-          label={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].label}
-          placeholderArr={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].placeholder}
-          fieldMaxLength={2}
-          value={expirationDate}
-          validator={expirationDateValidator}
-          onChange={handleExpirationDateChange}
-        />
-      </InputFieldLayout>
+        <InputFieldLayout
+          sectionTitle={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].sectionTitle}
+          hintText={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].hintText}
+        >
+          <InputFieldForm<ExpirationDateType>
+            id="expirationDate"
+            label={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].label}
+            placeholderArr={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].placeholder}
+            fieldMaxLength={2}
+            value={expirationDate}
+            validator={expirationDateValidator}
+            onChange={handleExpirationDateChange}
+          />
+        </InputFieldLayout>
 
-      <InputFieldLayout sectionTitle={INPUT_FIELD_CONFIG['CVC'].sectionTitle}>
-        <CVCFieldForm />
-      </InputFieldLayout>
-    </FormContainer>
+        <InputFieldLayout sectionTitle={INPUT_FIELD_CONFIG['CVC'].sectionTitle}>
+          <CVCFieldForm />
+        </InputFieldLayout>
+      </FormWrapper>
+    </Container>
   );
 }
 
-const FormContainer = styled.form`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 45px;
+`;
+
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 `;
