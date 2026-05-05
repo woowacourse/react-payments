@@ -27,28 +27,25 @@ export default function AddCardPage() {
 
   const handleCardNumbersUpdate = (cardNumbers: CardInfo['cardNumbers']) => {
     const cardBrand = categorizeCardBrand(cardNumbers);
-    const newFormValue = {
-      ...formValue,
+    setFormValue((prev)=>({
+      ...prev,
       cardNumbers: { value: cardNumbers },
       cardBrand: { value: cardBrand },
-    };
-    setFormValue(newFormValue);
+    }));
   };
 
   const handleExpirationPeriodUpdate = (expirationPeriod: CardInfo['expirationPeriod']) => {
-    const newFormValue = {
-      ...formValue,
+    setFormValue((prev) => ({
+      ...prev,
       expirationPeriod: { value: expirationPeriod },
-    };
-    setFormValue(newFormValue);
+    }));
   };
 
   const handleCVCUpdate = (cvc: CardInfo['cvc']) => {
-    const newFormValue = {
-      ...formValue,
+    setFormValue((prev)=>({
+      ...prev,
       cvc: { value: cvc },
-    };
-    setFormValue(newFormValue);
+    }));
   };
 
   return (
