@@ -1,8 +1,11 @@
+type ValidationResult = { valid: true } | { valid: false; message: string };
+
 export const Validator = {
-  isNumber(value: string) {
+  isNumber(value: string): ValidationResult {
     if (Number.isNaN(Number(value))) {
-      throw new Error('숫자만 입력 가능합니다.');
+      return { valid: false, message: '숫자만 입력 가능합니다.' };
     }
+    return { valid: true };
   },
 
   detectNetworkBrand(value: string): 'visa' | 'master' | '' {
@@ -15,50 +18,55 @@ export const Validator = {
     return '';
   },
 
-  isValidNetworkBrand(value: string) {
+  isValidNetworkBrand(value: string): ValidationResult {
     if (value !== '' && !['4', '5'].includes(value[0])) {
-      throw new Error('유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.');
+      return { valid: false, message: '유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.' };
     }
     if (value.length === 2 && value[0] === '5' && this.detectNetworkBrand(value) === '') {
-      throw new Error('마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.');
+      return { valid: false, message: '마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.' };
     }
+    return { valid: true };
   },
 
-  isValidCardNumberLength(value: string, limit: number) {
+  isValidCardNumberLength(value: string, limit: number): ValidationResult {
     if (![0, limit].includes(value.length)) {
-      throw new Error('카드 번호 각 항목은 4자리여야 합니다.');
+      return { valid: false, message: '카드 번호 각 항목은 4자리여야 합니다.' };
     }
+    return { valid: true };
   },
 
-  isValidMonth(value: string) {
+  isValidMonth(value: string): ValidationResult {
     if (value.length === 1 && !['0', '1'].includes(value[0])) {
-      throw new Error('유효하지 않은 날짜 형식입니다. 0 이나 1로 시작해야 합니다.');
+      return { valid: false, message: '유효하지 않은 날짜 형식입니다. 0 이나 1로 시작해야 합니다.' };
     }
     if (value.length === 2) {
       const month = Number(value);
       if (month < 1 || month > 12) {
-        throw new Error('유효하지 않은 날짜 형식입니다. 1 ~ 12 이내 숫자여야 합니다.');
+        return { valid: false, message: '유효하지 않은 날짜 형식입니다. 1 ~ 12 이내 숫자여야 합니다.' };
       }
     }
+    return { valid: true };
   },
 
-  isValidYear(value: string) {
+  isValidYear(value: string): ValidationResult {
     const currentYear = new Date().getFullYear().toString().slice(-2);
-    const year = value;
-    if (year.length === 2 && Number(year) < Number(currentYear)) {
-      throw new Error('유효기간이 만료된 연도입니다.');
+    if (value.length === 2 && Number(value) < Number(currentYear)) {
+      return { valid: false, message: '유효기간이 만료된 연도입니다.' };
     }
+    return { valid: true };
   },
 
-  isValidCardExpiryDateLength(value: string, limit: number) {
+  isValidCardExpiryDateLength(value: string, limit: number): ValidationResult {
     if (![0, limit].includes(value.length)) {
-      throw new Error('날짜 각 항목은 2자리여야 합니다.');
+      return { valid: false, message: '날짜 각 항목은 2자리여야 합니다.' };
     }
+    return { valid: true };
   },
 
-  isValidCardCVCLength(value: string, limit: number) {
+  isValidCardCVCLength(value: string, limit: number): ValidationResult {
     if (![0, limit].includes(value.length)) {
-      throw new Error('CVC는 3자리여야 합니다.');
+      return { valid: false, message: 'CVC는 3자리여야 합니다.' };
     }
+    return { valid: true };
   },
 };

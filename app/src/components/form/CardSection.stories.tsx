@@ -21,12 +21,7 @@ type Story = StoryObj<typeof meta>;
 export const CardNumberInputSection: Story = {
   args: { title: "", children: null },
   render: () => {
-    const [cardNumber, setCardNumber] = useState({
-      "first-digits": "",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
-    });
+    const [cardNumber, setCardNumber] = useState(['', '', '', '']);
     const [, setNetworkBrand] = useState("");
     return (
       <CardContext
@@ -60,12 +55,7 @@ export const CardExpiryDateInputSection: Story = {
     return (
       <CardContext
         value={{
-          cardNumber: {
-            "first-digits": "",
-            "second-digits": "",
-            "third-digits": "",
-            "fourth-digits": "",
-          },
+          cardNumber: ['', '', '', ''],
           setCardNumber: () => {},
           networkBrand: "",
           setNetworkBrand: () => {},

@@ -14,12 +14,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultCardNumber = {
-  "first-digits": "",
-  "second-digits": "",
-  "third-digits": "",
-  "fourth-digits": "",
-};
+const defaultCardNumber = ['', '', '', ''];
 const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
 
 const renderWithContext = (
@@ -47,21 +42,11 @@ export const Empty: Story = {
 };
 
 export const CardNumberPartiallyFilled: Story = {
-  render: renderWithContext({
-    "first-digits": "1234",
-    "second-digits": "5678",
-    "third-digits": "",
-    "fourth-digits": "",
-  }),
+  render: renderWithContext(['1234', '5678', '', '']),
 };
 
 export const CardNumberFullyFilled: Story = {
-  render: renderWithContext({
-    "first-digits": "1234",
-    "second-digits": "5678",
-    "third-digits": "9012",
-    "fourth-digits": "3456",
-  }),
+  render: renderWithContext(['1234', '5678', '9012', '3456']),
 };
 
 export const ExpiryDateFilled: Story = {
@@ -73,19 +58,14 @@ export const ExpiryDateFilled: Story = {
 
 export const FullyFilled: Story = {
   render: renderWithContext(
-    {
-      "first-digits": "1234",
-      "second-digits": "5678",
-      "third-digits": "9012",
-      "fourth-digits": "3456",
-    },
+    ['1234', '5678', '9012', '3456'],
     { "expiry-month": "12", "expiry-year": "26" },
   ),
 };
 
 export const VisaBrand: Story = {
   render: renderWithContext(
-    { "first-digits": "4111", "second-digits": "", "third-digits": "", "fourth-digits": "" },
+    ['4111', '', '', ''],
     defaultCardExpiryDate,
     "visa",
   ),
@@ -93,7 +73,7 @@ export const VisaBrand: Story = {
 
 export const MasterBrand: Story = {
   render: renderWithContext(
-    { "first-digits": "5111", "second-digits": "", "third-digits": "", "fourth-digits": "" },
+    ['5111', '', '', ''],
     defaultCardExpiryDate,
     "master",
   ),

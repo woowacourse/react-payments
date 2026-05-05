@@ -32,37 +32,39 @@ export function CardNumberInput() {
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    try {
-      Validator.isNumber(value);
-      if (id === 'first-digits') {
-        Validator.isValidNetworkBrand(value);
-        setNetworkBrand(Validator.detectNetworkBrand(value));
-      }
-      setError({ ...fieldErrors, [id]: false, message: '' });
-      const newCardNumber = [...cardNumber];
-      newCardNumber[indexMap[id]] = value;
-      setCardNumber(newCardNumber);
-    } catch (err) {
-      setError({
-        ...fieldErrors,
-        [id]: true,
-        message: err instanceof Error ? err.message : '',
-      });
+    const fieldId = id as keyof cardNumberFieldError;
+
+    const numberResult = Validator.isNumber(value);
+    if (!numberResult.valid) {
+      setError({ ...fieldErrors, [fieldId]: true, message: numberResult.message });
+      return;
     }
+
+    if (id === 'first-digits') {
+      const brandResult = Validator.isValidNetworkBrand(value);
+      if (!brandResult.valid) {
+        setError({ ...fieldErrors, [fieldId]: true, message: brandResult.message });
+        return;
+      }
+      setNetworkBrand(Validator.detectNetworkBrand(value));
+    }
+
+    setError({ ...fieldErrors, [fieldId]: false, message: '' });
+    const newCardNumber = [...cardNumber];
+    newCardNumber[indexMap[id]] = value;
+    setCardNumber(newCardNumber);
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    try {
-      Validator.isValidCardNumberLength(value, e.target.maxLength);
-      setError({ ...fieldErrors, [id]: false, message: '' });
-    } catch (err) {
-      setError({
-        ...fieldErrors,
-        [id]: true,
-        message: err instanceof Error ? err.message : '',
-      });
+    const fieldId = id as keyof cardNumberFieldError;
+
+    const result = Validator.isValidCardNumberLength(value, e.target.maxLength);
+    if (!result.valid) {
+      setError({ ...fieldErrors, [fieldId]: true, message: result.message });
+      return;
     }
+    setError({ ...fieldErrors, [fieldId]: false, message: '' });
   };
 
   return (

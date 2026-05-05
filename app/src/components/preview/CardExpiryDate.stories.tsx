@@ -14,12 +14,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultCardNumber = {
-  "first-digits": "",
-  "second-digits": "",
-  "third-digits": "",
-  "fourth-digits": "",
-};
+const defaultCardNumber = ['', '', '', ''];
 
 const renderWithContext = (cardExpiryDate: {
   "expiry-month": string;

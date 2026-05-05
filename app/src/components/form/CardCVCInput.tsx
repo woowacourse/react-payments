@@ -14,31 +14,25 @@ export function CardCVCInput() {
 
   const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    try {
-      Validator.isNumber(value);
-      setError({ ...fieldErrors, state: false, message: '' });
-      setCardCVC(e.target.value);
-    } catch (err) {
-      setError({
-        ...fieldErrors,
-        state: true,
-        message: err instanceof Error ? err.message : '',
-      });
+
+    const result = Validator.isNumber(value);
+    if (!result.valid) {
+      setError({ ...fieldErrors, state: true, message: result.message });
+      return;
     }
+    setError({ ...fieldErrors, state: false, message: '' });
+    setCardCVC(value);
   };
 
   const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    try {
-      Validator.isValidCardCVCLength(value, e.target.maxLength);
-      setError({ ...fieldErrors, state: false, message: '' });
-    } catch (err) {
-      setError({
-        ...fieldErrors,
-        state: true,
-        message: err instanceof Error ? err.message : '',
-      });
+
+    const result = Validator.isValidCardCVCLength(value, e.target.maxLength);
+    if (!result.valid) {
+      setError({ ...fieldErrors, state: true, message: result.message });
+      return;
     }
+    setError({ ...fieldErrors, state: false, message: '' });
   };
 
   return (
@@ -53,7 +47,7 @@ export function CardCVCInput() {
         value={cardCVC}
         onChange={changeCardCVC}
         onBlur={handleBlurCVC}
-        fieldErrors={fieldErrors.state}
+        $fieldErrors={fieldErrors.state}
       />
       <ErrorMessage message={fieldErrors['message']} />
     </CardCVCContainer>

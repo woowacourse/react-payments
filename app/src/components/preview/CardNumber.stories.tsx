@@ -16,12 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
 
-const renderWithContext = (cardNumber: {
-  "first-digits": string;
-  "second-digits": string;
-  "third-digits": string;
-  "fourth-digits": string;
-}) =>
+const renderWithContext = (cardNumber: string[]) =>
   () => (
     <CardContext
       value={{
@@ -38,46 +33,21 @@ const renderWithContext = (cardNumber: {
   );
 
 export const Empty: Story = {
-  render: renderWithContext({
-    "first-digits": "",
-    "second-digits": "",
-    "third-digits": "",
-    "fourth-digits": "",
-  }),
+  render: renderWithContext(['', '', '', '']),
 };
 
 export const FirstGroupFilled: Story = {
-  render: renderWithContext({
-    "first-digits": "1234",
-    "second-digits": "",
-    "third-digits": "",
-    "fourth-digits": "",
-  }),
+  render: renderWithContext(['1234', '', '', '']),
 };
 
 export const SecondGroupFilled: Story = {
-  render: renderWithContext({
-    "first-digits": "1234",
-    "second-digits": "5678",
-    "third-digits": "",
-    "fourth-digits": "",
-  }),
+  render: renderWithContext(['1234', '5678', '', '']),
 };
 
 export const ThirdGroupMasked: Story = {
-  render: renderWithContext({
-    "first-digits": "1234",
-    "second-digits": "5678",
-    "third-digits": "9012",
-    "fourth-digits": "",
-  }),
+  render: renderWithContext(['1234', '5678', '9012', '']),
 };
 
 export const FullyFilledAndMasked: Story = {
-  render: renderWithContext({
-    "first-digits": "1234",
-    "second-digits": "5678",
-    "third-digits": "9012",
-    "fourth-digits": "3456",
-  }),
+  render: renderWithContext(['1234', '5678', '9012', '3456']),
 };

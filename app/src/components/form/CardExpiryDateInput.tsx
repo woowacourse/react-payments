@@ -14,48 +14,47 @@ export function CardExpiryDateInput() {
 
   const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    try {
-      Validator.isNumber(value);
-      Validator.isValidMonth(value);
-      setError({ ...fieldErrors, [id]: false, message: '' });
-      setCardExpiryDate({ ...cardExpiryDate, [id]: value });
-    } catch (err) {
-      setError({
-        ...fieldErrors,
-        [id]: true,
-        message: err instanceof Error ? err.message : '',
-      });
+
+    const numberResult = Validator.isNumber(value);
+    if (!numberResult.valid) {
+      setError({ ...fieldErrors, [id]: true, message: numberResult.message });
+      return;
     }
+    const monthResult = Validator.isValidMonth(value);
+    if (!monthResult.valid) {
+      setError({ ...fieldErrors, [id]: true, message: monthResult.message });
+      return;
+    }
+    setError({ ...fieldErrors, [id]: false, message: '' });
+    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
   const changeCardExpiryYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    try {
-      Validator.isNumber(value);
-      Validator.isValidYear(value);
-      setError({ ...fieldErrors, [id]: false, message: '' });
-      setCardExpiryDate({ ...cardExpiryDate, [id]: value });
-    } catch (err) {
-      setError({
-        ...fieldErrors,
-        [id]: true,
-        message: err instanceof Error ? err.message : '',
-      });
+
+    const numberResult = Validator.isNumber(value);
+    if (!numberResult.valid) {
+      setError({ ...fieldErrors, [id]: true, message: numberResult.message });
+      return;
     }
+    const yearResult = Validator.isValidYear(value);
+    if (!yearResult.valid) {
+      setError({ ...fieldErrors, [id]: true, message: yearResult.message });
+      return;
+    }
+    setError({ ...fieldErrors, [id]: false, message: '' });
+    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
   };
 
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    try {
-      Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
-      setError({ ...fieldErrors, [id]: false, message: '' });
-    } catch (err) {
-      setError({
-        ...fieldErrors,
-        [id]: true,
-        message: err instanceof Error ? err.message : '',
-      });
+
+    const result = Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
+    if (!result.valid) {
+      setError({ ...fieldErrors, [id]: true, message: result.message });
+      return;
     }
+    setError({ ...fieldErrors, [id]: false, message: '' });
   };
 
   return (

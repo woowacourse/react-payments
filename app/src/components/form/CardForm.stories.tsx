@@ -17,12 +17,7 @@ type Story = StoryObj<typeof meta>;
 
 export const CardNumberInputSection: Story = {
   render: () => {
-    const [cardNumber, setCardNumber] = useState({
-      "first-digits": "",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
-    });
+    const [cardNumber, setCardNumber] = useState(['', '', '', '']);
     const [cardExpiryDate, setCardExpiryDate] = useState({
       "expiry-month": "",
       "expiry-year": "",
