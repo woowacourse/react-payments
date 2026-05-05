@@ -55,23 +55,29 @@ const InputSectionLayout = ({
           {message}
         </p>
       </div>
-      <div
+      <fieldset
         css={css`
           display: flex;
           flex-direction: column;
           gap: 8px;
+          border: none;
+          padding: 0;
+          margin: 0;
+          min-width: 0;
         `}
       >
-        <label
+        <legend
           css={css`
             font-size: 12px;
             font-weight: 500;
             line-height: 15px;
             color: #0a0d13;
+            float: left;
+            width: 100%;
           `}
         >
           {tag}
-        </label>
+        </legend>
 
         <div
           css={css`
@@ -99,7 +105,7 @@ const InputSectionLayout = ({
             {errorMessage}
           </span>
         </div>
-      </div>
+      </fieldset>
     </div>
   );
 };
