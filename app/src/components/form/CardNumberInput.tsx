@@ -21,18 +21,6 @@ export function CardNumberInput() {
     message: '',
   });
 
-  const handleNetworkBrand = (value: string) => {
-    if (value.startsWith('4')) {
-      setNetworkBrand('visa');
-      return;
-    }
-    if (value.startsWith('5') && ['1', '2', '3', '4', '5'].includes(value[1])) {
-      setNetworkBrand('master');
-      return;
-    }
-    setNetworkBrand('');
-  };
-
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
     try {
@@ -56,7 +44,7 @@ export function CardNumberInput() {
       Validator.isNumber(value);
       Validator.isValidNetworkBrand(value);
       setError({ ...fieldErrors, [id]: false, message: '' });
-      handleNetworkBrand(value);
+      setNetworkBrand(Validator.detectNetworkBrand(value));
       const newCardNumber = [...cardNumber];
       newCardNumber[0] = value;
       setCardNumber(newCardNumber);
