@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { getCardNumberErrorMessage } from "./utils/getCardNumberErrorMessage";
 import CardInfoSection from "./components/CardInfoSection";
-import { getCVCumberErrorMessage } from "./utils/getCVCNumberErrorMessage";
-import { getEXPNumberErrorMessage } from "./utils/getEXPNumberErrorMessage";
 import CardPreview from "./components/Card/CardPreview";
 import CardNumberInputWrapper from "./components/InputWrapper/CardNumberInputWrapper";
 import EXPInputWrapper from "./components/InputWrapper/EXPInputWrapper";
@@ -31,7 +28,6 @@ function App() {
         >
           <CardNumberInputWrapper
             setCardNumber={setCardNumbers}
-            validator={getCardNumberErrorMessage}
             value={cardNumbers}
           />
         </CardInfoSection>
@@ -41,19 +37,11 @@ function App() {
           caption="월/년도(MMYY)를 순서대로 입력해 주세요"
           inputLabel="유효기간"
         >
-          <EXPInputWrapper
-            setEXPNumber={setEXPNumbers}
-            validator={getEXPNumberErrorMessage}
-            value={EXPNumbers}
-          />
+          <EXPInputWrapper setEXPNumber={setEXPNumbers} value={EXPNumbers} />
         </CardInfoSection>
 
         <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC">
-          <CVCInputWrapper
-            setCVCNumber={setCVC}
-            validator={getCVCumberErrorMessage}
-            value={cvc}
-          />
+          <CVCInputWrapper setCVCNumber={setCVC} value={cvc} />
         </CardInfoSection>
       </InputSectionContainer>
     </MainContainer>
