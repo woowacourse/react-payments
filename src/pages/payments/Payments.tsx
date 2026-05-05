@@ -31,8 +31,8 @@ export const Payments = () => {
     setCardNumbers(next);
   };
 
-  const handleChangeExpirationDate = (expirationDate: ExpirationDate): void => {
-    setExpirationDate(expirationDate);
+  const handleChangeExpirationDate = (key: keyof ExpirationDate, value: string): void => {
+    setExpirationDate((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleChangeCvc = (cvc: string): void => {
@@ -52,11 +52,11 @@ export const Payments = () => {
           cardNumbers={cardNumbers}
           handleChangeCardNumber={handleChangeCardNumber}
         />
-        {/* <CvcFormGroup cvc={cvc} onChangeCvc={handleChangeCvc} />
+        {/* <CvcFormGroup cvc={cvc} onChangeCvc={handleChangeCvc} />*/}
         <ExpirationDateFormGroup
           expirationDate={expirationDate}
           onChangeExpirationDate={handleChangeExpirationDate}
-        /> */}
+        />
       </form>
     </div>
   );
