@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ErrorMessage } from "./ErrorMessage";
 
 const meta = {
@@ -13,13 +13,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const common: Story = {
+export const Common: Story = {
   args: {
     messages: ["some error1"],
   },
 };
 
-export const multiple: Story = {
+export const Multiple: Story = {
   args: {
     messages: ["some error1", "some error2", "some error3"],
   },

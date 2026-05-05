@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
-import { CardContext } from "../Card";
+import { CardContext } from "../CardContext";
 
 import { CardNumberInput } from "./CardNumberInput";
 
@@ -38,11 +38,11 @@ const renderWithContext = () => {
   );
 };
 
-export const base: Story = {
+export const Base: Story = {
   render: renderWithContext,
 };
 
-export const invalidInput: Story = {
+export const InvalidInput: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -52,7 +52,7 @@ export const invalidInput: Story = {
   },
 };
 
-export const invalidCardNumber: Story = {
+export const InvalidCardNumber: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -62,7 +62,7 @@ export const invalidCardNumber: Story = {
   },
 };
 
-export const invalidMastercard: Story = {
+export const InvalidMastercard: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -85,22 +85,22 @@ const createNoNetworkBrandValidationPlay =
     ).toBeNull();
   };
 
-export const noNetworkBrandValidationOnSecondInput: Story = {
+export const NoNetworkBrandValidationOnSecondInput: Story = {
   render: renderWithContext,
   play: createNoNetworkBrandValidationPlay(1),
 };
 
-export const noNetworkBrandValidationOnThirdInput: Story = {
+export const NoNetworkBrandValidationOnThirdInput: Story = {
   render: renderWithContext,
   play: createNoNetworkBrandValidationPlay(2),
 };
 
-export const noNetworkBrandValidationOnFourthInput: Story = {
+export const NoNetworkBrandValidationOnFourthInput: Story = {
   render: renderWithContext,
   play: createNoNetworkBrandValidationPlay(3),
 };
 
-export const incompleteLengthOnBlur: Story = {
+export const IncompleteLengthOnBlur: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -113,7 +113,7 @@ export const incompleteLengthOnBlur: Story = {
   },
 };
 
-export const emptyInputOnBlur: Story = {
+export const EmptyInputOnBlur: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -126,7 +126,7 @@ export const emptyInputOnBlur: Story = {
   },
 };
 
-export const completeLengthOnBlur: Story = {
+export const CompleteLengthOnBlur: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -139,11 +139,11 @@ export const completeLengthOnBlur: Story = {
   },
 };
 
-export const perserveErrorMessageInput: Story = {
+export const PerserveErrorMessageInput: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const [_, secondInput, thirdInput, fourthInput] =
+    const [, secondInput, thirdInput, fourthInput] =
       canvas.getAllByRole("textbox");
     await userEvent.type(secondInput, "12");
     await userEvent.type(thirdInput, "34");
@@ -154,7 +154,7 @@ export const perserveErrorMessageInput: Story = {
   },
 };
 
-export const multipleErrorsInput: Story = {
+export const MultipleErrorsInput: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

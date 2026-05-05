@@ -8,7 +8,7 @@ type ErrorFlag = {
   isError?: boolean;
 };
 
-export const StyledCardInput = styled.input<ErrorFlag>`
+const StyledCardInput = styled.input<ErrorFlag>`
   border: solid 1px ${(props) => (props.isError ? "#FF3D3D" : "#acacac")};
   border-radius: 2px;
   padding: 0.5rem;

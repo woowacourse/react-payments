@@ -3,7 +3,7 @@ import MasterCard from "../../assets/Mastercard.svg";
 import VisaCard from "../../assets/visa-logo.svg";
 import { NETWORK_BRAND_RULE } from "../../Constants";
 import { useContext } from "react";
-import { CardContext } from "../Card";
+import { CardContext } from "../CardContext";
 
 export function CardNetworkBrand() {
   const { cardNumber } = useContext(CardContext);

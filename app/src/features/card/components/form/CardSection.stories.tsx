@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { CardContext } from "../Card";
+import { CardContext } from "../CardContext";
 
 import { CardSection } from "./CardSection";
 import { CardNumberInput } from "./CardNumberInput";

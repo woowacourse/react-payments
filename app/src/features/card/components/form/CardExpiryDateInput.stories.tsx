@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
-import { CardContext } from "../Card";
+import { CardContext } from "../CardContext";
 
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
 
@@ -140,7 +140,7 @@ export const InvalidYearLength: Story = {
   },
 };
 
-export const multipleErrorsInput: Story = {
+export const MultipleErrorsInput: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { CardContext } from "../Card";
+import { CardContext } from "../CardContext";
 import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
 import { CARD_INPUT } from "../../Constants";
