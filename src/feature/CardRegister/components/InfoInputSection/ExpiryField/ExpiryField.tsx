@@ -5,7 +5,6 @@ import styled from "styled-components";
 import {
   validateExceedTwoDigits,
   validateMonth,
-  validateNumericInput,
   validateTwoDigits,
 } from "../../../validators/expiryDate";
 import {
@@ -13,6 +12,7 @@ import {
   EXPIRY_INPUT_COUNT,
   EXPIRY_VALUE_LENGTH,
 } from "../../../constants";
+import { validateNumericInput } from "../../../validators/input";
 
 const ExpiryField = ({
   expiryMonth,

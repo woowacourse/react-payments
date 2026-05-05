@@ -4,8 +4,6 @@ import {
   MIN_EXPIRY_MONTH,
 } from "../constants";
 
-export const validateNumericInput = (value: string) => /^\d*$/.test(value);
-
 export const validateExceedTwoDigits = (value: string) =>
   value.length > EXPIRY_VALUE_LENGTH;
 
