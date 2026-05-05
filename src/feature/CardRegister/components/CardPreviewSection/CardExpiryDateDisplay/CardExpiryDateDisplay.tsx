@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 
-const CardExpiryDateDisplay = ({expiryMonth, expiryYear}: {expiryMonth: string; expiryYear: string}) => {
-  let delimiter = '';
-  if (expiryMonth.length === 2 || expiryYear.length === 2) {
-    delimiter = '/';
-  }
+const CardExpiryDateDisplay = ({
+  expiryMonth,
+  expiryYear,
+}: {
+  expiryMonth: string;
+  expiryYear: string;
+}) => {
   return (
     <Container>
       <Chunk>{expiryMonth}</Chunk>
-      <Delimiter>{delimiter}</Delimiter>
+      <Delimiter>
+        {expiryMonth.length === 2 || expiryYear.length === 2 ? '/' : ''}
+      </Delimiter>
       <Chunk>{expiryYear}</Chunk>
     </Container>
   );
