@@ -1,10 +1,13 @@
 import type { CardBrand, CardInfo } from './types';
 
 export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardBrand => {
-  if (cardNumbers[0].startsWith('4')) {
+  const first = cardNumbers[0];
+  if (!first) return 'local';
+
+  if (first.startsWith('4')) {
     return 'visa';
   }
-  const firstTwoNumber = Number.parseInt(cardNumbers[0].slice(0, 2));
+  const firstTwoNumber = Number.parseInt(first.slice(0, 2));
   if (firstTwoNumber >= 51 && firstTwoNumber <= 55) {
     return 'mastercard';
   }
