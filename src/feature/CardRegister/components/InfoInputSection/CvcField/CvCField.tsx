@@ -1,12 +1,17 @@
+import { useState } from "react";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
-import { useState } from "react";
 import styled from "styled-components";
 import {
   CVC_INPUT_COUNT,
   CVC_LENGTH,
   ERROR_MESSAGES,
 } from "../../../constants";
+import {
+  validateCvcLength,
+  validateExceedCvcLength,
+} from "../../../validators/cvc";
+import { validateNumericInput } from "../../../validators/input";
 
 const CvcField = ({
   cvcNumber,
@@ -26,26 +31,34 @@ const CvcField = ({
   });
   const [isTouched, setIsTouched] = useState(createFlags());
 
-  const handleCvcNumberChange = (index: number, eValue: string) => {
+  const handleCvcChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!/^\d*$/.test(value)) return;
-    if (value.length > CVC_LENGTH) return;
+    if (!validateNumericInput(value)) {
+      return;
+    }
+    if (validateExceedCvcLength(value)) {
+      return;
+    }
 
     setCvcNumber(value);
-    clearErrorWhenComplete(index, value);
+
+    if (isTouched[index] && validateCvcLength(value)) {
+      updateErrorInfo(index, false);
+    }
+  };
+
+  const handleCvcBlur = (index: number, eValue: string) => {
+    const value = eValue.trim();
+
+    updateTouched(index);
+    updateErrorInfo(index, !validateCvcLength(value));
   };
 
   const updateTouched = (index: number) => {
     setIsTouched((prev) =>
       prev.map((touched, i) => (i === index ? true : touched)),
     );
-  };
-
-  const clearErrorWhenComplete = (index: number, value: string) => {
-    if (!isTouched[index] || value.length !== CVC_LENGTH) return;
-
-    updateErrorInfo(index, false);
   };
 
   const updateErrorInfo = (index: number, hasError: boolean) => {
@@ -61,13 +74,6 @@ const CvcField = ({
     onErrorChange(firstErrorIdx !== -1);
   };
 
-  const handleCvcBlur = (index: number, eValue: string) => {
-    updateTouched(index);
-
-    const isValid = eValue.length === CVC_LENGTH;
-    updateErrorInfo(index, !isValid);
-  };
-
   const firstErrorIdx = errorInfo.flag.indexOf(true);
 
   return (
@@ -81,7 +87,7 @@ const CvcField = ({
           inputMode="numeric"
           placeholder="123"
           strokeMode={0 === firstErrorIdx ? "error" : "default"}
-          onChange={(e) => handleCvcNumberChange(0, e.target.value)}
+          onChange={(e) => handleCvcChange(0, e.target.value)}
           onBlur={(e) => handleCvcBlur(0, e.target.value)}
         />
       </InputWrapper>
