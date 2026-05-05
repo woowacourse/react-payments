@@ -19,7 +19,7 @@ export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardPr
       <div css={cardInfoWrapperStyle}>
         <div css={cardNumberWrapperStyle}>
           {cardNumber.map((num, index) => (
-            <span>{index < 2 ? num : <span css={hiddenNumberStyle}>{'∙'.repeat(num.length)}</span>}</span>
+            <span key={index}>{index < 2 ? num : <span css={hiddenNumberStyle}>{'∙'.repeat(num.length)}</span>}</span>
           ))}
         </div>
         <div>
