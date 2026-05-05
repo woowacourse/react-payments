@@ -5,7 +5,7 @@ import VisaCard from '../../assets/visa-logo.svg';
 type NetworkBrand = 'visa' | 'master';
 
 export function CardNetworkBrand({ networkBrand }: { networkBrand: NetworkBrand }) {
-  const selectBrandImage = (brand: NetworkBrand) => {
+  const selectBrandImage = (brand: NetworkBrand | undefined) => {
     if (brand === 'visa') return VisaCard;
     if (brand === 'master') return MasterCard;
   };
