@@ -73,6 +73,17 @@ export const Validator = {
     return { valid: true };
   },
 
+  isValidCardExpiryDate(month: string, year: string): ValidationResult {
+    const today = new Date();
+    const currentYear = Number(new Date().getFullYear().toString().slice(-2));
+    const currentMonth = Number(today.getMonth() + 1);
+
+    if (currentYear === Number(year) && currentMonth > Number(month)) {
+      return { valid: false, message: '유효기간이 만료된 날짜입니다.' };
+    }
+    return { valid: true };
+  },
+
   isValidCardCVCLength(value: string, limit: number): ValidationResult {
     if (![0, limit].includes(value.length)) {
       return { valid: false, message: 'CVC는 3자리여야 합니다.' };

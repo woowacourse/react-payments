@@ -49,10 +49,25 @@ export function CardExpiryDateInput() {
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
 
-    const result = Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
-    if (!result.valid) {
-      setError({ ...fieldErrors, [id]: true, message: result.message });
+    const lengthResult = Validator.isValidCardExpiryDateLength(value, e.target.maxLength);
+    if (!lengthResult.valid) {
+      setError({ ...fieldErrors, [id]: true, message: lengthResult.message });
       return;
+    }
+    if (cardExpiryDate['expiry-month'].length === 2 && cardExpiryDate['expiry-year'].length === 2) {
+      const expiryResult = Validator.isValidCardExpiryDate(
+        cardExpiryDate['expiry-month'],
+        cardExpiryDate['expiry-year'],
+      );
+      if (!expiryResult.valid) {
+        setError({
+          ...fieldErrors,
+          'expiry-month': true,
+          'expiry-year': true,
+          message: expiryResult.message,
+        });
+        return;
+      }
     }
     setError({ ...fieldErrors, [id]: false, message: '' });
   };
