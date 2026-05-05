@@ -9,7 +9,7 @@ const BRAND_NUMBER = {
 export const BRAND_CARD_LENGTH = {
   visa: 16,
   mastercard: 16,
-  default: -1,
+  default: 16,
 };
 
 export const getBrand = (cardNumberStr: string): Brand => {

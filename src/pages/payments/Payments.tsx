@@ -6,35 +6,36 @@ import { CardPreview } from '../../features/cardPreview/CardPreview';
 
 import type { ExpirationDate } from '@/entities/card/types';
 
-import { CardNumberFormGroup } from '@/features/CardFormGroup/CardNumberFormGroup';
-import { CvcFormGroup } from '@/features/CardFormGroup/CvcFormGroup';
-import { ExpirationDateFormGroup } from '@/features/CardFormGroup/ExpirationDateFormGroup';
+import { CardNumberFormGroup } from '@/features/cardFormGroup/CardNumberFormGroup';
+import { CvcFormGroup } from '@/features/cardFormGroup/CvcFormGroup';
+import { ExpirationDateFormGroup } from '@/features/cardFormGroup/ExpirationDateFormGroup';
 import { CARD_BRAND_FORMAT, getBrand } from '@/entities/card/brand';
 
-import { isValidInputNumber } from '@/core/utils/validator';
-import { validateExpirationDate, validateCvc } from '@/entities/card/validator';
+import { isValidInputNumber, isNumericString } from '@/core/utils/validator';
+import {
+  validateExpirationDate,
+  validateCvc,
+  validateCardNumbers,
+} from '@/entities/card/validator';
 
 export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const brand = getBrand(cardNumbers.join(''));
+
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({ month: '', year: '' });
   const [cvc, setCvc] = useState('');
 
-  const brand = getBrand(cardNumbers.join(''));
-
   const handleChangeCardNumber = (cardNumber: string, index: number): void => {
-    if (!isValidInputNumber(cardNumber, CARD_BRAND_FORMAT[brand][index])) return;
     const next = [...cardNumbers];
     next[index] = cardNumber;
     setCardNumbers(next);
   };
 
   const handleChangeExpirationDate = (expirationDate: ExpirationDate): void => {
-    if (expirationDate.month !== '' && !validateExpirationDate(expirationDate)) return;
     setExpirationDate(expirationDate);
   };
 
   const handleChangeCvc = (cvc: string): void => {
-    if (cvc !== '' && !validateCvc(cvc)) return;
     setCvc(cvc);
   };
 
@@ -49,7 +50,7 @@ export const Payments = () => {
         <CardNumberFormGroup
           brand={brand}
           cardNumbers={cardNumbers}
-          onChangeCardNumber={handleChangeCardNumber}
+          handleChangeCardNumber={handleChangeCardNumber}
         />
         {/* <CvcFormGroup cvc={cvc} onChangeCvc={handleChangeCvc} />
         <ExpirationDateFormGroup
