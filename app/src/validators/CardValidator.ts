@@ -5,16 +5,7 @@ export const Validator = {
     }
   },
 
-  isValidNetworkBrand(value: string) {
-    if (value !== '' && !['4', '5'].includes(value[0])) {
-      throw new Error('유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.');
-    }
-    if (value.length === 2 && value[0] === '5' && !['1', '2', '3', '4', '5'].includes(value[1])) {
-      throw new Error('마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.');
-    }
-  },
-
-  detectNetworkBrand(value: string) {
+  detectNetworkBrand(value: string): 'visa' | 'master' | '' {
     if (value.startsWith('4')) {
       return 'visa';
     }
@@ -22,6 +13,15 @@ export const Validator = {
       return 'master';
     }
     return '';
+  },
+
+  isValidNetworkBrand(value: string) {
+    if (value !== '' && !['4', '5'].includes(value[0])) {
+      throw new Error('유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.');
+    }
+    if (value.length === 2 && value[0] === '5' && this.detectNetworkBrand(value) === '') {
+      throw new Error('마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.');
+    }
   },
 
   isValidCardNumberLength(value: string, limit: number) {
