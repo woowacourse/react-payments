@@ -54,7 +54,7 @@ export default function InputFieldForm<T extends CardNumbersType | ExpirationDat
         ))}
       </InputFieldWrapper>
 
-      {<ErrorMessage>{errorMessage.trim().length > 0 && errorMessage}</ErrorMessage>}
+      {errorMessage.trim().length > 0 && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </FormContainer>
   );
 }
