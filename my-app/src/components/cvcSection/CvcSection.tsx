@@ -1,7 +1,7 @@
-import { useId, useRef, useState } from 'react';
-import { getCvcError, isInputValidate } from '../../utils/Validation';
+import { useId } from 'react';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
+import { useCvc } from './useCvc';
 
 interface Props {
   value: string;
@@ -9,21 +9,8 @@ interface Props {
 }
 
 const CvcSection = ({ value, setValue }: Props) => {
-  const [error, setError] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const cvcInputId = useId();
-  
-  const handleOnChange = (inputValue: string) => {
-    if(!isInputValidate(inputValue, 3)) return;
-
-    setValue(inputValue);
-  }
-
-  const handleOnBlur = (inputValue: string) => {
-    setError(getCvcError(inputValue) !== '');
-  }
-
-  const finalErrorMessage = error ? getCvcError(value) : '';
+  const { error, inputRef, handleOnChange, handleOnBlur, finalErrorMessage } = useCvc({value, setValue});
 
   return (
     <CommonSection
