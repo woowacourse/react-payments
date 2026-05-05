@@ -21,7 +21,7 @@ const ErrorMessageList = styled.ul`
 `;
 
 const ErrorMessageItem = styled.li`
-  color: #ff3d3d;
+  color: #e22222;
   font-size: 9.5px;
   height: 1rem;
 `;

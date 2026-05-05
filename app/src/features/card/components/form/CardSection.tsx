@@ -24,7 +24,7 @@ const CardSectionContainer = styled.div`
 
   .sub-title {
     font-size: 9.5px;
-    color: #8b95a1;
+    color: #6c727a;
     margin-bottom: 1rem;
     min-height: 1px;
   }
