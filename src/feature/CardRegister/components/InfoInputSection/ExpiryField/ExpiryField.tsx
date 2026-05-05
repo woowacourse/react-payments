@@ -12,6 +12,10 @@ import {
   EXPIRY_INPUT_COUNT,
   EXPIRY_VALUE_LENGTH,
 } from "../../../constants";
+import {
+  formatExpiryValue,
+  type ExpiryType,
+} from "../../../utils/expiryFormatter";
 import { validateNumericInput } from "../../../validators/input";
 
 const ExpiryField = ({
@@ -74,36 +78,20 @@ const ExpiryField = ({
   const handleExpiryBlur = (
     index: number,
     eValue: string,
-    expiryType: "month" | "year",
+    expiryType: ExpiryType,
   ) => {
     updateTouched(index);
 
-    const filledNumber = fillZero(eValue, expiryType);
+    const formattedValue = formatExpiryValue(eValue, expiryType);
 
     if (expiryType === "month") {
-      setExpiryMonth(filledNumber);
+      setExpiryMonth(formattedValue);
     }
     if (expiryType === "year") {
-      setExpiryYear(filledNumber);
+      setExpiryYear(formattedValue);
     }
 
-    updateErrorInfo(index, !validateTwoDigits(filledNumber));
-  };
-
-  const fillZero = (value: string, expiryType: "month" | "year") => {
-    if (expiryType === "month") {
-      if (value.length === 1 && value !== "0") {
-        return `0${value}`;
-      }
-    }
-
-    if (expiryType === "year") {
-      if (value.length === 1) {
-        return `0${value}`;
-      }
-    }
-
-    return value;
+    updateErrorInfo(index, !validateTwoDigits(formattedValue));
   };
 
   const updateTouched = (index: number) => {
