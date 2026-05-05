@@ -47,7 +47,6 @@ export default function CVCField({ value, onUpdated }: CVCFieldProps) {
 
     if (inputValue.length < CVC_LENGTH) {
       setErrorStatus('invalidLength');
-      return;
     }
   };
 
