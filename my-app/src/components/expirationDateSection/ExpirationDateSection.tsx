@@ -1,7 +1,7 @@
-import { useId, useRef, useState } from 'react';
-import { isIncompleteRange, isInputValidate } from '../../utils/Validation';
+import { useId } from 'react';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
+import { useExpirationDate } from './useExpirationDate';
 
 interface Props {
   value: {
@@ -11,50 +11,9 @@ interface Props {
   setValue: (value: { month: string; year: string }) => void;
 }
 
-const getMonthError = (month: string): string => {
-  if (month === '') return '';
-  if (isIncompleteRange(month, 2)) return '월/연은 2자리수여야 합니다!';
-
-  const monthNum = Number(month);
-  if (monthNum < 1 || monthNum > 12) return '월은 1월부터 12월 사이여야 합니다!';
-
-  return '';
-}
-
-const getYearError = (year: string): string => {
-  if (year === '') return '';
-  if (isIncompleteRange(year, 2)) return '월/연은 2자리수여야 합니다!';
-
-  return '';
-}
-
 const ExpirationDateSection = ({ value, setValue }: Props) => {
-  const [errors, setErrors] = useState({ month: false, year: false });
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const expirationDateIds = useId();
-
-  const handleOnChange = (inputValue: string, type: 'month' | 'year') => {
-    if (!isInputValidate(inputValue, 2)) return;
-
-    const newValue = { ...value, [type]: inputValue };
-    setValue(newValue);
-
-    if (type === 'month' && inputValue.length === 2) {
-      inputRefs.current[1]?.focus();
-    }
-  }
-
-  const handleOnBlur = (inputValue: string, type: 'month' | 'year') => {
-    const isError = type === 'month' 
-      ? getMonthError(inputValue) !== '' 
-      : getYearError(inputValue) !== '';
-
-    setErrors(prev => ({ ...prev, [type]: isError }));
-  }
-
-  const monthErrMsg = errors.month ? getMonthError(value.month) : '';
-  const yearErrMsg = errors.year ? getYearError(value.year) : '';
-  const finalErrorMessage = monthErrMsg || yearErrMsg;
+  const { errors, monthRef, yearRef, handleOnChange, handleOnBlur, finalErrorMessage } = useExpirationDate({value, setValue});
 
   return (
     <CommonSection
@@ -72,7 +31,7 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         placeholder="MM"
         isError={errors.month}
         maxLength={2}
-        ref={(el) => {inputRefs.current[0] = el;}}
+        ref={monthRef}
       />
       <NumberInput
         id={`${expirationDateIds}-year`}
@@ -82,7 +41,7 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         placeholder="YY"
         isError={errors.year}
         maxLength={2}
-        ref={(el) => {inputRefs.current[1] = el;}}
+        ref={yearRef}
       />
     </CommonSection>
   );
