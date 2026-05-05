@@ -8,42 +8,42 @@ interface CvcFormGroupProps {
   handleChangeCvc: (value: string) => void;
 }
 
-type InputState = 'idle' | 'invalid' | 'touched' | 'valid';
+type FieldState =
+  | { status: 'idle' }
+  | { status: 'valid' }
+  | { status: 'invalid'; reason: 'type' | 'range' };
 
 const ERROR_MESSAGE = {
-  TYPE: '숫자만 입력 가능합니다.',
-  EMPTY: 'CVC를 전부 채워주세요.',
-  DEFAULT: '',
+  type: '숫자만 입력 가능합니다.',
+  range: 'CVC를 전부 채워주세요.',
+  default: '',
 };
 
+const CVC_LENGTH = 3;
+
 export const CvcFormGroup = ({ cvc, handleChangeCvc: onChangeCvc }: CvcFormGroupProps) => {
-  const [cvcState, setCvcState] = useState<InputState>('idle');
+  const [cvcState, setCvcState] = useState<FieldState>({ status: 'idle' });
 
   const handleChange = (value: string) => {
     if (value !== '' && !isNumericString(value)) {
-      setCvcState('invalid');
+      setCvcState({ status: 'invalid', reason: 'type' });
       return;
     }
-    setCvcState(value.length === 3 ? 'valid' : 'idle');
+    setCvcState(value.length === CVC_LENGTH ? { status: 'valid' } : { status: 'idle' });
     onChangeCvc(value);
   };
 
   const handleBlur = () => {
-    if (cvcState === 'valid') return;
-    setCvcState('touched');
+    if (cvcState.status === 'valid') return;
+    if (cvc.length < CVC_LENGTH) setCvcState({ status: 'invalid', reason: 'range' });
   };
 
-  const getErrorStatus = (state: InputState) => {
-    switch (state) {
+  const getErrorMessage = (state: FieldState) => {
+    switch (state.status) {
       case 'invalid':
-        return { render: true, message: ERROR_MESSAGE.TYPE };
-      case 'touched':
-        return {
-          render: true,
-          message: cvc.length === 3 ? ERROR_MESSAGE.DEFAULT : ERROR_MESSAGE.EMPTY,
-        };
+        return ERROR_MESSAGE[state.reason];
       default:
-        return { render: false, message: ERROR_MESSAGE.DEFAULT };
+        return ERROR_MESSAGE.default;
     }
   };
 
@@ -51,15 +51,15 @@ export const CvcFormGroup = ({ cvc, handleChangeCvc: onChangeCvc }: CvcFormGroup
     <FormGroup
       title="CVC 번호를 입력해 주세요"
       label="CVC"
-      errorMessage={getErrorStatus(cvcState).message}
+      errorMessage={getErrorMessage(cvcState)}
     >
       <Input
         type="text"
         inputMode="numeric"
         value={cvc}
-        maxLength={3}
+        maxLength={CVC_LENGTH}
         placeholder="123"
-        isError={getErrorStatus(cvcState).render}
+        isError={!!getErrorMessage(cvcState)}
         onChange={(e) => handleChange(e.target.value)}
         onBlur={handleBlur}
       />

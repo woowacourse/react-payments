@@ -12,12 +12,15 @@ interface CardNumberFormGroupProps {
   errorMessage?: string;
 }
 
-type InputState = 'idle' | 'invalid' | 'touched' | 'valid';
+type FieldState =
+  | { status: 'idle' }
+  | { status: 'valid' }
+  | { status: 'invalid'; reason: 'type' | 'length' };
 
 const ERROR_MESSAGE = {
-  TYPE: '숫자만 입력 가능합니다.',
-  EMPTY: '카드 번호를 전부 채워주세요.',
-  DEFAULT: '',
+  type: '숫자만 입력 가능합니다.',
+  length: '카드 번호를 전부 채워주세요.',
+  default: '',
 };
 
 export const CardNumberFormGroup = ({
@@ -26,44 +29,41 @@ export const CardNumberFormGroup = ({
 }: CardNumberFormGroupProps) => {
   const brand = getBrand(cardNumbers.join(''));
   const INPUT_FORMAT = CARD_BRAND_FORMAT[brand];
-  const [inputStates, setInputStates] = useState<InputState[]>(() =>
-    INPUT_FORMAT.map(() => 'idle'),
+  const [inputStates, setInputStates] = useState<FieldState[]>(() =>
+    INPUT_FORMAT.map(() => ({ status: 'idle' })),
   );
-
   // 현재 [4,4,4,4] -> [idle, idle, idle, idle]
 
   const handleChange = (value: string, index: number) => {
     if (value !== '' && !isNumericString(value)) {
       const nextInputStates = [...inputStates];
-      nextInputStates[index] = 'invalid';
+      nextInputStates[index] = { status: 'invalid', reason: 'type' };
       setInputStates(nextInputStates);
       return;
     }
     const nextInputStates = [...inputStates];
-    nextInputStates[index] = value.length === INPUT_FORMAT[index] ? 'valid' : 'idle';
+    nextInputStates[index] =
+      value.length === INPUT_FORMAT[index] ? { status: 'valid' } : { status: 'idle' };
     setInputStates(nextInputStates);
     handleChangeCardNumber(value, index);
   };
 
   const handleBlurCardNumber = (index: number) => {
-    if (inputStates[index] === 'valid') return;
+    if (inputStates[index].status === 'valid') return;
     const nextInputStates = [...inputStates];
-    nextInputStates[index] = 'touched';
+    nextInputStates[index] = { status: 'invalid', reason: 'length' };
     setInputStates(nextInputStates);
   };
 
-  const isInputError = (index: number) => {
-    if (inputStates[index] === 'invalid') return true;
-    if (inputStates[index] === 'touched' && cardNumbers[index].length !== INPUT_FORMAT[index])
-      return true;
-    return false;
-  };
-
-  const errorMessage = () => {
-    if (inputStates.some((state) => state === 'invalid')) return ERROR_MESSAGE.TYPE;
-    if (inputStates.some((state, index) => cardNumbers[index] !== '' && state === 'touched'))
-      return ERROR_MESSAGE.EMPTY;
-    return ERROR_MESSAGE.DEFAULT;
+  const getErrorMessage = () => {
+    if (inputStates.some((state) => state.status === 'invalid')) {
+      const typeError = inputStates.find(
+        (state) => state.status === 'invalid' && state.reason === 'type',
+      );
+      if (typeError) return ERROR_MESSAGE.type;
+      return ERROR_MESSAGE.length;
+    }
+    return ERROR_MESSAGE.default;
   };
 
   return (
@@ -71,7 +71,7 @@ export const CardNumberFormGroup = ({
       title="결제할 카드 번호를 입력해 주세요"
       subTitle="본인 명의의 카드만 결제 가능합니다."
       label="카드 번호"
-      errorMessage={errorMessage()}
+      errorMessage={getErrorMessage()}
     >
       {INPUT_FORMAT.map((size, index) => (
         <Input
@@ -81,7 +81,7 @@ export const CardNumberFormGroup = ({
           value={cardNumbers[index]}
           placeholder="1234"
           maxLength={size}
-          isError={isInputError(index)}
+          isError={inputStates[index].status === 'invalid'}
           onChange={(e) => handleChange(e.target.value, index)}
           onBlur={() => handleBlurCardNumber(index)}
         />
