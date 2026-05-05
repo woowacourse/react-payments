@@ -121,7 +121,7 @@ const ExpiryField = ({
 
   return (
     <StyledField>
-      <Label value="유효기간" htmlFor="expiry" />
+      <Label htmlFor="expiry">유효기간</Label>
       <InputWrapper>
         <ExpiryInput
           id="expiry"

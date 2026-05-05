@@ -8,7 +8,7 @@ const meta = {
   tags: ["autodocs"],
   args: {
     // props
-    value: "",
+    children: "",
   },
 } satisfies Meta<typeof Label>;
 
@@ -17,6 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: "LabelTest",
+    children: "LabelTest",
   },
 };

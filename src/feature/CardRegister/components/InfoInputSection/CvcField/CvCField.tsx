@@ -72,7 +72,7 @@ const CvcField = ({
 
   return (
     <StyledField>
-      <Label value="CVC" htmlFor="cvc" />
+      <Label htmlFor="cvc">CVC</Label>
       <InputWrapper>
         <CvcInput
           id="cvc"
