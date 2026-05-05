@@ -45,10 +45,7 @@ export default function PaymentForm() {
           hintText={INPUT_FIELD_CONFIG['CARD_NUMBERS'].hintText}
         >
           <InputFieldForm<CardNumbersType>
-            id="cardNumbers"
-            label={INPUT_FIELD_CONFIG['CARD_NUMBERS'].label}
-            placeholderArr={INPUT_FIELD_CONFIG['CARD_NUMBERS'].placeholder}
-            fieldMaxLength={4}
+            fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
             value={cardNumbers}
             validator={cardNumbersValidator}
             onChange={handleCardNumbersChange}
@@ -60,10 +57,7 @@ export default function PaymentForm() {
           hintText={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].hintText}
         >
           <InputFieldForm<ExpirationDateType>
-            id="expirationDate"
-            label={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].label}
-            placeholderArr={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].placeholder}
-            fieldMaxLength={2}
+            fieldConfig={INPUT_FIELD_CONFIG['EXPIRATION_DATE']}
             value={expirationDate}
             validator={expirationDateValidator}
             onChange={handleExpirationDateChange}

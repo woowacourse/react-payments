@@ -12,10 +12,7 @@ export default function CVCFieldForm() {
 
   return (
     <InputFieldForm<string>
-      id="cvcNumber"
-      label={INPUT_FIELD_CONFIG['CVC'].label}
-      placeholderArr={INPUT_FIELD_CONFIG['CVC'].placeholder}
-      fieldMaxLength={3}
+      fieldConfig={INPUT_FIELD_CONFIG['CVC']}
       value={cvcNumbers}
       validator={cvcValidator}
       onChange={handleCVCNumbersChange}

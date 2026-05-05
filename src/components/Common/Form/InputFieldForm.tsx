@@ -4,22 +4,17 @@ import FormField from './FormField';
 import { CardNumbersType, ExpirationDateType } from '../../Form/PaymentForm';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { InputFieldConfig } from '../../../types';
 
 interface InputFieldFormProps<T extends CardNumbersType | ExpirationDateType | string> {
-  id: string;
-  label: string;
-  placeholderArr: string[];
-  fieldMaxLength: number;
+  fieldConfig: InputFieldConfig;
   value: T;
   validator: (inputValue: string, index: number) => { error: boolean; errorMessage: string };
   onChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
 }
 
 export default function InputFieldForm<T extends CardNumbersType | ExpirationDateType | string>({
-  id,
-  label,
-  placeholderArr,
-  fieldMaxLength,
+  fieldConfig,
   value,
   validator,
   onChange,
@@ -36,19 +31,19 @@ export default function InputFieldForm<T extends CardNumbersType | ExpirationDat
 
   return (
     <FormContainer>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={fieldConfig.id}>{fieldConfig.label}</Label>
 
       <InputFieldWrapper>
-        {numberList.map((_, index) => (
+        {numberList.map((numbers, index) => (
           <FormField
-            key={`${label}-${index}`}
-            id={index === 0 ? id : String(index)}
+            key={index}
+            id={index === 0 ? fieldConfig.id : String(index)}
             index={index}
-            numbers={numberList[index]}
-            fieldMaxLength={fieldMaxLength}
+            numbers={numbers}
+            fieldMaxLength={fieldConfig.maxLength}
             validator={validator}
             onChange={onChange}
-            placeholder={placeholderArr[index]}
+            placeholder={fieldConfig.placeholder[index]}
             setErrorMessage={setErrorMessage}
           />
         ))}
