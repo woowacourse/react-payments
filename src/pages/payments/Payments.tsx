@@ -16,7 +16,7 @@ export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [onBlurCardNumber, setOnBlurCardNumber] = useState([false, false, false, false]);
 
-  const [cardNumbersInvalidAttempMessage, setCardNumbersInvalidAttempMessage] = useState(['', '', '', '']);
+  const [cardNumbersInvalidAttemp, setCardNumbersInvalidAttemp] = useState([false, false, false, false]);
   // cardNumber --------------------------
 
   const preventCardNumber = (cardNumber: string) => {
@@ -26,14 +26,14 @@ export const Payments = () => {
   };
 
   const renderErrorMessageCardNumbers = (cardNumbers: string[]) => {
-    if (cardNumbersInvalidAttempMessage.find(Boolean)) return '유효현 카드번호(숫자)를 입력해주세요';
+    if (cardNumbersInvalidAttemp.find(Boolean)) return '유효현 카드번호(숫자)를 입력해주세요';
     if (onBlurCardNumber.every((blur) => !blur)) return '';
     if (cardNumbers.some((cardNumber) => cardNumber.length !== 4)) return '카드 번호를 전부 채워주세요';
     return '';
   };
 
   const renderErrorCardNumberInput = (index: number) => {
-    const cardNumberInvalidAttempMessage = cardNumbersInvalidAttempMessage[index];
+    const cardNumberInvalidAttempMessage = cardNumbersInvalidAttemp[index];
     if (cardNumberInvalidAttempMessage) return true;
 
     const cardNumber = cardNumbers[index];
@@ -42,16 +42,16 @@ export const Payments = () => {
 
   const handleChangeCardNumber = (index: number, value: string) => {
     if (preventCardNumber(value)) {
-      setCardNumbersInvalidAttempMessage(
-        cardNumbersInvalidAttempMessage.map((message: string, i: number) => {
-          return index === i ? '유효현 카드번호(숫자)를 입력해주세요' : message;
+      setCardNumbersInvalidAttemp(
+        cardNumbersInvalidAttemp.map((invalidAttemp: boolean, i: number) => {
+          return index === i ? true : invalidAttemp;
         }),
       );
       return;
     } else {
-      setCardNumbersInvalidAttempMessage(
-        cardNumbersInvalidAttempMessage.map((message: string, i: number) => {
-          return index === i ? '' : message;
+      setCardNumbersInvalidAttemp(
+        cardNumbersInvalidAttemp.map((invalidAttemp: boolean, i: number) => {
+          return index === i ? false : invalidAttemp;
         }),
       );
     }
