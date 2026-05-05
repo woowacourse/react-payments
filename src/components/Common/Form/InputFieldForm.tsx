@@ -28,7 +28,7 @@ export default function InputFieldForm({
         {valueList.map((value, index) => (
           <FormField
             key={index}
-            id={index === 0 ? fieldConfig.id : String(index)}
+            id={index === 0 ? fieldConfig.id : `${fieldConfig.id}-${index}`}
             index={index}
             value={value}
             validator={validator}

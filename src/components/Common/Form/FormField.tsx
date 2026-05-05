@@ -63,7 +63,7 @@ export default function FormField({
     <FormFieldContainer>
       <InputField
         isError={isError}
-        id={index === 0 ? id : String(index)}
+        id={id}
         type="text"
         maxLength={fieldMaxLength}
         inputMode="numeric"
