@@ -13,7 +13,7 @@ const meta = {
     expiryYear: "",
     setExpiryMonth: fn(),
     setExpiryYear: fn(),
-    setIsError: fn(),
+    onErrorChange: fn(),
   },
 } satisfies Meta<typeof ExpiryField>;
 

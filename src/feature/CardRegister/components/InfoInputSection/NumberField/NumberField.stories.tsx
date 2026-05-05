@@ -11,7 +11,7 @@ const meta = {
   args: {
     cardNumbers: ["", "", "", ""],
     setCardNumbers: fn(),
-    setIsError: fn(),
+    onErrorChange: fn(),
   },
 } satisfies Meta<typeof NumberField>;
 
