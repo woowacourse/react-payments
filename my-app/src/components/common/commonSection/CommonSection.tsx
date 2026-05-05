@@ -4,7 +4,7 @@ interface Props {
   title: string;
   description: string;
   label: string;
-  children: any;
+  children: React.ReactNode;
   errorMessage: string;
 }
 
