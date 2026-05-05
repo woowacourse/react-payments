@@ -3,11 +3,11 @@ import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
 import {
-  isExceedTwoDigits,
-  isNumericInput,
-  isTwoDigits,
-  isValidMonth,
-} from "../../../../../validate";
+  validateExceedTwoDigits,
+  validateMonth,
+  validateNumericInput,
+  validateTwoDigits,
+} from "../../../validators/expiryDate";
 
 const ExpiryField = ({
   expiryMonth,
@@ -34,14 +34,14 @@ const ExpiryField = ({
   const handleMonthChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!isNumericInput(value)) {
+    if (!validateNumericInput(value)) {
       return;
     }
-    if (isExceedTwoDigits(value)) {
+    if (validateExceedTwoDigits(value)) {
       return;
     }
 
-    if (value.length === 2 && !isValidMonth(value)) {
+    if (value.length === 2 && !validateMonth(value)) {
       updateErrorInfo(index, true, "월은 01~12 사이로 입력해주세요.");
       return;
     }
@@ -56,8 +56,8 @@ const ExpiryField = ({
   const handleYearChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!isNumericInput(value)) return;
-    if (isExceedTwoDigits(value)) return;
+    if (!validateNumericInput(value)) return;
+    if (validateExceedTwoDigits(value)) return;
 
     setExpiryYear(value);
 
@@ -82,7 +82,7 @@ const ExpiryField = ({
       setExpiryYear(filledNumber);
     }
 
-    updateErrorInfo(index, !isTwoDigits(filledNumber));
+    updateErrorInfo(index, !validateTwoDigits(filledNumber));
   };
 
   const fillZero = (value: string, expiryType: "month" | "year") => {

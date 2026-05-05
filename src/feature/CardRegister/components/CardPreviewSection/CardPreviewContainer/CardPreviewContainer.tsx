@@ -1,37 +1,18 @@
 import styled from "styled-components";
-import type {
-  CardInfoType,
-  CardNumberChunkType,
-} from "../../../../../common/types/CardInfoType";
+import type { CardInfoType } from "../../../../../common/types/CardInfoType";
 import CardBrandLogo from "../CardBrandLogo/CardBrandLogo";
 import CardExpiryDateDisplay from "../CardExpiryDateDisplay/CardExpiryDateDisplay";
 import CardNumberDisplay from "../CardNumberDisplay/CardNumberDisplay";
+import { getCardBrandName } from "../../../utils/cardBrand";
 
 const CardPreviewContainer = ({ cardInfo }: { cardInfo: CardInfoType }) => {
   const { cardNumbers, expiryMonth, expiryYear } = cardInfo;
-
-  const getBrandName = (
-    cardNumbers: CardNumberChunkType,
-  ): "visa" | "masterCard" | null => {
-    const fullNumber = cardNumbers
-      .map((chunk) => chunk.padEnd(4, "#"))
-      .join("");
-
-    if (fullNumber.startsWith("4")) return "visa";
-
-    const prefix = Number(fullNumber.slice(0, 2));
-    if (prefix >= 51 && prefix <= 55) return "masterCard";
-
-    return null;
-  };
-
-  // 유틸로 빼자
 
   return (
     <Container>
       <CardHeader>
         <IcChip />
-        <CardBrandLogo brandName={getBrandName(cardNumbers)} />
+        <CardBrandLogo brandName={getCardBrandName(cardNumbers)} />
       </CardHeader>
       <CardBody>
         <CardNumberDisplay cardNumbers={cardNumbers} />
