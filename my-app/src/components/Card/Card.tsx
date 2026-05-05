@@ -9,7 +9,7 @@ const fixedCardNumberStyle = css`
   font-family: "Inter";
 `;
 
-const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
+const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
   return (
     <div
       css={css`
@@ -40,14 +40,14 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             border-radius: 4px;
           `}
         ></div>
-        {cardInfo.brand && (
+        {brand && (
           <img
             alt="카드 브랜드 이미지"
             css={css`
               width: 36px;
               height: 22px;
             `}
-            src={cardInfo.brand === "master" ? masterLogo : visaLogo}
+            src={brand === "master" ? masterLogo : visaLogo}
           />
         )}
       </div>

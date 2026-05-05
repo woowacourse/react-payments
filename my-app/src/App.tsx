@@ -6,17 +6,11 @@ import CardNumberInputSection from "./components/CardNumberInputSection/CardNumb
 import CvcInputSection from "./components/CvcInputSection/CvcInputSection";
 import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection";
 import { decideBrandName } from "./utils/decideBrandName.ts";
-import { useEffect } from "react";
 
 function App() {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: "", brand: "" });
+  const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: "" });
 
-  useEffect(() => {
-    const brandName = decideBrandName(cardInfo.numbers[0]);
-    setCardInfo((prev) => {
-      return { ...prev, brand: brandName };
-    });
-  }, [cardInfo.numbers[0]]);
+  const brand = decideBrandName(cardInfo.numbers[0] ?? "");
 
   const cardNumberHandler = (cardInfo: string[]) => {
     setCardInfo((prev) => {
@@ -60,7 +54,7 @@ function App() {
           gap: 45px;
         `}
       >
-        <Card cardInfo={cardInfo} />
+        <Card cardInfo={cardInfo} brand={brand} />
         <div
           css={css`
             width: 100%;

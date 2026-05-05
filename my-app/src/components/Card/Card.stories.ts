@@ -22,8 +22,8 @@ export const Empty: Story = {
       numbers: [],
       expiry: [],
       cvc: "",
-      brand: "",
     },
+    brand: "",
   },
 };
 
@@ -33,8 +33,8 @@ export const Visa: Story = {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["12", "26"],
       cvc: "123",
-      brand: "visa",
     },
+    brand: "visa",
   },
 };
 
@@ -44,7 +44,7 @@ export const Master: Story = {
       numbers: ["5123", "4567", "8901", "2345"],
       expiry: ["06", "27"],
       cvc: "456",
-      brand: "master",
     },
+    brand: "master",
   },
 };
