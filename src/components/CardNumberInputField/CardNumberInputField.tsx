@@ -1,5 +1,5 @@
 import InputField from "@components/common/InputField.tsx";
-import { checkIsInt, validateCardNumberUnitRange } from "@utils/validator";
+import { checkIsInt, checkLengthMatches } from "@utils/validator";
 import { useState } from "react";
 import {
   CARD_NUMBER_UNIT_MAX_LENGTH,
@@ -55,7 +55,7 @@ const CardNumberInputField = ({
       return;
     }
 
-    if (!validateCardNumberUnitRange(+input)) {
+    if (!checkLengthMatches(input, CARD_NUMBER_UNIT_MAX_LENGTH)) {
       updateInputStatus(index, "INVALID_LENGTH");
       return;
     }

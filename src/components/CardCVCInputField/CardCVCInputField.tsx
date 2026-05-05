@@ -1,6 +1,6 @@
 import { useState } from "react";
 import InputField from "@components/common/InputField.tsx";
-import { checkIsInt, validateCVCRange } from "@/utils/validator";
+import { checkIsInt, checkLengthMatches } from "@/utils/validator";
 import { CVC_MAX_LENGTH, HELPER_MESSAGE, type InputStatus } from "./constants";
 
 interface CardCVCInputFieldProps {
@@ -27,7 +27,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
       return;
     }
 
-    if (!validateCVCRange(+input)) {
+    if (!checkLengthMatches(input, CVC_MAX_LENGTH)) {
       setStatus("INVALID_LENGTH");
       return;
     }
