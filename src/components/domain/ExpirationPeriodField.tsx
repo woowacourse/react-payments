@@ -13,24 +13,30 @@ interface ExpirationPeriodFieldProps {
 }
 
 export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
-  const [errorStatus, setErrorStatus] = useState<ExpirationPeriodErrorStatus>(null);
-  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+  const [errors, setErrors] = useState<[ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]>([null, null]);
+
+  const updateError = (index: number, status: ExpirationPeriodErrorStatus) => {
+    setErrors((prev) => {
+      const next = [...prev] as [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
+      next[index] = status;
+      return next;
+    });
+  };
 
   // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
   // 1. numberOnly -> update 제외됨.
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    setCurrentIndex(index);
 
     if (inputValue !== '' && !isNumber(inputValue)) {
-      setErrorStatus('numberOnly');
+      updateError(index, 'numberOnly');
       return;
     }
 
     const newValue = [...value] as CardInfo['expirationPeriod'];
     newValue[index] = inputValue;
     onUpdated(newValue);
-    setErrorStatus(null);
+    updateError(index, null);
   };
 
   // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
@@ -40,36 +46,37 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
   // 4. YY -> 오늘로부터 5년 이내인지.
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    setCurrentIndex(index);
 
     if (inputValue === '') {
-      setErrorStatus('required');
+      updateError(index, 'required');
       return;
     }
 
     if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
-      setErrorStatus('invalidLength');
+      updateError(index, 'invalidLength');
       return;
     }
 
     if (index === 0 && !isValidMonth(inputValue)) {
-      setErrorStatus('invalidMonth');
+      updateError(index, 'invalidMonth');
       return;
     }
 
     if (index === 1 && !isValidYear(inputValue)) {
-      setErrorStatus('invalidYear');
+      updateError(index, 'invalidYear');
       return;
     }
 
-    setErrorStatus(null);
+    updateError(index, null);
   };
+
+  const activeError = errors.find((e) => e !== null) ?? null;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드 유효기간을 입력해 주세요',
     caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
-    error: !!errorStatus,
-    errorMessage: errorStatus ? EXPIRATION_PERIOD_ERROR_MESSAGES[errorStatus] : '',
+    error: activeError !== null,
+    errorMessage: activeError ? EXPIRATION_PERIOD_ERROR_MESSAGES[activeError] : '',
   };
 
   return (
@@ -79,7 +86,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
         <div css={inputGroupStyle}>
           <Input
             value={value[0]}
-            variant={errorStatus !== null && currentIndex === 0 ? 'error' : 'default'}
+            variant={errors[0] !== null ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="MM"
@@ -89,7 +96,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
           />
           <Input
             value={value[1]}
-            variant={errorStatus !== null && currentIndex === 1 ? 'error' : 'default'}
+            variant={errors[1] !== null ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="YY"
