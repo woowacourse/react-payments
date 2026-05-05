@@ -70,6 +70,8 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
       setErrorStatus('invalidLength');
       return;
     }
+
+    setErrorStatus(null);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
