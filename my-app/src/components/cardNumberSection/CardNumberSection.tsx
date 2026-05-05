@@ -1,18 +1,11 @@
 import { useId, useRef, useState } from 'react';
-import { isInputValidate, isIncompleteRange } from '../../utils/Validation';
+import { getCardNumberError, isInputValidate } from '../../utils/Validation';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
 
 interface Props {
   value: string[];
   setValue: (value: string[]) => void;
-}
-
-const getCardNumberError = (cardNumber: string): string => {
-  if (cardNumber === '') return '';
-  if (isIncompleteRange(cardNumber, 4)) return '필요한 자릿수를 모두 입력해주세요!'
-
-  return '';
 }
 
 const CardNumberSection = ({ value, setValue }: Props) => {
