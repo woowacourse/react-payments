@@ -78,7 +78,7 @@ export const CardNumberFormGroup = ({
         <Input
           type="text"
           inputMode="numeric"
-          key={index}
+          key={`${brand}-card-number-${index}`}
           value={cardNumbers[index]}
           placeholder="1234"
           maxLength={size}

@@ -3,6 +3,9 @@ import styles from './CardPreview.module.css';
 import MastercardSvg from '@/core/assets/Mastercard.svg?react';
 import VisaSvg from '@/core/assets/Visa.svg?react';
 
+import { CARD_BRAND_FORMAT } from '@/entities/card/brand';
+import type { Brand } from '@/entities/card/brand';
+
 import type { ExpirationDate } from '@/entities/card/types';
 
 export interface DefaultCardPreviewProps {
@@ -19,13 +22,16 @@ const BrandMap = {
 
 const STAR = '●';
 
-const FourCardNumber = ({ cardNumbers }: { cardNumbers: string[] }) => {
+const CardNumber = ({ cardNumbers, brand }: { cardNumbers: string[]; brand: Brand }) => {
+  const INPUT_FORMAT = CARD_BRAND_FORMAT[brand];
+
   return (
     <>
-      <span>{cardNumbers[0]}</span>
-      <span>{cardNumbers[1]}</span>
-      <span>{STAR.repeat(cardNumbers[2].length)}</span>
-      <span>{STAR.repeat(cardNumbers[3].length)}</span>
+      {INPUT_FORMAT.map((size, i) => (
+        <span key={`${brand}-card-number-${size}-${i}`} className={styles.cardNumberSection}>
+          {i >= 2 ? STAR.repeat(cardNumbers[i]?.length ?? 0) : (cardNumbers[i] ?? '')}
+        </span>
+      ))}
     </>
   );
 };
@@ -40,7 +46,7 @@ export const CardPreview = ({
       <div className={styles.card}>
         <div className={styles.brand}>{BrandMap[cardBrand]}</div>
         <div className={styles.number}>
-          <FourCardNumber cardNumbers={cardNumbers} />
+          <CardNumber cardNumbers={cardNumbers} brand={cardBrand} />
         </div>
         <div className={styles.expirationDate}>
           {expirationDate.month && <span>{expirationDate.month}/</span>}
