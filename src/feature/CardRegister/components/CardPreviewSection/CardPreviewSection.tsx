@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import type {CardInfoType} from '../../../../common/types/CardInfoType';
+import type { CardPreviewInfoType } from '../../../../common/types/CardPreviewInfoType';
 import CardPreviewContainer from './CardPreviewContainer/CardPreviewContainer';
 
-const CardPreviewSection = ({cardInfo}: {cardInfo: CardInfoType}) => {
+const CardPreviewSection = ({
+  cardPreviewInfo,
+}: {
+  cardPreviewInfo: CardPreviewInfoType;
+}) => {
   return (
     <Container>
-      <CardPreviewContainer cardInfo={cardInfo} />
+      <CardPreviewContainer cardPreviewInfo={cardPreviewInfo} />
     </Container>
   );
 };

@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import type {CardInfoType} from '../../../../../common/types/CardInfoType';
+import type {CardPreviewInfoType} from '../../../../../common/types/CardPreviewInfoType';
 import CardBrandLogo from '../CardBrandLogo/CardBrandLogo';
 import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDisplay';
 import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
 
-const CardPreviewContainer = ({cardInfo}: {cardInfo: CardInfoType}) => {
-  const {cardNumbers, expiryMonth, expiryYear} = cardInfo;
+const CardPreviewContainer = ({
+  cardPreviewInfo,
+}: {
+  cardPreviewInfo: CardPreviewInfoType;
+}) => {
+  const {cardNumbers, expiryMonth, expiryYear} = cardPreviewInfo;
 
   const getBrandName = (cardNumbers: string[]): 'visa' | 'masterCard' | null => {
     const fullNumber = cardNumbers.map((chunk) => chunk.padEnd(4, '#')).join('');

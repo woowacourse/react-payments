@@ -3,24 +3,24 @@ import CvcField from './CvcField/CvCField';
 import ExpiryField from './ExpiryField/ExpiryField';
 import NumberField from './NumberField/NumberField';
 import type {
-  CardInfoHandlersType,
-  CardInfoType,
-} from '../../../../common/types/CardInfoType';
+  CardFormHandlersType,
+  CardPreviewInfoType,
+} from '../../../../common/types/CardPreviewInfoType';
 import styled from 'styled-components';
 import FieldSection from './FieldSection/FieldSection';
 
 const InfoInputSection = ({
-  cardInfo,
-  cardInfoHandlers,
+  cardPreviewInfo,
+  cardFormHandlers,
 }: {
-  cardInfo: CardInfoType;
-  cardInfoHandlers: CardInfoHandlersType;
+  cardPreviewInfo: CardPreviewInfoType;
+  cardFormHandlers: CardFormHandlersType;
 }) => {
   const [cvcNumber, setCvcNumber] = useState('');
   const [isError, setIsError] = useState(false);
 
-  const { cardNumbers, expiryMonth, expiryYear } = cardInfo;
-  const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardInfoHandlers;
+  const { cardNumbers, expiryMonth, expiryYear } = cardPreviewInfo;
+  const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardFormHandlers;
 
   if (isError) {
     console.log('error');

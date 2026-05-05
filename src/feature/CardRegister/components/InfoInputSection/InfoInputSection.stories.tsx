@@ -9,12 +9,12 @@ const meta = {
   component: InfoInputSection,
   tags: ['autodocs'],
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['', '', '', ''],
       expiryMonth: '',
       expiryYear: '',
     },
-    cardInfoHandlers: {
+    cardFormHandlers: {
       setCardNumbers: fn(),
       setExpiryMonth: fn(),
       setExpiryYear: fn(),
@@ -29,7 +29,7 @@ export const Empty: Story = {};
 
 export const Partial: Story = {
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['4123', '56', '', ''],
       expiryMonth: '1',
       expiryYear: '',
@@ -39,7 +39,7 @@ export const Partial: Story = {
 
 export const Filled: Story = {
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['4123', '5678', '1234', '5678'],
       expiryMonth: '12',
       expiryYear: '30',
@@ -49,15 +49,15 @@ export const Filled: Story = {
 
 export const Interactive: Story = {
   render: function InteractiveInfoInputSection(args) {
-    const [cardNumbers, setCardNumbers] = useState(args.cardInfo.cardNumbers);
-    const [expiryMonth, setExpiryMonth] = useState(args.cardInfo.expiryMonth);
-    const [expiryYear, setExpiryYear] = useState(args.cardInfo.expiryYear);
+    const [cardNumbers, setCardNumbers] = useState(args.cardPreviewInfo.cardNumbers);
+    const [expiryMonth, setExpiryMonth] = useState(args.cardPreviewInfo.expiryMonth);
+    const [expiryYear, setExpiryYear] = useState(args.cardPreviewInfo.expiryYear);
 
     return (
       <InfoInputSection
         {...args}
-        cardInfo={{cardNumbers, expiryMonth, expiryYear}}
-        cardInfoHandlers={{setCardNumbers, setExpiryMonth, setExpiryYear}}
+        cardPreviewInfo={{cardNumbers, expiryMonth, expiryYear}}
+        cardFormHandlers={{setCardNumbers, setExpiryMonth, setExpiryYear}}
       />
     );
   },

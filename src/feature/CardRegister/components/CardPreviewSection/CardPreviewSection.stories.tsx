@@ -7,7 +7,7 @@ const meta = {
   component: CardPreviewSection,
   tags: ['autodocs'],
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['', '', '', ''],
       expiryMonth: '',
       expiryYear: '',
@@ -22,7 +22,7 @@ export const Empty: Story = {};
 
 export const Filled: Story = {
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['4123', '5678', '1234', '5678'],
       expiryMonth: '12',
       expiryYear: '30',

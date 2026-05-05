@@ -7,7 +7,7 @@ const meta = {
   component: CardPreviewContainer,
   tags: ['autodocs'],
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['', '', '', ''],
       expiryMonth: '',
       expiryYear: '',
@@ -22,7 +22,7 @@ export const Empty: Story = {};
 
 export const Visa: Story = {
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['4123', '5678', '1234', '5678'],
       expiryMonth: '12',
       expiryYear: '30',
@@ -32,7 +32,7 @@ export const Visa: Story = {
 
 export const MasterCard: Story = {
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['5123', '5678', '1234', '5678'],
       expiryMonth: '12',
       expiryYear: '30',
@@ -42,7 +42,7 @@ export const MasterCard: Story = {
 
 export const UnknownBrand: Story = {
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['3123', '5678', '1234', '5678'],
       expiryMonth: '12',
       expiryYear: '30',
@@ -52,7 +52,7 @@ export const UnknownBrand: Story = {
 
 export const Partial: Story = {
   args: {
-    cardInfo: {
+    cardPreviewInfo: {
       cardNumbers: ['4123', '56', '', ''],
       expiryMonth: '1',
       expiryYear: '',

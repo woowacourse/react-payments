@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import styled from 'styled-components';
@@ -8,13 +8,13 @@ const CardRegisterPage = () => {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
 
-  const cardInfo = {
+  const cardPreviewInfo = {
     cardNumbers,
     expiryMonth,
     expiryYear,
   };
 
-  const cardInfoHandlers = {
+  const cardFormHandlers = {
     setCardNumbers,
     setExpiryMonth,
     setExpiryYear,
@@ -23,8 +23,11 @@ const CardRegisterPage = () => {
   return (
     <Wrapper>
       <Container>
-        <CardPreviewSection cardInfo={cardInfo} />
-        <InfoInputSection cardInfo={cardInfo} cardInfoHandlers={cardInfoHandlers} />
+        <CardPreviewSection cardPreviewInfo={cardPreviewInfo} />
+        <InfoInputSection
+          cardPreviewInfo={cardPreviewInfo}
+          cardFormHandlers={cardFormHandlers}
+        />
       </Container>
     </Wrapper>
   );
