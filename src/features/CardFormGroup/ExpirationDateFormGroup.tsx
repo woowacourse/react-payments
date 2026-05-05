@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 interface ExpirationDateFormGroupProps {
   expirationDate: ExpirationDate;
-  onChangeExpirationDate: (key: keyof ExpirationDate, value: string) => void;
+  handleChangeExpirationDate: (key: keyof ExpirationDate, value: string) => void;
 }
 
 type InputState = 'idle' | 'invalidType' | 'invalidRange' | 'touched' | 'valid';
@@ -20,7 +20,7 @@ const ERROR_MESSAGE = {
 
 export const ExpirationDateFormGroup = ({
   expirationDate,
-  onChangeExpirationDate,
+  handleChangeExpirationDate: onChangeExpirationDate,
 }: ExpirationDateFormGroupProps) => {
   const [monthState, setMonthState] = useState<InputState>('idle');
   const [yearState, setYearState] = useState<InputState>('idle');

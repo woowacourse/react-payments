@@ -77,6 +77,7 @@ export const CardNumberFormGroup = ({
       {INPUT_FORMAT.map((size, index) => (
         <Input
           type="text"
+          inputMode="numeric"
           key={index}
           value={cardNumbers[index]}
           placeholder="1234"
