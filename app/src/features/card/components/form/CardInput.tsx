@@ -13,7 +13,7 @@ export const StyledCardInput = styled.input<ErrorFlag>`
   border-radius: 2px;
   padding: 0.5rem;
   font-size: 11px;
-  height: 44px;
+  height: 32px;
   width: 100%;
   box-sizing: border-box;
   -moz-appearance: textfield;
