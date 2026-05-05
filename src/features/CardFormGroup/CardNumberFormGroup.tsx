@@ -1,5 +1,5 @@
-import { FormGroup } from '@/core/components/formGroup';
-import { Input } from '@/core/components/input';
+import { FormGroup } from '@/core/components/formGroup/FormGroup';
+import { Input } from '@/core/components/input/Input';
 import { CARD_BRAND_FORMAT } from '@/entities/card/brand';
 import type { Brand } from '@/entities/card/brand';
 import { useState } from 'react';

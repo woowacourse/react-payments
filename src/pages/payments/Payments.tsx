@@ -1,8 +1,7 @@
-import cn from 'classnames';
 import styles from './Payments.module.css';
 
 import { useState } from 'react';
-import { CardPreview } from '../../features/cardPreview/CardPreview';
+import { CardPreview } from '@/features/cardPreview/CardPreview';
 
 import type { ExpirationDate } from '@/entities/card/types';
 
@@ -33,7 +32,7 @@ export const Payments = () => {
   };
 
   return (
-    <div className={cn(styles.payments)}>
+    <div className={styles.payments}>
       <CardPreview
         cardBrand={brand}
         cardNumbers={cardNumbers}
