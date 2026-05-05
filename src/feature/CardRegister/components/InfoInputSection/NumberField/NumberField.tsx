@@ -8,6 +8,11 @@ import {
   CARD_NUMBER_INPUT_COUNT,
   ERROR_MESSAGES,
 } from "../../../constants";
+import { validateNumericInput } from "../../../validators/input";
+import {
+  validateCardNumberChunkLength,
+  validateExceedCardNumberChunkLength,
+} from "../../../validators/cardNumber";
 
 const NumberField = ({
   cardNumbers,
@@ -30,26 +35,34 @@ const NumberField = ({
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!/^\d*$/.test(value)) return;
-    if (value.length > CARD_NUMBER_CHUNK_LENGTH) return;
+    if (!validateNumericInput(value)) {
+      return;
+    }
+    if (validateExceedCardNumberChunkLength(value)) {
+      return;
+    }
 
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? value : chunk,
     );
+
     setCardNumbers(newChunks as CardNumberChunkType);
-    clearErrorWhenComplete(index, value);
+
+    // 에러 해결과 동시에 에러 강조표시 해제
+    if (isTouched[index] && value.length === CARD_NUMBER_CHUNK_LENGTH) {
+      updateErrorInfo(index, false);
+    }
+  };
+
+  const handleNumbersBlur = (index: number, eValue: string) => {
+    updateTouched(index);
+    updateErrorInfo(index, !validateCardNumberChunkLength(eValue));
   };
 
   const updateTouched = (index: number) => {
     setIsTouched((prev) =>
       prev.map((touched, i) => (i === index ? true : touched)),
     );
-  };
-
-  const clearErrorWhenComplete = (index: number, value: string) => {
-    if (!isTouched[index] || value.length !== CARD_NUMBER_CHUNK_LENGTH) return;
-
-    updateErrorInfo(index, false);
   };
 
   const updateErrorInfo = (index: number, hasError: boolean) => {
@@ -65,18 +78,11 @@ const NumberField = ({
     onErrorChange(firstErrorIdx !== -1);
   };
 
-  const handleNumbersBlur = (index: number, eValue: string) => {
-    updateTouched(index);
-
-    const isValid = eValue.length === CARD_NUMBER_CHUNK_LENGTH;
-    updateErrorInfo(index, !isValid);
-  };
-
   const firstErrorIdx = errorInfo.flag.indexOf(true);
 
   return (
     <StyledField>
-      <Label value="카드 번호" htmlFor="card_number" />
+      <Label htmlFor="card_number">카드 번호</Label>
       <InputWrapper>
         {cardNumbers.map((chunk, index) => (
           <CardNumberInput
