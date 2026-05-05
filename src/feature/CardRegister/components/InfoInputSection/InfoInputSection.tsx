@@ -17,14 +17,14 @@ const InfoInputSection = ({
   cardFormHandlers: CardFormHandlersType;
 }) => {
   const [cvcNumber, setCvcNumber] = useState('');
-  const [isError, setIsError] = useState(false);
+  // const [isError, setIsError] = useState(false);
 
   const { cardNumbers, expiryMonth, expiryYear } = cardPreviewInfo;
   const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardFormHandlers;
 
-  if (isError) {
-    console.log('error');
-  }
+  // if (isError) {
+  //   console.log('error');
+  // }
 
   return (
     <Container>
