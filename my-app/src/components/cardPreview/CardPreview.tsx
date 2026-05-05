@@ -1,0 +1,33 @@
+import CardBrandImage from './cardBrandImage/CardBrandImage';
+import {
+  CardChip,
+  CardContainer,
+  CardExpirationDate,
+  CardHeader,
+  CardNumber,
+} from './CardPreview.styles';
+import EachCardNumber from './eachCardNumber/EachCardNumber';
+
+interface Props {
+  cardNumber: string[];
+  expirationDate: { month: string; year: string };
+}
+
+export default function CardPreview({ cardNumber, expirationDate }: Props) {
+  return (
+    <CardContainer>
+      <CardHeader>
+        <CardChip />
+        <CardBrandImage cardNumber={cardNumber[0]} />
+      </CardHeader>
+      <CardNumber>
+        {cardNumber.map((number, index) => (
+          <EachCardNumber key={index} cardNumber={number} index={index} />
+        ))}
+      </CardNumber>
+      <CardExpirationDate>
+        {expirationDate.month || 'MM'}/{expirationDate.year || 'YY'}
+      </CardExpirationDate>
+    </CardContainer>
+  );
+}
