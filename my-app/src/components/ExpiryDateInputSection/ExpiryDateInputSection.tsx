@@ -1,6 +1,6 @@
 import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
-import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
+import { css } from "@emotion/react";
 
 const ExpiryDateInputSection = ({
   onValueHandler,
@@ -10,7 +10,7 @@ const ExpiryDateInputSection = ({
   const [inputValues, setInputValues] = useState<string[]>(["", ""]);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
-
+  const placeHolder = ["MM", "YY"];
   const onChange = (index: number, value: string) => {
     const newValues = [...inputValues];
     newValues[index] = value;
@@ -48,15 +48,27 @@ const ExpiryDateInputSection = ({
       title="카드 유효기간을 입력해주세요"
       message="월/년도(MMYY)를 순서대로 입력해 주세요."
       tag="유효기간"
+      errorMessage={errorMessage}
     >
-      <ValidatedInputGroup
-        onChange={onChange}
-        onBlur={handleBlur}
-        errorMessage={errorMessage}
-        errorIndex={errorIndex}
-        values={inputValues}
-        inputOption={{ maxLength: 2, placeHolder: ["MM", "YY"] }}
-      />
+      {inputValues.map((value, i) => (
+        <input
+          key={i}
+          maxLength={2}
+          value={value}
+          onChange={(e) => onChange(i, e.target.value)}
+          onBlur={handleBlur}
+          css={css`
+            flex: 1;
+            height: 32px;
+            border-radius: 2px;
+            min-width: 0;
+            border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
+            padding: 8px;
+            box-sizing: border-box;
+          `}
+          placeholder={placeHolder[i]}
+        />
+      ))}
     </InputSectionLayout>
   );
 };

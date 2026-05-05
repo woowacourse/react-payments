@@ -1,18 +1,18 @@
 import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
-import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
+import { css } from "@emotion/react";
 
 const CvcInputSection = ({ onValueHandler }: { onValueHandler: (cardInfo: string) => void }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const onChange = (_index: number, value: string) => {
+  const onChange = (value: string) => {
     setErrorMessage("");
     setInputValue(value);
     onValueHandler(value);
   };
 
-  const handleBlur = (_i: number) => {
+  const handleBlur = () => {
     if (inputValue === "" || inputValue === undefined) return;
     if (!/^\d+$/.test(inputValue)) {
       setErrorMessage("숫자만 입력 가능합니다");
@@ -20,14 +20,22 @@ const CvcInputSection = ({ onValueHandler }: { onValueHandler: (cardInfo: string
   };
 
   return (
-    <InputSectionLayout title="CVC번호를 입력해 주세요" message="" tag="CVC">
-      <ValidatedInputGroup
-        onChange={onChange}
+    <InputSectionLayout title="CVC번호를 입력해 주세요" message="" tag="CVC" errorMessage={errorMessage}>
+      <input
+        maxLength={3}
+        value={inputValue}
+        onChange={(e) => onChange(e.target.value)}
         onBlur={handleBlur}
-        errorMessage={errorMessage}
-        values={[inputValue]}
-        errorIndex={errorMessage ? 0 : -1}
-        inputOption={{ maxLength: 3, placeHolder: ["123"] }}
+        css={css`
+          flex: 1;
+          height: 32px;
+          border-radius: 2px;
+          min-width: 0;
+          border: 1.01px solid ${errorMessage ? "#ff3d3d" : "#ACACAC"};
+          padding: 8px;
+          box-sizing: border-box;
+        `}
+        placeholder={"123"}
       />
     </InputSectionLayout>
   );

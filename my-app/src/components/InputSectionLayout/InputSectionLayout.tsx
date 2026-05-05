@@ -1,15 +1,23 @@
 import { css } from "@emotion/react";
-
+const errorTextStyle = css`
+  position: absolute;
+  bottom: 2px;
+  font-size: 9.5px;
+  font-weight: 400;
+  color: #ff3d3d;
+`;
 const InputSectionLayout = ({
   children,
   title,
   message,
   tag,
+  errorMessage,
 }: {
   children?: React.ReactNode;
   title: string;
   message: string;
   tag: string;
+  errorMessage?: string;
 }) => {
   return (
     <div
@@ -26,7 +34,6 @@ const InputSectionLayout = ({
           gap: 8px;
         `}
       >
-        {/*제목*/}
         <h2
           css={css`
             font-size: 18px;
@@ -37,7 +44,6 @@ const InputSectionLayout = ({
         >
           {title}
         </h2>
-        {/*설명*/}
         <p
           css={css`
             font-size: 9.5px;
@@ -56,7 +62,6 @@ const InputSectionLayout = ({
           gap: 8px;
         `}
       >
-        {/* 카드번호*/}
         <label
           css={css`
             font-size: 12px;
@@ -67,7 +72,33 @@ const InputSectionLayout = ({
         >
           {tag}
         </label>
-        {children}
+
+        <div
+          css={css`
+            position: relative;
+            padding-bottom: 20px;
+          `}
+        >
+          <section
+            css={css`
+              display: flex;
+              flex-direction: row;
+              gap: 8px;
+            `}
+          >
+            {children}
+          </section>
+          <span
+            css={[
+              errorTextStyle,
+              css`
+                visibility: ${errorMessage ? "visible" : "hidden"};
+              `,
+            ]}
+          >
+            {errorMessage}
+          </span>
+        </div>
       </div>
     </div>
   );
