@@ -12,9 +12,20 @@ interface ExpirationPeriodFieldProps {
   onUpdated: (value: CardInfo['expirationPeriod']) => void;
 }
 
+type ErrorStatusList = [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
+
 export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
-  const [errorStatus, setErrorStatus] = useState<ExpirationPeriodErrorStatus>(null);
-  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+  const [errorStatusList, setErrorStatusList] = useState<ErrorStatusList>([null, null]);
+  const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
+  const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
+
+  const setErrorStatus = (index: number, status: ExpirationPeriodErrorStatus) => {
+    setErrorStatusList((prev) => {
+      const updated = [...prev] as ErrorStatusList;
+      updated[index] = status;
+      return updated;
+    });
+  };
 
   // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
   // 1. required
@@ -23,17 +34,16 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
   // 4. YY -> 오늘로부터 5년 이내인지.
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    setCurrentIndex(index);
 
     if (inputValue !== '' && !isNumber(inputValue)) {
-      setErrorStatus('numberOnly');
+      setErrorStatus(index, 'numberOnly');
       return;
     }
 
     const newValue = [...value] as CardInfo['expirationPeriod'];
     newValue[index] = inputValue;
     onUpdated(newValue);
-    setErrorStatus(inputValue === '' ? 'required' : null);
+    setErrorStatus(index, inputValue === '' ? 'required' : null);
 
     // 1. invalid mm -> error status
     // 2. invlid yy -> error status
@@ -44,12 +54,12 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     }
 
     if (index === 0 && !isValidMonth(inputValue)) {
-      setErrorStatus('invalidMonth');
+      setErrorStatus(index, 'invalidMonth');
       return;
     }
 
     if (index === 1 && !isValidYear(inputValue)) {
-      setErrorStatus('invalidYear');
+      setErrorStatus(index, 'invalidYear');
       return;
     }
   };
@@ -59,15 +69,14 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
   // 2. invalidLength
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    setCurrentIndex(index);
 
     if (inputValue === '') {
-      setErrorStatus('required');
+      setErrorStatus(index, 'required');
       return;
     }
 
     if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
-      setErrorStatus('invalidLength');
+      setErrorStatus(index, 'invalidLength');
       return;
     }
   };
@@ -75,8 +84,8 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드 유효기간을 입력해 주세요',
     caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
-    error: !!errorStatus,
-    errorMessage: errorStatus ? EXPIRATION_PERIOD_ERROR_MESSAGES[errorStatus] : '',
+    error: !!activeErrorStatus,
+    errorMessage: EXPIRATION_PERIOD_ERROR_MESSAGES[activeErrorStatus] ?? '',
   };
 
   return (
@@ -86,7 +95,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
         <div css={inputGroupStyle}>
           <Input
             value={value[0]}
-            variant={errorStatus !== null && currentIndex === 0 ? 'error' : 'default'}
+            variant={activeErrorIndex === 0 ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="MM"
@@ -96,7 +105,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
           />
           <Input
             value={value[1]}
-            variant={errorStatus !== null && currentIndex === 1 ? 'error' : 'default'}
+            variant={activeErrorIndex === 1 ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="YY"
