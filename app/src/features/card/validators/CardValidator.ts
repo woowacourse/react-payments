@@ -1,3 +1,10 @@
+import { CARD_INPUT, NETWORK_BRAND_RULE } from "../Constants";
+
+const VALID_NETWORK_BRAND_START_NUMBER = [
+  NETWORK_BRAND_RULE.VISA_START_NUMBER,
+  NETWORK_BRAND_RULE.MASTER_START_NUMBER,
+];
+
 export const Validator = {
   isNumber(value: string) {
     if (Number.isNaN(Number(value))) {
@@ -6,22 +13,22 @@ export const Validator = {
   },
 
   isValidNetworkBrand(value: string) {
-    if (value !== "" && !["4", "5"].includes(value[0])) {
+    if (value !== "" && !VALID_NETWORK_BRAND_START_NUMBER.includes(value[0])) {
       throw new Error(
         "유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.",
       );
     }
     if (
       value.length === 2 &&
-      value[0] === "5" &&
-      !["1", "2", "3", "4", "5"].includes(value[1])
+      value[0] === NETWORK_BRAND_RULE.MASTER_START_NUMBER &&
+      !NETWORK_BRAND_RULE.MASTER_SECOND_NUMBER.includes(value[1])
     ) {
       throw new Error("마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.");
     }
   },
 
   isValidCardNumberLength(value: string) {
-    if (![0, 4].includes(value.length)) {
+    if (![0, CARD_INPUT.EACH_NUMBER_LENGTH].includes(value.length)) {
       throw new Error("카드 번호 각 항목은 4자리여야 합니다.");
     }
   },
@@ -57,13 +64,13 @@ export const Validator = {
   },
 
   isValidCardExpiryDateLength(value: string) {
-    if (![0, 2].includes(value.length)) {
+    if (![0, CARD_INPUT.EACH_EXPIRY_DATE_LENGTH].includes(value.length)) {
       throw new Error("날짜 각 항목은 2자리여야 합니다.");
     }
   },
 
   isValidCardCVCLength(value: string) {
-    if (![0, 3].includes(value.length)) {
+    if (![0, CARD_INPUT.CVC_LENGTH].includes(value.length)) {
       throw new Error("CVC는 3자리여야 합니다.");
     }
   },

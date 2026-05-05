@@ -2,6 +2,7 @@ import { CardFieldset, CardLegend } from "../../style/CardStyles";
 import { CardInput } from "./CardInput";
 import { Validator } from "../../validators/CardValidator";
 import { sanitizeErrors } from "../../../../Utils";
+import { CARD_INPUT } from "../../Constants";
 import { CardContext } from "../Card";
 import { useState, useContext } from "react";
 import { ErrorMessage } from "./ErrorMessage";
@@ -76,7 +77,7 @@ export function CardExpiryDateInput() {
           id="expiry-month"
           onChange={changeCardExpiryMonth}
           onBlur={handleBlurCardExpiryDate}
-          maxLength={2}
+          maxLength={CARD_INPUT.EACH_EXPIRY_DATE_LENGTH}
           value={cardExpiryDate["expiry-month"]}
           isError={isError["expiry-month"].state}
           placeholder="MM"
@@ -86,7 +87,7 @@ export function CardExpiryDateInput() {
           id="expiry-year"
           onChange={changeCardExpiryYear}
           onBlur={handleBlurCardExpiryDate}
-          maxLength={2}
+          maxLength={CARD_INPUT.EACH_EXPIRY_DATE_LENGTH}
           value={cardExpiryDate["expiry-year"]}
           isError={isError["expiry-year"].state}
           placeholder="YY"

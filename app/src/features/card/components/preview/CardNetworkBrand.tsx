@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import MasterCard from "../../assets/Mastercard.svg";
 import VisaCard from "../../assets/visa-logo.svg";
+import { NETWORK_BRAND_RULE } from "../../Constants";
 import { useContext } from "react";
 import { CardContext } from "../Card";
 
@@ -8,10 +9,11 @@ export function CardNetworkBrand() {
   const { cardNumber } = useContext(CardContext);
 
   const getNetworkBrand = (cardNumber: string) => {
-    if (cardNumber.startsWith("4")) return "visa";
+    if (cardNumber.startsWith(NETWORK_BRAND_RULE.VISA_START_NUMBER))
+      return "visa";
     if (
-      cardNumber.startsWith("5") &&
-      ["1", "2", "3", "4", "5"].includes(cardNumber[1])
+      cardNumber.startsWith(NETWORK_BRAND_RULE.MASTER_START_NUMBER) &&
+      NETWORK_BRAND_RULE.MASTER_SECOND_NUMBER.includes(cardNumber[1])
     )
       return "master";
   };
