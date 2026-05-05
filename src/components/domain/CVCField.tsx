@@ -49,6 +49,8 @@ export default function CVCField({ value, onUpdated }: CVCFieldProps) {
       setErrorStatus('invalidLength');
       return;
     }
+
+    setErrorStatus(null);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
