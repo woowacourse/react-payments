@@ -1,15 +1,39 @@
 # 페이먼츠 미션
 
-우아한테크코스 레벨2 **페이먼츠** 미션 저장소이다.
+## 기능 요구 사항
 
-이 저장소는 일부러 비어 있다. 크루는 프로젝트 부트스트랩부터 라이브러리 선택·설치·설정까지 직접 수행한다. "왜 이 라이브러리를 골랐는가"가 곧 학습이다.
+- 컴포넌트
+  - [x] CardForm
+    - [x] CardSection
+      - [x] CardNumberInputComponent
+      - [x] CardExpiryDateInputComponent
+      - [x] CardCVCInputComponent
+  - [x] CardComponent
+    - [x] CardNumberComponent
+    - [x] NetworkBrandComponent
+    - [x] ExpiryDateComponent
+    - [x] CVCComponent
 
-## 프로젝트 초기화
+- 카드번호 입력
+  - [x] 카드번호 입력값 검증
+    - [x] 숫자만 입력 검증
+    - [x] 첫째, 둘째 입력 검증(Visa: 4로 시작하는 16자리 숫자 MasterCard: 51~55로 시작하는 16자리 숫자)
+    - [x] focus 아웃시 길이 검증
+  - [x] 유효기간 입력 검증
+    - [x] MM(01 ~ 12) 입력 검증
+    - [x] focus 아웃시 길이 검증
+  - [x] CVC 입력 검증
+    - [x] 숫자 입력 검증
+    - [x] focus 아웃시 길이 검증
 
-[React — Build a React app from scratch](https://react.dev/learn/build-a-react-app-from-scratch)
+- 실시간 프리뷰
+  - [x] 입력값을 기반으로 카드 UI가 변경되도록 한다.
 
-```sh
-npm create vite@latest my-app -- --template react-ts
-npm install
-npm run dev
-```
+## UI
+
+- [x] 카드번호, 카드 만료일 레이아웃 정렬
+
+## 리팩토링 사항
+
+- [] 데이터 전달 구조
+- [] 검증로직 분리
