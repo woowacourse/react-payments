@@ -2,7 +2,6 @@ export interface CardInfo {
   cardNumbers: [string, string, string, string];
   expirationPeriod: [string, string];
   cvc: string;
-  cardBrand: CardBrand;
 }
 
 export type CardBrand = 'local' | 'visa' | 'mastercard';

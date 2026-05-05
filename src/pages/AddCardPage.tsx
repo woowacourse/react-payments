@@ -9,7 +9,7 @@ import Card from '../components/ui/Card';
 
 interface FieldState<T> {
   value: T;
-  // error?: string
+  // isValid?: boolean
   // touched?: boolean
 }
 
@@ -22,29 +22,14 @@ export default function AddCardPage() {
     cardNumbers: { value: ['', '', '', ''] },
     expirationPeriod: { value: ['', ''] },
     cvc: { value: '' },
-    cardBrand: { value: 'local' },
   });
 
-  const handleCardNumbersUpdate = (cardNumbers: CardInfo['cardNumbers']) => {
-    const cardBrand = categorizeCardBrand(cardNumbers);
-    setFormValue((prev)=>({
-      ...prev,
-      cardNumbers: { value: cardNumbers },
-      cardBrand: { value: cardBrand },
-    }));
-  };
+  const cardBrand = categorizeCardBrand(formValue.cardNumbers.value);
 
-  const handleExpirationPeriodUpdate = (expirationPeriod: CardInfo['expirationPeriod']) => {
+  const handleFormValueUpdate = <K extends keyof CardInfo>(field: K, value: CardInfo[K]) => {
     setFormValue((prev) => ({
       ...prev,
-      expirationPeriod: { value: expirationPeriod },
-    }));
-  };
-
-  const handleCVCUpdate = (cvc: CardInfo['cvc']) => {
-    setFormValue((prev)=>({
-      ...prev,
-      cvc: { value: cvc },
+      [field]: { value },
     }));
   };
 
@@ -55,13 +40,19 @@ export default function AddCardPage() {
           <Card
             cardNumber={formValue.cardNumbers.value}
             expirationPeriod={formValue.expirationPeriod.value}
-            cardBrand={formValue.cardBrand.value}
+            cardBrand={cardBrand}
           />
         </div>
         <form css={formLayout}>
-          <CardNumbersField value={formValue.cardNumbers.value} onUpdated={handleCardNumbersUpdate} />
-          <ExpirationPeriodField value={formValue.expirationPeriod.value} onUpdated={handleExpirationPeriodUpdate} />
-          <CVCField value={formValue.cvc.value} onUpdated={handleCVCUpdate} />
+          <CardNumbersField
+            value={formValue.cardNumbers.value}
+            onUpdated={(...params) => handleFormValueUpdate('cardNumbers', ...params)}
+          />
+          <ExpirationPeriodField
+            value={formValue.expirationPeriod.value}
+            onUpdated={(...params) => handleFormValueUpdate('expirationPeriod', ...params)}
+          />
+          <CVCField value={formValue.cvc.value} onUpdated={(...params) => handleFormValueUpdate('cvc', ...params)} />
         </form>
       </main>
     </div>
