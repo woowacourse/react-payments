@@ -2,6 +2,11 @@ import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import { useState } from "react";
 import styled from "styled-components";
+import {
+  CVC_INPUT_COUNT,
+  CVC_LENGTH,
+  ERROR_MESSAGES,
+} from "../../../constants";
 
 const CvcField = ({
   cvcNumber,
@@ -12,9 +17,8 @@ const CvcField = ({
   setCvcNumber: (value: string) => void;
   onErrorChange: (value: boolean) => void;
 }) => {
-  const INPUT_COUNT = 1;
-  const CVC_LENGTH = 3;
-  const createFlags = () => Array.from({ length: INPUT_COUNT }, () => false);
+  const createFlags = () =>
+    Array.from({ length: CVC_INPUT_COUNT }, () => false);
 
   const [errorInfo, setErrorInfo] = useState({
     flag: createFlags(),
@@ -31,8 +35,6 @@ const CvcField = ({
     setCvcNumber(value);
     clearErrorWhenComplete(index, value);
   };
-
-  const ERROR_MSG = "CVC 번호 3자리를 입력해 주세요";
 
   const updateTouched = (index: number) => {
     setIsTouched((prev) =>
@@ -54,7 +56,7 @@ const CvcField = ({
 
     setErrorInfo({
       flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MSG,
+      currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MESSAGES.cvc,
     });
     onErrorChange(firstErrorIdx !== -1);
   };
@@ -75,7 +77,7 @@ const CvcField = ({
         <CvcInput
           id="cvc"
           value={cvcNumber}
-          maxLength={3}
+          maxLength={CVC_LENGTH}
           inputMode="numeric"
           placeholder="123"
           strokeMode={0 === firstErrorIdx ? "error" : "default"}

@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import type { CardNumberChunkType } from "../../../../../common/types/CardInfoType";
+import {
+  CARD_NUMBER_MASK_CHAR,
+  CARD_NUMBER_MASK_START_INDEX,
+} from "../../../constants";
 
 const CardNumberDisplay = ({
   cardNumbers,
@@ -9,9 +13,11 @@ const CardNumberDisplay = ({
   return (
     <Container>
       {cardNumbers.map((chunk, index) => {
-        if (index >= 2) {
+        if (index >= CARD_NUMBER_MASK_START_INDEX) {
           return (
-            <MaskedChunk key={index}>{"·".repeat(chunk.length)}</MaskedChunk>
+            <MaskedChunk key={index}>
+              {CARD_NUMBER_MASK_CHAR.repeat(chunk.length)}
+            </MaskedChunk>
           );
         }
         return <Chunk key={index}>{chunk}</Chunk>;

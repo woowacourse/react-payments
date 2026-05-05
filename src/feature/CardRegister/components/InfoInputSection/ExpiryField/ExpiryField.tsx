@@ -8,6 +8,11 @@ import {
   validateNumericInput,
   validateTwoDigits,
 } from "../../../validators/expiryDate";
+import {
+  ERROR_MESSAGES,
+  EXPIRY_INPUT_COUNT,
+  EXPIRY_VALUE_LENGTH,
+} from "../../../constants";
 
 const ExpiryField = ({
   expiryMonth,
@@ -22,8 +27,8 @@ const ExpiryField = ({
   setExpiryYear: (value: string) => void;
   onErrorChange: (value: boolean) => void;
 }) => {
-  const INPUT_COUNT = 2;
-  const createFlags = () => Array.from({ length: INPUT_COUNT }, () => false);
+  const createFlags = () =>
+    Array.from({ length: EXPIRY_INPUT_COUNT }, () => false);
 
   const [errorInfo, setErrorInfo] = useState({
     flag: createFlags(),
@@ -41,14 +46,14 @@ const ExpiryField = ({
       return;
     }
 
-    if (value.length === 2 && !validateMonth(value)) {
-      updateErrorInfo(index, true, "월은 01~12 사이로 입력해주세요.");
+    if (value.length === EXPIRY_VALUE_LENGTH && !validateMonth(value)) {
+      updateErrorInfo(index, true, ERROR_MESSAGES.expiryMonthRange);
       return;
     }
 
     setExpiryMonth(value);
 
-    if (isTouched[index] && value.length === 2) {
+    if (isTouched[index] && value.length === EXPIRY_VALUE_LENGTH) {
       updateErrorInfo(index, false);
     }
   };
@@ -61,7 +66,7 @@ const ExpiryField = ({
 
     setExpiryYear(value);
 
-    if (isTouched[index] && value.length === 2) {
+    if (isTouched[index] && value.length === EXPIRY_VALUE_LENGTH) {
       updateErrorInfo(index, false);
     }
   };
@@ -110,7 +115,7 @@ const ExpiryField = ({
   const updateErrorInfo = (
     index: number,
     hasError: boolean,
-    errorMessage = "2자리를 입력해 주세요",
+    errorMessage: string = ERROR_MESSAGES.expiryLength,
   ) => {
     const newFlag = errorInfo.flag.map((flag, i) =>
       i === index ? hasError : flag,
@@ -133,7 +138,7 @@ const ExpiryField = ({
         <ExpiryInput
           id="expiry"
           value={expiryMonth}
-          maxLength={2}
+          maxLength={EXPIRY_VALUE_LENGTH}
           inputMode="numeric"
           placeholder="MM"
           strokeMode={0 === firstErrorIdx ? "error" : "default"}
@@ -142,7 +147,7 @@ const ExpiryField = ({
         />
         <ExpiryInput
           value={expiryYear}
-          maxLength={2}
+          maxLength={EXPIRY_VALUE_LENGTH}
           placeholder="YY"
           inputMode="numeric"
           strokeMode={1 === firstErrorIdx ? "error" : "default"}

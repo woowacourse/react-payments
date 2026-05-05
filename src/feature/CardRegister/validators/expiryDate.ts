@@ -1,12 +1,19 @@
+import {
+  EXPIRY_VALUE_LENGTH,
+  MAX_EXPIRY_MONTH,
+  MIN_EXPIRY_MONTH,
+} from "../constants";
+
 export const validateNumericInput = (value: string) => /^\d*$/.test(value);
 
-export const validateExceedTwoDigits = (value: string) => value.length > 2;
+export const validateExceedTwoDigits = (value: string) =>
+  value.length > EXPIRY_VALUE_LENGTH;
 
 export const validateMonth = (value: string) => {
   const month = Number(value);
-  return month >= 1 && month <= 12;
+  return month >= MIN_EXPIRY_MONTH && month <= MAX_EXPIRY_MONTH;
 };
 
 export const validateTwoDigits = (value: string) => {
-  return value.length === 2;
+  return value.length === EXPIRY_VALUE_LENGTH;
 };
