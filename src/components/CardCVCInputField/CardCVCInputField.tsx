@@ -12,7 +12,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
   const [status, setStatus] = useState<InputStatus>("DEFAULT");
 
   const handleCVCChange = (input: string) => {
-    if (checkIsOnlyDigits(input)) {
+    if (!checkIsOnlyDigits(input)) {
       setStatus("NOT_NUMBER");
       return;
     }

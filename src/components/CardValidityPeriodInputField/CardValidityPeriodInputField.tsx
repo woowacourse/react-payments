@@ -37,7 +37,7 @@ const CardValidityPeriodInputField = ({
     key: keyof ValidityPeriod,
     input: string,
   ) => {
-    if (checkIsOnlyDigits(input)) {
+    if (!checkIsOnlyDigits(input)) {
       setStatus((prev) => ({ ...prev, [key]: "NOT_NUMBER" }));
       return;
     }

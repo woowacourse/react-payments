@@ -37,7 +37,7 @@ const CardNumberInputField = ({
   };
 
   const handleCardNumberChange = (index: number, input: string) => {
-    if (checkIsOnlyDigits(input)) {
+    if (!checkIsOnlyDigits(input)) {
       updateInputStatus(index, "NOT_NUMBER");
       return;
     }
