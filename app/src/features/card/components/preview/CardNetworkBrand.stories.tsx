@@ -4,7 +4,7 @@ import { CardContext } from "../Card";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 
 const meta = {
-  title: "CardNetworkBrand",
+  title: "Card/Preview/CardNetworkBrand",
   component: CardNetworkBrand,
   parameters: {
     layout: "centered",

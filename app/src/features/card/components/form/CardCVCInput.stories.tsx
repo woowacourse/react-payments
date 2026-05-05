@@ -4,7 +4,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { CardCVCInput } from "./CardCVCInput";
 
 const meta = {
-  title: "CardCVCInput",
+  title: "Card/Form/CardCVCInput",
   component: CardCVCInput,
   parameters: {
     layout: "centered",

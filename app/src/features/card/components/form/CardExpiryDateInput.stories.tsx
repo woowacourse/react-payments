@@ -6,7 +6,7 @@ import { CardContext } from "../Card";
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
 
 const meta = {
-  title: "CardExpiryDateInput",
+  title: "Card/Form/CardExpiryDateInput",
   component: CardExpiryDateInput,
   parameters: {
     layout: "centered",

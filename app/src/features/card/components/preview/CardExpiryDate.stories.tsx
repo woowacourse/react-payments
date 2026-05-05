@@ -3,7 +3,7 @@ import { CardContext } from "../Card";
 import { CardExpiryDate } from "./CardExpiryDate";
 
 const meta = {
-  title: "CardExpiryDate",
+  title: "Card/Preview/CardExpiryDate",
   component: CardExpiryDate,
   parameters: {
     layout: "centered",

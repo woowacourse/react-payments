@@ -6,7 +6,7 @@ import { CardContext } from "../Card";
 import { CardNumberInput } from "./CardNumberInput";
 
 const meta = {
-  title: "CardNumberInput",
+  title: "Card/Form/CardNumberInput",
   component: CardNumberInput,
   parameters: {
     layout: "centered",

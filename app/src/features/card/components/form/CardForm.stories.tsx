@@ -4,7 +4,7 @@ import { CardContext } from "../Card";
 import { CardForm } from "./CardForm";
 
 const meta = {
-  title: "CardForm",
+  title: "Card/Form/CardForm",
   component: CardForm,
   parameters: {
     layout: "centered",

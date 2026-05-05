@@ -7,7 +7,7 @@ import { CardNumberInput } from "./CardNumberInput";
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
 
 const meta = {
-  title: "CardSection",
+  title: "Card/Form/CardSection",
   component: CardSection,
   parameters: {
     layout: "centered",

@@ -3,7 +3,7 @@ import { CardContext } from "../Card";
 import { CardPreview } from "./CardPreview";
 
 const meta = {
-  title: "CardPreview",
+  title: "Card/Preview/CardPreview",
   component: CardPreview,
   parameters: {
     layout: "centered",
