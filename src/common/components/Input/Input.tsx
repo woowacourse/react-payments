@@ -14,6 +14,16 @@ type InputPropsType = ComponentPropsWithoutRef<"input"> & {
   strokeMode?: StrokeModeType;
 };
 
+const Input = ({
+  strokeMode = "default",
+  type = "text",
+  ...rest
+}: InputPropsType) => {
+  return <StyledInput $strokeMode={strokeMode} type={type} {...rest} />;
+};
+
+export default Input;
+
 const StyledInput = styled.input<{ $strokeMode: StrokeModeType }>`
   font-size: 11px;
   font-weight: 400;
@@ -37,13 +47,3 @@ const StyledInput = styled.input<{ $strokeMode: StrokeModeType }>`
           : "rgba(0,0,0,0.2)"};
   }
 `;
-
-const Input = ({
-  strokeMode = "default",
-  type = "text",
-  ...rest
-}: InputPropsType) => {
-  return <StyledInput $strokeMode={strokeMode} type={type} {...rest} />;
-};
-
-export default Input;
