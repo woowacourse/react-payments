@@ -1,6 +1,7 @@
 import { getFormattedValidityPeriodUnit } from "@utils/card";
 import masterCard from "@assets/Mastercard.png";
 import visa from "@assets/Visa.png";
+import maskingImg from "@assets/MaskingImg.png";
 import type { CardNumberUnits } from "@/components/CardNumberInputField/CardNumberInputField";
 import type { ValidityPeriod } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
 import SwitchCase from "@components/common/SwitchCase";
@@ -42,7 +43,13 @@ const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
       <CardNumberWrapper>
         {cardNumberUnits.map((cardNumberUnit, index) => (
           <CardNumberUnit key={index}>
-            {index < 2 ? cardNumberUnit : "*".repeat(cardNumberUnit.length)}
+            {index < 2
+              ? cardNumberUnit
+              : Array.from({ length: cardNumberUnit.length }).map(
+                  (_, index) => (
+                    <MaskingImg key={index} src={maskingImg} alt="MaskingImg" />
+                  ),
+                )}
           </CardNumberUnit>
         ))}
       </CardNumberWrapper>
@@ -90,11 +97,19 @@ const CardNumberWrapper = styled.div`
 `;
 
 const CardNumberUnit = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
   font-weight: 500;
   font-style: Medium;
   font-size: 0.875rem;
   color: ${COLOR_PALETTE.WHITE};
   letter-spacing: 16%;
+`;
+
+const MaskingImg = styled.img`
+  width: 0.25rem;
+  height: 0.25rem;
 `;
 
 const CardValidityPeriodWrapper = styled.div`
