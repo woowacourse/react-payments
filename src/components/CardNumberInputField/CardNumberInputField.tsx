@@ -1,4 +1,4 @@
-import InputField from "@components/InputField.tsx";
+import InputField from "@components/common/InputField.tsx";
 import { checkIsInt, validateCardNumberUnitRange } from "@utils/validator";
 import { useState } from "react";
 

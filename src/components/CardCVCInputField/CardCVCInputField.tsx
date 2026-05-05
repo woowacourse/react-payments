@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputField from "@components/InputField.tsx";
+import InputField from "@components/common/InputField.tsx";
 import { checkIsInt, validateCVCRange } from "@/utils/validator";
 
 type InputStatus = "default" | "error";

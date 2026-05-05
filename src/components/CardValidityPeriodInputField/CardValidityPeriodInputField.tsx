@@ -3,7 +3,7 @@ import {
   validateMonthRange,
   validateYearRange,
 } from "@/utils/validator";
-import InputField from "@components/InputField.tsx";
+import InputField from "@components/common/InputField.tsx";
 import { formatValidityPeriod, padValidityPeriodUnit } from "@utils/card";
 import { useState } from "react";
 
