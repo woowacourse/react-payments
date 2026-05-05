@@ -83,6 +83,11 @@ export const Payments = () => {
     year: false,
   });
 
+  const [expirationDateInvalidAttemp, setExpirationDateInvalidAttemp] = useState({
+    month: false,
+    year: false,
+  });
+
   const preventExpirationMonth = (month: string) => {
     if (month !== '' && !isNumericString(month)) return true;
     if (month.length > 2) return true;
@@ -98,6 +103,7 @@ export const Payments = () => {
   };
 
   const renderErrorMessageExpirationDate = (expirationDate: ExpirationDate) => {
+    if (Object.values(expirationDateInvalidAttemp).find(Boolean)) return '유효햔 유효기간(숫자)을 입력해주세요';
     if (Object.values(onBlurExpirationDate).every((blur) => !blur)) return '';
 
     const isValidateExpirationDate = validateExpirationDate(expirationDate);
@@ -106,8 +112,22 @@ export const Payments = () => {
   };
 
   const handleChangeExpirationDate = (key: keyof ExpirationDate, value: string) => {
-    if (key === 'month' && preventExpirationMonth(value)) return;
-    if (key === 'year' && preventExpirationYear(value)) return;
+    if (key === 'month') {
+      if (preventExpirationMonth(value)) {
+        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, month: true });
+        return;
+      } else {
+        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, month: false });
+      }
+    }
+    if (key === 'year') {
+      if (preventExpirationYear(value)) {
+        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, year: true });
+        return;
+      } else {
+        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, year: false });
+      }
+    }
 
     setExpirationDate({ ...expirationDate, [key]: value });
   };
@@ -190,7 +210,10 @@ export const Payments = () => {
             onBlur={() => {
               handleBlurExpirationDate('month');
             }}
-            isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.month}
+            isError={
+              expirationDateInvalidAttemp.month ||
+              (Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.month)
+            }
             placeholder="MM"
           />
           <Input
@@ -201,7 +224,10 @@ export const Payments = () => {
             onBlur={() => {
               handleBlurExpirationDate('year');
             }}
-            isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.year}
+            isError={
+              expirationDateInvalidAttemp.year ||
+              (Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.year)
+            }
             placeholder="YY"
           />
         </Field>
