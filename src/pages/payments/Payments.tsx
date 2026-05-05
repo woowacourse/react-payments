@@ -9,14 +9,7 @@ import type { ExpirationDate } from '@/entities/card/types';
 import { CardNumberFormGroup } from '@/features/cardFormGroup/CardNumberFormGroup';
 import { CvcFormGroup } from '@/features/cardFormGroup/CvcFormGroup';
 import { ExpirationDateFormGroup } from '@/features/cardFormGroup/ExpirationDateFormGroup';
-import { CARD_BRAND_FORMAT, getBrand } from '@/entities/card/brand';
-
-import { isValidInputNumber, isNumericString } from '@/core/utils/validator';
-import {
-  validateExpirationDate,
-  validateCvc,
-  validateCardNumbers,
-} from '@/entities/card/validator';
+import { getBrand } from '@/entities/card/brand';
 
 export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -52,11 +45,11 @@ export const Payments = () => {
           cardNumbers={cardNumbers}
           handleChangeCardNumber={handleChangeCardNumber}
         />
-        {/* <CvcFormGroup cvc={cvc} onChangeCvc={handleChangeCvc} />*/}
         <ExpirationDateFormGroup
           expirationDate={expirationDate}
-          onChangeExpirationDate={handleChangeExpirationDate}
+          handleChangeExpirationDate={handleChangeExpirationDate}
         />
+        <CvcFormGroup cvc={cvc} handleChangeCvc={handleChangeCvc} />
       </form>
     </div>
   );
