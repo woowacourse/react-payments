@@ -62,6 +62,16 @@ export const ExpiryDateFilled: Story = {
   },
 };
 
+export const ExpiryDateDisplayDivideLine: Story = {
+  args: {
+    cardNumber: defaultCardNumber,
+    cardExpiryDate: {
+      "expiry-month": "12",
+      "expiry-year": "",
+    },
+  },
+};
+
 export const FullyFilled: Story = {
   args: {
     cardNumber: {
