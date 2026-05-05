@@ -10,8 +10,8 @@ interface Props {
   if (index >= 2) {
     return (
       <MaskingGroup>
-        {Array.from(cardNumber).map(() => (
-          <img src={MaskingImg} alt="masking-img" />
+        {Array.from(cardNumber).map((index) => (
+          <img key={index} src={MaskingImg} alt="masking-img" />
         ))}
       </MaskingGroup>
     );
@@ -19,8 +19,8 @@ interface Props {
 
   return (
     <NumberGroup>
-      {Array.from(cardNumber).map((number) => (
-        <p>{number}</p>
+      {Array.from(cardNumber).map((number, index) => (
+        <p key={index}>{number}</p>
       ))}
     </NumberGroup>
   );
