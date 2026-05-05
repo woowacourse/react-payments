@@ -10,7 +10,7 @@ const meta: Meta<typeof NumberInput> = {
 export default meta;
 type Story = StoryObj<typeof NumberInput>;
 
-export const First: Story = {
+export const Default: Story = {
   args: {
     placeholder: '숫자를 입력하세요',
   },

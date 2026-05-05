@@ -10,7 +10,7 @@ const meta: Meta<typeof CardNumberSection> = {
 export default meta;
 type Story = StoryObj<typeof CardNumberSection>;
 
-export const Second: Story = {
+export const Default: Story = {
   // render 함수를 통해 스토리북 안에서 상태(state)를 직접 관리합니다.
   render: () => {
     const [value, setValue] = useState(["", "", "", ""]);
