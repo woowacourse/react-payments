@@ -6,8 +6,8 @@ import visaLogo from "../../assets/visaLogo.png";
 const fixedCardNumberStyle = css`
   display: inline-block;
   min-width: 30px;
-  font-family: 'Inter';
-`
+  font-family: "Inter";
+`;
 
 const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
   return (
@@ -42,6 +42,7 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
         ></div>
         {cardInfo.brand && (
           <img
+            alt="카드 브랜드 이미지"
             css={css`
               width: 36px;
               height: 22px;
@@ -73,7 +74,7 @@ const Card = ({ cardInfo }: { cardInfo: CardInfo }) => {
             color: #ffffff;
             font-size: 14px;
             font-weight: 500;
-            font-family: 'Inter';
+            font-family: "Inter";
           `}
         >
           {cardInfo.expiry[0]}
