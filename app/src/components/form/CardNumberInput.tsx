@@ -5,6 +5,7 @@ import { CardFieldset, CardLegend, CardInput } from '../../style/CardStyles';
 import { useCardContext } from '../../hooks/useCardContext';
 
 const indexMap: { [key: string]: number } = {
+  'first-digits': 0,
   'second-digits': 1,
   'third-digits': 2,
   'fourth-digits': 3,
@@ -25,28 +26,13 @@ export function CardNumberInput() {
     const { value, id } = e.target;
     try {
       Validator.isNumber(value);
+      if (id === 'first-digits') {
+        Validator.isValidNetworkBrand(value);
+        setNetworkBrand(Validator.detectNetworkBrand(value));
+      }
       setError({ ...fieldErrors, [id]: false, message: '' });
       const newCardNumber = [...cardNumber];
       newCardNumber[indexMap[id]] = value;
-      setCardNumber(newCardNumber);
-    } catch (err) {
-      setError({
-        ...fieldErrors,
-        [id]: true,
-        message: err instanceof Error ? err.message : '',
-      });
-    }
-  };
-
-  const changeFirstDigitsCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
-    try {
-      Validator.isNumber(value);
-      Validator.isValidNetworkBrand(value);
-      setError({ ...fieldErrors, [id]: false, message: '' });
-      setNetworkBrand(Validator.detectNetworkBrand(value));
-      const newCardNumber = [...cardNumber];
-      newCardNumber[0] = value;
       setCardNumber(newCardNumber);
     } catch (err) {
       setError({
@@ -81,7 +67,7 @@ export function CardNumberInput() {
           maxLength={4}
           inputMode="numeric"
           value={cardNumber[0]}
-          onChange={changeFirstDigitsCardNumber}
+          onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
           fieldErrors={fieldErrors['first-digits']}
