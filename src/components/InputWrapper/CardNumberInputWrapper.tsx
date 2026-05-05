@@ -2,6 +2,7 @@ import { useState } from "react";
 import { isLengthMatch } from "../../utils/isLengthMatch";
 import Input from "../Input/Input";
 import InputGroup from "./InputGroup";
+import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
 
 type CardNumbers = {
   first: string;
@@ -10,15 +11,11 @@ type CardNumbers = {
   fourth: string;
 };
 interface Props {
-  validator: (
-    value: CardNumbers,
-  ) => { message: string; key: "first" | "second" | "third" | "fourth" } | null;
   setCardNumber: (value: CardNumbers) => void;
   value: CardNumbers;
 }
 
 export default function CardNumberInputWrapper({
-  validator,
   setCardNumber,
   value,
 }: Props) {
@@ -54,7 +51,7 @@ export default function CardNumberInputWrapper({
         maxLength={4}
         onError={setError("first")}
         onBlur={() => {
-          const result = validator(value);
+          const result = getCardNumberErrorMessage(value);
           if (result && result.key === "first")
             setError("first")(result.message);
         }}
@@ -69,7 +66,7 @@ export default function CardNumberInputWrapper({
         maxLength={4}
         onError={setError("second")}
         onBlur={() => {
-          const result = validator(value);
+          const result = getCardNumberErrorMessage(value);
           if (result && result.key === "second")
             setError("second")(result.message);
         }}
@@ -84,7 +81,7 @@ export default function CardNumberInputWrapper({
         maxLength={4}
         onError={setError("third")}
         onBlur={() => {
-          const result = validator(value);
+          const result = getCardNumberErrorMessage(value);
           if (result && result.key === "third")
             setError("third")(result.message);
         }}
@@ -99,7 +96,7 @@ export default function CardNumberInputWrapper({
         maxLength={4}
         onError={setError("fourth")}
         onBlur={() => {
-          const result = validator(value);
+          const result = getCardNumberErrorMessage(value);
           if (result && result.key === "fourth")
             setError("fourth")(result.message);
         }}

@@ -2,18 +2,14 @@ import { useState } from "react";
 import { isLengthMatch } from "../../utils/isLengthMatch";
 import Input from "../Input/Input";
 import InputGroup from "./InputGroup";
+import { getCVCumberErrorMessage } from "../../utils/getCVCNumberErrorMessage";
 
 interface Props {
-  validator: (value: string) => string | null;
   setCVCNumber: (value: string) => void;
   value: string;
 }
 
-export default function CVCInputWrapper({
-  validator,
-  setCVCNumber,
-  value,
-}: Props) {
+export default function CVCInputWrapper({ setCVCNumber, value }: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
   return (
@@ -26,7 +22,7 @@ export default function CVCInputWrapper({
         maxLength={3}
         onError={setInputError}
         onBlur={() => {
-          setInputError(validator(value));
+          setInputError(getCVCumberErrorMessage(value));
         }}
         style={{ width: "315px" }}
       />

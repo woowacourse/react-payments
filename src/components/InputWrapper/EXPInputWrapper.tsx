@@ -4,19 +4,15 @@ import { isMonthMatch } from "../../utils/isMonthMatch";
 import { isLengthMatch } from "../../utils/isLengthMatch";
 import Input from "../Input/Input";
 import InputGroup from "./InputGroup";
+import { getEXPNumberErrorMessage } from "../../utils/getEXPNumberErrorMessage";
 
 type EXPNumber = { mm: string; yy: string };
 interface Props {
-  validator: (value: EXPNumber) => { message: string; key: "mm" | "yy" } | null;
   setEXPNumber: (value: EXPNumber) => void;
   value: EXPNumber;
 }
 
-export default function EXPInputWrapper({
-  validator,
-  setEXPNumber,
-  value,
-}: Props) {
+export default function EXPInputWrapper({ setEXPNumber, value }: Props) {
   const [inputErrors, setInputErrors] = useState<{
     mm: string | null;
     yy: string | null;
@@ -43,7 +39,7 @@ export default function EXPInputWrapper({
         maxLength={2}
         onError={setError("mm")}
         onBlur={() => {
-          const result = validator(value);
+          const result = getEXPNumberErrorMessage(value);
           if (result && result.key === "mm") setError("mm")(result.message);
         }}
         style={{ width: "152px" }}
@@ -56,7 +52,7 @@ export default function EXPInputWrapper({
         maxLength={2}
         onError={setError("yy")}
         onBlur={() => {
-          const result = validator(value);
+          const result = getEXPNumberErrorMessage(value);
           if (result && result.key === "yy") setError("yy")(result.message);
         }}
         style={{ width: "152px" }}
