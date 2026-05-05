@@ -3,16 +3,16 @@ import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
 
-export function CardPreview() {
+export function CardPreview({ cardNumber, cardExpiryDate }) {
   return (
     <CardContainer>
       <div className="card-meta">
         <div className="ic-chip"></div>
-        <CardNetworkBrand />
+        <CardNetworkBrand cardNumber={cardNumber} />
       </div>
       <div className="card-contents">
-        <CardNumber />
-        <CardExpiryDate />
+        <CardNumber cardNumber={cardNumber} />
+        <CardExpiryDate cardExpiryDate={cardExpiryDate} />
       </div>
     </CardContainer>
   );

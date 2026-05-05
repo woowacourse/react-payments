@@ -1,5 +1,4 @@
-import { useState, useContext } from "react";
-import { CardContext } from "../CardContext";
+import { useState } from "react";
 import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
 import { CARD_INPUT } from "../../Constants";
@@ -7,9 +6,7 @@ import { Validator } from "../../validators/CardValidator";
 import { sanitizeErrors } from "../../../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
-export function CardNumberInput() {
-  const { cardNumber, setCardNumber } = useContext(CardContext);
-
+export function CardNumberInput({ cardNumber, setCardNumber }) {
   const [isError, setError] = useState({
     "first-digits": {
       state: false,

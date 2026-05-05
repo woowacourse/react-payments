@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
-import { useContext } from "react";
-import { CardContext } from "../CardContext";
 
-export function CardExpiryDate() {
-  const { cardExpiryDate } = useContext(CardContext);
+export function CardExpiryDate({ cardExpiryDate }) {
   return (
     <CardExpiryDateContainer>
       <span id="preview-card-expiry-date-month">

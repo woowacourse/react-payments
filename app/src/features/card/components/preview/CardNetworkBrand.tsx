@@ -2,12 +2,8 @@ import styled from "@emotion/styled";
 import MasterCard from "../../assets/Mastercard.svg";
 import VisaCard from "../../assets/visa-logo.svg";
 import { NETWORK_BRAND_RULE } from "../../Constants";
-import { useContext } from "react";
-import { CardContext } from "../CardContext";
 
-export function CardNetworkBrand() {
-  const { cardNumber } = useContext(CardContext);
-
+export function CardNetworkBrand({ cardNumber }) {
   const getNetworkBrand = (cardNumber: string) => {
     if (cardNumber.startsWith(NETWORK_BRAND_RULE.VISA_START_NUMBER))
       return "visa";

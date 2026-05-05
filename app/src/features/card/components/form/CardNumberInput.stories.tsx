@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
-import { CardContext } from "../CardContext";
 
 import { CardNumberInput } from "./CardNumberInput";
 
@@ -17,33 +16,31 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const renderWithContext = () => {
-  const [cardNumber, setCardNumber] = useState({
+const defaultArgs = {
+  cardNumber: {
     "first-digits": "",
     "second-digits": "",
     "third-digits": "",
     "fourth-digits": "",
-  });
+  },
+  setCardNumber: null,
+};
+
+const renderWithState = (args: typeof defaultArgs) => {
+  const [cardNumber, setCardNumber] = useState(args.cardNumber);
   return (
-    <CardContext
-      value={{
-        cardNumber,
-        setCardNumber,
-        cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
-        setCardExpiryDate: () => {},
-      }}
-    >
-      <CardNumberInput />
-    </CardContext>
+    <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
   );
 };
 
 export const Base: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
 };
 
 export const InvalidInput: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole("textbox");
@@ -53,7 +50,8 @@ export const InvalidInput: Story = {
 };
 
 export const InvalidCardNumber: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole("textbox");
@@ -63,7 +61,8 @@ export const InvalidCardNumber: Story = {
 };
 
 export const InvalidMastercard: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole("textbox");
@@ -86,22 +85,26 @@ const createNoNetworkBrandValidationPlay =
   };
 
 export const NoNetworkBrandValidationOnSecondInput: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: createNoNetworkBrandValidationPlay(1),
 };
 
 export const NoNetworkBrandValidationOnThirdInput: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: createNoNetworkBrandValidationPlay(2),
 };
 
 export const NoNetworkBrandValidationOnFourthInput: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: createNoNetworkBrandValidationPlay(3),
 };
 
 export const IncompleteLengthOnBlur: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, secondInput] = canvas.getAllByRole("textbox");
@@ -114,7 +117,8 @@ export const IncompleteLengthOnBlur: Story = {
 };
 
 export const EmptyInputOnBlur: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, secondInput] = canvas.getAllByRole("textbox");
@@ -127,7 +131,8 @@ export const EmptyInputOnBlur: Story = {
 };
 
 export const CompleteLengthOnBlur: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, secondInput] = canvas.getAllByRole("textbox");
@@ -140,7 +145,8 @@ export const CompleteLengthOnBlur: Story = {
 };
 
 export const PerserveErrorMessageInput: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, secondInput, thirdInput, fourthInput] =
@@ -155,7 +161,8 @@ export const PerserveErrorMessageInput: Story = {
 };
 
 export const MultipleErrorsInput: Story = {
-  render: renderWithContext,
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput, secondInput] = canvas.getAllByRole("textbox");

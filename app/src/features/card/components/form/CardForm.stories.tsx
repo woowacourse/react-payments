@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { CardContext } from "../CardContext";
 import { CardForm } from "./CardForm";
 
 const meta = {
@@ -16,6 +15,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const CardNumberInputSection: Story = {
+  args: {
+    cardNumber: "",
+    setCardNumber: null,
+    cardExpiryDate: "",
+    setCardExpiryDate: null,
+  },
   render: () => {
     const [cardNumber, setCardNumber] = useState({
       "first-digits": "",
@@ -28,16 +33,12 @@ export const CardNumberInputSection: Story = {
       "expiry-year": "",
     });
     return (
-      <CardContext
-        value={{
-          cardNumber,
-          setCardNumber,
-          cardExpiryDate,
-          setCardExpiryDate,
-        }}
-      >
-        <CardForm />
-      </CardContext>
+      <CardForm
+        cardNumber={cardNumber}
+        setCardNumber={setCardNumber}
+        cardExpiryDate={cardExpiryDate}
+        setCardExpiryDate={setCardExpiryDate}
+      />
     );
   },
 };

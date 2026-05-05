@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { CardContext } from "../CardContext";
 
 import { CardSection } from "./CardSection";
 import { CardNumberInput } from "./CardNumberInput";
@@ -28,21 +27,15 @@ export const CardNumberInputSection: Story = {
       "fourth-digits": "",
     });
     return (
-      <CardContext
-        value={{
-          cardNumber,
-          setCardNumber,
-          cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
-          setCardExpiryDate: () => {},
-        }}
+      <CardSection
+        title="결제할 카드 번호를 입력해 주세요"
+        subTitle="본인 명의의 카드만 결제 가능합니다."
       >
-        <CardSection
-          title="결제할 카드 번호를 입력해 주세요"
-          subTitle="본인 명의의 카드만 결제 가능합니다."
-        >
-          <CardNumberInput />
-        </CardSection>
-      </CardContext>
+        <CardNumberInput
+          cardNumber={cardNumber}
+          setCardNumber={setCardNumber}
+        />
+      </CardSection>
     );
   },
 };
@@ -55,26 +48,15 @@ export const CardExpiryDateInputSection: Story = {
       "expiry-year": "",
     });
     return (
-      <CardContext
-        value={{
-          cardNumber: {
-            "first-digits": "",
-            "second-digits": "",
-            "third-digits": "",
-            "fourth-digits": "",
-          },
-          setCardNumber: () => {},
-          cardExpiryDate,
-          setCardExpiryDate,
-        }}
+      <CardSection
+        title="카드 유효기간을 입력해 주세요"
+        subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."
       >
-        <CardSection
-          title="카드 유효기간을 입력해 주세요"
-          subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."
-        >
-          <CardExpiryDateInput />
-        </CardSection>
-      </CardContext>
+        <CardExpiryDateInput
+          cardExpiryDate={cardExpiryDate}
+          setCardExpiryDate={setCardExpiryDate}
+        />
+      </CardSection>
     );
   },
 };
