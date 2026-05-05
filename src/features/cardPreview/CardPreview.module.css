@@ -47,9 +47,11 @@
   color: #ffffff;
   font-size: 12px;
 }
+
 .number span {
   padding-right: 10px;
 }
+
 .expirationDate {
   padding-top: 8px;
   color: #ffffff;
