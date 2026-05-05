@@ -1,4 +1,4 @@
-import { checkIsInt, validateMonthRange } from "@/utils/validator";
+import { checkIsOnlyDigits, validateMonthRange } from "@/utils/validator";
 import InputField from "@components/common/InputField.tsx";
 import { padValidityPeriodUnit } from "@utils/card";
 import { useState } from "react";
@@ -37,7 +37,7 @@ const CardValidityPeriodInputField = ({
     key: keyof ValidityPeriod,
     input: string,
   ) => {
-    if (input.length !== 0 && !checkIsInt(+input)) {
+    if (checkIsOnlyDigits(input)) {
       setStatus((prev) => ({ ...prev, [key]: "NOT_NUMBER" }));
       return;
     }

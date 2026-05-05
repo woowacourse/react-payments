@@ -1,5 +1,5 @@
 import InputField from "@components/common/InputField.tsx";
-import { checkIsInt, checkLengthMatches } from "@utils/validator";
+import { checkIsOnlyDigits, checkLengthMatches } from "@utils/validator";
 import { useState } from "react";
 import {
   CARD_NUMBER_UNIT_MAX_LENGTH,
@@ -37,7 +37,7 @@ const CardNumberInputField = ({
   };
 
   const handleCardNumberChange = (index: number, input: string) => {
-    if (input.length !== 0 && !checkIsInt(+input)) {
+    if (checkIsOnlyDigits(input)) {
       updateInputStatus(index, "NOT_NUMBER");
       return;
     }

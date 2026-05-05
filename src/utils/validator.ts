@@ -1,10 +1,4 @@
-export const checkIsNumber = (arg: number) => {
-  return !Number.isNaN(arg);
-};
-
-export const checkIsInt = (arg: number) => {
-  return checkIsNumber(arg) && arg === parseInt(`${arg}`);
-};
+export const checkIsOnlyDigits = (input: string) => /^\d*$/.test(input);
 
 export const checkLengthMatches = (input: string, expectedLength: number) => {
   return input.length === expectedLength;

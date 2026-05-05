@@ -1,6 +1,6 @@
 import { useState } from "react";
 import InputField from "@components/common/InputField.tsx";
-import { checkIsInt, checkLengthMatches } from "@/utils/validator";
+import { checkIsOnlyDigits, checkLengthMatches } from "@/utils/validator";
 import { CVC_MAX_LENGTH, HELPER_MESSAGE, type InputStatus } from "./constants";
 
 interface CardCVCInputFieldProps {
@@ -12,7 +12,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
   const [status, setStatus] = useState<InputStatus>("DEFAULT");
 
   const handleCVCChange = (input: string) => {
-    if (input.length !== 0 && !checkIsInt(+input)) {
+    if (checkIsOnlyDigits(input)) {
       setStatus("NOT_NUMBER");
       return;
     }
