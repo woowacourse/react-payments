@@ -37,71 +37,38 @@ export default function CardNumberInputWrapper({
       setInputErrors((prev) => ({ ...prev, [key]: message }));
     };
 
+  const filterOnlyNumber = (value: string) => {
+    if (Number.isNaN(Number(value)) || (value !== "" && value.includes(" "))) {
+      return false;
+    } else return true;
+  };
+
   return (
     <InputGroup
       errorMessage={
         Object.values(inputErrors).find((err) => err !== null) ?? null
       }
     >
-      <Input
-        value={value.first}
-        setValue={(newValue) => setCardNumber({ ...value, first: newValue })}
-        placeholder="1234"
-        isValid={(value: string) => isLengthMatch(4, value)}
-        maxLength={4}
-        onError={setError("first")}
-        onBlur={() => {
-          const result = getCardNumberErrorMessage(value);
-          if (result && result.key === "first")
-            setError("first")(result.message);
-        }}
-        style={{ width: "71px" }}
-      />
-
-      <Input
-        value={value.second}
-        setValue={(newValue) => setCardNumber({ ...value, second: newValue })}
-        placeholder="1234"
-        isValid={(value: string) => isLengthMatch(4, value)}
-        maxLength={4}
-        onError={setError("second")}
-        onBlur={() => {
-          const result = getCardNumberErrorMessage(value);
-          if (result && result.key === "second")
-            setError("second")(result.message);
-        }}
-        style={{ width: "71px" }}
-      />
-
-      <Input
-        value={value.third}
-        setValue={(newValue) => setCardNumber({ ...value, third: newValue })}
-        placeholder="1234"
-        isValid={(value: string) => isLengthMatch(4, value)}
-        maxLength={4}
-        onError={setError("third")}
-        onBlur={() => {
-          const result = getCardNumberErrorMessage(value);
-          if (result && result.key === "third")
-            setError("third")(result.message);
-        }}
-        style={{ width: "71px" }}
-      />
-
-      <Input
-        value={value.fourth}
-        setValue={(newValue) => setCardNumber({ ...value, fourth: newValue })}
-        placeholder="1234"
-        isValid={(value: string) => isLengthMatch(4, value)}
-        maxLength={4}
-        onError={setError("fourth")}
-        onBlur={() => {
-          const result = getCardNumberErrorMessage(value);
-          if (result && result.key === "fourth")
-            setError("fourth")(result.message);
-        }}
-        style={{ width: "71px" }}
-      />
+      {Object.entries(value).map(([cardKey, cardValue]) => (
+        <Input
+          key={`${cardKey}-input`}
+          value={cardValue}
+          setValue={(newValue) =>
+            setCardNumber({ ...value, [cardKey]: newValue })
+          }
+          placeholder="1234"
+          isValid={(value: string) => isLengthMatch(4, value)}
+          maxLength={4}
+          onError={setError(cardKey as keyof CardNumbers)}
+          onBlur={() => {
+            const result = getCardNumberErrorMessage(value);
+            if (result && result.key === cardKey)
+              setError(cardKey as keyof CardNumbers)(result.message);
+          }}
+          filterOnlyNumber={filterOnlyNumber}
+          style={{ width: "71px" }}
+        />
+      ))}
     </InputGroup>
   );
 }
