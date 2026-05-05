@@ -125,7 +125,7 @@ export const Payments = () => {
   const [cvc, setCvc] = useState('');
   const [onBlurCvc, setOnBlurCvc] = useState(false);
 
-  const [cvcInvalidAttempMessage, setCvcInvalidAttempMessage] = useState('');
+  const [cvcInvalidAttemp, setCvcInvalidAttemp] = useState(false);
 
   const preventCvc = (cvc: string) => {
     if (cvc !== '' && !isNumericString(cvc)) return true;
@@ -135,7 +135,7 @@ export const Payments = () => {
   };
 
   const renderErrorMessageCvc = (cvc: string) => {
-    if (cvcInvalidAttempMessage) return cvcInvalidAttempMessage;
+    if (cvcInvalidAttemp) return '유효한 CVC(숫자)를 입력해주세요';
     if (!onBlurCvc) return '';
     if (!validateCvc(cvc)) return 'CVC를 전부 채워주세요';
     return '';
@@ -143,10 +143,10 @@ export const Payments = () => {
 
   const handleChangeCvc = (value: string) => {
     if (preventCvc(value)) {
-      setCvcInvalidAttempMessage('숫자를 입력해주세요');
+      setCvcInvalidAttemp(true);
       return;
     } else {
-      setCvcInvalidAttempMessage('');
+      setCvcInvalidAttemp(false);
     }
 
     setCvc(value);
@@ -214,7 +214,7 @@ export const Payments = () => {
             value={cvc}
             maxLength={3}
             placeholder="123"
-            isError={!!cvcInvalidAttempMessage || (onBlurCvc && !validateCvc(cvc))}
+            isError={!!cvcInvalidAttemp || (onBlurCvc && !validateCvc(cvc))}
             onChange={(e) => handleChangeCvc(e.target.value)}
             onBlur={() => handleBlurCvc()}
           />
