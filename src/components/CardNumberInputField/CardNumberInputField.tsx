@@ -42,7 +42,7 @@ const CardNumberInputField = ({
       return;
     }
 
-    setStatus(INPUTS_STATUSES);
+    updateInputStatus(index, "DEFAULT");
 
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
     newCardNumberUnits[index] = input.slice(0, CARD_NUMBER_UNIT_MAX_LENGTH);
@@ -59,7 +59,8 @@ const CardNumberInputField = ({
       updateInputStatus(index, "INVALID_LENGTH");
       return;
     }
-    setStatus(INPUTS_STATUSES);
+
+    updateInputStatus(index, "DEFAULT");
   };
 
   return (
