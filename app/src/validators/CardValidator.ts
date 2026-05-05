@@ -2,7 +2,8 @@ type ValidationResult = { valid: true } | { valid: false; message: string };
 
 export const Validator = {
   isNumber(value: string): ValidationResult {
-    if (Number.isNaN(Number(value))) {
+    const regex = /^\d*$/;
+    if (!regex.test(value)) {
       return { valid: false, message: '숫자만 입력 가능합니다.' };
     }
     return { valid: true };
@@ -20,7 +21,10 @@ export const Validator = {
 
   isValidNetworkBrand(value: string): ValidationResult {
     if (value !== '' && !['4', '5'].includes(value[0])) {
-      return { valid: false, message: '유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.' };
+      return {
+        valid: false,
+        message: '유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.',
+      };
     }
     if (value.length === 2 && value[0] === '5' && this.detectNetworkBrand(value) === '') {
       return { valid: false, message: '마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.' };
@@ -37,12 +41,18 @@ export const Validator = {
 
   isValidMonth(value: string): ValidationResult {
     if (value.length === 1 && !['0', '1'].includes(value[0])) {
-      return { valid: false, message: '유효하지 않은 날짜 형식입니다. 0 이나 1로 시작해야 합니다.' };
+      return {
+        valid: false,
+        message: '유효하지 않은 날짜 형식입니다. 0 이나 1로 시작해야 합니다.',
+      };
     }
     if (value.length === 2) {
       const month = Number(value);
       if (month < 1 || month > 12) {
-        return { valid: false, message: '유효하지 않은 날짜 형식입니다. 1 ~ 12 이내 숫자여야 합니다.' };
+        return {
+          valid: false,
+          message: '유효하지 않은 날짜 형식입니다. 1 ~ 12 이내 숫자여야 합니다.',
+        };
       }
     }
     return { valid: true };
