@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import Label from '../../../../../common/components/Label/Label';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
@@ -17,7 +17,8 @@ const ExpiryField = ({
   setIsError: (value: boolean) => void;
 }) => {
   const INPUT_COUNT = 2;
-  const createFlags = () => Array.from({length: INPUT_COUNT}, () => false);
+  const EXPIRY_LENGTH = 2;
+  const createFlags = () => Array.from({ length: INPUT_COUNT }, () => false);
 
   const [errorInfo, setErrorInfo] = useState({
     flag: createFlags(),
@@ -29,7 +30,7 @@ const ExpiryField = ({
     const value = eValue.trim();
 
     if (!/^\d*$/.test(value)) return;
-    if (value.length > 2) return;
+    if (value.length > EXPIRY_LENGTH) return;
 
     if (value.length === 0) {
       setExpiryMonth('');
@@ -74,7 +75,9 @@ const ExpiryField = ({
   };
 
   const updateTouched = (index: number) => {
-    setIsTouched((prev) => prev.map((touched, i) => (i === index ? true : touched)));
+    setIsTouched((prev) =>
+      prev.map((touched, i) => (i === index ? true : touched)),
+    );
   };
 
   const clearErrorWhenComplete = (index: number, value: string) => {
@@ -84,7 +87,9 @@ const ExpiryField = ({
   };
 
   const updateErrorInfo = (index: number, hasError: boolean) => {
-    const newFlag = errorInfo.flag.map((flag, i) => (i === index ? hasError : flag));
+    const newFlag = errorInfo.flag.map((flag, i) =>
+      i === index ? hasError : flag,
+    );
     const firstErrorIdx = newFlag.indexOf(true);
 
     setErrorInfo({
@@ -100,7 +105,11 @@ const ExpiryField = ({
     updateErrorInfo(index, !isValid);
   };
 
-  const handleExpiryBlur = (index: number, eValue: string, expiryType: 'month' | 'year') => {
+  const handleExpiryBlur = (
+    index: number,
+    eValue: string,
+    expiryType: 'month' | 'year',
+  ) => {
     updateTouched(index);
 
     const filledNumber = fillZero(eValue, expiryType);
@@ -123,13 +132,13 @@ const ExpiryField = ({
 
   return (
     <StyledField>
-      <Label value='유효기간' />
+      <Label value="유효기간" />
       <InputWrapper>
         <ExpiryInput
           value={expiryMonth}
           maxLength={2}
-          inputMode='numeric'
-          placeholder='MM'
+          inputMode="numeric"
+          placeholder="MM"
           strokeMode={0 === firstErrorIdx ? 'error' : 'default'}
           onChange={(e) => handleMonthChange(0, e.target.value)}
           onBlur={(e) => handleExpiryBlur(0, e.target.value, 'month')}
@@ -137,8 +146,8 @@ const ExpiryField = ({
         <ExpiryInput
           value={expiryYear}
           maxLength={2}
-          placeholder='YY'
-          inputMode='numeric'
+          placeholder="YY"
+          inputMode="numeric"
           strokeMode={1 === firstErrorIdx ? 'error' : 'default'}
           onChange={(e) => handleYearChange(1, e.target.value)}
           onBlur={(e) => handleExpiryBlur(1, e.target.value, 'year')}
