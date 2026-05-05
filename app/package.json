@@ -12,7 +12,8 @@
     "test-storybook": "test-storybook",
     "test-unit": "jest",
     "build-storybook": "storybook build",
-    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
+    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist",
+    "prepare": "cd .. && husky app/.husky"
   },
   "homepage": "https://antoliny0919.github.io/react-payments",
   "dependencies": {
@@ -44,6 +45,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-storybook": "^10.3.5",
     "globals": "^17.5.0",
+    "husky": "^9.1.7",
     "playwright": "^1.59.1",
     "storybook": "^10.3.5",
     "ts-jest": "^29.4.9",
