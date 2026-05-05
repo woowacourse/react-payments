@@ -1,6 +1,6 @@
-import {useState} from 'react';
-import type {Meta, StoryObj} from '@storybook/react-vite';
-import {fn} from 'storybook/test';
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 
 import NumberField from './NumberField';
 
@@ -11,7 +11,6 @@ const meta = {
   args: {
     cardNumbers: ['', '', '', ''],
     setCardNumbers: fn(),
-    setIsError: fn(),
   },
 } satisfies Meta<typeof NumberField>;
 
@@ -36,6 +35,12 @@ export const Interactive: Story = {
   render: function InteractiveNumberField(args) {
     const [cardNumbers, setCardNumbers] = useState(args.cardNumbers);
 
-    return <NumberField {...args} cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />;
+    return (
+      <NumberField
+        {...args}
+        cardNumbers={cardNumbers}
+        setCardNumbers={setCardNumbers}
+      />
+    );
   },
 };

@@ -1,6 +1,6 @@
-import {useState} from 'react';
-import type {Meta, StoryObj} from '@storybook/react-vite';
-import {fn} from 'storybook/test';
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 
 import ExpiryField from './ExpiryField';
 
@@ -13,7 +13,6 @@ const meta = {
     expiryYear: '',
     setExpiryMonth: fn(),
     setExpiryYear: fn(),
-    setIsError: fn(),
   },
 } satisfies Meta<typeof ExpiryField>;
 

@@ -1,6 +1,6 @@
-import {useState} from 'react';
-import type {Meta, StoryObj} from '@storybook/react-vite';
-import {fn} from 'storybook/test';
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 
 import CvcField from './CvCField';
 
@@ -11,7 +11,6 @@ const meta = {
   args: {
     cvcNumber: '',
     setCvcNumber: fn(),
-    setIsError: fn(),
   },
 } satisfies Meta<typeof CvcField>;
 
@@ -30,6 +29,8 @@ export const Interactive: Story = {
   render: function InteractiveCvcField(args) {
     const [cvcNumber, setCvcNumber] = useState(args.cvcNumber);
 
-    return <CvcField {...args} cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />;
+    return (
+      <CvcField {...args} cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
+    );
   },
 };
