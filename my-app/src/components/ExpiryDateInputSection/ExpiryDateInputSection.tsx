@@ -7,7 +7,7 @@ const ExpiryDateInputSection = ({
 }: {
   onValueHandler: (cardInfo: string[], brand?: string) => void;
 }) => {
-  const [inputValues, setInputValues] = useState<string[]>([]);
+  const [inputValues, setInputValues] = useState<string[]>(["", ""]);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
 
@@ -55,7 +55,7 @@ const ExpiryDateInputSection = ({
         errorMessage={errorMessage}
         errorIndex={errorIndex}
         values={inputValues}
-        inputOption={{ count: 2, maxLength: 2, placeHolder: ["MM", "YY"] }}
+        inputOption={{ maxLength: 2, placeHolder: ["MM", "YY"] }}
       />
     </InputSectionLayout>
   );

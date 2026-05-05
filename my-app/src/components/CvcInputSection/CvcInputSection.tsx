@@ -27,7 +27,7 @@ const CvcInputSection = ({ onValueHandler }: { onValueHandler: (cardInfo: string
         errorMessage={errorMessage}
         values={[inputValue]}
         errorIndex={errorMessage ? 0 : -1}
-        inputOption={{ count: 1, maxLength: 3, placeHolder: ["123"] }}
+        inputOption={{ maxLength: 3, placeHolder: ["123"] }}
       />
     </InputSectionLayout>
   );

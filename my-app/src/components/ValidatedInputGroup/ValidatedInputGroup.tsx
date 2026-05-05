@@ -20,15 +20,20 @@ const ValidatedInputGroup = ({
   onBlur: (i: number) => void;
   errorMessage: string;
   inputOption: {
-    count: number;
     maxLength: number;
     placeHolder: string[];
   };
   values: string[];
   errorIndex: number;
 }) => {
+  console.log(values);
   return (
-    <div css={css`position: relative; padding-bottom: 20px;`}>
+    <div
+      css={css`
+        position: relative;
+        padding-bottom: 20px;
+      `}
+    >
       <section
         css={css`
           display: flex;
@@ -36,11 +41,11 @@ const ValidatedInputGroup = ({
           gap: 8px;
         `}
       >
-        {Array.from({ length: inputOption.count }).map((_, i) => (
+        {values.map((value, i) => (
           <input
             key={i}
             maxLength={inputOption.maxLength}
-            value={values[i] || ""}
+            value={value}
             onChange={(e) => onChange(i, e.target.value)}
             onBlur={() => onBlur(i)}
             css={css`
@@ -57,7 +62,12 @@ const ValidatedInputGroup = ({
         ))}
       </section>
       <span
-        css={[errorTextStyle, css`visibility: ${errorMessage ? "visible" : "hidden"};`]}
+        css={[
+          errorTextStyle,
+          css`
+            visibility: ${errorMessage ? "visible" : "hidden"};
+          `,
+        ]}
       >
         {errorMessage}
       </span>
