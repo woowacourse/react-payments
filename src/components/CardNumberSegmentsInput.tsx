@@ -1,9 +1,13 @@
-import { useState, useEffect, type ChangeEvent } from 'react';
-import ValidationInput from './Common/ValidationInput';
-import { validateNumberString, validateStringLength, validateStringMaxLength } from '../utils';
-import type { CardNumberSegments } from '../types';
-import Flex from './Common/Flex';
-import Label from './Common/Label';
+import { type ChangeEvent } from "react";
+import ValidationInput from "./Common/ValidationInput";
+import {
+  validateNumberString,
+  validateStringLength,
+  validateStringMaxLength,
+} from "../utils";
+import type { CardNumberSegments } from "../types";
+import Flex from "./Common/Flex";
+import Label from "./Common/Label";
 
 interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;
@@ -11,24 +15,18 @@ interface CardNumberSegmentsInputProps {
 }
 
 function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
-  const [segments, setSegments] = useState<CardNumberSegments>(props.value);
-
-  useEffect(() => {
-    props.onChange(segments);
-  }, [segments]);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputIndex = Number(event.target.dataset.index);
-    const newSegments = [...segments] as CardNumberSegments;
+    const newSegments = [...props.value] as CardNumberSegments;
     newSegments.splice(inputIndex, 1, event.target.value);
-    setSegments(newSegments);
+    props.onChange(newSegments);
   };
 
   return (
     <Flex direction="column" gap={10}>
       <Label>카드 번호</Label>
       <Flex gap={10}>
-        {segments.map((el, index) => (
+        {props.value.map((el, index) => (
           <ValidationInput
             key={index}
             data-index={index}
@@ -40,19 +38,19 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             isShowError={true}
             validations={[
               {
-                type: 'validateOnChange',
+                type: "validateOnChange",
                 validator: validateNumberString,
-                message: '숫자만 입력 가능합니다.',
+                message: "숫자만 입력 가능합니다.",
               },
               {
-                type: 'validateOnChange',
+                type: "validateOnChange",
                 validator: (input: string) => validateStringMaxLength(input, 4),
-                message: '4자리까지만 입력 가능합니다.',
+                message: "4자리까지만 입력 가능합니다.",
               },
               {
-                type: 'validateOnBlur',
+                type: "validateOnBlur",
                 validator: (input: string) => validateStringLength(input, 4),
-                message: '4자리를 입력해주세요.',
+                message: "4자리를 입력해주세요.",
               },
             ]}
           />
