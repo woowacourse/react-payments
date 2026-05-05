@@ -34,7 +34,7 @@ export const CardNumber = styled.div`
   width: 100%;
   padding: 0 5px;
   display: flex;
-  align-item: center;
+  align-items: center;
   justify-content: space-between;
   gap: 5px;
   box-sizing: border-box;
