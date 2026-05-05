@@ -6,6 +6,7 @@ import { cardNumbersValidator, expirationDateValidator } from '../../utils/valid
 import CVCFieldForm from './CVCFieldForm';
 import InputFieldForm from '../Common/Form/InputFieldForm';
 import { INPUT_FIELD_CONFIG } from '../../constants';
+import { convertValueFormat } from '../../utils/convert';
 
 export type CardNumbersType = [string, string, string, string];
 export type ExpirationDateType = { month: string; year: string };
@@ -44,9 +45,9 @@ export default function PaymentForm() {
           sectionTitle={INPUT_FIELD_CONFIG['CARD_NUMBERS'].sectionTitle}
           hintText={INPUT_FIELD_CONFIG['CARD_NUMBERS'].hintText}
         >
-          <InputFieldForm<CardNumbersType>
+          <InputFieldForm
             fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
-            value={cardNumbers}
+            valueList={convertValueFormat(cardNumbers)}
             validator={cardNumbersValidator}
             onChange={handleCardNumbersChange}
           />
@@ -56,9 +57,9 @@ export default function PaymentForm() {
           sectionTitle={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].sectionTitle}
           hintText={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].hintText}
         >
-          <InputFieldForm<ExpirationDateType>
+          <InputFieldForm
             fieldConfig={INPUT_FIELD_CONFIG['EXPIRATION_DATE']}
-            value={expirationDate}
+            valueList={convertValueFormat(expirationDate)}
             validator={expirationDateValidator}
             onChange={handleExpirationDateChange}
           />

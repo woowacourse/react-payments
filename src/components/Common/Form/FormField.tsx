@@ -6,7 +6,7 @@ import { validateNaN } from '../../../utils/validate';
 interface FormFieldProps {
   id: string;
   index: number;
-  numbers: string;
+  value: string;
   fieldMaxLength: number;
   validator: (
     value: string,
@@ -23,7 +23,7 @@ interface FormFieldProps {
 export default function FormField({
   id,
   index,
-  numbers,
+  value,
   fieldMaxLength,
   validator,
   onChange,
@@ -68,7 +68,7 @@ export default function FormField({
         maxLength={fieldMaxLength}
         inputMode="numeric"
         autoComplete="off"
-        value={numbers}
+        value={value}
         placeholder={placeholder}
         onChange={handleChange}
         onFocus={handleFocus}

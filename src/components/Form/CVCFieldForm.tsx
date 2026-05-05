@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { cvcValidator } from '../../utils/validate';
 import InputFieldForm from '../Common/Form/InputFieldForm';
 import { INPUT_FIELD_CONFIG } from '../../constants';
+import { convertValueFormat } from '../../utils/convert';
 
 export default function CVCFieldForm() {
   const [cvcNumbers, setCVCNumbers] = useState<string>('');
@@ -11,9 +12,9 @@ export default function CVCFieldForm() {
   };
 
   return (
-    <InputFieldForm<string>
+    <InputFieldForm
       fieldConfig={INPUT_FIELD_CONFIG['CVC']}
-      value={cvcNumbers}
+      valueList={convertValueFormat(cvcNumbers)}
       validator={cvcValidator}
       onChange={handleCVCNumbersChange}
     />
