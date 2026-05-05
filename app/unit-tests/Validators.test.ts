@@ -1,10 +1,65 @@
 import { Validator } from "../src/validators/CardValidator";
 
 describe("카드 정보 검증기 테스트", () => {
+  describe("카드값 타입 테스트", () => {
+    test.each([["zz", "hello world", "카드번호", "!@*#@", "/check"]])(
+      "카드와 관련된 특정 입력에는 숫자만 입력해야 한다.",
+      (value) => {
+        expect(() => Validator.isNumber(value)).toThrow(
+          "숫자만 입력 가능합니다.",
+        );
+      },
+    );
+  });
+
+  describe("카드번호 테스트", () => {
+    test("카드 번호는 네트워크 브랜드에 의해 4 또는 5로 시작해야 한다.", () => {
+      expect(() => Validator.isValidNetworkBrand("4")).not.toThrow();
+      expect(() => Validator.isValidNetworkBrand("5")).not.toThrow();
+      expect(() => Validator.isValidNetworkBrand("6")).toThrow(
+        "유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.",
+      );
+    });
+
+    test("마스터카드는 번호는 51 ~ 55 사이 숫자로 시작해야 한다.", () => {
+      expect(() => Validator.isValidNetworkBrand("51")).not.toThrow();
+      expect(() => Validator.isValidNetworkBrand("55")).not.toThrow();
+      expect(() => Validator.isValidNetworkBrand("56")).toThrow(
+        "마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.",
+      );
+    });
+
+    test("카드 번호 각 항목은 4자리여야 한다.", () => {
+      expect(() => Validator.isValidCardNumberLength("", 4)).not.toThrow();
+      expect(() => Validator.isValidCardNumberLength("1234", 4)).not.toThrow();
+      expect(() => Validator.isValidCardNumberLength("123", 4)).toThrow(
+        "카드 번호 각 항목은 4자리여야 합니다.",
+      );
+    });
+  });
+
   describe("카드 유효기간 테스트", () => {
     afterEach(() => {
       jest.useRealTimers();
     });
+    test("카드 유효기간중 입력월은 0 이나 1로 시작해야 한다.", () => {
+      expect(() => Validator.isValidMonth("0")).not.toThrow();
+      expect(() => Validator.isValidMonth("1")).not.toThrow();
+      expect(() => Validator.isValidMonth("2")).toThrow(
+        "유효하지 않은 날짜 형식입니다. 0 이나 1로 시작해야 합니다.",
+      );
+    });
+
+    test("카드 유효기간중 입력월은 1 ~ 12 이내 숫자여야 한다.", () => {
+      expect(() => Validator.isValidMonth("01")).not.toThrow();
+      expect(() => Validator.isValidMonth("02")).not.toThrow();
+      expect(() => Validator.isValidMonth("11")).not.toThrow();
+      expect(() => Validator.isValidMonth("12")).not.toThrow();
+      expect(() => Validator.isValidMonth("13")).toThrow(
+        "유효하지 않은 날짜 형식입니다. 1 ~ 12 이내 숫자여야 합니다.",
+      );
+    });
+
     test.each([
       {
         mockDate: "2096-01-01",
@@ -36,5 +91,25 @@ describe("카드 정보 검증기 테스트", () => {
         });
       },
     );
+
+    test("카드 유효기간 각 항목은 2자리 여야 한다.", () => {
+      expect(() => Validator.isValidCardExpiryDateLength("", 2)).not.toThrow();
+      expect(() =>
+        Validator.isValidCardExpiryDateLength("12", 2),
+      ).not.toThrow();
+      expect(() => Validator.isValidCardExpiryDateLength("1", 2)).toThrow(
+        "날짜 각 항목은 2자리여야 합니다.",
+      );
+    });
+  });
+
+  describe("카드 CVC 테스트", () => {
+    test("카드 CVC번호는 3자리여야 한다.", () => {
+      expect(() => Validator.isValidCardCVCLength("", 3)).not.toThrow();
+      expect(() => Validator.isValidCardCVCLength("123", 3)).not.toThrow();
+      expect(() => Validator.isValidCardCVCLength("1", 3)).toThrow(
+        "CVC는 3자리여야 합니다.",
+      );
+    });
   });
 });
