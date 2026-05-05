@@ -2,6 +2,11 @@ import Label from '../../../../../common/components/Label/Label';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
+import {
+  isInMaxLength,
+  isMaxLength,
+  isNumeric,
+} from '../../../utils/validator';
 
 const CvcField = ({
   cvcNumber,
@@ -15,7 +20,7 @@ const CvcField = ({
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: [cvcNumber],
     validate: (value) => {
-      if (value.length !== CVC_LENGTH) {
+      if (!isMaxLength(value, CVC_LENGTH)) {
         return 'CVC 번호 3자리를 입력해 주세요';
       }
 
@@ -23,11 +28,11 @@ const CvcField = ({
     },
   });
 
-  const handleCvcNumberChange = (index: number, eValue: string) => {
+  const handleCvcNumberChange = (eValue: string) => {
     const value = eValue.trim();
 
-    if (!/^\d*$/.test(value)) return;
-    if (value.length > CVC_LENGTH) return;
+    if (!isNumeric(value)) return;
+    if (!isInMaxLength(value, CVC_LENGTH)) return;
 
     setCvcNumber(value);
   };
@@ -46,7 +51,7 @@ const CvcField = ({
           inputMode="numeric"
           placeholder="123"
           strokeMode={0 === firstErrorIndex ? 'error' : 'default'}
-          onChange={(e) => handleCvcNumberChange(0, e.target.value)}
+          onChange={(e) => handleCvcNumberChange(e.target.value)}
           onBlur={() => handleCvcBlur(0)}
         />
       </InputWrapper>

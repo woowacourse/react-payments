@@ -2,6 +2,12 @@ import Label from '../../../../../common/components/Label/Label';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
+import {
+  isInMaxLength,
+  isMaxLength,
+  isNumeric,
+  isValidMonth,
+} from '../../../utils/validator';
 
 const ExpiryField = ({
   expiryMonth,
@@ -20,19 +26,18 @@ const ExpiryField = ({
     values: [expiryMonth, expiryYear],
     validate: (value, index) => {
       if (index === 0) {
-        if (value.length === 0) return '월을 입력해 주세요';
-        if (value.length !== 2) return '월은 2자리로 입력해 주세요';
+        if (!isMaxLength(value, EXPIRY_LENGTH))
+          return '월은 2자리로 입력해 주세요';
 
-        const month = Number(value);
-        if (month < 1 || month > 12) {
+        if (!isValidMonth(value)) {
           return '월은 01부터 12까지 입력해 주세요';
         }
 
         return null;
       }
 
-      if (value.length === 0) return '년도를 입력해 주세요';
-      if (value.length !== 2) return '년도는 2자리로 입력해 주세요';
+      if (!isMaxLength(value, EXPIRY_LENGTH))
+        return '년도는 2자리로 입력해 주세요';
 
       return null;
     },
@@ -41,8 +46,9 @@ const ExpiryField = ({
   const handleMonthChange = (eValue: string) => {
     const value = eValue.trim();
 
-    if (!/^\d*$/.test(value)) return;
-    if (value.length > EXPIRY_LENGTH) return;
+    if (!isNumeric(value)) return;
+    if (!isInMaxLength(value, EXPIRY_LENGTH)) return;
+    if (isMaxLength(value, EXPIRY_LENGTH) && !isValidMonth(value)) return;
 
     setExpiryMonth(value);
   };
@@ -50,8 +56,8 @@ const ExpiryField = ({
   const handleYearChange = (eValue: string) => {
     const value = eValue.trim();
 
-    if (!/^\d*$/.test(value)) return;
-    if (value.length > EXPIRY_LENGTH) return;
+    if (!isNumeric(value)) return;
+    if (!isInMaxLength(value, EXPIRY_LENGTH)) return;
 
     setExpiryYear(value);
   };
