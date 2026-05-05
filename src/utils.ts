@@ -1,14 +1,13 @@
 export function validateNumberString(input: string) {
-  const chars = input.trim().split("");
-  return chars.every((char) => !isNaN(Number(char)));
+  return /^\d*$/.test(input);
 }
 
 export function validateStringMaxLength(input: string, maxLength: number) {
-  return input.length <= maxLength;
+  return input.trim().length <= maxLength;
 }
 
 export function validateStringLength(input: string, length: number) {
-  return input.length === length;
+  return input.trim().length === length;
 }
 
 export function validateMonth(input: string) {
