@@ -85,13 +85,10 @@ fieldset {
 legend {
   all: unset;
   display: block;
-
   width: 100%;
   max-width: 100%;
-
   padding: 0;
   margin: 0;
-
   font: inherit;
   line-height: inherit;
   color: inherit;
