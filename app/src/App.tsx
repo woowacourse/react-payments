@@ -1,11 +1,7 @@
 import { Card } from "./features/card/components/Card";
 
 function App() {
-  return (
-    <>
-      <Card />
-    </>
-  );
+  return <Card />;
 }
 
 export default App;
