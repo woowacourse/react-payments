@@ -49,6 +49,8 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
       setErrorStatus('invalidLength');
       return;
     }
+
+    setErrorStatus(null);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
