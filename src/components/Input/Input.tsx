@@ -11,24 +11,29 @@ interface Props extends Omit<
   isValid: (value: string) => boolean;
   // InputGroup에 에러 메세지 피드백 제공을 위한 함수
   onError: (message: string | null) => void;
+  filterOnlyNumber?: (value: string) => boolean;
 }
 
 interface InputStyleProps {
   isNotValidate: boolean;
 }
 
-export default function Input({ setValue, isValid, onError, ...props }: Props) {
+export default function Input({
+  setValue,
+  isValid,
+  onError,
+  filterOnlyNumber,
+  ...props
+}: Props) {
   const [isNotValidate, setIsNotValidate] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const tmpValue = e.target.value;
-    if (
-      Number.isNaN(Number(tmpValue)) ||
-      (tmpValue !== "" && tmpValue.includes(" "))
-    ) {
+    if (filterOnlyNumber && !filterOnlyNumber(tmpValue)) {
       onError("숫자만 입력할 수 있습니다.");
       return;
     }
+
     setValue(tmpValue);
     onError(null);
     if (!isValid(tmpValue)) setIsNotValidate(true);
