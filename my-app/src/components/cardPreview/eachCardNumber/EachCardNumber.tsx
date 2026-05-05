@@ -1,7 +1,12 @@
 import MaskingImg from '../../../assets/MaskingImg.png';
 import { NumberGroup, MaskingGroup } from './EachCardNumber.styles';
 
-export default function EachCardNumber(cardNumber: string, index: number) {
+interface Props {
+  cardNumber: string;
+  index: number;
+}
+
+ const EachCardNumber = ({cardNumber, index}: Props) => {
   if (index >= 2) {
     return (
       <MaskingGroup>
@@ -20,3 +25,5 @@ export default function EachCardNumber(cardNumber: string, index: number) {
     </NumberGroup>
   );
 }
+
+export default EachCardNumber

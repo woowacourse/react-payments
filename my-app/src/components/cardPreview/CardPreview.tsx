@@ -21,10 +21,12 @@ export default function CardPreview({ cardNumber, expirationDate }: Props) {
         <CardBrandImage cardNumber={cardNumber[0]} />
       </CardHeader>
       <CardNumber>
-        {cardNumber.map((number, index) => EachCardNumber(number, index))}
+        {cardNumber.map((number, index) => (
+          <EachCardNumber key={index} cardNumber={number} index={index} />
+        ))}
       </CardNumber>
       <CardExpirationDate>
-        {expirationDate.month || "MM"}/{expirationDate.year || "YY"}
+        {expirationDate.month || 'MM'}/{expirationDate.year || 'YY'}
       </CardExpirationDate>
     </CardContainer>
   );
