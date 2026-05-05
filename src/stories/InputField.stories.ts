@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import InputField from "../components/InputField";
+import InputField from "@components/common/InputField";
 
 const meta = {
   title: "InputField",
@@ -23,10 +23,7 @@ export const MultipleInputs: Story = {
   args: {
     title: "타이틀",
     label: "라벨",
-    inputPropsList: [
-      { placeholder: "첫 번째" },
-      { placeholder: "두 번째" },
-    ],
+    inputPropsList: [{ placeholder: "첫 번째" }, { placeholder: "두 번째" }],
   },
 };
 
