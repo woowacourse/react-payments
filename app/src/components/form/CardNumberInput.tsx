@@ -1,9 +1,10 @@
 import { useState, useContext } from "react";
 import { CardContext } from "../Card";
+import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
 import { Validator } from "../../validators/CardValidator";
 import { sanitizeErrors } from "../../Utils";
-import { CardFieldset, CardLegend, CardInput } from "../../style/CardStyles";
+import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
 export function CardNumberInput() {
   const { cardNumber, setCardNumber } = useContext(CardContext);
@@ -86,7 +87,6 @@ export function CardNumberInput() {
           id="first-digits"
           type="text"
           maxLength={4}
-          inputMode="numeric"
           value={cardNumber["first-digits"]}
           onChange={changeFirstDigitsCardNumber}
           onBlur={handleBlurCardNumber}
@@ -97,7 +97,6 @@ export function CardNumberInput() {
           id="second-digits"
           type="text"
           maxLength={4}
-          inputMode="numeric"
           value={cardNumber["second-digits"]}
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
@@ -108,7 +107,6 @@ export function CardNumberInput() {
           id="third-digits"
           type="text"
           maxLength={4}
-          inputMode="numeric"
           value={cardNumber["third-digits"]}
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
@@ -119,7 +117,6 @@ export function CardNumberInput() {
           id="fourth-digits"
           type="text"
           maxLength={4}
-          inputMode="numeric"
           value={cardNumber["fourth-digits"]}
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}

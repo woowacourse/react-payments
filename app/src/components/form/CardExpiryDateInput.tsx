@@ -1,4 +1,5 @@
-import { CardInput, CardFieldset, CardLegend } from "../../style/CardStyles";
+import { CardFieldset, CardLegend } from "../../style/CardStyles";
+import { CardInput } from "./CardInput";
 import { Validator } from "../../validators/CardValidator";
 import { sanitizeErrors } from "../../Utils";
 import { CardContext } from "../Card";
@@ -78,7 +79,6 @@ export function CardExpiryDateInput() {
         <CardLegend>유효기간</CardLegend>
         <CardInput
           type="text"
-          inputMode="numeric"
           id="expiry-month"
           onChange={changeCardExpiryMonth}
           onBlur={handleBlurCardExpiryDate}
@@ -89,7 +89,6 @@ export function CardExpiryDateInput() {
         />
         <CardInput
           type="text"
-          inputMode="numeric"
           id="expiry-year"
           onChange={changeCardExpiryYear}
           onBlur={handleBlurCardExpiryDate}

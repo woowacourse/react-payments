@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { ErrorMessage } from "./ErrorMessage";
 import { sanitizeErrors } from "../../Utils";
-import { CardInput } from "../../style/CardStyles";
+import { CardInput } from "./CardInput";
 import { Validator } from "../../validators/CardValidator";
 
 export function CardCVCInput() {
@@ -48,7 +48,6 @@ export function CardCVCInput() {
       <CardInput
         type="text"
         maxLength={3}
-        inputMode="numeric"
         placeholder="123"
         id="card-cvc-input"
         value={cardCVC}
