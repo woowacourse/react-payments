@@ -25,7 +25,7 @@ const Input = styled.input<{ $hasError: boolean }>`
 
 interface ValidationInputProps extends ComponentProps<"input"> {
   validations: {
-    type: "limit" | "check";
+    type: "validateOnChange" | "validateOnBlur";
     validator: (input: string) => boolean;
     message: string;
   }[];
@@ -49,7 +49,7 @@ export default function ValidationInput({
     const failedValidation = validations.find(
       (validation) =>
         event.target.value.length &&
-        validation.type === "limit" &&
+        validation.type === "validateOnChange" &&
         !validation.validator(event.target.value),
     );
 
@@ -69,7 +69,7 @@ export default function ValidationInput({
       (validation) =>
         typeof props.value === "string" &&
         props.value.length &&
-        validation.type === "check" &&
+        validation.type === "validateOnBlur" &&
         !validation.validator(props.value),
     );
 

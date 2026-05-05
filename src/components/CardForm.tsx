@@ -1,9 +1,9 @@
-import CardCVCInput from './CardCVCInput';
-import CardNumberSegmentsInput from './CardNumberSegmentsInput';
-import Flex from './Common/Flex';
-import styled from '@emotion/styled';
-import CardExpiryDateInput from './CardExpiryDateInput';
-import type { CardFormState, CardNumberSegments } from '../types';
+import CardCVCInput from "./CardCVCInput";
+import CardNumberSegmentsInput from "./CardNumberSegmentsInput";
+import Flex from "./Common/Flex";
+import styled from "@emotion/styled";
+import CardExpiryDateInput from "./CardExpiryDateInput";
+import type { CardFormState, CardNumberSegments } from "../types";
 
 const Title = styled.h3`
   font-size: 18px;
@@ -33,7 +33,10 @@ function CardForm(props: CardFormProps) {
         <CardNumberSegmentsInput
           value={props.formState.cardNumberSegments}
           onChange={(value: CardNumberSegments) =>
-            props.setFormState({ ...props.formState, cardNumberSegments: value })
+            props.setFormState({
+              ...props.formState,
+              cardNumberSegments: value,
+            })
           }
         />
         <Flex direction="column" gap={5}>
@@ -41,9 +44,16 @@ function CardForm(props: CardFormProps) {
           <Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
         </Flex>
         <CardExpiryDateInput
-          value={{ expiryMonth: props.formState.expiryMonth, expiryYear: props.formState.expiryYear }}
+          value={{
+            expiryMonth: props.formState.expiryMonth,
+            expiryYear: props.formState.expiryYear,
+          }}
           onChange={(value: [string, string]) =>
-            props.setFormState({ ...props.formState, expiryMonth: value[0], expiryYear: value[1] })
+            props.setFormState({
+              ...props.formState,
+              expiryMonth: value[0],
+              expiryYear: value[1],
+            })
           }
         />
         <Flex direction="column" gap={5}>
@@ -51,7 +61,9 @@ function CardForm(props: CardFormProps) {
         </Flex>
         <CardCVCInput
           value={props.formState.cvc}
-          onChange={(e) => props.setFormState({ ...props.formState, cvc: e.target.value })}
+          onChange={(e) =>
+            props.setFormState({ ...props.formState, cvc: e.target.value })
+          }
         />
       </Flex>
     </form>
