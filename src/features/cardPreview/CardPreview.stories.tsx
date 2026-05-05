@@ -14,8 +14,9 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
   args: {
-    cardBrand: 'mastercard',
-    cardNumbers: ['1234', '5678', '0000', '0000'],
-    expirationDate: { month: '04', year: '28' },
+    info: {
+      cardNumbers: ['1234', '5678', '0000', '0000'],
+      expirationDate: { month: '04', year: '28' },
+    },
   },
 };

@@ -1,14 +1,16 @@
 import styles from './Payments.module.css';
 
 import { useState } from 'react';
-import { CardPreview } from '@/features/cardPreview/CardPreview';
 
 import type { ExpirationDate } from '@/entities/card/types';
-
-import { CardNumberFormGroup } from '@/features/cardFormGroup/CardNumberFormGroup';
-import { CvcFormGroup } from '@/features/cardFormGroup/CvcFormGroup';
-import { ExpirationDateFormGroup } from '@/features/cardFormGroup/ExpirationDateFormGroup';
 import { getBrand } from '@/entities/card/brand';
+
+import type { CardInfo } from '@/features/cardPreview/CardPreview';
+import { CardPreview } from '@/features/cardPreview/CardPreview';
+
+import { CvcFormGroup } from '@/features/cardFormGroup/CvcFormGroup';
+import { CardNumberFormGroup } from '@/features/cardFormGroup/CardNumberFormGroup';
+import { ExpirationDateFormGroup } from '@/features/cardFormGroup/ExpirationDateFormGroup';
 
 export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -31,13 +33,14 @@ export const Payments = () => {
     setCvc(cvc);
   };
 
+  const cardInfo: CardInfo = {
+    cardNumbers,
+    expirationDate,
+  };
+
   return (
     <div className={styles.payments}>
-      <CardPreview
-        cardBrand={brand}
-        cardNumbers={cardNumbers}
-        expirationDate={{ month: expirationDate.month, year: expirationDate.year }}
-      />
+      <CardPreview info={cardInfo} />
       <form>
         <CardNumberFormGroup
           brand={brand}
