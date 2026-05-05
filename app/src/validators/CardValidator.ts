@@ -43,10 +43,16 @@ export const Validator = {
   },
 
   isValidYear(value: string) {
-    const currentYear = new Date().getFullYear().toString().slice(-2);
-    const year = value;
-    if (year.length === 2 && Number(year) < Number(currentYear)) {
-      throw new Error("유효기간이 만료된 연도입니다.");
+    if (value.length !== 2) return;
+
+    const currentYear = new Date().getFullYear();
+    const currentTwoDigit = currentYear % 100;
+
+    let offset = Number(value) - currentTwoDigit;
+    if (offset < 0) offset += 100;
+
+    if (offset > 5) {
+      throw new Error("유효하지 않은 연도입니다.");
     }
   },
 

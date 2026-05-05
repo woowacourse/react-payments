@@ -97,14 +97,19 @@ export const InvalidYearInput: Story = {
   },
 };
 
-export const InvalidPastYear: Story = {
+export const InvalidRangeYear: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [, yearInput] = canvas.getAllByRole("textbox");
-    await userEvent.type(yearInput, "24");
+    await userEvent.type(yearInput, "25");
     await expect(
-      canvas.getByText("유효기간이 만료된 연도입니다."),
+      canvas.getByText("유효하지 않은 연도입니다."),
+    ).toBeInTheDocument();
+    await userEvent.clear(yearInput);
+    await userEvent.type(yearInput, "32");
+    await expect(
+      canvas.getByText("유효하지 않은 연도입니다."),
     ).toBeInTheDocument();
   },
 };
