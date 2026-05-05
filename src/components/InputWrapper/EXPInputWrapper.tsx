@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { isMonthMatch } from "../../utils/isMonthMatch";
-
 import Input from "../Input/Input";
 import InputGroup from "./InputGroup";
 import { getEXPNumberErrorMessage } from "../../utils/getEXPNumberErrorMessage";
-import { isLengthMatch } from "../../utils/isLengthMatch";
 
 type EXPNumber = { mm: string; yy: string };
 interface Props {
@@ -43,11 +40,7 @@ export default function EXPInputWrapper({ setEXPNumber, value }: Props) {
             setEXPNumber({ ...value, [expKey]: newValue })
           }
           placeholder={expKey === "mm" ? "MM" : "YY"}
-          isValid={
-            expKey === "mm"
-              ? (value: string) => isMonthMatch(value)
-              : (value: string) => isLengthMatch(2, value)
-          }
+          hasError={inputErrors[expKey as keyof EXPNumber] !== null}
           maxLength={2}
           onError={setError(expKey as keyof EXPNumber)}
           onBlur={() => {

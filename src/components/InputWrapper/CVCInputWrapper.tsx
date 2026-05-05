@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { isLengthMatch } from "../../utils/isLengthMatch";
 import Input from "../Input/Input";
 import InputGroup from "./InputGroup";
 import { getCVCumberErrorMessage } from "../../utils/getCVCNumberErrorMessage";
@@ -24,7 +23,7 @@ export default function CVCInputWrapper({ setCVCNumber, value }: Props) {
         value={value}
         setValue={setCVCNumber}
         placeholder="123"
-        isValid={(value: string) => isLengthMatch(3, value)}
+        hasError={inputError !== null}
         maxLength={3}
         onError={setInputError}
         onBlur={() => {

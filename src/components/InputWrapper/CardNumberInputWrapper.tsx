@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { isLengthMatch } from "../../utils/isLengthMatch";
 import Input from "../Input/Input";
 import InputGroup from "./InputGroup";
 import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
@@ -57,7 +56,7 @@ export default function CardNumberInputWrapper({
             setCardNumber({ ...value, [cardKey]: newValue })
           }
           placeholder="1234"
-          isValid={(value: string) => isLengthMatch(4, value)}
+          hasError={inputErrors[cardKey as keyof CardNumbers] !== null}
           maxLength={4}
           onError={setError(cardKey as keyof CardNumbers)}
           onBlur={() => {
