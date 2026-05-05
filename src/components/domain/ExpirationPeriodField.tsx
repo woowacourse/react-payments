@@ -30,7 +30,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
       return;
     }
 
-    const newValue = [...value];
+    const newValue = [...value] as CardInfo['expirationPeriod'];
     newValue[index] = inputValue;
     onUpdated(newValue);
     setErrorStatus(inputValue === '' ? 'required' : null);

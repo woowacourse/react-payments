@@ -27,7 +27,7 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
       return;
     }
 
-    const newValue = [...value];
+    const newValue = [...value] as CardInfo['cardNumbers'];
     newValue[index] = inputValue;
     onUpdated(newValue);
     setErrorStatus(inputValue === '' ? 'required' : null);
