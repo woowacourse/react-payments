@@ -3,6 +3,7 @@ import { ErrorMessage } from './ErrorMessage';
 import { Validator } from '../../validators/CardValidator';
 import { CardFieldset, CardLegend, CardInput } from '../../style/CardStyles';
 import { useCardContext } from '../../hooks/useCardContext';
+import type { cardNumberFieldError } from '../../types/fieldError';
 
 const indexMap: { [key: string]: number } = {
   'first-digits': 0,
@@ -11,10 +12,17 @@ const indexMap: { [key: string]: number } = {
   'fourth-digits': 3,
 };
 
+const fields: Exclude<keyof cardNumberFieldError, 'message'>[] = [
+  'first-digits',
+  'second-digits',
+  'third-digits',
+  'fourth-digits',
+];
+
 export function CardNumberInput() {
   const { cardNumber, setCardNumber, setNetworkBrand } = useCardContext();
 
-  const [fieldErrors, setError] = useState({
+  const [fieldErrors, setError] = useState<cardNumberFieldError>({
     'first-digits': false,
     'second-digits': false,
     'third-digits': false,
@@ -61,50 +69,20 @@ export function CardNumberInput() {
     <>
       <CardFieldset>
         <CardLegend>카드 번호</CardLegend>
-        <CardInput
-          id="first-digits"
-          type="text"
-          maxLength={4}
-          inputMode="numeric"
-          value={cardNumber[0]}
-          onChange={changeCardNumber}
-          onBlur={handleBlurCardNumber}
-          placeholder="1234"
-          fieldErrors={fieldErrors['first-digits']}
-        />
-        <CardInput
-          id="second-digits"
-          type="text"
-          maxLength={4}
-          inputMode="numeric"
-          value={cardNumber[1]}
-          onChange={changeCardNumber}
-          onBlur={handleBlurCardNumber}
-          placeholder="1234"
-          fieldErrors={fieldErrors['second-digits']}
-        />
-        <CardInput
-          id="third-digits"
-          type="text"
-          maxLength={4}
-          inputMode="numeric"
-          value={cardNumber[2]}
-          onChange={changeCardNumber}
-          onBlur={handleBlurCardNumber}
-          placeholder="1234"
-          fieldErrors={fieldErrors['third-digits']}
-        />
-        <CardInput
-          id="fourth-digits"
-          type="text"
-          maxLength={4}
-          inputMode="numeric"
-          value={cardNumber[3]}
-          onChange={changeCardNumber}
-          onBlur={handleBlurCardNumber}
-          placeholder="1234"
-          fieldErrors={fieldErrors['fourth-digits']}
-        />
+        {fields.map((field, index) => (
+          <CardInput
+            key={field}
+            id={field}
+            type="text"
+            maxLength={4}
+            inputMode="numeric"
+            value={cardNumber[index]}
+            onChange={changeCardNumber}
+            onBlur={handleBlurCardNumber}
+            placeholder="1234"
+            fieldErrors={fieldErrors[field]}
+          />
+        ))}
       </CardFieldset>
       <ErrorMessage message={fieldErrors['message']} />
     </>
