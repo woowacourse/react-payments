@@ -1,16 +1,13 @@
-import {
-  checkIsInt,
-  validateMonthRange,
-  validateYearRange,
-} from "@/utils/validator";
+import { checkIsInt, validateMonthRange } from "@/utils/validator";
 import InputField from "@components/common/InputField.tsx";
-import { formatValidityPeriod, padValidityPeriodUnit } from "@utils/card";
+import { padValidityPeriodUnit } from "@utils/card";
 import { useState } from "react";
-
-type InputStatus = "default" | "error";
-
-const MONTH_MAX_LENGTH = 2;
-const YEAR_MAX_LENGTH = 2;
+import {
+  MONTH_MAX_LENGTH,
+  YEAR_MAX_LENGTH,
+  HELPER_MESSAGE,
+  type InputStatus,
+} from "./constants";
 
 export type ValidityPeriod = {
   month: string;
@@ -26,8 +23,8 @@ type InputsStatuses = {
 };
 
 const INPUTS_STATUSES: InputsStatuses = {
-  month: "default",
-  year: "default",
+  month: "DEFAULT",
+  year: "DEFAULT",
 };
 
 const CardValidityPeriodInputField = ({
@@ -36,56 +33,47 @@ const CardValidityPeriodInputField = ({
 }: CardValidityPeriodInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
 
-  const validityPeriodChange = (
-    key: keyof ValidityPeriod,
-    rawValue: string,
-  ): boolean => {
-    if (/\D/.test(rawValue)) {
-      setStatus((prev) => ({ ...prev, [key]: "error" }));
-      return false;
-    }
-    const value = formatValidityPeriod(rawValue);
-    if (key === "month") {
-      if (value.length === 0) {
-        setStatus((prev) => ({ ...prev, month: "default" }));
-        return true;
-      }
-      if (!checkIsInt(+value)) {
-        setStatus((prev) => ({ ...prev, month: "error" }));
-        return false;
-      }
-      if (value.length === MONTH_MAX_LENGTH && !validateMonthRange(+value)) {
-        setStatus((prev) => ({ ...prev, month: "error" }));
-        return false;
-      }
-      setStatus((prev) => ({ ...prev, month: "default" }));
-    }
-    if (key === "year") {
-      if (value.length === 0) {
-        setStatus((prev) => ({ ...prev, year: "default" }));
-        return true;
-      }
-      if (!checkIsInt(+value) || !validateYearRange(+value)) {
-        setStatus((prev) => ({ ...prev, year: "error" }));
-        return false;
-      }
-      setStatus((prev) => ({ ...prev, year: "default" }));
-    }
-    return true;
-  };
-
   const handleValidityPeriodChange = (
     key: keyof ValidityPeriod,
-    value: string,
+    input: string,
   ) => {
-    if (!validityPeriodChange(key, value)) return;
-    onChange({ ...validityPeriod, [key]: formatValidityPeriod(value) });
+    if (input.length !== 0 && !checkIsInt(+input)) {
+      setStatus((prev) => ({ ...prev, [key]: "NOT_NUMBER" }));
+      return;
+    }
+
+    setStatus((prev) => ({ ...prev, [key]: "DEFAULT" }));
+    onChange({
+      ...validityPeriod,
+      [key]: input.slice(
+        0,
+        key === "month" ? MONTH_MAX_LENGTH : YEAR_MAX_LENGTH,
+      ),
+    });
   };
 
-  const handleValidityPeriodBlur = (key: keyof ValidityPeriod) => {
-    const padded = padValidityPeriodUnit(validityPeriod[key]);
-    validityPeriodChange(key, padded);
-    if (padded === validityPeriod[key]) return;
+  const handleValidityPeriodBlur = (
+    key: keyof ValidityPeriod,
+    input: string,
+  ) => {
+    if (input.length === 0) {
+      setStatus((prev) => ({
+        ...prev,
+        [key]: key === "month" ? "EMPTY_MONTH" : "EMPTY_YEAR",
+      }));
+      return;
+    }
+
+    if (key === "month")
+      if (!validateMonthRange(+input)) {
+        setStatus((prev) => ({ ...prev, month: "INVALID_MONTH_RANGE" }));
+        return;
+      }
+
+    setStatus((prev) => ({ ...prev, [key]: "DEFAULT" }));
+
+    const padded = padValidityPeriodUnit(input);
+    if (padded === input) return;
     onChange({ ...validityPeriod, [key]: padded });
   };
 
@@ -101,8 +89,8 @@ const CardValidityPeriodInputField = ({
           fullWidth: true,
           value: validityPeriod.month,
           onChange: (e) => handleValidityPeriodChange("month", e.target.value),
-          onBlur: () => handleValidityPeriodBlur("month"),
-          state: status.month,
+          onBlur: (e) => handleValidityPeriodBlur("month", e.target.value),
+          state: status.month === "DEFAULT" ? "default" : "error",
         },
         {
           placeholder: "YY",
@@ -110,14 +98,14 @@ const CardValidityPeriodInputField = ({
           fullWidth: true,
           value: validityPeriod.year,
           onChange: (e) => handleValidityPeriodChange("year", e.target.value),
-          onBlur: () => handleValidityPeriodBlur("year"),
-          state: status.year,
+          onBlur: (e) => handleValidityPeriodBlur("year", e.target.value),
+          state: status.year === "DEFAULT" ? "default" : "error",
         },
       ]}
       helperMessage={
-        status.month === "error" || status.year === "error"
-          ? "숫자만 입력 가능합니다."
-          : ""
+        status.month !== "DEFAULT"
+          ? HELPER_MESSAGE[status.month]
+          : HELPER_MESSAGE[status.year]
       }
     />
   );
