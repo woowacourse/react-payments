@@ -4,14 +4,20 @@ import { Validator } from '../../validators/CardValidator';
 import { CardFieldset, CardLegend, CardInput } from '../../style/CardStyles';
 import { useCardContext } from '../../hooks/useCardContext';
 
+const indexMap: { [key: string]: number } = {
+  'second-digits': 1,
+  'third-digits': 2,
+  'fourth-digits': 3,
+};
+
 export function CardNumberInput() {
   const { cardNumber, setCardNumber, setNetworkBrand } = useCardContext();
 
-  const [isError, setError] = useState({
-    'first-digits': { state: false },
-    'second-digits': { state: false },
-    'third-digits': { state: false },
-    'fourth-digits': { state: false },
+  const [fieldErrors, setError] = useState({
+    'first-digits': false,
+    'second-digits': false,
+    'third-digits': false,
+    'fourth-digits': false,
     message: '',
   });
 
@@ -31,12 +37,14 @@ export function CardNumberInput() {
     const { value, id } = e.target;
     try {
       Validator.isNumber(value);
-      setError({ ...isError, [id]: { state: false }, message: '' });
-      setCardNumber({ ...cardNumber, [id]: value });
+      setError({ ...fieldErrors, [id]: false, message: '' });
+      const newCardNumber = [...cardNumber];
+      newCardNumber[indexMap[id]] = value;
+      setCardNumber(newCardNumber);
     } catch (err) {
       setError({
-        ...isError,
-        [id]: { state: true },
+        ...fieldErrors,
+        [id]: true,
         message: err instanceof Error ? err.message : '',
       });
     }
@@ -47,13 +55,15 @@ export function CardNumberInput() {
     try {
       Validator.isNumber(value);
       Validator.isValidNetworkBrand(value);
-      setError({ ...isError, [id]: { state: false }, message: '' });
+      setError({ ...fieldErrors, [id]: false, message: '' });
       handleNetworkBrand(value);
-      setCardNumber({ ...cardNumber, [id]: value });
+      const newCardNumber = [...cardNumber];
+      newCardNumber[0] = value;
+      setCardNumber(newCardNumber);
     } catch (err) {
       setError({
-        ...isError,
-        [id]: { state: true },
+        ...fieldErrors,
+        [id]: true,
         message: err instanceof Error ? err.message : '',
       });
     }
@@ -63,11 +73,11 @@ export function CardNumberInput() {
     const { value, id } = e.target;
     try {
       Validator.isValidCardNumberLength(value, e.target.maxLength);
-      setError({ ...isError, [id]: { state: false }, message: '' });
+      setError({ ...fieldErrors, [id]: false, message: '' });
     } catch (err) {
       setError({
-        ...isError,
-        [id]: { state: true },
+        ...fieldErrors,
+        [id]: true,
         message: err instanceof Error ? err.message : '',
       });
     }
@@ -86,7 +96,7 @@ export function CardNumberInput() {
           onChange={changeFirstDigitsCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
-          isError={isError['first-digits'].state}
+          fieldErrors={fieldErrors['first-digits']}
         />
         <CardInput
           id="second-digits"
@@ -97,7 +107,7 @@ export function CardNumberInput() {
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
-          isError={isError['second-digits'].state}
+          fieldErrors={fieldErrors['second-digits']}
         />
         <CardInput
           id="third-digits"
@@ -108,7 +118,7 @@ export function CardNumberInput() {
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
-          isError={isError['third-digits'].state}
+          fieldErrors={fieldErrors['third-digits']}
         />
         <CardInput
           id="fourth-digits"
@@ -119,10 +129,10 @@ export function CardNumberInput() {
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
-          isError={isError['fourth-digits'].state}
+          fieldErrors={fieldErrors['fourth-digits']}
         />
       </CardFieldset>
-      <ErrorMessage message={isError['message']} />
+      <ErrorMessage message={fieldErrors['message']} />
     </>
   );
 }

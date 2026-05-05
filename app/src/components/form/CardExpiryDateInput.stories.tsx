@@ -25,12 +25,7 @@ const renderWithContext = () => {
   return (
     <CardContext
       value={{
-        cardNumber: {
-          "first-digits": "",
-          "second-digits": "",
-          "third-digits": "",
-          "fourth-digits": "",
-        },
+        cardNumber: ['', '', '', ''],
         setCardNumber: () => {},
         networkBrand: "",
         setNetworkBrand: () => {},
