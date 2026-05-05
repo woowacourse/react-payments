@@ -10,3 +10,9 @@ export const isValidMonth = (month: string) => {
   const regex = /^(0[1-9]|1[0-2])$/;
   return regex.test(month);
 };
+
+export const isValidInputNumber = (input: string, maxLength: number) => {
+  if (input !== '' && !isNumericString(input)) return false;
+  if (input.length > maxLength) return false;
+  return true;
+};

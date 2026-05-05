@@ -2,199 +2,61 @@ import cn from 'classnames';
 import styles from './Payments.module.css';
 
 import { useState } from 'react';
-import { CreditCard } from './creditCard';
-import { FormGroup } from '../../core/components/formGroup';
-import { Input } from '../../core/components/input';
-import { validateCardNumber, validateCvc, validateExpirationDate } from './validator';
-import { isNumericString } from '../../core/utils/validator';
+import { CardPreview } from '../../features/cardPreview/CardPreview';
 
-import type { CardNumbers, ExpirationDate } from './types';
-import { BRAND_NUMBER } from './constant';
+import type { ExpirationDate } from '@/entities/card/types';
+
+import { CardNumberFormGroup } from '@/features/CardFormGroup/CardNumberFormGroup';
+import { CvcFormGroup } from '@/features/CardFormGroup/CvcFormGroup';
+import { ExpirationDateFormGroup } from '@/features/CardFormGroup/ExpirationDateFormGroup';
+import { CARD_BRAND_FORMAT, getBrand } from '@/entities/card/brand';
+
+import { isValidInputNumber } from '@/core/utils/validator';
+import { validateExpirationDate, validateCvc } from '@/entities/card/validator';
 
 export const Payments = () => {
-  const [cardNumbers, setCardNumbers] = useState<CardNumbers>({ first: '', second: '', third: '', fourth: '' });
-  const [onBlurCardNumber, setOnBlurCardNumber] = useState([false, false, false, false]);
+  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({ month: '', year: '' });
+  const [cvc, setCvc] = useState('');
 
-  // cardNumber --------------------------
+  const brand = getBrand(cardNumbers.join(''));
 
-  const preventCardNumber = (cardNumber: string) => {
-    if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
-    if (cardNumber.length > 4) return true;
-    return false;
-  };
-
-  const renderErrorMessageCardNumbers = (cardNumbers: string[]) => {
-    if (onBlurCardNumber.every((blur) => !blur)) return '';
-    if (cardNumbers.some((cardNumber) => cardNumber.length !== 4)) return '카드 번호를 전부 채워주세요';
-    return '';
-  };
-
-  const renderErrorCardNumberInput = (cardNumber: string) => {
-    return onBlurCardNumber.includes(true) && !validateCardNumber(cardNumber);
-  };
-
-  const handleChangeCardNumber = (index: number, value: string) => {
-    if (preventCardNumber(value)) return;
+  const handleChangeCardNumber = (cardNumber: string, index: number): void => {
+    if (!isValidInputNumber(cardNumber, CARD_BRAND_FORMAT[brand][index])) return;
     const next = [...cardNumbers];
-    next[index] = value;
+    next[index] = cardNumber;
     setCardNumbers(next);
   };
 
-  const handleBlurCardNumber = (index: number) => {
-    const next = [...onBlurCardNumber];
-    next[index] = true;
-    setOnBlurCardNumber(next);
+  const handleChangeExpirationDate = (expirationDate: ExpirationDate): void => {
+    if (expirationDate.month !== '' && !validateExpirationDate(expirationDate)) return;
+    setExpirationDate(expirationDate);
   };
 
-  const renderBrandCard = (cardNumbers: string[]) => {
-    if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
-    if (BRAND_NUMBER.mastercard.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'mastercard';
-    return 'default';
-  };
-
-  //--------------------------------
-
-  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
-    month: '',
-    year: '',
-  });
-  const [onBlurExpirationDate, setOnBlurExpirationDate] = useState({
-    month: false,
-    year: false,
-  });
-
-  const preventExpirationMonth = (month: string) => {
-    if (month !== '' && !isNumericString(month)) return true;
-    if (month.length > 2) return true;
-
-    return false;
-  };
-
-  const preventExpirationYear = (year: string) => {
-    if (year !== '' && !isNumericString(year)) return true;
-    if (year.length > 2) return true;
-
-    return false;
-  };
-
-  const renderErrorMessageExpirationDate = (expirationDate: ExpirationDate) => {
-    if (Object.values(onBlurExpirationDate).every((blur) => !blur)) return '';
-
-    const isValidateExpirationDate = validateExpirationDate(expirationDate);
-    if (!Object.values(isValidateExpirationDate).every((valid) => valid)) return '유효기간을 전부 채워주세요';
-    return '';
-  };
-
-  const handleChangeExpirationDate = (key: keyof ExpirationDate, value: string) => {
-    if (key === 'month' && preventExpirationMonth(value)) return;
-    if (key === 'year' && preventExpirationYear(value)) return;
-
-    setExpirationDate({ ...expirationDate, [key]: value });
-  };
-
-  const handleBlurExpirationDate = (key: keyof ExpirationDate) => {
-    setOnBlurExpirationDate({ ...onBlurExpirationDate, [key]: true });
-  };
-
-  const isValidateExpirationDate = validateExpirationDate(expirationDate);
-
-  // expirationDate 관련 상태값 -- end
-
-  //cvc
-
-  const [cvc, setCvc] = useState('');
-  const [onBlurCvc, setOnBlurCvc] = useState(false);
-
-  const preventCvc = (cvc: string) => {
-    if (!isNumericString(cvc)) return false;
-    if (cvc.length > 3) return false;
-    return true;
-  };
-
-  const renderErrorMessageCvc = (cvc: string) => {
-    if (!onBlurCvc) return '';
-    if (!validateCvc(cvc)) return 'CVC를 전부 채워주세요';
-    return '';
-  };
-
-  const handleChangeCvc = (value: string) => {
-    if (!preventCvc(value)) return;
-    setCvc(value);
-  };
-
-  const handleBlurCvc = () => {
-    preventCvc(cvc);
-    setOnBlurCvc(true);
+  const handleChangeCvc = (cvc: string): void => {
+    if (cvc !== '' && !validateCvc(cvc)) return;
+    setCvc(cvc);
   };
 
   return (
     <div className={cn(styles.payments)}>
-      <CreditCard
-        bank="default"
-        cardBrand={renderBrandCard(cardNumbers)}
-        cardNumberList={cardNumbers}
-        expirationDate={[expirationDate.month, expirationDate.year]}
+      <CardPreview
+        cardBrand={brand}
+        cardNumbers={cardNumbers}
+        expirationDate={{ month: expirationDate.month, year: expirationDate.year }}
       />
-      <FormGroup
-        title="결제할 카드 번호를 입력해 주세요"
-        subTitle="본인 명의의 카드만 결제 가능합니다."
-        label="카드 번호"
-        errorMessage={renderErrorMessageCardNumbers(cardNumbers)}
-      >
-        {cardNumbers.map((value, index) => (
-          <Input
-            type="text"
-            key={index}
-            value={value}
-            maxLength={4}
-            placeholder="1234"
-            isError={renderErrorCardNumberInput(cardNumbers[index])}
-            onChange={(e) => handleChangeCardNumber(index, e.target.value)}
-            onBlur={() => handleBlurCardNumber(index)}
-          />
-        ))}
-      </FormGroup>
-      <FormGroup
-        title="카드 유효기간을 입력해 주세요"
-        subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
-        label="유효기간"
-        errorMessage={renderErrorMessageExpirationDate(expirationDate)}
-      >
-        <Input
-          type="tel"
-          value={expirationDate.month}
-          maxLength={2}
-          onChange={(e) => handleChangeExpirationDate('month', e.target.value)}
-          onBlur={() => {
-            handleBlurExpirationDate('month');
-          }}
-          isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.month}
-          placeholder="MM"
+      <form>
+        <CardNumberFormGroup
+          brand={brand}
+          cardNumbers={cardNumbers}
+          onChangeCardNumber={handleChangeCardNumber}
         />
-        <Input
-          type="tel"
-          value={expirationDate.year}
-          maxLength={2}
-          onChange={(e) => handleChangeExpirationDate('year', e.target.value)}
-          onBlur={() => {
-            handleBlurExpirationDate('year');
-          }}
-          isError={Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.year}
-          placeholder="YY"
-        />
-      </FormGroup>
-
-      <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={renderErrorMessageCvc(cvc)}>
-        <Input
-          type="text"
-          value={cvc}
-          maxLength={3}
-          placeholder="123"
-          isError={onBlurCvc && !validateCvc(cvc)}
-          onChange={(e) => handleChangeCvc(e.target.value)}
-          onBlur={() => handleBlurCvc()}
-        />
-      </FormGroup>
+        {/* <CvcFormGroup cvc={cvc} onChangeCvc={handleChangeCvc} />
+        <ExpirationDateFormGroup
+          expirationDate={expirationDate}
+          onChangeExpirationDate={handleChangeExpirationDate}
+        /> */}
+      </form>
     </div>
   );
 };

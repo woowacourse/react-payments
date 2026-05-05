@@ -1,15 +1,16 @@
 import { isNumericString, isValidMonth } from '@/core/utils/validator';
-import { BRAND_CARD_LENGTH, getBrand } from './brand';
-import { ExpirationDate } from '@/pages/payments/index';
+import { BRAND_CARD_LENGTH } from './brand';
+import type { ExpirationDate } from '@/entities/card/types';
+import type { Brand } from '@/entities/card/brand';
 
-export const validateCardNumber = (cardNumbers: string) => {
-  const brand = getBrand(cardNumbers);
-
+// 카드번호
+export const validateCardNumbers = (cardNumbers: string, brand: Brand) => {
   if (cardNumbers.length !== BRAND_CARD_LENGTH[brand]) return false;
   if (!isNumericString(cardNumbers)) return false;
-
   return true;
 };
+
+// 유효기간
 
 const validateExpirationMonth = (month: string) => {
   if (month.length !== 2) return false;
@@ -30,6 +31,8 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
     year: validateExpirationYear(expirationDate.year),
   };
 };
+
+// CVC
 
 export const validateCvc = (cvc: string) => {
   if (cvc.length !== 3) return false;
