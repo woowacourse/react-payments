@@ -1,4 +1,3 @@
-
 # Page
 
 > formValue와 (step2에서 추가될 step..)을 관리함.
@@ -11,9 +10,9 @@
 
 - formValue: {
   cardNumbers: {value: ["","","",""]},
-  ExpirationPeriod: {value: ["",""]},
-  cvcNumbers: {value: ""},
-  cardBrand: {value: "" (visa | master | local)},
+  expirationPeriod: {value: ["",""]},
+  cvc: {value: ""},
+  cardBrand: {value: "" (visa | mastercard | local)},
 
 }
 
@@ -80,18 +79,20 @@
 
 ## view
 
-- <div>
-   <div>
-      <div></div>
-      <img />
-   </div>
-   <div>
-      <span>{}</span> * 4
-   </div>
-   <div>
-      <span>{}</span> * 2 (사이에 슬래쉬로)
-   </div>
+```jsx
+<div>
+  <div>
+    <div></div>
+    <img src="..." alt="카드 브랜드 로고" /> {/* visa | mastercard */}
+  </div>
+  <div>
+    <span>{}</span> * 4
+  </div>
+  <div>
+    <span>{}</span> * 2 (사이에 슬래쉬로)
+  </div>
 </div>
+```
 
 ---
 
@@ -184,7 +185,7 @@
 
 ## props
 
-- { title: string; caption: string; error: boolean; errorMessage: string; children: React.Node??; }
+- { title: string; caption: string; error: boolean; errorMessage: string; children: ReactNode; }
 
 ## state
 
