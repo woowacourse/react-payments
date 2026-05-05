@@ -80,7 +80,7 @@ export function CardNumberInput() {
             onChange={changeCardNumber}
             onBlur={handleBlurCardNumber}
             placeholder="1234"
-            fieldErrors={fieldErrors[field]}
+            $fieldErrors={fieldErrors[field]}
           />
         ))}
       </CardFieldset>

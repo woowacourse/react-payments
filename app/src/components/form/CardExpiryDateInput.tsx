@@ -70,7 +70,7 @@ export function CardExpiryDateInput() {
           onBlur={handleBlurCardExpiryDate}
           maxLength={2}
           value={cardExpiryDate['expiry-month']}
-          fieldErrors={fieldErrors['expiry-month']}
+          $fieldErrors={fieldErrors['expiry-month']}
           placeholder="MM"
         />
         <CardInput
@@ -81,7 +81,7 @@ export function CardExpiryDateInput() {
           onBlur={handleBlurCardExpiryDate}
           maxLength={2}
           value={cardExpiryDate['expiry-year']}
-          fieldErrors={fieldErrors['expiry-year']}
+          $fieldErrors={fieldErrors['expiry-year']}
           placeholder="YY"
         />
       </CardFieldset>

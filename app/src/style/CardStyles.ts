@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
 type ErrorFlag = {
-  fieldErrors?: boolean;
+  $fieldErrors?: boolean;
 };
 
 export const CardInput = styled.input<ErrorFlag>`
-  border: solid 1px ${(props) => (props.fieldErrors ? '#FF3D3D' : '#acacac')};
+  border: solid 1px ${(props) => (props.$fieldErrors ? '#FF3D3D' : '#acacac')};
   border-radius: 2px;
   padding: 0.5rem;
   font-size: 11px;
