@@ -34,12 +34,7 @@ export function CardCVCInput() {
 
   const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (
-      !runValidation([
-        () => Validator.isValidCardCVCLength(value, e.target.maxLength),
-      ])
-    )
-      return;
+    if (!runValidation([() => Validator.isValidCardCVCLength(value)])) return;
   };
 
   return (

@@ -62,13 +62,7 @@ export function CardExpiryDateInput() {
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
     if (
-      !runValidation(
-        [
-          () =>
-            Validator.isValidCardExpiryDateLength(value, e.target.maxLength),
-        ],
-        id,
-      )
+      !runValidation([() => Validator.isValidCardExpiryDateLength(value)], id)
     )
       return;
   };

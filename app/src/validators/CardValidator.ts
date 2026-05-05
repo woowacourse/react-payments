@@ -20,8 +20,8 @@ export const Validator = {
     }
   },
 
-  isValidCardNumberLength(value: string, limit: number) {
-    if (![0, limit].includes(value.length)) {
+  isValidCardNumberLength(value: string) {
+    if (![0, 4].includes(value.length)) {
       throw new Error("카드 번호 각 항목은 4자리여야 합니다.");
     }
   },
@@ -56,14 +56,14 @@ export const Validator = {
     }
   },
 
-  isValidCardExpiryDateLength(value: string, limit: number) {
-    if (![0, limit].includes(value.length)) {
+  isValidCardExpiryDateLength(value: string) {
+    if (![0, 2].includes(value.length)) {
       throw new Error("날짜 각 항목은 2자리여야 합니다.");
     }
   },
 
-  isValidCardCVCLength(value: string, limit: number) {
-    if (![0, limit].includes(value.length)) {
+  isValidCardCVCLength(value: string) {
+    if (![0, 3].includes(value.length)) {
       throw new Error("CVC는 3자리여야 합니다.");
     }
   },

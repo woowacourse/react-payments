@@ -30,9 +30,9 @@ describe("카드 정보 검증기 테스트", () => {
     });
 
     test("카드 번호 각 항목은 4자리여야 한다.", () => {
-      expect(() => Validator.isValidCardNumberLength("", 4)).not.toThrow();
-      expect(() => Validator.isValidCardNumberLength("1234", 4)).not.toThrow();
-      expect(() => Validator.isValidCardNumberLength("123", 4)).toThrow(
+      expect(() => Validator.isValidCardNumberLength("")).not.toThrow();
+      expect(() => Validator.isValidCardNumberLength("1234")).not.toThrow();
+      expect(() => Validator.isValidCardNumberLength("123")).toThrow(
         "카드 번호 각 항목은 4자리여야 합니다.",
       );
     });
@@ -93,11 +93,9 @@ describe("카드 정보 검증기 테스트", () => {
     );
 
     test("카드 유효기간 각 항목은 2자리 여야 한다.", () => {
-      expect(() => Validator.isValidCardExpiryDateLength("", 2)).not.toThrow();
-      expect(() =>
-        Validator.isValidCardExpiryDateLength("12", 2),
-      ).not.toThrow();
-      expect(() => Validator.isValidCardExpiryDateLength("1", 2)).toThrow(
+      expect(() => Validator.isValidCardExpiryDateLength("")).not.toThrow();
+      expect(() => Validator.isValidCardExpiryDateLength("12")).not.toThrow();
+      expect(() => Validator.isValidCardExpiryDateLength("1")).toThrow(
         "날짜 각 항목은 2자리여야 합니다.",
       );
     });
@@ -105,9 +103,9 @@ describe("카드 정보 검증기 테스트", () => {
 
   describe("카드 CVC 테스트", () => {
     test("카드 CVC번호는 3자리여야 한다.", () => {
-      expect(() => Validator.isValidCardCVCLength("", 3)).not.toThrow();
-      expect(() => Validator.isValidCardCVCLength("123", 3)).not.toThrow();
-      expect(() => Validator.isValidCardCVCLength("1", 3)).toThrow(
+      expect(() => Validator.isValidCardCVCLength("")).not.toThrow();
+      expect(() => Validator.isValidCardCVCLength("123")).not.toThrow();
+      expect(() => Validator.isValidCardCVCLength("1")).toThrow(
         "CVC는 3자리여야 합니다.",
       );
     });

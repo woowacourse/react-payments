@@ -70,12 +70,7 @@ export function CardNumberInput() {
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    if (
-      !runValidation(
-        [() => Validator.isValidCardNumberLength(value, e.target.maxLength)],
-        id,
-      )
-    )
+    if (!runValidation([() => Validator.isValidCardNumberLength(value)], id))
       return;
   };
 
