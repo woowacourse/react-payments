@@ -6,7 +6,7 @@ export function CardNumber() {
   const { cardNumber } = useContext(CardContext);
 
   return (
-    <CardNumberContainer>
+    <CardNumberContainer id="preview-card-number">
       <span>{cardNumber["first-digits"]}</span>
       <span>{cardNumber["second-digits"]}</span>
       <span className="secret">

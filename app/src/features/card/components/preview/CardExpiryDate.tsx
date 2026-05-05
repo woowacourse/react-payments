@@ -6,9 +6,15 @@ export function CardExpiryDate() {
   const { cardExpiryDate } = useContext(CardContext);
   return (
     <CardExpiryDateContainer>
-      <span>{cardExpiryDate["expiry-month"]}</span>
-      {cardExpiryDate["expiry-month"].length === 2 && <> / </>}
-      <span>{cardExpiryDate["expiry-year"]}</span>
+      <span id="preview-card-expiry-date-month">
+        {cardExpiryDate["expiry-month"]}
+      </span>
+      {cardExpiryDate["expiry-month"].length === 2 && (
+        <span id="preview-card-expiry-date-divide-line"> / </span>
+      )}
+      <span id="preview-card-expiry-date-year">
+        {cardExpiryDate["expiry-year"]}
+      </span>
     </CardExpiryDateContainer>
   );
 }
