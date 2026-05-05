@@ -19,7 +19,7 @@ export const CardNumber: Story = {
         <CardInfoInput
           value={value}
           setValue={setValue}
-          isValid={(v) => v.length === 4}
+          hasError={error !== null}
           maxLength={4}
           placeholder="0000"
           onError={setError}
@@ -39,7 +39,7 @@ export const EXP: Story = {
         <CardInfoInput
           value={value}
           setValue={setValue}
-          isValid={(v) => v.length === 2}
+          hasError={error !== null}
           maxLength={2}
           placeholder="MM"
           onError={setError}
@@ -59,7 +59,7 @@ export const CVC: Story = {
         <CardInfoInput
           value={value}
           setValue={setValue}
-          isValid={(v) => v.length === 3}
+          hasError={error !== null}
           maxLength={3}
           placeholder="123"
           onError={setError}
