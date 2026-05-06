@@ -1,5 +1,5 @@
 // import { isNumericString, isValidMonth } from '../../core/utils/validator';
-import { isNumericString, isValidMonth } from '../../core/utils/validator';
+import { isRequired, isNumericString, isValidMonth, min } from '../../core/utils/validator';
 import type { ExpirationDate } from './types';
 
 export const validateCardNumber = (cardNumber: string) => {
@@ -28,11 +28,11 @@ export const validateCvc = ({ cvc }: { cvc: string }) => {
   return rules.every((rule) => {
     switch (rule.type) {
       case 'isRequired':
-        return !!cvc;
+        return isRequired(cvc);
       case 'isNumericString':
         return isNumericString(cvc);
       case 'min':
-        return cvc.length === 3;
+        return min(cvc, 3);
       default:
         return true;
     }
