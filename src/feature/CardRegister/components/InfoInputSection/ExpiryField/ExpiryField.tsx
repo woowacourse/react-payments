@@ -36,10 +36,8 @@ const ExpiryField = ({
       return;
     }
 
-    if (value.length === 2 && !isValidMonth(value)) return;
-
     setExpiryMonth(value);
-    clearErrorWhenComplete(index, value);
+    clearErrorWhenComplete(index, value, 'month');
   };
 
   const handleYearChange = (index: number, eValue: string) => {
@@ -49,7 +47,7 @@ const ExpiryField = ({
     if (value.length > 2) return;
 
     setExpiryYear(value);
-    clearErrorWhenComplete(index, value);
+    clearErrorWhenComplete(index, value, 'year');
   };
   const ERROR_MSG = '2자리를 입력해 주세요';
 
@@ -77,8 +75,16 @@ const ExpiryField = ({
     setIsTouched((prev) => prev.map((touched, i) => (i === index ? true : touched)));
   };
 
-  const clearErrorWhenComplete = (index: number, value: string) => {
-    if (!isTouched[index] || value.length !== 2) return;
+  const isValidExpiry = (value: string, expiryType: 'month' | 'year') => {
+    if (expiryType === 'month') {
+      return value.length === 2 && isValidMonth(value);
+    }
+
+    return value.length === 2;
+  };
+
+  const clearErrorWhenComplete = (index: number, value: string, expiryType: 'month' | 'year') => {
+    if (!isTouched[index] || !isValidExpiry(value, expiryType)) return;
 
     updateErrorInfo(index, false);
   };
@@ -94,10 +100,8 @@ const ExpiryField = ({
     setIsError(firstErrorIdx !== -1);
   };
 
-  const validateError = (index: number, eValue: string) => {
-    const isValid = eValue.length === 2;
-
-    updateErrorInfo(index, !isValid);
+  const validateError = (index: number, eValue: string, expiryType: 'month' | 'year') => {
+    updateErrorInfo(index, !isValidExpiry(eValue, expiryType));
   };
 
   const handleExpiryBlur = (index: number, eValue: string, expiryType: 'month' | 'year') => {
@@ -105,7 +109,7 @@ const ExpiryField = ({
 
     const filledNumber = fillZero(eValue, expiryType);
     if (!filledNumber) {
-      validateError(index, eValue);
+      validateError(index, eValue, expiryType);
       return;
     }
 
@@ -116,7 +120,7 @@ const ExpiryField = ({
       setExpiryYear(filledNumber);
     }
 
-    validateError(index, filledNumber);
+    validateError(index, filledNumber, expiryType);
   };
 
   const firstErrorIdx = errorInfo.flag.indexOf(true);
