@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 import { isRequired, isNumericString, isValidMonth, length, minLength, maxLength } from '../utils/validator';
 
-type FormValuesRules<TFormValues extends Record<string, string>> = {
+export type FormValuesRules<TFormValues extends Record<string, string>> = {
   [FormKey in keyof TFormValues]: Rule[];
 };
 
