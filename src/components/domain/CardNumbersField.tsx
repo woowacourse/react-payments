@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo, ErrorStatus } from '../../types';
+import type { CardInfo, ErrorStatus, Validate } from '../../types';
 import { isNumber, sanitizeNumber } from '../../utils';
 import { useState } from 'react';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
@@ -12,6 +12,24 @@ interface CardNumbersFieldProps {
 }
 
 type ErrorStatusList = [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus];
+
+const validates: Validate[] = [
+  {
+    type: ['change', 'blur'],
+    rule: (inputValue: string) => inputValue === '',
+    errorStatus: 'required',
+  },
+  {
+    type: ['change'],
+    rule: (inputValue: string) => !isNumber(inputValue),
+    errorStatus: 'numberOnly',
+  },
+  {
+    type: ['blur'],
+    rule: (inputValue: string) => inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT,
+    errorStatus: 'invalidLength',
+  },
+];
 
 export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
   const [errorStatusList, setErrorStatusList] = useState<ErrorStatusList>([null, null, null, null]);
@@ -31,25 +49,6 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
     newValue[index] = sanitizeNumber(inputValue);
     onUpdated(newValue);
   };
-
-  const validates: { type: ('change' | 'blur')[]; rule: (inputValue: string) => boolean; errorStatus: ErrorStatus }[] =
-    [
-      {
-        type: ['change', 'blur'],
-        rule: (inputValue: string) => inputValue === '',
-        errorStatus: 'required',
-      },
-      {
-        type: ['change'],
-        rule: (inputValue: string) => !isNumber(inputValue),
-        errorStatus: 'numberOnly',
-      },
-      {
-        type: ['blur'],
-        rule: (inputValue: string) => inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT,
-        errorStatus: 'invalidLength',
-      },
-    ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;

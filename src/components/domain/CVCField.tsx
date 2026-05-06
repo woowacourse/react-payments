@@ -1,4 +1,4 @@
-import type { CardInfo } from '../../types';
+import type { CardInfo, Validate } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import { useState } from 'react';
@@ -11,31 +11,30 @@ interface CVCFieldProps {
   onUpdated: (value: CardInfo['cvc']) => void;
 }
 
+const validates: Validate[] = [
+  {
+    type: ['change', 'blur'],
+    rule: (inputValue: string) => inputValue === '',
+    errorStatus: 'required',
+  },
+  {
+    type: ['change'],
+    rule: (inputValue: string) => !isNumber(inputValue),
+    errorStatus: 'numberOnly',
+  },
+  {
+    type: ['blur'],
+    rule: (inputValue: string) => inputValue.length < CVC_LENGTH,
+    errorStatus: 'invalidLength',
+  },
+];
+
 export default function CVCField({ value, onUpdated }: CVCFieldProps) {
   const [errorStatus, setErrorStatus] = useState<ErrorStatus>(null);
 
   const updateFormValue = (inputValue: string) => {
     onUpdated(sanitizeNumber(inputValue));
   };
-
-  const validates: { type: ('change' | 'blur')[]; rule: (inputValue: string) => boolean; errorStatus: ErrorStatus }[] =
-    [
-      {
-        type: ['change', 'blur'],
-        rule: (inputValue: string) => inputValue === '',
-        errorStatus: 'required',
-      },
-      {
-        type: ['change'],
-        rule: (inputValue: string) => !isNumber(inputValue),
-        errorStatus: 'numberOnly',
-      },
-      {
-        type: ['blur'],
-        rule: (inputValue: string) => inputValue.length < CVC_LENGTH,
-        errorStatus: 'invalidLength',
-      },
-    ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;

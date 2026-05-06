@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo } from '../../types';
+import type { CardInfo, Validate } from '../../types';
 import { useState } from 'react';
 import type { ExpirationPeriodErrorStatus } from '../../types';
 import { isNumber, isValidMonth, isValidYear, sanitizeNumber } from '../../utils';
@@ -13,6 +13,36 @@ interface ExpirationPeriodFieldProps {
 }
 
 type ErrorStatusList = [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
+
+const validates: Validate<ExpirationPeriodErrorStatus>[] = [
+  {
+    type: ['change', 'blur'],
+    rule: (inputValue: string) => inputValue === '',
+    errorStatus: 'required',
+  },
+  {
+    type: ['change'],
+    rule: (inputValue: string) => !isNumber(inputValue),
+    errorStatus: 'numberOnly',
+  },
+  {
+    type: ['change'],
+    rule: (inputValue: string, index: number) =>
+      inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0 && !isValidMonth(inputValue),
+    errorStatus: 'invalidMonth',
+  },
+  {
+    type: ['change'],
+    rule: (inputValue: string, index: number) =>
+      inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1 && !isValidYear(inputValue),
+    errorStatus: 'invalidYear',
+  },
+  {
+    type: ['blur'],
+    rule: (inputValue: string) => inputValue.length < PERIOD_LENGTH_PER_INPUT,
+    errorStatus: 'invalidLength',
+  },
+];
 
 export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
   const [errorStatusList, setErrorStatusList] = useState<ErrorStatusList>([null, null]);
@@ -32,40 +62,6 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     newValue[index] = sanitizeNumber(inputValue);
     onUpdated(newValue);
   };
-
-  const validates: {
-    type: ('change' | 'blur')[];
-    rule: (inputValue: string, index?: number) => boolean;
-    errorStatus: ExpirationPeriodErrorStatus;
-  }[] = [
-    {
-      type: ['change', 'blur'],
-      rule: (inputValue: string) => inputValue === '',
-      errorStatus: 'required',
-    },
-    {
-      type: ['change'],
-      rule: (inputValue: string) => !isNumber(inputValue),
-      errorStatus: 'numberOnly',
-    },
-    {
-      type: ['change'],
-      rule: (inputValue: string, index: number) =>
-        inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0 && !isValidMonth(inputValue),
-      errorStatus: 'invalidMonth',
-    },
-    {
-      type: ['change'],
-      rule: (inputValue: string, index: number) =>
-        inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1 && !isValidYear(inputValue),
-      errorStatus: 'invalidYear',
-    },
-    {
-      type: ['blur'],
-      rule: (inputValue: string) => inputValue.length < PERIOD_LENGTH_PER_INPUT,
-      errorStatus: 'invalidLength',
-    },
-  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
