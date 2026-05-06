@@ -2,6 +2,7 @@ import {useState} from 'react';
 import Label from '../../../../../common/components/Label/Label';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
+import {createFlags, computeNextTouched, computeNextErrorInfo} from '../fieldState';
 
 const ExpiryField = ({
   expiryMonth,
@@ -17,13 +18,12 @@ const ExpiryField = ({
   setIsError: (value: boolean) => void;
 }) => {
   const INPUT_COUNT = 2;
-  const createFlags = () => Array.from({length: INPUT_COUNT}, () => false);
 
-  const [errorInfo, setErrorInfo] = useState({
-    flag: createFlags(),
+  const [errorInfo, setErrorInfo] = useState<{flag: boolean[]; currentErrorMsg: string}>({
+    flag: createFlags(INPUT_COUNT),
     currentErrorMsg: '',
   });
-  const [isTouched, setIsTouched] = useState(createFlags());
+  const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(INPUT_COUNT));
 
   const handleMonthChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -71,10 +71,6 @@ const ExpiryField = ({
     }
   };
 
-  const updateTouched = (index: number) => {
-    setIsTouched((prev) => prev.map((touched, i) => (i === index ? true : touched)));
-  };
-
   const isValidExpiry = (value: string, expiryType: 'month' | 'year') => {
     if (expiryType === 'month') {
       return value.length === 2 && isValidMonth(value);
@@ -83,21 +79,15 @@ const ExpiryField = ({
     return value.length === 2;
   };
 
-  const clearErrorWhenComplete = (index: number, value: string, expiryType: 'month' | 'year') => {
-    if (!isTouched[index] || !isValidExpiry(value, expiryType)) return;
-
-    updateErrorInfo(index, false);
+  const updateErrorInfo = (index: number, hasError: boolean) => {
+    const next = computeNextErrorInfo(errorInfo.flag, index, hasError, ERROR_MSG);
+    setErrorInfo(next);
+    setIsError(next.hasAnyError);
   };
 
-  const updateErrorInfo = (index: number, hasError: boolean) => {
-    const newFlag = errorInfo.flag.map((flag, i) => (i === index ? hasError : flag));
-    const firstErrorIdx = newFlag.indexOf(true);
-
-    setErrorInfo({
-      flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? '' : ERROR_MSG,
-    });
-    setIsError(firstErrorIdx !== -1);
+  const clearErrorWhenComplete = (index: number, value: string, expiryType: 'month' | 'year') => {
+    if (!isTouched[index] || !isValidExpiry(value, expiryType)) return;
+    updateErrorInfo(index, false);
   };
 
   const validateError = (index: number, eValue: string, expiryType: 'month' | 'year') => {
@@ -105,7 +95,7 @@ const ExpiryField = ({
   };
 
   const handleExpiryBlur = (index: number, eValue: string, expiryType: 'month' | 'year') => {
-    updateTouched(index);
+    setIsTouched((prev) => computeNextTouched(prev, index));
 
     const filledNumber = fillZero(eValue, expiryType);
     if (!filledNumber) {

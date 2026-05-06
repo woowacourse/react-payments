@@ -2,6 +2,7 @@ import {useState} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import Label from '../../../../../common/components/Label/Label';
 import styled from 'styled-components';
+import {createFlags, computeNextTouched, computeNextErrorInfo} from '../fieldState';
 
 const NumberField = ({
   cardNumbers,
@@ -14,13 +15,12 @@ const NumberField = ({
 }) => {
   const INPUT_COUNT = 4;
   const NUMBER_LENGTH = 4;
-  const createFlags = () => Array.from({length: INPUT_COUNT}, () => false);
 
-  const [errorInfo, setErrorInfo] = useState({
-    flag: createFlags(),
+  const [errorInfo, setErrorInfo] = useState<{flag: boolean[]; currentErrorMsg: string}>({
+    flag: createFlags(INPUT_COUNT),
     currentErrorMsg: '',
   });
-  const [isTouched, setIsTouched] = useState(createFlags());
+  const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(INPUT_COUNT));
 
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -35,29 +35,19 @@ const NumberField = ({
 
   const ERROR_MSG = '카드 번호 4자리를 입력해 주세요';
 
-  const updateTouched = (index: number) => {
-    setIsTouched((prev) => prev.map((touched, i) => (i === index ? true : touched)));
+  const updateErrorInfo = (index: number, hasError: boolean) => {
+    const next = computeNextErrorInfo(errorInfo.flag, index, hasError, ERROR_MSG);
+    setErrorInfo(next);
+    setIsError(next.hasAnyError);
   };
 
   const clearErrorWhenComplete = (index: number, value: string) => {
     if (!isTouched[index] || value.length !== NUMBER_LENGTH) return;
-
     updateErrorInfo(index, false);
   };
 
-  const updateErrorInfo = (index: number, hasError: boolean) => {
-    const newFlag = errorInfo.flag.map((flag, i) => (i === index ? hasError : flag));
-    const firstErrorIdx = newFlag.indexOf(true);
-
-    setErrorInfo({
-      flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? '' : ERROR_MSG,
-    });
-    setIsError(firstErrorIdx !== -1);
-  };
-
   const handleNumbersBlur = (index: number, eValue: string) => {
-    updateTouched(index);
+    setIsTouched((prev) => computeNextTouched(prev, index));
 
     const isValid = eValue.length === NUMBER_LENGTH;
     updateErrorInfo(index, !isValid);

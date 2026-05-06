@@ -2,6 +2,7 @@ import Label from '../../../../../common/components/Label/Label';
 import Input from '../../../../../common/components/Input/Input';
 import {useState} from 'react';
 import styled from 'styled-components';
+import {createFlags, computeNextTouched, computeNextErrorInfo} from '../fieldState';
 
 const CvcField = ({
   cvcNumber,
@@ -14,13 +15,12 @@ const CvcField = ({
 }) => {
   const INPUT_COUNT = 1;
   const CVC_LENGTH = 3;
-  const createFlags = () => Array.from({length: INPUT_COUNT}, () => false);
 
-  const [errorInfo, setErrorInfo] = useState({
-    flag: createFlags(),
+  const [errorInfo, setErrorInfo] = useState<{flag: boolean[]; currentErrorMsg: string}>({
+    flag: createFlags(INPUT_COUNT),
     currentErrorMsg: '',
   });
-  const [isTouched, setIsTouched] = useState(createFlags());
+  const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(INPUT_COUNT));
 
   const handleCvcNumberChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -34,29 +34,19 @@ const CvcField = ({
 
   const ERROR_MSG = 'CVC 번호 3자리를 입력해 주세요';
 
-  const updateTouched = (index: number) => {
-    setIsTouched((prev) => prev.map((touched, i) => (i === index ? true : touched)));
+  const updateErrorInfo = (index: number, hasError: boolean) => {
+    const next = computeNextErrorInfo(errorInfo.flag, index, hasError, ERROR_MSG);
+    setErrorInfo(next);
+    setIsError(next.hasAnyError);
   };
 
   const clearErrorWhenComplete = (index: number, value: string) => {
     if (!isTouched[index] || value.length !== CVC_LENGTH) return;
-
     updateErrorInfo(index, false);
   };
 
-  const updateErrorInfo = (index: number, hasError: boolean) => {
-    const newFlag = errorInfo.flag.map((flag, i) => (i === index ? hasError : flag));
-    const firstErrorIdx = newFlag.indexOf(true);
-
-    setErrorInfo({
-      flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? '' : ERROR_MSG,
-    });
-    setIsError(firstErrorIdx !== -1);
-  };
-
   const handleCvcBlur = (index: number, eValue: string) => {
-    updateTouched(index);
+    setIsTouched((prev) => computeNextTouched(prev, index));
 
     const isValid = eValue.length === CVC_LENGTH;
     updateErrorInfo(index, !isValid);
