@@ -3,17 +3,15 @@ import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo, ErrorStatus, Validate } from '../../types';
 import { isNumber, sanitizeNumber } from '../../utils';
-import { useState } from 'react';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
+import { useErrorStatusList } from '../../hooks/useErrorStatusList.ts';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
   onUpdated: (value: CardInfo['cardNumbers']) => void;
 }
 
-type ErrorStatusList = [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus];
-
-const validates: Validate[] = [
+const validates: Validate<ErrorStatus>[] = [
   {
     type: ['change', 'blur'],
     rule: (inputValue: string) => inputValue === '',
@@ -32,17 +30,9 @@ const validates: Validate[] = [
 ];
 
 export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
-  const [errorStatusList, setErrorStatusList] = useState<ErrorStatusList>([null, null, null, null]);
+  const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, CARD_NUMBER_LENGTH_PER_INPUT);
   const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
   const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
-
-  const setErrorStatus = (status: ErrorStatus, index: number) => {
-    setErrorStatusList((prev) => {
-      const updated = [...prev] as ErrorStatusList;
-      updated[index] = status;
-      return updated;
-    });
-  };
 
   const updateFormValue = (inputValue: string, index: number) => {
     const newValue = [...value] as CardInfo['cardNumbers'];
@@ -51,25 +41,11 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const inputValue = e.target.value;
-
-    const changeValidates = validates.filter((validate) => validate.type.includes('change'));
-    const activeValidate = changeValidates.find((validate) => validate.rule(inputValue));
-
-    setErrorStatus(activeValidate?.errorStatus ?? null, index);
-    updateFormValue(inputValue, index);
+    onChange(e, index);
+    updateFormValue(e.target.value, index);
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
-    const inputValue = e.target.value;
-
-    const blurValidates = validates.filter((validate) => validate.type.includes('blur'));
-    const activeValidate = blurValidates.find((validate) => validate.rule(inputValue));
-
-    if (activeValidate) {
-      setErrorStatus(activeValidate.errorStatus, index);
-    }
-  };
+  const handleBlur = onBlur;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '결제할 카드 번호를 입력해 주세요',
