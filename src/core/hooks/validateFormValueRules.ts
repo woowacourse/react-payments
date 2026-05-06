@@ -6,10 +6,14 @@ type FormValuesRules<TFormValues extends Record<string, string>> = {
   [FormKey in keyof TFormValues]: Rule[];
 };
 
-interface Rule {
-  type: string;
+type RuleType = 'isRequired' | 'isNumericString' | 'isValidMonth' | 'length' | 'minLength' | 'maxLength';
+
+type Rule = {
+  type: RuleType;
   message: ReactNode;
-}
+} & {
+  [optionKey in RuleType]?: number;
+};
 export interface ResultValid extends Rule {
   valid: boolean;
 }
@@ -24,11 +28,11 @@ const validateFormValueRules = <T extends string>(value: T, rules: Rule[]) => {
       case 'isValidMonth':
         return { ...rule, valid: isValidMonth(value) };
       case 'length':
-        return { ...rule, valid: length(value, 3) };
+        return { ...rule, valid: length(value, rule?.length || 0) };
       case 'minLength':
-        return { ...rule, valid: minLength(value, 3) };
+        return { ...rule, valid: minLength(value, rule?.minLength || 0) };
       case 'maxLength':
-        return { ...rule, valid: maxLength(value, 3) };
+        return { ...rule, valid: maxLength(value, rule?.maxLength || 0) };
       default:
         return { valid: true };
     }
