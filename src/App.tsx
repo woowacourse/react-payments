@@ -36,6 +36,37 @@ function App() {
             <CardPreview cardNumbers={cardNumbers} EXP={EXPNumbers} />
             <InputSectionContainer>
                 <CardInfoSection
+                    title="비밀번호"
+                    caption="앞의 2자리를 입력해 주세요"
+                    inputLabel="비밀번호 앞 2자리"
+                    isRender={isSatisfyCVC()}
+                >
+                    ㅇ
+                </CardInfoSection>
+                <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isSatisfyEXP()}>
+                    <CVCInputWrapper setCVCNumber={setCVC} validator={getCVCumberErrorMessage} value={cvc} />
+                </CardInfoSection>
+                <CardInfoSection
+                    title="카드 유효기간을 입력해 주세요"
+                    caption="월/년도(MMYY)를 순서대로 입력해 주세요"
+                    inputLabel="유효기간"
+                    isRender={isSatisfyCardBrand()}
+                >
+                    <EXPInputWrapper
+                        setEXPNumber={setEXPNumber}
+                        validator={getEXPNumberErrorMessage}
+                        value={EXPNumbers}
+                    />
+                </CardInfoSection>
+                <CardInfoSection
+                    title="카드사를 선택해 주세요"
+                    caption="현재 국내 카드사만 가능합니다."
+                    isRender={isSatisfyCardNumber()}
+                >
+                    ㅇ
+                </CardInfoSection>
+
+                <CardInfoSection
                     title="결제할 카드 번호를 입력해 주세요"
                     caption="본인 명의의 카드만 결제 가능합니다."
                     inputLabel="카드 번호"
@@ -45,23 +76,6 @@ function App() {
                         validator={getCardNumberErrorMessage}
                         value={cardNumbers}
                     />
-                </CardInfoSection>
-
-                <CardInfoSection
-                    title="카드 유효기간을 입력해 주세요"
-                    caption="월/년도(MMYY)를 순서대로 입력해 주세요"
-                    inputLabel="유효기간"
-                    isRender={isSatisfyCardNumber()}
-                >
-                    <EXPInputWrapper
-                        setEXPNumber={setEXPNumber}
-                        validator={getEXPNumberErrorMessage}
-                        value={EXPNumbers}
-                    />
-                </CardInfoSection>
-
-                <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isSatisfyEXP()}>
-                    <CVCInputWrapper setCVCNumber={setCVC} validator={getCVCumberErrorMessage} value={cvc} />
                 </CardInfoSection>
             </InputSectionContainer>
         </MainContainer>

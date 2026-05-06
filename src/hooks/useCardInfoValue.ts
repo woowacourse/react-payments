@@ -3,7 +3,7 @@ import { isMonthMatch } from '../utils/isMonthMatch';
 
 export const useCardInfoValue = () => {
     const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-    const [cardBrand, setCardBrand] = useState('');
+    const [cardBrand, setCardBrand] = useState(''); // TODO 문자열 리터럴 타입 추가
     const [EXPNumbers, setEXPNumbers] = useState(['', '']);
     const [cvc, setCVC] = useState('');
     const [password, setPassword] = useState('');
@@ -28,7 +28,7 @@ export const useCardInfoValue = () => {
     };
 
     const isSatisfyCardBrand = () => {
-        return isSatisfyCardNumber() && cardBrand;
+        return isSatisfyCardNumber() && !!cardBrand;
     };
 
     const isSatisfyEXP = () => {

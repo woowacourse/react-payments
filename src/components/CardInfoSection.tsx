@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 interface CardSectionProps {
     title: string;
     caption?: string;
-    inputLabel: string;
+    inputLabel?: string;
     isRender?: boolean;
     children: React.ReactNode;
 }
@@ -14,7 +14,7 @@ export default function CardInfoSection({ title, caption, inputLabel, isRender =
             <CardSectionStyle>
                 <TitleStyle>{title}</TitleStyle>
                 {caption && <CaptionStyle>{caption}</CaptionStyle>}
-                <InputLabelStyle>{inputLabel}</InputLabelStyle>
+                {inputLabel && <InputLabelStyle>{inputLabel}</InputLabelStyle>}
                 {children}
             </CardSectionStyle>
         )
