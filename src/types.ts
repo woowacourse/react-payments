@@ -14,5 +14,3 @@ export interface ValidationRule {
   validator: (input: string) => boolean;
   message: string;
 };
-
-export type ErrorEntry = { error: Error; timestamp: number } | null;

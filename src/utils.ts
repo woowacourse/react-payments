@@ -1,4 +1,4 @@
-import type { CardNumberSegments, ErrorEntry, ValidationRule } from './types';
+import type { CardNumberSegments, ValidationRule } from './types';
 
 export function validateDigits(input: string) {
   return /^\d+$/.test(input);
@@ -53,11 +53,3 @@ export function getCardBrand(cardNumberSegments: CardNumberSegments) {
   return null;
 }
 
-export function getLastError(errors: ErrorEntry[]): Error | null {
-  return errors
-    .filter((entry) => entry !== null)
-    .reduce<ErrorEntry>(
-      (latest, current) => (latest === null || current.timestamp > latest.timestamp ? current : latest),
-      null,
-    )?.error ?? null;
-}
