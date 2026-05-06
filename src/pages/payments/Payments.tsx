@@ -1,16 +1,20 @@
-import cn from 'classnames';
-import styles from './Payments.module.css';
-
 import { useState } from 'react';
+
+import cn from 'classnames';
+
 import { CreditCard } from '@/core/components/creditCard';
 import { FormGroup } from '@/core/components/formGroup';
 import { Field } from '@/core/components/field';
 import { Input } from '@/core/components/input';
-import { validateCardNumber, validateCvc, validateExpirationDate } from './validator';
+
 import { isNumericString } from '@/core/utils/validator';
 
-import type { ExpirationDate } from './types';
+import styles from './Payments.module.css';
+
+import { validateCardNumber, validateCvc, validateExpirationDate } from './validator';
 import { BRAND_NUMBER } from './constant';
+
+import type { ExpirationDate } from './types';
 
 export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
