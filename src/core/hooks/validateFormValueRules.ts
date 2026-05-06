@@ -7,20 +7,23 @@ type FormValuesRules<TFormValues extends Record<string, string>> = {
 interface Rule {
   type: string;
 }
+interface ResultValid extends Rule {
+  valid: boolean;
+}
 
 const validateFormValueRules = <T extends string>(value: T, rules: Rule[]) => {
   return rules.map((rule) => {
     switch (rule.type) {
       case 'isRequired':
-        return isRequired(value) ? true : rule;
+        return { ...rule, valid: isRequired(value) };
       case 'isNumericString':
-        return isNumericString(value) ? true : rule;
+        return { ...rule, valid: isNumericString(value) };
       case 'isValidMonth':
-        return isValidMonth(value) ? true : rule;
+        return { ...rule, valid: isValidMonth(value) };
       case 'min':
-        return min(value, 3) ? true : rule;
+        return { ...rule, valid: min(value, 3) };
       default:
-        return true;
+        return { valid: true };
     }
   });
 };
@@ -34,6 +37,6 @@ export const validateFormValuesRules = <TFormValues extends Record<string, strin
     const valid = validateFormValueRules(value, rules);
     return { ...acc, [key]: valid };
   }, {}) as {
-    [key in keyof TFormValues]: (true | Rule)[];
+    [key in keyof TFormValues]: ResultValid[];
   };
 };
