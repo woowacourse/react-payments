@@ -9,22 +9,22 @@ interface InputFieldFormProps {
   fieldConfig: InputFieldConfig;
   valueList: string[];
   validator: (inputValue: string, index: number) => { error: boolean; errorMessage: string };
-  onChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  onChanges: ((e: ChangeEvent<HTMLInputElement>) => void)[];
 }
 
 export default function InputFieldForm({
   fieldConfig,
   valueList,
   validator,
-  onChange,
+  onChanges,
 }: InputFieldFormProps) {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  if (valueList.length !== fieldConfig.placeholder.length) {
-    console.error(
-      `${fieldConfig.label}필드의 valueList(${valueList.length})와                                           
-  placeholder(${fieldConfig.placeholder.length})의 길이가 다릅니다.`
-    );
+  if (
+    valueList.length !== fieldConfig.placeholder.length ||
+    valueList.length !== onChanges.length
+  ) {
+    console.error(`필드의 개수가 일치하지 않습니다`);
   }
 
   return (
@@ -42,7 +42,7 @@ export default function InputFieldForm({
             fieldMaxLength={fieldConfig.maxLength}
             placeholder={fieldConfig.placeholder[index]}
             setErrorMessage={setErrorMessage}
-            onChange={onChange}
+            onChange={onChanges[index]}
           />
         ))}
       </InputFieldWrapper>

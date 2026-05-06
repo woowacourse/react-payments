@@ -15,7 +15,7 @@ interface FormFieldProps {
     error: boolean;
     errorMessage: string;
   };
-  onChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   setErrorMessage: React.Dispatch<SetStateAction<string>>;
 }
@@ -44,7 +44,7 @@ export default function FormField({
     setIsError(error);
     setErrorMessage(errorMessage);
 
-    onChange(e, index);
+    onChange(e);
   };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {

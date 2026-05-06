@@ -15,23 +15,16 @@ export default function PaymentForm() {
   const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({ month: '', year: '' });
 
-  const handleCardNumbersChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleCardNumbersChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) =>
     setCardNumbers((prev) => {
       const newCardNumbers = [...prev] as CardNumbersType;
       newCardNumbers[index] = e.target.value;
       return newCardNumbers;
     });
-  };
 
-  const handleExpirationDateChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    const key = index === 0 ? 'month' : 'year';
-
-    setExpirationDate((prev) => {
-      const newExpirationDate = { ...prev };
-      newExpirationDate[key] = e.target.value;
-      return newExpirationDate;
-    });
-  };
+  const handleExpirationDateChange =
+    (field: keyof ExpirationDateType) => (e: ChangeEvent<HTMLInputElement>) =>
+      setExpirationDate((prev) => ({ ...prev, [field]: e.target.value }));
 
   return (
     <Container>
@@ -49,7 +42,7 @@ export default function PaymentForm() {
             fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
             valueList={convertValueFormat(cardNumbers)}
             validator={cardNumbersValidator}
-            onChange={handleCardNumbersChange}
+            onChanges={[0, 1, 2, 3].map(handleCardNumbersChange)}
           />
         </InputFieldLayout>
 
@@ -61,7 +54,7 @@ export default function PaymentForm() {
             fieldConfig={INPUT_FIELD_CONFIG['EXPIRATION_DATE']}
             valueList={convertValueFormat(expirationDate)}
             validator={expirationDateValidator}
-            onChange={handleExpirationDateChange}
+            onChanges={[handleExpirationDateChange('month'), handleExpirationDateChange('year')]}
           />
         </InputFieldLayout>
 

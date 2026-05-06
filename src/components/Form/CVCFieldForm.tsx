@@ -7,7 +7,7 @@ import { convertValueFormat } from '../../utils/convert';
 export default function CVCFieldForm() {
   const [cvcNumbers, setCVCNumbers] = useState<string>('');
 
-  const handleCVCNumbersChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleCVCNumbersChange = () => (e: ChangeEvent<HTMLInputElement>) => {
     setCVCNumbers(e.target.value);
   };
 
@@ -16,7 +16,7 @@ export default function CVCFieldForm() {
       fieldConfig={INPUT_FIELD_CONFIG['CVC']}
       valueList={convertValueFormat(cvcNumbers)}
       validator={cvcValidator}
-      onChange={handleCVCNumbersChange}
+      onChanges={[handleCVCNumbersChange]}
     />
   );
 }
