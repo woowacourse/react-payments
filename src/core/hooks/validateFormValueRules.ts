@@ -2,21 +2,7 @@ import type { ReactNode } from 'react';
 
 import { isRequired, isNumericString, isValidMonth, length, minLength, maxLength } from '../utils/validator';
 
-export type FormValuesRules<TFormValues extends Record<string, unknown>> = {
-  [FormKey in keyof TFormValues]: Rule[];
-};
-
 type RuleType = 'isRequired' | 'isNumericString' | 'isValidMonth' | 'length' | 'minLength' | 'maxLength';
-
-export type Rule = {
-  type: RuleType;
-  message: ReactNode;
-} & {
-  [optionKey in RuleType]?: number;
-};
-export interface ResultValid extends Rule {
-  valid: boolean;
-}
 
 type Validators = {
   [type in RuleType]: (value: unknown, payload?: number) => boolean;
@@ -30,6 +16,21 @@ const validators: Validators = {
   minLength,
   maxLength,
 };
+
+export type Rule = {
+  type: RuleType;
+  message: ReactNode;
+} & {
+  [optionKey in RuleType]?: number;
+};
+
+export type FormValuesRules<TFormValues extends Record<string, unknown>> = {
+  [FormKey in keyof TFormValues]: Rule[];
+};
+
+export interface ResultValid extends Rule {
+  valid: boolean;
+}
 
 const validateFormValueRules = <T>(value: T, rules: Rule[]) => {
   return rules.map((rule) => {
