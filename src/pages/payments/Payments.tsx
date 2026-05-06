@@ -86,6 +86,8 @@ export const Payments = () => {
     blurValue: onBlurExpirationDate,
     onBlur: handleBlurExpirationDate,
 
+    errors: errorsExpirationDate,
+
     invalidAttemp: expirationDateInvalidAttemp,
     renderErrorMessage: renderErrorMessageExpirationDate,
   } = useExpirationDate();
@@ -140,7 +142,7 @@ export const Payments = () => {
             }}
             isError={
               expirationDateInvalidAttemp.month ||
-              (Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.month)
+              (Object.values(onBlurExpirationDate).includes(true) && !errorsExpirationDate.month?.length)
             }
             placeholder="MM"
           />
@@ -154,7 +156,7 @@ export const Payments = () => {
             }}
             isError={
               expirationDateInvalidAttemp.year ||
-              (Object.values(onBlurExpirationDate).includes(true) && !isValidateExpirationDate.year)
+              (Object.values(onBlurExpirationDate).includes(true) && !errorsExpirationDate.year?.length)
             }
             placeholder="YY"
           />

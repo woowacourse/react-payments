@@ -78,7 +78,10 @@ export const useExpirationDate = () => {
     blurValue: onBlurExpirationDate,
     onBlur: handleBlurExpirationDate,
 
-    errors: {},
+    errors: {
+      month: [],
+      year: [],
+    },
 
     invalidAttemp: expirationDateInvalidAttemp,
     renderErrorMessage: renderErrorMessageExpirationDate,
