@@ -83,6 +83,7 @@ const CardNumberInputField = ({
           onChange: (e) => handleCardNumberChange(0, e.target.value),
           onBlur: (e) => handleCardNumberBlur(0, e.target.value),
           state: status[0] === "DEFAULT" ? "default" : "error",
+          autoFocus: true,
         },
         {
           ref: (el) => registerInputRef(1)(el),
