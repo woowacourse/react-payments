@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Input from "../Input/Input";
+import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getEXPNumberErrorMessage } from "../../utils/getEXPNumberErrorMessage";
 
@@ -21,11 +21,7 @@ export default function EXPInputWrapper({ setEXPNumber, value }: Props) {
   const setError = (key: "mm" | "yy") => (message: string | null) => {
     setInputErrors((prev) => ({ ...prev, [key]: message }));
   };
-  const filterOnlyNumber = (value: string) => {
-    if (Number.isNaN(Number(value)) || (value !== "" && value.includes(" "))) {
-      return false;
-    } else return true;
-  };
+
   return (
     <InputGroup
       errorMessage={
@@ -33,7 +29,7 @@ export default function EXPInputWrapper({ setEXPNumber, value }: Props) {
       }
     >
       {Object.entries(value).map(([expKey, expValue]) => (
-        <Input
+        <NumberInput
           key={`${expKey}-input`}
           value={expValue}
           setValue={(newValue) =>
@@ -48,7 +44,6 @@ export default function EXPInputWrapper({ setEXPNumber, value }: Props) {
             if (result && result.key === expKey)
               setError(expKey as keyof EXPNumber)(result.message);
           }}
-          filterOnlyNumber={filterOnlyNumber}
           style={{ width: "152px" }}
         />
       ))}

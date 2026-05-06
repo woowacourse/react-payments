@@ -7,7 +7,6 @@ interface Props extends Omit<
   value: string;
   setValue: (value: string) => void;
   onError: (message: string | null) => void;
-  filterOnlyNumber?: (value: string) => boolean;
   hasError: boolean;
 }
 
@@ -15,16 +14,18 @@ interface InputStyleProps {
   hasError: boolean;
 }
 
-export default function Input({
+export default function NumberInput({
   setValue,
   onError,
-  filterOnlyNumber,
   hasError,
   ...props
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const tmpValue = e.target.value;
-    if (filterOnlyNumber && !filterOnlyNumber(tmpValue)) {
+    if (
+      Number.isNaN(Number(tmpValue)) ||
+      (tmpValue !== "" && tmpValue.includes(" "))
+    ) {
       onError("숫자만 입력할 수 있습니다.");
       return;
     }
@@ -37,6 +38,7 @@ export default function Input({
     <StyledInput
       hasError={hasError}
       type="text"
+      inputMode="numeric"
       onChange={(e) => handleInputChange(e)}
       {...props}
     />

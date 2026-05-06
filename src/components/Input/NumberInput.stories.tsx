@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardInfoInput from "./Input";
+import NumberInput from "./NumberInput";
 import { useState } from "react";
 
-const meta: Meta<typeof CardInfoInput> = {
-  title: "Components/CardInfoInput",
-  component: CardInfoInput,
+const meta: Meta<typeof NumberInput> = {
+  title: "Components/NumberInput",
+  component: NumberInput,
 };
 
 export default meta;
-type Story = StoryObj<typeof CardInfoInput>;
+type Story = StoryObj<typeof NumberInput>;
 
 export const CardNumber: Story = {
   render: () => {
@@ -16,7 +16,7 @@ export const CardNumber: Story = {
     const [error, setError] = useState<string | null>(null);
     return (
       <>
-        <CardInfoInput
+        <NumberInput
           value={value}
           setValue={setValue}
           hasError={error !== null}
@@ -36,7 +36,7 @@ export const EXP: Story = {
     const [error, setError] = useState<string | null>(null);
     return (
       <>
-        <CardInfoInput
+        <NumberInput
           value={value}
           setValue={setValue}
           hasError={error !== null}
@@ -56,7 +56,7 @@ export const CVC: Story = {
     const [error, setError] = useState<string | null>(null);
     return (
       <>
-        <CardInfoInput
+        <NumberInput
           value={value}
           setValue={setValue}
           hasError={error !== null}
