@@ -23,5 +23,18 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
 };
 
 export const validateCvc = ({ cvc }: { cvc: string }) => {
-  return cvc.length === 3 && isNumericString(cvc);
+  const rules = [{ type: 'isRequired' }, { type: 'isNumericString' }, { type: 'min' }];
+
+  return rules.every((rule) => {
+    switch (rule.type) {
+      case 'isRequired':
+        return !!cvc;
+      case 'isNumericString':
+        return isNumericString(cvc);
+      case 'min':
+        return cvc.length === 3;
+      default:
+        return true;
+    }
+  });
 };
