@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Input from "../Input/Input";
+import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
 
@@ -36,12 +36,6 @@ export default function CardNumberInputWrapper({
       setInputErrors((prev) => ({ ...prev, [key]: message }));
     };
 
-  const filterOnlyNumber = (value: string) => {
-    if (Number.isNaN(Number(value)) || (value !== "" && value.includes(" "))) {
-      return false;
-    } else return true;
-  };
-
   return (
     <InputGroup
       errorMessage={
@@ -49,7 +43,7 @@ export default function CardNumberInputWrapper({
       }
     >
       {Object.entries(value).map(([cardKey, cardValue]) => (
-        <Input
+        <NumberInput
           key={`${cardKey}-input`}
           value={cardValue}
           setValue={(newValue) =>
@@ -64,7 +58,6 @@ export default function CardNumberInputWrapper({
             if (result && result.key === cardKey)
               setError(cardKey as keyof CardNumbers)(result.message);
           }}
-          filterOnlyNumber={filterOnlyNumber}
           style={{ width: "71px" }}
         />
       ))}
