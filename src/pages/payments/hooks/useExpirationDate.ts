@@ -4,8 +4,6 @@ import type { ChangeEvent } from 'react';
 import { useFormValues } from '@/core/hooks/useFormValues';
 import { isNumericString } from '@/core/utils/validator';
 
-import type { ExpirationDate } from '../types';
-
 import { validateExpirationDate } from '../validator';
 
 export const useExpirationDate = () => {
@@ -62,12 +60,15 @@ export const useExpirationDate = () => {
     return false;
   };
 
-  const renderErrorMessageExpirationDate = (expirationDate: ExpirationDate) => {
+  const renderErrorMessageExpirationDate = () => {
     if (Object.values(expirationDateInvalidAttemp).find(Boolean)) return '유효햔 유효기간(숫자)을 입력해주세요';
     if (Object.values(blurExpirationDate).every((blur) => !blur)) return '';
 
-    const isValidateExpirationDate = validateExpirationDate(expirationDate);
-    if (!Object.values(isValidateExpirationDate).every((valid) => valid)) return '유효기간을 전부 채워주세요';
+    const errorMonth = errors.month.filter((error) => !error.valid);
+    if (errorMonth[0]) return errorMonth[0].message;
+
+    const errorYear = errors.year.filter((error) => !error.valid);
+    if (errorYear[0]) return errorYear[0].message;
     return '';
   };
 
@@ -80,10 +81,7 @@ export const useExpirationDate = () => {
     blurValue: blurExpirationDate,
     onBlur,
 
-    errors: {
-      month: [],
-      year: [],
-    },
+    errors,
 
     invalidAttemp: expirationDateInvalidAttemp,
     renderErrorMessage: renderErrorMessageExpirationDate,

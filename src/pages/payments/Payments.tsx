@@ -131,7 +131,7 @@ export const Payments = () => {
         </Field>
       </FormGroup>
       <FormGroup title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요">
-        <Field label="유효기간" errorMessage={renderErrorMessageExpirationDate(expirationDate)}>
+        <Field label="유효기간" errorMessage={renderErrorMessageExpirationDate()}>
           <Input
             type="tel"
             id="month"
