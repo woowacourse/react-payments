@@ -1,17 +1,16 @@
-import type { CardInfo, Validate } from '../../types';
+import type { CardInfo, ErrorStatus, Validate } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import { useState } from 'react';
-import type { ErrorStatus } from '../../types';
 import { isNumber, sanitizeNumber } from '../../utils';
 import { CVC_LENGTH, ERROR_MESSAGES } from '../../constants';
+import { useErrorStatus } from '../../hooks/useErrorStatus.ts';
 
 interface CVCFieldProps {
   value: CardInfo['cvc'];
   onUpdated: (value: CardInfo['cvc']) => void;
 }
 
-const validates: Validate[] = [
+const validates: Validate<ErrorStatus>[] = [
   {
     type: ['change', 'blur'],
     rule: (inputValue: string) => inputValue === '',
@@ -30,32 +29,14 @@ const validates: Validate[] = [
 ];
 
 export default function CVCField({ value, onUpdated }: CVCFieldProps) {
-  const [errorStatus, setErrorStatus] = useState<ErrorStatus>(null);
-
-  const updateFormValue = (inputValue: string) => {
-    onUpdated(sanitizeNumber(inputValue));
-  };
+  const { errorStatus, onChange, onBlur } = useErrorStatus(validates);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-
-    const changeValidates = validates.filter((validate) => validate.type.includes('change'));
-    const activeValidate = changeValidates.find((validate) => validate.rule(inputValue));
-
-    setErrorStatus(activeValidate?.errorStatus ?? null);
-    updateFormValue(inputValue);
+    onChange(e);
+    onUpdated(sanitizeNumber(e.target.value));
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-
-    const blurValidates = validates.filter((validate) => validate.type.includes('blur'));
-    const activeValidate = blurValidates.find((validate) => validate.rule(inputValue));
-
-    if (activeValidate) {
-      setErrorStatus(activeValidate.errorStatus);
-    }
-  };
+  const handleBlur = onBlur;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: 'CVC 번호를 입력해 주세요',
