@@ -3,7 +3,7 @@ import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import { useState } from 'react';
 import type { ErrorStatus } from '../../types';
-import { isNumber } from '../../utils';
+import { isNumber, sanitizeNumber } from '../../utils';
 import { CVC_LENGTH, ERROR_MESSAGES } from '../../constants';
 
 interface CVCFieldProps {
@@ -15,7 +15,7 @@ export default function CVCField({ value, onUpdated }: CVCFieldProps) {
   const [errorStatus, setErrorStatus] = useState<ErrorStatus>(null);
 
   const updateFormValue = (inputValue: string) => {
-    onUpdated(inputValue);
+    onUpdated(sanitizeNumber(inputValue));
   };
 
   const validates: { type: ('change' | 'blur')[]; rule: (inputValue: string) => boolean; errorStatus: ErrorStatus }[] =
