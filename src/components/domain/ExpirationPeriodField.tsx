@@ -33,49 +33,58 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     onUpdated(newValue);
   };
 
+  const validates: {
+    type: ('change' | 'blur')[];
+    rule: (inputValue: string, index?: number) => boolean;
+    errorStatus: ExpirationPeriodErrorStatus;
+  }[] = [
+    {
+      type: ['change', 'blur'],
+      rule: (inputValue: string) => inputValue === '',
+      errorStatus: 'required',
+    },
+    {
+      type: ['change'],
+      rule: (inputValue: string) => !isNumber(inputValue),
+      errorStatus: 'numberOnly',
+    },
+    {
+      type: ['change'],
+      rule: (inputValue: string, index: number) =>
+        inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0 && !isValidMonth(inputValue),
+      errorStatus: 'invalidMonth',
+    },
+    {
+      type: ['change'],
+      rule: (inputValue: string, index: number) =>
+        inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1 && !isValidYear(inputValue),
+      errorStatus: 'invalidYear',
+    },
+    {
+      type: ['blur'],
+      rule: (inputValue: string) => inputValue.length < PERIOD_LENGTH_PER_INPUT,
+      errorStatus: 'invalidLength',
+    },
+  ];
+
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue === '') {
-      setErrorStatus(index, 'required');
-      updateFormValue(index, inputValue);
-      return;
-    }
+    const changeValidates = validates.filter((validate) => validate.type.includes('change'));
+    const activeValidate = changeValidates.find((validate) => validate.rule(inputValue, index));
 
-    if (!isNumber(inputValue)) {
-      setErrorStatus(index, 'numberOnly');
-      updateFormValue(index, inputValue);
-      return;
-    }
-
-    if (inputValue.length === PERIOD_LENGTH_PER_INPUT) {
-      if (index === 0 && !isValidMonth(inputValue)) {
-        setErrorStatus(index, 'invalidMonth');
-        updateFormValue(index, inputValue);
-        return;
-      }
-
-      if (index === 1 && !isValidYear(inputValue)) {
-        setErrorStatus(index, 'invalidYear');
-        updateFormValue(index, inputValue);
-        return;
-      }
-    }
-
-    setErrorStatus(index, null);
+    setErrorStatus(index, activeValidate?.errorStatus ?? null);
     updateFormValue(index, inputValue);
   };
 
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue === '') {
-      setErrorStatus(index, 'required');
-      return;
-    }
+    const blurValidates = validates.filter((validate) => validate.type.includes('blur'));
+    const activeValidate = blurValidates.find((validate) => validate.rule(inputValue));
 
-    if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
-      setErrorStatus(index, 'invalidLength');
+    if (activeValidate) {
+      setErrorStatus(index, activeValidate.errorStatus);
     }
   };
 
