@@ -1,5 +1,5 @@
 // import { isNumericString, isValidMonth } from '../../core/utils/validator';
-import { isNumericString, isValidMonth } from '../../core/utils/validator';
+import { isNumericString } from '../../core/utils/validator';
 import type { ExpirationDate } from './types';
 
 import { validateFormValuesRules } from '@/core/hooks/validateFormValueRules';
@@ -10,18 +10,22 @@ export const validateCardNumber = (cardNumber: string) => {
   return true;
 };
 
-const validateExpirationMonth = (month: string) => {
-  return month.length === 2 && isNumericString(month) && isValidMonth(month);
-};
-const validateExpirationYear = (year: string) => {
-  return year.length === 2 && isNumericString(year);
-};
-
 export const validateExpirationDate = (expirationDate: ExpirationDate) => {
-  return {
-    month: validateExpirationMonth(expirationDate.month),
-    year: validateExpirationYear(expirationDate.year),
+  const rules = {
+    month: [
+      { type: 'isRequired', message: '유효기간(월)는 필수값입니다' },
+      { type: 'isNumericString', message: '유효기간(월)는 숫자여야합니다' },
+      { type: 'isValidMonth', message: '유효기간(월)는 01부터 12까지의 숫자여야합니다' },
+      { type: 'length', message: '유효기간(월)은 2자리여야합니다', length: 2 },
+    ],
+    year: [
+      { type: 'isRequired', message: '유효기간(년)는 필수값입니다' },
+      { type: 'isNumericString', message: '유효기간(년)는 숫자여야합니다' },
+      { type: 'length', message: '유효기간(년)은 2자리여야합니다', length: 2 },
+    ],
   };
+
+  return validateFormValuesRules(expirationDate, rules);
 };
 
 export const validateCvc = ({ cvc }: { cvc: string }) => {
