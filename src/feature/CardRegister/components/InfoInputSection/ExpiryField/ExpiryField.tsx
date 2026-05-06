@@ -70,11 +70,10 @@ const ExpiryField = ({
     setExpiryYear(value);
   };
 
-  const fillZero = (value: string, expiryType: 'month' | 'year') => {
+  const fillZero = (value: string, expiryType: 'month' | 'year'): string => {
     if (expiryType === 'month' && value.length === 1 && value !== '0') {
       return `0${value}`;
     }
-
     if (expiryType === 'year' && value.length === 1) {
       return `0${value}`;
     }
