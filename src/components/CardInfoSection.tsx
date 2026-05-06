@@ -4,17 +4,20 @@ interface CardSectionProps {
     title: string;
     caption?: string;
     inputLabel: string;
+    isRender?: boolean;
     children: React.ReactNode;
 }
 
-export default function CardInfoSection({ title, caption, inputLabel, children }: CardSectionProps) {
+export default function CardInfoSection({ title, caption, inputLabel, isRender = true, children }: CardSectionProps) {
     return (
-        <CardSectionStyle>
-            <TitleStyle>{title}</TitleStyle>
-            {caption && <CaptionStyle>{caption}</CaptionStyle>}
-            <InputLabelStyle>{inputLabel}</InputLabelStyle>
-            {children}
-        </CardSectionStyle>
+        isRender && (
+            <CardSectionStyle>
+                <TitleStyle>{title}</TitleStyle>
+                {caption && <CaptionStyle>{caption}</CaptionStyle>}
+                <InputLabelStyle>{inputLabel}</InputLabelStyle>
+                {children}
+            </CardSectionStyle>
+        )
     );
 }
 

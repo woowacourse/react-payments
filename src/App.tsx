@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
 import { getCardNumberErrorMessage } from './utils/getCardNumberErrorMessage';
 import CardInfoSection from './components/CardInfoSection';
 import { getCVCumberErrorMessage } from './utils/getCVCNumberErrorMessage';
@@ -8,20 +7,29 @@ import CardPreview from './components/Card/CardPreview';
 import CardNumberInputWrapper from './components/InputWrapper/CardNumberInputWrapper';
 import EXPInputWrapper from './components/InputWrapper/EXPInputWrapper';
 import CVCInputWrapper from './components/InputWrapper/CVCInputWrapper';
+import { useCardInfoValue } from './hooks/useCardInfoValue';
 
 function App() {
-    const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-    const [EXPNumbers, setEXPNumbers] = useState(['', '']);
+    const {
+        cardNumbers,
+        setCardNumber,
+        cardBrand,
+        setCardBrand,
+        EXPNumbers,
+        setEXPNumber,
+        cvc,
+        setCVC,
+        password,
+        setPassword,
+        isSatisfyCardNumber,
+        isSatisfyCardBrand,
+        isSatisfyEXP,
+        isSatisfyCVC,
+        isSatisfyPassword,
+    } = useCardInfoValue();
 
-    const setCardNumber = (index: number) => (value: string) => {
-        setCardNumbers((prev) => prev.with(index, value));
-    };
-
-    const setEXPNumber = (index: number) => (value: string) => {
-        setEXPNumbers((prev) => prev.with(index, value));
-    };
-
-    const [cvc, setCVC] = useState('');
+    // 여기서 input state 별로 어디 보여줄지 관리
+    // 카드 번호 -> 카드사 -> 유효기간 -> CVC -> 비밀번호 순서
 
     return (
         <MainContainer>
@@ -43,6 +51,7 @@ function App() {
                     title="카드 유효기간을 입력해 주세요"
                     caption="월/년도(MMYY)를 순서대로 입력해 주세요"
                     inputLabel="유효기간"
+                    isRender={isSatisfyCardNumber()}
                 >
                     <EXPInputWrapper
                         setEXPNumber={setEXPNumber}
@@ -51,7 +60,7 @@ function App() {
                     />
                 </CardInfoSection>
 
-                <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC">
+                <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isSatisfyEXP()}>
                     <CVCInputWrapper setCVCNumber={setCVC} validator={getCVCumberErrorMessage} value={cvc} />
                 </CardInfoSection>
             </InputSectionContainer>
