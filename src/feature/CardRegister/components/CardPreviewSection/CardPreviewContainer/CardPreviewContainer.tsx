@@ -7,7 +7,7 @@ import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
 const CardPreviewContainer = ({cardInfo}: {cardInfo: CardInfoType}) => {
   const {cardNumbers, expiryMonth, expiryYear} = cardInfo;
 
-  const getBrandName = (cardNumbers: string[]): 'visa' | 'masterCard' | null => {
+  const getBrandName = (cardNumbers: [string, string, string, string]): 'visa' | 'masterCard' | null => {
     const fullNumber = cardNumbers.map((chunk) => chunk.padEnd(4, '#')).join('');
 
     if (fullNumber.startsWith('4')) return 'visa';

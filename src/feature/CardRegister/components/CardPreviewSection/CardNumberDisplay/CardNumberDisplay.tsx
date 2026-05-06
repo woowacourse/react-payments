@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CardNumberDisplay = ({cardNumbers}: {cardNumbers: string[]}) => {
+const CardNumberDisplay = ({cardNumbers}: {cardNumbers: [string, string, string, string]}) => {
   return (
     <Container>
       {cardNumbers.map((chunk, index) => {

@@ -4,7 +4,7 @@ import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import styled from 'styled-components';
 
 const CardRegisterPage = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const [cardNumbers, setCardNumbers] = useState<[string, string, string, string]>(['', '', '', '']);
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
 

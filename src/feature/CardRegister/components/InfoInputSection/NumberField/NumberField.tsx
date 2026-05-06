@@ -8,8 +8,8 @@ const NumberField = ({
   setCardNumbers,
   setIsError,
 }: {
-  cardNumbers: string[];
-  setCardNumbers: (value: string[]) => void;
+  cardNumbers: [string, string, string, string];
+  setCardNumbers: (value: [string, string, string, string]) => void;
   setIsError: (value: boolean) => void;
 }) => {
   const INPUT_COUNT = 4;
@@ -28,7 +28,7 @@ const NumberField = ({
     if (!/^\d*$/.test(value)) return;
     if (value.length > NUMBER_LENGTH) return;
 
-    const newChunks = cardNumbers.map((chunk, i) => (i === index ? value : chunk));
+    const newChunks = cardNumbers.map((chunk, i) => (i === index ? value : chunk)) as [string, string, string, string];
     setCardNumbers(newChunks);
     clearErrorWhenComplete(index, value);
   };
