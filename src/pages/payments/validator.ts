@@ -26,7 +26,11 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
 
 export const validateCvc = ({ cvc }: { cvc: string }) => {
   const rules = {
-    cvc: [{ type: 'isRequired' }, { type: 'isNumericString' }, { type: 'length' }],
+    cvc: [
+      { type: 'isRequired', message: 'CVC는 필수값입니다' },
+      { type: 'isNumericString', message: 'CVC는 숫자여야합니다' },
+      { type: 'length', message: 'CVC는 3자리여야합니다' },
+    ],
   };
 
   return validateFormValuesRules({ cvc }, rules);

@@ -32,13 +32,7 @@ export const useCvc = () => {
     if (!onBlurCvc) return '';
 
     const errorCvc = errors.cvc.filter((error) => !error.valid);
-    if (errorCvc.length) {
-      const errorType = errorCvc[0].type;
-      if (errorType === 'isRequired') return 'CVC는 필수값입니다';
-      if (errorType === 'isNumbericString') return 'CVC는 숫자여야합니다';
-      if (errorType === 'min') return 'CVC는 3자리여야합니다';
-      return '유효한 CVC(숫자)를 입력해주세요';
-    }
+    if (errorCvc[0]) return errorCvc[0].message;
     return '';
   };
 
