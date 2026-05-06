@@ -55,12 +55,11 @@ export const useCardNumbers = () => {
     return '';
   };
 
-  const renderErrorCardNumberInput = (index: number) => {
-    const cardNumberInvalidAttempMessage = cardNumbersInvalidAttemp[index];
+  const renderErrorCardNumberInput = (index: string) => {
+    const cardNumberInvalidAttempMessage = cardNumbersInvalidAttemp[Number(index)];
     if (cardNumberInvalidAttempMessage) return true;
 
-    const cardNumber = cardNumbers[index as keyof typeof cardNumbers];
-    return Object.values(blurCardNumbers).includes(true) && !validateCardNumber(cardNumber);
+    return Object.values(blurCardNumbers).includes(true) && !validateCardNumbers(cardNumbers);
   };
 
   return {

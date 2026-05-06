@@ -3,7 +3,11 @@ import type { ExpirationDate } from './types';
 import { validateFormValuesRules } from '@/core/hooks/validateFormValueRules';
 import type { Rule, FormValuesRules } from '@/core/hooks/validateFormValueRules';
 
-export const validateCardNumbers = (cardNumbers: { [key: string]: string }) => {
+type CardNumbers = {
+  [key in '0' | '1' | '2' | '3']: string;
+};
+
+export const validateCardNumbers = (cardNumbers: CardNumbers) => {
   const rule = [
     { type: 'isRequired', message: '카드번호는 필수값입니다' },
     { type: 'isNumericString', message: '카드번호는 숫자여야합니다' },
@@ -15,7 +19,7 @@ export const validateCardNumbers = (cardNumbers: { [key: string]: string }) => {
     '1': rule,
     '2': rule,
     '3': rule,
-  } satisfies FormValuesRules<{ [key: number]: string }>;
+  } satisfies FormValuesRules<CardNumbers>;
 
   return validateFormValuesRules(cardNumbers, rules);
 };

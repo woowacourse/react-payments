@@ -75,7 +75,7 @@ export const Payments = () => {
               value={value}
               maxLength={4}
               placeholder="1234"
-              isError={renderErrorCardNumberInput(index)}
+              isError={renderErrorCardNumberInput(String(index))}
               onChange={handleChangeCardNumbers}
               onBlur={handleBlurCardNumbers}
             />
