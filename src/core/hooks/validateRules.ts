@@ -1,8 +1,8 @@
 import { isRequired, isNumericString, isValidMonth, min } from '../utils/validator';
 
-interface FormValuesRules<TFormValues extends Record<string, string>> {
+type FormValuesRules<TFormValues extends Record<string, string>> = {
   [FormKey in keyof TFormValues]: Rule[];
-}
+};
 
 interface Rule {
   type: string;
