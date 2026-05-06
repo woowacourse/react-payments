@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 
-export const CardInfoInputWrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   gap: 8px;
   flex-direction: column;
 `;
 
-export const CardInfoInputLabel = styled.label`
+export const Label = styled.label`
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0%;

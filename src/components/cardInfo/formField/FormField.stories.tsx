@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import styled from "@emotion/styled";
-import CardInfoInput from "./CardInfoInput";
+import FormField from "./FormField";
 
-const meta: Meta<typeof CardInfoInput> = {
-  title: "Components/CardInfoInput",
-  component: CardInfoInput,
+const meta: Meta<typeof FormField> = {
+  title: "Components/FormField",
+  component: FormField,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof CardInfoInput>;
+type Story = StoryObj<typeof FormField>;
 
 const Input = styled.input`
   flex: 1;
@@ -22,37 +22,37 @@ const Input = styled.input`
 
 export const CardNumber: Story = {
   args: {
-    inputTitle: "카드 번호",
+    label: "카드 번호",
   },
   render: (args) => (
-    <CardInfoInput {...args}>
+    <FormField {...args}>
       <Input placeholder="1234" maxLength={4} />
       <Input placeholder="1234" maxLength={4} />
       <Input placeholder="1234" maxLength={4} />
       <Input placeholder="1234" maxLength={4} />
-    </CardInfoInput>
+    </FormField>
   ),
 };
 
 export const ExpireNumber: Story = {
   args: {
-    inputTitle: "유효기간",
+    label: "유효기간",
   },
   render: (args) => (
-    <CardInfoInput {...args}>
+    <FormField {...args}>
       <Input placeholder="MM" maxLength={2} />
       <Input placeholder="YY" maxLength={2} />
-    </CardInfoInput>
+    </FormField>
   ),
 };
 
 export const CVC: Story = {
   args: {
-    inputTitle: "CVC",
+    label: "CVC",
   },
   render: (args) => (
-    <CardInfoInput {...args}>
+    <FormField {...args}>
       <Input placeholder="123" maxLength={3} />
-    </CardInfoInput>
+    </FormField>
   ),
 };
