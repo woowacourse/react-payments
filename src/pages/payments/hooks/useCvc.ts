@@ -55,6 +55,8 @@ export const useCvc = () => {
     blurValue: blurCvc,
     onBlur,
 
+    errors,
+
     invalidAttemp: cvcInvalidAttemp,
     prevent: preventCvc,
     renderErrorMessage: renderErrorMessageCvc,

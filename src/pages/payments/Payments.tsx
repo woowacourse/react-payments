@@ -13,7 +13,7 @@ import styles from './Payments.module.css';
 
 import { useCvc } from './hooks/useCvc';
 
-import { validateCardNumber, validateCvc, validateExpirationDate } from './validator';
+import { validateCardNumber, validateExpirationDate } from './validator';
 import { BRAND_NUMBER } from './constant';
 
 import type { ExpirationDate } from './types';
@@ -154,6 +154,8 @@ export const Payments = () => {
     blurValue: onBlurCvc,
     onBlur: handleBlurCvc,
 
+    errors,
+
     invalidAttemp: cvcInvalidAttemp,
     renderErrorMessage: renderErrorMessageCvc,
   } = useCvc();
@@ -223,7 +225,7 @@ export const Payments = () => {
             value={cvc}
             maxLength={3}
             placeholder="123"
-            isError={!!cvcInvalidAttemp || (onBlurCvc && !validateCvc({ cvc }))}
+            isError={!!cvcInvalidAttemp || (onBlurCvc && !errors.cvc.length)}
             onChange={handleChangeCvc}
             onBlur={handleBlurCvc}
           />
