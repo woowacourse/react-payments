@@ -1,0 +1,6 @@
+@import './morden-normalize.css';
+@import './fonts.css';
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}

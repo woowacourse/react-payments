@@ -1,0 +1,59 @@
+.cardPreview {
+  display: flex;
+  justify-content: center;
+  padding-top: 77px;
+  padding-bottom: 45px;
+}
+
+.card {
+  display: inline-block;
+  position: relative;
+  width: 212px;
+  height: 132px;
+  background-color: #333333;
+  border-radius: 4px;
+  padding-left: 17px;
+  padding-right: 17px;
+  box-sizing: border-box;
+}
+
+.card:after {
+  content: '';
+  position: absolute;
+  width: 36px;
+  height: 22px;
+  top: 8px;
+  left: 12px;
+  opacity: 1;
+  border: 0.5px solid #ddcd781a;
+  border-radius: 4px;
+  background-color: #ddcd78;
+}
+
+.brand {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 36px;
+}
+
+.brand svg {
+  width: 100%;
+  height: auto;
+}
+
+.number {
+  padding-top: 44px;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.number span {
+  padding-right: 10px;
+}
+
+.expirationDate {
+  padding-top: 8px;
+  color: #ffffff;
+  font-size: 12px;
+}
