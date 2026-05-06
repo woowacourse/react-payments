@@ -1,18 +1,15 @@
-import { type Dispatch, type SetStateAction } from 'react';
 import CardInfoHeader from '../cardInfoHeader/CardInfoHeader';
 import FormField from '../formField/FormField';
 import { Section, InfoInput, ErrorMessage } from '../CardInfo.styles';
 import { useExpireDate } from './useExpireDate';
+import { useCardForm } from '../../useCardForm';
 
 interface Props {
-  expireDate: string[];
-  setExpireDate: Dispatch<SetStateAction<string[]>>;
+  field: ReturnType<typeof useCardForm>['expireDate'];
 }
 
-export default function ExpireDateSection({
-  expireDate,
-  setExpireDate,
-}: Props) {
+export default function ExpireDateSection({ field }: Props) {
+  const { value: expireDate, set: setExpireDate } = field;
   const { error, handleChange } = useExpireDate(expireDate);
 
   return (

@@ -15,7 +15,7 @@ export const Default: Story = {
   render: () => {
     const [expireDate, setExpireDate] = useState(["", ""]);
     return (
-      <ExpireDateSection expireDate={expireDate} setExpireDate={setExpireDate} />
+      <ExpireDateSection field={{ value: expireDate, set: setExpireDate }} />
     );
   },
 };

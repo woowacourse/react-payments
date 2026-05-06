@@ -2,25 +2,26 @@ import PreviewCardNumber from "./cardNumber/PreviewCardNumber";
 import PreviewCardExpireDate from "./expireDate/PreviewCardExpireDate";
 import { getCardBrandLogoSrc } from "./utils";
 import {
-  CardImageWrapper,
+  Wrapper,
   Card,
   Upper,
   IC,
   PayMethodImage,
-  CardImageInfoWrapper,
+  InfoWrapper,
 } from "./CardPreview.styles";
+import { useCardForm } from "../useCardForm";
 
-export default function CardPreview({
-  cardNumber,
-  expireDate,
-}: {
-  cardNumber: string[];
-  expireDate: string[];
-}) {
+interface Props {
+  cardForm: ReturnType<typeof useCardForm>;
+}
+
+export default function CardPreview({ cardForm }: Props) {
+  const cardNumber = cardForm.cardNumber.value;
+  const expireDate = cardForm.expireDate.value;
   const cardBrandLogoSrc = getCardBrandLogoSrc(cardNumber[0]);
 
   return (
-    <CardImageWrapper>
+    <Wrapper>
       <Card>
         <Upper>
           <IC />
@@ -29,11 +30,11 @@ export default function CardPreview({
           )}
         </Upper>
 
-        <CardImageInfoWrapper>
+        <InfoWrapper>
           <PreviewCardNumber cardNumber={cardNumber} />
           <PreviewCardExpireDate expireDate={expireDate} />
-        </CardImageInfoWrapper>
+        </InfoWrapper>
       </Card>
-    </CardImageWrapper>
+    </Wrapper>
   );
 }

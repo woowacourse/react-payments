@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import CardInfo from "./CardInfo";
-import { useState } from "react";
+import { useCardForm } from "../useCardForm";
 
 const meta: Meta<typeof CardInfo> = {
   title: "Components/CardInfo",
@@ -13,19 +13,7 @@ type Story = StoryObj<typeof CardInfo>;
 
 export const Default: Story = {
   render: () => {
-    const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-    const [expireDate, setExpireDate] = useState(["", ""]);
-    const [cvcNumber, setCvcNumber] = useState("");
-
-    return (
-      <CardInfo
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-        expireDate={expireDate}
-        setExpireDate={setExpireDate}
-        cvcNumber={cvcNumber}
-        setCvcNumber={setCvcNumber}
-      />
-    );
+    const cardForm = useCardForm();
+    return <CardInfo cardForm={cardForm} />;
   },
 };

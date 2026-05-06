@@ -15,7 +15,7 @@ export const Default: Story = {
   render: () => {
     const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
     return (
-      <CardNumberSection cardNumber={cardNumber} setCardNumber={setCardNumber} />
+      <CardNumberSection field={{ value: cardNumber, set: setCardNumber }} />
     );
   },
 };

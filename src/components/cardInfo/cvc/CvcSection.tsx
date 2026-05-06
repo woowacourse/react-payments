@@ -1,15 +1,15 @@
-import { type Dispatch, type SetStateAction } from 'react';
 import CardInfoHeader from '../cardInfoHeader/CardInfoHeader';
 import FormField from '../formField/FormField';
 import { Section, InfoInput, ErrorMessage } from '../CardInfo.styles';
 import { useCvc } from './useCvc';
+import { useCardForm } from '../../useCardForm';
 
 interface Props {
-  cvcNumber: string;
-  setCvcNumber: Dispatch<SetStateAction<string>>;
+  field: ReturnType<typeof useCardForm>['cvc'];
 }
 
-export default function CvcSection({ cvcNumber, setCvcNumber }: Props) {
+export default function CvcSection({ field }: Props) {
+  const { value: cvc, set: setCvc } = field;
   const { error, handleChange } = useCvc();
 
   return (
@@ -19,10 +19,10 @@ export default function CvcSection({ cvcNumber, setCvcNumber }: Props) {
         <InfoInput
           placeholder="123"
           maxLength={3}
-          value={cvcNumber}
+          value={cvc}
           onChange={(e) => {
             const updatedCvc = handleChange(e);
-            if (updatedCvc !== null) setCvcNumber(updatedCvc);
+            if (updatedCvc !== null) setCvc(updatedCvc);
           }}
           inputMode="numeric"
         />

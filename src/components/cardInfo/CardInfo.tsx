@@ -1,31 +1,19 @@
-import { type Dispatch, type SetStateAction } from 'react';
 import { Wrapper } from './CardInfo.styles';
 import CardNumberSection from './cardNumber/CardNumberSection';
 import ExpireDateSection from './expireDate/ExpireDateSection';
 import CvcSection from './cvc/CvcSection';
+import { useCardForm } from '../useCardForm';
 
 interface Props {
-  cardNumber: string[];
-  setCardNumber: Dispatch<SetStateAction<string[]>>;
-  expireDate: string[];
-  setExpireDate: Dispatch<SetStateAction<string[]>>;
-  cvcNumber: string;
-  setCvcNumber: Dispatch<SetStateAction<string>>;
+  cardForm: ReturnType<typeof useCardForm>;
 }
 
-export default function CardInfo({
-  cardNumber,
-  setCardNumber,
-  expireDate,
-  setExpireDate,
-  cvcNumber,
-  setCvcNumber,
-}: Props) {
+export default function CardInfo({ cardForm }: Props) {
   return (
     <Wrapper>
-      <CardNumberSection cardNumber={cardNumber} setCardNumber={setCardNumber} />
-      <ExpireDateSection expireDate={expireDate} setExpireDate={setExpireDate} />
-      <CvcSection cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
+      <CardNumberSection field={cardForm.cardNumber} />
+      <ExpireDateSection field={cardForm.expireDate} />
+      <CvcSection field={cardForm.cvc} />
     </Wrapper>
   );
 }

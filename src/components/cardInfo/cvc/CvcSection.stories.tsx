@@ -13,7 +13,7 @@ type Story = StoryObj<typeof CvcSection>;
 
 export const Default: Story = {
   render: () => {
-    const [cvcNumber, setCvcNumber] = useState("");
-    return <CvcSection cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />;
+    const [cvc, setCvc] = useState("");
+    return <CvcSection field={{ value: cvc, set: setCvc }} />;
   },
 };

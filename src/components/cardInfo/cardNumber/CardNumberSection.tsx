@@ -1,15 +1,15 @@
-import { type Dispatch, type SetStateAction } from 'react';
 import CardInfoHeader from '../cardInfoHeader/CardInfoHeader';
 import FormField from '../formField/FormField';
 import { Section, InfoInput, ErrorMessage } from '../CardInfo.styles';
 import { useCardNumber } from './useCardNumber';
+import { useCardForm } from '../../useCardForm';
 
 interface Props {
-  cardNumber: string[];
-  setCardNumber: Dispatch<SetStateAction<string[]>>;
+  field: ReturnType<typeof useCardForm>['cardNumber'];
 }
 
-export default function CardNumberSection({ cardNumber, setCardNumber }: Props) {
+export default function CardNumberSection({ field }: Props) {
+  const { value: cardNumber, set: setCardNumber } = field;
   const { error, handleChange } = useCardNumber(cardNumber);
 
   return (
