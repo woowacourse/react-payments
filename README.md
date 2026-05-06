@@ -17,22 +17,27 @@ npm run dev
 ## 공통
 
 ### 컨벤션
+
 폴더명: camelCase
 컴포넌트 파일명: PascalCase
 
 ### tools
+
 prettier, eslint
 
 ### 버전
+
 package 관리: npm
 node: 22.22.2
 
 ### 기술 스택
+
 - design libary: CSS Module
   - 디자인 담당인 css와 js를 완전히 분리하기 위해서
   - 현재 미션에서 속성명이 축약형인 것보다 표준 css 속성 사용을 하기 위해서
 
 ### 폴더 구조
+
 ```
 /src
   /core
@@ -58,11 +63,11 @@ node: 22.22.2
 ```
 
 ## 기능 구현 사항
+
 - 카드번호
   - [ ] 카드 번호 입력을 실시간으로 파악하여 visa 혹은 mastercard 를 구분한다
   - [ ] 카드 번호 입력시 숫자만 입력 가능하게 해야 한다
   - [ ] 유효하지 않은 번호 입력시 실기간 피드백을 제공한다
-  
   - 카드사 식별 번호 구분 규칙
     - 카드 브랜드 구분 로직 (Visa / MasterCard)
       - Visa: 4로 시작하는 16자리 숫자
