@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { CardNetwork, CardNumberSegments } from '../types';
+import type { CardExpiryDate, CardIssuer, CardNetwork, CardNumberSegments } from '../types';
 import Flex from './Common/Flex';
 
 const CardContainer = styled(Flex)`
@@ -7,14 +7,14 @@ const CardContainer = styled(Flex)`
   width: 100%;
 `;
 
-const Card = styled(Flex)`
+const Card = styled(Flex)<{ issuer: CardIssuer }>`
   width: 212px;
   height: 132px;
-  background-color: var(--color-card-background);
   color: var(--color-white);
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px #00000040;
   padding: 8px 12px;
+  ${(props) => `background-color: var(--color-card-${props.issuer ?? 'background'}, --color-card-background);`}
 `;
 
 const CardImage = styled.img`
@@ -29,31 +29,31 @@ const CardText = styled.span`
 `;
 
 interface CardPrivewProps {
-  cardNetwork: CardNetwork;
-  cardNumberSegments: CardNumberSegments;
-  expiryMonth: string;
-  expiryYear: string;
+  issuer: CardIssuer;
+  network: CardNetwork;
+  numberSegments: CardNumberSegments;
+  expiryDate: CardExpiryDate;
 }
 
 function CardPreview(props: CardPrivewProps) {
   return (
     <CardContainer justifyContent="center">
-      <Card direction="column" gap={14}>
+      <Card issuer={props.issuer} direction="column" gap={14}>
         <Flex justifyContent="space-between">
           <CardImage alt="Card IC Chip" src={`${import.meta.env.BASE_URL}chip.svg`} />
-          {props.cardNetwork && (
-            <CardImage alt="Card Brand" src={`${import.meta.env.BASE_URL}${props.cardNetwork.toLowerCase()}.svg`} />
+          {props.network && (
+            <CardImage alt="Card Brand" src={`${import.meta.env.BASE_URL}${props.network.toLowerCase()}.svg`} />
           )}
         </Flex>
         <Flex gap={10}>
-          {props.cardNumberSegments.map((segments: string, index: number) => (
+          {props.numberSegments.map((segments: string, index: number) => (
             <CardText key={index}>{index < 2 ? segments : segments.replaceAll(/./g, '•')}</CardText>
           ))}
         </Flex>
         <CardText>
-          {props.expiryMonth}
-          {!!props.expiryYear.length && '/'}
-          {props.expiryYear}
+          {props.expiryDate[0]}
+          {!!props.expiryDate[1].length && '/'}
+          {props.expiryDate[1]}
         </CardText>
       </Card>
     </CardContainer>

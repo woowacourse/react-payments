@@ -2,7 +2,7 @@ import type { CARD_ISSUERS } from "./constants";
 
 export type CardNetwork = "VISA" | "MasterCard" | null;
 
-export type CardIssuer = typeof CARD_ISSUERS[number] | null;
+export type CardIssuer = typeof CARD_ISSUERS[number]["value"] | null;
 
 export type CardNumberSegments = [string, string, string, string]
 

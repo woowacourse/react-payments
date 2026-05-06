@@ -29,7 +29,7 @@ export function validateCVC(input: string) {
 }
 
 export function validateCardIssuer(input: string) {
-  return (CARD_ISSUERS as readonly string[]).includes(input)
+  return (CARD_ISSUERS.map(issuer => issuer.value) as string[]).includes(input)
 }
 
 export function createDigitFieldValidations(length: number): ValidationRule[] {

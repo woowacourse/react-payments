@@ -82,10 +82,10 @@ function CardForm() {
   return (
     <form>
       <CardPreview
-        cardNetwork={getCardNetwork(values.cardNumberSegments)}
-        cardNumberSegments={values.cardNumberSegments}
-        expiryMonth={values.cardExpiryDate[0]}
-        expiryYear={values.cardExpiryDate[1]}
+        issuer={values.cardIssuer}
+        network={getCardNetwork(values.cardNumberSegments)}
+        numberSegments={values.cardNumberSegments}
+        expiryDate={values.cardExpiryDate}
       />
       <Flex direction="column" gap={10}>
         {step >= 4 && (
@@ -160,12 +160,14 @@ function CardForm() {
             </Flex>
             <Select
               data-is-error={!!errors['cardIssuer']}
-              {...register<'cardIssuer', HTMLSelectElement>('cardIssuer', { onComplete: () => setStep((prev) => Math.max(2, prev)) })}
+              {...register<'cardIssuer', HTMLSelectElement>('cardIssuer', {
+                onComplete: () => setStep((prev) => Math.max(2, prev)),
+              })}
             >
               <option>카드사를 선택해 주세요</option>
               {CARD_ISSUERS.map((issuer) => (
-                <option key={issuer} value={issuer}>
-                  {issuer}
+                <option key={issuer.value} value={issuer.value}>
+                  {issuer.label}
                 </option>
               ))}
             </Select>
