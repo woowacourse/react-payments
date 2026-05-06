@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 import { isRequired, isNumericString, isValidMonth, length, minLength, maxLength } from '../utils/validator';
 
-export type FormValuesRules<TFormValues extends Record<string, string>> = {
+export type FormValuesRules<TFormValues extends Record<string, unknown>> = {
   [FormKey in keyof TFormValues]: Rule[];
 };
 
@@ -18,7 +18,7 @@ export interface ResultValid extends Rule {
   valid: boolean;
 }
 
-const validateFormValueRules = <T extends string>(value: T, rules: Rule[]) => {
+const validateFormValueRules = <T>(value: T, rules: Rule[]) => {
   return rules.map((rule) => {
     switch (rule.type) {
       case 'isRequired':
@@ -39,11 +39,11 @@ const validateFormValueRules = <T extends string>(value: T, rules: Rule[]) => {
   });
 };
 
-export const validateFormValuesRules = <TFormValues extends Record<string, string>>(
+export const validateFormValuesRules = <TFormValues extends Record<string, unknown>>(
   formValues: TFormValues,
   formValuesRules: FormValuesRules<TFormValues>,
 ) => {
-  return Object.entries(formValues).reduce((acc, [key, value]: [string, string]) => {
+  return Object.entries(formValues).reduce((acc, [key, value]: [string, unknown]) => {
     const rules = formValuesRules[key];
     const valid = validateFormValueRules(value, rules);
     return { ...acc, [key]: valid };

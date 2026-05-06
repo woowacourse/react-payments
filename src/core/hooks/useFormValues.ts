@@ -12,7 +12,7 @@ type FormTouched<TFormValues> = {
   [formKey in keyof TFormValues]: boolean;
 };
 
-export const useFormValues = <TFormValues extends Record<string, string>>({
+export const useFormValues = <TFormValues extends Record<string, unknown>>({
   initialValues,
   validate,
 }: Options<TFormValues>) => {
