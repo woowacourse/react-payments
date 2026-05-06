@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, type ComponentProps } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import NumberField from "./NumberField";
+import { ERROR_MESSAGES } from "../../../constants";
 
 const meta = {
   title: "feature/CardRegister/components/NumberField",
@@ -17,6 +18,19 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+type NumberFieldProps = ComponentProps<typeof NumberField>;
+
+const StatefulNumberField = (args: NumberFieldProps) => {
+  const [cardNumbers, setCardNumbers] = useState(args.cardNumbers);
+
+  return (
+    <NumberField
+      {...args}
+      cardNumbers={cardNumbers}
+      setCardNumbers={setCardNumbers}
+    />
+  );
+};
 
 export const Empty: Story = {};
 
@@ -33,15 +47,23 @@ export const Filled: Story = {
 };
 
 export const Interactive: Story = {
-  render: function InteractiveNumberField(args) {
-    const [cardNumbers, setCardNumbers] = useState(args.cardNumbers);
+  render: StatefulNumberField,
+};
 
-    return (
-      <NumberField
-        {...args}
-        cardNumbers={cardNumbers}
-        setCardNumbers={setCardNumbers}
-      />
-    );
+export const ErrorAfterBlur: Story = {
+  render: StatefulNumberField,
+  parameters: {
+    docs: {
+      disable: true,
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput] = canvas.getAllByPlaceholderText("1234");
+
+    await userEvent.type(firstInput, "12");
+    await userEvent.tab();
+
+    await expect(canvas.getByText(ERROR_MESSAGES.cardNumber)).toBeVisible();
   },
 };

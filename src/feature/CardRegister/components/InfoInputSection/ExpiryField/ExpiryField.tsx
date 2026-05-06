@@ -65,8 +65,12 @@ const ExpiryField = ({
   const handleYearChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!validateNumericInput(value)) return;
-    if (validateExceedTwoDigits(value)) return;
+    if (!validateNumericInput(value)) {
+      return;
+    }
+    if (validateExceedTwoDigits(value)) {
+      return;
+    }
 
     setExpiryYear(value);
 
@@ -121,10 +125,10 @@ const ExpiryField = ({
 
   return (
     <StyledField>
-      <Label htmlFor="expiry">유효기간</Label>
+      <Label htmlFor="expiry-month">유효기간</Label>
       <InputWrapper>
         <ExpiryInput
-          id="expiry"
+          id="expiry-month"
           value={expiryMonth}
           maxLength={EXPIRY_VALUE_LENGTH}
           inputMode="numeric"
@@ -134,6 +138,7 @@ const ExpiryField = ({
           onBlur={(e) => handleExpiryBlur(0, e.target.value, "month")}
         />
         <ExpiryInput
+          id="expiry-month"
           value={expiryYear}
           maxLength={EXPIRY_VALUE_LENGTH}
           placeholder="YY"
