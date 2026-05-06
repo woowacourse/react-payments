@@ -1,10 +1,10 @@
-import InputField from "@/components/common/InputField";
+import InputField from "@components/common/InputField";
 import { useState } from "react";
+import type { CardNumberUnits } from "@/types/card";
 
 import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
 import checkCardNumberInputStatus from "./utils";
-import type { CardNumberUnits } from "@/types/card";
 
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
