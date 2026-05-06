@@ -22,6 +22,6 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
   };
 };
 
-export const validateCvc = (cvc: string) => {
+export const validateCvc = ({ cvc }: { cvc: string }) => {
   return cvc.length === 3 && isNumericString(cvc);
 };
