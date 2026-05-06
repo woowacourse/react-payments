@@ -6,7 +6,7 @@ const meta = {
   component: CardPreview,
   tags: ['autodocs'],
   argTypes: {
-    cardBrand: {
+    cardNetwork: {
       control: { type: 'select' },
       options: ['VISA', 'MasterCard', null],
       description: '카드 브랜드 (VISA | MasterCard | null)',
@@ -33,7 +33,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardBrand: null,
+    cardNetwork: null,
     cardNumberSegments: ['', '', '', ''],
     expiryMonth: '',
     expiryYear: '',
@@ -42,7 +42,7 @@ export const Default: Story = {
 
 export const Visa: Story = {
   args: {
-    cardBrand: 'VISA',
+    cardNetwork: 'VISA',
     cardNumberSegments: ['4123', '4567', '8901', '2345'],
     expiryMonth: '12',
     expiryYear: '26',
@@ -51,7 +51,7 @@ export const Visa: Story = {
 
 export const MasterCard: Story = {
   args: {
-    cardBrand: 'MasterCard',
+    cardNetwork: 'MasterCard',
     cardNumberSegments: ['5212', '3456', '7890', '1234'],
     expiryMonth: '08',
     expiryYear: '28',
@@ -60,7 +60,7 @@ export const MasterCard: Story = {
 
 export const UnknownBrand: Story = {
   args: {
-    cardBrand: null,
+    cardNetwork: null,
     cardNumberSegments: ['9999', '1234', '5678', '9012'],
     expiryMonth: '03',
     expiryYear: '30',
@@ -69,7 +69,7 @@ export const UnknownBrand: Story = {
 
 export const PartiallyFilled: Story = {
   args: {
-    cardBrand: 'VISA',
+    cardNetwork: 'VISA',
     cardNumberSegments: ['4123', '4567', '', ''],
     expiryMonth: '12',
     expiryYear: '26',

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { CardBrand, CardNumberSegments } from '../types';
+import type { CardNetwork, CardNumberSegments } from '../types';
 import Flex from './Common/Flex';
 
 const CardContainer = styled(Flex)`
@@ -29,7 +29,7 @@ const CardText = styled.span`
 `;
 
 interface CardPrivewProps {
-  cardBrand: CardBrand;
+  cardNetwork: CardNetwork;
   cardNumberSegments: CardNumberSegments;
   expiryMonth: string;
   expiryYear: string;
@@ -41,8 +41,8 @@ function CardPreview(props: CardPrivewProps) {
       <Card direction="column" gap={14}>
         <Flex justifyContent="space-between">
           <CardImage alt="Card IC Chip" src={`${import.meta.env.BASE_URL}chip.svg`} />
-          {props.cardBrand && (
-            <CardImage alt="Card Brand" src={`${import.meta.env.BASE_URL}${props.cardBrand.toLowerCase()}.svg`} />
+          {props.cardNetwork && (
+            <CardImage alt="Card Brand" src={`${import.meta.env.BASE_URL}${props.cardNetwork.toLowerCase()}.svg`} />
           )}
         </Flex>
         <Flex gap={10}>

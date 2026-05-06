@@ -1,3 +1,4 @@
+import { CARD_ISSUERS } from './constants';
 import type { CardNumberSegments, ValidationRule } from './types';
 
 export function validateDigits(input: string) {
@@ -27,6 +28,10 @@ export function validateCVC(input: string) {
   return monthArray.includes(input);
 }
 
+export function validateCardIssuer(input: string) {
+  return (CARD_ISSUERS as readonly string[]).includes(input)
+}
+
 export function createDigitFieldValidations(length: number): ValidationRule[] {
   return [
     {
@@ -47,7 +52,7 @@ export function createDigitFieldValidations(length: number): ValidationRule[] {
   ]
 }
 
-export function getCardBrand(cardNumberSegments: CardNumberSegments) {
+export function getCardNetwork(cardNumberSegments: CardNumberSegments) {
   if (cardNumberSegments[0].startsWith('4')) return 'VISA';
   if (/^(51|52|53|54|55)/.test(cardNumberSegments[0])) return 'MasterCard';
   return null;
