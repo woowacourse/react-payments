@@ -15,7 +15,7 @@ export const Default: Story = {
   render: () => {
     const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
     const [expireDate, setExpireDate] = useState(["", ""]);
-    const [cvcNumber, setCvcNumber] = useState([""]);
+    const [cvcNumber, setCvcNumber] = useState("");
 
     return (
       <CardInfo
