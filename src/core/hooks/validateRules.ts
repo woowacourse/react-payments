@@ -1,7 +1,7 @@
 import { isRequired, isNumericString, isValidMonth, min } from '../utils/validator';
 
-interface FormValuesRules {
-  [formKey: string]: Rule[];
+interface FormValuesRules<TFormValues extends Record<string, string>> {
+  [FormKey in keyof TFormValues]: Rule[];
 }
 
 interface Rule {
@@ -10,7 +10,7 @@ interface Rule {
 
 export const validateRules = <TFormValues extends Record<string, string>>(
   formValues: TFormValues,
-  formValuesRules: FormValuesRules,
+  formValuesRules: FormValuesRules<TFormValues>,
 ) => {
   return Object.entries(formValues).every(([key, value]: [string, string]) => {
     const rules = formValuesRules[key];
