@@ -4,7 +4,7 @@ import { isNumericString } from '@/core/utils/validator';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
 
-import { validateCardNumber } from '../validator';
+import { validateCardNumbers } from '../validator';
 
 export const useCardNumbers = () => {
   const {
@@ -14,8 +14,8 @@ export const useCardNumbers = () => {
     onBlur,
     errors,
   } = useFormValues({
-    initialValues: { 0: '', 1: '', 2: '', 3: '' },
-    validate: validateCardNumber,
+    initialValues: { '0': '', '1': '', '2': '', '3': '' },
+    validate: validateCardNumbers,
   });
 
   const handleChangeCardNumbers = (e: ChangeEvent<HTMLInputElement>) => {

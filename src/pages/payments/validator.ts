@@ -1,14 +1,23 @@
-// import { isNumericString, isValidMonth } from '../../core/utils/validator';
-import { isNumericString } from '../../core/utils/validator';
 import type { ExpirationDate } from './types';
 
 import { validateFormValuesRules } from '@/core/hooks/validateFormValueRules';
-import type { FormValuesRules } from '@/core/hooks/validateFormValueRules';
+import type { Rule, FormValuesRules } from '@/core/hooks/validateFormValueRules';
 
-export const validateCardNumber = (cardNumber: string) => {
-  if (!isNumericString(cardNumber)) return false;
-  if (cardNumber.length !== 4) return false;
-  return true;
+export const validateCardNumbers = (cardNumbers: { [key: string]: string }) => {
+  const rule = [
+    { type: 'isRequired', message: '카드번호는 필수값입니다' },
+    { type: 'isNumericString', message: '카드번호는 숫자여야합니다' },
+    { type: 'length', message: '카드번호는 한칸당 4자리여야합니다', length: 4 },
+  ] as Rule[];
+
+  const rules = {
+    '0': rule,
+    '1': rule,
+    '2': rule,
+    '3': rule,
+  } satisfies FormValuesRules<{ [key: number]: string }>;
+
+  return validateFormValuesRules(cardNumbers, rules);
 };
 
 export const validateExpirationDate = (expirationDate: ExpirationDate) => {

@@ -8,7 +8,7 @@ export type FormValuesRules<TFormValues extends Record<string, string>> = {
 
 type RuleType = 'isRequired' | 'isNumericString' | 'isValidMonth' | 'length' | 'minLength' | 'maxLength';
 
-type Rule = {
+export type Rule = {
   type: RuleType;
   message: ReactNode;
 } & {
