@@ -1,11 +1,14 @@
 import styled from 'styled-components';
+import {MASK_FROM_INDEX, maskCardNumbers} from '../../../domain/cardPolicy';
 
 const CardNumberDisplay = ({cardNumbers}: {cardNumbers: [string, string, string, string]}) => {
+  const displayNumbers = maskCardNumbers(cardNumbers);
+
   return (
     <Container>
-      {cardNumbers.map((chunk, index) => {
-        if (index >= 2) {
-          return <MaskedChunk key={index}>{'·'.repeat(chunk.length)}</MaskedChunk>;
+      {displayNumbers.map((chunk, index) => {
+        if (index >= MASK_FROM_INDEX) {
+          return <MaskedChunk key={index}>{chunk}</MaskedChunk>;
         }
         return <Chunk key={index}>{chunk}</Chunk>;
       })}
