@@ -20,6 +20,13 @@ export default function InputFieldForm({
 }: InputFieldFormProps) {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
+  if (valueList.length !== fieldConfig.placeholder.length) {
+    console.error(
+      `${fieldConfig.label}필드의 valueList(${valueList.length})와                                           
+  placeholder(${fieldConfig.placeholder.length})의 길이가 다릅니다.`
+    );
+  }
+
   return (
     <FormContainer>
       <Label htmlFor={fieldConfig.id}>{fieldConfig.label}</Label>
