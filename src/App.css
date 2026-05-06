@@ -1,0 +1,36 @@
+@import './reset.css';
+
+:root {
+  --color-border-default: #acacac;
+  --color-border-error: #ff3d3d;
+  --color-border-focus: #000000;
+
+  --color-text-placeholder: #acacac;
+  --color-text-default: #000000;
+  --color-text-title: #000000;
+  --color-text-caption: #8b95a1;
+  --color-text-label: #0a0d13;
+  --color-text-error: #ff3d3d;
+  --color-text-card: #ffffff;
+
+  --color-background-card: #333333;
+  --color-background-chip: #ddcd78;
+  --color-shadow-card: #0000001a;
+
+  --color-brand-bc-card: #f04651;
+  --color-brand-shinhan-card: #0046ff;
+  --color-brand-kakaobank: #ffe600;
+  --color-brand-hyundai-card: #000000;
+  --color-brand-woori-card: #007bc8;
+  --color-brand-lotte-card: #ed1c24;
+  --color-brand-hana-card: #009490;
+  --color-brand-kb-card: #6a6056;
+}
+
+body {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
