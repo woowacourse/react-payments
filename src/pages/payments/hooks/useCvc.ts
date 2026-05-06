@@ -1,11 +1,19 @@
 import { useState } from 'react';
+import { type ChangeEvent } from 'react';
 
+import { useFormValues } from '@/core/hooks/useFormValues';
 import { isNumericString } from '@/core/utils/validator';
 
 import { validateCvc } from '../validator';
 
 export const useCvc = () => {
-  const [cvc, setCvc] = useState('');
+  const {
+    values: { cvc },
+    onChange,
+  } = useFormValues({
+    initialValues: { cvc: '' },
+  });
+
   const [onBlurCvc, setOnBlurCvc] = useState(false);
 
   const [cvcInvalidAttemp, setCvcInvalidAttemp] = useState(false);
@@ -24,7 +32,8 @@ export const useCvc = () => {
     return '';
   };
 
-  const handleChangeCvc = (value: string) => {
+  const handleChangeCvc = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
     if (preventCvc(value)) {
       setCvcInvalidAttemp(true);
       return;
@@ -32,7 +41,7 @@ export const useCvc = () => {
       setCvcInvalidAttemp(false);
     }
 
-    setCvc(value);
+    onChange(e);
   };
 
   const handleBlurCvc = () => {

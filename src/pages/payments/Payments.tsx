@@ -217,11 +217,12 @@ export const Payments = () => {
         <Field label="CVC" errorMessage={renderErrorMessageCvc(cvc)}>
           <Input
             type="tel"
+            id="cvc"
             value={cvc}
             maxLength={3}
             placeholder="123"
             isError={!!cvcInvalidAttemp || (onBlurCvc && !validateCvc(cvc))}
-            onChange={(e) => handleChangeCvc(e.target.value)}
+            onChange={handleChangeCvc}
             onBlur={() => handleBlurCvc()}
           />
         </Field>
