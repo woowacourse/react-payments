@@ -10,7 +10,7 @@ export const useCvc = () => {
   const {
     values: { cvc },
     onChange,
-    validate,
+    isValid,
   } = useFormValues({
     initialValues: { cvc: '' },
     validate: validateCvc,
@@ -27,10 +27,10 @@ export const useCvc = () => {
     return false;
   };
 
-  const renderErrorMessageCvc = (cvc: string) => {
+  const renderErrorMessageCvc = () => {
     if (cvcInvalidAttemp) return '유효한 CVC(숫자)를 입력해주세요';
     if (!onBlurCvc) return '';
-    if (!validate({ cvc })) return 'CVC를 전부 채워주세요';
+    if (!isValid) return 'CVC를 전부 채워주세요';
     return '';
   };
 

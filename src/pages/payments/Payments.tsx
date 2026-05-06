@@ -214,14 +214,14 @@ export const Payments = () => {
       </FormGroup>
 
       <FormGroup title="CVC 번호를 입력해 주세요">
-        <Field label="CVC" errorMessage={renderErrorMessageCvc(cvc)}>
+        <Field label="CVC" errorMessage={renderErrorMessageCvc()}>
           <Input
             type="tel"
             id="cvc"
             value={cvc}
             maxLength={3}
             placeholder="123"
-            isError={!!cvcInvalidAttemp || (onBlurCvc && !validateCvc(cvc))}
+            isError={!!cvcInvalidAttemp || (onBlurCvc && !validateCvc({ cvc }))}
             onChange={handleChangeCvc}
             onBlur={() => handleBlurCvc()}
           />
