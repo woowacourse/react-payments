@@ -11,6 +11,8 @@ import { isNumericString } from '@/core/utils/validator';
 
 import styles from './Payments.module.css';
 
+import { useCvc } from './hooks/useCvc';
+
 import { validateCardNumber, validateCvc, validateExpirationDate } from './validator';
 import { BRAND_NUMBER } from './constant';
 
@@ -145,40 +147,14 @@ export const Payments = () => {
   // expirationDate 관련 상태값 -- end
 
   //cvc
-
-  const [cvc, setCvc] = useState('');
-  const [onBlurCvc, setOnBlurCvc] = useState(false);
-
-  const [cvcInvalidAttemp, setCvcInvalidAttemp] = useState(false);
-
-  const preventCvc = (cvc: string) => {
-    if (cvc !== '' && !isNumericString(cvc)) return true;
-    if (cvc.length > 3) return true;
-
-    return false;
-  };
-
-  const renderErrorMessageCvc = (cvc: string) => {
-    if (cvcInvalidAttemp) return '유효한 CVC(숫자)를 입력해주세요';
-    if (!onBlurCvc) return '';
-    if (!validateCvc(cvc)) return 'CVC를 전부 채워주세요';
-    return '';
-  };
-
-  const handleChangeCvc = (value: string) => {
-    if (preventCvc(value)) {
-      setCvcInvalidAttemp(true);
-      return;
-    } else {
-      setCvcInvalidAttemp(false);
-    }
-
-    setCvc(value);
-  };
-
-  const handleBlurCvc = () => {
-    setOnBlurCvc(true);
-  };
+  const {
+    value: cvc,
+    invalidAttemp: cvcInvalidAttemp,
+    blurValue: onBlurCvc,
+    renderErrorMessage: renderErrorMessageCvc,
+    onChange: handleChangeCvc,
+    onBlur: handleBlurCvc,
+  } = useCvc();
 
   return (
     <div className={cn(styles.payments)}>
