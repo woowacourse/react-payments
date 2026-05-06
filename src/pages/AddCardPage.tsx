@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { categorizeCardBrand } from '../utils';
 import type { CardInfo } from '../types';
 import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
 
 interface FieldState<T> {
   value: T;
@@ -49,35 +50,27 @@ export default function AddCardPage() {
   };
 
   return (
-    <div css={mobileLayout}>
-      <main>
-        <div css={cardWrapperStyle}>
-          <Card
-            cardNumber={formValue.cardNumbers.value}
-            expirationPeriod={formValue.expirationPeriod.value}
-            cardBrand={formValue.cardBrand.value}
-          />
-        </div>
-        <form css={formLayout}>
-          <CardNumbersField value={formValue.cardNumbers.value} onUpdated={handleCardNumbersUpdate} />
-          <ExpirationPeriodField value={formValue.expirationPeriod.value} onUpdated={handleExpirationPeriodUpdate} />
-          <CVCField value={formValue.cvc.value} onUpdated={handleCVCUpdate} />
-        </form>
-      </main>
-    </div>
+    <main>
+      <div css={cardWrapperStyle}>
+        <Card
+          cardNumber={formValue.cardNumbers.value}
+          expirationPeriod={formValue.expirationPeriod.value}
+          cardBrand={formValue.cardBrand.value}
+        />
+      </div>
+      <form css={formLayout} id="add-card-form">
+        <CardNumbersField value={formValue.cardNumbers.value} onUpdated={handleCardNumbersUpdate} />
+        <ExpirationPeriodField value={formValue.expirationPeriod.value} onUpdated={handleExpirationPeriodUpdate} />
+        <CVCField value={formValue.cvc.value} onUpdated={handleCVCUpdate} />
+      </form>
+      <div css={submitButtonWrapperStyle}>
+        <Button type="submit" form="add-card-form" disabled>
+          확인
+        </Button>
+      </div>
+    </main>
   );
 }
-
-const mobileLayout = css`
-  display: flex;
-  flex-direction: column;
-  width: 376px;
-  height: 700px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  padding: 20px 30px;
-  overflow: scroll;
-  border-radius: 20px;
-`;
 
 const cardWrapperStyle = css`
   display: flex;
@@ -89,4 +82,12 @@ const formLayout = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+
+const submitButtonWrapperStyle = css`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: none
 `;
