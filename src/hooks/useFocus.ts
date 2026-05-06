@@ -1,0 +1,36 @@
+import { useCallback, useRef } from "react";
+
+const useFocus = () => {
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const registerInputRef = useCallback(
+    (index: number) => (el: HTMLInputElement | null) => {
+      inputRefs.current[index] = el;
+    },
+    [],
+  );
+
+  const setFocus = useCallback((index: number) => {
+    if (index < inputRefs.current.length) {
+      inputRefs.current[index]?.focus();
+    }
+  }, []);
+
+  const setNextFocus = useCallback(() => {
+    const currentIndex = inputRefs.current.findIndex(
+      (el) => el === document.activeElement,
+    );
+    if (currentIndex !== -1 && currentIndex + 1 < inputRefs.current.length) {
+      inputRefs.current[currentIndex + 1]?.focus();
+    }
+  }, []);
+
+  return {
+    activeElement: null,
+    registerInputRef,
+    setFocus,
+    setNextFocus,
+  };
+};
+
+export default useFocus;
