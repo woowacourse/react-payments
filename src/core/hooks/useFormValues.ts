@@ -13,9 +13,11 @@ export const useFormValues = <TFormValues>({ initialValues, validate }: Options<
     setFormValues((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+  const isValid = validate(formValues);
+
   return {
     values: formValues,
     onChange: handleChange,
-    validate,
+    isValid,
   };
 };
