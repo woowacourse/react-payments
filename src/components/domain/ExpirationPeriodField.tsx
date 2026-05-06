@@ -19,7 +19,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
   const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
   const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
 
-  const setErrorStatus = (index: number, status: ExpirationPeriodErrorStatus) => {
+  const setErrorStatus = (status: ExpirationPeriodErrorStatus, index: number) => {
     setErrorStatusList((prev) => {
       const updated = [...prev] as ErrorStatusList;
       updated[index] = status;
@@ -27,7 +27,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     });
   };
 
-  const updateFormValue = (index: number, inputValue: string) => {
+  const updateFormValue = (inputValue: string, index: number) => {
     const newValue = [...value] as CardInfo['expirationPeriod'];
     newValue[index] = sanitizeNumber(inputValue);
     onUpdated(newValue);
@@ -67,24 +67,24 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     },
   ];
 
-  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
 
     const changeValidates = validates.filter((validate) => validate.type.includes('change'));
     const activeValidate = changeValidates.find((validate) => validate.rule(inputValue, index));
 
-    setErrorStatus(index, activeValidate?.errorStatus ?? null);
-    updateFormValue(index, inputValue);
+    setErrorStatus(activeValidate?.errorStatus ?? null, index);
+    updateFormValue(inputValue, index);
   };
 
-  const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
 
     const blurValidates = validates.filter((validate) => validate.type.includes('blur'));
     const activeValidate = blurValidates.find((validate) => validate.rule(inputValue));
 
     if (activeValidate) {
-      setErrorStatus(index, activeValidate.errorStatus);
+      setErrorStatus(activeValidate.errorStatus, index);
     }
   };
 
@@ -107,8 +107,8 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
             inputMode="numeric"
             placeholder="MM"
             maxLength={PERIOD_LENGTH_PER_INPUT}
-            onChange={(e) => handleChange(0, e)}
-            onBlur={(e) => handleBlur(0, e)}
+            onChange={(e) => handleChange(e, 0)}
+            onBlur={(e) => handleBlur(e, 0)}
           />
           <Input
             value={value[1]}
@@ -117,8 +117,8 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
             inputMode="numeric"
             placeholder="YY"
             maxLength={PERIOD_LENGTH_PER_INPUT}
-            onChange={(e) => handleChange(1, e)}
-            onBlur={(e) => handleBlur(1, e)}
+            onChange={(e) => handleChange(e, 1)}
+            onBlur={(e) => handleBlur(e, 1)}
           />
         </div>
       </fieldset>

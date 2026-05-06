@@ -18,7 +18,7 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
   const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
   const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
 
-  const setErrorStatus = (index: number, status: ErrorStatus) => {
+  const setErrorStatus = (status: ErrorStatus, index: number) => {
     setErrorStatusList((prev) => {
       const updated = [...prev] as ErrorStatusList;
       updated[index] = status;
@@ -26,7 +26,7 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
     });
   };
 
-  const updateFormValue = (index: number, inputValue: string) => {
+  const updateFormValue = (inputValue: string, index: number) => {
     const newValue = [...value] as CardInfo['cardNumbers'];
     newValue[index] = sanitizeNumber(inputValue);
     onUpdated(newValue);
@@ -51,24 +51,24 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
       },
     ];
 
-  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
 
     const changeValidates = validates.filter((validate) => validate.type.includes('change'));
     const activeValidate = changeValidates.find((validate) => validate.rule(inputValue));
 
-    setErrorStatus(index, activeValidate?.errorStatus ?? null);
-    updateFormValue(index, inputValue);
+    setErrorStatus(activeValidate?.errorStatus ?? null, index);
+    updateFormValue(inputValue, index);
   };
 
-  const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
 
     const blurValidates = validates.filter((validate) => validate.type.includes('blur'));
     const activeValidate = blurValidates.find((validate) => validate.rule(inputValue));
 
     if (activeValidate) {
-      setErrorStatus(index, activeValidate.errorStatus);
+      setErrorStatus(activeValidate.errorStatus, index);
     }
   };
 
@@ -93,8 +93,8 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
               inputMode="numeric"
               placeholder="1234"
               maxLength={CARD_NUMBER_LENGTH_PER_INPUT}
-              onChange={(e) => handleChange(index, e)}
-              onBlur={(e) => handleBlur(index, e)}
+              onChange={(e) => handleChange(e, index)}
+              onBlur={(e) => handleBlur(e, index)}
             />
           ))}
         </div>
