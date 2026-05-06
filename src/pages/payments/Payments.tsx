@@ -12,11 +12,10 @@ import { isNumericString } from '@/core/utils/validator';
 import styles from './Payments.module.css';
 
 import { useCvc } from './hooks/useCvc';
+import { useExpirationDate } from './hooks/useExpirationDate';
 
-import { validateCardNumber, validateExpirationDate } from './validator';
+import { validateCardNumber } from './validator';
 import { BRAND_NUMBER } from './constant';
-
-import type { ExpirationDate } from './types';
 
 export const Payments = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -80,71 +79,16 @@ export const Payments = () => {
 
   //--------------------------------
 
-  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
-    month: '',
-    year: '',
-  });
-  const [onBlurExpirationDate, setOnBlurExpirationDate] = useState({
-    month: false,
-    year: false,
-  });
+  const {
+    value: expirationDate,
+    onChange: handleChangeExpirationDate,
 
-  const [expirationDateInvalidAttemp, setExpirationDateInvalidAttemp] = useState({
-    month: false,
-    year: false,
-  });
+    blurValue: onBlurExpirationDate,
+    onBlur: handleBlurExpirationDate,
 
-  const preventExpirationMonth = (month: string) => {
-    if (month !== '' && !isNumericString(month)) return true;
-    if (month.length > 2) return true;
-
-    return false;
-  };
-
-  const preventExpirationYear = (year: string) => {
-    if (year !== '' && !isNumericString(year)) return true;
-    if (year.length > 2) return true;
-
-    return false;
-  };
-
-  const renderErrorMessageExpirationDate = (expirationDate: ExpirationDate) => {
-    if (Object.values(expirationDateInvalidAttemp).find(Boolean)) return '유효햔 유효기간(숫자)을 입력해주세요';
-    if (Object.values(onBlurExpirationDate).every((blur) => !blur)) return '';
-
-    const isValidateExpirationDate = validateExpirationDate(expirationDate);
-    if (!Object.values(isValidateExpirationDate).every((valid) => valid)) return '유효기간을 전부 채워주세요';
-    return '';
-  };
-
-  const handleChangeExpirationDate = (key: keyof ExpirationDate, value: string) => {
-    if (key === 'month') {
-      if (preventExpirationMonth(value)) {
-        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, month: true });
-        return;
-      } else {
-        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, month: false });
-      }
-    }
-    if (key === 'year') {
-      if (preventExpirationYear(value)) {
-        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, year: true });
-        return;
-      } else {
-        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, year: false });
-      }
-    }
-
-    setExpirationDate({ ...expirationDate, [key]: value });
-  };
-
-  const handleBlurExpirationDate = (key: keyof ExpirationDate) => {
-    setOnBlurExpirationDate({ ...onBlurExpirationDate, [key]: true });
-  };
-
-  const isValidateExpirationDate = validateExpirationDate(expirationDate);
-
-  // expirationDate 관련 상태값 -- end
+    invalidAttemp: expirationDateInvalidAttemp,
+    renderErrorMessage: renderErrorMessageExpirationDate,
+  } = useExpirationDate();
 
   //cvc
   const {
