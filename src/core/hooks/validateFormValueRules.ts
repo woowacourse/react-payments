@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import { isRequired, isNumericString, isValidMonth, length, minLength, maxLength } from '../utils/validator';
 
 type FormValuesRules<TFormValues extends Record<string, string>> = {
@@ -6,6 +8,7 @@ type FormValuesRules<TFormValues extends Record<string, string>> = {
 
 interface Rule {
   type: string;
+  message: ReactNode;
 }
 export interface ResultValid extends Rule {
   valid: boolean;
