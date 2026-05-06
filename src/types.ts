@@ -16,6 +16,12 @@ export interface CardFormState {
   cardNumberSegments: CardNumberSegments;
 };
 
+export interface AddCardResultState {
+  type: 'success' | 'error';
+  issuer: CardIssuer;
+  firstSegment: string;
+}
+
 export interface ValidationRule {
   type: 'onChange' | 'onBlur' | 'isComplete';
   validator: (input: string) => boolean;

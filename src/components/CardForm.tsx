@@ -4,15 +4,16 @@ import { getCardNetwork } from '../utils';
 import Flex from './Common/Flex';
 import CardPreview from './CardPreview';
 import { CARD_ISSUERS } from '../constants';
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
+import type { CardFormState } from '../types';
 
-const Title = styled.h3`
+const Title = styled.p`
   font-size: 18px;
   font-weight: 700;
   margin: 0;
 `;
 
-const Description = styled.h3`
+const Description = styled.span`
   font-size: 10px;
   color: var(--color-description);
   margin: 0;
@@ -25,7 +26,7 @@ const Input = styled.input`
   padding: 8px 6px;
   border: 1px solid var(--color-border);
 
-  :focus {
+  &:focus {
     border-color: var(--color-black);
     outline: 0;
   }
@@ -42,7 +43,7 @@ const Select = styled.select`
   padding: 8px 6px;
   border: 1px solid var(--color-border);
 
-  :focus {
+  &:focus {
     border-color: var(--color-black);
     outline: 0;
   }
@@ -70,17 +71,26 @@ const Submit = styled.button`
   font-weight: 700;
   margin: 0 -32px;
 
-  :hover {
+  &:hover {
     cursor: pointer;
   }
 `;
 
-function CardForm() {
+interface CardFormProps {
+  onSubmit: (formData: CardFormState) => void;
+}
+
+function CardForm(props: CardFormProps) {
   const { register, values, errors, formStatus } = useCardForm();
   const [step, setStep] = useState(0);
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    props.onSubmit(values);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <CardPreview
         issuer={values.cardIssuer}
         network={getCardNetwork(values.cardNumberSegments)}
@@ -164,7 +174,7 @@ function CardForm() {
                 onComplete: () => setStep((prev) => Math.max(2, prev)),
               })}
             >
-              <option>카드사를 선택해 주세요</option>
+              <option value="">카드사를 선택해 주세요</option>
               {CARD_ISSUERS.map((issuer) => (
                 <option key={issuer.value} value={issuer.value}>
                   {issuer.label}
