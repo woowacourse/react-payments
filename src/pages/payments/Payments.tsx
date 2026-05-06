@@ -98,7 +98,7 @@ export const Payments = () => {
     blurValue: onBlurCvc,
     onBlur: handleBlurCvc,
 
-    errors,
+    errors: errorsCvc,
 
     invalidAttemp: cvcInvalidAttemp,
     renderErrorMessage: renderErrorMessageCvc,
@@ -169,7 +169,7 @@ export const Payments = () => {
             value={cvc}
             maxLength={3}
             placeholder="123"
-            isError={!!cvcInvalidAttemp || (onBlurCvc && !errors.cvc.length)}
+            isError={!!cvcInvalidAttemp || (onBlurCvc && !errorsCvc.cvc.length)}
             onChange={handleChangeCvc}
             onBlur={handleBlurCvc}
           />
