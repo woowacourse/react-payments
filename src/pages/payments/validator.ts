@@ -26,7 +26,7 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
 
 export const validateCvc = ({ cvc }: { cvc: string }) => {
   const rules = {
-    cvc: [{ type: 'isRequired' }, { type: 'isNumericString' }, { type: 'min' }],
+    cvc: [{ type: 'isRequired' }, { type: 'isNumericString' }, { type: 'length' }],
   };
 
   return validateFormValuesRules({ cvc }, rules);
