@@ -1,4 +1,4 @@
-import { sanitizeErrors } from "../src/Utils";
+import { sanitizeErrors } from "../Utils";
 
 describe("sanitizeErrors", () => {
   test("빈 문자열 메시지를 제거한다", () => {
