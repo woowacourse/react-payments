@@ -18,35 +18,43 @@ export default function CVCField({ value, onUpdated }: CVCFieldProps) {
     onUpdated(inputValue);
   };
 
+  const validates: { type: ('change' | 'blur')[]; rule: (inputValue: string) => boolean; errorStatus: ErrorStatus }[] =
+    [
+      {
+        type: ['change', 'blur'],
+        rule: (inputValue: string) => inputValue === '',
+        errorStatus: 'required',
+      },
+      {
+        type: ['change'],
+        rule: (inputValue: string) => !isNumber(inputValue),
+        errorStatus: 'numberOnly',
+      },
+      {
+        type: ['blur'],
+        rule: (inputValue: string) => inputValue.length < CVC_LENGTH,
+        errorStatus: 'invalidLength',
+      },
+    ];
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue === '') {
-      setErrorStatus('required');
-      updateFormValue(inputValue);
-      return;
-    }
+    const changeValidates = validates.filter((validate) => validate.type.includes('change'));
+    const activeValidate = changeValidates.find((validate) => validate.rule(inputValue));
 
-    if (!isNumber(inputValue)) {
-      setErrorStatus('numberOnly');
-      updateFormValue(inputValue);
-      return;
-    }
-
-    setErrorStatus(null);
+    setErrorStatus(activeValidate?.errorStatus ?? null);
     updateFormValue(inputValue);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue === '') {
-      setErrorStatus('required');
-      return;
-    }
+    const blurValidates = validates.filter((validate) => validate.type.includes('blur'));
+    const activeValidate = blurValidates.find((validate) => validate.rule(inputValue));
 
-    if (inputValue.length < CVC_LENGTH) {
-      setErrorStatus('invalidLength');
+    if (activeValidate) {
+      setErrorStatus(activeValidate.errorStatus);
     }
   };
 
