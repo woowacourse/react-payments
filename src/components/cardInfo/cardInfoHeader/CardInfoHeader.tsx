@@ -1,18 +1,15 @@
-import { CardInfoHeaderWrapper } from "./CardInfoHeader.styles";
+import { Wrapper } from './CardInfoHeader.styles';
 
-interface CardInfoHeaderProps {
-  guide: string;
-  subGuide: string;
+interface Props {
+  title: string;
+  description: string;
 }
 
-export default function CardInfoHeader({
-  guide,
-  subGuide,
-}: CardInfoHeaderProps) {
+export default function CardInfoHeader({ title, description }: Props) {
   return (
-    <CardInfoHeaderWrapper>
-      <h1>{guide}</h1>
-      <p>{subGuide}</p>
-    </CardInfoHeaderWrapper>
+    <Wrapper>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </Wrapper>
   );
 }

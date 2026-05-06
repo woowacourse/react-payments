@@ -1,8 +1,5 @@
 import { maskCardNumberTail } from "./utils";
-import {
-  CardNumberWrapper,
-  CardNumberParagraph,
-} from "./PreviewCardNumber.styles";
+import { Wrapper, Paragraph } from "./PreviewCardNumber.styles";
 
 export default function PreviewCardNumber({
   cardNumber,
@@ -12,8 +9,8 @@ export default function PreviewCardNumber({
   const cardNumbers = maskCardNumberTail([...cardNumber]);
 
   return (
-    <CardNumberWrapper>
-      <CardNumberParagraph>{cardNumbers.join(" ")}</CardNumberParagraph>
-    </CardNumberWrapper>
+    <Wrapper>
+      <Paragraph>{cardNumbers.join(" ")}</Paragraph>
+    </Wrapper>
   );
 }

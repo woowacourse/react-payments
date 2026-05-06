@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const CardImageWrapper = styled.section`
+export const Wrapper = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@ export const PayMethodImage = styled.img`
   height: 22px;
 `;
 
-export const CardImageInfoWrapper = styled.div`
+export const InfoWrapper = styled.div`
   margin-top: 14px;
   display: flex;
   flex-direction: column;

@@ -1,7 +1,4 @@
-import {
-  CardNumberWrapper,
-  CardNumberParagraph,
-} from "./PreviewCardExpireDate.styles";
+import { Wrapper, Paragraph } from "./PreviewCardExpireDate.styles";
 
 export default function PreviewCardExpireDate({
   expireDate,
@@ -10,8 +7,8 @@ export default function PreviewCardExpireDate({
 }) {
   const formatted = expireDate.filter(Boolean).join("/");
   return (
-    <CardNumberWrapper>
-      <CardNumberParagraph>{formatted}</CardNumberParagraph>
-    </CardNumberWrapper>
+    <Wrapper>
+      <Paragraph>{formatted}</Paragraph>
+    </Wrapper>
   );
 }

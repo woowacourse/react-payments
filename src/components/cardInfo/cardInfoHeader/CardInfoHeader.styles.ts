@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const CardInfoHeaderWrapper = styled.div`
+export const Wrapper = styled.div`
   gap: 4px;
 
   h1 {

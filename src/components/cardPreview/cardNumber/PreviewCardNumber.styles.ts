@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const CardNumberWrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   font-size: 14px;
   font-weight: 500;
@@ -11,7 +11,7 @@ export const CardNumberWrapper = styled.div`
   gap: "10px";
 `;
 
-export const CardNumberParagraph = styled.p`
+export const Paragraph = styled.p`
   margin: 0;
   padding: 0;
 `;

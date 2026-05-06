@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const CardPaymentWidgetWrapper = styled.div`
+export const Wrapper = styled.div`
   background-color: white;
   width: 376px;
   height: 750px;
