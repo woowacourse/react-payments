@@ -32,35 +32,43 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
     onUpdated(newValue);
   };
 
+  const validates: { type: ('change' | 'blur')[]; rule: (inputValue: string) => boolean; errorStatus: ErrorStatus }[] =
+    [
+      {
+        type: ['change', 'blur'],
+        rule: (inputValue: string) => inputValue === '',
+        errorStatus: 'required',
+      },
+      {
+        type: ['change'],
+        rule: (inputValue: string) => !isNumber(inputValue),
+        errorStatus: 'numberOnly',
+      },
+      {
+        type: ['blur'],
+        rule: (inputValue: string) => inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT,
+        errorStatus: 'invalidLength',
+      },
+    ];
+
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue === '') {
-      setErrorStatus(index, 'required');
-      updateFormValue(index, inputValue);
-      return;
-    }
+    const changeValidates = validates.filter((validate) => validate.type.includes('change'));
+    const activeValidate = changeValidates.find((validate) => validate.rule(inputValue));
 
-    if (!isNumber(inputValue)) {
-      setErrorStatus(index, 'numberOnly');
-      updateFormValue(index, inputValue);
-      return;
-    }
-
-    setErrorStatus(index, null);
+    setErrorStatus(index, activeValidate?.errorStatus ?? null);
     updateFormValue(index, inputValue);
   };
 
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue === '') {
-      setErrorStatus(index, 'required');
-      return;
-    }
+    const blurValidates = validates.filter((validate) => validate.type.includes('blur'));
+    const activeValidate = blurValidates.find((validate) => validate.rule(inputValue));
 
-    if (inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT) {
-      setErrorStatus(index, 'invalidLength');
+    if (activeValidate) {
+      setErrorStatus(index, activeValidate.errorStatus);
     }
   };
 
