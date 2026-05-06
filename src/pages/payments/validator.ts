@@ -2,7 +2,7 @@
 import { isNumericString, isValidMonth } from '../../core/utils/validator';
 import type { ExpirationDate } from './types';
 
-import { validateRules } from '@/core/hooks/validateRules';
+import { validateFormValuesRules } from '@/core/hooks/validateRules';
 
 export const validateCardNumber = (cardNumber: string) => {
   if (!isNumericString(cardNumber)) return false;
@@ -29,5 +29,5 @@ export const validateCvc = ({ cvc }: { cvc: string }) => {
     cvc: [{ type: 'isRequired' }, { type: 'isNumericString' }, { type: 'min' }],
   };
 
-  return validateRules({ cvc }, rules);
+  return validateFormValuesRules({ cvc }, rules);
 };
