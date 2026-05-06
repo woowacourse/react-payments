@@ -29,7 +29,5 @@ export const validateCvc = ({ cvc }: { cvc: string }) => {
     cvc: [{ type: 'isRequired' }, { type: 'isNumericString' }, { type: 'min' }],
   };
 
-  const valids = validateFormValuesRules({ cvc }, rules);
-
-  return valids.cvc.every((valid) => valid === true);
+  return validateFormValuesRules({ cvc }, rules);
 };
