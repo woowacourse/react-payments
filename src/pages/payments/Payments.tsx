@@ -134,12 +134,11 @@ export const Payments = () => {
         <Field label="유효기간" errorMessage={renderErrorMessageExpirationDate(expirationDate)}>
           <Input
             type="tel"
+            id="month"
             value={expirationDate.month}
             maxLength={2}
-            onChange={(e) => handleChangeExpirationDate('month', e.target.value)}
-            onBlur={() => {
-              handleBlurExpirationDate('month');
-            }}
+            onChange={handleChangeExpirationDate}
+            onBlur={handleBlurExpirationDate}
             isError={
               expirationDateInvalidAttemp.month ||
               (Object.values(onBlurExpirationDate).includes(true) && !errorsExpirationDate.month?.length)
@@ -148,12 +147,11 @@ export const Payments = () => {
           />
           <Input
             type="tel"
+            id="year"
             value={expirationDate.year}
             maxLength={2}
-            onChange={(e) => handleChangeExpirationDate('year', e.target.value)}
-            onBlur={() => {
-              handleBlurExpirationDate('year');
-            }}
+            onChange={handleChangeExpirationDate}
+            onBlur={handleBlurExpirationDate}
             isError={
               expirationDateInvalidAttemp.year ||
               (Object.values(onBlurExpirationDate).includes(true) && !errorsExpirationDate.year?.length)
