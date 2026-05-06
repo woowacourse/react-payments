@@ -1,6 +1,7 @@
+import useFocus from "@/hooks/useFocus";
+import type { CardNumberUnits } from "@/types/card";
 import InputField from "@components/common/InputField";
 import { useState } from "react";
-import type { CardNumberUnits } from "@/types/card";
 
 import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
@@ -26,6 +27,8 @@ const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
 }: CardNumberInputFieldProps) => {
+  const { registerInputRef, setNextFocus } = useFocus();
+
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
 
   const handleCardNumberBlur = (index: number, input: string) => {
@@ -50,6 +53,12 @@ const CardNumberInputField = ({
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
     newCardNumberUnits[index] = input.slice(0, CARD_NUMBER_UNIT_MAX_LENGTH);
     onChange(newCardNumberUnits);
+
+    if (
+      newCardNumberUnits[index].length === CARD_NUMBER_UNIT_MAX_LENGTH &&
+      index < cardNumberUnits.length - 1
+    )
+      setNextFocus();
   };
 
   return (
@@ -65,6 +74,7 @@ const CardNumberInputField = ({
       }
       inputPropsList={[
         {
+          ref: (el) => registerInputRef(0)(el),
           key: "card-number-0",
           placeholder: "1234",
           maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
@@ -75,6 +85,7 @@ const CardNumberInputField = ({
           state: status[0] === "DEFAULT" ? "default" : "error",
         },
         {
+          ref: (el) => registerInputRef(1)(el),
           key: "card-number-1",
           placeholder: "1234",
           maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
@@ -85,6 +96,7 @@ const CardNumberInputField = ({
           state: status[1] === "DEFAULT" ? "default" : "error",
         },
         {
+          ref: (el) => registerInputRef(2)(el),
           key: "card-number-2",
           placeholder: "1234",
           maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
@@ -95,6 +107,7 @@ const CardNumberInputField = ({
           state: status[2] === "DEFAULT" ? "default" : "error",
         },
         {
+          ref: (el) => registerInputRef(3)(el),
           key: "card-number-3",
           placeholder: "1234",
           maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
