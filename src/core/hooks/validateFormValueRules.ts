@@ -7,7 +7,7 @@ type FormValuesRules<TFormValues extends Record<string, string>> = {
 interface Rule {
   type: string;
 }
-interface ResultValid extends Rule {
+export interface ResultValid extends Rule {
   valid: boolean;
 }
 
