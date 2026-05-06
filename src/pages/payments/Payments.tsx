@@ -149,11 +149,13 @@ export const Payments = () => {
   //cvc
   const {
     value: cvc,
-    invalidAttemp: cvcInvalidAttemp,
-    blurValue: onBlurCvc,
-    renderErrorMessage: renderErrorMessageCvc,
     onChange: handleChangeCvc,
+
+    blurValue: onBlurCvc,
     onBlur: handleBlurCvc,
+
+    invalidAttemp: cvcInvalidAttemp,
+    renderErrorMessage: renderErrorMessageCvc,
   } = useCvc();
 
   return (
@@ -223,7 +225,7 @@ export const Payments = () => {
             placeholder="123"
             isError={!!cvcInvalidAttemp || (onBlurCvc && !validateCvc({ cvc }))}
             onChange={handleChangeCvc}
-            onBlur={() => handleBlurCvc()}
+            onBlur={handleBlurCvc}
           />
         </Field>
       </FormGroup>
