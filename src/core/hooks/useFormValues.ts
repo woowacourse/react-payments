@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { type ChangeEvent } from 'react';
 
-interface Options<T> {
-  initialValues: T;
+interface Options<TFormValues> {
+  initialValues: TFormValues;
 }
 
-export const useFormValues = <T>({ initialValues }: Options<T>) => {
-  const [formValues, setFormValues] = useState<T>(initialValues);
+export const useFormValues = <TFormValues>({ initialValues }: Options<TFormValues>) => {
+  const [formValues, setFormValues] = useState<TFormValues>(initialValues);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormValues((prev) => ({ ...prev, [e.target.id]: e.target.value }));
