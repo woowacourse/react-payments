@@ -4,7 +4,7 @@ import Input from '../ui/Input';
 import type { CardInfo } from '../../types';
 import { useState } from 'react';
 import type { ExpirationPeriodErrorStatus } from '../../types';
-import { isNumber, isValidMonth, isValidYear } from '../../utils';
+import { isNumber, isValidMonth, isValidYear, sanitizeNumber } from '../../utils';
 import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
 
 interface ExpirationPeriodFieldProps {
@@ -27,46 +27,45 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     });
   };
 
-  // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. required
-  // 2. numberOnly -> update 제외됨.
-  // 3. MM -> 1-12인지
-  // 4. YY -> 오늘로부터 5년 이내인지.
+  const updateFormValue = (index: number, inputValue: string) => {
+    const newValue = [...value] as CardInfo['expirationPeriod'];
+    newValue[index] = sanitizeNumber(inputValue);
+    onUpdated(newValue);
+  };
+
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue !== '' && !isNumber(inputValue)) {
+    if (inputValue === '') {
+      setErrorStatus(index, 'required');
+      updateFormValue(index, inputValue);
+      return;
+    }
+
+    if (!isNumber(inputValue)) {
       setErrorStatus(index, 'numberOnly');
+      updateFormValue(index, inputValue);
       return;
     }
 
-    const newValue = [...value] as CardInfo['expirationPeriod'];
-    newValue[index] = inputValue;
-    onUpdated(newValue);
-    setErrorStatus(index, inputValue === '' ? 'required' : null);
+    if (inputValue.length === PERIOD_LENGTH_PER_INPUT) {
+      if (index === 0 && !isValidMonth(inputValue)) {
+        setErrorStatus(index, 'invalidMonth');
+        updateFormValue(index, inputValue);
+        return;
+      }
 
-    // 1. invalid mm -> error status
-    // 2. invlid yy -> error status
-    // 3. invalid mm/yy -> 같은 error status
-
-    if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
-      return;
+      if (index === 1 && !isValidYear(inputValue)) {
+        setErrorStatus(index, 'invalidYear');
+        updateFormValue(index, inputValue);
+        return;
+      }
     }
 
-    if (index === 0 && !isValidMonth(inputValue)) {
-      setErrorStatus(index, 'invalidMonth');
-      return;
-    }
-
-    if (index === 1 && !isValidYear(inputValue)) {
-      setErrorStatus(index, 'invalidYear');
-      return;
-    }
+    setErrorStatus(index, null);
+    updateFormValue(index, inputValue);
   };
 
-  // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
-  // 1. required
-  // 2. invalidLength
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
@@ -77,7 +76,6 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
 
     if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
       setErrorStatus(index, 'invalidLength');
-      return;
     }
   };
 

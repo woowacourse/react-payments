@@ -14,29 +14,29 @@ interface CVCFieldProps {
 export default function CVCField({ value, onUpdated }: CVCFieldProps) {
   const [errorStatus, setErrorStatus] = useState<ErrorStatus>(null);
 
-  // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. required
-  // 2. numberOnly -> update 제외됨.
+  const updateFormValue = (inputValue: string) => {
+    onUpdated(inputValue);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue !== '' && !isNumber(inputValue)) {
+    if (inputValue === '') {
+      setErrorStatus('required');
+      updateFormValue(inputValue);
+      return;
+    }
+
+    if (!isNumber(inputValue)) {
       setErrorStatus('numberOnly');
+      updateFormValue(inputValue);
       return;
     }
 
-    const newValue = inputValue;
-    onUpdated(newValue);
-    setErrorStatus(inputValue === '' ? 'required' : null);
-
-    if (inputValue.length < CVC_LENGTH) {
-      return;
-    }
+    setErrorStatus(null);
+    updateFormValue(inputValue);
   };
 
-  // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
-  // 1. required
-  // 2. invalidLength
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 

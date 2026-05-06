@@ -17,6 +17,10 @@ export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardB
   return 'local';
 };
 
+export const sanitizeNumber = (input: string) => {
+  return input.replace(/[^0-9]/g, '');
+};
+
 export const isNumber = (value: string) => {
   return /^\d+$/.test(value);
 };

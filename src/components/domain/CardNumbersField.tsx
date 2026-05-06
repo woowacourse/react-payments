@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo, ErrorStatus } from '../../types';
-import { isNumber } from '../../utils';
+import { isNumber, sanitizeNumber } from '../../utils';
 import { useState } from 'react';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
 
@@ -26,26 +26,31 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
     });
   };
 
-  // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. required
-  // 2. numberOnly -> update 제외됨.
+  const updateFormValue = (index: number, inputValue: string) => {
+    const newValue = [...value] as CardInfo['cardNumbers'];
+    newValue[index] = sanitizeNumber(inputValue);
+    onUpdated(newValue);
+  };
+
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    if (inputValue !== '' && !isNumber(inputValue)) {
-      setErrorStatus(index, 'numberOnly');
+    if (inputValue === '') {
+      setErrorStatus(index, 'required');
+      updateFormValue(index, inputValue);
       return;
     }
 
-    const newValue = [...value] as CardInfo['cardNumbers'];
-    newValue[index] = inputValue;
-    onUpdated(newValue);
-    setErrorStatus(index, inputValue === '' ? 'required' : null);
+    if (!isNumber(inputValue)) {
+      setErrorStatus(index, 'numberOnly');
+      updateFormValue(index, inputValue);
+      return;
+    }
+
+    setErrorStatus(index, null);
+    updateFormValue(index, inputValue);
   };
 
-  // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
-  // 1. required
-  // 2. invalidLength
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
@@ -56,7 +61,6 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
 
     if (inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT) {
       setErrorStatus(index, 'invalidLength');
-      return;
     }
   };
 
