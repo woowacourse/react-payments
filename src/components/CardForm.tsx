@@ -160,7 +160,7 @@ function CardForm() {
             </Flex>
             <Select
               data-is-error={!!errors['cardIssuer']}
-              {...register('cardIssuer', { onComplete: () => setStep((prev) => Math.max(2, prev)) })}
+              {...register<'cardIssuer', HTMLSelectElement>('cardIssuer', { onComplete: () => setStep((prev) => Math.max(2, prev)) })}
             >
               <option>카드사를 선택해 주세요</option>
               {CARD_ISSUERS.map((issuer) => (

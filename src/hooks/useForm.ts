@@ -15,8 +15,8 @@ type Validations<T> = {
 
 type RefsState<T> = {
   [K in keyof T]: T[K] extends unknown[]
-  ? RefObject<HTMLInputElement>[]
-  : RefObject<HTMLInputElement>;
+  ? RefObject<HTMLElement>[]
+  : RefObject<HTMLElement>;
 };
 
 export default function useForm<T extends Record<string, (string | null) | (string | null)[]>>({ initialValues, validations }: { initialValues: T, validations: Validations<T> }) {
@@ -30,12 +30,12 @@ export default function useForm<T extends Record<string, (string | null) | (stri
     return Object.entries(initialValues).reduce((prev, [fieldName, fieldValue]) => ({
       ...prev,
       [fieldName]: Array.isArray(fieldValue)
-        ? fieldValue.map(() => createRef<HTMLInputElement>())
-        : createRef<HTMLInputElement>(),
+        ? fieldValue.map(() => createRef<HTMLElement>())
+        : createRef<HTMLElement>(),
     }), {}) as RefsState<T>
   });
 
-  const register = useCallback(<K extends keyof T>(
+  const register = useCallback(<K extends keyof T, E extends HTMLInputElement | HTMLSelectElement = HTMLInputElement>(
     fieldName: K,
     ...args: T[K] extends unknown[]
       ? [option: { index: number; onComplete?: () => void }]
@@ -48,9 +48,9 @@ export default function useForm<T extends Record<string, (string | null) | (stri
     if (typeof index === 'number') {
       const fieldValidations = (validations[fieldName] as ValidationRule[][])[index];
       return {
-        ref: (refs[fieldName] as RefObject<HTMLInputElement>[])[index],
+        ref: (refs[fieldName] as RefObject<HTMLElement>[])[index] as RefObject<E>,
         value: (values[fieldName] as string[])[index],
-        onChange: (event: ChangeEvent<HTMLInputElement>) => {
+        onChange: (event: ChangeEvent<E>) => {
           const failedValidation = fieldValidations.find(
             (validation) => event.target.value.length && validation.type === 'onChange' && !validation.validator(event.target.value),
           );
@@ -77,7 +77,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
 
           const isCompleteRule = fieldValidations.find((v) => v.type === 'isComplete');
           if (isCompleteRule?.validator(event.target.value)) {
-            const nextRef = (refs[fieldName] as RefObject<HTMLInputElement>[])[index + 1];
+            const nextRef = (refs[fieldName] as RefObject<HTMLElement>[])[index + 1];
             if (nextRef) {
               nextRef.current?.focus();
             } else {
@@ -85,7 +85,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
             }
           }
         },
-        onBlur: (event: FocusEvent<HTMLInputElement>) => {
+        onBlur: (event: FocusEvent<E>) => {
           const failedValidation = fieldValidations.find(
             (v) => event.target.value.length && v.type === 'onBlur' && !v.validator(event.target.value),
           );
@@ -110,9 +110,9 @@ export default function useForm<T extends Record<string, (string | null) | (stri
 
     const fieldValidations = validations[fieldName] as ValidationRule[];
     return {
-      ref: refs[fieldName] as RefObject<HTMLInputElement>,
+      ref: refs[fieldName] as RefObject<E>,
       value: values[fieldName] as string,
-      onChange: (event: ChangeEvent<HTMLInputElement>) => {
+      onChange: (event: ChangeEvent<E>) => {
         const failedValidation = fieldValidations.find(
           (v) => event.target.value.length && v.type === 'onChange' && !v.validator(event.target.value),
         );
@@ -131,7 +131,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
           onComplete?.();
         }
       },
-      onBlur: (event: FocusEvent<HTMLInputElement>) => {
+      onBlur: (event: FocusEvent<E>) => {
         const failedValidation = fieldValidations.find(
           (v) => event.target.value.length && v.type === 'onBlur' && !v.validator(event.target.value),
         );
