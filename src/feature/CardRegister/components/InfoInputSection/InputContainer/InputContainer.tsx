@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const InputContainer = ({title, description, children}: {title: string; description?: string; children: ReactNode}) => {
   return (
     <Container>
-      <Title value={title} />
+      <Title>{title}</Title>
       {description && <Description value={description} />}
       {children}
     </Container>

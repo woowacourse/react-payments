@@ -1,3 +1,4 @@
+import type {ComponentPropsWithoutRef} from 'react';
 import styled from 'styled-components';
 
 const StyledTitle = styled.span`
@@ -6,8 +7,8 @@ const StyledTitle = styled.span`
   color: #000;
 `;
 
-const Title = ({value}: {value: string}) => {
-  return <StyledTitle>{value}</StyledTitle>;
+const Title = ({children, ...rest}: ComponentPropsWithoutRef<'span'>) => {
+  return <StyledTitle {...rest}>{children}</StyledTitle>;
 };
 
 export default Title;
