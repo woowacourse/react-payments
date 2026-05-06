@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import cn from 'classnames';
 
 import { CreditCard } from '@/core/components/creditCard';
@@ -7,77 +5,24 @@ import { FormGroup } from '@/core/components/formGroup';
 import { Field } from '@/core/components/field';
 import { Input } from '@/core/components/input';
 
-import { isNumericString } from '@/core/utils/validator';
-
 import styles from './Payments.module.css';
 
-import { useCvc } from './hooks/useCvc';
+import { useCardNumbers } from './hooks/useCardNumbers';
 import { useExpirationDate } from './hooks/useExpirationDate';
+import { useCvc } from './hooks/useCvc';
 
-import { validateCardNumber } from './validator';
 import { BRAND_NUMBER } from './constant';
 
 export const Payments = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [onBlurCardNumber, setOnBlurCardNumber] = useState([false, false, false, false]);
+  const {
+    value: cardNumbers,
+    onChange: handleChangeCardNumbers,
 
-  const [cardNumbersInvalidAttemp, setCardNumbersInvalidAttemp] = useState([false, false, false, false]);
-  // cardNumber --------------------------
+    onBlur: handleBlurCardNumbers,
 
-  const preventCardNumber = (cardNumber: string) => {
-    if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
-    if (cardNumber.length > 4) return true;
-    return false;
-  };
-
-  const renderErrorMessageCardNumbers = (cardNumbers: string[]) => {
-    if (cardNumbersInvalidAttemp.find(Boolean)) return '유효현 카드번호(숫자)를 입력해주세요';
-    if (onBlurCardNumber.every((blur) => !blur)) return '';
-    if (cardNumbers.some((cardNumber) => cardNumber.length !== 4)) return '카드 번호를 전부 채워주세요';
-    return '';
-  };
-
-  const renderErrorCardNumberInput = (index: number) => {
-    const cardNumberInvalidAttempMessage = cardNumbersInvalidAttemp[index];
-    if (cardNumberInvalidAttempMessage) return true;
-
-    const cardNumber = cardNumbers[index];
-    return onBlurCardNumber.includes(true) && !validateCardNumber(cardNumber);
-  };
-
-  const handleChangeCardNumber = (index: number, value: string) => {
-    if (preventCardNumber(value)) {
-      setCardNumbersInvalidAttemp(
-        cardNumbersInvalidAttemp.map((invalidAttemp: boolean, i: number) => {
-          return index === i ? true : invalidAttemp;
-        }),
-      );
-      return;
-    } else {
-      setCardNumbersInvalidAttemp(
-        cardNumbersInvalidAttemp.map((invalidAttemp: boolean, i: number) => {
-          return index === i ? false : invalidAttemp;
-        }),
-      );
-    }
-    const next = [...cardNumbers];
-    next[index] = value;
-    setCardNumbers(next);
-  };
-
-  const handleBlurCardNumber = (index: number) => {
-    const next = [...onBlurCardNumber];
-    next[index] = true;
-    setOnBlurCardNumber(next);
-  };
-
-  const renderBrandCard = (cardNumbers: string[]) => {
-    if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
-    if (BRAND_NUMBER.mastercard.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'mastercard';
-    return 'default';
-  };
-
-  //--------------------------------
+    renderErrorMessage: renderErrorMessageCardNumbers,
+    renderErrorInput: renderErrorCardNumberInput,
+  } = useCardNumbers();
 
   const {
     value: expirationDate,
@@ -106,6 +51,12 @@ export const Payments = () => {
     renderErrorMessage: renderErrorMessageCvc,
   } = useCvc();
 
+  const renderBrandCard = (cardNumbers: string[]) => {
+    if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
+    if (BRAND_NUMBER.mastercard.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'mastercard';
+    return 'default';
+  };
+
   return (
     <div className={cn(styles.payments)}>
       <CreditCard
@@ -119,13 +70,14 @@ export const Payments = () => {
           {cardNumbers.map((value, index) => (
             <Input
               type="tel"
+              id={String(index)}
               key={index}
               value={value}
               maxLength={4}
               placeholder="1234"
               isError={renderErrorCardNumberInput(index)}
-              onChange={(e) => handleChangeCardNumber(index, e.target.value)}
-              onBlur={() => handleBlurCardNumber(index)}
+              onChange={handleChangeCardNumbers}
+              onBlur={handleBlurCardNumbers}
             />
           ))}
         </Field>
