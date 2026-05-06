@@ -4,7 +4,7 @@ interface Rule {
   type: string;
 }
 
-export const validateRules = <T>(value: T, rules: Rule[]) => {
+export const validateRules = <T extends string>(value: T, rules: Rule[]) => {
   return rules.every((rule) => {
     switch (rule.type) {
       case 'isRequired':
