@@ -8,6 +8,10 @@ interface Options<TFormValues> {
   validate: (formValues: TFormValues) => { [formKey in keyof TFormValues]: ResultValid[] };
 }
 
+type FormTouched<TFormValues> = {
+  [formKey in keyof TFormValues]: boolean;
+};
+
 export const useFormValues = <TFormValues extends Record<string, string>>({
   initialValues,
   validate,
@@ -19,14 +23,9 @@ export const useFormValues = <TFormValues extends Record<string, string>>({
   };
 
   const [blur, setBlur] = useState(() =>
-    Object.keys(initialValues).reduce(
-      (acc, key) => {
-        return { ...acc, [key]: false };
-      },
-      {} as {
-        [key in keyof TFormValues]: boolean;
-      },
-    ),
+    Object.keys(initialValues).reduce((acc, key) => {
+      return { ...acc, [key]: false };
+    }, {} as FormTouched<TFormValues>),
   );
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
