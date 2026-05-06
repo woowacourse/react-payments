@@ -2,35 +2,21 @@ import { useState, type ChangeEvent } from 'react';
 
 import { isNumericString } from '@/core/utils/validator';
 
+import { useFormValues } from '@/core/hooks/useFormValues';
+
 import { validateCardNumber } from '../validator';
 
 export const useCardNumbers = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [onBlurCardNumbers, setOnBlurCardNumbers] = useState([false, false, false, false]);
-
-  const [cardNumbersInvalidAttemp, setCardNumbersInvalidAttemp] = useState([false, false, false, false]);
-  // cardNumber --------------------------
-
-  const preventCardNumber = (cardNumber: string) => {
-    if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
-    if (cardNumber.length > 4) return true;
-    return false;
-  };
-
-  const renderErrorMessageCardNumbers = (cardNumbers: string[]) => {
-    if (cardNumbersInvalidAttemp.find(Boolean)) return '유효현 카드번호(숫자)를 입력해주세요';
-    if (onBlurCardNumbers.every((blur) => !blur)) return '';
-    if (cardNumbers.some((cardNumber) => cardNumber.length !== 4)) return '카드 번호를 전부 채워주세요';
-    return '';
-  };
-
-  const renderErrorCardNumberInput = (index: number) => {
-    const cardNumberInvalidAttempMessage = cardNumbersInvalidAttemp[index];
-    if (cardNumberInvalidAttempMessage) return true;
-
-    const cardNumber = cardNumbers[index];
-    return onBlurCardNumbers.includes(true) && !validateCardNumber(cardNumber);
-  };
+  const {
+    values: cardNumbers,
+    onChange,
+    blur: blurCardNumbers,
+    onBlur,
+    errors,
+  } = useFormValues({
+    initialValues: { 0: '', 1: '', 2: '', 3: '' },
+    validate: validateCardNumber,
+  });
 
   const handleChangeCardNumbers = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -49,26 +35,42 @@ export const useCardNumbers = () => {
         }),
       );
     }
-    const next = [...cardNumbers];
-    next[Number(id)] = value;
-    setCardNumbers(next);
+
+    onChange(e);
   };
 
-  const handleBlurCardNumbers = (e: ChangeEvent<HTMLInputElement>) => {
-    const { id } = e.target;
-    const next = [...onBlurCardNumbers];
-    next[Number(id)] = true;
-    setOnBlurCardNumbers(next);
+  const [cardNumbersInvalidAttemp, setCardNumbersInvalidAttemp] = useState([false, false, false, false]);
+  // cardNumber --------------------------
+
+  const preventCardNumber = (cardNumber: string) => {
+    if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
+    if (cardNumber.length > 4) return true;
+    return false;
+  };
+
+  const renderErrorMessageCardNumbers = () => {
+    if (cardNumbersInvalidAttemp.find(Boolean)) return '유효현 카드번호(숫자)를 입력해주세요';
+    if (Object.values(blurCardNumbers).every((blur) => !blur)) return '';
+    if (Object.values(cardNumbers).some((cardNumber) => cardNumber.length !== 4)) return '카드 번호를 전부 채워주세요';
+    return '';
+  };
+
+  const renderErrorCardNumberInput = (index: number) => {
+    const cardNumberInvalidAttempMessage = cardNumbersInvalidAttemp[index];
+    if (cardNumberInvalidAttempMessage) return true;
+
+    const cardNumber = cardNumbers[index as keyof typeof cardNumbers];
+    return Object.values(blurCardNumbers).includes(true) && !validateCardNumber(cardNumber);
   };
 
   return {
     value: cardNumbers,
     onChange: handleChangeCardNumbers,
 
-    blurValue: onBlurCardNumbers,
-    onBlur: handleBlurCardNumbers,
+    blurValue: blurCardNumbers,
+    onBlur,
 
-    errors: [],
+    errors,
 
     invalidAttemp: cardNumbersInvalidAttemp,
     renderErrorMessage: renderErrorMessageCardNumbers,

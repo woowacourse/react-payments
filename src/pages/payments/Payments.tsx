@@ -61,13 +61,13 @@ export const Payments = () => {
     <div className={cn(styles.payments)}>
       <CreditCard
         bank="default"
-        cardBrand={renderBrandCard(cardNumbers)}
-        cardNumberList={cardNumbers}
+        cardBrand={renderBrandCard(Object.values(cardNumbers))}
+        cardNumberList={Object.values(cardNumbers)}
         expirationDate={[expirationDate.month, expirationDate.year]}
       />
       <FormGroup title="결제할 카드 번호를 입력해 주세요" subTitle="본인 명의의 카드만 결제 가능합니다.">
-        <Field label="카드 번호" errorMessage={renderErrorMessageCardNumbers(cardNumbers)}>
-          {cardNumbers.map((value, index) => (
+        <Field label="카드 번호" errorMessage={renderErrorMessageCardNumbers()}>
+          {Object.values(cardNumbers).map((value, index) => (
             <Input
               type="tel"
               id={String(index)}
