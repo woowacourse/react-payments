@@ -1,4 +1,4 @@
-import { isRequired, isNumericString, isValidMonth, min } from '../utils/validator';
+import { isRequired, isNumericString, isValidMonth, length, minLength, maxLength } from '../utils/validator';
 
 type FormValuesRules<TFormValues extends Record<string, string>> = {
   [FormKey in keyof TFormValues]: Rule[];
@@ -20,8 +20,12 @@ const validateFormValueRules = <T extends string>(value: T, rules: Rule[]) => {
         return { ...rule, valid: isNumericString(value) };
       case 'isValidMonth':
         return { ...rule, valid: isValidMonth(value) };
-      case 'min':
-        return { ...rule, valid: min(value, 3) };
+      case 'length':
+        return { ...rule, valid: length(value, 3) };
+      case 'minLength':
+        return { ...rule, valid: minLength(value, 3) };
+      case 'maxLength':
+        return { ...rule, valid: maxLength(value, 3) };
       default:
         return { valid: true };
     }

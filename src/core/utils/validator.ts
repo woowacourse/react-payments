@@ -15,6 +15,14 @@ export const isValidMonth = (month: string) => {
   return regex.test(month);
 };
 
-export const min = (str: string, minLength: number) => {
-  return str.length === minLength;
+export const length = (str: string, length: number) => {
+  return str.length === length;
+};
+
+export const minLength = (str: string, minLength: number) => {
+  return str.length >= minLength;
+};
+
+export const maxLength = (str: string, maxLength: number) => {
+  return str.length <= maxLength;
 };
