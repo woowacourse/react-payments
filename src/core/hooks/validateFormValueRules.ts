@@ -18,24 +18,24 @@ export interface ResultValid extends Rule {
   valid: boolean;
 }
 
+type Validators = {
+  [type in RuleType]: (value: unknown, payload?: number) => boolean;
+};
+
+const validators: Validators = {
+  isRequired,
+  isNumericString,
+  isValidMonth,
+  length,
+  minLength,
+  maxLength,
+};
+
 const validateFormValueRules = <T>(value: T, rules: Rule[]) => {
   return rules.map((rule) => {
-    switch (rule.type) {
-      case 'isRequired':
-        return { ...rule, valid: isRequired(value) };
-      case 'isNumericString':
-        return { ...rule, valid: isNumericString(value) };
-      case 'isValidMonth':
-        return { ...rule, valid: isValidMonth(value) };
-      case 'length':
-        return { ...rule, valid: length(value, rule?.length || 0) };
-      case 'minLength':
-        return { ...rule, valid: minLength(value, rule?.minLength || 0) };
-      case 'maxLength':
-        return { ...rule, valid: maxLength(value, rule?.maxLength || 0) };
-      default:
-        return { valid: true };
-    }
+    const validator = validators[rule.type];
+    if (!validator) return { valid: true };
+    return { ...rule, valid: validator(value, rule[rule.type]) };
   });
 };
 
