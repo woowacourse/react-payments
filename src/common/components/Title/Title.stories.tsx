@@ -7,7 +7,7 @@ const meta = {
   component: Title,
   tags: ['autodocs'],
   args: {
-    value: '',
+    children: '',
   },
 } satisfies Meta<typeof Title>;
 
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: 'titleTest',
+    children: 'titleTest',
   },
 };
