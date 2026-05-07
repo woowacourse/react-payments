@@ -14,7 +14,7 @@ const Card = styled(Flex)<{ issuer: CardIssuer | null }>`
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px #00000040;
   padding: 8px 12px;
-  ${(props) => `background-color: var(--color-card-${props.issuer ?? 'background'}, --color-card-background);`}
+  ${(props) => `background-color: var(--color-card-${props.issuer ?? 'background'}, var(--color-card-background));`}
 `;
 
 const CardImage = styled.img`
