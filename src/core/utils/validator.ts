@@ -2,6 +2,10 @@ export const isString = (value: unknown): value is string => {
   return typeof value === 'string';
 };
 
+export const isEmptyString = (value: unknown): value is string => {
+  return value === '';
+};
+
 export const isRequired = (str: unknown) => {
   if (!isString(str)) return false;
   return !!str;
