@@ -56,16 +56,16 @@ const InfoInputSection = ({
     setPassword(password);
   };
 
+  const hasError = hasCardFormError({
+    cardNumbers,
+    expiryMonth,
+    expiryYear,
+    cvcNumber,
+    password,
+  });
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const hasError = hasCardFormError({
-      cardNumbers,
-      expiryMonth,
-      expiryYear,
-      cvcNumber,
-      password,
-    });
 
     if (hasError) return;
 
@@ -147,7 +147,7 @@ const InfoInputSection = ({
         </FieldSection>
       </FieldsWrapper>
 
-      <SubmitButton type="submit">제출</SubmitButton>
+      {!hasError && <SubmitButton type="submit">제출</SubmitButton>}
     </Container>
   );
 };
