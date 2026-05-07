@@ -51,11 +51,11 @@ export default function AddCardPage() {
           />
         </div>
         <form css={formLayout}>
-          {stepIndex >= 0 && (
-            <CardNumbersField
-              value={formValue.cardNumbers.value}
-              onUpdated={(...params) => handleFormValueUpdate('cardNumbers', ...params)}
-              onCompleted={() => handleFieldComplete(0)}
+          {stepIndex >= 2 && (
+            <CVCField
+              value={formValue.cvc.value}
+              onUpdated={(...params) => handleFormValueUpdate('cvc', ...params)}
+              onCompleted={() => handleFieldComplete(2)}
             />
           )}
           {stepIndex >= 1 && (
@@ -65,11 +65,11 @@ export default function AddCardPage() {
               onCompleted={() => handleFieldComplete(1)}
             />
           )}
-          {stepIndex >= 2 && (
-            <CVCField
-              value={formValue.cvc.value}
-              onUpdated={(...params) => handleFormValueUpdate('cvc', ...params)}
-              onCompleted={() => handleFieldComplete(2)}
+          {stepIndex >= 0 && (
+            <CardNumbersField
+              value={formValue.cardNumbers.value}
+              onUpdated={(...params) => handleFormValueUpdate('cardNumbers', ...params)}
+              onCompleted={() => handleFieldComplete(0)}
             />
           )}
         </form>
