@@ -1,8 +1,11 @@
 import styled from "@emotion/styled";
-export default function CheckBtn() {
+interface Props {
+  onClick: () => void;
+}
+export default function CheckBtn({ onClick }: Props) {
   return (
     <Footer>
-      <BTN>확인</BTN>
+      <BTN onClick={onClick}>확인</BTN>
     </Footer>
   );
 }
