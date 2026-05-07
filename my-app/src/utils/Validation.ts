@@ -75,3 +75,15 @@ export const getCardBrand = (cardNumber: string): CardBrand => {
 
   return 'Unknown';
 }
+
+export const getCardLengthByBrand = (cardBrand: CardBrand): number[] => {
+  switch (cardBrand) {
+    case 'AMEX': return [4, 6, 5]; 
+    case 'Diners': return [4, 6, 4];
+    case 'UnionPay':
+    case 'MasterCard':
+    case 'Visa':
+    default:
+      return [4, 4, 4, 4];
+  }
+}
