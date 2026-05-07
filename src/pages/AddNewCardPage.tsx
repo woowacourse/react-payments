@@ -1,4 +1,5 @@
 import Card from "@/components/Card/Card";
+import CardCompanySelector from "@/components/CardCompanySelector/CardCompanySelector";
 import CardCVCInputField from "@/components/CardCVCInputField/CardCVCInputField";
 import CardNumberInputField, {
   type CardNumberUnits,
@@ -34,6 +35,7 @@ const AddNewCardPage = () => {
             setCardNumber(input);
           }}
         />
+        <CardCompanySelector />
         <CardValidityPeriodInputField
           validityPeriod={validityPeriod}
           onChange={(input) => {
