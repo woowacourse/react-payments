@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { getCardBrand, getCardNumberArrayByBrand, getCardNumberError, isInputValidate } from "../../utils/Validation";
+import { getCardBrand, getCardNumberArrayByBrand, getCardNumberError } from "../../utils/Validation";
 
 
 interface Props {
@@ -15,10 +15,14 @@ export const useCardNumber = ({value, setValue}: Props) => {
   const cardNumberArray = getCardNumberArrayByBrand(currentBrand);
     
   const handleOnChange = (inputValue: string, index: number) => {
-    if (!isInputValidate(inputValue, cardNumberArray[index])) return;
+    const isNumberOnly = /^[0-9]*$/.test(inputValue);
+    if (!isNumberOnly) return false;
+
+    const currentMaxLength = cardNumberArray[index];
+    const slicedValue = inputValue.slice(0, currentMaxLength);
 
     let newValue = [...value];
-    newValue[index] = inputValue;
+    newValue[index] = slicedValue;
 
     const newBrand = getCardBrand(newValue.join(''));
     const newCardFormat = getCardNumberArrayByBrand(newBrand);
