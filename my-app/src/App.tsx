@@ -97,8 +97,8 @@ function App() {
         )}
         <CardNumberSection value={cardNumber} setValue={setCardNumber} />
 
-        {maxStep >= 5 && (
-          <SubmitButton type="submit" disabled={!isFormValid}>
+        {isFormValid && (
+          <SubmitButton type="submit">
             확인
           </SubmitButton>
         )}
