@@ -5,10 +5,11 @@ import { validateExpiryDate } from "../../utils/validators";
 
 const ExpiryDateInputSection = ({
   onValueHandler,
+  inputValues,
 }: {
-  onValueHandler: (cardInfo: string[], brand?: string) => void;
+  onValueHandler: (cardInfo: string[]) => void;
+  inputValues: string[];
 }) => {
-  const [inputValues, setInputValues] = useState<string[]>(["", ""]);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
   const placeHolder = ["MM", "YY"];
@@ -16,7 +17,6 @@ const ExpiryDateInputSection = ({
     const newValues = [...inputValues];
     newValues[index] = value;
 
-    setInputValues(newValues);
     setErrorMessage("");
     onValueHandler(newValues);
   };

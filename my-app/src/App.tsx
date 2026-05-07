@@ -8,7 +8,11 @@ import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDa
 import { decideBrandName } from "./utils/decideBrandName.ts";
 
 function App() {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: "" });
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
+    numbers: ["", "", "", ""],
+    expiry: ["", ""],
+    cvc: "",
+  });
 
   const brand = decideBrandName(cardInfo.numbers[0] ?? "");
 
@@ -64,9 +68,10 @@ function App() {
           `}
         >
           {/* form */}
-          <CardNumberInputSection onValueHandler={cardNumberHandler} />
-          <ExpiryDateInputSection onValueHandler={expiryHandler} />
-          <CvcInputSection onValueHandler={cvcHandler} />
+
+          <CardNumberInputSection onValueHandler={cardNumberHandler} inputValues={cardInfo.numbers} />
+          <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
+          <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />
         </div>
       </div>
     </main>

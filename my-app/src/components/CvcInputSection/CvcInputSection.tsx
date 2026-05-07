@@ -3,13 +3,17 @@ import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
 import { validateCvc } from "../../utils/validators";
 
-const CvcInputSection = ({ onValueHandler }: { onValueHandler: (cardInfo: string) => void }) => {
-  const [inputValue, setInputValue] = useState<string>("");
+const CvcInputSection = ({
+  onValueHandler,
+  inputValue,
+}: {
+  onValueHandler: (cardInfo: string) => void;
+  inputValue: string;
+}) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const onChange = (value: string) => {
     setErrorMessage("");
-    setInputValue(value);
     onValueHandler(value);
   };
 

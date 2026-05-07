@@ -5,10 +5,11 @@ import { validateCardNumber } from "../../utils/validators";
 
 const CardNumberInputSection = ({
   onValueHandler,
+  inputValues,
 }: {
-  onValueHandler: (cardInfo: string[], brand?: string) => void;
+  onValueHandler: (cardInfo: string[]) => void;
+  inputValues: string[];
 }) => {
-  const [inputValues, setInputValues] = useState<string[]>(["", "", "", ""]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
 
@@ -16,7 +17,6 @@ const CardNumberInputSection = ({
     const newValues = [...inputValues];
     newValues[index] = value;
 
-    setInputValues(newValues);
     setErrorMessage("");
     onValueHandler(newValues);
   };
