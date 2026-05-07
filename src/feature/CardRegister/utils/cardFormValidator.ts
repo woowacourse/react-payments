@@ -54,11 +54,13 @@ export const hasCardFormError = ({
   expiryMonth,
   expiryYear,
   cvcNumber,
+  password,
 }: {
   cardNumbers: string[];
   expiryMonth: string;
   expiryYear: string;
   cvcNumber: string;
+  password: string;
 }) => {
   const hasCardNumberError = cardNumbers.some(
     (cardNumber) => validateCardNumber(cardNumber) !== null,
@@ -66,11 +68,13 @@ export const hasCardFormError = ({
   const hasExpiryMonthError = validateExpiryMonth(expiryMonth) !== null;
   const hasExpiryYearError = validateExpiryYear(expiryYear) !== null;
   const hasCvcError = validateCvcNumber(cvcNumber) !== null;
+  const hasPasswordError = validatePassword(password) !== null;
 
   return (
     hasCardNumberError ||
     hasExpiryMonthError ||
     hasExpiryYearError ||
-    hasCvcError
+    hasCvcError ||
+    hasPasswordError
   );
 };

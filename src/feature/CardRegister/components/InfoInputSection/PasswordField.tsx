@@ -42,7 +42,7 @@ const PasswordField = ({
           value={password}
           maxLength={3}
           inputMode="numeric"
-          placeholder="123"
+          placeholder="**"
           strokeMode={0 === firstErrorIndex ? 'error' : 'default'}
           onChange={(e) => handlePasswordChange(e.target.value)}
           onBlur={() => handlePasswordBlur(0)}

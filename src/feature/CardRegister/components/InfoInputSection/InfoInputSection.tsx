@@ -11,6 +11,7 @@ import FieldSection from './FieldSection';
 import { hasCardFormError } from '../../utils/cardFormValidator';
 import SelectCardBrandField from './SelectCardBrandField';
 import PasswordField from './PasswordField';
+import Button from '../../../../common/components/Button';
 
 const InfoInputSection = ({
   cardPreviewInfo,
@@ -30,6 +31,15 @@ const InfoInputSection = ({
     handleCardBrandChange,
   } = cardFormHandlers;
 
+  const cardFormInfo = {
+    cardNumbers,
+    cardBrandId,
+    expiryMonth,
+    expiryYear,
+    cvcNumber,
+    password,
+  };
+
   const handleCvcNumberChange = (cvcNumber: string) => {
     setCvcNumber(cvcNumber);
   };
@@ -46,6 +56,7 @@ const InfoInputSection = ({
       expiryMonth,
       expiryYear,
       cvcNumber,
+      password,
     });
 
     if (hasError) return;
@@ -97,6 +108,7 @@ const InfoInputSection = ({
           handlePasswordNumberChange={handlePasswordNumberChange}
         />
       </FieldSection>
+      <Button type="submit">제출</Button>
     </Container>
   );
 };
