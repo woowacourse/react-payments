@@ -76,6 +76,8 @@ const InputWrapper = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 14px;
+
+  margin-bottom: 20px;
 `;
 
 // const CardBrandSelect = styled.select`
