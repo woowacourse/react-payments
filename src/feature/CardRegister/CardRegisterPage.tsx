@@ -6,6 +6,7 @@ import type {
   CardInfoType,
   CardNumberChunkType,
 } from "../../common/types/CardInfoType";
+import type { CardCompanyType } from "../../common/types/CardCompany";
 
 const CardRegisterPage = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumberChunkType>([
@@ -16,6 +17,13 @@ const CardRegisterPage = () => {
   ]);
   const [expiryMonth, setExpiryMonth] = useState("");
   const [expiryYear, setExpiryYear] = useState("");
+  const [selectedCardCompany, setSelectedCardCompany] = useState("");
+
+  const handleCardCompanyClick = (cardCompany: CardCompanyType) => {
+    if (selectedCardCompany !== cardCompany) {
+      setSelectedCardCompany(cardCompany);
+    }
+  };
 
   const cardInfo: CardInfoType = {
     cardNumbers,
@@ -36,6 +44,7 @@ const CardRegisterPage = () => {
         <InfoInputSection
           cardInfo={cardInfo}
           cardInfoHandlers={cardInfoHandlers}
+          handleCardCompanyClick={handleCardCompanyClick}
         />
       </Container>
     </Wrapper>

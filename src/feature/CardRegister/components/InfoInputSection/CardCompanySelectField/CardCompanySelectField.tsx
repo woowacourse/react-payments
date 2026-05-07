@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { CardCompanyType } from "../../../../../common/types/CardCompany";
 import styled from "styled-components";
 import { colors } from "../../../../../styles/color";
@@ -15,22 +14,16 @@ const mockCardCompany: CardCompanyType[] = [
   "국민카드",
 ];
 
-const CardCompanySelectField = () => {
-  const [selectedCardCompany, setSelectedCardCompany] = useState("");
-
-  const handleCardCompanyClick = (cardCompany: CardCompanyType) => {
-    if (selectedCardCompany !== cardCompany) {
-      setSelectedCardCompany(cardCompany);
-    }
-  };
-
+const CardCompanySelectField = ({
+  onSelect,
+}: {
+  onSelect: (cardCompany: CardCompanyType) => void;
+}) => {
   return (
     <CardSelectBox>
       <CardSelectTrigger
         defaultValue={""}
-        onChange={(e) =>
-          handleCardCompanyClick(e.target.value as CardCompanyType)
-        }
+        onChange={(e) => onSelect(e.target.value as CardCompanyType)}
       >
         <option value={""} disabled hidden>
           카드사를 선택해주세요
@@ -52,7 +45,8 @@ const CardSelectBox = styled.div`
 `;
 
 const CardSelectTrigger = styled.select`
+  appearance: base-select;
   width: 100%;
   border: 1px solid ${colors.border.default};
-  text-align: left;
+  border-radius: 4px;
 `;

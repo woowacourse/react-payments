@@ -8,13 +8,17 @@ import type {
   CardInfoType,
 } from "../../../../common/types/CardInfoType";
 import styled from "styled-components";
+import CardCompanySelectField from "./CardCompanySelectField/CardCompanySelectField";
+import type { CardCompanyType } from "../../../../common/types/CardCompany";
 
 const InfoInputSection = ({
   cardInfo,
   cardInfoHandlers,
+  handleCardCompanyClick,
 }: {
   cardInfo: CardInfoType;
   cardInfoHandlers: CardInfoHandlersType;
+  handleCardCompanyClick: (cardCompany: CardCompanyType) => void;
 }) => {
   const [cvcNumber, setCvcNumber] = useState("");
   const [formError, setFormError] = useState({
@@ -48,6 +52,14 @@ const InfoInputSection = ({
           }
         />
       </InputContainer>
+
+      <InputContainer
+        title="카드사를 선택해 주세요"
+        description="현재 국내 카드사만 가능합니다."
+      >
+        <CardCompanySelectField onSelect={handleCardCompanyClick} />
+      </InputContainer>
+
       <InputContainer
         title="카드 유효기간을 입력해 주세요"
         description="월/년도(MMYY)를 순서대로 입력해 주세요."
