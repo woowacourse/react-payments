@@ -18,7 +18,7 @@ export interface CardFormState {
 
 export interface AddCardResultState {
   type: 'success' | 'error';
-  issuer: CardIssuer;
+  issuer: CardIssuer | null;
   firstSegment: string;
 }
 
