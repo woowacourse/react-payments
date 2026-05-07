@@ -1,8 +1,8 @@
 import type { CARD_ISSUERS } from "./constants";
 
-export type CardNetwork = "VISA" | "MasterCard" | null;
+export type CardNetwork = "VISA" | "MasterCard" | "Diners" | "AMEX" | "UnionPay";
 
-export type CardIssuer = typeof CARD_ISSUERS[number]["value"] | null;
+export type CardIssuer = typeof CARD_ISSUERS[number]["value"];
 
 export type CardNumberSegments = [string, string, string, string]
 
@@ -12,7 +12,7 @@ export interface CardFormState {
   cardPassword: string;
   cardValidationCode: string;
   cardExpiryDate: CardExpiryDate
-  cardIssuer: CardIssuer;
+  cardIssuer: CardIssuer | null;
   cardNumberSegments: CardNumberSegments;
 };
 

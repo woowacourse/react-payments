@@ -1,5 +1,5 @@
 import { CARD_ISSUERS } from './constants';
-import type { CardNumberSegments, ValidationRule } from './types';
+import type { CardNetwork, CardNumberSegments, ValidationRule } from './types';
 
 export function validateDigits(input: string) {
   return /^\d+$/.test(input);
@@ -52,9 +52,14 @@ export function createDigitFieldValidations(length: number): ValidationRule[] {
   ]
 }
 
-export function getCardNetwork(cardNumberSegments: CardNumberSegments) {
+export function getCardNetwork(cardNumberSegments: CardNumberSegments): CardNetwork | null {
   if (cardNumberSegments[0].startsWith('4')) return 'VISA';
   if (/^(51|52|53|54|55)/.test(cardNumberSegments[0])) return 'MasterCard';
+  if (cardNumberSegments[0].startsWith('36')) return 'Diners';
+  if (/^(34|37)/.test(cardNumberSegments[0])) return 'AMEX';
+  if (/^(62[4-6])/.test(cardNumberSegments[0])) return 'UnionPay';
+  if (/^(628[2-8])/.test(cardNumberSegments[0])) return 'UnionPay';
+  if (/^(62212[6-9]|6221[3-9]\d|622[2-8]\d{2}|6229[01]\d|62292[0-5])/.test(cardNumberSegments.slice(0, 2).join(""))) return "UnionPay";
   return null;
 }
 

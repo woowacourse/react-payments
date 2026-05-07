@@ -7,7 +7,7 @@ const CardContainer = styled(Flex)`
   width: 100%;
 `;
 
-const Card = styled(Flex)<{ issuer: CardIssuer }>`
+const Card = styled(Flex)<{ issuer: CardIssuer | null }>`
   width: 212px;
   height: 132px;
   color: var(--color-white);
@@ -29,8 +29,8 @@ const CardText = styled.span`
 `;
 
 interface CardPrivewProps {
-  issuer: CardIssuer;
-  network: CardNetwork;
+  issuer: CardIssuer | null;
+  network: CardNetwork | null;
   numberSegments: CardNumberSegments;
   expiryDate: CardExpiryDate;
 }

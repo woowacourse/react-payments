@@ -1,4 +1,4 @@
-import type { CardExpiryDate, CardNumberSegments } from "../types";
+import { type CardExpiryDate, type CardNumberSegments } from "../types";
 import { createDigitFieldValidations, validateCardIssuer, validateDigits, validateMonth, validateStringMaxLength, validateYear } from "../utils";
 import useForm from "./useForm";
 
