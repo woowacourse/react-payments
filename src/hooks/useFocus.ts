@@ -26,7 +26,7 @@ const useFocus = () => {
   }, []);
 
   return {
-    activeElement: null,
+    activeElementRef: inputRefs,
     registerInputRef,
     setFocus,
     setNextFocus,
