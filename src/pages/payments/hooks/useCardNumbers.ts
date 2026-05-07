@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from 'react';
 
-import { isNumericString } from '@/core/utils/validator';
+import { isEmptyString, isNumericString } from '@/core/utils/validator';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
 
@@ -43,7 +43,7 @@ export const useCardNumbers = () => {
   // cardNumber --------------------------
 
   const preventCardNumber = (cardNumber: string) => {
-    if (cardNumber !== '' && !isNumericString(cardNumber)) return true;
+    if (!isEmptyString(cardNumber) && !isNumericString(cardNumber)) return true;
     if (cardNumber.length > 4) return true;
     return false;
   };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
-import { isNumericString } from '@/core/utils/validator';
+import { isEmptyString, isNumericString } from '@/core/utils/validator';
 
 import { validateExpirationDate } from '../validator';
 
@@ -47,14 +47,14 @@ export const useExpirationDate = () => {
   });
 
   const preventExpirationMonth = (month: string) => {
-    if (month !== '' && !isNumericString(month)) return true;
+    if (!isEmptyString(month) && !isNumericString(month)) return true;
     if (month.length > 2) return true;
 
     return false;
   };
 
   const preventExpirationYear = (year: string) => {
-    if (year !== '' && !isNumericString(year)) return true;
+    if (!isEmptyString(year) && !isNumericString(year)) return true;
     if (year.length > 2) return true;
 
     return false;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { type ChangeEvent } from 'react';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
-import { isNumericString } from '@/core/utils/validator';
+import { isEmptyString, isNumericString } from '@/core/utils/validator';
 
 import { validateCvc } from '../validator';
 
@@ -33,7 +33,7 @@ export const useCvc = () => {
   const [cvcInvalidAttemp, setCvcInvalidAttemp] = useState(false);
 
   const preventCvc = (cvc: string) => {
-    if (cvc !== '' && !isNumericString(cvc)) return true;
+    if (!isEmptyString(cvc) && !isNumericString(cvc)) return true;
     if (cvc.length > 3) return true;
 
     return false;
