@@ -44,7 +44,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    if (!runValidation([() => Validator.isNumber(value)], id)) return;
+    runValidation([() => Validator.isNumber(value)], id);
     setCardNumber({ ...cardNumber, [id]: value });
   };
 
@@ -52,24 +52,19 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const { value, id } = e.target;
-    if (
-      !runValidation(
-        [
-          () => Validator.isNumber(value),
-          () => Validator.isValidNetworkBrand(value),
-        ],
-        id,
-      )
-    )
-      return;
-
+    runValidation([() => Validator.isNumber(value)], id);
     setCardNumber({ ...cardNumber, [id]: value });
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    if (!runValidation([() => Validator.isValidCardNumberLength(value)], id))
-      return;
+    runValidation(
+      [
+        () => Validator.isValidCardNumberLength(value),
+        () => Validator.isValidNetworkBrand(value),
+      ],
+      id,
+    );
   };
 
   return (

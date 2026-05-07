@@ -1,32 +1,27 @@
 import styled from "@emotion/styled";
 import MasterCard from "../../assets/Mastercard.svg";
 import VisaCard from "../../assets/visa-logo.svg";
-import { NETWORK_BRAND_RULE } from "../../Constants";
+import UnionCard from "../../assets/unionpay-logo.svg";
+import { NetworkBrand } from "../../NetworkBrand";
 
 export function CardNetworkBrand({ cardNumber }) {
-  const getNetworkBrand = (cardNumber: string) => {
-    if (cardNumber.startsWith(NETWORK_BRAND_RULE.VISA_START_NUMBER))
-      return "visa";
-    if (
-      cardNumber.startsWith(NETWORK_BRAND_RULE.MASTER_START_NUMBER) &&
-      NETWORK_BRAND_RULE.MASTER_SECOND_NUMBER.includes(cardNumber[1])
-    )
-      return "master";
-  };
+  const fullCardNumber = Object.keys(cardNumber)
+    .map((key) => cardNumber[key])
+    .join("");
+  const networkBrandName = new NetworkBrand(fullCardNumber).name;
 
   const selectBrandImage = (brand: string): string | null => {
     if (brand === "visa") return VisaCard;
     if (brand === "master") return MasterCard;
+    if (brand === "union") return UnionCard;
   };
 
-  const networkBrand = getNetworkBrand(cardNumber["first-digits"]);
-
   return (
-    networkBrand && (
+    networkBrandName && (
       <CardNetworkBrandContainer>
         <img
-          src={selectBrandImage(networkBrand)}
-          alt={`${networkBrand}-network-brand-logo`}
+          src={selectBrandImage(networkBrandName)}
+          alt={`${networkBrandName}-network-brand-logo`}
         ></img>
       </CardNetworkBrandContainer>
     )

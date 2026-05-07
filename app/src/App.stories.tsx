@@ -43,6 +43,30 @@ export const MasterBrandDetection: Story = {
   },
 };
 
+export const UnionBrandDetection: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const firstDigitsInput =
+      canvasElement.querySelector<HTMLInputElement>("#first-digits")!;
+    const secondDigitsInput =
+      canvasElement.querySelector<HTMLInputElement>("#second-digits")!;
+    await userEvent.type(firstDigitsInput, "624");
+    let brandLogo = canvas.getByAltText("union-network-brand-logo");
+    await expect(brandLogo).toBeInTheDocument();
+
+    await userEvent.clear(firstDigitsInput);
+    await userEvent.type(firstDigitsInput, "6288");
+    brandLogo = canvas.getByAltText("union-network-brand-logo");
+    await expect(brandLogo).toBeInTheDocument();
+
+    await userEvent.clear(firstDigitsInput);
+    await userEvent.type(firstDigitsInput, "6223");
+    await userEvent.type(secondDigitsInput, "99");
+    brandLogo = canvas.getByAltText("union-network-brand-logo");
+    await expect(brandLogo).toBeInTheDocument();
+  },
+};
+
 export const CardNumberIsDynamicDisplay: Story = {
   play: async ({ canvasElement }) => {
     const firstDigitsInput = canvasElement.querySelector("#first-digits");

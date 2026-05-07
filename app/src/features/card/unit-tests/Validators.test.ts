@@ -13,19 +13,12 @@ describe("카드 정보 검증기 테스트", () => {
   });
 
   describe("카드번호 테스트", () => {
-    test("카드 번호는 네트워크 브랜드에 의해 4 또는 5로 시작해야 한다.", () => {
-      expect(() => Validator.isValidNetworkBrand("4")).not.toThrow();
-      expect(() => Validator.isValidNetworkBrand("5")).not.toThrow();
-      expect(() => Validator.isValidNetworkBrand("6")).toThrow(
-        "유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.",
+    test("네트워크 브랜드 형식에 해당하지 않는 카드 번호는 에러가 발생한다.", () => {
+      expect(() => Validator.isValidNetworkBrand("1")).toThrow(
+        "존재하지 않는 네트워크 브랜드 입니다.",
       );
-    });
-
-    test("마스터카드는 번호는 51 ~ 55 사이 숫자로 시작해야 한다.", () => {
-      expect(() => Validator.isValidNetworkBrand("51")).not.toThrow();
-      expect(() => Validator.isValidNetworkBrand("55")).not.toThrow();
-      expect(() => Validator.isValidNetworkBrand("56")).toThrow(
-        "마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.",
+      expect(() => Validator.isValidNetworkBrand("59")).toThrow(
+        "존재하지 않는 네트워크 브랜드 입니다.",
       );
     });
 

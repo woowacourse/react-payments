@@ -1,9 +1,5 @@
-import { CARD_INPUT, NETWORK_BRAND_RULE } from "../Constants";
-
-const VALID_NETWORK_BRAND_START_NUMBER = [
-  NETWORK_BRAND_RULE.VISA_START_NUMBER,
-  NETWORK_BRAND_RULE.MASTER_START_NUMBER,
-];
+import { CARD_INPUT } from "../Constants";
+import { NetworkBrand } from "../NetworkBrand";
 
 export const Validator = {
   isNumber(value: string) {
@@ -13,17 +9,9 @@ export const Validator = {
   },
 
   isValidNetworkBrand(value: string) {
-    if (value !== "" && !VALID_NETWORK_BRAND_START_NUMBER.includes(value[0])) {
-      throw new Error(
-        "유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.",
-      );
-    }
-    if (
-      value.length === 2 &&
-      value[0] === NETWORK_BRAND_RULE.MASTER_START_NUMBER &&
-      !NETWORK_BRAND_RULE.MASTER_SECOND_NUMBER.includes(value[1])
-    ) {
-      throw new Error("마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.");
+    const networkBrand = new NetworkBrand(value);
+    if (value !== "" && networkBrand.name === undefined) {
+      throw new Error("존재하지 않는 네트워크 브랜드 입니다.");
     }
   },
 
