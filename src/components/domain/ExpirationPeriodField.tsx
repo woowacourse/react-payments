@@ -43,7 +43,7 @@ const validates: Validate<ExpirationPeriodErrorStatus>[] = [
 ];
 
 export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
-  const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, PERIOD_LENGTH_PER_INPUT);
+  const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, [null, null]);
   const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
   const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
 

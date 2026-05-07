@@ -30,7 +30,7 @@ const validates: Validate<ErrorStatus>[] = [
 ];
 
 export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
-  const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, CARD_NUMBER_LENGTH_PER_INPUT);
+  const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, [null, null, null, null]);
   const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
   const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
 

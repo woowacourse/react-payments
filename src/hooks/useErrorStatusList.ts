@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import type { Validate } from '../types.ts';
 
-export const useErrorStatusList = <K>(validates: Validate<K>[], length: number) => {
-  const [errorStatusList, setErrorStatusList] = useState<K[]>(new Array(length).fill(null));
+export const useErrorStatusList = <T>(validates: Validate<T>[], initialState: T[]) => {
+  const [errorStatusList, setErrorStatusList] = useState<T[]>(initialState);
 
-  const setErrorStatus = (status: string, index: number) => {
+  const setErrorStatus = (status: T, index: number) => {
     setErrorStatusList((prev) => {
-      const updated = [...prev] as K[];
+      const updated = [...prev] as T[];
       updated[index] = status;
       return updated;
     });
