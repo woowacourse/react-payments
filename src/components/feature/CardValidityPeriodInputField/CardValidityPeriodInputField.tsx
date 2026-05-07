@@ -7,6 +7,7 @@ import { MONTH_MAX_LENGTH, YEAR_MAX_LENGTH } from "./constants";
 import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus, formatValidityPeriod } from "./utils";
+import useFocus from "@/hooks/useFocus";
 
 interface CardValidityPeriodInputFieldProps {
   validityPeriod: ValidityPeriod;
@@ -27,6 +28,7 @@ const CardValidityPeriodInputField = ({
   onChange,
 }: CardValidityPeriodInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
+  const { registerInputRef, setNextFocus } = useFocus();
 
   const handleValidityPeriodChange = (
     key: keyof ValidityPeriod,
@@ -36,18 +38,32 @@ const CardValidityPeriodInputField = ({
     setStatus((prev) => ({ ...prev, [key]: state }));
 
     if (state !== "DEFAULT") return;
-    onChange({ ...validityPeriod, [key]: formatValidityPeriod(value) });
+
+    const formattedValue = formatValidityPeriod(value);
+    onChange({ ...validityPeriod, [key]: formattedValue });
+
+    // TODO: check 함수 추출하기
+    if (
+      (key === "month" && value.length === MONTH_MAX_LENGTH) ||
+      (key === "month" &&
+        value.length < MONTH_MAX_LENGTH &&
+        +value !== 1 &&
+        +value !== 0)
+    ) {
+      setNextFocus();
+    }
   };
 
-  const handleValidityPeriodBlur = (key: keyof ValidityPeriod) => {
-    const input = validityPeriod[key];
-
-    if (input.length === 0)
+  const handleValidityPeriodBlur = (
+    key: keyof ValidityPeriod,
+    rawValue: string,
+  ) => {
+    if (rawValue.length === 0)
       return setStatus((prev) => ({ ...prev, [key]: "EMPTY" }));
 
-    const padded = padValidityPeriodUnit(input);
+    const padded = padValidityPeriodUnit(rawValue);
 
-    if (padded === input) return;
+    if (padded === rawValue) return;
     const state = checkCardNumberInputStatus(key, padded);
     setStatus((prev) => ({ ...prev, [key]: state }));
 
@@ -62,23 +78,26 @@ const CardValidityPeriodInputField = ({
       label="유효기간"
       inputPropsList={[
         {
+          ref: (el) => registerInputRef(0)(el),
           key: "month",
           placeholder: "MM",
           maxLength: MONTH_MAX_LENGTH,
           fullWidth: true,
           value: validityPeriod.month,
           onChange: (e) => handleValidityPeriodChange("month", e.target.value),
-          onBlur: () => handleValidityPeriodBlur("month"),
+          onBlur: (e) => handleValidityPeriodBlur("month", e.target.value),
           state: status.month === "DEFAULT" ? "default" : "error",
+          autoFocus: true,
         },
         {
+          ref: (el) => registerInputRef(1)(el),
           key: "year",
           placeholder: "YY",
           maxLength: YEAR_MAX_LENGTH,
           fullWidth: true,
           value: validityPeriod.year,
           onChange: (e) => handleValidityPeriodChange("year", e.target.value),
-          onBlur: () => handleValidityPeriodBlur("year"),
+          onBlur: (e) => handleValidityPeriodBlur("year", e.target.value),
           state: status.year === "DEFAULT" ? "default" : "error",
         },
       ]}
