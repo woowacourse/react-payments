@@ -158,9 +158,7 @@ export const MultipleErrorsInput: Story = {
     await userEvent.type(secondInput, "12");
     await userEvent.type(firstInput, "7");
     await expect(
-      canvas.queryByText(
-        "유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.",
-      ),
+      canvas.queryByText("존재하지 않는 네트워크 브랜드 입니다."),
     ).toBeInTheDocument();
     await expect(
       canvas.queryByText("카드 번호 각 항목은 4자리여야 합니다."),
