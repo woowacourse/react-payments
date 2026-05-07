@@ -2,23 +2,27 @@ import styled from "@emotion/styled";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import arrowDownIcon from "@/assets/arrowDownIcon.svg";
 import { useState } from "react";
+import { CARD_COMPANIES } from "@/constants/cardCompanies";
+import { type CardCompany } from "@/constants/cardCompanies";
 
-const CARD_COMPANIES = [
-  "BC카드",
-  "신한카드",
-  "카카오뱅크",
-  "현대카드",
-  "우리카드",
-  "롯데카드",
-  "하나카드",
-  "국민카드",
-];
+interface CardCompanySelectorProps {
+  cardCompany: CardCompany | null;
+  onSelect: (cardCompany: CardCompany) => void;
+}
 
-function CardCompanySelector() {
+function CardCompanySelector({
+  cardCompany,
+  onSelect,
+}: CardCompanySelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
+  };
+
+  const handleSelect = (company: CardCompany) => {
+    onSelect(company);
+    setIsOpen(false);
   };
 
   return (
@@ -26,15 +30,19 @@ function CardCompanySelector() {
       <Title>카드사를 선택해 주세요</Title>
       <Caption>현재 국내 카드사만 가능합니다.</Caption>
       <SelectButton type="button" onClick={handleToggle}>
-        <Placeholder>카드사를 선택해주세요</Placeholder>
+        <SelectedText state={cardCompany ? "selected" : "placeholder"}>
+          {cardCompany?.name ?? "카드사를 선택해주세요"}
+        </SelectedText>
         <ArrowIcon src={arrowDownIcon} alt="" />
       </SelectButton>
 
       {isOpen && (
         <OptionList>
           {CARD_COMPANIES.map((company) => (
-            <OptionItem key={company}>
-              <OptionButton type="button">{company}</OptionButton>
+            <OptionItem key={company.name}>
+              <OptionButton type="button" onClick={() => handleSelect(company)}>
+                {company.name}
+              </OptionButton>
             </OptionItem>
           ))}
         </OptionList>
@@ -74,8 +82,14 @@ const SelectButton = styled.button`
   }
 `;
 
-const Placeholder = styled.span`
-  color: ${COLOR_PALETTE.GREY};
+interface SelectedTextProps {
+  state?: "placeholder" | "selected";
+}
+
+const SelectedText = styled.span<SelectedTextProps>`
+  color: ${({ state }) =>
+    state === "placeholder" ? COLOR_PALETTE.GREY : COLOR_PALETTE["BLACK-900"]};
+
   font-weight: 400;
   font-size: 0.65rem;
 `;

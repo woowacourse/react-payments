@@ -7,6 +7,7 @@ import CardNumberInputField, {
 import CardValidityPeriodInputField, {
   type ValidityPeriod,
 } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import { type CardCompany } from "@/constants/cardCompanies";
 import styled from "@emotion/styled";
 import { detectCardBrand } from "@utils/card";
 import { useState } from "react";
@@ -16,6 +17,7 @@ const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
 
 const AddNewCardPage = () => {
   const [cardNumber, setCardNumber] = useState(DEFAULT_CARD_NUMBER_UNITS);
+  const [cardCompany, setCardCompany] = useState<CardCompany | null>(null);
   const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
   const [CVC, setCVC] = useState("");
 
@@ -35,7 +37,10 @@ const AddNewCardPage = () => {
             setCardNumber(input);
           }}
         />
-        <CardCompanySelector />
+        <CardCompanySelector
+          cardCompany={cardCompany}
+          onSelect={setCardCompany}
+        />
         <CardValidityPeriodInputField
           validityPeriod={validityPeriod}
           onChange={(input) => {
