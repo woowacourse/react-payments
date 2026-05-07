@@ -9,15 +9,15 @@ const CardCompanyOption = ({
   cardCompany: CardCompanyType;
 }) => {
   return (
-    <StyledButton type="button" onClick={onClick}>
+    <Button type="button" onClick={onClick}>
       {cardCompany}
-    </StyledButton>
+    </Button>
   );
 };
 
 export default CardCompanyOption;
 
-const StyledButton = styled.button`
+const Button = styled.button`
   width: 100%;
 
   &:hover {
