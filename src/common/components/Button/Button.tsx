@@ -36,7 +36,7 @@ const getButtonStyle = (size: ButtonSize) => {
     return css`
       width: 100%;
       height: 44px;
-      border-radius: 10px;
+      border-radius: 6px;
     `;
   }
 };

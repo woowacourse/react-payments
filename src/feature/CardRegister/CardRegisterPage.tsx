@@ -51,11 +51,11 @@ const CardRegisterPage = () => {
   );
 };
 
+export default CardRegisterPage;
+
 const CardRegisterPageLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
-
-export default CardRegisterPage;
