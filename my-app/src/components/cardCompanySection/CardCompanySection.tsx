@@ -4,6 +4,7 @@ import { useCardCompany } from './useCardCompany';
 import CommonSection from '../common/commonSection/CommonSection';
 import ChevronDown from '../../assets/ChevronDownIcon.svg';
 import ChevronUp from '../../assets/ChevronUpIcon.svg';
+import { DropdownButton, DropdownContainer, DropdownItem, DropdownList } from './CardCompanySection.styles';
 
 interface Props {
   value: CardCompany | '';
@@ -25,8 +26,8 @@ const CardCompanySection = ({ value, setValue }: Props) => {
       errorMessage=""
       htmlFor={cardCompanySelectId}
     >
-      <div>
-        <button id={cardCompanySelectId} onClick={toggleDropdown} type="button">
+      <DropdownContainer>
+        <DropdownButton id={cardCompanySelectId} onClick={toggleDropdown} type="button">
           <span style={{ color: value ? '#000000' : '#ACACAC' }}>
             {value || '카드사를 선택해주세요'}
           </span>
@@ -37,19 +38,19 @@ const CardCompanySection = ({ value, setValue }: Props) => {
               <img src={ChevronUp} alt="닫힌 상태" />
             )}
           </span>
-        </button>
+        </DropdownButton>
 
         {/* isOpen이 true일 떄만 list 렌더링 */}
         {isOpen && (
-          <ul>
+          <DropdownList>
             {CARD_COMPANIES.map((company) => (
-              <li key={company} onClick={() => handleChooseCompany(company)}>
+              <DropdownItem key={company} onClick={() => handleChooseCompany(company)}>
                 {company}
-              </li>
+              </DropdownItem>
             ))}
-          </ul>
+          </DropdownList>
         )}
-      </div>
+      </DropdownContainer>
     </CommonSection>
   );
 };
