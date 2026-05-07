@@ -7,6 +7,7 @@ const colors = {
   error: '#FF3D3D',
   cardBackground: '#333333',
   chipBackground: '#DDCD78',
+  completeText: '#353C49',
 };
 
 const typography = {
@@ -48,6 +49,16 @@ const typography = {
     leadingTrim: 'NONE',
     lineHeight: '20px',
     letterSpacing: '16%',
+    verticalAlign: 'middle',
+  },
+  mode: {
+    fontFamily: 'Noto Sans KR',
+    fontWeight: '700',
+    fontStyle: 'Bold',
+    fontSize: '15px',
+    leadingTrim: 'NONE',
+    lineHeight: '100%',
+    letterSpacing: '0%',
     verticalAlign: 'middle',
   },
 };
