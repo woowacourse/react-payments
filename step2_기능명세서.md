@@ -88,18 +88,18 @@ const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
 1. 브랜드 감지 시점
 
 - 첫 두자리 입력시 감지
-- 감지 시 매칭되는 브랜드 로고 preview 동기화
-- 감지 시 매칭되는 Input구조 렌더링
+- 감지 시 매칭되는 브랜드 로고 CardPreview 동기화
 
 2. 상태 구조
-   별도 InputWrapper를 만들어서 조건에 따라 렌더링
-   (DinersCardNumberInputWrapper, AMEXCardNumberInputWrapper)
 
-3. 브랜드 감지후 이미 입력한 값 처리
-   유저가 입력을 마친 후 첫 입력칸에 특정 브랜드 숫자를 기입하면 맞는 wrapper 렌더링
+- input 개수는 똑같이 4개로 고정 (CardNumberInputWrapper 공통 사용)
+- 어차피 최소 입력 개수 14개, 최대 16개니까 maxLength도 그대로 유지
 
-- [ ] 첫 2자리로 브랜드 감지
-- [ ] 브랜드 변경 시 first를 제외한 나머지 값 초기화
-- [ ] Diners: 4/6/4 InputWrapper (DinersCardNumberInputWrapper)
-- [ ] AMEX: 4/6/5 InputWrapper (AMEXCardNumberInputWrapper)
-- [ ] UnionPay: 기존 4/4/4/4 그대로
+3. 검증
+
+- Diners : onBlur 시점 총 길이가 14가 맞으면 통과
+- AMEX : onBlur 시점 총 길이가 15가 맞으면 통과
+- 유니온페이: 각 input상태를 공유하는 총 상태로 onBlur 시점 길이와 함께 판별
+  - 622126~622925로 시작하는 경우: 6221 2612 3456 7890
+  - 624~626로 시작하는 경우: 6240 1234 5678 9012
+  - 6282~6288로 시작하는 경우: 6282 1234 5678 9012

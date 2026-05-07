@@ -12,12 +12,10 @@ type Story = StoryObj<typeof CardFirmSelect>;
 
 export const Default: Story = {
   render: () => {
-    const [value, setValue] = useState("placeholder");
+    const [, setSelected] = useState({ value: "", label: "" });
     return (
       <CardFirmSelect
-        cardFrimCategory={value}
-        onChangeCardFirmCategory={setValue}
-        value={value}
+        onChangeCardFirmCategory={(value, label) => setSelected({ value, label })}
       />
     );
   },
