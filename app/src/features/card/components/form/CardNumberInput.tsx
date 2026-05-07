@@ -7,7 +7,7 @@ import { sanitizeErrors } from "../../../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
 export function CardNumberInput({ cardNumber, setCardNumber }) {
-  const [isError, setError] = useState({
+  const [fieldError, setFieldError] = useState({
     "first-digits": {
       state: false,
       message: "",
@@ -26,45 +26,51 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     },
   });
 
-  const runValidation = (validators: (() => void)[], id: string): boolean => {
+  const [networkBrandError, setNetworkBrandError] = useState({
+    state: false,
+    message: "",
+  });
+
+  const runFieldValidation = (
+    validators: (() => void)[],
+    id: string,
+  ): boolean => {
     try {
       validators.forEach((validate) => {
         validate();
       });
-      setError({ ...isError, [id]: { state: false, message: "" } });
+      setFieldError({ ...fieldError, [id]: { state: false } });
       return true;
     } catch (err) {
-      setError({
-        ...isError,
+      setFieldError({
+        ...fieldError,
         [id]: { state: true, message: (err as Error).message },
       });
       return false;
     }
   };
 
-  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
-    runValidation([() => Validator.isNumber(value)], id);
-    setCardNumber({ ...cardNumber, [id]: value });
+  const runNetworkBrandValidation = (value: string) => {
+    try {
+      Validator.isValidNetworkBrand(value);
+      setNetworkBrandError({ state: false, message: "" });
+    } catch (err) {
+      setNetworkBrandError({ state: true, message: (err as Error).message });
+    }
   };
 
-  const changeFirstDigitsCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    runValidation([() => Validator.isNumber(value)], id);
-    setCardNumber({ ...cardNumber, [id]: value });
+    const newCardNumber = { ...cardNumber, [id]: value };
+    const fullCardNumber = Object.values(newCardNumber).join("");
+    runFieldValidation([() => Validator.isNumber(value)], id);
+    runNetworkBrandValidation(fullCardNumber);
+    setCardNumber(newCardNumber);
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    runValidation(
-      [
-        () => Validator.isValidCardNumberLength(value),
-        () => Validator.isValidNetworkBrand(value),
-      ],
-      id,
-    );
+    runFieldValidation([() => Validator.isValidCardNumberLength(value)], id);
   };
 
   return (
@@ -76,10 +82,10 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["first-digits"]}
-          onChange={changeFirstDigitsCardNumber}
+          onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
-          isError={isError["first-digits"].state}
+          isError={fieldError["first-digits"].state}
         />
         <CardInput
           id="second-digits"
@@ -89,7 +95,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
-          isError={isError["second-digits"].state}
+          isError={fieldError["second-digits"].state}
         />
         <CardInput
           id="third-digits"
@@ -99,7 +105,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
-          isError={isError["third-digits"].state}
+          isError={fieldError["third-digits"].state}
         />
         <CardInput
           id="fourth-digits"
@@ -109,12 +115,12 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           onChange={changeCardNumber}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
-          isError={isError["fourth-digits"].state}
+          isError={fieldError["fourth-digits"].state}
         />
       </CardFieldset>
       <ErrorMessage
         messages={sanitizeErrors(
-          Object.keys(isError).map((key) => isError[key]["message"]),
+          Object.keys(fieldError).map((key) => fieldError[key]["message"]),
         )}
       />
     </>
