@@ -6,6 +6,7 @@ import { getCVCumberErrorMessage } from "../../utils/getCVCNumberErrorMessage";
 interface Props {
   setCVCNumber: (value: string) => void;
   value: string;
+  onComplete: (isCompleted: boolean) => void;
 }
 
 export default function CVCInputWrapper({ setCVCNumber, value }: Props) {

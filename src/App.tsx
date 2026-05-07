@@ -31,7 +31,13 @@ function App() {
       <InputSectionContainer>
         {isEXPCompleted && (
           <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
-            <CVCInputWrapper setCVCNumber={setCVC} value={cvc} />
+            <CVCInputWrapper
+              setCVCNumber={setCVC}
+              value={cvc}
+              onComplete={(isCompleted) => {
+                if (isCompleted) setIsEXPCompleted(true);
+              }}
+            />
           </CardInfoSection>
         )}
 
@@ -41,7 +47,13 @@ function App() {
             caption="월/년도(MMYY)를 순서대로 입력해 주세요"
             label="유효기간"
           >
-            <EXPInputWrapper setEXPNumber={setEXPNumbers} value={EXPNumbers} />
+            <EXPInputWrapper
+              setEXPNumber={setEXPNumbers}
+              value={EXPNumbers}
+              onComplete={(isCompleted) => {
+                if (isCompleted) setIsEXPCompleted(true);
+              }}
+            />
           </CardInfoSection>
         )}
 

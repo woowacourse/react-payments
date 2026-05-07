@@ -7,9 +7,14 @@ type EXPNumber = { mm: string; yy: string };
 interface Props {
   setEXPNumber: (value: EXPNumber) => void;
   value: EXPNumber;
+  onComplete: (isCompleted: boolean) => void;
 }
 
-export default function EXPInputWrapper({ setEXPNumber, value }: Props) {
+export default function EXPInputWrapper({
+  setEXPNumber,
+  value,
+  onComplete,
+}: Props) {
   const [inputErrors, setInputErrors] = useState<{
     mm: string | null;
     yy: string | null;
@@ -32,17 +37,24 @@ export default function EXPInputWrapper({ setEXPNumber, value }: Props) {
         <NumberInput
           key={`${expKey}-input`}
           value={expValue}
-          setValue={(newValue) =>
-            setEXPNumber({ ...value, [expKey]: newValue })
-          }
+          setValue={(newValue) => {
+            const newEXPNumbers = { ...value, [expKey]: newValue };
+            setEXPNumber(newEXPNumbers);
+            onComplete(
+              Object.values(newEXPNumbers).every(
+                (value) => value.length === 2,
+              ) && Object.values(inputErrors).every((err) => err === null),
+            );
+          }}
           placeholder={expKey === "mm" ? "MM" : "YY"}
           hasError={inputErrors[expKey as keyof EXPNumber] !== null}
           maxLength={2}
           onError={setError(expKey as keyof EXPNumber)}
           onBlur={() => {
             const result = getEXPNumberErrorMessage(value);
-            if (result && result.key === expKey)
-              setError(expKey as keyof EXPNumber)(result.message);
+            const message =
+              result && result.key === expKey ? result.message : null;
+            setError(expKey as keyof EXPNumber)(message);
           }}
           style={{ width: "152px" }}
         />
