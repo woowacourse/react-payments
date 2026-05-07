@@ -83,6 +83,8 @@ const ExpiryField = ({
 
     if (expiryType === 'month') {
       handleExpiryMonthChange(filledValue);
+
+      if (validateExpiryMonth(filledValue) === null) setMonthErrorMessage('');
     }
 
     if (expiryType === 'year') {
