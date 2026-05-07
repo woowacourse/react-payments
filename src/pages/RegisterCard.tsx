@@ -3,11 +3,18 @@ import CardInput from '../components/CardInput';
 import { useCardNumber } from '../hooks/useCardNumber';
 import { useExpiryDate } from '../hooks/useExpiryDate';
 import { useCardCvc } from '../hooks/useCardCvc';
+import { useState } from 'react';
+import type { CardIssuerType } from '../types/cardStausTypes';
 
 export default function RegisterCard() {
   const [cardStatus, setCardStatus] = useCardNumber();
   const [cardExpiry, setCardExpiry] = useExpiryDate();
   const [cardCvc, setCardCvc] = useCardCvc();
+  const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
+
+  const handleCardIssuer = (issuer: CardIssuerType) => {
+    setCardIssuer(issuer);
+  };
 
   return (
     <div
@@ -27,6 +34,7 @@ export default function RegisterCard() {
         cardNumbers={cardStatus.cardNumbers}
         cardExpiryDate={cardExpiry.cardExpiryDate}
         cardBrand={cardStatus.cardBrand}
+        cardIssuer={cardIssuer}
       />
       <CardInput
         cardStatus={cardStatus}
@@ -35,6 +43,8 @@ export default function RegisterCard() {
         setCardExpiry={setCardExpiry}
         cardCvc={cardCvc}
         setCardCvc={setCardCvc}
+        cardIssuer={cardIssuer}
+        handleCardIssuer={handleCardIssuer}
       />
     </div>
   );

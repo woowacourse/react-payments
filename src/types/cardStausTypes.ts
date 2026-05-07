@@ -33,3 +33,13 @@ export interface CvcHandler {
 }
 
 export type CardBrandType = 'visa' | 'master' | 'unknown';
+
+export type CardIssuerType =
+  | 'bcCard'
+  | 'shCard'
+  | 'kakaoCard'
+  | 'hyundaiCard'
+  | 'wooriCard'
+  | 'lotteCard'
+  | 'hanaCard'
+  | 'kbCard';

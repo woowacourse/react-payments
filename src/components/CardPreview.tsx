@@ -1,15 +1,32 @@
 import visa from '../assets/Visa.png';
 import master from '../assets/Mastercard.png';
 import { maskCardNumbers } from '../utils/maskCardNumbers';
-import type { CardBrandType } from '../types/cardStausTypes';
+import type { CardBrandType, CardIssuerType } from '../types/cardStausTypes';
 
 type CardPreviewProps = {
   cardBrand: CardBrandType;
   cardNumbers: string[];
   cardExpiryDate: string[];
+  cardIssuer?: CardIssuerType | '';
 };
 
-export default function CardPreview({ cardBrand, cardNumbers, cardExpiryDate }: CardPreviewProps) {
+const CARD_ISSUER_LABELS: Record<CardIssuerType, string> = {
+  bcCard: 'BC카드',
+  shCard: '신한카드',
+  kakaoCard: '카카오뱅크',
+  hyundaiCard: '현대카드',
+  wooriCard: '우리카드',
+  lotteCard: '롯데카드',
+  hanaCard: '하나카드',
+  kbCard: '국민카드',
+};
+
+export default function CardPreview({
+  cardBrand,
+  cardNumbers,
+  cardExpiryDate,
+  cardIssuer = '',
+}: CardPreviewProps) {
   const cardImgSrc: string | null =
     cardBrand === 'visa' ? visa : cardBrand === 'master' ? master : null;
 
@@ -18,7 +35,7 @@ export default function CardPreview({ cardBrand, cardNumbers, cardExpiryDate }: 
       css={(theme) => ({
         width: '212px',
         height: '132px',
-        backgroundColor: theme.colors.cardBackground,
+        backgroundColor: cardIssuer ? theme.colors[cardIssuer] : theme.colors.cardBackground,
         boxShadow: '3px 3px 5px 0px #00000040;',
         borderRadius: '4px',
         padding: '8px 12px 8px 12px',
@@ -77,6 +94,16 @@ export default function CardPreview({ cardBrand, cardNumbers, cardExpiryDate }: 
           })}
         >
           {cardExpiryDate[0].padStart(2, '0')}/{cardExpiryDate[1]}
+        </span>
+      )}
+      {cardIssuer && (
+        <span
+          css={(theme) => ({
+            ...theme.typography.caption,
+            color: theme.colors.white,
+          })}
+        >
+          {CARD_ISSUER_LABELS[cardIssuer]}
         </span>
       )}
     </div>

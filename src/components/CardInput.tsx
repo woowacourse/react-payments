@@ -8,6 +8,7 @@ import type {
   ExpireHandler,
   Cvc,
   CvcHandler,
+  CardIssuerType,
 } from '../types/cardStausTypes';
 import CardIssuer from './CardIssuer';
 
@@ -18,6 +19,8 @@ type CardInputProps = {
   setCardExpiry: ExpireHandler;
   cardCvc: Cvc;
   setCardCvc: CvcHandler;
+  cardIssuer: CardIssuerType | '';
+  handleCardIssuer: (issuer: CardIssuerType) => void;
 };
 
 export default function CardInput({
@@ -27,10 +30,14 @@ export default function CardInput({
   setCardExpiry,
   cardCvc,
   setCardCvc,
+  cardIssuer,
+  handleCardIssuer,
 }: CardInputProps) {
   return (
     <form css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {cardStatus.cardNumbers.join('').length === 16 && <CardIssuer />}
+      {cardStatus.cardNumbers.join('').length === 16 && (
+        <CardIssuer cardIssuer={cardIssuer} handleCardIssuer={handleCardIssuer} />
+      )}
       <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
       <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />
       <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />
