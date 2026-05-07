@@ -17,7 +17,8 @@ const CardRegisterPage = () => {
   ]);
   const [expiryMonth, setExpiryMonth] = useState("");
   const [expiryYear, setExpiryYear] = useState("");
-  const [selectedCardCompany, setSelectedCardCompany] = useState("");
+  const [selectedCardCompany, setSelectedCardCompany] =
+    useState<CardCompanyType | null>(null);
 
   const handleCardCompanyClick = (cardCompany: CardCompanyType) => {
     if (selectedCardCompany !== cardCompany) {
@@ -29,6 +30,7 @@ const CardRegisterPage = () => {
     cardNumbers,
     expiryMonth,
     expiryYear,
+    selectedCardCompany,
   };
 
   const cardInfoHandlers = {

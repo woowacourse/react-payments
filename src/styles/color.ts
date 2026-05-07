@@ -1,12 +1,15 @@
-export const cardColors = {
-  bc: "#F04651",
-  shinHan: "#0046FF",
-  kakao: "#FFE600",
-  hyundai: "#000000",
-  woori: "#007BC8",
-  lotte: "#ED1C24",
-  hana: "#009490",
-  kb: "#6A6056",
+import type { CardCompanyType } from "../common/types/CardCompany";
+
+export const cardColors: Record<CardCompanyType | "default", string> = {
+  default: "#333333",
+  BC카드: "#F04651",
+  신한카드: "#0046FF",
+  카카오뱅크: "#FFE600",
+  현대카드: "#000000",
+  우리카드: "#007BC8",
+  롯데카드: "#ED1C24",
+  하나카드: "#009490",
+  국민카드: "#6A6056",
 };
 
 export const colors = {

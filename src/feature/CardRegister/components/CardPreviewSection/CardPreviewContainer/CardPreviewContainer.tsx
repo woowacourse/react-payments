@@ -4,12 +4,21 @@ import CardBrandLogo from "../CardBrandLogo/CardBrandLogo";
 import CardExpiryDateDisplay from "../CardExpiryDateDisplay/CardExpiryDateDisplay";
 import CardNumberDisplay from "../CardNumberDisplay/CardNumberDisplay";
 import { getCardBrandName } from "../../../utils/cardBrand";
+import type { CardCompanyType } from "../../../../../common/types/CardCompany";
+import { cardColors } from "../../../../../styles/color";
 
+const getCardColor = (cardCompany: CardCompanyType | null) => {
+  if (!cardCompany) {
+    return cardColors.default;
+  }
+  return cardColors[cardCompany];
+};
 const CardPreviewContainer = ({ cardInfo }: { cardInfo: CardInfoType }) => {
-  const { cardNumbers, expiryMonth, expiryYear } = cardInfo;
+  const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
+    cardInfo;
 
   return (
-    <Container>
+    <Container $cardCompany={selectedCardCompany}>
       <CardHeader>
         <IcChip />
         <CardBrandLogo brandName={getCardBrandName(cardNumbers)} />
@@ -25,14 +34,14 @@ const CardPreviewContainer = ({ cardInfo }: { cardInfo: CardInfoType }) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ $cardCompany: CardCompanyType | null }>`
   display: flex;
   flex-direction: column;
   width: 212px;
   height: 132px;
   padding: 8px 10px;
   gap: 12px;
-  background-color: #333333;
+  background-color: ${(props) => getCardColor(props.$cardCompany)};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
