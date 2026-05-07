@@ -2,12 +2,17 @@ import { Global, ThemeProvider } from '@emotion/react';
 import RegisterCard from './pages/RegisterCard';
 import { theme } from './styles/theme';
 import { globalStyles } from './styles/globalStyles';
+import CardRegistrationComplete from './pages/CardRegistrationComplete';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Global styles={globalStyles} />
-      <RegisterCard />
+      <Routes>
+        <Route path="/" element={<RegisterCard />} />
+        <Route path="/complete" element={<CardRegistrationComplete />} />
+      </Routes>
     </ThemeProvider>
   );
 }
