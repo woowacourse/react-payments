@@ -12,6 +12,7 @@ import CardCompanySelectField from "./CardCompanySelectField/CardCompanySelectFi
 import type { CardCompanyType } from "../../../../common/types/CardCompany";
 import PasswordField from "./PasswordField/PasswordField";
 import Button from "../../../../common/components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const InfoInputSection = ({
   cardInfo,
@@ -22,6 +23,7 @@ const InfoInputSection = ({
   cardInfoHandlers: CardInfoHandlersType;
   handleCardCompanyClick: (cardCompany: CardCompanyType) => void;
 }) => {
+  const navigate = useNavigate();
   const [cvcNumber, setCvcNumber] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState({
@@ -75,8 +77,18 @@ const InfoInputSection = ({
     setFormError({ ...formError, [fieldName]: hasError });
   };
 
+  const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate("/register-complete", {
+      state: {
+        firstCardNumberChunk: cardNumbers[0],
+        cardCompany: selectedCardCompany,
+      },
+    });
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleCardInfoSubmit}>
       {formStep >= 5 && (
         <InputContainer
           title="비밀번호를 입력해 주세요"
@@ -144,7 +156,11 @@ const InfoInputSection = ({
           />
         </InputContainer>
       )}
-      {isFormComplete && <Button size="full">확인</Button>}
+      {isFormComplete && (
+        <Button size="full" type="submit">
+          확인
+        </Button>
+      )}
     </Form>
   );
 };
