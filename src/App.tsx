@@ -6,6 +6,7 @@ import CardNumberInputWrapper from "./components/InputWrapper/CardNumberInputWra
 import EXPInputWrapper from "./components/InputWrapper/EXPInputWrapper";
 import CVCInputWrapper from "./components/InputWrapper/CVCInputWrapper";
 import CardFirmSelect from "./components/CardFirmSelect/CardFirmSelect";
+import PassWordInputWrapper from "./components/PassWord/PassWordInputWrapper";
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState({
@@ -17,9 +18,11 @@ function App() {
   const [EXPNumbers, setEXPNumbers] = useState({ mm: "", yy: "" });
   const [cvc, setCVC] = useState("");
   const [cardFirm, setCardFirm] = useState({ value: "", label: "" });
+  const [passWord, setPassword] = useState("");
 
   const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
   const [isEXPCompleted, setIsEXPCompleted] = useState(false);
+  const [isCVCCompleted, setIsCVCCompleted] = useState(false);
 
   return (
     <MainContainer>
@@ -29,13 +32,28 @@ function App() {
         cardFirm={cardFirm}
       />
       <InputSectionContainer>
+        {isCVCCompleted && (
+          <CardInfoSection
+            title="비밀번호를 입력해 주세요"
+            caption="앞의 2자리를 입력해주세요"
+            label="비밀번호 앞 2자리"
+          >
+            <PassWordInputWrapper
+              setPassWord={setPassword}
+              value={passWord}
+              onComplete={(isCompleted) => {
+                if (isCompleted) setIsCVCCompleted(true);
+              }}
+            />
+          </CardInfoSection>
+        )}
         {isEXPCompleted && (
           <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
             <CVCInputWrapper
               setCVCNumber={setCVC}
               value={cvc}
               onComplete={(isCompleted) => {
-                if (isCompleted) setIsEXPCompleted(true);
+                if (isCompleted) setIsCVCCompleted(true);
               }}
             />
           </CardInfoSection>

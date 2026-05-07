@@ -1,36 +1,28 @@
 import { useState } from "react";
 import NumberInput from "../Input/NumberInput";
-import InputGroup from "./InputGroup";
-import { getCVCNumberErrorMessage } from "../../utils/getCVCNumberErrorMessage";
+import InputGroup from "../InputWrapper/InputGroup";
+import { getPassWordErrorMessage } from "../../utils/getPassWordErrorMessage";
 
 interface Props {
-  setCVCNumber: (value: string) => void;
+  setPassWord: (value: string) => void;
   value: string;
   onComplete: (isCompleted: boolean) => void;
 }
 
-export default function CVCInputWrapper({
-  setCVCNumber,
-  value,
-  onComplete,
-}: Props) {
+export default function PassWordInputWrapper({ setPassWord, value }: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
   return (
     <InputGroup errorMessage={inputError}>
       <NumberInput
         value={value}
-        setValue={(newValue) => {
-          const newCVCNumber = newValue;
-          setCVCNumber(newCVCNumber);
-          onComplete(newCVCNumber.length === 3 && inputError === null);
-        }}
+        setValue={setPassWord}
         placeholder="123"
         hasError={inputError !== null}
-        maxLength={3}
+        maxLength={2}
         onError={setInputError}
         onBlur={() => {
-          setInputError(getCVCNumberErrorMessage(value));
+          setInputError(getPassWordErrorMessage(value));
         }}
         style={{ width: "315px" }}
       />
