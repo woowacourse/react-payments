@@ -18,13 +18,13 @@ import {
 const ExpiryField = ({
   expiryMonth,
   expiryYear,
-  setExpiryMonth,
-  setExpiryYear,
+  handleExpiryMonthChange,
+  handleExpiryYearChange,
 }: {
   expiryMonth: string;
   expiryYear: string;
-  setExpiryMonth: (value: string) => void;
-  setExpiryYear: (value: string) => void;
+  handleExpiryMonthChange: (month: string) => void;
+  handleExpiryYearChange: (year: string) => void;
 }) => {
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: [expiryMonth, expiryYear],
@@ -51,7 +51,7 @@ const ExpiryField = ({
     }
 
     setMonthErrorMessage('');
-    setExpiryMonth(value);
+    handleExpiryMonthChange(value);
   };
 
   const handleYearChange = (eValue: string) => {
@@ -60,7 +60,7 @@ const ExpiryField = ({
     if (!isNumeric(value)) return;
     if (!isWithinMaxLength(value, EXPIRY_LENGTH)) return;
 
-    setExpiryYear(value);
+    handleExpiryYearChange(value);
   };
 
   const fillZero = (value: string, expiryType: 'month' | 'year'): string => {
@@ -82,11 +82,11 @@ const ExpiryField = ({
     const filledValue = fillZero(eValue, expiryType);
 
     if (expiryType === 'month') {
-      setExpiryMonth(filledValue);
+      handleExpiryMonthChange(filledValue);
     }
 
     if (expiryType === 'year') {
-      setExpiryYear(filledValue);
+      handleExpiryYearChange(filledValue);
     }
 
     touch(index);

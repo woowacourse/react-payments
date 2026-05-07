@@ -10,10 +10,10 @@ import {
 
 const NumberField = ({
   cardNumbers,
-  setCardNumbers,
+  handleCardNumbersChange,
 }: {
   cardNumbers: string[];
-  setCardNumbers: (value: string[]) => void;
+  handleCardNumbersChange: (value: string[]) => void;
 }) => {
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: cardNumbers,
@@ -29,7 +29,7 @@ const NumberField = ({
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? value : chunk,
     );
-    setCardNumbers(newChunks);
+    handleCardNumbersChange(newChunks);
   };
 
   const handleNumbersBlur = (index: number) => {

@@ -1,3 +1,5 @@
+import type { CardBrandId } from './CardPreview';
+
 export type CardPreviewInfoType = {
   cardNumbers: string[];
   expiryMonth: string;
@@ -6,7 +8,8 @@ export type CardPreviewInfoType = {
 };
 
 export type CardFormHandlersType = {
-  setCardNumbers: (value: string[]) => void;
-  setExpiryMonth: (value: string) => void;
-  setExpiryYear: (value: string) => void;
+  handleCardNumbersChange: (cardNumbers: string[]) => void;
+  handleExpiryMonthChange: (expiryMonth: string) => void;
+  handleExpiryYearChange: (expiryYear: string) => void;
+  handleCardBrandChange: (cardBrandId: CardBrandId | null) => void;
 };

@@ -9,6 +9,7 @@ import type {
 import styled from 'styled-components';
 import FieldSection from './FieldSection';
 import { hasCardFormError } from '../../utils/cardFormValidator';
+import SelectCardBrandField from './SelectCardBrandField';
 
 const InfoInputSection = ({
   cardPreviewInfo,
@@ -19,8 +20,13 @@ const InfoInputSection = ({
 }) => {
   const [cvcNumber, setCvcNumber] = useState('');
 
-  const { cardNumbers, expiryMonth, expiryYear } = cardPreviewInfo;
-  const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardFormHandlers;
+  const { cardNumbers, expiryMonth, expiryYear, cardBrandId } = cardPreviewInfo;
+  const {
+    handleCardNumbersChange,
+    handleExpiryMonthChange,
+    handleExpiryYearChange,
+    handleCardBrandChange,
+  } = cardFormHandlers;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -46,7 +52,7 @@ const InfoInputSection = ({
       >
         <NumberField
           cardNumbers={cardNumbers}
-          setCardNumbers={setCardNumbers}
+          handleCardNumbersChange={handleCardNumbersChange}
         />
       </FieldSection>
       <FieldSection
@@ -56,12 +62,18 @@ const InfoInputSection = ({
         <ExpiryField
           expiryMonth={expiryMonth}
           expiryYear={expiryYear}
-          setExpiryMonth={setExpiryMonth}
-          setExpiryYear={setExpiryYear}
+          handleExpiryMonthChange={handleExpiryMonthChange}
+          handleExpiryYearChange={handleExpiryYearChange}
         />
       </FieldSection>
       <FieldSection title="CVC 번호를 입력해 주세요">
         <CvcField cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
+      </FieldSection>
+      <FieldSection
+        title="카드사를 선택해 주세요"
+        description="현재 국내 카드사만 가능합니다."
+      >
+        <SelectCardBrandField handleCardBrandChange={handleCardBrandChange} />
       </FieldSection>
     </Container>
   );
