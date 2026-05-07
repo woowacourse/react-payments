@@ -18,6 +18,9 @@ function App() {
   const [cvc, setCVC] = useState("");
   const [cardFirm, setCardFirm] = useState({ value: "", label: "" });
 
+  const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
+  const [isEXPCompleted, setIsEXPCompleted] = useState(false);
+
   return (
     <MainContainer>
       <CardPreview
@@ -26,16 +29,21 @@ function App() {
         cardFirm={cardFirm}
       />
       <InputSectionContainer>
-        <CardInfoSection
-          title="카드사를 선택해 주세요"
-          caption="현재 국내 카드사만 가능합니다."
-        >
-          <CardFirmSelect
-            onChangeCardFirmCategory={(value) =>
-              setCardFirm({ value, label: "" })
-            }
-          />
-        </CardInfoSection>
+        {isEXPCompleted && (
+          <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
+            <CVCInputWrapper setCVCNumber={setCVC} value={cvc} />
+          </CardInfoSection>
+        )}
+
+        {isCardNumberCompleted && (
+          <CardInfoSection
+            title="카드 유효기간을 입력해 주세요"
+            caption="월/년도(MMYY)를 순서대로 입력해 주세요"
+            label="유효기간"
+          >
+            <EXPInputWrapper setEXPNumber={setEXPNumbers} value={EXPNumbers} />
+          </CardInfoSection>
+        )}
 
         {cardFirm.value && (
           <CardInfoSection
@@ -46,22 +54,22 @@ function App() {
             <CardNumberInputWrapper
               setCardNumber={setCardNumbers}
               value={cardNumbers}
+              onComplete={(isCompleted) => {
+                if (isCompleted) setIsCardNumberCompleted(true);
+              }}
             />
           </CardInfoSection>
         )}
 
-        {
-          <CardInfoSection
-            title="카드 유효기간을 입력해 주세요"
-            caption="월/년도(MMYY)를 순서대로 입력해 주세요"
-            label="유효기간"
-          >
-            <EXPInputWrapper setEXPNumber={setEXPNumbers} value={EXPNumbers} />
-          </CardInfoSection>
-        }
-
-        <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
-          <CVCInputWrapper setCVCNumber={setCVC} value={cvc} />
+        <CardInfoSection
+          title="카드사를 선택해 주세요"
+          caption="현재 국내 카드사만 가능합니다."
+        >
+          <CardFirmSelect
+            onChangeCardFirmCategory={(value) =>
+              setCardFirm({ value, label: "" })
+            }
+          />
         </CardInfoSection>
       </InputSectionContainer>
     </MainContainer>

@@ -12,11 +12,13 @@ type CardNumbers = {
 interface Props {
   setCardNumber: (value: CardNumbers) => void;
   value: CardNumbers;
+  onComplete: (isCompleted: boolean) => void;
 }
 
 export default function CardNumberInputWrapper({
   setCardNumber,
   value,
+  onComplete,
 }: Props) {
   const [inputErrors, setInputErrors] = useState<{
     first: string | null;
@@ -46,17 +48,24 @@ export default function CardNumberInputWrapper({
         <NumberInput
           key={`${cardKey}-input`}
           value={cardValue}
-          setValue={(newValue) =>
-            setCardNumber({ ...value, [cardKey]: newValue })
-          }
+          setValue={(newValue) => {
+            const newCardNumbers = { ...value, [cardKey]: newValue };
+            setCardNumber(newCardNumbers);
+            onComplete(
+              Object.values(newCardNumbers).every(
+                (value) => value.length === 4,
+              ) && Object.values(inputErrors).every((err) => err === null),
+            );
+          }}
           placeholder="1234"
           hasError={inputErrors[cardKey as keyof CardNumbers] !== null}
           maxLength={4}
           onError={setError(cardKey as keyof CardNumbers)}
           onBlur={() => {
             const result = getCardNumberErrorMessage(value);
-            if (result && result.key === cardKey)
-              setError(cardKey as keyof CardNumbers)(result.message);
+            const message =
+              result && result.key === cardKey ? result.message : null;
+            setError(cardKey as keyof CardNumbers)(message);
           }}
           style={{ width: "71px" }}
         />
