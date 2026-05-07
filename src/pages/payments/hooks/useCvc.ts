@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { type ChangeEvent } from 'react';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
-import { isEmptyString, isNumericString } from '@/core/utils/validator';
 
-import { validateCvc } from '../validator';
+import { validateCvc, preventCvc } from '../validator';
 
 export const useCvc = () => {
   const {
@@ -32,13 +31,6 @@ export const useCvc = () => {
 
   const [cvcInvalidAttemp, setCvcInvalidAttemp] = useState(false);
 
-  const preventCvc = (cvc: string) => {
-    if (!isEmptyString(cvc) && !isNumericString(cvc)) return true;
-    if (cvc.length > 3) return true;
-
-    return false;
-  };
-
   const renderErrorMessageCvc = () => {
     if (cvcInvalidAttemp) return '유효한 CVC(숫자)를 입력해주세요';
     if (!blurCvc) return '';
@@ -58,7 +50,6 @@ export const useCvc = () => {
     errors,
 
     invalidAttemp: cvcInvalidAttemp,
-    prevent: preventCvc,
     renderErrorMessage: renderErrorMessageCvc,
   };
 };

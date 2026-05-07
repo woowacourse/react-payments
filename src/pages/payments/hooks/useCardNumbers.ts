@@ -1,10 +1,8 @@
 import { useState, type ChangeEvent } from 'react';
 
-import { isEmptyString, isNumericString } from '@/core/utils/validator';
-
 import { useFormValues } from '@/core/hooks/useFormValues';
 
-import { validateCardNumbers } from '../validator';
+import { validateCardNumbers, preventCardNumber } from '../validator';
 
 export const useCardNumbers = () => {
   const {
@@ -41,12 +39,6 @@ export const useCardNumbers = () => {
 
   const [cardNumbersInvalidAttemp, setCardNumbersInvalidAttemp] = useState([false, false, false, false]);
   // cardNumber --------------------------
-
-  const preventCardNumber = (cardNumber: string) => {
-    if (!isEmptyString(cardNumber) && !isNumericString(cardNumber)) return true;
-    if (cardNumber.length > 4) return true;
-    return false;
-  };
 
   const renderErrorMessageCardNumbers = () => {
     if (cardNumbersInvalidAttemp.find(Boolean)) return '유효현 카드번호(숫자)를 입력해주세요';

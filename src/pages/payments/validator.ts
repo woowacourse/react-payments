@@ -3,6 +3,8 @@ import type { ExpirationDate } from './types';
 import { validateFormValuesRules } from '@/core/hooks/validateFormValueRules';
 import type { Rule, FormValuesRules } from '@/core/hooks/validateFormValueRules';
 
+import { isEmptyString, isNumericString } from '@/core/utils/validator';
+
 type CardNumbers = {
   [key in '0' | '1' | '2' | '3']: string;
 };
@@ -24,6 +26,12 @@ export const validateCardNumbers = (cardNumbers: CardNumbers) => {
   return validateFormValuesRules(cardNumbers, rules);
 };
 
+export const preventCardNumber = (cardNumber: string) => {
+  if (!isEmptyString(cardNumber) && !isNumericString(cardNumber)) return true;
+  if (cardNumber.length > 4) return true;
+  return false;
+};
+
 export const validateExpirationDate = (expirationDate: ExpirationDate) => {
   const rules = {
     month: [
@@ -42,6 +50,20 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
   return validateFormValuesRules(expirationDate, rules);
 };
 
+export const preventExpirationMonth = (month: string) => {
+  if (!isEmptyString(month) && !isNumericString(month)) return true;
+  if (month.length > 2) return true;
+
+  return false;
+};
+
+export const preventExpirationYear = (year: string) => {
+  if (!isEmptyString(year) && !isNumericString(year)) return true;
+  if (year.length > 2) return true;
+
+  return false;
+};
+
 export const validateCvc = ({ cvc }: { cvc: string }) => {
   const rules = {
     cvc: [
@@ -52,4 +74,11 @@ export const validateCvc = ({ cvc }: { cvc: string }) => {
   } satisfies FormValuesRules<{ cvc: string }>;
 
   return validateFormValuesRules({ cvc }, rules);
+};
+
+export const preventCvc = (cvc: string) => {
+  if (!isEmptyString(cvc) && !isNumericString(cvc)) return true;
+  if (cvc.length > 3) return true;
+
+  return false;
 };
