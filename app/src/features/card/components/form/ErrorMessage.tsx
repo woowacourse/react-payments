@@ -17,7 +17,7 @@ const ErrorMessageList = styled.ul`
   flex-direction: column;
   list-style: none;
   padding-left: 0;
-  margin: 0.4rem 0;
+  margin-top: 0.4rem;
 `;
 
 const ErrorMessageItem = styled.li`

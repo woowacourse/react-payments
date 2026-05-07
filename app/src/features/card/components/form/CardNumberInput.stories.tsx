@@ -49,24 +49,13 @@ export const InvalidInput: Story = {
   },
 };
 
-export const InvalidCardNumber: Story = {
+export const InvalidNetworkBrandCardNumber: Story = {
   args: defaultArgs,
   render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole("textbox");
     await userEvent.type(firstInput, "1");
-    await userEvent.tab();
-  },
-};
-
-export const InvalidMastercard: Story = {
-  args: defaultArgs,
-  render: renderWithState,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const [firstInput] = canvas.getAllByRole("textbox");
-    await userEvent.type(firstInput, "56");
     await userEvent.tab();
   },
 };

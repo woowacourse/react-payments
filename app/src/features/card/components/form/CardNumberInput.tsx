@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
+import NetworkBrandErrorMessage from "./NetworkBrandErrorMessage";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
 import { sanitizeErrors } from "../../../../Utils";
@@ -118,6 +119,9 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           isError={fieldError["fourth-digits"].state}
         />
       </CardFieldset>
+      <NetworkBrandErrorMessage
+        message={networkBrandError["message"]}
+      ></NetworkBrandErrorMessage>
       <ErrorMessage
         messages={sanitizeErrors(
           Object.keys(fieldError).map((key) => fieldError[key]["message"]),
