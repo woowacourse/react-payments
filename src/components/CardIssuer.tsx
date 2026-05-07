@@ -41,7 +41,7 @@ export default function CardIssuer({ cardIssuer, handleCardIssuer }: CardIssuerP
           height: '32px',
           border: `1px solid ${theme.colors.inactiveBorder}`,
           borderRadius: '3px',
-          color: theme.colors.inactiveBorder,
+          color: cardIssuer ? theme.colors.black : theme.colors.inactiveBorder,
 
           '&:focus': {
             borderColor: theme.colors.black,
