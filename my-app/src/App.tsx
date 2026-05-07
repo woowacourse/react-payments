@@ -7,10 +7,11 @@ import { AppContainer, FormLayout, SubmitButton } from './App.styles';
 import { getCardBrand, getCardNumberArrayByBrand } from './utils/Validation';
 import CardCompanySection from './components/cardCompanySection/CardCompanySection';
 import PasswordSection from './components/passwordSection/PasswordSection';
+import type { CardCompany } from './components/cardCompanySection/CardCompanyConstants';
 
 function App() {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [cardCompany, setCardCompany] = useState('');
+  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
+  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
   const [cvc, setCvc] = useState('');
   const [password, setPassword] = useState('');
