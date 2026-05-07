@@ -43,10 +43,10 @@ export const DropdownList = styled.ul`
 export const DropdownItem = styled.li`
   padding: 8px;
   font-size: 11px;
-  color: #4F4F4F;
+  color: #4f4f4f;
   background-color: #ffffff;
 
   &:hover {
-    background-color: #ACACAC;
+    background-color: #acacac;
   }
 `;
