@@ -7,6 +7,7 @@ import EXPInputWrapper from "./components/InputWrapper/EXPInputWrapper";
 import CVCInputWrapper from "./components/InputWrapper/CVCInputWrapper";
 import CardFirmSelect from "./components/CardFirmSelect/CardFirmSelect";
 import PassWordInputWrapper from "./components/PassWord/PassWordInputWrapper";
+import CheckBtn from "./components/button/CheckBtn";
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState({
@@ -23,6 +24,7 @@ function App() {
   const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
   const [isEXPCompleted, setIsEXPCompleted] = useState(false);
   const [isCVCCompleted, setIsCVCCompleted] = useState(false);
+  const [isPassWordCompleted, setIsPassWordCompleted] = useState(false);
 
   return (
     <MainContainer>
@@ -31,6 +33,7 @@ function App() {
         EXP={EXPNumbers}
         cardFirm={cardFirm}
       />
+
       <InputSectionContainer>
         {isCVCCompleted && (
           <CardInfoSection
@@ -42,7 +45,7 @@ function App() {
               setPassWord={setPassword}
               value={passWord}
               onComplete={(isCompleted) => {
-                if (isCompleted) setIsCVCCompleted(true);
+                if (isCompleted) setIsPassWordCompleted(true);
               }}
             />
           </CardInfoSection>
@@ -102,6 +105,7 @@ function App() {
           />
         </CardInfoSection>
       </InputSectionContainer>
+      {isPassWordCompleted && <CheckBtn />}
     </MainContainer>
   );
 }
@@ -121,7 +125,10 @@ const MainContainer = styled.main`
   align-items: center;
   gap: 45px;
   padding: 40px 20px;
+  width: 376px;
   min-height: 100vh;
   overflow-y: auto;
   box-sizing: border-box;
+  margin: 0 auto;
+  border: 0.5px solid #e0e0e0;
 `;

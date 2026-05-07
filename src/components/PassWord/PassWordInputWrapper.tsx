@@ -9,7 +9,11 @@ interface Props {
   onComplete: (isCompleted: boolean) => void;
 }
 
-export default function PassWordInputWrapper({ setPassWord, value }: Props) {
+export default function PassWordInputWrapper({
+  setPassWord,
+  value,
+  onComplete,
+}: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
   return (
@@ -17,7 +21,11 @@ export default function PassWordInputWrapper({ setPassWord, value }: Props) {
       <NumberInput
         type="password"
         value={value}
-        setValue={setPassWord}
+        setValue={(newValue) => {
+          const newPassWord = newValue;
+          setPassWord(newPassWord);
+          onComplete(newPassWord.length === 2 && inputError === null);
+        }}
         placeholder="123"
         hasError={inputError !== null}
         maxLength={2}
