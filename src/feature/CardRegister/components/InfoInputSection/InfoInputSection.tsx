@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import CvcField from './CvcField/CvCField';
-import ExpiryField from './ExpiryField/ExpiryField';
-import NumberField from './NumberField/NumberField';
+import CvcField from './CvCField';
+import ExpiryField from './ExpiryField';
+import NumberField from './NumberField';
 import type {
   CardFormHandlersType,
   CardPreviewInfoType,
 } from '../../../../common/types/CardPreviewInfoType';
 import styled from 'styled-components';
-import FieldSection from './FieldSection/FieldSection';
+import FieldSection from './FieldSection';
 import { hasCardFormError } from '../../utils/cardFormValidator';
 
 const InfoInputSection = ({
@@ -18,14 +18,9 @@ const InfoInputSection = ({
   cardFormHandlers: CardFormHandlersType;
 }) => {
   const [cvcNumber, setCvcNumber] = useState('');
-  // const [isError, setIsError] = useState(false);
 
   const { cardNumbers, expiryMonth, expiryYear } = cardPreviewInfo;
   const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardFormHandlers;
-
-  // if (isError) {
-  //   console.log('error');
-  // }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

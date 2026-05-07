@@ -1,22 +1,21 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
-import Label from './Label';
+import Title from '../../../common/components/Title/Title';
 
 const meta = {
-  title: 'common/components/Label',
-  component: Label,
+  title: 'common/components/Title',
+  component: Title,
   tags: ['autodocs'],
   args: {
-    // props
     value: '',
   },
-} satisfies Meta<typeof Label>;
+} satisfies Meta<typeof Title>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: 'LabelTest',
+    value: 'titleTest',
   },
 };

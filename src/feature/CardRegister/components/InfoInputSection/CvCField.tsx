@@ -1,12 +1,12 @@
-import Label from '../../../../../common/components/Label/Label';
-import Input from '../../../../../common/components/Input/Input';
+import Label from '../../../../common/components/Label/Label';
+import Input from '../../../../common/components/Input/Input';
 import styled from 'styled-components';
-import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
-import { isWithinMaxLength, isNumeric } from '../../../utils/validator';
+import useFieldValidation from '../../../../common/hooks/useFieldValidation';
+import { isWithinMaxLength, isNumeric } from '../../utils/validator';
 import {
   CVC_LENGTH,
   validateCvcNumber,
-} from '../../../utils/cardFormValidator';
+} from '../../utils/cardFormValidator';
 
 const CvcField = ({
   cvcNumber,

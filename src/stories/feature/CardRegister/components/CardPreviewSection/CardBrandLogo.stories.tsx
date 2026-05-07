@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
-import CardBrandLogo from './CardBrandLogo';
+import CardBrandLogo from '../../../../../feature/CardRegister/components/CardPreviewSection/CardBrandLogo';
 
 const meta = {
   title: 'feature/CardRegister/components/CardBrandLogo',

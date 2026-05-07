@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
-import ExpiryField from './ExpiryField';
+import ExpiryField from '../../../../../feature/CardRegister/components/InfoInputSection/ExpiryField';
 
 const meta = {
   title: 'feature/CardRegister/components/ExpiryField',

@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
-import CardExpiryDateDisplay from './CardExpiryDateDisplay';
+import CardExpiryDateDisplay from '../../../../../feature/CardRegister/components/CardPreviewSection/CardExpiryDateDisplay';
 
 const meta = {
   title: 'feature/CardRegister/components/CardExpiryDateDisplay',

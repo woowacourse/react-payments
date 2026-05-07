@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import type {CardPreviewInfoType} from '../../../../../common/types/CardPreviewInfoType';
-import CardBrandLogo from '../CardBrandLogo/CardBrandLogo';
-import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDisplay';
-import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
+import type {CardPreviewInfoType} from '../../../../common/types/CardPreviewInfoType';
+import CardBrandLogo from './CardBrandLogo';
+import CardExpiryDateDisplay from './CardExpiryDateDisplay';
+import CardNumberDisplay from './CardNumberDisplay';
 
 const CardPreviewContainer = ({
   cardPreviewInfo,

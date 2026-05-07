@@ -1,12 +1,12 @@
-import Input from '../../../../../common/components/Input/Input';
-import Label from '../../../../../common/components/Label/Label';
+import Input from '../../../../common/components/Input/Input';
+import Label from '../../../../common/components/Label/Label';
 import styled from 'styled-components';
-import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
-import { isWithinMaxLength, isNumeric } from '../../../utils/validator';
+import useFieldValidation from '../../../../common/hooks/useFieldValidation';
+import { isWithinMaxLength, isNumeric } from '../../utils/validator';
 import {
   NUMBER_LENGTH,
   validateCardNumber,
-} from '../../../utils/cardFormValidator';
+} from '../../utils/cardFormValidator';
 
 const NumberField = ({
   cardNumbers,

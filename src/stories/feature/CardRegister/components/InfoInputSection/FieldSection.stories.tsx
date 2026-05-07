@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Input from '../../../../../common/components/Input/Input';
-import FieldSection from './FieldSection';
+import FieldSection from '../../../../../feature/CardRegister/components/InfoInputSection/FieldSection';
 
 const meta = {
   title: 'feature/CardRegister/components/FieldSection',

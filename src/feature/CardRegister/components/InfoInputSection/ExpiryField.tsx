@@ -1,19 +1,19 @@
-import Label from '../../../../../common/components/Label/Label';
-import Input from '../../../../../common/components/Input/Input';
+import Label from '../../../../common/components/Label/Label';
+import Input from '../../../../common/components/Input/Input';
 import styled from 'styled-components';
-import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
+import useFieldValidation from '../../../../common/hooks/useFieldValidation';
 import {
   isWithinMaxLength,
   isExactLength,
   isNumeric,
   isValidMonth,
-} from '../../../utils/validator';
+} from '../../utils/validator';
 import { useState } from 'react';
 import {
   EXPIRY_LENGTH,
   validateExpiryMonth,
   validateExpiryYear,
-} from '../../../utils/cardFormValidator';
+} from '../../utils/cardFormValidator';
 
 const ExpiryField = ({
   expiryMonth,

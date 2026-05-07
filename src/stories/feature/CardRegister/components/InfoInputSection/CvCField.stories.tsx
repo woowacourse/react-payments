@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
-import CvcField from './CvCField';
+import CvcField from '../../../../../feature/CardRegister/components/InfoInputSection/CvCField';
 
 const meta = {
   title: 'feature/CardRegister/components/CvcField',

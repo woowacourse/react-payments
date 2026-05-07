@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
-import CardPreviewSection from './CardPreviewSection';
+import CardPreviewSection from '../../../../../feature/CardRegister/components/CardPreviewSection/CardPreviewSection';
 
 const meta = {
   title: 'feature/CardRegister/components/CardPreviewSection',

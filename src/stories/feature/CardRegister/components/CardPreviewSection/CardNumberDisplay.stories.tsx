@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
-import CardNumberDisplay from './CardNumberDisplay';
+import CardNumberDisplay from '../../../../../feature/CardRegister/components/CardPreviewSection/CardNumberDisplay';
 
 const meta = {
   title: 'feature/CardRegister/components/CardNumberDisplay',
