@@ -41,29 +41,21 @@ const CardRegisterPage = () => {
 
   return (
     <CardRegisterPageLayout>
-      <Container>
-        <CardPreviewSection cardInfo={cardInfo} />
-        <InfoInputSection
-          cardInfo={cardInfo}
-          cardInfoHandlers={cardInfoHandlers}
-          handleCardCompanyClick={handleCardCompanyClick}
-        />
-      </Container>
+      <CardPreviewSection cardInfo={cardInfo} />
+      <InfoInputSection
+        cardInfo={cardInfo}
+        cardInfoHandlers={cardInfoHandlers}
+        handleCardCompanyClick={handleCardCompanyClick}
+      />
     </CardRegisterPageLayout>
   );
 };
 
 const CardRegisterPageLayout = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-`;
-
-const Container = styled.div`
-  max-width: 376px;
-  max-height: 700px;
 `;
 
 export default CardRegisterPage;
