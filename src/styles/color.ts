@@ -8,3 +8,11 @@ export const cardColors = {
   hana: "#009490",
   kb: "#6A6056",
 };
+
+export const colors = {
+  border: {
+    default: "#ACACAC",
+    error: "#FF3D3D",
+    focus: "#000000",
+  },
+};
