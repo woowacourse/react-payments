@@ -3,7 +3,7 @@ export const COLOR_PALETTE = {
   LABEL: "#0a0d13",
   CAPTION: "#8b95a1",
   YELLOW: "#ddcd78",
-  GREY: "#acacac",
+  GRAY: "#acacac",
   "BLACK-900": "#000000",
   "BLACK-800": "#333",
   WHITE: "#ffffff",

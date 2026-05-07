@@ -10,10 +10,10 @@ const Input = styled.input<InputProps>`
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
   border: 1px solid
     ${({ state }) =>
-      state === "error" ? COLOR_PALETTE.ERROR : COLOR_PALETTE.GREY};
+      state === "error" ? COLOR_PALETTE.ERROR : COLOR_PALETTE.GRAY};
   border-radius: 2px;
   &::placeholder {
-    color: ${COLOR_PALETTE.GREY};
+    color: ${COLOR_PALETTE.GRAY};
   }
   padding: 8px;
   &:focus {
