@@ -10,7 +10,7 @@ interface Props {
 
 export default function CardNumberSection({ field }: Props) {
   const { value: cardNumber, set: setCardNumber } = field;
-  const { error, handleChange } = useCardNumber(cardNumber);
+  const { error, validate } = useCardNumber(cardNumber);
 
   return (
     <Section>
@@ -26,7 +26,7 @@ export default function CardNumberSection({ field }: Props) {
             maxLength={4}
             value={cardNumber[index]}
             onChange={(e) => {
-              const updatedCardNumber = handleChange(e, index);
+              const updatedCardNumber = validate(e, index);
               if (updatedCardNumber) setCardNumber(updatedCardNumber);
             }}
             inputMode="numeric"

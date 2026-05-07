@@ -4,7 +4,7 @@ import { validateCardNumberLength, validateNumber } from "../validator";
 export function useCardNumber(cardNumber: string[]) {
   const [error, setError] = useState("");
 
-  const handleChange = (
+  const validate = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ): string[] | null => {
@@ -25,5 +25,5 @@ export function useCardNumber(cardNumber: string[]) {
     return updatedCardNumber;
   };
 
-  return { error, handleChange };
+  return { error, validate };
 }
