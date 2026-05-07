@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import type { CardCompanyType } from "../../../../../../../common/types/CardCompany";
 
 const CardCompanyOption = ({
@@ -8,10 +9,18 @@ const CardCompanyOption = ({
   cardCompany: CardCompanyType;
 }) => {
   return (
-    <button type="button" onClick={onClick}>
+    <StyledButton type="button" onClick={onClick}>
       {cardCompany}
-    </button>
+    </StyledButton>
   );
 };
 
 export default CardCompanyOption;
+
+const StyledButton = styled.button`
+  width: 100%;
+
+  &:hover {
+    background-color: #ededed;
+  }
+`;
