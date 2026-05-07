@@ -1,22 +1,23 @@
 import { css } from "@emotion/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { CardInfo } from "../types";
 import Card from "../components/Card/Card";
 import CardNumberInputSection from "../components/CardNumberInputSection/CardNumberInputSection";
 import ExpiryDateInputSection from "../components/ExpiryDateInputSection/ExpiryDateInputSection";
+// import CardCompanySelectorSection from "../components/CardCompanySelectSection/CardCompanySelectSection"
 import CvcInputSection from "../components/CvcInputSection/CvcInputSection";
 import { decideBrandName } from "../utils/decideBrandName";
+import { getMaxLength } from "../utils/getMaxLength";
 
 const CardFormPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: "", brand: "" });
-
-  useEffect(() => {
-    const brandName = decideBrandName(cardInfo.numbers[0]);
-    setCardInfo((prev) => ({ ...prev, brand: brandName }));
-  }, [cardInfo.numbers[0]]);
+  const brand = decideBrandName(cardInfo.numbers[0] ?? "");
+  const maxLength = getMaxLength(brand);
+  const isCardNumberCompleted = cardInfo.numbers.join("").length === maxLength;
+  const CardCompanySelectSection = () => <div />
 
   const cardNumberHandler = (numbers: string[]) => {
-    setCardInfo((prev) => ({ ...prev, numbers }));
+    setCardInfo((prev) => ({ ...prev, numbers, brand }));
   };
 
   const expiryHandler = (expiry: string[]) => {
@@ -27,12 +28,15 @@ const CardFormPage = () => {
     setCardInfo((prev) => ({ ...prev, cvc }));
   };
 
+  const isSupportedBrand = decideBrandName(cardInfo.numbers[0] ?? "") !== "";
+
   return (
     <main css={pageStyle}>
       <div css={formContainerStyle}>
         <Card cardInfo={cardInfo} />
         <div css={sectionsStyle}>
-          <CardNumberInputSection onValueHandler={cardNumberHandler} />
+          <CardNumberInputSection onValueHandler={cardNumberHandler} maxLength={maxLength} isSupportedBrand={isSupportedBrand} />
+          {isCardNumberCompleted && <CardCompanySelectSection />}
           <ExpiryDateInputSection onValueHandler={expiryHandler} />
           <CvcInputSection onValueHandler={cvcHandler} />
         </div>

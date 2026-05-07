@@ -1,7 +1,6 @@
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 import { useState } from "react";
-import { decideBrandName } from "../../utils/decideBrandName";
 import { inputStyle } from "../../styles/inputStyle";
 
 const NUMERIC_REGEX = /^\d+$/;
@@ -10,9 +9,11 @@ const CARD_NUMBER_FIELD_COUNT = 4;
 
 type CardNumberInputSectionProps = {
   onValueHandler: (cardInfo: string[], brand?: string) => void;
+  maxLength: number;
+  isSupportedBrand: boolean;
 };
 
-const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps) => {
+const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedBrand }: CardNumberInputSectionProps) => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
@@ -32,9 +33,7 @@ const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps)
       if (!NUMERIC_REGEX.test(value)) {
         return { index: i, message: "숫자만 입력 가능합니다" };
       }
-      if (i === 0 && decideBrandName(value) === "") {
-        return { index: i, message: "이 카드 브랜드는 지원하지 않습니다." };
-      }
+      if (i === 0 && !isSupportedBrand) return { index: i, message: "이 카드 브랜드는 지원하지 않습니다." };
     }
     return { index: -1, message: "" };
   };
@@ -44,6 +43,8 @@ const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps)
     setErrorIndex(index);
     setErrorMessage(message);
   };
+
+  const lastInputMaxLength = maxLength - (CARD_NUMBER_MAX_LENGTH * (CARD_NUMBER_FIELD_COUNT - 1));
 
   return (
     <InputSectionLayout
@@ -55,7 +56,7 @@ const CardNumberInputSection = ({ onValueHandler }: CardNumberInputSectionProps)
         {Array.from({ length: CARD_NUMBER_FIELD_COUNT }, (_, i) => (
           <input
             key={i}
-            maxLength={CARD_NUMBER_MAX_LENGTH}
+            maxLength={i === CARD_NUMBER_FIELD_COUNT - 1 ? lastInputMaxLength : CARD_NUMBER_MAX_LENGTH}
             inputMode="numeric"
             value={inputValues[i] || ""}
             onChange={(e) => onChange(i, e.target.value)}
