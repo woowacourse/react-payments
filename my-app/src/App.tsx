@@ -3,7 +3,7 @@ import CardPreview from './components/cardPreview/CardPreview';
 import CardNumberSection from './components/cardNumberSection/CardNumberSection';
 import ExpirationDateSection from './components/expirationDateSection/ExpirationDateSection';
 import CvcSection from './components/cvcSection/CvcSection';
-import { AppContainer, FormLayout } from './App.styles';
+import { AppContainer, FormLayout, SubmitButton } from './App.styles';
 import { getCardBrand, getCardNumberArrayByBrand } from './utils/Validation';
 import CardCompanySection from './components/cardCompanySection/CardCompanySection';
 import PasswordSection from './components/passwordSection/PasswordSection';
@@ -98,9 +98,9 @@ function App() {
         <CardNumberSection value={cardNumber} setValue={setCardNumber} />
 
         {maxStep >= 5 && (
-          <button type="submit" disabled={!isFormValid}>
+          <SubmitButton type="submit" disabled={!isFormValid}>
             확인
-          </button>
+          </SubmitButton>
         )}
       </FormLayout>
     </AppContainer>
