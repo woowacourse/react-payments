@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within, expect } from '@storybook/test';
-import App from './App';
+import CardAddPage from './CardAddPage';
 
-const meta: Meta<typeof App> = {
+const meta: Meta<typeof CardAddPage> = {
   title: 'Pages/PaymentApp',
-  component: App,
+  component: CardAddPage,
   parameters: {
     layout: 'fullscreen',
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof App>;
+type Story = StoryObj<typeof CardAddPage>;
 
 // 빈 화면
 export const Default: Story = {};
