@@ -1,5 +1,6 @@
-import InputField from "@/components/common/InputField";
 import type { ValidityPeriod } from "@/types/card";
+import InputField from "@components/common/InputField";
+import useFocus from "@hooks/useFocus";
 import { padValidityPeriodUnit } from "@utils/card";
 import { useState } from "react";
 
@@ -7,7 +8,6 @@ import { MONTH_MAX_LENGTH, YEAR_MAX_LENGTH } from "./constants";
 import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus, formatValidityPeriod } from "./utils";
-import useFocus from "@/hooks/useFocus";
 
 interface CardValidityPeriodInputFieldProps {
   validityPeriod: ValidityPeriod;
