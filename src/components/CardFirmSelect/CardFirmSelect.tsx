@@ -9,9 +9,7 @@ import Select from "react-select";
 // 국민카드 #6A6056
 
 interface Props {
-  cardFrimCategory: string;
   onChangeCardFirmCategory: (value: string) => void;
-  value: string;
 }
 
 const CARD_OPTIONS = [
@@ -34,7 +32,11 @@ export default function CardFirmSelect({ onChangeCardFirmCategory }: Props) {
         placeholder="카드사를 선택해주세요"
         styles={{
           control: (base) => ({ ...base, width: 315, height: 31 }),
-          menu: (base) => ({ ...base, width: 315, height: 31 }),
+          menu: (base) => ({
+            ...base,
+            width: 315,
+          }),
+          menuList: (base) => ({ ...base, backgroundColor: "#ffffff" }),
           option: (base) => ({
             ...base,
             fontSize: 11,

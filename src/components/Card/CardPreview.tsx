@@ -6,13 +6,24 @@ import Visa from "../../../public/Visa.svg";
 interface Props {
   cardNumbers: { first: string; second: string; third: string; fourth: string };
   EXP: { mm: string; yy: string };
+  cardFirm: { value: string; label: string };
 }
 const BRAND_LOGO = { visa: Visa, master: Mastercard };
-
-export default function CardPreview({ cardNumbers, EXP }: Props) {
+const CARD_COLORS: Record<string, string> = {
+  BC: "#F04651",
+  신한: "#0046FF",
+  카뱅: "#FFE600",
+  현대: "#000000",
+  우리: "#007BC8",
+  롯데: "#ED1C24",
+  하나: "#009490",
+  국민: "#6A6056",
+};
+export default function CardPreview({ cardNumbers, EXP, cardFirm }: Props) {
   const cardBrand = getCardBrand(cardNumbers);
+  const cardColor = CARD_COLORS[cardFirm.value] ?? "#333333";
   return (
-    <CardPreviewContainer>
+    <CardPreviewContainer cardColor={cardColor}>
       <IcChip />
       <CardBrandLogo>
         {cardBrand && <CardBrandImage src={BRAND_LOGO[cardBrand]} />}
@@ -39,12 +50,12 @@ export default function CardPreview({ cardNumbers, EXP }: Props) {
   );
 }
 
-const CardPreviewContainer = styled.div`
+const CardPreviewContainer = styled.div<{ cardColor: string }>`
   width: 212px;
   height: 132px;
   position: relative;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${({ cardColor }) => cardColor};
   box-shadow: 3px 3px 5px 0px #00000040;
 `;
 

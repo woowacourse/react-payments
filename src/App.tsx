@@ -5,6 +5,7 @@ import CardPreview from "./components/Card/CardPreview";
 import CardNumberInputWrapper from "./components/InputWrapper/CardNumberInputWrapper";
 import EXPInputWrapper from "./components/InputWrapper/EXPInputWrapper";
 import CVCInputWrapper from "./components/InputWrapper/CVCInputWrapper";
+import CardFirmSelect from "./components/CardFirmSelect/CardFirmSelect";
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState({
@@ -14,13 +15,22 @@ function App() {
     fourth: "",
   });
   const [EXPNumbers, setEXPNumbers] = useState({ mm: "", yy: "" });
-
   const [cvc, setCVC] = useState("");
+  const [cardFirm, setCardFirm] = useState({ value: "", label: "" });
 
   return (
     <MainContainer>
-      <CardPreview cardNumbers={cardNumbers} EXP={EXPNumbers} />
+      <CardPreview
+        cardNumbers={cardNumbers}
+        EXP={EXPNumbers}
+        cardFirm={cardFirm}
+      />
       <InputSectionContainer>
+        <CardFirmSelect
+          onChangeCardFirmCategory={(value) =>
+            setCardFirm({ value, label: "" })
+          }
+        />
         <CardInfoSection
           title="결제할 카드 번호를 입력해 주세요"
           caption="본인 명의의 카드만 결제 가능합니다."
