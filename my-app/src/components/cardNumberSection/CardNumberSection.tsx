@@ -10,7 +10,7 @@ interface Props {
 
 const CardNumberSection = ({ value, setValue }: Props) => {
   const cardNumberIds = useId();
-  const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } = useCardNumber({value, setValue});
+  const { format, errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } = useCardNumber({value, setValue});
 
   return (
     <CommonSection
@@ -20,16 +20,16 @@ const CardNumberSection = ({ value, setValue }: Props) => {
       errorMessage={finalErrorMessage}
       htmlFor={`${cardNumberIds}-0`}
     >
-      {value.map((num, index) => (
+      {format.map((maxLength, index) => (
         <NumberInput
           key={index}
           id={`${cardNumberIds}-${index}`}
           ref={(el) => {inputRefs.current[index] = el;}}
-          value={num}
+          value={value[index] || ''}
           onChange={(v) => handleOnChange(v, index)}
-          onBlur={(v)=>handleOnBlur(v, index)}
-          placeholder="1234"
-          maxLength={4}
+          onBlur={(v) => handleOnBlur(v, index)}
+          placeholder={index === 0 ? "1234" : ""}
+          maxLength={maxLength}
           isError={errors[index]}
         />
       ))}

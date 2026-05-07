@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { getCardNumberError, isInputValidate } from "../../utils/Validation";
+import { getCardBrand, getCardNumberArrayByBrand, getCardNumberError, isInputValidate } from "../../utils/Validation";
 
 
 interface Props {
@@ -10,20 +10,33 @@ interface Props {
 export const useCardNumber = ({value, setValue}: Props) => {
   const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const currentBrand = getCardBrand(value.join(''));
+  const cardNumberArray = getCardNumberArrayByBrand(currentBrand);
     
   const handleOnChange = (inputValue: string, index: number) => {
-    if (!isInputValidate(inputValue, 4)) return;
+    if (!isInputValidate(inputValue, cardNumberArray[index])) return;
 
-    const newValue = [...value];
+    let newValue = [...value];
     newValue[index] = inputValue;
-    setValue(newValue);
 
-    if (inputValue.length === 4 && index < 3) {
+    const newBrand = getCardBrand(newValue.join(''));
+    const newCardFormat = getCardNumberArrayByBrand(newBrand);
+
+    // 현재 값과 새로 입력된 값으로 인해 브랜드가 달라진다면, 배열 길이를 가변적으로 변경시키고, 바뀌지 않은 칸의 데이터는 남겨둬야 함
+    if (newValue.length !== newCardFormat.length) {
+      newValue = newCardFormat.map((_, index) => newValue[index] || '');
+    }
+
+    setValue(newValue);
+    
+    // 각 칸의 최대길이에 마주쳤을 때만 포커스 이동
+    if (inputValue.length === newCardFormat[index] && index < newCardFormat.length - 1) {
       inputRefs.current[index + 1]?.focus();
     }
   };
 
-  const handleOnBlur = (inputValue:string, index: number) => {
+  const handleOnBlur = (inputValue: string, index: number) => {
     const isError = getCardNumberError(inputValue) !== '';
     setErrors((prev) => {
       const newErrors = [...prev];
@@ -36,6 +49,7 @@ export const useCardNumber = ({value, setValue}: Props) => {
   const finalErrorMessage = errorIndex !== -1 ? getCardNumberError(value[errorIndex]) : '';
 
   return {
+    format: cardNumberArray,
     errors,
     inputRefs,
     handleOnChange,
