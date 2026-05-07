@@ -75,8 +75,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
             return { ...prev, [fieldName]: newArray };
           });
 
-          const isCompleteRule = fieldValidations.find((v) => v.type === 'isComplete');
-          if (isCompleteRule?.validator(event.target.value)) {
+          if (fieldValidations.every((v) => v.validator(event.target.value))) {
             const nextRef = (refs[fieldName] as RefObject<HTMLElement>[])[index + 1];
             if (nextRef) {
               nextRef.current?.focus();
@@ -125,9 +124,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
         setValues((prev) => ({ ...prev, [fieldName]: event.target.value }));
         setErrors((prev) => ({ ...prev, [fieldName]: null }));
 
-        const isCompleteRule = fieldValidations.find((v) => v.type === 'isComplete');
-
-        if (isCompleteRule?.validator(event.target.value)) {
+        if (fieldValidations.every((v) => v.validator(event.target.value))) {
           onComplete?.();
         }
       },
@@ -153,8 +150,8 @@ export default function useForm<T extends Record<string, (string | null) | (stri
         ...prev,
         [fieldName]: {
           isValid: isArrayField
-            ? fieldValue.map((el, index) => el && (validations[fieldName as keyof T] as ValidationRule[][])[index].filter((v) => v.type !== 'isComplete').every((v) => v.validator(el)))
-            : fieldValue && (validations[fieldName as keyof T] as ValidationRule[]).filter((v) => v.type !== 'isComplete').every((v) => v.validator(fieldValue)),
+            ? fieldValue.map((el, index) => el && (validations[fieldName as keyof T] as ValidationRule[][])[index].every((v) => v.validator(el)))
+            : fieldValue && (validations[fieldName as keyof T] as ValidationRule[]).every((v) => v.validator(fieldValue)),
         }
       };
     }, {});

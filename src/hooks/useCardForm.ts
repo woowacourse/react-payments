@@ -1,5 +1,5 @@
 import type { CardExpiryDate, CardNumberSegments } from "../types";
-import { createDigitFieldValidations, validateCardIssuer, validateCVC, validateDigits, validateMonth, validateStringMaxLength, validateYear } from "../utils";
+import { createDigitFieldValidations, validateCardIssuer, validateDigits, validateMonth, validateStringMaxLength, validateYear } from "../utils";
 import useForm from "./useForm";
 
 export default function useCardForm() {
@@ -17,10 +17,6 @@ export default function useCardForm() {
       ],
       cardValidationCode: [
         ...createDigitFieldValidations(3),
-        {
-          type: 'isComplete',
-          validator: validateCVC
-        }
       ],
       cardExpiryDate: [
         [
@@ -30,20 +26,12 @@ export default function useCardForm() {
             validator: validateMonth,
             message: '유효한 월을 입력해주세요. (01 ~ 12)',
           },
-          {
-            type: 'isComplete',
-            validator: validateMonth,
-          },
         ], [
           ...createDigitFieldValidations(2),
           {
             type: 'onBlur',
             validator: validateYear,
             message: '유효한 년도를 입력해주세요. (00 ~ 99)',
-          },
-          {
-            type: 'isComplete',
-            validator: validateYear,
           },
         ],
       ],
@@ -53,33 +41,11 @@ export default function useCardForm() {
           validator: validateCardIssuer,
           message: "카드사를 선택해주세요"
         },
-        {
-          type: 'isComplete',
-          validator: validateCardIssuer,
-        }
       ],
       cardNumberSegments: [
-        [
-          ...createDigitFieldValidations(4),
-          {
-            type: 'isComplete',
-            validator: (v) => v.length === 4
-          }
-        ],
-        [
-          ...createDigitFieldValidations(4),
-          {
-            type: 'isComplete',
-            validator: (v) => v.length === 4
-          }
-        ],
-        [
-          ...createDigitFieldValidations(4),
-          {
-            type: 'isComplete',
-            validator: (v) => v.length === 4
-          }
-        ],
+        [...createDigitFieldValidations(4)],
+        [...createDigitFieldValidations(4)],
+        [...createDigitFieldValidations(4)],
         [
           {
             type: 'onChange',
@@ -96,10 +62,6 @@ export default function useCardForm() {
             validator: (v) => v.length >= 2,
             message: '2자리 이상 입력해주세요.'
           },
-          {
-            type: 'isComplete',
-            validator: (v) => v.length >= 2
-          }
         ],
       ],
 
