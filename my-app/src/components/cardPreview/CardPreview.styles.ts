@@ -8,6 +8,7 @@ interface CardContainerProps {
 export const CardContainer = styled.div<CardContainerProps>`
   display: flex;
   flex-direction: column;
+  margin: 50px;
   gap: 14px;
   padding: 8px 12px;
   width: 212px;

@@ -4,9 +4,8 @@ export const AppContainer = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 40px;
+  overflow: hidden;
 `;
 
 export const FormLayout = styled.form`
@@ -15,6 +14,12 @@ export const FormLayout = styled.form`
   align-items: center;
   gap: 16px;
   padding-bottom: 52px;
+  flex: 1;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const SubmitButton = styled.button`
