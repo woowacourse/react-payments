@@ -1,3 +1,4 @@
+import type { CardCompany } from '../cardCompanySection/CardCompanyConstants';
 import CardBrandImage from './cardBrandImage/CardBrandImage';
 import {
   CardChip,
@@ -11,11 +12,12 @@ import EachCardNumber from './eachCardNumber/EachCardNumber';
 interface Props {
   cardNumber: string[];
   expirationDate: { month: string; year: string };
+  cardCompany: CardCompany | '';
 }
 
-export default function CardPreview({ cardNumber, expirationDate }: Props) {
+export default function CardPreview({ cardNumber, expirationDate, cardCompany }: Props) {
   return (
-    <CardContainer>
+    <CardContainer company={cardCompany || 'Default'}>
       <CardHeader>
         <CardChip />
         <CardBrandImage cardNumber={cardNumber[0]} />
