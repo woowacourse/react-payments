@@ -16,8 +16,9 @@ const NumberField = ({
   const INPUT_COUNT = 4;
   const NUMBER_LENGTH = 4;
 
-  const [errorInfo, setErrorInfo] = useState<{flag: boolean[]; currentErrorMsg: string}>({
+  const [errorInfo, setErrorInfo] = useState<{flag: boolean[]; messages: string[]; currentErrorMsg: string}>({
     flag: createFlags(INPUT_COUNT),
+    messages: Array(INPUT_COUNT).fill(''),
     currentErrorMsg: '',
   });
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(INPUT_COUNT));
@@ -36,7 +37,7 @@ const NumberField = ({
   const ERROR_MSG = '카드 번호 4자리를 입력해 주세요';
 
   const updateErrorInfo = (index: number, hasError: boolean) => {
-    const next = computeNextErrorInfo(errorInfo.flag, index, hasError, ERROR_MSG);
+    const next = computeNextErrorInfo(errorInfo.flag, errorInfo.messages, index, hasError, ERROR_MSG);
     setErrorInfo(next);
     setIsError(next.hasAnyError);
   };

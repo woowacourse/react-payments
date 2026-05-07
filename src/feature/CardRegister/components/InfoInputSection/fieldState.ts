@@ -5,11 +5,14 @@ export const computeNextTouched = (prev: boolean[], index: number) =>
 
 export const computeNextErrorInfo = (
   prevFlag: boolean[],
+  prevMessages: string[],
   index: number,
   hasError: boolean,
   errorMsg: string,
 ) => {
   const flag = prevFlag.map((f, i) => (i === index ? hasError : f));
-  const hasAnyError = flag.some(Boolean);
-  return {flag, currentErrorMsg: hasAnyError ? errorMsg : '', hasAnyError};
+  const messages = prevMessages.map((m, i) => (i === index ? (hasError ? errorMsg : '') : m));
+  const firstErrorIdx = flag.indexOf(true);
+  const hasAnyError = firstErrorIdx !== -1;
+  return {flag, messages, currentErrorMsg: hasAnyError ? messages[firstErrorIdx] : '', hasAnyError};
 };

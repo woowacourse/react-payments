@@ -19,8 +19,9 @@ const ExpiryField = ({
 }) => {
   const INPUT_COUNT = 2;
 
-  const [errorInfo, setErrorInfo] = useState<{flag: boolean[]; currentErrorMsg: string}>({
+  const [errorInfo, setErrorInfo] = useState<{flag: boolean[]; messages: string[]; currentErrorMsg: string}>({
     flag: createFlags(INPUT_COUNT),
+    messages: Array(INPUT_COUNT).fill(''),
     currentErrorMsg: '',
   });
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(INPUT_COUNT));
@@ -50,6 +51,7 @@ const ExpiryField = ({
     clearErrorWhenComplete(index, value, 'year');
   };
   const ERROR_MSG = '2자리를 입력해 주세요';
+  const INVALID_MONTH_MSG = '01~12 사이의 월을 입력해 주세요';
 
   const isValidMonth = (value: string) => {
     const month = Number(value);
@@ -79,8 +81,8 @@ const ExpiryField = ({
     return value.length === 2;
   };
 
-  const updateErrorInfo = (index: number, hasError: boolean) => {
-    const next = computeNextErrorInfo(errorInfo.flag, index, hasError, ERROR_MSG);
+  const updateErrorInfo = (index: number, hasError: boolean, errorMsg = ERROR_MSG) => {
+    const next = computeNextErrorInfo(errorInfo.flag, errorInfo.messages, index, hasError, errorMsg);
     setErrorInfo(next);
     setIsError(next.hasAnyError);
   };
@@ -91,7 +93,10 @@ const ExpiryField = ({
   };
 
   const validateError = (index: number, eValue: string, expiryType: 'month' | 'year') => {
-    updateErrorInfo(index, !isValidExpiry(eValue, expiryType));
+    const hasError = !isValidExpiry(eValue, expiryType);
+    const errorMsg =
+      expiryType === 'month' && eValue.length === 2 ? INVALID_MONTH_MSG : ERROR_MSG;
+    updateErrorInfo(index, hasError, errorMsg);
   };
 
   const handleExpiryBlur = (index: number, eValue: string, expiryType: 'month' | 'year') => {
