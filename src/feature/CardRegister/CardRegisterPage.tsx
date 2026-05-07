@@ -40,7 +40,7 @@ const CardRegisterPage = () => {
   };
 
   return (
-    <Wrapper>
+    <CardRegisterPageLayout>
       <Container>
         <CardPreviewSection cardInfo={cardInfo} />
         <InfoInputSection
@@ -49,11 +49,11 @@ const CardRegisterPage = () => {
           handleCardCompanyClick={handleCardCompanyClick}
         />
       </Container>
-    </Wrapper>
+    </CardRegisterPageLayout>
   );
 };
 
-const Wrapper = styled.div`
+const CardRegisterPageLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
