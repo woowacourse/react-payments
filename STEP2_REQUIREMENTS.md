@@ -52,7 +52,11 @@
    b. 다른 방법 있나
 
 3. field별 validate를 기반으로 step을 관리한다
-   3-1. 파생값으로써 step을 관리한다.
+   3-1. step은 state로 관리한다.
+    - 이전 step의 error 상태에 따라 다음 ui가 깜빡거리는 문제
+    - 모든 input이 꽉차고, valid하고, step이 현재 step인 경우에만 다음 스텝으로 설정
+      -> errorStatus 및 value 기반 state로 관리해야 함
+    - 대신 이전 field가 다시 invalid해졌을 때 그 다음 field input들을 disable 처리 하는 방향
 
 4. step에 따라 점진적으로 나타나는 플로우를 구축한다
 

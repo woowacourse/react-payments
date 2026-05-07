@@ -18,6 +18,7 @@ type CardInfoFormValue = {
 };
 
 export default function AddCardPage() {
+  const [stepIndex, setStepIndex] = useState(0);
   const [formValue, setFormValue] = useState<CardInfoFormValue>({
     cardNumbers: { value: ['', '', '', ''] },
     expirationPeriod: { value: ['', ''] },
@@ -33,6 +34,12 @@ export default function AddCardPage() {
     }));
   };
 
+  const handleFieldComplete = (index) => {
+    if (stepIndex === index) {
+      setStepIndex(index + 1);
+    }
+  };
+
   return (
     <div css={mobileLayout}>
       <main>
@@ -44,15 +51,27 @@ export default function AddCardPage() {
           />
         </div>
         <form css={formLayout}>
-          <CardNumbersField
-            value={formValue.cardNumbers.value}
-            onUpdated={(...params) => handleFormValueUpdate('cardNumbers', ...params)}
-          />
-          <ExpirationPeriodField
-            value={formValue.expirationPeriod.value}
-            onUpdated={(...params) => handleFormValueUpdate('expirationPeriod', ...params)}
-          />
-          <CVCField value={formValue.cvc.value} onUpdated={(...params) => handleFormValueUpdate('cvc', ...params)} />
+          {stepIndex >= 0 && (
+            <CardNumbersField
+              value={formValue.cardNumbers.value}
+              onUpdated={(...params) => handleFormValueUpdate('cardNumbers', ...params)}
+              onCompleted={() => handleFieldComplete(0)}
+            />
+          )}
+          {stepIndex >= 1 && (
+            <ExpirationPeriodField
+              value={formValue.expirationPeriod.value}
+              onUpdated={(...params) => handleFormValueUpdate('expirationPeriod', ...params)}
+              onCompleted={() => handleFieldComplete(1)}
+            />
+          )}
+          {stepIndex >= 2 && (
+            <CVCField
+              value={formValue.cvc.value}
+              onUpdated={(...params) => handleFormValueUpdate('cvc', ...params)}
+              onCompleted={() => handleFieldComplete(2)}
+            />
+          )}
         </form>
       </main>
     </div>

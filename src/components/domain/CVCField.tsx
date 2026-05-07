@@ -4,10 +4,12 @@ import Input from '../ui/Input';
 import { isNumber, sanitizeNumber } from '../../utils';
 import { CVC_LENGTH, ERROR_MESSAGES } from '../../constants';
 import { useErrorStatus } from '../../hooks/useErrorStatus.ts';
+import { useEffect, useEffectEvent } from 'react';
 
 interface CVCFieldProps {
   value: CardInfo['cvc'];
   onUpdated: (value: CardInfo['cvc']) => void;
+  onCompleted: () => void;
 }
 
 const validates: Validate<ErrorStatus>[] = [
@@ -28,12 +30,22 @@ const validates: Validate<ErrorStatus>[] = [
   },
 ];
 
-export default function CVCField({ value, onUpdated }: CVCFieldProps) {
+export default function CVCField({ value, onUpdated, onCompleted }: CVCFieldProps) {
   const { errorStatus, onChange, onBlur } = useErrorStatus(validates);
+  const onCompletedEvent = useEffectEvent(onCompleted);
+
+  useEffect(() => {
+    if (!errorStatus && value.length === CVC_LENGTH) {
+      onCompletedEvent();
+    }
+  }, [errorStatus, value]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    const sanitizedValue = sanitizeNumber(inputValue);
+
     onChange(e);
-    onUpdated(sanitizeNumber(e.target.value));
+    onUpdated(sanitizedValue);
   };
 
   const handleBlur = onBlur;

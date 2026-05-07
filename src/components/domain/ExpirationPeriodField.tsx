@@ -6,10 +6,12 @@ import type { ExpirationPeriodErrorStatus } from '../../types';
 import { isNumber, isValidMonth, isValidYear, sanitizeNumber } from '../../utils';
 import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
 import { useErrorStatusList } from '../../hooks/useErrorStatusList.ts';
+import { useEffect, useEffectEvent } from 'react';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
   onUpdated: (value: CardInfo['expirationPeriod']) => void;
+  onCompleted: () => void;
 }
 
 const validates: Validate<ExpirationPeriodErrorStatus>[] = [
@@ -42,10 +44,18 @@ const validates: Validate<ExpirationPeriodErrorStatus>[] = [
   },
 ];
 
-export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
+export default function ExpirationPeriodField({ value, onUpdated, onCompleted }: ExpirationPeriodFieldProps) {
   const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, [null, null]);
   const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
   const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
+
+  const onCompletedEvent = useEffectEvent(onCompleted);
+
+  useEffect(() => {
+    if (!activeErrorStatus && value.every((v) => v.length === PERIOD_LENGTH_PER_INPUT)) {
+      onCompletedEvent();
+    }
+  }, [activeErrorStatus, value]);
 
   const updateFormValue = (inputValue: string, index: number) => {
     const newValue = [...value] as CardInfo['expirationPeriod'];

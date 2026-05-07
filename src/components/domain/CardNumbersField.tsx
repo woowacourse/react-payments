@@ -5,10 +5,12 @@ import type { CardInfo, ErrorStatus, Validate } from '../../types';
 import { isNumber, sanitizeNumber } from '../../utils';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
 import { useErrorStatusList } from '../../hooks/useErrorStatusList.ts';
+import { useEffect, useEffectEvent } from 'react';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
   onUpdated: (value: CardInfo['cardNumbers']) => void;
+  onCompleted: () => void;
 }
 
 const validates: Validate<ErrorStatus>[] = [
@@ -29,10 +31,18 @@ const validates: Validate<ErrorStatus>[] = [
   },
 ];
 
-export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
+export default function CardNumbersField({ value, onUpdated, onCompleted }: CardNumbersFieldProps) {
   const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, [null, null, null, null]);
   const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
   const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
+
+  const onCompletedEvent = useEffectEvent(onCompleted);
+
+  useEffect(() => {
+    if (!activeErrorStatus && value.every((v) => v.length === CARD_NUMBER_LENGTH_PER_INPUT)) {
+      onCompletedEvent();
+    }
+  }, [activeErrorStatus, value]);
 
   const updateFormValue = (inputValue: string, index: number) => {
     const newValue = [...value] as CardInfo['cardNumbers'];

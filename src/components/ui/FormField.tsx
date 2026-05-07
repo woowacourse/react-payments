@@ -29,6 +29,10 @@ const formFieldStyle = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  &[hidden] {
+    display: none;
+  }
 `;
 
 const formFieldTitleWrapperStyle = css`
