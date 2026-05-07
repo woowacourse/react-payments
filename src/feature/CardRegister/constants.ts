@@ -26,4 +26,4 @@ export const ERROR_MESSAGES = {
   expiryMonthRange: "월은 01~12 사이로 입력해주세요.",
   cvc: "CVC 번호 3자리를 입력해 주세요",
   password: "카드 비밀번호 앞 2자리를 입력해 주세요",
-} as const;
+};
