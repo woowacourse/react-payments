@@ -2,11 +2,11 @@ export const isNumeric = (value: string) => {
   return /^\d*$/.test(value);
 };
 
-export const isInMaxLength = (value: string, maxLength: number) => {
+export const isWithinMaxLength = (value: string, maxLength: number) => {
   return value.length <= maxLength;
 };
 
-export const isMaxLength = (value: string, length: number) => {
+export const isExactLength = (value: string, length: number) => {
   return value.length === length;
 };
 

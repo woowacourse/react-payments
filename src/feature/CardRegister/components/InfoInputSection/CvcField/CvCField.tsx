@@ -3,8 +3,8 @@ import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
 import {
-  isInMaxLength,
-  isMaxLength,
+  isWithinMaxLength,
+  isExactLength,
   isNumeric,
 } from '../../../utils/validator';
 
@@ -20,7 +20,7 @@ const CvcField = ({
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: [cvcNumber],
     validate: (value) => {
-      if (!isMaxLength(value, CVC_LENGTH)) {
+      if (!isExactLength(value, CVC_LENGTH)) {
         return 'CVC 번호 3자리를 입력해 주세요';
       }
 
@@ -32,7 +32,7 @@ const CvcField = ({
     const value = eValue.trim();
 
     if (!isNumeric(value)) return;
-    if (!isInMaxLength(value, CVC_LENGTH)) return;
+    if (!isWithinMaxLength(value, CVC_LENGTH)) return;
 
     setCvcNumber(value);
   };

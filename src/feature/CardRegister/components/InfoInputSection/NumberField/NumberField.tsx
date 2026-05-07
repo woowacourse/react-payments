@@ -3,8 +3,8 @@ import Label from '../../../../../common/components/Label/Label';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
 import {
-  isInMaxLength,
-  isMaxLength,
+  isWithinMaxLength,
+  isExactLength,
   isNumeric,
 } from '../../../utils/validator';
 
@@ -20,7 +20,7 @@ const NumberField = ({
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: cardNumbers,
     validate: (value) => {
-      if (!isMaxLength(value, NUMBER_LENGTH)) {
+      if (!isExactLength(value, NUMBER_LENGTH)) {
         return '카드 번호 4자리를 입력해 주세요';
       }
 
@@ -32,7 +32,7 @@ const NumberField = ({
     const value = eValue.trim();
 
     if (!isNumeric(value)) return;
-    if (!isInMaxLength(value, NUMBER_LENGTH)) return;
+    if (!isWithinMaxLength(value, NUMBER_LENGTH)) return;
 
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? value : chunk,
