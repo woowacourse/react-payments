@@ -56,7 +56,7 @@ const InfoInputSection = ({
     setPassword(password);
   };
 
-  const hasError = hasCardFormError({
+  const hasFormError = hasCardFormError({
     cardNumbers,
     expiryMonth,
     expiryYear,
@@ -67,7 +67,7 @@ const InfoInputSection = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (hasError) return;
+    if (hasFormError) return;
 
     // form에 필요한 데이터: 카드번호 첫 4자리, 카드 브랜드
     console.log('제출');
@@ -147,7 +147,7 @@ const InfoInputSection = ({
         </FieldSection>
       </FieldsWrapper>
 
-      {!hasError && <SubmitButton type="submit">제출</SubmitButton>}
+      {!hasFormError && <SubmitButton type="submit">제출</SubmitButton>}
     </Container>
   );
 };
