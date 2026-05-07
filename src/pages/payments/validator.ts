@@ -27,8 +27,11 @@ export const validateCardNumbers = (cardNumbers: CardNumbers) => {
 };
 
 export const preventCardNumber = (cardNumber: string) => {
-  if (!isEmptyString(cardNumber) && !isNumericString(cardNumber)) return true;
+  if (isEmptyString(cardNumber)) return false;
+
+  if (!isNumericString(cardNumber)) return true;
   if (cardNumber.length > 4) return true;
+
   return false;
 };
 
@@ -51,14 +54,18 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
 };
 
 export const preventExpirationMonth = (month: string) => {
-  if (!isEmptyString(month) && !isNumericString(month)) return true;
+  if (isEmptyString(month)) return false;
+
+  if (!isNumericString(month)) return true;
   if (month.length > 2) return true;
 
   return false;
 };
 
 export const preventExpirationYear = (year: string) => {
-  if (!isEmptyString(year) && !isNumericString(year)) return true;
+  if (isEmptyString(year)) return false;
+
+  if (!isNumericString(year)) return true;
   if (year.length > 2) return true;
 
   return false;
@@ -77,7 +84,9 @@ export const validateCvc = ({ cvc }: { cvc: string }) => {
 };
 
 export const preventCvc = (cvc: string) => {
-  if (!isEmptyString(cvc) && !isNumericString(cvc)) return true;
+  if (isEmptyString(cvc)) return false;
+
+  if (!isNumericString(cvc)) return true;
   if (cvc.length > 3) return true;
 
   return false;
