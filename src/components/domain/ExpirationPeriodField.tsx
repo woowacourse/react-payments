@@ -83,6 +83,7 @@ export default function ExpirationPeriodField({ value, onUpdated, onCompleted }:
         <legend css={legendStyle}>유효기간</legend>
         <div css={inputGroupStyle}>
           <Input
+            autoFocus
             value={value[0]}
             variant={activeErrorIndex === 0 ? 'error' : 'default'}
             type="text"

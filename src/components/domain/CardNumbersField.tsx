@@ -72,6 +72,7 @@ export default function CardNumbersField({ value, onUpdated, onCompleted }: Card
           {value.map((number, index) => (
             <Input
               key={index}
+              autoFocus={index === 0}
               variant={activeErrorIndex === index ? 'error' : 'default'}
               value={number}
               type="text"

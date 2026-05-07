@@ -61,6 +61,7 @@ export default function CVCField({ value, onUpdated, onCompleted }: CVCFieldProp
     <FormField {...formFieldProps}>
       <label htmlFor="cvc">CVC</label>
       <Input
+        autoFocus
         variant={errorStatus !== null ? 'error' : 'default'}
         value={value}
         id="cvc"
