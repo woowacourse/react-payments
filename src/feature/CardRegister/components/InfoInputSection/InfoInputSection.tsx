@@ -93,58 +93,61 @@ const InfoInputSection = ({
 
   return (
     <Container onSubmit={handleSubmit}>
-      {currentStep >= 4 && (
+      <FieldsWrapper>
+        {currentStep >= 4 && (
+          <FieldSection
+            title="비밀번호를 입력해 주세요"
+            description="앞의 2자리를 입력해주세요."
+          >
+            <PasswordField
+              password={password}
+              handlePasswordNumberChange={handlePasswordNumberChange}
+            />
+          </FieldSection>
+        )}
+        {currentStep >= 3 && (
+          <FieldSection title="CVC 번호를 입력해 주세요">
+            <CvcField
+              cvcNumber={cvcNumber}
+              handleCvcNumberChange={handleCvcNumberChange}
+            />
+          </FieldSection>
+        )}
+        {currentStep >= 2 && (
+          <FieldSection
+            title="카드 유효기간을 입력해 주세요"
+            description="월/년도(MMYY)를 순서대로 입력해 주세요."
+          >
+            <ExpiryField
+              expiryMonth={expiryMonth}
+              expiryYear={expiryYear}
+              handleExpiryMonthChange={handleExpiryMonthChange}
+              handleExpiryYearChange={handleExpiryYearChange}
+            />
+          </FieldSection>
+        )}
+        {currentStep >= 1 && (
+          <FieldSection
+            title="카드사를 선택해 주세요"
+            description="현재 국내 카드사만 가능합니다."
+          >
+            <SelectCardBrandField
+              handleCardBrandChange={handleCardBrandChange}
+            />
+          </FieldSection>
+        )}
         <FieldSection
-          title="비밀번호를 입력해 주세요"
-          description="앞의 2자리를 입력해주세요."
+          title="결제할 카드 번호를 입력해 주세요"
+          description="본인 명의의 카드만 결제 가능합니다."
         >
-          <PasswordField
-            password={password}
-            handlePasswordNumberChange={handlePasswordNumberChange}
+          <NumberField
+            cardNumbers={cardNumbers}
+            handleCardNumbersChange={handleCardNumbersChange}
           />
         </FieldSection>
-      )}
-      {currentStep >= 3 && (
-        <FieldSection title="CVC 번호를 입력해 주세요">
-          <CvcField
-            cvcNumber={cvcNumber}
-            handleCvcNumberChange={handleCvcNumberChange}
-          />
-        </FieldSection>
-      )}
-      {currentStep >= 2 && (
-        <FieldSection
-          title="카드 유효기간을 입력해 주세요"
-          description="월/년도(MMYY)를 순서대로 입력해 주세요."
-        >
-          <ExpiryField
-            expiryMonth={expiryMonth}
-            expiryYear={expiryYear}
-            handleExpiryMonthChange={handleExpiryMonthChange}
-            handleExpiryYearChange={handleExpiryYearChange}
-          />
-        </FieldSection>
-      )}
-      {currentStep >= 1 && (
-        <FieldSection
-          title="카드사를 선택해 주세요"
-          description="현재 국내 카드사만 가능합니다."
-        >
-          <SelectCardBrandField handleCardBrandChange={handleCardBrandChange} />
-        </FieldSection>
-      )}
+      </FieldsWrapper>
 
-      <FieldSection
-        title="결제할 카드 번호를 입력해 주세요"
-        description="본인 명의의 카드만 결제 가능합니다."
-      >
-        <NumberField
-          cardNumbers={cardNumbers}
-          handleCardNumbersChange={handleCardNumbersChange}
-        />
-      </FieldSection>
-
-      <Button type="submit">제출</Button>
+      <SubmitButton type="submit">제출</SubmitButton>
     </Container>
   );
 };
@@ -153,9 +156,29 @@ const Container = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  width: 100%;
+`;
+
+const FieldsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   padding: 30px;
 
   width: 100%;
+  box-sizing: border-box;
+`;
+
+const SubmitButton = styled(Button)`
+  width: 100%;
+  min-height: 46px;
+
+  background-color: #333333;
+
+  color: #f3f3f3;
+  font-size: 16px;
+  font-weight: 700;
 `;
 
 export default InfoInputSection;
