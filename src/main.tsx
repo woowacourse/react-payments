@@ -2,8 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles/index.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
-import AddCardPage from './Pages/AddCardPage';
-import AddCardResultPage from './Pages/AddCardResultPage';
+import AddCardPage from './pages/AddCardPage';
+import AddCardResultPage from './pages/AddCardResultPage';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
