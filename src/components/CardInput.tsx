@@ -9,6 +9,7 @@ import type {
   Cvc,
   CvcHandler,
 } from '../types/cardStausTypes';
+import CardIssuer from './CardIssuer';
 
 type CardInputProps = {
   cardStatus: CardStatus;
@@ -29,6 +30,7 @@ export default function CardInput({
 }: CardInputProps) {
   return (
     <form css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      {cardStatus.cardNumbers.join('').length === 16 && <CardIssuer />}
       <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
       <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />
       <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />
