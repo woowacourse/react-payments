@@ -87,3 +87,10 @@ export const getCardNumberArrayByBrand = (cardBrand: CardBrand): number[] => {
       return [4, 4, 4, 4];
   }
 }
+
+export const getPasswordError = (password: string): string => {
+  if (password === '') return '';
+  if (isIncompleteRange(password, 2)) return '비밀번호 앞 2자리를 모두 입력해주세요!';
+
+  return '';
+}
