@@ -49,7 +49,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
       const fieldValidations = (validations[fieldName] as ValidationRule[][])[index];
       return {
         ref: (refs[fieldName] as RefObject<HTMLElement>[])[index] as RefObject<E>,
-        value: (values[fieldName] as string[])[index],
+        value: (values[fieldName] as (string | null)[])[index] ?? "",
         onChange: (event: ChangeEvent<E>) => {
           const failedValidation = fieldValidations.find(
             (validation) => event.target.value.length && validation.type === 'onChange' && !validation.validator(event.target.value),
@@ -111,7 +111,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
     const fieldValidations = validations[fieldName] as ValidationRule[];
     return {
       ref: refs[fieldName] as RefObject<E>,
-      value: values[fieldName] as string,
+      value: values[fieldName] as string | null ?? "",
       onChange: (event: ChangeEvent<E>) => {
         const failedValidation = fieldValidations.find(
           (v) => event.target.value.length && v.type === 'onChange' && !v.validator(event.target.value),
