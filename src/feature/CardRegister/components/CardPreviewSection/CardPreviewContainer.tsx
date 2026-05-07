@@ -1,49 +1,45 @@
 import styled from 'styled-components';
-import type {CardPreviewInfoType} from '../../../../common/types/CardPreviewInfoType';
+import type { CardPreviewInfoType } from '../../../../common/types/CardPreviewInfoType';
 import CardBrandLogo from './CardBrandLogo';
 import CardExpiryDateDisplay from './CardExpiryDateDisplay';
 import CardNumberDisplay from './CardNumberDisplay';
+import { getCardBrandColor, getCardTypeName } from '../../utils/cardDisplay';
 
 const CardPreviewContainer = ({
   cardPreviewInfo,
 }: {
   cardPreviewInfo: CardPreviewInfoType;
 }) => {
-  const {cardNumbers, expiryMonth, expiryYear} = cardPreviewInfo;
+  const { cardNumbers, expiryMonth, expiryYear, cardBrandId } = cardPreviewInfo;
 
-  const getBrandName = (cardNumbers: string[]): 'visa' | 'masterCard' | null => {
-    const fullNumber = cardNumbers.map((chunk) => chunk.padEnd(4, '#')).join('');
-
-    if (fullNumber.startsWith('4')) return 'visa';
-
-    const prefix = Number(fullNumber.slice(0, 2));
-    if (prefix >= 51 && prefix <= 55) return 'masterCard';
-
-    return null;
-  };
+  const cardBackgroundColor = getCardBrandColor(cardBrandId);
+  const cardType = getCardTypeName(cardNumbers);
 
   return (
-    <Container>
+    <Container $backgroundColor={cardBackgroundColor}>
       <CardHeader>
         <IcChip />
-        <CardBrandLogo brandName={getBrandName(cardNumbers)} />
+        <CardBrandLogo brandName={cardType} />
       </CardHeader>
       <CardBody>
         <CardNumberDisplay cardNumbers={cardNumbers} />
-        <CardExpiryDateDisplay expiryMonth={expiryMonth} expiryYear={expiryYear} />
+        <CardExpiryDateDisplay
+          expiryMonth={expiryMonth}
+          expiryYear={expiryYear}
+        />
       </CardBody>
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ $backgroundColor: string }>`
   display: flex;
   flex-direction: column;
   width: 212px;
   height: 132px;
   padding: 8px 10px;
   gap: 12px;
-  background-color: #333333;
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
