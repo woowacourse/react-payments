@@ -60,11 +60,10 @@
 ### 구현 과정 (v3)
 
 1. react-router 설치 및 라우팅 구성
-2. ValidatedInputGroup children 합성으로 리팩토링
-3. decideBrandName 확장 (AMEX/Diners/UnionPay)
-4. 카드사 선택 UI 구현 (색상 변경 포함)
-5. 자동 포커스 이동 + 동적 입력 UI
-6. 브랜드별 입력 자릿수 조건 반영
-7. 폼 제출 및 확인 버튼 활성화/비활성화
-8. Custom Hook 추출
-9. 전체 테스트
+2. decideBrandName 확장 (AMEX/Diners/UnionPay)
+3. 카드사 선택 UI 구현 (색상 변경 포함)
+4. 자동 포커스 이동 + 동적 입력 UI
+5. 브랜드별 입력 자릿수 조건 반영
+6. 폼 제출 및 확인 버튼 활성화/비활성화
+7. Custom Hook 추출
+8. 전체 테스트
