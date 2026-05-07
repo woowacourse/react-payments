@@ -10,12 +10,13 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
+    "deploy": "npm run build && touch dist/.nojekyll && cp dist/index.html dist/404.html && npx gh-pages -d dist"
   },
   "dependencies": {
     "classnames": "^2.5.1",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.15.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
