@@ -28,14 +28,14 @@ const CardText = styled.span`
   letter-spacing: 8%;
 `;
 
-interface CardPrivewProps {
+interface CardPreviewProps {
   issuer: CardIssuer | null;
   network: CardNetwork | null;
   numberSegments: CardNumberSegments;
   expiryDate: CardExpiryDate;
 }
 
-function CardPreview(props: CardPrivewProps) {
+function CardPreview(props: CardPreviewProps) {
   return (
     <CardContainer justifyContent="center">
       <Card issuer={props.issuer} direction="column" gap={14}>
@@ -46,8 +46,8 @@ function CardPreview(props: CardPrivewProps) {
           )}
         </Flex>
         <Flex gap={10}>
-          {props.numberSegments.map((segments: string, index: number) => (
-            <CardText key={index}>{index < 2 ? segments : segments.replaceAll(/./g, '•')}</CardText>
+          {props.numberSegments.map((segment: string, index: number) => (
+            <CardText key={index}>{index < 2 ? segment : segment.replaceAll(/./g, '•')}</CardText>
           ))}
         </Flex>
         <CardText>
