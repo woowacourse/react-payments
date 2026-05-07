@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Input from "@/components/common/Input";
 import type { ComponentProps } from "react";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
+import FieldLayout from "./FieldLayout";
 
 interface InputFieldProps {
   title: string;
@@ -19,9 +20,13 @@ const InputField = ({
   helperMessage = "",
 }: InputFieldProps) => {
   return (
-    <Container>
-      <Title>{title}</Title>
-      {caption && <Caption>{caption}</Caption>}
+    <FieldLayout
+      titleComponent={<Title>{title}</Title>}
+      captionComponent={caption && <Caption>{caption}</Caption>}
+      helperMessageComponent={
+        helperMessage && <HelperMessage>{helperMessage}</HelperMessage>
+      }
+    >
       <InputGroup>
         <Legend>{label}</Legend>
         <InputWrapper>
@@ -30,14 +35,9 @@ const InputField = ({
           ))}
         </InputWrapper>
       </InputGroup>
-      <HelperMessage>{helperMessage}</HelperMessage>
-    </Container>
+    </FieldLayout>
   );
 };
-
-const Container = styled.section`
-  width: 100%;
-`;
 
 const Title = styled.h2`
   font-weight: 700;
