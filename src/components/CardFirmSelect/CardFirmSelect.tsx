@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-
+import Select from "react-select";
 // BC카드 #F04651
 // 신한카드 #0046FF
 // 카카오뱅크 #FFE600
@@ -15,36 +14,45 @@ interface Props {
   value: string;
 }
 
-export default function CardFirmSelect({
-  cardFrimCategory,
-  onChangeCardFirmCategory,
-}: Props) {
+const CARD_OPTIONS = [
+  { value: "BC", label: "BC카드" },
+  { value: "신한", label: "신한카드" },
+  { value: "카뱅", label: "카카오뱅크" },
+  { value: "현대", label: "현대카드" },
+  { value: "우리", label: "우리카드" },
+  { value: "롯데", label: "롯데카드" },
+  { value: "하나", label: "하나카드" },
+  { value: "국민", label: "국민카드" },
+];
+
+export default function CardFirmSelect({ onChangeCardFirmCategory }: Props) {
   return (
     <div>
-      <SelectCardFrim
-        value={cardFrimCategory}
-        onChange={(e) => onChangeCardFirmCategory(e.target.value)}
-        name="cardfirm-select"
-        className="restaurant-filter"
-      >
-        <option value="placeholder">카드사를 선택해주세요</option>
-        <option value="BC">BC카드</option>
-        <option value="신한">신한카드</option>
-        <option value="카뱅">카카오뱅크</option>
-        <option value="현대">현대카드</option>
-        <option value="우리">우리카드</option>
-        <option value="롯데">롯데카드</option>
-        <option value="하나">하나카드</option>
-        <option value="국민">국민카드</option>
-      </SelectCardFrim>
+      <Select
+        options={CARD_OPTIONS}
+        onChange={(opt) => opt && onChangeCardFirmCategory(opt.value)}
+        placeholder="카드사를 선택해주세요"
+        styles={{
+          control: (base) => ({ ...base, width: 315, height: 31 }),
+          menu: (base) => ({ ...base, width: 315, height: 31 }),
+          option: (base) => ({
+            ...base,
+            fontSize: 11,
+            fontFamily: "sans-serif",
+          }),
+          placeholder: (base) => ({
+            ...base,
+            color: "#ACACAC",
+            fontSize: 11,
+            fontFamily: "sans-serif",
+          }),
+          singleValue: (base) => ({
+            ...base,
+            fontSize: 11,
+            fontFamily: "sans-serif",
+          }),
+        }}
+      />
     </div>
   );
 }
-
-const SelectCardFrim = styled.select`
-  &:has(option[value="placeholder"]:checked) {
-    color: #acacac;
-  }
-  width: 315px;
-  height: 31.28px;
-`;
