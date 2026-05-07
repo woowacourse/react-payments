@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 interface Props extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  "onChange" | "type" | "onError"
+  "onChange" | "onError"
 > {
   value: string;
   setValue: (value: string) => void;

@@ -15,6 +15,7 @@ export default function PassWordInputWrapper({ setPassWord, value }: Props) {
   return (
     <InputGroup errorMessage={inputError}>
       <NumberInput
+        type="password"
         value={value}
         setValue={setPassWord}
         placeholder="123"
