@@ -1,4 +1,4 @@
-import type {ComponentPropsWithoutRef} from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
 type StrokeModeType = 'default' | 'error';
@@ -14,7 +14,7 @@ type InputPropsType = ComponentPropsWithoutRef<'input'> & {
   strokeMode?: StrokeModeType;
 };
 
-const StyledInput = styled.input<{$strokeMode: StrokeModeType}>`
+const StyledInput = styled.input<{ $strokeMode: StrokeModeType }>`
   font-size: 11px;
   font-weight: 400;
   color: #000;
@@ -25,12 +25,17 @@ const StyledInput = styled.input<{$strokeMode: StrokeModeType}>`
   height: 32px;
 
   &:focus {
-    border-color: ${(props) => (props.$strokeMode === 'error' ? STROKE_MODE_COLOR.error : FOCUS_COLOR)};
+    border-color: ${(props) =>
+      props.$strokeMode === 'error' ? STROKE_MODE_COLOR.error : FOCUS_COLOR};
   }
 `;
 
-const Input = ({strokeMode = 'default', type = 'text', ...rest}: InputPropsType) => {
-  return <StyledInput $strokeMode={strokeMode} type={type} {...rest} />;
-};
+const Input = forwardRef<HTMLInputElement, InputPropsType>(
+  ({ strokeMode = 'default', type = 'text', ...rest }, ref) => {
+    return (
+      <StyledInput ref={ref} $strokeMode={strokeMode} type={type} {...rest} />
+    );
+  },
+);
 
 export default Input;

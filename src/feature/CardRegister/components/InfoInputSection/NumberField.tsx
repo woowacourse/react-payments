@@ -7,11 +7,14 @@ import {
   NUMBER_LENGTH,
   validateCardNumber,
 } from '../../utils/cardFormValidator';
+import { useRef } from 'react';
 
 const NumberField = ({
+  autoFocus = false,
   cardNumbers,
   handleCardNumbersChange,
 }: {
+  autoFocus?: boolean;
   cardNumbers: string[];
   handleCardNumbersChange: (value: string[]) => void;
 }) => {
@@ -19,6 +22,11 @@ const NumberField = ({
     values: cardNumbers,
     validate: validateCardNumber,
   });
+
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const focusNextInput = (index: number) => {
+    inputRefs.current[index + 1]?.focus();
+  };
 
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -30,6 +38,8 @@ const NumberField = ({
       i === index ? value : chunk,
     );
     handleCardNumbersChange(newChunks);
+
+    if (value.length === NUMBER_LENGTH) focusNextInput(index);
   };
 
   const handleNumbersBlur = (index: number) => {
@@ -43,7 +53,11 @@ const NumberField = ({
         {cardNumbers.map((chunk, index) => (
           <CardNumberInput
             key={index}
+            ref={(element) => {
+              inputRefs.current[index] = element;
+            }}
             value={chunk}
+            autoFocus={autoFocus && index === 0}
             placeholder="1234"
             inputMode="numeric"
             maxLength={4}

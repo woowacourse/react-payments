@@ -8,7 +8,7 @@ import {
   isNumeric,
   isValidMonth,
 } from '../../utils/validator';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   EXPIRY_LENGTH,
   validateExpiryMonth,
@@ -16,11 +16,13 @@ import {
 } from '../../utils/cardFormValidator';
 
 const ExpiryField = ({
+  autoFocus = false,
   expiryMonth,
   expiryYear,
   handleExpiryMonthChange,
   handleExpiryYearChange,
 }: {
+  autoFocus?: boolean;
   expiryMonth: string;
   expiryYear: string;
   handleExpiryMonthChange: (month: string) => void;
@@ -37,6 +39,11 @@ const ExpiryField = ({
     },
   });
 
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const focusNextInput = (index: number) => {
+    inputRefs.current[index + 1]?.focus();
+  };
+
   const [monthErrorMessage, setMonthErrorMessage] = useState('');
 
   const handleMonthChange = (eValue: string) => {
@@ -52,6 +59,8 @@ const ExpiryField = ({
 
     setMonthErrorMessage('');
     handleExpiryMonthChange(value);
+
+    if (value.length === EXPIRY_LENGTH) focusNextInput(0);
   };
 
   const handleYearChange = (eValue: string) => {
@@ -99,7 +108,11 @@ const ExpiryField = ({
       <Label value="유효기간" />
       <InputWrapper>
         <ExpiryInput
+          ref={(element) => {
+            inputRefs.current[0] = element;
+          }}
           value={expiryMonth}
+          autoFocus={autoFocus}
           maxLength={2}
           inputMode="numeric"
           placeholder="MM"
@@ -108,6 +121,9 @@ const ExpiryField = ({
           onBlur={(e) => handleExpiryBlur(0, e.target.value, 'month')}
         />
         <ExpiryInput
+          ref={(element) => {
+            inputRefs.current[1] = element;
+          }}
           value={expiryYear}
           maxLength={2}
           placeholder="YY"

@@ -6,9 +6,11 @@ import { isWithinMaxLength, isNumeric } from '../../utils/validator';
 import { CVC_LENGTH, validateCvcNumber } from '../../utils/cardFormValidator';
 
 const CvcField = ({
+  autoFocus = false,
   cvcNumber,
   handleCvcNumberChange,
 }: {
+  autoFocus?: boolean;
   cvcNumber: string;
   handleCvcNumberChange: (value: string) => void;
 }) => {
@@ -36,6 +38,7 @@ const CvcField = ({
       <InputWrapper>
         <CvcInput
           value={cvcNumber}
+          autoFocus={autoFocus}
           maxLength={3}
           inputMode="numeric"
           placeholder="123"

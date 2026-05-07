@@ -100,6 +100,7 @@ const InfoInputSection = ({
             description="앞의 2자리를 입력해주세요."
           >
             <PasswordField
+              autoFocus
               password={password}
               handlePasswordNumberChange={handlePasswordNumberChange}
             />
@@ -108,6 +109,7 @@ const InfoInputSection = ({
         {currentStep >= 3 && (
           <FieldSection title="CVC 번호를 입력해 주세요">
             <CvcField
+              autoFocus
               cvcNumber={cvcNumber}
               handleCvcNumberChange={handleCvcNumberChange}
             />
@@ -119,6 +121,7 @@ const InfoInputSection = ({
             description="월/년도(MMYY)를 순서대로 입력해 주세요."
           >
             <ExpiryField
+              autoFocus
               expiryMonth={expiryMonth}
               expiryYear={expiryYear}
               handleExpiryMonthChange={handleExpiryMonthChange}
@@ -132,6 +135,7 @@ const InfoInputSection = ({
             description="현재 국내 카드사만 가능합니다."
           >
             <SelectCardBrandField
+              autoFocus
               handleCardBrandChange={handleCardBrandChange}
             />
           </FieldSection>
@@ -141,6 +145,7 @@ const InfoInputSection = ({
           description="본인 명의의 카드만 결제 가능합니다."
         >
           <NumberField
+            autoFocus
             cardNumbers={cardNumbers}
             handleCardNumbersChange={handleCardNumbersChange}
           />

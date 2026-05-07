@@ -4,8 +4,10 @@ import { CARD_BRANDS } from '../../constant/CARD_BRANDS';
 import type { CardBrandId } from '../../../../common/types/CardPreview';
 
 const SelectCardBrandField = ({
+  autoFocus = false,
   handleCardBrandChange,
 }: {
+  autoFocus?: boolean;
   handleCardBrandChange: (cardBrandId: CardBrandId | null) => void;
 }) => {
   const cardBrandOptions = CARD_BRANDS.map((cardBrand) => ({
@@ -17,6 +19,7 @@ const SelectCardBrandField = ({
     <StyledField>
       <InputWrapper>
         <Select
+          autoFocus={autoFocus}
           options={cardBrandOptions}
           placeholder="카드사를 선택해주세요"
           onChange={(selectedOption) => {

@@ -9,9 +9,11 @@ import {
 } from '../../utils/cardFormValidator';
 
 const PasswordField = ({
+  autoFocus = false,
   password,
   handlePasswordNumberChange,
 }: {
+  autoFocus?: boolean;
   password: string;
   handlePasswordNumberChange: (value: string) => void;
 }) => {
@@ -40,6 +42,7 @@ const PasswordField = ({
         <PasswordInput
           type="password"
           value={password}
+          autoFocus={autoFocus}
           maxLength={3}
           inputMode="numeric"
           placeholder="**"
