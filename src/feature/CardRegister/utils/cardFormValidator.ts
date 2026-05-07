@@ -3,6 +3,7 @@ import { isExactLength, isValidMonth } from './validator';
 export const NUMBER_LENGTH = 4;
 export const EXPIRY_LENGTH = 2;
 export const CVC_LENGTH = 3;
+export const PASSWORD_LENGTH = 2;
 
 export const validateCardNumber = (value: string) => {
   if (!isExactLength(value, NUMBER_LENGTH)) {
@@ -35,6 +36,14 @@ export const validateExpiryYear = (value: string) => {
 export const validateCvcNumber = (value: string) => {
   if (!isExactLength(value, CVC_LENGTH)) {
     return 'CVC 번호 3자리를 입력해 주세요';
+  }
+
+  return null;
+};
+
+export const validatePassword = (value: string) => {
+  if (!isExactLength(value, PASSWORD_LENGTH)) {
+    return '비밀번호 2자리를 입력해 주세요';
   }
 
   return null;

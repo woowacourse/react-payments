@@ -3,45 +3,49 @@ import Input from '../../../../common/components/Input/Input';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../common/hooks/useFieldValidation';
 import { isWithinMaxLength, isNumeric } from '../../utils/validator';
-import { CVC_LENGTH, validateCvcNumber } from '../../utils/cardFormValidator';
+import {
+  PASSWORD_LENGTH,
+  validatePassword,
+} from '../../utils/cardFormValidator';
 
-const CvcField = ({
-  cvcNumber,
-  handleCvcNumberChange,
+const PasswordField = ({
+  password,
+  handlePasswordNumberChange,
 }: {
-  cvcNumber: string;
-  handleCvcNumberChange: (value: string) => void;
+  password: string;
+  handlePasswordNumberChange: (value: string) => void;
 }) => {
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
-    values: [cvcNumber],
-    validate: validateCvcNumber,
+    values: [password],
+    validate: validatePassword,
   });
 
-  const handleCvcChange = (eValue: string) => {
+  const handlePasswordChange = (eValue: string) => {
     const value = eValue.trim();
 
     if (!isNumeric(value)) return;
-    if (!isWithinMaxLength(value, CVC_LENGTH)) return;
+    if (!isWithinMaxLength(value, PASSWORD_LENGTH)) return;
 
-    handleCvcNumberChange(value);
+    handlePasswordNumberChange(value);
   };
 
-  const handleCvcBlur = (index: number) => {
+  const handlePasswordBlur = (index: number) => {
     touch(index);
   };
 
   return (
     <StyledField>
-      <Label value="CVC" />
+      <Label value="비밀번호 앞 2자리" />
       <InputWrapper>
-        <CvcInput
-          value={cvcNumber}
+        <PasswordInput
+          type="password"
+          value={password}
           maxLength={3}
           inputMode="numeric"
           placeholder="123"
           strokeMode={0 === firstErrorIndex ? 'error' : 'default'}
-          onChange={(e) => handleCvcChange(e.target.value)}
-          onBlur={() => handleCvcBlur(0)}
+          onChange={(e) => handlePasswordChange(e.target.value)}
+          onBlur={() => handlePasswordBlur(0)}
         />
       </InputWrapper>
       <ErrorMessage>{errorMessage}</ErrorMessage>
@@ -65,7 +69,7 @@ const InputWrapper = styled.div`
   gap: 14px;
 `;
 
-const CvcInput = styled(Input)`
+const PasswordInput = styled(Input)`
   box-sizing: border-box;
   width: 100%;
   height: 32px;
@@ -78,4 +82,4 @@ const ErrorMessage = styled.span`
   color: #ff3d3d;
 `;
 
-export default CvcField;
+export default PasswordField;
