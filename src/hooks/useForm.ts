@@ -65,8 +65,8 @@ export default function useForm<T extends Record<string, (string | null) | (stri
           }
 
           setValues((prev) => {
-            const newArray = [...prev[fieldName] as string[]];
-            newArray.splice(index, 1, event.target.value);
+            const newArray = [...prev[fieldName] as (string | null)[]];
+            newArray.splice(index, 1, event.target.value || null);
             return { ...prev, [fieldName]: newArray as T[K] };
           });
           setErrors((prev) => {
@@ -121,7 +121,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
           return;
         }
 
-        setValues((prev) => ({ ...prev, [fieldName]: event.target.value }));
+        setValues((prev) => ({ ...prev, [fieldName]: event.target.value || null }));
         setErrors((prev) => ({ ...prev, [fieldName]: null }));
 
         if (fieldValidations.every((v) => v.validator(event.target.value))) {
