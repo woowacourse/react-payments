@@ -9,6 +9,11 @@ import {
   isValidMonth,
 } from '../../../utils/validator';
 import { useState } from 'react';
+import {
+  EXPIRY_LENGTH,
+  validateExpiryMonth,
+  validateExpiryYear,
+} from '../../../utils/cardFormValidator';
 
 const ExpiryField = ({
   expiryMonth,
@@ -21,26 +26,14 @@ const ExpiryField = ({
   setExpiryMonth: (value: string) => void;
   setExpiryYear: (value: string) => void;
 }) => {
-  const EXPIRY_LENGTH = 2;
-
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: [expiryMonth, expiryYear],
     validate: (value, index) => {
       if (index === 0) {
-        if (!isExactLength(value, EXPIRY_LENGTH))
-          return '월은 2자리로 입력해 주세요';
-
-        if (!isValidMonth(value)) {
-          return '월은 01부터 12까지 입력해 주세요';
-        }
-
-        return null;
+        return validateExpiryMonth(value);
       }
 
-      if (!isExactLength(value, EXPIRY_LENGTH))
-        return '년도는 2자리로 입력해 주세요';
-
-      return null;
+      return validateExpiryYear(value);
     },
   });
 

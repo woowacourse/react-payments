@@ -2,11 +2,11 @@ import Input from '../../../../../common/components/Input/Input';
 import Label from '../../../../../common/components/Label/Label';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
+import { isWithinMaxLength, isNumeric } from '../../../utils/validator';
 import {
-  isWithinMaxLength,
-  isExactLength,
-  isNumeric,
-} from '../../../utils/validator';
+  NUMBER_LENGTH,
+  validateCardNumber,
+} from '../../../utils/cardFormValidator';
 
 const NumberField = ({
   cardNumbers,
@@ -15,17 +15,9 @@ const NumberField = ({
   cardNumbers: string[];
   setCardNumbers: (value: string[]) => void;
 }) => {
-  const NUMBER_LENGTH = 4;
-
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: cardNumbers,
-    validate: (value) => {
-      if (!isExactLength(value, NUMBER_LENGTH)) {
-        return '카드 번호 4자리를 입력해 주세요';
-      }
-
-      return null;
-    },
+    validate: validateCardNumber,
   });
 
   const handleNumbersChange = (index: number, eValue: string) => {

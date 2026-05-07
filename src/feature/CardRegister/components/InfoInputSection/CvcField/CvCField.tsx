@@ -2,11 +2,11 @@ import Label from '../../../../../common/components/Label/Label';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../../common/hooks/useFieldValidation';
+import { isWithinMaxLength, isNumeric } from '../../../utils/validator';
 import {
-  isWithinMaxLength,
-  isExactLength,
-  isNumeric,
-} from '../../../utils/validator';
+  CVC_LENGTH,
+  validateCvcNumber,
+} from '../../../utils/cardFormValidator';
 
 const CvcField = ({
   cvcNumber,
@@ -15,17 +15,9 @@ const CvcField = ({
   cvcNumber: string;
   setCvcNumber: (value: string) => void;
 }) => {
-  const CVC_LENGTH = 3;
-
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: [cvcNumber],
-    validate: (value) => {
-      if (!isExactLength(value, CVC_LENGTH)) {
-        return 'CVC 번호 3자리를 입력해 주세요';
-      }
-
-      return null;
-    },
+    validate: validateCvcNumber,
   });
 
   const handleCvcNumberChange = (eValue: string) => {
