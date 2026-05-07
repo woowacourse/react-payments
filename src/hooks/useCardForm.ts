@@ -1,15 +1,15 @@
-import { type CardExpiryDate, type CardNumberSegments } from "../types";
+import { type CardFormState } from "../types";
 import { createDigitFieldValidations, validateCardIssuer, validateDigits, validateMonth, validateStringMaxLength, validateYear } from "../utils";
 import useForm from "./useForm";
 
 export default function useCardForm() {
-  return useForm({
+  return useForm<CardFormState>({
     initialValues: {
       cardPassword: '',
       cardValidationCode: '',
-      cardExpiryDate: ['', ''] as CardExpiryDate,
+      cardExpiryDate: ['', ''],
       cardIssuer: null,
-      cardNumberSegments: ['', '', '', ''] as CardNumberSegments,
+      cardNumberSegments: ['', '', '', ''],
     },
     validations: {
       cardPassword: [

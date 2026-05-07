@@ -19,7 +19,7 @@ type RefsState<T> = {
   : RefObject<HTMLElement>;
 };
 
-export default function useForm<T extends Record<string, (string | null) | (string | null)[]>>({ initialValues, validations }: { initialValues: T, validations: Validations<T> }) {
+export default function useForm<T extends { [K in keyof T]: (string | null) | (string | null)[] }>({ initialValues, validations }: { initialValues: T, validations: Validations<T> }) {
   const [values, setValues] = useState<T>(initialValues);
 
   const [errors, setErrors] = useState<ErrorState<T>>(Object.entries(initialValues).reduce((prev, [fieldName, fieldValue]) => {
@@ -151,7 +151,7 @@ export default function useForm<T extends Record<string, (string | null) | (stri
         [fieldName]: {
           isValid: isArrayField
             ? fieldValue.map((el, index) => el && (validations[fieldName as keyof T] as ValidationRule[][])[index].every((v) => v.validator(el)))
-            : fieldValue && (validations[fieldName as keyof T] as ValidationRule[]).every((v) => v.validator(fieldValue)),
+            : fieldValue && (validations[fieldName as keyof T] as ValidationRule[]).every((v) => v.validator(fieldValue as string | null ?? "")),
         }
       };
     }, {});
