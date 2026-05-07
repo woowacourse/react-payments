@@ -17,9 +17,13 @@ export const MAX_EXPIRY_MONTH = 12;
 export const CVC_INPUT_COUNT = 1;
 export const CVC_LENGTH = 3;
 
+export const PASSWORD_INPUT_COUNT = 1;
+export const PASSWORD_LENGTH = 2;
+
 export const ERROR_MESSAGES = {
   cardNumber: "카드 번호 4자리를 입력해 주세요",
   expiryLength: "2자리를 입력해 주세요",
   expiryMonthRange: "월은 01~12 사이로 입력해주세요.",
   cvc: "CVC 번호 3자리를 입력해 주세요",
+  password: "카드 비밀번호 앞 2자리를 입력해 주세요",
 } as const;
