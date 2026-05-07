@@ -115,13 +115,13 @@ const InputSectionContainer = styled.div`
 `;
 
 const MainContainer = styled.main`
-  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 45px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding: 40px 20px;
+  min-height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
 `;
