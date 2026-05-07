@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { categorizeCardBrand } from '../utils';
 import type { CardInfo } from '../types';
 import Card from '../components/ui/Card';
+import CardCompanyField from '../components/domain/CardCompanyField.tsx';
 
 interface FieldState<T> {
   value: T;
@@ -51,6 +52,7 @@ export default function AddCardPage() {
           />
         </div>
         <form css={formLayout}>
+          <CardCompanyField />
           {stepIndex >= 2 && (
             <CVCField
               value={formValue.cvc.value}

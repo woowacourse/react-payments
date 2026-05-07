@@ -96,3 +96,8 @@ legend {
   line-height: inherit;
   color: inherit;
 }
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
