@@ -8,6 +8,7 @@ import type {
 } from '../../../../common/types/CardPreviewInfoType';
 import styled from 'styled-components';
 import FieldSection from './FieldSection/FieldSection';
+import { hasCardFormError } from '../../utils/cardFormValidator';
 
 const InfoInputSection = ({
   cardPreviewInfo,
@@ -26,8 +27,24 @@ const InfoInputSection = ({
   //   console.log('error');
   // }
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const hasError = hasCardFormError({
+      cardNumbers,
+      expiryMonth,
+      expiryYear,
+      cvcNumber,
+    });
+
+    if (hasError) return;
+
+    // form에 필요한 데이터: 카드번호 첫 4자리, 카드 브랜드
+    console.log('제출');
+  };
+
   return (
-    <Container>
+    <Container onSubmit={handleSubmit}>
       <FieldSection
         title="결제할 카드 번호를 입력해 주세요"
         description="본인 명의의 카드만 결제 가능합니다."
@@ -55,7 +72,7 @@ const InfoInputSection = ({
   );
 };
 
-const Container = styled.div`
+const Container = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
