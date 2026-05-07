@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import type { CardInfo } from '../../types';
+import type { CardBrand, CardInfo } from '../../types';
 
 interface CardProps {
   cardNumber: CardInfo['cardNumbers'];
   expirationPeriod: CardInfo['expirationPeriod'];
-  cardBrand: CardInfo['cardBrand'];
+  cardBrand: CardBrand;
 }
 
 export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardProps) {
