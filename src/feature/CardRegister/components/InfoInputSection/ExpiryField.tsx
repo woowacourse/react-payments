@@ -88,17 +88,16 @@ const ExpiryField = ({
     eValue: string,
     expiryType: 'month' | 'year',
   ) => {
-    const filledValue = fillZero(eValue, expiryType);
-
     if (expiryType === 'month') {
+      const filledValue = fillZero(eValue, expiryType);
       handleExpiryMonthChange(filledValue);
 
       if (validateExpiryMonth(filledValue) === null) setMonthErrorMessage('');
     }
 
-    if (expiryType === 'year') {
-      handleExpiryYearChange(filledValue);
-    }
+    // if (expiryType === 'year') {
+    //   handleExpiryYearChange(filledValue);
+    // }
 
     touch(index);
   };
