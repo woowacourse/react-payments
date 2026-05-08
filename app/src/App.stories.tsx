@@ -204,3 +204,24 @@ export const CardBrendSelectFieldIsDynamicDisplay: Story = {
     await expect(cardBrandSelect).not.toBeVisible();
   },
 };
+
+export const CardExpiryDateFieldIsDynamicDisplay: Story = {
+  play: async ({ canvasElement }) => {
+    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>(
+        "#card-number-input-container input",
+      ),
+    );
+    await userEvent.type(firstInput, "3612");
+    await userEvent.type(secondInput, "3612");
+    await userEvent.type(thirdInput, "3612");
+    await userEvent.type(fourthInput, "36");
+
+    const brandSelect =
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+
+    await userEvent.selectOptions(brandSelect, "bc");
+    const expiryDateInput = canvasElement.querySelector("#expiry-month");
+    await expect(expiryDateInput).toBeVisible();
+  },
+};

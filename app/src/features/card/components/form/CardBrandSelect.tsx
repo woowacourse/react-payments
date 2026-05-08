@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
 
-export default function CardBrandSelect({ cardBrand, setCardBrand }) {
+export default function CardBrandSelect({
+  cardBrand,
+  setCardBrand,
+  progress,
+  setProgress,
+}) {
   const changeCardBrand = (value: string) => {
     setCardBrand(value);
+    setProgress({ ...progress, cardExpiryDate: true });
   };
 
   return (

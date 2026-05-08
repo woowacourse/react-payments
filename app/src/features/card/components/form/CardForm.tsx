@@ -33,11 +33,26 @@ export function CardForm({
         <CardPasswordInput />
       </CardSection>
       <CardSection
+        title={"카드 유효기간을 입력해 주세요"}
+        subTitle={"월/년도(MMYY)를 순서대로 입력해 주세요."}
+        display={progress["cardExpiryDate"]}
+      >
+        <CardExpiryDateInput
+          cardExpiryDate={cardExpiryDate}
+          setCardExpiryDate={setCardExpiryDate}
+        />
+      </CardSection>
+      <CardSection
         title={"카드사를 선택해 주세요"}
         subTitle={"현재 국내 카드사만 가능합니다."}
         display={progress["cardBrand"]}
       >
-        <CardBrandSelect cardBrand={cardBrand} setCardBrand={setCardBrand} />
+        <CardBrandSelect
+          cardBrand={cardBrand}
+          setCardBrand={setCardBrand}
+          progress={progress}
+          setProgress={setProgress}
+        />
       </CardSection>
       <CardSection
         title={"결제할 카드 번호를 입력해 주세요"}
@@ -49,16 +64,6 @@ export function CardForm({
           setCardNumber={setCardNumber}
           progress={progress}
           setProgress={setProgress}
-        />
-      </CardSection>
-      <CardSection
-        title={"카드 유효기간을 입력해 주세요"}
-        subTitle={"월/년도(MMYY)를 순서대로 입력해 주세요."}
-        display={progress["cardExpiryDate"]}
-      >
-        <CardExpiryDateInput
-          cardExpiryDate={cardExpiryDate}
-          setCardExpiryDate={setCardExpiryDate}
         />
       </CardSection>
       <CardSection

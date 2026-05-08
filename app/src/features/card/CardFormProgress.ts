@@ -10,6 +10,10 @@ const CardFormProgress = {
       return true;
     }
   },
+
+  isCardBrandComplete(value: string) {
+    if (value) return true;
+  },
 };
 
 export default CardFormProgress;
