@@ -20,7 +20,7 @@ export const useCvc = ({value, setValue}: Props) => {
     error: inputShell.errors[0],
     inputRef: (el: HTMLInputElement | null) => { inputShell.inputRefs.current[0] = el; },
     handleOnChange: (val: string) => inputShell.handleOnChange(val, 0),
-    handleOnBlur: () => inputShell.handleOnBlur(),
+    handleOnBlur: (val: string) => inputShell.handleOnBlur(val, 0),
     finalErrorMessage: inputShell.finalErrorMessage,
   };
 };

@@ -34,8 +34,9 @@ export const useInputShell = <T>({
     }
   };
 
-  const handleOnBlur = () => {
-    setErrors(errorChecker(value));
+  const handleOnBlur = (inputValue: string, index: number) => {
+    const updatedValue = valueUpdater(value, inputValue, index);
+    setErrors(errorChecker(updatedValue));
   };
 
   return {

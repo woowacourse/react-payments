@@ -27,7 +27,7 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         id={`${expirationDateIds}-month`}
         value={value.month}
         onChange={(v) => handleOnChange(v, 0)}
-        onBlur={() => handleOnBlur()}
+        onBlur={(v) => handleOnBlur(v, 0)}
         placeholder="MM"
         isError={errors[0]}
         maxLength={2}
@@ -37,7 +37,7 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         id={`${expirationDateIds}-year`}
         value={value.year}
         onChange={(v) => handleOnChange(v, 1)}
-        onBlur={() => handleOnBlur()}
+        onBlur={(v) => handleOnBlur(v, 1)}
         placeholder="YY"
         isError={errors[1]}
         maxLength={2}
