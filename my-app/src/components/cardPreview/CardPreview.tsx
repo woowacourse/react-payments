@@ -27,7 +27,7 @@ export default function CardPreview({ cardNumber, expirationDate, cardCompany }:
       </CardHeader>
       <CardNumber>
         {cardNumber.map((number, index) => (
-          <EachCardNumber key={index} cardNumber={number} index={index} />
+          <EachCardNumber key={`cardnumberKey-${index}`} cardNumber={number} index={index} />
         ))}
       </CardNumber>
       <CardExpirationDate>

@@ -25,7 +25,7 @@ const CardNumberSection = ({ value, setValue }: Props) => {
     >
       {format.map((maxLength, index) => (
         <NumberInput
-          key={index}
+          key={`${cardNumberIds}-${index}`}
           id={`${cardNumberIds}-${index}`}
           ref={(el) => {inputRefs.current[index] = el;}}
           value={value[index] || ''}
