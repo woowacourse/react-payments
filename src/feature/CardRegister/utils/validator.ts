@@ -15,3 +15,14 @@ export const isValidMonth = (value: string) => {
 
   return month >= 1 && month <= 12;
 };
+
+export const isPrefixInRange = (
+  fullNumber: string,
+  digitCount: number,
+  start: number,
+  end: number,
+) => {
+  const prefix = Number(fullNumber.slice(0, digitCount));
+
+  return prefix >= start && prefix <= end;
+};

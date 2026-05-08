@@ -1,3 +1,11 @@
+import type { CardBrandName } from '../../../common/types/CardPreview';
+
+import visaImg from '../assets/Visa.png';
+import masterCardImg from '../assets/Mastercard.png';
+import amexImg from '../assets/Amex.svg';
+import dinersImg from '../assets/Diners.svg';
+import unionPayImg from '../assets/UnionPay.svg';
+
 export const CARD_BRANDS = [
   { name: 'visa', maxlength: 16 },
   { name: 'masterCard', maxlength: 16 },
@@ -5,6 +13,14 @@ export const CARD_BRANDS = [
   { name: 'amex', maxlength: 15 },
   { name: 'unionPay', maxlength: 16 },
 ];
+
+export const BRANDS_IMAGE: Record<CardBrandName, string> = {
+  visa: visaImg,
+  masterCard: masterCardImg,
+  diners: dinersImg,
+  amex: amexImg,
+  unionPay: unionPayImg,
+};
 
 export const CARD_COMPANIES = [
   { id: 'bc', name: 'BC카드', color: '#f64655' },

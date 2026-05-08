@@ -3,6 +3,7 @@ import type {
   CardCompanyId,
 } from '../../../common/types/CardPreview';
 import { CARD_COMPANIES } from '../constant/CARD_BRANDS';
+import { isPrefixInRange } from './validator';
 
 export const getCardBrandName = (
   cardNumbers: string[],
@@ -11,8 +12,20 @@ export const getCardBrandName = (
 
   if (fullNumber.startsWith('4')) return 'visa';
 
-  const prefix = Number(fullNumber.slice(0, 2));
-  if (prefix >= 51 && prefix <= 55) return 'masterCard';
+  if (isPrefixInRange(fullNumber, 2, 51, 55)) return 'masterCard';
+  if (isPrefixInRange(fullNumber, 2, 36, 36)) return 'diners';
+  if (
+    isPrefixInRange(fullNumber, 2, 34, 34) ||
+    isPrefixInRange(fullNumber, 2, 37, 37)
+  )
+    return 'amex';
+
+  if (
+    isPrefixInRange(fullNumber, 6, 622126, 622925) ||
+    isPrefixInRange(fullNumber, 3, 624, 626) ||
+    isPrefixInRange(fullNumber, 4, 6282, 6288)
+  )
+    return 'unionPay';
 
   return null;
 };
