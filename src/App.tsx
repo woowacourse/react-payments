@@ -60,34 +60,34 @@ function App() {
             />
 
             <InputSectionContainer>
-              {isCVCCompleted && (
+              <CardInfoSection
+                title="결제할 카드 번호를 입력해 주세요"
+                caption="본인 명의의 카드만 결제 가능합니다."
+                label="카드 번호"
+              >
+                <CardNumberInputWrapper
+                  setCardNumber={setCardNumbers}
+                  value={cardNumbers}
+                  onComplete={(isCompleted) => {
+                    if (isCompleted) setIsCardNumberCompleted(true);
+                  }}
+                />
+              </CardInfoSection>
+
+              {isCardNumberCompleted && (
                 <CardInfoSection
-                  title="비밀번호를 입력해 주세요"
-                  caption="앞의 2자리를 입력해주세요"
-                  label="비밀번호 앞 2자리"
+                  title="카드사를 선택해 주세요"
+                  caption="현재 국내 카드사만 가능합니다."
                 >
-                  <PassWordInputWrapper
-                    setPassWord={setPassword}
-                    value={passWord}
-                    onComplete={(isCompleted) => {
-                      if (isCompleted) setIsPassWordCompleted(true);
-                    }}
-                  />
-                </CardInfoSection>
-              )}
-              {isEXPCompleted && (
-                <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
-                  <CVCInputWrapper
-                    setCVCNumber={setCVC}
-                    value={cvc}
-                    onComplete={(isCompleted) => {
-                      if (isCompleted) setIsCVCCompleted(true);
-                    }}
+                  <CardFirmSelect
+                    onChangeCardFirmCategory={(value, label) =>
+                      setCardFirm({ value, label })
+                    }
                   />
                 </CardInfoSection>
               )}
 
-              {isCardNumberCompleted && (
+              {cardFirm.value && (
                 <CardInfoSection
                   title="카드 유효기간을 입력해 주세요"
                   caption="월/년도(MMYY)를 순서대로 입력해 주세요"
@@ -103,32 +103,33 @@ function App() {
                 </CardInfoSection>
               )}
 
-              {cardFirm.value && (
-                <CardInfoSection
-                  title="결제할 카드 번호를 입력해 주세요"
-                  caption="본인 명의의 카드만 결제 가능합니다."
-                  label="카드 번호"
-                >
-                  <CardNumberInputWrapper
-                    setCardNumber={setCardNumbers}
-                    value={cardNumbers}
+              {isEXPCompleted && (
+                <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
+                  <CVCInputWrapper
+                    setCVCNumber={setCVC}
+                    value={cvc}
                     onComplete={(isCompleted) => {
-                      if (isCompleted) setIsCardNumberCompleted(true);
+                      if (isCompleted) setIsCVCCompleted(true);
                     }}
                   />
                 </CardInfoSection>
               )}
 
-              <CardInfoSection
-                title="카드사를 선택해 주세요"
-                caption="현재 국내 카드사만 가능합니다."
-              >
-                <CardFirmSelect
-                  onChangeCardFirmCategory={(value, label) =>
-                    setCardFirm({ value, label })
-                  }
-                />
-              </CardInfoSection>
+              {isCVCCompleted && (
+                <CardInfoSection
+                  title="비밀번호를 입력해 주세요"
+                  caption="앞의 2자리를 입력해주세요"
+                  label="비밀번호 앞 2자리"
+                >
+                  <PassWordInputWrapper
+                    setPassWord={setPassword}
+                    value={passWord}
+                    onComplete={(isCompleted) => {
+                      if (isCompleted) setIsPassWordCompleted(true);
+                    }}
+                  />
+                </CardInfoSection>
+              )}
             </InputSectionContainer>
             {isPassWordCompleted && (
               <CheckBtn
