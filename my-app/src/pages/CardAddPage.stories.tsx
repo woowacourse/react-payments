@@ -24,8 +24,10 @@ export const NormalCase: Story = {
     await userEvent.type(cardInputs[2], '3333');
     await userEvent.type(cardInputs[3], '4444');
 
-    const companyButton = await canvas.findByText('BC카드'); 
+    const companyButton = await canvas.findByText('카드사를 선택해주세요'); 
     await userEvent.click(companyButton);
+    const brandButton = await canvas.findByText('BC카드'); 
+    await userEvent.click(brandButton);
 
     const monthInput = await canvas.findByPlaceholderText('MM');
     await userEvent.type(monthInput, '12');
@@ -62,8 +64,10 @@ export const ErrorCase: Story = {
     await userEvent.type(cardInputs[2], '3333');
     await userEvent.type(cardInputs[3], '4444');
     
-    const companyButton = await canvas.findByText('BC카드');
+    const companyButton = await canvas.findByText('카드사를 선택해주세요'); 
     await userEvent.click(companyButton);
+    const brandButton = await canvas.findByText('BC카드'); 
+    await userEvent.click(brandButton);
 
     // 월 에러
     const monthInput = await canvas.findByPlaceholderText('MM');
