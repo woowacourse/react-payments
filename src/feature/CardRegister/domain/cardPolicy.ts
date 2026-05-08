@@ -50,9 +50,12 @@ const matchAmex = (prefix: string) => prefix.startsWith('34') || prefix.startsWi
 const matchDiners = (prefix: string) => prefix.startsWith('36');
 
 const matchUnionPay = (prefix: string) => {
+  if (prefix.length >= 6) {
+    const n6 = Number(prefix.slice(0, 6));
+    if (n6 >= 622126 && n6 <= 622925) return true;
+  }
   if (prefix.length >= 4) {
     const n4 = Number(prefix.slice(0, 4));
-    if (n4 >= 6221 && n4 <= 6229) return true;
     if (n4 >= 6282 && n4 <= 6288) return true;
   }
   if (prefix.length >= 3) {
@@ -71,7 +74,7 @@ const BRAND_MATCHERS: {brand: CardBrandType; match: (prefix: string) => boolean}
 ];
 
 export const getBrandName = (cardNumbers: CardNumbersType): CardBrandType | null => {
-  const prefix = cardNumbers[0] ?? '';
+  const prefix = cardNumbers.join('').slice(0, 6);
   if (!prefix) return null;
   return BRAND_MATCHERS.find(({match}) => match(prefix))?.brand ?? null;
 };
