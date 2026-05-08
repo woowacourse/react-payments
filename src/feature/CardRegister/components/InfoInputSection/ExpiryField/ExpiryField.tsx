@@ -1,3 +1,4 @@
+import {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 import type {useExpiryDate} from '../../../hooks/useExpiryDate';
@@ -5,6 +6,15 @@ import type {useExpiryDate} from '../../../hooks/useExpiryDate';
 type Props = ReturnType<typeof useExpiryDate>;
 
 const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMonthChange, handleYearChange, handleBlur}: Props) => {
+  const yearRef = useRef<HTMLInputElement | null>(null);
+
+  const onMonthChange = (value: string) => {
+    handleMonthChange(value);
+    if (value.length === 2 && /^\d+$/.test(value)) {
+      yearRef.current?.focus();
+    }
+  };
+
   return (
     <StyledField>
       <InputWrapper>
@@ -14,10 +24,11 @@ const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMo
           inputMode='numeric'
           placeholder='MM'
           strokeMode={0 === firstErrorIdx ? 'error' : 'default'}
-          onChange={(e) => handleMonthChange(e.target.value)}
+          onChange={(e) => onMonthChange(e.target.value)}
           onBlur={(e) => handleBlur(0, e.target.value, 'month')}
         />
         <ExpiryInput
+          ref={yearRef}
           value={expiryYear}
           maxLength={2}
           placeholder='YY'
