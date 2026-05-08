@@ -10,8 +10,10 @@ const meta = {
   tags: ['autodocs'],
   args: {
     cardNumbers: ['', '', '', ''],
-    setCardNumbers: fn(),
-    setIsError: fn(),
+    firstErrorIdx: -1,
+    errorMsg: '',
+    onChange: fn(),
+    onBlur: fn(),
   },
 } satisfies Meta<typeof NumberField>;
 
@@ -32,10 +34,21 @@ export const Filled: Story = {
   },
 };
 
+export const WithError: Story = {
+  args: {
+    cardNumbers: ['1234', '56', '', ''],
+    firstErrorIdx: 1,
+    errorMsg: '카드 번호 4자리를 입력해 주세요',
+  },
+};
+
 export const Interactive: Story = {
   render: function InteractiveNumberField(args) {
     const [cardNumbers, setCardNumbers] = useState(args.cardNumbers);
-
-    return <NumberField {...args} cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />;
+    const handleChange = (index: number, value: string) => {
+      if (!/^\d*$/.test(value) || value.length > 4) return;
+      setCardNumbers(cardNumbers.map((chunk, i) => (i === index ? value : chunk)));
+    };
+    return <NumberField {...args} cardNumbers={cardNumbers} onChange={handleChange} />;
   },
 };
