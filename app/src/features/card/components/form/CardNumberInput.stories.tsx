@@ -164,3 +164,20 @@ export const MultipleErrorsInput: Story = {
     ).toBeInTheDocument();
   },
 };
+
+export const BlankInputExcludeCheckNetworkBrand: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const firstDigitsInput = canvasElement.querySelector("#first-digits");
+    await userEvent.type(firstDigitsInput, "1");
+    await expect(
+      canvas.queryByText("존재하지 않는 네트워크 브랜드 입니다."),
+    ).toBeInTheDocument();
+    await userEvent.clear(firstDigitsInput);
+    await expect(
+      canvas.queryByText("존재하지 않는 네트워크 브랜드 입니다."),
+    ).toBeNull();
+  },
+};
