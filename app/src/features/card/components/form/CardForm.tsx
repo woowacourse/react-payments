@@ -14,6 +14,8 @@ export function CardForm({
   setCardExpiryDate,
   cardBrand,
   setCardBrand,
+  cardCVC,
+  setCardCVC,
 }) {
   const [progress, setProgress] = useState({
     cardNumber: true,
@@ -70,7 +72,7 @@ export function CardForm({
         title={"CVC 번호를 입력해 주세요"}
         display={progress["cardCVCNumber"]}
       >
-        <CardCVCInput />
+        <CardCVCInput cardCVC={cardCVC} setCardCVC={setCardCVC} />
       </CardSection>
     </CardFormContainer>
   );

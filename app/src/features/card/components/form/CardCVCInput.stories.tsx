@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 
 import { CardCVCInput } from "./CardCVCInput";
+import { useState } from "react";
 
 const meta = {
   title: "Card/Form/CardCVCInput",
@@ -15,9 +16,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Base: Story = {};
+const defaultArgs = {
+  cardCVC: "",
+  setCardCVC: null,
+};
+
+const renderWithState = (args: typeof defaultArgs) => {
+  const [cardCVC, setCardCVC] = useState(args.cardCVC);
+  return <CardCVCInput cardCVC={cardCVC} setCardCVC={setCardCVC} />;
+};
+
+export const Base: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+};
 
 export const InvalidTypeInput: Story = {
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("textbox");
@@ -29,6 +45,8 @@ export const InvalidTypeInput: Story = {
 };
 
 export const InvalidCVCLength: Story = {
+  args: defaultArgs,
+  render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("textbox");

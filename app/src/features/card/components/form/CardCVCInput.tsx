@@ -9,9 +9,7 @@ import {
   CardInputLabel,
 } from "../../style/CardStyles";
 
-export function CardCVCInput() {
-  const [cardCVC, setCardCVC] = useState("");
-
+export function CardCVCInput({ cardCVC, setCardCVC }) {
   const [isError, setError] = useState({
     state: false,
     message: "",

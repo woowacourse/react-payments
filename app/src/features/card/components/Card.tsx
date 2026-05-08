@@ -18,6 +18,8 @@ export function Card() {
 
   const [cardBrand, setCardBrand] = useState(null);
 
+  const [cardCVC, setCardCVC] = useState("");
+
   return (
     <CardContainer>
       <CardPreview
@@ -32,6 +34,8 @@ export function Card() {
         setCardExpiryDate={setCardExpiryDate}
         cardBrand={cardBrand}
         setCardBrand={setCardBrand}
+        cardCVC={cardCVC}
+        setCardCVC={setCardCVC}
       />
     </CardContainer>
   );
