@@ -14,7 +14,7 @@ export function CardNetworkBrand({ cardNumber }) {
       Object.values(cardNumber),
       CARD_INPUT.EACH_NUMBER_LENGTH,
     ),
-  ).name;
+  ).brand?.title;
 
   const selectBrandImage = (brand: string): string | null => {
     if (brand === "visa") return VisaCard;

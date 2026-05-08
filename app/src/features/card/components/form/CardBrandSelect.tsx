@@ -10,6 +10,7 @@ export default function CardBrandSelect({ cardBrand, setCardBrand }) {
       defaultValue={cardBrand ?? ""}
       onChange={(e) => changeCardBrand(e.target.value)}
       aria-label="select card brand"
+      id="card-brand-select"
     >
       <option value="" disabled hidden>
         카드사를 선택해주세요.

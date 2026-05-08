@@ -10,7 +10,7 @@ export const Validator = {
 
   isValidNetworkBrand(value: string) {
     const networkBrand = new CardNetwork(value);
-    if (value.trim() !== "" && networkBrand.name === undefined) {
+    if (value.trim() !== "" && networkBrand.brand === undefined) {
       throw new Error("존재하지 않는 네트워크 브랜드 입니다.");
     }
   },

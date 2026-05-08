@@ -23,7 +23,7 @@ export class CardNetwork {
     }
   }
 
-  get name() {
-    return this.#brand?.title;
+  get brand() {
+    return this.#brand;
   }
 }
