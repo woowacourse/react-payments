@@ -15,17 +15,7 @@ const CardRegisterCompletePage = () => {
 
   return (
     <Wrapper>
-      <CheckIcon viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'>
-        <circle cx='40' cy='40' r='40' fill='#333333' />
-        <path
-          d='M24 41 L36 53 L57 30'
-          stroke='#ffffff'
-          strokeWidth='6'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          fill='none'
-        />
-      </CheckIcon>
+      <CheckIcon src='/images/complete_check_icon.png' alt='완료' />
       <Message>
         {state.cardPrefix}로 시작하는
         <br />
@@ -47,7 +37,7 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 
-const CheckIcon = styled.svg`
+const CheckIcon = styled.img`
   width: 80px;
   height: 80px;
 `;
