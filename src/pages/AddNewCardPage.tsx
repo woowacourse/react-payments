@@ -7,7 +7,7 @@ import CardNumberInputField, {
 import CardValidityPeriodInputField, {
   type ValidityPeriod,
 } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
-import { type CardCompany } from "@/constants/cardCompanies";
+import type { CardCompany } from "@/constants/cardCompanies";
 import styled from "@emotion/styled";
 import { detectCardBrand } from "@utils/card";
 import { useState } from "react";
@@ -26,6 +26,7 @@ const AddNewCardPage = () => {
       <CardWrapper>
         <Card
           cardNumberUnits={cardNumber}
+          cardCompany={cardCompany}
           validityPeriod={validityPeriod}
           brand={detectCardBrand(cardNumber)}
         />

@@ -8,21 +8,28 @@ import SwitchCase from "@components/common/SwitchCase";
 import styled from "@emotion/styled";
 import { detectCardBrand } from "@utils/card";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
+import { type CardCompany } from "@/constants/cardCompanies";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;
+  cardCompany: CardCompany | null;
   validityPeriod: ValidityPeriod;
   brand?: ReturnType<typeof detectCardBrand>;
 }
 
 export type CardBrand = "Visa" | "MasterCard";
 
-const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
+const Card = ({
+  cardNumberUnits,
+  cardCompany,
+  validityPeriod,
+  brand,
+}: CardProps) => {
   const CardValidityPeriodUnitString =
     getFormattedValidityPeriodUnit(validityPeriod);
 
   return (
-    <Wrapper>
+    <Wrapper $backgroundColor={cardCompany?.color}>
       <ChipWrapper>
         <Chip />
         <SwitchCase
@@ -62,10 +69,11 @@ const Card = ({ cardNumberUnits, validityPeriod, brand }: CardProps) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $backgroundColor?: string }>`
   width: 13rem;
   height: 8rem;
-  background-color: ${COLOR_PALETTE["BLACK-800"]};
+  background-color: ${({ $backgroundColor }) =>
+    $backgroundColor ?? COLOR_PALETTE["BLACK-800"]};
   border-radius: 0.25rem;
   box-shadow: 3px 3px 5px 0px ${COLOR_PALETTE["BLACK-900"]}40;
 `;

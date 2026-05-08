@@ -3,7 +3,7 @@ import { COLOR_PALETTE } from "@/styles/colorPalette";
 import arrowDownIcon from "@/assets/arrowDownIcon.svg";
 import { useState } from "react";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
-import { type CardCompany } from "@/constants/cardCompanies";
+import type { CardCompany } from "@/constants/cardCompanies";
 
 interface CardCompanySelectorProps {
   cardCompany: CardCompany | null;
