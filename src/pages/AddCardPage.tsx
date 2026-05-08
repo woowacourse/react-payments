@@ -7,6 +7,7 @@ import { categorizeCardBrand } from '../utils';
 import type { CardInfo } from '../types';
 import Card from '../components/ui/Card';
 import CardCompanyField from '../components/domain/CardCompanyField.tsx';
+import PasswordField from '../components/domain/PasswordField.tsx';
 
 interface FieldState<T> {
   value: T;
@@ -25,6 +26,7 @@ export default function AddCardPage() {
     cardCompany: { value: null },
     expirationPeriod: { value: ['', ''] },
     cvc: { value: '' },
+    password: { value: '' },
   });
 
   const cardBrand = categorizeCardBrand(formValue.cardNumbers.value);
@@ -53,6 +55,13 @@ export default function AddCardPage() {
           />
         </div>
         <form css={formLayout}>
+          {stepIndex >= 4 && (
+            <PasswordField
+              value={formValue.password.value}
+              onUpdated={(value) => handleFormValueUpdate('password', value)}
+              onCompleted={() => handleFieldComplete(4)}
+            />
+          )}
           {stepIndex >= 3 && (
             <CVCField
               value={formValue.cvc.value}

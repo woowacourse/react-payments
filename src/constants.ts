@@ -15,3 +15,4 @@ export const EXPIRATION_PERIOD_ERROR_MESSAGES: Record<Exclude<ExpirationPeriodEr
 export const CARD_NUMBER_LENGTH_PER_INPUT = 4;
 export const PERIOD_LENGTH_PER_INPUT = 2;
 export const CVC_LENGTH = 3;
+export const PASSWORD_LENGTH = 2;

@@ -3,6 +3,7 @@ export interface CardInfo {
   cardCompany: CardCompany;
   expirationPeriod: [string, string];
   cvc: string;
+  password: string;
 }
 
 export type CardCompany =
