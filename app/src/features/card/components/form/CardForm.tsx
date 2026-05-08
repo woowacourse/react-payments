@@ -16,6 +16,8 @@ export function CardForm({
   setCardBrand,
   cardCVC,
   setCardCVC,
+  cardPassword,
+  setCardPassword,
 }) {
   const [progress, setProgress] = useState({
     cardNumber: true,
@@ -32,7 +34,10 @@ export function CardForm({
         subTitle={"앞의 2자리를 입력해주세요."}
         display={progress["cardPassword"]}
       >
-        <CardPasswordInput />
+        <CardPasswordInput
+          cardPassword={cardPassword}
+          setCardPassword={setCardPassword}
+        />
       </CardSection>
       <CardSection
         title={"카드 유효기간을 입력해 주세요"}

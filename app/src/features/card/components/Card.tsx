@@ -20,6 +20,8 @@ export function Card() {
 
   const [cardCVC, setCardCVC] = useState("");
 
+  const [cardPassword, setCardPassword] = useState("");
+
   return (
     <CardContainer>
       <CardPreview
@@ -36,6 +38,8 @@ export function Card() {
         setCardBrand={setCardBrand}
         cardCVC={cardCVC}
         setCardCVC={setCardCVC}
+        cardPassword={cardPassword}
+        setCardPassword={setCardPassword}
       />
     </CardContainer>
   );
