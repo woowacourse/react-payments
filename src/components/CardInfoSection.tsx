@@ -14,7 +14,9 @@ export default function CardInfoSection({ title, caption, inputLabel, isRender =
             <CardSectionStyle>
                 <TitleStyle>{title}</TitleStyle>
                 {caption && <CaptionStyle>{caption}</CaptionStyle>}
-                {inputLabel && <InputLabelStyle>{inputLabel}</InputLabelStyle>}
+                <InputLabelContainer>
+                    {inputLabel && <InputLabelStyle>{inputLabel}</InputLabelStyle>}
+                </InputLabelContainer>
                 {children}
             </CardSectionStyle>
         )
@@ -43,12 +45,16 @@ const CaptionStyle = styled.caption`
     color: #8b95a1;
 `;
 
+const InputLabelContainer = styled.div`
+    margin-top: 16px;
+    margin-bottom: 8px;
+`;
+
 const InputLabelStyle = styled.p`
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
     letter-spacing: 0%;
     color: #0a0d13;
-    margin-top: 16px;
-    margin-bottom: 8px;
+    margin: 0;
 `;
