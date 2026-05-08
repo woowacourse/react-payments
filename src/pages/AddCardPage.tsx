@@ -45,7 +45,7 @@ export default function AddCardPage() {
   };
 
   return (
-    <div css={mobileLayout}>
+    <div css={layout}>
       <main>
         <div css={cardWrapperStyle}>
           <Card
@@ -96,15 +96,16 @@ export default function AddCardPage() {
   );
 }
 
-const mobileLayout = css`
+const layout = css`
   display: flex;
   flex-direction: column;
-  width: 376px;
-  height: 700px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  padding: 20px 30px;
+  position: relative;
+  width: 100%;
+  max-width: 512px;
+  height: 100dvh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 20px 30px 80px 30px;
   overflow: scroll;
-  border-radius: 20px;
 `;
 
 const cardWrapperStyle = css`
