@@ -29,7 +29,6 @@ const Chunk = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  width: 38px;
   letter-spacing: 2px;
 `;
 
