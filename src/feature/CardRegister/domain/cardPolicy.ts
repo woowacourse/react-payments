@@ -50,17 +50,14 @@ const matchAmex = (prefix: string) => prefix.startsWith('34') || prefix.startsWi
 const matchDiners = (prefix: string) => prefix.startsWith('36');
 
 const matchUnionPay = (prefix: string) => {
-  if (prefix.length >= 6) {
-    const n = Number(prefix.slice(0, 6));
-    if (n >= 622126 && n <= 622925) return true;
+  if (prefix.length >= 4) {
+    const n4 = Number(prefix.slice(0, 4));
+    if (n4 >= 6221 && n4 <= 6229) return true;
+    if (n4 >= 6282 && n4 <= 6288) return true;
   }
   if (prefix.length >= 3) {
-    const n = Number(prefix.slice(0, 3));
-    if (n >= 624 && n <= 626) return true;
-  }
-  if (prefix.length >= 4) {
-    const n = Number(prefix.slice(0, 4));
-    if (n >= 6282 && n <= 6288) return true;
+    const n3 = Number(prefix.slice(0, 3));
+    if (n3 >= 624 && n3 <= 626) return true;
   }
   return false;
 };
