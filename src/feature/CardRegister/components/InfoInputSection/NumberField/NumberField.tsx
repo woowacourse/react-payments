@@ -5,24 +5,25 @@ import styled from 'styled-components';
 
 type Props = {
   cardNumbers: CardNumbersType;
+  format: number[];
   firstErrorIdx: number;
   errorMsg: string;
   onChange: (index: number, value: string) => void;
   onBlur: (index: number, value: string) => void;
 };
 
-const NumberField = ({cardNumbers, firstErrorIdx, errorMsg, onChange, onBlur}: Props) => {
+const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, onBlur}: Props) => {
   return (
     <StyledField>
       <Label value='카드 번호' />
-      <InputWrapper>
-        {cardNumbers.map((chunk, index) => (
+      <InputWrapper $columns={format.map((n) => `${n}fr`).join(' ')}>
+        {format.map((maxLen, index) => (
           <CardNumberInput
             key={index}
-            value={chunk}
+            value={cardNumbers[index] ?? ''}
             placeholder='1234'
             inputMode='numeric'
-            maxLength={4}
+            maxLength={maxLen}
             strokeMode={index === firstErrorIdx ? 'error' : 'default'}
             onChange={(e) => onChange(index, e.target.value)}
             onBlur={(e) => onBlur(index, e.target.value)}
@@ -45,9 +46,9 @@ const StyledField = styled.div`
   width: 100%;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{$columns: string}>`
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: ${({$columns}) => $columns};
   gap: 8px;
 `;
 

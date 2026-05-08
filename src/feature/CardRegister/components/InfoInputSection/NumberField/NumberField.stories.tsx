@@ -10,6 +10,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     cardNumbers: ['', '', '', ''],
+    format: [4, 4, 4, 4],
     firstErrorIdx: -1,
     errorMsg: '',
     onChange: fn(),
@@ -46,7 +47,7 @@ export const Interactive: Story = {
   render: function InteractiveNumberField(args) {
     const [cardNumbers, setCardNumbers] = useState(args.cardNumbers);
     const handleChange = (index: number, value: string) => {
-      if (!/^\d*$/.test(value) || value.length > 4) return;
+      if (!/^\d*$/.test(value) || value.length > args.format[index]) return;
       setCardNumbers(cardNumbers.map((chunk, i) => (i === index ? value : chunk)));
     };
     return <NumberField {...args} cardNumbers={cardNumbers} onChange={handleChange} />;
