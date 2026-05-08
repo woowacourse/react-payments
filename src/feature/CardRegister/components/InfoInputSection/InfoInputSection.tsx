@@ -3,11 +3,12 @@ import CvcField from './CvcField/CvCField';
 import ExpiryField from './ExpiryField/ExpiryField';
 import InputContainer from './InputContainer/InputContainer';
 import NumberField from './NumberField/NumberField';
+import type {CardNumbersType} from '../../../../common/types/CardInfoType';
 import styled from 'styled-components';
 
 type Props = {
-  cardNumbers: [string, string, string, string];
-  setCardNumbers: (value: [string, string, string, string]) => void;
+  cardNumbers: CardNumbersType;
+  setCardNumbers: (value: CardNumbersType) => void;
   expiryMonth: string;
   setExpiryMonth: (value: string) => void;
   expiryYear: string;

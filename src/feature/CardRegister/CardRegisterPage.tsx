@@ -1,10 +1,11 @@
 import {useState} from 'react';
 import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
+import type {CardNumbersType} from '../../common/types/CardInfoType';
 import styled from 'styled-components';
 
 const CardRegisterPage = () => {
-  const [cardNumbers, setCardNumbers] = useState<[string, string, string, string]>(['', '', '', '']);
+  const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
 

@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import Label from '../../../../../common/components/Label/Label';
+import type {CardNumbersType} from '../../../../../common/types/CardInfoType';
 import styled from 'styled-components';
 import {createFlags, computeNextTouched, computeNextErrorInfo} from '../fieldState';
 
@@ -9,8 +10,8 @@ const NumberField = ({
   setCardNumbers,
   setIsError,
 }: {
-  cardNumbers: [string, string, string, string];
-  setCardNumbers: (value: [string, string, string, string]) => void;
+  cardNumbers: CardNumbersType;
+  setCardNumbers: (value: CardNumbersType) => void;
   setIsError: (value: boolean) => void;
 }) => {
   const INPUT_COUNT = 4;
@@ -29,7 +30,7 @@ const NumberField = ({
     if (!/^\d*$/.test(value)) return;
     if (value.length > NUMBER_LENGTH) return;
 
-    const newChunks = cardNumbers.map((chunk, i) => (i === index ? value : chunk)) as [string, string, string, string];
+    const newChunks = cardNumbers.map((chunk, i) => (i === index ? value : chunk));
     setCardNumbers(newChunks);
     clearErrorWhenComplete(index, value);
   };
