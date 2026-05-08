@@ -1,13 +1,11 @@
-import visaImg from '../../../../../../public/images/Visa.png';
-import masterCardImg from '../../../../../../public/images/Mastercard.png';
 import styled from 'styled-components';
+import {BRAND_IMAGES} from '../../../domain/cardPolicy';
+import type {CardBrandType} from '../../../domain/cardPolicy';
 
-type BrandName = 'visa' | 'masterCard' | null;
-
-const CardBrandLogo = ({brandName}: {brandName: BrandName}) => {
+const CardBrandLogo = ({brandName}: {brandName: CardBrandType | null}) => {
   if (brandName === null) return null;
 
-  return <BrandLogoImg src={brandName === 'visa' ? visaImg : masterCardImg} alt={brandName} />;
+  return <BrandLogoImg src={BRAND_IMAGES[brandName]} alt={brandName} />;
 };
 
 const BrandLogoImg = styled.img`
