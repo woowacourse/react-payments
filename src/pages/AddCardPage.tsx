@@ -22,6 +22,7 @@ export default function AddCardPage() {
   const [stepIndex, setStepIndex] = useState(0);
   const [formValue, setFormValue] = useState<CardInfoFormValue>({
     cardNumbers: { value: ['', '', '', ''] },
+    cardCompany: { value: null },
     expirationPeriod: { value: ['', ''] },
     cvc: { value: '' },
   });
@@ -52,25 +53,31 @@ export default function AddCardPage() {
           />
         </div>
         <form css={formLayout}>
-          <CardCompanyField />
-          {stepIndex >= 2 && (
+          {stepIndex >= 3 && (
             <CVCField
               value={formValue.cvc.value}
-              onUpdated={(...params) => handleFormValueUpdate('cvc', ...params)}
+              onUpdated={(value) => handleFormValueUpdate('cvc', value)}
+              onCompleted={() => handleFieldComplete(3)}
+            />
+          )}
+          {stepIndex >= 2 && (
+            <ExpirationPeriodField
+              value={formValue.expirationPeriod.value}
+              onUpdated={(value) => handleFormValueUpdate('expirationPeriod', value)}
               onCompleted={() => handleFieldComplete(2)}
             />
           )}
           {stepIndex >= 1 && (
-            <ExpirationPeriodField
-              value={formValue.expirationPeriod.value}
-              onUpdated={(...params) => handleFormValueUpdate('expirationPeriod', ...params)}
+            <CardCompanyField
+              value={formValue.cardCompany.value}
+              onUpdated={(value) => handleFormValueUpdate('cardCompany', value)}
               onCompleted={() => handleFieldComplete(1)}
             />
           )}
           {stepIndex >= 0 && (
             <CardNumbersField
               value={formValue.cardNumbers.value}
-              onUpdated={(...params) => handleFormValueUpdate('cardNumbers', ...params)}
+              onUpdated={(value) => handleFormValueUpdate('cardNumbers', value)}
               onCompleted={() => handleFieldComplete(0)}
             />
           )}

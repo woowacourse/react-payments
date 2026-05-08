@@ -1,38 +1,41 @@
 import FormField, { type FormFieldProps } from '../ui/FormField.tsx';
-import { ERROR_MESSAGES } from '../../constants.ts';
-import { useState } from 'react';
 import { css } from '@emotion/react';
+import type { CardInfo } from '../../types.ts';
+import type { ChangeEvent } from 'react';
 
 const options = ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'];
 const placeholder = '카드사를 선택해주세요';
 
-export default function CardCompanyField() {
-  const [selected, setSelected] = useState(placeholder);
-  const errorStatus = null;
+interface CardCompanyFieldProps {
+  value: CardInfo['cardCompany'];
+  onUpdated: (value: CardInfo['cardCompany']) => void;
+  onCompleted: () => void;
+}
 
+export default function CardCompanyField({ value, onUpdated, onCompleted }: CardCompanyFieldProps) {
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드사를 선택해 주세요',
     caption: '현재 국내 카드사만 가능합니다.',
-    error: !!errorStatus,
-    errorMessage: ERROR_MESSAGES[errorStatus] ?? '',
+    error: false,
+    errorMessage: '',
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    onUpdated(e.target.value as CardInfo['cardCompany']);
+    onCompleted();
   };
 
   return (
     <FormField {...formFieldProps}>
       <select
+        autoFocus
         defaultValue={placeholder}
-        css={[selectStyle, variants[selected === placeholder ? 'placeholder' : 'default']]}
+        css={[selectStyle, variants[value === null ? 'placeholder' : 'default']]}
+        onChange={handleChange}
       >
-        <option css={placeholderStyle}>{placeholder}</option>
+        <option css={placeholderStyle}>{value ?? placeholder}</option>
         {options.map((option) => (
-          <option
-            key={option}
-            role="option"
-            css={optionStyle}
-            onClick={() => {
-              setSelected(option);
-            }}
-          >
+          <option key={option} role="option" css={optionStyle} onClick={() => {}}>
             {option}
           </option>
         ))}
