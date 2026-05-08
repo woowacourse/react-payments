@@ -1,6 +1,6 @@
 import { useState } from "react";
 import NumberInput from "../Input/NumberInput";
-import InputGroup from "../InputWrapper/InputGroup";
+import InputGroup from "./InputGroup";
 import { getPassWordErrorMessage } from "../../utils/getPassWordErrorMessage";
 
 interface Props {
@@ -20,6 +20,7 @@ export default function PassWordInputWrapper({
     <InputGroup errorMessage={inputError}>
       <NumberInput
         type="password"
+        autoFocus
         value={value}
         setValue={(newValue) => {
           const newPassWord = newValue;

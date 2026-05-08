@@ -47,6 +47,7 @@ export default function EXPInputWrapper({
             );
           }}
           placeholder={expKey === "mm" ? "MM" : "YY"}
+          autoFocus={expKey === "mm"}
           hasError={inputErrors[expKey as keyof EXPNumber] !== null}
           maxLength={2}
           onError={setError(expKey as keyof EXPNumber)}

@@ -26,6 +26,7 @@ export default function CVCInputWrapper({
           onComplete(newCVCNumber.length === 3 && inputError === null);
         }}
         placeholder="123"
+        autoFocus
         hasError={inputError !== null}
         maxLength={3}
         onError={setInputError}

@@ -28,6 +28,7 @@ export default function CardFirmSelect({ onChangeCardFirmCategory }: Props) {
     <div>
       <Select
         options={CARD_OPTIONS}
+        autoFocus
         onChange={(opt) =>
           opt && onChangeCardFirmCategory(opt.value, opt.label)
         }

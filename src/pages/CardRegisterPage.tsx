@@ -6,7 +6,7 @@ import CardNumberInputWrapper from "../components/InputWrapper/CardNumberInputWr
 import EXPInputWrapper from "../components/InputWrapper/EXPInputWrapper";
 import CVCInputWrapper from "../components/InputWrapper/CVCInputWrapper";
 import CardFirmSelect from "../components/CardFirmSelect/CardFirmSelect";
-import PassWordInputWrapper from "../components/PassWord/PassWordInputWrapper";
+import PassWordInputWrapper from "../components/InputWrapper/PassWordInputWrapper";
 import CheckBtn from "../components/button/CheckBtn";
 import { useNavigate } from "react-router-dom";
 

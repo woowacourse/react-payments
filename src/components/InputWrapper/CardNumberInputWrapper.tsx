@@ -47,6 +47,7 @@ export default function CardNumberInputWrapper({
       {Object.entries(value).map(([cardKey, cardValue]) => (
         <NumberInput
           key={`${cardKey}-input`}
+          autoFocus={cardKey === "first"}
           value={cardValue}
           setValue={(newValue) => {
             const newCardNumbers = { ...value, [cardKey]: newValue };
