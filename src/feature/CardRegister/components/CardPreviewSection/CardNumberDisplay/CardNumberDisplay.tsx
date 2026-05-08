@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {MASK_FROM_INDEX, maskCardNumbers} from '../../../domain/cardBrand';
+import {MASK_FROM_INDEX, maskCardNumbers} from '../../../domain/cardNumberMask';
 
 const CardNumberDisplay = ({cardNumbers}: {cardNumbers: string[]}) => {
   const displayNumbers = maskCardNumbers(cardNumbers);

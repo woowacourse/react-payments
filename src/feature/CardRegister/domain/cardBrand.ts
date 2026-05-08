@@ -8,9 +8,11 @@ export const CARD_BRANDS = {
   unionPay: {format: [4, 4, 4, 4], imageUrl: '/images/unionpay-logo.svg'},
 } as const;
 
+export const DEFAULT_CARD_NUMBER_FORMAT = [4, 4, 4, 4];
+
 export type CardBrandType = keyof typeof CARD_BRANDS;
 
-export const DEFAULT_CARD_NUMBER_FORMAT = [4, 4, 4, 4];
+const MAX_BRAND_PREFIX_LENGTH = 6;
 
 const BRAND_MATCHERS: {brand: CardBrandType; match: (prefix: string) => boolean}[] = [
   {brand: 'visa', match: matchVisa},
@@ -21,13 +23,8 @@ const BRAND_MATCHERS: {brand: CardBrandType; match: (prefix: string) => boolean}
 ];
 
 export const getBrandName = (cardNumbers: string[]): CardBrandType | null => {
-  const prefix = cardNumbers.join('').slice(0, 6);
+  const prefix = cardNumbers.join('').slice(0, MAX_BRAND_PREFIX_LENGTH);
   if (!prefix) return null;
   return BRAND_MATCHERS.find(({match}) => match(prefix))?.brand ?? null;
 };
 
-// mask 관련
-export const MASK_FROM_INDEX = 2;
-
-export const maskCardNumbers = (chunks: string[]) =>
-  chunks.map((chunk, i) => (i >= MASK_FROM_INDEX ? '·'.repeat(chunk.length) : chunk));
