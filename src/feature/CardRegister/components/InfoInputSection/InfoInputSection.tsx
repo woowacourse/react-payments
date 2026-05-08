@@ -30,24 +30,29 @@ const InfoInputSection = ({
   showExpiry,
   showCvc,
 }: Props) => {
-  return (
-    <Container>
-      {showCvc && (
-        <InputContainer title='CVC 번호를 입력해 주세요'>
-          <CvcField {...cvcField} />
-        </InputContainer>
-      )}
-      {showExpiry && (
-        <InputContainer title='카드 유효기간을 입력해 주세요' description='월/년도(MMYY)를 순서대로 입력해 주세요.'>
-          <ExpiryField {...expiryField} />
-        </InputContainer>
-      )}
-      {showCompanySelect && (
-        <InputContainer title='카드사를 선택해 주세요'>
-          <BrandSelectField selectedCompany={selectedCompany} onChange={onCompanyChange} />
-        </InputContainer>
-      )}
-      <InputContainer title='결제할 카드 번호를 입력해 주세요' description='본인 명의의 카드만 결제 가능합니다.'>
+  const fields = [
+    {
+      show: showCvc,
+      title: 'CVC 번호를 입력해 주세요',
+      node: <CvcField {...cvcField} />,
+    },
+    {
+      show: showExpiry,
+      title: '카드 유효기간을 입력해 주세요',
+      description: '월/년도(MMYY)를 순서대로 입력해 주세요.',
+      node: <ExpiryField {...expiryField} />,
+    },
+    {
+      show: showCompanySelect,
+      title: '카드사를 선택해 주세요',
+      description: '현재 국내 카드사만 가능합니다.',
+      node: <BrandSelectField selectedCompany={selectedCompany} onChange={onCompanyChange} />,
+    },
+    {
+      show: true,
+      title: '결제할 카드 번호를 입력해 주세요',
+      description: '본인 명의의 카드만 결제 가능합니다.',
+      node: (
         <NumberField
           cardNumbers={numberField.cardNumbers}
           format={numberField.format}
@@ -56,7 +61,19 @@ const InfoInputSection = ({
           onChange={numberField.handleChange}
           onBlur={numberField.handleBlur}
         />
-      </InputContainer>
+      ),
+    },
+  ];
+
+  return (
+    <Container>
+      {fields
+        .filter((f) => f.show)
+        .map((f, i) => (
+          <InputContainer key={i} title={f.title} description={f.description}>
+            {f.node}
+          </InputContainer>
+        ))}
     </Container>
   );
 };
