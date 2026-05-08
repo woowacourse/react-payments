@@ -1,4 +1,11 @@
-import type { CardError, DateError, MonthError, YearError, CvcError } from './errorTypes';
+import type {
+  CardError,
+  DateError,
+  MonthError,
+  YearError,
+  CvcError,
+  PasswordError,
+} from './errorTypes';
 
 export interface CardStatus {
   cardNumbers: string[];
@@ -30,6 +37,16 @@ export interface Cvc {
 export interface CvcHandler {
   handleCardCvc: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCvcBlur: () => void;
+}
+
+export interface Password {
+  cardPassword: string;
+  cardPasswordErrorMode: PasswordError | 'normal';
+}
+
+export interface PasswordHandler {
+  handleCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordBlur: () => void;
 }
 
 export type CardBrandType = 'visa' | 'master' | 'diners' | 'amex' | 'unionPay' | 'unknown';
