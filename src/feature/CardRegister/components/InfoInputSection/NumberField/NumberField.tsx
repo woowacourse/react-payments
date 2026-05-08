@@ -1,3 +1,4 @@
+import {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import Label from '../../../../../common/components/Label/Label';
 import type {CardNumbersType} from '../../../../../common/types/CardInfoType';
@@ -13,6 +14,15 @@ type Props = {
 };
 
 const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, onBlur}: Props) => {
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleChange = (index: number, value: string) => {
+    onChange(index, value);
+    if (value.length === format[index] && /^\d+$/.test(value) && index < format.length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
   return (
     <StyledField>
       <Label value='카드 번호' />
@@ -20,12 +30,15 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
         {format.map((maxLen, index) => (
           <CardNumberInput
             key={index}
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             value={cardNumbers[index] ?? ''}
             placeholder='1234'
             inputMode='numeric'
             maxLength={maxLen}
             strokeMode={index === firstErrorIdx ? 'error' : 'default'}
-            onChange={(e) => onChange(index, e.target.value)}
+            onChange={(e) => handleChange(index, e.target.value)}
             onBlur={(e) => onBlur(index, e.target.value)}
           />
         ))}
