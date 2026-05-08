@@ -1,0 +1,70 @@
+import { useEffect, useState } from "react";
+import type { CardCompany } from "../components/cardCompanySection/CardCompanyConstants";
+import { getCardBrand, getCardNumberArrayByBrand, getCardNumberError, getCvcError, getMonthError, getPasswordError, getYearError } from "../utils/Validation";
+
+export const useCardForm = () => {
+  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
+  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
+  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
+  const [cvc, setCvc] = useState('');
+  const [password, setPassword] = useState('');
+  const [maxStep, setMaxStep] = useState(1);
+
+  const brand = getCardBrand(cardNumber.join(''));
+  const format = getCardNumberArrayByBrand(brand);
+
+  const isCardNumberCorrect =
+    cardNumber.length === format.length &&
+    cardNumber.every((num, index) => num.length === format[index] && getCardNumberError(num) === '');
+  const isCardCompanyCorrect = cardCompany !== '';
+  const isExpirationDateCorrect =
+    expirationDate.month.length === 2 && expirationDate.year.length === 2 && getMonthError(expirationDate.month) === '' && getYearError(expirationDate.year) === '';
+  const isCvcCorrect = cvc.length === 3 && getCvcError(cvc) === '';
+  const isPasswordCorrect = password.length === 2 && getPasswordError(password) === '';
+
+  const isFormValid =
+    isCardNumberCorrect &&
+    isCardCompanyCorrect &&
+    isExpirationDateCorrect &&
+    isCvcCorrect &&
+    isPasswordCorrect;
+
+  useEffect(() => {
+    // 올바른 카드번호 입력
+    if (isCardNumberCorrect) {
+      setMaxStep((prev) => Math.max(prev, 2));
+    }
+    // 올바른 카드사 입력
+    if (isCardNumberCorrect && isCardCompanyCorrect) {
+      setMaxStep((prev) => Math.max(prev, 3));
+    }
+    // 올바른 유효기간 입력
+    if (
+      isCardNumberCorrect &&
+      isCardCompanyCorrect &&
+      isExpirationDateCorrect
+    ) {
+      setMaxStep((prev) => Math.max(prev, 4));
+    }
+    // 올바른 CVC 입력
+    if (
+      isCardNumberCorrect &&
+      isCardCompanyCorrect &&
+      isExpirationDateCorrect &&
+      isCvcCorrect
+    ) {
+      setMaxStep((prev) => Math.max(prev, 5));
+    }
+  }, [
+    isCardNumberCorrect,
+    isCardCompanyCorrect,
+    isExpirationDateCorrect,
+    isCvcCorrect,
+  ]);
+
+  return {
+    formState: { cardNumber, cardCompany, expirationDate, cvc, password },
+    setters: { setCardNumber, setCardCompany, setExpirationDate, setCvc, setPassword },
+    validation: { isFormValid, maxStep },
+  };
+};
