@@ -1,10 +1,9 @@
 import {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
-import type {CardNumbersType} from '../../../../../common/types/CardInfoType';
 import styled from 'styled-components';
 
 type Props = {
-  cardNumbers: CardNumbersType;
+  cardNumbers: string[];
   format: number[];
   firstErrorIdx: number;
   errorMsg: string;

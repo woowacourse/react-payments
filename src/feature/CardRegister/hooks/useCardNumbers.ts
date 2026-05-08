@@ -1,10 +1,9 @@
 import {useState} from 'react';
 import {CARD_BRANDS, DEFAULT_CARD_NUMBER_FORMAT, getBrandName} from '../domain/cardPolicy';
 import {createFlags, computeNextErrorInfo, computeNextTouched} from '../components/InfoInputSection/fieldState';
-import type {CardNumbersType} from '../../../common/types/CardInfoType';
 import {resizeArray} from '../../../common/utils/array';
 
-const getCardNumberFormat = (cardNumbers: CardNumbersType) => {
+const getCardNumberFormat = (cardNumbers: string[]) => {
   const brand = getBrandName(cardNumbers);
   return brand ? [...CARD_BRANDS[brand].format] : DEFAULT_CARD_NUMBER_FORMAT;
 };
@@ -12,7 +11,7 @@ const getCardNumberFormat = (cardNumbers: CardNumbersType) => {
 const buildErrorMsg = (digits: number) => `카드 번호 ${digits}자리를 입력해 주세요`;
 
 export function useCardNumbers() {
-  const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
+  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [errorInfo, setErrorInfo] = useState({
     flag: createFlags(DEFAULT_CARD_NUMBER_FORMAT.length),
     messages: Array(DEFAULT_CARD_NUMBER_FORMAT.length).fill(''),
@@ -29,7 +28,7 @@ export function useCardNumbers() {
   const firstErrorIdx = errorInfo.flag.indexOf(true);
   const hasAnyError = firstErrorIdx !== -1;
 
-  const applyResize = (nextChunks: CardNumbersType, nextFormat: number[]) => {
+  const applyResize = (nextChunks: string[], nextFormat: number[]) => {
     const len = nextFormat.length;
     const trimmed = Array.from({length: len}, (_, i) => (nextChunks[i] ?? '').slice(0, nextFormat[i]));
     setCardNumbers(trimmed);

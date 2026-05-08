@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import type {CardNumbersType} from '../../../../../common/types/CardInfoType';
 import {MASK_FROM_INDEX, maskCardNumbers} from '../../../domain/cardPolicy';
 
-const CardNumberDisplay = ({cardNumbers}: {cardNumbers: CardNumbersType}) => {
+const CardNumberDisplay = ({cardNumbers}: {cardNumbers: string[]}) => {
   const displayNumbers = maskCardNumbers(cardNumbers);
 
   return (

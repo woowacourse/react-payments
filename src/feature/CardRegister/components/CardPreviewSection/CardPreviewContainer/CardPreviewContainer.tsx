@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import type {CardNumbersType} from '../../../../../common/types/CardInfoType';
 import CardBrandLogo from '../CardBrandLogo/CardBrandLogo';
 import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDisplay';
 import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
@@ -7,7 +6,7 @@ import {getBrandName, CARD_COMPANIES} from '../../../domain/cardPolicy';
 import type {CardCompanyType} from '../../../domain/cardPolicy';
 
 type Props = {
-  cardNumbers: CardNumbersType;
+  cardNumbers: string[];
   expiryMonth: string;
   expiryYear: string;
   selectedCompany: CardCompanyType | null;

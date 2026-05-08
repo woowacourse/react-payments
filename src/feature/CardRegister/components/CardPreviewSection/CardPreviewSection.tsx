@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import type {CardNumbersType} from '../../../../common/types/CardInfoType';
 import CardPreviewContainer from './CardPreviewContainer/CardPreviewContainer';
 import type {CardCompanyType} from '../../domain/cardPolicy';
 
 type Props = {
-  cardNumbers: CardNumbersType;
+  cardNumbers: string[];
   expiryMonth: string;
   expiryYear: string;
   selectedCompany: CardCompanyType | null;

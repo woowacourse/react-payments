@@ -7,9 +7,7 @@ import {useExpiryDate} from '../../hooks/useExpiryDate';
 import {useCvcNumber} from '../../hooks/useCvcNumber';
 import {useState} from 'react';
 import type {CardCompanyType} from '../../domain/cardPolicy';
-import type {CardNumbersType} from '../../../../common/types/CardInfoType';
-
-const makeMockNumberField = (cardNumbers: CardNumbersType, isComplete = false) => ({
+const makeMockNumberField = (cardNumbers: string[], isComplete = false) => ({
   cardNumbers,
   format: [4, 4, 4, 4] as number[],
   brand: null,

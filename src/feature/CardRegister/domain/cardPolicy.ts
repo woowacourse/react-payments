@@ -1,5 +1,3 @@
-import type {CardNumbersType} from '../../../common/types/CardInfoType';
-
 export const CARD_COMPANIES = {
   bc: {name: 'BC카드', color: '#F04651'},
   shinhan: {name: '신한카드', color: '#0046FF'},
@@ -27,7 +25,7 @@ export const DEFAULT_CARD_NUMBER_FORMAT = [4, 4, 4, 4];
 
 export const MASK_FROM_INDEX = 2;
 
-export const maskCardNumbers = (chunks: CardNumbersType) =>
+export const maskCardNumbers = (chunks: string[]) =>
   chunks.map((chunk, i) => (i >= MASK_FROM_INDEX ? '·'.repeat(chunk.length) : chunk));
 
 const matchVisa = (prefix: string) => prefix.startsWith('4');
@@ -65,7 +63,7 @@ const BRAND_MATCHERS: {brand: CardBrandType; match: (prefix: string) => boolean}
   {brand: 'unionPay', match: matchUnionPay},
 ];
 
-export const getBrandName = (cardNumbers: CardNumbersType): CardBrandType | null => {
+export const getBrandName = (cardNumbers: string[]): CardBrandType | null => {
   const prefix = cardNumbers.join('').slice(0, 6);
   if (!prefix) return null;
   return BRAND_MATCHERS.find(({match}) => match(prefix))?.brand ?? null;
