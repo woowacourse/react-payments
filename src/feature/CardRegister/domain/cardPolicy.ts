@@ -1,3 +1,5 @@
+import {matchVisa, matchMasterCard, matchAmex, matchDiners, matchUnionPay} from './cardBrandMatchers';
+
 export const CARD_COMPANIES = {
   bc: {name: 'BC카드', color: '#F04651'},
   shinhan: {name: '신한카드', color: '#0046FF'},
@@ -27,33 +29,6 @@ export const MASK_FROM_INDEX = 2;
 
 export const maskCardNumbers = (chunks: string[]) =>
   chunks.map((chunk, i) => (i >= MASK_FROM_INDEX ? '·'.repeat(chunk.length) : chunk));
-
-const matchVisa = (prefix: string) => prefix.startsWith('4');
-
-const matchMasterCard = (prefix: string) => {
-  const n = Number(prefix.slice(0, 2));
-  return n >= 51 && n <= 55;
-};
-
-const matchAmex = (prefix: string) => prefix.startsWith('34') || prefix.startsWith('37');
-
-const matchDiners = (prefix: string) => prefix.startsWith('36');
-
-const matchUnionPay = (prefix: string) => {
-  if (prefix.length >= 6) {
-    const n6 = Number(prefix.slice(0, 6));
-    if (n6 >= 622126 && n6 <= 622925) return true;
-  }
-  if (prefix.length >= 4) {
-    const n4 = Number(prefix.slice(0, 4));
-    if (n4 >= 6282 && n4 <= 6288) return true;
-  }
-  if (prefix.length >= 3) {
-    const n3 = Number(prefix.slice(0, 3));
-    if (n3 >= 624 && n3 <= 626) return true;
-  }
-  return false;
-};
 
 const BRAND_MATCHERS: {brand: CardBrandType; match: (prefix: string) => boolean}[] = [
   {brand: 'visa', match: matchVisa},
