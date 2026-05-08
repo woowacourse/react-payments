@@ -9,13 +9,16 @@ import CvcInputSection from "../components/CvcInputSection/CvcInputSection";
 import { decideBrandName } from "../utils/decideBrandName";
 import { getMaxLength } from "../utils/getMaxLength";
 
+const CardCompanySelectSection = () => <div />
+
 const CardFormPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: "", brand: "" });
   const brand = decideBrandName(cardInfo.numbers[0] ?? "");
   const maxLength = getMaxLength(brand);
-  const isCardNumberCompleted = cardInfo.numbers.join("").length === maxLength;
-  const CardCompanySelectSection = () => <div />
+  const isSupportedBrand = brand !== "";
+  const isCardNumberCompleted = cardInfo.numbers.join("").length === maxLength && isSupportedBrand;
 
+  //스프레드 보일러 플레이트 라고 한다 (페어가...)
   const cardNumberHandler = (numbers: string[]) => {
     setCardInfo((prev) => ({ ...prev, numbers, brand }));
   };
@@ -27,8 +30,6 @@ const CardFormPage = () => {
   const cvcHandler = (cvc: string) => {
     setCardInfo((prev) => ({ ...prev, cvc }));
   };
-
-  const isSupportedBrand = decideBrandName(cardInfo.numbers[0] ?? "") !== "";
 
   return (
     <main css={pageStyle}>
