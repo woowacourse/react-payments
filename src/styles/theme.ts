@@ -11,6 +11,7 @@ const colors = {
   bcCard: '#F04651',
   shCard: '#0046FF',
   kakaoCard: '#FFE600',
+  hyundaiCard: '#000000',
   wooriCard: '#007BC8',
   lotteCard: '#ED1C24',
   hanaCard: '#009490',
