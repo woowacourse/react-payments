@@ -23,7 +23,7 @@ const CardRegisterPage = () => {
   return (
     <Wrapper>
       <Container>
-        <CardPreviewSection cardInfo={cardInfo} />
+        <CardPreviewSection cardNumbers={cardNumbers} expiryMonth={expiryMonth} expiryYear={expiryYear} />
         <InfoInputSection cardInfo={cardInfo} cardInfoHandlers={cardInfoHandlers} />
       </Container>
     </Wrapper>

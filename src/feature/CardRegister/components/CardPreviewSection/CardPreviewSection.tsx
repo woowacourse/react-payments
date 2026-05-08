@@ -1,11 +1,17 @@
 import styled from 'styled-components';
-import type {CardInfoType} from '../../../../common/types/CardInfoType';
+import type {CardNumbersType} from '../../../../common/types/CardInfoType';
 import CardPreviewContainer from './CardPreviewContainer/CardPreviewContainer';
 
-const CardPreviewSection = ({cardInfo}: {cardInfo: CardInfoType}) => {
+type Props = {
+  cardNumbers: CardNumbersType;
+  expiryMonth: string;
+  expiryYear: string;
+};
+
+const CardPreviewSection = ({cardNumbers, expiryMonth, expiryYear}: Props) => {
   return (
     <Container>
-      <CardPreviewContainer cardInfo={cardInfo} />
+      <CardPreviewContainer cardNumbers={cardNumbers} expiryMonth={expiryMonth} expiryYear={expiryYear} />
     </Container>
   );
 };

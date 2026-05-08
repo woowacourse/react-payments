@@ -7,11 +7,9 @@ const meta = {
   component: CardPreviewSection,
   tags: ['autodocs'],
   args: {
-    cardInfo: {
-      cardNumbers: ['', '', '', ''],
-      expiryMonth: '',
-      expiryYear: '',
-    },
+    cardNumbers: ['', '', '', ''],
+    expiryMonth: '',
+    expiryYear: '',
   },
 } satisfies Meta<typeof CardPreviewSection>;
 
@@ -22,10 +20,8 @@ export const Empty: Story = {};
 
 export const Filled: Story = {
   args: {
-    cardInfo: {
-      cardNumbers: ['4123', '5678', '1234', '5678'],
-      expiryMonth: '12',
-      expiryYear: '30',
-    },
+    cardNumbers: ['4123', '5678', '1234', '5678'],
+    expiryMonth: '12',
+    expiryYear: '30',
   },
 };

@@ -1,13 +1,17 @@
 import styled from 'styled-components';
-import type {CardInfoType} from '../../../../../common/types/CardInfoType';
+import type {CardNumbersType} from '../../../../../common/types/CardInfoType';
 import CardBrandLogo from '../CardBrandLogo/CardBrandLogo';
 import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDisplay';
 import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
 import {getBrandName} from '../../../domain/cardPolicy';
 
-const CardPreviewContainer = ({cardInfo}: {cardInfo: CardInfoType}) => {
-  const {cardNumbers, expiryMonth, expiryYear} = cardInfo;
+type Props = {
+  cardNumbers: CardNumbersType;
+  expiryMonth: string;
+  expiryYear: string;
+};
 
+const CardPreviewContainer = ({cardNumbers, expiryMonth, expiryYear}: Props) => {
   return (
     <Container>
       <CardHeader>
