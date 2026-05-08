@@ -11,12 +11,12 @@ const INPUT_WIDTH: Record<InputSize, string> = {
 interface CardInfoInputProps {
     value: string;
     setValue: (value: string) => void;
-    validator: (value: string) => string | null;
+    inputBlock?: (value: string) => string | null;
+    setErrorMessage?: (message: string | null) => void;
     isError: boolean;
     size: InputSize;
     maxLength?: number;
     placeHolder?: string;
-    onError: (message: string | null) => void;
     onBlur?: () => void;
     onFocus?: () => void;
 }
@@ -29,24 +29,24 @@ interface CardInfoInputStyleProps {
 export default function CardInfoInput({
     value,
     setValue,
-    validator,
+    inputBlock,
+    setErrorMessage,
     isError,
     size,
     placeHolder,
     maxLength,
-    onError,
     onBlur,
     onFocus,
 }: CardInfoInputProps) {
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tmpValue = e.target.value;
-        const error = validator(tmpValue);
+        const error = inputBlock?.(tmpValue) ?? null;
         if (error !== null) {
-            onError(error);
+            setErrorMessage?.(error);
             return;
         }
+        setErrorMessage?.(null);
         setValue(tmpValue);
-        onError(null);
     };
 
     return (
@@ -54,7 +54,7 @@ export default function CardInfoInput({
             isError={isError}
             type="text"
             value={value}
-            onChange={(e) => handleInputChange(e)}
+            onChange={handleInputChange}
             inputSize={size}
             placeholder={placeHolder}
             maxLength={maxLength}
