@@ -1,12 +1,12 @@
-# 카드 등록 페이지 (Card Register Page)
+# 페이먼츠
+
+## 카드 등록 페이지
 
 결제 카드 정보를 입력받는 페이지로, 사용자의 입력에 따라 실시간으로 카드 프리뷰를 업데이트하고 유효성을 검사하는 기능을 제공합니다.
 
-## 구현 사항 체크리스트
-
 ### 1. UI 및 컴포넌트 (Reusability)
 
-- [x] 공통 컴포넌트: 라벨(Label), 설명 텍스트(Description), 입력창(Input), 타이틀(Title) 분리
+- [x] 공통 컴포넌트: 라벨(Label), 설명 텍스트(Description), 입력창(Input), 타이틀(Title), 버튼(Button) 분리
 - [x] 컴포넌트별 전용 스타일과 글로벌 테마(Theme) 분리 적용
 - [x] 모든 입력 폼의 에러 발생 시 테두리 빨간색(`#FF3D3D`) 처리
 - [x] 모든 입력 폼의 포커스 시 테두리 검은색(`#000000`) 강조 처리
@@ -22,7 +22,9 @@
 
 - [x] 사용자 입력에 따라 실시간으로 카드 번호 표시
 - [x] 카드 번호는 4자리씩 묶어서 표시 (예: `1234 5678 9012 3456`)
+  - [ ] 카드번호가 16자리보다 적은 경우도 묶어서 표시 (예: `1234 5678 9012 34`)
 - [x] 카드 번호의 9~16번째 자리는 마스킹 처리 (예: `1234 5678 **** ****`)
+  - [ ] 카드번호가 16자리보다 적은 경우도 마스킹 처리 (예: `1234 5678 **** **`)
 - [x] 초기 상태에서는 placeholder 텍스트 표시
 
 #### 만료일 표시 (Card Expiry Date Display)
@@ -84,7 +86,6 @@
   - onChange: isTouched가 false일 때는 숫자 입력만 허용
   - onChange: isTouched가 true이고 length === 2일 때 에러 자동 해제
 - [x] **년(YY) 입력 예외 처리:**
-  - onBlur: 숫자 1개만 입력했을 때 자동으로 0 앞에 붙여서 2자리로 완성 (예: `2` → `02`)
   - onBlur: 자릿수 검증 (2자리 확인)
   - onChange: 숫자가 아닌 입력값 차단
   - onChange: isTouched가 false일 때는 숫자 입력만 허용
@@ -101,9 +102,9 @@
   - **실시간 검증:** 숫자 하나 입력할 때마다 숫자인지 확인
   - **필드 검증:** 필드 입력 완료 후마다 자릿수(3자리) 확인
 
-#### 카드 브랜드 선택 (Card Brand Select)
+#### 카드사 선택 (Card Brand Select)
 
-- [x] 제공되는 카드 브랜드 중 하나 선택
+- [x] 제공되는 카드사 중 하나 선택
 - [x] 선택창의 placeholder: `카드사를 선택해주세요`
 - [x] 입력 중인 칸의 테두리를 검은색(`#000000`)으로 강조
 - [x] 에러 발생 시 테두리를 빨간색(`#FF3D3D`)으로 표시
@@ -113,6 +114,7 @@
 
 - [x] 입력 형식: 2자리 입력칸 (두 자리 숫자)
 - [x] 숫자만 입력 가능하며, 숫자 외 입력은 자동 차단
+- [x] 비밀번호 마스킹 처리 (예: `**`)
 - [x] 입력칸의 placeholder: `**`
 - [x] 입력 중인 칸의 테두리를 검은색(`#000000`)으로 강조
 - [x] 에러 발생 시 테두리를 빨간색(`#FF3D3D`)으로 표시
@@ -137,6 +139,24 @@
 - [x] 입력창을 모두 채우면 다음 입력창에 자동으로 이동한다.
   - [x] 다음 입력창이 없다면, 다음 필드로 이동한다.
 - [x] 모든 필드에 유효한 값이 입력되면 제출 버튼이 생성된다.
+
+### 6. 폼 제출 기능
+
+- [ ] '확인' 버튼을 누르면 사용자가 입력한 데이터(카드 번호 앞 4자리, 카드사)를 카드 등록 완료 페이지에 전달한다.
+
+## 카드 등록 완료 페이지
+
+카드가 성공적으로 등록되었음을 보여주는 페이지로, 사용자가 입력한 카드 번호와 카드사를 메세지로 보여주며 카드 등록 페이지로 되돌아갈 수 있다.
+
+### 1. 등록 완료 페이지 영역
+
+- [ ] 등록 페이지로부터 전달받은 데이터를 표시한다.
+
+### 2. 초기 화면 이동 기능
+
+- [ ] '확인' 버튼을 누르면 카드 등록 페이지로 이동한다.
+
+---
 
 ## 기능 요구 사항
 
@@ -196,43 +216,65 @@
 src/
 ├── common/
 │   ├── components/
-│   │   ├── Title/
-│   │   │   └── Title.tsx
-│   │   ├── Description/
-│   │   │   └── Description.tsx
-│   │   ├── Label/
-│   │   │   └── Label.tsx
-│   │   └── Input/
-│   │       └── Input.tsx
-│   ├── types/
-│   │   └── CardInfoType.ts
-│   └── styles/
-│       └── reset.css
+│   │   ├── Button.tsx
+│   │   ├── Description.tsx
+│   │   ├── Input.tsx
+│   │   ├── Label.tsx
+│   │   └── Title.tsx
+│   ├── hooks/
+│   │   └── useFieldValidation.ts
+│   └── types/
+│       ├── CardPreview.ts
+│       └── CardPreviewInfoType.ts
 ├── feature/
 │   └── CardRegister/
 │       ├── CardRegisterPage.tsx
-│       └── components/
-│           ├── CardPreviewSection/
-│           │   ├── CardPreviewSection.tsx
-│           │   ├── CardPreviewContainer/
-│           │   │   └── CardPreviewContainer.tsx
-│           │   ├── CardNumberDisplay/
-│           │   │   └── CardNumberDisplay.tsx
-│           │   ├── CardExpiryDateDisplay/
-│           │   │   └── CardExpiryDateDisplay.tsx
-│           │   └── CardBrandLogo/
-│           │       └── CardBrandLogo.tsx
-│           └── InfoInputSection/
-│               ├── InfoInputSection.tsx
-│               ├── NumberField/
-│               │   └── NumberField.tsx
-│               ├── ExpiryField/
-│               │   └── ExpiryField.tsx
-│               ├── CvcField/
-│               │   └── CvCField.tsx
-│               └── InputContainer/
-│                   └── InputContainer.tsx
-├── App.tsx
+│       ├── constant/
+│       │   └── CARD_BRANDS.ts
+│       ├── components/
+│       │   ├── CardPreviewSection/
+│       │   │   ├── CardPreviewSection.tsx
+│       │   │   ├── CardPreviewContainer.tsx
+│       │   │   ├── CardNumberDisplay.tsx
+│       │   │   ├── CardExpiryDateDisplay.tsx
+│       │   │   └── CardBrandLogo.tsx
+│       │   └── InfoInputSection/
+│       │       ├── InfoInputSection.tsx
+│       │       ├── FieldSection.tsx
+│       │       ├── NumberField.tsx
+│       │       ├── SelectCardBrandField.tsx
+│       │       ├── ExpiryField.tsx
+│       │       ├── CvCField.tsx
+│       │       └── PasswordField.tsx
+│       └── utils/
+│           ├── cardDisplay.ts
+│           ├── cardFormValidator.ts
+│           └── validator.ts
+├── stories/
+│   ├── common/
+│   │   └── components/
+│   │       ├── Description.stories.tsx
+│   │       ├── Input.stories.tsx
+│   │       ├── Label.stories.tsx
+│   │       └── Title.stories.tsx
+│   └── feature/
+│       └── CardRegister/
+│           ├── CardRegisterPage.stories.tsx
+│           └── components/
+│               ├── CardPreviewSection/
+│               │   ├── CardBrandLogo.stories.tsx
+│               │   ├── CardExpiryDateDisplay.stories.tsx
+│               │   ├── CardNumberDisplay.stories.tsx
+│               │   ├── CardPreviewContainer.stories.tsx
+│               │   └── CardPreviewSection.stories.tsx
+│               └── InfoInputSection/
+│                   ├── CvCField.stories.tsx
+│                   ├── ExpiryField.stories.tsx
+│                   ├── FieldSection.stories.tsx
+│                   ├── InfoInputSection.stories.tsx
+│                   └── NumberField.stories.tsx
+├── styles/
+│   └── reset.css
 └── main.tsx
 ```
 
@@ -243,7 +285,8 @@ src/
 - **Title**: 섹션 제목 텍스트 표시
 - **Description**: 섹션 설명 텍스트 표시
 - **Label**: 입력 필드 라벨 표시
-- **Input**: 기본 입력 필드 (에러 상태, 포커스 상태 지원)
+- **Input**: 기본 입력 필드 (native input props, 에러 상태, 포커스 상태, ref 전달 지원)
+- **Button**: 기본 버튼 컴포넌트 (native button props 지원)
 
 ### Card Preview Section
 
@@ -251,12 +294,14 @@ src/
 - **CardPreviewContainer**: 카드 이미지 및 정보를 렌더링하는 카드 컨테이너
 - **CardNumberDisplay**: 마스킹 처리된 카드 번호 표시 (4자리씩 묶음)
 - **CardExpiryDateDisplay**: 유효기간 표시 (올바른 입력 시에만 `/` 표시)
-- **CardBrandLogo**: 카드 브랜드 로고 표시 (조건 충족 시에만)
+- **CardBrandLogo**: 카드 번호 기반 카드 타입 로고 표시 (Visa, Mastercard 조건 충족 시)
 
 ### Info Input Section
 
-- **InfoInputSection**: 카드 정보 입력 영역 전체 컴포넌트
-- **NumberField**: 카드 번호 입력 (4자리씩 4개 입력칸)
+- **InfoInputSection**: 카드 정보 입력 영역 전체 컴포넌트. 단계별 필드 노출과 제출 흐름 관리
+- **FieldSection**: 입력 필드의 제목, 설명, children을 묶는 섹션 레이아웃 컴포넌트
+- **NumberField**: 카드 번호 입력 (4자리씩 4개 입력칸, 입력 완료 시 다음 칸 포커스 이동)
+- **SelectCardBrandField**: 카드사 선택 입력 (선택한 카드사 id를 상위 form 상태로 전달)
 - **ExpiryField**: 유효기간 입력 (2자리씩 2개 입력칸 - 월, 년)
 - **CvcField**: CVC 번호 입력 (3자리 입력칸)
-- **InputContainer**: 입력 필드를 위한 컨테이너 컴포넌트
+- **PasswordField**: 카드 비밀번호 앞 2자리 입력
