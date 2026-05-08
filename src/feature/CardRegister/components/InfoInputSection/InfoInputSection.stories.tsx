@@ -1,28 +1,39 @@
-import {useState} from 'react';
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {fn} from 'storybook/test';
 
 import InfoInputSection from './InfoInputSection';
 import {useCardNumbers} from '../../hooks/useCardNumbers';
+import {useExpiryDate} from '../../hooks/useExpiryDate';
+import {useCvcNumber} from '../../hooks/useCvcNumber';
 import type {CardNumbersType} from '../../../../common/types/CardInfoType';
 
-type MockNumberField = {
-  cardNumbers: CardNumbersType;
-  format: number[];
-  brand: null;
-  isComplete: boolean;
-  hasAnyError: boolean;
-  firstErrorIdx: number;
-  errorMsg: string;
-  handleChange: () => void;
-  handleBlur: () => void;
-};
-
-const makeMockNumberField = (cardNumbers: CardNumbersType): MockNumberField => ({
+const makeMockNumberField = (cardNumbers: CardNumbersType) => ({
   cardNumbers,
-  format: [4, 4, 4, 4],
+  format: [4, 4, 4, 4] as number[],
   brand: null,
   isComplete: cardNumbers.every((c) => c.length === 4),
+  hasAnyError: false,
+  firstErrorIdx: -1,
+  errorMsg: '',
+  handleChange: fn(),
+  handleBlur: fn(),
+});
+
+const makeMockExpiryField = (expiryMonth: string, expiryYear: string) => ({
+  expiryMonth,
+  expiryYear,
+  isComplete: expiryMonth.length === 2 && expiryYear.length === 2,
+  hasAnyError: false,
+  firstErrorIdx: -1,
+  errorMsg: '',
+  handleMonthChange: fn(),
+  handleYearChange: fn(),
+  handleBlur: fn(),
+});
+
+const makeMockCvcField = (cvcNumber = '') => ({
+  cvcNumber,
+  isComplete: cvcNumber.length === 3,
   hasAnyError: false,
   firstErrorIdx: -1,
   errorMsg: '',
@@ -36,10 +47,8 @@ const meta = {
   tags: ['autodocs'],
   args: {
     numberField: makeMockNumberField(['', '', '', '']),
-    expiryMonth: '',
-    setExpiryMonth: fn(),
-    expiryYear: '',
-    setExpiryYear: fn(),
+    expiryField: makeMockExpiryField('', ''),
+    cvcField: makeMockCvcField(),
   },
 } satisfies Meta<typeof InfoInputSection>;
 
@@ -51,32 +60,29 @@ export const Empty: Story = {};
 export const Partial: Story = {
   args: {
     numberField: makeMockNumberField(['4123', '56', '', '']),
-    expiryMonth: '1',
-    expiryYear: '',
+    expiryField: makeMockExpiryField('1', ''),
   },
 };
 
 export const Filled: Story = {
   args: {
     numberField: makeMockNumberField(['4123', '5678', '1234', '5678']),
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryField: makeMockExpiryField('12', '30'),
+    cvcField: makeMockCvcField('123'),
   },
 };
 
 export const Interactive: Story = {
   render: function InteractiveInfoInputSection() {
     const numberField = useCardNumbers();
-    const [expiryMonth, setExpiryMonth] = useState('');
-    const [expiryYear, setExpiryYear] = useState('');
+    const expiryField = useExpiryDate();
+    const cvcField = useCvcNumber();
 
     return (
       <InfoInputSection
         numberField={numberField}
-        expiryMonth={expiryMonth}
-        setExpiryMonth={setExpiryMonth}
-        expiryYear={expiryYear}
-        setExpiryYear={setExpiryYear}
+        expiryField={expiryField}
+        cvcField={cvcField}
       />
     );
   },

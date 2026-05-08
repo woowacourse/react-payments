@@ -1,28 +1,27 @@
-import {useState} from 'react';
 import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import {useCardNumbers} from './hooks/useCardNumbers';
+import {useExpiryDate} from './hooks/useExpiryDate';
+import {useCvcNumber} from './hooks/useCvcNumber';
 import styled from 'styled-components';
 
 const CardRegisterPage = () => {
   const numberField = useCardNumbers();
-  const [expiryMonth, setExpiryMonth] = useState('');
-  const [expiryYear, setExpiryYear] = useState('');
+  const expiryField = useExpiryDate();
+  const cvcField = useCvcNumber();
 
   return (
     <Wrapper>
       <Container>
         <CardPreviewSection
           cardNumbers={numberField.cardNumbers}
-          expiryMonth={expiryMonth}
-          expiryYear={expiryYear}
+          expiryMonth={expiryField.expiryMonth}
+          expiryYear={expiryField.expiryYear}
         />
         <InfoInputSection
           numberField={numberField}
-          expiryMonth={expiryMonth}
-          setExpiryMonth={setExpiryMonth}
-          expiryYear={expiryYear}
-          setExpiryYear={setExpiryYear}
+          expiryField={expiryField}
+          cvcField={cvcField}
         />
       </Container>
     </Wrapper>

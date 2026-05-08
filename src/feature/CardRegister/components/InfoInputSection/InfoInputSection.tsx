@@ -1,23 +1,19 @@
-import {useState} from 'react';
 import CvcField from './CvcField/CvCField';
 import ExpiryField from './ExpiryField/ExpiryField';
 import InputContainer from './InputContainer/InputContainer';
 import NumberField from './NumberField/NumberField';
 import type {useCardNumbers} from '../../hooks/useCardNumbers';
+import type {useExpiryDate} from '../../hooks/useExpiryDate';
+import type {useCvcNumber} from '../../hooks/useCvcNumber';
 import styled from 'styled-components';
 
 type Props = {
   numberField: ReturnType<typeof useCardNumbers>;
-  expiryMonth: string;
-  setExpiryMonth: (value: string) => void;
-  expiryYear: string;
-  setExpiryYear: (value: string) => void;
+  expiryField: ReturnType<typeof useExpiryDate>;
+  cvcField: ReturnType<typeof useCvcNumber>;
 };
 
-const InfoInputSection = ({numberField, expiryMonth, setExpiryMonth, expiryYear, setExpiryYear}: Props) => {
-  const [cvcNumber, setCvcNumber] = useState('');
-  const [, setFieldErrors] = useState({expiry: false, cvc: false});
-
+const InfoInputSection = ({numberField, expiryField, cvcField}: Props) => {
   return (
     <Container>
       <InputContainer title='결제할 카드 번호를 입력해 주세요' description='본인 명의의 카드만 결제 가능합니다.'>
@@ -31,20 +27,10 @@ const InfoInputSection = ({numberField, expiryMonth, setExpiryMonth, expiryYear,
         />
       </InputContainer>
       <InputContainer title='카드 유효기간을 입력해 주세요' description='월/년도(MMYY)를 순서대로 입력해 주세요.'>
-        <ExpiryField
-          expiryMonth={expiryMonth}
-          expiryYear={expiryYear}
-          setExpiryMonth={setExpiryMonth}
-          setExpiryYear={setExpiryYear}
-          setIsError={(value) => setFieldErrors((prev) => ({...prev, expiry: value}))}
-        />
+        <ExpiryField {...expiryField} />
       </InputContainer>
       <InputContainer title='CVC 번호를 입력해 주세요'>
-        <CvcField
-          cvcNumber={cvcNumber}
-          setCvcNumber={setCvcNumber}
-          setIsError={(value) => setFieldErrors((prev) => ({...prev, cvc: value}))}
-        />
+        <CvcField {...cvcField} />
       </InputContainer>
     </Container>
   );
