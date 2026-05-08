@@ -7,6 +7,15 @@ export type CardPreviewInfoType = {
   cardCompanyId: CardCompanyId | null;
 };
 
+export type CardFormInfoType = {
+  cardNumbers: string[];
+  expiryMonth: string;
+  expiryYear: string;
+  cvcNumber: string;
+  cardCompanyId: CardCompanyId | null;
+  password: string;
+};
+
 export type CardFormHandlersType = {
   handleCardNumbersChange: (cardNumbers: string[]) => void;
   handleExpiryMonthChange: (expiryMonth: string) => void;

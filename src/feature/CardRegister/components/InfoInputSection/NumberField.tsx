@@ -3,11 +3,9 @@ import Label from '../../../../common/components/Label';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../common/hooks/useFieldValidation';
 import { isWithinMaxLength, isNumeric } from '../../utils/validator';
-import {
-  NUMBER_LENGTH,
-  validateCardNumber,
-} from '../../utils/cardFormValidator';
+import { validateCardNumber } from '../../utils/cardFormValidator';
 import { useRef } from 'react';
+import { getCardNumberSegmentLengths } from '../../utils/cardInfo';
 
 const NumberField = ({
   autoFocus = false,
@@ -18,9 +16,12 @@ const NumberField = ({
   cardNumbers: string[];
   handleCardNumbersChange: (value: string[]) => void;
 }) => {
+  const segmentLengths = getCardNumberSegmentLengths(cardNumbers);
+
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: cardNumbers,
-    validate: validateCardNumber,
+    validate: (value, index) =>
+      validateCardNumber(value, segmentLengths[index]),
   });
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
@@ -32,14 +33,14 @@ const NumberField = ({
     const value = eValue.trim();
 
     if (!isNumeric(value)) return;
-    if (!isWithinMaxLength(value, NUMBER_LENGTH)) return;
+    if (!isWithinMaxLength(value, segmentLengths[index])) return;
 
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? value : chunk,
     );
     handleCardNumbersChange(newChunks);
 
-    if (value.length === NUMBER_LENGTH) focusNextInput(index);
+    if (value.length === segmentLengths[index]) focusNextInput(index);
   };
 
   const handleNumbersBlur = (index: number) => {
@@ -60,7 +61,7 @@ const NumberField = ({
             autoFocus={autoFocus && index === 0}
             placeholder="1234"
             inputMode="numeric"
-            maxLength={4}
+            maxLength={segmentLengths[index]}
             strokeMode={index === firstErrorIndex ? 'error' : 'default'}
             onChange={(e) => handleNumbersChange(index, e.target.value)}
             onBlur={() => handleNumbersBlur(index)}

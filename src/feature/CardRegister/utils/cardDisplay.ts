@@ -8,7 +8,7 @@ import { isPrefixInRange } from './validator';
 export const getCardBrandName = (
   cardNumbers: string[],
 ): CardBrandName | null => {
-  const fullNumber = cardNumbers.map((chunk) => chunk.padEnd(4, '#')).join('');
+  const fullNumber = cardNumbers.join('');
 
   if (fullNumber.startsWith('4')) return 'visa';
 

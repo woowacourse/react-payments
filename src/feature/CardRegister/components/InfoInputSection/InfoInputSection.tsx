@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import FieldSection from './FieldSection';
 import {
   hasCardFormError,
-  validateCardNumber,
+  hasCardNumberError,
   validateCvcNumber,
   validateExpiryMonth,
   validateExpiryYear,
@@ -65,10 +65,7 @@ const InfoInputSection = ({
     console.log('제출');
   };
 
-  const hasCardNumberError = cardNumbers.some(
-    (cardNumber) => validateCardNumber(cardNumber) !== null,
-  );
-  if (currentStep === 0 && !hasCardNumberError)
+  if (currentStep === 0 && !hasCardNumberError(cardNumbers))
     setCurrentStep((prev) => prev + 1);
   if (currentStep === 1 && cardCompanyId !== null)
     setCurrentStep((prev) => prev + 1);

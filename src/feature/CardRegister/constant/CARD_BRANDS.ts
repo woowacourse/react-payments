@@ -7,11 +7,11 @@ import dinersImg from '../assets/Diners.svg';
 import unionPayImg from '../assets/UnionPay.svg';
 
 export const CARD_BRANDS = [
-  { name: 'visa', maxlength: 16 },
-  { name: 'masterCard', maxlength: 16 },
-  { name: 'diners', maxlength: 14 },
-  { name: 'amex', maxlength: 15 },
-  { name: 'unionPay', maxlength: 16 },
+  { name: 'visa', segmentLengths: [4, 4, 4, 4] },
+  { name: 'masterCard', segmentLengths: [4, 4, 4, 4] },
+  { name: 'amex', segmentLengths: [4, 4, 4, 3] },
+  { name: 'diners', segmentLengths: [4, 4, 4, 2] },
+  { name: 'unionPay', segmentLengths: [4, 4, 4, 4] },
 ];
 
 export const BRANDS_IMAGE: Record<CardBrandName, string> = {
