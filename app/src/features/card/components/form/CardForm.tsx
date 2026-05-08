@@ -3,6 +3,7 @@ import { CardSection } from "./CardSection";
 import { CardNumberInput } from "./CardNumberInput";
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
 import { CardCVCInput } from "./CardCVCInput";
+import CardPasswordInput from "./CardPasswordInput";
 import CardBrandSelect from "./CardBrandSelect";
 
 export function CardForm({
@@ -15,6 +16,12 @@ export function CardForm({
 }) {
   return (
     <CardFormContainer>
+      <CardSection
+        title={"비밀번호를 입력해 주세요"}
+        subTitle={"앞의 2자리를 입력해주세요."}
+      >
+        <CardPasswordInput />
+      </CardSection>
       <CardSection
         title={"카드사를 선택해 주세요"}
         subTitle={"현재 국내 카드사만 가능합니다."}

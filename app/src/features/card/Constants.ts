@@ -2,6 +2,7 @@ export const CARD_INPUT = {
   EACH_NUMBER_LENGTH: 4,
   EACH_EXPIRY_DATE_LENGTH: 2,
   CVC_LENGTH: 3,
+  PASSWORD_LENGTH: 2,
 };
 
 export const NETWORK_BRAND_RULE = {

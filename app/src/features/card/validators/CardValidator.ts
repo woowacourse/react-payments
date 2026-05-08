@@ -62,4 +62,10 @@ export const Validator = {
       throw new Error("CVC는 3자리여야 합니다.");
     }
   },
+
+  isValidCardPassswordLength(value: string) {
+    if (![0, CARD_INPUT.PASSWORD_LENGTH].includes(value.length)) {
+      throw new Error("Password는 2자리여야 합니다.");
+    }
+  },
 };
