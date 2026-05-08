@@ -35,3 +35,17 @@ export const UnionPay = {
     }
   },
 };
+
+export const Amex = {
+  title: "amex",
+  check(value: string): string | undefined {
+    const validValueLength = value.replaceAll(" ", "").length;
+    if (
+      (value.startsWith("34") || value.startsWith("37")) &&
+      validValueLength >= 2 &&
+      validValueLength <= 15
+    ) {
+      return this.title;
+    }
+  },
+};

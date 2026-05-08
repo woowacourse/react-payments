@@ -1,4 +1,4 @@
-import { Visa, MasterCard, UnionPay } from "../CardNetworkBrand";
+import { Visa, MasterCard, UnionPay, Amex } from "../CardNetworkBrand";
 
 describe("CardNetworkBrand Test", () => {
   test("숫자가 4로 시작하면 Visa 브랜드 이다.", () => {
@@ -59,6 +59,21 @@ describe("CardNetworkBrand Test", () => {
       "622126 ~ 622925 이내 숫자로 시작하면 Union Pay 브랜드 이다.",
       (value, expectedValue) => {
         expect(UnionPay.check(value)).toBe(expectedValue);
+      },
+    );
+  });
+
+  describe("Amex", () => {
+    test.each([
+      ["34", "amex"],
+      ["3712", "amex"],
+      ["3", undefined],
+      ["341234123412341", "amex"],
+      ["3412341234123412", undefined],
+    ])(
+      "34, 37로 시작하고 15자 이내이면 Amex 브랜드 이다.",
+      (value, expectedValue) => {
+        expect(Amex.check(value)).toBe(expectedValue);
       },
     );
   });

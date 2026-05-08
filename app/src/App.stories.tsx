@@ -67,6 +67,26 @@ export const UnionBrandDetection: Story = {
   },
 };
 
+export const AmexBrandDetection: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const firstDigitsInput =
+      canvasElement.querySelector<HTMLInputElement>("#first-digits")!;
+    await userEvent.type(firstDigitsInput, "34");
+    let brandLogo = canvas.getByAltText("amex-network-brand-logo");
+    await expect(brandLogo).toBeInTheDocument();
+    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>("#card-number-input-container input"),
+    );
+    await userEvent.type(firstInput, "12");
+    await userEvent.type(secondInput, "3456");
+    await userEvent.type(thirdInput, "3456");
+    await userEvent.type(fourthInput, "3456");
+    brandLogo = canvas.queryByAltText("amex-network-brand-logo");
+    await expect(brandLogo).not.toBeInTheDocument();
+  },
+};
+
 export const CardNumberIsDynamicDisplay: Story = {
   play: async ({ canvasElement }) => {
     const firstDigitsInput = canvasElement.querySelector("#first-digits");

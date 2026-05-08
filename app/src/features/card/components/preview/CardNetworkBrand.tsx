@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import MasterCard from "../../assets/Mastercard.svg";
 import VisaCard from "../../assets/visa-logo.svg";
 import UnionCard from "../../assets/unionpay-logo.svg";
+import AmexCard from "../../assets/amex-logo.svg";
 import { CARD_INPUT } from "../../Constants";
 import { joinEachStringWithLength } from "../../../../Utils";
 import { CardNetwork } from "../../CardNetwork";
@@ -18,6 +19,7 @@ export function CardNetworkBrand({ cardNumber }) {
     if (brand === "visa") return VisaCard;
     if (brand === "master") return MasterCard;
     if (brand === "union") return UnionCard;
+    if (brand === "amex") return AmexCard;
   };
 
   return (

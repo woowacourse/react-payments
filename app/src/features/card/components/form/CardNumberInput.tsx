@@ -64,7 +64,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     const { value, id } = e.target;
     const newCardNumber = { ...cardNumber, [id]: value };
     const fullNumber = joinEachStringWithLength(
-      Object.values(cardNumber),
+      Object.values(newCardNumber),
       CARD_INPUT.EACH_NUMBER_LENGTH,
     );
     runEachInputValidation([() => Validator.isNumber(value)], id);
@@ -82,7 +82,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
 
   return (
     <>
-      <CardFieldset>
+      <CardFieldset id="card-number-input-container">
         <CardLegend>카드 번호</CardLegend>
         <CardInput
           id="first-digits"
