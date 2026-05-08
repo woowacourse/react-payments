@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {CARD_BRANDS, DEFAULT_CARD_NUMBER_FORMAT, getBrandName} from '../domain/cardPolicy';
+import {CARD_BRANDS, DEFAULT_CARD_NUMBER_FORMAT, getBrandName} from '../domain/cardBrand';
 import {createFlags, computeNextErrorInfo, computeNextTouched} from '../components/InfoInputSection/fieldState';
 import {resizeArray} from '../../../common/utils/array';
 

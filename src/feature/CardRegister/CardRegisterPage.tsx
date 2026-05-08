@@ -5,8 +5,8 @@ import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import {useCardNumbers} from './hooks/useCardNumbers';
 import {useExpiryDate} from './hooks/useExpiryDate';
 import {useCvcNumber} from './hooks/useCvcNumber';
-import {CARD_COMPANIES} from './domain/cardPolicy';
-import type {CardCompanyType} from './domain/cardPolicy';
+import {CARD_COMPANIES} from './domain/cardCompany';
+import type {CardCompanyType} from './domain/cardCompany';
 import styled from 'styled-components';
 
 const CardRegisterPage = () => {

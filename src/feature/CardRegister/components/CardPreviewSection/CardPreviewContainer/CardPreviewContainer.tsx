@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import CardBrandLogo from '../CardBrandLogo/CardBrandLogo';
 import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDisplay';
 import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
-import {getBrandName, CARD_COMPANIES} from '../../../domain/cardPolicy';
-import type {CardCompanyType} from '../../../domain/cardPolicy';
+import {CARD_COMPANIES} from '../../../domain/cardCompany';
+import type {CardCompanyType} from '../../../domain/cardCompany';
+import {getBrandName} from '../../../domain/cardBrand';
 
 type Props = {
   cardNumbers: string[];

@@ -6,7 +6,7 @@ import NumberField from './NumberField/NumberField';
 import type {useCardNumbers} from '../../hooks/useCardNumbers';
 import type {useExpiryDate} from '../../hooks/useExpiryDate';
 import type {useCvcNumber} from '../../hooks/useCvcNumber';
-import type {CardCompanyType} from '../../domain/cardPolicy';
+import type {CardCompanyType} from '../../domain/cardCompany';
 import styled from 'styled-components';
 
 type Props = {

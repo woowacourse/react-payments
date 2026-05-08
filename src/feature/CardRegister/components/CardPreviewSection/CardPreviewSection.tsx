@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import CardPreviewContainer from './CardPreviewContainer/CardPreviewContainer';
-import type {CardCompanyType} from '../../domain/cardPolicy';
+import type {CardCompanyType} from '../../domain/cardCompany';
 
 type Props = {
   cardNumbers: string[];

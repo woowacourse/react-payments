@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import {CARD_COMPANIES} from '../../../domain/cardPolicy';
-import type {CardCompanyType} from '../../../domain/cardPolicy';
+import {CARD_COMPANIES} from '../../../domain/cardCompany';
+import type {CardCompanyType} from '../../../domain/cardCompany';
 
 type Props = {
   selectedCompany: CardCompanyType | null;
