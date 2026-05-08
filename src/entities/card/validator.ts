@@ -11,7 +11,6 @@ export const validateCardNumbers = (cardNumbers: string, brand: Brand) => {
 };
 
 // 유효기간
-
 const validateExpirationMonth = (month: string) => {
   if (month.length !== 2) return false;
   if (!isNumericString(month)) return false;
@@ -30,12 +29,4 @@ export const validateExpirationDate = (expirationDate: ExpirationDate) => {
     month: validateExpirationMonth(expirationDate.month),
     year: validateExpirationYear(expirationDate.year),
   };
-};
-
-// CVC
-
-export const validateCvc = (cvc: string) => {
-  if (cvc.length !== 3) return false;
-  if (!isNumericString(cvc)) return false;
-  return true;
 };
