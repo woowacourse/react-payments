@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 import MasterCard from "../../assets/Mastercard.svg";
 import VisaCard from "../../assets/visa-logo.svg";
 import UnionCard from "../../assets/unionpay-logo.svg";
-import { NetworkBrand } from "../../NetworkBrand";
+import { CardNetwork } from "../../CardNetwork";
 
 export function CardNetworkBrand({ cardNumber }) {
   const fullCardNumber = Object.keys(cardNumber)
     .map((key) => cardNumber[key])
     .join("");
-  const networkBrandName = new NetworkBrand(fullCardNumber).name;
+  const networkBrandName = new CardNetwork(fullCardNumber).name;
 
   const selectBrandImage = (brand: string): string | null => {
     if (brand === "visa") return VisaCard;

@@ -1,4 +1,4 @@
-export class NetworkBrand {
+export class CardNetwork {
   private allNetworkBrands = [Visa, MasterCard, UnionPay];
   #name: string | undefined;
 

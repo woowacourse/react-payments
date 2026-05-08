@@ -1,8 +1,8 @@
-import { NetworkBrand } from "../NetworkBrand";
+import { CardNetwork } from "../CardNetwork";
 
 describe("NetworkBrand Test", () => {
   test("숫자가 4로 시작하면 Visa 브랜드 이다.", () => {
-    const brand = new NetworkBrand("4321");
+    const brand = new CardNetwork("4321");
     expect(brand.name).toBe("visa");
   });
 
@@ -16,7 +16,7 @@ describe("NetworkBrand Test", () => {
   ])(
     "51 ~ 55 사이 숫자로 시작하면 Master Card 브랜드 이다.",
     (value, expectedValue) => {
-      const brand = new NetworkBrand(value);
+      const brand = new CardNetwork(value);
       expect(brand.name).toBe(expectedValue);
     },
   );
@@ -31,7 +31,7 @@ describe("NetworkBrand Test", () => {
     ])(
       "숫자가 624, 625, 626으로 시작하면 Union Pay 브랜드 이다.",
       (value, expectedValue) => {
-        const brand = new NetworkBrand(value);
+        const brand = new CardNetwork(value);
         expect(brand.name).toBe(expectedValue);
       },
     );
@@ -46,7 +46,7 @@ describe("NetworkBrand Test", () => {
     ])(
       "6282 ~ 6288 이내 숫자로 시작하면 Union Pay 브랜드 이다.",
       (value, expectedValue) => {
-        const brand = new NetworkBrand(value);
+        const brand = new CardNetwork(value);
         expect(brand.name).toBe(expectedValue);
       },
     );
@@ -61,7 +61,7 @@ describe("NetworkBrand Test", () => {
     ])(
       "622126 ~ 622925 이내 숫자로 시작하면 Union Pay 브랜드 이다.",
       (value, expectedValue) => {
-        const brand = new NetworkBrand(value);
+        const brand = new CardNetwork(value);
         expect(brand.name).toBe(expectedValue);
       },
     );
