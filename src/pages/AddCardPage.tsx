@@ -8,6 +8,7 @@ import type { CardInfo } from '../types';
 import Card from '../components/ui/Card';
 import CardCompanyField from '../components/domain/CardCompanyField.tsx';
 import PasswordField from '../components/domain/PasswordField.tsx';
+import SubmitButton from '../components/domain/SubmitButton.tsx';
 
 interface FieldState<T> {
   value: T;
@@ -55,6 +56,7 @@ export default function AddCardPage() {
           />
         </div>
         <form css={formLayout}>
+          {stepIndex >= 5 && <SubmitButton />}
           {stepIndex >= 4 && (
             <PasswordField
               value={formValue.password.value}
