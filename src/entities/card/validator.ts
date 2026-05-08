@@ -1,14 +1,5 @@
 import { isNumericString, isValidMonth } from '@/core/utils/validator';
-import { BRAND_CARD_LENGTH } from './brand';
 import type { ExpirationDate } from '@/entities/card/types';
-import type { Brand } from '@/entities/card/brand';
-
-// 카드번호
-export const validateCardNumbers = (cardNumbers: string, brand: Brand) => {
-  if (cardNumbers.length !== BRAND_CARD_LENGTH[brand]) return false;
-  if (!isNumericString(cardNumbers)) return false;
-  return true;
-};
 
 // 유효기간
 const validateExpirationMonth = (month: string) => {
