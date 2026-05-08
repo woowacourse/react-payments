@@ -10,20 +10,21 @@ interface CardNumberInputWrapperProps {
 }
 
 export default function CardNumberInputWrapper({ validator, setCardNumber, value }: CardNumberInputWrapperProps) {
-    // TODO CVCInputWrapper, EXPInputWrapper에 존재하는 에러 다루기 위한 유사한 로직들 커스텀 훅으로 분리
-    const [inputErrors, setInputErrors] = useState<(string | null)[]>([null, null, null, null]);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [hasTouched, setHasTouched] = useState(false);
 
-    const setError = (index: number) => (message: string | null) => {
-        setInputErrors((prev) => prev.with(index, message));
+    const handleBlur = () => {
+        setHasTouched(true);
+        setErrorMessage(validator(value));
     };
 
-    const [hasTouched, setHasTouched] = useState(false);
-    const errorAfterCompleted = hasTouched ? validator(value) : null;
-
-    const inputError = inputErrors.find((err) => err !== null) ?? errorAfterCompleted;
+    const handleFocus = () => {
+        setHasTouched(false);
+        setErrorMessage(null);
+    };
 
     return (
-        <CardInputWrapper errorMessage={inputError}>
+        <CardInputWrapper errorMessage={errorMessage}>
             {value.map((_, index) => (
                 <CardInfoInput
                     key={`${index}th-input`}
@@ -31,12 +32,12 @@ export default function CardNumberInputWrapper({ validator, setCardNumber, value
                     setValue={setCardNumber(index)}
                     size="small"
                     placeHolder="1234"
-                    validator={isNumeric}
-                    isError={(hasTouched && value[index].length !== 4) || inputErrors[index] !== null}
+                    inputBlock={isNumeric}
+                    setErrorMessage={setErrorMessage}
+                    isError={hasTouched && value[index].length !== 4}
                     maxLength={4}
-                    onError={setError(index)}
-                    onBlur={() => setHasTouched(true)}
-                    onFocus={() => setHasTouched(false)}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
                 />
             ))}
         </CardInputWrapper>

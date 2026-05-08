@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { isMonthMatch } from '../utils/isMonthMatch';
 
+export type CardBrandValue = 'BC' | 'SHINHAN' | 'KAKAO' | 'HYUNDAI' | 'WOORI' | 'LOTTE' | 'HANA' | 'KB' | '';
+
 export const useCardInfoValue = () => {
     const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-    const [cardBrand, setCardBrand] = useState(''); // TODO 문자열 리터럴 타입 추가
+    const [cardBrand, setCardBrand] = useState<CardBrandValue>(''); // TODO 문자열 리터럴 타입 추가
     const [EXPNumbers, setEXPNumbers] = useState(['', '']);
     const [cvc, setCVC] = useState('');
     const [password, setPassword] = useState('');
