@@ -49,3 +49,11 @@ export const Amex = {
     }
   },
 };
+
+export const Diners = {
+  title: "diners",
+  check(value: string): string | undefined {
+    const validValueLength = value.replaceAll(" ", "").length;
+    if (value.startsWith("36") && validValueLength <= 14) return this.title;
+  },
+};

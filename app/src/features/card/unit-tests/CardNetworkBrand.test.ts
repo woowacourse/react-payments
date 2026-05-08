@@ -1,4 +1,4 @@
-import { Visa, MasterCard, UnionPay, Amex } from "../CardNetworkBrand";
+import { Visa, MasterCard, UnionPay, Amex, Diners } from "../CardNetworkBrand";
 
 describe("CardNetworkBrand Test", () => {
   test("숫자가 4로 시작하면 Visa 브랜드 이다.", () => {
@@ -74,6 +74,21 @@ describe("CardNetworkBrand Test", () => {
       "34, 37로 시작하고 15자 이내이면 Amex 브랜드 이다.",
       (value, expectedValue) => {
         expect(Amex.check(value)).toBe(expectedValue);
+      },
+    );
+  });
+
+  describe("Diners", () => {
+    test.each([
+      ["36", "diners"],
+      ["3", undefined],
+      ["36123612", "diners"],
+      ["36123612361236", "diners"],
+      ["361236123612361", undefined],
+    ])(
+      "36으로 시작하고 14자 이내이면 Diners 브랜드 이다.",
+      (value, expectedValue) => {
+        expect(Diners.check(value)).toBe(expectedValue);
       },
     );
   });

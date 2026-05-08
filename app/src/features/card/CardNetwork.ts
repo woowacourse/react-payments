@@ -1,6 +1,6 @@
-import { Visa, MasterCard, UnionPay, Amex } from "./CardNetworkBrand";
+import { Visa, MasterCard, UnionPay, Amex, Diners } from "./CardNetworkBrand";
 
-const ALL_CARD_NETWORK_BRAND = [Visa, MasterCard, UnionPay, Amex];
+const ALL_CARD_NETWORK_BRAND = [Visa, MasterCard, UnionPay, Amex, Diners];
 
 export class CardNetwork {
   #name: string | undefined;
