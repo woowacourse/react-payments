@@ -1,10 +1,13 @@
 import { CardInput } from "./CardInput";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
-import styled from "@emotion/styled";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { sanitizeErrors } from "../../../../Utils";
+import {
+  CardInputLabel,
+  CardInputFieldContainer,
+} from "../../style/CardStyles";
 
 export default function CardPasswordInput() {
   const [cardPassword, setCardPassword] = useState("");
@@ -40,8 +43,8 @@ export default function CardPasswordInput() {
   };
 
   return (
-    <CardPasswordContainer>
-      <CardPasswordLabel>비밀번호 앞 2자리</CardPasswordLabel>
+    <CardInputFieldContainer>
+      <CardInputLabel>비밀번호 앞 2자리</CardInputLabel>
       <CardInput
         type="text"
         maxLength={CARD_INPUT.PASSWORD_LENGTH}
@@ -51,15 +54,6 @@ export default function CardPasswordInput() {
         onBlur={handleBlurPassword}
       />
       <ErrorMessage messages={sanitizeErrors([isError["message"]])} />
-    </CardPasswordContainer>
+    </CardInputFieldContainer>
   );
 }
-
-const CardPasswordContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-`;
-const CardPasswordLabel = styled.label`
-  font-size: 12px;
-`;

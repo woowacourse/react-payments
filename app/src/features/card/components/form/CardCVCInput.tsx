@@ -1,10 +1,13 @@
 import { useState } from "react";
-import styled from "@emotion/styled";
 import { ErrorMessage } from "./ErrorMessage";
 import { CARD_INPUT } from "../../Constants";
 import { sanitizeErrors } from "../../../../Utils";
 import { CardInput } from "./CardInput";
 import { Validator } from "../../validators/CardValidator";
+import {
+  CardInputFieldContainer,
+  CardInputLabel,
+} from "../../style/CardStyles";
 
 export function CardCVCInput() {
   const [cardCVC, setCardCVC] = useState("");
@@ -39,8 +42,8 @@ export function CardCVCInput() {
   };
 
   return (
-    <CardCVCContainer>
-      <CardCVCLabel htmlFor="card-cvc-input">CVC</CardCVCLabel>
+    <CardInputFieldContainer>
+      <CardInputLabel htmlFor="card-cvc-input">CVC</CardInputLabel>
       <CardInput
         type="text"
         maxLength={CARD_INPUT.CVC_LENGTH}
@@ -51,16 +54,6 @@ export function CardCVCInput() {
         onBlur={handleBlurCVC}
       />
       <ErrorMessage messages={sanitizeErrors([isError["message"]])} />
-    </CardCVCContainer>
+    </CardInputFieldContainer>
   );
 }
-
-const CardCVCContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-`;
-
-const CardCVCLabel = styled.label`
-  font-size: 12px;
-`;
