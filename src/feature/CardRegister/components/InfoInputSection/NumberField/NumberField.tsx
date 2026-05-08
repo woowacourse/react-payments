@@ -34,7 +34,7 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
               inputRefs.current[index] = el;
             }}
             value={cardNumbers[index] ?? ''}
-            placeholder='1234'
+            placeholder={Array.from({length: maxLen}, (_, i) => (i + 1) % 10).join('')}
             inputMode='numeric'
             maxLength={maxLen}
             strokeMode={index === firstErrorIdx ? 'error' : 'default'}
