@@ -49,15 +49,15 @@ const CardRegisterPage = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 `;
 
 const Container = styled.div`
+  width: 100%;
   max-width: 376px;
-  max-height: 700px;
 `;
 
 const SubmitButton = styled.button`
