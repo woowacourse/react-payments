@@ -16,7 +16,7 @@ export default function CardComplete() {
           {cardFirmLabel}가 등록되었어요.
         </Message>
       </Content>
-      <CheckBtn onClick={() => navigate("/", { state: { reset: true } })} />
+      <CheckBtn onClick={() => navigate("/")} />
     </CompleteStyle>
   );
 }
