@@ -11,9 +11,9 @@ export const isIncompleteRange = (value: string, maxLength: number): boolean => 
   return value.length < maxLength && value.length >= 0;
 }
 
-export const getCardNumberError = (cardNumber: string): string => {
+export const getCardNumberError = (cardNumber: string, requiredLength: number): string => {
   if (cardNumber === '') return '';
-  if (isIncompleteRange(cardNumber, 4)) return '필요한 자릿수를 모두 입력해주세요!'
+  if (isIncompleteRange(cardNumber, requiredLength)) return '필요한 자릿수를 모두 입력해주세요!'
 
   return '';
 }
