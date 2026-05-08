@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import type { CardError } from '../types/errorTypes';
 import type { CardStatus, CardHandler, CardBrandType } from '../types/cardStausTypes';
-import { getCardBrand, isNotNumber, setEmptyBrand, setNoExist } from '../utils/util';
+import {
+  getCardBrand,
+  getCardNumberLength,
+  isNumericInput,
+  isPossibleCardBrandPrefix,
+} from '../utils/util';
 
 export function useCardNumber(): [CardStatus, CardHandler] {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -11,36 +16,31 @@ export function useCardNumber(): [CardStatus, CardHandler] {
   const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = [...cardNumbers];
     next[index] = e.target.value;
+    const nextCardNumber = next.join('');
 
-    if (isNotNumber(Number(e.target.value), 'notNumber', setCardNumberErrorMode)) {
+    if (!isNumericInput(e.target.value)) {
+      setCardNumberErrorMode('notNumber');
       return;
     }
 
-    setEmptyBrand(next, setCardBrand);
+    const nextCardBrand = getCardBrand(nextCardNumber);
 
-    if (next[0].length === 1) {
-      if (setNoExist(next, 'notExistBrand', setCardNumberErrorMode)) {
-        return;
-      }
-      const nextCardBrand = getCardBrand(next[0]);
-      if (nextCardBrand !== 'unknown') {
-        setCardBrand(nextCardBrand);
-      }
+    if (!isPossibleCardBrandPrefix(nextCardNumber)) {
+      setCardBrand('unknown');
+      setCardNumberErrorMode('notExistBrand');
+      return;
     }
 
-    if (next[0].length === 2 && next[0].slice(0, 1) !== '4') {
-      if (setNoExist(next, 'notExistBrand', setCardNumberErrorMode)) {
-        return;
-      }
-      setCardBrand(getCardBrand(next[0]));
-    }
-
+    setCardBrand(nextCardBrand);
     setCardNumberErrorMode('normal');
     setCardNumbers(next);
   };
 
   const handleCardNumbersBlur = () => {
-    if (cardNumbers.join('').length !== 16) {
+    const cardNumber = cardNumbers.join('');
+    const cardBrand = getCardBrand(cardNumber);
+
+    if (cardNumber.length !== getCardNumberLength(cardBrand)) {
       setCardNumberErrorMode('cardNumberCount');
       return;
     }

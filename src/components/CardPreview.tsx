@@ -1,5 +1,8 @@
 import visa from '../assets/Visa.png';
 import master from '../assets/Mastercard.png';
+import union from '../assets/UnionPay.png';
+import diners from '../assets/Diners.png';
+import amex from '../assets/Amex.png';
 import { maskCardNumbers } from '../utils/maskCardNumbers';
 import type { CardBrandType, CardIssuerType } from '../types/cardStausTypes';
 
@@ -27,8 +30,22 @@ export default function CardPreview({
   cardExpiryDate,
   cardIssuer = '',
 }: CardPreviewProps) {
-  const cardImgSrc: string | null =
-    cardBrand === 'visa' ? visa : cardBrand === 'master' ? master : null;
+  const cardImgSrc: string | null = (() => {
+    switch (cardBrand) {
+      case 'visa':
+        return visa;
+      case 'master':
+        return master;
+      case 'unionPay':
+        return union;
+      case 'diners':
+        return diners;
+      case 'amex':
+        return amex;
+      default:
+        return null;
+    }
+  })();
 
   return (
     <div

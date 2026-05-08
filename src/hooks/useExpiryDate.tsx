@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { DateError, MonthError, YearError } from '../types/errorTypes';
 import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
-import { isNotNumber } from '../utils/util';
+import { isNumericInput } from '../utils/util';
 
 export function useExpiryDate(): [CardExpiry, ExpireHandler] {
   const [cardExpiryDate, setCardExpiryDate] = useState<string[]>(['', '']);
@@ -13,8 +13,10 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
     const next = [...cardExpiryDate];
     next[index] = e.target.value;
 
-    const errormode = index === 0 ? 'notMonthNumber' : 'notYearNumber';
-    if (isNotNumber(Number(e.target.value), errormode, setCardExpiryDateErrorMode)) return;
+    if (!isNumericInput(e.target.value)) {
+      setCardExpiryDateErrorMode(index === 0 ? 'notMonthNumber' : 'notYearNumber');
+      return;
+    }
 
     if (index === 0) {
       if (Number(next[index]) > 12 || next[index] === '00') {

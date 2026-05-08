@@ -32,7 +32,7 @@ export interface CvcHandler {
   handleCvcBlur: () => void;
 }
 
-export type CardBrandType = 'visa' | 'master' | 'unknown';
+export type CardBrandType = 'visa' | 'master' | 'diners' | 'amex' | 'unionPay' | 'unknown';
 
 export type CardIssuerType =
   | 'bcCard'
