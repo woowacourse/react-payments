@@ -1,48 +1,28 @@
-import { useRef, useState } from "react";
-import { getMonthError, getYearError, isInputValidate } from "../../utils/Validation";
+import { getMonthError, getYearError } from '../../utils/Validation';
+import { useInputShell } from '../common/commonHook/useInputShell';
 
 interface Props {
   value: {
     month: string;
     year: string;
   };
-  setValue: (value: { month: string; year: string; }) => void;
+  setValue: (value: { month: string; year: string }) => void;
 }
 
-export const useExpirationDate = ({value, setValue}: Props) => {
-  const [errors, setErrors] = useState({ month: false, year: false });
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
-
-  const handleOnChange = (inputValue: string, type: 'month' | 'year') => {
-    if (!isInputValidate(inputValue, 2)) return;
-
-    const newValue = { ...value, [type]: inputValue };
-    setValue(newValue);
-
-    if (type === 'month' && inputValue.length === 2) {
-      yearRef.current?.focus();
-    }
-  };
-
-  const handleOnBlur = (inputValue: string, type: 'month' | 'year') => {
-    const isError = type === 'month' 
-      ? getMonthError(inputValue) !== '' 
-      : getYearError(inputValue) !== '';
-
-    setErrors(prev => ({ ...prev, [type]: isError }));
-  };
-
-  const monthErrMsg = errors.month ? getMonthError(value.month) : '';
-  const yearErrMsg = errors.year ? getYearError(value.year) : '';
-  const finalErrorMessage = monthErrMsg || yearErrMsg;
-
-  return {
-    errors,
-    monthRef,
-    yearRef,
-    handleOnChange,
-    handleOnBlur,
-    finalErrorMessage,
-  }
-}
+export const useExpirationDate = ({ value, setValue }: Props) => {
+  return useInputShell({
+    value,
+    setValue,
+    maxLengthList: [2, 2],
+    valueUpdater: (currentValue, newValue, index) =>
+      index === 0
+        ? { ...currentValue, month: newValue }
+        : { ...currentValue, year: newValue },
+    errorChecker: (val) => [
+      getMonthError(val.month) !== '',
+      getYearError(val.year) !== '',
+    ],
+    errorMessageGenerator: (val) =>
+      getMonthError(val.month) || getYearError(val.year),
+  });
+};

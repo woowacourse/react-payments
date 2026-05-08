@@ -13,7 +13,7 @@ interface Props {
 
 const ExpirationDateSection = ({ value, setValue }: Props) => {
   const expirationDateIds = useId();
-  const { errors, monthRef, yearRef, handleOnChange, handleOnBlur, finalErrorMessage } = useExpirationDate({value, setValue});
+  const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } = useExpirationDate({value, setValue});
 
   return (
     <CommonSection
@@ -26,22 +26,22 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
       <NumberInput
         id={`${expirationDateIds}-month`}
         value={value.month}
-        onChange={(v) => handleOnChange(v, 'month')}
-        onBlur={(v) => handleOnBlur(v, 'month')}
+        onChange={(v) => handleOnChange(v, 0)}
+        onBlur={() => handleOnBlur()}
         placeholder="MM"
-        isError={errors.month}
+        isError={errors[0]}
         maxLength={2}
-        ref={monthRef}
+        ref={(el) => {inputRefs.current[0] = el;}}
       />
       <NumberInput
         id={`${expirationDateIds}-year`}
         value={value.year}
-        onChange={(v) => handleOnChange(v, 'year')}
-        onBlur={(v) => handleOnBlur(v, 'year')}
+        onChange={(v) => handleOnChange(v, 1)}
+        onBlur={() => handleOnBlur()}
         placeholder="YY"
-        isError={errors.year}
+        isError={errors[1]}
         maxLength={2}
-        ref={yearRef}
+        ref={(el) => {inputRefs.current[1] = el;}}
       />
     </CommonSection>
   );
