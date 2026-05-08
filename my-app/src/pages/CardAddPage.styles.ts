@@ -5,7 +5,7 @@ export const FormLayout = styled.form`
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding-bottom: 52px;
+  padding-bottom: 150px;
   flex: 1;
   overflow-y: auto;
 

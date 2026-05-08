@@ -4,6 +4,7 @@ export const DropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 `;
 
 export const DropdownButton = styled.button`
@@ -12,7 +13,6 @@ export const DropdownButton = styled.button`
   align-items: center;
   width: 100%;
   padding: 8px;
-  margin-bottom: 5px;
   background-color: #ffffff;
   border: 1px solid #acacac;
   border-radius: 2px;
@@ -31,7 +31,10 @@ export const DropdownButton = styled.button`
 export const DropdownList = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 99%;
+  position: absolute;
+  top: 40px;
+  z-index: 10;
+  width: 99.3%;
   margin: 0;
   padding: 0;
   background-color: #ffffff;
@@ -47,6 +50,6 @@ export const DropdownItem = styled.li`
   background-color: #ffffff;
 
   &:hover {
-    background-color: #acacac;
+    background-color: #c0c0c0;
   }
 `;

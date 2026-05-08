@@ -28,7 +28,7 @@ const CardAddPage = () => {
     cardNumber.every((num, index) => num.length === format[index] && getCardNumberError(num) === '');
   const isCardCompanyCorrect = cardCompany !== '';
   const isExpirationDateCorrect =
-    expirationDate.month.length === 2 && expirationDate.year.length === 2 && getMonthError(expirationDate.month) && getYearError(expirationDate.year);
+    expirationDate.month.length === 2 && expirationDate.year.length === 2 && getMonthError(expirationDate.month) === '' && getYearError(expirationDate.year) === '';
   const isCvcCorrect = cvc.length === 3 && getCvcError(cvc) === '';
   const isPasswordCorrect = password.length === 2 && getPasswordError(password) === '';
 
