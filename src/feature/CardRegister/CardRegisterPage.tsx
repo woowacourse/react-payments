@@ -39,10 +39,10 @@ const CardRegisterPage = () => {
           showExpiry={showExpiry}
           showCvc={showCvc}
         />
-        {isFormComplete && (
-          <SubmitButton onClick={() => navigate('/complete')}>확인</SubmitButton>
-        )}
       </Container>
+      {isFormComplete && (
+        <SubmitButton onClick={() => navigate('/complete')}>확인</SubmitButton>
+      )}
     </Wrapper>
   );
 };
@@ -53,6 +53,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   min-height: 100%;
+  padding-bottom: 64px;
 `;
 
 const Container = styled.div`
@@ -61,14 +62,16 @@ const Container = styled.div`
 `;
 
 const SubmitButton = styled.button`
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px;
   background-color: #000;
   color: #fff;
   font-size: 14px;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
 `;
 
