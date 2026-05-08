@@ -23,7 +23,7 @@ export const CARD_BRANDS = {
 
 export type CardBrandType = keyof typeof CARD_BRANDS;
 
-export const DEFAULT_FORMAT = [4, 4, 4, 4];
+export const DEFAULT_CARD_NUMBER_FORMAT = [4, 4, 4, 4];
 
 export const MASK_FROM_INDEX = 2;
 
