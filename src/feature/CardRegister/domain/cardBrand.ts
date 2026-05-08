@@ -1,10 +1,11 @@
 import {matchVisa, matchMasterCard, matchAmex, matchDiners, matchUnionPay} from './cardBrandMatchers';
 
+// 브랜드 데이터
 export const CARD_BRANDS = {
-  visa: {format: [4, 4, 4, 4], imageUrl: '/images/Visa.png'},
-  masterCard: {format: [4, 4, 4, 4], imageUrl: '/images/Mastercard.png'},
+  visa: {format: [4, 4, 4, 4], imageUrl: '/images/Visa.svg'},
+  masterCard: {format: [4, 4, 4, 4], imageUrl: '/images/mastercard-logo.svg'},
   amex: {format: [4, 6, 5], imageUrl: '/images/amex-logo.svg'},
-  diners: {format: [4, 6, 4], imageUrl: '/images/diners-club-logo.png'},
+  diners: {format: [4, 6, 4], imageUrl: '/images/diners-logo.svg'},
   unionPay: {format: [4, 4, 4, 4], imageUrl: '/images/unionpay-logo.svg'},
 } as const;
 
@@ -12,6 +13,7 @@ export const DEFAULT_CARD_NUMBER_FORMAT = [4, 4, 4, 4];
 
 export type CardBrandType = keyof typeof CARD_BRANDS;
 
+// 브랜드 감지
 const MAX_BRAND_PREFIX_LENGTH = 6;
 
 const BRAND_MATCHERS: {brand: CardBrandType; match: (prefix: string) => boolean}[] = [
@@ -27,4 +29,3 @@ export const getBrandName = (cardNumbers: string[]): CardBrandType | null => {
   if (!prefix) return null;
   return BRAND_MATCHERS.find(({match}) => match(prefix))?.brand ?? null;
 };
-
