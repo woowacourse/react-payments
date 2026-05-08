@@ -3,22 +3,28 @@ import CvcField from './CvcField/CvCField';
 import ExpiryField from './ExpiryField/ExpiryField';
 import InputContainer from './InputContainer/InputContainer';
 import NumberField from './NumberField/NumberField';
-import type {CardInfoHandlersType, CardInfoType} from '../../../../common/types/CardInfoType';
 import styled from 'styled-components';
 
+type Props = {
+  cardNumbers: [string, string, string, string];
+  setCardNumbers: (value: [string, string, string, string]) => void;
+  expiryMonth: string;
+  setExpiryMonth: (value: string) => void;
+  expiryYear: string;
+  setExpiryYear: (value: string) => void;
+};
+
 const InfoInputSection = ({
-  cardInfo,
-  cardInfoHandlers,
-}: {
-  cardInfo: CardInfoType;
-  cardInfoHandlers: CardInfoHandlersType;
-}) => {
+  cardNumbers,
+  setCardNumbers,
+  expiryMonth,
+  setExpiryMonth,
+  expiryYear,
+  setExpiryYear,
+}: Props) => {
   const [cvcNumber, setCvcNumber] = useState('');
   const [fieldErrors, setFieldErrors] = useState({number: false, expiry: false, cvc: false});
   const isError = Object.values(fieldErrors).some(Boolean);
-
-  const {cardNumbers, expiryMonth, expiryYear} = cardInfo;
-  const {setCardNumbers, setExpiryMonth, setExpiryYear} = cardInfoHandlers;
 
   if (isError) {
     console.log('error');

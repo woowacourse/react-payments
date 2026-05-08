@@ -9,16 +9,12 @@ const meta = {
   component: InfoInputSection,
   tags: ['autodocs'],
   args: {
-    cardInfo: {
-      cardNumbers: ['', '', '', ''],
-      expiryMonth: '',
-      expiryYear: '',
-    },
-    cardInfoHandlers: {
-      setCardNumbers: fn(),
-      setExpiryMonth: fn(),
-      setExpiryYear: fn(),
-    },
+    cardNumbers: ['', '', '', ''],
+    setCardNumbers: fn(),
+    expiryMonth: '',
+    setExpiryMonth: fn(),
+    expiryYear: '',
+    setExpiryYear: fn(),
   },
 } satisfies Meta<typeof InfoInputSection>;
 
@@ -29,35 +25,34 @@ export const Empty: Story = {};
 
 export const Partial: Story = {
   args: {
-    cardInfo: {
-      cardNumbers: ['4123', '56', '', ''],
-      expiryMonth: '1',
-      expiryYear: '',
-    },
+    cardNumbers: ['4123', '56', '', ''],
+    expiryMonth: '1',
+    expiryYear: '',
   },
 };
 
 export const Filled: Story = {
   args: {
-    cardInfo: {
-      cardNumbers: ['4123', '5678', '1234', '5678'],
-      expiryMonth: '12',
-      expiryYear: '30',
-    },
+    cardNumbers: ['4123', '5678', '1234', '5678'],
+    expiryMonth: '12',
+    expiryYear: '30',
   },
 };
 
 export const Interactive: Story = {
   render: function InteractiveInfoInputSection(args) {
-    const [cardNumbers, setCardNumbers] = useState(args.cardInfo.cardNumbers);
-    const [expiryMonth, setExpiryMonth] = useState(args.cardInfo.expiryMonth);
-    const [expiryYear, setExpiryYear] = useState(args.cardInfo.expiryYear);
+    const [cardNumbers, setCardNumbers] = useState(args.cardNumbers);
+    const [expiryMonth, setExpiryMonth] = useState(args.expiryMonth);
+    const [expiryYear, setExpiryYear] = useState(args.expiryYear);
 
     return (
       <InfoInputSection
-        {...args}
-        cardInfo={{cardNumbers, expiryMonth, expiryYear}}
-        cardInfoHandlers={{setCardNumbers, setExpiryMonth, setExpiryYear}}
+        cardNumbers={cardNumbers}
+        setCardNumbers={setCardNumbers}
+        expiryMonth={expiryMonth}
+        setExpiryMonth={setExpiryMonth}
+        expiryYear={expiryYear}
+        setExpiryYear={setExpiryYear}
       />
     );
   },

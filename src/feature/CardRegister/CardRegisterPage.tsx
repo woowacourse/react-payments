@@ -8,23 +8,18 @@ const CardRegisterPage = () => {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
 
-  const cardInfo = {
-    cardNumbers,
-    expiryMonth,
-    expiryYear,
-  };
-
-  const cardInfoHandlers = {
-    setCardNumbers,
-    setExpiryMonth,
-    setExpiryYear,
-  };
-
   return (
     <Wrapper>
       <Container>
         <CardPreviewSection cardNumbers={cardNumbers} expiryMonth={expiryMonth} expiryYear={expiryYear} />
-        <InfoInputSection cardInfo={cardInfo} cardInfoHandlers={cardInfoHandlers} />
+        <InfoInputSection
+          cardNumbers={cardNumbers}
+          setCardNumbers={setCardNumbers}
+          expiryMonth={expiryMonth}
+          setExpiryMonth={setExpiryMonth}
+          expiryYear={expiryYear}
+          setExpiryYear={setExpiryYear}
+        />
       </Container>
     </Wrapper>
   );
