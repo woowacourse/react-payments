@@ -1,4 +1,3 @@
-import Label from '../../../../../common/components/Label/Label';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 import type {useCvcNumber} from '../../../hooks/useCvcNumber';
@@ -8,7 +7,6 @@ type Props = ReturnType<typeof useCvcNumber>;
 const CvcField = ({cvcNumber, firstErrorIdx, errorMsg, handleChange, handleBlur}: Props) => {
   return (
     <StyledField>
-      <Label value='CVC' />
       <InputWrapper>
         <CvcInput
           value={cvcNumber}
@@ -29,8 +27,6 @@ const StyledField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  margin-top: 12px;
 
   width: 100%;
 `;

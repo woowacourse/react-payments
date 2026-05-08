@@ -1,6 +1,5 @@
 import {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
-import Label from '../../../../../common/components/Label/Label';
 import type {CardNumbersType} from '../../../../../common/types/CardInfoType';
 import styled from 'styled-components';
 
@@ -25,7 +24,6 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
 
   return (
     <StyledField>
-      <Label value='카드 번호' />
       <InputWrapper $columns={format.map((n) => `${n}fr`).join(' ')}>
         {format.map((maxLen, index) => (
           <CardNumberInput
@@ -53,8 +51,6 @@ const StyledField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  margin-top: 12px;
 
   width: 100%;
 `;

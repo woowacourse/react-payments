@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Label from '../../../../../common/components/Label/Label';
 import {CARD_COMPANIES} from '../../../domain/cardPolicy';
 import type {CardCompanyType} from '../../../domain/cardPolicy';
 
@@ -11,7 +10,6 @@ type Props = {
 const BrandSelectField = ({selectedCompany, onChange}: Props) => {
   return (
     <StyledField>
-      <Label value='카드사' />
       <Select
         value={selectedCompany ?? ''}
         onChange={(e) => {
@@ -36,8 +34,6 @@ const StyledField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  margin-top: 12px;
 
   width: 100%;
 `;

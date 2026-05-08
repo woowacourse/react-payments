@@ -1,4 +1,3 @@
-import Label from '../../../../../common/components/Label/Label';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 import type {useExpiryDate} from '../../../hooks/useExpiryDate';
@@ -8,7 +7,6 @@ type Props = ReturnType<typeof useExpiryDate>;
 const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMonthChange, handleYearChange, handleBlur}: Props) => {
   return (
     <StyledField>
-      <Label value='유효기간' />
       <InputWrapper>
         <ExpiryInput
           value={expiryMonth}
@@ -39,8 +37,6 @@ const StyledField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  margin-top: 12px;
 
   width: 100%;
 `;
