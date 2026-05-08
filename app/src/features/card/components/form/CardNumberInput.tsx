@@ -32,7 +32,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     message: "",
   });
 
-  const runFieldValidation = (
+  const runEachInputValidation = (
     validators: (() => void)[],
     id: string,
   ): boolean => {
@@ -67,14 +67,17 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
       Object.values(cardNumber),
       CARD_INPUT.EACH_NUMBER_LENGTH,
     );
-    runFieldValidation([() => Validator.isNumber(value)], id);
+    runEachInputValidation([() => Validator.isNumber(value)], id);
     runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    runFieldValidation([() => Validator.isValidCardNumberLength(value)], id);
+    runEachInputValidation(
+      [() => Validator.isValidCardNumberLength(value)],
+      id,
+    );
   };
 
   return (
