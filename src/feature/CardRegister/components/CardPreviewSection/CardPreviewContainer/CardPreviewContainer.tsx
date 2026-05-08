@@ -3,17 +3,21 @@ import type {CardNumbersType} from '../../../../../common/types/CardInfoType';
 import CardBrandLogo from '../CardBrandLogo/CardBrandLogo';
 import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDisplay';
 import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
-import {getBrandName} from '../../../domain/cardPolicy';
+import {getBrandName, CARD_COMPANIES} from '../../../domain/cardPolicy';
+import type {CardCompanyType} from '../../../domain/cardPolicy';
 
 type Props = {
   cardNumbers: CardNumbersType;
   expiryMonth: string;
   expiryYear: string;
+  selectedCompany: CardCompanyType | null;
 };
 
-const CardPreviewContainer = ({cardNumbers, expiryMonth, expiryYear}: Props) => {
+const CardPreviewContainer = ({cardNumbers, expiryMonth, expiryYear, selectedCompany}: Props) => {
+  const bgColor = selectedCompany ? CARD_COMPANIES[selectedCompany].color : '#333333';
+
   return (
-    <Container>
+    <Container $bgColor={bgColor}>
       <CardHeader>
         <IcChip />
         <CardBrandLogo brandName={getBrandName(cardNumbers)} />
@@ -26,14 +30,14 @@ const CardPreviewContainer = ({cardNumbers, expiryMonth, expiryYear}: Props) => 
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{$bgColor: string}>`
   display: flex;
   flex-direction: column;
   width: 212px;
   height: 132px;
   padding: 8px 10px;
   gap: 12px;
-  background-color: #333333;
+  background-color: ${({$bgColor}) => $bgColor};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;

@@ -5,13 +5,15 @@ import InfoInputSection from './InfoInputSection';
 import {useCardNumbers} from '../../hooks/useCardNumbers';
 import {useExpiryDate} from '../../hooks/useExpiryDate';
 import {useCvcNumber} from '../../hooks/useCvcNumber';
+import {useState} from 'react';
+import type {CardCompanyType} from '../../domain/cardPolicy';
 import type {CardNumbersType} from '../../../../common/types/CardInfoType';
 
-const makeMockNumberField = (cardNumbers: CardNumbersType) => ({
+const makeMockNumberField = (cardNumbers: CardNumbersType, isComplete = false) => ({
   cardNumbers,
   format: [4, 4, 4, 4] as number[],
   brand: null,
-  isComplete: cardNumbers.every((c) => c.length === 4),
+  isComplete,
   hasAnyError: false,
   firstErrorIdx: -1,
   errorMsg: '',
@@ -19,7 +21,7 @@ const makeMockNumberField = (cardNumbers: CardNumbersType) => ({
   handleBlur: fn(),
 });
 
-const makeMockExpiryField = (expiryMonth: string, expiryYear: string) => ({
+const makeMockExpiryField = (expiryMonth = '', expiryYear = '') => ({
   expiryMonth,
   expiryYear,
   isComplete: expiryMonth.length === 2 && expiryYear.length === 2,
@@ -47,28 +49,34 @@ const meta = {
   tags: ['autodocs'],
   args: {
     numberField: makeMockNumberField(['', '', '', '']),
-    expiryField: makeMockExpiryField('', ''),
+    expiryField: makeMockExpiryField(),
     cvcField: makeMockCvcField(),
+    selectedCompany: null,
+    onCompanyChange: fn(),
+    showCompanySelect: false,
+    showExpiry: false,
+    showCvc: false,
   },
 } satisfies Meta<typeof InfoInputSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Empty: Story = {};
+export const NumberOnly: Story = {};
 
-export const Partial: Story = {
+export const WithCompanySelect: Story = {
   args: {
-    numberField: makeMockNumberField(['4123', '56', '', '']),
-    expiryField: makeMockExpiryField('1', ''),
+    numberField: makeMockNumberField(['4123', '5678', '1234', '5678'], true),
+    showCompanySelect: true,
   },
 };
 
-export const Filled: Story = {
+export const WithExpiry: Story = {
   args: {
-    numberField: makeMockNumberField(['4123', '5678', '1234', '5678']),
-    expiryField: makeMockExpiryField('12', '30'),
-    cvcField: makeMockCvcField('123'),
+    numberField: makeMockNumberField(['4123', '5678', '1234', '5678'], true),
+    showCompanySelect: true,
+    selectedCompany: 'shinhan',
+    showExpiry: true,
   },
 };
 
@@ -77,12 +85,22 @@ export const Interactive: Story = {
     const numberField = useCardNumbers();
     const expiryField = useExpiryDate();
     const cvcField = useCvcNumber();
+    const [selectedCompany, setSelectedCompany] = useState<CardCompanyType | null>(null);
+
+    const showCompanySelect = numberField.isComplete;
+    const showExpiry = showCompanySelect && selectedCompany !== null;
+    const showCvc = showExpiry && expiryField.isComplete;
 
     return (
       <InfoInputSection
         numberField={numberField}
         expiryField={expiryField}
         cvcField={cvcField}
+        selectedCompany={selectedCompany}
+        onCompanyChange={setSelectedCompany}
+        showCompanySelect={showCompanySelect}
+        showExpiry={showExpiry}
+        showCvc={showCvc}
       />
     );
   },

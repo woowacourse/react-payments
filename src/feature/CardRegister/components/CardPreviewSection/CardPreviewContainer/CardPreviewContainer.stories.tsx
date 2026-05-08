@@ -10,6 +10,7 @@ const meta = {
     cardNumbers: ['', '', '', ''],
     expiryMonth: '',
     expiryYear: '',
+    selectedCompany: null,
   },
 } satisfies Meta<typeof CardPreviewContainer>;
 
