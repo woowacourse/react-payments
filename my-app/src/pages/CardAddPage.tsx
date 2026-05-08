@@ -76,7 +76,7 @@ const CardAddPage = () => {
     e.preventDefault();
     if (!isFormValid) return;
     // 라우팅 페이지 연결
-    navigate('/complete', {
+    navigate('/card-add-success', {
       state: { cardNumber, cardCompany, expirationDate, cvc, password },
     });
   };

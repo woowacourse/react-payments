@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppContainer } from './App.styles';
 import CardAddPage from './pages/CardAddPage';
+import CardAddSuccessPage from './pages/CardAddSuccessPage';
 
 const App = () => {
   return (
@@ -8,7 +9,7 @@ const App = () => {
       <AppContainer>
         <Routes>
           <Route path="/" element={<CardAddPage />} />
-          <Route path="/complete" element={<div>등록 완료</div>} />
+          <Route path="/card-add-success" element={<CardAddSuccessPage />} />
         </Routes>
       </AppContainer>
     </BrowserRouter>
