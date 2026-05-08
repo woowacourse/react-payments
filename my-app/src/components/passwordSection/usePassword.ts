@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { getPasswordError, isInputValidate } from '../../utils/Validation';
+import { getPasswordError } from '../../utils/Validation';
+import { useInputShell } from '../common/commonHook/useInputShell';
 
 interface Props {
   value: string;
@@ -7,23 +7,19 @@ interface Props {
 }
 
 export const usePassword = ({ value, setValue }: Props) => {
-  const [error, setError] = useState<boolean>(false);
-
-  const handleOnChange = (inputValue: string) => {
-    if (!isInputValidate(inputValue, 2)) return;
-    setValue(inputValue);
-  };
-
-  const handleOnBlur = (inputValue: string) => {
-    setError(getPasswordError(inputValue) !== '');
-  };
-
-  const finalErrorMessage = error ? getPasswordError(value) : '';
+  const inputShell = useInputShell({ 
+    value,
+    setValue,
+    maxLengthList: [2],
+    valueUpdater: (_, newValue) => newValue,
+    errorChecker: (val) => [getPasswordError(val) !== ''],
+    errorMessageGenerator: (val) => getPasswordError(val),
+  });
 
   return {
-    error,
-    handleOnChange,
-    handleOnBlur,
-    finalErrorMessage,
+    error: inputShell.errors[0],
+    handleOnChange: (val: string) => inputShell.handleOnChange(val, 0),
+    handleOnBlur: (val: string) => inputShell.handleOnBlur(val, 0),
+    finalErrorMessage: inputShell.finalErrorMessage,
   };
 };
