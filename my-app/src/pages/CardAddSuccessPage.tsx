@@ -12,8 +12,6 @@ const CardAddSuccessPage = () => {
   const navigate = useNavigate();
   const cardState = location.state;
 
-  if (!cardState) return null;
-
   const { cardNumber, cardCompany } = cardState;
   const cardNumberPrefixFourth = cardNumber.join('').slice(0, 4);
 
