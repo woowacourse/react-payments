@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import Description from '../../../../common/components/Description/Description';
-import Title from '../../../../common/components/Title/Title';
+import Description from '../../../../common/components/Description';
+import Title from '../../../../common/components/Title';
 import styled from 'styled-components';
 
 const FieldSection = ({

@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
-import Title from '../../../common/components/Title/Title';
+import Title from '../../../common/components/Title';
 
 const meta = {
   title: 'common/components/Title',

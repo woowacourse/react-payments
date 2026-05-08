@@ -1,5 +1,5 @@
-import Label from '../../../../common/components/Label/Label';
-import Input from '../../../../common/components/Input/Input';
+import Label from '../../../../common/components/Label';
+import Input from '../../../../common/components/Input';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../common/hooks/useFieldValidation';
 import {
