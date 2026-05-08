@@ -1,5 +1,12 @@
+export interface CardNetworkBrand {
+  title: string;
+  length: number;
+  check: (value: string) => string | undefined;
+}
+
 export const Visa = {
   title: "visa",
+  length: 16,
   check(value: string): string | undefined {
     if (value.startsWith("4")) return this.title;
   },
@@ -7,6 +14,7 @@ export const Visa = {
 
 export const MasterCard = {
   title: "master",
+  length: 16,
   check(value: string): string | undefined {
     if (value.startsWith("5") && ["1", "2", "3", "4", "5"].includes(value[1]))
       return this.title;
@@ -15,6 +23,7 @@ export const MasterCard = {
 
 export const UnionPay = {
   title: "union",
+  length: 16,
   check(value: string): string | undefined {
     if (value.startsWith("62")) {
       if (["624", "625", "626"].includes(value.slice(0, 3))) {
@@ -38,6 +47,7 @@ export const UnionPay = {
 
 export const Amex = {
   title: "amex",
+  length: 15,
   check(value: string): string | undefined {
     const validValueLength = value.replaceAll(" ", "").length;
     if (
@@ -52,6 +62,7 @@ export const Amex = {
 
 export const Diners = {
   title: "diners",
+  length: 14,
   check(value: string): string | undefined {
     const validValueLength = value.replaceAll(" ", "").length;
     if (value.startsWith("36") && validValueLength <= 14) return this.title;
