@@ -13,25 +13,17 @@ export const CARD_COMPANIES = {
 
 export type CardCompanyType = keyof typeof CARD_COMPANIES;
 
-export type CardBrandType = 'visa' | 'masterCard' | 'amex' | 'diners' | 'unionPay';
+export const CARD_BRANDS = {
+  visa:       {format: [4, 4, 4, 4], imageUrl: '/images/Visa.png'},
+  masterCard: {format: [4, 4, 4, 4], imageUrl: '/images/Mastercard.png'},
+  amex:       {format: [4, 6, 5],    imageUrl: '/images/amex-logo.svg'},
+  diners:     {format: [4, 6, 4],    imageUrl: '/images/diners-club-logo.png'},
+  unionPay:   {format: [4, 4, 4, 4], imageUrl: '/images/unionpay-logo.svg'},
+} as const;
 
-export const CARD_FORMAT: Record<CardBrandType, number[]> = {
-  visa: [4, 4, 4, 4],
-  masterCard: [4, 4, 4, 4],
-  amex: [4, 6, 5],
-  diners: [4, 6, 4],
-  unionPay: [4, 4, 4, 4],
-};
+export type CardBrandType = keyof typeof CARD_BRANDS;
 
 export const DEFAULT_FORMAT = [4, 4, 4, 4];
-
-export const BRAND_IMAGES: Record<CardBrandType, string> = {
-  visa: '/images/Visa.png',
-  masterCard: '/images/Mastercard.png',
-  amex: '/images/amex-logo.svg',
-  diners: '/images/diners-club-logo.png',
-  unionPay: '/images/unionpay-logo.svg',
-};
 
 export const MASK_FROM_INDEX = 2;
 
