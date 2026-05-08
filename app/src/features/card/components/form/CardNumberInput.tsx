@@ -4,7 +4,7 @@ import { ErrorMessage } from "./ErrorMessage";
 import NetworkBrandErrorMessage from "./NetworkBrandErrorMessage";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
-import { sanitizeErrors } from "../../../../Utils";
+import { sanitizeErrors, joinEachStringWithLength } from "../../../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
 export function CardNumberInput({ cardNumber, setCardNumber }) {
@@ -63,9 +63,12 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
     const newCardNumber = { ...cardNumber, [id]: value };
-    const fullCardNumber = Object.values(newCardNumber).join("");
+    const fullNumber = joinEachStringWithLength(
+      Object.values(cardNumber),
+      CARD_INPUT.EACH_NUMBER_LENGTH,
+    );
     runFieldValidation([() => Validator.isNumber(value)], id);
-    runNetworkBrandValidation(fullCardNumber);
+    runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
   };
 
