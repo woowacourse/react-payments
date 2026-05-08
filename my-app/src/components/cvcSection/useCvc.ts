@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
-import { getCvcError, isInputValidate } from "../../utils/Validation";
-
+import { getCvcError } from "../../utils/Validation";
+import { useInputShell } from "../common/commonHook/useInputShell";
 
 interface Props {
   value: string;
@@ -8,26 +7,20 @@ interface Props {
 }
 
 export const useCvc = ({value, setValue}: Props) => {
-  const [error, setError] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  
-  const handleOnChange = (inputValue: string) => {
-    if(!isInputValidate(inputValue, 3)) return;
-
-    setValue(inputValue);
-  }
-
-  const handleOnBlur = (inputValue: string) => {
-    setError(getCvcError(inputValue) !== '');
-  }
-
-  const finalErrorMessage = error ? getCvcError(value) : '';
+  const inputShell = useInputShell({
+    value,
+    setValue,
+    maxLengthList: [3],
+    valueUpdater: (_, newValue) => newValue,
+    errorChecker: (val) => [getCvcError(val) !== ''],
+    errorMessageGenerator: (val) => getCvcError(val),
+  });
 
   return {
-    error,
-    inputRef,
-    handleOnChange,
-    handleOnBlur,
-    finalErrorMessage,
-  }
-}
+    error: inputShell.errors[0],
+    inputRef: (el: HTMLInputElement | null) => { inputShell.inputRefs.current[0] = el; },
+    handleOnChange: (val: string) => inputShell.handleOnChange(val, 0),
+    handleOnBlur: () => inputShell.handleOnBlur(),
+    finalErrorMessage: inputShell.finalErrorMessage,
+  };
+};
