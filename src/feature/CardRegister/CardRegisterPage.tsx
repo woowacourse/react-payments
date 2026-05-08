@@ -2,13 +2,15 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
-import type { CardBrandId } from '../../common/types/CardPreview';
+import type { CardCompanyId } from '../../common/types/CardPreview';
 
 const CardRegisterPage = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
-  const [cardBrandId, setCardBrandId] = useState<CardBrandId | null>(null);
+  const [cardCompanyId, setCardCompanyId] = useState<CardCompanyId | null>(
+    null,
+  );
 
   const handleCardNumbersChange = (cardNumbers: string[]) => {
     setCardNumbers(cardNumbers);
@@ -22,22 +24,22 @@ const CardRegisterPage = () => {
     setExpiryYear(expiryYear);
   };
 
-  const handleCardBrandChange = (cardBrandId: CardBrandId | null) => {
-    setCardBrandId(cardBrandId);
+  const handleCardCompanyChange = (cardCompanyId: CardCompanyId | null) => {
+    setCardCompanyId(cardCompanyId);
   };
 
   const cardPreviewInfo = {
     cardNumbers,
     expiryMonth,
     expiryYear,
-    cardBrandId,
+    cardCompanyId,
   };
 
   const cardFormHandlers = {
     handleCardNumbersChange,
     handleExpiryMonthChange,
     handleExpiryYearChange,
-    handleCardBrandChange,
+    handleCardCompanyChange,
   };
 
   return (

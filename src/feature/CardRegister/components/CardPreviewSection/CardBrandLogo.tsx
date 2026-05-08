@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import type { CardTypeName } from '../../../../common/types/CardPreview';
+import type { CardBrandName } from '../../../../common/types/CardPreview';
 
 const VISA_IMAGE_PATH = '/images/Visa.png';
 const MASTER_CARD_IMAGE_PATH = '/images/Mastercard.png';
 
-const CardBrandLogo = ({ brandName }: { brandName: CardTypeName }) => {
+const CardBrandLogo = ({ brandName }: { brandName: CardBrandName | null }) => {
   if (brandName === null) return null;
 
   return (

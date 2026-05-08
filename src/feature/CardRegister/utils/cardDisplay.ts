@@ -1,8 +1,12 @@
-import { CARD_BRANDS } from '../constant/CARD_BRANDS';
+import type {
+  CardBrandName,
+  CardCompanyId,
+} from '../../../common/types/CardPreview';
+import { CARD_COMPANIES } from '../constant/CARD_BRANDS';
 
-export const getCardTypeName = (
+export const getCardBrandName = (
   cardNumbers: string[],
-): 'visa' | 'masterCard' | null => {
+): CardBrandName | null => {
   const fullNumber = cardNumbers.map((chunk) => chunk.padEnd(4, '#')).join('');
 
   if (fullNumber.startsWith('4')) return 'visa';
@@ -13,10 +17,10 @@ export const getCardTypeName = (
   return null;
 };
 
-export const getCardBrandColor = (cardBrandId: string | null) => {
-  const selectedCardBrand = CARD_BRANDS.find(
-    (cardBrand) => cardBrand.id === cardBrandId,
+export const getCardCompanyColor = (cardCompanyId: CardCompanyId | null) => {
+  const selectedCardCompany = CARD_COMPANIES.find(
+    (cardCompany) => cardCompany.id === cardCompanyId,
   );
 
-  return selectedCardBrand?.color ?? '#333333';
+  return selectedCardCompany?.color ?? '#333333';
 };

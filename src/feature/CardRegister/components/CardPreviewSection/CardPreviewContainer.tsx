@@ -3,23 +3,24 @@ import type { CardPreviewInfoType } from '../../../../common/types/CardPreviewIn
 import CardBrandLogo from './CardBrandLogo';
 import CardExpiryDateDisplay from './CardExpiryDateDisplay';
 import CardNumberDisplay from './CardNumberDisplay';
-import { getCardBrandColor, getCardTypeName } from '../../utils/cardDisplay';
+import { getCardBrandName, getCardCompanyColor } from '../../utils/cardDisplay';
 
 const CardPreviewContainer = ({
   cardPreviewInfo,
 }: {
   cardPreviewInfo: CardPreviewInfoType;
 }) => {
-  const { cardNumbers, expiryMonth, expiryYear, cardBrandId } = cardPreviewInfo;
+  const { cardNumbers, expiryMonth, expiryYear, cardCompanyId } =
+    cardPreviewInfo;
 
-  const cardBackgroundColor = getCardBrandColor(cardBrandId);
-  const cardType = getCardTypeName(cardNumbers);
+  const cardBackgroundColor = getCardCompanyColor(cardCompanyId);
+  const cardBrandName = getCardBrandName(cardNumbers);
 
   return (
     <Container $backgroundColor={cardBackgroundColor}>
       <CardHeader>
         <IcChip />
-        <CardBrandLogo brandName={cardType} />
+        <CardBrandLogo brandName={cardBrandName} />
       </CardHeader>
       <CardBody>
         <CardNumberDisplay cardNumbers={cardNumbers} />

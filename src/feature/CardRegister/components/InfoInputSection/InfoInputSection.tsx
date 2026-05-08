@@ -31,22 +31,14 @@ const InfoInputSection = ({
   const [password, setPassword] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
 
-  const { cardNumbers, expiryMonth, expiryYear, cardBrandId } = cardPreviewInfo;
+  const { cardNumbers, expiryMonth, expiryYear, cardCompanyId } =
+    cardPreviewInfo;
   const {
     handleCardNumbersChange,
     handleExpiryMonthChange,
     handleExpiryYearChange,
-    handleCardBrandChange,
+    handleCardCompanyChange,
   } = cardFormHandlers;
-
-  const cardFormInfo = {
-    cardNumbers,
-    cardBrandId,
-    expiryMonth,
-    expiryYear,
-    cvcNumber,
-    password,
-  };
 
   const handleCvcNumberChange = (cvcNumber: string) => {
     setCvcNumber(cvcNumber);
@@ -78,7 +70,7 @@ const InfoInputSection = ({
   );
   if (currentStep === 0 && !hasCardNumberError)
     setCurrentStep((prev) => prev + 1);
-  if (currentStep === 1 && cardBrandId !== null)
+  if (currentStep === 1 && cardCompanyId !== null)
     setCurrentStep((prev) => prev + 1);
   if (
     currentStep === 2 &&
@@ -136,7 +128,7 @@ const InfoInputSection = ({
           >
             <SelectCardBrandField
               autoFocus
-              handleCardBrandChange={handleCardBrandChange}
+              handleCardCompanyChange={handleCardCompanyChange}
             />
           </FieldSection>
         )}

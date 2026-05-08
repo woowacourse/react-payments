@@ -1,4 +1,12 @@
 export const CARD_BRANDS = [
+  { name: 'visa', maxlength: 16 },
+  { name: 'masterCard', maxlength: 16 },
+  { name: 'diners', maxlength: 14 },
+  { name: 'amex', maxlength: 15 },
+  { name: 'unionPay', maxlength: 16 },
+];
+
+export const CARD_COMPANIES = [
   { id: 'bc', name: 'BC카드', color: '#f64655' },
   { id: 'shinhan', name: '신한카드', color: '#0046ff' },
   { id: 'kakaoBank', name: '카카오뱅크', color: '#ffe100' },

@@ -1,18 +1,18 @@
 import Select from 'react-select';
 import styled from 'styled-components';
-import { CARD_BRANDS } from '../../constant/CARD_BRANDS';
-import type { CardBrandId } from '../../../../common/types/CardPreview';
+import { CARD_COMPANIES } from '../../constant/CARD_BRANDS';
+import type { CardCompanyId } from '../../../../common/types/CardPreview';
 
 const SelectCardBrandField = ({
   autoFocus = false,
-  handleCardBrandChange,
+  handleCardCompanyChange,
 }: {
   autoFocus?: boolean;
-  handleCardBrandChange: (cardBrandId: CardBrandId | null) => void;
+  handleCardCompanyChange: (cardCompanyId: CardCompanyId | null) => void;
 }) => {
-  const cardBrandOptions = CARD_BRANDS.map((cardBrand) => ({
-    value: cardBrand.id,
-    label: cardBrand.name,
+  const cardCompanyOptions = CARD_COMPANIES.map((cardCompany) => ({
+    value: cardCompany.id,
+    label: cardCompany.name,
   }));
 
   return (
@@ -20,10 +20,10 @@ const SelectCardBrandField = ({
       <InputWrapper>
         <Select
           autoFocus={autoFocus}
-          options={cardBrandOptions}
+          options={cardCompanyOptions}
           placeholder="카드사를 선택해주세요"
           onChange={(selectedOption) => {
-            handleCardBrandChange(selectedOption?.value ?? null);
+            handleCardCompanyChange(selectedOption?.value ?? null);
           }}
           styles={{
             control: (base, state) => ({

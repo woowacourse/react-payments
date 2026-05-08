@@ -1,5 +1,9 @@
-import type { CARD_BRANDS } from '../../feature/CardRegister/constant/CARD_BRANDS';
+import type {
+  CARD_BRANDS,
+  CARD_COMPANIES,
+} from '../../feature/CardRegister/constant/CARD_BRANDS';
 
-export type CardTypeName = 'visa' | 'masterCard' | null;
+// 카드 브랜드 - visa, masterCard, ...
+export type CardBrandName = (typeof CARD_BRANDS)[number]['name'];
 
-export type CardBrandId = (typeof CARD_BRANDS)[number]['id'];
+export type CardCompanyId = (typeof CARD_COMPANIES)[number]['id'];
