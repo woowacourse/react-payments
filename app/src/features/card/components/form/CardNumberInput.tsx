@@ -3,7 +3,7 @@ import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
 import NetworkBrandErrorMessage from "./NetworkBrandErrorMessage";
 import { CARD_INPUT } from "../../Constants";
-import { CardFormProgress } from "../../CardFormProcess";
+import CardFormProgress from "../../CardFormProgress";
 import { Validator } from "../../validators/CardValidator";
 import { sanitizeErrors, joinEachStringWithLength } from "../../../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";

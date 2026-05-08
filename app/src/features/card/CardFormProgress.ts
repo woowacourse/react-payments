@@ -1,6 +1,6 @@
 import { CardNetwork } from "./CardNetwork";
 
-export const CardFormProgress = {
+const CardFormProgress = {
   isCardNumberComplete(fullCardNumber: string): boolean {
     const networkBrand = new CardNetwork(fullCardNumber);
     if (
@@ -11,3 +11,5 @@ export const CardFormProgress = {
     }
   },
 };
+
+export default CardFormProgress;
