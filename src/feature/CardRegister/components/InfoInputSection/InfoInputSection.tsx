@@ -164,6 +164,8 @@ const Container = styled.form`
   gap: 12px;
 
   width: 100%;
+  height: 700px;
+  min-height: 0;
 `;
 
 const FieldsWrapper = styled.div`
@@ -173,12 +175,16 @@ const FieldsWrapper = styled.div`
   padding: 30px;
 
   width: 100%;
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
   box-sizing: border-box;
 `;
 
 const SubmitButton = styled(Button)`
   width: 100%;
   min-height: 46px;
+  flex-shrink: 0;
 
   background-color: #333333;
 

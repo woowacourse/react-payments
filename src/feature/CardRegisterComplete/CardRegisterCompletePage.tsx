@@ -45,7 +45,7 @@ const Wrapper = styled.div`
   justify-content: center;
 
   width: 100%;
-  min-height: 100vh;
+  height: 700px;
 
   background-color: #d3d3d3;
 `;
@@ -57,7 +57,7 @@ const Container = styled.div`
 
   width: 100%;
   max-width: 376px;
-  min-height: 100vh;
+  height: 700px;
 
   background-color: #ffffff;
 `;

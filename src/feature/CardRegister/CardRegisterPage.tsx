@@ -77,9 +77,13 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
   max-width: 376px;
-  min-height: 100vh;
+  height: min(700px, 100vh);
+  overflow: hidden;
 
   background-color: #ffffff;
 `;
