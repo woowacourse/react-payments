@@ -8,6 +8,8 @@ import CardNumberInputWrapper from './components/InputWrapper/CardNumberInputWra
 import EXPInputWrapper from './components/InputWrapper/EXPInputWrapper';
 import CVCInputWrapper from './components/InputWrapper/CVCInputWrapper';
 import { useCardInfoValue } from './hooks/useCardInfoValue';
+import PasswordInputWrapper from './components/InputWrapper/PasswordInputWrapper';
+import CardBrandInputWrapper from './components/InputWrapper/CardBrandInputWrapper';
 
 function App() {
     const {
@@ -25,7 +27,7 @@ function App() {
         isSatisfyCardBrand,
         isSatisfyEXP,
         isSatisfyCVC,
-        isSatisfyPassword,
+        // isSatisfyPassword, -> Button 활성화
     } = useCardInfoValue();
 
     // 여기서 input state 별로 어디 보여줄지 관리
@@ -41,7 +43,7 @@ function App() {
                     inputLabel="비밀번호 앞 2자리"
                     isRender={isSatisfyCVC()}
                 >
-                    ㅇ
+                    <PasswordInputWrapper setPassword={setPassword} validator={() => null} value={password} />
                 </CardInfoSection>
                 <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isSatisfyEXP()}>
                     <CVCInputWrapper setCVCNumber={setCVC} validator={getCVCumberErrorMessage} value={cvc} />
@@ -61,9 +63,10 @@ function App() {
                 <CardInfoSection
                     title="카드사를 선택해 주세요"
                     caption="현재 국내 카드사만 가능합니다."
-                    isRender={isSatisfyCardNumber()}
+                    // isRender={isSatisfyCardNumber()}
+                    isRender={true}
                 >
-                    ㅇ
+                    <CardBrandInputWrapper selectedValue={cardBrand} setSelectedValue={setCardBrand} />
                 </CardInfoSection>
 
                 <CardInfoSection
