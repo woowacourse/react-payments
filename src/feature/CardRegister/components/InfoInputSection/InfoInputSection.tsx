@@ -4,6 +4,7 @@ import ExpiryField from './ExpiryField';
 import NumberField from './NumberField';
 import type {
   CardFormHandlersType,
+  CardFormInfoType,
   CardPreviewInfoType,
 } from '../../../../common/types/CardPreviewInfoType';
 import styled from 'styled-components';
@@ -23,9 +24,11 @@ import Button from '../../../../common/components/Button';
 const InfoInputSection = ({
   cardPreviewInfo,
   cardFormHandlers,
+  onRegisterComplete,
 }: {
   cardPreviewInfo: CardPreviewInfoType;
   cardFormHandlers: CardFormHandlersType;
+  onRegisterComplete: (cardFormInfo: CardFormInfoType) => void;
 }) => {
   const [cvcNumber, setCvcNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -56,13 +59,22 @@ const InfoInputSection = ({
     password,
   });
 
+  const cardFormInfo = {
+    cardNumbers,
+    expiryMonth,
+    expiryYear,
+    cvcNumber,
+    cardCompanyId,
+    password,
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (hasFormError) return;
 
     // form에 필요한 데이터: 카드번호 첫 4자리, 카드 브랜드
-    console.log('제출');
+    onRegisterComplete(cardFormInfo);
   };
 
   if (currentStep === 0 && !hasCardNumberError(cardNumbers))

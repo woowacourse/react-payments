@@ -1,19 +1,39 @@
 import styled from 'styled-components';
 import Button from '../../common/components/Button';
 import checkIconImg from './assets/Group 54.png';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import type { CardFormInfoType } from '../../common/types/CardPreviewInfoType';
+import { getCardCompanyName } from '../CardRegister/utils/cardDisplay';
 
 const CardRegisterCompletePage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const cardFormInfo = location.state as CardFormInfoType | null;
+
+  // cardFormInfo가 존재하지 않는 경우 등록 페이지로 보내기
+  if (cardFormInfo === null) {
+    return <Navigate to="/register" replace />;
+  }
+
+  const handleConfirmClick = () => {
+    navigate('/register');
+  };
+
+  const firstCardNumber = cardFormInfo.cardNumbers[0];
+  const cardCompanyName = getCardCompanyName(cardFormInfo.cardCompanyId);
+
   return (
     <Wrapper>
       <Container>
         <Content>
           <CheckIcon src={checkIconImg} alt="" />
           <CheckDescription>
-            5511로 시작하는
+            {firstCardNumber}로 시작하는
             <br />
-            BC카드가 등록되었어요.
+            {cardCompanyName}가 등록되었어요.
           </CheckDescription>
-          <CheckButton>확인</CheckButton>
+          <CheckButton onClick={handleConfirmClick}>확인</CheckButton>
         </Content>
       </Container>
     </Wrapper>

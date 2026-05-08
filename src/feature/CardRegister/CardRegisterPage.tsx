@@ -3,8 +3,18 @@ import styled from 'styled-components';
 import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import type { CardCompanyId } from '../../common/types/CardPreview';
+import { useNavigate } from 'react-router-dom';
+import type { CardFormInfoType } from '../../common/types/CardPreviewInfoType';
 
 const CardRegisterPage = () => {
+  const navigate = useNavigate();
+
+  const handleRegisterComplete = (cardFormInfo: CardFormInfoType) => {
+    navigate('/complete', {
+      state: cardFormInfo,
+    });
+  };
+
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
@@ -49,6 +59,7 @@ const CardRegisterPage = () => {
         <InfoInputSection
           cardPreviewInfo={cardPreviewInfo}
           cardFormHandlers={cardFormHandlers}
+          onRegisterComplete={handleRegisterComplete}
         />
       </Container>
     </Wrapper>

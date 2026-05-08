@@ -37,3 +37,11 @@ export const getCardCompanyColor = (cardCompanyId: CardCompanyId | null) => {
 
   return selectedCardCompany?.color ?? '#333333';
 };
+
+export const getCardCompanyName = (cardCompanyId: CardCompanyId | null) => {
+  const selectedCardCompany = CARD_COMPANIES.find(
+    (cardCompany) => cardCompany.id === cardCompanyId,
+  );
+
+  return selectedCardCompany?.name ?? '';
+};
