@@ -2,17 +2,18 @@ import styled from '@emotion/styled';
 
 
 export const NumberGroup = styled.div`
-    width: 42px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 2px;
+    letter-spacing: 1px;
 `;
 
 export const MaskingGroup = styled.div`
-    width: 32px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    gap: 5px;
     
     img {
         width: 4px;

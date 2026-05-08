@@ -41,8 +41,8 @@ export const CardNumber = styled.div`
   padding: 0 5px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 5px;
+  justify-content: flex-start;
+  gap: 10px;
   box-sizing: border-box;
 `;
 
