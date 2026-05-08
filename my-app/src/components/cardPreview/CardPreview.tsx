@@ -1,3 +1,4 @@
+import { getCardBrand } from '../../utils/Validation';
 import type { CardCompany } from '../cardCompanySection/CardCompanyConstants';
 import CardBrandImage from './cardBrandImage/CardBrandImage';
 import {
@@ -16,11 +17,13 @@ interface Props {
 }
 
 export default function CardPreview({ cardNumber, expirationDate, cardCompany }: Props) {
+  const currentBrand = getCardBrand(cardNumber.join(''));
+
   return (
     <CardContainer company={cardCompany || 'Default'}>
       <CardHeader>
         <CardChip />
-        <CardBrandImage cardNumber={cardNumber[0]} />
+        <CardBrandImage brand={currentBrand} />
       </CardHeader>
       <CardNumber>
         {cardNumber.map((number, index) => (
