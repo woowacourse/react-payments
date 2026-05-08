@@ -24,73 +24,57 @@ const defaultArgs = {
   cardBrand: null,
 };
 
-const defaultCardNumber = {
-  "first-digits": "",
-  "second-digits": "",
-  "third-digits": "",
-  "fourth-digits": "",
-};
-const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
-const defaultCardBrand = null;
-
 export const Empty: Story = {
-  args: {
-    cardNumber: defaultCardNumber,
-    cardExpiryDate: defaultCardExpiryDate,
-    cardBrand: defaultCardBrand,
-  },
+  args: { ...defaultArgs },
 };
 
 export const CardNumberPartiallyFilled: Story = {
   args: {
+    ...defaultArgs,
     cardNumber: {
       "first-digits": "1234",
       "second-digits": "5678",
       "third-digits": "",
       "fourth-digits": "",
     },
-    cardExpiryDate: defaultCardExpiryDate,
-    cardBrand: defaultCardBrand,
   },
 };
 
 export const CardNumberFullyFilled: Story = {
   args: {
+    ...defaultArgs,
     cardNumber: {
       "first-digits": "1234",
       "second-digits": "5678",
       "third-digits": "9012",
       "fourth-digits": "3456",
     },
-    cardExpiryDate: defaultCardExpiryDate,
-    cardBrand: defaultCardBrand,
   },
 };
 
 export const ExpiryDateFilled: Story = {
   args: {
-    cardNumber: defaultCardNumber,
+    ...defaultArgs,
     cardExpiryDate: {
       "expiry-month": "12",
       "expiry-year": "26",
     },
-    cardBrand: defaultCardBrand,
   },
 };
 
 export const ExpiryDateDisplayDivideLine: Story = {
   args: {
-    cardNumber: defaultCardNumber,
+    ...defaultArgs,
     cardExpiryDate: {
       "expiry-month": "12",
       "expiry-year": "",
     },
-    cardBrand: defaultCardBrand,
   },
 };
 
 export const FullyFilled: Story = {
   args: {
+    ...defaultArgs,
     cardNumber: {
       "first-digits": "1234",
       "second-digits": "5678",
@@ -101,33 +85,30 @@ export const FullyFilled: Story = {
       "expiry-month": "12",
       "expiry-year": "26",
     },
-    cardBrand: defaultCardBrand,
   },
 };
 
 export const VisaBrand: Story = {
   args: {
+    ...defaultArgs,
     cardNumber: {
       "first-digits": "4111",
       "second-digits": "",
       "third-digits": "",
       "fourth-digits": "",
     },
-    cardExpiryDate: defaultCardExpiryDate,
-    cardBrand: defaultCardBrand,
   },
 };
 
 export const MasterBrand: Story = {
   args: {
+    ...defaultArgs,
     cardNumber: {
       "first-digits": "5111",
       "second-digits": "",
       "third-digits": "",
       "fourth-digits": "",
     },
-    cardExpiryDate: defaultCardExpiryDate,
-    cardBrand: defaultCardBrand,
   },
 };
 
