@@ -3,7 +3,7 @@ import CardPreview from '../components/cardPreview/CardPreview';
 import CardNumberSection from '../components/cardNumberSection/CardNumberSection';
 import ExpirationDateSection from '../components/expirationDateSection/ExpirationDateSection';
 import CvcSection from '../components/cvcSection/CvcSection';
-import { getCardBrand, getCardNumberArrayByBrand } from '../utils/Validation';
+import { getCardBrand, getCardNumberArrayByBrand, getCardNumberError, getCvcError, getMonthError, getPasswordError, getYearError } from '../utils/Validation';
 import CardCompanySection from '../components/cardCompanySection/CardCompanySection';
 import PasswordSection from '../components/passwordSection/PasswordSection';
 import type { CardCompany } from '../components/cardCompanySection/CardCompanyConstants';
@@ -25,12 +25,12 @@ const CardAddPage = () => {
 
   const isCardNumberCorrect =
     cardNumber.length === format.length &&
-    cardNumber.every((num, index) => num.length === format[index]);
+    cardNumber.every((num, index) => num.length === format[index] && getCardNumberError(num) === '');
   const isCardCompanyCorrect = cardCompany !== '';
   const isExpirationDateCorrect =
-    expirationDate.month.length === 2 && expirationDate.year.length === 2;
-  const isCvcCorrect = cvc.length === 3;
-  const isPasswordCorrect = password.length === 2;
+    expirationDate.month.length === 2 && expirationDate.year.length === 2 && getMonthError(expirationDate.month) && getYearError(expirationDate.year);
+  const isCvcCorrect = cvc.length === 3 && getCvcError(cvc) === '';
+  const isPasswordCorrect = password.length === 2 && getPasswordError(password) === '';
 
   const isFormValid =
     isCardNumberCorrect &&
