@@ -31,7 +31,8 @@ export function useCardNumbers() {
 
   const applyResize = (nextChunks: CardNumbersType, nextFormat: number[]) => {
     const len = nextFormat.length;
-    setCardNumbers(resizeArray(nextChunks, len, ''));
+    const trimmed = Array.from({length: len}, (_, i) => (nextChunks[i] ?? '').slice(0, nextFormat[i]));
+    setCardNumbers(trimmed);
     setErrorInfo((prev) => ({
       flag: resizeArray(prev.flag, len, false),
       messages: resizeArray(prev.messages, len, ''),
