@@ -3,9 +3,20 @@ import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
 
-export function CardPreview({ cardNumber, cardExpiryDate }) {
+export function CardPreview({ cardNumber, cardExpiryDate, cardBrand }) {
+  const getCardBgHex = (cardBrand: string) => {
+    if (cardBrand === "bc") return "#F04651";
+    if (cardBrand === "sinhan") return "#0046FF";
+    if (cardBrand === "kakao") return "#FFE600";
+    if (cardBrand === "hyundai") return "#000000";
+    if (cardBrand === "woori") return "#007BC8";
+    if (cardBrand === "lotte") return "#ED1C24";
+    if (cardBrand === "hana") return "#009490";
+    if (cardBrand === "kookmin") return "#6A6056";
+    return "#333333";
+  };
   return (
-    <CardContainer>
+    <CardContainer cardBg={getCardBgHex(cardBrand)}>
       <div className="card-meta">
         <div className="ic-chip"></div>
         <CardNetworkBrand cardNumber={cardNumber} />
@@ -18,7 +29,7 @@ export function CardPreview({ cardNumber, cardExpiryDate }) {
   );
 }
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ cardBg: string }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -26,7 +37,8 @@ const CardContainer = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${(props) => props.cardBg};
+  transition: background-color 200ms ease-out;
   padding: 0.5rem 0.75rem;
   margin: 4.625rem auto 2.75rem auto;
   color: white;

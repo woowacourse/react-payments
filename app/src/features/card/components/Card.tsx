@@ -16,14 +16,22 @@ export function Card() {
     "expiry-year": "",
   });
 
+  const [cardBrand, setCardBrand] = useState(null);
+
   return (
     <CardContainer>
-      <CardPreview cardNumber={cardNumber} cardExpiryDate={cardExpiryDate} />
+      <CardPreview
+        cardNumber={cardNumber}
+        cardExpiryDate={cardExpiryDate}
+        cardBrand={cardBrand}
+      />
       <CardForm
         cardNumber={cardNumber}
         setCardNumber={setCardNumber}
         cardExpiryDate={cardExpiryDate}
         setCardExpiryDate={setCardExpiryDate}
+        cardBrand={cardBrand}
+        setCardBrand={setCardBrand}
       />
     </CardContainer>
   );

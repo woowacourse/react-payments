@@ -3,15 +3,24 @@ import { CardSection } from "./CardSection";
 import { CardNumberInput } from "./CardNumberInput";
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
 import { CardCVCInput } from "./CardCVCInput";
+import CardBrandSelect from "./CardBrandSelect";
 
 export function CardForm({
   cardNumber,
   setCardNumber,
   cardExpiryDate,
   setCardExpiryDate,
+  cardBrand,
+  setCardBrand,
 }) {
   return (
     <CardFormContainer>
+      <CardSection
+        title={"카드사를 선택해 주세요"}
+        subTitle={"현재 국내 카드사만 가능합니다."}
+      >
+        <CardBrandSelect cardBrand={cardBrand} setCardBrand={setCardBrand} />
+      </CardSection>
       <CardSection
         title={"결제할 카드 번호를 입력해 주세요"}
         subTitle={"본인 명의의 카드만 결제 가능합니다."}

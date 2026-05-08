@@ -13,6 +13,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const defaultArgs = {
+  cardNumber: {
+    "first-digits": "",
+    "second-digits": "",
+    "third-digits": "",
+    "fourth-digits": "",
+  },
+  cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
+  cardBrand: null,
+};
+
 const defaultCardNumber = {
   "first-digits": "",
   "second-digits": "",
@@ -20,11 +31,13 @@ const defaultCardNumber = {
   "fourth-digits": "",
 };
 const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
+const defaultCardBrand = null;
 
 export const Empty: Story = {
   args: {
     cardNumber: defaultCardNumber,
     cardExpiryDate: defaultCardExpiryDate,
+    cardBrand: defaultCardBrand,
   },
 };
 
@@ -37,6 +50,7 @@ export const CardNumberPartiallyFilled: Story = {
       "fourth-digits": "",
     },
     cardExpiryDate: defaultCardExpiryDate,
+    cardBrand: defaultCardBrand,
   },
 };
 
@@ -49,6 +63,7 @@ export const CardNumberFullyFilled: Story = {
       "fourth-digits": "3456",
     },
     cardExpiryDate: defaultCardExpiryDate,
+    cardBrand: defaultCardBrand,
   },
 };
 
@@ -59,6 +74,7 @@ export const ExpiryDateFilled: Story = {
       "expiry-month": "12",
       "expiry-year": "26",
     },
+    cardBrand: defaultCardBrand,
   },
 };
 
@@ -69,6 +85,7 @@ export const ExpiryDateDisplayDivideLine: Story = {
       "expiry-month": "12",
       "expiry-year": "",
     },
+    cardBrand: defaultCardBrand,
   },
 };
 
@@ -84,6 +101,7 @@ export const FullyFilled: Story = {
       "expiry-month": "12",
       "expiry-year": "26",
     },
+    cardBrand: defaultCardBrand,
   },
 };
 
@@ -96,6 +114,7 @@ export const VisaBrand: Story = {
       "fourth-digits": "",
     },
     cardExpiryDate: defaultCardExpiryDate,
+    cardBrand: defaultCardBrand,
   },
 };
 
@@ -108,5 +127,38 @@ export const MasterBrand: Story = {
       "fourth-digits": "",
     },
     cardExpiryDate: defaultCardExpiryDate,
+    cardBrand: defaultCardBrand,
   },
+};
+
+export const BCBrand: Story = {
+  args: { ...defaultArgs, cardBrand: "bc" },
+};
+
+export const SinhanBrand: Story = {
+  args: { ...defaultArgs, cardBrand: "sinhan" },
+};
+
+export const KakaoBrand: Story = {
+  args: { ...defaultArgs, cardBrand: "kakao" },
+};
+
+export const HyundaiBrand: Story = {
+  args: { ...defaultArgs, cardBrand: "hyundai" },
+};
+
+export const WooriBrand: Story = {
+  args: { ...defaultArgs, cardBrand: "woori" },
+};
+
+export const LotteBrand: Story = {
+  args: { ...defaultArgs, cardBrand: "lotte" },
+};
+
+export const HanaBrand: Story = {
+  args: { ...defaultArgs, cardBrand: "hana" },
+};
+
+export const KookminBrand: Story = {
+  args: { ...defaultArgs, cardBrand: "kookmin" },
 };
