@@ -5,6 +5,7 @@ import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import {useCardNumbers} from './hooks/useCardNumbers';
 import {useExpiryDate} from './hooks/useExpiryDate';
 import {useCvcNumber} from './hooks/useCvcNumber';
+import {CARD_COMPANIES} from './domain/cardPolicy';
 import type {CardCompanyType} from './domain/cardPolicy';
 import styled from 'styled-components';
 
@@ -41,7 +42,18 @@ const CardRegisterPage = () => {
         />
       </Container>
       {isFormComplete && (
-        <SubmitButton onClick={() => navigate('/complete')}>확인</SubmitButton>
+        <SubmitButton
+          onClick={() =>
+            navigate('/complete', {
+              state: {
+                cardPrefix: numberField.cardNumbers[0],
+                companyName: selectedCompany ? CARD_COMPANIES[selectedCompany].name : '',
+              },
+            })
+          }
+        >
+          확인
+        </SubmitButton>
       )}
     </Wrapper>
   );
