@@ -4,7 +4,7 @@ import { validateExpireDateNotPast, validateMonth, validateNumber } from "../val
 export function useExpireDateValidation(expireDate: string[]) {
   const [error, setError] = useState("");
 
-  const handleChange = (
+  const validate = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ): string[] | null => {
@@ -35,5 +35,5 @@ export function useExpireDateValidation(expireDate: string[]) {
     return updatedExpireDate;
   };
 
-  return { error, handleChange };
+  return { error, validate };
 }

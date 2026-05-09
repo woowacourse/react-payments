@@ -17,7 +17,7 @@ interface Props {
 // 카드 비밀번호 앞 2자리를 입력할 수 있는 컴포넌트
 export default function CardPasswordField({ field }: Props) {
   const { value: password, set: setPassword } = field;
-  const { error, handleChange } = useCardPasswordValidation();
+  const { error, validate } = useCardPasswordValidation();
 
   return (
     <Field>
@@ -31,7 +31,7 @@ export default function CardPasswordField({ field }: Props) {
           maxLength={2}
           value={password}
           onChange={(e) => {
-            const updated = handleChange(e);
+            const updated = validate(e);
             if (updated !== null) setPassword(updated);
           }}
           inputMode="numeric"

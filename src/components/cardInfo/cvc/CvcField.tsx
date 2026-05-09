@@ -15,7 +15,7 @@ interface Props {
 //cvc를 입력할 수 있는 컴포넌트
 export default function CvcField({ field }: Props) {
   const { value: cvc, set: setCvc } = field;
-  const { error, handleChange } = useCvcValidation();
+  const { error, validate } = useCvcValidation();
 
   return (
     <Field>
@@ -27,7 +27,7 @@ export default function CvcField({ field }: Props) {
           maxLength={3}
           value={cvc}
           onChange={(e) => {
-            const updatedCvc = handleChange(e);
+            const updatedCvc = validate(e);
             if (updatedCvc !== null) setCvc(updatedCvc);
           }}
           inputMode="numeric"

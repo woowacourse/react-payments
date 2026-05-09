@@ -4,7 +4,7 @@ import { validateCvcLength, validateNumber } from "../validator";
 export function useCvcValidation() {
   const [error, setError] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): string | null => {
+  const validate = (e: React.ChangeEvent<HTMLInputElement>): string | null => {
     const newValue = e.target.value;
 
     const numberResult = validateNumber(newValue);
@@ -19,5 +19,5 @@ export function useCvcValidation() {
     return newValue;
   };
 
-  return { error, handleChange };
+  return { error, validate };
 }
