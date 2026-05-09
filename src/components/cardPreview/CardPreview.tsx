@@ -1,15 +1,15 @@
 import styled from "@emotion/styled";
-import { type CardPreviewProps } from "../../types/types";
 import { selectCardType } from "../../utils/selectCardType";
-import CardPreviewNumber from "../common/CardPreviewNumber";
+import CardPreviewNumber from "./CardPreviewNumber";
 import { maskCardNumber } from "../../utils/cardFormatters";
 import { formatExpireDate } from "../../utils/cardFormatters";
+import { useCardNumberContext } from "../../context/cardNumber/CardNumberContext";
+import { useExpireDateContext } from "../../context/expireDate/ExpireDateContext";
 
-export default function CardPreview({
-  cardNumber,
-  expireDate,
-}: CardPreviewProps) {
-  const cardType = selectCardType(cardNumber);
+export default function CardPreview() {
+  const cardNumberContext = useCardNumberContext();
+  const expireDateContext = useExpireDateContext();
+  const cardType = selectCardType(cardNumberContext.cardNumber);
 
   return (
     <CardPreviewWrapper>
@@ -22,11 +22,11 @@ export default function CardPreview({
         <CardImageInfoWrapper>
           <CardPreviewNumber
             gap="10px"
-            cardArray={maskCardNumber(cardNumber)}
+            cardArray={maskCardNumber(cardNumberContext.cardNumber)}
           />
           <CardPreviewNumber
             gap="0px"
-            cardArray={formatExpireDate(expireDate)}
+            cardArray={formatExpireDate(expireDateContext.expireDate)}
           />
         </CardImageInfoWrapper>
       </Card>
