@@ -3,6 +3,9 @@ import {createFlags, computeNextTouched, computeNextErrInfo} from './fieldErrorU
 
 const EXPIRY_ERR_MSG = '2자리를 입력해 주세요';
 const INVALID_MONTH_ERR_MSG = '01~12 사이의 월을 입력해 주세요';
+const EXPIRY_FIELD_COUNT = 2;
+const MONTH_FIELD_INDEX = 0;
+const YEAR_FIELD_INDEX = 1;
 
 const isValidMonth = (value: string) => {
   const month = Number(value);
@@ -24,10 +27,10 @@ export function useExpiryDate() {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
   const [errInfo, setErrInfo] = useState({
-    errFlags: createFlags(2),
-    errMessages: Array(2).fill('') as string[],
+    errFlags: createFlags(EXPIRY_FIELD_COUNT),
+    errMessages: Array(EXPIRY_FIELD_COUNT).fill('') as string[],
   });
-  const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(2));
+  const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(EXPIRY_FIELD_COUNT));
 
   const updateErrInfo = (index: number, hasErr: boolean, errMsg = EXPIRY_ERR_MSG) => {
     setErrInfo(computeNextErrInfo(errInfo.errFlags, errInfo.errMessages, index, hasErr, errMsg));
@@ -42,14 +45,14 @@ export function useExpiryDate() {
     const inputValue = value.trim();
     if (!/^\d*$/.test(inputValue) || inputValue.length > 2) return;
     setExpiryMonth(inputValue);
-    clearErrWhenComplete(0, inputValue, 'month');
+    clearErrWhenComplete(MONTH_FIELD_INDEX, inputValue, 'month');
   };
 
   const handleYearChange = (value: string) => {
     const inputValue = value.trim();
     if (!/^\d*$/.test(inputValue) || inputValue.length > 2) return;
     setExpiryYear(inputValue);
-    clearErrWhenComplete(1, inputValue, 'year');
+    clearErrWhenComplete(YEAR_FIELD_INDEX, inputValue, 'year');
   };
 
   const handleBlur = (index: number, value: string, fieldType: 'month' | 'year') => {
