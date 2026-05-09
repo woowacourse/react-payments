@@ -1,4 +1,17 @@
 import styled from '@emotion/styled';
+import type { CardCompany } from '../context/CardContext';
+
+export const CARD_COMPANY_COLOR: Record<CardCompany, string> = {
+  bc: '#F04651',
+  sinhan: '#0046FF',
+  kakao: '#FFE600',
+  hyundai: '#000000',
+  woori: '#007BC8',
+  lotte: '#ED1C24',
+  hana: '#009490',
+  kookmin: '#6A6056',
+  '': '#333333',
+};
 
 type ErrorFlag = {
   $fieldErrors?: boolean;

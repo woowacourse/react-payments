@@ -3,11 +3,12 @@ import { useCardContext } from '../../hooks/useCardContext';
 import { CardNetworkBrand } from './CardNetworkBrand';
 import { CardNumber } from './CardNumber';
 import { CardExpiryDate } from './CardExpiryDate';
+import { CARD_COMPANY_COLOR } from '../../style/CardStyles';
 
 export function CardPreview() {
-  const { networkBrand } = useCardContext();
+  const { networkBrand, cardCompany } = useCardContext();
   return (
-    <CardContainer>
+    <CardContainer $CardCompanySelected={CARD_COMPANY_COLOR[cardCompany]}>
       <div className="card-meta">
         <div className="ic-chip"></div>
         {networkBrand && <CardNetworkBrand networkBrand={networkBrand} />}
@@ -21,11 +22,11 @@ export function CardPreview() {
 }
 
 type CardCompanySelected = {
-  $CardCompanySelected?: boolean;
+  $CardCompanySelected?: string;
 };
 
 const CardContainer = styled.div<CardCompanySelected>`
-  background-color: ${(props) => (props.$CardCompanySelected ? '#FF3D3D' : '#333333')};
+  background-color: ${(props) => props.$CardCompanySelected ?? '#333333'};
   position: relative;
   display: flex;
   align-items: center;
