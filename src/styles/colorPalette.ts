@@ -6,5 +6,6 @@ export const COLOR_PALETTE = {
   GREY: "#acacac",
   "BLACK-900": "#000000",
   "BLACK-800": "#333",
+  "BLACK-700": "#353C49",
   WHITE: "#ffffff",
 };
