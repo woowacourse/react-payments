@@ -4,23 +4,38 @@ import type { CardInfo } from "../types";
 import Card from "../components/Card/Card";
 import CardNumberInputSection from "../components/CardNumberInputSection/CardNumberInputSection";
 import ExpiryDateInputSection from "../components/ExpiryDateInputSection/ExpiryDateInputSection";
-// import CardCompanySelectorSection from "../components/CardCompanySelectSection/CardCompanySelectSection"
+import CardCompanySelectSection from "../components/CardCompanySelectSection/CardCompanySelectSection";
 import CvcInputSection from "../components/CvcInputSection/CvcInputSection";
+import PasswordInputSection from "../components/PasswordInputSection/PasswordInputSection";
 import { decideBrandName } from "../utils/decideBrandName";
 import { getMaxLength } from "../utils/getMaxLength";
-
-const CardCompanySelectSection = () => <div />
+import { useNavigate } from "react-router-dom";
 
 const CardFormPage = () => {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({ numbers: [], expiry: [], cvc: "", brand: "" });
-  const brand = decideBrandName(cardInfo.numbers[0] ?? "");
-  const maxLength = getMaxLength(brand);
-  const isSupportedBrand = brand !== "";
-  const isCardNumberCompleted = cardInfo.numbers.join("").length === maxLength && isSupportedBrand;
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
+    numbers: [],
+    expiry: [],
+    cvc: "",
+    network: "",
+    company: "",
+    password: "",
+  });
 
-  //스프레드 보일러 플레이트 라고 한다 (페어가...)
+  const network = decideBrandName(cardInfo.numbers[0] ?? "");
+  const maxLength = getMaxLength(network);
+  const isSupportedNetwork = network !== "";
+  const isCardNumberCompleted = cardInfo.numbers.join("").length === maxLength && isSupportedNetwork;
+  const isCvcCompleted = cardInfo.cvc.length === 3;
+  const isExpiryCompleted = cardInfo.expiry[0]?.length === 2 && cardInfo.expiry[1]?.length === 2;
+  const isCompanySelected = cardInfo.company !== "";
+  const isAllCompleted = isCardNumberCompleted && isCvcCompleted && isExpiryCompleted && isCompanySelected;
+
   const cardNumberHandler = (numbers: string[]) => {
-    setCardInfo((prev) => ({ ...prev, numbers, brand }));
+    setCardInfo((prev) => ({ ...prev, numbers, network: decideBrandName(numbers[0] ?? ""), company: "" }));
+  };
+
+  const cardCompanyHandler = (company: string) => {
+    setCardInfo((prev) => ({ ...prev, company }));
   };
 
   const expiryHandler = (expiry: string[]) => {
@@ -31,15 +46,26 @@ const CardFormPage = () => {
     setCardInfo((prev) => ({ ...prev, cvc }));
   };
 
+  const passwordHandler = (password: string) => {
+    setCardInfo((prev) => ({ ...prev, password }));
+  };
+  const navigate = useNavigate();
+
   return (
     <main css={pageStyle}>
       <div css={formContainerStyle}>
         <Card cardInfo={cardInfo} />
         <div css={sectionsStyle}>
-          <CardNumberInputSection onValueHandler={cardNumberHandler} maxLength={maxLength} isSupportedBrand={isSupportedBrand} />
-          {isCardNumberCompleted && <CardCompanySelectSection />}
-          <ExpiryDateInputSection onValueHandler={expiryHandler} />
-          <CvcInputSection onValueHandler={cvcHandler} />
+          {isCvcCompleted && <PasswordInputSection onValueHandler={passwordHandler} />}
+          {isExpiryCompleted && <CvcInputSection onValueHandler={cvcHandler} />}
+          {isCompanySelected && <ExpiryDateInputSection onValueHandler={expiryHandler} />}
+          {isCardNumberCompleted && <CardCompanySelectSection onSelect={cardCompanyHandler} />}
+          <CardNumberInputSection
+            onValueHandler={cardNumberHandler}
+            maxLength={maxLength}
+            isSupportedNetwork={isSupportedNetwork}
+          />
+          {isAllCompleted && <button onClick={() => navigate("/completed")}>확인</button>}
         </div>
       </div>
     </main>
