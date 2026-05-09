@@ -62,6 +62,16 @@ export const getCardNumberFormat = (cardBrand: CardBrand | null) => {
   return cardBrand ? CARD_BRANDS[cardBrand].format : [4, 4, 4, 4];
 };
 
+export const isFormatChanged = (
+  currentFormat: readonly number[],
+  nextFormat: readonly number[],
+) => {
+  return (
+    currentFormat.length !== nextFormat.length ||
+    currentFormat.some((length, index) => length !== nextFormat[index])
+  );
+};
+
 export const getFormattedValidityPeriodUnit = (
   validityPeriod: ValidityPeriod,
 ) => {
@@ -69,12 +79,7 @@ export const getFormattedValidityPeriodUnit = (
   return `${month ? month + "/" : ""}${year ? year : ""}`;
 };
 
-export const padValidityPeriodUnit = (value: string) => {
-  if (value.length === 1) return `0${value}`;
-  return value;
-};
-
-export const adaptCardNumberUnitsToFormat = (
+export const updateCardNumberUnitsFormat = (
   cardNumber: CardNumberUnits,
   format: readonly number[],
 ): CardNumberUnits => {

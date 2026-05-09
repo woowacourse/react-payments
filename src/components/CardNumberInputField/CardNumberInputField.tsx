@@ -5,7 +5,8 @@ import {
   detectCardBrand,
   getCardNumberFormat,
   getCardNumberPlaceholder,
-  adaptCardNumberUnitsToFormat,
+  updateCardNumberUnitsFormat,
+  isFormatChanged,
 } from "@/utils/card";
 import useInputFocus from "@/hooks/useInputFocus";
 import FormField from "@components/common/FormField";
@@ -46,6 +47,16 @@ const CardNumberInputField = ({
     });
   };
 
+  const updateCardNumberUnit = (
+    index: number,
+    input: string,
+  ): CardNumberUnits => {
+    const newCardNumberUnits = [...cardNumberUnits];
+    newCardNumberUnits[index] = input.slice(0, cardNumberFormat[index]);
+
+    return newCardNumberUnits;
+  };
+
   const handleCardNumberChange = (index: number, input: string) => {
     if (!checkIsOnlyDigits(input)) {
       updateInputStatus(index, "NOT_NUMBER");
@@ -54,33 +65,24 @@ const CardNumberInputField = ({
 
     updateInputStatus(index, "DEFAULT");
 
-    const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
-    newCardNumberUnits[index] = input.slice(0, cardNumberFormat[index]);
+    const newCardNumberUnits = updateCardNumberUnit(index, input);
+    const newCardBrand = detectCardBrand(newCardNumberUnits);
+    const newCardNumberFormat = getCardNumberFormat(newCardBrand);
+
+    if (isFormatChanged(cardNumberFormat, newCardNumberFormat)) {
+      const reformattedUnits = updateCardNumberUnitsFormat(
+        newCardNumberUnits,
+        newCardNumberFormat,
+      );
+      onChange(reformattedUnits);
+      setStatus(reformattedUnits.map(() => "DEFAULT"));
+    } else {
+      onChange(newCardNumberUnits);
+    }
 
     if (newCardNumberUnits[index].length === cardNumberFormat[index]) {
       focusNextInput(index);
     }
-
-    const newCardBrand = detectCardBrand(newCardNumberUnits);
-    const newCardNumberFormat = getCardNumberFormat(newCardBrand);
-
-    const isFormatChanged =
-      cardNumberFormat.length !== newCardNumberFormat.length ||
-      cardNumberFormat.some(
-        (length, index) => length !== newCardNumberFormat[index],
-      );
-
-    if (isFormatChanged) {
-      const adaptedCardNumberUnits = adaptCardNumberUnitsToFormat(
-        newCardNumberUnits,
-        newCardNumberFormat,
-      );
-      onChange(adaptedCardNumberUnits);
-      setStatus(adaptedCardNumberUnits.map(() => "DEFAULT"));
-      return;
-    }
-
-    onChange(newCardNumberUnits);
   };
 
   const handleCardNumberBlur = (index: number, input: string) => {
