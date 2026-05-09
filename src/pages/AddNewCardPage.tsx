@@ -7,6 +7,7 @@ import CardNumberInputField, {
 import CardValidityPeriodInputField, {
   type ValidityPeriod,
 } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import Button from "@/components/common/Button";
 import type { CardCompany } from "@/constants/cardCompanies";
 import styled from "@emotion/styled";
 import { useState } from "react";
@@ -43,6 +44,7 @@ const AddNewCardPage = () => {
           onChange={setValidityPeriod}
         />
         <CardCVCInputField CVC={CVC} onChange={setCVC} />
+        <Button fixedBottom>확인</Button>
       </CardInfoForm>
     </PageWrapper>
   );
@@ -51,6 +53,7 @@ const AddNewCardPage = () => {
 const PageWrapper = styled.div`
   max-width: 23rem;
   margin-inline: auto;
+  padding-bottom: 4rem;
 `;
 
 const CardWrapper = styled.div`
