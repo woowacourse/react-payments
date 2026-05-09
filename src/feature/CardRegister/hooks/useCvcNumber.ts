@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {createFlags, computeNextTouched, computeNextErrorInfo} from './fieldState';
+import {createFlags, computeNextTouched, computeNextErrorInfo} from './fieldErrorUtils';
 
 const CVC_LENGTH = 3;
 const ERROR_MSG = 'CVC 번호 3자리를 입력해 주세요';

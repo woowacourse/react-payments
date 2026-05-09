@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {CARD_BRANDS, DEFAULT_CARD_NUMBER_FORMAT, getBrandName} from '../domain/cardBrand';
 import type {CardBrandType} from '../domain/cardBrand';
-import {createFlags, computeNextErrorInfo, computeNextTouched} from './fieldState';
+import {createFlags, computeNextErrorInfo, computeNextTouched} from './fieldErrorUtils';
 import {resizeArray} from '../../../common/utils/array';
 
 const getFormatByBrand = (brand: CardBrandType | null) =>
