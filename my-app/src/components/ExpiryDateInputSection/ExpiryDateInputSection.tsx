@@ -24,7 +24,7 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
     setInputValues(newValues);
     setErrorMessage("");
     onValueHandler(newValues);
-  };
+};
 
   const getValidationError = (values: string[]) => {
     for (const [i, value] of values.entries()) {
@@ -60,7 +60,7 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
             value={inputValues[i] || ""}
             onChange={(e) => onChange(i, e.target.value)}
             onBlur={handleBlur}
-            css={inputStyle(errorIndex === i)}
+            css={inputStyle(errorIndex === i, "80px")}
             placeholder={i === 0 ? "MM" : "YY"}
           />
         ))}

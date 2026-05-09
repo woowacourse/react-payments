@@ -20,7 +20,7 @@ type CardProps = {
 
 const Card = ({ cardInfo }: CardProps) => {
   return (
-    <div css={cardStyle}>
+    <div css={cardStyle(cardInfo.company)}>
       <div css={cardHeaderStyle}>
         <div css={chipStyle}></div>
         {NETWORK_LOGO[cardInfo.network] && (
@@ -50,12 +50,30 @@ const Card = ({ cardInfo }: CardProps) => {
 
 export default Card;
 
-const cardStyle = css`
+const CARD_LAYOUT_COLOR: Record<string, string> = {
+  chip: "#DDCD78",
+  text: "#FFFFFF",
+  shadow: "3px 3px 5px 0px rgba(0, 0, 0, 0.25)",
+}
+
+const COMPANY_COLOR: Record<string, string> = {
+  "": "#333333",
+  hyundai: "#000000",
+  shinhan: "#0046FF",
+  woori: "#007BC8",
+  hana: "#009490",
+  kookmin: "#6A6056",
+  lotte: "#ED1C24",
+  bc: "#F04651",
+  kakaobank: "#FFE600",
+}
+
+const cardStyle = (company: string) => css`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: #333333;
-  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
+  background-color: ${COMPANY_COLOR[company]};
+  box-shadow: ${CARD_LAYOUT_COLOR.shadow};
   padding: 8px 12px;
   display: flex;
   flex-direction: column;
@@ -69,7 +87,7 @@ const cardHeaderStyle = css`
 `;
 
 const chipStyle = css`
-  background-color: #ddcd78;
+  background-color: ${CARD_LAYOUT_COLOR.chip};
   width: 36px;
   height: 22px;
   border-radius: 4px;
@@ -81,7 +99,7 @@ const brandLogoStyle = css`
 `;
 
 const cardNumbersStyle = css`
-  color: #ffffff;
+  color: ${CARD_LAYOUT_COLOR.text};
   font-size: 14px;
   font-weight: 500;
   display: flex;
@@ -96,7 +114,7 @@ const fixedCardNumberStyle = css`
 `;
 
 const expiryStyle = css`
-  color: #ffffff;
+  color: ${CARD_LAYOUT_COLOR.text};
   font-size: 14px;
   font-weight: 500;
   font-family: "Inter";

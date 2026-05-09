@@ -28,7 +28,9 @@ const CardFormPage = () => {
   const isCvcCompleted = cardInfo.cvc.length === 3;
   const isExpiryCompleted = cardInfo.expiry[0]?.length === 2 && cardInfo.expiry[1]?.length === 2;
   const isCompanySelected = cardInfo.company !== "";
-  const isAllCompleted = isCardNumberCompleted && isCvcCompleted && isExpiryCompleted && isCompanySelected;
+  const isPasswordCompleted = cardInfo.password.length === 2;
+  const isAllCompleted =
+    isCardNumberCompleted && isCvcCompleted && isExpiryCompleted && isCompanySelected && isPasswordCompleted;
 
   const cardNumberHandler = (numbers: string[]) => {
     setCardInfo((prev) => ({ ...prev, numbers, network: decideBrandName(numbers[0] ?? ""), company: "" }));
@@ -65,7 +67,7 @@ const CardFormPage = () => {
             maxLength={maxLength}
             isSupportedNetwork={isSupportedNetwork}
           />
-          {isAllCompleted && <button onClick={() => navigate("/completed")}>확인</button>}
+          {isAllCompleted && <button onClick={() => navigate("/completed", {state: {cardInfo}})}>확인</button>}
         </div>
       </div>
     </main>
