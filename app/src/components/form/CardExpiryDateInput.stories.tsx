@@ -12,6 +12,10 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  args: {
+    firstRef: { current: null },
+    onComplete: () => {},
+  },
 } satisfies Meta<typeof CardExpiryDateInput>;
 
 export default meta;

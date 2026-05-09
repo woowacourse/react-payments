@@ -25,10 +25,14 @@ const renderWithContext = (cardExpiryDate: {
       value={{
         cardNumber: defaultCardNumber,
         cardExpiryDate,
-        networkBrand: "",
         setCardNumber: () => {},
         setCardExpiryDate: () => {},
-        setNetworkBrand: () => {},
+        cardCompany: '',
+        setCardCompany: () => {},
+        cardCVC: '',
+        setCardCVC: () => {},
+        cardPassword: '',
+        setCardPassword: () => {},
       }}
     >
       <CardExpiryDate />

@@ -11,6 +11,10 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  args: {
+    cardCVCRef: { current: null },
+    onComplete: () => {},
+  },
 } satisfies Meta<typeof CardCVCInput>;
 
 export default meta;

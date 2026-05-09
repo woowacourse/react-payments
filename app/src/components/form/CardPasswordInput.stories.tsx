@@ -11,6 +11,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  args: {
+    cardPasswordRef: { current: null },
+  },
 } satisfies Meta<typeof CardPasswordInput>;
 
 export default meta;
