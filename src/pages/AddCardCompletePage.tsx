@@ -2,17 +2,29 @@ import completeCheckImage from "@assets/completeCheckImage.png";
 import Button from "@/components/common/Button";
 import styled from "@emotion/styled";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
+import { useLocation, useNavigate } from "react-router";
+
+export type AddCardCompletePageState = {
+  cardNumberPrefix: string;
+  cardCompanyName: string;
+};
 
 const AddCardCompletePage = () => {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+
+  const { cardNumberPrefix, cardCompanyName } =
+    state as AddCardCompletePageState;
+
   return (
     <PageWrapper>
       <CompleteCheckImage src={completeCheckImage} alt="completeCheckImage" />
       <CompleteTitle>
-        5511로 시작하는
+        {cardNumberPrefix}로 시작하는
         <br />
-        BC카드가 등록되었어요.
+        {cardCompanyName}가 등록되었어요.
       </CompleteTitle>
-      <Button>확인</Button>
+      <Button onClick={() => navigate("/")}>확인</Button>
     </PageWrapper>
   );
 };
