@@ -3,17 +3,11 @@ import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
 import NetworkBrandErrorMessage from "./NetworkBrandErrorMessage";
 import { CARD_INPUT } from "../../Constants";
-import CardFormProgress from "../../CardFormProgress";
 import { Validator } from "../../validators/CardValidator";
 import { sanitizeErrors, joinEachStringWithLength } from "../../../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
-export function CardNumberInput({
-  cardNumber,
-  setCardNumber,
-  progress,
-  setProgress,
-}) {
+export function CardNumberInput({ cardNumber, setCardNumber }) {
   const [fieldError, setFieldError] = useState({
     "first-digits": {
       state: false,
@@ -76,12 +70,12 @@ export function CardNumberInput({
     runEachInputValidation([() => Validator.isNumber(value)], id);
     runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
-    const canNextStep = CardFormProgress.isCardNumberComplete(fullNumber);
-    if (canNextStep) {
-      setProgress({ ...progress, cardBrand: true });
-      return;
-    }
-    setProgress({ ...progress, cardBrand: false });
+    // const canNextStep = CardFormProgress.isCardNumberComplete(fullNumber);
+    // if (canNextStep) {
+    //   setProgress({ ...progress, cardBrand: true });
+    //   return;
+    // }
+    // setProgress({ ...progress, cardBrand: false });
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {

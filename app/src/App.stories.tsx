@@ -225,3 +225,106 @@ export const CardExpiryDateFieldIsDynamicDisplay: Story = {
     await expect(expiryDateInput).toBeVisible();
   },
 };
+
+export const CardCVCFieldIsDynamicDisplay: Story = {
+  play: async ({ canvasElement }) => {
+    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>(
+        "#card-number-input-container input",
+      ),
+    );
+    await userEvent.type(firstInput, "3612");
+    await userEvent.type(secondInput, "3612");
+    await userEvent.type(thirdInput, "3612");
+    await userEvent.type(fourthInput, "36");
+
+    const brandSelect =
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+    await userEvent.selectOptions(brandSelect, "bc");
+
+    const expiryMonthInput =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+    const expiryYearInput =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+    await userEvent.type(expiryMonthInput, "12");
+    await userEvent.type(expiryYearInput, "26");
+
+    const cvcInput = canvasElement.querySelector("#card-cvc-input");
+    await expect(cvcInput).toBeVisible();
+
+    await userEvent.clear(expiryYearInput);
+    await expect(cvcInput).not.toBeVisible();
+  },
+};
+
+export const CardPasswordFieldIsDynamicDisplay: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>(
+        "#card-number-input-container input",
+      ),
+    );
+    await userEvent.type(firstInput, "3612");
+    await userEvent.type(secondInput, "3612");
+    await userEvent.type(thirdInput, "3612");
+    await userEvent.type(fourthInput, "36");
+
+    const brandSelect =
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+    await userEvent.selectOptions(brandSelect, "bc");
+
+    const expiryMonthInput =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+    const expiryYearInput =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+    await userEvent.type(expiryMonthInput, "12");
+    await userEvent.type(expiryYearInput, "26");
+
+    const cvcInput =
+      canvasElement.querySelector<HTMLInputElement>("#card-cvc-input");
+    await userEvent.type(cvcInput, "123");
+
+    const passwordInput = canvas.getByPlaceholderText("비밀번호");
+    await expect(passwordInput).toBeVisible();
+
+    await userEvent.clear(cvcInput);
+    await expect(passwordInput).not.toBeVisible();
+  },
+};
+
+export const PreviousFieldsHideWhenCardNumberBecomesIncomplete: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>(
+        "#card-number-input-container input",
+      ),
+    );
+    await userEvent.type(firstInput, "3612");
+    await userEvent.type(secondInput, "3612");
+    await userEvent.type(thirdInput, "3612");
+    await userEvent.type(fourthInput, "36");
+
+    const brandSelect =
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+    await userEvent.selectOptions(brandSelect, "bc");
+
+    const expiryMonthInput =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+    const expiryYearInput =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+    await userEvent.type(expiryMonthInput, "12");
+    await userEvent.type(expiryYearInput, "26");
+
+    await userEvent.clear(firstInput);
+
+    await expect(brandSelect).not.toBeVisible();
+    await expect(expiryMonthInput).not.toBeVisible();
+    await expect(expiryYearInput).not.toBeVisible();
+    const cvcInput = canvasElement.querySelector("#card-cvc-input");
+    await expect(cvcInput).not.toBeVisible();
+    const passwordInput = canvas.getByPlaceholderText("비밀번호");
+    await expect(passwordInput).not.toBeVisible();
+  },
+};
