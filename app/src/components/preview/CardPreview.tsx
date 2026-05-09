@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
-import { useCardContext } from "../../hooks/useCardContext";
-import { CardNetworkBrand } from "./CardNetworkBrand";
-import { CardNumber } from "./CardNumber";
-import { CardExpiryDate } from "./CardExpiryDate";
+import styled from '@emotion/styled';
+import { useCardContext } from '../../hooks/useCardContext';
+import { CardNetworkBrand } from './CardNetworkBrand';
+import { CardNumber } from './CardNumber';
+import { CardExpiryDate } from './CardExpiryDate';
 
 export function CardPreview() {
   const { networkBrand } = useCardContext();
@@ -20,7 +20,12 @@ export function CardPreview() {
   );
 }
 
-const CardContainer = styled.div`
+type CardCompanySelected = {
+  $CardCompanySelected?: boolean;
+};
+
+const CardContainer = styled.div<CardCompanySelected>`
+  background-color: ${(props) => (props.$CardCompanySelected ? '#FF3D3D' : '#333333')};
   position: relative;
   display: flex;
   align-items: center;
@@ -28,7 +33,6 @@ const CardContainer = styled.div`
   width: 212px;
   height: 132px;
   border-radius: 4px;
-  background-color: #333333;
   padding: 0.5rem 0.75rem;
   margin: 4.625rem auto 2.75rem auto;
   color: white;

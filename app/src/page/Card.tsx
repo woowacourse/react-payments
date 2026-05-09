@@ -4,8 +4,11 @@ import { CardForm } from '../components/form/CardForm.tsx';
 import styled from '@emotion/styled';
 import { CardContext } from '../context/CardContext.ts';
 import type { NetworkBrand } from '../context/CardContext.ts';
+import type { CardCompany } from '../context/CardContext.ts';
 
 export function Card() {
+  const [cardCompany, setCardCompany] = useState<CardCompany>('');
+
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
 
   const [cardExpiryDate, setCardExpiryDate] = useState({
@@ -21,9 +24,11 @@ export function Card() {
         cardNumber,
         cardExpiryDate,
         networkBrand,
+        cardCompany,
         setCardNumber,
         setCardExpiryDate,
         setNetworkBrand,
+        setCardCompany,
       }}
     >
       <CardContainer>
