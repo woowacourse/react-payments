@@ -37,12 +37,15 @@ export const CARD = {
     },
   },
   DINER: {
+    LENGTH: 14,
     PREFIX: "36",
   },
   AMEX: {
-    PREFIX: [34, 37],
+    LENGTH: 15,
+    PREFIX: ["34", "37"],
   },
   UNION_PAY: {
+    LENGTH: 16,
     FIRST_PREFIX: {
       LENGTH: 6,
       MIN: 622126,

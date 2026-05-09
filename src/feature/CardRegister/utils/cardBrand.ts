@@ -21,6 +21,15 @@ export const getCardBrandName = (
   if (isMasterCard(fullNumber)) {
     return "masterCard";
   }
+  if (isDiner(fullNumber)) {
+    return "diners";
+  }
+  if (isAmex(fullNumber)) {
+    return "amex";
+  }
+  if (isUnionPay(fullNumber)) {
+    return "unionPay";
+  }
 
   return null;
 };
@@ -41,6 +50,44 @@ const isMasterCard = (cardNumbers: string) => {
   }
 };
 
-const isDiner = (cardNumbers: string) => {};
-const isAmex = (cardNumbers: string) => {};
-const isUnionPay = (cardNumbers: string) => {};
+const isDiner = (cardNumbers: string) => {
+  if (cardNumbers.startsWith(CARD.DINER.PREFIX)) {
+    return true;
+  }
+};
+const isAmex = (cardNumbers: string) => {
+  if (CARD.AMEX.PREFIX.some((prefix) => cardNumbers.startsWith(prefix))) {
+    return true;
+  }
+};
+const isUnionPay = (cardNumbers: string) => {
+  const firstPrefix = Number(
+    cardNumbers.slice(0, CARD.UNION_PAY.FIRST_PREFIX.LENGTH),
+  );
+  if (
+    firstPrefix >= CARD.UNION_PAY.FIRST_PREFIX.MIN &&
+    firstPrefix <= CARD.UNION_PAY.FIRST_PREFIX.MAX
+  ) {
+    return true;
+  }
+
+  const secondPrefix = Number(
+    cardNumbers.slice(0, CARD.UNION_PAY.SECOND_PREFIX.LENGTH),
+  );
+  if (
+    secondPrefix >= CARD.UNION_PAY.SECOND_PREFIX.MIN &&
+    secondPrefix <= CARD.UNION_PAY.SECOND_PREFIX.MAX
+  ) {
+    return true;
+  }
+
+  const thirdPrefix = Number(
+    cardNumbers.slice(0, CARD.UNION_PAY.THIRD_PREFIX.LENGTH),
+  );
+  if (
+    thirdPrefix >= CARD.UNION_PAY.THIRD_PREFIX.MIN &&
+    thirdPrefix <= CARD.UNION_PAY.THIRD_PREFIX.MAX
+  ) {
+    return true;
+  }
+};
