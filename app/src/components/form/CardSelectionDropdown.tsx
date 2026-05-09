@@ -58,6 +58,8 @@ export function CardSelectionDropdown() {
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 1rem;
 `;
 
 const DropwdownBox = styled.button<{ $isOpen: boolean }>`
