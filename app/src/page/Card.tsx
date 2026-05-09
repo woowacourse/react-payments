@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { CardPreview } from './preview/CardPreview.tsx';
-import { CardForm } from './form/CardForm.tsx';
+import { CardPreview } from '../components/preview/CardPreview.tsx';
+import { CardForm } from '../components/form/CardForm.tsx';
 import styled from '@emotion/styled';
-import { CardContext } from '../context/CardContext';
-import type { NetworkBrand } from '../context/CardContext';
+import { CardContext } from '../context/CardContext.ts';
+import type { NetworkBrand } from '../context/CardContext.ts';
 
 export function Card() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
