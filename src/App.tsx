@@ -12,6 +12,7 @@ import { useCardInfoInputField } from './hooks/useCardInfoInputField';
 import PasswordInputWrapper from './components/InputWrapper/PasswordInputWrapper';
 import CardBrandInputWrapper from './components/InputWrapper/CardBrandInputWrapper';
 import type { CardBrandValue } from './hooks/useCardInfoValue';
+import { getPasswordErrorMessage } from './utils/getPasswordErrorMessage';
 
 function App() {
     const {
@@ -57,7 +58,7 @@ function App() {
         hasTouched: hasPasswordTouched,
         handleBlur: handlePasswordBlur,
         handleFocus: handlePasswordFocus,
-    } = useCardInfoInputField({ validator: () => null, fieldCount: 1 });
+    } = useCardInfoInputField({ validator: (value) => getPasswordErrorMessage(value[0]), fieldCount: 1 });
 
     const isCardBrandSatisfy = !!cardBrand;
 
