@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { CardContext } from '../../context/CardContext';
 
 import { CardNumberInput } from './CardNumberInput';
@@ -19,6 +19,7 @@ type Story = StoryObj<typeof meta>;
 
 const renderWithContext = () => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+  const firstRef = useRef<HTMLInputElement>(null);
   return (
     <CardContext
       value={{
@@ -34,7 +35,7 @@ const renderWithContext = () => {
         setCardPassword: () => {},
       }}
     >
-      <CardNumberInput />
+      <CardNumberInput firstRef={firstRef} onComplete={() => {}} />
     </CardContext>
   );
 };

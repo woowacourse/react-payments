@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CardContext } from "../../context/CardContext";
 
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
@@ -22,6 +22,7 @@ const renderWithContext = () => {
     "expiry-month": "",
     "expiry-year": "",
   });
+  const firstRef = useRef<HTMLInputElement>(null);
   return (
     <CardContext
       value={{
@@ -37,7 +38,7 @@ const renderWithContext = () => {
         setCardExpiryDate,
       }}
     >
-      <CardExpiryDateInput />
+      <CardExpiryDateInput firstRef={firstRef} onComplete={() => {}} />
     </CardContext>
   );
 };

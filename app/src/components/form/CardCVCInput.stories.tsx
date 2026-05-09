@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CardContext } from "../../context/CardContext";
 import { CardCVCInput } from "./CardCVCInput";
 
@@ -18,6 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 const renderWithContext = () => {
   const [cardCVC, setCardCVC] = useState('');
+  const cardCVCRef = useRef<HTMLInputElement>(null);
   return (
     <CardContext
       value={{
@@ -33,7 +34,7 @@ const renderWithContext = () => {
         setCardCVC,
       }}
     >
-      <CardCVCInput />
+      <CardCVCInput cardCVCRef={cardCVCRef} onComplete={() => {}} />
     </CardContext>
   );
 };

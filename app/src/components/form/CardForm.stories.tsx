@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { CardContext } from "../../context/CardContext";
-import type { NetworkBrand } from "../../context/CardContext";
+import type { CardCompany } from "../../context/CardContext";
 
 import { CardForm } from "./CardForm";
 
@@ -17,14 +17,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const CardNumberInputSection: Story = {
+export const Base: Story = {
   render: () => {
     const [cardNumber, setCardNumber] = useState(['', '', '', '']);
     const [cardExpiryDate, setCardExpiryDate] = useState({
       "expiry-month": "",
       "expiry-year": "",
     });
-    const [networkBrand, setNetworkBrand] = useState<NetworkBrand>('');
+    const [cardCompany, setCardCompany] = useState<CardCompany>('');
+    const [cardCVC, setCardCVC] = useState('');
+    const [cardPassword, setCardPassword] = useState('');
     return (
       <CardContext
         value={{
@@ -32,8 +34,12 @@ export const CardNumberInputSection: Story = {
           setCardNumber,
           cardExpiryDate,
           setCardExpiryDate,
-          networkBrand,
-          setNetworkBrand,
+          cardCompany,
+          setCardCompany,
+          cardCVC,
+          setCardCVC,
+          cardPassword,
+          setCardPassword,
         }}
       >
         <CardForm />
