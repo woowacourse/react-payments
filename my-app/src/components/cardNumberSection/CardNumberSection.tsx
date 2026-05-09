@@ -2,7 +2,7 @@ import { useId } from 'react';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
 import { useCardNumber } from './useCardNumber';
-import { getCardBrand, getCardNumberArrayByBrand } from '../../utils/Validation';
+import { getCardBrand, getCardNumberArrayByBrand, getNumberPlaceholder } from '../../utils/Validation';
 
 interface Props {
   value: string[];
@@ -31,7 +31,7 @@ const CardNumberSection = ({ value, setValue }: Props) => {
           value={value[index] || ''}
           onChange={(v) => handleOnChange(v, index)}
           onBlur={(v) => handleOnBlur(v, index)}
-          placeholder={"1234"}
+          placeholder={getNumberPlaceholder(index, format.length)}
           maxLength={maxLength}
           isError={errors[index]}
         />

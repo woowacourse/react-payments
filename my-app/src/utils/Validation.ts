@@ -94,3 +94,8 @@ export const getPasswordError = (password: string): string => {
 
   return '';
 }
+
+export const getNumberPlaceholder = (index: number, totalLength: number) => {
+  if (totalLength === 3 && index === 1) return "123456";
+  return "1234";
+}
