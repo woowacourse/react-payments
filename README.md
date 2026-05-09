@@ -7,7 +7,7 @@
 ### 1. UI 및 컴포넌트 (Reusability)
 
 - [x] 공통 컴포넌트: 라벨(Label), 설명 텍스트(Description), 입력창(Input), 타이틀(Title), 버튼(Button) 분리
-- [x] 컴포넌트별 전용 스타일과 글로벌 테마(Theme) 분리 적용
+- [x] 컴포넌트별 전용 스타일과 글로벌 reset 스타일 분리 적용
 - [x] 모든 입력 폼의 에러 발생 시 테두리 빨간색(`#FF3D3D`) 처리
 - [x] 모든 입력 폼의 포커스 시 테두리 검은색(`#000000`) 강조 처리
 - [x] Storybook을 활용한 컴포넌트 시각적 테스트 및 상태 관리
@@ -21,10 +21,10 @@
 #### 카드 번호 표시 (Card Number Display)
 
 - [x] 사용자 입력에 따라 실시간으로 카드 번호 표시
-- [x] 카드 번호는 4자리씩 묶어서 표시 (예: `1234 5678 9012 3456`)
-  - [ ] 카드번호가 16자리보다 적은 경우도 묶어서 표시 (예: `1234 5678 9012 34`)
-- [x] 카드 번호의 9~16번째 자리는 마스킹 처리 (예: `1234 5678 **** ****`)
-  - [ ] 카드번호가 16자리보다 적은 경우도 마스킹 처리 (예: `1234 5678 **** **`)
+- [x] 카드 번호는 입력 세그먼트 단위로 묶어서 표시 (예: `1234 5678 9012 3456`)
+  - [x] 카드번호가 전체 길이보다 적은 경우도 묶어서 표시 (예: `1234 5678 9012 34`)
+- [x] 세 번째 세그먼트부터 마스킹 처리 (예: `1234 5678 **** ****`)
+  - [x] 카드번호가 전체 길이보다 적은 경우도 마스킹 처리 (예: `1234 5678 **** **`)
 - [x] 초기 상태에서는 placeholder 텍스트 표시
 
 #### 만료일 표시 (Card Expiry Date Display)
@@ -35,11 +35,11 @@
 
 #### 카드 타입 로고 (Card Type Logo)
 
-- [x] 카드 번호 입력 조건 충족 시 해당 카드사 로고 표시
+- [x] 카드 번호 입력 조건 충족 시 해당 카드 타입 로고 표시
   - **Visa:** `4`로 시작하는 16자리 숫자
   - **MasterCard:** `51`~`55`로 시작하는 16자리 숫자
   - **Diners:** `36`로 시작하는 14자리 숫자
-  - **AMEX:** `34`, `35`로 시작하는 15자리 숫자
+  - **AMEX:** `34`, `37`로 시작하는 15자리 숫자
   - **유니온페이:** `622126`~`622925`, `624~626`, `6282~6288`로 시작하는 16자리 숫자
 - [x] 위 조건을 만족하지 않으면 로고 미표시
 - [x] 실시간으로 브랜드 로고 업데이트
@@ -61,7 +61,11 @@
 
 #### 카드 번호 입력 (Card Number Input)
 
-- [x] 입력 형식: 4자리씩 4개 입력칸 (총 16자리)
+- [x] 기본 입력 형식: 4자리씩 4개 입력칸
+- [x] 카드 타입 식별 후 세그먼트 길이 동적 적용
+  - **Visa/MasterCard/UnionPay:** `[4, 4, 4, 4]`
+  - **AMEX:** `[4, 4, 4, 3]`
+  - **Diners:** `[4, 4, 4, 2]`
 - [x] 숫자만 입력 가능하며, 숫자 외 입력은 자동 차단
 - [x] 각 입력칸의 placeholder: `1234`
 - [x] 입력 중인 칸의 테두리를 검은색(`#000000`)으로 강조
@@ -107,8 +111,7 @@
 - [x] 제공되는 카드사 중 하나 선택
 - [x] 선택창의 placeholder: `카드사를 선택해주세요`
 - [x] 입력 중인 칸의 테두리를 검은색(`#000000`)으로 강조
-- [x] 에러 발생 시 테두리를 빨간색(`#FF3D3D`)으로 표시
-- [x] 포커스 시 테두리를 회색(`#ACACAC`)으로 강조
+- [x] 포커스 시 테두리를 검은색(`#000000`)으로 강조
 
 #### 비밀번호 입력 (Password Input)
 
@@ -129,8 +132,9 @@
 
 ### 4. 기능 및 유효성 검사 (State Management & Readability)
 
-- [x] 폼 라이브러리 미사용 (커스텀 훅으로 폼 상태 중앙 관리)
-- [x] 에러 로직을 뷰 컴포넌트와 분리하여 명확한 가독성 확보
+- [x] 폼 라이브러리 미사용
+- [x] 필드별 validation 상태는 `useFieldValidation` 커스텀 훅으로 관리
+- [x] 카드 타입, 카드사, 폼 유효성 검사 로직을 유틸 함수로 분리
 - [x] 각 입력 필드별 독립적인 상태 관리 및 실시간 유효성 검사
 - [x] styled-components를 활용한 동적 스타일링 적용
 
@@ -142,19 +146,19 @@
 
 ### 6. 폼 제출 기능
 
-- [ ] '확인' 버튼을 누르면 사용자가 입력한 데이터(카드 번호 앞 4자리, 카드사)를 카드 등록 완료 페이지에 전달한다.
+- [x] '제출' 버튼을 누르면 사용자가 입력한 데이터(카드 번호 앞 4자리, 카드사)를 카드 등록 완료 페이지에 전달한다.
 
 ## 카드 등록 완료 페이지
 
-카드가 성공적으로 등록되었음을 보여주는 페이지로, 사용자가 입력한 카드 번호와 카드사를 메세지로 보여주며 카드 등록 페이지로 되돌아갈 수 있다.
+카드가 성공적으로 등록되었음을 보여주는 페이지로, 사용자가 입력한 카드 번호와 카드사를 메시지로 보여주며 카드 등록 페이지로 되돌아갈 수 있다.
 
 ### 1. 등록 완료 페이지 영역
 
-- [ ] 등록 페이지로부터 전달받은 데이터를 표시한다.
+- [x] 등록 페이지로부터 전달받은 데이터를 표시한다.
 
 ### 2. 초기 화면 이동 기능
 
-- [ ] '확인' 버튼을 누르면 카드 등록 페이지로 이동한다.
+- [x] '확인' 버튼을 누르면 카드 등록 페이지로 이동한다.
 
 ---
 
@@ -172,7 +176,7 @@
 - **Visa:** `4`로 시작하는 16자리 숫자
 - **MasterCard:** `51`~`55`로 시작하는 16자리 숫자
 - **Diners:** `36`로 시작하는 14자리 숫자
-- **AMEX:** `34`, `35`로 시작하는 15자리 숫자
+- **AMEX:** `34`, `37`로 시작하는 15자리 숫자
 - **유니온페이:** `622126`~`622925`, `624~626`, `6282~6288`로 시작하는 16자리 숫자
 - 위 조건을 만족하지 않으면 로고 미표시
 
@@ -214,6 +218,7 @@
 
 ```
 src/
+├── App.tsx
 ├── common/
 │   ├── components/
 │   │   ├── Button.tsx
@@ -227,55 +232,70 @@ src/
 │       ├── CardPreview.ts
 │       └── CardPreviewInfoType.ts
 ├── feature/
-│   └── CardRegister/
-│       ├── CardRegisterPage.tsx
-│       ├── constant/
-│       │   └── CARD_BRANDS.ts
-│       ├── components/
-│       │   ├── CardPreviewSection/
-│       │   │   ├── CardPreviewSection.tsx
-│       │   │   ├── CardPreviewContainer.tsx
-│       │   │   ├── CardNumberDisplay.tsx
-│       │   │   ├── CardExpiryDateDisplay.tsx
-│       │   │   └── CardBrandLogo.tsx
-│       │   └── InfoInputSection/
-│       │       ├── InfoInputSection.tsx
-│       │       ├── FieldSection.tsx
-│       │       ├── NumberField.tsx
-│       │       ├── SelectCardBrandField.tsx
-│       │       ├── ExpiryField.tsx
-│       │       ├── CvCField.tsx
-│       │       └── PasswordField.tsx
-│       └── utils/
-│           ├── cardDisplay.ts
-│           ├── cardFormValidator.ts
-│           └── validator.ts
+│   ├── CardRegister/
+│   │   ├── CardRegisterPage.tsx
+│   │   ├── assets/
+│   │   │   ├── Amex.svg
+│   │   │   ├── Diners.svg
+│   │   │   ├── Mastercard.png
+│   │   │   ├── UnionPay.svg
+│   │   │   └── Visa.png
+│   │   ├── components/
+│   │   │   ├── CardPreviewSection/
+│   │   │   │   ├── CardBrandLogo.tsx
+│   │   │   │   ├── CardExpiryDateDisplay.tsx
+│   │   │   │   ├── CardNumberDisplay.tsx
+│   │   │   │   ├── CardPreviewContainer.tsx
+│   │   │   │   └── CardPreviewSection.tsx
+│   │   │   └── InfoInputSection/
+│   │   │       ├── CvCField.tsx
+│   │   │       ├── ExpiryField.tsx
+│   │   │       ├── FieldSection.tsx
+│   │   │       ├── InfoInputSection.tsx
+│   │   │       ├── NumberField.tsx
+│   │   │       ├── PasswordField.tsx
+│   │   │       └── SelectCardBrandField.tsx
+│   │   ├── constant/
+│   │   │   └── CARD_BRANDS.ts
+│   │   └── utils/
+│   │       ├── cardDisplay.ts
+│   │       ├── cardFormValidator.ts
+│   │       ├── cardInfo.ts
+│   │       └── validator.ts
+│   └── CardRegisterComplete/
+│       ├── CardRegisterCompletePage.tsx
+│       └── assets/
+│           └── Group 54.png
 ├── stories/
 │   ├── common/
 │   │   └── components/
+│   │       ├── Button.stories.tsx
 │   │       ├── Description.stories.tsx
 │   │       ├── Input.stories.tsx
 │   │       ├── Label.stories.tsx
 │   │       └── Title.stories.tsx
 │   └── feature/
-│       └── CardRegister/
-│           ├── CardRegisterPage.stories.tsx
-│           └── components/
-│               ├── CardPreviewSection/
-│               │   ├── CardBrandLogo.stories.tsx
-│               │   ├── CardExpiryDateDisplay.stories.tsx
-│               │   ├── CardNumberDisplay.stories.tsx
-│               │   ├── CardPreviewContainer.stories.tsx
-│               │   └── CardPreviewSection.stories.tsx
-│               └── InfoInputSection/
-│                   ├── CvCField.stories.tsx
-│                   ├── ExpiryField.stories.tsx
-│                   ├── FieldSection.stories.tsx
-│                   ├── InfoInputSection.stories.tsx
-│                   └── NumberField.stories.tsx
+│       ├── CardRegister/
+│       │   ├── CardRegisterPage.stories.tsx
+│       │   └── components/
+│       │       ├── CardPreviewSection/
+│       │       │   ├── CardBrandLogo.stories.tsx
+│       │       │   ├── CardExpiryDateDisplay.stories.tsx
+│       │       │   ├── CardNumberDisplay.stories.tsx
+│       │       │   ├── CardPreviewContainer.stories.tsx
+│       │       │   └── CardPreviewSection.stories.tsx
+│       │       └── InfoInputSection/
+│       │           ├── CvCField.stories.tsx
+│       │           ├── ExpiryField.stories.tsx
+│       │           ├── FieldSection.stories.tsx
+│       │           ├── InfoInputSection.stories.tsx
+│       │           ├── NumberField.stories.tsx
+│       │           ├── PasswordField.stories.tsx
+│       │           └── SelectCardBrandField.stories.tsx
+│       └── CardRegisterComplete/
+│           └── CardRegisterCompletePage.stories.tsx
 ├── styles/
 │   └── reset.css
-└── main.tsx
 ```
 
 ## 주요 컴포넌트 설명
@@ -291,17 +311,21 @@ src/
 ### Card Preview Section
 
 - **CardPreviewSection**: 카드 프리뷰 영역 전체 컴포넌트
-- **CardPreviewContainer**: 카드 이미지 및 정보를 렌더링하는 카드 컨테이너
-- **CardNumberDisplay**: 마스킹 처리된 카드 번호 표시 (4자리씩 묶음)
+- **CardPreviewContainer**: 카드 이미지, 카드 번호, 유효기간, 카드 타입 로고를 렌더링하는 카드 컨테이너
+- **CardNumberDisplay**: 입력 세그먼트 단위로 카드 번호를 표시하고 일부 번호를 마스킹 처리
 - **CardExpiryDateDisplay**: 유효기간 표시 (올바른 입력 시에만 `/` 표시)
-- **CardBrandLogo**: 카드 번호 기반 카드 타입 로고 표시 (Visa, Mastercard 조건 충족 시)
+- **CardBrandLogo**: 카드 번호 기반 카드 타입 로고 표시 (Visa, MasterCard, AMEX, Diners, UnionPay)
 
 ### Info Input Section
 
 - **InfoInputSection**: 카드 정보 입력 영역 전체 컴포넌트. 단계별 필드 노출과 제출 흐름 관리
 - **FieldSection**: 입력 필드의 제목, 설명, children을 묶는 섹션 레이아웃 컴포넌트
-- **NumberField**: 카드 번호 입력 (4자리씩 4개 입력칸, 입력 완료 시 다음 칸 포커스 이동)
+- **NumberField**: 카드 번호 입력 (카드 타입별 세그먼트 길이 적용, 입력 완료 시 다음 칸 포커스 이동)
 - **SelectCardBrandField**: 카드사 선택 입력 (선택한 카드사 id를 상위 form 상태로 전달)
 - **ExpiryField**: 유효기간 입력 (2자리씩 2개 입력칸 - 월, 년)
 - **CvcField**: CVC 번호 입력 (3자리 입력칸)
 - **PasswordField**: 카드 비밀번호 앞 2자리 입력
+
+### Card Register Complete
+
+- **CardRegisterCompletePage**: 카드 등록 완료 메시지를 표시하고 확인 버튼으로 등록 페이지로 이동
