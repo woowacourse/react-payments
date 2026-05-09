@@ -2,14 +2,8 @@ import { type ChangeEvent } from "react";
 import type { CardFormState } from "../types";
 import ValidationInput from "./Common/ValidationInput";
 import Flex from "./Common/Flex";
-import {
-  validateMonth,
-  validateNumberString,
-  validateStringLength,
-  validateStringMaxLength,
-  validateYear,
-} from "../utils";
 import Label from "./Common/Label";
+import { expiryDateValidations } from "../utils/validationRules";
 
 interface CardExpiryDateInputProps {
   value: Pick<CardFormState, "expiryMonth" | "expiryYear">;
@@ -37,28 +31,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           value={props.value.expiryMonth}
           onChange={handleChangeMonth}
           isShowError={true}
-          validations={[
-            {
-              type: "validateOnChange",
-              validator: validateNumberString,
-              message: "숫자만 입력 가능합니다.",
-            },
-            {
-              type: "validateOnChange",
-              validator: (input: string) => validateStringMaxLength(input, 2),
-              message: "2자리까지 입력 가능합니다.",
-            },
-            {
-              type: "validateOnBlur",
-              validator: (input: string) => validateStringLength(input, 2),
-              message: "2자리를 입력해주세요.",
-            },
-            {
-              type: "validateOnBlur",
-              validator: validateMonth,
-              message: "유효한 월을 입력해주세요. (01 ~ 12)",
-            },
-          ]}
+          validations={expiryDateValidations("month")}
         />
         <ValidationInput
           type="text"
@@ -68,28 +41,7 @@ export default function CardExpiryDateInput(props: CardExpiryDateInputProps) {
           value={props.value.expiryYear}
           onChange={handleChangeYear}
           isShowError={true}
-          validations={[
-            {
-              type: "validateOnChange",
-              validator: validateNumberString,
-              message: "숫자만 입력 가능합니다.",
-            },
-            {
-              type: "validateOnChange",
-              validator: (input: string) => validateStringMaxLength(input, 2),
-              message: "2자리까지 입력 가능합니다.",
-            },
-            {
-              type: "validateOnBlur",
-              validator: (input: string) => validateStringLength(input, 2),
-              message: "2자리를 입력해주세요.",
-            },
-            {
-              type: "validateOnBlur",
-              validator: validateYear,
-              message: "유효한 년도을 입력해주세요. (00 ~ 99)",
-            },
-          ]}
+          validations={expiryDateValidations("year")}
         />
       </Flex>
     </Flex>

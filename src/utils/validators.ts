@@ -23,10 +23,3 @@ export function validateYear(input: string) {
   );
   return monthArray.includes(input);
 }
-
-export function validateCVC(input: string) {
-  const monthArray = Array.from({ length: 1000 }).map((_, index) =>
-    String(index).padStart(3, "0"),
-  );
-  return monthArray.includes(input);
-}

@@ -7,6 +7,7 @@ import {
 import styled from "@emotion/styled";
 import Flex from "./Flex";
 import InputErrorMessage from "./InputErrorMessage";
+import type { Validation } from "../../utils/validationRules";
 
 const Input = styled.input<{ $hasError: boolean }>`
   width: 100%;
@@ -24,11 +25,7 @@ const Input = styled.input<{ $hasError: boolean }>`
 `;
 
 interface ValidationInputProps extends ComponentProps<"input"> {
-  validations: {
-    type: "validateOnChange" | "validateOnBlur";
-    validator: (input: string) => boolean;
-    message: string;
-  }[];
+  validations: Validation[];
   onChangeError?: (error: Error | null) => void;
   isShowError?: boolean;
 }
