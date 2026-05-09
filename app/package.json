@@ -19,7 +19,8 @@
   "dependencies": {
     "@emotion/styled": "^11.14.1",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "react-router": "^7.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -27,6 +28,7 @@
     "@babel/preset-typescript": "^7.28.5",
     "@chromatic-com/storybook": "^5.1.2",
     "@eslint/js": "^10.0.1",
+    "@react-router/dev": "^7.15.0",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-vitest": "^10.3.5",
