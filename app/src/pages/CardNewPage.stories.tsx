@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within, expect } from "storybook/test";
 
-import App from "./App";
+import CardNewPage from "./CardNewPage";
 
 const meta = {
-  title: "App",
-  component: App,
+  title: "pages/CardNewPage",
+  component: CardNewPage,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof App>;
+} satisfies Meta<typeof CardNewPage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
