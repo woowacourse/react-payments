@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {createFlags, computeNextTouched, computeNextErrorInfo} from './fieldErrorUtils';
 
 const CVC_DIGIT_COUNT = 3;
-const CVC_ERROR_MSG = 'CVC 번호 3자리를 입력해 주세요';
+const CVC_ERROR_MSG = `CVC 번호 ${CVC_DIGIT_COUNT}자리를 입력해 주세요`;
 
 export function useCvcNumber() {
   const [cvcNumber, setCvcNumber] = useState('');
@@ -18,16 +18,17 @@ export function useCvcNumber() {
     setErrorInfo(nextErrorInfo);
   };
 
-  const handleChange = (value: string) => {
-    const inputValue = value.trim();
+  const handleChange = (rawValue: string) => {
+    const inputValue = rawValue.trim();
     if (!/^\d*$/.test(inputValue) || inputValue.length > CVC_DIGIT_COUNT) return;
     setCvcNumber(inputValue);
     if (isTouched[0] && inputValue.length === CVC_DIGIT_COUNT) updateErrorInfo(false);
   };
 
-  const handleBlur = (value: string) => {
+  const handleBlur = (rawValue: string) => {
+    const inputValue = rawValue.trim();
     setIsTouched((prev) => computeNextTouched(prev, 0));
-    updateErrorInfo(value.length !== CVC_DIGIT_COUNT);
+    updateErrorInfo(inputValue.length !== CVC_DIGIT_COUNT);
   };
 
   const isComplete = cvcNumber.length === CVC_DIGIT_COUNT;
