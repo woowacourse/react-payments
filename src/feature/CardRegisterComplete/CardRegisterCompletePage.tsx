@@ -45,7 +45,7 @@ const Wrapper = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 700px;
+  min-height: 100vh;
 
   background-color: #d3d3d3;
 `;
