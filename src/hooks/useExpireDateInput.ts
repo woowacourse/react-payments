@@ -3,36 +3,62 @@ import type { SetExpireDate } from "../types/types";
 import { isNumeric } from "../utils/validators";
 
 export function useExpireDateInput(setExpireDate: SetExpireDate) {
-  const [expireDateError, setExpireDateError] = useState([""]);
-  const handleExpireDateChange = (
-    index: number,
-    value: string,
-    name: string,
-  ) => {
-    const newError = [...expireDateError];
+  const [expireDateError, setExpireDateError] = useState({
+    month: "",
+    year: "",
+  });
 
+  const handleMonthChange = (value: string) => {
     if (!isNumeric(value)) {
-      newError[index] = "숫자를 입력해주세요.";
-      setExpireDateError(newError);
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "숫자를 입력해주세요.",
+      }));
       return;
     }
 
-    newError[index] = "";
-
-    if (name === "month" && value !== "") {
+    if (value !== "") {
       const month = Number(value);
+
       if (month < 1 || month > 12) {
-        newError[index] = "1 ~ 12월 사이의 숫자를 입력해주세요.";
+        setExpireDateError((prev) => ({
+          ...prev,
+          month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
+        }));
+        return;
       }
     }
 
-    setExpireDateError(newError);
+    setExpireDateError((prev) => ({
+      ...prev,
+      month: "",
+    }));
 
     setExpireDate((prev) => ({
       ...prev,
-      [name]: value,
+      month: value,
     }));
   };
 
-  return { expireDateError, handleExpireDateChange };
+  const handleYearChange = (value: string) => {
+    if (!isNumeric(value)) {
+      setExpireDateError((prev) => ({
+        ...prev,
+        year: "숫자를 입력해주세요.",
+      }));
+      return;
+    }
+
+    setExpireDateError((prev) => ({
+      ...prev,
+      year: "",
+    }));
+
+    setExpireDate((prev) => ({
+      ...prev,
+      year: value,
+    }));
+  };
+
+  return { expireDateError, handleMonthChange, handleYearChange };
 }

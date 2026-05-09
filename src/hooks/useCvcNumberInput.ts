@@ -1,27 +1,19 @@
 import { useState } from "react";
-import { type SetCardNumber } from "../types/types";
+import { type SetCvcNumber } from "../types/types";
 import { isNumeric } from "../utils/validators";
 
-export function useCvcNumberInput(setCvcNumber: SetCardNumber) {
-  const [cvcNumberError, setCvcNumberError] = useState([""]);
-  const handleCvcNumberChange = (index: number, value: string) => {
-    const newError = [...cvcNumberError];
+export function useCvcNumberInput(setCvc: SetCvcNumber) {
+  const [cvcError, setCvcError] = useState("");
 
+  const handleCvcChange = (value: string) => {
     if (!isNumeric(value)) {
-      newError[index] = "숫자를 입력해주세요.";
-      setCvcNumberError(newError);
+      setCvcError("숫자를 입력해주세요.");
       return;
     }
 
-    newError[index] = "";
-    setCvcNumberError(newError);
-
-    setCvcNumber((prev) => {
-      const newArray = [...prev];
-      newArray[index] = value;
-      return newArray;
-    });
+    setCvcError("");
+    setCvc(value);
   };
 
-  return { cvcNumberError, handleCvcNumberChange };
+  return { cvcError, handleCvcChange };
 }
