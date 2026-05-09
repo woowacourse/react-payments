@@ -1,8 +1,8 @@
 // util
 const inRange = (prefix: string, length: number, min: number, max: number) => {
   if (prefix.length < length) return false;
-  const n = Number(prefix.slice(0, length));
-  return n >= min && n <= max;
+  const prefixNumber = Number(prefix.slice(0, length));
+  return prefixNumber >= min && prefixNumber <= max;
 };
 
 // matchers

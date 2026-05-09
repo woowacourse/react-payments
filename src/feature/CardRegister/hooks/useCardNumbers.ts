@@ -21,53 +21,59 @@ export function useCardNumbers() {
   const firstErrorIdx = errorInfo.errorFlags.indexOf(true);
   const hasAnyError = firstErrorIdx !== -1;
 
-  const applyResize = (nextChunks: string[], nextFormat: number[]) => {
-    const len = nextFormat.length;
-    const trimmed = Array.from({length: len}, (_, i) => (nextChunks[i] ?? '').slice(0, nextFormat[i]));
-    setCardNumbers(trimmed);
+  const applyResize = (nextChunks: string[], detectedFormat: number[]) => {
+    const fieldCount = detectedFormat.length;
+    const clippedChunks = Array.from({length: fieldCount}, (_, i) => (nextChunks[i] ?? '').slice(0, detectedFormat[i]));
+    setCardNumbers(clippedChunks);
     setErrorInfo((prev) => ({
-      errorFlags: resizeArray(prev.errorFlags, len, false),
-      errorMessages: resizeArray(prev.errorMessages, len, ''),
+      errorFlags: resizeArray(prev.errorFlags, fieldCount, false),
+      errorMessages: resizeArray(prev.errorMessages, fieldCount, ''),
       currentErrorMsg: prev.currentErrorMsg,
     }));
-    setIsTouched((prev) => resizeArray(prev, len, false));
+    setIsTouched((prev) => resizeArray(prev, fieldCount, false));
   };
 
-  const handleChange = (index: number, eValue: string) => {
-    const value = eValue.trim();
+  const handleChange = (index: number, rawValue: string) => {
+    const value = rawValue.trim();
     if (!/^\d*$/.test(value)) return;
 
-    const candidate = [...cardNumbers];
-    candidate[index] = value;
+    const updatedChunks = [...cardNumbers];
+    updatedChunks[index] = value;
 
-    const nextFormat = getFormatByBrand(getBrandName(candidate));
-    if (value.length > nextFormat[index]) return;
+    const detectedFormat = getFormatByBrand(getBrandName(updatedChunks));
+    if (value.length > detectedFormat[index]) return;
 
-    if (candidate.length !== nextFormat.length) {
-      applyResize(candidate, nextFormat);
+    if (updatedChunks.length !== detectedFormat.length) {
+      applyResize(updatedChunks, detectedFormat);
     } else {
-      setCardNumbers(candidate);
+      setCardNumbers(updatedChunks);
     }
 
-    if (isTouched[index] && value.length === nextFormat[index]) {
-      const next = computeNextErrorInfo(
+    if (isTouched[index] && value.length === detectedFormat[index]) {
+      const nextErrorInfo = computeNextErrorInfo(
         errorInfo.errorFlags,
         errorInfo.errorMessages,
         index,
         false,
-        getCardNumberErrorMsg(nextFormat[index])
+        getCardNumberErrorMsg(detectedFormat[index])
       );
-      setErrorInfo(next);
+      setErrorInfo(nextErrorInfo);
     }
   };
 
-  const handleBlur = (index: number, eValue: string) => {
+  const handleBlur = (index: number, rawValue: string) => {
     setIsTouched((prev) => computeNextTouched(prev, index));
 
-    const expected = format[index];
-    const isValid = eValue.length === expected;
-    const next = computeNextErrorInfo(errorInfo.errorFlags, errorInfo.errorMessages, index, !isValid, getCardNumberErrorMsg(expected));
-    setErrorInfo(next);
+    const requiredLength = format[index];
+    const isValid = rawValue.length === requiredLength;
+    const nextErrorInfo = computeNextErrorInfo(
+      errorInfo.errorFlags,
+      errorInfo.errorMessages,
+      index,
+      !isValid,
+      getCardNumberErrorMsg(requiredLength)
+    );
+    setErrorInfo(nextErrorInfo);
   };
 
   return {

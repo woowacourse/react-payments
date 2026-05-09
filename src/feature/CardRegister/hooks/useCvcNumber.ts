@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import {createFlags, computeNextTouched, computeNextErrorInfo} from './fieldErrorUtils';
 
-const CVC_LENGTH = 3;
-const ERROR_MSG = 'CVC 번호 3자리를 입력해 주세요';
+const CVC_DIGIT_COUNT = 3;
+const CVC_ERROR_MSG = 'CVC 번호 3자리를 입력해 주세요';
 
 export function useCvcNumber() {
   const [cvcNumber, setCvcNumber] = useState('');
@@ -14,23 +14,23 @@ export function useCvcNumber() {
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(1));
 
   const updateErrorInfo = (hasError: boolean) => {
-    const next = computeNextErrorInfo(errorInfo.errorFlags, errorInfo.errorMessages, 0, hasError, ERROR_MSG);
-    setErrorInfo(next);
+    const nextErrorInfo = computeNextErrorInfo(errorInfo.errorFlags, errorInfo.errorMessages, 0, hasError, CVC_ERROR_MSG);
+    setErrorInfo(nextErrorInfo);
   };
 
   const handleChange = (value: string) => {
-    const trimmed = value.trim();
-    if (!/^\d*$/.test(trimmed) || trimmed.length > CVC_LENGTH) return;
-    setCvcNumber(trimmed);
-    if (isTouched[0] && trimmed.length === CVC_LENGTH) updateErrorInfo(false);
+    const inputValue = value.trim();
+    if (!/^\d*$/.test(inputValue) || inputValue.length > CVC_DIGIT_COUNT) return;
+    setCvcNumber(inputValue);
+    if (isTouched[0] && inputValue.length === CVC_DIGIT_COUNT) updateErrorInfo(false);
   };
 
   const handleBlur = (value: string) => {
     setIsTouched((prev) => computeNextTouched(prev, 0));
-    updateErrorInfo(value.length !== CVC_LENGTH);
+    updateErrorInfo(value.length !== CVC_DIGIT_COUNT);
   };
 
-  const isComplete = cvcNumber.length === CVC_LENGTH;
+  const isComplete = cvcNumber.length === CVC_DIGIT_COUNT;
   const firstErrorIdx = errorInfo.errorFlags.indexOf(true);
 
   return {

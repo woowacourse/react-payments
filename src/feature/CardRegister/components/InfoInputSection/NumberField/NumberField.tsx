@@ -32,17 +32,17 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
 
   return (
     <StyledField>
-      <InputWrapper $columns={format.map((n) => `${n}fr`).join(' ')}>
-        {format.map((maxLen, index) => (
+      <InputWrapper $columns={format.map((digitCount) => `${digitCount}fr`).join(' ')}>
+        {format.map((maxDigits, index) => (
           <CardNumberInput
             key={index}
             ref={(el) => {
               inputRefs.current[index] = el;
             }}
             value={cardNumbers[index] ?? ''}
-            placeholder={generatePlaceholder(maxLen)}
+            placeholder={generatePlaceholder(maxDigits)}
             inputMode='numeric'
-            maxLength={maxLen}
+            maxLength={maxDigits}
             strokeMode={index === firstErrorIdx ? 'error' : 'default'}
             onChange={(e) => handleChange(index, e.target.value)}
             onBlur={(e) => onBlur(index, e.target.value)}
