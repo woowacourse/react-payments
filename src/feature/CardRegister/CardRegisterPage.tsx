@@ -65,6 +65,8 @@ const SubmitButton = styled.button`
   right: 0;
   z-index: 100;
   width: 100%;
+  max-width: 376px;
+  margin: 0 auto;
   padding: 16px;
   background-color: #000;
   color: #fff;
