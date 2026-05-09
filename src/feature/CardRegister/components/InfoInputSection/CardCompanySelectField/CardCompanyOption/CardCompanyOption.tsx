@@ -13,6 +13,7 @@ export default CardCompanyOption;
 
 const Option = styled.option`
   width: 100%;
+  color: #4f4f4f;
 
   &:hover {
     background-color: #ededed;
