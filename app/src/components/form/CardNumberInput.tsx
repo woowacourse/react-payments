@@ -71,14 +71,12 @@ export function CardNumberInput() {
     networkBrand: NetworkBrand,
     index: number,
   ): { maxLength: number; placeholder: string } => {
-    if (index === 3) {
-      if (networkBrand === 'diners') {
-        return { maxLength: 2, placeholder: '12' };
-      }
+    if (networkBrand === 'diners' && index === 3) {
+      return { maxLength: 2, placeholder: '12' };
+    }
 
-      if (networkBrand === 'amex') {
-        return { maxLength: 3, placeholder: '123' };
-      }
+    if (networkBrand === 'amex' && index === 3) {
+      return { maxLength: 3, placeholder: '123' };
     }
 
     return { maxLength: 4, placeholder: '1234' };
