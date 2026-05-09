@@ -29,7 +29,7 @@ const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMo
           maxLength={2}
           inputMode='numeric'
           placeholder='MM'
-          strokeMode={0 === firstErrorIdx ? 'error' : 'default'}
+          strokeMode={firstErrorIdx === 0 ? 'error' : 'default'}
           onChange={(e) => onMonthChange(e.target.value)}
           onBlur={(e) => handleBlur(0, e.target.value, 'month')}
         />
@@ -39,7 +39,7 @@ const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMo
           maxLength={2}
           placeholder='YY'
           inputMode='numeric'
-          strokeMode={1 === firstErrorIdx ? 'error' : 'default'}
+          strokeMode={firstErrorIdx === 1 ? 'error' : 'default'}
           onChange={(e) => handleYearChange(e.target.value)}
           onBlur={(e) => handleBlur(1, e.target.value, 'year')}
         />

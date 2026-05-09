@@ -17,7 +17,7 @@ const CvcField = ({cvcNumber, firstErrorIdx, errorMsg, handleChange, handleBlur}
           maxLength={3}
           inputMode='numeric'
           placeholder='123'
-          strokeMode={0 === firstErrorIdx ? 'error' : 'default'}
+          strokeMode={firstErrorIdx === 0 ? 'error' : 'default'}
           onChange={(e) => handleChange(e.target.value)}
           onBlur={(e) => handleBlur(e.target.value)}
         />

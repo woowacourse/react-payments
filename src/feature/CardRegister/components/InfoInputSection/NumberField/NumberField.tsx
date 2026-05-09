@@ -11,6 +11,9 @@ type Props = {
   onBlur: (index: number, value: string) => void;
 };
 
+const generatePlaceholder = (length: number) =>
+  Array.from({length}, (_, i) => (i + 1) % 10).join('');
+
 const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, onBlur}: Props) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -31,7 +34,7 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
               inputRefs.current[index] = el;
             }}
             value={cardNumbers[index] ?? ''}
-            placeholder={Array.from({length: maxLen}, (_, i) => (i + 1) % 10).join('')}
+            placeholder={generatePlaceholder(maxLen)}
             inputMode='numeric'
             maxLength={maxLen}
             strokeMode={index === firstErrorIdx ? 'error' : 'default'}
