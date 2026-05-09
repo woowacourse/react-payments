@@ -1,24 +1,29 @@
-import CardInfoHeader from '../cardInfoHeader/CardInfoHeader';
-import FormField from '../formField/FormField';
-import { Section, InfoInput, ErrorMessage } from '../CardInfo.styles';
+import {
+  Field,
+  InfoInput,
+  ErrorMessage,
+  Title,
+  Description,
+  Label,
+  InputContainer,
+} from '../CardInfo.styles';
 import { useCardNumber } from './useCardNumber';
 import { useCardForm } from '../../useCardForm';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardNumber'];
 }
-
-export default function CardNumberSection({ field }: Props) {
+//카드 번호를 입력할수 있는 컴포넌트
+export default function CardNumberField({ field }: Props) {
   const { value: cardNumber, set: setCardNumber } = field;
   const { error, validate } = useCardNumber(cardNumber);
 
   return (
-    <Section>
-      <CardInfoHeader
-        title="결제할 카드 번호를 입력해 주세요"
-        description="본인 명의의 카드만 결제 가능합니다."
-      />
-      <FormField label="카드 번호">
+    <Field>
+      <Title>결제할 카드 번호를 입력해 주세요</Title>
+      <Description>본인 명의의 카드만 결제 가능합니다.</Description>
+      <Label>카드 번호</Label>
+      <InputContainer>
         {cardNumber.map((_, index) => (
           <InfoInput
             key={index}
@@ -32,8 +37,8 @@ export default function CardNumberSection({ field }: Props) {
             inputMode="numeric"
           />
         ))}
-      </FormField>
+      </InputContainer>
       <ErrorMessage>{error}</ErrorMessage>
-    </Section>
+    </Field>
   );
 }

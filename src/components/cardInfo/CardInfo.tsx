@@ -1,7 +1,7 @@
 import { Wrapper } from './CardInfo.styles';
-import CardNumberSection from './cardNumber/CardNumberSection';
-import ExpireDateSection from './expireDate/ExpireDateSection';
-import CvcSection from './cvc/CvcSection';
+import CardNumberField from './cardNumber/CardNumberField';
+import ExpireDateField from './expireDate/ExpireDateField';
+import CvcField from './cvc/CvcField';
 import { useCardForm } from '../useCardForm';
 
 interface Props {
@@ -11,9 +11,9 @@ interface Props {
 export default function CardInfo({ cardForm }: Props) {
   return (
     <Wrapper>
-      <CardNumberSection field={cardForm.cardNumber} />
-      <ExpireDateSection field={cardForm.expireDate} />
-      <CvcSection field={cardForm.cvc} />
+      <CardNumberField field={cardForm.cardNumber} />
+      <ExpireDateField field={cardForm.expireDate} />
+      <CvcField field={cardForm.cvc} />
     </Wrapper>
   );
 }

@@ -1,21 +1,27 @@
-import CardInfoHeader from '../cardInfoHeader/CardInfoHeader';
-import FormField from '../formField/FormField';
-import { Section, InfoInput, ErrorMessage } from '../CardInfo.styles';
+import {
+  Field,
+  InfoInput,
+  ErrorMessage,
+  Title,
+  Label,
+  InputContainer,
+} from '../CardInfo.styles';
 import { useCvc } from './useCvc';
 import { useCardForm } from '../../useCardForm';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cvc'];
 }
-
-export default function CvcSection({ field }: Props) {
+//cvc를 입력할 수 있는 컴포넌트
+export default function CvcField({ field }: Props) {
   const { value: cvc, set: setCvc } = field;
   const { error, handleChange } = useCvc();
 
   return (
-    <Section>
-      <CardInfoHeader title="CVC 번호를 입력해 주세요" description="" />
-      <FormField label="CVC">
+    <Field>
+      <Title>CVC 번호를 입력해 주세요</Title>
+      <Label>CVC</Label>
+      <InputContainer>
         <InfoInput
           placeholder="123"
           maxLength={3}
@@ -26,8 +32,8 @@ export default function CvcSection({ field }: Props) {
           }}
           inputMode="numeric"
         />
-      </FormField>
+      </InputContainer>
       <ErrorMessage>{error}</ErrorMessage>
-    </Section>
+    </Field>
   );
 }
