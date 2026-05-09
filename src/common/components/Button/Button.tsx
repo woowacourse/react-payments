@@ -41,6 +41,7 @@ const getButtonStyle = (size: ButtonSize) => {
 
   if (size === "block") {
     return css`
+      display: block;
       width: 100%;
       height: 44px;
       border-radius: 6px;
