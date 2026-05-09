@@ -29,7 +29,7 @@ const CardText = styled.span`
 `;
 
 interface CardPreviewProps {
-  cardBrand: CardBrand;
+  cardBrand: CardBrand | undefined;
   cardNumberSegments: CardNumberSegments;
   expiryMonth: string;
   expiryYear: string;
