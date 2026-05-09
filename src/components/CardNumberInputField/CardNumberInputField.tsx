@@ -2,14 +2,18 @@ import InputField from "@components/common/InputField.tsx";
 import { checkIsOnlyDigits, checkLengthMatches } from "@utils/validator";
 import { useState } from "react";
 import { HELPER_MESSAGE, type InputStatus } from "./constants";
-import { getCardNumberPlaceholder } from "@/utils/card";
+import {
+  detectCardBrand,
+  getCardNumberFormat,
+  getCardNumberPlaceholder,
+  adaptCardNumberUnitsToFormat,
+} from "@/utils/card";
 
 export type CardNumberUnits = string[];
 export type CardNumberFormat = number[];
 
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
-  cardNumberFormat: readonly number[];
   onChange: (input: CardNumberUnits) => void;
 }
 
@@ -24,10 +28,12 @@ const INPUTS_STATUSES: InputsStatuses = [
 
 const CardNumberInputField = ({
   cardNumberUnits,
-  cardNumberFormat,
   onChange,
 }: CardNumberInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
+
+  const cardBrand = detectCardBrand(cardNumberUnits);
+  const cardNumberFormat = getCardNumberFormat(cardBrand);
 
   const updateInputStatus = (index: number, inputStatus: InputStatus) => {
     setStatus((prev) => {
@@ -47,6 +53,25 @@ const CardNumberInputField = ({
 
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
     newCardNumberUnits[index] = input.slice(0, cardNumberFormat[index]);
+
+    const newCardBrand = detectCardBrand(newCardNumberUnits);
+    const newCardNumberFormat = getCardNumberFormat(newCardBrand);
+
+    const isFormatChanged =
+      cardNumberFormat.length !== newCardNumberFormat.length ||
+      cardNumberFormat.some(
+        (length, index) => length !== newCardNumberFormat[index],
+      );
+
+    if (isFormatChanged) {
+      const adaptedCardNumberUnits = adaptCardNumberUnitsToFormat(
+        newCardNumberUnits,
+        newCardNumberFormat,
+      );
+      onChange(adaptedCardNumberUnits);
+      return;
+    }
+
     onChange(newCardNumberUnits);
   };
 

@@ -1,4 +1,7 @@
-import { getFormattedValidityPeriodUnit } from "@utils/card";
+import {
+  getCardNumberFormat,
+  getFormattedValidityPeriodUnit,
+} from "@utils/card";
 import masterCard from "@assets/Mastercard.png";
 import visa from "@assets/Visa.png";
 import diners from "@assets/Diners.png";
@@ -15,20 +18,15 @@ import { type CardCompany } from "@/constants/cardCompanies";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;
-  cardNumberFormat: readonly number[];
   cardCompany: CardCompany | null;
   validityPeriod: ValidityPeriod;
-  brand?: ReturnType<typeof detectCardBrand>;
 }
 
-const Card = ({
-  cardNumberUnits,
-  cardNumberFormat,
-  cardCompany,
-  validityPeriod,
-  brand,
-}: CardProps) => {
-  const CardValidityPeriodUnitString =
+const Card = ({ cardNumberUnits, cardCompany, validityPeriod }: CardProps) => {
+  const cardBrand = detectCardBrand(cardNumberUnits);
+  const cardNumberFormat = getCardNumberFormat(cardBrand);
+
+  const cardValidityPeriodUnitString =
     getFormattedValidityPeriodUnit(validityPeriod);
 
   return (
@@ -36,7 +34,7 @@ const Card = ({
       <ChipWrapper>
         <Chip />
         <SwitchCase
-          value={brand}
+          value={cardBrand}
           caseBy={[
             {
               case: "MasterCard",
@@ -77,7 +75,7 @@ const Card = ({
       </CardNumberWrapper>
       <CardValidityPeriodWrapper>
         <CardValidityPeriodUnit>
-          {CardValidityPeriodUnitString}
+          {cardValidityPeriodUnitString}
         </CardValidityPeriodUnit>
       </CardValidityPeriodWrapper>
     </Wrapper>

@@ -74,7 +74,7 @@ export const padValidityPeriodUnit = (value: string) => {
   return value;
 };
 
-export const splitCardNumberByFormat = (
+export const adaptCardNumberUnitsToFormat = (
   cardNumber: CardNumberUnits,
   format: readonly number[],
 ): CardNumberUnits => {
