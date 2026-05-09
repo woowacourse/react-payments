@@ -1,5 +1,3 @@
-import type { NetworkBrand } from '../context/CardContext.ts';
-
 type ValidationResult = { valid: true } | { valid: false; message: string };
 
 export const Validator = {
@@ -7,51 +5,6 @@ export const Validator = {
     const regex = /^\d*$/;
     if (!regex.test(value)) {
       return { valid: false, message: '숫자만 입력 가능합니다.' };
-    }
-    return { valid: true };
-  },
-
-  isUnionPay(value: string) {
-    return (
-      /^622(1[2-9][6-9]|[2-9]\d{2})/.test(value) ||
-      /^62[4-6]/.test(value) ||
-      /^628[2-8]/.test(value)
-    );
-  },
-
-  detectNetworkBrand(value: string): NetworkBrand {
-    if (/^4/.test(value)) {
-      return 'visa';
-    }
-
-    if (/^5[1-5]/.test(value)) {
-      return 'master';
-    }
-
-    if (/^36/.test(value)) {
-      return 'diners';
-    }
-
-    if (/^3[47]/.test(value)) {
-      return 'amex';
-    }
-
-    if (this.isUnionPay(value)) {
-      return 'unionpay';
-    }
-
-    return '';
-  },
-
-  isValidNetworkBrand(value: string): ValidationResult {
-    if (value !== '' && !['4', '5'].includes(value[0])) {
-      return {
-        valid: false,
-        message: '유효한 카드 번호가 아닙니다. 카드 번호는 4 또는 5로 시작해야합니다.',
-      };
-    }
-    if (value.length === 2 && value[0] === '5' && this.detectNetworkBrand(value) === '') {
-      return { valid: false, message: '마스터카드 번호는 51 ~ 55 사이 숫자로 시작해야 합니다.' };
     }
     return { valid: true };
   },

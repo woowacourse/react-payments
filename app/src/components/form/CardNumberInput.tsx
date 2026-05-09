@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import { Validator } from '../../validators/CardValidator';
+import { BrandValidator } from '../../validators/BrandValidator';
 import { CardFieldset, CardLegend, CardInput } from '../../style/CardStyles';
 import { useCardContext } from '../../hooks/useCardContext';
 import type { cardNumberFieldError } from '../../types/fieldError';
@@ -40,18 +41,16 @@ export function CardNumberInput() {
       return;
     }
 
-    if (id === 'first-digits') {
-      const brandResult = Validator.isValidNetworkBrand(value);
-      if (!brandResult.valid) {
-        setError({ ...fieldErrors, [fieldId]: true, message: brandResult.message });
-        return;
-      }
-      setNetworkBrand(Validator.detectNetworkBrand(value));
-    }
-
-    setError({ ...fieldErrors, [fieldId]: false, message: '' });
     const newCardNumber = [...cardNumber];
     newCardNumber[indexMap[id]] = value;
+    const brandResult = BrandValidator.detectNetworkBrand(newCardNumber.join(''));
+    if (!brandResult.valid) {
+      setError({ ...fieldErrors, [fieldId]: true, message: brandResult.message });
+      return;
+    }
+    setNetworkBrand(brandResult.brand);
+
+    setError({ ...fieldErrors, [fieldId]: false, message: '' });
     setCardNumber(newCardNumber);
   };
 
