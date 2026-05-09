@@ -1,7 +1,7 @@
 import CvcField from './CvcField/CvCField';
 import ExpiryField from './ExpiryField/ExpiryField';
 import BrandSelectField from './BrandSelectField/BrandSelectField';
-import InputContainer from './InputContainer/InputContainer';
+import InputContainer from '../InputContainer/InputContainer';
 import NumberField from './NumberField/NumberField';
 import type {useCardNumbers} from '../../hooks/useCardNumbers';
 import type {useExpiryDate} from '../../hooks/useExpiryDate';

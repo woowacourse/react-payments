@@ -1,7 +1,7 @@
 import type {ReactNode} from 'react';
-import Description from '../../Description/Description';
-import Label from '../../Label/Label';
-import Title from '../../Title/Title';
+import Description from '../Description/Description';
+import Label from '../Label/Label';
+import Title from '../Title/Title';
 import styled from 'styled-components';
 
 const InputContainer = ({
