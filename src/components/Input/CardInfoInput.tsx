@@ -42,16 +42,7 @@ export default function CardInfoInput({
         setValue(tmpValue);
     };
 
-    return (
-        <InputStyle
-            {...inputProps}
-            isError={isError}
-            type="text"
-            value={value}
-            onChange={handleInputChange}
-            inputSize={size}
-        />
-    );
+    return <InputStyle {...inputProps} isError={isError} value={value} onChange={handleInputChange} inputSize={size} />;
 }
 
 const InputStyle = styled.input<CardInfoInputStyleProps>`

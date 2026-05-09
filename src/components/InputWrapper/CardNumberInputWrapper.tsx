@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';

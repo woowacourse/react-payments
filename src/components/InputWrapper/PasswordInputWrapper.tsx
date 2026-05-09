@@ -34,6 +34,7 @@ export default function PasswordInputWrapper({
                 onBlur={handleBlur}
                 onFocus={handleFocus}
                 placeholder=""
+                type="password"
             />
         </CardInputWrapper>
     );
