@@ -37,6 +37,17 @@ export const CardInput = styled.input<ErrorFlag>`
   }
 `;
 
+export const CardSingleFieldContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+`;
+
+export const CardLabel = styled.label`
+  font-size: 12px;
+  color: #0a0d13;
+`;
+
 export const CardFieldset = styled.fieldset`
   border: none;
   display: flex;
@@ -48,4 +59,5 @@ export const CardFieldset = styled.fieldset`
 export const CardLegend = styled.legend`
   font-size: 12px;
   margin: 8px 0;
+  color: #0a0d13;
 `;

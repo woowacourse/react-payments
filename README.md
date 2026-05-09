@@ -44,11 +44,11 @@
 - 컴포넌트
   - [x] CardForm
     - [x] CardSection
-      - [ ] CardSelectionDropdown
+      - [x] CardSelectionDropdown
       - [x] CardNumberInput
       - [x] CardExpiryDateInput
       - [x] CardCVCInput
-      - [ ] CardPasswordInput
+      - [x] CardPasswordInput
   - [x] CardComponent
     - [x] CardNumber
     - [x] NetworkBrand

@@ -70,4 +70,11 @@ export const Validator = {
     }
     return { valid: true };
   },
+
+  isValidPasswordLength(value: string, limit: number): ValidationResult {
+    if (![0, limit].includes(value.length)) {
+      return { valid: false, message: '비밀번호 앞 2자리를 입력해주세요.' };
+    }
+    return { valid: true };
+  },
 };

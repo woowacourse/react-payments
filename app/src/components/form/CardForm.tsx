@@ -4,6 +4,7 @@ import { CardSelectionDropdown } from './CardSelectionDropdown';
 import { CardNumberInput } from './CardNumberInput';
 import { CardExpiryDateInput } from './CardExpiryDateInput';
 import { CardCVCInput } from './CardCVCInput';
+import { CardPasswordInput } from './CardPasswordInput';
 
 export function CardForm() {
   return (
@@ -25,6 +26,9 @@ export function CardForm() {
       </CardSection>
       <CardSection title={'CVC 번호를 입력해 주세요'}>
         <CardCVCInput />
+      </CardSection>
+      <CardSection title={'비밀번호를 입력해 주세요'} subTitle={'앞의 2자리를 입력해주세요'}>
+        <CardPasswordInput />
       </CardSection>
     </CardFormContainer>
   );

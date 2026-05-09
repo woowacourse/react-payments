@@ -3,15 +3,15 @@ import { ErrorMessage } from './ErrorMessage';
 import { CardInput, CardSingleFieldContainer, CardLabel } from '../../style/CardStyles';
 import { Validator } from '../../validators/CardValidator';
 
-export function CardCVCInput() {
-  const [cardCVC, setCardCVC] = useState('');
+export function CardPasswordInput() {
+  const [cardPassword, setCardPassword] = useState('');
 
   const [fieldErrors, setError] = useState({
     state: false,
     message: '',
   });
 
-  const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
     const result = Validator.isNumber(value);
@@ -20,13 +20,13 @@ export function CardCVCInput() {
       return;
     }
     setError({ ...fieldErrors, state: false, message: '' });
-    setCardCVC(value);
+    setCardPassword(value);
   };
 
-  const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlurPassword = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    const result = Validator.isValidCardCVCLength(value, e.target.maxLength);
+    const result = Validator.isValidPasswordLength(value, e.target.maxLength);
     if (!result.valid) {
       setError({ ...fieldErrors, state: true, message: result.message });
       return;
@@ -36,16 +36,16 @@ export function CardCVCInput() {
 
   return (
     <CardSingleFieldContainer>
-      <CardLabel htmlFor="card-cvc-input">CVC</CardLabel>
+      <CardLabel htmlFor="card-password-input">비밀번호 앞 2자리</CardLabel>
       <CardInput
-        type="text"
-        maxLength={3}
+        type="password"
+        maxLength={2}
         inputMode="numeric"
-        placeholder="123"
-        id="card-cvc-input"
-        value={cardCVC}
-        onChange={changeCardCVC}
-        onBlur={handleBlurCVC}
+        placeholder="12"
+        id="card-password-input"
+        value={cardPassword}
+        onChange={changeCardPassword}
+        onBlur={handleBlurPassword}
         $fieldErrors={fieldErrors.state}
       />
       <ErrorMessage message={fieldErrors['message']} />
