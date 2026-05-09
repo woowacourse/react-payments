@@ -14,13 +14,13 @@ type Story = StoryObj<typeof CardBrandField>;
 export const Default: Story = {
   render: () => {
     const [brand, setBrand] = useState('');
-    return <CardBrandField value={brand} onChange={setBrand} />;
+    return <CardBrandField field={{ value: brand, set: setBrand }} />;
   },
 };
 
 export const Selected: Story = {
   render: () => {
     const [brand, setBrand] = useState('신한카드');
-    return <CardBrandField value={brand} onChange={setBrand} />;
+    return <CardBrandField field={{ value: brand, set: setBrand }} />;
   },
 };
