@@ -15,12 +15,14 @@ const CardRegisterCompletePage = () => {
 
   return (
     <Wrapper>
-      <CheckIcon src='/images/complete_check_icon.png' alt='완료' />
-      <Message>
-        {state.cardPrefix}로 시작하는
-        <br />
-        {state.companyName}가 등록되었어요.
-      </Message>
+      <Content>
+        <CheckIcon src='/images/complete_check_icon.png' alt='완료' />
+        <Message>
+          {state.cardPrefix}로 시작하는
+          <br />
+          {state.companyName}가 등록되었어요.
+        </Message>
+      </Content>
       <ConfirmButton onClick={() => navigate('/')}>확인</ConfirmButton>
     </Wrapper>
   );
@@ -29,12 +31,20 @@ const CardRegisterCompletePage = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex: 1;
   width: 100%;
-  min-height: 100%;
   padding: 0 16px;
   gap: 32px;
+  overflow-y: auto;
 `;
 
 const CheckIcon = styled.img`
@@ -52,6 +62,7 @@ const Message = styled.p`
 `;
 
 const ConfirmButton = styled.button`
+  flex-shrink: 0;
   width: 100%;
   padding: 16px;
   background-color: #333333;

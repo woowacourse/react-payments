@@ -20,7 +20,7 @@ const CardRegisterPage = () => {
 
   return (
     <Wrapper>
-      <Container>
+      <Content>
         <CardPreviewSection
           cardNumbers={numberField.cardNumbers}
           brand={numberField.brand}
@@ -37,7 +37,7 @@ const CardRegisterPage = () => {
           showExpiry={showExpiry}
           showCvc={showCvc}
         />
-      </Container>
+      </Content>
       {isFormComplete && <SubmitButton onClick={handleSubmit}>확인</SubmitButton>}
     </Wrapper>
   );
@@ -46,26 +46,21 @@ const CardRegisterPage = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  min-height: 100%;
-  padding-bottom: 64px;
+  height: 100%;
 `;
 
-const Container = styled.div`
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 376px;
+  flex: 1;
+  overflow-y: auto;
 `;
 
 const SubmitButton = styled.button`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
+  flex-shrink: 0;
   width: 100%;
-  max-width: 376px;
-  margin: 0 auto;
   padding: 16px;
   background-color: #000;
   color: #fff;
