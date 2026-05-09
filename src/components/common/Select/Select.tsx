@@ -4,31 +4,32 @@ import { Children, isValidElement, useState, type ReactNode } from "react";
 
 import Option from "./Option";
 import SelectContext, { type SelectContextType } from "./SelectContext";
+import SwitchCase from "../SwitchCase";
 
-interface SelectProps {
-  value: string;
-  onChange: (next: string) => void;
+export interface SelectProps<T> {
+  value: T | null;
+  onChange: (next: T) => void;
   placeholder?: string;
   children: ReactNode;
 }
 
-const Select = ({
+const Select = <T extends string>({
   value,
   onChange,
   placeholder = "",
   children,
-}: SelectProps) => {
+}: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen((prev) => !prev);
   const close = () => setIsOpen(false);
 
   const handleChange = (next: string) => {
-    onChange(next);
+    onChange(next as T);
     close();
   };
 
-  const contextValue: SelectContextType = {
+  const contextValue: SelectContextType<string> = {
     value,
     onChange: handleChange,
     isOpen,
@@ -47,7 +48,16 @@ const Select = ({
           aria-expanded={isOpen}
           onClick={toggle}
         >
-          {selectedLabel ?? <Placeholder>{placeholder}</Placeholder>}
+          <SwitchCase
+            value={!!selectedLabel}
+            caseBy={[
+              {
+                case: true,
+                component: <SelectedOption>{selectedLabel}</SelectedOption>,
+              },
+            ]}
+            defaultCase={<Placeholder>{placeholder}</Placeholder>}
+          />
         </Trigger>
         {isOpen && <OptionList role="listbox">{children}</OptionList>}
       </Wrapper>
@@ -55,7 +65,10 @@ const Select = ({
   );
 };
 
-const findSelectedLabel = (children: ReactNode, value: string) => {
+const findSelectedLabel = (
+  children: ReactNode,
+  value: string | null,
+): ReactNode | null => {
   let label: ReactNode = null;
   Children.forEach(children, (child) => {
     if (
@@ -65,6 +78,7 @@ const findSelectedLabel = (children: ReactNode, value: string) => {
       label = child.props.children;
     }
   });
+
   return label;
 };
 
@@ -88,6 +102,8 @@ const Trigger = styled.button`
     ${COLOR_PALETTE["BLACK-900"]}
   }
 `;
+
+const SelectedOption = styled.span``;
 
 const Placeholder = styled.span`
   color: ${COLOR_PALETTE.GRAY};
