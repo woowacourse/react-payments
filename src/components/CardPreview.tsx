@@ -13,17 +13,6 @@ type CardPreviewProps = {
   cardIssuer?: CardIssuerType | '';
 };
 
-const CARD_ISSUER_LABELS: Record<CardIssuerType, string> = {
-  bcCard: 'BC카드',
-  shCard: '신한카드',
-  kakaoCard: '카카오뱅크',
-  hyundaiCard: '현대카드',
-  wooriCard: '우리카드',
-  lotteCard: '롯데카드',
-  hanaCard: '하나카드',
-  kbCard: '국민카드',
-};
-
 export default function CardPreview({
   cardBrand,
   cardNumbers,
@@ -111,16 +100,6 @@ export default function CardPreview({
           })}
         >
           {cardExpiryDate[0].padStart(2, '0')}/{cardExpiryDate[1]}
-        </span>
-      )}
-      {cardIssuer && (
-        <span
-          css={(theme) => ({
-            ...theme.typography.caption,
-            color: theme.colors.white,
-          })}
-        >
-          {CARD_ISSUER_LABELS[cardIssuer]}
         </span>
       )}
     </div>

@@ -50,7 +50,8 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
             padding: '8px',
           })}
           id="card-cvc"
-        ></input>
+          autoFocus
+        />
         <p
           css={(theme) => ({
             ...theme.typography.caption,

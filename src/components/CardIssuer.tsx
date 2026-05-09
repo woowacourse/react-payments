@@ -51,6 +51,7 @@ export default function CardIssuer({ cardIssuer, handleCardIssuer }: CardIssuerP
         })}
         value={cardIssuer}
         onChange={handleChange}
+        autoFocus
       >
         <option value="" disabled>
           카드사를 선택해주세요

@@ -67,6 +67,7 @@ export default function CardPassword({ cardPassword, setCardPassword }: CardPass
               padding: '8px',
             })}
             id="card-password-label"
+            autoFocus
           />
         </div>
         <p

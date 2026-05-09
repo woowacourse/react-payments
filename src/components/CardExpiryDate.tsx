@@ -5,6 +5,7 @@ import {
 } from '../constants/messages.ts';
 import { isMonthError, isYearError } from '../utils/util.ts';
 import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
+import { useRef } from 'react';
 
 type CardExpiryDateProps = {
   cardExpiry: CardExpiry;
@@ -17,6 +18,17 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
     ...MONTH_ERROR_MESSAGE,
     ...YEAR_ERROR_MESSAGE,
   };
+
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+
+  const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardExpiry.handleCardExpiryDate(index)(e);
+
+    if (e.target.value.length === 2) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
   return (
     <fieldset
       css={{ display: 'flex', flexDirection: 'column', border: 'none', padding: 0, gap: '10px' }}
@@ -61,7 +73,7 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             type="text"
             placeholder="MM"
             value={cardExpiry.cardExpiryDate[0]}
-            onChange={setCardExpiry.handleCardExpiryDate(0)}
+            onChange={handleChange(0)}
             onBlur={setCardExpiry.handleMonthBlur}
             maxLength={2}
             inputMode="numeric"
@@ -78,12 +90,16 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
               padding: '8px',
             })}
             aria-label="카드 유효기간 월 입력창"
-          ></input>
+            autoFocus
+            ref={(element) => {
+              inputRefs.current[0] = element;
+            }}
+          />
           <input
             type="text"
             placeholder="YY"
             value={cardExpiry.cardExpiryDate[1]}
-            onChange={setCardExpiry.handleCardExpiryDate(1)}
+            onChange={handleChange(1)}
             onBlur={setCardExpiry.handleYearBlur}
             maxLength={2}
             inputMode="numeric"
@@ -100,7 +116,10 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
               padding: '8px',
             })}
             aria-label="카드 유효기간 연도 입력창"
-          ></input>
+            ref={(element) => {
+              inputRefs.current[1] = element;
+            }}
+          />
         </div>
         <p
           css={(theme) => ({
