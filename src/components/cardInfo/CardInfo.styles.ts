@@ -53,6 +53,7 @@ export const Label = styled.label`
   font-weight: 500;
   line-height: 15px;
   color: rgba(10, 13, 19, 1);
+  margin-top: 16px;
 `;
 
 export const InputContainer = styled.div`
