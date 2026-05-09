@@ -13,6 +13,8 @@ import type { CardCompanyType } from "../../../../common/types/CardCompany";
 import PasswordField from "./PasswordField/PasswordField";
 import Button from "../../../../common/components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { getCardBrandName } from "../../utils/cardBrand";
+import type { CardBrandType } from "../../../../common/types/CardBrand";
 
 const InfoInputSection = ({
   cardInfo,
@@ -26,20 +28,37 @@ const InfoInputSection = ({
   const navigate = useNavigate();
   const [cvcNumber, setCvcNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [formError, setFormError] = useState({
-    cardNumber: false,
-    expiryDate: false,
-    cvc: false,
-    password: false,
-  }); // 이부분 state말고 파생값으로 바꿔야함
   const [formStep, setFormStep] = useState(1);
 
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
     cardInfo;
   const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardInfoHandlers;
+  const cardBrand = getCardBrandName(cardNumbers);
+  const getBrandLastCardNumberLength = (cardBrand: CardBrandType) => {
+    if (cardBrand === "visa") {
+      return 4;
+    }
+    if (cardBrand === "masterCard") {
+      return 4;
+    }
+    if (cardBrand === "diners") {
+      return 2;
+    }
+    if (cardBrand === "amex") {
+      return 3;
+    }
+    if (cardBrand === "unionPay") {
+      return 4;
+    }
+    return 4;
+  };
 
   const fieldCompleteState = {
-    cardNumber: cardNumbers.every((chunk) => chunk.length === 4),
+    cardNumber:
+      cardNumbers[0].length === 4 &&
+      cardNumbers[1].length === 4 &&
+      cardNumbers[2].length === 4 &&
+      cardNumbers[3].length === getBrandLastCardNumberLength(cardBrand),
     cardCompany: selectedCardCompany,
     expirayDate: expiryMonth.length === 2 && expiryYear.length === 2,
     cvc: cvcNumber.length === 3,
@@ -70,13 +89,6 @@ const InfoInputSection = ({
     setFormStep((previous) => previous + 1);
   }
 
-  const handleFieldErrorChange = (
-    fieldName: "cardNumber" | "expiryDate" | "cvc" | "password",
-    hasError: boolean,
-  ) => {
-    setFormError({ ...formError, [fieldName]: hasError });
-  };
-
   const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate("/register-complete", {
@@ -94,25 +106,13 @@ const InfoInputSection = ({
           title="비밀번호를 입력해 주세요"
           description="앞의 2자리를 입력해주세요"
         >
-          <PasswordField
-            password={password}
-            setPassword={setPassword}
-            onErrorChange={(hasError) =>
-              handleFieldErrorChange("password", hasError)
-            }
-          />
+          <PasswordField password={password} setPassword={setPassword} />
         </InputContainer>
       )}
 
       {formStep >= 4 && (
         <InputContainer title="CVC 번호를 입력해 주세요">
-          <CvcField
-            cvcNumber={cvcNumber}
-            setCvcNumber={setCvcNumber}
-            onErrorChange={(hasError) =>
-              handleFieldErrorChange("cvc", hasError)
-            }
-          />
+          <CvcField cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
         </InputContainer>
       )}
 
@@ -126,9 +126,6 @@ const InfoInputSection = ({
             expiryYear={expiryYear}
             setExpiryMonth={setExpiryMonth}
             setExpiryYear={setExpiryYear}
-            onErrorChange={(hasError) =>
-              handleFieldErrorChange("expiryDate", hasError)
-            }
           />
         </InputContainer>
       )}
@@ -150,9 +147,7 @@ const InfoInputSection = ({
           <NumberField
             cardNumbers={cardNumbers}
             setCardNumbers={setCardNumbers}
-            onErrorChange={(hasError) =>
-              handleFieldErrorChange("cardNumber", hasError)
-            }
+            lastInputMaxLength={getBrandLastCardNumberLength(cardBrand)}
           />
         </InputContainer>
       )}

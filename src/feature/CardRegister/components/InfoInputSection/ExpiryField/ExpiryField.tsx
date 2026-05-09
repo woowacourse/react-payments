@@ -23,22 +23,18 @@ const ExpiryField = ({
   expiryYear,
   setExpiryMonth,
   setExpiryYear,
-  onErrorChange,
 }: {
   expiryMonth: string;
   expiryYear: string;
   setExpiryMonth: (value: string) => void;
   setExpiryYear: (value: string) => void;
-  onErrorChange: (value: boolean) => void;
 }) => {
-  const createFlags = () =>
-    Array.from({ length: EXPIRY_INPUT_COUNT }, () => false);
-
-  const [errorInfo, setErrorInfo] = useState({
-    flag: createFlags(),
-    currentErrorMsg: "",
-  });
-  const [isTouched, setIsTouched] = useState(createFlags());
+  const [errorInfo, setErrorInfo] = useState(
+    Array.from({ length: EXPIRY_INPUT_COUNT }, () => ""),
+  );
+  const [isTouched, setIsTouched] = useState(
+    Array.from({ length: EXPIRY_INPUT_COUNT }, () => false),
+  );
 
   const handleMonthChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -51,14 +47,20 @@ const ExpiryField = ({
     }
 
     if (value.length === EXPIRY_VALUE_LENGTH && !validateMonth(value)) {
-      updateErrorInfo(index, true, ERROR_MESSAGES.expiryMonthRange);
+      const newErrorInfo = errorInfo.map((message, errorIndex) =>
+        errorIndex === index ? ERROR_MESSAGES.expiryMonthRange : message,
+      );
+      setErrorInfo(newErrorInfo);
       return;
     }
 
     setExpiryMonth(value);
 
     if (isTouched[index] && value.length === EXPIRY_VALUE_LENGTH) {
-      updateErrorInfo(index, false);
+      const newErrorInfo = errorInfo.map((message, errorIndex) =>
+        errorIndex === index ? "" : message,
+      );
+      setErrorInfo(newErrorInfo);
     }
   };
 
@@ -75,7 +77,10 @@ const ExpiryField = ({
     setExpiryYear(value);
 
     if (isTouched[index] && value.length === EXPIRY_VALUE_LENGTH) {
-      updateErrorInfo(index, false);
+      const newErrorInfo = errorInfo.map((message, errorIndex) =>
+        errorIndex === index ? "" : message,
+      );
+      setErrorInfo(newErrorInfo);
     }
   };
 
@@ -95,7 +100,14 @@ const ExpiryField = ({
       setExpiryYear(formattedValue);
     }
 
-    updateErrorInfo(index, !validateTwoDigits(formattedValue));
+    const newErrorInfo = errorInfo.map((message, errorIndex) =>
+      errorIndex === index
+        ? validateTwoDigits(formattedValue)
+          ? ""
+          : ERROR_MESSAGES.expiryLength
+        : message,
+    );
+    setErrorInfo(newErrorInfo);
   };
 
   const updateTouched = (index: number) => {
@@ -104,24 +116,7 @@ const ExpiryField = ({
     );
   };
 
-  const updateErrorInfo = (
-    index: number,
-    hasError: boolean,
-    errorMessage: string = ERROR_MESSAGES.expiryLength,
-  ) => {
-    const newFlag = errorInfo.flag.map((flag, i) =>
-      i === index ? hasError : flag,
-    );
-    const firstErrorIdx = newFlag.indexOf(true);
-
-    setErrorInfo({
-      flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? "" : errorMessage,
-    });
-    onErrorChange(firstErrorIdx !== -1);
-  };
-
-  const firstErrorIdx = errorInfo.flag.indexOf(true);
+  const firstErrorIndex = errorInfo.findIndex((message) => message !== "");
 
   return (
     <StyledField>
@@ -133,7 +128,7 @@ const ExpiryField = ({
           maxLength={EXPIRY_VALUE_LENGTH}
           inputMode="numeric"
           placeholder="MM"
-          strokeMode={0 === firstErrorIdx ? "error" : "default"}
+          strokeMode={0 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handleMonthChange(0, e.target.value)}
           onBlur={(e) => handleExpiryBlur(0, e.target.value, "month")}
         />
@@ -143,13 +138,13 @@ const ExpiryField = ({
           maxLength={EXPIRY_VALUE_LENGTH}
           placeholder="YY"
           inputMode="numeric"
-          strokeMode={1 === firstErrorIdx ? "error" : "default"}
+          strokeMode={1 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handleYearChange(1, e.target.value)}
           onBlur={(e) => handleExpiryBlur(1, e.target.value, "year")}
         />
       </InputWrapper>
 
-      <ErrorMessage>{errorInfo.currentErrorMsg}</ErrorMessage>
+      <ErrorMessage>{errorInfo[firstErrorIndex]}</ErrorMessage>
     </StyledField>
   );
 };

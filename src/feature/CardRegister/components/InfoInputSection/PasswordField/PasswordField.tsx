@@ -16,20 +16,16 @@ import Input from "../../../../../common/components/Input/Input";
 const PasswordField = ({
   password,
   setPassword,
-  onErrorChange,
 }: {
   password: string;
   setPassword: (value: string) => void;
-  onErrorChange: (value: boolean) => void;
 }) => {
-  const createFlags = () =>
-    Array.from({ length: PASSWORD_INPUT_COUNT }, () => false);
-
-  const [errorInfo, setErrorInfo] = useState({
-    flag: createFlags(),
-    currentErrorMsg: "",
-  });
-  const [isTouched, setIsTouched] = useState(createFlags());
+  const [errorInfo, setErrorInfo] = useState(
+    Array.from({ length: PASSWORD_INPUT_COUNT }, () => ""),
+  );
+  const [isTouched, setIsTouched] = useState(
+    Array.from({ length: PASSWORD_INPUT_COUNT }, () => false),
+  );
 
   const handlePasswordChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -44,7 +40,10 @@ const PasswordField = ({
     setPassword(value);
 
     if (isTouched[index] && validatePasswordLength(value)) {
-      updateErrorInfo(index, false);
+      const newErrorInfo = errorInfo.map((message, errorIndex) =>
+        errorIndex === index ? "" : message,
+      );
+      setErrorInfo(newErrorInfo);
     }
   };
 
@@ -52,7 +51,14 @@ const PasswordField = ({
     const value = eValue.trim();
 
     updateTouched(index);
-    updateErrorInfo(index, !validatePasswordLength(value));
+    const newErrorInfo = errorInfo.map((message, errorIndex) =>
+      errorIndex === index
+        ? validatePasswordLength(value)
+          ? ""
+          : ERROR_MESSAGES.password
+        : message,
+    );
+    setErrorInfo(newErrorInfo);
   };
 
   const updateTouched = (index: number) => {
@@ -61,20 +67,7 @@ const PasswordField = ({
     );
   };
 
-  const updateErrorInfo = (index: number, hasError: boolean) => {
-    const newFlag = errorInfo.flag.map((flag, i) =>
-      i === index ? hasError : flag,
-    );
-    const firstErrorIdx = newFlag.indexOf(true);
-
-    setErrorInfo({
-      flag: newFlag,
-      currentErrorMsg: firstErrorIdx === -1 ? "" : ERROR_MESSAGES.password,
-    });
-    onErrorChange(firstErrorIdx !== -1);
-  };
-
-  const firstErrorIdx = errorInfo.flag.indexOf(true);
+  const firstErrorIndex = errorInfo.findIndex((message) => message !== "");
 
   return (
     <StyledField>
@@ -87,12 +80,12 @@ const PasswordField = ({
           maxLength={PASSWORD_LENGTH}
           inputMode="numeric"
           placeholder="**"
-          strokeMode={0 === firstErrorIdx ? "error" : "default"}
+          strokeMode={0 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handlePasswordChange(0, e.target.value)}
           onBlur={(e) => handlePasswordBlur(0, e.target.value)}
         />
       </InputWrapper>
-      <ErrorMessage>{errorInfo.currentErrorMsg}</ErrorMessage>
+      <ErrorMessage>{errorInfo[firstErrorIndex]}</ErrorMessage>
     </StyledField>
   );
 };

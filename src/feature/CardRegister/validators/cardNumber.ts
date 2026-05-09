@@ -5,3 +5,13 @@ export const validateExceedCardNumberChunkLength = (value: string) =>
 
 export const validateCardNumberChunkLength = (value: string) =>
   value.length === CARD_NUMBER_CHUNK_LENGTH;
+
+export const validateExceedLastCardNumberChunkLength = (
+  value: string,
+  length: number,
+) => value.length > length;
+
+export const validateLastCardNumberChunkLength = (
+  value: string,
+  length: number,
+) => value.length === length;
