@@ -1,5 +1,8 @@
 import MasterCard from "../../../assets/Mastercard.png";
 import Visa from "../../../assets/Visa.png";
+import AMEX from "../../../assets/AMEX.png";
+import Diners from "../../../assets/Diners.png";
+import UnionPay from "../../../assets/UnionPay.png";
 import type { CardBrand } from "../../../utils/Validation";
 import { EmptyImg, StyledImg } from "./CardBrandImage.styles";
 
@@ -7,13 +10,19 @@ interface Props {
     brand: CardBrand,
 }
 
-const CardBrandImage = ({ brand }: Props) => {
-    if (brand === 'Visa') {
-    return <StyledImg src={Visa} alt="Visa 로고 이미지" />;
-  }
+const BRAND_LOGOS: Record<string, string> = {
+  Visa,
+  MasterCard,
+  AMEX,
+  Diners,
+  UnionPay,
+};
 
-  if (brand === 'MasterCard') {
-    return <StyledImg src={MasterCard} alt="MasterCard 로고 이미지" />;
+const CardBrandImage = ({ brand }: Props) => {
+  const logo = BRAND_LOGOS[brand];
+
+  if (logo) {
+    return <StyledImg src={logo} alt={`${brand} 로고 이미지`} />;
   }
 
   return <EmptyImg />;
