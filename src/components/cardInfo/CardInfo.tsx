@@ -1,19 +1,15 @@
 import { Wrapper } from './CardInfo.styles';
 import CardNumberField from './cardNumber/CardNumberField';
-import ExpireDateField from './expireDate/ExpireDateField';
-import CvcField from './cvc/CvcField';
 import { useCardForm } from '../useCardForm';
 
 interface Props {
   cardForm: ReturnType<typeof useCardForm>;
 }
-
+//카드 정보를 담고있는 컴포넌트
 export default function CardInfo({ cardForm }: Props) {
   return (
     <Wrapper>
       <CardNumberField field={cardForm.cardNumber} />
-      <ExpireDateField field={cardForm.expireDate} />
-      <CvcField field={cardForm.cvc} />
     </Wrapper>
   );
 }
