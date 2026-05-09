@@ -1,38 +1,31 @@
 import { useState } from 'react';
 
 interface UseFieldProps {
-  state: string;
   validateFormat: (value: string) => string | undefined;
   validateComplete: (value: string) => string | undefined;
-  onChange: (value: string) => void;
 }
 
-type Error = string | undefined;
-
 interface UseFieldResult {
-  error: Error;
+  value: string;
+  error: string | undefined;
   handleChange: (value: string) => void;
   handleBlur: () => void;
 }
 
-export const useField = ({
-  state,
-  validateFormat,
-  validateComplete,
-  onChange,
-}: UseFieldProps): UseFieldResult => {
-  const [error, setError] = useState<Error>();
+export const useField = ({ validateFormat, validateComplete }: UseFieldProps): UseFieldResult => {
+  const [value, setValue] = useState('');
+  const [error, setError] = useState<string | undefined>();
 
-  const handleChange = (value: string) => {
-    const errorMessage = validateFormat(value);
+  const handleChange = (nextValue: string) => {
+    const errorMessage = validateFormat(nextValue);
     setError(errorMessage);
     if (errorMessage) return;
-    onChange(value);
+    setValue(nextValue);
   };
 
   const handleBlur = () => {
-    setError(validateComplete(state));
+    setError(validateComplete(value));
   };
 
-  return { error, handleChange, handleBlur };
+  return { value, error, handleChange, handleBlur };
 };

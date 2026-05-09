@@ -3,27 +3,20 @@ import { Input } from '@/core/components/input/Input';
 import { useField } from '@/core/hooks/useField';
 import { validateCvc, validateCvcFormat, CVC_LENGTH } from '@/entities/card/cvc';
 
-interface CvcFormGroupProps {
-  cvc: string;
-  handleChangeCvc: (value: string) => void;
-}
-
-export const CvcFormGroup = ({ cvc, handleChangeCvc: onChangeCvc }: CvcFormGroupProps) => {
+export const CvcFormGroup = () => {
   const useCvc = useField({
-    state: cvc,
     validateFormat: validateCvcFormat,
     validateComplete: validateCvc,
-    onChange: onChangeCvc,
   });
 
-  const { error, handleChange, handleBlur } = useCvc;
+  const { value, error, handleChange, handleBlur } = useCvc;
 
   return (
     <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={error}>
       <Input
         type="text"
         inputMode="numeric"
-        value={cvc}
+        value={value}
         maxLength={CVC_LENGTH}
         placeholder="123"
         isError={error !== undefined}
