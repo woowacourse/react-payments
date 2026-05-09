@@ -5,11 +5,20 @@ export type ExpireDate = {
   month: string;
   year: string;
 };
-type CvcNumber = string[];
 
-export type SetCardNumber = Dispatch<SetStateAction<string[]>>;
+export type SetCardNumber = Dispatch<SetStateAction<CardNumber>>;
 export type SetExpireDate = Dispatch<SetStateAction<ExpireDate>>;
-type SetCvcNumber = Dispatch<SetStateAction<string[]>>;
+export type SetCvcNumber = Dispatch<SetStateAction<string>>;
+
+export interface CardNumberState {
+  cardNumber: CardNumber;
+  setCardNumber: SetCardNumber;
+}
+
+export interface ExpireDateState {
+  expireDate: ExpireDate;
+  setExpireDate: SetExpireDate;
+}
 
 export interface CardPreviewProps {
   cardNumber: CardNumber;
@@ -21,6 +30,6 @@ export interface CardFormType {
   setCardNumber: SetCardNumber;
   expireDate: ExpireDate;
   setExpireDate: SetExpireDate;
-  cvcNumber: CvcNumber;
-  setCvcNumber: SetCvcNumber;
+  // cvcNumber: CvcNumber;
+  // setCvcNumber: SetCvcNumber;
 }
