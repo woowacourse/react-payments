@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PaymentWidget from "./components/PaymentWidget";
-import styled from "@emotion/styled";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PaymentWidget from './components/PaymentWidget';
+import styled from '@emotion/styled';
 
 function App() {
   return (

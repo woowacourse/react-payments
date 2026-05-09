@@ -114,3 +114,7 @@ export const isExpireDateComplete = (expireDate : string[]) : boolean =>{
 export const isCvcComplete = (cvc : string) : boolean =>{
   return cvc.length === 3 && validateNumber(cvc).state
 }
+
+export const isCardPasswordComplete = (password : string) : boolean =>{
+  return password.length === 2 && validateNumber(password).state
+}

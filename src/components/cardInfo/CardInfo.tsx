@@ -1,9 +1,10 @@
-import { Wrapper } from './CardInfo.styles';
+import { ConfirmButton, Wrapper } from './CardInfo.styles';
 import CardNumberField from './cardNumber/CardNumberField';
 import { useCardForm } from '../useCardForm';
 import {
   isCardBrandComplete,
   isCardNumberComplete,
+  isCardPasswordComplete,
   isCvcComplete,
   isExpireDateComplete,
 } from './validator';
@@ -23,6 +24,8 @@ export default function CardInfo({ cardForm }: Props) {
   if (step === 1 && isCardBrandComplete(cardForm.cardBrand.value)) setStep(2);
   if (step === 2 && isExpireDateComplete(cardForm.expireDate.value)) setStep(3);
   if (step === 3 && isCvcComplete(cardForm.cvc.value)) setStep(4);
+  if (step === 4 && isCardPasswordComplete(cardForm.cardPassword.value))
+    setStep(5);
 
   return (
     <Wrapper>
@@ -31,6 +34,7 @@ export default function CardInfo({ cardForm }: Props) {
       {step >= 2 && <ExpireDateField field={cardForm.expireDate} />}
       {step >= 1 && <CardBrandField field={cardForm.cardBrand} />}
       <CardNumberField field={cardForm.cardNumber} />
+      {step >= 5 && <ConfirmButton>확인</ConfirmButton>}
     </Wrapper>
   );
 }

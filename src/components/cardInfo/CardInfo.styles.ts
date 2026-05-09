@@ -6,6 +6,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   margin: 45px 30px 20px 30px;
   gap: 8px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 4px;
+  position: relative;
 `;
 
 export const Field = styled.section`
@@ -62,4 +67,17 @@ export const InputContainer = styled.div`
   align-items: center;
   gap: 8px;
   width: 100%;
+`;
+
+export const ConfirmButton = styled.button`
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  height: 52px;
+  background-color: #333333;
+  color: #F3F3F3;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
 `;
