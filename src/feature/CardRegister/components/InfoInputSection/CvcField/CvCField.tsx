@@ -2,13 +2,13 @@ import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 type Props = {
   cvcNumber: string;
-  firstErrorIdx: number;
-  errorMsg: string;
+  firstErrIdx: number;
+  errMsg: string;
   handleChange: (value: string) => void;
   handleBlur: (value: string) => void;
 };
 
-const CvcField = ({cvcNumber, firstErrorIdx, errorMsg, handleChange, handleBlur}: Props) => {
+const CvcField = ({cvcNumber, firstErrIdx, errMsg, handleChange, handleBlur}: Props) => {
   return (
     <StyledField>
       <InputWrapper>
@@ -17,12 +17,12 @@ const CvcField = ({cvcNumber, firstErrorIdx, errorMsg, handleChange, handleBlur}
           maxLength={3}
           inputMode='numeric'
           placeholder='123'
-          strokeMode={firstErrorIdx === 0 ? 'error' : 'default'}
+          strokeMode={firstErrIdx === 0 ? 'error' : 'default'}
           onChange={(e) => handleChange(e.target.value)}
           onBlur={(e) => handleBlur(e.target.value)}
         />
       </InputWrapper>
-      <ErrorMessage>{errorMsg}</ErrorMessage>
+      <ErrMessage>{errMsg}</ErrMessage>
     </StyledField>
   );
 };
@@ -47,7 +47,7 @@ const CvcInput = styled(Input)`
   height: 32px;
 `;
 
-const ErrorMessage = styled.span`
+const ErrMessage = styled.span`
   min-height: 20px;
   font-size: 9.5px;
   font-weight: 400;

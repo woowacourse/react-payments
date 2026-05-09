@@ -11,8 +11,8 @@ const meta = {
   args: {
     cardNumbers: ['', '', '', ''],
     format: [4, 4, 4, 4],
-    firstErrorIdx: -1,
-    errorMsg: '',
+    firstErrIdx: -1,
+    errMsg: '',
     onChange: fn(),
     onBlur: fn(),
   },
@@ -35,11 +35,11 @@ export const Filled: Story = {
   },
 };
 
-export const WithError: Story = {
+export const WithErr: Story = {
   args: {
     cardNumbers: ['1234', '56', '', ''],
-    firstErrorIdx: 1,
-    errorMsg: '카드 번호 4자리를 입력해 주세요',
+    firstErrIdx: 1,
+    errMsg: '카드 번호 4자리를 입력해 주세요',
   },
 };
 

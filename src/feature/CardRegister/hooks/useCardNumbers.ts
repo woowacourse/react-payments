@@ -1,14 +1,13 @@
 import {useState} from 'react';
-import {DEFAULT_CARD_NUMBER_FORMAT, getBrandName, getFormatByBrand, getCardNumberErrorMsg} from '../domain/cardBrand';
-import {createFlags, computeNextErrorInfo, computeNextTouched} from './fieldErrorUtils';
+import {DEFAULT_CARD_NUMBER_FORMAT, getBrandName, getFormatByBrand, getCardNumberErrMsg} from '../domain/cardBrand';
+import {createFlags, computeNextErrInfo, computeNextTouched} from './fieldErrorUtils';
 import {resizeArray} from '../../../common/utils/array';
 
 export function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [errorInfo, setErrorInfo] = useState({
-    errorFlags: createFlags(DEFAULT_CARD_NUMBER_FORMAT.length),
-    errorMessages: Array(DEFAULT_CARD_NUMBER_FORMAT.length).fill(''),
-    currentErrorMsg: '',
+  const [errInfo, setErrInfo] = useState({
+    errFlags: createFlags(DEFAULT_CARD_NUMBER_FORMAT.length),
+    errMessages: Array(DEFAULT_CARD_NUMBER_FORMAT.length).fill('') as string[],
   });
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(DEFAULT_CARD_NUMBER_FORMAT.length));
 
@@ -18,17 +17,17 @@ export function useCardNumbers() {
   const isComplete =
     cardNumbers.length === format.length && cardNumbers.every((chunk, i) => chunk.length === format[i]);
 
-  const firstErrorIdx = errorInfo.errorFlags.indexOf(true);
-  const hasAnyError = firstErrorIdx !== -1;
+  const firstErrIdx = errInfo.errFlags.indexOf(true);
+  const hasAnyErr = firstErrIdx !== -1;
+  const errMsg = hasAnyErr ? errInfo.errMessages[firstErrIdx] : '';
 
   const applyResize = (nextChunks: string[], detectedFormat: number[]) => {
     const fieldCount = detectedFormat.length;
     const clippedChunks = Array.from({length: fieldCount}, (_, i) => (nextChunks[i] ?? '').slice(0, detectedFormat[i]));
     setCardNumbers(clippedChunks);
-    setErrorInfo((prev) => ({
-      errorFlags: resizeArray(prev.errorFlags, fieldCount, false),
-      errorMessages: resizeArray(prev.errorMessages, fieldCount, ''),
-      currentErrorMsg: prev.currentErrorMsg,
+    setErrInfo((prev) => ({
+      errFlags: resizeArray(prev.errFlags, fieldCount, false),
+      errMessages: resizeArray(prev.errMessages, fieldCount, ''),
     }));
     setIsTouched((prev) => resizeArray(prev, fieldCount, false));
   };
@@ -50,14 +49,13 @@ export function useCardNumbers() {
     }
 
     if (isTouched[index] && value.length === detectedFormat[index]) {
-      const nextErrorInfo = computeNextErrorInfo(
-        errorInfo.errorFlags,
-        errorInfo.errorMessages,
+      setErrInfo(computeNextErrInfo(
+        errInfo.errFlags,
+        errInfo.errMessages,
         index,
         false,
-        getCardNumberErrorMsg(detectedFormat[index])
-      );
-      setErrorInfo(nextErrorInfo);
+        getCardNumberErrMsg(detectedFormat[index])
+      ));
     }
   };
 
@@ -66,14 +64,13 @@ export function useCardNumbers() {
 
     const requiredLength = format[index];
     const isValid = rawValue.length === requiredLength;
-    const nextErrorInfo = computeNextErrorInfo(
-      errorInfo.errorFlags,
-      errorInfo.errorMessages,
+    setErrInfo(computeNextErrInfo(
+      errInfo.errFlags,
+      errInfo.errMessages,
       index,
       !isValid,
-      getCardNumberErrorMsg(requiredLength)
-    );
-    setErrorInfo(nextErrorInfo);
+      getCardNumberErrMsg(requiredLength)
+    ));
   };
 
   return {
@@ -81,9 +78,9 @@ export function useCardNumbers() {
     format,
     brand,
     isComplete,
-    hasAnyError,
-    firstErrorIdx,
-    errorMsg: errorInfo.currentErrorMsg,
+    hasAnyErr,
+    firstErrIdx,
+    errMsg,
     handleChange,
     handleBlur,
   };

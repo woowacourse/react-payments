@@ -3,16 +3,14 @@ export const createFlags = (count: number): boolean[] => Array.from({length: cou
 export const computeNextTouched = (prev: boolean[], index: number) =>
   prev.map((touched, i) => (i === index ? true : touched));
 
-export const computeNextErrorInfo = (
-  prevErrorFlags: boolean[],
-  prevErrorMessages: string[],
+export const computeNextErrInfo = (
+  prevErrFlags: boolean[],
+  prevErrMessages: string[],
   index: number,
-  hasError: boolean,
-  errorMsg: string,
+  hasErr: boolean,
+  errMsg: string,
 ) => {
-  const errorFlags = prevErrorFlags.map((prevHasError, i) => (i === index ? hasError : prevHasError));
-  const errorMessages = prevErrorMessages.map((prevErrorMsg, i) => (i === index ? (hasError ? errorMsg : '') : prevErrorMsg));
-  const firstErrorIndex = errorFlags.indexOf(true);
-  const hasAnyError = firstErrorIndex !== -1;
-  return {errorFlags, errorMessages, currentErrorMsg: hasAnyError ? errorMessages[firstErrorIndex] : '', hasAnyError};
+  const errFlags = prevErrFlags.map((prevHasErr, i) => (i === index ? hasErr : prevHasErr));
+  const errMessages = prevErrMessages.map((prevErrMsg, i) => (i === index ? (hasErr ? errMsg : '') : prevErrMsg));
+  return {errFlags, errMessages};
 };

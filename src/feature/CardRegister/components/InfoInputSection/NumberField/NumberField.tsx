@@ -5,8 +5,8 @@ import styled from 'styled-components';
 type Props = {
   cardNumbers: string[];
   format: number[];
-  firstErrorIdx: number;
-  errorMsg: string;
+  firstErrIdx: number;
+  errMsg: string;
   onChange: (index: number, value: string) => void;
   onBlur: (index: number, value: string) => void;
 };
@@ -14,7 +14,7 @@ type Props = {
 const generatePlaceholder = (length: number) =>
   Array.from({length}, (_, i) => (i + 1) % 10).join('');
 
-const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, onBlur}: Props) => {
+const NumberField = ({cardNumbers, format, firstErrIdx, errMsg, onChange, onBlur}: Props) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleChange = (index: number, value: string) => {
@@ -43,7 +43,7 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
             placeholder={generatePlaceholder(maxDigits)}
             inputMode='numeric'
             maxLength={maxDigits}
-            strokeMode={index === firstErrorIdx ? 'error' : 'default'}
+            strokeMode={index === firstErrIdx ? 'error' : 'default'}
             onChange={(e) => handleChange(index, e.target.value)}
             onBlur={(e) => onBlur(index, e.target.value)}
             onKeyDown={(e) => handleKeyDown(index, e)}
@@ -51,7 +51,7 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
         ))}
       </InputWrapper>
 
-      <ErrorMessage>{errorMsg}</ErrorMessage>
+      <ErrMessage>{errMsg}</ErrMessage>
     </StyledField>
   );
 };
@@ -76,7 +76,7 @@ const CardNumberInput = styled(Input)`
   height: 32px;
 `;
 
-const ErrorMessage = styled.span`
+const ErrMessage = styled.span`
   min-height: 20px;
   font-size: 9.5px;
   font-weight: 400;

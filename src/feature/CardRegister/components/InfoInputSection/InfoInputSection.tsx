@@ -63,8 +63,8 @@ const InfoInputSection = ({
         <NumberField
           cardNumbers={numberField.cardNumbers}
           format={numberField.format}
-          firstErrorIdx={numberField.firstErrorIdx}
-          errorMsg={numberField.errorMsg}
+          firstErrIdx={numberField.firstErrIdx}
+          errMsg={numberField.errMsg}
           onChange={numberField.handleChange}
           onBlur={numberField.handleBlur}
         />

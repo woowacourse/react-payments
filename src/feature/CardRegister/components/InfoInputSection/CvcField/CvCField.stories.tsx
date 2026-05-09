@@ -7,9 +7,9 @@ import {useCvcNumber} from '../../../hooks/useCvcNumber';
 const mockCvcField = (cvcNumber = '') => ({
   cvcNumber,
   isComplete: cvcNumber.length === 3,
-  hasAnyError: false,
-  firstErrorIdx: -1,
-  errorMsg: '',
+  hasAnyErr: false,
+  firstErrIdx: -1,
+  errMsg: '',
   handleChange: fn(),
   handleBlur: fn(),
 });

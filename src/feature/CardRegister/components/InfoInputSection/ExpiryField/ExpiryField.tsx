@@ -4,14 +4,14 @@ import styled from 'styled-components';
 type Props = {
   expiryMonth: string;
   expiryYear: string;
-  firstErrorIdx: number;
-  errorMsg: string;
+  firstErrIdx: number;
+  errMsg: string;
   handleMonthChange: (value: string) => void;
   handleYearChange: (value: string) => void;
   handleBlur: (index: number, value: string, type: 'month' | 'year') => void;
 };
 
-const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMonthChange, handleYearChange, handleBlur}: Props) => {
+const ExpiryField = ({expiryMonth, expiryYear, firstErrIdx, errMsg, handleMonthChange, handleYearChange, handleBlur}: Props) => {
   const monthRef = useRef<HTMLInputElement | null>(null);
   const yearRef = useRef<HTMLInputElement | null>(null);
 
@@ -37,7 +37,7 @@ const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMo
           maxLength={2}
           inputMode='numeric'
           placeholder='MM'
-          strokeMode={firstErrorIdx === 0 ? 'error' : 'default'}
+          strokeMode={firstErrIdx === 0 ? 'error' : 'default'}
           onChange={(e) => onMonthChange(e.target.value)}
           onBlur={(e) => handleBlur(0, e.target.value, 'month')}
         />
@@ -47,14 +47,14 @@ const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMo
           maxLength={2}
           placeholder='YY'
           inputMode='numeric'
-          strokeMode={firstErrorIdx === 1 ? 'error' : 'default'}
+          strokeMode={firstErrIdx === 1 ? 'error' : 'default'}
           onChange={(e) => handleYearChange(e.target.value)}
           onBlur={(e) => handleBlur(1, e.target.value, 'year')}
           onKeyDown={onYearKeyDown}
         />
       </InputWrapper>
 
-      <ErrorMessage>{errorMsg}</ErrorMessage>
+      <ErrMessage>{errMsg}</ErrMessage>
     </StyledField>
   );
 };
@@ -79,7 +79,7 @@ const ExpiryInput = styled(Input)`
   height: 32px;
 `;
 
-const ErrorMessage = styled.span`
+const ErrMessage = styled.span`
   min-height: 20px;
   font-size: 9.5px;
   font-weight: 400;
