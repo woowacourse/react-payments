@@ -5,12 +5,13 @@ type ButtonSize = "full" | "block";
 
 type ButtonProps = Pick<
   ComponentPropsWithoutRef<"button">,
-  "disabled" | "type" | "children" | "onClick"
+  "className" | "disabled" | "type" | "children" | "onClick"
 > & {
   size: ButtonSize;
 };
 
 const Button = ({
+  className,
   type = "button",
   disabled,
   size,
@@ -18,7 +19,13 @@ const Button = ({
   onClick,
 }: ButtonProps) => {
   return (
-    <ButtonRoot type={type} disabled={disabled} $size={size} onClick={onClick}>
+    <ButtonRoot
+      className={className}
+      type={type}
+      disabled={disabled}
+      $size={size}
+      onClick={onClick}
+    >
       {children}
     </ButtonRoot>
   );

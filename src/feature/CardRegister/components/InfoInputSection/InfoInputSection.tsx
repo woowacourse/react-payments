@@ -152,9 +152,9 @@ const InfoInputSection = ({
         </InputContainer>
       )}
       {isFormComplete && (
-        <Button size="full" type="submit">
+        <ConfirmButton size="full" type="submit">
           확인
-        </Button>
+        </ConfirmButton>
       )}
     </Form>
   );
@@ -165,6 +165,16 @@ const Form = styled.form`
   flex-direction: column;
   gap: 12px;
   padding: 30px;
+
+  width: 100%;
+`;
+
+const ConfirmButton = styled(Button)`
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
 
   width: 100%;
 `;
