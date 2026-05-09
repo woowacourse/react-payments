@@ -19,8 +19,10 @@ const InputContainer = ({
     <Container>
       <Title>{title}</Title>
       {description && <Description value={description} />}
-      {label && <Label value={label} />}
-      {children}
+      <InputGroup>
+        {label && <Label value={label} />}
+        {children}
+      </InputGroup>
     </Container>
   );
 };
@@ -28,9 +30,16 @@ const InputContainer = ({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
-
   width: 100%;
+  gap: 2px;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  gap: 2px;
 `;
 
 export default InputContainer;
