@@ -1,7 +1,18 @@
 import { css } from "@emotion/react";
 import type { CardInfo } from "../../types";
-import masterLogo from "./masterLogo.png";
-import visaLogo from "./visaLogo.png";
+import masterLogo from "../../assets/masterLogo.png";
+import visaLogo from "../../assets/visaLogo.png";
+import amexLogo from "../../assets/American Express.png";
+import dinersLogo from "../../assets/Diners Club.png";
+import unionpayLogo from "../../assets/China UnionPay.png";
+
+const NETWORK_LOGO: Record<string, { src: string; alt: string }> = {
+  visa: { src: visaLogo, alt: "Visa" },
+  master: { src: masterLogo, alt: "Mastercard" },
+  amex: { src: amexLogo, alt: "American Express" },
+  diners: { src: dinersLogo, alt: "Diners Club" },
+  unionpay: { src: unionpayLogo, alt: "UnionPay" },
+};
 
 type CardProps = {
   cardInfo: CardInfo;
@@ -12,11 +23,11 @@ const Card = ({ cardInfo }: CardProps) => {
     <div css={cardStyle}>
       <div css={cardHeaderStyle}>
         <div css={chipStyle}></div>
-        {cardInfo.brand && (
+        {NETWORK_LOGO[cardInfo.network] && (
           <img
             css={brandLogoStyle}
-            src={cardInfo.brand === "master" ? masterLogo : visaLogo}
-            alt={cardInfo.brand === "master" ? "Mastercard" : "Visa"}
+            src={NETWORK_LOGO[cardInfo.network].src}
+            alt={NETWORK_LOGO[cardInfo.network].alt}
           />
         )}
       </div>
