@@ -55,7 +55,7 @@
     - [x] ExpiryDate
 - 페이지
   - [x] Card
-  - [ ] CompleteRegistration
+  - [x] CompleteRegistration
 - 검증
   - [x] 카드번호 입력값 검증
     - [x] Visa: 4로 시작하는 16자리 숫자
@@ -71,14 +71,14 @@
 - 동적 입력 UI 구현
   - [x] 사용자의 입력이 완료되면 다음 필드로 자동으로 이동
 - [x] 모든 input 입력완료시 확인버튼 show
-  - [ ] 확인 버튼 입력시 완료 페이지로 라우팅
+  - [x] 확인 버튼 입력시 완료 페이지로 라우팅
 - 실시간 프리뷰
   - [x] 카드사에 맞는 카드 배경색 변경
 
 ## 프로그래밍 요구사항
 
 - Routing
-  - [ ] react-router 사용
+  - [x] react-router 사용
 - Custom Hooks
   - [ ] 사용하여 Form 관리 로직을 UI와 분리하기 (구현 완료 후)
     - [ ] 입력값, 에러 상태, onChange, onBlur 패턴 공통 커스텀훅으로 추출 (검증 메서드 주입)

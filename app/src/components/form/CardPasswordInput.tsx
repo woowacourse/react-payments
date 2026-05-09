@@ -44,6 +44,7 @@ export function CardPasswordInput({
       <CardLabel htmlFor="card-password-input">비밀번호 앞 2자리</CardLabel>
       <CardInput
         type="password"
+        autoComplete="off"
         maxLength={2}
         inputMode="numeric"
         placeholder="12"
