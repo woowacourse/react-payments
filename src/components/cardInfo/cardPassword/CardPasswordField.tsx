@@ -1,5 +1,6 @@
 import {
   Description,
+  ErrorMessage,
   Field,
   InfoInput,
   InputContainer,
@@ -7,6 +8,7 @@ import {
   Title,
 } from '../CardInfo.styles';
 import type { useCardForm } from '../../useCardForm';
+import { useCardPasswordValidation } from './useCardPasswordValidation';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardPassword'];
@@ -15,6 +17,8 @@ interface Props {
 // 카드 비밀번호 앞 2자리를 입력할 수 있는 컴포넌트
 export default function CardPasswordField({ field }: Props) {
   const { value: password, set: setPassword } = field;
+  const { error, handleChange } = useCardPasswordValidation();
+
   return (
     <Field>
       <Title>비밀번호를 입력해 주세요</Title>
@@ -26,10 +30,14 @@ export default function CardPasswordField({ field }: Props) {
           type="password"
           maxLength={2}
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            const updated = handleChange(e);
+            if (updated !== null) setPassword(updated);
+          }}
           inputMode="numeric"
         />
       </InputContainer>
+      <ErrorMessage>{error}</ErrorMessage>
     </Field>
   );
 }

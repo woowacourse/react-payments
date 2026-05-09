@@ -83,3 +83,14 @@ export const validateCvcLength = (cvc: string) => {
 
   return errorValue;
 }
+
+export const validateCardPasswordLength = (cardPassword: string) => {
+  const errorValue = { state: true, message: "" };
+
+  if (cardPassword.length > 0 && cardPassword.length < 2) {
+    errorValue.state = false;
+    errorValue.message = "비밀번호 앞 2자리를 입력해 주세요.";
+  }
+
+  return errorValue;
+}
