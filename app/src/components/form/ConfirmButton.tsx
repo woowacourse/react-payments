@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export function ConfirmButton({ isFormComplete }: { isFormComplete: boolean }) {
   return (
-    <Button type="submit" $isFormComplete={isFormComplete}>
+    <Button type="submit" $isFormComplete={isFormComplete} disabled={!isFormComplete}>
       확인
     </Button>
   );
