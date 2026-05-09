@@ -1,5 +1,4 @@
 import {
-  useEffect,
   useState,
   type ChangeEvent,
   type ComponentProps,
@@ -26,7 +25,6 @@ const Input = styled.input<{ $hasError: boolean }>`
 
 interface ValidationInputProps extends ComponentProps<"input"> {
   validations: Validation[];
-  onChangeError?: (error: Error | null) => void;
   isShowError?: boolean;
 }
 
@@ -34,14 +32,9 @@ export default function ValidationInput({
   validations,
   onChange,
   onBlur,
-  onChangeError,
   ...props
 }: ValidationInputProps) {
   const [inputError, setInputError] = useState<null | Error>(null);
-
-  useEffect(() => {
-    onChangeError?.(inputError);
-  }, [inputError, onChangeError]);
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const failedValidation = validations.find(
