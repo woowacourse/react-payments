@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { type SetCvcNumber } from "../types/types";
 import { isNumeric } from "../utils/validators";
 
-export function useCvcNumberInput(setCvc: SetCvcNumber) {
+export function useCvcNumberInput() {
+  const [cvc, setCvc] = useState("");
   const [cvcError, setCvcError] = useState("");
 
   const handleCvcChange = (value: string) => {
@@ -15,5 +15,5 @@ export function useCvcNumberInput(setCvc: SetCvcNumber) {
     setCvc(value);
   };
 
-  return { cvcError, handleCvcChange };
+  return { cvc, cvcError, handleCvcChange };
 }

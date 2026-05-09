@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { type SetCardNumber } from "../types/types";
 import { isNumeric } from "../utils/validators";
 
-export function useCardNumberInput(setCardNumber: SetCardNumber) {
+export function useCardNumberInput() {
+  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
   const [cardNumberError, setCardNumberError] = useState(["", "", "", ""]);
 
   const handleCardNumberChange = (index: number, value: string) => {
@@ -24,5 +24,5 @@ export function useCardNumberInput(setCardNumber: SetCardNumber) {
     });
   };
 
-  return { cardNumberError, handleCardNumberChange };
+  return { cardNumber, cardNumberError, handleCardNumberChange };
 }

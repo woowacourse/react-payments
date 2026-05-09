@@ -1,8 +1,8 @@
 import { useState } from "react";
-import type { SetExpireDate } from "../types/types";
 import { isNumeric } from "../utils/validators";
 
-export function useExpireDateInput(setExpireDate: SetExpireDate) {
+export function useExpireDateInput() {
+  const [expireDate, setExpireDate] = useState({ month: "", year: "" });
   const [expireDateError, setExpireDateError] = useState({
     month: "",
     year: "",
@@ -60,5 +60,5 @@ export function useExpireDateInput(setExpireDate: SetExpireDate) {
     }));
   };
 
-  return { expireDateError, handleMonthChange, handleYearChange };
+  return { expireDate, expireDateError, handleMonthChange, handleYearChange };
 }
