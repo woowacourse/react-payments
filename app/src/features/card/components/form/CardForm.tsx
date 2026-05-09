@@ -72,6 +72,12 @@ export function CardForm({
           setCardNumber={setCardNumber}
         />
       </CardSection>
+      <CardSubmitButton
+        type="submit"
+        disabled={progress["complete"] ? false : true}
+      >
+        확인
+      </CardSubmitButton>
     </CardFormContainer>
   );
 }
@@ -82,4 +88,18 @@ const CardFormContainer = styled.form`
   gap: 1rem;
   padding: 24px 30px 20px 30px;
   box-sizing: border-box;
+`;
+
+const CardSubmitButton = styled.button`
+  background-color: #333333;
+  padding: 20px 0;
+  color: #f3f3f3;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  &:disabled {
+    background-color: #3333334d;
+    cursor: auto;
+  }
 `;
