@@ -69,7 +69,8 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                   padding: '8px',
                 })}
                 aria-label={`카드 번호 ${index + 1}번째 입력창`}
-              ></input>
+                autoFocus={index === 0}
+              />
             );
           })}
         </div>
