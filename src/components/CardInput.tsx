@@ -61,7 +61,7 @@ export default function CardInput({
   });
 
   return (
-    <form css={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '100%' }}>
+    <form css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {step >= 4 && <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />}
       {step >= 3 && <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />}
       {step >= 2 && <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />}

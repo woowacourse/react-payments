@@ -24,12 +24,12 @@ export default function RegisterCard() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
         gap: '45px',
         backgroundColor: theme.colors.white,
         width: '376px',
-        height: '100vh',
+        minHeight: '100vh',
         margin: '0 auto',
+        padding: '40px 0',
       })}
     >
       <CardPreview
