@@ -21,6 +21,15 @@ const CardRegisterPage = () => {
   const showCvc = showExpiry && expiryField.isComplete;
   const isFormComplete = showCvc && cvcField.isComplete;
 
+  const handleSubmit = () => {
+    navigate('/complete', {
+      state: {
+        cardPrefix: numberField.cardNumbers[0],
+        companyName: selectedCompany ? CARD_COMPANIES[selectedCompany].name : '',
+      },
+    });
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -42,20 +51,7 @@ const CardRegisterPage = () => {
           showCvc={showCvc}
         />
       </Container>
-      {isFormComplete && (
-        <SubmitButton
-          onClick={() =>
-            navigate('/complete', {
-              state: {
-                cardPrefix: numberField.cardNumbers[0],
-                companyName: selectedCompany ? CARD_COMPANIES[selectedCompany].name : '',
-              },
-            })
-          }
-        >
-          확인
-        </SubmitButton>
-      )}
+      {isFormComplete && <SubmitButton onClick={handleSubmit}>확인</SubmitButton>}
     </Wrapper>
   );
 };
