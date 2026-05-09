@@ -26,6 +26,7 @@ const CardRegisterPage = () => {
       <Container>
         <CardPreviewSection
           cardNumbers={numberField.cardNumbers}
+          brand={numberField.brand}
           expiryMonth={expiryField.expiryMonth}
           expiryYear={expiryField.expiryYear}
           selectedCompany={selectedCompany}

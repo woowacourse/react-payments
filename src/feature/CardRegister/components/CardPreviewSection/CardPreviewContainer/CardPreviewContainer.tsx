@@ -4,23 +4,26 @@ import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDispla
 import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
 import {CARD_COMPANIES} from '../../../domain/cardCompany';
 import type {CardCompanyType} from '../../../domain/cardCompany';
-import {getBrandName} from '../../../domain/cardBrand';
+import type {CardBrandType} from '../../../domain/cardBrand';
+
+const DEFAULT_CARD_COLOR = '#333333';
 
 type Props = {
   cardNumbers: string[];
+  brand: CardBrandType | null;
   expiryMonth: string;
   expiryYear: string;
   selectedCompany: CardCompanyType | null;
 };
 
-const CardPreviewContainer = ({cardNumbers, expiryMonth, expiryYear, selectedCompany}: Props) => {
-  const bgColor = selectedCompany ? CARD_COMPANIES[selectedCompany].color : '#333333';
+const CardPreviewContainer = ({cardNumbers, brand, expiryMonth, expiryYear, selectedCompany}: Props) => {
+  const bgColor = selectedCompany ? CARD_COMPANIES[selectedCompany].color : DEFAULT_CARD_COLOR;
 
   return (
     <Container $bgColor={bgColor}>
       <CardHeader>
         <IcChip />
-        <CardBrandLogo brandName={getBrandName(cardNumbers)} />
+        <CardBrandLogo brandName={brand} />
       </CardHeader>
       <CardBody>
         <CardNumberDisplay cardNumbers={cardNumbers} />
