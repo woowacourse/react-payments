@@ -42,6 +42,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
             handelCVCChange(input);
           },
           state: status,
+          autoFocus: true,
         },
       ]}
     />
