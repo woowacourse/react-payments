@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {CARD_BRANDS, DEFAULT_CARD_NUMBER_FORMAT, getBrandName} from '../domain/cardBrand';
-import {createFlags, computeNextErrorInfo, computeNextTouched} from '../components/InfoInputSection/fieldState';
+import {createFlags, computeNextErrorInfo, computeNextTouched} from './fieldState';
 import {resizeArray} from '../../../common/utils/array';
 
 const getCardNumberFormat = (cardNumbers: string[]) => {
