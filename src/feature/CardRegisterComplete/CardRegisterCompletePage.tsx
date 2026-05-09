@@ -87,16 +87,9 @@ const CheckDescription = styled.p`
 `;
 
 const CheckButton = styled(Button)`
-  width: 100%;
-  min-height: 48px;
   margin-top: 44px;
 
   border-radius: 4px;
-  background-color: #333333;
-
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
 `;
 
 export default CardRegisterCompletePage;
