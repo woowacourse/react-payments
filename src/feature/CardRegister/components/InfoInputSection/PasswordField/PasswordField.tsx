@@ -83,6 +83,7 @@ const PasswordField = ({
           strokeMode={0 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handlePasswordChange(0, e.target.value)}
           onBlur={(e) => handlePasswordBlur(0, e.target.value)}
+          autoFocus
         />
       </InputWrapper>
       <ErrorMessage>{errorInfo[firstErrorIndex]}</ErrorMessage>

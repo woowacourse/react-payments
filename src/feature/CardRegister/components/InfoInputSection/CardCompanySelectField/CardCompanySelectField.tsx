@@ -24,6 +24,7 @@ const CardCompanySelectField = ({
       <CardSelectTrigger
         defaultValue={""}
         onChange={(e) => onSelect(e.target.value as CardCompanyType)}
+        autoFocus
       >
         <option value={""} disabled hidden>
           카드사를 선택해주세요

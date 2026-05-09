@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 import styled from "styled-components";
 import { colors } from "../../../styles/color";
 
@@ -9,16 +9,19 @@ const STROKE_MODE_COLOR: Record<StrokeModeType, string> = {
   error: colors.border.error,
 };
 
-type InputPropsType = ComponentPropsWithoutRef<"input"> & {
+type InputPropsType = ComponentPropsWithRef<"input"> & {
   strokeMode?: StrokeModeType;
 };
 
 const Input = ({
+  ref,
   strokeMode = "default",
   type = "text",
   ...rest
 }: InputPropsType) => {
-  return <StyledInput $strokeMode={strokeMode} type={type} {...rest} />;
+  return (
+    <StyledInput ref={ref} $strokeMode={strokeMode} type={type} {...rest} />
+  );
 };
 
 export default Input;

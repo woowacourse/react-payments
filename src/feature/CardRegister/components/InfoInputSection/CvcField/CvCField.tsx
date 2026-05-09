@@ -82,6 +82,7 @@ const CvcField = ({
           strokeMode={0 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handleCvcChange(0, e.target.value)}
           onBlur={(e) => handleCvcBlur(0, e.target.value)}
+          autoFocus
         />
       </InputWrapper>
       <ErrorMessage>{errorInfo[firstErrorIndex]}</ErrorMessage>

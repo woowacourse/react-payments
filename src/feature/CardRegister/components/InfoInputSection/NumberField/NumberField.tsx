@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Input from "../../../../../common/components/Input/Input";
 import Label from "../../../../../common/components/Label/Label";
 import styled from "styled-components";
@@ -32,6 +32,9 @@ const NumberField = ({
   const [isTouched, setIsTouched] = useState(
     Array.from({ length: CARD_NUMBER_INPUT_COUNT }, () => false),
   );
+  const inputFocusRefs = useRef<Array<HTMLInputElement | null>>(
+    Array.from({ length: CARD_NUMBER_INPUT_COUNT }, () => null),
+  );
 
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -59,6 +62,15 @@ const NumberField = ({
         errorIndex === index ? "" : message,
       );
       setErrorInfo(newErrorInfo);
+    }
+
+    // 다음 포커싱
+    if (value.length === CARD_NUMBER_CHUNK_LENGTH) {
+      inputFocusRefs.current[index + 1]?.focus();
+    }
+
+    if (value.length === 0) {
+      inputFocusRefs.current[index - 1]?.focus();
     }
   };
 
@@ -95,6 +107,10 @@ const NumberField = ({
       );
       setErrorInfo(newErrorInfo);
     }
+
+    if (value.length === 0) {
+      inputFocusRefs.current[3 - 1]?.focus();
+    }
   };
 
   const handleLastInputNumbersBlur = (eValue: string) => {
@@ -129,6 +145,9 @@ const NumberField = ({
       <InputWrapper>
         {cardNumbers.map((chunk, index) => (
           <CardNumberInput
+            ref={(node) => {
+              inputFocusRefs.current[index] = node;
+            }}
             id={`card_number-${index}`}
             key={index}
             value={chunk}
@@ -150,6 +169,7 @@ const NumberField = ({
                 ? (e) => handleNumbersBlur(index, e.target.value)
                 : (e) => handleLastInputNumbersBlur(e.target.value)
             }
+            autoFocus={index === 0}
           />
         ))}
       </InputWrapper>

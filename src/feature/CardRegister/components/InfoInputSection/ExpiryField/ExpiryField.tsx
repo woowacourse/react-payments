@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
@@ -36,6 +36,10 @@ const ExpiryField = ({
     Array.from({ length: EXPIRY_INPUT_COUNT }, () => false),
   );
 
+  const inputFocusRefs = useRef<Array<HTMLInputElement | null>>(
+    Array.from({ length: EXPIRY_INPUT_COUNT }, () => null),
+  );
+
   const handleMonthChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
@@ -51,7 +55,6 @@ const ExpiryField = ({
         errorIndex === index ? ERROR_MESSAGES.expiryMonthRange : message,
       );
       setErrorInfo(newErrorInfo);
-      return;
     }
 
     setExpiryMonth(value);
@@ -61,6 +64,11 @@ const ExpiryField = ({
         errorIndex === index ? "" : message,
       );
       setErrorInfo(newErrorInfo);
+    }
+
+    // 다음 포커싱
+    if (value.length === EXPIRY_VALUE_LENGTH) {
+      inputFocusRefs.current[index + 1]?.focus();
     }
   };
 
@@ -81,6 +89,11 @@ const ExpiryField = ({
         errorIndex === index ? "" : message,
       );
       setErrorInfo(newErrorInfo);
+    }
+
+    // 이전 포커싱
+    if (value.length === 0) {
+      inputFocusRefs.current[index - 1]?.focus();
     }
   };
 
@@ -123,6 +136,9 @@ const ExpiryField = ({
       <Label htmlFor="expiry-month">유효기간</Label>
       <InputWrapper>
         <ExpiryInput
+          ref={(node) => {
+            inputFocusRefs.current[0] = node;
+          }}
           id="expiry-month"
           value={expiryMonth}
           maxLength={EXPIRY_VALUE_LENGTH}
@@ -131,8 +147,12 @@ const ExpiryField = ({
           strokeMode={0 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handleMonthChange(0, e.target.value)}
           onBlur={(e) => handleExpiryBlur(0, e.target.value, "month")}
+          autoFocus
         />
         <ExpiryInput
+          ref={(node) => {
+            inputFocusRefs.current[1] = node;
+          }}
           id="expiry-month"
           value={expiryYear}
           maxLength={EXPIRY_VALUE_LENGTH}
