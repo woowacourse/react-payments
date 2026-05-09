@@ -20,7 +20,7 @@ export default function ExpireDateField({ field }: Props) {
 
   return (
     <Field>
-      1<Title>카드 유효기간을 입력해 주세요</Title>
+      <Title>카드 유효기간을 입력해 주세요</Title>
       <Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
       <Label>유효기간</Label>
       <InputContainer>

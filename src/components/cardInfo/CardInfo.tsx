@@ -1,9 +1,10 @@
 import { Wrapper } from './CardInfo.styles';
 import CardNumberField from './cardNumber/CardNumberField';
 import { useCardForm } from '../useCardForm';
-import { isCardNumberComplete } from './validator';
+import { isCardBrandComplete, isCardNumberComplete } from './validator';
 import CardBrandField from './cardBrand/CardBrandField';
 import { useState } from 'react';
+import ExpireDateField from './expireDate/ExpireDateField';
 
 interface Props {
   cardForm: ReturnType<typeof useCardForm>;
@@ -12,9 +13,11 @@ interface Props {
 export default function CardInfo({ cardForm }: Props) {
   const [step, setStep] = useState(0);
   if (step === 0 && isCardNumberComplete(cardForm.cardNumber.value)) setStep(1);
+  if (step === 1 && isCardBrandComplete(cardForm.cardBrand.value)) setStep(2);
 
   return (
     <Wrapper>
+      {step >= 2 && <ExpireDateField field={cardForm.expireDate} />}
       {step >= 1 && <CardBrandField field={cardForm.cardBrand} />}
       <CardNumberField field={cardForm.cardNumber} />
     </Wrapper>

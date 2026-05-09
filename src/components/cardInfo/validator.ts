@@ -102,3 +102,7 @@ export const isCardNumberComplete = (cardNumber: string[]): boolean => {
     cardNumber.every((string) => validateNumber(string).state) &&
     validateCardNumberLength(cardNumber).state;
 }
+
+export const isCardBrandComplete = (cardBrand : string) : boolean =>{
+  return cardBrand !== ""
+}
