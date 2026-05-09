@@ -1,6 +1,9 @@
 import { getFormattedValidityPeriodUnit } from "@utils/card";
 import masterCard from "@assets/Mastercard.png";
 import visa from "@assets/Visa.png";
+import diners from "@assets/Diners.png";
+import amex from "@assets/AMEX.png";
+import unionPay from "@assets/UnionPay.png";
 import maskingImg from "@assets/MaskingImg.png";
 import type { CardNumberUnits } from "@/components/CardNumberInputField/CardNumberInputField";
 import type { ValidityPeriod } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
@@ -16,8 +19,6 @@ interface CardProps {
   validityPeriod: ValidityPeriod;
   brand?: ReturnType<typeof detectCardBrand>;
 }
-
-export type CardBrand = "Visa" | "MasterCard";
 
 const Card = ({
   cardNumberUnits,
@@ -42,6 +43,18 @@ const Card = ({
             {
               case: "Visa",
               component: <CardBrandImg src={visa} alt="Visa" />,
+            },
+            {
+              case: "Diners",
+              component: <CardBrandImg src={diners} alt="Diners" />,
+            },
+            {
+              case: "AMEX",
+              component: <CardBrandImg src={amex} alt="AMEX" />,
+            },
+            {
+              case: "UnionPay",
+              component: <CardBrandImg src={unionPay} alt="UnionPay" />,
             },
           ]}
           defaultCase={null}

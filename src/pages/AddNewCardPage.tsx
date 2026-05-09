@@ -28,7 +28,7 @@ const AddNewCardPage = () => {
           cardNumberUnits={cardNumber}
           cardCompany={cardCompany}
           validityPeriod={validityPeriod}
-          brand={detectCardBrand(cardNumber)}
+          brand={detectCardBrand(cardNumber.join(""))}
         />
       </CardWrapper>
       <CardInfoForm>
