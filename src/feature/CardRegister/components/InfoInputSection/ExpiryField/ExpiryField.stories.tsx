@@ -4,15 +4,13 @@ import {fn} from 'storybook/test';
 import ExpiryField from './ExpiryField';
 import {useExpiryDate} from '../../../hooks/useExpiryDate';
 
-const mockExpiryField = (expiryMonth = '', expiryYear = '') => ({
-  expiryMonth,
-  expiryYear,
-  isComplete: expiryMonth.length === 2 && expiryYear.length === 2,
+const mockExpiryField = (expiryDate = ['', '']) => ({
+  expiryDate,
+  isComplete: expiryDate[0].length === 2 && expiryDate[1].length === 2,
   hasAnyErr: false,
   firstErrIdx: -1,
   errMsg: '',
-  handleMonthChange: fn(),
-  handleYearChange: fn(),
+  handleChange: fn(),
   handleBlur: fn(),
 });
 
@@ -29,11 +27,11 @@ type Story = StoryObj<typeof meta>;
 export const Empty: Story = {};
 
 export const Partial: Story = {
-  args: mockExpiryField('5', ''),
+  args: mockExpiryField(['5', '']),
 };
 
 export const Filled: Story = {
-  args: mockExpiryField('12', '30'),
+  args: mockExpiryField(['12', '30']),
 };
 
 export const Interactive: Story = {

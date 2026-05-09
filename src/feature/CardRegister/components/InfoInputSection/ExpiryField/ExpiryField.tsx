@@ -1,29 +1,28 @@
 import React, {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
+
 type Props = {
-  expiryMonth: string;
-  expiryYear: string;
+  expiryDate: string[];
   firstErrIdx: number;
   errMsg: string;
-  handleMonthChange: (value: string) => void;
-  handleYearChange: (value: string) => void;
-  handleBlur: (index: number, value: string, type: 'month' | 'year') => void;
+  handleChange: (index: number, value: string) => void;
+  handleBlur: (index: number, value: string) => void;
 };
 
-const ExpiryField = ({expiryMonth, expiryYear, firstErrIdx, errMsg, handleMonthChange, handleYearChange, handleBlur}: Props) => {
+const ExpiryField = ({expiryDate, firstErrIdx, errMsg, handleChange, handleBlur}: Props) => {
   const monthRef = useRef<HTMLInputElement | null>(null);
   const yearRef = useRef<HTMLInputElement | null>(null);
 
   const onMonthChange = (value: string) => {
-    handleMonthChange(value);
+    handleChange(0, value);
     if (value.length === 2 && /^\d+$/.test(value)) {
       yearRef.current?.focus();
     }
   };
 
   const onYearKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && expiryYear === '') {
+    if (e.key === 'Backspace' && expiryDate[1] === '') {
       monthRef.current?.focus();
     }
   };
@@ -33,23 +32,23 @@ const ExpiryField = ({expiryMonth, expiryYear, firstErrIdx, errMsg, handleMonthC
       <InputWrapper>
         <ExpiryInput
           ref={monthRef}
-          value={expiryMonth}
+          value={expiryDate[0]}
           maxLength={2}
           inputMode='numeric'
           placeholder='MM'
           strokeMode={firstErrIdx === 0 ? 'error' : 'default'}
           onChange={(e) => onMonthChange(e.target.value)}
-          onBlur={(e) => handleBlur(0, e.target.value, 'month')}
+          onBlur={(e) => handleBlur(0, e.target.value)}
         />
         <ExpiryInput
           ref={yearRef}
-          value={expiryYear}
+          value={expiryDate[1]}
           maxLength={2}
           placeholder='YY'
           inputMode='numeric'
           strokeMode={firstErrIdx === 1 ? 'error' : 'default'}
-          onChange={(e) => handleYearChange(e.target.value)}
-          onBlur={(e) => handleBlur(1, e.target.value, 'year')}
+          onChange={(e) => handleChange(1, e.target.value)}
+          onBlur={(e) => handleBlur(1, e.target.value)}
           onKeyDown={onYearKeyDown}
         />
       </InputWrapper>
