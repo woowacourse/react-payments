@@ -1,71 +1,40 @@
 import { FormGroup } from '@/core/components/formGroup/FormGroup';
 import { Input } from '@/core/components/input/Input';
-import {
-  validateExpirationMonth,
-  validateExpirationMonthFormat,
-  validateExpirationYear,
-  validateExpirationYearFormat,
-} from '@/entities/card/expiration';
-import type { ExpirationDate } from '@/entities/card/types';
-import { useState } from 'react';
 
+import type { UseFieldResult } from '@/core/hooks/useField';
+import { MONTH_CONSTAND, YEAR_CONSTAND } from '@/entities/card/expiration';
 interface ExpirationDateFormGroupProps {
-  expirationDate: ExpirationDate;
-  handleChangeExpirationDate: (key: keyof ExpirationDate, value: string) => void;
+  month: UseFieldResult;
+  year: UseFieldResult;
 }
 
-export const ExpirationDateFormGroup = ({
-  expirationDate,
-  handleChangeExpirationDate: onChangeExpirationDate,
-}: ExpirationDateFormGroupProps) => {
-  const [monthError, setMonthError] = useState<string | undefined>();
-  const [yearError, setYearError] = useState<string | undefined>();
-
-  const handleChangeMonth = (value: string) => {
-    const monthError = validateExpirationMonthFormat(value);
-    setMonthError(monthError);
-    if (monthError) return;
-    onChangeExpirationDate('month', value);
-  };
-
-  const handleChangeYear = (value: string) => {
-    const yearError = validateExpirationYearFormat(value);
-    setYearError(yearError);
-    if (yearError) return;
-    onChangeExpirationDate('year', value);
-  };
-
-  const handleBlur = (key: keyof ExpirationDate) => {
-    if (key === 'month' && validateExpirationMonth(expirationDate[key])) setMonthError(monthError);
-    if (key === 'year' && validateExpirationYear(expirationDate[key])) setYearError(yearError);
-  };
-
+export const ExpirationDateFormGroup = ({ month, year }: ExpirationDateFormGroupProps) => {
   return (
     <FormGroup
       title="카드 유효기간을 입력해 주세요"
       subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
       label="유효기간"
-      errorMessage={monthError || yearError}
+      errorMessage={month.error || year.error}
     >
       <Input
         type="text"
         inputMode="numeric"
-        value={expirationDate.month}
-        maxLength={2}
+        value={month.value}
+        maxLength={MONTH_CONSTAND.LENGTH}
         placeholder="MM"
-        isError={monthError !== undefined}
-        onChange={(e) => handleChangeMonth(e.target.value)}
-        onBlur={() => handleBlur('month')}
+        isError={month.error !== undefined}
+        onChange={(e) => month.handleChange(e.target.value)}
+        onBlur={() => month.handleBlur}
       />
       <Input
         type="text"
         inputMode="numeric"
-        value={expirationDate.year}
-        maxLength={2}
+        value={year.value}
+        maxLength={YEAR_CONSTAND.LENGTH}
         placeholder="YY"
-        isError={yearError !== undefined}
-        onChange={(e) => handleChangeYear(e.target.value)}
-        onBlur={() => handleBlur('year')}
+        isError={year.error !== undefined}
+        onChange={(e) => year.handleChange(e.target.value)}
+        onBlur={() => year.handleBlur}
       />
     </FormGroup>
   );

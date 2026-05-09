@@ -1,9 +1,9 @@
 import { isNumericString, isValidMonth } from '@/core/utils/validator';
 
-const MONTH_CONSTAND = {
+export const MONTH_CONSTAND = {
   LENGTH: 2,
 };
-const YEAR_CONSAND = {
+export const YEAR_CONSTAND = {
   LENGTH: 2,
 };
 
@@ -35,8 +35,7 @@ export const validateExpirationYearFormat = (year: string): string | undefined =
 };
 
 export const validateExpirationYear = (year: string): string | undefined => {
-  if (!isNumericString(year)) return ERROR_MESSAGE.RANGE;
-  if (year.length !== YEAR_CONSAND.LENGTH) return ERROR_MESSAGE.RANGE;
-  if (year.length !== 2) return ERROR_MESSAGE.EMPTY;
+  if (!isNumericString(year)) return ERROR_MESSAGE.TYPE;
+  if (year.length !== YEAR_CONSTAND.LENGTH) return ERROR_MESSAGE.EMPTY;
   return;
 };

@@ -5,7 +5,7 @@ interface UseFieldProps {
   validateComplete: (value: string) => string | undefined;
 }
 
-interface UseFieldResult {
+export interface UseFieldResult {
   value: string;
   error: string | undefined;
   handleChange: (value: string) => void;
