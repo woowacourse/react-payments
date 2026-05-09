@@ -6,7 +6,7 @@ interface CaseBy<T> {
 interface SwitchCaseProps<T> {
   value: T;
   caseBy: CaseBy<T>[];
-  defaultCase: React.ReactNode;
+  defaultCase?: React.ReactNode;
 }
 
 const SwitchCase = <T,>({ value, caseBy, defaultCase }: SwitchCaseProps<T>) => {
@@ -14,7 +14,7 @@ const SwitchCase = <T,>({ value, caseBy, defaultCase }: SwitchCaseProps<T>) => {
     ({ case: caseValue }) => caseValue === value,
   )?.component;
 
-  return <div>{caseComponent || defaultCase}</div>;
+  return <div>{caseComponent || defaultCase || null}</div>;
 };
 
 export default SwitchCase;
