@@ -19,6 +19,6 @@ const Button = styled.button<{ $isFormComplete: boolean }>`
   position: fixed;
   bottom: 0;
   left: 0;
-  display: ${(props) => (props.$isFormComplete ? 'show' : 'none')};
+  display: ${(props) => (props.$isFormComplete ? 'block' : 'none')};
   cursor: pointer;
 `;

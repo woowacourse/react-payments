@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { MemoryRouter } from "react-router-dom";
 import { CardContext } from "../../context/CardContext";
 import type { CardCompany } from "../../context/CardContext";
 
@@ -28,22 +29,24 @@ export const Base: Story = {
     const [cardCVC, setCardCVC] = useState('');
     const [cardPassword, setCardPassword] = useState('');
     return (
-      <CardContext
-        value={{
-          cardNumber,
-          setCardNumber,
-          cardExpiryDate,
-          setCardExpiryDate,
-          cardCompany,
-          setCardCompany,
-          cardCVC,
-          setCardCVC,
-          cardPassword,
-          setCardPassword,
-        }}
-      >
-        <CardForm />
-      </CardContext>
+      <MemoryRouter>
+        <CardContext
+          value={{
+            cardNumber,
+            setCardNumber,
+            cardExpiryDate,
+            setCardExpiryDate,
+            cardCompany,
+            setCardCompany,
+            cardCVC,
+            setCardCVC,
+            cardPassword,
+            setCardPassword,
+          }}
+        >
+          <CardForm />
+        </CardContext>
+      </MemoryRouter>
     );
   },
 };

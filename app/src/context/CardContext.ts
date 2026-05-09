@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import type { CardExpiryDateType } from '../types/cardExpiryDate';
 
+export type NetworkBrand = 'visa' | 'master' | 'diners' | 'amex' | 'unionpay' | '';
 export type CardCompany =
   | 'bc'
   | 'sinhan'

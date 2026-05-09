@@ -9,6 +9,7 @@ import { ConfirmButton } from './ConfirmButton';
 import { useCardContext } from '../../hooks/useCardContext';
 import { BrandValidator } from '../../validators/BrandValidator';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function CardForm() {
   const { cardCompany, cardNumber, cardExpiryDate, cardCVC, cardPassword } = useCardContext();
@@ -31,8 +32,17 @@ export function CardForm() {
   const cardCVCRef = useRef<HTMLInputElement>(null);
   const cardPasswordRef = useRef<HTMLInputElement>(null);
 
+  const navigate = useNavigate();
+
   return (
-    <CardFormContainer>
+    <CardFormContainer
+      onSubmit={(e) => {
+        e.preventDefault();
+        navigate('/react-payments/complete', {
+          state: { firstDigits: cardNumber[0], cardCompany: cardCompany },
+        });
+      }}
+    >
       <CardSection title={'카드사를 선택해 주세요'} subTitle={'현재 국내 카드사만 가능합니다.'}>
         <CardSelectionDropdown
           onSelect={() => {
