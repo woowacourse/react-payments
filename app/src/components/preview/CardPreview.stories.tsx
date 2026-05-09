@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CardContext } from "../../context/CardContext";
-import type { NetworkBrand } from "../../context/CardContext";
 import { CardPreview } from "./CardPreview";
 
 const meta = {
@@ -21,17 +20,20 @@ const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
 const renderWithContext = (
   cardNumber = defaultCardNumber,
   cardExpiryDate = defaultCardExpiryDate,
-  networkBrand: NetworkBrand = "",
 ) =>
   () => (
     <CardContext
       value={{
         cardNumber,
         cardExpiryDate,
-        networkBrand,
         setCardNumber: () => {},
         setCardExpiryDate: () => {},
-        setNetworkBrand: () => {},
+        cardCompany: '',
+        setCardCompany: () => {},
+        cardCVC: '',
+        setCardCVC: () => {},
+        cardPassword: '',
+        setCardPassword: () => {},
       }}
     >
       <CardPreview />
@@ -65,41 +67,21 @@ export const FullyFilled: Story = {
 };
 
 export const VisaBrand: Story = {
-  render: renderWithContext(
-    ['4111', '', '', ''],
-    defaultCardExpiryDate,
-    "visa",
-  ),
+  render: renderWithContext(['4111', '', '', '']),
 };
 
 export const MasterBrand: Story = {
-  render: renderWithContext(
-    ['5111', '', '', ''],
-    defaultCardExpiryDate,
-    "master",
-  ),
+  render: renderWithContext(['5111', '', '', '']),
 };
 
 export const DinersBrand: Story = {
-  render: renderWithContext(
-    ['3600', '', '', ''],
-    defaultCardExpiryDate,
-    "diners",
-  ),
+  render: renderWithContext(['3600', '', '', '']),
 };
 
 export const AmexBrand: Story = {
-  render: renderWithContext(
-    ['3400', '', '', ''],
-    defaultCardExpiryDate,
-    "amex",
-  ),
+  render: renderWithContext(['3400', '', '', '']),
 };
 
 export const UnionPayBrand: Story = {
-  render: renderWithContext(
-    ['6221', '26', '', ''],
-    defaultCardExpiryDate,
-    "unionpay",
-  ),
+  render: renderWithContext(['6221', '26', '', '']),
 };

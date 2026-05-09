@@ -26,8 +26,10 @@ const renderWithContext = () => {
         setCardNumber: () => {},
         cardExpiryDate: { 'expiry-month': '', 'expiry-year': '' },
         setCardExpiryDate: () => {},
-        networkBrand: '',
-        setNetworkBrand: () => {},
+        cardCVC: '',
+        setCardCVC: () => {},
+        cardPassword: '',
+        setCardPassword: () => {},
         cardCompany,
         setCardCompany,
       }}

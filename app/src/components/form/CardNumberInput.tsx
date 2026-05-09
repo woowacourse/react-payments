@@ -5,7 +5,6 @@ import { BrandValidator } from '../../validators/BrandValidator';
 import { CardFieldset, CardLegend, CardInput } from '../../style/CardStyles';
 import { useCardContext } from '../../hooks/useCardContext';
 import type { cardNumberFieldError } from '../../types/fieldError';
-import type { NetworkBrand } from '../../context/CardContext.ts';
 
 const indexMap: { [key: string]: number } = {
   'first-digits': 0,
@@ -22,7 +21,8 @@ const fields: Exclude<keyof cardNumberFieldError, 'message'>[] = [
 ];
 
 export function CardNumberInput() {
-  const { cardNumber, setCardNumber, networkBrand, setNetworkBrand } = useCardContext();
+  const { cardNumber, setCardNumber } = useCardContext();
+  const networkBrand = BrandValidator.detectNetworkBrand(cardNumber.join('')).brand;
 
   const [fieldErrors, setError] = useState<cardNumberFieldError>({
     'first-digits': false,
@@ -49,7 +49,6 @@ export function CardNumberInput() {
       setError({ ...fieldErrors, [fieldId]: true, message: brandResult.message });
       return;
     }
-    setNetworkBrand(brandResult.brand);
 
     setError({ ...fieldErrors, [fieldId]: false, message: '' });
     setCardNumber(newCardNumber);
@@ -69,7 +68,7 @@ export function CardNumberInput() {
   };
 
   const handleInputMaxLength = (
-    networkBrand: NetworkBrand,
+    networkBrand: string,
     index: number,
   ): { maxLength: number; placeholder: string } => {
     if (networkBrand === 'diners' && index === 3) {

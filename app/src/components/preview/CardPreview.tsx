@@ -1,12 +1,15 @@
 import styled from '@emotion/styled';
 import { useCardContext } from '../../hooks/useCardContext';
-import { CardNetworkBrand } from './CardNetworkBrand';
 import { CardNumber } from './CardNumber';
 import { CardExpiryDate } from './CardExpiryDate';
 import { CARD_COMPANY_COLOR } from '../../style/CardStyles';
+import { BrandValidator } from '../../validators/BrandValidator';
+import { CardNetworkBrand } from './CardNetworkBrand';
 
 export function CardPreview() {
-  const { networkBrand, cardCompany } = useCardContext();
+  const { cardNumber, cardCompany } = useCardContext();
+  const networkBrand = BrandValidator.detectNetworkBrand(cardNumber.join('')).brand;
+
   return (
     <CardContainer $CardCompanySelected={CARD_COMPANY_COLOR[cardCompany]}>
       <div className="card-meta">

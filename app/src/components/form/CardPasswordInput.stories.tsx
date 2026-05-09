@@ -2,22 +2,22 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
 import { CardContext } from "../../context/CardContext";
-import { CardCVCInput } from "./CardCVCInput";
+import { CardPasswordInput } from "./CardPasswordInput";
 
 const meta = {
-  title: "CardCVCInput",
-  component: CardCVCInput,
+  title: "CardPasswordInput",
+  component: CardPasswordInput,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CardCVCInput>;
+} satisfies Meta<typeof CardPasswordInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 const renderWithContext = () => {
-  const [cardCVC, setCardCVC] = useState('');
+  const [cardPassword, setCardPassword] = useState('');
   return (
     <CardContext
       value={{
@@ -27,13 +27,13 @@ const renderWithContext = () => {
         setCardExpiryDate: () => {},
         cardCompany: '',
         setCardCompany: () => {},
-        cardPassword: '',
-        setCardPassword: () => {},
-        cardCVC,
-        setCardCVC,
+        cardCVC: '',
+        setCardCVC: () => {},
+        cardPassword,
+        setCardPassword,
       }}
     >
-      <CardCVCInput />
+      <CardPasswordInput />
     </CardContext>
   );
 };
@@ -54,15 +54,15 @@ export const InvalidTypeInput: Story = {
   },
 };
 
-export const InvalidCVCLength: Story = {
+export const InvalidPasswordLength: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("textbox");
-    await userEvent.type(input, "12");
+    await userEvent.type(input, "1");
     await userEvent.tab();
     await expect(
-      canvas.getByText("CVC는 3자리여야 합니다."),
+      canvas.getByText("비밀번호 앞 2자리를 입력해주세요."),
     ).toBeInTheDocument();
   },
 };

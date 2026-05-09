@@ -3,7 +3,6 @@ import { CardPreview } from '../components/preview/CardPreview.tsx';
 import { CardForm } from '../components/form/CardForm.tsx';
 import styled from '@emotion/styled';
 import { CardContext } from '../context/CardContext.ts';
-import type { NetworkBrand } from '../context/CardContext.ts';
 import type { CardCompany } from '../context/CardContext.ts';
 
 export function Card() {
@@ -20,20 +19,16 @@ export function Card() {
 
   const [cardPassword, setCardPassword] = useState('');
 
-  const [networkBrand, setNetworkBrand] = useState<NetworkBrand>('');
-
   return (
     <CardContext
       value={{
         cardNumber,
         cardExpiryDate,
-        networkBrand,
         cardCompany,
         cardCVC,
         cardPassword,
         setCardNumber,
         setCardExpiryDate,
-        setNetworkBrand,
         setCardCompany,
         setCardCVC,
         setCardPassword,

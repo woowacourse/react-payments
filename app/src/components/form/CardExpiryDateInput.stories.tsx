@@ -27,8 +27,12 @@ const renderWithContext = () => {
       value={{
         cardNumber: ['', '', '', ''],
         setCardNumber: () => {},
-        networkBrand: "",
-        setNetworkBrand: () => {},
+        cardCompany: '',
+        setCardCompany: () => {},
+        cardCVC: '',
+        setCardCVC: () => {},
+        cardPassword: '',
+        setCardPassword: () => {},
         cardExpiryDate,
         setCardExpiryDate,
       }}
