@@ -48,6 +48,9 @@
       "@hooks/*": [
         "./src/hooks/*"
       ],
+      "@constants/*": [
+        "./src/constants/*"
+      ]
     }
   },
   "include": [
