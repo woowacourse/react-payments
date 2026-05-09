@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { CardContext } from "../../context/CardContext";
+import type { NetworkBrand } from "../../context/CardContext";
 
 import { CardSection } from "./CardSection";
 import { CardNumberInputContainer } from "./CardNumberInput";
@@ -22,7 +23,7 @@ export const CardNumberInputSection: Story = {
   args: { title: "", children: null },
   render: () => {
     const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-    const [, setNetworkBrand] = useState("");
+    const [, setNetworkBrand] = useState<NetworkBrand>('');
     return (
       <CardContext
         value={{

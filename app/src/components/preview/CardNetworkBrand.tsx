@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import MasterCard from '../../assets/Mastercard.svg';
 import VisaCard from '../../assets/visa-logo.svg';
+import type { NetworkBrand } from '../../context/CardContext';
 
-type NetworkBrand = 'visa' | 'master';
-
-export function CardNetworkBrand({ networkBrand }: { networkBrand: NetworkBrand }) {
-  const selectBrandImage = (brand: NetworkBrand | undefined) => {
+export function CardNetworkBrand({ networkBrand }: { networkBrand: Exclude<NetworkBrand, ''> }) {
+  const selectBrandImage = (brand: Exclude<NetworkBrand, ''> | undefined) => {
     if (brand === 'visa') return VisaCard;
     if (brand === 'master') return MasterCard;
   };

@@ -26,8 +26,3 @@ export const Visa: Story = {
   },
 };
 
-export const Unknown: Story = {
-  args: {
-    networkBrand: "",
-  },
-};

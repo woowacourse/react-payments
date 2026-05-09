@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { useState } from 'react';
 import { CardContext } from '../../context/CardContext';
+import type { NetworkBrand } from '../../context/CardContext';
 
 import { CardNumberInput } from './CardNumberInput';
 
@@ -19,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 const renderWithContext = () => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [, setNetworkBrand] = useState('');
+  const [, setNetworkBrand] = useState<NetworkBrand>('');
   return (
     <CardContext
       value={{

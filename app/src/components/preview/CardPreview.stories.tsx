@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CardContext } from "../../context/CardContext";
+import type { NetworkBrand } from "../../context/CardContext";
 import { CardPreview } from "./CardPreview";
 
 const meta = {
@@ -20,7 +21,7 @@ const defaultCardExpiryDate = { "expiry-month": "", "expiry-year": "" };
 const renderWithContext = (
   cardNumber = defaultCardNumber,
   cardExpiryDate = defaultCardExpiryDate,
-  networkBrand = "",
+  networkBrand: NetworkBrand = "",
 ) =>
   () => (
     <CardContext
