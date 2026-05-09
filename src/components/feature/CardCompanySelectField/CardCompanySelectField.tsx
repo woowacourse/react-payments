@@ -1,6 +1,5 @@
+import CARD_COMPANY_SELECT_FIELD from "@constants/card";
 import SelectField from "@components/common/SelectField";
-
-import CARD_COMPANY_SELECT_FIELD from "./constants";
 
 type CardCompanySelectFieldOption = (typeof CARD_COMPANY_SELECT_FIELD)[number];
 
