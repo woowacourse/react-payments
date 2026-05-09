@@ -1,6 +1,7 @@
 import {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
+import {StyledField, ErrMessage} from '../fieldStyles';
 
 type Props = {
   cardNumbers: string[];
@@ -56,13 +57,6 @@ const NumberField = ({cardNumbers, format, firstErrIdx, errMsg, onChange, onBlur
   );
 };
 
-const StyledField = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  width: 100%;
-`;
 
 const InputWrapper = styled.div<{$columns: string}>`
   display: grid;
@@ -76,11 +70,5 @@ const CardNumberInput = styled(Input)`
   height: 32px;
 `;
 
-const ErrMessage = styled.span`
-  min-height: 20px;
-  font-size: 9.5px;
-  font-weight: 400;
-  color: #ff3d3d;
-`;
 
 export default NumberField;

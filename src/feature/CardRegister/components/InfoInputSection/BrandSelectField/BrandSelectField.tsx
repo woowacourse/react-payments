@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {StyledField} from '../fieldStyles';
 import {CARD_COMPANIES} from '../../../domain/cardCompany';
 import type {CardCompanyType} from '../../../domain/cardCompany';
 
@@ -17,26 +18,17 @@ const BrandSelectField = ({selectedCompany, onChange}: Props) => {
           onChange(value ? (value as CardCompanyType) : null);
         }}
       >
-        <option value=''>선택해 주세요</option>
-        {(Object.entries(CARD_COMPANIES) as [CardCompanyType, {name: string; color: string}][]).map(
-          ([key, {name}]) => (
-            <option key={key} value={key}>
-              {name}
-            </option>
-          ),
-        )}
+        <option value=''>카드사를 선택해주세요</option>
+        {(Object.entries(CARD_COMPANIES) as [CardCompanyType, {name: string; color: string}][]).map(([key, {name}]) => (
+          <option key={key} value={key}>
+            {name}
+          </option>
+        ))}
       </Select>
     </StyledField>
   );
 };
 
-const StyledField = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  width: 100%;
-`;
 
 const Select = styled.select`
   height: 32px;

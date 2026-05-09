@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
+import {StyledField, ErrMessage} from '../fieldStyles';
 
 type Props = {
   expiryDate: string[];
@@ -58,14 +59,6 @@ const ExpiryField = ({expiryDate, firstErrIdx, errMsg, handleChange, handleBlur}
   );
 };
 
-const StyledField = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  width: 100%;
-`;
-
 const InputWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -76,13 +69,6 @@ const ExpiryInput = styled(Input)`
   box-sizing: border-box;
   width: 100%;
   height: 32px;
-`;
-
-const ErrMessage = styled.span`
-  min-height: 20px;
-  font-size: 9.5px;
-  font-weight: 400;
-  color: #ff3d3d;
 `;
 
 export default ExpiryField;

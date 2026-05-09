@@ -1,5 +1,6 @@
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
+import {StyledField, ErrMessage} from '../fieldStyles';
 type Props = {
   cvcNumber: string;
   firstErrIdx: number;
@@ -27,13 +28,6 @@ const CvcField = ({cvcNumber, firstErrIdx, errMsg, handleChange, handleBlur}: Pr
   );
 };
 
-const StyledField = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  width: 100%;
-`;
 
 const InputWrapper = styled.div`
   display: grid;
@@ -47,11 +41,5 @@ const CvcInput = styled(Input)`
   height: 32px;
 `;
 
-const ErrMessage = styled.span`
-  min-height: 20px;
-  font-size: 9.5px;
-  font-weight: 400;
-  color: #ff3d3d;
-`;
 
 export default CvcField;
