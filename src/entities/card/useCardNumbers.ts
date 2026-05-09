@@ -21,7 +21,7 @@ export interface UseCardNumbersResult {
   errorMessage: string | undefined;
   maxLengths: number[];
   handleChange: (value: string, index: number) => void;
-  handleBlur: (index: number) => void;
+  handleBlur: (value: string, index: number) => void;
 }
 
 export const useCardNumbers = ({
@@ -46,9 +46,9 @@ export const useCardNumbers = ({
     setValues(nextCardNumbers);
   };
 
-  const handleBlur = (index: number) => {
+  const handleBlur = (value: string, index: number) => {
     const nextError = [...errors];
-    nextError[index] = validateCardNumber({ cardNumber: values[index], index, brand });
+    nextError[index] = validateCardNumber({ cardNumber: value, index, brand });
     setErrors(nextError);
   };
 

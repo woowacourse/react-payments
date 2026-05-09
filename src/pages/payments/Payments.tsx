@@ -14,24 +14,23 @@ import {
 import { useCardNumbers } from '@/entities/card/useCardNumbers';
 import { validateCardNumber, validateCardNumberFormat } from '@/entities/card/cardNumbers';
 import { CardPreview, type CardInfo } from '@/features/cardPreview/CardPreview';
+import { useInputFocus } from '@/core/hooks/useInputFocus';
 
 export const Payments = () => {
+  const { setInputRef, focusNext } = useInputFocus();
+
   const cardNumbers = useCardNumbers({
     validateCardNumber,
     validateCardNumberFormat,
   });
-
-  // useField 한곳
   const month = useField({
     validateFormat: validateExpirationMonthFormat,
     validateComplete: validateExpirationMonth,
   });
-
   const year = useField({
     validateFormat: validateExpirationYearFormat,
     validateComplete: validateExpirationYear,
   });
-
   const cvc = useField({ validateFormat: validateCvcFormat, validateComplete: validateCvc });
 
   const cardInfo: CardInfo = {
@@ -42,12 +41,21 @@ export const Payments = () => {
     },
   };
 
+  const nextStep = () => {
+    focusNext(0);
+  };
+
   return (
     <div className={styles.payments}>
       <CardPreview info={cardInfo} />
       <form>
-        <CardNumberFormGroup results={cardNumbers} />
-        <ExpirationDateFormGroup month={month} year={year} />
+        <CardNumberFormGroup results={cardNumbers} setStepRef={setInputRef} onComplete={nextStep} />
+        <ExpirationDateFormGroup
+          month={month}
+          setStepRef={setInputRef}
+          onComplete={nextStep}
+          year={year}
+        />
         <CvcFormGroup cvc={cvc} />
       </form>
     </div>
