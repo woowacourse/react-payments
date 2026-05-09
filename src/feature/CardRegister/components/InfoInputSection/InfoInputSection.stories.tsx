@@ -19,15 +19,13 @@ const makeMockNumberField = (cardNumbers: string[], isComplete = false) => ({
   handleBlur: fn(),
 });
 
-const makeMockExpiryField = (expiryMonth = '', expiryYear = '') => ({
-  expiryMonth,
-  expiryYear,
-  isComplete: expiryMonth.length === 2 && expiryYear.length === 2,
+const makeMockExpiryField = (expiryDate: string[] = ['', '']) => ({
+  expiryDate,
+  isComplete: expiryDate[0]?.length === 2 && expiryDate[1]?.length === 2,
   hasAnyErr: false,
   firstErrIdx: -1,
   errMsg: '',
-  handleMonthChange: fn(),
-  handleYearChange: fn(),
+  handleChange: fn(),
   handleBlur: fn(),
 });
 

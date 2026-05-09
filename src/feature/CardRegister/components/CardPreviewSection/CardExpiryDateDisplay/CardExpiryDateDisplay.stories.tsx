@@ -7,8 +7,7 @@ const meta = {
   component: CardExpiryDateDisplay,
   tags: ['autodocs'],
   args: {
-    expiryMonth: '',
-    expiryYear: '',
+    expiryDate: ['', ''],
   },
 } satisfies Meta<typeof CardExpiryDateDisplay>;
 
@@ -19,21 +18,18 @@ export const Empty: Story = {};
 
 export const OnlyMonth: Story = {
   args: {
-    expiryMonth: '12',
-    expiryYear: '',
+    expiryDate: ['12', ''],
   },
 };
 
 export const OnlyYear: Story = {
   args: {
-    expiryMonth: '',
-    expiryYear: '30',
+    expiryDate: ['', '30'],
   },
 };
 
 export const Filled: Story = {
   args: {
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryDate: ['12', '30'],
   },
 };

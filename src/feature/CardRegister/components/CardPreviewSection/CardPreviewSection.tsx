@@ -6,19 +6,17 @@ import type {CardBrandType} from '../../domain/cardBrand';
 type Props = {
   cardNumbers: string[];
   brand: CardBrandType | null;
-  expiryMonth: string;
-  expiryYear: string;
+  expiryDate: string[];
   selectedCompany: CardCompanyType | null;
 };
 
-const CardPreviewSection = ({cardNumbers, brand, expiryMonth, expiryYear, selectedCompany}: Props) => {
+const CardPreviewSection = ({cardNumbers, brand, expiryDate, selectedCompany}: Props) => {
   return (
     <Container>
       <CardPreviewContainer
         cardNumbers={cardNumbers}
         brand={brand}
-        expiryMonth={expiryMonth}
-        expiryYear={expiryYear}
+        expiryDate={expiryDate}
         selectedCompany={selectedCompany}
       />
     </Container>

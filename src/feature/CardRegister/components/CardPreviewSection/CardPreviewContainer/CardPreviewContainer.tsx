@@ -11,12 +11,11 @@ const DEFAULT_CARD_COLOR = '#333333';
 type Props = {
   cardNumbers: string[];
   brand: CardBrandType | null;
-  expiryMonth: string;
-  expiryYear: string;
+  expiryDate: string[];
   selectedCompany: CardCompanyType | null;
 };
 
-const CardPreviewContainer = ({cardNumbers, brand, expiryMonth, expiryYear, selectedCompany}: Props) => {
+const CardPreviewContainer = ({cardNumbers, brand, expiryDate, selectedCompany}: Props) => {
   const bgColor = selectedCompany ? CARD_COMPANIES[selectedCompany].color : DEFAULT_CARD_COLOR;
 
   return (
@@ -27,7 +26,7 @@ const CardPreviewContainer = ({cardNumbers, brand, expiryMonth, expiryYear, sele
       </CardHeader>
       <CardBody>
         <CardNumberDisplay cardNumbers={cardNumbers} />
-        <CardExpiryDateDisplay expiryMonth={expiryMonth} expiryYear={expiryYear} />
+        <CardExpiryDateDisplay expiryDate={expiryDate} />
       </CardBody>
     </Container>
   );

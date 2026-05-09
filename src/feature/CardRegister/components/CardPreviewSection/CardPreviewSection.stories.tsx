@@ -8,8 +8,8 @@ const meta = {
   tags: ['autodocs'],
   args: {
     cardNumbers: ['', '', '', ''],
-    expiryMonth: '',
-    expiryYear: '',
+    brand: null,
+    expiryDate: ['', ''],
     selectedCompany: null,
   },
 } satisfies Meta<typeof CardPreviewSection>;
@@ -22,7 +22,6 @@ export const Empty: Story = {};
 export const Filled: Story = {
   args: {
     cardNumbers: ['4123', '5678', '1234', '5678'],
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryDate: ['12', '30'],
   },
 };

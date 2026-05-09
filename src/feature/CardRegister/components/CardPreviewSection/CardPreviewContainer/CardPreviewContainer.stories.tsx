@@ -8,8 +8,8 @@ const meta = {
   tags: ['autodocs'],
   args: {
     cardNumbers: ['', '', '', ''],
-    expiryMonth: '',
-    expiryYear: '',
+    brand: null,
+    expiryDate: ['', ''],
     selectedCompany: null,
   },
 } satisfies Meta<typeof CardPreviewContainer>;
@@ -22,55 +22,48 @@ export const Empty: Story = {};
 export const Visa: Story = {
   args: {
     cardNumbers: ['4123', '5678', '1234', '5678'],
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryDate: ['12', '30'],
   },
 };
 
 export const MasterCard: Story = {
   args: {
     cardNumbers: ['5123', '5678', '1234', '5678'],
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryDate: ['12', '30'],
   },
 };
 
 export const Amex: Story = {
   args: {
     cardNumbers: ['3412', '345678', '90123'],
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryDate: ['12', '30'],
   },
 };
 
 export const Diners: Story = {
   args: {
     cardNumbers: ['3612', '345678', '9012'],
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryDate: ['12', '30'],
   },
 };
 
 export const UnionPay: Story = {
   args: {
     cardNumbers: ['6221', '2612', '3456', '7890'],
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryDate: ['12', '30'],
   },
 };
 
 export const UnknownBrand: Story = {
   args: {
     cardNumbers: ['3123', '5678', '1234', '5678'],
-    expiryMonth: '12',
-    expiryYear: '30',
+    expiryDate: ['12', '30'],
   },
 };
 
 export const Partial: Story = {
   args: {
     cardNumbers: ['4123', '56', '', ''],
-    expiryMonth: '1',
-    expiryYear: '',
+    expiryDate: ['1', ''],
   },
 };

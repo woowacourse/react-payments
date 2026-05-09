@@ -24,8 +24,7 @@ const CardRegisterPage = () => {
         <CardPreviewSection
           cardNumbers={numberField.cardNumbers}
           brand={numberField.brand}
-          expiryMonth={expiryField.expiryMonth}
-          expiryYear={expiryField.expiryYear}
+          expiryDate={expiryField.expiryDate}
           selectedCompany={companyField.selectedCompany}
         />
         <InfoInputSection
