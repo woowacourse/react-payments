@@ -1,29 +1,27 @@
-import { useState } from 'react';
 import { isMonthMatch } from '../../utils/isMonthMatch';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
 
 interface EXPInputWrapperProps {
-    validator: (value: string[]) => string | null;
     setEXPNumber: (index: number) => (value: string) => void;
     value: string[];
+    handleBlur: () => void;
+    handleFocus: () => void;
+    errorMessage: string | null;
+    setErrorMessage: (errorMessage: string | null) => void;
+    hasTouched: boolean;
 }
 
-export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPInputWrapperProps) {
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [hasTouched, setHasTouched] = useState<boolean>(false);
-
-    const handleBlur = () => {
-        setHasTouched(true);
-        setErrorMessage(validator(value));
-    };
-
-    const handleFocus = () => {
-        setHasTouched(false);
-        setErrorMessage(null);
-    };
-
+export default function EXPInputWrapper({
+    setEXPNumber,
+    value,
+    handleBlur,
+    handleFocus,
+    errorMessage,
+    setErrorMessage,
+    hasTouched,
+}: EXPInputWrapperProps) {
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             <CardInfoInput

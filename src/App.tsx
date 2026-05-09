@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import { getCardNumberErrorMessage } from './utils/getCardNumberErrorMessage';
 import CardInfoSection from './components/CardInfoSection';
 import { getCVCumberErrorMessage } from './utils/getCVCNumberErrorMessage';
@@ -7,77 +8,130 @@ import CardPreview from './components/Card/CardPreview';
 import CardNumberInputWrapper from './components/InputWrapper/CardNumberInputWrapper';
 import EXPInputWrapper from './components/InputWrapper/EXPInputWrapper';
 import CVCInputWrapper from './components/InputWrapper/CVCInputWrapper';
-import { useCardInfoValue } from './hooks/useCardInfoValue';
+import { useCardInfoInputField } from './hooks/useCardInfoInputField';
 import PasswordInputWrapper from './components/InputWrapper/PasswordInputWrapper';
 import CardBrandInputWrapper from './components/InputWrapper/CardBrandInputWrapper';
+import type { CardBrandValue } from './hooks/useCardInfoValue';
 
 function App() {
     const {
-        cardNumbers,
-        setCardNumber,
-        cardBrand,
-        setCardBrand,
-        EXPNumbers,
-        setEXPNumber,
-        cvc,
-        setCVC,
-        password,
-        setPassword,
-        isSatisfyCardNumber,
-        isSatisfyCardBrand,
-        isSatisfyEXP,
-        isSatisfyCVC,
-        // isSatisfyPassword, -> Button 활성화
-    } = useCardInfoValue();
+        values: cardNumberValues,
+        setValueByIndex: setCardNumberValueByIndex,
+        errorMessage: cardNumberErrorMessage,
+        setErrorMessage: setCardNumberErrorMessage,
+        hasTouched: hasCardNumberTouched,
+        handleBlur: handleCardNumberBlur,
+        handleFocus: handleCardNumberFocus,
+        isSatisfy: isCardNumberSatisfy,
+    } = useCardInfoInputField({ validator: getCardNumberErrorMessage, fieldCount: 4 });
 
-    // 여기서 input state 별로 어디 보여줄지 관리
-    // 카드 번호 -> 카드사 -> 유효기간 -> CVC -> 비밀번호 순서
+    const [cardBrand, setCardBrand] = useState<CardBrandValue>('');
+
+    const {
+        values: expValues,
+        setValueByIndex: setExpValueByIndex,
+        errorMessage: expErrorMessage,
+        setErrorMessage: setExpErrorMessage,
+        hasTouched: hasExpTouched,
+        handleBlur: handleExpBlur,
+        handleFocus: handleExpFocus,
+        isSatisfy: isExpSatisfy,
+    } = useCardInfoInputField({ validator: getEXPNumberErrorMessage, fieldCount: 2 });
+
+    const {
+        values: cvcValues,
+        setValueByIndex: setCVCValueByIndex,
+        errorMessage: cvcErrorMessage,
+        setErrorMessage: setCVCErrorMessage,
+        hasTouched: hasCVCTouched,
+        handleBlur: handleCVCBlur,
+        handleFocus: handleCVCFocus,
+        isSatisfy: isCVCSatisfy,
+    } = useCardInfoInputField({ validator: (values) => getCVCumberErrorMessage(values[0]), fieldCount: 1 });
+
+    const {
+        values: passwordValues,
+        setValueByIndex: setPasswordValueByIndex,
+        errorMessage: passwordErrorMessage,
+        setErrorMessage: setPasswordErrorMessage,
+        hasTouched: hasPasswordTouched,
+        handleBlur: handlePasswordBlur,
+        handleFocus: handlePasswordFocus,
+    } = useCardInfoInputField({ validator: () => null, fieldCount: 1 });
+
+    const isCardBrandSatisfy = !!cardBrand;
 
     return (
         <MainContainer>
-            <CardPreview cardNumbers={cardNumbers} EXP={EXPNumbers} />
+            <CardPreview cardNumbers={cardNumberValues} EXP={expValues} />
             <InputSectionContainer>
                 <CardInfoSection
                     title="비밀번호"
                     caption="앞의 2자리를 입력해 주세요"
                     inputLabel="비밀번호 앞 2자리"
-                    isRender={isSatisfyCVC()}
+                    isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy}
                 >
-                    <PasswordInputWrapper setPassword={setPassword} validator={() => null} value={password} />
+                    <PasswordInputWrapper
+                        setPassword={setPasswordValueByIndex(0)}
+                        value={passwordValues[0]}
+                        handleBlur={handlePasswordBlur}
+                        handleFocus={handlePasswordFocus}
+                        errorMessage={passwordErrorMessage}
+                        setErrorMessage={setPasswordErrorMessage}
+                        hasTouched={hasPasswordTouched}
+                    />
                 </CardInfoSection>
-                <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isSatisfyEXP()}>
-                    <CVCInputWrapper setCVCNumber={setCVC} validator={getCVCumberErrorMessage} value={cvc} />
+                <CardInfoSection
+                    title="CVC 번호를 입력해 주세요"
+                    inputLabel="CVC"
+                    isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy}
+                >
+                    <CVCInputWrapper
+                        setCVCNumber={setCVCValueByIndex(0)}
+                        value={cvcValues[0]}
+                        handleBlur={handleCVCBlur}
+                        handleFocus={handleCVCFocus}
+                        errorMessage={cvcErrorMessage}
+                        setErrorMessage={setCVCErrorMessage}
+                        hasTouched={hasCVCTouched}
+                    />
                 </CardInfoSection>
                 <CardInfoSection
                     title="카드 유효기간을 입력해 주세요"
                     caption="월/년도(MMYY)를 순서대로 입력해 주세요"
                     inputLabel="유효기간"
-                    isRender={isSatisfyCardBrand()}
+                    isRender={isCardNumberSatisfy && isCardBrandSatisfy}
                 >
                     <EXPInputWrapper
-                        setEXPNumber={setEXPNumber}
-                        validator={getEXPNumberErrorMessage}
-                        value={EXPNumbers}
+                        setEXPNumber={setExpValueByIndex}
+                        value={expValues}
+                        handleBlur={handleExpBlur}
+                        handleFocus={handleExpFocus}
+                        errorMessage={expErrorMessage}
+                        setErrorMessage={setExpErrorMessage}
+                        hasTouched={hasExpTouched}
                     />
                 </CardInfoSection>
                 <CardInfoSection
                     title="카드사를 선택해 주세요"
                     caption="현재 국내 카드사만 가능합니다."
-                    // isRender={isSatisfyCardNumber()}
-                    isRender={true}
+                    isRender={isCardNumberSatisfy}
                 >
                     <CardBrandInputWrapper selectedValue={cardBrand} setSelectedValue={setCardBrand} />
                 </CardInfoSection>
-
                 <CardInfoSection
                     title="결제할 카드 번호를 입력해 주세요"
                     caption="본인 명의의 카드만 결제 가능합니다."
                     inputLabel="카드 번호"
                 >
                     <CardNumberInputWrapper
-                        setCardNumber={setCardNumber}
-                        validator={getCardNumberErrorMessage}
-                        value={cardNumbers}
+                        setCardNumber={setCardNumberValueByIndex}
+                        value={cardNumberValues}
+                        handleBlur={handleCardNumberBlur}
+                        handleFocus={handleCardNumberFocus}
+                        errorMessage={cardNumberErrorMessage}
+                        setErrorMessage={setCardNumberErrorMessage}
+                        hasTouched={hasCardNumberTouched}
                     />
                 </CardInfoSection>
             </InputSectionContainer>

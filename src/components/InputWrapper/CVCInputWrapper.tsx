@@ -1,28 +1,26 @@
-import { useState } from 'react';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
 
 interface CVCInputWrapperProps {
-    validator: (value: string) => string | null;
     setCVCNumber: (value: string) => void;
     value: string;
+    handleBlur: () => void;
+    handleFocus: () => void;
+    errorMessage: string | null;
+    setErrorMessage: (errorMessage: string | null) => void;
+    hasTouched: boolean;
 }
 
-export default function CVCInputWrapper({ validator, setCVCNumber, value }: CVCInputWrapperProps) {
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [hasTouched, setHasTouched] = useState(false);
-
-    const handleBlur = () => {
-        setHasTouched(true);
-        setErrorMessage(validator(value));
-    };
-
-    const handleFocus = () => {
-        setHasTouched(false);
-        setErrorMessage(null);
-    };
-
+export default function CVCInputWrapper({
+    setCVCNumber,
+    value,
+    handleBlur,
+    handleFocus,
+    errorMessage,
+    setErrorMessage,
+    hasTouched,
+}: CVCInputWrapperProps) {
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             <CardInfoInput

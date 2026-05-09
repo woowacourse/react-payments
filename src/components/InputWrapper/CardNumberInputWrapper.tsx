@@ -4,25 +4,24 @@ import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
 
 interface CardNumberInputWrapperProps {
-    validator: (value: string[]) => string | null;
     setCardNumber: (index: number) => (value: string) => void;
     value: string[];
+    handleBlur: () => void;
+    handleFocus: () => void;
+    errorMessage: string | null;
+    setErrorMessage: (errorMessage: string | null) => void;
+    hasTouched: boolean;
 }
 
-export default function CardNumberInputWrapper({ validator, setCardNumber, value }: CardNumberInputWrapperProps) {
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [hasTouched, setHasTouched] = useState(false);
-
-    const handleBlur = () => {
-        setHasTouched(true);
-        setErrorMessage(validator(value));
-    };
-
-    const handleFocus = () => {
-        setHasTouched(false);
-        setErrorMessage(null);
-    };
-
+export default function CardNumberInputWrapper({
+    setCardNumber,
+    value,
+    handleBlur,
+    handleFocus,
+    errorMessage,
+    setErrorMessage,
+    hasTouched,
+}: CardNumberInputWrapperProps) {
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             {value.map((_, index) => (

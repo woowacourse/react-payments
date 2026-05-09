@@ -1,26 +1,25 @@
-import { useState } from 'react';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 
 interface PasswordInputWrapperProps {
-    validator: (value: string) => string | null;
     setPassword: (value: string) => void;
     value: string;
+    handleBlur: () => void;
+    handleFocus: () => void;
+    errorMessage: string | null;
+    setErrorMessage: (errorMessage: string | null) => void;
+    hasTouched: boolean;
 }
 
-export default function PasswordInputWrapper({ validator, setPassword, value }: PasswordInputWrapperProps) {
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [hasTouched, setHasTouched] = useState(false);
-
-    const handleBlur = () => {
-        setHasTouched(true);
-        setErrorMessage(validator(value));
-    };
-
-    const handleFocus = () => {
-        setHasTouched(false);
-        setErrorMessage(null);
-    };
+export default function PasswordInputWrapper({
+    setPassword,
+    value,
+    handleBlur,
+    handleFocus,
+    errorMessage,
+    setErrorMessage,
+    hasTouched,
+}: PasswordInputWrapperProps) {
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             <CardInfoInput
