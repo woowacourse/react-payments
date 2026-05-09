@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import Input from "@components/common/Input.tsx";
-import type { ComponentProps } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 
 interface InputFieldProps {
   title: string;
   caption?: string;
   label: string;
-  inputPropsList: ComponentProps<typeof Input>[];
+  inputPropsList: ComponentPropsWithRef<typeof Input>[];
   helperMessage?: string;
 }
 

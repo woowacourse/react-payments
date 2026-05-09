@@ -8,6 +8,7 @@ import {
   HELPER_MESSAGE,
   type InputStatus,
 } from "./constants";
+import useInputFocus from "@/hooks/useInputFocus";
 
 export type ValidityPeriod = {
   month: string;
@@ -32,6 +33,7 @@ const CardValidityPeriodInputField = ({
   onChange,
 }: CardValidityPeriodInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
+  const { registerInput, focusNextInput } = useInputFocus();
 
   const handleValidityPeriodChange = (
     key: keyof ValidityPeriod,
@@ -42,14 +44,19 @@ const CardValidityPeriodInputField = ({
       return;
     }
 
+    const maxLength = key === "month" ? MONTH_MAX_LENGTH : YEAR_MAX_LENGTH;
+    const nextValue = input.slice(0, maxLength);
+
     setStatus((prev) => ({ ...prev, [key]: "DEFAULT" }));
+
     onChange({
       ...validityPeriod,
-      [key]: input.slice(
-        0,
-        key === "month" ? MONTH_MAX_LENGTH : YEAR_MAX_LENGTH,
-      ),
+      [key]: nextValue,
     });
+
+    if (nextValue.length === 2) {
+      focusNextInput(0);
+    }
   };
 
   const handleValidityPeriodBlur = (
@@ -84,6 +91,7 @@ const CardValidityPeriodInputField = ({
       label="유효기간"
       inputPropsList={[
         {
+          ref: registerInput(0),
           placeholder: "MM",
           maxLength: MONTH_MAX_LENGTH,
           fullWidth: true,
@@ -93,6 +101,7 @@ const CardValidityPeriodInputField = ({
           state: status.month === "DEFAULT" ? "default" : "error",
         },
         {
+          ref: registerInput(1),
           placeholder: "YY",
           maxLength: YEAR_MAX_LENGTH,
           fullWidth: true,

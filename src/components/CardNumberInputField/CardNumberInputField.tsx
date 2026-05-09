@@ -8,6 +8,7 @@ import {
   getCardNumberPlaceholder,
   adaptCardNumberUnitsToFormat,
 } from "@/utils/card";
+import useInputFocus from "@/hooks/useInputFocus";
 
 export type CardNumberUnits = string[];
 export type CardNumberFormat = number[];
@@ -31,6 +32,7 @@ const CardNumberInputField = ({
   onChange,
 }: CardNumberInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
+  const { registerInput, focusNextInput } = useInputFocus();
 
   const cardBrand = detectCardBrand(cardNumberUnits);
   const cardNumberFormat = getCardNumberFormat(cardBrand);
@@ -53,6 +55,10 @@ const CardNumberInputField = ({
 
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
     newCardNumberUnits[index] = input.slice(0, cardNumberFormat[index]);
+
+    if (newCardNumberUnits[index].length === cardNumberFormat[index]) {
+      focusNextInput(index);
+    }
 
     const newCardBrand = detectCardBrand(newCardNumberUnits);
     const newCardNumberFormat = getCardNumberFormat(newCardBrand);
@@ -101,6 +107,7 @@ const CardNumberInputField = ({
         ]
       }
       inputPropsList={cardNumberFormat.map((maxLength, index) => ({
+        ref: registerInput(index),
         placeholder: getCardNumberPlaceholder(maxLength),
         maxLength,
         fullWidth: true,
