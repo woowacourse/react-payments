@@ -1,9 +1,15 @@
 import {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
-import type {useExpiryDate} from '../../../hooks/useExpiryDate';
-
-type Props = ReturnType<typeof useExpiryDate>;
+type Props = {
+  expiryMonth: string;
+  expiryYear: string;
+  firstErrorIdx: number;
+  errorMsg: string;
+  handleMonthChange: (value: string) => void;
+  handleYearChange: (value: string) => void;
+  handleBlur: (index: number, value: string, type: 'month' | 'year') => void;
+};
 
 const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMonthChange, handleYearChange, handleBlur}: Props) => {
   const yearRef = useRef<HTMLInputElement | null>(null);

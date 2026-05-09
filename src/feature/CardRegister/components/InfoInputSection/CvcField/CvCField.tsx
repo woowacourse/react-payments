@@ -1,8 +1,12 @@
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
-import type {useCvcNumber} from '../../../hooks/useCvcNumber';
-
-type Props = ReturnType<typeof useCvcNumber>;
+type Props = {
+  cvcNumber: string;
+  firstErrorIdx: number;
+  errorMsg: string;
+  handleChange: (value: string) => void;
+  handleBlur: (value: string) => void;
+};
 
 const CvcField = ({cvcNumber, firstErrorIdx, errorMsg, handleChange, handleBlur}: Props) => {
   return (
