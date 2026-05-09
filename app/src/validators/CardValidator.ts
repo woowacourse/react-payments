@@ -1,3 +1,5 @@
+import type { NetworkBrand } from '../context/CardContext.ts';
+
 type ValidationResult = { valid: true } | { valid: false; message: string };
 
 export const Validator = {
@@ -9,7 +11,7 @@ export const Validator = {
     return { valid: true };
   },
 
-  detectNetworkBrand(value: string): 'visa' | 'master' | '' {
+  detectNetworkBrand(value: string): NetworkBrand {
     if (value.startsWith('4')) {
       return 'visa';
     }
