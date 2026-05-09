@@ -1,13 +1,7 @@
 import {useState} from 'react';
-import {CARD_BRANDS, DEFAULT_CARD_NUMBER_FORMAT, getBrandName} from '../domain/cardBrand';
-import type {CardBrandType} from '../domain/cardBrand';
+import {DEFAULT_CARD_NUMBER_FORMAT, getBrandName, getFormatByBrand, getCardNumberErrorMsg} from '../domain/cardBrand';
 import {createFlags, computeNextErrorInfo, computeNextTouched} from './fieldErrorUtils';
 import {resizeArray} from '../../../common/utils/array';
-
-const getFormatByBrand = (brand: CardBrandType | null) =>
-  brand ? [...CARD_BRANDS[brand].format] : DEFAULT_CARD_NUMBER_FORMAT;
-
-const buildErrorMsg = (digits: number) => `카드 번호 ${digits}자리를 입력해 주세요`;
 
 export function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -61,7 +55,7 @@ export function useCardNumbers() {
         errorInfo.errorMessages,
         index,
         false,
-        buildErrorMsg(nextFormat[index])
+        getCardNumberErrorMsg(nextFormat[index])
       );
       setErrorInfo(next);
     }
@@ -72,7 +66,7 @@ export function useCardNumbers() {
 
     const expected = format[index];
     const isValid = eValue.length === expected;
-    const next = computeNextErrorInfo(errorInfo.errorFlags, errorInfo.errorMessages, index, !isValid, buildErrorMsg(expected));
+    const next = computeNextErrorInfo(errorInfo.errorFlags, errorInfo.errorMessages, index, !isValid, getCardNumberErrorMsg(expected));
     setErrorInfo(next);
   };
 

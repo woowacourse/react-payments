@@ -29,3 +29,8 @@ export const getBrandName = (cardNumbers: string[]): CardBrandType | null => {
   if (!prefix) return null;
   return BRAND_MATCHERS.find(({match}) => match(prefix))?.brand ?? null;
 };
+
+export const getFormatByBrand = (brand: CardBrandType | null): number[] =>
+  brand ? [...CARD_BRANDS[brand].format] : DEFAULT_CARD_NUMBER_FORMAT;
+
+export const getCardNumberErrorMsg = (digits: number) => `카드 번호 ${digits}자리를 입력해 주세요`;
