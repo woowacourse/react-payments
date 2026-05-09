@@ -1,12 +1,11 @@
 import {useState} from 'react';
 import {CARD_BRANDS, DEFAULT_CARD_NUMBER_FORMAT, getBrandName} from '../domain/cardBrand';
+import type {CardBrandType} from '../domain/cardBrand';
 import {createFlags, computeNextErrorInfo, computeNextTouched} from './fieldState';
 import {resizeArray} from '../../../common/utils/array';
 
-const getCardNumberFormat = (cardNumbers: string[]) => {
-  const brand = getBrandName(cardNumbers);
-  return brand ? [...CARD_BRANDS[brand].format] : DEFAULT_CARD_NUMBER_FORMAT;
-};
+const getFormatByBrand = (brand: CardBrandType | null) =>
+  brand ? [...CARD_BRANDS[brand].format] : DEFAULT_CARD_NUMBER_FORMAT;
 
 const buildErrorMsg = (digits: number) => `카드 번호 ${digits}자리를 입력해 주세요`;
 
@@ -20,7 +19,7 @@ export function useCardNumbers() {
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(DEFAULT_CARD_NUMBER_FORMAT.length));
 
   const brand = getBrandName(cardNumbers);
-  const format = brand ? [...CARD_BRANDS[brand].format] : DEFAULT_CARD_NUMBER_FORMAT;
+  const format = getFormatByBrand(brand);
 
   const isComplete =
     cardNumbers.length === format.length && cardNumbers.every((chunk, i) => chunk.length === format[i]);
@@ -47,7 +46,7 @@ export function useCardNumbers() {
     const candidate = [...cardNumbers];
     candidate[index] = value;
 
-    const nextFormat = getCardNumberFormat(candidate);
+    const nextFormat = getFormatByBrand(getBrandName(candidate));
     if (value.length > nextFormat[index]) return;
 
     if (candidate.length !== nextFormat.length) {
