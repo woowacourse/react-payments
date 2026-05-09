@@ -1,25 +1,17 @@
 import styled from "@emotion/styled";
 import Input from "./Input";
 import { INPUT_CARD_NUMBER_CONFIG } from "../constants";
-import { type CardNumberState } from "../../../types/types";
-import { memo } from "react";
 
-function CardNumber({ cardNumber, setCardNumber }: CardNumberState) {
+export default function CardNumber() {
   return (
     <Wrapper>
       <Header>결제할 카드 번호를 입력해 주세요</Header>
       <SubHeader>본인 명의의 카드만 결제 가능합니다.</SubHeader>
       <Label>카드 번호</Label>
-      <Input
-        inputConfig={INPUT_CARD_NUMBER_CONFIG}
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-      />
+      <Input inputConfig={INPUT_CARD_NUMBER_CONFIG} />
     </Wrapper>
   );
 }
-
-export default memo(CardNumber);
 
 const Wrapper = styled.section`
   display: flex;

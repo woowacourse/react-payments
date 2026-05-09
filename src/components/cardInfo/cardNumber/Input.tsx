@@ -1,20 +1,15 @@
 import styled from "@emotion/styled";
-import { useCardNumberInput } from "../../../hooks/useCardNumberInput";
-import type { CardNumberState } from "../../../types/types";
+import { useCardNumberContext } from "../../../context/cardNumber/CardNumberContext";
 
-interface Props extends CardNumberState {
+interface Props {
   inputConfig: { name: string; placeholder: string; maxLength: number }[];
 }
 
-export default function Input({
-  inputConfig,
-  cardNumber,
-  setCardNumber,
-}: Props) {
-  const { cardNumberError, handleCardNumberChange } =
-    useCardNumberInput(setCardNumber);
+export default function Input({ inputConfig }: Props) {
+  const context = useCardNumberContext();
 
-  const displayError = cardNumberError.find((value) => value !== "") || "";
+  const displayError =
+    context.cardNumberError.find((value) => value !== "") || "";
 
   return (
     <Wrapper>
@@ -24,9 +19,11 @@ export default function Input({
             type="text"
             key={index}
             {...config}
-            value={cardNumber[index]}
-            onChange={(e) => handleCardNumberChange(index, e.target.value)}
-            $hasError={!!cardNumberError[index]}
+            value={context.cardNumber[index]}
+            onChange={(e) =>
+              context.handleCardNumberChange(index, e.target.value)
+            }
+            $hasError={!!context.cardNumberError[index]}
           />
         ))}
       </Container>
