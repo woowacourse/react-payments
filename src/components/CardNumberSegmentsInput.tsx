@@ -4,7 +4,7 @@ import {
   validateNumberString,
   validateStringLength,
   validateStringMaxLength,
-} from "../utils";
+} from "../utils/validators";
 import type { CardNumberSegments } from "../types";
 import Flex from "./Common/Flex";
 import Label from "./Common/Label";

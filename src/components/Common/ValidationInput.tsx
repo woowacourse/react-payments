@@ -34,13 +34,14 @@ export default function ValidationInput({
   validations,
   onChange,
   onBlur,
+  onChangeError,
   ...props
 }: ValidationInputProps) {
   const [inputError, setInputError] = useState<null | Error>(null);
 
   useEffect(() => {
-    props.onChangeError?.(inputError);
-  }, [inputError]);
+    onChangeError?.(inputError);
+  }, [inputError, onChangeError]);
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const failedValidation = validations.find(
