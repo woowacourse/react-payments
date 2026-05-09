@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {resizeArray} from '../../../common/utils/array';
 
-import {createFlags, createErrInfo, computeNextErrInfo, computeNextTouched} from './fieldErrorUtils';
+import {createFlags, createErrInfo, computeNextErrInfo, computeNextTouched} from '../utils/fieldErrorUtils';
 
 import {DEFAULT_CARD_NUMBER_FORMAT, getBrandName, getFormatByBrand, getCardNumberErrMsg} from '../domain/cardBrand';
 

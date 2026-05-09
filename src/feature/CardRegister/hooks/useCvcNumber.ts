@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {createFlags, createErrInfo, computeNextTouched, computeNextErrInfo} from './fieldErrorUtils';
+import {createFlags, createErrInfo, computeNextTouched, computeNextErrInfo} from '../utils/fieldErrorUtils';
 
 const CVC_DIGIT_COUNT = 3;
 const CVC_ERR_MSG = `CVC 번호 ${CVC_DIGIT_COUNT}자리를 입력해 주세요`;

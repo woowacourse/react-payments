@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {createFlags, createErrInfo, computeNextTouched, computeNextErrInfo} from './fieldErrorUtils';
+import {createFlags, createErrInfo, computeNextTouched, computeNextErrInfo} from '../utils/fieldErrorUtils';
 
 const EXPIRY_ERR_MSG = '2자리를 입력해 주세요';
 const INVALID_MONTH_ERR_MSG = '01~12 사이의 월을 입력해 주세요';
