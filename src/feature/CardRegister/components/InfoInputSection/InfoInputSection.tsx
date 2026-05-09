@@ -30,14 +30,16 @@ const InfoInputSection = ({
   showExpiry,
   showCvc,
 }: Props) => {
-  const fields = [
+  const infoInputFields = [
     {
+      id: 'cvc',
       show: showCvc,
       title: 'CVC 번호를 입력해 주세요',
       label: 'CVC',
       node: <CvcField {...cvcField} />,
     },
     {
+      id: 'expiry',
       show: showExpiry,
       title: '카드 유효기간을 입력해 주세요',
       description: '월/년도(MMYY)를 순서대로 입력해 주세요.',
@@ -45,12 +47,14 @@ const InfoInputSection = ({
       node: <ExpiryField {...expiryField} />,
     },
     {
+      id: 'company',
       show: showCompanySelect,
       title: '카드사를 선택해 주세요',
       description: '현재 국내 카드사만 가능합니다.',
       node: <BrandSelectField selectedCompany={selectedCompany} onChange={onCompanyChange} />,
     },
     {
+      id: 'number',
       show: true,
       title: '결제할 카드 번호를 입력해 주세요',
       description: '본인 명의의 카드만 결제 가능합니다.',
@@ -70,11 +74,11 @@ const InfoInputSection = ({
 
   return (
     <Container>
-      {fields
-        .filter((f) => f.show)
-        .map((f, i) => (
-          <InputContainer key={i} title={f.title} description={f.description} label={f.label}>
-            {f.node}
+      {infoInputFields
+        .filter((field) => field.show)
+        .map((field) => (
+          <InputContainer key={field.id} title={field.title} description={field.description} label={field.label}>
+            {field.node}
           </InputContainer>
         ))}
     </Container>
