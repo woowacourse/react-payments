@@ -1,3 +1,5 @@
+import { CARD_NUMBER_SEGMENT_LENGTHS } from "../../constants/constants";
+
 export const validateNumber = (newValue: string) => {
   const errorValue = { state: true, message: "" };
   if (!/^\d+$/.test(newValue) && newValue) {
@@ -37,9 +39,9 @@ export const validateCardNumberLength = (cardNumber: string[]) => {
     return errorValue;
   }
 
-  if (cardNumber.some((value) => value.length > 0 && value.length < 4)) {
+  if (cardNumber.some((value, index) => value.length > 0 && value.length < CARD_NUMBER_SEGMENT_LENGTHS[index])) {
     errorValue.state = false;
-    errorValue.message = "카드 번호 각 칸은 4자리를 입력해 주세요.";
+    errorValue.message = "카드 번호 각 칸을 모두 입력해 주세요.";
     return errorValue;
   }
 
@@ -93,4 +95,10 @@ export const validateCardPasswordLength = (cardPassword: string) => {
   }
 
   return errorValue;
+}
+
+export const isCardNumberComplete = (cardNumber: string[]): boolean => {
+  return cardNumber.every((string, i) => string.length === CARD_NUMBER_SEGMENT_LENGTHS[i]) &&
+    cardNumber.every((string) => validateNumber(string).state) &&
+    validateCardNumberLength(cardNumber).state;
 }

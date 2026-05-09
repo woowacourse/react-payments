@@ -9,6 +9,7 @@ import {
 } from '../CardInfo.styles';
 import { useCardNumberValidation } from './useCardNumberValidation';
 import { useCardForm } from '../../useCardForm';
+import { CARD_NUMBER_SEGMENT_LENGTHS } from '../../../constants/constants';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardNumber'];
@@ -28,7 +29,7 @@ export default function CardNumberField({ field }: Props) {
           <InfoInput
             key={index}
             placeholder="1234"
-            maxLength={4}
+            maxLength={CARD_NUMBER_SEGMENT_LENGTHS[index]}
             value={cardNumber[index]}
             onChange={(e) => {
               const updatedCardNumber = validate(e, index);
