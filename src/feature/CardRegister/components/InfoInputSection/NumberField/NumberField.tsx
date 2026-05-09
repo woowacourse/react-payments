@@ -1,7 +1,7 @@
 import {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
-import {StyledField, ErrMessage} from '../fieldStyles';
+import {StyledField, ErrMessage} from '../inputFieldStyles';
 
 type Props = {
   cardNumbers: string[];

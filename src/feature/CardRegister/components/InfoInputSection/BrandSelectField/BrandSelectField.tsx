@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {StyledField} from '../fieldStyles';
+import {StyledField} from '../inputFieldStyles';
 import {CARD_COMPANIES} from '../../../domain/cardCompany';
 import type {CardCompanyType} from '../../../domain/cardCompany';
 
