@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import CardPreviewContainer from '../../../../../feature/CardRegister/components/CardPreviewSection/CardPreviewContainer';
 
@@ -11,6 +11,7 @@ const meta = {
       cardNumbers: ['', '', '', ''],
       expiryMonth: '',
       expiryYear: '',
+      cardCompanyId: null,
     },
   },
 } satisfies Meta<typeof CardPreviewContainer>;
@@ -26,6 +27,7 @@ export const Visa: Story = {
       cardNumbers: ['4123', '5678', '1234', '5678'],
       expiryMonth: '12',
       expiryYear: '30',
+      cardCompanyId: 'bc',
     },
   },
 };
@@ -36,6 +38,18 @@ export const MasterCard: Story = {
       cardNumbers: ['5123', '5678', '1234', '5678'],
       expiryMonth: '12',
       expiryYear: '30',
+      cardCompanyId: 'shinhan',
+    },
+  },
+};
+
+export const Amex: Story = {
+  args: {
+    cardPreviewInfo: {
+      cardNumbers: ['3434', '312323', '32134'],
+      expiryMonth: '12',
+      expiryYear: '30',
+      cardCompanyId: 'hyundai',
     },
   },
 };
@@ -46,6 +60,7 @@ export const UnknownBrand: Story = {
       cardNumbers: ['3123', '5678', '1234', '5678'],
       expiryMonth: '12',
       expiryYear: '30',
+      cardCompanyId: null,
     },
   },
 };
@@ -56,6 +71,7 @@ export const Partial: Story = {
       cardNumbers: ['4123', '56', '', ''],
       expiryMonth: '1',
       expiryYear: '',
+      cardCompanyId: 'woori',
     },
   },
 };

@@ -10,7 +10,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     cardNumbers: ['', '', '', ''],
-    setCardNumbers: fn(),
+    handleCardNumbersChange: fn(),
   },
 } satisfies Meta<typeof NumberField>;
 
@@ -22,16 +22,22 @@ export const Empty: Story = {};
 export const Partial: Story = {
   args: {
     cardNumbers: ['1234', '56', '', ''],
+    handleCardNumbersChange: fn(),
   },
 };
 
 export const Filled: Story = {
   args: {
     cardNumbers: ['1234', '5678', '1234', '5678'],
+    handleCardNumbersChange: fn(),
   },
 };
 
 export const Interactive: Story = {
+  args: {
+    cardNumbers: ['', '', '', ''],
+    handleCardNumbersChange: fn(),
+  },
   render: function InteractiveNumberField(args) {
     const [cardNumbers, setCardNumbers] = useState(args.cardNumbers);
 
@@ -39,7 +45,7 @@ export const Interactive: Story = {
       <NumberField
         {...args}
         cardNumbers={cardNumbers}
-        setCardNumbers={setCardNumbers}
+        handleCardNumbersChange={setCardNumbers}
       />
     );
   },

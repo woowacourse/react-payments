@@ -10,7 +10,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     cvcNumber: '',
-    setCvcNumber: fn(),
+    handleCvcNumberChange: fn(),
   },
 } satisfies Meta<typeof CvcField>;
 
@@ -22,15 +22,24 @@ export const Empty: Story = {};
 export const Filled: Story = {
   args: {
     cvcNumber: '123',
+    handleCvcNumberChange: fn(),
   },
 };
 
 export const Interactive: Story = {
+  args: {
+    cvcNumber: '',
+    handleCvcNumberChange: fn(),
+  },
   render: function InteractiveCvcField(args) {
     const [cvcNumber, setCvcNumber] = useState(args.cvcNumber);
 
     return (
-      <CvcField {...args} cvcNumber={cvcNumber} setCvcNumber={setCvcNumber} />
+      <CvcField
+        {...args}
+        cvcNumber={cvcNumber}
+        handleCvcNumberChange={setCvcNumber}
+      />
     );
   },
 };

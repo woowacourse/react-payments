@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import CardNumberDisplay from '../../../../../feature/CardRegister/components/CardPreviewSection/CardNumberDisplay';
 
@@ -25,5 +25,11 @@ export const Partial: Story = {
 export const Filled: Story = {
   args: {
     cardNumbers: ['1234', '5678', '1234', '5678'],
+  },
+};
+
+export const AmexLength: Story = {
+  args: {
+    cardNumbers: ['3434', '312323', '32134'],
   },
 };

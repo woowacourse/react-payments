@@ -1,5 +1,5 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
-import {fn} from 'storybook/test';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 
 import Input from '../../../common/components/Input';
 
@@ -30,6 +30,15 @@ export const NoInput: Story = {
   args: {
     value: '',
     placeholder: '1234',
+    strokeMode: 'default',
+  },
+};
+
+export const Password: Story = {
+  args: {
+    value: '12',
+    placeholder: '**',
+    type: 'password',
     strokeMode: 'default',
   },
 };

@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import Label from '../../../common/components/Label';
 
@@ -7,16 +7,11 @@ const meta = {
   component: Label,
   tags: ['autodocs'],
   args: {
-    // props
-    value: '',
+    value: '카드 번호',
   },
 } satisfies Meta<typeof Label>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    value: 'LabelTest',
-  },
-};
+export const Default: Story = {};

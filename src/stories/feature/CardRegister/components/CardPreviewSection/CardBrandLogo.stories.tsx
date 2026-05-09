@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import CardBrandLogo from '../../../../../feature/CardRegister/components/CardPreviewSection/CardBrandLogo';
 
@@ -23,5 +23,29 @@ export const Visa: Story = {
 export const MasterCard: Story = {
   args: {
     brandName: 'masterCard',
+  },
+};
+
+export const Amex: Story = {
+  args: {
+    brandName: 'amex',
+  },
+};
+
+export const Diners: Story = {
+  args: {
+    brandName: 'diners',
+  },
+};
+
+export const UnionPay: Story = {
+  args: {
+    brandName: 'unionPay',
+  },
+};
+
+export const Hidden: Story = {
+  args: {
+    brandName: null,
   },
 };
