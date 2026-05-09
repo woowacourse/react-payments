@@ -106,3 +106,7 @@ export const isCardNumberComplete = (cardNumber: string[]): boolean => {
 export const isCardBrandComplete = (cardBrand : string) : boolean =>{
   return cardBrand !== ""
 }
+
+export const isExpireDateComplete = (expireDate : string[]) : boolean =>{
+  return expireDate.every((string) => string.length === 2) && validateExpireDateNotPast(expireDate).state && validateMonth(expireDate[0]).state
+} 
