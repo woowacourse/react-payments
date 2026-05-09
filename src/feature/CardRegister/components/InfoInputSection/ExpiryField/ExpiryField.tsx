@@ -55,6 +55,7 @@ const ExpiryField = ({
         errorIndex === index ? ERROR_MESSAGES.expiryMonthRange : message,
       );
       setErrorInfo(newErrorInfo);
+      return;
     }
 
     setExpiryMonth(value);
@@ -113,13 +114,21 @@ const ExpiryField = ({
       setExpiryYear(formattedValue);
     }
 
-    const newErrorInfo = errorInfo.map((message, errorIndex) =>
-      errorIndex === index
-        ? validateTwoDigits(formattedValue)
-          ? ""
-          : ERROR_MESSAGES.expiryLength
-        : message,
-    );
+    const newErrorInfo = errorInfo.map((message, errorIndex) => {
+      if (errorIndex !== index) {
+        return message;
+      }
+
+      if (!validateTwoDigits(formattedValue)) {
+        return ERROR_MESSAGES.expiryLength;
+      }
+
+      if (expiryType === "month" && !validateMonth(formattedValue)) {
+        return ERROR_MESSAGES.expiryMonthRange;
+      }
+
+      return "";
+    });
     setErrorInfo(newErrorInfo);
   };
 
