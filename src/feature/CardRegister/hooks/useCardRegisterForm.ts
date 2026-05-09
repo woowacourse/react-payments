@@ -15,7 +15,12 @@ export function useCardRegisterForm() {
   const showCompanySelect = numberField.isComplete;
   const showExpiry = showCompanySelect && companyField.isComplete;
   const showCvc = showExpiry && expiryField.isComplete;
-  const isFormComplete = showCvc && cvcField.isComplete;
+
+  const isFormComplete =
+    numberField.isComplete &&
+    companyField.isComplete &&
+    expiryField.isComplete &&
+    cvcField.isComplete;
 
   const handleSubmit = () => {
     navigate('/complete', {
