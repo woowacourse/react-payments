@@ -1,20 +1,16 @@
 import styled from "@emotion/styled";
 import Input from "./Input";
-import { type ExpireDateState } from "../../../types/types";
-import { memo } from "react";
 
-function ExpireDate({ expireDate, setExpireDate }: ExpireDateState) {
+export default function ExpireDate() {
   return (
     <Wrapper>
       <Header>카드 유효기간을 입력해 주세요</Header>
       <SubHeader>월/년도(MMYY)를 순서대로 입력해 주세요.</SubHeader>
       <Label>유효기간</Label>
-      <Input expireDate={expireDate} setExpireDate={setExpireDate} />
+      <Input />
     </Wrapper>
   );
 }
-
-export default memo(ExpireDate);
 
 const Wrapper = styled.section`
   display: flex;

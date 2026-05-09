@@ -1,31 +1,33 @@
 import styled from "@emotion/styled";
-import { useExpireDateInput } from "../../../hooks/useExpireDateInput";
-import { type ExpireDateState } from "../../../types/types";
+import { useExpireDateContext } from "../../../context/expireDate/ExpireDateContext";
 
-export default function Input({ expireDate, setExpireDate }: ExpireDateState) {
-  const { expireDateError, handleMonthChange, handleYearChange } =
-    useExpireDateInput(setExpireDate);
+export default function Input() {
+  const expireDateContext = useExpireDateContext();
 
   return (
     <Wrapper>
       <Container>
         <MonthInput
-          value={expireDate.month}
+          value={expireDateContext.expireDate.month}
           placeholder="MM"
           maxLength={2}
-          onChange={(e) => handleMonthChange(e.target.value)}
-          $hasError={!!expireDateError.month}
+          onChange={(e) => expireDateContext.handleMonthChange(e.target.value)}
+          $hasError={!!expireDateContext.expireDateError.month}
         />
-        {expireDateError.month && <Error>{expireDateError.month}</Error>}
+        {expireDateContext.expireDateError.month && (
+          <Error>{expireDateContext.expireDateError.month}</Error>
+        )}
 
         <YearInput
-          value={expireDate.year}
+          value={expireDateContext.expireDate.year}
           placeholder="YY"
           maxLength={2}
-          onChange={(e) => handleYearChange(e.target.value)}
-          $hasError={!!expireDateError.year}
+          onChange={(e) => expireDateContext.handleYearChange(e.target.value)}
+          $hasError={!!expireDateContext.expireDateError.year}
         />
-        {expireDateError.year && <Error>{expireDateError.year}</Error>}
+        {expireDateContext.expireDateError.year && (
+          <Error>{expireDateContext.expireDateError.year}</Error>
+        )}
       </Container>
     </Wrapper>
   );
