@@ -9,6 +9,10 @@ import CardFirmSelect from "../components/CardFirmSelect/CardFirmSelect";
 import PassWordInputWrapper from "../components/InputWrapper/PassWordInputWrapper";
 import CheckBtn from "../components/button/CheckBtn";
 import { useNavigate } from "react-router-dom";
+import { getCardNumberErrorMessage } from "../utils/getCardNumberErrorMessage";
+import { getEXPNumberErrorMessage } from "../utils/getEXPNumberErrorMessage";
+import { getCVCNumberErrorMessage } from "../utils/getCVCNumberErrorMessage";
+import { getPassWordErrorMessage } from "../utils/getPassWordErrorMessage";
 
 export default function CardRegister() {
   const [cardNumbers, setCardNumbers] = useState({
@@ -25,7 +29,14 @@ export default function CardRegister() {
   const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
   const [isEXPCompleted, setIsEXPCompleted] = useState(false);
   const [isCVCCompleted, setIsCVCCompleted] = useState(false);
-  const [isPassWordCompleted, setIsPassWordCompleted] = useState(false);
+
+  const isAllValid =
+    cardFirm.value !== "" &&
+    getCardNumberErrorMessage(cardNumbers) === null &&
+    getEXPNumberErrorMessage(EXPNumbers) === null &&
+    getCVCNumberErrorMessage(cvc) === null &&
+    getPassWordErrorMessage(passWord) === null;
+
   const navigate = useNavigate();
 
   return (
@@ -43,13 +54,7 @@ export default function CardRegister() {
             caption="앞의 2자리를 입력해주세요"
             label="비밀번호 앞 2자리"
           >
-            <PassWordInputWrapper
-              setPassWord={setPassword}
-              value={passWord}
-              onComplete={(isCompleted) => {
-                if (isCompleted) setIsPassWordCompleted(true);
-              }}
-            />
+            <PassWordInputWrapper setPassWord={setPassword} value={passWord} />
           </CardInfoSection>
         )}
 
@@ -108,7 +113,7 @@ export default function CardRegister() {
           />
         </CardInfoSection>
       </InputSectionContainer>
-      {isPassWordCompleted && (
+      {isAllValid && (
         <CheckBtn
           onClick={() =>
             navigate("/complete", {
@@ -127,19 +132,25 @@ const InputSectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+  width: 100%;
 `;
 
 const MainContainer = styled.main`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 45px;
-  padding: 40px 20px;
+  padding: 40px 20px 20px;
   width: 376px;
-  min-height: 100vh;
-  overflow-y: auto;
+  height: 700px;
+  overflow: hidden;
   box-sizing: border-box;
-  margin: 0 auto;
   border: 0.5px solid #e0e0e0;
 `;

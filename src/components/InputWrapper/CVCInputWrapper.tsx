@@ -21,9 +21,8 @@ export default function CVCInputWrapper({
       <NumberInput
         value={value}
         setValue={(newValue) => {
-          const newCVCNumber = newValue;
-          setCVCNumber(newCVCNumber);
-          onComplete(newCVCNumber.length === 3 && inputError === null);
+          setCVCNumber(newValue);
+          onComplete(newValue.length === 3 && inputError === null);
         }}
         placeholder="123"
         autoFocus
@@ -31,7 +30,7 @@ export default function CVCInputWrapper({
         maxLength={3}
         onError={setInputError}
         onBlur={() => {
-          setInputError(getCVCNumberErrorMessage(value));
+          if (value !== "") setInputError(getCVCNumberErrorMessage(value));
         }}
         style={{ width: "315px" }}
       />

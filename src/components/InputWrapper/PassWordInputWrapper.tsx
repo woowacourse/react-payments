@@ -6,14 +6,9 @@ import { getPassWordErrorMessage } from "../../utils/getPassWordErrorMessage";
 interface Props {
   setPassWord: (value: string) => void;
   value: string;
-  onComplete: (isCompleted: boolean) => void;
 }
 
-export default function PassWordInputWrapper({
-  setPassWord,
-  value,
-  onComplete,
-}: Props) {
+export default function PassWordInputWrapper({ setPassWord, value }: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
   return (
@@ -23,9 +18,7 @@ export default function PassWordInputWrapper({
         autoFocus
         value={value}
         setValue={(newValue) => {
-          const newPassWord = newValue;
-          setPassWord(newPassWord);
-          onComplete(newPassWord.length === 2 && inputError === null);
+          setPassWord(newValue);
         }}
         placeholder="123"
         hasError={inputError !== null}

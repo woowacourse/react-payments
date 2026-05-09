@@ -19,6 +19,7 @@ export default function NumberInput({
   setValue,
   onError,
   hasError,
+  ref,
   ...props
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +42,7 @@ export default function NumberInput({
       type="text"
       inputMode="numeric"
       onChange={(e) => handleInputChange(e)}
+      {...(ref ? { ref } : {})}
       {...props}
     />
   );

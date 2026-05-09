@@ -4,13 +4,13 @@ interface Props {
 }
 export default function CheckBtn({ onClick }: Props) {
   return (
-    <Footer>
+    <BTNDIV>
       <BTN onClick={onClick}>확인</BTN>
-    </Footer>
+    </BTNDIV>
   );
 }
 
-const Footer = styled.footer`
+const BTNDIV = styled.div`
   width: 100%;
 `;
 const BTN = styled.button`

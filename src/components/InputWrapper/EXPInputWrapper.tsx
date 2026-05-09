@@ -30,7 +30,7 @@ export default function EXPInputWrapper({
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
   useEffect(() => {
-    if (value.mm.length === 2) {
+    if (value.mm.length === 2 && value.yy === "") {
       const result = getEXPNumberErrorMessage({ mm: value.mm, yy: value.yy });
       if (result === null || result.key !== "mm") {
         inputRefs.current["yy"]?.focus();
