@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import CardValidityPeriodInputField from "../components/feature/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import CardValidityPeriodInputField from "../components/feature/CardInfoForm/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
 
 const meta = {
   title: "CardValidityPeriodInputField",

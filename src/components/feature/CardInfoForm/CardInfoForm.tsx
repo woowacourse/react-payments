@@ -1,9 +1,9 @@
 import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
 import StepFunnel from "@components/common/StepFunnel/StepFunnel";
-import CardCompanySelectField from "@components/feature/CardCompanySelectField/CardCompanySelectField";
-import CardCVCInputField from "@components/feature/CardCVCInputField";
-import CardNumberInputField from "@components/feature/CardNumberInputField/CardNumberInputField";
-import CardValidityPeriodInputField from "@components/feature/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import CardCompanySelectField from "@/components/feature/CardInfoForm/components/CardCompanySelectField/CardCompanySelectField";
+import CardCVCInputField from "@/components/feature/CardInfoForm/components/CardCVCInputField";
+import CardNumberInputField from "@/components/feature/CardInfoForm/components/CardNumberInputField/CardNumberInputField";
+import CardValidityPeriodInputField from "@/components/feature/CardInfoForm/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
 import type CARD_COMPANY_SELECT_FIELD from "@constants/card";
 import styled from "@emotion/styled";
 import { useState, type ReactNode } from "react";
