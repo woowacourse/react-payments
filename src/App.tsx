@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import CardPreview from './components/CardPreview';
-import CardForm from './components/CardForm';
-import { useCardBrand } from './hooks/useCardBrand';
-import type { CardNumberSegments } from './types';
-import styled from '@emotion/styled';
+import { useState } from "react";
+import CardPreview from "./components/CardPreview";
+import CardForm from "./components/CardForm";
+import { getCardBrand } from "./utils/getCardBrand";
+import type { CardNumberSegments } from "./types";
+import styled from "@emotion/styled";
 
 const View = styled.div`
   width: 100%;
@@ -14,13 +14,13 @@ const View = styled.div`
 
 function App() {
   const [formState, setFormState] = useState({
-    cardNumberSegments: ['', '', '', ''] as CardNumberSegments,
-    expiryMonth: '',
-    expiryYear: '',
-    cvc: '',
+    cardNumberSegments: ["", "", "", ""] as CardNumberSegments,
+    expiryMonth: "",
+    expiryYear: "",
+    cvc: "",
   });
 
-  const brand = useCardBrand(formState.cardNumberSegments);
+  const brand = getCardBrand(formState.cardNumberSegments);
 
   return (
     <View>

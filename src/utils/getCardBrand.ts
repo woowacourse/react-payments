@@ -1,4 +1,4 @@
-export function useCardBrand(
+export function getCardBrand(
   cardNumberSegments: [string, string, string, string],
 ) {
   if (/^4/.test(cardNumberSegments[0])) return "VISA";
