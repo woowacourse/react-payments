@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CvcField from "./CvcField/CvCField";
 import ExpiryField from "./ExpiryField/ExpiryField";
 import InputContainer from "./InputContainer/InputContainer";
@@ -29,10 +29,12 @@ const InfoInputSection = ({
   const [cvcNumber, setCvcNumber] = useState("");
   const [password, setPassword] = useState("");
   const [formStep, setFormStep] = useState(1);
+  const confirmButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
     cardInfo;
   const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardInfoHandlers;
+
   const cardBrand = getCardBrandName(cardNumbers);
   const getBrandLastCardNumberLength = (cardBrand: CardBrandType) => {
     if (cardBrand === "visa") {
@@ -68,6 +70,12 @@ const InfoInputSection = ({
   const isFormComplete = Object.values(fieldCompleteState).every(
     (isCompleteFiled) => isCompleteFiled,
   );
+
+  useEffect(() => {
+    if (!isFormComplete) return;
+
+    confirmButtonRef.current?.focus();
+  }, [isFormComplete]);
 
   if (fieldCompleteState.cardNumber && formStep < 2) {
     setFormStep((previous) => previous + 1);
@@ -152,7 +160,13 @@ const InfoInputSection = ({
         </InputContainer>
       )}
       {isFormComplete && (
-        <ConfirmButton size="full" type="submit">
+        <ConfirmButton
+          ref={(node) => {
+            confirmButtonRef.current = node;
+          }}
+          size="full"
+          type="submit"
+        >
           확인
         </ConfirmButton>
       )}

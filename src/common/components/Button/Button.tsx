@@ -1,16 +1,17 @@
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 import styled, { css } from "styled-components";
 
 type ButtonSize = "full" | "block";
 
 type ButtonProps = Pick<
-  ComponentPropsWithoutRef<"button">,
-  "className" | "disabled" | "type" | "children" | "onClick"
+  ComponentPropsWithRef<"button">,
+  "className" | "disabled" | "type" | "children" | "onClick" | "ref"
 > & {
   size: ButtonSize;
 };
 
 const Button = ({
+  ref,
   className,
   type = "button",
   disabled,
@@ -20,6 +21,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <ButtonRoot
+      ref={ref}
       className={className}
       type={type}
       disabled={disabled}
