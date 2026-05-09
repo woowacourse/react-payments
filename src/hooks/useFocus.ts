@@ -26,7 +26,12 @@ const useFocus = () => {
   }, []);
 
   return {
-    activeElementRef: inputRefs,
+    getCurrentFocusRef: () => {
+      const currentIndex = inputRefs.current.findIndex(
+        (el) => el === document.activeElement,
+      );
+      return inputRefs.current[currentIndex] || null;
+    },
     registerInputRef,
     setFocus,
     setNextFocus,
