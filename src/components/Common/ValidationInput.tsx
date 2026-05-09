@@ -1,8 +1,4 @@
-import {
-  useState,
-  type ChangeEvent,
-  type ComponentProps,
-} from "react";
+import { useState, type ChangeEvent, type ComponentProps } from "react";
 import styled from "@emotion/styled";
 import Flex from "./Flex";
 import InputErrorMessage from "./InputErrorMessage";

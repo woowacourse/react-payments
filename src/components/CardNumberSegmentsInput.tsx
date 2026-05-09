@@ -1,13 +1,9 @@
 import { type ChangeEvent } from "react";
 import ValidationInput from "./Common/ValidationInput";
-import {
-  validateNumberString,
-  validateStringLength,
-  validateStringMaxLength,
-} from "../utils/validators";
 import type { CardNumberSegments } from "../types";
 import Flex from "./Common/Flex";
 import Label from "./Common/Label";
+import { numberSegmentValidations } from "../utils/validationRules";
 
 interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;
@@ -36,23 +32,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             value={el}
             onChange={handleChange}
             isShowError={true}
-            validations={[
-              {
-                type: "validateOnChange",
-                validator: validateNumberString,
-                message: "숫자만 입력 가능합니다.",
-              },
-              {
-                type: "validateOnChange",
-                validator: (input: string) => validateStringMaxLength(input, 4),
-                message: "4자리까지만 입력 가능합니다.",
-              },
-              {
-                type: "validateOnBlur",
-                validator: (input: string) => validateStringLength(input, 4),
-                message: "4자리를 입력해주세요.",
-              },
-            ]}
+            validations={numberSegmentValidations}
           />
         ))}
       </Flex>
