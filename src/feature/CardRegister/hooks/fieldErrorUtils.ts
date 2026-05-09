@@ -1,5 +1,10 @@
 export const createFlags = (count: number): boolean[] => Array.from({length: count}, () => false);
 
+export const createErrInfo = (fieldCount: number) => ({
+  errFlags: createFlags(fieldCount),
+  errMessages: Array(fieldCount).fill('') as string[],
+});
+
 export const computeNextTouched = (prev: boolean[], index: number) =>
   prev.map((touched, i) => (i === index ? true : touched));
 

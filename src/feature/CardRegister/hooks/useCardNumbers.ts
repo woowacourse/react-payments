@@ -1,15 +1,16 @@
 import {useState} from 'react';
-import {DEFAULT_CARD_NUMBER_FORMAT, getBrandName, getFormatByBrand, getCardNumberErrMsg} from '../domain/cardBrand';
-import {createFlags, computeNextErrInfo, computeNextTouched} from './fieldErrorUtils';
 import {resizeArray} from '../../../common/utils/array';
+
+import {createFlags, createErrInfo, computeNextErrInfo, computeNextTouched} from './fieldErrorUtils';
+
+import {DEFAULT_CARD_NUMBER_FORMAT, getBrandName, getFormatByBrand, getCardNumberErrMsg} from '../domain/cardBrand';
+
+const CARD_NUMBER_FIELD_COUNT = DEFAULT_CARD_NUMBER_FORMAT.length;
 
 export function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [errInfo, setErrInfo] = useState({
-    errFlags: createFlags(DEFAULT_CARD_NUMBER_FORMAT.length),
-    errMessages: Array(DEFAULT_CARD_NUMBER_FORMAT.length).fill('') as string[],
-  });
-  const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(DEFAULT_CARD_NUMBER_FORMAT.length));
+  const [errInfo, setErrInfo] = useState(createErrInfo(CARD_NUMBER_FIELD_COUNT));
+  const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(CARD_NUMBER_FIELD_COUNT));
 
   const brand = getBrandName(cardNumbers);
   const format = getFormatByBrand(brand);
@@ -49,13 +50,15 @@ export function useCardNumbers() {
     }
 
     if (isTouched[index] && value.length === detectedFormat[index]) {
-      setErrInfo(computeNextErrInfo(
-        errInfo.errFlags,
-        errInfo.errMessages,
-        index,
-        false,
-        getCardNumberErrMsg(detectedFormat[index])
-      ));
+      setErrInfo(
+        computeNextErrInfo(
+          errInfo.errFlags,
+          errInfo.errMessages,
+          index,
+          false,
+          getCardNumberErrMsg(detectedFormat[index])
+        )
+      );
     }
   };
 
@@ -64,13 +67,9 @@ export function useCardNumbers() {
 
     const requiredLength = format[index];
     const isValid = rawValue.length === requiredLength;
-    setErrInfo(computeNextErrInfo(
-      errInfo.errFlags,
-      errInfo.errMessages,
-      index,
-      !isValid,
-      getCardNumberErrMsg(requiredLength)
-    ));
+    setErrInfo(
+      computeNextErrInfo(errInfo.errFlags, errInfo.errMessages, index, !isValid, getCardNumberErrMsg(requiredLength))
+    );
   };
 
   return {
