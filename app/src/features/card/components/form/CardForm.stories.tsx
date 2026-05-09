@@ -14,49 +14,71 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const CardNumberInputSection: Story = {
+const defaultArgs = {
+  cardNumber: {
+    "first-digits": "",
+    "second-digits": "",
+    "third-digits": "",
+    "fourth-digits": "",
+  },
+  setCardNumber: null,
+  cardExpiryDate: {
+    "expiry-month": "",
+    "expiry-year": "",
+  },
+  setCardExpiryDate: null,
+  cardBrand: "",
+  setCardBrand: null,
+  cardCVC: "",
+  setCardCVC: null,
+  cardPassword: "",
+  setCardPassword: null,
+};
+
+const renderWithState = (args: typeof defaultArgs) => {
+  const [cardNumber, setCardNumber] = useState(args.cardNumber);
+  const [cardExpiryDate, setCardExpiryDate] = useState(args.cardExpiryDate);
+  const [cardBrand, setCardBrand] = useState(args.cardBrand);
+  const [cardCVC, setCardCVC] = useState(args.cardCVC);
+  const [cardPassword, setCardPassword] = useState(args.cardPassword);
+
+  return (
+    <CardForm
+      cardNumber={cardNumber}
+      setCardNumber={setCardNumber}
+      cardExpiryDate={cardExpiryDate}
+      setCardExpiryDate={setCardExpiryDate}
+      cardBrand={cardBrand}
+      setCardBrand={setCardBrand}
+      cardCVC={cardCVC}
+      setCardCVC={setCardCVC}
+      cardPassword={cardPassword}
+      setCardPassword={setCardPassword}
+    />
+  );
+};
+
+export const BaseCardForm: Story = {
+  args: { ...defaultArgs },
+  render: renderWithState,
+};
+
+export const CompleteCardForm: Story = {
   args: {
-    cardNumber: "",
-    setCardNumber: null,
-    cardExpiryDate: "",
-    setCardExpiryDate: null,
-    cardBrand: "",
-    setCardBrand: null,
-    cardCVC: "",
-    setCardCVC: null,
-    cardPassword: "",
-    setCardPassword: null,
+    ...defaultArgs,
+    cardNumber: {
+      "first-digits": "4321",
+      "second-digits": "4321",
+      "third-digits": "4321",
+      "fourth-digits": "4321",
+    },
+    cardExpiryDate: {
+      "expiry-month": "01",
+      "expiry-year": "28",
+    },
+    cardBrand: "kakao",
+    cardCVC: "111",
+    cardPassword: "12",
   },
-  render: () => {
-    const [cardNumber, setCardNumber] = useState({
-      "first-digits": "",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
-    });
-    const [cardExpiryDate, setCardExpiryDate] = useState({
-      "expiry-month": "",
-      "expiry-year": "",
-    });
-
-    const [cardBrand, setCardBrand] = useState(null);
-
-    const [cardCVC, setCardCVC] = useState("");
-
-    const [cardPassword, setCardPassword] = useState("");
-    return (
-      <CardForm
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-        cardExpiryDate={cardExpiryDate}
-        setCardExpiryDate={setCardExpiryDate}
-        cardBrand={cardBrand}
-        setCardBrand={setCardBrand}
-        cardCVC={cardCVC}
-        setCardCVC={setCardCVC}
-        cardPassword={cardPassword}
-        setCardPassword={setCardPassword}
-      />
-    );
-  },
+  render: renderWithState,
 };
