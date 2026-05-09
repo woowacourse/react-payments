@@ -16,7 +16,7 @@ interface UseCardNumbersProps {
 }
 
 export interface UseCardNumbersResult {
-  cardNumbers: string[];
+  values: string[];
   errors: (string | undefined)[];
   errorMessage: string | undefined;
   maxLengths: number[];
@@ -28,12 +28,12 @@ export const useCardNumbers = ({
   validateCardNumber,
   validateCardNumberFormat,
 }: UseCardNumbersProps): UseCardNumbersResult => {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(CARD_BRAND_FORMAT.default.map(() => ''));
+  const [values, setValues] = useState<string[]>(CARD_BRAND_FORMAT.default.map(() => ''));
   const [errors, setErrors] = useState<(string | undefined)[]>(
     CARD_BRAND_FORMAT.default.map(() => undefined),
   );
 
-  const brand = getBrand(cardNumbers.join(''));
+  const brand = getBrand(values.join(''));
 
   const handleChange = (value: string, index: number): void => {
     const nextErrors = [...errors];
@@ -41,19 +41,19 @@ export const useCardNumbers = ({
     setErrors(nextErrors);
     if (nextErrors[index] !== undefined) return;
 
-    const nextCardNumbers = [...cardNumbers];
+    const nextCardNumbers = [...values];
     nextCardNumbers[index] = value;
-    setCardNumbers(nextCardNumbers);
+    setValues(nextCardNumbers);
   };
 
   const handleBlur = (index: number) => {
     const nextError = [...errors];
-    nextError[index] = validateCardNumber({ cardNumber: cardNumbers[index], index, brand });
+    nextError[index] = validateCardNumber({ cardNumber: values[index], index, brand });
     setErrors(nextError);
   };
 
   const errorMessage = errors.find((error) => error !== undefined);
   const maxLengths = CARD_BRAND_FORMAT[brand];
 
-  return { cardNumbers, errors, errorMessage, maxLengths, handleChange, handleBlur };
+  return { values, errors, errorMessage, maxLengths, handleChange, handleBlur };
 };

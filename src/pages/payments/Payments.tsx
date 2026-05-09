@@ -13,6 +13,7 @@ import {
 } from '@/entities/card/expiration';
 import { useCardNumbers } from '@/entities/card/useCardNumbers';
 import { validateCardNumber, validateCardNumberFormat } from '@/entities/card/cardNumbers';
+import { CardPreview, type CardInfo } from '@/features/cardPreview/CardPreview';
 
 export const Payments = () => {
   const cardNumbers = useCardNumbers({
@@ -33,9 +34,17 @@ export const Payments = () => {
 
   const cvc = useField({ validateFormat: validateCvcFormat, validateComplete: validateCvc });
 
+  const cardInfo: CardInfo = {
+    cardNumbers: cardNumbers.values,
+    expirationDate: {
+      month: month.value,
+      year: year.value,
+    },
+  };
+
   return (
     <div className={styles.payments}>
-      {/* <CardPreview info={cardInfo} /> */}
+      <CardPreview info={cardInfo} />
       <form>
         <CardNumberFormGroup results={cardNumbers} />
         <ExpirationDateFormGroup month={month} year={year} />

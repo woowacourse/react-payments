@@ -16,7 +16,7 @@ export const CardNumberFormGroup = ({ results }: CardNumberFormGroupProps) => {
       label="카드 번호"
       errorMessage={results.errorMessage}
     >
-      {results.cardNumbers.map((cardNumber, index) => (
+      {results.values.map((cardNumber, index) => (
         <Input
           type="text"
           inputMode="numeric"
