@@ -24,6 +24,12 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
     }
   };
 
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && cardNumbers[index] === '' && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
   return (
     <StyledField>
       <InputWrapper $columns={format.map((n) => `${n}fr`).join(' ')}>
@@ -40,6 +46,7 @@ const NumberField = ({cardNumbers, format, firstErrorIdx, errorMsg, onChange, on
             strokeMode={index === firstErrorIdx ? 'error' : 'default'}
             onChange={(e) => handleChange(index, e.target.value)}
             onBlur={(e) => onBlur(index, e.target.value)}
+            onKeyDown={(e) => handleKeyDown(index, e)}
           />
         ))}
       </InputWrapper>

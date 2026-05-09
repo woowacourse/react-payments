@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import React, {useRef} from 'react';
 import Input from '../../../../../common/components/Input/Input';
 import styled from 'styled-components';
 type Props = {
@@ -12,6 +12,7 @@ type Props = {
 };
 
 const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMonthChange, handleYearChange, handleBlur}: Props) => {
+  const monthRef = useRef<HTMLInputElement | null>(null);
   const yearRef = useRef<HTMLInputElement | null>(null);
 
   const onMonthChange = (value: string) => {
@@ -21,10 +22,17 @@ const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMo
     }
   };
 
+  const onYearKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && expiryYear === '') {
+      monthRef.current?.focus();
+    }
+  };
+
   return (
     <StyledField>
       <InputWrapper>
         <ExpiryInput
+          ref={monthRef}
           value={expiryMonth}
           maxLength={2}
           inputMode='numeric'
@@ -42,6 +50,7 @@ const ExpiryField = ({expiryMonth, expiryYear, firstErrorIdx, errorMsg, handleMo
           strokeMode={firstErrorIdx === 1 ? 'error' : 'default'}
           onChange={(e) => handleYearChange(e.target.value)}
           onBlur={(e) => handleBlur(1, e.target.value, 'year')}
+          onKeyDown={onYearKeyDown}
         />
       </InputWrapper>
 
