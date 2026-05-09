@@ -57,7 +57,7 @@ export const invalidCardNumber: Story = {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole('textbox');
     await userEvent.type(firstInput, '1');
-    await userEvent.tab();
+    await expect(canvas.getByText('유효한 카드번호 형식이 아닙니다.')).toBeInTheDocument();
   },
 };
 
@@ -67,7 +67,38 @@ export const invalidMastercard: Story = {
     const canvas = within(canvasElement);
     const [firstInput] = canvas.getAllByRole('textbox');
     await userEvent.type(firstInput, '56');
-    await userEvent.tab();
+    await expect(canvas.getByText('유효한 카드번호 형식이 아닙니다.')).toBeInTheDocument();
+  },
+};
+
+export const validDiners: Story = {
+  render: renderWithContext,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput] = canvas.getAllByRole('textbox');
+    await userEvent.type(firstInput, '36');
+    await expect(canvas.queryByText('유효한 카드번호 형식이 아닙니다.')).toBeNull();
+  },
+};
+
+export const validAmex: Story = {
+  render: renderWithContext,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput] = canvas.getAllByRole('textbox');
+    await userEvent.type(firstInput, '34');
+    await expect(canvas.queryByText('유효한 카드번호 형식이 아닙니다.')).toBeNull();
+  },
+};
+
+export const validUnionPay: Story = {
+  render: renderWithContext,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const inputs = canvas.getAllByRole('textbox');
+    await userEvent.type(inputs[0], '6221');
+    await userEvent.type(inputs[1], '26');
+    await expect(canvas.queryByText('유효한 카드번호 형식이 아닙니다.')).toBeNull();
   },
 };
 
@@ -78,8 +109,7 @@ const createNoNetworkBrandValidationPlay =
     const input = canvas.getAllByRole('textbox')[inputIndex];
     await userEvent.type(input, '1');
     await userEvent.tab();
-    await expect(canvas.queryByText('유효한 카드 번호가 아닙니다.')).toBeNull();
-    await expect(canvas.queryByText('유효한 마스터카드 번호가 아닙니다.')).toBeNull();
+    await expect(canvas.queryByText('유효한 카드번호 형식이 아닙니다.')).toBeNull();
   };
 
 export const noNetworkBrandValidationOnSecondInput: Story = {

@@ -14,15 +14,33 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Visa: Story = {
+  args: {
+    networkBrand: "visa",
+  },
+};
+
 export const Master: Story = {
   args: {
     networkBrand: "master",
   },
 };
 
-export const Visa: Story = {
+export const Diners: Story = {
   args: {
-    networkBrand: "visa",
+    networkBrand: "diners",
+  },
+};
+
+export const Amex: Story = {
+  args: {
+    networkBrand: "amex",
+  },
+};
+
+export const UnionPay: Story = {
+  args: {
+    networkBrand: "unionpay",
   },
 };
 

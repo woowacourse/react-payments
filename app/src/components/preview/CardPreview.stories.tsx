@@ -79,3 +79,27 @@ export const MasterBrand: Story = {
     "master",
   ),
 };
+
+export const DinersBrand: Story = {
+  render: renderWithContext(
+    ['3600', '', '', ''],
+    defaultCardExpiryDate,
+    "diners",
+  ),
+};
+
+export const AmexBrand: Story = {
+  render: renderWithContext(
+    ['3400', '', '', ''],
+    defaultCardExpiryDate,
+    "amex",
+  ),
+};
+
+export const UnionPayBrand: Story = {
+  render: renderWithContext(
+    ['6221', '26', '', ''],
+    defaultCardExpiryDate,
+    "unionpay",
+  ),
+};
