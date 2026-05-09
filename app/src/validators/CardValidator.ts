@@ -11,13 +11,35 @@ export const Validator = {
     return { valid: true };
   },
 
+  isUnionPay(value: string) {
+    return (
+      /^622(1[2-9][6-9]|[2-9]\d{2})/.test(value) ||
+      /^62[4-6]/.test(value) ||
+      /^628[2-8]/.test(value)
+    );
+  },
+
   detectNetworkBrand(value: string): NetworkBrand {
-    if (value.startsWith('4')) {
+    if (/^4/.test(value)) {
       return 'visa';
     }
-    if (value.startsWith('5') && ['1', '2', '3', '4', '5'].includes(value[1])) {
+
+    if (/^5[1-5]/.test(value)) {
       return 'master';
     }
+
+    if (/^36/.test(value)) {
+      return 'diners';
+    }
+
+    if (/^3[47]/.test(value)) {
+      return 'amex';
+    }
+
+    if (this.isUnionPay(value)) {
+      return 'unionpay';
+    }
+
     return '';
   },
 
