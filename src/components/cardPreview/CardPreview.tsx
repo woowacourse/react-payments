@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { type CardPreviewProps } from "../../types/types";
-import CardPreviewInfo from "./CardPreviewInfo";
 import { selectCardType } from "../../utils/selectCardType";
+import CardPreviewNumber from "../common/CardPreviewNumber";
+import { maskCardNumber } from "../../utils/cardFormatters";
+import { formatExpireDate } from "../../utils/cardFormatters";
 
 export default function CardPreview({
   cardNumber,
@@ -17,7 +19,16 @@ export default function CardPreview({
           {cardType && <PayMethodImage src={cardType} alt="payment method" />}
         </Upper>
 
-        <CardPreviewInfo cardNumber={cardNumber} expireDate={expireDate} />
+        <CardImageInfoWrapper>
+          <CardPreviewNumber
+            gap="10px"
+            cardArray={maskCardNumber(cardNumber)}
+          />
+          <CardPreviewNumber
+            gap="0px"
+            cardArray={formatExpireDate(expireDate)}
+          />
+        </CardImageInfoWrapper>
       </Card>
     </CardPreviewWrapper>
   );
@@ -28,6 +39,7 @@ const CardPreviewWrapper = styled.section`
   align-items: center;
   justify-content: center;
   padding-top: 77px;
+  margin-bottom: 40px;
 `;
 
 const Card = styled.div`
@@ -56,4 +68,11 @@ const IC = styled.div`
 const PayMethodImage = styled.img`
   width: 36px;
   height: 22px;
+`;
+
+const CardImageInfoWrapper = styled.div`
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;

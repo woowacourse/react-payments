@@ -2,13 +2,13 @@ import styled from "@emotion/styled";
 import type { CardNumber } from "../../types/types";
 
 interface CardNumberProps {
-  id: "cardNumber" | "expireNumber";
+  gap: string;
   cardArray: CardNumber;
 }
 
-export default function CardPreviewNumber({ id, cardArray }: CardNumberProps) {
+export default function CardPreviewNumber({ gap, cardArray }: CardNumberProps) {
   return (
-    <CardNumberWrapper id={id}>
+    <CardNumberWrapper $gap={gap}>
       {cardArray.map((value, index) => (
         <CardNumberParagraph key={index}>{value}</CardNumberParagraph>
       ))}
@@ -16,11 +16,7 @@ export default function CardPreviewNumber({ id, cardArray }: CardNumberProps) {
   );
 }
 
-interface CardNumberWrapperProps {
-  id: "cardNumber" | "expireNumber";
-}
-
-const CardNumberWrapper = styled.div<CardNumberWrapperProps>`
+const CardNumberWrapper = styled.div<{ $gap: string }>`
   display: flex;
   font-size: 14px;
   font-weight: 500;
@@ -28,7 +24,7 @@ const CardNumberWrapper = styled.div<CardNumberWrapperProps>`
   line-height: 20px;
   vertical-align: middle;
   color: rgba(255, 255, 255, 1);
-  gap: ${(props) => (props.id === "cardNumber" ? "10px" : "0px")};
+  gap: ${(props) => props.$gap};
 `;
 
 const CardNumberParagraph = styled.p`
