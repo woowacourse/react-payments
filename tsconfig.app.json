@@ -50,6 +50,9 @@
       ],
       "@constants/*": [
         "./src/constants/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
       ]
     }
   },

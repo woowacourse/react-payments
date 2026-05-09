@@ -67,6 +67,7 @@ export default defineConfig({
       { find: "@types", replacement: resolve(dirname, "src/types") },
       { find: "@hooks", replacement: resolve(dirname, "src/hooks") },
       { find: "@constants", replacement: resolve(dirname, "src/constants") },
+      { find: "@styles", replacement: resolve(dirname, "src/styles") },
     ],
   },
 });
