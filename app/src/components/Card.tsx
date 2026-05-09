@@ -3,6 +3,7 @@ import { CardPreview } from './preview/CardPreview.tsx';
 import { CardForm } from './form/CardForm.tsx';
 import styled from '@emotion/styled';
 import { CardContext } from '../context/CardContext';
+import type { NetworkBrand } from '../context/CardContext';
 
 export function Card() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
@@ -12,7 +13,7 @@ export function Card() {
     'expiry-year': '',
   });
 
-  const [networkBrand, setNetworkBrand] = useState('');
+  const [networkBrand, setNetworkBrand] = useState<NetworkBrand>('');
 
   return (
     <CardContext
