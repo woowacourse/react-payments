@@ -23,7 +23,7 @@ export const CardNumber: Story = {
                 inputBlock={isNumeric}
                 isError={false}
                 maxLength={4}
-                placeHolder="0000"
+                placeholder="0000"
             />
         );
     },
@@ -40,7 +40,7 @@ export const EXPMonth: Story = {
                 inputBlock={isMonthMatch}
                 isError={false}
                 maxLength={2}
-                placeHolder="MM"
+                placeholder="MM"
             />
         );
     },
@@ -57,7 +57,7 @@ export const EXPYear: Story = {
                 inputBlock={isNumeric}
                 isError={false}
                 maxLength={2}
-                placeHolder="YY"
+                placeholder="YY"
             />
         );
     },
@@ -74,7 +74,7 @@ export const CVC: Story = {
                 inputBlock={isNumeric}
                 isError={false}
                 maxLength={3}
-                placeHolder="123"
+                placeholder="123"
             />
         );
     },

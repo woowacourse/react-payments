@@ -28,7 +28,7 @@ export default function EXPInputWrapper({
                 value={value[0]}
                 setValue={setEXPNumber(0)}
                 size="medium"
-                placeHolder="MM"
+                placeholder="MM"
                 inputBlock={isMonthMatch}
                 setErrorMessage={setErrorMessage}
                 isError={hasTouched && value[0].length !== 2}
@@ -40,7 +40,7 @@ export default function EXPInputWrapper({
                 value={value[1]}
                 setValue={setEXPNumber(1)}
                 size="medium"
-                placeHolder="YY"
+                placeholder="YY"
                 inputBlock={isNumeric}
                 setErrorMessage={setErrorMessage}
                 isError={hasTouched && value[1].length !== 2}

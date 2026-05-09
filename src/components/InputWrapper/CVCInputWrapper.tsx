@@ -27,7 +27,7 @@ export default function CVCInputWrapper({
                 value={value}
                 setValue={setCVCNumber}
                 size="large"
-                placeHolder="123"
+                placeholder="123"
                 inputBlock={isNumeric}
                 setErrorMessage={setErrorMessage}
                 isError={hasTouched && value.length !== 3}

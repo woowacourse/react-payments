@@ -8,17 +8,13 @@ const INPUT_WIDTH: Record<InputSize, string> = {
     large: '315px',
 };
 
-interface CardInfoInputProps {
+interface CardInfoInputProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'onChange' | 'value'> {
     value: string;
     setValue: (value: string) => void;
     inputBlock?: (value: string) => string | null;
     setErrorMessage?: (message: string | null) => void;
     isError: boolean;
     size: InputSize;
-    maxLength?: number;
-    placeHolder?: string;
-    onBlur?: () => void;
-    onFocus?: () => void;
 }
 
 interface CardInfoInputStyleProps {
@@ -33,10 +29,7 @@ export default function CardInfoInput({
     setErrorMessage,
     isError,
     size,
-    placeHolder,
-    maxLength,
-    onBlur,
-    onFocus,
+    ...inputProps
 }: CardInfoInputProps) {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const tmpValue = e.target.value;
@@ -51,15 +44,12 @@ export default function CardInfoInput({
 
     return (
         <InputStyle
+            {...inputProps}
             isError={isError}
             type="text"
             value={value}
             onChange={handleInputChange}
             inputSize={size}
-            placeholder={placeHolder}
-            maxLength={maxLength}
-            onBlur={() => onBlur?.()}
-            onFocus={() => onFocus?.()}
         />
     );
 }

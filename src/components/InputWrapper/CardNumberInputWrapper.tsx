@@ -30,7 +30,7 @@ export default function CardNumberInputWrapper({
                     value={value[index]}
                     setValue={setCardNumber(index)}
                     size="small"
-                    placeHolder="1234"
+                    placeholder="1234"
                     inputBlock={isNumeric}
                     setErrorMessage={setErrorMessage}
                     isError={hasTouched && value[index].length !== 4}

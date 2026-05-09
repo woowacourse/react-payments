@@ -1,3 +1,4 @@
+import { isNumeric } from '../../utils/isNumeric';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 
@@ -27,11 +28,12 @@ export default function PasswordInputWrapper({
                 setValue={setPassword}
                 isError={hasTouched && value.length !== 2}
                 setErrorMessage={setErrorMessage}
+                inputBlock={isNumeric}
                 size="large"
                 maxLength={2}
                 onBlur={handleBlur}
                 onFocus={handleFocus}
-                placeHolder=""
+                placeholder=""
             />
         </CardInputWrapper>
     );
