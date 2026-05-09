@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { validateCardNumberLength, validateNumber } from "../validator";
 
-export function useCardNumber(cardNumber: string[]) {
+export function useCardNumberValidation(cardNumber: string[]) {
   const [error, setError] = useState("");
 
   const validate = (

@@ -7,7 +7,7 @@ import {
   Label,
   InputContainer,
 } from '../CardInfo.styles';
-import { useCardNumber } from './useCardNumber';
+import { useCardNumberValidation } from './useCardNumberValidation';
 import { useCardForm } from '../../useCardForm';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 //카드 번호를 입력할수 있는 컴포넌트
 export default function CardNumberField({ field }: Props) {
   const { value: cardNumber, set: setCardNumber } = field;
-  const { error, validate } = useCardNumber(cardNumber);
+  const { error, validate } = useCardNumberValidation(cardNumber);
 
   return (
     <Field>

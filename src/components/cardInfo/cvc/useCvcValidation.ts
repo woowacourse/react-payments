@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { validateCvcLength, validateNumber } from "../validator";
 
-export function useCvc() {
+export function useCvcValidation() {
   const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): string | null => {

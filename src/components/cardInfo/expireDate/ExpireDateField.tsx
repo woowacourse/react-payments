@@ -7,7 +7,7 @@ import {
   Label,
   InputContainer,
 } from '../CardInfo.styles';
-import { useExpireDate } from './useExpireDate';
+import { useExpireDateValidation } from './useExpireDateValidation';
 import { useCardForm } from '../../useCardForm';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 //유효기간을 적을수 있는 컴포넌트
 export default function ExpireDateField({ field }: Props) {
   const { value: expireDate, set: setExpireDate } = field;
-  const { error, handleChange } = useExpireDate(expireDate);
+  const { error, handleChange } = useExpireDateValidation(expireDate);
 
   return (
     <Field>

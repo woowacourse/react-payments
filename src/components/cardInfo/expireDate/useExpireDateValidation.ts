@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { validateExpireDateNotPast, validateMonth, validateNumber } from "../validator";
 
-export function useExpireDate(expireDate: string[]) {
+export function useExpireDateValidation(expireDate: string[]) {
   const [error, setError] = useState("");
 
   const handleChange = (

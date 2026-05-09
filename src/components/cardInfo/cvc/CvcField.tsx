@@ -6,7 +6,7 @@ import {
   Label,
   InputContainer,
 } from '../CardInfo.styles';
-import { useCvc } from './useCvc';
+import { useCvcValidation } from './useCvcValidation';
 import { useCardForm } from '../../useCardForm';
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 //cvc를 입력할 수 있는 컴포넌트
 export default function CvcField({ field }: Props) {
   const { value: cvc, set: setCvc } = field;
-  const { error, handleChange } = useCvc();
+  const { error, handleChange } = useCvcValidation();
 
   return (
     <Field>
