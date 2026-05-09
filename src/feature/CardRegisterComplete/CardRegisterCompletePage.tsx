@@ -22,8 +22,8 @@ const CardRegisterCompletePage = () => {
           <br />
           {state.companyName}가 등록되었어요.
         </Message>
+        <ConfirmButton onClick={() => navigate('/')}>확인</ConfirmButton>
       </Content>
-      <ConfirmButton onClick={() => navigate('/')}>확인</ConfirmButton>
     </Wrapper>
   );
 };
@@ -63,12 +63,18 @@ const Message = styled.p`
 
 const ConfirmButton = styled.button`
   flex-shrink: 0;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 42px;
   padding: 16px;
   background-color: #333333;
   color: #fff;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 15px;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
 `;
 
