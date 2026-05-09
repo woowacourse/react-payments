@@ -82,3 +82,18 @@
 
 - [ ] CVC 입력시 카드가 Flip Over 되는 이펙트
 - [ ] CVC 입력시 Preview 렌더링
+
+### 리팩토링 사항
+
+#### 버그
+
+- [ ] Amex, Diners와 같이 16자리가 아닌 경우 onFocus에 의해 16자 검증이 수행되어 에러메시지 반환
+
+#### 구조
+
+- [ ] Utils의 이름이 불명확함. 이름만으로는 기능유추가 어려움. Card내의 Utils로 이동시키고 더 직접적인 네이밍으로 전환
+- [ ] CardNetwork를 클래스가 아닌 객체로 전환
+- [ ] ProgressManager와 CardForm에 결합이 존재
+- [ ] Validator를 변경할 Error상태를 반환하는 형태로 전환할지 고민
+- [ ] ProgressManager의 Complete검증 메서드를 분리
+- [ ] ProgressManager는 Complete된지 여부에 따라 Progress만 조정하여 반환하도록 전환
