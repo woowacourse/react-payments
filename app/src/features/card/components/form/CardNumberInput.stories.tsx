@@ -36,14 +36,8 @@ const defaultArgs = {
 
 const renderWithState = (args: typeof defaultArgs) => {
   const [cardNumber, setCardNumber] = useState(args.cardNumber);
-  const [progress, setProgress] = useState(args.progress);
   return (
-    <CardNumberInput
-      cardNumber={cardNumber}
-      setCardNumber={setCardNumber}
-      progress={progress}
-      setProgress={setProgress}
-    />
+    <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
   );
 };
 
