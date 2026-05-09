@@ -56,10 +56,11 @@ export function CardNumberInput() {
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
+    const { value, id, maxLength } = e.target;
     const fieldId = id as keyof cardNumberFieldError;
+    const inputIndex = indexMap[id];
 
-    const result = Validator.isValidCardNumberLength(value, e.target.maxLength);
+    const result = Validator.isValidCardNumberLength(value, inputIndex, maxLength);
     if (!result.valid) {
       setError({ ...fieldErrors, [fieldId]: true, message: result.message });
       return;

@@ -9,9 +9,12 @@ export const Validator = {
     return { valid: true };
   },
 
-  isValidCardNumberLength(value: string, limit: number): ValidationResult {
+  isValidCardNumberLength(value: string, index: number, limit: number): ValidationResult {
     if (![0, limit].includes(value.length)) {
-      return { valid: false, message: '카드 번호 각 항목은 4자리여야 합니다.' };
+      return {
+        valid: false,
+        message: `카드번호의 ${index + 1}번째 항목은 ${limit}자리여야 합니다.`,
+      };
     }
     return { valid: true };
   },
