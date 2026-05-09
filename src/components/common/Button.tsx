@@ -23,6 +23,7 @@ const Button = styled.button<ButtonProps>`
       position: fixed;
       bottom: 0;
       left: 0;
+       z-index: 100;
     `}
 `;
 

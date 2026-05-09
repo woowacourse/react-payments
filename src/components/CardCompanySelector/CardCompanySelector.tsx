@@ -4,6 +4,7 @@ import arrowDownIcon from "@/assets/arrowDownIcon.svg";
 import { useState } from "react";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
 import type { CardCompany } from "@/constants/cardCompanies";
+import FormField from "@components/common/FormField";
 
 interface CardCompanySelectorProps {
   cardCompany: CardCompany | null;
@@ -26,9 +27,11 @@ function CardCompanySelector({
   };
 
   return (
-    <Container>
-      <Title>카드사를 선택해 주세요</Title>
-      <Caption>현재 국내 카드사만 가능합니다.</Caption>
+    <FormField
+      title="카드사를 선택해 주세요"
+      caption="현재 국내 카드사만 가능합니다."
+      label="카드 번호"
+    >
       <SelectButton type="button" onClick={handleToggle}>
         <SelectedText state={cardCompany ? "selected" : "placeholder"}>
           {cardCompany?.name ?? "카드사를 선택해주세요"}
@@ -47,26 +50,9 @@ function CardCompanySelector({
           ))}
         </OptionList>
       )}
-    </Container>
+    </FormField>
   );
 }
-
-const Container = styled.section`
-  position: relative;
-  width: 100%;
-`;
-
-const Title = styled.h2`
-  font-weight: 700;
-  font-size: 1.2rem;
-`;
-
-const Caption = styled.p`
-  font-weight: 400;
-  font-size: 0.6rem;
-  color: ${COLOR_PALETTE.CAPTION};
-  margin-top: 0.25rem;
-`;
 
 const SelectButton = styled.button`
   display: flex;
@@ -101,7 +87,7 @@ const ArrowIcon = styled.img`
 
 const OptionList = styled.ul`
   position: absolute;
-  top: calc(100% + 0.3rem);
+  top: calc(100%);
   left: 0;
   z-index: 10;
   box-sizing: border-box;

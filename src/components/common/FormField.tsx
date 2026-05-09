@@ -10,7 +10,7 @@ interface FormFieldProps {
   children: ReactNode;
 }
 
-const InputField = ({
+const FormField = ({
   title,
   caption,
   label,
@@ -32,6 +32,7 @@ const InputField = ({
 };
 
 const Container = styled.section`
+  position: relative;
   width: 100%;
 `;
 
@@ -68,9 +69,11 @@ const FieldContent = styled.div`
 `;
 
 const HelperMessage = styled.p`
+  margin: 0.75rem 0 0;
+  min-height: 0.75rem;
   font-weight: 400;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   color: ${COLOR_PALETTE.ERROR};
 `;
 
-export default InputField;
+export default FormField;

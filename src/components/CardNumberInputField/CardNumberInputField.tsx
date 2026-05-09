@@ -1,4 +1,3 @@
-import InputField from "@components/common/InputField.tsx";
 import { checkIsOnlyDigits, checkLengthMatches } from "@utils/validator";
 import { useState } from "react";
 import { HELPER_MESSAGE, type InputStatus } from "./constants";
@@ -9,6 +8,8 @@ import {
   adaptCardNumberUnitsToFormat,
 } from "@/utils/card";
 import useInputFocus from "@/hooks/useInputFocus";
+import FormField from "@components/common/FormField";
+import Input from "@components/common/Input";
 
 export type CardNumberUnits = string[];
 export type CardNumberFormat = number[];
@@ -97,7 +98,7 @@ const CardNumberInputField = ({
   };
 
   return (
-    <InputField
+    <FormField
       title="결제할 카드 번호를 입력해 주세요"
       caption="본인 명의의 카드만 결제 가능합니다."
       label="카드 번호"
@@ -106,23 +107,27 @@ const CardNumberInputField = ({
           status.find((inputStatus) => inputStatus !== "DEFAULT") ?? "DEFAULT"
         ]
       }
-      inputPropsList={cardNumberFormat.map((maxLength, index) => ({
-        ref: registerInput(index),
-        placeholder: getCardNumberPlaceholder(maxLength),
-        maxLength,
-        fullWidth: true,
-        value: cardNumberUnits[index],
-        onChange: (e) => {
-          const input = e.target.value;
-          handleCardNumberChange(index, input);
-        },
-        onBlur: (e) => {
-          const input = e.target.value;
-          handleCardNumberBlur(index, input);
-        },
-        state: status[index] === "DEFAULT" ? "default" : "error",
-      }))}
-    />
+    >
+      {cardNumberFormat.map((maxLength, index) => (
+        <Input
+          key={index}
+          ref={registerInput(index)}
+          placeholder={getCardNumberPlaceholder(maxLength)}
+          maxLength={maxLength}
+          fullWidth
+          value={cardNumberUnits[index]}
+          onChange={(e) => {
+            const input = e.target.value;
+            handleCardNumberChange(index, input);
+          }}
+          onBlur={(e) => {
+            const input = e.target.value;
+            handleCardNumberBlur(index, input);
+          }}
+          state={status[index] === "DEFAULT" ? "default" : "error"}
+        />
+      ))}
+    </FormField>
   );
 };
 

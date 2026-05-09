@@ -1,5 +1,4 @@
 import { checkIsOnlyDigits, validateMonthRange } from "@/utils/validator";
-import InputField from "@components/common/InputField.tsx";
 import { padValidityPeriodUnit } from "@utils/card";
 import { useState } from "react";
 import {
@@ -9,6 +8,8 @@ import {
   type InputStatus,
 } from "./constants";
 import useInputFocus from "@/hooks/useInputFocus";
+import FormField from "@components/common/FormField";
+import Input from "@components/common/Input";
 
 export type ValidityPeriod = {
   month: string;
@@ -85,38 +86,37 @@ const CardValidityPeriodInputField = ({
   };
 
   return (
-    <InputField
+    <FormField
       title="카드 유효기간을 입력해 주세요"
       caption="월/년도(MMYY)를 순서대로 입력해 주세요."
       label="유효기간"
-      inputPropsList={[
-        {
-          ref: registerInput(0),
-          placeholder: "MM",
-          maxLength: MONTH_MAX_LENGTH,
-          fullWidth: true,
-          value: validityPeriod.month,
-          onChange: (e) => handleValidityPeriodChange("month", e.target.value),
-          onBlur: (e) => handleValidityPeriodBlur("month", e.target.value),
-          state: status.month === "DEFAULT" ? "default" : "error",
-        },
-        {
-          ref: registerInput(1),
-          placeholder: "YY",
-          maxLength: YEAR_MAX_LENGTH,
-          fullWidth: true,
-          value: validityPeriod.year,
-          onChange: (e) => handleValidityPeriodChange("year", e.target.value),
-          onBlur: (e) => handleValidityPeriodBlur("year", e.target.value),
-          state: status.year === "DEFAULT" ? "default" : "error",
-        },
-      ]}
       helperMessage={
         status.month !== "DEFAULT"
           ? HELPER_MESSAGE[status.month]
           : HELPER_MESSAGE[status.year]
       }
-    />
+    >
+      <Input
+        ref={registerInput(0)}
+        placeholder="MM"
+        maxLength={MONTH_MAX_LENGTH}
+        fullWidth
+        value={validityPeriod.month}
+        onChange={(e) => handleValidityPeriodChange("month", e.target.value)}
+        onBlur={(e) => handleValidityPeriodBlur("month", e.target.value)}
+        state={status.month === "DEFAULT" ? "default" : "error"}
+      />
+      <Input
+        ref={registerInput(1)}
+        placeholder="YY"
+        maxLength={YEAR_MAX_LENGTH}
+        fullWidth
+        value={validityPeriod.year}
+        onChange={(e) => handleValidityPeriodChange("year", e.target.value)}
+        onBlur={(e) => handleValidityPeriodBlur("year", e.target.value)}
+        state={status.year === "DEFAULT" ? "default" : "error"}
+      />
+    </FormField>
   );
 };
 
