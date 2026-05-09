@@ -17,7 +17,8 @@
     "@emotion/styled": "^11.14.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-router-dom": "^7.15.0"
+    "react-router-dom": "^7.15.0",
+    "react-select": "^5.10.2"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",

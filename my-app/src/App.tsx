@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/react-payments">
       <Routes>
         <Route path="/" element={<CardFormPage />} />
         <Route path="/completed" element={<CompletedPage />} />
