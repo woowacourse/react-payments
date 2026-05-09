@@ -1,54 +1,45 @@
 import styles from './Payments.module.css';
 
-import { useState } from 'react';
-
-import type { ExpirationDate } from '@/entities/card/types';
-
-import type { CardInfo } from '@/features/cardPreview/CardPreview';
-import { CardPreview } from '@/features/cardPreview/CardPreview';
-
 import { CvcFormGroup } from '@/features/cardFormGroup/CvcFormGroup';
 import { CardNumberFormGroup } from '@/features/cardFormGroup/CardNumberFormGroup';
 import { ExpirationDateFormGroup } from '@/features/cardFormGroup/ExpirationDateFormGroup';
-import { CARD_BRAND_FORMAT } from '@/entities/card/brand';
+import { useField } from '@/core/hooks/useField';
+import { validateCvc, validateCvcFormat } from '@/entities/card/cvc';
+import {
+  validateExpirationMonth,
+  validateExpirationMonthFormat,
+  validateExpirationYear,
+  validateExpirationYearFormat,
+} from '@/entities/card/expiration';
+import { useCardNumbers } from '@/entities/card/useCardNumbers';
+import { validateCardNumber, validateCardNumberFormat } from '@/entities/card/cardNumbers';
 
 export const Payments = () => {
-  const [cardNumbers, setCardNumbers] = useState(CARD_BRAND_FORMAT.default.map(() => ''));
-  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({ month: '', year: '' });
-  const [cvc, setCvc] = useState('');
+  const cardNumbers = useCardNumbers({
+    validateCardNumber,
+    validateCardNumberFormat,
+  });
 
-  const handleChangeCardNumber = (cardNumber: string, index: number): void => {
-    const next = [...cardNumbers];
-    next[index] = cardNumber;
-    setCardNumbers(next);
-  };
+  // useField 한곳
+  const month = useField({
+    validateFormat: validateExpirationMonthFormat,
+    validateComplete: validateExpirationMonth,
+  });
 
-  const handleChangeExpirationDate = (key: keyof ExpirationDate, value: string): void => {
-    setExpirationDate((prev) => ({ ...prev, [key]: value }));
-  };
+  const year = useField({
+    validateFormat: validateExpirationYearFormat,
+    validateComplete: validateExpirationYear,
+  });
 
-  const handleChangeCvc = (cvc: string): void => {
-    setCvc(cvc);
-  };
-
-  const cardInfo: CardInfo = {
-    cardNumbers,
-    expirationDate,
-  };
+  const cvc = useField({ validateFormat: validateCvcFormat, validateComplete: validateCvc });
 
   return (
     <div className={styles.payments}>
-      <CardPreview info={cardInfo} />
+      {/* <CardPreview info={cardInfo} /> */}
       <form>
-        <CardNumberFormGroup
-          cardNumbers={cardNumbers}
-          handleChangeCardNumber={handleChangeCardNumber}
-        />
-        <ExpirationDateFormGroup
-          expirationDate={expirationDate}
-          handleChangeExpirationDate={handleChangeExpirationDate}
-        />
-        <CvcFormGroup cvc={cvc} handleChangeCvc={handleChangeCvc} />
+        <CardNumberFormGroup results={cardNumbers} />
+        <ExpirationDateFormGroup month={month} year={year} />
+        <CvcFormGroup cvc={cvc} />
       </form>
     </div>
   );

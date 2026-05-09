@@ -1,19 +1,24 @@
 import { isNumericString } from '@/core/utils/validator';
 
-export const CVC_LENGTH = 3;
+import type { Brand } from '@/entities/card/brand';
+import { CARD_BRAND_FORMAT } from './brand';
 
 const ERROR_MESSAGE = {
   TYPE: '숫자만 입력 가능합니다.',
   LENGTH: '카드 번호를 전부 채워주세요.',
 };
 
-import type { Brand } from '@/entities/card/brand';
-import { BRAND_CARD_LENGTH } from './brand';
-
-// 카드번호
-export const validateCardNumber = (cardNumber: string, brand: Brand): string | undefined => {
-  if (cardNumber.length !== BRAND_CARD_LENGTH[brand]) return ERROR_MESSAGE.LENGTH;
+export const validateCardNumber = ({
+  cardNumber,
+  index,
+  brand,
+}: {
+  cardNumber: string;
+  index: number;
+  brand: Brand;
+}): string | undefined => {
   if (!isNumericString(cardNumber)) return ERROR_MESSAGE.TYPE;
+  if (cardNumber.length !== CARD_BRAND_FORMAT[brand][index]) return ERROR_MESSAGE.LENGTH;
   return;
 };
 
