@@ -1,35 +1,29 @@
-import type { Dispatch, SetStateAction } from "react";
-
 export type CardNumber = string[];
 export type ExpireDate = {
   month: string;
   year: string;
 };
 
-export type SetCardNumber = Dispatch<SetStateAction<CardNumber>>;
-export type SetExpireDate = Dispatch<SetStateAction<ExpireDate>>;
-export type SetCvcNumber = Dispatch<SetStateAction<string>>;
-
-export interface CardNumberState {
-  cardNumber: CardNumber;
-  setCardNumber: SetCardNumber;
-}
-
-export interface ExpireDateState {
-  expireDate: ExpireDate;
-  setExpireDate: SetExpireDate;
-}
-
 export interface CardPreviewProps {
   cardNumber: CardNumber;
   expireDate: ExpireDate;
 }
 
-export interface CardFormType {
+export interface CardNumberContextValue {
   cardNumber: CardNumber;
-  setCardNumber: SetCardNumber;
+  cardNumberError: string[];
+  handleCardNumberChange: (index: number, value: string) => void;
+}
+
+export interface ExpireDateContextValue {
   expireDate: ExpireDate;
-  setExpireDate: SetExpireDate;
-  // cvcNumber: CvcNumber;
-  // setCvcNumber: SetCvcNumber;
+  expireDateError: { month: string; year: string };
+  handleMonthChange: (value: string) => void;
+  handleYearChange: (value: string) => void;
+}
+
+export interface CvcContextValue {
+  cvc: string;
+  cvcError: string;
+  handleCvcChange: (value: string) => void;
 }
