@@ -12,8 +12,8 @@ const buildErrorMsg = (digits: number) => `카드 번호 ${digits}자리를 입�
 export function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [errorInfo, setErrorInfo] = useState({
-    flag: createFlags(DEFAULT_CARD_NUMBER_FORMAT.length),
-    messages: Array(DEFAULT_CARD_NUMBER_FORMAT.length).fill(''),
+    errorFlags: createFlags(DEFAULT_CARD_NUMBER_FORMAT.length),
+    errorMessages: Array(DEFAULT_CARD_NUMBER_FORMAT.length).fill(''),
     currentErrorMsg: '',
   });
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(DEFAULT_CARD_NUMBER_FORMAT.length));
@@ -24,7 +24,7 @@ export function useCardNumbers() {
   const isComplete =
     cardNumbers.length === format.length && cardNumbers.every((chunk, i) => chunk.length === format[i]);
 
-  const firstErrorIdx = errorInfo.flag.indexOf(true);
+  const firstErrorIdx = errorInfo.errorFlags.indexOf(true);
   const hasAnyError = firstErrorIdx !== -1;
 
   const applyResize = (nextChunks: string[], nextFormat: number[]) => {
@@ -32,8 +32,8 @@ export function useCardNumbers() {
     const trimmed = Array.from({length: len}, (_, i) => (nextChunks[i] ?? '').slice(0, nextFormat[i]));
     setCardNumbers(trimmed);
     setErrorInfo((prev) => ({
-      flag: resizeArray(prev.flag, len, false),
-      messages: resizeArray(prev.messages, len, ''),
+      errorFlags: resizeArray(prev.errorFlags, len, false),
+      errorMessages: resizeArray(prev.errorMessages, len, ''),
       currentErrorMsg: prev.currentErrorMsg,
     }));
     setIsTouched((prev) => resizeArray(prev, len, false));
@@ -57,8 +57,8 @@ export function useCardNumbers() {
 
     if (isTouched[index] && value.length === nextFormat[index]) {
       const next = computeNextErrorInfo(
-        errorInfo.flag,
-        errorInfo.messages,
+        errorInfo.errorFlags,
+        errorInfo.errorMessages,
         index,
         false,
         buildErrorMsg(nextFormat[index])
@@ -72,7 +72,7 @@ export function useCardNumbers() {
 
     const expected = format[index];
     const isValid = eValue.length === expected;
-    const next = computeNextErrorInfo(errorInfo.flag, errorInfo.messages, index, !isValid, buildErrorMsg(expected));
+    const next = computeNextErrorInfo(errorInfo.errorFlags, errorInfo.errorMessages, index, !isValid, buildErrorMsg(expected));
     setErrorInfo(next);
   };
 

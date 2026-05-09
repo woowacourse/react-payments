@@ -7,14 +7,14 @@ const ERROR_MSG = 'CVC 번호 3자리를 입력해 주세요';
 export function useCvcNumber() {
   const [cvcNumber, setCvcNumber] = useState('');
   const [errorInfo, setErrorInfo] = useState({
-    flag: createFlags(1),
-    messages: Array(1).fill('') as string[],
+    errorFlags: createFlags(1),
+    errorMessages: Array(1).fill('') as string[],
     currentErrorMsg: '',
   });
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(1));
 
   const updateErrorInfo = (hasError: boolean) => {
-    const next = computeNextErrorInfo(errorInfo.flag, errorInfo.messages, 0, hasError, ERROR_MSG);
+    const next = computeNextErrorInfo(errorInfo.errorFlags, errorInfo.errorMessages, 0, hasError, ERROR_MSG);
     setErrorInfo(next);
   };
 
@@ -31,7 +31,7 @@ export function useCvcNumber() {
   };
 
   const isComplete = cvcNumber.length === CVC_LENGTH;
-  const firstErrorIdx = errorInfo.flag.indexOf(true);
+  const firstErrorIdx = errorInfo.errorFlags.indexOf(true);
 
   return {
     cvcNumber,

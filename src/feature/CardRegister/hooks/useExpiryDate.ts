@@ -24,14 +24,14 @@ export function useExpiryDate() {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
   const [errorInfo, setErrorInfo] = useState({
-    flag: createFlags(2),
-    messages: Array(2).fill('') as string[],
+    errorFlags: createFlags(2),
+    errorMessages: Array(2).fill('') as string[],
     currentErrorMsg: '',
   });
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(2));
 
   const updateErrorInfo = (index: number, hasError: boolean, errorMsg = ERROR_MSG) => {
-    const next = computeNextErrorInfo(errorInfo.flag, errorInfo.messages, index, hasError, errorMsg);
+    const next = computeNextErrorInfo(errorInfo.errorFlags, errorInfo.errorMessages, index, hasError, errorMsg);
     setErrorInfo(next);
   };
 
@@ -67,7 +67,7 @@ export function useExpiryDate() {
     updateErrorInfo(index, hasError, msg);
   };
 
-  const firstErrorIdx = errorInfo.flag.indexOf(true);
+  const firstErrorIdx = errorInfo.errorFlags.indexOf(true);
   const isComplete = isValidExpiry(expiryMonth, 'month') && isValidExpiry(expiryYear, 'year');
 
   return {
