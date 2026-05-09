@@ -1,34 +1,22 @@
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
-import InfoInputSection from './components/InfoInputSection/InfoInputSection';
-import {useCardNumbers} from './hooks/useCardNumbers';
-import {useExpiryDate} from './hooks/useExpiryDate';
-import {useCvcNumber} from './hooks/useCvcNumber';
-import {CARD_COMPANIES} from './domain/cardCompany';
-import type {CardCompanyType} from './domain/cardCompany';
 import styled from 'styled-components';
 
+import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
+import InfoInputSection from './components/InfoInputSection/InfoInputSection';
+
+import {useCardRegisterForm} from './hooks/useCardRegisterForm';
+
 const CardRegisterPage = () => {
-  const numberField = useCardNumbers();
-  const expiryField = useExpiryDate();
-  const cvcField = useCvcNumber();
-  const [selectedCompany, setSelectedCompany] = useState<CardCompanyType | null>(null);
-  const navigate = useNavigate();
-
-  const showCompanySelect = numberField.isComplete;
-  const showExpiry = showCompanySelect && selectedCompany !== null;
-  const showCvc = showExpiry && expiryField.isComplete;
-  const isFormComplete = showCvc && cvcField.isComplete;
-
-  const handleSubmit = () => {
-    navigate('/complete', {
-      state: {
-        cardPrefix: numberField.cardNumbers[0],
-        companyName: selectedCompany ? CARD_COMPANIES[selectedCompany].name : '',
-      },
-    });
-  };
+  const {
+    numberField,
+    companyField,
+    expiryField,
+    cvcField,
+    showCompanySelect,
+    showExpiry,
+    showCvc,
+    isFormComplete,
+    handleSubmit,
+  } = useCardRegisterForm();
 
   return (
     <Wrapper>
@@ -38,14 +26,14 @@ const CardRegisterPage = () => {
           brand={numberField.brand}
           expiryMonth={expiryField.expiryMonth}
           expiryYear={expiryField.expiryYear}
-          selectedCompany={selectedCompany}
+          selectedCompany={companyField.selectedCompany}
         />
         <InfoInputSection
           numberField={numberField}
           expiryField={expiryField}
           cvcField={cvcField}
-          selectedCompany={selectedCompany}
-          onCompanyChange={setSelectedCompany}
+          selectedCompany={companyField.selectedCompany}
+          onCompanyChange={companyField.handleChange}
           showCompanySelect={showCompanySelect}
           showExpiry={showExpiry}
           showCvc={showCvc}
