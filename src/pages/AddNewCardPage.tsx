@@ -4,6 +4,7 @@ import CardCVCInputField from "@/components/CardCVCInputField/CardCVCInputField"
 import CardNumberInputField, {
   type CardNumberUnits,
 } from "@/components/CardNumberInputField/CardNumberInputField";
+import CardPasswordInputField from "@/components/CardPasswordInputField/CardPasswordInputField";
 import CardValidityPeriodInputField, {
   type ValidityPeriod,
 } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
@@ -20,6 +21,7 @@ const AddNewCardPage = () => {
   const [cardCompany, setCardCompany] = useState<CardCompany | null>(null);
   const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
   const [CVC, setCVC] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <PageWrapper>
@@ -44,6 +46,7 @@ const AddNewCardPage = () => {
           onChange={setValidityPeriod}
         />
         <CardCVCInputField CVC={CVC} onChange={setCVC} />
+        <CardPasswordInputField password={password} onChange={setPassword} />
         <Button fixedBottom>확인</Button>
       </CardInfoForm>
     </PageWrapper>

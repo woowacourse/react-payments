@@ -1,35 +1,31 @@
 import styled from "@emotion/styled";
-import Input from "@components/common/Input.tsx";
-import type { ComponentPropsWithRef } from "react";
+import type { ReactNode } from "react";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 
-interface InputFieldProps {
+interface FormFieldProps {
   title: string;
   caption?: string;
   label: string;
-  inputPropsList: ComponentPropsWithRef<typeof Input>[];
   helperMessage?: string;
+  children: ReactNode;
 }
 
 const InputField = ({
   title,
   caption,
   label,
-  inputPropsList,
   helperMessage = "",
-}: InputFieldProps) => {
+  children,
+}: FormFieldProps) => {
   return (
     <Container>
       <Title>{title}</Title>
       {caption && <Caption>{caption}</Caption>}
       <Fieldset>
         <Legend>{label}</Legend>
-        <InputWrapper>
-          {inputPropsList.map((inputProps) => (
-            <Input {...inputProps} />
-          ))}
-        </InputWrapper>
+        <FieldContent>{children}</FieldContent>
       </Fieldset>
+
       <HelperMessage>{helperMessage}</HelperMessage>
     </Container>
   );
@@ -65,17 +61,15 @@ const Legend = styled.legend`
   margin-top: 1rem;
 `;
 
-const InputWrapper = styled.div`
+const FieldContent = styled.div`
   display: flex;
   gap: 0.625rem;
   margin-top: 0.5rem;
 `;
 
 const HelperMessage = styled.p`
-  margin: 0.75rem 0 0;
-  min-height: 0.75rem;
   font-weight: 400;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
   color: ${COLOR_PALETTE.ERROR};
 `;
 
