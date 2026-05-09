@@ -8,12 +8,12 @@ const CARD_NUMBER_MAX_LENGTH = 4;
 const CARD_NUMBER_FIELD_COUNT = 4;
 
 type CardNumberInputSectionProps = {
-  onValueHandler: (cardInfo: string[], brand?: string) => void;
+  onValueHandler: (numbers: string[]) => void;
   maxLength: number;
-  isSupportedBrand: boolean;
+  isSupportedNetwork: boolean;
 };
 
-const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedBrand }: CardNumberInputSectionProps) => {
+const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork }: CardNumberInputSectionProps) => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
@@ -33,7 +33,7 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedBrand }:
       if (!NUMERIC_REGEX.test(value)) {
         return { index: i, message: "숫자만 입력 가능합니다" };
       }
-      if (i === 0 && !isSupportedBrand) return { index: i, message: "이 카드 브랜드는 지원하지 않습니다." };
+      if (i === 0 && !isSupportedNetwork) return { index: i, message: "이 카드 브랜드는 지원하지 않습니다." };
     }
     return { index: -1, message: "" };
   };
@@ -44,7 +44,7 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedBrand }:
     setErrorMessage(message);
   };
 
-  const lastInputMaxLength = maxLength - (CARD_NUMBER_MAX_LENGTH * (CARD_NUMBER_FIELD_COUNT - 1));
+  const lastInputMaxLength = maxLength - CARD_NUMBER_MAX_LENGTH * (CARD_NUMBER_FIELD_COUNT - 1);
 
   return (
     <InputSectionLayout
@@ -61,7 +61,7 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedBrand }:
             value={inputValues[i] || ""}
             onChange={(e) => onChange(i, e.target.value)}
             onBlur={handleBlur}
-            css={inputStyle(errorIndex === i)}
+            css={[inputStyle(errorIndex === i), { flex: 1 }]}
             placeholder="1234"
           />
         ))}

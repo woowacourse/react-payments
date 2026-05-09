@@ -4,6 +4,6 @@ const MAX_LENGTH = {
     default: 16,
 } as const
 
-export const getMaxLength = (brand: string): number => {
-    return MAX_LENGTH[brand as keyof typeof MAX_LENGTH] ?? MAX_LENGTH.default;
+export const getMaxLength = (network: string): number => {
+    return MAX_LENGTH[network as keyof typeof MAX_LENGTH] ?? MAX_LENGTH.default;
 };
