@@ -43,7 +43,7 @@ export const CreateCardProgressManager = {
     currentProgress["cardPassword"] = true;
 
     if (!this.isCardPasswordComplete(cardPassword)) return currentProgress;
-    currentProgress["cardPassword"] = true;
+    currentProgress["complete"] = true;
 
     return currentProgress;
   },

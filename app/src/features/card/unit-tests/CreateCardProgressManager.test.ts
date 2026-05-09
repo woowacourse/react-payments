@@ -181,7 +181,7 @@ describe("CreateCardProgressManager 테스트", () => {
       });
     });
 
-    test("모든 카드 정보가 입력 완료되면 비밀번호 단계까지 활성화된다.", () => {
+    test("모든 카드 정보가 입력 완료되면 Complete가 활성화된다.", () => {
       const progress = CreateCardProgressManager.calculateCurrentProgress(
         VISA_CARD_NUMBER,
         "visa",
@@ -195,7 +195,7 @@ describe("CreateCardProgressManager 테스트", () => {
         cardExpiryDate: true,
         cardCVC: true,
         cardPassword: true,
-        complete: false,
+        complete: true,
       });
     });
   });
