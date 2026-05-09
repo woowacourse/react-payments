@@ -20,6 +20,12 @@ export const CardNumberInputSection: Story = {
     setCardNumber: null,
     cardExpiryDate: "",
     setCardExpiryDate: null,
+    cardBrand: "",
+    setCardBrand: null,
+    cardCVC: "",
+    setCardCVC: null,
+    cardPassword: "",
+    setCardPassword: null,
   },
   render: () => {
     const [cardNumber, setCardNumber] = useState({
@@ -32,12 +38,24 @@ export const CardNumberInputSection: Story = {
       "expiry-month": "",
       "expiry-year": "",
     });
+
+    const [cardBrand, setCardBrand] = useState(null);
+
+    const [cardCVC, setCardCVC] = useState("");
+
+    const [cardPassword, setCardPassword] = useState("");
     return (
       <CardForm
         cardNumber={cardNumber}
         setCardNumber={setCardNumber}
         cardExpiryDate={cardExpiryDate}
         setCardExpiryDate={setCardExpiryDate}
+        cardBrand={cardBrand}
+        setCardBrand={setCardBrand}
+        cardCVC={cardCVC}
+        setCardCVC={setCardCVC}
+        cardPassword={cardPassword}
+        setCardPassword={setCardPassword}
       />
     );
   },
