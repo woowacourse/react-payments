@@ -1,19 +1,19 @@
 import InputField from "@components/common/InputField.tsx";
 import { checkIsOnlyDigits, checkLengthMatches } from "@utils/validator";
 import { useState } from "react";
-import {
-  CARD_NUMBER_UNIT_MAX_LENGTH,
-  HELPER_MESSAGE,
-  type InputStatus,
-} from "./constants";
+import { HELPER_MESSAGE, type InputStatus } from "./constants";
+import { getCardNumberPlaceholder } from "@/utils/card";
 
-export type CardNumberUnits = [string, string, string, string];
+export type CardNumberUnits = string[];
+export type CardNumberFormat = number[];
+
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
+  cardNumberFormat: readonly number[];
   onChange: (input: CardNumberUnits) => void;
 }
 
-type InputsStatuses = [InputStatus, InputStatus, InputStatus, InputStatus];
+type InputsStatuses = InputStatus[];
 
 const INPUTS_STATUSES: InputsStatuses = [
   "DEFAULT",
@@ -24,6 +24,7 @@ const INPUTS_STATUSES: InputsStatuses = [
 
 const CardNumberInputField = ({
   cardNumberUnits,
+  cardNumberFormat,
   onChange,
 }: CardNumberInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
@@ -45,7 +46,7 @@ const CardNumberInputField = ({
     updateInputStatus(index, "DEFAULT");
 
     const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
-    newCardNumberUnits[index] = input.slice(0, CARD_NUMBER_UNIT_MAX_LENGTH);
+    newCardNumberUnits[index] = input.slice(0, cardNumberFormat[index]);
     onChange(newCardNumberUnits);
   };
 
@@ -55,7 +56,7 @@ const CardNumberInputField = ({
       return;
     }
 
-    if (!checkLengthMatches(input, CARD_NUMBER_UNIT_MAX_LENGTH)) {
+    if (!checkLengthMatches(input, cardNumberFormat[index])) {
       updateInputStatus(index, "INVALID_LENGTH");
       return;
     }
@@ -73,68 +74,21 @@ const CardNumberInputField = ({
           status.find((inputStatus) => inputStatus !== "DEFAULT") ?? "DEFAULT"
         ]
       }
-      inputPropsList={[
-        {
-          placeholder: "1234",
-          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
-          fullWidth: true,
-          value: cardNumberUnits[0],
-          onChange: (e) => {
-            const input = e.target.value;
-            handleCardNumberChange(0, input);
-          },
-          onBlur: (e) => {
-            const input = e.target.value;
-            handleCardNumberBlur(0, input);
-          },
-          state: status[0] === "DEFAULT" ? "default" : "error",
+      inputPropsList={cardNumberFormat.map((maxLength, index) => ({
+        placeholder: getCardNumberPlaceholder(maxLength),
+        maxLength,
+        fullWidth: true,
+        value: cardNumberUnits[index],
+        onChange: (e) => {
+          const input = e.target.value;
+          handleCardNumberChange(index, input);
         },
-        {
-          placeholder: "1234",
-          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
-          fullWidth: true,
-          value: cardNumberUnits[1],
-          onChange: (e) => {
-            const input = e.target.value;
-            handleCardNumberChange(1, input);
-          },
-          onBlur: (e) => {
-            const input = e.target.value;
-            handleCardNumberBlur(1, input);
-          },
-          state: status[1] === "DEFAULT" ? "default" : "error",
+        onBlur: (e) => {
+          const input = e.target.value;
+          handleCardNumberBlur(index, input);
         },
-        {
-          placeholder: "1234",
-          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
-          fullWidth: true,
-          value: cardNumberUnits[2],
-          onChange: (e) => {
-            const input = e.target.value;
-            handleCardNumberChange(2, input);
-          },
-          onBlur: (e) => {
-            const input = e.target.value;
-            handleCardNumberBlur(2, input);
-          },
-          state: status[2] === "DEFAULT" ? "default" : "error",
-        },
-        {
-          placeholder: "1234",
-          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
-          fullWidth: true,
-          value: cardNumberUnits[3],
-          onChange: (e) => {
-            const input = e.target.value;
-            handleCardNumberChange(3, input);
-          },
-          onBlur: (e) => {
-            const input = e.target.value;
-            handleCardNumberBlur(3, input);
-          },
-          state: status[3] === "DEFAULT" ? "default" : "error",
-        },
-      ]}
+        state: status[index] === "DEFAULT" ? "default" : "error",
+      }))}
     />
   );
 };

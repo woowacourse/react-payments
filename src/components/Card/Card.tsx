@@ -15,6 +15,7 @@ import { type CardCompany } from "@/constants/cardCompanies";
 
 interface CardProps {
   cardNumberUnits: CardNumberUnits;
+  cardNumberFormat: readonly number[];
   cardCompany: CardCompany | null;
   validityPeriod: ValidityPeriod;
   brand?: ReturnType<typeof detectCardBrand>;
@@ -22,6 +23,7 @@ interface CardProps {
 
 const Card = ({
   cardNumberUnits,
+  cardNumberFormat,
   cardCompany,
   validityPeriod,
   brand,
@@ -60,7 +62,7 @@ const Card = ({
           defaultCase={null}
         />
       </ChipWrapper>
-      <CardNumberWrapper>
+      <CardNumberWrapper $format={cardNumberFormat}>
         {cardNumberUnits.map((cardNumberUnit, index) => (
           <CardNumberUnit key={index}>
             {index < 2
@@ -109,9 +111,10 @@ const CardBrandImg = styled.img`
   height: 1.5rem;
 `;
 
-const CardNumberWrapper = styled.div`
+const CardNumberWrapper = styled.div<{ $format: readonly number[] }>`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: ${({ $format }) =>
+    $format.map((length) => `${length}ch`).join(" ")};
   padding-inline: 1rem;
   justify-content: space-between;
   margin-top: 0.875rem;

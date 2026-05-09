@@ -4,19 +4,34 @@ import {
   type PrefixRange,
 } from "@/constants/cardBrands";
 import type { ValidityPeriod } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import type { CardNumberUnits } from "@/components/CardNumberInputField/CardNumberInputField";
 
-export const detectCardBrand = (cardNumber: string): CardBrand | null => {
-  if (checkPrefixMatches(cardNumber, CARD_BRANDS.Visa.prefixes)) return "Visa";
+export const detectCardBrand = (
+  cardNumber: CardNumberUnits,
+): CardBrand | null => {
+  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.Visa.prefixes))
+    return "Visa";
 
-  if (checkPrefixRangeMatches(cardNumber, CARD_BRANDS.MasterCard.prefixRanges))
+  if (
+    checkPrefixRangeMatches(
+      `${cardNumber[0]}`,
+      CARD_BRANDS.MasterCard.prefixRanges,
+    )
+  )
     return "MasterCard";
 
-  if (checkPrefixMatches(cardNumber, CARD_BRANDS.AMEX.prefixes)) return "AMEX";
+  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.AMEX.prefixes))
+    return "AMEX";
 
-  if (checkPrefixMatches(cardNumber, CARD_BRANDS.Diners.prefixes))
+  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.Diners.prefixes))
     return "Diners";
 
-  if (checkPrefixRangeMatches(cardNumber, CARD_BRANDS.UnionPay.prefixRanges))
+  if (
+    checkPrefixRangeMatches(
+      `${cardNumber[0]}${cardNumber[1]}`,
+      CARD_BRANDS.UnionPay.prefixRanges,
+    )
+  )
     return "UnionPay";
 
   return null;
@@ -43,6 +58,10 @@ const checkPrefixRangeMatches = (
   );
 };
 
+export const getCardNumberFormat = (cardBrand: CardBrand | null) => {
+  return cardBrand ? CARD_BRANDS[cardBrand].format : [4, 4, 4, 4];
+};
+
 export const getFormattedValidityPeriodUnit = (
   validityPeriod: ValidityPeriod,
 ) => {
@@ -50,11 +69,18 @@ export const getFormattedValidityPeriodUnit = (
   return `${month ? month + "/" : ""}${year ? year : ""}`;
 };
 
-export const formatValidityPeriod = (nextRaw: string) => {
-  return nextRaw.replace(/\D/g, "").slice(0, 2);
-};
-
 export const padValidityPeriodUnit = (value: string) => {
   if (value.length === 1) return `0${value}`;
   return value;
+};
+
+export const splitCardNumberByFormat = (
+  cardNumber: CardNumberUnits,
+  format: readonly number[],
+): CardNumberUnits => {
+  return format.map((_, index) => (index === 0 ? cardNumber[0] : ""));
+};
+
+export const getCardNumberPlaceholder = (length: number) => {
+  return "1234567890".slice(0, length);
 };
