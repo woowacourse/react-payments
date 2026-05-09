@@ -96,9 +96,8 @@ constants/
 
 1. 카드사 선택 컴포넌트 작성
 
-- 공통 컴포넌트(FormField)를 input과 드롭다운 두 방식에서 어떻게 재사용할지 먼저 고민
-- 카드사 선택 토글 UI 작성
-- Storybook으로 UI 확인
+- ~~카드사 선택 토글 UI 작성~~
+- ~~Storybook으로 UI 확인~~
 
 2. 카드사 토글 상태에 따라 cardPreview 색상 변경
 
