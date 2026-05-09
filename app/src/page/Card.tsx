@@ -16,6 +16,10 @@ export function Card() {
     'expiry-year': '',
   });
 
+  const [cardCVC, setCardCVC] = useState('');
+
+  const [cardPassword, setCardPassword] = useState('');
+
   const [networkBrand, setNetworkBrand] = useState<NetworkBrand>('');
 
   return (
@@ -25,10 +29,14 @@ export function Card() {
         cardExpiryDate,
         networkBrand,
         cardCompany,
+        cardCVC,
+        cardPassword,
         setCardNumber,
         setCardExpiryDate,
         setNetworkBrand,
         setCardCompany,
+        setCardCVC,
+        setCardPassword,
       }}
     >
       <CardContainer>

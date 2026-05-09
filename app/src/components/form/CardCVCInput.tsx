@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import { CardInput, CardSingleFieldContainer, CardLabel } from '../../style/CardStyles';
 import { Validator } from '../../validators/CardValidator';
+import { useCardContext } from '../../hooks/useCardContext';
 
 export function CardCVCInput() {
-  const [cardCVC, setCardCVC] = useState('');
+  const { cardCVC, setCardCVC } = useCardContext();
 
   const [fieldErrors, setError] = useState({
     state: false,

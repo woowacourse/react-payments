@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import { CardInput, CardSingleFieldContainer, CardLabel } from '../../style/CardStyles';
 import { Validator } from '../../validators/CardValidator';
+import { useCardContext } from '../../hooks/useCardContext';
 
 export function CardPasswordInput() {
-  const [cardPassword, setCardPassword] = useState('');
+  const { cardPassword, setCardPassword } = useCardContext();
 
   const [fieldErrors, setError] = useState({
     state: false,
