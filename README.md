@@ -66,7 +66,7 @@
       - [x] 622126~622925로 시작하는 경우
       - [x] 624~626로 시작하는 경우
       - [x] 6282~6288로 시작하는 경우
-    - [ ] 브랜드에 맞는 자리수에 맞게 fourth-digits input maxlength와 placeholder 변경하기
+    - [x] 브랜드에 맞는 자리수에 맞게 fourth-digits input maxlength와 placeholder 변경하기
 - 동적 입력 UI 구현
   - [ ] 사용자의 입력이 완료되면 다음 필드로 자동으로 이동
 - 실시간 프리뷰

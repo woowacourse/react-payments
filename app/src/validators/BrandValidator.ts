@@ -13,8 +13,10 @@ export const BrandValidator = {
     );
   },
 
-  isPossibleUnionPayFormat(value: string): boolean {
-    return /^6(2(2(1([2-9]([6-9]?)?)?|[2-9]\d{0,2})?|[4-6]\d{0,3}|8[2-8]\d{0,2})?)?$/.test(value);
+  isPossibleUnionPayFormat(joinedValue: string): boolean {
+    return /^6(2(2(1([2-9]([6-9]?)?)?|[2-9]\d{0,2})?|[4-6]\d{0,3}|8[2-8]\d{0,2})?)?$/.test(
+      joinedValue,
+    );
   },
 
   detectNetworkBrand(joinedValue: string): BrandResult {
@@ -42,7 +44,7 @@ export const BrandValidator = {
       return { brand: 'unionpay', valid: true };
     }
 
-    if (!this.isPossibleUnionPayFormat(joinedValue)) {
+    if (/^6/.test(joinedValue) && !this.isPossibleUnionPayFormat(joinedValue)) {
       return { brand: '', valid: false, message: '유효한 카드번호 형식이 아닙니다.' };
     }
 

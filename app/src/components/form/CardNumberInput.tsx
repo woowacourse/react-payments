@@ -5,6 +5,7 @@ import { BrandValidator } from '../../validators/BrandValidator';
 import { CardFieldset, CardLegend, CardInput } from '../../style/CardStyles';
 import { useCardContext } from '../../hooks/useCardContext';
 import type { cardNumberFieldError } from '../../types/fieldError';
+import type { NetworkBrand } from '../../context/CardContext.ts';
 
 const indexMap: { [key: string]: number } = {
   'first-digits': 0,
@@ -21,7 +22,7 @@ const fields: Exclude<keyof cardNumberFieldError, 'message'>[] = [
 ];
 
 export function CardNumberInput() {
-  const { cardNumber, setCardNumber, setNetworkBrand } = useCardContext();
+  const { cardNumber, setCardNumber, networkBrand, setNetworkBrand } = useCardContext();
 
   const [fieldErrors, setError] = useState<cardNumberFieldError>({
     'first-digits': false,
@@ -66,6 +67,23 @@ export function CardNumberInput() {
     setError({ ...fieldErrors, [fieldId]: false, message: '' });
   };
 
+  const handleInputMaxLength = (
+    networkBrand: NetworkBrand,
+    index: number,
+  ): { maxLength: number; placeholder: string } => {
+    if (index === 3) {
+      if (networkBrand === 'diners') {
+        return { maxLength: 2, placeholder: '12' };
+      }
+
+      if (networkBrand === 'amex') {
+        return { maxLength: 3, placeholder: '123' };
+      }
+    }
+
+    return { maxLength: 4, placeholder: '1234' };
+  };
+
   return (
     <>
       <CardFieldset>
@@ -75,12 +93,12 @@ export function CardNumberInput() {
             key={field}
             id={field}
             type="text"
-            maxLength={4}
+            maxLength={handleInputMaxLength(networkBrand, index).maxLength}
             inputMode="numeric"
             value={cardNumber[index]}
             onChange={changeCardNumber}
             onBlur={handleBlurCardNumber}
-            placeholder="1234"
+            placeholder={handleInputMaxLength(networkBrand, index).placeholder}
             $fieldErrors={fieldErrors[field]}
           />
         ))}
