@@ -69,6 +69,7 @@ const CardNumberInputField = ({
         newCardNumberFormat,
       );
       onChange(adaptedCardNumberUnits);
+      setStatus(adaptedCardNumberUnits.map(() => "DEFAULT"));
       return;
     }
 
