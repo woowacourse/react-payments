@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getEXPNumberErrorMessage } from "../../utils/getEXPNumberErrorMessage";
@@ -26,6 +26,17 @@ export default function EXPInputWrapper({
   const setError = (key: "mm" | "yy") => (message: string | null) => {
     setInputErrors((prev) => ({ ...prev, [key]: message }));
   };
+
+  const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+
+  useEffect(() => {
+    if (value.mm.length === 2) {
+      const result = getEXPNumberErrorMessage({ mm: value.mm, yy: value.yy });
+      if (result === null || result.key !== "mm") {
+        inputRefs.current["yy"]?.focus();
+      } else setError("mm")(result?.message);
+    }
+  }, [value.mm, value.yy]);
 
   return (
     <InputGroup
@@ -56,6 +67,9 @@ export default function EXPInputWrapper({
             const message =
               result && result.key === expKey ? result.message : null;
             setError(expKey as keyof EXPNumber)(message);
+          }}
+          ref={(el) => {
+            if (expKey !== "mm") inputRefs.current[expKey] = el;
           }}
           style={{ width: "152px" }}
         />

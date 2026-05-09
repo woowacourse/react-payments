@@ -8,6 +8,7 @@ interface Props extends Omit<
   setValue: (value: string) => void;
   onError: (message: string | null) => void;
   hasError: boolean;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 interface InputStyleProps {

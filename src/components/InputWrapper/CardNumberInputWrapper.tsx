@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
@@ -38,6 +38,17 @@ export default function CardNumberInputWrapper({
       setInputErrors((prev) => ({ ...prev, [key]: message }));
     };
 
+  const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+
+  useEffect(() => {
+    if (value.first.length === 4) inputRefs.current["second"]?.focus();
+  }, [value.first]);
+  useEffect(() => {
+    if (value.second.length === 4) inputRefs.current["third"]?.focus();
+  }, [value.second]);
+  useEffect(() => {
+    if (value.third.length === 4) inputRefs.current["fourth"]?.focus();
+  }, [value.third]);
   return (
     <InputGroup
       errorMessage={
@@ -67,6 +78,9 @@ export default function CardNumberInputWrapper({
             const message =
               result && result.key === cardKey ? result.message : null;
             setError(cardKey as keyof CardNumbers)(message);
+          }}
+          ref={(el) => {
+            if (cardKey !== "first") inputRefs.current[cardKey] = el;
           }}
           style={{ width: "71px" }}
         />
