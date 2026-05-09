@@ -4,7 +4,11 @@ import { CardInput, CardSingleFieldContainer, CardLabel } from '../../style/Card
 import { Validator } from '../../validators/CardValidator';
 import { useCardContext } from '../../hooks/useCardContext';
 
-export function CardPasswordInput() {
+export function CardPasswordInput({
+  cardPasswordRef,
+}: {
+  cardPasswordRef: React.RefObject<HTMLInputElement | null>;
+}) {
   const { cardPassword, setCardPassword } = useCardContext();
 
   const [fieldErrors, setError] = useState({
@@ -48,6 +52,7 @@ export function CardPasswordInput() {
         onChange={changeCardPassword}
         onBlur={handleBlurPassword}
         $fieldErrors={fieldErrors.state}
+        ref={cardPasswordRef}
       />
       <ErrorMessage message={fieldErrors['message']} />
     </CardSingleFieldContainer>

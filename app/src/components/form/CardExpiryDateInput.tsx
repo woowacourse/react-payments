@@ -1,16 +1,23 @@
 import { CardInput, CardFieldset, CardLegend } from '../../style/CardStyles';
 import { Validator } from '../../validators/CardValidator';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import { useCardContext } from '../../hooks/useCardContext';
 
-export function CardExpiryDateInput() {
+export function CardExpiryDateInput({
+  firstRef,
+  onComplete,
+}: {
+  firstRef: React.RefObject<HTMLInputElement | null>;
+  onComplete: () => void;
+}) {
   const { cardExpiryDate, setCardExpiryDate } = useCardContext();
   const [fieldErrors, setError] = useState({
     'expiry-month': false,
     'expiry-year': false,
     message: '',
   });
+  const yearRef = useRef<HTMLInputElement | null>(null);
 
   const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
@@ -27,6 +34,10 @@ export function CardExpiryDateInput() {
     }
     setError({ ...fieldErrors, [id]: false, message: '' });
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+
+    if (value.length === 2) {
+      yearRef.current?.focus();
+    }
   };
 
   const changeCardExpiryYear = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +55,10 @@ export function CardExpiryDateInput() {
     }
     setError({ ...fieldErrors, [id]: false, message: '' });
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+
+    if (cardExpiryDate['expiry-month'].length === 2 && value.length === 2) {
+      onComplete();
+    }
   };
 
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -86,6 +101,7 @@ export function CardExpiryDateInput() {
           value={cardExpiryDate['expiry-month']}
           $fieldErrors={fieldErrors['expiry-month']}
           placeholder="MM"
+          ref={firstRef}
         />
         <CardInput
           type="text"
@@ -97,6 +113,7 @@ export function CardExpiryDateInput() {
           value={cardExpiryDate['expiry-year']}
           $fieldErrors={fieldErrors['expiry-year']}
           placeholder="YY"
+          ref={yearRef}
         />
       </CardFieldset>
       <ErrorMessage message={fieldErrors['message']} />

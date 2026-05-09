@@ -8,6 +8,7 @@ import { CardPasswordInput } from './CardPasswordInput';
 import { ConfirmButton } from './ConfirmButton';
 import { useCardContext } from '../../hooks/useCardContext';
 import { BrandValidator } from '../../validators/BrandValidator';
+import { useRef } from 'react';
 
 export function CardForm() {
   const { cardCompany, cardNumber, cardExpiryDate, cardCVC, cardPassword } = useCardContext();
@@ -25,28 +26,52 @@ export function CardForm() {
     cardCVC.length === 3 &&
     cardPassword.length === 2;
 
+  const cardNumberFirstRef = useRef<HTMLInputElement>(null);
+  const cardExpiryDateFirstRef = useRef<HTMLInputElement>(null);
+  const cardCVCRef = useRef<HTMLInputElement>(null);
+  const cardPasswordRef = useRef<HTMLInputElement>(null);
+
   return (
     <CardFormContainer>
       <CardSection title={'카드사를 선택해 주세요'} subTitle={'현재 국내 카드사만 가능합니다.'}>
-        <CardSelectionDropdown />
+        <CardSelectionDropdown
+          onSelect={() => {
+            cardNumberFirstRef.current?.focus();
+          }}
+        />
       </CardSection>
       <CardSection
         title={'결제할 카드 번호를 입력해 주세요'}
         subTitle={'본인 명의의 카드만 결제 가능합니다.'}
       >
-        <CardNumberInput />
+        <CardNumberInput
+          firstRef={cardNumberFirstRef}
+          onComplete={() => {
+            cardExpiryDateFirstRef.current?.focus();
+          }}
+        />
       </CardSection>
       <CardSection
         title={'카드 유효기간을 입력해 주세요'}
         subTitle={'월/년도(MMYY)를 순서대로 입력해 주세요.'}
       >
-        <CardExpiryDateInput />
+        <CardExpiryDateInput
+          firstRef={cardExpiryDateFirstRef}
+          onComplete={() => {
+            cardCVCRef.current?.focus();
+          }}
+        />
       </CardSection>
       <CardSection title={'CVC 번호를 입력해 주세요'}>
-        <CardCVCInput />
+        <CardCVCInput
+          cardCVCRef={cardCVCRef}
+          onComplete={() => {
+            cardPasswordRef.current?.focus();
+          }}
+        />
       </CardSection>
       <CardSection title={'비밀번호를 입력해 주세요'} subTitle={'앞의 2자리를 입력해주세요'}>
-        <CardPasswordInput />
+        <CardPasswordInput cardPasswordRef={cardPasswordRef} />
       </CardSection>
       <ConfirmButton isFormComplete={isFormComplete} />
     </CardFormContainer>

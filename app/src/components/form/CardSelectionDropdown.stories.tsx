@@ -12,6 +12,9 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    onSelect: () => {},
+  },
 } satisfies Meta<typeof CardSelectionDropdown>;
 
 export default meta;
@@ -34,7 +37,7 @@ const renderWithContext = () => {
         setCardCompany,
       }}
     >
-      <CardSelectionDropdown />
+      <CardSelectionDropdown onSelect={() => {}} />
     </CardContext>
   );
 };

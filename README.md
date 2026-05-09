@@ -54,7 +54,7 @@
     - [x] NetworkBrand
     - [x] ExpiryDate
 - 페이지
-  - [ ] Card
+  - [x] Card
   - [ ] CompleteRegistration
 - 검증
   - [x] 카드번호 입력값 검증
@@ -69,8 +69,8 @@
     - [x] 브랜드에 맞는 자리수에 맞게 fourth-digits input maxlength와 placeholder 변경하기
       - [x] onBlur시 자리수에 맞게 에러메세지 출력
 - 동적 입력 UI 구현
-  - [ ] 사용자의 입력이 완료되면 다음 필드로 자동으로 이동
-- [ ] 모든 input 입력완료시 확인버튼 show
+  - [x] 사용자의 입력이 완료되면 다음 필드로 자동으로 이동
+- [x] 모든 input 입력완료시 확인버튼 show
   - [ ] 확인 버튼 입력시 완료 페이지로 라우팅
 - 실시간 프리뷰
   - [x] 카드사에 맞는 카드 배경색 변경
@@ -81,3 +81,5 @@
   - [ ] react-router 사용
 - Custom Hooks
   - [ ] 사용하여 Form 관리 로직을 UI와 분리하기 (구현 완료 후)
+    - [ ] 입력값, 에러 상태, onChange, onBlur 패턴 공통 커스텀훅으로 추출 (검증 메서드 주입)
+    - [ ] focus 관련 훅들 커스텀 훅으로 모아놓기

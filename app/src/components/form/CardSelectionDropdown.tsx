@@ -16,7 +16,7 @@ const cardCompanyOptions: { value: CardCompany; label: string }[] = [
   { value: 'kookmin', label: '국민카드' },
 ];
 
-export function CardSelectionDropdown() {
+export function CardSelectionDropdown({ onSelect }: { onSelect: () => void }) {
   const { cardCompany, setCardCompany } = useCardContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -44,6 +44,7 @@ export function CardSelectionDropdown() {
               onClick={() => {
                 setCardCompany(option.value);
                 setIsDropdownOpen(false);
+                onSelect();
               }}
             >
               {option.label}

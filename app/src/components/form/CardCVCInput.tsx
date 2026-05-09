@@ -4,7 +4,13 @@ import { CardInput, CardSingleFieldContainer, CardLabel } from '../../style/Card
 import { Validator } from '../../validators/CardValidator';
 import { useCardContext } from '../../hooks/useCardContext';
 
-export function CardCVCInput() {
+export function CardCVCInput({
+  cardCVCRef,
+  onComplete,
+}: {
+  cardCVCRef: React.RefObject<HTMLInputElement | null>;
+  onComplete: () => void;
+}) {
   const { cardCVC, setCardCVC } = useCardContext();
 
   const [fieldErrors, setError] = useState({
@@ -22,6 +28,10 @@ export function CardCVCInput() {
     }
     setError({ ...fieldErrors, state: false, message: '' });
     setCardCVC(value);
+
+    if (value.length === 3) {
+      onComplete();
+    }
   };
 
   const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -48,6 +58,7 @@ export function CardCVCInput() {
         onChange={changeCardCVC}
         onBlur={handleBlurCVC}
         $fieldErrors={fieldErrors.state}
+        ref={cardCVCRef}
       />
       <ErrorMessage message={fieldErrors['message']} />
     </CardSingleFieldContainer>

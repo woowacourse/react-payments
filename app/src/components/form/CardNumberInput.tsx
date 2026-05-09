@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import { Validator } from '../../validators/CardValidator';
 import { BrandValidator } from '../../validators/BrandValidator';
@@ -20,8 +20,15 @@ const fields: Exclude<keyof cardNumberFieldError, 'message'>[] = [
   'fourth-digits',
 ];
 
-export function CardNumberInput() {
+export function CardNumberInput({
+  firstRef,
+  onComplete,
+}: {
+  firstRef: React.RefObject<HTMLInputElement | null>;
+  onComplete: () => void;
+}) {
   const { cardNumber, setCardNumber } = useCardContext();
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const networkBrand = BrandValidator.detectNetworkBrand(cardNumber.join('')).brand;
 
   const [fieldErrors, setError] = useState<cardNumberFieldError>({
@@ -32,7 +39,7 @@ export function CardNumberInput() {
     message: '',
   });
 
-  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { value, id } = e.target;
     const fieldId = id as keyof cardNumberFieldError;
 
@@ -52,6 +59,21 @@ export function CardNumberInput() {
 
     setError({ ...fieldErrors, [fieldId]: false, message: '' });
     setCardNumber(newCardNumber);
+
+    const max = handleInputMaxLength(networkBrand, indexMap[id]).maxLength;
+    if (value.length === max) {
+      inputRefs.current[index + 1]?.focus();
+    }
+
+    const lastDigitLength = networkBrand === 'diners' ? 2 : networkBrand === 'amex' ? 3 : 4;
+    if (
+      cardNumber[0].length === 4 &&
+      cardNumber[1].length === 4 &&
+      cardNumber[2].length === 4 &&
+      value.length === lastDigitLength
+    ) {
+      onComplete();
+    }
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -94,10 +116,14 @@ export function CardNumberInput() {
             maxLength={handleInputMaxLength(networkBrand, index).maxLength}
             inputMode="numeric"
             value={cardNumber[index]}
-            onChange={changeCardNumber}
+            onChange={(e) => changeCardNumber(e, index)}
             onBlur={handleBlurCardNumber}
             placeholder={handleInputMaxLength(networkBrand, index).placeholder}
             $fieldErrors={fieldErrors[field]}
+            ref={(el) => {
+              inputRefs.current[index] = el;
+              if (index === 0) firstRef.current = el;
+            }}
           />
         ))}
       </CardFieldset>
