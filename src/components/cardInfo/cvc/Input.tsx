@@ -1,24 +1,22 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
-import { useCvcNumberInput } from "../../../hooks/useCvcNumberInput";
+import { useCvcContext } from "../../../context/cvc/CvcContext";
 
 export default function Input() {
-  const [cvc, setCvc] = useState("");
-  const { cvcError, handleCvcChange } = useCvcNumberInput(setCvc);
+  const cvcContext = useCvcContext();
 
   return (
     <Wrapper>
       <Container>
         <InfoInput
-          value={cvc}
+          value={cvcContext.cvc}
           placeholder="123"
           maxLength={3}
-          onChange={(e) => handleCvcChange(e.target.value)}
-          $hasError={!!cvcError}
+          onChange={(e) => cvcContext.handleCvcChange(e.target.value)}
+          $hasError={!!cvcContext.cvcError}
         />
       </Container>
 
-      {cvcError && <Error>{cvcError}</Error>}
+      {cvcContext.cvcError && <Error>{cvcContext.cvcError}</Error>}
     </Wrapper>
   );
 }
