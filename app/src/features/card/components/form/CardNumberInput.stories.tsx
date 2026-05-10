@@ -189,3 +189,19 @@ export const BlankInputExcludeCheckNetworkBrand: Story = {
     ).toBeNull();
   },
 };
+
+export const InputAutoFocusNextOrPreviousInput: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput, secondInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(firstInput, "1234");
+    await expect(secondInput).toHaveFocus();
+
+    await userEvent.type(secondInput, "12");
+    await userEvent.clear(secondInput);
+
+    await expect(firstInput).toHaveFocus();
+  },
+};

@@ -1,8 +1,12 @@
+import { forwardRef } from "react";
 import styled from "@emotion/styled";
 
-export function CardInput(props: React.ComponentProps<typeof StyledCardInput>) {
-  return <StyledCardInput {...props} inputMode="numeric" />;
-}
+export const CardInput = forwardRef<
+  HTMLInputElement,
+  React.ComponentProps<typeof StyledCardInput>
+>((props, ref) => {
+  return <StyledCardInput ref={ref} {...props} inputMode="numeric" />;
+});
 
 type ErrorFlag = {
   isError?: boolean;

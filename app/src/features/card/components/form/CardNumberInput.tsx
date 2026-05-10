@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
 import NetworkBrandErrorMessage from "./NetworkBrandErrorMessage";
+import useFocusChain from "../../hooks/useFocusChain";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
 import { sanitizeErrors, joinEachStringWithLength } from "../../../../Utils";
@@ -31,6 +32,8 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     state: false,
     message: "",
   });
+
+  const { ref, changeFocus } = useFocusChain(4, CARD_INPUT.EACH_NUMBER_LENGTH);
 
   const runEachInputValidation = (
     validators: (() => void)[],
@@ -89,9 +92,13 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["first-digits"]}
-          onChange={changeCardNumber}
+          onChange={(e) => {
+            changeCardNumber(e);
+            changeFocus(e, 1);
+          }}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
+          ref={(node) => ref(1, node)}
           isError={fieldError["first-digits"].state}
         />
         <CardInput
@@ -99,9 +106,13 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["second-digits"]}
-          onChange={changeCardNumber}
+          onChange={(e) => {
+            changeCardNumber(e);
+            changeFocus(e, 2);
+          }}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
+          ref={(node) => ref(2, node)}
           isError={fieldError["second-digits"].state}
         />
         <CardInput
@@ -109,9 +120,13 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["third-digits"]}
-          onChange={changeCardNumber}
+          onChange={(e) => {
+            changeCardNumber(e);
+            changeFocus(e, 3);
+          }}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
+          ref={(node) => ref(3, node)}
           isError={fieldError["third-digits"].state}
         />
         <CardInput
@@ -119,9 +134,13 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["fourth-digits"]}
-          onChange={changeCardNumber}
+          onChange={(e) => {
+            changeCardNumber(e);
+            changeFocus(e, 4);
+          }}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
+          ref={(node) => ref(4, node)}
           isError={fieldError["fourth-digits"].state}
         />
       </CardFieldset>
