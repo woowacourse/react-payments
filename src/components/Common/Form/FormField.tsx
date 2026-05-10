@@ -30,8 +30,6 @@ export default function FormField({
   placeholder,
   setErrorMessage,
 }: Props) {
-  const [isError, setIsError] = useState<boolean>(false);
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (validateNaN(e.target.value)) {
       setIsError(true);
@@ -60,9 +58,9 @@ export default function FormField({
   };
 
   return (
-    <FormFieldContainer>
+    <Wrapper>
       <InputField
-        isError={isError}
+        isError={}
         id={id}
         type="text"
         maxLength={fieldMaxLength}
@@ -74,13 +72,10 @@ export default function FormField({
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-    </FormFieldContainer>
+    </Wrapper>
   );
 }
 
-const FormFieldContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+const Wrapper = styled.div`
   width: 100%;
 `;

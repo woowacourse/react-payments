@@ -1,4 +1,5 @@
 export const ERROR_MESSAGE = {
+  INVALID_TYPE: '숫자만 입력 가능합니다.',
   INVALID_CARD_BRAND_NUMBER: '유효한 카드 브랜드 번호를 입력해주세요.',
   NAN: '숫자만 입력 가능합니다.',
   MAX_LENGTH: (length: number) => `숫자는 ${length}자리를 입력해야 합니다.`,
