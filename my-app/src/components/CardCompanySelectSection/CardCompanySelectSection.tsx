@@ -3,16 +3,7 @@ import { css } from "@emotion/react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import chevronDown from "../../assets/ic_chevron_down.svg";
 import chevronUp from "../../assets/ic_chevron_up.svg";
-const CARD_COMPANIES = [
-  "BC카드",
-  "신한카드",
-  "카카오뱅크",
-  "현태카드",
-  "우리카드",
-  "롯데카드",
-  "하나카드",
-  "국민카드",
-];
+import { CARD_COMPANIES } from "../../constants/cardCompanies";
 
 const CardCompanySelectSection = ({
   onValueHandler,
@@ -77,24 +68,24 @@ const CardCompanySelectSection = ({
               overflow-y: auto;
             `}
           >
-            {CARD_COMPANIES.map((company) => (
+            {CARD_COMPANIES.map(({ name }) => (
               <li
-                key={company}
-                onClick={() => handleSelect(company)}
+                key={name}
+                onClick={() => handleSelect(name)}
                 css={css`
                   padding: 8px 12px;
-                  font-weight: 400;
                   font-size: 10.63px;
                   cursor: pointer;
                   color: #4f4f4f;
-                  background: ${inputValue === company ? "#f3f3f3" : "#fff"};
-                  font-weight: ${inputValue === company ? 600 : 400};
+                  background: ${inputValue === name ? "#f3f3f3" : "#fff"};
+                  font-weight: ${inputValue === name ? 600 : 400};
                   &:hover {
                     background: #f3f3f3;
                   }
                 `}
               >
-                {company}
+                <span />
+                {name}
               </li>
             ))}
           </ul>

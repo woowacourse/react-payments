@@ -6,7 +6,7 @@ import CardNumberInputSection from "./components/CardNumberInputSection/CardNumb
 import CardCompanySelectSection from "./components/CardCompanySelectSection/CardCompanySelectSection.tsx";
 import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
 import CvcInputSection from "./components/CvcInputSection/CvcInputSection.tsx";
-import { decideBrandName } from "./utils/decideBrandName.ts";
+import { decideBrandName } from "./utils/decideCardInfo.ts";
 import { validateCardNumber, validateExpiryDate, validateCvc } from "./utils/validators.ts";
 import { useNavigate } from "react-router-dom";
 function App() {

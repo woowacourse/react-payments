@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import type { CardInfo } from "../../types";
 import masterLogo from "../../assets/masterLogo.png";
 import visaLogo from "../../assets/visaLogo.png";
+import { decideCardColor } from "../../utils/decideCardInfo";
 
 const cardTextStyle = css`
   color: #ffffff;
@@ -16,13 +17,15 @@ const cardNumberSpanStyle = css`
 `;
 
 const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
+  const cardColor = decideCardColor(cardInfo.company);
+
   return (
     <div
       css={css`
         width: 212px;
         height: 132px;
         border-radius: 4px;
-        background-color: #333333;
+        background-color: ${cardColor};
         box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
         padding: 8px 12px;
         display: flex;
@@ -61,11 +64,14 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
       {/* 카드 정보 */}
       <div>
         <div
-          css={[cardTextStyle, css`
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-          `]}
+          css={[
+            cardTextStyle,
+            css`
+              display: flex;
+              flex-direction: row;
+              gap: 10px;
+            `,
+          ]}
         >
           <span css={cardNumberSpanStyle}>{cardInfo.numbers[0]}</span>
           <span css={cardNumberSpanStyle}>{cardInfo.numbers[1]}</span>
@@ -73,7 +79,12 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
           <span css={cardNumberSpanStyle}>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
         </div>
         <p
-          css={[cardTextStyle, css`font-family: "Inter";`]}
+          css={[
+            cardTextStyle,
+            css`
+              font-family: "Inter";
+            `,
+          ]}
         >
           {cardInfo.expiry[0]}
           <span

@@ -1,4 +1,4 @@
-import { decideBrandName } from "./decideBrandName";
+import { decideBrandName } from "./decideCardInfo";
 
 type ValidationResult = { errorIndex: number; message: string };
 
