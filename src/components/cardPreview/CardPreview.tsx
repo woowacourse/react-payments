@@ -5,15 +5,19 @@ import { maskCardNumber } from "../../utils/cardFormatters";
 import { formatExpireDate } from "../../utils/cardFormatters";
 import { useCardNumberContext } from "../../context/cardNumber/CardNumberContext";
 import { useExpireDateContext } from "../../context/expireDate/ExpireDateContext";
+import { useCardBrandContext } from "../../context/cardBrand/CardBrandContext";
 
 export default function CardPreview() {
-  const cardNumberContext = useCardNumberContext();
-  const expireDateContext = useExpireDateContext();
-  const cardType = selectCardType(cardNumberContext.cardNumber);
+  const { cardNumber } = useCardNumberContext();
+  const { expireDate } = useExpireDateContext();
+  const {
+    selectedItem: { color },
+  } = useCardBrandContext();
+  const cardType = selectCardType(cardNumber);
 
   return (
     <CardPreviewWrapper>
-      <Card>
+      <Card color={color}>
         <Upper>
           <IC />
           {cardType && <PayMethodImage src={cardType} alt="payment method" />}
@@ -22,11 +26,11 @@ export default function CardPreview() {
         <CardImageInfoWrapper>
           <CardPreviewNumber
             gap="10px"
-            cardArray={maskCardNumber(cardNumberContext.cardNumber)}
+            cardArray={maskCardNumber(cardNumber)}
           />
           <CardPreviewNumber
             gap="0px"
-            cardArray={formatExpireDate(expireDateContext.expireDate)}
+            cardArray={formatExpireDate(expireDate)}
           />
         </CardImageInfoWrapper>
       </Card>
@@ -42,8 +46,9 @@ const CardPreviewWrapper = styled.section`
   margin-bottom: 40px;
 `;
 
-const Card = styled.div`
-  background-color: rgba(51, 51, 51, 1);
+const Card = styled.div<{ color: string }>`
+  background-color: ${(props) =>
+    props.color ? `${props.color}` : "rgba(51, 51, 51, 1)"};
   box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   width: 212px;
