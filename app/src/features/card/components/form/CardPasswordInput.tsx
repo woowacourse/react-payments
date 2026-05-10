@@ -3,7 +3,7 @@ import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
-import { sanitizeErrors } from "../../../../Utils";
+import { sanitizeErrors } from "../../Utils";
 import {
   CardInputLabel,
   CardInputFieldContainer,

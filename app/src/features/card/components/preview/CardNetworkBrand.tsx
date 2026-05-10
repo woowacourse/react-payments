@@ -5,15 +5,12 @@ import UnionCard from "../../assets/unionpay-logo.svg";
 import AmexCard from "../../assets/amex-logo.svg";
 import DinersCard from "../../assets/diners-club-logo.png";
 import { CARD_INPUT } from "../../Constants";
-import { joinEachStringWithLength } from "../../../../Utils";
+import { joinCardNumber } from "../../Utils";
 import { CardNetwork } from "../../CardNetwork";
 
 export function CardNetworkBrand({ cardNumber }) {
   const networkBrandName = new CardNetwork(
-    joinEachStringWithLength(
-      Object.values(cardNumber),
-      CARD_INPUT.EACH_NUMBER_LENGTH,
-    ),
+    joinCardNumber(Object.values(cardNumber), CARD_INPUT.EACH_NUMBER_LENGTH),
   ).brand?.title;
 
   const selectBrandImage = (brand: string): string | null => {

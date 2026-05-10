@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { CARD_INPUT } from "../../Constants";
-import { sanitizeErrors } from "../../../../Utils";
+import { sanitizeErrors } from "../../Utils";
 import { CardInput } from "./CardInput";
 import { Validator } from "../../validators/CardValidator";
 import {

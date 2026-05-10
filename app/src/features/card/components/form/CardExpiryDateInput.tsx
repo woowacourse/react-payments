@@ -1,7 +1,7 @@
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 import { CardInput } from "./CardInput";
 import { Validator } from "../../validators/CardValidator";
-import { sanitizeErrors } from "../../../../Utils";
+import { sanitizeErrors } from "../../Utils";
 import { CARD_INPUT } from "../../Constants";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";

@@ -6,7 +6,7 @@ import useFocusChain from "../../hooks/useFocusChain";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
 import { CardInputChecker } from "../../Checker";
-import { sanitizeErrors, joinEachStringWithLength } from "../../../../Utils";
+import { sanitizeErrors, joinCardNumber } from "../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
 const CARD_NUMBER_FIELDS = [
@@ -69,7 +69,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     const { value } = e.target;
     const field = CARD_NUMBER_FIELDS[index - 1];
     const newCardNumber = { ...cardNumber, [field]: value };
-    const fullNumber = joinEachStringWithLength(
+    const fullNumber = joinCardNumber(
       Object.values(newCardNumber),
       CARD_INPUT.EACH_NUMBER_LENGTH,
     );
