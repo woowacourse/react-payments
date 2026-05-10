@@ -78,7 +78,7 @@ const WarningBadge = styled.span`
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background-color: #c41616;
+  background-color: #c13740;
   color: #fff;
   font-size: 8px;
   font-weight: 700;
@@ -87,7 +87,7 @@ const WarningBadge = styled.span`
 `;
 
 const MessageText = styled.span`
-  color: #c41616;
+  color: #c13740;
   font-size: 10px;
   text-align: left;
 `;
@@ -95,7 +95,7 @@ const MessageText = styled.span`
 const Chevron = styled.span<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
-  color: #c41616;
+  color: #c13740;
   flex-shrink: 0;
   transform: rotate(${({ isOpen }) => (isOpen ? "180deg" : "0deg")});
   transition: transform 0.2s ease;
@@ -130,7 +130,6 @@ const BrandInfoList = styled.ul`
       content: "•";
       position: absolute;
       left: 0;
-      color: #e22222;
       font-size: 7px;
       top: 1px;
     }
@@ -152,7 +151,7 @@ const BrandInfoSubList = styled.ul`
     position: relative;
 
     &::before {
-      content: "–";
+      content: "-";
       position: absolute;
       left: 0;
       color: #bbb;
