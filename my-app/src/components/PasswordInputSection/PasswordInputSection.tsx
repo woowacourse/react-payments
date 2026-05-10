@@ -2,8 +2,8 @@ import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 import { inputStyle } from "../../styles/inputStyle";
+import { validateNumeric } from "../../utils/validators";
 
-const NUMERIC_REGEX = /^\d+$/;
 const PASS_WORD_LENGTH = 2;
 
 type PasswordInputSectionProps = {
@@ -20,14 +20,8 @@ const PasswordInputSection = ({ onValueHandler }: PasswordInputSectionProps) => 
     onValueHandler(value);
   };
 
-  const getValidationError = (value: string) => {
-    if (!value) return "";
-    if (!NUMERIC_REGEX.test(value)) return "숫자만 입력 가능합니다";
-    return "";
-  };
-
   const handleBlur = () => {
-    setErrorMessage(getValidationError(inputValue));
+    setErrorMessage(validateNumeric(inputValue));
   };
 
   return (
