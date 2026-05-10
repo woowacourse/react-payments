@@ -24,8 +24,26 @@ export default function CardInfo({ cardForm }: Props) {
   if (step === 1 && isCardBrandComplete(cardForm.cardBrand.value)) setStep(2);
   if (step === 2 && isExpireDateComplete(cardForm.expireDate.value)) setStep(3);
   if (step === 3 && isCvcComplete(cardForm.cvc.value)) setStep(4);
-  if (step === 4 && isCardPasswordComplete(cardForm.cardPassword.value))
+  if (
+    step === 4 &&
+    isCardNumberComplete(cardForm.cardNumber.value) &&
+    isCardBrandComplete(cardForm.cardBrand.value) &&
+    isExpireDateComplete(cardForm.expireDate.value) &&
+    isCvcComplete(cardForm.cvc.value) &&
+    isCardPasswordComplete(cardForm.cardPassword.value)
+  )
     setStep(5);
+  if (
+    step === 5 &&
+    !(
+      isCardNumberComplete(cardForm.cardNumber.value) &&
+      isCardBrandComplete(cardForm.cardBrand.value) &&
+      isExpireDateComplete(cardForm.expireDate.value) &&
+      isCvcComplete(cardForm.cvc.value) &&
+      isCardPasswordComplete(cardForm.cardPassword.value)
+    )
+  )
+    setStep(4);
 
   return (
     <Wrapper>
