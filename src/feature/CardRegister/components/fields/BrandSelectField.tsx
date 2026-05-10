@@ -9,16 +9,7 @@ type BrandSelectFieldProps = {
   onChange: (value: CardCompanyType | null) => void;
 };
 
-const CARD_COMPANY_KEYS: CardCompanyType[] = [
-  'bc',
-  'shinhan',
-  'kakao',
-  'hyundai',
-  'woori',
-  'lotte',
-  'hana',
-  'kookmin',
-];
+const CARD_COMPANY_KEYS: CardCompanyType[] = ['bc', 'shinhan', 'kakao', 'hyundai', 'woori', 'lotte', 'hana', 'kookmin'];
 
 const BrandSelectField = ({selectedCompany, onChange}: BrandSelectFieldProps) => {
   return (

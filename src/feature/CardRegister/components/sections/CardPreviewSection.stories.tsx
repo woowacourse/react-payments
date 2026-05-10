@@ -4,12 +4,7 @@ import CardPreviewSection from './CardPreviewSection';
 import CardPreviewContainer from '../preview/CardPreviewContainer';
 
 const emptyPreviewSlot = (
-  <CardPreviewContainer
-    cardNumbers={['', '', '', '']}
-    brand={null}
-    expiryDate={['', '']}
-    selectedCompany={null}
-  />
+  <CardPreviewContainer cardNumbers={['', '', '', '']} brand={null} expiryDate={['', '']} selectedCompany={null} />
 );
 
 const filledPreviewSlot = (

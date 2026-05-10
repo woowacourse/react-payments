@@ -6,8 +6,7 @@ import {fn} from 'storybook/test';
 import NumberField from './NumberField';
 import type {CardRegisterInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
 
-const generatePlaceholder = (length: number) =>
-  Array.from({length}, (_, i) => (i + 1) % 10).join('');
+const generatePlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
 
 const createInputProps = (value: string, maxLength: number): CardRegisterInputProps => ({
   value,

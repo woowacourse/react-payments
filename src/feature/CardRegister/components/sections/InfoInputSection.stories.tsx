@@ -9,11 +9,7 @@ import NumberField from '../fields/NumberField';
 import PasswordField from '../fields/PasswordField';
 import type {CardRegisterInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
 
-const createInputProps = (
-  value: string,
-  maxLength: number,
-  placeholder: string
-): CardRegisterInputProps => ({
+const createInputProps = (value: string, maxLength: number, placeholder: string): CardRegisterInputProps => ({
   value,
   maxLength,
   placeholder,
@@ -22,11 +18,7 @@ const createInputProps = (
 });
 
 const numberSlot = (
-  <NumberField
-    inputProps={[0, 1, 2, 3].map(() => createInputProps('', 4, '1234'))}
-    errorMessage=''
-    errorIndex={-1}
-  />
+  <NumberField inputProps={[0, 1, 2, 3].map(() => createInputProps('', 4, '1234'))} errorMessage='' errorIndex={-1} />
 );
 
 const brandSlot = <BrandSelectField selectedCompany={null} onChange={fn()} />;
@@ -44,12 +36,7 @@ const expirySlot = (
 
 const cvcSlot = <CvcField inputProps={createInputProps('', 3, '123')} errorMessage='' />;
 
-const passwordSlot = (
-  <PasswordField
-    inputProps={{...createInputProps('', 2, ''), type: 'password'}}
-    errorMessage=''
-  />
-);
+const passwordSlot = <PasswordField inputProps={{...createInputProps('', 2, ''), type: 'password'}} errorMessage='' />;
 
 const meta = {
   title: 'feature/CardRegister/components/sections/InfoInputSection',

@@ -6,11 +6,7 @@ type CardPreviewSectionProps = {
 };
 
 const CardPreviewSection = ({previewSlot}: CardPreviewSectionProps) => {
-  return (
-    <Container>
-      {previewSlot}
-    </Container>
-  );
+  return <Container>{previewSlot}</Container>;
 };
 
 const Container = styled.div`
