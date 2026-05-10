@@ -161,6 +161,7 @@ function CardForm(props: CardFormProps) {
             <Flex gap={8}>
               {form.cardNumberSegments.values.map((segment, segmentIndex) => (
                 <Input
+                  key={segmentIndex}
                   autoFocus={segmentIndex === 0}
                   type="text"
                   inputMode="numeric"
