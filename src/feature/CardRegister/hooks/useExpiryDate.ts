@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {createFlags, createErrInfo, computeNextTouched, computeNextErrInfo} from '../utils/fieldErrorUtils';
+import {createFlags, createErrInfo, updateTouched, updateErrInfo} from '../utils/fieldErrorUtils';
 
 const EXPIRY_ERR_MSG = '2자리를 입력해 주세요';
 const INVALID_MONTH_ERR_MSG = '01~12 사이의 월을 입력해 주세요';
@@ -7,8 +7,8 @@ const INVALID_MONTH_ERR_MSG = '01~12 사이의 월을 입력해 주세요';
 const EXPIRY_FIELD_COUNT = 2;
 const EXPIRY_DIGIT_COUNT = 2;
 
-const MONTH_FIELD_INDEX = 0;
-const YEAR_FIELD_INDEX = 1;
+const MONTH_INDEX = 0;
+const YEAR_INDEX = 1;
 
 const isValidMonth = (value: string) => {
   const month = Number(value);
@@ -16,14 +16,29 @@ const isValidMonth = (value: string) => {
 };
 
 const isValidExpiry = (value: string, index: number) => {
-  if (index === MONTH_FIELD_INDEX) return value.length === EXPIRY_DIGIT_COUNT && isValidMonth(value);
-  return value.length === EXPIRY_DIGIT_COUNT;
+  // (공통) 길이 검사
+  if (value.length !== EXPIRY_DIGIT_COUNT) return false;
+
+  // (월) 추가적으로 1~12 사이인지 유효성 검사
+  if (index === MONTH_INDEX) return isValidMonth(value);
+
+  return true;
+};
+
+const getErrMsg = (value: string, index: number) => {
+  if (index === MONTH_INDEX && value.length === EXPIRY_DIGIT_COUNT) return INVALID_MONTH_ERR_MSG;
+  return EXPIRY_ERR_MSG;
 };
 
 const fillZero = (value: string, index: number) => {
   if (value.length !== 1) return undefined;
-  if (index === MONTH_FIELD_INDEX && value !== '0') return `0${value}`;
-  if (index === YEAR_FIELD_INDEX) return `0${value}`;
+
+  //case: month
+  if (index === MONTH_INDEX && value !== '0') return `0${value}`;
+
+  //case: year
+  if (index === YEAR_INDEX) return `0${value}`;
+
   return undefined;
 };
 
@@ -32,43 +47,49 @@ export function useExpiryDate() {
   const [errInfo, setErrInfo] = useState(createErrInfo(EXPIRY_FIELD_COUNT));
   const [isTouched, setIsTouched] = useState<boolean[]>(createFlags(EXPIRY_FIELD_COUNT));
 
-  const updateErrInfo = (index: number, hasErr: boolean, errMsg = EXPIRY_ERR_MSG) => {
-    setErrInfo(computeNextErrInfo(errInfo.errFlags, errInfo.errMessages, index, hasErr, errMsg));
+  const applyErrInfo = (index: number, hasErr: boolean, errMsg = EXPIRY_ERR_MSG) => {
+    setErrInfo(updateErrInfo(errInfo.errFlags, errInfo.errMessages, index, hasErr, errMsg));
   };
 
   const clearErrWhenComplete = (index: number, value: string) => {
-    if (!isTouched[index] || !isValidExpiry(value, index)) return;
-    updateErrInfo(index, false);
+    // 입력값이 유효하지 않을 때와 첫 입력 중일 땐 입력 무시
+    if (!isValidExpiry(value, index) || !isTouched[index]) return;
+    // 즉, 첫 입력이 아니고 입력값이 유효할 때 hasErr를 false로 update
+    applyErrInfo(index, false);
   };
 
   const handleChange = (index: number, rawValue: string) => {
-    const inputValue = rawValue.trim();
-    if (!/^\d*$/.test(inputValue) || inputValue.length > EXPIRY_DIGIT_COUNT) return;
-    setExpiryDate((prev) => prev.map((v, i) => (i === index ? inputValue : v)));
-    clearErrWhenComplete(index, inputValue);
+    // 1. 숫자 아닌 입력이나 자릿수 초과는 무시
+    const newValue = rawValue.trim();
+    if (!/^\d*$/.test(newValue) || newValue.length > EXPIRY_DIGIT_COUNT) return;
+
+    // 2. 값 반영
+    setExpiryDate((prev) => prev.map((prevValue, i) => (i === index ? newValue : prevValue)));
+
+    // 3. 이미 touched 상태에서 유효한 값이 되면 에러 해제
+    clearErrWhenComplete(index, newValue);
   };
 
   const handleBlur = (index: number, rawValue: string) => {
-    setIsTouched((prev) => computeNextTouched(prev, index));
-    const zeroPaddedValue = fillZero(rawValue, index);
-    const normalizedValue = zeroPaddedValue ?? rawValue;
+    // 1. touched 기록
+    setIsTouched((prev) => updateTouched(prev, index));
 
-    setExpiryDate((prev) => prev.map((v, i) => (i === index ? normalizedValue : v)));
+    // 2. 1자리 입력이면 앞자리 0 채움 (예: '9' → '09')
+    const value = fillZero(rawValue, index) ?? rawValue;
+    setExpiryDate((prev) => prev.map((prevValue, i) => (i === index ? value : prevValue)));
 
-    const hasErr = !isValidExpiry(normalizedValue, index);
-    const errMsg =
-      index === MONTH_FIELD_INDEX && normalizedValue.length === EXPIRY_DIGIT_COUNT
-        ? INVALID_MONTH_ERR_MSG
-        : EXPIRY_ERR_MSG;
-    updateErrInfo(index, hasErr, errMsg);
+    // 3. 유효성 검사 후 에러 상태 반영
+    const hasErr = !isValidExpiry(value, index);
+    const errMsg = getErrMsg(value, index);
+    applyErrInfo(index, hasErr, errMsg);
   };
 
   const firstErrIdx = errInfo.errFlags.indexOf(true);
   const hasAnyErr = firstErrIdx !== -1;
   const errMsg = hasAnyErr ? errInfo.errMessages[firstErrIdx] : '';
+
   const isComplete =
-    isValidExpiry(expiryDate[MONTH_FIELD_INDEX], MONTH_FIELD_INDEX) &&
-    isValidExpiry(expiryDate[YEAR_FIELD_INDEX], YEAR_FIELD_INDEX);
+    isValidExpiry(expiryDate[MONTH_INDEX], MONTH_INDEX) && isValidExpiry(expiryDate[YEAR_INDEX], YEAR_INDEX);
 
   return {
     expiryDate,
