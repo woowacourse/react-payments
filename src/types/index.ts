@@ -7,4 +7,11 @@ interface InputFieldConfig {
   maxLength: number;
 }
 
-export type { InputFieldConfig };
+interface SelectFieldConfig {
+  id: string;
+  sectionTitle: string;
+  hintText: string;
+  placeholder: string;
+}
+
+export type { InputFieldConfig, SelectFieldConfig };

@@ -1,6 +1,15 @@
-import { InputFieldConfig } from '../types';
+import { InputFieldConfig } from "../types";
 
-export const INPUT_FIELD_CONFIG: Record<string, InputFieldConfig> = {
+export const SELECT_FIELD_CONFIG = {
+  CARD_ISSUER: {
+    id: 'cardIssuer',
+    sectionTitle: '카드사를 선택해 주세요',
+    hintText: '현재 국내 카드사만 가능합니다',
+    placeholder: '카드사를 선택해 주세요',
+  },
+} as const;
+
+export const INPUT_FIELD_CONFIG = {
   CARD_NUMBERS: {
     id: 'cardNumbers',
     sectionTitle: '결제할 카드 번호를 입력해 주세요',
@@ -24,4 +33,4 @@ export const INPUT_FIELD_CONFIG: Record<string, InputFieldConfig> = {
     placeholder: ['123'],
     maxLength: 3,
   },
-} as const;
+} satisfies Record<string, InputFieldConfig>;
