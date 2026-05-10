@@ -3,7 +3,7 @@ import {fn} from 'storybook/test';
 import BrandSelectField from './BrandSelectField';
 
 const meta = {
-  title: 'feature/CardRegister/components/fields/BrandSelectField',
+  title: 'feature/CardRegister/components/inputs/BrandSelectField',
   component: BrandSelectField,
   tags: ['autodocs'],
   args: {

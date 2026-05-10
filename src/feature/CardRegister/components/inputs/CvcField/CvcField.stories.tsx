@@ -3,27 +3,26 @@ import type {ChangeEvent} from 'react';
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {fn} from 'storybook/test';
 
-import PasswordField from './PasswordField';
+import CvcField from './CvcField';
 import type {CardRegisterInputProps} from '../shared.types';
 
 const createInputProps = (value: string): CardRegisterInputProps => ({
-  type: 'password',
   value,
-  maxLength: 2,
-  placeholder: '',
+  maxLength: 3,
+  placeholder: '123',
   onChange: fn(),
   onBlur: fn(),
 });
 
 const meta = {
-  title: 'feature/CardRegister/components/fields/PasswordField',
-  component: PasswordField,
+  title: 'feature/CardRegister/components/inputs/CvcField',
+  component: CvcField,
   tags: ['autodocs'],
   args: {
     inputProps: createInputProps(''),
     errorMessage: '',
   },
-} satisfies Meta<typeof PasswordField>;
+} satisfies Meta<typeof CvcField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -32,29 +31,29 @@ export const Empty: Story = {};
 
 export const Filled: Story = {
   args: {
-    inputProps: createInputProps('12'),
+    inputProps: createInputProps('123'),
   },
 };
 
 export const WithErr: Story = {
   args: {
-    inputProps: createInputProps('1'),
-    errorMessage: '비밀번호 앞 2자리를 입력해 주세요',
+    inputProps: createInputProps('12'),
+    errorMessage: 'CVC 번호 3자리를 입력해 주세요',
   },
 };
 
 export const Interactive: Story = {
-  render: function InteractivePasswordField(args) {
-    const [password, setPassword] = useState('');
+  render: function InteractiveCvcField(args) {
+    const [cvcNumber, setCvcNumber] = useState('');
     const inputProps = {
-      ...createInputProps(password),
+      ...createInputProps(cvcNumber),
       onChange: (event: ChangeEvent<HTMLInputElement>) => {
         const nextValue = event.currentTarget.value;
-        if (!/^\d*$/.test(nextValue) || nextValue.length > 2) return;
-        setPassword(nextValue);
+        if (!/^\d*$/.test(nextValue) || nextValue.length > 3) return;
+        setCvcNumber(nextValue);
       },
     };
 
-    return <PasswordField {...args} inputProps={inputProps} />;
+    return <CvcField {...args} inputProps={inputProps} />;
   },
 };

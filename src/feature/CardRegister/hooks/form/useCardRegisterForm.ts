@@ -7,7 +7,7 @@ import {useCvcNumber} from './useCvcNumber';
 import {useCardPassword} from './useCardPassword';
 
 import {CARD_COMPANIES} from '@/domain/card/cardCompany';
-import type {CardRegisterInputProps, ExpiryInputProps} from '../../components/fields/shared.types';
+import type {CardRegisterInputProps, ExpiryInputProps} from '../../components/inputs/shared.types';
 
 const generateNumberPlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
 

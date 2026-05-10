@@ -19,7 +19,7 @@ const createInputProps = (value: string, maxLength: number): CardRegisterInputPr
 const createInputPropsList = (values: string[]) => values.map((value) => createInputProps(value, 4));
 
 const meta = {
-  title: 'feature/CardRegister/components/fields/NumberField',
+  title: 'feature/CardRegister/components/inputs/NumberField',
   component: NumberField,
   tags: ['autodocs'],
   args: {

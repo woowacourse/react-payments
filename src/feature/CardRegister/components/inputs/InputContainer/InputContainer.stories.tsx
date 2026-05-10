@@ -4,7 +4,7 @@ import Input from '@/common/components/Input/Input';
 import InputContainer from './InputContainer';
 
 const meta = {
-  title: 'feature/CardRegister/components/fields/InputContainer',
+  title: 'feature/CardRegister/components/inputs/InputContainer',
   component: InputContainer,
   tags: ['autodocs'],
   args: {

@@ -2,12 +2,12 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import {fn} from 'storybook/test';
 
 import InfoInputSection from './InfoInputSection';
-import BrandSelectField from '../../fields/BrandSelectField/BrandSelectField';
-import CvcField from '../../fields/CvcField/CvcField';
-import ExpiryField from '../../fields/ExpiryField/ExpiryField';
-import NumberField from '../../fields/NumberField/NumberField';
-import PasswordField from '../../fields/PasswordField/PasswordField';
-import type {CardRegisterInputProps} from '../../fields/shared.types';
+import BrandSelectField from '../../inputs/BrandSelectField/BrandSelectField';
+import CvcField from '../../inputs/CvcField/CvcField';
+import ExpiryField from '../../inputs/ExpiryField/ExpiryField';
+import NumberField from '../../inputs/NumberField/NumberField';
+import PasswordField from '../../inputs/PasswordField/PasswordField';
+import type {CardRegisterInputProps} from '../../inputs/shared.types';
 
 const createInputProps = (value: string, maxLength: number, placeholder: string): CardRegisterInputProps => ({
   value,

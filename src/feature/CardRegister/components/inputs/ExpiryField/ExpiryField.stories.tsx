@@ -20,7 +20,7 @@ const createInputPropsGroup = (month: string, year: string): ExpiryInputProps =>
 });
 
 const meta = {
-  title: 'feature/CardRegister/components/fields/ExpiryField',
+  title: 'feature/CardRegister/components/inputs/ExpiryField',
   component: ExpiryField,
   tags: ['autodocs'],
   args: {
