@@ -1,17 +1,21 @@
 import { css } from "@emotion/react";
 import { useState } from "react";
-import type { CardInfo } from "../types";
-import Card from "../components/Card/Card";
-import CardNumberInputSection from "../components/CardNumberInputSection/CardNumberInputSection";
-import ExpiryDateInputSection from "../components/ExpiryDateInputSection/ExpiryDateInputSection";
-import CardCompanySelectSection from "../components/CardCompanySelectSection/CardCompanySelectSection";
-import CvcInputSection from "../components/CvcInputSection/CvcInputSection";
-import PasswordInputSection from "../components/PasswordInputSection/PasswordInputSection";
-import { decideBrandName } from "../utils/decideBrandName";
-import { getMaxLength } from "../utils/getMaxLength";
 import { useNavigate } from "react-router-dom";
 
+import type { CardInfo } from "../types";
+
+import Card from "../components/Card/Card";
+import CardCompanySelectSection from "../components/CardCompanySelectSection/CardCompanySelectSection";
+import CardNumberInputSection from "../components/CardNumberInputSection/CardNumberInputSection";
+import CvcInputSection from "../components/CvcInputSection/CvcInputSection";
+import ExpiryDateInputSection from "../components/ExpiryDateInputSection/ExpiryDateInputSection";
+import PasswordInputSection from "../components/PasswordInputSection/PasswordInputSection";
+
+import { decideBrandName } from "../utils/decideBrandName";
+import { getMaxLength } from "../utils/getMaxLength";
+
 const CardFormPage = () => {
+  const navigate = useNavigate();
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     numbers: [],
     expiry: [],
@@ -51,7 +55,6 @@ const CardFormPage = () => {
   const passwordHandler = (password: string) => {
     setCardInfo((prev) => ({ ...prev, password }));
   };
-  const navigate = useNavigate();
 
   return (
     <main css={pageStyle}>

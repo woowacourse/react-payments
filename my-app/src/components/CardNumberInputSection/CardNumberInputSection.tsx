@@ -1,6 +1,8 @@
+import { useState, useRef } from "react";
+
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
-import { useState, useRef } from "react";
+
 import { inputStyle } from "../../styles/inputStyle";
 
 const NUMERIC_REGEX = /^\d+$/;

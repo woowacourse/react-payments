@@ -1,6 +1,7 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import CardFormPage from "./pages/CardFormPage";
 import CompletedPage from "./pages/CompletedPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (

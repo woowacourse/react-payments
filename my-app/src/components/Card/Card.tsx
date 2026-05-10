@@ -1,10 +1,12 @@
 import { css } from "@emotion/react";
+
 import type { CardInfo } from "../../types";
-import masterLogo from "../../assets/masterLogo.png";
-import visaLogo from "../../assets/visaLogo.png";
+
 import amexLogo from "../../assets/American Express.png";
 import dinersLogo from "../../assets/Diners Club.png";
+import masterLogo from "../../assets/masterLogo.png";
 import unionpayLogo from "../../assets/China UnionPay.png";
+import visaLogo from "../../assets/visaLogo.png";
 
 const NETWORK_LOGO: Record<string, { src: string; alt: string }> = {
   visa: { src: visaLogo, alt: "Visa" },
@@ -12,6 +14,24 @@ const NETWORK_LOGO: Record<string, { src: string; alt: string }> = {
   amex: { src: amexLogo, alt: "American Express" },
   diners: { src: dinersLogo, alt: "Diners Club" },
   unionpay: { src: unionpayLogo, alt: "UnionPay" },
+};
+
+const CARD_LAYOUT_COLOR: Record<string, string> = {
+  chip: "#DDCD78",
+  text: "#FFFFFF",
+  shadow: "3px 3px 5px 0px rgba(0, 0, 0, 0.25)",
+};
+
+const COMPANY_COLOR: Record<string, string> = {
+  "": "#333333",
+  hyundai: "#000000",
+  shinhan: "#0046FF",
+  woori: "#007BC8",
+  hana: "#009490",
+  kookmin: "#6A6056",
+  lotte: "#ED1C24",
+  bc: "#F04651",
+  kakaobank: "#FFE600",
 };
 
 type CardProps = {
@@ -49,24 +69,6 @@ const Card = ({ cardInfo }: CardProps) => {
 };
 
 export default Card;
-
-const CARD_LAYOUT_COLOR: Record<string, string> = {
-  chip: "#DDCD78",
-  text: "#FFFFFF",
-  shadow: "3px 3px 5px 0px rgba(0, 0, 0, 0.25)",
-}
-
-const COMPANY_COLOR: Record<string, string> = {
-  "": "#333333",
-  hyundai: "#000000",
-  shinhan: "#0046FF",
-  woori: "#007BC8",
-  hana: "#009490",
-  kookmin: "#6A6056",
-  lotte: "#ED1C24",
-  bc: "#F04651",
-  kakaobank: "#FFE600",
-}
 
 const cardStyle = (company: string) => css`
   width: 212px;
