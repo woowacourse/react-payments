@@ -7,10 +7,10 @@ const CardContainer = styled(Flex)`
   width: 100%;
 `;
 
-const Card = styled(Flex)`
+const Card = styled(Flex)<{ $backgroundColor?: string }>`
   width: 212px;
   height: 132px;
-  background-color: var(--color-card-background);
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#111111"};
   color: var(--color-white);
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px #00000040;
@@ -28,17 +28,33 @@ const CardText = styled.span`
   letter-spacing: 8%;
 `;
 
+const CardCompanyName: Record<string, string> = {
+  BC카드: "#F04651",
+  신한카드: "#0046FF",
+  카카오뱅크: "#FFE600",
+  현대카드: "#000000",
+  우리카드: "#007BC8",
+  롯데카드: "#ED1C24",
+  하나카드: "#009490",
+  국민카드: " #6A6056",
+};
+
 interface CardPreviewProps {
   cardBrand: CardBrand | undefined;
   cardNumberSegments: CardNumberSegments;
   expiryMonth: string;
   expiryYear: string;
+  cardCompany: string;
 }
 
 function CardPreview(props: CardPreviewProps) {
   return (
     <CardContainer justifyContent="center">
-      <Card direction="column" gap={14}>
+      <Card
+        $backgroundColor={CardCompanyName[props.cardCompany]}
+        direction="column"
+        gap={14}
+      >
         <Flex justifyContent="space-between">
           <CardImage src={`${import.meta.env.BASE_URL}chip.svg`} />
           {props.cardBrand && (

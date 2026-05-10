@@ -30,6 +30,7 @@ function App() {
         cardNumberSegments={formState.cardNumberSegments}
         expiryMonth={formState.expiryMonth}
         expiryYear={formState.expiryYear}
+        cardCompany={formState.cardCompany}
       />
       <CardForm formState={formState} setFormState={setFormState} />
     </View>
