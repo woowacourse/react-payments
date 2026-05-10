@@ -13,8 +13,10 @@ import type { CardCompanyType } from "../../../../common/types/CardCompany";
 import PasswordField from "./PasswordField/PasswordField";
 import Button from "../../../../common/components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import { getCardBrandName } from "../../utils/cardBrand";
-import type { CardBrandType } from "../../../../common/types/CardBrand";
+import {
+  getBrandLastCardNumberLength,
+  getCardBrandName,
+} from "../../utils/cardBrand";
 
 const InfoInputSection = ({
   cardInfo,
@@ -36,24 +38,6 @@ const InfoInputSection = ({
   const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardInfoHandlers;
 
   const cardBrand = getCardBrandName(cardNumbers);
-  const getBrandLastCardNumberLength = (cardBrand: CardBrandType) => {
-    if (cardBrand === "visa") {
-      return 4;
-    }
-    if (cardBrand === "masterCard") {
-      return 4;
-    }
-    if (cardBrand === "diners") {
-      return 2;
-    }
-    if (cardBrand === "amex") {
-      return 3;
-    }
-    if (cardBrand === "unionPay") {
-      return 4;
-    }
-    return 4;
-  };
 
   const fieldCompleteState = {
     cardNumber:

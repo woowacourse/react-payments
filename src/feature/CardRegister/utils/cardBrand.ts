@@ -34,6 +34,25 @@ export const getCardBrandName = (
   return null;
 };
 
+export const getBrandLastCardNumberLength = (cardBrand: CardBrandType) => {
+  if (cardBrand === "visa") {
+    return 4;
+  }
+  if (cardBrand === "masterCard") {
+    return 4;
+  }
+  if (cardBrand === "diners") {
+    return 2;
+  }
+  if (cardBrand === "amex") {
+    return 3;
+  }
+  if (cardBrand === "unionPay") {
+    return 4;
+  }
+  return 4;
+};
+
 const isVisa = (cardNumbers: string) => {
   if (cardNumbers.startsWith(CARD.VISA.PREFIX)) {
     return true;
