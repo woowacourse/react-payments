@@ -1,18 +1,17 @@
 import FormField, { type FormFieldProps } from '../ui/FormField.tsx';
 import { css } from '@emotion/react';
-import type { CardInfo } from '../../types.ts';
-import type { ChangeEvent } from 'react';
+import type { CardInfo, ErrorStatus } from '../../types.ts';
 
 const options = ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'];
 const placeholder = '카드사를 선택해주세요';
 
 interface CardCompanyFieldProps {
   value: CardInfo['cardCompany'];
-  onUpdated: (value: CardInfo['cardCompany']) => void;
+  errorStatus: ErrorStatus;
   onCompleted: () => void;
 }
 
-export default function CardCompanyField({ value, onUpdated, onCompleted }: CardCompanyFieldProps) {
+export default function CardCompanyField({ value, onCompleted }: CardCompanyFieldProps) {
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드사를 선택해 주세요',
     caption: '현재 국내 카드사만 가능합니다.',
@@ -20,22 +19,25 @@ export default function CardCompanyField({ value, onUpdated, onCompleted }: Card
     errorMessage: '',
   };
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    onUpdated(e.target.value as CardInfo['cardCompany']);
+  const handleChange = () => {
     onCompleted();
   };
 
+  // TODO: placeholder를 disabled/hidden 처리하는 패턴 컴포넌트화
   return (
     <FormField {...formFieldProps}>
       <select
         autoFocus
         defaultValue={placeholder}
+        name="cardCompany"
         css={[selectStyle, variants[value === null ? 'placeholder' : 'default']]}
         onChange={handleChange}
       >
-        <option css={placeholderStyle}>{value ?? placeholder}</option>
+        <option disabled css={placeholderStyle}>
+          {value ?? placeholder}
+        </option>
         {options.map((option) => (
-          <option key={option} role="option" css={optionStyle} onClick={() => {}}>
+          <option key={option} css={optionStyle}>
             {option}
           </option>
         ))}

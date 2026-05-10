@@ -3,41 +3,116 @@ import CardNumbersField from '../components/domain/CardNumbersField';
 import ExpirationPeriodField from '../components/domain/ExpirationPeriodField';
 import CVCField from '../components/domain/CVCField';
 import { useState } from 'react';
-import { categorizeCardBrand } from '../utils';
-import type { CardInfo } from '../types';
+import { categorizeCardBrand, isNumber, isValidMonth, isValidYear } from '../utils';
+import type { CardInfo, ErrorStatus, ExpirationPeriodErrorStatus } from '../types';
 import Card from '../components/ui/Card';
 import CardCompanyField from '../components/domain/CardCompanyField.tsx';
 import PasswordField from '../components/domain/PasswordField.tsx';
 import SubmitButton from '../components/domain/SubmitButton.tsx';
+import { type Rules, useForm } from '../hooks/useForm.ts';
+import { CARD_NUMBER_LENGTH_PER_INPUT, CVC_LENGTH, PASSWORD_LENGTH, PERIOD_LENGTH_PER_INPUT } from '../constants.ts';
 
-interface FieldState<T> {
-  value: T;
-  // isValid?: boolean
-  // touched?: boolean
-}
+const initialValues: CardInfo = {
+  cardNumbers: ['', '', '', ''],
+  cardCompany: null,
+  expirationPeriod: ['', ''],
+  cvc: '',
+  password: '',
+};
 
-type CardInfoFormValue = {
-  [K in keyof CardInfo]: FieldState<CardInfo[K]>;
+// TODO: 반복되는 validate 패턴 유틸화
+const rules: Rules<CardInfo, ErrorStatus | ExpirationPeriodErrorStatus> = {
+  cardNumbers: [
+    {
+      eventType: ['change', 'blur'],
+      validate: (inputValue: string) => inputValue === '',
+      errorStatus: 'required',
+    },
+    {
+      eventType: ['change'],
+      validate: (inputValue: string) => !isNumber(inputValue),
+      errorStatus: 'numberOnly',
+    },
+    {
+      eventType: ['blur'],
+      validate: (inputValue: string) => inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT,
+      errorStatus: 'invalidLength',
+    },
+  ],
+  cardCompany: [],
+  expirationPeriod: [
+    {
+      eventType: ['change', 'blur'],
+      validate: (inputValue: string) => inputValue === '',
+      errorStatus: 'required',
+    },
+    {
+      eventType: ['change'],
+      validate: (inputValue: string) => !isNumber(inputValue),
+      errorStatus: 'numberOnly',
+    },
+    {
+      eventType: ['change'],
+      validate: (inputValue: string, index: number) =>
+        inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0 && !isValidMonth(inputValue),
+      errorStatus: 'invalidMonth',
+    },
+    {
+      eventType: ['change'],
+      validate: (inputValue: string, index: number) =>
+        inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1 && !isValidYear(inputValue),
+      errorStatus: 'invalidYear',
+    },
+    {
+      eventType: ['blur'],
+      validate: (inputValue: string) => inputValue.length < PERIOD_LENGTH_PER_INPUT,
+      errorStatus: 'invalidLength',
+    },
+  ],
+  cvc: [
+    {
+      eventType: ['change', 'blur'],
+      validate: (inputValue: string) => inputValue === '',
+      errorStatus: 'required',
+    },
+    {
+      eventType: ['change'],
+      validate: (inputValue: string) => !isNumber(inputValue),
+      errorStatus: 'numberOnly',
+    },
+    {
+      eventType: ['blur'],
+      validate: (inputValue: string) => inputValue.length < CVC_LENGTH,
+      errorStatus: 'invalidLength',
+    },
+  ],
+  password: [
+    {
+      eventType: ['change', 'blur'],
+      validate: (inputValue: string) => inputValue === '',
+      errorStatus: 'required',
+    },
+    {
+      eventType: ['change'],
+      validate: (inputValue: string) => !isNumber(inputValue),
+      errorStatus: 'numberOnly',
+    },
+    {
+      eventType: ['blur'],
+      validate: (inputValue: string) => inputValue.length < PASSWORD_LENGTH,
+      errorStatus: 'invalidLength',
+    },
+  ],
 };
 
 export default function AddCardPage() {
   const [stepIndex, setStepIndex] = useState(0);
-  const [formValue, setFormValue] = useState<CardInfoFormValue>({
-    cardNumbers: { value: ['', '', '', ''] },
-    cardCompany: { value: null },
-    expirationPeriod: { value: ['', ''] },
-    cvc: { value: '' },
-    password: { value: '' },
-  });
+  const { values, errors, handleChange, handleBlur } = useForm<CardInfo, ErrorStatus | ExpirationPeriodErrorStatus>(
+    initialValues,
+    rules,
+  );
 
-  const cardBrand = categorizeCardBrand(formValue.cardNumbers.value);
-
-  const handleFormValueUpdate = <K extends keyof CardInfo>(field: K, value: CardInfo[K]) => {
-    setFormValue((prev) => ({
-      ...prev,
-      [field]: { value },
-    }));
-  };
+  const cardBrand = categorizeCardBrand(values.cardNumbers);
 
   const handleFieldComplete = (index) => {
     if (stepIndex === index) {
@@ -49,46 +124,42 @@ export default function AddCardPage() {
     <div css={layout}>
       <main>
         <div css={cardWrapperStyle}>
-          <Card
-            cardNumber={formValue.cardNumbers.value}
-            expirationPeriod={formValue.expirationPeriod.value}
-            cardBrand={cardBrand}
-          />
+          <Card cardNumber={values.cardNumbers} expirationPeriod={values.expirationPeriod} cardBrand={cardBrand} />
         </div>
-        <form css={formLayout}>
+        <form onChange={handleChange} onBlur={handleBlur} css={formLayout}>
           {stepIndex >= 5 && <SubmitButton />}
           {stepIndex >= 4 && (
             <PasswordField
-              value={formValue.password.value}
-              onUpdated={(value) => handleFormValueUpdate('password', value)}
+              value={values.password}
+              errorStatus={errors.password as ErrorStatus}
               onCompleted={() => handleFieldComplete(4)}
             />
           )}
           {stepIndex >= 3 && (
             <CVCField
-              value={formValue.cvc.value}
-              onUpdated={(value) => handleFormValueUpdate('cvc', value)}
+              value={values.cvc}
+              errorStatus={errors.cvc as ErrorStatus}
               onCompleted={() => handleFieldComplete(3)}
             />
           )}
           {stepIndex >= 2 && (
             <ExpirationPeriodField
-              value={formValue.expirationPeriod.value}
-              onUpdated={(value) => handleFormValueUpdate('expirationPeriod', value)}
+              value={values.expirationPeriod}
+              errorStatus={errors.expirationPeriod as ExpirationPeriodErrorStatus[]}
               onCompleted={() => handleFieldComplete(2)}
             />
           )}
           {stepIndex >= 1 && (
             <CardCompanyField
-              value={formValue.cardCompany.value}
-              onUpdated={(value) => handleFormValueUpdate('cardCompany', value)}
+              value={values.cardCompany}
+              errorStatus={errors.cardCompany as ErrorStatus}
               onCompleted={() => handleFieldComplete(1)}
             />
           )}
           {stepIndex >= 0 && (
             <CardNumbersField
-              value={formValue.cardNumbers.value}
-              onUpdated={(value) => handleFormValueUpdate('cardNumbers', value)}
+              value={values.cardNumbers}
+              errorStatus={errors.cardNumbers as ErrorStatus[]}
               onCompleted={() => handleFieldComplete(0)}
             />
           )}

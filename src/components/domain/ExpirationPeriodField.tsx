@@ -1,53 +1,20 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo, Validate } from '../../types';
+import type { CardInfo } from '../../types';
 import type { ExpirationPeriodErrorStatus } from '../../types';
-import { isNumber, isValidMonth, isValidYear, sanitizeNumber } from '../../utils';
 import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
-import { useErrorStatusList } from '../../hooks/useErrorStatusList.ts';
 import { useEffect, useEffectEvent } from 'react';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
-  onUpdated: (value: CardInfo['expirationPeriod']) => void;
+  errorStatus: ExpirationPeriodErrorStatus[];
   onCompleted: () => void;
 }
 
-const validates: Validate<ExpirationPeriodErrorStatus>[] = [
-  {
-    type: ['change', 'blur'],
-    rule: (inputValue: string) => inputValue === '',
-    errorStatus: 'required',
-  },
-  {
-    type: ['change'],
-    rule: (inputValue: string) => !isNumber(inputValue),
-    errorStatus: 'numberOnly',
-  },
-  {
-    type: ['change'],
-    rule: (inputValue: string, index: number) =>
-      inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0 && !isValidMonth(inputValue),
-    errorStatus: 'invalidMonth',
-  },
-  {
-    type: ['change'],
-    rule: (inputValue: string, index: number) =>
-      inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1 && !isValidYear(inputValue),
-    errorStatus: 'invalidYear',
-  },
-  {
-    type: ['blur'],
-    rule: (inputValue: string) => inputValue.length < PERIOD_LENGTH_PER_INPUT,
-    errorStatus: 'invalidLength',
-  },
-];
-
-export default function ExpirationPeriodField({ value, onUpdated, onCompleted }: ExpirationPeriodFieldProps) {
-  const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, [null, null]);
-  const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
-  const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
+export default function ExpirationPeriodField({ value, errorStatus, onCompleted }: ExpirationPeriodFieldProps) {
+  const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
+  const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
 
   const onCompletedEvent = useEffectEvent(onCompleted);
 
@@ -56,19 +23,6 @@ export default function ExpirationPeriodField({ value, onUpdated, onCompleted }:
       onCompletedEvent();
     }
   }, [activeErrorStatus, value]);
-
-  const updateFormValue = (inputValue: string, index: number) => {
-    const newValue = [...value] as CardInfo['expirationPeriod'];
-    newValue[index] = sanitizeNumber(inputValue);
-    onUpdated(newValue);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    onChange(e, index);
-    updateFormValue(e.target.value, index);
-  };
-
-  const handleBlur = onBlur;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드 유효기간을 입력해 주세요',
@@ -84,24 +38,22 @@ export default function ExpirationPeriodField({ value, onUpdated, onCompleted }:
         <div css={inputGroupStyle}>
           <Input
             autoFocus
+            name="expirationPeriod"
             value={value[0]}
             variant={activeErrorIndex === 0 ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="MM"
             maxLength={PERIOD_LENGTH_PER_INPUT}
-            onChange={(e) => handleChange(e, 0)}
-            onBlur={(e) => handleBlur(e, 0)}
           />
           <Input
+            name="expirationPeriod"
             value={value[1]}
             variant={activeErrorIndex === 1 ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="YY"
             maxLength={PERIOD_LENGTH_PER_INPUT}
-            onChange={(e) => handleChange(e, 1)}
-            onBlur={(e) => handleBlur(e, 1)}
           />
         </div>
       </fieldset>

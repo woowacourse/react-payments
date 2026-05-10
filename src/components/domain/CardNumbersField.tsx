@@ -1,40 +1,19 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo, ErrorStatus, Validate } from '../../types';
-import { isNumber, sanitizeNumber } from '../../utils';
+import type { CardInfo, ErrorStatus } from '../../types';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
-import { useErrorStatusList } from '../../hooks/useErrorStatusList.ts';
 import { useEffect, useEffectEvent } from 'react';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
-  onUpdated: (value: CardInfo['cardNumbers']) => void;
+  errorStatus: ErrorStatus[];
   onCompleted: () => void;
 }
 
-const validates: Validate<ErrorStatus>[] = [
-  {
-    type: ['change', 'blur'],
-    rule: (inputValue: string) => inputValue === '',
-    errorStatus: 'required',
-  },
-  {
-    type: ['change'],
-    rule: (inputValue: string) => !isNumber(inputValue),
-    errorStatus: 'numberOnly',
-  },
-  {
-    type: ['blur'],
-    rule: (inputValue: string) => inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT,
-    errorStatus: 'invalidLength',
-  },
-];
-
-export default function CardNumbersField({ value, onUpdated, onCompleted }: CardNumbersFieldProps) {
-  const { errorStatusList, onChange, onBlur } = useErrorStatusList(validates, [null, null, null, null]);
-  const activeErrorStatus = errorStatusList.filter((errorStatus) => !!errorStatus)[0];
-  const activeErrorIndex = errorStatusList.findIndex((errorStatus) => errorStatus === activeErrorStatus);
+export default function CardNumbersField({ value, errorStatus, onCompleted }: CardNumbersFieldProps) {
+  const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
+  const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
 
   const onCompletedEvent = useEffectEvent(onCompleted);
 
@@ -43,19 +22,6 @@ export default function CardNumbersField({ value, onUpdated, onCompleted }: Card
       onCompletedEvent();
     }
   }, [activeErrorStatus, value]);
-
-  const updateFormValue = (inputValue: string, index: number) => {
-    const newValue = [...value] as CardInfo['cardNumbers'];
-    newValue[index] = sanitizeNumber(inputValue);
-    onUpdated(newValue);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    onChange(e, index);
-    updateFormValue(e.target.value, index);
-  };
-
-  const handleBlur = onBlur;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '결제할 카드 번호를 입력해 주세요',
@@ -72,6 +38,7 @@ export default function CardNumbersField({ value, onUpdated, onCompleted }: Card
           {value.map((number, index) => (
             <Input
               key={index}
+              name="cardNumbers"
               autoFocus={index === 0}
               variant={activeErrorIndex === index ? 'error' : 'default'}
               value={number}
@@ -79,8 +46,6 @@ export default function CardNumbersField({ value, onUpdated, onCompleted }: Card
               inputMode="numeric"
               placeholder="1234"
               maxLength={CARD_NUMBER_LENGTH_PER_INPUT}
-              onChange={(e) => handleChange(e, index)}
-              onBlur={(e) => handleBlur(e, index)}
             />
           ))}
         </div>
