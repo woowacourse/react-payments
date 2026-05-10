@@ -1,6 +1,6 @@
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { inputStyle } from "../../styles/inputStyle";
 
 const NUMERIC_REGEX = /^\d+$/;
@@ -17,14 +17,24 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork 
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const latestValues = useRef<string[]>([]);
+
+  const lastInputMaxLength = maxLength - CARD_NUMBER_MAX_LENGTH * (CARD_NUMBER_FIELD_COUNT - 1);
 
   const onChange = (index: number, value: string) => {
     const newValues = [...inputValues];
     newValues[index] = value;
+    latestValues.current = newValues;
 
     setInputValues(newValues);
     setErrorMessage("");
     onValueHandler(newValues);
+
+    const currentMax = index === CARD_NUMBER_FIELD_COUNT - 1 ? lastInputMaxLength : CARD_NUMBER_MAX_LENGTH;
+    if (value.length === currentMax) {
+      inputRefs.current[index + 1]?.focus();
+    }
   };
 
   const getValidationError = (values: string[]) => {
@@ -39,12 +49,10 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork 
   };
 
   const handleBlur = () => {
-    const { index, message } = getValidationError(inputValues);
+    const { index, message } = getValidationError(latestValues.current);
     setErrorIndex(index);
     setErrorMessage(message);
   };
-
-  const lastInputMaxLength = maxLength - CARD_NUMBER_MAX_LENGTH * (CARD_NUMBER_FIELD_COUNT - 1);
 
   return (
     <InputSectionLayout
@@ -55,6 +63,9 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork 
       <ValidatedInputGroup errorMessage={errorMessage} legend="카드 번호">
         {Array.from({ length: CARD_NUMBER_FIELD_COUNT }, (_, i) => (
           <input
+            ref={(el) => {
+              inputRefs.current[i] = el;
+            }}
             key={i}
             maxLength={i === CARD_NUMBER_FIELD_COUNT - 1 ? lastInputMaxLength : CARD_NUMBER_MAX_LENGTH}
             inputMode="numeric"

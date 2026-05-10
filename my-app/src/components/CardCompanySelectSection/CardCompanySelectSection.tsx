@@ -18,6 +18,7 @@ const CARD_COMPANIES = [
 const CardCompanySelectorSection = ({ onSelect }: CardCompanySelectorSectionProps) => {
   return (
     <Select
+      autoFocus
       options={CARD_COMPANIES}
       onChange={(option) => option && onSelect(option.value)}
       placeholder="카드사를 선택해주세요"

@@ -34,6 +34,7 @@ const PasswordInputSection = ({ onValueHandler }: PasswordInputSectionProps) => 
     <InputSectionLayout title="비밀번호를 입력해 주세요" message="앞의 두자리를 입력해 주세요" tag="PASSWORD">
       <ValidatedInputGroup errorMessage={errorMessage} legend="PASSWORD">
         <input
+          autoFocus
           maxLength={PASS_WORD_LENGTH}
           inputMode="numeric"
           value={inputValue}
