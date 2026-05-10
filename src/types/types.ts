@@ -27,3 +27,11 @@ export interface CvcContextValue {
   cvcError: string;
   handleCvcChange: (value: string) => void;
 }
+
+export interface CardBrandContextValue {
+  isOpen: boolean;
+  selectedItem: string;
+  options: string[];
+  toggleDropdown: () => void;
+  handleItemClick: (item: string) => void;
+}
