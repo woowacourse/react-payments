@@ -1,9 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { type CardFormState, type CardIssuer, type CardNumberSegments } from "../types";
-import { createDigitFieldValidations, getCardNetwork, validateCardIssuer, validateMonth, validateYear } from "../utils";
+import { createDigitFieldValidations, getCardNetwork, validateCardIssuer, validateMonth } from "../utils";
 import useArrayInput from "./useArrayInput";
 import useInput from "./useInput";
-import { CARD_NETWORK } from "../constants";
+import { CARD_EXPIRY_MONTH_LENGTH, CARD_EXPIRY_YEAR_LENGTH, CARD_NETWORK, CARD_NUMBER_SEGMENT_LENGTH, CARD_PASSWORD_LENGTH, CARD_VALIDATION_CODE_DEFAULT_LENGTH } from "../constants";
+
+export const CARD_FORM_STEP = {
+  CARD_PASSWORD: 4,
+  CARD_VALIDATION_CODE: 3,
+  CARD_EXPIRY_DATE: 2,
+  CARD_ISSUER: 1,
+  CARD_NUMBER: 0,
+};
 
 export default function useCardForm() {
   const [step, setStep] = useState(0);
@@ -11,11 +19,14 @@ export default function useCardForm() {
   const cardNumberSegmentsField = useArrayInput(['', '', '', ''], {
     validation: (cardNumberSegments) => {
       const cardNetwork = getCardNetwork(cardNumberSegments as CardNumberSegments);
+      const lastSegmentsLength = cardNetwork ?
+        CARD_NETWORK[cardNetwork]["cardNumberLength"] % CARD_NUMBER_SEGMENT_LENGTH
+        : CARD_NUMBER_SEGMENT_LENGTH;
       return [
-        [...createDigitFieldValidations(4)],
-        [...createDigitFieldValidations(4)],
-        [...createDigitFieldValidations(4)],
-        [...createDigitFieldValidations(cardNetwork ? CARD_NETWORK[cardNetwork]["cardNumberLength"] % 4 : 4)],
+        [...createDigitFieldValidations(CARD_NUMBER_SEGMENT_LENGTH)],
+        [...createDigitFieldValidations(CARD_NUMBER_SEGMENT_LENGTH)],
+        [...createDigitFieldValidations(CARD_NUMBER_SEGMENT_LENGTH)],
+        [...createDigitFieldValidations(lastSegmentsLength)],
       ]
     }
   });
@@ -34,29 +45,28 @@ export default function useCardForm() {
     validation: () => {
       return [
         [
-          ...createDigitFieldValidations(2),
+          ...createDigitFieldValidations(CARD_EXPIRY_MONTH_LENGTH),
           {
             type: 'onBlur',
             validator: validateMonth,
             message: '유효한 월을 입력해주세요. (01 ~ 12)',
           },
         ], [
-          ...createDigitFieldValidations(2),
-          {
-            type: 'onBlur',
-            validator: validateYear,
-            message: '유효한 년도를 입력해주세요. (00 ~ 99)',
-          },
+          ...createDigitFieldValidations(CARD_EXPIRY_YEAR_LENGTH)
         ],
       ]
     }
   })
 
   const cardValidationCodeField = useInput("", {
-    validation: () => [...createDigitFieldValidations(3)]
+    validation: () => {
+      const cardNetwork = getCardNetwork(cardNumberSegmentsField.values as CardNumberSegments);
+      const cardValidationCodeLength = cardNetwork ? CARD_NETWORK[cardNetwork].cardValidationCodeLength : CARD_VALIDATION_CODE_DEFAULT_LENGTH;
+      return [...createDigitFieldValidations(cardValidationCodeLength)]
+    }
   })
 
-  const cardPasswordField = useInput("", { validation: () => ([...createDigitFieldValidations(2)]) })
+  const cardPasswordField = useInput("", { validation: () => ([...createDigitFieldValidations(CARD_PASSWORD_LENGTH)]) })
 
   const formValue = useMemo(() => ({
     cardNumberSegments: cardNumberSegmentsField.values,
@@ -72,10 +82,10 @@ export default function useCardForm() {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (cardNumberSegmentsField.isValid) setStep(prev => Math.max(1, prev));
-    if (cardIssuerField.isValid) setStep(prev => Math.max(2, prev));
-    if (cardExpiryDateField.isValid) setStep(prev => Math.max(3, prev));
-    if (cardValidationCodeField.isValid) setStep(prev => Math.max(4, prev));
+    if (cardNumberSegmentsField.isValid) setStep(prev => Math.max(CARD_FORM_STEP['CARD_ISSUER'], prev));
+    if (cardIssuerField.isValid) setStep(prev => Math.max(CARD_FORM_STEP['CARD_EXPIRY_DATE'], prev));
+    if (cardExpiryDateField.isValid) setStep(prev => Math.max(CARD_FORM_STEP['CARD_VALIDATION_CODE'], prev));
+    if (cardValidationCodeField.isValid) setStep(prev => Math.max(CARD_FORM_STEP['CARD_PASSWORD'], prev));
   }, [cardExpiryDateField.isValid, cardIssuerField.isValid, cardNumberSegmentsField.isValid, cardPasswordField.isValid, cardValidationCodeField.isValid])
 
   return {

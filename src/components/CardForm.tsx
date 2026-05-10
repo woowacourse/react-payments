@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { getCardNetwork } from '../utils';
 import Flex from './Common/Flex';
 import CardPreview from './CardPreview';
-import { CARD_ISSUERS } from '../constants';
+import { CARD_ISSUER } from '../constants';
 import type { CardFormState } from '../types';
-import useCardForm from '../hooks/useCardForm';
+import useCardForm, { CARD_FORM_STEP } from '../hooks/useCardForm';
 import Text from './Common/Text';
 import Input from './Common/Input';
 import Select from './Common/Select';
@@ -16,14 +16,6 @@ const Submit = styled(Button)`
   border-radius: 0px;
   margin: 0 -32px;
 `;
-
-const CARD_FORM_STEP = {
-  CARD_PASSWORD: 4,
-  CARD_VALIDATION_CODE: 3,
-  CARD_EXPIRY_DATE: 2,
-  CARD_ISSUER: 1,
-  CARD_NUMBER: 0,
-};
 
 interface CardFormProps {
   onSubmit: (formData: CardFormState) => void;
@@ -144,9 +136,9 @@ function CardForm(props: CardFormProps) {
               {...form.cardIssuer.register()}
             >
               <Select.Option value="">카드사를 선택해 주세요</Select.Option>
-              {CARD_ISSUERS.map((issuer) => (
-                <Select.Option key={issuer.value} value={issuer.value}>
-                  {issuer.label}
+              {Object.entries(CARD_ISSUER).map(([issuer, { label }]) => (
+                <Select.Option key={issuer} value={issuer}>
+                  {label}
                 </Select.Option>
               ))}
             </Select>

@@ -1,8 +1,8 @@
-import type { CARD_ISSUERS } from "./constants";
+import { CARD_ISSUER } from "./constants";
 
 export type CardNetwork = "VISA" | "MasterCard" | "Diners" | "AMEX" | "UnionPay";
 
-export type CardIssuer = typeof CARD_ISSUERS[number]["value"];
+export type CardIssuer = keyof typeof CARD_ISSUER;
 
 export type CardNumberSegments = [string, string, string, string]
 
@@ -15,12 +15,6 @@ export interface CardFormState {
   cardIssuer: CardIssuer | null;
   cardNumberSegments: CardNumberSegments;
 };
-
-export interface AddCardResultState {
-  type: 'success' | 'error';
-  issuer: CardIssuer | null;
-  firstSegment: string;
-}
 
 export interface ValidationRule {
   type: 'onChange' | 'onBlur';

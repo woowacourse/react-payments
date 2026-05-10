@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import CardPreview from './../components/CardPreview';
+import { CARD_ISSUER, CARD_NETWORK } from '../constants';
 
 const meta = {
   title: 'Components/CardPreview',
@@ -8,12 +9,12 @@ const meta = {
   argTypes: {
     issuer: {
       control: { type: 'select' },
-      options: [null, 'bc', 'shinhan', 'kakao', 'hyundai', 'woori', 'lotte', 'hana', 'kookmin'],
+      options: [null, ...Object.keys(CARD_ISSUER)],
       description: '카드사 (배경색에 영향)',
     },
     network: {
       control: { type: 'select' },
-      options: [null, 'VISA', 'MasterCard', 'Diners', 'AMEX', 'UnionPay'],
+      options: [null, ...Object.keys(CARD_NETWORK)],
       description: '카드 네트워크 브랜드',
     },
     numberSegments: {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Select from '../components/Common/Select';
-import { CARD_ISSUERS } from '../constants';
+import { CARD_ISSUER } from '../constants';
 
 const meta = {
   title: 'Common/Select',
@@ -15,9 +15,9 @@ export const Default: Story = {
   render: () => (
     <Select defaultValue="">
       <Select.Option value="">카드사를 선택해 주세요</Select.Option>
-      {CARD_ISSUERS.map((issuer) => (
-        <Select.Option key={issuer.value} value={issuer.value}>
-          {issuer.label}
+      {Object.entries(CARD_ISSUER).map(([issuer, { label }]) => (
+        <Select.Option key={issuer} value={issuer}>
+          {label}
         </Select.Option>
       ))}
     </Select>
@@ -28,9 +28,9 @@ export const Error: Story = {
   render: () => (
     <Select defaultValue="" data-is-error="true">
       <Select.Option value="">카드사를 선택해 주세요</Select.Option>
-      {CARD_ISSUERS.map((issuer) => (
-        <Select.Option key={issuer.value} value={issuer.value}>
-          {issuer.label}
+      {Object.entries(CARD_ISSUER).map(([issuer, { label }]) => (
+        <Select.Option key={issuer} value={issuer}>
+          {label}
         </Select.Option>
       ))}
     </Select>
