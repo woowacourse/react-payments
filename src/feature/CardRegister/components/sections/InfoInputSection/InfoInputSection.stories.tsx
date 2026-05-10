@@ -7,7 +7,7 @@ import CvcField from '../../fields/CvcField/CvcField';
 import ExpiryField from '../../fields/ExpiryField/ExpiryField';
 import NumberField from '../../fields/NumberField/NumberField';
 import PasswordField from '../../fields/PasswordField/PasswordField';
-import type {CardRegisterInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
+import type {CardRegisterInputProps} from '../../fields/shared.types';
 
 const createInputProps = (value: string, maxLength: number, placeholder: string): CardRegisterInputProps => ({
   value,

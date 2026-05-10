@@ -4,7 +4,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import {fn} from 'storybook/test';
 
 import NumberField from './NumberField';
-import type {CardRegisterInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
+import type {CardRegisterInputProps} from '../shared.types';
 
 const generatePlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
 

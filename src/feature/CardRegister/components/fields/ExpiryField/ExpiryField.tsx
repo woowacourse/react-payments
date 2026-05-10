@@ -1,7 +1,7 @@
 import Input from '@/common/components/Input/Input';
 import styled from 'styled-components';
-import {useInputFocusMove} from '@/feature/CardRegister/hooks/useInputFocusMove';
-import type {ExpiryInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
+import {useInputFocusMove} from '@/feature/CardRegister/hooks/ui/useInputFocusMove';
+import type {ExpiryInputProps} from '../shared.types';
 import InputContainer from '../InputContainer/InputContainer';
 import {FieldErrorMessage, FieldLayout} from '../../styles/inputFieldStyles';
 

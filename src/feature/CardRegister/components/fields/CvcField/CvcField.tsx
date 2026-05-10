@@ -1,6 +1,6 @@
 import Input from '@/common/components/Input/Input';
 import styled from 'styled-components';
-import type {CardRegisterInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
+import type {CardRegisterInputProps} from '../shared.types';
 import InputContainer from '../InputContainer/InputContainer';
 import {FieldErrorMessage, FieldLayout} from '../../styles/inputFieldStyles';
 

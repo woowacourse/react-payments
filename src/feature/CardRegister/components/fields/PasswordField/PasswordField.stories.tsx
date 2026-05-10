@@ -4,7 +4,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import {fn} from 'storybook/test';
 
 import PasswordField from './PasswordField';
-import type {CardRegisterInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
+import type {CardRegisterInputProps} from '../shared.types';
 
 const createInputProps = (value: string): CardRegisterInputProps => ({
   type: 'password',

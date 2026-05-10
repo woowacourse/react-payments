@@ -4,7 +4,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import {fn} from 'storybook/test';
 
 import ExpiryField from './ExpiryField';
-import type {CardRegisterInputProps, ExpiryInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
+import type {CardRegisterInputProps, ExpiryInputProps} from '../shared.types';
 
 const createInputProps = (value: string, placeholder: string): CardRegisterInputProps => ({
   value,
