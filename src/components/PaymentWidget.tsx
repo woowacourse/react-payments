@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import Cvc from "./cardInfo/cvc/Cvc";
 import CardPreview from "./cardPreview/CardPreview";
 import CardNumber from "./cardInfo/cardNumber/CardNumber";
-import ExpireDate from "./cardInfo/expireDate/ExpireDate";
 import PaymentProvider from "../context/PaymentProvider";
-import CardBrand from "./cardInfo/cardBrand/CardBrand";
-import Password from "./cardInfo/password/Password";
+import ConditionalCardBrand from "./conditional/ConditionalCardBrand";
+import ConditionalExpireDate from "./conditional/ConditionalExpireDate";
+import ConditionalCvc from "./conditional/ConditionalCvc";
+import ConditionalPassword from "./conditional/ConditionalPassword";
 
 export default function PaymentWidget() {
   return (
@@ -13,10 +13,10 @@ export default function PaymentWidget() {
       <CardPaymentWidgetWrapper>
         <CardPreview />
 
-        <Password />
-        <Cvc />
-        <ExpireDate />
-        <CardBrand />
+        <ConditionalPassword />
+        <ConditionalCvc />
+        <ConditionalExpireDate />
+        <ConditionalCardBrand />
         <CardNumber />
       </CardPaymentWidgetWrapper>
     </PaymentProvider>
