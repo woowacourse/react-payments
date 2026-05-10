@@ -28,5 +28,6 @@ const CardPaymentWidgetWrapper = styled.div`
   width: 376px;
   height: 750px;
   border-radius: 10px;
-  padding: 0 20px;
+  padding: 0 20px 20px 20px;
+  overflow-y: auto;
 `;

@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import Input from "./Input";
-import { INPUT_CARD_NUMBER_CONFIG } from "../constants";
 
 export default function CardNumber() {
   return (
@@ -8,7 +7,7 @@ export default function CardNumber() {
       <Header>결제할 카드 번호를 입력해 주세요</Header>
       <SubHeader>본인 명의의 카드만 결제 가능합니다.</SubHeader>
       <Label>카드 번호</Label>
-      <Input inputConfig={INPUT_CARD_NUMBER_CONFIG} />
+      <Input />
     </Wrapper>
   );
 }

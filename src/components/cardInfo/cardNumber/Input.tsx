@@ -1,29 +1,25 @@
 import styled from "@emotion/styled";
 import { useCardNumberContext } from "../../../context/cardNumber/CardNumberContext";
 
-interface Props {
-  inputConfig: { name: string; placeholder: string; maxLength: number }[];
-}
-
-export default function Input({ inputConfig }: Props) {
-  const context = useCardNumberContext();
+export default function Input() {
+  const cardNumberContext = useCardNumberContext();
 
   const displayError =
-    context.cardNumberError.find((value) => value !== "") || "";
+    cardNumberContext.cardNumberError.find((value) => value !== "") || "";
 
   return (
     <Wrapper>
       <Container>
-        {inputConfig.map((config, index) => (
+        {cardNumberContext.inputConfig.map((config, index) => (
           <InfoInput
             type="text"
             key={index}
             {...config}
-            value={context.cardNumber[index]}
+            value={cardNumberContext.cardNumber[index]}
             onChange={(e) =>
-              context.handleCardNumberChange(index, e.target.value)
+              cardNumberContext.handleCardNumberChange(index, e.target.value)
             }
-            $hasError={!!context.cardNumberError[index]}
+            $hasError={!!cardNumberContext.cardNumberError[index]}
           />
         ))}
       </Container>

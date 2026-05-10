@@ -9,10 +9,18 @@ export interface CardPreviewProps {
   expireDate: ExpireDate;
 }
 
+export type InputConfig = {
+  name: string;
+  placeholder: string;
+  maxLength: number;
+}[];
+
 export interface CardNumberContextValue {
   cardNumber: CardNumber;
   cardNumberError: string[];
   handleCardNumberChange: (index: number, value: string) => void;
+  inputConfig: InputConfig;
+  cardType: string;
 }
 
 export interface ExpireDateContextValue {
