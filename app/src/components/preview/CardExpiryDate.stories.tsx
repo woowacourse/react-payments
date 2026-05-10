@@ -33,6 +33,7 @@ const renderWithContext = (cardExpiryDate: {
         setCardCVC: () => {},
         cardPassword: '',
         setCardPassword: () => {},
+        isFormComplete: false,
       }}
     >
       <CardExpiryDate />

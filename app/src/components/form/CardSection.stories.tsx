@@ -36,6 +36,7 @@ export const CardNumberInputSection: Story = {
           setCardCVC: () => {},
           cardPassword: '',
           setCardPassword: () => {},
+          isFormComplete: false,
         }}
       >
         <CardSection
@@ -70,6 +71,7 @@ export const CardExpiryDateInputSection: Story = {
           setCardPassword: () => {},
           cardExpiryDate,
           setCardExpiryDate,
+          isFormComplete: false,
         }}
       >
         <CardSection
