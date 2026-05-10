@@ -1,12 +1,22 @@
-import './App.css';
+import { createBrowserRouter, RouterProvider } from 'react-router';
+import AddCardPage from './pages/AddCardPage.tsx';
 import AddCardCompletePage from './pages/AddCardCompletePage.tsx';
+import { ROUTES } from './constants.ts';
+import './App.css';
+
+const router = createBrowserRouter([
+  {
+    path: ROUTES.ADD_CARD,
+    element: <AddCardPage />,
+  },
+  {
+    path: ROUTES.ADD_CARD_COMPLETE,
+    element: <AddCardCompletePage />,
+  },
+]);
 
 function App() {
-  return (
-    <>
-      <AddCardCompletePage />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

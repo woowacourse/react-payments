@@ -1,5 +1,10 @@
 import type { ErrorStatus, ExpirationPeriodErrorStatus } from './types';
 
+export const ROUTES = {
+  ADD_CARD: '/',
+  ADD_CARD_COMPLETE: '/complete',
+};
+
 export const ERROR_MESSAGES: Record<Exclude<ErrorStatus, null>, string> = {
   required: '필수 입력 항목입니다.',
   invalidLength: '입력 길이가 올바르지 않습니다.',

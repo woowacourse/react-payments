@@ -1,18 +1,26 @@
 import { css } from '@emotion/react';
-import Check from '../assets/check.tsx';
+import CheckIcon from '../assets/check.tsx';
 import Button from '../components/ui/Button.tsx';
+import { useLocation, useNavigate } from 'react-router';
+import { ROUTES } from '../constants.ts';
 
 export default function AddCardCompletePage() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { firstCardNumbers, cardCompany } = location.state || { firstCardNumbers: '0000', cardCompany: '카드' };
+
+  const cardCompanyContent = cardCompany.includes('카드') ? cardCompany : `${cardCompany} 카드`;
+
   return (
     <div css={layout}>
       <div css={wrapperStyle}>
-        <Check />
+        <CheckIcon />
         <span css={displayTypography}>
-          5511로 시작하는
+          {firstCardNumbers}로 시작하는
           <br />
-          BC카드가 등록되었어요.
+          {cardCompanyContent}가 등록되었어요.
         </span>
-        <Button>확인</Button>
+        <Button onClick={() => navigate(ROUTES.ADD_CARD, { replace: true })}>확인</Button>
       </div>
     </div>
   );

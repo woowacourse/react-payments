@@ -10,7 +10,14 @@ import CardCompanyField from '../components/domain/CardCompanyField.tsx';
 import PasswordField from '../components/domain/PasswordField.tsx';
 import SubmitButton from '../components/domain/SubmitButton.tsx';
 import { type Rules, useForm } from '../hooks/useForm.ts';
-import { CARD_NUMBER_LENGTH_PER_INPUT, CVC_LENGTH, PASSWORD_LENGTH, PERIOD_LENGTH_PER_INPUT } from '../constants.ts';
+import {
+  CARD_NUMBER_LENGTH_PER_INPUT,
+  CVC_LENGTH,
+  PASSWORD_LENGTH,
+  PERIOD_LENGTH_PER_INPUT,
+  ROUTES,
+} from '../constants.ts';
+import { useNavigate } from 'react-router';
 
 const initialValues: CardInfo = {
   cardNumbers: ['', '', '', ''],
@@ -106,6 +113,7 @@ const rules: Rules<CardInfo, ErrorStatus | ExpirationPeriodErrorStatus> = {
 };
 
 export default function AddCardPage() {
+  const navigate = useNavigate();
   const [stepIndex, setStepIndex] = useState(0);
   const { values, errors, isFormValid, handleChange, handleBlur } = useForm<
     CardInfo,
@@ -120,13 +128,27 @@ export default function AddCardPage() {
     }
   };
 
+  const handleSubmit = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    if (!isFormValid) {
+      return;
+    }
+
+    navigate(ROUTES.ADD_CARD_COMPLETE, {
+      state: {
+        firstCardNumbers: values.cardNumbers[0],
+        cardCompany: values.cardCompany,
+      },
+    });
+  };
+
   return (
     <div css={layout}>
       <main>
         <div css={cardWrapperStyle}>
           <Card cardNumber={values.cardNumbers} expirationPeriod={values.expirationPeriod} cardBrand={cardBrand} />
         </div>
-        <form onChange={handleChange} onBlur={handleBlur} css={formLayout}>
+        <form onChange={handleChange} onBlur={handleBlur} onSubmit={handleSubmit} css={formLayout}>
           {stepIndex >= 5 && <SubmitButton disabled={!isFormValid} />}
           {stepIndex >= 4 && (
             <PasswordField
