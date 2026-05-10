@@ -9,7 +9,7 @@ const App = () => {
       <Routes>
         <Route path="register" element={<CardRegisterPage />} />
         <Route
-          path="register-complete"
+          path="register/complete"
           element={<CardRegisterCompletePage />}
         />
       </Routes>

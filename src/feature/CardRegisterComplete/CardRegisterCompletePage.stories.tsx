@@ -20,7 +20,7 @@ export const Default: Story = {
     <MemoryRouter
       initialEntries={[
         {
-          pathname: "/register-complete",
+          pathname: "/register/complete",
           state: {
             firstCardNumberChunk: "4123",
             cardCompany: "신한카드",

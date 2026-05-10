@@ -134,7 +134,7 @@ const InfoInputSection = ({
       return;
     }
 
-    navigate("/register-complete", {
+    navigate("/register/complete", {
       state: {
         firstCardNumberChunk: cardNumbers[0],
         cardCompany: selectedCardCompany,
