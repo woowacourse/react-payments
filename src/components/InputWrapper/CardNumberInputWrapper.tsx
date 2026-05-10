@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect } from "react";
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
-
+import { useInputGroup } from "../../hooks/useInputGroup";
 type CardNumbers = {
   first: string;
   second: string;
@@ -20,41 +20,24 @@ export default function CardNumberInputWrapper({
   value,
   onComplete,
 }: Props) {
-  const [inputErrors, setInputErrors] = useState<{
-    first: string | null;
-    second: string | null;
-    third: string | null;
-    fourth: string | null;
-  }>({
-    first: null,
-    second: null,
-    third: null,
-    fourth: null,
-  });
-
-  const setError =
-    (key: "first" | "second" | "third" | "fourth") =>
-    (message: string | null) => {
-      setInputErrors((prev) => ({ ...prev, [key]: message }));
-    };
-
-  const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
-
+  const { inputErrors, setError, inputRefs, errorMessage } = useInputGroup([
+    "first",
+    "second",
+    "third",
+    "fourth",
+  ]);
   useEffect(() => {
     if (value.first.length === 4) inputRefs.current["second"]?.focus();
-  }, [value.first]);
+  }, [value.first, inputRefs]);
   useEffect(() => {
     if (value.second.length === 4) inputRefs.current["third"]?.focus();
-  }, [value.second]);
+  }, [value.second, inputRefs]);
   useEffect(() => {
     if (value.third.length === 4) inputRefs.current["fourth"]?.focus();
-  }, [value.third]);
+  }, [value.third, inputRefs]);
+
   return (
-    <InputGroup
-      errorMessage={
-        Object.values(inputErrors).find((err) => err !== null) ?? null
-      }
-    >
+    <InputGroup errorMessage={errorMessage}>
       {Object.entries(value).map(([cardKey, cardValue]) => (
         <NumberInput
           key={`${cardKey}-input`}

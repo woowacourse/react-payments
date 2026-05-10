@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect } from "react";
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getEXPNumberErrorMessage } from "../../utils/getEXPNumberErrorMessage";
+import { useInputGroup } from "../../hooks/useInputGroup";
 
 type EXPNumber = { mm: string; yy: string };
 interface Props {
@@ -15,20 +16,10 @@ export default function EXPInputWrapper({
   value,
   onComplete,
 }: Props) {
-  const [inputErrors, setInputErrors] = useState<{
-    mm: string | null;
-    yy: string | null;
-  }>({
-    mm: null,
-    yy: null,
-  });
-
-  const setError = (key: "mm" | "yy") => (message: string | null) => {
-    setInputErrors((prev) => ({ ...prev, [key]: message }));
-  };
-
-  const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
-
+  const { inputErrors, setError, inputRefs, errorMessage } = useInputGroup([
+    "mm",
+    "yy",
+  ]);
   useEffect(() => {
     if (value.mm.length === 2 && value.yy === "") {
       const result = getEXPNumberErrorMessage({ mm: value.mm, yy: value.yy });
@@ -36,14 +27,10 @@ export default function EXPInputWrapper({
         inputRefs.current["yy"]?.focus();
       } else setError("mm")(result?.message);
     }
-  }, [value.mm, value.yy]);
+  }, [value.mm, value.yy, inputRefs, setError]);
 
   return (
-    <InputGroup
-      errorMessage={
-        Object.values(inputErrors).find((err) => err !== null) ?? null
-      }
-    >
+    <InputGroup errorMessage={errorMessage}>
       {Object.entries(value).map(([expKey, expValue]) => (
         <NumberInput
           key={`${expKey}-input`}
