@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Input from "../../../../../common/components/Input/Input";
 import Label from "../../../../../common/components/Label/Label";
 import styled from "styled-components";
@@ -15,6 +15,7 @@ import {
   validateExceedLastCardNumberChunkLength,
   validateLastCardNumberChunkLength,
 } from "../../../validators/cardNumber";
+import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 
 const NumberField = ({
   cardNumbers,
@@ -32,8 +33,8 @@ const NumberField = ({
   const [isTouched, setIsTouched] = useState(
     Array.from({ length: CARD_NUMBER_INPUT_COUNT }, () => false),
   );
-  const inputFocusRefs = useRef<Array<HTMLInputElement | null>>(
-    Array.from({ length: CARD_NUMBER_INPUT_COUNT }, () => null),
+  const { registerFocusRef, focusNext, focusPrevious } = useInputFocusGroup(
+    CARD_NUMBER_INPUT_COUNT,
   );
 
   const handleNumbersChange = (index: number, eValue: string) => {
@@ -64,13 +65,12 @@ const NumberField = ({
       setErrorInfo(newErrorInfo);
     }
 
-    // 다음 포커싱
     if (value.length === CARD_NUMBER_CHUNK_LENGTH) {
-      inputFocusRefs.current[index + 1]?.focus();
+      focusNext(index);
     }
 
     if (value.length === 0) {
-      inputFocusRefs.current[index - 1]?.focus();
+      focusPrevious(index);
     }
   };
 
@@ -109,7 +109,7 @@ const NumberField = ({
     }
 
     if (value.length === 0) {
-      inputFocusRefs.current[3 - 1]?.focus();
+      focusPrevious(3);
     }
   };
 
@@ -146,7 +146,7 @@ const NumberField = ({
         {cardNumbers.map((chunk, index) => (
           <CardNumberInput
             ref={(node) => {
-              inputFocusRefs.current[index] = node;
+              registerFocusRef(index, node);
             }}
             id={`card_number-${index}`}
             key={index}

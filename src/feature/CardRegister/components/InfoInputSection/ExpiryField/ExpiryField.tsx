@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
@@ -17,6 +17,7 @@ import {
   type ExpiryType,
 } from "../../../utils/expiryFormatter";
 import { validateNumericInput } from "../../../validators/input";
+import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 
 const ExpiryField = ({
   expiryMonth,
@@ -36,9 +37,8 @@ const ExpiryField = ({
     Array.from({ length: EXPIRY_INPUT_COUNT }, () => false),
   );
 
-  const inputFocusRefs = useRef<Array<HTMLInputElement | null>>(
-    Array.from({ length: EXPIRY_INPUT_COUNT }, () => null),
-  );
+  const { registerFocusRef, focusNext, focusPrevious } =
+    useInputFocusGroup(EXPIRY_INPUT_COUNT);
 
   const handleMonthChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -69,7 +69,7 @@ const ExpiryField = ({
 
     // 다음 포커싱
     if (value.length === EXPIRY_VALUE_LENGTH) {
-      inputFocusRefs.current[index + 1]?.focus();
+      focusNext(index);
     }
   };
 
@@ -94,7 +94,7 @@ const ExpiryField = ({
 
     // 이전 포커싱
     if (value.length === 0) {
-      inputFocusRefs.current[index - 1]?.focus();
+      focusPrevious(index);
     }
   };
 
@@ -146,7 +146,7 @@ const ExpiryField = ({
       <InputWrapper>
         <ExpiryInput
           ref={(node) => {
-            inputFocusRefs.current[0] = node;
+            registerFocusRef(0, node);
           }}
           id="expiry-month"
           value={expiryMonth}
@@ -160,7 +160,7 @@ const ExpiryField = ({
         />
         <ExpiryInput
           ref={(node) => {
-            inputFocusRefs.current[1] = node;
+            registerFocusRef(1, node);
           }}
           id="expiry-month"
           value={expiryYear}
