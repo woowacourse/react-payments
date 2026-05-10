@@ -4,7 +4,6 @@ import {
   PASSWORD_INPUT_COUNT,
   PASSWORD_LENGTH,
 } from "../../../constants";
-import { useState } from "react";
 import { validateNumericInput } from "../../../validators/input";
 import {
   validateExceedPasswordLength,
@@ -12,6 +11,7 @@ import {
 } from "../../../validators/password";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
+import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
 const PasswordField = ({
   password,
@@ -20,12 +20,14 @@ const PasswordField = ({
   password: string;
   setPassword: (value: string) => void;
 }) => {
-  const [errorInfo, setErrorInfo] = useState(
-    Array.from({ length: PASSWORD_INPUT_COUNT }, () => ""),
-  );
-  const [isTouched, setIsTouched] = useState(
-    Array.from({ length: PASSWORD_INPUT_COUNT }, () => false),
-  );
+  const {
+    updateErrorMessage,
+    clearErrorMessage,
+    firstErrorIndex,
+    firstErrorMessage,
+    isTouched,
+    touchField,
+  } = useInputErrorState(PASSWORD_INPUT_COUNT);
 
   const handlePasswordChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -40,34 +42,22 @@ const PasswordField = ({
     setPassword(value);
 
     if (isTouched[index] && validatePasswordLength(value)) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === index ? "" : message,
-      );
-      setErrorInfo(newErrorInfo);
+      clearErrorMessage(index);
     }
   };
 
   const handlePasswordBlur = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    updateTouched(index);
-    const newErrorInfo = errorInfo.map((message, errorIndex) =>
-      errorIndex === index
-        ? validatePasswordLength(value)
-          ? ""
-          : ERROR_MESSAGES.password
-        : message,
-    );
-    setErrorInfo(newErrorInfo);
-  };
+    touchField(index);
 
-  const updateTouched = (index: number) => {
-    setIsTouched((prev) =>
-      prev.map((touched, i) => (i === index ? true : touched)),
-    );
-  };
+    if (!validatePasswordLength(value)) {
+      updateErrorMessage(index, ERROR_MESSAGES.password);
+      return;
+    }
 
-  const firstErrorIndex = errorInfo.findIndex((message) => message !== "");
+    clearErrorMessage(index);
+  };
 
   return (
     <StyledField>
@@ -86,7 +76,7 @@ const PasswordField = ({
           autoFocus
         />
       </InputWrapper>
-      <ErrorMessage>{errorInfo[firstErrorIndex]}</ErrorMessage>
+      <ErrorMessage>{firstErrorMessage}</ErrorMessage>
     </StyledField>
   );
 };

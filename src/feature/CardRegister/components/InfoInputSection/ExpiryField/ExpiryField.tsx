@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
@@ -18,6 +17,7 @@ import {
 } from "../../../utils/expiryFormatter";
 import { validateNumericInput } from "../../../validators/input";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
+import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
 const ExpiryField = ({
   expiryMonth,
@@ -30,12 +30,14 @@ const ExpiryField = ({
   setExpiryMonth: (value: string) => void;
   setExpiryYear: (value: string) => void;
 }) => {
-  const [errorInfo, setErrorInfo] = useState(
-    Array.from({ length: EXPIRY_INPUT_COUNT }, () => ""),
-  );
-  const [isTouched, setIsTouched] = useState(
-    Array.from({ length: EXPIRY_INPUT_COUNT }, () => false),
-  );
+  const {
+    updateErrorMessage,
+    clearErrorMessage,
+    firstErrorIndex,
+    firstErrorMessage,
+    isTouched,
+    touchField,
+  } = useInputErrorState(EXPIRY_INPUT_COUNT);
 
   const { registerFocusRef, focusNext, focusPrevious } =
     useInputFocusGroup(EXPIRY_INPUT_COUNT);
@@ -51,20 +53,14 @@ const ExpiryField = ({
     }
 
     if (value.length === EXPIRY_VALUE_LENGTH && !validateMonth(value)) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === index ? ERROR_MESSAGES.expiryMonthRange : message,
-      );
-      setErrorInfo(newErrorInfo);
+      updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
       return;
     }
 
     setExpiryMonth(value);
 
     if (isTouched[index] && value.length === EXPIRY_VALUE_LENGTH) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === index ? "" : message,
-      );
-      setErrorInfo(newErrorInfo);
+      clearErrorMessage(index);
     }
 
     // 다음 포커싱
@@ -86,10 +82,7 @@ const ExpiryField = ({
     setExpiryYear(value);
 
     if (isTouched[index] && value.length === EXPIRY_VALUE_LENGTH) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === index ? "" : message,
-      );
-      setErrorInfo(newErrorInfo);
+      clearErrorMessage(index);
     }
 
     // 이전 포커싱
@@ -103,7 +96,7 @@ const ExpiryField = ({
     eValue: string,
     expiryType: ExpiryType,
   ) => {
-    updateTouched(index);
+    touchField(index);
 
     const formattedValue = formatExpiryValue(eValue, expiryType);
 
@@ -114,31 +107,18 @@ const ExpiryField = ({
       setExpiryYear(formattedValue);
     }
 
-    const newErrorInfo = errorInfo.map((message, errorIndex) => {
-      if (errorIndex !== index) {
-        return message;
-      }
+    if (!validateTwoDigits(formattedValue)) {
+      updateErrorMessage(index, ERROR_MESSAGES.expiryLength);
+      return;
+    }
 
-      if (!validateTwoDigits(formattedValue)) {
-        return ERROR_MESSAGES.expiryLength;
-      }
+    if (expiryType === "month" && !validateMonth(formattedValue)) {
+      updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
+      return;
+    }
 
-      if (expiryType === "month" && !validateMonth(formattedValue)) {
-        return ERROR_MESSAGES.expiryMonthRange;
-      }
-
-      return "";
-    });
-    setErrorInfo(newErrorInfo);
+    clearErrorMessage(index);
   };
-
-  const updateTouched = (index: number) => {
-    setIsTouched((prev) =>
-      prev.map((touched, i) => (i === index ? true : touched)),
-    );
-  };
-
-  const firstErrorIndex = errorInfo.findIndex((message) => message !== "");
 
   return (
     <StyledField>
@@ -173,7 +153,7 @@ const ExpiryField = ({
         />
       </InputWrapper>
 
-      <ErrorMessage>{errorInfo[firstErrorIndex]}</ErrorMessage>
+      <ErrorMessage>{firstErrorMessage}</ErrorMessage>
     </StyledField>
   );
 };

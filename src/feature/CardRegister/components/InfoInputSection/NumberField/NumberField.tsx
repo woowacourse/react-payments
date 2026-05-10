@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Input from "../../../../../common/components/Input/Input";
 import Label from "../../../../../common/components/Label/Label";
 import styled from "styled-components";
@@ -16,6 +15,8 @@ import {
   validateLastCardNumberChunkLength,
 } from "../../../validators/cardNumber";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
+import useInputErrorState from "../../../../../hooks/useInputErrorState";
+import { getPlaceHolder } from "../../../utils/placeHolder";
 
 const NumberField = ({
   cardNumbers,
@@ -27,15 +28,27 @@ const NumberField = ({
 
   lastInputMaxLength: number;
 }) => {
-  const [errorInfo, setErrorInfo] = useState(
-    Array.from({ length: CARD_NUMBER_INPUT_COUNT }, () => ""),
-  );
-  const [isTouched, setIsTouched] = useState(
-    Array.from({ length: CARD_NUMBER_INPUT_COUNT }, () => false),
-  );
+  const {
+    updateErrorMessage,
+    clearErrorMessage,
+    firstErrorIndex,
+    firstErrorMessage,
+    isTouched,
+    touchField,
+  } = useInputErrorState(CARD_NUMBER_INPUT_COUNT);
+
   const { registerFocusRef, focusNext, focusPrevious } = useInputFocusGroup(
     CARD_NUMBER_INPUT_COUNT,
   );
+
+  const LAST_INPUT_INDEX = 3;
+
+  const updateCardNumber = (index: number, newCardNumber: string) => {
+    const newChunks = cardNumbers.map((chunk, i) =>
+      i === index ? newCardNumber : chunk,
+    );
+    setCardNumbers(newChunks as CardNumberChunkType);
+  };
 
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -43,26 +56,27 @@ const NumberField = ({
     if (!validateNumericInput(value)) {
       return;
     }
-    if (validateExceedCardNumberChunkLength(value)) {
-      return;
+    if (index !== LAST_INPUT_INDEX) {
+      if (validateExceedCardNumberChunkLength(value)) {
+        return;
+      }
+    } else {
+      if (validateExceedLastCardNumberChunkLength(value, lastInputMaxLength)) {
+        return;
+      }
     }
 
-    const newChunks = cardNumbers.map((chunk, i) =>
-      i === index ? value : chunk,
-    );
-
-    setCardNumbers(newChunks as CardNumberChunkType);
+    updateCardNumber(index, value);
 
     // 에러 해결과 동시에 에러 강조표시 해제
-    if (
-      index !== 3 &&
-      isTouched[index] &&
-      value.length === CARD_NUMBER_CHUNK_LENGTH
-    ) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === index ? "" : message,
-      );
-      setErrorInfo(newErrorInfo);
+    if (index !== LAST_INPUT_INDEX) {
+      if (isTouched[index] && value.length === CARD_NUMBER_CHUNK_LENGTH) {
+        clearErrorMessage(index);
+      }
+    } else {
+      if (isTouched[index] && value.length === lastInputMaxLength) {
+        clearErrorMessage(index);
+      }
     }
 
     if (value.length === CARD_NUMBER_CHUNK_LENGTH) {
@@ -75,68 +89,20 @@ const NumberField = ({
   };
 
   const handleNumbersBlur = (index: number, eValue: string) => {
-    updateTouched(index);
+    touchField(index);
 
-    // 에러 검증
-    if (!validateCardNumberChunkLength(eValue)) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === index ? ERROR_MESSAGES.cardNumber : message,
-      );
-      setErrorInfo(newErrorInfo);
+    if (index !== LAST_INPUT_INDEX) {
+      if (!validateCardNumberChunkLength(eValue)) {
+        updateErrorMessage(index, ERROR_MESSAGES.cardNumber);
+      }
+    } else {
+      if (!validateLastCardNumberChunkLength(eValue, lastInputMaxLength)) {
+        updateErrorMessage(
+          index,
+          `카드 번호 ${lastInputMaxLength}자리를 입력해 주세요`,
+        );
+      }
     }
-  };
-
-  const handleLastInputNumbersChange = (eValue: string) => {
-    const value = eValue.trim();
-
-    if (!validateNumericInput(value)) {
-      return;
-    }
-    if (validateExceedLastCardNumberChunkLength(value, lastInputMaxLength)) {
-      return;
-    }
-
-    const newChunks = cardNumbers.map((chunk, i) => (i === 3 ? value : chunk));
-
-    setCardNumbers(newChunks as CardNumberChunkType);
-
-    // 에러 해결과 동시에 에러 강조표시 해제
-    if (isTouched[3] && value.length === lastInputMaxLength) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === 3 ? "" : message,
-      );
-      setErrorInfo(newErrorInfo);
-    }
-
-    if (value.length === 0) {
-      focusPrevious(3);
-    }
-  };
-
-  const handleLastInputNumbersBlur = (eValue: string) => {
-    updateTouched(3);
-    if (!validateLastCardNumberChunkLength(eValue, lastInputMaxLength)) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === 3
-          ? `카드 번호 ${lastInputMaxLength}자리를 입력해 주세요`
-          : message,
-      );
-      setErrorInfo(newErrorInfo);
-    }
-  };
-
-  const updateTouched = (index: number) => {
-    setIsTouched((prev) =>
-      prev.map((touched, i) => (i === index ? true : touched)),
-    );
-  };
-
-  const firstErrorIndex = errorInfo.findIndex((message) => message !== "");
-
-  const getPlaceHolder = (lastInputMaxLength: number) => {
-    return Array.from({ length: lastInputMaxLength }, (_, idx) => idx + 1).join(
-      "",
-    );
   };
 
   return (
@@ -152,29 +118,25 @@ const NumberField = ({
             key={index}
             value={chunk}
             placeholder={
-              index !== 3 ? "1234" : getPlaceHolder(lastInputMaxLength)
+              index !== LAST_INPUT_INDEX
+                ? getPlaceHolder(CARD_NUMBER_CHUNK_LENGTH)
+                : getPlaceHolder(lastInputMaxLength)
             }
             inputMode="numeric"
             maxLength={
-              index !== 3 ? CARD_NUMBER_CHUNK_LENGTH : lastInputMaxLength
+              index !== LAST_INPUT_INDEX
+                ? CARD_NUMBER_CHUNK_LENGTH
+                : lastInputMaxLength
             }
             strokeMode={index === firstErrorIndex ? "error" : "default"}
-            onChange={
-              index !== 3
-                ? (e) => handleNumbersChange(index, e.target.value)
-                : (e) => handleLastInputNumbersChange(e.target.value)
-            }
-            onBlur={
-              index !== 3
-                ? (e) => handleNumbersBlur(index, e.target.value)
-                : (e) => handleLastInputNumbersBlur(e.target.value)
-            }
+            onChange={(e) => handleNumbersChange(index, e.target.value)}
+            onBlur={(e) => handleNumbersBlur(index, e.target.value)}
             autoFocus={index === 0}
           />
         ))}
       </InputWrapper>
 
-      <ErrorMessage>{errorInfo[firstErrorIndex]}</ErrorMessage>
+      <ErrorMessage>{firstErrorMessage}</ErrorMessage>
     </StyledField>
   );
 };

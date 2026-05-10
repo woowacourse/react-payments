@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
@@ -12,6 +11,7 @@ import {
   validateExceedCvcLength,
 } from "../../../validators/cvc";
 import { validateNumericInput } from "../../../validators/input";
+import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
 const CvcField = ({
   cvcNumber,
@@ -20,12 +20,14 @@ const CvcField = ({
   cvcNumber: string;
   setCvcNumber: (value: string) => void;
 }) => {
-  const [errorInfo, setErrorInfo] = useState(
-    Array.from({ length: CVC_INPUT_COUNT }, () => ""),
-  );
-  const [isTouched, setIsTouched] = useState(
-    Array.from({ length: CVC_INPUT_COUNT }, () => false),
-  );
+  const {
+    updateErrorMessage,
+    clearErrorMessage,
+    firstErrorIndex,
+    firstErrorMessage,
+    isTouched,
+    touchField,
+  } = useInputErrorState(CVC_INPUT_COUNT);
 
   const handleCvcChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -40,34 +42,22 @@ const CvcField = ({
     setCvcNumber(value);
 
     if (isTouched[index] && validateCvcLength(value)) {
-      const newErrorInfo = errorInfo.map((message, errorIndex) =>
-        errorIndex === index ? "" : message,
-      );
-      setErrorInfo(newErrorInfo);
+      clearErrorMessage(index);
     }
   };
 
   const handleCvcBlur = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    updateTouched(index);
-    const newErrorInfo = errorInfo.map((message, errorIndex) =>
-      errorIndex === index
-        ? validateCvcLength(value)
-          ? ""
-          : ERROR_MESSAGES.cvc
-        : message,
-    );
-    setErrorInfo(newErrorInfo);
-  };
+    touchField(index);
 
-  const updateTouched = (index: number) => {
-    setIsTouched((prev) =>
-      prev.map((touched, i) => (i === index ? true : touched)),
-    );
-  };
+    if (!validateCvcLength(value)) {
+      updateErrorMessage(index, ERROR_MESSAGES.cvc);
+      return;
+    }
 
-  const firstErrorIndex = errorInfo.findIndex((message) => message !== "");
+    clearErrorMessage(index);
+  };
 
   return (
     <StyledField>
@@ -85,7 +75,7 @@ const CvcField = ({
           autoFocus
         />
       </InputWrapper>
-      <ErrorMessage>{errorInfo[firstErrorIndex]}</ErrorMessage>
+      <ErrorMessage>{firstErrorMessage}</ErrorMessage>
     </StyledField>
   );
 };
