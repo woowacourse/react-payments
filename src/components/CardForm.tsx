@@ -73,7 +73,7 @@ function CardForm(props: CardFormProps) {
             <Input
               autoFocus
               inputMode="numeric"
-              type="text"
+              type="password"
               placeholder="CVC"
               data-is-error={!!form.cardValidationCode.error}
               value={form.cardValidationCode.value}
@@ -159,35 +159,17 @@ function CardForm(props: CardFormProps) {
             </Flex>
             <Text.Label>카드 번호</Text.Label>
             <Flex gap={8}>
-              <Input
-                autoFocus
-                type="text"
-                placeholder="1234"
-                data-is-error={!!form.cardNumberSegments.errors[0]}
-                value={form.cardNumberSegments.values[0]}
-                {...form.cardNumberSegments.register({ index: 0 })}
-              />
-              <Input
-                type="text"
-                placeholder="1234"
-                data-is-error={!!form.cardNumberSegments.errors[1]}
-                value={form.cardNumberSegments.values[1]}
-                {...form.cardNumberSegments.register({ index: 1 })}
-              />
-              <Input
-                type="text"
-                placeholder="1234"
-                data-is-error={!!form.cardNumberSegments.errors[2]}
-                value={form.cardNumberSegments.values[2]}
-                {...form.cardNumberSegments.register({ index: 2 })}
-              />
-              <Input
-                type="text"
-                placeholder="1234"
-                data-is-error={!!form.cardNumberSegments.errors[3]}
-                value={form.cardNumberSegments.values[3]}
-                {...form.cardNumberSegments.register({ index: 3 })}
-              />
+              {form.cardNumberSegments.values.map((segment, segmentIndex) => (
+                <Input
+                  autoFocus={segmentIndex === 0}
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="1234"
+                  data-is-error={!!form.cardNumberSegments.errors[segmentIndex]}
+                  value={segment}
+                  {...form.cardNumberSegments.register({ index: segmentIndex })}
+                />
+              ))}
             </Flex>
             <Text size="s" color="error">
               {form.cardNumberSegments.error}
