@@ -18,19 +18,29 @@ interface ChangeEvent {
   };
 }
 
+interface FocusEvent {
+  target: {
+    id: string;
+  };
+}
+
 interface SelectOwnProps {
   id: string;
   options: Option[];
   value: unknown;
   onChange: (e: ChangeEvent) => void;
+  onBlur?: (e: FocusEvent) => void;
 }
 
 interface SelectProps extends Omit<ComponentProps<'select'>, keyof SelectOwnProps>, SelectOwnProps {}
 
-export const Select = ({ value, onChange, options, id }: SelectProps) => {
+export const Select = ({ id, options, value, onChange, onBlur }: SelectProps) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
+    onBlur?.({
+      target: { id },
+    });
     setOpen(!open);
   };
 
