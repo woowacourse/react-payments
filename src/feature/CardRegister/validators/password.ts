@@ -1,9 +1,9 @@
 import { PASSWORD_LENGTH } from "../constants";
 
-export const validateExceedPasswordLength = (value: string) => {
+export const isPasswordLengthExceeded = (value: string) => {
   return value.length > PASSWORD_LENGTH;
 };
 
-export const validatePasswordLength = (value: string) => {
+export const isPasswordLengthValid = (value: string) => {
   return value.length === PASSWORD_LENGTH;
 };

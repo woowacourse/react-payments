@@ -2,9 +2,9 @@ import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
 import {
-  validateExceedTwoDigits,
-  validateMonth,
-  validateTwoDigits,
+  isMonthValid,
+  isTwoDigits,
+  isTwoDigitsExceeded,
 } from "../../../validators/expiryDate";
 import {
   ERROR_MESSAGES,
@@ -15,7 +15,7 @@ import {
   formatExpiryValue,
   type ExpiryType,
 } from "../../../utils/expiryFormatter";
-import { validateNumericInput } from "../../../validators/input";
+import { isNumericInput } from "../../../validators/input";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
@@ -45,14 +45,14 @@ const ExpiryField = ({
   const handleMonthChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!validateNumericInput(value)) {
+    if (!isNumericInput(value)) {
       return;
     }
-    if (validateExceedTwoDigits(value)) {
+    if (isTwoDigitsExceeded(value)) {
       return;
     }
 
-    if (value.length === EXPIRY_VALUE_LENGTH && !validateMonth(value)) {
+    if (value.length === EXPIRY_VALUE_LENGTH && !isMonthValid(value)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
       return;
     }
@@ -72,10 +72,10 @@ const ExpiryField = ({
   const handleYearChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!validateNumericInput(value)) {
+    if (!isNumericInput(value)) {
       return;
     }
-    if (validateExceedTwoDigits(value)) {
+    if (isTwoDigitsExceeded(value)) {
       return;
     }
 
@@ -107,12 +107,12 @@ const ExpiryField = ({
       setExpiryYear(formattedValue);
     }
 
-    if (!validateTwoDigits(formattedValue)) {
+    if (!isTwoDigits(formattedValue)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryLength);
       return;
     }
 
-    if (expiryType === "month" && !validateMonth(formattedValue)) {
+    if (expiryType === "month" && !isMonthValid(formattedValue)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
       return;
     }

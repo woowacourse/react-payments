@@ -4,10 +4,10 @@ import {
   PASSWORD_INPUT_COUNT,
   PASSWORD_LENGTH,
 } from "../../../constants";
-import { validateNumericInput } from "../../../validators/input";
+import { isNumericInput } from "../../../validators/input";
 import {
-  validateExceedPasswordLength,
-  validatePasswordLength,
+  isPasswordLengthExceeded,
+  isPasswordLengthValid,
 } from "../../../validators/password";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
@@ -32,16 +32,16 @@ const PasswordField = ({
   const handlePasswordChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!validateNumericInput(value)) {
+    if (!isNumericInput(value)) {
       return;
     }
-    if (validateExceedPasswordLength(value)) {
+    if (isPasswordLengthExceeded(value)) {
       return;
     }
 
     setPassword(value);
 
-    if (isTouched[index] && validatePasswordLength(value)) {
+    if (isTouched[index] && isPasswordLengthValid(value)) {
       clearErrorMessage(index);
     }
   };
@@ -51,7 +51,7 @@ const PasswordField = ({
 
     touchField(index);
 
-    if (!validatePasswordLength(value)) {
+    if (!isPasswordLengthValid(value)) {
       updateErrorMessage(index, ERROR_MESSAGES.password);
       return;
     }

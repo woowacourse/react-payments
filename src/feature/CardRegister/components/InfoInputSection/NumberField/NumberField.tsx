@@ -7,12 +7,12 @@ import {
   CARD_NUMBER_INPUT_COUNT,
   ERROR_MESSAGES,
 } from "../../../constants";
-import { validateNumericInput } from "../../../validators/input";
+import { isNumericInput } from "../../../validators/input";
 import {
-  validateCardNumberChunkLength,
-  validateExceedCardNumberChunkLength,
-  validateExceedLastCardNumberChunkLength,
-  validateLastCardNumberChunkLength,
+  isCardNumberChunkLengthExceeded,
+  isCardNumberChunkLengthValid,
+  isLastCardNumberChunkLengthExceeded,
+  isLastCardNumberChunkLengthValid,
 } from "../../../validators/cardNumber";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
@@ -53,15 +53,15 @@ const NumberField = ({
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!validateNumericInput(value)) {
+    if (!isNumericInput(value)) {
       return;
     }
     if (index !== LAST_INPUT_INDEX) {
-      if (validateExceedCardNumberChunkLength(value)) {
+      if (isCardNumberChunkLengthExceeded(value)) {
         return;
       }
     } else {
-      if (validateExceedLastCardNumberChunkLength(value, lastInputMaxLength)) {
+      if (isLastCardNumberChunkLengthExceeded(value, lastInputMaxLength)) {
         return;
       }
     }
@@ -92,11 +92,11 @@ const NumberField = ({
     touchField(index);
 
     if (index !== LAST_INPUT_INDEX) {
-      if (!validateCardNumberChunkLength(eValue)) {
+      if (!isCardNumberChunkLengthValid(eValue)) {
         updateErrorMessage(index, ERROR_MESSAGES.cardNumber);
       }
     } else {
-      if (!validateLastCardNumberChunkLength(eValue, lastInputMaxLength)) {
+      if (!isLastCardNumberChunkLengthValid(eValue, lastInputMaxLength)) {
         updateErrorMessage(
           index,
           `카드 번호 ${lastInputMaxLength}자리를 입력해 주세요`,

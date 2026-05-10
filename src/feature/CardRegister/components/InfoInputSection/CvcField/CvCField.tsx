@@ -7,10 +7,10 @@ import {
   ERROR_MESSAGES,
 } from "../../../constants";
 import {
-  validateCvcLength,
-  validateExceedCvcLength,
+  isCvcLengthExceeded,
+  isCvcLengthValid,
 } from "../../../validators/cvc";
-import { validateNumericInput } from "../../../validators/input";
+import { isNumericInput } from "../../../validators/input";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
 const CvcField = ({
@@ -32,16 +32,16 @@ const CvcField = ({
   const handleCvcChange = (index: number, eValue: string) => {
     const value = eValue.trim();
 
-    if (!validateNumericInput(value)) {
+    if (!isNumericInput(value)) {
       return;
     }
-    if (validateExceedCvcLength(value)) {
+    if (isCvcLengthExceeded(value)) {
       return;
     }
 
     setCvcNumber(value);
 
-    if (isTouched[index] && validateCvcLength(value)) {
+    if (isTouched[index] && isCvcLengthValid(value)) {
       clearErrorMessage(index);
     }
   };
@@ -51,7 +51,7 @@ const CvcField = ({
 
     touchField(index);
 
-    if (!validateCvcLength(value)) {
+    if (!isCvcLengthValid(value)) {
       updateErrorMessage(index, ERROR_MESSAGES.cvc);
       return;
     }
