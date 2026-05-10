@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { MemoryRouter, Routes, Route } from "react-router";
-import CreateComplete from "./CreateComplete";
+import CardCreateComplete from "./CardCreateComplete";
 
 const meta = {
-  title: "Pages/Card/CreateComplete",
-  component: CreateComplete,
+  title: "Card/CardCreateComplete",
+  component: CardCreateComplete,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CreateComplete>;
+} satisfies Meta<typeof CardCreateComplete>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

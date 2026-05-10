@@ -3,7 +3,7 @@ import { userEvent, within, expect } from "storybook/test";
 import { MemoryRouter, Routes, Route } from "react-router";
 
 import CardCreate from "./CardCreate";
-import CreateComplete from "../../../pages/card/CreateComplete";
+import CardCreateComplete from "./CardCreateComplete";
 
 const meta = {
   title: "Card/CardCreate",
@@ -22,7 +22,7 @@ const defaultDecorators = [
     <MemoryRouter initialEntries={["/card"]}>
       <Routes>
         <Route path="/card" element={<Story />} />
-        <Route path="/card/done" element={<CreateComplete />} />
+        <Route path="/card/done" element={<CardCreateComplete />} />
       </Routes>
     </MemoryRouter>
   ),
