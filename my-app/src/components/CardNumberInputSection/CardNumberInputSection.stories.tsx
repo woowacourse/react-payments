@@ -11,6 +11,8 @@ const meta = {
   },
   args: {
     onValueHandler: fn(),
+    maxLength: 16,
+    isSupportedNetwork: false,
   },
   render: (args) => (
     <div style={{ width: 320 }}>
@@ -25,6 +27,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const FilledValid: Story = {
+  args: {
+    isSupportedNetwork: true,
+  },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
     const inputs = canvas.getAllByRole("textbox");
