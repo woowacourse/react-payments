@@ -1,9 +1,10 @@
 import { css } from "@emotion/react";
 import completeCheck from "./assets/completeCheck.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CardComplete = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const numbers: string[] = state?.numbers ?? [];
   const brand: string = state?.brand ?? "";
 
@@ -38,6 +39,7 @@ const CardComplete = () => {
         {brand} 카드가 등록되었어요.
       </span>
       <button
+        onClick={() => navigate("/")}
         css={css`
           width: 100%;
           background: #333333;
