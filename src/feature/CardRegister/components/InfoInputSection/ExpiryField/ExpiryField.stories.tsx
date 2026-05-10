@@ -11,9 +11,8 @@ const meta = {
   args: {
     expiryMonth: "",
     expiryYear: "",
-    setExpiryMonth: fn(),
-    setExpiryYear: fn(),
-    onErrorChange: fn(),
+    onExpiryMonthChange: fn(),
+    onExpiryYearChange: fn(),
   },
 } satisfies Meta<typeof ExpiryField>;
 
@@ -46,8 +45,8 @@ export const Interactive: Story = {
         {...args}
         expiryMonth={expiryMonth}
         expiryYear={expiryYear}
-        setExpiryMonth={setExpiryMonth}
-        setExpiryYear={setExpiryYear}
+        onExpiryMonthChange={setExpiryMonth}
+        onExpiryYearChange={setExpiryYear}
       />
     );
   },

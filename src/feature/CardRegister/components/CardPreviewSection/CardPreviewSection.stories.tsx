@@ -11,6 +11,7 @@ const meta = {
       cardNumbers: ["", "", "", ""],
       expiryMonth: "",
       expiryYear: "",
+      selectedCardCompany: null,
     },
   },
 } satisfies Meta<typeof CardPreviewSection>;
@@ -26,6 +27,7 @@ export const Filled: Story = {
       cardNumbers: ["4123", "5678", "1234", "5678"],
       expiryMonth: "12",
       expiryYear: "30",
+      selectedCardCompany: "신한카드",
     },
   },
 };

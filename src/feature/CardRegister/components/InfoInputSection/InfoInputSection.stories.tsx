@@ -1,24 +1,36 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
+import { MemoryRouter } from "react-router-dom";
 
 import InfoInputSection from "./InfoInputSection";
+import type {
+  CardInfoType,
+  CardNumberChunkType,
+} from "../../../../common/types/CardInfoType";
 
 const meta = {
   title: "feature/CardRegister/components/InfoInputSection",
   component: InfoInputSection,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <MemoryRouter initialEntries={["/register"]}>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
   args: {
     cardInfo: {
       cardNumbers: ["", "", "", ""],
       expiryMonth: "",
       expiryYear: "",
+      selectedCardCompany: null,
     },
-    cardInfoHandlers: {
-      setCardNumbers: fn(),
-      setExpiryMonth: fn(),
-      setExpiryYear: fn(),
-    },
+    onCardNumbersChange: fn(),
+    onExpiryMonthChange: fn(),
+    onExpiryYearChange: fn(),
+    onCardCompanySelect: fn(),
   },
 } satisfies Meta<typeof InfoInputSection>;
 
@@ -33,6 +45,7 @@ export const Partial: Story = {
       cardNumbers: ["4123", "56", "", ""],
       expiryMonth: "1",
       expiryYear: "",
+      selectedCardCompany: null,
     },
   },
 };
@@ -43,21 +56,40 @@ export const Filled: Story = {
       cardNumbers: ["4123", "5678", "1234", "5678"],
       expiryMonth: "12",
       expiryYear: "30",
+      selectedCardCompany: "신한카드",
     },
   },
 };
 
 export const Interactive: Story = {
   render: function InteractiveInfoInputSection(args) {
-    const [cardNumbers, setCardNumbers] = useState(args.cardInfo.cardNumbers);
-    const [expiryMonth, setExpiryMonth] = useState(args.cardInfo.expiryMonth);
-    const [expiryYear, setExpiryYear] = useState(args.cardInfo.expiryYear);
+    const [cardInfo, setCardInfo] = useState<CardInfoType>(args.cardInfo);
+
+    const handleCardNumbersChange = (cardNumbers: CardNumberChunkType) => {
+      setCardInfo((previousCardInfo) => ({ ...previousCardInfo, cardNumbers }));
+    };
+
+    const handleExpiryMonthChange = (expiryMonth: string) => {
+      setCardInfo((previousCardInfo) => ({ ...previousCardInfo, expiryMonth }));
+    };
+
+    const handleExpiryYearChange = (expiryYear: string) => {
+      setCardInfo((previousCardInfo) => ({ ...previousCardInfo, expiryYear }));
+    };
 
     return (
       <InfoInputSection
         {...args}
-        cardInfo={{ cardNumbers, expiryMonth, expiryYear }}
-        cardInfoHandlers={{ setCardNumbers, setExpiryMonth, setExpiryYear }}
+        cardInfo={cardInfo}
+        onCardNumbersChange={handleCardNumbersChange}
+        onExpiryMonthChange={handleExpiryMonthChange}
+        onExpiryYearChange={handleExpiryYearChange}
+        onCardCompanySelect={(selectedCardCompany) =>
+          setCardInfo((previousCardInfo) => ({
+            ...previousCardInfo,
+            selectedCardCompany,
+          }))
+        }
       />
     );
   },

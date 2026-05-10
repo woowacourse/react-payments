@@ -11,8 +11,8 @@ const meta = {
   tags: ["autodocs"],
   args: {
     cardNumbers: ["", "", "", ""],
-    setCardNumbers: fn(),
-    onErrorChange: fn(),
+    onCardNumbersChange: fn(),
+    lastInputMaxLength: 4,
   },
 } satisfies Meta<typeof NumberField>;
 
@@ -27,7 +27,7 @@ const StatefulNumberField = (args: NumberFieldProps) => {
     <NumberField
       {...args}
       cardNumbers={cardNumbers}
-      setCardNumbers={setCardNumbers}
+      onCardNumbersChange={setCardNumbers}
     />
   );
 };
@@ -37,12 +37,14 @@ export const Empty: Story = {};
 export const Partial: Story = {
   args: {
     cardNumbers: ["1234", "56", "", ""],
+    lastInputMaxLength: 4,
   },
 };
 
 export const Filled: Story = {
   args: {
     cardNumbers: ["1234", "5678", "1234", "5678"],
+    lastInputMaxLength: 4,
   },
 };
 
