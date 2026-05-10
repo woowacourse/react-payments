@@ -20,7 +20,7 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
   });
 
   const { ref, changeFocus } = useFocusChain(
-    2,
+    Object.keys(cardExpiryDate).length,
     CARD_INPUT.EACH_EXPIRY_DATE_LENGTH,
   );
 

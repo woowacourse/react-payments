@@ -33,7 +33,10 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     message: "",
   });
 
-  const { ref, changeFocus } = useFocusChain(4, CARD_INPUT.EACH_NUMBER_LENGTH);
+  const { ref, changeFocus } = useFocusChain(
+    Object.keys(cardNumber).length,
+    CARD_INPUT.EACH_NUMBER_LENGTH,
+  );
 
   const runEachInputValidation = (
     validators: (() => void)[],
