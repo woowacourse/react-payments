@@ -14,7 +14,7 @@ import { getEXPNumberErrorMessage } from "../utils/getEXPNumberErrorMessage";
 import { getCVCNumberErrorMessage } from "../utils/getCVCNumberErrorMessage";
 import { getPassWordErrorMessage } from "../utils/getPassWordErrorMessage";
 
-export default function CardRegister() {
+export default function CardRegisterPage() {
   const [cardNumbers, setCardNumbers] = useState({
     first: "",
     second: "",
