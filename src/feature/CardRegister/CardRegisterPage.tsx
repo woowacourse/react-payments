@@ -9,7 +9,7 @@ import PasswordField from './components/fields/PasswordField/PasswordField';
 import CardPreviewSection from './components/sections/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/sections/InfoInputSection/InfoInputSection';
 
-import {useCardRegisterForm} from './hooks/useCardRegisterForm';
+import {useCardRegisterForm} from './hooks/form/useCardRegisterForm';
 
 const CardRegisterPage = () => {
   const {cardPreview, fieldProps, visibleFields, isFormComplete, handleSubmit} = useCardRegisterForm();
