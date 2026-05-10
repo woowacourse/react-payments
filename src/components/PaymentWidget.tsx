@@ -1,23 +1,14 @@
 import styled from "@emotion/styled";
 import CardPreview from "./cardPreview/CardPreview";
-import CardNumber from "./cardInfo/cardNumber/CardNumber";
 import PaymentProvider from "../context/PaymentProvider";
-import ConditionalCardBrand from "./conditional/ConditionalCardBrand";
-import ConditionalExpireDate from "./conditional/ConditionalExpireDate";
-import ConditionalCvc from "./conditional/ConditionalCvc";
-import ConditionalPassword from "./conditional/ConditionalPassword";
+import TotalInfo from "./cardInfo/totalInfo";
 
 export default function PaymentWidget() {
   return (
     <PaymentProvider>
       <CardPaymentWidgetWrapper>
         <CardPreview />
-
-        <ConditionalPassword />
-        <ConditionalCvc />
-        <ConditionalExpireDate />
-        <ConditionalCardBrand />
-        <CardNumber />
+        <TotalInfo />
       </CardPaymentWidgetWrapper>
     </PaymentProvider>
   );
@@ -30,4 +21,6 @@ const CardPaymentWidgetWrapper = styled.div`
   border-radius: 10px;
   padding: 0 20px 20px 20px;
   overflow-y: auto;
+  position: relative;
+  flex-direction: column;
 `;

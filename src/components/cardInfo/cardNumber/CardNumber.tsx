@@ -1,9 +1,14 @@
 import styled from "@emotion/styled";
 import Input from "./Input";
 
-export default function CardNumber() {
+export default function CardNumber({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <Wrapper>
+      {children}
       <Header>결제할 카드 번호를 입력해 주세요</Header>
       <SubHeader>본인 명의의 카드만 결제 가능합니다.</SubHeader>
       <Label>카드 번호</Label>

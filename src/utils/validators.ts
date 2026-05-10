@@ -2,6 +2,7 @@ import { type CardNumberContextValue } from "../types/types";
 import { type CardBrandContextValue } from "../types/types";
 import { type ExpireDateContextValue } from "../types/types";
 import { type CvcContextValue } from "../types/types";
+import { type PasswordContextValue } from "../types/types";
 
 export const isNumeric = (value: string) => {
   return value === "" || /^\d+$/.test(value);
@@ -30,4 +31,8 @@ export const canShowCvc = (expireDateContext: ExpireDateContextValue) => {
 
 export const canShowPassword = (cvcContext: CvcContextValue) => {
   return cvcContext.cvc.length === 3;
+};
+
+export const canShowSendButton = (passwordContext: PasswordContextValue) => {
+  return passwordContext.password.length === 2;
 };
