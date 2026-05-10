@@ -91,18 +91,23 @@ const NumberField = ({
   const handleNumbersBlur = (index: number, eValue: string) => {
     touchField(index);
 
-    if (index !== LAST_INPUT_INDEX) {
-      if (!isCardNumberChunkLengthValid(eValue)) {
-        updateErrorMessage(index, ERROR_MESSAGES.cardNumber);
-      }
-    } else {
-      if (!isLastCardNumberChunkLengthValid(eValue, lastInputMaxLength)) {
-        updateErrorMessage(
-          index,
-          `카드 번호 ${lastInputMaxLength}자리를 입력해 주세요`,
-        );
-      }
+    if (index !== LAST_INPUT_INDEX && !isCardNumberChunkLengthValid(eValue)) {
+      updateErrorMessage(index, ERROR_MESSAGES.cardNumber);
+      return;
     }
+
+    if (
+      index === LAST_INPUT_INDEX &&
+      !isLastCardNumberChunkLengthValid(eValue, lastInputMaxLength)
+    ) {
+      updateErrorMessage(
+        index,
+        `카드 번호 ${lastInputMaxLength}자리를 입력해 주세요`,
+      );
+      return;
+    }
+
+    clearErrorMessage(index);
   };
 
   return (
