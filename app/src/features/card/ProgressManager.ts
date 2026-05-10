@@ -1,77 +1,37 @@
-import { CardNetwork } from "./CardNetwork";
+import { CardInputChecker } from "./Checker";
 
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
-
-type CardExpiryDate = {
-  "expiry-year": string;
-  "expiry-month": string;
-};
-
-export const CreateCardProgressManager = {
-  progress: {
-    cardNumber: true,
-    cardBrand: false,
-    cardExpiryDate: false,
-    cardCVC: false,
-    cardPassword: false,
-    complete: false,
-  },
-
-  calculateCurrentProgress(
-    cardNumber: CardNumber,
-    cardBrand: string,
-    cardExpiryDate: CardExpiryDate,
-    cardCVC: string,
-    cardPassword: string,
-  ) {
-    const currentProgress = { ...this.progress };
-    if (!this.isCardNumberComplete(cardNumber)) return currentProgress;
-    currentProgress["cardBrand"] = true;
-
-    if (!this.isCardBrandComplete(cardBrand)) return currentProgress;
-    currentProgress["cardExpiryDate"] = true;
-
-    if (!this.isCardExpiryDateComplete(cardExpiryDate)) return currentProgress;
-    currentProgress["cardCVC"] = true;
-
-    if (!this.isCardCVCComplete(cardCVC)) return currentProgress;
-    currentProgress["cardPassword"] = true;
-
-    if (!this.isCardPasswordComplete(cardPassword)) return currentProgress;
-    currentProgress["complete"] = true;
-
+export function calculateCreateCardCurrentProgress(
+  cardNumber: string,
+  cardBrand: string,
+  cardExpiryDate: string,
+  cardCVC: string,
+  cardPassword: string,
+) {
+  const currentProgress = {
+    cardNumberIsComplete: true,
+    cardBrandIsComplete: false,
+    cardExpiryDateIsComplete: false,
+    cardCVCIsComplete: false,
+    cardPasswordIsComplete: false,
+    allComplete: false,
+  };
+  if (!CardInputChecker.isCardNumberComplete(cardNumber))
     return currentProgress;
-  },
+  currentProgress["cardBrandIsComplete"] = true;
 
-  isCardNumberComplete(cardNumber: CardNumber): boolean {
-    const fullNumber = Object.values(cardNumber).join("");
-    const networkBrand = new CardNetwork(fullNumber);
-    return networkBrand.brand?.length === fullNumber.length;
-  },
+  if (!CardInputChecker.isCardBrandComplete(cardBrand)) return currentProgress;
+  currentProgress["cardExpiryDateIsComplete"] = true;
 
-  isCardBrandComplete(value: string): boolean {
-    return Boolean(value);
-  },
+  if (!CardInputChecker.isCardExpiryDateComplete(cardExpiryDate))
+    return currentProgress;
+  currentProgress["cardCVCIsComplete"] = true;
 
-  isCardExpiryDateComplete(cardExpiryDate: CardExpiryDate): boolean {
-    if (
-      cardExpiryDate["expiry-year"].length === 2 &&
-      cardExpiryDate["expiry-month"].length === 2
-    ) {
-      return true;
-    }
-  },
+  if (!CardInputChecker.isCardCVCComplete(cardCVC)) return currentProgress;
+  currentProgress["cardPasswordIsComplete"] = true;
 
-  isCardCVCComplete(cardCVC: string): boolean {
-    if (cardCVC.length === 3) return true;
-  },
+  if (!CardInputChecker.isCardPasswordComplete(cardPassword))
+    return currentProgress;
+  currentProgress["allComplete"] = true;
 
-  isCardPasswordComplete(password: string): boolean {
-    if (password.length === 2) return true;
-  },
-};
+  return currentProgress;
+}

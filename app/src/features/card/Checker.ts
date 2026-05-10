@@ -1,15 +1,27 @@
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
 import { CardNetwork } from "./CardNetwork";
+import { CARD_INPUT } from "./Constants";
 
-export const CreateCardInputChecker = {
-  isCardNumberComplete(cardNumber: CardNumber) {
-    const fullNumber = Object.values(cardNumber).join("");
-    const networkBrand = new CardNetwork(fullNumber);
-    return networkBrand.brand?.length === fullNumber.length;
+export const CardInputChecker = {
+  isCardNumberComplete(cardNumber: string): boolean {
+    const networkBrand = new CardNetwork(cardNumber);
+    return networkBrand.brand?.length === cardNumber.length;
+  },
+
+  isCardBrandComplete(value: string): boolean {
+    return Boolean(value);
+  },
+
+  isCardExpiryDateComplete(cardExpiryDate: string): boolean {
+    if (cardExpiryDate.length === CARD_INPUT.EACH_EXPIRY_DATE_LENGTH * 2) {
+      return true;
+    }
+  },
+
+  isCardCVCComplete(cardCVC: string): boolean {
+    if (cardCVC.length === CARD_INPUT.CVC_LENGTH) return true;
+  },
+
+  isCardPasswordComplete(password: string): boolean {
+    if (password.length === CARD_INPUT.PASSWORD_LENGTH) return true;
   },
 };
