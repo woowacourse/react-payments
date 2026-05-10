@@ -91,3 +91,24 @@ export const preventCvc = (cvc: string) => {
 
   return false;
 };
+
+export const validatePassword = ({ password }: { password: string }) => {
+  const rules = {
+    password: [
+      { type: 'isRequired', message: '비밀번호는 필수값입니다' },
+      { type: 'isNumericString', message: '비밀번호는 숫자여야합니다' },
+      { type: 'length', message: '비밀번호는 2자리여야합니다', length: 2 },
+    ],
+  } satisfies FormValuesRules<{ password: string }>;
+
+  return validateFormValuesRules({ password }, rules);
+};
+
+export const preventPassword = (password: string) => {
+  if (isEmptyString(password)) return false;
+
+  if (!isNumericString(password)) return true;
+  if (password.length > 2) return true;
+
+  return false;
+};

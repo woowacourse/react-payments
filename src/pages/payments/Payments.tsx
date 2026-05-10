@@ -11,6 +11,7 @@ import styles from './Payments.module.css';
 import { useCardNumbers } from './hooks/useCardNumbers';
 import { useExpirationDate } from './hooks/useExpirationDate';
 import { useCvc } from './hooks/useCvc';
+import { usePassword } from './hooks/usePassword';
 
 import { BRAND_NUMBER, CARD_OPTIONS } from './constant';
 
@@ -51,6 +52,20 @@ export const Payments = () => {
     invalidAttemp: cvcInvalidAttemp,
     renderErrorMessage: renderErrorMessageCvc,
   } = useCvc();
+
+  //password
+  const {
+    value: password,
+    onChange: handleChangePassword,
+
+    blurValue: onBlurPassword,
+    onBlur: handleBlurPassword,
+
+    errors: errorsPassword,
+
+    invalidAttemp: passwordInvalidAttemp,
+    renderErrorMessage: renderErrorMessagePassword,
+  } = usePassword();
 
   const renderBrandCard = (cardNumbers: string[]) => {
     if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
@@ -135,15 +150,15 @@ export const Payments = () => {
       </FormGroup>
 
       <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요">
-        <Field label="비밀번호 앞 2자리">
+        <Field label="비밀번호 앞 2자리" errorMessage={renderErrorMessagePassword()}>
           <Input
             type="password"
             id="password"
-            value={''}
+            value={password}
             maxLength={2}
-            isError={false}
-            onChange={() => {}}
-            onBlur={() => {}}
+            isError={!!passwordInvalidAttemp || (onBlurPassword && !errorsPassword.password.length)}
+            onChange={handleChangePassword}
+            onBlur={handleBlurPassword}
           />
         </Field>
       </FormGroup>
