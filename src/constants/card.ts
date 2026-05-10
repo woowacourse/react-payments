@@ -22,4 +22,6 @@ const CARD = {
   NUMBER_LENGTH_BY_BRAND,
 };
 
+export type CardBrand = keyof typeof NUMBER_LENGTH_BY_BRAND;
+
 export default CARD;
