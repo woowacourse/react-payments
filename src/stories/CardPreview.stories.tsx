@@ -6,24 +6,23 @@ const meta = {
   component: CardPreview,
   tags: ['autodocs'],
   argTypes: {
-    cardNetwork: {
+    issuer: {
       control: { type: 'select' },
-      options: ['VISA', 'MasterCard', null],
-      description: '카드 브랜드 (VISA | MasterCard | null)',
+      options: [null, 'bc', 'shinhan', 'kakao', 'hyundai', 'woori', 'lotte', 'hana', 'kookmin'],
+      description: '카드사 (배경색에 영향)',
     },
-    cardNumberSegments: {
+    network: {
+      control: { type: 'select' },
+      options: [null, 'VISA', 'MasterCard', 'Diners', 'AMEX', 'UnionPay'],
+      description: '카드 네트워크 브랜드',
+    },
+    numberSegments: {
       control: 'object',
-      description: '4자리 숫자 문자열 4개로 이루어진 배열 (예: ["1234", "5678", "9012", "3456"])',
+      description: '4자리 숫자 문자열 4개 배열 (예: ["1234", "5678", "9012", "3456"])',
     },
-    expiryMonth: {
-      control: { type: 'select' },
-      options: Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0')),
-      description: '1~12 사이의 숫자 문자열',
-    },
-    expiryYear: {
-      control: { type: 'select' },
-      options: Array.from({ length: 99 }, (_, i) => String(i).padStart(2, '0')),
-      description: '2자리 연도 문자열 (예: 26)',
+    expiryDate: {
+      control: 'object',
+      description: '[월(MM), 년(YY)] 배열 (예: ["12", "26"])',
     },
   },
 } satisfies Meta<typeof CardPreview>;
@@ -33,45 +32,54 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardNetwork: null,
-    cardNumberSegments: ['', '', '', ''],
-    expiryMonth: '',
-    expiryYear: '',
+    issuer: null,
+    network: null,
+    numberSegments: ['', '', '', ''],
+    expiryDate: ['', ''],
   },
 };
 
 export const Visa: Story = {
   args: {
-    cardNetwork: 'VISA',
-    cardNumberSegments: ['4123', '4567', '8901', '2345'],
-    expiryMonth: '12',
-    expiryYear: '26',
+    issuer: 'shinhan',
+    network: 'VISA',
+    numberSegments: ['4123', '4567', '8901', '2345'],
+    expiryDate: ['12', '26'],
   },
 };
 
 export const MasterCard: Story = {
   args: {
-    cardNetwork: 'MasterCard',
-    cardNumberSegments: ['5212', '3456', '7890', '1234'],
-    expiryMonth: '08',
-    expiryYear: '28',
+    issuer: 'bc',
+    network: 'MasterCard',
+    numberSegments: ['5212', '3456', '7890', '1234'],
+    expiryDate: ['08', '28'],
   },
 };
 
-export const UnknownBrand: Story = {
+export const AMEX: Story = {
   args: {
-    cardNetwork: null,
-    cardNumberSegments: ['9999', '1234', '5678', '9012'],
-    expiryMonth: '03',
-    expiryYear: '30',
+    issuer: 'hyundai',
+    network: 'AMEX',
+    numberSegments: ['3714', '4963', '539', ''],
+    expiryDate: ['05', '27'],
+  },
+};
+
+export const UnknownNetwork: Story = {
+  args: {
+    issuer: 'kakao',
+    network: null,
+    numberSegments: ['9999', '1234', '5678', '9012'],
+    expiryDate: ['03', '30'],
   },
 };
 
 export const PartiallyFilled: Story = {
   args: {
-    cardNetwork: 'VISA',
-    cardNumberSegments: ['4123', '4567', '', ''],
-    expiryMonth: '12',
-    expiryYear: '26',
+    issuer: null,
+    network: 'VISA',
+    numberSegments: ['4123', '4567', '', ''],
+    expiryDate: ['12', ''],
   },
 };

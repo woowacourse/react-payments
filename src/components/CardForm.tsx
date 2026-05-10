@@ -5,74 +5,16 @@ import CardPreview from './CardPreview';
 import { CARD_ISSUERS } from '../constants';
 import type { CardFormState } from '../types';
 import useCardForm from '../hooks/useCardForm';
+import Text from './Common/Text';
+import Input from './Common/Input';
+import Select from './Common/Select';
+import Button from './Common/Button';
 
-const Title = styled.p`
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-`;
-
-const Description = styled.span`
-  font-size: 10px;
-  color: var(--color-description);
-  margin: 0;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  font-size: 13px;
-  border-radius: 2px;
-  padding: 8px 6px;
-  border: 1px solid var(--color-border);
-
-  &:focus {
-    border-color: var(--color-black);
-    outline: 0;
-  }
-
-  &[data-is-error='true'] {
-    border-color: var(--color-error);
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  font-size: 13px;
-  border-radius: 2px;
-  padding: 8px 6px;
-  border: 1px solid var(--color-border);
-
-  &:focus {
-    border-color: var(--color-black);
-    outline: 0;
-  }
-
-  &[data-is-error='true'] {
-    border-color: var(--color-error);
-  }
-`;
-
-const ErrorMessage = styled.p`
-  color: var(--color-error);
-  font-size: 12px;
-  line-height: 14px;
-  min-height: 14px;
-  margin: 0;
-`;
-
-const Submit = styled.button`
+const Submit = styled(Button)`
   position: sticky;
   bottom: 0;
-  border: 0;
-  background: var(--color-card-background);
-  color: var(--color-white);
-  height: 52px;
-  font-weight: 700;
+  border-radius: 0px;
   margin: 0 -32px;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const CARD_FORM_STEP = {
@@ -106,9 +48,14 @@ function CardForm(props: CardFormProps) {
         {step >= CARD_FORM_STEP['CARD_PASSWORD'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
-              <Title>비밀번호를 입력해 주세요</Title>
-              <Description>앞의 2자리를 입력해주세요</Description>
+              <Text size="l" weight="bold">
+                비밀번호를 입력해 주세요
+              </Text>
+              <Text size="xs" color="description">
+                앞의 2자리를 입력해주세요
+              </Text>
             </Flex>
+            <Text.Label>비밀번호 앞 2자리</Text.Label>
             <Input
               autoFocus
               inputMode="numeric"
@@ -118,14 +65,19 @@ function CardForm(props: CardFormProps) {
               value={form.cardPassword.value}
               {...form.cardPassword.register()}
             />
-            <ErrorMessage>{form.cardPassword.error}</ErrorMessage>
+            <Text size="s" color="error">
+              {form.cardPassword.error}
+            </Text>
           </Flex>
         )}
         {step >= CARD_FORM_STEP['CARD_VALIDATION_CODE'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
-              <Title>CVC 번호를 입력해 주세요</Title>
+              <Text size="l" weight="bold">
+                CVC 번호를 입력해 주세요
+              </Text>
             </Flex>
+            <Text.Label>CVC</Text.Label>
             <Input
               autoFocus
               inputMode="numeric"
@@ -135,15 +87,22 @@ function CardForm(props: CardFormProps) {
               value={form.cardValidationCode.value}
               {...form.cardValidationCode.register()}
             />
-            <ErrorMessage>{form.cardValidationCode.error}</ErrorMessage>
+            <Text size="s" color="error">
+              {form.cardValidationCode.error}
+            </Text>
           </Flex>
         )}
         {step >= CARD_FORM_STEP['CARD_EXPIRY_DATE'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
-              <Title>카드 유효기간을 입력해 주세요</Title>
-              <Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
+              <Text size="l" weight="bold">
+                카드 유효기간을 입력해 주세요
+              </Text>
+              <Text size="xs" color="description">
+                월/년도(MMYY)를 순서대로 입력해 주세요.
+              </Text>
             </Flex>
+            <Text.Label>유효기간</Text.Label>
             <Flex gap={8}>
               <Input
                 autoFocus
@@ -163,14 +122,20 @@ function CardForm(props: CardFormProps) {
                 {...form.cardExpiryDate.register({ index: 1 })}
               />
             </Flex>
-            <ErrorMessage>{form.cardExpiryDate.error}</ErrorMessage>
+            <Text size="s" color="error">
+              {form.cardExpiryDate.error}
+            </Text>
           </Flex>
         )}
         {step >= CARD_FORM_STEP['CARD_ISSUER'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
-              <Title>카드사를 선택해 주세요</Title>
-              <Description>현재 국내 카드사만 가능합니다.</Description>
+              <Text size="l" weight="bold">
+                카드사를 선택해 주세요
+              </Text>
+              <Text size="xs" color="description">
+                현재 국내 카드사만 가능합니다.
+              </Text>
             </Flex>
             <Select
               autoFocus
@@ -178,22 +143,29 @@ function CardForm(props: CardFormProps) {
               value={form.cardIssuer.value ?? ''}
               {...form.cardIssuer.register()}
             >
-              <option value="">카드사를 선택해 주세요</option>
+              <Select.Option value="">카드사를 선택해 주세요</Select.Option>
               {CARD_ISSUERS.map((issuer) => (
-                <option key={issuer.value} value={issuer.value}>
+                <Select.Option key={issuer.value} value={issuer.value}>
                   {issuer.label}
-                </option>
+                </Select.Option>
               ))}
             </Select>
-            <ErrorMessage>{form.cardIssuer.error}</ErrorMessage>
+            <Text size="s" color="error">
+              {form.cardIssuer.error}
+            </Text>
           </Flex>
         )}
         {step >= CARD_FORM_STEP['CARD_NUMBER'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
-              <Title>결제할 카드 번호를 입력해 주세요</Title>
-              <Description>본인 명의의 카드만 결제 가능합니다.</Description>
+              <Text size="l" weight="bold">
+                결제할 카드 번호를 입력해 주세요
+              </Text>
+              <Text size="xs" color="description">
+                본인 명의의 카드만 결제 가능합니다.
+              </Text>
             </Flex>
+            <Text.Label>카드 번호</Text.Label>
             <Flex gap={8}>
               <Input
                 autoFocus
@@ -225,7 +197,9 @@ function CardForm(props: CardFormProps) {
                 {...form.cardNumberSegments.register({ index: 3 })}
               />
             </Flex>
-            <ErrorMessage>{form.cardNumberSegments.error}</ErrorMessage>
+            <Text size="s" color="error">
+              {form.cardNumberSegments.error}
+            </Text>
           </Flex>
         )}
         {form.formStatus.isValid && <Submit type="submit">확인</Submit>}
