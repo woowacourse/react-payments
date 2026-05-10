@@ -2,9 +2,10 @@ import { css } from "@emotion/react";
 import type { CardInfo } from "./types.ts";
 import { useState } from "react";
 import Card from "./components/Card/Card";
-import CardNumberInputSection from "./components/CardNumberInputSection/CardNumberInputSection";
-import CvcInputSection from "./components/CvcInputSection/CvcInputSection";
-import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection";
+import CardNumberInputSection from "./components/CardNumberInputSection/CardNumberInputSection.tsx";
+import CardCompanySelectSection from "./components/CardCompanySelectSection/CardCompanySelectSection.tsx";
+import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
+import CvcInputSection from "./components/CvcInputSection/CvcInputSection.tsx";
 import { decideBrandName } from "./utils/decideBrandName.ts";
 import { validateCardNumber, validateExpiryDate, validateCvc } from "./utils/validators.ts";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ function App() {
     numbers: ["", "", "", ""],
     expiry: ["", ""],
     cvc: "",
+    company: "",
   });
   const [step, setStep] = useState(0);
 
@@ -30,18 +32,24 @@ function App() {
   const expiryHandler = (expiry: string[]) => {
     setCardInfo((prev) => ({ ...prev, expiry }));
     if (expiry.every((e) => e.length === 2) && validateExpiryDate(expiry).errorIndex === -1) {
-      setStep((prev) => Math.max(prev, 2));
+      setStep((prev) => Math.max(prev, 3));
     }
   };
 
-  const cvcHandler = (cardInfo: string) => {
+  const cvcHandler = (cvc: string) => {
     setCardInfo((prev) => {
-      return { ...prev, cvc: cardInfo };
+      return { ...prev, cvc: cvc };
     });
+  };
+
+  const selectCompanyHandler = (company: string) => {
+    setCardInfo((prev) => ({ ...prev, company }));
+    setStep((prev) => Math.max(prev, 2));
   };
 
   const isComplete =
     cardInfo.numbers.every((n) => n.length === 4) &&
+    cardInfo.company !== "" &&
     cardInfo.expiry.every((e) => e.length === 2) &&
     cardInfo.cvc.length === 3;
 
@@ -88,11 +96,13 @@ function App() {
           `}
         >
           <form id="card-form" onSubmit={handleSubmit}>
-            {step >= 2 && <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />}
-            {step >= 1 && (
+            {step >= 3 && <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />}
+            {step >= 2 && (
               <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
             )}
-
+            {step >= 1 && (
+              <CardCompanySelectSection onValueHandler={selectCompanyHandler} inputValue={cardInfo.company} />
+            )}
             <CardNumberInputSection onValueHandler={cardNumberHandler} inputValues={cardInfo.numbers} />
           </form>
         </div>

@@ -26,7 +26,7 @@ const InputSectionLayout = ({
   children?: React.ReactNode;
   title: string;
   message: string;
-  tag: string;
+  tag?: string;
   errorMessage?: string;
 }) => {
   return (
