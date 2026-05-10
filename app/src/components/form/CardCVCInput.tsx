@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import { CardInput, CardSingleFieldContainer, CardLabel } from '../../style/CardStyles';
 import { Validator } from '../../validators/CardValidator';
 import { useCardContext } from '../../hooks/useCardContext';
+import { useSingleInput } from '../../hooks/useSingleInput';
 
 export function CardCVCInput({
   cardCVCRef,
@@ -13,37 +13,11 @@ export function CardCVCInput({
 }) {
   const { cardCVC, setCardCVC } = useCardContext();
 
-  const [fieldErrors, setError] = useState({
-    state: false,
-    message: '',
-  });
-
-  const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    const result = Validator.isNumber(value);
-    if (!result.valid) {
-      setError({ ...fieldErrors, state: true, message: result.message });
-      return;
-    }
-    setError({ ...fieldErrors, state: false, message: '' });
-    setCardCVC(value);
-
-    if (value.length === 3) {
-      onComplete();
-    }
-  };
-
-  const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    const result = Validator.isValidCardCVCLength(value, e.target.maxLength);
-    if (!result.valid) {
-      setError({ ...fieldErrors, state: true, message: result.message });
-      return;
-    }
-    setError({ ...fieldErrors, state: false, message: '' });
-  };
+  const { fieldErrors, onChange, onBlur } = useSingleInput(
+    setCardCVC,
+    Validator.isNumber,
+    Validator.isValidCardCVCLength,
+  );
 
   return (
     <CardSingleFieldContainer>
@@ -55,8 +29,13 @@ export function CardCVCInput({
         placeholder="123"
         id="card-cvc-input"
         value={cardCVC}
-        onChange={changeCardCVC}
-        onBlur={handleBlurCVC}
+        onChange={(e) => {
+          onChange(e);
+          if (e.target.value.length === 3) {
+            onComplete();
+          }
+        }}
+        onBlur={onBlur}
         $fieldErrors={fieldErrors.state}
         ref={cardCVCRef}
       />

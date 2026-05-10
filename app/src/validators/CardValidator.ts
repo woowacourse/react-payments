@@ -1,4 +1,4 @@
-type ValidationResult = { valid: true } | { valid: false; message: string };
+export type ValidationResult = { valid: true } | { valid: false; message: string };
 
 export const Validator = {
   isNumber(value: string): ValidationResult {
