@@ -76,6 +76,6 @@ const CardFormContainer = styled.form`
   gap: 1rem;
   padding: 24px 30px 20px 30px;
   box-sizing: border-box;
-  height: 700px;
+  flex: 1;
   overflow-y: auto;
 `;

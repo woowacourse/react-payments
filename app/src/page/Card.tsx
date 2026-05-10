@@ -44,6 +44,8 @@ export function Card() {
 }
 
 const CardContainer = styled.div`
-  margin-bottom: auto;
-  margin-top: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;

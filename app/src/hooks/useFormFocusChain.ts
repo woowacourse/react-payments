@@ -17,9 +17,9 @@ export function useFormFocusChain() {
   return {
     refs: { cardNumberFirstRef, cardExpiryDateFirstRef, cardCVCRef, cardPasswordRef },
     currentStep,
-    onCardNumberComplete: () => setCurrentStep(1),
-    onCardCompanySelected: () => setCurrentStep(2),
-    onCardExpiryDateComplete: () => setCurrentStep(3),
-    onCardCVCComplete: () => setCurrentStep(4),
+    onCardNumberComplete: () => setCurrentStep(s => Math.max(s, 1)),
+    onCardCompanySelected: () => setCurrentStep(s => Math.max(s, 2)),
+    onCardExpiryDateComplete: () => setCurrentStep(s => Math.max(s, 3)),
+    onCardCVCComplete: () => setCurrentStep(s => Math.max(s, 4)),
   };
 }
