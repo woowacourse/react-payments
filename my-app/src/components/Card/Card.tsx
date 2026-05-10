@@ -3,7 +3,13 @@ import type { CardInfo } from "../../types";
 import masterLogo from "../../assets/masterLogo.png";
 import visaLogo from "../../assets/visaLogo.png";
 
-const fixedCardNumberStyle = css`
+const cardTextStyle = css`
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const cardNumberSpanStyle = css`
   display: inline-block;
   min-width: 30px;
   font-family: "Inter";
@@ -55,27 +61,19 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
       {/* 카드 정보 */}
       <div>
         <div
-          css={css`
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 500;
+          css={[cardTextStyle, css`
             display: flex;
             flex-direction: row;
             gap: 10px;
-          `}
+          `]}
         >
-          <span css={fixedCardNumberStyle}>{cardInfo.numbers[0]}</span>
-          <span css={fixedCardNumberStyle}>{cardInfo.numbers[1]}</span>
-          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
-          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
+          <span css={cardNumberSpanStyle}>{cardInfo.numbers[0]}</span>
+          <span css={cardNumberSpanStyle}>{cardInfo.numbers[1]}</span>
+          <span css={cardNumberSpanStyle}>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
+          <span css={cardNumberSpanStyle}>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
         </div>
         <p
-          css={css`
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: "Inter";
-          `}
+          css={[cardTextStyle, css`font-family: "Inter";`]}
         >
           {cardInfo.expiry[0]}
           <span

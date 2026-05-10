@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
+import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
 import { validateExpiryDate } from "../../utils/validators";
 
@@ -41,15 +41,7 @@ const ExpiryDateInputSection = ({
           value={value}
           onChange={(e) => onChange(i, e.target.value)}
           onBlur={handleBlur}
-          css={css`
-            flex: 1;
-            height: 32px;
-            border-radius: 2px;
-            min-width: 0;
-            border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
-            padding: 8px;
-            box-sizing: border-box;
-          `}
+          css={[baseInputStyle, css`border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};`]}
           placeholder={placeHolder[i]}
         />
       ))}

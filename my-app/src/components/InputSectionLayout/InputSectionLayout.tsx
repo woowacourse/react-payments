@@ -1,4 +1,14 @@
 import { css } from "@emotion/react";
+
+export const baseInputStyle = css`
+  flex: 1;
+  height: 32px;
+  border-radius: 2px;
+  min-width: 0;
+  padding: 8px;
+  box-sizing: border-box;
+`;
+
 const errorTextStyle = css`
   position: absolute;
   bottom: 2px;
