@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { RadiusButton } from "../../features/card/style/Button";
 import CreateComplete from "../../app/assets/check.svg";
 
-export default function CardCreateDonePage() {
+export default function CardCreateCompletePage() {
   const { cardNumber, cardBrand } = useLocation().state ?? {};
   return (
     <RootContainer>

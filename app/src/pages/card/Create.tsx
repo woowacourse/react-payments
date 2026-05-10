@@ -1,5 +1,5 @@
-import { Card } from "../../features/card/components/Card";
+import CardCreate from "../../features/card/components/CardCreate";
 
 export default function CardCreatePage() {
-  return <Card />;
+  return <CardCreate />;
 }

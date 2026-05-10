@@ -3,7 +3,7 @@ import { CardPreview } from "./preview/CardPreview.tsx";
 import { CardForm } from "./form/CardForm.tsx";
 import styled from "@emotion/styled";
 
-export function Card() {
+export default function CardCreate() {
   const [cardNumber, setCardNumber] = useState({
     "first-digits": "",
     "second-digits": "",
