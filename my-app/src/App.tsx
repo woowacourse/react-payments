@@ -14,21 +14,24 @@ function App() {
     expiry: ["", ""],
     cvc: "",
   });
+  const [step, setStep] = useState(0);
 
   const navigate = useNavigate();
 
   const brand = decideBrandName(cardInfo.numbers[0] ?? "");
 
-  const cardNumberHandler = (cardInfo: string[]) => {
-    setCardInfo((prev) => {
-      return { ...prev, numbers: cardInfo };
-    });
+  const cardNumberHandler = (numbers: string[]) => {
+    setCardInfo((prev) => ({ ...prev, numbers }));
+    if (numbers.every((n) => n.length === 4) && validateCardNumber(numbers).errorIndex === -1) {
+      setStep((prev) => Math.max(prev, 1));
+    }
   };
 
-  const expiryHandler = (cardInfo: string[]) => {
-    setCardInfo((prev) => {
-      return { ...prev, expiry: cardInfo };
-    });
+  const expiryHandler = (expiry: string[]) => {
+    setCardInfo((prev) => ({ ...prev, expiry }));
+    if (expiry.every((e) => e.length === 2) && validateExpiryDate(expiry).errorIndex === -1) {
+      setStep((prev) => Math.max(prev, 2));
+    }
   };
 
   const cvcHandler = (cardInfo: string) => {
@@ -53,6 +56,7 @@ function App() {
 
     navigate("/complete", { state: { numbers: cardInfo.numbers, brand } });
   };
+
   return (
     <>
       <div
@@ -84,9 +88,12 @@ function App() {
           `}
         >
           <form id="card-form" onSubmit={handleSubmit}>
+            {step >= 2 && <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />}
+            {step >= 1 && (
+              <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
+            )}
+
             <CardNumberInputSection onValueHandler={cardNumberHandler} inputValues={cardInfo.numbers} />
-            <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
-            <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />
           </form>
         </div>
       </div>
