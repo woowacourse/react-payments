@@ -69,13 +69,13 @@
 
 4. step에 따라 점진적으로 나타나는 플로우를 구축한다
 
----
-
 1. 추가 input 및 button 컴포넌트를 구현한다
 
 2. button disabled 로직을 구현한다
    -> 가능하다면 첫 validate 시 렌더링, 다시 invlid해지면 돔에서 제거 대신 disabled
    2-1. 파생값으로써 disabled를 관리한다.
+
+---
 
 6. complete 페이지를 구현한다
 

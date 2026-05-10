@@ -19,6 +19,11 @@ const buttonStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  :disabled {
+    cursor: none;
+    pointer-events: none;
+  }
 `;
 
 const roundedStyle = css`
@@ -42,5 +47,9 @@ const variants = {
   primary: css`
     background-color: var(--color-background-button-primary);
     color: white;
+
+    :disabled {
+      background-color: var(--color-border-default);
+    }
   `,
 };

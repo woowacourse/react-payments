@@ -46,6 +46,7 @@ export default function CardCompanyField({ value, onCompleted }: CardCompanyFiel
   );
 }
 
+// TODO: picker(select) z-index 이슈
 const selectStyle = css`
   appearance: base-select;
   width: 100%;

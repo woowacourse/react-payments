@@ -107,10 +107,10 @@ const rules: Rules<CardInfo, ErrorStatus | ExpirationPeriodErrorStatus> = {
 
 export default function AddCardPage() {
   const [stepIndex, setStepIndex] = useState(0);
-  const { values, errors, handleChange, handleBlur } = useForm<CardInfo, ErrorStatus | ExpirationPeriodErrorStatus>(
-    initialValues,
-    rules,
-  );
+  const { values, errors, isFormValid, handleChange, handleBlur } = useForm<
+    CardInfo,
+    ErrorStatus | ExpirationPeriodErrorStatus
+  >(initialValues, rules);
 
   const cardBrand = categorizeCardBrand(values.cardNumbers);
 
@@ -127,7 +127,7 @@ export default function AddCardPage() {
           <Card cardNumber={values.cardNumbers} expirationPeriod={values.expirationPeriod} cardBrand={cardBrand} />
         </div>
         <form onChange={handleChange} onBlur={handleBlur} css={formLayout}>
-          {stepIndex >= 5 && <SubmitButton />}
+          {stepIndex >= 5 && <SubmitButton disabled={!isFormValid} />}
           {stepIndex >= 4 && (
             <PasswordField
               value={values.password}

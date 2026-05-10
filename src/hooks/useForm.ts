@@ -27,7 +27,14 @@ export const useForm = <T extends object, E>(initialValues: T, rules: Rules<T, E
 
     return initialErrors;
   });
-  const isFormValid = Object.values(values).every((value) => !value?.rule?.errorStatus);
+
+  const isFormValid = Object.values(errors).every((error) => {
+    if (Array.isArray(error)) {
+      return error.every((e) => !e);
+    } else {
+      return !error;
+    }
+  });
 
   const setListValue = (field: keyof T, value: string, index: number) => {
     const fieldValue = values[field];

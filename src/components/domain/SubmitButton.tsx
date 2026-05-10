@@ -1,10 +1,14 @@
 import Button from '../ui/Button.tsx';
 import { css } from '@emotion/react';
 
-export default function SubmitButton() {
+interface SubmitButtonProps {
+  disabled?: boolean;
+}
+
+export default function SubmitButton({ disabled = false }: SubmitButtonProps) {
   return (
     <div css={buttonWrapperStyle}>
-      <Button size="lg" rounded={false}>
+      <Button disabled={disabled} size="lg" rounded={false}>
         확인
       </Button>
     </div>
