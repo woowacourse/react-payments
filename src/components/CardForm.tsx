@@ -4,6 +4,7 @@ import Flex from "./Common/Flex";
 import styled from "@emotion/styled";
 import CardExpiryDateInput from "./CardExpiryDateInput";
 import type { CardFormState, CardNumberSegments } from "../types";
+import { CardCompany } from "./CardCompany";
 
 const Title = styled.h3`
   font-size: 18px;
@@ -38,6 +39,18 @@ function CardForm(props: CardFormProps) {
               cardNumberSegments: value,
             })
           }
+        />
+        <Flex direction="column" gap={16}>
+          <Flex direction="column" gap={5}>
+            <Title>카드사를 선택해주세요</Title>
+            <Description>현재 국내 카드사만 가능합니다.</Description>
+          </Flex>
+        </Flex>
+        <CardCompany
+          value={props.formState.cardCompany}
+          onChange={(value: string) => {
+            props.setFormState({ ...props.formState, cardCompany: value });
+          }}
         />
         <Flex direction="column" gap={5}>
           <Title>카드 유효기간을 입력해 주세요</Title>

@@ -14,6 +14,7 @@ const View = styled.div`
 
 function App() {
   const [formState, setFormState] = useState({
+    cardCompany: "",
     cardNumberSegments: ["", "", "", ""] as CardNumberSegments,
     expiryMonth: "",
     expiryYear: "",
