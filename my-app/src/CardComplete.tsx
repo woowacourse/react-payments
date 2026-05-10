@@ -11,6 +11,7 @@ const CardComplete = () => {
         align-items: center;
         margin: auto;
         gap: 25px;
+        padding: 30px;
       `}
     >
       <img

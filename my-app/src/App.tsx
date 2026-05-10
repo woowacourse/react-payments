@@ -57,38 +57,52 @@ function App() {
     <>
       <div
         css={css`
-          padding: 45px 0;
-        `}
-      >
-        <Card cardInfo={cardInfo} brand={brand} />
-      </div>
-
-      <div
-        css={css`
-          width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          width: 100%;
+          height: 100%;
+          padding: 30px;
+          align-items: center;
         `}
       >
-        <form onSubmit={handleSubmit}>
-          <CardNumberInputSection onValueHandler={cardNumberHandler} inputValues={cardInfo.numbers} />
-          <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
-          <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />
-          {isValid && (
-            <button
-              css={css`
-                width: 100%;
-                background: #333333;
-                color: #f3f3f3;
-                height: 52px;
-              `}
-            >
-              확인
-            </button>
-          )}
-        </form>
+        <div
+          css={css`
+            padding: 45px 0;
+          `}
+        >
+          <Card cardInfo={cardInfo} brand={brand} />
+        </div>
+
+        <div
+          css={css`
+            width: 100%;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+          `}
+        >
+          <form id="card-form" onSubmit={handleSubmit}>
+            <CardNumberInputSection onValueHandler={cardNumberHandler} inputValues={cardInfo.numbers} />
+            <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
+            <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />
+          </form>
+        </div>
       </div>
+      {isValid && (
+        <button
+          form="card-form"
+          css={css`
+            width: 100%;
+            background: #333333;
+            color: #f3f3f3;
+            height: 52px;
+          `}
+        >
+          확인
+        </button>
+      )}
     </>
   );
 }

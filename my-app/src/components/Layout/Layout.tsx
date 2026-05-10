@@ -22,7 +22,6 @@ const Layout = () => {
           flex-direction: column;
           align-items: center;
           height: 700px;
-          padding: 30px;
         `}
       >
         <Outlet />
