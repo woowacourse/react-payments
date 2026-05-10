@@ -1,24 +1,27 @@
 import {useNavigate} from 'react-router-dom';
+
 import {useCardNumbers} from './useCardNumbers';
 import {useCompanySelect} from './useCompanySelect';
 import {useExpiryDate} from './useExpiryDate';
 import {useCvcNumber} from './useCvcNumber';
 import {useCardPassword} from './useCardPassword';
+
 import {CARD_COMPANIES} from '@/domain/card/cardCompany';
 import type {CardRegisterInputProps, ExpiryInputProps} from '../types/cardRegisterInputProps';
-
-const EXPIRY_PLACEHOLDERS = ['MM', 'YY'] as const;
 
 const generateNumberPlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
 
 export function useCardRegisterForm() {
+  const navigate = useNavigate();
+
+  // 각 필드의 커스텀훅을 가져와서 사용
   const numberField = useCardNumbers();
   const companyField = useCompanySelect();
   const expiryField = useExpiryDate();
   const cvcField = useCvcNumber();
   const passwordField = useCardPassword();
-  const navigate = useNavigate();
 
+  // step을 파생값으로 두어 간편하게 관리
   const isBrandVisible = numberField.isComplete;
   const isExpiryVisible = isBrandVisible && companyField.isComplete;
   const isCvcVisible = isExpiryVisible && expiryField.isComplete;
@@ -39,11 +42,11 @@ export function useCardRegisterForm() {
     passwordField.isComplete;
 
   const getNumberInputProps = (): CardRegisterInputProps[] =>
-    numberField.format.map((maxDigits, index) => ({
+    numberField.format.map((maxLength, index) => ({
       type: 'text',
       value: numberField.cardNumbers[index] ?? '',
-      maxLength: maxDigits,
-      placeholder: generateNumberPlaceholder(maxDigits),
+      maxLength: maxLength,
+      placeholder: generateNumberPlaceholder(maxLength),
       onChange: (event) => numberField.handleChange(index, event.currentTarget.value),
       onBlur: (event) => numberField.handleBlur(index, event.currentTarget.value),
     }));
@@ -52,7 +55,7 @@ export function useCardRegisterForm() {
     type: 'text',
     value: expiryField.expiryDate[index],
     maxLength: 2,
-    placeholder: EXPIRY_PLACEHOLDERS[index],
+    placeholder: ['MM', 'YY'][index],
     onChange: (event) => expiryField.handleChange(index, event.currentTarget.value),
     onBlur: (event) => expiryField.handleBlur(index, event.currentTarget.value),
   });
@@ -75,7 +78,7 @@ export function useCardRegisterForm() {
     type: 'password',
     value: passwordField.password,
     maxLength: 2,
-    placeholder: '',
+    placeholder: '**',
     onChange: (event) => passwordField.handleChange(event.currentTarget.value),
     onBlur: (event) => passwordField.handleBlur(event.currentTarget.value),
   });
@@ -89,6 +92,7 @@ export function useCardRegisterForm() {
     });
   };
 
+  // 각 컴포넌트에서 필요한 데이터만 선별하여 묶어서 반환
   return {
     cardPreview: {
       cardNumbers: numberField.cardNumbers,
