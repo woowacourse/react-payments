@@ -101,7 +101,7 @@ constants/
 
 2. 카드사 토글 상태에 따라 cardPreview 색상 변경
 
-- 토글 선택 → cardPreview 색상 렌더링 확인
+- ~~토글 선택 → cardPreview 색상 렌더링 확인~~
 - Storybook으로 UI 확인
 
 ~~3. 카드 번호 입력 컴포넌트 작성~~

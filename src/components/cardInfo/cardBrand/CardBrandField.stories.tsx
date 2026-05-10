@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import CardBrandField from './CardBrandField';
+import CardPreview from '../../cardPreview/CardPreview';
+import { useCardForm } from '../../useCardForm';
 
 const meta: Meta<typeof CardBrandField> = {
   title: 'Components/CardBrandField',
@@ -22,5 +24,17 @@ export const Selected: Story = {
   render: () => {
     const [brand, setBrand] = useState('신한카드');
     return <CardBrandField field={{ value: brand, set: setBrand }} />;
+  },
+};
+
+export const ColorTest: Story = {
+  render: () => {
+    const cardForm = useCardForm();
+    return (
+      <>
+        <CardPreview cardForm={cardForm} />
+        <CardBrandField field={cardForm.cardBrand} />
+      </>
+    );
   },
 };
