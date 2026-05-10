@@ -11,6 +11,7 @@ const CardRegisterCompletePage = () => {
   const location = useLocation();
   const state = location.state as CompleteState | null;
 
+  // complete 페이지 진입 시 state가 없으면, 메인으로 redirect하고 히스토리를 덮어써서 뒤로가기를 방지함
   if (!state) return <Navigate to='/' replace />;
 
   return (
