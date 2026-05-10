@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import type {CardCompanyType} from '../domain/cardCompany';
+import type {CardCompanyType} from '@/domain/card/cardCompany';
 
 export function useCompanySelect() {
   const [selectedCompany, setSelectedCompany] = useState<CardCompanyType | null>(null);

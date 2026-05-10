@@ -16,6 +16,7 @@ type InputPropsType = ComponentPropsWithoutRef<'input'> & {
 };
 
 const StyledInput = styled.input<{$strokeMode: StrokeModeType}>`
+  font-family: 'Inter', sans-serif;
   font-size: 11px;
   font-weight: 400;
   color: #000;
@@ -27,7 +28,6 @@ const StyledInput = styled.input<{$strokeMode: StrokeModeType}>`
   &:focus {
     border-color: ${(props) => (props.$strokeMode === 'error' ? STROKE_MODE_COLOR.error : FOCUS_COLOR)};
   }
-
 `;
 
 const Input = forwardRef<HTMLInputElement, InputPropsType>(({strokeMode = 'default', ...rest}, ref) => {

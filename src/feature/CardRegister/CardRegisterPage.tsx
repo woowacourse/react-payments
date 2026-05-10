@@ -1,41 +1,29 @@
 import styled from 'styled-components';
 
-import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
-import InfoInputSection from './components/InfoInputSection/InfoInputSection';
+import CardPreviewContainer from './components/preview/CardPreviewContainer';
+import BrandSelectField from './components/fields/BrandSelectField';
+import CvcField from './components/fields/CvcField';
+import ExpiryField from './components/fields/ExpiryField';
+import NumberField from './components/fields/NumberField';
+import PasswordField from './components/fields/PasswordField';
+import CardPreviewSection from './components/sections/CardPreviewSection';
+import InfoInputSection from './components/sections/InfoInputSection';
 
 import {useCardRegisterForm} from './hooks/useCardRegisterForm';
 
 const CardRegisterPage = () => {
-  const {
-    numberField,
-    companyField,
-    expiryField,
-    cvcField,
-    showCompanySelect,
-    showExpiry,
-    showCvc,
-    isFormComplete,
-    handleSubmit,
-  } = useCardRegisterForm();
+  const {cardPreview, fieldProps, visibleFields, isFormComplete, handleSubmit} = useCardRegisterForm();
 
   return (
     <Wrapper>
       <Content>
-        <CardPreviewSection
-          cardNumbers={numberField.cardNumbers}
-          brand={numberField.brand}
-          expiryDate={expiryField.expiryDate}
-          selectedCompany={companyField.selectedCompany}
-        />
+        <CardPreviewSection previewSlot={<CardPreviewContainer {...cardPreview} />} />
         <InfoInputSection
-          numberField={numberField}
-          expiryField={expiryField}
-          cvcField={cvcField}
-          selectedCompany={companyField.selectedCompany}
-          onCompanyChange={companyField.handleChange}
-          showCompanySelect={showCompanySelect}
-          showExpiry={showExpiry}
-          showCvc={showCvc}
+          numberSlot={<NumberField {...fieldProps.cardNumbers} />}
+          brandSlot={visibleFields.brand ? <BrandSelectField {...fieldProps.cardBrand} /> : null}
+          expirySlot={visibleFields.expiry ? <ExpiryField {...fieldProps.cardExpiryDate} /> : null}
+          cvcSlot={visibleFields.cvc ? <CvcField {...fieldProps.cardCvc} /> : null}
+          passwordSlot={visibleFields.password ? <PasswordField {...fieldProps.cardPassword} /> : null}
         />
       </Content>
       {isFormComplete && <SubmitButton onClick={handleSubmit}>확인</SubmitButton>}
