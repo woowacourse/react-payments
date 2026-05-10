@@ -36,7 +36,7 @@ const Chevron = styled.span<{ $isOpen: boolean }>`
 `;
 
 const OptionList = styled.ul`
-  width: 315px;
+  width: 312px;
   height: 320px;
   position: absolute;
   top: calc(100% + 4px);
@@ -46,7 +46,7 @@ const OptionList = styled.ul`
   padding: 4px 0;
   list-style: none;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 5px;
   background-color: white;
   z-index: 10;
 `;
