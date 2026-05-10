@@ -1,0 +1,35 @@
+.symbolInfo {
+  text-align: center;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.symbolInfo.is-full {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.symbol {
+  display: inline-block;
+}
+
+.content {
+  padding-top: 35px;
+  font-weight: 700;
+  font-size: 25px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.action {
+  padding-top: 35px;
+}
