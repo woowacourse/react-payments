@@ -142,7 +142,7 @@ export const IncompleteLengthOnBlur: Story = {
     const [, secondInput] = canvas.getAllByRole('textbox');
     await userEvent.type(secondInput, '12');
     await userEvent.tab();
-    await expect(canvas.getByText('카드 번호 각 항목은 4자리여야 합니다.')).toBeInTheDocument();
+    await expect(canvas.getByText('카드번호의 2번째 항목은 4자리여야 합니다.')).toBeInTheDocument();
   },
 };
 

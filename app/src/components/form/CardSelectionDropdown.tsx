@@ -74,7 +74,7 @@ const Placeholder = styled.span`
 
 const OptionsBox = styled.ul`
   position: absolute;
-  top: 120%;
+  top: 100%;
   width: 100%;
   overflow-y: auto;
   border: 1px solid #acacac;
