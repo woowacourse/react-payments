@@ -1,0 +1,18 @@
+.fullScreen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: flex-start;
+  padding-bottom: 52px;
+}
+
+.content {
+  height: 100%;
+}
+
+.action {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
