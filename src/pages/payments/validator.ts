@@ -35,6 +35,18 @@ export const preventCardNumber = (cardNumber: string) => {
   return false;
 };
 
+export const validateCard = ({ card }: { card: string }) => {
+  const rules = {
+    card: [{ type: 'isRequired', message: '카드사는 필수값입니다' }],
+  } satisfies FormValuesRules<{ card: string }>;
+
+  return validateFormValuesRules({ card }, rules);
+};
+
+export const preventCard = (value: unknown) => {
+  return false;
+};
+
 export const validateExpirationDate = (expirationDate: ExpirationDate) => {
   const rules = {
     month: [

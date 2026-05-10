@@ -9,6 +9,7 @@ import { Select } from '@/core/components/select';
 import styles from './Payments.module.css';
 
 import { useCardNumbers } from './hooks/useCardNumbers';
+import { useCard } from './hooks/useCard';
 import { useExpirationDate } from './hooks/useExpirationDate';
 import { useCvc } from './hooks/useCvc';
 import { usePassword } from './hooks/usePassword';
@@ -25,6 +26,15 @@ export const Payments = () => {
     renderErrorMessage: renderErrorMessageCardNumbers,
     renderErrorInput: renderErrorCardNumberInput,
   } = useCardNumbers();
+
+  const {
+    value: card,
+    onChange: handleChangeCard,
+
+    onBlur: handleBlurCard,
+
+    renderErrorMessage: renderErrorMessageCard,
+  } = useCard();
 
   const {
     value: expirationDate,
@@ -99,8 +109,8 @@ export const Payments = () => {
         </Field>
       </FormGroup>
       <FormGroup title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다.">
-        <Field>
-          <Select id="card" value={null} onChange={() => {}} options={CARD_OPTIONS} />
+        <Field errorMessage={renderErrorMessageCard()}>
+          <Select id="card" value={card} onChange={handleChangeCard} options={CARD_OPTIONS} onBlur={handleBlurCard} />
         </Field>
       </FormGroup>
       <FormGroup title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요">
