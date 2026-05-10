@@ -1,7 +1,7 @@
-import CARD_COMPANY_SELECT_FIELD from "@constants/card";
 import SelectField from "@components/common/SelectField";
+import { default as CARD } from "@constants/card";
 
-type CardCompanySelectFieldOption = (typeof CARD_COMPANY_SELECT_FIELD)[number];
+type CardCompanySelectFieldOption = (typeof CARD.COMPANY_SELECT_FIELD)[number];
 
 interface CardCompanySelectFieldProps {
   selectedCompany: CardCompanySelectFieldOption["value"] | null;
@@ -16,7 +16,7 @@ const CardCompanySelectField = ({
     <SelectField<CardCompanySelectFieldOption["value"]>
       title="카드사를 선택해 주세요"
       caption="현재 국내 카드사만 가능합니다."
-      options={[...CARD_COMPANY_SELECT_FIELD]}
+      options={[...CARD.COMPANY_SELECT_FIELD]}
       placeholder="카드사를 선택해주세요"
       value={selectedCompany}
       onChange={(next) => onChange(next)}
