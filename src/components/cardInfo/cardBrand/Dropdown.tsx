@@ -4,31 +4,34 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useCardBrandContext } from "../../../context/cardBrand/CardBrandContext";
 
 export default function Dropdown() {
-  const cardBrand = useCardBrandContext();
+  const cardBrandContext = useCardBrandContext();
 
   return (
     <Wrapper>
       <Button
-        onClick={cardBrand.toggleDropdown}
-        isOpen={cardBrand.isOpen}
-        selectedItem={!!cardBrand.selectedItem}
+        onClick={cardBrandContext.toggleDropdown}
+        isOpen={cardBrandContext.isOpen}
+        selectedItem={!!cardBrandContext.selectedItem}
       >
         <span>
-          {cardBrand.selectedItem === ""
+          {cardBrandContext.selectedItem.brand === ""
             ? "카드사를 선택해주세요"
-            : cardBrand.selectedItem}
+            : cardBrandContext.selectedItem.brand}
         </span>
-        {cardBrand.isOpen ? (
+        {cardBrandContext.isOpen ? (
           <MdOutlineKeyboardArrowDown />
         ) : (
           <MdOutlineKeyboardArrowUp />
         )}
       </Button>
-      {cardBrand.isOpen && (
+      {cardBrandContext.isOpen && (
         <Ul>
-          {cardBrand.options.map((option, index) => (
-            <Li key={index} onClick={() => cardBrand.handleItemClick(option)}>
-              {option}
+          {cardBrandContext.options.map((option, index) => (
+            <Li
+              key={index}
+              onClick={() => cardBrandContext.handleItemClick(option)}
+            >
+              {option.brand}
             </Li>
           ))}
         </Ul>
