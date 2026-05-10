@@ -1,25 +1,27 @@
-import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
+import type { ValidityPeriod } from "@/types/card";
+import AMEX from "@assets/AMEX.png";
+import Diners from "@assets/Diners.png";
 import masterCard from "@assets/Mastercard.png";
+import UnionPay from "@assets/UnionPay.png";
 import visa from "@assets/Visa.png";
 import SwitchCase from "@components/common/SwitchCase";
-import type CARD_COMPANY_SELECT_FIELD from "@constants/card";
+import type CARD from "@constants/card";
+import type { CardBrand } from "@constants/card";
 import styled from "@emotion/styled";
 import { COLOR_PALETTE } from "@styles/colorPalette";
-import { detectCardBrand, getFormattedValidityPeriodUnit } from "@utils/card";
+import {
+  formatCardNumberUnitByBrand,
+  getFormattedValidityPeriodUnit,
+} from "@utils/card";
 
 interface CardProps {
-  cardNumberUnits: CardNumberUnits;
+  cardNumber: string;
   validityPeriod: ValidityPeriod;
-  brand?: ReturnType<typeof detectCardBrand>;
-  company?: (typeof CARD_COMPANY_SELECT_FIELD)[number]["value"] | null;
+  brand: CardBrand | null;
+  company?: (typeof CARD.COMPANY_SELECT_FIELD)[number]["value"] | null;
 }
 
-const Card = ({
-  cardNumberUnits,
-  validityPeriod,
-  brand,
-  company,
-}: CardProps) => {
+const Card = ({ cardNumber, validityPeriod, brand, company }: CardProps) => {
   const CardValidityPeriodUnitString =
     getFormattedValidityPeriodUnit(validityPeriod);
 
@@ -38,16 +40,30 @@ const Card = ({
               case: "Visa",
               component: <CardBrandImg src={visa} alt="Visa" />,
             },
+            {
+              case: "Diners",
+              component: <CardBrandImg src={Diners} alt="Diners" />,
+            },
+            {
+              case: "AMEX",
+              component: <CardBrandImg src={AMEX} alt="AMEX" />,
+            },
+            {
+              case: "UnionPay",
+              component: <CardBrandImg src={UnionPay} alt="UnionPay" />,
+            },
           ]}
           defaultCase={null}
         />
       </ChipWrapper>
       <CardNumberWrapper>
-        {cardNumberUnits.map((cardNumberUnit, index) => (
-          <CardNumberUnit key={index}>
-            {index < 2 ? cardNumberUnit : "*".repeat(cardNumberUnit.length)}
-          </CardNumberUnit>
-        ))}
+        {formatCardNumberUnitByBrand(cardNumber, brand).map(
+          (cardNumberUnit, index) => (
+            <CardNumberUnit key={index}>
+              {index < 2 ? cardNumberUnit : "*".repeat(cardNumberUnit.length)}
+            </CardNumberUnit>
+          ),
+        )}
       </CardNumberWrapper>
       <CardValidityPeriodWrapper>
         <CardValidityPeriodUnit>
@@ -88,19 +104,19 @@ const CardBrandImg = styled.img`
 `;
 
 const CardNumberWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
   padding-inline: 1rem;
   justify-content: space-between;
   margin-top: 0.875rem;
 `;
 
-const CardNumberUnit = styled.span`
+const CardNumberUnit = styled.p`
   font-weight: 500;
   font-style: Medium;
   font-size: 0.875rem;
   color: ${COLOR_PALETTE.WHITE};
   letter-spacing: 16%;
+  text-align: center;
 `;
 
 const CardValidityPeriodWrapper = styled.div`
