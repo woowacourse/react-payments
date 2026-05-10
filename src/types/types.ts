@@ -35,3 +35,9 @@ export interface CardBrandContextValue {
   toggleDropdown: () => void;
   handleItemClick: (option: { brand: string; color: string }) => void;
 }
+
+export interface PasswordContextValue {
+  password: string;
+  passwordError: string;
+  handlePasswordChange: (value: string) => void;
+}
