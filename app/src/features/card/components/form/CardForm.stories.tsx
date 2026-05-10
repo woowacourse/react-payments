@@ -25,8 +25,8 @@ const defaultArgs = {
   },
   setCardNumber: null,
   cardExpiryDate: {
-    "expiry-month": "",
-    "expiry-year": "",
+    expiryMonth: "",
+    expiryYear: "",
   },
   setCardExpiryDate: null,
   cardBrand: "",
@@ -75,8 +75,8 @@ export const CompleteCardForm: Story = {
       fourthDigits: "4321",
     },
     cardExpiryDate: {
-      "expiry-month": "01",
-      "expiry-year": "28",
+      expiryMonth: "01",
+      expiryYear: "28",
     },
     cardBrand: "kakao",
     cardCVC: "111",

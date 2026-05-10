@@ -20,7 +20,7 @@ const defaultArgs = {
     thirdDigits: "",
     fourthDigits: "",
   },
-  cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
+  cardExpiryDate: { expiryMonth: "", expiryYear: "" },
   cardBrand: null,
 };
 
@@ -56,8 +56,8 @@ export const ExpiryDateFilled: Story = {
   args: {
     ...defaultArgs,
     cardExpiryDate: {
-      "expiry-month": "12",
-      "expiry-year": "26",
+      expiryMonth: "12",
+      expiryYear: "26",
     },
   },
 };
@@ -66,8 +66,8 @@ export const ExpiryDateDisplayDivideLine: Story = {
   args: {
     ...defaultArgs,
     cardExpiryDate: {
-      "expiry-month": "12",
-      "expiry-year": "",
+      expiryMonth: "12",
+      expiryYear: "",
     },
   },
 };
@@ -82,8 +82,8 @@ export const FullyFilled: Story = {
       fourthDigits: "3456",
     },
     cardExpiryDate: {
-      "expiry-month": "12",
-      "expiry-year": "26",
+      expiryMonth: "12",
+      expiryYear: "26",
     },
   },
 };

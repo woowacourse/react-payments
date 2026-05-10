@@ -18,8 +18,8 @@ type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
   cardExpiryDate: {
-    "expiry-month": "",
-    "expiry-year": "",
+    expiryMonth: "",
+    expiryYear: "",
   },
   setCardExpiryDate: null,
 };

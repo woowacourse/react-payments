@@ -4,13 +4,13 @@ export function CardExpiryDate({ cardExpiryDate }) {
   return (
     <CardExpiryDateContainer>
       <span id="preview-card-expiry-date-month">
-        {cardExpiryDate["expiry-month"]}
+        {cardExpiryDate.expiryMonth}
       </span>
-      {cardExpiryDate["expiry-month"].length === 2 && (
+      {cardExpiryDate.expiryMonth.length === 2 && (
         <span id="preview-card-expiry-date-divide-line"> / </span>
       )}
       <span id="preview-card-expiry-date-year">
-        {cardExpiryDate["expiry-year"]}
+        {cardExpiryDate.expiryYear}
       </span>
     </CardExpiryDateContainer>
   );

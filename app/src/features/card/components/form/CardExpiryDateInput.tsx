@@ -9,11 +9,11 @@ import useFocusChain from "../../hooks/useFocusChain";
 
 export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
   const [isError, setError] = useState({
-    "expiry-month": {
+    expiryMonth: {
       state: false,
       message: "",
     },
-    "expiry-year": {
+    expiryYear: {
       state: false,
       message: "",
     },
@@ -28,14 +28,14 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
-    const { value, id } = e.target;
+    const { value } = e.target;
     const errorReport = runValidation([
       () => Validator.isNumber(value),
       () => Validator.isValidMonth(value),
     ]);
-    setError({ ...isError, [id]: errorReport });
+    setError({ ...isError, expiryMonth: errorReport });
     if (errorReport.state) return;
-    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+    setCardExpiryDate({ ...cardExpiryDate, expiryMonth: value });
     changeFocus(e, index);
   };
 
@@ -43,23 +43,26 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
-    const { value, id } = e.target;
+    const { value } = e.target;
     const errorReport = runValidation([
       () => Validator.isNumber(value),
       () => Validator.isValidYear(value),
     ]);
-    setError({ ...isError, [id]: errorReport });
+    setError({ ...isError, expiryYear: errorReport });
     if (errorReport.state) return;
-    setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+    setCardExpiryDate({ ...cardExpiryDate, expiryYear: value });
     changeFocus(e, index);
   };
 
-  const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
+  const handleBlurCardExpiryDate = (
+    e: React.FocusEvent<HTMLInputElement>,
+    field: "expiryMonth" | "expiryYear",
+  ) => {
+    const { value } = e.target;
     const errorReport = runValidation([
       () => Validator.isValidCardExpiryDateLength(value),
     ]);
-    setError({ ...isError, [id]: errorReport });
+    setError({ ...isError, [field]: errorReport });
   };
 
   return (
@@ -71,23 +74,21 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
           id="expiry-month"
           ref={(node) => ref(1, node)}
           onChange={(e) => changeCardExpiryMonth(e, 1)}
-          onBlur={handleBlurCardExpiryDate}
+          onBlur={(e) => handleBlurCardExpiryDate(e, "expiryMonth")}
           maxLength={CARD_INPUT.EACH_EXPIRY_DATE_LENGTH}
-          value={cardExpiryDate["expiry-month"]}
-          isError={isError["expiry-month"].state}
+          value={cardExpiryDate.expiryMonth}
+          isError={isError.expiryMonth.state}
           placeholder="MM"
         />
         <CardInput
           type="text"
           id="expiry-year"
           ref={(node) => ref(2, node)}
-          onChange={(e) => {
-            changeCardExpiryYear(e, 2);
-          }}
-          onBlur={handleBlurCardExpiryDate}
+          onChange={(e) => changeCardExpiryYear(e, 2)}
+          onBlur={(e) => handleBlurCardExpiryDate(e, "expiryYear")}
           maxLength={CARD_INPUT.EACH_EXPIRY_DATE_LENGTH}
-          value={cardExpiryDate["expiry-year"]}
-          isError={isError["expiry-year"].state}
+          value={cardExpiryDate.expiryYear}
+          isError={isError.expiryYear.state}
           placeholder="YY"
         />
       </CardFieldset>

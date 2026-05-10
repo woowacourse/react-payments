@@ -47,8 +47,8 @@ export const CardExpiryDateInputSection: Story = {
   args: defaultArgs,
   render: () => {
     const [cardExpiryDate, setCardExpiryDate] = useState({
-      "expiry-month": "",
-      "expiry-year": "",
+      expiryMonth: "",
+      expiryYear: "",
     });
     return (
       <CardSection

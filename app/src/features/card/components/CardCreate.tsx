@@ -12,8 +12,8 @@ export default function CardCreate() {
   });
 
   const [cardExpiryDate, setCardExpiryDate] = useState({
-    "expiry-month": "",
-    "expiry-year": "",
+    expiryMonth: "",
+    expiryYear: "",
   });
 
   const [cardBrand, setCardBrand] = useState(null);
