@@ -9,9 +9,7 @@ import {
 } from "../../../constants";
 import { isNumericInput } from "../../../validators/input";
 import {
-  isCardNumberChunkLengthExceeded,
   isCardNumberChunkLengthValid,
-  isLastCardNumberChunkLengthExceeded,
   isLastCardNumberChunkLengthValid,
 } from "../../../validators/cardNumber";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
@@ -56,15 +54,6 @@ const NumberField = ({
     if (!isNumericInput(value)) {
       return;
     }
-    if (index !== LAST_INPUT_INDEX) {
-      if (isCardNumberChunkLengthExceeded(value)) {
-        return;
-      }
-    } else {
-      if (isLastCardNumberChunkLengthExceeded(value, lastInputMaxLength)) {
-        return;
-      }
-    }
 
     updateCardNumber(index, value);
 
@@ -79,6 +68,7 @@ const NumberField = ({
       }
     }
 
+    // 마지막 input은 자동으로 넘길 포커스가 없기때문에 해당 로직도 아직은 괜찮다고 판단.
     if (value.length === CARD_NUMBER_CHUNK_LENGTH) {
       focusNext(index);
     }

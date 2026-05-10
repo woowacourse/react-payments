@@ -1,11 +1,7 @@
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
-import {
-  isMonthValid,
-  isTwoDigits,
-  isTwoDigitsExceeded,
-} from "../../../validators/expiryDate";
+import { isMonthValid, isTwoDigits } from "../../../validators/expiryDate";
 import {
   ERROR_MESSAGES,
   EXPIRY_INPUT_COUNT,
@@ -48,9 +44,6 @@ const ExpiryField = ({
     if (!isNumericInput(value)) {
       return;
     }
-    if (isTwoDigitsExceeded(value)) {
-      return;
-    }
 
     if (value.length === EXPIRY_VALUE_LENGTH && !isMonthValid(value)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
@@ -73,9 +66,6 @@ const ExpiryField = ({
     const value = eValue.trim();
 
     if (!isNumericInput(value)) {
-      return;
-    }
-    if (isTwoDigitsExceeded(value)) {
       return;
     }
 

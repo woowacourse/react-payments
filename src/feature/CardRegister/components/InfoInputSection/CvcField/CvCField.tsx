@@ -6,10 +6,7 @@ import {
   CVC_LENGTH,
   ERROR_MESSAGES,
 } from "../../../constants";
-import {
-  isCvcLengthExceeded,
-  isCvcLengthValid,
-} from "../../../validators/cvc";
+import { isCvcLengthValid } from "../../../validators/cvc";
 import { isNumericInput } from "../../../validators/input";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
@@ -33,9 +30,6 @@ const CvcField = ({
     const value = eValue.trim();
 
     if (!isNumericInput(value)) {
-      return;
-    }
-    if (isCvcLengthExceeded(value)) {
       return;
     }
 

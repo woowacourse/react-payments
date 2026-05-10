@@ -5,10 +5,7 @@ import {
   PASSWORD_LENGTH,
 } from "../../../constants";
 import { isNumericInput } from "../../../validators/input";
-import {
-  isPasswordLengthExceeded,
-  isPasswordLengthValid,
-} from "../../../validators/password";
+import { isPasswordLengthValid } from "../../../validators/password";
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
@@ -33,9 +30,6 @@ const PasswordField = ({
     const value = eValue.trim();
 
     if (!isNumericInput(value)) {
-      return;
-    }
-    if (isPasswordLengthExceeded(value)) {
       return;
     }
 
