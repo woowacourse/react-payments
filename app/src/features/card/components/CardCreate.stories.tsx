@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within, expect } from "storybook/test";
-import { MemoryRouter, Routes, Route } from "react-router";
 
 import CardCreate from "./CardCreate";
-import CardCreateComplete from "./CardCreateComplete";
+import { withCardRouter } from "./storybook/decorators";
 
 const meta = {
   title: "Card/CardCreate",
@@ -17,16 +16,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultDecorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/card"]}>
-      <Routes>
-        <Route path="/card" element={<Story />} />
-        <Route path="/card/done" element={<CardCreateComplete />} />
-      </Routes>
-    </MemoryRouter>
-  ),
-];
+const defaultDecorators = [withCardRouter];
 
 export const Base: Story = {
   decorators: defaultDecorators,

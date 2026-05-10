@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { CardForm } from "./CardForm";
+import { withCardRouter } from "../storybook/decorators";
 
 const meta = {
   title: "Card/Form/CardForm",
@@ -9,6 +10,7 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  decorators: [withCardRouter],
 } satisfies Meta<typeof CardForm>;
 
 export default meta;
