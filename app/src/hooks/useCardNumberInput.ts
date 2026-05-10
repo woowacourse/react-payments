@@ -13,7 +13,9 @@ const indexMap: { [key: string]: number } = {
 
 export function useCardNumberInput(onComplete: () => void) {
   const { cardNumber, setCardNumber } = useCardContext();
-  const networkBrand = BrandValidator.detectNetworkBrand(cardNumber.join('')).brand;
+  const networkBrand = cardNumber[0].length > 0
+    ? BrandValidator.detectNetworkBrand(cardNumber.join('')).brand
+    : '';
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const [fieldErrors, setError] = useState<cardNumberFieldError>({
@@ -36,10 +38,13 @@ export function useCardNumberInput(onComplete: () => void) {
 
     const newCardNumber = [...cardNumber];
     newCardNumber[indexMap[id]] = value;
-    const brandResult = BrandValidator.detectNetworkBrand(newCardNumber.join(''));
-    if (!brandResult.valid) {
-      setError({ ...fieldErrors, [fieldId]: true, message: brandResult.message });
-      return;
+
+    if (newCardNumber[0].length > 0) {
+      const brandResult = BrandValidator.detectNetworkBrand(newCardNumber.join(''));
+      if (!brandResult.valid) {
+        setError({ ...fieldErrors, [fieldId]: true, message: brandResult.message });
+        return;
+      }
     }
 
     setError({ ...fieldErrors, [fieldId]: false, message: '' });

@@ -8,7 +8,9 @@ import { CardNetworkBrand } from './CardNetworkBrand';
 
 export function CardPreview() {
   const { cardNumber, cardCompany } = useCardContext();
-  const networkBrand = BrandValidator.detectNetworkBrand(cardNumber.join('')).brand;
+  const networkBrand = cardNumber[0].length > 0
+    ? BrandValidator.detectNetworkBrand(cardNumber.join('')).brand
+    : '';
 
   return (
     <CardContainer $CardCompanySelected={CARD_COMPANY_COLOR[cardCompany]}>
