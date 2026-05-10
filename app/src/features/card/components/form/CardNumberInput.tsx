@@ -70,12 +70,6 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     runEachInputValidation([() => Validator.isNumber(value)], id);
     runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
-    // const canNextStep = CardFormProgress.isCardNumberComplete(fullNumber);
-    // if (canNextStep) {
-    //   setProgress({ ...progress, cardBrand: true });
-    //   return;
-    // }
-    // setProgress({ ...progress, cardBrand: false });
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
