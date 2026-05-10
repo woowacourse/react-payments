@@ -3,7 +3,7 @@ import Mastercard from "../../../public/Mastercard.svg";
 import Visa from "../../../public/Visa.svg";
 import Diners from "../../../public/Diners.svg";
 import Amex from "../../../public/Amex.svg";
-import Union from "../../../public/Unionpay.svg";
+import Union from "../../../public/UnionPay.svg";
 
 interface Props {
   cardNumbers: { first: string; second: string; third: string; fourth: string };
