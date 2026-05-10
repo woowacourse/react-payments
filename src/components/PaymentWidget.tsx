@@ -5,6 +5,7 @@ import CardNumber from "./cardInfo/cardNumber/CardNumber";
 import ExpireDate from "./cardInfo/expireDate/ExpireDate";
 import PaymentProvider from "../context/PaymentProvider";
 import CardBrand from "./cardInfo/cardBrand/CardBrand";
+import Password from "./cardInfo/password/Password";
 
 export default function PaymentWidget() {
   return (
@@ -12,10 +13,11 @@ export default function PaymentWidget() {
       <CardPaymentWidgetWrapper>
         <CardPreview />
 
+        <Password />
+        <Cvc />
+        <ExpireDate />
         <CardBrand />
         <CardNumber />
-        <ExpireDate />
-        <Cvc />
       </CardPaymentWidgetWrapper>
     </PaymentProvider>
   );

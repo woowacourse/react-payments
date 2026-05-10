@@ -2,6 +2,7 @@ import { CardBrandProvider } from "./cardBrand/CardBrandProvider";
 import { CardNumberProvider } from "./cardNumber/CardNumberProvider";
 import { CvcProvider } from "./cvc/CvcProvider";
 import { ExpireDateProvider } from "./expireDate/ExpireDateProvider";
+import { PasswordProvider } from "./password/PasswordProvider";
 
 export default function PaymentProvider({
   children,
@@ -12,7 +13,9 @@ export default function PaymentProvider({
     <CardNumberProvider>
       <ExpireDateProvider>
         <CvcProvider>
-          <CardBrandProvider>{children}</CardBrandProvider>
+          <CardBrandProvider>
+            <PasswordProvider>{children}</PasswordProvider>
+          </CardBrandProvider>
         </CvcProvider>
       </ExpireDateProvider>
     </CardNumberProvider>
