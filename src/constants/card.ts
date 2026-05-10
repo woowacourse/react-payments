@@ -1,4 +1,4 @@
-const CARD_COMPANY_SELECT_FIELD = [
+const COMPANY_SELECT_FIELD = [
   { value: "BC", label: "BC카드" },
   { value: "sinhan", label: "신한카드" },
   { value: "kakaobank", label: "카카오뱅크" },
@@ -9,4 +9,17 @@ const CARD_COMPANY_SELECT_FIELD = [
   { value: "kookmin", label: "국민카드" },
 ] as const;
 
-export default CARD_COMPANY_SELECT_FIELD;
+const NUMBER_LENGTH_BY_BRAND = {
+  Visa: 16,
+  MasterCard: 16,
+  UnionPay: 16,
+  AMEX: 15,
+  Diners: 14,
+} as const;
+
+const CARD = {
+  COMPANY_SELECT_FIELD,
+  NUMBER_LENGTH_BY_BRAND,
+};
+
+export default CARD;
