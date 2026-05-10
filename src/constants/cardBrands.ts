@@ -4,15 +4,18 @@ export type PrefixRange = {
   max: number;
 };
 
+export const DEFAULT_CARD_NUMBER_FORMAT = [4, 4, 4, 4] as const;
+export const DEFAULT_CARD_NUMBER_TOTAL_LENGTH = 16;
+
 export const CARD_BRANDS = {
   Visa: {
-    format: [4, 4, 4, 4],
-    totalLength: 16,
+    format: DEFAULT_CARD_NUMBER_FORMAT,
+    totalLength: DEFAULT_CARD_NUMBER_TOTAL_LENGTH,
     prefixes: ["4"],
   },
   MasterCard: {
-    format: [4, 4, 4, 4],
-    totalLength: 16,
+    format: DEFAULT_CARD_NUMBER_FORMAT,
+    totalLength: DEFAULT_CARD_NUMBER_TOTAL_LENGTH,
     prefixRanges: [{ length: 2, min: 51, max: 55 }],
   },
   AMEX: {
@@ -26,8 +29,8 @@ export const CARD_BRANDS = {
     prefixes: ["36"],
   },
   UnionPay: {
-    format: [4, 4, 4, 4],
-    totalLength: 16,
+    format: DEFAULT_CARD_NUMBER_FORMAT,
+    totalLength: DEFAULT_CARD_NUMBER_TOTAL_LENGTH,
     prefixRanges: [
       { length: 6, min: 622126, max: 622925 },
       { length: 3, min: 624, max: 626 },

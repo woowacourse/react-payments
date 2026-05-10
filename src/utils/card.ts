@@ -1,5 +1,6 @@
 import {
   CARD_BRANDS,
+  DEFAULT_CARD_NUMBER_FORMAT,
   type CardBrand,
   type PrefixRange,
 } from "@/constants/cardBrands";
@@ -59,7 +60,7 @@ const checkPrefixRangeMatches = (
 };
 
 export const getCardNumberFormat = (cardBrand: CardBrand | null) => {
-  return cardBrand ? CARD_BRANDS[cardBrand].format : [4, 4, 4, 4];
+  return cardBrand ? CARD_BRANDS[cardBrand].format : DEFAULT_CARD_NUMBER_FORMAT;
 };
 
 export const isFormatChanged = (

@@ -50,14 +50,17 @@ const CardValidityPeriodInputField = ({
       month: input.slice(0, MONTH_MAX_LENGTH),
     });
 
-    if (input.length === MONTH_MAX_LENGTH && !validateMonthRange(+input)) {
+    if (
+      !checkLengthMatches(input, MONTH_MAX_LENGTH) &&
+      !validateMonthRange(+input)
+    ) {
       setStatus((prev) => ({ ...prev, month: "INVALID_MONTH_RANGE" }));
       return;
     }
 
     setStatus((prev) => ({ ...prev, month: "DEFAULT" }));
 
-    if (input.length === MONTH_MAX_LENGTH) {
+    if (checkLengthMatches(input, MONTH_MAX_LENGTH)) {
       focusNextInput(0);
     }
   };

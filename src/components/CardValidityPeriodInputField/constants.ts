@@ -9,6 +9,7 @@ export const HELPER_MESSAGE = {
   EMPTY_YEAR: "만료년을 입력해 주세요.",
   INVALID_MONTH_LENGTH: `만료월을 ${MONTH_MAX_LENGTH}자리 숫자로 입력해 주세요.`,
   INVALID_YEAR_LENGTH: `만료년을 ${YEAR_MAX_LENGTH}자리 숫자로 입력해 주세요.`,
+  EXPIRED_VALIDITY_PERIOD: "만료된 유효기간입니다.",
 } as const;
 
 export type InputStatus = keyof typeof HELPER_MESSAGE;

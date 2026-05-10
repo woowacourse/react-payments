@@ -14,6 +14,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import type { AddCardCompletePageState } from "./AddCardCompletePage";
+import { validateCardForm } from "@/utils/validator";
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
@@ -24,6 +25,14 @@ const AddNewCardPage = () => {
   const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
   const [CVC, setCVC] = useState("");
   const [password, setPassword] = useState("");
+
+  const isFormValid = validateCardForm(
+    cardNumber,
+    cardCompany,
+    validityPeriod,
+    CVC,
+    password,
+  );
 
   const navigate = useNavigate();
 
@@ -62,9 +71,11 @@ const AddNewCardPage = () => {
         />
         <CardCVCInputField CVC={CVC} onChange={setCVC} />
         <CardPasswordInputField password={password} onChange={setPassword} />
-        <Button type="submit" fixedBottom>
-          확인
-        </Button>
+        {isFormValid && (
+          <Button type="submit" fixedBottom>
+            확인
+          </Button>
+        )}
       </CardInfoForm>
     </PageWrapper>
   );
