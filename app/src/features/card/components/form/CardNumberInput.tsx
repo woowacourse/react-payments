@@ -76,7 +76,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
       Object.values(newCardNumber),
       CARD_INPUT.EACH_NUMBER_LENGTH,
     );
-    runEachInputValidation([() => Validator.isNumber(value)], id);
+    if (!runEachInputValidation([() => Validator.isNumber(value)], id)) return;
     runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
     changeFocus(e, index);
