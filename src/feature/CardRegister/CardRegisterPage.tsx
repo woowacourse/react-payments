@@ -2,50 +2,49 @@ import { useState } from "react";
 import CardPreviewSection from "./components/CardPreviewSection/CardPreviewSection";
 import InfoInputSection from "./components/InfoInputSection/InfoInputSection";
 import styled from "styled-components";
-import type {
-  CardInfoType,
-  CardNumberChunkType,
-} from "../../common/types/CardInfoType";
+import type { CardInfoType } from "../../common/types/CardInfoType";
 import type { CardCompanyType } from "../../common/types/CardCompany";
 
 const CardRegisterPage = () => {
-  const [cardNumbers, setCardNumbers] = useState<CardNumberChunkType>([
-    "",
-    "",
-    "",
-    "",
-  ]);
-  const [expiryMonth, setExpiryMonth] = useState("");
-  const [expiryYear, setExpiryYear] = useState("");
-  const [selectedCardCompany, setSelectedCardCompany] =
-    useState<CardCompanyType | null>(null);
+  const [cardInformation, setCardInformation] = useState<CardInfoType>({
+    cardNumbers: ["", "", "", ""],
+    expiryMonth: "",
+    expiryYear: "",
+    selectedCardCompany: null,
+  });
 
-  const handleCardCompanyClick = (cardCompany: CardCompanyType) => {
-    if (selectedCardCompany !== cardCompany) {
-      setSelectedCardCompany(cardCompany);
-    }
+  const updateCardInformation = (patch: Partial<CardInfoType>) => {
+    setCardInformation((previousCardInformation) => ({
+      ...previousCardInformation,
+      ...patch,
+    }));
   };
 
-  const cardInfo: CardInfoType = {
-    cardNumbers,
-    expiryMonth,
-    expiryYear,
-    selectedCardCompany,
+  const handleCardNumbersChange = (cardNumbers: CardInfoType["cardNumbers"]) => {
+    updateCardInformation({ cardNumbers });
   };
 
-  const cardInfoHandlers = {
-    setCardNumbers,
-    setExpiryMonth,
-    setExpiryYear,
+  const handleExpiryMonthChange = (expiryMonth: string) => {
+    updateCardInformation({ expiryMonth });
+  };
+
+  const handleExpiryYearChange = (expiryYear: string) => {
+    updateCardInformation({ expiryYear });
+  };
+
+  const handleCardCompanySelect = (selectedCardCompany: CardCompanyType) => {
+    updateCardInformation({ selectedCardCompany });
   };
 
   return (
     <CardRegisterPageLayout>
-      <CardPreviewSection cardInfo={cardInfo} />
+      <CardPreviewSection cardInfo={cardInformation} />
       <InfoInputSection
-        cardInfo={cardInfo}
-        cardInfoHandlers={cardInfoHandlers}
-        handleCardCompanyClick={handleCardCompanyClick}
+        cardInfo={cardInformation}
+        onCardNumbersChange={handleCardNumbersChange}
+        onExpiryMonthChange={handleExpiryMonthChange}
+        onExpiryYearChange={handleExpiryYearChange}
+        onCardCompanySelect={handleCardCompanySelect}
       />
     </CardRegisterPageLayout>
   );

@@ -8,9 +8,3 @@ export type CardInfoType = {
   expiryYear: string;
   selectedCardCompany: CardCompanyType | null;
 };
-
-export type CardInfoHandlersType = {
-  setCardNumbers: (value: CardNumberChunkType) => void;
-  setExpiryMonth: (value: string) => void;
-  setExpiryYear: (value: string) => void;
-};

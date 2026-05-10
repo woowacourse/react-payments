@@ -11,8 +11,8 @@ import PasswordField from "./PasswordField/PasswordField";
 import Button from "../../../../common/components/Button/Button";
 
 import type {
-  CardInfoHandlersType,
   CardInfoType,
+  CardNumberChunkType,
 } from "../../../../common/types/CardInfoType";
 import type { CardCompanyType } from "../../../../common/types/CardCompany";
 import {
@@ -30,16 +30,23 @@ import { CARD_FORM } from "../../constants";
 
 const InfoInputSection = ({
   cardInfo,
-  cardInfoHandlers,
-  handleCardCompanyClick,
+  onCardNumbersChange,
+  onExpiryMonthChange,
+  onExpiryYearChange,
+  onCardCompanySelect,
 }: {
   cardInfo: CardInfoType;
-  cardInfoHandlers: CardInfoHandlersType;
-  handleCardCompanyClick: (cardCompany: CardCompanyType) => void;
+  onCardNumbersChange: (cardNumbers: CardNumberChunkType) => void;
+  onExpiryMonthChange: (expiryMonth: string) => void;
+  onExpiryYearChange: (expiryYear: string) => void;
+  onCardCompanySelect: (cardCompany: CardCompanyType) => void;
 }) => {
   const navigate = useNavigate();
-  const [cvcNumber, setCvcNumber] = useState("");
-  const [password, setPassword] = useState("");
+  const [cardInputSectionInformation, setCardInputSectionInformation] =
+    useState({
+      cvcNumber: "",
+      password: "",
+    });
 
   // 한 번 렌더링 된 필드는 이전 단계에서 에러가 나도 사라지지 않게 하므로 state로!
   const [unlockedStep, setUnlockedStep] = useState(1);
@@ -47,7 +54,6 @@ const InfoInputSection = ({
 
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
     cardInfo;
-  const { setCardNumbers, setExpiryMonth, setExpiryYear } = cardInfoHandlers;
 
   const cardBrand = getCardBrandName(cardNumbers);
 
@@ -58,7 +64,7 @@ const InfoInputSection = ({
   const handleCardNumbersChange = (
     nextCardNumbers: CardInfoType["cardNumbers"],
   ) => {
-    setCardNumbers(nextCardNumbers);
+    onCardNumbersChange(nextCardNumbers);
     const nextCardBrand = getCardBrandName(nextCardNumbers);
 
     if (isCardNumberFieldValid(nextCardNumbers.join(""), nextCardBrand)) {
@@ -66,34 +72,40 @@ const InfoInputSection = ({
     }
   };
 
-  const handleCardCompanySelect = (cardCompany: CardCompanyType) => {
-    handleCardCompanyClick(cardCompany);
+  const handleCardCompanyChange = (cardCompany: CardCompanyType) => {
+    onCardCompanySelect(cardCompany);
     showAtLeastStep(CARD_FORM.RENDER_STEP.EXPIRY);
   };
 
   const handleExpiryMonthChange = (nextExpiryMonth: string) => {
-    setExpiryMonth(nextExpiryMonth);
+    onExpiryMonthChange(nextExpiryMonth);
     if (isExpiryFieldValid(nextExpiryMonth, expiryYear)) {
       showAtLeastStep(CARD_FORM.RENDER_STEP.CVC);
     }
   };
 
   const handleExpiryYearChange = (nextExpiryYear: string) => {
-    setExpiryYear(nextExpiryYear);
+    onExpiryYearChange(nextExpiryYear);
     if (isExpiryFieldValid(expiryMonth, nextExpiryYear)) {
       showAtLeastStep(CARD_FORM.RENDER_STEP.CVC);
     }
   };
 
   const handleCvcNumberChange = (nextCvcNumber: string) => {
-    setCvcNumber(nextCvcNumber);
+    setCardInputSectionInformation((previousInformation) => ({
+      ...previousInformation,
+      cvcNumber: nextCvcNumber,
+    }));
     if (isCvcFieldValid(nextCvcNumber)) {
       showAtLeastStep(CARD_FORM.RENDER_STEP.PASSWORD);
     }
   };
 
   const handlePasswordChange = (nextPassword: string) => {
-    setPassword(nextPassword);
+    setCardInputSectionInformation((previousInformation) => ({
+      ...previousInformation,
+      password: nextPassword,
+    }));
     if (isPasswordFieldValid(nextPassword)) {
       showAtLeastStep(CARD_FORM.RENDER_STEP.COMPLETE);
     }
@@ -104,8 +116,8 @@ const InfoInputSection = ({
     cardNumber: isCardNumberFieldValid(joinedCardNumber, cardBrand),
     cardCompany: isCardCompanyFieldValid(selectedCardCompany),
     expiry: isExpiryFieldValid(expiryMonth, expiryYear),
-    cvc: isCvcFieldValid(cvcNumber),
-    password: isPasswordFieldValid(password),
+    cvc: isCvcFieldValid(cardInputSectionInformation.cvcNumber),
+    password: isPasswordFieldValid(cardInputSectionInformation.password),
   };
   const isFormInputComplete = Object.values(fieldValidity).every(Boolean);
 
@@ -119,7 +131,9 @@ const InfoInputSection = ({
   const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isFormInputComplete) {
+      return;
     }
+
     navigate("/register-complete", {
       state: {
         firstCardNumberChunk: cardNumbers[0],
@@ -136,7 +150,7 @@ const InfoInputSection = ({
           description="앞의 2자리를 입력해주세요"
         >
           <PasswordField
-            password={password}
+            password={cardInputSectionInformation.password}
             onPasswordChange={handlePasswordChange}
           />
         </InputContainer>
@@ -145,7 +159,7 @@ const InfoInputSection = ({
       {unlockedStep >= CARD_FORM.RENDER_STEP.CVC && (
         <InputContainer title="CVC 번호를 입력해 주세요">
           <CvcField
-            cvcNumber={cvcNumber}
+            cvcNumber={cardInputSectionInformation.cvcNumber}
             onCvcNumberChange={handleCvcNumberChange}
           />
         </InputContainer>
@@ -170,7 +184,7 @@ const InfoInputSection = ({
           title="카드사를 선택해 주세요"
           description="현재 국내 카드사만 가능합니다."
         >
-          <CardCompanySelectField onSelect={handleCardCompanySelect} />
+          <CardCompanySelectField onSelect={handleCardCompanyChange} />
         </InputContainer>
       )}
 
