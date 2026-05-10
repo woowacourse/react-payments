@@ -1,10 +1,10 @@
 import './App.css';
-import AddCardPage from './pages/AddCardPage';
+import AddCardCompletePage from './pages/AddCardCompletePage.tsx';
 
 function App() {
   return (
     <>
-      <AddCardPage />
+      <AddCardCompletePage />
     </>
   );
 }
