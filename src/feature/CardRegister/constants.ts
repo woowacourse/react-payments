@@ -72,5 +72,6 @@ export const CARD_FORM = {
     EXPIRY: 3,
     CVC: 4,
     PASSWORD: 5,
+    COMPLETE: 6,
   },
 };

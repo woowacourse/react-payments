@@ -62,57 +62,64 @@ const InfoInputSection = ({
     const nextCardBrand = getCardBrandName(nextCardNumbers);
 
     if (isCardNumberFieldValid(nextCardNumbers.join(""), nextCardBrand)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.CARD_NUMBER + 1);
+      showAtLeastStep(CARD_FORM.RENDER_STEP.CARD_COMPANY);
     }
   };
 
   const handleCardCompanySelect = (cardCompany: CardCompanyType) => {
     handleCardCompanyClick(cardCompany);
-    showAtLeastStep(CARD_FORM.RENDER_STEP.CARD_COMPANY + 1);
+    showAtLeastStep(CARD_FORM.RENDER_STEP.EXPIRY);
   };
 
   const handleExpiryMonthChange = (nextExpiryMonth: string) => {
     setExpiryMonth(nextExpiryMonth);
     if (isExpiryFieldValid(nextExpiryMonth, expiryYear)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.EXPIRY + 1);
+      showAtLeastStep(CARD_FORM.RENDER_STEP.CVC);
     }
   };
 
   const handleExpiryYearChange = (nextExpiryYear: string) => {
     setExpiryYear(nextExpiryYear);
     if (isExpiryFieldValid(expiryMonth, nextExpiryYear)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.EXPIRY + 1);
+      showAtLeastStep(CARD_FORM.RENDER_STEP.CVC);
     }
   };
 
   const handleCvcNumberChange = (nextCvcNumber: string) => {
     setCvcNumber(nextCvcNumber);
     if (isCvcFieldValid(nextCvcNumber)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.CVC + 1);
+      showAtLeastStep(CARD_FORM.RENDER_STEP.PASSWORD);
     }
   };
 
   const handlePasswordChange = (nextPassword: string) => {
     setPassword(nextPassword);
     if (isPasswordFieldValid(nextPassword)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.PASSWORD + 1);
+      showAtLeastStep(CARD_FORM.RENDER_STEP.COMPLETE);
     }
   };
 
-  const isFormInputComplete =
-    isCardNumberFieldValid(cardNumbers.join(""), cardBrand) &&
-    isCardCompanyFieldValid(selectedCardCompany) &&
-    isExpiryFieldValid(expiryMonth, expiryYear) &&
-    isCvcFieldValid(cvcNumber) &&
-    isPasswordFieldValid(password);
+  const joinedCardNumber = cardNumbers.join("");
+  const fieldValidity = {
+    cardNumber: isCardNumberFieldValid(joinedCardNumber, cardBrand),
+    cardCompany: isCardCompanyFieldValid(selectedCardCompany),
+    expiry: isExpiryFieldValid(expiryMonth, expiryYear),
+    cvc: isCvcFieldValid(cvcNumber),
+    password: isPasswordFieldValid(password),
+  };
+  const isFormInputComplete = Object.values(fieldValidity).every(Boolean);
 
   useEffect(() => {
-    if (!isFormInputComplete) return;
+    if (!isFormInputComplete) {
+      return;
+    }
     confirmButtonRef.current?.focus();
   }, [isFormInputComplete]);
 
   const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!isFormInputComplete) {
+    }
     navigate("/register-complete", {
       state: {
         firstCardNumberChunk: cardNumbers[0],
@@ -181,13 +188,7 @@ const InfoInputSection = ({
       )}
 
       {isFormInputComplete && (
-        <ConfirmButton
-          ref={(node) => {
-            confirmButtonRef.current = node;
-          }}
-          size="full"
-          type="submit"
-        >
+        <ConfirmButton ref={confirmButtonRef} size="full" type="submit">
           확인
         </ConfirmButton>
       )}
