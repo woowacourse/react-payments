@@ -9,21 +9,9 @@ import {
 
 const ALL_CARD_NETWORK_BRAND = [Visa, MasterCard, UnionPay, Amex, Diners];
 
-export class CardNetwork {
-  #brand: CardNetworkBrand;
-
-  constructor(cardNumber: string) {
-    this.#brand = undefined;
-    for (const networkBrand of ALL_CARD_NETWORK_BRAND) {
-      const thisBrand = networkBrand.check(cardNumber);
-      if (thisBrand !== undefined) {
-        this.#brand = networkBrand;
-        break;
-      }
-    }
+export function detectCardNetwork(cardNumber: string): CardNetworkBrand | undefined {
+  for (const networkBrand of ALL_CARD_NETWORK_BRAND) {
+    if (networkBrand.check(cardNumber) !== undefined) return networkBrand;
   }
-
-  get brand() {
-    return this.#brand;
-  }
+  return undefined;
 }

@@ -6,12 +6,12 @@ import AmexCard from "../../assets/amex-logo.svg";
 import DinersCard from "../../assets/diners-club-logo.png";
 import { CARD_INPUT } from "../../Constants";
 import { joinCardNumber } from "../../Utils";
-import { CardNetwork } from "../../CardNetwork";
+import { detectCardNetwork } from "../../CardNetwork";
 
 export function CardNetworkBrand({ cardNumber }) {
-  const networkBrandName = new CardNetwork(
+  const networkBrandName = detectCardNetwork(
     joinCardNumber(Object.values(cardNumber), CARD_INPUT.EACH_NUMBER_LENGTH),
-  ).brand?.title;
+  )?.title;
 
   const selectBrandImage = (brand: string): string | null => {
     if (brand === "visa") return VisaCard;

@@ -1,4 +1,4 @@
-import { CardNetwork } from "../CardNetwork";
+import { detectCardNetwork } from "../CardNetwork";
 
 describe("NetworkBrand Test", () => {
   test.each([
@@ -8,8 +8,7 @@ describe("NetworkBrand Test", () => {
   ])(
     "전달된 카드번호를 통해 네트워크를 지정한다.",
     (cardNumber, expectedNetworkBrand) => {
-      const cardNetwork = new CardNetwork(cardNumber);
-      expect(cardNetwork.brand.title).toBe(expectedNetworkBrand);
+      expect(detectCardNetwork(cardNumber)?.title).toBe(expectedNetworkBrand);
     },
   );
 });

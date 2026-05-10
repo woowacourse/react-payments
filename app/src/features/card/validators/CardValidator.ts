@@ -1,5 +1,5 @@
 import { CARD_INPUT } from "../Constants";
-import { CardNetwork } from "../CardNetwork";
+import { detectCardNetwork } from "../CardNetwork";
 
 export const Validator = {
   isNumber(value: string) {
@@ -9,8 +9,8 @@ export const Validator = {
   },
 
   isValidNetworkBrand(value: string) {
-    const networkBrand = new CardNetwork(value);
-    if (value.trim() !== "" && networkBrand.brand === undefined) {
+    const networkBrand = detectCardNetwork(value);
+    if (value.trim() !== "" && networkBrand === undefined) {
       throw new Error("존재하지 않는 네트워크 브랜드 입니다.");
     }
   },

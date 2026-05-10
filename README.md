@@ -92,7 +92,7 @@
 #### 구조
 
 - [x] Utils의 이름이 불명확함. 이름만으로는 기능유추가 어려움. Card내의 Utils로 이동시키고 더 직접적인 네이밍으로 전환
-- [ ] CardNetwork를 클래스가 아닌 객체로 전환
+- [x] CardNetwork를 클래스가 아닌 객체로 전환
 - [x] ProgressManager와 CardForm에 결합이 존재
 - [ ] Validator를 변경할 Error상태를 반환하는 형태로 전환할지 고민
 - [x] ProgressManager의 Complete검증 메서드를 분리

@@ -1,10 +1,10 @@
-import { CardNetwork } from "./CardNetwork";
+import { detectCardNetwork } from "./CardNetwork";
 import { CARD_INPUT } from "./Constants";
 
 export const CardInputChecker = {
   isCardNumberComplete(cardNumber: string): boolean {
-    const networkBrand = new CardNetwork(cardNumber);
-    return networkBrand.brand?.length === cardNumber.length;
+    const networkBrand = detectCardNetwork(cardNumber);
+    return networkBrand?.length === cardNumber.length;
   },
 
   isCardBrandComplete(value: string): boolean {
