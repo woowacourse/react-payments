@@ -8,6 +8,7 @@ import { Validator } from "../../validators/CardValidator";
 import { CardInputChecker } from "../../Checker";
 import { sanitizeErrors, joinCardNumber, runValidation } from "../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
+import type { CardNumber, SetState } from "../../types";
 
 const CARD_NUMBER_FIELDS = [
   "firstDigits",
@@ -16,7 +17,12 @@ const CARD_NUMBER_FIELDS = [
   "fourthDigits",
 ] as const;
 
-export function CardNumberInput({ cardNumber, setCardNumber }) {
+interface CardNumberInputProps {
+  cardNumber: CardNumber;
+  setCardNumber: SetState<CardNumber>;
+}
+
+export function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
   const [isError, setError] = useState({
     firstDigits: { state: false, message: "" },
     secondDigits: { state: false, message: "" },
@@ -131,7 +137,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
       ></NetworkBrandErrorMessage>
       <ErrorMessage
         messages={sanitizeErrors(
-          Object.keys(isError).map((key) => isError[key]["message"]),
+          Object.values(isError).map((err) => err.message),
         )}
       />
     </>

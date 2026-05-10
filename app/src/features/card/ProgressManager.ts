@@ -2,7 +2,7 @@ import { CardInputChecker } from "./Checker";
 
 export function calculateCreateCardCurrentProgress(
   cardNumber: string,
-  cardBrand: string,
+  cardBrand: string | null,
   cardExpiryDate: string,
   cardCVC: string,
   cardPassword: string,

@@ -6,8 +6,14 @@ import { CARD_INPUT } from "../../Constants";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import useFocusChain from "../../hooks/useFocusChain";
+import type { CardExpiryDate, SetState } from "../../types";
 
-export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
+interface CardExpiryDateInputProps {
+  cardExpiryDate: CardExpiryDate;
+  setCardExpiryDate: SetState<CardExpiryDate>;
+}
+
+export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }: CardExpiryDateInputProps) {
   const [isError, setError] = useState({
     expiryMonth: {
       state: false,
@@ -94,7 +100,7 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
       </CardFieldset>
       <ErrorMessage
         messages={sanitizeErrors(
-          Object.keys(isError).map((key) => isError[key]["message"]),
+          Object.values(isError).map((err) => err.message),
         )}
       />
     </>

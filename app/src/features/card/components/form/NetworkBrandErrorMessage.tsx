@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 
-export default function NetworkBrandErrorMessage({ message }) {
+export default function NetworkBrandErrorMessage({ message }: { message: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (!message) return null;

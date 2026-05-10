@@ -23,21 +23,21 @@ const defaultArgs = {
     thirdDigits: "",
     fourthDigits: "",
   },
-  setCardNumber: null,
+  setCardNumber: () => {},
   cardExpiryDate: {
     expiryMonth: "",
     expiryYear: "",
   },
-  setCardExpiryDate: null,
-  cardBrand: "",
-  setCardBrand: null,
+  setCardExpiryDate: () => {},
+  cardBrand: null as string | null,
+  setCardBrand: () => {},
   cardCVC: "",
-  setCardCVC: null,
+  setCardCVC: () => {},
   cardPassword: "",
-  setCardPassword: null,
+  setCardPassword: () => {},
 };
 
-const renderWithState = (args: typeof defaultArgs) => {
+const renderWithState: NonNullable<Story["render"]> = (args) => {
   const [cardNumber, setCardNumber] = useState(args.cardNumber);
   const [cardExpiryDate, setCardExpiryDate] = useState(args.cardExpiryDate);
   const [cardBrand, setCardBrand] = useState(args.cardBrand);

@@ -2,8 +2,15 @@ import styled from "@emotion/styled";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
+import type { CardNumber as CardNumberType, CardExpiryDate as CardExpiryDateType } from "../../types";
 
-export function CardPreview({ cardNumber, cardExpiryDate, cardBrand }) {
+interface CardPreviewProps {
+  cardNumber: CardNumberType;
+  cardExpiryDate: CardExpiryDateType;
+  cardBrand: string | null;
+}
+
+export function CardPreview({ cardNumber, cardExpiryDate, cardBrand }: CardPreviewProps) {
   const getCardBgHex = (cardBrand: string) => {
     if (cardBrand === "bc") return "#F04651";
     if (cardBrand === "sinhan") return "#0046FF";
@@ -16,7 +23,7 @@ export function CardPreview({ cardNumber, cardExpiryDate, cardBrand }) {
     return "#333333";
   };
   return (
-    <CardContainer cardBg={getCardBgHex(cardBrand)}>
+    <CardContainer cardBg={getCardBgHex(cardBrand ?? "")}>
       <div className="card-meta">
         <div className="ic-chip"></div>
         <CardNetworkBrand cardNumber={cardNumber} />

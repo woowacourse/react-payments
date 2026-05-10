@@ -4,7 +4,10 @@ import styled from "@emotion/styled";
 import { RadiusButton } from "../style/Button";
 import CreateCompleteCheck from "../../../app/assets/check.svg";
 export default function CardCreateComplete() {
-  const { firstDigitsCardNumber, cardBrand } = useLocation().state ?? {};
+  const { firstDigitsCardNumber, cardBrand } = (useLocation().state ?? {}) as {
+    firstDigitsCardNumber: string;
+    cardBrand: keyof typeof CARD_BRAND;
+  };
   return (
     <RootContainer>
       <CardCreateCompleteContent>

@@ -8,6 +8,20 @@ import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
 import { useNavigate } from "react-router";
 import { Button } from "../../style/Button";
 import CardBrandSelect from "./CardBrandSelect";
+import type { CardNumber, CardExpiryDate, SetState } from "../../types";
+
+interface CardFormProps {
+  cardNumber: CardNumber;
+  setCardNumber: SetState<CardNumber>;
+  cardExpiryDate: CardExpiryDate;
+  setCardExpiryDate: SetState<CardExpiryDate>;
+  cardBrand: string | null;
+  setCardBrand: (value: string) => void;
+  cardCVC: string;
+  setCardCVC: (value: string) => void;
+  cardPassword: string;
+  setCardPassword: (value: string) => void;
+}
 
 export function CardForm({
   cardNumber,
@@ -20,7 +34,7 @@ export function CardForm({
   setCardCVC,
   cardPassword,
   setCardPassword,
-}) {
+}: CardFormProps) {
   const {
     cardNumberIsComplete,
     cardBrandIsComplete,

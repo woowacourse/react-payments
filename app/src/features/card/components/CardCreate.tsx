@@ -16,7 +16,7 @@ export default function CardCreate() {
     expiryYear: "",
   });
 
-  const [cardBrand, setCardBrand] = useState(null);
+  const [cardBrand, setCardBrand] = useState<string | null>(null);
 
   const [cardCVC, setCardCVC] = useState("");
 

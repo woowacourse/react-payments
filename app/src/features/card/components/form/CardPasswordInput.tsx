@@ -9,7 +9,12 @@ import {
   CardInputFieldContainer,
 } from "../../style/CardStyles";
 
-export default function CardPasswordInput({ cardPassword, setCardPassword }) {
+interface CardPasswordInputProps {
+  cardPassword: string;
+  setCardPassword: (value: string) => void;
+}
+
+export default function CardPasswordInput({ cardPassword, setCardPassword }: CardPasswordInputProps) {
   const [isError, setError] = useState({
     state: false,
     message: "",

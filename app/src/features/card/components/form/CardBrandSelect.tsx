@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 
-export default function CardBrandSelect({ cardBrand, setCardBrand }) {
+interface CardBrandSelectProps {
+  cardBrand: string | null;
+  setCardBrand: (value: string) => void;
+}
+
+export default function CardBrandSelect({ cardBrand, setCardBrand }: CardBrandSelectProps) {
   const changeCardBrand = (value: string) => {
     setCardBrand(value);
   };

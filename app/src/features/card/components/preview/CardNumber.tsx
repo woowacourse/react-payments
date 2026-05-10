@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import type { CardNumber as CardNumberType } from "../../types";
 
-export function CardNumber({ cardNumber }) {
+export function CardNumber({ cardNumber }: { cardNumber: CardNumberType }) {
   return (
     <CardNumberContainer id="preview-card-number">
       <span>{cardNumber.firstDigits}</span>

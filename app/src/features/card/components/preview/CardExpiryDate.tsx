@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
+import type { CardExpiryDate as CardExpiryDateType } from "../../types";
 
-export function CardExpiryDate({ cardExpiryDate }) {
+export function CardExpiryDate({
+  cardExpiryDate,
+}: {
+  cardExpiryDate: CardExpiryDateType;
+}) {
   return (
     <CardExpiryDateContainer>
       <span id="preview-card-expiry-date-month">

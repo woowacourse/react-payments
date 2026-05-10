@@ -7,18 +7,20 @@ import DinersCard from "../../assets/diners-club-logo.png";
 import { CARD_INPUT } from "../../Constants";
 import { joinCardNumber } from "../../Utils";
 import { detectCardNetwork } from "../../CardNetwork";
+import type { CardNumber } from "../../types";
 
-export function CardNetworkBrand({ cardNumber }) {
+export function CardNetworkBrand({ cardNumber }: { cardNumber: CardNumber }) {
   const networkBrandName = detectCardNetwork(
     joinCardNumber(Object.values(cardNumber), CARD_INPUT.EACH_NUMBER_LENGTH),
   )?.title;
 
-  const selectBrandImage = (brand: string): string | null => {
+  const selectBrandImage = (brand: string): string | undefined => {
     if (brand === "visa") return VisaCard;
     if (brand === "master") return MasterCard;
     if (brand === "union") return UnionCard;
     if (brand === "amex") return AmexCard;
     if (brand === "diners") return DinersCard;
+    return undefined;
   };
 
   return (

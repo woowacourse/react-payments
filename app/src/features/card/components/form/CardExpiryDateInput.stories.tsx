@@ -21,10 +21,10 @@ const defaultArgs = {
     expiryMonth: "",
     expiryYear: "",
   },
-  setCardExpiryDate: null,
+  setCardExpiryDate: () => {},
 };
 
-const renderWithState = (args: typeof defaultArgs) => {
+const renderWithState: NonNullable<Story["render"]> = (args) => {
   const [cardExpiryDate, setCardExpiryDate] = useState(args.cardExpiryDate);
   return (
     <CardExpiryDateInput

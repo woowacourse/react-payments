@@ -82,7 +82,7 @@ export const AmexBrandDetection: Story = {
     const firstDigitsInput =
       canvasElement.querySelector<HTMLInputElement>("#first-digits")!;
     await userEvent.type(firstDigitsInput, "34");
-    let brandLogo = canvas.getByAltText("amex-network-brand-logo");
+    let brandLogo: HTMLElement | null = canvas.getByAltText("amex-network-brand-logo");
     await expect(brandLogo).toBeInTheDocument();
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(
@@ -103,9 +103,9 @@ export const DinersBrandDetection: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstDigitsInput =
-      canvasElement.querySelector<HTMLInputElement>("#first-digits");
+      canvasElement.querySelector<HTMLInputElement>("#first-digits")!;
     await userEvent.type(firstDigitsInput, "36");
-    let brandLogo = canvas.getByAltText("diners-network-brand-logo");
+    let brandLogo: HTMLElement | null = canvas.getByAltText("diners-network-brand-logo");
     await expect(brandLogo).toBeInTheDocument();
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(
@@ -124,7 +124,7 @@ export const DinersBrandDetection: Story = {
 export const CardNumberIsDynamicDisplay: Story = {
   decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
-    const firstDigitsInput = canvasElement.querySelector("#first-digits");
+    const firstDigitsInput = canvasElement.querySelector("#first-digits")!;
     await userEvent.type(firstDigitsInput, "5");
     let previewNumbers = canvasElement.querySelectorAll<HTMLBaseElement>(
       "#preview-card-number span",
@@ -141,14 +141,14 @@ export const CardNumberIsDynamicDisplay: Story = {
 export const CardNumberSpecificDisplaySecret: Story = {
   decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
-    const thirdDigitsInput = canvasElement.querySelector("#third-digits");
+    const thirdDigitsInput = canvasElement.querySelector("#third-digits")!;
     await userEvent.type(thirdDigitsInput, "1234");
     let previewNumbers = canvasElement.querySelectorAll<HTMLBaseElement>(
       "#preview-card-number span",
     );
     await expect(previewNumbers[2]).toHaveTextContent("●●●●");
 
-    const fourthDigitsInput = canvasElement.querySelector("#fourth-digits");
+    const fourthDigitsInput = canvasElement.querySelector("#fourth-digits")!;
     await userEvent.type(fourthDigitsInput, "1");
     previewNumbers = canvasElement.querySelectorAll<HTMLBaseElement>(
       "#preview-card-number span",
@@ -171,11 +171,11 @@ export const CardExpiryDateIsDynamicDisplay: Story = {
     await userEvent.type(fourthInput, "36");
 
     const brandSelect =
-      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select")!;
     await userEvent.selectOptions(brandSelect, "bc");
 
     const expiryDateMonth =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month")!;
     await userEvent.type(expiryDateMonth, "1");
     let previewExpiryMonth = canvasElement.querySelector(
       "#preview-card-expiry-date-month",
@@ -188,7 +188,7 @@ export const CardExpiryDateIsDynamicDisplay: Story = {
     await expect(previewExpiryMonth).toHaveTextContent("12");
 
     const expiryDateYear =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year")!;
     await userEvent.type(expiryDateYear, "3");
     let previewExpiryYear = canvasElement.querySelector(
       "#preview-card-expiry-date-year",
@@ -216,11 +216,11 @@ export const CardExpiryDateDivideLineIsDynamicDisplay: Story = {
     await userEvent.type(fourthInput, "36");
 
     const brandSelect =
-      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select")!;
     await userEvent.selectOptions(brandSelect, "bc");
 
     const expiryDateMonth =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month")!;
     await userEvent.type(expiryDateMonth, "12");
     const divideLine = canvasElement.querySelector(
       "#preview-card-expiry-date-divide-line",
@@ -265,7 +265,7 @@ export const CardExpiryDateFieldIsDynamicDisplay: Story = {
     await userEvent.type(fourthInput, "36");
 
     const brandSelect =
-      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select")!;
 
     await userEvent.selectOptions(brandSelect, "bc");
     const expiryDateInput = canvasElement.querySelector("#expiry-month");
@@ -287,13 +287,13 @@ export const CardCVCFieldIsDynamicDisplay: Story = {
     await userEvent.type(fourthInput, "36");
 
     const brandSelect =
-      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select")!;
     await userEvent.selectOptions(brandSelect, "bc");
 
     const expiryMonthInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month")!;
     const expiryYearInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year")!;
     await userEvent.type(expiryMonthInput, "12");
     await userEvent.type(expiryYearInput, "26");
 
@@ -320,18 +320,18 @@ export const CardPasswordFieldIsDynamicDisplay: Story = {
     await userEvent.type(fourthInput, "36");
 
     const brandSelect =
-      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select")!;
     await userEvent.selectOptions(brandSelect, "bc");
 
     const expiryMonthInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month")!;
     const expiryYearInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year")!;
     await userEvent.type(expiryMonthInput, "12");
     await userEvent.type(expiryYearInput, "26");
 
     const cvcInput =
-      canvasElement.querySelector<HTMLInputElement>("#card-cvc-input");
+      canvasElement.querySelector<HTMLInputElement>("#card-cvc-input")!;
     await userEvent.type(cvcInput, "123");
 
     const passwordInput = canvas.getByPlaceholderText("비밀번호");
@@ -357,13 +357,13 @@ export const PreviousFieldsHideWhenCardNumberBecomesIncomplete: Story = {
     await userEvent.type(fourthInput, "36");
 
     const brandSelect =
-      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select")!;
     await userEvent.selectOptions(brandSelect, "bc");
 
     const expiryMonthInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month")!;
     const expiryYearInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year")!;
     await userEvent.type(expiryMonthInput, "12");
     await userEvent.type(expiryYearInput, "26");
 
@@ -394,18 +394,18 @@ export const NavigateToCardCreateDonePage: Story = {
     await userEvent.type(fourthInput, "36");
 
     const brandSelect =
-      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select")!;
     await userEvent.selectOptions(brandSelect, "bc");
 
     const expiryMonthInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month")!;
     const expiryYearInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year")!;
     await userEvent.type(expiryMonthInput, "12");
     await userEvent.type(expiryYearInput, "26");
 
     const cvcInput =
-      canvasElement.querySelector<HTMLInputElement>("#card-cvc-input");
+      canvasElement.querySelector<HTMLInputElement>("#card-cvc-input")!;
     await userEvent.type(cvcInput, "123");
 
     const passwordInput = canvas.getByPlaceholderText("비밀번호");

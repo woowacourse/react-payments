@@ -23,18 +23,10 @@ const defaultArgs = {
     thirdDigits: "",
     fourthDigits: "",
   },
-  setCardNumber: null,
-  progress: {
-    cardNumber: true,
-    cardBrand: false,
-    cardExpiryDate: false,
-    cardCVCNumber: false,
-    cardPassword: false,
-  },
-  setProgress: null,
+  setCardNumber: () => {},
 };
 
-const renderWithState = (args: typeof defaultArgs) => {
+const renderWithState: NonNullable<Story["render"]> = (args) => {
   const [cardNumber, setCardNumber] = useState(args.cardNumber);
   return (
     <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
@@ -178,7 +170,7 @@ export const BlankInputExcludeCheckNetworkBrand: Story = {
   render: renderWithState,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const firstDigitsInput = canvasElement.querySelector("#first-digits");
+    const firstDigitsInput = canvasElement.querySelector("#first-digits")!;
     await userEvent.type(firstDigitsInput, "1");
     await expect(
       canvas.queryByText("존재하지 않는 네트워크 브랜드 입니다."),

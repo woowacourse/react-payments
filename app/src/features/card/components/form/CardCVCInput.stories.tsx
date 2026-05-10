@@ -18,10 +18,10 @@ type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
   cardCVC: "",
-  setCardCVC: null,
+  setCardCVC: () => {},
 };
 
-const renderWithState = (args: typeof defaultArgs) => {
+const renderWithState: NonNullable<Story["render"]> = (args) => {
   const [cardCVC, setCardCVC] = useState(args.cardCVC);
   return <CardCVCInput cardCVC={cardCVC} setCardCVC={setCardCVC} />;
 };
