@@ -9,65 +9,58 @@ export function useExpireDateInput() {
   });
 
   const handleMonthChange = (value: string) => {
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    const sliceValue = onlyNumbers.substring(0, 2);
+    const firstDigit = value.substring(0, 1);
+    const month = Number(sliceValue);
+
     if (!isNumeric(value)) {
       setExpireDateError((prev) => ({
         ...prev,
         month: "숫자를 입력해주세요.",
       }));
-      return;
+    } else if (value === "00") {
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
+      }));
+    } else if (firstDigit !== "0" && (month < 1 || month > 12)) {
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
+      }));
+    } else {
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "",
+      }));
     }
-
-    const firstDigit = value.substring(0, 1);
-
-    if (value !== "") {
-      if (firstDigit === "0") {
-        if (value === "00") {
-          setExpireDateError((prev) => ({
-            ...prev,
-            month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
-          }));
-          return;
-        }
-      }
-      const month = Number(value);
-
-      if (firstDigit !== "0" && (month < 1 || month > 12)) {
-        setExpireDateError((prev) => ({
-          ...prev,
-          month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
-        }));
-        return;
-      }
-    }
-
-    setExpireDateError((prev) => ({
-      ...prev,
-      month: "",
-    }));
 
     setExpireDate((prev) => ({
       ...prev,
-      month: value,
+      month: sliceValue,
     }));
   };
 
   const handleYearChange = (value: string) => {
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    const sliceValue = onlyNumbers.substring(0, 2);
+
     if (!isNumeric(value)) {
       setExpireDateError((prev) => ({
         ...prev,
         year: "숫자를 입력해주세요.",
       }));
-      return;
+    } else {
+      setExpireDateError((prev) => ({
+        ...prev,
+        year: "",
+      }));
     }
-
-    setExpireDateError((prev) => ({
-      ...prev,
-      year: "",
-    }));
 
     setExpireDate((prev) => ({
       ...prev,
-      year: value,
+      year: sliceValue,
     }));
   };
 

@@ -6,13 +6,16 @@ export function useCvcNumberInput() {
   const [cvcError, setCvcError] = useState("");
 
   const handleCvcChange = (value: string) => {
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    const sliceValue = onlyNumbers.substring(0, 3);
+
     if (!isNumeric(value)) {
       setCvcError("숫자를 입력해주세요.");
-      return;
+    } else {
+      setCvcError("");
     }
 
-    setCvcError("");
-    setCvc(value);
+    setCvc(sliceValue);
   };
 
   const handleBlur = () => {

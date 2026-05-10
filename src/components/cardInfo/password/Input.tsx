@@ -11,7 +11,6 @@ export default function Input() {
           type="password"
           value={passwordContext.password}
           placeholder="**"
-          maxLength={2}
           onBlur={() => passwordContext.handleBlur()}
           onChange={(e) => passwordContext.handlePasswordChange(e.target.value)}
           $hasError={!!passwordContext.passwordError}

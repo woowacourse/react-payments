@@ -14,7 +14,8 @@ export default function Input() {
           <InfoInput
             type="text"
             key={index}
-            {...config}
+            name={config.name}
+            placeholder={config.placeholder}
             value={cardNumberContext.cardNumber[index]}
             onBlur={() => cardNumberContext.handleBlur(index)}
             onChange={(e) =>

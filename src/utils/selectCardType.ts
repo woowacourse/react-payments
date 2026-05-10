@@ -8,7 +8,7 @@ import {
   AMEX_INPUT_CARD_NUMBER_CONFIG,
   DINERS_INPUT_CARD_NUMBER_CONFIG,
   INPUT_CARD_NUMBER_CONFIG,
-} from "../components/cardInfo/constants";
+} from "../components/cardInfo/cardNumber/constants";
 
 export function selectCardType(cardNumber: string[]): {
   inputConfig: InputConfig;

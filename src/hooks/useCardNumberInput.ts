@@ -9,19 +9,21 @@ export function useCardNumberInput() {
 
   const handleCardNumberChange = (index: number, value: string) => {
     const newError = [...cardNumberError];
+    const maxLength = inputConfig[index].maxLength;
+
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    const sliceValue = onlyNumbers.slice(0, maxLength);
 
     if (!isNumeric(value)) {
       newError[index] = "숫자를 입력해주세요.";
-      setCardNumberError(newError);
-      return;
+    } else {
+      newError[index] = "";
     }
-
-    newError[index] = "";
     setCardNumberError(newError);
 
     setCardNumber((prev) => {
       const newArray = [...prev];
-      newArray[index] = value;
+      newArray[index] = sliceValue;
       return newArray;
     });
   };

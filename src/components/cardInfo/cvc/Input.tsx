@@ -10,7 +10,6 @@ export default function Input() {
         <InfoInput
           value={cvcContext.cvc}
           placeholder="123"
-          maxLength={3}
           onBlur={() => cvcContext.handleBlur()}
           onChange={(e) => cvcContext.handleCvcChange(e.target.value)}
           $hasError={!!cvcContext.cvcError}

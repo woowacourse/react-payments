@@ -6,13 +6,16 @@ export function usePasswordInput() {
   const [passwordError, setPasswordError] = useState("");
 
   const handlePasswordChange = (value: string) => {
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    const sliceValue = onlyNumbers.substring(0, 2);
+
     if (!isNumeric(value)) {
       setPasswordError("숫자를 입력해주세요.");
-      return;
+    } else {
+      setPasswordError("");
     }
 
-    setPasswordError("");
-    setPassword(value);
+    setPassword(sliceValue);
   };
 
   const handleBlur = () => {

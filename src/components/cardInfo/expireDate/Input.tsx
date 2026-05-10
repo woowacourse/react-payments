@@ -11,7 +11,6 @@ export default function Input() {
           <MonthInput
             value={expireDateContext.expireDate.month}
             placeholder="MM"
-            maxLength={2}
             onBlur={() => expireDateContext.handleMonthBlur()}
             onChange={(e) =>
               expireDateContext.handleMonthChange(e.target.value)
