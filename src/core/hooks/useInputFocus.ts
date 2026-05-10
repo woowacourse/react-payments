@@ -24,7 +24,7 @@ export const useInputFocus = () => {
 
   const focusNext = (index: number): void => {
     const map = getMap();
-    map.get(index + 1)?.focus();
+    map.get(index)?.focus();
   };
 
   return { setInputRef, focusNext };
