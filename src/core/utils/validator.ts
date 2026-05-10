@@ -14,3 +14,8 @@ export const isValidInputNumber = (input: string, maxLength: number) => {
   if (input.length > maxLength) return false;
   return true;
 };
+
+export const isInputNumbericString = (input: string): boolean => {
+  if (input !== '' && !isNumericString(input)) return false;
+  return true;
+};
