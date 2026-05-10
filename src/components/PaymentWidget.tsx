@@ -4,12 +4,15 @@ import CardPreview from "./cardPreview/CardPreview";
 import CardNumber from "./cardInfo/cardNumber/CardNumber";
 import ExpireDate from "./cardInfo/expireDate/ExpireDate";
 import PaymentProvider from "../context/PaymentProvider";
+import CardBrand from "./cardInfo/cardBrand/CardBrand";
 
 export default function PaymentWidget() {
   return (
     <PaymentProvider>
       <CardPaymentWidgetWrapper>
         <CardPreview />
+
+        <CardBrand />
         <CardNumber />
         <ExpireDate />
         <Cvc />
