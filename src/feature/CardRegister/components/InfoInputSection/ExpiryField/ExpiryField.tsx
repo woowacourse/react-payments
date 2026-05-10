@@ -7,16 +7,14 @@ import {
   EXPIRY_MONTH_LENGTH,
   EXPIRY_YEAR_LENGTH,
 } from "../../../constants";
-import {
-  formatExpiryValue,
-  type ExpiryType,
-} from "../../../utils/expiryFormatter";
+import { formatExpiryValue } from "../../../utils/expiryFormatter";
 import { isNumericInput } from "../../../validators/input";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 import {
   isMonthLengthValid,
   isMonthRangeValid,
+  isYearLengthValid,
 } from "../../../validators/expiryDate";
 
 const ExpiryField = ({
@@ -85,29 +83,33 @@ const ExpiryField = ({
     }
   };
 
-  const handleExpiryBlur = (
-    index: number,
-    eValue: string,
-    expiryType: ExpiryType,
-  ) => {
+  const handleMonthBlur = (index: number, eValue: string) => {
     touchField(index);
 
-    const formattedValue = formatExpiryValue(eValue, expiryType);
-
-    if (expiryType === "month") {
-      onExpiryMonthChange(formattedValue);
-    }
-    if (expiryType === "year") {
-      onExpiryYearChange(formattedValue);
-    }
+    const formattedValue = formatExpiryValue(eValue, "month");
+    onExpiryMonthChange(formattedValue);
 
     if (!isMonthLengthValid(formattedValue)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryLength);
       return;
     }
 
-    if (expiryType === "month" && !isMonthRangeValid(formattedValue)) {
+    if (!isMonthRangeValid(formattedValue)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
+      return;
+    }
+
+    clearErrorMessage(index);
+  };
+
+  const handleYearBlur = (index: number, eValue: string) => {
+    touchField(index);
+
+    const formattedValue = formatExpiryValue(eValue, "year");
+    onExpiryYearChange(formattedValue);
+
+    if (!isYearLengthValid(formattedValue)) {
+      updateErrorMessage(index, ERROR_MESSAGES.expiryLength);
       return;
     }
 
@@ -129,21 +131,21 @@ const ExpiryField = ({
           placeholder="MM"
           strokeMode={0 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handleMonthChange(0, e.target.value)}
-          onBlur={(e) => handleExpiryBlur(0, e.target.value, "month")}
+          onBlur={(e) => handleMonthBlur(0, e.target.value)}
           autoFocus
         />
         <ExpiryInput
           ref={(node) => {
             registerFocusRef(1, node);
           }}
-          id="expiry-month"
+          id="expiry-year"
           value={expiryYear}
           maxLength={EXPIRY_YEAR_LENGTH}
           placeholder="YY"
           inputMode="numeric"
           strokeMode={1 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handleYearChange(1, e.target.value)}
-          onBlur={(e) => handleExpiryBlur(1, e.target.value, "year")}
+          onBlur={(e) => handleYearBlur(1, e.target.value)}
         />
       </InputWrapper>
 
