@@ -1,4 +1,5 @@
 import {
+  checkExpiredValidityPeriod,
   checkIsOnlyDigits,
   checkLengthMatches,
   validateMonthRange,
@@ -45,19 +46,27 @@ const CardValidityPeriodInputField = ({
       return;
     }
 
-    onChange({
-      ...validityPeriod,
-      month: input.slice(0, MONTH_MAX_LENGTH),
-    });
-
     if (
-      !checkLengthMatches(input, MONTH_MAX_LENGTH) &&
+      checkLengthMatches(input, MONTH_MAX_LENGTH) &&
       !validateMonthRange(+input)
     ) {
       setStatus((prev) => ({ ...prev, month: "INVALID_MONTH_RANGE" }));
       return;
     }
 
+    if (
+      checkLengthMatches(validityPeriod.year, YEAR_MAX_LENGTH) &&
+      checkLengthMatches(input, MONTH_MAX_LENGTH) &&
+      checkExpiredValidityPeriod(input, validityPeriod.year)
+    ) {
+      setStatus((prev) => ({ ...prev, month: "EXPIRED_VALIDITY_PERIOD" }));
+      return;
+    }
+
+    onChange({
+      ...validityPeriod,
+      month: input.slice(0, MONTH_MAX_LENGTH),
+    });
     setStatus((prev) => ({ ...prev, month: "DEFAULT" }));
 
     if (checkLengthMatches(input, MONTH_MAX_LENGTH)) {
@@ -68,6 +77,15 @@ const CardValidityPeriodInputField = ({
   const handleYearChange = (input: string) => {
     if (!checkIsOnlyDigits(input)) {
       setStatus((prev) => ({ ...prev, year: "NOT_NUMBER" }));
+      return;
+    }
+
+    if (
+      checkLengthMatches(validityPeriod.month, MONTH_MAX_LENGTH) &&
+      checkLengthMatches(input, YEAR_MAX_LENGTH) &&
+      checkExpiredValidityPeriod(validityPeriod.month, input)
+    ) {
+      setStatus((prev) => ({ ...prev, year: "EXPIRED_VALIDITY_PERIOD" }));
       return;
     }
 

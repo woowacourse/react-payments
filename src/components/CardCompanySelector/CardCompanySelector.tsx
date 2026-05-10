@@ -87,7 +87,7 @@ const ArrowIcon = styled.img`
 
 const OptionList = styled.ul`
   position: absolute;
-  top: calc(100%);
+  top: calc(88%);
   left: 0;
   z-index: 10;
   box-sizing: border-box;
