@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
-import useCardForm from '../hooks/useCardForm';
 import { getCardNetwork } from '../utils';
 import Flex from './Common/Flex';
 import CardPreview from './CardPreview';
 import { CARD_ISSUERS } from '../constants';
-import { useState, type FormEvent } from 'react';
 import type { CardFormState } from '../types';
+import useCardForm from '../hooks/useCardForm';
 
 const Title = styled.p`
   font-size: 18px;
@@ -76,64 +75,70 @@ const Submit = styled.button`
   }
 `;
 
+const CARD_FORM_STEP = {
+  CARD_PASSWORD: 4,
+  CARD_VALIDATION_CODE: 3,
+  CARD_EXPIRY_DATE: 2,
+  CARD_ISSUER: 1,
+  CARD_NUMBER: 0,
+};
+
 interface CardFormProps {
   onSubmit: (formData: CardFormState) => void;
 }
 
 function CardForm(props: CardFormProps) {
-  const { register, values, errors, formStatus } = useCardForm();
-  const [step, setStep] = useState(0);
+  const { step, ...form } = useCardForm();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    props.onSubmit(values);
+  const handleFormAction = () => {
+    props.onSubmit(form.formValue);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form action={handleFormAction}>
       <CardPreview
-        issuer={values.cardIssuer}
-        network={getCardNetwork(values.cardNumberSegments)}
-        numberSegments={values.cardNumberSegments}
-        expiryDate={values.cardExpiryDate}
+        issuer={form.formValue.cardIssuer}
+        network={getCardNetwork(form.formValue.cardNumberSegments)}
+        numberSegments={form.formValue.cardNumberSegments}
+        expiryDate={form.formValue.cardExpiryDate}
       />
       <Flex direction="column" gap={10}>
-        {step >= 4 && (
+        {step >= CARD_FORM_STEP['CARD_PASSWORD'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
               <Title>비밀번호를 입력해 주세요</Title>
               <Description>앞의 2자리를 입력해주세요</Description>
             </Flex>
             <Input
-              autoFocus={true}
+              autoFocus
+              inputMode="numeric"
               type="password"
               placeholder="**"
-              data-is-error={!!errors['cardPassword']}
-              {...register('cardPassword')}
+              data-is-error={!!form.cardPassword.error}
+              value={form.cardPassword.value}
+              {...form.cardPassword.register()}
             />
-            <ErrorMessage>{errors['cardPassword']}</ErrorMessage>
+            <ErrorMessage>{form.cardPassword.error}</ErrorMessage>
           </Flex>
         )}
-        {step >= 3 && (
+        {step >= CARD_FORM_STEP['CARD_VALIDATION_CODE'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
               <Title>CVC 번호를 입력해 주세요</Title>
             </Flex>
             <Input
-              autoFocus={true}
+              autoFocus
+              inputMode="numeric"
               type="text"
               placeholder="CVC"
-              data-is-error={!!errors['cardValidationCode']}
-              {...register('cardValidationCode', {
-                onComplete: () => {
-                  setStep((prev) => Math.max(4, prev));
-                },
-              })}
+              data-is-error={!!form.cardValidationCode.error}
+              value={form.cardValidationCode.value}
+              {...form.cardValidationCode.register()}
             />
-            <ErrorMessage>{errors['cardValidationCode']}</ErrorMessage>
+            <ErrorMessage>{form.cardValidationCode.error}</ErrorMessage>
           </Flex>
         )}
-        {step >= 2 && (
+        {step >= CARD_FORM_STEP['CARD_EXPIRY_DATE'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
               <Title>카드 유효기간을 입력해 주세요</Title>
@@ -141,38 +146,37 @@ function CardForm(props: CardFormProps) {
             </Flex>
             <Flex gap={8}>
               <Input
-                autoFocus={true}
+                autoFocus
+                inputMode="numeric"
                 type="text"
                 placeholder="MM"
-                data-is-error={!!errors['cardExpiryDate'][0]}
-                {...register('cardExpiryDate', { index: 0 })}
+                data-is-error={!!form.cardExpiryDate.errors[0]}
+                value={form.cardExpiryDate.values[0]}
+                {...form.cardExpiryDate.register({ index: 0 })}
               />
               <Input
                 type="text"
+                inputMode="numeric"
                 placeholder="YY"
-                data-is-error={!!errors['cardExpiryDate'][1]}
-                {...register('cardExpiryDate', {
-                  index: 1,
-                  onComplete: () => {
-                    setStep((prev) => Math.max(3, prev));
-                  },
-                })}
+                data-is-error={!!form.cardExpiryDate.errors[1]}
+                value={form.cardExpiryDate.values[1]}
+                {...form.cardExpiryDate.register({ index: 1 })}
               />
             </Flex>
-            <ErrorMessage>{errors['cardExpiryDate'].find((el) => el !== null)}</ErrorMessage>
+            <ErrorMessage>{form.cardExpiryDate.error}</ErrorMessage>
           </Flex>
         )}
-        {step >= 1 && (
+        {step >= CARD_FORM_STEP['CARD_ISSUER'] && (
           <Flex direction="column" gap={10}>
             <Flex direction="column" gap={5}>
               <Title>카드사를 선택해 주세요</Title>
               <Description>현재 국내 카드사만 가능합니다.</Description>
             </Flex>
             <Select
-              data-is-error={!!errors['cardIssuer']}
-              {...register<'cardIssuer', HTMLSelectElement>('cardIssuer', {
-                onComplete: () => setStep((prev) => Math.max(2, prev)),
-              })}
+              autoFocus
+              data-is-error={!!form.cardIssuer.error}
+              value={form.cardIssuer.value ?? ''}
+              {...form.cardIssuer.register()}
             >
               <option value="">카드사를 선택해 주세요</option>
               {CARD_ISSUERS.map((issuer) => (
@@ -181,49 +185,50 @@ function CardForm(props: CardFormProps) {
                 </option>
               ))}
             </Select>
-            <ErrorMessage>{errors['cardIssuer']}</ErrorMessage>
+            <ErrorMessage>{form.cardIssuer.error}</ErrorMessage>
           </Flex>
         )}
-        <Flex direction="column" gap={10}>
-          <Flex direction="column" gap={5}>
-            <Title>결제할 카드 번호를 입력해 주세요</Title>
-            <Description>본인 명의의 카드만 결제 가능합니다.</Description>
+        {step >= CARD_FORM_STEP['CARD_NUMBER'] && (
+          <Flex direction="column" gap={10}>
+            <Flex direction="column" gap={5}>
+              <Title>결제할 카드 번호를 입력해 주세요</Title>
+              <Description>본인 명의의 카드만 결제 가능합니다.</Description>
+            </Flex>
+            <Flex gap={8}>
+              <Input
+                autoFocus
+                type="text"
+                placeholder="1234"
+                data-is-error={!!form.cardNumberSegments.errors[0]}
+                value={form.cardNumberSegments.values[0]}
+                {...form.cardNumberSegments.register({ index: 0 })}
+              />
+              <Input
+                type="text"
+                placeholder="1234"
+                data-is-error={!!form.cardNumberSegments.errors[1]}
+                value={form.cardNumberSegments.values[1]}
+                {...form.cardNumberSegments.register({ index: 1 })}
+              />
+              <Input
+                type="text"
+                placeholder="1234"
+                data-is-error={!!form.cardNumberSegments.errors[2]}
+                value={form.cardNumberSegments.values[2]}
+                {...form.cardNumberSegments.register({ index: 2 })}
+              />
+              <Input
+                type="text"
+                placeholder="1234"
+                data-is-error={!!form.cardNumberSegments.errors[3]}
+                value={form.cardNumberSegments.values[3]}
+                {...form.cardNumberSegments.register({ index: 3 })}
+              />
+            </Flex>
+            <ErrorMessage>{form.cardNumberSegments.error}</ErrorMessage>
           </Flex>
-          <Flex gap={8}>
-            <Input
-              type="text"
-              placeholder="1234"
-              data-is-error={!!errors['cardNumberSegments'][0]}
-              autoFocus={true}
-              {...register('cardNumberSegments', { index: 0 })}
-            />
-            <Input
-              type="text"
-              placeholder="1234"
-              data-is-error={!!errors['cardNumberSegments'][1]}
-              {...register('cardNumberSegments', { index: 1 })}
-            />
-            <Input
-              type="text"
-              placeholder="1234"
-              data-is-error={!!errors['cardNumberSegments'][2]}
-              {...register('cardNumberSegments', { index: 2 })}
-            />
-            <Input
-              type="text"
-              placeholder="1234"
-              data-is-error={!!errors['cardNumberSegments'][3]}
-              {...register('cardNumberSegments', {
-                index: 3,
-                onComplete: () => {
-                  setStep((prev) => Math.max(1, prev));
-                },
-              })}
-            />
-          </Flex>
-          <ErrorMessage>{errors['cardNumberSegments'].find((el) => el !== null)}</ErrorMessage>
-        </Flex>
-        {formStatus.isValid && <Submit type="submit">확인</Submit>}
+        )}
+        {form.formStatus.isValid && <Submit type="submit">확인</Submit>}
       </Flex>
     </form>
   );

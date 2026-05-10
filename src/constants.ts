@@ -32,3 +32,21 @@ export const CARD_ISSUERS = [
     "value": "kookmin"
   }
 ] as const
+
+export const CARD_NETWORK = {
+  "VISA": {
+    cardNumberLength: 16,
+  },
+  "MasterCard": {
+    cardNumberLength: 16,
+  },
+  "Diners": {
+    cardNumberLength: 14,
+  },
+  "AMEX": {
+    cardNumberLength: 15,
+  },
+  "UnionPay": {
+    cardNumberLength: 16,
+  }
+} as const

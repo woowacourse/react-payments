@@ -1,24 +1,38 @@
-import { type CardFormState } from "../types";
-import { createDigitFieldValidations, validateCardIssuer, validateDigits, validateMonth, validateStringMaxLength, validateYear } from "../utils";
-import useForm from "./useForm";
+import { useEffect, useMemo, useState } from "react";
+import { type CardFormState, type CardIssuer, type CardNumberSegments } from "../types";
+import { createDigitFieldValidations, getCardNetwork, validateCardIssuer, validateMonth, validateYear } from "../utils";
+import useArrayInput from "./useArrayInput";
+import useInput from "./useInput";
+import { CARD_NETWORK } from "../constants";
 
 export default function useCardForm() {
-  return useForm<CardFormState>({
-    initialValues: {
-      cardPassword: '',
-      cardValidationCode: '',
-      cardExpiryDate: ['', ''],
-      cardIssuer: null,
-      cardNumberSegments: ['', '', '', ''],
-    },
-    validations: {
-      cardPassword: [
-        ...createDigitFieldValidations(2)
-      ],
-      cardValidationCode: [
-        ...createDigitFieldValidations(3),
-      ],
-      cardExpiryDate: [
+  const [step, setStep] = useState(0);
+
+  const cardNumberSegmentsField = useArrayInput(['', '', '', ''], {
+    validation: (cardNumberSegments) => {
+      const cardNetwork = getCardNetwork(cardNumberSegments as CardNumberSegments);
+      return [
+        [...createDigitFieldValidations(4)],
+        [...createDigitFieldValidations(4)],
+        [...createDigitFieldValidations(4)],
+        [...createDigitFieldValidations(cardNetwork ? CARD_NETWORK[cardNetwork]["cardNumberLength"] % 4 : 4)],
+      ]
+    }
+  });
+
+  const cardIssuerField = useInput<CardIssuer | null, HTMLSelectElement>(null, {
+    validation: () => {
+      return [{
+        type: 'onBlur',
+        validator: validateCardIssuer,
+        message: "카드사를 선택해주세요"
+      }]
+    }
+  });
+
+  const cardExpiryDateField = useArrayInput(["", ""], {
+    validation: () => {
+      return [
         [
           ...createDigitFieldValidations(2),
           {
@@ -34,37 +48,44 @@ export default function useCardForm() {
             message: '유효한 년도를 입력해주세요. (00 ~ 99)',
           },
         ],
-      ],
-      cardIssuer: [
-        {
-          type: 'onBlur',
-          validator: validateCardIssuer,
-          message: "카드사를 선택해주세요"
-        },
-      ],
-      cardNumberSegments: [
-        [...createDigitFieldValidations(4)],
-        [...createDigitFieldValidations(4)],
-        [...createDigitFieldValidations(4)],
-        [
-          {
-            type: 'onChange',
-            validator: validateDigits,
-            message: '숫자만 입력 가능합니다.'
-          },
-          {
-            type: 'onChange',
-            validator: (v) => validateStringMaxLength(v, 4),
-            message: '4자리까지 입력 가능합니다.'
-          },
-          {
-            type: 'onBlur',
-            validator: (v) => v.length >= 2,
-            message: '2자리 이상 입력해주세요.'
-          },
-        ],
-      ],
-
-    },
+      ]
+    }
   })
+
+  const cardValidationCodeField = useInput("", {
+    validation: () => [...createDigitFieldValidations(3)]
+  })
+
+  const cardPasswordField = useInput("", { validation: () => ([...createDigitFieldValidations(2)]) })
+
+  const formValue = useMemo(() => ({
+    cardNumberSegments: cardNumberSegmentsField.values,
+    cardIssuer: cardIssuerField.value,
+    cardExpiryDate: cardExpiryDateField.values,
+    cardValidationCode: cardValidationCodeField.value,
+    cardPassword: cardPasswordField.value
+  } as CardFormState), [cardExpiryDateField, cardIssuerField, cardNumberSegmentsField, cardPasswordField, cardValidationCodeField]);
+
+  const formStatus = useMemo(() => ({
+    isValid: cardNumberSegmentsField.isValid && cardIssuerField.isValid && cardExpiryDateField.isValid && cardValidationCodeField.isValid && cardPasswordField.isValid
+  }), [cardExpiryDateField.isValid, cardIssuerField.isValid, cardNumberSegmentsField.isValid, cardPasswordField.isValid, cardValidationCodeField.isValid])
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (cardNumberSegmentsField.isValid) setStep(prev => Math.max(1, prev));
+    if (cardIssuerField.isValid) setStep(prev => Math.max(2, prev));
+    if (cardExpiryDateField.isValid) setStep(prev => Math.max(3, prev));
+    if (cardValidationCodeField.isValid) setStep(prev => Math.max(4, prev));
+  }, [cardExpiryDateField.isValid, cardIssuerField.isValid, cardNumberSegmentsField.isValid, cardPasswordField.isValid, cardValidationCodeField.isValid])
+
+  return {
+    step,
+    formValue,
+    formStatus,
+    cardNumberSegments: cardNumberSegmentsField,
+    cardIssuer: cardIssuerField,
+    cardExpiryDate: cardExpiryDateField,
+    cardValidationCode: cardValidationCodeField,
+    cardPassword: cardPasswordField
+  }
 }

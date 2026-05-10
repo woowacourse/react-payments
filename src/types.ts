@@ -25,5 +25,5 @@ export interface AddCardResultState {
 export interface ValidationRule {
   type: 'onChange' | 'onBlur';
   validator: (input: string) => boolean;
-  message?: string
+  message: string
 }
