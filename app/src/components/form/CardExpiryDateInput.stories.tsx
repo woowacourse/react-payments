@@ -40,6 +40,7 @@ const renderWithContext = () => {
         setCardPassword: () => {},
         cardExpiryDate,
         setCardExpiryDate,
+        isFormComplete: false,
       }}
     >
       <CardExpiryDateInput firstRef={firstRef} onComplete={() => {}} />

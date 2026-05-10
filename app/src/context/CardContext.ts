@@ -19,6 +19,7 @@ export type CardContextType = {
   cardCompany: CardCompany;
   cardCVC: string;
   cardPassword: string;
+  isFormComplete: boolean;
   setCardNumber: React.Dispatch<React.SetStateAction<CardContextType['cardNumber']>>;
   setCardExpiryDate: React.Dispatch<React.SetStateAction<CardContextType['cardExpiryDate']>>;
   setCardCompany: React.Dispatch<React.SetStateAction<CardCompany>>;

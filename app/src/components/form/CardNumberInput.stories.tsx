@@ -37,6 +37,7 @@ const renderWithContext = () => {
         setCardCVC: () => {},
         cardPassword: '',
         setCardPassword: () => {},
+        isFormComplete: false,
       }}
     >
       <CardNumberInput firstRef={firstRef} onComplete={() => {}} />

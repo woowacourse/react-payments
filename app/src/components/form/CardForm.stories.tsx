@@ -42,6 +42,7 @@ export const Base: Story = {
             setCardCVC,
             cardPassword,
             setCardPassword,
+            isFormComplete: false,
           }}
         >
           <CardForm />
