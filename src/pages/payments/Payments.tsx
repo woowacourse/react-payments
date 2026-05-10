@@ -4,6 +4,7 @@ import { CreditCard } from '@/core/components/creditCard';
 import { FormGroup } from '@/core/components/formGroup';
 import { Field } from '@/core/components/field';
 import { Input } from '@/core/components/input';
+import { Select } from '@/core/components/select';
 
 import styles from './Payments.module.css';
 
@@ -11,7 +12,7 @@ import { useCardNumbers } from './hooks/useCardNumbers';
 import { useExpirationDate } from './hooks/useExpirationDate';
 import { useCvc } from './hooks/useCvc';
 
-import { BRAND_NUMBER } from './constant';
+import { BRAND_NUMBER, CARD_OPTIONS } from './constant';
 
 export const Payments = () => {
   const {
@@ -82,6 +83,11 @@ export const Payments = () => {
           ))}
         </Field>
       </FormGroup>
+      <FormGroup title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다.">
+        <Field>
+          <Select id="card" value={null} onChange={() => {}} options={CARD_OPTIONS} />
+        </Field>
+      </FormGroup>
       <FormGroup title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요">
         <Field label="유효기간" errorMessage={renderErrorMessageExpirationDate()}>
           <Input
@@ -124,6 +130,20 @@ export const Payments = () => {
             isError={!!cvcInvalidAttemp || (onBlurCvc && !errorsCvc.cvc.length)}
             onChange={handleChangeCvc}
             onBlur={handleBlurCvc}
+          />
+        </Field>
+      </FormGroup>
+
+      <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요">
+        <Field label="비밀번호 앞 2자리">
+          <Input
+            type="password"
+            id="password"
+            value={''}
+            maxLength={2}
+            isError={false}
+            onChange={() => {}}
+            onBlur={() => {}}
           />
         </Field>
       </FormGroup>
