@@ -2,7 +2,12 @@ import { ChangeEvent, useState } from 'react';
 import styled from '@emotion/styled';
 import CardPreview from '../CardPreview/CardPreview';
 import InputFieldLayout from '../Layout/InputFieldLayout';
-import { cardNumbersValidator, cvcValidator, expirationDateValidator } from '../../utils/validate';
+import {
+  cardNumbersValidator,
+  cvcValidator,
+  expirationDateValidator,
+  passwordValidator,
+} from '../../utils/validate';
 import InputFieldForm from '../Common/Form/InputFieldForm';
 import { CARD_ISSUER_CONFIG, INPUT_FIELD_CONFIG, SELECT_FIELD_CONFIG } from '../../constants';
 import { convertValueFormat } from '../../utils/convert';
@@ -13,12 +18,17 @@ export type ExpirationDateType = { month: string; year: string };
 export type CardIssuerType = (typeof CARD_ISSUER_CONFIG)[keyof typeof CARD_ISSUER_CONFIG]['name'];
 
 export default function PaymentForm() {
+  const [password, setPassword] = useState<string>('');
   const [cvcNumbers, setCVCNumbers] = useState<string>('');
   const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({ month: '', year: '' });
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | null>(null);
   const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
 
-  const handleCVCNumbersChange = () => (e: ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleCVCNumbersChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCVCNumbers(e.target.value);
   };
 
@@ -45,6 +55,18 @@ export default function PaymentForm() {
       />
 
       <FormWrapper>
+        <InputFieldLayout
+          sectionTitle={INPUT_FIELD_CONFIG['PASSWORD'].sectionTitle}
+          hintText={INPUT_FIELD_CONFIG['PASSWORD'].hintText}
+        >
+          <InputFieldForm
+            fieldConfig={INPUT_FIELD_CONFIG['PASSWORD']}
+            valueList={convertValueFormat(password)}
+            validator={passwordValidator}
+            onChanges={[handlePasswordChange]}
+          />
+        </InputFieldLayout>
+
         <InputFieldLayout sectionTitle={INPUT_FIELD_CONFIG['CVC'].sectionTitle}>
           <InputFieldForm
             fieldConfig={INPUT_FIELD_CONFIG['CVC']}

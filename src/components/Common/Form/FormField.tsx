@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import InputField from '../InputField/InputField';
 import { validateNaN } from '../../../utils/validate';
 
-interface FormFieldProps {
+interface Props {
   id: string;
   index: number;
   value: string;
@@ -29,17 +29,17 @@ export default function FormField({
   onChange,
   placeholder,
   setErrorMessage,
-}: FormFieldProps) {
+}: Props) {
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { error, errorMessage } = validator(e.target.value, index);
-
     if (validateNaN(e.target.value)) {
       setIsError(true);
       setErrorMessage('숫자만 입력 가능합니다.');
       return;
     }
+
+    const { error, errorMessage } = validator(e.target.value, index);
 
     setIsError(error);
     setErrorMessage(errorMessage);

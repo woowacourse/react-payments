@@ -66,6 +66,20 @@ export const cvcValidator = (inputValue: string) => {
   };
 };
 
+export const passwordValidator = (inputValue: string) => {
+  if (validateInputValueLength(inputValue, VALIDATION_RULE.PASSWORD_LENGTH)) {
+    return {
+      error: true,
+      errorMessage: ERROR_MESSAGE.MAX_LENGTH(VALIDATION_RULE.PASSWORD_LENGTH),
+    };
+  }
+
+  return {
+    error: false,
+    errorMessage: '',
+  };
+};
+
 // 숫자 외의 값이 입력되는 경우 검증
 export const validateNaN = (inputValue: string) => isNaN(Number(inputValue));
 

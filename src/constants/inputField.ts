@@ -1,4 +1,4 @@
-import { InputFieldConfig } from "../types";
+import { InputFieldConfig } from '../types';
 
 export const SELECT_FIELD_CONFIG = {
   CARD_ISSUER: {
@@ -32,5 +32,13 @@ export const INPUT_FIELD_CONFIG = {
     label: 'CVC',
     placeholder: ['123'],
     maxLength: 3,
+  },
+  PASSWORD: {
+    id: 'passwordd',
+    sectionTitle: '비밀번호를 입력해 주세요',
+    hintText: '앞의 2자리를 입력해주세요',
+    label: '비밀번호 앞 2자리',
+    placeholder: ['**'],
+    maxLength: 2,
   },
 } satisfies Record<string, InputFieldConfig>;

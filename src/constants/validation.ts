@@ -11,4 +11,5 @@ export const VALIDATION_RULE = {
   EXPIRATION_DATE_LENGTH: 2,
   CVC_LENGTH: 3,
   MAX_MONTH: 12,
+  PASSWORD_LENGTH: 2,
 } as const;
