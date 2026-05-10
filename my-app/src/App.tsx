@@ -55,7 +55,14 @@ function App() {
   };
   return (
     <>
-      <Card cardInfo={cardInfo} brand={brand} />
+      <div
+        css={css`
+          padding: 45px 0;
+        `}
+      >
+        <Card cardInfo={cardInfo} brand={brand} />
+      </div>
+
       <div
         css={css`
           width: 100%;

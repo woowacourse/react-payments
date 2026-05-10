@@ -8,22 +8,21 @@ const Layout = () => {
         display: flex;
         min-height: 100vh;
         width: 100vw;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
-        padding-top: 60px;
         background-color: #f5f5f5;
       `}
     >
       <div
         css={css`
           width: 376px;
-          padding: 77px 30px 20px;
           background-color: #ffffff;
           border-radius: 20px;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 45px;
+          height: 700px;
+          padding: 30px;
         `}
       >
         <Outlet />
