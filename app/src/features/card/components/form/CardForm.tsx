@@ -6,6 +6,7 @@ import { CardCVCInput } from "./CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput";
 import { CreateCardProgressManager } from "../../ProgressManager";
 import { useNavigate } from "react-router";
+import { Button } from "../../style/Button";
 import CardBrandSelect from "./CardBrandSelect";
 
 export function CardForm({
@@ -32,7 +33,7 @@ export function CardForm({
 
   const loadDonePage = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/card/done/", { state: { cardNumber } });
+    navigate("/card/done/", { state: { cardNumber, cardBrand } });
   };
 
   return (
@@ -80,12 +81,9 @@ export function CardForm({
           setCardNumber={setCardNumber}
         />
       </CardSection>
-      <CardSubmitButton
-        type="submit"
-        disabled={progress["complete"] ? false : true}
-      >
+      <Button type="submit" disabled={progress["complete"] ? false : true}>
         확인
-      </CardSubmitButton>
+      </Button>
     </CardFormContainer>
   );
 }
@@ -96,18 +94,4 @@ const CardFormContainer = styled.form`
   gap: 1rem;
   padding: 24px 30px 20px 30px;
   box-sizing: border-box;
-`;
-
-const CardSubmitButton = styled.button`
-  background-color: #333333;
-  padding: 20px 0;
-  color: #f3f3f3;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  &:disabled {
-    background-color: #3333334d;
-    cursor: auto;
-  }
 `;

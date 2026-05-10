@@ -10,3 +10,30 @@ export const NETWORK_BRAND_RULE = {
   MASTER_START_NUMBER: "5",
   MASTER_SECOND_NUMBER: ["1", "2", "3", "4", "5"],
 };
+
+export const CARD_BRAND = {
+  bc: {
+    title: "BC",
+  },
+  sinhan: {
+    title: "신한",
+  },
+  kakao: {
+    title: "카카오뱅크",
+  },
+  hyundai: {
+    title: "현대",
+  },
+  woori: {
+    title: "우리",
+  },
+  lotte: {
+    title: "롯데",
+  },
+  hana: {
+    title: "하나",
+  },
+  kookmin: {
+    title: "국민",
+  },
+};

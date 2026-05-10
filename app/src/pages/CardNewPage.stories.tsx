@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within, expect } from "storybook/test";
+import { MemoryRouter, Routes, Route } from "react-router";
 
 import CardNewPage from "./CardNewPage";
+import CardCreateDonePage from "./CardCreateDonePage";
 
 const meta = {
   title: "pages/CardNewPage",
@@ -15,9 +17,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Base: Story = {};
+const defaultDecorators = [
+  (Story) => (
+    <MemoryRouter initialEntries={["/card"]}>
+      <Routes>
+        <Route path="/card" element={<Story />} />
+        <Route path="/card/done" element={<CardCreateDonePage />} />
+      </Routes>
+    </MemoryRouter>
+  ),
+];
+
+export const Base: Story = {
+  decorators: defaultDecorators,
+};
 
 export const VisaBrandDetection: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstDigitsInput =
@@ -31,6 +47,7 @@ export const VisaBrandDetection: Story = {
 };
 
 export const MasterBrandDetection: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstDigitsInput =
@@ -44,6 +61,7 @@ export const MasterBrandDetection: Story = {
 };
 
 export const UnionBrandDetection: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstDigitsInput =
@@ -68,6 +86,7 @@ export const UnionBrandDetection: Story = {
 };
 
 export const AmexBrandDetection: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstDigitsInput =
@@ -90,6 +109,7 @@ export const AmexBrandDetection: Story = {
 };
 
 export const DinersBrandDetection: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const firstDigitsInput =
@@ -112,6 +132,7 @@ export const DinersBrandDetection: Story = {
 };
 
 export const CardNumberIsDynamicDisplay: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const firstDigitsInput = canvasElement.querySelector("#first-digits");
     await userEvent.type(firstDigitsInput, "5");
@@ -128,6 +149,7 @@ export const CardNumberIsDynamicDisplay: Story = {
 };
 
 export const CardNumberSpecificDisplaySecret: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const thirdDigitsInput = canvasElement.querySelector("#third-digits");
     await userEvent.type(thirdDigitsInput, "1234");
@@ -186,6 +208,7 @@ export const CardNumberSpecificDisplaySecret: Story = {
 // };
 
 export const CardBrendSelectFieldIsDynamicDisplay: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(
@@ -206,6 +229,7 @@ export const CardBrendSelectFieldIsDynamicDisplay: Story = {
 };
 
 export const CardExpiryDateFieldIsDynamicDisplay: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(
@@ -227,6 +251,7 @@ export const CardExpiryDateFieldIsDynamicDisplay: Story = {
 };
 
 export const CardCVCFieldIsDynamicDisplay: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(
@@ -258,6 +283,7 @@ export const CardCVCFieldIsDynamicDisplay: Story = {
 };
 
 export const CardPasswordFieldIsDynamicDisplay: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
@@ -294,6 +320,7 @@ export const CardPasswordFieldIsDynamicDisplay: Story = {
 };
 
 export const PreviousFieldsHideWhenCardNumberBecomesIncomplete: Story = {
+  decorators: defaultDecorators,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
@@ -326,5 +353,46 @@ export const PreviousFieldsHideWhenCardNumberBecomesIncomplete: Story = {
     await expect(cvcInput).not.toBeVisible();
     const passwordInput = canvas.getByPlaceholderText("비밀번호");
     await expect(passwordInput).not.toBeVisible();
+  },
+};
+
+export const NavigateToCardCreateDonePage: Story = {
+  decorators: defaultDecorators,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>(
+        "#card-number-input-container input",
+      ),
+    );
+    await userEvent.type(firstInput, "3612");
+    await userEvent.type(secondInput, "3612");
+    await userEvent.type(thirdInput, "3612");
+    await userEvent.type(fourthInput, "36");
+
+    const brandSelect =
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+    await userEvent.selectOptions(brandSelect, "bc");
+
+    const expiryMonthInput =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+    const expiryYearInput =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+    await userEvent.type(expiryMonthInput, "12");
+    await userEvent.type(expiryYearInput, "26");
+
+    const cvcInput =
+      canvasElement.querySelector<HTMLInputElement>("#card-cvc-input");
+    await userEvent.type(cvcInput, "123");
+
+    const passwordInput = canvas.getByPlaceholderText("비밀번호");
+    await userEvent.type(passwordInput, "12");
+
+    const submitButton = canvas.getByRole("button", { name: "확인" });
+    await userEvent.click(submitButton);
+
+    await expect(
+      canvas.getByText("3612로 시작하는 BC카드 가 등록되었어요."),
+    ).toBeInTheDocument();
   },
 };
