@@ -135,7 +135,9 @@ function CardForm(props: CardFormProps) {
               value={form.cardIssuer.value ?? ''}
               {...form.cardIssuer.register()}
             >
-              <Select.Option value="">카드사를 선택해 주세요</Select.Option>
+              <Select.Option value="" disabled hidden>
+                카드사를 선택해 주세요
+              </Select.Option>
               {Object.entries(CARD_ISSUER).map(([issuer, { label }]) => (
                 <Select.Option key={issuer} value={issuer}>
                   {label}
