@@ -1,39 +1,27 @@
-import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
-import { inputStyle } from "../../styles/inputStyle";
-import { validateNumeric } from "../../utils/validators";
 
-const PASS_WORD_LENGTH = 2;
+import { PASSWORD_LENGTH } from "../../constants/cardField";
+import { usePasswordInput } from "../../hooks/usePasswordInput";
+import { inputStyle } from "../../styles/inputStyle";
 
 type PasswordInputSectionProps = {
-  onValueHandler: (cardInfo: string) => void;
+  onValueHandler: (value: string) => void;
 };
 
 const PasswordInputSection = ({ onValueHandler }: PasswordInputSectionProps) => {
-  const [inputValue, setInputValue] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const onChange = (value: string) => {
-    setErrorMessage("");
-    setInputValue(value);
-    onValueHandler(value);
-  };
-
-  const handleBlur = () => {
-    setErrorMessage(validateNumeric(inputValue));
-  };
+  const { inputValue, errorMessage, handlers } = usePasswordInput({ onValueHandler });
 
   return (
     <InputSectionLayout title="비밀번호를 입력해 주세요" message="앞의 두자리를 입력해 주세요" tag="PASSWORD">
       <ValidatedInputGroup errorMessage={errorMessage} legend="PASSWORD">
         <input
           autoFocus
-          maxLength={PASS_WORD_LENGTH}
+          maxLength={PASSWORD_LENGTH}
           inputMode="numeric"
           value={inputValue}
-          onChange={(e) => onChange(e.target.value)}
-          onBlur={handleBlur}
+          onChange={(e) => handlers.onChange(e.target.value)}
+          onBlur={handlers.handleBlur}
           css={inputStyle(!!errorMessage, "80px")}
           placeholder="**"
         />

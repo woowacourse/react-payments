@@ -36,18 +36,19 @@ const COMPANY_COLOR: Record<string, string> = {
 
 type CardProps = {
   cardInfo: CardInfo;
+  network: string;
 };
 
-const Card = ({ cardInfo }: CardProps) => {
+const Card = ({ cardInfo, network }: CardProps) => {
   return (
     <div css={cardStyle(cardInfo.company)}>
       <div css={cardHeaderStyle}>
         <div css={chipStyle}></div>
-        {NETWORK_LOGO[cardInfo.network] && (
+        {NETWORK_LOGO[network] && (
           <img
             css={brandLogoStyle}
-            src={NETWORK_LOGO[cardInfo.network].src}
-            alt={NETWORK_LOGO[cardInfo.network].alt}
+            src={NETWORK_LOGO[network].src}
+            alt={NETWORK_LOGO[network].alt}
           />
         )}
       </div>

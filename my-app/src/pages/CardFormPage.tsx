@@ -1,8 +1,5 @@
 import { css } from "@emotion/react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import type { CardInfo } from "../types";
 
 import Card from "../components/Card/Card";
 import CardCompanySelectSection from "../components/CardCompanySelectSection/CardCompanySelectSection";
@@ -11,66 +8,29 @@ import CvcInputSection from "../components/CvcInputSection/CvcInputSection";
 import ExpiryDateInputSection from "../components/ExpiryDateInputSection/ExpiryDateInputSection";
 import PasswordInputSection from "../components/PasswordInputSection/PasswordInputSection";
 
-import { decideBrandName } from "../utils/decideBrandName";
-import { getMaxLength } from "../utils/getMaxLength";
+import { useCardForm } from "../hooks/useCardForm";
 
 const CardFormPage = () => {
   const navigate = useNavigate();
-  const [cardInfo, setCardInfo] = useState<CardInfo>({
-    numbers: [],
-    expiry: [],
-    cvc: "",
-    network: "",
-    company: "",
-    password: "",
+  const { cardInfo, network, maxLength, isSupportedNetwork, completion, handlers } = useCardForm({
+    onSubmit: (info) => navigate("/completed", { state: { cardInfo: info } }),
   });
-
-  const network = decideBrandName(cardInfo.numbers[0] ?? "");
-  const maxLength = getMaxLength(network);
-  const isSupportedNetwork = network !== "";
-  const isCardNumberCompleted = cardInfo.numbers.join("").length === maxLength && isSupportedNetwork;
-  const isCvcCompleted = cardInfo.cvc.length === 3;
-  const isExpiryCompleted = cardInfo.expiry[0]?.length === 2 && cardInfo.expiry[1]?.length === 2;
-  const isCompanySelected = cardInfo.company !== "";
-  const isPasswordCompleted = cardInfo.password.length === 2;
-  const isAllCompleted =
-    isCardNumberCompleted && isCvcCompleted && isExpiryCompleted && isCompanySelected && isPasswordCompleted;
-
-  const cardNumberHandler = (numbers: string[]) => {
-    setCardInfo((prev) => ({ ...prev, numbers, network: decideBrandName(numbers[0] ?? ""), company: "" }));
-  };
-
-  const cardCompanyHandler = (company: string) => {
-    setCardInfo((prev) => ({ ...prev, company }));
-  };
-
-  const expiryHandler = (expiry: string[]) => {
-    setCardInfo((prev) => ({ ...prev, expiry }));
-  };
-
-  const cvcHandler = (cvc: string) => {
-    setCardInfo((prev) => ({ ...prev, cvc }));
-  };
-
-  const passwordHandler = (password: string) => {
-    setCardInfo((prev) => ({ ...prev, password }));
-  };
 
   return (
     <main css={pageStyle}>
       <div css={formContainerStyle}>
-        <Card cardInfo={cardInfo} />
+        <Card cardInfo={cardInfo} network={network} />
         <div css={sectionsStyle}>
-          {isCvcCompleted && <PasswordInputSection onValueHandler={passwordHandler} />}
-          {isExpiryCompleted && <CvcInputSection onValueHandler={cvcHandler} />}
-          {isCompanySelected && <ExpiryDateInputSection onValueHandler={expiryHandler} />}
-          {isCardNumberCompleted && <CardCompanySelectSection onSelect={cardCompanyHandler} />}
+          {completion.cvc && <PasswordInputSection onValueHandler={handlers.password} />}
+          {completion.expiry && <CvcInputSection onValueHandler={handlers.cvc} />}
+          {completion.company && <ExpiryDateInputSection onValueHandler={handlers.expiry} />}
+          {completion.cardNumber && <CardCompanySelectSection onSelect={handlers.cardCompany} />}
           <CardNumberInputSection
-            onValueHandler={cardNumberHandler}
+            onValueHandler={handlers.cardNumber}
             maxLength={maxLength}
             isSupportedNetwork={isSupportedNetwork}
           />
-          {isAllCompleted && <button onClick={() => navigate("/completed", {state: {cardInfo}})}>확인</button>}
+          {completion.all && <button onClick={handlers.submit}>확인</button>}
         </div>
       </div>
     </main>

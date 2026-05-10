@@ -1,39 +1,27 @@
-import { useState } from "react";
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
-import { inputStyle } from "../../styles/inputStyle";
-import { validateNumeric } from "../../utils/validators";
 
-const CVC_MAX_LENGTH = 3;
+import { CVC_LENGTH } from "../../constants/cardField";
+import { useCvcInput } from "../../hooks/useCvcInput";
+import { inputStyle } from "../../styles/inputStyle";
 
 type CvcInputSectionProps = {
-  onValueHandler: (cardInfo: string) => void;
+  onValueHandler: (value: string) => void;
 };
 
 const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
-  const [inputValue, setInputValue] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const onChange = (value: string) => {
-    setErrorMessage("");
-    setInputValue(value);
-    onValueHandler(value);
-  };
-
-  const handleBlur = () => {
-    setErrorMessage(validateNumeric(inputValue));
-  };
+  const { inputValue, errorMessage, handlers } = useCvcInput({ onValueHandler });
 
   return (
     <InputSectionLayout title="CVC번호를 입력해 주세요" message="" tag="CVC">
       <ValidatedInputGroup errorMessage={errorMessage} legend="CVC">
         <input
           autoFocus
-          maxLength={CVC_MAX_LENGTH}
+          maxLength={CVC_LENGTH}
           inputMode="numeric"
           value={inputValue}
-          onChange={(e) => onChange(e.target.value)}
-          onBlur={handleBlur}
+          onChange={(e) => handlers.onChange(e.target.value)}
+          onBlur={handlers.handleBlur}
           css={inputStyle(!!errorMessage, "80px")}
           placeholder="123"
         />

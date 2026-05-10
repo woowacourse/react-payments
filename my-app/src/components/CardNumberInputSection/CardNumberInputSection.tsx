@@ -1,13 +1,8 @@
-import { useState, useRef } from "react";
-
 import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 
+import { useCardNumberInput } from "../../hooks/useCardNumberInput";
 import { inputStyle } from "../../styles/inputStyle";
-
-const NUMERIC_REGEX = /^\d+$/;
-const CARD_NUMBER_MAX_LENGTH = 4;
-const CARD_NUMBER_FIELD_COUNT = 4;
 
 type CardNumberInputSectionProps = {
   onValueHandler: (numbers: string[]) => void;
@@ -15,46 +10,21 @@ type CardNumberInputSectionProps = {
   isSupportedNetwork: boolean;
 };
 
-const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork }: CardNumberInputSectionProps) => {
-  const [inputValues, setInputValues] = useState<string[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [errorIndex, setErrorIndex] = useState<number>(-1);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const latestValues = useRef<string[]>([]);
-
-  const lastInputMaxLength = maxLength - CARD_NUMBER_MAX_LENGTH * (CARD_NUMBER_FIELD_COUNT - 1);
-
-  const onChange = (index: number, value: string) => {
-    const newValues = [...inputValues];
-    newValues[index] = value;
-    latestValues.current = newValues;
-
-    setInputValues(newValues);
-    setErrorMessage("");
-    onValueHandler(newValues);
-
-    const currentMax = index === CARD_NUMBER_FIELD_COUNT - 1 ? lastInputMaxLength : CARD_NUMBER_MAX_LENGTH;
-    if (value.length === currentMax) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
-
-  const getValidationError = (values: string[]) => {
-    for (const [i, value] of values.entries()) {
-      if (!value) continue;
-      if (!NUMERIC_REGEX.test(value)) {
-        return { index: i, message: "숫자만 입력 가능합니다" };
-      }
-      if (i === 0 && !isSupportedNetwork) return { index: i, message: "이 카드 브랜드는 지원하지 않습니다." };
-    }
-    return { index: -1, message: "" };
-  };
-
-  const handleBlur = () => {
-    const { index, message } = getValidationError(latestValues.current);
-    setErrorIndex(index);
-    setErrorMessage(message);
-  };
+const CardNumberInputSection = ({
+  onValueHandler,
+  maxLength,
+  isSupportedNetwork,
+}: CardNumberInputSectionProps) => {
+  const {
+    inputValues,
+    errorMessage,
+    errorIndex,
+    inputRefs,
+    lastInputMaxLength,
+    fieldCount,
+    fieldMaxLength,
+    handlers,
+  } = useCardNumberInput({ onValueHandler, maxLength, isSupportedNetwork });
 
   return (
     <InputSectionLayout
@@ -63,17 +33,17 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork 
       tag="카드 번호"
     >
       <ValidatedInputGroup errorMessage={errorMessage} legend="카드 번호">
-        {Array.from({ length: CARD_NUMBER_FIELD_COUNT }, (_, i) => (
+        {Array.from({ length: fieldCount }, (_, i) => (
           <input
             ref={(el) => {
               inputRefs.current[i] = el;
             }}
             key={i}
-            maxLength={i === CARD_NUMBER_FIELD_COUNT - 1 ? lastInputMaxLength : CARD_NUMBER_MAX_LENGTH}
+            maxLength={i === fieldCount - 1 ? lastInputMaxLength : fieldMaxLength}
             inputMode="numeric"
             value={inputValues[i] || ""}
-            onChange={(e) => onChange(i, e.target.value)}
-            onBlur={handleBlur}
+            onChange={(e) => handlers.onChange(i, e.target.value)}
+            onBlur={handlers.handleBlur}
             css={[inputStyle(errorIndex === i), { flex: 1 }]}
             placeholder="1234"
           />
