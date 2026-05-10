@@ -22,7 +22,7 @@ export type CardNumberFormat = number[];
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
   onChange: (input: CardNumberUnits) => void;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
+  onNextStep: (fromStep: number) => void;
 }
 
 type InputsStatuses = InputStatus[];
@@ -37,7 +37,7 @@ const INPUTS_STATUSES: InputsStatuses = [
 const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
-  setStep,
+  onNextStep,
 }: CardNumberInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
   const { registerInput, focusNextInput } = useInputFocus();
@@ -91,10 +91,7 @@ const CardNumberInputField = ({
     }
 
     if (checkCardNumberLength(newCardNumberUnits)) {
-      setStep((prev) => {
-        if (prev !== 1) return prev;
-        return prev + 1;
-      });
+      onNextStep(1);
     }
   };
 

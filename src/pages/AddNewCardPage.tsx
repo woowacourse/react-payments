@@ -28,6 +28,13 @@ const AddNewCardPage = () => {
 
   const [step, setStep] = useState(1);
 
+  const goToNextStep = (fromStep: number) => {
+    setStep((prev) => {
+      if (fromStep !== prev) return prev;
+      return prev + 1;
+    });
+  };
+
   const isFormValid = validateCardForm(
     cardNumber,
     cardCompany,
@@ -63,27 +70,31 @@ const AddNewCardPage = () => {
           <CardPasswordInputField password={password} onChange={setPassword} />
         )}
         {step > 3 && (
-          <CardCVCInputField CVC={CVC} onChange={setCVC} setStep={setStep} />
+          <CardCVCInputField
+            CVC={CVC}
+            onChange={setCVC}
+            onNextStep={goToNextStep}
+          />
         )}
         {step > 2 && (
           <CardValidityPeriodInputField
             validityPeriod={validityPeriod}
             onChange={setValidityPeriod}
-            setStep={setStep}
+            onNextStep={goToNextStep}
           />
         )}
         {step > 1 && (
           <CardCompanySelector
             cardCompany={cardCompany}
             onSelect={setCardCompany}
-            setStep={setStep}
+            onNextStep={goToNextStep}
           />
         )}
         {step > 0 && (
           <CardNumberInputField
             cardNumberUnits={cardNumber}
             onChange={setCardNumber}
-            setStep={setStep}
+            onNextStep={goToNextStep}
           />
         )}
 
