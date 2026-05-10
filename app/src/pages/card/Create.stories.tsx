@@ -2,17 +2,17 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within, expect } from "storybook/test";
 import { MemoryRouter, Routes, Route } from "react-router";
 
-import CardNewPage from "./CardNewPage";
-import CardCreateDonePage from "./CardCreateDonePage";
+import Create from "./Create";
+import CreateComplete from "./CreateComplete";
 
 const meta = {
-  title: "pages/CardNewPage",
-  component: CardNewPage,
+  title: "Pages/Card/Create",
+  component: Create,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CardNewPage>;
+} satisfies Meta<typeof Create>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -22,7 +22,7 @@ const defaultDecorators = [
     <MemoryRouter initialEntries={["/card"]}>
       <Routes>
         <Route path="/card" element={<Story />} />
-        <Route path="/card/done" element={<CardCreateDonePage />} />
+        <Route path="/card/done" element={<CreateComplete />} />
       </Routes>
     </MemoryRouter>
   ),

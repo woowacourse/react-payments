@@ -1,8 +1,8 @@
 import { useLocation } from "react-router";
-import { CARD_BRAND } from "../features/card/Constants";
+import { CARD_BRAND } from "../../features/card/Constants";
 import styled from "@emotion/styled";
-import { RadiusButton } from "../features/card/style/Button";
-import CreateComplete from "../app/assets/Check.svg";
+import { RadiusButton } from "../../features/card/style/Button";
+import CreateComplete from "../../app/assets/check.svg";
 
 export default function CardCreateDonePage() {
   const { cardNumber, cardBrand } = useLocation().state ?? {};
