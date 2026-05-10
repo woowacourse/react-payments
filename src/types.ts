@@ -8,4 +8,5 @@ export interface CardFormState {
   expiryYear: string;
   cvc: string;
   cardCompany: string;
+  cardPassword: string;
 }

@@ -12,6 +12,24 @@ export interface Validation {
   message: string;
 }
 
+export const cardPasswordValidations = [
+  {
+    type: "validateOnChange",
+    validator: validateNumberString,
+    message: "숫자만 입력 가능합니다.",
+  },
+  {
+    type: "validateOnChange",
+    validator: (input: string) => validateStringMaxLength(input, 2),
+    message: "2자리까지만 입력 가능합니다.",
+  },
+  {
+    type: "validateOnBlur",
+    validator: (input: string) => validateStringLength(input, 2),
+    message: "2자리를 입력해주세요.",
+  },
+] as const satisfies Validation[];
+
 export const numberSegmentValidations = [
   {
     type: "validateOnChange",

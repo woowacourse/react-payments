@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import CardExpiryDateInput from "./CardExpiryDateInput";
 import type { CardFormState, CardNumberSegments } from "../types";
 import { CardCompany } from "./CardCompany";
+import CardPasswordInput from "./CardPasswordInput";
 
 const Title = styled.h3`
   font-size: 18px;
@@ -76,6 +77,19 @@ function CardForm(props: CardFormProps) {
           value={props.formState.cvc}
           onChange={(value: string) =>
             props.setFormState({ ...props.formState, cvc: value })
+          }
+        />
+        <Flex direction="column" gap={5}>
+          <Title>비밀번호를 입력해 주세요</Title>
+          <Description>앞의 2자리를 입력해주세요</Description>
+        </Flex>
+        <CardPasswordInput
+          value={props.formState.cardPassword}
+          onChange={(value: string) =>
+            props.setFormState({
+              ...props.formState,
+              cardPassword: value,
+            })
           }
         />
       </Flex>

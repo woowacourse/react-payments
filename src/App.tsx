@@ -19,7 +19,10 @@ function App() {
     expiryMonth: "",
     expiryYear: "",
     cvc: "",
+    cardPassword: "",
   });
+
+  console.log(formState);
 
   const brand = getCardBrand(formState.cardNumberSegments);
 
