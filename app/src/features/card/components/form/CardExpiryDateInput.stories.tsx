@@ -159,3 +159,19 @@ export const MultipleErrorsInput: Story = {
     ).toBeInTheDocument();
   },
 };
+
+export const InputAutoFocusNextOrPreviousInput: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const [firstInput, secondInput] = canvas.getAllByRole("textbox");
+    await userEvent.type(firstInput, "12");
+    await expect(secondInput).toHaveFocus();
+
+    await userEvent.type(secondInput, "30");
+    await userEvent.clear(secondInput);
+
+    await expect(firstInput).toHaveFocus();
+  },
+};

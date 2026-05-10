@@ -5,6 +5,7 @@ import { sanitizeErrors } from "../../../../Utils";
 import { CARD_INPUT } from "../../Constants";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
+import useFocusChain from "../../hooks/useFocusChain";
 
 export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
   const [isError, setError] = useState({
@@ -17,6 +18,11 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
       message: "",
     },
   });
+
+  const { ref, changeFocus } = useFocusChain(
+    2,
+    CARD_INPUT.EACH_EXPIRY_DATE_LENGTH,
+  );
 
   const runValidation = (validators: (() => void)[], id: string): boolean => {
     try {
@@ -34,7 +40,10 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
     }
   };
 
-  const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeCardExpiryMonth = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
     const { value, id } = e.target;
     if (
       !runValidation(
@@ -44,9 +53,13 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
     )
       return;
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+    changeFocus(e, index);
   };
 
-  const changeCardExpiryYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeCardExpiryYear = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
     const { value, id } = e.target;
     if (
       !runValidation(
@@ -56,6 +69,7 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
     )
       return;
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
+    changeFocus(e, index);
   };
 
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -73,7 +87,8 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
         <CardInput
           type="text"
           id="expiry-month"
-          onChange={changeCardExpiryMonth}
+          ref={(node) => ref(1, node)}
+          onChange={(e) => changeCardExpiryMonth(e, 1)}
           onBlur={handleBlurCardExpiryDate}
           maxLength={CARD_INPUT.EACH_EXPIRY_DATE_LENGTH}
           value={cardExpiryDate["expiry-month"]}
@@ -83,7 +98,10 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
         <CardInput
           type="text"
           id="expiry-year"
-          onChange={changeCardExpiryYear}
+          ref={(node) => ref(2, node)}
+          onChange={(e) => {
+            changeCardExpiryYear(e, 2);
+          }}
           onBlur={handleBlurCardExpiryDate}
           maxLength={CARD_INPUT.EACH_EXPIRY_DATE_LENGTH}
           value={cardExpiryDate["expiry-year"]}
