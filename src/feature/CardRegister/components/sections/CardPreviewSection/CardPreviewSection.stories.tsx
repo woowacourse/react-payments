@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
 import CardPreviewSection from './CardPreviewSection';
-import CardPreviewContainer from '../../preview/CardPreviewContainer/CardPreviewContainer';
+import CardPreviewContainer from '../../previews/CardPreviewContainer/CardPreviewContainer';
 
 const emptyPreviewSlot = (
   <CardPreviewContainer cardNumbers={['', '', '', '']} brand={null} expiryDate={['', '']} selectedCompany={null} />

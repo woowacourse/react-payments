@@ -3,7 +3,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import CardNumberDisplay from './CardNumberDisplay';
 
 const meta = {
-  title: 'feature/CardRegister/components/preview/CardNumberDisplay',
+  title: 'feature/CardRegister/components/previews/CardNumberDisplay',
   component: CardNumberDisplay,
   tags: ['autodocs'],
   args: {

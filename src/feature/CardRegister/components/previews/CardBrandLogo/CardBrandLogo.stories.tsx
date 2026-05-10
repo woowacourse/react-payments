@@ -3,7 +3,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import CardBrandLogo from './CardBrandLogo';
 
 const meta = {
-  title: 'feature/CardRegister/components/preview/CardBrandLogo',
+  title: 'feature/CardRegister/components/previews/CardBrandLogo',
   component: CardBrandLogo,
   tags: ['autodocs'],
   args: {

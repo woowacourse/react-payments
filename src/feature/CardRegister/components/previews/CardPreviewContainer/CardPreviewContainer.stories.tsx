@@ -3,7 +3,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import CardPreviewContainer from './CardPreviewContainer';
 
 const meta = {
-  title: 'feature/CardRegister/components/preview/CardPreviewContainer',
+  title: 'feature/CardRegister/components/previews/CardPreviewContainer',
   component: CardPreviewContainer,
   tags: ['autodocs'],
   args: {

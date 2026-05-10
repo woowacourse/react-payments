@@ -1,18 +1,20 @@
 import styled from 'styled-components';
 
-import CardPreviewContainer from './components/preview/CardPreviewContainer/CardPreviewContainer';
-import BrandSelectField from './components/fields/BrandSelectField/BrandSelectField';
-import CvcField from './components/fields/CvcField/CvcField';
-import ExpiryField from './components/fields/ExpiryField/ExpiryField';
-import NumberField from './components/fields/NumberField/NumberField';
-import PasswordField from './components/fields/PasswordField/PasswordField';
 import CardPreviewSection from './components/sections/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/sections/InfoInputSection/InfoInputSection';
+
+import CardPreviewContainer from './components/previews/CardPreviewContainer/CardPreviewContainer';
+
+import NumberField from './components/inputs/NumberField/NumberField';
+import BrandSelectField from './components/inputs/BrandSelectField/BrandSelectField';
+import ExpiryField from './components/inputs/ExpiryField/ExpiryField';
+import CvcField from './components/inputs/CvcField/CvcField';
+import PasswordField from './components/inputs/PasswordField/PasswordField';
 
 import {useCardRegisterForm} from './hooks/form/useCardRegisterForm';
 
 const CardRegisterPage = () => {
-  const {cardPreview, fieldProps, visibleFields, isFormComplete, handleSubmit} = useCardRegisterForm();
+  const {cardPreview, visibleFields, fieldProps, isFormComplete, handleSubmit} = useCardRegisterForm();
 
   return (
     <Wrapper>

@@ -3,7 +3,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import CardExpiryDateDisplay from './CardExpiryDateDisplay';
 
 const meta = {
-  title: 'feature/CardRegister/components/preview/CardExpiryDateDisplay',
+  title: 'feature/CardRegister/components/previews/CardExpiryDateDisplay',
   component: CardExpiryDateDisplay,
   tags: ['autodocs'],
   args: {
