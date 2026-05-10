@@ -3,6 +3,7 @@ import CardNumber from './CardNumber';
 import CardExpiryDate from './CardExpiryDate';
 import CardPassword from './CardPassword';
 import { getStep } from '../utils/getStep';
+import { useNavigate } from 'react-router-dom';
 
 import type {
   CardHandler,
@@ -43,6 +44,8 @@ export default function CardInput({
   cardIssuer,
   handleCardIssuer,
 }: CardInputProps) {
+  const navigate = useNavigate();
+
   const isCardNumberValid =
     cardStatus.cardBrand !== 'unknown' &&
     cardStatus.cardNumbers.join('').length === getCardNumberLength(cardStatus.cardBrand) &&
@@ -67,6 +70,21 @@ export default function CardInput({
       {step >= 2 && <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />}
       {step >= 1 && <CardIssuer cardIssuer={cardIssuer} handleCardIssuer={handleCardIssuer} />}
       <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
+      <button
+        type="submit"
+        onClick={() => navigate('/complete')}
+        css={(theme) => ({
+          backgroundColor: theme.colors.cardBackground,
+          width: '100%',
+          height: '44px',
+          borderRadius: '5px',
+          ...theme.typography.mode,
+          color: theme.colors.white,
+          textAlign: 'center',
+        })}
+      >
+        확인
+      </button>
     </form>
   );
 }
