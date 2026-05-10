@@ -54,59 +54,35 @@ function App() {
     navigate("/complete");
   };
   return (
-    <main
-      css={css`
-        display: flex;
-        min-height: 100vh;
-        width: 100vw;
-        align-items: flex-start;
-        justify-content: center;
-        padding-top: 60px;
-        background-color: #f5f5f5;
-      `}
-    >
+    <>
+      <Card cardInfo={cardInfo} brand={brand} />
       <div
         css={css`
-          width: 376px;
-          padding: 77px 30px 20px;
-          background-color: #ffffff;
-          border-radius: 20px;
+          width: 100%;
           display: flex;
           flex-direction: column;
-          align-items: center;
-          gap: 45px;
+          gap: 16px;
         `}
       >
-        <Card cardInfo={cardInfo} brand={brand} />
-        <div
-          css={css`
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-          `}
-        >
-          {/* form */}
-          <form onSubmit={handleSubmit}>
-            <CardNumberInputSection onValueHandler={cardNumberHandler} inputValues={cardInfo.numbers} />
-            <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
-            <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />
-            {isValid && (
-              <button
-                css={css`
-                  width: 100%;
-                  background: #333333;
-                  color: #f3f3f3;
-                  height: 52px;
-                `}
-              >
-                확인
-              </button>
-            )}
-          </form>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <CardNumberInputSection onValueHandler={cardNumberHandler} inputValues={cardInfo.numbers} />
+          <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
+          <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />
+          {isValid && (
+            <button
+              css={css`
+                width: 100%;
+                background: #333333;
+                color: #f3f3f3;
+                height: 52px;
+              `}
+            >
+              확인
+            </button>
+          )}
+        </form>
       </div>
-    </main>
+    </>
   );
 }
 

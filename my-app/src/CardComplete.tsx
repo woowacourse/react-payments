@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 const CardComplete = () => {
   return <></>;
 };
