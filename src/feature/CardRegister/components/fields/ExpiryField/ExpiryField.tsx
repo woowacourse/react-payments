@@ -2,8 +2,8 @@ import Input from '@/common/components/Input/Input';
 import styled from 'styled-components';
 import {useInputFocusMove} from '@/feature/CardRegister/hooks/useInputFocusMove';
 import type {ExpiryInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
-import InputContainer from './InputContainer';
-import {FieldErrorMessage, FieldLayout} from '../styles/inputFieldStyles';
+import InputContainer from '../InputContainer/InputContainer';
+import {FieldErrorMessage, FieldLayout} from '../../styles/inputFieldStyles';
 
 type ExpiryFieldProps = {
   inputProps: ExpiryInputProps;

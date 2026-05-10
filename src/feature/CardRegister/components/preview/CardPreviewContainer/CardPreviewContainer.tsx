@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import CardBrandLogo from './CardBrandLogo';
-import CardExpiryDateDisplay from './CardExpiryDateDisplay';
-import CardNumberDisplay from './CardNumberDisplay';
+import CardBrandLogo from '../CardBrandLogo/CardBrandLogo';
+import CardExpiryDateDisplay from '../CardExpiryDateDisplay/CardExpiryDateDisplay';
+import CardNumberDisplay from '../CardNumberDisplay/CardNumberDisplay';
 
 import {CARD_COMPANIES, DEFAULT_CARD_COLOR} from '@/domain/card/cardCompany';
 

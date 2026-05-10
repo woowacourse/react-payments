@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-import CardPreviewContainer from './components/preview/CardPreviewContainer';
-import BrandSelectField from './components/fields/BrandSelectField';
-import CvcField from './components/fields/CvcField';
-import ExpiryField from './components/fields/ExpiryField';
-import NumberField from './components/fields/NumberField';
-import PasswordField from './components/fields/PasswordField';
-import CardPreviewSection from './components/sections/CardPreviewSection';
-import InfoInputSection from './components/sections/InfoInputSection';
+import CardPreviewContainer from './components/preview/CardPreviewContainer/CardPreviewContainer';
+import BrandSelectField from './components/fields/BrandSelectField/BrandSelectField';
+import CvcField from './components/fields/CvcField/CvcField';
+import ExpiryField from './components/fields/ExpiryField/ExpiryField';
+import NumberField from './components/fields/NumberField/NumberField';
+import PasswordField from './components/fields/PasswordField/PasswordField';
+import CardPreviewSection from './components/sections/CardPreviewSection/CardPreviewSection';
+import InfoInputSection from './components/sections/InfoInputSection/InfoInputSection';
 
 import {useCardRegisterForm} from './hooks/useCardRegisterForm';
 

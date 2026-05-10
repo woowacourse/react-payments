@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import {CARD_COMPANIES} from '@/domain/card/cardCompany';
 import type {CardCompanyType} from '@/domain/card/cardCompany';
-import InputContainer from './InputContainer';
-import {FieldLayout} from '../styles/inputFieldStyles';
+import InputContainer from '../InputContainer/InputContainer';
+import {FieldLayout} from '../../styles/inputFieldStyles';
 
 type BrandSelectFieldProps = {
   selectedCompany: CardCompanyType | null;

@@ -1,20 +1,20 @@
 import Input from '@/common/components/Input/Input';
 import styled from 'styled-components';
 import type {CardRegisterInputProps} from '@/feature/CardRegister/types/cardRegisterInputProps';
-import InputContainer from './InputContainer';
-import {FieldErrorMessage, FieldLayout} from '../styles/inputFieldStyles';
+import InputContainer from '../InputContainer/InputContainer';
+import {FieldErrorMessage, FieldLayout} from '../../styles/inputFieldStyles';
 
-type CvcFieldProps = {
+type PasswordFieldProps = {
   inputProps: CardRegisterInputProps;
   errorMessage: string;
 };
 
-const CvcField = ({inputProps, errorMessage}: CvcFieldProps) => {
+const PasswordField = ({inputProps, errorMessage}: PasswordFieldProps) => {
   return (
-    <InputContainer title='CVC 번호를 입력해 주세요' label='CVC'>
+    <InputContainer title='비밀번호를 입력해 주세요' description='앞의 2자리를 입력해주세요' label='비밀번호 앞 2자리'>
       <FieldLayout>
         <InputWrapper>
-          <CvcInput {...inputProps} strokeMode={errorMessage ? 'error' : 'default'} />
+          <PasswordInput {...inputProps} strokeMode={errorMessage ? 'error' : 'default'} />
         </InputWrapper>
         <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       </FieldLayout>
@@ -25,13 +25,12 @@ const CvcField = ({inputProps, errorMessage}: CvcFieldProps) => {
 const InputWrapper = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 14px;
 `;
 
-const CvcInput = styled(Input)`
+const PasswordInput = styled(Input)`
   box-sizing: border-box;
   width: 100%;
   height: 32px;
 `;
 
-export default CvcField;
+export default PasswordField;
