@@ -1,31 +1,35 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
-interface UseFieldProps {
-  validateFormat: (value: string) => string | undefined;
-  validateComplete: (value: string) => string | undefined;
-}
+// interface UseFieldProps {
+//   isValidFormat: (value: string) => boolean;
+//   validator: (value: string) => string | undefined;
+// }
 
-export interface UseFieldResult {
-  value: string;
-  error: string | undefined;
-  handleChange: (value: string) => void;
-  handleBlur: () => void;
-}
+// export interface UseFieldResult {
+//   value: string;
+//   errorMessage: string | undefined;
+//   handleChange: (value: string) => boolean;
+//   handleBlur: () => void;
+//   isValid: boolean;
+// }
 
-export const useField = ({ validateFormat, validateComplete }: UseFieldProps): UseFieldResult => {
-  const [value, setValue] = useState('');
-  const [error, setError] = useState<string | undefined>();
+// export const useField = ({ isValidFormat, validator }: UseFieldProps): UseFieldResult => {
+//   const [value, setValue] = useState<string>('');
+//   const [touched, setTouched] = useState<boolean>(false);
 
-  const handleChange = (nextValue: string) => {
-    const errorMessage = validateFormat(nextValue);
-    setError(errorMessage);
-    if (errorMessage) return;
-    setValue(nextValue);
-  };
+//   const error = validator(value);
+//   const errorMessage = touched ? validator(value) : undefined;
 
-  const handleBlur = () => {
-    setError(validateComplete(value));
-  };
+//   const handleChange = (inputValue: string): boolean => {
+//     if (!isValidFormat(inputValue)) return false;
+//     setValue(inputValue);
+//     setTouched(false);
+//     return validator(inputValue) === undefined;
+//   };
 
-  return { value, error, handleChange, handleBlur };
-};
+//   const handleBlur = () => {
+//     setTouched(true);
+//   };
+
+//   return { value, errorMessage, handleChange, handleBlur, isValid: !error };
+// };
