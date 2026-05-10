@@ -42,11 +42,11 @@ const renderWithContext = () => {
   );
 };
 
-export const base: Story = {
+export const Base: Story = {
   render: renderWithContext,
 };
 
-export const openDropdown: Story = {
+export const OpenDropdown: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -55,7 +55,7 @@ export const openDropdown: Story = {
   },
 };
 
-export const selectOption: Story = {
+export const SelectOption: Story = {
   render: renderWithContext,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import { CardInput, CardSingleFieldContainer, CardLabel } from '../../style/CardStyles';
 import { Validator } from '../../validators/CardValidator';
 import { useCardContext } from '../../hooks/useCardContext';
+import { useSingleInput } from '../../hooks/useSingleInput';
 
 export function CardPasswordInput({
   cardPasswordRef,
@@ -11,33 +11,11 @@ export function CardPasswordInput({
 }) {
   const { cardPassword, setCardPassword } = useCardContext();
 
-  const [fieldErrors, setError] = useState({
-    state: false,
-    message: '',
-  });
-
-  const changeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    const result = Validator.isNumber(value);
-    if (!result.valid) {
-      setError({ ...fieldErrors, state: true, message: result.message });
-      return;
-    }
-    setError({ ...fieldErrors, state: false, message: '' });
-    setCardPassword(value);
-  };
-
-  const handleBlurPassword = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    const result = Validator.isValidPasswordLength(value, e.target.maxLength);
-    if (!result.valid) {
-      setError({ ...fieldErrors, state: true, message: result.message });
-      return;
-    }
-    setError({ ...fieldErrors, state: false, message: '' });
-  };
+  const { fieldErrors, onChange, onBlur } = useSingleInput(
+    setCardPassword,
+    Validator.isNumber,
+    Validator.isValidPasswordLength,
+  );
 
   return (
     <CardSingleFieldContainer>
@@ -50,8 +28,8 @@ export function CardPasswordInput({
         placeholder="12"
         id="card-password-input"
         value={cardPassword}
-        onChange={changeCardPassword}
-        onBlur={handleBlurPassword}
+        onChange={onChange}
+        onBlur={onBlur}
         $fieldErrors={fieldErrors.state}
         ref={cardPasswordRef}
       />
