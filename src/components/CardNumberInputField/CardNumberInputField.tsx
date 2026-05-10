@@ -1,4 +1,8 @@
-import { checkIsOnlyDigits, checkLengthMatches } from "@utils/validator";
+import {
+  checkCardNumberLength,
+  checkIsOnlyDigits,
+  checkLengthMatches,
+} from "@utils/validator";
 import { useState } from "react";
 import { HELPER_MESSAGE, type InputStatus } from "./constants";
 import {
@@ -18,6 +22,7 @@ export type CardNumberFormat = number[];
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
   onChange: (input: CardNumberUnits) => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
 type InputsStatuses = InputStatus[];
@@ -32,6 +37,7 @@ const INPUTS_STATUSES: InputsStatuses = [
 const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
+  setStep,
 }: CardNumberInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
   const { registerInput, focusNextInput } = useInputFocus();
@@ -83,6 +89,13 @@ const CardNumberInputField = ({
     if (newCardNumberUnits[index].length === cardNumberFormat[index]) {
       focusNextInput(index);
     }
+
+    if (checkCardNumberLength(newCardNumberUnits)) {
+      setStep((prev) => {
+        if (prev !== 1) return prev;
+        return prev + 1;
+      });
+    }
   };
 
   const handleCardNumberBlur = (index: number, input: string) => {
@@ -112,6 +125,7 @@ const CardNumberInputField = ({
     >
       {cardNumberFormat.map((maxLength, index) => (
         <Input
+          autoFocus={index === 0}
           key={index}
           ref={registerInput(index)}
           placeholder={getCardNumberPlaceholder(maxLength)}

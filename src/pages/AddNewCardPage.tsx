@@ -26,6 +26,8 @@ const AddNewCardPage = () => {
   const [CVC, setCVC] = useState("");
   const [password, setPassword] = useState("");
 
+  const [step, setStep] = useState(1);
+
   const isFormValid = validateCardForm(
     cardNumber,
     cardCompany,
@@ -57,20 +59,34 @@ const AddNewCardPage = () => {
           navigate("/complete", { state: completePageState });
         }}
       >
-        <CardNumberInputField
-          cardNumberUnits={cardNumber}
-          onChange={setCardNumber}
-        />
-        <CardCompanySelector
-          cardCompany={cardCompany}
-          onSelect={setCardCompany}
-        />
-        <CardValidityPeriodInputField
-          validityPeriod={validityPeriod}
-          onChange={setValidityPeriod}
-        />
-        <CardCVCInputField CVC={CVC} onChange={setCVC} />
-        <CardPasswordInputField password={password} onChange={setPassword} />
+        {step > 4 && (
+          <CardPasswordInputField password={password} onChange={setPassword} />
+        )}
+        {step > 3 && (
+          <CardCVCInputField CVC={CVC} onChange={setCVC} setStep={setStep} />
+        )}
+        {step > 2 && (
+          <CardValidityPeriodInputField
+            validityPeriod={validityPeriod}
+            onChange={setValidityPeriod}
+            setStep={setStep}
+          />
+        )}
+        {step > 1 && (
+          <CardCompanySelector
+            cardCompany={cardCompany}
+            onSelect={setCardCompany}
+            setStep={setStep}
+          />
+        )}
+        {step > 0 && (
+          <CardNumberInputField
+            cardNumberUnits={cardNumber}
+            onChange={setCardNumber}
+            setStep={setStep}
+          />
+        )}
+
         {isFormValid && (
           <Button type="submit" fixedBottom>
             확인

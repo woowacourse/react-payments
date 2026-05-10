@@ -9,11 +9,13 @@ import FormField from "@components/common/FormField";
 interface CardCompanySelectorProps {
   cardCompany: CardCompany | null;
   onSelect: (cardCompany: CardCompany) => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function CardCompanySelector({
   cardCompany,
   onSelect,
+  setStep,
 }: CardCompanySelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,6 +26,11 @@ function CardCompanySelector({
   const handleSelect = (company: CardCompany) => {
     onSelect(company);
     setIsOpen(false);
+
+    setStep((prev) => {
+      if (prev !== 2) return prev;
+      return prev + 1;
+    });
   };
 
   return (

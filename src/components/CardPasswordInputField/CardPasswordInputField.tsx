@@ -51,6 +51,7 @@ const CardPasswordInputField = ({
       helperMessage={HELPER_MESSAGE[status]}
     >
       <Input
+        autoFocus
         placeholder="••"
         type="password"
         maxLength={PASSWORD_MAX_LENGTH}

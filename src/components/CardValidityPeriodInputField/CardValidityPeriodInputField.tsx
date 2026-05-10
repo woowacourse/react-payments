@@ -22,6 +22,7 @@ export type ValidityPeriod = {
 interface CardValidityPeriodInputFieldProps {
   validityPeriod: ValidityPeriod;
   onChange: (validityPeriod: ValidityPeriod) => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
 type InputsStatuses = {
@@ -36,6 +37,7 @@ const INPUTS_STATUSES: InputsStatuses = {
 const CardValidityPeriodInputField = ({
   validityPeriod,
   onChange,
+  setStep,
 }: CardValidityPeriodInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
   const { registerInput, focusNextInput } = useInputFocus();
@@ -94,6 +96,13 @@ const CardValidityPeriodInputField = ({
       year: input.slice(0, YEAR_MAX_LENGTH),
     });
     setStatus((prev) => ({ ...prev, year: "DEFAULT" }));
+
+    if (checkLengthMatches(input, YEAR_MAX_LENGTH)) {
+      setStep((prev) => {
+        if (prev !== 3) return prev;
+        return prev + 1;
+      });
+    }
   };
 
   const handleValidityPeriodBlur = (
@@ -133,6 +142,7 @@ const CardValidityPeriodInputField = ({
       }
     >
       <Input
+        autoFocus
         ref={registerInput(0)}
         placeholder="MM"
         maxLength={MONTH_MAX_LENGTH}

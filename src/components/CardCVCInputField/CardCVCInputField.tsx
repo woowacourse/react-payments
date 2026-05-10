@@ -7,9 +7,14 @@ import Input from "@components/common/Input";
 interface CardCVCInputFieldProps {
   CVC: string;
   onChange: (CVC: string) => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
+const CardCVCInputField = ({
+  CVC,
+  onChange,
+  setStep,
+}: CardCVCInputFieldProps) => {
   const [status, setStatus] = useState<InputStatus>("DEFAULT");
 
   const handleCVCChange = (input: string) => {
@@ -20,6 +25,13 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
 
     setStatus("DEFAULT");
     onChange(input.slice(0, CVC_MAX_LENGTH));
+
+    if (checkLengthMatches(input, CVC_MAX_LENGTH)) {
+      setStep((prev) => {
+        if (prev !== 4) return prev;
+        return prev + 1;
+      });
+    }
   };
 
   const handleCVCBlur = (input: string) => {
@@ -43,6 +55,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
       helperMessage={HELPER_MESSAGE[status]}
     >
       <Input
+        autoFocus
         placeholder="123"
         maxLength={CVC_MAX_LENGTH}
         fullWidth
