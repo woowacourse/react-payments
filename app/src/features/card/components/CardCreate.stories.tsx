@@ -157,45 +157,78 @@ export const CardNumberSpecificDisplaySecret: Story = {
   },
 };
 
-// export const CardExpiryDateIsDynamicDisplay: Story = {
-//   play: async ({ canvasElement }) => {
-//     const expiryDateMonth = canvasElement.querySelector("#expiry-month");
-//     await userEvent.type(expiryDateMonth, "1");
-//     let previewExpiryMonth = canvasElement.querySelector(
-//       "#preview-card-expiry-date-month",
-//     );
-//     await expect(previewExpiryMonth).toHaveTextContent("1");
-//     await userEvent.type(expiryDateMonth, "2");
-//     previewExpiryMonth = canvasElement.querySelector(
-//       "#preview-card-expiry-date-month",
-//     );
-//     await expect(previewExpiryMonth).toHaveTextContent("12");
+export const CardExpiryDateIsDynamicDisplay: Story = {
+  decorators: defaultDecorators,
+  play: async ({ canvasElement }) => {
+    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>(
+        "#card-number-input-container input",
+      ),
+    );
+    await userEvent.type(firstInput, "3612");
+    await userEvent.type(secondInput, "3612");
+    await userEvent.type(thirdInput, "3612");
+    await userEvent.type(fourthInput, "36");
 
-//     const expiryDateYear = canvasElement.querySelector("#expiry-year");
-//     await userEvent.type(expiryDateYear, "3");
-//     let previewExpiryYear = canvasElement.querySelector(
-//       "#preview-card-expiry-date-year",
-//     );
-//     await expect(previewExpiryYear).toHaveTextContent("3");
-//     await userEvent.type(expiryDateYear, "1");
-//     previewExpiryYear = canvasElement.querySelector(
-//       "#preview-card-expiry-date-year",
-//     );
-//     await expect(previewExpiryYear).toHaveTextContent("31");
-//   },
-// };
+    const brandSelect =
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+    await userEvent.selectOptions(brandSelect, "bc");
 
-// export const CardExpiryDateDivideLineIsDynamicDisplay: Story = {
-//   play: async ({ canvasElement }) => {
-//     const expiryDateMonth = canvasElement.querySelector("#expiry-month");
-//     await userEvent.type(expiryDateMonth, "12");
-//     const divideLine = canvasElement.querySelector(
-//       "#preview-card-expiry-date-divide-line",
-//     );
-//     await expect(divideLine).toBeVisible();
-//     await expect(divideLine).toHaveTextContent("/");
-//   },
-// };
+    const expiryDateMonth =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+    await userEvent.type(expiryDateMonth, "1");
+    let previewExpiryMonth = canvasElement.querySelector(
+      "#preview-card-expiry-date-month",
+    );
+    await expect(previewExpiryMonth).toHaveTextContent("1");
+    await userEvent.type(expiryDateMonth, "2");
+    previewExpiryMonth = canvasElement.querySelector(
+      "#preview-card-expiry-date-month",
+    );
+    await expect(previewExpiryMonth).toHaveTextContent("12");
+
+    const expiryDateYear =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-year");
+    await userEvent.type(expiryDateYear, "3");
+    let previewExpiryYear = canvasElement.querySelector(
+      "#preview-card-expiry-date-year",
+    );
+    await expect(previewExpiryYear).toHaveTextContent("3");
+    await userEvent.type(expiryDateYear, "1");
+    previewExpiryYear = canvasElement.querySelector(
+      "#preview-card-expiry-date-year",
+    );
+    await expect(previewExpiryYear).toHaveTextContent("31");
+  },
+};
+
+export const CardExpiryDateDivideLineIsDynamicDisplay: Story = {
+  decorators: defaultDecorators,
+  play: async ({ canvasElement }) => {
+    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
+      canvasElement.querySelectorAll<HTMLInputElement>(
+        "#card-number-input-container input",
+      ),
+    );
+    await userEvent.type(firstInput, "3612");
+    await userEvent.type(secondInput, "3612");
+    await userEvent.type(thirdInput, "3612");
+    await userEvent.type(fourthInput, "36");
+
+    const brandSelect =
+      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select");
+    await userEvent.selectOptions(brandSelect, "bc");
+
+    const expiryDateMonth =
+      canvasElement.querySelector<HTMLInputElement>("#expiry-month");
+    await userEvent.type(expiryDateMonth, "12");
+    const divideLine = canvasElement.querySelector(
+      "#preview-card-expiry-date-divide-line",
+    );
+    await expect(divideLine).toBeVisible();
+    await expect(divideLine).toHaveTextContent("/");
+  },
+};
 
 export const CardBrendSelectFieldIsDynamicDisplay: Story = {
   decorators: defaultDecorators,
