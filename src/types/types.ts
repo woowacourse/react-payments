@@ -19,6 +19,7 @@ export interface CardNumberContextValue {
   cardNumber: CardNumber;
   cardNumberError: string[];
   handleCardNumberChange: (index: number, value: string) => void;
+  handleBlur: (index: number) => void;
   inputConfig: InputConfig;
   cardType: string;
 }
@@ -28,12 +29,15 @@ export interface ExpireDateContextValue {
   expireDateError: { month: string; year: string };
   handleMonthChange: (value: string) => void;
   handleYearChange: (value: string) => void;
+  handleMonthBlur: () => void;
+  handleYearBlur: () => void;
 }
 
 export interface CvcContextValue {
   cvc: string;
   cvcError: string;
   handleCvcChange: (value: string) => void;
+  handleBlur: () => void;
 }
 
 export interface CardBrandContextValue {
@@ -48,4 +52,5 @@ export interface PasswordContextValue {
   password: string;
   passwordError: string;
   handlePasswordChange: (value: string) => void;
+  handleBlur: () => void;
 }
