@@ -2,19 +2,21 @@ import { ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 import { CARD_ISSUER_CONFIG } from '../../constants';
 import { SelectFieldConfig } from '../../types';
+import { CardIssuerType } from '../Form/PaymentForm';
 
 interface Props {
   fieldConfig: SelectFieldConfig;
-  onChange: (value: string) => void;
+  onChange: (value: CardIssuerType | null) => void;
 }
 
 export default function CardSelect({ fieldConfig, onChange }: Props) {
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => onChange(e.target.value);
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) =>
+    onChange(e.target.value as CardIssuerType);
 
   return (
     <>
       <Label htmlFor="card-select">카드사 선택</Label>
-      
+
       <Select id="card-select" onChange={handleSelect}>
         <Option value="" hidden>
           {fieldConfig.placeholder}
