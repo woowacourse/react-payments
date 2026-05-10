@@ -17,7 +17,7 @@ export type CardCompany =
   | '하나카드'
   | '국민카드';
 
-export type CardBrand = 'local' | 'visa' | 'mastercard';
+export type CardBrand = 'local' | 'visa' | 'mastercard' | 'diners' | 'amex' | 'unionpay';
 
 export type ErrorStatus = null | 'required' | 'invalidLength' | 'numberOnly';
 

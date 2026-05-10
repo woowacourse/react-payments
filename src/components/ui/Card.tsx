@@ -8,12 +8,23 @@ interface CardProps {
 }
 
 export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardProps) {
+  const cardBrandImg = {
+    visa: './visa.png',
+    mastercard: './mastercard.png',
+    diners: './diners.png',
+    amex: './amex.png',
+    unionpay: './unionpay.png',
+  };
+
   return (
     <div css={cardStyle}>
       <div css={cardHeaderStyle}>
         <div css={cardChipStyle} />
-        {cardBrand === 'visa' && <img css={cardBrandStyle} src="./visa.png" alt="visa" />}
-        {cardBrand === 'mastercard' && <img css={cardBrandStyle} src="./mastercard.png" alt="mastercard" />}
+        {cardBrand !== 'local' && (
+          <div css={cardBrandWrapperStyle}>
+            <img css={cardBrandImgStyle} src={cardBrandImg[cardBrand]} alt={cardBrand} />
+          </div>
+        )}
       </div>
 
       <div css={cardInfoWrapperStyle}>
@@ -53,11 +64,22 @@ const cardChipStyle = css`
   border-radius: 3px;
 `;
 
-const cardBrandStyle = css`
+const cardBrandWrapperStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 36px;
   height: 22px;
+  padding: 4px 3px;
   border-radius: 3px;
   border: 1px solid var(--color-border-default);
+  background-color: white;
+`;
+
+const cardBrandImgStyle = css`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const cardInfoWrapperStyle = css`
