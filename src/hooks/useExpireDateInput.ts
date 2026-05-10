@@ -17,10 +17,21 @@ export function useExpireDateInput() {
       return;
     }
 
+    const firstDigit = value.substring(0, 1);
+
     if (value !== "") {
+      if (firstDigit === "0") {
+        if (value === "00") {
+          setExpireDateError((prev) => ({
+            ...prev,
+            month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
+          }));
+          return;
+        }
+      }
       const month = Number(value);
 
-      if (month < 1 || month > 12) {
+      if (firstDigit !== "0" && (month < 1 || month > 12)) {
         setExpireDateError((prev) => ({
           ...prev,
           month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
@@ -60,5 +71,28 @@ export function useExpireDateInput() {
     }));
   };
 
-  return { expireDate, expireDateError, handleMonthChange, handleYearChange };
+  const handleMonthBlur = () => {
+    if (expireDate.month.length < 2)
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "완전히 입력해 주세요.",
+      }));
+  };
+
+  const handleYearBlur = () => {
+    if (expireDate.year.length < 2)
+      setExpireDateError((prev) => ({
+        ...prev,
+        year: "완전히 입력해 주세요.",
+      }));
+  };
+
+  return {
+    expireDate,
+    expireDateError,
+    handleMonthChange,
+    handleYearChange,
+    handleMonthBlur,
+    handleYearBlur,
+  };
 }

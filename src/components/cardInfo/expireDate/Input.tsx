@@ -7,27 +7,39 @@ export default function Input() {
   return (
     <Wrapper>
       <Container>
-        <MonthInput
-          value={expireDateContext.expireDate.month}
-          placeholder="MM"
-          maxLength={2}
-          onChange={(e) => expireDateContext.handleMonthChange(e.target.value)}
-          $hasError={!!expireDateContext.expireDateError.month}
-        />
-        {expireDateContext.expireDateError.month && (
-          <Error>{expireDateContext.expireDateError.month}</Error>
-        )}
+        <FieldWrapper>
+          <MonthInput
+            value={expireDateContext.expireDate.month}
+            placeholder="MM"
+            maxLength={2}
+            onBlur={() => expireDateContext.handleMonthBlur()}
+            onChange={(e) =>
+              expireDateContext.handleMonthChange(e.target.value)
+            }
+            $hasError={!!expireDateContext.expireDateError.month}
+          />
+          <ErrorContainer>
+            {expireDateContext.expireDateError.month && (
+              <Error>{expireDateContext.expireDateError.month}</Error>
+            )}
+          </ErrorContainer>
+        </FieldWrapper>
 
-        <YearInput
-          value={expireDateContext.expireDate.year}
-          placeholder="YY"
-          maxLength={2}
-          onChange={(e) => expireDateContext.handleYearChange(e.target.value)}
-          $hasError={!!expireDateContext.expireDateError.year}
-        />
-        {expireDateContext.expireDateError.year && (
-          <Error>{expireDateContext.expireDateError.year}</Error>
-        )}
+        <FieldWrapper>
+          <YearInput
+            value={expireDateContext.expireDate.year}
+            placeholder="YY"
+            maxLength={2}
+            onBlur={() => expireDateContext.handleYearBlur()}
+            onChange={(e) => expireDateContext.handleYearChange(e.target.value)}
+            $hasError={!!expireDateContext.expireDateError.year}
+          />
+          <ErrorContainer>
+            {expireDateContext.expireDateError.year && (
+              <Error>{expireDateContext.expireDateError.year}</Error>
+            )}
+          </ErrorContainer>
+        </FieldWrapper>
       </Container>
     </Wrapper>
   );
@@ -35,25 +47,33 @@ export default function Input() {
 
 const Wrapper = styled.div`
   display: flex;
-  gap: 8px;
   flex-direction: column;
+  width: 100%;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   width: 100%;
 `;
 
-const MonthInput = styled.input<{ $hasError: boolean }>`
+const FieldWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
+`;
+
+const MonthInput = styled.input<{ $hasError: boolean }>`
+  width: 100%;
+  box-sizing: border-box;
   min-width: 0;
   height: 32px;
   border: 1px solid rgba(172, 172, 172, 1);
   border-radius: 6px;
   padding: 4px;
+  outline: none;
   ${(props) =>
     props.$hasError &&
     `
@@ -62,12 +82,14 @@ const MonthInput = styled.input<{ $hasError: boolean }>`
 `;
 
 const YearInput = styled.input<{ $hasError: boolean }>`
-  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
   min-width: 0;
   height: 32px;
   border: 1px solid rgba(172, 172, 172, 1);
   border-radius: 6px;
   padding: 4px;
+  outline: none;
   ${(props) =>
     props.$hasError &&
     `
@@ -75,13 +97,17 @@ const YearInput = styled.input<{ $hasError: boolean }>`
   `}
 `;
 
+const ErrorContainer = styled.div`
+  min-height: 14px;
+  margin-top: 4px;
+`;
+
 const Error = styled.p`
   padding: 0;
-  margin: 0 0;
+  margin: 0;
   font-size: 9.5px;
   font-weight: 400;
   line-height: 100%;
   letter-spacing: 0%;
-  vertical-align: middle;
   color: rgba(255, 61, 61, 1);
 `;

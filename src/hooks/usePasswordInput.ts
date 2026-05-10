@@ -15,5 +15,12 @@ export function usePasswordInput() {
     setPassword(value);
   };
 
-  return { password, passwordError, handlePasswordChange };
+  const handleBlur = () => {
+    if (password.length < 2) {
+      setPasswordError("완전히 입력해 주세요.");
+      return;
+    }
+  };
+
+  return { password, passwordError, handlePasswordChange, handleBlur };
 }

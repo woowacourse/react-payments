@@ -16,6 +16,7 @@ export default function Input() {
             key={index}
             {...config}
             value={cardNumberContext.cardNumber[index]}
+            onBlur={() => cardNumberContext.handleBlur(index)}
             onChange={(e) =>
               cardNumberContext.handleCardNumberChange(index, e.target.value)
             }

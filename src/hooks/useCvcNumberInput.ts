@@ -15,5 +15,12 @@ export function useCvcNumberInput() {
     setCvc(value);
   };
 
-  return { cvc, cvcError, handleCvcChange };
+  const handleBlur = () => {
+    if (cvc.length < 3) {
+      setCvcError("완전히 입력해 주세요.");
+      return;
+    }
+  };
+
+  return { cvc, cvcError, handleCvcChange, handleBlur };
 }
