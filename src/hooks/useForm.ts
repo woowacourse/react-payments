@@ -72,13 +72,15 @@ export const useForm = <T extends object, E>(initialValues: T, rules: Rules<T, E
     const inputValue = e.target.value;
 
     const changeRules = rules[field].filter((rule) => rule.eventType.includes('change'));
-    const activeRule = changeRules.find((rule) => rule.validate(inputValue));
-    const errorStatus = activeRule?.errorStatus ?? null;
 
     if (e.target instanceof HTMLInputElement && Array.isArray(values[field])) {
       const fieldset = e.target.closest('fieldset');
       const inputs = fieldset.querySelectorAll('input');
       const index = Array.from(inputs).indexOf(e.target);
+
+      const activeRule = changeRules.find((rule) => rule.validate(inputValue, index));
+      const errorStatus = activeRule?.errorStatus ?? null;
+
       setListError(field, errorStatus, index);
 
       // TODO: sanitize 로직 더 잘 쓸 방법 고민
@@ -88,6 +90,9 @@ export const useForm = <T extends object, E>(initialValues: T, rules: Rules<T, E
       }
       setListValue(field, newValue, index);
     } else {
+      const activeRule = changeRules.find((rule) => rule.validate(inputValue));
+      const errorStatus = activeRule?.errorStatus ?? null;
+
       setErrors((prev) => ({
         ...prev,
         [field]: errorStatus,
@@ -113,6 +118,8 @@ export const useForm = <T extends object, E>(initialValues: T, rules: Rules<T, E
     const blurRules = rules[field].filter((rule) => rule.eventType.includes('blur'));
     const activeRule = blurRules.find((rule) => rule.validate(inputValue));
     const errorStatus = activeRule?.errorStatus ?? null;
+
+    if (!errorStatus) return;
 
     if (e.target instanceof HTMLInputElement && Array.isArray(values[field])) {
       const fieldset = e.target.closest('fieldset');
