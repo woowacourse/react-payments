@@ -5,6 +5,7 @@ import NetworkBrandErrorMessage from "./NetworkBrandErrorMessage";
 import useFocusChain from "../../hooks/useFocusChain";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
+import { CreateCardInputChecker } from "../../Checker";
 import { sanitizeErrors, joinEachStringWithLength } from "../../../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
@@ -84,10 +85,12 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    runEachInputValidation(
-      [() => Validator.isValidCardNumberLength(value)],
-      id,
-    );
+    if (!CreateCardInputChecker.isCardNumberComplete(cardNumber)) {
+      runEachInputValidation(
+        [() => Validator.isValidCardNumberLength(value)],
+        id,
+      );
+    }
   };
 
   return (

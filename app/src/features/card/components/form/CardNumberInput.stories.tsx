@@ -205,3 +205,25 @@ export const InputAutoFocusNextOrPreviousInput: Story = {
     await expect(firstInput).toHaveFocus();
   },
 };
+
+export const NotMaxLengthValidNetworkBrandDoNotBlurValidation: Story = {
+  args: defaultArgs,
+  render: renderWithState,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const inputs = canvas.getAllByRole("textbox");
+    await userEvent.type(inputs[0], "3612");
+    await userEvent.type(inputs[1], "3612");
+    await userEvent.type(inputs[2], "3612");
+    await userEvent.type(inputs[3], "36");
+    await userEvent.tab();
+    await expect(
+      canvas.queryByText("카드 번호 각 항목은 4자리여야 합니다."),
+    ).toBeNull();
+    await userEvent.type(inputs[3], "3");
+    await userEvent.tab();
+    await expect(
+      canvas.queryByText("카드 번호 각 항목은 4자리여야 합니다."),
+    ).toBeInTheDocument();
+  },
+};
