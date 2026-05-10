@@ -4,7 +4,7 @@ import styles from './Input.module.css';
 import type { ComponentProps } from 'react';
 
 interface InputOwnProps {
-  type?: 'text' | 'tel';
+  type?: 'text' | 'tel' | 'password';
   isError?: boolean;
 }
 
