@@ -2,7 +2,7 @@ import type { CardBrandType } from "../../../common/types/CardBrand";
 import type { CardNumberChunkType } from "../../../common/types/CardInfoType";
 import {
   CARD,
-  CARD_NUMBER_CHUNK_LENGTH,
+  CARD_NUMBER_DEFAULT_CHUNK_LENGTH,
   UNKNOWN_CARD_NUMBER_CHAR,
 } from "../constants";
 
@@ -11,7 +11,7 @@ export const getCardBrandName = (
 ): CardBrandType => {
   const fullNumber = cardNumbers
     .map((chunk) =>
-      chunk.padEnd(CARD_NUMBER_CHUNK_LENGTH, UNKNOWN_CARD_NUMBER_CHAR),
+      chunk.padEnd(CARD_NUMBER_DEFAULT_CHUNK_LENGTH, UNKNOWN_CARD_NUMBER_CHAR),
     )
     .join("");
 

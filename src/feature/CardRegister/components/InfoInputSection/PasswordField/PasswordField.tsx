@@ -12,10 +12,10 @@ import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
 const PasswordField = ({
   password,
-  setPassword,
+  onPasswordChange,
 }: {
   password: string;
-  setPassword: (value: string) => void;
+  onPasswordChange: (value: string) => void;
 }) => {
   const {
     updateErrorMessage,
@@ -33,7 +33,7 @@ const PasswordField = ({
       return;
     }
 
-    setPassword(value);
+    onPasswordChange(value);
 
     if (isTouched[index] && isPasswordLengthValid(value)) {
       clearErrorMessage(index);

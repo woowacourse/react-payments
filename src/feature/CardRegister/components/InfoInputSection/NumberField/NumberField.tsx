@@ -3,26 +3,23 @@ import Label from "../../../../../common/components/Label/Label";
 import styled from "styled-components";
 import type { CardNumberChunkType } from "../../../../../common/types/CardInfoType";
 import {
-  CARD_NUMBER_CHUNK_LENGTH,
+  CARD_NUMBER_DEFAULT_CHUNK_LENGTH,
   CARD_NUMBER_INPUT_COUNT,
   ERROR_MESSAGES,
 } from "../../../constants";
 import { isNumericInput } from "../../../validators/input";
-import {
-  isCardNumberChunkLengthValid,
-  isLastCardNumberChunkLengthValid,
-} from "../../../validators/cardNumber";
+import { isCardNumberChunkLengthValid } from "../../../validators/cardNumber";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 import { getPlaceHolder } from "../../../utils/placeHolder";
 
 const NumberField = ({
   cardNumbers,
-  setCardNumbers,
+  onCardNumbersChange,
   lastInputMaxLength,
 }: {
   cardNumbers: CardNumberChunkType;
-  setCardNumbers: (value: CardNumberChunkType) => void;
+  onCardNumbersChange: (value: CardNumberChunkType) => void;
 
   lastInputMaxLength: number;
 }) => {
@@ -45,7 +42,7 @@ const NumberField = ({
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? newCardNumber : chunk,
     );
-    setCardNumbers(newChunks as CardNumberChunkType);
+    onCardNumbersChange(newChunks as CardNumberChunkType);
   };
 
   const handleNumbersChange = (index: number, eValue: string) => {
@@ -59,7 +56,10 @@ const NumberField = ({
 
     // 에러 해결과 동시에 에러 강조표시 해제
     if (index !== LAST_INPUT_INDEX) {
-      if (isTouched[index] && value.length === CARD_NUMBER_CHUNK_LENGTH) {
+      if (
+        isTouched[index] &&
+        value.length === CARD_NUMBER_DEFAULT_CHUNK_LENGTH
+      ) {
         clearErrorMessage(index);
       }
     } else {
@@ -69,7 +69,7 @@ const NumberField = ({
     }
 
     // 마지막 input은 자동으로 넘길 포커스가 없기때문에 해당 로직도 아직은 괜찮다고 판단.
-    if (value.length === CARD_NUMBER_CHUNK_LENGTH) {
+    if (value.length === CARD_NUMBER_DEFAULT_CHUNK_LENGTH) {
       focusNext(index);
     }
 
@@ -81,14 +81,17 @@ const NumberField = ({
   const handleNumbersBlur = (index: number, eValue: string) => {
     touchField(index);
 
-    if (index !== LAST_INPUT_INDEX && !isCardNumberChunkLengthValid(eValue)) {
+    if (
+      index !== LAST_INPUT_INDEX &&
+      !isCardNumberChunkLengthValid(eValue, CARD_NUMBER_DEFAULT_CHUNK_LENGTH)
+    ) {
       updateErrorMessage(index, ERROR_MESSAGES.cardNumber);
       return;
     }
 
     if (
       index === LAST_INPUT_INDEX &&
-      !isLastCardNumberChunkLengthValid(eValue, lastInputMaxLength)
+      !isCardNumberChunkLengthValid(eValue, lastInputMaxLength)
     ) {
       updateErrorMessage(
         index,
@@ -114,13 +117,13 @@ const NumberField = ({
             value={chunk}
             placeholder={
               index !== LAST_INPUT_INDEX
-                ? getPlaceHolder(CARD_NUMBER_CHUNK_LENGTH)
+                ? getPlaceHolder(CARD_NUMBER_DEFAULT_CHUNK_LENGTH)
                 : getPlaceHolder(lastInputMaxLength)
             }
             inputMode="numeric"
             maxLength={
               index !== LAST_INPUT_INDEX
-                ? CARD_NUMBER_CHUNK_LENGTH
+                ? CARD_NUMBER_DEFAULT_CHUNK_LENGTH
                 : lastInputMaxLength
             }
             strokeMode={index === firstErrorIndex ? "error" : "default"}

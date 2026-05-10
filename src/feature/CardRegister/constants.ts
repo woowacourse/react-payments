@@ -1,11 +1,12 @@
 export const CARD_NUMBER_INPUT_COUNT = 4;
-export const CARD_NUMBER_CHUNK_LENGTH = 4;
+export const CARD_NUMBER_DEFAULT_CHUNK_LENGTH = 4;
 export const CARD_NUMBER_MASK_START_INDEX = 2;
 export const CARD_NUMBER_MASK_CHAR = "·";
 export const UNKNOWN_CARD_NUMBER_CHAR = "#";
 
 export const EXPIRY_INPUT_COUNT = 2;
-export const EXPIRY_VALUE_LENGTH = 2;
+export const EXPIRY_MONTH_LENGTH = 2;
+export const EXPIRY_YEAR_LENGTH = 2;
 export const MIN_EXPIRY_MONTH = 1;
 export const MAX_EXPIRY_MONTH = 12;
 
@@ -61,5 +62,15 @@ export const CARD = {
       MIN: 6282,
       MAX: 6288,
     },
+  },
+};
+
+export const CARD_FORM = {
+  RENDER_STEP: {
+    CARD_NUMBER: 1,
+    CARD_COMPANY: 2,
+    EXPIRY: 3,
+    CVC: 4,
+    PASSWORD: 5,
   },
 };

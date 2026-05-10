@@ -1,11 +1,11 @@
 import Label from "../../../../../common/components/Label/Label";
 import Input from "../../../../../common/components/Input/Input";
 import styled from "styled-components";
-import { isMonthValid, isTwoDigits } from "../../../validators/expiryDate";
 import {
   ERROR_MESSAGES,
   EXPIRY_INPUT_COUNT,
-  EXPIRY_VALUE_LENGTH,
+  EXPIRY_MONTH_LENGTH,
+  EXPIRY_YEAR_LENGTH,
 } from "../../../constants";
 import {
   formatExpiryValue,
@@ -14,17 +14,21 @@ import {
 import { isNumericInput } from "../../../validators/input";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
+import {
+  isMonthLengthValid,
+  isMonthRangeValid,
+} from "../../../validators/expiryDate";
 
 const ExpiryField = ({
   expiryMonth,
   expiryYear,
-  setExpiryMonth,
-  setExpiryYear,
+  onExpiryMonthChange,
+  onExpiryYearChange,
 }: {
   expiryMonth: string;
   expiryYear: string;
-  setExpiryMonth: (value: string) => void;
-  setExpiryYear: (value: string) => void;
+  onExpiryMonthChange: (value: string) => void;
+  onExpiryYearChange: (value: string) => void;
 }) => {
   const {
     updateErrorMessage,
@@ -45,19 +49,19 @@ const ExpiryField = ({
       return;
     }
 
-    if (value.length === EXPIRY_VALUE_LENGTH && !isMonthValid(value)) {
+    if (value.length === EXPIRY_MONTH_LENGTH && !isMonthRangeValid(value)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
       return;
     }
 
-    setExpiryMonth(value);
+    onExpiryMonthChange(value);
 
-    if (isTouched[index] && value.length === EXPIRY_VALUE_LENGTH) {
+    if (isTouched[index] && value.length === EXPIRY_MONTH_LENGTH) {
       clearErrorMessage(index);
     }
 
     // 다음 포커싱
-    if (value.length === EXPIRY_VALUE_LENGTH) {
+    if (value.length === EXPIRY_MONTH_LENGTH) {
       focusNext(index);
     }
   };
@@ -69,9 +73,9 @@ const ExpiryField = ({
       return;
     }
 
-    setExpiryYear(value);
+    onExpiryYearChange(value);
 
-    if (isTouched[index] && value.length === EXPIRY_VALUE_LENGTH) {
+    if (isTouched[index] && value.length === EXPIRY_YEAR_LENGTH) {
       clearErrorMessage(index);
     }
 
@@ -91,18 +95,18 @@ const ExpiryField = ({
     const formattedValue = formatExpiryValue(eValue, expiryType);
 
     if (expiryType === "month") {
-      setExpiryMonth(formattedValue);
+      onExpiryMonthChange(formattedValue);
     }
     if (expiryType === "year") {
-      setExpiryYear(formattedValue);
+      onExpiryYearChange(formattedValue);
     }
 
-    if (!isTwoDigits(formattedValue)) {
+    if (!isMonthLengthValid(formattedValue)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryLength);
       return;
     }
 
-    if (expiryType === "month" && !isMonthValid(formattedValue)) {
+    if (expiryType === "month" && !isMonthRangeValid(formattedValue)) {
       updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
       return;
     }
@@ -120,7 +124,7 @@ const ExpiryField = ({
           }}
           id="expiry-month"
           value={expiryMonth}
-          maxLength={EXPIRY_VALUE_LENGTH}
+          maxLength={EXPIRY_MONTH_LENGTH}
           inputMode="numeric"
           placeholder="MM"
           strokeMode={0 === firstErrorIndex ? "error" : "default"}
@@ -134,7 +138,7 @@ const ExpiryField = ({
           }}
           id="expiry-month"
           value={expiryYear}
-          maxLength={EXPIRY_VALUE_LENGTH}
+          maxLength={EXPIRY_YEAR_LENGTH}
           placeholder="YY"
           inputMode="numeric"
           strokeMode={1 === firstErrorIndex ? "error" : "default"}

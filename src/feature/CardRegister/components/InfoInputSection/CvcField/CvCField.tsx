@@ -12,10 +12,10 @@ import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
 const CvcField = ({
   cvcNumber,
-  setCvcNumber,
+  onCvcNumberChange,
 }: {
   cvcNumber: string;
-  setCvcNumber: (value: string) => void;
+  onCvcNumberChange: (value: string) => void;
 }) => {
   const {
     updateErrorMessage,
@@ -33,7 +33,7 @@ const CvcField = ({
       return;
     }
 
-    setCvcNumber(value);
+    onCvcNumberChange(value);
 
     if (isTouched[index] && isCvcLengthValid(value)) {
       clearErrorMessage(index);
