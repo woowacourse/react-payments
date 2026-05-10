@@ -1,7 +1,12 @@
 import { css } from "@emotion/react";
 import completeCheck from "./assets/completeCheck.png";
+import { useLocation } from "react-router-dom";
 
 const CardComplete = () => {
+  const { state } = useLocation();
+  const numbers: string[] = state?.numbers ?? [];
+  const brand: string = state?.brand ?? "";
+
   return (
     <div
       css={css`
@@ -29,8 +34,8 @@ const CardComplete = () => {
           text-align: center;
         `}
       >
-        5511로 시작하는 <br />
-        BC 카드가 등록되었어요.
+        {numbers[0]}로 시작하는 <br />
+        {brand} 카드가 등록되었어요.
       </span>
       <button
         css={css`

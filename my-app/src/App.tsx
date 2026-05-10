@@ -51,7 +51,7 @@ function App() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    navigate("/complete");
+    navigate("/complete", { state: { numbers: cardInfo.numbers, brand } });
   };
   return (
     <>
