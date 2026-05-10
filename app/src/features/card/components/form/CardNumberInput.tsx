@@ -66,7 +66,10 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     }
   };
 
-  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeCardNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
     const { value, id } = e.target;
     const newCardNumber = { ...cardNumber, [id]: value };
     const fullNumber = joinEachStringWithLength(
@@ -76,6 +79,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     runEachInputValidation([() => Validator.isNumber(value)], id);
     runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
+    changeFocus(e, index);
   };
 
   const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -96,8 +100,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["first-digits"]}
           onChange={(e) => {
-            changeCardNumber(e);
-            changeFocus(e, 1);
+            changeCardNumber(e, 1);
           }}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
@@ -110,8 +113,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["second-digits"]}
           onChange={(e) => {
-            changeCardNumber(e);
-            changeFocus(e, 2);
+            changeCardNumber(e, 2);
           }}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
@@ -124,8 +126,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["third-digits"]}
           onChange={(e) => {
-            changeCardNumber(e);
-            changeFocus(e, 3);
+            changeCardNumber(e, 3);
           }}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
@@ -138,8 +139,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
           value={cardNumber["fourth-digits"]}
           onChange={(e) => {
-            changeCardNumber(e);
-            changeFocus(e, 4);
+            changeCardNumber(e, 4);
           }}
           onBlur={handleBlurCardNumber}
           placeholder="1234"
