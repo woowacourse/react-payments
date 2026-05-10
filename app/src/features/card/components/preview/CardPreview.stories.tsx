@@ -15,10 +15,10 @@ type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
   cardNumber: {
-    "first-digits": "",
-    "second-digits": "",
-    "third-digits": "",
-    "fourth-digits": "",
+    firstDigits: "",
+    secondDigits: "",
+    thirdDigits: "",
+    fourthDigits: "",
   },
   cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
   cardBrand: null,
@@ -32,10 +32,10 @@ export const CardNumberPartiallyFilled: Story = {
   args: {
     ...defaultArgs,
     cardNumber: {
-      "first-digits": "1234",
-      "second-digits": "5678",
-      "third-digits": "",
-      "fourth-digits": "",
+      firstDigits: "1234",
+      secondDigits: "5678",
+      thirdDigits: "",
+      fourthDigits: "",
     },
   },
 };
@@ -44,10 +44,10 @@ export const CardNumberFullyFilled: Story = {
   args: {
     ...defaultArgs,
     cardNumber: {
-      "first-digits": "1234",
-      "second-digits": "5678",
-      "third-digits": "9012",
-      "fourth-digits": "3456",
+      firstDigits: "1234",
+      secondDigits: "5678",
+      thirdDigits: "9012",
+      fourthDigits: "3456",
     },
   },
 };
@@ -76,10 +76,10 @@ export const FullyFilled: Story = {
   args: {
     ...defaultArgs,
     cardNumber: {
-      "first-digits": "1234",
-      "second-digits": "5678",
-      "third-digits": "9012",
-      "fourth-digits": "3456",
+      firstDigits: "1234",
+      secondDigits: "5678",
+      thirdDigits: "9012",
+      fourthDigits: "3456",
     },
     cardExpiryDate: {
       "expiry-month": "12",
@@ -92,10 +92,10 @@ export const VisaBrand: Story = {
   args: {
     ...defaultArgs,
     cardNumber: {
-      "first-digits": "4111",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
+      firstDigits: "4111",
+      secondDigits: "",
+      thirdDigits: "",
+      fourthDigits: "",
     },
   },
 };
@@ -104,10 +104,10 @@ export const MasterBrand: Story = {
   args: {
     ...defaultArgs,
     cardNumber: {
-      "first-digits": "5111",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
+      firstDigits: "5111",
+      secondDigits: "",
+      thirdDigits: "",
+      fourthDigits: "",
     },
   },
 };

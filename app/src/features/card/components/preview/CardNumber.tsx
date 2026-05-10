@@ -3,13 +3,13 @@ import styled from "@emotion/styled";
 export function CardNumber({ cardNumber }) {
   return (
     <CardNumberContainer id="preview-card-number">
-      <span>{cardNumber["first-digits"]}</span>
-      <span>{cardNumber["second-digits"]}</span>
+      <span>{cardNumber.firstDigits}</span>
+      <span>{cardNumber.secondDigits}</span>
       <span className="secret">
-        {"●".repeat(cardNumber["third-digits"].length)}
+        {"●".repeat(cardNumber.thirdDigits.length)}
       </span>
       <span className="secret">
-        {"●".repeat(cardNumber["fourth-digits"].length)}
+        {"●".repeat(cardNumber.fourthDigits.length)}
       </span>
     </CardNumberContainer>
   );

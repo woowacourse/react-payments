@@ -9,24 +9,19 @@ import { CardInputChecker } from "../../Checker";
 import { sanitizeErrors, joinEachStringWithLength } from "../../../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
+const CARD_NUMBER_FIELDS = [
+  "firstDigits",
+  "secondDigits",
+  "thirdDigits",
+  "fourthDigits",
+] as const;
+
 export function CardNumberInput({ cardNumber, setCardNumber }) {
   const [fieldError, setFieldError] = useState({
-    "first-digits": {
-      state: false,
-      message: "",
-    },
-    "second-digits": {
-      state: false,
-      message: "",
-    },
-    "third-digits": {
-      state: false,
-      message: "",
-    },
-    "fourth-digits": {
-      state: false,
-      message: "",
-    },
+    firstDigits: { state: false, message: "" },
+    secondDigits: { state: false, message: "" },
+    thirdDigits: { state: false, message: "" },
+    fourthDigits: { state: false, message: "" },
   });
 
   const [networkBrandError, setNetworkBrandError] = useState({
@@ -71,26 +66,32 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
-    const { value, id } = e.target;
-    const newCardNumber = { ...cardNumber, [id]: value };
+    const { value } = e.target;
+    const field = CARD_NUMBER_FIELDS[index - 1];
+    const newCardNumber = { ...cardNumber, [field]: value };
     const fullNumber = joinEachStringWithLength(
       Object.values(newCardNumber),
       CARD_INPUT.EACH_NUMBER_LENGTH,
     );
-    if (!runEachInputValidation([() => Validator.isNumber(value)], id)) return;
+    if (!runEachInputValidation([() => Validator.isNumber(value)], field))
+      return;
     runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
     changeFocus(e, index);
   };
 
-  const handleBlurCardNumber = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
+  const handleBlurCardNumber = (
+    e: React.FocusEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    const { value } = e.target;
+    const field = CARD_NUMBER_FIELDS[index - 1];
     if (
       !CardInputChecker.isCardNumberComplete(Object.values(cardNumber).join(""))
     ) {
       runEachInputValidation(
         [() => Validator.isValidCardNumberLength(value)],
-        id,
+        field,
       );
     }
   };
@@ -103,53 +104,45 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           id="first-digits"
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
-          value={cardNumber["first-digits"]}
-          onChange={(e) => {
-            changeCardNumber(e, 1);
-          }}
-          onBlur={handleBlurCardNumber}
+          value={cardNumber.firstDigits}
+          onChange={(e) => changeCardNumber(e, 1)}
+          onBlur={(e) => handleBlurCardNumber(e, 1)}
           placeholder="1234"
           ref={(node) => ref(1, node)}
-          isError={fieldError["first-digits"].state}
+          isError={fieldError.firstDigits.state}
         />
         <CardInput
           id="second-digits"
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
-          value={cardNumber["second-digits"]}
-          onChange={(e) => {
-            changeCardNumber(e, 2);
-          }}
-          onBlur={handleBlurCardNumber}
+          value={cardNumber.secondDigits}
+          onChange={(e) => changeCardNumber(e, 2)}
+          onBlur={(e) => handleBlurCardNumber(e, 2)}
           placeholder="1234"
           ref={(node) => ref(2, node)}
-          isError={fieldError["second-digits"].state}
+          isError={fieldError.secondDigits.state}
         />
         <CardInput
           id="third-digits"
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
-          value={cardNumber["third-digits"]}
-          onChange={(e) => {
-            changeCardNumber(e, 3);
-          }}
-          onBlur={handleBlurCardNumber}
+          value={cardNumber.thirdDigits}
+          onChange={(e) => changeCardNumber(e, 3)}
+          onBlur={(e) => handleBlurCardNumber(e, 3)}
           placeholder="1234"
           ref={(node) => ref(3, node)}
-          isError={fieldError["third-digits"].state}
+          isError={fieldError.thirdDigits.state}
         />
         <CardInput
           id="fourth-digits"
           type="text"
           maxLength={CARD_INPUT.EACH_NUMBER_LENGTH}
-          value={cardNumber["fourth-digits"]}
-          onChange={(e) => {
-            changeCardNumber(e, 4);
-          }}
-          onBlur={handleBlurCardNumber}
+          value={cardNumber.fourthDigits}
+          onChange={(e) => changeCardNumber(e, 4)}
+          onBlur={(e) => handleBlurCardNumber(e, 4)}
           placeholder="1234"
           ref={(node) => ref(4, node)}
-          isError={fieldError["fourth-digits"].state}
+          isError={fieldError.fourthDigits.state}
         />
       </CardFieldset>
       <NetworkBrandErrorMessage

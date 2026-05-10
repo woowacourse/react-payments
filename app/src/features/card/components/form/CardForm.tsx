@@ -38,9 +38,13 @@ export function CardForm({
 
   const navigate = useNavigate();
 
+  const { firstDigits } = cardNumber;
+
   const loadDonePage = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/card/done/", { state: { cardNumber, cardBrand } });
+    navigate("/card/done/", {
+      state: { firstDigitsCardNumber: firstDigits, cardBrand },
+    });
   };
 
   return (

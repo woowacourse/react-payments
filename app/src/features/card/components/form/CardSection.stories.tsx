@@ -21,10 +21,10 @@ export const CardNumberInputSection: Story = {
   args: { title: "", children: null },
   render: () => {
     const [cardNumber, setCardNumber] = useState({
-      "first-digits": "",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
+      firstDigits: "",
+      secondDigits: "",
+      thirdDigits: "",
+      fourthDigits: "",
     });
     return (
       <CardSection

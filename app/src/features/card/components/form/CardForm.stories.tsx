@@ -18,10 +18,10 @@ type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
   cardNumber: {
-    "first-digits": "",
-    "second-digits": "",
-    "third-digits": "",
-    "fourth-digits": "",
+    firstDigits: "",
+    secondDigits: "",
+    thirdDigits: "",
+    fourthDigits: "",
   },
   setCardNumber: null,
   cardExpiryDate: {
@@ -69,10 +69,10 @@ export const CompleteCardForm: Story = {
   args: {
     ...defaultArgs,
     cardNumber: {
-      "first-digits": "4321",
-      "second-digits": "4321",
-      "third-digits": "4321",
-      "fourth-digits": "4321",
+      firstDigits: "4321",
+      secondDigits: "4321",
+      thirdDigits: "4321",
+      fourthDigits: "4321",
     },
     cardExpiryDate: {
       "expiry-month": "01",

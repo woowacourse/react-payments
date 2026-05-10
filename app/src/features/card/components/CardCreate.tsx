@@ -5,10 +5,10 @@ import styled from "@emotion/styled";
 
 export default function CardCreate() {
   const [cardNumber, setCardNumber] = useState({
-    "first-digits": "",
-    "second-digits": "",
-    "third-digits": "",
-    "fourth-digits": "",
+    firstDigits: "",
+    secondDigits: "",
+    thirdDigits: "",
+    fourthDigits: "",
   });
 
   const [cardExpiryDate, setCardExpiryDate] = useState({

@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { RadiusButton } from "../style/Button";
 import CreateCompleteCheck from "../../../app/assets/check.svg";
 export default function CardCreateComplete() {
-  const { cardNumber, cardBrand } = useLocation().state ?? {};
+  const { firstDigitsCardNumber, cardBrand } = useLocation().state ?? {};
   return (
     <RootContainer>
       <CardCreateCompleteContent>
@@ -13,7 +13,7 @@ export default function CardCreateComplete() {
           alt="card-create-complete"
         ></CreateCompleteSVG>
         <p>
-          {cardNumber["first-digits"]}로 시작하는 {CARD_BRAND[cardBrand].title}
+          {firstDigitsCardNumber}로 시작하는 {CARD_BRAND[cardBrand].title}
           카드 가 등록되었어요.
         </p>
         <RadiusButton type="button">확인</RadiusButton>

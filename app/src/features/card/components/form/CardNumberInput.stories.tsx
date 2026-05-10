@@ -18,10 +18,10 @@ type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
   cardNumber: {
-    "first-digits": "",
-    "second-digits": "",
-    "third-digits": "",
-    "fourth-digits": "",
+    firstDigits: "",
+    secondDigits: "",
+    thirdDigits: "",
+    fourthDigits: "",
   },
   setCardNumber: null,
   progress: {
