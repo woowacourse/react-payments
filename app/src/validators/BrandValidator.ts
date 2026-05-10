@@ -7,7 +7,7 @@ type BrandResult =
 export const BrandValidator = {
   isUnionPay(value: string) {
     return (
-      /^622(1[2-9][6-9]|[2-9]\d{2})/.test(value) ||
+      /^622(?:12[6-9]|1[3-9]\d|[2-8]\d{2}|9[0-1]\d|92[0-5])/.test(value) ||
       /^62[4-6]/.test(value) ||
       /^628[2-8]/.test(value)
     );

@@ -39,23 +39,25 @@ export function useCardNumberInput(onComplete: () => void) {
     const newCardNumber = [...cardNumber];
     newCardNumber[indexMap[id]] = value;
 
+    let currentBrand = networkBrand;
     if (newCardNumber[0].length > 0) {
       const brandResult = BrandValidator.detectNetworkBrand(newCardNumber.join(''));
       if (!brandResult.valid) {
         setError({ ...fieldErrors, [fieldId]: true, message: brandResult.message });
         return;
       }
+      currentBrand = brandResult.brand;
     }
 
     setError({ ...fieldErrors, [fieldId]: false, message: '' });
     setCardNumber(newCardNumber);
 
-    const max = handleInputMaxLength(networkBrand, indexMap[id]).maxLength;
+    const max = handleInputMaxLength(currentBrand, indexMap[id]).maxLength;
     if (value.length === max) {
       inputRefs.current[index + 1]?.focus();
     }
 
-    const lastDigitLength = networkBrand === 'diners' ? 2 : networkBrand === 'amex' ? 3 : 4;
+    const lastDigitLength = currentBrand === 'diners' ? 2 : currentBrand === 'amex' ? 3 : 4;
     if (
       cardNumber[0].length === 4 &&
       cardNumber[1].length === 4 &&
