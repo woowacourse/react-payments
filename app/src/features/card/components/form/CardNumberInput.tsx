@@ -6,7 +6,7 @@ import useFocusChain from "../../hooks/useFocusChain";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
 import { CardInputChecker } from "../../Checker";
-import { sanitizeErrors, joinCardNumber } from "../../Utils";
+import { sanitizeErrors, joinCardNumber, runValidation } from "../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 
 const CARD_NUMBER_FIELDS = [
@@ -17,7 +17,7 @@ const CARD_NUMBER_FIELDS = [
 ] as const;
 
 export function CardNumberInput({ cardNumber, setCardNumber }) {
-  const [fieldError, setFieldError] = useState({
+  const [isError, setError] = useState({
     firstDigits: { state: false, message: "" },
     secondDigits: { state: false, message: "" },
     thirdDigits: { state: false, message: "" },
@@ -33,25 +33,6 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     Object.keys(cardNumber).length,
     CARD_INPUT.EACH_NUMBER_LENGTH,
   );
-
-  const runEachInputValidation = (
-    validators: (() => void)[],
-    id: string,
-  ): boolean => {
-    try {
-      validators.forEach((validate) => {
-        validate();
-      });
-      setFieldError({ ...fieldError, [id]: { state: false } });
-      return true;
-    } catch (err) {
-      setFieldError({
-        ...fieldError,
-        [id]: { state: true, message: (err as Error).message },
-      });
-      return false;
-    }
-  };
 
   const runNetworkBrandValidation = (value: string) => {
     try {
@@ -73,8 +54,8 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
       Object.values(newCardNumber),
       CARD_INPUT.EACH_NUMBER_LENGTH,
     );
-    if (!runEachInputValidation([() => Validator.isNumber(value)], field))
-      return;
+    const errorReport = runValidation([() => Validator.isNumber(value)]);
+    setError({ ...isError, [field]: errorReport });
     runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
     changeFocus(e, index);
@@ -89,10 +70,10 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
     if (
       !CardInputChecker.isCardNumberComplete(Object.values(cardNumber).join(""))
     ) {
-      runEachInputValidation(
-        [() => Validator.isValidCardNumberLength(value)],
-        field,
-      );
+      const errorReport = runValidation([
+        () => Validator.isValidCardNumberLength(value),
+      ]);
+      setError({ ...isError, [field]: errorReport });
     }
   };
 
@@ -109,7 +90,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           onBlur={(e) => handleBlurCardNumber(e, 1)}
           placeholder="1234"
           ref={(node) => ref(1, node)}
-          isError={fieldError.firstDigits.state}
+          isError={isError.firstDigits.state}
         />
         <CardInput
           id="second-digits"
@@ -120,7 +101,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           onBlur={(e) => handleBlurCardNumber(e, 2)}
           placeholder="1234"
           ref={(node) => ref(2, node)}
-          isError={fieldError.secondDigits.state}
+          isError={isError.secondDigits.state}
         />
         <CardInput
           id="third-digits"
@@ -131,7 +112,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           onBlur={(e) => handleBlurCardNumber(e, 3)}
           placeholder="1234"
           ref={(node) => ref(3, node)}
-          isError={fieldError.thirdDigits.state}
+          isError={isError.thirdDigits.state}
         />
         <CardInput
           id="fourth-digits"
@@ -142,7 +123,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
           onBlur={(e) => handleBlurCardNumber(e, 4)}
           placeholder="1234"
           ref={(node) => ref(4, node)}
-          isError={fieldError.fourthDigits.state}
+          isError={isError.fourthDigits.state}
         />
       </CardFieldset>
       <NetworkBrandErrorMessage
@@ -150,7 +131,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }) {
       ></NetworkBrandErrorMessage>
       <ErrorMessage
         messages={sanitizeErrors(
-          Object.keys(fieldError).map((key) => fieldError[key]["message"]),
+          Object.keys(isError).map((key) => isError[key]["message"]),
         )}
       />
     </>

@@ -3,7 +3,7 @@ import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
-import { sanitizeErrors } from "../../Utils";
+import { sanitizeErrors, runValidation } from "../../Utils";
 import {
   CardInputLabel,
   CardInputFieldContainer,
@@ -15,29 +15,17 @@ export default function CardPasswordInput({ cardPassword, setCardPassword }) {
     message: "",
   });
 
-  const runValidation = (validators: (() => void)[]): boolean => {
-    try {
-      validators.forEach((validate) => {
-        validate();
-      });
-      setError({ state: false, message: "" });
-      return true;
-    } catch (err) {
-      setError({ state: true, message: (err as Error).message });
-      return false;
-    }
-  };
-
   const changeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (!runValidation([() => Validator.isNumber(value)])) return;
+    const errorReport = runValidation([() => Validator.isNumber(value)]);
+    setError(errorReport);
+    if (errorReport.state) return;
     setCardPassword(value);
   };
 
   const handleBlurPassword = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (!runValidation([() => Validator.isValidCardPassswordLength(value)]))
-      return;
+    setError(runValidation([() => Validator.isValidCardPassswordLength(value)]));
   };
 
   return (

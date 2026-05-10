@@ -18,3 +18,14 @@ export function joinCardNumber(stringValues: string[], eachLength: number) {
     })
     .join("");
 }
+
+export const runValidation = (validators: (() => void)[]) => {
+  try {
+    validators.forEach((validate) => {
+      validate();
+    });
+    return { state: false, message: "" };
+  } catch (err) {
+    return { state: true, message: (err as Error).message };
+  }
+};

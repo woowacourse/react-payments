@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { CARD_INPUT } from "../../Constants";
-import { sanitizeErrors } from "../../Utils";
+import { sanitizeErrors, runValidation } from "../../Utils";
 import { CardInput } from "./CardInput";
 import { Validator } from "../../validators/CardValidator";
 import {
@@ -15,28 +15,17 @@ export function CardCVCInput({ cardCVC, setCardCVC }) {
     message: "",
   });
 
-  const runValidation = (validators: (() => void)[]): boolean => {
-    try {
-      validators.forEach((validate) => {
-        validate();
-      });
-      setError({ state: false, message: "" });
-      return true;
-    } catch (err) {
-      setError({ state: true, message: (err as Error).message });
-      return false;
-    }
-  };
-
   const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (!runValidation([() => Validator.isNumber(value)])) return;
+    const errorReport = runValidation([() => Validator.isNumber(value)]);
+    setError(errorReport);
+    if (errorReport.state) return;
     setCardCVC(value);
   };
 
   const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (!runValidation([() => Validator.isValidCardCVCLength(value)])) return;
+    setError(runValidation([() => Validator.isValidCardCVCLength(value)]));
   };
 
   return (

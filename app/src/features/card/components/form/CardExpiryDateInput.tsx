@@ -1,7 +1,7 @@
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 import { CardInput } from "./CardInput";
 import { Validator } from "../../validators/CardValidator";
-import { sanitizeErrors } from "../../Utils";
+import { sanitizeErrors, runValidation } from "../../Utils";
 import { CARD_INPUT } from "../../Constants";
 import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
@@ -24,34 +24,17 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
     CARD_INPUT.EACH_EXPIRY_DATE_LENGTH,
   );
 
-  const runValidation = (validators: (() => void)[], id: string): boolean => {
-    try {
-      validators.forEach((validate) => {
-        validate();
-      });
-      setError({ ...isError, [id]: { state: false, message: "" } });
-      return true;
-    } catch (err) {
-      setError({
-        ...isError,
-        [id]: { state: true, message: (err as Error).message },
-      });
-      return false;
-    }
-  };
-
   const changeCardExpiryMonth = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
     const { value, id } = e.target;
-    if (
-      !runValidation(
-        [() => Validator.isNumber(value), () => Validator.isValidMonth(value)],
-        id,
-      )
-    )
-      return;
+    const errorReport = runValidation([
+      () => Validator.isNumber(value),
+      () => Validator.isValidMonth(value),
+    ]);
+    setError({ ...isError, [id]: errorReport });
+    if (errorReport.state) return;
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     changeFocus(e, index);
   };
@@ -61,23 +44,22 @@ export function CardExpiryDateInput({ cardExpiryDate, setCardExpiryDate }) {
     index: number,
   ) => {
     const { value, id } = e.target;
-    if (
-      !runValidation(
-        [() => Validator.isNumber(value), () => Validator.isValidYear(value)],
-        id,
-      )
-    )
-      return;
+    const errorReport = runValidation([
+      () => Validator.isNumber(value),
+      () => Validator.isValidYear(value),
+    ]);
+    setError({ ...isError, [id]: errorReport });
+    if (errorReport.state) return;
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
     changeFocus(e, index);
   };
 
   const handleBlurCardExpiryDate = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
-    if (
-      !runValidation([() => Validator.isValidCardExpiryDateLength(value)], id)
-    )
-      return;
+    const errorReport = runValidation([
+      () => Validator.isValidCardExpiryDateLength(value),
+    ]);
+    setError({ ...isError, [id]: errorReport });
   };
 
   return (
