@@ -13,6 +13,7 @@ import { getCardNumberErrorMessage } from "../utils/getCardNumberErrorMessage";
 import { getEXPNumberErrorMessage } from "../utils/getEXPNumberErrorMessage";
 import { getCVCNumberErrorMessage } from "../utils/getCVCNumberErrorMessage";
 import { getPassWordErrorMessage } from "../utils/getPassWordErrorMessage";
+import { getCardBrand } from "../utils/getCardBrand";
 
 export default function CardRegisterPage() {
   const [cardNumbers, setCardNumbers] = useState({
@@ -21,6 +22,9 @@ export default function CardRegisterPage() {
     third: "",
     fourth: "",
   });
+
+  const cardBrand = getCardBrand(cardNumbers);
+
   const [EXPNumbers, setEXPNumbers] = useState({ mm: "", yy: "" });
   const [cvc, setCVC] = useState("");
   const [cardFirm, setCardFirm] = useState({ value: "", label: "" });
@@ -32,7 +36,7 @@ export default function CardRegisterPage() {
 
   const isAllValid =
     cardFirm.value !== "" &&
-    getCardNumberErrorMessage(cardNumbers) === null &&
+    getCardNumberErrorMessage(cardNumbers, cardBrand) === null &&
     getEXPNumberErrorMessage(EXPNumbers) === null &&
     getCVCNumberErrorMessage(cvc) === null &&
     getPassWordErrorMessage(passWord) === null;
@@ -45,6 +49,7 @@ export default function CardRegisterPage() {
         cardNumbers={cardNumbers}
         EXP={EXPNumbers}
         cardFirm={cardFirm}
+        cardBrand={cardBrand}
       />
 
       <InputSectionContainer>
@@ -110,6 +115,7 @@ export default function CardRegisterPage() {
             onComplete={(isCompleted) => {
               if (isCompleted) setIsCardNumberCompleted(true);
             }}
+            cardBrand={cardBrand}
           />
         </CardInfoSection>
       </InputSectionContainer>

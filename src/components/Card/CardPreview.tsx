@@ -1,14 +1,23 @@
 import styled from "@emotion/styled";
-import { getCardBrand } from "../../utils/getCardBrand";
 import Mastercard from "../../../public/Mastercard.svg";
 import Visa from "../../../public/Visa.svg";
+import Diners from "../../../public/Diners.svg";
+import Amex from "../../../public/Amex.svg";
+import Union from "../../../public/Unionpay.svg";
 
 interface Props {
   cardNumbers: { first: string; second: string; third: string; fourth: string };
   EXP: { mm: string; yy: string };
   cardFirm: { value: string; label: string };
+  cardBrand: "visa" | "master" | "diners" | "amex" | "unionpay" | null;
 }
-const BRAND_LOGO = { visa: Visa, master: Mastercard };
+const BRAND_LOGO = {
+  visa: Visa,
+  master: Mastercard,
+  diners: Diners,
+  amex: Amex,
+  unionpay: Union,
+};
 const CARD_COLORS: Record<string, string> = {
   BC: "#F04651",
   신한: "#0046FF",
@@ -19,8 +28,12 @@ const CARD_COLORS: Record<string, string> = {
   하나: "#009490",
   국민: "#6A6056",
 };
-export default function CardPreview({ cardNumbers, EXP, cardFirm }: Props) {
-  const cardBrand = getCardBrand(cardNumbers);
+export default function CardPreview({
+  cardNumbers,
+  EXP,
+  cardFirm,
+  cardBrand,
+}: Props) {
   const cardColor = CARD_COLORS[cardFirm.value] ?? "#333333";
   return (
     <CardPreviewContainer cardColor={cardColor}>
