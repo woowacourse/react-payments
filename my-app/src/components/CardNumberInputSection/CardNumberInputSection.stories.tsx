@@ -11,6 +11,7 @@ const meta = {
   },
   args: {
     onValueHandler: fn(),
+    inputValues: ["", "", "", ""],
   },
   render: (args) => (
     <div style={{ width: 320 }}>
