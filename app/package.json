@@ -11,6 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "test-storybook": "test-storybook",
     "test-unit": "jest",
+    "test-type": "tsc -b",
     "build-storybook": "storybook build",
     "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist",
     "prepare": "cd .. && husky app/.husky"
