@@ -50,7 +50,7 @@ export const CARD_NETWORK = {
   },
   "AMEX": {
     startPatterns: [{
-      regex: /^34|37/,
+      regex: /^(34|37)/,
       minMatchLength: 2,
     }],
     cardValidationCodeLength: 4,
