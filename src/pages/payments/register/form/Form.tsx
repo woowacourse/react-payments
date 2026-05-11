@@ -52,6 +52,8 @@ export const Form = () => {
 
     errorsExpirationDate,
 
+    expirationDateRef,
+
     expirationDateInvalidAttemp,
     renderErrorMessageExpirationDate,
 
@@ -104,13 +106,13 @@ export const Form = () => {
 
   useEffect(() => {
     if (isValidCardNumbers3 && !isValidCard) return cardRef.current?.focus();
-    if (isValidCard && !isValidExpirationMonth) return monthRef.current?.focus();
+    if (isValidCard && !isValidExpirationMonth) return expirationDateRef.current.month?.focus();
     if (isValidExpirationYear && !isValidCvc) return cvcRef.current?.focus();
     if (isValidCvc && !isValidPassword) return passwordRef.current?.focus();
   }, [
-    cardNumbersRefs,
     isValidCardNumbers3,
     isValidCard,
+    expirationDateRef,
     isValidExpirationMonth,
     isValidExpirationYear,
     isValidCvc,
@@ -158,7 +160,7 @@ export const Form = () => {
       <FormGroup title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요">
         <Field label="유효기간" errorMessage={renderErrorMessageExpirationDate()}>
           <Input
-            ref={monthRef}
+            ref={expirationDateRef}
             type="tel"
             id="month"
             value={expirationDate.month}
@@ -172,7 +174,7 @@ export const Form = () => {
             placeholder="MM"
           />
           <Input
-            ref={yearRef}
+            ref={expirationDateRef}
             type="tel"
             id="year"
             value={expirationDate.year}

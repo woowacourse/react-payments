@@ -43,6 +43,8 @@ export const Flow = () => {
 
     errors: errorsExpirationDate,
 
+    ref: expirationDateRef,
+
     invalidAttemp: expirationDateInvalidAttemp,
     renderErrorMessage: renderErrorMessageExpirationDate,
   } = useExpirationDate();
@@ -121,6 +123,8 @@ export const Flow = () => {
         handleBlurExpirationDate,
 
         errorsExpirationDate,
+
+        expirationDateRef,
 
         expirationDateInvalidAttemp,
         renderErrorMessageExpirationDate,

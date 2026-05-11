@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
@@ -59,6 +59,29 @@ export const useExpirationDate = () => {
 
   // expirationDate 관련 상태값 -- end
 
+  const refs = useRef<Record<string, HTMLElement>>({});
+  const ref = (refElement: HTMLElement) => {
+    if (!refElement) return;
+    if (!refElement.id) return;
+    refs.current[refElement.id] = refElement;
+  };
+
+  const orders = ['month', 'year'] as (keyof typeof errors)[];
+  useEffect(() => {
+    orders.some((order, index) => {
+      const current = order;
+      const next = orders[index + 1];
+
+      const isValidCurrnet = errors[current]?.every((error) => error.valid);
+      const isValidNext = errors[next]?.every((error) => error.valid);
+
+      if (isValidCurrnet && !isValidNext) {
+        refs.current[next]?.focus();
+        return true;
+      }
+    });
+  }, [errors, orders]);
+
   return {
     value: expirationDate,
     onChange: handleChangeExpirationDate,
@@ -67,6 +90,8 @@ export const useExpirationDate = () => {
     onBlur,
 
     errors,
+
+    ref,
 
     invalidAttemp: expirationDateInvalidAttemp,
     renderErrorMessage: renderErrorMessageExpirationDate,
