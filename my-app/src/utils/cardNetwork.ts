@@ -1,4 +1,6 @@
-export const detectCardNetwork = (number: string) => {
+export type CardNetwork = "" | "visa" | "master" | "amex" | "diners" | "unionpay";
+
+export const detectCardNetwork = (number: string): CardNetwork => {
   if (/^4/.test(number)) return "visa";
   if (/^5[1-5]/.test(number)) return "master";
   if (/^3[47]/.test(number)) return "amex";
@@ -25,7 +27,7 @@ const MAX_LENGTH = {
   default: 16,
 } as const;
 
-export const getMaxLength = (network: string): number => {
+export const getMaxLength = (network: CardNetwork): number => {
   return MAX_LENGTH[network as keyof typeof MAX_LENGTH] ?? MAX_LENGTH.default;
 };
 
