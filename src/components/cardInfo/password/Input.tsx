@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
 import { usePasswordContext } from "../../../context/password/PasswordContext";
+import { useRef } from "react";
+import { useFocusFirstInput } from "../../../hooks/useFocusFirstInput";
 
 export default function Input() {
   const passwordContext = usePasswordContext();
+  const formRef = useRef<HTMLFormElement | null>(null);
+  useFocusFirstInput(formRef);
 
   return (
     <Wrapper>
-      <Container>
+      <Container ref={formRef}>
         <InfoInput
           type="password"
           value={passwordContext.password}
@@ -30,7 +34,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Container = styled.div`
+const Container = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;

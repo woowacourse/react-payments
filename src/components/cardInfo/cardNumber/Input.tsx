@@ -1,27 +1,35 @@
 import styled from "@emotion/styled";
 import { useCardNumberContext } from "../../../context/cardNumber/CardNumberContext";
+import { useRef } from "react";
+import { useFocusFirstInput } from "../../../hooks/useFocusFirstInput";
 
 export default function Input() {
-  const cardNumberContext = useCardNumberContext();
+  const {
+    inputConfig,
+    cardNumber,
+    handleBlur,
+    handleCardNumberChange,
+    cardNumberError,
+  } = useCardNumberContext();
 
-  const displayError =
-    cardNumberContext.cardNumberError.find((value) => value !== "") || "";
+  const displayError = cardNumberError.find((value) => value !== "") || "";
+
+  const formRef = useRef<HTMLFormElement | null>(null);
+  useFocusFirstInput(formRef);
 
   return (
     <Wrapper>
-      <Container>
-        {cardNumberContext.inputConfig.map((config, index) => (
+      <Container ref={formRef}>
+        {inputConfig.map((config, index) => (
           <InfoInput
             type="text"
             key={index}
             name={config.name}
             placeholder={config.placeholder}
-            value={cardNumberContext.cardNumber[index]}
-            onBlur={() => cardNumberContext.handleBlur(index)}
-            onChange={(e) =>
-              cardNumberContext.handleCardNumberChange(index, e.target.value)
-            }
-            $hasError={!!cardNumberContext.cardNumberError[index]}
+            value={cardNumber[index]}
+            onBlur={() => handleBlur(index)}
+            onChange={(e) => handleCardNumberChange(index, e.target.value)}
+            $hasError={!!cardNumberError[index]}
           />
         ))}
       </Container>
@@ -37,7 +45,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Container = styled.div`
+const Container = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;

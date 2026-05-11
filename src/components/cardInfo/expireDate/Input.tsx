@@ -1,13 +1,16 @@
 import styled from "@emotion/styled";
 import { useExpireDateContext } from "../../../context/expireDate/ExpireDateContext";
+import { useRef } from "react";
+import { useFocusFirstInput } from "../../../hooks/useFocusFirstInput";
 
 export default function Input() {
   const expireDateContext = useExpireDateContext();
-
+  const formRef = useRef<HTMLFormElement | null>(null);
+  useFocusFirstInput(formRef);
   return (
     <Wrapper>
       <Container>
-        <FieldWrapper>
+        <FieldWrapper ref={formRef}>
           <MonthInput
             value={expireDateContext.expireDate.month}
             placeholder="MM"
@@ -58,7 +61,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const FieldWrapper = styled.div`
+const FieldWrapper = styled.form`
   display: flex;
   flex-direction: column;
   flex: 1;

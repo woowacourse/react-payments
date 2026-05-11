@@ -1,22 +1,26 @@
 import styled from "@emotion/styled";
 import { useCvcContext } from "../../../context/cvc/CvcContext";
+import { useRef } from "react";
+import { useFocusFirstInput } from "../../../hooks/useFocusFirstInput";
 
 export default function Input() {
-  const cvcContext = useCvcContext();
+  const { cvc, handleBlur, handleCvcChange, cvcError } = useCvcContext();
+  const formRef = useRef<HTMLFormElement | null>(null);
+  useFocusFirstInput(formRef);
 
   return (
     <Wrapper>
-      <Container>
+      <Container ref={formRef}>
         <InfoInput
-          value={cvcContext.cvc}
+          value={cvc}
           placeholder="123"
-          onBlur={() => cvcContext.handleBlur()}
-          onChange={(e) => cvcContext.handleCvcChange(e.target.value)}
-          $hasError={!!cvcContext.cvcError}
+          onBlur={() => handleBlur()}
+          onChange={(e) => handleCvcChange(e.target.value)}
+          $hasError={!!cvcError}
         />
       </Container>
 
-      {cvcContext.cvcError && <Error>{cvcContext.cvcError}</Error>}
+      {cvcError && <Error>{cvcError}</Error>}
     </Wrapper>
   );
 }
@@ -27,7 +31,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Container = styled.div`
+const Container = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;
