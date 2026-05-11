@@ -7,14 +7,19 @@ type InputStatus = "default" | "error";
 interface CardCVCInputFieldProps {
   CVC: string;
   onChange: (CVC: string) => void;
+  onComplete?: () => void;
 }
 
 const CVC_MAX_LENGTH = 3;
 
-const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
+const CardCVCInputField = ({
+  CVC,
+  onChange,
+  onComplete,
+}: CardCVCInputFieldProps) => {
   const [status, setStatus] = useState<InputStatus>("default");
 
-  const handelCVCChange = (input: string) => {
+  const handleCVCChange = (input: string) => {
     if (input.length !== 0)
       if (!checkIsInt(+input) || !validateCVCRange(+input)) {
         return setStatus("error");
@@ -23,6 +28,10 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
     setStatus("default");
 
     onChange(input.slice(0, CVC_MAX_LENGTH));
+
+    if (input.length === CVC_MAX_LENGTH && status !== "error") {
+      onComplete?.();
+    }
   };
 
   return (
@@ -39,7 +48,7 @@ const CardCVCInputField = ({ CVC, onChange }: CardCVCInputFieldProps) => {
           value: CVC,
           onChange: (e) => {
             const input = e.target.value;
-            handelCVCChange(input);
+            handleCVCChange(input);
           },
           state: status,
           autoFocus: true,

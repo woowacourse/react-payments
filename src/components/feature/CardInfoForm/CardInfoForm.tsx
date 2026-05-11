@@ -8,10 +8,13 @@ import type { default as CARD } from "@constants/card";
 import styled from "@emotion/styled";
 import { useState, type ReactNode } from "react";
 
+import CardPasswordField from "./components/CardPasswordField";
+
 interface CardInfoFormState {
   cardNumber: string;
   validityPeriod: ValidityPeriod;
   CVC: string;
+  password: string;
   selectedCardCompany:
     | (typeof CARD.COMPANY_SELECT_FIELD)[number]["value"]
     | null;
@@ -27,6 +30,7 @@ const CardInfoForm = ({ children }: CardInfoFormProps) => {
   const [cardNumber, setCardNumber] = useState("");
   const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
   const [CVC, setCVC] = useState("");
+  const [password, setPassword] = useState("");
   const [selectedCardCompany, setSelectedCardCompany] = useState<
     (typeof CARD.COMPANY_SELECT_FIELD)[number]["value"] | null
   >(null);
@@ -34,15 +38,34 @@ const CardInfoForm = ({ children }: CardInfoFormProps) => {
   return (
     <>
       {children &&
-        children({ cardNumber, validityPeriod, CVC, selectedCardCompany })}
+        children({
+          cardNumber,
+          validityPeriod,
+          CVC,
+          selectedCardCompany,
+          password,
+        })}
       <Container>
         <StepFunnel>
-          <StepFunnel.Step step={3} comparisonOperator="greaterThanOrEqual">
+          <StepFunnel.Step step={4} comparisonOperator="greaterThanOrEqual">
             {() => (
+              <CardPasswordField
+                password={password}
+                onChange={(input) => {
+                  setPassword(input);
+                }}
+              />
+            )}
+          </StepFunnel.Step>
+          <StepFunnel.Step step={3} comparisonOperator="greaterThanOrEqual">
+            {({ goToStep }) => (
               <CardCVCInputField
                 CVC={CVC}
                 onChange={(input) => {
                   setCVC(input);
+                }}
+                onComplete={() => {
+                  goToStep((prev) => (prev < 4 ? 4 : prev));
                 }}
               />
             )}
