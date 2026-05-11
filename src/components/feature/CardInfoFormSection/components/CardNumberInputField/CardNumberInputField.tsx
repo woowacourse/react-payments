@@ -1,3 +1,4 @@
+import useFormValue from "@/components/common/FormContainer/useFormValue";
 import useFocus from "@/hooks/useFocus";
 import InputField from "@components/common/InputField";
 import {
@@ -8,13 +9,12 @@ import {
 } from "@utils/card";
 import { useState } from "react";
 
+import type { CardInfoFormState } from "../../formState";
 import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus } from "./utils";
 
 interface CardNumberInputFieldProps {
-  cardNumber: string;
-  onChange: (input: string) => void;
   onComplete: () => void;
 }
 
@@ -37,11 +37,9 @@ const updateArray = <T extends unknown[]>(
   return newArray;
 };
 
-const CardNumberInputField = ({
-  cardNumber,
-  onChange,
-  onComplete,
-}: CardNumberInputFieldProps) => {
+const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
+  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const cardNumber = getValue("cardNumber");
   const { registerInputRef, setNextFocus } = useFocus();
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
 
@@ -69,7 +67,6 @@ const CardNumberInputField = ({
 
     setStatus((prev) => updateArray(prev, index, cardNumberInputStatus));
 
-    // TODO: 계산으로 뺴기
     const updatedFormattedUnits = updateArray(
       formattedCardNumberUnits,
       index,
@@ -81,7 +78,7 @@ const CardNumberInputField = ({
       getCardNumberLengthByBrand(detectCardBrand(joined)),
     );
 
-    onChange(newCardNumber);
+    setValue("cardNumber", newCardNumber);
 
     const unitMaxLength = getCardNumberUnitMaxLengthByBrand(brand, index);
     if (input.length >= unitMaxLength) setNextFocus();
@@ -111,12 +108,10 @@ const CardNumberInputField = ({
         onChange: (e) => handleCardNumberChange(index, e.target.value),
         onBlur: (e) => handleCardNumberBlur(index, e.target.value),
         state:
-          //TODO: 추상화 레벨 맞추기
           status[index] === "DEFAULT" || status[index] === "SUCCESS"
             ? "default"
             : "error",
-        autoFocus: index === 0,
-        // maxLength: getCardNumberUnitMaxLengthByBrand(brand, index),
+        autoFocus: index === 0 || index === 3,
       }))}
     />
   );

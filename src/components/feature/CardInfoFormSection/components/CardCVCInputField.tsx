@@ -1,22 +1,21 @@
 import { useState } from "react";
+import useFormValue from "@/components/common/FormContainer/useFormValue";
 import InputField from "@/components/common/InputField";
 import { checkIsInt, validateCVCRange } from "@/utils/validator";
+
+import type { CardInfoFormState } from "../formState";
 
 type InputStatus = "default" | "error";
 
 interface CardCVCInputFieldProps {
-  CVC: string;
-  onChange: (CVC: string) => void;
   onComplete?: () => void;
 }
 
 const CVC_MAX_LENGTH = 3;
 
-const CardCVCInputField = ({
-  CVC,
-  onChange,
-  onComplete,
-}: CardCVCInputFieldProps) => {
+const CardCVCInputField = ({ onComplete }: CardCVCInputFieldProps) => {
+  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const CVC = getValue("CVC");
   const [status, setStatus] = useState<InputStatus>("default");
 
   const handleCVCChange = (input: string) => {
@@ -27,7 +26,7 @@ const CardCVCInputField = ({
 
     setStatus("default");
 
-    onChange(input.slice(0, CVC_MAX_LENGTH));
+    setValue("CVC", input.slice(0, CVC_MAX_LENGTH));
 
     if (input.length === CVC_MAX_LENGTH && status !== "error") {
       onComplete?.();

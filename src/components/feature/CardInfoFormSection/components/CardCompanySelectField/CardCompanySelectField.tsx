@@ -1,17 +1,19 @@
+import useFormValue from "@/components/common/FormContainer/useFormValue";
 import SelectField from "@components/common/SelectField";
 import { default as CARD } from "@constants/card";
+
+import type { CardInfoFormState } from "../../formState";
 
 type CardCompanySelectFieldOption = (typeof CARD.COMPANY_SELECT_FIELD)[number];
 
 interface CardCompanySelectFieldProps {
-  selectedCompany: CardCompanySelectFieldOption["value"] | null;
-  onChange: (company: CardCompanySelectFieldOption["value"]) => void;
+  onComplete?: () => void;
 }
 
-const CardCompanySelectField = ({
-  selectedCompany,
-  onChange,
-}: CardCompanySelectFieldProps) => {
+const CardCompanySelectField = ({ onComplete }: CardCompanySelectFieldProps) => {
+  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const selectedCompany = getValue("selectedCardCompany");
+
   return (
     <SelectField<CardCompanySelectFieldOption["value"]>
       title="카드사를 선택해 주세요"
@@ -19,7 +21,10 @@ const CardCompanySelectField = ({
       options={[...CARD.COMPANY_SELECT_FIELD]}
       placeholder="카드사를 선택해주세요"
       value={selectedCompany}
-      onChange={(next) => onChange(next)}
+      onChange={(next) => {
+        setValue("selectedCardCompany", next);
+        onComplete?.();
+      }}
     />
   );
 };

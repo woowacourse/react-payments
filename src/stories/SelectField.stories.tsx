@@ -20,9 +20,6 @@ const meta = {
   parameters: {
     layout: "padded",
   },
-  args: {
-    children: null,
-  },
   render: ({ value: initialValue, onChange, ...args }) => {
     const [value, setValue] = useState(initialValue);
     return (

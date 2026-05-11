@@ -1,17 +1,18 @@
+import useFormValue from "@/components/common/FormContainer/useFormValue";
 import type { ValidityPeriod } from "@/types/card";
 import InputField from "@components/common/InputField";
 import useFocus from "@hooks/useFocus";
 import { padValidityPeriodUnit } from "@utils/card";
 import { useState } from "react";
 
+import type { CardInfoFormState } from "../../formState";
 import { MONTH_MAX_LENGTH, YEAR_MAX_LENGTH } from "./constants";
 import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus, formatValidityPeriod } from "./utils";
 
 interface CardValidityPeriodInputFieldProps {
-  validityPeriod: ValidityPeriod;
-  onChange: (validityPeriod: ValidityPeriod) => void;
+  onComplete?: () => void;
 }
 
 type InputsStatuses = {
@@ -24,9 +25,10 @@ const INPUTS_STATUSES: InputsStatuses = {
 };
 
 const CardValidityPeriodInputField = ({
-  validityPeriod,
-  onChange,
+  onComplete,
 }: CardValidityPeriodInputFieldProps) => {
+  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const validityPeriod = getValue("validityPeriod");
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
   const { registerInputRef, setNextFocus } = useFocus();
 
@@ -40,9 +42,9 @@ const CardValidityPeriodInputField = ({
     if (state !== "DEFAULT") return;
 
     const formattedValue = formatValidityPeriod(value);
-    onChange({ ...validityPeriod, [key]: formattedValue });
+    const next = { ...validityPeriod, [key]: formattedValue };
+    setValue("validityPeriod", next);
 
-    // TODO: check 함수 추출하기
     if (
       (key === "month" && value.length === MONTH_MAX_LENGTH) ||
       (key === "month" &&
@@ -51,6 +53,13 @@ const CardValidityPeriodInputField = ({
         +value !== 0)
     ) {
       setNextFocus();
+    }
+
+    if (
+      next.month.length === MONTH_MAX_LENGTH &&
+      next.year.length === YEAR_MAX_LENGTH
+    ) {
+      onComplete?.();
     }
   };
 
@@ -68,7 +77,7 @@ const CardValidityPeriodInputField = ({
     setStatus((prev) => ({ ...prev, [key]: state }));
 
     if (state !== "DEFAULT") return;
-    onChange({ ...validityPeriod, [key]: padded });
+    setValue("validityPeriod", { ...validityPeriod, [key]: padded });
   };
 
   return (

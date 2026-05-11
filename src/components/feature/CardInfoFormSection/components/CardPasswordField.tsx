@@ -1,17 +1,21 @@
+import useFormValue from "@/components/common/FormContainer/useFormValue";
 import InputField from "@/components/common/InputField";
 import { checkIsInt, validateCVCRange } from "@/utils/validator";
 import { useState } from "react";
 
+import type { CardInfoFormState } from "../formState";
+
 type InputStatus = "default" | "error";
 
 interface CardPasswordFieldProps {
-  password: string;
-  onChange: (password: string) => void;
+  onComplete?: () => void;
 }
 
 const PASSWORD_MAX_LENGTH = 2;
 
-const CardPasswordField = ({ password, onChange }: CardPasswordFieldProps) => {
+const CardPasswordField = ({ onComplete }: CardPasswordFieldProps) => {
+  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const password = getValue("password");
   const [status, setStatus] = useState<InputStatus>("default");
 
   const handlePasswordChange = (input: string) => {
@@ -23,7 +27,11 @@ const CardPasswordField = ({ password, onChange }: CardPasswordFieldProps) => {
 
     setStatus("default");
 
-    onChange(input.slice(0, PASSWORD_MAX_LENGTH));
+    setValue("password", input.slice(0, PASSWORD_MAX_LENGTH));
+
+    if (input.length === PASSWORD_MAX_LENGTH && status !== "error") {
+      onComplete?.();
+    }
   };
 
   return (
