@@ -1,14 +1,18 @@
+import { useOutletContext } from 'react-router';
+
 import { SymbolInfo } from '@/core/components/symbolInfo';
 import { Button } from '@/core/components/button';
 import { CARD_OPTIONS } from '../../register/form/constant';
 
-interface CompleteProps {
-  cardNumber: string;
-  card: string;
-}
+export const Complete = () => {
+  const outletContext = useOutletContext<any>();
+  if (!outletContext) return null;
 
-export const Complete = ({ cardNumber, card }: CompleteProps) => {
+  const { cardNumbers, card } = outletContext;
+  const cardNumber = cardNumbers[0];
+
   const cardOption = CARD_OPTIONS.find((option) => option.value === card);
+
   return (
     <SymbolInfo
       full={true}

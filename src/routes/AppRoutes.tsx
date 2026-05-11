@@ -9,7 +9,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/payments/register" element={<Flow />}>
         <Route index element={<Form />} />
-        <Route path="complete" element={<Complete cardNumber="5511" card="bc" />} />
+        <Route path="complete" element={<Complete />} />
       </Route>
     </Routes>
   );
