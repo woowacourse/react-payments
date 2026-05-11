@@ -1,5 +1,5 @@
 import check from '../assets/check.png';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { CARD_ISSUER } from '../constants/constant';
 import type { CardIssuerType } from '../types/cardStausTypes';
 
@@ -10,7 +10,7 @@ export default function CardRegistrationComplete() {
   const state = location.state as { cardIssuer: CardIssuerType; cardNumber: string } | null;
 
   if (!state) {
-    navigate('/');
+    return <Navigate to="/" replace />;
   }
 
   return (

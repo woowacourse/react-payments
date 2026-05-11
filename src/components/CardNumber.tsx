@@ -101,7 +101,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             height: '12px',
           })}
         >
-          {cardStatus.cardNumberErrorMode !== 'normal'
+          {cardStatus.cardNumberErrorMode !== 'normal' && cardStatus.cardNumberErrorMode !== ''
             ? CARD_ERROR_MESSAGE[cardStatus.cardNumberErrorMode]
             : ' '}
         </p>
