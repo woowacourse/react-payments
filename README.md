@@ -83,8 +83,8 @@
 
 #### 커스텀 훅
 
-- [ ] Custom Hook을 활용하여 Form 관리 로직을 UI와 분리
+- [x] Custom Hook을 활용하여 Form 관리 로직을 UI와 분리
 
 #### Test
 
-- [ ] Storybook 테스트
+- [x] Storybook 테스트
