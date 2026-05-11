@@ -22,6 +22,7 @@ export interface CardNumberContextValue {
   handleBlur: (index: number) => void;
   inputConfig: InputConfig;
   cardType: string;
+  resetCardNumber: () => void;
 }
 
 export interface ExpireDateContextValue {
@@ -31,6 +32,7 @@ export interface ExpireDateContextValue {
   handleYearChange: (value: string) => void;
   handleMonthBlur: () => void;
   handleYearBlur: () => void;
+  resetExpireDate: () => void;
 }
 
 export interface CvcContextValue {
@@ -38,6 +40,7 @@ export interface CvcContextValue {
   cvcError: string;
   handleCvcChange: (value: string) => void;
   handleBlur: () => void;
+  resetCvc: () => void;
 }
 
 export interface CardBrandContextValue {
@@ -46,6 +49,7 @@ export interface CardBrandContextValue {
   options: { brand: string; color: string }[];
   toggleDropdown: () => void;
   handleItemClick: (option: { brand: string; color: string }) => void;
+  resetCardBrand: () => void;
 }
 
 export interface PasswordContextValue {
@@ -53,4 +57,5 @@ export interface PasswordContextValue {
   passwordError: string;
   handlePasswordChange: (value: string) => void;
   handleBlur: () => void;
+  resetPassword: () => void;
 }
