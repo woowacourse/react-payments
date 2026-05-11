@@ -1,18 +1,24 @@
 import useFocus from "@/hooks/useFocus";
-import type { CardNumberUnits } from "@/types/card";
 import InputField from "@components/common/InputField";
+import {
+  detectCardBrand,
+  formatCardNumberUnitByBrand,
+  getCardNumberLengthByBrand,
+  getCardNumberUnitMaxLengthByBrand,
+} from "@utils/card";
 import { useState } from "react";
 
 import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
-import checkCardNumberInputStatus from "./utils";
+import { checkCardNumberInputStatus } from "./utils";
 
 interface CardNumberInputFieldProps {
-  cardNumberUnits: CardNumberUnits;
-  onChange: (input: CardNumberUnits) => void;
+  cardNumber: string;
+  onChange: (input: string) => void;
+  onComplete: () => void;
 }
 
-type InputsStatuses = [InputStatus, InputStatus, InputStatus, InputStatus];
+type InputsStatuses = InputStatus[];
 
 const INPUTS_STATUSES: InputsStatuses = [
   "DEFAULT",
@@ -21,44 +27,68 @@ const INPUTS_STATUSES: InputsStatuses = [
   "DEFAULT",
 ];
 
-const CARD_NUMBER_UNIT_MAX_LENGTH = 4;
+const updateArray = <T extends unknown[]>(
+  array: T,
+  index: number,
+  value: T[number],
+): T => {
+  const newArray = [...array] as unknown as T;
+  newArray[index] = value;
+  return newArray;
+};
 
 const CardNumberInputField = ({
-  cardNumberUnits,
+  cardNumber,
   onChange,
+  onComplete,
 }: CardNumberInputFieldProps) => {
   const { registerInputRef, setNextFocus } = useFocus();
-
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
 
-  const handleCardNumberBlur = (index: number, input: string) => {
-    const cardNumberInputStatus = checkCardNumberInputStatus(input);
+  const brand = detectCardBrand(cardNumber);
+  const formattedCardNumberUnits = formatCardNumberUnitByBrand(
+    cardNumber,
+    brand,
+  );
+  const cardNumberMaxLength = getCardNumberLengthByBrand(brand);
 
-    setStatus((prev) => {
-      const newInputsStatuses: InputsStatuses = [...prev];
-      newInputsStatuses[index] = cardNumberInputStatus;
-      return newInputsStatuses;
-    });
+  const handleCardNumberBlur = (index: number, input: string) => {
+    const cardNumberInputStatus = checkCardNumberInputStatus(
+      input,
+      getCardNumberUnitMaxLengthByBrand(brand, index),
+    );
+
+    setStatus((prev) => updateArray(prev, index, cardNumberInputStatus));
   };
 
   const handleCardNumberChange = (index: number, input: string) => {
-    const cardNumberInputStatus = checkCardNumberInputStatus(input);
+    const cardNumberInputStatus = checkCardNumberInputStatus(
+      input,
+      getCardNumberUnitMaxLengthByBrand(brand, index),
+    );
 
-    setStatus((prev) => {
-      const newInputsStatuses: InputsStatuses = [...prev];
-      newInputsStatuses[index] = cardNumberInputStatus;
-      return newInputsStatuses;
-    });
+    setStatus((prev) => updateArray(prev, index, cardNumberInputStatus));
 
-    const newCardNumberUnits: CardNumberUnits = [...cardNumberUnits];
-    newCardNumberUnits[index] = input.slice(0, CARD_NUMBER_UNIT_MAX_LENGTH);
-    onChange(newCardNumberUnits);
+    // TODO: 계산으로 뺴기
+    const updatedFormattedUnits = updateArray(
+      formattedCardNumberUnits,
+      index,
+      input,
+    );
+    const joined = updatedFormattedUnits.join("");
+    const newCardNumber = joined.slice(
+      0,
+      getCardNumberLengthByBrand(detectCardBrand(joined)),
+    );
 
-    if (
-      newCardNumberUnits[index].length === CARD_NUMBER_UNIT_MAX_LENGTH &&
-      index < cardNumberUnits.length - 1
-    )
-      setNextFocus();
+    onChange(newCardNumber);
+
+    const unitMaxLength = getCardNumberUnitMaxLengthByBrand(brand, index);
+    if (input.length >= unitMaxLength) setNextFocus();
+
+    if (newCardNumber.length >= cardNumberMaxLength) {
+      onComplete();
+    }
   };
 
   return (
@@ -72,53 +102,22 @@ const CardNumberInputField = ({
         ERROR_MESSAGE[status[2]] ||
         ERROR_MESSAGE[status[3]]
       }
-      inputPropsList={[
-        {
-          ref: (el) => registerInputRef(0)(el),
-          key: "card-number-0",
-          placeholder: "1234",
-          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
-          fullWidth: true,
-          value: cardNumberUnits[0],
-          onChange: (e) => handleCardNumberChange(0, e.target.value),
-          onBlur: (e) => handleCardNumberBlur(0, e.target.value),
-          state: status[0] === "DEFAULT" ? "default" : "error",
-          autoFocus: true,
-        },
-        {
-          ref: (el) => registerInputRef(1)(el),
-          key: "card-number-1",
-          placeholder: "1234",
-          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
-          fullWidth: true,
-          value: cardNumberUnits[1],
-          onChange: (e) => handleCardNumberChange(1, e.target.value),
-          onBlur: (e) => handleCardNumberBlur(1, e.target.value),
-          state: status[1] === "DEFAULT" ? "default" : "error",
-        },
-        {
-          ref: (el) => registerInputRef(2)(el),
-          key: "card-number-2",
-          placeholder: "1234",
-          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
-          fullWidth: true,
-          value: cardNumberUnits[2],
-          onChange: (e) => handleCardNumberChange(2, e.target.value),
-          onBlur: (e) => handleCardNumberBlur(2, e.target.value),
-          state: status[2] === "DEFAULT" ? "default" : "error",
-        },
-        {
-          ref: (el) => registerInputRef(3)(el),
-          key: "card-number-3",
-          placeholder: "1234",
-          maxLength: CARD_NUMBER_UNIT_MAX_LENGTH,
-          fullWidth: true,
-          value: cardNumberUnits[3],
-          onChange: (e) => handleCardNumberChange(3, e.target.value),
-          onBlur: (e) => handleCardNumberBlur(3, e.target.value),
-          state: status[3] === "DEFAULT" ? "default" : "error",
-        },
-      ]}
+      inputPropsList={formattedCardNumberUnits.map((unit, index) => ({
+        ref: (el) => registerInputRef(index)(el),
+        key: `card-number-${index}`,
+        placeholder: "1234",
+        fullWidth: true,
+        value: unit,
+        onChange: (e) => handleCardNumberChange(index, e.target.value),
+        onBlur: (e) => handleCardNumberBlur(index, e.target.value),
+        state:
+          //TODO: 추상화 레벨 맞추기
+          status[index] === "DEFAULT" || status[index] === "SUCCESS"
+            ? "default"
+            : "error",
+        autoFocus: index === 0,
+        // maxLength: getCardNumberUnitMaxLengthByBrand(brand, index),
+      }))}
     />
   );
 };

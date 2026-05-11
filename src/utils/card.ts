@@ -49,28 +49,76 @@ export const getFormattedValidityPeriodUnit = (
   return `${month ? month + "/" : ""}${year ? year : ""}`;
 };
 
+export const getCardNumberUnitMaxLengthByBrand = (
+  brand: CardBrand | null,
+  unitIndex: number,
+) => {
+  if (!brand) return CARD.UNIT_LENGTHS_BY_BRAND.Visa[unitIndex];
+  return CARD.UNIT_LENGTHS_BY_BRAND[brand][unitIndex];
+};
+
 export const formatCardNumberUnitByBrand = (
   cardNumberUnit: string,
   brand: CardBrand | null,
 ) => {
   if (brand === "AMEX") {
-    const firstUnit = cardNumberUnit.slice(0, 4);
-    const secondUnit = cardNumberUnit.slice(4, 10);
-    const thirdUnit = cardNumberUnit.slice(10, 15);
+    const firstUnit = cardNumberUnit.slice(
+      0,
+      CARD.UNIT_LENGTHS_BY_BRAND.AMEX[0],
+    );
+    const secondUnit = cardNumberUnit.slice(
+      CARD.UNIT_LENGTHS_BY_BRAND.AMEX[0],
+      CARD.UNIT_LENGTHS_BY_BRAND.AMEX[0] + CARD.UNIT_LENGTHS_BY_BRAND.AMEX[1],
+    );
+    const thirdUnit = cardNumberUnit.slice(
+      CARD.UNIT_LENGTHS_BY_BRAND.AMEX[0] + CARD.UNIT_LENGTHS_BY_BRAND.AMEX[1],
+      CARD.UNIT_LENGTHS_BY_BRAND.AMEX[0] +
+        CARD.UNIT_LENGTHS_BY_BRAND.AMEX[1] +
+        CARD.UNIT_LENGTHS_BY_BRAND.AMEX[2],
+    );
     return [firstUnit, secondUnit, thirdUnit];
   }
 
   if (brand === "Diners") {
-    const firstUnit = cardNumberUnit.slice(0, 4);
-    const secondUnit = cardNumberUnit.slice(4, 10);
-    const thirdUnit = cardNumberUnit.slice(10, 14);
+    const firstUnit = cardNumberUnit.slice(
+      0,
+      CARD.UNIT_LENGTHS_BY_BRAND.Diners[0],
+    );
+    const secondUnit = cardNumberUnit.slice(
+      CARD.UNIT_LENGTHS_BY_BRAND.Diners[0],
+      CARD.UNIT_LENGTHS_BY_BRAND.Diners[0] +
+        CARD.UNIT_LENGTHS_BY_BRAND.Diners[1],
+    );
+    const thirdUnit = cardNumberUnit.slice(
+      CARD.UNIT_LENGTHS_BY_BRAND.Diners[0] +
+        CARD.UNIT_LENGTHS_BY_BRAND.Diners[1],
+      CARD.UNIT_LENGTHS_BY_BRAND.Diners[0] +
+        CARD.UNIT_LENGTHS_BY_BRAND.Diners[1] +
+        CARD.UNIT_LENGTHS_BY_BRAND.Diners[2],
+    );
     return [firstUnit, secondUnit, thirdUnit];
   }
 
-  const firstUnit = cardNumberUnit.slice(0, 4);
-  const secondUnit = cardNumberUnit.slice(4, 8);
-  const thirdUnit = cardNumberUnit.slice(8, 12);
-  const fourthUnit = cardNumberUnit.slice(12, 16);
+  const firstUnit = cardNumberUnit.slice(0, CARD.UNIT_LENGTHS_BY_BRAND.Visa[0]);
+  const secondUnit = cardNumberUnit.slice(
+    CARD.UNIT_LENGTHS_BY_BRAND.Visa[0],
+    CARD.UNIT_LENGTHS_BY_BRAND.Visa[0] + CARD.UNIT_LENGTHS_BY_BRAND.Visa[1],
+  );
+  const thirdUnit = cardNumberUnit.slice(
+    CARD.UNIT_LENGTHS_BY_BRAND.Visa[0] + CARD.UNIT_LENGTHS_BY_BRAND.Visa[1],
+    CARD.UNIT_LENGTHS_BY_BRAND.Visa[0] +
+      CARD.UNIT_LENGTHS_BY_BRAND.Visa[1] +
+      CARD.UNIT_LENGTHS_BY_BRAND.Visa[2],
+  );
+  const fourthUnit = cardNumberUnit.slice(
+    CARD.UNIT_LENGTHS_BY_BRAND.Visa[0] +
+      CARD.UNIT_LENGTHS_BY_BRAND.Visa[1] +
+      CARD.UNIT_LENGTHS_BY_BRAND.Visa[2],
+    CARD.UNIT_LENGTHS_BY_BRAND.Visa[0] +
+      CARD.UNIT_LENGTHS_BY_BRAND.Visa[1] +
+      CARD.UNIT_LENGTHS_BY_BRAND.Visa[2] +
+      CARD.UNIT_LENGTHS_BY_BRAND.Visa[3],
+  );
   return [firstUnit, secondUnit, thirdUnit, fourthUnit];
 };
 

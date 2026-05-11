@@ -10,6 +10,10 @@ export const validateRange = (arg: number, min: number, max: number) => {
   return arg >= min && arg <= max;
 };
 
+export const checkIsGreaterThanZero = (arg: number) => {
+  return checkIsNumber(arg) && arg > 0;
+};
+
 export const validateMonthRange = (month: number) => {
   return validateRange(month, 1, 12);
 };
@@ -20,10 +24,6 @@ export const validateYearRange = (year: number) => {
     parseInt(`${new Date().getFullYear()}`.slice(2)),
     Infinity,
   );
-};
-
-export const validateCardNumberUnitRange = (cardNumberUnit: number) => {
-  return validateRange(cardNumberUnit, 0, 9999);
 };
 
 export const validateCVCRange = (CVC: number) => {
