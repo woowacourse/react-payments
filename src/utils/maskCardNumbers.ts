@@ -11,7 +11,7 @@ export function maskCardNumbers(cardNumbers: string[]): string[] {
 export function maskSpecialCardNumbers(cardNumbers: string[]): string[] {
   const maskedCardNumbers = [];
   maskedCardNumbers.push(cardNumbers[0]);
-  maskedCardNumbers.push('·'.repeat(6));
-  maskedCardNumbers.push(cardNumbers[2].slice(-2) + cardNumbers[3]);
+  maskedCardNumbers.push('·'.repeat(cardNumbers[1].length + cardNumbers[2].slice(0, 2).length));
+  maskedCardNumbers.push(cardNumbers[2].slice(2, 4) + cardNumbers[3]);
   return maskedCardNumbers;
 }
