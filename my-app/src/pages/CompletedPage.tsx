@@ -1,16 +1,19 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import type { CardInfo } from "../types";
+type CompletedState = {
+  numberHead: string;
+  company: string;
+};
 
 const CompletedPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { cardInfo } = state as { cardInfo: CardInfo };
+  const { numberHead, company } = state as CompletedState;
 
   return (
     <main>
       <div>
-        {cardInfo.numbers[0]}로 시작하는 {cardInfo.company} 카드가 등록되었어요.
+        {numberHead}로 시작하는 {company} 카드가 등록되었어요.
       </div>
       <button onClick={() => navigate("/")}>확인</button>
     </main>

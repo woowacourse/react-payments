@@ -15,8 +15,13 @@ const CardFormPage = () => {
   const { cardInfo, network, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
 
   const handleConfirm = () => {
-    navigate("/completed", { state: { cardInfo } });
-  }
+    navigate("/completed", {
+      state: {
+        numberHead: cardInfo.numbers[0],
+        company: cardInfo.company,
+      },
+    });
+  };
 
   return (
     <main css={pageStyle}>
