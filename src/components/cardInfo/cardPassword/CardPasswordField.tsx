@@ -31,8 +31,9 @@ export default function CardPasswordField({ field }: Props) {
           maxLength={2}
           value={password}
           onChange={(e) => {
-            const updated = validate(e);
-            if (updated !== null) setPassword(updated);
+            const newValue = e.target.value;
+            if (!validate(newValue)) return;
+            setPassword(newValue);
           }}
           inputMode="numeric"
         />

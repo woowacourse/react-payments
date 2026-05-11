@@ -4,19 +4,17 @@ import { validateCardPasswordLength, validateNumber } from "../validator";
 export function useCardPasswordValidation() {
   const [error, setError] = useState("");
 
-  const validate = (e: React.ChangeEvent<HTMLInputElement>): string | null => {
-    const newValue = e.target.value;
-
+  const validate = (newValue: string): boolean => {
     const numberResult = validateNumber(newValue);
     if (!numberResult.state) {
       setError(numberResult.message);
-      return null;
+      return false;
     }
 
     const lengthResult = validateCardPasswordLength(newValue);
     setError(lengthResult.state ? "" : lengthResult.message);
 
-    return newValue;
+    return true;
   };
 
   return { error, validate };

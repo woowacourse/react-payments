@@ -17,7 +17,7 @@ interface Props {
 //카드 번호를 입력할수 있는 컴포넌트
 export default function CardNumberField({ field }: Props) {
   const { value: cardNumber, set: setCardNumber } = field;
-  const { error, validateInput, validateLength } = useCardNumberValidation();
+  const { error, validate } = useCardNumberValidation();
   const segments = getCardNumberSegments(cardNumber.join(''));
 
   return (
@@ -34,9 +34,8 @@ export default function CardNumberField({ field }: Props) {
             value={cardNumber[index] ?? ''}
             onChange={(e) => {
               const newValue = e.target.value;
-              if (!validateInput(newValue)) return;
               const updated = reshapeCardNumber(cardNumber, index, newValue);
-              validateLength(updated);
+              if (!validate(updated)) return;
               setCardNumber(updated);
             }}
             inputMode="numeric"

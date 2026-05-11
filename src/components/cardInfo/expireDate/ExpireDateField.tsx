@@ -16,7 +16,7 @@ interface Props {
 //유효기간을 적을수 있는 컴포넌트
 export default function ExpireDateField({ field }: Props) {
   const { value: expireDate, set: setExpireDate } = field;
-  const { error, validate } = useExpireDateValidation(expireDate);
+  const { error, validate } = useExpireDateValidation();
 
   return (
     <Field>
@@ -29,8 +29,11 @@ export default function ExpireDateField({ field }: Props) {
           maxLength={2}
           value={expireDate[0]}
           onChange={(e) => {
-            const updatedExpireDate = validate(e, 0);
-            if (updatedExpireDate) setExpireDate(updatedExpireDate);
+            const newValue = e.target.value;
+            const updated = [...expireDate];
+            updated[0] = newValue;
+            if (!validate(updated)) return;
+            setExpireDate(updated);
           }}
           inputMode="numeric"
         />
@@ -39,8 +42,11 @@ export default function ExpireDateField({ field }: Props) {
           maxLength={2}
           value={expireDate[1]}
           onChange={(e) => {
-            const updatedExpireDate = validate(e, 1);
-            if (updatedExpireDate) setExpireDate(updatedExpireDate);
+            const newValue = e.target.value;
+            const updated = [...expireDate];
+            updated[1] = newValue;
+            if (!validate(updated)) return;
+            setExpireDate(updated);
           }}
           inputMode="numeric"
         />

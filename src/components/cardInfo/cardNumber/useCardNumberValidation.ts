@@ -5,16 +5,20 @@ import { validateCardNumberLength, validateNumber } from "../validator";
 export function useCardNumberValidation() {
   const [error, setError] = useState("");
 
-  const validateInput = (newValue: string): boolean => {
-    const result = validateNumber(newValue);
-    if (!result.state) setError(result.message);
-    return result.state;
+  const validate = (updatedCardNumber: string[]): boolean => {
+    for (const segment of updatedCardNumber) {
+      const numberResult = validateNumber(segment);
+      if (!numberResult.state) {
+        setError(numberResult.message);
+        return false;
+      }
+    }
+
+    const lengthResult = validateCardNumberLength(updatedCardNumber);
+    setError(lengthResult.state ? "" : lengthResult.message);
+
+    return true;
   };
 
-  const validateLength = (cardNumber: string[]) => {
-    const result = validateCardNumberLength(cardNumber);
-    setError(result.state ? "" : result.message);
-  };
-
-  return { error, validateInput, validateLength };
+  return { error, validate };
 }

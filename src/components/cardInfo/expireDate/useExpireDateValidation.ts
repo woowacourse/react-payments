@@ -1,38 +1,28 @@
 import { useState } from "react";
 import { validateExpireDateNotPast, validateMonth, validateNumber } from "../validator";
 
-export function useExpireDateValidation(expireDate: string[]) {
+export function useExpireDateValidation() {
   const [error, setError] = useState("");
 
-  const validate = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ): string[] | null => {
-    const newValue = e.target.value;
-
-    setError("");
-
-    const numberResult = validateNumber(newValue);
-    if (!numberResult.state) {
-      setError(numberResult.message);
-      return null;
+  const validate = (updatedExpireDate: string[]): boolean => {
+    for (const segment of updatedExpireDate) {
+      const numberResult = validateNumber(segment);
+      if (!numberResult.state) {
+        setError(numberResult.message);
+        return false;
+      }
     }
-
-    const updatedExpireDate = [...expireDate];
-    updatedExpireDate[index] = newValue;
 
     const monthResult = validateMonth(updatedExpireDate[0]);
     if (!monthResult.state) {
       setError(monthResult.message);
-      return updatedExpireDate;
+      return true;
     }
 
     const expireDateResult = validateExpireDateNotPast(updatedExpireDate);
-    if (!expireDateResult.state) {
-      setError(expireDateResult.message);
-    }
+    setError(expireDateResult.state ? "" : expireDateResult.message);
 
-    return updatedExpireDate;
+    return true;
   };
 
   return { error, validate };
