@@ -1,14 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-type CompletedState = {
-  numberHead: string;
-  company: string;
-};
+import type { PublicCardInfo } from "../types";
 
 const CompletedPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { numberHead, company } = state as CompletedState;
+  const { numberHead, company } = state as PublicCardInfo;
 
   return (
     <main>

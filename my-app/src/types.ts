@@ -5,3 +5,8 @@ export type CardInfo = {
   cvc: string;
   password: string;
 };
+
+export type PublicCardInfo = {
+  numberHead: string;
+  company: string;
+};

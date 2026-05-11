@@ -15,12 +15,11 @@ const CardFormPage = () => {
   const { cardInfo, network, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
 
   const handleConfirm = () => {
-    navigate("/completed", {
-      state: {
-        numberHead: cardInfo.numbers[0],
-        company: cardInfo.company,
-      },
-    });
+    const publicCardInfo = {
+      numberHead: cardInfo.numbers[0],
+      company: cardInfo.company,
+    }
+    navigate("/completed", { state: publicCardInfo });
   };
 
   return (
