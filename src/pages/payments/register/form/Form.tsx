@@ -97,7 +97,7 @@ export const Form = () => {
             <FormGroup title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다.">
               <Field errorMessage={card.renderErrorMessage()}>
                 <Select
-                  // ref={card.ref}
+                  {...{ ref: card.ref }}
                   id="card"
                   value={card.values.card}
                   onChange={card.onChange}
@@ -111,7 +111,7 @@ export const Form = () => {
             <FormGroup title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요">
               <Field label="유효기간" errorMessage={expirationDate.renderErrorMessage()}>
                 <Input
-                  ref={expirationDate.ref}
+                  {...{ ref: expirationDate.ref }}
                   type="tel"
                   id="month"
                   value={expirationDate.values.month}
@@ -125,7 +125,7 @@ export const Form = () => {
                   placeholder="MM"
                 />
                 <Input
-                  ref={expirationDate.ref}
+                  {...{ ref: expirationDate.ref }}
                   type="tel"
                   id="year"
                   value={expirationDate.values.year}
@@ -145,7 +145,7 @@ export const Form = () => {
             <FormGroup title="CVC 번호를 입력해 주세요">
               <Field label="CVC" errorMessage={cvc.renderErrorMessage()}>
                 <Input
-                  ref={cvc.ref}
+                  {...{ ref: cvc.ref }}
                   type="tel"
                   id="cvc"
                   value={cvc.values.cvc}
@@ -162,7 +162,7 @@ export const Form = () => {
             <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요">
               <Field label="비밀번호 앞 2자리" errorMessage={password.renderErrorMessage()}>
                 <Input
-                  ref={password.ref}
+                  {...{ ref: password.ref }}
                   type="password"
                   id="password"
                   value={password.values.password}
