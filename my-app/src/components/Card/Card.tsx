@@ -2,6 +2,9 @@ import { css } from "@emotion/react";
 import type { CardInfo } from "../../types";
 import masterLogo from "../../assets/masterLogo.png";
 import visaLogo from "../../assets/visaLogo.png";
+import amexLogo from "../../assets/amexLogo.png";
+import unionpayLogo from "../../assets/unionpayLogo.png";
+import dinersLogo from "../../assets/dinersLogo.png";
 import { decideCardColor } from "../../utils/decideCardInfo";
 
 const cardTextStyle = css`
@@ -19,6 +22,22 @@ const cardNumberSpanStyle = css`
 const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
   const cardColor = decideCardColor(cardInfo.company);
 
+  const decideLogoImg = (brand: string) => {
+    switch (brand) {
+      case "master":
+        return masterLogo;
+      case "visa":
+        return visaLogo;
+      case "amex":
+        return amexLogo;
+      case "diners":
+        return dinersLogo;
+      case "unionpay":
+        return unionpayLogo;
+      default:
+        return undefined;
+    }
+  };
   return (
     <div
       css={css`
@@ -56,7 +75,7 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
               width: 36px;
               height: 22px;
             `}
-            src={brand === "master" ? masterLogo : visaLogo}
+            src={decideLogoImg(brand)}
           />
         )}
       </div>
