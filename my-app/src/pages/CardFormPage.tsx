@@ -18,7 +18,7 @@ const CardFormPage = () => {
     const publicCardInfo = {
       numberHead: cardInfo.numbers[0],
       company: cardInfo.company,
-    }
+    };
     navigate("/completed", { state: publicCardInfo });
   };
 

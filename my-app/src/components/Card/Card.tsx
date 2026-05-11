@@ -45,11 +45,7 @@ const Card = ({ cardInfo, network }: CardProps) => {
       <div css={cardHeaderStyle}>
         <div css={chipStyle}></div>
         {NETWORK_LOGO[network] && (
-          <img
-            css={brandLogoStyle}
-            src={NETWORK_LOGO[network].src}
-            alt={NETWORK_LOGO[network].alt}
-          />
+          <img css={brandLogoStyle} src={NETWORK_LOGO[network].src} alt={NETWORK_LOGO[network].alt} />
         )}
       </div>
       <div>

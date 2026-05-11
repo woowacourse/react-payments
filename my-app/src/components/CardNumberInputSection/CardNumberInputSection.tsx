@@ -10,11 +10,7 @@ type CardNumberInputSectionProps = {
   isSupportedNetwork: boolean;
 };
 
-const CardNumberInputSection = ({
-  onValueHandler,
-  maxLength,
-  isSupportedNetwork,
-}: CardNumberInputSectionProps) => {
+const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork }: CardNumberInputSectionProps) => {
   const {
     inputValues,
     errorMessage,

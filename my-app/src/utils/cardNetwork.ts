@@ -29,5 +29,4 @@ export const getMaxLength = (network: string): number => {
   return MAX_LENGTH[network as keyof typeof MAX_LENGTH] ?? MAX_LENGTH.default;
 };
 
-export const SUPPORTED_NETWORKS_MESSAGE =
-  "* VISA, Mastercard, AMEX, Diners, UnionPay 카드만 지원합니다";
+export const SUPPORTED_NETWORKS_MESSAGE = "* VISA, Mastercard, AMEX, Diners, UnionPay 카드만 지원합니다";

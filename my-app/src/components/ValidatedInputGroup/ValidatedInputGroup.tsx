@@ -7,12 +7,7 @@ type ValidatedInputGroupProps = {
   children: React.ReactNode;
 };
 
-const ValidatedInputGroup = ({
-  errorMessage,
-  warningMessage = "",
-  legend,
-  children,
-}: ValidatedInputGroupProps) => {
+const ValidatedInputGroup = ({ errorMessage, warningMessage = "", legend, children }: ValidatedInputGroupProps) => {
   const message = errorMessage || warningMessage;
   const isError = !!errorMessage;
 

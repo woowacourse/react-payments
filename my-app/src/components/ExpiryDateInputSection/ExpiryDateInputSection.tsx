@@ -9,8 +9,9 @@ type ExpiryDateInputSectionProps = {
 };
 
 const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps) => {
-  const { inputValues, errorMessage, errorIndex, inputRefs, fieldCount, fieldMaxLength, handlers } =
-    useExpiryDateInput({ onValueHandler });
+  const { inputValues, errorMessage, errorIndex, inputRefs, fieldCount, fieldMaxLength, handlers } = useExpiryDateInput(
+    { onValueHandler },
+  );
 
   return (
     <InputSectionLayout
