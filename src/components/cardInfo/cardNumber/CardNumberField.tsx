@@ -22,6 +22,20 @@ export default function CardNumberField({ field }: Props) {
   const segments = getCardNumberSegments(cardNumber.join(''));
   const { setRef, focusNext } = useAutoFocus();
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+    length: number,
+  ) => {
+    const newValue = e.target.value;
+    const updated = reshapeCardNumber(cardNumber, index, newValue);
+    if (!validate(updated)) return;
+    setCardNumber(updated);
+    if (newValue.length === length && index + 1 < updated.length) {
+      focusNext(index);
+    }
+  };
+
   return (
     <Field>
       <Title>결제할 카드 번호를 입력해 주세요</Title>
@@ -36,15 +50,7 @@ export default function CardNumberField({ field }: Props) {
             placeholder="1234"
             maxLength={length}
             value={cardNumber[index] ?? ''}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              const updated = reshapeCardNumber(cardNumber, index, newValue);
-              if (!validate(updated)) return;
-              setCardNumber(updated);
-              if (newValue.length === length && index + 1 < updated.length) {
-                focusNext(index);
-              }
-            }}
+            onChange={(e) => handleChange(e, index, length)}
             inputMode="numeric"
           />
         ))}

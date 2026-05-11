@@ -20,6 +20,18 @@ export default function ExpireDateField({ field }: Props) {
   const { error, validate } = useExpireDateValidation();
   const { setRef, focusNext } = useAutoFocus();
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    const newValue = e.target.value;
+    const updated = [...expireDate];
+    updated[index] = newValue;
+    if (!validate(updated)) return;
+    setExpireDate(updated);
+    if (newValue.length === 2 && index === 0) focusNext(0);
+  };
+
   return (
     <Field>
       <Title>카드 유효기간을 입력해 주세요</Title>
@@ -32,14 +44,7 @@ export default function ExpireDateField({ field }: Props) {
           placeholder="MM"
           maxLength={2}
           value={expireDate[0]}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            const updated = [...expireDate];
-            updated[0] = newValue;
-            if (!validate(updated)) return;
-            setExpireDate(updated);
-            if (newValue.length === 2) focusNext(0);
-          }}
+          onChange={(e) => handleChange(e, 0)}
           inputMode="numeric"
         />
         <InfoInput
@@ -47,13 +52,7 @@ export default function ExpireDateField({ field }: Props) {
           placeholder="YY"
           maxLength={2}
           value={expireDate[1]}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            const updated = [...expireDate];
-            updated[1] = newValue;
-            if (!validate(updated)) return;
-            setExpireDate(updated);
-          }}
+          onChange={(e) => handleChange(e, 1)}
           inputMode="numeric"
         />
       </InputContainer>

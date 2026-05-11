@@ -19,6 +19,12 @@ export default function CardPasswordField({ field }: Props) {
   const { value: password, set: setPassword } = field;
   const { error, validate } = useCardPasswordValidation();
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    if (!validate(newValue)) return;
+    setPassword(newValue);
+  };
+
   return (
     <Field>
       <Title>비밀번호를 입력해 주세요</Title>
@@ -31,11 +37,7 @@ export default function CardPasswordField({ field }: Props) {
           type="password"
           maxLength={2}
           value={password}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            if (!validate(newValue)) return;
-            setPassword(newValue);
-          }}
+          onChange={handleChange}
           inputMode="numeric"
         />
       </InputContainer>

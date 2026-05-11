@@ -17,6 +17,12 @@ export default function CvcField({ field }: Props) {
   const { value: cvc, set: setCvc } = field;
   const { error, validate } = useCvcValidation();
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    if (!validate(newValue)) return;
+    setCvc(newValue);
+  };
+
   return (
     <Field>
       <Title>CVC 번호를 입력해 주세요</Title>
@@ -27,11 +33,7 @@ export default function CvcField({ field }: Props) {
           placeholder="123"
           maxLength={3}
           value={cvc}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            if (!validate(newValue)) return;
-            setCvc(newValue);
-          }}
+          onChange={handleChange}
           inputMode="numeric"
         />
       </InputContainer>
