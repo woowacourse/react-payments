@@ -28,6 +28,8 @@ export const Form = () => {
 
     errorsCardNumbers,
 
+    cardNubmersRef,
+
     renderErrorMessageCardNumbers,
     renderErrorCardNumberInput,
 
@@ -83,23 +85,13 @@ export const Form = () => {
     handleSubmit,
   } = outletContext;
 
-  const cardNumberRef0 = useRef<HTMLInputElement>(null);
-  const cardNumberRef1 = useRef<HTMLInputElement>(null);
-  const cardNumberRef2 = useRef<HTMLInputElement>(null);
-  const cardNumberRef3 = useRef<HTMLInputElement>(null);
-  const cardNumbersRefs = [cardNumberRef0, cardNumberRef1, cardNumberRef2, cardNumberRef3];
-
   const cardRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
   const cvcRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const isValidCardNumbers0 = errorsCardNumbers?.[0]?.every((error) => error.valid);
-  const isValidCardNumbers1 = errorsCardNumbers?.[1]?.every((error) => error.valid);
-  const isValidCardNumbers2 = errorsCardNumbers?.[2]?.every((error) => error.valid);
   const isValidCardNumbers3 = errorsCardNumbers?.[3]?.every((error) => error.valid);
-  const isValidCardNumbers = [isValidCardNumbers0, isValidCardNumbers1, isValidCardNumbers2, isValidCardNumbers3];
 
   const isValidCard = errorsCard?.card.every((error) => error.valid);
 
@@ -111,26 +103,12 @@ export const Form = () => {
   const isValidPassword = errorsPassword?.password.every((error) => error.valid);
 
   useEffect(() => {
-    isValidCardNumbers.some((isValidCardNumber, index) => {
-      const current = index;
-      const next = current + 1;
-
-      const isValidCurrent = isValidCardNumber;
-      const isValidNext = isValidCardNumbers?.[next];
-
-      if (isValidCurrent && !isValidNext) {
-        cardNumbersRefs?.[next]?.current?.focus();
-        return true;
-      }
-    });
-
     if (isValidCardNumbers3 && !isValidCard) return cardRef.current?.focus();
     if (isValidCard && !isValidExpirationMonth) return monthRef.current?.focus();
     if (isValidExpirationYear && !isValidCvc) return cvcRef.current?.focus();
     if (isValidCvc && !isValidPassword) return passwordRef.current?.focus();
   }, [
     cardNumbersRefs,
-    isValidCardNumbers,
     isValidCardNumbers3,
     isValidCard,
     isValidExpirationMonth,
@@ -151,7 +129,7 @@ export const Form = () => {
         <Field label="카드 번호" errorMessage={renderErrorMessageCardNumbers()}>
           {Object.values(cardNumbers).map((value, index) => (
             <Input
-              ref={cardNumbersRefs[index]}
+              ref={cardNubmersRef}
               type="tel"
               id={String(index)}
               key={index}

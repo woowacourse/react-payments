@@ -17,6 +17,8 @@ export const Flow = () => {
 
     errors: errorsCardNumbers,
 
+    ref: cardNubmersRef,
+
     renderErrorMessage: renderErrorMessageCardNumbers,
     renderErrorInput: renderErrorCardNumberInput,
   } = useCardNumbers();
@@ -95,6 +97,8 @@ export const Flow = () => {
         handleBlurCardNumbers,
 
         errorsCardNumbers,
+
+        cardNubmersRef,
 
         renderErrorMessageCardNumbers,
         renderErrorCardNumberInput,
