@@ -7,11 +7,12 @@ import { categorizeCardBrand } from '../utils';
 import type { CardInfo } from '../types';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import CardCompanySelect from '../components/domain/CardCompanySelect';
+import PasswordField from '../components/domain/PasswordField';
 
 interface FieldState<T> {
   value: T;
-  // error?: string
-  // touched?: boolean
+  isValid: boolean;
 }
 
 type CardInfoFormValue = {
@@ -20,34 +21,31 @@ type CardInfoFormValue = {
 
 export default function AddCardPage() {
   const [formValue, setFormValue] = useState<CardInfoFormValue>({
-    cardNumbers: { value: ['', '', '', ''] },
-    expirationPeriod: { value: ['', ''] },
-    cvc: { value: '' },
-    cardBrand: { value: 'local' },
+    cardNumbers: { value: ['', '', '', ''], isValid: false },
+    cardCompany: { value: '', isValid: false },
+    expirationPeriod: { value: ['', ''], isValid: false },
+    cvc: { value: '', isValid: false },
+    password: { value: '', isValid: false },
+    cardBrand: { value: 'local', isValid: false },
   });
+
+  const handleUpdate = <K extends keyof CardInfo>(key: K, value: CardInfo[K]) => {
+    setFormValue((prev) => ({
+      ...prev,
+      [key]: { value, isValid: true },
+    }));
+  };
 
   const handleCardNumbersUpdate = (cardNumbers: CardInfo['cardNumbers']) => {
     const cardBrand = categorizeCardBrand(cardNumbers);
     setFormValue((prev) => ({
       ...prev,
-      cardNumbers: { value: cardNumbers },
-      cardBrand: { value: cardBrand },
+      cardNumbers: { value: cardNumbers, isValid: true },
+      cardBrand: { value: cardBrand, isValid: true },
     }));
   };
 
-  const handleExpirationPeriodUpdate = (expirationPeriod: CardInfo['expirationPeriod']) => {
-    setFormValue((prev) => ({
-      ...prev,
-      expirationPeriod: { value: expirationPeriod },
-    }));
-  };
-
-  const handleCVCUpdate = (cvc: CardInfo['cvc']) => {
-    setFormValue((prev) => ({
-      ...prev,
-      cvc: { value: cvc },
-    }));
-  };
+  const isFormValid = Object.values(formValue).every((field) => field.isValid);
 
   return (
     <main>
@@ -59,12 +57,17 @@ export default function AddCardPage() {
         />
       </div>
       <form css={formLayout} id="add-card-form">
+        <PasswordField value={formValue.password.value} onUpdated={(v) => handleUpdate('password', v)} />
+        <CVCField value={formValue.cvc.value} onUpdated={(v) => handleUpdate('cvc', v)} />
+        <ExpirationPeriodField
+          value={formValue.expirationPeriod.value}
+          onUpdated={(v) => handleUpdate('expirationPeriod', v)}
+        />
+        <CardCompanySelect value={formValue.cardCompany.value} onUpdated={(v) => handleUpdate('cardCompany', v)} />
         <CardNumbersField value={formValue.cardNumbers.value} onUpdated={handleCardNumbersUpdate} />
-        <ExpirationPeriodField value={formValue.expirationPeriod.value} onUpdated={handleExpirationPeriodUpdate} />
-        <CVCField value={formValue.cvc.value} onUpdated={handleCVCUpdate} />
       </form>
       <div css={submitButtonWrapperStyle}>
-        <Button type="submit" form="add-card-form" disabled>
+        <Button type="submit" form="add-card-form" disabled={!isFormValid}>
           확인
         </Button>
       </div>
@@ -89,5 +92,5 @@ const submitButtonWrapperStyle = css`
   bottom: 0;
   left: 0;
   width: 100%;
-  display: none
+  display: none;
 `;
