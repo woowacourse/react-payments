@@ -54,7 +54,7 @@ export function CardForm({
 
   const { firstDigits } = cardNumber;
 
-  const loadDonePage = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate("/card/done/", {
       state: { firstDigitsCardNumber: firstDigits, cardBrand },
@@ -62,7 +62,7 @@ export function CardForm({
   };
 
   return (
-    <CardFormContainer onSubmit={loadDonePage}>
+    <CardFormContainer onSubmit={handleSubmit}>
       <CardSection
         title={"비밀번호를 입력해 주세요"}
         subTitle={"앞의 2자리를 입력해주세요."}
