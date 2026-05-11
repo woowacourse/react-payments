@@ -14,7 +14,7 @@ const PasswordInputSection = ({ onValueHandler }: PasswordInputSectionProps) => 
   const { inputValue, errorMessage, handlers } = useSecretInput({ onValueHandler, validate: validateNumeric });
 
   return (
-    <InputSectionLayout title="비밀번호를 입력해 주세요" message="앞의 두자리를 입력해 주세요" tag="PASSWORD">
+    <InputSectionLayout title="비밀번호를 입력해 주세요" message="앞의 두자리를 입력해 주세요" tag="비밀번호 앞 2자리">
       <ValidatedInputGroup errorMessage={errorMessage} legend="PASSWORD">
         <input
           type="password"
@@ -24,7 +24,7 @@ const PasswordInputSection = ({ onValueHandler }: PasswordInputSectionProps) => 
           value={inputValue}
           onChange={(e) => handlers.onChange(e.target.value)}
           onBlur={handlers.handleBlur}
-          css={inputStyle(!!errorMessage, "80px")}
+          css={[inputStyle(!!errorMessage), { flex: 1 }]}
           placeholder="**"
         />
       </ValidatedInputGroup>

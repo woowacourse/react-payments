@@ -24,7 +24,7 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
           value={inputValue}
           onChange={(e) => handlers.onChange(e.target.value)}
           onBlur={handlers.handleBlur}
-          css={inputStyle(!!errorMessage, "80px")}
+          css={[inputStyle(!!errorMessage), { flex: 1 }]}
           placeholder="123"
         />
       </ValidatedInputGroup>

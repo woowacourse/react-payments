@@ -31,7 +31,7 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
             value={inputValues[i] || ""}
             onChange={(e) => handlers.onChange(i, e.target.value)}
             onBlur={handlers.handleBlur}
-            css={inputStyle(errorIndex === i, "80px")}
+            css={[inputStyle(errorIndex === i), { flex: 1 }]}
             placeholder={i === 0 ? "MM" : "YY"}
           />
         ))}
