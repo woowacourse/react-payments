@@ -51,6 +51,7 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
             ref={(el) => {
               inputRefs.current[index] = el;
             }}
+            autoFocus={index === 0}
             key={index}
             isError={touched && error}
             id={index === 0 ? fieldConfig.id : `${fieldConfig.id}-${index}`}
