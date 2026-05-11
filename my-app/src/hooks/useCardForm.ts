@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CVC_LENGTH, EXPIRY_FIELD_MAX_LENGTH, PASSWORD_LENGTH } from "../constants/cardField";
 import type { CardInfo } from "../types";
 import { detectCardNetwork, getMaxLength } from "../utils/cardNetwork";
+import { validateExpiry } from "../utils/validators";
 
 const INITIAL_CARD_INFO: CardInfo = {
   numbers: [],
@@ -26,7 +27,9 @@ export const useCardForm = ({ onSubmit }: UseCardFormParams) => {
   const isCardNumber = cardInfo.numbers.join("").length === maxLength && isSupportedNetwork;
   const isCompany = cardInfo.company !== "";
   const isExpiry =
-    cardInfo.expiry[0]?.length === EXPIRY_FIELD_MAX_LENGTH && cardInfo.expiry[1]?.length === EXPIRY_FIELD_MAX_LENGTH;
+    cardInfo.expiry[0]?.length === EXPIRY_FIELD_MAX_LENGTH &&
+    cardInfo.expiry[1]?.length === EXPIRY_FIELD_MAX_LENGTH &&
+    validateExpiry(cardInfo.expiry).message === "";
   const isCvc = cardInfo.cvc.length === CVC_LENGTH;
   const isPassword = cardInfo.password.length === PASSWORD_LENGTH;
   const isAll = isCardNumber && isCompany && isExpiry && isCvc && isPassword;
