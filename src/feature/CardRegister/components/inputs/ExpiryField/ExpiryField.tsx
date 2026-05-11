@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useInputFocusMove} from '@/feature/CardRegister/hooks/ui/useInputFocusMove';
 import type {ExpiryInputProps} from '../shared.types';
 import InputContainer from '../InputContainer/InputContainer';
-import {FieldErrorMessage, FieldLayout} from '../../styles/inputFieldStyles';
+import {FieldErrorMessage, FieldLayout} from '../styles/inputFieldStyles';
 
 type ExpiryFieldProps = {
   inputProps: ExpiryInputProps;

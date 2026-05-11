@@ -12,3 +12,5 @@ export const CARD_COMPANIES = {
 } as const;
 
 export type CardCompanyType = keyof typeof CARD_COMPANIES;
+
+export const CARD_COMPANY_KEYS = Object.keys(CARD_COMPANIES) as CardCompanyType[];

@@ -4,7 +4,7 @@ import Input from '@/common/components/Input/Input';
 import type {CardRegisterInputProps} from '../shared.types';
 import {useInputFocusMove} from '@/feature/CardRegister/hooks/ui/useInputFocusMove';
 import InputContainer from '../InputContainer/InputContainer';
-import {FieldErrorMessage, FieldLayout} from '../../styles/inputFieldStyles';
+import {FieldErrorMessage, FieldLayout} from '../styles/inputFieldStyles';
 
 type NumberFieldProps = {
   inputProps: CardRegisterInputProps[];
