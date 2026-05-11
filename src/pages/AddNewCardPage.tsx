@@ -11,12 +11,11 @@ import CardValidityPeriodInputField, {
 import Button from "@/components/common/Button";
 import type { CardCompany } from "@/constants/cardCompanies";
 import styled from "@emotion/styled";
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import type { AddCardCompletePageState } from "./AddCardCompletePage";
+import { useState, type ComponentProps } from "react";
 import { validateCardForm } from "@/utils/validator";
 import useFormStep from "@/hooks/useFormStep";
 import { ADD_CARD_FORM_STEP } from "@/constants/addCardForm";
+import useCardNavigation from "@/hooks/useCardNavigation";
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
@@ -33,6 +32,8 @@ const AddNewCardPage = () => {
     "CARD_NUMBER",
   );
 
+  const { goToAddCardCompletePage } = useCardNavigation();
+
   const isFormValid = validateCardForm(
     cardNumber,
     cardCompany,
@@ -41,7 +42,14 @@ const AddNewCardPage = () => {
     password,
   );
 
-  const navigate = useNavigate();
+  const handleCardFormSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
+    event.preventDefault();
+
+    goToAddCardCompletePage({
+      cardNumberPrefix: cardNumber[0],
+      cardCompanyName: cardCompany?.name ?? "",
+    });
+  };
 
   return (
     <PageWrapper>
@@ -52,18 +60,7 @@ const AddNewCardPage = () => {
           validityPeriod={validityPeriod}
         />
       </CardWrapper>
-      <CardInfoForm
-        onSubmit={(event) => {
-          event.preventDefault();
-
-          const completePageState: AddCardCompletePageState = {
-            cardNumberPrefix: cardNumber[0],
-            cardCompanyName: cardCompany?.name ?? "",
-          };
-
-          navigate("/complete", { state: completePageState });
-        }}
-      >
+      <CardInfoForm onSubmit={handleCardFormSubmit}>
         {isStepVisible("PASSWORD") && (
           <CardPasswordInputField password={password} onChange={setPassword} />
         )}
