@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 
-type UseSecretInputParams = {
+type UseSingleFieldInputParams = {
   onValueHandler: (value: string) => void;
   validate: (value: string) => string;
 };
 
-export const useSecretInput = ({ onValueHandler, validate }: UseSecretInputParams) => {
+export const useSingleFieldInput = ({ onValueHandler, validate }: UseSingleFieldInputParams) => {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 

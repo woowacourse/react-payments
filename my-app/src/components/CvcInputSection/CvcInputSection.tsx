@@ -2,7 +2,7 @@ import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 
 import { CVC_LENGTH } from "../../constants/cardField";
-import { useSecretInput } from "../../hooks/useSecretInput";
+import { useSingleFieldInput } from "../../hooks/useSingleFieldInput";
 import { inputStyle } from "../../styles/inputStyle";
 import { validateNumeric } from "../../utils/validators";
 
@@ -11,7 +11,7 @@ type CvcInputSectionProps = {
 };
 
 const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
-  const { inputValue, errorMessage, handlers } = useSecretInput({ onValueHandler, validate: validateNumeric });
+  const { inputValue, errorMessage, handlers } = useSingleFieldInput({ onValueHandler, validate: validateNumeric });
 
   return (
     <InputSectionLayout title="CVC번호를 입력해 주세요" message="" tag="CVC">
