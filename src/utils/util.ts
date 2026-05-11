@@ -1,6 +1,8 @@
 import type { DateError, MonthError, YearError } from '../types/errorTypes';
 import type { CardBrandType } from '../types/cardStausTypes';
 
+type ExpiryDateError = DateError | MonthError | YearError | 'normal';
+
 export function getCardBrand(cardNumber: string): CardBrandType {
   if (cardNumber.startsWith('4')) {
     return 'visa';
@@ -132,4 +134,48 @@ export function isYearError(mode: DateError | MonthError | YearError | 'normal' 
 
 export function isNumericInput(value: string): boolean {
   return value === '' || /^\d+$/.test(value);
+}
+
+export function getExpiryDateChangeError(index: number, value: string): ExpiryDateError {
+  if (!isNumericInput(value)) {
+    return index === 0 ? 'notMonthNumber' : 'notYearNumber';
+  }
+
+  if (index === 0 && isInvalidMonth(value)) {
+    return 'notMonthRange';
+  }
+
+  return 'normal';
+}
+
+export function getMonthBlurError(month: string): ExpiryDateError {
+  if (isEmptyMonth(month)) {
+    return 'emptyMonth';
+  }
+
+  if (isInvalidMonth(month)) {
+    return 'notMonthRange';
+  }
+
+  return 'normal';
+}
+
+export function getYearBlurError(month: string, year: string): ExpiryDateError {
+  if (`${month}${year}`.length === 0) {
+    return 'emptyBoth';
+  }
+
+  if (year.length < 2) {
+    return 'emptyYear';
+  }
+
+  return getMonthBlurError(month);
+}
+
+function isEmptyMonth(month: string): boolean {
+  return month.length === 0 || month === '0' || month === '00';
+}
+
+function isInvalidMonth(month: string): boolean {
+  return Number(month) > 12 || month === '00';
 }

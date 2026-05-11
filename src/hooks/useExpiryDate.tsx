@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { DateError, MonthError, YearError } from '../types/errorTypes';
 import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
-import { isNumericInput } from '../utils/util';
+import { getExpiryDateChangeError, getMonthBlurError, getYearBlurError } from '../utils/util';
 
 export function useExpiryDate(): [CardExpiry, ExpireHandler] {
   const [cardExpiryDate, setCardExpiryDate] = useState<string[]>(['', '']);
@@ -12,56 +12,27 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
   const handleCardExpiryDate = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = [...cardExpiryDate];
     next[index] = e.target.value;
+    const nextErrorMode = getExpiryDateChangeError(index, e.target.value);
 
-    if (!isNumericInput(e.target.value)) {
-      setCardExpiryDateErrorMode(index === 0 ? 'notMonthNumber' : 'notYearNumber');
+    if (nextErrorMode !== 'normal') {
+      setCardExpiryDateErrorMode(nextErrorMode);
       return;
     }
 
     setCardExpiryDate(next);
-
-    if (index === 0) {
-      if (Number(next[index]) > 12 || next[index] === '00') {
-        setCardExpiryDateErrorMode('notMonthRange');
-        return;
-      }
-    }
-
-    setCardExpiryDateErrorMode('normal');
+    setCardExpiryDateErrorMode(nextErrorMode);
   };
 
   const handleYearBlur = () => {
-    if (cardExpiryDate.join('').length === 0) {
-      setCardExpiryDateErrorMode('emptyBoth');
-      return;
-    }
-    if (cardExpiryDate[1].length < 2) {
-      setCardExpiryDateErrorMode('emptyYear');
-      return;
-    }
-    if (cardExpiryDate[0].length === 0 || cardExpiryDate[0] === '0' || cardExpiryDate[0] === '00') {
-      setCardExpiryDateErrorMode('emptyMonth');
-      return;
-    }
-    if (Number(cardExpiryDate[0]) > 12) {
-      setCardExpiryDateErrorMode('notMonthRange');
-      return;
-    }
-    setCardExpiryDateErrorMode('normal');
+    const [month, year] = cardExpiryDate;
+
+    setCardExpiryDateErrorMode(getYearBlurError(month, year));
   };
 
   const handleMonthBlur = () => {
-    if (cardExpiryDate[0].length === 0 || cardExpiryDate[0] === '0' || cardExpiryDate[0] === '00') {
-      setCardExpiryDateErrorMode('emptyMonth');
-      return;
-    }
+    const [month] = cardExpiryDate;
 
-    if (Number(cardExpiryDate[0]) > 12) {
-      setCardExpiryDateErrorMode('notMonthRange');
-      return;
-    }
-
-    setCardExpiryDateErrorMode('normal');
+    setCardExpiryDateErrorMode(getMonthBlurError(month));
   };
 
   return [
