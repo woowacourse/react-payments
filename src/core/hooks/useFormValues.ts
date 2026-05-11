@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import type { ChangeEvent, FocusEvent } from 'react';
 
 import type { ResultValid } from './validateFormValueRules';
@@ -32,6 +32,13 @@ export const useFormValues = <TFormValues extends Record<string, unknown>>({
     setBlur((prev) => ({ ...prev, [e.target.id]: true }));
   };
 
+  const refs = useRef<Record<string, HTMLElement>>({});
+  const ref = (refElement: HTMLElement) => {
+    if (!refElement) return;
+    if (!refElement.id) return;
+    refs.current[refElement.id] = refElement;
+  };
+
   const errors = validate(formValues);
 
   return {
@@ -39,6 +46,8 @@ export const useFormValues = <TFormValues extends Record<string, unknown>>({
     onChange: handleChange,
     blur,
     onBlur: handleBlur,
+    refs,
+    ref,
     errors,
   };
 };
