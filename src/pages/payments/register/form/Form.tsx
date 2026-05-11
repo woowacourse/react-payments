@@ -28,6 +28,7 @@ export const Form = () => {
 
     errorsCardNumbers,
 
+    cardNubmersRefs,
     cardNubmersRef,
 
     renderErrorMessageCardNumbers,
@@ -36,6 +37,9 @@ export const Form = () => {
     // card
     card,
     handleChangeCard,
+
+    cardRefs,
+    cardRef,
 
     errorsCard,
 
@@ -52,6 +56,7 @@ export const Form = () => {
 
     errorsExpirationDate,
 
+    expirationDateRefs,
     expirationDateRef,
 
     expirationDateInvalidAttemp,
@@ -63,6 +68,9 @@ export const Form = () => {
 
     onBlurCvc,
     handleBlurCvc,
+
+    cvcRefs,
+    cvcRef,
 
     errorsCvc,
 
@@ -76,6 +84,9 @@ export const Form = () => {
     onBlurPassword,
     handleBlurPassword,
 
+    passwordRefs,
+    passwordRef,
+
     errorsPassword,
 
     passwordInvalidAttemp,
@@ -87,14 +98,6 @@ export const Form = () => {
     handleSubmit,
   } = outletContext;
 
-  const cardRef = useRef<HTMLInputElement>(null);
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
-  const cvcRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-
-  const isValidCardNumbers3 = errorsCardNumbers?.[3]?.every((error) => error.valid);
-
   const isValidCard = errorsCard?.card.every((error) => error.valid);
 
   const isValidExpirationMonth = errorsExpirationDate?.month.every((error) => error.valid);
@@ -105,17 +108,24 @@ export const Form = () => {
   const isValidPassword = errorsPassword?.password.every((error) => error.valid);
 
   useEffect(() => {
-    if (isValidCardNumbers3 && !isValidCard) return cardRef.current?.focus();
-    if (isValidCard && !isValidExpirationMonth) return expirationDateRef.current.month?.focus();
-    if (isValidExpirationYear && !isValidCvc) return cvcRef.current?.focus();
-    if (isValidCvc && !isValidPassword) return passwordRef.current?.focus();
+    if (cardNubmersRefs.current[3] && !isValidCard) return cardRefs.current?.card?.focus();
+    if (isValidCard && !isValidExpirationMonth) return expirationDateRefs.current.month?.focus();
+    if (isValidExpirationYear && !isValidCvc) return cvcRefs.current?.cvc?.focus();
+    if (isValidCvc && !isValidPassword) return passwordRefs.current?.password?.focus();
   }, [
-    isValidCardNumbers3,
+    cardNubmersRefs,
+
+    cardRefs,
     isValidCard,
-    expirationDateRef,
+
+    expirationDateRefs,
     isValidExpirationMonth,
     isValidExpirationYear,
+
+    cvcRefs,
     isValidCvc,
+
+    passwordRefs,
     isValidPassword,
   ]);
 

@@ -11,6 +11,8 @@ export const useCvc = () => {
     onChange,
     blur: { cvc: blurCvc },
     onBlur,
+    refs,
+    ref,
     errors,
   } = useFormValues({
     initialValues: { cvc: '' },
@@ -46,6 +48,9 @@ export const useCvc = () => {
 
     blurValue: blurCvc,
     onBlur,
+
+    refs,
+    ref,
 
     errors,
 

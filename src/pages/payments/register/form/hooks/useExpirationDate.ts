@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
@@ -11,6 +11,8 @@ export const useExpirationDate = () => {
     onChange,
     blur: blurExpirationDate,
     onBlur,
+    refs,
+    ref,
     errors,
   } = useFormValues({
     initialValues: { month: '', year: '' },
@@ -59,13 +61,6 @@ export const useExpirationDate = () => {
 
   // expirationDate 관련 상태값 -- end
 
-  const refs = useRef<Record<string, HTMLElement>>({});
-  const ref = (refElement: HTMLElement) => {
-    if (!refElement) return;
-    if (!refElement.id) return;
-    refs.current[refElement.id] = refElement;
-  };
-
   const orders = ['month', 'year'] as (keyof typeof errors)[];
   useEffect(() => {
     orders.some((order, index) => {
@@ -91,6 +86,7 @@ export const useExpirationDate = () => {
 
     errors,
 
+    refs,
     ref,
 
     invalidAttemp: expirationDateInvalidAttemp,

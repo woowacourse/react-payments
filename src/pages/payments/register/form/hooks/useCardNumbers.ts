@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
@@ -11,6 +11,8 @@ export const useCardNumbers = () => {
     onChange,
     blur: blurCardNumbers,
     onBlur,
+    refs,
+    ref,
     errors,
   } = useFormValues({
     initialValues: { '0': '', '1': '', '2': '', '3': '' },
@@ -55,13 +57,6 @@ export const useCardNumbers = () => {
     return Object.values(blurCardNumbers).includes(true) && !validateCardNumbers(cardNumbers);
   };
 
-  const refs = useRef<Record<string, HTMLElement>>({});
-  const ref = (refElement: HTMLElement) => {
-    if (!refElement) return;
-    if (!refElement.id) return;
-    refs.current[refElement.id] = refElement;
-  };
-
   const orders = ['0', '1', '2', '3'] as (keyof typeof errors)[];
   useEffect(() => {
     orders.some((order, index) => {
@@ -85,6 +80,7 @@ export const useCardNumbers = () => {
     blurValue: blurCardNumbers,
     onBlur,
 
+    refs,
     ref,
 
     errors,

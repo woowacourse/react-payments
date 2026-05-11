@@ -17,6 +17,8 @@ export const usePassword = () => {
     onChange,
     blur: { password: blurPassword },
     onBlur,
+    refs,
+    ref,
     errors,
   } = useFormValues({
     initialValues: { password: '' },
@@ -53,6 +55,9 @@ export const usePassword = () => {
 
     blurValue: blurPassword,
     onBlur,
+
+    refs,
+    ref,
 
     errors,
 

@@ -17,6 +17,8 @@ export const useCard = () => {
     onChange,
     blur: { card: blurCard },
     onBlur,
+    refs,
+    ref,
     errors,
   } = useFormValues({
     initialValues: { card: '' },
@@ -43,7 +45,7 @@ export const useCard = () => {
     if (!blurCard) return '';
 
     const errorCard = errors.card.filter((error) => !error.valid);
-    console.log('errorCard', errorCard);
+
     if (errorCard[0]) return errorCard[0].message;
 
     return '';
@@ -55,6 +57,9 @@ export const useCard = () => {
 
     blurValue: blurCard,
     onBlur,
+
+    refs,
+    ref,
 
     errors,
 

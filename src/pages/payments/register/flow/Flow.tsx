@@ -15,9 +15,10 @@ export const Flow = () => {
 
     onBlur: handleBlurCardNumbers,
 
-    errors: errorsCardNumbers,
-
+    refs: cardNubmersRefs,
     ref: cardNubmersRef,
+
+    errors: errorsCardNumbers,
 
     renderErrorMessage: renderErrorMessageCardNumbers,
     renderErrorInput: renderErrorCardNumberInput,
@@ -28,6 +29,9 @@ export const Flow = () => {
     onChange: handleChangeCard,
 
     onBlur: handleBlurCard,
+
+    refs: cardRefs,
+    ref: cardRef,
 
     errors: errorsCard,
 
@@ -41,9 +45,10 @@ export const Flow = () => {
     blurValue: onBlurExpirationDate,
     onBlur: handleBlurExpirationDate,
 
-    errors: errorsExpirationDate,
-
+    refs: expirationDateRefs,
     ref: expirationDateRef,
+
+    errors: errorsExpirationDate,
 
     invalidAttemp: expirationDateInvalidAttemp,
     renderErrorMessage: renderErrorMessageExpirationDate,
@@ -56,6 +61,9 @@ export const Flow = () => {
 
     blurValue: onBlurCvc,
     onBlur: handleBlurCvc,
+
+    refs: cvcRefs,
+    ref: cvcRef,
 
     errors: errorsCvc,
 
@@ -70,6 +78,9 @@ export const Flow = () => {
 
     blurValue: onBlurPassword,
     onBlur: handleBlurPassword,
+
+    refs: passwordRefs,
+    ref: passwordRef,
 
     errors: errorsPassword,
 
@@ -100,6 +111,7 @@ export const Flow = () => {
 
         errorsCardNumbers,
 
+        cardNubmersRefs,
         cardNubmersRef,
 
         renderErrorMessageCardNumbers,
@@ -110,6 +122,9 @@ export const Flow = () => {
         handleChangeCard,
 
         handleBlurCard,
+
+        cardRefs,
+        cardRef,
 
         errorsCard,
 
@@ -124,6 +139,7 @@ export const Flow = () => {
 
         errorsExpirationDate,
 
+        expirationDateRefs,
         expirationDateRef,
 
         expirationDateInvalidAttemp,
@@ -136,6 +152,9 @@ export const Flow = () => {
         onBlurCvc,
         handleBlurCvc,
 
+        cvcRefs,
+        cvcRef,
+
         errorsCvc,
 
         cvcInvalidAttemp,
@@ -147,6 +166,9 @@ export const Flow = () => {
 
         onBlurPassword,
         handleBlurPassword,
+
+        passwordRefs,
+        passwordRef,
 
         errorsPassword,
 
