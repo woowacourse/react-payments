@@ -6,7 +6,7 @@ import { Field } from '@/core/components/field';
 import { Input } from '@/core/components/input';
 import { Select } from '@/core/components/select';
 
-import styles from './Payments.module.css';
+import styles from './Form.module.css';
 
 import { useCardNumbers } from './hooks/useCardNumbers';
 import { useCard } from './hooks/useCard';
@@ -16,7 +16,7 @@ import { usePassword } from './hooks/usePassword';
 
 import { BRAND_NUMBER, CARD_OPTIONS } from './constant';
 
-export const Payments = () => {
+export const Form = () => {
   const {
     value: cardNumbers,
     onChange: handleChangeCardNumbers,

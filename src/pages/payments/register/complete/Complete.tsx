@@ -1,6 +1,6 @@
 import { SymbolInfo } from '@/core/components/symbolInfo';
 import { Button } from '@/core/components/button';
-import { CARD_OPTIONS } from '../payments/constant';
+import { CARD_OPTIONS } from '../../register/form/constant';
 
 interface CompleteProps {
   cardNumber: string;
