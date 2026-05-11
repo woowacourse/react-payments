@@ -6,7 +6,7 @@ import {
   isCardPasswordComplete,
   isCvcComplete,
   isExpireDateComplete,
-} from './validator';
+} from './isComplete';
 
 export function useCardStep(cardForm: ReturnType<typeof useCardForm>) {
   const [step, setStep] = useState(0);
