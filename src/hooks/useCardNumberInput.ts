@@ -2,10 +2,22 @@ import { useState } from "react";
 import { isNumeric } from "../utils/validators";
 import { selectCardType } from "../utils/selectCardType";
 
+const initialState = {
+  cardNumber: ["", "", "", ""],
+  cardNumberError: ["", "", "", ""],
+};
+
 export function useCardNumberInput() {
-  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-  const [cardNumberError, setCardNumberError] = useState(["", "", "", ""]);
+  const [cardNumber, setCardNumber] = useState(initialState.cardNumber);
+  const [cardNumberError, setCardNumberError] = useState(
+    initialState.cardNumberError,
+  );
   const { inputConfig, cardType } = selectCardType(cardNumber);
+
+  const resetCardNumber = () => {
+    setCardNumber(initialState.cardNumber);
+    setCardNumberError(initialState.cardNumberError);
+  };
 
   const handleCardNumberChange = (index: number, value: string) => {
     const newError = [...cardNumberError];
@@ -46,5 +58,6 @@ export function useCardNumberInput() {
     handleBlur,
     inputConfig,
     cardType,
+    resetCardNumber,
   };
 }

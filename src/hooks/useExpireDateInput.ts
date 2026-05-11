@@ -1,12 +1,21 @@
 import { useState } from "react";
 import { isNumeric } from "../utils/validators";
 
+const initialState = {
+  expireDate: { month: "", year: "" },
+  expireDateError: { month: "", year: "" },
+};
+
 export function useExpireDateInput() {
-  const [expireDate, setExpireDate] = useState({ month: "", year: "" });
-  const [expireDateError, setExpireDateError] = useState({
-    month: "",
-    year: "",
-  });
+  const [expireDate, setExpireDate] = useState(initialState.expireDate);
+  const [expireDateError, setExpireDateError] = useState(
+    initialState.expireDateError,
+  );
+
+  const resetExpireDate = () => {
+    setExpireDate(initialState.expireDate);
+    setExpireDateError(initialState.expireDateError);
+  };
 
   const handleMonthChange = (value: string) => {
     const onlyNumbers = value.replace(/[^0-9]/g, "");
@@ -87,5 +96,6 @@ export function useExpireDateInput() {
     handleYearChange,
     handleMonthBlur,
     handleYearBlur,
+    resetExpireDate,
   };
 }

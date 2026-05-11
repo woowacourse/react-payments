@@ -1,9 +1,21 @@
 import { useState } from "react";
 import { isNumeric } from "../utils/validators";
 
+const initialState = {
+  password: "",
+  passwordError: "",
+};
+
 export function usePasswordInput() {
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [password, setPassword] = useState(initialState.password);
+  const [passwordError, setPasswordError] = useState(
+    initialState.passwordError,
+  );
+
+  const resetPassword = () => {
+    setPassword(initialState.password);
+    setPasswordError(initialState.passwordError);
+  };
 
   const handlePasswordChange = (value: string) => {
     const onlyNumbers = value.replace(/[^0-9]/g, "");
@@ -25,5 +37,11 @@ export function usePasswordInput() {
     }
   };
 
-  return { password, passwordError, handlePasswordChange, handleBlur };
+  return {
+    password,
+    passwordError,
+    handlePasswordChange,
+    handleBlur,
+    resetPassword,
+  };
 }

@@ -1,9 +1,19 @@
 import { useState } from "react";
 import { isNumeric } from "../utils/validators";
 
+const initialState = {
+  cvc: "",
+  cvcError: "",
+};
+
 export function useCvcNumberInput() {
-  const [cvc, setCvc] = useState("");
-  const [cvcError, setCvcError] = useState("");
+  const [cvc, setCvc] = useState(initialState.cvc);
+  const [cvcError, setCvcError] = useState(initialState.cvcError);
+
+  const resetCvc = () => {
+    setCvc(initialState.cvc);
+    setCvcError(initialState.cvcError);
+  };
 
   const handleCvcChange = (value: string) => {
     const onlyNumbers = value.replace(/[^0-9]/g, "");
@@ -25,5 +35,5 @@ export function useCvcNumberInput() {
     }
   };
 
-  return { cvc, cvcError, handleCvcChange, handleBlur };
+  return { cvc, cvcError, handleCvcChange, handleBlur, resetCvc };
 }
