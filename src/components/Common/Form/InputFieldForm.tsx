@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { InputFieldConfig } from '../../../types';
@@ -37,6 +37,20 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
     }
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (
+      index !== 0 &&
+      fields[index].value.length === 0 &&
+      (e.key === 'Backspace' || e.key === 'ArrowLeft')
+    ) {
+      inputRefs.current[index - 1]?.focus();
+    }
+
+    if (index !== fields.length - 1 && fields[index].value.length === 0 && e.key === 'ArrowRight') {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
   if (fields.length !== fieldConfig.placeholder.length || fields.length !== onChanges.length) {
     console.error(`필드의 개수가 일치하지 않습니다`);
   }
@@ -64,6 +78,7 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
             onChange={(e) => handleChange(e, index, onChanges[index])}
             onFocus={() => setActiveFieldIdx(index)}
             onBlur={() => setActiveFieldIdx(null)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
           />
         ))}
       </InputFieldWrapper>
