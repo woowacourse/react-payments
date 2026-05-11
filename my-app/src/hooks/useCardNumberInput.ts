@@ -4,7 +4,7 @@ import { CARD_NUMBER_FIELD_COUNT, CARD_NUMBER_FIELD_MAX_LENGTH } from "../consta
 import {
   SUPPORTED_NETWORKS_MESSAGE,
   getRequiredLengthForDetection,
-} from "../utils/cardNetworkDetection";
+} from "../utils/cardNetwork";
 import { validateCardNumbers } from "../utils/validators";
 
 type UseCardNumberInputParams = {
@@ -55,13 +55,13 @@ export const useCardNumberInput = ({
 
   return {
     inputValues,
+    inputRefs,
     errorMessage,
     errorIndex,
     warningMessage,
-    inputRefs,
-    lastInputMaxLength,
     fieldCount: CARD_NUMBER_FIELD_COUNT,
     fieldMaxLength: CARD_NUMBER_FIELD_MAX_LENGTH,
+    lastInputMaxLength,
     handlers: { onChange, handleBlur },
   };
 };

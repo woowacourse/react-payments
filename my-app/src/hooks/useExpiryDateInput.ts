@@ -36,9 +36,9 @@ export const useExpiryDateInput = ({ onValueHandler }: UseExpiryDateInputParams)
 
   return {
     inputValues,
+    inputRefs,
     errorMessage,
     errorIndex,
-    inputRefs,
     fieldCount: EXPIRY_FIELD_COUNT,
     fieldMaxLength: EXPIRY_FIELD_MAX_LENGTH,
     handlers: { onChange, handleBlur },

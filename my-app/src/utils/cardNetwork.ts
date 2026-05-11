@@ -1,6 +1,3 @@
-export const SUPPORTED_NETWORKS_MESSAGE =
-  "* VISA, Mastercard, AMEX, Diners, UnionPay 카드만 지원합니다";
-
 export const detectCardNetwork = (number: string) => {
   if (/^4/.test(number)) return "visa";
   if (/^5[1-5]/.test(number)) return "master";
@@ -21,3 +18,16 @@ export const getRequiredLengthForDetection = (number: string): number => {
   if (number.startsWith("622")) return 6;
   return 4;
 };
+
+const MAX_LENGTH = {
+  amex: 15,
+  diners: 14,
+  default: 16,
+} as const;
+
+export const getMaxLength = (network: string): number => {
+  return MAX_LENGTH[network as keyof typeof MAX_LENGTH] ?? MAX_LENGTH.default;
+};
+
+export const SUPPORTED_NETWORKS_MESSAGE =
+  "* VISA, Mastercard, AMEX, Diners, UnionPay 카드만 지원합니다";

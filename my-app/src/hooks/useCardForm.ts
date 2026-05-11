@@ -2,8 +2,7 @@ import { useState } from "react";
 
 import { CVC_LENGTH, EXPIRY_FIELD_MAX_LENGTH, PASSWORD_LENGTH } from "../constants/cardField";
 import type { CardInfo } from "../types";
-import { detectCardNetwork } from "../utils/cardNetworkDetection";
-import { getMaxLength } from "../utils/getMaxLength";
+import { detectCardNetwork, getMaxLength } from "../utils/cardNetwork";
 
 const INITIAL_CARD_INFO: CardInfo = {
   numbers: [],
@@ -32,7 +31,6 @@ export const useCardForm = ({ onSubmit }: UseCardFormParams) => {
   const isPassword = cardInfo.password.length === PASSWORD_LENGTH;
   const isAll = isCardNumber && isCompany && isExpiry && isCvc && isPassword;
 
-  //스프레드 보일러 플레이트를 바꿔보자.
   const cardNumberHandler = (numbers: string[]) => {
     setCardInfo((prev) => ({ ...prev, numbers, company: "" }));
   };
