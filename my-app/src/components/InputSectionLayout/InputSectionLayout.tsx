@@ -4,7 +4,7 @@ type InputSectionLayoutProps = {
   children?: React.ReactNode;
   title: string;
   message: string;
-  tag: string;
+  tag?: string;
 };
 
 const InputSectionLayout = ({ children, title, message, tag }: InputSectionLayoutProps) => {
@@ -15,7 +15,7 @@ const InputSectionLayout = ({ children, title, message, tag }: InputSectionLayou
         <p css={messageStyle}>{message}</p>
       </div>
       <div css={columnStyle}>
-        <label css={labelStyle}>{tag}</label>
+        {tag && <label css={labelStyle}>{tag}</label>}
         {children}
       </div>
     </div>

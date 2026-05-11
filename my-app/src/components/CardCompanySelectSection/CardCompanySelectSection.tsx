@@ -1,5 +1,7 @@
 import Select from "react-select";
 
+import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
+
 type CardCompanySelectorSectionProps = {
   onSelect: (company: string) => void;
 };
@@ -17,12 +19,17 @@ const CARD_COMPANIES = [
 
 const CardCompanySelectorSection = ({ onSelect }: CardCompanySelectorSectionProps) => {
   return (
-    <Select
-      autoFocus
-      options={CARD_COMPANIES}
-      onChange={(option) => option && onSelect(option.value)}
-      placeholder="카드사를 선택해주세요"
-    />
+    <InputSectionLayout title="카드사를 선택해 주세요" message="현재 국내 카드사만 가능합니다.">
+      <Select
+        autoFocus
+        options={CARD_COMPANIES}
+        onChange={(option) => option && onSelect(option.value)}
+        placeholder="카드사를 선택해주세요"
+        styles={{
+          placeholder: (base) => ({ ...base, opacity: 0.55 }),
+        }}
+      />
+    </InputSectionLayout>
   );
 };
 
