@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { InputFieldConfig } from '../../../types';
@@ -18,21 +18,28 @@ interface Props {
 }
 
 export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props) {
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
   const [activeFieldIdx, setActiveFieldIdx] = useState<number | null>(null);
 
-  if (fields.length !== fieldConfig.placeholder.length || fields.length !== onChanges.length) {
-    console.error(`필드의 개수가 일치하지 않습니다`);
-  }
+  const errorMessage = activeFieldIdx ? fields[activeFieldIdx].errorMessage : '';
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
+    index: number,
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
   ) => {
     if (validateNaN(e.target.value)) return;
     onChange(e);
+
+    if (e.target.value.length === fieldConfig.maxLength) {
+      inputRefs.current[index + 1]?.focus();
+    }
   };
 
-  const errorMessage = activeFieldIdx ? fields[activeFieldIdx].errorMessage : '';
+  if (fields.length !== fieldConfig.placeholder.length || fields.length !== onChanges.length) {
+    console.error(`필드의 개수가 일치하지 않습니다`);
+  }
 
   return (
     <FormContainer>
@@ -41,6 +48,9 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
       <InputFieldWrapper>
         {fields.map(({ value, error, touched }, index) => (
           <InputField
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             key={index}
             isError={touched && error}
             id={index === 0 ? fieldConfig.id : `${fieldConfig.id}-${index}`}
@@ -50,7 +60,7 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
             autoComplete="off"
             value={value}
             placeholder={fieldConfig.placeholder[index]}
-            onChange={(e) => handleChange(e, onChanges[index])}
+            onChange={(e) => handleChange(e, index, onChanges[index])}
             onFocus={() => setActiveFieldIdx(index)}
             onBlur={() => setActiveFieldIdx(null)}
           />
