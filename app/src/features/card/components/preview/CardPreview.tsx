@@ -21,7 +21,7 @@ export function CardPreview({
 }: CardPreviewProps) {
   const getCardBgHex = (cardBrand: string) => {
     if (Object.keys(CARD_BRAND).includes(cardBrand)) {
-      return CARD_BRAND[cardBrand as keyof typeof CARD_BRAND].bgHex;
+      return `#${CARD_BRAND[cardBrand as keyof typeof CARD_BRAND].bgHex}`;
     }
     return "#333333";
   };
