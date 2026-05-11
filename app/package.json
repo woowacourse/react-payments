@@ -13,7 +13,7 @@
     "test-unit": "jest",
     "test-type": "tsc -b",
     "build-storybook": "storybook build",
-    "deploy": "react-router build && npx gh-pages -d build/client",
+    "deploy": "react-router build && cp build/client/index.html build/client/404.html && npx gh-pages -d build/client",
     "prepare": "cd .. && husky app/.husky"
   },
   "homepage": "https://antoliny0919.github.io/react-payments",
