@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
+  hasCardNumbersError,
   hasCardFormError,
-  hasCardNumberError,
   validateCvcNumber,
   validateExpiryMonth,
   validateExpiryYear,
@@ -31,7 +31,7 @@ export const useCardForm = () => {
   const handleCardNumbersChange = (cardNumbers: string[]) => {
     setCardNumbers(cardNumbers);
 
-    if (!hasCardNumberError(cardNumbers)) advanceStep(1);
+    if (!hasCardNumbersError(cardNumbers)) advanceStep(1);
   };
   const handleCardCompanyChange = (cardCompanyId: CardCompanyId | null) => {
     setCardCompanyId(cardCompanyId);

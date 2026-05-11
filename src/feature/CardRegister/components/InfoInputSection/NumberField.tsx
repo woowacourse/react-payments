@@ -3,9 +3,9 @@ import Label from '../../../../common/components/Label';
 import styled from 'styled-components';
 import useFieldValidation from '../../../../common/hooks/useFieldValidation';
 import { isWithinMaxLength, isNumeric } from '../../utils/validator';
-import { validateCardNumber } from '../../utils/cardFormValidator';
 import { useRef } from 'react';
 import { getCardNumberSegmentLengths } from '../../utils/cardInfo';
+import { validateCardNumbers } from '../../utils/cardFormValidator';
 
 const NumberField = ({
   autoFocus = false,
@@ -17,11 +17,11 @@ const NumberField = ({
   handleCardNumbersChange: (value: string[]) => void;
 }) => {
   const segmentLengths = getCardNumberSegmentLengths(cardNumbers);
+  const cardNumberErrors = validateCardNumbers(cardNumbers);
 
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
     values: cardNumbers,
-    validate: (value, index) =>
-      validateCardNumber(value, segmentLengths[index]),
+    validate: (_, index) => cardNumberErrors[index] ?? null,
   });
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);

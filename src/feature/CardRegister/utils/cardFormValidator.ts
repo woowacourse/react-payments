@@ -7,12 +7,22 @@ export const EXPIRY_LENGTH = 2;
 export const CVC_LENGTH = 3;
 export const PASSWORD_LENGTH = 2;
 
-export const validateCardNumber = (value: string, expectedLength: number) => {
-  if (!isExactLength(value, expectedLength)) {
-    return `카드 번호 ${expectedLength}자리를 입력해 주세요`;
-  }
+export const validateCardNumbers = (value: string[]) => {
+  const segmentLengths = getCardNumberSegmentLengths(value);
 
-  return null;
+  return value.map((cardNumber, index) => {
+    if (!isExactLength(cardNumber, segmentLengths[index])) {
+      return `카드 번호 ${segmentLengths[index]}자리를 입력해 주세요`;
+    }
+
+    return null;
+  });
+};
+
+export const hasCardNumbersError = (cardNumbers: string[]) => {
+  return validateCardNumbers(cardNumbers).some(
+    (errorMessage) => errorMessage !== null,
+  );
 };
 
 export const validateExpiryMonth = (value: string) => {
@@ -51,14 +61,6 @@ export const validatePassword = (value: string) => {
   return null;
 };
 
-export const hasCardNumberError = (cardNumbers: string[]) => {
-  const segmentLengths = getCardNumberSegmentLengths(cardNumbers);
-
-  return cardNumbers.some((cardNumber, index) => {
-    return validateCardNumber(cardNumber, segmentLengths[index]) !== null;
-  });
-};
-
 export const hasCardFormError = ({
   cardNumbers,
   expiryMonth,
@@ -78,7 +80,7 @@ export const hasCardFormError = ({
   const hasPasswordError = validatePassword(password) !== null;
 
   return (
-    hasCardNumberError(cardNumbers) ||
+    hasCardNumbersError(cardNumbers) ||
     hasExpiryMonthError ||
     hasExpiryYearError ||
     hasCvcError ||
@@ -101,7 +103,7 @@ export const getAvailableStep = ({
   cvcNumber: string;
   password: string;
 }) => {
-  if (hasCardNumberError(cardNumbers)) return 0;
+  if (hasCardNumbersError(cardNumbers)) return 0;
   if (cardCompanyId === null) return 1;
 
   if (
