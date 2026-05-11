@@ -16,7 +16,7 @@ const InfoInputSection = ({numberSlot, companySlot, expirySlot, cvcSlot, passwor
   return (
     <Container>
       {orderedSlots.map((slot, index) => (
-        <Slot key={index}>{slot}</Slot>
+        <Field key={index}>{slot}</Field>
       ))}
     </Container>
   );
@@ -31,7 +31,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Slot = styled.div`
+const Field = styled.div`
   display: contents;
 `;
 
