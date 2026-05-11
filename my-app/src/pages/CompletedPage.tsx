@@ -1,12 +1,20 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function CompletedPage() {
+import type { CardInfo } from "../types";
+
+const CompletedPage = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
-  const { cardInfo } = state;
+  const { cardInfo } = state as { cardInfo: CardInfo };
 
   return (
-    <div>
-      {cardInfo.numbers[0]}로 시작하는 {cardInfo.company} 카드가 등록되었습니다.
-    </div>
+    <main>
+      <div>
+        {cardInfo.numbers[0]}로 시작하는 {cardInfo.company} 카드가 등록되었어요.
+      </div>
+      <button onClick={() => navigate("/")}>확인</button>
+    </main>
   );
-}
+};
+
+export default CompletedPage;

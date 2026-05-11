@@ -74,6 +74,7 @@ export default Card;
 const cardStyle = (company: string) => css`
   width: 212px;
   height: 132px;
+  flex-shrink: 0;
   border-radius: 4px;
   background-color: ${COMPANY_COLOR[company]};
   box-shadow: ${CARD_LAYOUT_COLOR.shadow};

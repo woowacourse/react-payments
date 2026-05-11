@@ -19,19 +19,25 @@ const CardFormPage = () => {
   return (
     <main css={pageStyle}>
       <div css={formContainerStyle}>
-        <Card cardInfo={cardInfo} network={network} />
-        <div css={sectionsStyle}>
-          {completion.cvc && <PasswordInputSection onValueHandler={handlers.password} />}
-          {completion.expiry && <CvcInputSection onValueHandler={handlers.cvc} />}
-          {completion.company && <ExpiryDateInputSection onValueHandler={handlers.expiry} />}
-          {completion.cardNumber && <CardCompanySelectSection onSelect={handlers.cardCompany} />}
-          <CardNumberInputSection
-            onValueHandler={handlers.cardNumber}
-            maxLength={maxLength}
-            isSupportedNetwork={isSupportedNetwork}
-          />
-          {completion.all && <button onClick={handlers.submit}>확인</button>}
+        <div css={contentStyle}>
+          <Card cardInfo={cardInfo} network={network} />
+          <div css={sectionsStyle}>
+            {completion.cvc && <PasswordInputSection onValueHandler={handlers.password} />}
+            {completion.expiry && <CvcInputSection onValueHandler={handlers.cvc} />}
+            {completion.company && <ExpiryDateInputSection onValueHandler={handlers.expiry} />}
+            {completion.cardNumber && <CardCompanySelectSection onSelect={handlers.cardCompany} />}
+            <CardNumberInputSection
+              onValueHandler={handlers.cardNumber}
+              maxLength={maxLength}
+              isSupportedNetwork={isSupportedNetwork}
+            />
+          </div>
         </div>
+        {completion.all && (
+          <button css={confirmButtonStyle} onClick={handlers.submit}>
+            확인
+          </button>
+        )}
       </div>
     </main>
   );
@@ -51,9 +57,17 @@ const pageStyle = css`
 
 const formContainerStyle = css`
   width: 376px;
-  padding: 77px 30px 20px;
+  height: 700px;
   background-color: #ffffff;
-  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
+const contentStyle = css`
+  flex: 1;
+  overflow-y: auto;
+  padding: 62px 30px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,4 +79,15 @@ const sectionsStyle = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
+`;
+
+const confirmButtonStyle = css`
+  width: 100%;
+  height: 52px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
 `;
