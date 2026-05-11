@@ -4,6 +4,8 @@ import CardForm from "./components/CardForm";
 import { getCardBrand } from "./utils/getCardBrand";
 import type { CardNumberSegments } from "./types";
 import styled from "@emotion/styled";
+import { SubmitButton } from "./components/SubmitButton";
+import { isCardFormComplete } from "./utils/validators";
 
 const View = styled.div`
   width: 100%;
@@ -36,6 +38,7 @@ function App() {
         cardCompany={formState.cardCompany}
       />
       <CardForm formState={formState} setFormState={setFormState} />
+      <SubmitButton isCardFormComplete={isCardFormComplete(formState)} />
     </View>
   );
 }

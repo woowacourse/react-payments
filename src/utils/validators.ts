@@ -1,3 +1,5 @@
+import type { CardFormState } from "../types";
+
 export function validateNumberString(input: string) {
   return /^\d*$/.test(input);
 }
@@ -22,4 +24,15 @@ export function validateYear(input: string) {
     String(index).padStart(2, "0"),
   );
   return monthArray.includes(input);
+}
+
+export function isCardFormComplete(formState: CardFormState) {
+  return !!(
+    formState.cardCompany &&
+    formState.cardNumberSegments.every((segment) => segment.length === 4) &&
+    formState.expiryMonth.length === 2 &&
+    formState.expiryYear.length === 2 &&
+    formState.cvc.length === 3 &&
+    formState.cardPassword.length === 2
+  );
 }
