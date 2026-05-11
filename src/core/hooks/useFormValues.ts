@@ -40,6 +40,14 @@ export const useFormValues = <TFormValues extends Record<string, unknown>>({
   };
 
   const errors = validate(formValues);
+  const valids = Object.entries(errors).reduce(
+    (acc, [key, errorValue]) => {
+      acc[key] = errorValue.every((error) => error.valid);
+      return acc;
+    },
+    {} as Record<string, boolean>,
+  );
+  const isValid = Object.values(errors).every((errorsValue) => errorsValue.every((error) => error.valid));
 
   return {
     values: formValues,
@@ -49,5 +57,7 @@ export const useFormValues = <TFormValues extends Record<string, unknown>>({
     refs,
     ref,
     errors,
+    valids,
+    isValid,
   };
 };
