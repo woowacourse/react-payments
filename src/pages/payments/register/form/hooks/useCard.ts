@@ -12,39 +12,29 @@ interface ChangeEvent {
 }
 
 export const useCard = () => {
-  const {
-    values: { card },
-    onChange,
-    blur: { card: blurCard },
-    onBlur,
-    refs,
-    ref,
-    errors,
-    valids,
-    isValid,
-  } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
     initialValues: { card: '' },
     validate: validateCard,
   });
 
-  const handleChangeCard = (e: ChangeEvent) => {
-    const { value } = e.target;
+  const handleChange = (e: ChangeEvent) => {
+    const { id, value } = e.target;
 
     if (preventCard(value)) {
-      setCardInvalidAttemp(true);
+      setInvalidAttemp({ ...invalidAttemp, [id]: true });
       return;
     } else {
-      setCardInvalidAttemp(false);
+      setInvalidAttemp({ ...invalidAttemp, [id]: false });
     }
 
     onChange(e);
   };
 
-  const [cardInvalidAttemp, setCardInvalidAttemp] = useState(false);
+  const [invalidAttemp, setInvalidAttemp] = useState({ card: false });
 
-  const renderErrorMessageCard = () => {
-    if (cardInvalidAttemp) return '유효한 비밀번호를 입력해주세요';
-    if (!blurCard) return '';
+  const renderErrorMessage = () => {
+    if (invalidAttemp.card) return '유효한 비밀번호를 입력해주세요';
+    if (!blur.card) return '';
 
     const errorCard = errors.card.filter((error) => !error.valid);
 
@@ -54,10 +44,10 @@ export const useCard = () => {
   };
 
   return {
-    value: card,
-    onChange: handleChangeCard,
+    values,
+    onChange: handleChange,
 
-    blurValue: blurCard,
+    blur,
     onBlur,
 
     refs,
@@ -67,7 +57,7 @@ export const useCard = () => {
     valids,
     isValid,
 
-    invalidAttemp: cardInvalidAttemp,
-    renderErrorMessage: renderErrorMessageCard,
+    invalidAttemp,
+    renderErrorMessage,
   };
 };

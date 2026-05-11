@@ -12,39 +12,29 @@ interface ChangeEvent {
 }
 
 export const usePassword = () => {
-  const {
-    values: { password },
-    onChange,
-    blur: { password: blurPassword },
-    onBlur,
-    refs,
-    ref,
-    errors,
-    valids,
-    isValid,
-  } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
     initialValues: { password: '' },
     validate: validatePassword,
   });
 
-  const handleChangePassword = (e: ChangeEvent) => {
-    const { value } = e.target;
+  const handleChange = (e: ChangeEvent) => {
+    const { id, value } = e.target;
 
     if (preventPassword(value)) {
-      setPasswordInvalidAttemp(true);
+      setInvalidAttemp({ ...invalidAttemp, [id]: true });
       return;
     } else {
-      setPasswordInvalidAttemp(false);
+      setInvalidAttemp({ ...invalidAttemp, [id]: false });
     }
 
     onChange(e);
   };
 
-  const [passwordInvalidAttemp, setPasswordInvalidAttemp] = useState(false);
+  const [invalidAttemp, setInvalidAttemp] = useState({ password: false });
 
-  const renderErrorMessagePassword = () => {
-    if (passwordInvalidAttemp) return '유효한 비밀번호를 입력해주세요';
-    if (!blurPassword) return '';
+  const renderErrorMessage = () => {
+    if (invalidAttemp.password) return '유효한 비밀번호를 입력해주세요';
+    if (!blur.password) return '';
 
     const errorPassword = errors.password.filter((error) => !error.valid);
     if (errorPassword[0]) return errorPassword[0].message;
@@ -52,10 +42,10 @@ export const usePassword = () => {
   };
 
   return {
-    value: password,
-    onChange: handleChangePassword,
+    values,
+    onChange: handleChange,
 
-    blurValue: blurPassword,
+    blur,
     onBlur,
 
     refs,
@@ -65,7 +55,7 @@ export const usePassword = () => {
     valids,
     isValid,
 
-    invalidAttemp: passwordInvalidAttemp,
-    renderErrorMessage: renderErrorMessagePassword,
+    invalidAttemp,
+    renderErrorMessage,
   };
 };

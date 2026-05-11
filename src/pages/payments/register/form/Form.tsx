@@ -21,120 +21,47 @@ export const Form = () => {
   if (!outletContext) return null;
 
   const {
-    // cardNumbers
     cardNumbers,
-    handleChangeCardNumbers,
-
-    handleBlurCardNumbers,
-
-    cardNubmersIsValid,
-
-    cardNubmersRefs,
-    cardNubmersRef,
-
-    renderErrorMessageCardNumbers,
-    renderErrorCardNumberInput,
-
-    // card
     card,
-    handleChangeCard,
-
-    cardRefs,
-    cardRef,
-
-    cardValids,
-    cardIsValid,
-
-    handleBlurCard,
-
-    renderErrorMessageCard,
-
-    // expirationDate
     expirationDate,
-    handleChangeExpirationDate,
-
-    onBlurExpirationDate,
-    handleBlurExpirationDate,
-
-    errorsExpirationDate,
-    expirationDateValids,
-    expirationDateIsValid,
-
-    expirationDateRefs,
-    expirationDateRef,
-
-    expirationDateInvalidAttemp,
-    renderErrorMessageExpirationDate,
-
-    // cvc
     cvc,
-    handleChangeCvc,
-
-    onBlurCvc,
-    handleBlurCvc,
-
-    cvcRefs,
-    cvcRef,
-
-    errorsCvc,
-    cvcIsValid,
-
-    cvcInvalidAttemp,
-    renderErrorMessageCvc,
-
-    // password
     password,
-    handleChangePassword,
-
-    onBlurPassword,
-    handleBlurPassword,
-
-    passwordRefs,
-    passwordRef,
-
-    errorsPassword,
-    passwordIsValid,
-
-    passwordInvalidAttemp,
-    renderErrorMessagePassword,
-
-    // creditCard
     renderBrandCard,
 
     handleSubmit,
   } = outletContext;
 
   useEffect(() => {
-    if (cardNubmersIsValid && !cardIsValid) return cardRefs.current?.card?.focus();
-    if (cardIsValid && !expirationDateValids.month) return expirationDateRefs.current.month?.focus();
-    if (expirationDateValids.year && !cvcIsValid) return cvcRefs.current?.cvc?.focus();
-    if (cvcIsValid && !passwordIsValid) return passwordRefs.current?.password?.focus();
+    if (cardNumbers.isValid && !card.isValid) return card.refs.current?.card?.focus();
+    if (card.isValid && !expirationDate.valids.month) return expirationDate.refs.current.month?.focus();
+    if (expirationDate.valids.year && !cvc.isValid) return cvc.refs.current?.cvc?.focus();
+    if (cvc.isValid && !password.isValid) return password.refs.current?.password?.focus();
   }, [
-    cardNubmersIsValid,
+    cardNumbers.isValid,
 
-    cardRefs,
-    cardIsValid,
+    card.refs,
+    card.isValid,
 
-    expirationDateRefs,
-    expirationDateValids,
+    expirationDate.refs,
+    expirationDate.valids,
 
-    cvcRefs,
-    cvcIsValid,
+    cvc.refs,
+    cvc.isValid,
 
-    passwordRefs,
-    passwordIsValid,
+    password.refs,
+    password.isValid,
   ]);
 
   const [step, setStep] = useState<number>(0);
 
   useEffect(() => {
-    if (cardNubmersIsValid) setStep(1);
-    if (cardIsValid) setStep(2);
-    if (expirationDateIsValid) setStep(3);
-    if (cvcIsValid) setStep(4);
-  }, [cardNubmersIsValid, cardIsValid, expirationDateIsValid, cvcIsValid, passwordIsValid]);
+    if (cardNumbers.isValid) setStep(1);
+    if (card.isValid) setStep(2);
+    if (expirationDate.isValid) setStep(3);
+    if (cvc.isValid) setStep(4);
+  }, [cardNumbers.isValid, card.isValid, expirationDate.isValid, cvc.isValid, password.isValid]);
 
-  const isValid = cardNubmersIsValid && cardIsValid && expirationDateIsValid && cvcIsValid && passwordIsValid;
+  const isValid = cardNumbers.isValid && card.isValid && expirationDate.isValid && cvc.isValid && password.isValid;
 
   return (
     <div className={cn(styles.payments)}>
@@ -142,25 +69,25 @@ export const Form = () => {
         <FullScreen.Content>
           <CreditCard
             bank="default"
-            cardBrand={renderBrandCard(Object.values(cardNumbers))}
-            cardNumberList={Object.values(cardNumbers)}
-            expirationDate={[expirationDate.month, expirationDate.year]}
+            cardBrand={renderBrandCard(Object.values(cardNumbers.values))}
+            cardNumberList={Object.values(cardNumbers.values)}
+            expirationDate={[expirationDate.values.month, expirationDate.values.year]}
           />
           {step >= 0 && (
             <FormGroup title="결제할 카드 번호를 입력해 주세요" subTitle="본인 명의의 카드만 결제 가능합니다.">
-              <Field label="카드 번호" errorMessage={renderErrorMessageCardNumbers()}>
-                {Object.values(cardNumbers).map((value, index) => (
+              <Field label="카드 번호" errorMessage={cardNumbers.renderErrorMessage()}>
+                {Object.values(cardNumbers.values).map((value, index) => (
                   <Input
-                    ref={cardNubmersRef}
+                    ref={cardNumbers.ref}
                     type="tel"
                     id={String(index)}
                     key={index}
-                    value={value}
+                    value={value as string}
                     maxLength={4}
                     placeholder="1234"
-                    isError={renderErrorCardNumberInput(String(index))}
-                    onChange={handleChangeCardNumbers}
-                    onBlur={handleBlurCardNumbers}
+                    isError={cardNumbers.renderErrorInput(String(index))}
+                    onChange={cardNumbers.onChange}
+                    onBlur={cardNumbers.onBlur}
                   />
                 ))}
               </Field>
@@ -168,46 +95,46 @@ export const Form = () => {
           )}
           {step >= 1 && (
             <FormGroup title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다.">
-              <Field errorMessage={renderErrorMessageCard()}>
+              <Field errorMessage={card.renderErrorMessage()}>
                 <Select
-                  ref={cardRef}
+                  // ref={card.ref}
                   id="card"
-                  value={card}
-                  onChange={handleChangeCard}
+                  value={card.values.card}
+                  onChange={card.onChange}
                   options={CARD_OPTIONS}
-                  onBlur={handleBlurCard}
+                  onBlur={card.onBlur}
                 />
               </Field>
             </FormGroup>
           )}
           {step >= 2 && (
             <FormGroup title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요">
-              <Field label="유효기간" errorMessage={renderErrorMessageExpirationDate()}>
+              <Field label="유효기간" errorMessage={expirationDate.renderErrorMessage()}>
                 <Input
-                  ref={expirationDateRef}
+                  ref={expirationDate.ref}
                   type="tel"
                   id="month"
-                  value={expirationDate.month}
+                  value={expirationDate.values.month}
                   maxLength={2}
-                  onChange={handleChangeExpirationDate}
-                  onBlur={handleBlurExpirationDate}
+                  onChange={expirationDate.onChange}
+                  onBlur={expirationDate.onBlur}
                   isError={
-                    expirationDateInvalidAttemp.month ||
-                    (Object.values(onBlurExpirationDate).includes(true) && !errorsExpirationDate.month?.length)
+                    expirationDate.invalidAttemp.month ||
+                    (Object.values(expirationDate.blur).includes(true) && !expirationDate.errors.month?.length)
                   }
                   placeholder="MM"
                 />
                 <Input
-                  ref={expirationDateRef}
+                  ref={expirationDate.ref}
                   type="tel"
                   id="year"
-                  value={expirationDate.year}
+                  value={expirationDate.values.year}
                   maxLength={2}
-                  onChange={handleChangeExpirationDate}
-                  onBlur={handleBlurExpirationDate}
+                  onChange={expirationDate.onChange}
+                  onBlur={expirationDate.onBlur}
                   isError={
-                    expirationDateInvalidAttemp.year ||
-                    (Object.values(onBlurExpirationDate).includes(true) && !errorsExpirationDate.year?.length)
+                    expirationDate.invalidAttemp.year ||
+                    (Object.values(expirationDate.blur).includes(true) && !expirationDate.errors.year?.length)
                   }
                   placeholder="YY"
                 />
@@ -216,33 +143,35 @@ export const Form = () => {
           )}
           {step >= 3 && (
             <FormGroup title="CVC 번호를 입력해 주세요">
-              <Field label="CVC" errorMessage={renderErrorMessageCvc()}>
+              <Field label="CVC" errorMessage={cvc.renderErrorMessage()}>
                 <Input
-                  ref={cvcRef}
+                  ref={cvc.ref}
                   type="tel"
                   id="cvc"
-                  value={cvc}
+                  value={cvc.values.cvc}
                   maxLength={3}
                   placeholder="123"
-                  isError={!!cvcInvalidAttemp || (onBlurCvc && !errorsCvc.cvc.length)}
-                  onChange={handleChangeCvc}
-                  onBlur={handleBlurCvc}
+                  isError={!!cvc.invalidAttemp || (cvc.blur.cvc && !cvc.errors.cvc.length)}
+                  onChange={cvc.onChange}
+                  onBlur={cvc.onBlur}
                 />
               </Field>
             </FormGroup>
           )}
           {step >= 4 && (
             <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요">
-              <Field label="비밀번호 앞 2자리" errorMessage={renderErrorMessagePassword()}>
+              <Field label="비밀번호 앞 2자리" errorMessage={password.renderErrorMessage()}>
                 <Input
-                  ref={passwordRef}
+                  ref={password.ref}
                   type="password"
                   id="password"
-                  value={password}
+                  value={password.values.password}
                   maxLength={2}
-                  isError={!!passwordInvalidAttemp || (onBlurPassword && !errorsPassword.password.length)}
-                  onChange={handleChangePassword}
-                  onBlur={handleBlurPassword}
+                  isError={
+                    !!password.invalidAttemp.password || (password.blur.password && !password.errors.password.length)
+                  }
+                  onChange={password.onChange}
+                  onBlur={password.onBlur}
                 />
               </Field>
             </FormGroup>

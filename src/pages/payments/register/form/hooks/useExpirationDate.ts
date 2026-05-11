@@ -6,52 +6,42 @@ import { useFormValues } from '@/core/hooks/useFormValues';
 import { validateExpirationDate, preventExpirationMonth, preventExpirationYear } from '../validator';
 
 export const useExpirationDate = () => {
-  const {
-    values: expirationDate,
-    onChange,
-    blur: blurExpirationDate,
-    onBlur,
-    refs,
-    ref,
-    errors,
-    valids,
-    isValid,
-  } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
     initialValues: { month: '', year: '' },
     validate: validateExpirationDate,
   });
 
-  const handleChangeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
 
     if (id === 'month') {
       if (preventExpirationMonth(value)) {
-        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, month: true });
+        setInvalidAttemp({ ...invalidAttemp, month: true });
         return;
       } else {
-        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, month: false });
+        setInvalidAttemp({ ...invalidAttemp, month: false });
       }
     }
     if (id === 'year') {
       if (preventExpirationYear(value)) {
-        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, year: true });
+        setInvalidAttemp({ ...invalidAttemp, year: true });
         return;
       } else {
-        setExpirationDateInvalidAttemp({ ...expirationDateInvalidAttemp, year: false });
+        setInvalidAttemp({ ...invalidAttemp, year: false });
       }
     }
 
     onChange(e);
   };
 
-  const [expirationDateInvalidAttemp, setExpirationDateInvalidAttemp] = useState({
+  const [invalidAttemp, setInvalidAttemp] = useState({
     month: false,
     year: false,
   });
 
-  const renderErrorMessageExpirationDate = () => {
-    if (Object.values(expirationDateInvalidAttemp).find(Boolean)) return '유효햔 유효기간(숫자)을 입력해주세요';
-    if (Object.values(blurExpirationDate).every((blur) => !blur)) return '';
+  const renderErrorMessage = () => {
+    if (Object.values(invalidAttemp).find(Boolean)) return '유효햔 유효기간(숫자)을 입력해주세요';
+    if (Object.values(blur).every((blur) => !blur)) return '';
 
     const errorMonth = errors.month.filter((error) => !error.valid);
     if (errorMonth[0]) return errorMonth[0].message;
@@ -80,10 +70,10 @@ export const useExpirationDate = () => {
   }, [errors, orders]);
 
   return {
-    value: expirationDate,
-    onChange: handleChangeExpirationDate,
+    values,
+    onChange: handleChange,
 
-    blurValue: blurExpirationDate,
+    blur,
     onBlur,
 
     errors,
@@ -93,7 +83,7 @@ export const useExpirationDate = () => {
     refs,
     ref,
 
-    invalidAttemp: expirationDateInvalidAttemp,
-    renderErrorMessage: renderErrorMessageExpirationDate,
+    invalidAttemp,
+    renderErrorMessage,
   };
 };

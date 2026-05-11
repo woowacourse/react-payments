@@ -6,38 +6,28 @@ import { useFormValues } from '@/core/hooks/useFormValues';
 import { validateCvc, preventCvc } from '../validator';
 
 export const useCvc = () => {
-  const {
-    values: { cvc },
-    onChange,
-    blur: { cvc: blurCvc },
-    onBlur,
-    refs,
-    ref,
-    errors,
-    valids,
-    isValid,
-  } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
     initialValues: { cvc: '' },
     validate: validateCvc,
   });
 
-  const handleChangeCvc = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
     if (preventCvc(value)) {
-      setCvcInvalidAttemp(true);
+      setInvalidAttemp({ ...invalidAttemp, [id]: true });
       return;
     } else {
-      setCvcInvalidAttemp(false);
+      setInvalidAttemp({ ...invalidAttemp, [id]: false });
     }
 
     onChange(e);
   };
 
-  const [cvcInvalidAttemp, setCvcInvalidAttemp] = useState(false);
+  const [invalidAttemp, setInvalidAttemp] = useState({ cvc: false });
 
-  const renderErrorMessageCvc = () => {
-    if (cvcInvalidAttemp) return '유효한 CVC(숫자)를 입력해주세요';
-    if (!blurCvc) return '';
+  const renderErrorMessage = () => {
+    if (invalidAttemp.cvc) return '유효한 CVC(숫자)를 입력해주세요';
+    if (!blur.cvc) return '';
 
     const errorCvc = errors.cvc.filter((error) => !error.valid);
     if (errorCvc[0]) return errorCvc[0].message;
@@ -45,10 +35,10 @@ export const useCvc = () => {
   };
 
   return {
-    value: cvc,
-    onChange: handleChangeCvc,
+    values,
+    onChange: handleChange,
 
-    blurValue: blurCvc,
+    blur,
     onBlur,
 
     refs,
@@ -58,7 +48,7 @@ export const useCvc = () => {
     valids,
     isValid,
 
-    invalidAttemp: cvcInvalidAttemp,
-    renderErrorMessage: renderErrorMessageCvc,
+    invalidAttemp,
+    renderErrorMessage,
   };
 };
