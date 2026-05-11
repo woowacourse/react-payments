@@ -16,7 +16,7 @@ function getSelectionRange(target: HTMLInputElement): SelectionRange {
   };
 }
 
-export function useSelectionRestore(ref: RefObject<HTMLInputElement | null>) {
+export function useSelectionRestore<E extends HTMLElement>(ref: RefObject<E | null>) {
   const selectionRef = useRef<SelectionRange | null>(null);
 
   useLayoutEffect(() => {
@@ -24,7 +24,9 @@ export function useSelectionRestore(ref: RefObject<HTMLInputElement | null>) {
 
     const { start, end } = selectionRef.current;
     selectionRef.current = null;
-    ref.current?.setSelectionRange(start, end);
+    if (ref.current instanceof HTMLInputElement) {
+      ref.current.setSelectionRange(start, end);
+    }
   });
 
   return useCallback((target: HTMLInputElement) => {

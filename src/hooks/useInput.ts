@@ -37,7 +37,7 @@ export default function useInput<T extends string | null, E extends HTMLInputEle
 ) {
   const [value, setValue] = useState(initialValue);
   const [storedError, setStoredError] = useState<string | null>(null);
-  const ref = useRef<HTMLInputElement | null>(null);
+  const ref = useRef<E | null>(null);
   const saveSelection = useSelectionRestore(ref);
 
   const currentValidations = useMemo(
