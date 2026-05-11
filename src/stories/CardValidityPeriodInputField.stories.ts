@@ -93,3 +93,16 @@ export const ErrorEmptyYear: Story = {
     await userEvent.tab();
   },
 };
+
+export const ErrorExpiredValidityPeriod: Story = {
+  args: {
+    validityPeriod: { month: "01", year: "20" },
+    onChange: () => {},
+    onNextStep: () => {},
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByDisplayValue("20"));
+    await userEvent.tab();
+  },
+};
