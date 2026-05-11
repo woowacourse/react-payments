@@ -17,16 +17,14 @@ function CardPasswordInput(props: CardPasswordInputProps) {
   return (
     <Flex direction="column" gap={10}>
       <Label>비밀번호 앞 2자리</Label>
-      <Flex gap={10}>
-        <ValidationInput
-          value={props.value}
-          onChange={handlePassword}
-          type="password"
-          inputMode="numeric"
-          isShowError={true}
-          validations={cardPasswordValidations}
-        />
-      </Flex>
+      <ValidationInput
+        value={props.value}
+        onChange={handlePassword}
+        type="password"
+        inputMode="numeric"
+        isShowError={true}
+        validations={cardPasswordValidations}
+      />
     </Flex>
   );
 }
