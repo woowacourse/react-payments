@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 
 import { useCardNumbers } from '../form/hooks/useCardNumbers';
 import { useCard } from '../form/hooks/useCard';
@@ -75,6 +75,12 @@ export const Flow = () => {
     return 'default';
   };
 
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    navigate('/payments/register/complete');
+  };
+
   return (
     <Outlet
       context={{
@@ -133,6 +139,9 @@ export const Flow = () => {
 
         // creditCard
         renderBrandCard,
+
+        // submit
+        handleSubmit,
       }}
     />
   );

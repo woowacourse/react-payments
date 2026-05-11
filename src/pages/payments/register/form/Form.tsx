@@ -7,6 +7,7 @@ import { FormGroup } from '@/core/components/formGroup';
 import { Field } from '@/core/components/field';
 import { Input } from '@/core/components/input';
 import { Select } from '@/core/components/select';
+import { Button } from '@/core/components/button';
 
 import { CARD_OPTIONS } from './constant';
 
@@ -72,6 +73,8 @@ export const Form = () => {
 
     // creditCard
     renderBrandCard,
+
+    handleSubmit,
   } = outletContext;
 
   return (
@@ -163,6 +166,9 @@ export const Form = () => {
           />
         </Field>
       </FormGroup>
+      <Button variant="primary" edge="flat" onClick={handleSubmit}>
+        확인
+      </Button>
     </div>
   );
 };
