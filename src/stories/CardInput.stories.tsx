@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import { useState } from 'react';
 
 import CardInput from '../components/CardInput';
@@ -56,6 +56,44 @@ function CardInputWithState() {
 }
 
 export const Interactive: Story = {
+  args: {
+    cardStatus: {
+      cardNumbers: ['', '', '', ''],
+      cardNumberErrorMode: 'normal',
+      cardBrand: 'unknown',
+    },
+    setCardStatus: {
+      handleCardNumbers: () => fn(),
+      handleCardNumbersBlur: fn(),
+    },
+    cardExpiry: {
+      cardExpiryDate: ['', ''],
+      cardExpiryDateErrorMode: 'normal',
+    },
+    setCardExpiry: {
+      handleCardExpiryDate: () => fn(),
+      handleYearBlur: fn(),
+      handleMonthBlur: fn(),
+    },
+    cardCvc: {
+      cardCvc: '',
+      cardCvcErrorMode: 'normal',
+    },
+    setCardCvc: {
+      handleCardCvc: fn(),
+      handleCvcBlur: fn(),
+    },
+    cardPassword: {
+      cardPassword: '',
+      cardPasswordErrorMode: 'normal',
+    },
+    setCardPassword: {
+      handleCardPassword: fn(),
+      handlePasswordBlur: fn(),
+    },
+    cardIssuer: '',
+    handleCardIssuer: fn(),
+  },
   render: () => <CardInputWithState />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
