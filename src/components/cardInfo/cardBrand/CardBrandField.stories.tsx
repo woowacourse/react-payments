@@ -22,7 +22,7 @@ export const Default: Story = {
 
 export const Selected: Story = {
   render: () => {
-    const [brand, setBrand] = useState('신한카드');
+    const [brand, setBrand] = useState('SHINHAN');
     return <CardBrandField field={{ value: brand, set: setBrand }} />;
   },
 };
