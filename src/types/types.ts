@@ -21,7 +21,7 @@ export interface CardNumberContextValue {
   handleCardNumberChange: (index: number, value: string) => void;
   handleBlur: (index: number) => void;
   inputConfig: InputConfig;
-  cardType: string;
+  cardType: string | null;
   resetCardNumber: () => void;
   inputRefs: React.RefObject<(HTMLInputElement | null)[]>;
 }
