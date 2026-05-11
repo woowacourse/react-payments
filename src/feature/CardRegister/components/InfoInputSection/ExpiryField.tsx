@@ -95,10 +95,6 @@ const ExpiryField = ({
       if (validateExpiryMonth(filledValue) === null) setMonthErrorMessage('');
     }
 
-    // if (expiryType === 'year') {
-    //   handleExpiryYearChange(filledValue);
-    // }
-
     touch(index);
   };
 

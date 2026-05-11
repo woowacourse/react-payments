@@ -61,7 +61,6 @@ const SelectCardBrandField = ({
           }}
         />
       </InputWrapper>
-      {/* <ErrorMessage>error</ErrorMessage> */}
     </StyledField>
   );
 };
@@ -82,24 +81,5 @@ const InputWrapper = styled.div`
 
   margin-bottom: 20px;
 `;
-
-// const CardBrandSelect = styled.select`
-//   box-sizing: border-box;
-//   width: 100%;
-//   height: 32px;
-//   padding: 5px;
-
-//   border: 1px solid black;
-//   border-radius: 3px;
-
-//   font-size: 11px;
-//   font-weight: 400;
-// `;
-// const ErrorMessage = styled.span`
-//   min-height: 20px;
-//   font-size: 9.5px;
-//   font-weight: 400;
-//   color: #ff3d3d;
-// `;
 
 export default SelectCardBrandField;
