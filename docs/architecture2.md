@@ -48,26 +48,34 @@
 ## rule 타입
 
 ```ts
-type Rule = { name: string; fn: (value: unknown) => boolean };
+// src/utils.ts
+type ValidationRule = {
+  name: ErrorStatus | ExpirationPeriodErrorStatus;
+  fn: (value: string) => boolean;
+  on: ('onChange' | 'onBlur')[];
+};
 ```
 
 ## 공통 rule 상수
 
 ```ts
+// src/constants.ts
 const RULES = {
-  required: { name: 'required', fn: (v: string) => v.length > 0 },
-  numberOnly: { name: 'numberOnly', fn: (v: string) => /^\d+$/.test(v) },
-  exactLength: (length: number) => ({ name: 'invalidLength', fn: (v: string) => v.length === length }),
+  required:    { name: 'required',      fn: (v) => v.length > 0,          on: ['onBlur'] },
+  numberOnly:  { name: 'numberOnly',    fn: (v) => /^\d+$/.test(v),       on: ['onChange'] },
+  validMonth:  { name: 'invalidMonth',  fn: isValidMonth,                  on: ['onBlur'] },
+  validYear:   { name: 'invalidYear',   fn: isValidYear,                   on: ['onBlur'] },
+  exactLength: (length) => ({ name: 'invalidLength', fn: (v) => v.length === length, on: ['onBlur'] }),
 };
 ```
 
-## useFieldValidation(rules)
-
-> rules 배열을 받아서 검증을 실행하고 errorStatuses를 반환하는 공통 validation 엔진.
-> 필드 컴포넌트 내부에서 onChange/onBlur 시 사용.
+## validation 유틸 함수
 
 ```ts
-const { errorStatuses, validate } = useFieldValidation(rules);
+// src/utils.ts
+validate(rules, 'onChange', value);  // onChange에 등록된 rules만 실행 → ErrorStatus 반환
+validate(rules, 'onBlur', value);    // onBlur에 등록된 rules만 실행 → ErrorStatus 반환
+validateAll(rules, value);           // 모든 rules 실행 (form submit 시) → ErrorStatus 반환
 ```
 
 ---
@@ -91,7 +99,7 @@ basename: `/react-payments`
 ## states
 
 - formValue: {
-  cardNumbers: { value: ["","","",""], errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus] },
+  cardNumbers: { value: ["","","",""], errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus] }, // 4개 input별 + 1개 총 길이
   cardCompany: { value: "", errorStatuses: [ErrorStatus] },
   expirationPeriod: { value: ["",""], errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus] },
   cvc: { value: "", errorStatuses: [ErrorStatus] },
@@ -186,14 +194,14 @@ basename: `/react-payments`
 
 - value: [string, string, string, string]
 - onUpdated: (value) => void
-- validationRules: { onChange: rule[], onBlur: rule[] }
-- errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus]
+- validationRules: ValidationRule[]
+- errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus] // 4개 input별 + 1개 총 길이
 - onErrorUpdated: (errorStatuses) => void
 
 ## functions
 
 - handleChange: 숫자 입력 외 방어, onUpdated 호출
-- handleBlur: required, invalidLength 검사 후 onErrorUpdated 호출
+- handleBlur: input별 required/numberOnly 검사, 총 길이 검사 후 onErrorUpdated 호출
 
 ## view
 
@@ -215,7 +223,7 @@ basename: `/react-payments`
 
 - value: [string, string]
 - onUpdated: (value) => void
-- validationRules: { onChange: rule[], onBlur: rule[] }
+- validationRules: ValidationRule[]
 - errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]
 - onErrorUpdated: (errorStatuses) => void
 
@@ -242,7 +250,7 @@ basename: `/react-payments`
 
 - value: string
 - onUpdated: (value) => void
-- validationRules: { onChange: rule[], onBlur: rule[] }
+- validationRules: ValidationRule[]
 - errorStatuses: [ErrorStatus]
 - onErrorUpdated: (errorStatuses) => void
 
@@ -269,7 +277,7 @@ basename: `/react-payments`
 
 - value: CardCompany
 - onUpdated: (value) => void
-- validationRules: { onChange: rule[], onBlur: rule[] }
+- validationRules: ValidationRule[]
 - errorStatuses: [ErrorStatus]
 - onErrorUpdated: (errorStatuses) => void
 
@@ -296,7 +304,7 @@ basename: `/react-payments`
 
 - value: string
 - onUpdated: (value) => void
-- validationRules: { onChange: rule[], onBlur: rule[] }
+- validationRules: ValidationRule[]
 - errorStatuses: [ErrorStatus]
 - onErrorUpdated: (errorStatuses) => void
 
