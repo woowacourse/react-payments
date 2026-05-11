@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo } from '../../types';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { ExpirationPeriodErrorStatus } from '../../types';
 import { isNumber, isValidMonth, isValidYear } from '../../utils';
 import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
@@ -14,6 +14,7 @@ interface ExpirationPeriodFieldProps {
 
 export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
   const [errors, setErrors] = useState<[ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]>([null, null]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([null, null]);
 
   const updateError = (index: number, status: ExpirationPeriodErrorStatus) => {
     setErrors((prev) => {
@@ -37,6 +38,16 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     newValue[index] = inputValue;
     onUpdated(newValue);
     updateError(index, null);
+
+    if (inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0) {
+      inputRefs.current[1]?.focus();
+    }
+  };
+
+  const handleKeyUp = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && index === 1 && value[1] === '') {
+      inputRefs.current[0]?.focus();
+    }
   };
 
   // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
@@ -85,6 +96,9 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
         <legend css={legendStyle}>유효기간</legend>
         <div css={inputGroupStyle}>
           <Input
+            ref={(el) => {
+              inputRefs.current[0] = el;
+            }}
             value={value[0]}
             variant={errors[0] !== null ? 'error' : 'default'}
             type="text"
@@ -95,6 +109,9 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
             onBlur={(e) => handleBlur(0, e)}
           />
           <Input
+            ref={(el) => {
+              inputRefs.current[1] = el;
+            }}
             value={value[1]}
             variant={errors[1] !== null ? 'error' : 'default'}
             type="text"
@@ -103,6 +120,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
             maxLength={PERIOD_LENGTH_PER_INPUT}
             onChange={(e) => handleChange(1, e)}
             onBlur={(e) => handleBlur(1, e)}
+            onKeyUp={(e) => handleKeyUp(1, e)}
           />
         </div>
       </fieldset>
