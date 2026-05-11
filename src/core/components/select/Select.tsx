@@ -54,7 +54,7 @@ export const Select = forwardRef(
     const selectedOption = options.find((option) => option.value === value);
 
     return (
-      <div ref={ref} className={cn(styles.select, open && styles.open)}>
+      <div ref={ref} tabIndex={0} className={cn(styles.select, open && styles.open)}>
         <div className={styles.box} onClick={handleClickOpen}>
           {selectedOption?.text}
           <div className={styles.arrow}>
