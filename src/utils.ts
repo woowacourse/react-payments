@@ -1,4 +1,34 @@
-import type { CardBrand, CardInfo } from './types';
+import type { CardBrand, CardInfo, ErrorStatus, ExpirationPeriodErrorStatus } from './types';
+
+export type ValidationRule = {
+  name: ErrorStatus | ExpirationPeriodErrorStatus;
+  fn: (value: string) => boolean;
+  on: ('onChange' | 'onBlur')[];
+};
+
+export const validate = (rules: ValidationRule[], trigger: 'onChange' | 'onBlur', value: string): ValidationRule['name'] => {
+  const targetRules = rules.filter((rule) => rule.on.includes(trigger));
+
+  for (const rule of targetRules) {
+    const isValid = rule.fn(value);
+    if (!isValid) {
+      return rule.name;
+    }
+  }
+
+  return null;
+};
+
+export const validateAll = (rules: ValidationRule[], value: string): ValidationRule['name'] => {
+  for (const rule of rules) {
+    const isValid = rule.fn(value);
+    if (!isValid) {
+      return rule.name;
+    }
+  }
+
+  return null;
+};
 
 export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardBrand => {
   const first = cardNumbers[0];
