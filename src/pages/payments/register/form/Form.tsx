@@ -127,10 +127,10 @@ export const Form = () => {
   const [step, setStep] = useState<number>(0);
 
   useEffect(() => {
-    if (cardNubmersIsValid) return setStep(1);
-    if (cardIsValid) return setStep(2);
-    if (expirationDateIsValid) return setStep(3);
-    if (cvcIsValid) return setStep(4);
+    if (cardNubmersIsValid) setStep(1);
+    if (cardIsValid) setStep(2);
+    if (expirationDateIsValid) setStep(3);
+    if (cvcIsValid) setStep(4);
   }, [cardNubmersIsValid, cardIsValid, expirationDateIsValid, cvcIsValid, passwordIsValid]);
 
   return (
