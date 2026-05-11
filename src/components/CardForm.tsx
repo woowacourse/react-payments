@@ -1,9 +1,11 @@
+import { useEffect, useRef } from "react";
 import CardCVCInput from "./CardCVCInput";
 import CardNumberSegmentsInput from "./CardNumberSegmentsInput";
 import Flex from "./Common/Flex";
 import styled from "@emotion/styled";
 import CardExpiryDateInput from "./CardExpiryDateInput";
 import type { CardBrand, CardFormState, CardNumberSegments } from "../types";
+import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS } from "../types";
 import { CardCompany } from "./CardCompany";
 import CardPasswordInput from "./CardPasswordInput";
 
@@ -26,9 +28,112 @@ interface CardFormProps {
 }
 
 function CardForm(props: CardFormProps) {
+  const segmentLengths = props.brand
+    ? CARD_BRAND_CONFIGS[props.brand].segmentLengths
+    : DEFAULT_SEGMENT_LENGTHS;
+
+  const isCardNumberComplete = segmentLengths.every(
+    (len, i) => props.formState.cardNumberSegments[i]?.length === len,
+  );
+  const isCardCompanySelected = !!props.formState.cardCompany;
+  const isExpiryComplete =
+    props.formState.expiryMonth.length === 2 &&
+    props.formState.expiryYear.length === 2;
+  const isCvcComplete = props.formState.cvc.length === 3;
+
+  const cardCompanyRef = useRef<HTMLDivElement>(null);
+  const expiryRef = useRef<HTMLDivElement>(null);
+  const cvcRef = useRef<HTMLDivElement>(null);
+  const passwordRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isCardNumberComplete) cardCompanyRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [isCardNumberComplete]);
+
+  useEffect(() => {
+    if (isCardCompanySelected) expiryRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [isCardCompanySelected]);
+
+  useEffect(() => {
+    if (isExpiryComplete) cvcRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [isExpiryComplete]);
+
+  useEffect(() => {
+    if (isCvcComplete) passwordRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [isCvcComplete]);
+
   return (
     <form>
       <Flex direction="column" gap={16}>
+        {isCvcComplete && (
+          <div ref={passwordRef}>
+            <Flex direction="column" gap={5}>
+              <Title>비밀번호를 입력해 주세요</Title>
+              <Description>앞의 2자리를 입력해주세요</Description>
+            </Flex>
+            <CardPasswordInput
+              value={props.formState.cardPassword}
+              onChange={(value: string) =>
+                props.setFormState({
+                  ...props.formState,
+                  cardPassword: value,
+                })
+              }
+            />
+          </div>
+        )}
+
+        {isExpiryComplete && (
+          <div ref={cvcRef}>
+            <Flex direction="column" gap={5}>
+              <Title>CVC 번호를 입력해 주세요</Title>
+            </Flex>
+            <CardCVCInput
+              value={props.formState.cvc}
+              onChange={(value: string) =>
+                props.setFormState({ ...props.formState, cvc: value })
+              }
+            />
+          </div>
+        )}
+
+        {isCardCompanySelected && (
+          <div ref={expiryRef}>
+            <Flex direction="column" gap={5}>
+              <Title>카드 유효기간을 입력해 주세요</Title>
+              <Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
+            </Flex>
+            <CardExpiryDateInput
+              value={{
+                expiryMonth: props.formState.expiryMonth,
+                expiryYear: props.formState.expiryYear,
+              }}
+              onChange={(value: [string, string]) =>
+                props.setFormState({
+                  ...props.formState,
+                  expiryMonth: value[0],
+                  expiryYear: value[1],
+                })
+              }
+            />
+          </div>
+        )}
+
+        {isCardNumberComplete && (
+          <div ref={cardCompanyRef}>
+            <Flex direction="column" gap={5}>
+              <Title>카드사를 선택해주세요</Title>
+              <Description>현재 국내 카드사만 가능합니다.</Description>
+            </Flex>
+            <CardCompany
+              value={props.formState.cardCompany}
+              onChange={(value: string) =>
+                props.setFormState({ ...props.formState, cardCompany: value })
+              }
+            />
+          </div>
+        )}
+
         <Flex direction="column" gap={5}>
           <Title>결제할 카드 번호를 입력해 주세요</Title>
           <Description>본인 명의의 카드만 결제 가능합니다.</Description>
@@ -40,57 +145,6 @@ function CardForm(props: CardFormProps) {
             props.setFormState({
               ...props.formState,
               cardNumberSegments: value,
-            })
-          }
-        />
-        <Flex direction="column" gap={16}>
-          <Flex direction="column" gap={5}>
-            <Title>카드사를 선택해주세요</Title>
-            <Description>현재 국내 카드사만 가능합니다.</Description>
-          </Flex>
-        </Flex>
-        <CardCompany
-          value={props.formState.cardCompany}
-          onChange={(value: string) => {
-            props.setFormState({ ...props.formState, cardCompany: value });
-          }}
-        />
-        <Flex direction="column" gap={5}>
-          <Title>카드 유효기간을 입력해 주세요</Title>
-          <Description>월/년도(MMYY)를 순서대로 입력해 주세요.</Description>
-        </Flex>
-        <CardExpiryDateInput
-          value={{
-            expiryMonth: props.formState.expiryMonth,
-            expiryYear: props.formState.expiryYear,
-          }}
-          onChange={(value: [string, string]) =>
-            props.setFormState({
-              ...props.formState,
-              expiryMonth: value[0],
-              expiryYear: value[1],
-            })
-          }
-        />
-        <Flex direction="column" gap={5}>
-          <Title>CVC 번호를 입력해 주세요</Title>
-        </Flex>
-        <CardCVCInput
-          value={props.formState.cvc}
-          onChange={(value: string) =>
-            props.setFormState({ ...props.formState, cvc: value })
-          }
-        />
-        <Flex direction="column" gap={5}>
-          <Title>비밀번호를 입력해 주세요</Title>
-          <Description>앞의 2자리를 입력해주세요</Description>
-        </Flex>
-        <CardPasswordInput
-          value={props.formState.cardPassword}
-          onChange={(value: string) =>
-            props.setFormState({
-              ...props.formState,
-              cardPassword: value,
             })
           }
         />
