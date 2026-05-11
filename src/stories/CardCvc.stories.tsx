@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 
 import CardCvc from '../components/CardCvc';
 import { useCardCvc } from '../hooks/useCardCvc';
@@ -87,8 +87,19 @@ export const Interactive: Story = {
       <div>
         <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />
 
-        <div style={{ marginTop: '16px' }}>입력값: {cardCvc.cardCvc}</div>
+        <div data-testid="card-cvc-value" style={{ marginTop: '16px' }}>
+          입력값: {cardCvc.cardCvc}
+        </div>
       </div>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const cvcInput = canvas.getByLabelText('CVC');
+
+    await userEvent.type(cvcInput, '123');
+
+    await expect(cvcInput).toHaveValue('123');
+    await expect(canvas.getByTestId('card-cvc-value')).toHaveTextContent('123');
   },
 };

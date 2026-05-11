@@ -37,3 +37,12 @@ export const FilledMaster: Story = {
     cardExpiryDate: ['12', '12'],
   },
 };
+
+export const IssuerColor: Story = {
+  args: {
+    cardBrand: 'visa',
+    cardNumbers: ['4123', '5678', '9875', '1234'],
+    cardExpiryDate: ['12', '12'],
+    cardIssuer: 'kakaoCard',
+  },
+};
