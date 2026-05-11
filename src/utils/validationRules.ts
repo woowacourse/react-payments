@@ -12,6 +12,14 @@ export interface Validation {
   message: string;
 }
 
+export const numericOnlyValidations: Validation[] = [
+  {
+    type: "validateOnChange",
+    validator: validateNumberString,
+    message: "숫자만 입력 가능합니다.",
+  },
+];
+
 export const cardPasswordValidations = [
   {
     type: "validateOnChange",

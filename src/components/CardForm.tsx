@@ -3,7 +3,7 @@ import CardNumberSegmentsInput from "./CardNumberSegmentsInput";
 import Flex from "./Common/Flex";
 import styled from "@emotion/styled";
 import CardExpiryDateInput from "./CardExpiryDateInput";
-import type { CardFormState, CardNumberSegments } from "../types";
+import type { CardBrand, CardFormState, CardNumberSegments } from "../types";
 import { CardCompany } from "./CardCompany";
 import CardPasswordInput from "./CardPasswordInput";
 
@@ -22,7 +22,7 @@ const Description = styled.h3`
 interface CardFormProps {
   formState: CardFormState;
   setFormState: (value: CardFormState) => void;
-  segmentLengths: number[];
+  brand: CardBrand | undefined;
 }
 
 function CardForm(props: CardFormProps) {
@@ -35,7 +35,7 @@ function CardForm(props: CardFormProps) {
         </Flex>
         <CardNumberSegmentsInput
           value={props.formState.cardNumberSegments}
-          segmentLengths={props.segmentLengths}
+          brand={props.brand}
           onChange={(value: CardNumberSegments) =>
             props.setFormState({
               ...props.formState,

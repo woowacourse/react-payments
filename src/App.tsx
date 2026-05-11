@@ -2,7 +2,7 @@ import { useState } from "react";
 import CardPreview from "./components/CardPreview";
 import CardForm from "./components/CardForm";
 import { getCardBrand } from "./utils/getCardBrand";
-import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS } from "./types";
+import { CARD_BRAND_CONFIGS, type CardFormState } from "./types";
 import styled from "@emotion/styled";
 import { SubmitButton } from "./components/SubmitButton";
 import { isCardFormComplete } from "./utils/validators";
@@ -16,22 +16,42 @@ const View = styled.div`
   padding: 16px 32px;
 `;
 
+function splitIntoSegments(fullNumber: string, lengths: number[]): string[] {
+  const segments: string[] = [];
+  let pos = 0;
+  for (const len of lengths) {
+    segments.push(fullNumber.slice(pos, pos + len));
+    pos += len;
+  }
+  return segments;
+}
+
 function App() {
   const [formState, setFormState] = useState({
     cardCompany: "",
-    cardNumberSegments: ["", "", "", ""],
+    cardNumberSegments: [""],
     expiryMonth: "",
     expiryYear: "",
     cvc: "",
     cardPassword: "",
   });
 
-  console.log(formState);
-
   const brand = getCardBrand(formState.cardNumberSegments);
-  const segmentLengths = brand
-    ? CARD_BRAND_CONFIGS[brand].segmentLengths
-    : DEFAULT_SEGMENT_LENGTHS;
+
+  const handleSetFormState = (newState: CardFormState) => {
+    const newBrand = getCardBrand(newState.cardNumberSegments);
+    const fullNumber = newState.cardNumberSegments.join("");
+
+    if (newBrand) {
+      const newSegments = splitIntoSegments(
+        fullNumber,
+        CARD_BRAND_CONFIGS[newBrand].segmentLengths,
+      );
+      setFormState({ ...newState, cardNumberSegments: newSegments });
+    } else {
+      setFormState({ ...newState, cardNumberSegments: [fullNumber] });
+    }
+  };
 
   return (
     <Routes>
@@ -48,11 +68,11 @@ function App() {
             />
             <CardForm
               formState={formState}
-              setFormState={setFormState}
-              segmentLengths={segmentLengths}
+              setFormState={handleSetFormState}
+              brand={brand}
             />
             <SubmitButton
-              isCardFormComplete={isCardFormComplete(formState, segmentLengths)}
+              isCardFormComplete={isCardFormComplete(formState, brand)}
             />
           </View>
         }
