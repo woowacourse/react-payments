@@ -2,8 +2,6 @@ import CardCvc from './CardCvc';
 import CardNumber from './CardNumber';
 import CardExpiryDate from './CardExpiryDate';
 import CardPassword from './CardPassword';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 import type {
   CardHandler,
@@ -17,7 +15,7 @@ import type {
   PasswordHandler,
 } from '../types/cardStausTypes';
 import CardIssuer from './CardIssuer';
-import { getCardBrand, getCardNumberLength, isNumericInput } from '../utils/util';
+import { useCardInput } from '../hooks/useCardInput';
 
 type CardInputProps = {
   cardStatus: CardStatus;
@@ -44,64 +42,27 @@ export default function CardInput({
   cardIssuer,
   handleCardIssuer: changeCardIssuer,
 }: CardInputProps) {
-  const navigate = useNavigate();
-  const [step, setStep] = useState(0);
-
-  const openStep = (nextStep: number) => {
-    setStep((prev) => Math.max(prev, nextStep));
-  };
-
-  const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardStatus.handleCardNumbers(index)(e);
-
-    const nextCardNumbers = [...cardStatus.cardNumbers];
-    nextCardNumbers[index] = e.target.value;
-    const nextCardNumber = nextCardNumbers.join('');
-    const nextCardBrand = getCardBrand(nextCardNumber);
-
-    if (
-      nextCardBrand !== 'unknown' &&
-      nextCardNumber.length === getCardNumberLength(nextCardBrand) &&
-      isNumericInput(e.target.value)
-    ) {
-      openStep(1);
-    }
-  };
-
-  const handleCardIssuer = (issuer: CardIssuerType) => {
-    changeCardIssuer(issuer);
-    openStep(2);
-  };
-
-  const handleCardExpiryDate = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardExpiry.handleCardExpiryDate(index)(e);
-
-    const nextCardExpiryDate = [...cardExpiry.cardExpiryDate];
-    nextCardExpiryDate[index] = e.target.value;
-
-    if (
-      isNumericInput(e.target.value) &&
-      nextCardExpiryDate[1].length === 2 &&
-      Number(nextCardExpiryDate[0]) > 0 &&
-      Number(nextCardExpiryDate[0]) <= 12
-    ) {
-      openStep(3);
-    }
-  };
-
-  const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardCvc.handleCardCvc(e);
-
-    if (e.target.value.length === 3) {
-      openStep(4);
-    }
-  };
-
-  const isCardPasswordValid =
-    cardPassword.cardPassword.length === 2 && cardPassword.cardPasswordErrorMode === 'normal';
+  const {
+    step,
+    handleCardNumbers,
+    handleCardIssuer,
+    handleCardExpiryDate,
+    handleCardCvc,
+    handleSubmit,
+    isCardPasswordValid,
+  } = useCardInput({
+    cardStatus,
+    setCardStatus,
+    cardExpiry,
+    setCardExpiry,
+    setCardCvc,
+    cardPassword,
+    cardIssuer,
+    handleCardIssuer: changeCardIssuer,
+  });
 
   return (
-    <form css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <form onSubmit={handleSubmit} css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {step >= 4 && <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />}
       {step >= 3 && (
         <CardCvc
@@ -132,12 +93,6 @@ export default function CardInput({
       {step >= 4 && isCardPasswordValid && (
         <button
           type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate('/complete', {
-              state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
-            });
-          }}
           css={(theme) => ({
             backgroundColor: theme.colors.cardBackground,
             width: '100%',
