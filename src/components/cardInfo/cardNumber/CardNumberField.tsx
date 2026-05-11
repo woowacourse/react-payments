@@ -9,7 +9,7 @@ import {
 } from '../CardInfo.styles';
 import { useCardNumberValidation } from './useCardNumberValidation';
 import { useCardForm } from '../../useCardForm';
-import { CARD_NUMBER_SEGMENT_LENGTHS } from '../../../constants/constants';
+import { getCardNumberSegments, reshapeCardNumber } from '../../../utils/cardNetwork';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardNumber'];
@@ -17,7 +17,8 @@ interface Props {
 //카드 번호를 입력할수 있는 컴포넌트
 export default function CardNumberField({ field }: Props) {
   const { value: cardNumber, set: setCardNumber } = field;
-  const { error, validate } = useCardNumberValidation(cardNumber);
+  const { error, validateInput, validateLength } = useCardNumberValidation();
+  const segments = getCardNumberSegments(cardNumber.join(''));
 
   return (
     <Field>
@@ -25,15 +26,18 @@ export default function CardNumberField({ field }: Props) {
       <Description>본인 명의의 카드만 결제 가능합니다.</Description>
       <Label>카드 번호</Label>
       <InputContainer>
-        {cardNumber.map((_, index) => (
+        {segments.map((length, index) => (
           <InfoInput
             key={index}
             placeholder="1234"
-            maxLength={CARD_NUMBER_SEGMENT_LENGTHS[index]}
-            value={cardNumber[index]}
+            maxLength={length}
+            value={cardNumber[index] ?? ''}
             onChange={(e) => {
-              const updatedCardNumber = validate(e, index);
-              if (updatedCardNumber) setCardNumber(updatedCardNumber);
+              const newValue = e.target.value;
+              if (!validateInput(newValue)) return;
+              const updated = reshapeCardNumber(cardNumber, index, newValue);
+              validateLength(updated);
+              setCardNumber(updated);
             }}
             inputMode="numeric"
           />

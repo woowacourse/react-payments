@@ -20,7 +20,7 @@ export default function CardPreview({ cardForm }: Props) {
   const cardNumber = cardForm.cardNumber.value;
   const expireDate = cardForm.expireDate.value;
   const cardBrand = cardForm.cardBrand.value;
-  const cardBrandLogoSrc = getCardBrandLogoSrc(cardNumber[0]);
+  const cardBrandLogoSrc = getCardBrandLogoSrc(cardNumber.join(''));
   const backgroundColor = cardBrand ? CARD_BRANDS[cardBrand].color : undefined;
 
   return (

@@ -1,4 +1,4 @@
-import { CARD_NUMBER_SEGMENT_LENGTHS } from "../../constants/constants";
+import { getCardNumberSegments } from "../../utils/cardNetwork";
 
 export const validateNumber = (newValue: string) => {
   const errorValue = { state: true, message: "" };
@@ -34,12 +34,13 @@ export const validateMonth = (newValue: string) => {
 
 export const validateCardNumberLength = (cardNumber: string[]) => {
   const errorValue = { state: true, message: "" };
+  const segments = getCardNumberSegments(cardNumber.join(""));
 
   if (cardNumber.every((value) => value.length === 0)) {
     return errorValue;
   }
 
-  if (cardNumber.some((value, index) => value.length > 0 && value.length < CARD_NUMBER_SEGMENT_LENGTHS[index])) {
+  if (cardNumber.some((value, index) => value.length > 0 && value.length < segments[index])) {
     errorValue.state = false;
     errorValue.message = "카드 번호 각 칸을 모두 입력해 주세요.";
     return errorValue;
@@ -47,7 +48,7 @@ export const validateCardNumberLength = (cardNumber: string[]) => {
 
   if (cardNumber.some((value) => value.length === 0)) {
     errorValue.state = false;
-    errorValue.message = "카드 번호 16자리를 모두 입력해 주세요.";
+    errorValue.message = "카드 번호 모두 입력해 주세요.";
   }
 
   return errorValue;
@@ -98,7 +99,9 @@ export const validateCardPasswordLength = (cardPassword: string) => {
 }
 
 export const isCardNumberComplete = (cardNumber: string[]): boolean => {
-  return cardNumber.every((string, i) => string.length === CARD_NUMBER_SEGMENT_LENGTHS[i]) &&
+  const segments = getCardNumberSegments(cardNumber.join(""));
+  if (cardNumber.length !== segments.length) return false;
+  return cardNumber.every((string, i) => string.length === segments[i]) &&
     cardNumber.every((string) => validateNumber(string).state) &&
     validateCardNumberLength(cardNumber).state;
 }
@@ -109,7 +112,7 @@ export const isCardBrandComplete = (cardBrand : string) : boolean =>{
 
 export const isExpireDateComplete = (expireDate : string[]) : boolean =>{
   return expireDate.every((string) => string.length === 2) && validateExpireDateNotPast(expireDate).state && validateMonth(expireDate[0]).state
-} 
+}
 
 export const isCvcComplete = (cvc : string) : boolean =>{
   return cvc.length === 3 && validateNumber(cvc).state

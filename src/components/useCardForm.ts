@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { CARD_NUMBER_SEGMENT_LENGTHS } from "../constants/constants";
+import { DEFAULT_CARD_NUMBER_SEGMENTS } from "../constants/constants";
 
 export function useCardForm() {
-  const [cardNumber, setCardNumber] = useState(CARD_NUMBER_SEGMENT_LENGTHS.map(() => ""));
+  const [cardNumber, setCardNumber] = useState(DEFAULT_CARD_NUMBER_SEGMENTS.map(() => ""));
   const [expireDate, setExpireDate] = useState(["", ""]);
   const [cvc, setCvc] = useState("");
   const [cardBrand, setCardBrand] = useState("")

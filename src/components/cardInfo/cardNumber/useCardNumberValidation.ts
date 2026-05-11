@@ -1,29 +1,20 @@
 import { useState } from "react";
 import { validateCardNumberLength, validateNumber } from "../validator";
 
-export function useCardNumberValidation(cardNumber: string[]) {
+//카드 번호를 정확히 입력했는지 확인하는 함수
+export function useCardNumberValidation() {
   const [error, setError] = useState("");
 
-  const validate = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ): string[] | null => {
-    const newValue = e.target.value;
-
-    const numberResult = validateNumber(newValue);
-    if (!numberResult.state) {
-      setError(numberResult.message);
-      return null;
-    }
-
-    const updatedCardNumber = [...cardNumber];
-    updatedCardNumber[index] = newValue;
-
-    const lengthResult = validateCardNumberLength(updatedCardNumber);
-    setError(lengthResult.state ? "" : lengthResult.message);
-
-    return updatedCardNumber;
+  const validateInput = (newValue: string): boolean => {
+    const result = validateNumber(newValue);
+    if (!result.state) setError(result.message);
+    return result.state;
   };
 
-  return { error, validate };
+  const validateLength = (cardNumber: string[]) => {
+    const result = validateCardNumberLength(cardNumber);
+    setError(result.state ? "" : result.message);
+  };
+
+  return { error, validateInput, validateLength };
 }
