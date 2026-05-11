@@ -7,6 +7,14 @@ import unionpayLogo from "../../assets/unionpayLogo.png";
 import dinersLogo from "../../assets/dinersLogo.png";
 import { decideCardColor } from "../../utils/decideCardInfo";
 
+const LOGO_MAP: Record<string, string> = {
+  master: masterLogo,
+  visa: visaLogo,
+  amex: amexLogo,
+  diners: dinersLogo,
+  unionpay: unionpayLogo,
+};
+
 const cardTextStyle = css`
   color: #ffffff;
   font-size: 14px;
@@ -22,22 +30,6 @@ const cardNumberSpanStyle = css`
 const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
   const cardColor = decideCardColor(cardInfo.company);
 
-  const decideLogoImg = (brand: string) => {
-    switch (brand) {
-      case "master":
-        return masterLogo;
-      case "visa":
-        return visaLogo;
-      case "amex":
-        return amexLogo;
-      case "diners":
-        return dinersLogo;
-      case "unionpay":
-        return unionpayLogo;
-      default:
-        return undefined;
-    }
-  };
   return (
     <div
       css={css`
@@ -75,7 +67,7 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
               width: 36px;
               height: 22px;
             `}
-            src={decideLogoImg(brand)}
+            src={LOGO_MAP[brand]}
           />
         )}
       </div>
@@ -92,10 +84,11 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
             `,
           ]}
         >
-          <span css={cardNumberSpanStyle}>{cardInfo.numbers[0]}</span>
-          <span css={cardNumberSpanStyle}>{cardInfo.numbers[1]}</span>
-          <span css={cardNumberSpanStyle}>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
-          <span css={cardNumberSpanStyle}>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
+          {cardInfo.numbers.map((num, i) => (
+            <span key={i} css={cardNumberSpanStyle}>
+              {i < 2 ? num : "•".repeat(num?.length ?? 0)}
+            </span>
+          ))}
         </div>
         <p
           css={[
