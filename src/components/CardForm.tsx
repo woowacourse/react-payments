@@ -74,6 +74,7 @@ function CardForm(props: CardFormProps) {
               autoFocus
               inputMode="numeric"
               type="password"
+              autoComplete="cc-csc"
               placeholder="CVC"
               data-is-error={!!form.cardValidationCode.error}
               value={form.cardValidationCode.value}
@@ -100,6 +101,7 @@ function CardForm(props: CardFormProps) {
                 autoFocus
                 inputMode="numeric"
                 type="text"
+                autoComplete="cc-exp-month"
                 placeholder="MM"
                 data-is-error={!!form.cardExpiryDate.errors[0]}
                 value={form.cardExpiryDate.values[0]}
@@ -108,6 +110,7 @@ function CardForm(props: CardFormProps) {
               <Input
                 type="text"
                 inputMode="numeric"
+                autoComplete="cc-exp-year"
                 placeholder="YY"
                 data-is-error={!!form.cardExpiryDate.errors[1]}
                 value={form.cardExpiryDate.values[1]}
