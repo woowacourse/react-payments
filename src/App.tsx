@@ -13,6 +13,10 @@ import PasswordInputWrapper from './components/InputWrapper/PasswordInputWrapper
 import CardBrandInputWrapper from './components/InputWrapper/CardBrandInputWrapper';
 import type { CardBrandValue } from './hooks/useCardInfoValue';
 import { getPasswordErrorMessage } from './utils/getPasswordErrorMessage';
+import { isEachCardNumber } from './utils/isEachCardNumber';
+import { isCVCInputFilled } from './utils/isCVCInputFilled';
+import { isPasswordInputFilled } from './utils/isPasswordInputFilled';
+import { isEXPNumber } from './utils/isEXPNumber';
 
 function App() {
     const {
@@ -24,7 +28,8 @@ function App() {
         handleBlur: handleCardNumberBlur,
         handleFocus: handleCardNumberFocus,
         isSatisfy: isCardNumberSatisfy,
-    } = useCardInfoInputField({ validator: getCardNumberErrorMessage, fieldCount: 4 });
+        getRef: getCardNumberRef,
+    } = useCardInfoInputField({ validator: getCardNumberErrorMessage, fieldCount: 4, isFilled: isEachCardNumber });
 
     const [cardBrand, setCardBrand] = useState<CardBrandValue>('');
 
@@ -37,7 +42,9 @@ function App() {
         handleBlur: handleExpBlur,
         handleFocus: handleExpFocus,
         isSatisfy: isExpSatisfy,
-    } = useCardInfoInputField({ validator: getEXPNumberErrorMessage, fieldCount: 2 });
+        getRef: getExpRef,
+        focusFirst: focusFirstExp,
+    } = useCardInfoInputField({ validator: getEXPNumberErrorMessage, fieldCount: 2, isFilled: isEXPNumber });
 
     const {
         values: cvcValues,
@@ -48,7 +55,13 @@ function App() {
         handleBlur: handleCVCBlur,
         handleFocus: handleCVCFocus,
         isSatisfy: isCVCSatisfy,
-    } = useCardInfoInputField({ validator: (values) => getCVCumberErrorMessage(values[0]), fieldCount: 1 });
+        getRef: getCVCRef,
+        focusFirst: focusFirstCVC,
+    } = useCardInfoInputField({
+        validator: (values) => getCVCumberErrorMessage(values[0]),
+        fieldCount: 1,
+        isFilled: isCVCInputFilled,
+    });
 
     const {
         values: passwordValues,
@@ -58,7 +71,13 @@ function App() {
         hasTouched: hasPasswordTouched,
         handleBlur: handlePasswordBlur,
         handleFocus: handlePasswordFocus,
-    } = useCardInfoInputField({ validator: (value) => getPasswordErrorMessage(value[0]), fieldCount: 1 });
+        getRef: getPasswordRef,
+        focusFirst: focusFirstPassword,
+    } = useCardInfoInputField({
+        validator: (value) => getPasswordErrorMessage(value[0]),
+        fieldCount: 1,
+        isFilled: isPasswordInputFilled,
+    });
 
     const isCardBrandSatisfy = !!cardBrand;
 
@@ -80,6 +99,8 @@ function App() {
                         errorMessage={passwordErrorMessage}
                         setErrorMessage={setPasswordErrorMessage}
                         hasTouched={hasPasswordTouched}
+                        getRef={getPasswordRef}
+                        focusFirst={focusFirstPassword}
                     />
                 </CardInfoSection>
                 <CardInfoSection
@@ -95,6 +116,8 @@ function App() {
                         errorMessage={cvcErrorMessage}
                         setErrorMessage={setCVCErrorMessage}
                         hasTouched={hasCVCTouched}
+                        getRef={getCVCRef}
+                        focusFirst={focusFirstCVC}
                     />
                 </CardInfoSection>
                 <CardInfoSection
@@ -111,6 +134,8 @@ function App() {
                         errorMessage={expErrorMessage}
                         setErrorMessage={setExpErrorMessage}
                         hasTouched={hasExpTouched}
+                        getRef={getExpRef}
+                        focusFirst={focusFirstExp}
                     />
                 </CardInfoSection>
                 <CardInfoSection
@@ -133,6 +158,7 @@ function App() {
                         errorMessage={cardNumberErrorMessage}
                         setErrorMessage={setCardNumberErrorMessage}
                         hasTouched={hasCardNumberTouched}
+                        getRef={getCardNumberRef}
                     />
                 </CardInfoSection>
             </InputSectionContainer>

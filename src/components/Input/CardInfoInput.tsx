@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from '@emotion/styled';
 
 type InputSize = 'small' | 'medium' | 'large';
@@ -22,28 +23,36 @@ interface CardInfoInputStyleProps {
     isError: boolean;
 }
 
-export default function CardInfoInput({
-    value,
-    setValue,
-    inputBlock,
-    setErrorMessage,
-    isError,
-    size,
-    ...inputProps
-}: CardInfoInputProps) {
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const tmpValue = e.target.value;
-        const error = inputBlock?.(tmpValue) ?? null;
-        if (error !== null) {
-            setErrorMessage?.(error);
-            return;
-        }
-        setErrorMessage?.(null);
-        setValue(tmpValue);
-    };
+const CardInfoInput = React.forwardRef<HTMLInputElement, CardInfoInputProps>(
+    ({ value, setValue, inputBlock, setErrorMessage, isError, size, ...inputProps }, ref) => {
+        const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const tmpValue = e.target.value;
+            const error = inputBlock?.(tmpValue) ?? null;
+            if (error !== null) {
+                setErrorMessage?.(error);
+                return;
+            }
+            setErrorMessage?.(null);
+            setValue(tmpValue);
+        };
 
-    return <InputStyle {...inputProps} isError={isError} value={value} onChange={handleInputChange} inputSize={size} />;
-}
+        return (
+            <InputStyle
+                {...inputProps}
+                ref={ref}
+                isError={isError}
+                type="text"
+                value={value}
+                onChange={handleInputChange}
+                inputSize={size}
+            />
+        );
+    },
+);
+
+CardInfoInput.displayName = 'CardInfoInput';
+
+export default CardInfoInput;
 
 const InputStyle = styled.input<CardInfoInputStyleProps>`
     border: 1px solid ${({ isError }) => (isError ? '#FF3D3D' : '#acacac')};

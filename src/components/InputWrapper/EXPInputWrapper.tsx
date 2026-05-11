@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { isMonthMatch } from '../../utils/isMonthMatch';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
@@ -11,6 +12,8 @@ interface EXPInputWrapperProps {
     errorMessage: string | null;
     setErrorMessage: (errorMessage: string | null) => void;
     hasTouched: boolean;
+    getRef: (index: number) => (el: HTMLInputElement | null) => void;
+    focusFirst: () => void;
 }
 
 export default function EXPInputWrapper({
@@ -21,10 +24,17 @@ export default function EXPInputWrapper({
     errorMessage,
     setErrorMessage,
     hasTouched,
+    getRef,
+    focusFirst,
 }: EXPInputWrapperProps) {
+    useEffect(() => {
+        focusFirst();
+    }, []);
+
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             <CardInfoInput
+                ref={getRef(0)}
                 value={value[0]}
                 setValue={setEXPNumber(0)}
                 size="medium"
@@ -37,6 +47,7 @@ export default function EXPInputWrapper({
                 onFocus={handleFocus}
             />
             <CardInfoInput
+                ref={getRef(1)}
                 value={value[1]}
                 setValue={setEXPNumber(1)}
                 size="medium"

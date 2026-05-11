@@ -10,6 +10,7 @@ interface CardNumberInputWrapperProps {
     errorMessage: string | null;
     setErrorMessage: (errorMessage: string | null) => void;
     hasTouched: boolean;
+    getRef: (index: number) => (el: HTMLInputElement | null) => void;
 }
 
 export default function CardNumberInputWrapper({
@@ -20,12 +21,14 @@ export default function CardNumberInputWrapper({
     errorMessage,
     setErrorMessage,
     hasTouched,
+    getRef,
 }: CardNumberInputWrapperProps) {
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             {value.map((_, index) => (
                 <CardInfoInput
                     key={`${index}th-input`}
+                    ref={getRef(index)}
                     value={value[index]}
                     setValue={setCardNumber(index)}
                     size="small"

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
@@ -10,6 +11,8 @@ interface CVCInputWrapperProps {
     errorMessage: string | null;
     setErrorMessage: (errorMessage: string | null) => void;
     hasTouched: boolean;
+    getRef: (index: number) => (el: HTMLInputElement | null) => void;
+    focusFirst: () => void;
 }
 
 export default function CVCInputWrapper({
@@ -20,10 +23,17 @@ export default function CVCInputWrapper({
     errorMessage,
     setErrorMessage,
     hasTouched,
+    getRef,
+    focusFirst,
 }: CVCInputWrapperProps) {
+    useEffect(() => {
+        focusFirst();
+    }, []);
+
     return (
         <CardInputWrapper errorMessage={errorMessage}>
             <CardInfoInput
+                ref={getRef(0)}
                 value={value}
                 setValue={setCVCNumber}
                 size="large"
