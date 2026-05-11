@@ -9,6 +9,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     value: ['', '', '', ''] as CardNumberSegments,
+    segmentLengths: [4, 4, 4, 4],
     onChange: () => {},
   },
 } satisfies Meta<typeof CardNumberSegmentsInput>;
@@ -21,6 +22,7 @@ function Wrapper({ initialValue }: { initialValue: CardNumberSegments }) {
   return (
     <CardNumberSegmentsInput
       value={value}
+      segmentLengths={[4, 4, 4, 4]}
       onChange={(newValue) => setValue(newValue)}
     />
   );

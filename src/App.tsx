@@ -2,7 +2,7 @@ import { useState } from "react";
 import CardPreview from "./components/CardPreview";
 import CardForm from "./components/CardForm";
 import { getCardBrand } from "./utils/getCardBrand";
-import type { CardNumberSegments } from "./types";
+import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS } from "./types";
 import styled from "@emotion/styled";
 import { SubmitButton } from "./components/SubmitButton";
 import { isCardFormComplete } from "./utils/validators";
@@ -19,7 +19,7 @@ const View = styled.div`
 function App() {
   const [formState, setFormState] = useState({
     cardCompany: "",
-    cardNumberSegments: ["", "", "", ""] as CardNumberSegments,
+    cardNumberSegments: ["", "", "", ""],
     expiryMonth: "",
     expiryYear: "",
     cvc: "",
@@ -29,6 +29,9 @@ function App() {
   console.log(formState);
 
   const brand = getCardBrand(formState.cardNumberSegments);
+  const segmentLengths = brand
+    ? CARD_BRAND_CONFIGS[brand].segmentLengths
+    : DEFAULT_SEGMENT_LENGTHS;
 
   return (
     <Routes>
@@ -43,8 +46,14 @@ function App() {
               expiryYear={formState.expiryYear}
               cardCompany={formState.cardCompany}
             />
-            <CardForm formState={formState} setFormState={setFormState} />
-            <SubmitButton isCardFormComplete={isCardFormComplete(formState)} />
+            <CardForm
+              formState={formState}
+              setFormState={setFormState}
+              segmentLengths={segmentLengths}
+            />
+            <SubmitButton
+              isCardFormComplete={isCardFormComplete(formState, segmentLengths)}
+            />
           </View>
         }
       />
