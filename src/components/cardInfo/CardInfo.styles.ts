@@ -69,15 +69,3 @@ export const InputContainer = styled.div`
   width: 100%;
 `;
 
-export const ConfirmButton = styled.button`
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  height: 52px;
-  background-color: #333333;
-  color: #F3F3F3;
-  border: none;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-`;
