@@ -27,8 +27,9 @@ export default function CvcField({ field }: Props) {
           maxLength={3}
           value={cvc}
           onChange={(e) => {
-            const updatedCvc = validate(e);
-            if (updatedCvc !== null) setCvc(updatedCvc);
+            const newValue = e.target.value;
+            if (!validate(newValue)) return;
+            setCvc(newValue);
           }}
           inputMode="numeric"
         />
