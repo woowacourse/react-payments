@@ -12,6 +12,7 @@ import InputFieldForm from '../Common/Form/InputFieldForm';
 import { CARD_ISSUER_CONFIG, INPUT_FIELD_CONFIG, SELECT_FIELD_CONFIG } from '../../constants';
 import { convertValueFormat } from '../../utils/convert';
 import CardSelect from '../Select/CardSelect';
+import { getCardIssuerBackgroundColor } from '../../utils/cards';
 
 export type Step = 1 | 2 | 3 | 4 | 5;
 export type CardNumbersType = [string, string, string, string];
@@ -66,11 +67,13 @@ export default function PaymentForm() {
 
     if (newCardNumbers.every((value, i) => !cardNumbersValidator(value, i).error)) setStep(2);
   };
+
   return (
     <Container>
       <CardPreview
         cardNumberList={cardNumbers}
         expirationDate={`${expirationDate['month']}/${expirationDate['year']}`}
+        backgroundColor={getCardIssuerBackgroundColor(cardIssuer)}
       />
 
       <FormWrapper>

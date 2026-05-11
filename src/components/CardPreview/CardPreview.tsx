@@ -4,12 +4,13 @@ import { CardNumbersType } from '../Form/PaymentForm';
 import { validateNaN } from '../../utils/validate';
 import { BRAND_ICON_MAP, CARD_BRAND } from '../../constants';
 
-interface CardPreviewProps {
+interface Props {
   cardNumberList: CardNumbersType;
   expirationDate: string;
+  backgroundColor: string;
 }
 
-export default function CardPreview({ cardNumberList, expirationDate }: CardPreviewProps) {
+export default function CardPreview({ cardNumberList, expirationDate, backgroundColor }: Props) {
   const cardNumbersToBrand = (value: string) => {
     if (validateNaN(value)) return 'NONE';
 
@@ -27,8 +28,9 @@ export default function CardPreview({ cardNumberList, expirationDate }: CardPrev
   const cardBrand = cardNumbersToBrand(cardNumberList[0]);
 
   const [month = '', year = ''] = expirationDate.split('/');
+
   return (
-    <Card>
+    <Container $backgroundColor={backgroundColor}>
       <Header>
         <Magenetic />
         {BRAND_ICON_MAP[cardBrand] && (
@@ -48,11 +50,11 @@ export default function CardPreview({ cardNumberList, expirationDate }: CardPrev
           {month.length > 0 || year.length > 0 ? `${month} / ${year}` : ''}
         </ExpirationDate>
       </ContentWrapper>
-    </Card>
+    </Container>
   );
 }
 
-const Card = styled.div`
+const Container = styled.div<{ $backgroundColor: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,7 +63,7 @@ const Card = styled.div`
   padding: 8px 12px;
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.25);
-  background-color: #333333;
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
 `;
 
 const Header = styled.div`
