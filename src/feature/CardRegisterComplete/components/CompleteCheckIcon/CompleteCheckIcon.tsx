@@ -4,7 +4,7 @@ import CheckIcon from "../../../../../public/images/CheckIcon.png";
 const CompleteCheckIcon = () => {
   return (
     <Icon>
-      <img src={CheckIcon}></img>
+      <img src={CheckIcon} alt="완료 확인 아이콘"></img>
     </Icon>
   );
 };
