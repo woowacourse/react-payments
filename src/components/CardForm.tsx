@@ -22,6 +22,7 @@ const Description = styled.h3`
 interface CardFormProps {
   formState: CardFormState;
   setFormState: (value: CardFormState) => void;
+  segmentLengths: number[];
 }
 
 function CardForm(props: CardFormProps) {
@@ -34,6 +35,7 @@ function CardForm(props: CardFormProps) {
         </Flex>
         <CardNumberSegmentsInput
           value={props.formState.cardNumberSegments}
+          segmentLengths={props.segmentLengths}
           onChange={(value: CardNumberSegments) =>
             props.setFormState({
               ...props.formState,
