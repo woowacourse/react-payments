@@ -19,6 +19,7 @@ const CardNumberInputSection = ({
     inputValues,
     errorMessage,
     errorIndex,
+    warningMessage,
     inputRefs,
     lastInputMaxLength,
     fieldCount,
@@ -32,7 +33,7 @@ const CardNumberInputSection = ({
       message="본인 명의의 카드만 결제 가능합니다."
       tag="카드 번호"
     >
-      <ValidatedInputGroup errorMessage={errorMessage} legend="카드 번호">
+      <ValidatedInputGroup errorMessage={errorMessage} warningMessage={warningMessage} legend="카드 번호">
         {Array.from({ length: fieldCount }, (_, i) => (
           <input
             ref={(el) => {

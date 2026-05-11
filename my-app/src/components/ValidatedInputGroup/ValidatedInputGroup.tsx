@@ -2,18 +2,27 @@ import { css } from "@emotion/react";
 
 type ValidatedInputGroupProps = {
   errorMessage: string;
+  warningMessage?: string;
   legend: string;
   children: React.ReactNode;
 };
 
-const ValidatedInputGroup = ({ errorMessage, legend, children }: ValidatedInputGroupProps) => {
+const ValidatedInputGroup = ({
+  errorMessage,
+  warningMessage = "",
+  legend,
+  children,
+}: ValidatedInputGroupProps) => {
+  const message = errorMessage || warningMessage;
+  const isError = !!errorMessage;
+
   return (
     <div css={containerStyle}>
       <fieldset css={fieldsetStyle}>
         <legend css={visuallyHiddenStyle}>{legend}</legend>
         {children}
       </fieldset>
-      <span css={[errorTextStyle, visibilityStyle(!!errorMessage)]}>{errorMessage}</span>
+      <span css={[messageStyle(isError), visibilityStyle(!!message)]}>{message}</span>
     </div>
   );
 };
@@ -46,12 +55,12 @@ const visuallyHiddenStyle = css`
   border: 0;
 `;
 
-const errorTextStyle = css`
+const messageStyle = (isError: boolean) => css`
   position: absolute;
   bottom: 2px;
   font-size: 9.5px;
   font-weight: 400;
-  color: #ff3d3d;
+  color: ${isError ? "#ff3d3d" : "#d97706"};
 `;
 
 const visibilityStyle = (visible: boolean) => css`

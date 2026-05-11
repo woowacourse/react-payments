@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
 
 import { CARD_NUMBER_FIELD_COUNT, CARD_NUMBER_FIELD_MAX_LENGTH } from "../constants/cardField";
+import {
+  SUPPORTED_NETWORKS_MESSAGE,
+  getRequiredLengthForDetection,
+} from "../utils/cardNetworkDetection";
 import { validateCardNumbers } from "../utils/validators";
 
 type UseCardNumberInputParams = {
@@ -22,6 +26,12 @@ export const useCardNumberInput = ({
 
   const lastInputMaxLength = maxLength - CARD_NUMBER_FIELD_MAX_LENGTH * (CARD_NUMBER_FIELD_COUNT - 1);
 
+  const totalDigits = inputValues.join("");
+  const warningMessage =
+    !isSupportedNetwork && totalDigits.length >= getRequiredLengthForDetection(totalDigits)
+      ? SUPPORTED_NETWORKS_MESSAGE
+      : "";
+
   const onChange = (index: number, value: string) => {
     const newValues = [...inputValues];
     newValues[index] = value;
@@ -38,7 +48,7 @@ export const useCardNumberInput = ({
   };
 
   const handleBlur = () => {
-    const { index, message } = validateCardNumbers(latestValues.current, isSupportedNetwork);
+    const { index, message } = validateCardNumbers(latestValues.current);
     setErrorIndex(index);
     setErrorMessage(message);
   };
@@ -47,6 +57,7 @@ export const useCardNumberInput = ({
     inputValues,
     errorMessage,
     errorIndex,
+    warningMessage,
     inputRefs,
     lastInputMaxLength,
     fieldCount: CARD_NUMBER_FIELD_COUNT,
