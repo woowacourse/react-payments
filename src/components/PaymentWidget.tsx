@@ -1,16 +1,13 @@
 import styled from "@emotion/styled";
 import CardPreview from "./cardPreview/CardPreview";
-import PaymentProvider from "../context/PaymentProvider";
-import TotalInfo from "./cardInfo/totalInfo";
+import TotalInfo from "./cardInfo/TotalInfo";
 
 export default function PaymentWidget() {
   return (
-    <PaymentProvider>
-      <CardPaymentWidgetWrapper>
-        <CardPreview />
-        <TotalInfo />
-      </CardPaymentWidgetWrapper>
-    </PaymentProvider>
+    <CardPaymentWidgetWrapper>
+      <CardPreview />
+      <TotalInfo />
+    </CardPaymentWidgetWrapper>
   );
 }
 
