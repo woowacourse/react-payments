@@ -43,7 +43,7 @@ const PasswordField = ({
           type="password"
           value={password}
           autoFocus={autoFocus}
-          maxLength={3}
+          maxLength={2}
           inputMode="numeric"
           placeholder="**"
           strokeMode={0 === firstErrorIndex ? 'error' : 'default'}
