@@ -3,7 +3,7 @@ import { type CardFormState, type CardIssuer, type CardNumberSegments } from "..
 import { createDigitFieldValidations, getCardNetwork, validateCardIssuer, validateMonth } from "../utils";
 import useArrayInput from "./useArrayInput";
 import useInput from "./useInput";
-import { CARD_EXPIRY_MONTH_LENGTH, CARD_EXPIRY_YEAR_LENGTH, CARD_NETWORK, DEFAULT_CARD_NUMBER_FORMAT, CARD_PASSWORD_LENGTH, DEFAULT_CARD_VALIDATION_CODE_LENGTH } from "../constants";
+import { CARD_EXPIRY_MONTH_LENGTH, CARD_EXPIRY_YEAR_LENGTH, CARD_NETWORK, CARD_PASSWORD_LENGTH, DEFAULT_CARD_VALIDATION_CODE_LENGTH, DEFAULT_CARD_NUMBER_LENGTH, DEFAULT_CARD_NUMBER_SEGMENT_LENGTH } from "../constants";
 
 export const CARD_FORM_STEP = {
   CARD_PASSWORD: 4,
@@ -19,30 +19,16 @@ export default function useCardForm() {
   const cardNumberSegmentsField = useArrayInput(['', '', '', ''] as string[], {
     validation: (cardNumberSegments) => {
       const cardNetwork = getCardNetwork(cardNumberSegments as CardNumberSegments);
-      const format = cardNetwork
-        ? [...CARD_NETWORK[cardNetwork].cardNumberFormat]
-        : [...DEFAULT_CARD_NUMBER_FORMAT];
-      return format.map(len => createDigitFieldValidations(len));
-    },
-    resolver: (updatedValues) => {
-      const network = getCardNetwork(updatedValues as CardNumberSegments);
-      const format = network
-        ? [...CARD_NETWORK[network].cardNumberFormat]
-        : [...DEFAULT_CARD_NUMBER_FORMAT];
+      const cardNumberLength = cardNetwork
+        ? CARD_NETWORK[cardNetwork].cardNumberLength
+        : DEFAULT_CARD_NUMBER_LENGTH;
 
-      if (updatedValues.length === format.length) return updatedValues;
-
-      const result = updatedValues.join("").split("").reduce((prev, cur) => {
-        const newArray = [...prev];
-        const lastIndex = newArray.length - 1;
-        if (newArray[lastIndex].length < format[lastIndex]) newArray[lastIndex] += cur;
-        else newArray.push(cur)
-        return newArray
-      }, [''])
-
-      while (result.length < format.length) result.push("");
-
-      return result;
+      return [
+        [...createDigitFieldValidations(DEFAULT_CARD_NUMBER_SEGMENT_LENGTH)],
+        [...createDigitFieldValidations(DEFAULT_CARD_NUMBER_SEGMENT_LENGTH)],
+        [...createDigitFieldValidations(DEFAULT_CARD_NUMBER_SEGMENT_LENGTH)],
+        [...createDigitFieldValidations(cardNumberLength - DEFAULT_CARD_NUMBER_SEGMENT_LENGTH * 3)],
+      ]
     },
   });
 
