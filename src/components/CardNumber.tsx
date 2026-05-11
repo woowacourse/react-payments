@@ -75,7 +75,9 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                   borderRadius: '2px',
                   border: `1.01px solid ${theme.colors.inactiveBorder}`,
                   borderColor:
-                    cardNumber.length < 4 && cardStatus.cardNumberErrorMode !== 'normal'
+                    cardNumber.length < 4 &&
+                    cardStatus.cardNumberErrorMode !== 'normal' &&
+                    cardStatus.cardNumberErrorMode !== ''
                       ? theme.colors.error
                       : theme.colors.inactiveBorder,
                   padding: '8px',

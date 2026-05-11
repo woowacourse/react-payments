@@ -10,7 +10,7 @@ import {
 
 export function useCardNumber(): [CardStatus, CardHandler] {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [cardNumberErrorMode, setCardNumberErrorMode] = useState<CardError | 'normal'>('normal');
+  const [cardNumberErrorMode, setCardNumberErrorMode] = useState<CardError | 'normal' | ''>('');
   const [cardBrand, setCardBrand] = useState<CardBrandType>('unknown');
 
   const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +23,8 @@ export function useCardNumber(): [CardStatus, CardHandler] {
       return;
     }
 
+    setCardNumbers(next);
+
     if (!isPossibleCardBrandPrefix(nextCardNumber)) {
       setCardBrand('unknown');
       setCardNumberErrorMode('notExistBrand');
@@ -33,7 +35,6 @@ export function useCardNumber(): [CardStatus, CardHandler] {
 
     setCardBrand(nextCardBrand);
     setCardNumberErrorMode('normal');
-    setCardNumbers(next);
   };
 
   const handleCardNumbersBlur = () => {
@@ -44,6 +45,11 @@ export function useCardNumber(): [CardStatus, CardHandler] {
       setCardNumberErrorMode('cardNumberCount');
       return;
     }
+
+    if (cardBrand === 'unknown') {
+      return;
+    }
+
     setCardNumberErrorMode('normal');
   };
 

@@ -76,10 +76,14 @@ export default function CardInput({
   const handleCardExpiryDate = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardExpiry.handleCardExpiryDate(index)(e);
 
+    const nextCardExpiryDate = [...cardExpiry.cardExpiryDate];
+    nextCardExpiryDate[index] = e.target.value;
+
     if (
-      cardExpiry.cardExpiryDate[0] !== '0' &&
-      cardExpiry.cardExpiryDate[0] !== '00' &&
-      cardExpiry.cardExpiryDate[1].length === 2
+      isNumericInput(e.target.value) &&
+      nextCardExpiryDate[1].length === 2 &&
+      Number(nextCardExpiryDate[0]) > 0 &&
+      Number(nextCardExpiryDate[0]) <= 12
     ) {
       openStep(3);
     }

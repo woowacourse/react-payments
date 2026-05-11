@@ -25,7 +25,9 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
     setCardExpiry.handleCardExpiryDate(index)(e);
 
     if (e.target.value.length === 2 && isNumericInput(e.target.value)) {
-      inputRefs.current[index + 1]?.focus();
+      if (index === 0 && Number(e.target.value) <= 12 && Number(e.target.value) > 0) {
+        inputRefs.current[index + 1]?.focus();
+      }
     }
   };
 

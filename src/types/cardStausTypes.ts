@@ -9,7 +9,7 @@ import type {
 
 export interface CardStatus {
   cardNumbers: string[];
-  cardNumberErrorMode: CardError | 'normal';
+  cardNumberErrorMode: CardError | 'normal' | '';
   cardBrand: CardBrandType;
 }
 
@@ -20,7 +20,7 @@ export interface CardHandler {
 
 export interface CardExpiry {
   cardExpiryDate: string[];
-  cardExpiryDateErrorMode: DateError | MonthError | YearError | 'normal';
+  cardExpiryDateErrorMode: DateError | MonthError | YearError | 'normal' | '';
 }
 
 export interface ExpireHandler {

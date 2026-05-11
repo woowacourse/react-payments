@@ -6,8 +6,8 @@ import { isNumericInput } from '../utils/util';
 export function useExpiryDate(): [CardExpiry, ExpireHandler] {
   const [cardExpiryDate, setCardExpiryDate] = useState<string[]>(['', '']);
   const [cardExpiryDateErrorMode, setCardExpiryDateErrorMode] = useState<
-    DateError | MonthError | YearError | 'normal'
-  >('normal');
+    DateError | MonthError | YearError | 'normal' | ''
+  >('');
 
   const handleCardExpiryDate = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = [...cardExpiryDate];
@@ -18,6 +18,8 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
       return;
     }
 
+    setCardExpiryDate(next);
+
     if (index === 0) {
       if (Number(next[index]) > 12 || next[index] === '00') {
         setCardExpiryDateErrorMode('notMonthRange');
@@ -26,7 +28,6 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
     }
 
     setCardExpiryDateErrorMode('normal');
-    setCardExpiryDate(next);
   };
 
   const handleYearBlur = () => {
@@ -42,12 +43,21 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
       setCardExpiryDateErrorMode('emptyMonth');
       return;
     }
+    if (Number(cardExpiryDate[0]) > 12) {
+      setCardExpiryDateErrorMode('notMonthRange');
+      return;
+    }
     setCardExpiryDateErrorMode('normal');
   };
 
   const handleMonthBlur = () => {
     if (cardExpiryDate[0].length === 0 || cardExpiryDate[0] === '0' || cardExpiryDate[0] === '00') {
       setCardExpiryDateErrorMode('emptyMonth');
+      return;
+    }
+
+    if (Number(cardExpiryDate[0]) > 12) {
+      setCardExpiryDateErrorMode('notMonthRange');
       return;
     }
 

@@ -102,7 +102,7 @@ function isUnionPayPrefix(prefix: number): boolean {
   );
 }
 
-export function isMonthError(mode: DateError | MonthError | YearError | 'normal') {
+export function isMonthError(mode: DateError | MonthError | YearError | 'normal' | '') {
   if (
     mode === 'emptyBoth' ||
     mode === 'emptyMonth' ||
@@ -116,7 +116,7 @@ export function isMonthError(mode: DateError | MonthError | YearError | 'normal'
   }
 }
 
-export function isYearError(mode: DateError | MonthError | YearError | 'normal') {
+export function isYearError(mode: DateError | MonthError | YearError | 'normal' | '') {
   if (mode === 'emptyBoth' || mode === 'emptyYear' || mode === 'notYearNumber') {
     return true;
   }
