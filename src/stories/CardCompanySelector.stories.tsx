@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { userEvent, within } from "storybook/test";
 
 import CardCompanySelector from "@components/CardCompanySelector/CardCompanySelector";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
@@ -24,5 +25,17 @@ export const Selected: Story = {
     cardCompany: CARD_COMPANIES[0],
     onSelect: () => {},
     onNextStep: () => {},
+  },
+};
+
+export const Opened: Story = {
+  args: {
+    cardCompany: null,
+    onSelect: () => {},
+    onNextStep: () => {},
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button"));
   },
 };
