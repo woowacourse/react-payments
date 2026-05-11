@@ -132,7 +132,12 @@ export default function CardInput({
       {step >= 4 && isCardPasswordValid && (
         <button
           type="submit"
-          onClick={() => navigate('/complete')}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate('/complete', {
+              state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
+            });
+          }}
           css={(theme) => ({
             backgroundColor: theme.colors.cardBackground,
             width: '100%',

@@ -1,8 +1,17 @@
 import check from '../assets/check.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { CARD_ISSUER } from '../constants/constant';
+import type { CardIssuerType } from '../types/cardStausTypes';
 
 export default function CardRegistrationComplete() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const state = location.state as { cardIssuer: CardIssuerType; cardNumber: string } | null;
+
+  if (!state) {
+    navigate('/');
+  }
 
   return (
     <div
@@ -29,8 +38,8 @@ export default function CardRegistrationComplete() {
           lineHeight: '35px',
         })}
       >
-        5511로 시작하는 <br />
-        BC카드가 등록되었어요.
+        {state.cardNumber}로 시작하는 <br />
+        {CARD_ISSUER[state.cardIssuer]}가 등록되었어요.
       </h1>
       <button
         onClick={() => navigate('/')}
