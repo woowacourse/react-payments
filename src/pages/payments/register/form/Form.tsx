@@ -133,6 +133,8 @@ export const Form = () => {
     if (cvcIsValid) setStep(4);
   }, [cardNubmersIsValid, cardIsValid, expirationDateIsValid, cvcIsValid, passwordIsValid]);
 
+  const isValid = cardNubmersIsValid && cardIsValid && expirationDateIsValid && cvcIsValid && passwordIsValid;
+
   return (
     <div className={cn(styles.payments)}>
       <CreditCard
@@ -242,9 +244,11 @@ export const Form = () => {
           </Field>
         </FormGroup>
       )}
-      <Button variant="primary" edge="flat" onClick={handleSubmit}>
-        확인
-      </Button>
+      {isValid && (
+        <Button variant="primary" edge="flat" onClick={handleSubmit}>
+          확인
+        </Button>
+      )}
     </div>
   );
 };
