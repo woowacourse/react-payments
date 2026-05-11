@@ -1,8 +1,8 @@
 import { useState } from "react";
 import CardPreview from "./components/CardPreview";
 import CardForm from "./components/CardForm";
-import { getCardBrand } from "./utils/getCardBrand";
-import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS, type CardFormState } from "./types";
+import { useCardNumberSegments } from "./hooks/useCardNumberSegments";
+import type { CardFormState } from "./types";
 import styled from "@emotion/styled";
 import { SubmitButton } from "./components/SubmitButton";
 import { isCardFormComplete } from "./utils/validators";
@@ -16,41 +16,32 @@ const View = styled.div`
   padding: 16px 32px;
 `;
 
-function splitIntoSegments(fullNumber: string, lengths: number[]): string[] {
-  const segments: string[] = [];
-  let pos = 0;
-  for (const len of lengths) {
-    segments.push(fullNumber.slice(pos, pos + len));
-    pos += len;
-  }
-  return segments;
-}
-
 function App() {
+  const { segments, brand, handleChange: handleCardNumberChange } =
+    useCardNumberSegments();
+
   const [formState, setFormState] = useState({
     cardCompany: "",
-    cardNumberSegments: [""],
     expiryMonth: "",
     expiryYear: "",
     cvc: "",
     cardPassword: "",
   });
 
-  const brand = getCardBrand(formState.cardNumberSegments);
+  const cardFormState: CardFormState = {
+    ...formState,
+    cardNumberSegments: segments,
+  };
 
   const handleSetFormState = (newState: CardFormState) => {
-    const newBrand = getCardBrand(newState.cardNumberSegments);
-    const fullNumber = newState.cardNumberSegments.join("");
-
-    if (fullNumber.length >= 4) {
-      const segmentLengths = newBrand
-        ? CARD_BRAND_CONFIGS[newBrand].segmentLengths
-        : DEFAULT_SEGMENT_LENGTHS;
-      const newSegments = splitIntoSegments(fullNumber, segmentLengths);
-      setFormState({ ...newState, cardNumberSegments: newSegments });
-    } else {
-      setFormState({ ...newState, cardNumberSegments: [fullNumber] });
-    }
+    handleCardNumberChange(newState.cardNumberSegments);
+    setFormState({
+      cardCompany: newState.cardCompany,
+      expiryMonth: newState.expiryMonth,
+      expiryYear: newState.expiryYear,
+      cvc: newState.cvc,
+      cardPassword: newState.cardPassword,
+    });
   };
 
   return (
@@ -61,18 +52,18 @@ function App() {
           <View>
             <CardPreview
               cardBrand={brand}
-              cardNumberSegments={formState.cardNumberSegments}
+              cardNumberSegments={segments}
               expiryMonth={formState.expiryMonth}
               expiryYear={formState.expiryYear}
               cardCompany={formState.cardCompany}
             />
             <CardForm
-              formState={formState}
+              formState={cardFormState}
               setFormState={handleSetFormState}
               brand={brand}
             />
             <SubmitButton
-              isCardFormComplete={isCardFormComplete(formState, brand)}
+              isCardFormComplete={isCardFormComplete(cardFormState, brand)}
             />
           </View>
         }
@@ -81,11 +72,11 @@ function App() {
         path="/react-payments/success"
         element={
           <SubmitSuccess
-            firstNumberSegment={formState.cardNumberSegments[0]}
+            firstNumberSegment={segments[0]}
             cardCompany={formState.cardCompany}
           />
         }
-      ></Route>
+      />
     </Routes>
   );
 }
