@@ -30,23 +30,25 @@ export const cardPasswordValidations = [
   },
 ] as const satisfies Validation[];
 
-export const numberSegmentValidations = [
-  {
-    type: "validateOnChange",
-    validator: validateNumberString,
-    message: "숫자만 입력 가능합니다.",
-  },
-  {
-    type: "validateOnChange",
-    validator: (input: string) => validateStringMaxLength(input, 4),
-    message: "4자리까지만 입력 가능합니다.",
-  },
-  {
-    type: "validateOnBlur",
-    validator: (input: string) => validateStringLength(input, 4),
-    message: "4자리를 입력해주세요.",
-  },
-] as const satisfies Validation[];
+export function numberSegmentValidations(maxLength: number): Validation[] {
+  return [
+    {
+      type: "validateOnChange",
+      validator: validateNumberString,
+      message: "숫자만 입력 가능합니다.",
+    },
+    {
+      type: "validateOnChange",
+      validator: (input: string) => validateStringMaxLength(input, maxLength),
+      message: `${maxLength}자리까지만 입력 가능합니다.`,
+    },
+    {
+      type: "validateOnBlur",
+      validator: (input: string) => validateStringLength(input, maxLength),
+      message: `${maxLength}자리를 입력해주세요.`,
+    },
+  ];
+}
 
 export const cvcValidations = [
   {

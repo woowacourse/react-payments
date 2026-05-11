@@ -26,10 +26,15 @@ export function validateYear(input: string) {
   return monthArray.includes(input);
 }
 
-export function isCardFormComplete(formState: CardFormState) {
+export function isCardFormComplete(
+  formState: CardFormState,
+  segmentLengths: number[],
+) {
   return !!(
     formState.cardCompany &&
-    formState.cardNumberSegments.every((segment) => segment.length === 4) &&
+    segmentLengths.every(
+      (len, i) => formState.cardNumberSegments[i]?.length === len,
+    ) &&
     formState.expiryMonth.length === 2 &&
     formState.expiryYear.length === 2 &&
     formState.cvc.length === 3 &&
