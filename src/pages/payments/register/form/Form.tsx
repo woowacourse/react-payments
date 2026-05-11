@@ -1,3 +1,5 @@
+import { useRef, useEffect } from 'react';
+
 import { useOutletContext } from 'react-router';
 
 import cn from 'classnames';
@@ -24,12 +26,16 @@ export const Form = () => {
 
     handleBlurCardNumbers,
 
+    errorsCardNumbers,
+
     renderErrorMessageCardNumbers,
     renderErrorCardNumberInput,
 
     // card
     card,
     handleChangeCard,
+
+    errorsCard,
 
     handleBlurCard,
 
@@ -77,6 +83,62 @@ export const Form = () => {
     handleSubmit,
   } = outletContext;
 
+  const cardNumberRef0 = useRef<HTMLInputElement>(null);
+  const cardNumberRef1 = useRef<HTMLInputElement>(null);
+  const cardNumberRef2 = useRef<HTMLInputElement>(null);
+  const cardNumberRef3 = useRef<HTMLInputElement>(null);
+  const cardNumbersRefs = [cardNumberRef0, cardNumberRef1, cardNumberRef2, cardNumberRef3];
+
+  const cardRef = useRef<HTMLInputElement>(null);
+  const monthRef = useRef<HTMLInputElement>(null);
+  const yearRef = useRef<HTMLInputElement>(null);
+  const cvcRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const isValidCardNumbers0 = errorsCardNumbers?.[0]?.every((error) => error.valid);
+  const isValidCardNumbers1 = errorsCardNumbers?.[1]?.every((error) => error.valid);
+  const isValidCardNumbers2 = errorsCardNumbers?.[2]?.every((error) => error.valid);
+  const isValidCardNumbers3 = errorsCardNumbers?.[3]?.every((error) => error.valid);
+  const isValidCardNumbers = [isValidCardNumbers0, isValidCardNumbers1, isValidCardNumbers2, isValidCardNumbers3];
+
+  const isValidCard = errorsCard?.card.every((error) => error.valid);
+
+  const isValidExpirationMonth = errorsExpirationDate?.month.every((error) => error.valid);
+  const isValidExpirationYear = errorsExpirationDate?.year.every((error) => error.valid);
+
+  const isValidCvc = errorsCvc?.cvc.every((error) => error.valid);
+
+  const isValidPassword = errorsPassword?.password.every((error) => error.valid);
+
+  useEffect(() => {
+    isValidCardNumbers.some((isValidCardNumber, index) => {
+      const current = index;
+      const next = current + 1;
+
+      const isValidCurrent = isValidCardNumber;
+      const isValidNext = isValidCardNumbers?.[next];
+
+      if (isValidCurrent && !isValidNext) {
+        cardNumbersRefs?.[next]?.current?.focus();
+        return true;
+      }
+    });
+
+    if (isValidCardNumbers3 && !isValidCard) return cardRef.current?.focus();
+    if (isValidCard && !isValidExpirationMonth) return monthRef.current?.focus();
+    if (isValidExpirationYear && !isValidCvc) return cvcRef.current?.focus();
+    if (isValidCvc && !isValidPassword) return passwordRef.current?.focus();
+  }, [
+    cardNumbersRefs,
+    isValidCardNumbers,
+    isValidCardNumbers3,
+    isValidCard,
+    isValidExpirationMonth,
+    isValidExpirationYear,
+    isValidCvc,
+    isValidPassword,
+  ]);
+
   return (
     <div className={cn(styles.payments)}>
       <CreditCard
@@ -89,6 +151,7 @@ export const Form = () => {
         <Field label="카드 번호" errorMessage={renderErrorMessageCardNumbers()}>
           {Object.values(cardNumbers).map((value, index) => (
             <Input
+              ref={cardNumbersRefs[index]}
               type="tel"
               id={String(index)}
               key={index}
@@ -104,12 +167,20 @@ export const Form = () => {
       </FormGroup>
       <FormGroup title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다.">
         <Field errorMessage={renderErrorMessageCard()}>
-          <Select id="card" value={card} onChange={handleChangeCard} options={CARD_OPTIONS} onBlur={handleBlurCard} />
+          <Select
+            ref={cardRef}
+            id="card"
+            value={card}
+            onChange={handleChangeCard}
+            options={CARD_OPTIONS}
+            onBlur={handleBlurCard}
+          />
         </Field>
       </FormGroup>
       <FormGroup title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MMYY)를 순서대로 입력해 주세요">
         <Field label="유효기간" errorMessage={renderErrorMessageExpirationDate()}>
           <Input
+            ref={monthRef}
             type="tel"
             id="month"
             value={expirationDate.month}
@@ -123,6 +194,7 @@ export const Form = () => {
             placeholder="MM"
           />
           <Input
+            ref={yearRef}
             type="tel"
             id="year"
             value={expirationDate.year}
@@ -141,6 +213,7 @@ export const Form = () => {
       <FormGroup title="CVC 번호를 입력해 주세요">
         <Field label="CVC" errorMessage={renderErrorMessageCvc()}>
           <Input
+            ref={cvcRef}
             type="tel"
             id="cvc"
             value={cvc}
@@ -156,6 +229,7 @@ export const Form = () => {
       <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요">
         <Field label="비밀번호 앞 2자리" errorMessage={renderErrorMessagePassword()}>
           <Input
+            ref={passwordRef}
             type="password"
             id="password"
             value={password}
