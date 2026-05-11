@@ -1,6 +1,7 @@
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
 import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
 import { useRef } from 'react';
+import { isNumericInput } from '../utils/util.ts';
 
 type CardNumbersProps = {
   cardStatus: CardStatus;
@@ -13,7 +14,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
   const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardStatus.handleCardNumbers(index)(e);
 
-    if (e.target.value.length === 4) {
+    if (e.target.value.length === 4 && isNumericInput(e.target.value)) {
       inputRefs.current[index + 1]?.focus();
     }
   };

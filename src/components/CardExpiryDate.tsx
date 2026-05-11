@@ -3,7 +3,7 @@ import {
   MONTH_ERROR_MESSAGE,
   YEAR_ERROR_MESSAGE,
 } from '../constants/messages.ts';
-import { isMonthError, isYearError } from '../utils/util.ts';
+import { isMonthError, isYearError, isNumericInput } from '../utils/util.ts';
 import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
 import { useRef } from 'react';
 
@@ -24,7 +24,7 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
   const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardExpiry.handleCardExpiryDate(index)(e);
 
-    if (e.target.value.length === 2) {
+    if (e.target.value.length === 2 && isNumericInput(e.target.value)) {
       inputRefs.current[index + 1]?.focus();
     }
   };

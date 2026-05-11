@@ -23,13 +23,13 @@ export function useCardNumber(): [CardStatus, CardHandler] {
       return;
     }
 
-    const nextCardBrand = getCardBrand(nextCardNumber);
-
     if (!isPossibleCardBrandPrefix(nextCardNumber)) {
       setCardBrand('unknown');
       setCardNumberErrorMode('notExistBrand');
       return;
     }
+
+    const nextCardBrand = getCardBrand(nextCardNumber);
 
     setCardBrand(nextCardBrand);
     setCardNumberErrorMode('normal');

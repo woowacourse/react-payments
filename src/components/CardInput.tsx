@@ -17,7 +17,7 @@ import type {
   PasswordHandler,
 } from '../types/cardStausTypes';
 import CardIssuer from './CardIssuer';
-import { getCardBrand, getCardNumberLength } from '../utils/util';
+import { getCardBrand, getCardNumberLength, isNumericInput } from '../utils/util';
 
 type CardInputProps = {
   cardStatus: CardStatus;
@@ -61,7 +61,8 @@ export default function CardInput({
 
     if (
       nextCardBrand !== 'unknown' &&
-      nextCardNumber.length === getCardNumberLength(nextCardBrand)
+      nextCardNumber.length === getCardNumberLength(nextCardBrand) &&
+      isNumericInput(e.target.value)
     ) {
       openStep(1);
     }
@@ -75,13 +76,10 @@ export default function CardInput({
   const handleCardExpiryDate = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardExpiry.handleCardExpiryDate(index)(e);
 
-    const nextCardExpiryDate = [...cardExpiry.cardExpiryDate];
-    nextCardExpiryDate[index] = e.target.value;
-
     if (
-      nextCardExpiryDate[0] !== '0' &&
-      nextCardExpiryDate[0] !== '00' &&
-      nextCardExpiryDate[1].length === 2
+      cardExpiry.cardExpiryDate[0] !== '0' &&
+      cardExpiry.cardExpiryDate[0] !== '00' &&
+      cardExpiry.cardExpiryDate[1].length === 2
     ) {
       openStep(3);
     }
