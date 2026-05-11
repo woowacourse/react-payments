@@ -10,9 +10,9 @@ const AddNewCardPage = () => {
         {({ cardNumber, validityPeriod, selectedCardCompany }) => (
           <CardWrapper>
             <Card
-              cardNumber={cardNumber.join("")}
+              cardNumber={cardNumber}
               validityPeriod={validityPeriod}
-              brand={detectCardBrand(cardNumber.join(""))}
+              brand={detectCardBrand(cardNumber)}
               company={selectedCardCompany}
             />
           </CardWrapper>

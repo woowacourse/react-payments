@@ -1,4 +1,4 @@
-import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
+import type { ValidityPeriod } from "@/types/card";
 import StepFunnel from "@components/common/StepFunnel/StepFunnel";
 import CardCompanySelectField from "@components/feature/CardInfoForm/components/CardCompanySelectField/CardCompanySelectField";
 import CardCVCInputField from "@components/feature/CardInfoForm/components/CardCVCInputField";
@@ -9,7 +9,7 @@ import styled from "@emotion/styled";
 import { useState, type ReactNode } from "react";
 
 interface CardInfoFormState {
-  cardNumber: CardNumberUnits;
+  cardNumber: string;
   validityPeriod: ValidityPeriod;
   CVC: string;
   selectedCardCompany:
@@ -21,11 +21,10 @@ interface CardInfoFormProps {
   children?: (arg: CardInfoFormState) => ReactNode;
 }
 
-const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
 
 const CardInfoForm = ({ children }: CardInfoFormProps) => {
-  const [cardNumber, setCardNumber] = useState(DEFAULT_CARD_NUMBER_UNITS);
+  const [cardNumber, setCardNumber] = useState("");
   const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
   const [CVC, setCVC] = useState("");
   const [selectedCardCompany, setSelectedCardCompany] = useState<
@@ -75,12 +74,12 @@ const CardInfoForm = ({ children }: CardInfoFormProps) => {
           <StepFunnel.Step step={0} comparisonOperator="greaterThanOrEqual">
             {({ goToStep }) => (
               <CardNumberInputField
-                cardNumberUnits={cardNumber}
+                cardNumber={cardNumber}
                 onChange={(input) => {
                   setCardNumber(input);
-                  if (input.join("")?.length === 16) {
-                    goToStep((prev) => (prev < 1 ? 1 : prev));
-                  }
+                }}
+                onComplete={() => {
+                  goToStep((prev) => (prev < 1 ? 1 : prev));
                 }}
               />
             )}
