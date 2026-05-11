@@ -68,7 +68,7 @@ export const Select = forwardRef(
                 const selected = value === option.value;
 
                 return (
-                  <li className={cn(selected && styles.selected)}>
+                  <li key={option.value} className={cn(selected && styles.selected)}>
                     <a
                       href="#"
                       onClick={() => {
