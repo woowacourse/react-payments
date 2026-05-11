@@ -3,7 +3,7 @@ import master from '../assets/Mastercard.png';
 import union from '../assets/UnionPay.png';
 import diners from '../assets/Diners.png';
 import amex from '../assets/Amex.png';
-import { maskCardNumbers } from '../utils/maskCardNumbers';
+import { maskCardNumbers, maskSpecialCardNumbers } from '../utils/maskCardNumbers';
 import type { CardBrandType, CardIssuerType } from '../types/cardStausTypes';
 
 type CardPreviewProps = {
@@ -35,6 +35,11 @@ export default function CardPreview({
         return null;
     }
   })();
+
+  const isSpecialCard = cardBrand === 'amex' || cardBrand === 'diners';
+  const maskedCardNumbers = isSpecialCard
+    ? maskSpecialCardNumbers(cardNumbers)
+    : maskCardNumbers(cardNumbers);
 
   return (
     <div
@@ -75,7 +80,7 @@ export default function CardPreview({
           gap: '10px',
         })}
       >
-        {maskCardNumbers(cardNumbers).map((cardNumber, index) => {
+        {maskedCardNumbers.map((cardNumber, index) => {
           return (
             <span
               key={index}
@@ -83,8 +88,8 @@ export default function CardPreview({
                 width: '40px',
                 display: 'inline-block',
                 textAlign: 'center',
-                fontSize: index > 1 ? '30px' : '14px',
-                letterSpacing: index > 1 ? '0px' : '16%',
+                fontSize: '14px',
+                letterSpacing: '16%',
               }}
             >
               {cardNumber}
