@@ -19,6 +19,8 @@ export const Flow = () => {
     ref: cardNubmersRef,
 
     errors: errorsCardNumbers,
+    valids: cardNumbersValids,
+    isValid: cardNubmersIsValid,
 
     renderErrorMessage: renderErrorMessageCardNumbers,
     renderErrorInput: renderErrorCardNumberInput,
@@ -34,6 +36,8 @@ export const Flow = () => {
     ref: cardRef,
 
     errors: errorsCard,
+    valids: cardValids,
+    isValid: cardIsValid,
 
     renderErrorMessage: renderErrorMessageCard,
   } = useCard();
@@ -49,6 +53,8 @@ export const Flow = () => {
     ref: expirationDateRef,
 
     errors: errorsExpirationDate,
+    valids: expirationDateValids,
+    isValid: expirationDateIsValid,
 
     invalidAttemp: expirationDateInvalidAttemp,
     renderErrorMessage: renderErrorMessageExpirationDate,
@@ -66,6 +72,8 @@ export const Flow = () => {
     ref: cvcRef,
 
     errors: errorsCvc,
+    valids: cvcValids,
+    isValid: cvcIsValid,
 
     invalidAttemp: cvcInvalidAttemp,
     renderErrorMessage: renderErrorMessageCvc,
@@ -83,6 +91,8 @@ export const Flow = () => {
     ref: passwordRef,
 
     errors: errorsPassword,
+    valids: passwordValids,
+    isValid: passwordIsValid,
 
     invalidAttemp: passwordInvalidAttemp,
     renderErrorMessage: renderErrorMessagePassword,
@@ -110,6 +120,8 @@ export const Flow = () => {
         handleBlurCardNumbers,
 
         errorsCardNumbers,
+        cardNumbersValids,
+        cardNubmersIsValid,
 
         cardNubmersRefs,
         cardNubmersRef,
@@ -127,6 +139,8 @@ export const Flow = () => {
         cardRef,
 
         errorsCard,
+        cardValids,
+        cardIsValid,
 
         renderErrorMessageCard,
 
@@ -138,6 +152,8 @@ export const Flow = () => {
         handleBlurExpirationDate,
 
         errorsExpirationDate,
+        expirationDateValids,
+        expirationDateIsValid,
 
         expirationDateRefs,
         expirationDateRef,
@@ -156,6 +172,8 @@ export const Flow = () => {
         cvcRef,
 
         errorsCvc,
+        cvcValids,
+        cvcIsValid,
 
         cvcInvalidAttemp,
         renderErrorMessageCvc,
@@ -171,6 +189,8 @@ export const Flow = () => {
         passwordRef,
 
         errorsPassword,
+        passwordValids,
+        passwordIsValid,
 
         passwordInvalidAttemp,
         renderErrorMessagePassword,

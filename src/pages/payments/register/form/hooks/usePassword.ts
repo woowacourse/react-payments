@@ -20,6 +20,8 @@ export const usePassword = () => {
     refs,
     ref,
     errors,
+    valids,
+    isValid,
   } = useFormValues({
     initialValues: { password: '' },
     validate: validatePassword,
@@ -60,6 +62,8 @@ export const usePassword = () => {
     ref,
 
     errors,
+    valids,
+    isValid,
 
     invalidAttemp: passwordInvalidAttemp,
     renderErrorMessage: renderErrorMessagePassword,

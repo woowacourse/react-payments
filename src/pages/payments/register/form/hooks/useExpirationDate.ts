@@ -14,6 +14,8 @@ export const useExpirationDate = () => {
     refs,
     ref,
     errors,
+    valids,
+    isValid,
   } = useFormValues({
     initialValues: { month: '', year: '' },
     validate: validateExpirationDate,
@@ -85,6 +87,8 @@ export const useExpirationDate = () => {
     onBlur,
 
     errors,
+    valids,
+    isValid,
 
     refs,
     ref,

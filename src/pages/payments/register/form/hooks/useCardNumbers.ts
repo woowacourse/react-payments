@@ -14,6 +14,8 @@ export const useCardNumbers = () => {
     refs,
     ref,
     errors,
+    valids,
+    isValid,
   } = useFormValues({
     initialValues: { '0': '', '1': '', '2': '', '3': '' },
     validate: validateCardNumbers,
@@ -84,6 +86,8 @@ export const useCardNumbers = () => {
     ref,
 
     errors,
+    valids,
+    isValid,
 
     invalidAttemp: cardNumbersInvalidAttemp,
     renderErrorMessage: renderErrorMessageCardNumbers,

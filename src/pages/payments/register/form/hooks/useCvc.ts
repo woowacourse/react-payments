@@ -14,6 +14,8 @@ export const useCvc = () => {
     refs,
     ref,
     errors,
+    valids,
+    isValid,
   } = useFormValues({
     initialValues: { cvc: '' },
     validate: validateCvc,
@@ -53,6 +55,8 @@ export const useCvc = () => {
     ref,
 
     errors,
+    valids,
+    isValid,
 
     invalidAttemp: cvcInvalidAttemp,
     renderErrorMessage: renderErrorMessageCvc,
