@@ -5,7 +5,7 @@ import CardAddSuccessPage from './pages/CardAddSuccessPage';
 
 const App = () => {
   return (
-    <BrowserRouter basename="/react-payments/">
+    <BrowserRouter basename="/react-payments">
       <AppContainer>
         <Routes>
           <Route path="/" element={<CardAddPage />} />
