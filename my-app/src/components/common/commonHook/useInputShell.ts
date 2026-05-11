@@ -19,7 +19,9 @@ export const useInputShell = <T>({
   errorMessageGenerator,
 }: UseInputShellProps<T>) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [errors, setErrors] = useState<boolean[]>(Array(maxLengthList.length).fill(false));
+  const [touched, setTouched] = useState<boolean[]>(Array(maxLengthList.length).fill(false));
+  const currentErrors = errorChecker(value);
+  const showErrors = currentErrors.map((isError, index) => (touched[index] ? isError : false));
 
   const handleOnChange = (inputValue: string, index: number) => {
     if (!/^[0-9]*$/.test(inputValue)) return;
@@ -35,15 +37,18 @@ export const useInputShell = <T>({
   };
 
   const handleOnBlur = (inputValue: string, index: number) => {
-    const updatedValue = valueUpdater(value, inputValue, index);
-    setErrors(errorChecker(updatedValue));
+    setTouched((prev) => {
+      const newTouched = [...prev];
+      newTouched[index] = true;
+      return newTouched;
+    });
   };
 
   return {
     inputRefs,
-    errors,
+    errors: showErrors,
     handleOnChange,
     handleOnBlur,
-    finalErrorMessage: errors.some((error) => error) ? errorMessageGenerator(value) : "",
+    finalErrorMessage: showErrors.some((error) => error) ? errorMessageGenerator(value) : "",
   };
 };
