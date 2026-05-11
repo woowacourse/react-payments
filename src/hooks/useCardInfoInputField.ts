@@ -1,17 +1,31 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 interface UseCardInfoInputFieldProps {
     validator: (values: string[]) => string | null;
     fieldCount: number;
+    isFilled: (value: string) => boolean;
 }
 
-export const useCardInfoInputField = ({ validator, fieldCount }: UseCardInfoInputFieldProps) => {
-    const [values, setValues] = useState(Array(fieldCount).fill('')); // fieldCount만큼 빈 배열 만들기
-    const [errorMessage, setErrorMessage] = useState<string | null>(null); // errorMessage가 담길 곳(null이면 정상 상태)
-    const [hasTouched, setHasTouched] = useState(false); // blur, focus 상태를 기억하기 위한
+export const useCardInfoInputField = ({ validator, fieldCount, isFilled }: UseCardInfoInputFieldProps) => {
+    const [values, setValues] = useState(Array(fieldCount).fill(''));
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [hasTouched, setHasTouched] = useState(false);
+
+    const refs = useRef<(HTMLInputElement | null)[]>(Array(fieldCount).fill(null));
+
+    const getRef = (index: number) => (el: HTMLInputElement | null) => {
+        refs.current[index] = el;
+    };
+
+    const focusFirst = useCallback(() => {
+        refs.current[0]?.focus();
+    }, []);
 
     const setValueByIndex = (index: number) => (value: string) => {
         setValues((prev) => prev.with(index, value));
+        if (isFilled(value) && index < fieldCount - 1) {
+            refs.current[index + 1]?.focus();
+        }
     };
 
     const handleBlur = () => {
@@ -37,5 +51,7 @@ export const useCardInfoInputField = ({ validator, fieldCount }: UseCardInfoInpu
         handleBlur,
         handleFocus,
         isSatisfy,
+        getRef,
+        focusFirst,
     };
 };
