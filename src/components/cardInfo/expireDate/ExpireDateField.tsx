@@ -9,6 +9,7 @@ import {
 } from '../CardInfo.styles';
 import { useExpireDateValidation } from './useExpireDateValidation';
 import { useCardForm } from '../../useCardForm';
+import { useAutoFocus } from '../useAutoFocus';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['expireDate'];
@@ -17,6 +18,7 @@ interface Props {
 export default function ExpireDateField({ field }: Props) {
   const { value: expireDate, set: setExpireDate } = field;
   const { error, validate } = useExpireDateValidation();
+  const { setRef, focusNext } = useAutoFocus();
 
   return (
     <Field>
@@ -25,6 +27,8 @@ export default function ExpireDateField({ field }: Props) {
       <Label>유효기간</Label>
       <InputContainer>
         <InfoInput
+          ref={setRef(0)}
+          autoFocus
           placeholder="MM"
           maxLength={2}
           value={expireDate[0]}
@@ -34,10 +38,12 @@ export default function ExpireDateField({ field }: Props) {
             updated[0] = newValue;
             if (!validate(updated)) return;
             setExpireDate(updated);
+            if (newValue.length === 2) focusNext(0);
           }}
           inputMode="numeric"
         />
         <InfoInput
+          ref={setRef(1)}
           placeholder="YY"
           maxLength={2}
           value={expireDate[1]}

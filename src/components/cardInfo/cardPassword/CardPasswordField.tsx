@@ -26,6 +26,7 @@ export default function CardPasswordField({ field }: Props) {
       <Label>비밀번호 앞 2자리</Label>
       <InputContainer>
         <InfoInput
+          autoFocus
           placeholder="**"
           type="password"
           maxLength={2}

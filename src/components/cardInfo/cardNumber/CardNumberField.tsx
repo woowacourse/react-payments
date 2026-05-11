@@ -10,6 +10,7 @@ import {
 import { useCardNumberValidation } from './useCardNumberValidation';
 import { useCardForm } from '../../useCardForm';
 import { getCardNumberSegments, reshapeCardNumber } from '../../../utils/cardNetwork';
+import { useAutoFocus } from '../useAutoFocus';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardNumber'];
@@ -19,6 +20,7 @@ export default function CardNumberField({ field }: Props) {
   const { value: cardNumber, set: setCardNumber } = field;
   const { error, validate } = useCardNumberValidation();
   const segments = getCardNumberSegments(cardNumber.join(''));
+  const { setRef, focusNext } = useAutoFocus();
 
   return (
     <Field>
@@ -29,6 +31,8 @@ export default function CardNumberField({ field }: Props) {
         {segments.map((length, index) => (
           <InfoInput
             key={index}
+            ref={setRef(index)}
+            autoFocus={index === 0}
             placeholder="1234"
             maxLength={length}
             value={cardNumber[index] ?? ''}
@@ -37,6 +41,9 @@ export default function CardNumberField({ field }: Props) {
               const updated = reshapeCardNumber(cardNumber, index, newValue);
               if (!validate(updated)) return;
               setCardNumber(updated);
+              if (newValue.length === length && index + 1 < updated.length) {
+                focusNext(index);
+              }
             }}
             inputMode="numeric"
           />

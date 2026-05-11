@@ -23,6 +23,7 @@ export default function CvcField({ field }: Props) {
       <Label>CVC</Label>
       <InputContainer>
         <InfoInput
+          autoFocus
           placeholder="123"
           maxLength={3}
           value={cvc}
