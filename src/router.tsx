@@ -3,13 +3,18 @@ import AddNewCardPage from "@/pages/AddNewCardPage";
 import AddCardCompletePage from "@/pages/AddCardCompletePage";
 import { ROUTE_PATH } from "@/constants/routes";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: ROUTE_PATH.ADD_CARD,
+      element: <AddNewCardPage />,
+    },
+    {
+      path: ROUTE_PATH.ADD_CARD_COMPLETE,
+      element: <AddCardCompletePage />,
+    },
+  ],
   {
-    path: ROUTE_PATH.ADD_CARD,
-    element: <AddNewCardPage />,
+    basename: import.meta.env.BASE_URL,
   },
-  {
-    path: ROUTE_PATH.ADD_CARD_COMPLETE,
-    element: <AddCardCompletePage />,
-  },
-]);
+);
