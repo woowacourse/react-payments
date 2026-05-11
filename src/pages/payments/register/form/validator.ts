@@ -88,7 +88,7 @@ export const validateCvc = ({ cvc }: { cvc: string }) => {
     cvc: [
       { type: 'isRequired', message: 'CVC는 필수값입니다' },
       { type: 'isNumericString', message: 'CVC는 숫자여야합니다' },
-      { type: 'length', message: 'CVC는 3자리여야합니다' },
+      { type: 'length', message: 'CVC는 3자리여야합니다', length: 3 },
     ],
   } satisfies FormValuesRules<{ cvc: string }>;
 
