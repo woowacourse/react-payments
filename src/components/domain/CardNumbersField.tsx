@@ -3,8 +3,9 @@ import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo, ErrorStatus } from '../../types';
 import { isNumber } from '../../utils';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
+import useInputFocus from '../../hooks/useInputFocus';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
@@ -13,7 +14,7 @@ interface CardNumbersFieldProps {
 
 export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
   const [errors, setErrors] = useState<[ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus]>([null, null, null, null]);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([null, null, null, null]);
+  const { setRef, focusNext, focusPrev } = useInputFocus(4);
 
   const updateError = (index: number, status: ErrorStatus) => {
     setErrors((prev) => {
@@ -39,14 +40,14 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
     onUpdated(newValue);
     updateError(index, inputValue === '' ? 'required' : null);
 
-    if (inputValue.length === CARD_NUMBER_LENGTH_PER_INPUT && index < value.length - 1) {
-      inputRefs.current[index + 1]?.focus();
+    if (inputValue.length === CARD_NUMBER_LENGTH_PER_INPUT) {
+      focusNext(index);
     }
   };
 
   const handleKeyUp = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && index > 0 && value[index] === '') {
-      inputRefs.current[index - 1]?.focus();
+    if (e.key === 'Backspace' && value[index] === '') {
+      focusPrev(index);
     }
   };
 
@@ -86,9 +87,7 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
           {value.map((number, index) => (
             <Input
               key={index}
-              ref={(el) => {
-                inputRefs.current[index] = el;
-              }}
+              ref={setRef(index)}
               variant={errors[index] !== null ? 'error' : 'default'}
               value={number}
               type="text"

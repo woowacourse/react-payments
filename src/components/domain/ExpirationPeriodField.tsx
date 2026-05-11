@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo } from '../../types';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import useInputFocus from '../../hooks/useInputFocus';
 import type { ExpirationPeriodErrorStatus } from '../../types';
 import { isNumber, isValidMonth, isValidYear } from '../../utils';
 import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
@@ -14,7 +15,7 @@ interface ExpirationPeriodFieldProps {
 
 export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
   const [errors, setErrors] = useState<[ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]>([null, null]);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([null, null]);
+  const { setRef, focusNext, focusPrev } = useInputFocus(2);
 
   const updateError = (index: number, status: ExpirationPeriodErrorStatus) => {
     setErrors((prev) => {
@@ -40,13 +41,13 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     updateError(index, null);
 
     if (inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0) {
-      inputRefs.current[1]?.focus();
+      focusNext(index);
     }
   };
 
   const handleKeyUp = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && index === 1 && value[1] === '') {
-      inputRefs.current[0]?.focus();
+    if (e.key === 'Backspace' && value[index] === '') {
+      focusPrev(index);
     }
   };
 
@@ -96,9 +97,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
         <legend css={legendStyle}>유효기간</legend>
         <div css={inputGroupStyle}>
           <Input
-            ref={(el) => {
-              inputRefs.current[0] = el;
-            }}
+            ref={setRef(0)}
             value={value[0]}
             variant={errors[0] !== null ? 'error' : 'default'}
             type="text"
@@ -109,9 +108,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
             onBlur={(e) => handleBlur(0, e)}
           />
           <Input
-            ref={(el) => {
-              inputRefs.current[1] = el;
-            }}
+            ref={setRef(1)}
             value={value[1]}
             variant={errors[1] !== null ? 'error' : 'default'}
             type="text"
