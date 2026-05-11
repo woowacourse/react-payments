@@ -63,7 +63,7 @@ export default function PaymentForm() {
   const handleCardIssuerSelect = (value: CardIssuerType | null) => {
     setCardIssuer(value);
 
-    if (!cardIssuer) setStep(3);
+    if (value) setStep(3);
   };
 
   const handleCardNumbersChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
