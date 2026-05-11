@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type ComponentProps } from "react";
+import { forwardRef, useState, type ChangeEvent, type ComponentProps } from "react";
 import styled from "@emotion/styled";
 import Flex from "./Flex";
 import InputErrorMessage from "./InputErrorMessage";
@@ -24,61 +24,61 @@ interface ValidationInputProps extends ComponentProps<"input"> {
   isShowError?: boolean;
 }
 
-export default function ValidationInput({
-  validations,
-  onChange,
-  onBlur,
-  ...props
-}: ValidationInputProps) {
-  const [inputError, setInputError] = useState<null | Error>(null);
+const ValidationInput = forwardRef<HTMLInputElement, ValidationInputProps>(
+  function ValidationInput({ validations, onChange, onBlur, ...props }, ref) {
+    const [inputError, setInputError] = useState<null | Error>(null);
 
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const failedValidation = validations.find(
-      (validation) =>
-        event.target.value.length &&
-        validation.type === "validateOnChange" &&
-        !validation.validator(event.target.value),
+    const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+      const failedValidation = validations.find(
+        (validation) =>
+          event.target.value.length &&
+          validation.type === "validateOnChange" &&
+          !validation.validator(event.target.value),
+      );
+
+      if (failedValidation) {
+        setInputError(new Error(failedValidation.message));
+        return;
+      }
+
+      setInputError(null);
+      onChange?.(event);
+    };
+
+    const handleOnBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+      onBlur?.(event);
+
+      const failedValidation = validations.find(
+        (validation) =>
+          typeof props.value === "string" &&
+          props.value.length &&
+          validation.type === "validateOnBlur" &&
+          !validation.validator(props.value),
+      );
+
+      if (failedValidation) {
+        setInputError(new Error(failedValidation.message));
+        return;
+      }
+
+      setInputError(null);
+    };
+
+    return (
+      <Flex direction="column" gap={10}>
+        <Input
+          ref={ref}
+          $hasError={!!inputError}
+          {...props}
+          onChange={handleOnChange}
+          onBlur={handleOnBlur}
+        />
+        {props.isShowError && (
+          <InputErrorMessage>{inputError?.message}</InputErrorMessage>
+        )}
+      </Flex>
     );
+  },
+);
 
-    if (failedValidation) {
-      setInputError(new Error(failedValidation.message));
-      return;
-    }
-
-    setInputError(null);
-    onChange?.(event);
-  };
-
-  const handleOnBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
-    onBlur?.(event);
-
-    const failedValidation = validations.find(
-      (validation) =>
-        typeof props.value === "string" &&
-        props.value.length &&
-        validation.type === "validateOnBlur" &&
-        !validation.validator(props.value),
-    );
-
-    if (failedValidation) {
-      setInputError(new Error(failedValidation.message));
-      return;
-    }
-
-    setInputError(null);
-  };
-
-  return (
-    <Flex direction="column" gap={10}>
-      <Input
-        $hasError={!!inputError}
-        {...props}
-        onChange={handleOnChange}
-        onBlur={handleOnBlur}
-      />
-      {props.isShowError && (
-        <InputErrorMessage>{inputError?.message}</InputErrorMessage>
-      )}
-    </Flex>
-  );
-}
+export default ValidationInput;

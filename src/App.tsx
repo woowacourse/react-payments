@@ -2,7 +2,7 @@ import { useState } from "react";
 import CardPreview from "./components/CardPreview";
 import CardForm from "./components/CardForm";
 import { getCardBrand } from "./utils/getCardBrand";
-import { CARD_BRAND_CONFIGS, type CardFormState } from "./types";
+import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS, type CardFormState } from "./types";
 import styled from "@emotion/styled";
 import { SubmitButton } from "./components/SubmitButton";
 import { isCardFormComplete } from "./utils/validators";
@@ -42,11 +42,11 @@ function App() {
     const newBrand = getCardBrand(newState.cardNumberSegments);
     const fullNumber = newState.cardNumberSegments.join("");
 
-    if (newBrand) {
-      const newSegments = splitIntoSegments(
-        fullNumber,
-        CARD_BRAND_CONFIGS[newBrand].segmentLengths,
-      );
+    if (fullNumber.length >= 4) {
+      const segmentLengths = newBrand
+        ? CARD_BRAND_CONFIGS[newBrand].segmentLengths
+        : DEFAULT_SEGMENT_LENGTHS;
+      const newSegments = splitIntoSegments(fullNumber, segmentLengths);
       setFormState({ ...newState, cardNumberSegments: newSegments });
     } else {
       setFormState({ ...newState, cardNumberSegments: [fullNumber] });
