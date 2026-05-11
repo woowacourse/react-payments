@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-// import { selectCardType } from "../../utils/selectCardType";
 import CardPreviewNumber from "./CardPreviewNumber";
 import { maskCardNumber } from "../../utils/cardFormatters";
 import { formatExpireDate } from "../../utils/cardFormatters";
@@ -13,7 +12,6 @@ export default function CardPreview() {
   const {
     selectedItem: { color },
   } = useCardBrandContext();
-  // const cardType = selectCardType(cardNumber);
 
   return (
     <CardPreviewWrapper>
