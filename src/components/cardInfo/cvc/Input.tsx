@@ -12,6 +12,7 @@ export default function Input() {
     <Wrapper>
       <Container ref={formRef}>
         <InfoInput
+          type="text"
           value={cvc}
           placeholder="123"
           onBlur={() => handleBlur()}
