@@ -4,7 +4,15 @@ import { useRef } from "react";
 import { useFocusFirstInput } from "../../../hooks/useFocusFirstInput";
 
 export default function Input() {
-  const expireDateContext = useExpireDateContext();
+  const {
+    expireDate,
+    handleMonthBlur,
+    handleYearBlur,
+    handleMonthChange,
+    handleYearChange,
+    expireDateError,
+    yearInputRef,
+  } = useExpireDateContext();
   const formRef = useRef<HTMLFormElement | null>(null);
   useFocusFirstInput(formRef);
   return (
@@ -12,34 +20,31 @@ export default function Input() {
       <Container>
         <FieldWrapper ref={formRef}>
           <MonthInput
-            value={expireDateContext.expireDate.month}
+            type="text"
+            value={expireDate.month}
             placeholder="MM"
-            onBlur={() => expireDateContext.handleMonthBlur()}
-            onChange={(e) =>
-              expireDateContext.handleMonthChange(e.target.value)
-            }
-            $hasError={!!expireDateContext.expireDateError.month}
+            onBlur={() => handleMonthBlur()}
+            onChange={(e) => handleMonthChange(e.target.value)}
+            $hasError={!!expireDateError.month}
           />
           <ErrorContainer>
-            {expireDateContext.expireDateError.month && (
-              <Error>{expireDateContext.expireDateError.month}</Error>
-            )}
+            {expireDateError.month && <Error>{expireDateError.month}</Error>}
           </ErrorContainer>
         </FieldWrapper>
 
         <FieldWrapper>
           <YearInput
-            value={expireDateContext.expireDate.year}
+            ref={yearInputRef}
+            type="text"
+            value={expireDate.year}
             placeholder="YY"
             maxLength={2}
-            onBlur={() => expireDateContext.handleYearBlur()}
-            onChange={(e) => expireDateContext.handleYearChange(e.target.value)}
-            $hasError={!!expireDateContext.expireDateError.year}
+            onBlur={() => handleYearBlur()}
+            onChange={(e) => handleYearChange(e.target.value)}
+            $hasError={!!expireDateError.year}
           />
           <ErrorContainer>
-            {expireDateContext.expireDateError.year && (
-              <Error>{expireDateContext.expireDateError.year}</Error>
-            )}
+            {expireDateError.year && <Error>{expireDateError.year}</Error>}
           </ErrorContainer>
         </FieldWrapper>
       </Container>

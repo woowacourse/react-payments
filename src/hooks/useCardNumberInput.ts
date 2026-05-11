@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { isNumeric } from "../utils/validators";
 import { selectCardType } from "../utils/selectCardType";
 
@@ -13,6 +13,7 @@ export function useCardNumberInput() {
     initialState.cardNumberError,
   );
   const { inputConfig, cardType } = selectCardType(cardNumber);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const resetCardNumber = () => {
     setCardNumber(initialState.cardNumber);
@@ -25,6 +26,10 @@ export function useCardNumberInput() {
 
     const onlyNumbers = value.replace(/[^0-9]/g, "");
     const sliceValue = onlyNumbers.slice(0, maxLength);
+
+    if (onlyNumbers.length === maxLength && index < 3) {
+      inputRefs.current[index + 1]?.focus();
+    }
 
     if (!isNumeric(value)) {
       newError[index] = "숫자를 입력해주세요.";
@@ -59,5 +64,6 @@ export function useCardNumberInput() {
     inputConfig,
     cardType,
     resetCardNumber,
+    inputRefs,
   };
 }

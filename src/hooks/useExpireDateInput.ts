@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { isNumeric } from "../utils/validators";
 
 const initialState = {
@@ -11,6 +11,7 @@ export function useExpireDateInput() {
   const [expireDateError, setExpireDateError] = useState(
     initialState.expireDateError,
   );
+  const yearInputRef = useRef<HTMLInputElement | null>(null);
 
   const resetExpireDate = () => {
     setExpireDate(initialState.expireDate);
@@ -22,6 +23,10 @@ export function useExpireDateInput() {
     const sliceValue = onlyNumbers.substring(0, 2);
     const firstDigit = value.substring(0, 1);
     const month = Number(sliceValue);
+
+    if (onlyNumbers.length === 2) {
+      yearInputRef.current?.focus();
+    }
 
     if (!isNumeric(value)) {
       setExpireDateError((prev) => ({
@@ -97,5 +102,6 @@ export function useExpireDateInput() {
     handleMonthBlur,
     handleYearBlur,
     resetExpireDate,
+    yearInputRef,
   };
 }

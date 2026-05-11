@@ -10,6 +10,7 @@ export default function Input() {
     handleBlur,
     handleCardNumberChange,
     cardNumberError,
+    inputRefs,
   } = useCardNumberContext();
 
   const displayError = cardNumberError.find((value) => value !== "") || "";
@@ -22,6 +23,9 @@ export default function Input() {
       <Container ref={formRef}>
         {inputConfig.map((config, index) => (
           <InfoInput
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             type="text"
             key={index}
             name={config.name}
