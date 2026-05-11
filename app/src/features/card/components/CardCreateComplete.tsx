@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { CARD_BRAND } from "../Constants";
 import styled from "@emotion/styled";
 import { RadiusButton } from "../style/Button";
@@ -8,6 +8,7 @@ export default function CardCreateComplete() {
     firstDigitsCardNumber: string;
     cardBrand: keyof typeof CARD_BRAND;
   };
+  const navigate = useNavigate();
   return (
     <RootContainer>
       <CardCreateCompleteContent>
@@ -19,7 +20,9 @@ export default function CardCreateComplete() {
           {firstDigitsCardNumber}로 시작하는 {CARD_BRAND[cardBrand].title}
           카드 가 등록되었어요.
         </p>
-        <RadiusButton type="button">확인</RadiusButton>
+        <RadiusButton type="button" onClick={() => navigate("/card/")}>
+          확인
+        </RadiusButton>
       </CardCreateCompleteContent>
     </RootContainer>
   );
