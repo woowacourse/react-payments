@@ -1,8 +1,6 @@
-import { useState } from "react";
 import CardPreview from "./components/CardPreview";
 import CardForm from "./components/CardForm";
-import { useCardNumberSegments } from "./hooks/useCardNumberSegments";
-import type { CardFormState } from "./types";
+import { useCardForm } from "./hooks/useCardForm";
 import styled from "@emotion/styled";
 import { SubmitButton } from "./components/SubmitButton";
 import { isCardFormComplete } from "./utils/validators";
@@ -17,32 +15,7 @@ const View = styled.div`
 `;
 
 function App() {
-  const { segments, brand, handleChange: handleCardNumberChange } =
-    useCardNumberSegments();
-
-  const [formState, setFormState] = useState({
-    cardCompany: "",
-    expiryMonth: "",
-    expiryYear: "",
-    cvc: "",
-    cardPassword: "",
-  });
-
-  const cardFormState: CardFormState = {
-    ...formState,
-    cardNumberSegments: segments,
-  };
-
-  const handleSetFormState = (newState: CardFormState) => {
-    handleCardNumberChange(newState.cardNumberSegments);
-    setFormState({
-      cardCompany: newState.cardCompany,
-      expiryMonth: newState.expiryMonth,
-      expiryYear: newState.expiryYear,
-      cvc: newState.cvc,
-      cardPassword: newState.cardPassword,
-    });
-  };
+  const { cardFormState, brand, handleSetFormState } = useCardForm();
 
   return (
     <Routes>
@@ -52,10 +25,10 @@ function App() {
           <View>
             <CardPreview
               cardBrand={brand}
-              cardNumberSegments={segments}
-              expiryMonth={formState.expiryMonth}
-              expiryYear={formState.expiryYear}
-              cardCompany={formState.cardCompany}
+              cardNumberSegments={cardFormState.cardNumberSegments}
+              expiryMonth={cardFormState.expiryMonth}
+              expiryYear={cardFormState.expiryYear}
+              cardCompany={cardFormState.cardCompany}
             />
             <CardForm
               formState={cardFormState}
@@ -72,8 +45,8 @@ function App() {
         path="/react-payments/success"
         element={
           <SubmitSuccess
-            firstNumberSegment={segments[0]}
-            cardCompany={formState.cardCompany}
+            firstNumberSegment={cardFormState.cardNumberSegments[0]}
+            cardCompany={cardFormState.cardCompany}
           />
         }
       />
