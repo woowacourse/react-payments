@@ -1,11 +1,7 @@
-import { useRef, useState } from "react";
-
 import { CARD_NUMBER_FIELD_COUNT, CARD_NUMBER_FIELD_MAX_LENGTH } from "../constants/cardField";
-import {
-  SUPPORTED_NETWORKS_MESSAGE,
-  getRequiredLengthForDetection,
-} from "../utils/cardNetwork";
+import { SUPPORTED_NETWORKS_MESSAGE, getRequiredLengthForDetection } from "../utils/cardNetwork";
 import { validateCardNumbers } from "../utils/validators";
+import { useMultiFieldInput } from "./useMultiFieldInput";
 
 type UseCardNumberInputParams = {
   onValueHandler: (numbers: string[]) => void;
@@ -13,55 +9,27 @@ type UseCardNumberInputParams = {
   isSupportedNetwork: boolean;
 };
 
-export const useCardNumberInput = ({
-  onValueHandler,
-  maxLength,
-  isSupportedNetwork,
-}: UseCardNumberInputParams) => {
-  const [inputValues, setInputValues] = useState<string[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [errorIndex, setErrorIndex] = useState<number>(-1);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const latestValues = useRef<string[]>([]);
-
+export const useCardNumberInput = ({ onValueHandler, maxLength, isSupportedNetwork }: UseCardNumberInputParams) => {
   const lastInputMaxLength = maxLength - CARD_NUMBER_FIELD_MAX_LENGTH * (CARD_NUMBER_FIELD_COUNT - 1);
+  const base = useMultiFieldInput({
+    fieldCount: CARD_NUMBER_FIELD_COUNT,
+    getMaxLength: (index) =>
+      index === CARD_NUMBER_FIELD_COUNT - 1 ? lastInputMaxLength : CARD_NUMBER_FIELD_MAX_LENGTH,
+    validate: validateCardNumbers,
+    onValueHandler,
+  });
 
-  const totalDigits = inputValues.join("");
+  const totalDigits = base.inputValues.join("");
   const warningMessage =
     !isSupportedNetwork && totalDigits.length >= getRequiredLengthForDetection(totalDigits)
       ? SUPPORTED_NETWORKS_MESSAGE
       : "";
 
-  const onChange = (index: number, value: string) => {
-    const newValues = [...inputValues];
-    newValues[index] = value;
-    latestValues.current = newValues;
-
-    setInputValues(newValues);
-    setErrorMessage("");
-    onValueHandler(newValues);
-
-    const currentMax = index === CARD_NUMBER_FIELD_COUNT - 1 ? lastInputMaxLength : CARD_NUMBER_FIELD_MAX_LENGTH;
-    if (value.length === currentMax) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
-
-  const handleBlur = () => {
-    const { index, message } = validateCardNumbers(latestValues.current);
-    setErrorIndex(index);
-    setErrorMessage(message);
-  };
-
   return {
-    inputValues,
-    inputRefs,
-    errorMessage,
-    errorIndex,
+    ...base,
     warningMessage,
     fieldCount: CARD_NUMBER_FIELD_COUNT,
     fieldMaxLength: CARD_NUMBER_FIELD_MAX_LENGTH,
     lastInputMaxLength,
-    handlers: { onChange, handleBlur },
   };
 };
