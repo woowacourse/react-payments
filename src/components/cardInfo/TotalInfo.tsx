@@ -19,11 +19,6 @@ export default function TotalInfo() {
           </ConditionalExpireDate>
         </ConditionalCardBrand>
       </CardNumber>
-      {/* <ConditionalPassword />
-      <ConditionalCvc />
-      <ConditionalExpireDate />
-      <ConditionalCardBrand />
-      <CardNumber /> */}
     </>
   );
 }
