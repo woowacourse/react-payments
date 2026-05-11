@@ -2,7 +2,11 @@ import styled from "@emotion/styled";
 import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
-import type { CardNumber as CardNumberType, CardExpiryDate as CardExpiryDateType } from "../../types";
+import { CARD_BRAND } from "../../Constants";
+import type {
+  CardNumber as CardNumberType,
+  CardExpiryDate as CardExpiryDateType,
+} from "../../types";
 
 interface CardPreviewProps {
   cardNumber: CardNumberType;
@@ -10,16 +14,15 @@ interface CardPreviewProps {
   cardBrand: string | null;
 }
 
-export function CardPreview({ cardNumber, cardExpiryDate, cardBrand }: CardPreviewProps) {
+export function CardPreview({
+  cardNumber,
+  cardExpiryDate,
+  cardBrand,
+}: CardPreviewProps) {
   const getCardBgHex = (cardBrand: string) => {
-    if (cardBrand === "bc") return "#F04651";
-    if (cardBrand === "sinhan") return "#0046FF";
-    if (cardBrand === "kakao") return "#FFE600";
-    if (cardBrand === "hyundai") return "#000000";
-    if (cardBrand === "woori") return "#007BC8";
-    if (cardBrand === "lotte") return "#ED1C24";
-    if (cardBrand === "hana") return "#009490";
-    if (cardBrand === "kookmin") return "#6A6056";
+    if (Object.keys(CARD_BRAND).includes(cardBrand)) {
+      return CARD_BRAND[cardBrand as keyof typeof CARD_BRAND].bgHex;
+    }
     return "#333333";
   };
   return (

@@ -14,26 +14,34 @@ export const NETWORK_BRAND_RULE = {
 export const CARD_BRAND = {
   bc: {
     title: "BC",
+    bgHex: "F04651",
   },
   sinhan: {
     title: "신한",
+    bgHex: "0046FF",
   },
   kakao: {
     title: "카카오뱅크",
+    bgHex: "FFE600",
   },
   hyundai: {
     title: "현대",
+    bgHex: "000000",
   },
   woori: {
     title: "우리",
+    bgHex: "007BC8",
   },
   lotte: {
     title: "롯데",
+    bgHex: "ED1C24",
   },
   hana: {
     title: "하나",
+    bgHex: "009490",
   },
   kookmin: {
     title: "국민",
+    bgHex: "6A6056",
   },
 };
