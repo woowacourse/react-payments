@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 const Button = styled.button`
   background: #333333;
@@ -24,6 +25,12 @@ interface SubmitButtonProps {
 }
 
 export function SubmitButton(props: SubmitButtonProps) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/react-payments/success");
+  };
+
   if (!props.isCardFormComplete) return null;
-  return <Button>확인</Button>;
+  return <Button onClick={handleClick}>확인</Button>;
 }
