@@ -30,11 +30,17 @@ export const useCardNumber = ({value, setValue}: Props) => {
       return newArr;
     },
 
-    errorChecker: (val) => val.map((num, index) => getCardNumberError(num, maxLengthList[index]) !== ''),
+    errorChecker: (val) => {
+      const brand = getCardBrand(val.join(''));
+      const currentFormat = getCardNumberArrayByBrand(brand);
+      return val.map((num, index) => getCardNumberError(num, currentFormat[index]) !== '');
+    },
 
     errorMessageGenerator: (val) => {
-      const errorIndex = val.findIndex((num, index) => getCardNumberError(num, maxLengthList[index]) !== '');
-      return errorIndex !== -1 ? getCardNumberError(val[errorIndex], maxLengthList[errorIndex]) : '';
+      const brand = getCardBrand(val.join(''));
+      const currentFormat = getCardNumberArrayByBrand(brand);
+      const errorIndex = val.findIndex((num, index) => getCardNumberError(num, currentFormat[index]) !== '');
+      return errorIndex !== -1 ? getCardNumberError(val[errorIndex], currentFormat[errorIndex]) : '';
     },
   });
 };
