@@ -4,7 +4,6 @@ interface InputFieldConfig {
   hintText?: string;
   label: string;
   placeholder: string[];
-  maxLength: number;
 }
 
 interface SelectFieldConfig {

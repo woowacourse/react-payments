@@ -9,9 +9,10 @@ import { validateNaN } from '../../../utils/validate';
 interface Props {
   fields: {
     value: string;
+    touched: boolean;
+    maxLength: number;
     error: boolean;
     errorMessage: string;
-    touched: boolean;
   }[];
   fieldConfig: InputFieldConfig;
   onChanges: ((e: ChangeEvent<HTMLInputElement>) => void)[];
@@ -27,12 +28,13 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+    maxLength: number
   ) => {
     if (validateNaN(e.target.value)) return;
     onChange(e);
 
-    if (e.target.value.length === fieldConfig.maxLength) {
+    if (e.target.value.length === maxLength) {
       inputRefs.current[index + 1]?.focus();
     }
   };
@@ -60,7 +62,7 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
       <Label htmlFor={fieldConfig.id}>{fieldConfig.label}</Label>
 
       <InputFieldWrapper>
-        {fields.map(({ value, error, touched }, index) => (
+        {fields.map(({ value, touched, maxLength, error }, index) => (
           <InputField
             ref={(el) => {
               inputRefs.current[index] = el;
@@ -70,12 +72,12 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
             isError={touched && error}
             id={index === 0 ? fieldConfig.id : `${fieldConfig.id}-${index}`}
             type="text"
-            maxLength={fieldConfig.maxLength}
+            maxLength={maxLength}
             inputMode="numeric"
             autoComplete="off"
             value={value}
             placeholder={fieldConfig.placeholder[index]}
-            onChange={(e) => handleChange(e, index, onChanges[index])}
+            onChange={(e) => handleChange(e, index, onChanges[index], maxLength)}
             onFocus={() => setActiveFieldIdx(index)}
             onBlur={() => setActiveFieldIdx(null)}
             onKeyDown={(e) => handleKeyDown(e, index)}

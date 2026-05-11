@@ -1,18 +1,10 @@
 import { CARD_BRAND_RULE, ERROR_MESSAGE, VALIDATION_RULE } from '../constants';
 
-export const cardNumbersValidator = (inputValue: string, index: number) => {
-  const isFirstCardNumbers = index === 0;
-  if (isFirstCardNumbers && validateCardBrandNumber(inputValue)) {
+export const cardNumbersValidator = (inputValue: string, maxLength: number) => {
+  if (validateInputValueLength(inputValue, maxLength)) {
     return {
       error: true,
-      errorMessage: ERROR_MESSAGE.INVALID_CARD_BRAND_NUMBER,
-    };
-  }
-
-  if (validateInputValueLength(inputValue, VALIDATION_RULE.CARD_NUMBERS_LENGTH)) {
-    return {
-      error: true,
-      errorMessage: ERROR_MESSAGE.MAX_LENGTH(VALIDATION_RULE.CARD_NUMBERS_LENGTH),
+      errorMessage: ERROR_MESSAGE.MAX_LENGTH(maxLength),
     };
   }
 
@@ -87,18 +79,9 @@ export const validateNaN = (inputValue: string) => isNaN(Number(inputValue));
 const validateInputValueLength = (inputValue: string, inputMaxLength: number) =>
   inputValue.length < inputMaxLength;
 
-// cardBrand 번호가 맞는지 검증
-export const validateCardBrandNumber = (inputValue: string) => {
-  if (inputValue.startsWith(CARD_BRAND_RULE.VISA.PREFIX)) return false;
-
-  const slicedValue = Number(inputValue.slice(0, CARD_BRAND_RULE.MASTER_CARD.PREFIX_LENGTH));
-  if (
-    slicedValue >= CARD_BRAND_RULE.MASTER_CARD.PREFIX_MIN &&
-    slicedValue <= CARD_BRAND_RULE.MASTER_CARD.PREFIX_MAX
-  )
-    return false;
-
-  return true;
+// cardBrand 규칙이 맞는지 검증
+export const validateCardBrand = (inputValue: string) => {
+  return CARD_BRAND_RULE.some((brand) => !brand.pattern.test(inputValue));
 };
 
 // 월 범위를 벗어난 경우

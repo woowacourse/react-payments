@@ -9,10 +9,16 @@ import {
   passwordValidator,
 } from '../../utils/validate';
 import InputFieldForm from '../Common/Form/InputFieldForm';
-import { CARD_ISSUER_CONFIG, INPUT_FIELD_CONFIG, SELECT_FIELD_CONFIG } from '../../constants';
+import {
+  CARD_ISSUER_CONFIG,
+  INPUT_FIELD_CONFIG,
+  SELECT_FIELD_CONFIG,
+  VALIDATION_RULE,
+} from '../../constants';
 import { convertValueFormat } from '../../utils/convert';
 import CardSelect from '../Select/CardSelect';
-import { getCardIssuerBackgroundColor } from '../../utils/cards';
+import { detectCardBrand, getCardIssuerBackgroundColor } from '../../utils/cards';
+import { getCardNumbersMaxLength } from '../../utils/fields';
 
 export type Step = 1 | 2 | 3 | 4 | 5;
 export type CardNumbersType = [string, string, string, string];
@@ -65,14 +71,24 @@ export default function PaymentForm() {
     newCardNumbers[index] = e.target.value;
     setCardNumbers(newCardNumbers);
 
-    if (newCardNumbers.every((value, i) => !cardNumbersValidator(value, i).error)) setStep(2);
+    if (
+      newCardNumbers.every(
+        (value) =>
+          !cardNumbersValidator(value, getCardNumbersMaxLength(detectCardBrand(cardNumbers), index))
+            .error
+      )
+    )
+      setStep(2);
   };
 
   return (
     <Container>
       <CardPreview
-        cardNumberList={cardNumbers}
-        expirationDate={`${expirationDate['month']}/${expirationDate['year']}`}
+        fields={{
+          cardNumbers,
+          expirationDate: `${expirationDate['month']}/${expirationDate['year']}`,
+        }}
+        cardBrand={detectCardBrand(cardNumbers)}
         backgroundColor={getCardIssuerBackgroundColor(cardIssuer)}
       />
 
@@ -86,6 +102,7 @@ export default function PaymentForm() {
               fields={convertValueFormat(password).map((value) => ({
                 value,
                 touched: !!value,
+                maxLength: VALIDATION_RULE.PASSWORD_LENGTH,
                 ...passwordValidator(value),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['PASSWORD']}
@@ -100,6 +117,7 @@ export default function PaymentForm() {
               fields={convertValueFormat(cvc).map((value) => ({
                 value,
                 touched: !!value,
+                maxLength: VALIDATION_RULE.CVC_LENGTH,
                 ...cvcValidator(value),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['CVC']}
@@ -117,6 +135,7 @@ export default function PaymentForm() {
               fields={convertValueFormat(expirationDate).map((value, index) => ({
                 value,
                 touched: !!value,
+                maxLength: VALIDATION_RULE.EXPIRATION_DATE_LENGTH,
                 ...expirationDateValidator(value, index),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['EXPIRATION_DATE']}
@@ -142,11 +161,16 @@ export default function PaymentForm() {
           hintText={INPUT_FIELD_CONFIG['CARD_NUMBERS'].hintText}
         >
           <InputFieldForm
-            fields={convertValueFormat(cardNumbers).map((value, index) => ({
-              value,
-              touched: !!value,
-              ...cardNumbersValidator(value, index),
-            }))}
+            fields={convertValueFormat(cardNumbers).map((value, index) => {
+              const maxLength = getCardNumbersMaxLength(detectCardBrand(cardNumbers), index);
+
+              return {
+                value,
+                touched: !!value,
+                maxLength,
+                ...cardNumbersValidator(value, maxLength),
+              };
+            })}
             fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
             onChanges={[0, 1, 2, 3].map(handleCardNumbersChange)}
           />

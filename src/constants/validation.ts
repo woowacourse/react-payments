@@ -8,7 +8,6 @@ export const ERROR_MESSAGE = {
 } as const;
 
 export const VALIDATION_RULE = {
-  CARD_NUMBERS_LENGTH: 4,
   EXPIRATION_DATE_LENGTH: 2,
   CVC_LENGTH: 3,
   MAX_MONTH: 12,
