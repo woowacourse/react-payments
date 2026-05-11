@@ -1,33 +1,21 @@
 import { styled } from 'storybook/theming';
 import CardNumbers from './CardNumbers';
 import { CardNumbersType } from '../Form/PaymentForm';
-import { validateNaN } from '../../utils/validate';
 import { BRAND_ICON_MAP, CARD_BRAND } from '../../constants';
 
+export type CardBrand = (typeof CARD_BRAND)[keyof typeof CARD_BRAND];
+
 interface Props {
-  cardNumberList: CardNumbersType;
-  expirationDate: string;
+  fields: {
+    cardNumbers: CardNumbersType;
+    expirationDate: string;
+  };
+  cardBrand: CardBrand;
   backgroundColor: string;
 }
 
-export default function CardPreview({ cardNumberList, expirationDate, backgroundColor }: Props) {
-  const cardNumbersToBrand = (value: string) => {
-    if (validateNaN(value)) return 'NONE';
-
-    if (value.length > 0) {
-      if (value.startsWith('4')) return CARD_BRAND['VISA'];
-      if (value.length >= 2) {
-        const numbers = Number(value.slice(0, 2));
-        if (numbers >= 51 && numbers <= 55) return CARD_BRAND['MASTER_CARD'];
-      }
-    }
-
-    return 'NONE';
-  };
-
-  const cardBrand = cardNumbersToBrand(cardNumberList[0]);
-
-  const [month = '', year = ''] = expirationDate.split('/');
+export default function CardPreview({ fields, cardBrand, backgroundColor }: Props) {
+  const [month, year] = fields.expirationDate.split('/');
 
   return (
     <Container $backgroundColor={backgroundColor}>
@@ -42,7 +30,7 @@ export default function CardPreview({ cardNumberList, expirationDate, background
 
       <ContentWrapper>
         <CardNumberList>
-          {cardNumberList.map((numbers, index) => (
+          {fields.cardNumbers.map((numbers, index) => (
             <CardNumbers key={`cardNumbers-${index}`} numbers={numbers} index={index} />
           ))}
         </CardNumberList>
