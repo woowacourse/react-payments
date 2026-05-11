@@ -1,7 +1,8 @@
 import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { css } from "@emotion/react";
 import { validateCardNumber } from "../../utils/validators";
+import useInputValidation from "../../hooks/useInputValidation";
 
 const CardNumberInputSection = ({
   onValueHandler,
@@ -12,15 +13,14 @@ const CardNumberInputSection = ({
   inputValues: string[];
   fieldConfig: number[];
 }) => {
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [errorIndex, setErrorIndex] = useState<number>(-1);
+  const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(validateCardNumber, inputValues);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const onChange = (index: number, value: string) => {
     const newValues = [...inputValues];
     newValues[index] = value;
 
-    setErrorMessage("");
+    clearError();
     onValueHandler(newValues);
 
     // 현재 칸이 꽉 찼고, 마지막 칸이 아닐 때 다음칸 Input Dom에 포커스 이동.
@@ -28,15 +28,6 @@ const CardNumberInputSection = ({
       inputRefs.current[index + 1]?.focus();
     }
   };
-
-  const handleBlur = () => {
-    const { errorIndex, message } = validateCardNumber(inputValues);
-    setErrorIndex(errorIndex);
-    setErrorMessage(message);
-  };
-
-  console.log(fieldConfig);
-  console.log(errorIndex);
 
   return (
     <InputSectionLayout

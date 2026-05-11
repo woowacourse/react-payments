@@ -1,7 +1,7 @@
-import { useState } from "react";
 import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
 import { validateExpiryDate } from "../../utils/validators";
+import useInputValidation from "../../hooks/useInputValidation";
 
 const ExpiryDateInputSection = ({
   onValueHandler,
@@ -10,21 +10,15 @@ const ExpiryDateInputSection = ({
   onValueHandler: (cardInfo: string[]) => void;
   inputValues: string[];
 }) => {
-  const [errorMessage, setErrorMessage] = useState("");
-  const [errorIndex, setErrorIndex] = useState<number>(-1);
+  const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(validateExpiryDate, inputValues);
   const placeHolder = ["MM", "YY"];
+
   const onChange = (index: number, value: string) => {
     const newValues = [...inputValues];
     newValues[index] = value;
 
-    setErrorMessage("");
+    clearError();
     onValueHandler(newValues);
-  };
-
-  const handleBlur = () => {
-    const { errorIndex, message } = validateExpiryDate(inputValues);
-    setErrorIndex(errorIndex);
-    setErrorMessage(message);
   };
 
   return (

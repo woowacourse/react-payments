@@ -1,7 +1,7 @@
-import { useState } from "react";
 import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
 import { validateCvc } from "../../utils/validators";
+import useInputValidation from "../../hooks/useInputValidation";
 
 const CvcInputSection = ({
   onValueHandler,
@@ -10,16 +10,11 @@ const CvcInputSection = ({
   onValueHandler: (cardInfo: string) => void;
   inputValue: string;
 }) => {
-  const [errorMessage, setErrorMessage] = useState("");
+  const { errorMessage, clearError, handleBlur } = useInputValidation(validateCvc, inputValue);
 
   const onChange = (value: string) => {
-    setErrorMessage("");
+    clearError();
     onValueHandler(value);
-  };
-
-  const handleBlur = () => {
-    const { message } = validateCvc(inputValue);
-    setErrorMessage(message);
   };
 
   return (
