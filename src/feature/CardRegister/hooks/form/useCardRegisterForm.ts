@@ -22,13 +22,13 @@ export function useCardRegisterForm() {
   const passwordField = useCardPassword();
 
   // step을 파생값으로 두어 간편하게 관리
-  const isBrandVisible = numberField.isComplete;
-  const isExpiryVisible = isBrandVisible && companyField.isComplete;
+  const isCompanyVisible = numberField.isComplete;
+  const isExpiryVisible = isCompanyVisible && companyField.isComplete;
   const isCvcVisible = isExpiryVisible && expiryField.isComplete;
   const isPasswordVisible = isCvcVisible && cvcField.isComplete;
 
   const visibleFields = {
-    brand: isBrandVisible,
+    company: isCompanyVisible,
     expiry: isExpiryVisible,
     cvc: isCvcVisible,
     password: isPasswordVisible,
@@ -106,7 +106,7 @@ export function useCardRegisterForm() {
         errorMessage: numberField.errMsg,
         errorIndex: numberField.firstErrIdx,
       },
-      cardBrand: {
+      cardCompany: {
         selectedCompany: companyField.selectedCompany,
         onChange: companyField.handleChange,
       },

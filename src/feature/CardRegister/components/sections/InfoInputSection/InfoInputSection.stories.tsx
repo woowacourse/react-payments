@@ -2,7 +2,7 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import {fn} from 'storybook/test';
 
 import InfoInputSection from './InfoInputSection';
-import BrandSelectField from '../../inputs/BrandSelectField/BrandSelectField';
+import CompanySelectField from '../../inputs/CompanySelectField/CompanySelectField';
 import CvcField from '../../inputs/CvcField/CvcField';
 import ExpiryField from '../../inputs/ExpiryField/ExpiryField';
 import NumberField from '../../inputs/NumberField/NumberField';
@@ -21,7 +21,7 @@ const numberSlot = (
   <NumberField inputProps={[0, 1, 2, 3].map(() => createInputProps('', 4, '1234'))} errorMessage='' errorIndex={-1} />
 );
 
-const brandSlot = <BrandSelectField selectedCompany={null} onChange={fn()} />;
+const companySlot = <CompanySelectField selectedCompany={null} onChange={fn()} />;
 
 const expirySlot = (
   <ExpiryField
@@ -44,7 +44,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     numberSlot,
-    brandSlot: null,
+    companySlot: null,
     expirySlot: null,
     cvcSlot: null,
     passwordSlot: null,
@@ -58,20 +58,20 @@ export const NumberOnly: Story = {};
 
 export const WithCompanySelect: Story = {
   args: {
-    brandSlot,
+    companySlot,
   },
 };
 
 export const WithExpiry: Story = {
   args: {
-    brandSlot,
+    companySlot,
     expirySlot,
   },
 };
 
 export const FullVisible: Story = {
   args: {
-    brandSlot,
+    companySlot,
     expirySlot,
     cvcSlot,
     passwordSlot,

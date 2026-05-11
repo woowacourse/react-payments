@@ -6,12 +6,12 @@ type InfoInputSectionProps = {
   expirySlot: ReactNode;
   cvcSlot: ReactNode;
   passwordSlot: ReactNode;
-  brandSlot: ReactNode;
+  companySlot: ReactNode;
 };
 
-const InfoInputSection = ({numberSlot, brandSlot, expirySlot, cvcSlot, passwordSlot}: InfoInputSectionProps) => {
+const InfoInputSection = ({numberSlot, companySlot, expirySlot, cvcSlot, passwordSlot}: InfoInputSectionProps) => {
   // 화면 렌더 순서는 입력 순서의 반대이므로 순서가 있는 배열로 만들어 순회 렌더 시 password가 제일 위로 오도록 설계
-  const orderedSlots = [passwordSlot, cvcSlot, expirySlot, brandSlot, numberSlot];
+  const orderedSlots = [passwordSlot, cvcSlot, expirySlot, companySlot, numberSlot];
 
   return (
     <Container>

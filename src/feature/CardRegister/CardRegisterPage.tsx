@@ -6,7 +6,7 @@ import InfoInputSection from './components/sections/InfoInputSection/InfoInputSe
 import CardPreviewContainer from './components/previews/CardPreviewContainer/CardPreviewContainer';
 
 import NumberField from './components/inputs/NumberField/NumberField';
-import BrandSelectField from './components/inputs/BrandSelectField/BrandSelectField';
+import CompanySelectField from './components/inputs/CompanySelectField/CompanySelectField';
 import ExpiryField from './components/inputs/ExpiryField/ExpiryField';
 import CvcField from './components/inputs/CvcField/CvcField';
 import PasswordField from './components/inputs/PasswordField/PasswordField';
@@ -22,7 +22,7 @@ const CardRegisterPage = () => {
         <CardPreviewSection previewSlot={<CardPreviewContainer {...cardPreview} />} />
         <InfoInputSection
           numberSlot={<NumberField {...fieldProps.cardNumbers} />}
-          brandSlot={visibleFields.brand ? <BrandSelectField {...fieldProps.cardBrand} /> : null}
+          companySlot={visibleFields.company ? <CompanySelectField {...fieldProps.cardCompany} /> : null}
           expirySlot={visibleFields.expiry ? <ExpiryField {...fieldProps.cardExpiryDate} /> : null}
           cvcSlot={visibleFields.cvc ? <CvcField {...fieldProps.cardCvc} /> : null}
           passwordSlot={visibleFields.password ? <PasswordField {...fieldProps.cardPassword} /> : null}

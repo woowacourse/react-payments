@@ -4,12 +4,12 @@ import type {CardCompanyType} from '@/domain/card/cardCompany';
 import InputContainer from '../InputContainer/InputContainer';
 import {FieldLayout} from '../styles/inputFieldStyles';
 
-type BrandSelectFieldProps = {
+type CompanySelectFieldProps = {
   selectedCompany: CardCompanyType | null;
   onChange: (value: CardCompanyType | null) => void;
 };
 
-const BrandSelectField = ({selectedCompany, onChange}: BrandSelectFieldProps) => {
+const CompanySelectField = ({selectedCompany, onChange}: CompanySelectFieldProps) => {
   return (
     <InputContainer title='카드사를 선택해 주세요' description='현재 국내 카드사만 가능합니다.'>
       <FieldLayout>
@@ -46,4 +46,4 @@ const Select = styled.select`
   }
 `;
 
-export default BrandSelectField;
+export default CompanySelectField;
