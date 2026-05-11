@@ -2,6 +2,7 @@ import check from '../assets/check.png';
 import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { CARD_ISSUER } from '../constants/constant';
 import type { CardIssuerType } from '../types/cardStausTypes';
+import Button from '../components/Button';
 
 export default function CardRegistrationComplete() {
   const navigate = useNavigate();
@@ -41,25 +42,7 @@ export default function CardRegistrationComplete() {
         {state.cardNumber}로 시작하는 <br />
         {CARD_ISSUER[state.cardIssuer]}가 등록되었어요.
       </h1>
-      <button
-        onClick={() => navigate('/')}
-        css={(theme) => ({
-          backgroundColor: theme.colors.cardBackground,
-          width: '100%',
-          height: '44px',
-          borderRadius: '5px',
-        })}
-      >
-        <span
-          css={(theme) => ({
-            ...theme.typography.mode,
-            color: theme.colors.white,
-            textAlign: 'center',
-          })}
-        >
-          확인
-        </span>
-      </button>
+      <Button onClick={() => navigate('/')}>확인</Button>
     </div>
   );
 }

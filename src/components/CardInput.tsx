@@ -16,6 +16,7 @@ import type {
 } from '../types/cardStausTypes';
 import CardIssuer from './CardIssuer';
 import { useCardInput } from '../hooks/useCardInput';
+import Button from './Button';
 
 type CardInputProps = {
   cardStatus: CardStatus;
@@ -91,20 +92,7 @@ export default function CardInput({
         }}
       />
       {step >= 4 && isCardPasswordValid && (
-        <button
-          type="submit"
-          css={(theme) => ({
-            backgroundColor: theme.colors.cardBackground,
-            width: '100%',
-            height: '44px',
-            borderRadius: '5px',
-            ...theme.typography.mode,
-            color: theme.colors.white,
-            textAlign: 'center',
-          })}
-        >
-          확인
-        </button>
+        <Button type="submit">확인</Button>
       )}
     </form>
   );
