@@ -4,7 +4,7 @@ export type CardNetwork = "VISA" | "MasterCard" | "Diners" | "AMEX" | "UnionPay"
 
 export type CardIssuer = keyof typeof CARD_ISSUER;
 
-export type CardNumberSegments = [string, string, string, string]
+export type CardNumberSegments = string[]
 
 export type CardExpiryDate = [string, string];
 

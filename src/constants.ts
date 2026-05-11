@@ -1,14 +1,16 @@
 export const CARD_PASSWORD_LENGTH = 2;
 
-export const CARD_VALIDATION_CODE_DEFAULT_LENGTH = 3;
-
 export const CARD_EXPIRY_MONTH_LENGTH = 2;
 
 export const CARD_EXPIRY_MONTH_RANGE = Array.from({ length: 12 }).map((_, index) => String(index + 1).padStart(2, "0"));
 
 export const CARD_EXPIRY_YEAR_LENGTH = 2;
 
-export const CARD_NUMBER_SEGMENT_LENGTH = 4;
+export const DEFAULT_CARD_NUMBER_FORMAT = [4, 4, 4, 4];
+
+export const DEFAULT_CARD_VALIDATION_CODE_LENGTH = 3;
+
+export const DEFAULT_CARD_NUMBER_SEGMENT_LENGTH = 4;
 
 export const UNMASKED_CARD_NUMBER_SEGMENT_COUNT = 2;
 
@@ -30,6 +32,7 @@ export const CARD_NETWORK = {
       minMatchLength: 1,
     }],
     cardValidationCodeLength: 3,
+    cardNumberFormat: [4, 4, 4, 4],
     cardNumberLength: 16,
   },
   "MasterCard": {
@@ -38,6 +41,7 @@ export const CARD_NETWORK = {
       minMatchLength: 2,
     }],
     cardValidationCodeLength: 3,
+    cardNumberFormat: [4, 4, 4, 4],
     cardNumberLength: 16,
   },
   "Diners": {
@@ -46,6 +50,7 @@ export const CARD_NETWORK = {
       minMatchLength: 2,
     }],
     cardValidationCodeLength: 3,
+    cardNumberFormat: [4, 6, 4],
     cardNumberLength: 14,
   },
   "AMEX": {
@@ -54,6 +59,7 @@ export const CARD_NETWORK = {
       minMatchLength: 2,
     }],
     cardValidationCodeLength: 4,
+    cardNumberFormat: [4, 6, 5],
     cardNumberLength: 15,
   },
   "UnionPay": {
@@ -70,6 +76,7 @@ export const CARD_NETWORK = {
       }
     ],
     cardValidationCodeLength: 3,
+    cardNumberFormat: [4, 4, 4, 4],
     cardNumberLength: 16,
   }
 } as const
