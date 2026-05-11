@@ -1,9 +1,14 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 export default function SendButton() {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
-      <Button>확인</Button>
+      <Button onClick={() => navigate("/react-payments/enrollment")}>
+        확인
+      </Button>
     </Wrapper>
   );
 }
