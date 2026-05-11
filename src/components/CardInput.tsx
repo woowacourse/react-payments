@@ -51,21 +51,20 @@ export default function CardInput({
     setStep((prev) => Math.max(prev, nextStep));
   };
 
-  const handleCardNumbers =
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCardStatus.handleCardNumbers(index)(e);
+  const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardStatus.handleCardNumbers(index)(e);
 
-      const nextCardNumbers = [...cardStatus.cardNumbers];
-      nextCardNumbers[index] = e.target.value;
-      const nextCardNumber = nextCardNumbers.join('');
-      const nextCardBrand = getCardBrand(nextCardNumber);
+    const nextCardNumbers = [...cardStatus.cardNumbers];
+    nextCardNumbers[index] = e.target.value;
+    const nextCardNumber = nextCardNumbers.join('');
+    const nextCardBrand = getCardBrand(nextCardNumber);
 
-      if (
-        nextCardBrand !== 'unknown' &&
-        nextCardNumber.length === getCardNumberLength(nextCardBrand)
-      ) {
-        openStep(1);
-      }
+    if (
+      nextCardBrand !== 'unknown' &&
+      nextCardNumber.length === getCardNumberLength(nextCardBrand)
+    ) {
+      openStep(1);
+    }
   };
 
   const handleCardIssuer = (issuer: CardIssuerType) => {
@@ -73,17 +72,20 @@ export default function CardInput({
     openStep(2);
   };
 
-  const handleCardExpiryDate =
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCardExpiry.handleCardExpiryDate(index)(e);
+  const handleCardExpiryDate = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardExpiry.handleCardExpiryDate(index)(e);
 
-      const nextCardExpiryDate = [...cardExpiry.cardExpiryDate];
-      nextCardExpiryDate[index] = e.target.value;
+    const nextCardExpiryDate = [...cardExpiry.cardExpiryDate];
+    nextCardExpiryDate[index] = e.target.value;
 
-      if (nextCardExpiryDate.every((date) => date.length === 2)) {
-        openStep(3);
-      }
-    };
+    if (
+      nextCardExpiryDate[0] !== '0' &&
+      nextCardExpiryDate[0] !== '00' &&
+      nextCardExpiryDate[1].length === 2
+    ) {
+      openStep(3);
+    }
+  };
 
   const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardCvc.handleCardCvc(e);

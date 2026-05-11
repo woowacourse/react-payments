@@ -46,7 +46,7 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
   };
 
   const handleMonthBlur = () => {
-    if (cardExpiryDate[0].length === 0) {
+    if (cardExpiryDate[0].length === 0 || cardExpiryDate[0] === '0' || cardExpiryDate[0] === '00') {
       setCardExpiryDateErrorMode('emptyMonth');
       return;
     }
