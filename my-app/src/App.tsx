@@ -6,9 +6,10 @@ import CardNumberInputSection from "./components/CardNumberInputSection/CardNumb
 import CardCompanySelectSection from "./components/CardCompanySelectSection/CardCompanySelectSection.tsx";
 import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
 import CvcInputSection from "./components/CvcInputSection/CvcInputSection.tsx";
-import { decideBrandName } from "./utils/decideCardInfo.ts";
+import { decideBrandName, getFieldConfig } from "./utils/decideCardInfo.ts";
 import { validateCardNumber, validateExpiryDate, validateCvc } from "./utils/validators.ts";
 import { useNavigate } from "react-router-dom";
+
 function App() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     numbers: ["", "", "", ""],
@@ -20,11 +21,23 @@ function App() {
 
   const navigate = useNavigate();
 
-  const brand = decideBrandName(cardInfo.numbers[0] ?? "");
+  const brand = decideBrandName(cardInfo.numbers.join(""));
+  const fieldConfig = getFieldConfig(brand);
 
   const cardNumberHandler = (numbers: string[]) => {
-    setCardInfo((prev) => ({ ...prev, numbers }));
-    if (numbers.every((n) => n.length === 4) && validateCardNumber(numbers).errorIndex === -1) {
+    const newBrand = decideBrandName(numbers.join(""));
+    console.log(newBrand);
+    const newConfig = getFieldConfig(newBrand);
+
+    let adjustedNumbers = numbers;
+    if (newConfig.length !== numbers.length) {
+      adjustedNumbers = Array.from({ length: newConfig.length }, (_, i) => numbers[i] ?? "");
+    }
+
+    setCardInfo((prev) => ({ ...prev, numbers: adjustedNumbers }));
+
+    const isNumbersComplete = newConfig.every((len, i) => adjustedNumbers[i]?.length === len);
+    if (isNumbersComplete && validateCardNumber(adjustedNumbers).errorIndex === -1) {
       setStep((prev) => Math.max(prev, 1));
     }
   };
@@ -48,7 +61,7 @@ function App() {
   };
 
   const isComplete =
-    cardInfo.numbers.every((n) => n.length === 4) &&
+    fieldConfig.every((len, i) => cardInfo.numbers[i]?.length === len) &&
     cardInfo.company !== "" &&
     cardInfo.expiry.every((e) => e.length === 2) &&
     cardInfo.cvc.length === 3;
@@ -61,7 +74,6 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     navigate("/complete", { state: { numbers: cardInfo.numbers, brand } });
   };
 
@@ -103,7 +115,11 @@ function App() {
             {step >= 1 && (
               <CardCompanySelectSection onValueHandler={selectCompanyHandler} inputValue={cardInfo.company} />
             )}
-            <CardNumberInputSection onValueHandler={cardNumberHandler} inputValues={cardInfo.numbers} />
+            <CardNumberInputSection
+              onValueHandler={cardNumberHandler}
+              inputValues={cardInfo.numbers}
+              fieldConfig={fieldConfig}
+            />
           </form>
         </div>
       </div>

@@ -7,9 +7,11 @@ export const validateCardNumber = (values: string[]): ValidationResult => {
     const value = values[i];
     if (value === "" || value === undefined) continue;
     if (!/^\d+$/.test(value)) return { errorIndex: i, message: "숫자만 입력 가능합니다" };
-    if (i === 0 && decideBrandName(value) === "")
-      return { errorIndex: i, message: "이 카드 브랜드는 지원하지 않습니다." };
   }
+  const joined = values.join("");
+
+  if (joined.length >= 8 && decideBrandName(joined) === "")
+    return { errorIndex: -2, message: "이 카드 브랜드는 지원하지 않습니다." };
   return { errorIndex: -1, message: "" };
 };
 

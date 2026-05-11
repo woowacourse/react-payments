@@ -1,17 +1,20 @@
 import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { css } from "@emotion/react";
 import { validateCardNumber } from "../../utils/validators";
 
 const CardNumberInputSection = ({
   onValueHandler,
   inputValues,
+  fieldConfig,
 }: {
   onValueHandler: (cardInfo: string[]) => void;
   inputValues: string[];
+  fieldConfig: number[];
 }) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const onChange = (index: number, value: string) => {
     const newValues = [...inputValues];
@@ -19,6 +22,11 @@ const CardNumberInputSection = ({
 
     setErrorMessage("");
     onValueHandler(newValues);
+
+    // 현재 칸이 꽉 찼고, 마지막 칸이 아닐 때 다음칸 Input Dom에 포커스 이동.
+    if (value.length === fieldConfig[index] && index < fieldConfig.length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
   };
 
   const handleBlur = () => {
@@ -27,6 +35,9 @@ const CardNumberInputSection = ({
     setErrorMessage(message);
   };
 
+  console.log(fieldConfig);
+  console.log(errorIndex);
+
   return (
     <InputSectionLayout
       title="결제할 카드 번호를 입력해 주세요"
@@ -34,14 +45,22 @@ const CardNumberInputSection = ({
       tag="카드 번호"
       errorMessage={errorMessage}
     >
-      {inputValues.map((value, i) => (
+      {fieldConfig.map((maxLen, i) => (
         <input
           key={i}
-          maxLength={4}
-          value={value}
+          ref={(el) => {
+            inputRefs.current[i] = el;
+          }}
+          maxLength={maxLen}
+          value={inputValues[i] ?? ""}
           onChange={(e) => onChange(i, e.target.value)}
           onBlur={handleBlur}
-          css={[baseInputStyle, css`border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};`]}
+          css={[
+            baseInputStyle,
+            css`
+              border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
+            `,
+          ]}
           placeholder={"1234"}
         />
       ))}
