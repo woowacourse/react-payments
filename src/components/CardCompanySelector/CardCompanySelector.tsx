@@ -34,7 +34,6 @@ function CardCompanySelector({
     <FormField
       title="카드사를 선택해 주세요"
       caption="현재 국내 카드사만 가능합니다."
-      label="카드 번호"
     >
       <SelectButton type="button" onClick={handleToggle}>
         <SelectedText state={cardCompany ? "selected" : "placeholder"}>

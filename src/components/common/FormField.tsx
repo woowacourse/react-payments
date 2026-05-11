@@ -5,7 +5,7 @@ import { COLOR_PALETTE } from "@/styles/colorPalette";
 interface FormFieldProps {
   title: string;
   caption?: string;
-  label: string;
+  label?: string;
   helperMessage?: string;
   children: ReactNode;
 }
@@ -22,7 +22,7 @@ const FormField = ({
       <Title>{title}</Title>
       {caption && <Caption>{caption}</Caption>}
       <Fieldset>
-        <Legend>{label}</Legend>
+        {label && <Legend>{label}</Legend>}
         <FieldContent>{children}</FieldContent>
       </Fieldset>
 
