@@ -13,7 +13,7 @@ type NumberFieldProps = {
 };
 
 const NumberField = ({inputProps, errorMessage, errorIndex}: NumberFieldProps) => {
-  const {setInputRef, handleChange, handleKeyDown} = useInputFocusMove(inputProps);
+  const inputPropsWithFocusMove = useInputFocusMove(inputProps);
 
   return (
     <InputContainer
@@ -23,14 +23,11 @@ const NumberField = ({inputProps, errorMessage, errorIndex}: NumberFieldProps) =
     >
       <FieldLayout>
         <InputWrapper $columns={inputProps.map(({maxLength}) => `${maxLength}fr`).join(' ')}>
-          {inputProps.map((props, index) => (
+          {inputPropsWithFocusMove.map((props, index) => (
             <CardNumberInput
               key={index}
               {...props}
-              ref={setInputRef(index)}
               strokeMode={index === errorIndex ? 'error' : 'default'}
-              onChange={(event) => handleChange(index, event)}
-              onKeyDown={(event) => handleKeyDown(index, event)}
             />
           ))}
         </InputWrapper>

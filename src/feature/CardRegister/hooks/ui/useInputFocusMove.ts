@@ -1,5 +1,5 @@
 import {useRef} from 'react';
-import type {ChangeEvent, ChangeEventHandler, KeyboardEvent} from 'react';
+import type {ChangeEvent, ChangeEventHandler, KeyboardEventHandler} from 'react';
 
 type FocusMoveInputProps = {
   value: string;
@@ -10,34 +10,40 @@ type FocusMoveInputProps = {
 export const useInputFocusMove = (inputProps: FocusMoveInputProps[]) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const setInputRef = (index: number) => (element: HTMLInputElement | null) => {
-    inputRefs.current[index] = element;
-  };
+  const inputPropsWithFocusMove = inputProps.map((props, index) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+      // 기존 onChange 실행
+      props.onChange(event);
 
-  const handleChange = (index: number, event: ChangeEvent<HTMLInputElement>) => {
-    inputProps[index].onChange(event);
+      // 자동 focus onChange 실행
+      const value = event.currentTarget.value;
+      const isFull = value.length === props.maxLength;
+      const hasNextInput = index < inputProps.length - 1;
 
-    const value = event.currentTarget.value;
-    const isFull = value.length === inputProps[index].maxLength;
-    const hasNextInput = index < inputProps.length - 1;
+      if (isFull && hasNextInput) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    };
 
-    if (isFull && hasNextInput) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
+    // keyDown 감지하여 연속해서 지울 때 이전 ref로 이동하도록 설정
+    const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
+      const isEmpty = props.value === '';
+      const hasPreviousInput = index > 0;
 
-  const handleKeyDown = (index: number, event: KeyboardEvent<HTMLInputElement>) => {
-    const isEmpty = inputProps[index].value === '';
-    const hasPreviousInput = index > 0;
+      if (event.key === 'Backspace' && isEmpty && hasPreviousInput) {
+        inputRefs.current[index - 1]?.focus();
+      }
+    };
 
-    if (event.key === 'Backspace' && isEmpty && hasPreviousInput) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
+    return {
+      ...props,
+      ref: (element: HTMLInputElement | null) => {
+        inputRefs.current[index] = element;
+      },
+      onChange: handleChange,
+      onKeyDown: handleKeyDown,
+    };
+  });
 
-  return {
-    setInputRef,
-    handleChange,
-    handleKeyDown,
-  };
+  return inputPropsWithFocusMove;
 };

@@ -13,8 +13,7 @@ type ExpiryFieldProps = {
 
 const ExpiryField = ({inputProps, errorMessage, errorIndex}: ExpiryFieldProps) => {
   const {month, year} = inputProps;
-  const expiryInputs = [month, year];
-  const {setInputRef, handleChange, handleKeyDown} = useInputFocusMove(expiryInputs);
+  const [monthInputProps, yearInputProps] = useInputFocusMove([month, year]);
 
   return (
     <InputContainer
@@ -25,17 +24,12 @@ const ExpiryField = ({inputProps, errorMessage, errorIndex}: ExpiryFieldProps) =
       <FieldLayout>
         <InputWrapper>
           <ExpiryInput
-            {...month}
-            ref={setInputRef(0)}
+            {...monthInputProps}
             strokeMode={errorIndex === 0 ? 'error' : 'default'}
-            onChange={(event) => handleChange(0, event)}
           />
           <ExpiryInput
-            {...year}
-            ref={setInputRef(1)}
+            {...yearInputProps}
             strokeMode={errorIndex === 1 ? 'error' : 'default'}
-            onChange={(event) => handleChange(1, event)}
-            onKeyDown={(event) => handleKeyDown(1, event)}
           />
         </InputWrapper>
 
