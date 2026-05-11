@@ -1,4 +1,5 @@
-import { useState, type ComponentProps, type ReactNode } from 'react';
+import { useState, forwardRef } from 'react';
+import type { ComponentProps, ReactNode, ForwardedRef } from 'react';
 
 import cn from 'classnames';
 
@@ -34,58 +35,60 @@ interface SelectOwnProps {
 
 interface SelectProps extends Omit<ComponentProps<'select'>, keyof SelectOwnProps>, SelectOwnProps {}
 
-export const Select = ({ id, options, value, onChange, onBlur }: SelectProps) => {
-  const [open, setOpen] = useState(false);
+export const Select = forwardRef(
+  ({ id, options, value, onChange, onBlur }: SelectProps, ref: ForwardedRef<HTMLDivElement>) => {
+    const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    onBlur?.({
-      target: { id },
-    });
-    setOpen(!open);
-  };
+    const handleClickOpen = () => {
+      onBlur?.({
+        target: { id },
+      });
+      setOpen(!open);
+    };
 
-  const handleChange = (e: ChangeEvent) => {
-    setOpen(false);
-    onChange(e);
-  };
+    const handleChange = (e: ChangeEvent) => {
+      setOpen(false);
+      onChange(e);
+    };
 
-  const selectedOption = options.find((option) => option.value === value);
+    const selectedOption = options.find((option) => option.value === value);
 
-  return (
-    <div className={cn(styles.select, open && styles.open)}>
-      <div className={styles.box} onClick={handleClickOpen}>
-        {selectedOption?.text}
-        <div className={styles.arrow}>
-          <ArrowDownImg />
+    return (
+      <div ref={ref} className={cn(styles.select, open && styles.open)}>
+        <div className={styles.box} onClick={handleClickOpen}>
+          {selectedOption?.text}
+          <div className={styles.arrow}>
+            <ArrowDownImg />
+          </div>
         </div>
+        {open && (
+          <div className={styles.options}>
+            <ul className={styles.list}>
+              {options.map((option: Option) => {
+                const selected = value === option.value;
+
+                return (
+                  <li className={cn(selected && styles.selected)}>
+                    <a
+                      href="#"
+                      onClick={() => {
+                        handleChange({
+                          target: {
+                            id,
+                            value: option.value,
+                          },
+                        });
+                      }}
+                    >
+                      {option.text}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
-      {open && (
-        <div className={styles.options}>
-          <ul className={styles.list}>
-            {options.map((option: Option) => {
-              const selected = value === option.value;
-
-              return (
-                <li className={cn(selected && styles.selected)}>
-                  <a
-                    href="#"
-                    onClick={() => {
-                      handleChange({
-                        target: {
-                          id,
-                          value: option.value,
-                        },
-                      });
-                    }}
-                  >
-                    {option.text}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-};
+    );
+  },
+);
