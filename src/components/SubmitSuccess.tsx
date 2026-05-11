@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 interface SubmitSuccessprops {
   firstNumberSegment: string;
@@ -48,6 +49,12 @@ const Wrapper = styled.div`
 `;
 
 export function SubmitSuccess(props: SubmitSuccessprops) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/react-payments/");
+  };
+
   return (
     <Wrapper>
       <CheckImage src={`${import.meta.env.BASE_URL}check.png`} />
@@ -56,7 +63,7 @@ export function SubmitSuccess(props: SubmitSuccessprops) {
         <br />
         {props.cardCompany}가 등록되었어요.
       </Message>
-      <ConfirmButton>확인</ConfirmButton>
+      <ConfirmButton onClick={handleClick}>확인</ConfirmButton>
     </Wrapper>
   );
 }
