@@ -15,6 +15,7 @@ export const Empty: Story = {
   args: {
     cardNumberUnits: ["", "", "", ""],
     onChange: () => {},
+    onNextStep: () => {},
   },
 };
 
@@ -22,6 +23,7 @@ export const Filled: Story = {
   args: {
     cardNumberUnits: ["1234", "5678", "1234", "5678"],
     onChange: () => {},
+    onNextStep: () => {},
   },
 };
 
@@ -29,6 +31,7 @@ export const ErrorNotNumber: Story = {
   args: {
     cardNumberUnits: ["", "", "", ""],
     onChange: () => {},
+    onNextStep: () => {},
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -40,6 +43,7 @@ export const ErrorEmpty: Story = {
   args: {
     cardNumberUnits: ["", "", "", ""],
     onChange: () => {},
+    onNextStep: () => {},
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -52,6 +56,7 @@ export const ErrorInvalidLength: Story = {
   args: {
     cardNumberUnits: ["123", "", "", ""],
     onChange: () => {},
+    onNextStep: () => {},
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -15,6 +15,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import type { AddCardCompletePageState } from "./AddCardCompletePage";
 import { validateCardForm } from "@/utils/validator";
+import useFormStep from "@/hooks/useFormStep";
+import { ADD_CARD_FORM_STEP } from "@/constants/addCardForm";
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
@@ -26,14 +28,10 @@ const AddNewCardPage = () => {
   const [CVC, setCVC] = useState("");
   const [password, setPassword] = useState("");
 
-  const [step, setStep] = useState(1);
-
-  const goToNextStep = (fromStep: number) => {
-    setStep((prev) => {
-      if (fromStep !== prev) return prev;
-      return prev + 1;
-    });
-  };
+  const { goToNextStep, isStepVisible } = useFormStep(
+    ADD_CARD_FORM_STEP,
+    "CARD_NUMBER",
+  );
 
   const isFormValid = validateCardForm(
     cardNumber,
@@ -66,31 +64,31 @@ const AddNewCardPage = () => {
           navigate("/complete", { state: completePageState });
         }}
       >
-        {step > 4 && (
+        {isStepVisible("PASSWORD") && (
           <CardPasswordInputField password={password} onChange={setPassword} />
         )}
-        {step > 3 && (
+        {isStepVisible("CVC") && (
           <CardCVCInputField
             CVC={CVC}
             onChange={setCVC}
             onNextStep={goToNextStep}
           />
         )}
-        {step > 2 && (
+        {isStepVisible("VALIDITY_PERIOD") && (
           <CardValidityPeriodInputField
             validityPeriod={validityPeriod}
             onChange={setValidityPeriod}
             onNextStep={goToNextStep}
           />
         )}
-        {step > 1 && (
+        {isStepVisible("COMPANY") && (
           <CardCompanySelector
             cardCompany={cardCompany}
             onSelect={setCardCompany}
             onNextStep={goToNextStep}
           />
         )}
-        {step > 0 && (
+        {isStepVisible("CARD_NUMBER") && (
           <CardNumberInputField
             cardNumberUnits={cardNumber}
             onChange={setCardNumber}

@@ -23,7 +23,7 @@ export type ValidityPeriod = {
 interface CardValidityPeriodInputFieldProps {
   validityPeriod: ValidityPeriod;
   onChange: (validityPeriod: ValidityPeriod) => void;
-  onNextStep: (fromStep: number) => void;
+  onNextStep: () => void;
 }
 
 type InputsStatuses = {
@@ -99,7 +99,7 @@ const CardValidityPeriodInputField = ({
     setStatus((prev) => ({ ...prev, year: "DEFAULT" }));
 
     if (checkLengthMatches(input, YEAR_MAX_LENGTH)) {
-      onNextStep(3);
+      onNextStep();
     }
   };
 

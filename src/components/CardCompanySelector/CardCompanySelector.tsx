@@ -9,7 +9,7 @@ import FormField from "@components/common/FormField";
 interface CardCompanySelectorProps {
   cardCompany: CardCompany | null;
   onSelect: (cardCompany: CardCompany) => void;
-  onNextStep: (fromStep: number) => void;
+  onNextStep: () => void;
 }
 
 function CardCompanySelector({
@@ -27,7 +27,7 @@ function CardCompanySelector({
     onSelect(company);
     setIsOpen(false);
 
-    onNextStep(2);
+    onNextStep();
   };
 
   return (

@@ -22,7 +22,7 @@ export type CardNumberFormat = number[];
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
   onChange: (input: CardNumberUnits) => void;
-  onNextStep: (fromStep: number) => void;
+  onNextStep: () => void;
 }
 
 type InputsStatuses = InputStatus[];
@@ -91,7 +91,7 @@ const CardNumberInputField = ({
     }
 
     if (checkCardNumberLength(newCardNumberUnits)) {
-      onNextStep(1);
+      onNextStep();
     }
   };
 

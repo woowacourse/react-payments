@@ -15,6 +15,7 @@ export const Empty: Story = {
   args: {
     CVC: "",
     onChange: () => {},
+    onNextStep: () => {},
   },
 };
 
@@ -22,6 +23,7 @@ export const Filled: Story = {
   args: {
     CVC: "123",
     onChange: () => {},
+    onNextStep: () => {},
   },
 };
 
@@ -29,6 +31,7 @@ export const ErrorNotNumber: Story = {
   args: {
     CVC: "",
     onChange: () => {},
+    onNextStep: () => {},
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -40,6 +43,7 @@ export const ErrorEmpty: Story = {
   args: {
     CVC: "",
     onChange: () => {},
+    onNextStep: () => {},
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -52,6 +56,7 @@ export const ErrorInvalidLength: Story = {
   args: {
     CVC: "12",
     onChange: () => {},
+    onNextStep: () => {},
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
