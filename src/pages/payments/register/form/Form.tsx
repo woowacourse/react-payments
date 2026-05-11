@@ -1,3 +1,5 @@
+import { useOutletContext } from 'react-router';
+
 import cn from 'classnames';
 
 import { CreditCard } from '@/core/components/creditCard';
@@ -6,82 +8,71 @@ import { Field } from '@/core/components/field';
 import { Input } from '@/core/components/input';
 import { Select } from '@/core/components/select';
 
+import { CARD_OPTIONS } from './constant';
+
 import styles from './Form.module.css';
 
-import { useCardNumbers } from './hooks/useCardNumbers';
-import { useCard } from './hooks/useCard';
-import { useExpirationDate } from './hooks/useExpirationDate';
-import { useCvc } from './hooks/useCvc';
-import { usePassword } from './hooks/usePassword';
-
-import { BRAND_NUMBER, CARD_OPTIONS } from './constant';
-
 export const Form = () => {
-  const {
-    value: cardNumbers,
-    onChange: handleChangeCardNumbers,
-
-    onBlur: handleBlurCardNumbers,
-
-    renderErrorMessage: renderErrorMessageCardNumbers,
-    renderErrorInput: renderErrorCardNumberInput,
-  } = useCardNumbers();
+  const outletContext = useOutletContext<any>();
+  if (!outletContext) return null;
 
   const {
-    value: card,
-    onChange: handleChangeCard,
+    // cardNumbers
+    cardNumbers,
+    handleChangeCardNumbers,
 
-    onBlur: handleBlurCard,
+    handleBlurCardNumbers,
 
-    renderErrorMessage: renderErrorMessageCard,
-  } = useCard();
+    renderErrorMessageCardNumbers,
+    renderErrorCardNumberInput,
 
-  const {
-    value: expirationDate,
-    onChange: handleChangeExpirationDate,
+    // card
+    card,
+    handleChangeCard,
 
-    blurValue: onBlurExpirationDate,
-    onBlur: handleBlurExpirationDate,
+    handleBlurCard,
 
-    errors: errorsExpirationDate,
+    renderErrorMessageCard,
 
-    invalidAttemp: expirationDateInvalidAttemp,
-    renderErrorMessage: renderErrorMessageExpirationDate,
-  } = useExpirationDate();
+    // expirationDate
+    expirationDate,
+    handleChangeExpirationDate,
 
-  //cvc
-  const {
-    value: cvc,
-    onChange: handleChangeCvc,
+    onBlurExpirationDate,
+    handleBlurExpirationDate,
 
-    blurValue: onBlurCvc,
-    onBlur: handleBlurCvc,
+    errorsExpirationDate,
 
-    errors: errorsCvc,
+    expirationDateInvalidAttemp,
+    renderErrorMessageExpirationDate,
 
-    invalidAttemp: cvcInvalidAttemp,
-    renderErrorMessage: renderErrorMessageCvc,
-  } = useCvc();
+    // cvc
+    cvc,
+    handleChangeCvc,
 
-  //password
-  const {
-    value: password,
-    onChange: handleChangePassword,
+    onBlurCvc,
+    handleBlurCvc,
 
-    blurValue: onBlurPassword,
-    onBlur: handleBlurPassword,
+    errorsCvc,
 
-    errors: errorsPassword,
+    cvcInvalidAttemp,
+    renderErrorMessageCvc,
 
-    invalidAttemp: passwordInvalidAttemp,
-    renderErrorMessage: renderErrorMessagePassword,
-  } = usePassword();
+    // password
+    password,
+    handleChangePassword,
 
-  const renderBrandCard = (cardNumbers: string[]) => {
-    if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
-    if (BRAND_NUMBER.mastercard.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'mastercard';
-    return 'default';
-  };
+    onBlurPassword,
+    handleBlurPassword,
+
+    errorsPassword,
+
+    passwordInvalidAttemp,
+    renderErrorMessagePassword,
+
+    // creditCard
+    renderBrandCard,
+  } = outletContext;
 
   return (
     <div className={cn(styles.payments)}>
