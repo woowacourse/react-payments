@@ -2,20 +2,22 @@ import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
 import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
 
 import { PASSWORD_LENGTH } from "../../constants/cardField";
-import { usePasswordInput } from "../../hooks/usePasswordInput";
+import { useSecretInput } from "../../hooks/useSecretInput";
 import { inputStyle } from "../../styles/inputStyle";
+import { validateNumeric } from "../../utils/validators";
 
 type PasswordInputSectionProps = {
   onValueHandler: (value: string) => void;
 };
 
 const PasswordInputSection = ({ onValueHandler }: PasswordInputSectionProps) => {
-  const { inputValue, errorMessage, handlers } = usePasswordInput({ onValueHandler });
+  const { inputValue, errorMessage, handlers } = useSecretInput({ onValueHandler, validate: validateNumeric });
 
   return (
     <InputSectionLayout title="비밀번호를 입력해 주세요" message="앞의 두자리를 입력해 주세요" tag="PASSWORD">
       <ValidatedInputGroup errorMessage={errorMessage} legend="PASSWORD">
         <input
+          type="password"
           autoFocus
           maxLength={PASSWORD_LENGTH}
           inputMode="numeric"
