@@ -19,6 +19,9 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
     }
   };
 
+  const lastCardNumberLength =
+    cardStatus.cardBrand === 'diners' ? 2 : cardStatus.cardBrand === 'amex' ? 3 : 4;
+
   return (
     <fieldset
       css={{ display: 'flex', flexDirection: 'column', border: 'none', padding: 0, gap: '10px' }}
@@ -64,7 +67,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                 key={index}
                 type="text"
                 placeholder="1234"
-                maxLength={4}
+                maxLength={index === 3 ? lastCardNumberLength : 4}
                 onChange={handleChange(index)}
                 value={cardNumber}
                 onBlur={setCardStatus.handleCardNumbersBlur}
