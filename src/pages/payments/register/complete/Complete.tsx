@@ -1,10 +1,12 @@
-import { useOutletContext } from 'react-router';
+import { useNavigate, useOutletContext } from 'react-router';
 
 import { SymbolInfo } from '@/core/components/symbolInfo';
 import { Button } from '@/core/components/button';
 import { CARD_OPTIONS } from '../../register/form/constant';
 
 export const Complete = () => {
+  const navigate = useNavigate();
+
   const outletContext = useOutletContext<any>();
   if (!outletContext) return null;
 
@@ -13,12 +15,16 @@ export const Complete = () => {
 
   const cardOption = CARD_OPTIONS.find((option) => option.value === card);
 
+  const handleClick = () => {
+    navigate('/payments/register');
+  };
+
   return (
     <SymbolInfo
       full={true}
       symbol="complete"
       action={
-        <Button variant="primary" block>
+        <Button variant="primary" block onClick={handleClick}>
           확인
         </Button>
       }
