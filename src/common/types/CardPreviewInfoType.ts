@@ -21,4 +21,6 @@ export type CardFormHandlersType = {
   handleExpiryMonthChange: (expiryMonth: string) => void;
   handleExpiryYearChange: (expiryYear: string) => void;
   handleCardCompanyChange: (cardCompanyId: CardCompanyId | null) => void;
+  handleCvcNumberChange: (cvcNumber: string) => void;
+  handlePasswordNumberChange: (password: string) => void;
 };

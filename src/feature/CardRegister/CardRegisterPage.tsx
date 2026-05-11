@@ -1,13 +1,20 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
-import type { CardCompanyId } from '../../common/types/CardPreview';
 import { useNavigate } from 'react-router-dom';
 import type { CardFormInfoType } from '../../common/types/CardPreviewInfoType';
+import { useCardForm } from './hooks/useCardForm';
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
+
+  const {
+    cardPreviewInfo,
+    cardFormInfo,
+    cardFormHandlers,
+    currentStep,
+    hasFormError,
+  } = useCardForm();
 
   const handleRegisterComplete = (cardFormInfo: CardFormInfoType) => {
     navigate('/complete', {
@@ -15,50 +22,15 @@ const CardRegisterPage = () => {
     });
   };
 
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [expiryMonth, setExpiryMonth] = useState('');
-  const [expiryYear, setExpiryYear] = useState('');
-  const [cardCompanyId, setCardCompanyId] = useState<CardCompanyId | null>(
-    null,
-  );
-
-  const handleCardNumbersChange = (cardNumbers: string[]) => {
-    setCardNumbers(cardNumbers);
-  };
-
-  const handleExpiryMonthChange = (expiryMonth: string) => {
-    setExpiryMonth(expiryMonth);
-  };
-
-  const handleExpiryYearChange = (expiryYear: string) => {
-    setExpiryYear(expiryYear);
-  };
-
-  const handleCardCompanyChange = (cardCompanyId: CardCompanyId | null) => {
-    setCardCompanyId(cardCompanyId);
-  };
-
-  const cardPreviewInfo = {
-    cardNumbers,
-    expiryMonth,
-    expiryYear,
-    cardCompanyId,
-  };
-
-  const cardFormHandlers = {
-    handleCardNumbersChange,
-    handleExpiryMonthChange,
-    handleExpiryYearChange,
-    handleCardCompanyChange,
-  };
-
   return (
     <Wrapper>
       <Container>
         <CardPreviewSection cardPreviewInfo={cardPreviewInfo} />
         <InfoInputSection
-          cardPreviewInfo={cardPreviewInfo}
+          cardFormInfo={cardFormInfo}
           cardFormHandlers={cardFormHandlers}
+          currentStep={currentStep}
+          hasFormError={hasFormError}
           onRegisterComplete={handleRegisterComplete}
         />
       </Container>

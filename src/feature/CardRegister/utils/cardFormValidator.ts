@@ -1,3 +1,4 @@
+import type { CardCompanyId } from '../../../common/types/CardPreview';
 import { getCardNumberSegmentLengths } from './cardInfo';
 import { isExactLength, isValidMonth } from './validator';
 
@@ -83,4 +84,34 @@ export const hasCardFormError = ({
     hasCvcError ||
     hasPasswordError
   );
+};
+
+export const getAvailableStep = ({
+  cardNumbers,
+  cardCompanyId,
+  expiryMonth,
+  expiryYear,
+  cvcNumber,
+  password,
+}: {
+  cardNumbers: string[];
+  cardCompanyId: CardCompanyId | null;
+  expiryMonth: string;
+  expiryYear: string;
+  cvcNumber: string;
+  password: string;
+}) => {
+  if (hasCardNumberError(cardNumbers)) return 0;
+  if (cardCompanyId === null) return 1;
+
+  if (
+    validateExpiryMonth(expiryMonth) !== null ||
+    validateExpiryYear(expiryYear) !== null
+  )
+    return 2;
+
+  if (validateCvcNumber(cvcNumber) !== null) return 3;
+  if (validatePassword(password) !== null) return 4;
+
+  return 5;
 };

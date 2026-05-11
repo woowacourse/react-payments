@@ -1,96 +1,44 @@
-import { useState } from 'react';
 import CvcField from './CvCField';
 import ExpiryField from './ExpiryField';
 import NumberField from './NumberField';
 import type {
   CardFormHandlersType,
   CardFormInfoType,
-  CardPreviewInfoType,
 } from '../../../../common/types/CardPreviewInfoType';
 import styled from 'styled-components';
 import FieldSection from './FieldSection';
-import {
-  hasCardFormError,
-  hasCardNumberError,
-  validateCvcNumber,
-  validateExpiryMonth,
-  validateExpiryYear,
-  validatePassword,
-} from '../../utils/cardFormValidator';
 import SelectCardBrandField from './SelectCardBrandField';
 import PasswordField from './PasswordField';
 import Button from '../../../../common/components/Button';
 
 const InfoInputSection = ({
-  cardPreviewInfo,
+  cardFormInfo,
   cardFormHandlers,
+  currentStep,
+  hasFormError,
   onRegisterComplete,
 }: {
-  cardPreviewInfo: CardPreviewInfoType;
+  cardFormInfo: CardFormInfoType;
   cardFormHandlers: CardFormHandlersType;
+  currentStep: number;
+  hasFormError: boolean;
   onRegisterComplete: (cardFormInfo: CardFormInfoType) => void;
 }) => {
-  const [cvcNumber, setCvcNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [currentStep, setCurrentStep] = useState(0);
-
-  const { cardNumbers, expiryMonth, expiryYear, cardCompanyId } =
-    cardPreviewInfo;
+  const { cardNumbers, expiryMonth, expiryYear, cvcNumber, password } =
+    cardFormInfo;
   const {
     handleCardNumbersChange,
     handleExpiryMonthChange,
     handleExpiryYearChange,
     handleCardCompanyChange,
+    handleCvcNumberChange,
+    handlePasswordNumberChange,
   } = cardFormHandlers;
-
-  const handleCvcNumberChange = (cvcNumber: string) => {
-    setCvcNumber(cvcNumber);
-  };
-
-  const handlePasswordNumberChange = (password: string) => {
-    setPassword(password);
-  };
-
-  const hasFormError = hasCardFormError({
-    cardNumbers,
-    expiryMonth,
-    expiryYear,
-    cvcNumber,
-    password,
-  });
-
-  const cardFormInfo = {
-    cardNumbers,
-    expiryMonth,
-    expiryYear,
-    cvcNumber,
-    cardCompanyId,
-    password,
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (hasFormError) return;
-
-    // form에 필요한 데이터: 카드번호 첫 4자리, 카드 브랜드
     onRegisterComplete(cardFormInfo);
   };
-
-  if (currentStep === 0 && !hasCardNumberError(cardNumbers))
-    setCurrentStep((prev) => prev + 1);
-  if (currentStep === 1 && cardCompanyId !== null)
-    setCurrentStep((prev) => prev + 1);
-  if (
-    currentStep === 2 &&
-    validateExpiryMonth(expiryMonth) === null &&
-    validateExpiryYear(expiryYear) === null
-  )
-    setCurrentStep((prev) => prev + 1);
-  if (currentStep === 3 && validateCvcNumber(cvcNumber) === null)
-    setCurrentStep((prev) => prev + 1);
-  if (currentStep === 4 && validatePassword(password) === null)
-    setCurrentStep((prev) => prev + 1);
 
   return (
     <Container onSubmit={handleSubmit}>

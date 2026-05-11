@@ -28,25 +28,11 @@ const useFieldValidation = ({ values, validate }: UseFieldValidationParams) => {
       prev.map((value, index) => (idx === index ? true : value)),
     );
   };
-  const touchAll = () => {
-    setIsTouched(values.map(() => true));
-  };
-
-  const validateAll = () => {
-    touchAll();
-
-    const currentErrorMessages = values.map((value, index) =>
-      validate(value, index),
-    );
-
-    return currentErrorMessages.every((message) => message === null);
-  };
 
   return {
     firstErrorIndex,
     errorMessage,
     touch,
-    validateAll,
   };
 };
 
