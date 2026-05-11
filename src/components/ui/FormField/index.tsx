@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import FieldTitle from './FieldTitle';
-import FieldCaption from './FieldCaption';
+import FieldTitle from '../FieldTitle';
+import FieldCaption from '../FieldCaption';
 
 export interface FormFieldProps {
   title: string;
