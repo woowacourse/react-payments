@@ -32,6 +32,5 @@ export const useCardInfo = () => {
             cvc: cvcHandler,
             password: passwordHandler,
         }
-    }
-
-}
+    };
+};

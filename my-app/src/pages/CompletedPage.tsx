@@ -1,11 +1,19 @@
-import { useLocation, useNavigate } from "react-router-dom";
-
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import type { PublicCardInfo } from "../types";
+
+const isPublicCardInfo = (value: unknown): value is PublicCardInfo => {
+  return typeof value === "object" && value !== null && "numberHead" in value && "company" in value;
+};
 
 const CompletedPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { numberHead, company } = state as PublicCardInfo;
+
+  if (!isPublicCardInfo(state)) {
+    return <Navigate to="/" replace />;
+  }
+
+  const { numberHead, company } = state;
 
   return (
     <main>
