@@ -1,4 +1,4 @@
-import { CARD_BRAND_CONFIGS, type CardBrand, type CardFormState } from "../types";
+import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS, type CardBrand, type CardFormState } from "../types";
 
 export function validateNumberString(input: string) {
   return /^\d*$/.test(input);
@@ -30,9 +30,10 @@ export function isCardFormComplete(
   formState: CardFormState,
   brand: CardBrand | undefined,
 ) {
-  if (!brand) return false;
+  const segmentLengths = brand
+    ? CARD_BRAND_CONFIGS[brand].segmentLengths
+    : DEFAULT_SEGMENT_LENGTHS;
 
-  const segmentLengths = CARD_BRAND_CONFIGS[brand].segmentLengths;
   return !!(
     formState.cardCompany &&
     segmentLengths.every(
