@@ -3,7 +3,7 @@ import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo, ErrorStatus } from '../../types';
 import { isNumber } from '../../utils';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
 
 interface CardNumbersFieldProps {
@@ -13,6 +13,7 @@ interface CardNumbersFieldProps {
 
 export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
   const [errors, setErrors] = useState<[ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus]>([null, null, null, null]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([null, null, null, null]);
 
   const updateError = (index: number, status: ErrorStatus) => {
     setErrors((prev) => {
@@ -37,6 +38,16 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
     newValue[index] = inputValue;
     onUpdated(newValue);
     updateError(index, inputValue === '' ? 'required' : null);
+
+    if (inputValue.length === CARD_NUMBER_LENGTH_PER_INPUT && index < value.length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyUp = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && index > 0 && value[index] === '') {
+      inputRefs.current[index - 1]?.focus();
+    }
   };
 
   // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
@@ -75,6 +86,9 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
           {value.map((number, index) => (
             <Input
               key={index}
+              ref={(el) => {
+                inputRefs.current[index] = el;
+              }}
               variant={errors[index] !== null ? 'error' : 'default'}
               value={number}
               type="text"
@@ -83,6 +97,7 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
               maxLength={CARD_NUMBER_LENGTH_PER_INPUT}
               onChange={(e) => handleChange(index, e)}
               onBlur={(e) => handleBlur(index, e)}
+              onKeyUp={(e) => handleKeyUp(index, e)}
             />
           ))}
         </div>
