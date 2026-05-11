@@ -12,9 +12,11 @@ import { useCardForm } from "../hooks/useCardForm";
 
 const CardFormPage = () => {
   const navigate = useNavigate();
-  const { cardInfo, network, maxLength, isSupportedNetwork, completion, handlers } = useCardForm({
-    onSubmit: (info) => navigate("/completed", { state: { cardInfo: info } }),
-  });
+  const { cardInfo, network, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
+
+  const handleConfirm = () => {
+    navigate("/completed", { state: { cardInfo } });
+  }
 
   return (
     <main css={pageStyle}>
@@ -34,7 +36,7 @@ const CardFormPage = () => {
           </div>
         </div>
         {completion.all && (
-          <button css={confirmButtonStyle} onClick={handlers.submit}>
+          <button css={confirmButtonStyle} onClick={handleConfirm}>
             확인
           </button>
         )}
