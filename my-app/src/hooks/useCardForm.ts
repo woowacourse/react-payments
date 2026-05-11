@@ -34,25 +34,15 @@ export const useCardForm = ({ onSubmit }: UseCardFormParams) => {
   const isPassword = cardInfo.password.length === PASSWORD_LENGTH;
   const isAll = isCardNumber && isCompany && isExpiry && isCvc && isPassword;
 
-  const cardNumberHandler = (numbers: string[]) => {
-    setCardInfo((prev) => ({ ...prev, numbers, company: "" }));
+  const setFields = (partial: Partial<CardInfo>) => {
+    setCardInfo((prev) => ({ ...prev, ...partial }));
   };
 
-  const cardCompanyHandler = (company: string) => {
-    setCardInfo((prev) => ({ ...prev, company }));
-  };
-
-  const expiryHandler = (expiry: string[]) => {
-    setCardInfo((prev) => ({ ...prev, expiry }));
-  };
-
-  const cvcHandler = (cvc: string) => {
-    setCardInfo((prev) => ({ ...prev, cvc }));
-  };
-
-  const passwordHandler = (password: string) => {
-    setCardInfo((prev) => ({ ...prev, password }));
-  };
+  const cardNumberHandler = (numbers: string[]) => setFields({ numbers, company: "" });
+  const cardCompanyHandler = (company: string) => setFields({ company });
+  const expiryHandler = (expiry: string[]) => setFields({ expiry });
+  const cvcHandler = (cvc: string) => setFields({ cvc });
+  const passwordHandler = (password: string) => setFields({ password });
 
   const submitHandler = () => {
     onSubmit(cardInfo);
