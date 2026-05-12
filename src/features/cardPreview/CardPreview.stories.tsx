@@ -16,7 +16,7 @@ export const Default: Story = {
   args: {
     info: {
       cardNumbers: ['1234', '5678', '0000', '0000'],
-      expirationDate: { month: '04', year: '28' },
+      expiryDate: { month: '04', year: '28' },
     },
   },
 };
