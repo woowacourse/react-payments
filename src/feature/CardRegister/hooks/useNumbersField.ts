@@ -65,7 +65,7 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
   ) => {
     if (event.key !== 'Backspace') return;
 
-    if (cardNumbers[index] === '') return;
+    if (cardNumbers[index] !== '') return;
     if (index === 0) return;
 
     focusPreviousInput(index);

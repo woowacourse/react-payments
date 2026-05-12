@@ -124,7 +124,7 @@ export const useExpiryField = ({ onComplete }: UseExpiryFieldParams) => {
 
     const values = [expiryMonth, expiryYear];
 
-    if (values[index] === '') return;
+    if (values[index] !== '') return;
     if (index === 0) return;
 
     focusPreviousInput(index);

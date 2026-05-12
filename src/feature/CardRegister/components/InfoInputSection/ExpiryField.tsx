@@ -34,6 +34,7 @@ const ExpiryField = ({
           strokeMode={1 === field.firstErrorIndex ? 'error' : 'default'}
           onChange={(e) => field.handleYearChange(e.target.value)}
           onBlur={(e) => field.handleExpiryBlur(1, e.target.value, 'year')}
+          onKeyDown={(event) => field.handleKeyDown(1, event)}
         />
       </InputWrapper>
 

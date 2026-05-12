@@ -26,6 +26,7 @@ const NumberField = ({
             strokeMode={index === field.firstErrorIndex ? 'error' : 'default'}
             onChange={(e) => field.handleNumbersChange(index, e.target.value)}
             onBlur={() => field.handleNumbersBlur(index)}
+            onKeyDown={(event) => field.handleKeyDown(index, event)}
           />
         ))}
       </InputWrapper>
