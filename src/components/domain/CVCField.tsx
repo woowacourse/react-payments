@@ -30,7 +30,7 @@ export default function CVCField({
     if (!errorStatus && value.length === cvcLength) {
       onCompletedEvent();
     }
-  }, [errorStatus, value]);
+  }, [errorStatus, value, cvcLength]);
 
   const validate = (eventType: 'change' | 'blur', inputValue: string) => {
     if (validates['required'](inputValue)) {

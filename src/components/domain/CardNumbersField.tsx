@@ -44,7 +44,7 @@ export default function CardNumbersField({
     if (!activeErrorStatus && value.every((v, index) => v.length === cardNumbersLength[index])) {
       onCompletedEvent();
     }
-  }, [activeErrorStatus, value]);
+  }, [activeErrorStatus, value, cardNumbersLength]);
 
   // TODO: validate key와 반환값 연동 로직 고민
   const validate = (eventType: 'change' | 'blur', inputValue: string, index: number) => {
