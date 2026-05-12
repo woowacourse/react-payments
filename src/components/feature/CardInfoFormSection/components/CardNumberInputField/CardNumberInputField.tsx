@@ -1,6 +1,6 @@
-import useFormValue from "@/components/common/FormContainer/useFormValue";
-import useFocus from "@/hooks/useFocus";
+import useFormValue from "@components/common/FormContainer/useFormValue";
 import InputField from "@components/common/InputField";
+import useFocus from "@hooks/useFocus";
 import {
   detectCardBrand,
   formatCardNumberUnitByBrand,
@@ -8,7 +8,7 @@ import {
   getCardNumberUnitMaxLengthByBrand,
 } from "@utils/card";
 
-import type { CardInfoFormState } from "../../formState";
+import type { CardInfoFormState, CardNumberStatusTuple } from "../../formState";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus } from "./utils";
 
@@ -37,7 +37,6 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
     cardNumber,
     brand,
   );
-  const cardNumberMaxLength = getCardNumberLengthByBrand(brand);
 
   const handleCardNumberBlur = (index: number, input: string) => {
     const cardNumberInputStatus = checkCardNumberInputStatus(
@@ -52,15 +51,7 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
   };
 
   const handleCardNumberChange = (index: number, input: string) => {
-    const cardNumberInputStatus = checkCardNumberInputStatus(
-      input,
-      getCardNumberUnitMaxLengthByBrand(brand, index),
-    );
-
-    setValue(
-      "cardNumberStatus",
-      updateArray(status, index, cardNumberInputStatus),
-    );
+    const unitMaxLength = getCardNumberUnitMaxLengthByBrand(brand, index);
 
     const updatedFormattedUnits = updateArray(
       formattedCardNumberUnits,
@@ -68,17 +59,31 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
       input,
     );
     const joined = updatedFormattedUnits.join("");
-    const newCardNumber = joined.slice(
-      0,
-      getCardNumberLengthByBrand(detectCardBrand(joined)),
-    );
+    const newBrand = detectCardBrand(joined);
+    const newCardNumberMaxLength = getCardNumberLengthByBrand(newBrand);
+    const newCardNumber = joined.slice(0, newCardNumberMaxLength);
+    const effectiveUnitCount = formatCardNumberUnitByBrand(
+      newCardNumber,
+      newBrand,
+    ).length;
 
+    const cardNumberInputStatus = checkCardNumberInputStatus(
+      input,
+      unitMaxLength,
+    );
+    const newStatus = updateArray(status, index, cardNumberInputStatus).map(
+      (s, i) => (i < effectiveUnitCount ? s : "DEFAULT"),
+    ) as CardNumberStatusTuple;
+
+    setValue("cardNumberStatus", newStatus);
     setValue("cardNumber", newCardNumber);
 
-    const unitMaxLength = getCardNumberUnitMaxLengthByBrand(brand, index);
-    if (input.length >= unitMaxLength) setNextFocus();
+    if (input.length === unitMaxLength) setNextFocus();
 
-    if (newCardNumber.length >= cardNumberMaxLength) {
+    const allValid = newStatus
+      .slice(0, effectiveUnitCount)
+      .every((s) => s === "SUCCESS");
+    if (newCardNumber.length === newCardNumberMaxLength && allValid) {
       onComplete();
     }
   };
@@ -89,10 +94,15 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
       caption="본인 명의의 카드만 결제 가능합니다."
       label="카드 번호"
       helperMessage={
-        ERROR_MESSAGE[status[0]] ||
-        ERROR_MESSAGE[status[1]] ||
-        ERROR_MESSAGE[status[2]] ||
-        ERROR_MESSAGE[status[3]]
+        formattedCardNumberUnits
+          .map((_, i) => ERROR_MESSAGE[status[i]])
+          .find(Boolean) ??
+        (!brand &&
+        status
+          .slice(0, formattedCardNumberUnits.length)
+          .every((s) => s !== "DEFAULT")
+          ? ERROR_MESSAGE.INVALID_BRAND
+          : undefined)
       }
       inputPropsList={formattedCardNumberUnits.map((unit, index) => ({
         ref: (el) => registerInputRef(index)(el),
@@ -107,7 +117,7 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
           status[index] === "DEFAULT" || status[index] === "SUCCESS"
             ? "default"
             : "error",
-        autoFocus: index === 0 || index === 3,
+        autoFocus: index === 0,
       }))}
     />
   );
