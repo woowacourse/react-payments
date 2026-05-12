@@ -1,10 +1,10 @@
 import { css } from "@emotion/react";
 import Card from "./components/Card/Card";
-import CardNumberInputSection from "./components/CardNumberInputSection/CardNumberInputSection.tsx";
-import CardCompanySelectSection from "./components/CardCompanySelectSection/CardCompanySelectSection.tsx";
-import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
-import CvcInputSection from "./components/CvcInputSection/CvcInputSection.tsx";
-import PasswordInputSection from "./components/PasswordInputSection/PasswordInputSectino.tsx";
+import CardNumberInputSection from "./components/CardForm/CardNumberInputSection/CardNumberInputSection.tsx";
+import CardCompanySelectSection from "./components/CardForm/CardCompanySelectSection/CardCompanySelectSection.tsx";
+import ExpiryDateInputSection from "./components/CardForm/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
+import CvcInputSection from "./components/CardForm/CvcInputSection/CvcInputSection.tsx";
+import PasswordInputSection from "./components/CardForm/PasswordInputSection/PasswordInputSectino.tsx";
 import useCardForm from "./hooks/useCardForm.ts";
 
 function App() {
