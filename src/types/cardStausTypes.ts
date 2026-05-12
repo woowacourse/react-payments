@@ -66,6 +66,6 @@ export interface CardPassword {
 }
 
 export interface CardPasswordHandler {
-  handleCardPassword: (value: string) => void;
+  handleCardPassword: () => void;
   handlePasswordBlur: () => void;
 }
