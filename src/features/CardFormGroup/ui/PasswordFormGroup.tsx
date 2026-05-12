@@ -22,7 +22,7 @@ export const PasswordFormGroup = ({ password, setStepRef }: PasswordFormGroupPro
         inputMode="numeric"
         value={value}
         maxLength={maxLength}
-        placeholder="123"
+        placeholder="**"
         isError={errorMessage !== undefined}
         onChange={(e) => handleChange(e.target.value)}
         onBlur={() => handleBlur()}
