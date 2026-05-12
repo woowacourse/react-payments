@@ -1,18 +1,8 @@
-import type { ComponentProps } from 'react';
-
 import cn from 'classnames';
 
 import styles from './Button.module.css';
 
-interface ButtonOwnProps {
-  shape?: 'default';
-  variant?: 'default' | 'primary';
-  edge?: 'rounded' | 'flat';
-  size?: 'normal' | 'large';
-  block?: boolean;
-}
-
-interface ButtonProps extends Omit<ComponentProps<'button'>, keyof ButtonOwnProps>, ButtonOwnProps {}
+import type { ButtonProps } from './types';
 
 export const Button = ({
   children,
