@@ -52,7 +52,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
               <input
                 key={index}
                 type="text"
-                placeholder={'0'.repeat(maxLength)}
+                placeholder={'123456'.slice(0, maxLength)}
                 maxLength={maxLength}
                 onChange={setCardStatus.handleCardNumbers(index)}
                 value={cardNumber}
