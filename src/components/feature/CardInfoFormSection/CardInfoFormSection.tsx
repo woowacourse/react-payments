@@ -71,7 +71,11 @@ const CardInfoFormSection = () => {
             )}
           </StepFunnel.Step>
           <StepFunnel.Step step={5}>
-            {() => <CardInfoFormSubmitButton />}
+            {() => (
+              <CardInfoFormSubmitButtonContainer>
+                <CardInfoFormSubmitButton />
+              </CardInfoFormSubmitButtonContainer>
+            )}
           </StepFunnel.Step>
         </StepFunnel>
       </Container>
@@ -83,6 +87,14 @@ const Container = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding-bottom: 8rem;
+`;
+
+const CardInfoFormSubmitButtonContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
 `;
 
 export default CardInfoFormSection;
