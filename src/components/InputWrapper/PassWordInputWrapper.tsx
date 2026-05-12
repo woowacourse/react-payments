@@ -17,7 +17,7 @@ export default function PassWordInputWrapper({ setPassWord, value }: Props) {
         type="password"
         autoFocus
         value={value}
-        setValue={(newValue) => {
+        onChange={(newValue) => {
           setPassWord(newValue);
         }}
         placeholder="123"

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getEXPNumberErrorMessage } from "../../utils/getEXPNumberErrorMessage";
@@ -20,14 +19,28 @@ export default function EXPInputWrapper({
     "mm",
     "yy",
   ]);
-  useEffect(() => {
-    if (value.mm.length === 2 && value.yy === "") {
-      const result = getEXPNumberErrorMessage({ mm: value.mm, yy: value.yy });
+
+  const handelOnChange = (expKey: string) => (newValue: string) => {
+    const newEXPNumbers = { ...value, [expKey]: newValue };
+    setEXPNumber(newEXPNumbers);
+    onComplete(
+      Object.values(newEXPNumbers).every((value) => value.length === 2) &&
+        Object.values(inputErrors).every((err) => err === null),
+    );
+
+    if (expKey === "mm" && newValue.length === 2 && value.yy === "") {
+      const result = getEXPNumberErrorMessage({ mm: newValue, yy: value.yy });
       if (result === null || result.key !== "mm") {
         inputRefs.current["yy"]?.focus();
       } else setError("mm")(result?.message);
     }
-  }, [value.mm, value.yy, inputRefs, setError]);
+  };
+
+  const handleOnBlur = (expKey: string) => () => {
+    const result = getEXPNumberErrorMessage(value);
+    const message = result && result.key === expKey ? result.message : null;
+    setError(expKey as keyof EXPNumber)(message);
+  };
 
   return (
     <InputGroup errorMessage={errorMessage}>
@@ -35,26 +48,13 @@ export default function EXPInputWrapper({
         <NumberInput
           key={`${expKey}-input`}
           value={expValue}
-          setValue={(newValue) => {
-            const newEXPNumbers = { ...value, [expKey]: newValue };
-            setEXPNumber(newEXPNumbers);
-            onComplete(
-              Object.values(newEXPNumbers).every(
-                (value) => value.length === 2,
-              ) && Object.values(inputErrors).every((err) => err === null),
-            );
-          }}
+          onChange={handelOnChange(expKey)}
           placeholder={expKey === "mm" ? "MM" : "YY"}
           autoFocus={expKey === "mm"}
           hasError={inputErrors[expKey as keyof EXPNumber] !== null}
           maxLength={2}
           onError={setError(expKey as keyof EXPNumber)}
-          onBlur={() => {
-            const result = getEXPNumberErrorMessage(value);
-            const message =
-              result && result.key === expKey ? result.message : null;
-            setError(expKey as keyof EXPNumber)(message);
-          }}
+          onBlur={handleOnBlur(expKey)}
           ref={(el) => {
             if (expKey !== "mm") inputRefs.current[expKey] = el;
           }}

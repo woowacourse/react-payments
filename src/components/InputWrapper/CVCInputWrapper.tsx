@@ -20,7 +20,7 @@ export default function CVCInputWrapper({
     <InputGroup errorMessage={inputError}>
       <NumberInput
         value={value}
-        setValue={(newValue) => {
+        onChange={(newValue) => {
           setCVCNumber(newValue);
           onComplete(newValue.length === 3 && inputError === null);
         }}

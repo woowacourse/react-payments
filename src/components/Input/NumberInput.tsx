@@ -5,7 +5,7 @@ interface Props extends Omit<
   "onChange" | "onError"
 > {
   value: string;
-  setValue: (value: string) => void;
+  onChange: (value: string) => void;
   onError: (message: string | null) => void;
   hasError: boolean;
   ref?: React.Ref<HTMLInputElement>;
@@ -16,7 +16,7 @@ interface InputStyleProps {
 }
 
 export default function NumberInput({
-  setValue,
+  onChange,
   onError,
   hasError,
   ref,
@@ -32,7 +32,7 @@ export default function NumberInput({
       return;
     }
 
-    setValue(tmpValue);
+    onChange(tmpValue);
     onError(null);
   };
 
