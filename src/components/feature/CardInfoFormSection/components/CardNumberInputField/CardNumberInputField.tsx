@@ -1,6 +1,6 @@
-import useFormValue from "@components/common/FormContainer/useFormValue";
 import InputField from "@components/common/InputField";
 import useFocus from "@hooks/useFocus";
+import { useFormValue } from "@hooks/useFormWrapper";
 import {
   detectCardBrand,
   formatCardNumberUnitByBrand,

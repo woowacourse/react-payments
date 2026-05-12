@@ -1,5 +1,5 @@
 import Button from "@components/common/Button";
-import { useFormValue } from "@components/common/FormContainer";
+import { useFormValue } from "@hooks/useFormWrapper";
 
 import type { CardInfoFormState } from "../../formState";
 

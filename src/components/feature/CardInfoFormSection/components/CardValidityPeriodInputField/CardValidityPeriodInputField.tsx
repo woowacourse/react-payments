@@ -1,7 +1,7 @@
-import useFormValue from "@/components/common/FormContainer/useFormValue";
 import type { ValidityPeriod } from "@/types/card";
 import InputField from "@components/common/InputField";
 import useFocus from "@hooks/useFocus";
+import { useFormValue } from "@hooks/useFormWrapper";
 import { padValidityPeriodUnit } from "@utils/card";
 
 import type { CardInfoFormState } from "../../formState";

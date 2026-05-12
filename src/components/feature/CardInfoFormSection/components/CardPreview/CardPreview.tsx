@@ -1,6 +1,6 @@
 import Card from "@components/common/Card";
-import useFormValue from "@components/common/FormContainer/useFormValue";
 import styled from "@emotion/styled";
+import { useFormValue } from "@hooks/useFormWrapper";
 import { detectCardBrand } from "@utils/card";
 
 import type { CardInfoFormState } from "../../formState";

@@ -1,6 +1,6 @@
-import useFormValue from "@/components/common/FormContainer/useFormValue";
 import InputField from "@/components/common/InputField";
 import { checkIsInt, validateCVCRange } from "@/utils/validator";
+import { useFormValue } from "@hooks/useFormWrapper";
 
 import type { CardInfoFormState } from "../../formState";
 

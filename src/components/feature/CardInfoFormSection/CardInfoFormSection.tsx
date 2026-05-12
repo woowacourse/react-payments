@@ -1,6 +1,6 @@
-import useFormWrapper from "@components/common/FormContainer";
 import StepFunnel from "@components/common/StepFunnel/StepFunnel";
 import styled from "@emotion/styled";
+import useFormWrapper from "@hooks/useFormWrapper";
 import { useNavigate } from "react-router";
 
 import CardCompanySelectField from "./components/CardCompanySelectField/CardCompanySelectField";
