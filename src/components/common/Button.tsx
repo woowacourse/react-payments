@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 interface ButtonProps {
   fullWidth?: boolean;
   rounded?: boolean;
+  disabled?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`
@@ -16,6 +17,8 @@ const Button = styled.button<ButtonProps>`
   font-weight: 700;
   font-style: Bold;
   font-size: 1rem;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 `;
 
 export default Button;
