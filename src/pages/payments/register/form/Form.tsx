@@ -154,7 +154,7 @@ export const Form = () => {
                   value={cvc.values.cvc}
                   maxLength={3}
                   placeholder="123"
-                  isError={!!cvc.invalidAttemp || (cvc.blur.cvc && !cvc.errors.cvc.length)}
+                  isError={!!cvc.invalidAttemp.cvc || (cvc.blur.cvc && !cvc.errors.cvc.length)}
                   onChange={cvc.onChange}
                   onBlur={cvc.onBlur}
                 />
