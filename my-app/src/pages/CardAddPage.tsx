@@ -19,7 +19,10 @@ const CardAddPage = () => {
     if (!isFormValid) return;
     // 라우팅 페이지 연결
     navigate('/card-add-success', {
-      state: formState,
+      state: {
+        cardNumberPrefixFourth: formState.cardNumber[0],
+        cardCompany: formState.cardCompany,
+      },
     });
   };
 

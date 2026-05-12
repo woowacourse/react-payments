@@ -12,8 +12,7 @@ const CardAddSuccessPage = () => {
   const navigate = useNavigate();
   const cardState = location.state;
 
-  const { cardNumber, cardCompany } = cardState;
-  const cardNumberPrefixFourth = cardNumber.join('').slice(0, 4);
+  const { cardNumberPrefixFourth, cardCompany } = cardState;
 
   const handleSubmit = () => {
     navigate('/', { replace: true });
