@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import completeCheck from "./assets/completeCheck.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from "./components/Button/Button";
 
 const CardComplete = () => {
   const { state } = useLocation();
@@ -38,20 +39,7 @@ const CardComplete = () => {
         {numbers[0]}로 시작하는 <br />
         {brand} 카드가 등록되었어요.
       </span>
-      <button
-        onClick={() => navigate("/")}
-        css={css`
-          width: 100%;
-          background: #333333;
-          color: #f3f3f3;
-          height: 44px;
-          border-radius: 5px;
-          font-size: 15px;
-          font-weight: 700;
-        `}
-      >
-        확인
-      </button>
+      <Button onClick={() => navigate("/")}>확인</Button>
     </div>
   );
 };
