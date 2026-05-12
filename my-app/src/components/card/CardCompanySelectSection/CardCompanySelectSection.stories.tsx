@@ -3,7 +3,7 @@ import { fn } from "storybook/test";
 import CardCompanySelectSection from "./CardCompanySelectSection";
 
 const meta = {
-  title: "Components/CardCompanySelectSection",
+  title: "Components/Card/CardCompanySelectSection",
   component: CardCompanySelectSection,
   tags: ["autodocs"],
   parameters: {

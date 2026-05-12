@@ -1,12 +1,12 @@
 import { css } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
 
-import Card from "../components/Card/Card";
-import CardCompanySelectSection from "../components/CardCompanySelectSection/CardCompanySelectSection";
-import CardNumberInputSection from "../components/CardNumberInputSection/CardNumberInputSection";
-import CvcInputSection from "../components/CvcInputSection/CvcInputSection";
-import ExpiryDateInputSection from "../components/ExpiryDateInputSection/ExpiryDateInputSection";
-import PasswordInputSection from "../components/PasswordInputSection/PasswordInputSection";
+import Card from "../components/card/Card/Card";
+import CardCompanySelectSection from "../components/card/CardCompanySelectSection/CardCompanySelectSection";
+import CardNumberInputSection from "../components/card/CardNumberInputSection/CardNumberInputSection";
+import CvcInputSection from "../components/card/CvcInputSection/CvcInputSection";
+import ExpiryDateInputSection from "../components/card/ExpiryDateInputSection/ExpiryDateInputSection";
+import PasswordInputSection from "../components/card/PasswordInputSection/PasswordInputSection";
 
 import { useCardForm } from "../hooks/useCardForm";
 

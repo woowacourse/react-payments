@@ -1,25 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import CardNumberInputSection from "./CardNumberInputSection";
+import ExpiryDateInputSection from "./ExpiryDateInputSection";
 
 const meta = {
-  title: "Components/CardNumberInputSection",
-  component: CardNumberInputSection,
+  title: "Components/Card/ExpiryDateInputSection",
+  component: ExpiryDateInputSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },
   args: {
     onValueHandler: fn(),
-    maxLength: 16,
-    isSupportedNetwork: false,
   },
   render: (args) => (
     <div style={{ width: 320 }}>
-      <CardNumberInputSection {...args} />
+      <ExpiryDateInputSection {...args} />
     </div>
   ),
-} satisfies Meta<typeof CardNumberInputSection>;
+} satisfies Meta<typeof ExpiryDateInputSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -27,19 +25,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const FilledValid: Story = {
-  args: {
-    isSupportedNetwork: true,
-  },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
     const inputs = canvas.getAllByRole("textbox");
 
-    await userEvent.type(inputs[0], "4123");
-    await userEvent.type(inputs[1], "4567");
-    await userEvent.type(inputs[2], "8901");
-    await userEvent.type(inputs[3], "2345");
+    await userEvent.type(inputs[0], "08");
+    await userEvent.type(inputs[1], "29");
 
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith(["4123", "4567", "8901", "2345"]);
+    await expect(args.onValueHandler).toHaveBeenLastCalledWith(["08", "29"]);
   },
 };
 
@@ -48,21 +41,21 @@ export const ErrorNonNumeric: Story = {
     const canvas = within(canvasElement);
     const inputs = canvas.getAllByRole("textbox");
 
-    await userEvent.type(inputs[0], "abcd");
+    await userEvent.type(inputs[1], "aa");
     await userEvent.tab();
 
     await expect(canvas.getByText("숫자만 입력 가능합니다")).toBeInTheDocument();
   },
 };
 
-export const ErrorUnsupportedBrand: Story = {
+export const ErrorInvalidMonth: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const inputs = canvas.getAllByRole("textbox");
 
-    await userEvent.type(inputs[0], "1234");
+    await userEvent.type(inputs[0], "13");
     await userEvent.tab();
 
-    await expect(canvas.getByText("이 카드 브랜드는 지원하지 않습니다.")).toBeInTheDocument();
+    await expect(canvas.getByText("유효한 날짜를 입력해주세요")).toBeInTheDocument();
   },
 };

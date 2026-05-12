@@ -1,8 +1,8 @@
-import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
-import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
+import InputSectionLayout from "../../common/InputSectionLayout/InputSectionLayout";
+import ValidatedInputGroup from "../../common/ValidatedInputGroup/ValidatedInputGroup";
 
-import { useCardNumberInput } from "../../hooks/useCardNumberInput";
-import { inputStyle } from "../../styles/inputStyle";
+import { useCardNumberInput } from "../../../hooks/useCardNumberInput";
+import { inputStyle } from "../../../styles/inputStyle";
 
 type CardNumberInputSectionProps = {
   onValueHandler: (numbers: string[]) => void;

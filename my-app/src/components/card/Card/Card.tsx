@@ -1,14 +1,14 @@
 import { css } from "@emotion/react";
 
-import { CARD_COMPANIES, DEFAULT_CARD_COLOR, isCardCompany } from "../../constants/cardCompany";
-import type { CardInfo } from "../../types";
-import type { CardNetwork } from "../../utils/cardNetwork";
+import { CARD_COMPANIES, DEFAULT_CARD_COLOR, isCardCompany } from "../../../constants/cardCompany";
+import type { CardInfo } from "../../../types";
+import type { CardNetwork } from "../../../utils/cardNetwork";
 
-import amexLogo from "../../assets/American Express.png";
-import dinersLogo from "../../assets/Diners Club.png";
-import masterLogo from "../../assets/masterLogo.png";
-import unionpayLogo from "../../assets/China UnionPay.png";
-import visaLogo from "../../assets/visaLogo.png";
+import amexLogo from "../../../assets/American Express.png";
+import dinersLogo from "../../../assets/Diners Club.png";
+import masterLogo from "../../../assets/masterLogo.png";
+import unionpayLogo from "../../../assets/China UnionPay.png";
+import visaLogo from "../../../assets/visaLogo.png";
 
 const NETWORK_LOGO: Record<Exclude<CardNetwork, "">, { src: string; alt: string }> = {
   visa: { src: visaLogo, alt: "Visa" },

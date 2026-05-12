@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import CvcInputSection from "./CvcInputSection";
+import PasswordInputSection from "./PasswordInputSection";
 
 const meta = {
-  title: "Components/CvcInputSection",
-  component: CvcInputSection,
+  title: "Components/Card/PasswordInputSection",
+  component: PasswordInputSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -14,10 +14,10 @@ const meta = {
   },
   render: (args) => (
     <div style={{ width: 320 }}>
-      <CvcInputSection {...args} />
+      <PasswordInputSection {...args} />
     </div>
   ),
-} satisfies Meta<typeof CvcInputSection>;
+} satisfies Meta<typeof PasswordInputSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -29,9 +29,9 @@ export const FilledValid: Story = {
     const canvas = within(canvasElement);
     const input = canvas.getByRole("textbox");
 
-    await userEvent.type(input, "123");
+    await userEvent.type(input, "12");
 
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith("123");
+    await expect(args.onValueHandler).toHaveBeenLastCalledWith("12");
   },
 };
 

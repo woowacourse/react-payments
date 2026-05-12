@@ -1,4 +1,4 @@
-import { getCardCompletion } from "../utils/getCardCompletion";
+import { getCardCompletion } from "../utils/cardCompletion";
 import { useCardInfo } from "./useCardInfo";
 
 export const useCardForm = () => {

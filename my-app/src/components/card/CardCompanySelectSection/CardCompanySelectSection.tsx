@@ -1,7 +1,7 @@
 import Select from "react-select";
 
-import { CARD_COMPANIES, type CardCompany } from "../../constants/cardCompany";
-import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
+import { CARD_COMPANIES, type CardCompany } from "../../../constants/cardCompany";
+import InputSectionLayout from "../../common/InputSectionLayout/InputSectionLayout";
 
 type CardCompanySelectorSectionProps = {
   onSelect: (company: CardCompany) => void;

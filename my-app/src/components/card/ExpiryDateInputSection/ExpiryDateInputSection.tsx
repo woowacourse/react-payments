@@ -1,8 +1,8 @@
-import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
-import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
+import InputSectionLayout from "../../common/InputSectionLayout/InputSectionLayout";
+import ValidatedInputGroup from "../../common/ValidatedInputGroup/ValidatedInputGroup";
 
-import { useExpiryDateInput } from "../../hooks/useExpiryDateInput";
-import { inputStyle } from "../../styles/inputStyle";
+import { useExpiryDateInput } from "../../../hooks/useExpiryDateInput";
+import { inputStyle } from "../../../styles/inputStyle";
 
 type ExpiryDateInputSectionProps = {
   onValueHandler: (values: string[]) => void;

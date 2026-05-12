@@ -1,10 +1,10 @@
-import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
-import ValidatedInputGroup from "../ValidatedInputGroup/ValidatedInputGroup";
+import InputSectionLayout from "../../common/InputSectionLayout/InputSectionLayout";
+import ValidatedInputGroup from "../../common/ValidatedInputGroup/ValidatedInputGroup";
 
-import { CVC_LENGTH } from "../../constants/cardField";
-import { useSingleFieldInput } from "../../hooks/useSingleFieldInput";
-import { inputStyle } from "../../styles/inputStyle";
-import { validateNumeric } from "../../utils/validators";
+import { CVC_LENGTH } from "../../../constants/cardField";
+import { useSingleFieldInput } from "../../../hooks/useSingleFieldInput";
+import { inputStyle } from "../../../styles/inputStyle";
+import { validateNumeric } from "../../../utils/validators";
 
 type CvcInputSectionProps = {
   onValueHandler: (value: string) => void;

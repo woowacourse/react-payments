@@ -64,7 +64,7 @@ const InteractiveValidatedInputGroup = (args: ValidatedInputGroupProps) => {
 };
 
 const meta = {
-  title: "Components/ValidatedInputGroup",
+  title: "Components/Common/ValidatedInputGroup",
   component: ValidatedInputGroup,
   tags: ["autodocs"],
   parameters: {

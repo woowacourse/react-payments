@@ -11,7 +11,7 @@ const inputStyle = {
 };
 
 const meta = {
-  title: "Components/InputSectionLayout",
+  title: "Components/Common/InputSectionLayout",
   component: InputSectionLayout,
   tags: ["autodocs"],
   parameters: {
