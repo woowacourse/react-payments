@@ -55,7 +55,9 @@ export const useCardForm = () => {
     password: passwordField.password,
   };
 
-  const hasFormError = !Object.values(fields).every((field) => field.isComplete);
+  const hasFormError = !Object.values(fields).every(
+    (field) => field.isComplete,
+  );
 
   return {
     fields,
