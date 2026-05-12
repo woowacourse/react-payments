@@ -61,6 +61,8 @@ export const Form = () => {
     if (cvc.isValid) setStep(4);
   }, [cardNumbers.isValid, card.isValid, expirationDate.isValid, cvc.isValid, password.isValid]);
 
+  const brandCard = renderBrandCard(Object.values(cardNumbers.values));
+
   const isValid = cardNumbers.isValid && card.isValid && expirationDate.isValid && cvc.isValid && password.isValid;
 
   return (
@@ -70,7 +72,7 @@ export const Form = () => {
           <CreditCard
             bank="default"
             card={card.values.card}
-            cardBrand={renderBrandCard(Object.values(cardNumbers.values))}
+            cardBrand={brandCard}
             cardNumberList={Object.values(cardNumbers.values)}
             expirationDate={[expirationDate.values.month, expirationDate.values.year]}
           />

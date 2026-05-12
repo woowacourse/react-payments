@@ -4,7 +4,7 @@ import MastercardSvg from '@/core/assets/Mastercard.svg?react';
 import VisaSvg from '@/core/assets/Visa.svg?react';
 
 type Bank = 'default';
-type BrandType = 'visa' | 'mastercard' | 'default';
+type BrandType = 'visa' | 'mastercard' | 'diner' | 'amex' | 'union' | 'default';
 type CardNumberType = string[] | undefined;
 type ExpirationDate = string[] | undefined;
 
