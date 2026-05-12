@@ -15,7 +15,7 @@ const CvcField = ({
       <Label value="CVC" />
       <InputWrapper>
         <CvcInput
-          value={field.value}
+          value={field.cvcNumber}
           autoFocus={autoFocus}
           maxLength={3}
           inputMode="numeric"
