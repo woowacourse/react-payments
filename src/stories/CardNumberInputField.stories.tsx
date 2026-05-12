@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import useFormWrapper from "../components/common/FormContainer";
-import CardNumberInputField from "../components/feature/CardInfoFormSection/components/CardNumberInputField/CardNumberInputField";
+import useFormWrapper from "@hooks/useFormWrapper";
+import CardNumberInputField from "../components/feature/CardInfoFormSection/components/CardNumberInputField";
 import { INITIAL_CARD_INFO_FORM_STATE } from "../components/feature/CardInfoFormSection/formState";
 
 const meta = {

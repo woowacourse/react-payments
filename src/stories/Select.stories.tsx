@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
-import Select from "../components/common/Select/Select";
+import Select from "../components/common/Select";
 
 const CARD_COMPANIES = [
   { value: "BC", label: "BC카드" },

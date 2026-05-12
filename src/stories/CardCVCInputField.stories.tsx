@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import useFormWrapper from "../components/common/FormContainer";
+import useFormWrapper from "@hooks/useFormWrapper";
 import CardCVCInputField from "../components/feature/CardInfoFormSection/components/CardCVCInputField";
 import { INITIAL_CARD_INFO_FORM_STATE } from "../components/feature/CardInfoFormSection/formState";
 

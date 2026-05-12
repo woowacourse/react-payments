@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Input from "@/components/common/Input";
 import type { ComponentProps } from "react";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
-import FieldLayout from "./FieldLayout";
+import FieldLayout from "../FieldLayout";
 
 interface InputFieldProps {
   title: string;

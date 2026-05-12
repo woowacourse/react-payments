@@ -1,15 +1,15 @@
-import StepFunnel from "@components/common/StepFunnel/StepFunnel";
+import StepFunnel from "@components/common/StepFunnel";
 import styled from "@emotion/styled";
 import useFormWrapper from "@hooks/useFormWrapper";
 import { useNavigate } from "react-router";
 
-import CardCompanySelectField from "./components/CardCompanySelectField/CardCompanySelectField";
+import CardCompanySelectField from "./components/CardCompanySelectField";
 import CardCVCInputField from "./components/CardCVCInputField";
 import CardInfoFormSubmitButton from "./components/CardInfoFormSubmitButton";
-import CardNumberInputField from "./components/CardNumberInputField/CardNumberInputField";
+import CardNumberInputField from "./components/CardNumberInputField";
 import CardPasswordField from "./components/CardPasswordField";
 import CardPreview from "./components/CardPreview";
-import CardValidityPeriodInputField from "./components/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import CardValidityPeriodInputField from "./components/CardValidityPeriodInputField";
 import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
 
 const CardInfoFormSection = () => {

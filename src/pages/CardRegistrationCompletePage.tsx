@@ -1,6 +1,6 @@
 import Check from "@assets/Check.png";
 import PageWrapper from "@components/common/PageWrapper";
-import GoHomeButton from "@components/feature/GoHomeButton/GoHomeButton";
+import GoHomeButton from "@components/feature/GoHomeButton";
 import CARD from "@constants/card";
 import styled from "@emotion/styled";
 import { useSearchParams } from "react-router";
