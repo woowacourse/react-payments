@@ -11,6 +11,7 @@ interface CardNumberInputWrapperProps {
     setErrorMessage: (errorMessage: string | null) => void;
     hasTouched: boolean;
     getRef: (index: number) => (el: HTMLInputElement | null) => void;
+    maxLengths: number[];
 }
 
 export default function CardNumberInputWrapper({
@@ -22,10 +23,11 @@ export default function CardNumberInputWrapper({
     setErrorMessage,
     hasTouched,
     getRef,
+    maxLengths,
 }: CardNumberInputWrapperProps) {
     return (
         <CardInputWrapper errorMessage={errorMessage}>
-            {value.map((_, index) => (
+            {maxLengths.map((maxLength, index) => (
                 <CardInfoInput
                     key={`${index}th-input`}
                     ref={getRef(index)}
@@ -35,8 +37,8 @@ export default function CardNumberInputWrapper({
                     placeholder="1234"
                     inputBlock={isNumeric}
                     setErrorMessage={setErrorMessage}
-                    isError={hasTouched && value[index].length !== 4}
-                    maxLength={4}
+                    isError={hasTouched && value[index].length !== maxLength}
+                    maxLength={maxLength}
                     onBlur={handleBlur}
                     onFocus={handleFocus}
                 />

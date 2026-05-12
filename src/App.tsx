@@ -13,6 +13,7 @@ import PasswordInputWrapper from './components/InputWrapper/PasswordInputWrapper
 import CardBrandInputWrapper from './components/InputWrapper/CardBrandInputWrapper';
 import type { CardBrandValue } from './hooks/useCardInfoValue';
 import { getPasswordErrorMessage } from './utils/getPasswordErrorMessage';
+import { getCardNumberMaxLengths } from './utils/getCardNumberMaxLengths';
 import { isEachCardNumber } from './utils/isEachCardNumber';
 import { isCVCInputFilled } from './utils/isCVCInputFilled';
 import { isPasswordInputFilled } from './utils/isPasswordInputFilled';
@@ -29,7 +30,11 @@ function App() {
         handleFocus: handleCardNumberFocus,
         isSatisfy: isCardNumberSatisfy,
         getRef: getCardNumberRef,
-    } = useCardInfoInputField({ validator: getCardNumberErrorMessage, fieldCount: 4, isFilled: isEachCardNumber });
+    } = useCardInfoInputField({
+        validator: getCardNumberErrorMessage,
+        fieldCount: 4,
+        isFilled: (value, index) => isEachCardNumber(value, getCardNumberMaxLengths(cardNumberValues[0])[index]),
+    });
 
     const [cardBrand, setCardBrand] = useState<CardBrandValue>('');
 
@@ -159,6 +164,7 @@ function App() {
                         setErrorMessage={setCardNumberErrorMessage}
                         hasTouched={hasCardNumberTouched}
                         getRef={getCardNumberRef}
+                        maxLengths={getCardNumberMaxLengths(cardNumberValues[0])}
                     />
                 </CardInfoSection>
             </InputSectionContainer>
