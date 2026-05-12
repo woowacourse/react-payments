@@ -61,10 +61,10 @@ type ValidationRule = {
 ```ts
 // src/constants.ts
 const RULES = {
-  required:    { name: 'required',      fn: (v) => v.length > 0,          on: ['onBlur'] },
-  numberOnly:  { name: 'numberOnly',    fn: (v) => /^\d+$/.test(v),       on: ['onChange'] },
-  validMonth:  { name: 'invalidMonth',  fn: isValidMonth,                  on: ['onBlur'] },
-  validYear:   { name: 'invalidYear',   fn: isValidYear,                   on: ['onBlur'] },
+  required: { name: 'required', fn: (v) => v.length > 0, on: ['onBlur'] },
+  numberOnly: { name: 'numberOnly', fn: (v) => /^\d+$/.test(v), on: ['onChange'] },
+  validMonth: { name: 'invalidMonth', fn: isValidMonth, on: ['onBlur'] },
+  validYear: { name: 'invalidYear', fn: isValidYear, on: ['onBlur'] },
   exactLength: (length) => ({ name: 'invalidLength', fn: (v) => v.length === length, on: ['onBlur'] }),
 };
 ```
@@ -73,9 +73,9 @@ const RULES = {
 
 ```ts
 // src/utils.ts
-validate(rules, 'onChange', value);  // onChange에 등록된 rules만 실행 → ErrorStatus 반환
-validate(rules, 'onBlur', value);    // onBlur에 등록된 rules만 실행 → ErrorStatus 반환
-validateAll(rules, value);           // 모든 rules 실행 (form submit 시) → ErrorStatus 반환
+validate(rules, 'onChange', value); // onChange에 등록된 rules만 실행 → ErrorStatus 반환
+validate(rules, 'onBlur', value); // onBlur에 등록된 rules만 실행 → ErrorStatus 반환
+validateAll(rules, value); // 모든 rules 실행 (form submit 시) → ErrorStatus 반환
 ```
 
 ---
