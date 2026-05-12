@@ -19,5 +19,9 @@ export default function useInputFocus(count: number) {
     }
   };
 
-  return { setRef, focusNext, focusPrev };
+  const focusFirst = () => {
+    inputRefs.current[0]?.focus();
+  };
+
+  return { setRef, focusNext, focusPrev, focusFirst };
 }
