@@ -9,6 +9,10 @@
   border: none;
 }
 
+.hide {
+  /* display: none; */
+}
+
 .titleContainer {
   display: flex;
   align-content: space-between;
