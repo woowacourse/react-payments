@@ -71,6 +71,7 @@ export default function AddCardPage() {
           {stepIndex >= 3 && (
             <CVCField
               value={values.cvc}
+              cardBrand={cardBrand}
               errorStatus={errors.cvc as ErrorStatus}
               setFieldValue={setFieldValue}
               setFieldError={setFieldError}
