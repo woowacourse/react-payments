@@ -4,7 +4,7 @@ import Input from '../ui/Input';
 import type { CardInfo, ErrorStatus, Validate } from '../../types';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
-import { isNumber, sanitizeNumber } from '../../utils';
+import { getActiveError, isNumber, sanitizeNumber } from '../../utils';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
@@ -50,17 +50,9 @@ export default function CardNumbersField({
     }
   }, [activeErrorStatus, value]);
 
-  const getActiveError = (inputValue: string, eventType: 'change' | 'blur') => {
-    const activeRule = rules
-      .filter((rule) => rule.type.includes(eventType))
-      .find((rule) => rule.rule(inputValue));
-
-    return activeRule?.errorStatus ?? null;
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const error = getActiveError(inputValue, 'change');
+    const error = getActiveError(rules, inputValue, 'change');
 
     setFieldError('cardNumbers', error, index);
     setFieldValue('cardNumbers', sanitizeNumber(inputValue), index);
@@ -68,7 +60,7 @@ export default function CardNumbersField({
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const error = getActiveError(inputValue, 'blur');
+    const error = getActiveError(rules, inputValue, 'blur');
 
     if (error) {
       setFieldError('cardNumbers', error, index);

@@ -4,7 +4,7 @@ import Input from '../ui/Input';
 import type { CardInfo, ExpirationPeriodErrorStatus, Validate } from '../../types';
 import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
-import { isNumber, isValidMonth, isValidYear, sanitizeNumber } from '../../utils';
+import { getActiveError, isNumber, isValidMonth, isValidYear, sanitizeNumber } from '../../utils';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
@@ -62,17 +62,9 @@ export default function ExpirationPeriodField({
     }
   }, [activeErrorStatus, value]);
 
-  const getActiveError = (inputValue: string, index: number, eventType: 'change' | 'blur') => {
-    const activeRule = rules
-      .filter((rule) => rule.type.includes(eventType))
-      .find((rule) => rule.rule(inputValue, index));
-
-    return activeRule?.errorStatus ?? null;
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const error = getActiveError(inputValue, index, 'change');
+    const error = getActiveError(rules, inputValue, 'change', index);
 
     setFieldError('expirationPeriod', error, index);
     setFieldValue('expirationPeriod', sanitizeNumber(inputValue), index);
@@ -80,7 +72,7 @@ export default function ExpirationPeriodField({
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const error = getActiveError(inputValue, index, 'blur');
+    const error = getActiveError(rules, inputValue, 'blur', index);
 
     if (error) {
       setFieldError('expirationPeriod', error, index);
