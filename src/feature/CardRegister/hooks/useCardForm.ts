@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import type {
-  CardFormInfoType,
-  CardPreviewInfoType,
-} from '../../../common/types/CardPreviewInfoType';
+
 import { useCvcField, type CvcFieldType } from './useCvcField';
 import { useExpiryField, type ExpiryFieldType } from './useExpiryField';
 import { useNumbersField, type NumbersFieldType } from './useNumbersField';
@@ -11,6 +8,10 @@ import {
   UseCardCompanyField,
   type CardCompanyFieldType,
 } from './useCardCompanyField';
+import type {
+  CardFormInfoType,
+  CardPreviewInfoType,
+} from '../types/CardPreviewInfoType';
 
 export type CardFormFieldsType = {
   numbers: NumbersFieldType;

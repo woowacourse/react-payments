@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import { useNavigate } from 'react-router-dom';
-import type { CardFormInfoType } from '../../common/types/CardPreviewInfoType';
 import { useCardForm } from './hooks/useCardForm';
+import type { CardFormInfoType } from './types/CardPreviewInfoType';
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
