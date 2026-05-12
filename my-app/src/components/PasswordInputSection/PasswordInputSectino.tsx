@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import useInputValidation from "../../hooks/useInputValidation";
 import { validateCvc } from "../../utils/validators";
 
-const PasswardInputSection = ({
+const PasswordInputSection = ({
   onValueHandler,
   inputValue,
 }: {
@@ -42,4 +42,4 @@ const PasswardInputSection = ({
   );
 };
 
-export default PasswardInputSection;
+export default PasswordInputSection;

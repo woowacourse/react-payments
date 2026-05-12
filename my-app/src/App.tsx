@@ -6,7 +6,7 @@ import CardNumberInputSection from "./components/CardNumberInputSection/CardNumb
 import CardCompanySelectSection from "./components/CardCompanySelectSection/CardCompanySelectSection.tsx";
 import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
 import CvcInputSection from "./components/CvcInputSection/CvcInputSection.tsx";
-import PasswardInputSection from "./components/PasswordInputSection/PasswordInputSectino.tsx";
+import PasswordInputSection from "./components/PasswordInputSection/PasswordInputSectino.tsx";
 import { decideBrandName, getFieldConfig } from "./utils/decideCardInfo.ts";
 import { validateCardNumber, validateExpiryDate, validateCvc } from "./utils/validators.ts";
 import { useNavigate } from "react-router-dom";
@@ -123,7 +123,7 @@ function App() {
         >
           <form id="card-form" onSubmit={handleSubmit}>
             {step >= 4 && (
-              <PasswardInputSection onValueHandler={passwordHandler} inputValue={cardInfo.password} />
+              <PasswordInputSection onValueHandler={passwordHandler} inputValue={cardInfo.password} />
             )}
             {step >= 3 && <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />}
             {step >= 2 && (
