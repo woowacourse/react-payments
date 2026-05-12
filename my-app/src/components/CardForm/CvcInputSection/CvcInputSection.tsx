@@ -1,7 +1,7 @@
-import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
+import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout"
 import { css } from "@emotion/react";
-import { validateCvc } from "../../utils/validators";
-import useInputValidation from "../../hooks/useInputValidation";
+import { validateCvc } from "../../../utils/validators";
+import useInputValidation from "../../../hooks/useInputValidation";
 
 const CvcInputSection = ({
   onValueHandler,
@@ -24,7 +24,12 @@ const CvcInputSection = ({
         value={inputValue}
         onChange={(e) => onChange(e.target.value)}
         onBlur={handleBlur}
-        css={[baseInputStyle, css`border: 1.01px solid ${errorMessage ? "#ff3d3d" : "#ACACAC"};`]}
+        css={[
+          baseInputStyle,
+          css`
+            border: 1.01px solid ${errorMessage ? "#ff3d3d" : "#ACACAC"};
+          `,
+        ]}
         placeholder={"123"}
       />
     </InputSectionLayout>

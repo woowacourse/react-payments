@@ -1,8 +1,8 @@
 import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
 import { useRef } from "react";
 import { css } from "@emotion/react";
-import { validateCardNumber } from "../../utils/validators";
-import useInputValidation from "../../hooks/useInputValidation";
+import { validateCardNumber } from "../../../utils/validators";
+import useInputValidation from "../../../hooks/useInputValidation";
 
 const CardNumberInputSection = ({
   onValueHandler,
@@ -13,7 +13,10 @@ const CardNumberInputSection = ({
   inputValues: string[];
   fieldConfig: number[];
 }) => {
-  const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(validateCardNumber, inputValues);
+  const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(
+    validateCardNumber,
+    inputValues,
+  );
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const onChange = (index: number, value: string) => {

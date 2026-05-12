@@ -1,7 +1,7 @@
 import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
-import { validateExpiryDate } from "../../utils/validators";
-import useInputValidation from "../../hooks/useInputValidation";
+import { validateExpiryDate } from "../../../utils/validators";
+import useInputValidation from "../../../hooks/useInputValidation";
 
 const ExpiryDateInputSection = ({
   onValueHandler,
@@ -10,7 +10,10 @@ const ExpiryDateInputSection = ({
   onValueHandler: (cardInfo: string[]) => void;
   inputValues: string[];
 }) => {
-  const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(validateExpiryDate, inputValues);
+  const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(
+    validateExpiryDate,
+    inputValues,
+  );
   const placeHolder = ["MM", "YY"];
 
   const onChange = (index: number, value: string) => {
@@ -35,7 +38,12 @@ const ExpiryDateInputSection = ({
           value={value}
           onChange={(e) => onChange(i, e.target.value)}
           onBlur={handleBlur}
-          css={[baseInputStyle, css`border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};`]}
+          css={[
+            baseInputStyle,
+            css`
+              border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
+            `,
+          ]}
           placeholder={placeHolder[i]}
         />
       ))}

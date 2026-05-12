@@ -1,7 +1,7 @@
 import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
-import useInputValidation from "../../hooks/useInputValidation";
-import { validateCvc } from "../../utils/validators";
+import useInputValidation from "../../../hooks/useInputValidation";
+import { validateCvc } from "../../../utils/validators";
 
 const PasswordInputSection = ({
   onValueHandler,
@@ -27,6 +27,7 @@ const PasswordInputSection = ({
       <input
         type="password"
         inputMode="numeric"
+        autoComplete="off"
         maxLength={2}
         value={inputValue}
         onChange={(e) => onChange(e.target.value)}
