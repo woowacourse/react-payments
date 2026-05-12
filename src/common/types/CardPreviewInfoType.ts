@@ -1,4 +1,4 @@
-import type { CardCompanyId } from './CardPreview';
+import type { CardCompanyId } from '../../feature/CardRegister/constant/cardCompanies';
 
 export type CardPreviewInfoType = {
   cardNumbers: string[];

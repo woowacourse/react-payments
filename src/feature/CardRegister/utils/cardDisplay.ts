@@ -1,8 +1,8 @@
-import type {
-  CardBrandName,
-  CardCompanyId,
-} from '../../../common/types/CardPreview';
-import { CARD_COMPANIES } from '../constant/CARD_BRANDS';
+import type { CardBrandName } from '../constant/cardBrands';
+import {
+  CARD_COMPANIES,
+  type CardCompanyId,
+} from '../constant/cardCompanies';
 import { isPrefixInRange } from './validator';
 
 export const getCardBrandName = (

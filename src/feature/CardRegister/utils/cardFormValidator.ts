@@ -1,4 +1,4 @@
-import type { CardCompanyId } from '../../../common/types/CardPreview';
+import type { CardCompanyId } from '../constant/cardCompanies';
 import { getCardNumberSegmentLengths } from './cardInfo';
 import { isExactLength, isValidMonth } from './validator';
 

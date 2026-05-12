@@ -1,4 +1,4 @@
-import { CARD_BRANDS } from '../constant/CARD_BRANDS';
+import { CARD_BRANDS } from '../constant/cardBrands';
 import { getCardBrandName } from './cardDisplay';
 
 export const getCardNumberSegmentLengths = (cardNumbers: string[]) => {

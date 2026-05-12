@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
 import InfoInputSection from '../../../../../feature/CardRegister/components/InfoInputSection/InfoInputSection';
-import type { CardCompanyId } from '../../../../../common/types/CardPreview';
+import type { CardCompanyId } from '../../../../../feature/CardRegister/constant/cardCompanies';
 
 const meta = {
   title: 'feature/CardRegister/components/InfoInputSection',

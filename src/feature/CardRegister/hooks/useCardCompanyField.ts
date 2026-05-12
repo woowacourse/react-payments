@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import type { CardCompanyId } from '../../../common/types/CardPreview';
-import { CARD_COMPANIES } from '../constant/CARD_BRANDS';
+import {
+  CARD_COMPANIES,
+  type CardCompanyId,
+} from '../constant/cardCompanies';
 
 type UseCardCompanyFieldParams = {
   onComplete?: () => void;
