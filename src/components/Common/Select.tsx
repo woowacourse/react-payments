@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 interface SelectProps {
-  value: string;
+  value?: string;
 }
 
 const SelectBase = styled.select<SelectProps>`
@@ -12,7 +12,7 @@ const SelectBase = styled.select<SelectProps>`
   border: 1px solid var(--color-border);
   background: no-repeat calc(100% - 8px) 50% url(${import.meta.env.BASE_URL}select_icon.svg);
   appearance: none;
-  color: ${(props) => (props.value.length ? 'var(--color-black)' : 'var(--color-description)')};
+  color: ${(props) => (props.value?.length ? 'var(--color-black)' : 'var(--color-description)')};
 
   &:focus {
     border-color: var(--color-black);
