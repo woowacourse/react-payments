@@ -1,5 +1,6 @@
 interface InputFieldConfig {
   id: string;
+  type: 'text' | 'password';
   sectionTitle: string;
   hintText?: string;
   label: string;

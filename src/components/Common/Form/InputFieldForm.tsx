@@ -71,7 +71,7 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
             key={index}
             isError={touched && error}
             id={index === 0 ? fieldConfig.id : `${fieldConfig.id}-${index}`}
-            type="text"
+            type={fieldConfig.type}
             maxLength={maxLength}
             inputMode="numeric"
             autoComplete="off"
