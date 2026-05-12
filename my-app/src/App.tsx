@@ -6,6 +6,7 @@ import CardNumberInputSection from "./components/CardNumberInputSection/CardNumb
 import CardCompanySelectSection from "./components/CardCompanySelectSection/CardCompanySelectSection.tsx";
 import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
 import CvcInputSection from "./components/CvcInputSection/CvcInputSection.tsx";
+import PasswardInputSection from "./components/PasswordInputSection/PasswordInputSectino.tsx";
 import { decideBrandName, getFieldConfig } from "./utils/decideCardInfo.ts";
 import { validateCardNumber, validateExpiryDate, validateCvc } from "./utils/validators.ts";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +17,7 @@ function App() {
     expiry: ["", ""],
     cvc: "",
     company: "",
+    password: "",
   });
   const [step, setStep] = useState(0);
 
@@ -53,24 +55,32 @@ function App() {
     setCardInfo((prev) => {
       return { ...prev, cvc: cvc };
     });
+    setStep((prev) => Math.max(prev, 4));
   };
 
   const selectCompanyHandler = (company: string) => {
     setCardInfo((prev) => ({ ...prev, company }));
     setStep((prev) => Math.max(prev, 2));
   };
+  const passwordHandler = (password: string) => {
+    setCardInfo((prev) => {
+      return { ...prev, password };
+    });
+  };
 
   const isComplete =
     fieldConfig.every((len, i) => cardInfo.numbers[i]?.length === len) &&
     cardInfo.company !== "" &&
     cardInfo.expiry.every((e) => e.length === 2) &&
-    cardInfo.cvc.length === 3;
+    cardInfo.cvc.length === 3 &&
+    cardInfo.password.length === 2;
 
   const isValid =
     isComplete &&
     validateCardNumber(cardInfo.numbers).errorIndex === -1 &&
     validateExpiryDate(cardInfo.expiry).errorIndex === -1 &&
-    validateCvc(cardInfo.cvc).errorIndex === -1;
+    validateCvc(cardInfo.cvc).errorIndex === -1 &&
+    validateCvc(cardInfo.password).errorIndex === -1;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -108,6 +118,9 @@ function App() {
           `}
         >
           <form id="card-form" onSubmit={handleSubmit}>
+            {step >= 4 && (
+              <PasswardInputSection onValueHandler={passwordHandler} inputValue={cardInfo.password} />
+            )}
             {step >= 3 && <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />}
             {step >= 2 && (
               <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />

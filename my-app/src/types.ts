@@ -3,4 +3,5 @@ export type CardInfo = {
   expiry: string[];
   cvc: string;
   company: string;
+  password: string;
 };
