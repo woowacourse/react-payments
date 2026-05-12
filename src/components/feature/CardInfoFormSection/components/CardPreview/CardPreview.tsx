@@ -7,9 +7,11 @@ import type { CardInfoFormState } from "../../formState";
 
 const CardPreview = () => {
   const { getValue } = useFormValue<CardInfoFormState>();
-  const cardNumber = getValue("cardNumber");
+  const cardNumberUnits = getValue("cardNumber");
+  const cardNumber = cardNumberUnits.join("");
   const validityPeriod = getValue("validityPeriod");
   const company = getValue("selectedCardCompany");
+
   const brand = detectCardBrand(cardNumber);
 
   return (

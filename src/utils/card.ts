@@ -63,7 +63,8 @@ export const getCardNumberUnitMaxLengthByBrand = (
 export const formatCardNumberUnitByBrand = (
   cardNumberUnit: string,
   brand: CardBrand | null,
-) => {
+): //TODO: 타입 정의해서 사용하기
+  [string, string, string, string] | [string, string, string] => {
   if (brand === "AMEX") {
     const firstUnit = cardNumberUnit.slice(
       0,

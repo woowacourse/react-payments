@@ -28,62 +28,74 @@ const updateArray = <T extends unknown[]>(
 
 const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
   const { getValue, setValue } = useFormValue<CardInfoFormState>();
-  const cardNumber = getValue("cardNumber");
+  const cardNumberUnits = getValue("cardNumber");
+  const cardNumber = cardNumberUnits.join("");
   const status = getValue("cardNumberStatus");
   const { registerInputRef, setNextFocus } = useFocus();
 
   const brand = detectCardBrand(cardNumber);
-  const formattedCardNumberUnits = formatCardNumberUnitByBrand(
-    cardNumber,
-    brand,
-  );
 
   const handleCardNumberBlur = (index: number, input: string) => {
     const cardNumberInputStatus = checkCardNumberInputStatus(
       input,
       getCardNumberUnitMaxLengthByBrand(brand, index),
     );
+    const blurStatus =
+      cardNumberInputStatus === "DEFAULT" ? "EMPTY" : cardNumberInputStatus;
 
-    setValue(
-      "cardNumberStatus",
-      updateArray(status, index, cardNumberInputStatus),
-    );
+    setValue("cardNumberStatus", updateArray(status, index, blurStatus));
   };
 
   const handleCardNumberChange = (index: number, input: string) => {
     const unitMaxLength = getCardNumberUnitMaxLengthByBrand(brand, index);
 
-    const updatedFormattedUnits = updateArray(
-      formattedCardNumberUnits,
-      index,
-      input,
-    );
-    const joined = updatedFormattedUnits.join("");
+    const updatedUnits = updateArray(cardNumberUnits, index, input);
+    const joined = updatedUnits.join("");
     const newBrand = detectCardBrand(joined);
     const newCardNumberMaxLength = getCardNumberLengthByBrand(newBrand);
     const newCardNumber = joined.slice(0, newCardNumberMaxLength);
-    const effectiveUnitCount = formatCardNumberUnitByBrand(
-      newCardNumber,
-      newBrand,
-    ).length;
+
+    const newUnitCount = formatCardNumberUnitByBrand("", newBrand).length;
+    const unitCountChanged = cardNumberUnits.length !== newUnitCount;
+    const newCardNumberUnits = unitCountChanged
+      ? formatCardNumberUnitByBrand(newCardNumber, newBrand)
+      : updatedUnits;
+
+    const effectiveUnitCount = newCardNumberUnits.length;
 
     const cardNumberInputStatus = checkCardNumberInputStatus(
       input,
       unitMaxLength,
     );
-    const newStatus = updateArray(status, index, cardNumberInputStatus).map(
-      (s, i) => (i < effectiveUnitCount ? s : "DEFAULT"),
+
+    const newStatus = (
+      unitCountChanged
+        ? Array.from({ length: effectiveUnitCount }, (_, i) =>
+            checkCardNumberInputStatus(
+              newCardNumberUnits[i],
+              getCardNumberUnitMaxLengthByBrand(newBrand, i),
+            ),
+          )
+        : Array.from({ length: effectiveUnitCount }, (_, i) =>
+            i === index ? cardNumberInputStatus : (status[i] ?? "DEFAULT"),
+          )
     ) as CardNumberStatusTuple;
 
     setValue("cardNumberStatus", newStatus);
-    setValue("cardNumber", newCardNumber);
+    setValue("cardNumber", newCardNumberUnits);
 
     if (input.length === unitMaxLength) setNextFocus();
 
-    const allValid = newStatus
-      .slice(0, effectiveUnitCount)
-      .every((s) => s === "SUCCESS");
-    if (newCardNumber.length === newCardNumberMaxLength && allValid) {
+    const allUnitsFilled =
+      newBrand !== null &&
+      newCardNumberUnits.every(
+        (unit, i) =>
+          checkCardNumberInputStatus(
+            unit,
+            getCardNumberUnitMaxLengthByBrand(newBrand, i),
+          ) === "SUCCESS",
+      );
+    if (allUnitsFilled) {
       onComplete();
     }
   };
@@ -94,22 +106,19 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
       caption="본인 명의의 카드만 결제 가능합니다."
       label="카드 번호"
       helperMessage={
-        formattedCardNumberUnits
-          .map((_, i) => ERROR_MESSAGE[status[i]])
-          .find(Boolean) ??
+        cardNumberUnits.map((_, i) => ERROR_MESSAGE[status[i]]).find(Boolean) ??
         (!brand &&
-        status
-          .slice(0, formattedCardNumberUnits.length)
-          .every((s) => s !== "DEFAULT")
+        status.slice(0, cardNumberUnits.length).every((s) => s !== "DEFAULT")
           ? ERROR_MESSAGE.INVALID_BRAND
           : undefined)
       }
-      inputPropsList={formattedCardNumberUnits.map((unit, index) => ({
+      inputPropsList={cardNumberUnits.map((unit, index) => ({
         ref: (el) => registerInputRef(index)(el),
         key: `card-number-${index}`,
         name: "card-number",
         placeholder: "1234",
         fullWidth: true,
+        maxLength: getCardNumberUnitMaxLengthByBrand(brand, index),
         value: unit,
         onChange: (e) => handleCardNumberChange(index, e.target.value),
         onBlur: (e) => handleCardNumberBlur(index, e.target.value),

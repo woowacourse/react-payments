@@ -6,19 +6,16 @@ import type { InputStatus as CardNumberInputStatus } from "./components/CardNumb
 import type { PasswordInputStatus } from "./components/CardPasswordField/types";
 import type { InputStatus as ValidityPeriodInputStatus } from "./components/CardValidityPeriodInputField/errorMessage";
 
-export type CardNumberStatusTuple = [
-  CardNumberInputStatus,
-  CardNumberInputStatus,
-  CardNumberInputStatus,
-  CardNumberInputStatus,
-];
+export type CardNumberStatusTuple =
+  | [CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus]
+  | [CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus];
 
 export type ValidityPeriodStatus = {
   [K in keyof ValidityPeriod]: ValidityPeriodInputStatus;
 };
 
 export interface CardInfoFormState extends Record<string, unknown> {
-  cardNumber: string;
+  cardNumber: [string, string, string, string] | [string, string, string];
   validityPeriod: ValidityPeriod;
   CVC: string;
   password: string;
@@ -33,7 +30,7 @@ export interface CardInfoFormState extends Record<string, unknown> {
 }
 
 export const INITIAL_CARD_INFO_FORM_STATE: CardInfoFormState = {
-  cardNumber: "",
+  cardNumber: ["", "", "", ""],
   validityPeriod: { month: "", year: "" },
   CVC: "",
   password: "",
