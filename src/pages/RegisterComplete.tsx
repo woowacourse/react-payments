@@ -1,16 +1,19 @@
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import registerCheck from '../assets/RegisterCheck.png';
+import { CARD_COMPANY_LABEL } from '../constants/cardCompanies';
+import type { RegisteredCard } from './RegisterCard';
 
-type RegisterCompleteProps = {
-  cardNumberPrefix: string;
-  cardCompanyName: string;
-  onConfirm: () => void;
-};
+type RegisterCompleteLocationState = RegisteredCard | null;
 
-export default function RegisterComplete({
-  cardNumberPrefix,
-  cardCompanyName,
-  onConfirm,
-}: RegisterCompleteProps) {
+export default function RegisterComplete() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const registeredCard = location.state as RegisterCompleteLocationState;
+
+  if (!registeredCard) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div
       css={(theme) => ({
@@ -46,13 +49,13 @@ export default function RegisterComplete({
             justifyContent: 'center',
           })}
         >
-          {cardNumberPrefix}로 시작하는
+          {registeredCard.cardNumberPrefix}로 시작하는
           <br />
-          {cardCompanyName}가 등록되었어요.
+          {CARD_COMPANY_LABEL[registeredCard.cardCompany]}가 등록되었어요.
         </p>
         <button
           type="button"
-          onClick={onConfirm}
+          onClick={() => navigate('/', { replace: true })}
           css={(theme) => ({
             width: '100%',
             height: '44px',

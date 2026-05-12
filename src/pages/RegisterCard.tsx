@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import CardPreview from '../components/CardPreview';
 import CardInput from '../components/CardInput';
 import { useCardNumber } from '../hooks/useCardNumber';
@@ -12,11 +13,8 @@ export type RegisteredCard = {
   cardCompany: Exclude<CardCompany, ''>;
 };
 
-type RegisterCardProps = {
-  onComplete: (registeredCard: RegisteredCard) => void;
-};
-
-export default function RegisterCard({ onComplete }: RegisterCardProps) {
+export default function RegisterCard() {
+  const navigate = useNavigate();
   const [cardStatus, setCardStatus] = useCardNumber();
   const [cardExpiry, setCardExpiry] = useExpiryDate();
   const [cardCvc, setCardCvc] = useCardCvc();
@@ -31,9 +29,11 @@ export default function RegisterCard({ onComplete }: RegisterCardProps) {
     if (cardCompanyStatus.cardCompany === '') {
       return;
     }
-    onComplete({
-      cardNumberPrefix: cardStatus.cardNumbers[0],
-      cardCompany: cardCompanyStatus.cardCompany,
+    navigate('/complete', {
+      state: {
+        cardNumberPrefix: cardStatus.cardNumbers[0],
+        cardCompany: cardCompanyStatus.cardCompany,
+      } satisfies RegisteredCard,
     });
   };
 
