@@ -1,7 +1,7 @@
 import Button from '../components/ui/Button';
 import CheckIcon from '../components/ui/CheckIcon';
 import { css } from '@emotion/react';
-import { useLocation, Navigate } from 'react-router';
+import { useLocation, Navigate, useNavigate } from 'react-router';
 
 interface LocationState {
   firstFourDigits: string;
@@ -9,11 +9,14 @@ interface LocationState {
 }
 
 export default function AddCardCompletePage() {
+  const navigate = useNavigate();
   const { state } = useLocation();
 
   if (!state) return <Navigate to="/" replace />;
 
   const { firstFourDigits, cardCompany } = state as LocationState;
+
+  const handleConfirm = () => navigate('/');
 
   return (
     <main css={mainStyle}>
@@ -24,7 +27,7 @@ export default function AddCardCompletePage() {
           <br />
           {cardCompany}가 등록되었어요.
         </p>
-        <Button>확인</Button>
+        <Button onClick={handleConfirm}>확인</Button>
       </div>
     </main>
   );
@@ -43,7 +46,7 @@ const contentStyle = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 12px;
 `;
 
 const completeMessageStyle = css`
