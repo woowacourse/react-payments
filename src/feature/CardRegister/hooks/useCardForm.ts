@@ -21,16 +21,35 @@ export type CardFormFieldsType = {
   cardCompany: CardCompanyFieldType;
 };
 
-export const useCardForm = () => {
-  const numbersField = useNumbersField({ onComplete: () => advanceStep(1) });
-  const cardCompanyField = UseCardCompanyField({
-    onComplete: () => advanceStep(2),
-  });
-  const expiryField = useExpiryField({ onComplete: () => advanceStep(3) });
-  const cvcField = useCvcField({ onComplete: () => advanceStep(4) });
-  const passwordField = usePasswordField({ onComplete: () => advanceStep(5) });
+const CARD_FORM_STEP = {
+  CARD_NUMBER: 0,
+  CARD_COMPANY: 1,
+  EXPIRY: 2,
+  CVC: 3,
+  PASSWORD: 4,
+  SUBMIT: 5,
+} as const;
 
-  const [currentStep, setCurrentStep] = useState(0);
+export const useCardForm = () => {
+  const numbersField = useNumbersField({
+    onComplete: () => advanceStep(CARD_FORM_STEP.CARD_COMPANY),
+  });
+  const cardCompanyField = UseCardCompanyField({
+    onComplete: () => advanceStep(CARD_FORM_STEP.EXPIRY),
+  });
+  const expiryField = useExpiryField({
+    onComplete: () => advanceStep(CARD_FORM_STEP.CVC),
+  });
+  const cvcField = useCvcField({
+    onComplete: () => advanceStep(CARD_FORM_STEP.PASSWORD),
+  });
+  const passwordField = usePasswordField({
+    onComplete: () => advanceStep(CARD_FORM_STEP.SUBMIT),
+  });
+
+  const [currentStep, setCurrentStep] = useState<number>(
+    CARD_FORM_STEP.CARD_NUMBER,
+  );
   const advanceStep = (nextStep: number) => {
     setCurrentStep((prev) => Math.max(prev, nextStep));
   };
