@@ -22,7 +22,9 @@ export default function CardCompanyField({ value, setFieldValue, onCompleted }: 
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFieldValue('cardCompany', e.target.value as CardCompany);
-    onCompleted();
+    setTimeout(() => {
+      onCompleted();
+    }, 0);
   };
 
   // TODO: placeholder를 disabled/hidden 처리하는 패턴 컴포넌트화
