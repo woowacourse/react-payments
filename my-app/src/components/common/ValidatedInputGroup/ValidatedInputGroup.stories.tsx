@@ -1,67 +1,40 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useEffect, useState } from "react";
-import type { ComponentProps } from "react";
-import { fn } from "storybook/test";
+
 import ValidatedInputGroup from "./ValidatedInputGroup";
 
-type ValidatedInputGroupProps = ComponentProps<typeof ValidatedInputGroup>;
+const inputStyle = (isError = false) => ({
+  width: 72,
+  height: 32,
+  border: `1px solid ${isError ? "#ff3d3d" : "#acacac"}`,
+  borderRadius: 2,
+  boxSizing: "border-box" as const,
+  padding: "8px",
+});
 
-const getFrameWidth = (count: number) => {
-  if (count === 1) return 96;
-  if (count === 2) return 160;
-  return 320;
-};
-
-const InteractiveValidatedInputGroup = (args: ValidatedInputGroupProps) => {
-  const [values, setValues] = useState(args.values);
-  const [errorMessage, setErrorMessage] = useState(args.errorMessage);
-  const [errorIndex, setErrorIndex] = useState(args.errorIndex);
-
-  useEffect(() => {
-    setValues(args.values);
-  }, [args.values]);
-
-  useEffect(() => {
-    setErrorMessage(args.errorMessage);
-  }, [args.errorMessage]);
-
-  useEffect(() => {
-    setErrorIndex(args.errorIndex);
-  }, [args.errorIndex]);
-
-  return (
-    <div style={{ width: getFrameWidth(args.inputOption.count) }}>
-      <ValidatedInputGroup
-        {...args}
-        values={values}
-        errorMessage={errorMessage}
-        errorIndex={errorIndex}
-        onChange={(index, value) => {
-          const nextValues = [...values];
-          nextValues[index] = value;
-
-          setValues(nextValues);
-          setErrorMessage("");
-          setErrorIndex(-1);
-          args.onChange(index, value);
-        }}
-        onBlur={(index) => {
-          const value = values[index];
-
-          if (value && !/^\d+$/.test(value)) {
-            setErrorMessage("숫자만 입력 가능합니다");
-            setErrorIndex(index);
-          } else {
-            setErrorMessage("");
-            setErrorIndex(-1);
-          }
-
-          args.onBlur(index);
-        }}
+const renderInputs = ({
+  values,
+  placeholders,
+  maxLength,
+  errorIndex = -1,
+}: {
+  values: string[];
+  placeholders: string[];
+  maxLength: number;
+  errorIndex?: number;
+}) => (
+  <>
+    {values.map((value, index) => (
+      <input
+        key={index}
+        aria-label={`입력 ${index + 1}`}
+        defaultValue={value}
+        maxLength={maxLength}
+        placeholder={placeholders[index]}
+        style={inputStyle(errorIndex === index)}
       />
-    </div>
-  );
-};
+    ))}
+  </>
+);
 
 const meta = {
   title: "Components/Common/ValidatedInputGroup",
@@ -70,19 +43,20 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  args: {
-    onChange: fn(),
-    onBlur: fn(),
-    errorMessage: "",
-    errorIndex: -1,
-    inputOption: {
-      count: 4,
-      maxLength: 4,
-      placeHolder: ["1234", "1234", "1234", "1234"],
+  argTypes: {
+    children: {
+      control: false,
     },
-    values: ["", "", "", ""],
   },
-  render: (args) => <InteractiveValidatedInputGroup {...args} />,
+  args: {
+    errorMessage: "",
+    legend: "카드 번호",
+    children: renderInputs({
+      values: ["", "", "", ""],
+      placeholders: ["1234", "1234", "1234", "1234"],
+      maxLength: 4,
+    }),
+  },
 } satisfies Meta<typeof ValidatedInputGroup>;
 
 export default meta;
@@ -92,30 +66,40 @@ export const CardNumberInputs: Story = {};
 
 export const ExpiryDateInputs: Story = {
   args: {
-    inputOption: {
-      count: 2,
+    legend: "유효기간",
+    children: renderInputs({
+      values: ["08", "29"],
+      placeholders: ["MM", "YY"],
       maxLength: 2,
-      placeHolder: ["MM", "YY"],
-    },
-    values: ["08", "29"],
+    }),
   },
 };
 
 export const CvcInput: Story = {
   args: {
-    inputOption: {
-      count: 1,
+    legend: "CVC",
+    children: renderInputs({
+      values: [""],
+      placeholders: ["123"],
       maxLength: 3,
-      placeHolder: ["123"],
-    },
-    values: [""],
+    }),
   },
 };
 
 export const ErrorState: Story = {
   args: {
-    values: ["12ab", "", "", ""],
     errorMessage: "숫자만 입력 가능합니다",
-    errorIndex: 0,
+    children: renderInputs({
+      values: ["12ab", "", "", ""],
+      placeholders: ["1234", "1234", "1234", "1234"],
+      maxLength: 4,
+      errorIndex: 0,
+    }),
+  },
+};
+
+export const WarningState: Story = {
+  args: {
+    warningMessage: "지원하지 않는 카드입니다",
   },
 };
