@@ -4,11 +4,9 @@ import { CardNumber } from './CardNumber';
 import { CardExpiryDate } from './CardExpiryDate';
 import { CARD_COMPANY_COLOR } from '../../style/CardStyles';
 import { CardNetworkBrand } from './CardNetworkBrand';
-import { useCardForm } from '../../hooks/useCardForm';
 
 export function CardPreview() {
-  const { cardCompany } = useCardContext();
-  const { networkBrand } = useCardForm();
+  const { cardCompany, networkBrand } = useCardContext();
 
   return (
     <CardContainer $CardCompanySelected={CARD_COMPANY_COLOR[cardCompany]}>
