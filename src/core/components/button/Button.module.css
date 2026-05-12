@@ -5,6 +5,8 @@
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
+
+  box-sizing: border-box;
 }
 
 .variant-default {
@@ -27,6 +29,7 @@
 .size-normal {
   height: 44px;
 
+  padding: 12px 10px;
   font-size: 15px;
   font-weight: 700;
 }
@@ -34,6 +37,7 @@
 .size-large {
   height: 52px;
 
+  padding: 16px 10px;
   font-size: 16px;
   font-weight: 700;
 }
