@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <BrowserRouter>
+        <BrowserRouter basename="/react-payments">
             <App />
         </BrowserRouter>
     </StrictMode>
