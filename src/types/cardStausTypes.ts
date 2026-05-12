@@ -66,6 +66,6 @@ export interface CardPassword {
 }
 
 export interface CardPasswordHandler {
-  handleCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardPassword: () => void;
   handlePasswordBlur: () => void;
 }

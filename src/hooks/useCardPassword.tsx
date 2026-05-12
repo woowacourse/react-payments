@@ -7,13 +7,13 @@ export function useCardPassword(): [CardPassword, CardPasswordHandler] {
   const [cardPassword, setCardPassword] = useState<string>('');
   const [cardPasswordErrorMode, setCardPasswordErrorMode] = useState<PasswordError | null>(null);
 
-  const handleCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isNotNumber(Number(e.target.value), 'notNumber', setCardPasswordErrorMode)) {
+  const handleCardPassword = (value: string) => {
+    if (isNotNumber(Number(value), 'notNumber', setCardPasswordErrorMode)) {
       return;
     }
 
     setCardPasswordErrorMode(null);
-    setCardPassword(e.target.value);
+    setCardPassword(value);
   };
 
   const handlePasswordBlur = () => {
