@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 
 import { useFormValues } from '@/core/hooks/useFormValues';
@@ -49,6 +49,7 @@ export const useCardNumbers = () => {
     return Object.values(blur).includes(true) && !validateCardNumbers(values);
   };
 
+  const prevFormValidsRefs = useRef<Record<string, boolean>>({});
   const orders = ['0', '1', '2', '3'] as (keyof typeof errors)[];
   useEffect(() => {
     orders.some((order, index) => {
@@ -59,7 +60,9 @@ export const useCardNumbers = () => {
       const isValidNext = errors[next]?.every((error) => error.valid);
 
       if (isValidCurrnet && !isValidNext) {
+        if (prevFormValidsRefs.current[next]) return true;
         refs.current[next]?.focus();
+        prevFormValidsRefs.current[next] = true;
         return true;
       }
     });
