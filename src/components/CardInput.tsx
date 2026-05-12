@@ -1,6 +1,8 @@
 import CardCvc from './CardCvc';
 import CardNumber from './CardNumber';
 import CardExpiryDate from './CardExpiryDate';
+import CardCompany from './CardCompany';
+import CardPassword from './CardPassword';
 import type {
   CardHandler,
   CardStatus,
@@ -8,6 +10,10 @@ import type {
   ExpireHandler,
   Cvc,
   CvcHandler,
+  CardCompanyHandler,
+  CardCompanyStatus,
+  CardPassword as CardPasswordType,
+  CardPasswordHandler,
 } from '../types/cardStausTypes';
 
 type CardInputProps = {
@@ -17,6 +23,11 @@ type CardInputProps = {
   setCardExpiry: ExpireHandler;
   cardCvc: Cvc;
   setCardCvc: CvcHandler;
+  cardPassword: CardPasswordType;
+  setCardPassword: CardPasswordHandler;
+  cardCompanyStatus: CardCompanyStatus;
+  setCardCompany: CardCompanyHandler;
+  hasBottomAction?: boolean;
 };
 
 export default function CardInput({
@@ -26,12 +37,43 @@ export default function CardInput({
   setCardExpiry,
   cardCvc,
   setCardCvc,
+  cardPassword,
+  setCardPassword,
+  cardCompanyStatus,
+  setCardCompany,
+  hasBottomAction = false,
 }: CardInputProps) {
+  const isCardNumberComplete =
+    cardStatus.cardNumbers.every((cardNumber) => cardNumber.length === 4) &&
+    cardStatus.cardNumberErrorMode === null;
+  const isCardCompanySelected = cardCompanyStatus.cardCompany !== '';
+  const isExpiryDateComplete =
+    cardExpiry.cardExpiryDate.every((date) => date.length === 2) &&
+    cardExpiry.cardExpiryDateErrorMode === null;
+  const isCvcComplete = cardCvc.cardCvc.length === 3 && cardCvc.cardCvcErrorMode === null;
+
   return (
-    <form css={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+    <form
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        paddingBottom: hasBottomAction ? '64px' : 0,
+      }}
+    >
+      {isCardNumberComplete && isCardCompanySelected && isExpiryDateComplete && isCvcComplete && (
+        <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />
+      )}
+      {isCardNumberComplete && isCardCompanySelected && isExpiryDateComplete && (
+        <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />
+      )}
+      {isCardNumberComplete && isCardCompanySelected && (
+        <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />
+      )}
+      {isCardNumberComplete && (
+        <CardCompany cardCompanyStatus={cardCompanyStatus} setCardCompany={setCardCompany} />
+      )}
       <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
-      <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />
-      <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />
     </form>
   );
 }
