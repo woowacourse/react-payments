@@ -10,7 +10,7 @@ interface Props {
 
 const CvcSection = ({ value, setValue }: Props) => {
   const cvcInputId = useId();
-  const { error, inputRef, handleOnChange, handleOnBlur, finalErrorMessage } = useCvc({value, setValue});
+  const { error, handleOnChange, handleOnBlur, finalErrorMessage } = useCvc({value, setValue});
 
   return (
     <CommonSection
@@ -28,7 +28,6 @@ const CvcSection = ({ value, setValue }: Props) => {
         placeholder="123"
         isError={error}
         maxLength={3}
-        ref={inputRef}
       />
     </CommonSection>
   );

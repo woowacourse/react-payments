@@ -1,5 +1,6 @@
 import { getPasswordError } from '../../utils/Validation';
-import { useInputShell } from '../common/commonHook/useInputShell';
+import { useErrorTouched } from '../common/commonHooks/useErrorTouched';
+import { useNumberInputCheck } from '../common/commonHooks/useNumberInputCheck';
 
 interface Props {
   value: string;
@@ -7,19 +8,24 @@ interface Props {
 }
 
 export const usePassword = ({ value, setValue }: Props) => {
-  const inputShell = useInputShell({ 
+  const { handleOnChange } = useNumberInputCheck({
     value,
     setValue,
     maxLengthList: [2],
     valueUpdater: (_, newValue) => newValue,
+  });
+
+  const { errors, finalErrorMessage, markingTouched } = useErrorTouched({
+    value,
+    length: 1,
     errorChecker: (val) => [getPasswordError(val) !== ''],
     errorMessageGenerator: (val) => getPasswordError(val),
   });
 
   return {
-    error: inputShell.errors[0],
-    handleOnChange: (val: string) => inputShell.handleOnChange(val, 0),
-    handleOnBlur: (val: string) => inputShell.handleOnBlur(val, 0),
-    finalErrorMessage: inputShell.finalErrorMessage,
+    error: errors[0],
+    handleOnChange: (val: string) => handleOnChange(val, 0),
+    handleOnBlur: () => markingTouched(0),
+    finalErrorMessage,
   };
 };

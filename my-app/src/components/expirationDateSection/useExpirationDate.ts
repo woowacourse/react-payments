@@ -1,5 +1,7 @@
 import { getMonthError, getYearError } from '../../utils/Validation';
-import { useInputShell } from '../common/commonHook/useInputShell';
+import { useErrorTouched } from '../common/commonHooks/useErrorTouched';
+import { useFocusRule } from '../common/commonHooks/useFocusRule';
+import { useNumberInputCheck } from '../common/commonHooks/useNumberInputCheck';
 
 interface Props {
   value: {
@@ -10,7 +12,9 @@ interface Props {
 }
 
 export const useExpirationDate = ({ value, setValue }: Props) => {
-  return useInputShell({
+  const { inputRefs, focusMove } = useFocusRule(2);
+
+  const { handleOnChange } = useNumberInputCheck({
     value,
     setValue,
     maxLengthList: [2, 2],
@@ -18,6 +22,12 @@ export const useExpirationDate = ({ value, setValue }: Props) => {
       index === 0
         ? { ...currentValue, month: newValue }
         : { ...currentValue, year: newValue },
+    onComplete: (index) => focusMove(index),
+  });
+
+  const { errors, finalErrorMessage, markingTouched } = useErrorTouched({
+    value,
+    length: 2,
     errorChecker: (val) => [
       getMonthError(val.month) !== '',
       getYearError(val.year) !== '',
@@ -25,4 +35,12 @@ export const useExpirationDate = ({ value, setValue }: Props) => {
     errorMessageGenerator: (val) =>
       getMonthError(val.month) || getYearError(val.year),
   });
+
+  return {
+    inputRefs,
+    errors,
+    finalErrorMessage,
+    handleOnChange,
+    handleOnBlur: (val: string, index: number) => markingTouched(index),
+  };
 };

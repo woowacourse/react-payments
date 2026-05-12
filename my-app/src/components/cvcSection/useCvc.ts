@@ -1,26 +1,31 @@
-import { getCvcError } from "../../utils/Validation";
-import { useInputShell } from "../common/commonHook/useInputShell";
+import { getCvcError } from '../../utils/Validation';
+import { useErrorTouched } from '../common/commonHooks/useErrorTouched';
+import { useNumberInputCheck } from '../common/commonHooks/useNumberInputCheck';
 
 interface Props {
   value: string;
   setValue: (value: string) => void;
 }
 
-export const useCvc = ({value, setValue}: Props) => {
-  const inputShell = useInputShell({
+export const useCvc = ({ value, setValue }: Props) => {
+  const { handleOnChange } = useNumberInputCheck({
     value,
     setValue,
     maxLengthList: [3],
     valueUpdater: (_, newValue) => newValue,
+  });
+
+  const { errors, finalErrorMessage, markingTouched } = useErrorTouched({
+    value,
+    length: 1,
     errorChecker: (val) => [getCvcError(val) !== ''],
     errorMessageGenerator: (val) => getCvcError(val),
   });
 
   return {
-    error: inputShell.errors[0],
-    inputRef: (el: HTMLInputElement | null) => { inputShell.inputRefs.current[0] = el; },
-    handleOnChange: (val: string) => inputShell.handleOnChange(val, 0),
-    handleOnBlur: (val: string) => inputShell.handleOnBlur(val, 0),
-    finalErrorMessage: inputShell.finalErrorMessage,
+    error: errors[0],
+    handleOnChange: (val: string) => handleOnChange(val, 0),
+    handleOnBlur: () => markingTouched(0),
+    finalErrorMessage,
   };
 };
