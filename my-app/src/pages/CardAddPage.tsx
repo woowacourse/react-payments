@@ -6,15 +6,17 @@ import CardCompanySection from '../components/cardCompanySection/CardCompanySect
 import PasswordSection from '../components/passwordSection/PasswordSection';
 import { useNavigate } from 'react-router-dom';
 import { FormLayout, SubmitButton } from './CardAddPage.styles';
-import { useCardForm } from './useCardForm';
+import { useCardFormState } from './useCardFormState';
+import { useCardFormValidation } from './useCardFormValidation';
 
 const CardAddPage = () => {
   const navigate = useNavigate();
-  const { formState, setters, validation } = useCardForm();
+  const { formState, setters } = useCardFormState();
+  const { isFormValid, canShowSteps } = useCardFormValidation(formState);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validation.isFormValid) return;
+    if (!isFormValid) return;
     // 라우팅 페이지 연결
     navigate('/card-add-success', {
       state: formState,
@@ -29,22 +31,22 @@ const CardAddPage = () => {
         cardCompany={formState.cardCompany}
       />
       <FormLayout onSubmit={handleSubmit}>
-        {validation.maxStep >= 5 && (
+        {canShowSteps.canShowPassword && (
           <PasswordSection value={formState.password} setValue={setters.setPassword} />
         )}
-        {validation.maxStep >= 4 && <CvcSection value={formState.cvc} setValue={setters.setCvc} />}
-        {validation.maxStep >= 3 && (
+        {canShowSteps.canShowCvc && <CvcSection value={formState.cvc} setValue={setters.setCvc} />}
+        {canShowSteps.canShowExpirationDate && (
           <ExpirationDateSection
             value={formState.expirationDate}
             setValue={setters.setExpirationDate}
           />
         )}
-        {validation.maxStep >= 2 && (
+        {canShowSteps.canShowCompany && (
           <CardCompanySection value={formState.cardCompany} setValue={setters.setCardCompany} />
         )}
         <CardNumberSection value={formState.cardNumber} setValue={setters.setCardNumber} />
 
-        {validation.isFormValid && <SubmitButton type="submit">확인</SubmitButton>}
+        {isFormValid && <SubmitButton type="submit">확인</SubmitButton>}
       </FormLayout>
     </>
   );
