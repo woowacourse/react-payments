@@ -4,12 +4,17 @@ import { validateFormValuesRules } from '@/core/hooks/validateFormValueRules';
 import type { Rule, FormValuesRules } from '@/core/hooks/validateFormValueRules';
 
 import { isEmptyString, isNumericString } from '@/core/utils/validator';
+import { getBrandCard } from './utils';
+import { BRAND_NUMBER } from './constant';
 
 type CardNumbers = {
   [key in '0' | '1' | '2' | '3']: string;
 };
 
 export const validateCardNumbers = (cardNumbers: CardNumbers) => {
+  const cardBrand = getBrandCard(Object.values(cardNumbers));
+  const branchNumberCard = BRAND_NUMBER?.[cardBrand as keyof typeof BRAND_NUMBER];
+  const length = branchNumberCard?.length || 16;
   const rule = [
     { type: 'isRequired', message: '카드번호는 필수값입니다' },
     { type: 'isNumericString', message: '카드번호는 숫자여야합니다' },
@@ -20,7 +25,7 @@ export const validateCardNumbers = (cardNumbers: CardNumbers) => {
     '0': rule,
     '1': rule,
     '2': rule,
-    '3': rule,
+    '3': [...rule.map((r) => (r.type !== 'length' ? r : { ...r, length: length % 4 || 4 }))],
   } satisfies FormValuesRules<CardNumbers>;
 
   return validateFormValuesRules(cardNumbers, rules);

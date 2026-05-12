@@ -12,7 +12,7 @@ import { Input } from '@/core/components/input';
 import { Select } from '@/core/components/select';
 import { Button } from '@/core/components/button';
 
-import { CARD_OPTIONS } from './constant';
+import { BRAND_NUMBER, CARD_OPTIONS } from './constant';
 
 import styles from './Form.module.css';
 
@@ -61,7 +61,7 @@ export const Form = () => {
     if (cvc.isValid) setStep(4);
   }, [cardNumbers.isValid, card.isValid, expirationDate.isValid, cvc.isValid, password.isValid]);
 
-  const brandCard = renderBrandCard(Object.values(cardNumbers.values));
+  const branchNumberCard = BRAND_NUMBER?.[brandCard as keyof typeof BRAND_NUMBER];
 
   const isValid = cardNumbers.isValid && card.isValid && expirationDate.isValid && cvc.isValid && password.isValid;
 
@@ -79,14 +79,14 @@ export const Form = () => {
           {step >= 0 && (
             <FormGroup title="결제할 카드 번호를 입력해 주세요" subTitle="본인 명의의 카드만 결제 가능합니다.">
               <Field label="카드 번호" errorMessage={cardNumbers.renderErrorMessage()}>
-                {Object.values(cardNumbers.values).map((value, index) => (
+                {Object.values(cardNumbers.values).map((value, index, array) => (
                   <Input
                     ref={cardNumbers.ref}
                     type="tel"
                     id={String(index)}
                     key={index}
                     value={value as string}
-                    maxLength={4}
+                    maxLength={array.length - 1 !== index ? 4 : (branchNumberCard?.length || 16) % 4 || 4}
                     placeholder="1234"
                     isError={cardNumbers.renderErrorInput(String(index))}
                     onChange={cardNumbers.onChange}
