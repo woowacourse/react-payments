@@ -1,6 +1,5 @@
-import { decideBrandName } from "../constants/cardBrand";
-
-type ValidationResult = { errorIndex: number; message: string };
+import { detectBrand } from "../constants/cardBrand";
+import type { ValidationResult } from "../types";
 
 export const validateCardNumber = (values: string[]): ValidationResult => {
   for (let i = 0; i < values.length; i++) {
@@ -10,7 +9,7 @@ export const validateCardNumber = (values: string[]): ValidationResult => {
   }
   const joined = values.join("");
 
-  if (joined.length >= 8 && decideBrandName(joined) === "")
+  if (joined.length >= 8 && detectBrand(joined) === "")
     return { errorIndex: -2, message: "이 카드 브랜드는 지원하지 않습니다." };
   return { errorIndex: -1, message: "" };
 };

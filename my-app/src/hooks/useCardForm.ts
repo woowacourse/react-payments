@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import type { CardInfo } from "../types";
 import { detectBrand, getFieldConfig } from "../constants/cardBrand";
 import { validateCardNumber, validateExpiryDate, validateCvc } from "../utils/validators";
@@ -13,8 +12,6 @@ const useCardForm = () => {
     password: "",
   });
   const [step, setStep] = useState(0);
-
-  const navigate = useNavigate();
 
   const brand = detectBrand(cardInfo.numbers.join(""));
   const fieldConfig = getFieldConfig(brand);
@@ -36,7 +33,7 @@ const useCardForm = () => {
     }
   };
 
-  const selectCompanyHandler = (company: string) => {
+  const companyHandler = (company: string) => {
     setCardInfo((prev) => ({ ...prev, company }));
     setStep((prev) => Math.max(prev, 2));
   };
@@ -73,11 +70,6 @@ const useCardForm = () => {
 
   const isValid = isNumbersValid && isCompanyValid && isExpiryValid && isCvcValid && isPasswordValid;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    navigate("/complete", { state: { numbers: cardInfo.numbers, brand } });
-  };
-
   return {
     cardInfo,
     step,
@@ -85,11 +77,10 @@ const useCardForm = () => {
     fieldConfig,
     isValid,
     cardNumberHandler,
-    selectCompanyHandler,
+    companyHandler,
     expiryHandler,
     cvcHandler,
     passwordHandler,
-    handleSubmit,
   };
 };
 

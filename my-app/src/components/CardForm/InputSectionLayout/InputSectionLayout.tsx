@@ -95,7 +95,7 @@ const InputSectionLayout = ({
             padding-bottom: 20px;
           `}
         >
-          <section
+          <div
             css={css`
               display: flex;
               flex-direction: row;
@@ -103,7 +103,7 @@ const InputSectionLayout = ({
             `}
           >
             {children}
-          </section>
+          </div>
           <span
             css={[
               errorTextStyle,

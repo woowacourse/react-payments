@@ -29,7 +29,7 @@ const CardComplete = () => {
           aspect-ratio: 1 / 1;
         `}
       ></img>
-      <span
+      <p
         css={css`
           font-weight: 700;
           font-size: 25px;
@@ -38,7 +38,7 @@ const CardComplete = () => {
       >
         {numbers[0]}로 시작하는 <br />
         {brand} 카드가 등록되었어요.
-      </span>
+      </p>
       <Button onClick={() => navigate("/")}>확인</Button>
     </div>
   );
