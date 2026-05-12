@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import useFieldValidation from '../../../common/hooks/useFieldValidation';
 import { PASSWORD_LENGTH, validatePassword } from '../utils/cardFormValidator';
 import { isNumeric, isWithinMaxLength } from '../utils/validator';
+import useTouchedFieldError from './useTouchedFieldError';
 
 type UsePasswordFieldParams = {
   onComplete?: () => void;
@@ -12,7 +12,7 @@ export type PasswordFieldType = ReturnType<typeof usePasswordField>;
 export const usePasswordField = ({ onComplete }: UsePasswordFieldParams) => {
   const [password, setPassword] = useState('');
 
-  const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
+  const { firstErrorIndex, errorMessage, touch } = useTouchedFieldError({
     values: [password],
     validate: validatePassword,
   });

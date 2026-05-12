@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import useFieldValidation from '../../../common/hooks/useFieldValidation';
 import { CVC_LENGTH, validateCvcNumber } from '../utils/cardFormValidator';
 import { isNumeric, isWithinMaxLength } from '../utils/validator';
+import useTouchedFieldError from './useTouchedFieldError';
 
 type UseCvcFieldParams = {
   onComplete?: () => void;
@@ -12,7 +12,7 @@ export type CvcFieldType = ReturnType<typeof useCvcField>;
 export const useCvcField = ({ onComplete }: UseCvcFieldParams) => {
   const [cvcNumber, setCvcNumber] = useState('');
 
-  const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
+  const { firstErrorIndex, errorMessage, touch } = useTouchedFieldError({
     values: [cvcNumber],
     validate: validateCvcNumber,
   });

@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import useFieldValidation from '../../../common/hooks/useFieldValidation';
 import {
   EXPIRY_LENGTH,
   validateExpiryMonth,
@@ -11,6 +10,7 @@ import {
   isValidMonth,
   isWithinMaxLength,
 } from '../utils/validator';
+import useTouchedFieldError from './useTouchedFieldError';
 
 type UseExpiryFieldParams = {
   onComplete?: () => void;
@@ -22,7 +22,7 @@ export const useExpiryField = ({ onComplete }: UseExpiryFieldParams) => {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
 
-  const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
+  const { firstErrorIndex, errorMessage, touch } = useTouchedFieldError({
     values: [expiryMonth, expiryYear],
     validate: (value, index) => {
       if (index === 0) {

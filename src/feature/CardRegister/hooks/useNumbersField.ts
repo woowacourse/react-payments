@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
-import useFieldValidation from '../../../common/hooks/useFieldValidation';
 import {
   hasCardNumbersError,
   validateCardNumbers,
 } from '../utils/cardFormValidator';
 import { isNumeric, isWithinMaxLength } from '../utils/validator';
 import { getCardNumberSegmentLengths } from '../utils/cardInfo';
+import useTouchedFieldError from './useTouchedFieldError';
 
 type UseNumbersFieldParams = {
   onComplete?: () => void;
@@ -19,7 +19,7 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
   const segmentLengths = getCardNumberSegmentLengths(cardNumbers);
   const cardNumberErrors = validateCardNumbers(cardNumbers);
 
-  const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
+  const { firstErrorIndex, errorMessage, touch } = useTouchedFieldError({
     values: cardNumbers,
     validate: (_, index) => cardNumberErrors[index] ?? null,
   });

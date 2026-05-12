@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-type UseFieldValidationParams = {
+type UseTouchedFieldErrorParams = {
   values: string[];
   validate: (value: string, index: number) => string | null;
 };
@@ -8,7 +8,10 @@ type UseFieldValidationParams = {
 const createFlags = (count: number) =>
   Array.from({ length: count }, () => false);
 
-const useFieldValidation = ({ values, validate }: UseFieldValidationParams) => {
+const useTouchedFieldError = ({
+  values,
+  validate,
+}: UseTouchedFieldErrorParams) => {
   const [isTouched, setIsTouched] = useState(() => createFlags(values.length));
 
   const errorMessages = values.map((value, index) => {
@@ -36,4 +39,4 @@ const useFieldValidation = ({ values, validate }: UseFieldValidationParams) => {
   };
 };
 
-export default useFieldValidation;
+export default useTouchedFieldError;
