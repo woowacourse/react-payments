@@ -4,6 +4,7 @@ import Visa from "../../../public/Visa.svg";
 import Diners from "../../../public/Diners.svg";
 import Amex from "../../../public/Amex.svg";
 import Union from "../../../public/UnionPay.svg";
+import { CARD_COLORS } from "../../constants/cardConstants";
 
 interface Props {
   cardNumbers: { first: string; second: string; third: string; fourth: string };
@@ -18,16 +19,7 @@ const BRAND_LOGO = {
   amex: Amex,
   unionpay: Union,
 };
-const CARD_COLORS: Record<string, string> = {
-  BC: "#F04651",
-  신한: "#0046FF",
-  카뱅: "#FFE600",
-  현대: "#000000",
-  우리: "#007BC8",
-  롯데: "#ED1C24",
-  하나: "#009490",
-  국민: "#6A6056",
-};
+
 export default function CardPreview({
   cardNumbers,
   EXP,
