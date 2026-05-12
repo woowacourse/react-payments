@@ -3,7 +3,12 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CardAddSuccessPage from './CardAddSuccessPage';
 
-const StateInjector = ({ children, mockState }: { children: React.ReactNode, mockState: any }) => {
+interface MockState {
+  cardNumberPrefixFourth: string,
+  cardCompany: string,
+}
+
+const StateInjector = ({ children, mockState }: { children: React.ReactNode, mockState: MockState }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,7 +32,7 @@ type Story = StoryObj<typeof CardAddSuccessPage>;
 export const BCCard: Story = {
   decorators: [
     (Story) => (
-      <StateInjector mockState={{ cardNumber: ['5511', '2222', '3333', '4444'], cardCompany: 'BC카드' }}>
+      <StateInjector mockState={{ cardNumberPrefixFourth: '5511', cardCompany: 'BC카드' }}>
         <Story />
       </StateInjector>
     ),
@@ -37,7 +42,7 @@ export const BCCard: Story = {
 export const KakaoBank: Story = {
   decorators: [
     (Story) => (
-      <StateInjector mockState={{ cardNumber: ['3333', '4444', '5555', '6666'], cardCompany: '카카오뱅크' }}>
+      <StateInjector mockState={{ cardNumberPrefixFourth: '3333', cardCompany: '카카오뱅크' }}>
         <Story />
       </StateInjector>
     ),
