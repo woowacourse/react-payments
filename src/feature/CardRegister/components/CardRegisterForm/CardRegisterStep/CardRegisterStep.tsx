@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import Description from "../../../../../common/components/Description/Description";
-import Title from "../../../../../common/components/Title/Title";
+
 import styled from "styled-components";
 
 const CardRegisterStep = ({
@@ -14,8 +13,8 @@ const CardRegisterStep = ({
 }) => {
   return (
     <Container>
-      <Title value={title} />
-      {description && <Description value={description} />}
+      <Title>{title}</Title>
+      {description && <Description>{description}</Description>}
       {children}
     </Container>
   );
@@ -27,6 +26,18 @@ const Container = styled.div`
   gap: 6px;
 
   width: 100%;
+`;
+
+const Title = styled.span`
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+`;
+
+const Description = styled.span`
+  font-size: 9.5px;
+  font-weight: 400;
+  color: #8b95a1;
 `;
 
 export default CardRegisterStep;

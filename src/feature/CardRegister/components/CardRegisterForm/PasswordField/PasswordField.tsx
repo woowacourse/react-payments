@@ -6,8 +6,8 @@ import {
 } from "../../../constants";
 import { isNumericInput } from "../../../validators/input";
 import { isPasswordLengthValid } from "../../../validators/password";
-import Label from "../../../../../common/components/Label/Label";
-import Input from "../../../../../common/components/Input/Input";
+import Label from "../shared/Label/Label";
+import Input from "../shared/Input/Input";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
 const PasswordField = ({

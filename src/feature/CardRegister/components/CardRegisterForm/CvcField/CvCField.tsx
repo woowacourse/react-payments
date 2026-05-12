@@ -1,5 +1,5 @@
-import Label from "../../../../../common/components/Label/Label";
-import Input from "../../../../../common/components/Input/Input";
+import Label from "../shared/Label/Label";
+import Input from "../shared/Input/Input";
 import styled from "styled-components";
 import {
   CVC_INPUT_COUNT,

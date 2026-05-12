@@ -1,5 +1,5 @@
-import Input from "../../../../../common/components/Input/Input";
-import Label from "../../../../../common/components/Label/Label";
+import Input from "../shared/Input/Input";
+import Label from "../shared/Label/Label";
 import styled from "styled-components";
 import type { CardNumberChunkType } from "../../../../../common/types/CardInfoType";
 import {

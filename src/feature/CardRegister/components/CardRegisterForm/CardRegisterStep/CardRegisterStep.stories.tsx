@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import Input from "../../../../../common/components/Input/Input";
+import Input from "../shared/Input/Input";
 import InputContainer from "./CardRegisterStep";
 
 const meta = {

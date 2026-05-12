@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef } from "react";
 import styled from "styled-components";
-import { colors } from "../../../styles/color";
+import { colors } from "../../../../../../styles/color";
 
 type StrokeModeType = "default" | "error";
 
