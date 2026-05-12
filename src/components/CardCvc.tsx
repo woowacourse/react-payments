@@ -41,9 +41,7 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
               borderRadius: '2px',
               border: `1.01px solid ${theme.colors.inactiveBorder}`,
               borderColor: `${
-                cardCvc.cardCvcErrorMode !== 'normal'
-                  ? theme.colors.error
-                  : theme.colors.inactiveBorder
+                cardCvc.cardCvcErrorMode !== null ? theme.colors.error : theme.colors.inactiveBorder
               }`,
               padding: '8px',
             })}
@@ -56,9 +54,7 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
             height: '12px',
           })}
         >
-          {cardCvc.cardCvcErrorMode !== 'normal'
-            ? CVC_ERROR_MESSAGE[cardCvc.cardCvcErrorMode]
-            : ' '}
+          {cardCvc.cardCvcErrorMode !== null ? CVC_ERROR_MESSAGE[cardCvc.cardCvcErrorMode] : ' '}
         </p>
       </div>
     </div>

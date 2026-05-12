@@ -103,7 +103,7 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             height: '12px',
           })}
         >
-          {cardExpiry.cardExpiryDateErrorMode !== 'normal'
+          {cardExpiry.cardExpiryDateErrorMode !== null
             ? EXPIRY_ERROR_MESSAGE[cardExpiry.cardExpiryDateErrorMode]
             : ' '}
         </p>

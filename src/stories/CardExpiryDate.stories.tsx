@@ -20,7 +20,7 @@ export const Default: Story = {
   args: {
     cardExpiry: {
       cardExpiryDate: ['', ''],
-      cardExpiryDateErrorMode: 'normal',
+      cardExpiryDateErrorMode: null,
     },
     setCardExpiry: {
       handleCardExpiryDate: () => fn(),
@@ -34,7 +34,7 @@ export const Filled: Story = {
   args: {
     cardExpiry: {
       cardExpiryDate: ['12', '11'],
-      cardExpiryDateErrorMode: 'normal',
+      cardExpiryDateErrorMode: null,
     },
     setCardExpiry: {
       handleCardExpiryDate: () => fn(),
@@ -90,7 +90,7 @@ export const Interactive: Story = {
   args: {
     cardExpiry: {
       cardExpiryDate: ['', ''],
-      cardExpiryDateErrorMode: 'normal',
+      cardExpiryDateErrorMode: null,
     },
     setCardExpiry: {
       handleCardExpiryDate: () => fn(),

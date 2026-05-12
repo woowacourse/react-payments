@@ -21,7 +21,7 @@ export const Default: Story = {
   args: {
     cardCvc: {
       cardCvc: '',
-      cardCvcErrorMode: 'normal',
+      cardCvcErrorMode: null,
     },
     setCardCvc: {
       handleCardCvc: () => fn(),
@@ -34,7 +34,7 @@ export const Filled: Story = {
   args: {
     cardCvc: {
       cardCvc: '123',
-      cardCvcErrorMode: 'normal',
+      cardCvcErrorMode: null,
     },
     setCardCvc: {
       handleCardCvc: () => fn(),
@@ -73,7 +73,7 @@ export const Interactive: Story = {
   args: {
     cardCvc: {
       cardCvc: '',
-      cardCvcErrorMode: 'normal',
+      cardCvcErrorMode: null,
     },
     setCardCvc: {
       handleCardCvc: () => fn(),

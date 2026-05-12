@@ -5,14 +5,14 @@ import { isNotNumber } from '../utils/util';
 
 export function useCardCvc(): [Cvc, CvcHandler] {
   const [cardCvc, setCardCvc] = useState<string>('');
-  const [cardCvcErrorMode, setCardCvcErrorMode] = useState<CvcError | 'normal'>('normal');
+  const [cardCvcErrorMode, setCardCvcErrorMode] = useState<CvcError | null>(null);
 
   const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isNotNumber(Number(e.target.value), 'notNumber', setCardCvcErrorMode)) {
       return;
     }
 
-    setCardCvcErrorMode('normal');
+    setCardCvcErrorMode(null);
     setCardCvc(e.target.value);
   };
 
@@ -21,7 +21,7 @@ export function useCardCvc(): [Cvc, CvcHandler] {
       setCardCvcErrorMode('cvcCount');
       return;
     }
-    setCardCvcErrorMode('normal');
+    setCardCvcErrorMode(null);
   };
 
   return [

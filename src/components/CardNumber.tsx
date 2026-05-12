@@ -16,7 +16,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             color: theme.colors.black,
           })}
         >
-          결제한 카드 번호를 입력해주세요
+          결제할 카드 번호를 입력해주세요
         </h1>
         <p
           css={(theme) => ({
@@ -59,7 +59,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                   borderRadius: '2px',
                   border: `1.01px solid ${theme.colors.inactiveBorder}`,
                   borderColor:
-                    cardNumber.length < 4 && cardStatus.cardNumberErrorMode !== 'normal'
+                    cardNumber.length < 4 && cardStatus.cardNumberErrorMode !== null
                       ? theme.colors.error
                       : theme.colors.inactiveBorder,
                   padding: '8px',
@@ -75,7 +75,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             height: '12px',
           })}
         >
-          {cardStatus.cardNumberErrorMode !== 'normal'
+          {cardStatus.cardNumberErrorMode !== null
             ? CARD_ERROR_MESSAGE[cardStatus.cardNumberErrorMode]
             : ' '}
         </p>

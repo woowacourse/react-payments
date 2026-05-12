@@ -20,7 +20,7 @@ export const Default: Story = {
   args: {
     cardStatus: {
       cardNumbers: ['', '', '', ''],
-      cardNumberErrorMode: 'normal',
+      cardNumberErrorMode: null,
       cardBrand: '',
     },
     setCardStatus: {
@@ -34,7 +34,7 @@ export const Filled: Story = {
   args: {
     cardStatus: {
       cardNumbers: ['4123', '1234', '1234', '1234'],
-      cardNumberErrorMode: 'normal',
+      cardNumberErrorMode: null,
       cardBrand: 'visa',
     },
     setCardStatus: {
@@ -49,7 +49,7 @@ export const Error: Story = {
     cardStatus: {
       cardNumbers: ['412a', '1234', '1234', '1234'],
       cardNumberErrorMode: 'notNumber',
-      cardBrand: 'visa',
+      cardBrand: '',
     },
     setCardStatus: {
       handleCardNumbers: () => fn(),
@@ -62,7 +62,7 @@ export const Interactive: Story = {
   args: {
     cardStatus: {
       cardNumbers: ['', '', '', ''],
-      cardNumberErrorMode: 'normal',
+      cardNumberErrorMode: null,
       cardBrand: '',
     },
     setCardStatus: {

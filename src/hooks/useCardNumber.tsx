@@ -5,7 +5,7 @@ import { isNotNumber, setEmptyBrand, setNoExist } from '../utils/util';
 
 export function useCardNumber(): [CardStatus, CardHandler] {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [cardNumberErrorMode, setCardNumberErrorMode] = useState<CardError | 'normal'>('normal');
+  const [cardNumberErrorMode, setCardNumberErrorMode] = useState<CardError | null>(null);
   const [cardBrand, setCardBrand] = useState<CardStatus['cardBrand']>('');
 
   const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +22,7 @@ export function useCardNumber(): [CardStatus, CardHandler] {
       if (setNoExist(next, 'notExistBrand', setCardNumberErrorMode)) {
         return;
       }
-      if (next[0].slice(0, 1) == '4') {
+      if (next[0].slice(0, 1) === '4') {
         setCardBrand('visa');
       }
     }
@@ -34,7 +34,7 @@ export function useCardNumber(): [CardStatus, CardHandler] {
       setCardBrand('master');
     }
 
-    setCardNumberErrorMode('normal');
+    setCardNumberErrorMode(null);
     setCardNumbers(next);
   };
 
@@ -43,7 +43,7 @@ export function useCardNumber(): [CardStatus, CardHandler] {
       setCardNumberErrorMode('cardNumberCount');
       return;
     }
-    setCardNumberErrorMode('normal');
+    setCardNumberErrorMode(null);
   };
 
   return [
