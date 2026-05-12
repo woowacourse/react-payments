@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import PaymentForm from '../Form/PaymentForm';
+import { Outlet } from 'react-router-dom';
 
 export default function ServiceLayout() {
   return (
     <Layout>
-      <PaymentForm />
+      <Outlet />
     </Layout>
   );
 }
