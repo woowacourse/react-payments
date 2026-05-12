@@ -6,6 +6,7 @@ import { EXPIRATION_PERIOD_ERROR_MESSAGES, EXPIRATION_PERIOD_LENGTH } from '../.
 import { useEffect, useEffectEvent } from 'react';
 import { sanitizeNumber } from '../../utils';
 import { validates } from '../../validates.ts';
+import { useInputs } from '../../hooks/useInputs.ts';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
@@ -22,6 +23,8 @@ export default function ExpirationPeriodField({
   setFieldError,
   onCompleted,
 }: ExpirationPeriodFieldProps) {
+  const { registerInputRefs, moveToNext, handleKeyDown } = useInputs();
+
   const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
   const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
 
@@ -65,6 +68,10 @@ export default function ExpirationPeriodField({
 
     setFieldError('expirationPeriod', error, index);
     setFieldValue('expirationPeriod', sanitizeNumber(inputValue), index);
+
+    if (inputValue.length === EXPIRATION_PERIOD_LENGTH[index]) {
+      moveToNext(index);
+    }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
@@ -90,10 +97,12 @@ export default function ExpirationPeriodField({
         <div css={inputGroupStyle}>
           <Input
             autoFocus
+            ref={(el) => registerInputRefs(el, 0)}
             name="expirationPeriod"
             value={value[0]}
             onChange={(e) => handleChange(e, 0)}
             onBlur={(e) => handleBlur(e, 0)}
+            onKeyDown={(e) => handleKeyDown(e, 0)}
             variant={activeErrorIndex === 0 ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
@@ -101,10 +110,12 @@ export default function ExpirationPeriodField({
             maxLength={EXPIRATION_PERIOD_LENGTH[0]}
           />
           <Input
+            ref={(el) => registerInputRefs(el, 1)}
             name="expirationPeriod"
             value={value[1]}
             onChange={(e) => handleChange(e, 1)}
             onBlur={(e) => handleBlur(e, 1)}
+            onKeyDown={(e) => handleKeyDown(e, 1)}
             variant={activeErrorIndex === 1 ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
