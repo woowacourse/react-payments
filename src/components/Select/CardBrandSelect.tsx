@@ -2,9 +2,10 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import arrow from '../../../public/chevron-up.svg';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import type { CardBrandValue } from '../../types/CardBrandValue';
 
 interface SelectOptions {
-    value: string;
+    value: CardBrandValue;
     label: string;
 }
 
@@ -12,7 +13,7 @@ interface CardBrandSelectProps {
     options: SelectOptions[];
     placeholder?: string;
     selectedValue?: string;
-    setSelectedValue?: (selectedValue: string) => void;
+    setSelectedValue: (selectedValue: CardBrandValue) => void;
 }
 
 export default function CardBrandSelect({

@@ -1,4 +1,11 @@
-export const BRAND_SELECT_OPTIONS = [
+import type { CardBrandValue } from '../types/CardBrandValue';
+
+interface BrandSelectOption {
+    value: CardBrandValue;
+    label: string;
+}
+
+export const BRAND_SELECT_OPTIONS: BrandSelectOption[] = [
     { value: 'BC', label: 'BC카드' },
     { value: 'SHINHAN', label: '신한카드' },
     { value: 'KAKAO', label: '카카오뱅크' },

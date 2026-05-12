@@ -1,11 +1,11 @@
 import { BRAND_SELECT_OPTIONS } from '../../constants/BRAND_SELECT_OPTIONS';
-import type { CardBrandValue } from '../../hooks/useCardInfoValue';
+import type { CardBrandValue } from '../../types/CardBrandValue';
 import CardBrandSelect from '../Select/CardBrandSelect';
 import CardInputWrapper from './CardInputWrapper';
 
 interface CardBrandInputWrapperProps {
     selectedValue?: string;
-    setSelectedValue?: (selectedValue: CardBrandValue) => void;
+    setSelectedValue: (selectedValue: CardBrandValue) => void;
 }
 
 export default function CardBrandInputWrapper({ selectedValue, setSelectedValue }: CardBrandInputWrapperProps) {
