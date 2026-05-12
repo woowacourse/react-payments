@@ -20,7 +20,7 @@ export const Flow = () => {
   const password = usePassword();
 
   const renderBrandCard = (cardNumbers: string[]) => {
-    if (cardNumbers[0].startsWith(BRAND_NUMBER.visa)) return 'visa';
+    if (BRAND_NUMBER.visa.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'visa';
     if (BRAND_NUMBER.mastercard.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return 'mastercard';
     return 'default';
   };
