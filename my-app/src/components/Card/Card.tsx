@@ -29,7 +29,6 @@ const cardNumberSpanStyle = css`
 
 const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
   const cardColor = getCardColor(cardInfo.company);
-
   return (
     <div
       css={css`

@@ -28,6 +28,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Empty: Story = {};
 
+
 export const Visa: Story = {
   args: {
     cardInfo: {
@@ -36,6 +37,7 @@ export const Visa: Story = {
       cvc: "123",
       company: "신한카드",
       password: "12",
+
     },
     brand: "visa",
   },

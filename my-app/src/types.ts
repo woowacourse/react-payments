@@ -7,3 +7,4 @@ export type CardInfo = {
 };
 
 export type ValidationResult = { errorIndex: number; message: string };
+
