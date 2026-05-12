@@ -8,14 +8,8 @@ import { useCardForm } from './hooks/useCardForm';
 const CardRegisterPage = () => {
   const navigate = useNavigate();
 
-  const {
-    fields,
-    cardPreviewInfo,
-    cardFormInfo,
-    cardFormHandlers,
-    currentStep,
-    hasFormError,
-  } = useCardForm();
+  const { fields, cardPreviewInfo, cardFormInfo, currentStep, hasFormError } =
+    useCardForm();
 
   const handleRegisterComplete = (cardFormInfo: CardFormInfoType) => {
     navigate('/complete', {
@@ -30,7 +24,6 @@ const CardRegisterPage = () => {
         <InfoInputSection
           fields={fields}
           cardFormInfo={cardFormInfo}
-          cardFormHandlers={cardFormHandlers}
           currentStep={currentStep}
           hasFormError={hasFormError}
           onRegisterComplete={handleRegisterComplete}

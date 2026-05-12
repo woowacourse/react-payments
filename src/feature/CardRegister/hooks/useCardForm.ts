@@ -59,15 +59,6 @@ export const useCardForm = () => {
     password: passwordField.password,
   };
 
-  const cardFormHandlers = {
-    handleCardNumbersChange: numbersField.handleNumbersChange,
-    handleExpiryMonthChange: expiryField.handleMonthChange,
-    handleExpiryYearChange: expiryField.handleYearChange,
-    handleCardCompanyChange: cardCompanyField.handleChange,
-    handleCvcNumberChange: cvcField.handleChange,
-    handlePasswordNumberChange: passwordField.handleChange,
-  };
-
   const hasFormError = hasCardFormError({
     cardNumbers: numbersField.cardNumbers,
     expiryMonth: expiryField.expiryMonth,
@@ -80,7 +71,6 @@ export const useCardForm = () => {
     fields,
     cardPreviewInfo,
     cardFormInfo,
-    cardFormHandlers,
     currentStep,
     hasFormError,
   };

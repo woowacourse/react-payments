@@ -1,10 +1,7 @@
 import CvcField from './CvCField';
 import ExpiryField from './ExpiryField';
 import NumberField from './NumberField';
-import type {
-  CardFormHandlersType,
-  CardFormInfoType,
-} from '../../../../common/types/CardPreviewInfoType';
+import type { CardFormInfoType } from '../../../../common/types/CardPreviewInfoType';
 import styled from 'styled-components';
 import FieldSection from './FieldSection';
 import SelectCardBrandField from './SelectCardBrandField';
@@ -15,14 +12,12 @@ import type { CardFormFieldsType } from '../../hooks/useCardForm';
 const InfoInputSection = ({
   fields,
   cardFormInfo,
-  cardFormHandlers,
   currentStep,
   hasFormError,
   onRegisterComplete,
 }: {
   fields: CardFormFieldsType;
   cardFormInfo: CardFormInfoType;
-  cardFormHandlers: CardFormHandlersType;
   currentStep: number;
   hasFormError: boolean;
   onRegisterComplete: (cardFormInfo: CardFormInfoType) => void;
