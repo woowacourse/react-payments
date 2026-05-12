@@ -47,10 +47,12 @@ export default function ExpirationPeriodField({
     newValue[index] = inputValue;
     onUpdated(newValue);
 
+    const isComplete = newValue.every((fieldValue) => fieldValue.length === PERIOD_LENGTH_PER_INPUT);
+
     if (inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0) {
       focusNext(index);
     }
-    if (inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1) {
+    if (isComplete) {
       onValid(newValue);
     }
   };
