@@ -27,10 +27,13 @@ export const detectCardBrand = (cardNumber: string): CardBrand | null => {
   )
     return "AMEX";
 
-  const unionPayPrefix = parseInt(cardNumber.slice(0, 6));
   if (
-    ((unionPayPrefix >= 622126 && unionPayPrefix <= 622925) ||
-      (unionPayPrefix >= 624 && unionPayPrefix <= 626)) &&
+    ((parseInt(cardNumber.slice(0, 6)) >= 622126 &&
+      parseInt(cardNumber.slice(0, 6)) <= 622925) ||
+      (parseInt(cardNumber.slice(0, 3)) >= 624 &&
+        parseInt(cardNumber.slice(0, 3)) <= 626) ||
+      (parseInt(cardNumber.slice(0, 4)) >= 6282 &&
+        parseInt(cardNumber.slice(0, 4)) <= 6288)) &&
     cardNumber.length <= getCardNumberLengthByBrand("UnionPay")
   )
     return "UnionPay";
