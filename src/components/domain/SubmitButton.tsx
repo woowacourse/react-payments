@@ -17,6 +17,7 @@ export default function SubmitButton({ disabled = false }: SubmitButtonProps) {
 
 const buttonWrapperStyle = css`
   position: fixed;
+  z-index: 1;
   width: 100%;
   bottom: 0;
   left: 50%;
