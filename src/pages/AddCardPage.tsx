@@ -124,7 +124,7 @@ const layout = css`
   max-width: 512px;
   height: 100dvh;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  padding: 20px 30px 80px 30px;
+  padding: 20px 30px 100px 30px;
   overflow: scroll;
 `;
 
