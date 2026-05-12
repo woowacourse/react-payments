@@ -7,24 +7,6 @@ type CardPasswordProps = {
 };
 
 export default function CardPassword({ cardPassword, setCardPassword }: CardPasswordProps) {
-  const maskedPassword = '*'.repeat(cardPassword.cardPassword.length);
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nextValue = e.target.value;
-    const typedValue = nextValue.replaceAll('*', '');
-
-    if (typedValue === '' && nextValue.length < cardPassword.cardPassword.length) {
-      setCardPassword.handleCardPassword(cardPassword.cardPassword.slice(0, nextValue.length));
-      return;
-    }
-
-    const nextPassword = nextValue.includes('*')
-      ? `${cardPassword.cardPassword}${typedValue}`.slice(0, 2)
-      : typedValue.slice(0, 2);
-
-    setCardPassword.handleCardPassword(nextPassword);
-  };
-
   return (
     <div css={{ display: 'flex', flexDirection: 'column' }}>
       <div>
@@ -56,10 +38,10 @@ export default function CardPassword({ cardPassword, setCardPassword }: CardPass
         </label>
         <div>
           <input
-            type="text"
-            placeholder="**"
-            value={maskedPassword}
-            onChange={handlePasswordChange}
+            type="password"
+            placeholder="••"
+            value={cardPassword.cardPassword}
+            onChange={setCardPassword.handleCardPassword}
             maxLength={2}
             onBlur={setCardPassword.handlePasswordBlur}
             inputMode="numeric"
