@@ -102,20 +102,22 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
       expirationPeriodRules[0],
       value[0],
     ) as FormValue['expirationPeriod']['errorStatuses'][0];
-    const yearFieldError = validateAll(
+    const yearError = validateAll(
       expirationPeriodRules[1],
       value[1],
     ) as FormValue['expirationPeriod']['errorStatuses'][1];
-    const combinedError =
-      monthError !== null || yearFieldError !== null
-        ? null
-        : (validate(
-            [RULES.validMonthAndYear],
-            'onBlur',
-            value.join(''),
-          ) as FormValue['expirationPeriod']['errorStatuses'][1]);
+    // 개별 에러가 이미 있으면 조합 검증은 건너뜀
+    const hasIndividualError = monthError !== null || yearError !== null;
+    const combinedError = hasIndividualError
+      ? null
+      : (validate(
+          [RULES.validMonthAndYear],
+          'onBlur',
+          value.join(''),
+        ) as FormValue['expirationPeriod']['errorStatuses'][1]);
 
-    return [monthError, yearFieldError ?? combinedError];
+    // year 개별 에러가 없을 때만 조합 에러(만료 여부)를 year 자리에 표시
+    return [monthError, yearError ?? combinedError];
   };
 
   const validateExpirationPeriodOnComplete = (value: CardInfo['expirationPeriod']) => {
@@ -193,21 +195,24 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
         value: formValue.cardNumbers.value,
         errorStatuses: formValue.cardNumbers.errorStatuses,
         onUpdated: (value: CardInfo['cardNumbers']) => updateValue('cardNumbers', value),
-        onErrorUpdated: (errorStatuses: FormValue['cardNumbers']['errorStatuses']) => updateErrors('cardNumbers', errorStatuses),
+        onErrorUpdated: (errorStatuses: FormValue['cardNumbers']['errorStatuses']) =>
+          updateErrors('cardNumbers', errorStatuses),
         validationRules: cardNumbersRules.slice(0, 2),
       },
       cardCompany: {
         value: formValue.cardCompany.value,
         errorStatuses: formValue.cardCompany.errorStatuses,
         onUpdated: (value: CardInfo['cardCompany']) => updateValue('cardCompany', value),
-        onErrorUpdated: (errorStatuses: FormValue['cardCompany']['errorStatuses']) => updateErrors('cardCompany', errorStatuses),
+        onErrorUpdated: (errorStatuses: FormValue['cardCompany']['errorStatuses']) =>
+          updateErrors('cardCompany', errorStatuses),
         validationRules: cardCompanyRules,
       },
       expirationPeriod: {
         value: formValue.expirationPeriod.value,
         errorStatuses: formValue.expirationPeriod.errorStatuses,
         onUpdated: (value: CardInfo['expirationPeriod']) => updateValue('expirationPeriod', value),
-        onErrorUpdated: (errorStatuses: FormValue['expirationPeriod']['errorStatuses']) => updateErrors('expirationPeriod', errorStatuses),
+        onErrorUpdated: (errorStatuses: FormValue['expirationPeriod']['errorStatuses']) =>
+          updateErrors('expirationPeriod', errorStatuses),
         validationRules: expirationPeriodRules,
       },
       cvc: {
@@ -223,7 +228,8 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
         value: formValue.password.value,
         errorStatuses: formValue.password.errorStatuses,
         onUpdated: (value: CardInfo['password']) => updateValue('password', value),
-        onErrorUpdated: (errorStatuses: FormValue['password']['errorStatuses']) => updateErrors('password', errorStatuses),
+        onErrorUpdated: (errorStatuses: FormValue['password']['errorStatuses']) =>
+          updateErrors('password', errorStatuses),
         validationRules: passwordRules,
       },
     },
