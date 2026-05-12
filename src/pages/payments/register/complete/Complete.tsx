@@ -10,7 +10,12 @@ export const Complete = () => {
   const outletContext = useOutletContext<any>();
   if (!outletContext) return null;
 
-  const { cardNumbers, card } = outletContext;
+  const {
+    cardNumbers: { values: cardNumbers },
+    card: {
+      values: { card },
+    },
+  } = outletContext;
   const cardNumber = cardNumbers[0];
 
   const cardOption = CARD_OPTIONS.find((option) => option.value === card);
