@@ -1,7 +1,6 @@
 import type { CardCompanyType } from "../../../../../common/types/CardCompany";
 import styled from "styled-components";
 import { colors } from "../../../../../styles/color";
-import CardCompanyOption from "./CardCompanyOption/CardCompanyOption";
 
 const mockCardCompany: CardCompanyType[] = [
   "BC카드",
@@ -32,7 +31,9 @@ const CardCompanySelectField = ({
         </option>
 
         {mockCardCompany.map((cardCompany) => (
-          <CardCompanyOption cardCompany={cardCompany} key={cardCompany} />
+          <CardCompanyOption value={cardCompany} key={cardCompany}>
+            {cardCompany}
+          </CardCompanyOption>
         ))}
       </CardSelectTrigger>
     </CardSelectBox>
@@ -99,5 +100,14 @@ const CardSelectTrigger = styled.select`
 
   &:invalid {
     color: #acacac;
+  }
+`;
+
+const CardCompanyOption = styled.option`
+  width: 100%;
+  color: #4f4f4f;
+
+  &:hover {
+    background-color: #ededed;
   }
 `;
