@@ -12,7 +12,7 @@ const isPublicCardInfo = (value: unknown): value is PublicCardInfo => {
   );
 };
 
-const CompletedPage = () => {
+const CardRegistrationCompletePage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
@@ -32,4 +32,4 @@ const CompletedPage = () => {
   );
 };
 
-export default CompletedPage;
+export default CardRegistrationCompletePage;
