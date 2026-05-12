@@ -184,22 +184,16 @@ export default function AddCardPage() {
     );
 
   const cardBrand = categorizeCardBrand(formValue.cardNumbers.value);
-
   const cvcLength = CARD_CVC_MAX_LENGTH[cardBrand] ?? DEFAULT_CVC_LENGTH;
-
   const cardNumbersTotalLength = CARD_TOTAL_LENGTH[cardBrand] ?? DEFAULT_CARD_TOTAL_LENGTH;
 
   const cardNumbersRules = [RULES.numberOnly, RULES.required, RULES.exactLength(cardNumbersTotalLength)];
-
   const expirationPeriodRules: [ValidationRule[], ValidationRule[]] = [
     [RULES.numberOnly, RULES.required, RULES.exactLength(PERIOD_LENGTH_PER_INPUT), RULES.validMonth],
     [RULES.numberOnly, RULES.required, RULES.exactLength(PERIOD_LENGTH_PER_INPUT), RULES.validYear],
   ];
-
   const cvcRules = [RULES.numberOnly, RULES.required, RULES.exactLength(cvcLength)];
-
   const cardCompanyRules = [RULES.required];
-
   const passwordRules = [RULES.numberOnly, RULES.required, RULES.exactLength(PASSWORD_LENGTH)];
 
   return (
