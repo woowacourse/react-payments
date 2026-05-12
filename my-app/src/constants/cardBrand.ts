@@ -1,7 +1,3 @@
-import { CARD_COMPANIES } from "../constants/cardCompanies";
-
-const COMPANY_COLOR_MAP = new Map(CARD_COMPANIES.map((c) => [c.name, c.color]));
-
 export const BRAND_FIELD_CONFIG: Record<string, number[]> = {
   visa: [4, 4, 4, 4],
   master: [4, 4, 4, 4],
@@ -23,8 +19,4 @@ export const decideBrandName = (number: string): string => {
     return "unionpay";
 
   return "";
-};
-
-export const decideCardColor = (company: string) => {
-  return COMPANY_COLOR_MAP.get(company) ?? "#333333";
 };

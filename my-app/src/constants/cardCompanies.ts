@@ -13,3 +13,9 @@ export const CARD_COMPANIES: CardCompany[] = [
   { name: "하나카드", color: "#009490" },
   { name: "국민카드", color: "#6A6056" },
 ];
+
+const COMPANY_COLOR_MAP = new Map(CARD_COMPANIES.map((c) => [c.name, c.color]));
+
+export const decideCardColor = (company: string) => {
+  return COMPANY_COLOR_MAP.get(company) ?? "#333333";
+};

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { CardInfo } from "../types";
-import { decideBrandName, getFieldConfig } from "../utils/decideCardInfo";
+import { decideBrandName, getFieldConfig } from "../constants/cardBrand";
 import { validateCardNumber, validateExpiryDate, validateCvc } from "../utils/validators";
 
 const useCardForm = () => {
