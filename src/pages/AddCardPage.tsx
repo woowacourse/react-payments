@@ -55,7 +55,12 @@ export default function AddCardPage() {
     <div css={layout}>
       <main>
         <div css={cardWrapperStyle}>
-          <Card cardNumber={values.cardNumbers} expirationPeriod={values.expirationPeriod} cardBrand={cardBrand} />
+          <Card
+            cardNumber={values.cardNumbers}
+            expirationPeriod={values.expirationPeriod}
+            cardBrand={cardBrand}
+            cardCompany={values.cardCompany}
+          />
         </div>
         <form onSubmit={handleSubmit} css={formLayout}>
           {stepIndex >= 5 && <SubmitButton disabled={!isFormValid} />}

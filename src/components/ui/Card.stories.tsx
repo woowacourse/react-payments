@@ -26,6 +26,7 @@ const meta = {
   },
   args: {
     cardBrand: 'local',
+    cardCompany: null,
   },
 } satisfies Meta<typeof Card>;
 
