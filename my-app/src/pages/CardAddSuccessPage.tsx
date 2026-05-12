@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import CardAddSuccessImage from '../assets/CardAddSuccessImage.svg';
 import {
   SuccessContainer,
@@ -13,6 +13,10 @@ const CardAddSuccessPage = () => {
   const cardState = location.state;
 
   const { cardNumberPrefixFourth, cardCompany } = cardState;
+
+  if (!cardState) {
+    return <Navigate to="/" replace />;
+  }
 
   const handleSubmit = () => {
     navigate('/', { replace: true });
