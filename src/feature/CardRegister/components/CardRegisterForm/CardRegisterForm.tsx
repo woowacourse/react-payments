@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import CvcField from "./CvcField/CvCField";
 import ExpiryField from "./ExpiryField/ExpiryField";
-import InputContainer from "./InputContainer/InputContainer";
+import InputContainer from "./CardRegisterStep/CardRegisterStep";
 import NumberField from "./NumberField/NumberField";
 import CardCompanySelectField from "./CardCompanySelectField/CardCompanySelectField";
 import PasswordField from "./PasswordField/PasswordField";
@@ -28,7 +28,7 @@ import {
 } from "../../validators/cardForm";
 import { CARD_FORM } from "../../constants";
 
-const InfoInputSection = ({
+const CardRegisterForm = ({
   cardInfo,
   onCardNumbersChange,
   onExpiryMonthChange,
@@ -229,4 +229,4 @@ const ConfirmButton = styled(Button)`
   width: 100%;
 `;
 
-export default InfoInputSection;
+export default CardRegisterForm;

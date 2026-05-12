@@ -3,7 +3,7 @@ import Description from "../../../../../common/components/Description/Descriptio
 import Title from "../../../../../common/components/Title/Title";
 import styled from "styled-components";
 
-const InputContainer = ({
+const CardRegisterStep = ({
   title,
   description,
   children,
@@ -29,4 +29,4 @@ const Container = styled.div`
   width: 100%;
 `;
 
-export default InputContainer;
+export default CardRegisterStep;

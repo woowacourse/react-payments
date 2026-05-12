@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import InfoInputSection from "./components/InfoInputSection/InfoInputSection";
+import InfoInputSection from "./components/CardRegisterForm/CardRegisterForm";
 import styled from "styled-components";
 import type { CardInfoType } from "../../common/types/CardInfoType";
 import type { CardCompanyType } from "../../common/types/CardCompany";
