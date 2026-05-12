@@ -1,8 +1,5 @@
-import type { CardBrandName } from '../constant/cardBrands';
-import {
-  CARD_COMPANIES,
-  type CardCompanyId,
-} from '../constant/cardCompanies';
+import { CARD_BRANDS, type CardBrandName } from '../constant/cardBrands';
+import { CARD_COMPANIES, type CardCompanyId } from '../constant/cardCompanies';
 import { isPrefixInRange } from './validator';
 
 export const getCardBrandName = (
@@ -10,24 +7,13 @@ export const getCardBrandName = (
 ): CardBrandName | null => {
   const fullNumber = cardNumbers.join('');
 
-  if (fullNumber.startsWith('4')) return 'visa';
+  const matchedBrand = CARD_BRANDS.find((brand) =>
+    brand.prefixRules.some((rule) =>
+      isPrefixInRange(fullNumber, rule.digitCount, rule.start, rule.end),
+    ),
+  );
 
-  if (isPrefixInRange(fullNumber, 2, 51, 55)) return 'masterCard';
-  if (isPrefixInRange(fullNumber, 2, 36, 36)) return 'diners';
-  if (
-    isPrefixInRange(fullNumber, 2, 34, 34) ||
-    isPrefixInRange(fullNumber, 2, 37, 37)
-  )
-    return 'amex';
-
-  if (
-    isPrefixInRange(fullNumber, 6, 622126, 622925) ||
-    isPrefixInRange(fullNumber, 3, 624, 626) ||
-    isPrefixInRange(fullNumber, 4, 6282, 6288)
-  )
-    return 'unionPay';
-
-  return null;
+  return matchedBrand?.name ?? null;
 };
 
 export const getCardCompanyColor = (cardCompanyId: CardCompanyId | null) => {
