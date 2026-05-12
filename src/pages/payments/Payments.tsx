@@ -48,6 +48,7 @@ export const Payments = () => {
   const cardInfo: CardInfo = {
     bank: bank.value,
     cardNumbers: cardNumbers.values,
+    brand: cardNumbers.brand,
     expiryDate: {
       month: expiryDate.month.value,
       year: expiryDate.year.value,

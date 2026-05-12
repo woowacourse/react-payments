@@ -1,6 +1,6 @@
 import { useInputFocus } from '@/core/hooks/useInputFocus';
 import { isNumericString } from '@/core/utils/validator';
-import { BRAND, getBrand, RULES } from '@/entities/card/brand/brand';
+import { BRAND, getBrand, RULES, type Brand } from '@/entities/card/brand/brand';
 import {
   CARD_NUMBER_ERRORS,
   validateCardNumber,
@@ -14,6 +14,7 @@ interface UseCardNumbersProps {
 
 export interface UseCardNumbersResult {
   values: string[];
+  brand: Brand;
   isValid: boolean;
   infoErrors: boolean[];
   maxLengths: number[];
@@ -28,8 +29,11 @@ export const useCardNumbers = ({ onComplete }: UseCardNumbersProps): UseCardNumb
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [touched, setTouched] = useState<boolean[]>([false, false, false, false]);
 
-  const brand = getBrand(cardNumbers[0] + (cardNumbers[1] ?? ''));
+  const brandCardStand =
+    cardNumbers[0].length !== 4 ? cardNumbers[0] : cardNumbers[0] + cardNumbers[1];
+  const brand = getBrand(brandCardStand);
   const format = RULES[brand].format;
+  console.log(brandCardStand, brand);
 
   const errors = cardNumbers.map((cardNumber, idx) => validateCardNumber(cardNumber, format[idx]));
 
@@ -80,6 +84,7 @@ export const useCardNumbers = ({ onComplete }: UseCardNumbersProps): UseCardNumb
 
   return {
     values: cardNumbers,
+    brand,
     isValid,
     infoErrors,
     maxLengths: format,
