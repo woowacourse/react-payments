@@ -3,7 +3,7 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import ExpiryDateInputSection from "./ExpiryDateInputSection";
 
 const meta = {
-  title: "Components/ExpiryDateInputSection",
+  title: "CardForm/ExpiryDateInputSection",
   component: ExpiryDateInputSection,
   tags: ["autodocs"],
   parameters: {

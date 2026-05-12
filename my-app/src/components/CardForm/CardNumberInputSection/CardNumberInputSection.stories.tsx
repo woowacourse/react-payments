@@ -3,7 +3,7 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import CardNumberInputSection from "./CardNumberInputSection";
 
 const meta = {
-  title: "Components/CardNumberInputSection",
+  title: "CardForm/CardNumberInputSection",
   component: CardNumberInputSection,
   tags: ["autodocs"],
   parameters: {
@@ -12,6 +12,7 @@ const meta = {
   args: {
     onValueHandler: fn(),
     inputValues: ["", "", "", ""],
+    fieldConfig: [4, 4, 4, 4],
   },
   render: (args) => (
     <div style={{ width: 320 }}>

@@ -3,7 +3,7 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import CardCompanySelectSection from "./CardCompanySelectSection";
 
 const meta = {
-  title: "Components/CardCompanySelectSection",
+  title: "CardForm/CardCompanySelectSection",
   component: CardCompanySelectSection,
   tags: ["autodocs"],
   parameters: {
