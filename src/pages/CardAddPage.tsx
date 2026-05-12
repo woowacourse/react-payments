@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { getCardNumberErrorMessage } from '../utils/getCardNumberErrorMessage';
-import CardInfoSection from '../components/CardInfoSection';
 import { getCVCumberErrorMessage } from '../utils/getCVCNumberErrorMessage';
 import { getEXPNumberErrorMessage } from '../utils/getEXPNumberErrorMessage';
 import CardPreview from '../components/Card/CardPreview';
@@ -92,83 +91,58 @@ export default function CardAddPage() {
             <MainContainer>
                 <CardPreview cardNumbers={cardNumberValues} EXP={expValues} cardIssuer={cardBrand} />
                 <InputSectionContainer>
-                    <CardInfoSection
-                        title="비밀번호"
-                        caption="앞의 2자리를 입력해 주세요"
-                        inputLabel="비밀번호 앞 2자리"
+                    <PasswordInputWrapper
+                        setPassword={setPasswordValueByIndex(0)}
+                        value={passwordValues[0]}
+                        handleBlur={handlePasswordBlur}
+                        handleFocus={handlePasswordFocus}
+                        errorMessage={passwordErrorMessage}
+                        setErrorMessage={setPasswordErrorMessage}
+                        hasTouched={hasPasswordTouched}
+                        getRef={getPasswordRef}
+                        focusFirst={focusFirstPassword}
                         isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy}
-                    >
-                        <PasswordInputWrapper
-                            setPassword={setPasswordValueByIndex(0)}
-                            value={passwordValues[0]}
-                            handleBlur={handlePasswordBlur}
-                            handleFocus={handlePasswordFocus}
-                            errorMessage={passwordErrorMessage}
-                            setErrorMessage={setPasswordErrorMessage}
-                            hasTouched={hasPasswordTouched}
-                            getRef={getPasswordRef}
-                            focusFirst={focusFirstPassword}
-                        />
-                    </CardInfoSection>
-                    <CardInfoSection
-                        title="CVC 번호를 입력해 주세요"
-                        inputLabel="CVC"
+                    />
+                    <CVCInputWrapper
+                        setCVCNumber={setCVCValueByIndex(0)}
+                        value={cvcValues[0]}
+                        handleBlur={handleCVCBlur}
+                        handleFocus={handleCVCFocus}
+                        errorMessage={cvcErrorMessage}
+                        setErrorMessage={setCVCErrorMessage}
+                        hasTouched={hasCVCTouched}
+                        getRef={getCVCRef}
+                        focusFirst={focusFirstCVC}
                         isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy}
-                    >
-                        <CVCInputWrapper
-                            setCVCNumber={setCVCValueByIndex(0)}
-                            value={cvcValues[0]}
-                            handleBlur={handleCVCBlur}
-                            handleFocus={handleCVCFocus}
-                            errorMessage={cvcErrorMessage}
-                            setErrorMessage={setCVCErrorMessage}
-                            hasTouched={hasCVCTouched}
-                            getRef={getCVCRef}
-                            focusFirst={focusFirstCVC}
-                        />
-                    </CardInfoSection>
-                    <CardInfoSection
-                        title="카드 유효기간을 입력해 주세요"
-                        caption="월/년도(MMYY)를 순서대로 입력해 주세요"
-                        inputLabel="유효기간"
+                    />
+                    <EXPInputWrapper
+                        setEXPNumber={setExpValueByIndex}
+                        value={expValues}
+                        handleBlur={handleExpBlur}
+                        handleFocus={handleExpFocus}
+                        errorMessage={expErrorMessage}
+                        setErrorMessage={setExpErrorMessage}
+                        hasTouched={hasExpTouched}
+                        getRef={getExpRef}
+                        focusFirst={focusFirstExp}
                         isRender={isCardNumberSatisfy && isCardBrandSatisfy}
-                    >
-                        <EXPInputWrapper
-                            setEXPNumber={setExpValueByIndex}
-                            value={expValues}
-                            handleBlur={handleExpBlur}
-                            handleFocus={handleExpFocus}
-                            errorMessage={expErrorMessage}
-                            setErrorMessage={setExpErrorMessage}
-                            hasTouched={hasExpTouched}
-                            getRef={getExpRef}
-                            focusFirst={focusFirstExp}
-                        />
-                    </CardInfoSection>
-                    <CardInfoSection
-                        title="카드사를 선택해 주세요"
-                        caption="현재 국내 카드사만 가능합니다."
+                    />
+                    <CardBrandInputWrapper
+                        selectedValue={cardBrand}
+                        setSelectedValue={setCardBrand}
                         isRender={isCardNumberSatisfy}
-                    >
-                        <CardBrandInputWrapper selectedValue={cardBrand} setSelectedValue={setCardBrand} />
-                    </CardInfoSection>
-                    <CardInfoSection
-                        title="결제할 카드 번호를 입력해 주세요"
-                        caption="본인 명의의 카드만 결제 가능합니다."
-                        inputLabel="카드 번호"
-                    >
-                        <CardNumberInputWrapper
-                            setCardNumber={setCardNumberValueByIndex}
-                            value={cardNumberValues}
-                            handleBlur={handleCardNumberBlur}
-                            handleFocus={handleCardNumberFocus}
-                            errorMessage={cardNumberErrorMessage}
-                            setErrorMessage={setCardNumberErrorMessage}
-                            hasTouched={hasCardNumberTouched}
-                            getRef={getCardNumberRef}
-                            maxLengths={getCardNumberMaxLengths(cardNumberValues[0])}
-                        />
-                    </CardInfoSection>
+                    />
+                    <CardNumberInputWrapper
+                        setCardNumber={setCardNumberValueByIndex}
+                        value={cardNumberValues}
+                        handleBlur={handleCardNumberBlur}
+                        handleFocus={handleCardNumberFocus}
+                        errorMessage={cardNumberErrorMessage}
+                        setErrorMessage={setCardNumberErrorMessage}
+                        hasTouched={hasCardNumberTouched}
+                        getRef={getCardNumberRef}
+                        maxLengths={getCardNumberMaxLengths(cardNumberValues[0])}
+                    />
                     {isAllSatisfy && <ConfirmButtonSpacer />}
                 </InputSectionContainer>
                 {isAllSatisfy && (

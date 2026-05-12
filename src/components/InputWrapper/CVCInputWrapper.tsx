@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
+import CardInfoSection from '../CardInfoSection';
 
 interface CVCInputWrapperProps {
     setCVCNumber: (value: string) => void;
@@ -13,6 +14,7 @@ interface CVCInputWrapperProps {
     hasTouched: boolean;
     getRef: (index: number) => (el: HTMLInputElement | null) => void;
     focusFirst: () => void;
+    isRender?: boolean;
 }
 
 export default function CVCInputWrapper({
@@ -25,26 +27,29 @@ export default function CVCInputWrapper({
     hasTouched,
     getRef,
     focusFirst,
+    isRender,
 }: CVCInputWrapperProps) {
     useEffect(() => {
         focusFirst();
     }, []);
 
     return (
-        <CardInputWrapper errorMessage={errorMessage}>
-            <CardInfoInput
-                ref={getRef(0)}
-                value={value}
-                setValue={setCVCNumber}
-                size="large"
-                placeholder="123"
-                inputBlock={isNumeric}
-                setErrorMessage={setErrorMessage}
-                isError={hasTouched && value.length !== 3}
-                maxLength={3}
-                onBlur={handleBlur}
-                onFocus={handleFocus}
-            />
-        </CardInputWrapper>
+        <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isRender}>
+            <CardInputWrapper errorMessage={errorMessage}>
+                <CardInfoInput
+                    ref={getRef(0)}
+                    value={value}
+                    setValue={setCVCNumber}
+                    size="large"
+                    placeholder="123"
+                    inputBlock={isNumeric}
+                    setErrorMessage={setErrorMessage}
+                    isError={hasTouched && value.length !== 3}
+                    maxLength={3}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
+                />
+            </CardInputWrapper>
+        </CardInfoSection>
     );
 }
