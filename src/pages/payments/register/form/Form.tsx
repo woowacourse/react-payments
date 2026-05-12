@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { useOutletContext } from 'react-router';
 
@@ -31,11 +31,28 @@ export const Form = () => {
     handleSubmit,
   } = outletContext;
 
+  const prevFormValidsRefs = useRef<Record<string, boolean>>({});
   useEffect(() => {
-    if (cardNumbers.isValid && !card.isValid) return card.refs.current?.card?.focus();
-    if (card.isValid && !expirationDate.valids.month) return expirationDate.refs.current.month?.focus();
-    if (expirationDate.valids.year && !cvc.isValid) return cvc.refs.current?.cvc?.focus();
-    if (cvc.isValid && !password.isValid) return password.refs.current?.password?.focus();
+    if (cardNumbers.isValid && !card.isValid && card.refs.current?.card) {
+      if (prevFormValidsRefs.current.card) return;
+      prevFormValidsRefs.current.card = true;
+      return card.refs.current?.card.focus();
+    }
+    if (card.isValid && !expirationDate.valids.month) {
+      if (prevFormValidsRefs.current.month) return;
+      prevFormValidsRefs.current.month = true;
+      return expirationDate.refs.current.month?.focus();
+    }
+    if (expirationDate.valids.year && !cvc.isValid) {
+      if (prevFormValidsRefs.current.cvc) return;
+      prevFormValidsRefs.current.cvc = true;
+      return cvc.refs.current?.cvc?.focus();
+    }
+    if (cvc.isValid && !password.isValid) {
+      if (prevFormValidsRefs.current.password) return;
+      prevFormValidsRefs.current.password = true;
+      return password.refs.current?.password?.focus();
+    }
   }, [
     cardNumbers.isValid,
 
