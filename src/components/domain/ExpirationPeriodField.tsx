@@ -2,46 +2,56 @@ import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo } from '../../types';
-import { useState } from 'react';
 import useInputFocus from '../../hooks/useInputFocus';
 import type { ExpirationPeriodErrorStatus } from '../../types';
-import { isNumber, isValidMonth, isValidYear } from '../../utils';
+import { useEffect } from 'react';
+import { validate, type ValidationRule } from '../../utils';
 import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
+  errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
   onUpdated: (value: CardInfo['expirationPeriod']) => void;
+  onErrorUpdated: (errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]) => void;
+  onValid: (value: CardInfo['expirationPeriod']) => void;
+  validationRules: [ValidationRule[], ValidationRule[]];
 }
 
-export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
-  const [errors, setErrors] = useState<[ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]>([null, null]);
-  const { setRef, focusNext, focusPrev } = useInputFocus(2);
+export default function ExpirationPeriodField({
+  value,
+  errorStatuses,
+  onUpdated,
+  onErrorUpdated,
+  onValid,
+  validationRules,
+}: ExpirationPeriodFieldProps) {
+  const { setRef, focusNext, focusPrev, focusFirst } = useInputFocus(2);
+
+  useEffect(() => {
+    focusFirst();
+  }, []);
 
   const updateError = (index: number, status: ExpirationPeriodErrorStatus) => {
-    setErrors((prev) => {
-      const next = [...prev] as [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
-      next[index] = status;
-      return next;
-    });
+    const next = [...errorStatuses] as [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
+    next[index] = status;
+    onErrorUpdated(next);
   };
 
-  // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. numberOnly -> update 제외됨.
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-
-    if (inputValue !== '' && !isNumber(inputValue)) {
-      updateError(index, 'numberOnly');
-      return;
-    }
+    const error = validate(validationRules[index], 'onChange', inputValue);
+    updateError(index, error as ExpirationPeriodErrorStatus);
+    if (error) return;
 
     const newValue = [...value] as CardInfo['expirationPeriod'];
     newValue[index] = inputValue;
     onUpdated(newValue);
-    updateError(index, null);
 
     if (inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0) {
       focusNext(index);
+    }
+    if (inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1) {
+      onValid(newValue);
     }
   };
 
@@ -51,38 +61,11 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
     }
   };
 
-  // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
-  // 1. required
-  // 2. invalidLength
-  // 3. MM -> 1-12인지
-  // 4. YY -> 오늘로부터 5년 이내인지.
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-
-    if (inputValue === '') {
-      updateError(index, 'required');
-      return;
-    }
-
-    if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
-      updateError(index, 'invalidLength');
-      return;
-    }
-
-    if (index === 0 && !isValidMonth(inputValue)) {
-      updateError(index, 'invalidMonth');
-      return;
-    }
-
-    if (index === 1 && !isValidYear(inputValue)) {
-      updateError(index, 'invalidYear');
-      return;
-    }
-
-    updateError(index, null);
+    updateError(index, validate(validationRules[index], 'onBlur', e.target.value) as ExpirationPeriodErrorStatus);
   };
 
-  const activeError = errors.find((e) => e !== null) ?? null;
+  const activeError = errorStatuses.find((e) => e !== null) ?? null;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드 유효기간을 입력해 주세요',
@@ -99,7 +82,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
           <Input
             ref={setRef(0)}
             value={value[0]}
-            variant={errors[0] !== null ? 'error' : 'default'}
+            variant={errorStatuses[0] !== null ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="MM"
@@ -110,7 +93,7 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
           <Input
             ref={setRef(1)}
             value={value[1]}
-            variant={errors[1] !== null ? 'error' : 'default'}
+            variant={errorStatuses[1] !== null ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="YY"
