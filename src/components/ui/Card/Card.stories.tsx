@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Card from './Card';
+import Card from './index';
 
 const meta = {
   title: 'ui/Card',
@@ -12,8 +12,13 @@ const meta = {
   argTypes: {
     cardBrand: {
       control: 'inline-radio',
-      options: ['local', 'visa', 'mastercard'],
+      options: ['local', 'visa', 'mastercard', 'amex', 'diners', 'unionpay'],
       description: '카드 브랜드',
+    },
+    cardCompany: {
+      control: 'inline-radio',
+      options: ['', 'bc', 'shinhan', 'kakao', 'hyundai', 'woori', 'lotte', 'nh', 'hana'],
+      description: '카드사',
     },
     cardNumber: {
       control: 'object',
@@ -26,6 +31,7 @@ const meta = {
   },
   args: {
     cardBrand: 'local',
+    cardCompany: '',
   },
 } satisfies Meta<typeof Card>;
 
@@ -36,6 +42,7 @@ export const Default: Story = {
   args: {
     cardNumber: ['1234', '1234', '1234', '1234'],
     expirationPeriod: ['05', '26'],
+    cardCompany: 'bc',
   },
 };
 
@@ -43,5 +50,6 @@ export const Empty: Story = {
   args: {
     cardNumber: ['', '', '', ''],
     expirationPeriod: ['', ''],
+    cardCompany: '',
   },
 };

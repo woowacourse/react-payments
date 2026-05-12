@@ -1,21 +1,47 @@
 import { css } from '@emotion/react';
-import type { CardInfo } from '../../types';
+import type { CardInfo } from '../../../types';
 import visaLogo from '/visa.png';
 import mastercardLogo from '/mastercard.png';
+import amexLogo from '/amex.png';
+import dinersLogo from '/diners.png';
+import unionpayLogo from '/unionpay.png';
+
+const CARD_BRAND_LOGOS: Partial<Record<string, { src: string; alt: string }>> = {
+  visa: { src: visaLogo, alt: 'visa' },
+  mastercard: { src: mastercardLogo, alt: 'mastercard' },
+  amex: { src: amexLogo, alt: 'amex' },
+  diners: { src: dinersLogo, alt: 'diners' },
+  unionpay: { src: unionpayLogo, alt: 'unionpay' },
+};
+
+const CARD_COMPANY_COLORS: Partial<Record<string, string>> = {
+  bc: 'var(--color-brand-bc-card)',
+  shinhan: 'var(--color-brand-shinhan-card)',
+  kakao: 'var(--color-brand-kakaobank)',
+  hyundai: 'var(--color-brand-hyundai-card)',
+  woori: 'var(--color-brand-woori-card)',
+  lotte: 'var(--color-brand-lotte-card)',
+  hana: 'var(--color-brand-hana-card)',
+  nh: 'var(--color-brand-kb-card)',
+};
 
 interface CardProps {
   cardNumber: CardInfo['cardNumbers'];
   expirationPeriod: CardInfo['expirationPeriod'];
   cardBrand: CardInfo['cardBrand'];
+  cardCompany: CardInfo['cardCompany'];
 }
 
-export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardProps) {
+export default function Card({ cardNumber, expirationPeriod, cardBrand, cardCompany }: CardProps) {
+  const backgroundColor = CARD_COMPANY_COLORS[cardCompany] ?? 'var(--color-background-card)';
+
   return (
-    <div css={cardStyle}>
+    <div css={[cardStyle, { background: backgroundColor }]}>
       <div css={cardHeaderStyle}>
         <div css={cardChipStyle} />
-        {cardBrand === 'visa' && <img css={cardBrandStyle} src={visaLogo} alt="visa" />}
-        {cardBrand === 'mastercard' && <img css={cardBrandStyle} src={mastercardLogo} alt="mastercard" />}
+        {CARD_BRAND_LOGOS[cardBrand] && (
+          <img css={cardBrandStyle} src={CARD_BRAND_LOGOS[cardBrand].src} alt={CARD_BRAND_LOGOS[cardBrand].alt} />
+        )}
       </div>
 
       <div css={cardInfoWrapperStyle}>
