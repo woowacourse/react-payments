@@ -33,7 +33,6 @@ export const useCardNumbers = ({ onComplete }: UseCardNumbersProps): UseCardNumb
     cardNumbers[0].length !== 4 ? cardNumbers[0] : cardNumbers[0] + cardNumbers[1];
   const brand = getBrand(brandCardStand);
   const format = RULES[brand].format;
-  console.log(brandCardStand, brand);
 
   const errors = cardNumbers.map((cardNumber, idx) => validateCardNumber(cardNumber, format[idx]));
 

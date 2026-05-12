@@ -43,7 +43,7 @@ export const CardPreview = ({ info }: CardPreviewProps) => {
         </div>
         <div className={styles.ExpiryDate}>
           {expiryDate.month && <span>{expiryDate.month}/</span>}
-          {expiryDate.year}
+          <span>{expiryDate.year}</span>
         </div>
       </div>
     </div>
