@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import arrow from '../../../public/chevron-up.svg';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 interface SelectOptions {
     value: string;
@@ -21,8 +22,10 @@ export default function CardBrandSelect({
     setSelectedValue,
 }: CardBrandSelectProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const containerRef = useOutsideClick<HTMLDivElement>(() => setIsOpen(false));
+
     return (
-        <CardBrandSelectContainer>
+        <CardBrandSelectContainer ref={containerRef}>
             <CardBrandSelectStyle value={selectedValue} onClick={() => setIsOpen((prev) => !prev)}>
                 {selectedValue ? options.find((o) => o.value === selectedValue)?.label : placeholder}
                 <ArrowImage src={arrow} />
