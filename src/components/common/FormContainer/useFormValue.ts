@@ -3,6 +3,7 @@ import { useContext } from "react";
 import FormWrapperContext from "./FormWrapperContext";
 import type { FormWrapperValue } from "./types";
 
+//TODO: 타입 추론이 되도록 개선하기
 export const useFormValue = <T extends Record<string, unknown>>() => {
   const context = useContext(FormWrapperContext);
   if (!context) {
