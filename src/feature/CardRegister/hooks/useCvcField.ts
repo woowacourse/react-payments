@@ -19,14 +19,14 @@ export const useCvcField = ({ onComplete }: UseCvcFieldParams) => {
   const hasError = firstErrorIndex === 0;
 
   const handleChange = (rawValue: string) => {
-    const nextValue = rawValue.trim();
+    const value = rawValue.trim();
 
-    if (!isNumeric(nextValue)) return;
-    if (!isWithinMaxLength(nextValue, CVC_LENGTH)) return;
+    if (!isNumeric(value)) return;
+    if (!isWithinMaxLength(value, CVC_LENGTH)) return;
 
-    setValue(nextValue);
+    setValue(value);
 
-    if (validateCvcNumber(nextValue) === null) onComplete();
+    if (validateCvcNumber(value) === null) onComplete();
   };
 
   const handleBlur = () => {
