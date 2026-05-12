@@ -37,25 +37,22 @@ export const useCardForm = () => {
 
   const fields = {
     numbers: numbersField,
+    cardCompany: cardCompanyField,
     expiry: expiryField,
     cvc: cvcField,
     password: passwordField,
-    cardCompany: cardCompanyField,
   };
 
   const cardPreviewInfo: CardPreviewInfoType = {
     cardNumbers: numbersField.cardNumbers,
+    cardCompanyId: cardCompanyField.cardCompanyId,
     expiryMonth: expiryField.expiryMonth,
     expiryYear: expiryField.expiryYear,
-    cardCompanyId: cardCompanyField.cardCompanyId,
   };
 
   const cardFormInfo: CardFormInfoType = {
-    cardNumbers: numbersField.cardNumbers,
-    expiryMonth: expiryField.expiryMonth,
-    expiryYear: expiryField.expiryYear,
-    cvcNumber: cvcField.value,
-    cardCompanyId: cardCompanyField.cardCompanyId,
+    ...cardPreviewInfo,
+    cvcNumber: cvcField.cvcNumber,
     password: passwordField.password,
   };
 
@@ -63,7 +60,7 @@ export const useCardForm = () => {
     cardNumbers: numbersField.cardNumbers,
     expiryMonth: expiryField.expiryMonth,
     expiryYear: expiryField.expiryYear,
-    cvcNumber: cvcField.value,
+    cvcNumber: cvcField.cvcNumber,
     password: passwordField.password,
   });
 

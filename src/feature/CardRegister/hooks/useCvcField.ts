@@ -10,14 +10,14 @@ type UseCvcFieldParams = {
 export type CvcFieldType = ReturnType<typeof useCvcField>;
 
 export const useCvcField = ({ onComplete }: UseCvcFieldParams) => {
-  const [value, setValue] = useState('');
+  const [cvcNumber, setCvcNumber] = useState('');
 
   const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
-    values: [value],
+    values: [cvcNumber],
     validate: validateCvcNumber,
   });
 
-  const isComplete = validateCvcNumber(value) === null;
+  const isComplete = validateCvcNumber(cvcNumber) === null;
   const hasError = firstErrorIndex === 0;
 
   const handleChange = (rawValue: string) => {
@@ -26,7 +26,7 @@ export const useCvcField = ({ onComplete }: UseCvcFieldParams) => {
     if (!isNumeric(value)) return;
     if (!isWithinMaxLength(value, CVC_LENGTH)) return;
 
-    setValue(value);
+    setCvcNumber(value);
 
     if (validateCvcNumber(value) === null) onComplete();
   };
@@ -36,7 +36,7 @@ export const useCvcField = ({ onComplete }: UseCvcFieldParams) => {
   };
 
   return {
-    value,
+    cvcNumber,
     errorMessage,
     hasError,
     isComplete,
