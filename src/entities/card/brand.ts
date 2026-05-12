@@ -1,10 +1,10 @@
 export const BRAND = {
-  VISA: 'visa',
-  MASTERCARD: 'mastercard',
-  DINERS: 'diners',
-  AMEX: 'amex',
-  UNIONPAY: 'unionpay',
-  DEFAULT: 'default',
+  VISA: 'VISA',
+  MASTERCARD: 'MASTERCARD',
+  DINERS: 'DINERS',
+  AMEX: 'AMEX',
+  UNIONPAY: 'UNIONPAY',
+  UNKNOWN: 'UNKNOWN',
 } as const;
 
 export type Brand = (typeof BRAND)[keyof typeof BRAND];
@@ -22,27 +22,27 @@ const isInRange = (str: string, min: number, max: number): boolean => {
 };
 
 export const RULES: Record<Brand, BrandConfig> = {
-  visa: {
+  VISA: {
     format: [4, 4, 4, 4],
     length: 16,
     isMatch: [(str) => str.startsWith('4')],
   },
-  mastercard: {
+  MASTERCARD: {
     format: [4, 4, 4, 4],
     length: 16,
     isMatch: [(str) => isInRange(str.slice(0, 2), 51, 55)],
   },
-  diners: {
-    format: [4, 6, 4],
+  DINERS: {
+    format: [4, 4, 4, 2],
     length: 14,
     isMatch: [(str) => str.startsWith('36')],
   },
-  amex: {
-    format: [4, 6, 5],
+  AMEX: {
+    format: [4, 4, 4, 3],
     length: 15,
     isMatch: [(str) => str.startsWith('34'), (str) => str.startsWith('37')],
   },
-  unionpay: {
+  UNIONPAY: {
     format: [4, 4, 4, 4],
     length: 16,
     isMatch: [
@@ -51,7 +51,7 @@ export const RULES: Record<Brand, BrandConfig> = {
       (str) => isInRange(str.slice(0, 4), 6282, 6288),
     ],
   },
-  default: {
+  UNKNOWN: {
     format: [4, 4, 4, 4],
     length: 16,
     isMatch: [],
@@ -66,6 +66,5 @@ export const getBrand = (cardNumber: string): Brand => {
       return brand;
     }
   }
-
-  return BRAND.DEFAULT;
+  return BRAND.UNKNOWN;
 };

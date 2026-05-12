@@ -20,7 +20,6 @@ const ERROR_MESSAGE = {
 
 // month
 export const isValidFormatMonth = (month: string): boolean => {
-  if (month !== '' && !isNumericString(month)) return false;
   if (!isValidMonth(month)) return false;
   return true;
 };
