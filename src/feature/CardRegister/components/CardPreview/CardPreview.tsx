@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import type { CardInfoType } from "../../../../../common/types/CardInfoType";
-import CardBrandLogo from "../CardBrandLogo/CardBrandLogo";
-import CardExpiryDateDisplay from "../CardExpiryDateDisplay/CardExpiryDateDisplay";
-import CardNumberDisplay from "../CardNumberDisplay/CardNumberDisplay";
-import { getCardBrandName } from "../../../utils/cardBrand";
-import type { CardCompanyType } from "../../../../../common/types/CardCompany";
-import { cardColors } from "../../../../../styles/color";
+import type { CardCompanyType } from "../../../../common/types/CardCompany";
+import type { CardInfoType } from "../../../../common/types/CardInfoType";
+import { cardColors } from "../../../../styles/color";
+import CardBrandLogo from "./CardBrandLogo/CardBrandLogo";
+import CardExpiryDateDisplay from "./CardExpiryDateDisplay/CardExpiryDateDisplay";
+import CardNumberDisplay from "./CardNumberDisplay/CardNumberDisplay";
+import { getCardBrandName } from "../../utils/cardBrand";
 
 const getCardColor = (cardCompany: CardCompanyType | null) => {
   if (!cardCompany) {
@@ -13,7 +13,7 @@ const getCardColor = (cardCompany: CardCompanyType | null) => {
   }
   return cardColors[cardCompany];
 };
-const CardPreviewContainer = ({ cardInfo }: { cardInfo: CardInfoType }) => {
+const CardPreview = ({ cardInfo }: { cardInfo: CardInfoType }) => {
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
     cardInfo;
 
@@ -76,4 +76,4 @@ const IcChip = styled.div`
   border-radius: 4px;
 `;
 
-export default CardPreviewContainer;
+export default CardPreview;

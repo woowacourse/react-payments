@@ -1,9 +1,10 @@
 import { useState } from "react";
-import CardPreviewSection from "./components/CardPreviewSection/CardPreviewSection";
+
 import InfoInputSection from "./components/InfoInputSection/InfoInputSection";
 import styled from "styled-components";
 import type { CardInfoType } from "../../common/types/CardInfoType";
 import type { CardCompanyType } from "../../common/types/CardCompany";
+import CardPreview from "./components/CardPreview/CardPreview";
 
 const CardRegisterPage = () => {
   const [cardInformation, setCardInformation] = useState<CardInfoType>({
@@ -20,7 +21,9 @@ const CardRegisterPage = () => {
     }));
   };
 
-  const handleCardNumbersChange = (cardNumbers: CardInfoType["cardNumbers"]) => {
+  const handleCardNumbersChange = (
+    cardNumbers: CardInfoType["cardNumbers"],
+  ) => {
     updateCardInformation({ cardNumbers });
   };
 
@@ -38,7 +41,7 @@ const CardRegisterPage = () => {
 
   return (
     <CardRegisterPageLayout>
-      <CardPreviewSection cardInfo={cardInformation} />
+      <CardPreview cardInfo={cardInformation} />
       <InfoInputSection
         cardInfo={cardInformation}
         onCardNumbersChange={handleCardNumbersChange}
