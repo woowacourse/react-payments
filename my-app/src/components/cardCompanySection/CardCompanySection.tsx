@@ -13,10 +13,8 @@ interface Props {
 
 const CardCompanySection = ({ value, setValue }: Props) => {
   const cardCompanySelectId = useId();
-  const { isOpen, toggleDropdown, handleChooseCompany } = useCardCompany({
-    value,
-    setValue,
-  });
+  const dropdownListId = useId();
+  const { isOpen, toggleDropdown, handleChooseCompany, handleKeyDown } = useCardCompany({ setValue });
 
   return (
     <CommonSection
@@ -27,7 +25,7 @@ const CardCompanySection = ({ value, setValue }: Props) => {
       htmlFor={cardCompanySelectId}
     >
       <DropdownContainer>
-        <DropdownButton id={cardCompanySelectId} onClick={toggleDropdown} type="button">
+        <DropdownButton id={cardCompanySelectId} onClick={toggleDropdown} type="button" aria-haspopup="listbox" aria-expanded={isOpen} aria-controls={isOpen ? dropdownListId : undefined}>
           <span style={{ color: value ? '#000000' : '#ACACAC' }}>
             {value || '카드사를 선택해주세요'}
           </span>
@@ -42,9 +40,9 @@ const CardCompanySection = ({ value, setValue }: Props) => {
 
         {/* isOpen이 true일 떄만 list 렌더링 */}
         {isOpen && (
-          <DropdownList>
+          <DropdownList id={dropdownListId} role="listbox">
             {CARD_COMPANIES.map((company) => (
-              <DropdownItem key={company} onClick={() => handleChooseCompany(company)}>
+              <DropdownItem key={company} role="option" tabIndex={0} aria-selected={value === company} onClick={() => handleChooseCompany(company)} onKeyDown={(e) => handleKeyDown(e, company)}>
                 {company}
               </DropdownItem>
             ))}
