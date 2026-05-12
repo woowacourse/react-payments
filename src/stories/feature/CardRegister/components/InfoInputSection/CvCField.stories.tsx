@@ -1,16 +1,30 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
 import CvcField from '../../../../../feature/CardRegister/components/InfoInputSection/CvCField';
+import {
+  useCvcField,
+  type CvcFieldType,
+} from '../../../../../feature/CardRegister/hooks/useCvcField';
+
+const createCvcField = (
+  overrides: Partial<CvcFieldType> = {},
+): CvcFieldType => ({
+  cvcNumber: '',
+  errorMessage: '',
+  hasError: false,
+  isComplete: false,
+  handleChange: fn(),
+  handleBlur: fn(),
+  ...overrides,
+});
 
 const meta = {
   title: 'feature/CardRegister/components/CvcField',
   component: CvcField,
   tags: ['autodocs'],
   args: {
-    cvcNumber: '',
-    handleCvcNumberChange: fn(),
+    field: createCvcField(),
   },
 } satisfies Meta<typeof CvcField>;
 
@@ -21,25 +35,27 @@ export const Empty: Story = {};
 
 export const Filled: Story = {
   args: {
-    cvcNumber: '123',
-    handleCvcNumberChange: fn(),
+    field: createCvcField({
+      cvcNumber: '123',
+      isComplete: true,
+    }),
+  },
+};
+
+export const Error: Story = {
+  args: {
+    field: createCvcField({
+      cvcNumber: '12',
+      errorMessage: 'CVC 번호 3자리를 입력해 주세요',
+      hasError: true,
+    }),
   },
 };
 
 export const Interactive: Story = {
-  args: {
-    cvcNumber: '',
-    handleCvcNumberChange: fn(),
-  },
-  render: function InteractiveCvcField(args) {
-    const [cvcNumber, setCvcNumber] = useState(args.cvcNumber);
+  render: function InteractiveCvcField() {
+    const field = useCvcField({});
 
-    return (
-      <CvcField
-        {...args}
-        cvcNumber={cvcNumber}
-        handleCvcNumberChange={setCvcNumber}
-      />
-    );
+    return <CvcField field={field} />;
   },
 };
