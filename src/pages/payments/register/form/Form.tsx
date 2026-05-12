@@ -69,6 +69,7 @@ export const Form = () => {
         <FullScreen.Content>
           <CreditCard
             bank="default"
+            card={card.values.card}
             cardBrand={renderBrandCard(Object.values(cardNumbers.values))}
             cardNumberList={Object.values(cardNumbers.values)}
             expirationDate={[expirationDate.values.month, expirationDate.values.year]}
