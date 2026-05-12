@@ -1,75 +1,36 @@
 import Input from '../../../../common/components/Input';
 import Label from '../../../../common/components/Label';
 import styled from 'styled-components';
-import useFieldValidation from '../../../../common/hooks/useFieldValidation';
-import { isWithinMaxLength, isNumeric } from '../../utils/validator';
-import { useRef } from 'react';
-import { getCardNumberSegmentLengths } from '../../utils/cardInfo';
-import { validateCardNumbers } from '../../utils/cardFormValidator';
+import type { NumbersFieldType } from '../../hooks/useNumbersField';
 
 const NumberField = ({
   autoFocus = false,
-  cardNumbers,
-  handleCardNumbersChange,
+  field,
 }: {
   autoFocus?: boolean;
-  cardNumbers: string[];
-  handleCardNumbersChange: (value: string[]) => void;
+  field: NumbersFieldType;
 }) => {
-  const segmentLengths = getCardNumberSegmentLengths(cardNumbers);
-  const cardNumberErrors = validateCardNumbers(cardNumbers);
-
-  const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
-    values: cardNumbers,
-    validate: (_, index) => cardNumberErrors[index] ?? null,
-  });
-
-  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
-  const focusNextInput = (index: number) => {
-    inputRefs.current[index + 1]?.focus();
-  };
-
-  const handleNumbersChange = (index: number, eValue: string) => {
-    const value = eValue.trim();
-
-    if (!isNumeric(value)) return;
-    if (!isWithinMaxLength(value, segmentLengths[index])) return;
-
-    const newChunks = cardNumbers.map((chunk, i) =>
-      i === index ? value : chunk,
-    );
-    handleCardNumbersChange(newChunks);
-
-    if (value.length === segmentLengths[index]) focusNextInput(index);
-  };
-
-  const handleNumbersBlur = (index: number) => {
-    touch(index);
-  };
-
   return (
     <StyledField>
       <Label value="카드 번호" />
       <InputWrapper>
-        {cardNumbers.map((chunk, index) => (
+        {field.cardNumbers.map((chunk, index) => (
           <CardNumberInput
             key={index}
-            ref={(element) => {
-              inputRefs.current[index] = element;
-            }}
+            ref={field.setInputRef(index)}
             value={chunk}
             autoFocus={autoFocus && index === 0}
             placeholder="1234"
             inputMode="numeric"
-            maxLength={segmentLengths[index]}
-            strokeMode={index === firstErrorIndex ? 'error' : 'default'}
-            onChange={(e) => handleNumbersChange(index, e.target.value)}
-            onBlur={() => handleNumbersBlur(index)}
+            maxLength={field.segmentLengths[index]}
+            strokeMode={index === field.firstErrorIndex ? 'error' : 'default'}
+            onChange={(e) => field.handleNumbersChange(index, e.target.value)}
+            onBlur={() => field.handleNumbersBlur(index)}
           />
         ))}
       </InputWrapper>
 
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage>{field.errorMessage}</ErrorMessage>
     </StyledField>
   );
 };

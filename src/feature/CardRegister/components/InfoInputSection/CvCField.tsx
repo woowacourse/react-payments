@@ -1,53 +1,31 @@
 import Label from '../../../../common/components/Label';
 import Input from '../../../../common/components/Input';
 import styled from 'styled-components';
-import useFieldValidation from '../../../../common/hooks/useFieldValidation';
-import { isWithinMaxLength, isNumeric } from '../../utils/validator';
-import { CVC_LENGTH, validateCvcNumber } from '../../utils/cardFormValidator';
+import type { CvcFieldType } from '../../hooks/useCvcField';
 
 const CvcField = ({
   autoFocus = false,
-  cvcNumber,
-  handleCvcNumberChange,
+  field,
 }: {
   autoFocus?: boolean;
-  cvcNumber: string;
-  handleCvcNumberChange: (value: string) => void;
+  field: CvcFieldType;
 }) => {
-  const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
-    values: [cvcNumber],
-    validate: validateCvcNumber,
-  });
-
-  const handleCvcChange = (eValue: string) => {
-    const value = eValue.trim();
-
-    if (!isNumeric(value)) return;
-    if (!isWithinMaxLength(value, CVC_LENGTH)) return;
-
-    handleCvcNumberChange(value);
-  };
-
-  const handleCvcBlur = (index: number) => {
-    touch(index);
-  };
-
   return (
     <StyledField>
       <Label value="CVC" />
       <InputWrapper>
         <CvcInput
-          value={cvcNumber}
+          value={field.value}
           autoFocus={autoFocus}
           maxLength={3}
           inputMode="numeric"
           placeholder="123"
-          strokeMode={0 === firstErrorIndex ? 'error' : 'default'}
-          onChange={(e) => handleCvcChange(e.target.value)}
-          onBlur={() => handleCvcBlur(0)}
+          strokeMode={field.hasError ? 'error' : 'default'}
+          onChange={(e) => field.handleChange(e.target.value)}
+          onBlur={() => field.handleBlur()}
         />
       </InputWrapper>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage>{field.errorMessage}</ErrorMessage>
     </StyledField>
   );
 };
