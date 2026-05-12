@@ -15,6 +15,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     info: {
+      brand: 'UNKNOWN',
+      bank: 'unknown',
       cardNumbers: ['1234', '5678', '0000', '0000'],
       expiryDate: { month: '04', year: '28' },
     },
