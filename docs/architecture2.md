@@ -1,6 +1,6 @@
 # 현재 구조 기준 아키텍처 정리
 
-이 문서는 `src/pages/AddCardPage.tsx`와 연결된 field 컴포넌트들의 **현재 구현**을 기준으로 정리한 문서다.
+이 문서는 `src/pages/AddCardPage.tsx`, `src/hooks/useAddCardForm.ts`, 그리고 연결된 field 컴포넌트들의 **현재 구현**을 기준으로 정리한 문서다.
 
 ---
 
@@ -16,7 +16,7 @@
   4. `CVCField`
   5. `PasswordField`
 - 각 field는 자신의 입력/blur 시점에 검증 요청을 올리고,
-  **최종 step 오픈 여부는 `AddCardPage`가 결정**한다.
+  **`useAddCardForm`이 boolean 검증 결과를 반환하면 `AddCardPage`가 step을 연다.**
 
 ### 2. field 내부 책임
 
@@ -25,14 +25,20 @@
 - onChange / onBlur 시점의 1차 validation
 - 에러 스타일 / 에러 메시지 표시
 
-### 3. AddCardPage 책임
+### 3. 현재 상위 구조의 책임 분리
 
-- form 전체 상태 관리
-- field별 에러 상태 저장
-- 카드 브랜드 파생
-- 카드번호 총 길이 / CVC 길이 / 유효기간 조합 검증 같은 **page-level 최종 validation**
-- step 오픈
-- submit 시 전체 검증 및 완료 페이지 이동
+- `useAddCardForm`
+  - form 전체 상태 관리
+  - field별 에러 상태 저장
+  - 카드 브랜드 / 길이 파생
+  - page-level 최종 validation
+  - 전체 field 검증
+  - 완료 페이지 이동용 state 생성
+- `AddCardPage`
+  - `step` 상태 관리
+  - `runAndOpenNextStep`로 step progression 제어
+  - field 렌더링 조립
+  - submit 시 `navigate('/complete')`
 
 ---
 
@@ -56,17 +62,17 @@
 - **카드 번호**
   - 앞의 3칸이 모두 4자리이고,
   - 마지막 칸이 2자리 이상이 되면
-  - `AddCardPage`에 총 길이 검증을 요청
+  - `useAddCardForm`의 카드번호 최종 검증을 요청
   - 총 길이까지 통과해야 다음 step 오픈
 - **카드사**
   - value는 `change`에서 업데이트
   - 최종 검증과 step 오픈은 `blur`에서 수행
 - **유효기간**
-  - `MM` / `YY`가 모두 2자리가 되면 마지막으로 입력한 칸이 무엇이든 `AddCardPage`에 최종 검증 요청
+  - `MM` / `YY`가 모두 2자리가 되면 마지막으로 입력한 칸이 무엇이든 `useAddCardForm`에 최종 검증 요청
   - 월/년 개별 검증 + 조합 검증을 모두 통과해야 다음 step 오픈
 - **CVC**
   - 입력 길이가 `minLength` 이상이면 `AddCardPage`에 최종 검증 요청
-  - `AddCardPage`는 현재 카드 브랜드 기준 `cvcRules`로 최종 판정
+  - `useAddCardForm`은 현재 카드 브랜드 기준 `cvcRules`로 최종 판정
   - 일반 카드는 기본 3자리, amex는 4자리
 - **비밀번호**
   - 다음 step이 없으므로 field 내부 검증만 수행
@@ -143,48 +149,32 @@ validateAll(rules, value); // trigger 무시, 모든 rules 실행
 
 ## AddCardPage
 
-`AddCardPage`는 이 form의 orchestration layer다.
+`AddCardPage`는 이 form의 page shell이다.
 
 ### state
 
 ```ts
-formValue = {
-  cardNumbers: { value: ['', '', '', ''], errorStatuses: [null, null, null, null, null] },
-  cardCompany: { value: '', errorStatuses: [null] },
-  expirationPeriod: { value: ['', ''], errorStatuses: [null, null] },
-  cvc: { value: '', errorStatuses: [null] },
-  password: { value: '', errorStatuses: [null] },
-};
-
 step: number;
 ```
 
 ### 핵심 함수
 
-- `handleUpdate` — field value 공통 업데이트
-- `handleErrorUpdated` — field errorStatuses 공통 업데이트
-- `handleCardNumbersValid` — 카드번호 총 길이 최종 검증
-- `getExpirationPeriodErrorStatuses` — 유효기간 개별/조합 검증 결과 계산
-- `handleExpirationPeriodValid` — 유효기간 최종 검증 + 다음 step 오픈
-- `handleCvcValid` — CVC 최종 검증 + 다음 step 오픈
-- `handleCardCompanyValid` — 카드사 최종 검증 + 다음 step 오픈
-- `handleValidateForm` — submit 직전 전체 검증
+- `handleOpenNextStep` — `step` 증가
+- `runAndOpenNextStep` — validation 결과가 true일 때만 다음 step 오픈
 - `handleSubmitForm` — 검증 통과 시 `/complete`로 이동
 
-### 파생 값
+### page가 useAddCardForm에서 받는 값
 
-- `cardBrand`
-- `cvcLength = CARD_CVC_MAX_LENGTH[cardBrand] ?? DEFAULT_CVC_LENGTH`
-- `cardNumbersTotalLength = CARD_TOTAL_LENGTH[cardBrand] ?? DEFAULT_CARD_TOTAL_LENGTH`
-- `isFormValid`
+- `formValue`
+- `derived.cardBrand`
+- `derived.areAllFieldErrorsClear`
+- `fieldProps`
+- `actions`
 
-### validation 규칙 / 설정값
+### submit 버튼 표시 조건
 
-- `cardNumbersRules`
-- `expirationPeriodRules` (월/년 2중 배열)
-- `cvcRules`
-- `cardCompanyRules`
-- `passwordRules`
+- `step >= FIELD_STEP.password`
+- `derived.areAllFieldErrorsClear === true`
 
 ### view 구조
 
@@ -201,6 +191,74 @@ step: number;
   {isFormValid && <Button>확인</Button>}
 </main>
 ```
+
+---
+
+## useAddCardForm
+
+`useAddCardForm`은 이 form의 orchestration hook이다.
+
+### 입력값
+
+```ts
+useAddCardForm({ initialValue: createInitialFormValue() })
+```
+
+### 내부에서 관리하는 것
+
+- `formValue`
+- field value / error 상태 업데이트
+- `cardBrand`
+- `cvcLength`
+- `cardNumbersTotalLength`
+- field별 validation 규칙 생성
+- page-level 최종 validation
+- submit 전 전체 field 검증
+- 완료 페이지 state 생성
+
+### 반환 구조
+
+#### `derived`
+
+- `cardBrand`
+- `cvcLength`
+- `cardNumbersTotalLength`
+- `areAllFieldErrorsClear`
+
+#### `fieldProps`
+
+- `cardNumbers`
+- `cardCompany`
+- `expirationPeriod`
+- `cvc`
+- `password`
+
+각 fieldProps는 현재 field 컴포넌트가 바로 소비할 수 있는
+`value`, `errorStatuses`, `onUpdated`, `onErrorUpdated`, `validationRules`
+또는 `minLength` / `maxLength`를 포함한다.
+
+#### `actions`
+
+- `validateCardNumbersOnComplete`
+- `validateExpirationPeriodOnComplete`
+- `validateCvcOnComplete`
+- `validateCardCompanyOnComplete`
+- `validateAllFields`
+- `buildCompletePageState`
+
+### 파생 값
+
+- `cardBrand`
+- `cvcLength = CARD_CVC_MAX_LENGTH[cardBrand] ?? DEFAULT_CVC_LENGTH`
+- `cardNumbersTotalLength = CARD_TOTAL_LENGTH[cardBrand] ?? DEFAULT_CARD_TOTAL_LENGTH`
+
+### validation 규칙 / 설정값
+
+- `cardNumbersRules`
+- `expirationPeriodRules` (월/년 2중 배열)
+- `cvcRules`
+- `cardCompanyRules`
+- `passwordRules`
 
 ---
 
@@ -256,7 +314,7 @@ step: number;
 - 숫자 입력 방어
 - 각 칸 blur 검증
 - 칸 간 focus 이동
-- 마지막 칸 입력 중 `[4,4,4,2+]` 조건이 되면 page에 총 길이 최종 검증 요청
+- 마지막 칸 입력 중 `[4,4,4,2+]` 조건이 되면 `useAddCardForm`에 총 길이 최종 검증 요청
 
 ---
 
@@ -277,7 +335,7 @@ step: number;
 
 - 월/년 input 값을 개별 관리
 - 월은 `validMonth`, 년은 `validYear`를 포함한 개별 blur 검증
-- `MM` / `YY`가 모두 2자리면 page에 최종 조합 검증 요청
+- `MM` / `YY`가 모두 2자리면 `useAddCardForm`에 최종 조합 검증 요청
 
 ---
 
@@ -300,8 +358,8 @@ CVC 입력과 1차 검증을 담당한다.
 
 - 숫자 입력 방어
 - blur 시 required / invalidLength 반영
-- 길이가 `minLength` 이상이 되면 page에 최종 검증 요청
-- 실제 step 오픈 여부는 page의 `cvcRules`가 결정
+- 길이가 `minLength` 이상이 되면 `useAddCardForm`에 최종 검증 요청
+- 실제 step 오픈 여부는 `useAddCardForm`의 boolean 결과와 `AddCardPage`의 step orchestration이 함께 결정
 
 ---
 
@@ -322,7 +380,7 @@ CVC 입력과 1차 검증을 담당한다.
 
 - `change`에서 value 업데이트
 - `blur`에서 required 최종 검증
-- blur 검증 통과 시 page에 step 오픈 요청
+- blur 검증 통과 시 `useAddCardForm`에 최종 검증 요청 후, `AddCardPage`가 step을 오픈
 
 ---
 
