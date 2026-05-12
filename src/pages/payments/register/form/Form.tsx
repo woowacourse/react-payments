@@ -26,7 +26,7 @@ export const Form = () => {
     expirationDate,
     cvc,
     password,
-    renderBrandCard,
+    brandCard,
 
     handleSubmit,
   } = outletContext;
