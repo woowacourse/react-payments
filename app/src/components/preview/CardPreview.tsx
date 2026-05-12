@@ -3,14 +3,12 @@ import { useCardContext } from '../../hooks/useCardContext';
 import { CardNumber } from './CardNumber';
 import { CardExpiryDate } from './CardExpiryDate';
 import { CARD_COMPANY_COLOR } from '../../style/CardStyles';
-import { BrandValidator } from '../../validators/BrandValidator';
 import { CardNetworkBrand } from './CardNetworkBrand';
+import { useCardForm } from '../../hooks/useCardForm';
 
 export function CardPreview() {
-  const { cardNumber, cardCompany } = useCardContext();
-  const networkBrand = cardNumber[0].length > 0
-    ? BrandValidator.detectNetworkBrand(cardNumber.join('')).brand
-    : '';
+  const { cardCompany } = useCardContext();
+  const { networkBrand } = useCardForm();
 
   return (
     <CardContainer $CardCompanySelected={CARD_COMPANY_COLOR[cardCompany]}>

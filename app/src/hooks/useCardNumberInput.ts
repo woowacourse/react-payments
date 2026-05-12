@@ -3,6 +3,7 @@ import type { cardNumberFieldError } from '../types/fieldError';
 import { useCardContext } from './useCardContext';
 import { BrandValidator } from '../validators/BrandValidator';
 import { Validator } from '../validators/CardValidator';
+import { useCardForm } from './useCardForm';
 
 const indexMap: { [key: string]: number } = {
   'first-digits': 0,
@@ -13,9 +14,7 @@ const indexMap: { [key: string]: number } = {
 
 export function useCardNumberInput(onComplete: () => void) {
   const { cardNumber, setCardNumber } = useCardContext();
-  const networkBrand = cardNumber[0].length > 0
-    ? BrandValidator.detectNetworkBrand(cardNumber.join('')).brand
-    : '';
+  const { networkBrand } = useCardForm();
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const [fieldErrors, setError] = useState<cardNumberFieldError>({

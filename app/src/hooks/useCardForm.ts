@@ -16,9 +16,8 @@ export function useCardForm() {
 
   const [cardPassword, setCardPassword] = useState('');
 
-  const networkBrand = cardNumber[0].length > 0
-    ? BrandValidator.detectNetworkBrand(cardNumber.join('')).brand
-    : '';
+  const networkBrand =
+    cardNumber[0].length > 0 ? BrandValidator.detectNetworkBrand(cardNumber.join('')).brand : '';
   const lastDigitLength = networkBrand === 'diners' ? 2 : networkBrand === 'amex' ? 3 : 4;
   const isFormComplete =
     cardCompany !== '' &&
@@ -38,6 +37,7 @@ export function useCardForm() {
     cardCVC,
     cardPassword,
     isFormComplete,
+    networkBrand,
     setCardCompany,
     setCardNumber,
     setCardExpiryDate,
