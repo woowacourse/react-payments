@@ -2,7 +2,14 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import type { PublicCardInfo } from "../types";
 
 const isPublicCardInfo = (value: unknown): value is PublicCardInfo => {
-  return typeof value === "object" && value !== null && "numberHead" in value && "company" in value;
+  if (typeof value !== "object" || value === null) return false;
+
+  return (
+    "numberHead" in value &&
+    "company" in value &&
+    typeof value.numberHead === "string" &&
+    typeof value.company === "string"
+  );
 };
 
 const CompletedPage = () => {
