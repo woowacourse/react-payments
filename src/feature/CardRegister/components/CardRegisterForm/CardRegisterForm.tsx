@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import CvcField from "./CvcField/CvCField";
 import ExpiryField from "./ExpiryField/ExpiryField";
-import InputContainer from "./CardRegisterStep/CardRegisterStep";
+import CardRegisterStep from "./CardRegisterStep/CardRegisterStep";
 import NumberField from "./NumberField/NumberField";
 import CardCompanySelectField from "./CardCompanySelectField/CardCompanySelectField";
 import PasswordField from "./PasswordField/PasswordField";
@@ -145,7 +145,7 @@ const CardRegisterForm = ({
   return (
     <Form onSubmit={handleCardInfoSubmit}>
       {unlockedStep >= CARD_FORM.RENDER_STEP.PASSWORD && (
-        <InputContainer
+        <CardRegisterStep
           title="비밀번호를 입력해 주세요"
           description="앞의 2자리를 입력해주세요"
         >
@@ -153,20 +153,20 @@ const CardRegisterForm = ({
             password={cardInputSectionInformation.password}
             onPasswordChange={handlePasswordChange}
           />
-        </InputContainer>
+        </CardRegisterStep>
       )}
 
       {unlockedStep >= CARD_FORM.RENDER_STEP.CVC && (
-        <InputContainer title="CVC 번호를 입력해 주세요">
+        <CardRegisterStep title="CVC 번호를 입력해 주세요">
           <CvcField
             cvcNumber={cardInputSectionInformation.cvcNumber}
             onCvcNumberChange={handleCvcNumberChange}
           />
-        </InputContainer>
+        </CardRegisterStep>
       )}
 
       {unlockedStep >= CARD_FORM.RENDER_STEP.EXPIRY && (
-        <InputContainer
+        <CardRegisterStep
           title="카드 유효기간을 입력해 주세요"
           description="월/년도(MMYY)를 순서대로 입력해 주세요."
         >
@@ -176,20 +176,20 @@ const CardRegisterForm = ({
             onExpiryMonthChange={handleExpiryMonthChange}
             onExpiryYearChange={handleExpiryYearChange}
           />
-        </InputContainer>
+        </CardRegisterStep>
       )}
 
       {unlockedStep >= CARD_FORM.RENDER_STEP.CARD_COMPANY && (
-        <InputContainer
+        <CardRegisterStep
           title="카드사를 선택해 주세요"
           description="현재 국내 카드사만 가능합니다."
         >
           <CardCompanySelectField onSelect={handleCardCompanyChange} />
-        </InputContainer>
+        </CardRegisterStep>
       )}
 
       {unlockedStep >= CARD_FORM.RENDER_STEP.CARD_NUMBER && (
-        <InputContainer
+        <CardRegisterStep
           title="결제할 카드 번호를 입력해 주세요"
           description="본인 명의의 카드만 결제 가능합니다."
         >
@@ -198,7 +198,7 @@ const CardRegisterForm = ({
             onCardNumbersChange={handleCardNumbersChange}
             lastInputMaxLength={getBrandLastCardNumberLength(cardBrand)}
           />
-        </InputContainer>
+        </CardRegisterStep>
       )}
 
       {isFormInputComplete && (

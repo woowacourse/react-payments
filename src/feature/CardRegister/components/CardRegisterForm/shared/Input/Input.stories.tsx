@@ -4,7 +4,7 @@ import { fn } from "storybook/test";
 import Input from "./Input";
 
 const meta = {
-  title: "common/components/Input",
+  title: "feature/CardRegister/components/CardRegisterForm/shared/Input",
   component: Input,
   tags: ["autodocs"],
   args: {

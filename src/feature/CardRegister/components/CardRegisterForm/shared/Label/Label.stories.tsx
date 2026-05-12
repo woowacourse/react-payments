@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import Label from "./Label";
 
 const meta = {
-  title: "common/components/Label",
+  title: "feature/CardRegister/components/CardRegisterForm/shared/Label",
   component: Label,
   tags: ["autodocs"],
   args: {

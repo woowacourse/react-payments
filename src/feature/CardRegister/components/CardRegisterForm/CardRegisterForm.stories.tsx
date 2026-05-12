@@ -3,15 +3,15 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
 import { MemoryRouter } from "react-router-dom";
 
-import InfoInputSection from "./CardRegisterForm";
+import CardRegisterForm from "./CardRegisterForm";
 import type {
   CardInfoType,
   CardNumberChunkType,
 } from "../../../../common/types/CardInfoType";
 
 const meta = {
-  title: "feature/CardRegister/components/InfoInputSection",
-  component: InfoInputSection,
+  title: "feature/CardRegister/components/CardRegisterForm",
+  component: CardRegisterForm,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -32,7 +32,7 @@ const meta = {
     onExpiryYearChange: fn(),
     onCardCompanySelect: fn(),
   },
-} satisfies Meta<typeof InfoInputSection>;
+} satisfies Meta<typeof CardRegisterForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -62,7 +62,7 @@ export const Filled: Story = {
 };
 
 export const Interactive: Story = {
-  render: function InteractiveInfoInputSection(args) {
+  render: function InteractiveCardRegisterForm(args) {
     const [cardInfo, setCardInfo] = useState<CardInfoType>(args.cardInfo);
 
     const handleCardNumbersChange = (cardNumbers: CardNumberChunkType) => {
@@ -78,7 +78,7 @@ export const Interactive: Story = {
     };
 
     return (
-      <InfoInputSection
+      <CardRegisterForm
         {...args}
         cardInfo={cardInfo}
         onCardNumbersChange={handleCardNumbersChange}

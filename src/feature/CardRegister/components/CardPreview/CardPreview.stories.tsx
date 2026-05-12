@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import CardPreviewContainer from "./CardPreview";
+import CardPreview from "./CardPreview";
 
 const meta = {
-  title: "feature/CardRegister/components/CardPreviewContainer",
-  component: CardPreviewContainer,
+  title: "feature/CardRegister/components/CardPreview",
+  component: CardPreview,
   tags: ["autodocs"],
   args: {
     cardInfo: {
@@ -14,7 +14,7 @@ const meta = {
       selectedCardCompany: null,
     },
   },
-} satisfies Meta<typeof CardPreviewContainer>;
+} satisfies Meta<typeof CardPreview>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

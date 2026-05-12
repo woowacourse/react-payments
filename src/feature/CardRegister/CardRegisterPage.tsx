@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import InfoInputSection from "./components/CardRegisterForm/CardRegisterForm";
+import CardRegisterForm from "./components/CardRegisterForm/CardRegisterForm";
 import styled from "styled-components";
 import type { CardInfoType } from "../../common/types/CardInfoType";
 import type { CardCompanyType } from "../../common/types/CardCompany";
@@ -42,7 +42,7 @@ const CardRegisterPage = () => {
   return (
     <CardRegisterPageLayout>
       <CardPreview cardInfo={cardInformation} />
-      <InfoInputSection
+      <CardRegisterForm
         cardInfo={cardInformation}
         onCardNumbersChange={handleCardNumbersChange}
         onExpiryMonthChange={handleExpiryMonthChange}
