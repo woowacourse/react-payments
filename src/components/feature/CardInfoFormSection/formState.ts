@@ -1,6 +1,22 @@
 import type { ValidityPeriod } from "@/types/card";
 import type CARD from "@constants/card";
 
+import type { CVCInputStatus } from "./components/CardCVCInputField/types";
+import type { InputStatus as CardNumberInputStatus } from "./components/CardNumberInputField/errorMessage";
+import type { PasswordInputStatus } from "./components/CardPasswordField/types";
+import type { InputStatus as ValidityPeriodInputStatus } from "./components/CardValidityPeriodInputField/errorMessage";
+
+export type CardNumberStatusTuple = [
+  CardNumberInputStatus,
+  CardNumberInputStatus,
+  CardNumberInputStatus,
+  CardNumberInputStatus,
+];
+
+export type ValidityPeriodStatus = {
+  [K in keyof ValidityPeriod]: ValidityPeriodInputStatus;
+};
+
 export interface CardInfoFormState extends Record<string, unknown> {
   cardNumber: string;
   validityPeriod: ValidityPeriod;
@@ -9,6 +25,11 @@ export interface CardInfoFormState extends Record<string, unknown> {
   selectedCardCompany:
     | (typeof CARD.COMPANY_SELECT_FIELD)[number]["value"]
     | null;
+
+  cardNumberStatus: CardNumberStatusTuple;
+  validityPeriodStatus: ValidityPeriodStatus;
+  CVCStatus: CVCInputStatus;
+  passwordStatus: PasswordInputStatus;
 }
 
 export const INITIAL_CARD_INFO_FORM_STATE: CardInfoFormState = {
@@ -17,4 +38,9 @@ export const INITIAL_CARD_INFO_FORM_STATE: CardInfoFormState = {
   CVC: "",
   password: "",
   selectedCardCompany: null,
+
+  cardNumberStatus: ["DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT"],
+  validityPeriodStatus: { month: "DEFAULT", year: "DEFAULT" },
+  CVCStatus: "default",
+  passwordStatus: "default",
 };

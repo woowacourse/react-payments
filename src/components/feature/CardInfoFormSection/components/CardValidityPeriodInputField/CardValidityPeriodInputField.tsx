@@ -3,11 +3,9 @@ import type { ValidityPeriod } from "@/types/card";
 import InputField from "@components/common/InputField";
 import useFocus from "@hooks/useFocus";
 import { padValidityPeriodUnit } from "@utils/card";
-import { useState } from "react";
 
 import type { CardInfoFormState } from "../../formState";
 import { MONTH_MAX_LENGTH, YEAR_MAX_LENGTH } from "./constants";
-import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus, formatValidityPeriod } from "./utils";
 
@@ -15,21 +13,12 @@ interface CardValidityPeriodInputFieldProps {
   onComplete?: () => void;
 }
 
-type InputsStatuses = {
-  [T in keyof ValidityPeriod]: InputStatus;
-};
-
-const INPUTS_STATUSES: InputsStatuses = {
-  month: "DEFAULT",
-  year: "DEFAULT",
-};
-
 const CardValidityPeriodInputField = ({
   onComplete,
 }: CardValidityPeriodInputFieldProps) => {
   const { getValue, setValue } = useFormValue<CardInfoFormState>();
   const validityPeriod = getValue("validityPeriod");
-  const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
+  const status = getValue("validityPeriodStatus");
   const { registerInputRef, setNextFocus } = useFocus();
 
   const handleValidityPeriodChange = (
@@ -37,7 +26,7 @@ const CardValidityPeriodInputField = ({
     value: string,
   ) => {
     const state = checkCardNumberInputStatus(key, value);
-    setStatus((prev) => ({ ...prev, [key]: state }));
+    setValue("validityPeriodStatus", { ...status, [key]: state });
 
     if (state !== "DEFAULT") return;
 
@@ -68,13 +57,13 @@ const CardValidityPeriodInputField = ({
     rawValue: string,
   ) => {
     if (rawValue.length === 0)
-      return setStatus((prev) => ({ ...prev, [key]: "EMPTY" }));
+      return setValue("validityPeriodStatus", { ...status, [key]: "EMPTY" });
 
     const padded = padValidityPeriodUnit(rawValue);
 
     if (padded === rawValue) return;
     const state = checkCardNumberInputStatus(key, padded);
-    setStatus((prev) => ({ ...prev, [key]: state }));
+    setValue("validityPeriodStatus", { ...status, [key]: state });
 
     if (state !== "DEFAULT") return;
     setValue("validityPeriod", { ...validityPeriod, [key]: padded });

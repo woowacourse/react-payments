@@ -1,13 +1,13 @@
-import Button from "@components/common/Button";
 import useFormWrapper from "@components/common/FormContainer";
 import StepFunnel from "@components/common/StepFunnel/StepFunnel";
 import styled from "@emotion/styled";
 
-import CardPreview from "./CardPreview";
 import CardCompanySelectField from "./components/CardCompanySelectField/CardCompanySelectField";
 import CardCVCInputField from "./components/CardCVCInputField";
+import CardInfoFormSubmitButton from "./components/CardInfoFormSubmitButton";
 import CardNumberInputField from "./components/CardNumberInputField/CardNumberInputField";
 import CardPasswordField from "./components/CardPasswordField";
+import CardPreview from "./components/CardPreview";
 import CardValidityPeriodInputField from "./components/CardValidityPeriodInputField/CardValidityPeriodInputField";
 import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
 
@@ -19,7 +19,11 @@ const CardInfoFormSection = () => {
   return (
     <FormWrapper>
       <CardPreview />
-      <Container>
+      <Container
+        onSubmit={() => {
+          alert("카드 정보가 제출되었습니다.");
+        }}
+      >
         <StepFunnel>
           <StepFunnel.Step step={4} comparisonOperator="greaterThanOrEqual">
             {({ goToStep }) => (
@@ -67,7 +71,7 @@ const CardInfoFormSection = () => {
             )}
           </StepFunnel.Step>
           <StepFunnel.Step step={5}>
-            {() => <Button fullWidth>완료</Button>}
+            {() => <CardInfoFormSubmitButton />}
           </StepFunnel.Step>
         </StepFunnel>
       </Container>

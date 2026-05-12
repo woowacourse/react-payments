@@ -1,9 +1,9 @@
-import useFormValue from "@/components/common/FormContainer/useFormValue";
+import Card from "@components/common/Card";
+import useFormValue from "@components/common/FormContainer/useFormValue";
 import styled from "@emotion/styled";
 import { detectCardBrand } from "@utils/card";
 
-import type { CardInfoFormState } from "../formState";
-import Card from "../../../common/Card";
+import type { CardInfoFormState } from "../../formState";
 
 const CardPreview = () => {
   const { getValue } = useFormValue<CardInfoFormState>();

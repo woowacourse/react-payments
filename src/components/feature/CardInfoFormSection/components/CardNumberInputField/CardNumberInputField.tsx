@@ -7,25 +7,14 @@ import {
   getCardNumberLengthByBrand,
   getCardNumberUnitMaxLengthByBrand,
 } from "@utils/card";
-import { useState } from "react";
 
 import type { CardInfoFormState } from "../../formState";
-import type { InputStatus } from "./errorMessage";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus } from "./utils";
 
 interface CardNumberInputFieldProps {
   onComplete: () => void;
 }
-
-type InputsStatuses = InputStatus[];
-
-const INPUTS_STATUSES: InputsStatuses = [
-  "DEFAULT",
-  "DEFAULT",
-  "DEFAULT",
-  "DEFAULT",
-];
 
 const updateArray = <T extends unknown[]>(
   array: T,
@@ -40,8 +29,8 @@ const updateArray = <T extends unknown[]>(
 const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
   const { getValue, setValue } = useFormValue<CardInfoFormState>();
   const cardNumber = getValue("cardNumber");
+  const status = getValue("cardNumberStatus");
   const { registerInputRef, setNextFocus } = useFocus();
-  const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
 
   const brand = detectCardBrand(cardNumber);
   const formattedCardNumberUnits = formatCardNumberUnitByBrand(
@@ -56,7 +45,10 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
       getCardNumberUnitMaxLengthByBrand(brand, index),
     );
 
-    setStatus((prev) => updateArray(prev, index, cardNumberInputStatus));
+    setValue(
+      "cardNumberStatus",
+      updateArray(status, index, cardNumberInputStatus),
+    );
   };
 
   const handleCardNumberChange = (index: number, input: string) => {
@@ -65,7 +57,10 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
       getCardNumberUnitMaxLengthByBrand(brand, index),
     );
 
-    setStatus((prev) => updateArray(prev, index, cardNumberInputStatus));
+    setValue(
+      "cardNumberStatus",
+      updateArray(status, index, cardNumberInputStatus),
+    );
 
     const updatedFormattedUnits = updateArray(
       formattedCardNumberUnits,
