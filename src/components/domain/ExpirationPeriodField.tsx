@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo, ExpirationPeriodErrorStatus, Validate } from '../../types';
-import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
+import type { CardInfo, ExpirationPeriodErrorStatus } from '../../types';
+import { EXPIRATION_PERIOD_ERROR_MESSAGES, EXPIRATION_PERIOD_LENGTH, PERIOD_LENGTH_PER_INPUT } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
-import { getActiveError, isNumber, isValidMonth, isValidYear, sanitizeNumber } from '../../utils';
+import { sanitizeNumber } from '../../utils';
+import { validates } from '../../validates.ts';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
@@ -13,36 +14,6 @@ interface ExpirationPeriodFieldProps {
   setFieldError: (field: 'expirationPeriod', error: ExpirationPeriodErrorStatus, index: number) => void;
   onCompleted: () => void;
 }
-
-const rules: Validate<ExpirationPeriodErrorStatus>[] = [
-  {
-    type: ['change', 'blur'],
-    rule: (inputValue: string) => inputValue === '',
-    errorStatus: 'required',
-  },
-  {
-    type: ['change'],
-    rule: (inputValue: string) => !isNumber(inputValue),
-    errorStatus: 'numberOnly',
-  },
-  {
-    type: ['change'],
-    rule: (inputValue: string, index?: number) =>
-      inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0 && !isValidMonth(inputValue),
-    errorStatus: 'invalidMonth',
-  },
-  {
-    type: ['change'],
-    rule: (inputValue: string, index?: number) =>
-      inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1 && !isValidYear(inputValue),
-    errorStatus: 'invalidYear',
-  },
-  {
-    type: ['blur'],
-    rule: (inputValue: string) => inputValue.length < PERIOD_LENGTH_PER_INPUT,
-    errorStatus: 'invalidLength',
-  },
-];
 
 export default function ExpirationPeriodField({
   value,
@@ -62,9 +33,35 @@ export default function ExpirationPeriodField({
     }
   }, [activeErrorStatus, value]);
 
+  const validate = (eventType: 'change' | 'blur', inputValue: string, index: number) => {
+    if (validates['required'](inputValue)) {
+      return 'required';
+    }
+
+    if (eventType === 'change' && validates['numberOnly'](inputValue)) {
+      return 'numberOnly';
+    }
+
+    const isInvalidLength = validates['invalidLength'](inputValue, EXPIRATION_PERIOD_LENGTH[index]);
+
+    if (index === 0 && !isInvalidLength && validates['invalidMonth'](inputValue)) {
+      return 'invalidMonth';
+    }
+
+    if (index === 1 && !isInvalidLength && validates['invalidYear'](inputValue)) {
+      return 'invalidYear';
+    }
+
+    if (eventType === 'blur' && isInvalidLength) {
+      return 'invalidLength';
+    }
+
+    return null;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const error = getActiveError(rules, inputValue, 'change', index);
+    const error = validate('change', inputValue, index);
 
     setFieldError('expirationPeriod', error, index);
     setFieldValue('expirationPeriod', sanitizeNumber(inputValue), index);
@@ -72,7 +69,7 @@ export default function ExpirationPeriodField({
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const error = getActiveError(rules, inputValue, 'blur', index);
+    const error = validate('blur', inputValue, index);
 
     if (error) {
       setFieldError('expirationPeriod', error, index);

@@ -1,9 +1,10 @@
-import type { CardBrand, CardInfo, ErrorStatus, Validate } from '../../types';
+import type { CardBrand, CardInfo, ErrorStatus } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import { AMEX_CVC_LENGTH, CVC_LENGTH, ERROR_MESSAGES } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
-import { getActiveError, isNumber, sanitizeNumber } from '../../utils';
+import { sanitizeNumber } from '../../utils';
+import { validates } from '../../validates.ts';
 
 interface CVCFieldProps {
   value: CardInfo['cvc'];
@@ -23,24 +24,6 @@ export default function CVCField({
   onCompleted,
 }: CVCFieldProps) {
   const cvcLength = cardBrand === 'amex' ? AMEX_CVC_LENGTH : CVC_LENGTH;
-  const rules: Validate<ErrorStatus>[] = [
-    {
-      type: ['change', 'blur'],
-      rule: (inputValue: string) => inputValue === '',
-      errorStatus: 'required',
-    },
-    {
-      type: ['change'],
-      rule: (inputValue: string) => !isNumber(inputValue),
-      errorStatus: 'numberOnly',
-    },
-    {
-      type: ['blur'],
-      rule: (inputValue: string) => inputValue.length < cvcLength,
-      errorStatus: 'invalidLength',
-    },
-  ];
-
   const onCompletedEvent = useEffectEvent(onCompleted);
 
   useEffect(() => {
@@ -49,9 +32,25 @@ export default function CVCField({
     }
   }, [errorStatus, value]);
 
+  const validate = (eventType: 'change' | 'blur', inputValue: string) => {
+    if (validates['required'](inputValue)) {
+      return 'required';
+    }
+
+    if (eventType === 'change' && validates['numberOnly'](inputValue)) {
+      return 'numberOnly';
+    }
+
+    if (eventType === 'blur' && validates['invalidLength'](inputValue, cvcLength)) {
+      return 'invalidLength';
+    }
+
+    return null;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    const error = getActiveError(rules, inputValue, 'change');
+    const error = validate('change', inputValue);
 
     setFieldError('cvc', error);
     setFieldValue('cvc', sanitizeNumber(inputValue));
@@ -59,7 +58,7 @@ export default function CVCField({
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    const error = getActiveError(rules, inputValue, 'blur');
+    const error = validate('blur', inputValue);
 
     if (error) {
       setFieldError('cvc', error);

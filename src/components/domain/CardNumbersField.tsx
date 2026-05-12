@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardBrand, CardInfo, ErrorStatus, Validate } from '../../types';
+import type { CardBrand, CardInfo, ErrorStatus } from '../../types';
 import {
   AMEX_CARD_NUMBERS_LENGTH,
   CARD_NUMBERS_LENGTH,
@@ -9,7 +9,8 @@ import {
   ERROR_MESSAGES,
 } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
-import { getActiveError, isNumber, sanitizeNumber } from '../../utils';
+import { sanitizeNumber } from '../../utils';
+import { validates } from '../../validates.ts';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
@@ -34,24 +35,6 @@ export default function CardNumbersField({
     return CARD_NUMBERS_LENGTH;
   })();
 
-  const rules: Validate<ErrorStatus>[] = [
-    {
-      type: ['change', 'blur'],
-      rule: (inputValue: string) => inputValue === '',
-      errorStatus: 'required',
-    },
-    {
-      type: ['change'],
-      rule: (inputValue: string) => !isNumber(inputValue),
-      errorStatus: 'numberOnly',
-    },
-    {
-      type: ['blur'],
-      rule: (inputValue: string, index: number) => inputValue.length < cardNumbersLength[index],
-      errorStatus: 'invalidLength',
-    },
-  ];
-
   const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
   const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
 
@@ -63,9 +46,26 @@ export default function CardNumbersField({
     }
   }, [activeErrorStatus, value]);
 
+  // TODO: validate key와 반환값 연동 로직 고민
+  const validate = (eventType: 'change' | 'blur', inputValue: string, index: number) => {
+    if (validates['required'](inputValue)) {
+      return 'required';
+    }
+
+    if (eventType === 'change' && validates['numberOnly'](inputValue)) {
+      return 'numberOnly';
+    }
+
+    if (eventType === 'blur' && validates['invalidLength'](inputValue, cardNumbersLength[index])) {
+      return 'invalidLength';
+    }
+
+    return null;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const error = getActiveError(rules, inputValue, 'change', index);
+    const error = validate('change', inputValue, index);
 
     setFieldError('cardNumbers', error, index);
     setFieldValue('cardNumbers', sanitizeNumber(inputValue), index);
@@ -73,7 +73,7 @@ export default function CardNumbersField({
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    const error = getActiveError(rules, inputValue, 'blur', index);
+    const error = validate('blur', inputValue, index);
 
     if (error) {
       setFieldError('cardNumbers', error, index);

@@ -1,9 +1,10 @@
-import type { CardInfo, ErrorStatus, Validate } from '../../types';
+import type { CardInfo, ErrorStatus } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import { PASSWORD_LENGTH, ERROR_MESSAGES } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
-import { getActiveError, isNumber, sanitizeNumber } from '../../utils';
+import { sanitizeNumber } from '../../utils';
+import { validates } from '../../validates.ts';
 
 interface PasswordFieldProps {
   value: CardInfo['password'];
@@ -12,24 +13,6 @@ interface PasswordFieldProps {
   setFieldError: (field: 'password', error: ErrorStatus) => void;
   onCompleted: () => void;
 }
-
-const rules: Validate<ErrorStatus>[] = [
-  {
-    type: ['change', 'blur'],
-    rule: (inputValue: string) => inputValue === '',
-    errorStatus: 'required',
-  },
-  {
-    type: ['change'],
-    rule: (inputValue: string) => !isNumber(inputValue),
-    errorStatus: 'numberOnly',
-  },
-  {
-    type: ['blur'],
-    rule: (inputValue: string) => inputValue.length < PASSWORD_LENGTH,
-    errorStatus: 'invalidLength',
-  },
-];
 
 export default function PasswordField({
   value,
@@ -46,9 +29,25 @@ export default function PasswordField({
     }
   }, [errorStatus, value]);
 
+  const validate = (eventType: 'change' | 'blur', inputValue: string) => {
+    if (validates['required'](inputValue)) {
+      return 'required';
+    }
+
+    if (eventType === 'change' && validates['numberOnly'](inputValue)) {
+      return 'numberOnly';
+    }
+
+    if (eventType === 'blur' && validates['invalidLength'](inputValue, PASSWORD_LENGTH)) {
+      return 'invalidLength';
+    }
+
+    return null;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    const error = getActiveError(rules, inputValue, 'change');
+    const error = validate('change', inputValue);
 
     setFieldError('password', error);
     setFieldValue('password', sanitizeNumber(inputValue));
@@ -56,7 +55,7 @@ export default function PasswordField({
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    const error = getActiveError(rules, inputValue, 'blur');
+    const error = validate('blur', inputValue);
 
     if (error) {
       setFieldError('password', error);
