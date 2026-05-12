@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import FormField from './FormField';
-import Input from './Input';
+import FormField from './index';
+import Input from '../Input';
+
+type FormFieldStoryArgs = React.ComponentProps<typeof FormField>;
 
 const meta = {
   title: 'ui/FormField',
@@ -25,7 +27,7 @@ export const Default: Story = {
   args: {
     error: false,
   },
-  render: (args) => (
+  render: (args: FormFieldStoryArgs) => (
     <FormField {...args}>
       <label>CVC</label>
       <Input variant={args.error ? 'error' : 'default'} />
@@ -37,7 +39,7 @@ export const Error: Story = {
   args: {
     error: true,
   },
-  render: (args) => (
+  render: (args: FormFieldStoryArgs) => (
     <FormField {...args}>
       <label>CVC</label>
       <Input variant={args.error ? 'error' : 'default'} />
