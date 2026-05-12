@@ -1,5 +1,5 @@
 import type { ErrorStatus, ExpirationPeriodErrorStatus } from './types';
-import { isNumber, isValidMonth, isValidYear, type ValidationRule } from './utils';
+import { isNumber, isValidMonth, isValidYear, isValidMonthAndYear, type ValidationRule } from './utils';
 
 export const ERROR_MESSAGES: Record<Exclude<ErrorStatus, null>, string> = {
   required: '필수 입력 항목입니다.',
@@ -15,7 +15,7 @@ export const EXPIRATION_PERIOD_ERROR_MESSAGES: Record<Exclude<ExpirationPeriodEr
 
 export const CARD_NUMBER_LENGTH_PER_INPUT = 4;
 export const PERIOD_LENGTH_PER_INPUT = 2;
-export const CVC_LENGTH = 3;
+export const DEFAULT_CVC_LENGTH = 3;
 export const PASSWORD_LENGTH = 2;
 export const DEFAULT_CARD_TOTAL_LENGTH = 16;
 
@@ -24,7 +24,7 @@ export const CARD_TOTAL_LENGTH: Partial<Record<string, number>> = {
   diners: 14,
 };
 
-export const CARD_CVC_LENGTH: Partial<Record<string, number>> = {
+export const CARD_CVC_MAX_LENGTH: Partial<Record<string, number>> = {
   amex: 4,
 };
 
@@ -50,7 +50,11 @@ export const FIELD_STEP = {
 
 export const RULES = {
   required: { name: 'required', fn: (v: string) => v.length > 0, on: ['onBlur'] } satisfies ValidationRule,
-  numberOnly: { name: 'numberOnly', fn: isNumber, on: ['onChange'] } satisfies ValidationRule,
+  numberOnly: {
+    name: 'numberOnly',
+    fn: (v: string) => v === '' || isNumber(v),
+    on: ['onChange'],
+  } satisfies ValidationRule,
   validMonth: { name: 'invalidMonth', fn: isValidMonth, on: ['onBlur'] } satisfies ValidationRule,
   validYear: { name: 'invalidYear', fn: isValidYear, on: ['onBlur'] } satisfies ValidationRule,
   exactLength: (length: number): ValidationRule => ({
@@ -58,4 +62,9 @@ export const RULES = {
     fn: (v: string) => v.length === length,
     on: ['onBlur'],
   }),
+  validMonthAndYear: {
+    name: 'invalidYear',
+    fn: (v: string) => isValidMonthAndYear(v.slice(0, 2), v.slice(2, 4)),
+    on: ['onBlur'],
+  } satisfies ValidationRule,
 };
