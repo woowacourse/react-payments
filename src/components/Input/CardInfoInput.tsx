@@ -41,13 +41,12 @@ const CardInfoInput = React.forwardRef<HTMLInputElement, CardInfoInputProps>(
                 {...inputProps}
                 ref={ref}
                 isError={isError}
-                type="text"
                 value={value}
                 onChange={handleInputChange}
                 inputSize={size}
             />
         );
-    },
+    }
 );
 
 CardInfoInput.displayName = 'CardInfoInput';
