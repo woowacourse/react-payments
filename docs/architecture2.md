@@ -1,54 +1,99 @@
-# 추가되어야 하는 비즈니스 로직
+# 현재 구조 기준 아키텍처 정리
 
-## input 자동 포커스 이동
+이 문서는 `src/pages/AddCardPage.tsx`와 연결된 field 컴포넌트들의 **현재 구현**을 기준으로 정리한 문서다.
 
-- input.value === "" 일때 backspace를 누르면 input focus를 앞 input으로 옮김. (input[1] 이상)
-- 4칸이 다 채워지면 다음 input으로 포커스 자동 이동
+---
 
-## 필드 validation 통과 후 다음 step 열림
+## 핵심 흐름
 
-- 새롭게 열린 field 내로 focus 이동
+### 1. step 기반 progressive form
 
-## cardNumbers에 따라 다른 필드에 영향을 주는 경우
+- `AddCardPage`는 `step` 상태를 기준으로 필드를 순서대로 연다.
+- 순서:
+  1. `CardNumbersField`
+  2. `CardCompanySelect`
+  3. `ExpirationPeriodField`
+  4. `CVCField`
+  5. `PasswordField`
+- 각 field는 자신의 입력/blur 시점에 검증 요청을 올리고,
+  **최종 step 오픈 여부는 `AddCardPage`가 결정**한다.
 
-- cardNumbers 값에 따라 분기 처리
-- cardBrand, cvc 자릿수 validation, cardNumbers 총 길이 validation에 영향을 줌.
-
-### 카드 브랜드
-
-- visa: 16자리(xxxx-xxxx-xxxx-xxxx). cvc 3자리. 4로 시작.
-- master: 16자리(xxxx-xxxx-xxxx-xxxx). cvc 3자리. 51~55로 시작.
-- amex: 15자리(xxxx-xxxxxx-xxxxx). cvc 4자리. 34, 37로 시작.
-- diners: 14자리(xxxx-xxxxxx-xxxx). cvc 3자리. 36으로 시작.
-- unionpay: 16자리(xxxx-xxxx-xxxx-xxxx). cvc 3자리. 622126~622925, 624~626, 6282~6288로 시작.
-- local: 16자리(xxxx-xxxx-xxxx-xxxx). cvc 3자리. 그외.
-
-## 모든 필드가 validation을 통과하고 submit 할 준비가 되었다면 "제출 버튼" 뜨게 하기
-
-- `isFormValid`가 truthy 하면 '제출 버튼' 뜨게 하기
-
-## field 정보를 담는 객체가 필요함
-
-- value
-- errorStatuses: ErrorStatus[]
-
-## AddCardPage에서 하고자 하는 것.
-
-- 각 필드 정의/상태관리
-- form 전체 validation
-  - 각 field에서 validation 후 만약 에러가 있다면 에러 메시지와 보더 표시.
-- form 제출
-
-## 각 필드 컴포넌트에서 하고자 하는 것.
+### 2. field 내부 책임
 
 - 값 입력/수정
-- validation
-- 에러 표시
+- input/select focus UX
+- onChange / onBlur 시점의 1차 validation
+- 에러 스타일 / 에러 메시지 표시
 
-## rule 타입
+### 3. AddCardPage 책임
+
+- form 전체 상태 관리
+- field별 에러 상태 저장
+- 카드 브랜드 파생
+- 카드번호 총 길이 / CVC 길이 / 유효기간 조합 검증 같은 **page-level 최종 validation**
+- step 오픈
+- submit 시 전체 검증 및 완료 페이지 이동
+
+---
+
+## 비즈니스 규칙
+
+### 자동 포커스 이동
+
+- `CardNumbersField`
+  - 각 칸이 4자리가 되면 다음 칸으로 focus 이동
+  - 빈 칸에서 backspace를 누르면 이전 칸으로 focus 이동
+  - mount 시 첫 번째 input으로 focus 이동
+- `ExpirationPeriodField`
+  - `MM` 2자리가 채워지면 `YY`로 focus 이동
+  - `YY`가 비어 있을 때 backspace를 누르면 `MM`으로 focus 이동
+  - mount 시 첫 번째 input으로 focus 이동
+- `CardCompanySelect`, `CVCField`, `PasswordField`
+  - mount 시 자기 첫 control로 focus 이동
+
+### step 오픈 규칙
+
+- **카드 번호**
+  - 앞의 3칸이 모두 4자리이고,
+  - 마지막 칸이 2자리 이상이 되면
+  - `AddCardPage`에 총 길이 검증을 요청
+  - 총 길이까지 통과해야 다음 step 오픈
+- **카드사**
+  - value는 `change`에서 업데이트
+  - 최종 검증과 step 오픈은 `blur`에서 수행
+- **유효기간**
+  - `MM` / `YY`가 모두 2자리가 되면 마지막으로 입력한 칸이 무엇이든 `AddCardPage`에 최종 검증 요청
+  - 월/년 개별 검증 + 조합 검증을 모두 통과해야 다음 step 오픈
+- **CVC**
+  - 입력 길이가 `minLength` 이상이면 `AddCardPage`에 최종 검증 요청
+  - `AddCardPage`는 현재 카드 브랜드 기준 `cvcRules`로 최종 판정
+  - 일반 카드는 기본 3자리, amex는 4자리
+- **비밀번호**
+  - 다음 step이 없으므로 field 내부 검증만 수행
+
+### 카드번호가 다른 필드에 주는 영향
+
+- `cardNumbers` → `cardBrand` 파생
+- `cardBrand`는 아래 값에 영향을 준다.
+  - 카드 미리보기 로고
+  - 카드 미리보기 배경색은 `cardCompany` 기준
+  - 카드번호 총 길이 검증
+  - CVC 길이 검증
+
+### 카드 브랜드 규칙
+
+- `visa`: 16자리, CVC 3자리, `4`로 시작
+- `mastercard`: 16자리, CVC 3자리, `51~55`로 시작
+- `amex`: 15자리, CVC 4자리, `34`, `37`로 시작
+- `diners`: 14자리, CVC 3자리, `36`으로 시작
+- `unionpay`: 16자리, CVC 3자리, `622126~622925`, `624~626`, `6282~6288`
+- `local`: 그 외, 16자리, CVC 3자리
+
+---
+
+## validation rule 구조
 
 ```ts
-// src/utils.ts
 type ValidationRule = {
   name: ErrorStatus | ExpirationPeriodErrorStatus;
   fn: (value: string) => boolean;
@@ -56,392 +101,284 @@ type ValidationRule = {
 };
 ```
 
-## 공통 rule 상수
+### 공통 RULES
 
 ```ts
-// src/constants.ts
 const RULES = {
   required: { name: 'required', fn: (v) => v.length > 0, on: ['onBlur'] },
-  numberOnly: { name: 'numberOnly', fn: (v) => /^\d+$/.test(v), on: ['onChange'] },
+  numberOnly: { name: 'numberOnly', fn: (v) => v === '' || isNumber(v), on: ['onChange'] },
   validMonth: { name: 'invalidMonth', fn: isValidMonth, on: ['onBlur'] },
   validYear: { name: 'invalidYear', fn: isValidYear, on: ['onBlur'] },
   exactLength: (length) => ({ name: 'invalidLength', fn: (v) => v.length === length, on: ['onBlur'] }),
+  validMonthAndYear: {
+    name: 'invalidYear',
+    fn: (v) => isValidMonthAndYear(v.slice(0, 2), v.slice(2, 4)),
+    on: ['onBlur'],
+  },
 };
 ```
 
-## validation 유틸 함수
+### validation 유틸
 
 ```ts
-// src/utils.ts
-validate(rules, 'onChange', value); // onChange에 등록된 rules만 실행 → ErrorStatus 반환
-validate(rules, 'onBlur', value); // onBlur에 등록된 rules만 실행 → ErrorStatus 반환
-validateAll(rules, value); // 모든 rules 실행 (form submit 시) → ErrorStatus 반환
+validate(rules, 'onChange', value); // trigger에 해당하는 rules만 실행
+validate(rules, 'onBlur', value); // trigger에 해당하는 rules만 실행
+validateAll(rules, value); // trigger 무시, 모든 rules 실행
 ```
 
 ---
 
-# Routing
+## Routing
 
-```
+```txt
 / (MobileLayout)
-├── index → AddCardPage
-└── complete → AddCardCompletePage (state 없으면 "/" 로 redirect)
+├── index -> AddCardPage
+└── complete -> AddCardCompletePage
 ```
 
-basename: `/react-payments`
+- basename: `/react-payments`
+- 완료 페이지는 `location.state`가 없으면 `/`로 redirect
 
 ---
 
-# AddCardPage
+## AddCardPage
 
-> formValue를 관리함.
+`AddCardPage`는 이 form의 orchestration layer다.
 
-## states
+### state
 
-- formValue: {
-  cardNumbers: { value: ["","","",""], errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus] }, // 4개 input별 + 1개 총 길이
-  cardCompany: { value: "", errorStatuses: [ErrorStatus] },
-  expirationPeriod: { value: ["",""], errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus] },
-  cvc: { value: "", errorStatuses: [ErrorStatus] },
-  password: { value: "", errorStatuses: [ErrorStatus] },
-  }
-- step: number;
+```ts
+formValue = {
+  cardNumbers: { value: ['', '', '', ''], errorStatuses: [null, null, null, null, null] },
+  cardCompany: { value: '', errorStatuses: [null] },
+  expirationPeriod: { value: ['', ''], errorStatuses: [null, null] },
+  cvc: { value: '', errorStatuses: [null] },
+  password: { value: '', errorStatuses: [null] },
+};
 
-## functions
+step: number;
+```
 
-- handleUpdate: (key, value) => void — 공통 필드 업데이트
-- handleSubmit — form 제출
-- handleValidateForm — submit 시점에 모든 필드의 rules 실행 → formValue의 errorStatuses 업데이트
-- handleOpenNextStep — step 증가 및 다음 필드 열기
+### 핵심 함수
 
-## variables
+- `handleUpdate` — field value 공통 업데이트
+- `handleErrorUpdated` — field errorStatuses 공통 업데이트
+- `handleCardNumbersValid` — 카드번호 총 길이 최종 검증
+- `getExpirationPeriodErrorStatuses` — 유효기간 개별/조합 검증 결과 계산
+- `handleExpirationPeriodValid` — 유효기간 최종 검증 + 다음 step 오픈
+- `handleCvcValid` — CVC 최종 검증 + 다음 step 오픈
+- `handleCardCompanyValid` — 카드사 최종 검증 + 다음 step 오픈
+- `handleValidateForm` — submit 직전 전체 검증
+- `handleSubmitForm` — 검증 통과 시 `/complete`로 이동
 
-- cardBrand: cardNumbers에서 파생 ('local' | 'visa' | 'mastercard' | 'amex' | 'diners' | 'unionpay')
-- cvcValidationRules: cardBrand에서 파생 (amex이면 cvc 4자리, 그외 3자리)
-- cardNumbersValidationRules: cardBrand에서 파생 — 4칸 고정 입력, join한 string 길이로 검증 (amex 15자리, diners 14자리, 그외 16자리)
-- isFormValid: 모든 필드의 errorStatuses가 전부 null인지 여부
+### 파생 값
 
-## view
+- `cardBrand`
+- `cvcLength = CARD_CVC_MAX_LENGTH[cardBrand] ?? DEFAULT_CVC_LENGTH`
+- `cardNumbersTotalLength = CARD_TOTAL_LENGTH[cardBrand] ?? DEFAULT_CARD_TOTAL_LENGTH`
+- `isFormValid`
+
+### validation 규칙 / 설정값
+
+- `cardNumbersRules`
+- `expirationPeriodRules` (월/년 2중 배열)
+- `cvcRules`
+- `cardCompanyRules`
+- `passwordRules`
+
+### view 구조
 
 ```jsx
 <main>
   <Card />
   <form>
-    <PasswordField />
-    <CVCField />
-    <ExpirationPeriodField />
-    <CardCompanySelect />
+    {step >= password && <PasswordField />}
+    {step >= cvc && <CVCField />}
+    {step >= expirationPeriod && <ExpirationPeriodField />}
+    {step >= cardCompany && <CardCompanySelect />}
     <CardNumbersField />
   </form>
-  <Button disabled={!isFormValid}>확인</Button>
+  {isFormValid && <Button>확인</Button>}
 </main>
 ```
 
 ---
 
-# AddCardCompletePage
+## AddCardCompletePage
 
-> 카드 추가 완료 화면. location.state로 카드 정보를 받음. state 없으면 "/" 로 Navigate.
-
-## view
-
-```jsx
-<main>
-  <CheckIcon />
-  <p>
-    {firstFourDigits}로 시작하는 {cardCompany}가 등록되었어요.
-  </p>
-  <Button>확인</Button>
-</main>
-```
+- `location.state`에서
+  - `firstFourDigits`
+  - `cardCompany`
+  를 받아 완료 메시지 렌더링
+- state가 없으면 `/`로 redirect
 
 ---
 
-# Card
+## Card
 
-> formValue(카드 번호, 유효기간, 카드 브랜드)를 시각적으로 보여줌.
+카드 미리보기 컴포넌트.
 
-## props
+### props
 
-- cardNumbers: [string, string, string, string]
-- expirationPeriod: [string, string]
-- cardBrand: CardBrand
+- `cardNumber: [string, string, string, string]`
+- `expirationPeriod: [string, string]`
+- `cardBrand: CardBrand`
+- `cardCompany: CardCompany`
 
-## view
+### 현재 동작
 
-```jsx
-<div>
-  <div>
-    <div></div>
-    <img src="..." alt="카드 브랜드 로고" /> {/* visa | mastercard */}
-  </div>
-  <div>
-    <span>{}</span> * 4
-  </div>
-  <div>
-    <span>{}</span> * 2 (사이에 슬래쉬로)
-  </div>
-</div>
-```
+- 카드사별 배경색 적용
+- 브랜드별 로고 렌더링
+  - `visa`
+  - `mastercard`
+  - `amex`
+  - `diners`
+  - `unionpay`
+- 카드번호는 앞 2칸만 그대로 보여주고, 뒤 2칸은 `∙` 처리
 
 ---
 
-# CardNumbersField
+## CardNumbersField
 
-> 카드 번호 도메인 로직을 포함한 input 입력, 유효성 검사, formValue 업데이트를 진행함.
+카드번호 4칸 입력과 1차 검증, field 내부 focus UX를 담당한다.
 
-## props
+### props
 
-- value: [string, string, string, string]
-- onUpdated: (value) => void
-- validationRules: ValidationRule[]
-- errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus] // 4개 input별 + 1개 총 길이
-- onErrorUpdated: (errorStatuses) => void
+- `value`
+- `errorStatuses`
+- `onUpdated`
+- `onErrorUpdated`
+- `onValid`
+- `validationRules`
 
-## functions
+### 내부 역할
 
-- handleChange: 숫자 입력 외 방어, onUpdated 호출
-- handleBlur: input별 required/numberOnly 검사, 총 길이 검사 후 onErrorUpdated 호출
-
-## view
-
-```jsx
-<FormField>
-  <fieldset>
-    <Input /> * 4
-  </fieldset>
-</FormField>
-```
+- 숫자 입력 방어
+- 각 칸 blur 검증
+- 칸 간 focus 이동
+- 마지막 칸 입력 중 `[4,4,4,2+]` 조건이 되면 page에 총 길이 최종 검증 요청
 
 ---
 
-# ExpirationPeriodField
+## ExpirationPeriodField
 
-> 유효기간 도메인 로직을 포함한 input 입력, 유효성 검사, formValue 업데이트를 진행함.
+유효기간 2칸 입력과 1차 검증, field 내부 focus UX를 담당한다.
 
-## props
+### props
 
-- value: [string, string]
-- onUpdated: (value) => void
-- validationRules: ValidationRule[]
-- errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]
-- onErrorUpdated: (errorStatuses) => void
+- `value: [string, string]`
+- `errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]`
+- `onUpdated`
+- `onErrorUpdated`
+- `onValid`
+- `validationRules: [ValidationRule[], ValidationRule[]]`
 
-## functions
+### 내부 역할
 
-- handleChange: 숫자 입력 외 방어, onUpdated 호출
-- handleBlur: required, invalidLength, invalidMonth, invalidYear 검사 후 onErrorUpdated 호출
-
-## view
-
-```jsx
-<FormField>
-  <Input /> * 2
-</FormField>
-```
+- 월/년 input 값을 개별 관리
+- 월은 `validMonth`, 년은 `validYear`를 포함한 개별 blur 검증
+- `MM` / `YY`가 모두 2자리면 page에 최종 조합 검증 요청
 
 ---
 
-# CVCField
+## CVCField
 
-> CVC 도메인 로직을 포함한 input 입력, 유효성 검사, formValue 업데이트를 진행함.
+CVC 입력과 1차 검증을 담당한다.
 
-## props
+### props
 
-- value: string
-- onUpdated: (value) => void
-- validationRules: ValidationRule[]
-- errorStatuses: [ErrorStatus]
-- onErrorUpdated: (errorStatuses) => void
+- `value`
+- `errorStatuses`
+- `minLength`
+- `maxLength`
+- `onUpdated`
+- `onErrorUpdated`
+- `onValid`
+- `validationRules`
 
-## functions
+### 내부 역할
 
-- handleChange: 숫자 입력 외 방어, onUpdated 호출
-- handleBlur: required, invalidLength 검사 후 onErrorUpdated 호출
-
-## view
-
-```jsx
-<FormField>
-  <Input type="text" inputMode="numeric" maxLength={3} />
-</FormField>
-```
+- 숫자 입력 방어
+- blur 시 required / invalidLength 반영
+- 길이가 `minLength` 이상이 되면 page에 최종 검증 요청
+- 실제 step 오픈 여부는 page의 `cvcRules`가 결정
 
 ---
 
-# CardCompanySelect
+## CardCompanySelect
 
-> 카드사 선택 도메인 로직을 포함한 select 입력, 유효성 검사, formValue 업데이트를 진행함.
+카드사 선택과 1차 검증을 담당한다.
 
-## props
+### props
 
-- value: CardCompany
-- onUpdated: (value) => void
-- validationRules: ValidationRule[]
-- errorStatuses: [ErrorStatus]
-- onErrorUpdated: (errorStatuses) => void
+- `value`
+- `errorStatuses`
+- `onUpdated`
+- `onErrorUpdated`
+- `onValid`
+- `validationRules`
 
-## functions
+### 내부 역할
 
-- handleChange: onUpdated 호출
-- handleBlur: required 검사 후 onErrorUpdated 호출
-
-## view
-
-```jsx
-<FormField>
-  <Select options={CARD_COMPANY_OPTIONS} variant="default" | "error" />
-</FormField>
-```
+- `change`에서 value 업데이트
+- `blur`에서 required 최종 검증
+- blur 검증 통과 시 page에 step 오픈 요청
 
 ---
 
-# PasswordField
+## PasswordField
 
-> 비밀번호 앞 2자리 도메인 로직을 포함한 input 입력, 유효성 검사, formValue 업데이트를 진행함.
+비밀번호 앞 2자리 입력과 1차 검증을 담당한다.
 
-## props
+### props
 
-- value: string
-- onUpdated: (value) => void
-- validationRules: ValidationRule[]
-- errorStatuses: [ErrorStatus]
-- onErrorUpdated: (errorStatuses) => void
+- `value`
+- `errorStatuses`
+- `onUpdated`
+- `onErrorUpdated`
+- `validationRules`
 
-## functions
+### 내부 역할
 
-- handleChange: 숫자 입력 외 방어, onUpdated 호출
-- handleBlur: required, invalidLength 검사 후 onErrorUpdated 호출
-
-## view
-
-```jsx
-<FormField>
-  <Input type="password" inputMode="numeric" maxLength={2} />
-</FormField>
-```
+- 숫자 입력 방어
+- blur 시 required / invalidLength 반영
+- mount 시 첫 input focus
 
 ---
 
-# FormField (공통)
+## FormField
 
-> 라벨, 에러메시지 레이아웃
+공통 field 레이아웃.
 
-## props
-
-- { title: string; caption: string; error: boolean; errorMessage: string; children: ReactNode; }
-
-## view
-
-```jsx
-<>
-  <FieldTitle />
-  <FieldCaption />
-  {children}
-  <FieldCaption variant="error">{errorMessage}</FieldCaption>
-</>
-```
+- title
+- caption
+- children
+- error / errorMessage
 
 ---
 
-# Button (공통)
+## Select
 
-> 스타일 위주 구현. variant로 스타일 분기.
-
-## props
-
-- extends ButtonHTMLAttributes\<HTMLButtonElement\>
-- variant?: 'primary' (default)
-
-## view
-
-```jsx
-<button data-variant={variant} />
-```
+- `options`
+- `variant`
+- native `<select>` wrapper
 
 ---
 
-# Select (공통)
+## Input
 
-> 스타일 위주 구현. variant로 에러 스타일 분기.
-
-## props
-
-- extends SelectHTMLAttributes\<HTMLSelectElement\>
-- options: readonly { label: string; value: string }[]
-- variant?: 'default' | 'error'
-
-## view
-
-```jsx
-<select className="select select--{variant}">
-  <option /> * n
-</select>
-```
+- `variant`
+- native `<input>` wrapper
 
 ---
 
-# Input (공통)
+## useInputFocus
 
-> 스타일 위주 구현. variant로 에러 스타일 분기.
+다중 input field에서 ref를 배열로 관리하는 공통 hook.
 
-## props
+### 제공 기능
 
-- extends InputHTMLAttributes\<HTMLInputElement\>
-- variant?: 'default' | 'error'
-
-## view
-
-```jsx
-<input />
-```
-
----
-
-# CheckIcon (공통)
-
-> 체크 애니메이션 아이콘. stroke-dashoffset으로 드로잉 애니메이션.
-
-## view
-
-```jsx
-<div>
-  {' '}
-  {/* 원형 배경 */}
-  <svg>
-    <path /> {/* stroke-dashoffset 애니메이션 */}
-  </svg>
-</div>
-```
-
----
-
-# FieldTitle (공통)
-
-> FormField의 Title 컴포넌트. 스타일만 담당함.
-
-## props
-
-- { children }
-
-## view
-
-```jsx
-<h3>{children}</h3>
-```
-
----
-
-# FieldCaption (공통)
-
-> FormField의 Caption 컴포넌트. variant로 에러 스타일 분기.
-
-## props
-
-- { children; variant?: 'default' | 'error' }
-
-## view
-
-```jsx
-<span>{children}</span>
-```
+- `setRef(index)`
+- `focusNext(index)`
+- `focusPrev(index)`
+- `focusFirst()`
