@@ -51,11 +51,7 @@ export default function AddCardPage() {
         />
       </div>
       <form css={formLayout} id="add-card-form" onSubmit={handleSubmitForm}>
-        {step >= FIELD_STEP.password && (
-          <PasswordField
-            {...fieldProps.password}
-          />
-        )}
+        {step >= FIELD_STEP.password && <PasswordField {...fieldProps.password} />}
         {step >= FIELD_STEP.cvc && (
           <CVCField
             {...fieldProps.cvc}
@@ -65,7 +61,9 @@ export default function AddCardPage() {
         {step >= FIELD_STEP.expirationPeriod && (
           <ExpirationPeriodField
             {...fieldProps.expirationPeriod}
-            onValid={(value) => runAndOpenNextStep('expirationPeriod', () => actions.validateExpirationPeriodOnComplete(value))}
+            onValid={(value) =>
+              runAndOpenNextStep('expirationPeriod', () => actions.validateExpirationPeriodOnComplete(value))
+            }
           />
         )}
         {step >= FIELD_STEP.cardCompany && (
