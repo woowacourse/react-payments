@@ -1,6 +1,7 @@
 import useFormWrapper from "@components/common/FormContainer";
 import StepFunnel from "@components/common/StepFunnel/StepFunnel";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router";
 
 import CardCompanySelectField from "./components/CardCompanySelectField/CardCompanySelectField";
 import CardCVCInputField from "./components/CardCVCInputField";
@@ -15,15 +16,27 @@ const CardInfoFormSection = () => {
   const { FormWrapper } = useFormWrapper({
     defaultValues: INITIAL_CARD_INFO_FORM_STATE,
   });
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const cardNumber = formData.getAll("card-number").join("");
+    const cardCompany = (formData.get("card-company") ?? "").toString();
+
+    const params = new URLSearchParams({
+      "card-number": cardNumber,
+      "card-company": cardCompany,
+    });
+
+    //TODO: 경로 상수화
+    navigate(`/complete?${params.toString()}`);
+  };
 
   return (
     <FormWrapper>
       <CardPreview />
-      <Container
-        onSubmit={() => {
-          alert("카드 정보가 제출되었습니다.");
-        }}
-      >
+      <Container onSubmit={handleSubmit}>
         <StepFunnel>
           <StepFunnel.Step step={4} comparisonOperator="greaterThanOrEqual">
             {({ goToStep }) => (

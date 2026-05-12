@@ -15,17 +15,25 @@ const CardCompanySelectField = ({ onComplete }: CardCompanySelectFieldProps) => 
   const selectedCompany = getValue("selectedCardCompany");
 
   return (
-    <SelectField<CardCompanySelectFieldOption["value"]>
-      title="카드사를 선택해 주세요"
-      caption="현재 국내 카드사만 가능합니다."
-      options={[...CARD.COMPANY_SELECT_FIELD]}
-      placeholder="카드사를 선택해주세요"
-      value={selectedCompany}
-      onChange={(next) => {
-        setValue("selectedCardCompany", next);
-        onComplete?.();
-      }}
-    />
+    <>
+      <SelectField<CardCompanySelectFieldOption["value"]>
+        title="카드사를 선택해 주세요"
+        caption="현재 국내 카드사만 가능합니다."
+        options={[...CARD.COMPANY_SELECT_FIELD]}
+        placeholder="카드사를 선택해주세요"
+        value={selectedCompany}
+        onChange={(next) => {
+          setValue("selectedCardCompany", next);
+          onComplete?.();
+        }}
+      />
+      <input
+        type="hidden"
+        name="card-company"
+        value={selectedCompany ?? ""}
+        readOnly
+      />
+    </>
   );
 };
 

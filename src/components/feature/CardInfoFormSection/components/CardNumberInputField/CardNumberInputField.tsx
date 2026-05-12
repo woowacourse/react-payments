@@ -97,6 +97,7 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
       inputPropsList={formattedCardNumberUnits.map((unit, index) => ({
         ref: (el) => registerInputRef(index)(el),
         key: `card-number-${index}`,
+        name: "card-number",
         placeholder: "1234",
         fullWidth: true,
         value: unit,
