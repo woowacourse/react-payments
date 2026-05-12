@@ -6,7 +6,7 @@ import { useFormValues } from '@/core/hooks/useFormValues';
 import { validateCardNumbers, preventCardNumber } from '../validator';
 
 export const useCardNumbers = () => {
-  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid, reset } = useFormValues({
     initialValues: { '0': '', '1': '', '2': '', '3': '' },
     validate: validateCardNumbers,
   });
@@ -81,6 +81,8 @@ export const useCardNumbers = () => {
     errors,
     valids,
     isValid,
+
+    reset,
 
     invalidAttemp,
     renderErrorMessage,

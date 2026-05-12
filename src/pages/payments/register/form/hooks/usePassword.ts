@@ -12,7 +12,7 @@ interface ChangeEvent {
 }
 
 export const usePassword = () => {
-  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid, reset } = useFormValues({
     initialValues: { password: '' },
     validate: validatePassword,
   });
@@ -54,6 +54,8 @@ export const usePassword = () => {
     errors,
     valids,
     isValid,
+
+    reset,
 
     invalidAttemp,
     renderErrorMessage,

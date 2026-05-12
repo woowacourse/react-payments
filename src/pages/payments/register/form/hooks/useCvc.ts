@@ -6,7 +6,7 @@ import { useFormValues } from '@/core/hooks/useFormValues';
 import { validateCvc, preventCvc } from '../validator';
 
 export const useCvc = () => {
-  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid, reset } = useFormValues({
     initialValues: { cvc: '' },
     validate: validateCvc,
   });
@@ -47,6 +47,8 @@ export const useCvc = () => {
     errors,
     valids,
     isValid,
+
+    reset,
 
     invalidAttemp,
     renderErrorMessage,

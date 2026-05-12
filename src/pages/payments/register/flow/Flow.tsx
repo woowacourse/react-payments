@@ -23,6 +23,14 @@ export const Flow = () => {
 
   const navigate = useNavigate();
 
+  const handleReset = () => {
+    cardNumbers.reset();
+    card.reset();
+    expirationDate.reset();
+    cvc.reset();
+    password.reset();
+  };
+
   const handleSubmit = () => {
     navigate('/payments/register/complete');
   };
@@ -37,6 +45,7 @@ export const Flow = () => {
         password,
         brandCard,
         handleSubmit,
+        handleReset,
       }}
     />
   );

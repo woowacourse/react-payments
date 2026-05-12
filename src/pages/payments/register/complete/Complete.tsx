@@ -15,12 +15,14 @@ export const Complete = () => {
     card: {
       values: { card },
     },
+    handleReset,
   } = outletContext;
   const cardNumber = cardNumbers[0];
 
   const cardOption = CARD_OPTIONS.find((option) => option.value === card);
 
   const handleClick = () => {
+    handleReset();
     navigate('/payments/register');
   };
 

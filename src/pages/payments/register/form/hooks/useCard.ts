@@ -12,7 +12,7 @@ interface ChangeEvent {
 }
 
 export const useCard = () => {
-  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid, reset } = useFormValues({
     initialValues: { card: '' },
     validate: validateCard,
   });
@@ -56,6 +56,8 @@ export const useCard = () => {
     errors,
     valids,
     isValid,
+
+    reset,
 
     invalidAttemp,
     renderErrorMessage,

@@ -6,7 +6,7 @@ import { useFormValues } from '@/core/hooks/useFormValues';
 import { validateExpirationDate, preventExpirationMonth, preventExpirationYear } from '../validator';
 
 export const useExpirationDate = () => {
-  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid } = useFormValues({
+  const { values, onChange, blur, onBlur, refs, ref, errors, valids, isValid, reset } = useFormValues({
     initialValues: { month: '', year: '' },
     validate: validateExpirationDate,
   });
@@ -81,6 +81,8 @@ export const useExpirationDate = () => {
     errors,
     valids,
     isValid,
+
+    reset,
 
     refs,
     ref,
