@@ -13,10 +13,7 @@ import PasswordInputWrapper from '../components/InputWrapper/PasswordInputWrappe
 import CardBrandInputWrapper from '../components/InputWrapper/CardBrandInputWrapper';
 import { getPasswordErrorMessage } from '../utils/getPasswordErrorMessage';
 import { getCardNumberMaxLengths } from '../utils/getCardNumberMaxLengths';
-import { isEachCardNumber } from '../utils/isEachCardNumber';
-import { isCVCInputFilled } from '../utils/isCVCInputFilled';
-import { isPasswordInputFilled } from '../utils/isPasswordInputFilled';
-import { isEXPNumber } from '../utils/isEXPNumber';
+import { isFilledNumeric } from '../utils/isFilledNumeric';
 import type { CardBrandValue } from '../types/CardBrandValue';
 import type { CardAddCompleteState } from '../types/CardAddCompleteState';
 import ConfirmButton from '../components/ConfirmButton';
@@ -35,7 +32,7 @@ export default function CardAddPage() {
     } = useCardInfoInputField({
         validator: getCardNumberErrorMessage,
         fieldCount: 4,
-        isFilled: (value, index) => isEachCardNumber(value, getCardNumberMaxLengths(cardNumberValues[0])[index]),
+        isFilled: (value, index) => isFilledNumeric(value, getCardNumberMaxLengths(cardNumberValues[0])[index]),
     });
 
     const [cardBrand, setCardBrand] = useState<CardBrandValue>('');
@@ -51,7 +48,7 @@ export default function CardAddPage() {
         isSatisfy: isExpSatisfy,
         getRef: getExpRef,
         focusFirst: focusFirstExp,
-    } = useCardInfoInputField({ validator: getEXPNumberErrorMessage, fieldCount: 2, isFilled: isEXPNumber });
+    } = useCardInfoInputField({ validator: getEXPNumberErrorMessage, fieldCount: 2, isFilled: (value) => isFilledNumeric(value, 2) });
 
     const {
         values: cvcValues,
@@ -67,7 +64,7 @@ export default function CardAddPage() {
     } = useCardInfoInputField({
         validator: (values) => getCVCumberErrorMessage(values[0]),
         fieldCount: 1,
-        isFilled: isCVCInputFilled,
+        isFilled: (value) => isFilledNumeric(value, 3),
     });
 
     const {
@@ -84,7 +81,7 @@ export default function CardAddPage() {
     } = useCardInfoInputField({
         validator: (value) => getPasswordErrorMessage(value[0]),
         fieldCount: 1,
-        isFilled: isPasswordInputFilled,
+        isFilled: (value) => isFilledNumeric(value, 2),
     });
 
     const isCardBrandSatisfy = !!cardBrand;
