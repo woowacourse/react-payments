@@ -10,7 +10,6 @@
   position: relative;
   width: 212px;
   height: 132px;
-  background-color: #333333;
   border-radius: 4px;
   padding-left: 17px;
   padding-right: 17px;
@@ -52,7 +51,7 @@
   padding-right: 10px;
 }
 
-.expirationDate {
+.ExpiryDate {
   padding-top: 8px;
   color: #ffffff;
   font-size: 12px;
