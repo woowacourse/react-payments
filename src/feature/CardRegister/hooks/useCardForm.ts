@@ -5,9 +5,15 @@ import type {
   CardFormInfoType,
   CardPreviewInfoType,
 } from '../../../common/types/CardPreviewInfoType';
-import { useCvcField } from './useCvcField';
-import { useExpiryField } from './useExpiryField';
-import { useNumbersField } from './useNumbersField';
+import { useCvcField, type CvcFieldType } from './useCvcField';
+import { useExpiryField, type ExpiryFieldType } from './useExpiryField';
+import { useNumbersField, type NumbersFieldType } from './useNumbersField';
+
+export type CardFormFieldsType = {
+  numbers: NumbersFieldType;
+  expiry: ExpiryFieldType;
+  cvc: CvcFieldType;
+};
 
 export const useCardForm = () => {
   const numbersField = useNumbersField({ onComplete: () => advanceStep(1) });
@@ -36,6 +42,12 @@ export const useCardForm = () => {
     setPassword(password);
 
     if (validatePassword(password) === null) advanceStep(5);
+  };
+
+  const fields = {
+    numbers: numbersField,
+    expiry: expiryField,
+    cvc: cvcField,
   };
 
   const cardPreviewInfo: CardPreviewInfoType = {
@@ -72,6 +84,7 @@ export const useCardForm = () => {
   });
 
   return {
+    fields,
     cardPreviewInfo,
     cardFormInfo,
     cardFormHandlers,

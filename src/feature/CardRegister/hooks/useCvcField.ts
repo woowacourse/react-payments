@@ -7,6 +7,8 @@ type UseCvcFieldParams = {
   onComplete?: () => void;
 };
 
+export type CvcFieldType = ReturnType<typeof useCvcField>;
+
 export const useCvcField = ({ onComplete }: UseCvcFieldParams) => {
   const [value, setValue] = useState('');
 

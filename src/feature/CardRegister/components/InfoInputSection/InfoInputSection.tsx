@@ -10,30 +10,26 @@ import FieldSection from './FieldSection';
 import SelectCardBrandField from './SelectCardBrandField';
 import PasswordField from './PasswordField';
 import Button from '../../../../common/components/Button';
+import type { CardFormFieldsType } from '../../hooks/useCardForm';
 
 const InfoInputSection = ({
+  fields,
   cardFormInfo,
   cardFormHandlers,
   currentStep,
   hasFormError,
   onRegisterComplete,
 }: {
+  fields: CardFormFieldsType;
   cardFormInfo: CardFormInfoType;
   cardFormHandlers: CardFormHandlersType;
   currentStep: number;
   hasFormError: boolean;
   onRegisterComplete: (cardFormInfo: CardFormInfoType) => void;
 }) => {
-  const { cardNumbers, expiryMonth, expiryYear, cvcNumber, password } =
-    cardFormInfo;
-  const {
-    handleCardNumbersChange,
-    handleExpiryMonthChange,
-    handleExpiryYearChange,
-    handleCardCompanyChange,
-    handleCvcNumberChange,
-    handlePasswordNumberChange,
-  } = cardFormHandlers;
+  const { password } = cardFormInfo;
+  const { handleCardCompanyChange, handlePasswordNumberChange } =
+    cardFormHandlers;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -57,11 +53,7 @@ const InfoInputSection = ({
         )}
         {currentStep >= 3 && (
           <FieldSection title="CVC 번호를 입력해 주세요">
-            <CvcField
-              autoFocus
-              cvcNumber={cvcNumber}
-              handleCvcNumberChange={handleCvcNumberChange}
-            />
+            <CvcField autoFocus field={fields.cvc} />
           </FieldSection>
         )}
         {currentStep >= 2 && (
@@ -69,13 +61,7 @@ const InfoInputSection = ({
             title="카드 유효기간을 입력해 주세요"
             description="월/년도(MMYY)를 순서대로 입력해 주세요."
           >
-            <ExpiryField
-              autoFocus
-              expiryMonth={expiryMonth}
-              expiryYear={expiryYear}
-              handleExpiryMonthChange={handleExpiryMonthChange}
-              handleExpiryYearChange={handleExpiryYearChange}
-            />
+            <ExpiryField autoFocus field={fields.expiry} />
           </FieldSection>
         )}
         {currentStep >= 1 && (
@@ -93,11 +79,7 @@ const InfoInputSection = ({
           title="결제할 카드 번호를 입력해 주세요"
           description="본인 명의의 카드만 결제 가능합니다."
         >
-          <NumberField
-            autoFocus
-            cardNumbers={cardNumbers}
-            handleCardNumbersChange={handleCardNumbersChange}
-          />
+          <NumberField autoFocus field={fields.numbers} />
         </FieldSection>
       </FieldsWrapper>
 

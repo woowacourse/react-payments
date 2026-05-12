@@ -9,6 +9,7 @@ const CardRegisterPage = () => {
   const navigate = useNavigate();
 
   const {
+    fields,
     cardPreviewInfo,
     cardFormInfo,
     cardFormHandlers,
@@ -27,6 +28,7 @@ const CardRegisterPage = () => {
       <Container>
         <CardPreviewSection cardPreviewInfo={cardPreviewInfo} />
         <InfoInputSection
+          fields={fields}
           cardFormInfo={cardFormInfo}
           cardFormHandlers={cardFormHandlers}
           currentStep={currentStep}

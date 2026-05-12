@@ -11,6 +11,8 @@ type UseNumbersFieldParams = {
   onComplete?: () => void;
 };
 
+export type NumbersFieldType = ReturnType<typeof useNumbersField>;
+
 export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
 
@@ -71,6 +73,7 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
 
   return {
     cardNumbers,
+    segmentLengths,
     firstErrorIndex,
     errorMessage,
     isComplete,

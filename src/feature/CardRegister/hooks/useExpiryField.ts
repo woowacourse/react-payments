@@ -16,6 +16,8 @@ type UseExpiryFieldParams = {
   onComplete?: () => void;
 };
 
+export type ExpiryFieldType = ReturnType<typeof useExpiryField>;
+
 export const useExpiryField = ({ onComplete }: UseExpiryFieldParams) => {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
