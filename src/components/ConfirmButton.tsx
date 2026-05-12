@@ -1,14 +1,15 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
-interface ConfirmButtonProps {
+interface ConfirmButtonProps<TState = unknown> {
     to: string;
     purpose: 'submit' | 'confirm';
+    state?: TState;
 }
 
-export default function ConfirmButton({ to, purpose }: ConfirmButtonProps) {
+export default function ConfirmButton<TState = unknown>({ to, purpose, state }: ConfirmButtonProps<TState>) {
     return (
-        <ConfirmButtonStyled purpose={purpose} to={to}>
+        <ConfirmButtonStyled purpose={purpose} to={to} state={state}>
             확인
         </ConfirmButtonStyled>
     );
