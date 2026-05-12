@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { useInputFocus } from '@/core/hooks/useInputFocus';
-import { isInputNumbericString } from '@/core/utils/validator';
+import { isNumericString } from '@/core/utils/validator';
 import {
   isValidFormatMonth,
   MONTH_CONSTAND,
@@ -8,57 +7,65 @@ import {
   validateYear,
   YEAR_CONSTAND,
 } from '@/entities/card/expiryDate';
+import { useInput } from '@/core/hooks/useInput';
 
 interface FieldState {
   value: string;
   errorMessage: string | undefined;
-  handleBlur: () => void;
-  handleChange: (value: string) => void;
+  isValid: boolean;
   maxLength: number;
+  handleChange: (value: string) => void;
+  handleBlur: () => void;
 }
 
 export interface UseExpiryDateResult {
   month: FieldState;
   year: FieldState;
+  isValid: boolean;
   setInputRef: (node: HTMLInputElement | null, index: number) => void;
 }
 
+const monthValidate = (month: string) => {
+  return isNumericString(month) && isValidFormatMonth(month);
+};
 export const useExpiryDate = ({ onComplete }: { onComplete: () => void }): UseExpiryDateResult => {
-  const [monthValue, setMonthValue] = useState('');
-  const [monthTouched, setMonthTouched] = useState(false);
-  const [yearValue, setYearValue] = useState('');
-  const [yearTouched, setYearTouched] = useState(false);
+  const month = useInput({ validator: monthValidate });
+  const year = useInput({ validator: isNumericString });
   const { setInputRef, focusNext } = useInputFocus();
 
+  const monthError = validateMonth(month.value);
+  const yearError = validateYear(year.value);
+
+  const isValid = !monthError && !yearError;
+
   const handleMonthChange = (value: string) => {
-    if (!isValidFormatMonth(value)) return;
-    setMonthValue(value);
-    setMonthTouched(false);
+    month.handleChange(value);
     if (!validateMonth(value)) focusNext(1);
   };
 
   const handleYearChange = (value: string) => {
-    if (!isInputNumbericString(value)) return;
-    setYearValue(value);
-    setYearTouched(false);
-    if (!validateYear(value) && !validateMonth(monthValue)) onComplete();
+    year.handleChange(value);
+    if (!validateYear(value)) onComplete();
   };
 
   return {
     month: {
-      value: monthValue,
-      errorMessage: monthTouched ? validateMonth(monthValue) : undefined,
-      handleBlur: () => setMonthTouched(true),
+      value: month.value,
+      errorMessage: month.touched ? monthError : undefined,
+      isValid: !monthError,
       handleChange: handleMonthChange,
+      handleBlur: month.handleBlur,
       maxLength: MONTH_CONSTAND.LENGTH,
     },
     year: {
-      value: yearValue,
-      errorMessage: yearTouched ? validateYear(yearValue) : undefined,
-      handleBlur: () => setYearTouched(true),
+      value: year.value,
+      errorMessage: year.touched ? yearError : undefined,
+      isValid: !yearError,
       handleChange: handleYearChange,
+      handleBlur: year.handleBlur,
       maxLength: YEAR_CONSTAND.LENGTH,
     },
+    isValid,
     setInputRef,
   };
 };
