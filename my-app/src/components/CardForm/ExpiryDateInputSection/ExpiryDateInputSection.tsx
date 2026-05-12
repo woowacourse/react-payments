@@ -4,24 +4,24 @@ import { validateExpiryDate } from "../../../utils/validators";
 import useInputValidation from "../../../hooks/useInputValidation";
 
 const ExpiryDateInputSection = ({
-  onValueHandler,
+  onChange,
   inputValues,
 }: {
-  onValueHandler: (cardInfo: string[]) => void;
+  onChange: (value: string[]) => void;
   inputValues: string[];
 }) => {
   const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(
     validateExpiryDate,
     inputValues,
   );
-  const placeHolder = ["MM", "YY"];
+  const placeholders = ["MM", "YY"];
 
-  const onChange = (index: number, value: string) => {
+  const handleChange = (index: number, value: string) => {
     const newValues = [...inputValues];
     newValues[index] = value;
 
     clearError();
-    onValueHandler(newValues);
+    onChange(newValues);
   };
 
   return (
@@ -36,7 +36,7 @@ const ExpiryDateInputSection = ({
           key={i}
           maxLength={2}
           value={value}
-          onChange={(e) => onChange(i, e.target.value)}
+          onChange={(e) => handleChange(i, e.target.value)}
           onBlur={handleBlur}
           css={[
             baseInputStyle,
@@ -44,7 +44,7 @@ const ExpiryDateInputSection = ({
               border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
             `,
           ]}
-          placeholder={placeHolder[i]}
+          placeholder={placeholders[i]}
         />
       ))}
     </InputSectionLayout>

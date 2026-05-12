@@ -5,11 +5,11 @@ import { validateCardNumber } from "../../../utils/validators";
 import useInputValidation from "../../../hooks/useInputValidation";
 
 const CardNumberInputSection = ({
-  onValueHandler,
+  onChange,
   inputValues,
   fieldConfig,
 }: {
-  onValueHandler: (cardInfo: string[]) => void;
+  onChange: (value: string[]) => void;
   inputValues: string[];
   fieldConfig: number[];
 }) => {
@@ -19,12 +19,12 @@ const CardNumberInputSection = ({
   );
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const onChange = (index: number, value: string) => {
+  const handleChange = (index: number, value: string) => {
     const newValues = [...inputValues];
     newValues[index] = value;
 
     clearError();
-    onValueHandler(newValues);
+    onChange(newValues);
 
     // 현재 칸이 꽉 찼고, 마지막 칸이 아닐 때 다음칸 Input Dom에 포커스 이동.
     if (value.length === fieldConfig[index] && index < fieldConfig.length - 1) {
@@ -47,7 +47,7 @@ const CardNumberInputSection = ({
           }}
           maxLength={maxLen}
           value={inputValues[i] ?? ""}
-          onChange={(e) => onChange(i, e.target.value)}
+          onChange={(e) => handleChange(i, e.target.value)}
           onBlur={handleBlur}
           css={[
             baseInputStyle,

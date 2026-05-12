@@ -5,7 +5,7 @@ import visaLogo from "../../assets/visaLogo.png";
 import amexLogo from "../../assets/amexLogo.png";
 import unionpayLogo from "../../assets/unionpayLogo.png";
 import dinersLogo from "../../assets/dinersLogo.png";
-import { decideCardColor } from "../../constants/cardCompanies";
+import { getCardColor } from "../../constants/cardCompanies";
 
 const LOGO_MAP: Record<string, string> = {
   master: masterLogo,
@@ -28,7 +28,7 @@ const cardNumberSpanStyle = css`
 `;
 
 const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
-  const cardColor = decideCardColor(cardInfo.company);
+  const cardColor = getCardColor(cardInfo.company);
 
   return (
     <div

@@ -1,20 +1,20 @@
-import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout"
+import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
 import { validateCvc } from "../../../utils/validators";
 import useInputValidation from "../../../hooks/useInputValidation";
 
 const CvcInputSection = ({
-  onValueHandler,
+  onChange,
   inputValue,
 }: {
-  onValueHandler: (cardInfo: string) => void;
+  onChange: (value: string) => void;
   inputValue: string;
 }) => {
   const { errorMessage, clearError, handleBlur } = useInputValidation(validateCvc, inputValue);
 
-  const onChange = (value: string) => {
+  const handleChange = (value: string) => {
     clearError();
-    onValueHandler(value);
+    onChange(value);
   };
 
   return (
@@ -22,7 +22,7 @@ const CvcInputSection = ({
       <input
         maxLength={3}
         value={inputValue}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
         onBlur={handleBlur}
         css={[
           baseInputStyle,

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import PasswordInputSection from "./PasswordInputSectino";
+import PasswordInputSection from "./PasswordInputSection";
 
 const meta = {
   title: "CardForm/PasswordInputSection",
@@ -10,7 +10,7 @@ const meta = {
     layout: "centered",
   },
   args: {
-    onValueHandler: fn(),
+    onChange: fn(),
     inputValue: "",
   },
   render: (args) => (
@@ -29,7 +29,7 @@ export const FilledValid: Story = {
   play: async ({ args, canvasElement }) => {
     const input = canvasElement.querySelector('input[type="password"]')!;
     await userEvent.type(input, "12");
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith("12");
+    await expect(args.onChange).toHaveBeenLastCalledWith("12");
   },
 };
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { CardInfo } from "../types";
-import { decideBrandName, getFieldConfig } from "../constants/cardBrand";
+import { detectBrand, getFieldConfig } from "../constants/cardBrand";
 import { validateCardNumber, validateExpiryDate, validateCvc } from "../utils/validators";
 
 const useCardForm = () => {
@@ -16,11 +16,11 @@ const useCardForm = () => {
 
   const navigate = useNavigate();
 
-  const brand = decideBrandName(cardInfo.numbers.join(""));
+  const brand = detectBrand(cardInfo.numbers.join(""));
   const fieldConfig = getFieldConfig(brand);
 
   const cardNumberHandler = (numbers: string[]) => {
-    const newBrand = decideBrandName(numbers.join(""));
+    const newBrand = detectBrand(numbers.join(""));
     const newConfig = getFieldConfig(newBrand);
 
     let adjustedNumbers = numbers;

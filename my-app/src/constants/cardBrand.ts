@@ -10,7 +10,7 @@ export const DEFAULT_FIELD_CONFIG = [4, 4, 4, 4];
 
 export const getFieldConfig = (brand: string): number[] => BRAND_FIELD_CONFIG[brand] ?? DEFAULT_FIELD_CONFIG;
 
-export const decideBrandName = (number: string): string => {
+export const detectBrand = (number: string): string => {
   if (/^4/.test(number)) return "visa";
   if (/^5[1-5]/.test(number)) return "master";
   if (/^3[47]/.test(number)) return "amex";

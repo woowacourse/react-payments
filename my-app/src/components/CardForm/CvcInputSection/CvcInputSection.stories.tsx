@@ -10,7 +10,7 @@ const meta = {
     layout: "centered",
   },
   args: {
-    onValueHandler: fn(),
+    onChange: fn(),
     inputValue: "",
   },
   render: (args) => (
@@ -32,7 +32,7 @@ export const FilledValid: Story = {
 
     await userEvent.type(input, "123");
 
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith("123");
+    await expect(args.onChange).toHaveBeenLastCalledWith("123");
   },
 };
 

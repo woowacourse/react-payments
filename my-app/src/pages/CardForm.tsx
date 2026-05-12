@@ -4,7 +4,7 @@ import CardNumberInputSection from "../components/CardForm/CardNumberInputSectio
 import CardCompanySelectSection from "../components/CardForm/CardCompanySelectSection/CardCompanySelectSection.tsx";
 import ExpiryDateInputSection from "../components/CardForm/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
 import CvcInputSection from "../components/CardForm/CvcInputSection/CvcInputSection.tsx";
-import PasswordInputSection from "../components/CardForm/PasswordInputSection/PasswordInputSectino.tsx";
+import PasswordInputSection from "../components/CardForm/PasswordInputSection/PasswordInputSection.tsx";
 import useCardForm from "../hooks/useCardForm.ts";
 
 const CardForm = () => {
@@ -58,17 +58,17 @@ const CardForm = () => {
         >
           <form id="card-form" onSubmit={handleSubmit}>
             {step >= 4 && (
-              <PasswordInputSection onValueHandler={passwordHandler} inputValue={cardInfo.password} />
+              <PasswordInputSection onChange={passwordHandler} inputValue={cardInfo.password} />
             )}
-            {step >= 3 && <CvcInputSection onValueHandler={cvcHandler} inputValue={cardInfo.cvc} />}
+            {step >= 3 && <CvcInputSection onChange={cvcHandler} inputValue={cardInfo.cvc} />}
             {step >= 2 && (
-              <ExpiryDateInputSection onValueHandler={expiryHandler} inputValues={cardInfo.expiry} />
+              <ExpiryDateInputSection onChange={expiryHandler} inputValues={cardInfo.expiry} />
             )}
             {step >= 1 && (
-              <CardCompanySelectSection onValueHandler={selectCompanyHandler} inputValue={cardInfo.company} />
+              <CardCompanySelectSection onChange={selectCompanyHandler} inputValue={cardInfo.company} />
             )}
             <CardNumberInputSection
-              onValueHandler={cardNumberHandler}
+              onChange={cardNumberHandler}
               inputValues={cardInfo.numbers}
               fieldConfig={fieldConfig}
             />

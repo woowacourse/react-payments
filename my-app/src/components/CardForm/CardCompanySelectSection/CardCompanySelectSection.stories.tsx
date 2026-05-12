@@ -10,7 +10,7 @@ const meta = {
     layout: "centered",
   },
   args: {
-    onValueHandler: fn(),
+    onChange: fn(),
     inputValue: "",
   },
   render: (args) => (
@@ -55,6 +55,6 @@ export const SelectCompany: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button"));
     await userEvent.click(canvas.getByText("신한카드"));
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith("신한카드");
+    await expect(args.onChange).toHaveBeenLastCalledWith("신한카드");
   },
 };

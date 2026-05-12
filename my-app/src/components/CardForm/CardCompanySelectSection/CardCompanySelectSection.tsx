@@ -5,10 +5,10 @@ import { CARD_COMPANIES } from "../../../constants/cardCompanies";
 const COMPANY_NAMES = CARD_COMPANIES.map(({ name }) => name);
 
 const CardCompanySelectSection = ({
-  onValueHandler,
+  onChange,
   inputValue,
 }: {
-  onValueHandler: (company: string) => void;
+  onChange: (value: string) => void;
   inputValue: string;
 }) => {
   return (
@@ -17,7 +17,7 @@ const CardCompanySelectSection = ({
         value={inputValue}
         options={COMPANY_NAMES}
         placeholder="카드사를 선택해 주세요"
-        onChange={onValueHandler}
+        onChange={onChange}
       />
     </InputSectionLayout>
   );
