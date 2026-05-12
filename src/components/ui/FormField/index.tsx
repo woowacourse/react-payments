@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import FieldTitle from '../FieldTitle';
 import FieldCaption from '../FieldCaption';
 
@@ -25,10 +25,22 @@ export default function FormField({ title, caption, error, errorMessage, childre
   );
 }
 
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const formFieldStyle = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  animation: ${slideIn} 0.5s ease;
 `;
 
 const formFieldTitleWrapperStyle = css`
