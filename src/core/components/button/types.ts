@@ -1,11 +1,15 @@
-import type { ComponentProps } from 'react';
+import type { ElementType } from 'react';
 
-interface ButtonOwnProps {
+import type { PolymorphicProps } from '@/core/components/view';
+
+export type AS = 'button' | 'a';
+
+export type ButtonOwnProps = {
   shape?: 'default';
   variant?: 'default' | 'primary';
   edge?: 'rounded' | 'flat';
   size?: 'normal' | 'large';
   block?: boolean;
-}
+};
 
-export interface ButtonProps extends Omit<ComponentProps<'button'>, keyof ButtonOwnProps>, ButtonOwnProps {}
+export type ButtonProps<T extends ElementType = AS> = PolymorphicProps<T, ButtonOwnProps>;

@@ -1,19 +1,25 @@
+import type { ElementType } from 'react';
+
 import cn from 'classnames';
+
+import { View } from '@/core/components/view';
 
 import styles from './Button.module.css';
 
 import type { ButtonProps } from './types';
 
-export const Button = ({
+export const Button = <T extends ElementType>({
+  as = 'button',
   children,
   variant = 'default',
   edge = 'rounded',
   size = 'normal',
   block,
   ...rest
-}: ButtonProps) => {
+}: ButtonProps<T>) => {
   return (
-    <button
+    <View
+      as={as}
       className={cn(
         styles.button,
         styles[`variant-${variant}`],
@@ -24,6 +30,6 @@ export const Button = ({
       {...rest}
     >
       {children}
-    </button>
+    </View>
   );
 };
