@@ -1,6 +1,6 @@
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
-import { getCardNumberGroupLengths } from '../constants/cardBrands.ts';
 import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
+import { getCardNumberGroupLengths } from '../utils/cardBrand.ts';
 
 type CardNumbersProps = {
   cardStatus: CardStatus;

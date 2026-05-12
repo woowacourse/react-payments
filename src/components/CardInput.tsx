@@ -3,7 +3,6 @@ import CardNumber from './CardNumber';
 import CardExpiryDate from './CardExpiryDate';
 import CardCompany from './CardCompany';
 import CardPassword from './CardPassword';
-import { isValidCardNumber } from '../constants/cardBrands';
 import type {
   CardHandler,
   CardStatus,
@@ -16,6 +15,7 @@ import type {
   CardPassword as CardPasswordType,
   CardPasswordHandler,
 } from '../types/cardStausTypes';
+import { isValidCardNumber } from '../utils/cardBrand';
 
 type CardInputProps = {
   cardStatus: CardStatus;

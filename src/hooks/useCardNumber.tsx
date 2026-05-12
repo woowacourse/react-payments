@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import { DEFAULT_CARD_NUMBER_GROUP_LENGTHS } from '../constants/cardBrands';
+import type { CardError } from '../types/errorTypes';
+import type { CardStatus, CardHandler } from '../types/cardStausTypes';
 import {
-  DEFAULT_CARD_NUMBER_GROUP_LENGTHS,
   getCardBrand,
   hasPotentialCardBrand,
   isValidCardNumber,
   splitCardNumberByBrand,
-} from '../constants/cardBrands';
-import type { CardError } from '../types/errorTypes';
-import type { CardStatus, CardHandler } from '../types/cardStausTypes';
+} from '../utils/cardBrand';
 import { isNotNumber } from '../utils/util';
 
 export function useCardNumber(): [CardStatus, CardHandler] {
