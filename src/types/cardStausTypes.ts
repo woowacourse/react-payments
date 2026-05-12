@@ -1,9 +1,11 @@
 import type { CardError, DateError, MonthError, YearError, CvcError } from './errorTypes';
 
+export type CardBrand = '' | 'visa' | 'master';
+
 export interface CardStatus {
   cardNumbers: string[];
   cardNumberErrorMode: CardError | 'normal';
-  cardBrand: string;
+  cardBrand: CardBrand;
 }
 
 export interface CardHandler {
