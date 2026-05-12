@@ -22,7 +22,6 @@ export const DINERS_CARD_NUMBERS_LENGTH = [4, 4, 4, 2];
 export const AMEX_CARD_NUMBERS_LENGTH = [4, 4, 4, 3];
 
 export const EXPIRATION_PERIOD_LENGTH = [2, 2];
-export const PERIOD_LENGTH_PER_INPUT = 2;
 
 export const CVC_LENGTH = 3;
 export const AMEX_CVC_LENGTH = 4;

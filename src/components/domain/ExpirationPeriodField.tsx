@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo, ExpirationPeriodErrorStatus } from '../../types';
-import { EXPIRATION_PERIOD_ERROR_MESSAGES, EXPIRATION_PERIOD_LENGTH, PERIOD_LENGTH_PER_INPUT } from '../../constants';
+import { EXPIRATION_PERIOD_ERROR_MESSAGES, EXPIRATION_PERIOD_LENGTH } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
 import { sanitizeNumber } from '../../utils';
 import { validates } from '../../validates.ts';
@@ -28,7 +28,7 @@ export default function ExpirationPeriodField({
   const onCompletedEvent = useEffectEvent(onCompleted);
 
   useEffect(() => {
-    if (!activeErrorStatus && value.every((v) => v.length === PERIOD_LENGTH_PER_INPUT)) {
+    if (!activeErrorStatus && value.every((v, index) => v.length === EXPIRATION_PERIOD_LENGTH[index])) {
       onCompletedEvent();
     }
   }, [activeErrorStatus, value]);
@@ -98,7 +98,7 @@ export default function ExpirationPeriodField({
             type="text"
             inputMode="numeric"
             placeholder="MM"
-            maxLength={PERIOD_LENGTH_PER_INPUT}
+            maxLength={EXPIRATION_PERIOD_LENGTH[0]}
           />
           <Input
             name="expirationPeriod"
@@ -109,7 +109,7 @@ export default function ExpirationPeriodField({
             type="text"
             inputMode="numeric"
             placeholder="YY"
-            maxLength={PERIOD_LENGTH_PER_INPUT}
+            maxLength={EXPIRATION_PERIOD_LENGTH[1]}
           />
         </div>
       </fieldset>
