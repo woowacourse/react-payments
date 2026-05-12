@@ -5,7 +5,7 @@ import CardComplete from "./pages/CardComplete";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<CardForm />} />
