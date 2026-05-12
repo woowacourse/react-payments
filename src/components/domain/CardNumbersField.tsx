@@ -8,7 +8,7 @@ import {
   DINERS_CARD_NUMBERS_LENGTH,
   ERROR_MESSAGES,
 } from '../../constants';
-import { useEffect, useEffectEvent } from 'react';
+import { useEffect, useEffectEvent, useRef } from 'react';
 import { sanitizeNumber } from '../../utils';
 import { validates } from '../../validates.ts';
 
@@ -63,12 +63,33 @@ export default function CardNumbersField({
     return null;
   };
 
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
     const error = validate('change', inputValue, index);
 
     setFieldError('cardNumbers', error, index);
     setFieldValue('cardNumbers', sanitizeNumber(inputValue), index);
+
+    if (inputValue.length === cardNumbersLength[index]) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (value[index] === '' && e.key === 'Backspace') {
+      e.preventDefault();
+      inputRefs.current[index - 1]?.focus();
+    }
+
+    if (inputRefs.current[index]?.selectionStart === 0 && e.key === 'ArrowLeft') {
+      inputRefs.current[index - 1]?.focus();
+    }
+
+    if (inputRefs.current[index]?.selectionStart === value[index].length && e.key === 'ArrowRight') {
+      inputRefs.current[index + 1]?.focus();
+    }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
@@ -95,11 +116,15 @@ export default function CardNumbersField({
           {value.map((number, index) => (
             <Input
               key={index}
+              ref={(el) => {
+                inputRefs.current[index] = el;
+              }}
               name="cardNumbers"
               autoFocus={index === 0}
               variant={activeErrorIndex === index ? 'error' : 'default'}
               value={number}
               onChange={(e) => handleChange(e, index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               onBlur={(e) => handleBlur(e, index)}
               type="text"
               inputMode="numeric"
