@@ -2,22 +2,47 @@ import type { CardInfo, ErrorStatus } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Select from '../ui/Select';
 import { CARD_COMPANY_OPTIONS, ERROR_MESSAGES } from '../../constants';
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { validate, type ValidationRule } from '../../utils';
 
 interface CardCompanySelectProps {
   value: CardInfo['cardCompany'];
+  errorStatuses: [ErrorStatus];
   onUpdated: (value: CardInfo['cardCompany']) => void;
+  onErrorUpdated: (errorStatuses: [ErrorStatus]) => void;
+  onValid: (value: CardInfo['cardCompany']) => void;
+  validationRules: ValidationRule[];
 }
 
-export default function CardCompanySelect({ value, onUpdated }: CardCompanySelectProps) {
-  const [errorStatus, setErrorStatus] = useState<ErrorStatus>(null);
+export default function CardCompanySelect({
+  value,
+  errorStatuses,
+  onUpdated,
+  onErrorUpdated,
+  onValid,
+  validationRules,
+}: CardCompanySelectProps) {
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  const errorStatus = errorStatuses[0];
+
+  useEffect(() => {
+    selectRef.current?.focus();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onUpdated(e.target.value as CardInfo['cardCompany']);
+    const inputValue = e.target.value;
+    const error = validate(validationRules, 'onChange', inputValue);
+    onErrorUpdated([error as ErrorStatus]);
+    if (error) return;
+    onUpdated(inputValue as CardInfo['cardCompany']);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLSelectElement>) => {
-    setErrorStatus(e.target.value === '' ? 'required' : null);
+    const inputValue = e.target.value as CardInfo['cardCompany'];
+    const errorStatus = validate(validationRules, 'onBlur', inputValue) as ErrorStatus;
+    onErrorUpdated([errorStatus]);
+    if (!errorStatus) onValid(inputValue);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
@@ -29,7 +54,14 @@ export default function CardCompanySelect({ value, onUpdated }: CardCompanySelec
 
   return (
     <FormField {...formFieldProps}>
-      <Select variant={errorStatus ? 'error' : 'default'} value={value} options={CARD_COMPANY_OPTIONS} onChange={handleChange} onBlur={handleBlur} />
+      <Select
+        ref={selectRef}
+        variant={errorStatus ? 'error' : 'default'}
+        value={value}
+        options={CARD_COMPANY_OPTIONS}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
     </FormField>
   );
 }

@@ -1,56 +1,44 @@
 import type { CardInfo } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import { useState } from 'react';
 import type { ErrorStatus } from '../../types';
-import { isNumber } from '../../utils';
+import { useEffect, useRef } from 'react';
+import { validate, type ValidationRule } from '../../utils';
 import { PASSWORD_LENGTH, ERROR_MESSAGES } from '../../constants';
 
 interface PasswordFieldProps {
   value: CardInfo['password'];
+  errorStatuses: [ErrorStatus];
   onUpdated: (value: CardInfo['password']) => void;
+  onErrorUpdated: (errorStatuses: [ErrorStatus]) => void;
+  validationRules: ValidationRule[];
 }
 
-export default function PasswordField({ value, onUpdated }: PasswordFieldProps) {
-  const [errorStatus, setErrorStatus] = useState<ErrorStatus>(null);
+export default function PasswordField({
+  value,
+  errorStatuses,
+  onUpdated,
+  onErrorUpdated,
+  validationRules,
+}: PasswordFieldProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. required
-  // 2. numberOnly -> update 제외됨.
+  const errorStatus = errorStatuses[0];
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-
-    if (inputValue !== '' && !isNumber(inputValue)) {
-      setErrorStatus('numberOnly');
-      return;
-    }
-
-    const newValue = inputValue;
-    onUpdated(newValue);
-    setErrorStatus(inputValue === '' ? 'required' : null);
-
-    if (inputValue.length < PASSWORD_LENGTH) {
-      return;
-    }
+    const error = validate(validationRules, 'onChange', inputValue);
+    onErrorUpdated([error as ErrorStatus]);
+    if (error) return;
+    onUpdated(inputValue);
   };
 
-  // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
-  // 1. required
-  // 2. invalidLength
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-
-    if (inputValue === '') {
-      setErrorStatus('required');
-      return;
-    }
-
-    if (inputValue.length < PASSWORD_LENGTH) {
-      setErrorStatus('invalidLength');
-      return;
-    }
-
-    setErrorStatus(null);
+    onErrorUpdated([validate(validationRules, 'onBlur', e.target.value) as ErrorStatus]);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
@@ -64,6 +52,7 @@ export default function PasswordField({ value, onUpdated }: PasswordFieldProps) 
     <FormField {...formFieldProps}>
       <label htmlFor="password">비밀번호 앞 {PASSWORD_LENGTH}자리</label>
       <Input
+        ref={inputRef}
         variant={errorStatus !== null ? 'error' : 'default'}
         value={value}
         id="password"
