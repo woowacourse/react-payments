@@ -1,37 +1,33 @@
-import { useState } from 'react';
-import { isInputNumbericString } from '@/core/utils/validator';
+import { isNumericString } from '@/core/utils/validator';
 import { CVC_LENGTH, validateCvc } from '@/entities/card/cvc';
+import { useInput } from '@/core/hooks/useInput';
 
 export interface UseCvcResult {
   value: string;
+  isValid: boolean;
   errorMessage: string | undefined;
   maxLength: number;
-  isValid: boolean;
   handleChange: (value: string) => void;
   handleBlur: () => void;
 }
 
 export const useCvc = ({ onComplete }: { onComplete: () => void }): UseCvcResult => {
-  const [value, setValue] = useState('');
-  const [touched, setTouched] = useState(false);
+  const cvc = useInput({ validator: isNumericString });
 
+  const { value, touched } = cvc;
   const error = validateCvc(value);
 
-  const handleChange = (inputValue: string): void => {
-    if (!isInputNumbericString(inputValue)) return;
-    setValue(inputValue);
-    setTouched(false);
-    if (!validateCvc(inputValue)) onComplete();
+  const handleChangeCvc = (inputValue: string): void => {
+    cvc.handleChange(inputValue);
+    if (validateCvc(inputValue) === undefined) onComplete();
   };
-
-  const handleBlur = () => setTouched(true);
 
   return {
     value,
-    errorMessage: touched ? error : undefined,
-    isValid: !error,
     maxLength: CVC_LENGTH,
-    handleChange,
-    handleBlur,
+    isValid: !error,
+    errorMessage: touched ? error : undefined,
+    handleChange: handleChangeCvc,
+    handleBlur: cvc.handleBlur,
   };
 };
