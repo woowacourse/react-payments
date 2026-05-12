@@ -11,12 +11,13 @@ type CardExpiryDateProps = {
   setCardExpiry: ExpireHandler;
 };
 
+const EXPIRY_ERROR_MESSAGE = {
+  ...DATE_ERROR_MESSAGE,
+  ...MONTH_ERROR_MESSAGE,
+  ...YEAR_ERROR_MESSAGE,
+};
+
 export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiryDateProps) {
-  const EXPIRY_ERROR_MESSAGE = {
-    ...DATE_ERROR_MESSAGE,
-    ...MONTH_ERROR_MESSAGE,
-    ...YEAR_ERROR_MESSAGE,
-  };
   return (
     <div css={{ display: 'flex', flexDirection: 'column' }}>
       <div>
