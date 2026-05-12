@@ -27,7 +27,7 @@ const CardForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isValid) return;
-    navigate("/complete", { state: { cardInfo, brand } });
+    navigate("/complete", { state: { numbers: cardInfo.numbers, brand } });
   };
 
   return (

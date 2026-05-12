@@ -1,20 +1,20 @@
 import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
+import { validatePassword } from "../../../utils/validators";
 import useInputValidation from "../../../hooks/useInputValidation";
-import { validateCvc } from "../../../utils/validators";
 
 const PasswordInputSection = ({
-  onValueHandler,
+  onChange,
   inputValue,
 }: {
-  onValueHandler: (cardInfo: string) => void;
+  onChange: (value: string) => void;
   inputValue: string;
 }) => {
-  const { errorMessage, clearError, handleBlur } = useInputValidation(validateCvc, inputValue);
+  const { errorMessage, clearError, handleBlur } = useInputValidation(validatePassword, inputValue);
 
-  const onChange = (value: string) => {
+  const handleChange = (value: string) => {
     clearError();
-    onValueHandler(value.replace(/\D/g, ""));
+    onChange(value.replace(/\D/g, ""));
   };
 
   return (
@@ -27,10 +27,10 @@ const PasswordInputSection = ({
       <input
         type="password"
         inputMode="numeric"
-        autoComplete="off"
+        autoComplete="new-password"
         maxLength={2}
         value={inputValue}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
         onBlur={handleBlur}
         css={[
           baseInputStyle,
