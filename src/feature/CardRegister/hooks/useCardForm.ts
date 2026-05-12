@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import {
-  hasCardNumbersError,
-  hasCardFormError,
-  validatePassword,
-} from '../utils/cardFormValidator';
+import { hasCardFormError, validatePassword } from '../utils/cardFormValidator';
 import type { CardCompanyId } from '../../../common/types/CardPreview';
 import type {
   CardFormInfoType,
@@ -11,9 +7,10 @@ import type {
 } from '../../../common/types/CardPreviewInfoType';
 import { useCvcField } from './useCvcField';
 import { useExpiryField } from './useExpiryField';
+import { useNumbersField } from './useNumbersField';
 
 export const useCardForm = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const numbersField = useNumbersField({ onComplete: () => advanceStep(1) });
   const expiryField = useExpiryField({ onComplete: () => advanceStep(3) });
   const [cardCompanyId, setCardCompanyId] = useState<CardCompanyId | null>(
     null,
@@ -22,17 +19,13 @@ export const useCardForm = () => {
     onComplete: () => advanceStep(4),
   });
   const [password, setPassword] = useState('');
+
   const [currentStep, setCurrentStep] = useState(0);
 
   const advanceStep = (nextStep: number) => {
     setCurrentStep((prev) => Math.max(prev, nextStep));
   };
 
-  const handleCardNumbersChange = (cardNumbers: string[]) => {
-    setCardNumbers(cardNumbers);
-
-    if (!hasCardNumbersError(cardNumbers)) advanceStep(1);
-  };
   const handleCardCompanyChange = (cardCompanyId: CardCompanyId | null) => {
     setCardCompanyId(cardCompanyId);
 
@@ -46,14 +39,14 @@ export const useCardForm = () => {
   };
 
   const cardPreviewInfo: CardPreviewInfoType = {
-    cardNumbers,
+    cardNumbers: numbersField.cardNumbers,
     expiryMonth: expiryField.expiryMonth,
     expiryYear: expiryField.expiryYear,
     cardCompanyId,
   };
 
   const cardFormInfo: CardFormInfoType = {
-    cardNumbers,
+    cardNumbers: numbersField.cardNumbers,
     expiryMonth: expiryField.expiryMonth,
     expiryYear: expiryField.expiryYear,
     cvcNumber: cvcField.value,
@@ -62,7 +55,7 @@ export const useCardForm = () => {
   };
 
   const cardFormHandlers = {
-    handleCardNumbersChange,
+    handleCardNumbersChange: numbersField.handleNumbersChange,
     handleExpiryMonthChange: expiryField.handleMonthChange,
     handleExpiryYearChange: expiryField.handleYearChange,
     handleCardCompanyChange,
@@ -71,7 +64,7 @@ export const useCardForm = () => {
   };
 
   const hasFormError = hasCardFormError({
-    cardNumbers,
+    cardNumbers: numbersField.cardNumbers,
     expiryMonth: expiryField.expiryMonth,
     expiryYear: expiryField.expiryYear,
     cvcNumber: cvcField.value,
