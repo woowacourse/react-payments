@@ -1,45 +1,53 @@
 import { useState } from 'react';
+import {
+  DEFAULT_CARD_NUMBER_GROUP_LENGTHS,
+  getCardBrand,
+  hasPotentialCardBrand,
+  isValidCardNumber,
+  splitCardNumberByBrand,
+} from '../constants/cardBrands';
 import type { CardError } from '../types/errorTypes';
 import type { CardStatus, CardHandler } from '../types/cardStausTypes';
-import { isNotNumber, setEmptyBrand, setNoExist } from '../utils/util';
+import { isNotNumber } from '../utils/util';
 
 export function useCardNumber(): [CardStatus, CardHandler] {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
+  const [cardNumbers, setCardNumbers] = useState<string[]>(
+    DEFAULT_CARD_NUMBER_GROUP_LENGTHS.map(() => ''),
+  );
   const [cardNumberErrorMode, setCardNumberErrorMode] = useState<CardError | null>(null);
   const [cardBrand, setCardBrand] = useState<CardStatus['cardBrand']>('');
 
   const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = [...cardNumbers];
     next[index] = e.target.value;
+    const cardNumber = next.join('');
 
     if (isNotNumber(Number(e.target.value), 'notNumber', setCardNumberErrorMode)) {
       return;
     }
 
-    setEmptyBrand(next, setCardBrand);
-
-    if (next[0].length === 1) {
-      if (setNoExist(next, 'notExistBrand', setCardNumberErrorMode)) {
-        return;
-      }
-      if (next[0].slice(0, 1) === '4') {
-        setCardBrand('visa');
-      }
+    if (!hasPotentialCardBrand(cardNumber)) {
+      setCardNumberErrorMode('notExistBrand');
+      return;
     }
 
-    if (next[0].length === 2 && next[0].slice(0, 1) !== '4') {
-      if (setNoExist(next, 'notExistBrand', setCardNumberErrorMode)) {
-        return;
-      }
-      setCardBrand('master');
-    }
+    const nextCardBrand = getCardBrand(cardNumber);
 
+    setCardBrand(nextCardBrand);
     setCardNumberErrorMode(null);
-    setCardNumbers(next);
+    setCardNumbers(splitCardNumberByBrand(cardNumber, nextCardBrand));
   };
 
   const handleCardNumbersBlur = () => {
-    if (cardNumbers.join('').length !== 16) {
+    if (cardNumbers.join('').length === 0) {
+      setCardNumberErrorMode('cardNumberCount');
+      return;
+    }
+    if (cardBrand === '') {
+      setCardNumberErrorMode('notExistBrand');
+      return;
+    }
+    if (!isValidCardNumber(cardNumbers, cardBrand)) {
       setCardNumberErrorMode('cardNumberCount');
       return;
     }

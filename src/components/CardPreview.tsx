@@ -58,18 +58,24 @@ export default function CardPreview({
           gap: '10px',
         })}
       >
-        <span css={{ width: '40px', display: 'inline-block', textAlign: 'center' }}>
-          {cardNumbers[0]}
-        </span>
-        <span css={{ width: '40px', display: 'inline-block', textAlign: 'center' }}>
-          {cardNumbers[1]}
-        </span>
-        <span css={{ letterSpacing: '0px', fontSize: '30px', width: '34px' }}>
-          {'·'.repeat(cardNumbers[2].length)}
-        </span>
-        <span css={{ letterSpacing: '0px', fontSize: '30px', width: '34px' }}>
-          {'·'.repeat(cardNumbers[3].length)}
-        </span>
+        {cardNumbers.map((cardNumber, index) => {
+          const visibleCardNumber = index < 2 ? cardNumber : '·'.repeat(cardNumber.length);
+
+          return (
+            <span
+              key={index}
+              css={{
+                display: 'inline-block',
+                fontSize: index < 2 ? '14px' : '30px',
+                letterSpacing: '0px',
+                minWidth: `${Math.max(34, cardNumber.length * 10)}px`,
+                textAlign: 'center',
+              }}
+            >
+              {visibleCardNumber}
+            </span>
+          );
+        })}
       </div>
       {cardExpiryDate[0] !== '' && cardExpiryDate[1] !== '' && (
         <span

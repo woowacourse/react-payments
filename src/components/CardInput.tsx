@@ -3,6 +3,7 @@ import CardNumber from './CardNumber';
 import CardExpiryDate from './CardExpiryDate';
 import CardCompany from './CardCompany';
 import CardPassword from './CardPassword';
+import { isValidCardNumber } from '../constants/cardBrands';
 import type {
   CardHandler,
   CardStatus,
@@ -44,7 +45,7 @@ export default function CardInput({
   hasBottomAction = false,
 }: CardInputProps) {
   const isCardNumberComplete =
-    cardStatus.cardNumbers.every((cardNumber) => cardNumber.length === 4) &&
+    isValidCardNumber(cardStatus.cardNumbers, cardStatus.cardBrand) &&
     cardStatus.cardNumberErrorMode === null;
   const isCardCompanySelected = cardCompanyStatus.cardCompany !== '';
   const isExpiryDateComplete =

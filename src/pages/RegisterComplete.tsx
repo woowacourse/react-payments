@@ -1,5 +1,4 @@
 import registerCheck from '../assets/RegisterCheck.png';
-import { theme } from '../styles/theme';
 
 type RegisterCompleteProps = {
   cardNumberPrefix: string;

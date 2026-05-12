@@ -1,4 +1,5 @@
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
+import { getCardNumberGroupLengths } from '../constants/cardBrands.ts';
 import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
 
 type CardNumbersProps = {
@@ -7,6 +8,8 @@ type CardNumbersProps = {
 };
 
 export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersProps) {
+  const cardNumberGroupLengths = getCardNumberGroupLengths(cardStatus.cardBrand);
+
   return (
     <div css={{ display: 'flex', flexDirection: 'column' }}>
       <div>
@@ -43,23 +46,25 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
           }}
         >
           {cardStatus.cardNumbers.map((cardNumber, index) => {
+            const maxLength = cardNumberGroupLengths[index];
+
             return (
               <input
                 key={index}
                 type="text"
-                placeholder="1234"
-                maxLength={4}
+                placeholder={'0'.repeat(maxLength)}
+                maxLength={maxLength}
                 onChange={setCardStatus.handleCardNumbers(index)}
                 value={cardNumber}
                 onBlur={setCardStatus.handleCardNumbersBlur}
                 inputMode="numeric"
                 css={(theme) => ({
-                  width: '71.25px',
+                  width: `${maxLength * 17.75}px`,
                   height: '32px',
                   borderRadius: '2px',
                   border: `1.01px solid ${theme.colors.inactiveBorder}`,
                   borderColor:
-                    cardNumber.length < 4 && cardStatus.cardNumberErrorMode !== null
+                    cardNumber.length < maxLength && cardStatus.cardNumberErrorMode !== null
                       ? theme.colors.error
                       : theme.colors.inactiveBorder,
                   padding: '8px',

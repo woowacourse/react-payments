@@ -7,7 +7,7 @@ import type {
   PasswordError,
 } from './errorTypes';
 
-export type CardBrand = '' | 'visa' | 'master';
+export type CardBrand = '' | 'visa' | 'master' | 'diners' | 'amex' | 'unionpay';
 
 export type CardCompany =
   | ''
