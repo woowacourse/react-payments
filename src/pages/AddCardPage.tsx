@@ -97,6 +97,7 @@ export default function AddCardPage() {
           {stepIndex >= 0 && (
             <CardNumbersField
               value={values.cardNumbers}
+              cardBrand={cardBrand}
               errorStatus={errors.cardNumbers as ErrorStatus[]}
               setFieldValue={setFieldValue}
               setFieldError={setFieldError}
