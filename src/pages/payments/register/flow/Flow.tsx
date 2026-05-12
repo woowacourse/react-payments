@@ -20,8 +20,9 @@ export const Flow = () => {
   const password = usePassword();
 
   const renderBrandCard = (cardNumbers: string[]) => {
-    const brandCard = Object.entries(BRAND_NUMBER).find(([key, brandNumberList]) => {
-      if (brandNumberList.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return true;
+    const brandCard = Object.entries(BRAND_NUMBER).find(([key, brand]) => {
+      const { startNumber } = brand;
+      if (startNumber.some((brandNumber) => cardNumbers[0].startsWith(brandNumber))) return true;
     });
 
     return brandCard ? brandCard?.[0] : 'default';

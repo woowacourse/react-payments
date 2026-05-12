@@ -7,15 +7,19 @@ const toStringNumbers = (numbers: number[]) => {
 };
 
 export const BRAND_NUMBER = {
-  visa: ['4'],
-  mastercard: toStringNumbers(getRangeNumber(51, 55)),
-  diners: ['36'],
-  amex: ['34', '35'],
-  union: [
-    ...toStringNumbers(getRangeNumber(624, 626)),
-    ...toStringNumbers(getRangeNumber(6282, 6288)),
-    ...toStringNumbers(getRangeNumber(622126, 622925)),
-  ],
+  visa: { startNumber: ['4'], length: 16, lengths: [4, 4, 4, 4] },
+  mastercard: { startNumber: toStringNumbers(getRangeNumber(51, 55)), length: 16, lengths: [4, 4, 4, 4] },
+  diners: { startNumber: ['36'], length: 14, lengths: [4, 6, 4] },
+  amex: { startNumber: ['34', '35'], length: 15, lengths: [4, 6, 5] },
+  union: {
+    startNumber: [
+      ...toStringNumbers(getRangeNumber(624, 626)),
+      ...toStringNumbers(getRangeNumber(6282, 6288)),
+      ...toStringNumbers(getRangeNumber(622126, 622925)),
+    ],
+    length: 16,
+    lengths: [4, 4, 4, 4],
+  },
 };
 
 export const CARD_OPTIONS = [
