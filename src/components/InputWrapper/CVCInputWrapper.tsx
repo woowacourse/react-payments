@@ -21,6 +21,7 @@ export default function CVCInputWrapper({
       <NumberInput
         value={value}
         onChange={(newValue) => {
+          setInputError(null);
           setCVCNumber(newValue);
           onComplete(newValue.length === 3 && inputError === null);
         }}

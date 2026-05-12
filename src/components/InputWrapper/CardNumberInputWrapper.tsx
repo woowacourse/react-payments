@@ -32,6 +32,7 @@ export default function CardNumberInputWrapper({
     cardBrand === "diners" ? 2 : cardBrand === "amex" ? 3 : 4;
 
   const handleOnChange = (cardKey: string) => (newValue: string) => {
+    setError(cardKey as keyof CardNumbers)(null);
     const newCardNumbers = { ...value, [cardKey]: newValue };
     setCardNumber(newCardNumbers);
 
@@ -55,11 +56,13 @@ export default function CardNumberInputWrapper({
     }
   };
 
-  const handleOnBlur = (cardKey: string) => () => {
-    const result = getCardNumberErrorMessage(value, cardBrand);
-    const message = result && result.key === cardKey ? result.message : null;
-    setError(cardKey as keyof CardNumbers)(message);
-  };
+  const handleOnBlur =
+    (cardKey: string) => (e: React.FocusEvent<HTMLInputElement>) => {
+      const currentValues = { ...value, [cardKey]: e.target.value };
+      const result = getCardNumberErrorMessage(currentValues, cardBrand);
+      const message = result && result.key === cardKey ? result.message : null;
+      setError(cardKey as keyof CardNumbers)(message);
+    };
 
   return (
     <InputGroup errorMessage={errorMessage}>

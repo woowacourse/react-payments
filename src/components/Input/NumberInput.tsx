@@ -31,9 +31,8 @@ export default function NumberInput({
       onError("숫자만 입력할 수 있습니다.");
       return;
     }
-
-    onChange(tmpValue);
     onError(null);
+    onChange(tmpValue);
   };
 
   return (

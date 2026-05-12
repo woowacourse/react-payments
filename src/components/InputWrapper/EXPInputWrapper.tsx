@@ -21,6 +21,7 @@ export default function EXPInputWrapper({
   ]);
 
   const handelOnChange = (expKey: string) => (newValue: string) => {
+    setError(expKey as keyof EXPNumber)(null);
     const newEXPNumbers = { ...value, [expKey]: newValue };
     setEXPNumber(newEXPNumbers);
     onComplete(
@@ -28,19 +29,23 @@ export default function EXPInputWrapper({
         Object.values(inputErrors).every((err) => err === null),
     );
 
-    if (expKey === "mm" && newValue.length === 2 && value.yy === "") {
+    if (expKey === "mm" && newValue.length === 2) {
       const result = getEXPNumberErrorMessage({ mm: newValue, yy: value.yy });
       if (result === null || result.key !== "mm") {
-        inputRefs.current["yy"]?.focus();
+        if (value.yy === "") inputRefs.current["yy"]?.focus();
       } else setError("mm")(result?.message);
     }
   };
 
-  const handleOnBlur = (expKey: string) => () => {
-    const result = getEXPNumberErrorMessage(value);
-    const message = result && result.key === expKey ? result.message : null;
-    setError(expKey as keyof EXPNumber)(message);
-  };
+  const handleOnBlur =
+    (expKey: string) => (e: React.FocusEvent<HTMLInputElement>) => {
+      const result = getEXPNumberErrorMessage({
+        ...value,
+        [expKey]: e.target.value,
+      });
+      const message = result && result.key === expKey ? result.message : null;
+      setError(expKey as keyof EXPNumber)(message);
+    };
 
   return (
     <InputGroup errorMessage={errorMessage}>
