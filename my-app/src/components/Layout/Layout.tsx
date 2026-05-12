@@ -10,14 +10,12 @@ const Layout = () => {
         width: 100vw;
         align-items: center;
         justify-content: center;
-        background-color: #f5f5f5;
       `}
     >
       <div
         css={css`
           width: 376px;
           background-color: #ffffff;
-          border-radius: 20px;
           display: flex;
           flex-direction: column;
           align-items: center;

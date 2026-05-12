@@ -115,6 +115,10 @@ function App() {
             display: flex;
             flex-direction: column;
             gap: 16px;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+              display: none;
+            }
           `}
         >
           <form id="card-form" onSubmit={handleSubmit}>
@@ -135,20 +139,21 @@ function App() {
             />
           </form>
         </div>
+        {isValid && (
+          <button
+            form="card-form"
+            css={css`
+              width: calc(100% + 60px);
+              margin-bottom: -30px;
+              background: #333333;
+              color: #f3f3f3;
+              height: 52px;
+            `}
+          >
+            확인
+          </button>
+        )}
       </div>
-      {isValid && (
-        <button
-          form="card-form"
-          css={css`
-            width: 100%;
-            background: #333333;
-            color: #f3f3f3;
-            height: 52px;
-          `}
-        >
-          확인
-        </button>
-      )}
     </>
   );
 }
