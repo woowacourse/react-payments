@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { hasCardFormError, validatePassword } from '../utils/cardFormValidator';
-import type { CardCompanyId } from '../../../common/types/CardPreview';
 import type {
   CardFormInfoType,
   CardPreviewInfoType,
@@ -8,53 +6,48 @@ import type {
 import { useCvcField, type CvcFieldType } from './useCvcField';
 import { useExpiryField, type ExpiryFieldType } from './useExpiryField';
 import { useNumbersField, type NumbersFieldType } from './useNumbersField';
+import { usePasswordField, type PasswordFieldType } from './usePasswordField';
+import {
+  UseCardCompanyField,
+  type CardCompanyFieldType,
+} from './useCardCompanyField';
+import { hasCardFormError } from '../utils/cardFormValidator';
 
 export type CardFormFieldsType = {
   numbers: NumbersFieldType;
   expiry: ExpiryFieldType;
   cvc: CvcFieldType;
+  password: PasswordFieldType;
+  cardCompany: CardCompanyFieldType;
 };
 
 export const useCardForm = () => {
   const numbersField = useNumbersField({ onComplete: () => advanceStep(1) });
-  const expiryField = useExpiryField({ onComplete: () => advanceStep(3) });
-  const [cardCompanyId, setCardCompanyId] = useState<CardCompanyId | null>(
-    null,
-  );
-  const cvcField = useCvcField({
-    onComplete: () => advanceStep(4),
+  const cardCompanyField = UseCardCompanyField({
+    onComplete: () => advanceStep(2),
   });
-  const [password, setPassword] = useState('');
+  const expiryField = useExpiryField({ onComplete: () => advanceStep(3) });
+  const cvcField = useCvcField({ onComplete: () => advanceStep(4) });
+  const passwordField = usePasswordField({ onComplete: () => advanceStep(5) });
 
   const [currentStep, setCurrentStep] = useState(0);
-
   const advanceStep = (nextStep: number) => {
     setCurrentStep((prev) => Math.max(prev, nextStep));
-  };
-
-  const handleCardCompanyChange = (cardCompanyId: CardCompanyId | null) => {
-    setCardCompanyId(cardCompanyId);
-
-    if (cardCompanyId !== null) advanceStep(2);
-  };
-
-  const handlePasswordNumberChange = (password: string) => {
-    setPassword(password);
-
-    if (validatePassword(password) === null) advanceStep(5);
   };
 
   const fields = {
     numbers: numbersField,
     expiry: expiryField,
     cvc: cvcField,
+    password: passwordField,
+    cardCompany: cardCompanyField,
   };
 
   const cardPreviewInfo: CardPreviewInfoType = {
     cardNumbers: numbersField.cardNumbers,
     expiryMonth: expiryField.expiryMonth,
     expiryYear: expiryField.expiryYear,
-    cardCompanyId,
+    cardCompanyId: cardCompanyField.cardCompanyId,
   };
 
   const cardFormInfo: CardFormInfoType = {
@@ -62,17 +55,17 @@ export const useCardForm = () => {
     expiryMonth: expiryField.expiryMonth,
     expiryYear: expiryField.expiryYear,
     cvcNumber: cvcField.value,
-    cardCompanyId,
-    password,
+    cardCompanyId: cardCompanyField.cardCompanyId,
+    password: passwordField.password,
   };
 
   const cardFormHandlers = {
     handleCardNumbersChange: numbersField.handleNumbersChange,
     handleExpiryMonthChange: expiryField.handleMonthChange,
     handleExpiryYearChange: expiryField.handleYearChange,
-    handleCardCompanyChange,
+    handleCardCompanyChange: cardCompanyField.handleChange,
     handleCvcNumberChange: cvcField.handleChange,
-    handlePasswordNumberChange,
+    handlePasswordNumberChange: passwordField.handleChange,
   };
 
   const hasFormError = hasCardFormError({
@@ -80,7 +73,7 @@ export const useCardForm = () => {
     expiryMonth: expiryField.expiryMonth,
     expiryYear: expiryField.expiryYear,
     cvcNumber: cvcField.value,
-    password,
+    password: passwordField.password,
   });
 
   return {

@@ -1,29 +1,23 @@
 import Select from 'react-select';
 import styled from 'styled-components';
-import { CARD_COMPANIES } from '../../constant/CARD_BRANDS';
-import type { CardCompanyId } from '../../../../common/types/CardPreview';
+import type { CardCompanyFieldType } from '../../hooks/useCardCompanyField';
 
 const SelectCardBrandField = ({
   autoFocus = false,
-  handleCardCompanyChange,
+  field,
 }: {
   autoFocus?: boolean;
-  handleCardCompanyChange: (cardCompanyId: CardCompanyId | null) => void;
+  field: CardCompanyFieldType;
 }) => {
-  const cardCompanyOptions = CARD_COMPANIES.map((cardCompany) => ({
-    value: cardCompany.id,
-    label: cardCompany.name,
-  }));
-
   return (
     <StyledField>
       <InputWrapper>
         <Select
           autoFocus={autoFocus}
-          options={cardCompanyOptions}
+          options={field.cardCompanyOptions}
           placeholder="카드사를 선택해주세요"
           onChange={(selectedOption) => {
-            handleCardCompanyChange(selectedOption?.value ?? null);
+            field.handleChange(selectedOption.value ?? null);
           }}
           styles={{
             control: (base, state) => ({

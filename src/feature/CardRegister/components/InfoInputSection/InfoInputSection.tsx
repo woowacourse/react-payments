@@ -27,10 +27,6 @@ const InfoInputSection = ({
   hasFormError: boolean;
   onRegisterComplete: (cardFormInfo: CardFormInfoType) => void;
 }) => {
-  const { password } = cardFormInfo;
-  const { handleCardCompanyChange, handlePasswordNumberChange } =
-    cardFormHandlers;
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onRegisterComplete(cardFormInfo);
@@ -44,11 +40,7 @@ const InfoInputSection = ({
             title="비밀번호를 입력해 주세요"
             description="앞의 2자리를 입력해주세요."
           >
-            <PasswordField
-              autoFocus
-              password={password}
-              handlePasswordNumberChange={handlePasswordNumberChange}
-            />
+            <PasswordField autoFocus field={fields.password} />
           </FieldSection>
         )}
         {currentStep >= 3 && (
@@ -69,10 +61,7 @@ const InfoInputSection = ({
             title="카드사를 선택해 주세요"
             description="현재 국내 카드사만 가능합니다."
           >
-            <SelectCardBrandField
-              autoFocus
-              handleCardCompanyChange={handleCardCompanyChange}
-            />
+            <SelectCardBrandField autoFocus field={fields.cardCompany} />
           </FieldSection>
         )}
         <FieldSection

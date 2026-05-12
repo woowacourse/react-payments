@@ -1,57 +1,32 @@
 import Label from '../../../../common/components/Label';
 import Input from '../../../../common/components/Input';
 import styled from 'styled-components';
-import useFieldValidation from '../../../../common/hooks/useFieldValidation';
-import { isWithinMaxLength, isNumeric } from '../../utils/validator';
-import {
-  PASSWORD_LENGTH,
-  validatePassword,
-} from '../../utils/cardFormValidator';
+import type { PasswordFieldType } from '../../hooks/usePasswordField';
 
 const PasswordField = ({
   autoFocus = false,
-  password,
-  handlePasswordNumberChange,
+  field,
 }: {
   autoFocus?: boolean;
-  password: string;
-  handlePasswordNumberChange: (value: string) => void;
+  field: PasswordFieldType;
 }) => {
-  const { firstErrorIndex, errorMessage, touch } = useFieldValidation({
-    values: [password],
-    validate: validatePassword,
-  });
-
-  const handlePasswordChange = (eValue: string) => {
-    const value = eValue.trim();
-
-    if (!isNumeric(value)) return;
-    if (!isWithinMaxLength(value, PASSWORD_LENGTH)) return;
-
-    handlePasswordNumberChange(value);
-  };
-
-  const handlePasswordBlur = (index: number) => {
-    touch(index);
-  };
-
   return (
     <StyledField>
       <Label value="비밀번호 앞 2자리" />
       <InputWrapper>
         <PasswordInput
           type="password"
-          value={password}
+          value={field.password}
           autoFocus={autoFocus}
           maxLength={2}
           inputMode="numeric"
           placeholder="**"
-          strokeMode={0 === firstErrorIndex ? 'error' : 'default'}
-          onChange={(e) => handlePasswordChange(e.target.value)}
-          onBlur={() => handlePasswordBlur(0)}
+          strokeMode={field.hasError ? 'error' : 'default'}
+          onChange={(e) => field.handleChange(e.target.value)}
+          onBlur={() => field.handleBlur()}
         />
       </InputWrapper>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      <ErrorMessage>{field.errorMessage}</ErrorMessage>
     </StyledField>
   );
 };
