@@ -2,18 +2,20 @@ import styled from "@emotion/styled";
 interface Props {
   onClick: () => void;
 }
+
 export default function CheckBtn({ onClick }: Props) {
   return (
-    <BTNDIV>
-      <BTN onClick={onClick}>확인</BTN>
-    </BTNDIV>
+    <ButtonWrapper>
+      <Button onClick={onClick}>확인</Button>
+    </ButtonWrapper>
   );
 }
 
-const BTNDIV = styled.div`
+const ButtonWrapper = styled.div`
   width: 100%;
 `;
-const BTN = styled.button`
+
+const Button = styled.button`
   bottom: 0;
   left: 50%;
   width: 100%;
