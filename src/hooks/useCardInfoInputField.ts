@@ -3,7 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 interface UseCardInfoInputFieldProps {
     validator: (values: string[]) => string | null;
     fieldCount: number;
-    isFilled: (value: string) => boolean;
+    isFilled: (value: string, index: number) => boolean;
 }
 
 export const useCardInfoInputField = ({ validator, fieldCount, isFilled }: UseCardInfoInputFieldProps) => {
@@ -23,7 +23,8 @@ export const useCardInfoInputField = ({ validator, fieldCount, isFilled }: UseCa
 
     const setValueByIndex = (index: number) => (value: string) => {
         setValues((prev) => prev.with(index, value));
-        if (isFilled(value) && index < fieldCount - 1) {
+        if (isFilled(value, index) && refs.current[index + 1]) {
+            // 다음 항목이 있으면 다음 항목에 focus
             refs.current[index + 1]?.focus();
         }
     };
