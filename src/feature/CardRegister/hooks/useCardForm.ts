@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   hasCardNumbersError,
   hasCardFormError,
-  validateCvcNumber,
   validateExpiryMonth,
   validateExpiryYear,
   validatePassword,
@@ -12,6 +11,7 @@ import type {
   CardFormInfoType,
   CardPreviewInfoType,
 } from '../../../common/types/CardPreviewInfoType';
+import { useCvcField } from './useCvcField';
 
 export const useCardForm = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -20,7 +20,9 @@ export const useCardForm = () => {
   const [cardCompanyId, setCardCompanyId] = useState<CardCompanyId | null>(
     null,
   );
-  const [cvcNumber, setCvcNumber] = useState('');
+  const cvcField = useCvcField({
+    onComplete: () => advanceStep(4),
+  });
   const [password, setPassword] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -58,11 +60,7 @@ export const useCardForm = () => {
       advanceStep(3);
     }
   };
-  const handleCvcNumberChange = (cvcNumber: string) => {
-    setCvcNumber(cvcNumber);
 
-    if (validateCvcNumber(cvcNumber) === null) advanceStep(4);
-  };
   const handlePasswordNumberChange = (password: string) => {
     setPassword(password);
 
@@ -80,7 +78,7 @@ export const useCardForm = () => {
     cardNumbers,
     expiryMonth,
     expiryYear,
-    cvcNumber,
+    cvcNumber: cvcField.value,
     cardCompanyId,
     password,
   };
@@ -90,7 +88,7 @@ export const useCardForm = () => {
     handleExpiryMonthChange,
     handleExpiryYearChange,
     handleCardCompanyChange,
-    handleCvcNumberChange,
+    handleCvcNumberChange: cvcField.handleChange,
     handlePasswordNumberChange,
   };
 
@@ -98,7 +96,7 @@ export const useCardForm = () => {
     cardNumbers,
     expiryMonth,
     expiryYear,
-    cvcNumber,
+    cvcNumber: cvcField.value,
     password,
   });
 
