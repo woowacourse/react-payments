@@ -40,36 +40,57 @@ export default function RegisterCard() {
   return (
     <div
       css={(theme) => ({
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '45px',
+        position: 'relative',
         backgroundColor: theme.colors.white,
         width: '376px',
         height: '100vh',
         margin: '0 auto',
+        boxSizing: 'border-box',
+        overflow: 'hidden',
       })}
     >
-      <CardPreview
-        cardNumbers={cardStatus.cardNumbers}
-        cardExpiryDate={cardExpiry.cardExpiryDate}
-        cardBrand={cardStatus.cardBrand}
-        cardCompany={cardCompanyStatus.cardCompany}
-      />
-      <CardInput
-        cardStatus={cardStatus}
-        setCardStatus={setCardStatus}
-        cardExpiry={cardExpiry}
-        setCardExpiry={setCardExpiry}
-        cardCvc={cardCvc}
-        setCardCvc={setCardCvc}
-        cardPassword={cardPassword}
-        setCardPassword={setCardPassword}
-        cardCompanyStatus={cardCompanyStatus}
-        setCardCompany={setCardCompany}
-        hasBottomAction={isPasswordComplete}
-      />
+      <div
+        css={{
+          position: 'fixed',
+          top: '98px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 1,
+        }}
+      >
+        <CardPreview
+          cardNumbers={cardStatus.cardNumbers}
+          cardExpiryDate={cardExpiry.cardExpiryDate}
+          cardBrand={cardStatus.cardBrand}
+          cardCompany={cardCompanyStatus.cardCompany}
+        />
+      </div>
+      <div
+        css={{
+          position: 'absolute',
+          top: '296px',
+          bottom: isPasswordComplete ? '48px' : 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '315px',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+        }}
+      >
+        <CardInput
+          cardStatus={cardStatus}
+          setCardStatus={setCardStatus}
+          cardExpiry={cardExpiry}
+          setCardExpiry={setCardExpiry}
+          cardCvc={cardCvc}
+          setCardCvc={setCardCvc}
+          cardPassword={cardPassword}
+          setCardPassword={setCardPassword}
+          cardCompanyStatus={cardCompanyStatus}
+          setCardCompany={setCardCompany}
+          hasBottomAction={isPasswordComplete}
+        />
+      </div>
       {isPasswordComplete && (
         <button
           type="button"
