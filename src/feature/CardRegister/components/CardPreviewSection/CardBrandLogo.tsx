@@ -5,7 +5,11 @@ import { getCardBrandImage } from '../../utils/cardDisplay';
 const CardBrandLogo = ({ brandName }: { brandName: CardBrandName | null }) => {
   if (brandName === null) return null;
 
-  return <BrandLogoImg src={getCardBrandImage(brandName)} alt={brandName} />;
+  const brandImage = getCardBrandImage(brandName);
+
+  if (brandImage === null) return null;
+
+  return <BrandLogoImg src={brandImage} alt={brandName} />;
 };
 
 const BrandLogoImg = styled.img`
