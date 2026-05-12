@@ -1,18 +1,7 @@
+import { BRAND_SELECT_OPTIONS } from '../../constants/BRAND_SELECT_OPTIONS';
+import type { CardBrandValue } from '../../hooks/useCardInfoValue';
 import CardBrandSelect from '../Select/CardBrandSelect';
 import CardInputWrapper from './CardInputWrapper';
-
-export type CardBrandValue = 'BC' | 'SHINHAN' | 'KAKAO' | 'HYUNDAI' | 'WOORI' | 'LOTTE' | 'HANA' | 'KB' | '';
-
-const BRAND_SELECT_OPTIONS = [
-    { value: 'BC', label: 'BC카드' },
-    { value: 'SHINHAN', label: '신한카드' },
-    { value: 'KAKAO', label: '카카오뱅크' },
-    { value: 'HYUNDAI', label: '현대카드' },
-    { value: 'WOORI', label: '우리카드' },
-    { value: 'LOTTE', label: '롯데카드' },
-    { value: 'HANA', label: '하나카드' },
-    { value: 'KB', label: '국민카드' },
-];
 
 interface CardBrandInputWrapperProps {
     selectedValue?: string;

@@ -11,13 +11,13 @@ import CVCInputWrapper from './components/InputWrapper/CVCInputWrapper';
 import { useCardInfoInputField } from './hooks/useCardInfoInputField';
 import PasswordInputWrapper from './components/InputWrapper/PasswordInputWrapper';
 import CardBrandInputWrapper from './components/InputWrapper/CardBrandInputWrapper';
-import type { CardBrandValue } from './hooks/useCardInfoValue';
 import { getPasswordErrorMessage } from './utils/getPasswordErrorMessage';
 import { getCardNumberMaxLengths } from './utils/getCardNumberMaxLengths';
 import { isEachCardNumber } from './utils/isEachCardNumber';
 import { isCVCInputFilled } from './utils/isCVCInputFilled';
 import { isPasswordInputFilled } from './utils/isPasswordInputFilled';
 import { isEXPNumber } from './utils/isEXPNumber';
+import type { CardBrandValue } from './types/CardBrandValue';
 
 function App() {
     const {
@@ -88,7 +88,7 @@ function App() {
 
     return (
         <MainContainer>
-            <CardPreview cardNumbers={cardNumberValues} EXP={expValues} />
+            <CardPreview cardNumbers={cardNumberValues} EXP={expValues} cardIssuer={cardBrand} />
             <InputSectionContainer>
                 <CardInfoSection
                     title="비밀번호"

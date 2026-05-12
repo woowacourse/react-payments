@@ -9,26 +9,29 @@ import Visa from '../../../public/Visa.svg';
 import AmericanExpress from '../../../public/American Express.svg';
 import DinersClub from '../../../public/Diners Club.svg';
 import UnionPay from '../../../public/China UnionPay.svg';
+import { CARD_ISSUER_COLOR } from '../../constants/CARD_ISSUER_COLOR';
+import type { CardBrandValue } from '../../types/CardBrandValue';
 
 interface CardPreviewProps {
     cardNumbers: string[];
     EXP: string[];
+    cardIssuer?: CardBrandValue;
 }
 
-export default function CardPreview({ cardNumbers, EXP }: CardPreviewProps) {
+export default function CardPreview({ cardNumbers, EXP, cardIssuer }: CardPreviewProps) {
     const firstGroup = cardNumbers[0];
 
     return (
-        <CardPreviewStyle>
+        <CardPreviewStyle backgroundColor={CARD_ISSUER_COLOR[cardIssuer ?? '']}>
             <YellowBlock />
-            <CardBrandPosition>
+            <CardInternationalBrandPosition>
                 {/* TODO getCardBrand 형식으로 리팩터링 */}
                 {isMasterCardNumber(firstGroup) && <CardBrandImage src={Mastercard} />}
                 {isVisaCardNumber(firstGroup) && <CardBrandImage src={Visa} />}
                 {isAMEXCardNumber(firstGroup) && <CardBrandImage src={AmericanExpress} />}
                 {isDinersCardNumber(firstGroup) && <CardBrandImage src={DinersClub} />}
                 {isUnionPayCardNumber(firstGroup + cardNumbers[1]) && <CardBrandImage src={UnionPay} />}
-            </CardBrandPosition>
+            </CardInternationalBrandPosition>
             <CardNumberPosition>
                 {cardNumbers.map((number, index) =>
                     index > 1 ? (
@@ -50,12 +53,12 @@ export default function CardPreview({ cardNumbers, EXP }: CardPreviewProps) {
     );
 }
 
-const CardPreviewStyle = styled.div`
+const CardPreviewStyle = styled.div<{ backgroundColor: string }>`
     width: 212px;
     height: 132px;
     position: relative;
     border-radius: 4px;
-    background-color: #333333;
+    background-color: ${({ backgroundColor }) => backgroundColor};
     box-shadow: 3px 3px 5px 0px #00000040;
 `;
 
@@ -70,7 +73,7 @@ const YellowBlock = styled.div`
     border-radius: 4px;
 `;
 
-const CardBrandPosition = styled.div`
+const CardInternationalBrandPosition = styled.div`
     position: absolute;
     top: 8px;
     left: 164px;

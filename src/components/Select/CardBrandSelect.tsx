@@ -24,7 +24,7 @@ export default function CardBrandSelect({
     return (
         <CardBrandSelectContainer>
             <CardBrandSelectStyle value={selectedValue} onClick={() => setIsOpen((prev) => !prev)}>
-                {selectedValue ? selectedValue : placeholder}
+                {selectedValue ? options.find((o) => o.value === selectedValue)?.label : placeholder}
                 <ArrowImage src={arrow} />
             </CardBrandSelectStyle>
             {isOpen && (
@@ -32,7 +32,7 @@ export default function CardBrandSelect({
                     {options.map((option) => (
                         <BrandOptionElement
                             onClick={() => {
-                                setSelectedValue(option.label);
+                                setSelectedValue(option.value);
                                 setIsOpen(false);
                             }}
                             value={option.value}
@@ -60,7 +60,6 @@ const CardBrandSelectStyle = styled.button`
     box-sizing: border-box;
     padding: 8px;
     background-color: white;
-    color: #acacac;
     font-weight: 400;
     font-size: 10.63px;
     display: flex;
