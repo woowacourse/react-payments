@@ -78,7 +78,11 @@ export const Form = () => {
           />
           {step >= 0 && (
             <FormGroup title="결제할 카드 번호를 입력해 주세요" subTitle="본인 명의의 카드만 결제 가능합니다.">
-              <Field label="카드 번호" errorMessage={cardNumbers.renderErrorMessage()}>
+              <Field
+                label="카드 번호"
+                errorMessage={cardNumbers.renderErrorMessage()}
+                style={{ justifyContent: 'flex-start' }}
+              >
                 {Object.values(cardNumbers.values).map((value, index, array) => (
                   <Input
                     ref={cardNumbers.ref}
@@ -87,6 +91,11 @@ export const Form = () => {
                     key={index}
                     value={value as string}
                     maxLength={array.length - 1 !== index ? 4 : (branchNumberCard?.length || 16) % 4 || 4}
+                    style={{
+                      flex: '0 0 auto',
+                      flexWrap: 'wrap',
+                      width: `calc(${((array.length - 1 !== index ? 4 : (branchNumberCard?.length || 16) % 4 || 4) * 25) / 4}% - 10px)`,
+                    }}
                     placeholder="1234"
                     isError={cardNumbers.renderErrorInput(String(index))}
                     onChange={cardNumbers.onChange}
