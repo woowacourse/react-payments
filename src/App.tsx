@@ -18,6 +18,7 @@ import { isCVCInputFilled } from './utils/isCVCInputFilled';
 import { isPasswordInputFilled } from './utils/isPasswordInputFilled';
 import { isEXPNumber } from './utils/isEXPNumber';
 import type { CardBrandValue } from './types/CardBrandValue';
+import ConfirmButton from './components/ConfirmButton';
 
 function App() {
     const {
@@ -76,6 +77,7 @@ function App() {
         hasTouched: hasPasswordTouched,
         handleBlur: handlePasswordBlur,
         handleFocus: handlePasswordFocus,
+        isSatisfy: isPasswordSatisfy,
         getRef: getPasswordRef,
         focusFirst: focusFirstPassword,
     } = useCardInfoInputField({
@@ -87,88 +89,98 @@ function App() {
     const isCardBrandSatisfy = !!cardBrand;
 
     return (
-        <MainContainer>
-            <CardPreview cardNumbers={cardNumberValues} EXP={expValues} cardIssuer={cardBrand} />
-            <InputSectionContainer>
-                <CardInfoSection
-                    title="비밀번호"
-                    caption="앞의 2자리를 입력해 주세요"
-                    inputLabel="비밀번호 앞 2자리"
-                    isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy}
-                >
-                    <PasswordInputWrapper
-                        setPassword={setPasswordValueByIndex(0)}
-                        value={passwordValues[0]}
-                        handleBlur={handlePasswordBlur}
-                        handleFocus={handlePasswordFocus}
-                        errorMessage={passwordErrorMessage}
-                        setErrorMessage={setPasswordErrorMessage}
-                        hasTouched={hasPasswordTouched}
-                        getRef={getPasswordRef}
-                        focusFirst={focusFirstPassword}
-                    />
-                </CardInfoSection>
-                <CardInfoSection
-                    title="CVC 번호를 입력해 주세요"
-                    inputLabel="CVC"
-                    isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy}
-                >
-                    <CVCInputWrapper
-                        setCVCNumber={setCVCValueByIndex(0)}
-                        value={cvcValues[0]}
-                        handleBlur={handleCVCBlur}
-                        handleFocus={handleCVCFocus}
-                        errorMessage={cvcErrorMessage}
-                        setErrorMessage={setCVCErrorMessage}
-                        hasTouched={hasCVCTouched}
-                        getRef={getCVCRef}
-                        focusFirst={focusFirstCVC}
-                    />
-                </CardInfoSection>
-                <CardInfoSection
-                    title="카드 유효기간을 입력해 주세요"
-                    caption="월/년도(MMYY)를 순서대로 입력해 주세요"
-                    inputLabel="유효기간"
-                    isRender={isCardNumberSatisfy && isCardBrandSatisfy}
-                >
-                    <EXPInputWrapper
-                        setEXPNumber={setExpValueByIndex}
-                        value={expValues}
-                        handleBlur={handleExpBlur}
-                        handleFocus={handleExpFocus}
-                        errorMessage={expErrorMessage}
-                        setErrorMessage={setExpErrorMessage}
-                        hasTouched={hasExpTouched}
-                        getRef={getExpRef}
-                        focusFirst={focusFirstExp}
-                    />
-                </CardInfoSection>
-                <CardInfoSection
-                    title="카드사를 선택해 주세요"
-                    caption="현재 국내 카드사만 가능합니다."
-                    isRender={isCardNumberSatisfy}
-                >
-                    <CardBrandInputWrapper selectedValue={cardBrand} setSelectedValue={setCardBrand} />
-                </CardInfoSection>
-                <CardInfoSection
-                    title="결제할 카드 번호를 입력해 주세요"
-                    caption="본인 명의의 카드만 결제 가능합니다."
-                    inputLabel="카드 번호"
-                >
-                    <CardNumberInputWrapper
-                        setCardNumber={setCardNumberValueByIndex}
-                        value={cardNumberValues}
-                        handleBlur={handleCardNumberBlur}
-                        handleFocus={handleCardNumberFocus}
-                        errorMessage={cardNumberErrorMessage}
-                        setErrorMessage={setCardNumberErrorMessage}
-                        hasTouched={hasCardNumberTouched}
-                        getRef={getCardNumberRef}
-                        maxLengths={getCardNumberMaxLengths(cardNumberValues[0])}
-                    />
-                </CardInfoSection>
-            </InputSectionContainer>
-        </MainContainer>
+        <>
+            <MainContainer>
+                <CardPreview cardNumbers={cardNumberValues} EXP={expValues} cardIssuer={cardBrand} />
+                <InputSectionContainer>
+                    <CardInfoSection
+                        title="비밀번호"
+                        caption="앞의 2자리를 입력해 주세요"
+                        inputLabel="비밀번호 앞 2자리"
+                        isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy}
+                    >
+                        <PasswordInputWrapper
+                            setPassword={setPasswordValueByIndex(0)}
+                            value={passwordValues[0]}
+                            handleBlur={handlePasswordBlur}
+                            handleFocus={handlePasswordFocus}
+                            errorMessage={passwordErrorMessage}
+                            setErrorMessage={setPasswordErrorMessage}
+                            hasTouched={hasPasswordTouched}
+                            getRef={getPasswordRef}
+                            focusFirst={focusFirstPassword}
+                        />
+                    </CardInfoSection>
+                    <CardInfoSection
+                        title="CVC 번호를 입력해 주세요"
+                        inputLabel="CVC"
+                        isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy}
+                    >
+                        <CVCInputWrapper
+                            setCVCNumber={setCVCValueByIndex(0)}
+                            value={cvcValues[0]}
+                            handleBlur={handleCVCBlur}
+                            handleFocus={handleCVCFocus}
+                            errorMessage={cvcErrorMessage}
+                            setErrorMessage={setCVCErrorMessage}
+                            hasTouched={hasCVCTouched}
+                            getRef={getCVCRef}
+                            focusFirst={focusFirstCVC}
+                        />
+                    </CardInfoSection>
+                    <CardInfoSection
+                        title="카드 유효기간을 입력해 주세요"
+                        caption="월/년도(MMYY)를 순서대로 입력해 주세요"
+                        inputLabel="유효기간"
+                        isRender={isCardNumberSatisfy && isCardBrandSatisfy}
+                    >
+                        <EXPInputWrapper
+                            setEXPNumber={setExpValueByIndex}
+                            value={expValues}
+                            handleBlur={handleExpBlur}
+                            handleFocus={handleExpFocus}
+                            errorMessage={expErrorMessage}
+                            setErrorMessage={setExpErrorMessage}
+                            hasTouched={hasExpTouched}
+                            getRef={getExpRef}
+                            focusFirst={focusFirstExp}
+                        />
+                    </CardInfoSection>
+                    <CardInfoSection
+                        title="카드사를 선택해 주세요"
+                        caption="현재 국내 카드사만 가능합니다."
+                        isRender={isCardNumberSatisfy}
+                    >
+                        <CardBrandInputWrapper selectedValue={cardBrand} setSelectedValue={setCardBrand} />
+                    </CardInfoSection>
+                    <CardInfoSection
+                        title="결제할 카드 번호를 입력해 주세요"
+                        caption="본인 명의의 카드만 결제 가능합니다."
+                        inputLabel="카드 번호"
+                    >
+                        <CardNumberInputWrapper
+                            setCardNumber={setCardNumberValueByIndex}
+                            value={cardNumberValues}
+                            handleBlur={handleCardNumberBlur}
+                            handleFocus={handleCardNumberFocus}
+                            errorMessage={cardNumberErrorMessage}
+                            setErrorMessage={setCardNumberErrorMessage}
+                            hasTouched={hasCardNumberTouched}
+                            getRef={getCardNumberRef}
+                            maxLengths={getCardNumberMaxLengths(cardNumberValues[0])}
+                        />
+                    </CardInfoSection>
+                    {isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy && isPasswordSatisfy && (
+                        <ConfirmButtonSpacer />
+                    )}
+                </InputSectionContainer>
+                {isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy && isPasswordSatisfy && (
+                    <ConfirmButtonContainer>
+                        <ConfirmButton to="dd" purpose="submit" />
+                    </ConfirmButtonContainer>
+                )}
+            </MainContainer>
+        </>
     );
 }
 
@@ -178,16 +190,31 @@ const InputSectionContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow-y: auto;
+    max-height: 60vh;
+`;
+
+const ConfirmButtonSpacer = styled.div`
+    height: 44px;
+    flex-shrink: 0;
 `;
 
 const MainContainer = styled.main`
     position: fixed;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 45px;
-    top: 50%;
+    top: 77px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+    width: 375px;
+`;
+
+const ConfirmButtonContainer = styled.div`
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 375px;
 `;
