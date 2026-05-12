@@ -59,18 +59,19 @@ const useCardForm = () => {
     setCardInfo((prev) => ({ ...prev, password }));
   };
 
-  const isComplete =
+  const isNumbersValid =
     fieldConfig.every((len, i) => cardInfo.numbers[i]?.length === len) &&
-    cardInfo.company !== "" &&
-    cardInfo.expiry.every((e) => e.length === 2) &&
-    cardInfo.cvc.length === 3 &&
-    cardInfo.password.length === 2;
+    validateCardNumber(cardInfo.numbers).errorIndex === -1;
 
-  const isValid =
-    isComplete &&
-    validateCardNumber(cardInfo.numbers).errorIndex === -1 &&
-    validateExpiryDate(cardInfo.expiry).errorIndex === -1 &&
-    validateCvc(cardInfo.cvc).errorIndex === -1;
+  const isExpiryValid =
+    cardInfo.expiry.every((e) => e.length === 2) && validateExpiryDate(cardInfo.expiry).errorIndex === -1;
+
+  const isCvcValid = cardInfo.cvc.length === 3 && validateCvc(cardInfo.cvc).errorIndex === -1;
+
+  const isCompanyValid = cardInfo.company !== "";
+  const isPasswordValid = cardInfo.password.length === 2;
+
+  const isValid = isNumbersValid && isCompanyValid && isExpiryValid && isCvcValid && isPasswordValid;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
