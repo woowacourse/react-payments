@@ -25,6 +25,15 @@ const useFocus = () => {
     }
   }, []);
 
+  const setPreviousFocus = useCallback(() => {
+    const currentIndex = inputRefs.current.findIndex(
+      (el) => el === document.activeElement,
+    );
+    if (currentIndex > 0) {
+      inputRefs.current[currentIndex - 1]?.focus();
+    }
+  }, []);
+
   return {
     getCurrentFocusRef: () => {
       const currentIndex = inputRefs.current.findIndex(
@@ -35,6 +44,7 @@ const useFocus = () => {
     registerInputRef,
     setFocus,
     setNextFocus,
+    setPreviousFocus,
   };
 };
 
