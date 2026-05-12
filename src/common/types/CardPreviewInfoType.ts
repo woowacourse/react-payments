@@ -17,7 +17,7 @@ export type CardFormInfoType = {
 };
 
 export type CardFormHandlersType = {
-  handleCardNumbersChange: (cardNumbers: string[]) => void;
+  handleCardNumbersChange: (index: number, value: string) => void;
   handleExpiryMonthChange: (expiryMonth: string) => void;
   handleExpiryYearChange: (expiryYear: string) => void;
   handleCardCompanyChange: (cardCompanyId: CardCompanyId | null) => void;
