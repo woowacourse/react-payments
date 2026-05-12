@@ -1,8 +1,14 @@
 import styled from '@emotion/styled';
 import { isMasterCardNumber } from '../../utils/isMasterCardNumber';
 import { isVisaCardNumber } from '../../utils/isVisaCardNumber';
+import { isAMEXCardNumber } from '../../utils/isAMEXCardNumber';
+import { isDinersCardNumber } from '../../utils/isDinersCardNumber';
+import { isUnionPayCardNumber } from '../../utils/isUnionPayCardNumber';
 import Mastercard from '../../../public/Mastercard.svg';
 import Visa from '../../../public/Visa.svg';
+import AmericanExpress from '../../../public/American Express.svg';
+import DinersClub from '../../../public/Diners Club.svg';
+import UnionPay from '../../../public/China UnionPay.svg';
 
 interface CardPreviewProps {
     cardNumbers: string[];
@@ -10,12 +16,18 @@ interface CardPreviewProps {
 }
 
 export default function CardPreview({ cardNumbers, EXP }: CardPreviewProps) {
+    const firstGroup = cardNumbers[0];
+
     return (
         <CardPreviewStyle>
             <YellowBlock />
             <CardBrandPosition>
-                {isMasterCardNumber(cardNumbers) && <CardBrandImage src={Mastercard} />}
-                {isVisaCardNumber(cardNumbers) && <CardBrandImage src={Visa} />}
+                {/* TODO getCardBrand 형식으로 리팩터링 */}
+                {isMasterCardNumber(firstGroup) && <CardBrandImage src={Mastercard} />}
+                {isVisaCardNumber(firstGroup) && <CardBrandImage src={Visa} />}
+                {isAMEXCardNumber(firstGroup) && <CardBrandImage src={AmericanExpress} />}
+                {isDinersCardNumber(firstGroup) && <CardBrandImage src={DinersClub} />}
+                {isUnionPayCardNumber(firstGroup + cardNumbers[1]) && <CardBrandImage src={UnionPay} />}
             </CardBrandPosition>
             <CardNumberPosition>
                 {cardNumbers.map((number, index) =>
