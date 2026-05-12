@@ -1,91 +1,26 @@
 import { css } from "@emotion/react";
-import type { CardInfo } from "./types.ts";
-import { useState } from "react";
 import Card from "./components/Card/Card";
 import CardNumberInputSection from "./components/CardNumberInputSection/CardNumberInputSection.tsx";
 import CardCompanySelectSection from "./components/CardCompanySelectSection/CardCompanySelectSection.tsx";
 import ExpiryDateInputSection from "./components/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
 import CvcInputSection from "./components/CvcInputSection/CvcInputSection.tsx";
 import PasswordInputSection from "./components/PasswordInputSection/PasswordInputSectino.tsx";
-import { decideBrandName, getFieldConfig } from "./utils/decideCardInfo.ts";
-import { validateCardNumber, validateExpiryDate, validateCvc } from "./utils/validators.ts";
-import { useNavigate } from "react-router-dom";
+import useCardForm from "./hooks/useCardForm.ts";
 
 function App() {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({
-    numbers: ["", "", "", ""],
-    expiry: ["", ""],
-    cvc: "",
-    company: "",
-    password: "",
-  });
-  const [step, setStep] = useState(0);
-
-  const navigate = useNavigate();
-
-  const brand = decideBrandName(cardInfo.numbers.join(""));
-  const fieldConfig = getFieldConfig(brand);
-
-  const cardNumberHandler = (numbers: string[]) => {
-    const newBrand = decideBrandName(numbers.join(""));
-    console.log(newBrand);
-    const newConfig = getFieldConfig(newBrand);
-
-    let adjustedNumbers = numbers;
-    if (newConfig.length !== numbers.length) {
-      adjustedNumbers = Array.from({ length: newConfig.length }, (_, i) => numbers[i] ?? "");
-    }
-
-    setCardInfo((prev) => ({ ...prev, numbers: adjustedNumbers }));
-
-    const isNumbersComplete = newConfig.every((len, i) => adjustedNumbers[i]?.length === len);
-    if (isNumbersComplete && validateCardNumber(adjustedNumbers).errorIndex === -1) {
-      setStep((prev) => Math.max(prev, 1));
-    }
-  };
-
-  const expiryHandler = (expiry: string[]) => {
-    setCardInfo((prev) => ({ ...prev, expiry }));
-    if (expiry.every((e) => e.length === 2) && validateExpiryDate(expiry).errorIndex === -1) {
-      setStep((prev) => Math.max(prev, 3));
-    }
-  };
-
-  const cvcHandler = (cvc: string) => {
-    setCardInfo((prev) => {
-      return { ...prev, cvc: cvc };
-    });
-    setStep((prev) => Math.max(prev, 4));
-  };
-
-  const selectCompanyHandler = (company: string) => {
-    setCardInfo((prev) => ({ ...prev, company }));
-    setStep((prev) => Math.max(prev, 2));
-  };
-  const passwordHandler = (password: string) => {
-    setCardInfo((prev) => {
-      return { ...prev, password };
-    });
-  };
-
-  const isComplete =
-    fieldConfig.every((len, i) => cardInfo.numbers[i]?.length === len) &&
-    cardInfo.company !== "" &&
-    cardInfo.expiry.every((e) => e.length === 2) &&
-    cardInfo.cvc.length === 3 &&
-    cardInfo.password.length === 2;
-
-  const isValid =
-    isComplete &&
-    validateCardNumber(cardInfo.numbers).errorIndex === -1 &&
-    validateExpiryDate(cardInfo.expiry).errorIndex === -1 &&
-    validateCvc(cardInfo.cvc).errorIndex === -1 &&
-    validateCvc(cardInfo.password).errorIndex === -1;
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    navigate("/complete", { state: { numbers: cardInfo.numbers, brand } });
-  };
+  const {
+    cardInfo,
+    step,
+    brand,
+    fieldConfig,
+    isValid,
+    cardNumberHandler,
+    selectCompanyHandler,
+    expiryHandler,
+    cvcHandler,
+    passwordHandler,
+    handleSubmit,
+  } = useCardForm();
 
   return (
     <>
