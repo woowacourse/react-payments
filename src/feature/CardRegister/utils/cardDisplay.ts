@@ -16,6 +16,10 @@ export const getCardBrandName = (
   return matchedBrand?.name ?? null;
 };
 
+export const getCardBrandImage = (brandName: CardBrandName) => {
+  return CARD_BRANDS.find((brand) => brand.name === brandName).image ?? null;
+};
+
 export const getCardCompanyColor = (cardCompanyId: CardCompanyId | null) => {
   const selectedCardCompany = CARD_COMPANIES.find(
     (cardCompany) => cardCompany.id === cardCompanyId,

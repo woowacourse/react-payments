@@ -12,11 +12,13 @@ export const CARD_BRANDS = [
     name: 'visa',
     segmentLengths: [4, 4, 4, 4],
     prefixRules: [{ digitCount: 1, start: 4, end: 4 }],
+    image: visaImg,
   },
   {
     name: 'masterCard',
     segmentLengths: [4, 4, 4, 4],
     prefixRules: [{ digitCount: 2, start: 51, end: 55 }],
+    image: masterCardImg,
   },
   {
     name: 'amex',
@@ -25,11 +27,13 @@ export const CARD_BRANDS = [
       { digitCount: 2, start: 34, end: 34 },
       { digitCount: 2, start: 37, end: 37 },
     ],
+    image: amexImg,
   },
   {
     name: 'diners',
     segmentLengths: [4, 4, 4, 2],
     prefixRules: [{ digitCount: 2, start: 36, end: 36 }],
+    image: dinersImg,
   },
   {
     name: 'unionPay',
@@ -39,13 +43,6 @@ export const CARD_BRANDS = [
       { digitCount: 3, start: 624, end: 626 },
       { digitCount: 4, start: 6282, end: 6288 },
     ],
+    image: unionPayImg,
   },
 ] as const;
-
-export const BRANDS_IMAGE: Record<CardBrandName, string> = {
-  visa: visaImg,
-  masterCard: masterCardImg,
-  diners: dinersImg,
-  amex: amexImg,
-  unionPay: unionPayImg,
-};
