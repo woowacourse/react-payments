@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
@@ -28,15 +27,6 @@ export default function CardNumberInputWrapper({
     "third",
     "fourth",
   ]);
-  useEffect(() => {
-    if (value.first.length === 4) inputRefs.current["second"]?.focus();
-  }, [value.first, inputRefs]);
-  useEffect(() => {
-    if (value.second.length === 4) inputRefs.current["third"]?.focus();
-  }, [value.second, inputRefs]);
-  useEffect(() => {
-    if (value.third.length === 4) inputRefs.current["fourth"]?.focus();
-  }, [value.third, inputRefs]);
 
   const fourthMaxLength =
     cardBrand === "diners" ? 2 : cardBrand === "amex" ? 3 : 4;
@@ -50,6 +40,7 @@ export default function CardNumberInputWrapper({
           setValue={(newValue) => {
             const newCardNumbers = { ...value, [cardKey]: newValue };
             setCardNumber(newCardNumbers);
+
             onComplete(
               newCardNumbers.first.length === 4 &&
                 newCardNumbers.second.length === 4 &&
@@ -57,6 +48,17 @@ export default function CardNumberInputWrapper({
                 newCardNumbers.fourth.length === fourthMaxLength &&
                 Object.values(inputErrors).every((err) => err === null),
             );
+
+            const maxLen = cardKey === "fourth" ? fourthMaxLength : 4;
+            const nextKey: Record<string, string> = {
+              first: "second",
+              second: "third",
+              third: "fourth",
+            };
+
+            if (newValue.length === maxLen && nextKey[cardKey]) {
+              inputRefs.current[nextKey[cardKey]]?.focus();
+            }
           }}
           placeholder="1234"
           hasError={inputErrors[cardKey as keyof CardNumbers] !== null}
