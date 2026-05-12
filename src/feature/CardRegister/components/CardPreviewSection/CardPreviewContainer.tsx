@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type { CardPreviewInfoType } from '../../../../common/types/CardPreviewInfoType';
+import type { CardPreviewInfoType } from '../../types/CardPreviewInfoType';
 import CardBrandLogo from './CardBrandLogo';
 import CardExpiryDateDisplay from './CardExpiryDateDisplay';
 import CardNumberDisplay from './CardNumberDisplay';

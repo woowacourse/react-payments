@@ -17,7 +17,7 @@ const SelectCardBrandField = ({
           options={field.cardCompanyOptions}
           placeholder="카드사를 선택해주세요"
           onChange={(selectedOption) => {
-            field.handleChange(selectedOption.value ?? null);
+            field.handleChange(selectedOption?.value ?? null);
           }}
           styles={{
             control: (base, state) => ({

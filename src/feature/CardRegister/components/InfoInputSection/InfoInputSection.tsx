@@ -1,7 +1,7 @@
 import CvcField from './CvCField';
 import ExpiryField from './ExpiryField';
 import NumberField from './NumberField';
-import type { CardFormInfoType } from '../../../../common/types/CardPreviewInfoType';
+import type { CardFormInfoType } from '../../types/CardPreviewInfoType';
 import styled from 'styled-components';
 import FieldSection from './FieldSection';
 import SelectCardBrandField from './SelectCardBrandField';
