@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
-import completeCheck from "./assets/completeCheck.png";
+import completeCheck from "../assets/completeCheck.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "./components/Button/Button";
+import Button from "../components/Button/Button";
 
 const CardComplete = () => {
   const { state } = useLocation();
