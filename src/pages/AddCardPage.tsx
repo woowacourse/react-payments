@@ -3,20 +3,14 @@ import CardNumbersField from '../components/domain/CardNumbersField';
 import ExpirationPeriodField from '../components/domain/ExpirationPeriodField';
 import CVCField from '../components/domain/CVCField';
 import { useState } from 'react';
-import { categorizeCardBrand, isNumber, isValidMonth, isValidYear } from '../utils';
+import { categorizeCardBrand } from '../utils';
 import type { CardInfo, ErrorStatus, ExpirationPeriodErrorStatus } from '../types';
 import Card from '../components/ui/Card';
 import CardCompanyField from '../components/domain/CardCompanyField.tsx';
 import PasswordField from '../components/domain/PasswordField.tsx';
 import SubmitButton from '../components/domain/SubmitButton.tsx';
-import { type Rules, useForm } from '../hooks/useForm.ts';
-import {
-  CARD_NUMBER_LENGTH_PER_INPUT,
-  CVC_LENGTH,
-  PASSWORD_LENGTH,
-  PERIOD_LENGTH_PER_INPUT,
-  ROUTES,
-} from '../constants.ts';
+import { useForm } from '../hooks/useForm.ts';
+import { ROUTES } from '../constants.ts';
 import { useNavigate } from 'react-router';
 
 const initialValues: CardInfo = {
@@ -27,102 +21,17 @@ const initialValues: CardInfo = {
   password: '',
 };
 
-// TODO: 반복되는 validate 패턴 유틸화
-const rules: Rules<CardInfo, ErrorStatus | ExpirationPeriodErrorStatus> = {
-  cardNumbers: [
-    {
-      eventType: ['change', 'blur'],
-      validate: (inputValue: string) => inputValue === '',
-      errorStatus: 'required',
-    },
-    {
-      eventType: ['change'],
-      validate: (inputValue: string) => !isNumber(inputValue),
-      errorStatus: 'numberOnly',
-    },
-    {
-      eventType: ['blur'],
-      validate: (inputValue: string) => inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT,
-      errorStatus: 'invalidLength',
-    },
-  ],
-  cardCompany: [],
-  expirationPeriod: [
-    {
-      eventType: ['change', 'blur'],
-      validate: (inputValue: string) => inputValue === '',
-      errorStatus: 'required',
-    },
-    {
-      eventType: ['change'],
-      validate: (inputValue: string) => !isNumber(inputValue),
-      errorStatus: 'numberOnly',
-    },
-    {
-      eventType: ['change'],
-      validate: (inputValue: string, index: number) =>
-        inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0 && !isValidMonth(inputValue),
-      errorStatus: 'invalidMonth',
-    },
-    {
-      eventType: ['change'],
-      validate: (inputValue: string, index: number) =>
-        inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 1 && !isValidYear(inputValue),
-      errorStatus: 'invalidYear',
-    },
-    {
-      eventType: ['blur'],
-      validate: (inputValue: string) => inputValue.length < PERIOD_LENGTH_PER_INPUT,
-      errorStatus: 'invalidLength',
-    },
-  ],
-  cvc: [
-    {
-      eventType: ['change', 'blur'],
-      validate: (inputValue: string) => inputValue === '',
-      errorStatus: 'required',
-    },
-    {
-      eventType: ['change'],
-      validate: (inputValue: string) => !isNumber(inputValue),
-      errorStatus: 'numberOnly',
-    },
-    {
-      eventType: ['blur'],
-      validate: (inputValue: string) => inputValue.length < CVC_LENGTH,
-      errorStatus: 'invalidLength',
-    },
-  ],
-  password: [
-    {
-      eventType: ['change', 'blur'],
-      validate: (inputValue: string) => inputValue === '',
-      errorStatus: 'required',
-    },
-    {
-      eventType: ['change'],
-      validate: (inputValue: string) => !isNumber(inputValue),
-      errorStatus: 'numberOnly',
-    },
-    {
-      eventType: ['blur'],
-      validate: (inputValue: string) => inputValue.length < PASSWORD_LENGTH,
-      errorStatus: 'invalidLength',
-    },
-  ],
-};
-
 export default function AddCardPage() {
   const navigate = useNavigate();
   const [stepIndex, setStepIndex] = useState(0);
-  const { values, errors, isFormValid, handleChange, handleBlur } = useForm<
+  const { values, errors, isFormValid, setFieldValue, setFieldError } = useForm<
     CardInfo,
     ErrorStatus | ExpirationPeriodErrorStatus
-  >(initialValues, rules);
+  >(initialValues);
 
   const cardBrand = categorizeCardBrand(values.cardNumbers);
 
-  const handleFieldComplete = (index) => {
+  const handleFieldComplete = (index: number) => {
     if (stepIndex === index) {
       setStepIndex(index + 1);
     }
@@ -148,12 +57,14 @@ export default function AddCardPage() {
         <div css={cardWrapperStyle}>
           <Card cardNumber={values.cardNumbers} expirationPeriod={values.expirationPeriod} cardBrand={cardBrand} />
         </div>
-        <form onChange={handleChange} onBlur={handleBlur} onSubmit={handleSubmit} css={formLayout}>
+        <form onSubmit={handleSubmit} css={formLayout}>
           {stepIndex >= 5 && <SubmitButton disabled={!isFormValid} />}
           {stepIndex >= 4 && (
             <PasswordField
               value={values.password}
               errorStatus={errors.password as ErrorStatus}
+              setFieldValue={setFieldValue}
+              setFieldError={setFieldError}
               onCompleted={() => handleFieldComplete(4)}
             />
           )}
@@ -161,6 +72,8 @@ export default function AddCardPage() {
             <CVCField
               value={values.cvc}
               errorStatus={errors.cvc as ErrorStatus}
+              setFieldValue={setFieldValue}
+              setFieldError={setFieldError}
               onCompleted={() => handleFieldComplete(3)}
             />
           )}
@@ -168,6 +81,8 @@ export default function AddCardPage() {
             <ExpirationPeriodField
               value={values.expirationPeriod}
               errorStatus={errors.expirationPeriod as ExpirationPeriodErrorStatus[]}
+              setFieldValue={setFieldValue}
+              setFieldError={setFieldError}
               onCompleted={() => handleFieldComplete(2)}
             />
           )}
@@ -175,6 +90,7 @@ export default function AddCardPage() {
             <CardCompanyField
               value={values.cardCompany}
               errorStatus={errors.cardCompany as ErrorStatus}
+              setFieldValue={setFieldValue}
               onCompleted={() => handleFieldComplete(1)}
             />
           )}
@@ -182,6 +98,8 @@ export default function AddCardPage() {
             <CardNumbersField
               value={values.cardNumbers}
               errorStatus={errors.cardNumbers as ErrorStatus[]}
+              setFieldValue={setFieldValue}
+              setFieldError={setFieldError}
               onCompleted={() => handleFieldComplete(0)}
             />
           )}

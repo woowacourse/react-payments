@@ -1,6 +1,6 @@
 import FormField, { type FormFieldProps } from '../ui/FormField.tsx';
 import { css } from '@emotion/react';
-import type { CardInfo, ErrorStatus } from '../../types.ts';
+import type { CardCompany, CardInfo, ErrorStatus } from '../../types.ts';
 
 const options = ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'];
 const placeholder = '카드사를 선택해주세요';
@@ -8,10 +8,11 @@ const placeholder = '카드사를 선택해주세요';
 interface CardCompanyFieldProps {
   value: CardInfo['cardCompany'];
   errorStatus: ErrorStatus;
+  setFieldValue: (field: 'cardCompany', value: CardCompany) => void;
   onCompleted: () => void;
 }
 
-export default function CardCompanyField({ value, onCompleted }: CardCompanyFieldProps) {
+export default function CardCompanyField({ value, setFieldValue, onCompleted }: CardCompanyFieldProps) {
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드사를 선택해 주세요',
     caption: '현재 국내 카드사만 가능합니다.',
@@ -19,7 +20,8 @@ export default function CardCompanyField({ value, onCompleted }: CardCompanyFiel
     errorMessage: '',
   };
 
-  const handleChange = () => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFieldValue('cardCompany', e.target.value as CardCompany);
     onCompleted();
   };
 

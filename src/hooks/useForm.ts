@@ -1,27 +1,16 @@
 import { useState } from 'react';
-import { sanitizeNumber } from '../utils.ts';
 
-export interface Rule<T> {
-  eventType: ('change' | 'blur')[];
-  validate: (inputValue: string, index?: number) => boolean;
-  errorStatus: T;
-}
-
-export type Rules<T, E> = Record<keyof T, Rule<E>[]>;
-type Errors<T, E> = Record<keyof T, E | E[]>;
-
-const isKeyofValue = <T extends object>(values: T, field: string): field is Extract<keyof T, string> => {
-  return field in values;
+export type Errors<T, E> = {
+  [K in keyof T]: T[K] extends unknown[] ? E[] : E;
 };
 
-export const useForm = <T extends object, E>(initialValues: T, rules: Rules<T, E>) => {
+export const useForm = <T extends object, E>(initialValues: T) => {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<Errors<T, E>>(() => {
     const initialErrors = {} as Errors<T, E>;
 
     for (const key of Object.keys(initialValues) as Array<keyof T>) {
       const value = initialValues[key];
-
       initialErrors[key] = (Array.isArray(value) ? value.map(() => null) : null) as Errors<T, E>[typeof key];
     }
 
@@ -36,103 +25,37 @@ export const useForm = <T extends object, E>(initialValues: T, rules: Rules<T, E
     }
   });
 
-  const setListValue = (field: keyof T, value: string, index: number) => {
-    const fieldValue = values[field];
-    if (!Array.isArray(fieldValue)) {
-      return;
-    }
-
+  const setFieldValue = <K extends keyof T>(
+    field: K,
+    value: T[K] extends unknown[] ? T[K][number] : T[K],
+    index?: number,
+  ) => {
     setValues((prev) => {
-      const updatedFieldValue = [...fieldValue];
-      updatedFieldValue[index] = value;
-      return { ...prev, [field]: updatedFieldValue };
+      const fieldValue = prev[field];
+
+      if (Array.isArray(fieldValue) && typeof index === 'number') {
+        const updatedFieldValue = [...fieldValue];
+        updatedFieldValue[index] = value as string;
+        return { ...prev, [field]: updatedFieldValue as T[K] };
+      }
+
+      return { ...prev, [field]: value as T[K] };
     });
   };
 
-  const setListError = (field: keyof T, errorStatus: E, index: number) => {
-    const fieldError = errors[field];
-    if (!Array.isArray(fieldError)) {
-      return;
-    }
-
+  const setFieldError = <K extends keyof T>(field: K, errorStatus: E, index?: number) => {
     setErrors((prev) => {
-      const updatedFieldError = [...fieldError];
-      updatedFieldError[index] = errorStatus;
-      return { ...prev, [field]: updatedFieldError };
+      const fieldError = prev[field];
+
+      if (Array.isArray(fieldError) && typeof index === 'number') {
+        const updatedFieldError = [...fieldError];
+        updatedFieldError[index] = errorStatus;
+        return { ...prev, [field]: updatedFieldError as Errors<T, E>[K] };
+      }
+
+      return { ...prev, [field]: errorStatus as Errors<T, E>[K] };
     });
   };
 
-  // TODO: change/blur 사실상 중복되는 로직 추출
-  const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
-    const field = e.target.name;
-    if (!isKeyofValue(initialValues, field)) {
-      return;
-    }
-
-    const inputValue = e.target.value;
-
-    const changeRules = rules[field].filter((rule) => rule.eventType.includes('change'));
-
-    if (e.target instanceof HTMLInputElement && Array.isArray(values[field])) {
-      const fieldset = e.target.closest('fieldset');
-      const inputs = fieldset.querySelectorAll('input');
-      const index = Array.from(inputs).indexOf(e.target);
-
-      const activeRule = changeRules.find((rule) => rule.validate(inputValue, index));
-      const errorStatus = activeRule?.errorStatus ?? null;
-
-      setListError(field, errorStatus, index);
-
-      // TODO: sanitize 로직 더 잘 쓸 방법 고민
-      let newValue = inputValue;
-      if (e.target.inputMode === 'numeric') {
-        newValue = sanitizeNumber(inputValue);
-      }
-      setListValue(field, newValue, index);
-    } else {
-      const activeRule = changeRules.find((rule) => rule.validate(inputValue));
-      const errorStatus = activeRule?.errorStatus ?? null;
-
-      setErrors((prev) => ({
-        ...prev,
-        [field]: errorStatus,
-      }));
-
-      // 중복
-      let newValue = inputValue;
-      if (e.target.inputMode === 'numeric') {
-        newValue = sanitizeNumber(inputValue);
-      }
-      setValues((prev) => ({ ...prev, [field]: newValue }));
-    }
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLFormElement>) => {
-    const field = e.target.name;
-    if (!isKeyofValue(initialValues, field)) {
-      return;
-    }
-
-    const inputValue = e.target.value;
-
-    const blurRules = rules[field].filter((rule) => rule.eventType.includes('blur'));
-    const activeRule = blurRules.find((rule) => rule.validate(inputValue));
-    const errorStatus = activeRule?.errorStatus ?? null;
-
-    if (!errorStatus) return;
-
-    if (e.target instanceof HTMLInputElement && Array.isArray(values[field])) {
-      const fieldset = e.target.closest('fieldset');
-      const inputs = fieldset.querySelectorAll('input');
-      const index = Array.from(inputs).indexOf(e.target);
-      setListError(field, errorStatus, index);
-    } else {
-      setErrors((prev) => ({
-        ...prev,
-        [field]: errorStatus,
-      }));
-    }
-  };
-
-  return { values, errors, isFormValid, handleChange, handleBlur };
+  return { values, errors, isFormValid, setFieldValue, setFieldError };
 };

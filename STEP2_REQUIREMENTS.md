@@ -34,6 +34,8 @@
 12. form에서 이벤트 버블링을 사용한 제어 -> value에는 change 이벤트를 걸어줘야 한다는 에러
     - react의 controlled input 모델과 충돌
     - 지금처럼 불필요한 반복을 줄이면서도 리액트 철학과 충돌하지 않을 방안 모색 필요
+13. cardNumbers(form value) -> cardBrand -> cardNumbers length(form value) / cvc length (form value)
+    - 순환 의존성?! 어떻게 제거할지
 
 ---
 

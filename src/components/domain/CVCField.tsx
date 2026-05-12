@@ -1,16 +1,37 @@
-import type { CardInfo, ErrorStatus } from '../../types';
+import type { CardInfo, ErrorStatus, Validate } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import { CVC_LENGTH, ERROR_MESSAGES } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
+import { isNumber, sanitizeNumber } from '../../utils';
 
 interface CVCFieldProps {
   value: CardInfo['cvc'];
   errorStatus: ErrorStatus;
+  setFieldValue: (field: 'cvc', value: string) => void;
+  setFieldError: (field: 'cvc', error: ErrorStatus) => void;
   onCompleted: () => void;
 }
 
-export default function CVCField({ value, errorStatus, onCompleted }: CVCFieldProps) {
+const rules: Validate<ErrorStatus>[] = [
+  {
+    type: ['change', 'blur'],
+    rule: (inputValue: string) => inputValue === '',
+    errorStatus: 'required',
+  },
+  {
+    type: ['change'],
+    rule: (inputValue: string) => !isNumber(inputValue),
+    errorStatus: 'numberOnly',
+  },
+  {
+    type: ['blur'],
+    rule: (inputValue: string) => inputValue.length < CVC_LENGTH,
+    errorStatus: 'invalidLength',
+  },
+];
+
+export default function CVCField({ value, errorStatus, setFieldValue, setFieldError, onCompleted }: CVCFieldProps) {
   const onCompletedEvent = useEffectEvent(onCompleted);
 
   useEffect(() => {
@@ -18,6 +39,31 @@ export default function CVCField({ value, errorStatus, onCompleted }: CVCFieldPr
       onCompletedEvent();
     }
   }, [errorStatus, value]);
+
+  const getActiveError = (inputValue: string, eventType: 'change' | 'blur') => {
+    const activeRule = rules
+      .filter((rule) => rule.type.includes(eventType))
+      .find((rule) => rule.rule(inputValue));
+
+    return activeRule?.errorStatus ?? null;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    const error = getActiveError(inputValue, 'change');
+
+    setFieldError('cvc', error);
+    setFieldValue('cvc', sanitizeNumber(inputValue));
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    const error = getActiveError(inputValue, 'blur');
+
+    if (error) {
+      setFieldError('cvc', error);
+    }
+  };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: 'CVC 번호를 입력해 주세요',
@@ -34,6 +80,8 @@ export default function CVCField({ value, errorStatus, onCompleted }: CVCFieldPr
         name="cvc"
         variant={errorStatus !== null ? 'error' : 'default'}
         value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
         id="cvc"
         type="text"
         inputMode="numeric"
