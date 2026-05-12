@@ -4,11 +4,22 @@ import type { CardError } from '../types/errorTypes';
 import type { CardStatus, CardHandler } from '../types/cardStausTypes';
 import {
   getCardBrand,
+  getCardNumberGroupLengths,
   hasPotentialCardBrand,
   isValidCardNumber,
-  splitCardNumberByBrand,
 } from '../utils/cardBrand';
 import { isNotNumber } from '../utils/util';
+
+function matchCardNumberGroupCount(cardNumbers: string[], cardBrand: CardStatus['cardBrand']) {
+  const groupLengths = getCardNumberGroupLengths(cardBrand);
+  const nextCardNumbers = cardNumbers.slice(0, groupLengths.length);
+
+  while (nextCardNumbers.length < groupLengths.length) {
+    nextCardNumbers.push('');
+  }
+
+  return nextCardNumbers;
+}
 
 export function useCardNumber(): [CardStatus, CardHandler] {
   const [cardNumbers, setCardNumbers] = useState<string[]>(
@@ -26,8 +37,17 @@ export function useCardNumber(): [CardStatus, CardHandler] {
       return;
     }
 
-    if (!hasPotentialCardBrand(cardNumber)) {
+    if (next[0] === '') {
+      setCardBrand('');
+      setCardNumberErrorMode(null);
+      setCardNumbers(matchCardNumberGroupCount(next, ''));
+      return;
+    }
+
+    if (cardNumber !== '' && !hasPotentialCardBrand(cardNumber)) {
       setCardNumberErrorMode('notExistBrand');
+      setCardBrand('');
+      setCardNumbers(matchCardNumberGroupCount(next, ''));
       return;
     }
 
@@ -35,7 +55,7 @@ export function useCardNumber(): [CardStatus, CardHandler] {
 
     setCardBrand(nextCardBrand);
     setCardNumberErrorMode(null);
-    setCardNumbers(splitCardNumberByBrand(cardNumber, nextCardBrand));
+    setCardNumbers(matchCardNumberGroupCount(next, nextCardBrand));
   };
 
   const handleCardNumbersBlur = () => {
