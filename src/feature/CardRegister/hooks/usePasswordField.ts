@@ -28,7 +28,7 @@ export const usePasswordField = ({ onComplete }: UsePasswordFieldParams) => {
 
     setPassword(value);
 
-    if (validatePassword(value) === null) onComplete();
+    if (validatePassword(value) === null) onComplete?.();
   };
 
   const handleBlur = () => {

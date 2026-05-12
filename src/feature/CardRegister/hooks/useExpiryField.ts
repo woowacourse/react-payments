@@ -34,7 +34,8 @@ export const useExpiryField = ({ onComplete }: UseExpiryFieldParams) => {
   });
 
   const isComplete =
-    validateExpiryMonth(expiryMonth) === null && validateExpiryYear(expiryYear);
+    validateExpiryMonth(expiryMonth) === null &&
+    validateExpiryYear(expiryYear) === null;
 
   const checkComplete = (expiryMonth: string, expiryYear: string) => {
     if (

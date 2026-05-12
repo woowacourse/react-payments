@@ -28,7 +28,7 @@ export const useCvcField = ({ onComplete }: UseCvcFieldParams) => {
 
     setCvcNumber(value);
 
-    if (validateCvcNumber(value) === null) onComplete();
+    if (validateCvcNumber(value) === null) onComplete?.();
   };
 
   const handleBlur = () => {

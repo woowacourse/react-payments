@@ -52,7 +52,7 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
 
     if (value.length === segmentLengths[index]) focusNextInput(index);
 
-    if (!hasCardNumbersError(newChunks)) onComplete();
+    if (!hasCardNumbersError(newChunks)) onComplete?.();
   };
 
   const handleNumbersBlur = (index: number) => {

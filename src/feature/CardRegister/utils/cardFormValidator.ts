@@ -61,33 +61,6 @@ export const validatePassword = (value: string) => {
   return null;
 };
 
-export const hasCardFormError = ({
-  cardNumbers,
-  expiryMonth,
-  expiryYear,
-  cvcNumber,
-  password,
-}: {
-  cardNumbers: string[];
-  expiryMonth: string;
-  expiryYear: string;
-  cvcNumber: string;
-  password: string;
-}) => {
-  const hasExpiryMonthError = validateExpiryMonth(expiryMonth) !== null;
-  const hasExpiryYearError = validateExpiryYear(expiryYear) !== null;
-  const hasCvcError = validateCvcNumber(cvcNumber) !== null;
-  const hasPasswordError = validatePassword(password) !== null;
-
-  return (
-    hasCardNumbersError(cardNumbers) ||
-    hasExpiryMonthError ||
-    hasExpiryYearError ||
-    hasCvcError ||
-    hasPasswordError
-  );
-};
-
 export const getAvailableStep = ({
   cardNumbers,
   cardCompanyId,

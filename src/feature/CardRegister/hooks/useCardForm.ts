@@ -11,7 +11,6 @@ import {
   UseCardCompanyField,
   type CardCompanyFieldType,
 } from './useCardCompanyField';
-import { hasCardFormError } from '../utils/cardFormValidator';
 
 export type CardFormFieldsType = {
   numbers: NumbersFieldType;
@@ -56,13 +55,7 @@ export const useCardForm = () => {
     password: passwordField.password,
   };
 
-  const hasFormError = hasCardFormError({
-    cardNumbers: numbersField.cardNumbers,
-    expiryMonth: expiryField.expiryMonth,
-    expiryYear: expiryField.expiryYear,
-    cvcNumber: cvcField.cvcNumber,
-    password: passwordField.password,
-  });
+  const hasFormError = !Object.values(fields).every((field) => field.isComplete);
 
   return {
     fields,
