@@ -30,7 +30,7 @@ export default function CardNumbersField({
   setFieldError,
   onCompleted,
 }: CardNumbersFieldProps) {
-  const { inputRefs, moveToNext, handleKeyDown } = useInputs();
+  const { registerInputRefs, moveToNext, handleKeyDown } = useInputs();
 
   const cardNumbersLength = (() => {
     if (cardBrand === 'diners') return DINERS_CARD_NUMBERS_LENGTH;
@@ -102,9 +102,7 @@ export default function CardNumbersField({
           {value.map((number, index) => (
             <Input
               key={index}
-              ref={(el) => {
-                inputRefs.current[index] = el;
-              }}
+              ref={(el) => registerInputRefs(el, index)}
               name="cardNumbers"
               autoFocus={index === 0}
               variant={activeErrorIndex === index ? 'error' : 'default'}

@@ -3,6 +3,10 @@ import { useRef } from 'react';
 export const useInputs = () => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
+  const registerInputRefs = (el: HTMLInputElement, index: number) => {
+    inputRefs.current[index] = el;
+  };
+
   const moveToPrev = (index: number) => {
     inputRefs.current[index - 1]?.focus();
   };
@@ -28,5 +32,5 @@ export const useInputs = () => {
     }
   };
 
-  return { inputRefs, moveToPrev, moveToNext, handleKeyDown };
+  return { registerInputRefs, moveToPrev, moveToNext, handleKeyDown };
 };
