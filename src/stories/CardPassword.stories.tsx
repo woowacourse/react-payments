@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
 import CardPassword from '../components/CardPassword';
+import { useCardPassword } from '../hooks/useCardPassword';
+import { createPasswordHandlers, emptyPassword, filledPassword } from './cardStoryFixtures';
 
 const meta = {
   title: 'Components/CardPassword',
@@ -17,26 +18,46 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardPassword: {
-      cardPassword: '',
-      cardPasswordErrorMode: null,
-    },
-    setCardPassword: {
-      handleCardPassword: fn(),
-      handlePasswordBlur: fn(),
-    },
+    cardPassword: emptyPassword,
+    setCardPassword: createPasswordHandlers(),
   },
 };
 
 export const Filled: Story = {
   args: {
+    cardPassword: filledPassword,
+    setCardPassword: createPasswordHandlers(),
+  },
+};
+
+export const NotNumberError: Story = {
+  args: {
     cardPassword: {
-      cardPassword: '12',
-      cardPasswordErrorMode: null,
+      cardPassword: '1',
+      cardPasswordErrorMode: 'notNumber',
     },
-    setCardPassword: {
-      handleCardPassword: fn(),
-      handlePasswordBlur: fn(),
+    setCardPassword: createPasswordHandlers(),
+  },
+};
+
+export const PasswordCountError: Story = {
+  args: {
+    cardPassword: {
+      cardPassword: '1',
+      cardPasswordErrorMode: 'passwordCount',
     },
+    setCardPassword: createPasswordHandlers(),
+  },
+};
+
+export const Interactive: Story = {
+  args: {
+    cardPassword: emptyPassword,
+    setCardPassword: createPasswordHandlers(),
+  },
+  render: () => {
+    const [cardPassword, setCardPassword] = useCardPassword();
+
+    return <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />;
   },
 };

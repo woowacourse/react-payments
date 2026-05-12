@@ -1,7 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
 import CardNumber from '../components/CardNumber';
 import { useCardNumber } from '../hooks/useCardNumber';
+import {
+  amexCardStatus,
+  createCardNumberHandlers,
+  dinersCardStatus,
+  emptyCardStatus,
+  masterCardStatus,
+  unionPayCardStatus,
+  visaCardStatus,
+} from './cardStoryFixtures';
 
 const meta = {
   title: 'Components/CardNumber',
@@ -18,29 +26,43 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardStatus: {
-      cardNumbers: ['', '', '', ''],
-      cardNumberErrorMode: null,
-      cardBrand: '',
-    },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    cardStatus: emptyCardStatus,
+    setCardStatus: createCardNumberHandlers(),
   },
 };
 
-export const Filled: Story = {
+export const FilledVisa: Story = {
   args: {
-    cardStatus: {
-      cardNumbers: ['4123', '1234', '1234', '1234'],
-      cardNumberErrorMode: null,
-      cardBrand: 'visa',
-    },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    cardStatus: visaCardStatus,
+    setCardStatus: createCardNumberHandlers(),
+  },
+};
+
+export const FilledMastercard: Story = {
+  args: {
+    cardStatus: masterCardStatus,
+    setCardStatus: createCardNumberHandlers(),
+  },
+};
+
+export const FilledDiners: Story = {
+  args: {
+    cardStatus: dinersCardStatus,
+    setCardStatus: createCardNumberHandlers(),
+  },
+};
+
+export const FilledAMEX: Story = {
+  args: {
+    cardStatus: amexCardStatus,
+    setCardStatus: createCardNumberHandlers(),
+  },
+};
+
+export const FilledUnionPay: Story = {
+  args: {
+    cardStatus: unionPayCardStatus,
+    setCardStatus: createCardNumberHandlers(),
   },
 };
 
@@ -51,24 +73,25 @@ export const Error: Story = {
       cardNumberErrorMode: 'notNumber',
       cardBrand: '',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
+    setCardStatus: createCardNumberHandlers(),
+  },
+};
+
+export const UnknownBrandError: Story = {
+  args: {
+    cardStatus: {
+      cardNumbers: ['9912', '1234', '1234', '1234'],
+      cardNumberErrorMode: 'notExistBrand',
+      cardBrand: '',
     },
+    setCardStatus: createCardNumberHandlers(),
   },
 };
 
 export const Interactive: Story = {
   args: {
-    cardStatus: {
-      cardNumbers: ['', '', '', ''],
-      cardNumberErrorMode: null,
-      cardBrand: '',
-    },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    cardStatus: emptyCardStatus,
+    setCardStatus: createCardNumberHandlers(),
   },
   render: () => {
     const [cardStatus, setCardStatus] = useCardNumber();

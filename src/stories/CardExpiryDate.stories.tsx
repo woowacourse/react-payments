@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
 import CardExpiryDate from '../components/CardExpiryDate';
 import { useExpiryDate } from '../hooks/useExpiryDate';
+import { createExpiryHandlers, emptyExpiry, filledExpiry } from './cardStoryFixtures';
 
 const meta = {
   title: 'Components/CardExpiryDate',
@@ -18,29 +18,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardExpiry: {
-      cardExpiryDate: ['', ''],
-      cardExpiryDateErrorMode: null,
-    },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    cardExpiry: emptyExpiry,
+    setCardExpiry: createExpiryHandlers(),
   },
 };
 
 export const Filled: Story = {
   args: {
-    cardExpiry: {
-      cardExpiryDate: ['12', '11'],
-      cardExpiryDateErrorMode: null,
-    },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    cardExpiry: filledExpiry,
+    setCardExpiry: createExpiryHandlers(),
   },
 };
 
@@ -50,11 +36,7 @@ export const EmptyBothError: Story = {
       cardExpiryDate: ['', ''],
       cardExpiryDateErrorMode: 'emptyBoth',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    setCardExpiry: createExpiryHandlers(),
   },
 };
 
@@ -64,39 +46,44 @@ export const EmptyMonthError: Story = {
       cardExpiryDate: ['', '22'],
       cardExpiryDateErrorMode: 'emptyMonth',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    setCardExpiry: createExpiryHandlers(),
   },
 };
 
-export const emptyYearError: Story = {
+export const EmptyYearError: Story = {
   args: {
     cardExpiry: {
       cardExpiryDate: ['10', ''],
       cardExpiryDateErrorMode: 'emptyYear',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
+    setCardExpiry: createExpiryHandlers(),
+  },
+};
+
+export const MonthRangeError: Story = {
+  args: {
+    cardExpiry: {
+      cardExpiryDate: ['13', '29'],
+      cardExpiryDateErrorMode: 'notMonthRange',
     },
+    setCardExpiry: createExpiryHandlers(),
+  },
+};
+
+export const NotNumberError: Story = {
+  args: {
+    cardExpiry: {
+      cardExpiryDate: ['0a', '2b'],
+      cardExpiryDateErrorMode: 'notMonthNumber',
+    },
+    setCardExpiry: createExpiryHandlers(),
   },
 };
 
 export const Interactive: Story = {
   args: {
-    cardExpiry: {
-      cardExpiryDate: ['', ''],
-      cardExpiryDateErrorMode: null,
-    },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    cardExpiry: emptyExpiry,
+    setCardExpiry: createExpiryHandlers(),
   },
   render: () => {
     const [cardExpiry, setCardExpiry] = useExpiryDate();
