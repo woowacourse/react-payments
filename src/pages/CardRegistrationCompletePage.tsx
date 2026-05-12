@@ -1,8 +1,9 @@
+import Check from "@assets/Check.png";
+import PageWrapper from "@components/common/PageWrapper";
+import GoHomeButton from "@components/feature/GoHomeButton/GoHomeButton";
+import CARD from "@constants/card";
 import styled from "@emotion/styled";
 import { useSearchParams } from "react-router";
-
-import Check from "@assets/Check.png";
-import CARD from "@constants/card";
 
 const CARD_COMPANY_LABEL_MAP = Object.fromEntries(
   CARD.COMPANY_SELECT_FIELD.map(({ value, label }) => [value, label]),
@@ -17,11 +18,16 @@ const CardRegistrationCompletePage = () => {
   const cardCompanyLabel = CARD_COMPANY_LABEL_MAP[cardCompany] ?? "";
 
   return (
-    <Wrapper>
-      <CheckIcon src={Check} alt="Check" />
-      <Description>{cardNumberPrefix}로 시작하는</Description>
-      <Description>{cardCompanyLabel}가 등록되었어요.</Description>
-    </Wrapper>
+    <PageWrapper>
+      <Wrapper>
+        <CheckIcon src={Check} alt="Check" />
+        <Description>{cardNumberPrefix}로 시작하는</Description>
+        <Description>{cardCompanyLabel}가 등록되었어요.</Description>
+        <GoBackButtonContainer>
+          <GoHomeButton />
+        </GoBackButtonContainer>
+      </Wrapper>
+    </PageWrapper>
   );
 };
 
@@ -42,6 +48,11 @@ const Description = styled.p`
   font-size: 1.2rem;
   font-weight: 700;
   margin: 1rem 0 0 0;
+`;
+
+const GoBackButtonContainer = styled.div`
+  margin-top: 2rem;
+  width: 100%;
 `;
 
 export default CardRegistrationCompletePage;
