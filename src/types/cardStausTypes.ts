@@ -1,10 +1,28 @@
-import type { CardError, DateError, MonthError, YearError, CvcError } from './errorTypes';
+import type {
+  CardError,
+  DateError,
+  MonthError,
+  YearError,
+  CvcError,
+  PasswordError,
+} from './errorTypes';
 
 export type CardBrand = '' | 'visa' | 'master';
 
+export type CardCompany =
+  | ''
+  | 'bc'
+  | 'shinhan'
+  | 'kakao'
+  | 'hyundai'
+  | 'woori'
+  | 'lotte'
+  | 'hana'
+  | 'kookmin';
+
 export interface CardStatus {
   cardNumbers: string[];
-  cardNumberErrorMode: CardError | 'normal';
+  cardNumberErrorMode: CardError | null;
   cardBrand: CardBrand;
 }
 
@@ -13,9 +31,17 @@ export interface CardHandler {
   handleCardNumbersBlur: () => void;
 }
 
+export interface CardCompanyStatus {
+  cardCompany: CardCompany;
+}
+
+export interface CardCompanyHandler {
+  handleCardCompany: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
 export interface CardExpiry {
   cardExpiryDate: string[];
-  cardExpiryDateErrorMode: DateError | MonthError | YearError | 'normal';
+  cardExpiryDateErrorMode: DateError | MonthError | YearError | null;
 }
 
 export interface ExpireHandler {
@@ -26,10 +52,20 @@ export interface ExpireHandler {
 
 export interface Cvc {
   cardCvc: string;
-  cardCvcErrorMode: CvcError | 'normal';
+  cardCvcErrorMode: CvcError | null;
 }
 
 export interface CvcHandler {
   handleCardCvc: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCvcBlur: () => void;
+}
+
+export interface CardPassword {
+  cardPassword: string;
+  cardPasswordErrorMode: PasswordError | null;
+}
+
+export interface CardPasswordHandler {
+  handleCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordBlur: () => void;
 }
