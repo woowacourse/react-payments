@@ -1,8 +1,12 @@
-import { isDinersCardNumber } from './isDinersCardNumber';
-import { isAMEXCardNumber } from './isAMEXCardNumber';
+import type { InternationalCardBrand } from '../types/InternationalCardBrand';
+import { getCardBrand } from './getCardBrand';
+
+const BRAND_MAX_LENGTHS: Partial<Record<InternationalCardBrand, number[]>> = {
+    DINERS: [4, 6, 4],
+    AMEX: [4, 6, 5],
+};
 
 export const getCardNumberMaxLengths = (firstGroup: string): number[] => {
-    if (isDinersCardNumber(firstGroup)) return [4, 6, 4];
-    if (isAMEXCardNumber(firstGroup)) return [4, 6, 5];
-    return [4, 4, 4, 4];
+    const brand = getCardBrand([firstGroup]);
+    return (brand && BRAND_MAX_LENGTHS[brand]) ?? [4, 4, 4, 4];
 };

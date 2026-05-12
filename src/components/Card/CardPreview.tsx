@@ -1,9 +1,4 @@
 import styled from '@emotion/styled';
-import { isMasterCardNumber } from '../../utils/isMasterCardNumber';
-import { isVisaCardNumber } from '../../utils/isVisaCardNumber';
-import { isAMEXCardNumber } from '../../utils/isAMEXCardNumber';
-import { isDinersCardNumber } from '../../utils/isDinersCardNumber';
-import { isUnionPayCardNumber } from '../../utils/isUnionPayCardNumber';
 import Mastercard from '../../../public/Mastercard.svg';
 import Visa from '../../../public/Visa.svg';
 import AmericanExpress from '../../../public/American Express.svg';
@@ -11,6 +6,16 @@ import DinersClub from '../../../public/Diners Club.svg';
 import UnionPay from '../../../public/China UnionPay.svg';
 import { CARD_ISSUER_COLOR } from '../../constants/CARD_ISSUER_COLOR';
 import type { CardBrandValue } from '../../types/CardBrandValue';
+import { getCardBrand } from '../../utils/getCardBrand';
+import type { InternationalCardBrand } from '../../types/InternationalCardBrand';
+
+const INTERNATIONAL_CARD_BRAND_IMAGE: Record<InternationalCardBrand, string> = {
+    MASTERCARD: Mastercard,
+    VISA: Visa,
+    AMEX: AmericanExpress,
+    DINERS: DinersClub,
+    UNION_PAY: UnionPay,
+};
 
 interface CardPreviewProps {
     cardNumbers: string[];
@@ -19,18 +24,15 @@ interface CardPreviewProps {
 }
 
 export default function CardPreview({ cardNumbers, EXP, cardIssuer }: CardPreviewProps) {
-    const firstGroup = cardNumbers[0];
+    const internationalCardBrand = getCardBrand(cardNumbers);
 
     return (
         <CardPreviewStyle backgroundColor={CARD_ISSUER_COLOR[cardIssuer ?? '']}>
             <YellowBlock />
             <CardInternationalBrandPosition>
-                {/* TODO getCardBrand 형식으로 리팩터링 */}
-                {isMasterCardNumber(firstGroup) && <CardBrandImage src={Mastercard} />}
-                {isVisaCardNumber(firstGroup) && <CardBrandImage src={Visa} />}
-                {isAMEXCardNumber(firstGroup) && <CardBrandImage src={AmericanExpress} />}
-                {isDinersCardNumber(firstGroup) && <CardBrandImage src={DinersClub} />}
-                {isUnionPayCardNumber(firstGroup + cardNumbers[1]) && <CardBrandImage src={UnionPay} />}
+                {internationalCardBrand && (
+                    <CardBrandImage src={INTERNATIONAL_CARD_BRAND_IMAGE[internationalCardBrand]} />
+                )}
             </CardInternationalBrandPosition>
             <CardNumberPosition>
                 {cardNumbers.map((number, index) =>
