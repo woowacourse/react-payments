@@ -1,6 +1,21 @@
+const getRangeNumber = (min: number, max: number) => {
+  return Array.from({ length: max - min + 1 }, (_, i) => min + i);
+};
+
+const toStringNumbers = (numbers: number[]) => {
+  return numbers.map((number) => String(number));
+};
+
 export const BRAND_NUMBER = {
   visa: ['4'],
-  mastercard: ['51', '52', '53', '54', '55'],
+  mastercard: toStringNumbers(getRangeNumber(51, 55)),
+  diners: ['36'],
+  amex: ['34', '35'],
+  union: [
+    ...toStringNumbers(getRangeNumber(624, 626)),
+    ...toStringNumbers(getRangeNumber(6282, 6288)),
+    ...toStringNumbers(getRangeNumber(622126, 622925)),
+  ],
 };
 
 export const CARD_OPTIONS = [
