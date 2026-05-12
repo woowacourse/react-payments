@@ -49,6 +49,15 @@ export const useFormValues = <TFormValues extends Record<string, unknown>>({
   );
   const isValid = Object.values(errors).every((errorsValue) => errorsValue.every((error) => error.valid));
 
+  const reset = () => {
+    setFormValues({ ...initialValues });
+    setBlur(
+      Object.keys(initialValues).reduce((acc, key) => {
+        return { ...acc, [key]: false };
+      }, {} as FormTouched<TFormValues>),
+    );
+  };
+
   return {
     values: formValues,
     onChange: handleChange,
@@ -59,5 +68,6 @@ export const useFormValues = <TFormValues extends Record<string, unknown>>({
     errors,
     valids,
     isValid,
+    reset,
   };
 };
