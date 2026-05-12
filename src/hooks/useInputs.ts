@@ -3,8 +3,10 @@ import { useRef } from 'react';
 export const useInputs = () => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
-  const registerInputRefs = (el: HTMLInputElement, index: number) => {
-    inputRefs.current[index] = el;
+  const registerInputRefs = (el: HTMLInputElement | null, index: number) => {
+    if (el) {
+      inputRefs.current[index] = el;
+    }
   };
 
   const moveToPrev = (index: number) => {

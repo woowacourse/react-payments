@@ -4,10 +4,10 @@ import type { Validate } from '../types.ts';
 export const useErrorStatusList = <T>(validates: Validate<T>[], initialState: T[]) => {
   const [errorStatusList, setErrorStatusList] = useState<T[]>(initialState);
 
-  const setErrorStatus = (status: T, index: number) => {
+  const setErrorStatus = (status: T | null, index: number) => {
     setErrorStatusList((prev) => {
       const updated = [...prev] as T[];
-      updated[index] = status;
+      updated[index] = status as T;
       return updated;
     });
   };
@@ -18,7 +18,7 @@ export const useErrorStatusList = <T>(validates: Validate<T>[], initialState: T[
     const changeValidates = validates.filter((validate) => validate.type.includes('change'));
     const activeValidate = changeValidates.find((validate) => validate.rule(inputValue, index));
 
-    setErrorStatus(activeValidate?.errorStatus ?? null, index);
+    setErrorStatus((activeValidate?.errorStatus ?? null) as T | null, index);
   };
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {

@@ -40,7 +40,7 @@ export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardB
   return 'local';
 };
 
-const parsePrefixNumber = (str, n) => Number.parseInt(str.slice(0, n));
+const parsePrefixNumber = (str: string, n: number) => Number.parseInt(str.slice(0, n));
 
 export const sanitizeNumber = (input: string) => {
   return input.replace(/[^0-9]/g, '');

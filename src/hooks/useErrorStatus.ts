@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Validate } from '../types.ts';
 
 export const useErrorStatus = <K>(validates: Validate<K>[]) => {
-  const [errorStatus, setErrorStatus] = useState<K>(null);
+  const [errorStatus, setErrorStatus] = useState<K | null>(null);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
