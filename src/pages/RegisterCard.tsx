@@ -5,8 +5,18 @@ import { useExpiryDate } from '../hooks/useExpiryDate';
 import { useCardCvc } from '../hooks/useCardCvc';
 import { useCardCompany } from '../hooks/useCardCompany';
 import { useCardPassword } from '../hooks/useCardPassword';
+import type { CardCompany } from '../types/cardStausTypes';
 
-export default function RegisterCard() {
+export type RegisteredCard = {
+  cardNumberPrefix: string;
+  cardCompany: Exclude<CardCompany, ''>;
+};
+
+type RegisterCardProps = {
+  onComplete: (registeredCard: RegisteredCard) => void;
+};
+
+export default function RegisterCard({ onComplete }: RegisterCardProps) {
   const [cardStatus, setCardStatus] = useCardNumber();
   const [cardExpiry, setCardExpiry] = useExpiryDate();
   const [cardCvc, setCardCvc] = useCardCvc();
@@ -17,6 +27,15 @@ export default function RegisterCard() {
     isCvcComplete &&
     cardPassword.cardPassword.length === 2 &&
     cardPassword.cardPasswordErrorMode === null;
+  const handleComplete = () => {
+    if (cardCompanyStatus.cardCompany === '') {
+      return;
+    }
+    onComplete({
+      cardNumberPrefix: cardStatus.cardNumbers[0],
+      cardCompany: cardCompanyStatus.cardCompany,
+    });
+  };
 
   return (
     <div
@@ -54,6 +73,7 @@ export default function RegisterCard() {
       {isPasswordComplete && (
         <button
           type="button"
+          onClick={handleComplete}
           css={(theme) => ({
             width: '376px',
             height: '48px',
