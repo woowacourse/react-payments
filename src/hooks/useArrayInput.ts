@@ -48,6 +48,7 @@ export default function useArrayInput<T extends string | null>(
 ) {
   const [values, setValues] = useState(initialValue);
   const [storedErrors, setStoredErrors] = useState<(string | null)[]>(() => initialValue.map(() => null));
+  const [isToucheds, setIsToucheds] = useState<boolean[]>(() => initialValue.map(() => false));
   const [refs] = useState<RefObject<HTMLInputElement | null>[]>(
     () => initialValue.map(() => createRef<HTMLInputElement>())
   );
@@ -119,19 +120,24 @@ export default function useArrayInput<T extends string | null>(
         }
       },
       onBlur: (e: FocusEvent<HTMLInputElement>) => {
+        if (!isToucheds[index]) setIsToucheds(prev => replaceAt(prev, index, true));
         const failedValidation = findFailedValidation(currentValidations[index] ?? [], e.target.value, "onBlur");
         setStoredErrors(prev => {
           return replaceAt(prev, index, failedValidation ? failedValidation.message : null);
         });
       }
     }
-  }, [currentValidations, refs, values, options?.resolver, saveSelection])
+  }, [currentValidations, refs, values, options?.resolver, saveSelection, isToucheds])
+
+  const isTouched = isToucheds.some(Boolean);
 
   return {
     values,
     errors,
     error,
     isValid,
+    isToucheds,
+    isTouched,
     refs,
     register
   };

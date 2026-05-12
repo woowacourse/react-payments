@@ -37,6 +37,7 @@ export default function useInput<T extends string | null, E extends HTMLInputEle
 ) {
   const [value, setValue] = useState(initialValue);
   const [storedError, setStoredError] = useState<string | null>(null);
+  const [isTouched, setIsTouched] = useState(false);
   const ref = useRef<E | null>(null);
   const saveSelection = useSelectionRestore(ref);
 
@@ -76,16 +77,18 @@ export default function useInput<T extends string | null, E extends HTMLInputEle
         setStoredError(null);
       },
       onBlur: (e: FocusEvent<E>) => {
+        if (!isTouched) setIsTouched(true);
         const failedValidation = findFailedValidation(currentValidations, e.target.value, "onBlur");
         setStoredError(failedValidation ? failedValidation.message : null);
       }
     }
-  }, [currentValidations, value, options?.resolver, saveSelection])
+  }, [currentValidations, value, options?.resolver, saveSelection, isTouched])
 
   return {
     value,
     error,
     isValid,
+    isTouched,
     ref,
     register
   };

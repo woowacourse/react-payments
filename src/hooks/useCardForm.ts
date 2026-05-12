@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { type CardFormState, type CardIssuer, type CardNumberSegments } from "../types";
 import { createDigitFieldValidations, getCardNetwork, validateCardIssuer, validateMonth } from "../utils";
 import useArrayInput from "./useArrayInput";
@@ -14,8 +14,6 @@ export const CARD_FORM_STEP = {
 };
 
 export default function useCardForm() {
-  const [step, setStep] = useState(0);
-
   const cardNumberSegmentsField = useArrayInput(['', '', '', ''] as string[], {
     validation: (cardNumberSegments) => {
       const cardNetwork = getCardNetwork(cardNumberSegments as CardNumberSegments);
@@ -81,13 +79,19 @@ export default function useCardForm() {
     isValid: cardNumberSegmentsField.isValid && cardIssuerField.isValid && cardExpiryDateField.isValid && cardValidationCodeField.isValid && cardPasswordField.isValid
   }), [cardExpiryDateField.isValid, cardIssuerField.isValid, cardNumberSegmentsField.isValid, cardPasswordField.isValid, cardValidationCodeField.isValid])
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (cardNumberSegmentsField.isValid) setStep(prev => Math.max(CARD_FORM_STEP['CARD_ISSUER'], prev));
-    if (cardIssuerField.isValid) setStep(prev => Math.max(CARD_FORM_STEP['CARD_EXPIRY_DATE'], prev));
-    if (cardExpiryDateField.isValid) setStep(prev => Math.max(CARD_FORM_STEP['CARD_VALIDATION_CODE'], prev));
-    if (cardValidationCodeField.isValid) setStep(prev => Math.max(CARD_FORM_STEP['CARD_PASSWORD'], prev));
-  }, [cardExpiryDateField.isValid, cardIssuerField.isValid, cardNumberSegmentsField.isValid, cardPasswordField.isValid, cardValidationCodeField.isValid])
+  const step = useMemo(() => {
+    if (cardValidationCodeField.isValid || cardPasswordField.isTouched) return CARD_FORM_STEP.CARD_PASSWORD;
+    if (cardExpiryDateField.isValid || cardValidationCodeField.isTouched) return CARD_FORM_STEP.CARD_VALIDATION_CODE;
+    if (cardIssuerField.isValid || cardExpiryDateField.isTouched) return CARD_FORM_STEP.CARD_EXPIRY_DATE;
+    if (cardNumberSegmentsField.isValid || cardIssuerField.isTouched) return CARD_FORM_STEP.CARD_ISSUER;
+    return CARD_FORM_STEP.CARD_NUMBER;
+  }, [
+    cardNumberSegmentsField.isValid,
+    cardIssuerField.isValid, cardIssuerField.isTouched,
+    cardExpiryDateField.isValid, cardExpiryDateField.isTouched,
+    cardValidationCodeField.isValid, cardValidationCodeField.isTouched,
+    cardPasswordField.isTouched,
+  ]);
 
   return {
     step,
