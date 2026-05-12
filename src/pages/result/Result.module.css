@@ -1,0 +1,36 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 25px;
+}
+
+.message {
+  font-size: 25px;
+  font-weight: 700;
+  color: #353c49;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.button {
+  width: 320px;
+  height: 44px;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #333333;
+  cursor: pointer;
+}
