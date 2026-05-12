@@ -1,6 +1,6 @@
 import { useInputFocus } from '@/core/hooks/useInputFocus';
 import { isNumericString } from '@/core/utils/validator';
-import { BRAND, getBrand, RULES } from '@/entities/card/brand';
+import { BRAND, getBrand, RULES } from '@/entities/card/brand/brand';
 import {
   CARD_NUMBER_ERRORS,
   validateCardNumber,

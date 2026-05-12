@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-type FocusableElement = HTMLInputElement | HTMLSelectElement;
+export type FocusableElement = HTMLInputElement | HTMLSelectElement;
 
 export interface UseInputFocusResult {
   setInputRef: (node: FocusableElement | null, index: number) => void;

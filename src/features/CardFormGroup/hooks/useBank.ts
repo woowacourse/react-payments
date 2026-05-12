@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { type Bank } from '@/entities/card/bank';
+import { type Bank } from '@/entities/card/bank/bank';
 
 export interface UseBankResult {
   value: Bank;

@@ -1,9 +1,8 @@
 import styles from './Result.module.css';
-
 import CheckSvg from '@/core/assets/Check.svg?react';
 
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
-import { BANK_CONFIG } from '@/entities/card/bank';
+import { BANK_CONFIG } from '@/entities/card/bank/bank';
 import type { CardInfo } from '@/features/cardPreview/CardPreview';
 
 export const Result = () => {

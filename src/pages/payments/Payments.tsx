@@ -25,17 +25,18 @@ const STEP = {
   PASSWORD: 4,
   BUTTON: 5,
 };
+export type FocusElement = HTMLInputElement | HTMLSelectElement | null;
 
 export const Payments = () => {
   const navigate = useNavigate();
   const { step, toStep, setInputRef } = usePaymentStep();
 
   const SET_REFS = {
-    CARD_NUMBERS: (node: HTMLInputElement | null) => setInputRef(node, STEP.CARD),
-    BANK: (node: HTMLSelectElement | null) => setInputRef(node, STEP.BANK),
-    EXPIRY: (node: HTMLInputElement | null) => setInputRef(node, STEP.EXPIRY),
-    CVC: (node: HTMLInputElement | null) => setInputRef(node, STEP.CVC),
-    PASSWORD: (node: HTMLInputElement | null) => setInputRef(node, STEP.PASSWORD),
+    CARD_NUMBERS: (node: FocusElement) => setInputRef(node, STEP.CARD),
+    BANK: (node: FocusElement) => setInputRef(node, STEP.BANK),
+    EXPIRY: (node: FocusElement) => setInputRef(node, STEP.EXPIRY),
+    CVC: (node: FocusElement) => setInputRef(node, STEP.CVC),
+    PASSWORD: (node: FocusElement) => setInputRef(node, STEP.PASSWORD),
   };
 
   const cardNumbers = useCardNumbers({ onComplete: () => toStep(STEP.BANK) });

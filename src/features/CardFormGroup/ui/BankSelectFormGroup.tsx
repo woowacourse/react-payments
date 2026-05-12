@@ -1,5 +1,5 @@
 import { FormGroup } from '@/core/components/formGroup/FormGroup';
-import { BANK_CONFIG, BANKS, type Bank } from '@/entities/card/bank';
+import { BANK_CONFIG, BANKS, type Bank } from '@/entities/card/bank/bank';
 import type { UseBankResult } from '../hooks/useBank';
 
 interface BankSelectFormGroupProps {

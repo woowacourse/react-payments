@@ -1,4 +1,4 @@
-import { BRAND, getBrand, RULES } from './brand';
+import { BRAND, getBrand, RULES } from './brand/brand';
 
 export const CARD_NUMBER_ERRORS = {
   TYPE: '숫자만 입력 가능합니다.',
