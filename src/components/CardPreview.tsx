@@ -1,25 +1,19 @@
-import visa from '../assets/Visa.png';
-import master from '../assets/Mastercard.png';
-import type { CardBrand } from '../types/cardStausTypes';
-
-const CARD_BRAND_IMAGE: Record<Exclude<CardBrand, ''>, { src: string; alt: string }> = {
-  visa: {
-    src: visa,
-    alt: 'Visa',
-  },
-  master: {
-    src: master,
-    alt: 'MasterCard',
-  },
-};
+import { CARD_BRAND_IMAGE } from '../constants/cardBrandImages';
+import type { CardBrand, CardCompany } from '../types/cardStausTypes';
 
 type CardPreviewProps = {
-  cardBrand: CardBrand;
+  cardBrand?: CardBrand;
+  cardCompany: CardCompany;
   cardNumbers: string[];
   cardExpiryDate: string[];
 };
 
-export default function CardPreview({ cardBrand, cardNumbers, cardExpiryDate }: CardPreviewProps) {
+export default function CardPreview({
+  cardBrand = '',
+  cardCompany,
+  cardNumbers,
+  cardExpiryDate,
+}: CardPreviewProps) {
   const brandImage = cardBrand === '' ? null : CARD_BRAND_IMAGE[cardBrand];
 
   return (
@@ -27,7 +21,10 @@ export default function CardPreview({ cardBrand, cardNumbers, cardExpiryDate }: 
       css={(theme) => ({
         width: '212px',
         height: '132px',
-        backgroundColor: theme.colors.cardBackground,
+        backgroundColor:
+          cardCompany === ''
+            ? theme.colors.cardBackground
+            : theme.colors.cardCompanyBackground[cardCompany],
         boxShadow: '3px 3px 5px 0px #00000040;',
         borderRadius: '4px',
         padding: '8px 12px 8px 12px',
