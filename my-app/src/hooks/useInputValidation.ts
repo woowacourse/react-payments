@@ -5,7 +5,10 @@ const useInputValidation = <T>(validator: (v: T) => ValidationResult, inputValue
   const [errorMessage, setErrorMessage] = useState("");
   const [errorIndex, setErrorIndex] = useState(-1);
 
-  const clearError = () => setErrorMessage("");
+  const clearError = () => {
+    setErrorMessage("");
+    setErrorIndex(-1);
+  };
   const handleBlur = () => {
     const { errorIndex, message } = validator(inputValue);
     setErrorIndex(errorIndex);

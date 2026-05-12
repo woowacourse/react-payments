@@ -31,7 +31,6 @@ const CardFormLayout = ({
       </div>
       {isValid && (
         <button
-          type="submit"
           form="card-form"
           css={css`
             width: calc(100% + 60px);

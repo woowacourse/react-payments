@@ -21,7 +21,7 @@ const CardNumberInputSection = ({
 
   const handleChange = (index: number, value: string) => {
     const newValues = [...inputValues];
-    newValues[index] = value;
+    newValues[index] = value.replace(/\D/g, "");
 
     clearError();
     onChange(newValues);
@@ -42,6 +42,7 @@ const CardNumberInputSection = ({
       {fieldConfig.map((maxLen, i) => (
         <input
           key={i}
+          inputMode="numeric"
           ref={(el) => {
             inputRefs.current[i] = el;
           }}

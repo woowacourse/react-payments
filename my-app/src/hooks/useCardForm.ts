@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { CardInfo } from "../types";
 import { detectBrand, getFieldConfig } from "../constants/cardBrand";
-import { validateCardNumber, validateExpiryDate, validateCvc } from "../utils/validators";
+import { validateCardNumber, validateExpiryDate } from "../utils/validators";
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -47,7 +47,7 @@ const useCardForm = () => {
 
   const cvcHandler = (cvc: string) => {
     setCardInfo((prev) => ({ ...prev, cvc }));
-    if (cvc.length === 3 && validateCvc(cvc).errorIndex === -1) {
+    if (cvc.length === 3) {
       setStep((prev) => Math.max(prev, 4));
     }
   };
@@ -63,7 +63,7 @@ const useCardForm = () => {
   const isExpiryValid =
     cardInfo.expiry.every((e) => e.length === 2) && validateExpiryDate(cardInfo.expiry).errorIndex === -1;
 
-  const isCvcValid = cardInfo.cvc.length === 3 && validateCvc(cardInfo.cvc).errorIndex === -1;
+  const isCvcValid = cardInfo.cvc.length === 3;
 
   const isCompanyValid = cardInfo.company !== "";
   const isPasswordValid = cardInfo.password.length === 2;

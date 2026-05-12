@@ -4,17 +4,17 @@ import useInputValidation from "../../../hooks/useInputValidation";
 import { validateCvc } from "../../../utils/validators";
 
 const PasswordInputSection = ({
-  onChange,
+  onValueHandler,
   inputValue,
 }: {
-  onChange: (value: string) => void;
+  onValueHandler: (cardInfo: string) => void;
   inputValue: string;
 }) => {
   const { errorMessage, clearError, handleBlur } = useInputValidation(validateCvc, inputValue);
 
-  const handleChange = (value: string) => {
+  const onChange = (value: string) => {
     clearError();
-    onChange(value.replace(/\D/g, ""));
+    onValueHandler(value.replace(/\D/g, ""));
   };
 
   return (
@@ -30,7 +30,7 @@ const PasswordInputSection = ({
         autoComplete="off"
         maxLength={2}
         value={inputValue}
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         onBlur={handleBlur}
         css={[
           baseInputStyle,

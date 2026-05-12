@@ -18,7 +18,7 @@ const ExpiryDateInputSection = ({
 
   const handleChange = (index: number, value: string) => {
     const newValues = [...inputValues];
-    newValues[index] = value;
+    newValues[index] = value.replace(/\D/g, "");
 
     clearError();
     onChange(newValues);
@@ -34,6 +34,7 @@ const ExpiryDateInputSection = ({
       {inputValues.map((value, i) => (
         <input
           key={i}
+          inputMode="numeric"
           maxLength={2}
           value={value}
           onChange={(e) => handleChange(i, e.target.value)}
