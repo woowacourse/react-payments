@@ -2,8 +2,6 @@ import { useState } from 'react';
 import {
   hasCardNumbersError,
   hasCardFormError,
-  validateExpiryMonth,
-  validateExpiryYear,
   validatePassword,
 } from '../utils/cardFormValidator';
 import type { CardCompanyId } from '../../../common/types/CardPreview';
@@ -12,11 +10,11 @@ import type {
   CardPreviewInfoType,
 } from '../../../common/types/CardPreviewInfoType';
 import { useCvcField } from './useCvcField';
+import { useExpiryField } from './useExpiryField';
 
 export const useCardForm = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [expiryMonth, setExpiryMonth] = useState('');
-  const [expiryYear, setExpiryYear] = useState('');
+  const expiryField = useExpiryField({ onComplete: () => advanceStep(3) });
   const [cardCompanyId, setCardCompanyId] = useState<CardCompanyId | null>(
     null,
   );
@@ -40,26 +38,6 @@ export const useCardForm = () => {
 
     if (cardCompanyId !== null) advanceStep(2);
   };
-  const handleExpiryMonthChange = (expiryMonth: string) => {
-    setExpiryMonth(expiryMonth);
-
-    if (
-      validateExpiryMonth(expiryMonth) === null &&
-      validateExpiryYear(expiryYear) === null
-    ) {
-      advanceStep(3);
-    }
-  };
-  const handleExpiryYearChange = (expiryYear: string) => {
-    setExpiryYear(expiryYear);
-
-    if (
-      validateExpiryMonth(expiryMonth) === null &&
-      validateExpiryYear(expiryYear) === null
-    ) {
-      advanceStep(3);
-    }
-  };
 
   const handlePasswordNumberChange = (password: string) => {
     setPassword(password);
@@ -69,15 +47,15 @@ export const useCardForm = () => {
 
   const cardPreviewInfo: CardPreviewInfoType = {
     cardNumbers,
-    expiryMonth,
-    expiryYear,
+    expiryMonth: expiryField.expiryMonth,
+    expiryYear: expiryField.expiryYear,
     cardCompanyId,
   };
 
   const cardFormInfo: CardFormInfoType = {
     cardNumbers,
-    expiryMonth,
-    expiryYear,
+    expiryMonth: expiryField.expiryMonth,
+    expiryYear: expiryField.expiryYear,
     cvcNumber: cvcField.value,
     cardCompanyId,
     password,
@@ -85,8 +63,8 @@ export const useCardForm = () => {
 
   const cardFormHandlers = {
     handleCardNumbersChange,
-    handleExpiryMonthChange,
-    handleExpiryYearChange,
+    handleExpiryMonthChange: expiryField.handleMonthChange,
+    handleExpiryYearChange: expiryField.handleYearChange,
     handleCardCompanyChange,
     handleCvcNumberChange: cvcField.handleChange,
     handlePasswordNumberChange,
@@ -94,8 +72,8 @@ export const useCardForm = () => {
 
   const hasFormError = hasCardFormError({
     cardNumbers,
-    expiryMonth,
-    expiryYear,
+    expiryMonth: expiryField.expiryMonth,
+    expiryYear: expiryField.expiryYear,
     cvcNumber: cvcField.value,
     password,
   });
