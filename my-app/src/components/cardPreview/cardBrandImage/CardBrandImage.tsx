@@ -1,24 +1,31 @@
 import MasterCard from "../../../assets/Mastercard.png";
 import Visa from "../../../assets/Visa.png";
+import AMEX from "../../../assets/AMEX.png";
+import Diners from "../../../assets/Diners.png";
+import UnionPay from "../../../assets/UnionPay.png";
+import type { CardBrand } from "../../../utils/Validation";
 import { EmptyImg, StyledImg } from "./CardBrandImage.styles";
 
 interface Props {
-    cardNumber: string,
+    brand: CardBrand,
 }
 
-export default function CardBrandImage({cardNumber}: Props) {
-    function checkMasterCard() {
-        const adb= Number(cardNumber.slice(0,2));
-        return adb >= 51 && adb <= 55;
-    }
+const BRAND_LOGOS: Record<string, string> = {
+  Visa,
+  MasterCard,
+  AMEX,
+  Diners,
+  UnionPay,
+};
 
-    if(cardNumber.slice(0,1)==="4") {
-        return <StyledImg src={Visa} alt="visa 로고 이미지" />
-    }
+const CardBrandImage = ({ brand }: Props) => {
+  const logo = BRAND_LOGOS[brand];
 
-    if(checkMasterCard()) {
-        return <StyledImg src={MasterCard} alt="mastercard 로고 이미지" />
-    }
+  if (logo) {
+    return <StyledImg src={logo} alt={`${brand} 로고 이미지`} />;
+  }
 
-    return <EmptyImg />
-}
+  return <EmptyImg />;
+};
+
+export default CardBrandImage;

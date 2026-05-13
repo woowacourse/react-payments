@@ -1,45 +1,70 @@
-import { useRef, useState } from "react";
-import { getCardNumberError, isInputValidate } from "../../utils/Validation";
-
+import {
+  getCardBrand,
+  getCardNumberArrayByBrand,
+  getCardNumberError,
+} from '../../utils/Validation';
+import { useErrorTouched } from '../common/commonHooks/useErrorTouched';
+import { useFocusRule } from '../common/commonHooks/useFocusRule';
+import { useNumberInputCheck } from '../common/commonHooks/useNumberInputCheck';
 
 interface Props {
   value: string[];
   setValue: (value: string[]) => void;
 }
 
-export const useCardNumber = ({value, setValue}: Props) => {
-  const [errors, setErrors] = useState<boolean[]>([false, false, false, false]);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-    
-  const handleOnChange = (inputValue: string, index: number) => {
-    if (!isInputValidate(inputValue, 4)) return;
+export const useCardNumber = ({ value, setValue }: Props) => {
+  const currentBrand = getCardBrand(value.join(''));
+  const maxLengthList = getCardNumberArrayByBrand(currentBrand);
 
-    const newValue = [...value];
-    newValue[index] = inputValue;
-    setValue(newValue);
+  const { inputRefs, focusMove } = useFocusRule(maxLengthList.length);
+  const { handleOnChange } = useNumberInputCheck({
+    value,
+    setValue,
+    maxLengthList,
+    valueUpdater: (currentValue, newValue, index) => {
+      const newArr = [...currentValue];
+      newArr[index] = newValue;
 
-    if (inputValue.length === 4 && index < 3) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
+      const newBrand = getCardBrand(newArr.join(''));
+      const newFormat = getCardNumberArrayByBrand(newBrand);
 
-  const handleOnBlur = (inputValue:string, index: number) => {
-    const isError = getCardNumberError(inputValue) !== '';
-    setErrors((prev) => {
-      const newErrors = [...prev];
-      newErrors[index] = isError;
-      return newErrors;
-    });
-  };
+      if (newArr.length !== newFormat.length) {
+        return newFormat.map((_, index) => newArr[index] || '');
+      }
 
-  const errorIndex = errors.findIndex((isError) => isError);
-  const finalErrorMessage = errorIndex !== -1 ? getCardNumberError(value[errorIndex]) : '';
+      return newArr;
+    },
+    onComplete: (index) => focusMove(index),
+  });
+
+  const { errors, finalErrorMessage, markingTouched } = useErrorTouched({
+    value,
+    length: maxLengthList.length,
+    errorChecker: (val) => {
+      const brand = getCardBrand(val.join(''));
+      const currentFormat = getCardNumberArrayByBrand(brand);
+      return val.map(
+        (num, index) => getCardNumberError(num, currentFormat[index]) !== '',
+      );
+    },
+
+    errorMessageGenerator: (val) => {
+      const brand = getCardBrand(val.join(''));
+      const currentFormat = getCardNumberArrayByBrand(brand);
+      const errorIndex = val.findIndex(
+        (num, index) => getCardNumberError(num, currentFormat[index]) !== '',
+      );
+      return errorIndex !== -1
+        ? getCardNumberError(val[errorIndex], currentFormat[errorIndex])
+        : '';
+    },
+  });
 
   return {
-    errors,
     inputRefs,
-    handleOnChange,
-    handleOnBlur,
+    errors,
     finalErrorMessage,
+    handleOnChange,
+    handleOnBlur: (_val: string, index: number) => markingTouched(index),
   };
 };

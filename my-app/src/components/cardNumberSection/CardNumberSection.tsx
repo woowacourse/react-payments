@@ -2,6 +2,7 @@ import { useId } from 'react';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
 import { useCardNumber } from './useCardNumber';
+import { getCardBrand, getCardNumberArrayByBrand, getNumberPlaceholder } from '../../utils/Validation';
 
 interface Props {
   value: string[];
@@ -11,6 +12,8 @@ interface Props {
 const CardNumberSection = ({ value, setValue }: Props) => {
   const cardNumberIds = useId();
   const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } = useCardNumber({value, setValue});
+  const currentBrand = getCardBrand(value.join(''));
+  const format = getCardNumberArrayByBrand(currentBrand);
 
   return (
     <CommonSection
@@ -20,16 +23,16 @@ const CardNumberSection = ({ value, setValue }: Props) => {
       errorMessage={finalErrorMessage}
       htmlFor={`${cardNumberIds}-0`}
     >
-      {value.map((num, index) => (
+      {format.map((maxLength, index) => (
         <NumberInput
-          key={index}
+          key={`${cardNumberIds}-${index}`}
           id={`${cardNumberIds}-${index}`}
           ref={(el) => {inputRefs.current[index] = el;}}
-          value={num}
+          value={value[index] || ''}
           onChange={(v) => handleOnChange(v, index)}
-          onBlur={(v)=>handleOnBlur(v, index)}
-          placeholder="1234"
-          maxLength={4}
+          onBlur={(v) => handleOnBlur(v, index)}
+          placeholder={getNumberPlaceholder(index, format.length)}
+          maxLength={maxLength}
           isError={errors[index]}
         />
       ))}

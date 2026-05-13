@@ -1,4 +1,4 @@
-import { getCvcError } from '../../utils/Validation';
+import { getPasswordError } from '../../utils/Validation';
 import { useErrorTouched } from '../common/commonHooks/useErrorTouched';
 import { useNumberInputCheck } from '../common/commonHooks/useNumberInputCheck';
 
@@ -7,19 +7,19 @@ interface Props {
   setValue: (value: string) => void;
 }
 
-export const useCvc = ({ value, setValue }: Props) => {
+export const usePassword = ({ value, setValue }: Props) => {
   const { handleOnChange } = useNumberInputCheck({
     value,
     setValue,
-    maxLengthList: [3],
+    maxLengthList: [2],
     valueUpdater: (_, newValue) => newValue,
   });
 
   const { errors, finalErrorMessage, markingTouched } = useErrorTouched({
     value,
     length: 1,
-    errorChecker: (val) => [getCvcError(val) !== ''],
-    errorMessageGenerator: (val) => getCvcError(val),
+    errorChecker: (val) => [getPasswordError(val) !== ''],
+    errorMessageGenerator: (val) => getPasswordError(val),
   });
 
   return {

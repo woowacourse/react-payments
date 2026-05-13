@@ -1,29 +1,19 @@
-import React, { useState } from "react"
-import CardPreview from "./components/cardPreview/CardPreview";
-import CardNumberSection from "./components/cardNumberSection/CardNumberSection";
-import ExpirationDateSection from "./components/expirationDateSection/ExpirationDateSection";
-import CvcSection from "./components/cvcSection/CvcSection";
-import { AppContainer, FormLayout } from "./App.styles";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AppContainer } from './App.styles';
+import CardAddPage from './pages/CardAddPage';
+import CardAddSuccessPage from './pages/CardAddSuccessPage';
 
-function App() {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
-  const [cvc, setCvc] = useState('');
-
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  }
-
+const App = () => {
   return (
-    <AppContainer>
-      <CardPreview cardNumber={cardNumber} expirationDate={expirationDate} />
-      <FormLayout onSubmit={handleSubmit}>
-        <CardNumberSection value={cardNumber} setValue = {setCardNumber} />
-        <ExpirationDateSection value={expirationDate} setValue={setExpirationDate} />
-        <CvcSection value={cvc} setValue={setCvc} />
-      </FormLayout>
-    </AppContainer>
+    <BrowserRouter basename="/react-payments">
+      <AppContainer>
+        <Routes>
+          <Route path="/" element={<CardAddPage />} />
+          <Route path="/card-add-success" element={<CardAddSuccessPage />} />
+        </Routes>
+      </AppContainer>
+    </BrowserRouter>
   );
-}
+};
 
-export default App
+export default App;
