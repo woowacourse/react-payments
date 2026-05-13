@@ -8,6 +8,7 @@ import {useCvcNumber} from './useCvcNumber';
 import {useCardPassword} from './useCardPassword';
 
 import {CARD_COMPANIES} from '@/domain/card/cardCompany';
+import type {CardRegisterCompleteState} from '@/feature/CardRegisterComplete/routeState.types';
 import type {CardRegisterInputProps, ExpiryInputProps} from '../../components/inputs/shared.types';
 
 const generateNumberPlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
@@ -101,11 +102,13 @@ export function useCardRegisterForm() {
 
     setSubmitError('');
 
+    const completeState: CardRegisterCompleteState = {
+      cardPrefix,
+      companyName: CARD_COMPANIES[selectedCompany].name,
+    };
+
     navigate('/complete', {
-      state: {
-        cardPrefix,
-        companyName: CARD_COMPANIES[selectedCompany].name,
-      },
+      state: completeState,
     });
   };
 

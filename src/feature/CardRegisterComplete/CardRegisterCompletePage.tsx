@@ -1,15 +1,12 @@
 import {useNavigate, useLocation, Navigate} from 'react-router-dom';
 import styled from 'styled-components';
 
-type CompleteState = {
-  cardPrefix: string;
-  companyName: string;
-};
+import type {CardRegisterCompleteState} from './routeState.types';
 
 const CardRegisterCompletePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as CompleteState | null;
+  const state = location.state as CardRegisterCompleteState | null;
 
   // complete 페이지 진입 시 state가 없으면, 메인으로 redirect하고 히스토리를 덮어써서 뒤로가기를 방지함
   if (!state) return <Navigate to='/' replace />;
