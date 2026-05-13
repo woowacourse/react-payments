@@ -10,6 +10,7 @@ const meta = {
   component: CardCompanySelectField,
   tags: ["autodocs"],
   args: {
+    selectedCardCompany: null,
     onSelect: fn(),
   },
 } satisfies Meta<typeof CardCompanySelectField>;
@@ -28,6 +29,7 @@ export const Interactive: Story = {
       <div>
         <CardCompanySelectField
           {...args}
+          selectedCardCompany={selectedCardCompany}
           onSelect={(cardCompany) => {
             setSelectedCardCompany(cardCompany);
             args.onSelect(cardCompany);

@@ -24,7 +24,6 @@ const CardCompanySelectField = ({
     <CardSelectBox>
       <CardSelectTrigger
         required
-        defaultValue=""
         value={selectedCardCompany ?? ""}
         onChange={(e) => onSelect(e.target.value as CardCompanyType)}
         autoFocus
