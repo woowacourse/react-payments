@@ -37,6 +37,6 @@ export const getBrandName = (cardNumbers: string[]): CardBrandType | null => {
 // param: brandName
 // return: brandFormat
 export const getFormatByBrand = (brand: CardBrandType | null): number[] =>
-  brand ? [...CARD_BRANDS[brand].format] : DEFAULT_CARD_NUMBER_FORMAT;
+  brand ? [...CARD_BRANDS[brand].format] : [...DEFAULT_CARD_NUMBER_FORMAT];
 
 export const getCardNumberErrMsg = (digits: number) => `카드 번호 ${digits}자리를 입력해 주세요`;
