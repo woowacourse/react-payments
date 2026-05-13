@@ -28,6 +28,7 @@ const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps)
               inputRefs.current[i] = el;
             }}
             key={i}
+            aria-label={EXPRIY_DATE_INPUT_LABELS[i]}
             autoFocus={i === 0}
             maxLength={fieldMaxLength}
             inputMode="numeric"

@@ -27,7 +27,7 @@ export const Default: Story = {};
 export const FilledValid: Story = {
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByRole("textbox");
+    const input = canvas.getByPlaceholderText("**");
 
     await userEvent.type(input, "12");
 
@@ -38,7 +38,7 @@ export const FilledValid: Story = {
 export const ErrorNonNumeric: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByRole("textbox");
+    const input = canvas.getByPlaceholderText("**");
 
     await userEvent.type(input, "ab");
     await userEvent.tab();
