@@ -6,7 +6,11 @@ export type ValidationRule = {
   on: ('onChange' | 'onBlur')[];
 };
 
-export const validate = (rules: ValidationRule[], trigger: 'onChange' | 'onBlur', value: string): ValidationRule['name'] => {
+export const validate = (
+  rules: ValidationRule[],
+  trigger: 'onChange' | 'onBlur',
+  value: string,
+): ValidationRule['name'] => {
   const targetRules = rules.filter((rule) => rule.on.includes(trigger));
 
   for (const rule of targetRules) {
@@ -75,8 +79,19 @@ export const isValidMonthAndYear = (month: string, year: string) => {
   const currentMonth = currentDate.getMonth() + 1;
 
   const numYear = Number(year);
-  const fullYear = century + numYear;
   const numMonth = Number(month);
+
+  if (
+    !Number.isInteger(numMonth) ||
+    numMonth < 1 ||
+    numMonth > 12 ||
+    !Number.isInteger(numYear) ||
+    numYear < 0 ||
+    numYear > 99
+  )
+    return false;
+
+  const fullYear = century + numYear;
 
   if (fullYear < currentFullYear || fullYear > currentFullYear + 5) return false;
   if (fullYear === currentFullYear && numMonth < currentMonth) return false;
