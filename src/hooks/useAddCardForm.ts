@@ -87,10 +87,16 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
   const validateCardNumbersOnComplete = (value: CardInfo['cardNumbers']) => {
     const totalError = validate([RULES.exactLength(cardNumbersTotalLength)], 'onBlur', value.join(''));
 
-    updateErrors('cardNumbers', [
-      ...formValue.cardNumbers.errorStatuses.slice(0, 4),
-      totalError as FormValue['cardNumbers']['errorStatuses'][4],
-    ] as FormValue['cardNumbers']['errorStatuses']);
+    setFormValue((prev) => ({
+      ...prev,
+      cardNumbers: {
+        ...prev.cardNumbers,
+        errorStatuses: [
+          ...prev.cardNumbers.errorStatuses.slice(0, 4),
+          totalError as FormValue['cardNumbers']['errorStatuses'][4],
+        ] as FormValue['cardNumbers']['errorStatuses'],
+      },
+    }));
 
     return totalError === null;
   };
