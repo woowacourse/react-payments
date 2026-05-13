@@ -10,7 +10,7 @@ export default function useCvcNumberField(
   const handleOnChange = (newValue: string) => {
     setInputError(null);
     onChange(newValue);
-    onComplete(newValue.length === 3 && inputError === null);
+    onComplete(getCvcNumberErrorMessage(newValue) === null);
   };
   const handleOnBlur = () => {
     if (value !== "") setInputError(getCvcNumberErrorMessage(value));

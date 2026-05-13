@@ -17,10 +17,7 @@ export default function useExpNumberField(
     setError(expKey)(null);
     const newExpNumbers = { ...value, [expKey]: newValue };
     onChange(newExpNumbers);
-    onComplete(
-      Object.values(newExpNumbers).every((value) => value.length === 2) &&
-        Object.values(inputErrors).every((err) => err === null),
-    );
+    onComplete(getExpNumberErrorMessage(newExpNumbers) === null);
 
     if (expKey === "mm" && newValue.length === 2) {
       const result = getExpNumberErrorMessage({ mm: newValue, yy: value.yy });

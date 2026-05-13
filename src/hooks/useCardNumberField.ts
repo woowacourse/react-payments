@@ -39,13 +39,7 @@ export default function useCardNumberField(
     const newCardNumbers = { ...value, [cardKey]: newValue };
     onChange(newCardNumbers);
 
-    onComplete(
-      newCardNumbers.first.length === 4 &&
-        newCardNumbers.second.length === 4 &&
-        newCardNumbers.third.length === 4 &&
-        newCardNumbers.fourth.length === fourthMaxLength &&
-        Object.values(inputErrors).every((err) => err === null),
-    );
+    onComplete(getCardNumberErrorMessage(newCardNumbers, cardBrand) === null);
 
     const maxLen = cardKey === "fourth" ? fourthMaxLength : 4;
     const nextKey: Record<string, string> = {
