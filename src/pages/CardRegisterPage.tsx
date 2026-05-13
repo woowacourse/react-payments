@@ -49,7 +49,7 @@ export default function CardRegisterPage() {
             label="비밀번호 앞 2자리"
           >
             <PasswordNumberField
-              setPassWord={onPasswordNumberChange}
+              onChange={onPasswordNumberChange}
               value={passwordNumbers}
             />
           </CardInfoSection>
@@ -58,7 +58,7 @@ export default function CardRegisterPage() {
         {isExpNumberCompleted && (
           <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
             <CvcNumberField
-              setCvcNumber={onCvcNumberChange}
+              onChange={onCvcNumberChange}
               value={cvcNumbers}
               onComplete={onCvcNumberComplete}
             />
@@ -72,7 +72,7 @@ export default function CardRegisterPage() {
             label="유효기간"
           >
             <ExpNumberField
-              setExpNumber={onExpNumberChange}
+              onChange={onExpNumberChange}
               value={expNumbers}
               onComplete={onExpNumberComplete}
             />
@@ -84,7 +84,7 @@ export default function CardRegisterPage() {
             title="카드사를 선택해 주세요"
             caption="현재 국내 카드사만 가능합니다."
           >
-            <CardFirmSelect onChangeCardFirmCategory={onCardFirmChange} />
+            <CardFirmSelect onChange={onCardFirmChange} />
           </CardInfoSection>
         )}
 
@@ -94,7 +94,7 @@ export default function CardRegisterPage() {
           label="카드 번호"
         >
           <CardNumberField
-            setCardNumber={onCardNumberChange}
+            onChange={onCardNumberChange}
             value={cardNumbers}
             onComplete={onCardNumberComplete}
             cardBrand={cardBrand}

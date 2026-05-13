@@ -5,16 +5,12 @@ import useExpNumberField, {
 } from "../../hooks/useExpNumberField";
 
 interface Props {
-  setExpNumber: (value: ExpNumber) => void;
+  onChange: (value: ExpNumber) => void;
   value: ExpNumber;
   onComplete: (isCompleted: boolean) => void;
 }
 
-export default function ExpNumberField({
-  setExpNumber,
-  value,
-  onComplete,
-}: Props) {
+export default function ExpNumberField({ onChange, value, onComplete }: Props) {
   const {
     inputRefs,
     inputErrors,
@@ -22,7 +18,7 @@ export default function ExpNumberField({
     errorMessage,
     handleOnChange,
     handleOnBlur,
-  } = useExpNumberField(setExpNumber, value, onComplete);
+  } = useExpNumberField(onChange, value, onComplete);
   return (
     <InputGroup errorMessage={errorMessage}>
       {Object.entries(value).map(([expKey, expValue]) => (

@@ -3,13 +3,13 @@ import InputGroup from "./InputGroup";
 import usePasswordNumberField from "../../hooks/usePasswordNumberField";
 
 interface Props {
-  setPassWord: (value: string) => void;
+  onChange: (value: string) => void;
   value: string;
 }
 
-export default function PasswordNumberField({ setPassWord, value }: Props) {
+export default function PasswordNumberField({ onChange, value }: Props) {
   const { inputError, setInputError, handleOnChange, handleOnBlur } =
-    usePasswordNumberField(setPassWord, value);
+    usePasswordNumberField(onChange, value);
   return (
     <InputGroup errorMessage={inputError}>
       <NumberInput

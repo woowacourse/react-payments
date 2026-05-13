@@ -8,12 +8,12 @@ import useCardNumberField, {
 interface Props {
   value: CardNumbers;
   cardBrand: CardBrand;
-  setCardNumber: (value: CardNumbers) => void;
+  onChange: (value: CardNumbers) => void;
   onComplete: (isCompleted: boolean) => void;
 }
 
 export default function CardNumberField({
-  setCardNumber,
+  onChange,
   value,
   onComplete,
   cardBrand,
@@ -26,7 +26,7 @@ export default function CardNumberField({
     handleOnChange,
     handleOnBlur,
     setError,
-  } = useCardNumberField(value, cardBrand, setCardNumber, onComplete);
+  } = useCardNumberField(value, cardBrand, onChange, onComplete);
 
   return (
     <InputGroup errorMessage={errorMessage}>

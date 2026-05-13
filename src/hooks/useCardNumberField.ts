@@ -19,7 +19,7 @@ export type CardBrand =
 export default function useCardNumberField(
   value: CardNumbers,
   cardBrand: CardBrand,
-  setCardNumber: (value: CardNumbers) => void,
+  onChange: (value: CardNumbers) => void,
   onComplete: (isCompleted: boolean) => void,
 ) {
   const { inputErrors, setError, errorMessage } = useFieldErrors([
@@ -37,7 +37,7 @@ export default function useCardNumberField(
   const handleOnChange = (cardKey: string) => (newValue: string) => {
     setError(cardKey)(null);
     const newCardNumbers = { ...value, [cardKey]: newValue };
-    setCardNumber(newCardNumbers);
+    onChange(newCardNumbers);
 
     onComplete(
       newCardNumbers.first.length === 4 &&

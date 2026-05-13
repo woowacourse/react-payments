@@ -9,7 +9,7 @@ import Select from "react-select";
 // 국민카드 #6A6056
 
 interface Props {
-  onChangeCardFirmCategory: (value: string, label: string) => void;
+  onChange: (value: string, label: string) => void;
 }
 
 const CARD_OPTIONS = [
@@ -23,15 +23,13 @@ const CARD_OPTIONS = [
   { value: "국민", label: "국민카드" },
 ];
 
-export default function CardFirmSelect({ onChangeCardFirmCategory }: Props) {
+export default function CardFirmSelect({ onChange }: Props) {
   return (
     <div>
       <Select
         options={CARD_OPTIONS}
         autoFocus
-        onChange={(opt) =>
-          opt && onChangeCardFirmCategory(opt.value, opt.label)
-        }
+        onChange={(opt) => opt && onChange(opt.value, opt.label)}
         placeholder="카드사를 선택해주세요"
         styles={{
           control: (base) => ({ ...base, width: 315, height: 31 }),

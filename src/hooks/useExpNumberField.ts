@@ -5,7 +5,7 @@ import { useFieldErrors } from "./useFieldErrors";
 export type ExpNumber = { mm: string; yy: string };
 
 export default function useExpNumberField(
-  setExpNumber: (value: ExpNumber) => void,
+  onChange: (value: ExpNumber) => void,
   value: ExpNumber,
   onComplete: (isCompleted: boolean) => void,
 ) {
@@ -16,7 +16,7 @@ export default function useExpNumberField(
   const handleOnChange = (expKey: string) => (newValue: string) => {
     setError(expKey)(null);
     const newExpNumbers = { ...value, [expKey]: newValue };
-    setExpNumber(newExpNumbers);
+    onChange(newExpNumbers);
     onComplete(
       Object.values(newExpNumbers).every((value) => value.length === 2) &&
         Object.values(inputErrors).every((err) => err === null),

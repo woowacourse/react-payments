@@ -3,18 +3,14 @@ import InputGroup from "./InputGroup";
 import useCvcNumberField from "../../hooks/useCvcNumberField";
 
 interface Props {
-  setCvcNumber: (value: string) => void;
+  onChange: (value: string) => void;
   value: string;
   onComplete: (isCompleted: boolean) => void;
 }
 
-export default function CvcNumberField({
-  setCvcNumber,
-  value,
-  onComplete,
-}: Props) {
+export default function CvcNumberField({ onChange, value, onComplete }: Props) {
   const { inputError, setInputError, handleOnChange, handleOnBlur } =
-    useCvcNumberField(setCvcNumber, value, onComplete);
+    useCvcNumberField(onChange, value, onComplete);
   return (
     <InputGroup errorMessage={inputError}>
       <NumberInput
