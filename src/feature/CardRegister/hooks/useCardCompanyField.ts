@@ -1,16 +1,13 @@
 import { useState } from 'react';
-import {
-  CARD_COMPANIES,
-  type CardCompanyId,
-} from '../constant/cardCompanies';
+import { CARD_COMPANIES, type CardCompanyId } from '../constant/cardCompanies';
 
 type UseCardCompanyFieldParams = {
   onComplete?: () => void;
 };
 
-export type CardCompanyFieldType = ReturnType<typeof UseCardCompanyField>;
+export type CardCompanyFieldType = ReturnType<typeof useCardCompanyField>;
 
-export const UseCardCompanyField = ({
+export const useCardCompanyField = ({
   onComplete,
 }: UseCardCompanyFieldParams) => {
   const [cardCompanyId, setCardCompanyId] = useState<CardCompanyId | null>(

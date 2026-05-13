@@ -5,7 +5,7 @@ import { useExpiryField, type ExpiryFieldType } from './useExpiryField';
 import { useNumbersField, type NumbersFieldType } from './useNumbersField';
 import { usePasswordField, type PasswordFieldType } from './usePasswordField';
 import {
-  UseCardCompanyField,
+  useCardCompanyField,
   type CardCompanyFieldType,
 } from './useCardCompanyField';
 import type {
@@ -34,7 +34,7 @@ export const useCardForm = () => {
   const numbersField = useNumbersField({
     onComplete: () => advanceStep(CARD_FORM_STEP.CARD_COMPANY),
   });
-  const cardCompanyField = UseCardCompanyField({
+  const cardCompanyField = useCardCompanyField({
     onComplete: () => advanceStep(CARD_FORM_STEP.EXPIRY),
   });
   const expiryField = useExpiryField({
