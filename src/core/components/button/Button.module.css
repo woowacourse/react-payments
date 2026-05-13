@@ -18,6 +18,18 @@
   color: #ffffff;
 }
 
+.variant-placeholder {
+  background: #333333;
+  color: #8C8C8C;
+  font-size: 13px;
+  border: 1px dashed #E6E6E6;
+  background: #ffffff;
+}
+
+.variant-placeholder:disabled {
+  background: #F7F7F7;
+}
+
 .edge-rounded {
   border-radius: 5px;
 }
