@@ -12,7 +12,12 @@ export default function AddCardCompletePage() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  if (!state) return <Navigate to="/" replace />;
+  if (
+    !state ||
+    typeof (state as LocationState).firstFourDigits !== 'string' ||
+    typeof (state as LocationState).cardCompany !== 'string'
+  )
+    return <Navigate to="/" replace />;
 
   const { firstFourDigits, cardCompany } = state as LocationState;
 
