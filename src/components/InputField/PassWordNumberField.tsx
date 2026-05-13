@@ -1,7 +1,6 @@
-import { useState } from "react";
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
-import { getPassWordErrorMessage } from "../../utils/getPassWordErrorMessage";
+import usePassWordNumberField from "../../hooks/usePassWordNumberField";
 
 interface Props {
   setPassWord: (value: string) => void;
@@ -9,25 +8,20 @@ interface Props {
 }
 
 export default function PassWordNumberField({ setPassWord, value }: Props) {
-  const [inputError, setInputError] = useState<string | null>(null);
-
+  const { inputError, setInputError, handleOnChange, handleOnBlur } =
+    usePassWordNumberField(setPassWord, value);
   return (
     <InputGroup errorMessage={inputError}>
       <NumberInput
         type="password"
         autoFocus
         value={value}
-        onChange={(newValue) => {
-          setInputError(null);
-          setPassWord(newValue);
-        }}
+        onChange={handleOnChange}
         placeholder="123"
         hasError={inputError !== null}
         maxLength={2}
         onError={setInputError}
-        onBlur={() => {
-          setInputError(getPassWordErrorMessage(value));
-        }}
+        onBlur={handleOnBlur}
         style={{ width: "315px" }}
       />
     </InputGroup>
