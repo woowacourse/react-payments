@@ -21,21 +21,19 @@ const CardRegisterPage = () => {
     }));
   };
 
-  const handleCardNumbersChange = (
-    cardNumbers: CardInfoType["cardNumbers"],
-  ) => {
+  const updateCardNumbers = (cardNumbers: CardInfoType["cardNumbers"]) => {
     updateCardInformation({ cardNumbers });
   };
 
-  const handleExpiryMonthChange = (expiryMonth: string) => {
+  const updateExpiryMonth = (expiryMonth: string) => {
     updateCardInformation({ expiryMonth });
   };
 
-  const handleExpiryYearChange = (expiryYear: string) => {
+  const updateExpiryYear = (expiryYear: string) => {
     updateCardInformation({ expiryYear });
   };
 
-  const handleCardCompanySelect = (selectedCardCompany: CardCompanyType) => {
+  const updateCardCompany = (selectedCardCompany: CardCompanyType) => {
     updateCardInformation({ selectedCardCompany });
   };
 
@@ -44,10 +42,10 @@ const CardRegisterPage = () => {
       <CardPreview cardInfo={cardInformation} />
       <CardRegisterForm
         cardInfo={cardInformation}
-        onCardNumbersChange={handleCardNumbersChange}
-        onExpiryMonthChange={handleExpiryMonthChange}
-        onExpiryYearChange={handleExpiryYearChange}
-        onCardCompanySelect={handleCardCompanySelect}
+        updateCardNumbers={updateCardNumbers}
+        updateExpiryMonth={updateExpiryMonth}
+        updateExpiryYear={updateExpiryYear}
+        updateCardCompany={updateCardCompany}
       />
     </CardRegisterPageLayout>
   );

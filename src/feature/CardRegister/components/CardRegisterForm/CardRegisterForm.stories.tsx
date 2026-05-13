@@ -8,6 +8,7 @@ import type {
   CardInfoType,
   CardNumberChunkType,
 } from "../../../../common/types/CardInfoType";
+import type { CardCompanyType } from "../../../../common/types/CardCompany";
 
 const meta = {
   title: "feature/CardRegister/components/CardRegisterForm",
@@ -27,10 +28,10 @@ const meta = {
       expiryYear: "",
       selectedCardCompany: null,
     },
-    onCardNumbersChange: fn(),
-    onExpiryMonthChange: fn(),
-    onExpiryYearChange: fn(),
-    onCardCompanySelect: fn(),
+    updateCardNumbers: fn(),
+    updateExpiryMonth: fn(),
+    updateExpiryYear: fn(),
+    updateCardCompany: fn(),
   },
 } satisfies Meta<typeof CardRegisterForm>;
 
@@ -65,31 +66,33 @@ export const Interactive: Story = {
   render: function InteractiveCardRegisterForm(args) {
     const [cardInfo, setCardInfo] = useState<CardInfoType>(args.cardInfo);
 
-    const handleCardNumbersChange = (cardNumbers: CardNumberChunkType) => {
+    const updateCardNumbers = (cardNumbers: CardNumberChunkType) => {
       setCardInfo((previousCardInfo) => ({ ...previousCardInfo, cardNumbers }));
     };
 
-    const handleExpiryMonthChange = (expiryMonth: string) => {
+    const updateExpiryMonth = (expiryMonth: string) => {
       setCardInfo((previousCardInfo) => ({ ...previousCardInfo, expiryMonth }));
     };
 
-    const handleExpiryYearChange = (expiryYear: string) => {
+    const updateExpiryYear = (expiryYear: string) => {
       setCardInfo((previousCardInfo) => ({ ...previousCardInfo, expiryYear }));
+    };
+
+    const updateCardCompany = (selectedCardCompany: CardCompanyType) => {
+      setCardInfo((previousCardInfo) => ({
+        ...previousCardInfo,
+        selectedCardCompany,
+      }));
     };
 
     return (
       <CardRegisterForm
         {...args}
         cardInfo={cardInfo}
-        onCardNumbersChange={handleCardNumbersChange}
-        onExpiryMonthChange={handleExpiryMonthChange}
-        onExpiryYearChange={handleExpiryYearChange}
-        onCardCompanySelect={(selectedCardCompany) =>
-          setCardInfo((previousCardInfo) => ({
-            ...previousCardInfo,
-            selectedCardCompany,
-          }))
-        }
+        updateCardNumbers={updateCardNumbers}
+        updateExpiryMonth={updateExpiryMonth}
+        updateExpiryYear={updateExpiryYear}
+        updateCardCompany={updateCardCompany}
       />
     );
   },

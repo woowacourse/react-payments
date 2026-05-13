@@ -9,7 +9,6 @@ import NumberField from "./NumberField/NumberField";
 import CardCompanySelectField from "./CardCompanySelectField/CardCompanySelectField";
 import PasswordField from "./PasswordField/PasswordField";
 import Button from "../../../../common/components/Button/Button";
-
 import type {
   CardInfoType,
   CardNumberChunkType,
@@ -30,16 +29,16 @@ import { CARD_FORM } from "../../constants";
 
 const CardRegisterForm = ({
   cardInfo,
-  onCardNumbersChange,
-  onExpiryMonthChange,
-  onExpiryYearChange,
-  onCardCompanySelect,
+  updateCardNumbers,
+  updateExpiryMonth,
+  updateExpiryYear,
+  updateCardCompany,
 }: {
   cardInfo: CardInfoType;
-  onCardNumbersChange: (cardNumbers: CardNumberChunkType) => void;
-  onExpiryMonthChange: (expiryMonth: string) => void;
-  onExpiryYearChange: (expiryYear: string) => void;
-  onCardCompanySelect: (cardCompany: CardCompanyType) => void;
+  updateCardNumbers: (cardNumbers: CardNumberChunkType) => void;
+  updateExpiryMonth: (expiryMonth: string) => void;
+  updateExpiryYear: (expiryYear: string) => void;
+  updateCardCompany: (cardCompany: CardCompanyType) => void;
 }) => {
   const navigate = useNavigate();
   const [cardInputSectionInformation, setCardInputSectionInformation] =
@@ -49,7 +48,7 @@ const CardRegisterForm = ({
     });
 
   // 한 번 렌더링 된 필드는 이전 단계에서 에러가 나도 사라지지 않게 하므로 state로!
-  const [unlockedStep, setUnlockedStep] = useState(1);
+  const [maxUnlockedStep, setMaxUnlockedStep] = useState(1);
   const confirmButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
@@ -57,38 +56,48 @@ const CardRegisterForm = ({
 
   const cardBrand = getCardBrandName(cardNumbers);
 
-  const showAtLeastStep = (step: number) => {
-    setUnlockedStep((previousStep) => Math.max(previousStep, step));
+  // 한 번 열린 Step은 다시 닫히지 않는다.
+  const updateMaxUnlockedStep = (step: number) => {
+    setMaxUnlockedStep((previousStep) => Math.max(previousStep, step));
+  };
+
+  const unlockNextStepIfFieldValid = (isValid: boolean, nextStep: number) => {
+    if (isValid) {
+      updateMaxUnlockedStep(nextStep);
+    }
   };
 
   const handleCardNumbersChange = (
     nextCardNumbers: CardInfoType["cardNumbers"],
   ) => {
-    onCardNumbersChange(nextCardNumbers);
-    const nextCardBrand = getCardBrandName(nextCardNumbers);
+    updateCardNumbers(nextCardNumbers);
 
-    if (isCardNumberFieldValid(nextCardNumbers.join(""), nextCardBrand)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.CARD_COMPANY);
-    }
+    const nextCardBrand = getCardBrandName(nextCardNumbers);
+    unlockNextStepIfFieldValid(
+      isCardNumberFieldValid(nextCardNumbers.join(""), nextCardBrand),
+      CARD_FORM.RENDER_STEP.CARD_COMPANY,
+    );
   };
 
   const handleCardCompanyChange = (cardCompany: CardCompanyType) => {
-    onCardCompanySelect(cardCompany);
-    showAtLeastStep(CARD_FORM.RENDER_STEP.EXPIRY);
+    updateCardCompany(cardCompany);
+    updateMaxUnlockedStep(CARD_FORM.RENDER_STEP.EXPIRY);
   };
 
   const handleExpiryMonthChange = (nextExpiryMonth: string) => {
-    onExpiryMonthChange(nextExpiryMonth);
-    if (isExpiryFieldValid(nextExpiryMonth, expiryYear)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.CVC);
-    }
+    updateExpiryMonth(nextExpiryMonth);
+    unlockNextStepIfFieldValid(
+      isExpiryFieldValid(nextExpiryMonth, expiryYear),
+      CARD_FORM.RENDER_STEP.CVC,
+    );
   };
 
   const handleExpiryYearChange = (nextExpiryYear: string) => {
-    onExpiryYearChange(nextExpiryYear);
-    if (isExpiryFieldValid(expiryMonth, nextExpiryYear)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.CVC);
-    }
+    updateExpiryYear(nextExpiryYear);
+    unlockNextStepIfFieldValid(
+      isExpiryFieldValid(expiryMonth, nextExpiryYear),
+      CARD_FORM.RENDER_STEP.CVC,
+    );
   };
 
   const handleCvcNumberChange = (nextCvcNumber: string) => {
@@ -96,9 +105,11 @@ const CardRegisterForm = ({
       ...previousInformation,
       cvcNumber: nextCvcNumber,
     }));
-    if (isCvcFieldValid(nextCvcNumber)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.PASSWORD);
-    }
+
+    unlockNextStepIfFieldValid(
+      isCvcFieldValid(nextCvcNumber),
+      CARD_FORM.RENDER_STEP.PASSWORD,
+    );
   };
 
   const handlePasswordChange = (nextPassword: string) => {
@@ -106,9 +117,11 @@ const CardRegisterForm = ({
       ...previousInformation,
       password: nextPassword,
     }));
-    if (isPasswordFieldValid(nextPassword)) {
-      showAtLeastStep(CARD_FORM.RENDER_STEP.COMPLETE);
-    }
+
+    unlockNextStepIfFieldValid(
+      isPasswordFieldValid(nextPassword),
+      CARD_FORM.RENDER_STEP.COMPLETE,
+    );
   };
 
   const joinedCardNumber = cardNumbers.join("");
@@ -144,7 +157,7 @@ const CardRegisterForm = ({
 
   return (
     <Form onSubmit={handleCardInfoSubmit}>
-      {unlockedStep >= CARD_FORM.RENDER_STEP.PASSWORD && (
+      {maxUnlockedStep >= CARD_FORM.RENDER_STEP.PASSWORD && (
         <CardRegisterStep
           title="비밀번호를 입력해 주세요"
           description="앞의 2자리를 입력해주세요"
@@ -156,7 +169,7 @@ const CardRegisterForm = ({
         </CardRegisterStep>
       )}
 
-      {unlockedStep >= CARD_FORM.RENDER_STEP.CVC && (
+      {maxUnlockedStep >= CARD_FORM.RENDER_STEP.CVC && (
         <CardRegisterStep title="CVC 번호를 입력해 주세요">
           <CvcField
             cvcNumber={cardInputSectionInformation.cvcNumber}
@@ -165,7 +178,7 @@ const CardRegisterForm = ({
         </CardRegisterStep>
       )}
 
-      {unlockedStep >= CARD_FORM.RENDER_STEP.EXPIRY && (
+      {maxUnlockedStep >= CARD_FORM.RENDER_STEP.EXPIRY && (
         <CardRegisterStep
           title="카드 유효기간을 입력해 주세요"
           description="월/년도(MMYY)를 순서대로 입력해 주세요."
@@ -179,7 +192,7 @@ const CardRegisterForm = ({
         </CardRegisterStep>
       )}
 
-      {unlockedStep >= CARD_FORM.RENDER_STEP.CARD_COMPANY && (
+      {maxUnlockedStep >= CARD_FORM.RENDER_STEP.CARD_COMPANY && (
         <CardRegisterStep
           title="카드사를 선택해 주세요"
           description="현재 국내 카드사만 가능합니다."
@@ -191,7 +204,7 @@ const CardRegisterForm = ({
         </CardRegisterStep>
       )}
 
-      {unlockedStep >= CARD_FORM.RENDER_STEP.CARD_NUMBER && (
+      {maxUnlockedStep >= CARD_FORM.RENDER_STEP.CARD_NUMBER && (
         <CardRegisterStep
           title="결제할 카드 번호를 입력해 주세요"
           description="본인 명의의 카드만 결제 가능합니다."
