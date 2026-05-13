@@ -3,7 +3,7 @@ import './Select.css';
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options: readonly { label: string; value: string }[];
   variant?: 'default' | 'error';
-  ref?: React.RefObject<HTMLSelectElement | null>;
+  ref?: React.Ref<HTMLSelectElement>;
 }
 
 export default function Select({ options, variant = 'default', ref, ...props }: SelectProps) {
