@@ -47,6 +47,7 @@ export function useCardRegisterForm() {
   const getNumberInputProps = (): CardRegisterInputProps[] =>
     numberField.format.map((maxLength, index) => ({
       type: 'text',
+      inputMode: 'numeric',
       value: numberField.cardNumbers[index] ?? '',
       maxLength: maxLength,
       placeholder: generateNumberPlaceholder(maxLength),
@@ -56,6 +57,7 @@ export function useCardRegisterForm() {
 
   const createExpiryInputProps = (index: 0 | 1): CardRegisterInputProps => ({
     type: 'text',
+    inputMode: 'numeric',
     value: expiryField.expiryDate[index],
     maxLength: 2,
     placeholder: ['MM', 'YY'][index],
@@ -70,6 +72,7 @@ export function useCardRegisterForm() {
 
   const getCvcInputProps = (): CardRegisterInputProps => ({
     type: 'text',
+    inputMode: 'numeric',
     value: cvcField.cvcNumber,
     maxLength: 3,
     placeholder: '123',
@@ -79,6 +82,7 @@ export function useCardRegisterForm() {
 
   const getPasswordInputProps = (): CardRegisterInputProps => ({
     type: 'password',
+    inputMode: 'numeric',
     value: passwordField.password,
     maxLength: 2,
     placeholder: '**',

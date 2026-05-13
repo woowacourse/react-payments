@@ -1,7 +1,8 @@
-import type {ChangeEventHandler, FocusEventHandler} from 'react';
+import type {ChangeEventHandler, FocusEventHandler, HTMLAttributes, HTMLInputTypeAttribute} from 'react';
 
 export type CardRegisterInputProps = {
-  type?: 'text' | 'password';
+  type?: HTMLInputTypeAttribute;
+  inputMode?: HTMLAttributes<HTMLInputElement>['inputMode'];
   value: string;
   maxLength: number;
   placeholder: string;
