@@ -8,6 +8,8 @@ type ExpiryDateInputSectionProps = {
   onValueHandler: (values: string[]) => void;
 };
 
+const EXPRIY_DATE_INPUT_LABELS = ["유효기간 월", "유효기간 년도"];
+
 const ExpiryDateInputSection = ({ onValueHandler }: ExpiryDateInputSectionProps) => {
   const { inputValues, errorMessage, errorIndex, inputRefs, fieldCount, fieldMaxLength, handlers } = useExpiryDateInput(
     { onValueHandler },

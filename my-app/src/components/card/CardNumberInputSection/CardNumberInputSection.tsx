@@ -10,6 +10,13 @@ type CardNumberInputSectionProps = {
   isSupportedNetwork: boolean;
 };
 
+const CARD_NUMBER_INPUT_LABELS = [
+  "카드 번호 첫번째 칸",
+  "카드 번호 두번째 칸",
+  "카드 번호 세번째 칸",
+  "카드 번호 네번째 칸",
+];
+
 const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork }: CardNumberInputSectionProps) => {
   const {
     inputValues,
@@ -36,6 +43,7 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork 
               inputRefs.current[i] = el;
             }}
             key={i}
+            aria-label={CARD_NUMBER_INPUT_LABELS[i]}
             maxLength={i === fieldCount - 1 ? lastInputMaxLength : fieldMaxLength}
             inputMode="numeric"
             value={inputValues[i] || ""}

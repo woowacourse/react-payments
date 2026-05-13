@@ -10,6 +10,8 @@ type CvcInputSectionProps = {
   onValueHandler: (value: string) => void;
 };
 
+const CVC_INPUT_LABEL = "CVC";
+
 const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
   const { inputValue, errorMessage, handlers } = useSingleFieldInput({ onValueHandler, validate: validateNumeric });
 
@@ -18,6 +20,7 @@ const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
       <ValidatedInputGroup errorMessage={errorMessage} legend="CVC">
         <input
           type="text"
+          aria-label={CVC_INPUT_LABEL}
           autoFocus
           maxLength={CVC_LENGTH}
           inputMode="numeric"
