@@ -14,8 +14,10 @@ const mockCardCompany: CardCompanyType[] = [
 ];
 
 const CardCompanySelectField = ({
+  selectedCardCompany,
   onSelect,
 }: {
+  selectedCardCompany: CardCompanyType | null;
   onSelect: (cardCompany: CardCompanyType) => void;
 }) => {
   return (
@@ -23,6 +25,7 @@ const CardCompanySelectField = ({
       <CardSelectTrigger
         required
         defaultValue=""
+        value={selectedCardCompany ?? ""}
         onChange={(e) => onSelect(e.target.value as CardCompanyType)}
         autoFocus
       >
