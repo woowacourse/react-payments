@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCardBrand } from "../utils/getCardBrand";
 import { getCardNumberErrorMessage } from "../utils/getCardNumberErrorMessage";
-import { getEXPNumberErrorMessage } from "../utils/getEXPNumberErrorMessage";
-import { getCVCNumberErrorMessage } from "../utils/getCVCNumberErrorMessage";
-import { getPassWordErrorMessage } from "../utils/getPassWordErrorMessage";
+import { getExpNumberErrorMessage } from "../utils/getExpNumberErrorMessage";
+import { getCvcNumberErrorMessage } from "../utils/getCvcNumberErrorMessage";
+import { getPasswordErrorMessage } from "../utils/getPasswordErrorMessage";
 import type { CardNumbers } from "./useCardNumberField";
 import type { ExpNumber } from "./useExpNumberField";
 export default function useCardRegisterPage() {
@@ -29,9 +29,9 @@ export default function useCardRegisterPage() {
   const isAllValid =
     cardFirm.value !== "" &&
     getCardNumberErrorMessage(cardNumbers, cardBrand) === null &&
-    getEXPNumberErrorMessage(expNumbers) === null &&
-    getCVCNumberErrorMessage(cvcNumbers) === null &&
-    getPassWordErrorMessage(passwordNumbers) === null;
+    getExpNumberErrorMessage(expNumbers) === null &&
+    getCvcNumberErrorMessage(cvcNumbers) === null &&
+    getPasswordErrorMessage(passwordNumbers) === null;
 
   const navigate = useNavigate();
 

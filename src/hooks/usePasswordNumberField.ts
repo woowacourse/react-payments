@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getPassWordErrorMessage } from "../utils/getPassWordErrorMessage";
+import { getPasswordErrorMessage } from "../utils/getPasswordErrorMessage";
 
 export default function usePasswordNumberField(
   setPassWord: (value: string) => void,
@@ -11,7 +11,7 @@ export default function usePasswordNumberField(
     setPassWord(newValue);
   };
   const handleOnBlur = () => {
-    setInputError(getPassWordErrorMessage(value));
+    setInputError(getPasswordErrorMessage(value));
   };
   return { inputError, setInputError, handleOnChange, handleOnBlur };
 }

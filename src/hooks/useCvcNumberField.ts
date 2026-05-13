@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getCVCNumberErrorMessage } from "../utils/getCVCNumberErrorMessage";
+import { getCvcNumberErrorMessage } from "../utils/getCvcNumberErrorMessage";
 
 export default function useCvcNumberField(
   setCvcNumber: (value: string) => void,
@@ -13,7 +13,7 @@ export default function useCvcNumberField(
     onComplete(newValue.length === 3 && inputError === null);
   };
   const handleOnBlur = () => {
-    if (value !== "") setInputError(getCVCNumberErrorMessage(value));
+    if (value !== "") setInputError(getCvcNumberErrorMessage(value));
   };
   return { inputError, setInputError, handleOnChange, handleOnBlur };
 }

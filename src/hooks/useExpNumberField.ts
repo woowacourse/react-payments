@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { getEXPNumberErrorMessage } from "../utils/getEXPNumberErrorMessage";
+import { getExpNumberErrorMessage } from "../utils/getExpNumberErrorMessage";
 import { useFieldErrors } from "./useFieldErrors";
 
 export type ExpNumber = { mm: string; yy: string };
@@ -23,7 +23,7 @@ export default function useExpNumberField(
     );
 
     if (expKey === "mm" && newValue.length === 2) {
-      const result = getEXPNumberErrorMessage({ mm: newValue, yy: value.yy });
+      const result = getExpNumberErrorMessage({ mm: newValue, yy: value.yy });
       if (result === null || result.key !== "mm") {
         if (value.yy === "") inputRefs.current["yy"]?.focus();
       } else setError("mm")(result?.message);
@@ -32,7 +32,7 @@ export default function useExpNumberField(
 
   const handleOnBlur =
     (expKey: string) => (e: React.FocusEvent<HTMLInputElement>) => {
-      const result = getEXPNumberErrorMessage({
+      const result = getExpNumberErrorMessage({
         ...value,
         [expKey]: e.target.value,
       });
