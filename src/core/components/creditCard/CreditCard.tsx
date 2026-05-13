@@ -1,3 +1,5 @@
+import cn from 'classnames';
+
 import styles from './CreditCard.module.css';
 
 import MastercardSvg from '@/core/assets/Mastercard.svg?react';
@@ -9,9 +11,10 @@ type CardNumberType = string[] | undefined;
 type ExpirationDate = string[] | undefined;
 
 export interface DefaultCreditCardProps {
+  size?: 'small';
   card?: keyof typeof cardColors;
-  bank: Bank;
-  cardBrand: BrandType;
+  bank?: Bank;
+  cardBrand?: BrandType;
   cardNumberList?: CardNumberType;
   expirationDate?: ExpirationDate;
 }
@@ -37,6 +40,7 @@ const cardColors = {
 
 export const CreditCard = ({
   // bank = 'default',
+  size,
   card,
   cardBrand = 'mastercard',
   cardNumberList,
@@ -45,7 +49,7 @@ export const CreditCard = ({
   const cardColor = cardColors[card as keyof typeof cardColors];
 
   return (
-    <div className={styles.creditCard}>
+    <div className={cn(styles.creditCard, styles[`size-${size}`])}>
       <div className={styles.card} style={{ background: cardColor }}>
         <div className={styles.brand}>{BrandMap[cardBrand]}</div>
         <div className={styles.number}>
