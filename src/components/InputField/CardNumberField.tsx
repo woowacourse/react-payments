@@ -1,18 +1,15 @@
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
-import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
-import { useFieldErrors } from "../../hooks/useFieldErrors";
-type CardNumbers = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+import useCardNumberField, {
+  type CardNumbers,
+  type CardBrand,
+} from "../../hooks/useCardNumberField";
+
 interface Props {
-  setCardNumber: (value: CardNumbers) => void;
   value: CardNumbers;
+  cardBrand: CardBrand;
+  setCardNumber: (value: CardNumbers) => void;
   onComplete: (isCompleted: boolean) => void;
-  cardBrand: "visa" | "master" | "diners" | "amex" | "unionpay" | null;
 }
 
 export default function CardNumberField({
@@ -21,48 +18,15 @@ export default function CardNumberField({
   onComplete,
   cardBrand,
 }: Props) {
-  const { inputErrors, setError, errorMessage } = useFieldErrors([
-    "first",
-    "second",
-    "third",
-    "fourth",
-  ]);
-
-  const fourthMaxLength =
-    cardBrand === "diners" ? 2 : cardBrand === "amex" ? 3 : 4;
-
-  const handleOnChange = (cardKey: string) => (newValue: string) => {
-    setError(cardKey as keyof CardNumbers)(null);
-    const newCardNumbers = { ...value, [cardKey]: newValue };
-    setCardNumber(newCardNumbers);
-
-    onComplete(
-      newCardNumbers.first.length === 4 &&
-        newCardNumbers.second.length === 4 &&
-        newCardNumbers.third.length === 4 &&
-        newCardNumbers.fourth.length === fourthMaxLength &&
-        Object.values(inputErrors).every((err) => err === null),
-    );
-
-    const maxLen = cardKey === "fourth" ? fourthMaxLength : 4;
-    const nextKey: Record<string, string> = {
-      first: "second",
-      second: "third",
-      third: "fourth",
-    };
-
-    if (newValue.length === maxLen && nextKey[cardKey]) {
-      inputRefs.current[nextKey[cardKey]]?.focus();
-    }
-  };
-
-  const handleOnBlur =
-    (cardKey: string) => (e: React.FocusEvent<HTMLInputElement>) => {
-      const currentValues = { ...value, [cardKey]: e.target.value };
-      const result = getCardNumberErrorMessage(currentValues, cardBrand);
-      const message = result && result.key === cardKey ? result.message : null;
-      setError(cardKey as keyof CardNumbers)(message);
-    };
+  const {
+    inputErrors,
+    inputRefs,
+    errorMessage,
+    fourthMaxLength,
+    handleOnChange,
+    handleOnBlur,
+    setError,
+  } = useCardNumberField(value, cardBrand, setCardNumber, onComplete);
 
   return (
     <InputGroup errorMessage={errorMessage}>
@@ -73,9 +37,9 @@ export default function CardNumberField({
           value={cardValue}
           onChange={handleOnChange(cardKey)}
           placeholder="1234"
-          hasError={inputErrors[cardKey as keyof CardNumbers] !== null}
+          hasError={inputErrors[cardKey] !== null}
           maxLength={cardKey === "fourth" ? fourthMaxLength : 4}
-          onError={setError(cardKey as keyof CardNumbers)}
+          onError={setError(cardKey)}
           onBlur={handleOnBlur(cardKey)}
           ref={(el) => {
             if (cardKey !== "first") inputRefs.current[cardKey] = el;
