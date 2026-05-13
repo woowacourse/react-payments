@@ -43,11 +43,7 @@ const meta = {
   component: InfoInputSection,
   tags: ['autodocs'],
   args: {
-    numberSlot,
-    companySlot: null,
-    expirySlot: null,
-    cvcSlot: null,
-    passwordSlot: null,
+    slots: [numberSlot],
   },
 } satisfies Meta<typeof InfoInputSection>;
 
@@ -58,22 +54,18 @@ export const NumberOnly: Story = {};
 
 export const WithCompanySelect: Story = {
   args: {
-    companySlot,
+    slots: [companySlot, numberSlot],
   },
 };
 
 export const WithExpiry: Story = {
   args: {
-    companySlot,
-    expirySlot,
+    slots: [expirySlot, companySlot, numberSlot],
   },
 };
 
 export const FullVisible: Story = {
   args: {
-    companySlot,
-    expirySlot,
-    cvcSlot,
-    passwordSlot,
+    slots: [passwordSlot, cvcSlot, expirySlot, companySlot, numberSlot],
   },
 };

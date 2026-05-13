@@ -12,21 +12,33 @@ import CvcField from './components/inputs/CvcField/CvcField';
 import PasswordField from './components/inputs/PasswordField/PasswordField';
 
 import {useCardRegisterForm} from './hooks/form/useCardRegisterForm';
+import {useStepFocus} from './hooks/ui/useStepFocus';
 
 const CardRegisterPage = () => {
   const {cardPreview, visibleFields, fieldProps, isFormComplete, submitError, handleSubmit} = useCardRegisterForm();
+
+  // 새 필드가 위에 쌓이는 UX라 화면 렌더 순서도 입력 순서의 반대로 둔다.
+  const inputSteps = [
+    {slot: visibleFields.password ? <PasswordField {...fieldProps.cardPassword} /> : null, focusTargetId: 'card-password'},
+    {slot: visibleFields.cvc ? <CvcField {...fieldProps.cardCvc} /> : null, focusTargetId: 'card-cvc'},
+    {
+      slot: visibleFields.expiry ? <ExpiryField {...fieldProps.cardExpiryDate} /> : null,
+      focusTargetId: 'card-expiry-month',
+    },
+    {
+      slot: visibleFields.company ? <CompanySelectField {...fieldProps.cardCompany} /> : null,
+      focusTargetId: 'card-company',
+    },
+    {slot: <NumberField {...fieldProps.cardNumbers} />},
+  ];
+
+  useStepFocus(inputSteps);
 
   return (
     <Wrapper>
       <Content>
         <CardPreviewSection previewSlot={<CardPreviewContainer {...cardPreview} />} />
-        <InfoInputSection
-          numberSlot={<NumberField {...fieldProps.cardNumbers} />}
-          companySlot={visibleFields.company ? <CompanySelectField {...fieldProps.cardCompany} /> : null}
-          expirySlot={visibleFields.expiry ? <ExpiryField {...fieldProps.cardExpiryDate} /> : null}
-          cvcSlot={visibleFields.cvc ? <CvcField {...fieldProps.cardCvc} /> : null}
-          passwordSlot={visibleFields.password ? <PasswordField {...fieldProps.cardPassword} /> : null}
-        />
+        <InfoInputSection slots={inputSteps.map(({slot}) => slot)} />
       </Content>
       {submitError && <SubmitErrorMessage>{submitError}</SubmitErrorMessage>}
       {isFormComplete && <SubmitButton onClick={handleSubmit}>확인</SubmitButton>}
