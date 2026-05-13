@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import CardInfoSection from "../components/CardInfoSection";
 import CardPreview from "../components/Card/CardPreview";
-import CardNumberInputWrapper from "../components/InputWrapper/CardNumberInputWrapper";
-import EXPInputWrapper from "../components/InputWrapper/EXPInputWrapper";
-import CVCInputWrapper from "../components/InputWrapper/CVCInputWrapper";
+import CardNumberField from "../components/InputField/CardNumberField";
+import EXPNumberField from "../components/InputField/EXPNumberField";
+import CVCNumberField from "../components/InputField/CVCNumberField";
 import CardFirmSelect from "../components/CardFirmSelect/CardFirmSelect";
-import PassWordInputWrapper from "../components/InputWrapper/PassWordInputWrapper";
+import PassWordNumberField from "../components/InputField/PassWordNumberField";
 import CheckBtn from "../components/button/CheckBtn";
 import { useNavigate } from "react-router-dom";
 import { getCardNumberErrorMessage } from "../utils/getCardNumberErrorMessage";
@@ -59,7 +59,7 @@ export default function CardRegisterPage() {
             caption="앞의 2자리를 입력해주세요"
             label="비밀번호 앞 2자리"
           >
-            <PassWordInputWrapper
+            <PassWordNumberField
               setPassWord={setPasswordNumbers}
               value={passWordNumbers}
             />
@@ -68,7 +68,7 @@ export default function CardRegisterPage() {
 
         {isEXPCompleted && (
           <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
-            <CVCInputWrapper
+            <CVCNumberField
               setCVCNumber={setCVCNumbers}
               value={CVCNumbers}
               onComplete={(isCompleted) => {
@@ -84,7 +84,7 @@ export default function CardRegisterPage() {
             caption="월/년도(MMYY)를 순서대로 입력해 주세요"
             label="유효기간"
           >
-            <EXPInputWrapper
+            <EXPNumberField
               setEXPNumber={setEXPNumbers}
               value={EXPNumbers}
               onComplete={(isCompleted) => {
@@ -112,7 +112,7 @@ export default function CardRegisterPage() {
           caption="본인 명의의 카드만 결제 가능합니다."
           label="카드 번호"
         >
-          <CardNumberInputWrapper
+          <CardNumberField
             setCardNumber={setCardNumbers}
             value={cardNumbers}
             onComplete={(isCompleted) => {

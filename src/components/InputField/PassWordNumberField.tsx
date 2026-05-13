@@ -8,7 +8,7 @@ interface Props {
   value: string;
 }
 
-export default function PassWordInputWrapper({ setPassWord, value }: Props) {
+export default function PassWordNumberField({ setPassWord, value }: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
   return (

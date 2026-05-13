@@ -15,7 +15,7 @@ interface Props {
   cardBrand: "visa" | "master" | "diners" | "amex" | "unionpay" | null;
 }
 
-export default function CardNumberInputWrapper({
+export default function CardNumberField({
   setCardNumber,
   value,
   onComplete,

@@ -10,7 +10,7 @@ interface Props {
   onComplete: (isCompleted: boolean) => void;
 }
 
-export default function EXPInputWrapper({
+export default function EXPNumberField({
   setEXPNumber,
   value,
   onComplete,

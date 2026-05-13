@@ -9,7 +9,7 @@ interface Props {
   onComplete: (isCompleted: boolean) => void;
 }
 
-export default function CVCInputWrapper({
+export default function CVCNumberField({
   setCVCNumber,
   value,
   onComplete,
