@@ -1,7 +1,6 @@
-import { useState } from "react";
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
-import { getCVCNumberErrorMessage } from "../../utils/getCVCNumberErrorMessage";
+import useCVCNumberField from "../../hooks/useCVCNumberField";
 
 interface Props {
   setCVCNumber: (value: string) => void;
@@ -14,25 +13,19 @@ export default function CVCNumberField({
   value,
   onComplete,
 }: Props) {
-  const [inputError, setInputError] = useState<string | null>(null);
-
+  const { inputError, setInputError, handleOnChange, handleOnBlur } =
+    useCVCNumberField(setCVCNumber, value, onComplete);
   return (
     <InputGroup errorMessage={inputError}>
       <NumberInput
         value={value}
-        onChange={(newValue) => {
-          setInputError(null);
-          setCVCNumber(newValue);
-          onComplete(newValue.length === 3 && inputError === null);
-        }}
+        onChange={handleOnChange}
         placeholder="123"
         autoFocus
         hasError={inputError !== null}
         maxLength={3}
         onError={setInputError}
-        onBlur={() => {
-          if (value !== "") setInputError(getCVCNumberErrorMessage(value));
-        }}
+        onBlur={handleOnBlur}
         style={{ width: "315px" }}
       />
     </InputGroup>
