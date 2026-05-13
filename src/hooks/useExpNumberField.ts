@@ -2,11 +2,11 @@ import { useRef } from "react";
 import { getEXPNumberErrorMessage } from "../utils/getEXPNumberErrorMessage";
 import { useFieldErrors } from "./useFieldErrors";
 
-export type EXPNumber = { mm: string; yy: string };
+export type ExpNumber = { mm: string; yy: string };
 
-export default function useEXPNumberField(
-  setEXPNumber: (value: EXPNumber) => void,
-  value: EXPNumber,
+export default function useExpNumberField(
+  setExpNumber: (value: ExpNumber) => void,
+  value: ExpNumber,
   onComplete: (isCompleted: boolean) => void,
 ) {
   const { inputErrors, setError, errorMessage } = useFieldErrors(["mm", "yy"]);
@@ -14,11 +14,11 @@ export default function useEXPNumberField(
   const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
   const handleOnChange = (expKey: string) => (newValue: string) => {
-    setError(expKey as keyof EXPNumber)(null);
-    const newEXPNumbers = { ...value, [expKey]: newValue };
-    setEXPNumber(newEXPNumbers);
+    setError(expKey)(null);
+    const newExpNumbers = { ...value, [expKey]: newValue };
+    setExpNumber(newExpNumbers);
     onComplete(
-      Object.values(newEXPNumbers).every((value) => value.length === 2) &&
+      Object.values(newExpNumbers).every((value) => value.length === 2) &&
         Object.values(inputErrors).every((err) => err === null),
     );
 
@@ -37,7 +37,7 @@ export default function useEXPNumberField(
         [expKey]: e.target.value,
       });
       const message = result && result.key === expKey ? result.message : null;
-      setError(expKey as keyof EXPNumber)(message);
+      setError(expKey)(message);
     };
 
   return {

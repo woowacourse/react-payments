@@ -1,25 +1,29 @@
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
-import usePassWordNumberField from "../../hooks/usePassWordNumberField";
+import useCvcNumberField from "../../hooks/useCvcNumberField";
 
 interface Props {
-  setPassWord: (value: string) => void;
+  setCvcNumber: (value: string) => void;
   value: string;
+  onComplete: (isCompleted: boolean) => void;
 }
 
-export default function PassWordNumberField({ setPassWord, value }: Props) {
+export default function CvcNumberField({
+  setCvcNumber,
+  value,
+  onComplete,
+}: Props) {
   const { inputError, setInputError, handleOnChange, handleOnBlur } =
-    usePassWordNumberField(setPassWord, value);
+    useCvcNumberField(setCvcNumber, value, onComplete);
   return (
     <InputGroup errorMessage={inputError}>
       <NumberInput
-        type="password"
-        autoFocus
         value={value}
         onChange={handleOnChange}
         placeholder="123"
+        autoFocus
         hasError={inputError !== null}
-        maxLength={2}
+        maxLength={3}
         onError={setInputError}
         onBlur={handleOnBlur}
         style={{ width: "315px" }}

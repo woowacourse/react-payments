@@ -1,17 +1,17 @@
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
-import useEXPNumberField, {
-  type EXPNumber,
-} from "../../hooks/useEXPNumberField";
+import useExpNumberField, {
+  type ExpNumber,
+} from "../../hooks/useExpNumberField";
 
 interface Props {
-  setEXPNumber: (value: EXPNumber) => void;
-  value: EXPNumber;
+  setExpNumber: (value: ExpNumber) => void;
+  value: ExpNumber;
   onComplete: (isCompleted: boolean) => void;
 }
 
-export default function EXPNumberField({
-  setEXPNumber,
+export default function ExpNumberField({
+  setExpNumber,
   value,
   onComplete,
 }: Props) {
@@ -22,7 +22,7 @@ export default function EXPNumberField({
     errorMessage,
     handleOnChange,
     handleOnBlur,
-  } = useEXPNumberField(setEXPNumber, value, onComplete);
+  } = useExpNumberField(setExpNumber, value, onComplete);
   return (
     <InputGroup errorMessage={errorMessage}>
       {Object.entries(value).map(([expKey, expValue]) => (

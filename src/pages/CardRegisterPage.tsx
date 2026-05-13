@@ -3,10 +3,10 @@ import { useState } from "react";
 import CardInfoSection from "../components/CardInfoSection";
 import CardPreview from "../components/Card/CardPreview";
 import CardNumberField from "../components/InputField/CardNumberField";
-import EXPNumberField from "../components/InputField/EXPNumberField";
-import CVCNumberField from "../components/InputField/CVCNumberField";
+import ExpNumberField from "../components/InputField/ExpNumberField";
+import CvcNumberField from "../components/InputField/CvcNumberField";
 import CardFirmSelect from "../components/CardFirmSelect/CardFirmSelect";
-import PassWordNumberField from "../components/InputField/PassWordNumberField";
+import PasswordNumberField from "../components/InputField/PasswordNumberField";
 import CheckBtn from "../components/button/CheckBtn";
 import { useNavigate } from "react-router-dom";
 import { getCardNumberErrorMessage } from "../utils/getCardNumberErrorMessage";
@@ -25,21 +25,21 @@ export default function CardRegisterPage() {
 
   const cardBrand = getCardBrand(cardNumbers);
 
-  const [EXPNumbers, setEXPNumbers] = useState({ mm: "", yy: "" });
-  const [CVCNumbers, setCVCNumbers] = useState("");
+  const [expNumbers, setExpNumbers] = useState({ mm: "", yy: "" });
+  const [cvcNumbers, setCvcNumbers] = useState("");
   const [cardFirm, setCardFirm] = useState({ value: "", label: "" });
-  const [passWordNumbers, setPasswordNumbers] = useState("");
+  const [passwordNumbers, setPasswordNumbers] = useState("");
 
   const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
-  const [isEXPCompleted, setIsEXPCompleted] = useState(false);
-  const [isCVCCompleted, setIsCVCCompleted] = useState(false);
+  const [isExpCompleted, setIsExpCompleted] = useState(false);
+  const [isCvcCompleted, setIsCvcCompleted] = useState(false);
 
   const isAllValid =
     cardFirm.value !== "" &&
     getCardNumberErrorMessage(cardNumbers, cardBrand) === null &&
-    getEXPNumberErrorMessage(EXPNumbers) === null &&
-    getCVCNumberErrorMessage(CVCNumbers) === null &&
-    getPassWordErrorMessage(passWordNumbers) === null;
+    getEXPNumberErrorMessage(expNumbers) === null &&
+    getCVCNumberErrorMessage(cvcNumbers) === null &&
+    getPassWordErrorMessage(passwordNumbers) === null;
 
   const navigate = useNavigate();
 
@@ -47,32 +47,32 @@ export default function CardRegisterPage() {
     <MainContainer>
       <CardPreview
         cardNumbers={cardNumbers}
-        EXP={EXPNumbers}
+        EXP={expNumbers}
         cardFirm={cardFirm}
         cardBrand={cardBrand}
       />
 
       <InputSectionContainer>
-        {isCVCCompleted && (
+        {isCvcCompleted && (
           <CardInfoSection
             title="비밀번호를 입력해 주세요"
             caption="앞의 2자리를 입력해주세요"
             label="비밀번호 앞 2자리"
           >
-            <PassWordNumberField
+            <PasswordNumberField
               setPassWord={setPasswordNumbers}
-              value={passWordNumbers}
+              value={passwordNumbers}
             />
           </CardInfoSection>
         )}
 
-        {isEXPCompleted && (
+        {isExpCompleted && (
           <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
-            <CVCNumberField
-              setCVCNumber={setCVCNumbers}
-              value={CVCNumbers}
+            <CvcNumberField
+              setCvcNumber={setCvcNumbers}
+              value={cvcNumbers}
               onComplete={(isCompleted) => {
-                if (isCompleted) setIsCVCCompleted(true);
+                if (isCompleted) setIsCvcCompleted(true);
               }}
             />
           </CardInfoSection>
@@ -84,11 +84,11 @@ export default function CardRegisterPage() {
             caption="월/년도(MMYY)를 순서대로 입력해 주세요"
             label="유효기간"
           >
-            <EXPNumberField
-              setEXPNumber={setEXPNumbers}
-              value={EXPNumbers}
+            <ExpNumberField
+              setExpNumber={setExpNumbers}
+              value={expNumbers}
               onComplete={(isCompleted) => {
-                if (isCompleted) setIsEXPCompleted(true);
+                if (isCompleted) setIsExpCompleted(true);
               }}
             />
           </CardInfoSection>

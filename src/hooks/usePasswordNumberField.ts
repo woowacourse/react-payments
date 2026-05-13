@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getPassWordErrorMessage } from "../utils/getPassWordErrorMessage";
 
-export default function usePassWordNumberField(
+export default function usePasswordNumberField(
   setPassWord: (value: string) => void,
   value: string,
 ) {
