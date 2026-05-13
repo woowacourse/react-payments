@@ -1,7 +1,7 @@
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getCardNumberErrorMessage } from "../../utils/getCardNumberErrorMessage";
-import { useInputGroup } from "../../hooks/useInputGroup";
+import { useFieldErrors } from "../../hooks/useFieldErrors";
 type CardNumbers = {
   first: string;
   second: string;
@@ -21,7 +21,7 @@ export default function CardNumberInputWrapper({
   onComplete,
   cardBrand,
 }: Props) {
-  const { inputErrors, setError, inputRefs, errorMessage } = useInputGroup([
+  const { inputErrors, setError, errorMessage } = useFieldErrors([
     "first",
     "second",
     "third",

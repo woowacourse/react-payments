@@ -1,7 +1,7 @@
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
 import { getEXPNumberErrorMessage } from "../../utils/getEXPNumberErrorMessage";
-import { useInputGroup } from "../../hooks/useInputGroup";
+import { useFieldErrors } from "../../hooks/useFieldErrors";
 
 type EXPNumber = { mm: string; yy: string };
 interface Props {
@@ -15,10 +15,7 @@ export default function EXPInputWrapper({
   value,
   onComplete,
 }: Props) {
-  const { inputErrors, setError, inputRefs, errorMessage } = useInputGroup([
-    "mm",
-    "yy",
-  ]);
+  const { inputErrors, setError, errorMessage } = useFieldErrors(["mm", "yy"]);
 
   const handelOnChange = (expKey: string) => (newValue: string) => {
     setError(expKey as keyof EXPNumber)(null);

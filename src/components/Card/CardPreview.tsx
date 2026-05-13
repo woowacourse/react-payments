@@ -12,6 +12,7 @@ interface Props {
   cardFirm: { value: string; label: string };
   cardBrand: "visa" | "master" | "diners" | "amex" | "unionpay" | null;
 }
+
 const BRAND_LOGO = {
   visa: Visa,
   master: Mastercard,
@@ -27,6 +28,7 @@ export default function CardPreview({
   cardBrand,
 }: Props) {
   const cardColor = CARD_COLORS[cardFirm.value] ?? "#333333";
+
   return (
     <CardPreviewContainer cardColor={cardColor}>
       <IcChip />

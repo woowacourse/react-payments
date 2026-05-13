@@ -26,9 +26,9 @@ export default function CardRegisterPage() {
   const cardBrand = getCardBrand(cardNumbers);
 
   const [EXPNumbers, setEXPNumbers] = useState({ mm: "", yy: "" });
-  const [cvc, setCVC] = useState("");
+  const [CVCNumbers, setCVCNumbers] = useState("");
   const [cardFirm, setCardFirm] = useState({ value: "", label: "" });
-  const [passWord, setPassword] = useState("");
+  const [passWordNumbers, setPasswordNumbers] = useState("");
 
   const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
   const [isEXPCompleted, setIsEXPCompleted] = useState(false);
@@ -38,8 +38,8 @@ export default function CardRegisterPage() {
     cardFirm.value !== "" &&
     getCardNumberErrorMessage(cardNumbers, cardBrand) === null &&
     getEXPNumberErrorMessage(EXPNumbers) === null &&
-    getCVCNumberErrorMessage(cvc) === null &&
-    getPassWordErrorMessage(passWord) === null;
+    getCVCNumberErrorMessage(CVCNumbers) === null &&
+    getPassWordErrorMessage(passWordNumbers) === null;
 
   const navigate = useNavigate();
 
@@ -59,15 +59,18 @@ export default function CardRegisterPage() {
             caption="앞의 2자리를 입력해주세요"
             label="비밀번호 앞 2자리"
           >
-            <PassWordInputWrapper setPassWord={setPassword} value={passWord} />
+            <PassWordInputWrapper
+              setPassWord={setPasswordNumbers}
+              value={passWordNumbers}
+            />
           </CardInfoSection>
         )}
 
         {isEXPCompleted && (
           <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
             <CVCInputWrapper
-              setCVCNumber={setCVC}
-              value={cvc}
+              setCVCNumber={setCVCNumbers}
+              value={CVCNumbers}
               onComplete={(isCompleted) => {
                 if (isCompleted) setIsCVCCompleted(true);
               }}
