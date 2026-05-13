@@ -76,14 +76,14 @@ export function useCardNumbers() {
   const hasAnyErr = firstErrIdx !== -1;
   const errMsg = hasAnyErr ? errInfo.errMessages[firstErrIdx] : '';
 
-  const isComplete =
+  const isCardNumberFilled =
     cardNumbers.length === format.length && cardNumbers.every((chunk, i) => chunk.length === format[i]);
 
   return {
     cardNumbers,
     format,
     brand,
-    isComplete,
+    isComplete: isCardNumberFilled,
     hasAnyErr,
     firstErrIdx,
     errMsg,
