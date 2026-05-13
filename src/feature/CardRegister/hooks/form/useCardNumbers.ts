@@ -5,6 +5,9 @@ import {DEFAULT_CARD_NUMBER_FORMAT, getBrandName, getFormatByBrand, getCardNumbe
 
 const CARD_NUMBER_FIELD_COUNT = DEFAULT_CARD_NUMBER_FORMAT.length;
 
+const formatsEqual = (currentFormat: number[], nextFormat: number[]) =>
+  currentFormat.length === nextFormat.length && currentFormat.every((length, index) => length === nextFormat[index]);
+
 export function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [errInfo, setErrInfo] = useState(createErrInfo(CARD_NUMBER_FIELD_COUNT));
@@ -43,7 +46,7 @@ export function useCardNumbers() {
     if (value.length > detectedFormat[index]) return;
 
     // 3. 포맷이 바뀌면 칸 수 재조정, 아니면 값만 반영
-    if (updatedChunks.length !== detectedFormat.length) {
+    if (!formatsEqual(format, detectedFormat)) {
       applyResize(updatedChunks, detectedFormat);
       return;
     }
