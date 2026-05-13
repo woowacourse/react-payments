@@ -14,7 +14,7 @@ import PasswordField from './components/inputs/PasswordField/PasswordField';
 import {useCardRegisterForm} from './hooks/form/useCardRegisterForm';
 
 const CardRegisterPage = () => {
-  const {cardPreview, visibleFields, fieldProps, isFormComplete, handleSubmit} = useCardRegisterForm();
+  const {cardPreview, visibleFields, fieldProps, isFormComplete, submitError, handleSubmit} = useCardRegisterForm();
 
   return (
     <Wrapper>
@@ -28,6 +28,7 @@ const CardRegisterPage = () => {
           passwordSlot={visibleFields.password ? <PasswordField {...fieldProps.cardPassword} /> : null}
         />
       </Content>
+      {submitError && <SubmitErrorMessage>{submitError}</SubmitErrorMessage>}
       {isFormComplete && <SubmitButton onClick={handleSubmit}>확인</SubmitButton>}
     </Wrapper>
   );
@@ -57,6 +58,14 @@ const SubmitButton = styled.button`
   font-size: 14px;
   border: none;
   cursor: pointer;
+`;
+
+const SubmitErrorMessage = styled.p`
+  margin: 0;
+  padding: 8px 16px;
+  color: #ff4d4f;
+  font-size: 12px;
+  text-align: center;
 `;
 
 export default CardRegisterPage;

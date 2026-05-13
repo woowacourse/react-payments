@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import {useCardNumbers} from './useCardNumbers';
@@ -10,9 +11,11 @@ import {CARD_COMPANIES} from '@/domain/card/cardCompany';
 import type {CardRegisterInputProps, ExpiryInputProps} from '../../components/inputs/shared.types';
 
 const generateNumberPlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
+const SUBMIT_ERROR_MESSAGE = '카드 정보를 다시 확인해 주세요';
 
 export function useCardRegisterForm() {
   const navigate = useNavigate();
+  const [submitError, setSubmitError] = useState('');
 
   // 각 필드의 커스텀훅을 가져와서 사용
   const numberField = useCardNumbers();
@@ -84,10 +87,20 @@ export function useCardRegisterForm() {
   });
 
   const handleSubmit = () => {
+    const cardPrefix = numberField.cardNumbers[0];
+    const selectedCompany = companyField.selectedCompany;
+
+    if (!isFormComplete || !cardPrefix || !selectedCompany) {
+      setSubmitError(SUBMIT_ERROR_MESSAGE);
+      return;
+    }
+
+    setSubmitError('');
+
     navigate('/complete', {
       state: {
-        cardPrefix: numberField.cardNumbers[0],
-        companyName: companyField.selectedCompany ? CARD_COMPANIES[companyField.selectedCompany].name : '',
+        cardPrefix,
+        companyName: CARD_COMPANIES[selectedCompany].name,
       },
     });
   };
@@ -126,6 +139,7 @@ export function useCardRegisterForm() {
     },
     visibleFields,
     isFormComplete,
+    submitError,
     handleSubmit,
   };
 }
