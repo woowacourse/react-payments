@@ -1,46 +1,83 @@
-import {useState} from 'react';
-import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
-import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import styled from 'styled-components';
 
+import CardPreviewSection from './components/sections/CardPreviewSection/CardPreviewSection';
+import InfoInputSection from './components/sections/InfoInputSection/InfoInputSection';
+
+import CardPreviewContainer from './components/previews/CardPreviewContainer/CardPreviewContainer';
+
+import NumberField from './components/inputs/NumberField/NumberField';
+import CompanySelectField from './components/inputs/CompanySelectField/CompanySelectField';
+import ExpiryField from './components/inputs/ExpiryField/ExpiryField';
+import CvcField from './components/inputs/CvcField/CvcField';
+import PasswordField from './components/inputs/PasswordField/PasswordField';
+
+import {useCardRegisterForm} from './hooks/form/useCardRegisterForm';
+import {useStepFocus} from './hooks/ui/useStepFocus';
+
 const CardRegisterPage = () => {
-  const [cardNumbers, setCardNumbers] = useState<[string, string, string, string]>(['', '', '', '']);
-  const [expiryMonth, setExpiryMonth] = useState('');
-  const [expiryYear, setExpiryYear] = useState('');
+  const {cardPreview, visibleFields, fieldProps, isFormComplete, submitError, handleSubmit} = useCardRegisterForm();
 
-  const cardInfo = {
-    cardNumbers,
-    expiryMonth,
-    expiryYear,
-  };
+  // 새 필드가 위에 쌓이는 UX라 화면 렌더 순서도 입력 순서의 반대로 둔다.
+  const inputSteps = [
+    {slot: visibleFields.password ? <PasswordField {...fieldProps.cardPassword} /> : null, focusTargetId: 'card-password'},
+    {slot: visibleFields.cvc ? <CvcField {...fieldProps.cardCvc} /> : null, focusTargetId: 'card-cvc'},
+    {
+      slot: visibleFields.expiry ? <ExpiryField {...fieldProps.cardExpiryDate} /> : null,
+      focusTargetId: 'card-expiry-month',
+    },
+    {
+      slot: visibleFields.company ? <CompanySelectField {...fieldProps.cardCompany} /> : null,
+      focusTargetId: 'card-company',
+    },
+    {slot: <NumberField {...fieldProps.cardNumbers} />},
+  ];
 
-  const cardInfoHandlers = {
-    setCardNumbers,
-    setExpiryMonth,
-    setExpiryYear,
-  };
+  useStepFocus(inputSteps);
 
   return (
     <Wrapper>
-      <Container>
-        <CardPreviewSection cardInfo={cardInfo} />
-        <InfoInputSection cardInfo={cardInfo} cardInfoHandlers={cardInfoHandlers} />
-      </Container>
+      <Content>
+        <CardPreviewSection previewSlot={<CardPreviewContainer {...cardPreview} />} />
+        <InfoInputSection slots={inputSteps.map(({slot}) => slot)} />
+      </Content>
+      {submitError && <SubmitErrorMessage>{submitError}</SubmitErrorMessage>}
+      {isFormComplete && <SubmitButton onClick={handleSubmit}>확인</SubmitButton>}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 `;
 
-const Container = styled.div`
-  max-width: 376px;
-  max-height: 700px;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+`;
+
+const SubmitButton = styled.button`
+  flex-shrink: 0;
+  width: 100%;
+  padding: 16px;
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+`;
+
+const SubmitErrorMessage = styled.p`
+  margin: 0;
+  padding: 8px 16px;
+  color: #ff4d4f;
+  font-size: 12px;
+  text-align: center;
 `;
 
 export default CardRegisterPage;
