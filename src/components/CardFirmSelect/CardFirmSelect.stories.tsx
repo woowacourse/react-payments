@@ -15,7 +15,7 @@ export const Default: Story = {
     const [, setSelected] = useState({ value: "", label: "" });
     return (
       <CardFirmSelect
-        onChangeCardFirmCategory={(value, label) => setSelected({ value, label })}
+        onChange={(value, label) => setSelected({ value, label })}
       />
     );
   },
