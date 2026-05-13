@@ -20,14 +20,17 @@ const ExpiryField = ({inputProps, errorMessage, errorIndex}: ExpiryFieldProps) =
       title='카드 유효기간을 입력해 주세요'
       description='월/년도(MMYY)를 순서대로 입력해 주세요.'
       label='유효기간'
+      labelFor='card-expiry-month'
     >
       <FieldLayout>
         <InputWrapper>
           <ExpiryInput
+            id='card-expiry-month'
             {...monthInputProps}
             strokeMode={errorIndex === 0 ? 'error' : 'default'}
           />
           <ExpiryInput
+            id='card-expiry-year'
             {...yearInputProps}
             strokeMode={errorIndex === 1 ? 'error' : 'default'}
           />

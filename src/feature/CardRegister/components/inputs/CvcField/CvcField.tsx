@@ -11,10 +11,10 @@ type CvcFieldProps = {
 
 const CvcField = ({inputProps, errorMessage}: CvcFieldProps) => {
   return (
-    <InputContainer title='CVC 번호를 입력해 주세요' label='CVC'>
+    <InputContainer title='CVC 번호를 입력해 주세요' label='CVC' labelFor='card-cvc'>
       <FieldLayout>
         <InputWrapper>
-          <CvcInput {...inputProps} strokeMode={errorMessage ? 'error' : 'default'} />
+          <CvcInput id='card-cvc' {...inputProps} strokeMode={errorMessage ? 'error' : 'default'} />
         </InputWrapper>
         <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       </FieldLayout>

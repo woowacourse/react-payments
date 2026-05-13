@@ -20,12 +20,14 @@ const NumberField = ({inputProps, errorMessage, errorIndex}: NumberFieldProps) =
       title='결제할 카드 번호를 입력해 주세요'
       description='본인 명의의 카드만 결제 가능합니다.'
       label='카드 번호'
+      labelFor='card-number-0'
     >
       <FieldLayout>
         <InputWrapper $columns={inputProps.map(({maxLength}) => `${maxLength}fr`).join(' ')}>
           {inputPropsWithFocusMove.map((props, index) => (
             <CardNumberInput
               key={index}
+              id={`card-number-${index}`}
               {...props}
               strokeMode={index === errorIndex ? 'error' : 'default'}
             />

@@ -8,11 +8,13 @@ const InputContainer = ({
   title,
   description,
   label,
+  labelFor,
   children,
 }: {
   title: string;
   description?: string;
   label?: string;
+  labelFor?: string;
   children: ReactNode;
 }) => {
   return (
@@ -20,7 +22,7 @@ const InputContainer = ({
       <Title>{title}</Title>
       {description && <Description>{description}</Description>}
       <InputGroup>
-        {label && <Label>{label}</Label>}
+        {label && <Label htmlFor={labelFor}>{label}</Label>}
         {children}
       </InputGroup>
     </Container>

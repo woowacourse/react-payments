@@ -11,10 +11,15 @@ type PasswordFieldProps = {
 
 const PasswordField = ({inputProps, errorMessage}: PasswordFieldProps) => {
   return (
-    <InputContainer title='비밀번호를 입력해 주세요' description='앞의 2자리를 입력해주세요' label='비밀번호 앞 2자리'>
+    <InputContainer
+      title='비밀번호를 입력해 주세요'
+      description='앞의 2자리를 입력해주세요'
+      label='비밀번호 앞 2자리'
+      labelFor='card-password'
+    >
       <FieldLayout>
         <InputWrapper>
-          <PasswordInput {...inputProps} strokeMode={errorMessage ? 'error' : 'default'} />
+          <PasswordInput id='card-password' {...inputProps} strokeMode={errorMessage ? 'error' : 'default'} />
         </InputWrapper>
         <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       </FieldLayout>

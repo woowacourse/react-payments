@@ -11,9 +11,15 @@ type CompanySelectFieldProps = {
 
 const CompanySelectField = ({selectedCompany, onChange}: CompanySelectFieldProps) => {
   return (
-    <InputContainer title='카드사를 선택해 주세요' description='현재 국내 카드사만 가능합니다.'>
+    <InputContainer
+      title='카드사를 선택해 주세요'
+      description='현재 국내 카드사만 가능합니다.'
+      label='카드사'
+      labelFor='card-company'
+    >
       <FieldLayout>
         <Select
+          id='card-company'
           value={selectedCompany ?? ''}
           onChange={(e) => {
             onChange(e.target.value ? (e.target.value as CardCompanyType) : null);
