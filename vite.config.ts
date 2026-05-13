@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [react({
     jsxImportSource: "@emotion/react"
   })],
-  base: './',
+  base: '/react-payments/',
   test: {
     projects: [{
       extends: true,

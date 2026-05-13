@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.ComponentProps<'input'> {
   variant?: 'default' | 'error';
 }
 

@@ -4,82 +4,133 @@ import ExpirationPeriodField from '../components/domain/ExpirationPeriodField';
 import CVCField from '../components/domain/CVCField';
 import { useState } from 'react';
 import { categorizeCardBrand } from '../utils';
-import type { CardInfo } from '../types';
+import type { CardInfo, ErrorStatus, ExpirationPeriodErrorStatus } from '../types';
 import Card from '../components/ui/Card';
+import CardCompanyField from '../components/domain/CardCompanyField.tsx';
+import PasswordField from '../components/domain/PasswordField.tsx';
+import SubmitButton from '../components/domain/SubmitButton.tsx';
+import { useForm } from '../hooks/useForm.ts';
+import { ROUTES } from '../constants.ts';
+import { useNavigate } from 'react-router';
 
-interface FieldState<T> {
-  value: T;
-  // error?: string
-  // touched?: boolean
-}
-
-type CardInfoFormValue = {
-  [K in keyof CardInfo]: FieldState<CardInfo[K]>;
+const initialValues: CardInfo = {
+  cardNumbers: ['', '', '', ''],
+  cardCompany: null,
+  expirationPeriod: ['', ''],
+  cvc: '',
+  password: '',
 };
 
 export default function AddCardPage() {
-  const [formValue, setFormValue] = useState<CardInfoFormValue>({
-    cardNumbers: { value: ['', '', '', ''] },
-    expirationPeriod: { value: ['', ''] },
-    cvc: { value: '' },
-    cardBrand: { value: 'local' },
-  });
+  const navigate = useNavigate();
+  const [stepIndex, setStepIndex] = useState(0);
+  const { values, errors, isFormValid, setFieldValue, setFieldError } = useForm<
+    CardInfo,
+    ErrorStatus | ExpirationPeriodErrorStatus
+  >(initialValues);
 
-  const handleCardNumbersUpdate = (cardNumbers: CardInfo['cardNumbers']) => {
-    const cardBrand = categorizeCardBrand(cardNumbers);
-    const newFormValue = {
-      ...formValue,
-      cardNumbers: { value: cardNumbers },
-      cardBrand: { value: cardBrand },
-    };
-    setFormValue(newFormValue);
+  const cardBrand = categorizeCardBrand(values.cardNumbers);
+
+  const handleFieldComplete = (index: number) => {
+    if (stepIndex === index) {
+      setStepIndex(index + 1);
+    }
   };
 
-  const handleExpirationPeriodUpdate = (expirationPeriod: CardInfo['expirationPeriod']) => {
-    const newFormValue = {
-      ...formValue,
-      expirationPeriod: { value: expirationPeriod },
-    };
-    setFormValue(newFormValue);
-  };
+  const handleSubmit = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    if (!isFormValid) {
+      return;
+    }
 
-  const handleCVCUpdate = (cvc: CardInfo['cvc']) => {
-    const newFormValue = {
-      ...formValue,
-      cvc: { value: cvc },
-    };
-    setFormValue(newFormValue);
+    navigate(ROUTES.ADD_CARD_COMPLETE, {
+      state: {
+        firstCardNumbers: values.cardNumbers[0],
+        cardCompany: values.cardCompany,
+      },
+    });
   };
 
   return (
-    <div css={mobileLayout}>
+    <div css={layout}>
       <main>
         <div css={cardWrapperStyle}>
           <Card
-            cardNumber={formValue.cardNumbers.value}
-            expirationPeriod={formValue.expirationPeriod.value}
-            cardBrand={formValue.cardBrand.value}
+            cardNumber={values.cardNumbers}
+            expirationPeriod={values.expirationPeriod}
+            cardBrand={cardBrand}
+            cardCompany={values.cardCompany}
           />
         </div>
-        <form css={formLayout}>
-          <CardNumbersField value={formValue.cardNumbers.value} onUpdated={handleCardNumbersUpdate} />
-          <ExpirationPeriodField value={formValue.expirationPeriod.value} onUpdated={handleExpirationPeriodUpdate} />
-          <CVCField value={formValue.cvc.value} onUpdated={handleCVCUpdate} />
+        <form onSubmit={handleSubmit} css={formLayout}>
+          {stepIndex >= 5 && <SubmitButton key="step-5" disabled={!isFormValid} />}
+          {stepIndex >= 4 && (
+            <PasswordField
+              key="step-4"
+              value={values.password}
+              errorStatus={errors.password as ErrorStatus}
+              setFieldValue={setFieldValue}
+              setFieldError={setFieldError}
+              onCompleted={() => handleFieldComplete(4)}
+            />
+          )}
+          {stepIndex >= 3 && (
+            <CVCField
+              key="step-3"
+              value={values.cvc}
+              cardBrand={cardBrand}
+              errorStatus={errors.cvc as ErrorStatus}
+              setFieldValue={setFieldValue}
+              setFieldError={setFieldError}
+              onCompleted={() => handleFieldComplete(3)}
+            />
+          )}
+          {stepIndex >= 2 && (
+            <ExpirationPeriodField
+              key="step-2"
+              value={values.expirationPeriod}
+              errorStatus={errors.expirationPeriod as ExpirationPeriodErrorStatus[]}
+              setFieldValue={setFieldValue}
+              setFieldError={setFieldError}
+              onCompleted={() => handleFieldComplete(2)}
+            />
+          )}
+          {stepIndex >= 1 && (
+            <CardCompanyField
+              key="step-1"
+              value={values.cardCompany}
+              errorStatus={errors.cardCompany as ErrorStatus}
+              setFieldValue={setFieldValue}
+              onCompleted={() => handleFieldComplete(1)}
+            />
+          )}
+          {stepIndex >= 0 && (
+            <CardNumbersField
+              key="step-0"
+              value={values.cardNumbers}
+              cardBrand={cardBrand}
+              errorStatus={errors.cardNumbers as ErrorStatus[]}
+              setFieldValue={setFieldValue}
+              setFieldError={setFieldError}
+              onCompleted={() => handleFieldComplete(0)}
+            />
+          )}
         </form>
       </main>
     </div>
   );
 }
 
-const mobileLayout = css`
+const layout = css`
   display: flex;
   flex-direction: column;
-  width: 376px;
-  height: 700px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
-  padding: 20px 30px;
+  position: relative;
+  width: 100%;
+  max-width: 512px;
+  height: 100dvh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 20px 30px 100px 30px;
   overflow: scroll;
-  border-radius: 20px;
 `;
 
 const cardWrapperStyle = css`

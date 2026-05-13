@@ -1,36 +1,33 @@
-import type { CardBrand, CardInfo, ErrorStatus } from '../../types';
+import type { CardInfo, ErrorStatus } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import { AMEX_CVC_LENGTH, CVC_LENGTH, ERROR_MESSAGES } from '../../constants';
+import { PASSWORD_LENGTH, ERROR_MESSAGES } from '../../constants';
 import { useEffect, useEffectEvent } from 'react';
 import { sanitizeNumber } from '../../utils';
 import { validates } from '../../validates.ts';
 
-interface CVCFieldProps {
-  value: CardInfo['cvc'];
-  cardBrand: CardBrand;
+interface PasswordFieldProps {
+  value: CardInfo['password'];
   errorStatus: ErrorStatus;
-  setFieldValue: (field: 'cvc', value: string) => void;
-  setFieldError: (field: 'cvc', error: ErrorStatus) => void;
+  setFieldValue: (field: 'password', value: string) => void;
+  setFieldError: (field: 'password', error: ErrorStatus) => void;
   onCompleted: () => void;
 }
 
-export default function CVCField({
+export default function PasswordField({
   value,
-  cardBrand,
   errorStatus,
   setFieldValue,
   setFieldError,
   onCompleted,
-}: CVCFieldProps) {
-  const cvcLength = cardBrand === 'amex' ? AMEX_CVC_LENGTH : CVC_LENGTH;
+}: PasswordFieldProps) {
   const onCompletedEvent = useEffectEvent(onCompleted);
 
   useEffect(() => {
-    if (!errorStatus && value.length === cvcLength) {
+    if (!errorStatus && value.length === PASSWORD_LENGTH) {
       onCompletedEvent();
     }
-  }, [errorStatus, value, cvcLength]);
+  }, [errorStatus, value]);
 
   const validate = (eventType: 'change' | 'blur', inputValue: string) => {
     if (validates['required'](inputValue)) {
@@ -41,7 +38,7 @@ export default function CVCField({
       return 'numberOnly';
     }
 
-    if (eventType === 'blur' && validates['invalidLength'](inputValue, cvcLength)) {
+    if (eventType === 'blur' && validates['invalidLength'](inputValue, PASSWORD_LENGTH)) {
       return 'invalidLength';
     }
 
@@ -52,8 +49,8 @@ export default function CVCField({
     const inputValue = e.target.value;
     const error = validate('change', inputValue);
 
-    setFieldError('cvc', error);
-    setFieldValue('cvc', sanitizeNumber(inputValue));
+    setFieldError('password', error);
+    setFieldValue('password', sanitizeNumber(inputValue));
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -61,32 +58,32 @@ export default function CVCField({
     const error = validate('blur', inputValue);
 
     if (error) {
-      setFieldError('cvc', error);
+      setFieldError('password', error);
     }
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
-    title: 'CVC 번호를 입력해 주세요',
-    caption: '',
+    title: '비밀번호를 입력해 주세요',
+    caption: '앞의 2자리를 입력해주세요',
     error: !!errorStatus,
     errorMessage: errorStatus ? ERROR_MESSAGES[errorStatus] : '',
   };
 
   return (
     <FormField {...formFieldProps}>
-      <label htmlFor="cvc">CVC</label>
+      <label htmlFor="password">비밀번호 앞 2자리</label>
       <Input
         autoFocus
-        name="cvc"
+        name="password"
         variant={errorStatus !== null ? 'error' : 'default'}
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        id="cvc"
-        type="text"
+        id="password"
+        type="password"
         inputMode="numeric"
-        placeholder="123"
-        maxLength={cvcLength}
+        placeholder="**"
+        maxLength={PASSWORD_LENGTH}
       />
     </FormField>
   );

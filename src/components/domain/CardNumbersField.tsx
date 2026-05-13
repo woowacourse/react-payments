@@ -1,61 +1,97 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo, ErrorStatus } from '../../types';
-import { isNumber } from '../../utils';
-import { useState } from 'react';
-import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
+import type { CardBrand, CardInfo, ErrorStatus } from '../../types';
+import {
+  AMEX_CARD_NUMBERS_LENGTH,
+  CARD_NUMBERS_LENGTH,
+  DINERS_CARD_NUMBERS_LENGTH,
+  ERROR_MESSAGES,
+} from '../../constants';
+import { useEffect, useEffectEvent } from 'react';
+import { sanitizeNumber } from '../../utils';
+import { validates } from '../../validates.ts';
+import { useInputs } from '../../hooks/useInputs.ts';
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
-  onUpdated: (value: CardInfo['cardNumbers']) => void;
+  cardBrand: CardBrand;
+  errorStatus: ErrorStatus[];
+  setFieldValue: (field: 'cardNumbers', value: string, index: number) => void;
+  setFieldError: (field: 'cardNumbers', error: ErrorStatus, index: number) => void;
+  onCompleted: () => void;
 }
 
-export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
-  const [errorStatus, setErrorStatus] = useState<ErrorStatus>(null);
-  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+export default function CardNumbersField({
+  value,
+  cardBrand,
+  errorStatus,
+  setFieldValue,
+  setFieldError,
+  onCompleted,
+}: CardNumbersFieldProps) {
+  const { registerInputRefs, moveToNext, handleKeyDown } = useInputs();
 
-  // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. required
-  // 2. numberOnly -> update 제외됨.
-  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCurrentIndex(index);
+  const cardNumbersLength = (() => {
+    if (cardBrand === 'diners') return DINERS_CARD_NUMBERS_LENGTH;
+    if (cardBrand === 'amex') return AMEX_CARD_NUMBERS_LENGTH;
+    return CARD_NUMBERS_LENGTH;
+  })();
 
-    if (inputValue !== '' && !isNumber(inputValue)) {
-      setErrorStatus('numberOnly');
-      return;
+  const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
+  const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
+
+  const onCompletedEvent = useEffectEvent(onCompleted);
+
+  useEffect(() => {
+    if (!activeErrorStatus && value.every((v, index) => v.length === cardNumbersLength[index])) {
+      onCompletedEvent();
+    }
+  }, [activeErrorStatus, value, cardNumbersLength]);
+
+  // TODO: validate key와 반환값 연동 로직 고민
+  const validate = (eventType: 'change' | 'blur', inputValue: string, index: number) => {
+    if (validates['required'](inputValue)) {
+      return 'required';
     }
 
-    const newValue = [...value];
-    newValue[index] = inputValue;
-    onUpdated(newValue);
-    setErrorStatus(inputValue === '' ? 'required' : null);
+    if (eventType === 'change' && validates['numberOnly'](inputValue)) {
+      return 'numberOnly';
+    }
+
+    if (eventType === 'blur' && validates['invalidLength'](inputValue, cardNumbersLength[index])) {
+      return 'invalidLength';
+    }
+
+    return null;
   };
 
-  // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
-  // 1. required
-  // 2. invalidLength
-  const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    setCurrentIndex(index);
+    const error = validate('change', inputValue, index);
 
-    if (inputValue === '') {
-      setErrorStatus('required');
-      return;
+    setFieldError('cardNumbers', error, index);
+    setFieldValue('cardNumbers', sanitizeNumber(inputValue), index);
+
+    if (inputValue.length === cardNumbersLength[index]) {
+      moveToNext(index);
     }
+  };
 
-    if (inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT) {
-      setErrorStatus('invalidLength');
-      return;
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
+    const inputValue = e.target.value;
+    const error = validate('blur', inputValue, index);
+
+    if (error) {
+      setFieldError('cardNumbers', error, index);
     }
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '결제할 카드 번호를 입력해 주세요',
     caption: '본인 명의의 카드만 결제 가능합니다.',
-    error: !!errorStatus,
-    errorMessage: errorStatus ? ERROR_MESSAGES[errorStatus] : '',
+    error: !!activeErrorStatus,
+    errorMessage: ERROR_MESSAGES[activeErrorStatus] ?? '',
   };
 
   return (
@@ -66,14 +102,18 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
           {value.map((number, index) => (
             <Input
               key={index}
-              variant={errorStatus !== null && currentIndex === index ? 'error' : 'default'}
+              ref={(el) => registerInputRefs(el, index)}
+              name="cardNumbers"
+              autoFocus={index === 0}
+              variant={activeErrorIndex === index ? 'error' : 'default'}
               value={number}
+              onChange={(e) => handleChange(e, index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              onBlur={(e) => handleBlur(e, index)}
               type="text"
               inputMode="numeric"
               placeholder="1234"
-              maxLength={CARD_NUMBER_LENGTH_PER_INPUT}
-              onChange={(e) => handleChange(index, e)}
-              onBlur={(e) => handleBlur(index, e)}
+              maxLength={cardNumbersLength[index]}
             />
           ))}
         </div>

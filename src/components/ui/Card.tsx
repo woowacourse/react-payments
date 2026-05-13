@@ -1,25 +1,37 @@
 import { css } from '@emotion/react';
-import type { CardInfo } from '../../types';
+import type { CardBrand, CardCompany, CardInfo } from '../../types';
 
 interface CardProps {
   cardNumber: CardInfo['cardNumbers'];
   expirationPeriod: CardInfo['expirationPeriod'];
-  cardBrand: CardInfo['cardBrand'];
+  cardBrand: CardBrand;
+  cardCompany: CardCompany;
 }
 
-export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardProps) {
+export default function Card({ cardNumber, expirationPeriod, cardBrand, cardCompany }: CardProps) {
+  const cardBrandImg = {
+    visa: './visa.png',
+    mastercard: './mastercard.png',
+    diners: './diners.png',
+    amex: './amex.png',
+    unionpay: './unionpay.png',
+  };
+
   return (
-    <div css={cardStyle}>
+    <div css={[cardStyle, cardColor[cardCompany ?? 'default']]}>
       <div css={cardHeaderStyle}>
         <div css={cardChipStyle} />
-        {cardBrand === 'visa' && <img css={cardBrandStyle} src="./visa.png" alt="visa" />}
-        {cardBrand === 'mastercard' && <img css={cardBrandStyle} src="./mastercard.png" alt="mastercard" />}
+        {cardBrand !== 'local' && (
+          <div css={cardBrandWrapperStyle}>
+            <img css={cardBrandImgStyle} src={cardBrandImg[cardBrand]} alt={cardBrand} />
+          </div>
+        )}
       </div>
 
       <div css={cardInfoWrapperStyle}>
         <div css={cardNumberWrapperStyle}>
           {cardNumber.map((num, index) => (
-            <span>{index < 2 ? num : <span css={hiddenNumberStyle}>{'∙'.repeat(num.length)}</span>}</span>
+            <span key={index}>{index < 2 ? num : <span css={hiddenNumberStyle}>{'∙'.repeat(num.length)}</span>}</span>
           ))}
         </div>
         <div>
@@ -33,13 +45,51 @@ export default function Card({ cardNumber, expirationPeriod, cardBrand }: CardPr
 }
 
 const cardStyle = css`
-  background: var(--color-background-card);
   width: 212px;
   height: 132px;
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px var(--color-shadow-card);
   padding: 8px 12px;
 `;
+
+const cardColor = {
+  default: css`
+    color: var(--color-text-card);
+    background-color: var(--color-background-card);
+  `,
+  BC카드: css`
+    color: var(--color-text-card);
+    background-color: var(--color-brand-bc-card);
+  `,
+  신한카드: css`
+    color: var(--color-text-card);
+    background-color: var(--color-brand-shinhan-card);
+  `,
+  카카오뱅크: css`
+    color: var(--color-text-default);
+    background-color: var(--color-brand-kakaobank);
+  `,
+  현대카드: css`
+    color: var(--color-text-card);
+    background-color: var(--color-brand-hyundai-card);
+  `,
+  우리카드: css`
+    color: var(--color-text-card);
+    background-color: var(--color-brand-woori-card);
+  `,
+  롯데카드: css`
+    color: var(--color-text-card);
+    background-color: var(--color-brand-lotte-card);
+  `,
+  하나카드: css`
+    color: var(--color-text-card);
+    background-color: var(--color-brand-hana-card);
+  `,
+  국민카드: css`
+    color: var(--color-text-card);
+    background-color: var(--color-brand-kb-card);
+  `,
+};
 
 const cardHeaderStyle = css`
   display: flex;
@@ -53,11 +103,22 @@ const cardChipStyle = css`
   border-radius: 3px;
 `;
 
-const cardBrandStyle = css`
+const cardBrandWrapperStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 36px;
   height: 22px;
+  padding: 4px 3px;
   border-radius: 3px;
   border: 1px solid var(--color-border-default);
+  background-color: white;
+`;
+
+const cardBrandImgStyle = css`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const cardInfoWrapperStyle = css`
@@ -65,7 +126,6 @@ const cardInfoWrapperStyle = css`
   flex-direction: column;
   gap: 8px;
   padding: 14px 5px;
-  color: var(--color-text-card);
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;

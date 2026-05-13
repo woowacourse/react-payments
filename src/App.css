@@ -14,6 +14,7 @@
   --color-text-card: #ffffff;
 
   --color-background-card: #333333;
+  --color-background-button-primary: #333333;
   --color-background-chip: #ddcd78;
   --color-shadow-card: #0000001a;
 
@@ -27,10 +28,14 @@
   --color-brand-kb-card: #6a6056;
 }
 
-body {
+#root {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+button {
+  cursor: pointer;
 }

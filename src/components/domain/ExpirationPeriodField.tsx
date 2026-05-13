@@ -1,82 +1,93 @@
 import { css } from '@emotion/react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
-import type { CardInfo } from '../../types';
-import { useState } from 'react';
-import type { ExpirationPeriodErrorStatus } from '../../types';
-import { isNumber, isValidMonth, isValidYear } from '../../utils';
-import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
+import type { CardInfo, ExpirationPeriodErrorStatus } from '../../types';
+import { EXPIRATION_PERIOD_ERROR_MESSAGES, EXPIRATION_PERIOD_LENGTH } from '../../constants';
+import { useEffect, useEffectEvent } from 'react';
+import { sanitizeNumber } from '../../utils';
+import { validates } from '../../validates.ts';
+import { useInputs } from '../../hooks/useInputs.ts';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
-  onUpdated: (value: CardInfo['expirationPeriod']) => void;
+  errorStatus: ExpirationPeriodErrorStatus[];
+  setFieldValue: (field: 'expirationPeriod', value: string, index: number) => void;
+  setFieldError: (field: 'expirationPeriod', error: ExpirationPeriodErrorStatus, index: number) => void;
+  onCompleted: () => void;
 }
 
-export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPeriodFieldProps) {
-  const [errorStatus, setErrorStatus] = useState<ExpirationPeriodErrorStatus>(null);
-  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+export default function ExpirationPeriodField({
+  value,
+  errorStatus,
+  setFieldValue,
+  setFieldError,
+  onCompleted,
+}: ExpirationPeriodFieldProps) {
+  const { registerInputRefs, moveToNext, handleKeyDown } = useInputs();
 
-  // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. required
-  // 2. numberOnly -> update 제외됨.
-  // 3. MM -> 1-12인지
-  // 4. YY -> 오늘로부터 5년 이내인지.
-  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
+  const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
+
+  const onCompletedEvent = useEffectEvent(onCompleted);
+
+  useEffect(() => {
+    if (!activeErrorStatus && value.every((v, index) => v.length === EXPIRATION_PERIOD_LENGTH[index])) {
+      onCompletedEvent();
+    }
+  }, [activeErrorStatus, value]);
+
+  const validate = (eventType: 'change' | 'blur', inputValue: string, index: number) => {
+    if (validates['required'](inputValue)) {
+      return 'required';
+    }
+
+    if (eventType === 'change' && validates['numberOnly'](inputValue)) {
+      return 'numberOnly';
+    }
+
+    const isInvalidLength = validates['invalidLength'](inputValue, EXPIRATION_PERIOD_LENGTH[index]);
+
+    if (index === 0 && !isInvalidLength && validates['invalidMonth'](inputValue)) {
+      return 'invalidMonth';
+    }
+
+    if (index === 1 && !isInvalidLength && validates['invalidYear'](inputValue)) {
+      return 'invalidYear';
+    }
+
+    if (eventType === 'blur' && isInvalidLength) {
+      return 'invalidLength';
+    }
+
+    return null;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    setCurrentIndex(index);
+    const error = validate('change', inputValue, index);
 
-    if (inputValue !== '' && !isNumber(inputValue)) {
-      setErrorStatus('numberOnly');
-      return;
-    }
+    setFieldError('expirationPeriod', error, index);
+    setFieldValue('expirationPeriod', sanitizeNumber(inputValue), index);
 
-    const newValue = [...value];
-    newValue[index] = inputValue;
-    onUpdated(newValue);
-    setErrorStatus(inputValue === '' ? 'required' : null);
-
-    // 1. invalid mm -> error status
-    // 2. invlid yy -> error status
-    // 3. invalid mm/yy -> 같은 error status
-
-    if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
-      return;
-    }
-
-    if (index === 0 && !isValidMonth(inputValue)) {
-      setErrorStatus('invalidMonth');
-      return;
-    }
-
-    if (index === 1 && !isValidYear(inputValue)) {
-      setErrorStatus('invalidYear');
-      return;
+    if (inputValue.length === EXPIRATION_PERIOD_LENGTH[index]) {
+      moveToNext(index);
     }
   };
 
-  // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
-  // 1. required
-  // 2. invalidLength
-  const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
-    setCurrentIndex(index);
+    const error = validate('blur', inputValue, index);
 
-    if (inputValue === '') {
-      setErrorStatus('required');
-      return;
-    }
-
-    if (inputValue.length < PERIOD_LENGTH_PER_INPUT) {
-      setErrorStatus('invalidLength');
-      return;
+    if (error) {
+      setFieldError('expirationPeriod', error, index);
     }
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드 유효기간을 입력해 주세요',
     caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
-    error: !!errorStatus,
-    errorMessage: errorStatus ? EXPIRATION_PERIOD_ERROR_MESSAGES[errorStatus] : '',
+    error: !!activeErrorStatus,
+    errorMessage: EXPIRATION_PERIOD_ERROR_MESSAGES[activeErrorStatus] ?? '',
   };
 
   return (
@@ -85,24 +96,31 @@ export default function ExpirationPeriodField({ value, onUpdated }: ExpirationPe
         <legend css={legendStyle}>유효기간</legend>
         <div css={inputGroupStyle}>
           <Input
+            autoFocus
+            ref={(el) => registerInputRefs(el, 0)}
+            name="expirationPeriod"
             value={value[0]}
-            variant={errorStatus !== null && currentIndex === 0 ? 'error' : 'default'}
+            onChange={(e) => handleChange(e, 0)}
+            onBlur={(e) => handleBlur(e, 0)}
+            onKeyDown={(e) => handleKeyDown(e, 0)}
+            variant={activeErrorIndex === 0 ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="MM"
-            maxLength={PERIOD_LENGTH_PER_INPUT}
-            onChange={(e) => handleChange(0, e)}
-            onBlur={(e) => handleBlur(0, e)}
+            maxLength={EXPIRATION_PERIOD_LENGTH[0]}
           />
           <Input
+            ref={(el) => registerInputRefs(el, 1)}
+            name="expirationPeriod"
             value={value[1]}
-            variant={errorStatus !== null && currentIndex === 1 ? 'error' : 'default'}
+            onChange={(e) => handleChange(e, 1)}
+            onBlur={(e) => handleBlur(e, 1)}
+            onKeyDown={(e) => handleKeyDown(e, 1)}
+            variant={activeErrorIndex === 1 ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="YY"
-            maxLength={PERIOD_LENGTH_PER_INPUT}
-            onChange={(e) => handleChange(1, e)}
-            onBlur={(e) => handleBlur(1, e)}
+            maxLength={EXPIRATION_PERIOD_LENGTH[1]}
           />
         </div>
       </fieldset>

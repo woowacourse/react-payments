@@ -96,3 +96,12 @@ legend {
   line-height: inherit;
   color: inherit;
 }
+
+ul, li, button {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+}
