@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
 import CardInfoSection from "../components/CardInfoSection";
 import CardPreview from "../components/Card/CardPreview";
 import CardNumberField from "../components/InputField/CardNumberField";
@@ -8,40 +7,30 @@ import CvcNumberField from "../components/InputField/CvcNumberField";
 import CardFirmSelect from "../components/CardFirmSelect/CardFirmSelect";
 import PasswordNumberField from "../components/InputField/PasswordNumberField";
 import CheckBtn from "../components/button/CheckBtn";
-import { useNavigate } from "react-router-dom";
-import { getCardNumberErrorMessage } from "../utils/getCardNumberErrorMessage";
-import { getEXPNumberErrorMessage } from "../utils/getEXPNumberErrorMessage";
-import { getCVCNumberErrorMessage } from "../utils/getCVCNumberErrorMessage";
-import { getPassWordErrorMessage } from "../utils/getPassWordErrorMessage";
-import { getCardBrand } from "../utils/getCardBrand";
+import useCardRegisterPage from "../hooks/useCardRegisterPage";
 
 export default function CardRegisterPage() {
-  const [cardNumbers, setCardNumbers] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
-
-  const cardBrand = getCardBrand(cardNumbers);
-
-  const [expNumbers, setExpNumbers] = useState({ mm: "", yy: "" });
-  const [cvcNumbers, setCvcNumbers] = useState("");
-  const [cardFirm, setCardFirm] = useState({ value: "", label: "" });
-  const [passwordNumbers, setPasswordNumbers] = useState("");
-
-  const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
-  const [isExpCompleted, setIsExpCompleted] = useState(false);
-  const [isCvcCompleted, setIsCvcCompleted] = useState(false);
-
-  const isAllValid =
-    cardFirm.value !== "" &&
-    getCardNumberErrorMessage(cardNumbers, cardBrand) === null &&
-    getEXPNumberErrorMessage(expNumbers) === null &&
-    getCVCNumberErrorMessage(cvcNumbers) === null &&
-    getPassWordErrorMessage(passwordNumbers) === null;
-
-  const navigate = useNavigate();
+  const {
+    cardNumbers,
+    expNumbers,
+    cvcNumbers,
+    cardFirm,
+    passwordNumbers,
+    cardBrand,
+    isCardNumberCompleted,
+    isExpNumberCompleted,
+    isCvcNumberCompleted,
+    isAllValid,
+    onCardNumberChange,
+    onExpNumberChange,
+    onCvcNumberChange,
+    onCardFirmChange,
+    onPasswordNumberChange,
+    onCardNumberComplete,
+    onExpNumberComplete,
+    onCvcNumberComplete,
+    handleComplete,
+  } = useCardRegisterPage();
 
   return (
     <MainContainer>
@@ -53,27 +42,25 @@ export default function CardRegisterPage() {
       />
 
       <InputSectionContainer>
-        {isCvcCompleted && (
+        {isCvcNumberCompleted && (
           <CardInfoSection
             title="비밀번호를 입력해 주세요"
             caption="앞의 2자리를 입력해주세요"
             label="비밀번호 앞 2자리"
           >
             <PasswordNumberField
-              setPassWord={setPasswordNumbers}
+              setPassWord={onPasswordNumberChange}
               value={passwordNumbers}
             />
           </CardInfoSection>
         )}
 
-        {isExpCompleted && (
+        {isExpNumberCompleted && (
           <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
             <CvcNumberField
-              setCvcNumber={setCvcNumbers}
+              setCvcNumber={onCvcNumberChange}
               value={cvcNumbers}
-              onComplete={(isCompleted) => {
-                if (isCompleted) setIsCvcCompleted(true);
-              }}
+              onComplete={onCvcNumberComplete}
             />
           </CardInfoSection>
         )}
@@ -85,11 +72,9 @@ export default function CardRegisterPage() {
             label="유효기간"
           >
             <ExpNumberField
-              setExpNumber={setExpNumbers}
+              setExpNumber={onExpNumberChange}
               value={expNumbers}
-              onComplete={(isCompleted) => {
-                if (isCompleted) setIsExpCompleted(true);
-              }}
+              onComplete={onExpNumberComplete}
             />
           </CardInfoSection>
         )}
@@ -99,11 +84,7 @@ export default function CardRegisterPage() {
             title="카드사를 선택해 주세요"
             caption="현재 국내 카드사만 가능합니다."
           >
-            <CardFirmSelect
-              onChangeCardFirmCategory={(value, label) =>
-                setCardFirm({ value, label })
-              }
-            />
+            <CardFirmSelect onChangeCardFirmCategory={onCardFirmChange} />
           </CardInfoSection>
         )}
 
@@ -113,27 +94,14 @@ export default function CardRegisterPage() {
           label="카드 번호"
         >
           <CardNumberField
-            setCardNumber={setCardNumbers}
+            setCardNumber={onCardNumberChange}
             value={cardNumbers}
-            onComplete={(isCompleted) => {
-              if (isCompleted) setIsCardNumberCompleted(true);
-            }}
+            onComplete={onCardNumberComplete}
             cardBrand={cardBrand}
           />
         </CardInfoSection>
       </InputSectionContainer>
-      {isAllValid && (
-        <CheckBtn
-          onClick={() =>
-            navigate("/complete", {
-              state: {
-                first: cardNumbers.first,
-                cardFirmLabel: cardFirm.label,
-              },
-            })
-          }
-        />
-      )}
+      {isAllValid && <CheckBtn onClick={handleComplete} />}
     </MainContainer>
   );
 }
