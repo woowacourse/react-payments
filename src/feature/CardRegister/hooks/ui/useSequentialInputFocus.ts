@@ -7,7 +7,7 @@ type FocusMoveInputProps = {
   onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-export const useInputFocusMove = (inputProps: FocusMoveInputProps[]) => {
+export const useSequentialInputFocus = (inputProps: FocusMoveInputProps[]) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const inputPropsWithFocusMove = inputProps.map((props, index) => {

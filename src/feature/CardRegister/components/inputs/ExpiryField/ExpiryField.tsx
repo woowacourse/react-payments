@@ -1,6 +1,6 @@
 import Input from '@/common/components/Input/Input';
 import styled from 'styled-components';
-import {useInputFocusMove} from '@/feature/CardRegister/hooks/ui/useInputFocusMove';
+import {useSequentialInputFocus} from '@/feature/CardRegister/hooks/ui/useSequentialInputFocus';
 import type {ExpiryInputProps} from '../shared.types';
 import InputContainer from '../InputContainer/InputContainer';
 import {FieldErrorMessage, FieldLayout} from '../styles/inputFieldStyles';
@@ -13,7 +13,7 @@ type ExpiryFieldProps = {
 
 const ExpiryField = ({inputProps, errorMessage, errorIndex}: ExpiryFieldProps) => {
   const {month, year} = inputProps;
-  const [monthInputProps, yearInputProps] = useInputFocusMove([month, year]);
+  const [monthInputProps, yearInputProps] = useSequentialInputFocus([month, year]);
 
   return (
     <InputContainer
