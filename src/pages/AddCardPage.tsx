@@ -63,10 +63,9 @@ export default function AddCardPage() {
           />
         </div>
         <form onSubmit={handleSubmit} css={formLayout}>
-          {stepIndex >= 5 && <SubmitButton key="step-5" disabled={!isFormValid} />}
+          {stepIndex >= 5 && <SubmitButton disabled={!isFormValid} />}
           {stepIndex >= 4 && (
             <PasswordField
-              key="step-4"
               value={values.password}
               errorStatus={errors.password as ErrorStatus}
               setFieldValue={setFieldValue}
@@ -76,7 +75,6 @@ export default function AddCardPage() {
           )}
           {stepIndex >= 3 && (
             <CVCField
-              key="step-3"
               value={values.cvc}
               cardBrand={cardBrand}
               errorStatus={errors.cvc as ErrorStatus}
@@ -87,7 +85,6 @@ export default function AddCardPage() {
           )}
           {stepIndex >= 2 && (
             <ExpirationPeriodField
-              key="step-2"
               value={values.expirationPeriod}
               errorStatus={errors.expirationPeriod as ExpirationPeriodErrorStatus[]}
               setFieldValue={setFieldValue}
@@ -97,7 +94,6 @@ export default function AddCardPage() {
           )}
           {stepIndex >= 1 && (
             <CardCompanyField
-              key="step-1"
               value={values.cardCompany}
               errorStatus={errors.cardCompany as ErrorStatus}
               setFieldValue={setFieldValue}
@@ -106,7 +102,6 @@ export default function AddCardPage() {
           )}
           {stepIndex >= 0 && (
             <CardNumbersField
-              key="step-0"
               value={values.cardNumbers}
               cardBrand={cardBrand}
               errorStatus={errors.cardNumbers as ErrorStatus[]}
