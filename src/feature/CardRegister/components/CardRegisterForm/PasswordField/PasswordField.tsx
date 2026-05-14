@@ -1,14 +1,10 @@
 import styled from "styled-components";
-import {
-  ERROR_MESSAGES,
-  PASSWORD_INPUT_COUNT,
-  PASSWORD_LENGTH,
-} from "../../../constants";
+import { PASSWORD_INPUT_COUNT, PASSWORD_LENGTH } from "../../../constants";
 import { isNumericInput } from "../../../validators/input";
-import { isPasswordLengthValid } from "../../../validators/password";
 import Label from "../shared/Label/Label";
 import Input from "../shared/Input/Input";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
+import { validatePassword } from "../../../validators/password";
 
 const PasswordField = ({
   password,
@@ -35,7 +31,7 @@ const PasswordField = ({
 
     onPasswordChange(value);
 
-    if (isTouched[index] && isPasswordLengthValid(value)) {
+    if (isTouched[index] && validatePassword(value).isValid) {
       clearErrorMessage(index);
     }
   };
@@ -45,12 +41,12 @@ const PasswordField = ({
 
     touchField(index);
 
-    if (!isPasswordLengthValid(value)) {
-      updateErrorMessage(index, ERROR_MESSAGES.password);
-      return;
+    const { errorMessage } = validatePassword(value);
+    if (errorMessage) {
+      updateErrorMessage(index, errorMessage);
+    } else {
+      clearErrorMessage(index);
     }
-
-    clearErrorMessage(index);
   };
 
   return (

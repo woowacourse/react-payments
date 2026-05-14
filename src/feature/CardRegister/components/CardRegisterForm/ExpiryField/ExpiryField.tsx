@@ -2,7 +2,6 @@ import Label from "../shared/Label/Label";
 import Input from "../shared/Input/Input";
 import styled from "styled-components";
 import {
-  ERROR_MESSAGES,
   EXPIRY_INPUT_COUNT,
   EXPIRY_MONTH_LENGTH,
   EXPIRY_YEAR_LENGTH,
@@ -12,9 +11,8 @@ import { isNumericInput } from "../../../validators/input";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 import {
-  isMonthLengthValid,
-  isMonthRangeValid,
-  isYearLengthValid,
+  validateExpiryMonth,
+  validateExpiryYear,
 } from "../../../validators/expiryDate";
 
 const ExpiryField = ({
@@ -47,14 +45,17 @@ const ExpiryField = ({
       return;
     }
 
-    if (value.length === EXPIRY_MONTH_LENGTH && !isMonthRangeValid(value)) {
-      updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
+    const { isValid, errorMessage } = validateExpiryMonth(value);
+    // 여기서 isValid쓸건지 errorMessage 쓸건지 통일해야함
+
+    if (value.length === EXPIRY_MONTH_LENGTH && errorMessage) {
+      updateErrorMessage(index, errorMessage);
       return;
     }
 
     onExpiryMonthChange(value);
 
-    if (isTouched[index] && value.length === EXPIRY_MONTH_LENGTH) {
+    if (isTouched[index] && isValid) {
       clearErrorMessage(index);
     }
 
@@ -73,7 +74,7 @@ const ExpiryField = ({
 
     onExpiryYearChange(value);
 
-    if (isTouched[index] && value.length === EXPIRY_YEAR_LENGTH) {
+    if (isTouched[index] && validateExpiryYear(value).isValid) {
       clearErrorMessage(index);
     }
 
@@ -89,17 +90,12 @@ const ExpiryField = ({
     const formattedValue = formatExpiryValue(eValue, "month");
     onExpiryMonthChange(formattedValue);
 
-    if (!isMonthLengthValid(formattedValue)) {
-      updateErrorMessage(index, ERROR_MESSAGES.expiryLength);
-      return;
+    const { errorMessage } = validateExpiryMonth(formattedValue);
+    if (errorMessage) {
+      updateErrorMessage(index, errorMessage);
+    } else {
+      clearErrorMessage(index);
     }
-
-    if (!isMonthRangeValid(formattedValue)) {
-      updateErrorMessage(index, ERROR_MESSAGES.expiryMonthRange);
-      return;
-    }
-
-    clearErrorMessage(index);
   };
 
   const handleYearBlur = (index: number, eValue: string) => {
@@ -108,12 +104,12 @@ const ExpiryField = ({
     const formattedValue = formatExpiryValue(eValue, "year");
     onExpiryYearChange(formattedValue);
 
-    if (!isYearLengthValid(formattedValue)) {
-      updateErrorMessage(index, ERROR_MESSAGES.expiryLength);
-      return;
+    const { errorMessage } = validateExpiryYear(formattedValue);
+    if (errorMessage) {
+      updateErrorMessage(index, errorMessage);
+    } else {
+      clearErrorMessage(index);
     }
-
-    clearErrorMessage(index);
   };
 
   return (

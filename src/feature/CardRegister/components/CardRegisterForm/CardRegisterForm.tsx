@@ -15,17 +15,18 @@ import type {
 } from "../../../../common/types/CardInfoType";
 import type { CardCompanyType } from "../../../../common/types/CardCompany";
 import {
-  getBrandLastCardNumberLength,
+  getCardNumberChunkLengths,
   getCardBrandName,
 } from "../../utils/cardBrand";
-import {
-  isCardCompanyFieldValid,
-  isCardNumberFieldValid,
-  isCvcFieldValid,
-  isExpiryFieldValid,
-  isPasswordFieldValid,
-} from "../../validators/cardForm";
 import { CARD_FORM } from "../../constants";
+import { validateCvc } from "../../validators/cvc";
+import { validatePassword } from "../../validators/password";
+import {
+  validateExpiryMonth,
+  validateExpiryYear,
+} from "../../validators/expiryDate";
+import { validateCardCompany } from "../../validators/cardCompany";
+import { validateCardNumber } from "../../validators/cardNumber";
 
 const CardRegisterForm = ({
   cardInfo,
@@ -55,6 +56,7 @@ const CardRegisterForm = ({
     cardInfo;
 
   const cardBrand = getCardBrandName(cardNumbers);
+  const cardNumberChunkLengths = getCardNumberChunkLengths(cardBrand);
 
   // 한 번 열린 Step은 다시 닫히지 않는다.
   const updateMaxUnlockedStep = (step: number) => {
@@ -74,7 +76,7 @@ const CardRegisterForm = ({
 
     const nextCardBrand = getCardBrandName(nextCardNumbers);
     unlockNextStepIfFieldValid(
-      isCardNumberFieldValid(nextCardNumbers.join(""), nextCardBrand),
+      validateCardNumber(nextCardNumbers.join(""), nextCardBrand).isValid,
       CARD_FORM.RENDER_STEP.CARD_COMPANY,
     );
   };
@@ -87,7 +89,8 @@ const CardRegisterForm = ({
   const handleExpiryMonthChange = (nextExpiryMonth: string) => {
     updateExpiryMonth(nextExpiryMonth);
     unlockNextStepIfFieldValid(
-      isExpiryFieldValid(nextExpiryMonth, expiryYear),
+      validateExpiryMonth(nextExpiryMonth).isValid &&
+        validateExpiryYear(expiryYear).isValid,
       CARD_FORM.RENDER_STEP.CVC,
     );
   };
@@ -95,7 +98,8 @@ const CardRegisterForm = ({
   const handleExpiryYearChange = (nextExpiryYear: string) => {
     updateExpiryYear(nextExpiryYear);
     unlockNextStepIfFieldValid(
-      isExpiryFieldValid(expiryMonth, nextExpiryYear),
+      validateExpiryMonth(expiryMonth).isValid &&
+        validateExpiryYear(nextExpiryYear).isValid,
       CARD_FORM.RENDER_STEP.CVC,
     );
   };
@@ -107,7 +111,7 @@ const CardRegisterForm = ({
     }));
 
     unlockNextStepIfFieldValid(
-      isCvcFieldValid(nextCvcNumber),
+      validateCvc(nextCvcNumber).isValid,
       CARD_FORM.RENDER_STEP.PASSWORD,
     );
   };
@@ -119,18 +123,19 @@ const CardRegisterForm = ({
     }));
 
     unlockNextStepIfFieldValid(
-      isPasswordFieldValid(nextPassword),
+      validatePassword(nextPassword).isValid,
       CARD_FORM.RENDER_STEP.COMPLETE,
     );
   };
 
   const joinedCardNumber = cardNumbers.join("");
   const fieldValidity = {
-    cardNumber: isCardNumberFieldValid(joinedCardNumber, cardBrand),
-    cardCompany: isCardCompanyFieldValid(selectedCardCompany),
-    expiry: isExpiryFieldValid(expiryMonth, expiryYear),
-    cvc: isCvcFieldValid(cardInputSectionInformation.cvcNumber),
-    password: isPasswordFieldValid(cardInputSectionInformation.password),
+    cardNumber: validateCardNumber(joinedCardNumber, cardBrand).isValid,
+    cardCompany: validateCardCompany(selectedCardCompany).isValid,
+    expiryMonth: validateExpiryMonth(cardInfo.expiryMonth).isValid,
+    expiryYear: validateExpiryYear(cardInfo.expiryYear).isValid,
+    cvc: validateCvc(cardInputSectionInformation.cvcNumber).isValid,
+    password: validatePassword(cardInputSectionInformation.password).isValid,
   };
   const isFormInputComplete = Object.values(fieldValidity).every(Boolean);
 
@@ -212,7 +217,7 @@ const CardRegisterForm = ({
           <NumberField
             cardNumbers={cardNumbers}
             onCardNumbersChange={handleCardNumbersChange}
-            lastInputMaxLength={getBrandLastCardNumberLength(cardBrand)}
+            chunkLengths={cardNumberChunkLengths}
           />
         </CardRegisterStep>
       )}

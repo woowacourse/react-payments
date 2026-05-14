@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 
 import NumberField from "./NumberField";
-import { ERROR_MESSAGES } from "../../../constants";
+import { CARD, ERROR_MESSAGES } from "../../../constants";
 
 const meta = {
   title: "feature/CardRegister/components/NumberField",
@@ -12,7 +12,7 @@ const meta = {
   args: {
     cardNumbers: ["", "", "", ""],
     onCardNumbersChange: fn(),
-    lastInputMaxLength: 4,
+    chunkLengths: CARD.DEFAULT.CHUNK_LENGTHS,
   },
 } satisfies Meta<typeof NumberField>;
 
@@ -37,14 +37,14 @@ export const Empty: Story = {};
 export const Partial: Story = {
   args: {
     cardNumbers: ["1234", "56", "", ""],
-    lastInputMaxLength: 4,
+    chunkLengths: CARD.DEFAULT.CHUNK_LENGTHS,
   },
 };
 
 export const Filled: Story = {
   args: {
     cardNumbers: ["1234", "5678", "1234", "5678"],
-    lastInputMaxLength: 4,
+    chunkLengths: CARD.DEFAULT.CHUNK_LENGTHS,
   },
 };
 

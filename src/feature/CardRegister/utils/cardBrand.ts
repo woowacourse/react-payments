@@ -2,7 +2,7 @@ import type { CardBrandType } from "../../../common/types/CardBrand";
 import type { CardNumberChunkType } from "../../../common/types/CardInfoType";
 import {
   CARD,
-  CARD_NUMBER_DEFAULT_CHUNK_LENGTH,
+  type CardNumberChunkLengths,
   UNKNOWN_CARD_NUMBER_CHAR,
 } from "../constants";
 
@@ -10,8 +10,8 @@ export const getCardBrandName = (
   cardNumbers: CardNumberChunkType,
 ): CardBrandType => {
   const fullNumber = cardNumbers
-    .map((chunk) =>
-      chunk.padEnd(CARD_NUMBER_DEFAULT_CHUNK_LENGTH, UNKNOWN_CARD_NUMBER_CHAR),
+    .map((chunk, index) =>
+      chunk.padEnd(CARD.DEFAULT.CHUNK_LENGTHS[index], UNKNOWN_CARD_NUMBER_CHAR),
     )
     .join("");
 
@@ -35,22 +35,29 @@ export const getCardBrandName = (
 };
 
 export const getBrandLastCardNumberLength = (cardBrand: CardBrandType) => {
+  const chunkLengths = getCardNumberChunkLengths(cardBrand);
+  return chunkLengths[chunkLengths.length - 1];
+};
+
+export const getCardNumberChunkLengths = (
+  cardBrand: CardBrandType,
+): CardNumberChunkLengths => {
   if (cardBrand === "visa") {
-    return 4;
+    return CARD.VISA.CHUNK_LENGTHS;
   }
   if (cardBrand === "masterCard") {
-    return 4;
+    return CARD.MASTERCARD.CHUNK_LENGTHS;
   }
   if (cardBrand === "diners") {
-    return 2;
+    return CARD.DINER.CHUNK_LENGTHS;
   }
   if (cardBrand === "amex") {
-    return 3;
+    return CARD.AMEX.CHUNK_LENGTHS;
   }
   if (cardBrand === "unionPay") {
-    return 4;
+    return CARD.UNION_PAY.CHUNK_LENGTHS;
   }
-  return 4;
+  return CARD.DEFAULT.CHUNK_LENGTHS;
 };
 
 const isVisa = (cardNumbers: string) => {

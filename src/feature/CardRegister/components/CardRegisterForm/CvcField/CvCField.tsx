@@ -1,12 +1,8 @@
 import Label from "../shared/Label/Label";
 import Input from "../shared/Input/Input";
 import styled from "styled-components";
-import {
-  CVC_INPUT_COUNT,
-  CVC_LENGTH,
-  ERROR_MESSAGES,
-} from "../../../constants";
-import { isCvcLengthValid } from "../../../validators/cvc";
+import { CVC_INPUT_COUNT, CVC_LENGTH } from "../../../constants";
+import { validateCvc } from "../../../validators/cvc";
 import { isNumericInput } from "../../../validators/input";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 
@@ -35,7 +31,7 @@ const CvcField = ({
 
     onCvcNumberChange(value);
 
-    if (isTouched[index] && isCvcLengthValid(value)) {
+    if (isTouched[index] && validateCvc(value).isValid) {
       clearErrorMessage(index);
     }
   };
@@ -45,12 +41,12 @@ const CvcField = ({
 
     touchField(index);
 
-    if (!isCvcLengthValid(value)) {
-      updateErrorMessage(index, ERROR_MESSAGES.cvc);
-      return;
+    const { errorMessage } = validateCvc(value);
+    if (errorMessage) {
+      updateErrorMessage(index, errorMessage);
+    } else {
+      clearErrorMessage(index);
     }
-
-    clearErrorMessage(index);
   };
 
   return (

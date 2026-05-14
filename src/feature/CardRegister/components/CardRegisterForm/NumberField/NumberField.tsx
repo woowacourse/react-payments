@@ -3,12 +3,11 @@ import Label from "../shared/Label/Label";
 import styled from "styled-components";
 import type { CardNumberChunkType } from "../../../../../common/types/CardInfoType";
 import {
-  CARD_NUMBER_DEFAULT_CHUNK_LENGTH,
   CARD_NUMBER_INPUT_COUNT,
-  ERROR_MESSAGES,
+  type CardNumberChunkLengths,
 } from "../../../constants";
 import { isNumericInput } from "../../../validators/input";
-import { isCardNumberChunkLengthValid } from "../../../validators/cardNumber";
+import { validateCardNumberChunk } from "../../../validators/cardNumber";
 import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
 import { getPlaceHolder } from "../../../utils/placeHolder";
@@ -16,12 +15,11 @@ import { getPlaceHolder } from "../../../utils/placeHolder";
 const NumberField = ({
   cardNumbers,
   onCardNumbersChange,
-  lastInputMaxLength,
+  chunkLengths,
 }: {
   cardNumbers: CardNumberChunkType;
   onCardNumbersChange: (value: CardNumberChunkType) => void;
-
-  lastInputMaxLength: number;
+  chunkLengths: CardNumberChunkLengths;
 }) => {
   const {
     updateErrorMessage,
@@ -36,9 +34,7 @@ const NumberField = ({
     CARD_NUMBER_INPUT_COUNT,
   );
 
-  const LAST_INPUT_INDEX = 3;
-
-  const updateCardNumber = (index: number, newCardNumber: string) => {
+  const updateCardNumberChunk = (index: number, newCardNumber: string) => {
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? newCardNumber : chunk,
     );
@@ -52,24 +48,18 @@ const NumberField = ({
       return;
     }
 
-    updateCardNumber(index, value);
+    const expectedLength = chunkLengths[index];
 
-    // 에러 해결과 동시에 에러 강조표시 해제
-    if (index !== LAST_INPUT_INDEX) {
-      if (
-        isTouched[index] &&
-        value.length === CARD_NUMBER_DEFAULT_CHUNK_LENGTH
-      ) {
-        clearErrorMessage(index);
-      }
-    } else {
-      if (isTouched[index] && value.length === lastInputMaxLength) {
-        clearErrorMessage(index);
-      }
+    updateCardNumberChunk(index, value);
+
+    if (
+      isTouched[index] &&
+      validateCardNumberChunk(value, expectedLength).isValid
+    ) {
+      clearErrorMessage(index);
     }
 
-    // 마지막 input은 자동으로 넘길 포커스가 없기때문에 해당 로직도 아직은 괜찮다고 판단.
-    if (value.length === CARD_NUMBER_DEFAULT_CHUNK_LENGTH) {
+    if (value.length === expectedLength) {
       focusNext(index);
     }
 
@@ -81,22 +71,14 @@ const NumberField = ({
   const handleNumbersBlur = (index: number, eValue: string) => {
     touchField(index);
 
-    if (
-      index !== LAST_INPUT_INDEX &&
-      !isCardNumberChunkLengthValid(eValue, CARD_NUMBER_DEFAULT_CHUNK_LENGTH)
-    ) {
-      updateErrorMessage(index, ERROR_MESSAGES.cardNumber);
-      return;
-    }
+    const expectedLength = chunkLengths[index];
+    const { isValid, errorMessage } = validateCardNumberChunk(
+      eValue,
+      expectedLength,
+    );
 
-    if (
-      index === LAST_INPUT_INDEX &&
-      !isCardNumberChunkLengthValid(eValue, lastInputMaxLength)
-    ) {
-      updateErrorMessage(
-        index,
-        `카드 번호 ${lastInputMaxLength}자리를 입력해 주세요`,
-      );
+    if (!isValid && errorMessage) {
+      updateErrorMessage(index, errorMessage);
       return;
     }
 
@@ -115,17 +97,9 @@ const NumberField = ({
             id={`card_number-${index}`}
             key={index}
             value={chunk}
-            placeholder={
-              index !== LAST_INPUT_INDEX
-                ? getPlaceHolder(CARD_NUMBER_DEFAULT_CHUNK_LENGTH)
-                : getPlaceHolder(lastInputMaxLength)
-            }
+            placeholder={getPlaceHolder(chunkLengths[index])}
             inputMode="numeric"
-            maxLength={
-              index !== LAST_INPUT_INDEX
-                ? CARD_NUMBER_DEFAULT_CHUNK_LENGTH
-                : lastInputMaxLength
-            }
+            maxLength={chunkLengths[index]}
             strokeMode={index === firstErrorIndex ? "error" : "default"}
             onChange={(e) => handleNumbersChange(index, e.target.value)}
             onBlur={(e) => handleNumbersBlur(index, e.target.value)}
