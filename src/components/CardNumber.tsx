@@ -25,6 +25,14 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
     }
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (e.currentTarget.contains(e.relatedTarget)) {
+      return;
+    }
+
+    setCardStatus.handleCardNumbersBlur();
+  };
+
   const lastCardNumberLength =
     cardStatus.cardBrand === 'diners' ? 2 : cardStatus.cardBrand === 'amex' ? 3 : 4;
 
@@ -66,6 +74,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             display: 'flex',
             gap: '10px',
           }}
+          onBlur={handleBlur}
         >
           {cardStatus.cardNumbers.map((cardNumber, index) => {
             return (
@@ -76,7 +85,6 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                 maxLength={index === 3 ? lastCardNumberLength : 4}
                 onChange={handleChange(index)}
                 value={cardNumber}
-                onBlur={setCardStatus.handleCardNumbersBlur}
                 inputMode="numeric"
                 css={(theme) => ({
                   width: '71.25px',
