@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import arrowDownIcon from "@/assets/arrowDownIcon.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
 import type { CardCompany } from "@/constants/cardCompanies";
 import FormField from "@components/common/FormField";
@@ -19,6 +19,7 @@ function CardCompanySelector({
   onNextStep,
 }: CardCompanySelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const selectWrapperRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
@@ -35,13 +36,23 @@ function CardCompanySelector({
     if (!isOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen((prevIsOpen) => !prevIsOpen);
+      if (event.key === "Escape") setIsOpen(false);
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!selectWrapperRef.current) return;
+
+      if (!selectWrapperRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -50,27 +61,37 @@ function CardCompanySelector({
       title="카드사를 선택해 주세요"
       caption="현재 국내 카드사만 가능합니다."
     >
-      <SelectButton type="button" onClick={handleToggle}>
-        <SelectedText state={cardCompany ? "selected" : "placeholder"}>
-          {cardCompany?.name ?? "카드사를 선택해주세요"}
-        </SelectedText>
-        <ArrowIcon src={arrowDownIcon} alt="" />
-      </SelectButton>
+      <SelectWrapper ref={selectWrapperRef}>
+        <SelectButton type="button" onClick={handleToggle}>
+          <SelectedText state={cardCompany ? "selected" : "placeholder"}>
+            {cardCompany?.name ?? "카드사를 선택해주세요"}
+          </SelectedText>
+          <ArrowIcon src={arrowDownIcon} alt="" />
+        </SelectButton>
 
-      {isOpen && (
-        <OptionList>
-          {CARD_COMPANIES.map((company) => (
-            <OptionItem key={company.name}>
-              <OptionButton type="button" onClick={() => handleSelect(company)}>
-                {company.name}
-              </OptionButton>
-            </OptionItem>
-          ))}
-        </OptionList>
-      )}
+        {isOpen && (
+          <OptionList>
+            {CARD_COMPANIES.map((company) => (
+              <OptionItem key={company.name}>
+                <OptionButton
+                  type="button"
+                  onClick={() => handleSelect(company)}
+                >
+                  {company.name}
+                </OptionButton>
+              </OptionItem>
+            ))}
+          </OptionList>
+        )}
+      </SelectWrapper>
     </FormField>
   );
 }
+
+const SelectWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
 
 const SelectButton = styled.button`
   display: flex;
@@ -105,7 +126,7 @@ const ArrowIcon = styled.img`
 
 const OptionList = styled.ul`
   position: absolute;
-  top: calc(88%);
+  top: calc(110%);
   left: 0;
   z-index: 10;
   box-sizing: border-box;
