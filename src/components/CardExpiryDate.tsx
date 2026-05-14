@@ -19,6 +19,10 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
     ...MONTH_ERROR_MESSAGE,
     ...YEAR_ERROR_MESSAGE,
   };
+  const expiryDateErrorMessage =
+    cardExpiry.cardExpiryDateErrorMode !== 'normal' && cardExpiry.cardExpiryDateErrorMode !== ''
+      ? EXPIRY_ERROR_MESSAGE[cardExpiry.cardExpiryDateErrorMode]
+      : ' ';
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
@@ -93,6 +97,8 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
               padding: '8px',
             })}
             aria-label="카드 유효기간 월 입력창"
+            aria-invalid={isMonthError(cardExpiry.cardExpiryDateErrorMode) === true}
+            aria-describedby="card-expiry-error"
             autoFocus
             ref={(element) => {
               inputRefs.current[0] = element;
@@ -119,6 +125,8 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
               padding: '8px',
             })}
             aria-label="카드 유효기간 연도 입력창"
+            aria-invalid={isYearError(cardExpiry.cardExpiryDateErrorMode) === true}
+            aria-describedby="card-expiry-error"
             ref={(element) => {
               inputRefs.current[1] = element;
             }}
@@ -130,11 +138,9 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             color: theme.colors.error,
             height: '12px',
           })}
+          id="card-expiry-error"
         >
-          {cardExpiry.cardExpiryDateErrorMode !== 'normal' &&
-          cardExpiry.cardExpiryDateErrorMode !== ''
-            ? EXPIRY_ERROR_MESSAGE[cardExpiry.cardExpiryDateErrorMode]
-            : ' '}
+          {expiryDateErrorMessage}
         </p>
       </div>
     </fieldset>

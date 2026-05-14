@@ -51,6 +51,8 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
           })}
           id="card-cvc"
           autoFocus
+          aria-invalid={cardCvc.cardCvcErrorMode !== 'normal'}
+          aria-describedby="card-cvc-error"
         />
         <p
           css={(theme) => ({
@@ -58,6 +60,7 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
             color: theme.colors.error,
             height: '12px',
           })}
+          id="card-cvc-error"
         >
           {cardCvc.cardCvcErrorMode !== 'normal'
             ? CVC_ERROR_MESSAGE[cardCvc.cardCvcErrorMode]

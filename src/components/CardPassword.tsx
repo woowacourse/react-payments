@@ -68,6 +68,8 @@ export default function CardPassword({ cardPassword, setCardPassword }: CardPass
             })}
             id="card-password-label"
             autoFocus
+            aria-invalid={cardPassword.cardPasswordErrorMode !== 'normal'}
+            aria-describedby="card-password-error"
           />
         </div>
         <p
@@ -76,6 +78,7 @@ export default function CardPassword({ cardPassword, setCardPassword }: CardPass
             color: theme.colors.error,
             height: '12px',
           })}
+          id="card-password-error"
         >
           {cardPassword.cardPasswordErrorMode !== 'normal'
             ? PASSWORD_ERROR_MESSAGE[cardPassword.cardPasswordErrorMode]

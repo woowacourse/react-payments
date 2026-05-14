@@ -10,6 +10,12 @@ type CardNumbersProps = {
 
 export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersProps) {
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const hasCardNumberError =
+    cardStatus.cardNumberErrorMode !== 'normal' && cardStatus.cardNumberErrorMode !== '';
+  const cardNumberErrorMessage =
+    cardStatus.cardNumberErrorMode !== 'normal' && cardStatus.cardNumberErrorMode !== ''
+      ? CARD_ERROR_MESSAGE[cardStatus.cardNumberErrorMode]
+      : ' ';
 
   const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardStatus.handleCardNumbers(index)(e);
@@ -86,6 +92,8 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                   padding: '8px',
                 })}
                 aria-label={`카드 번호 ${index + 1}번째 입력창`}
+                aria-invalid={hasCardNumberError}
+                aria-describedby="card-number-error"
                 autoFocus={index === 0}
                 ref={(element) => {
                   inputRefs.current[index] = element;
@@ -100,10 +108,9 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             color: theme.colors.error,
             height: '12px',
           })}
+          id="card-number-error"
         >
-          {cardStatus.cardNumberErrorMode !== 'normal' && cardStatus.cardNumberErrorMode !== ''
-            ? CARD_ERROR_MESSAGE[cardStatus.cardNumberErrorMode]
-            : ' '}
+          {cardNumberErrorMessage}
         </p>
       </div>
     </fieldset>
