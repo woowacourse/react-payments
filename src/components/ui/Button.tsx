@@ -8,7 +8,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function Button({ variant = 'primary', size = 'md', rounded = true, children, ...props }: ButtonProps) {
   return (
-    <button css={[buttonStyle, variants[variant], sizes[size], rounded ? roundedStyle : null]} {...props}>
+    <button
+      type={props.type ?? 'button'}
+      css={[buttonStyle, variants[variant], sizes[size], rounded ? roundedStyle : null]}
+      {...props}
+    >
       {children}
     </button>
   );

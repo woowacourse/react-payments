@@ -8,7 +8,7 @@ interface SubmitButtonProps {
 export default function SubmitButton({ disabled = false }: SubmitButtonProps) {
   return (
     <div css={buttonWrapperStyle}>
-      <Button disabled={disabled} size="lg" rounded={false}>
+      <Button type="submit" disabled={disabled} size="lg" rounded={false}>
         확인
       </Button>
     </div>
