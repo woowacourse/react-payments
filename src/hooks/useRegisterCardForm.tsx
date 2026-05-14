@@ -6,17 +6,26 @@ import type {
   CardStatus,
   CardExpiry,
   ExpireHandler,
+  Cvc,
   CvcHandler,
   CardIssuerType,
   Password,
 } from '../types/cardStausTypes';
-import { isCardNumberComplete, isNumericInput, isCardExpiryDateComplete } from '../utils/validate';
+import {
+  isCardCvcComplete,
+  isCardExpiryDateComplete,
+  isCardIssuerSelected,
+  isCardNumberComplete,
+  isCardPasswordComplete,
+  isNumericInput,
+} from '../utils/validate';
 
 type UseRegisterCardFormParams = {
   cardStatus: CardStatus;
   setCardStatus: CardHandler;
   cardExpiry: CardExpiry;
   setCardExpiry: ExpireHandler;
+  cardCvc: Cvc;
   setCardCvc: CvcHandler;
   cardPassword: Password;
   cardIssuer: CardIssuerType | '';
@@ -28,6 +37,7 @@ export function useRegisterCardForm({
   setCardStatus,
   cardExpiry,
   setCardExpiry,
+  cardCvc,
   setCardCvc,
   cardPassword,
   cardIssuer,
@@ -71,20 +81,33 @@ export function useRegisterCardForm({
   const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardCvc.handleCardCvc(e);
 
-    if (e.target.value.length === 3 && isNumericInput(e.target.value)) {
+    if (isCardCvcComplete(e.target.value)) {
       openStep(4);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const isFormValid =
+    isCardNumberComplete(cardStatus.cardNumbers.join('')) &&
+    cardStatus.cardNumberErrorMode === 'normal' &&
+    isCardIssuerSelected(cardIssuer) &&
+    isCardExpiryDateComplete(cardExpiry.cardExpiryDate) &&
+    cardExpiry.cardExpiryDateErrorMode === 'normal' &&
+    isCardCvcComplete(cardCvc.cardCvc) &&
+    cardCvc.cardCvcErrorMode === 'normal' &&
+    isCardPasswordComplete(cardPassword.cardPassword) &&
+    cardPassword.cardPasswordErrorMode === 'normal';
+
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isFormValid) {
+      return;
+    }
+
     navigate('/complete', {
       state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
     });
   };
-
-  const isCardPasswordValid =
-    cardPassword.cardPassword.length === 2 && cardPassword.cardPasswordErrorMode === 'normal';
 
   return {
     step,
@@ -93,6 +116,6 @@ export function useRegisterCardForm({
     handleCardExpiryDate,
     handleCardCvc,
     handleSubmit,
-    isCardPasswordValid,
+    isFormValid,
   };
 }

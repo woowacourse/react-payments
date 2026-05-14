@@ -50,12 +50,13 @@ export default function CardInput({
     handleCardExpiryDate,
     handleCardCvc,
     handleSubmit,
-    isCardPasswordValid,
+    isFormValid,
   } = useRegisterCardForm({
     cardStatus,
     setCardStatus,
     cardExpiry,
     setCardExpiry,
+    cardCvc,
     setCardCvc,
     cardPassword,
     cardIssuer,
@@ -91,7 +92,7 @@ export default function CardInput({
           handleCardNumbers,
         }}
       />
-      {step >= 4 && isCardPasswordValid && <Button type="submit">확인</Button>}
+      {isFormValid && <Button type="submit">확인</Button>}
     </form>
   );
 }

@@ -1,4 +1,5 @@
 import type { CardError } from '../types/errorTypes';
+import type { CardIssuerType } from '../types/cardStausTypes';
 import { getCardBrand, getCardNumberLength, isPossibleCardBrandPrefix } from './cardBrand';
 
 type CardNumberError = CardError | 'normal';
@@ -31,4 +32,16 @@ export function isCardExpiryDateComplete(cardExpiryDate: string[]): boolean {
     Number(cardExpiryDate[0]) > 0 &&
     Number(cardExpiryDate[0]) <= 12
   );
+}
+
+export function isCardIssuerSelected(cardIssuer: CardIssuerType | ''): boolean {
+  return cardIssuer !== '';
+}
+
+export function isCardCvcComplete(cardCvc: string): boolean {
+  return cardCvc.length === 3 && isNumericInput(cardCvc);
+}
+
+export function isCardPasswordComplete(cardPassword: string): boolean {
+  return cardPassword.length === 2 && isNumericInput(cardPassword);
 }
