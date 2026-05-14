@@ -14,5 +14,5 @@ export const DEFAULT_CARD_COLOR = "#333333";
 export type CardCompany = keyof typeof CARD_COMPANIES;
 
 export const isCardCompany = (value: string): value is CardCompany => {
-  return value in CARD_COMPANIES;
+  return Object.prototype.hasOwnProperty.call(CARD_COMPANIES, value);
 };
