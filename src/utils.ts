@@ -1,16 +1,10 @@
-import type { CardBrand, CardInfo, ErrorStatus, ExpirationPeriodErrorStatus } from './types';
+import type { BaseValidationRule, CardBrand, CardInfo, ExpirationValidationRule, ValidationTrigger } from './types';
 
-export type ValidationRule = {
-  name: ErrorStatus | ExpirationPeriodErrorStatus;
-  fn: (value: string) => boolean;
-  on: ('onChange' | 'onBlur')[];
-};
-
-export const validate = (
-  rules: ValidationRule[],
-  trigger: 'onChange' | 'onBlur',
+export const validate = <R extends BaseValidationRule | ExpirationValidationRule>(
+  rules: R[],
+  trigger: ValidationTrigger,
   value: string,
-): ValidationRule['name'] => {
+): R['name'] | null => {
   const targetRules = rules.filter((rule) => rule.on.includes(trigger));
 
   for (const rule of targetRules) {
@@ -23,7 +17,10 @@ export const validate = (
   return null;
 };
 
-export const validateAll = (rules: ValidationRule[], value: string): ValidationRule['name'] => {
+export const validateAll = <R extends BaseValidationRule | ExpirationValidationRule>(
+  rules: R[],
+  value: string,
+): R['name'] | null => {
   for (const rule of rules) {
     const isValid = rule.fn(value);
     if (!isValid) {

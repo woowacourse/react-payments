@@ -1,5 +1,5 @@
-import type { ErrorStatus, ExpirationPeriodErrorStatus } from './types';
-import { isNumber, isValidMonth, isValidYear, isValidMonthAndYear, type ValidationRule } from './utils';
+import type { BaseValidationRule, CardBrand, ErrorStatus, ExpirationPeriodErrorStatus, ExpirationValidationRule } from './types';
+import { isNumber, isValidMonth, isValidYear, isValidMonthAndYear } from './utils';
 
 export const ERROR_MESSAGES: Record<Exclude<ErrorStatus, null>, string> = {
   required: '필수 입력 항목입니다.',
@@ -19,12 +19,12 @@ export const DEFAULT_CVC_LENGTH = 3;
 export const PASSWORD_LENGTH = 2;
 export const DEFAULT_CARD_TOTAL_LENGTH = 16;
 
-export const CARD_TOTAL_LENGTH: Partial<Record<string, number>> = {
+export const CARD_TOTAL_LENGTH: Partial<Record<CardBrand, number>> = {
   amex: 15,
   diners: 14,
 };
 
-export const CARD_CVC_MAX_LENGTH: Partial<Record<string, number>> = {
+export const CARD_CVC_MAX_LENGTH: Partial<Record<CardBrand, number>> = {
   amex: 4,
 };
 
@@ -49,15 +49,15 @@ export const FIELD_STEP = {
 };
 
 export const RULES = {
-  required: { name: 'required', fn: (v: string) => v.length > 0, on: ['onBlur'] } satisfies ValidationRule,
+  required: { name: 'required', fn: (v: string) => v.length > 0, on: ['onBlur'] } satisfies BaseValidationRule,
   numberOnly: {
     name: 'numberOnly',
     fn: (v: string) => v === '' || isNumber(v),
     on: ['onChange'],
-  } satisfies ValidationRule,
-  validMonth: { name: 'invalidMonth', fn: isValidMonth, on: ['onBlur'] } satisfies ValidationRule,
-  validYear: { name: 'invalidYear', fn: isValidYear, on: ['onBlur'] } satisfies ValidationRule,
-  exactLength: (length: number): ValidationRule => ({
+  } satisfies BaseValidationRule,
+  validMonth: { name: 'invalidMonth', fn: isValidMonth, on: ['onBlur'] } satisfies ExpirationValidationRule,
+  validYear: { name: 'invalidYear', fn: isValidYear, on: ['onBlur'] } satisfies ExpirationValidationRule,
+  exactLength: (length: number): BaseValidationRule => ({
     name: 'invalidLength',
     fn: (v: string) => v.length === length,
     on: ['onBlur'],
@@ -66,5 +66,5 @@ export const RULES = {
     name: 'invalidYear',
     fn: (v: string) => isValidMonthAndYear(v.slice(0, 2), v.slice(2, 4)),
     on: ['onBlur'],
-  } satisfies ValidationRule,
+  } satisfies ExpirationValidationRule,
 };
