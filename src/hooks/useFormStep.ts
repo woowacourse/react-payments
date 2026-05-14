@@ -20,7 +20,7 @@ const useFormStep = <StepKey extends string>(
     if (currentStepKey !== stepKey) return;
     const nextStepKey = formStep[stepKey].next;
 
-    if (!nextStepKey) return;
+    if (nextStepKey === null) return;
 
     setStepKey(nextStepKey);
   };
