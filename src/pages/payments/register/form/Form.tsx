@@ -116,7 +116,9 @@ export const Form = () => {
           <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" hide={!(releavedStep >= 4)}>
             <Field
               label="비밀번호 앞 2자리"
-              errorMessage={errorMessages.password?.[password.renderErrorMessage()] || ''}
+              errorMessage={
+                errorMessages.password?.[password.renderErrorMessage()] || password.renderErrorMessage() || ''
+              }
             >
               <Input
                 {...{ ref: password.ref }}
@@ -133,7 +135,10 @@ export const Form = () => {
             </Field>
           </FormGroup>
           <FormGroup title="CVC 번호를 입력해 주세요" hide={!(releavedStep >= 3)}>
-            <Field label="CVC" errorMessage={errorMessages?.cvc?.[cvc.renderErrorMessage()] || ''}>
+            <Field
+              label="CVC"
+              errorMessage={errorMessages?.cvc?.[cvc.renderErrorMessage()] || cvc.renderErrorMessage() || ''}
+            >
               <Input
                 {...{ ref: cvc.ref }}
                 type="tel"
@@ -154,7 +159,11 @@ export const Form = () => {
           >
             <Field
               label="유효기간"
-              errorMessage={errorMessages?.expirationDate?.[expirationDate.renderErrorMessage()] || ''}
+              errorMessage={
+                errorMessages?.expirationDate?.[expirationDate.renderErrorMessage()] ||
+                expirationDate.renderErrorMessage() ||
+                ''
+              }
             >
               <Input
                 {...{ ref: expirationDate.ref }}
@@ -191,7 +200,7 @@ export const Form = () => {
             subTitle="현재 국내 카드사만 가능합니다."
             hide={!(releavedStep >= 1)}
           >
-            <Field errorMessage={errorMessages?.card?.[card.renderErrorMessage()] || ''}>
+            <Field errorMessage={errorMessages?.card?.[card.renderErrorMessage()] || card.renderErrorMessage() || ''}>
               <Select
                 {...{ ref: card.ref }}
                 id="card"
@@ -209,7 +218,9 @@ export const Form = () => {
           >
             <Field
               label="카드 번호"
-              errorMessage={errorMessages?.cardNumbers?.[cardNumbers.renderErrorMessage()] || ''}
+              errorMessage={
+                errorMessages?.cardNumbers?.[cardNumbers.renderErrorMessage()] || cardNumbers.renderErrorMessage() || ''
+              }
               style={{ justifyContent: 'flex-start' }}
             >
               {Object.values(cardNumbers.values).map((value, index, array) => (
