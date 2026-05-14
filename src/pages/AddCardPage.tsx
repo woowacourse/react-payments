@@ -40,11 +40,11 @@ export default function AddCardPage() {
     setStep((prev) => Math.max(prev, currentStep + 1));
   };
 
-  const runAndOpenNextStep = (key: AddCardFormFieldKey, validate: () => boolean) => {
-    if (validate()) {
-      handleOpenNextStep(FIELD_STEP[key]);
-    }
-  };
+  const runAndOpenNextStep =
+    <T,>(key: AddCardFormFieldKey, validate: (value: T) => boolean) =>
+    (value: T) => {
+      if (validate(value)) handleOpenNextStep(FIELD_STEP[key]);
+    };
 
   const isFormValid = step >= FIELD_STEP.password && areAllFieldErrorsClear;
 
@@ -77,7 +77,7 @@ export default function AddCardPage() {
             onUpdated={(value) => updateValue('cvc', value)}
             onErrorUpdated={(errorStatuses) => updateErrors('cvc', errorStatuses)}
             validationRules={rules.cvc}
-            onValid={(value) => runAndOpenNextStep('cvc', () => validateCvcOnComplete(value))}
+            onValid={runAndOpenNextStep('cvc', validateCvcOnComplete)}
           />
         )}
         {step >= FIELD_STEP.expirationPeriod && (
@@ -87,7 +87,7 @@ export default function AddCardPage() {
             onUpdated={(value) => updateValue('expirationPeriod', value)}
             onErrorUpdated={(errorStatuses) => updateErrors('expirationPeriod', errorStatuses)}
             validationRules={rules.expirationPeriod}
-            onValid={(value) => runAndOpenNextStep('expirationPeriod', () => validateExpirationPeriodOnComplete(value))}
+            onValid={runAndOpenNextStep('expirationPeriod', validateExpirationPeriodOnComplete)}
           />
         )}
         {step >= FIELD_STEP.cardCompany && (
@@ -97,7 +97,7 @@ export default function AddCardPage() {
             onUpdated={(value) => updateValue('cardCompany', value)}
             onErrorUpdated={(errorStatuses) => updateErrors('cardCompany', errorStatuses)}
             validationRules={rules.cardCompany}
-            onValid={(value) => runAndOpenNextStep('cardCompany', () => validateCardCompanyOnComplete(value))}
+            onValid={runAndOpenNextStep('cardCompany', validateCardCompanyOnComplete)}
           />
         )}
         <CardNumbersField
@@ -106,7 +106,7 @@ export default function AddCardPage() {
           onUpdated={(value) => updateValue('cardNumbers', value)}
           onErrorUpdated={(errorStatuses) => updateErrors('cardNumbers', errorStatuses)}
           validationRules={rules.cardNumbers.slice(0, 2)}
-          onValid={(value) => runAndOpenNextStep('cardNumbers', () => validateCardNumbersOnComplete(value))}
+          onValid={runAndOpenNextStep('cardNumbers', validateCardNumbersOnComplete)}
         />
       </form>
       {isFormValid && (
