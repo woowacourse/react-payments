@@ -5,9 +5,6 @@ export interface FunnelContextType<Step> {
   goToStep: (modifier: (currentStep: Step) => Step) => void;
 }
 
-const FunnelContext = createContext<FunnelContextType<number>>({
-  currentStep: 0,
-  goToStep: () => {},
-});
+const FunnelContext = createContext<FunnelContextType<number> | null>(null);
 
 export default FunnelContext;
