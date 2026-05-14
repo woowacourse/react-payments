@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { CardContext } from "../../context/CardContext";
 import type { CardCompany } from "../../context/CardContext";
@@ -28,6 +28,12 @@ export const Base: Story = {
     const [cardCompany, setCardCompany] = useState<CardCompany>('');
     const [cardCVC, setCardCVC] = useState('');
     const [cardPassword, setCardPassword] = useState('');
+    const refs = {
+      cardNumberFirstRef: useRef<HTMLInputElement>(null),
+      expiryMonthRef: useRef<HTMLInputElement>(null),
+      cardCVCRef: useRef<HTMLInputElement>(null),
+      cardPasswordRef: useRef<HTMLInputElement>(null),
+    };
     return (
       <MemoryRouter>
         <CardContext
@@ -42,10 +48,19 @@ export const Base: Story = {
             setCardCVC,
             cardPassword,
             setCardPassword,
-            isFormComplete: false,
+            networkBrand: '',
           }}
         >
-          <CardForm />
+          <CardForm
+            refs={refs}
+            currentStep={0}
+            isFormComplete={false}
+            onCardNumberComplete={() => {}}
+            onCardCompanySelected={() => {}}
+            onCardExpiryDateComplete={() => {}}
+            onCardCVCComplete={() => {}}
+            handleFormSubmit={() => {}}
+          />
         </CardContext>
       </MemoryRouter>
     );

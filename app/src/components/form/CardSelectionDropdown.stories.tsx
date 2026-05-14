@@ -35,7 +35,7 @@ const renderWithContext = () => {
         setCardPassword: () => {},
         cardCompany,
         setCardCompany,
-        isFormComplete: false,
+        networkBrand: '',
       }}
     >
       <CardSelectionDropdown onSelect={() => {}} />

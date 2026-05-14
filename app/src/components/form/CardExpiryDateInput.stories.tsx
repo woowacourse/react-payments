@@ -13,8 +13,8 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    firstRef: { current: null },
-    onComplete: () => {},
+    expiryMonthRef: { current: null },
+    onCardExpiryDateComplete: () => {},
   },
 } satisfies Meta<typeof CardExpiryDateInput>;
 
@@ -40,10 +40,10 @@ const renderWithContext = () => {
         setCardPassword: () => {},
         cardExpiryDate,
         setCardExpiryDate,
-        isFormComplete: false,
+        networkBrand: '',
       }}
     >
-      <CardExpiryDateInput firstRef={firstRef} onComplete={() => {}} />
+      <CardExpiryDateInput expiryMonthRef={firstRef} onCardExpiryDateComplete={() => {}} />
     </CardContext>
   );
 };

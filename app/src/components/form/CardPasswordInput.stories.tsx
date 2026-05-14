@@ -35,7 +35,7 @@ const renderWithContext = () => {
         setCardCVC: () => {},
         cardPassword,
         setCardPassword,
-        isFormComplete: false,
+        networkBrand: '',
       }}
     >
       <CardPasswordInput cardPasswordRef={cardPasswordRef} />

@@ -36,14 +36,14 @@ export const CardNumberInputSection: Story = {
           setCardCVC: () => {},
           cardPassword: '',
           setCardPassword: () => {},
-          isFormComplete: false,
+          networkBrand: '',
         }}
       >
         <CardSection
           title="결제할 카드 번호를 입력해 주세요"
           subTitle="본인 명의의 카드만 결제 가능합니다."
         >
-          <CardNumberInputContainer firstRef={firstRef} onComplete={() => {}} />
+          <CardNumberInputContainer firstRef={firstRef} onCardNumberComplete={() => {}} />
         </CardSection>
       </CardContext>
     );
@@ -71,14 +71,14 @@ export const CardExpiryDateInputSection: Story = {
           setCardPassword: () => {},
           cardExpiryDate,
           setCardExpiryDate,
-          isFormComplete: false,
+          networkBrand: '',
         }}
       >
         <CardSection
           title="카드 유효기간을 입력해 주세요"
           subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."
         >
-          <CardExpiryDateInputContainer firstRef={firstRef} onComplete={() => {}} />
+          <CardExpiryDateInputContainer expiryMonthRef={firstRef} onCardExpiryDateComplete={() => {}} />
         </CardSection>
       </CardContext>
     );

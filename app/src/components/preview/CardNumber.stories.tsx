@@ -29,7 +29,7 @@ const renderWithContext = (cardNumber: string[]) => () => (
       setCardCVC: () => {},
       cardPassword: '',
       setCardPassword: () => {},
-      isFormComplete: false,
+      networkBrand: '',
     }}
   >
     <CardNumber />

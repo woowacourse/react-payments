@@ -14,7 +14,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     firstRef: { current: null },
-    onComplete: () => {},
+    onCardNumberComplete: () => {},
   },
 } satisfies Meta<typeof CardNumberInput>;
 
@@ -37,10 +37,10 @@ const renderWithContext = () => {
         setCardCVC: () => {},
         cardPassword: '',
         setCardPassword: () => {},
-        isFormComplete: false,
+        networkBrand: '',
       }}
     >
-      <CardNumberInput firstRef={firstRef} onComplete={() => {}} />
+      <CardNumberInput firstRef={firstRef} onCardNumberComplete={() => {}} />
     </CardContext>
   );
 };

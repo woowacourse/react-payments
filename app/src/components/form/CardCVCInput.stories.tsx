@@ -13,7 +13,7 @@ const meta = {
   tags: ["autodocs"],
   args: {
     cardCVCRef: { current: null },
-    onComplete: () => {},
+    onCardCVCComplete: () => {},
   },
 } satisfies Meta<typeof CardCVCInput>;
 
@@ -36,10 +36,10 @@ const renderWithContext = () => {
         setCardPassword: () => {},
         cardCVC,
         setCardCVC,
-        isFormComplete: false,
+        networkBrand: '',
       }}
     >
-      <CardCVCInput cardCVCRef={cardCVCRef} onComplete={() => {}} />
+      <CardCVCInput cardCVCRef={cardCVCRef} onCardCVCComplete={() => {}} />
     </CardContext>
   );
 };
