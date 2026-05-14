@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -50,7 +50,6 @@ const CardRegisterForm = ({
 
   // 한 번 렌더링 된 필드는 이전 단계에서 에러가 나도 사라지지 않게 하므로 state로!
   const [maxUnlockedStep, setMaxUnlockedStep] = useState(1);
-  const confirmButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
     cardInfo;
@@ -139,13 +138,6 @@ const CardRegisterForm = ({
   };
   const isFormInputComplete = Object.values(fieldValidity).every(Boolean);
 
-  useEffect(() => {
-    if (!isFormInputComplete) {
-      return;
-    }
-    confirmButtonRef.current?.focus();
-  }, [isFormInputComplete]);
-
   const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isFormInputComplete) {
@@ -223,7 +215,7 @@ const CardRegisterForm = ({
       )}
 
       {isFormInputComplete && (
-        <ConfirmButton ref={confirmButtonRef} size="full" type="submit">
+        <ConfirmButton size="full" type="submit">
           확인
         </ConfirmButton>
       )}
