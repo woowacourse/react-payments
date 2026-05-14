@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { CardError } from '../types/errorTypes';
-import type { CardStatus, CardHandler, CardBrandType } from '../types/cardStausTypes';
+import type { CardStatus, CardHandler } from '../types/cardStausTypes';
 import {
   getCardBrand,
   getCardNumberLength,
@@ -11,7 +11,7 @@ import {
 export function useCardNumber(): [CardStatus, CardHandler] {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [cardNumberErrorMode, setCardNumberErrorMode] = useState<CardError | 'normal' | ''>('');
-  const [cardBrand, setCardBrand] = useState<CardBrandType>('unknown');
+  const cardBrand = getCardBrand(cardNumbers.join(''));
 
   const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = [...cardNumbers];
@@ -26,14 +26,10 @@ export function useCardNumber(): [CardStatus, CardHandler] {
     setCardNumbers(next);
 
     if (!isPossibleCardBrandPrefix(nextCardNumber)) {
-      setCardBrand('unknown');
       setCardNumberErrorMode('notExistBrand');
       return;
     }
 
-    const nextCardBrand = getCardBrand(nextCardNumber);
-
-    setCardBrand(nextCardBrand);
     setCardNumberErrorMode('normal');
   };
 
