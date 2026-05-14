@@ -12,25 +12,18 @@ import {
 import type { CardBrand, CardInfo, ErrorStatus, ExpirationPeriodErrorStatus, ExpirationValidationRule } from '../types';
 import { categorizeCardBrand, validate, validateAll } from '../utils';
 
-export interface CardNumbersFieldState {
-  value: CardInfo['cardNumbers'];
-  errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus];
-}
-
-export interface ExpirationPeriodFieldState {
-  value: CardInfo['expirationPeriod'];
-  errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
-}
-
-export interface FieldState<T> {
-  value: T;
-  errorStatuses: [ErrorStatus];
+interface FieldState<V, E extends (ErrorStatus | ExpirationPeriodErrorStatus)[] = [ErrorStatus]> {
+  value: V;
+  errorStatuses: E;
 }
 
 export interface FormValue {
-  cardNumbers: CardNumbersFieldState;
+  cardNumbers: FieldState<CardInfo['cardNumbers'], [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus]>;
   cardCompany: FieldState<CardInfo['cardCompany']>;
-  expirationPeriod: ExpirationPeriodFieldState;
+  expirationPeriod: FieldState<
+    CardInfo['expirationPeriod'],
+    [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]
+  >;
   cvc: FieldState<CardInfo['cvc']>;
   password: FieldState<CardInfo['password']>;
 }
@@ -201,51 +194,17 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
       cvcLength,
       cardNumbersTotalLength,
       areAllFieldErrorsClear,
-    },
-    fieldProps: {
-      cardNumbers: {
-        value: formValue.cardNumbers.value,
-        errorStatuses: formValue.cardNumbers.errorStatuses,
-        onUpdated: (value: CardInfo['cardNumbers']) => updateValue('cardNumbers', value),
-        onErrorUpdated: (errorStatuses: FormValue['cardNumbers']['errorStatuses']) =>
-          updateErrors('cardNumbers', errorStatuses),
-        validationRules: cardNumbersRules.slice(0, 2),
-      },
-      cardCompany: {
-        value: formValue.cardCompany.value,
-        errorStatuses: formValue.cardCompany.errorStatuses,
-        onUpdated: (value: CardInfo['cardCompany']) => updateValue('cardCompany', value),
-        onErrorUpdated: (errorStatuses: FormValue['cardCompany']['errorStatuses']) =>
-          updateErrors('cardCompany', errorStatuses),
-        validationRules: cardCompanyRules,
-      },
-      expirationPeriod: {
-        value: formValue.expirationPeriod.value,
-        errorStatuses: formValue.expirationPeriod.errorStatuses,
-        onUpdated: (value: CardInfo['expirationPeriod']) => updateValue('expirationPeriod', value),
-        onErrorUpdated: (errorStatuses: FormValue['expirationPeriod']['errorStatuses']) =>
-          updateErrors('expirationPeriod', errorStatuses),
-        validationRules: expirationPeriodRules,
-      },
-      cvc: {
-        value: formValue.cvc.value,
-        errorStatuses: formValue.cvc.errorStatuses,
-        minLength: DEFAULT_CVC_LENGTH,
-        maxLength: cvcLength,
-        onUpdated: (value: CardInfo['cvc']) => updateValue('cvc', value),
-        onErrorUpdated: (errorStatuses: FormValue['cvc']['errorStatuses']) => updateErrors('cvc', errorStatuses),
-        validationRules: cvcRules,
-      },
-      password: {
-        value: formValue.password.value,
-        errorStatuses: formValue.password.errorStatuses,
-        onUpdated: (value: CardInfo['password']) => updateValue('password', value),
-        onErrorUpdated: (errorStatuses: FormValue['password']['errorStatuses']) =>
-          updateErrors('password', errorStatuses),
-        validationRules: passwordRules,
+      rules: {
+        cardNumbers: cardNumbersRules,
+        cardCompany: cardCompanyRules,
+        expirationPeriod: expirationPeriodRules,
+        cvc: cvcRules,
+        password: passwordRules,
       },
     },
     actions: {
+      updateValue,
+      updateErrors,
       validateCardNumbersOnComplete,
       validateExpirationPeriodOnComplete,
       validateCvcOnComplete,
