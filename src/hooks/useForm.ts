@@ -35,7 +35,7 @@ export const useForm = <T extends object, E>(initialValues: T) => {
 
       if (Array.isArray(fieldValue) && typeof index === 'number') {
         const updatedFieldValue = [...fieldValue];
-        updatedFieldValue[index] = value as string;
+        updatedFieldValue[index] = value;
         return { ...prev, [field]: updatedFieldValue as T[K] };
       }
 
