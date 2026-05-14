@@ -1,6 +1,6 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
-import type { UseCvcResult } from '../../hooks/useCvc';
+import type { UseCvcResult } from '../../../../entities/card/cvc/useCvc';
 
 interface CvcFieldProps {
   cvc: UseCvcResult;
