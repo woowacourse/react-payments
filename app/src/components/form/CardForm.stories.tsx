@@ -13,6 +13,21 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  args: {
+    refs: {
+      cardNumberFirstRef: { current: null },
+      expiryMonthRef: { current: null },
+      cardCVCRef: { current: null },
+      cardPasswordRef: { current: null },
+    },
+    currentStep: 0,
+    isFormComplete: false,
+    onCardNumberComplete: () => {},
+    onCardCompanySelected: () => {},
+    onCardExpiryDateComplete: () => {},
+    onCardCVCComplete: () => {},
+    handleFormSubmit: () => {},
+  },
 } satisfies Meta<typeof CardForm>;
 
 export default meta;
