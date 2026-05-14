@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
 import NetworkBrandErrorMessage from "./NetworkBrandErrorMessage";
@@ -34,7 +33,7 @@ export function CardNumberInput({
     fourthDigits: { state: false, message: "" },
   });
 
-  const [networkBrandError, setNetworkBrandError] = useState({
+  const [networkBrandError, handleChangeNetworkBrandError] = useCardInputError({
     state: false,
     message: "",
   });
@@ -43,15 +42,6 @@ export function CardNumberInput({
     Object.keys(cardNumber).length,
     CARD_INPUT.EACH_NUMBER_LENGTH,
   );
-
-  const runNetworkBrandValidation = (value: string) => {
-    try {
-      Validator.isValidNetworkBrand(value);
-      setNetworkBrandError({ state: false, message: "" });
-    } catch (err) {
-      setNetworkBrandError({ state: true, message: (err as Error).message });
-    }
-  };
 
   const changeCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -65,7 +55,9 @@ export function CardNumberInput({
       CARD_INPUT.EACH_NUMBER_LENGTH,
     );
     handleChangeError([() => Validator.isNumber(value)], field);
-    runNetworkBrandValidation(fullNumber);
+    handleChangeNetworkBrandError([
+      () => Validator.isValidNetworkBrand(fullNumber),
+    ]);
     setCardNumber(newCardNumber);
     changeFocus(e, index);
   };
