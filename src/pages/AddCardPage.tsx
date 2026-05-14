@@ -8,24 +8,32 @@ import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import CardCompanySelect from '../components/domain/CardCompanySelect';
 import PasswordField from '../components/domain/PasswordField';
-import { FIELD_STEP } from '../constants';
+import { FIELD_STEP, DEFAULT_CVC_LENGTH } from '../constants';
 import useAddCardForm, { type AddCardFormFieldKey, createInitialFormValue } from '../hooks/useAddCardForm';
 
 export default function AddCardPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const {
-    formValue,
-    derived: { cardBrand, areAllFieldErrorsClear },
-    fieldProps,
-    actions,
+    formValue: { cardNumbers, cardCompany, expirationPeriod, cvc, password },
+    derived: { cardBrand, cvcLength, areAllFieldErrorsClear, rules },
+    actions: {
+      updateValue,
+      updateErrors,
+      validateAllFields,
+      validateCardNumbersOnComplete,
+      validateCvcOnComplete,
+      validateExpirationPeriodOnComplete,
+      validateCardCompanyOnComplete,
+      buildCompletePageState,
+    },
   } = useAddCardForm({ initialValue: createInitialFormValue() });
 
   const handleSubmitForm = (e: React.SubmitEvent) => {
     e.preventDefault();
-    const isValid = actions.validateAllFields();
+    const isValid = validateAllFields();
     if (!isValid) return;
-    navigate('/complete', { state: actions.buildCompletePageState() });
+    navigate('/complete', { state: buildCompletePageState() });
   };
 
   const handleOpenNextStep = (currentStep: number) => {
@@ -44,37 +52,61 @@ export default function AddCardPage() {
     <main css={mainStyle}>
       <div css={cardWrapperStyle}>
         <Card
-          cardNumber={formValue.cardNumbers.value}
-          expirationPeriod={formValue.expirationPeriod.value}
+          cardNumber={cardNumbers.value}
+          expirationPeriod={expirationPeriod.value}
           cardBrand={cardBrand}
-          cardCompany={formValue.cardCompany.value}
+          cardCompany={cardCompany.value}
         />
       </div>
       <form css={formLayout} id="add-card-form" onSubmit={handleSubmitForm}>
-        {step >= FIELD_STEP.password && <PasswordField {...fieldProps.password} />}
+        {step >= FIELD_STEP.password && (
+          <PasswordField
+            value={password.value}
+            errorStatuses={password.errorStatuses}
+            onUpdated={(value) => updateValue('password', value)}
+            onErrorUpdated={(errorStatuses) => updateErrors('password', errorStatuses)}
+            validationRules={rules.password}
+          />
+        )}
         {step >= FIELD_STEP.cvc && (
           <CVCField
-            {...fieldProps.cvc}
-            onValid={(value) => runAndOpenNextStep('cvc', () => actions.validateCvcOnComplete(value))}
+            value={cvc.value}
+            errorStatuses={cvc.errorStatuses}
+            minLength={DEFAULT_CVC_LENGTH}
+            maxLength={cvcLength}
+            onUpdated={(value) => updateValue('cvc', value)}
+            onErrorUpdated={(errorStatuses) => updateErrors('cvc', errorStatuses)}
+            validationRules={rules.cvc}
+            onValid={(value) => runAndOpenNextStep('cvc', () => validateCvcOnComplete(value))}
           />
         )}
         {step >= FIELD_STEP.expirationPeriod && (
           <ExpirationPeriodField
-            {...fieldProps.expirationPeriod}
-            onValid={(value) =>
-              runAndOpenNextStep('expirationPeriod', () => actions.validateExpirationPeriodOnComplete(value))
-            }
+            value={expirationPeriod.value}
+            errorStatuses={expirationPeriod.errorStatuses}
+            onUpdated={(value) => updateValue('expirationPeriod', value)}
+            onErrorUpdated={(errorStatuses) => updateErrors('expirationPeriod', errorStatuses)}
+            validationRules={rules.expirationPeriod}
+            onValid={(value) => runAndOpenNextStep('expirationPeriod', () => validateExpirationPeriodOnComplete(value))}
           />
         )}
         {step >= FIELD_STEP.cardCompany && (
           <CardCompanySelect
-            {...fieldProps.cardCompany}
-            onValid={(value) => runAndOpenNextStep('cardCompany', () => actions.validateCardCompanyOnComplete(value))}
+            value={cardCompany.value}
+            errorStatuses={cardCompany.errorStatuses}
+            onUpdated={(value) => updateValue('cardCompany', value)}
+            onErrorUpdated={(errorStatuses) => updateErrors('cardCompany', errorStatuses)}
+            validationRules={rules.cardCompany}
+            onValid={(value) => runAndOpenNextStep('cardCompany', () => validateCardCompanyOnComplete(value))}
           />
         )}
         <CardNumbersField
-          {...fieldProps.cardNumbers}
-          onValid={(value) => runAndOpenNextStep('cardNumbers', () => actions.validateCardNumbersOnComplete(value))}
+          value={cardNumbers.value}
+          errorStatuses={cardNumbers.errorStatuses}
+          onUpdated={(value) => updateValue('cardNumbers', value)}
+          onErrorUpdated={(errorStatuses) => updateErrors('cardNumbers', errorStatuses)}
+          validationRules={rules.cardNumbers.slice(0, 2)}
+          onValid={(value) => runAndOpenNextStep('cardNumbers', () => validateCardNumbersOnComplete(value))}
         />
       </form>
       {isFormValid && (
