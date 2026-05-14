@@ -6,7 +6,8 @@ import useFocusChain from "../../hooks/useFocusChain";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
 import { CardInputChecker } from "../../Checker";
-import { sanitizeErrors, joinCardNumber, runValidation } from "../../Utils";
+import useCardInputError from "../../hooks/useCardInputError";
+import { sanitizeErrors, joinCardNumber } from "../../Utils";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 import type { CardNumber, SetState } from "../../types";
 
@@ -22,8 +23,11 @@ interface CardNumberInputProps {
   setCardNumber: SetState<CardNumber>;
 }
 
-export function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
-  const [isError, setError] = useState({
+export function CardNumberInput({
+  cardNumber,
+  setCardNumber,
+}: CardNumberInputProps) {
+  const [isError, handleChangeError, handleOnBlurError] = useCardInputError({
     firstDigits: { state: false, message: "" },
     secondDigits: { state: false, message: "" },
     thirdDigits: { state: false, message: "" },
@@ -60,8 +64,7 @@ export function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputPr
       Object.values(newCardNumber),
       CARD_INPUT.EACH_NUMBER_LENGTH,
     );
-    const errorReport = runValidation([() => Validator.isNumber(value)]);
-    setError({ ...isError, [field]: errorReport });
+    handleChangeError([() => Validator.isNumber(value)], field);
     runNetworkBrandValidation(fullNumber);
     setCardNumber(newCardNumber);
     changeFocus(e, index);
@@ -76,10 +79,10 @@ export function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputPr
     if (
       !CardInputChecker.isCardNumberComplete(Object.values(cardNumber).join(""))
     ) {
-      const errorReport = runValidation([
-        () => Validator.isValidCardNumberLength(value),
-      ]);
-      setError({ ...isError, [field]: errorReport });
+      handleOnBlurError(
+        [() => Validator.isValidCardNumberLength(value)],
+        field,
+      );
     }
   };
 

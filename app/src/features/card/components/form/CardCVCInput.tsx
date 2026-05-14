@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
 import { CARD_INPUT } from "../../Constants";
-import { sanitizeErrors, runValidation } from "../../Utils";
+import { sanitizeErrors } from "../../Utils";
 import { CardInput } from "./CardInput";
+import useCardInputError from "../../hooks/useCardInputError";
 import { Validator } from "../../validators/CardValidator";
 import {
   CardInputFieldContainer,
@@ -15,22 +15,16 @@ interface CardCVCInputProps {
 }
 
 export function CardCVCInput({ cardCVC, setCardCVC }: CardCVCInputProps) {
-  const [isError, setError] = useState({
+  const [isError, handleChangeError, handleOnBlurError] = useCardInputError({
     state: false,
     message: "",
   });
 
   const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const errorReport = runValidation([() => Validator.isNumber(value)]);
-    setError(errorReport);
+    const errorReport = handleChangeError([() => Validator.isNumber(value)]);
     if (errorReport.state) return;
     setCardCVC(value);
-  };
-
-  const handleBlurCVC = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setError(runValidation([() => Validator.isValidCardCVCLength(value)]));
   };
 
   return (
@@ -43,7 +37,11 @@ export function CardCVCInput({ cardCVC, setCardCVC }: CardCVCInputProps) {
         id="card-cvc-input"
         value={cardCVC}
         onChange={changeCardCVC}
-        onBlur={handleBlurCVC}
+        onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+          handleOnBlurError([
+            () => Validator.isValidCardCVCLength(e.target.value),
+          ])
+        }
       />
       <ErrorMessage messages={sanitizeErrors([isError["message"]])} />
     </CardInputFieldContainer>

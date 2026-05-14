@@ -1,9 +1,9 @@
 import { CardInput } from "./CardInput";
 import { CARD_INPUT } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
-import { useState } from "react";
 import { ErrorMessage } from "./ErrorMessage";
-import { sanitizeErrors, runValidation } from "../../Utils";
+import useCardInputError from "../../hooks/useCardInputError";
+import { sanitizeErrors } from "../../Utils";
 import {
   CardInputLabel,
   CardInputFieldContainer,
@@ -14,23 +14,20 @@ interface CardPasswordInputProps {
   setCardPassword: (value: string) => void;
 }
 
-export default function CardPasswordInput({ cardPassword, setCardPassword }: CardPasswordInputProps) {
-  const [isError, setError] = useState({
+export default function CardPasswordInput({
+  cardPassword,
+  setCardPassword,
+}: CardPasswordInputProps) {
+  const [isError, handleChangeError, handleOnBlurError] = useCardInputError({
     state: false,
     message: "",
   });
 
   const changeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const errorReport = runValidation([() => Validator.isNumber(value)]);
-    setError(errorReport);
+    const errorReport = handleChangeError([() => Validator.isNumber(value)]);
     if (errorReport.state) return;
     setCardPassword(value);
-  };
-
-  const handleBlurPassword = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setError(runValidation([() => Validator.isValidCardPassswordLength(value)]));
   };
 
   return (
@@ -42,7 +39,11 @@ export default function CardPasswordInput({ cardPassword, setCardPassword }: Car
         placeholder="비밀번호"
         value={cardPassword}
         onChange={changeCardPassword}
-        onBlur={handleBlurPassword}
+        onBlur={(e) =>
+          handleOnBlurError([
+            () => Validator.isValidCardPassswordLength(e.target.value),
+          ])
+        }
       />
       <ErrorMessage messages={sanitizeErrors([isError["message"]])} />
     </CardInputFieldContainer>
