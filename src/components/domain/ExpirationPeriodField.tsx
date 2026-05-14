@@ -79,9 +79,7 @@ export default function ExpirationPeriodField({
     const inputValue = e.target.value;
     const error = validate('blur', inputValue, index);
 
-    if (error) {
-      setFieldError('expirationPeriod', error, index);
-    }
+    setFieldError('expirationPeriod', error, index);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {

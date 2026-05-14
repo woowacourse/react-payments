@@ -57,9 +57,7 @@ export default function PasswordField({
     const inputValue = e.target.value;
     const error = validate('blur', inputValue);
 
-    if (error) {
-      setFieldError('password', error);
-    }
+    setFieldError('password', error);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {

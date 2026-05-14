@@ -60,9 +60,7 @@ export default function CVCField({
     const inputValue = e.target.value;
     const error = validate('blur', inputValue);
 
-    if (error) {
-      setFieldError('cvc', error);
-    }
+    setFieldError('cvc', error);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {

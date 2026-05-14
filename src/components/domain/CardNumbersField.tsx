@@ -83,9 +83,7 @@ export default function CardNumbersField({
     const inputValue = e.target.value;
     const error = validate('blur', inputValue, index);
 
-    if (error) {
-      setFieldError('cardNumbers', error, index);
-    }
+    setFieldError('cardNumbers', error, index);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
