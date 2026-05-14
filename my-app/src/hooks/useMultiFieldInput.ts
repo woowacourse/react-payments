@@ -15,7 +15,7 @@ export const useMultiFieldInput = ({
   validate,
   onValueHandler,
 }: UseMultiFieldInputParams) => {
-  const [inputValues, setInputValues] = useState<string[]>([]);
+  const [inputValues, setInputValues] = useState<string[]>(() => Array(fieldCount).fill(""));
   const [errorMessage, setErrorMessage] = useState("");
   const [errorIndex, setErrorIndex] = useState<number>(-1);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
