@@ -15,7 +15,6 @@ import type {
   PasswordHandler,
 } from '../types/cardStausTypes';
 import CardIssuer from './CardIssuer';
-import { useRegisterCardForm } from '../hooks/useRegisterCardForm';
 import Button from './common/Button';
 
 type CardInputProps = {
@@ -29,6 +28,9 @@ type CardInputProps = {
   setCardPassword: PasswordHandler;
   cardIssuer: CardIssuerType | '';
   handleCardIssuer: (issuer: CardIssuerType) => void;
+  step: number;
+  handleSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
+  isFormValid: boolean;
 };
 
 export default function CardInput({
@@ -41,57 +43,18 @@ export default function CardInput({
   cardPassword,
   setCardPassword,
   cardIssuer,
-  handleCardIssuer: changeCardIssuer,
+  handleCardIssuer,
+  step,
+  handleSubmit,
+  isFormValid,
 }: CardInputProps) {
-  const {
-    step,
-    handleCardNumbers,
-    handleCardIssuer,
-    handleCardExpiryDate,
-    handleCardCvc,
-    handleSubmit,
-    isFormValid,
-  } = useRegisterCardForm({
-    cardStatus,
-    setCardStatus,
-    cardExpiry,
-    setCardExpiry,
-    cardCvc,
-    setCardCvc,
-    cardPassword,
-    cardIssuer,
-    handleCardIssuer: changeCardIssuer,
-  });
-
   return (
     <form onSubmit={handleSubmit} css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {step >= 4 && <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />}
-      {step >= 3 && (
-        <CardCvc
-          cardCvc={cardCvc}
-          setCardCvc={{
-            ...setCardCvc,
-            handleCardCvc,
-          }}
-        />
-      )}
-      {step >= 2 && (
-        <CardExpiryDate
-          cardExpiry={cardExpiry}
-          setCardExpiry={{
-            ...setCardExpiry,
-            handleCardExpiryDate,
-          }}
-        />
-      )}
+      {step >= 3 && <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />}
+      {step >= 2 && <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />}
       {step >= 1 && <CardIssuer cardIssuer={cardIssuer} handleCardIssuer={handleCardIssuer} />}
-      <CardNumber
-        cardStatus={cardStatus}
-        setCardStatus={{
-          ...setCardStatus,
-          handleCardNumbers,
-        }}
-      />
+      <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
       {isFormValid && <Button type="submit">확인</Button>}
     </form>
   );

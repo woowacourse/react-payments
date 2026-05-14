@@ -1,22 +1,9 @@
 import CardPreview from '../components/CardPreview';
 import CardInput from '../components/CardInput';
-import { useCardNumber } from '../hooks/useCardNumber';
-import { useExpiryDate } from '../hooks/useExpiryDate';
-import { useCardCvc } from '../hooks/useCardCvc';
-import { useCardPassword } from '../hooks/useCardPassword';
-import { useState } from 'react';
-import type { CardIssuerType } from '../types/cardStausTypes';
+import { useRegisterCardForm } from '../hooks/useRegisterCardForm';
 
 export default function RegisterCard() {
-  const [cardStatus, setCardStatus] = useCardNumber();
-  const [cardExpiry, setCardExpiry] = useExpiryDate();
-  const [cardCvc, setCardCvc] = useCardCvc();
-  const [cardPassword, setCardPassword] = useCardPassword();
-  const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
-
-  const handleCardIssuer = (issuer: CardIssuerType) => {
-    setCardIssuer(issuer);
-  };
+  const registerCardForm = useRegisterCardForm();
 
   return (
     <div
@@ -33,23 +20,12 @@ export default function RegisterCard() {
       })}
     >
       <CardPreview
-        cardNumbers={cardStatus.cardNumbers}
-        cardExpiryDate={cardExpiry.cardExpiryDate}
-        cardBrand={cardStatus.cardBrand}
-        cardIssuer={cardIssuer}
+        cardNumbers={registerCardForm.cardStatus.cardNumbers}
+        cardExpiryDate={registerCardForm.cardExpiry.cardExpiryDate}
+        cardBrand={registerCardForm.cardStatus.cardBrand}
+        cardIssuer={registerCardForm.cardIssuer}
       />
-      <CardInput
-        cardStatus={cardStatus}
-        setCardStatus={setCardStatus}
-        cardExpiry={cardExpiry}
-        setCardExpiry={setCardExpiry}
-        cardCvc={cardCvc}
-        setCardCvc={setCardCvc}
-        cardPassword={cardPassword}
-        setCardPassword={setCardPassword}
-        cardIssuer={cardIssuer}
-        handleCardIssuer={handleCardIssuer}
-      />
+      <CardInput {...registerCardForm} />
     </div>
   );
 }

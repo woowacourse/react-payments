@@ -1,16 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type {
-  CardHandler,
-  CardStatus,
-  CardExpiry,
-  ExpireHandler,
-  Cvc,
-  CvcHandler,
-  CardIssuerType,
-  Password,
-} from '../types/cardStausTypes';
+import { useCardCvc } from './useCardCvc';
+import { useCardNumber } from './useCardNumber';
+import { useCardPassword } from './useCardPassword';
+import { useExpiryDate } from './useExpiryDate';
+import type { CardIssuerType } from '../types/cardStausTypes';
 import {
   isCardCvcComplete,
   isCardExpiryDateComplete,
@@ -20,38 +15,22 @@ import {
   isNumericInput,
 } from '../utils/validate';
 
-type UseRegisterCardFormParams = {
-  cardStatus: CardStatus;
-  setCardStatus: CardHandler;
-  cardExpiry: CardExpiry;
-  setCardExpiry: ExpireHandler;
-  cardCvc: Cvc;
-  setCardCvc: CvcHandler;
-  cardPassword: Password;
-  cardIssuer: CardIssuerType | '';
-  handleCardIssuer: (issuer: CardIssuerType) => void;
-};
-
-export function useRegisterCardForm({
-  cardStatus,
-  setCardStatus,
-  cardExpiry,
-  setCardExpiry,
-  cardCvc,
-  setCardCvc,
-  cardPassword,
-  cardIssuer,
-  handleCardIssuer: changeCardIssuer,
-}: UseRegisterCardFormParams) {
-  const navigate = useNavigate();
+export function useRegisterCardForm() {
+  const [cardStatus, cardNumberHandler] = useCardNumber();
+  const [cardExpiry, cardExpiryHandler] = useExpiryDate();
+  const [cardCvc, cardCvcHandler] = useCardCvc();
+  const [cardPassword, setCardPassword] = useCardPassword();
+  const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
   const [step, setStep] = useState(0);
+
+  const navigate = useNavigate();
 
   const openStep = (nextStep: number) => {
     setStep((prev) => Math.max(prev, nextStep));
   };
 
   const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardStatus.handleCardNumbers(index)(e);
+    cardNumberHandler.handleCardNumbers(index)(e);
 
     const nextCardNumbers = [...cardStatus.cardNumbers];
     nextCardNumbers[index] = e.target.value;
@@ -63,12 +42,12 @@ export function useRegisterCardForm({
   };
 
   const handleCardIssuer = (issuer: CardIssuerType) => {
-    changeCardIssuer(issuer);
+    setCardIssuer(issuer);
     openStep(2);
   };
 
   const handleCardExpiryDate = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardExpiry.handleCardExpiryDate(index)(e);
+    cardExpiryHandler.handleCardExpiryDate(index)(e);
 
     const nextCardExpiryDate = [...cardExpiry.cardExpiryDate];
     nextCardExpiryDate[index] = e.target.value;
@@ -79,7 +58,7 @@ export function useRegisterCardForm({
   };
 
   const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardCvc.handleCardCvc(e);
+    cardCvcHandler.handleCardCvc(e);
 
     if (isCardCvcComplete(e.target.value)) {
       openStep(4);
@@ -110,11 +89,26 @@ export function useRegisterCardForm({
   };
 
   return {
-    step,
-    handleCardNumbers,
+    cardStatus,
+    setCardStatus: {
+      ...cardNumberHandler,
+      handleCardNumbers,
+    },
+    cardExpiry,
+    setCardExpiry: {
+      ...cardExpiryHandler,
+      handleCardExpiryDate,
+    },
+    cardCvc,
+    setCardCvc: {
+      ...cardCvcHandler,
+      handleCardCvc,
+    },
+    cardPassword,
+    setCardPassword,
+    cardIssuer,
     handleCardIssuer,
-    handleCardExpiryDate,
-    handleCardCvc,
+    step,
     handleSubmit,
     isFormValid,
   };
