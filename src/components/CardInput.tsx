@@ -15,7 +15,7 @@ import type {
   PasswordHandler,
 } from '../types/cardStausTypes';
 import CardIssuer from './CardIssuer';
-import { useCardInput } from '../hooks/useCardInput';
+import { useRegisterCardForm } from '../hooks/useRegisterCardForm';
 import Button from './Button';
 
 type CardInputProps = {
@@ -51,7 +51,7 @@ export default function CardInput({
     handleCardCvc,
     handleSubmit,
     isCardPasswordValid,
-  } = useCardInput({
+  } = useRegisterCardForm({
     cardStatus,
     setCardStatus,
     cardExpiry,
@@ -91,9 +91,7 @@ export default function CardInput({
           handleCardNumbers,
         }}
       />
-      {step >= 4 && isCardPasswordValid && (
-        <Button type="submit">확인</Button>
-      )}
+      {step >= 4 && isCardPasswordValid && <Button type="submit">확인</Button>}
     </form>
   );
 }

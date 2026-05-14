@@ -12,7 +12,7 @@ import type {
 } from '../types/cardStausTypes';
 import { isCardNumberComplete, isNumericInput, isCardExpiryDateComplete } from '../utils/validate';
 
-type UseCardInputParams = {
+type UseRegisterCardFormParams = {
   cardStatus: CardStatus;
   setCardStatus: CardHandler;
   cardExpiry: CardExpiry;
@@ -23,7 +23,7 @@ type UseCardInputParams = {
   handleCardIssuer: (issuer: CardIssuerType) => void;
 };
 
-export function useCardInput({
+export function useRegisterCardForm({
   cardStatus,
   setCardStatus,
   cardExpiry,
@@ -32,7 +32,7 @@ export function useCardInput({
   cardPassword,
   cardIssuer,
   handleCardIssuer: changeCardIssuer,
-}: UseCardInputParams) {
+}: UseRegisterCardFormParams) {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
 
