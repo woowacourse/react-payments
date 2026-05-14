@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { type Bank } from '@/entities/card/bank/bank';
 
+interface UseBankProps {
+  onComplete: () => void;
+}
+
 export interface UseBankResult {
-  value: Bank;
+  value: Bank | undefined;
   handleChange: (bank: Bank) => void;
 }
 
-export const useBank = ({ onComplete }: { onComplete: () => void }): UseBankResult => {
-  const [bank, setBank] = useState<Bank>('unknown');
+export const useBank = ({ onComplete }: UseBankProps): UseBankResult => {
+  const [value, setValue] = useState<Bank | undefined>(undefined);
 
-  const handleChange = (value: Bank) => {
-    setBank(value);
-    if (value !== 'unknown') onComplete();
+  const handleChange = (bank: Bank) => {
+    setValue(bank);
+    onComplete();
   };
 
-  return {
-    value: bank,
-    handleChange,
-  };
+  return { value, handleChange };
 };

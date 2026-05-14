@@ -11,11 +11,11 @@ import { useExpiryDate } from '@/features/cardFormGroup/hooks/useExpiryDate';
 import { useCvc } from '@/features/cardFormGroup/hooks/useCvc';
 import { usePassword } from '@/features/cardFormGroup/hooks/usePassword';
 import { PasswordFormGroup } from '@/features/cardFormGroup/ui/PasswordFormGroup';
-import { useBank } from '@/features/cardFormGroup/hooks/useBank';
 import { BankSelectFormGroup } from '@/features/cardFormGroup/ui/BankSelectFormGroup';
 import { usePaymentStep } from './usePaymentsStep';
 import { SubmitButton } from '@/features/cardFormGroup/ui/SubmitButton';
 import { useNavigate } from 'react-router-dom';
+import { useBank } from '@/features/cardFormGroup/hooks/useBank';
 
 const STEP = {
   CARD: 0,
@@ -60,13 +60,13 @@ export const Payments = () => {
     navigate('/result', {
       state: {
         cardNumbers: cardNumbers.values,
-        bank: bank.value,
+        bank: bank,
       },
     });
   };
   const isFormValid =
     cardNumbers.isValid &&
-    bank.value !== 'unknown' &&
+    bank !== undefined &&
     expiryDate.isValid &&
     cvc.isValid &&
     password.isValid;

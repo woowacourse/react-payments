@@ -6,6 +6,7 @@
 }
 
 .card {
+  background-color: black;
   display: inline-block;
   position: relative;
   width: 212px;
