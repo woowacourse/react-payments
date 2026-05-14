@@ -9,13 +9,7 @@ import {
   PERIOD_LENGTH_PER_INPUT,
   RULES,
 } from '../constants';
-import type {
-  CardBrand,
-  CardInfo,
-  ErrorStatus,
-  ExpirationPeriodErrorStatus,
-  ExpirationValidationRule,
-} from '../types';
+import type { CardBrand, CardInfo, ErrorStatus, ExpirationPeriodErrorStatus, ExpirationValidationRule } from '../types';
 import { categorizeCardBrand, validate, validateAll } from '../utils';
 
 export interface CardNumbersFieldState {
@@ -151,38 +145,44 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
   };
 
   const validateAllFields = () => {
-    const cardNumbersErrorStatuses = [
-      ...formValue.cardNumbers.value.map((fieldValue) => validateAll([RULES.numberOnly, RULES.required], fieldValue)),
-      validateAll([RULES.exactLength(cardNumbersTotalLength)], formValue.cardNumbers.value.join('')),
-    ] as FormValue['cardNumbers']['errorStatuses'];
+    let isValid = false;
 
-    const cardCompanyErrorStatuses = [
-      validateAll(cardCompanyRules, formValue.cardCompany.value),
-    ] as FormValue['cardCompany']['errorStatuses'];
+    setFormValue((prev) => {
+      const cardNumbersErrorStatuses = [
+        ...prev.cardNumbers.value.map((fieldValue) => validateAll([RULES.numberOnly, RULES.required], fieldValue)),
+        validateAll([RULES.exactLength(cardNumbersTotalLength)], prev.cardNumbers.value.join('')),
+      ] as FormValue['cardNumbers']['errorStatuses'];
 
-    const expirationPeriodErrorStatuses = getExpirationPeriodErrorStatuses(formValue.expirationPeriod.value);
+      const cardCompanyErrorStatuses = [
+        validateAll(cardCompanyRules, prev.cardCompany.value),
+      ] as FormValue['cardCompany']['errorStatuses'];
 
-    const cvcErrorStatuses = [validateAll(cvcRules, formValue.cvc.value)] as FormValue['cvc']['errorStatuses'];
+      const expirationPeriodErrorStatuses = getExpirationPeriodErrorStatuses(prev.expirationPeriod.value);
 
-    const passwordErrorStatuses = [
-      validateAll(passwordRules, formValue.password.value),
-    ] as FormValue['password']['errorStatuses'];
+      const cvcErrorStatuses = [validateAll(cvcRules, prev.cvc.value)] as FormValue['cvc']['errorStatuses'];
 
-    setFormValue((prev) => ({
-      cardNumbers: { ...prev.cardNumbers, errorStatuses: cardNumbersErrorStatuses },
-      cardCompany: { ...prev.cardCompany, errorStatuses: cardCompanyErrorStatuses },
-      expirationPeriod: { ...prev.expirationPeriod, errorStatuses: expirationPeriodErrorStatuses },
-      cvc: { ...prev.cvc, errorStatuses: cvcErrorStatuses },
-      password: { ...prev.password, errorStatuses: passwordErrorStatuses },
-    }));
+      const passwordErrorStatuses = [
+        validateAll(passwordRules, prev.password.value),
+      ] as FormValue['password']['errorStatuses'];
 
-    return [
-      ...cardNumbersErrorStatuses,
-      ...cardCompanyErrorStatuses,
-      ...expirationPeriodErrorStatuses,
-      ...cvcErrorStatuses,
-      ...passwordErrorStatuses,
-    ].every((errorStatus) => errorStatus === null);
+      isValid = [
+        ...cardNumbersErrorStatuses,
+        ...cardCompanyErrorStatuses,
+        ...expirationPeriodErrorStatuses,
+        ...cvcErrorStatuses,
+        ...passwordErrorStatuses,
+      ].every((errorStatus) => errorStatus === null);
+
+      return {
+        cardNumbers: { ...prev.cardNumbers, errorStatuses: cardNumbersErrorStatuses },
+        cardCompany: { ...prev.cardCompany, errorStatuses: cardCompanyErrorStatuses },
+        expirationPeriod: { ...prev.expirationPeriod, errorStatuses: expirationPeriodErrorStatuses },
+        cvc: { ...prev.cvc, errorStatuses: cvcErrorStatuses },
+        password: { ...prev.password, errorStatuses: passwordErrorStatuses },
+      };
+    });
+
+    return isValid;
   };
 
   const buildCompletePageState = (): CompletePageState => ({
