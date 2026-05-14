@@ -16,7 +16,6 @@ export const BankSelectFormGroup = ({ bank, setStepRef }: BankSelectFormGroupPro
         <select
           ref={(node) => setStepRef(node)}
           className={styles.button}
-<<<<<<< HEAD
           value={bank.value ?? ''}
           onChange={(e) => bank.handleChange(e.target.value as Bank)}
         >
@@ -24,11 +23,6 @@ export const BankSelectFormGroup = ({ bank, setStepRef }: BankSelectFormGroupPro
           <option value="" disabled>
             카드사를 선택해 주세요
           </option>
-=======
-          value={bank.value}
-          onChange={(e) => bank.handleChange(e.target.value as Bank)}
-        >
->>>>>>> 6ea3eafb075d299cabe06cd4eac14b5d686759c2
           {BANKS.map((banks) => (
             <option key={banks} value={banks}>
               {BANK_RULES[banks].label}

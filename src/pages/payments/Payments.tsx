@@ -15,11 +15,6 @@ import { BankSelectFormGroup } from '@/features/cardFormGroup/ui/BankSelectFormG
 import { usePaymentStep } from './usePaymentsStep';
 import { SubmitButton } from '@/features/cardFormGroup/ui/SubmitButton';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
-=======
-import { useState } from 'react';
-import { BANK_RULES, type Bank } from '@/entities/card/bank/bank';
->>>>>>> 6ea3eafb075d299cabe06cd4eac14b5d686759c2
 import { useBank } from '@/features/cardFormGroup/hooks/useBank';
 
 const STEP = {

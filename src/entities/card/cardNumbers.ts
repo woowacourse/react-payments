@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { BRAND, getBrand, BRAND_RULES, type Brand } from './brand/brand';
-=======
-import { BRAND, getBrand, BRAND_RULES } from './brand/brand';
->>>>>>> 6ea3eafb075d299cabe06cd4eac14b5d686759c2
 
 export const CARD_NUMBER_ERRORS = {
   TYPE: '숫자만 입력 가능합니다.',
