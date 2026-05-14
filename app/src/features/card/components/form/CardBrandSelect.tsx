@@ -5,14 +5,17 @@ interface CardBrandSelectProps {
   setCardBrand: (value: string) => void;
 }
 
-export default function CardBrandSelect({ cardBrand, setCardBrand }: CardBrandSelectProps) {
+export default function CardBrandSelect({
+  cardBrand,
+  setCardBrand,
+}: CardBrandSelectProps) {
   const changeCardBrand = (value: string) => {
     setCardBrand(value);
   };
 
   return (
     <Select
-      defaultValue={cardBrand ?? ""}
+      value={cardBrand ?? ""}
       onChange={(e) => changeCardBrand(e.target.value)}
       aria-label="select card brand"
       id="card-brand-select"
