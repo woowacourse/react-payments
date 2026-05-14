@@ -33,26 +33,43 @@ export const Form = () => {
 
   const prevFormValidsRefs = useRef<Record<string, boolean>>({});
   useEffect(() => {
-    if (cardNumbers.isValid && !card.isValid && card.refs.current?.card) {
-      if (prevFormValidsRefs.current.card) return;
-      prevFormValidsRefs.current.card = true;
-      return card.refs.current?.card.focus();
+    function focusCardIfCardNumberCompleted() {
+      if (cardNumbers.isValid && !card.isValid && card.refs.current?.card) {
+        if (prevFormValidsRefs.current.card) return;
+        prevFormValidsRefs.current.card = true;
+        card.refs.current?.card.focus();
+        return true;
+      }
     }
-    if (card.isValid && !expirationDate.valids.month) {
-      if (prevFormValidsRefs.current.month) return;
-      prevFormValidsRefs.current.month = true;
-      return expirationDate.refs.current.month?.focus();
+    function focusMonthIfCardSelected() {
+      if (card.isValid && !expirationDate.valids.month) {
+        if (prevFormValidsRefs.current.month) return;
+        prevFormValidsRefs.current.month = true;
+        expirationDate.refs.current.month?.focus();
+        return true;
+      }
     }
-    if (expirationDate.valids.year && !cvc.isValid) {
-      if (prevFormValidsRefs.current.cvc) return;
-      prevFormValidsRefs.current.cvc = true;
-      return cvc.refs.current?.cvc?.focus();
+    function focusCvcIfExpirationDateCompleted() {
+      if (expirationDate.valids.year && !cvc.isValid) {
+        if (prevFormValidsRefs.current.cvc) return;
+        prevFormValidsRefs.current.cvc = true;
+        cvc.refs.current?.cvc?.focus();
+        return true;
+      }
     }
-    if (cvc.isValid && !password.isValid) {
-      if (prevFormValidsRefs.current.password) return;
-      prevFormValidsRefs.current.password = true;
-      return password.refs.current?.password?.focus();
+    function focusPasswordIfCvcCompleted() {
+      if (cvc.isValid && !password.isValid) {
+        if (prevFormValidsRefs.current.password) return;
+        prevFormValidsRefs.current.password = true;
+        password.refs.current?.password?.focus();
+        return true;
+      }
     }
+
+    if (focusCardIfCardNumberCompleted()) return;
+    if (focusMonthIfCardSelected()) return;
+    if (focusCvcIfExpirationDateCompleted()) return;
+    if (focusPasswordIfCvcCompleted()) return;
   }, [
     cardNumbers.isValid,
 
