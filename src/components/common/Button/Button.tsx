@@ -16,7 +16,6 @@ const Button = styled.button<ButtonProps>`
   border-radius: ${({ rounded }) => (rounded ? "5px" : "0")};
   border: none;
   font-weight: 700;
-  font-style: Bold;
   font-size: 1rem;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
 `;
