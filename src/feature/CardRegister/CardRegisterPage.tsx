@@ -15,7 +15,8 @@ import {useCardRegisterForm} from './hooks/form/useCardRegisterForm';
 import {useStepFocus} from './hooks/ui/useStepFocus';
 
 const CardRegisterPage = () => {
-  const {cardPreview, visibleFields, fieldProps, isFormComplete, submitError, handleSubmit} = useCardRegisterForm();
+  const {cardPreview, visibleFields, fieldProps, isFormComplete, submitStatus, submitError, handleSubmit} =
+    useCardRegisterForm();
 
   // 새 필드가 위에 쌓이는 UX라 화면 렌더 순서도 입력 순서의 반대로 둔다.
   const inputSteps = [
@@ -41,7 +42,11 @@ const CardRegisterPage = () => {
         <InfoInputSection slots={inputSteps.map(({slot}) => slot)} />
       </Content>
       {submitError && <SubmitErrorMessage>{submitError}</SubmitErrorMessage>}
-      {isFormComplete && <SubmitButton onClick={handleSubmit}>확인</SubmitButton>}
+      {isFormComplete && (
+        <SubmitButton onClick={handleSubmit} disabled={submitStatus === 'loading'}>
+          {submitStatus === 'loading' ? '등록 중...' : '확인'}
+        </SubmitButton>
+      )}
     </Wrapper>
   );
 };
@@ -70,6 +75,11 @@ const SubmitButton = styled.button`
   font-size: 14px;
   border: none;
   cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
 `;
 
 const SubmitErrorMessage = styled.p`

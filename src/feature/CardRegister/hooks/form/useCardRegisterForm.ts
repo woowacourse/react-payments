@@ -7,16 +7,44 @@ import {useExpiryDate} from './useExpiryDate';
 import {useCvcNumber} from './useCvcNumber';
 import {useCardPassword} from './useCardPassword';
 
+import {createCard} from '@/api/cardsApi';
+import type {CardErrorResponse, CreateCardRequest} from '@/domain/card/cardApi.types';
 import {CARD_COMPANIES} from '@/domain/card/cardCompany';
-import type {CardRegisterCompleteState} from '@/feature/CardRegisterComplete/routeState.types';
 import type {CardRegisterInputProps, ExpiryInputProps} from '../../components/inputs/shared.types';
 
 const generateNumberPlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
 const SUBMIT_ERROR_MESSAGE = '카드 정보를 다시 확인해 주세요';
 
+type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
+
+type ServerFieldErrors = {
+  cardNumbers: string;
+  cardCompany: string;
+  cardExpiryDate: string;
+  cardCvc: string;
+};
+
+const createEmptyServerFieldErrors = (): ServerFieldErrors => ({
+  cardNumbers: '',
+  cardCompany: '',
+  cardExpiryDate: '',
+  cardCvc: '',
+});
+
+const getServerFieldName = (code?: string): keyof ServerFieldErrors | null => {
+  if (code === 'INVALID_CARD_NUMBER') return 'cardNumbers';
+  if (code === 'INVALID_CVC') return 'cardCvc';
+  if (code === 'INVALID_EXPIRATION_DATE') return 'cardExpiryDate';
+  if (code === 'INVALID_ISSUER_CODE') return 'cardCompany';
+
+  return null;
+};
+
 export function useCardRegisterForm() {
   const navigate = useNavigate();
   const [submitError, setSubmitError] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
+  const [serverFieldErrors, setServerFieldErrors] = useState(createEmptyServerFieldErrors);
 
   // 각 필드의 커스텀훅을 가져와서 사용
   const numberField = useCardNumbers();
@@ -45,6 +73,20 @@ export function useCardRegisterForm() {
     cvcField.isComplete &&
     passwordField.isComplete;
 
+  const clearServerFieldError = (fieldName: keyof ServerFieldErrors) => {
+    setServerFieldErrors((prev) => ({
+      ...prev,
+      [fieldName]: '',
+    }));
+  };
+
+  const createCardRequest = (selectedCompany: NonNullable<typeof companyField.selectedCompany>): CreateCardRequest => ({
+    number: numberField.cardNumbers.join(''),
+    expirationDate: `${expiryField.expiryDate[0]}/${expiryField.expiryDate[1]}`,
+    cvc: cvcField.cvcNumber,
+    issuerCode: CARD_COMPANIES[selectedCompany].issuerCode,
+  });
+
   const getNumberInputProps = (): CardRegisterInputProps[] =>
     numberField.format.map((maxLength, index) => ({
       type: 'text',
@@ -52,7 +94,10 @@ export function useCardRegisterForm() {
       value: numberField.cardNumbers[index] ?? '',
       maxLength: maxLength,
       placeholder: generateNumberPlaceholder(maxLength),
-      onChange: (event) => numberField.handleChange(index, event.currentTarget.value),
+      onChange: (event) => {
+        clearServerFieldError('cardNumbers');
+        numberField.handleChange(index, event.currentTarget.value);
+      },
       onBlur: (event) => numberField.handleBlur(index, event.currentTarget.value),
     }));
 
@@ -62,7 +107,10 @@ export function useCardRegisterForm() {
     value: expiryField.expiryDate[index],
     maxLength: 2,
     placeholder: ['MM', 'YY'][index],
-    onChange: (event) => expiryField.handleChange(index, event.currentTarget.value),
+    onChange: (event) => {
+      clearServerFieldError('cardExpiryDate');
+      expiryField.handleChange(index, event.currentTarget.value);
+    },
     onBlur: (event) => expiryField.handleBlur(index, event.currentTarget.value),
   });
 
@@ -77,7 +125,10 @@ export function useCardRegisterForm() {
     value: cvcField.cvcNumber,
     maxLength: 3,
     placeholder: '123',
-    onChange: (event) => cvcField.handleChange(event.currentTarget.value),
+    onChange: (event) => {
+      clearServerFieldError('cardCvc');
+      cvcField.handleChange(event.currentTarget.value);
+    },
     onBlur: (event) => cvcField.handleBlur(event.currentTarget.value),
   });
 
@@ -91,7 +142,12 @@ export function useCardRegisterForm() {
     onBlur: (event) => passwordField.handleBlur(event.currentTarget.value),
   });
 
-  const handleSubmit = () => {
+  const handleCompanyChange = (value: typeof companyField.selectedCompany) => {
+    clearServerFieldError('cardCompany');
+    companyField.handleChange(value);
+  };
+
+  const handleSubmit = async () => {
     const cardPrefix = numberField.cardNumbers[0];
     const selectedCompany = companyField.selectedCompany;
 
@@ -101,15 +157,29 @@ export function useCardRegisterForm() {
     }
 
     setSubmitError('');
+    setSubmitStatus('loading');
+    setServerFieldErrors(createEmptyServerFieldErrors());
 
-    const completeState: CardRegisterCompleteState = {
-      cardPrefix,
-      companyName: CARD_COMPANIES[selectedCompany].name,
-    };
+    try {
+      await createCard(createCardRequest(selectedCompany));
+      setSubmitStatus('success');
+      navigate('/cards');
+    } catch (error) {
+      const cardError = error as CardErrorResponse;
+      const fieldName = getServerFieldName(cardError.code);
 
-    navigate('/complete', {
-      state: completeState,
-    });
+      setSubmitStatus('error');
+
+      if (!fieldName) {
+        setSubmitError(SUBMIT_ERROR_MESSAGE);
+        return;
+      }
+
+      setServerFieldErrors((prev) => ({
+        ...prev,
+        [fieldName]: cardError.message,
+      }));
+    }
   };
 
   // 각 컴포넌트에서 필요한 데이터만 선별하여 묶어서 반환
@@ -123,21 +193,22 @@ export function useCardRegisterForm() {
     fieldProps: {
       cardNumbers: {
         inputProps: getNumberInputProps(),
-        errorMessage: numberField.errMsg,
+        errorMessage: numberField.errMsg || serverFieldErrors.cardNumbers,
         errorIndex: numberField.firstErrIdx,
       },
       cardCompany: {
         selectedCompany: companyField.selectedCompany,
-        onChange: companyField.handleChange,
+        onChange: handleCompanyChange,
+        errorMessage: serverFieldErrors.cardCompany,
       },
       cardExpiryDate: {
         inputProps: getExpiryInputProps(),
-        errorMessage: expiryField.errMsg,
+        errorMessage: expiryField.errMsg || serverFieldErrors.cardExpiryDate,
         errorIndex: expiryField.firstErrIdx,
       },
       cardCvc: {
         inputProps: getCvcInputProps(),
-        errorMessage: cvcField.errMsg,
+        errorMessage: cvcField.errMsg || serverFieldErrors.cardCvc,
       },
       cardPassword: {
         inputProps: getPasswordInputProps(),
@@ -146,6 +217,7 @@ export function useCardRegisterForm() {
     },
     visibleFields,
     isFormComplete,
+    submitStatus,
     submitError,
     handleSubmit,
   };

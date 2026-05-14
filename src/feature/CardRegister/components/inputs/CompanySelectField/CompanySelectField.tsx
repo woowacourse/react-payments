@@ -2,14 +2,15 @@ import styled from 'styled-components';
 import {CARD_COMPANIES, CARD_COMPANY_KEYS} from '@/domain/card/cardCompany';
 import type {CardCompanyType} from '@/domain/card/cardCompany';
 import InputContainer from '../InputContainer/InputContainer';
-import {FieldLayout} from '../styles/inputFieldStyles';
+import {FieldErrorMessage, FieldLayout} from '../styles/inputFieldStyles';
 
 type CompanySelectFieldProps = {
   selectedCompany: CardCompanyType | null;
   onChange: (value: CardCompanyType | null) => void;
+  errorMessage?: string;
 };
 
-const CompanySelectField = ({selectedCompany, onChange}: CompanySelectFieldProps) => {
+const CompanySelectField = ({selectedCompany, onChange, errorMessage = ''}: CompanySelectFieldProps) => {
   return (
     <InputContainer
       title='카드사를 선택해 주세요'
@@ -32,6 +33,7 @@ const CompanySelectField = ({selectedCompany, onChange}: CompanySelectFieldProps
             </option>
           ))}
         </Select>
+        <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       </FieldLayout>
     </InputContainer>
   );
