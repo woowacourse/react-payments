@@ -37,7 +37,7 @@ export const Form = () => {
   useEffect(() => {
     function focusCardIfCardNumberCompleted() {
       if (cardNumbers.isValid && !card.isValid && card.refs.current?.card) {
-        if (prevFormValidsRefs.current.card) return;
+        if (prevFormValidsRefs.current.card) return true;
         prevFormValidsRefs.current.card = true;
         card.refs.current?.card.focus();
         return true;
@@ -45,7 +45,7 @@ export const Form = () => {
     }
     function focusMonthIfCardSelected() {
       if (card.isValid && !expirationDate.valids.month) {
-        if (prevFormValidsRefs.current.month) return;
+        if (prevFormValidsRefs.current.month) return true;
         prevFormValidsRefs.current.month = true;
         expirationDate.refs.current.month?.focus();
         return true;
@@ -53,7 +53,7 @@ export const Form = () => {
     }
     function focusCvcIfExpirationDateCompleted() {
       if (expirationDate.valids.year && !cvc.isValid) {
-        if (prevFormValidsRefs.current.cvc) return;
+        if (prevFormValidsRefs.current.cvc) return true;
         prevFormValidsRefs.current.cvc = true;
         cvc.refs.current?.cvc?.focus();
         return true;
@@ -61,17 +61,17 @@ export const Form = () => {
     }
     function focusPasswordIfCvcCompleted() {
       if (cvc.isValid && !password.isValid) {
-        if (prevFormValidsRefs.current.password) return;
+        if (prevFormValidsRefs.current.password) return true;
         prevFormValidsRefs.current.password = true;
         password.refs.current?.password?.focus();
         return true;
       }
     }
 
-    if (focusCardIfCardNumberCompleted()) return;
     if (focusMonthIfCardSelected()) return;
     if (focusCvcIfExpirationDateCompleted()) return;
     if (focusPasswordIfCvcCompleted()) return;
+    if (focusCardIfCardNumberCompleted()) return;
   }, [
     cardNumbers.isValid,
 
