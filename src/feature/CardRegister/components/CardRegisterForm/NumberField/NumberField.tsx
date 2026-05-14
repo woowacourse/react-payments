@@ -70,19 +70,29 @@ const NumberField = ({
 
   const handleNumbersBlur = (index: number, eValue: string) => {
     touchField(index);
+    // blur했을 때 4개의 input 모두 돌면서 touched + length가 더 크면 그 칸에 에러 메시지를 띄워야할듯
 
     const expectedLength = chunkLengths[index];
-    const { isValid, errorMessage } = validateCardNumberChunk(
-      eValue,
-      expectedLength,
-    );
-
-    if (!isValid && errorMessage) {
+    const { errorMessage } = validateCardNumberChunk(eValue, expectedLength);
+    if (errorMessage) {
       updateErrorMessage(index, errorMessage);
-      return;
+    } else {
+      clearErrorMessage(index);
     }
 
-    clearErrorMessage(index);
+    // 첫 번째 input 수정시 마지막 input에 에러 띄워주는 정책
+    const LAST_CHUNK_INDEX = 3;
+    const lastChunkCardNumbers = cardNumbers[LAST_CHUNK_INDEX];
+    const lastChunkLength = chunkLengths[LAST_CHUNK_INDEX];
+    const { errorMessage: lastChunkErrorMessage } = validateCardNumberChunk(
+      lastChunkCardNumbers,
+      lastChunkLength,
+    );
+    if (lastChunkCardNumbers.length > lastChunkLength) {
+      if (lastChunkErrorMessage) {
+        updateErrorMessage(LAST_CHUNK_INDEX, lastChunkErrorMessage);
+      }
+    }
   };
 
   return (
