@@ -43,13 +43,13 @@ export function CardForm({
     cardCVCIsComplete,
     cardPasswordIsComplete,
     allComplete,
-  } = calculateCreateCardCurrentProgress(
-    Object.values(cardNumber).join(""),
+  } = calculateCreateCardCurrentProgress({
+    cardNumber: Object.values(cardNumber).join(""),
     cardBrand,
-    Object.values(cardExpiryDate).join(""),
+    cardExpiryDate: Object.values(cardExpiryDate).join(""),
     cardCVC,
     cardPassword,
-  );
+  });
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
