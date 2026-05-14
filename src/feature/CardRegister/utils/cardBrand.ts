@@ -34,11 +34,6 @@ export const getCardBrandName = (
   return null;
 };
 
-export const getBrandLastCardNumberLength = (cardBrand: CardBrandType) => {
-  const chunkLengths = getCardNumberChunkLengths(cardBrand);
-  return chunkLengths[chunkLengths.length - 1];
-};
-
 export const getCardNumberChunkLengths = (
   cardBrand: CardBrandType,
 ): CardNumberChunkLengths => {
