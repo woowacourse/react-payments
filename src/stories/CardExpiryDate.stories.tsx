@@ -22,11 +22,9 @@ export const Default: Story = {
       cardExpiryDate: ['', ''],
       cardExpiryDateErrorMode: 'normal',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -36,11 +34,9 @@ export const Filled: Story = {
       cardExpiryDate: ['12', '11'],
       cardExpiryDateErrorMode: 'normal',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -50,11 +46,9 @@ export const EmptyBothError: Story = {
       cardExpiryDate: ['', ''],
       cardExpiryDateErrorMode: 'emptyBoth',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -64,11 +58,9 @@ export const EmptyMonthError: Story = {
       cardExpiryDate: ['', '22'],
       cardExpiryDateErrorMode: 'emptyMonth',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -78,11 +70,9 @@ export const EmptyYearError: Story = {
       cardExpiryDate: ['10', ''],
       cardExpiryDateErrorMode: 'emptyYear',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -92,18 +82,21 @@ export const Interactive: Story = {
       cardExpiryDate: ['', ''],
       cardExpiryDateErrorMode: 'normal',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
   render: () => {
     const [cardExpiry, setCardExpiry] = useExpiryDate();
 
     return (
       <div>
-        <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />
+        <CardExpiryDate
+          cardExpiry={cardExpiry}
+          onChangeCardExpiryDate={setCardExpiry.handleCardExpiryDate}
+          onBlurMonth={setCardExpiry.handleMonthBlur}
+          onBlurYear={setCardExpiry.handleYearBlur}
+        />
 
         <div data-testid="card-expiry-value" style={{ marginTop: '16px' }}>
           입력값: {cardExpiry.cardExpiryDate.join('/')}

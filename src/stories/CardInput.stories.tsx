@@ -1,14 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
 import { expect, fn, userEvent, within } from 'storybook/test';
-import { useState } from 'react';
 
 import CardInput from '../components/CardInput';
-import { useCardCvc } from '../hooks/useCardCvc';
-import { useCardNumber } from '../hooks/useCardNumber';
-import { useCardPassword } from '../hooks/useCardPassword';
-import { useExpiryDate } from '../hooks/useExpiryDate';
-import type { CardIssuerType } from '../types/cardStausTypes';
+import { useRegisterCardForm } from '../hooks/useRegisterCardForm';
 
 const meta = {
   title: 'Components/CardInput',
@@ -31,26 +26,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 function CardInputWithState() {
-  const [cardStatus, setCardStatus] = useCardNumber();
-  const [cardExpiry, setCardExpiry] = useExpiryDate();
-  const [cardCvc, setCardCvc] = useCardCvc();
-  const [cardPassword, setCardPassword] = useCardPassword();
-  const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
+  const registerCardForm = useRegisterCardForm();
 
   return (
     <div style={{ width: '315px' }}>
-      <CardInput
-        cardStatus={cardStatus}
-        setCardStatus={setCardStatus}
-        cardExpiry={cardExpiry}
-        setCardExpiry={setCardExpiry}
-        cardCvc={cardCvc}
-        setCardCvc={setCardCvc}
-        cardPassword={cardPassword}
-        setCardPassword={setCardPassword}
-        cardIssuer={cardIssuer}
-        handleCardIssuer={setCardIssuer}
-      />
+      <CardInput {...registerCardForm} />
     </div>
   );
 }
@@ -62,37 +42,32 @@ export const Interactive: Story = {
       cardNumberErrorMode: 'normal',
       cardBrand: 'unknown',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: fn(),
-    },
+    onChangeCardNumber: () => fn(),
+    onValidateCardNumber: fn(),
     cardExpiry: {
       cardExpiryDate: ['', ''],
       cardExpiryDateErrorMode: 'normal',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: fn(),
-      handleMonthBlur: fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
     cardCvc: {
       cardCvc: '',
       cardCvcErrorMode: 'normal',
     },
-    setCardCvc: {
-      handleCardCvc: fn(),
-      handleCvcBlur: fn(),
-    },
+    onChangeCardCvc: fn(),
+    onBlurCardCvc: fn(),
     cardPassword: {
       cardPassword: '',
       cardPasswordErrorMode: 'normal',
     },
-    setCardPassword: {
-      handleCardPassword: fn(),
-      handlePasswordBlur: fn(),
-    },
+    onChangeCardPassword: fn(),
+    onBlurCardPassword: fn(),
     cardIssuer: '',
     handleCardIssuer: fn(),
+    step: 0,
+    handleSubmit: fn(),
+    isFormValid: false,
   },
   render: () => <CardInputWithState />,
   play: async ({ canvasElement }) => {

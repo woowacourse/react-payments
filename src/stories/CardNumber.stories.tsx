@@ -21,7 +21,11 @@ function CardNumberWithState() {
 
   return (
     <div>
-      <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
+      <CardNumber
+        cardStatus={cardStatus}
+        onChangeCardNumber={setCardStatus.handleCardNumbers}
+        onValidateCardNumber={setCardStatus.validateCardNumbers}
+      />
       <div data-testid="card-brand" style={{ marginTop: '16px' }}>
         브랜드: {cardStatus.cardBrand}
       </div>
@@ -37,10 +41,8 @@ export const Default: Story = {
       cardNumberErrorMode: 'normal',
       cardBrand: 'unknown',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    onChangeCardNumber: () => fn(),
+    onValidateCardNumber: fn(),
   },
 };
 
@@ -51,10 +53,8 @@ export const Filled: Story = {
       cardNumberErrorMode: 'normal',
       cardBrand: 'visa',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    onChangeCardNumber: () => fn(),
+    onValidateCardNumber: fn(),
   },
 };
 
@@ -65,10 +65,8 @@ export const Error: Story = {
       cardNumberErrorMode: 'notNumber',
       cardBrand: 'visa',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    onChangeCardNumber: () => fn(),
+    onValidateCardNumber: fn(),
   },
 };
 
@@ -79,10 +77,8 @@ export const Interactive: Story = {
       cardNumberErrorMode: 'normal',
       cardBrand: 'unknown',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    onChangeCardNumber: () => fn(),
+    onValidateCardNumber: fn(),
   },
   render: () => {
     return <CardNumberWithState />;
@@ -96,10 +92,8 @@ export const VisaInput: Story = {
       cardNumberErrorMode: 'normal',
       cardBrand: 'unknown',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    onChangeCardNumber: () => fn(),
+    onValidateCardNumber: fn(),
   },
   render: () => {
     return <CardNumberWithState />;
@@ -122,10 +116,8 @@ export const MasterInput: Story = {
       cardNumberErrorMode: 'normal',
       cardBrand: 'unknown',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    onChangeCardNumber: () => fn(),
+    onValidateCardNumber: fn(),
   },
   render: () => {
     return <CardNumberWithState />;

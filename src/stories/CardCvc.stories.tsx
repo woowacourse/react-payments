@@ -23,10 +23,8 @@ export const Default: Story = {
       cardCvc: '',
       cardCvcErrorMode: 'normal',
     },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    onChangeCardCvc: fn(),
+    onBlurCardCvc: fn(),
   },
 };
 
@@ -36,10 +34,8 @@ export const Filled: Story = {
       cardCvc: '123',
       cardCvcErrorMode: 'normal',
     },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    onChangeCardCvc: fn(),
+    onBlurCardCvc: fn(),
   },
 };
 
@@ -49,10 +45,8 @@ export const NotNumberError: Story = {
       cardCvc: '1a',
       cardCvcErrorMode: 'notNumber',
     },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    onChangeCardCvc: fn(),
+    onBlurCardCvc: fn(),
   },
 };
 
@@ -62,10 +56,8 @@ export const CvcCountError: Story = {
       cardCvc: '12',
       cardCvcErrorMode: 'cvcCount',
     },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    onChangeCardCvc: fn(),
+    onBlurCardCvc: fn(),
   },
 };
 
@@ -75,17 +67,19 @@ export const Interactive: Story = {
       cardCvc: '',
       cardCvcErrorMode: 'normal',
     },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    onChangeCardCvc: fn(),
+    onBlurCardCvc: fn(),
   },
   render: () => {
     const [cardCvc, setCardCvc] = useCardCvc();
 
     return (
       <div>
-        <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />
+        <CardCvc
+          cardCvc={cardCvc}
+          onChangeCardCvc={setCardCvc.handleCardCvc}
+          onBlurCardCvc={setCardCvc.handleCvcBlur}
+        />
 
         <div data-testid="card-cvc-value" style={{ marginTop: '16px' }}>
           입력값: {cardCvc.cardCvc}

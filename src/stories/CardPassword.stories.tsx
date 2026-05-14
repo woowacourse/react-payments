@@ -23,10 +23,8 @@ export const Default: Story = {
       cardPassword: '',
       cardPasswordErrorMode: 'normal',
     },
-    setCardPassword: {
-      handleCardPassword: fn(),
-      handlePasswordBlur: fn(),
-    },
+    onChangeCardPassword: fn(),
+    onBlurCardPassword: fn(),
   },
 };
 
@@ -36,10 +34,8 @@ export const Filled: Story = {
       cardPassword: '12',
       cardPasswordErrorMode: 'normal',
     },
-    setCardPassword: {
-      handleCardPassword: fn(),
-      handlePasswordBlur: fn(),
-    },
+    onChangeCardPassword: fn(),
+    onBlurCardPassword: fn(),
   },
 };
 
@@ -49,10 +45,8 @@ export const NotNumberError: Story = {
       cardPassword: '1',
       cardPasswordErrorMode: 'notNumber',
     },
-    setCardPassword: {
-      handleCardPassword: fn(),
-      handlePasswordBlur: fn(),
-    },
+    onChangeCardPassword: fn(),
+    onBlurCardPassword: fn(),
   },
 };
 
@@ -62,10 +56,8 @@ export const PasswordCountError: Story = {
       cardPassword: '1',
       cardPasswordErrorMode: 'passwordCount',
     },
-    setCardPassword: {
-      handleCardPassword: fn(),
-      handlePasswordBlur: fn(),
-    },
+    onChangeCardPassword: fn(),
+    onBlurCardPassword: fn(),
   },
 };
 
@@ -75,17 +67,19 @@ export const Interactive: Story = {
       cardPassword: '',
       cardPasswordErrorMode: 'normal',
     },
-    setCardPassword: {
-      handleCardPassword: fn(),
-      handlePasswordBlur: fn(),
-    },
+    onChangeCardPassword: fn(),
+    onBlurCardPassword: fn(),
   },
   render: () => {
     const [cardPassword, setCardPassword] = useCardPassword();
 
     return (
       <div>
-        <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />
+        <CardPassword
+          cardPassword={cardPassword}
+          onChangeCardPassword={setCardPassword.handleCardPassword}
+          onBlurCardPassword={setCardPassword.handlePasswordBlur}
+        />
 
         <div data-testid="card-password-value" style={{ marginTop: '16px' }}>
           입력값: {cardPassword.cardPassword}
