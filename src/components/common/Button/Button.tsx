@@ -8,7 +8,7 @@ interface ButtonProps {
 }
 
 const Button = styled.button<ButtonProps>`
-  width: ${(props) => props.fullWidth && "100%"};
+  width: ${(props) => (props.fullWidth ? "100%" : "auto")};
   padding: 1.2rem 2.4rem;
   background-color: ${({ disabled }) =>
     disabled ? COLOR_PALETTE.GRAY : COLOR_PALETTE["BLACK-800"]};
