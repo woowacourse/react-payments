@@ -12,13 +12,13 @@ type Story = StoryObj<typeof NumberInput>;
 
 export const CardNumber: Story = {
   render: () => {
-    const [value, onChange] = useState("");
+    const [value, setValue] = useState("");
     const [error, setError] = useState<string | null>(null);
     return (
       <>
         <NumberInput
           value={value}
-          onChange={onChange}
+          onChange={setValue}
           hasError={error !== null}
           maxLength={4}
           placeholder="0000"
@@ -32,13 +32,13 @@ export const CardNumber: Story = {
 
 export const EXP: Story = {
   render: () => {
-    const [value, onChange] = useState("");
+    const [value, setValue] = useState("");
     const [error, setError] = useState<string | null>(null);
     return (
       <>
         <NumberInput
           value={value}
-          onChange={onChange}
+          onChange={setValue}
           hasError={error !== null}
           maxLength={2}
           placeholder="MM"
@@ -52,13 +52,13 @@ export const EXP: Story = {
 
 export const CVC: Story = {
   render: () => {
-    const [value, onChange] = useState("");
+    const [value, setValue] = useState("");
     const [error, setError] = useState<string | null>(null);
     return (
       <>
         <NumberInput
           value={value}
-          onChange={onChange}
+          onChange={setValue}
           hasError={error !== null}
           maxLength={3}
           placeholder="123"
