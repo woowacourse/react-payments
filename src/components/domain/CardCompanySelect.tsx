@@ -3,7 +3,8 @@ import FormField, { type FormFieldProps } from '../ui/FormField';
 import Select from '../ui/Select';
 import { CARD_COMPANY_OPTIONS, ERROR_MESSAGES } from '../../constants';
 import { useEffect, useRef } from 'react';
-import { validate, type ValidationRule } from '../../utils';
+import { validate } from '../../utils';
+import type { BaseValidationRule } from '../../types';
 
 interface CardCompanySelectProps {
   value: CardInfo['cardCompany'];
@@ -11,7 +12,7 @@ interface CardCompanySelectProps {
   onUpdated: (value: CardInfo['cardCompany']) => void;
   onErrorUpdated: (errorStatuses: [ErrorStatus]) => void;
   onValid: (value: CardInfo['cardCompany']) => void;
-  validationRules: ValidationRule[];
+  validationRules: BaseValidationRule[];
 }
 
 export default function CardCompanySelect({

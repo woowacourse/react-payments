@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo, ErrorStatus } from '../../types';
-import { validate, type ValidationRule } from '../../utils';
+import { validate } from '../../utils';
+import type { BaseValidationRule } from '../../types';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
 import useInputFocus from '../../hooks/useInputFocus';
 
@@ -13,7 +14,7 @@ interface CardNumbersFieldProps {
   onUpdated: (value: CardInfo['cardNumbers']) => void;
   onErrorUpdated: (errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus]) => void;
   onValid: (value: CardInfo['cardNumbers']) => void;
-  validationRules: ValidationRule[];
+  validationRules: BaseValidationRule[];
 }
 
 export default function CardNumbersField({

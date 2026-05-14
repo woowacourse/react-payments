@@ -9,8 +9,14 @@ import {
   PERIOD_LENGTH_PER_INPUT,
   RULES,
 } from '../constants';
-import type { CardBrand, CardInfo, ErrorStatus, ExpirationPeriodErrorStatus } from '../types';
-import { categorizeCardBrand, validate, validateAll, type ValidationRule } from '../utils';
+import type {
+  CardBrand,
+  CardInfo,
+  ErrorStatus,
+  ExpirationPeriodErrorStatus,
+  ExpirationValidationRule,
+} from '../types';
+import { categorizeCardBrand, validate, validateAll } from '../utils';
 
 export interface CardNumbersFieldState {
   value: CardInfo['cardNumbers'];
@@ -62,7 +68,7 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
   const cardNumbersTotalLength = CARD_TOTAL_LENGTH[cardBrand] ?? DEFAULT_CARD_TOTAL_LENGTH;
 
   const cardNumbersRules = [RULES.numberOnly, RULES.required, RULES.exactLength(cardNumbersTotalLength)];
-  const expirationPeriodRules: [ValidationRule[], ValidationRule[]] = [
+  const expirationPeriodRules: [ExpirationValidationRule[], ExpirationValidationRule[]] = [
     [RULES.numberOnly, RULES.required, RULES.exactLength(PERIOD_LENGTH_PER_INPUT), RULES.validMonth],
     [RULES.numberOnly, RULES.required, RULES.exactLength(PERIOD_LENGTH_PER_INPUT), RULES.validYear],
   ];

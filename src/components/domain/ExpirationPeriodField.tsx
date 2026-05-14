@@ -5,7 +5,8 @@ import type { CardInfo } from '../../types';
 import useInputFocus from '../../hooks/useInputFocus';
 import type { ExpirationPeriodErrorStatus } from '../../types';
 import { useEffect } from 'react';
-import { validate, type ValidationRule } from '../../utils';
+import { validate } from '../../utils';
+import type { ExpirationValidationRule } from '../../types';
 import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
 
 interface ExpirationPeriodFieldProps {
@@ -14,7 +15,7 @@ interface ExpirationPeriodFieldProps {
   onUpdated: (value: CardInfo['expirationPeriod']) => void;
   onErrorUpdated: (errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]) => void;
   onValid: (value: CardInfo['expirationPeriod']) => void;
-  validationRules: [ValidationRule[], ValidationRule[]];
+  validationRules: [ExpirationValidationRule[], ExpirationValidationRule[]];
 }
 
 export default function ExpirationPeriodField({

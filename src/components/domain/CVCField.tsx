@@ -3,7 +3,8 @@ import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { ErrorStatus } from '../../types';
 import { useEffect, useRef } from 'react';
-import { validate, type ValidationRule } from '../../utils';
+import { validate } from '../../utils';
+import type { BaseValidationRule } from '../../types';
 import { ERROR_MESSAGES } from '../../constants';
 
 interface CVCFieldProps {
@@ -14,7 +15,7 @@ interface CVCFieldProps {
   onUpdated: (value: CardInfo['cvc']) => void;
   onErrorUpdated: (errorStatuses: [ErrorStatus]) => void;
   onValid: (value: CardInfo['cvc']) => void;
-  validationRules: ValidationRule[];
+  validationRules: BaseValidationRule[];
 }
 
 export default function CVCField({
