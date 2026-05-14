@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import arrowDownIcon from "@/assets/arrowDownIcon.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
 import type { CardCompany } from "@/constants/cardCompanies";
 import FormField from "@components/common/FormField";
@@ -30,6 +30,20 @@ function CardCompanySelector({
 
     onNextStep("COMPANY");
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen((prevIsOpen) => !prevIsOpen);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
   return (
     <FormField
