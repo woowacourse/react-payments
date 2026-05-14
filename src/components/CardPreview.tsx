@@ -6,6 +6,14 @@ import amex from '../assets/Amex.png';
 import { maskCardNumbers, maskSpecialCardNumbers } from '../utils/maskCardNumbers';
 import type { CardBrandType, CardIssuerType } from '../types/cardStausTypes';
 
+const CARD_BRAND_IMAGE: Partial<Record<CardBrandType, string>> = {
+  visa,
+  master,
+  unionPay: union,
+  diners,
+  amex,
+};
+
 type CardPreviewProps = {
   cardBrand: CardBrandType;
   cardNumbers: string[];
@@ -19,23 +27,7 @@ export default function CardPreview({
   cardExpiryDate,
   cardIssuer = '',
 }: CardPreviewProps) {
-  const cardImgSrc: string | null = (() => {
-    switch (cardBrand) {
-      case 'visa':
-        return visa;
-      case 'master':
-        return master;
-      case 'unionPay':
-        return union;
-      case 'diners':
-        return diners;
-      case 'amex':
-        return amex;
-      default:
-        return null;
-    }
-  })();
-
+  const cardImgSrc = CARD_BRAND_IMAGE[cardBrand];
   const isSpecialCard = cardBrand === 'amex' || cardBrand === 'diners';
   const maskedCardNumbers = isSpecialCard
     ? maskSpecialCardNumbers(cardNumbers)
