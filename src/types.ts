@@ -25,5 +25,5 @@ interface ValidationRule<N extends string> {
   on: ValidationTrigger[];
 }
 
-export type BaseValidationRule = ValidationRule<'required' | 'invalidLength' | 'numberOnly'>;
-export type ExpirationValidationRule = ValidationRule<BaseValidationRule['name'] | 'invalidMonth' | 'invalidYear'>;
+export type BaseValidationRule = ValidationRule<Exclude<ErrorStatus, null>>;
+export type ExpirationValidationRule = ValidationRule<Exclude<ExpirationPeriodErrorStatus, null>>;
