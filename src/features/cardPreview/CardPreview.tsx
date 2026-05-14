@@ -33,11 +33,12 @@ const CardNumber = ({ cardNumbers, brand }: { cardNumbers: string[]; brand: Bran
 
 export const CardPreview = ({ info }: CardPreviewProps) => {
   const { cardNumbers, expiryDate, bank = 'unknown', brand } = info;
+  const brandImg = BRAND_SVG_MAP[brand];
 
   return (
     <div className={styles.cardPreview}>
       <div className={`${styles.card} ${bankStyles[bank]}`}>
-        <div className={styles.brand}>{BRAND_SVG_MAP[brand]}</div>
+        {brandImg && <img src={brandImg} alt={brand} className={styles.brand} />}
         <div className={styles.number}>
           <CardNumber cardNumbers={cardNumbers} brand={brand} />
         </div>
