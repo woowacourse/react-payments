@@ -64,12 +64,13 @@ export default function ExpirationPeriodField({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
+    const sanitizedValue = sanitizeNumber(inputValue);
     const error = validate('change', inputValue, index);
 
     setFieldError('expirationPeriod', error, index);
-    setFieldValue('expirationPeriod', sanitizeNumber(inputValue), index);
+    setFieldValue('expirationPeriod', sanitizedValue, index);
 
-    if (inputValue.length === EXPIRATION_PERIOD_LENGTH[index]) {
+    if (sanitizedValue.length === EXPIRATION_PERIOD_LENGTH[index]) {
       moveToNext(index);
     }
   };

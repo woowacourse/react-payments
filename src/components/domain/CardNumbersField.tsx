@@ -68,12 +68,13 @@ export default function CardNumbersField({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
+    const sanitizedValue = sanitizeNumber(inputValue);
     const error = validate('change', inputValue, index);
 
     setFieldError('cardNumbers', error, index);
-    setFieldValue('cardNumbers', sanitizeNumber(inputValue), index);
+    setFieldValue('cardNumbers', sanitizedValue, index);
 
-    if (inputValue.length === cardNumbersLength[index]) {
+    if (sanitizedValue.length === cardNumbersLength[index]) {
       moveToNext(index);
     }
   };
