@@ -1,21 +1,21 @@
 import styles from './Payments.module.css';
 
-import { CvcFormGroup } from '@/features/cardFormGroup/ui/CvcFormGroup';
-import { CardNumberFormGroup } from '@/features/cardFormGroup/ui/CardNumberFormGroup';
-import { useCardNumbers } from '@/features/cardFormGroup/hooks/useCardNumbers';
-import { ExpiryDateFormGroup } from '@/features/cardFormGroup/ui/ExpiryDateFormGroup';
+import { CvcField } from '@/features/cardForm/ui/fields/CvcField';
+import { CardNumberField } from '@/features/cardForm/ui/fields/CardNumberField';
+import { useCardNumbers } from '@/features/cardForm/hooks/useCardNumbers';
+import { ExpiryDateField } from '@/features/cardForm/ui/fields/ExpiryDateField';
 import { CardPreview, type CardInfo } from '@/features/cardPreview/CardPreview';
 
-// import { useCardNumbers } from '@/features/cardFormGroup/hooks/useCardNumbers';
-import { useExpiryDate } from '@/features/cardFormGroup/hooks/useExpiryDate';
-import { useCvc } from '@/features/cardFormGroup/hooks/useCvc';
-import { usePassword } from '@/features/cardFormGroup/hooks/usePassword';
-import { PasswordFormGroup } from '@/features/cardFormGroup/ui/PasswordFormGroup';
-import { BankSelectFormGroup } from '@/features/cardFormGroup/ui/BankSelectFormGroup';
+// import { useCardNumbers } from '@/features/cardForm/hooks/useCardNumbers';
+import { useExpiryDate } from '@/features/cardForm/hooks/useExpiryDate';
+import { useCvc } from '@/features/cardForm/hooks/useCvc';
+import { usePassword } from '@/features/cardForm/hooks/usePassword';
+import { PasswordField } from '@/features/cardForm/ui/fields/PasswordField';
+import { BankSelectField } from '@/features/cardForm/ui/fields/BankSelectField';
 import { usePaymentStep } from './usePaymentsStep';
-import { SubmitButton } from '@/features/cardFormGroup/ui/SubmitButton';
+import { SubmitButton } from '@/features/cardForm/ui/SubmitButton';
 import { useNavigate } from 'react-router-dom';
-import { useBank } from '@/features/cardFormGroup/hooks/useBank';
+import { useBank } from '@/features/cardForm/hooks/useBank';
 
 const STEP = {
   CARD: 0,
@@ -40,7 +40,7 @@ export const Payments = () => {
   };
 
   const cardNumbers = useCardNumbers({ onComplete: () => toStep(STEP.BANK) });
-  const bank = useBank({ onComplete: () => STEP.BANK });
+  const bank = useBank({ onComplete: () => toStep(STEP.EXPIRY) });
   const expiryDate = useExpiryDate({ onComplete: () => toStep(STEP.CVC) });
   const cvc = useCvc({ onComplete: () => toStep(STEP.PASSWORD) });
   const password = usePassword({ onComplete: () => STEP.BUTTON });
@@ -60,10 +60,11 @@ export const Payments = () => {
     navigate('/result', {
       state: {
         cardNumbers: cardNumbers.values,
-        bank: bank,
+        bank: bank.value,
       },
     });
   };
+
   const isFormValid =
     cardNumbers.isValid &&
     bank !== undefined &&
@@ -75,11 +76,11 @@ export const Payments = () => {
     <div className={styles.payments}>
       <CardPreview info={cardInfo} />
       <form className={styles.form} id="payment-form" onSubmit={handleSubmit}>
-        {step >= 4 && <PasswordFormGroup password={password} setStepRef={SET_REFS.PASSWORD} />}
-        {step >= 3 && <CvcFormGroup cvc={cvc} setStepRef={SET_REFS.CVC} />}
-        {step >= 2 && <ExpiryDateFormGroup expiryDate={expiryDate} setStepRef={SET_REFS.EXPIRY} />}
-        {step >= 1 && <BankSelectFormGroup bank={bank} setStepRef={SET_REFS.BANK} />}
-        <CardNumberFormGroup cardNumbers={cardNumbers} setStepRef={SET_REFS.CARD_NUMBERS} />
+        {step >= 4 && <PasswordField password={password} setStepRef={SET_REFS.PASSWORD} />}
+        {step >= 3 && <CvcField cvc={cvc} setStepRef={SET_REFS.CVC} />}
+        {step >= 2 && <ExpiryDateField expiryDate={expiryDate} setStepRef={SET_REFS.EXPIRY} />}
+        {step >= 1 && <BankSelectField bank={bank} setStepRef={SET_REFS.BANK} />}
+        <CardNumberField cardNumbers={cardNumbers} setStepRef={SET_REFS.CARD_NUMBERS} />
         {isFormValid && <SubmitButton form="payment-form" />}
       </form>
     </div>

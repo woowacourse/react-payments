@@ -1,13 +1,13 @@
-import { FormGroup } from '@/core/components/formGroup/FormGroup';
+import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
-import type { UseCardNumbersResult } from '../hooks/useCardNumbers';
+import type { UseCardNumbersResult } from '../../hooks/useCardNumbers';
 
-interface CardNumberFormGroupProps {
+interface CardNumberFieldProps {
   cardNumbers: UseCardNumbersResult;
   setStepRef: (node: HTMLInputElement | null) => void;
 }
 
-export const CardNumberFormGroup = ({ cardNumbers, setStepRef }: CardNumberFormGroupProps) => {
+export const CardNumberField = ({ cardNumbers, setStepRef }: CardNumberFieldProps) => {
   const {
     values,
     totalErrorMessage,
@@ -19,7 +19,7 @@ export const CardNumberFormGroup = ({ cardNumbers, setStepRef }: CardNumberFormG
   } = cardNumbers;
 
   return (
-    <FormGroup
+    <Field
       title="결제할 카드 번호를 입력해 주세요"
       subTitle="본인 명의의 카드만 결제 가능합니다."
       label={`카드 번호`}
@@ -42,6 +42,6 @@ export const CardNumberFormGroup = ({ cardNumbers, setStepRef }: CardNumberFormG
           onBlur={() => handleBlur(index)}
         />
       ))}
-    </FormGroup>
+    </Field>
   );
 };

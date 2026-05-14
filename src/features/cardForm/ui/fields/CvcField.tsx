@@ -1,16 +1,17 @@
-import { FormGroup } from '@/core/components/formGroup/FormGroup';
+import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
-import type { UseCvcResult } from '../hooks/useCvc';
+import type { UseCvcResult } from '../../hooks/useCvc';
 
-interface CvcFormGroupProps {
+interface CvcFieldProps {
   cvc: UseCvcResult;
   setStepRef: (node: HTMLInputElement | null) => void;
 }
 
-export const CvcFormGroup = ({ cvc, setStepRef }: CvcFormGroupProps) => {
+export const CvcField = ({ cvc, setStepRef }: CvcFieldProps) => {
   const { value, maxLength, errorMessage, handleChange, handleBlur } = cvc;
+
   return (
-    <FormGroup title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={errorMessage}>
+    <Field title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={errorMessage}>
       <Input
         ref={(node) => setStepRef(node)}
         type="text"
@@ -22,6 +23,6 @@ export const CvcFormGroup = ({ cvc, setStepRef }: CvcFormGroupProps) => {
         onChange={(e) => handleChange(e.target.value)}
         onBlur={() => handleBlur()}
       />
-    </FormGroup>
+    </Field>
   );
 };

@@ -1,7 +1,7 @@
-import styles from './FormGroup.module.css';
+import styles from './Field.module.css';
 import type { ReactNode } from 'react';
 
-interface FormGroupProps {
+interface FieldProps {
   title: string;
   subTitle?: string;
   label?: string;
@@ -9,13 +9,7 @@ interface FormGroupProps {
   errorMessage?: string;
 }
 
-export const FormGroup = ({
-  title,
-  subTitle,
-  label,
-  errorMessage = '',
-  children,
-}: FormGroupProps) => {
+export const Field = ({ title, subTitle, label, errorMessage = '', children }: FieldProps) => {
   return (
     <fieldset className={styles.formGroup}>
       <legend className={styles.legend}>

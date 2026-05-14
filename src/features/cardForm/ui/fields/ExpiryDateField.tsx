@@ -1,16 +1,16 @@
-import { FormGroup } from '@/core/components/formGroup/FormGroup';
+import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
-import type { UseExpiryDateResult } from '../hooks/useExpiryDate';
+import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 
-interface ExpiryDateFormGroupProps {
+interface ExpiryDateFieldProps {
   expiryDate: UseExpiryDateResult;
   setStepRef: (node: HTMLInputElement | null) => void;
 }
 
-export const ExpiryDateFormGroup = ({ expiryDate, setStepRef }: ExpiryDateFormGroupProps) => {
+export const ExpiryDateField = ({ expiryDate, setStepRef }: ExpiryDateFieldProps) => {
   const { month, year, setInputRef } = expiryDate;
   return (
-    <FormGroup
+    <Field
       title="카드 유효기간을 입력해 주세요"
       subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
       label="유효기간"
@@ -41,6 +41,6 @@ export const ExpiryDateFormGroup = ({ expiryDate, setStepRef }: ExpiryDateFormGr
         onChange={(e) => year.handleChange(e.target.value)}
         onBlur={() => year.handleBlur()}
       />
-    </FormGroup>
+    </Field>
   );
 };

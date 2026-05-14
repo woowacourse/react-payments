@@ -15,7 +15,8 @@ export const useBank = ({ onComplete }: UseBankProps): UseBankResult => {
 
   const handleChange = (bank: Bank) => {
     setValue(bank);
-    onComplete();
+    console.log(bank);
+    if (bank !== undefined) onComplete();
   };
 
   return { value, handleChange };

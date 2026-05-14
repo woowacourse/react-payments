@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { FormGroup } from './FormGroup';
+import { Field } from './Field';
 import { Input } from '@/core/components/input/Input';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Example/FormGroup',
-  component: FormGroup,
-} satisfies Meta<typeof FormGroup>;
+  title: 'Example/Field',
+  component: Field,
+} satisfies Meta<typeof Field>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
