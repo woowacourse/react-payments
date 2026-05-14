@@ -7,5 +7,5 @@ type Props = {
 };
 
 export const AppProviders = ({ children }: Props) => {
-  return <Router>{children}</Router>;
+  return <Router basename="/react-payments">{children}</Router>;
 };
