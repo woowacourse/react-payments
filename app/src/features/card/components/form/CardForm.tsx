@@ -5,7 +5,6 @@ import { CardExpiryDateInput } from "./CardExpiryDateInput";
 import { CardCVCInput } from "./CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput";
 import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
-import { useNavigate } from "react-router";
 import { Button } from "../../style/Button";
 import CardBrandSelect from "./CardBrandSelect";
 import type { CardNumber, CardExpiryDate, SetState } from "../../types";
@@ -21,6 +20,7 @@ interface CardFormProps {
   setCardCVC: (value: string) => void;
   cardPassword: string;
   setCardPassword: (value: string) => void;
+  gotoCreateCardDonePage: () => void;
 }
 
 export function CardForm({
@@ -34,6 +34,7 @@ export function CardForm({
   setCardCVC,
   cardPassword,
   setCardPassword,
+  gotoCreateCardDonePage,
 }: CardFormProps) {
   const {
     cardNumberIsComplete,
@@ -50,15 +51,9 @@ export function CardForm({
     cardPassword,
   );
 
-  const navigate = useNavigate();
-
-  const { firstDigits } = cardNumber;
-
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/card/done/", {
-      state: { firstDigitsCardNumber: firstDigits, cardBrand },
-    });
+    gotoCreateCardDonePage();
   };
 
   return (

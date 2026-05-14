@@ -35,6 +35,7 @@ const defaultArgs = {
   setCardCVC: () => {},
   cardPassword: "",
   setCardPassword: () => {},
+  gotoCreateCardDonePage: () => {},
 };
 
 const renderWithState: NonNullable<Story["render"]> = (args) => {
@@ -56,6 +57,7 @@ const renderWithState: NonNullable<Story["render"]> = (args) => {
       setCardCVC={setCardCVC}
       cardPassword={cardPassword}
       setCardPassword={setCardPassword}
+      gotoCreateCardDonePage={args.gotoCreateCardDonePage}
     />
   );
 };
