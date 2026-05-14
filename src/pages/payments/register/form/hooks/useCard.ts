@@ -33,7 +33,7 @@ export const useCard = () => {
   const [invalidAttemp, setInvalidAttemp] = useState({ card: false });
 
   const renderErrorMessage = () => {
-    if (invalidAttemp.card) return '유효한 카드사를 선택해주세요';
+    if (invalidAttemp.card) return 'invalidAttemp';
     if (!blur.card) return '';
 
     const errorCard = errors.card.filter((error) => !error.valid);

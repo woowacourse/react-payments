@@ -36,9 +36,9 @@ export const useCardNumbers = () => {
   // cardNumber --------------------------
 
   const renderErrorMessage = () => {
-    if (invalidAttemp.find(Boolean)) return '유효현 카드번호(숫자)를 입력해주세요';
+    if (invalidAttemp.find(Boolean)) return 'invalidAttemp';
     if (Object.values(blur).every((blur) => !blur)) return '';
-    if (Object.values(blur).some((cardNumber) => cardNumber.length !== 4)) return '카드 번호를 전부 채워주세요';
+    if (Object.values(blur).some((cardNumber) => cardNumber.length !== 4)) return 'incomplete';
     return '';
   };
 
