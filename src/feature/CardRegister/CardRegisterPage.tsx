@@ -1,23 +1,20 @@
-import { useState } from 'react';
+import styled from 'styled-components';
 import CardPreviewSection from './components/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
-import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useCardForm } from './hooks/useCardForm';
+import type { CardFormInfoType } from './types/CardPreviewInfoType';
 
 const CardRegisterPage = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [expiryMonth, setExpiryMonth] = useState('');
-  const [expiryYear, setExpiryYear] = useState('');
+  const navigate = useNavigate();
 
-  const cardPreviewInfo = {
-    cardNumbers,
-    expiryMonth,
-    expiryYear,
-  };
+  const { fields, cardPreviewInfo, cardFormInfo, currentStep, hasFormError } =
+    useCardForm();
 
-  const cardFormHandlers = {
-    setCardNumbers,
-    setExpiryMonth,
-    setExpiryYear,
+  const handleRegisterComplete = (cardFormInfo: CardFormInfoType) => {
+    navigate('/complete', {
+      state: cardFormInfo,
+    });
   };
 
   return (
@@ -25,8 +22,11 @@ const CardRegisterPage = () => {
       <Container>
         <CardPreviewSection cardPreviewInfo={cardPreviewInfo} />
         <InfoInputSection
-          cardPreviewInfo={cardPreviewInfo}
-          cardFormHandlers={cardFormHandlers}
+          fields={fields}
+          cardFormInfo={cardFormInfo}
+          currentStep={currentStep}
+          hasFormError={hasFormError}
+          onRegisterComplete={handleRegisterComplete}
         />
       </Container>
     </Wrapper>
@@ -36,14 +36,23 @@ const CardRegisterPage = () => {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+
+  background-color: #d3d3d3;
 `;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
   max-width: 376px;
-  max-height: 700px;
+  height: min(700px, 100vh);
+  overflow: hidden;
+
+  background-color: #ffffff;
 `;
 
 export default CardRegisterPage;
