@@ -12,11 +12,11 @@ const CardAddSuccessPage = () => {
   const navigate = useNavigate();
   const cardState = location.state;
 
-  const { cardNumberPrefixFourth, cardCompany } = cardState;
-
   if (!cardState) {
     return <Navigate to="/" replace />;
   }
+
+  const { cardNumberPrefixFourth, cardCompany } = cardState;
 
   const handleSubmit = () => {
     navigate('/', { replace: true });
