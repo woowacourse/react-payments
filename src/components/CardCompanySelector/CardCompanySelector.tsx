@@ -75,6 +75,7 @@ function CardCompanySelector({
               <OptionItem key={company.name}>
                 <OptionButton
                   type="button"
+                  selected={company.name === cardCompany?.name}
                   onClick={() => handleSelect(company)}
                 >
                   {company.name}
@@ -99,7 +100,7 @@ const SelectButton = styled.button`
   align-items: center;
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid ${COLOR_PALETTE.GREY};
+  border: 1px solid ${COLOR_PALETTE["GREY-400"]};
   border-radius: 0.16rem;
   background-color: ${COLOR_PALETTE.WHITE};
   &:focus {
@@ -113,7 +114,9 @@ interface SelectedTextProps {
 
 const SelectedText = styled.span<SelectedTextProps>`
   color: ${({ state }) =>
-    state === "placeholder" ? COLOR_PALETTE.GREY : COLOR_PALETTE["BLACK-900"]};
+    state === "placeholder"
+      ? COLOR_PALETTE["GREY-400"]
+      : COLOR_PALETTE["BLACK-900"]};
 
   font-weight: 400;
   font-size: 0.65rem;
@@ -135,7 +138,7 @@ const OptionList = styled.ul`
   padding: 0;
   list-style: none;
   border-radius: 0.35rem;
-  border: 1px solid ${COLOR_PALETTE.GREY};
+  border: 1px solid ${COLOR_PALETTE["GREY-400"]};
   background-color: ${COLOR_PALETTE.WHITE};
 `;
 
@@ -143,13 +146,18 @@ const OptionItem = styled.li`
   width: 100%;
 `;
 
-const OptionButton = styled.button`
+interface OptionButtonProps {
+  selected: boolean;
+}
+
+const OptionButton = styled.button<OptionButtonProps>`
   width: 100%;
   padding: 0.5rem 0.67rem;
   border: 0;
   border-radius: 0.35rem;
-  background-color: ${COLOR_PALETTE.WHITE};
-  color: #4f4f4f;
+  background-color: ${({ selected }) =>
+    selected ? COLOR_PALETTE["GREY-100"] : COLOR_PALETTE.WHITE};
+  color: ${COLOR_PALETTE["BLACK-600"]};
   font-weight: 400;
   font-size: 0.67rem;
   text-align: left;
