@@ -14,6 +14,7 @@ import {
 import useInputFocus from "@/hooks/useInputFocus";
 import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
+import type { AddCardFormStepKey } from "@/constants/addCardForm";
 
 export type ValidityPeriod = {
   month: string;
@@ -23,7 +24,7 @@ export type ValidityPeriod = {
 interface CardValidityPeriodInputFieldProps {
   validityPeriod: ValidityPeriod;
   onChange: (validityPeriod: ValidityPeriod) => void;
-  onNextStep: () => void;
+  onNextStep: (currentStepKey: AddCardFormStepKey) => void;
 }
 
 type InputsStatuses = {
@@ -99,7 +100,7 @@ const CardValidityPeriodInputField = ({
     setStatus((prev) => ({ ...prev, year: "DEFAULT" }));
 
     if (checkLengthMatches(input, YEAR_MAX_LENGTH)) {
-      onNextStep();
+      onNextStep("VALIDITY_PERIOD");
     }
   };
 

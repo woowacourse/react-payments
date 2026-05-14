@@ -16,7 +16,8 @@ const useFormStep = <StepKey extends string>(
 
   const step = formStep[stepKey].order;
 
-  const goToNextStep = () => {
+  const goToNextStep = (currentStepKey: StepKey) => {
+    if (currentStepKey !== stepKey) return;
     const nextStepKey = formStep[stepKey].next;
 
     if (!nextStepKey) return;

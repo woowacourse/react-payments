@@ -3,11 +3,12 @@ import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
 import { useState } from "react";
 import { checkIsOnlyDigits, checkLengthMatches } from "@/utils/validator";
+import type { AddCardFormStepKey } from "@/constants/addCardForm";
 
 interface CardCVCInputFieldProps {
   CVC: string;
   onChange: (CVC: string) => void;
-  onNextStep: () => void;
+  onNextStep: (currentStepKey: AddCardFormStepKey) => void;
 }
 
 const CardCVCInputField = ({
@@ -27,7 +28,7 @@ const CardCVCInputField = ({
     onChange(input.slice(0, CVC_MAX_LENGTH));
 
     if (checkLengthMatches(input, CVC_MAX_LENGTH)) {
-      onNextStep();
+      onNextStep("CVC");
     }
   };
 

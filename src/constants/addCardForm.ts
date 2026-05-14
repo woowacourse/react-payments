@@ -20,3 +20,5 @@ export const ADD_CARD_FORM_STEP = {
     next: null,
   },
 } as const;
+
+export type AddCardFormStepKey = keyof typeof ADD_CARD_FORM_STEP;

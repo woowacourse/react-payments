@@ -15,6 +15,7 @@ import {
 import useInputFocus from "@/hooks/useInputFocus";
 import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
+import type { AddCardFormStepKey } from "@/constants/addCardForm";
 
 export type CardNumberUnits = string[];
 export type CardNumberFormat = number[];
@@ -22,7 +23,7 @@ export type CardNumberFormat = number[];
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
   onChange: (input: CardNumberUnits) => void;
-  onNextStep: () => void;
+  onNextStep: (currentStepKey: AddCardFormStepKey) => void;
 }
 
 type InputsStatuses = InputStatus[];
@@ -91,7 +92,7 @@ const CardNumberInputField = ({
     }
 
     if (checkCardNumberLength(newCardNumberUnits)) {
-      onNextStep();
+      onNextStep("CARD_NUMBER");
     }
   };
 
