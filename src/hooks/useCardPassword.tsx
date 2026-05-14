@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { PasswordError } from '../types/errorTypes';
 import type { Password, PasswordHandler } from '../types/cardStausTypes';
-import { isNumericInput } from '../utils/util';
+import { isNumericInput } from '../utils/validate';
 
 export function useCardPassword(): [Password, PasswordHandler] {
   const [cardPassword, setCardPassword] = useState('');

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { DateError, MonthError, YearError } from '../types/errorTypes';
 import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
-import { getExpiryDateChangeError, getMonthBlurError, getYearBlurError } from '../utils/util';
+import { getExpiryDateChangeError, getMonthBlurError, getYearBlurError } from '../utils/error';
 
 export function useExpiryDate(): [CardExpiry, ExpireHandler] {
   const [cardExpiryDate, setCardExpiryDate] = useState<string[]>(['', '']);

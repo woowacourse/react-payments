@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import type { CardError } from '../types/errorTypes';
 import type { CardStatus, CardHandler } from '../types/cardStausTypes';
-import {
-  getCardBrand,
-  getCardNumberLength,
-  isNumericInput,
-  isPossibleCardBrandPrefix,
-} from '../utils/util';
+import { getCardBrand } from '../utils/cardBrand';
+import { getCardNumberError } from '../utils/error';
+import { validateCardNumber } from '../utils/validate';
 
 export function useCardNumber(): [CardStatus, CardHandler] {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -17,36 +14,20 @@ export function useCardNumber(): [CardStatus, CardHandler] {
     const next = [...cardNumbers];
     next[index] = e.target.value;
     const nextCardNumber = next.join('');
+    const nextCardNumberError = validateCardNumber(nextCardNumber);
 
-    if (!isNumericInput(e.target.value)) {
-      setCardNumberErrorMode('notNumber');
+    if (nextCardNumberError === 'notNumber') {
+      setCardNumberErrorMode(nextCardNumberError);
       return;
     }
 
     setCardNumbers(next);
-
-    if (!isPossibleCardBrandPrefix(nextCardNumber)) {
-      setCardNumberErrorMode('notExistBrand');
-      return;
-    }
-
-    setCardNumberErrorMode('normal');
+    setCardNumberErrorMode(nextCardNumberError);
   };
 
   const handleCardNumbersBlur = () => {
     const cardNumber = cardNumbers.join('');
-    const cardBrand = getCardBrand(cardNumber);
-
-    if (cardNumber.length !== getCardNumberLength(cardBrand)) {
-      setCardNumberErrorMode('cardNumberCount');
-      return;
-    }
-
-    if (cardBrand === 'unknown') {
-      return;
-    }
-
-    setCardNumberErrorMode('normal');
+    setCardNumberErrorMode(getCardNumberError(cardNumber));
   };
 
   return [

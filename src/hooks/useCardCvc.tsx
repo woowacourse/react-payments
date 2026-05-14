@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { CvcError } from '../types/errorTypes';
 import type { Cvc, CvcHandler } from '../types/cardStausTypes';
-import { isNumericInput } from '../utils/util';
+import { isNumericInput } from '../utils/validate';
 
 export function useCardCvc(): [Cvc, CvcHandler] {
   const [cardCvc, setCardCvc] = useState<string>('');

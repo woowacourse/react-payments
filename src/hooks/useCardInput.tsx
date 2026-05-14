@@ -10,7 +10,7 @@ import type {
   CardIssuerType,
   Password,
 } from '../types/cardStausTypes';
-import { getCardBrand, getCardNumberLength, isNumericInput } from '../utils/util';
+import { isCardNumberComplete, isNumericInput, isCardExpiryDateComplete } from '../utils/validate';
 
 type UseCardInputParams = {
   cardStatus: CardStatus;
@@ -46,13 +46,8 @@ export function useCardInput({
     const nextCardNumbers = [...cardStatus.cardNumbers];
     nextCardNumbers[index] = e.target.value;
     const nextCardNumber = nextCardNumbers.join('');
-    const nextCardBrand = getCardBrand(nextCardNumber);
 
-    if (
-      nextCardBrand !== 'unknown' &&
-      nextCardNumber.length === getCardNumberLength(nextCardBrand) &&
-      isNumericInput(e.target.value)
-    ) {
+    if (isCardNumberComplete(nextCardNumber)) {
       openStep(1);
     }
   };
@@ -68,12 +63,7 @@ export function useCardInput({
     const nextCardExpiryDate = [...cardExpiry.cardExpiryDate];
     nextCardExpiryDate[index] = e.target.value;
 
-    if (
-      isNumericInput(e.target.value) &&
-      nextCardExpiryDate[1].length === 2 &&
-      Number(nextCardExpiryDate[0]) > 0 &&
-      Number(nextCardExpiryDate[0]) <= 12
-    ) {
+    if (isNumericInput(e.target.value) && isCardExpiryDateComplete(nextCardExpiryDate)) {
       openStep(3);
     }
   };

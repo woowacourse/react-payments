@@ -1,7 +1,7 @@
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
 import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
 import { useRef } from 'react';
-import { isNumericInput } from '../utils/util.ts';
+import { isNumericInput } from '../utils/validate.ts';
 
 type CardNumbersProps = {
   cardStatus: CardStatus;
