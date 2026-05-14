@@ -13,6 +13,17 @@ export type CardBrand = 'local' | 'visa' | 'mastercard' | 'amex' | 'diners' | 'u
 
 export type CardCompany = (typeof CARD_COMPANY_OPTIONS)[number]['value'];
 
+export type ValidationTrigger = 'onChange' | 'onBlur';
+
 export type ErrorStatus = null | 'required' | 'invalidLength' | 'numberOnly';
 
 export type ExpirationPeriodErrorStatus = ErrorStatus | 'invalidMonth' | 'invalidYear';
+
+interface ValidationRule<N extends string> {
+  name: N;
+  fn: (value: string) => boolean;
+  on: ValidationTrigger[];
+}
+
+export type BaseValidationRule = ValidationRule<'required' | 'invalidLength' | 'numberOnly'>;
+export type ExpirationValidationRule = ValidationRule<BaseValidationRule['name'] | 'invalidMonth' | 'invalidYear'>;
