@@ -12,10 +12,10 @@ const fields: Exclude<keyof cardNumberFieldError, 'message'>[] = [
 
 export function CardNumberInput({
   firstRef,
-  onComplete,
+  onCardNumberComplete,
 }: {
   firstRef: React.RefObject<HTMLInputElement | null>;
-  onComplete: () => void;
+  onCardNumberComplete: () => void;
 }) {
   const {
     fieldErrors,
@@ -25,7 +25,7 @@ export function CardNumberInput({
     changeCardNumber,
     handleBlurCardNumber,
     handleInputMaxLength,
-  } = useCardNumberInput(onComplete);
+  } = useCardNumberInput(onCardNumberComplete);
 
   return (
     <>

@@ -6,10 +6,10 @@ import { useSingleInput } from '../../hooks/useSingleInput';
 
 export function CardCVCInput({
   cardCVCRef,
-  onComplete,
+  onCardCVCComplete,
 }: {
   cardCVCRef: React.RefObject<HTMLInputElement | null>;
-  onComplete: () => void;
+  onCardCVCComplete: () => void;
 }) {
   const { cardCVC, setCardCVC } = useCardContext();
 
@@ -32,7 +32,7 @@ export function CardCVCInput({
         onChange={(e) => {
           onChange(e);
           if (e.target.value.length === 3) {
-            onComplete();
+            onCardCVCComplete();
           }
         }}
         onBlur={onBlur}

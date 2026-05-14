@@ -3,20 +3,20 @@ import { CardInput, CardFieldset, CardLegend } from '../../style/CardStyles';
 import { ErrorMessage } from './ErrorMessage';
 
 export function CardExpiryDateInput({
-  firstRef,
-  onComplete,
+  expiryMonthRef,
+  onCardExpiryDateComplete,
 }: {
-  firstRef: React.RefObject<HTMLInputElement | null>;
-  onComplete: () => void;
+  expiryMonthRef: React.RefObject<HTMLInputElement | null>;
+  onCardExpiryDateComplete: () => void;
 }) {
   const {
     fieldErrors,
-    yearRef,
+    expiryYearRef,
     cardExpiryDate,
     changeCardExpiryMonth,
     changeCardExpiryYear,
     handleBlurCardExpiryDate,
-  } = useExpiryDateInput(onComplete);
+  } = useExpiryDateInput(onCardExpiryDateComplete);
 
   return (
     <>
@@ -32,7 +32,7 @@ export function CardExpiryDateInput({
           value={cardExpiryDate['expiry-month']}
           $fieldErrors={fieldErrors['expiry-month']}
           placeholder="MM"
-          ref={firstRef}
+          ref={expiryMonthRef}
         />
         <CardInput
           type="text"
@@ -44,7 +44,7 @@ export function CardExpiryDateInput({
           value={cardExpiryDate['expiry-year']}
           $fieldErrors={fieldErrors['expiry-year']}
           placeholder="YY"
-          ref={yearRef}
+          ref={expiryYearRef}
         />
       </CardFieldset>
       <ErrorMessage message={fieldErrors['message']} />

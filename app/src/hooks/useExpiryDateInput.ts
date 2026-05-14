@@ -9,7 +9,7 @@ export function useExpiryDateInput(onComplete: () => void) {
     'expiry-year': false,
     message: '',
   });
-  const yearRef = useRef<HTMLInputElement | null>(null);
+  const expiryYearRef = useRef<HTMLInputElement | null>(null);
 
   const changeCardExpiryMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.target;
@@ -28,7 +28,7 @@ export function useExpiryDateInput(onComplete: () => void) {
     setCardExpiryDate({ ...cardExpiryDate, [id]: value });
 
     if (value.length === 2) {
-      yearRef.current?.focus();
+      expiryYearRef.current?.focus();
     }
   };
 
@@ -81,7 +81,7 @@ export function useExpiryDateInput(onComplete: () => void) {
 
   return {
     fieldErrors,
-    yearRef,
+    expiryYearRef,
     cardExpiryDate,
     changeCardExpiryMonth,
     changeCardExpiryYear,
