@@ -50,10 +50,7 @@ export function CardNumberInput({
     const { value } = e.target;
     const field = CARD_NUMBER_FIELDS[index - 1];
     const newCardNumber = { ...cardNumber, [field]: value };
-    const fullNumber = joinCardNumber(
-      Object.values(newCardNumber),
-      CARD_INPUT.EACH_NUMBER_LENGTH,
-    );
+    const fullNumber = joinCardNumber(newCardNumber);
     handleChangeError([() => Validator.isNumber(value)], field);
     handleChangeNetworkBrandError([
       () => Validator.isValidNetworkBrand(fullNumber),

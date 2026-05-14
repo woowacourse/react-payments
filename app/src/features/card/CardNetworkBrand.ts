@@ -49,11 +49,10 @@ export const Amex = {
   title: "amex",
   length: 15,
   check(value: string): string | undefined {
-    const validValueLength = value.replaceAll(" ", "").length;
     if (
       (value.startsWith("34") || value.startsWith("37")) &&
-      validValueLength >= 2 &&
-      validValueLength <= 15
+      value.length >= 2 &&
+      value.length <= 15
     ) {
       return this.title;
     }
@@ -64,7 +63,6 @@ export const Diners = {
   title: "diners",
   length: 14,
   check(value: string): string | undefined {
-    const validValueLength = value.replaceAll(" ", "").length;
-    if (value.startsWith("36") && validValueLength <= 14) return this.title;
+    if (value.startsWith("36") && value.length <= 14) return this.title;
   },
 };

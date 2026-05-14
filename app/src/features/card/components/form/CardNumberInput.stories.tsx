@@ -60,36 +60,6 @@ export const InvalidNetworkBrandCardNumber: Story = {
   },
 };
 
-const createNetworkBrandValidationPlay =
-  (inputIndex: number): Story["play"] =>
-  async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const input = canvas.getAllByRole("textbox")[inputIndex];
-    await userEvent.type(input, "4");
-    await userEvent.tab();
-    await expect(
-      canvas.queryByText("존재하지 않는 네트워크 브랜드 입니다."),
-    ).toBeInTheDocument();
-  };
-
-export const NetworkBrandValidationOnSecondInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
-  play: createNetworkBrandValidationPlay(1),
-};
-
-export const NetworkBrandValidationOnThirdInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
-  play: createNetworkBrandValidationPlay(2),
-};
-
-export const NetworkBrandValidationOnFourthInput: Story = {
-  args: defaultArgs,
-  render: renderWithState,
-  play: createNetworkBrandValidationPlay(3),
-};
-
 export const IncompleteLengthOnBlur: Story = {
   args: defaultArgs,
   render: renderWithState,

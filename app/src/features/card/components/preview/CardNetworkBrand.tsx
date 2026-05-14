@@ -4,15 +4,12 @@ import VisaCard from "../../assets/visa-logo.svg";
 import UnionCard from "../../assets/unionpay-logo.svg";
 import AmexCard from "../../assets/amex-logo.svg";
 import DinersCard from "../../assets/diners-club-logo.png";
-import { CARD_INPUT } from "../../Constants";
 import { joinCardNumber } from "../../Utils";
 import { detectCardNetwork } from "../../CardNetwork";
 import type { CardNumber } from "../../types";
 
 export function CardNetworkBrand({ cardNumber }: { cardNumber: CardNumber }) {
-  const networkBrandName = detectCardNetwork(
-    joinCardNumber(Object.values(cardNumber), CARD_INPUT.EACH_NUMBER_LENGTH),
-  )?.title;
+  const networkBrandName = detectCardNetwork(joinCardNumber(cardNumber))?.title;
 
   const selectBrandImage = (brand: string): string | undefined => {
     if (brand === "visa") return VisaCard;
