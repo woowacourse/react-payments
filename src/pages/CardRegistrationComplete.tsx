@@ -1,16 +1,30 @@
 import check from '../assets/check.png';
 import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { CARD_ISSUER } from '../constants/constant';
-import type { CardIssuerType } from '../types/cardStausTypes';
 import Button from '../components/common/Button';
+
+function isCardIssuer(cardIssuer: string): cardIssuer is keyof typeof CARD_ISSUER {
+  return cardIssuer in CARD_ISSUER;
+}
 
 export default function CardRegistrationComplete() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const state = location.state as { cardIssuer: CardIssuerType; cardNumber: string } | null;
+  const state: unknown = location.state;
 
-  if (!state) {
+  if (
+    typeof state !== 'object' ||
+    state === null ||
+    !('cardIssuer' in state) ||
+    !('cardNumber' in state)
+  ) {
+    return <Navigate to="/" replace />;
+  }
+
+  const { cardIssuer, cardNumber } = state;
+
+  if (typeof cardIssuer !== 'string' || !isCardIssuer(cardIssuer) || typeof cardNumber !== 'string') {
     return <Navigate to="/" replace />;
   }
 
@@ -39,8 +53,8 @@ export default function CardRegistrationComplete() {
           lineHeight: '35px',
         })}
       >
-        {state.cardNumber}로 시작하는 <br />
-        {CARD_ISSUER[state.cardIssuer]}가 등록되었어요.
+        {cardNumber}로 시작하는 <br />
+        {CARD_ISSUER[cardIssuer]}가 등록되었어요.
       </h1>
       <Button onClick={() => navigate('/')}>확인</Button>
     </div>
