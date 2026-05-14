@@ -78,9 +78,9 @@ const Wrapper = styled.div<Pick<CardProps, "company">>`
   width: 13rem;
   height: 8rem;
   background-color: ${({ company }) =>
-    company
+    (company
       ? COLOR_PALETTE[company.toUpperCase() as keyof typeof COLOR_PALETTE]
-      : COLOR_PALETTE["BLACK-800"]};
+      : undefined) ?? COLOR_PALETTE["BLACK-800"]};
   border-radius: 0.25rem;
   box-shadow: 3px 3px 5px 0px ${COLOR_PALETTE["BLACK-900"]}40;
 `;
