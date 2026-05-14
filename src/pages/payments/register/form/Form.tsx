@@ -86,13 +86,13 @@ export const Form = () => {
     password.isValid,
   ]);
 
-  const [step, setStep] = useState<number>(0);
+  const [releavedStep, setReleavedStep] = useState<number>(0);
 
   useEffect(() => {
-    if (cardNumbers.isValid) setStep(1);
-    if (card.isValid) setStep(2);
-    if (expirationDate.isValid) setStep(3);
-    if (cvc.isValid) setStep(4);
+    if (cardNumbers.isValid) setReleavedStep(1);
+    if (card.isValid) setReleavedStep(2);
+    if (expirationDate.isValid) setReleavedStep(3);
+    if (cvc.isValid) setReleavedStep(4);
   }, [cardNumbers.isValid, card.isValid, expirationDate.isValid, cvc.isValid, password.isValid]);
 
   const branchNumberCard = BRAND_NUMBER?.[brandCard as keyof typeof BRAND_NUMBER];
@@ -111,7 +111,7 @@ export const Form = () => {
             expirationDate={[expirationDate.values.month, expirationDate.values.year]}
           />
 
-          <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" hide={!(step >= 4)}>
+          <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" hide={!(releavedStep >= 4)}>
             <Field label="비밀번호 앞 2자리" errorMessage={password.renderErrorMessage()}>
               <Input
                 {...{ ref: password.ref }}
@@ -127,7 +127,7 @@ export const Form = () => {
               />
             </Field>
           </FormGroup>
-          <FormGroup title="CVC 번호를 입력해 주세요" hide={!(step >= 3)}>
+          <FormGroup title="CVC 번호를 입력해 주세요" hide={!(releavedStep >= 3)}>
             <Field label="CVC" errorMessage={cvc.renderErrorMessage()}>
               <Input
                 {...{ ref: cvc.ref }}
@@ -145,7 +145,7 @@ export const Form = () => {
           <FormGroup
             title="카드 유효기간을 입력해 주세요"
             subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
-            hide={!(step >= 2)}
+            hide={!(releavedStep >= 2)}
           >
             <Field label="유효기간" errorMessage={expirationDate.renderErrorMessage()}>
               <Input
@@ -178,7 +178,11 @@ export const Form = () => {
               />
             </Field>
           </FormGroup>
-          <FormGroup title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다." hide={!(step >= 1)}>
+          <FormGroup
+            title="카드사를 선택해 주세요"
+            subTitle="현재 국내 카드사만 가능합니다."
+            hide={!(releavedStep >= 1)}
+          >
             <Field errorMessage={card.renderErrorMessage()}>
               <Select
                 {...{ ref: card.ref }}
@@ -193,7 +197,7 @@ export const Form = () => {
           <FormGroup
             title="결제할 카드 번호를 입력해 주세요"
             subTitle="본인 명의의 카드만 결제 가능합니다."
-            hide={!(step >= 0)}
+            hide={!(releavedStep >= 0)}
           >
             <Field
               label="카드 번호"
