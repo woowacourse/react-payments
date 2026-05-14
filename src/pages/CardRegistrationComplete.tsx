@@ -2,7 +2,7 @@ import check from '../assets/check.png';
 import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { CARD_ISSUER } from '../constants/constant';
 import type { CardIssuerType } from '../types/cardStausTypes';
-import Button from '../components/Button';
+import Button from '../components/common/Button';
 
 export default function CardRegistrationComplete() {
   const navigate = useNavigate();

@@ -16,7 +16,7 @@ import type {
 } from '../types/cardStausTypes';
 import CardIssuer from './CardIssuer';
 import { useRegisterCardForm } from '../hooks/useRegisterCardForm';
-import Button from './Button';
+import Button from './common/Button';
 
 type CardInputProps = {
   cardStatus: CardStatus;
