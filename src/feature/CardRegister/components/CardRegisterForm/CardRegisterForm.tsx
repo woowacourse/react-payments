@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import CvcField from "./CvcField/CvCField";
 import ExpiryField from "./ExpiryField/ExpiryField";
 import CardRegisterStep from "./CardRegisterStep/CardRegisterStep";
@@ -28,6 +27,27 @@ import {
 import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
 
+const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
+  const cardBrand = getCardBrandName(cardInfo.cardNumbers);
+
+  if (!validateCardNumber(cardInfo.cardNumbers.join(""), cardBrand).isValid) {
+    return CARD_FORM.RENDER_STEP.CARD_NUMBER;
+  }
+
+  if (!validateCardCompany(cardInfo.selectedCardCompany).isValid) {
+    return CARD_FORM.RENDER_STEP.CARD_COMPANY;
+  }
+
+  if (
+    !validateExpiryMonth(cardInfo.expiryMonth).isValid ||
+    !validateExpiryYear(cardInfo.expiryYear).isValid
+  ) {
+    return CARD_FORM.RENDER_STEP.EXPIRY;
+  }
+
+  return CARD_FORM.RENDER_STEP.CVC;
+};
+
 const CardRegisterForm = ({
   cardInfo,
   updateCardNumbers,
@@ -42,6 +62,7 @@ const CardRegisterForm = ({
   updateCardCompany: (cardCompany: CardCompanyType) => void;
 }) => {
   const navigate = useNavigate();
+
   const [cardInputSectionInformation, setCardInputSectionInformation] =
     useState({
       cvcNumber: "",
@@ -49,7 +70,9 @@ const CardRegisterForm = ({
     });
 
   // 한 번 렌더링 된 필드는 이전 단계에서 에러가 나도 사라지지 않게 하므로 state로!
-  const [maxUnlockedStep, setMaxUnlockedStep] = useState(1);
+  const [maxUnlockedStep, setMaxUnlockedStep] = useState(() =>
+    getInitialMaxUnlockedStep(cardInfo),
+  );
 
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
     cardInfo;

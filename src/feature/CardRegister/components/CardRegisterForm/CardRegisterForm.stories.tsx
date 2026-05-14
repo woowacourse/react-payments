@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { fn, userEvent, within } from "storybook/test";
 import { MemoryRouter } from "react-router-dom";
 
 import CardRegisterForm from "./CardRegisterForm";
@@ -38,9 +38,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Empty: Story = {};
+const filledCardNumberInfo = {
+  cardNumbers: ["4123", "5678", "1234", "5678"],
+  expiryMonth: "",
+  expiryYear: "",
+  selectedCardCompany: null,
+} satisfies CardInfoType;
 
-export const Partial: Story = {
+const filledExpiryInfo = {
+  cardNumbers: ["4123", "5678", "1234", "5678"],
+  expiryMonth: "12",
+  expiryYear: "30",
+  selectedCardCompany: "신한카드",
+} satisfies CardInfoType;
+
+export const CardNumberStep: Story = {};
+
+export const CardNumberStepWithPartialInput: Story = {
   args: {
     cardInfo: {
       cardNumbers: ["4123", "56", "", ""],
@@ -48,6 +62,52 @@ export const Partial: Story = {
       expiryYear: "",
       selectedCardCompany: null,
     },
+  },
+};
+
+export const CardCompanyStep: Story = {
+  args: {
+    cardInfo: filledCardNumberInfo,
+  },
+};
+
+export const ExpiryStep: Story = {
+  args: {
+    cardInfo: {
+      cardNumbers: ["4123", "5678", "1234", "5678"],
+      expiryMonth: "",
+      expiryYear: "",
+      selectedCardCompany: "신한카드",
+    },
+  },
+};
+
+export const CvcStep: Story = {
+  args: {
+    cardInfo: filledExpiryInfo,
+  },
+};
+
+export const PasswordStep: Story = {
+  args: {
+    cardInfo: filledExpiryInfo,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.type(canvas.getByLabelText("CVC"), "123");
+  },
+};
+
+export const CompleteStep: Story = {
+  args: {
+    cardInfo: filledExpiryInfo,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.type(canvas.getByLabelText("CVC"), "123");
+    await userEvent.type(await canvas.findByLabelText("비밀번호 앞 2자리"), "12");
   },
 };
 
