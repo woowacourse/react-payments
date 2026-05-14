@@ -5,15 +5,22 @@ import {
 } from '../constants/messages.ts';
 import { isMonthError, isYearError } from '../utils/error.ts';
 import { isNumericInput } from '../utils/validate.ts';
-import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
+import type { CardExpiry } from '../types/cardStausTypes';
 import { useRef } from 'react';
 
 type CardExpiryDateProps = {
   cardExpiry: CardExpiry;
-  setCardExpiry: ExpireHandler;
+  onChangeCardExpiryDate: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlurMonth: () => void;
+  onBlurYear: () => void;
 };
 
-export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiryDateProps) {
+export default function CardExpiryDate({
+  cardExpiry,
+  onChangeCardExpiryDate,
+  onBlurMonth,
+  onBlurYear,
+}: CardExpiryDateProps) {
   const EXPIRY_ERROR_MESSAGE = {
     ...DATE_ERROR_MESSAGE,
     ...MONTH_ERROR_MESSAGE,
@@ -27,7 +34,7 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardExpiry.handleCardExpiryDate(index)(e);
+    onChangeCardExpiryDate(index)(e);
 
     if (e.target.value.length === 2 && isNumericInput(e.target.value)) {
       if (index === 0 && Number(e.target.value) <= 12 && Number(e.target.value) > 0) {
@@ -81,7 +88,7 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             placeholder="MM"
             value={cardExpiry.cardExpiryDate[0]}
             onChange={handleChange(0)}
-            onBlur={setCardExpiry.handleMonthBlur}
+            onBlur={onBlurMonth}
             maxLength={2}
             inputMode="numeric"
             css={(theme) => ({
@@ -109,7 +116,7 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             placeholder="YY"
             value={cardExpiry.cardExpiryDate[1]}
             onChange={handleChange(1)}
-            onBlur={setCardExpiry.handleYearBlur}
+            onBlur={onBlurYear}
             maxLength={2}
             inputMode="numeric"
             css={(theme) => ({

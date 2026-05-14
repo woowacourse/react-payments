@@ -1,12 +1,17 @@
 import { PASSWORD_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { Password, PasswordHandler } from '../types/cardStausTypes';
+import type { Password } from '../types/cardStausTypes';
 
 type CardPasswordProps = {
   cardPassword: Password;
-  setCardPassword: PasswordHandler;
+  onChangeCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlurCardPassword: () => void;
 };
 
-export default function CardPassword({ cardPassword, setCardPassword }: CardPasswordProps) {
+export default function CardPassword({
+  cardPassword,
+  onChangeCardPassword,
+  onBlurCardPassword,
+}: CardPasswordProps) {
   return (
     <fieldset
       css={{ display: 'flex', flexDirection: 'column', border: 'none', padding: 0, gap: '10px' }}
@@ -50,8 +55,8 @@ export default function CardPassword({ cardPassword, setCardPassword }: CardPass
           <input
             type="password"
             value={cardPassword.cardPassword}
-            onChange={setCardPassword.handleCardPassword}
-            onBlur={setCardPassword.handlePasswordBlur}
+            onChange={onChangeCardPassword}
+            onBlur={onBlurCardPassword}
             maxLength={2}
             inputMode="numeric"
             css={(theme) => ({

@@ -1,14 +1,19 @@
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
+import type { CardStatus } from '../types/cardStausTypes.ts';
 import { useRef } from 'react';
 import { isNumericInput } from '../utils/validate.ts';
 
 type CardNumbersProps = {
   cardStatus: CardStatus;
-  setCardStatus: CardHandler;
+  onChangeCardNumber: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onValidateCardNumber: () => void;
 };
 
-export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersProps) {
+export default function CardNumber({
+  cardStatus,
+  onChangeCardNumber,
+  onValidateCardNumber,
+}: CardNumbersProps) {
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
   const hasCardNumberError =
     cardStatus.cardNumberErrorMode !== 'normal' && cardStatus.cardNumberErrorMode !== '';
@@ -18,7 +23,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
       : ' ';
 
   const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardStatus.handleCardNumbers(index)(e);
+    onChangeCardNumber(index)(e);
 
     if (e.target.value.length === 4 && isNumericInput(e.target.value)) {
       inputRefs.current[index + 1]?.focus();
@@ -30,7 +35,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
       return;
     }
 
-    setCardStatus.handleCardNumbersBlur();
+    onValidateCardNumber();
   };
 
   const lastCardNumberLength =

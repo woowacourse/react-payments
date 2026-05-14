@@ -25,7 +25,7 @@ export function useCardNumber(): [CardStatus, CardHandler] {
     setCardNumberErrorMode(nextCardNumberError);
   };
 
-  const handleCardNumbersBlur = () => {
+  const validateCardNumbers = () => {
     const cardNumber = cardNumbers.join('');
     setCardNumberErrorMode(getCardNumberError(cardNumber));
   };
@@ -38,7 +38,7 @@ export function useCardNumber(): [CardStatus, CardHandler] {
     },
     {
       handleCardNumbers: handleCardNumbers,
-      handleCardNumbersBlur: handleCardNumbersBlur,
+      validateCardNumbers: validateCardNumbers,
     },
   ];
 }

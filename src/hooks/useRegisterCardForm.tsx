@@ -19,7 +19,7 @@ export function useRegisterCardForm() {
   const [cardStatus, cardNumberHandler] = useCardNumber();
   const [cardExpiry, cardExpiryHandler] = useExpiryDate();
   const [cardCvc, cardCvcHandler] = useCardCvc();
-  const [cardPassword, setCardPassword] = useCardPassword();
+  const [cardPassword, cardPasswordHandler] = useCardPassword();
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
   const [step, setStep] = useState(0);
 
@@ -90,22 +90,18 @@ export function useRegisterCardForm() {
 
   return {
     cardStatus,
-    setCardStatus: {
-      ...cardNumberHandler,
-      handleCardNumbers,
-    },
+    onChangeCardNumber: handleCardNumbers,
+    onValidateCardNumber: cardNumberHandler.validateCardNumbers,
     cardExpiry,
-    setCardExpiry: {
-      ...cardExpiryHandler,
-      handleCardExpiryDate,
-    },
+    onChangeCardExpiryDate: handleCardExpiryDate,
+    onBlurMonth: cardExpiryHandler.handleMonthBlur,
+    onBlurYear: cardExpiryHandler.handleYearBlur,
     cardCvc,
-    setCardCvc: {
-      ...cardCvcHandler,
-      handleCardCvc,
-    },
+    onChangeCardCvc: handleCardCvc,
+    onBlurCardCvc: cardCvcHandler.handleCvcBlur,
     cardPassword,
-    setCardPassword,
+    onChangeCardPassword: cardPasswordHandler.handleCardPassword,
+    onBlurCardPassword: cardPasswordHandler.handlePasswordBlur,
     cardIssuer,
     handleCardIssuer,
     step,

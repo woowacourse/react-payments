@@ -4,28 +4,29 @@ import CardExpiryDate from './CardExpiryDate';
 import CardPassword from './CardPassword';
 
 import type {
-  CardHandler,
   CardStatus,
   CardExpiry,
-  ExpireHandler,
   Cvc,
-  CvcHandler,
   CardIssuerType,
   Password,
-  PasswordHandler,
 } from '../types/cardStausTypes';
 import CardIssuer from './CardIssuer';
 import Button from './common/Button';
 
 type CardInputProps = {
   cardStatus: CardStatus;
-  setCardStatus: CardHandler;
+  onChangeCardNumber: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onValidateCardNumber: () => void;
   cardExpiry: CardExpiry;
-  setCardExpiry: ExpireHandler;
+  onChangeCardExpiryDate: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlurMonth: () => void;
+  onBlurYear: () => void;
   cardCvc: Cvc;
-  setCardCvc: CvcHandler;
+  onChangeCardCvc: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlurCardCvc: () => void;
   cardPassword: Password;
-  setCardPassword: PasswordHandler;
+  onChangeCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlurCardPassword: () => void;
   cardIssuer: CardIssuerType | '';
   handleCardIssuer: (issuer: CardIssuerType) => void;
   step: number;
@@ -35,13 +36,18 @@ type CardInputProps = {
 
 export default function CardInput({
   cardStatus,
-  setCardStatus,
+  onChangeCardNumber,
+  onValidateCardNumber,
   cardExpiry,
-  setCardExpiry,
+  onChangeCardExpiryDate,
+  onBlurMonth,
+  onBlurYear,
   cardCvc,
-  setCardCvc,
+  onChangeCardCvc,
+  onBlurCardCvc,
   cardPassword,
-  setCardPassword,
+  onChangeCardPassword,
+  onBlurCardPassword,
   cardIssuer,
   handleCardIssuer,
   step,
@@ -50,11 +56,34 @@ export default function CardInput({
 }: CardInputProps) {
   return (
     <form onSubmit={handleSubmit} css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {step >= 4 && <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />}
-      {step >= 3 && <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />}
-      {step >= 2 && <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />}
+      {step >= 4 && (
+        <CardPassword
+          cardPassword={cardPassword}
+          onChangeCardPassword={onChangeCardPassword}
+          onBlurCardPassword={onBlurCardPassword}
+        />
+      )}
+      {step >= 3 && (
+        <CardCvc
+          cardCvc={cardCvc}
+          onChangeCardCvc={onChangeCardCvc}
+          onBlurCardCvc={onBlurCardCvc}
+        />
+      )}
+      {step >= 2 && (
+        <CardExpiryDate
+          cardExpiry={cardExpiry}
+          onChangeCardExpiryDate={onChangeCardExpiryDate}
+          onBlurMonth={onBlurMonth}
+          onBlurYear={onBlurYear}
+        />
+      )}
       {step >= 1 && <CardIssuer cardIssuer={cardIssuer} handleCardIssuer={handleCardIssuer} />}
-      <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
+      <CardNumber
+        cardStatus={cardStatus}
+        onChangeCardNumber={onChangeCardNumber}
+        onValidateCardNumber={onValidateCardNumber}
+      />
       {isFormValid && <Button type="submit">확인</Button>}
     </form>
   );
