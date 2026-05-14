@@ -1,6 +1,7 @@
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
 import type { CardStatus } from '../types/cardStausTypes.ts';
 import { useRef } from 'react';
+import { getCardNumberGroups } from '../utils/cardBrand.ts';
 import { isNumericInput } from '../utils/validate.ts';
 
 type CardNumbersProps = {
@@ -38,8 +39,7 @@ export default function CardNumber({
     onValidateCardNumber();
   };
 
-  const lastCardNumberLength =
-    cardStatus.cardBrand === 'diners' ? 2 : cardStatus.cardBrand === 'amex' ? 3 : 4;
+  const cardNumberGroups = getCardNumberGroups(cardStatus.cardBrand);
 
   return (
     <fieldset
@@ -87,7 +87,7 @@ export default function CardNumber({
                 key={index}
                 type="text"
                 placeholder="1234"
-                maxLength={index === 3 ? lastCardNumberLength : 4}
+                maxLength={cardNumberGroups[index]}
                 onChange={handleChange(index)}
                 value={cardNumber}
                 inputMode="numeric"

@@ -1,5 +1,31 @@
 import type { CardBrandType } from '../types/cardStausTypes';
 
+type CardNumberMaskType = 'default' | 'special';
+
+type CardBrandSpec = {
+  numberGroups: number[];
+  maskType: CardNumberMaskType;
+};
+
+const DEFAULT_CARD_BRAND_SPEC: CardBrandSpec = {
+  numberGroups: [4, 4, 4, 4],
+  maskType: 'default',
+};
+
+const CARD_BRAND_SPECS: Partial<Record<CardBrandType, CardBrandSpec>> = {
+  visa: DEFAULT_CARD_BRAND_SPEC,
+  master: DEFAULT_CARD_BRAND_SPEC,
+  unionPay: DEFAULT_CARD_BRAND_SPEC,
+  diners: {
+    numberGroups: [4, 4, 4, 2],
+    maskType: 'special',
+  },
+  amex: {
+    numberGroups: [4, 4, 4, 3],
+    maskType: 'special',
+  },
+};
+
 export function getCardBrand(cardNumber: string): CardBrandType {
   if (cardNumber.startsWith('4')) {
     return 'visa';
@@ -29,15 +55,15 @@ export function getCardBrand(cardNumber: string): CardBrandType {
 }
 
 export function getCardNumberLength(cardBrand: CardBrandType): number {
-  if (cardBrand === 'diners') {
-    return 14;
-  }
+  return getCardNumberGroups(cardBrand).reduce((total, groupLength) => total + groupLength, 0);
+}
 
-  if (cardBrand === 'amex') {
-    return 15;
-  }
+export function getCardNumberGroups(cardBrand: CardBrandType): number[] {
+  return CARD_BRAND_SPECS[cardBrand]?.numberGroups ?? DEFAULT_CARD_BRAND_SPEC.numberGroups;
+}
 
-  return 16;
+export function getCardNumberMaskType(cardBrand: CardBrandType): CardNumberMaskType {
+  return CARD_BRAND_SPECS[cardBrand]?.maskType ?? DEFAULT_CARD_BRAND_SPEC.maskType;
 }
 
 export function isPossibleCardBrandPrefix(cardNumber: string): boolean {
