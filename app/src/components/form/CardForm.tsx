@@ -6,37 +6,28 @@ import { CardExpiryDateInput } from './CardExpiryDateInput';
 import { CardCVCInput } from './CardCVCInput';
 import { CardPasswordInput } from './CardPasswordInput';
 import { ConfirmButton } from './ConfirmButton';
-import { useCardContext } from '../../hooks/useCardContext';
-import { useNavigate } from 'react-router-dom';
-import { useFormFocusChain } from '../../hooks/useFormFocusChain';
+import type { CardFormPropsType } from '../../types/CardFormProps';
 
-export function CardForm() {
-  const { cardCompany, cardNumber, isFormComplete } = useCardContext();
-  const {
-    refs,
-    currentStep,
-    onCardCompanySelected,
-    onCardNumberComplete,
-    onCardExpiryDateComplete,
-    onCardCVCComplete,
-  } = useFormFocusChain();
-
-  const navigate = useNavigate();
-
+export function CardForm({
+  refs,
+  currentStep,
+  isFormComplete,
+  onCardNumberComplete,
+  onCardCompanySelected,
+  onCardExpiryDateComplete,
+  onCardCVCComplete,
+  handleFormSubmit,
+}: CardFormPropsType) {
   return (
-    <CardFormContainer
-      onSubmit={(e) => {
-        e.preventDefault();
-        navigate('/react-payments/complete', {
-          state: { firstDigits: cardNumber[0], cardCompany: cardCompany },
-        });
-      }}
-    >
+    <CardFormContainer onSubmit={handleFormSubmit}>
       <CardSection
         title={'결제할 카드 번호를 입력해 주세요'}
         subTitle={'본인 명의의 카드만 결제 가능합니다.'}
       >
-        <CardNumberInput firstRef={refs.cardNumberFirstRef} onComplete={onCardNumberComplete} />
+        <CardNumberInput
+          firstRef={refs.cardNumberFirstRef}
+          onCardNumberComplete={onCardNumberComplete}
+        />
       </CardSection>
       {currentStep >= 1 && (
         <CardSection title={'카드사를 선택해 주세요'} subTitle={'현재 국내 카드사만 가능합니다.'}>
@@ -49,14 +40,14 @@ export function CardForm() {
           subTitle={'월/년도(MMYY)를 순서대로 입력해 주세요.'}
         >
           <CardExpiryDateInput
-            firstRef={refs.cardExpiryDateFirstRef}
-            onComplete={onCardExpiryDateComplete}
+            expiryMonthRef={refs.expiryMonthRef}
+            onCardExpiryDateComplete={onCardExpiryDateComplete}
           />
         </CardSection>
       )}
       {currentStep >= 3 && (
         <CardSection title={'CVC 번호를 입력해 주세요'}>
-          <CardCVCInput cardCVCRef={refs.cardCVCRef} onComplete={onCardCVCComplete} />
+          <CardCVCInput cardCVCRef={refs.cardCVCRef} onCardCVCComplete={onCardCVCComplete} />
         </CardSection>
       )}
       {currentStep >= 4 && (

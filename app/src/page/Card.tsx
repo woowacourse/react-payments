@@ -5,41 +5,36 @@ import { CardContext } from '../context/CardContext.ts';
 import { useCardForm } from '../hooks/useCardForm.ts';
 
 export function Card() {
-  const {
-    cardCompany,
-    cardNumber,
-    cardExpiryDate,
-    cardCVC,
-    cardPassword,
-    isFormComplete,
-    networkBrand,
-    setCardCompany,
-    setCardNumber,
-    setCardExpiryDate,
-    setCardCVC,
-    setCardPassword,
-  } = useCardForm();
+  const cardForm = useCardForm();
 
   return (
     <CardContext
       value={{
-        cardNumber,
-        cardExpiryDate,
-        cardCompany,
-        cardCVC,
-        cardPassword,
-        isFormComplete,
-        networkBrand,
-        setCardNumber,
-        setCardExpiryDate,
-        setCardCompany,
-        setCardCVC,
-        setCardPassword,
+        cardNumber: cardForm.cardNumber,
+        cardExpiryDate: cardForm.cardExpiryDate,
+        cardCompany: cardForm.cardCompany,
+        cardCVC: cardForm.cardCVC,
+        cardPassword: cardForm.cardPassword,
+        networkBrand: cardForm.networkBrand,
+        setCardNumber: cardForm.setCardNumber,
+        setCardExpiryDate: cardForm.setCardExpiryDate,
+        setCardCompany: cardForm.setCardCompany,
+        setCardCVC: cardForm.setCardCVC,
+        setCardPassword: cardForm.setCardPassword,
       }}
     >
       <CardContainer>
         <CardPreview />
-        <CardForm />
+        <CardForm
+          refs={cardForm.refs}
+          currentStep={cardForm.currentStep}
+          isFormComplete={cardForm.isFormComplete}
+          onCardNumberComplete={cardForm.onCardNumberComplete}
+          onCardCompanySelected={cardForm.onCardCompanySelected}
+          onCardExpiryDateComplete={cardForm.onCardExpiryDateComplete}
+          onCardCVCComplete={cardForm.onCardCVCComplete}
+          handleFormSubmit={cardForm.handleFormSubmit}
+        />
       </CardContainer>
     </CardContext>
   );
