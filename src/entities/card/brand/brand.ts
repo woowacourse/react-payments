@@ -21,7 +21,7 @@ const isInRange = (str: string, min: number, max: number): boolean => {
   return Number(str) >= min && Number(str) <= max;
 };
 
-export const RULES: Record<Brand, BrandConfig> = {
+export const BRAND_RULES: Record<Brand, BrandConfig> = {
   VISA: {
     format: [4, 4, 4, 4],
     length: 16,
@@ -59,7 +59,7 @@ export const RULES: Record<Brand, BrandConfig> = {
 };
 
 export const getBrand = (cardNumber: string): Brand => {
-  const rulesEntries = Object.entries(RULES) as [Brand, BrandConfig][];
+  const rulesEntries = Object.entries(BRAND_RULES) as [Brand, BrandConfig][];
 
   for (const [brand, config] of rulesEntries) {
     if (config.isMatch.some((match) => match(cardNumber))) {

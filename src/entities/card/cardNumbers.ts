@@ -1,4 +1,4 @@
-import { BRAND, getBrand, RULES } from './brand/brand';
+import { BRAND, getBrand, BRAND_RULES } from './brand/brand';
 
 export const CARD_NUMBER_ERRORS = {
   TYPE: '숫자만 입력 가능합니다.',
@@ -9,7 +9,7 @@ export const CARD_NUMBER_ERRORS = {
 export const validateFullCardNumber = (fullCardNumber: string): string | undefined => {
   const brand = getBrand(fullCardNumber);
   if (brand === BRAND.UNKNOWN) return CARD_NUMBER_ERRORS.UNKNOWN;
-  if (fullCardNumber.length !== RULES[brand].length) return CARD_NUMBER_ERRORS.UNKNOWN;
+  if (fullCardNumber.length !== BRAND_RULES[brand].length) return CARD_NUMBER_ERRORS.UNKNOWN;
   return undefined;
 };
 

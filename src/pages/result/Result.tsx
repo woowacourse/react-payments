@@ -2,16 +2,20 @@ import styles from './Result.module.css';
 import CheckSvg from '@/core/assets/Check.svg?react';
 
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
-import { BANK_CONFIG } from '@/entities/card/bank/bank';
-import type { CardInfo } from '@/features/cardPreview/CardPreview';
+import { type Bank, BANK_RULES } from '@/entities/card/bank/bank';
+
+interface ResultState {
+  cardNumbers: string[];
+  bank: Bank;
+}
 
 export const Result = () => {
   const navigate = useNavigate();
-  const { state } = useLocation() as { state: CardInfo };
+  const { state } = useLocation() as { state: ResultState };
   if (!state) return <Navigate to="/" replace />;
 
   const firstFour = state.cardNumbers[0];
-  const bankLabel = BANK_CONFIG[state.bank].label;
+  const bankLabel = BANK_RULES[state.bank].label;
 
   return (
     <div className={styles.wrapper}>

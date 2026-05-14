@@ -1,6 +1,6 @@
 import { useInputFocus } from '@/core/hooks/useInputFocus';
 import { isNumericString } from '@/core/utils/validator';
-import { BRAND, getBrand, RULES, type Brand } from '@/entities/card/brand/brand';
+import { BRAND, getBrand, BRAND_RULES, type Brand } from '@/entities/card/brand/brand';
 import {
   CARD_NUMBER_ERRORS,
   validateCardNumber,
@@ -32,7 +32,7 @@ export const useCardNumbers = ({ onComplete }: UseCardNumbersProps): UseCardNumb
   const brandCardStand =
     cardNumbers[0].length !== 4 ? cardNumbers[0] : cardNumbers[0] + cardNumbers[1];
   const brand = getBrand(brandCardStand);
-  const format = RULES[brand].format;
+  const format = BRAND_RULES[brand].format;
 
   const errors = cardNumbers.map((cardNumber, idx) => validateCardNumber(cardNumber, format[idx]));
 
@@ -68,7 +68,7 @@ export const useCardNumbers = ({ onComplete }: UseCardNumbersProps): UseCardNumb
     next[index] = inputValue;
     const nextBrand = getBrand(next[0]);
 
-    if (index !== 3) next[3] = next[3].slice(0, RULES[nextBrand].format[3]);
+    if (index !== 3) next[3] = next[3].slice(0, BRAND_RULES[nextBrand].format[3]);
     setCardNumbers(next);
 
     if (validateFullCardNumber(next.join('')) === undefined) onComplete();
