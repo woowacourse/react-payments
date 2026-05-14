@@ -15,7 +15,8 @@ import { useState, type ComponentProps } from "react";
 import { validateCardForm } from "@/utils/validator";
 import useFormStep from "@/hooks/useFormStep";
 import { ADD_CARD_FORM_STEP } from "@/constants/addCardForm";
-import useCardNavigation from "@/hooks/useCardNavigation";
+import { useNavigate } from "react-router";
+import { ROUTE_PATH } from "@/constants/routes";
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
@@ -32,7 +33,7 @@ const AddNewCardPage = () => {
     "CARD_NUMBER",
   );
 
-  const { goToAddCardCompletePage } = useCardNavigation();
+  const navigate = useNavigate();
 
   const isFormValid = validateCardForm(
     cardNumber,
@@ -45,9 +46,11 @@ const AddNewCardPage = () => {
   const handleCardFormSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
     event.preventDefault();
 
-    goToAddCardCompletePage({
-      cardNumberPrefix: cardNumber[0],
-      cardCompanyName: cardCompany?.name ?? "",
+    navigate(ROUTE_PATH.ADD_CARD_COMPLETE, {
+      state: {
+        cardNumberPrefix: cardNumber[0],
+        cardCompanyName: cardCompany?.name ?? "",
+      },
     });
   };
 

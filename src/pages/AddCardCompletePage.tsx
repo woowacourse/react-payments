@@ -2,8 +2,8 @@ import completeCheckImage from "@assets/completeCheckImage.png";
 import Button from "@/components/common/Button";
 import styled from "@emotion/styled";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
-import { useLocation } from "react-router";
-import useCardNavigation from "@/hooks/useCardNavigation";
+import { useLocation, useNavigate } from "react-router";
+import { ROUTE_PATH } from "@/constants/routes";
 
 export type AddCardCompletePageState = {
   cardNumberPrefix: string;
@@ -11,7 +11,7 @@ export type AddCardCompletePageState = {
 };
 
 const AddCardCompletePage = () => {
-  const { goToAddCardPage } = useCardNavigation();
+  const navigate = useNavigate();
   const { state } = useLocation();
 
   const { cardNumberPrefix, cardCompanyName } =
@@ -25,7 +25,7 @@ const AddCardCompletePage = () => {
         <br />
         {cardCompanyName}가 등록되었어요.
       </CompleteTitle>
-      <Button onClick={goToAddCardPage}>확인</Button>
+      <Button onClick={() => navigate(ROUTE_PATH.ADD_CARD)}>확인</Button>
     </PageWrapper>
   );
 };
