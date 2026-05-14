@@ -16,16 +16,14 @@ const CardCVCInputField = ({ onComplete }: CardCVCInputFieldProps) => {
   const status = getValue("CVCStatus");
 
   const handleCVCChange = (input: string) => {
-    if (input.length !== 0)
-      if (!checkIsInt(+input) || !validateCVCRange(+input)) {
-        return setValue("CVCStatus", "error");
-      }
+    const isInvalid =
+      input.length !== 0 && (!checkIsInt(+input) || !validateCVCRange(+input));
+    const nextStatus = isInvalid ? "error" : "default";
 
-    setValue("CVCStatus", "default");
-
+    setValue("CVCStatus", nextStatus);
     setValue("CVC", input.slice(0, CVC_MAX_LENGTH));
 
-    if (input.length === CVC_MAX_LENGTH && status !== "error") {
+    if (input.length === CVC_MAX_LENGTH && nextStatus !== "error") {
       onComplete?.();
     }
   };
