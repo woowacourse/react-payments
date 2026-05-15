@@ -99,3 +99,23 @@ export const getNumberPlaceholder = (index: number, totalLength: number) => {
   if (totalLength === 3 && index === 1) return "123456";
   return "1234";
 }
+
+export const isCardNumberCorrect = (cardNumber: string): boolean => {
+  return getCardBrand(cardNumber) !== 'Unknown';
+}
+
+export const isExpirationDateCorrect = (expirationDate: string) => {
+  if (!expirationDate || !expirationDate.includes('/')) return false;
+  const [month, year] = expirationDate.split('/');
+
+  if (month.length !== 2 || year.length !== 2) return false;
+
+  const isMonthValid = getMonthError(month) === '';
+  const isYearValid = getYearError(year) === '';
+
+  return isMonthValid && isYearValid;
+}
+
+export const isCvcCorrect = (cvc: string): boolean => {
+  return cvc !== '000';
+}

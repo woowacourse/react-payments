@@ -1,12 +1,13 @@
 import { http, HttpResponse } from 'msw';
+import { isCardNumberCorrect, isCvcCorrect, isExpirationDateCorrect } from '../utils/Validation';
 
 export const handlers = [
   http.post('/cards', async ({ request }) => {
-    const requestDetail = await request.json();
+    const requestDetail = (await request.json()) as Record<string, string>;
     const { number, expirationDate, cvc } = requestDetail;
 
     // 카드 번호 에러 처리, 카드 브랜드 에러 처리
-    if (isCardNumberIncorrect(number) || isCardBrandIncorrect(number)) {
+    if (!isCardNumberCorrect(number)) {
       return HttpResponse.json(
         {
           code: 'INVALID_CARD_NUMBER',
@@ -17,7 +18,7 @@ export const handlers = [
     }
 
     // 유효기간 에러 처리
-    if (isExpirationDateIncorrect(expirationDate)) {
+    if (!isExpirationDateCorrect(expirationDate)) {
       return HttpResponse.json(
         {
           code: 'INVALID_EXPIRATION_DATE',
@@ -28,7 +29,7 @@ export const handlers = [
     }
 
     // CVC 에러 처리
-    if (isCvcIncorrect(cvc)) {
+    if (!isCvcCorrect(cvc)) {
       return HttpResponse.json(
         {
           code: 'INVALID_CVC',
@@ -48,7 +49,7 @@ export const handlers = [
           id: '550e8400-e29b-41d4-a716-446655440000',
           issuerCode: '31',
           number: '411111******1111',
-          expirationDate: 12/12,
+          expirationDate: '12/12',
         },
       ],
       { status: 200 },
