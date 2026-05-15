@@ -26,12 +26,3 @@ export const validateYearRange = (year: number) => {
   );
 };
 
-// TODO: 도메인이 있는 로직을 사용하는 곳으로 옮기기
-
-export const validateCVCRange = (CVC: number) => {
-  return validateRange(CVC, 0, 999);
-};
-
-export const validatePasswordRange = (password: number) => {
-  return validateRange(password, 0, 99);
-};

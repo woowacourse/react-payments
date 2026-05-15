@@ -1,5 +1,6 @@
 import InputField from "@/components/common/InputField";
-import { checkIsInt, validateCVCRange } from "@/utils/validator";
+import { checkIsInt } from "@/utils/validator";
+import { validateCVCRange } from "./utils";
 import { useFormValue } from "../../formContext";
 
 
