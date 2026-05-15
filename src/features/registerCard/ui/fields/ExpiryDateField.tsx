@@ -2,13 +2,7 @@ import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
 import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 
-interface ExpiryDateFieldProps {
-  expiryDate: UseExpiryDateResult;
-  setStepRef: (node: HTMLInputElement | null) => void;
-}
-
-export const ExpiryDateField = ({ expiryDate, setStepRef }: ExpiryDateFieldProps) => {
-  const { month, year, setInputRef } = expiryDate;
+export const ExpiryDateField = ({ month, year }: UseExpiryDateResult) => {
   return (
     <Field
       title="카드 유효기간을 입력해 주세요"
@@ -17,10 +11,6 @@ export const ExpiryDateField = ({ expiryDate, setStepRef }: ExpiryDateFieldProps
       errorMessage={month.errorMessage || year.errorMessage}
     >
       <Input
-        ref={(node) => {
-          setStepRef(node);
-          setInputRef(node, 0);
-        }}
         type="text"
         inputMode="numeric"
         value={month.value}
@@ -31,7 +21,6 @@ export const ExpiryDateField = ({ expiryDate, setStepRef }: ExpiryDateFieldProps
         onBlur={() => month.handleBlur()}
       />
       <Input
-        ref={(node) => setInputRef(node, 1)}
         type="text"
         inputMode="numeric"
         value={year.value}

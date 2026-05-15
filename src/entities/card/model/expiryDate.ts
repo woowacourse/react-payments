@@ -18,7 +18,6 @@ const ERROR_MESSAGE = {
   EMPTY: '유효기간을 전부 채워주세요.',
 };
 
-// month
 export const isValidFormatMonth = (month: string): boolean => {
   if (!isValidMonth(month)) return false;
   return true;
