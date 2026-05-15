@@ -126,6 +126,7 @@ const CardNumberInputField = ({
           key={index}
           ref={registerInput(index)}
           placeholder={getCardNumberPlaceholder(maxLength)}
+          inputMode="numeric"
           maxLength={maxLength}
           fullWidth
           value={cardNumberUnits[index]}

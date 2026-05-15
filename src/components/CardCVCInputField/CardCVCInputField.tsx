@@ -52,6 +52,7 @@ const CardCVCInputField = ({
       <Input
         autoFocus
         placeholder="123"
+        inputMode="numeric"
         maxLength={CVC_MAX_LENGTH}
         fullWidth
         value={CVC}

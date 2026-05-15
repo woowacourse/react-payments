@@ -128,6 +128,7 @@ const CardValidityPeriodInputField = ({
         autoFocus
         ref={registerInput(0)}
         placeholder="MM"
+        inputMode="numeric"
         maxLength={MONTH_MAX_LENGTH}
         fullWidth
         value={validityPeriod.month}
@@ -138,6 +139,7 @@ const CardValidityPeriodInputField = ({
       <Input
         ref={registerInput(1)}
         placeholder="YY"
+        inputMode="numeric"
         maxLength={YEAR_MAX_LENGTH}
         fullWidth
         value={validityPeriod.year}

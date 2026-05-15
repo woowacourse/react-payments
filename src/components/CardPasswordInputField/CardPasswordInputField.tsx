@@ -51,6 +51,7 @@ const CardPasswordInputField = ({
         autoFocus
         placeholder="••"
         type="password"
+        inputMode="numeric"
         maxLength={PASSWORD_MAX_LENGTH}
         fullWidth
         value={password}
