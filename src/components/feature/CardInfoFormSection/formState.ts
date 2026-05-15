@@ -38,6 +38,6 @@ export const INITIAL_CARD_INFO_FORM_STATE: CardInfoFormState = {
 
   cardNumberStatus: ["DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT"],
   validityPeriodStatus: { month: "DEFAULT", year: "DEFAULT" },
-  CVCStatus: "default",
-  passwordStatus: "default",
+  CVCStatus: "DEFAULT",
+  passwordStatus: "DEFAULT",
 };

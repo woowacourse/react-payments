@@ -18,15 +18,15 @@ const CardPasswordField = ({ onComplete }: CardPasswordFieldProps) => {
   const handlePasswordChange = (input: string) => {
     if (input.length !== 0) {
       if (!checkIsInt(+input) || !validateCVCRange(+input)) {
-        return setValue("passwordStatus", "error");
+        return setValue("passwordStatus", "ERROR");
       }
     }
 
-    setValue("passwordStatus", "default");
+    setValue("passwordStatus", "DEFAULT");
 
     setValue("password", input.slice(0, PASSWORD_MAX_LENGTH));
 
-    if (input.length === PASSWORD_MAX_LENGTH && status !== "error") {
+    if (input.length === PASSWORD_MAX_LENGTH && status !== "ERROR") {
       onComplete?.();
     }
   };
@@ -36,7 +36,7 @@ const CardPasswordField = ({ onComplete }: CardPasswordFieldProps) => {
       title="비밀번호를 입력해 주세요"
       caption="앞의 2자리를 입력해주세요"
       label="비밀번호 앞 2자리"
-      helperMessage={status === "error" ? "숫자만 입력 가능합니다." : ""}
+      helperMessage={status === "ERROR" ? "숫자만 입력 가능합니다." : ""}
       inputPropsList={[
         {
           key: "password",
@@ -49,7 +49,7 @@ const CardPasswordField = ({ onComplete }: CardPasswordFieldProps) => {
             const input = e.target.value;
             handlePasswordChange(input);
           },
-          state: status,
+          state: status === "ERROR" ? "error" : "default",
           autoFocus: true,
         },
       ]}

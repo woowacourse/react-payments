@@ -1,1 +1,1 @@
-export type PasswordInputStatus = "default" | "error";
+export type PasswordInputStatus = "DEFAULT" | "ERROR";

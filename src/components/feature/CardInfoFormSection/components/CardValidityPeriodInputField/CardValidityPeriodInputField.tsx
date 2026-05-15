@@ -28,7 +28,7 @@ const CardValidityPeriodInputField = ({
     const state = checkCardNumberInputStatus(key, value);
     setValue("validityPeriodStatus", { ...status, [key]: state });
 
-    if (state !== "DEFAULT") return;
+    if (state !== "DEFAULT" && state !== "SUCCESS") return;
 
     const formattedValue = formatValidityPeriod(value);
     const next = { ...validityPeriod, [key]: formattedValue };
@@ -84,7 +84,7 @@ const CardValidityPeriodInputField = ({
           value: validityPeriod.month,
           onChange: (e) => handleValidityPeriodChange("month", e.target.value),
           onBlur: (e) => handleValidityPeriodBlur("month", e.target.value),
-          state: status.month === "DEFAULT" ? "default" : "error",
+          state: status.month === "DEFAULT" || status.month === "SUCCESS" ? "default" : "error",
           autoFocus: true,
         },
         {
@@ -96,7 +96,7 @@ const CardValidityPeriodInputField = ({
           value: validityPeriod.year,
           onChange: (e) => handleValidityPeriodChange("year", e.target.value),
           onBlur: (e) => handleValidityPeriodBlur("year", e.target.value),
-          state: status.year === "DEFAULT" ? "default" : "error",
+          state: status.year === "DEFAULT" || status.year === "SUCCESS" ? "default" : "error",
         },
       ]}
       helperMessage={

@@ -24,6 +24,11 @@ export const checkCardNumberInputStatus = (
     if (value.length === MONTH_MAX_LENGTH && !validateMonthRange(+value)) {
       return "MONTH_RANGE_ERROR";
     }
+
+    if (value.length === MONTH_MAX_LENGTH && validateMonthRange(+value)) {
+      return "SUCCESS";
+    }
+
     return "DEFAULT";
   }
   if (key === "year") {
@@ -31,6 +36,11 @@ export const checkCardNumberInputStatus = (
     if (value.length === YEAR_MAX_LENGTH && !validateYearRange(+value)) {
       return "YEAR_RANGE_ERROR";
     }
+
+    if (value.length === YEAR_MAX_LENGTH && validateYearRange(+value)) {
+      return "SUCCESS";
+    }
+
     return "DEFAULT";
   }
   return "DEFAULT";

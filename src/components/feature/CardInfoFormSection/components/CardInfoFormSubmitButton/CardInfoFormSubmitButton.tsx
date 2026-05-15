@@ -16,10 +16,10 @@ const CardInfoFormSubmitButton = () => {
     return !(
       selectedCardCompany &&
       cardNumberStatus.every((status) => status === "SUCCESS") &&
-      validityPeriodStatus.month === "DEFAULT" &&
-      validityPeriodStatus.year === "DEFAULT" &&
-      CVCStatus === "default" &&
-      passwordStatus === "default"
+      validityPeriodStatus.month === "SUCCESS" &&
+      validityPeriodStatus.year === "SUCCESS" &&
+      CVCStatus === "DEFAULT" &&
+      passwordStatus === "DEFAULT"
     );
   };
 

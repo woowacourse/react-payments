@@ -18,12 +18,12 @@ const CardCVCInputField = ({ onComplete }: CardCVCInputFieldProps) => {
   const handleCVCChange = (input: string) => {
     const isInvalid =
       input.length !== 0 && (!checkIsInt(+input) || !validateCVCRange(+input));
-    const nextStatus = isInvalid ? "error" : "default";
+    const nextStatus = isInvalid ? "ERROR" : "DEFAULT";
 
     setValue("CVCStatus", nextStatus);
     setValue("CVC", input.slice(0, CVC_MAX_LENGTH));
 
-    if (input.length === CVC_MAX_LENGTH && nextStatus !== "error") {
+    if (input.length === CVC_MAX_LENGTH && nextStatus !== "ERROR") {
       onComplete?.();
     }
   };
@@ -32,7 +32,7 @@ const CardCVCInputField = ({ onComplete }: CardCVCInputFieldProps) => {
     <InputField
       title="CVC 번호를 입력해 주세요"
       label="CVC"
-      helperMessage={status === "error" ? "숫자만 입력 가능합니다." : ""}
+      helperMessage={status === "ERROR" ? "숫자만 입력 가능합니다." : ""}
       inputPropsList={[
         {
           key: "cvc",
@@ -44,7 +44,7 @@ const CardCVCInputField = ({ onComplete }: CardCVCInputFieldProps) => {
             const input = e.target.value;
             handleCVCChange(input);
           },
-          state: status,
+          state: status === "ERROR" ? "error" : "default",
           autoFocus: true,
         },
       ]}
