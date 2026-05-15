@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Button from '@/common/components/Button/Button';
 import type {CardResponse} from '@/domain/card/cardApi.types';
 import CardListItem from './CardListItem';
 
@@ -34,14 +35,9 @@ const List = styled.ul`
   gap: 16px;
 `;
 
-const AddCardButton = styled.button`
+const AddCardButton = styled(Button).attrs({variant: 'dashed'})`
   width: 100%;
   height: 40px;
-  color: #8c8c8c;
-  border: 1px dashed #e6e6e6;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: 700;
 `;
 
 export default CardListSuccess;

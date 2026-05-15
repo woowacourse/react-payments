@@ -1,6 +1,7 @@
 import {useNavigate, useLocation, Navigate} from 'react-router-dom';
 import styled from 'styled-components';
 
+import Button from '@/common/components/Button/Button';
 import type {CardRegisterCompleteState} from './routeState.types';
 
 const CardRegisterCompletePage = () => {
@@ -59,21 +60,12 @@ const Message = styled.p`
   margin: 0;
 `;
 
-const ConfirmButton = styled.button`
+const ConfirmButton = styled(Button).attrs({variant: 'primary'})`
   flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 90%;
   height: 42px;
   padding: 16px;
-  background-color: #333333;
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
-  border: none;
   border-radius: 6px;
-  cursor: pointer;
 `;
 
 export default CardRegisterCompletePage;

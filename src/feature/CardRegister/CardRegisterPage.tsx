@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Button from '@/common/components/Button/Button';
 import CardPreviewSection from './components/sections/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/sections/InfoInputSection/InfoInputSection';
 
@@ -66,20 +67,10 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled(Button).attrs({variant: 'submit'})`
   flex-shrink: 0;
   width: 100%;
   padding: 16px;
-  background-color: #000;
-  color: #fff;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
 `;
 
 const SubmitErrorMessage = styled.p`

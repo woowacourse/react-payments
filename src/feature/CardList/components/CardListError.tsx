@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import Button from '@/common/components/Button/Button';
+
 type CardListErrorProps = {
   message: string;
   onRetry: () => void;
@@ -50,15 +52,10 @@ const Description = styled.p`
   font-size: 12px;
 `;
 
-const RetryButton = styled.button`
+const RetryButton = styled(Button).attrs({variant: 'primary'})`
   width: 100%;
   height: 44px;
   margin-top: 32px;
-  background-color: #333333;
-  color: #ffffff;
-  border-radius: 5px;
-  font-size: 15px;
-  font-weight: 700;
 `;
 
 export default CardListError;
