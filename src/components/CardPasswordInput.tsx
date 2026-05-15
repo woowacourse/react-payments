@@ -1,4 +1,4 @@
-import type { ChangeEvent } from "react";
+import { forwardRef, type ChangeEvent } from "react";
 import Label from "./Common/Label";
 import Flex from "./Common/Flex";
 import { cardPasswordValidations } from "../utils/validationRules";
@@ -9,24 +9,27 @@ interface CardPasswordInputProps {
   onChange: (value: string) => void;
 }
 
-function CardPasswordInput(props: CardPasswordInputProps) {
-  const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    props.onChange(event.target.value);
-  };
+const CardPasswordInput = forwardRef<HTMLInputElement, CardPasswordInputProps>(
+  function CardPasswordInput(props, ref) {
+    const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
+      props.onChange(event.target.value);
+    };
 
-  return (
-    <Flex direction="column" gap={10}>
-      <Label>비밀번호 앞 2자리</Label>
-      <ValidationInput
-        value={props.value}
-        onChange={handlePassword}
-        type="password"
-        inputMode="numeric"
-        isShowError={true}
-        validations={cardPasswordValidations}
-      />
-    </Flex>
-  );
-}
+    return (
+      <Flex direction="column" gap={10}>
+        <Label>비밀번호 앞 2자리</Label>
+        <ValidationInput
+          ref={ref}
+          value={props.value}
+          onChange={handlePassword}
+          type="password"
+          inputMode="numeric"
+          isShowError={true}
+          validations={cardPasswordValidations}
+        />
+      </Flex>
+    );
+  }
+);
 
 export default CardPasswordInput;

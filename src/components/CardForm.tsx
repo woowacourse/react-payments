@@ -47,24 +47,34 @@ function CardForm(props: CardFormProps) {
   const cvcRef = useRef<HTMLDivElement>(null);
   const passwordRef = useRef<HTMLDivElement>(null);
 
+  const expiryInputRef = useRef<HTMLInputElement>(null);
+  const cvcInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (isCardNumberComplete)
       cardCompanyRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [isCardNumberComplete]);
 
   useEffect(() => {
-    if (isCardCompanySelected)
+    if (isCardCompanySelected) {
       expiryRef.current?.scrollIntoView({ behavior: "smooth" });
+      expiryInputRef.current?.focus();
+    }
   }, [isCardCompanySelected]);
 
   useEffect(() => {
-    if (isExpiryComplete)
+    if (isExpiryComplete) {
       cvcRef.current?.scrollIntoView({ behavior: "smooth" });
+      cvcInputRef.current?.focus();
+    }
   }, [isExpiryComplete]);
 
   useEffect(() => {
-    if (isCvcComplete)
+    if (isCvcComplete) {
       passwordRef.current?.scrollIntoView({ behavior: "smooth" });
+      passwordInputRef.current?.focus();
+    }
   }, [isCvcComplete]);
 
   return (
@@ -78,6 +88,7 @@ function CardForm(props: CardFormProps) {
                 <Description>앞의 2자리를 입력해주세요</Description>
               </Flex>
               <CardPasswordInput
+                ref={passwordInputRef}
                 value={props.formState.cardPassword}
                 onChange={(value: string) =>
                   props.setFormState({
@@ -97,6 +108,7 @@ function CardForm(props: CardFormProps) {
                 <Title>CVC 번호를 입력해 주세요</Title>
               </Flex>
               <CardCVCInput
+                ref={cvcInputRef}
                 value={props.formState.cvc}
                 onChange={(value: string) =>
                   props.setFormState({ ...props.formState, cvc: value })
@@ -116,6 +128,7 @@ function CardForm(props: CardFormProps) {
                 </Description>
               </Flex>
               <CardExpiryDateInput
+                ref={expiryInputRef}
                 value={{
                   expiryMonth: props.formState.expiryMonth,
                   expiryYear: props.formState.expiryYear,
