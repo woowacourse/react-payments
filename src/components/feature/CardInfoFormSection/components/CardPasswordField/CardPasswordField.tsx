@@ -16,17 +16,18 @@ const CardPasswordField = ({ onComplete }: CardPasswordFieldProps) => {
   const status = getValue("passwordStatus");
 
   const handlePasswordChange = (input: string) => {
-    if (input.length !== 0) {
-      if (!checkIsInt(+input) || !validateCVCRange(+input)) {
-        return setValue("passwordStatus", "ERROR");
-      }
+    if (input.length !== 0 && (!checkIsInt(+input) || !validateCVCRange(+input))) {
+      setValue("passwordStatus", "ERROR");
+      return;
     }
 
-    setValue("passwordStatus", "DEFAULT");
+    const isComplete = input.length === PASSWORD_MAX_LENGTH;
+    const nextStatus = isComplete ? "SUCCESS" : "DEFAULT";
 
+    setValue("passwordStatus", nextStatus);
     setValue("password", input.slice(0, PASSWORD_MAX_LENGTH));
 
-    if (input.length === PASSWORD_MAX_LENGTH && status !== "ERROR") {
+    if (isComplete) {
       onComplete?.();
     }
   };

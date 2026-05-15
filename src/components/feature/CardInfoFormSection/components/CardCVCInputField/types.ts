@@ -1,1 +1,1 @@
-export type CVCInputStatus = "DEFAULT" | "ERROR";
+export type CVCInputStatus = "DEFAULT" | "SUCCESS" | "ERROR";

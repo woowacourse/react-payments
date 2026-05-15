@@ -18,8 +18,8 @@ const CardInfoFormSubmitButton = () => {
       cardNumberStatus.every((status) => status === "SUCCESS") &&
       validityPeriodStatus.month === "SUCCESS" &&
       validityPeriodStatus.year === "SUCCESS" &&
-      CVCStatus === "DEFAULT" &&
-      passwordStatus === "DEFAULT"
+      CVCStatus === "SUCCESS" &&
+      passwordStatus === "SUCCESS"
     );
   };
 

@@ -18,12 +18,13 @@ const CardCVCInputField = ({ onComplete }: CardCVCInputFieldProps) => {
   const handleCVCChange = (input: string) => {
     const isInvalid =
       input.length !== 0 && (!checkIsInt(+input) || !validateCVCRange(+input));
-    const nextStatus = isInvalid ? "ERROR" : "DEFAULT";
+    const isComplete = input.length === CVC_MAX_LENGTH;
+    const nextStatus = isInvalid ? "ERROR" : isComplete ? "SUCCESS" : "DEFAULT";
 
     setValue("CVCStatus", nextStatus);
     setValue("CVC", input.slice(0, CVC_MAX_LENGTH));
 
-    if (input.length === CVC_MAX_LENGTH && nextStatus !== "ERROR") {
+    if (isComplete && nextStatus === "SUCCESS") {
       onComplete?.();
     }
   };
