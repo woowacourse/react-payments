@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
 import type { CardCompany } from "@/constants/cardCompanies";
 import FormField from "@components/common/FormField";
-import type { AddCardFormStepKey } from "@/constants/addCardForm";
+import type { AddCardFormStepKey } from "@/constants/cardForm";
 
 interface CardCompanySelectorProps {
   cardCompany: CardCompany | null;

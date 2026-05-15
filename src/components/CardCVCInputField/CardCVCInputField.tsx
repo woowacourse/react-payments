@@ -3,7 +3,7 @@ import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
 import { useState } from "react";
 import { checkIsOnlyDigits, checkLengthMatches } from "@/utils/validator";
-import type { AddCardFormStepKey } from "@/constants/addCardForm";
+import type { AddCardFormStepKey } from "@/constants/cardForm";
 
 interface CardCVCInputFieldProps {
   CVC: string;

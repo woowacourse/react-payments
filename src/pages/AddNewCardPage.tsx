@@ -14,7 +14,7 @@ import styled from "@emotion/styled";
 import { useState, type ComponentProps } from "react";
 import { validateCardForm } from "@/utils/validator";
 import useFormStep from "@/hooks/useFormStep";
-import { ADD_CARD_FORM_STEP } from "@/constants/addCardForm";
+import { ADD_CARD_FORM_STEP } from "@/constants/cardForm";
 import { useNavigate } from "react-router";
 import { ROUTE_PATH } from "@/constants/routes";
 

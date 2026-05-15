@@ -44,7 +44,7 @@ const Title = styled.h2`
 const Caption = styled.p`
   font-weight: 400;
   font-size: 0.6rem;
-  color: ${COLOR_PALETTE.CAPTION};
+  color: ${COLOR_PALETTE["GREY-500"]}};
   margin-top: 0.25rem;
 `;
 

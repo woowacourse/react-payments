@@ -15,7 +15,7 @@ import {
 import useInputFocus from "@/hooks/useInputFocus";
 import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
-import type { AddCardFormStepKey } from "@/constants/addCardForm";
+import type { AddCardFormStepKey } from "@/constants/cardForm";
 
 export type CardNumberUnits = string[];
 export type CardNumberFormat = number[];
