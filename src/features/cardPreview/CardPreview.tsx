@@ -1,10 +1,10 @@
 import styles from './CardPreview.module.css';
-import bankStyles from '@/entities/card/bank/bank.module.css';
+import bankStyles from '@/entities/card/config/bank.module.css';
 
-import { BRAND_RULES, type Brand } from '@/entities/card/brand/brand';
-import type { ExpiryDate } from '@/entities/card/expiryDate';
-import { BANK_RULES, type Bank } from '@/entities/card/bank/bank';
-import { BRAND_SVG_MAP } from '@/entities/card/brand/brandSvgMap';
+import type { ExpiryDate } from '@/entities/card/model/expiryDate';
+import { BRAND_RULES, type Brand } from '@/entities/card';
+import { BANK_RULES, type Bank } from '@/entities/card/model/bank';
+import { BRAND_SVG_MAP } from '@/entities/card/config/brandSvgMap';
 
 export interface CardInfo {
   cardNumbers: string[];

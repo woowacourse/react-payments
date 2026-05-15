@@ -2,7 +2,7 @@ import styles from './Result.module.css';
 import CheckSvg from '@/core/assets/Check.svg?react';
 
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
-import { type Bank, BANK_RULES } from '@/entities/card/bank/bank';
+import { type Bank, BANK_RULES } from '@/entities/card/model/bank';
 
 interface ResultState {
   cardNumbers: string[];

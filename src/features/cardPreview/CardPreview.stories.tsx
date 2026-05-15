@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { CardPreview } from './CardPreview';
-import { BRAND } from '@/entities/card/brand/brand';
+import { BRAND } from '@/entities/card/model/brand';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
