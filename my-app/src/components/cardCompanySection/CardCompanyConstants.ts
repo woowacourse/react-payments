@@ -22,3 +22,14 @@ export const CARD_COMPANY_COLORS: Record<CardCompany | 'Default', string> = {
   국민카드: '#6A6056',
   Default: '#333333',
 };
+
+export const ISSUER_CODES: Record<CardCompany, string> = {
+  BC카드: '31',
+  신한카드: '41',
+  카카오뱅크: '15',
+  현대카드: '61',
+  우리카드: 'W1',
+  롯데카드: '71',
+  하나카드: '21',
+  국민카드: '11',
+};

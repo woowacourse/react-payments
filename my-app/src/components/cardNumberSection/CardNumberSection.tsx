@@ -7,9 +7,10 @@ import { getCardBrand, getCardNumberArrayByBrand, getNumberPlaceholder } from '.
 interface Props {
   value: string[];
   setValue: (value: string[]) => void;
+  serverError?: string;
 }
 
-const CardNumberSection = ({ value, setValue }: Props) => {
+const CardNumberSection = ({ value, setValue, serverError }: Props) => {
   const cardNumberIds = useId();
   const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } = useCardNumber({value, setValue});
   const currentBrand = getCardBrand(value.join(''));
@@ -20,7 +21,7 @@ const CardNumberSection = ({ value, setValue }: Props) => {
       title="결제할 카드 번호를 입력해주세요"
       description="본인 명의의 카드만 결제 가능합니다"
       label="카드 번호"
-      errorMessage={finalErrorMessage}
+      errorMessage={serverError || finalErrorMessage}
       htmlFor={`${cardNumberIds}-0`}
     >
       {format.map((maxLength, index) => (
