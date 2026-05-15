@@ -2,8 +2,8 @@
 
 1. 카드 리스트 페이지 퍼블리싱
 
-- [ ] layout
-    - [ ] header
+- [x] layout
+    - [x] header
 - [ ] success
     - [ ] card item
         - [ ] 카드사, 카드번호, 유효기간, issuer
