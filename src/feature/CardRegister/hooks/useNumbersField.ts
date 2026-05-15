@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   hasCardNumbersError,
   validateCardNumbers,
@@ -6,6 +6,7 @@ import {
 import { isNumeric, isWithinMaxLength } from '../utils/validator';
 import { getCardNumberSegmentLengths } from '../utils/cardInfo';
 import useTouchedFieldError from './useTouchedFieldError';
+import { useInputRefs } from './useInputRefs';
 
 type UseNumbersFieldParams = {
   onComplete?: () => void;
@@ -26,18 +27,8 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
 
   const isComplete = !hasCardNumbersError(cardNumbers);
 
-  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
-
-  const setInputRef = (index: number) => (element: HTMLInputElement | null) => {
-    inputRefs.current[index] = element;
-  };
-
-  const focusNextInput = (index: number) => {
-    inputRefs.current[index + 1]?.focus();
-  };
-  const focusPreviousInput = (index: number) => {
-    inputRefs.current[index - 1]?.focus();
-  };
+  const { setInputRef, focusNextInput, handleKeyDown } =
+    useInputRefs(cardNumbers);
 
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
@@ -57,18 +48,6 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
 
   const handleNumbersBlur = (index: number) => {
     touch(index);
-  };
-
-  const handleKeyDown = (
-    index: number,
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
-    if (event.key !== 'Backspace') return;
-
-    if (cardNumbers[index] !== '') return;
-    if (index === 0) return;
-
-    focusPreviousInput(index);
   };
 
   return {

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   EXPIRY_LENGTH,
   validateExpiryMonth,
@@ -11,6 +11,7 @@ import {
   isWithinMaxLength,
 } from '../utils/validator';
 import useTouchedFieldError from './useTouchedFieldError';
+import { useInputRefs } from './useInputRefs';
 
 type UseExpiryFieldParams = {
   onComplete?: () => void;
@@ -46,18 +47,10 @@ export const useExpiryField = ({ onComplete }: UseExpiryFieldParams) => {
     }
   };
 
-  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
-
-  const setInputRef = (index: number) => (element: HTMLInputElement | null) => {
-    inputRefs.current[index] = element;
-  };
-
-  const focusNextInput = (index: number) => {
-    inputRefs.current[index + 1]?.focus();
-  };
-  const focusPreviousInput = (index: number) => {
-    inputRefs.current[index - 1]?.focus();
-  };
+  const { setInputRef, focusNextInput, handleKeyDown } = useInputRefs([
+    expiryMonth,
+    expiryYear,
+  ]);
 
   const [monthErrorMessage, setMonthErrorMessage] = useState('');
 
@@ -115,20 +108,6 @@ export const useExpiryField = ({ onComplete }: UseExpiryFieldParams) => {
     }
 
     touch(index);
-  };
-
-  const handleKeyDown = (
-    index: number,
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
-    if (event.key !== 'Backspace') return;
-
-    const values = [expiryMonth, expiryYear];
-
-    if (values[index] !== '') return;
-    if (index === 0) return;
-
-    focusPreviousInput(index);
   };
 
   return {
