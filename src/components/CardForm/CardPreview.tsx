@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import type { CardExpiryDate, CardIssuer, CardNetwork, CardNumberSegments } from '../types';
-import Flex from './Common/Flex';
-import { UNMASKED_CARD_NUMBER_SEGMENT_COUNT } from '../constants';
+import type { CardExpiryDate, CardIssuer, CardNetwork, CardNumberSegments } from '../../types';
+import Flex from '../Common/Flex';
+import { UNMASKED_CARD_NUMBER_SEGMENT_COUNT } from '../../constants';
 
 const CardContainer = styled(Flex)`
   margin: 45px 0;

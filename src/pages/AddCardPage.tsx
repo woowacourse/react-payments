@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import CardForm from '../components/CardForm';
+import CardForm from '../components/CardForm/CardForm';
 import View from '../components/Common/View';
 
 function AddCardPage() {

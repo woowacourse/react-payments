@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
-import CardForm from '../components/CardForm';
+import CardForm from '../components/CardForm/CardForm';
 
 const meta = {
   title: 'Components/CardForm',
