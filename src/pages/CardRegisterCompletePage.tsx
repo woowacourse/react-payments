@@ -1,4 +1,4 @@
-import { SubmitSuccess } from "../components/SubmitSuccess";
+import { SubmitSuccess } from "../components/CardRegisterComplete/SubmitSuccess";
 import type { CardFormState } from "../types";
 
 interface CardRegisterCompletePageProps {

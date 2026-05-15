@@ -1,8 +1,8 @@
 import { forwardRef, type ChangeEvent } from "react";
-import ValidationInput from "./Common/ValidationInput";
-import Flex from "./Common/Flex";
-import Label from "./Common/Label";
-import { cvcValidations } from "../utils/validationRules";
+import Flex from "../Common/Flex";
+import Label from "../Common/Label";
+import ValidationInput from "../Common/ValidationInput";
+import { cvcValidations } from "../../utils/validationRules";
 
 interface CardCVCInputProps {
   value: string;
@@ -31,7 +31,7 @@ const CardCVCInput = forwardRef<HTMLInputElement, CardCVCInputProps>(
         />
       </Flex>
     );
-  }
+  },
 );
 
 export default CardCVCInput;

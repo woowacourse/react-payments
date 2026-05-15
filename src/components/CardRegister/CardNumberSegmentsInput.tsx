@@ -1,13 +1,17 @@
 import { useRef, type ChangeEvent } from "react";
-import ValidationInput from "./Common/ValidationInput";
-import type { CardBrand, CardNumberSegments } from "../types";
-import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS } from "../types";
-import Flex from "./Common/Flex";
-import Label from "./Common/Label";
+import {
+  CARD_BRAND_CONFIGS,
+  DEFAULT_SEGMENT_LENGTHS,
+  type CardBrand,
+  type CardNumberSegments,
+} from "../../types";
+import Flex from "../Common/Flex";
+import Label from "../Common/Label";
+import ValidationInput from "../Common/ValidationInput";
 import {
   numberSegmentValidations,
   numericOnlyValidations,
-} from "../utils/validationRules";
+} from "../../utils/validationRules";
 
 interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;

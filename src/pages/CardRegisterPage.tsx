@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import CardForm from "../components/CardForm";
-import CardPreview from "../components/CardPreview";
-import { SubmitButton } from "../components/SubmitButton";
+import CardForm from "../components/CardRegister/CardForm";
+import CardPreview from "../components/CardRegister/CardPreview";
+import { SubmitButton } from "../components/CardRegisterComplete/SubmitButton";
 import { isCardFormComplete } from "../utils/validators";
 import type { CardBrand, CardFormState } from "../types";
 

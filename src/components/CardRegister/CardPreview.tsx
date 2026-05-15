@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import type { CardBrand, CardNumberSegments } from "../types";
-import Flex from "./Common/Flex";
+import Flex from "../Common/Flex";
+import type { CardBrand, CardNumberSegments } from "../../types";
 
 const CardContainer = styled(Flex)`
   margin: 45px 0;

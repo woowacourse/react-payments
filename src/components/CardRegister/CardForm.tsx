@@ -1,13 +1,18 @@
 import { forwardRef, useEffect, useRef, type ReactNode } from "react";
 import CardCVCInput from "./CardCVCInput";
 import CardNumberSegmentsInput from "./CardNumberSegmentsInput";
-import Flex from "./Common/Flex";
 import styled from "@emotion/styled";
 import CardExpiryDateInput from "./CardExpiryDateInput";
-import type { CardBrand, CardFormState, CardNumberSegments } from "../types";
-import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS } from "../types";
 import { CardCompany } from "./CardCompany";
 import CardPasswordInput from "./CardPasswordInput";
+import Flex from "../Common/Flex";
+import {
+  CARD_BRAND_CONFIGS,
+  DEFAULT_SEGMENT_LENGTHS,
+  type CardBrand,
+  type CardFormState,
+  type CardNumberSegments,
+} from "../../types";
 
 const Title = styled.h3`
   font-size: 18px;
@@ -42,7 +47,7 @@ const FormSection = forwardRef<HTMLDivElement, FormSectionProps>(
         </Flex>
       </div>
     );
-  }
+  },
 );
 
 interface CardFormProps {

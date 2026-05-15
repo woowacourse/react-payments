@@ -1,8 +1,8 @@
 import { forwardRef, type ChangeEvent } from "react";
-import Label from "./Common/Label";
-import Flex from "./Common/Flex";
-import { cardPasswordValidations } from "../utils/validationRules";
-import ValidationInput from "./Common/ValidationInput";
+import Flex from "../Common/Flex";
+import Label from "../Common/Label";
+import ValidationInput from "../Common/ValidationInput";
+import { cardPasswordValidations } from "../../utils/validationRules";
 
 interface CardPasswordInputProps {
   value: string;
@@ -29,7 +29,7 @@ const CardPasswordInput = forwardRef<HTMLInputElement, CardPasswordInputProps>(
         />
       </Flex>
     );
-  }
+  },
 );
 
 export default CardPasswordInput;
