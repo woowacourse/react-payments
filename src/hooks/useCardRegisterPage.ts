@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { getCardBrand } from "../utils/getCardBrand";
 import { getCardNumberErrorMessage } from "../utils/getCardNumberErrorMessage";
 import { getExpNumberErrorMessage } from "../utils/getExpNumberErrorMessage";
 import { getCvcNumberErrorMessage } from "../utils/getCvcNumberErrorMessage";
 import { getPasswordErrorMessage } from "../utils/getPasswordErrorMessage";
-import type { CardNumbers } from "./useCardNumberField";
-import type { ExpNumber } from "./useExpNumberField";
+
+import type { CardNumbers } from "../components/InputField/CardNumberField";
+import type { ExpNumber } from "../components/InputField/ExpNumberField";
+
 export default function useCardRegisterPage() {
   const [cardNumbers, setCardNumbers] = useState({
     first: "",

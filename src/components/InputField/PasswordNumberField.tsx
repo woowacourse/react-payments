@@ -1,6 +1,8 @@
 import NumberInput from "../Input/NumberInput";
 import InputGroup from "./InputGroup";
-import usePasswordNumberField from "../../hooks/usePasswordNumberField";
+
+import { useState } from "react";
+import { getPasswordErrorMessage } from "../../utils/getPasswordErrorMessage";
 
 interface Props {
   onChange: (value: string) => void;
@@ -8,8 +10,16 @@ interface Props {
 }
 
 export default function PasswordNumberField({ onChange, value }: Props) {
-  const { inputError, setInputError, handleOnChange, handleOnBlur } =
-    usePasswordNumberField(onChange, value);
+  const [inputError, setInputError] = useState<string | null>(null);
+  const handleOnChange = (newValue: string) => {
+    setInputError(null);
+    onChange(newValue);
+  };
+
+  const handleOnBlur = () => {
+    setInputError(getPasswordErrorMessage(value));
+  };
+
   return (
     <InputGroup errorMessage={inputError}>
       <NumberInput
