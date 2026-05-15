@@ -8,50 +8,20 @@ import {useCvcNumber} from './useCvcNumber';
 import {useCardPassword} from './useCardPassword';
 
 import {createCard} from '@/api/cardsApi';
-import type {CardErrorResponse, CreateCardRequest} from '@/domain/card/cardApi.types';
-import {CARD_COMPANIES} from '@/domain/card/cardCompany';
+import type {CardErrorResponse} from '@/domain/card/cardApi.types';
 import type {CardRegisterInputProps, ExpiryInputProps} from '../../components/inputs/shared.types';
+import {createCardRequest} from '../../utils/createCardRequest';
+import {
+  createEmptyServerFieldErrors,
+  focusServerErrorField,
+  getServerFieldName,
+} from '../../utils/serverFieldErrorUtils';
+import type {ServerFieldName} from '../../utils/serverFieldErrorUtils';
 
 const generateNumberPlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
 const SUBMIT_ERROR_MESSAGE = '카드 정보를 다시 확인해 주세요';
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
-
-type ServerFieldErrors = {
-  cardNumbers: string;
-  cardCompany: string;
-  cardExpiryDate: string;
-  cardCvc: string;
-};
-
-const createEmptyServerFieldErrors = (): ServerFieldErrors => ({
-  cardNumbers: '',
-  cardCompany: '',
-  cardExpiryDate: '',
-  cardCvc: '',
-});
-
-const getServerFieldName = (code?: string): keyof ServerFieldErrors | null => {
-  if (code === 'INVALID_CARD_NUMBER') return 'cardNumbers';
-  if (code === 'INVALID_CVC') return 'cardCvc';
-  if (code === 'INVALID_EXPIRATION_DATE') return 'cardExpiryDate';
-  if (code === 'INVALID_ISSUER_CODE') return 'cardCompany';
-
-  return null;
-};
-
-const ERROR_FIELD_INPUT_IDS: Record<keyof ServerFieldErrors, string> = {
-  cardNumbers: 'card-number-0',
-  cardCompany: 'card-company',
-  cardExpiryDate: 'card-expiry-month',
-  cardCvc: 'card-cvc',
-};
-
-const focusErrorField = (fieldName: keyof ServerFieldErrors) => {
-  window.requestAnimationFrame(() => {
-    document.getElementById(ERROR_FIELD_INPUT_IDS[fieldName])?.focus();
-  });
-};
 
 export function useCardRegisterForm() {
   const navigate = useNavigate();
@@ -86,19 +56,12 @@ export function useCardRegisterForm() {
     cvcField.isComplete &&
     passwordField.isComplete;
 
-  const clearServerFieldError = (fieldName: keyof ServerFieldErrors) => {
+  const clearServerFieldError = (fieldName: ServerFieldName) => {
     setServerFieldErrors((prev) => ({
       ...prev,
       [fieldName]: '',
     }));
   };
-
-  const createCardRequest = (selectedCompany: NonNullable<typeof companyField.selectedCompany>): CreateCardRequest => ({
-    number: numberField.cardNumbers.join(''),
-    expirationDate: `${expiryField.expiryDate[0]}/${expiryField.expiryDate[1]}`,
-    cvc: cvcField.cvcNumber,
-    issuerCode: CARD_COMPANIES[selectedCompany].issuerCode,
-  });
 
   const getNumberInputProps = (): CardRegisterInputProps[] =>
     numberField.format.map((maxLength, index) => ({
@@ -174,7 +137,14 @@ export function useCardRegisterForm() {
     setServerFieldErrors(createEmptyServerFieldErrors());
 
     try {
-      await createCard(createCardRequest(selectedCompany));
+      await createCard(
+        createCardRequest({
+          cardNumbers: numberField.cardNumbers,
+          expiryDate: expiryField.expiryDate,
+          cvcNumber: cvcField.cvcNumber,
+          selectedCompany,
+        })
+      );
       setSubmitStatus('success');
       navigate('/cards');
     } catch (error) {
@@ -192,7 +162,7 @@ export function useCardRegisterForm() {
         ...prev,
         [fieldName]: cardError.message,
       }));
-      focusErrorField(fieldName);
+      focusServerErrorField(fieldName);
     }
   };
 
