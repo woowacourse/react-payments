@@ -3,7 +3,7 @@ import styles from './CardForm.module.css';
 import { CvcField } from '@/features/registerCard/ui/fields/CvcField';
 import { NumberField } from '@/features/registerCard/ui/fields/NumberField';
 import type { UseNumbersResults } from '../../hooks/useNumbers';
-import type { FieldControl } from '../fields/types';
+import type { FieldControl } from '../../model/payments';
 import { PasswordField } from '../fields/PasswordField';
 import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 import { ExpiryDateField } from '../fields/ExpiryDateField';
@@ -17,6 +17,8 @@ export interface CardFormProps {
   bankField: BankFieldControl;
   cvcField: FieldControl;
   passwordField: FieldControl;
+  formId: string;
+  handleSubmit: (e: React.FormEvent) => void;
 }
 
 export const CardForm = ({
@@ -25,11 +27,13 @@ export const CardForm = ({
   bankField,
   cvcField,
   passwordField,
+  formId,
+  handleSubmit,
 }: CardFormProps) => {
   const { step, toStep, setStepRef } = usePaymentStep();
 
   return (
-    <form className={styles.form} id="payment-form">
+    <form className={styles.form} id={formId} onSubmit={handleSubmit}>
       {step >= 4 && (
         <PasswordField
           passwordField={passwordField}

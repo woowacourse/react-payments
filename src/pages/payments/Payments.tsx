@@ -8,6 +8,10 @@ import { useExpiryDate } from '@/features/registerCard/hooks/useExpiryDate';
 import { CardPreview } from '@/features/cardPreview/CardPreview';
 import type { CardInfo } from '@/features/cardPreview/CardPreview';
 import type { Bank } from '@/entities/card/model/bank';
+import { SubmitButton } from '@/features/registerCard/ui/submitButton/SubmitButton';
+import { useNavigate } from 'react-router-dom';
+import { validateFieldData } from '@/features/registerCard/lib/validateFieldData';
+import { FORM_ID, type FieldData } from '@/features/registerCard/model/payments';
 
 export type FocusElement = HTMLInputElement | HTMLSelectElement | null;
 
@@ -45,11 +49,33 @@ export const Payments = () => {
     },
   };
 
+  const fieldData: FieldData = {
+    numbers: numbersField.values.join(''),
+    month: expiryField.month.value,
+    year: expiryField.year.value,
+    cvc,
+    password,
+    bank,
+  };
+  const isFormValid = validateFieldData(fieldData);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate('/result', {
+      state: {
+        cardNumbers: numbersField.values,
+        bank: bank,
+      },
+    });
+  };
+
   return (
     <div className={styles.payments}>
       <CardPreview info={cardInfo} />
-      <CardForm {...fields} />
-      {/* {isFormValid && <SubmitButton handleSubmit={handleSubmit} />} */}
+      <CardForm handleSubmit={handleSubmit} formId={FORM_ID} {...fields} />
+      {isFormValid && <SubmitButton formId={FORM_ID} />}
     </div>
   );
 };

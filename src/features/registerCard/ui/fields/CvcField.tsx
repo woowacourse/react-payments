@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { CVC_LENGTH } from '@/entities/card';
 import { getErrorCvc, validateCvc } from '@/entities/card/model/cvc';
 import { isNumericString } from '@/core/utils/validator';
-import type { FieldControl } from './types';
+import type { FieldControl } from '../../model/payments';
 
 interface CvcFieldProps {
   cvcField: FieldControl;
