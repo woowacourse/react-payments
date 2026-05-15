@@ -20,7 +20,8 @@ export default function CvcNumberField({ onChange, value, onComplete }: Props) {
   };
 
   const handleOnBlur = () => {
-    if (value !== "") setInputError(getCvcNumberErrorMessage(value));
+    if (value !== "")
+      setInputError(getCvcNumberErrorMessage(value)?.message ?? null);
   };
 
   return (

@@ -17,7 +17,7 @@ export default function PasswordNumberField({ onChange, value }: Props) {
   };
 
   const handleOnBlur = () => {
-    setInputError(getPasswordErrorMessage(value));
+    setInputError(getPasswordErrorMessage(value)?.message ?? null);
   };
 
   return (
