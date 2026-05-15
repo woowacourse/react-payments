@@ -9,7 +9,7 @@ const CardRegisterCompletePage = () => {
   const state = location.state as CardRegisterCompleteState | null;
 
   // complete 페이지 진입 시 state가 없으면, 메인으로 redirect하고 히스토리를 덮어써서 뒤로가기를 방지함
-  if (!state) return <Navigate to='/' replace />;
+  if (!state) return <Navigate to='/cards' replace />;
 
   return (
     <Wrapper>
@@ -20,7 +20,7 @@ const CardRegisterCompletePage = () => {
           <br />
           {state.companyName}가 등록되었어요.
         </Message>
-        <ConfirmButton onClick={() => navigate('/')}>확인</ConfirmButton>
+        <ConfirmButton onClick={() => navigate('/cards')}>확인</ConfirmButton>
       </Content>
     </Wrapper>
   );
