@@ -13,8 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import { validateFieldData } from '@/features/registerCard/lib/validateFieldData';
 import { FORM_ID, type FieldData } from '@/features/registerCard/model/payments';
 
-export type FocusElement = HTMLInputElement | HTMLSelectElement | null;
-
 export const Payments = () => {
   const numbersField = useNumbers();
   const expiryField = useExpiryDate();
