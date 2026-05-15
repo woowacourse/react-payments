@@ -1,5 +1,5 @@
-import type { CardCompanyId } from '../constant/cardCompanies';
-import { getCardNumberSegmentLengths } from './cardInfo';
+import type { CardCompanyId } from '../../../domain/card/constant/cardCompanies';
+import { getCardNumberSegmentLengths } from '../../../domain/card/utils/cardInfo';
 import { isExactLength, isValidMonth } from './validator';
 
 export const NUMBER_LENGTH = 4;

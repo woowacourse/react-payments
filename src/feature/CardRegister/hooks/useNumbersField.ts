@@ -4,7 +4,7 @@ import {
   validateCardNumbers,
 } from '../utils/cardFormValidator';
 import { isNumeric, isWithinMaxLength } from '../utils/validator';
-import { getCardNumberSegmentLengths } from '../utils/cardInfo';
+import { getCardNumberSegmentLengths } from '../../../domain/card/utils/cardInfo';
 import useTouchedFieldError from './useTouchedFieldError';
 import { useInputRefs } from './useInputRefs';
 

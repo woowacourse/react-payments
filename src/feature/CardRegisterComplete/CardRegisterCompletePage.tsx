@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import Button from '../../common/components/Button';
 import checkIconImg from './assets/Group 54.png';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import type { CardFormInfoType } from '../CardRegister/types/CardPreviewInfoType';
-import { getCardCompanyName } from '../CardRegister/utils/cardDisplay';
+import type { CardFormInfoType } from '../../domain/card/types/card';
+import { getCardCompanyName } from '../../domain/card/utils/cardDisplay';
 
 const CardRegisterCompletePage = () => {
   const location = useLocation();

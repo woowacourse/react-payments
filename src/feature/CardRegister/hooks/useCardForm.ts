@@ -11,7 +11,7 @@ import {
 import type {
   CardFormInfoType,
   CardPreviewInfoType,
-} from '../types/CardPreviewInfoType';
+} from '../../../domain/card/types/card';
 
 export type CardFormFieldsType = {
   numbers: NumbersFieldType;

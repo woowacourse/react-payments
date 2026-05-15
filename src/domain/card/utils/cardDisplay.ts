@@ -1,6 +1,16 @@
 import { CARD_BRANDS, type CardBrandName } from '../constant/cardBrands';
 import { CARD_COMPANIES, type CardCompanyId } from '../constant/cardCompanies';
-import { isPrefixInRange } from './validator';
+
+const isPrefixInRange = (
+  fullNumber: string,
+  digitCount: number,
+  start: number,
+  end: number,
+) => {
+  const prefix = Number(fullNumber.slice(0, digitCount));
+
+  return prefix >= start && prefix <= end;
+};
 
 export const getCardBrandName = (
   cardNumbers: string[],
