@@ -23,6 +23,8 @@ export default defineConfig({
         test: {
           name: 'integration',
           environment: 'jsdom',
+          setupFiles: ['./setupTests.ts'],
+          include: ['tests/**/*.{test,spec}.{ts,tsx}'],
         },
       },
       {
