@@ -39,6 +39,7 @@ export default function CardBrandSelect({
                                 setSelectedValue(option.value);
                                 setIsOpen(false);
                             }}
+                            key={option.value}
                             value={option.value}
                         >
                             {option.label}
