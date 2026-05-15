@@ -1,2 +1,2 @@
-export * from './cvc/useCvc';
-export * from './cvc/model';
+export * from './model/cvc';
+export * from './lib/validatorCvc';
