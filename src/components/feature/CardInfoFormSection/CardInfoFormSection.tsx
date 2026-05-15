@@ -1,6 +1,6 @@
 import StepFunnel from "@components/common/StepFunnel";
 import styled from "@emotion/styled";
-import useFormWrapper from "@hooks/useFormWrapper";
+import useFormWrapper from "@hooks/common/useFormWrapper";
 import { useNavigate } from "react-router";
 
 import CardCompanySelectField from "./components/CardCompanySelectField";
@@ -24,13 +24,9 @@ const CardInfoFormSection = () => {
     const cardNumber = formData.getAll("card-number").join("");
     const cardCompany = (formData.get("card-company") ?? "").toString();
 
-    const params = new URLSearchParams({
-      "card-number": cardNumber,
-      "card-company": cardCompany,
+    navigate("/complete", {
+      state: { cardNumber, cardCompany },
     });
-
-    //TODO: 경로 상수화
-    navigate(`/complete?${params.toString()}`);
   };
 
   return (

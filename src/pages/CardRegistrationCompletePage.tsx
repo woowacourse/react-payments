@@ -3,16 +3,16 @@ import PageWrapper from "@components/common/PageWrapper";
 import GoHomeButton from "@components/feature/GoHomeButton";
 import CARD from "@constants/card";
 import styled from "@emotion/styled";
-import { useSearchParams } from "react-router";
+import { useLocation } from "react-router";
 
 const CARD_COMPANY_LABEL_MAP = Object.fromEntries(
   CARD.COMPANY_SELECT_FIELD.map(({ value, label }) => [value, label]),
 );
 
 const CardRegistrationCompletePage = () => {
-  const [searchParams] = useSearchParams();
-  const cardNumber = searchParams.get("card-number") ?? "";
-  const cardCompany = searchParams.get("card-company") ?? "";
+  const { state } = useLocation();
+  const cardNumber: string = state?.cardNumber ?? "";
+  const cardCompany: string = state?.cardCompany ?? "";
 
   const cardNumberPrefix = cardNumber.slice(0, 4);
   const cardCompanyLabel = CARD_COMPANY_LABEL_MAP[cardCompany] ?? "";
