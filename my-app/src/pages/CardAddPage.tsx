@@ -4,27 +4,24 @@ import ExpirationDateSection from '../components/expirationDateSection/Expiratio
 import CvcSection from '../components/cvcSection/CvcSection';
 import CardCompanySection from '../components/cardCompanySection/CardCompanySection';
 import PasswordSection from '../components/passwordSection/PasswordSection';
-import { useNavigate } from 'react-router-dom';
 import { FormLayout, SubmitButton } from './CardAddPage.styles';
 import { useCardFormState } from './useCardFormState';
 import { useCardFormValidation } from './useCardFormValidation';
+import { useCardSubmit } from './useCardSubmit';
 
 const CardAddPage = () => {
-  const navigate = useNavigate();
   const { formState, setters } = useCardFormState();
   const { isFormValid, canShowSteps } = useCardFormValidation(formState);
+  const { submitCard, status, error } = useCardSubmit();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isFormValid) return;
-    // 라우팅 페이지 연결
-    navigate('/card-add-success', {
-      state: {
-        cardNumberPrefixFourth: formState.cardNumber[0],
-        cardCompany: formState.cardCompany,
-      },
-    });
+
+    await submitCard(formState);
   };
+
+  const serverError = error as unknown as { code: string; message: string; } | null;
 
   return (
     <>
@@ -35,21 +32,22 @@ const CardAddPage = () => {
       />
       <FormLayout onSubmit={handleSubmit}>
         {canShowSteps.canShowPassword && (
-          <PasswordSection value={formState.password} setValue={setters.setPassword} />
+          <PasswordSection value={formState.password} setValue={setters.setPassword}/>
         )}
-        {canShowSteps.canShowCvc && <CvcSection value={formState.cvc} setValue={setters.setCvc} />}
+        {canShowSteps.canShowCvc && <CvcSection value={formState.cvc} setValue={setters.setCvc} serverError={serverError?.code === 'INVALID_CVC' ? serverError.message : ''} />}
         {canShowSteps.canShowExpirationDate && (
           <ExpirationDateSection
             value={formState.expirationDate}
             setValue={setters.setExpirationDate}
+            serverError={serverError?.code === 'INVALID_EXPIRATION_DATE' ? serverError.message : ''}
           />
         )}
         {canShowSteps.canShowCompany && (
           <CardCompanySection value={formState.cardCompany} setValue={setters.setCardCompany} />
         )}
-        <CardNumberSection value={formState.cardNumber} setValue={setters.setCardNumber} />
+        <CardNumberSection value={formState.cardNumber} setValue={setters.setCardNumber} serverError={serverError?.code === 'INVALID_CARD_NUMBER' ? serverError.message : ''}/>
 
-        {isFormValid && <SubmitButton type="submit">확인</SubmitButton>}
+        {isFormValid && <SubmitButton type="submit" disabled={ status==='loading' }>확인</SubmitButton>}
       </FormLayout>
     </>
   );
