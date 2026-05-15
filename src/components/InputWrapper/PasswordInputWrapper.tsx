@@ -3,32 +3,26 @@ import { isNumeric } from '../../utils/isNumeric';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import CardInfoSection from '../CardInfoSection';
+import { useFieldInputState } from '../../hooks/useFieldInputState';
+import { getPasswordErrorMessage } from '../../utils/getPasswordErrorMessage';
+import { isFilledNumeric } from '../../utils/isFilledNumeric';
 
 interface PasswordInputWrapperProps {
-    setPassword: (value: string) => void;
+    setValue: (index: number) => (value: string) => void;
     value: string;
-    handleBlur: () => void;
-    handleFocus: () => void;
-    errorMessage: string | null;
-    setErrorMessage: (errorMessage: string | null) => void;
-    hasTouched: boolean;
-    getRef: (index: number) => (el: HTMLInputElement | null) => void;
-    focusFirst: () => void;
     isRender?: boolean;
 }
 
-export default function PasswordInputWrapper({
-    setPassword,
-    value,
-    handleBlur,
-    handleFocus,
-    errorMessage,
-    setErrorMessage,
-    hasTouched,
-    getRef,
-    focusFirst,
-    isRender,
-}: PasswordInputWrapperProps) {
+export default function PasswordInputWrapper({ setValue, value, isRender }: PasswordInputWrapperProps) {
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
+        useFieldInputState({
+            values: [value],
+            setValue,
+            validator: (values) => getPasswordErrorMessage(values[0]),
+            isFilled: (v) => isFilledNumeric(v, 2),
+            fieldCount: 1,
+        });
+
     useEffect(() => {
         focusFirst();
     }, []);
@@ -44,7 +38,7 @@ export default function PasswordInputWrapper({
                 <CardInfoInput
                     ref={getRef(0)}
                     value={value}
-                    setValue={setPassword}
+                    setValue={handleChange(0)}
                     isError={hasTouched && value.length !== 2}
                     setErrorMessage={setErrorMessage}
                     inputBlock={isNumeric}

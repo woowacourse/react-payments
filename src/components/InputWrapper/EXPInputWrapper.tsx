@@ -4,32 +4,26 @@ import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
 import CardInfoSection from '../CardInfoSection';
+import { useFieldInputState } from '../../hooks/useFieldInputState';
+import { getEXPNumberErrorMessage } from '../../utils/getEXPNumberErrorMessage';
+import { isFilledNumeric } from '../../utils/isFilledNumeric';
 
 interface EXPInputWrapperProps {
-    setEXPNumber: (index: number) => (value: string) => void;
+    setValue: (index: number) => (value: string) => void;
     value: string[];
-    handleBlur: () => void;
-    handleFocus: () => void;
-    errorMessage: string | null;
-    setErrorMessage: (errorMessage: string | null) => void;
-    hasTouched: boolean;
-    getRef: (index: number) => (el: HTMLInputElement | null) => void;
-    focusFirst: () => void;
     isRender?: boolean;
 }
 
-export default function EXPInputWrapper({
-    setEXPNumber,
-    value,
-    handleBlur,
-    handleFocus,
-    errorMessage,
-    setErrorMessage,
-    hasTouched,
-    getRef,
-    focusFirst,
-    isRender,
-}: EXPInputWrapperProps) {
+export default function EXPInputWrapper({ setValue, value, isRender }: EXPInputWrapperProps) {
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
+        useFieldInputState({
+            values: value,
+            setValue,
+            validator: getEXPNumberErrorMessage,
+            isFilled: (v) => isFilledNumeric(v, 2),
+            fieldCount: 2,
+        });
+
     useEffect(() => {
         focusFirst();
     }, []);
@@ -45,7 +39,7 @@ export default function EXPInputWrapper({
                 <CardInfoInput
                     ref={getRef(0)}
                     value={value[0]}
-                    setValue={setEXPNumber(0)}
+                    setValue={handleChange(0)}
                     size="medium"
                     placeholder="MM"
                     inputBlock={isMonthMatch}
@@ -58,7 +52,7 @@ export default function EXPInputWrapper({
                 <CardInfoInput
                     ref={getRef(1)}
                     value={value[1]}
-                    setValue={setEXPNumber(1)}
+                    setValue={handleChange(1)}
                     size="medium"
                     placeholder="YY"
                     inputBlock={isNumeric}

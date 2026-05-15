@@ -3,32 +3,26 @@ import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
 import CardInfoSection from '../CardInfoSection';
+import { useFieldInputState } from '../../hooks/useFieldInputState';
+import { getCVCumberErrorMessage } from '../../utils/getCVCNumberErrorMessage';
+import { isFilledNumeric } from '../../utils/isFilledNumeric';
 
 interface CVCInputWrapperProps {
-    setCVCNumber: (value: string) => void;
+    setValue: (index: number) => (value: string) => void;
     value: string;
-    handleBlur: () => void;
-    handleFocus: () => void;
-    errorMessage: string | null;
-    setErrorMessage: (errorMessage: string | null) => void;
-    hasTouched: boolean;
-    getRef: (index: number) => (el: HTMLInputElement | null) => void;
-    focusFirst: () => void;
     isRender?: boolean;
 }
 
-export default function CVCInputWrapper({
-    setCVCNumber,
-    value,
-    handleBlur,
-    handleFocus,
-    errorMessage,
-    setErrorMessage,
-    hasTouched,
-    getRef,
-    focusFirst,
-    isRender,
-}: CVCInputWrapperProps) {
+export default function CVCInputWrapper({ setValue, value, isRender }: CVCInputWrapperProps) {
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
+        useFieldInputState({
+            values: [value],
+            setValue,
+            validator: (values) => getCVCumberErrorMessage(values[0]),
+            isFilled: (v) => isFilledNumeric(v, 3),
+            fieldCount: 1,
+        });
+
     useEffect(() => {
         focusFirst();
     }, []);
@@ -39,7 +33,7 @@ export default function CVCInputWrapper({
                 <CardInfoInput
                     ref={getRef(0)}
                     value={value}
-                    setValue={setCVCNumber}
+                    setValue={handleChange(0)}
                     size="large"
                     placeholder="123"
                     inputBlock={isNumeric}

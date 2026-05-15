@@ -2,30 +2,27 @@ import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
 import CardInfoSection from '../CardInfoSection';
+import { useFieldInputState } from '../../hooks/useFieldInputState';
+import { getCardNumberErrorMessage } from '../../utils/getCardNumberErrorMessage';
+import { getCardNumberMaxLengths } from '../../utils/getCardNumberMaxLengths';
+import { isFilledNumeric } from '../../utils/isFilledNumeric';
 
 interface CardNumberInputWrapperProps {
-    setCardNumber: (index: number) => (value: string) => void;
+    setValue: (index: number) => (value: string) => void;
     value: string[];
-    handleBlur: () => void;
-    handleFocus: () => void;
-    errorMessage: string | null;
-    setErrorMessage: (errorMessage: string | null) => void;
-    hasTouched: boolean;
-    getRef: (index: number) => (el: HTMLInputElement | null) => void;
-    maxLengths: number[];
 }
 
-export default function CardNumberInputWrapper({
-    setCardNumber,
-    value,
-    handleBlur,
-    handleFocus,
-    errorMessage,
-    setErrorMessage,
-    hasTouched,
-    getRef,
-    maxLengths,
-}: CardNumberInputWrapperProps) {
+export default function CardNumberInputWrapper({ setValue, value }: CardNumberInputWrapperProps) {
+    const maxLengths = getCardNumberMaxLengths(value[0]);
+
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, handleChange } = useFieldInputState({
+        values: value,
+        setValue,
+        validator: getCardNumberErrorMessage,
+        isFilled: (v, index) => isFilledNumeric(v, getCardNumberMaxLengths(value[0])[index]),
+        fieldCount: 4,
+    });
+
     return (
         <CardInfoSection
             title="결제할 카드 번호를 입력해 주세요"
@@ -38,7 +35,7 @@ export default function CardNumberInputWrapper({
                         key={`${index}th-input`}
                         ref={getRef(index)}
                         value={value[index]}
-                        setValue={setCardNumber(index)}
+                        setValue={handleChange(index)}
                         size="small"
                         placeholder="1234"
                         inputBlock={isNumeric}

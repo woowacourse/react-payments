@@ -45,12 +45,12 @@ export default function CardAddPage() {
                 <CardPreview cardNumbers={cardNumberValues} EXP={expValues} cardIssuer={cardBrand} />
                 <InputSectionContainer>
                     <PasswordInputWrapper
-                        setValue={setPasswordValue(0)}
+                        setValue={setPasswordValue}
                         value={passwordValues[0]}
                         isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy}
                     />
                     <CVCInputWrapper
-                        setValue={setCVCValue(0)}
+                        setValue={setCVCValue}
                         value={cvcValues[0]}
                         isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy}
                     />
