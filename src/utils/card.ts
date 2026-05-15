@@ -1,4 +1,4 @@
-import type { ValidityPeriod } from "@/types/card";
+import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
 import CARD, { type CardBrand } from "@constants/card";
 
 export const detectCardBrand = (cardNumber: string): CardBrand | null => {
@@ -63,8 +63,7 @@ export const getCardNumberUnitMaxLengthByBrand = (
 export const formatCardNumberUnitByBrand = (
   cardNumberUnit: string,
   brand: CardBrand | null,
-): //TODO: 타입 정의해서 사용하기
-  [string, string, string, string] | [string, string, string] => {
+): CardNumberUnits => {
   if (brand === "AMEX") {
     const firstUnit = cardNumberUnit.slice(
       0,

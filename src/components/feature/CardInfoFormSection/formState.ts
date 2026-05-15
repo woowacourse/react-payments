@@ -1,4 +1,4 @@
-import type { ValidityPeriod } from "@/types/card";
+import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
 import type CARD from "@constants/card";
 
 import type { CVCInputStatus } from "./components/CardCVCInputField/types";
@@ -15,7 +15,7 @@ export type ValidityPeriodStatus = {
 };
 
 export interface CardInfoFormState extends Record<string, unknown> {
-  cardNumber: [string, string, string, string] | [string, string, string];
+  cardNumber: CardNumberUnits;
   validityPeriod: ValidityPeriod;
   CVC: string;
   password: string;
