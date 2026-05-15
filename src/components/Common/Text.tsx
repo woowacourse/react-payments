@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const FONT_SIZE = {
@@ -26,23 +27,23 @@ interface CommonTextProps {
   color?: keyof typeof FONT_COLOR;
 }
 
+const textStyles = (props: CommonTextProps) => css`
+  font-size: ${FONT_SIZE[props.size ?? 'm']};
+  font-weight: ${FONT_WEIGHT[props.weight ?? 'medium']};
+  color: ${FONT_COLOR[props.color ?? 'black']};
+`;
+
 const TextBase = styled.p<CommonTextProps>`
   margin: 0;
-  font-size: ${(props) => `${FONT_SIZE[props.size ?? 'm']};`};
-  font-weight: ${(props) => `${FONT_WEIGHT[props.weight ?? 'medium']};`};
-  color: ${(props) => `${FONT_COLOR[props.color ?? 'black']};`};
+  ${textStyles}
 `;
 
 const Span = styled.span<CommonTextProps>`
-  font-size: ${(props) => `${FONT_SIZE[props.size ?? 'm']};`};
-  font-weight: ${(props) => `${FONT_WEIGHT[props.weight ?? 'medium']};`};
-  color: ${(props) => `${FONT_COLOR[props.color ?? 'black']};`};
+  ${textStyles}
 `;
 
 const Label = styled.label<CommonTextProps>`
-  font-size: ${(props) => `${FONT_SIZE[props.size ?? 'm']};`};
-  font-weight: ${(props) => `${FONT_WEIGHT[props.weight ?? 'medium']};`};
-  color: ${(props) => `${FONT_COLOR[props.color ?? 'black']};`};
+  ${textStyles}
 `;
 
 const Text = Object.assign(TextBase, { Span, Label });
