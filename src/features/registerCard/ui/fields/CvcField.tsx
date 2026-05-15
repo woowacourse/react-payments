@@ -6,25 +6,34 @@ import { getErrorCvc, validateCvc } from '@/entities/card/model/cvc';
 import { isNumericString } from '@/core/utils/validator';
 import type { FieldControl } from './types';
 
-export const CvcField = ({ value, handleChange }: FieldControl) => {
-  const [touched, setTouched] = useState<boolean>(false);
+interface CvcFieldProps {
+  cvcField: FieldControl;
+  setStepRef: (node: HTMLInputElement | null) => void;
+  onComplate: () => void;
+}
 
+export const CvcField = ({ cvcField, setStepRef, onComplate }: CvcFieldProps) => {
+  const { handleChange, value } = cvcField;
+  const [touched, setTouched] = useState<boolean>(false);
   const handleChangeCvc = (inputValue: string): void => {
     if (inputValue !== '' && !isNumericString(inputValue)) return;
     handleChange(inputValue);
     setTouched(false);
+
+    if (validateCvc(inputValue)) onComplate();
   };
 
   const handleBlur = () => {
     setTouched(true);
   };
 
-  const error = validateCvc(value);
+  const error = !validateCvc(value);
   const errorMessage = touched ? getErrorCvc(value) : undefined;
 
   return (
     <Field title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={errorMessage}>
       <Input
+        ref={setStepRef}
         type="text"
         inputMode="numeric"
         value={value}

@@ -1,6 +1,6 @@
 import { isNumericString } from '@/core/utils/validator';
 import { updateNumbers } from '@/entities/card/lib/handleNumbers';
-import { BRAND_RULES } from '@/entities/card/model/brand';
+import { BRAND_RULES, type Brand } from '@/entities/card/model/brand';
 import {
   getBrandByNumber,
   getNumberError,
@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 export interface UseNumbersResults {
   values: string[];
-  brand: string;
+  brand: Brand;
   maxLengths: number[];
   infoErrorField: boolean[];
   totalErrorMessage: string | undefined;

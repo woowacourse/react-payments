@@ -9,13 +9,21 @@ import {
   validatePassword,
 } from '@/entities/card/model/password';
 
-export const PasswordField = ({ value, handleChange }: FieldControl) => {
+interface PasswordFieldProps {
+  passwordField: FieldControl;
+  setStepRef: (node: HTMLInputElement | null) => void;
+  onComplate: () => void;
+}
+
+export const PasswordField = ({ passwordField, setStepRef, onComplate }: PasswordFieldProps) => {
+  const { value, handleChange } = passwordField;
   const [touched, setTouched] = useState<boolean>(false);
 
   const handleChangePW = (inputValue: string): void => {
     if (inputValue !== '' && !isNumericString(inputValue)) return;
     handleChange(inputValue);
     setTouched(false);
+    if (inputValue.length === PASSWORD_LENGTH) onComplate();
   };
 
   const handleBlur = () => {
@@ -32,6 +40,7 @@ export const PasswordField = ({ value, handleChange }: FieldControl) => {
       errorMessage={errorMessage}
     >
       <Input
+        ref={(node) => setStepRef(node)}
         type="password"
         inputMode="numeric"
         value={value}

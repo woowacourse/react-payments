@@ -10,5 +10,5 @@ export const getErrorCvc = (cvc: string): string | undefined => {
   return;
 };
 export const validateCvc = (cvc: string): boolean => {
-  return getErrorCvc(cvc) !== undefined;
+  return getErrorCvc(cvc) === undefined;
 };

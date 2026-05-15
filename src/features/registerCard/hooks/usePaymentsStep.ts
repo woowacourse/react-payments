@@ -20,5 +20,5 @@ export const usePaymentStep = () => {
     pendingFocus.current = focusIndex;
   };
 
-  return { step, toStep, setInputRef };
+  return { step, toStep, setStepRef: setInputRef };
 };

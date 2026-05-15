@@ -8,6 +8,8 @@ import { PasswordField } from '../fields/PasswordField';
 import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 import { ExpiryDateField } from '../fields/ExpiryDateField';
 import { BankSelectField } from '../fields/BankSelectField';
+import { usePaymentStep } from '../../hooks/usePaymentsStep';
+import { STEP } from '../../model/step';
 
 export interface CardFormProps {
   numbersField: UseNumbersResults;
@@ -24,13 +26,43 @@ export const CardForm = ({
   cvcField,
   passwordField,
 }: CardFormProps) => {
+  const { step, toStep, setStepRef } = usePaymentStep();
+
   return (
     <form className={styles.form} id="payment-form">
-      <PasswordField {...passwordField} />
-      <CvcField {...cvcField} />
-      <BankSelectField bank={bankField} />
-      <ExpiryDateField {...expiryField} />
-      <NumberField {...numbersField} />
+      {step >= 4 && (
+        <PasswordField
+          passwordField={passwordField}
+          setStepRef={(node) => setStepRef(node, STEP.PASSWORD)}
+          onComplate={() => {}}
+        />
+      )}
+      {step >= 3 && (
+        <CvcField
+          cvcField={cvcField}
+          setStepRef={(node) => setStepRef(node, STEP.CVC)}
+          onComplate={() => toStep(STEP.PASSWORD)}
+        />
+      )}
+      {step >= 2 && (
+        <ExpiryDateField
+          expiryField={expiryField}
+          setStepRef={(node) => setStepRef(node, STEP.EXPIRY)}
+          onComplate={() => toStep(STEP.CVC)}
+        />
+      )}
+      {step >= 1 && (
+        <BankSelectField
+          bankField={bankField}
+          setStepRef={(node) => setStepRef(node, STEP.BANK)}
+          onComplate={() => toStep(STEP.EXPIRY)}
+        />
+      )}
+      <NumberField
+        numbersField={numbersField}
+        setStepRef={(node) => setStepRef(node, STEP.NUMBERS)}
+        onComplate={() => toStep(STEP.BANK)}
+      />
     </form>
   );
 };
