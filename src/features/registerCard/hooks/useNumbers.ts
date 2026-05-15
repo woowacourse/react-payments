@@ -1,6 +1,6 @@
 import { isNumericString } from '@/core/utils/validator';
 import { updateNumbers } from '@/entities/card/lib/handleNumbers';
-import { BRAND_RULES, type Brand } from '@/entities/card/model/brand';
+import { BRAND, BRAND_RULES, type Brand } from '@/entities/card/model/brand';
 import {
   getBrandByNumber,
   getNumberError,
@@ -28,8 +28,11 @@ export const useNumbers = (): UseNumbersResults => {
   const errors = numbers.map((cardNumber, idx) => getNumberError(cardNumber, format[idx]));
   const errorFiled = errors.map((error, idx) => error !== undefined && touched[idx]);
 
-  const totalErrorMessage = getTotalErrorMessage(numbers, errorFiled, brand);
-  const infoErrorField = totalErrorMessage === undefined ? errorFiled : [true, true, true, true];
+  const isTouched = touched.some((e) => e === true);
+  const totalErrorMessage = getTotalErrorMessage(isTouched, errorFiled, brand);
+  const isFilled = numbers.every((num, idx) => num.length === format[idx]);
+  const infoErrorField =
+    isFilled && brand === BRAND.UNKNOWN ? [true, true, true, true] : errorFiled;
 
   const handleChange = (inputValue: string, index: number) => {
     if (inputValue !== '' && !isNumericString(inputValue)) return;

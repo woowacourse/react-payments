@@ -23,18 +23,17 @@ export const getNumbersError = (fullNumbers: string): string | undefined => {
 };
 
 export const getTotalErrorMessage = (
-  numbers: string[],
+  isTouched: boolean,
   fieldErrors: boolean[],
   brand: string,
 ): string | undefined => {
-  // 나중에고치장
-  const checkFill = (numbers[0] + numbers[1]).length === 8;
-  const hasError = fieldErrors.some((e) => e !== false);
+  const hasError = fieldErrors.some((e) => e === true);
+
   if (hasError) {
     return CARD_NUMBER_ERRORS.LENGTH;
   }
 
-  if (checkFill && brand === BRAND.UNKNOWN) {
+  if (isTouched && brand === BRAND.UNKNOWN) {
     return CARD_NUMBER_ERRORS.UNKNOWN;
   }
 };
