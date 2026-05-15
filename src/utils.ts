@@ -18,7 +18,7 @@ export function validateMonth(input: string) {
 }
 
 export function validateCardIssuer(input: string) {
-  return input in CARD_ISSUER
+  return Object.prototype.hasOwnProperty.call(CARD_ISSUER, input);
 }
 
 export function createDigitFieldValidations(length: number): ValidationRule[] {
