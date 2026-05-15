@@ -10,5 +10,5 @@ export const getErrorPassword = (password: string): string | undefined => {
 };
 
 export const validatePassword = (password: string): boolean => {
-  return getErrorPassword(password) !== undefined;
+  return getErrorPassword(password) === undefined;
 };

@@ -1,6 +1,6 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
-import type { FieldControl } from './types';
+import type { FieldControl } from '../../model/payments';
 import { useState } from 'react';
 import { isNumericString } from '@/core/utils/validator';
 import {
@@ -23,7 +23,7 @@ export const PasswordField = ({ passwordField, setStepRef, onComplate }: Passwor
     if (inputValue !== '' && !isNumericString(inputValue)) return;
     handleChange(inputValue);
     setTouched(false);
-    if (inputValue.length === PASSWORD_LENGTH) onComplate();
+    if (validatePassword(inputValue)) onComplate();
   };
 
   const handleBlur = () => {
