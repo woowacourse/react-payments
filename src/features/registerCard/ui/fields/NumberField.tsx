@@ -1,8 +1,15 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
+import type { UseNumbersResults } from '../../hooks/useNumbers';
 
-export const NumberField = ({ numbers }) => {
-  const { values, totalErrorMessage, maxLengths, handleChange, handleBlur, fieldErrors } = numbers;
+export const NumberField = ({
+  values,
+  totalErrorMessage,
+  maxLengths,
+  handleChange,
+  handleBlur,
+  infoErrorField,
+}: UseNumbersResults) => {
   return (
     <Field
       title="결제할 카드 번호를 입력해 주세요"
@@ -18,7 +25,7 @@ export const NumberField = ({ numbers }) => {
           value={number}
           placeholder={Array.from({ length: maxLengths[index] }, (_, i) => i + 1).join('')}
           maxLength={maxLengths[index]}
-          isError={fieldErrors[index]}
+          isError={infoErrorField[index]}
           onChange={(e) => handleChange(e.currentTarget.value, index)}
           onBlur={() => handleBlur(index)}
         />
