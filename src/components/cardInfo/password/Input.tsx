@@ -12,6 +12,7 @@ export default function Input() {
     <Wrapper>
       <Container ref={formRef}>
         <InfoInput
+          id="password"
           type="password"
           value={passwordContext.password}
           placeholder="**"

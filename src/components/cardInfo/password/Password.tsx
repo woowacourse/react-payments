@@ -6,7 +6,7 @@ export default function Password() {
     <Wrapper>
       <Header>비밀번호를 입력해 주세요</Header>
       <SubHeader>앞의 2자리를 입력해주세요</SubHeader>
-      <Label>비밀번호 앞 2자리</Label>
+      <Label htmlFor="password">비밀번호 앞 2자리</Label>
       <Input />
     </Wrapper>
   );
