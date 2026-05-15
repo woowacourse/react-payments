@@ -1,23 +1,8 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
-import type { UseCardNumbersResult } from '../../hooks/useCardNumbers';
 
-interface CardNumberFieldProps {
-  cardNumbers: UseCardNumbersResult;
-  setStepRef: (node: HTMLInputElement | null) => void;
-}
-
-export const CardNumberField = ({ cardNumbers, setStepRef }: CardNumberFieldProps) => {
-  const {
-    values,
-    totalErrorMessage,
-    maxLengths,
-    handleChange,
-    handleBlur,
-    infoErrors,
-    setInputRef,
-  } = cardNumbers;
-
+export const NumberField = ({ numbers }) => {
+  const { values, totalErrorMessage, maxLengths, handleChange, handleBlur, fieldErrors } = numbers;
   return (
     <Field
       title="결제할 카드 번호를 입력해 주세요"
@@ -25,19 +10,15 @@ export const CardNumberField = ({ cardNumbers, setStepRef }: CardNumberFieldProp
       label={`카드 번호`}
       errorMessage={totalErrorMessage}
     >
-      {values.map((cardNumber, index) => (
+      {values.map((number, index) => (
         <Input
           type="text"
           key={`${index}`}
           inputMode="numeric"
-          value={cardNumber}
+          value={number}
           placeholder={Array.from({ length: maxLengths[index] }, (_, i) => i + 1).join('')}
           maxLength={maxLengths[index]}
-          isError={infoErrors[index]}
-          ref={(node) => {
-            if (index === 0) setStepRef(node);
-            setInputRef(node, index);
-          }}
+          isError={fieldErrors[index]}
           onChange={(e) => handleChange(e.currentTarget.value, index)}
           onBlur={() => handleBlur(index)}
         />
