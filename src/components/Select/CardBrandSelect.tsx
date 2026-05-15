@@ -93,7 +93,7 @@ const BrandOptionElement = styled.li`
     padding: 7.97px;
     font-weight: 400;
     font-size: 10.63px;
-    color: #acacac;
+    color: #4F4F4F;
 `;
 
 const ArrowImage = styled.img`
