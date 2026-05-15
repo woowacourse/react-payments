@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import CardForm from "../components/CardForm";
 import CardPreview from "../components/CardPreview";
 import { SubmitButton } from "../components/SubmitButton";
-import { useCardForm } from "../hooks/useCardForm";
 import { isCardFormComplete } from "../utils/validators";
+import type { CardBrand, CardFormState } from "../types";
 
 const View = styled.div`
   width: 100%;
@@ -12,8 +12,14 @@ const View = styled.div`
   padding: 16px 32px;
 `;
 
-export function CardRegisterPage() {
-  const { cardFormState, brand, handleSetFormState } = useCardForm();
+interface CardRegisterPageProps {
+  cardFormState: CardFormState;
+  brand: CardBrand | undefined;
+  handleSetFormState: (newState: CardFormState) => void;
+}
+
+export function CardRegisterPage(props: CardRegisterPageProps) {
+  const { cardFormState, brand, handleSetFormState } = props;
 
   return (
     <View>

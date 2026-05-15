@@ -61,7 +61,9 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
         {segmentLengths.map((maxLength, index) => (
           <ValidationInput
             key={index}
-            ref={(el) => { segmentRefs.current[index] = el; }}
+            ref={(el) => {
+              segmentRefs.current[index] = el;
+            }}
             data-index={index}
             type="text"
             inputMode="numeric"

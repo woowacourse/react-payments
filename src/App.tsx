@@ -4,14 +4,27 @@ import { CardRegisterCompletePage } from "./pages/CardRegisterCompletePage";
 import { useCardForm } from "./hooks/useCardForm";
 
 function App() {
-  const { cardFormState } = useCardForm();
+  const { cardFormState, brand, handleSetFormState } = useCardForm();
 
   return (
     <Routes>
-      <Route path="/react-payments" element={<CardRegisterPage />} />
+      <Route
+        path="/react-payments"
+        element={
+          <CardRegisterPage
+            cardFormState={cardFormState}
+            brand={brand}
+            handleSetFormState={handleSetFormState}
+          />
+        }
+      />
       <Route
         path="/react-payments/success"
-        element={<CardRegisterCompletePage />}
+        element={
+          <CardRegisterCompletePage
+            cardFormState={cardFormState}
+          />
+        }
       />
     </Routes>
   );

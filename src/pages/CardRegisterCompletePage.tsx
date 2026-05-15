@@ -1,13 +1,15 @@
 import { SubmitSuccess } from "../components/SubmitSuccess";
-import { useCardForm } from "../hooks/useCardForm";
+import type { CardFormState } from "../types";
 
-export function CardRegisterCompletePage() {
-  const { cardFormState } = useCardForm();
+interface CardRegisterCompletePageProps {
+  cardFormState: CardFormState;
+}
 
+export function CardRegisterCompletePage(props: CardRegisterCompletePageProps) {
   return (
     <SubmitSuccess
-      firstNumberSegment={cardFormState.cardNumberSegments[0]}
-      cardCompany={cardFormState.cardCompany}
+      firstNumberSegment={props.cardFormState.cardNumberSegments[0]}
+      cardCompany={props.cardFormState.cardCompany}
     />
   );
 }
