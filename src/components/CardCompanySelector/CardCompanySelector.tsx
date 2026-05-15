@@ -162,6 +162,10 @@ const OptionButton = styled.button<OptionButtonProps>`
   font-size: 0.67rem;
   text-align: left;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${COLOR_PALETTE["GREY-100"]};
+  }
 `;
 
 export default CardCompanySelector;
