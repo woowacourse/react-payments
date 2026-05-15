@@ -3,6 +3,10 @@ export type ExpireDate = {
   month: string;
   year: string;
 };
+export type ExpireDateError = {
+  month: string;
+  year: string;
+};
 
 export interface CardPreviewProps {
   cardNumber: CardNumber;
@@ -28,7 +32,7 @@ export interface CardNumberContextValue {
 
 export interface ExpireDateContextValue {
   expireDate: ExpireDate;
-  expireDateError: { month: string; year: string };
+  expireDateError: ExpireDateError;
   handleMonthChange: (value: string) => void;
   handleYearChange: (value: string) => void;
   handleMonthBlur: () => void;
