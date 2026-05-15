@@ -9,7 +9,7 @@ import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 import { ExpiryDateField } from '../fields/ExpiryDateField';
 import { BankSelectField, type BankFieldControl } from '../fields/BankSelectField';
 import { usePaymentStep } from '../../hooks/usePaymentsStep';
-import { STEP } from '../../model/step';
+import { STEP } from '../../model/payments';
 
 export interface CardFormProps {
   numbersField: UseNumbersResults;
