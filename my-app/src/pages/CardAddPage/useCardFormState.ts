@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CardCompany } from "../components/cardCompanySection/CardCompanyConstants";
+import type { CardCompany } from "../../components/cardCompanySection/CardCompanyConstants";
 
 export interface FormState {
    cardNumber: string[],

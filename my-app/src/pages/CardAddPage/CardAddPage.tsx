@@ -1,9 +1,9 @@
-import CardPreview from '../components/cardPreview/CardPreview';
-import CardNumberSection from '../components/cardNumberSection/CardNumberSection';
-import ExpirationDateSection from '../components/expirationDateSection/ExpirationDateSection';
-import CvcSection from '../components/cvcSection/CvcSection';
-import CardCompanySection from '../components/cardCompanySection/CardCompanySection';
-import PasswordSection from '../components/passwordSection/PasswordSection';
+import CardPreview from '../../components/cardPreview/CardPreview';
+import CardNumberSection from '../../components/cardNumberSection/CardNumberSection';
+import ExpirationDateSection from '../../components/expirationDateSection/ExpirationDateSection';
+import CvcSection from '../../components/cvcSection/CvcSection';
+import CardCompanySection from '../../components/cardCompanySection/CardCompanySection';
+import PasswordSection from '../../components/passwordSection/PasswordSection';
 import { FormLayout, SubmitButton } from './CardAddPage.styles';
 import { useCardFormState } from './useCardFormState';
 import { useCardFormValidation } from './useCardFormValidation';

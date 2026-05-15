@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { useAsync } from '../components/common/commonHooks/useAsync';
+import { useAsync } from '../../components/common/commonHooks/useAsync';
 import {
   ISSUER_CODES,
   type CardCompany,
-} from '../components/cardCompanySection/CardCompanyConstants';
-import { postCard } from '../api/cardApi';
+} from '../../components/cardCompanySection/CardCompanyConstants';
+import { postCard } from '../../api/cardApi';
 import type { FormState } from './useCardFormState';
 
 export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
