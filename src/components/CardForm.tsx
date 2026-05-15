@@ -47,8 +47,9 @@ function CardForm(props: CardFormProps) {
                 앞의 2자리를 입력해주세요
               </Text>
             </Flex>
-            <Text.Label>비밀번호 앞 2자리</Text.Label>
+            <Text.Label htmlFor="password">비밀번호 앞 2자리</Text.Label>
             <Input
+              id="password"
               autoFocus
               inputMode="numeric"
               type="password"
@@ -69,8 +70,9 @@ function CardForm(props: CardFormProps) {
                 CVC 번호를 입력해 주세요
               </Text>
             </Flex>
-            <Text.Label>CVC</Text.Label>
+            <Text.Label htmlFor="cvc">CVC</Text.Label>
             <Input
+              id="cvc"
               autoFocus
               inputMode="numeric"
               type="password"
@@ -95,9 +97,10 @@ function CardForm(props: CardFormProps) {
                 월/년도(MMYY)를 순서대로 입력해 주세요.
               </Text>
             </Flex>
-            <Text.Label>유효기간</Text.Label>
+            <Text.Label htmlFor="expiry-date">유효기간</Text.Label>
             <Flex gap={8}>
               <Input
+                id="expiry-date"
                 autoFocus
                 inputMode="numeric"
                 type="text"
@@ -162,18 +165,21 @@ function CardForm(props: CardFormProps) {
                 본인 명의의 카드만 결제 가능합니다.
               </Text>
             </Flex>
-            <Text.Label>카드 번호</Text.Label>
+            <Text.Label htmlFor="cardnumber">카드 번호</Text.Label>
             <Flex gap={8}>
               {form.cardNumberSegments.values.map((segment, segmentIndex) => (
                 <Input
                   key={segmentIndex}
+                  id={segmentIndex === 0 ? 'cardnumber' : undefined}
                   autoFocus={segmentIndex === 0}
                   type="text"
                   inputMode="numeric"
                   placeholder="1234"
                   data-is-error={!!form.cardNumberSegments.errors[segmentIndex]}
                   value={segment}
-                  {...form.cardNumberSegments.register({ index: segmentIndex })}
+                  {...form.cardNumberSegments.register({
+                    index: segmentIndex,
+                  })}
                 />
               ))}
             </Flex>
