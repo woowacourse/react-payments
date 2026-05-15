@@ -19,11 +19,10 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: NumberFiel
   const handleChangeNumbers = (value: string, index: number) => {
     handleChange(value, index);
 
-    if (value.length === BRAND_RULES[brand].format[index]) focusNext(index + 1);
-    const lastIndex = values.length - 1;
     const next = [...values];
-    next[lastIndex] = value;
+    next[index] = value;
     if (getNumbersError(next.join('')) === undefined) onComplate();
+    if (value.length === BRAND_RULES[brand].format[index]) focusNext(index + 1);
   };
 
   return (
@@ -37,7 +36,7 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: NumberFiel
         <Input
           ref={(node) => {
             setInputRef(node, index);
-            if (index === 3) setStepRef(node);
+            setStepRef(node);
           }}
           type="text"
           key={`${index}`}
