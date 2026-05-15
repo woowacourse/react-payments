@@ -14,7 +14,17 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 export default defineConfig({
   plugins: [react(), svgr()],
   test: {
+    globals: true,
+    environment: 'jsdom',
+
     projects: [
+      {
+        extends: true,
+        test: {
+          name: 'integration',
+          environment: 'jsdom',
+        },
+      },
       {
         extends: true,
         plugins: [
