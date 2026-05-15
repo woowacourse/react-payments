@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef, type ReactNode } from "react";
 import CardCVCInput from "./CardCVCInput";
 import CardNumberSegmentsInput from "./CardNumberSegmentsInput";
 import Flex from "./Common/Flex";
@@ -20,6 +20,30 @@ const Description = styled.h3`
   color: var(--color-description);
   margin: 0;
 `;
+
+interface FormSectionProps {
+  isVisible: boolean;
+  title: string;
+  description?: string;
+  children: ReactNode;
+}
+
+const FormSection = forwardRef<HTMLDivElement, FormSectionProps>(
+  function FormSection({ isVisible, title, description, children }, ref) {
+    if (!isVisible) return null;
+    return (
+      <div ref={ref}>
+        <Flex direction="column" gap={10}>
+          <Flex direction="column" gap={5}>
+            <Title>{title}</Title>
+            {description && <Description>{description}</Description>}
+          </Flex>
+          {children}
+        </Flex>
+      </div>
+    );
+  }
+);
 
 interface CardFormProps {
   formState: CardFormState;
@@ -80,88 +104,71 @@ function CardForm(props: CardFormProps) {
   return (
     <form>
       <Flex direction="column" gap={16}>
-        {isCvcComplete && (
-          <div ref={passwordRef}>
-            <Flex direction="column" gap={10}>
-              <Flex direction="column" gap={5}>
-                <Title>비밀번호를 입력해 주세요</Title>
-                <Description>앞의 2자리를 입력해주세요</Description>
-              </Flex>
-              <CardPasswordInput
-                ref={passwordInputRef}
-                value={props.formState.cardPassword}
-                onChange={(value: string) =>
-                  props.setFormState({
-                    ...props.formState,
-                    cardPassword: value,
-                  })
-                }
-              />
-            </Flex>
-          </div>
-        )}
+        <FormSection
+          ref={passwordRef}
+          isVisible={isCvcComplete}
+          title="비밀번호를 입력해 주세요"
+          description="앞의 2자리를 입력해주세요"
+        >
+          <CardPasswordInput
+            ref={passwordInputRef}
+            value={props.formState.cardPassword}
+            onChange={(value: string) =>
+              props.setFormState({ ...props.formState, cardPassword: value })
+            }
+          />
+        </FormSection>
 
-        {isExpiryComplete && (
-          <div ref={cvcRef}>
-            <Flex direction="column" gap={10}>
-              <Flex direction="column" gap={5}>
-                <Title>CVC 번호를 입력해 주세요</Title>
-              </Flex>
-              <CardCVCInput
-                ref={cvcInputRef}
-                value={props.formState.cvc}
-                onChange={(value: string) =>
-                  props.setFormState({ ...props.formState, cvc: value })
-                }
-              />
-            </Flex>
-          </div>
-        )}
+        <FormSection
+          ref={cvcRef}
+          isVisible={isExpiryComplete}
+          title="CVC 번호를 입력해 주세요"
+        >
+          <CardCVCInput
+            ref={cvcInputRef}
+            value={props.formState.cvc}
+            onChange={(value: string) =>
+              props.setFormState({ ...props.formState, cvc: value })
+            }
+          />
+        </FormSection>
 
-        {isCardCompanySelected && (
-          <div ref={expiryRef}>
-            <Flex direction="column" gap={10}>
-              <Flex direction="column" gap={5}>
-                <Title>카드 유효기간을 입력해 주세요</Title>
-                <Description>
-                  월/년도(MMYY)를 순서대로 입력해 주세요.
-                </Description>
-              </Flex>
-              <CardExpiryDateInput
-                ref={expiryInputRef}
-                value={{
-                  expiryMonth: props.formState.expiryMonth,
-                  expiryYear: props.formState.expiryYear,
-                }}
-                onChange={(value: [string, string]) =>
-                  props.setFormState({
-                    ...props.formState,
-                    expiryMonth: value[0],
-                    expiryYear: value[1],
-                  })
-                }
-              />
-            </Flex>
-          </div>
-        )}
+        <FormSection
+          ref={expiryRef}
+          isVisible={isCardCompanySelected}
+          title="카드 유효기간을 입력해 주세요"
+          description="월/년도(MMYY)를 순서대로 입력해 주세요."
+        >
+          <CardExpiryDateInput
+            ref={expiryInputRef}
+            value={{
+              expiryMonth: props.formState.expiryMonth,
+              expiryYear: props.formState.expiryYear,
+            }}
+            onChange={(value: [string, string]) =>
+              props.setFormState({
+                ...props.formState,
+                expiryMonth: value[0],
+                expiryYear: value[1],
+              })
+            }
+          />
+        </FormSection>
 
-        {isCardNumberComplete && (
-          <div ref={cardCompanyRef}>
-            <Flex direction="column" gap={10}>
-              <Flex direction="column" gap={5}>
-                <Title>카드사를 선택해주세요</Title>
-                <Description>현재 국내 카드사만 가능합니다.</Description>
-              </Flex>
-              <CardCompany
-                value={props.formState.cardCompany}
-                onChange={(value: string) =>
-                  props.setFormState({ ...props.formState, cardCompany: value })
-                }
-              />
-              <div style={{ height: "16px" }} />
-            </Flex>
-          </div>
-        )}
+        <FormSection
+          ref={cardCompanyRef}
+          isVisible={isCardNumberComplete}
+          title="카드사를 선택해주세요"
+          description="현재 국내 카드사만 가능합니다."
+        >
+          <CardCompany
+            value={props.formState.cardCompany}
+            onChange={(value: string) =>
+              props.setFormState({ ...props.formState, cardCompany: value })
+            }
+          />
+          <div style={{ height: "16px" }} />
+        </FormSection>
 
         <Flex direction="column" gap={10}>
           <Flex direction="column" gap={5}>
