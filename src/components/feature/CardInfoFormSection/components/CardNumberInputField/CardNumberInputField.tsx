@@ -1,6 +1,6 @@
 import InputField from "@components/common/InputField";
 import useFocus from "@hooks/useFocus";
-import { useFormValue } from "@hooks/useFormWrapper";
+import { useFormValue } from "../../formContext";
 import {
   detectCardBrand,
   formatCardNumberUnitByBrand,
@@ -8,7 +8,7 @@ import {
   getCardNumberUnitMaxLengthByBrand,
 } from "@utils/card";
 
-import type { CardInfoFormState, CardNumberStatusTuple } from "../../formState";
+import type { CardNumberStatusTuple } from "../../formState";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus } from "./utils";
 
@@ -27,7 +27,7 @@ const updateArray = <T extends unknown[]>(
 };
 
 const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
-  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const { getValue, setValue } = useFormValue();
   const cardNumberUnits = getValue("cardNumber");
   const cardNumber = cardNumberUnits.join("");
   const status = getValue("cardNumberStatus");

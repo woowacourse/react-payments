@@ -1,8 +1,7 @@
 import InputField from "@/components/common/InputField";
 import { checkIsInt, validatePasswordRange } from "@/utils/validator";
-import { useFormValue } from "@hooks/useFormWrapper";
+import { useFormValue } from "../../formContext";
 
-import type { CardInfoFormState } from "../../formState";
 
 interface CardPasswordFieldProps {
   onComplete?: () => void;
@@ -11,7 +10,7 @@ interface CardPasswordFieldProps {
 const PASSWORD_MAX_LENGTH = 2;
 
 const CardPasswordField = ({ onComplete }: CardPasswordFieldProps) => {
-  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const { getValue, setValue } = useFormValue();
   const password = getValue("password");
   const status = getValue("passwordStatus");
 

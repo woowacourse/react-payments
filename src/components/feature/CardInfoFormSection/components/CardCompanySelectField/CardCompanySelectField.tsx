@@ -1,8 +1,7 @@
 import SelectField from "@components/common/SelectField";
 import { default as CARD } from "@constants/card";
-import { useFormValue } from "@hooks/useFormWrapper";
 
-import type { CardInfoFormState } from "../../formState";
+import { useFormValue } from "../../formContext";
 
 type CardCompanySelectFieldOption = (typeof CARD.COMPANY_SELECT_FIELD)[number];
 
@@ -13,7 +12,7 @@ interface CardCompanySelectFieldProps {
 const CardCompanySelectField = ({
   onComplete,
 }: CardCompanySelectFieldProps) => {
-  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const { getValue, setValue } = useFormValue();
   const selectedCompany = getValue("selectedCardCompany");
 
   return (

@@ -1,6 +1,5 @@
 import StepFunnel from "@components/common/StepFunnel";
 import styled from "@emotion/styled";
-import useFormWrapper from "@hooks/common/useFormWrapper";
 import { useNavigate } from "react-router";
 
 import CardCompanySelectField from "./components/CardCompanySelectField";
@@ -10,12 +9,10 @@ import CardNumberInputField from "./components/CardNumberInputField";
 import CardPasswordField from "./components/CardPasswordField";
 import CardPreview from "./components/CardPreview";
 import CardValidityPeriodInputField from "./components/CardValidityPeriodInputField";
+import { FormWrapper } from "./formContext";
 import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
 
 const CardInfoFormSection = () => {
-  const { FormWrapper } = useFormWrapper({
-    defaultValues: INITIAL_CARD_INFO_FORM_STATE,
-  });
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
@@ -30,7 +27,7 @@ const CardInfoFormSection = () => {
   };
 
   return (
-    <FormWrapper>
+    <FormWrapper defaultValues={INITIAL_CARD_INFO_FORM_STATE}>
       <CardPreview />
       <Container onSubmit={handleSubmit}>
         <StepFunnel>

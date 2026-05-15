@@ -1,10 +1,9 @@
 import Button from "@components/common/Button";
-import { useFormValue } from "@hooks/useFormWrapper";
+import { useFormValue } from "../../formContext";
 
-import type { CardInfoFormState } from "../../formState";
 
 const CardInfoFormSubmitButton = () => {
-  const { getValue } = useFormValue<CardInfoFormState>();
+  const { getValue } = useFormValue();
 
   const checkIsDisabled = () => {
     const cardNumberStatus = getValue("cardNumberStatus");

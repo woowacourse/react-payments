@@ -1,10 +1,9 @@
 import type { ValidityPeriod } from "@/types/card";
 import InputField from "@components/common/InputField";
 import useFocus from "@hooks/useFocus";
-import { useFormValue } from "@hooks/useFormWrapper";
+import { useFormValue } from "../../formContext";
 import { padValidityPeriodUnit } from "@utils/card";
 
-import type { CardInfoFormState } from "../../formState";
 import { MONTH_MAX_LENGTH, YEAR_MAX_LENGTH } from "./constants";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus, formatValidityPeriod } from "./utils";
@@ -16,7 +15,7 @@ interface CardValidityPeriodInputFieldProps {
 const CardValidityPeriodInputField = ({
   onComplete,
 }: CardValidityPeriodInputFieldProps) => {
-  const { getValue, setValue } = useFormValue<CardInfoFormState>();
+  const { getValue, setValue } = useFormValue();
   const validityPeriod = getValue("validityPeriod");
   const status = getValue("validityPeriodStatus");
   const { registerInputRef, setNextFocus } = useFocus();

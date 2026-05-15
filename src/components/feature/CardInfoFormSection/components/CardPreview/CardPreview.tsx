@@ -1,12 +1,11 @@
 import Card from "@components/common/Card";
 import styled from "@emotion/styled";
-import { useFormValue } from "@hooks/useFormWrapper";
+import { useFormValue } from "../../formContext";
 import { detectCardBrand } from "@utils/card";
 
-import type { CardInfoFormState } from "../../formState";
 
 const CardPreview = () => {
-  const { getValue } = useFormValue<CardInfoFormState>();
+  const { getValue } = useFormValue();
   const cardNumberUnits = getValue("cardNumber");
   const cardNumber = cardNumberUnits.join("");
   const validityPeriod = getValue("validityPeriod");
