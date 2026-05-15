@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { type CardFormState, type CardIssuer, type CardNumberSegments } from "../types";
+import { type CardFormState, type CardNumberSegments } from "../types";
 import { createDigitFieldValidations, getCardNetwork, validateCardIssuer, validateMonth } from "../utils";
-import useArrayInput from "./useArrayInput";
+import useInputGroup from "./useInputGroup";
 import useInput from "./useInput";
 import { CARD_EXPIRY_MONTH_LENGTH, CARD_EXPIRY_YEAR_LENGTH, CARD_NETWORK, CARD_PASSWORD_LENGTH, DEFAULT_CARD_VALIDATION_CODE_LENGTH, DEFAULT_CARD_NUMBER_LENGTH, DEFAULT_CARD_NUMBER_SEGMENT_LENGTH } from "../constants";
 
@@ -14,7 +14,7 @@ export const CARD_FORM_STEP = {
 };
 
 export default function useCardForm() {
-  const cardNumberSegmentsField = useArrayInput(['', '', '', ''] as string[], {
+  const cardNumberSegmentsField = useInputGroup(['', '', '', ''] as string[], {
     validation: (cardNumberSegments) => {
       const cardNetwork = getCardNetwork(cardNumberSegments as CardNumberSegments);
       const cardNumberLength = cardNetwork
@@ -30,7 +30,7 @@ export default function useCardForm() {
     },
   });
 
-  const cardIssuerField = useInput<CardIssuer | null, HTMLSelectElement>(null, {
+  const cardIssuerField = useInput<HTMLSelectElement>("", {
     validation: () => {
       return [{
         type: 'onBlur',
@@ -40,7 +40,7 @@ export default function useCardForm() {
     }
   });
 
-  const cardExpiryDateField = useArrayInput(["", ""], {
+  const cardExpiryDateField = useInputGroup(["", ""], {
     validation: () => {
       return [
         [
