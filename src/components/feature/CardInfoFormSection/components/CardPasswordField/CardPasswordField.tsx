@@ -1,5 +1,5 @@
 import InputField from "@/components/common/InputField";
-import { checkIsInt, validateCVCRange } from "@/utils/validator";
+import { checkIsInt, validatePasswordRange } from "@/utils/validator";
 import { useFormValue } from "@hooks/useFormWrapper";
 
 import type { CardInfoFormState } from "../../formState";
@@ -16,7 +16,7 @@ const CardPasswordField = ({ onComplete }: CardPasswordFieldProps) => {
   const status = getValue("passwordStatus");
 
   const handlePasswordChange = (input: string) => {
-    if (input.length !== 0 && (!checkIsInt(+input) || !validateCVCRange(+input))) {
+    if (input.length !== 0 && (!checkIsInt(+input) || !validatePasswordRange(+input))) {
       setValue("passwordStatus", "ERROR");
       return;
     }
