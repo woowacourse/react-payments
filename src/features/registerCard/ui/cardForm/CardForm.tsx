@@ -7,14 +7,14 @@ import type { FieldControl } from '../fields/types';
 import { PasswordField } from '../fields/PasswordField';
 import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 import { ExpiryDateField } from '../fields/ExpiryDateField';
-import { BankSelectField } from '../fields/BankSelectField';
+import { BankSelectField, type BankFieldControl } from '../fields/BankSelectField';
 import { usePaymentStep } from '../../hooks/usePaymentsStep';
 import { STEP } from '../../model/step';
 
 export interface CardFormProps {
   numbersField: UseNumbersResults;
   expiryField: UseExpiryDateResult;
-  bankField: FieldControl;
+  bankField: BankFieldControl;
   cvcField: FieldControl;
   passwordField: FieldControl;
 }

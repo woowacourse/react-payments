@@ -2,7 +2,7 @@ import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
 import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 import { useInputFocus } from '@/core/hooks/useInputFocus';
-import { validateMonth } from '@/entities/card/model/expiryDate';
+import { validateMonth, validateYear } from '@/entities/card/model/expiryDate';
 
 interface ExpiryDateField {
   expiryField: UseExpiryDateResult;
@@ -22,7 +22,9 @@ export const ExpiryDateField = ({ expiryField, onComplate, setStepRef }: ExpiryD
 
   const handleChangeYear = (value: string) => {
     year.handleChange(value);
-    if (validateMonth(value) === undefined) onComplate();
+    const monthError = validateMonth(expiryField.month.value);
+    const yearError = validateYear(value);
+    if (!monthError && !yearError) onComplate();
   };
 
   return (
