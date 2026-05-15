@@ -3,6 +3,7 @@ import AddCardPage from './pages/AddCardPage.tsx';
 import AddCardCompletePage from './pages/AddCardCompletePage.tsx';
 import { ROUTES } from './constants.ts';
 import './App.css';
+import CardListPage from './pages/CardListPage.tsx';
 
 const router = createBrowserRouter(
   [
@@ -13,6 +14,10 @@ const router = createBrowserRouter(
     {
       path: ROUTES.ADD_CARD_COMPLETE,
       element: <AddCardCompletePage />,
+    },
+    {
+      path: ROUTES.CARD_LIST,
+      element: <CardListPage />,
     },
   ],
   {

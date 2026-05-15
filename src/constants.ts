@@ -1,8 +1,9 @@
 import type { ErrorStatus, ExpirationPeriodErrorStatus } from './types';
 
 export const ROUTES = {
-  ADD_CARD: '/',
-  ADD_CARD_COMPLETE: '/complete',
+  CARD_LIST: '/card',
+  ADD_CARD: '/card/add',
+  ADD_CARD_COMPLETE: '/card/add/complete',
 };
 
 export const ERROR_MESSAGES: Record<Exclude<ErrorStatus, null>, string> = {
