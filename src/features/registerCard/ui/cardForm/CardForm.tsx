@@ -4,25 +4,33 @@ import { CvcField } from '@/features/registerCard/ui/fields/CvcField';
 import { NumberField } from '@/features/registerCard/ui/fields/NumberField';
 import type { UseNumbersResults } from '../../hooks/useNumbers';
 import type { FieldControl } from '../fields/types';
+import { PasswordField } from '../fields/PasswordField';
+import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
+import { ExpiryDateField } from '../fields/ExpiryDateField';
+import { BankSelectField } from '../fields/BankSelectField';
 
 export interface CardFormProps {
   numbersField: UseNumbersResults;
+  expiryField: UseExpiryDateResult;
+  bankField: FieldControl;
   cvcField: FieldControl;
+  passwordField: FieldControl;
 }
 
-export const CardForm = ({ numbersField, cvcField }: CardFormProps) => {
+export const CardForm = ({
+  numbersField,
+  expiryField,
+  bankField,
+  cvcField,
+  passwordField,
+}: CardFormProps) => {
   return (
     <form className={styles.form} id="payment-form">
-      {/* {step >= 4 && <PasswordField password={password} setStepRef={SET_REFS.PASSWORD} />}
-      {step >= 3 && <CvcField cvc={cvc} setStepRef={SET_REFS.CVC} />}
-      {step >= 2 && <ExpiryDateField expiryDate={expiryDate} setStepRef={SET_REFS.EXPIRY} />}
-      {step >= 1 && <BankSelectField bank={bank} setStepRef={SET_REFS.BANK} />}
-          {step >= 4 && <PasswordField password={password} setStepRef={SET_REFS.PASSWORD} />} */}
-      {/* <PasswordField password={password} setStepRef={SET_REFS.PASSWORD} />}  */}
-      <NumberField {...numbersField} />
+      <PasswordField {...passwordField} />
       <CvcField {...cvcField} />
-      {/* <ExpiryDateField expiryDate={expiryDate} setStepRef={SET_REFS.EXPIRY} /> */}
-      {/* <BankSelectField bank={bank} setStepRef={SET_REFS.BANK} /> */}
+      <BankSelectField bank={bankField} />
+      <ExpiryDateField {...expiryField} />
+      <NumberField {...numbersField} />
     </form>
   );
 };
