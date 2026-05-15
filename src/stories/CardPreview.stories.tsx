@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import CardPreview from './../components/CardPreview';
+import CardPreview from './../components/CardRegister/CardPreview';
 
 const meta = {
   title: 'Components/CardPreview',
@@ -8,8 +8,8 @@ const meta = {
   argTypes: {
     cardBrand: {
       control: { type: 'select' },
-      options: ['VISA', 'MasterCard', null],
-      description: '카드 브랜드 (VISA | MasterCard | null)',
+      options: ['VISA', 'MasterCard', undefined],
+      description: '카드 브랜드 (VISA | MasterCard | undefined)',
     },
     cardNumberSegments: {
       control: 'object',
@@ -32,10 +32,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardBrand: null,
+    cardBrand: undefined,
     cardNumberSegments: ['', '', '', ''],
     expiryMonth: '',
     expiryYear: '',
+    cardCompany: '',
   },
 };
 
@@ -45,6 +46,7 @@ export const Visa: Story = {
     cardNumberSegments: ['4123', '4567', '8901', '2345'],
     expiryMonth: '12',
     expiryYear: '26',
+    cardCompany: '신한카드',
   },
 };
 
@@ -54,15 +56,17 @@ export const MasterCard: Story = {
     cardNumberSegments: ['5212', '3456', '7890', '1234'],
     expiryMonth: '08',
     expiryYear: '28',
+    cardCompany: '국민카드',
   },
 };
 
 export const UnknownBrand: Story = {
   args: {
-    cardBrand: null,
+    cardBrand: undefined,
     cardNumberSegments: ['9999', '1234', '5678', '9012'],
     expiryMonth: '03',
     expiryYear: '30',
+    cardCompany: '',
   },
 };
 
@@ -72,5 +76,6 @@ export const PartiallyFilled: Story = {
     cardNumberSegments: ['4123', '4567', '', ''],
     expiryMonth: '12',
     expiryYear: '26',
+    cardCompany: '',
   },
 };
