@@ -25,6 +25,14 @@ function AddCardResultPage() {
     );
   }
 
+  if (state.type !== 'success') {
+    return (
+      <View>
+        <Result type="error" message="카드 등록에 실패했습니다." action={() => navigate('/')} />
+      </View>
+    );
+  }
+
   return (
     <View>
       <Result
