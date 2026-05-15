@@ -48,7 +48,7 @@ export const handlers = [
           id: '550e8400-e29b-41d4-a716-446655440000',
           issuerCode: '31',
           number: '411111******1111',
-          expirationDate: { month: 12, year: 12 },
+          expirationDate: 12/12,
         },
       ],
       { status: 200 },
