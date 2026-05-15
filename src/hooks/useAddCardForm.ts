@@ -120,13 +120,18 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
   };
 
   const validateExpirationPeriodOnComplete = (value: CardInfo['expirationPeriod']) => {
-    const errorStatuses = getExpirationPeriodErrorStatuses(value);
-    updateErrors('expirationPeriod', errorStatuses);
-    return errorStatuses.every((status) => status === null);
+    const combinedError = validate(
+      [RULES.validMonthAndYear],
+      'onBlur',
+      value.join(''),
+    ) as FormValue['expirationPeriod']['errorStatuses'][1];
+
+    updateErrors('expirationPeriod', [null, combinedError]);
+    return combinedError === null;
   };
 
   const validateCvcOnComplete = (value: CardInfo['cvc']) => {
-    const errorStatus = validateAll(cvcRules, value) as FormValue['cvc']['errorStatuses'][0];
+    const errorStatus = validate([RULES.exactLength(cvcLength)], 'onBlur', value) as FormValue['cvc']['errorStatuses'][0];
     updateErrors('cvc', [errorStatus]);
     return errorStatus === null;
   };
