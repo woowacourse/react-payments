@@ -5,7 +5,7 @@ import { useFocusFirstInput } from "../../../hooks/useFocusFirstInput";
 
 export default function Input() {
   const passwordContext = usePasswordContext();
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const formRef = useRef<HTMLDivElement | null>(null);
   useFocusFirstInput(formRef);
 
   return (
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Container = styled.form`
+const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
