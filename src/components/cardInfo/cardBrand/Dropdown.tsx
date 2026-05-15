@@ -10,8 +10,8 @@ export default function Dropdown() {
     <Wrapper>
       <Button
         onClick={cardBrandContext.toggleDropdown}
-        isOpen={cardBrandContext.isOpen}
-        selectedItem={!!cardBrandContext.selectedItem}
+        $isOpen={cardBrandContext.isOpen}
+        $selectedItem={!!cardBrandContext.selectedItem}
       >
         <span>
           {cardBrandContext.selectedItem.brand === ""
@@ -46,7 +46,7 @@ const Wrapper = styled.div`
   margin: 4px 0;
 `;
 
-const Button = styled.button<{ isOpen: boolean; selectedItem: boolean }>`
+const Button = styled.button<{ $isOpen: boolean; $selectedItem: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +54,7 @@ const Button = styled.button<{ isOpen: boolean; selectedItem: boolean }>`
   height: 31px;
   border-radius: 3px;
   border: 1px solid
-    ${(props) => (props.isOpen ? "rgba(0,0,0,1)" : "rgba(172, 172, 172, 1)")};
+    ${(props) => (props.$isOpen ? "rgba(0,0,0,1)" : "rgba(172, 172, 172, 1)")};
   background-color: white;
   padding: 8px;
   cursor: pointer;
@@ -70,11 +70,11 @@ const Button = styled.button<{ isOpen: boolean; selectedItem: boolean }>`
   }
   svg {
     color: ${(props) =>
-      props.isOpen ? "rgba(0,0,0,1)" : "rgba(172, 172, 172, 1)"};
+      props.$isOpen ? "rgba(0,0,0,1)" : "rgba(172, 172, 172, 1)"};
   }
   span {
     color: ${(props) =>
-      props.selectedItem ? "rgba(0,0,0,1)" : "rgba(172, 172, 172, 1)"};
+      props.$selectedItem ? "rgba(0,0,0,1)" : "rgba(172, 172, 172, 1)"};
   }
 `;
 
