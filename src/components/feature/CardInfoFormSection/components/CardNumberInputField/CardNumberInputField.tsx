@@ -41,7 +41,7 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
       getCardNumberUnitMaxLengthByBrand(brand, index),
     );
     const blurStatus =
-      cardNumberInputStatus === "DEFAULT" ? "EMPTY" : cardNumberInputStatus;
+      cardNumberInputStatus === "DEFAULT" ? "INCOMPLETE" : cardNumberInputStatus;
 
     setValue("cardNumberStatus", updateArray(status, index, blurStatus));
   };
