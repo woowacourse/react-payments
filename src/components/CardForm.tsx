@@ -58,7 +58,7 @@ function CardForm(props: CardFormProps) {
               value={form.cardPassword.value}
               {...form.cardPassword.register()}
             />
-            <Text size="s" color="error">
+            <Text size="s" color="error" role="alert">
               {form.cardPassword.error}
             </Text>
           </Flex>
@@ -82,7 +82,7 @@ function CardForm(props: CardFormProps) {
               value={form.cardValidationCode.value}
               {...form.cardValidationCode.register()}
             />
-            <Text size="s" color="error">
+            <Text size="s" color="error" role="alert">
               {form.cardValidationCode.error}
             </Text>
           </Flex>
@@ -120,7 +120,7 @@ function CardForm(props: CardFormProps) {
                 {...form.cardExpiryDate.register({ index: 1 })}
               />
             </Flex>
-            <Text size="s" color="error">
+            <Text size="s" color="error" role="alert">
               {form.cardExpiryDate.error}
             </Text>
           </Flex>
@@ -150,7 +150,7 @@ function CardForm(props: CardFormProps) {
                 </Select.Option>
               ))}
             </Select>
-            <Text size="s" color="error">
+            <Text size="s" color="error" role="alert">
               {form.cardIssuer.error}
             </Text>
           </Flex>
@@ -183,7 +183,7 @@ function CardForm(props: CardFormProps) {
                 />
               ))}
             </Flex>
-            <Text size="s" color="error">
+            <Text size="s" color="error" role="alert">
               {form.cardNumberSegments.error}
             </Text>
           </Flex>
