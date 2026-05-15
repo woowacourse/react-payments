@@ -1,10 +1,23 @@
-import { http, HttpResponse } from 'msw';
-import { isCardNumberCorrect, isCvcCorrect, isExpirationDateCorrect } from '../utils/Validation';
+import { delay, http, HttpResponse } from 'msw';
+import {
+  isCardNumberCorrect,
+  isCvcCorrect,
+  isExpirationDateCorrect,
+} from '../utils/Validation';
+
+interface Card {
+  id: string;
+  issuerCode: string;
+  number: string;
+  expirationDate: string;
+}
+
+const cards: Card[] = [];
 
 export const handlers = [
   http.post('/cards', async ({ request }) => {
     const requestDetail = (await request.json()) as Record<string, string>;
-    const { number, expirationDate, cvc } = requestDetail;
+    const { number, expirationDate, cvc, issuerCode } = requestDetail;
 
     // 카드 번호 에러 처리, 카드 브랜드 에러 처리
     if (!isCardNumberCorrect(number)) {
@@ -39,24 +52,44 @@ export const handlers = [
       );
     }
 
-    return HttpResponse.json({ id: crypto.randomUUID() }, { status: 201 });
+    const newCard: Card = {
+      id: crypto.randomUUID(),
+      issuerCode,
+      number,
+      expirationDate,
+    };
+
+    cards.push(newCard);
+
+    return HttpResponse.json({ id: newCard.id }, { status: 201 });
   }),
 
-  http.get('/cards', () => {
-    return HttpResponse.json(
-      [
-        {
-          id: '550e8400-e29b-41d4-a716-446655440000',
-          issuerCode: '31',
-          number: '411111******1111',
-          expirationDate: '12/12',
-        },
-      ],
-      { status: 200 },
-    );
+  http.get('/cards', async () => {
+    await delay(1000);
+
+    const maskingCards = cards.map((card) => {
+      const prefix = card.number.slice(0, 6);
+      const suffix = card.number.slice(-4);
+      const maskingLength = card.number.length - 10;
+      const mask = '*'.repeat(maskingLength);
+
+      return {
+        ...card,
+        number: `${prefix}${mask}${suffix}`,
+      };
+    });
+
+    return HttpResponse.json(maskingCards, { status: 200 });
   }),
 
-  http.delete('/cards/:id', () => {
+  http.delete('/cards/:id', ({ params }) => {
+    const id = params.id;
+    const targetIndex = cards.findIndex((card) => card.id === id);
+
+    if (targetIndex !== -1) {
+      cards.splice(targetIndex, 1);
+    }
+    
     return new HttpResponse(null, { status: 204 });
   }),
 ];
