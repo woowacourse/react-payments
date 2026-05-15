@@ -8,7 +8,7 @@ import { useExpiryDate } from '@/features/registerCard/hooks/useExpiryDate';
 import { CardPreview } from '@/features/cardPreview/CardPreview';
 import type { CardInfo } from '@/features/cardPreview/CardPreview';
 import type { Bank } from '@/entities/card/model/bank';
-import { SubmitButton } from '@/features/registerCard/ui/submitButton/SubmitButton';
+import { SubmitButton } from '@/features/submitButton/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import { validateFieldData } from '@/features/registerCard/lib/validateFieldData';
 import { FORM_ID, type FieldData } from '@/features/registerCard/model/payments';
