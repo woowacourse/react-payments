@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router';
 import CardForm from '../components/CardForm';
 import View from '../components/Common/View';
-import type { AddCardResultState } from '../types';
 
 function AddCardPage() {
   const navigate = useNavigate();
@@ -10,7 +9,7 @@ function AddCardPage() {
     <View>
       <CardForm
         onSubmit={(formData) => {
-          const state: AddCardResultState = {
+          const state = {
             type: 'success',
             issuer: formData.cardIssuer,
             firstSegment: formData.cardNumberSegments[0],
