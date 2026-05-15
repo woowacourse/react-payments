@@ -18,25 +18,24 @@ export function useCardNumberSegments() {
   const brand = getCardBrand(segments);
 
   const handleChange = (newSegments: string[]) => {
-    const newBrand = getCardBrand(newSegments);
-    const currentBrand = getCardBrand(segments);
-    const fullNumber = newSegments.join("");
     const alreadySplit = segments.length > 1;
 
-    if (!alreadySplit && fullNumber.length < 4) {
+    if (alreadySplit) {
+      setSegments(newSegments);
+      return;
+    }
+
+    const fullNumber = newSegments.join("");
+
+    if (fullNumber.length < 4) {
       setSegments([fullNumber]);
       return;
     }
 
-    if (!alreadySplit || newBrand !== currentBrand) {
-      const segmentLengths = newBrand
-        ? CARD_BRAND_CONFIGS[newBrand].segmentLengths
-        : DEFAULT_SEGMENT_LENGTHS;
-      setSegments(splitIntoSegments(fullNumber, segmentLengths));
-      return;
-    }
-
-    setSegments(newSegments);
+    const segmentLengths = brand
+      ? CARD_BRAND_CONFIGS[brand].segmentLengths
+      : DEFAULT_SEGMENT_LENGTHS;
+    setSegments(splitIntoSegments(fullNumber, segmentLengths));
   };
 
   return { segments, brand, handleChange };
