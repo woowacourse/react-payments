@@ -38,17 +38,13 @@ export const createInitialFormValue = (): FormValue => ({
   password: { value: '', errorStatuses: [null] },
 });
 
-type UseAddCardFormParams = {
-  initialValue: FormValue;
-};
-
 type CompletePageState = {
   firstFourDigits: string;
   cardCompany: string;
 };
 
-export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
-  const [formValue, setFormValue] = useState<FormValue>(initialValue);
+export default function useAddCardForm() {
+  const [formValue, setFormValue] = useState<FormValue>(createInitialFormValue);
 
   const cardBrand = categorizeCardBrand(formValue.cardNumbers.value);
   const cvcLength = CARD_CVC_MAX_LENGTH[cardBrand] ?? DEFAULT_CVC_LENGTH;
@@ -105,7 +101,7 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
       expirationPeriodRules[1],
       value[1],
     ) as FormValue['expirationPeriod']['errorStatuses'][1];
-    // 개별 에러가 이미 있으면 조합 검증은 건너뜀
+
     const hasIndividualError = monthError !== null || yearError !== null;
     const combinedError = hasIndividualError
       ? null
@@ -115,7 +111,6 @@ export default function useAddCardForm({ initialValue }: UseAddCardFormParams) {
           value.join(''),
         ) as FormValue['expirationPeriod']['errorStatuses'][1]);
 
-    // year 개별 에러가 없을 때만 조합 에러(만료 여부)를 year 자리에 표시
     return [monthError, yearError ?? combinedError];
   };
 

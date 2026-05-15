@@ -9,7 +9,7 @@ import Button from '../components/ui/Button';
 import CardCompanySelect from '../components/domain/CardCompanySelect';
 import PasswordField from '../components/domain/PasswordField';
 import { FIELD_STEP, DEFAULT_CVC_LENGTH } from '../constants';
-import useAddCardForm, { type AddCardFormFieldKey, createInitialFormValue } from '../hooks/useAddCardForm';
+import useAddCardForm, { type AddCardFormFieldKey } from '../hooks/useAddCardForm';
 
 export default function AddCardPage() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function AddCardPage() {
       validateCardCompanyOnComplete,
       buildCompletePageState,
     },
-  } = useAddCardForm({ initialValue: createInitialFormValue() });
+  } = useAddCardForm();
 
   const handleSubmitForm = (e: React.SubmitEvent) => {
     e.preventDefault();
