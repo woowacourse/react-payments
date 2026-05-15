@@ -11,76 +11,29 @@ import { useCardInfoInputField } from '../hooks/useCardInfoInputField';
 import PasswordInputWrapper from '../components/InputWrapper/PasswordInputWrapper';
 import CardBrandInputWrapper from '../components/InputWrapper/CardBrandInputWrapper';
 import { getPasswordErrorMessage } from '../utils/getPasswordErrorMessage';
-import { getCardNumberMaxLengths } from '../utils/getCardNumberMaxLengths';
-import { isFilledNumeric } from '../utils/isFilledNumeric';
 import type { CardBrandValue } from '../types/CardBrandValue';
 import type { CardAddCompleteState } from '../types/CardAddCompleteState';
 import ConfirmButton from '../components/ConfirmButton';
 
 export default function CardAddPage() {
-    const {
-        values: cardNumberValues,
-        setValueByIndex: setCardNumberValueByIndex,
-        errorMessage: cardNumberErrorMessage,
-        setErrorMessage: setCardNumberErrorMessage,
-        hasTouched: hasCardNumberTouched,
-        handleBlur: handleCardNumberBlur,
-        handleFocus: handleCardNumberFocus,
-        isSatisfy: isCardNumberSatisfy,
-        getRef: getCardNumberRef,
-    } = useCardInfoInputField({
-        validator: getCardNumberErrorMessage,
-        fieldCount: 4,
-        isFilled: (value, index) => isFilledNumeric(value, getCardNumberMaxLengths(cardNumberValues[0])[index]),
-    });
+    const { values: cardNumberValues, setValue: setCardNumberValue, isSatisfy: isCardNumberSatisfy } =
+        useCardInfoInputField({ validator: getCardNumberErrorMessage, fieldCount: 4 });
 
     const [cardBrand, setCardBrand] = useState<CardBrandValue>('');
 
-    const {
-        values: expValues,
-        setValueByIndex: setExpValueByIndex,
-        errorMessage: expErrorMessage,
-        setErrorMessage: setExpErrorMessage,
-        hasTouched: hasExpTouched,
-        handleBlur: handleExpBlur,
-        handleFocus: handleExpFocus,
-        isSatisfy: isExpSatisfy,
-        getRef: getExpRef,
-        focusFirst: focusFirstExp,
-    } = useCardInfoInputField({ validator: getEXPNumberErrorMessage, fieldCount: 2, isFilled: (value) => isFilledNumeric(value, 2) });
-
-    const {
-        values: cvcValues,
-        setValueByIndex: setCVCValueByIndex,
-        errorMessage: cvcErrorMessage,
-        setErrorMessage: setCVCErrorMessage,
-        hasTouched: hasCVCTouched,
-        handleBlur: handleCVCBlur,
-        handleFocus: handleCVCFocus,
-        isSatisfy: isCVCSatisfy,
-        getRef: getCVCRef,
-        focusFirst: focusFirstCVC,
-    } = useCardInfoInputField({
-        validator: (values) => getCVCumberErrorMessage(values[0]),
-        fieldCount: 1,
-        isFilled: (value) => isFilledNumeric(value, 3),
+    const { values: expValues, setValue: setExpValue, isSatisfy: isExpSatisfy } = useCardInfoInputField({
+        validator: getEXPNumberErrorMessage,
+        fieldCount: 2,
     });
 
-    const {
-        values: passwordValues,
-        setValueByIndex: setPasswordValueByIndex,
-        errorMessage: passwordErrorMessage,
-        setErrorMessage: setPasswordErrorMessage,
-        hasTouched: hasPasswordTouched,
-        handleBlur: handlePasswordBlur,
-        handleFocus: handlePasswordFocus,
-        isSatisfy: isPasswordSatisfy,
-        getRef: getPasswordRef,
-        focusFirst: focusFirstPassword,
-    } = useCardInfoInputField({
-        validator: (value) => getPasswordErrorMessage(value[0]),
+    const { values: cvcValues, setValue: setCVCValue, isSatisfy: isCVCSatisfy } = useCardInfoInputField({
+        validator: (values) => getCVCumberErrorMessage(values[0]),
         fieldCount: 1,
-        isFilled: (value) => isFilledNumeric(value, 2),
+    });
+
+    const { values: passwordValues, setValue: setPasswordValue, isSatisfy: isPasswordSatisfy } = useCardInfoInputField({
+        validator: (values) => getPasswordErrorMessage(values[0]),
+        fieldCount: 1,
     });
 
     const isCardBrandSatisfy = !!cardBrand;
@@ -92,39 +45,18 @@ export default function CardAddPage() {
                 <CardPreview cardNumbers={cardNumberValues} EXP={expValues} cardIssuer={cardBrand} />
                 <InputSectionContainer>
                     <PasswordInputWrapper
-                        setPassword={setPasswordValueByIndex(0)}
+                        setValue={setPasswordValue(0)}
                         value={passwordValues[0]}
-                        handleBlur={handlePasswordBlur}
-                        handleFocus={handlePasswordFocus}
-                        errorMessage={passwordErrorMessage}
-                        setErrorMessage={setPasswordErrorMessage}
-                        hasTouched={hasPasswordTouched}
-                        getRef={getPasswordRef}
-                        focusFirst={focusFirstPassword}
                         isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy}
                     />
                     <CVCInputWrapper
-                        setCVCNumber={setCVCValueByIndex(0)}
+                        setValue={setCVCValue(0)}
                         value={cvcValues[0]}
-                        handleBlur={handleCVCBlur}
-                        handleFocus={handleCVCFocus}
-                        errorMessage={cvcErrorMessage}
-                        setErrorMessage={setCVCErrorMessage}
-                        hasTouched={hasCVCTouched}
-                        getRef={getCVCRef}
-                        focusFirst={focusFirstCVC}
                         isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy}
                     />
                     <EXPInputWrapper
-                        setEXPNumber={setExpValueByIndex}
+                        setValue={setExpValue}
                         value={expValues}
-                        handleBlur={handleExpBlur}
-                        handleFocus={handleExpFocus}
-                        errorMessage={expErrorMessage}
-                        setErrorMessage={setExpErrorMessage}
-                        hasTouched={hasExpTouched}
-                        getRef={getExpRef}
-                        focusFirst={focusFirstExp}
                         isRender={isCardNumberSatisfy && isCardBrandSatisfy}
                     />
                     <CardBrandInputWrapper
@@ -132,17 +64,7 @@ export default function CardAddPage() {
                         setSelectedValue={setCardBrand}
                         isRender={isCardNumberSatisfy}
                     />
-                    <CardNumberInputWrapper
-                        setCardNumber={setCardNumberValueByIndex}
-                        value={cardNumberValues}
-                        handleBlur={handleCardNumberBlur}
-                        handleFocus={handleCardNumberFocus}
-                        errorMessage={cardNumberErrorMessage}
-                        setErrorMessage={setCardNumberErrorMessage}
-                        hasTouched={hasCardNumberTouched}
-                        getRef={getCardNumberRef}
-                        maxLengths={getCardNumberMaxLengths(cardNumberValues[0])}
-                    />
+                    <CardNumberInputWrapper setValue={setCardNumberValue} value={cardNumberValues} />
                     {isAllSatisfy && <ConfirmButtonSpacer />}
                 </InputSectionContainer>
                 {isAllSatisfy && (
