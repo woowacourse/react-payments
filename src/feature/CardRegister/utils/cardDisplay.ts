@@ -8,7 +8,7 @@ export const getCardBrandName = (
   const fullNumber = cardNumbers.join('');
 
   const matchedBrand = CARD_BRANDS.find((brand) =>
-    brand.prefixRules.some((rule) =>
+    brand.prefixRules.some((rule: Record<string, number>) =>
       isPrefixInRange(fullNumber, rule.digitCount, rule.start, rule.end),
     ),
   );
