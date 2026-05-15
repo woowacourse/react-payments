@@ -8,7 +8,17 @@ import {
 } from '@/entities/card/model/numbers';
 import { useState } from 'react';
 
-export const useNumbers = () => {
+export interface UseNumbersResults {
+  values: string[];
+  brand: string;
+  maxLengths: number[];
+  infoErrorField: boolean[];
+  totalErrorMessage: string | undefined;
+  handleChange: (input: string, index: number) => void;
+  handleBlur: (index: number) => void;
+}
+
+export const useNumbers = (): UseNumbersResults => {
   const [numbers, setNumbers] = useState<string[]>(['', '', '', '']);
   const [touched, setTouched] = useState<boolean[]>([false, false, false, false]);
 
@@ -38,7 +48,7 @@ export const useNumbers = () => {
     values: numbers,
     brand,
     maxLengths: format,
-    fieldErrors: infoErrorField,
+    infoErrorField,
     totalErrorMessage,
     handleChange,
     handleBlur,
