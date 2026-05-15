@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-import {getCards} from '@/api/cardsApi';
+import {deleteCard, getCards} from '@/api/cardsApi';
 import type {CardResponse} from '@/domain/card/cardApi.types';
 
 type CardsState =
@@ -27,6 +27,23 @@ export const useCards = () => {
     }
   };
 
+  // 삭제 확인 후 서버 카드 삭제
+  const removeCard = async (id: string) => {
+    const isConfirmed = window.confirm('카드를 삭제할까요?');
+
+    if (!isConfirmed) return;
+
+    try {
+      await deleteCard(id);
+      await fetchCards();
+    } catch {
+      setState({
+        status: 'error',
+        message: '카드 삭제에 실패했습니다.',
+      });
+    }
+  };
+
   useEffect(() => {
     // idle 상태를 한 번 거친 뒤 목록 조회 시작 (지금 바로 말고, 이번 턴 끝나자마자 fetchCards 실행)
     Promise.resolve().then(fetchCards);
@@ -35,5 +52,6 @@ export const useCards = () => {
   return {
     state,
     refetch: fetchCards,
+    removeCard,
   };
 };

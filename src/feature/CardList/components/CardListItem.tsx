@@ -5,9 +5,10 @@ import {CARD_COMPANIES, DEFAULT_CARD_COLOR, getCompanyByIssuerCode} from '@/doma
 
 type CardListItemProps = {
   card: CardResponse;
+  onDeleteCard: (id: string) => void;
 };
 
-const CardListItem = ({card}: CardListItemProps) => {
+const CardListItem = ({card, onDeleteCard}: CardListItemProps) => {
   const company = getCompanyByIssuerCode(card.issuerCode);
   const cardColor = company ? CARD_COMPANIES[company].backgroundColor : DEFAULT_CARD_COLOR;
   const companyName = company ? CARD_COMPANIES[company].name : '알 수 없는 카드';
@@ -20,7 +21,7 @@ const CardListItem = ({card}: CardListItemProps) => {
         <CardNumber>{card.number}</CardNumber>
         <ExpirationDate>유효기간 {card.expirationDate}</ExpirationDate>
       </Info>
-      <DeleteButton type='button' aria-label={`${companyName} 삭제`}>
+      <DeleteButton type='button' aria-label={`${companyName} 삭제`} onClick={() => onDeleteCard(card.id)}>
         <DeleteIcon src='/images/delete_icon.svg' alt='' />
       </DeleteButton>
     </Item>

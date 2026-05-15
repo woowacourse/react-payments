@@ -6,14 +6,15 @@ import CardListItem from './CardListItem';
 type CardListSuccessProps = {
   cards: CardResponse[];
   onAddCard: () => void;
+  onDeleteCard: (id: string) => void;
 };
 
-const CardListSuccess = ({cards, onAddCard}: CardListSuccessProps) => {
+const CardListSuccess = ({cards, onAddCard, onDeleteCard}: CardListSuccessProps) => {
   return (
     <Container>
       <List>
         {cards.map((card) => (
-          <CardListItem key={card.id} card={card} />
+          <CardListItem key={card.id} card={card} onDeleteCard={onDeleteCard} />
         ))}
       </List>
       <AddCardButton onClick={onAddCard}>+ 카드 추가</AddCardButton>

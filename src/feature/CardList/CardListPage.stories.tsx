@@ -30,7 +30,11 @@ const createErrorResponse = () =>
 
 const withMockFetch = (fetchCards: () => Promise<Response>): Decorator => {
   return (Story) => {
-    window.fetch = fetchCards;
+    window.fetch = async (_input, init) => {
+      if (init?.method === 'DELETE') return new Response(null, {status: 204});
+
+      return fetchCards();
+    };
 
     return (
       <StoryBackground>
