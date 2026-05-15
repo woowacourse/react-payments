@@ -12,6 +12,6 @@ export const TestProvider = ({ children, route = '/' }: TestProviderProps) => {
   return <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>;
 };
 
-export const renderProvider = ({ children, route }: TestProviderProps) => {
+export const renderProvider = (children: ReactNode, { route = '/' }: { route?: string } = {}) => {
   return render(<TestProvider route={route}>{children}</TestProvider>);
 };
