@@ -6,7 +6,10 @@ export default function SendButton() {
 
   return (
     <Wrapper>
-      <Button onClick={() => navigate("/react-payments/enrollment")}>
+      <Button
+        type="button"
+        onClick={() => navigate("/react-payments/enrollment")}
+      >
         확인
       </Button>
     </Wrapper>
