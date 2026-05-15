@@ -20,15 +20,3 @@
 ## 3. 카드 삭제
 
 - 삭제 버튼 클릭 시 삭제 여부를 받고, 사용자가 확인한 경우에만 삭제를 진행한다.
-
-✅ 프로그래밍 요구사항
-이전 미션의 프로그래밍 요구사항은 기본으로 포함한다.
-
-MSW
-POST /cards, GET /cards, DELETE /cards/:id handler를 작성한다.
-POST /cards에 400 시나리오(지원하지 않는 카드사 등)를 추가한다.
-Async State
-비동기 상태를 idle | loading | success | error 네 가지로 명시적으로 다룬다.
-isLoading, error를 별도 boolean으로 분리하지 않는다.
-Test
-MSW와 RTL로 사용자 관점의 통합 테스트를 작성한다.
