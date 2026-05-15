@@ -40,6 +40,19 @@ const getServerFieldName = (code?: string): keyof ServerFieldErrors | null => {
   return null;
 };
 
+const ERROR_FIELD_INPUT_IDS: Record<keyof ServerFieldErrors, string> = {
+  cardNumbers: 'card-number-0',
+  cardCompany: 'card-company',
+  cardExpiryDate: 'card-expiry-month',
+  cardCvc: 'card-cvc',
+};
+
+const focusErrorField = (fieldName: keyof ServerFieldErrors) => {
+  window.requestAnimationFrame(() => {
+    document.getElementById(ERROR_FIELD_INPUT_IDS[fieldName])?.focus();
+  });
+};
+
 export function useCardRegisterForm() {
   const navigate = useNavigate();
   const [submitError, setSubmitError] = useState('');
@@ -179,6 +192,7 @@ export function useCardRegisterForm() {
         ...prev,
         [fieldName]: cardError.message,
       }));
+      focusErrorField(fieldName);
     }
   };
 
