@@ -59,7 +59,8 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
             border-radius: 4px;
           `}
         ></div>
-        {brand && (
+
+        {LOGO_MAP[brand] && (
           <img
             alt="카드 브랜드 이미지"
             css={css`
