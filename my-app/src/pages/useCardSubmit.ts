@@ -5,12 +5,16 @@ import {
   type CardCompany,
 } from '../components/cardCompanySection/CardCompanyConstants';
 import { postCard } from '../api/cardApi';
+import type { FormState } from './useCardFormState';
 
-export const useCardSubmit = () => {
+export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
   const navigate = useNavigate();
   const { run, status, error } = useAsync<{ id: string }>();
 
-  const submitCard = async (formState: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
     // 서버에 보낼 데이터 정리
     const sendingData = {
       number: formState.cardNumber.join(''),
@@ -36,5 +40,10 @@ export const useCardSubmit = () => {
     }
   };
 
-  return { submitCard, status, error };
+  const serverError = error as unknown as {
+    code: string;
+    message: string;
+  } | null;
+
+  return { handleSubmit, status, serverError };
 };

@@ -1,6 +1,14 @@
 import { useState } from "react";
 import type { CardCompany } from "../components/cardCompanySection/CardCompanyConstants";
 
+export interface FormState {
+   cardNumber: string[],
+   cardCompany: CardCompany | '',
+   expirationDate: { month: string, year: string },
+   cvc: string,
+   password: string,
+}
+
 export const useCardFormState = () => {
   const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
   const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');

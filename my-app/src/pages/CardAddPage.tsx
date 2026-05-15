@@ -12,16 +12,7 @@ import { useCardSubmit } from './useCardSubmit';
 const CardAddPage = () => {
   const { formState, setters } = useCardFormState();
   const { isFormValid, canShowSteps } = useCardFormValidation(formState);
-  const { submitCard, status, error } = useCardSubmit();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!isFormValid) return;
-
-    await submitCard(formState);
-  };
-
-  const serverError = error as unknown as { code: string; message: string; } | null;
+  const { handleSubmit, status, serverError } = useCardSubmit(formState, isFormValid);
 
   return (
     <>
