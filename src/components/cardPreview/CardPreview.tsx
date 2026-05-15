@@ -8,7 +8,7 @@ import { useCardBrandContext } from "../../context/cardBrand/CardBrandContext";
 
 export default function CardPreview() {
   const { cardNumber, cardType } = useCardNumberContext();
-  const { expireDate } = useExpireDateContext();
+  const { expireDate, expireDateError } = useExpireDateContext();
   const {
     selectedItem: { color },
   } = useCardBrandContext();
@@ -28,7 +28,7 @@ export default function CardPreview() {
           />
           <CardPreviewNumber
             gap="0px"
-            cardArray={formatExpireDate(expireDate)}
+            cardArray={formatExpireDate(expireDate, expireDateError)}
           />
         </CardImageInfoWrapper>
       </Card>
