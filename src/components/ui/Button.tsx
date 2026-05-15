@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary';
-  size?: 'lg' | 'md';
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'solid' | 'dashed';
+  size?: 'lg' | 'md' | 'sm';
   rounded?: boolean;
 }
 
-export default function Button({ variant = 'primary', size = 'md', rounded = true, children, ...props }: ButtonProps) {
+export default function Button({ variant = 'solid', size = 'md', rounded = true, children, ...props }: ButtonProps) {
   return (
     <button
       type={props.type ?? 'button'}
@@ -23,11 +23,6 @@ const buttonStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  :disabled {
-    cursor: none;
-    pointer-events: none;
-  }
 `;
 
 const roundedStyle = css`
@@ -45,15 +40,29 @@ const sizes = {
     font-weight: 700;
     font-size: 15px;
   `,
+  sm: css`
+    height: 40px;
+    font-weight: 500;
+    font-size: 13px;
+  `,
 };
 
 const variants = {
-  primary: css`
+  solid: css`
     background-color: var(--color-background-button-primary);
     color: white;
 
     :disabled {
       background-color: var(--color-border-default);
+    }
+  `,
+  dashed: css`
+    background-color: white;
+    color: #8c8c8c;
+    border: 1px dashed #e6e6e6;
+
+    :disabled {
+      color: var(--color-border-default);
     }
   `,
 };

@@ -104,4 +104,10 @@ ul, li, button {
 
 button {
   border: none;
+  background-color: transparent;
+  
+  :disabled {
+    cursor: none;
+    pointer-events: none;
+  }
 }
