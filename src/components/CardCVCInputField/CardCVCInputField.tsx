@@ -2,7 +2,7 @@ import { CVC_MAX_LENGTH, HELPER_MESSAGE, type InputStatus } from "./constants";
 import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
 import { useState } from "react";
-import { checkIsOnlyDigits, checkLengthMatches } from "@/utils/validator";
+import { validateCVCInput } from "@/utils/validator";
 import type { AddCardFormStepKey } from "@/constants/cardForm";
 
 interface CardCVCInputFieldProps {
@@ -19,31 +19,28 @@ const CardCVCInputField = ({
   const [status, setStatus] = useState<InputStatus>("DEFAULT");
 
   const handleCVCChange = (input: string) => {
-    if (!checkIsOnlyDigits(input)) {
+    const nextCVC = input.slice(0, CVC_MAX_LENGTH);
+    const validationStatus = validateCVCInput(nextCVC);
+
+    onChange(nextCVC);
+
+    if (validationStatus === "NOT_NUMBER") {
       setStatus("NOT_NUMBER");
       return;
     }
 
     setStatus("DEFAULT");
-    onChange(input.slice(0, CVC_MAX_LENGTH));
 
-    if (checkLengthMatches(input, CVC_MAX_LENGTH)) {
+    if (validationStatus === "DEFAULT") {
       onNextStep("CVC");
     }
   };
 
   const handleCVCBlur = (input: string) => {
-    if (input.length === 0) {
-      setStatus("EMPTY");
-      return;
-    }
+    const nextCVC = input.slice(0, CVC_MAX_LENGTH);
+    const validationStatus = validateCVCInput(nextCVC);
 
-    if (!checkLengthMatches(input, CVC_MAX_LENGTH)) {
-      setStatus("INVALID_LENGTH");
-      return;
-    }
-
-    setStatus("DEFAULT");
+    setStatus(validationStatus);
   };
 
   return (

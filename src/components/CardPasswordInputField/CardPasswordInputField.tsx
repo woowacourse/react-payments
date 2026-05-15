@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { checkIsOnlyDigits, checkLengthMatches } from "@/utils/validator";
+import { validatePasswordInput } from "@/utils/validator";
 import {
   HELPER_MESSAGE,
   PASSWORD_MAX_LENGTH,
@@ -20,27 +20,24 @@ const CardPasswordInputField = ({
   const [status, setStatus] = useState<InputStatus>("DEFAULT");
 
   const handlePasswordChange = (input: string) => {
-    if (!checkIsOnlyDigits(input)) {
+    const nextPassword = input.slice(0, PASSWORD_MAX_LENGTH);
+    const validationStatus = validatePasswordInput(nextPassword);
+
+    onChange(nextPassword);
+
+    if (validationStatus === "NOT_NUMBER") {
       setStatus("NOT_NUMBER");
       return;
     }
 
     setStatus("DEFAULT");
-    onChange(input.slice(0, PASSWORD_MAX_LENGTH));
   };
 
   const handlePasswordBlur = (input: string) => {
-    if (input.length === 0) {
-      setStatus("EMPTY");
-      return;
-    }
+    const nextPassword = input.slice(0, PASSWORD_MAX_LENGTH);
+    const validationStatus = validatePasswordInput(nextPassword);
 
-    if (!checkLengthMatches(input, PASSWORD_MAX_LENGTH)) {
-      setStatus("INVALID_LENGTH");
-      return;
-    }
-
-    setStatus("DEFAULT");
+    setStatus(validationStatus);
   };
 
   return (

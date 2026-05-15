@@ -1,11 +1,8 @@
 import type { CardNumberUnits } from "@/components/CardNumberInputField/CardNumberInputField";
-import { detectCardBrand } from "./card";
-import {
-  CARD_BRANDS,
-  DEFAULT_CARD_NUMBER_TOTAL_LENGTH,
-} from "@/constants/cardBrands";
+import { detectCardBrand, getCardNumberFormat } from "./card";
 import type { CardCompany } from "@/constants/cardCompanies";
 import type { ValidityPeriod } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import { CARD_FIELD_LENGTH } from "@/constants/cardForm";
 
 export const checkIsOnlyDigits = (input: string) => /^\d*$/.test(input);
 
@@ -35,14 +32,81 @@ export const checkExpiredValidityPeriod = (month: string, year: string) => {
   );
 };
 
-export const checkCardNumberLength = (cardNumber: CardNumberUnits) => {
-  const brandName = detectCardBrand(cardNumber);
-  const cardNumberLength = cardNumber.join("").length;
-  const expectedLength = brandName
-    ? CARD_BRANDS[brandName].totalLength
-    : DEFAULT_CARD_NUMBER_TOTAL_LENGTH;
+export const validateCardNumberInput = (cardNumber: CardNumberUnits) => {
+  const cardBrand = detectCardBrand(cardNumber);
+  const cardNumberFormat = getCardNumberFormat(cardBrand);
 
-  return cardNumberLength === expectedLength;
+  const invalidStatus = cardNumberFormat
+    .map((expectedLength, index) =>
+      validateCardNumberUnitInput(cardNumber[index] ?? "", expectedLength),
+    )
+    .find((status) => status !== "DEFAULT");
+
+  return invalidStatus ?? "DEFAULT";
+};
+
+export const validateCardNumberUnitInput = (
+  input: string,
+  expectedLength: number,
+) => {
+  if (input.length === 0) return "EMPTY";
+  if (!checkIsOnlyDigits(input)) return "NOT_NUMBER";
+  if (!checkLengthMatches(input, expectedLength)) return "INVALID_LENGTH";
+
+  return "DEFAULT";
+};
+
+export const validateExpiryMonth = (month: string, year: string) => {
+  if (month.length === 0) return "EMPTY_MONTH";
+  if (!checkIsOnlyDigits(month)) return "NOT_NUMBER";
+  if (!checkLengthMatches(month, CARD_FIELD_LENGTH.VALIDITY_MONTH)) {
+    return "INVALID_MONTH_LENGTH";
+  }
+  if (!validateMonthRange(+month)) return "INVALID_MONTH_RANGE";
+  if (
+    checkLengthMatches(year, CARD_FIELD_LENGTH.VALIDITY_YEAR) &&
+    checkExpiredValidityPeriod(month, year)
+  ) {
+    return "EXPIRED_VALIDITY_PERIOD";
+  }
+
+  return "DEFAULT";
+};
+
+export const validateExpiryYear = (year: string, month: string) => {
+  if (year.length === 0) return "EMPTY_YEAR";
+  if (!checkIsOnlyDigits(year)) return "NOT_NUMBER";
+  if (!checkLengthMatches(year, CARD_FIELD_LENGTH.VALIDITY_YEAR)) {
+    return "INVALID_YEAR_LENGTH";
+  }
+  if (
+    checkLengthMatches(month, CARD_FIELD_LENGTH.VALIDITY_MONTH) &&
+    checkExpiredValidityPeriod(month, year)
+  ) {
+    return "EXPIRED_VALIDITY_PERIOD";
+  }
+
+  return "DEFAULT";
+};
+
+export const validateCVCInput = (input: string) => {
+  if (input.length === 0) return "EMPTY";
+  if (!checkIsOnlyDigits(input)) return "NOT_NUMBER";
+  if (!checkLengthMatches(input, CARD_FIELD_LENGTH.CVC)) {
+    return "INVALID_LENGTH";
+  }
+
+  return "DEFAULT";
+};
+
+export const validatePasswordInput = (input: string) => {
+  if (input.length === 0) return "EMPTY";
+  if (!checkIsOnlyDigits(input)) return "NOT_NUMBER";
+  if (!checkLengthMatches(input, CARD_FIELD_LENGTH.PASSWORD)) {
+    return "INVALID_LENGTH";
+  }
+
+  return "DEFAULT";
 };
 
 export const validateCardForm = (
@@ -53,22 +117,21 @@ export const validateCardForm = (
   password: string,
 ) => {
   // 카드 번호 검증
-  if (!checkCardNumberLength(cardNumber)) return false;
+
+  if (validateCardNumberInput(cardNumber) !== "DEFAULT") return false;
 
   // 카드사 검증
   if (!cardCompany) return false;
 
   // 유효기간 검증
-  if (!checkLengthMatches(month, 2)) return false;
-  if (!validateMonthRange(+month)) return false;
-  if (!checkLengthMatches(year, 2)) return false;
-  if (checkExpiredValidityPeriod(month, year)) return false;
+  if (validateExpiryMonth(month, year) !== "DEFAULT") return false;
+  if (validateExpiryYear(year, month) !== "DEFAULT") return false;
 
-  // CVC 번호 검증
-  if (!checkLengthMatches(CVC, 3)) return false;
+  // CVC 검증
+  if (validateCVCInput(CVC) !== "DEFAULT") return false;
 
   // 비밀번호 검증
-  if (!checkLengthMatches(password, 2)) return false;
+  if (validatePasswordInput(password) !== "DEFAULT") return false;
 
   return true;
 };

@@ -1,7 +1,6 @@
 import {
-  checkCardNumberLength,
-  checkIsOnlyDigits,
-  checkLengthMatches,
+  validateCardNumberInput,
+  validateCardNumberUnitInput,
 } from "@utils/validator";
 import { useState } from "react";
 import { HELPER_MESSAGE, type InputStatus } from "./constants";
@@ -65,14 +64,21 @@ const CardNumberInputField = ({
   };
 
   const handleCardNumberChange = (index: number, input: string) => {
-    if (!checkIsOnlyDigits(input)) {
+    const newCardNumberUnits = updateCardNumberUnit(index, input);
+    const validationStatus = validateCardNumberUnitInput(
+      newCardNumberUnits[index],
+      cardNumberFormat[index],
+    );
+
+    onChange(newCardNumberUnits);
+
+    if (validationStatus === "NOT_NUMBER") {
       updateInputStatus(index, "NOT_NUMBER");
       return;
     }
 
     updateInputStatus(index, "DEFAULT");
 
-    const newCardNumberUnits = updateCardNumberUnit(index, input);
     const newCardBrand = detectCardBrand(newCardNumberUnits);
     const newCardNumberFormat = getCardNumberFormat(newCardBrand);
 
@@ -83,31 +89,24 @@ const CardNumberInputField = ({
       );
       onChange(reformattedUnits);
       setStatus(reformattedUnits.map(() => "DEFAULT"));
-    } else {
-      onChange(newCardNumberUnits);
     }
 
-    if (newCardNumberUnits[index].length === cardNumberFormat[index]) {
+    if (validationStatus === "DEFAULT") {
       focusNextInput(index);
     }
 
-    if (checkCardNumberLength(newCardNumberUnits)) {
+    if (validateCardNumberInput(newCardNumberUnits) === "DEFAULT") {
       onNextStep("CARD_NUMBER");
     }
   };
 
   const handleCardNumberBlur = (index: number, input: string) => {
-    if (input.length === 0) {
-      updateInputStatus(index, "EMPTY");
-      return;
-    }
+    const validationStatus = validateCardNumberUnitInput(
+      input.slice(0, cardNumberFormat[index]),
+      cardNumberFormat[index],
+    );
 
-    if (!checkLengthMatches(input, cardNumberFormat[index])) {
-      updateInputStatus(index, "INVALID_LENGTH");
-      return;
-    }
-
-    updateInputStatus(index, "DEFAULT");
+    updateInputStatus(index, validationStatus);
   };
 
   return (

@@ -1,6 +1,6 @@
-import { CARD_FORM_LENGTH } from "@/constants/cardForm";
+import { CARD_FIELD_LENGTH } from "@/constants/cardForm";
 
-export const PASSWORD_MAX_LENGTH = CARD_FORM_LENGTH.PASSWORD;
+export const PASSWORD_MAX_LENGTH = CARD_FIELD_LENGTH.PASSWORD;
 
 export const HELPER_MESSAGE = {
   DEFAULT: "",

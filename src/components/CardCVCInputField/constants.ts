@@ -1,6 +1,6 @@
-import { CARD_FORM_LENGTH } from "@/constants/cardForm";
+import { CARD_FIELD_LENGTH } from "@/constants/cardForm";
 
-export const CVC_MAX_LENGTH = CARD_FORM_LENGTH.CVC;
+export const CVC_MAX_LENGTH = CARD_FIELD_LENGTH.CVC;
 
 export const HELPER_MESSAGE = {
   DEFAULT: "",

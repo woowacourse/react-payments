@@ -1,7 +1,7 @@
-import { CARD_FORM_LENGTH } from "@/constants/cardForm";
+import { CARD_FIELD_LENGTH } from "@/constants/cardForm";
 
-export const MONTH_MAX_LENGTH = CARD_FORM_LENGTH.VALIDITY_MONTH;
-export const YEAR_MAX_LENGTH = CARD_FORM_LENGTH.VALIDITY_YEAR;
+export const MONTH_MAX_LENGTH = CARD_FIELD_LENGTH.VALIDITY_MONTH;
+export const YEAR_MAX_LENGTH = CARD_FIELD_LENGTH.VALIDITY_YEAR;
 
 export const HELPER_MESSAGE = {
   DEFAULT: "",
