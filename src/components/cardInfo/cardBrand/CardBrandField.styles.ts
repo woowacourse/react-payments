@@ -13,6 +13,7 @@ export const Trigger = styled.button`
   cursor: pointer;
   font-size: 14px;
   color: rgba(172, 172, 172, 1);
+  margin-top: 16px;
 `;
 
 export const DropdownList = styled.ul`

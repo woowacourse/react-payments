@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Description, Field, Label, Title } from '../CardInfo.styles';
+import { Description, Field, Title } from '../CardInfo.styles';
 import { Trigger, DropdownList, DropdownItem } from './CardBrandField.styles';
 import { useCardForm } from '../../useCardForm';
 import { CARD_BRANDS } from '../../../constants/constants';
@@ -22,7 +22,6 @@ export default function CardBrandField({ field }: Props) {
     <Field>
       <Title>카드사를 선택해 주세요</Title>
       <Description>현재 국내 카드사만 가능합니다</Description>
-      <Label></Label>
       <Trigger onClick={() => setIsOpen((prev) => !prev)}>
         <span>
           {cardBrand ? CARD_BRANDS[cardBrand].label : '카드사를 선택해주세요'}
