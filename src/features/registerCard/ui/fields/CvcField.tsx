@@ -20,10 +20,10 @@ export const CvcField = ({ value, handleChange }: FieldControl) => {
   };
 
   const error = validateCvc(value);
-  const errorMessgae = touched ? getErrorCvc(value) : undefined;
+  const errorMessage = touched ? getErrorCvc(value) : undefined;
 
   return (
-    <Field title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={errorMessgae}>
+    <Field title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={errorMessage}>
       <Input
         type="text"
         inputMode="numeric"
