@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { CARD_COMPANIES, DEFAULT_CARD_COLOR, isCardCompany } from "../../../constants/cardCompany";
-import type { CardInfo } from "../../../types";
+import type { CardDisplayInfo } from "../../../types";
 import type { CardNetwork } from "../../../utils/cardNetwork";
 
 import amexLogo from "../../../assets/American Express.png";
@@ -29,17 +29,20 @@ const getCardColor = (company: string) => {
 };
 
 type CardProps = {
-  cardInfo: CardInfo;
-  network: CardNetwork;
+  cardInfo: CardDisplayInfo;
 };
 
-const Card = ({ cardInfo, network }: CardProps) => {
+const Card = ({ cardInfo }: CardProps) => {
   return (
     <div css={cardStyle(cardInfo.company)}>
       <div css={cardHeaderStyle}>
         <div css={chipStyle}></div>
-        {network !== "" && (
-          <img css={brandLogoStyle} src={NETWORK_LOGO[network].src} alt={NETWORK_LOGO[network].alt} />
+        {cardInfo.network !== "" && (
+          <img
+            css={networkLogoStyle}
+            src={NETWORK_LOGO[cardInfo.network].src}
+            alt={NETWORK_LOGO[cardInfo.network].alt}
+          />
         )}
       </div>
       <div>
@@ -87,7 +90,7 @@ const chipStyle = css`
   border-radius: 4px;
 `;
 
-const brandLogoStyle = css`
+const networkLogoStyle = css`
   width: 36px;
   height: 22px;
 `;

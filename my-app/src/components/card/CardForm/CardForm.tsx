@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import type { CardInfo, PublicCardInfo } from "../../../types";
+import type { CardDisplayInfo, PublicCardInfo } from "../../../types";
 import { useCardForm } from "../../../hooks/useCardForm";
 
 import Card from "../Card/Card";
@@ -14,13 +14,13 @@ type CardFormProps = {
   onSubmit: (publicCardInfo: PublicCardInfo) => void;
 };
 
-const toPublicCardInfo = (cardInfo: CardInfo): PublicCardInfo => ({
+const toPublicCardInfo = (cardInfo: CardDisplayInfo): PublicCardInfo => ({
   numberHead: cardInfo.numbers[0],
   company: cardInfo.company,
 });
 
 const CardForm = ({ onSubmit }: CardFormProps) => {
-  const { cardInfo, network, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
+  const { cardInfo, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
 
   const handleConfirm = () => {
     onSubmit(toPublicCardInfo(cardInfo));
@@ -29,7 +29,7 @@ const CardForm = ({ onSubmit }: CardFormProps) => {
   return (
     <div css={formContainerStyle}>
       <div css={contentStyle}>
-        <Card cardInfo={cardInfo} network={network} />
+        <Card cardInfo={cardInfo} />
         <div css={sectionsStyle}>
           {completion.cvc && <PasswordInputSection onValueHandler={handlers.password} />}
           {completion.expiry && <CvcInputSection onValueHandler={handlers.cvc} />}
