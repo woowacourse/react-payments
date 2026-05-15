@@ -4,7 +4,7 @@
     "target": "ESNext",
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ES5", "DOM"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "esnext",
     "types": ["vite/client"],
     "skipLibCheck": true,
