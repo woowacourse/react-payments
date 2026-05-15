@@ -65,7 +65,7 @@ const CardValidityPeriodInputField = ({
     const state = checkCardNumberInputStatus(key, padded);
     setValue("validityPeriodStatus", { ...status, [key]: state });
 
-    if (state !== "DEFAULT") return;
+    if (state !== "DEFAULT" && state !== "SUCCESS") return;
     setValue("validityPeriod", { ...validityPeriod, [key]: padded });
   };
 
