@@ -1,4 +1,9 @@
-import { forwardRef, useState, type ChangeEvent, type ComponentProps } from "react";
+import {
+  forwardRef,
+  useState,
+  type ChangeEvent,
+  type ComponentProps,
+} from "react";
 import styled from "@emotion/styled";
 import Flex from "./Flex";
 import InputErrorMessage from "./InputErrorMessage";
@@ -25,7 +30,7 @@ interface ValidationInputProps extends ComponentProps<"input"> {
 }
 
 const ValidationInput = forwardRef<HTMLInputElement, ValidationInputProps>(
-  function ValidationInput({ validations, onChange, onBlur, ...props }, ref) {
+  function ValidationInput({ validations, onChange, ...props }, ref) {
     const [inputError, setInputError] = useState<null | Error>(null);
 
     const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -45,9 +50,9 @@ const ValidationInput = forwardRef<HTMLInputElement, ValidationInputProps>(
       onChange?.(event);
     };
 
-    const handleOnBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
-      onBlur?.(event);
-
+    const handleOnBlur = (
+      event: React.FocusEvent<HTMLInputElement, Element>,
+    ) => {
       const failedValidation = validations.find(
         (validation) =>
           typeof props.value === "string" &&

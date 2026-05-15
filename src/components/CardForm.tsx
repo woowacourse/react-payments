@@ -35,6 +35,7 @@ function CardForm(props: CardFormProps) {
   const isCardNumberComplete = segmentLengths.every(
     (len, i) => props.formState.cardNumberSegments[i]?.length === len,
   );
+
   const isCardCompanySelected = !!props.formState.cardCompany;
   const isExpiryComplete =
     props.formState.expiryMonth.length === 2 &&
