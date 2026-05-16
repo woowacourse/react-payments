@@ -14,6 +14,7 @@ type NumberFieldProps = {
 
 const NumberField = ({inputProps, errorMessage, errorIndex}: NumberFieldProps) => {
   const inputPropsWithFocusMove = useSequentialInputFocus(inputProps);
+  const errorMessageId = errorIndex >= 0 ? `card-number-error-${errorIndex}` : undefined;
 
   return (
     <InputContainer
@@ -24,17 +25,23 @@ const NumberField = ({inputProps, errorMessage, errorIndex}: NumberFieldProps) =
     >
       <FieldLayout>
         <InputWrapper $columns={inputProps.map(({maxLength}) => `${maxLength}fr`).join(' ')}>
-          {inputPropsWithFocusMove.map((props, index) => (
-            <CardNumberInput
-              key={index}
-              id={`card-number-${index}`}
-              {...props}
-              strokeMode={index === errorIndex ? 'error' : 'default'}
-            />
-          ))}
+          {inputPropsWithFocusMove.map((props, index) => {
+            const hasError = index === errorIndex;
+
+            return (
+              <CardNumberInput
+                key={index}
+                id={`card-number-${index}`}
+                {...props}
+                aria-invalid={hasError ? 'true' : undefined}
+                aria-describedby={hasError ? errorMessageId : undefined}
+                strokeMode={hasError ? 'error' : 'default'}
+              />
+            );
+          })}
         </InputWrapper>
 
-        <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
+        <FieldErrorMessage id={errorMessageId}>{errorMessage}</FieldErrorMessage>
       </FieldLayout>
     </InputContainer>
   );
