@@ -3,24 +3,33 @@ import { useState, useEffect, useCallback } from 'react';
 import type { Options, Result } from './useLoadDAta.types';
 
 export const useLoadData = <T = unknown>({ queryFn }: Options): Result<T> => {
-  const [hasFetched, setHasFetched] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState<Error | null>(null);
+  const [status, setStatus] = useState<Result<T>>({
+    status: 'idle',
+    data: null,
+    error: null,
+  });
 
   const fetchData = useCallback(async (): Promise<T | void> => {
-    setIsLoading(true);
-    setError(null);
+    setStatus({
+      status: 'loading',
+      data: null,
+      error: null,
+    });
 
     try {
       const data = (await queryFn()) as T;
-      setData(data);
+      setStatus({
+        status: 'success',
+        data,
+        error: null,
+      });
       return data;
-    } catch (error) {
-      setError(error as Error);
-    } finally {
-      setIsLoading(false);
-      setHasFetched(true);
+    } catch {
+      setStatus({
+        status: 'error',
+        data: null,
+        error: true,
+      });
     }
   }, [queryFn]);
 
@@ -28,5 +37,5 @@ export const useLoadData = <T = unknown>({ queryFn }: Options): Result<T> => {
     fetchData();
   }, []);
 
-  return { data, error, isLoading, hasFetched };
+  return status;
 };
