@@ -11,11 +11,11 @@ export const Cards = () => {
   const { cards, error, isLoading } = useCards();
   return (
     <ContentBox>
-      <Title>보유 카드 ({cards.length})</Title>
+      <Title>보유 카드 ({cards?.length})</Title>
       {isLoading && <>loading</>}
       {error && <>error</>}
       <List>
-        {cards.map((card) => {
+        {cards?.map((card) => {
           return (
             <List.Item
               key={card.id}
