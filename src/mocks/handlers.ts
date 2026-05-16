@@ -20,7 +20,14 @@ const createErrorResponse = (code: ErrorCode) =>
 export const handlers = [
   // 카드 추가
   http.post(CARDS_ENDPOINT, async ({request}) => {
-    const requestBody = await request.json();
+    let requestBody;
+
+    try {
+      requestBody = await request.json();
+    } catch {
+      return createErrorResponse('INVALID_CARD_NUMBER');
+    }
+
     const card = requestBody as Partial<CreateCardRequest>;
     const errorCode = validateCreateCardRequest(card);
 
