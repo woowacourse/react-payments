@@ -1,32 +1,17 @@
-import type { BaseValidationRule, CardBrand, ErrorStatus, ExpirationPeriodErrorStatus, ExpirationValidationRule } from './types';
+import type { BaseValidationRule, ExpirationPeriodErrorStatus, ExpirationValidationRule } from './types';
 import { isNumber, isValidMonth, isValidYear, isValidMonthAndYear } from './utils';
 
-export const ERROR_MESSAGES: Record<Exclude<ErrorStatus, null>, string> = {
+export const ERROR_MESSAGES: Record<Exclude<ExpirationPeriodErrorStatus, null>, string> = {
   required: '필수 입력 항목입니다.',
   invalidLength: '입력 길이가 올바르지 않습니다.',
   numberOnly: '숫자만 입력 가능합니다.',
-};
-
-export const EXPIRATION_PERIOD_ERROR_MESSAGES: Record<Exclude<ExpirationPeriodErrorStatus, null>, string> = {
-  ...ERROR_MESSAGES,
   invalidMonth: '올바른 월을 입력하세요.',
   invalidYear: '올바른 연도를 입력하세요.',
 };
 
 export const CARD_NUMBER_LENGTH_PER_INPUT = 4;
 export const PERIOD_LENGTH_PER_INPUT = 2;
-export const DEFAULT_CVC_LENGTH = 3;
 export const PASSWORD_LENGTH = 2;
-export const DEFAULT_CARD_TOTAL_LENGTH = 16;
-
-export const CARD_TOTAL_LENGTH: Partial<Record<CardBrand, number>> = {
-  amex: 15,
-  diners: 14,
-};
-
-export const CARD_CVC_MAX_LENGTH: Partial<Record<CardBrand, number>> = {
-  amex: 4,
-};
 
 export const CARD_COMPANY_OPTIONS = [
   { label: '카드사를 선택해 주세요', value: '' },
@@ -62,9 +47,14 @@ export const RULES = {
     fn: (v: string) => v.length === length,
     on: ['onBlur'],
   }),
+  exactLengthOnComplete: (length: number): BaseValidationRule => ({
+    name: 'invalidLength',
+    fn: (v: string) => v.length === length,
+    on: ['onComplete'],
+  }),
   validMonthAndYear: {
     name: 'invalidYear',
     fn: (v: string) => isValidMonthAndYear(v.slice(0, 2), v.slice(2, 4)),
-    on: ['onBlur'],
+    on: ['onComplete'],
   } satisfies ExpirationValidationRule,
 };
