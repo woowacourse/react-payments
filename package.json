@@ -10,12 +10,13 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --minify=false && npx gh-pages -d dist"
+    "deploy": "vite build --mode gh-pages --minify=false && npx gh-pages -d dist"
   },
   "homepage": "https://bel1c10ud.github.io/react-payments",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "msw": "^2.14.6",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "^7.15.0"
@@ -45,5 +46,10 @@
     "typescript-eslint": "^8.58.2",
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
