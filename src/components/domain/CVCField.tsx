@@ -7,11 +7,12 @@ import { validate } from '../../utils';
 import type { BaseValidationRule } from '../../types';
 import { ERROR_MESSAGES } from '../../constants';
 
+const MIN_CVC_LENGTH = 3;
+const MAX_CVC_LENGTH = 4;
+
 interface CVCFieldProps {
   value: CardInfo['cvc'];
   errorStatuses: [ErrorStatus];
-  minLength: number;
-  maxLength: number;
   onUpdated: (value: CardInfo['cvc']) => void;
   onErrorUpdated: (errorStatuses: [ErrorStatus]) => void;
   onValid: (value: CardInfo['cvc']) => void;
@@ -21,8 +22,6 @@ interface CVCFieldProps {
 export default function CVCField({
   value,
   errorStatuses,
-  minLength,
-  maxLength,
   onUpdated,
   onErrorUpdated,
   onValid,
@@ -43,7 +42,7 @@ export default function CVCField({
     if (error) return;
 
     onUpdated(inputValue);
-    if (inputValue.length >= minLength) onValid(inputValue);
+    if (inputValue.length >= MIN_CVC_LENGTH) onValid(inputValue);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -68,7 +67,7 @@ export default function CVCField({
         type="text"
         inputMode="numeric"
         placeholder="123"
-        maxLength={maxLength}
+        maxLength={MAX_CVC_LENGTH}
         onChange={handleChange}
         onBlur={handleBlur}
       />
