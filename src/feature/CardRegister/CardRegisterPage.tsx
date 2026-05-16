@@ -1,58 +1,61 @@
 import { useState } from "react";
-import CardPreviewSection from "./components/CardPreviewSection/CardPreviewSection";
-import InfoInputSection from "./components/InfoInputSection/InfoInputSection";
+
+import CardRegisterForm from "./components/CardRegisterForm/CardRegisterForm";
 import styled from "styled-components";
-import type {
-  CardInfoType,
-  CardNumberChunkType,
-} from "../../common/types/CardInfoType";
+import type { CardInfoType } from "../../common/types/CardInfoType";
+import type { CardCompanyType } from "../../common/types/CardCompany";
+import CardPreview from "./components/CardPreview/CardPreview";
 
 const CardRegisterPage = () => {
-  const [cardNumbers, setCardNumbers] = useState<CardNumberChunkType>([
-    "",
-    "",
-    "",
-    "",
-  ]);
-  const [expiryMonth, setExpiryMonth] = useState("");
-  const [expiryYear, setExpiryYear] = useState("");
+  const [cardInformation, setCardInformation] = useState<CardInfoType>({
+    cardNumbers: ["", "", "", ""],
+    expiryMonth: "",
+    expiryYear: "",
+    selectedCardCompany: null,
+  });
 
-  const cardInfo: CardInfoType = {
-    cardNumbers,
-    expiryMonth,
-    expiryYear,
+  const updateCardInformation = (patch: Partial<CardInfoType>) => {
+    setCardInformation((previousCardInformation) => ({
+      ...previousCardInformation,
+      ...patch,
+    }));
   };
 
-  const cardInfoHandlers = {
-    setCardNumbers,
-    setExpiryMonth,
-    setExpiryYear,
+  const updateCardNumbers = (cardNumbers: CardInfoType["cardNumbers"]) => {
+    updateCardInformation({ cardNumbers });
+  };
+
+  const updateExpiryMonth = (expiryMonth: string) => {
+    updateCardInformation({ expiryMonth });
+  };
+
+  const updateExpiryYear = (expiryYear: string) => {
+    updateCardInformation({ expiryYear });
+  };
+
+  const updateCardCompany = (selectedCardCompany: CardCompanyType) => {
+    updateCardInformation({ selectedCardCompany });
   };
 
   return (
-    <Wrapper>
-      <Container>
-        <CardPreviewSection cardInfo={cardInfo} />
-        <InfoInputSection
-          cardInfo={cardInfo}
-          cardInfoHandlers={cardInfoHandlers}
-        />
-      </Container>
-    </Wrapper>
+    <CardRegisterPageLayout>
+      <CardPreview cardInfo={cardInformation} />
+      <CardRegisterForm
+        cardInfo={cardInformation}
+        updateCardNumbers={updateCardNumbers}
+        updateExpiryMonth={updateExpiryMonth}
+        updateExpiryYear={updateExpiryYear}
+        updateCardCompany={updateCardCompany}
+      />
+    </CardRegisterPageLayout>
   );
 };
 
-const Wrapper = styled.div`
+export default CardRegisterPage;
+
+const CardRegisterPageLayout = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
 `;
-
-const Container = styled.div`
-  max-width: 376px;
-  max-height: 700px;
-`;
-
-export default CardRegisterPage;

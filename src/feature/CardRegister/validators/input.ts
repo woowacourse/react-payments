@@ -1,1 +1,1 @@
-export const validateNumericInput = (value: string) => /^\d*$/.test(value);
+export const isNumericInput = (value: string) => /^\d*$/.test(value);
