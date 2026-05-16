@@ -23,7 +23,7 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
 
   const [activeFieldIdx, setActiveFieldIdx] = useState<number | null>(null);
 
-  const errorMessage = activeFieldIdx ? fields[activeFieldIdx].errorMessage : '';
+  const errorMessage = activeFieldIdx !== null ? fields[activeFieldIdx].errorMessage : '';
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -31,7 +31,7 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
     onChange: (e: ChangeEvent<HTMLInputElement>) => void,
     maxLength: number
   ) => {
-    if (validateNaN(e.target.value)) return;
+    if (validateNaN(e.target.value)) return; // TODO: string 관련 인풋이 추가한다면 확장가능성이 떨어지지 않나?
     onChange(e);
 
     if (e.target.value.length === maxLength) {
