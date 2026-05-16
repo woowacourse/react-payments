@@ -7,7 +7,7 @@ import {
   Label,
   InputContainer,
 } from '../CardFormFields.styles';
-import { useExpireDateValidation } from './useExpireDateValidation';
+import { getExpireDateError, isNumericInput } from '../validator';
 import { useCardForm } from '../../useCardForm';
 import { useAutoFocus } from '../useAutoFocus';
 
@@ -17,17 +17,17 @@ interface Props {
 //유효기간을 적을수 있는 컴포넌트
 export default function ExpireDateField({ field }: Props) {
   const { value: expireDate, set: setExpireDate } = field;
-  const { error, validate } = useExpireDateValidation();
   const { setRef, focusNext } = useAutoFocus();
+  const error = getExpireDateError(expireDate);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
   ) => {
     const newValue = e.target.value;
+    if (!isNumericInput(newValue)) return;
     const updated = [...expireDate];
     updated[index] = newValue;
-    if (!validate(updated)) return;
     setExpireDate(updated);
     if (newValue.length === 2 && index === 0) focusNext(0);
   };

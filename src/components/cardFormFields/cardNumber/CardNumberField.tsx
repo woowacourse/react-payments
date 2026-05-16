@@ -7,7 +7,7 @@ import {
   Label,
   InputContainer,
 } from '../CardFormFields.styles';
-import { useCardNumberValidation } from './useCardNumberValidation';
+import { getCardNumberError, isNumericInput } from '../validator';
 import { useCardForm } from '../../useCardForm';
 import { getCardNumberSegments, reshapeCardNumber } from '../../../utils/cardNetwork';
 import { useAutoFocus } from '../useAutoFocus';
@@ -18,9 +18,9 @@ interface Props {
 //카드 번호를 입력할수 있는 컴포넌트
 export default function CardNumberField({ field }: Props) {
   const { value: cardNumber, set: setCardNumber } = field;
-  const { error, validate } = useCardNumberValidation();
   const segments = getCardNumberSegments(cardNumber.join(''));
   const { setRef, focusNext } = useAutoFocus();
+  const error = getCardNumberError(cardNumber);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -28,8 +28,8 @@ export default function CardNumberField({ field }: Props) {
     length: number,
   ) => {
     const newValue = e.target.value;
+    if (!isNumericInput(newValue)) return;
     const updated = reshapeCardNumber(cardNumber, index, newValue);
-    if (!validate(updated)) return;
     setCardNumber(updated);
     if (newValue.length === length && index + 1 < updated.length) {
       focusNext(index);

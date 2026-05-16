@@ -98,3 +98,28 @@ export const validateCardPasswordLength = (cardPassword: string) => {
   return errorValue;
 }
 
+export const isNumericInput = (value: string): boolean => /^\d*$/.test(value);
+
+export const getCardNumberError = (cardNumber: string[]): string => {
+  const result = validateCardNumberLength(cardNumber);
+  return result.state ? "" : result.message;
+}
+
+export const getExpireDateError = (expireDate: string[]): string => {
+  const monthResult = validateMonth(expireDate[0]);
+  if (!monthResult.state) return monthResult.message;
+
+  const dateResult = validateExpireDateNotPast(expireDate);
+  return dateResult.state ? "" : dateResult.message;
+}
+
+export const getCvcError = (cvc: string): string => {
+  const result = validateCvcLength(cvc);
+  return result.state ? "" : result.message;
+}
+
+export const getCardPasswordError = (cardPassword: string): string => {
+  const result = validateCardPasswordLength(cardPassword);
+  return result.state ? "" : result.message;
+}
+

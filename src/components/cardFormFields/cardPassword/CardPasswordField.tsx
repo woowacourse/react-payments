@@ -8,7 +8,7 @@ import {
   Title,
 } from '../CardFormFields.styles';
 import type { useCardForm } from '../../useCardForm';
-import { useCardPasswordValidation } from './useCardPasswordValidation';
+import { getCardPasswordError, isNumericInput } from '../validator';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardPassword'];
@@ -17,11 +17,11 @@ interface Props {
 // 카드 비밀번호 앞 2자리를 입력할 수 있는 컴포넌트
 export default function CardPasswordField({ field }: Props) {
   const { value: password, set: setPassword } = field;
-  const { error, validate } = useCardPasswordValidation();
+  const error = getCardPasswordError(password);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    if (!validate(newValue)) return;
+    if (!isNumericInput(newValue)) return;
     setPassword(newValue);
   };
 

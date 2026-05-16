@@ -6,7 +6,7 @@ import {
   Label,
   InputContainer,
 } from '../CardFormFields.styles';
-import { useCvcValidation } from './useCvcValidation';
+import { getCvcError, isNumericInput } from '../validator';
 import { useCardForm } from '../../useCardForm';
 
 interface Props {
@@ -15,11 +15,11 @@ interface Props {
 //cvc를 입력할 수 있는 컴포넌트
 export default function CvcField({ field }: Props) {
   const { value: cvc, set: setCvc } = field;
-  const { error, validate } = useCvcValidation();
+  const error = getCvcError(cvc);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    if (!validate(newValue)) return;
+    if (!isNumericInput(newValue)) return;
     setCvc(newValue);
   };
 
