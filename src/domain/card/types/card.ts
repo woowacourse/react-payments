@@ -15,3 +15,11 @@ export type CardFormInfoType = {
   cardCompanyId: CardCompanyId | null;
   password: string;
 };
+
+export type Card = {
+  id: string;
+  cardNumbers: string[];
+  expiryMonth: string;
+  expiryYear: string;
+  cardCompanyId: CardCompanyId | null;
+};
