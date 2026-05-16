@@ -4,16 +4,17 @@ import Input from '../ui/Input';
 import type { CardInfo } from '../../types';
 import useInputFocus from '../../hooks/useInputFocus';
 import type { ExpirationPeriodErrorStatus } from '../../types';
+import type { FormValue } from '../../hooks/useAddCardForm';
 import { useEffect } from 'react';
 import { validate } from '../../utils';
 import type { ExpirationValidationRule } from '../../types';
-import { EXPIRATION_PERIOD_ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
+import { ERROR_MESSAGES, PERIOD_LENGTH_PER_INPUT } from '../../constants';
 
 interface ExpirationPeriodFieldProps {
   value: CardInfo['expirationPeriod'];
-  errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
+  errorStatuses: FormValue['expirationPeriod']['errorStatuses'];
   onUpdated: (value: CardInfo['expirationPeriod']) => void;
-  onErrorUpdated: (errorStatuses: [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus]) => void;
+  onErrorUpdated: (errorStatuses: FormValue['expirationPeriod']['errorStatuses']) => void;
   onValid: (value: CardInfo['expirationPeriod']) => void;
   validationRules: [ExpirationValidationRule[], ExpirationValidationRule[]];
 }
@@ -33,9 +34,9 @@ export default function ExpirationPeriodField({
   }, []);
 
   const updateError = (index: number, status: ExpirationPeriodErrorStatus) => {
-    const next = [...errorStatuses] as [ExpirationPeriodErrorStatus, ExpirationPeriodErrorStatus];
-    next[index] = status;
-    onErrorUpdated(next);
+    const newErrorStatuses = [...errorStatuses] as FormValue['expirationPeriod']['errorStatuses'];
+    newErrorStatuses[index] = status;
+    onErrorUpdated(newErrorStatuses);
   };
 
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,12 +50,13 @@ export default function ExpirationPeriodField({
     onUpdated(newValue);
 
     const isComplete = newValue.every((fieldValue) => fieldValue.length === PERIOD_LENGTH_PER_INPUT);
+    if (isComplete) {
+      onValid(newValue);
+      return;
+    }
 
     if (inputValue.length === PERIOD_LENGTH_PER_INPUT && index === 0) {
       focusNext(index);
-    }
-    if (isComplete) {
-      onValid(newValue);
     }
   };
 
@@ -74,7 +76,7 @@ export default function ExpirationPeriodField({
     title: '카드 유효기간을 입력해 주세요',
     caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
     error: activeError !== null,
-    errorMessage: activeError ? EXPIRATION_PERIOD_ERROR_MESSAGES[activeError] : '',
+    errorMessage: activeError ? ERROR_MESSAGES[activeError] : '',
   };
 
   return (
