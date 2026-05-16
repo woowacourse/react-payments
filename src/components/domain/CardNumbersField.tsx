@@ -7,12 +7,15 @@ import { validate } from '../../utils';
 import type { BaseValidationRule } from '../../types';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
 import useInputFocus from '../../hooks/useInputFocus';
+import type { FormValue } from '../../hooks/useAddCardForm';
+
+const MIN_CARD_NUMBERS_LENGTH = 14; // onValid로 넘어가기 위한 카드번호의 최소 길이
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
-  errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus];
+  errorStatuses: FormValue['cardNumbers']['errorStatuses'];
   onUpdated: (value: CardInfo['cardNumbers']) => void;
-  onErrorUpdated: (errorStatuses: [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus]) => void;
+  onErrorUpdated: (errorStatuses: FormValue['cardNumbers']['errorStatuses']) => void;
   onValid: (value: CardInfo['cardNumbers']) => void;
   validationRules: BaseValidationRule[];
 }
@@ -32,7 +35,7 @@ export default function CardNumbersField({
   }, []);
 
   const updateErrorStatuses = (index: number, status: ErrorStatus) => {
-    const newErrorStatuses = [...errorStatuses] as [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus];
+    const newErrorStatuses = [...errorStatuses] as FormValue['cardNumbers']['errorStatuses'];
     newErrorStatuses[index] = status;
     onErrorUpdated(newErrorStatuses);
   };
@@ -47,13 +50,9 @@ export default function CardNumbersField({
     newValue[index] = inputValue;
     onUpdated(newValue);
 
-    const isLastInput = index === value.length - 1;
-    const arePreviousInputsFilled = newValue
-      .slice(0, -1)
-      .every((number) => number.length === CARD_NUMBER_LENGTH_PER_INPUT);
-
-    if (isLastInput && arePreviousInputsFilled && inputValue.length >= 2) {
+    if (newValue.join('').length >= MIN_CARD_NUMBERS_LENGTH) {
       onValid(newValue);
+      return;
     }
 
     if (inputValue.length === CARD_NUMBER_LENGTH_PER_INPUT) {
