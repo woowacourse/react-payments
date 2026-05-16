@@ -9,6 +9,7 @@ export const useCards = () => {
     data: cards,
     isLoading,
     error,
+    hasFetched,
   } = useLoadData<Card[]>({
     queryFn: async () => {
       const data = await getCards();
@@ -16,5 +17,5 @@ export const useCards = () => {
     },
   });
 
-  return { cards, error, isLoading };
+  return { cards, error, isLoading, hasFetched };
 };
