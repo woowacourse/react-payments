@@ -4,6 +4,8 @@ import { Flow } from '@/pages/payments/register/flow';
 import { Form } from '@/pages/payments/register/form';
 import { Complete } from '@/pages/payments/register/complete';
 
+import { Cards } from '@/pages/payments/cards';
+
 export const AppRoutes = () => {
   return (
     <Routes>
@@ -12,6 +14,7 @@ export const AppRoutes = () => {
         <Route index element={<Form />} />
         <Route path="complete" element={<Complete />} />
       </Route>
+      <Route path="/payments/cards" element={<Cards />}></Route>
     </Routes>
   );
 };
