@@ -2,6 +2,8 @@ import { http, HttpResponse } from 'msw';
 
 import { BRAND_NUMBER } from '@/pages/payments/register/form/constant';
 
+import { cards } from '@/mocks/data/cards';
+
 const validateBin = (numbers: unknown) => {
   if (typeof numbers !== 'string') return false;
   const VALID_BIN = Object.values(BRAND_NUMBER)
@@ -65,5 +67,8 @@ export const handlers = [
 
     // 201
     return HttpResponse.json({ id: crypto.randomUUID() }, { status: 201 });
+  }),
+  http.get('/cards', () => {
+    return HttpResponse.json(cards, { status: 201 });
   }),
 ];
