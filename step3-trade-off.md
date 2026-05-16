@@ -32,3 +32,20 @@
        -> card list section에 add card button이 있어야 하나?
        -> 아니면 페이지에서 card list section과 add card button을 조합해야 하나?
        -> api 응답 상태에 따라 add card button도 제어되어야 하니까 우선은 card list section에 같이 있어도 괜찮을 것 같다
+
+6. card list section 내부에서 api 응답 상태별 ui 컴포넌트의 계층 구조를 맞추려면 어떻게 해야 할까
+    1. loading/success 내부는 모두 컴포넌트로 감싸진 반면
+    2. error/empty 내부에는 span 노출
+
+   ![img5.png](./public/img5.png)
+
+7. skeleton은 어디까지 감춰야 할까
+    1. card item skeleton
+    2. card list skeleton
+    3. card list section skeleton
+    4. 어디까지의 fallback으로 볼지에 대한 기준을 설정해야 할지? 스켈레톤 시스템 구축 필요
+
+8. 다시 시도 버튼을 어떻게 추상화할지
+    1. 공통 button 컴포넌트에 card list section에서 다시시도 로직 주입
+    2. 별도의 retry button 구현
+    3. 다시 시도 시 card list 조회 -> api 조회에 대한 책임은 card list section에 있는 게 맞음
