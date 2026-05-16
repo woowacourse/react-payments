@@ -35,6 +35,13 @@ export default defineConfig({
           }]
         }
       }
+    }, {
+      extends: true,
+      test: {
+        name: 'unit',
+        include: ['src/**/*.test.{ts,tsx}'],
+        setupFiles: ['./vitest.setup.ts']
+      }
     }]
   }
 });
