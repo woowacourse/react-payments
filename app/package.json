@@ -9,15 +9,21 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
+    "test-storybook": "test-storybook",
     "test-unit": "jest",
+    "test-type": "tsc -b",
     "build-storybook": "storybook build",
-    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
+    "deploy": "react-router build && cp build/client/index.html build/client/404.html && npx gh-pages -d build/client",
+    "prepare": "cd .. && husky app/.husky"
   },
   "homepage": "https://antoliny0919.github.io/react-payments",
   "dependencies": {
     "@emotion/styled": "^11.14.1",
+    "@react-router/node": "^7.15.0",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "react-router": "^7.15.0",
+    "isbot": "^5"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -25,10 +31,12 @@
     "@babel/preset-typescript": "^7.28.5",
     "@chromatic-com/storybook": "^5.1.2",
     "@eslint/js": "^10.0.1",
+    "@react-router/dev": "^7.15.0",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-vitest": "^10.3.5",
     "@storybook/react-vite": "^10.3.5",
+    "@storybook/test-runner": "^0.24.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
@@ -42,6 +50,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-storybook": "^10.3.5",
     "globals": "^17.5.0",
+    "husky": "^9.1.7",
     "playwright": "^1.59.1",
     "storybook": "^10.3.5",
     "ts-jest": "^29.4.9",

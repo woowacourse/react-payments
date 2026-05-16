@@ -27,3 +27,6 @@ dist-ssr
 *.sw?
 
 *storybook.log
+
+.react-router
+app/build
