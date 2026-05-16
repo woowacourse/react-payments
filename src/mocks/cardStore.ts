@@ -9,7 +9,7 @@ let cards: StoredCard[] = [];
 const VISIBLE_PREFIX_LENGTH = 6;
 const VISIBLE_SUFFIX_LENGTH = 4;
 
-// 앞 ${VISIBLE_PREFIX_LENGTH}자리, 뒤 ${VISIBLE_SUFFIX_LENGTH}자리를 제외한 중간 숫자를 *로 마스킹
+// 앞 VISIBLE_PREFIX_LENGTH자리, 뒤 VISIBLE_SUFFIX_LENGTH자리를 제외한 중간 숫자를 *로 마스킹
 const maskCardNumber = (number: string) => {
   const visiblePrefix = number.slice(0, VISIBLE_PREFIX_LENGTH);
   const visibleSuffix = number.slice(-VISIBLE_SUFFIX_LENGTH);
@@ -18,7 +18,7 @@ const maskCardNumber = (number: string) => {
   return `${visiblePrefix}${'*'.repeat(maskedLength)}${visibleSuffix}`;
 };
 
-// 카드 등록 성공 시 mock 서버 저장소(cards)에 카드를 추가
+// 카드 등록 성공 시 mock 저장소(cards)에 카드를 추가
 export const addMockCard = (card: CreateCardRequest): StoredCard => {
   // 방어적 복사!
   const newCard = {
@@ -45,7 +45,7 @@ export const deleteMockCard = (id: string) => {
   cards = cards.filter((card) => card.id !== id);
 };
 
-// mock 서버 저장소를 초기화
+// mock 저장소를 초기화
 export const resetMockCards = () => {
   cards = [];
 };
