@@ -1,53 +1,68 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { isMonthMatch } from '../../utils/isMonthMatch';
-
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
+import CardInfoSection from '../CardInfoSection';
+import { useFieldInputState } from '../../hooks/useFieldInputState';
+import { getEXPNumberErrorMessage } from '../../utils/getEXPNumberErrorMessage';
+import { isFilledNumeric } from '../../utils/isFilledNumeric';
 
 interface EXPInputWrapperProps {
-    validator: (value: string[]) => string | null;
-    setEXPNumber: (index: number) => (value: string) => void;
+    setValue: (index: number) => (value: string) => void;
     value: string[];
+    isRender?: boolean;
 }
 
-export default function EXPInputWrapper({ validator, setEXPNumber, value }: EXPInputWrapperProps) {
-    const [inputErrors, setInputErrors] = useState<(string | null)[]>([null, null]);
+export default function EXPInputWrapper({ setValue, value, isRender }: EXPInputWrapperProps) {
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
+        useFieldInputState({
+            values: value,
+            setValue,
+            validator: getEXPNumberErrorMessage,
+            isFilled: (v) => isFilledNumeric(v, 2),
+            fieldCount: 2,
+        });
 
-    const setError = (index: number) => (message: string | null) => {
-        setInputErrors((prev) => prev.with(index, message));
-    };
-    const [hasTouched, setHasTouched] = useState<boolean>(false);
-    const errorAfterCompleted = hasTouched ? validator(value) : null;
-
-    const inputError = inputErrors.find((err) => err !== null) ?? errorAfterCompleted;
+    useEffect(() => {
+        focusFirst();
+    }, []);
 
     return (
-        <CardInputWrapper errorMessage={inputError}>
-            <CardInfoInput
-                value={value[0]}
-                setValue={setEXPNumber(0)}
-                size="medium"
-                placeHolder="MM"
-                validator={isMonthMatch}
-                isError={(hasTouched && value[0].length !== 2) || inputErrors[0] !== null}
-                maxLength={2}
-                onError={setError(0)}
-                onBlur={() => setHasTouched(true)}
-                onFocus={() => setHasTouched(false)}
-            />
-            <CardInfoInput
-                value={value[1]}
-                setValue={setEXPNumber(1)}
-                size="medium"
-                placeHolder="YY"
-                validator={isNumeric}
-                isError={(hasTouched && value[1].length !== 2) || inputErrors[1] !== null}
-                maxLength={2}
-                onError={setError(1)}
-                onBlur={() => setHasTouched(true)}
-                onFocus={() => setHasTouched(false)}
-            />
-        </CardInputWrapper>
+        <CardInfoSection
+            title="카드 유효기간을 입력해 주세요"
+            caption="월/년도(MMYY)를 순서대로 입력해 주세요"
+            inputLabel="유효기간"
+            isRender={isRender}
+        >
+            <CardInputWrapper errorMessage={errorMessage}>
+                <CardInfoInput
+                    ref={getRef(0)}
+                    value={value[0]}
+                    setValue={handleChange(0)}
+                    size="medium"
+                    placeholder="MM"
+                    inputBlock={isMonthMatch}
+                    setErrorMessage={setErrorMessage}
+                    isError={hasTouched && value[0].length !== 2}
+                    maxLength={2}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
+                />
+                <CardInfoInput
+                    ref={getRef(1)}
+                    value={value[1]}
+                    setValue={handleChange(1)}
+                    size="medium"
+                    placeholder="YY"
+                    inputBlock={isNumeric}
+                    setErrorMessage={setErrorMessage}
+                    isError={hasTouched && value[1].length !== 2}
+                    maxLength={2}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
+                />
+            </CardInputWrapper>
+        </CardInfoSection>
     );
 }

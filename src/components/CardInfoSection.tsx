@@ -3,18 +3,23 @@ import styled from '@emotion/styled';
 interface CardSectionProps {
     title: string;
     caption?: string;
-    inputLabel: string;
+    inputLabel?: string;
+    isRender?: boolean;
     children: React.ReactNode;
 }
 
-export default function CardInfoSection({ title, caption, inputLabel, children }: CardSectionProps) {
+export default function CardInfoSection({ title, caption, inputLabel, isRender = true, children }: CardSectionProps) {
     return (
-        <CardSectionStyle>
-            <TitleStyle>{title}</TitleStyle>
-            {caption && <CaptionStyle>{caption}</CaptionStyle>}
-            <InputLabelStyle>{inputLabel}</InputLabelStyle>
-            {children}
-        </CardSectionStyle>
+        isRender && (
+            <CardSectionStyle>
+                <TitleStyle>{title}</TitleStyle>
+                {caption && <CaptionStyle>{caption}</CaptionStyle>}
+                <InputLabelContainer>
+                    {inputLabel && <InputLabelStyle>{inputLabel}</InputLabelStyle>}
+                </InputLabelContainer>
+                {children}
+            </CardSectionStyle>
+        )
     );
 }
 
@@ -40,12 +45,16 @@ const CaptionStyle = styled.caption`
     color: #8b95a1;
 `;
 
+const InputLabelContainer = styled.div`
+    margin-top: 16px;
+    margin-bottom: 8px;
+`;
+
 const InputLabelStyle = styled.p`
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
     letter-spacing: 0%;
     color: #0a0d13;
-    margin-top: 16px;
-    margin-bottom: 8px;
+    margin: 0;
 `;

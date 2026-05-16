@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 interface CardInputWrapperProps {
-    errorMessage: string | null;
+    errorMessage?: string | null;
     children: React.ReactNode;
 }
 

@@ -1,22 +1,39 @@
 import styled from '@emotion/styled';
-import { isMasterCardNumber } from '../../utils/isMasterCardNumber';
-import { isVisaCardNumber } from '../../utils/isVisaCardNumber';
 import Mastercard from '../../../public/Mastercard.svg';
 import Visa from '../../../public/Visa.svg';
+import AmericanExpress from '../../../public/American Express.svg';
+import DinersClub from '../../../public/Diners Club.svg';
+import UnionPay from '../../../public/China UnionPay.svg';
+import { CARD_ISSUER_COLOR } from '../../constants/CARD_ISSUER_COLOR';
+import type { CardBrandValue } from '../../types/CardBrandValue';
+import { getCardBrand } from '../../utils/getCardBrand';
+import type { InternationalCardBrand } from '../../types/InternationalCardBrand';
+
+const INTERNATIONAL_CARD_BRAND_IMAGE: Record<InternationalCardBrand, string> = {
+    MASTERCARD: Mastercard,
+    VISA: Visa,
+    AMEX: AmericanExpress,
+    DINERS: DinersClub,
+    UNION_PAY: UnionPay,
+};
 
 interface CardPreviewProps {
     cardNumbers: string[];
     EXP: string[];
+    cardIssuer?: CardBrandValue;
 }
 
-export default function CardPreview({ cardNumbers, EXP }: CardPreviewProps) {
+export default function CardPreview({ cardNumbers, EXP, cardIssuer }: CardPreviewProps) {
+    const internationalCardBrand = getCardBrand(cardNumbers);
+
     return (
-        <CardPreviewStyle>
+        <CardPreviewStyle backgroundColor={CARD_ISSUER_COLOR[cardIssuer ?? '']}>
             <YellowBlock />
-            <CardBrandPosition>
-                {isMasterCardNumber(cardNumbers) && <CardBrandImage src={Mastercard} />}
-                {isVisaCardNumber(cardNumbers) && <CardBrandImage src={Visa} />}
-            </CardBrandPosition>
+            <CardInternationalBrandPosition>
+                {internationalCardBrand && (
+                    <CardBrandImage src={INTERNATIONAL_CARD_BRAND_IMAGE[internationalCardBrand]} />
+                )}
+            </CardInternationalBrandPosition>
             <CardNumberPosition>
                 {cardNumbers.map((number, index) =>
                     index > 1 ? (
@@ -38,12 +55,12 @@ export default function CardPreview({ cardNumbers, EXP }: CardPreviewProps) {
     );
 }
 
-const CardPreviewStyle = styled.div`
+const CardPreviewStyle = styled.div<{ backgroundColor: string }>`
     width: 212px;
     height: 132px;
     position: relative;
     border-radius: 4px;
-    background-color: #333333;
+    background-color: ${({ backgroundColor }) => backgroundColor};
     box-shadow: 3px 3px 5px 0px #00000040;
 `;
 
@@ -58,7 +75,7 @@ const YellowBlock = styled.div`
     border-radius: 4px;
 `;
 
-const CardBrandPosition = styled.div`
+const CardInternationalBrandPosition = styled.div`
     position: absolute;
     top: 8px;
     left: 164px;

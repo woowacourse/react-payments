@@ -1,25 +1,25 @@
 import { useEffect } from 'react';
+import { isNumeric } from '../../utils/isNumeric';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
-import { isNumeric } from '../../utils/isNumeric';
 import CardInfoSection from '../CardInfoSection';
 import { useFieldInputState } from '../../hooks/useFieldInputState';
-import { getCVCumberErrorMessage } from '../../utils/getCVCNumberErrorMessage';
+import { getPasswordErrorMessage } from '../../utils/getPasswordErrorMessage';
 import { isFilledNumeric } from '../../utils/isFilledNumeric';
 
-interface CVCInputWrapperProps {
+interface PasswordInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string;
     isRender?: boolean;
 }
 
-export default function CVCInputWrapper({ setValue, value, isRender }: CVCInputWrapperProps) {
+export default function PasswordInputWrapper({ setValue, value, isRender }: PasswordInputWrapperProps) {
     const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
         useFieldInputState({
             values: [value],
             setValue,
-            validator: (values) => getCVCumberErrorMessage(values[0]),
-            isFilled: (v) => isFilledNumeric(v, 3),
+            validator: (values) => getPasswordErrorMessage(values[0]),
+            isFilled: (v) => isFilledNumeric(v, 2),
             fieldCount: 1,
         });
 
@@ -28,20 +28,26 @@ export default function CVCInputWrapper({ setValue, value, isRender }: CVCInputW
     }, []);
 
     return (
-        <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isRender}>
+        <CardInfoSection
+            title="비밀번호"
+            caption="앞의 2자리를 입력해 주세요"
+            inputLabel="비밀번호 앞 2자리"
+            isRender={isRender}
+        >
             <CardInputWrapper errorMessage={errorMessage}>
                 <CardInfoInput
                     ref={getRef(0)}
                     value={value}
                     setValue={handleChange(0)}
-                    size="large"
-                    placeholder="123"
-                    inputBlock={isNumeric}
+                    isError={hasTouched && value.length !== 2}
                     setErrorMessage={setErrorMessage}
-                    isError={hasTouched && value.length !== 3}
-                    maxLength={3}
+                    inputBlock={isNumeric}
+                    size="large"
+                    maxLength={2}
                     onBlur={handleBlur}
                     onFocus={handleFocus}
+                    placeholder=""
+                    type="password"
                 />
             </CardInputWrapper>
         </CardInfoSection>
