@@ -4,6 +4,7 @@ import type { CardDisplayInfo, PublicCardInfo } from "../../../types";
 import { useCardForm } from "../../../hooks/useCardForm";
 
 import Card from "../Card/Card";
+import SubmitButton from "../../SubmitButton/SubmitButton";
 import CardCompanySelectSection from "../CardCompanySelectSection/CardCompanySelectSection";
 import CardNumberInputSection from "../CardNumberInputSection/CardNumberInputSection";
 import CvcInputSection from "../CvcInputSection/CvcInputSection";
@@ -42,11 +43,7 @@ const CardForm = ({ onSubmit }: CardFormProps) => {
           />
         </div>
       </div>
-      {completion.all && (
-        <button css={confirmButtonStyle} onClick={handleConfirm}>
-          확인
-        </button>
-      )}
+      {completion.all && <SubmitButton onClick={handleConfirm}>확인</SubmitButton>}
     </div>
   );
 };
@@ -77,15 +74,4 @@ const sectionsStyle = css`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
-
-const confirmButtonStyle = css`
-  width: 100%;
-  height: 52px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
 `;
