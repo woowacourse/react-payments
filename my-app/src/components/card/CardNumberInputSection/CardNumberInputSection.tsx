@@ -46,7 +46,7 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork 
             aria-label={CARD_NUMBER_INPUT_LABELS[i]}
             maxLength={i === fieldCount - 1 ? lastInputMaxLength : fieldMaxLength}
             inputMode="numeric"
-            value={inputValues[i] || ""}
+            value={inputValues[i] ?? ""}
             onChange={(e) => handlers.onChange(i, e.target.value)}
             onBlur={handlers.handleBlur}
             css={[inputStyle(errorIndex === i), { flex: 1 }]}
