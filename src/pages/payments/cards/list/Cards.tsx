@@ -21,7 +21,7 @@ export const Cards = () => {
               right={<IconButton icon="close" />}
               title={card.card}
               content={card.cardNumbers}
-              description={card.expirationDate}
+              description={`${card.expirationDate.month}/${card.expirationDate.year}`}
             />
           );
         })}
