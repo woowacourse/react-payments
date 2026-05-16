@@ -1,7 +1,7 @@
 import { ComponentProps, ReactNode } from 'react';
 import styled from '@emotion/styled';
 
-interface Props extends Omit<ComponentProps<'button'>, 'children'> {
+interface Props extends Omit<ComponentProps<'button'>, 'children' | 'disabeld'> {
   children: ReactNode;
 }
 
@@ -17,4 +17,9 @@ const ButtonStyled = styled.button`
   border-radius: 5px;
   color: #fff;
   background-color: #333;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
 `;

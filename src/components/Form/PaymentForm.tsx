@@ -22,7 +22,7 @@ import { getCardNumbersMaxLength } from '../../utils/fields';
 import Button from '../Common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 
-export type Step = 1 | 2 | 3 | 4 | 5;
+export type Step = 1 | 2 | 3 | 4 | 5 | 6;
 export type CardNumbersType = [string, string, string, string];
 export type ExpirationDateType = { month: string; year: string };
 export type CardIssuerType = (typeof CARD_ISSUER_CONFIG)[keyof typeof CARD_ISSUER_CONFIG]['name'];
@@ -59,7 +59,11 @@ export default function PaymentForm() {
     !passwordValidator(password).error;
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
     setPassword(e.target.value);
+
+    if (!passwordValidator(value).error) setStep(6);
   };
 
   const handleCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -109,6 +113,8 @@ export default function PaymentForm() {
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!e.target.value) return;
 
     navigate('/registration/completion', {
       state: {
@@ -218,8 +224,7 @@ export default function PaymentForm() {
           />
         </InputFieldLayout>
 
-        {/* TODO: 유효성에 따른 disabeld 추가하기 */}
-        {isValid && <Button>확인</Button>}
+        {step >= 6 && <Button disabled={!isValid}>확인</Button>}
       </FormWrapper>
     </Container>
   );
