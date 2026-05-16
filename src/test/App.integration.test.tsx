@@ -128,6 +128,16 @@ describe('카드 결제 흐름', () => {
     expect(screen.getByText('551112******9012')).toBeInTheDocument();
   });
 
+  test('CVC는 4자리까지 입력할 수 있고 카드 등록에 성공한다', async () => {
+    renderApp('/register');
+
+    const user = await fillValidCardForm('1234');
+    await user.click(screen.getByRole('button', {name: '확인'}));
+
+    expect(await screen.findByText('보유 카드 (1)')).toBeInTheDocument();
+    expect(screen.getByText('BC카드')).toBeInTheDocument();
+  });
+
   test('카드 등록 중에는 확인 버튼이 등록 중 상태로 바뀐다', async () => {
     server.use(http.post('/cards', () => new Promise(() => {})));
     renderApp('/register');

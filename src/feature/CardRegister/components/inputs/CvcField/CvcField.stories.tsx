@@ -8,7 +8,7 @@ import type {CardRegisterInputProps} from '../shared.types';
 
 const createInputProps = (value: string): CardRegisterInputProps => ({
   value,
-  maxLength: 3,
+  maxLength: 4,
   placeholder: '123',
   onChange: fn(),
   onBlur: fn(),
@@ -38,7 +38,7 @@ export const Filled: Story = {
 export const WithErr: Story = {
   args: {
     inputProps: createInputProps('12'),
-    errorMessage: 'CVC 번호 3자리를 입력해 주세요',
+    errorMessage: 'CVC 번호 3~4자리를 입력해 주세요',
   },
 };
 
@@ -49,7 +49,7 @@ export const Interactive: Story = {
       ...createInputProps(cvcNumber),
       onChange: (event: ChangeEvent<HTMLInputElement>) => {
         const nextValue = event.currentTarget.value;
-        if (!/^\d*$/.test(nextValue) || nextValue.length > 3) return;
+        if (!/^\d*$/.test(nextValue) || nextValue.length > 4) return;
         setCvcNumber(nextValue);
       },
     };

@@ -74,7 +74,7 @@ export function useCardRegisterForm() {
     type: 'text',
     inputMode: 'numeric',
     value: cvcField.cvcNumber,
-    maxLength: 3,
+    maxLength: 4,
     placeholder: '123',
     onChange: (event) => {
       clearServerFieldError('cardCvc');
