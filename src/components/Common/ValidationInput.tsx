@@ -53,12 +53,12 @@ const ValidationInput = forwardRef<HTMLInputElement, ValidationInputProps>(
     const handleOnBlur = (
       event: React.FocusEvent<HTMLInputElement, Element>,
     ) => {
+      const currentValue = event.target.value;
       const failedValidation = validations.find(
         (validation) =>
-          typeof props.value === "string" &&
-          props.value.length &&
+          currentValue.length &&
           validation.type === "validateOnBlur" &&
-          !validation.validator(props.value),
+          !validation.validator(currentValue),
       );
 
       if (failedValidation) {
