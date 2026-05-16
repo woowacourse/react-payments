@@ -8,13 +8,13 @@ import { Button } from '@/core/components/button';
 import { useCards } from './hooks/useCards';
 
 export const Cards = () => {
-  const { cards, error, isLoading, hasFetched } = useCards();
+  const { status, data: cards } = useCards();
   return (
     <ContentBox>
       <Title>보유 카드 ({cards?.length})</Title>
-      {isLoading && <>loading</>}
-      {error && <>error</>}
-      {hasFetched && !cards?.length && <div>no data</div>}
+      {status === 'loading' && <>loading</>}
+      {status === 'error' && <>error</>}
+      {status === 'success' && !cards.length && <div>no data</div>}
       <List>
         {cards?.map((card) => {
           return (
