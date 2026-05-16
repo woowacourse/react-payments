@@ -52,11 +52,11 @@ export default function useCardFormValidation({
   };
 
   const validateAllFields = () => {
-    const cardNumbersErrorStatuses = cardNumbers.getErrorStatuses(formValue.cardNumbers.value);
-    const cardCompanyErrorStatuses = cardCompany.getErrorStatuses(formValue.cardCompany.value);
-    const expirationPeriodErrorStatuses = expirationPeriod.getErrorStatuses(formValue.expirationPeriod.value);
-    const cvcErrorStatuses = cvc.getErrorStatuses(formValue.cvc.value);
-    const passwordErrorStatuses = password.getErrorStatuses(formValue.password.value);
+    const cardNumbersErrorStatuses = cardNumbers.runAllValidations(formValue.cardNumbers.value);
+    const cardCompanyErrorStatuses = cardCompany.runAllValidations(formValue.cardCompany.value);
+    const expirationPeriodErrorStatuses = expirationPeriod.runAllValidations(formValue.expirationPeriod.value);
+    const cvcErrorStatuses = cvc.runAllValidations(formValue.cvc.value);
+    const passwordErrorStatuses = password.runAllValidations(formValue.password.value);
 
     setFormValue((prev) => ({
       cardNumbers: { ...prev.cardNumbers, errorStatuses: cardNumbersErrorStatuses },

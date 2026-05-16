@@ -6,7 +6,7 @@ import type { FormValue } from '../useAddCardForm';
 export default function useCardNumbersValidation(cardNumbersTotalLength: number) {
   const rules = [RULES.numberOnly, RULES.required, RULES.exactLengthOnComplete(cardNumbersTotalLength)];
 
-  const getErrorStatuses = (value: CardInfo['cardNumbers']): FormValue['cardNumbers']['errorStatuses'] =>
+  const runAllValidations = (value: CardInfo['cardNumbers']): FormValue['cardNumbers']['errorStatuses'] =>
     [
       ...value.map((fieldValue) => validateAll([RULES.numberOnly, RULES.required], fieldValue)),
       validateAll(rules, value.join('')),
@@ -25,5 +25,5 @@ export default function useCardNumbersValidation(cardNumbersTotalLength: number)
     };
   };
 
-  return { rules, getErrorStatuses, validateOnComplete };
+  return { rules, runAllValidations, validateOnComplete };
 }

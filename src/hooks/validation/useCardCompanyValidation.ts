@@ -6,7 +6,7 @@ import type { FormValue } from '../useAddCardForm';
 export default function useCardCompanyValidation() {
   const rules = [RULES.required];
 
-  const getErrorStatuses = (value: CardInfo['cardCompany']): FormValue['cardCompany']['errorStatuses'] =>
+  const runAllValidations = (value: CardInfo['cardCompany']): FormValue['cardCompany']['errorStatuses'] =>
     [validateAll(rules, value)] as FormValue['cardCompany']['errorStatuses'];
 
   const validateOnComplete = (
@@ -22,5 +22,5 @@ export default function useCardCompanyValidation() {
     };
   };
 
-  return { rules, getErrorStatuses, validateOnComplete };
+  return { rules, runAllValidations, validateOnComplete };
 }

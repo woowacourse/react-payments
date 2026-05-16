@@ -6,7 +6,7 @@ import type { FormValue } from '../useAddCardForm';
 export default function useCvcValidation(cvcLength: number) {
   const rules = [RULES.numberOnly, RULES.required, RULES.exactLengthOnComplete(cvcLength)];
 
-  const getErrorStatuses = (value: CardInfo['cvc']): FormValue['cvc']['errorStatuses'] =>
+  const runAllValidations = (value: CardInfo['cvc']): FormValue['cvc']['errorStatuses'] =>
     [validateAll(rules, value)] as FormValue['cvc']['errorStatuses'];
 
   const validateOnComplete = (
@@ -22,5 +22,5 @@ export default function useCvcValidation(cvcLength: number) {
     };
   };
 
-  return { rules, getErrorStatuses, validateOnComplete };
+  return { rules, runAllValidations, validateOnComplete };
 }

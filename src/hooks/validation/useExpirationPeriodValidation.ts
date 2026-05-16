@@ -15,7 +15,7 @@ export default function useExpirationPeriodValidation() {
     ],
   ];
 
-  const getErrorStatuses = (value: CardInfo['expirationPeriod']): FormValue['expirationPeriod']['errorStatuses'] => {
+  const runAllValidations = (value: CardInfo['expirationPeriod']): FormValue['expirationPeriod']['errorStatuses'] => {
     const monthError = validate(rules[0], 'onBlur', value[0]) as FormValue['expirationPeriod']['errorStatuses'][0];
     const yearError = validate(rules[1], 'onBlur', value[1]) as FormValue['expirationPeriod']['errorStatuses'][1];
     const hasIndividualError = monthError !== null || yearError !== null;
@@ -42,5 +42,5 @@ export default function useExpirationPeriodValidation() {
     };
   };
 
-  return { rules, getErrorStatuses, validateOnComplete };
+  return { rules, runAllValidations, validateOnComplete };
 }

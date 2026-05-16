@@ -6,8 +6,8 @@ import type { FormValue } from '../useAddCardForm';
 export default function usePasswordValidation() {
   const rules = [RULES.numberOnly, RULES.required, RULES.exactLength(PASSWORD_LENGTH)];
 
-  const getErrorStatuses = (value: CardInfo['password']): FormValue['password']['errorStatuses'] =>
+  const runAllValidations = (value: CardInfo['password']): FormValue['password']['errorStatuses'] =>
     [validateAll(rules, value)] as FormValue['password']['errorStatuses'];
 
-  return { rules, getErrorStatuses };
+  return { rules, runAllValidations };
 }
