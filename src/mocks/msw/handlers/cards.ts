@@ -71,4 +71,7 @@ export const handlers = [
   http.get('/cards', () => {
     return HttpResponse.json(cards, { status: 201 });
   }),
+  http.delete('/cards/:id', () => {
+    return HttpResponse.json(undefined, { status: 204 });
+  }),
 ];
