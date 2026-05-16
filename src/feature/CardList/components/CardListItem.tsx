@@ -22,7 +22,7 @@ const CardListItem = ({card, onDeleteCard}: CardListItemProps) => {
         <ExpirationDate>유효기간 {card.expirationDate}</ExpirationDate>
       </Info>
       <DeleteButton type='button' aria-label={`${companyName} 삭제`} onClick={() => onDeleteCard(card.id)}>
-        <DeleteIcon src='/images/delete_icon.svg' alt='delete_icon' />
+        <DeleteIcon src='/images/delete_icon.svg' alt='' />
       </DeleteButton>
     </Item>
   );
