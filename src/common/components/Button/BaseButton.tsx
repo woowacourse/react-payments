@@ -1,21 +1,21 @@
 import type { ComponentPropsWithRef } from "react";
 import styled, { css } from "styled-components";
 
-type ButtonSize = "full" | "block";
+type ButtonStyle = "base" | "rounded";
 
 type ButtonProps = Pick<
   ComponentPropsWithRef<"button">,
   "className" | "disabled" | "type" | "children" | "onClick" | "ref"
 > & {
-  size: ButtonSize;
+  style: ButtonStyle;
 };
 
-const Button = ({
+const BaseButton = ({
   ref,
   className,
   type = "button",
   disabled,
-  size,
+  style = "base",
   children,
   onClick,
 }: ButtonProps) => {
@@ -25,7 +25,7 @@ const Button = ({
       className={className}
       type={type}
       disabled={disabled}
-      $size={size}
+      $style={style}
       onClick={onClick}
     >
       {children}
@@ -33,15 +33,15 @@ const Button = ({
   );
 };
 
-const getButtonStyle = (size: ButtonSize) => {
-  if (size === "full") {
+const getButtonStyle = (style: ButtonStyle) => {
+  if (style === "base") {
     return css`
       width: 100%;
       height: 52px;
     `;
   }
 
-  if (size === "block") {
+  if (style === "rounded") {
     return css`
       display: block;
       width: 100%;
@@ -51,10 +51,10 @@ const getButtonStyle = (size: ButtonSize) => {
   }
 };
 
-const ButtonRoot = styled.button<{ $size: ButtonSize }>`
-  ${({ $size }) => getButtonStyle($size)}
+const ButtonRoot = styled.button<{ $style: ButtonStyle }>`
+  ${({ $style }) => getButtonStyle($style)}
   color: #f3f3f3;
   background-color: #333333;
 `;
 
-export default Button;
+export default BaseButton;

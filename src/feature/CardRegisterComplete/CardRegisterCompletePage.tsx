@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CheckIcon from "../../../public/images/CheckIcon.png";
-import Button from "../../common/components/Button/Button";
+import BaseButton from "../../common/components/Button/BaseButton";
 
 const CardRegisterCompletePage = () => {
   const location = useLocation();
@@ -17,9 +17,9 @@ const CardRegisterCompletePage = () => {
         <span>{firstCardNumberChunk}로 시작하는</span>
         <span>{cardCompany}가 등록되었어요.</span>
       </CompleteMessage>
-      <Button size="block" onClick={() => navigate("/register")}>
+      <BaseButton style="rounded" onClick={() => navigate("/register")}>
         확인
-      </Button>
+      </BaseButton>
     </CardRegisterCompletePageLayout>
   );
 };

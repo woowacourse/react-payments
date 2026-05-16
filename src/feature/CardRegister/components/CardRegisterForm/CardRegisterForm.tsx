@@ -7,7 +7,7 @@ import CardRegisterStep from "./CardRegisterStep/CardRegisterStep";
 import NumberField from "./NumberField/NumberField";
 import CardCompanySelectField from "./CardCompanySelectField/CardCompanySelectField";
 import PasswordField from "./PasswordField/PasswordField";
-import Button from "../../../../common/components/Button/Button";
+
 import type {
   CardInfoType,
   CardNumberChunkType,
@@ -26,6 +26,7 @@ import {
 } from "../../validators/expiryDate";
 import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
+import BaseButton from "../../../../common/components/Button/BaseButton";
 
 const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
   const cardBrand = getCardBrandName(cardInfo.cardNumbers);
@@ -237,11 +238,7 @@ const CardRegisterForm = ({
         </CardRegisterStep>
       )}
 
-      {isFormInputComplete && (
-        <ConfirmButton size="full" type="submit">
-          확인
-        </ConfirmButton>
-      )}
+      {isFormInputComplete && <ConfirmButton type="submit">확인</ConfirmButton>}
     </Form>
   );
 };
@@ -255,7 +252,7 @@ const Form = styled.form`
   width: 100%;
 `;
 
-const ConfirmButton = styled(Button)`
+const ConfirmButton = styled(BaseButton)`
   position: fixed;
   right: 0;
   bottom: 0;
