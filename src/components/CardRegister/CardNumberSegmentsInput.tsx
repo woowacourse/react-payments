@@ -1,4 +1,4 @@
-import { useRef, type ChangeEvent } from "react";
+import { useEffect, useRef, type ChangeEvent } from "react";
 import {
   CARD_BRAND_CONFIGS,
   DEFAULT_SEGMENT_LENGTHS,
@@ -21,9 +21,20 @@ interface CardNumberSegmentsInputProps {
 
 function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
   const segmentRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const prevSegmentCountRef = useRef(props.value.length);
   const segmentLengths = props.brand
     ? CARD_BRAND_CONFIGS[props.brand].segmentLengths
     : DEFAULT_SEGMENT_LENGTHS;
+
+  useEffect(() => {
+    if (prevSegmentCountRef.current === 1 && props.value.length > 1) {
+      const firstIncomplete = props.value.findIndex(
+        (seg, i) => seg.length < segmentLengths[i]
+      );
+      segmentRefs.current[firstIncomplete === -1 ? 1 : firstIncomplete]?.focus();
+    }
+    prevSegmentCountRef.current = props.value.length;
+  }, [props.value, segmentLengths]);
 
   const handleSingleChange = (event: ChangeEvent<HTMLInputElement>) => {
     props.onChange([event.target.value]);
@@ -76,7 +87,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             onChange={handleSegmentChange}
             isShowError={true}
             validations={numberSegmentValidations(maxLength)}
-            autoFocus={index === 0}
+            autoFocus={index === 0 && props.value[0].length < segmentLengths[0]}
           />
         ))}
       </Flex>
