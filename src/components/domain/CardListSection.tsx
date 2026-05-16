@@ -43,7 +43,9 @@ export default function CardListPage() {
         {isSuccess && !isEmpty && (
           <>
             <CardList cards={cards} />
-            <AddCardButton />
+            <AddCardButton variant="dashed" size="sm">
+              + 카드 추가
+            </AddCardButton>
           </>
         )}
         {isError && <div></div>}
@@ -72,6 +74,8 @@ const headerTypography = css`
 
 const contentWrapperStyle = css`
   display: flex;
+  flex-direction: column;
+  gap: 16px;
   justify-content: center;
   align-items: center;
 `;
