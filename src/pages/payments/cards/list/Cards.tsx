@@ -19,8 +19,8 @@ export const Cards = () => {
               key={card.id}
               left={<CreditCard size="small" />}
               right={<IconButton icon="close" />}
-              title={card.issuerCode}
-              content={card.number}
+              title={card.card}
+              content={card.cardNumbers}
               description={card.expirationDate}
             />
           );
