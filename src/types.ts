@@ -13,7 +13,7 @@ export type CardBrand = 'local' | 'visa' | 'mastercard' | 'amex' | 'diners' | 'u
 
 export type CardCompany = (typeof CARD_COMPANY_OPTIONS)[number]['value'];
 
-export type ValidationTrigger = 'onChange' | 'onBlur';
+export type ValidationTrigger = 'onChange' | 'onBlur' | 'onComplete';
 
 export type ErrorStatus = null | 'required' | 'invalidLength' | 'numberOnly';
 
