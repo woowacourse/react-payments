@@ -12,6 +12,7 @@ const App = () => (
       <Route path='/register' element={<CardRegisterPage />} />
       <Route path='/complete' element={<CardRegisterCompletePage />} />
       <Route path='/cards' element={<CardListPage />} />
+      <Route path='*' element={<Navigate to='/cards' replace />} />
     </Routes>
   </PhoneFrame>
 );

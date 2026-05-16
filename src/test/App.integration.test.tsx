@@ -71,6 +71,12 @@ describe('카드 결제 흐름', () => {
     expect(await screen.findByRole('heading', {name: '보유 카드'})).toBeInTheDocument();
   });
 
+  test('정의되지 않은 경로로 진입하면 카드 목록 페이지를 보여준다', async () => {
+    renderApp('/unknown');
+
+    expect(await screen.findByRole('heading', {name: '보유 카드'})).toBeInTheDocument();
+  });
+
   test('카드 목록을 불러오는 동안 loading 화면을 보여준다', async () => {
     server.use(http.get('/cards', () => new Promise(() => {})));
 
