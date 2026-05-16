@@ -12,6 +12,8 @@ import { Input } from '@/core/components/input';
 import { Select } from '@/core/components/select';
 import { Button } from '@/core/components/button';
 
+import { errorMessages } from './errorMessage';
+
 import { BRAND_NUMBER, CARD_OPTIONS } from './constant';
 
 import styles from './Form.module.css';
@@ -33,26 +35,43 @@ export const Form = () => {
 
   const prevFormValidsRefs = useRef<Record<string, boolean>>({});
   useEffect(() => {
-    if (cardNumbers.isValid && !card.isValid && card.refs.current?.card) {
-      if (prevFormValidsRefs.current.card) return;
-      prevFormValidsRefs.current.card = true;
-      return card.refs.current?.card.focus();
+    function focusCardIfCardNumberCompleted() {
+      if (cardNumbers.isValid && !card.isValid && card.refs.current?.card) {
+        if (prevFormValidsRefs.current.card) return true;
+        prevFormValidsRefs.current.card = true;
+        card.refs.current?.card.focus();
+        return true;
+      }
     }
-    if (card.isValid && !expirationDate.valids.month) {
-      if (prevFormValidsRefs.current.month) return;
-      prevFormValidsRefs.current.month = true;
-      return expirationDate.refs.current.month?.focus();
+    function focusMonthIfCardSelected() {
+      if (card.isValid && !expirationDate.valids.month) {
+        if (prevFormValidsRefs.current.month) return true;
+        prevFormValidsRefs.current.month = true;
+        expirationDate.refs.current.month?.focus();
+        return true;
+      }
     }
-    if (expirationDate.valids.year && !cvc.isValid) {
-      if (prevFormValidsRefs.current.cvc) return;
-      prevFormValidsRefs.current.cvc = true;
-      return cvc.refs.current?.cvc?.focus();
+    function focusCvcIfExpirationDateCompleted() {
+      if (expirationDate.valids.year && !cvc.isValid) {
+        if (prevFormValidsRefs.current.cvc) return true;
+        prevFormValidsRefs.current.cvc = true;
+        cvc.refs.current?.cvc?.focus();
+        return true;
+      }
     }
-    if (cvc.isValid && !password.isValid) {
-      if (prevFormValidsRefs.current.password) return;
-      prevFormValidsRefs.current.password = true;
-      return password.refs.current?.password?.focus();
+    function focusPasswordIfCvcCompleted() {
+      if (cvc.isValid && !password.isValid) {
+        if (prevFormValidsRefs.current.password) return true;
+        prevFormValidsRefs.current.password = true;
+        password.refs.current?.password?.focus();
+        return true;
+      }
     }
+
+    if (focusMonthIfCardSelected()) return;
+    if (focusCvcIfExpirationDateCompleted()) return;
+    if (focusPasswordIfCvcCompleted()) return;
+    if (focusCardIfCardNumberCompleted()) return;
   }, [
     cardNumbers.isValid,
 
@@ -69,13 +88,13 @@ export const Form = () => {
     password.isValid,
   ]);
 
-  const [step, setStep] = useState<number>(0);
+  const [releavedStep, setReleavedStep] = useState<number>(0);
 
   useEffect(() => {
-    if (cardNumbers.isValid) setStep(1);
-    if (card.isValid) setStep(2);
-    if (expirationDate.isValid) setStep(3);
-    if (cvc.isValid) setStep(4);
+    if (cardNumbers.isValid) setReleavedStep(1);
+    if (card.isValid) setReleavedStep(2);
+    if (expirationDate.isValid) setReleavedStep(3);
+    if (cvc.isValid) setReleavedStep(4);
   }, [cardNumbers.isValid, card.isValid, expirationDate.isValid, cvc.isValid, password.isValid]);
 
   const branchNumberCard = BRAND_NUMBER?.[brandCard as keyof typeof BRAND_NUMBER];
@@ -94,8 +113,13 @@ export const Form = () => {
             expirationDate={[expirationDate.values.month, expirationDate.values.year]}
           />
 
-          <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" hide={!(step >= 4)}>
-            <Field label="비밀번호 앞 2자리" errorMessage={password.renderErrorMessage()}>
+          <FormGroup title="비밀번호를 입력해 주세요" subTitle="앞의 2자리를 입력해주세요" hide={!(releavedStep >= 4)}>
+            <Field
+              label="비밀번호 앞 2자리"
+              errorMessage={
+                errorMessages.password?.[password.renderErrorMessage()] || password.renderErrorMessage() || ''
+              }
+            >
               <Input
                 {...{ ref: password.ref }}
                 type="password"
@@ -110,8 +134,11 @@ export const Form = () => {
               />
             </Field>
           </FormGroup>
-          <FormGroup title="CVC 번호를 입력해 주세요" hide={!(step >= 3)}>
-            <Field label="CVC" errorMessage={cvc.renderErrorMessage()}>
+          <FormGroup title="CVC 번호를 입력해 주세요" hide={!(releavedStep >= 3)}>
+            <Field
+              label="CVC"
+              errorMessage={errorMessages?.cvc?.[cvc.renderErrorMessage()] || cvc.renderErrorMessage() || ''}
+            >
               <Input
                 {...{ ref: cvc.ref }}
                 type="tel"
@@ -128,9 +155,16 @@ export const Form = () => {
           <FormGroup
             title="카드 유효기간을 입력해 주세요"
             subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
-            hide={!(step >= 2)}
+            hide={!(releavedStep >= 2)}
           >
-            <Field label="유효기간" errorMessage={expirationDate.renderErrorMessage()}>
+            <Field
+              label="유효기간"
+              errorMessage={
+                errorMessages?.expirationDate?.[expirationDate.renderErrorMessage()] ||
+                expirationDate.renderErrorMessage() ||
+                ''
+              }
+            >
               <Input
                 {...{ ref: expirationDate.ref }}
                 type="tel"
@@ -161,8 +195,12 @@ export const Form = () => {
               />
             </Field>
           </FormGroup>
-          <FormGroup title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다." hide={!(step >= 1)}>
-            <Field errorMessage={card.renderErrorMessage()}>
+          <FormGroup
+            title="카드사를 선택해 주세요"
+            subTitle="현재 국내 카드사만 가능합니다."
+            hide={!(releavedStep >= 1)}
+          >
+            <Field errorMessage={errorMessages?.card?.[card.renderErrorMessage()] || card.renderErrorMessage() || ''}>
               <Select
                 {...{ ref: card.ref }}
                 id="card"
@@ -176,11 +214,13 @@ export const Form = () => {
           <FormGroup
             title="결제할 카드 번호를 입력해 주세요"
             subTitle="본인 명의의 카드만 결제 가능합니다."
-            hide={!(step >= 0)}
+            hide={!(releavedStep >= 0)}
           >
             <Field
               label="카드 번호"
-              errorMessage={cardNumbers.renderErrorMessage()}
+              errorMessage={
+                errorMessages?.cardNumbers?.[cardNumbers.renderErrorMessage()] || cardNumbers.renderErrorMessage() || ''
+              }
               style={{ justifyContent: 'flex-start' }}
             >
               {Object.values(cardNumbers.values).map((value, index, array) => (
