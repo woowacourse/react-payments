@@ -4,13 +4,20 @@ import styled from 'styled-components';
 import Button from '@/common/components/Button/Button';
 import type {CardRegisterCompleteState} from './routeState.types';
 
+// complete 페이지에서 사용할 route state 형식 확인
+const isCardRegisterCompleteState = (state: unknown): state is CardRegisterCompleteState => {
+  const completeState = state as CardRegisterCompleteState;
+
+  return typeof completeState?.cardPrefix === 'string' && typeof completeState?.companyName === 'string';
+};
+
 const CardRegisterCompletePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as CardRegisterCompleteState | null;
+  const state = location.state;
 
-  // complete 페이지 진입 시 state가 없으면, 메인으로 redirect하고 히스토리를 덮어써서 뒤로가기를 방지함
-  if (!state) return <Navigate to='/cards' replace />;
+  // complete 페이지 진입 시 state가 유효하지 않으면 메인으로 redirect
+  if (!isCardRegisterCompleteState(state)) return <Navigate to='/cards' replace />;
 
   return (
     <Wrapper>
