@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
 import completeIcon from '../assets/complete.svg';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../components/Common/Button/Button';
 
 export default function RegistrationCompletionPage() {
   const location = useLocation();
+  const state = location.state;
   const navigate = useNavigate();
+
+  if (!state) return <Navigate to="/registration" />;
 
   return (
     <Container>
@@ -14,9 +17,9 @@ export default function RegistrationCompletionPage() {
       </IconWrapper>
 
       <CompletedMessage>
-        {`${location.state.prefix}로 시작하는`}
+        {`${state.prefix}로 시작하는`}
         <br />
-        {`${location.state.cardIssuer}가 등록되었어요.`}
+        {`${state.cardIssuer}가 등록되었어요.`}
       </CompletedMessage>
 
       <Button onClick={() => navigate('/registration')}>확인</Button>
