@@ -4,18 +4,18 @@
 
 - [x] layout
     - [x] header
-- [ ] success
-    - [ ] card item
-        - [ ] 카드사, 카드번호, 유효기간, issuer
-        - [ ] 삭제 버튼
-    - [ ] 버튼 variant - solid/outlined(dashed?)
-    - [ ] 버튼 icon 추가? or children으로
-- [ ] loading
-    - [ ] 스켈레톤 컴포넌트?
-- [ ] empty
-    - [ ] 카드 추가 버튼
-- [ ] error
-    - [ ] 다시 시도 버튼
+- [x] success
+    - [x] card item
+        - [x] 카드사, 카드번호, 유효기간, issuer
+        - [x] 삭제 버튼
+    - [x] 버튼 variant - solid/outlined(dashed?)
+    - [x] 버튼 icon 추가? or children으로
+- [x] loading
+    - [x] 스켈레톤 컴포넌트?
+- [x] empty
+    - [x] 카드 추가 버튼
+- [x] error
+    - [x] 다시 시도 버튼
 
 2. MSW 구현
 
