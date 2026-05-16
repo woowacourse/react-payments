@@ -1,8 +1,39 @@
 import { useState } from "react";
+import Success from "./components/Success/Success";
+import styled from "styled-components";
+import Error from "./components/Error/Error";
+import Loading from "./components/Loading/Loading";
+import Empty from "./components/Empty/Empty";
 
 const CardListPage = () => {
-  const [cardList, setCardList] = useState(null);
-  return <div>카드 목록 페이지</div>;
+  const [cardList, setCardList] = useState([]);
+  const [page, setPage] = useState<"Error" | "Success" | "Loading">("Success");
+  return (
+    <CardListPageLayout>
+      <HasCardCountSpan>
+        보유 카드 {cardList && cardList.length !== 0 && `(${cardList.length})`}
+      </HasCardCountSpan>
+      {page === "Success" && cardList.length === 0 && <Empty />}
+      {page === "Success" && cardList.length !== 0 && <Success />}
+      {page === "Error" && <Error />}
+      {page === "Loading" && <Loading />}
+    </CardListPageLayout>
+  );
 };
 
 export default CardListPage;
+
+const CardListPageLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-height: 700px;
+  padding: 0 28px;
+`;
+
+const HasCardCountSpan = styled.span`
+  font-size: 18px;
+  font-weight: 700;
+  color: #353c49;
+`;
