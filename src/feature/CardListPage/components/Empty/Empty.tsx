@@ -2,11 +2,11 @@ import styled from "styled-components";
 import NextActionGuide from "../shared/NextActionGuide/NextActionGuide";
 import BaseButton from "../../../../common/components/Button/BaseButton";
 
-const Idle = () => {
+const Empty = () => {
   return (
-    <IdleLayout>
+    <EmptyLayout>
       <NextActionGuide
-        visualElement={<IdleCard />}
+        visualElement={<EmptyCard />}
         title="등록된 카드가 없습니다"
         description="아래 버튼을 눌러 첫 카드를 등록해보세요"
         actionButton={
@@ -15,13 +15,13 @@ const Idle = () => {
           </BaseButton>
         }
       />
-    </IdleLayout>
+    </EmptyLayout>
   );
 };
 
-export default Idle;
+export default Empty;
 
-const IdleLayout = styled.div`
+const EmptyLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +29,7 @@ const IdleLayout = styled.div`
   height: 100%;
 `;
 
-const IdleCard = styled.div`
+const EmptyCard = styled.div`
   width: 160px;
   height: 100px;
   border: 1px dashed #d9d9d9;
