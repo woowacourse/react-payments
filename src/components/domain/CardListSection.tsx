@@ -30,7 +30,7 @@ export default function CardListPage() {
   const isPending = responseStatus === 'idle';
   const isLoading = responseStatus === 'loading';
   const isSuccess = responseStatus === 'success';
-  const isEmpty = false;
+  const isEmpty = cards.length === 0;
   const isError = responseStatus === 'error';
 
   return (
@@ -39,14 +39,23 @@ export default function CardListPage() {
       <div css={contentWrapperStyle}>
         {isPending && <div></div>}
         {isLoading && <div></div>}
-        {isSuccess && isEmpty && <div></div>}
+        {isSuccess && isEmpty && (
+          <div css={emptyWrapperStyle}>
+            <div css={emptyCardStyle} />
+            <span css={errorMessageTypography}>등록된 카드가 없습니다</span>
+            <span css={errorCaptionTypography}>아래 버튼을 눌러 첫 카드를 등록해보세요</span>
+            <AddCardButton variant="solid" size="md">
+              카드 추가하기
+            </AddCardButton>
+          </div>
+        )}
         {isSuccess && !isEmpty && (
-          <>
+          <div css={successWrapperStyle}>
             <CardList cards={cards} />
             <AddCardButton variant="dashed" size="sm">
               + 카드 추가
             </AddCardButton>
-          </>
+          </div>
         )}
         {isError && <div></div>}
       </div>
@@ -74,8 +83,42 @@ const headerTypography = css`
 
 const contentWrapperStyle = css`
   display: flex;
+  height: 100%;
+`;
+
+const emptyWrapperStyle = css`
+  display: flex;
   flex-direction: column;
   gap: 16px;
-  justify-content: center;
   align-items: center;
+  width: 100%;
+  margin: auto;
+`;
+
+const successWrapperStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+`;
+
+const emptyCardStyle = css`
+  width: 160px;
+  height: 100px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+`;
+
+const errorMessageTypography = css`
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+`;
+
+const errorCaptionTypography = css`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: #8c8c8c;
 `;
