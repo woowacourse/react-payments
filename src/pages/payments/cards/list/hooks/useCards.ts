@@ -7,15 +7,23 @@ import type { Card } from '@/pages/payments/cards/list/model';
 export const useCards = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cards, setCards] = useState<Card[]>([]);
+  const [error, setError] = useState<null | true>(null);
 
   useEffect(() => {
     setIsLoading(true);
+    setError(null);
 
-    getCards().then((cards) => {
-      setCards(mapCardsResponseDTOToModel(cards));
-      setIsLoading(false);
-    });
+    getCards()
+      .then((cards) => {
+        setCards(mapCardsResponseDTOToModel(cards));
+      })
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
-  return { cards, isLoading };
+  return { cards, error, isLoading };
 };
