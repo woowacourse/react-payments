@@ -8,3 +8,14 @@ export const CARD_ISSUER = {
   hanaCard: '하나카드',
   kbCard: '국민카드',
 };
+
+export const CARD_ISSUER_CODE = {
+  bcCard: '31',
+  shCard: '41',
+  kakaoCard: '15',
+  hyundaiCard: '61',
+  wooriCard: 'W1',
+  lotteCard: '71',
+  hanaCard: '21',
+  kbCard: '11',
+};
