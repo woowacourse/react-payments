@@ -8,7 +8,7 @@ import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import CardCompanySelect from '../components/domain/CardCompanySelect';
 import PasswordField from '../components/domain/PasswordField';
-import { FIELD_STEP, DEFAULT_CVC_LENGTH } from '../constants';
+import { FIELD_STEP } from '../constants';
 import useAddCardForm, { type AddCardFormFieldKey } from '../hooks/useAddCardForm';
 
 export default function AddCardPage() {
@@ -16,7 +16,8 @@ export default function AddCardPage() {
   const [step, setStep] = useState(0);
   const {
     formValue: { cardNumbers, cardCompany, expirationPeriod, cvc, password },
-    derived: { cardBrand, cvcLength, areAllFieldErrorsClear, rules },
+    derived: { cardBrand, areAllFieldErrorsClear },
+    rules,
     actions: {
       updateValue,
       updateErrors,
@@ -72,8 +73,6 @@ export default function AddCardPage() {
           <CVCField
             value={cvc.value}
             errorStatuses={cvc.errorStatuses}
-            minLength={DEFAULT_CVC_LENGTH}
-            maxLength={cvcLength}
             onUpdated={(value) => updateValue('cvc', value)}
             onErrorUpdated={(errorStatuses) => updateErrors('cvc', errorStatuses)}
             validationRules={rules.cvc}
@@ -105,7 +104,7 @@ export default function AddCardPage() {
           errorStatuses={cardNumbers.errorStatuses}
           onUpdated={(value) => updateValue('cardNumbers', value)}
           onErrorUpdated={(errorStatuses) => updateErrors('cardNumbers', errorStatuses)}
-          validationRules={rules.cardNumbers.slice(0, 2)}
+          validationRules={rules.cardNumbers}
           onValid={runAndOpenNextStep('cardNumbers', validateCardNumbersOnComplete)}
         />
       </form>
