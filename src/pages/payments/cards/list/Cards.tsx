@@ -14,6 +14,7 @@ export const Cards = () => {
       <Title>보유 카드 ({cards?.length})</Title>
       {isLoading && <>loading</>}
       {error && <>error</>}
+      {cards !== null && !cards?.length && <div>no data</div>}
       <List>
         {cards?.map((card) => {
           return (
