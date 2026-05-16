@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import InputField from "@components/common/InputField";
+import FormField from "@components/common/FormField";
+import Input from "@components/common/Input";
 
 const meta = {
-  title: "InputField",
-  component: InputField,
-} satisfies Meta<typeof InputField>;
+  title: "FormField",
+  component: FormField,
+} satisfies Meta<typeof FormField>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -15,7 +16,7 @@ export const Primary: Story = {
     title: "타이틀",
     caption: "여기는 캡션입니다!",
     label: "라벨",
-    inputPropsList: [{ placeholder: "입력해 주세요" }],
+    children: <Input placeholder="입력해 주세요" />,
   },
 };
 
@@ -23,7 +24,12 @@ export const MultipleInputs: Story = {
   args: {
     title: "타이틀",
     label: "라벨",
-    inputPropsList: [{ placeholder: "첫 번째" }, { placeholder: "두 번째" }],
+    children: (
+      <>
+        <Input placeholder="첫 번째" />
+        <Input placeholder="두 번째" />
+      </>
+    ),
   },
 };
 
@@ -32,7 +38,7 @@ export const Error: Story = {
     title: "타이틀",
     caption: "여기는 캡션입니다!",
     label: "라벨",
-    inputPropsList: [{ state: "error", placeholder: "입력해 주세요" }],
+    children: <Input state="error" placeholder="입력해 주세요" />,
     helperMessage: "에러가 발생했습니다!",
   },
 };

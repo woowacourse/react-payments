@@ -1,7 +1,8 @@
-import AddNewCardPage from "./pages/AddNewCardPage";
+import { RouterProvider } from "react-router";
+import { router } from "./router";
 
 const App = () => {
-  return <AddNewCardPage />;
+  return <RouterProvider router={router} />;
 };
 
 export default App;

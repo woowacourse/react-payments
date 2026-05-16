@@ -1,5 +1,7 @@
-export const MONTH_MAX_LENGTH = 2;
-export const YEAR_MAX_LENGTH = 2;
+import { CARD_FIELD_LENGTH } from "@/constants/cardForm";
+
+export const MONTH_MAX_LENGTH = CARD_FIELD_LENGTH.VALIDITY_MONTH;
+export const YEAR_MAX_LENGTH = CARD_FIELD_LENGTH.VALIDITY_YEAR;
 
 export const HELPER_MESSAGE = {
   DEFAULT: "",
@@ -7,6 +9,9 @@ export const HELPER_MESSAGE = {
   INVALID_MONTH_RANGE: "월은 1부터 12 사이의 숫자로 입력해 주세요.",
   EMPTY_MONTH: "만료월을 입력해 주세요.",
   EMPTY_YEAR: "만료년을 입력해 주세요.",
+  INVALID_MONTH_LENGTH: `만료월을 ${MONTH_MAX_LENGTH}자리 숫자로 입력해 주세요.`,
+  INVALID_YEAR_LENGTH: `만료년을 ${YEAR_MAX_LENGTH}자리 숫자로 입력해 주세요.`,
+  EXPIRED_VALIDITY_PERIOD: "만료된 유효기간입니다.",
 } as const;
 
 export type InputStatus = keyof typeof HELPER_MESSAGE;

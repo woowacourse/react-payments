@@ -1,34 +1,29 @@
 import styled from "@emotion/styled";
-import Input from "@components/common/Input.tsx";
-import type { ComponentProps } from "react";
+import type { ReactNode } from "react";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 
-interface InputFieldProps {
+interface FormFieldProps {
   title: string;
   caption?: string;
-  label: string;
-  inputPropsList: ComponentProps<typeof Input>[];
+  label?: string;
   helperMessage?: string;
+  children: ReactNode;
 }
 
-const InputField = ({
+const FormField = ({
   title,
   caption,
   label,
-  inputPropsList,
   helperMessage = "",
-}: InputFieldProps) => {
+  children,
+}: FormFieldProps) => {
   return (
     <Container>
       <Title>{title}</Title>
       {caption && <Caption>{caption}</Caption>}
       <Fieldset>
-        <Legend>{label}</Legend>
-        <InputWrapper>
-          {inputPropsList.map((inputProps) => (
-            <Input {...inputProps} />
-          ))}
-        </InputWrapper>
+        {label && <Legend>{label}</Legend>}
+        <FieldContent>{children}</FieldContent>
       </Fieldset>
 
       <HelperMessage>{helperMessage}</HelperMessage>
@@ -37,6 +32,7 @@ const InputField = ({
 };
 
 const Container = styled.section`
+  position: relative;
   width: 100%;
 `;
 
@@ -48,7 +44,7 @@ const Title = styled.h2`
 const Caption = styled.p`
   font-weight: 400;
   font-size: 0.6rem;
-  color: ${COLOR_PALETTE.CAPTION};
+  color: ${COLOR_PALETTE["GREY-500"]}};
   margin-top: 0.25rem;
 `;
 
@@ -66,16 +62,18 @@ const Legend = styled.legend`
   margin-top: 1rem;
 `;
 
-const InputWrapper = styled.div`
+const FieldContent = styled.div`
   display: flex;
   gap: 0.625rem;
   margin-top: 0.5rem;
 `;
 
 const HelperMessage = styled.p`
+  margin: 0.75rem 0 0;
+  min-height: 0.75rem;
   font-weight: 400;
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   color: ${COLOR_PALETTE.ERROR};
 `;
 
-export default InputField;
+export default FormField;
