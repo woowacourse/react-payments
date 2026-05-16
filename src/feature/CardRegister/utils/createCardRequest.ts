@@ -2,7 +2,7 @@ import type {CreateCardRequest} from '@/domain/card/cardApi.types';
 import {CARD_COMPANIES} from '@/domain/card/cardCompany';
 import type {CardCompanyType} from '@/domain/card/cardCompany';
 
-type CreateCardRequestParams = {
+export type CreateCardRequestParams = {
   cardNumbers: string[];
   expiryDate: string[];
   cvcNumber: string;

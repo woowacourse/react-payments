@@ -1,40 +1,22 @@
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-
 import {useCardNumbers} from './useCardNumbers';
 import {useCompanySelect} from './useCompanySelect';
 import {useExpiryDate} from './useExpiryDate';
 import {useCvcNumber} from './useCvcNumber';
 import {useCardPassword} from './useCardPassword';
+import {useCardRegisterSubmit} from './useCardRegisterSubmit';
 
-import {createCard} from '@/api/cardsApi';
-import type {CardErrorResponse} from '@/domain/card/cardApi.types';
 import type {CardRegisterInputProps, ExpiryInputProps} from '../../components/inputs/shared.types';
-import {createCardRequest} from '../../utils/createCardRequest';
-import {
-  createEmptyServerFieldErrors,
-  focusServerErrorField,
-  getServerFieldName,
-} from '../../utils/serverFieldErrorUtils';
-import type {ServerFieldName} from '../../utils/serverFieldErrorUtils';
 
 const generateNumberPlaceholder = (length: number) => Array.from({length}, (_, i) => (i + 1) % 10).join('');
-const SUBMIT_ERROR_MESSAGE = '카드 정보를 다시 확인해 주세요';
-
-type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export function useCardRegisterForm() {
-  const navigate = useNavigate();
-  const [submitError, setSubmitError] = useState('');
-  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
-  const [serverFieldErrors, setServerFieldErrors] = useState(createEmptyServerFieldErrors);
-
   // 각 필드의 커스텀훅을 가져와서 사용
   const numberField = useCardNumbers();
   const companyField = useCompanySelect();
   const expiryField = useExpiryDate();
   const cvcField = useCvcNumber();
   const passwordField = useCardPassword();
+  const {submitStatus, submitError, serverFieldErrors, clearServerFieldError, submitCard} = useCardRegisterSubmit();
 
   // step을 파생값으로 두어 간편하게 관리
   const isCompanyVisible = numberField.isComplete;
@@ -55,13 +37,6 @@ export function useCardRegisterForm() {
     expiryField.isComplete &&
     cvcField.isComplete &&
     passwordField.isComplete;
-
-  const clearServerFieldError = (fieldName: ServerFieldName) => {
-    setServerFieldErrors((prev) => ({
-      ...prev,
-      [fieldName]: '',
-    }));
-  };
 
   const getNumberInputProps = (): CardRegisterInputProps[] =>
     numberField.format.map((maxLength, index) => ({
@@ -124,46 +99,19 @@ export function useCardRegisterForm() {
   };
 
   const handleSubmit = async () => {
-    const cardPrefix = numberField.cardNumbers[0];
     const selectedCompany = companyField.selectedCompany;
 
-    if (!isFormComplete || !cardPrefix || !selectedCompany) {
-      setSubmitError(SUBMIT_ERROR_MESSAGE);
-      return;
-    }
-
-    setSubmitError('');
-    setSubmitStatus('loading');
-    setServerFieldErrors(createEmptyServerFieldErrors());
-
-    try {
-      await createCard(
-        createCardRequest({
-          cardNumbers: numberField.cardNumbers,
-          expiryDate: expiryField.expiryDate,
-          cvcNumber: cvcField.cvcNumber,
-          selectedCompany,
-        })
-      );
-      setSubmitStatus('success');
-      navigate('/cards');
-    } catch (error) {
-      const cardError = error as CardErrorResponse;
-      const fieldName = getServerFieldName(cardError.code);
-
-      setSubmitStatus('error');
-
-      if (!fieldName) {
-        setSubmitError(SUBMIT_ERROR_MESSAGE);
-        return;
-      }
-
-      setServerFieldErrors((prev) => ({
-        ...prev,
-        [fieldName]: cardError.message,
-      }));
-      focusServerErrorField(fieldName);
-    }
+    await submitCard({
+      isFormComplete,
+      cardRequestParams: selectedCompany
+        ? {
+            cardNumbers: numberField.cardNumbers,
+            expiryDate: expiryField.expiryDate,
+            cvcNumber: cvcField.cvcNumber,
+            selectedCompany,
+          }
+        : null,
+    });
   };
 
   // 각 컴포넌트에서 필요한 데이터만 선별하여 묶어서 반환
