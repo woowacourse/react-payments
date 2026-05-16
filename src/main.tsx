@@ -1,8 +1,8 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import {BrowserRouter} from 'react-router-dom';
-import App from './App';
 import './common/styles/reset.css';
+import App from './App';
 
 async function main() {
   // 배포 환경에서도 MSW를 시작해 미션용 API 경계를 모킹
