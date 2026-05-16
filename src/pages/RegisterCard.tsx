@@ -1,13 +1,9 @@
 import CardPreview from '../components/CardPreview';
 import CardInput from '../components/CardInput';
-import { useCardNumber } from '../hooks/useCardNumber';
-import { useExpiryDate } from '../hooks/useExpiryDate';
-import { useCardCvc } from '../hooks/useCardCvc';
+import { useRegisterCardForm } from '../hooks/useRegisterCardForm';
 
 export default function RegisterCard() {
-  const [cardStatus, setCardStatus] = useCardNumber();
-  const [cardExpiry, setCardExpiry] = useExpiryDate();
-  const [cardCvc, setCardCvc] = useCardCvc();
+  const registerCardForm = useRegisterCardForm();
 
   return (
     <div
@@ -15,27 +11,21 @@ export default function RegisterCard() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
         gap: '45px',
         backgroundColor: theme.colors.white,
         width: '376px',
-        height: '100vh',
+        minHeight: '100vh',
         margin: '0 auto',
+        padding: '40px 0',
       })}
     >
       <CardPreview
-        cardNumbers={cardStatus.cardNumbers}
-        cardExpiryDate={cardExpiry.cardExpiryDate}
-        cardBrand={cardStatus.cardBrand}
+        cardNumbers={registerCardForm.cardStatus.cardNumbers}
+        cardExpiryDate={registerCardForm.cardExpiry.cardExpiryDate}
+        cardBrand={registerCardForm.cardStatus.cardBrand}
+        cardIssuer={registerCardForm.cardIssuer}
       />
-      <CardInput
-        cardStatus={cardStatus}
-        setCardStatus={setCardStatus}
-        cardExpiry={cardExpiry}
-        setCardExpiry={setCardExpiry}
-        cardCvc={cardCvc}
-        setCardCvc={setCardCvc}
-      />
+      <CardInput {...registerCardForm} />
     </div>
   );
 }

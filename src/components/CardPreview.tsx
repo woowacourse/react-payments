@@ -1,24 +1,44 @@
 import visa from '../assets/Visa.png';
 import master from '../assets/Mastercard.png';
-import { maskCardNumbers } from '../utils/maskCardNumbers';
-import type { CardBrandType } from '../types/cardStausTypes';
+import union from '../assets/UnionPay.png';
+import diners from '../assets/Diners.png';
+import amex from '../assets/Amex.png';
+import { maskCardNumbers, maskSpecialCardNumbers } from '../utils/maskCardNumbers';
+import type { CardBrandType, CardIssuerType } from '../types/cardStausTypes';
+import { getCardNumberMaskType } from '../utils/cardBrand';
+
+const CARD_BRAND_IMAGE: Partial<Record<CardBrandType, string>> = {
+  visa,
+  master,
+  unionPay: union,
+  diners,
+  amex,
+};
 
 type CardPreviewProps = {
   cardBrand: CardBrandType;
   cardNumbers: string[];
   cardExpiryDate: string[];
+  cardIssuer?: CardIssuerType | '';
 };
 
-export default function CardPreview({ cardBrand, cardNumbers, cardExpiryDate }: CardPreviewProps) {
-  const cardImgSrc: string | null =
-    cardBrand === 'visa' ? visa : cardBrand === 'master' ? master : null;
+export default function CardPreview({
+  cardBrand,
+  cardNumbers,
+  cardExpiryDate,
+  cardIssuer = '',
+}: CardPreviewProps) {
+  const cardImgSrc = CARD_BRAND_IMAGE[cardBrand];
+  const maskedCardNumbers = getCardNumberMaskType(cardBrand) === 'special'
+    ? maskSpecialCardNumbers(cardNumbers)
+    : maskCardNumbers(cardNumbers);
 
   return (
     <div
       css={(theme) => ({
         width: '212px',
         height: '132px',
-        backgroundColor: theme.colors.cardBackground,
+        backgroundColor: cardIssuer ? theme.colors[cardIssuer] : theme.colors.cardBackground,
         boxShadow: '3px 3px 5px 0px #00000040;',
         borderRadius: '4px',
         padding: '8px 12px 8px 12px',
@@ -52,7 +72,7 @@ export default function CardPreview({ cardBrand, cardNumbers, cardExpiryDate }: 
           gap: '10px',
         })}
       >
-        {maskCardNumbers(cardNumbers).map((cardNumber, index) => {
+        {maskedCardNumbers.map((cardNumber, index) => {
           return (
             <span
               key={index}
@@ -60,8 +80,8 @@ export default function CardPreview({ cardBrand, cardNumbers, cardExpiryDate }: 
                 width: '40px',
                 display: 'inline-block',
                 textAlign: 'center',
-                fontSize: index > 1 ? '30px' : '14px',
-                letterSpacing: index > 1 ? '0px' : '16%',
+                fontSize: '14px',
+                letterSpacing: '16%',
               }}
             >
               {cardNumber}

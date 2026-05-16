@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import type { CvcError } from '../types/errorTypes';
 import type { Cvc, CvcHandler } from '../types/cardStausTypes';
-import { isNotNumber } from '../utils/util';
+import { isNumericInput } from '../utils/validate';
 
 export function useCardCvc(): [Cvc, CvcHandler] {
   const [cardCvc, setCardCvc] = useState<string>('');
   const [cardCvcErrorMode, setCardCvcErrorMode] = useState<CvcError | 'normal'>('normal');
 
   const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isNotNumber(Number(e.target.value), 'notNumber', setCardCvcErrorMode)) {
+    if (!isNumericInput(e.target.value)) {
+      setCardCvcErrorMode('notNumber');
       return;
     }
 

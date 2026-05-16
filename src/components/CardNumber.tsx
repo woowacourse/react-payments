@@ -1,12 +1,46 @@
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
+import type { CardStatus } from '../types/cardStausTypes.ts';
+import { useRef } from 'react';
+import { getCardNumberGroups } from '../utils/cardBrand.ts';
+import { isNumericInput } from '../utils/validate.ts';
 
 type CardNumbersProps = {
   cardStatus: CardStatus;
-  setCardStatus: CardHandler;
+  onChangeCardNumber: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onValidateCardNumber: () => void;
 };
 
-export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersProps) {
+export default function CardNumber({
+  cardStatus,
+  onChangeCardNumber,
+  onValidateCardNumber,
+}: CardNumbersProps) {
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const hasCardNumberError =
+    cardStatus.cardNumberErrorMode !== 'normal' && cardStatus.cardNumberErrorMode !== '';
+  const cardNumberErrorMessage =
+    cardStatus.cardNumberErrorMode !== 'normal' && cardStatus.cardNumberErrorMode !== ''
+      ? CARD_ERROR_MESSAGE[cardStatus.cardNumberErrorMode]
+      : ' ';
+
+  const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeCardNumber(index)(e);
+
+    if (e.target.value.length === 4 && isNumericInput(e.target.value)) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (e.currentTarget.contains(e.relatedTarget)) {
+      return;
+    }
+
+    onValidateCardNumber();
+  };
+
+  const cardNumberGroups = getCardNumberGroups(cardStatus.cardBrand);
+
   return (
     <fieldset
       css={{ display: 'flex', flexDirection: 'column', border: 'none', padding: 0, gap: '10px' }}
@@ -45,6 +79,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             display: 'flex',
             gap: '10px',
           }}
+          onBlur={handleBlur}
         >
           {cardStatus.cardNumbers.map((cardNumber, index) => {
             return (
@@ -52,10 +87,9 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                 key={index}
                 type="text"
                 placeholder="1234"
-                maxLength={4}
-                onChange={setCardStatus.handleCardNumbers(index)}
+                maxLength={cardNumberGroups[index]}
+                onChange={handleChange(index)}
                 value={cardNumber}
-                onBlur={setCardStatus.handleCardNumbersBlur}
                 inputMode="numeric"
                 css={(theme) => ({
                   width: '71.25px',
@@ -63,13 +97,21 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                   borderRadius: '2px',
                   border: `1.01px solid ${theme.colors.inactiveBorder}`,
                   borderColor:
-                    cardNumber.length < 4 && cardStatus.cardNumberErrorMode !== 'normal'
+                    cardNumber.length < 4 &&
+                    cardStatus.cardNumberErrorMode !== 'normal' &&
+                    cardStatus.cardNumberErrorMode !== ''
                       ? theme.colors.error
                       : theme.colors.inactiveBorder,
                   padding: '8px',
                 })}
                 aria-label={`카드 번호 ${index + 1}번째 입력창`}
-              ></input>
+                aria-invalid={hasCardNumberError}
+                aria-describedby="card-number-error"
+                autoFocus={index === 0}
+                ref={(element) => {
+                  inputRefs.current[index] = element;
+                }}
+              />
             );
           })}
         </div>
@@ -79,10 +121,9 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             color: theme.colors.error,
             height: '12px',
           })}
+          id="card-number-error"
         >
-          {cardStatus.cardNumberErrorMode !== 'normal'
-            ? CARD_ERROR_MESSAGE[cardStatus.cardNumberErrorMode]
-            : ' '}
+          {cardNumberErrorMessage}
         </p>
       </div>
     </fieldset>

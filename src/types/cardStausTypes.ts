@@ -1,19 +1,26 @@
-import type { CardError, DateError, MonthError, YearError, CvcError } from './errorTypes';
+import type {
+  CardError,
+  DateError,
+  MonthError,
+  YearError,
+  CvcError,
+  PasswordError,
+} from './errorTypes';
 
 export interface CardStatus {
   cardNumbers: string[];
-  cardNumberErrorMode: CardError | 'normal';
+  cardNumberErrorMode: CardError | 'normal' | '';
   cardBrand: CardBrandType;
 }
 
 export interface CardHandler {
   handleCardNumbers: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleCardNumbersBlur: () => void;
+  validateCardNumbers: () => void;
 }
 
 export interface CardExpiry {
   cardExpiryDate: string[];
-  cardExpiryDateErrorMode: DateError | MonthError | YearError | 'normal';
+  cardExpiryDateErrorMode: DateError | MonthError | YearError | 'normal' | '';
 }
 
 export interface ExpireHandler {
@@ -32,4 +39,24 @@ export interface CvcHandler {
   handleCvcBlur: () => void;
 }
 
-export type CardBrandType = 'visa' | 'master' | 'unknown';
+export interface Password {
+  cardPassword: string;
+  cardPasswordErrorMode: PasswordError | 'normal';
+}
+
+export interface PasswordHandler {
+  handleCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordBlur: () => void;
+}
+
+export type CardBrandType = 'visa' | 'master' | 'diners' | 'amex' | 'unionPay' | 'unknown';
+
+export type CardIssuerType =
+  | 'bcCard'
+  | 'shCard'
+  | 'kakaoCard'
+  | 'hyundaiCard'
+  | 'wooriCard'
+  | 'lotteCard'
+  | 'hanaCard'
+  | 'kbCard';

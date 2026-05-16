@@ -3,20 +3,46 @@ import {
   MONTH_ERROR_MESSAGE,
   YEAR_ERROR_MESSAGE,
 } from '../constants/messages.ts';
-import { isMonthError, isYearError } from '../utils/util.ts';
-import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
+import { isMonthError, isYearError } from '../utils/error.ts';
+import { isNumericInput } from '../utils/validate.ts';
+import type { CardExpiry } from '../types/cardStausTypes';
+import { useRef } from 'react';
 
 type CardExpiryDateProps = {
   cardExpiry: CardExpiry;
-  setCardExpiry: ExpireHandler;
+  onChangeCardExpiryDate: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlurMonth: () => void;
+  onBlurYear: () => void;
 };
 
-export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiryDateProps) {
+export default function CardExpiryDate({
+  cardExpiry,
+  onChangeCardExpiryDate,
+  onBlurMonth,
+  onBlurYear,
+}: CardExpiryDateProps) {
   const EXPIRY_ERROR_MESSAGE = {
     ...DATE_ERROR_MESSAGE,
     ...MONTH_ERROR_MESSAGE,
     ...YEAR_ERROR_MESSAGE,
   };
+  const expiryDateErrorMessage =
+    cardExpiry.cardExpiryDateErrorMode !== 'normal' && cardExpiry.cardExpiryDateErrorMode !== ''
+      ? EXPIRY_ERROR_MESSAGE[cardExpiry.cardExpiryDateErrorMode]
+      : ' ';
+
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+
+  const handleChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeCardExpiryDate(index)(e);
+
+    if (e.target.value.length === 2 && isNumericInput(e.target.value)) {
+      if (index === 0 && Number(e.target.value) <= 12 && Number(e.target.value) > 0) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    }
+  };
+
   return (
     <fieldset
       css={{ display: 'flex', flexDirection: 'column', border: 'none', padding: 0, gap: '10px' }}
@@ -61,8 +87,8 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             type="text"
             placeholder="MM"
             value={cardExpiry.cardExpiryDate[0]}
-            onChange={setCardExpiry.handleCardExpiryDate(0)}
-            onBlur={setCardExpiry.handleMonthBlur}
+            onChange={handleChange(0)}
+            onBlur={onBlurMonth}
             maxLength={2}
             inputMode="numeric"
             css={(theme) => ({
@@ -78,13 +104,19 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
               padding: '8px',
             })}
             aria-label="카드 유효기간 월 입력창"
-          ></input>
+            aria-invalid={isMonthError(cardExpiry.cardExpiryDateErrorMode) === true}
+            aria-describedby="card-expiry-error"
+            autoFocus
+            ref={(element) => {
+              inputRefs.current[0] = element;
+            }}
+          />
           <input
             type="text"
             placeholder="YY"
             value={cardExpiry.cardExpiryDate[1]}
-            onChange={setCardExpiry.handleCardExpiryDate(1)}
-            onBlur={setCardExpiry.handleYearBlur}
+            onChange={handleChange(1)}
+            onBlur={onBlurYear}
             maxLength={2}
             inputMode="numeric"
             css={(theme) => ({
@@ -100,7 +132,12 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
               padding: '8px',
             })}
             aria-label="카드 유효기간 연도 입력창"
-          ></input>
+            aria-invalid={isYearError(cardExpiry.cardExpiryDateErrorMode) === true}
+            aria-describedby="card-expiry-error"
+            ref={(element) => {
+              inputRefs.current[1] = element;
+            }}
+          />
         </div>
         <p
           css={(theme) => ({
@@ -108,10 +145,9 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             color: theme.colors.error,
             height: '12px',
           })}
+          id="card-expiry-error"
         >
-          {cardExpiry.cardExpiryDateErrorMode !== 'normal'
-            ? EXPIRY_ERROR_MESSAGE[cardExpiry.cardExpiryDateErrorMode]
-            : ' '}
+          {expiryDateErrorMessage}
         </p>
       </div>
     </fieldset>

@@ -1,50 +1,33 @@
 import { useState } from 'react';
 import type { CardError } from '../types/errorTypes';
-import type { CardStatus, CardHandler, CardBrandType } from '../types/cardStausTypes';
-import { getCardBrand, isNotNumber, setEmptyBrand, setNoExist } from '../utils/util';
+import type { CardStatus, CardHandler } from '../types/cardStausTypes';
+import { getCardBrand } from '../utils/cardBrand';
+import { getCardNumberError } from '../utils/error';
+import { validateCardNumber } from '../utils/validate';
 
 export function useCardNumber(): [CardStatus, CardHandler] {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [cardNumberErrorMode, setCardNumberErrorMode] = useState<CardError | 'normal'>('normal');
-  const [cardBrand, setCardBrand] = useState<CardBrandType>('unknown');
+  const [cardNumberErrorMode, setCardNumberErrorMode] = useState<CardError | 'normal' | ''>('');
+  const cardBrand = getCardBrand(cardNumbers.join(''));
 
   const handleCardNumbers = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = [...cardNumbers];
     next[index] = e.target.value;
+    const nextCardNumber = next.join('');
+    const nextCardNumberError = validateCardNumber(nextCardNumber);
 
-    if (isNotNumber(Number(e.target.value), 'notNumber', setCardNumberErrorMode)) {
+    if (nextCardNumberError === 'notNumber') {
+      setCardNumberErrorMode(nextCardNumberError);
       return;
     }
 
-    setEmptyBrand(next, setCardBrand);
-
-    if (next[0].length === 1) {
-      if (setNoExist(next, 'notExistBrand', setCardNumberErrorMode)) {
-        return;
-      }
-      const nextCardBrand = getCardBrand(next[0]);
-      if (nextCardBrand !== 'unknown') {
-        setCardBrand(nextCardBrand);
-      }
-    }
-
-    if (next[0].length === 2 && next[0].slice(0, 1) !== '4') {
-      if (setNoExist(next, 'notExistBrand', setCardNumberErrorMode)) {
-        return;
-      }
-      setCardBrand(getCardBrand(next[0]));
-    }
-
-    setCardNumberErrorMode('normal');
     setCardNumbers(next);
+    setCardNumberErrorMode(nextCardNumberError);
   };
 
-  const handleCardNumbersBlur = () => {
-    if (cardNumbers.join('').length !== 16) {
-      setCardNumberErrorMode('cardNumberCount');
-      return;
-    }
-    setCardNumberErrorMode('normal');
+  const validateCardNumbers = () => {
+    const cardNumber = cardNumbers.join('');
+    setCardNumberErrorMode(getCardNumberError(cardNumber));
   };
 
   return [
@@ -55,7 +38,7 @@ export function useCardNumber(): [CardStatus, CardHandler] {
     },
     {
       handleCardNumbers: handleCardNumbers,
-      handleCardNumbersBlur: handleCardNumbersBlur,
+      validateCardNumbers: validateCardNumbers,
     },
   ];
 }

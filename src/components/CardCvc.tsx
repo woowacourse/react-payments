@@ -1,12 +1,13 @@
 import { CVC_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { Cvc, CvcHandler } from '../types/cardStausTypes.ts';
+import type { Cvc } from '../types/cardStausTypes.ts';
 
 type CardCvcProps = {
   cardCvc: Cvc;
-  setCardCvc: CvcHandler;
+  onChangeCardCvc: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlurCardCvc: () => void;
 };
 
-export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
+export default function CardCvc({ cardCvc, onChangeCardCvc, onBlurCardCvc }: CardCvcProps) {
   return (
     <fieldset css={{ display: 'flex', flexDirection: 'column', border: 'none', padding: 0 }}>
       <legend
@@ -33,9 +34,9 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
           type="text"
           placeholder="123"
           value={cardCvc.cardCvc}
-          onChange={setCardCvc.handleCardCvc}
+          onChange={onChangeCardCvc}
           maxLength={3}
-          onBlur={setCardCvc.handleCvcBlur}
+          onBlur={onBlurCardCvc}
           inputMode="numeric"
           css={(theme) => ({
             width: '315px',
@@ -50,13 +51,17 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
             padding: '8px',
           })}
           id="card-cvc"
-        ></input>
+          autoFocus
+          aria-invalid={cardCvc.cardCvcErrorMode !== 'normal'}
+          aria-describedby="card-cvc-error"
+        />
         <p
           css={(theme) => ({
             ...theme.typography.caption,
             color: theme.colors.error,
             height: '12px',
           })}
+          id="card-cvc-error"
         >
           {cardCvc.cardCvcErrorMode !== 'normal'
             ? CVC_ERROR_MESSAGE[cardCvc.cardCvcErrorMode]

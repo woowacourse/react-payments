@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import CardExpiryDate from '../components/CardExpiryDate';
 import { useExpiryDate } from '../hooks/useExpiryDate';
 
@@ -22,11 +22,9 @@ export const Default: Story = {
       cardExpiryDate: ['', ''],
       cardExpiryDateErrorMode: 'normal',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -36,11 +34,9 @@ export const Filled: Story = {
       cardExpiryDate: ['12', '11'],
       cardExpiryDateErrorMode: 'normal',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -50,11 +46,9 @@ export const EmptyBothError: Story = {
       cardExpiryDate: ['', ''],
       cardExpiryDateErrorMode: 'emptyBoth',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -64,11 +58,9 @@ export const EmptyMonthError: Story = {
       cardExpiryDate: ['', '22'],
       cardExpiryDateErrorMode: 'emptyMonth',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -78,11 +70,9 @@ export const EmptyYearError: Story = {
       cardExpiryDate: ['10', ''],
       cardExpiryDateErrorMode: 'emptyYear',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
 };
 
@@ -92,21 +82,38 @@ export const Interactive: Story = {
       cardExpiryDate: ['', ''],
       cardExpiryDateErrorMode: 'normal',
     },
-    setCardExpiry: {
-      handleCardExpiryDate: () => fn(),
-      handleYearBlur: () => fn(),
-      handleMonthBlur: () => fn(),
-    },
+    onChangeCardExpiryDate: () => fn(),
+    onBlurMonth: fn(),
+    onBlurYear: fn(),
   },
   render: () => {
     const [cardExpiry, setCardExpiry] = useExpiryDate();
 
     return (
       <div>
-        <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />
+        <CardExpiryDate
+          cardExpiry={cardExpiry}
+          onChangeCardExpiryDate={setCardExpiry.handleCardExpiryDate}
+          onBlurMonth={setCardExpiry.handleMonthBlur}
+          onBlurYear={setCardExpiry.handleYearBlur}
+        />
 
-        <div style={{ marginTop: '16px' }}>입력값: {cardExpiry.cardExpiryDate.join('/')}</div>
+        <div data-testid="card-expiry-value" style={{ marginTop: '16px' }}>
+          입력값: {cardExpiry.cardExpiryDate.join('/')}
+        </div>
       </div>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const monthInput = canvas.getByLabelText('카드 유효기간 월 입력창');
+    const yearInput = canvas.getByLabelText('카드 유효기간 연도 입력창');
+
+    await userEvent.type(monthInput, '12');
+    await userEvent.type(yearInput, '30');
+
+    await expect(monthInput).toHaveValue('12');
+    await expect(yearInput).toHaveValue('30');
+    await expect(canvas.getByTestId('card-expiry-value')).toHaveTextContent('12/30');
   },
 };
