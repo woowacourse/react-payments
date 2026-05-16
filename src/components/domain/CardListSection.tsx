@@ -3,6 +3,9 @@ import CardList, { type Card } from './CardList.tsx';
 import AddCardButton from './AddCardButton.tsx';
 import Error from '../../assets/error.tsx';
 import Button from '../ui/Button.tsx';
+import CardItemSkeleton from './CardItem.skeleton.tsx';
+import { useEffect, useState } from 'react';
+import ButtonSkeleton from '../ui/Button.skeleton.tsx';
 
 const mockCards: Card[] = [
   {
@@ -27,7 +30,7 @@ type ResponseStatus = 'idle' | 'loading' | 'success' | 'error';
 export default function CardListPage() {
   const cards = mockCards;
   const cardCount = cards.length;
-  const responseStatus: ResponseStatus = 'error';
+  const [responseStatus, setResponseStatus] = useState<ResponseStatus>('loading');
 
   const isPending = responseStatus === 'idle';
   const isLoading = responseStatus === 'loading';
@@ -35,12 +38,24 @@ export default function CardListPage() {
   const isEmpty = cards.length === 0;
   const isError = responseStatus === 'error';
 
+  useEffect(() => {
+    setTimeout(() => {
+      setResponseStatus('success');
+    }, 10000);
+  }, []);
+
   return (
     <div css={layout}>
       <h1 css={headerTypography}>보유 카드 {cardCount > 0 ? ` (${cardCount})` : ''}</h1>
       <div css={contentWrapperStyle}>
-        {isPending && <div></div>}
-        {isLoading && <div></div>}
+        {(isPending || isLoading) && (
+          <div css={loadingWrapperStyle}>
+            <CardItemSkeleton />
+            <CardItemSkeleton />
+            <CardItemSkeleton />
+            <ButtonSkeleton />
+          </div>
+        )}
         {isSuccess && isEmpty && (
           <div css={emptyWrapperStyle}>
             <div css={emptyCardStyle} />
@@ -95,6 +110,14 @@ const headerTypography = css`
 const contentWrapperStyle = css`
   display: flex;
   height: 100%;
+`;
+
+const loadingWrapperStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
 `;
 
 const emptyWrapperStyle = css`
