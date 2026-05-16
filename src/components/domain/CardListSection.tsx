@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import CardList, { type Card } from './CardList.tsx';
 import AddCardButton from './AddCardButton.tsx';
+import Error from '../../assets/error.tsx';
+import Button from '../ui/Button.tsx';
 
 const mockCards: Card[] = [
   {
@@ -25,7 +27,7 @@ type ResponseStatus = 'idle' | 'loading' | 'success' | 'error';
 export default function CardListPage() {
   const cards = mockCards;
   const cardCount = cards.length;
-  const responseStatus: ResponseStatus = 'success';
+  const responseStatus: ResponseStatus = 'error';
 
   const isPending = responseStatus === 'idle';
   const isLoading = responseStatus === 'loading';
@@ -57,7 +59,16 @@ export default function CardListPage() {
             </AddCardButton>
           </div>
         )}
-        {isError && <div></div>}
+        {isError && (
+          <div css={errorWrapperStyle}>
+            <Error />
+            <span css={errorMessageTypography}>카드 목록을 불러올 수 없어요</span>
+            <span css={errorCaptionTypography}>잠시 후 다시 시도해 주세요.</span>
+            <Button variant="solid" size="md">
+              다시 시도
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -100,6 +111,15 @@ const successWrapperStyle = css`
   flex-direction: column;
   gap: 16px;
   width: 100%;
+`;
+
+const errorWrapperStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  margin: auto;
 `;
 
 const emptyCardStyle = css`
