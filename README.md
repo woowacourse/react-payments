@@ -72,7 +72,7 @@
 - [x] 부분 입력 시 자동으로 앞에 0을 붙여서 2자리로 완성
 
 #### CVC 번호 입력 (CVC Input)
-- [x] 입력 형식: 3자리 입력칸
+- [x] 입력 형식: 3~4자리 입력칸
 - [x] 숫자만 입력 가능하며, 숫자 외 입력은 자동 차단
 - [x] 입력칸의 placeholder: `123`
 - [x] 입력 중인 칸의 테두리를 검은색(`#000000`)으로 강조
@@ -221,6 +221,7 @@ src/
 │   └── cardsApi.ts
 ├── common/
 │   ├── components/
+│   │   ├── Button/
 │   │   ├── Input/
 │   │   └── Typography/
 │   ├── styles/
@@ -261,10 +262,12 @@ src/
 │   ├── browser.ts
 │   ├── cardStore.ts
 │   ├── handlers.ts
-│   └── server.ts
+│   ├── server.ts
+│   └── validators/
+│       └── cardRequestValidator.ts
 ├── test/
+│   ├── App.integration.test.tsx
 │   └── setup.ts
-├── App.test.tsx
 ├── App.tsx
 └── main.tsx
 ```
@@ -293,7 +296,8 @@ src/
 
 ### Card Register Section
 - **CardRegisterPage**: 카드 등록 화면 전체 조립
-- **useCardRegisterForm**: 카드 등록 폼 상태, 서버 제출, 서버 에러 매핑 담당
+- **useCardRegisterForm**: 카드 등록 필드 상태 조합, 단계별 필드 노출, 입력 props 생성 담당
+- **useCardRegisterSubmit**: 카드 등록 제출 상태, 서버 요청, 서버 에러 매핑 담당
 - **NumberField**: 카드 번호 입력
 - **CompanySelectField**: 카드사 선택
 - **ExpiryField**: 유효기간 입력
