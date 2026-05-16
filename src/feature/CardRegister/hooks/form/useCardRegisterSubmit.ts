@@ -5,20 +5,30 @@ import {createCard} from '@/api/cardsApi';
 import type {CardErrorResponse} from '@/domain/card/cardApi.types';
 import type {CreateCardRequestParams} from '../../utils/createCardRequest';
 import {createCardRequest} from '../../utils/createCardRequest';
-import {
-  createEmptyServerFieldErrors,
-  focusServerErrorField,
-  getServerFieldName,
-} from '../../utils/serverFieldErrorUtils';
+import {createEmptyServerFieldErrors, getServerFieldName} from '../../utils/serverFieldErrorUtils';
 import type {ServerFieldErrors, ServerFieldName} from '../../utils/serverFieldErrorUtils';
 
 const SUBMIT_ERROR_MESSAGE = '카드 정보를 다시 확인해 주세요';
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 
+const ERROR_FIELD_INPUT_IDS: Record<ServerFieldName, string> = {
+  cardNumbers: 'card-number-0',
+  cardCompany: 'card-company',
+  cardExpiryDate: 'card-expiry-month',
+  cardCvc: 'card-cvc',
+};
+
 type SubmitCardParams = {
   isFormComplete: boolean;
   cardRequestParams: CreateCardRequestParams | null;
+};
+
+// 서버 에러가 발생한 입력 필드로 focus 이동
+const focusServerErrorField = (fieldName: ServerFieldName) => {
+  window.requestAnimationFrame(() => {
+    document.getElementById(ERROR_FIELD_INPUT_IDS[fieldName])?.focus();
+  });
 };
 
 export const useCardRegisterSubmit = () => {

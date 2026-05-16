@@ -17,16 +17,3 @@ export const getServerFieldName = (code?: string): ServerFieldName | null => {
 
   return null;
 };
-
-const ERROR_FIELD_INPUT_IDS: Record<ServerFieldName, string> = {
-  cardNumbers: 'card-number-0',
-  cardCompany: 'card-company',
-  cardExpiryDate: 'card-expiry-month',
-  cardCvc: 'card-cvc',
-};
-
-export const focusServerErrorField = (fieldName: ServerFieldName) => {
-  window.requestAnimationFrame(() => {
-    document.getElementById(ERROR_FIELD_INPUT_IDS[fieldName])?.focus();
-  });
-};
