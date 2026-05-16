@@ -1,18 +1,11 @@
 import { css } from "@emotion/react";
-import { useNavigate } from "react-router-dom";
 
 import CardForm from "../components/card/CardForm/CardForm";
 
 const CardFormPage = () => {
-  const navigate = useNavigate();
-
   return (
     <main css={pageStyle}>
-      <CardForm
-        onSubmit={(publicCardInfo) => {
-          navigate("/completed", { state: publicCardInfo });
-        }}
-      />
+      <CardForm />
     </main>
   );
 };

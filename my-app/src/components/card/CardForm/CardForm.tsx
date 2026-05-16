@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 
 import type { CardDisplayInfo, PublicCardInfo } from "../../../types";
 import { useCardForm } from "../../../hooks/useCardForm";
+import { useNavigate } from "react-router-dom";
 
 import Card from "../Card/Card";
 import SubmitButton from "../../SubmitButton/SubmitButton";
@@ -11,20 +12,17 @@ import CvcInputSection from "../CvcInputSection/CvcInputSection";
 import ExpiryDateInputSection from "../ExpiryDateInputSection/ExpiryDateInputSection";
 import PasswordInputSection from "../PasswordInputSection/PasswordInputSection";
 
-type CardFormProps = {
-  onSubmit: (publicCardInfo: PublicCardInfo) => void;
-};
-
 const toPublicCardInfo = (cardInfo: CardDisplayInfo): PublicCardInfo => ({
   numberHead: cardInfo.numbers[0],
   company: cardInfo.company,
 });
 
-const CardForm = ({ onSubmit }: CardFormProps) => {
+const CardForm = () => {
+  const navigate = useNavigate();
   const { cardInfo, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
 
   const handleConfirm = () => {
-    onSubmit(toPublicCardInfo(cardInfo));
+    navigate("/completed", { state: toPublicCardInfo(cardInfo) });
   };
 
   return (
