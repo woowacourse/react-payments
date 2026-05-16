@@ -10,6 +10,7 @@ import {
 import { getExpireDateError, isNumericInput } from '../validator';
 import { useCardForm } from '../../useCardForm';
 import { useAutoFocus } from '../useAutoFocus';
+import useBlur from '../useBlur';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['expireDate'];
@@ -19,6 +20,7 @@ export default function ExpireDateField({ field }: Props) {
   const { value: expireDate, set: setExpireDate } = field;
   const { setRef, focusNext } = useAutoFocus();
   const error = getExpireDateError(expireDate);
+  const { touched, handleBlur } = useBlur();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -45,6 +47,7 @@ export default function ExpireDateField({ field }: Props) {
           maxLength={2}
           value={expireDate[0]}
           onChange={(e) => handleChange(e, 0)}
+          onBlur={handleBlur}
           inputMode="numeric"
         />
         <InfoInput
@@ -53,10 +56,11 @@ export default function ExpireDateField({ field }: Props) {
           maxLength={2}
           value={expireDate[1]}
           onChange={(e) => handleChange(e, 1)}
+          onBlur={handleBlur}
           inputMode="numeric"
         />
       </InputContainer>
-      <ErrorMessage>{error}</ErrorMessage>
+      <ErrorMessage>{touched ? error : ''}</ErrorMessage>
     </Field>
   );
 }

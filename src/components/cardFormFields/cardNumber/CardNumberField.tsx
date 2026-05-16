@@ -9,8 +9,12 @@ import {
 } from '../CardFormFields.styles';
 import { getCardNumberError, isNumericInput } from '../validator';
 import { useCardForm } from '../../useCardForm';
-import { getCardNumberSegments, reshapeCardNumber } from '../../../utils/cardNetwork';
+import {
+  getCardNumberSegments,
+  reshapeCardNumber,
+} from '../../../utils/cardNetwork';
 import { useAutoFocus } from '../useAutoFocus';
+import useBlur from '../useBlur';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardNumber'];
@@ -21,6 +25,7 @@ export default function CardNumberField({ field }: Props) {
   const segments = getCardNumberSegments(cardNumber.join(''));
   const { setRef, focusNext } = useAutoFocus();
   const error = getCardNumberError(cardNumber);
+  const { touched, handleBlur } = useBlur();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -51,11 +56,12 @@ export default function CardNumberField({ field }: Props) {
             maxLength={length}
             value={cardNumber[index] ?? ''}
             onChange={(e) => handleChange(e, index, length)}
+            onBlur={handleBlur}
             inputMode="numeric"
           />
         ))}
       </InputContainer>
-      <ErrorMessage>{error}</ErrorMessage>
+      <ErrorMessage>{touched ? error : ''}</ErrorMessage>
     </Field>
   );
 }

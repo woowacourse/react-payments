@@ -8,6 +8,7 @@ import {
 } from '../CardFormFields.styles';
 import { getCvcError, isNumericInput } from '../validator';
 import { useCardForm } from '../../useCardForm';
+import useBlur from '../useBlur';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cvc'];
@@ -16,6 +17,7 @@ interface Props {
 export default function CvcField({ field }: Props) {
   const { value: cvc, set: setCvc } = field;
   const error = getCvcError(cvc);
+  const { touched, handleBlur } = useBlur();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -34,10 +36,11 @@ export default function CvcField({ field }: Props) {
           maxLength={3}
           value={cvc}
           onChange={handleChange}
+          onBlur={handleBlur}
           inputMode="numeric"
         />
       </InputContainer>
-      <ErrorMessage>{error}</ErrorMessage>
+      <ErrorMessage>{touched ? error : ''}</ErrorMessage>
     </Field>
   );
 }

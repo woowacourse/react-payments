@@ -9,6 +9,7 @@ import {
 } from '../CardFormFields.styles';
 import type { useCardForm } from '../../useCardForm';
 import { getCardPasswordError, isNumericInput } from '../validator';
+import useBlur from '../useBlur';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardPassword'];
@@ -18,6 +19,7 @@ interface Props {
 export default function CardPasswordField({ field }: Props) {
   const { value: password, set: setPassword } = field;
   const error = getCardPasswordError(password);
+  const { touched, handleBlur } = useBlur();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -38,10 +40,11 @@ export default function CardPasswordField({ field }: Props) {
           maxLength={2}
           value={password}
           onChange={handleChange}
+          onBlur={handleBlur}
           inputMode="numeric"
         />
       </InputContainer>
-      <ErrorMessage>{error}</ErrorMessage>
+      <ErrorMessage>{touched ? error : ''}</ErrorMessage>
     </Field>
   );
 }
