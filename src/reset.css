@@ -102,6 +102,10 @@ ul, li, button {
   padding: 0;
 }
 
+li {
+  list-style: none;
+}
+
 button {
   border: none;
   background-color: transparent;
