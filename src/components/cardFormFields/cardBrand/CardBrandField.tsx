@@ -1,4 +1,4 @@
-import { Description, Field, Title } from '../CardInfo.styles';
+import { Description, Field, Title } from '../CardFormFields.styles';
 import { Select } from './CardBrandField.styles';
 import { useCardForm } from '../../useCardForm';
 import { CARD_BRANDS } from '../../../constants/constants';

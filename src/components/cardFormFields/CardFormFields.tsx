@@ -1,4 +1,4 @@
-import { Wrapper } from './CardInfo.styles';
+import { Wrapper } from './CardFormFields.styles';
 import CardNumberField from './cardNumber/CardNumberField';
 import { useCardForm } from '../useCardForm';
 import CardBrandField from './cardBrand/CardBrandField';
@@ -11,7 +11,7 @@ interface Props {
   step: number;
 }
 //카드 정보를 담고있는 컴포넌트
-export default function CardInfo({ cardForm, step }: Props) {
+export default function CardFormFields({ cardForm, step }: Props) {
   return (
     <Wrapper>
       {step >= 4 && <CardPasswordField field={cardForm.cardPassword} />}

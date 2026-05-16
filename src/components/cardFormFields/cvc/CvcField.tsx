@@ -5,7 +5,7 @@ import {
   Title,
   Label,
   InputContainer,
-} from '../CardInfo.styles';
+} from '../CardFormFields.styles';
 import { useCvcValidation } from './useCvcValidation';
 import { useCardForm } from '../../useCardForm';
 

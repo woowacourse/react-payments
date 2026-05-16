@@ -6,7 +6,7 @@ import {
   Description,
   Label,
   InputContainer,
-} from '../CardInfo.styles';
+} from '../CardFormFields.styles';
 import { useCardNumberValidation } from './useCardNumberValidation';
 import { useCardForm } from '../../useCardForm';
 import { getCardNumberSegments, reshapeCardNumber } from '../../../utils/cardNetwork';

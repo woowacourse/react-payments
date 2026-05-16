@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import CardInfo from "./cardInfo/CardInfo";
+import CardFormFields from "./cardFormFields/CardFormFields";
 import CardPreview from "./cardPreview/CardPreview";
 import { Wrapper, ConfirmButton } from "./PaymentWidget.styles";
 import { useCardForm } from "./useCardForm";
-import { useCardStep } from "./cardInfo/useCardStep";
+import { useCardStep } from "./cardFormFields/useCardStep";
 import { CARD_BRANDS } from "../constants/constants";
 
 export default function PaymentWidget() {
@@ -23,7 +23,7 @@ export default function PaymentWidget() {
   return (
     <Wrapper>
       <CardPreview cardForm={cardForm} />
-      <CardInfo cardForm={cardForm} step={step} />
+      <CardFormFields cardForm={cardForm} step={step} />
       {step >= 5 && <ConfirmButton onClick={handleConfirm}>확인</ConfirmButton>}
     </Wrapper>
   );

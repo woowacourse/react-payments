@@ -6,7 +6,7 @@ import {
   Description,
   Label,
   InputContainer,
-} from '../CardInfo.styles';
+} from '../CardFormFields.styles';
 import { useExpireDateValidation } from './useExpireDateValidation';
 import { useCardForm } from '../../useCardForm';
 import { useAutoFocus } from '../useAutoFocus';

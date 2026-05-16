@@ -6,7 +6,7 @@ import {
   InputContainer,
   Label,
   Title,
-} from '../CardInfo.styles';
+} from '../CardFormFields.styles';
 import type { useCardForm } from '../../useCardForm';
 import { useCardPasswordValidation } from './useCardPasswordValidation';
 
