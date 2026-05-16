@@ -9,20 +9,22 @@ export const useCards = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [error, setError] = useState<null | true>(null);
 
-  useEffect(() => {
+  const fetchData = async () => {
     setIsLoading(true);
     setError(null);
 
-    getCards()
-      .then((cards) => {
-        setCards(mapCardsResponseDTOToModel(cards));
-      })
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    try {
+      const cards = await getCards();
+      setCards(mapCardsResponseDTOToModel(cards));
+    } catch {
+      setError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return { cards, error, isLoading };
