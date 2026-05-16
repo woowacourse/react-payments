@@ -4,9 +4,9 @@ import {afterEach, describe, expect, test, vi} from 'vitest';
 import {render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import App from './App';
-import {addMockCard} from './mocks/cardStore';
-import {server} from './mocks/server';
+import App from '../App';
+import {addMockCard} from '../mocks/cardStore';
+import {server} from '../mocks/server';
 
 const renderApp = (route: string) => {
   return render(
