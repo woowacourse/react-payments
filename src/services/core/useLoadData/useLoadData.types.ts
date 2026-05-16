@@ -6,4 +6,5 @@ export type Result<T = unknown> = {
   data: T | null;
   error: Error | null;
   isLoading: boolean;
+  hasFetched: boolean;
 };
