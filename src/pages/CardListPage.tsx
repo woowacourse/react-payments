@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CardListSkeleton from "../components/skeleton/CardListSkeleton";
+import CardListFallback from "./CardListFallback";
 
 export type Card = {
   id: string;
@@ -49,10 +51,10 @@ export default function CardListPage() {
       </h1>
       {state.status === "loading" && <CardListSkeleton />}
       {state.status === "error" && (
-        <EmptyCardList type="error" onClick={handleRetry} />
+        <CardListFallback type="error" onClick={handleRetry} />
       )}
       {state.status === "success" && state.data.length === 0 && (
-        <EmptyCardList type="success" onClick={() => navigate("/")} />
+        <CardListFallback type="success" onClick={() => navigate("/")} />
       )}
       {state.status === "success" && state.data.length > 0 && (
         <CardList cards={state.data} onDelete={fetchCards} />

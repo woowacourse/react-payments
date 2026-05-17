@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 interface Props {
   onClick: () => void;
+  children?: React.ReactNode;
 }
 
-export default function CheckBtn({ onClick }: Props) {
+export default function CheckBtn({ onClick, children }: Props) {
   return (
     <ButtonWrapper>
-      <Button onClick={onClick}>확인</Button>
+      <Button onClick={onClick}>{children ?? "확인"}</Button>
     </ButtonWrapper>
   );
 }
