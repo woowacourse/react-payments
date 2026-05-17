@@ -50,7 +50,7 @@ const validateExpirationDate = (expirationDate: string) => {
 };
 
 const validateBin = (cardNumber: string) => {
-  const cardNumbers = [cardNumber.slice(0, 4), cardNumber.slice(4, 8), cardNumber.slice(8, 12), cardNumber.slice(12)];
+  const cardNumbers = chunkString(cardNumber, 4);
   const cardBrand = categorizeCardBrand(cardNumbers);
   return cardBrand !== 'local';
 };

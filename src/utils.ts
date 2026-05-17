@@ -1,5 +1,15 @@
 import type { CardBrand, CardInfo } from './types';
 
+export const chunkString = (value: string, size: number) => {
+  const chunked: string[] = [];
+
+  for (let i = 0; i < value.length; i += size) {
+    chunked.push(value.slice(i, i + size));
+  }
+
+  return chunked;
+};
+
 export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardBrand => {
   const numbers = cardNumbers.join('');
 
