@@ -41,7 +41,7 @@ const CardComplete = () => {
           text-align: center;
         `}
       >
-        {numbers[0]}로 시작하는 <br />
+        {numbers}로 시작하는 <br />
         {brand} 카드가 등록되었어요.
       </p>
       <Button onClick={() => navigate("/")}>확인</Button>
