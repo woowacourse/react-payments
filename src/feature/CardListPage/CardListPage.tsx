@@ -18,22 +18,23 @@ const CardListPage = () => {
   };
   // 비동기 상태를 명시적으로 4개로 관리하니까 null일 필요는 굳이 없지 않나? -> 그래서 뺌
 
-  useEffect(() => {
-    const loadCardList = async () => {
-      // 이렇게 하니까 무슨 callback 쓰는 것처럼 쓰게 되는데, 이러면 useEffect를 쓰는 이유가...
-      try {
-        setAsyncState("loading");
-        const fetchedCardList = await fetchCardList();
-        setCardList(fetchedCardList);
-        setAsyncState("success");
-      } catch (error) {
-        alert((error as Error).message);
-        setAsyncState("error");
-      }
-    };
+  const loadCardList = async () => {
+    // 이렇게 하니까 무슨 callback 쓰는 것처럼 쓰게 되는데, 이러면 useEffect를 쓰는 이유가...
+    try {
+      setAsyncState("loading");
+      const fetchedCardList = await fetchCardList();
+      setCardList(fetchedCardList);
+      setAsyncState("success");
+    } catch (error) {
+      alert((error as Error).message);
+      setAsyncState("error");
+    }
+  };
 
+  useEffect(() => {
     loadCardList();
   }, []);
+
   return (
     <CardListPageLayout>
       <HasCardCountSpan>
@@ -43,7 +44,7 @@ const CardListPage = () => {
       {asyncState === "success" && cardList.length !== 0 && (
         <Success cardList={cardList} deleteCard={deleteCard} />
       )}
-      {asyncState === "error" && <Error />}
+      {asyncState === "error" && <Error onRetry={loadCardList} />}
       {asyncState === "loading" && <Loading />}
     </CardListPageLayout>
   );

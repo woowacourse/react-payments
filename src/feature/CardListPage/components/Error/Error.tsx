@@ -2,7 +2,7 @@ import styled from "styled-components";
 import NextActionGuide from "../shared/NextActionGuide/NextActionGuide";
 import BaseButton from "../../../../common/components/Button/BaseButton";
 
-const Error = () => {
+const Error = ({ onRetry }: { onRetry: () => void }) => {
   return (
     <ErrorLayout>
       <NextActionGuide
@@ -10,7 +10,7 @@ const Error = () => {
         title="카드 목록을 불러올 수 없어요"
         description="잠시 후 다시 시도해 주세요"
         actionButton={
-          <BaseButton onClick={() => console.log("다시 시도")} style="rounded">
+          <BaseButton onClick={onRetry} style="rounded">
             다시 시도
           </BaseButton>
         }
