@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardListSkeleton from "../components/skeleton/CardListSkeleton";
 import CardListFallback from "./CardListFallback";
+import CardList from "../components/CardList/CardList";
+import styled from "@emotion/styled";
 
 export type Card = {
   id: string;
@@ -44,12 +46,12 @@ export default function CardListPage() {
 
   return (
     <div>
-      <h1>
+      <HavingCard>
         보유 카드{" "}
         {state.status === "success" &&
           state.data.length > 0 &&
           `(${state.data.length})`}
-      </h1>
+      </HavingCard>
       {state.status === "loading" && <CardListSkeleton />}
       {state.status === "error" && (
         <CardListFallback type="error" onClick={handleRetry} />
@@ -63,3 +65,9 @@ export default function CardListPage() {
     </div>
   );
 }
+
+const HavingCard = styled.p`
+  font-size: 18px;
+  font-weight: 700;
+  font-family: sans-serif;
+`;

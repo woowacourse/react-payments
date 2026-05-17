@@ -7,7 +7,12 @@ import App from "./App.tsx";
 async function main() {
   if (import.meta.env.DEV) {
     const { worker } = await import("./mocks/browser");
-    await worker.start({ onUnhandledRequest: "bypass" });
+    await worker.start({
+      onUnhandledRequest: "bypass",
+      serviceWorker: {
+        url: "/react-payments/mockServiceWorker.js",
+      },
+    });
   }
 
   createRoot(document.getElementById("root")!).render(

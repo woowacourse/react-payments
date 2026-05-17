@@ -8,13 +8,13 @@ interface Props {
 
 const CONTENT = {
   success: {
-    img: "/GhostCard.svg",
+    img: `${import.meta.env.BASE_URL}GhostCard.svg`,
     title: "등록된 카드가 없습니다",
     description: "아래 버튼을 눌러 첫 카드를 등록해보세요",
     buttonLabel: "카드 추가하기",
   },
   error: {
-    img: "/ErrorIcon.svg",
+    img: `${import.meta.env.BASE_URL}ErrorIcon.svg`,
     title: "카드 목록을 불러올 수 없어요",
     description: "잠시 후 다시 시도해 주세요",
     buttonLabel: "다시 시도",
