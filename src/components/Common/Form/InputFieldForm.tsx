@@ -31,7 +31,7 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
     onChange: (e: ChangeEvent<HTMLInputElement>) => void,
     maxLength: number
   ) => {
-    if (validateNaN(e.target.value)) return; // TODO: string 관련 인풋이 추가한다면 확장가능성이 떨어지지 않나?
+    if (validateNaN(e.target.value)) return;
     onChange(e);
 
     if (e.target.value.length === maxLength) {

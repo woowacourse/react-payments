@@ -27,10 +27,6 @@ export type CardNumbersType = [string, string, string, string];
 export type ExpirationDateType = { month: string; year: string };
 export type CardIssuerType = (typeof CARD_ISSUER_CONFIG)[keyof typeof CARD_ISSUER_CONFIG]['name'];
 
-// 구조가 일관된 기준으로 쪼개졌는지,
-// 책임이 한 파일이나 훅에 몰렸는지 -> PaymentForm에서 각 필드의 핸들러를 통합적으로 관리하는 것이 맞을까?
-// 하나의 수정이 여러 곳으로 퍼지는지 -> 사이드 이펙트 관련 얘기같다.
-
 export default function PaymentForm() {
   const navigate = useNavigate();
 
@@ -41,10 +37,6 @@ export default function PaymentForm() {
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | null>(null);
   const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
 
-  // TODO: 확장성은 괜찮지만, 코드의 의도를 알기 어렵고, 명확성이 떨어진다.
-  // 네이밍을 조금 더 신경써보면 좋을 듯. 로직을 함수로 분리해보면 어떨까?
-  // -> 그러면 계층이 하나 더 생겨서 오히려 복잡성이 올라가지 않을까?
-  // 도넛: 계층이 늘어나더라도 괜찮다.
   const isValid =
     cardNumbers.every(
       (value, index) =>
