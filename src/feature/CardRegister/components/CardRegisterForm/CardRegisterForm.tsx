@@ -176,7 +176,7 @@ const CardRegisterForm = ({
     }
 
     const postCardInformation: PostCardRequestBody = {
-      number: cardInfo.cardNumbers.join(),
+      number: cardInfo.cardNumbers.join(""),
       expirationDate: `${cardInfo.expiryMonth}/${cardInfo.expiryYear}`,
       cvc: cardInputSectionInformation.cvcNumber,
       issuerCode: issuerCode,
