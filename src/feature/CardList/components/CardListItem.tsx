@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
 
   width: 100%;
-  padding: 18px 20px;
+  padding: 12px;
 
   border: 1px solid #e6e6e6;
   border-radius: 6px;
@@ -51,7 +51,7 @@ const CardInfoGroup = styled.div`
 `;
 
 const CardCompanyColorBox = styled.div<{ $backgroundColor: string }>`
-  width: 74px;
+  width: 70px;
   height: 45px;
 
   background-color: ${({ $backgroundColor }) => $backgroundColor};
