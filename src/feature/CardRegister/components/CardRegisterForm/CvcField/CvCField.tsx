@@ -1,10 +1,11 @@
 import Label from "../shared/Label/Label";
 import Input from "../shared/Input/Input";
 import styled from "styled-components";
-import { CVC_INPUT_COUNT, CVC_LENGTH } from "../../../constants";
+import { CVC_INPUT_COUNT, CVC_MAX_LENGTH } from "../../../constants";
 import { validateCvc } from "../../../validators/cvc";
 import { isNumericInput } from "../../../validators/input";
 import useInputErrorState from "../../../../../hooks/useInputErrorState";
+import { getPlaceHolder } from "../../../utils/placeHolder";
 
 const CvcField = ({
   cvcNumber,
@@ -61,9 +62,9 @@ const CvcField = ({
         <CvcInput
           id="cvc"
           value={cvcNumber}
-          maxLength={CVC_LENGTH}
+          maxLength={CVC_MAX_LENGTH}
           inputMode="numeric"
-          placeholder="123"
+          placeholder={getPlaceHolder(CVC_MAX_LENGTH)}
           strokeMode={0 === firstErrorIndex ? "error" : "default"}
           onChange={(e) => handleCvcChange(0, e.target.value)}
           onBlur={(e) => handleCvcBlur(0, e.target.value)}

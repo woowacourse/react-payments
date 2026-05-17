@@ -1,4 +1,4 @@
-import { CVC_LENGTH, ERROR_MESSAGES } from "../constants";
+import { CVC_MIN_LENGTH, ERROR_MESSAGES } from "../constants";
 import type { ErrorInformationType } from "./ErrorInformationType";
 
 export const validateCvc = (cvcNumber: string) => {
@@ -19,5 +19,5 @@ export const validateCvc = (cvcNumber: string) => {
 };
 
 const isCvcLengthValid = (cvcNumber: string) => {
-  return cvcNumber.length === CVC_LENGTH;
+  return cvcNumber.length >= CVC_MIN_LENGTH;
 };
