@@ -1,5 +1,6 @@
 import CardListEmpty from "@/components/CardList/CardListEmpty";
 import CardListError from "@/components/CardList/CardListError";
+import CardListLoading from "@/components/CardList/CardListLoading";
 import PageLayout from "@/components/common/PageLayout";
 import { ROUTE_PATH } from "@/constants/routes";
 import useCardList from "@/hooks/useCardList";
@@ -24,6 +25,7 @@ const CardListPage = () => {
     <PageLayout>
       <PageWrapper>
         <PageTitle>보유 카드</PageTitle>
+        {status === "loading" && <CardListLoading />}
         {status === "success" && cards.length === 0 && (
           <CardListEmpty onAddCard={handleAddCard} />
         )}
