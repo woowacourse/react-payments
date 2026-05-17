@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import type { Card } from '../../../domain/card/types/card';
 import {
-  getCardCompanyColor,
-  getCardCompanyName,
-} from '../../../domain/card/utils/cardDisplay';
+  getCardCompanyColorByIssuerCode,
+  getCardCompanyNameByIssuerCode,
+} from '../utils/issuerCode';
 
 type CardListItemProps = {
   card: Card;
@@ -11,8 +11,8 @@ type CardListItemProps = {
 };
 
 const CardListItem = ({ card, handleDeleteCard }: CardListItemProps) => {
-  const cardBackgroundColor = getCardCompanyColor(card.issuerCode);
-  const cardCompanyName = getCardCompanyName(card.issuerCode);
+  const cardBackgroundColor = getCardCompanyColorByIssuerCode(card.issuerCode);
+  const cardCompanyName = getCardCompanyNameByIssuerCode(card.issuerCode);
 
   return (
     <Wrapper>
@@ -20,7 +20,7 @@ const CardListItem = ({ card, handleDeleteCard }: CardListItemProps) => {
         <CardCompanyColorBox $backgroundColor={cardBackgroundColor} />
         <CardTextGroup>
           <CardCompanyName>{cardCompanyName}</CardCompanyName>
-          <CardText>{card.number.join(' ')}</CardText>
+          <CardText>{card.number.match(/.{1,4}/g)?.join(' ')}</CardText>
           <CardText>유효기간 {card.expirationDate}</CardText>
         </CardTextGroup>
       </CardInfoGroup>

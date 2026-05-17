@@ -45,3 +45,7 @@ export const getCardCompanyName = (cardCompanyId: CardCompanyId | null) => {
 
   return selectedCardCompany?.name ?? '';
 };
+
+export const maskCardNumber = (cardNumbers: string) => {
+  return `${cardNumbers.slice(0, 6)}******${cardNumbers.slice(-4)}`;
+};
