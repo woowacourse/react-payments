@@ -15,11 +15,14 @@ const Layout = () => {
       <div
         css={css`
           width: 376px;
+          max-width: 100vw;
+          min-height: 0;
+          height: min(700px, 100vh);
           background-color: #ffffff;
           display: flex;
           flex-direction: column;
           align-items: center;
-          height: 700px;
+          overflow-y: auto;
         `}
       >
         <Outlet />
