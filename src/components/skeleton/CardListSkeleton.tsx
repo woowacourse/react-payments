@@ -4,14 +4,13 @@ import { keyframes } from "@emotion/react";
 export default function CardListSkeleton() {
   return (
     <Wrapper>
-      <Header>보유 카드</Header>
       {Array.from({ length: 3 }).map((_, i) => (
         <SkeletonContainer key={i}>
           <MiniCardSkeleton />
           <InfoContainer>
-            <InfoLine width="60%" />
-            <InfoLine width="80%" />
-            <InfoLine width="40%" />
+            <InfoLine width="80px" height="14px" />
+            <InfoLine width="140px" height="10px" />
+            <InfoLine width="60px" height="9px" />
           </InfoContainer>
         </SkeletonContainer>
       ))}
@@ -21,42 +20,45 @@ export default function CardListSkeleton() {
 }
 
 const shimmer = keyframes`
-    0% { background-position: -400px 0; }
-    100% { background-position: 400px 0; }
-  `;
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+`;
 
 const SkeletonBase = styled.div`
   background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
   background-size: 800px 100%;
   animation: ${shimmer} 1.5s infinite;
-  border-radius: 4px;
 `;
 
 const Wrapper = styled.div`
+  width: 376px;
+  height: 700px;
+  border-radius: 12px;
+  padding: 40px 28px 32px 28px;
+  gap: 16px;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-`;
-
-const Header = styled.p`
-  font-weight: bold;
-  font-size: 16px;
+  box-sizing: border-box;
 `;
 
 const SkeletonContainer = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
+  width: 320px;
+  height: 69px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
   padding: 12px;
-  border: 1px solid #f0f0f0;
-  border-radius: 8px;
+  gap: 12px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
 `;
 
-const MiniCardSkeleton = styled(SkeletonBase)`
-  width: 70px;
-  height: 50px;
-  border-radius: 6px;
+const MiniCardSkeleton = styled.div`
+  width: 64px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #ebebeb;
   flex-shrink: 0;
 `;
 
@@ -67,12 +69,14 @@ const InfoContainer = styled.div`
   flex: 1;
 `;
 
-const InfoLine = styled(SkeletonBase)<{ width?: string }>`
-  height: 12px;
+const InfoLine = styled(SkeletonBase)<{ width?: string; height?: string }>`
   width: ${({ width }) => width ?? "100%"};
+  height: ${({ height }) => height ?? "12px"};
+  border-radius: 3px;
 `;
 
 const AddButtonSkeleton = styled(SkeletonBase)`
-  height: 48px;
-  border-radius: 8px;
+  width: 100%;
+  height: 44px;
+  border-radius: 5px;
 `;
