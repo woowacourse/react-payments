@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { CardResponse } from '../types/cardStausTypes';
-import ErrorInfo from '../components/ErrorInfo';
+import ErrorInfo from '../components/userCard/ErrorInfo';
 import { requestCards } from '../api/requestCards';
 import Skeleton from '../components/skeleton/Skeleton';
+import Empty from '../components/userCard/Empty';
 
 export default function UserCardList() {
   const [cards, setCards] = useState<CardResponse[]>([]);
@@ -71,7 +72,12 @@ export default function UserCardList() {
       >
         보유 카드
       </p>
-      {!errorMessage && <>{isLoading && <Skeleton />}</>}
+      {!errorMessage && (
+        <>
+          {isLoading && <Skeleton />}
+          {!isLoading && cards.length === 0 && <Empty />}
+        </>
+      )}
       {errorMessage && <ErrorInfo message={errorMessage} handleRetry={handleRetry} />}
     </div>
   );

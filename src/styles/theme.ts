@@ -17,6 +17,7 @@ const colors = {
   hanaCard: '#009490',
   kbCard: '#6A6056',
   loading: '#EBEBEB',
+  empty: '#F5F5F5',
 };
 
 const typography = {
