@@ -6,7 +6,13 @@ import type { CardItemInformation } from "../feature/CardListPage/components/Suc
 const cards: CardItemInformation[] = [];
 
 const getCardListHandler = http.get(`${BASE_URL}/cards`, () => {
-  return HttpResponse.json(cards);
+  const maskedCards = cards.map((card) => {
+    return {
+      ...card,
+      number: card.number.slice(0, 6) + "******" + card.number.slice(12),
+    };
+  });
+  return HttpResponse.json(maskedCards);
 });
 
 const postCardHandler = http.post(`${BASE_URL}/cards`, async ({ request }) => {
