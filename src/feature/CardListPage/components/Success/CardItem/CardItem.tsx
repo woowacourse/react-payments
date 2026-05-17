@@ -5,6 +5,7 @@ import type {
   IssuerCodeType,
 } from "../../../types/CardCompay";
 import { CARD_COMPANY } from "../../../constants";
+import { deleteCard } from "../../../api/card";
 
 // todo: 타입 정의 상위로 올리기
 export type CardItemInformation = {
@@ -14,14 +15,32 @@ export type CardItemInformation = {
   expirationDate: string;
 };
 
+type CardItemProps = {
+  cardItemInformaiton: CardItemInformation;
+  onDeleteCard: (cardId: string) => void;
+};
+
 // todo: 유틸로 빼기
 const getCardCompanyByCode = (code: IssuerCodeType): CardCompanyType => {
   return CARD_COMPANY[code];
 };
 
-const CardItem = (cardItemInformaiton: CardItemInformation) => {
+const CardItem = ({ cardItemInformaiton, onDeleteCard }: CardItemProps) => {
   const { id, issuerCode, number, expirationDate } = cardItemInformaiton;
   const cardCompany = getCardCompanyByCode(issuerCode);
+
+  const handleCardDeleteClick = async (cardId: string) => {
+    const result = window.confirm("카드를 삭제하시겠습니까?");
+    if (!result) {
+      return;
+    }
+    try {
+      await deleteCard(cardId);
+      onDeleteCard(cardId);
+    } catch (error) {
+      alert((error as Error).message);
+    }
+  };
   return (
     <CardItemLayout>
       <CardIcon $color={cardCompany.COLOR} />
@@ -30,7 +49,7 @@ const CardItem = (cardItemInformaiton: CardItemInformation) => {
         <CardNumber>{number}</CardNumber>
         <ExpiryDate>유효기간 {expirationDate}</ExpiryDate>
       </CardInformationBox>
-      <DeleteButton>X</DeleteButton>
+      <DeleteButton onClick={() => handleCardDeleteClick(id)}>X</DeleteButton>
     </CardItemLayout>
   );
 };

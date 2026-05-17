@@ -12,6 +12,10 @@ const CardListPage = () => {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [cardList, setCardList] = useState<CardItemInformation[]>([]);
+  const deleteCard = (cardId: string) => {
+    const newCardList = cardList.filter((card) => card.id !== cardId);
+    setCardList(newCardList);
+  };
   // 비동기 상태를 명시적으로 4개로 관리하니까 null일 필요는 굳이 없지 않나? -> 그래서 뺌
 
   useEffect(() => {
@@ -37,7 +41,7 @@ const CardListPage = () => {
       </HasCardCountSpan>
       {asyncState === "success" && cardList.length === 0 && <Empty />}
       {asyncState === "success" && cardList.length !== 0 && (
-        <Success cardList={cardList} />
+        <Success cardList={cardList} deleteCard={deleteCard} />
       )}
       {asyncState === "error" && <Error />}
       {asyncState === "loading" && <Loading />}

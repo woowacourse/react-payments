@@ -28,6 +28,11 @@ const deleteCardHandler = http.delete(
   `${BASE_URL}/cards/:id`,
   async ({ params }) => {
     const { id } = params;
+    const targetIndex = cards.findIndex((card) => card.id === id);
+    if (targetIndex > -1) {
+      cards.splice(targetIndex, 1);
+    }
+
     return HttpResponse.json(null, { status: 204 });
   },
 );
