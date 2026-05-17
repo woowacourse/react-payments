@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { getCardNetwork } from '../../utils';
 import Flex from '../Common/Flex';
 import CardPreview from './CardPreview';
-import type { CardFormState } from '../../types';
+import type { AddCardError, AddCardSuccess } from '../../types';
 import useCardForm, { CARD_FORM_STEP } from '../../hooks/useCardForm';
 import Button from '../Common/Button';
 import CardPasswordInput from './CardPasswordInput';
@@ -11,6 +11,8 @@ import CardExpiryDateInput from './CardExpiryDateInput';
 import CardIssuerSelect from './CardIssuerSelect';
 import CardNumberSegmentsInput from './CardNumberSegmentsInput';
 import CardFormSection from './CardFormSection';
+import { useNavigate } from 'react-router';
+import { CARD_ISSUER } from '../../constants';
 
 const Submit = styled(Button)`
   position: sticky;
@@ -19,15 +21,59 @@ const Submit = styled(Button)`
   margin: 0 -32px;
 `;
 
-interface CardFormProps {
-  onSubmit: (formData: CardFormState) => void;
-}
-
-function CardForm(props: CardFormProps) {
+function CardForm() {
   const { step, ...form } = useCardForm();
 
-  const handleFormAction = () => {
-    props.onSubmit(form.formValue);
+  const navigate = useNavigate();
+
+  const handleFormAction = async () => {
+    const requestBody = {
+      number: form.formValue.cardNumberSegments.join(''),
+      expirationDate: form.formValue.cardExpiryDate.join('/'),
+      cvc: form.formValue.cardValidationCode,
+      issuerCode: form.formValue.cardIssuer,
+    };
+
+    try {
+      const req = await fetch('/cards', {
+        method: 'post',
+        body: JSON.stringify(requestBody),
+      });
+
+      const body = (await req.json()) as AddCardSuccess | AddCardError;
+
+      if (!Object.prototype.hasOwnProperty.call(body, 'id')) {
+        navigate('/result', {
+          state: {
+            type: 'error',
+            message: (body as AddCardError).message,
+            redirect: '/',
+          },
+        });
+        return;
+      }
+
+      const cardNumberFirstSegments = form.formValue.cardNumberSegments[0];
+      const cardIssuer = Object.entries(CARD_ISSUER).find(
+        ([, value]) => (value.issuerCode as string) === form.formValue.cardIssuer,
+      );
+
+      navigate('/result', {
+        state: {
+          type: 'success',
+          message: `${cardNumberFirstSegments ?? '알 수 없는 카드번호'}로 시작하는 ${cardIssuer?.[1].label ?? '카드'}가 등록되었어요.`,
+          redirect: '/cards',
+        },
+      });
+    } catch {
+      navigate('/result', {
+        state: {
+          type: 'error',
+          message: '알 수 없는 오류가 발생했습니다.',
+          redirect: '/',
+        },
+      });
+    }
   };
 
   return (

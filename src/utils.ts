@@ -1,4 +1,4 @@
-import { CARD_EXPIRY_MONTH_RANGE, CARD_ISSUER, CARD_NETWORK } from './constants';
+import { CARD_EXPIRY_MONTH_RANGE, CARD_ISSUER_CODES, CARD_NETWORK } from './constants';
 import type { CardNetwork, CardNumberSegments, ValidationRule } from './types';
 
 export function validateDigits(input: string) {
@@ -18,7 +18,7 @@ export function validateMonth(input: string) {
 }
 
 export function validateCardIssuer(input: string) {
-  return Object.prototype.hasOwnProperty.call(CARD_ISSUER, input);
+  return (CARD_ISSUER_CODES as string[]).includes(input);
 }
 
 export function createDigitFieldValidations(length: number): ValidationRule[] {

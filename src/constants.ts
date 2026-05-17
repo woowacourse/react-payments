@@ -17,15 +17,17 @@ export const DEFAULT_CARD_NUMBER_SEGMENT_LENGTH = 4;
 export const UNMASKED_CARD_NUMBER_SEGMENT_COUNT = 2;
 
 export const CARD_ISSUER = {
-  bc: { label: "BC카드" },
-  shinhan: { label: "신한카드" },
-  kakao: { label: "카카오뱅크" },
-  hyundai: { label: "현대카드" },
-  woori: { label: "우리카드" },
-  lotte: { label: "롯데카드" },
-  hana: { label: "하나카드" },
-  kookmin: { label: "국민카드" },
+  bc: { issuerCode: "31", label: "BC카드" },
+  shinhan: { issuerCode: "41", label: "신한카드" },
+  kakao: { issuerCode: "15", label: "카카오뱅크" },
+  hyundai: { issuerCode: "61", label: "현대카드" },
+  woori: { issuerCode: "W1", label: "우리카드" },
+  lotte: { issuerCode: "71", label: "롯데카드" },
+  hana: { issuerCode: "21", label: "하나카드" },
+  kookmin: { issuerCode: "11", label: "국민카드" },
 } as const
+
+export const CARD_ISSUER_CODES = Object.values(CARD_ISSUER).map(({ issuerCode }) => issuerCode);
 
 export const CARD_NETWORK = {
   "VISA": {

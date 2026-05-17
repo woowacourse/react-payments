@@ -21,3 +21,21 @@ export interface ValidationRule {
   validator: (input: string) => boolean;
   message: string
 }
+
+export interface AddCardSuccess {
+  id: string;
+}
+
+export interface AddCardError {
+  code: string;
+  message: string
+}
+
+export interface Card {
+  "id": string;
+  "issuerCode": string;
+  "number": string;
+  "expirationDate": string;
+}
+
+export type CardsResponse = Card[]

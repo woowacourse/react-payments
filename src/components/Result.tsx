@@ -17,20 +17,27 @@ const Button = styled(CommonButton)`
   width: 100%;
 `;
 
-interface ResultProps {
+export interface ResultProps {
   type: 'success' | 'error';
   message: string;
-  action: () => void;
+  description?: string;
+  action?: string;
+  onAction: () => void;
 }
 
 export default function Result(props: ResultProps) {
   return (
     <Container direction="column" alignItems="center" justifyContent="center" gap={25}>
       <Image alt={`${props.type} icon`} src={`${import.meta.env.BASE_URL}${props.type}.svg`} />
-      <Text size="xl" weight="bold">
-        {props.message}
-      </Text>
-      <Button onClick={props.action}>확인</Button>
+      <Flex direction="column">
+        <Text size="xl" weight="bold" align="center">
+          {props.message}
+        </Text>
+        <Text size="s" color="description" align="center">
+          {props.description}
+        </Text>
+      </Flex>
+      <Button onClick={props.onAction}>{props.action ?? '확인'}</Button>
     </Container>
   );
 }
