@@ -1,17 +1,9 @@
-import type { UUID } from 'crypto';
 import { http, HttpResponse } from 'msw';
 import { getCardBrand } from '../utils/cardBrand';
 import { CARD_ISSUER_CODE } from '../constants/constant';
 import { isCardExpiryDateComplete } from '../utils/validate';
 import type { CardIssuerType } from '../types/cardStausTypes';
-
-type CardInfo = {
-  id?: UUID;
-  number: string;
-  expirationDate: string;
-  cvc: string;
-  issuerCode: string;
-};
+import type { CardInfo } from '../types/cardStausTypes';
 
 type CardRequest = Omit<CardInfo, 'id' | 'issuerCode'> & {
   issuerCode: CardIssuerType;

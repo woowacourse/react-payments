@@ -1,3 +1,5 @@
+import type { UUID } from 'crypto';
+
 import type {
   CardError,
   DateError,
@@ -60,3 +62,18 @@ export type CardIssuerType =
   | 'lotteCard'
   | 'hanaCard'
   | 'kbCard';
+
+export type CardInfo = {
+  id?: UUID;
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: string;
+};
+
+export type CardResponse = {
+  id: UUID;
+  issuerCode: string;
+  number: string;
+  expirationDate: string;
+};
