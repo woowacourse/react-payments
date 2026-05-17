@@ -26,6 +26,18 @@ body {
 }
 
 :root {
+  --color-gray-50: #fdfdfd;
+  --color-gray-100: #fafafa;
+  --color-gray-200: #e6e6e6;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #8b95a1;
+  --color-gray-500: #6b7685;
+  --color-gray-600: #515c6b;
+  --color-gray-700: #3b4453;
+  --color-gray-800: #272e3b;
+  --color-gray-900: #181d27;
+  --color-gray-950: #0e1118;
+
   --color-black: #000000;
   --color-white: #ffffff;
   --color-description: #8b95a1;
