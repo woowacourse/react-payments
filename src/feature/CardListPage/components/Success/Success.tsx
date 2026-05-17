@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import CardItem, { type CardItemInformation } from "./CardItem/CardItem";
 import BaseButton from "../../../../common/components/Button/BaseButton";
+import { useNavigate } from "react-router-dom";
 
 const Success = ({ cardList }: { cardList: CardItemInformation[] }) => {
+  const navigate = useNavigate();
   return (
     <SuccessLayout>
       {cardList.map((card) => (
         <CardItem key={card.id} {...card} />
       ))}
-      <AddCardButton onClick={() => console.log("카드 추가")} style="rounded">
+      <AddCardButton onClick={() => navigate("/register")} style="rounded">
         + 카드 추가
       </AddCardButton>
     </SuccessLayout>
