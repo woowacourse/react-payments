@@ -1,24 +1,12 @@
-import { useState } from "react";
-import CardInfo from "./cardInfo/CardInfo";
-import CardPreview from "./cardPreview/CardPreview";
 import styled from "@emotion/styled";
+import CardPreview from "./cardPreview/CardPreview";
+import TotalInfo from "./cardInfo/TotalInfo";
 
 export default function PaymentWidget() {
-  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-  const [expireDate, setExpireDate] = useState({ month: "", year: "" });
-  const [cvcNumber, setCvcNumber] = useState([""]);
-
   return (
     <CardPaymentWidgetWrapper>
-      <CardPreview cardNumber={cardNumber} expireDate={expireDate} />
-      <CardInfo
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-        expireDate={expireDate}
-        setExpireDate={setExpireDate}
-        cvcNumber={cvcNumber}
-        setCvcNumber={setCvcNumber}
-      />
+      <CardPreview />
+      <TotalInfo />
     </CardPaymentWidgetWrapper>
   );
 }
@@ -28,4 +16,8 @@ const CardPaymentWidgetWrapper = styled.div`
   width: 376px;
   height: 750px;
   border-radius: 10px;
+  padding: 0 20px 20px 20px;
+  overflow-y: auto;
+  position: relative;
+  flex-direction: column;
 `;

@@ -1,38 +1,107 @@
-import { useState } from "react";
-import type { SetExpireDate } from "../types/types";
+import { useRef, useState } from "react";
 import { isNumeric } from "../utils/validators";
 
-export function useExpireDateInput(setExpireDate: SetExpireDate) {
-  const [expireDateError, setExpireDateError] = useState([""]);
-  const handleExpireDateChange = (
-    index: number,
-    value: string,
-    name: string,
-  ) => {
-    const newError = [...expireDateError];
+const initialState = {
+  expireDate: { month: "", year: "" },
+  expireDateError: { month: "", year: "" },
+};
+
+export function useExpireDateInput() {
+  const [expireDate, setExpireDate] = useState(initialState.expireDate);
+  const [expireDateError, setExpireDateError] = useState(
+    initialState.expireDateError,
+  );
+  const yearInputRef = useRef<HTMLInputElement | null>(null);
+
+  const resetExpireDate = () => {
+    setExpireDate(initialState.expireDate);
+    setExpireDateError(initialState.expireDateError);
+  };
+
+  const handleMonthChange = (value: string) => {
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    const sliceValue = onlyNumbers.substring(0, 2);
+    const firstDigit = value.substring(0, 1);
+    const month = Number(sliceValue);
+
+    if (onlyNumbers.length === 2) {
+      yearInputRef.current?.focus();
+    }
 
     if (!isNumeric(value)) {
-      newError[index] = "숫자를 입력해주세요.";
-      setExpireDateError(newError);
-      return;
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "숫자를 입력해주세요.",
+      }));
+    } else if (value === "00") {
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
+      }));
+    } else if (firstDigit !== "0" && (month < 1 || month > 12)) {
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "1 ~ 12월 사이의 숫자를 입력해주세요.",
+      }));
+    } else {
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "",
+      }));
     }
-
-    newError[index] = "";
-
-    if (name === "month" && value !== "") {
-      const month = Number(value);
-      if (month < 1 || month > 12) {
-        newError[index] = "1 ~ 12월 사이의 숫자를 입력해주세요.";
-      }
-    }
-
-    setExpireDateError(newError);
 
     setExpireDate((prev) => ({
       ...prev,
-      [name]: value,
+      month: sliceValue,
     }));
   };
 
-  return { expireDateError, handleExpireDateChange };
+  const handleYearChange = (value: string) => {
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    const sliceValue = onlyNumbers.substring(0, 2);
+
+    if (!isNumeric(value)) {
+      setExpireDateError((prev) => ({
+        ...prev,
+        year: "숫자를 입력해주세요.",
+      }));
+    } else {
+      setExpireDateError((prev) => ({
+        ...prev,
+        year: "",
+      }));
+    }
+
+    setExpireDate((prev) => ({
+      ...prev,
+      year: sliceValue,
+    }));
+  };
+
+  const handleMonthBlur = () => {
+    if (expireDate.month.length < 2)
+      setExpireDateError((prev) => ({
+        ...prev,
+        month: "완전히 입력해 주세요.",
+      }));
+  };
+
+  const handleYearBlur = () => {
+    if (expireDate.year.length < 2)
+      setExpireDateError((prev) => ({
+        ...prev,
+        year: "완전히 입력해 주세요.",
+      }));
+  };
+
+  return {
+    expireDate,
+    expireDateError,
+    handleMonthChange,
+    handleYearChange,
+    handleMonthBlur,
+    handleYearBlur,
+    resetExpireDate,
+    yearInputRef,
+  };
 }

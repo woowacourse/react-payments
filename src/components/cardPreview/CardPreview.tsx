@@ -1,23 +1,36 @@
 import styled from "@emotion/styled";
-import { type CardPreviewProps } from "../../types/types";
-import CardPreviewInfo from "./CardPreviewInfo";
-import { selectCardType } from "../../utils/selectCardType";
+import CardPreviewNumber from "./CardPreviewNumber";
+import { maskCardNumber } from "../../utils/cardFormatters";
+import { formatExpireDate } from "../../utils/cardFormatters";
+import { useCardNumberContext } from "../../context/cardNumber/CardNumberContext";
+import { useExpireDateContext } from "../../context/expireDate/ExpireDateContext";
+import { useCardBrandContext } from "../../context/cardBrand/CardBrandContext";
 
-export default function CardPreview({
-  cardNumber,
-  expireDate,
-}: CardPreviewProps) {
-  const cardType = selectCardType(cardNumber);
+export default function CardPreview() {
+  const { cardNumber, cardType } = useCardNumberContext();
+  const { expireDate, expireDateError } = useExpireDateContext();
+  const {
+    selectedItem: { color },
+  } = useCardBrandContext();
 
   return (
     <CardPreviewWrapper>
-      <Card>
+      <Card color={color}>
         <Upper>
           <IC />
           {cardType && <PayMethodImage src={cardType} alt="payment method" />}
         </Upper>
 
-        <CardPreviewInfo cardNumber={cardNumber} expireDate={expireDate} />
+        <CardImageInfoWrapper>
+          <CardPreviewNumber
+            gap="10px"
+            cardArray={maskCardNumber(cardNumber)}
+          />
+          <CardPreviewNumber
+            gap="0px"
+            cardArray={formatExpireDate(expireDate, expireDateError)}
+          />
+        </CardImageInfoWrapper>
       </Card>
     </CardPreviewWrapper>
   );
@@ -28,10 +41,12 @@ const CardPreviewWrapper = styled.section`
   align-items: center;
   justify-content: center;
   padding-top: 77px;
+  margin-bottom: 40px;
 `;
 
-const Card = styled.div`
-  background-color: rgba(51, 51, 51, 1);
+const Card = styled.div<{ color: string }>`
+  background-color: ${(props) =>
+    props.color ? `${props.color}` : "rgba(51, 51, 51, 1)"};
   box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   width: 212px;
@@ -56,4 +71,11 @@ const IC = styled.div`
 const PayMethodImage = styled.img`
   width: 36px;
   height: 22px;
+`;
+
+const CardImageInfoWrapper = styled.div`
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;

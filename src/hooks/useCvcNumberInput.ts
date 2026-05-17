@@ -1,27 +1,39 @@
 import { useState } from "react";
-import { type SetCardNumber } from "../types/types";
 import { isNumeric } from "../utils/validators";
 
-export function useCvcNumberInput(setCvcNumber: SetCardNumber) {
-  const [cvcNumberError, setCvcNumberError] = useState([""]);
-  const handleCvcNumberChange = (index: number, value: string) => {
-    const newError = [...cvcNumberError];
+const initialState = {
+  cvc: "",
+  cvcError: "",
+};
 
-    if (!isNumeric(value)) {
-      newError[index] = "숫자를 입력해주세요.";
-      setCvcNumberError(newError);
-      return;
-    }
+export function useCvcNumberInput() {
+  const [cvc, setCvc] = useState(initialState.cvc);
+  const [cvcError, setCvcError] = useState(initialState.cvcError);
 
-    newError[index] = "";
-    setCvcNumberError(newError);
-
-    setCvcNumber((prev) => {
-      const newArray = [...prev];
-      newArray[index] = value;
-      return newArray;
-    });
+  const resetCvc = () => {
+    setCvc(initialState.cvc);
+    setCvcError(initialState.cvcError);
   };
 
-  return { cvcNumberError, handleCvcNumberChange };
+  const handleCvcChange = (value: string) => {
+    const onlyNumbers = value.replace(/[^0-9]/g, "");
+    const sliceValue = onlyNumbers.substring(0, 3);
+
+    if (!isNumeric(value)) {
+      setCvcError("숫자를 입력해주세요.");
+    } else {
+      setCvcError("");
+    }
+
+    setCvc(sliceValue);
+  };
+
+  const handleBlur = () => {
+    if (cvc.length < 3) {
+      setCvcError("완전히 입력해 주세요.");
+      return;
+    }
+  };
+
+  return { cvc, cvcError, handleCvcChange, handleBlur, resetCvc };
 }

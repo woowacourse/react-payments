@@ -1,11 +1,24 @@
 import PaymentWidget from "./components/PaymentWidget";
 import styled from "@emotion/styled";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Enrollment from "./components/Enrollment";
+import PaymentProvider from "./context/PaymentProvider";
 
 function App() {
   return (
-    <AppWrapper>
-      <PaymentWidget />
-    </AppWrapper>
+    <BrowserRouter>
+      <AppWrapper>
+        <PaymentProvider>
+          <Routes>
+            <Route path="/react-payments/" element={<PaymentWidget />}></Route>
+            <Route
+              path="/react-payments/enrollment"
+              element={<Enrollment />}
+            ></Route>
+          </Routes>
+        </PaymentProvider>
+      </AppWrapper>
+    </BrowserRouter>
   );
 }
 
