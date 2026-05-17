@@ -56,19 +56,15 @@ const useCardForm = () => {
     setCardInfo((prev) => ({ ...prev, password }));
   };
 
-  const isNumbersValid =
-    fieldConfig.every((len, i) => cardInfo.numbers[i]?.length === len) &&
-    validateCardNumber(cardInfo.numbers).errorIndex === -1;
+  const validationMap = {
+    numbers: () => validateCardNumber(cardInfo.numbers).errorIndex === -1,
+    company: () => cardInfo.company !== "",
+    expiry: () => validateExpiryDate(cardInfo.expiry).errorIndex === -1,
+    cvc: () => cardInfo.cvc.length === 3,
+    password: () => cardInfo.password.length === 2,
+  };
 
-  const isExpiryValid =
-    cardInfo.expiry.every((e) => e.length === 2) && validateExpiryDate(cardInfo.expiry).errorIndex === -1;
-
-  const isCvcValid = cardInfo.cvc.length === 3;
-
-  const isCompanyValid = cardInfo.company !== "";
-  const isPasswordValid = cardInfo.password.length === 2;
-
-  const isValid = isNumbersValid && isCompanyValid && isExpiryValid && isCvcValid && isPasswordValid;
+  const isValid = Object.values(validationMap).every((fn) => fn());
 
   return {
     cardInfo,
