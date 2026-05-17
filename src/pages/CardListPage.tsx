@@ -1,4 +1,5 @@
 import AddCardButton from '../components/CardListResult/AddCardButton';
+import CardListEmpty from '../components/CardListResult/CardListEmpty';
 import CardListLoading from '../components/CardListResult/CardListLoading';
 import MyCardItem from '../components/CardListResult/MyCardItem/MyCardItem';
 
@@ -9,6 +10,7 @@ export default function CardListPage() {
             <MyCardItem />
             <AddCardButton />
             <CardListLoading />
+            <CardListEmpty />
         </div>
     );
 }
