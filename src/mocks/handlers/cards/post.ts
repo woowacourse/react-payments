@@ -1,4 +1,7 @@
 import { http, HttpResponse } from 'msw';
+import { cards } from '../../datas/cards.ts';
+import type { Card } from '../../datas/cards.type.ts';
+import { categorizeCardBrand } from '../../../utils.ts';
 
 interface CreateCardRequest {
   number: string;
@@ -29,12 +32,12 @@ export const handler = http.post(`${import.meta.env.BASE_URL}cards`, async ({ re
     );
   }
 
-  createCardFromRequest(body);
+  createCard(body);
   return HttpResponse.json({ id: crypto.randomUUID() }, { status: 201 });
 });
 
 const validateCardNumber = (cardNumber: string) => {
-  return true;
+  return validateBin(cardNumber);
 };
 
 const validateCvc = (cvc: string) => {
@@ -42,9 +45,35 @@ const validateCvc = (cvc: string) => {
 };
 
 const validateExpirationDate = (expirationDate: string) => {
-  return true;
+  return validateExpirationDateFormat(expirationDate) && validateExpirationMonth(expirationDate);
 };
 
-const createCardFromRequest = (request: CreateCardRequest) => {
-  // 전역 cards 객체 배열에 push
+const validateBin = (cardNumber: string) => {
+  const cardNumbers = [cardNumber.slice(0, 4), cardNumber.slice(4, 8), cardNumber.slice(8, 12), cardNumber.slice(12)];
+  const cardBrand = categorizeCardBrand(cardNumbers);
+  return cardBrand !== 'local';
+};
+
+const validateExpirationDateFormat = (expirationDate: string) => {
+  const regex = /^\d{2}\/\d{2}$/;
+  return regex.test(expirationDate);
+};
+
+const validateExpirationMonth = (expirationDate: string) => {
+  const [month] = expirationDate.split('/');
+  return Number(month) >= 1 && Number(month) <= 12;
+};
+
+const createCard = (request: CreateCardRequest) => {
+  const card = createCardFromRequest(request);
+  cards.push(card);
+};
+
+const createCardFromRequest = (request: CreateCardRequest): Card => {
+  return {
+    id: crypto.randomUUID(),
+    issuerCode: request.issuerCode,
+    number: request.number,
+    expirationDate: request.expirationDate,
+  };
 };

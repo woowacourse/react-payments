@@ -1,7 +1,7 @@
 export interface CardInfo {
-  cardNumbers: [string, string, string, string];
+  cardNumbers: string[];
   cardCompany: CardCompany;
-  expirationPeriod: [string, string];
+  expirationPeriod: string[];
   cvc: string;
   password: string;
 }
