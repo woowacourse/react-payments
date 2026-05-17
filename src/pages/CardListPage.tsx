@@ -39,12 +39,24 @@ export default function CardListPage() {
     fetchCards();
   }, []);
 
-  if (state.status === "loading") return <CardListSkeleton />;
-  if (state.status === "error")
-    return <EmptyCardList type="error" onClick={handleRetry} />;
-  if (state.status === "success" && state.data.length === 0)
-    return <EmptyCardList type="success" onClick={() => navigate("/")} />;
-  if (state.status === "success")
-    return <CardList cards={state.data} onDelete={fetchCards} />;
-  return null;
+  return (
+    <div>
+      <h1>
+        보유 카드{" "}
+        {state.status === "success" &&
+          state.data.length > 0 &&
+          `(${state.data.length})`}
+      </h1>
+      {state.status === "loading" && <CardListSkeleton />}
+      {state.status === "error" && (
+        <EmptyCardList type="error" onClick={handleRetry} />
+      )}
+      {state.status === "success" && state.data.length === 0 && (
+        <EmptyCardList type="success" onClick={() => navigate("/")} />
+      )}
+      {state.status === "success" && state.data.length > 0 && (
+        <CardList cards={state.data} onDelete={fetchCards} />
+      )}
+    </div>
+  );
 }
