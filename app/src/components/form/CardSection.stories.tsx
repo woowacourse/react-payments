@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CardContext } from "../../context/CardContext";
 
 import { CardSection } from "./CardSection";
@@ -21,29 +21,29 @@ type Story = StoryObj<typeof meta>;
 export const CardNumberInputSection: Story = {
   args: { title: "", children: null },
   render: () => {
-    const [cardNumber, setCardNumber] = useState({
-      "first-digits": "",
-      "second-digits": "",
-      "third-digits": "",
-      "fourth-digits": "",
-    });
-    const [, setNetworkBrand] = useState("");
+    const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+    const firstRef = useRef<HTMLInputElement>(null);
     return (
       <CardContext
         value={{
           cardNumber,
           setCardNumber,
-          networkBrand: "",
-          setNetworkBrand,
           cardExpiryDate: { "expiry-month": "", "expiry-year": "" },
           setCardExpiryDate: () => {},
+          cardCompany: '',
+          setCardCompany: () => {},
+          cardCVC: '',
+          setCardCVC: () => {},
+          cardPassword: '',
+          setCardPassword: () => {},
+          networkBrand: '',
         }}
       >
         <CardSection
           title="결제할 카드 번호를 입력해 주세요"
           subTitle="본인 명의의 카드만 결제 가능합니다."
         >
-          <CardNumberInputContainer />
+          <CardNumberInputContainer firstRef={firstRef} onCardNumberComplete={() => {}} />
         </CardSection>
       </CardContext>
     );
@@ -57,27 +57,28 @@ export const CardExpiryDateInputSection: Story = {
       "expiry-month": "",
       "expiry-year": "",
     });
+    const firstRef = useRef<HTMLInputElement>(null);
     return (
       <CardContext
         value={{
-          cardNumber: {
-            "first-digits": "",
-            "second-digits": "",
-            "third-digits": "",
-            "fourth-digits": "",
-          },
+          cardNumber: ['', '', '', ''],
           setCardNumber: () => {},
-          networkBrand: "",
-          setNetworkBrand: () => {},
+          cardCompany: '',
+          setCardCompany: () => {},
+          cardCVC: '',
+          setCardCVC: () => {},
+          cardPassword: '',
+          setCardPassword: () => {},
           cardExpiryDate,
           setCardExpiryDate,
+          networkBrand: '',
         }}
       >
         <CardSection
           title="카드 유효기간을 입력해 주세요"
           subTitle="월/년도(MMYY)를 순서대로 입력해 주세요."
         >
-          <CardExpiryDateInputContainer />
+          <CardExpiryDateInputContainer expiryMonthRef={firstRef} onCardExpiryDateComplete={() => {}} />
         </CardSection>
       </CardContext>
     );

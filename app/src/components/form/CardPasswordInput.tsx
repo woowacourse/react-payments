@@ -4,40 +4,34 @@ import { Validator } from '../../validators/CardValidator';
 import { useCardContext } from '../../hooks/useCardContext';
 import { useSingleInput } from '../../hooks/useSingleInput';
 
-export function CardCVCInput({
-  cardCVCRef,
-  onCardCVCComplete,
+export function CardPasswordInput({
+  cardPasswordRef,
 }: {
-  cardCVCRef: React.RefObject<HTMLInputElement | null>;
-  onCardCVCComplete: () => void;
+  cardPasswordRef: React.RefObject<HTMLInputElement | null>;
 }) {
-  const { cardCVC, setCardCVC } = useCardContext();
+  const { cardPassword, setCardPassword } = useCardContext();
 
   const { fieldErrors, onChange, onBlur } = useSingleInput(
-    setCardCVC,
+    setCardPassword,
     Validator.isNumber,
-    Validator.isValidCardCVCLength,
+    Validator.isValidPasswordLength,
   );
 
   return (
     <CardSingleFieldContainer>
-      <CardLabel htmlFor="card-cvc-input">CVC</CardLabel>
+      <CardLabel htmlFor="card-password-input">비밀번호 앞 2자리</CardLabel>
       <CardInput
-        type="text"
-        maxLength={3}
+        type="password"
+        autoComplete="off"
+        maxLength={2}
         inputMode="numeric"
-        placeholder="123"
-        id="card-cvc-input"
-        value={cardCVC}
-        onChange={(e) => {
-          onChange(e);
-          if (e.target.value.length === 3) {
-            onCardCVCComplete();
-          }
-        }}
+        placeholder="12"
+        id="card-password-input"
+        value={cardPassword}
+        onChange={onChange}
         onBlur={onBlur}
         $fieldErrors={fieldErrors.state}
-        ref={cardCVCRef}
+        ref={cardPasswordRef}
       />
       <ErrorMessage message={fieldErrors['message']} />
     </CardSingleFieldContainer>

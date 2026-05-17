@@ -1,5 +1,7 @@
 # 페이먼츠 미션
 
+## Step1
+
 ## 기능 요구 사항
 
 - 컴포넌트
@@ -33,7 +35,51 @@
 
 - [x] 카드번호, 카드 만료일 레이아웃 정렬
 
-## 리팩토링 사항
+---
 
-- [] 데이터 전달 구조
-- [] 검증로직 분리
+## Step2
+
+## 기능 요구 사항
+
+- 컴포넌트
+  - [x] CardForm
+    - [x] CardSection
+      - [x] CardSelectionDropdown
+      - [x] CardNumberInput
+      - [x] CardExpiryDateInput
+      - [x] CardCVCInput
+      - [x] CardPasswordInput
+  - [x] CardComponent
+    - [x] CardNumber
+    - [x] NetworkBrand
+    - [x] ExpiryDate
+- 페이지
+  - [x] Card
+  - [x] CompleteRegistration
+- 검증
+  - [x] 카드번호 입력값 검증
+    - [x] Visa: 4로 시작하는 16자리 숫자
+    - [x] MasterCard: 51~55로 시작하는 16자리 숫자
+    - [x] Diners: 36으로 시작하는 14자리 숫자
+    - [x] AMEX: 34, 37로 시작하는 15자리 숫자
+    - [x] 유니온페이 (16자리 숫자)
+      - [x] 622126~622925로 시작하는 경우
+      - [x] 624~626로 시작하는 경우
+      - [x] 6282~6288로 시작하는 경우
+    - [x] 브랜드에 맞는 자리수에 맞게 fourth-digits input maxlength와 placeholder 변경하기
+      - [x] onBlur시 자리수에 맞게 에러메세지 출력
+- 동적 입력 UI 구현
+  - [x] 사용자의 입력이 완료되면 다음 필드로 자동으로 이동
+- [x] 모든 input 입력완료시 확인버튼 show
+  - [x] 확인 버튼 입력시 완료 페이지로 라우팅
+- 실시간 프리뷰
+  - [x] 카드사에 맞는 카드 배경색 변경
+
+## 프로그래밍 요구사항
+
+- Routing
+  - [x] react-router 사용
+- Custom Hooks
+  - [x] 사용하여 Form 관리 로직을 UI와 분리하기 (구현 완료 후)
+    - [x] 입력값, 에러 상태, onChange, onBlur 패턴 공통 커스텀훅으로 추출 (검증 메서드 주입)
+    - [x] focus 관련 훅들 커스텀 훅으로 모아놓기

@@ -1,11 +1,24 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
+import type { CardCompany } from '../context/CardContext';
+
+export const CARD_COMPANY_COLOR: Record<CardCompany, string> = {
+  bc: '#F04651',
+  sinhan: '#0046FF',
+  kakao: '#FFE600',
+  hyundai: '#000000',
+  woori: '#007BC8',
+  lotte: '#ED1C24',
+  hana: '#009490',
+  kookmin: '#6A6056',
+  '': '#333333',
+};
 
 type ErrorFlag = {
-  isError?: boolean;
+  $fieldErrors?: boolean;
 };
 
 export const CardInput = styled.input<ErrorFlag>`
-  border: solid 1px ${(props) => (props.isError ? "#FF3D3D" : "#acacac")};
+  border: solid 1px ${(props) => (props.$fieldErrors ? '#FF3D3D' : '#acacac')};
   border-radius: 2px;
   padding: 0.5rem;
   font-size: 11px;
@@ -24,6 +37,17 @@ export const CardInput = styled.input<ErrorFlag>`
   }
 `;
 
+export const CardSingleFieldContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+`;
+
+export const CardLabel = styled.label`
+  font-size: 12px;
+  color: #0a0d13;
+`;
+
 export const CardFieldset = styled.fieldset`
   border: none;
   display: flex;
@@ -35,4 +59,5 @@ export const CardFieldset = styled.fieldset`
 export const CardLegend = styled.legend`
   font-size: 12px;
   margin: 8px 0;
+  color: #0a0d13;
 `;

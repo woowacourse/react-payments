@@ -14,12 +14,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultCardNumber = {
-  "first-digits": "",
-  "second-digits": "",
-  "third-digits": "",
-  "fourth-digits": "",
-};
+const defaultCardNumber = ['', '', '', ''];
 
 const renderWithContext = (cardExpiryDate: {
   "expiry-month": string;
@@ -30,10 +25,15 @@ const renderWithContext = (cardExpiryDate: {
       value={{
         cardNumber: defaultCardNumber,
         cardExpiryDate,
-        networkBrand: "",
         setCardNumber: () => {},
         setCardExpiryDate: () => {},
-        setNetworkBrand: () => {},
+        cardCompany: '',
+        setCardCompany: () => {},
+        cardCVC: '',
+        setCardCVC: () => {},
+        cardPassword: '',
+        setCardPassword: () => {},
+        networkBrand: '',
       }}
     >
       <CardExpiryDate />

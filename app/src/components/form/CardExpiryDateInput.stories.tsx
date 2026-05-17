@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CardContext } from "../../context/CardContext";
 
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
@@ -12,6 +12,10 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  args: {
+    expiryMonthRef: { current: null },
+    onCardExpiryDateComplete: () => {},
+  },
 } satisfies Meta<typeof CardExpiryDateInput>;
 
 export default meta;
@@ -22,23 +26,24 @@ const renderWithContext = () => {
     "expiry-month": "",
     "expiry-year": "",
   });
+  const firstRef = useRef<HTMLInputElement>(null);
   return (
     <CardContext
       value={{
-        cardNumber: {
-          "first-digits": "",
-          "second-digits": "",
-          "third-digits": "",
-          "fourth-digits": "",
-        },
+        cardNumber: ['', '', '', ''],
         setCardNumber: () => {},
-        networkBrand: "",
-        setNetworkBrand: () => {},
+        cardCompany: '',
+        setCardCompany: () => {},
+        cardCVC: '',
+        setCardCVC: () => {},
+        cardPassword: '',
+        setCardPassword: () => {},
         cardExpiryDate,
         setCardExpiryDate,
+        networkBrand: '',
       }}
     >
-      <CardExpiryDateInput />
+      <CardExpiryDateInput expiryMonthRef={firstRef} onCardExpiryDateComplete={() => {}} />
     </CardContext>
   );
 };
