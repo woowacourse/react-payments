@@ -20,11 +20,15 @@ const ExpiryField = ({
   expiryYear,
   onExpiryMonthChange,
   onExpiryYearChange,
+  formErrorMessage,
+  clearFormErrorMessage,
 }: {
   expiryMonth: string;
   expiryYear: string;
   onExpiryMonthChange: (value: string) => void;
   onExpiryYearChange: (value: string) => void;
+  formErrorMessage: string | null;
+  clearFormErrorMessage: () => void;
 }) => {
   const {
     updateErrorMessage,
@@ -39,6 +43,7 @@ const ExpiryField = ({
     useInputFocusGroup(EXPIRY_INPUT_COUNT);
 
   const handleMonthChange = (index: number, eValue: string) => {
+    clearFormErrorMessage();
     const value = eValue.trim();
 
     if (!isNumericInput(value)) {
@@ -66,6 +71,7 @@ const ExpiryField = ({
   };
 
   const handleYearChange = (index: number, eValue: string) => {
+    clearFormErrorMessage();
     const value = eValue.trim();
 
     if (!isNumericInput(value)) {
@@ -145,7 +151,9 @@ const ExpiryField = ({
         />
       </InputWrapper>
 
-      <ErrorMessage>{firstErrorMessage}</ErrorMessage>
+      <ErrorMessage>
+        {formErrorMessage ? formErrorMessage : firstErrorMessage}
+      </ErrorMessage>
     </StyledField>
   );
 };

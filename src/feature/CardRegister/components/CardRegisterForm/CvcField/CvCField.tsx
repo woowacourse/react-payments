@@ -9,9 +9,13 @@ import useInputErrorState from "../../../../../hooks/useInputErrorState";
 const CvcField = ({
   cvcNumber,
   onCvcNumberChange,
+  formErrorMessage,
+  clearFormErrorMessage,
 }: {
   cvcNumber: string;
   onCvcNumberChange: (value: string) => void;
+  formErrorMessage: string | null;
+  clearFormErrorMessage: () => void;
 }) => {
   const {
     updateErrorMessage,
@@ -23,6 +27,7 @@ const CvcField = ({
   } = useInputErrorState(CVC_INPUT_COUNT);
 
   const handleCvcChange = (index: number, eValue: string) => {
+    clearFormErrorMessage();
     const value = eValue.trim();
 
     if (!isNumericInput(value)) {
@@ -65,7 +70,9 @@ const CvcField = ({
           autoFocus
         />
       </InputWrapper>
-      <ErrorMessage>{firstErrorMessage}</ErrorMessage>
+      <ErrorMessage>
+        {formErrorMessage ? formErrorMessage : firstErrorMessage}
+      </ErrorMessage>
     </StyledField>
   );
 };

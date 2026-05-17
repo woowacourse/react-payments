@@ -27,7 +27,11 @@ import {
 import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
 import BaseButton from "../../../../common/components/Button/BaseButton";
-import { fetchCardRegister, type PostCardRequestBody } from "../../api/card";
+import {
+  registerCard,
+  type ErrorInformation,
+  type PostCardRequestBody,
+} from "../../api/card";
 import { getIssuerCodeByCompanyName } from "../../utils/cardCompany";
 
 const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
@@ -71,6 +75,40 @@ const CardRegisterForm = ({
       cvcNumber: "",
       password: "",
     });
+
+  const [formErrorMessages, setFormErrorMessages] = useState<{
+    cardNumber: string | null;
+    expiryDate: string | null;
+    cvc: string | null;
+  }>({
+    cardNumber: null,
+    expiryDate: null,
+    cvc: null,
+  });
+
+  const updateCardNumberErrorMessage = (message: string) => {
+    setFormErrorMessages({ ...formErrorMessages, cardNumber: message });
+  };
+
+  const clearCardNumberErrorMessage = () => {
+    setFormErrorMessages({ ...formErrorMessages, cardNumber: null });
+  };
+
+  const updateExpiryDateErrorMessage = (message: string) => {
+    setFormErrorMessages({ ...formErrorMessages, expiryDate: message });
+  };
+
+  const clearExpiryDateErrorMessage = () => {
+    setFormErrorMessages({ ...formErrorMessages, expiryDate: null });
+  };
+
+  const updateCvcErrorMessage = (message: string) => {
+    setFormErrorMessages({ ...formErrorMessages, cvc: message });
+  };
+
+  const clearCvcErrorMessage = () => {
+    setFormErrorMessages({ ...formErrorMessages, cvc: null });
+  };
 
   // 한 번 렌더링 된 필드는 이전 단계에서 에러가 나도 사라지지 않게 하므로 state로!
   const [maxUnlockedStep, setMaxUnlockedStep] = useState(() =>
@@ -183,12 +221,19 @@ const CardRegisterForm = ({
     };
 
     try {
-      const id = await fetchCardRegister(postCardInformation);
+      const id = await registerCard(postCardInformation);
+      navigate("/cards");
     } catch (error) {
-      alert((error as Error).message);
+      if ((error as ErrorInformation).code === "INVALID_CARD_NUMBER") {
+        updateCardNumberErrorMessage((error as ErrorInformation).message);
+      }
+      if ((error as ErrorInformation).code === "INVALID_CVC") {
+        updateCvcErrorMessage((error as ErrorInformation).message);
+      }
+      if ((error as ErrorInformation).code === "INVALID_EXPIRATION_DATE") {
+        updateExpiryDateErrorMessage((error as ErrorInformation).message);
+      }
     }
-
-    navigate("/cards");
   };
 
   return (
@@ -210,6 +255,8 @@ const CardRegisterForm = ({
           <CvcField
             cvcNumber={cardInputSectionInformation.cvcNumber}
             onCvcNumberChange={handleCvcNumberChange}
+            formErrorMessage={formErrorMessages.cvc}
+            clearFormErrorMessage={clearCvcErrorMessage}
           />
         </CardRegisterStep>
       )}
@@ -224,6 +271,8 @@ const CardRegisterForm = ({
             expiryYear={expiryYear}
             onExpiryMonthChange={handleExpiryMonthChange}
             onExpiryYearChange={handleExpiryYearChange}
+            formErrorMessage={formErrorMessages.expiryDate}
+            clearFormErrorMessage={clearExpiryDateErrorMessage}
           />
         </CardRegisterStep>
       )}
@@ -249,6 +298,8 @@ const CardRegisterForm = ({
             cardNumbers={cardNumbers}
             onCardNumbersChange={handleCardNumbersChange}
             chunkLengths={cardNumberChunkLengths}
+            formErrorMessage={formErrorMessages.cardNumber}
+            clearFormErrorMessage={clearCardNumberErrorMessage}
           />
         </CardRegisterStep>
       )}

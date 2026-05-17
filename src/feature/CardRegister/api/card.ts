@@ -9,7 +9,12 @@ export type PostCardRequestBody = {
   issuerCode: IssuerCodeType;
 };
 
-export const fetchCardRegister = async (
+export type ErrorInformation = {
+  code: string;
+  message: string;
+};
+
+export const registerCard = async (
   postCardInformation: PostCardRequestBody,
 ) => {
   const response = await fetch(`${BASE_URL}/cards`, {
@@ -18,7 +23,8 @@ export const fetchCardRegister = async (
   });
 
   if (!response.ok) {
-    throw new Error("카드 등록에 실패했습니다.");
+    const error: ErrorInformation = await response.json();
+    throw error;
   }
 
   return response.json();

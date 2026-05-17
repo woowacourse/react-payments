@@ -16,10 +16,14 @@ const NumberField = ({
   cardNumbers,
   onCardNumbersChange,
   chunkLengths,
+  formErrorMessage,
+  clearFormErrorMessage,
 }: {
   cardNumbers: CardNumberChunkType;
   onCardNumbersChange: (value: CardNumberChunkType) => void;
   chunkLengths: CardNumberChunkLengths;
+  formErrorMessage: string | null;
+  clearFormErrorMessage: () => void;
 }) => {
   const {
     updateErrorMessage,
@@ -42,6 +46,7 @@ const NumberField = ({
   };
 
   const handleNumbersChange = (index: number, eValue: string) => {
+    clearFormErrorMessage();
     const value = eValue.trim();
 
     if (!isNumericInput(value)) {
@@ -118,7 +123,9 @@ const NumberField = ({
         ))}
       </InputWrapper>
 
-      <ErrorMessage>{firstErrorMessage}</ErrorMessage>
+      <ErrorMessage>
+        {formErrorMessage ? formErrorMessage : firstErrorMessage}
+      </ErrorMessage>
     </StyledField>
   );
 };
