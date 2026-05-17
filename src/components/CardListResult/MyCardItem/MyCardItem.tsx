@@ -42,7 +42,7 @@ const CardItemContainer = styled.div`
     height: 73px;
     border: 1px solid #e6e6e6;
     border-radius: 5px;
-    box-sizing: content-box;
+    box-sizing: border-box;
     padding: 12px;
     display: flex;
     gap: 12px;
