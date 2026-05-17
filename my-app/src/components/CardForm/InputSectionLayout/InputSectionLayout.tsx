@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import type { ReactNode } from "react";
 
 export const baseInputStyle = css`
   flex: 1;
@@ -23,7 +24,7 @@ const InputSectionLayout = ({
   tag,
   errorMessage,
 }: {
-  children?: React.ReactNode;
+  children?: ReactNode;
   title: string;
   message: string;
   tag?: string;
