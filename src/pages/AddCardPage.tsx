@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import CardNumbersField from '../components/domain/CardNumbersField';
 import ExpirationPeriodField from '../components/domain/ExpirationPeriodField';
 import CVCField from '../components/domain/CVCField';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -30,10 +30,38 @@ export default function AddCardPage() {
     },
   } = useAddCardForm();
 
+  const cardNumbersRef = useRef<HTMLInputElement>(null);
+  const cardCompanyRef = useRef<HTMLSelectElement>(null);
+  const expirationPeriodRef = useRef<HTMLInputElement>(null);
+  const cvcRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const focusFirstErrorField = () => {
+    const fields = { cardNumbers, cardCompany, expirationPeriod, cvc, password };
+    const refs = {
+      cardNumbers: cardNumbersRef,
+      cardCompany: cardCompanyRef,
+      expirationPeriod: expirationPeriodRef,
+      cvc: cvcRef,
+      password: passwordRef,
+    };
+
+    const firstErrorField = Object.entries(FIELD_STEP)
+      .sort(([, a], [, b]) => b - a)
+      .find(([key]) => fields[key as AddCardFormFieldKey]?.errorStatuses.some((s) => s !== null))?.[0] as
+      | AddCardFormFieldKey
+      | undefined;
+
+    if (firstErrorField) refs[firstErrorField].current?.focus();
+  };
+
   const handleSubmitForm = (e: React.SubmitEvent) => {
     e.preventDefault();
     const isValid = validateAllFields();
-    if (!isValid) return;
+    if (!isValid) {
+      focusFirstErrorField();
+      return;
+    }
     navigate('/complete', { state: buildCompletePageState() });
   };
 
@@ -62,6 +90,7 @@ export default function AddCardPage() {
       <form css={formLayout} id="add-card-form" onSubmit={handleSubmitForm}>
         {step >= FIELD_STEP.password && (
           <PasswordField
+            ref={passwordRef}
             value={password.value}
             errorStatuses={password.errorStatuses}
             onUpdated={(value) => updateValue('password', value)}
@@ -71,6 +100,7 @@ export default function AddCardPage() {
         )}
         {step >= FIELD_STEP.cvc && (
           <CVCField
+            ref={cvcRef}
             value={cvc.value}
             errorStatuses={cvc.errorStatuses}
             onUpdated={(value) => updateValue('cvc', value)}
@@ -81,6 +111,7 @@ export default function AddCardPage() {
         )}
         {step >= FIELD_STEP.expirationPeriod && (
           <ExpirationPeriodField
+            ref={expirationPeriodRef}
             value={expirationPeriod.value}
             errorStatuses={expirationPeriod.errorStatuses}
             onUpdated={(value) => updateValue('expirationPeriod', value)}
@@ -91,6 +122,7 @@ export default function AddCardPage() {
         )}
         {step >= FIELD_STEP.cardCompany && (
           <CardCompanySelect
+            ref={cardCompanyRef}
             value={cardCompany.value}
             errorStatuses={cardCompany.errorStatuses}
             onUpdated={(value) => updateValue('cardCompany', value)}
@@ -100,6 +132,7 @@ export default function AddCardPage() {
           />
         )}
         <CardNumbersField
+          ref={cardNumbersRef}
           value={cardNumbers.value}
           errorStatuses={cardNumbers.errorStatuses}
           onUpdated={(value) => updateValue('cardNumbers', value)}
