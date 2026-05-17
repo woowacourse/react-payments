@@ -29,4 +29,5 @@ const RootLayout = styled.div`
   max-width: 376px;
   min-height: 100vh;
   margin: 0 auto;
+  padding: 50px 0;
 `;
