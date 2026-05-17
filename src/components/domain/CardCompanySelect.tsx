@@ -2,7 +2,6 @@ import type { CardInfo, ErrorStatus } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Select from '../ui/Select';
 import { CARD_COMPANY_OPTIONS, ERROR_MESSAGES } from '../../constants';
-import { useEffect, useRef } from 'react';
 import { validate } from '../../utils';
 import type { BaseValidationRule } from '../../types';
 
@@ -13,6 +12,7 @@ interface CardCompanySelectProps {
   onErrorUpdated: (errorStatuses: [ErrorStatus]) => void;
   onValid: (value: CardInfo['cardCompany']) => void;
   validationRules: BaseValidationRule[];
+  ref?: React.Ref<HTMLSelectElement>;
 }
 
 export default function CardCompanySelect({
@@ -22,14 +22,9 @@ export default function CardCompanySelect({
   onErrorUpdated,
   onValid,
   validationRules,
+  ref,
 }: CardCompanySelectProps) {
-  const selectRef = useRef<HTMLSelectElement>(null);
-
   const errorStatus = errorStatuses[0];
-
-  useEffect(() => {
-    selectRef.current?.focus();
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const inputValue = e.target.value;
@@ -49,14 +44,14 @@ export default function CardCompanySelect({
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드사를 선택해 주세요',
     caption: '현재 국내 카드사만 가능합니다.',
-    error: !!errorStatus,
     errorMessage: errorStatus ? ERROR_MESSAGES[errorStatus] : '',
   };
 
   return (
     <FormField {...formFieldProps}>
       <Select
-        ref={selectRef}
+        ref={ref}
+        autoFocus
         variant={errorStatus ? 'error' : 'default'}
         value={value}
         options={CARD_COMPANY_OPTIONS}

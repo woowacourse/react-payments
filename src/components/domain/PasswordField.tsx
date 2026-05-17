@@ -2,7 +2,6 @@ import type { CardInfo } from '../../types';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { ErrorStatus } from '../../types';
-import { useEffect, useRef } from 'react';
 import { validate } from '../../utils';
 import type { BaseValidationRule } from '../../types';
 import { PASSWORD_LENGTH, ERROR_MESSAGES } from '../../constants';
@@ -13,6 +12,7 @@ interface PasswordFieldProps {
   onUpdated: (value: CardInfo['password']) => void;
   onErrorUpdated: (errorStatuses: [ErrorStatus]) => void;
   validationRules: BaseValidationRule[];
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export default function PasswordField({
@@ -21,14 +21,9 @@ export default function PasswordField({
   onUpdated,
   onErrorUpdated,
   validationRules,
+  ref,
 }: PasswordFieldProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const errorStatus = errorStatuses[0];
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -45,7 +40,6 @@ export default function PasswordField({
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '비밀번호를 입력해 주세요',
     caption: `앞의 ${PASSWORD_LENGTH}자리를 입력해주세요`,
-    error: !!errorStatus,
     errorMessage: errorStatus ? ERROR_MESSAGES[errorStatus] : '',
   };
 
@@ -53,7 +47,8 @@ export default function PasswordField({
     <FormField {...formFieldProps}>
       <label htmlFor="password">비밀번호 앞 {PASSWORD_LENGTH}자리</label>
       <Input
-        ref={inputRef}
+        ref={ref}
+        autoFocus
         variant={errorStatus !== null ? 'error' : 'default'}
         value={value}
         id="password"
