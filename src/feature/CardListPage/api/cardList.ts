@@ -1,4 +1,4 @@
-const BASE_URL = "https://woowa.yiheon.com";
+import { BASE_URL } from "../../../constants";
 
 export const fetchCardList = async () => {
   const response = await fetch(`${BASE_URL}/cards`);

@@ -1,6 +1,5 @@
 import { http, HttpResponse } from "msw";
-
-export const BASE_URL = "https://woowa.yiheon.com";
+import { BASE_URL } from "../constants";
 
 const getCardListHandler = http.get(`${BASE_URL}/cards`, () => {
   return HttpResponse.json([
