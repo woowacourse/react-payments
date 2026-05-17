@@ -20,7 +20,7 @@ interface CardNumberSegmentsInputProps {
 }
 
 function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
-  const segmentRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const segmentInputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const prevSegmentCountRef = useRef(props.value.length);
   const segmentLengths = props.brand
     ? CARD_BRAND_CONFIGS[props.brand].segmentLengths
@@ -28,10 +28,9 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
 
   useEffect(() => {
     if (prevSegmentCountRef.current === 1 && props.value.length > 1) {
-      const firstIncomplete = props.value.findIndex(
-        (seg, i) => seg.length < segmentLengths[i]
-      );
-      segmentRefs.current[firstIncomplete === -1 ? 1 : firstIncomplete]?.focus();
+      const isFirstSegmentComplete =
+        props.value[0].length === segmentLengths[0];
+      segmentInputRefs.current[isFirstSegmentComplete ? 1 : 0]?.focus();
     }
     prevSegmentCountRef.current = props.value.length;
   }, [props.value, segmentLengths]);
@@ -47,7 +46,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
     props.onChange(newSegments);
 
     if (event.target.value.length === segmentLengths[inputIndex]) {
-      segmentRefs.current[inputIndex + 1]?.focus();
+      segmentInputRefs.current[inputIndex + 1]?.focus();
     }
   };
 
@@ -77,7 +76,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
           <ValidationInput
             key={index}
             ref={(el) => {
-              segmentRefs.current[index] = el;
+              segmentInputRefs.current[index] = el;
             }}
             data-index={index}
             type="text"
