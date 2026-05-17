@@ -17,6 +17,7 @@ interface ExpirationPeriodFieldProps {
   onErrorUpdated: (errorStatuses: FormValue['expirationPeriod']['errorStatuses']) => void;
   onValid: (value: CardInfo['expirationPeriod']) => void;
   validationRules: [ExpirationValidationRule[], ExpirationValidationRule[]];
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export default function ExpirationPeriodField({
@@ -26,6 +27,7 @@ export default function ExpirationPeriodField({
   onErrorUpdated,
   onValid,
   validationRules,
+  ref,
 }: ExpirationPeriodFieldProps) {
   const { setRef, focusNext, focusPrev, focusFirst } = useInputFocus(2);
 
@@ -70,12 +72,12 @@ export default function ExpirationPeriodField({
     updateError(index, validate(validationRules[index], 'onBlur', e.target.value) as ExpirationPeriodErrorStatus);
   };
 
+  const [monthError, yearError, totalError] = errorStatuses;
   const activeError = errorStatuses.find((e) => e !== null) ?? null;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드 유효기간을 입력해 주세요',
     caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
-    error: activeError !== null,
     errorMessage: activeError ? ERROR_MESSAGES[activeError] : '',
   };
 
@@ -85,9 +87,9 @@ export default function ExpirationPeriodField({
         <legend css={legendStyle}>유효기간</legend>
         <div css={inputGroupStyle}>
           <Input
-            ref={setRef(0)}
+            ref={setRef(0, ref)}
             value={value[0]}
-            variant={errorStatuses[0] !== null ? 'error' : 'default'}
+            variant={monthError !== null ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="MM"
@@ -98,7 +100,7 @@ export default function ExpirationPeriodField({
           <Input
             ref={setRef(1)}
             value={value[1]}
-            variant={errorStatuses[1] !== null ? 'error' : 'default'}
+            variant={yearError !== null || totalError !== null ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="YY"

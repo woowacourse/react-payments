@@ -18,6 +18,7 @@ interface CardNumbersFieldProps {
   onErrorUpdated: (errorStatuses: FormValue['cardNumbers']['errorStatuses']) => void;
   onValid: (value: CardInfo['cardNumbers']) => void;
   validationRules: BaseValidationRule[];
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export default function CardNumbersField({
@@ -27,6 +28,7 @@ export default function CardNumbersField({
   onErrorUpdated,
   onValid,
   validationRules,
+  ref,
 }: CardNumbersFieldProps) {
   const { setRef, focusNext, focusPrev, focusFirst } = useInputFocus(4);
 
@@ -70,12 +72,12 @@ export default function CardNumbersField({
     updateErrorStatuses(index, validate(validationRules, 'onBlur', e.target.value) as ErrorStatus);
   };
 
+  const totalError = errorStatuses[4];
   const activeError = errorStatuses.find((e) => e !== null) ?? null;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '결제할 카드 번호를 입력해 주세요',
     caption: '본인 명의의 카드만 결제 가능합니다.',
-    error: activeError !== null,
     errorMessage: activeError ? ERROR_MESSAGES[activeError] : '',
   };
 
@@ -87,8 +89,8 @@ export default function CardNumbersField({
           {value.map((number, index) => (
             <Input
               key={index}
-              ref={setRef(index)}
-              variant={errorStatuses[index] !== null ? 'error' : 'default'}
+              ref={setRef(index, index === 0 ? ref : undefined)}
+              variant={errorStatuses[index] !== null || totalError !== null ? 'error' : 'default'}
               value={number}
               type="text"
               inputMode="numeric"
