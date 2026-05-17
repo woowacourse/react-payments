@@ -39,9 +39,12 @@ export default function CardListPage() {
   const isError = responseStatus === 'error';
 
   useEffect(() => {
-    setTimeout(() => {
-      setResponseStatus('success');
-    }, 10000);
+    const getCards = async () => {
+      const response = await fetch(`${import.meta.env.BASE_URL}cards`);
+      console.log(await response.json());
+    };
+
+    getCards();
   }, []);
 
   return (
