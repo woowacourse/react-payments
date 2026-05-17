@@ -53,7 +53,11 @@ const CardListPage = () => {
   const 비동기_상태에_따라_컴포넌트_보여주기 = () => {
     if (cardFetchStatus === 'loading') return <CardListSkeleton />;
     if (cardFetchStatus === 'error') {
-      return <CardListErrorState message={cardFetchErrorMessage} />;
+      return (
+        <CardListErrorState
+          handleRetryFetchCards={async () => await fetchCards()}
+        />
+      );
     }
     if (cardFetchStatus === 'success' && cards.length === 0) {
       return <CardListEmptyState />;
