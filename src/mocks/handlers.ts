@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 import { getCardBrand } from '../utils/cardBrand';
 import { CARD_ISSUER_CODE } from '../constants/constant';
 import { isCardExpiryDateComplete } from '../utils/validate';
@@ -62,7 +62,9 @@ export const handlers = [
   }),
 
   // get
-  http.get('/api/cards', () => {
+  http.get('/api/cards', async () => {
+    await delay(500);
+
     return HttpResponse.json(cardInfo);
   }),
 
