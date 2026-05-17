@@ -5,10 +5,7 @@ export default function useInputFocus(count: number) {
 
   const setRef = (index: number, externalRef?: React.Ref<HTMLInputElement>) => (el: HTMLInputElement | null) => {
     inputRefs.current[index] = el;
-    if (externalRef) {
-      if (typeof externalRef === 'function') externalRef(el);
-      else (externalRef as React.RefObject<HTMLInputElement | null>).current = el;
-    }
+    if (externalRef && 'current' in externalRef) externalRef.current = el;
   };
 
   const focusNext = (index: number) => {
