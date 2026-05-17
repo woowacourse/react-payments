@@ -5,21 +5,21 @@ import type {
   PostedCard,
 } from '../../domain/card/types/card';
 import { validatePostedCard } from '../../feature/CardList/utils/ValidatePostedCard';
+import { getCardIssuerCode } from '../../feature/CardList/utils/issuerCode';
+import { maskCardNumber } from '../../domain/card/utils/cardDisplay';
 
 const cards: Card[] = [
   {
     id: '1',
-    number: ['1111', '2222', '3333', '4444'],
+    issuerCode: '31',
+    number: '111122******4444',
     expirationDate: '01/40',
-    cvc: '123',
-    issuerCode: 'bc',
   },
   {
     id: '2',
-    number: ['1234', '1234', '1234', '1234'],
+    issuerCode: '41',
+    number: '123412******1234',
     expirationDate: '01/20',
-    cvc: '456',
-    issuerCode: 'shinhan',
   },
 ];
 
@@ -39,18 +39,25 @@ export const cardHandlers = [
   http.post('/cards', async ({ request }) => {
     const body = (await request.json()) as CardFormInfoType;
 
-    const newCard: PostedCard = {
-      number: body.cardNumbers,
+    // post된
+    const postedCard: PostedCard = {
+      number: body.cardNumbers.join(''),
       expirationDate: `${body.expiryMonth}/${body.expiryYear}`,
       cvc: body.cvcNumber,
-      issuerCode: body.cardCompanyId, // cardCompanyId -> issuerCode로 변환 필요
+      issuerCode: getCardIssuerCode(body.cardCompanyId),
     };
 
-    const error = validatePostedCard(newCard);
+    const error = validatePostedCard(postedCard);
     if (error) return HttpResponse.json(error, { status: 400 });
 
     const cardId = crypto.randomUUID();
-    cards.push({ id: cardId, ...newCard });
+    const card: Card = {
+      id: cardId,
+      issuerCode: postedCard.issuerCode,
+      number: maskCardNumber(postedCard.number),
+      expirationDate: postedCard.expirationDate,
+    };
+    cards.push(card);
 
     return HttpResponse.json(cardId, { status: 201 });
   }),

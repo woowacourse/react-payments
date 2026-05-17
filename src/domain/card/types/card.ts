@@ -16,17 +16,18 @@ export type CardFormInfoType = {
   password: string;
 };
 
+// POST 카드 요청 타입
 export type PostedCard = {
-  number: string[];
+  number: string;
   expirationDate: string;
   cvc: string;
-  issuerCode: CardCompanyId | null;
+  issuerCode: string | null;
 };
 
+// GET 카드 반환 타입
 export type Card = {
   id: string;
-  number: string[];
+  issuerCode: string | null;
+  number: string;
   expirationDate: string;
-  cvc: string;
-  issuerCode: CardCompanyId | null;
 };
