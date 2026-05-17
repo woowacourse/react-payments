@@ -6,6 +6,7 @@ import CardListFallback from "./CardListFallback";
 export type Card = {
   id: string;
   first: string;
+  fourth: string;
   cardFrimLabel: string;
   expMm: string;
   expYy: string;

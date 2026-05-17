@@ -1,4 +1,6 @@
 import type { Card } from "../../pages/CardListPage";
+import AddCardButton from "./AddCardButton";
+import RegisteredCardInfo from "./RegisteredCardInfo";
 
 interface Props {
   cards: Card[];
