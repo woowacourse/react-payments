@@ -52,9 +52,9 @@ export const Payments = () => {
       <CardForm
         numbersField={{ numbers, onChange: (v) => setNumbers(v) }}
         expiryField={{ expiryDate, onChange: (v) => setExpiryDate(v) }}
-        bankField={{ value: bank, handleChange: (v) => setBank(v) }}
-        cvcField={{ value: cvc, handleChange: (v) => setCvc(v) }}
-        passwordField={{ value: password, handleChange: (v) => setPassword(v) }}
+        bankField={{ bank, onChange: (v) => setBank(v) }}
+        cvcField={{ cvc, onChange: (v) => setCvc(v) }}
+        passwordField={{ password, onChange: (v) => setPassword(v) }}
         onRegister={() => onRegister(fieldData)}
         formId={FORM_ID}
       />

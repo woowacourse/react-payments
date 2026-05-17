@@ -2,28 +2,29 @@ import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
 import { useState } from 'react';
 import { validateCvc } from '@/entities/card/model/cvc';
-import type { FieldControl } from '../../model/payments';
 import { getCvcFieldState, isValidInputCvc } from '../../model/registerCvc';
 
+export interface CvcFieldControl {
+  cvc: string;
+  onChange: (v: string) => void;
+}
+
 interface CvcFieldProps {
-  cvcField: FieldControl;
+  cvcField: CvcFieldControl;
   setStepRef: (node: HTMLInputElement | null) => void;
   onComplate: () => void;
 }
 
 export const CvcField = ({ cvcField, setStepRef, onComplate }: CvcFieldProps) => {
-  const { value, handleChange } = cvcField;
+  const { cvc, onChange } = cvcField;
   const [touched, setTouched] = useState<boolean>(false);
 
-  const { errorMessage, isError, maxLength } = getCvcFieldState({
-    value,
-    touched,
-  });
+  const { errorMessage, isValid, maxLength } = getCvcFieldState(cvc, touched);
 
-  const handleChangeCvc = (inputValue: string): void => {
+  const handleChange = (inputValue: string): void => {
     if (!isValidInputCvc(inputValue)) return;
 
-    handleChange(inputValue);
+    onChange(inputValue);
 
     if (validateCvc(inputValue)) onComplate();
   };
@@ -34,11 +35,11 @@ export const CvcField = ({ cvcField, setStepRef, onComplate }: CvcFieldProps) =>
         ref={setStepRef}
         type="text"
         inputMode="numeric"
-        value={value}
+        value={cvc}
         maxLength={maxLength}
         placeholder="123"
-        isError={isError}
-        onChange={(e) => handleChangeCvc(e.target.value)}
+        isError={!isValid}
+        onChange={(e) => handleChange(e.target.value)}
         onBlur={() => setTouched(true)}
       />
     </Field>

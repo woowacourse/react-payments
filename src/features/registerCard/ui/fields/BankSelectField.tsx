@@ -4,8 +4,8 @@ import { Field } from '@/core/components/field/Field';
 import { BANK_RULES, BANKS, type Bank } from '@/entities/card/model/bank';
 
 export interface BankFieldControl {
-  value: Bank | undefined;
-  handleChange: (v: Bank | undefined) => void;
+  bank: Bank | undefined;
+  onChange: (v: Bank | undefined) => void;
 }
 export interface BankSelectFieldProps {
   bankField: BankFieldControl;
@@ -13,9 +13,9 @@ export interface BankSelectFieldProps {
   onComplate: () => void;
 }
 export const BankSelectField = ({ bankField, setStepRef, onComplate }: BankSelectFieldProps) => {
-  const { value, handleChange } = bankField;
-  const handleChangeBank = (value: Bank) => {
-    handleChange(value);
+  const { bank, onChange } = bankField;
+  const handleChange = (value: Bank) => {
+    onChange(value);
     if (value !== undefined) onComplate();
   };
   return (
@@ -24,10 +24,9 @@ export const BankSelectField = ({ bankField, setStepRef, onComplate }: BankSelec
         <select
           ref={setStepRef}
           className={styles.button}
-          value={value ?? ''}
-          onChange={(e) => handleChangeBank(e.target.value as Bank)}
+          value={bank ?? ''}
+          onChange={(e) => handleChange(e.target.value as Bank)}
         >
-          {' '}
           <option value="" disabled>
             카드사를 선택해 주세요
           </option>

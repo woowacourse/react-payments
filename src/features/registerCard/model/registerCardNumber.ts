@@ -16,7 +16,7 @@ export const CARD_BRAND_FORMAT: Record<CardBrand | 'UNKNOWN', number[]> = {
   UNKNOWN: [4, 4, 4, 4],
 };
 
-export const isValidCardNumberInput = (value: string) => {
+export const isValidInputCardNumber = (value: string) => {
   return value === '' || isNumericString(value);
 };
 

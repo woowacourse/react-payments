@@ -9,14 +9,13 @@ export const isValidInputCvc = (value: string): boolean => {
   return value === '' || isNumericString(value);
 };
 
-export const getCvcFieldState = ({ value, touched }: { value: string; touched: boolean }) => {
+export const getCvcFieldState = (value: string, touched: boolean) => {
   const errorMessage = !validateCvc(value) ? CVC_ERROR_MESSAGE.EMPTY : undefined;
   const visibleErrorMessage = touched ? errorMessage : undefined;
 
   return {
     errorMessage: visibleErrorMessage,
-    isError: visibleErrorMessage !== undefined,
-    isValid: errorMessage === undefined,
+    isValid: visibleErrorMessage === undefined,
     maxLength: CVC_LENGTH,
   };
 };

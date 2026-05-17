@@ -3,11 +3,6 @@ import type { ExpiryDate } from '@/entities/card/model/expiryDate';
 
 export const FORM_ID = 'payments-form';
 
-export interface FieldControl {
-  value: string;
-  handleChange: (v: string) => void;
-}
-
 export interface FieldData {
   numbers: string;
   expiryDate: ExpiryDate;

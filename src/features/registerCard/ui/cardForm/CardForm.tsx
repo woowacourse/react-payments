@@ -1,12 +1,11 @@
 import styles from './CardForm.module.css';
 
-import { CvcField } from '@/features/registerCard/ui/fields/CvcField';
+import { CvcField, type CvcFieldControl } from '@/features/registerCard/ui/fields/CvcField';
 import {
   NumberField,
   type CardNumberFieldControl,
 } from '@/features/registerCard/ui/fields/CardNumberField';
-import type { FieldControl } from '../../model/payments';
-import { PasswordField } from '../fields/PasswordField';
+import { PasswordField, type PasswordFieldControl } from '../fields/PasswordField';
 import { ExpiryDateField, type ExpiryFieldControl } from '../fields/ExpiryDateField';
 import { BankSelectField, type BankFieldControl } from '../fields/BankSelectField';
 import { usePaymentStep } from '../../hooks/usePaymentsStep';
@@ -16,8 +15,8 @@ export interface CardFormProps {
   numbersField: CardNumberFieldControl;
   expiryField: ExpiryFieldControl;
   bankField: BankFieldControl;
-  cvcField: FieldControl;
-  passwordField: FieldControl;
+  cvcField: CvcFieldControl;
+  passwordField: PasswordFieldControl;
   formId: string;
   onRegister: () => void;
 }

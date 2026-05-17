@@ -3,14 +3,14 @@ import { Input } from '@/core/components/input/Input';
 import { useInputFocus } from '@/core/hooks/useInputFocus';
 import { useState } from 'react';
 import {
-  isValidCardNumberInput,
+  isValidInputCardNumber,
   getCardNumberFieldState,
   getNextCardNumberFieldState,
 } from '../../model/registerCardNumber';
 
 export interface CardNumberFieldControl {
   numbers: string[];
-  onChange: (values: string[]) => void;
+  onChange: (v: string[]) => void;
 }
 
 interface CardNumberFieldProps {
@@ -33,7 +33,7 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
   });
 
   const handleChangeNumbers = (value: string, index: number) => {
-    if (!isValidCardNumberInput(value)) return;
+    if (!isValidInputCardNumber(value)) return;
 
     const next = [...numbers];
     next[index] = value;
