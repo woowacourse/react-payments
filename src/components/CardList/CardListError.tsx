@@ -1,7 +1,7 @@
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
-import CardListRetryButton from "./CardListRetryButton";
 import errorImage from "@/assets/ErrorImage.png";
+import Button from "../common/Button";
 
 interface CardListErrorProps {
   onRetry: () => void;
@@ -12,7 +12,7 @@ const CardListError = ({ onRetry }: CardListErrorProps) => (
     <ErrorImage src={errorImage} alt="errorImage" />
     <ErrorTitle>카드 목록을 불러올 수 없어요</ErrorTitle>
     <Description>잠시 후 다시 시도해 주세요.</Description>
-    <CardListRetryButton onClick={onRetry} />
+    <Button onClick={onRetry}>다시 시도</Button>
   </Container>
 );
 

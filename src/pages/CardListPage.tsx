@@ -1,13 +1,20 @@
-import CardListEmpty from "@/components/CardList/CardListEmpty/CardListEmpty";
-import CardListError from "@/components/CardList/CardListError/CardListError";
+import CardListEmpty from "@/components/CardList/CardListEmpty";
+import CardListError from "@/components/CardList/CardListError";
 import PageLayout from "@/components/common/PageLayout";
+import { ROUTE_PATH } from "@/constants/routes";
 import useCardList from "@/hooks/useCardList";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const CardListPage = () => {
   const { cards, status, fetchCards } = useCardList();
+  const navigate = useNavigate();
+
+  const handleAddCard = () => {
+    navigate(ROUTE_PATH.CARD_REGISTER);
+  };
 
   useEffect(() => {
     fetchCards();
@@ -17,7 +24,9 @@ const CardListPage = () => {
     <PageLayout>
       <PageWrapper>
         <PageTitle>보유 카드</PageTitle>
-        {status === "success" && cards.length === 0 && <CardListEmpty />}
+        {status === "success" && cards.length === 0 && (
+          <CardListEmpty onAddCard={handleAddCard} />
+        )}
         {status === "error" && <CardListError onRetry={fetchCards} />}
       </PageWrapper>
     </PageLayout>

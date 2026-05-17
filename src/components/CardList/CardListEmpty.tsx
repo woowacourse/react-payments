@@ -1,13 +1,17 @@
+import Button from "@/components/common/Button";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
-import CardAddButton from "./CardAddButton";
 
-const CardListEmpty = () => (
+interface CardListEmptyProps {
+  onAddCard: () => void;
+}
+
+const CardListEmpty = ({ onAddCard }: CardListEmptyProps) => (
   <Container>
     <CardPlaceholder />
     <EmptyTitle>등록된 카드가 없습니다</EmptyTitle>
     <Description>아래 버튼을 눌러 첫 카드를 등록해보세요</Description>
-    <CardAddButton />
+    <Button onClick={onAddCard}>카드 추가하기</Button>
   </Container>
 );
 
