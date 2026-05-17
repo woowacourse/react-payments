@@ -50,9 +50,7 @@ const ValidationInput = forwardRef<HTMLInputElement, ValidationInputProps>(
       onChange?.(event);
     };
 
-    const handleOnBlur = (
-      event: React.FocusEvent<HTMLInputElement, Element>,
-    ) => {
+    const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       const currentValue = event.target.value;
       const failedValidation = validations.find(
         (validation) =>
