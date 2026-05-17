@@ -2,26 +2,11 @@ import styled from "styled-components";
 import CardItem, { type CardItemInformation } from "./CardItem/CardItem";
 import BaseButton from "../../../../common/components/Button/BaseButton";
 
-const mockCardList: CardItemInformation[] = [
-  {
-    id: "1",
-    issuerCode: "31",
-    number: "5511****",
-    expirationDate: "12/28",
-  },
-  {
-    id: "2",
-    issuerCode: "W1",
-    number: "5511****",
-    expirationDate: "12/28",
-  },
-];
-
-const Success = () => {
+const Success = ({ cardList }: { cardList: CardItemInformation[] }) => {
   return (
     <SuccessLayout>
-      {mockCardList.map((mockCard) => (
-        <CardItem key={mockCard.id} {...mockCard} />
+      {cardList.map((card) => (
+        <CardItem key={card.id} {...card} />
       ))}
       <AddCardButton onClick={() => console.log("카드 추가")} style="rounded">
         + 카드 추가
