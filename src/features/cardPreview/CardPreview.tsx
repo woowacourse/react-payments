@@ -2,29 +2,33 @@ import styles from './CardPreview.module.css';
 import bankStyles from '@/entities/card/config/bank.module.css';
 
 import type { ExpiryDate } from '@/entities/card/model/expiryDate';
-import { BRAND_RULES, type Brand } from '@/entities/card';
 import { BANK_RULES, type Bank } from '@/entities/card/model/bank';
 import { BRAND_SVG_MAP } from '@/entities/card/config/brandSvgMap';
+import { getCardBrand, type CardBrand } from '@/entities/card/model/cardNumber';
+import { getPreviewCardNumbers } from './model/cardPreview';
 
 export interface CardInfo {
-  cardNumbers: string[];
+  numbers: string[];
   expiryDate: ExpiryDate;
-  brand: Brand;
   bank: Bank | undefined;
 }
 interface CardPreviewProps {
   info: CardInfo;
 }
 
-const STAR = '●';
-
-const CardNumber = ({ cardNumbers, brand }: { cardNumbers: string[]; brand: Brand }) => {
-  const INPUT_FORMAT = BRAND_RULES[brand].format;
+const CardNumber = ({
+  cardNumbers,
+  brand,
+}: {
+  cardNumbers: string;
+  brand: CardBrand | undefined;
+}) => {
+  const previewNumbers = getPreviewCardNumbers(cardNumbers, brand);
   return (
     <>
-      {INPUT_FORMAT.map((_, i) => (
-        <span key={`card-number-${i}`} className={styles.cardNumberSection}>
-          {i >= 2 ? STAR.repeat(cardNumbers[i]?.length ?? 0) : (cardNumbers[i] ?? '')}
+      {previewNumbers.map((number, index) => (
+        <span key={`card-number-${index}`} className={styles.cardNumberSection}>
+          {number}
         </span>
       ))}
     </>
@@ -32,8 +36,12 @@ const CardNumber = ({ cardNumbers, brand }: { cardNumbers: string[]; brand: Bran
 };
 
 export const CardPreview = ({ info }: CardPreviewProps) => {
-  const { cardNumbers, expiryDate, brand, bank } = info;
-  const brandImg = BRAND_SVG_MAP[brand];
+  const { numbers, expiryDate, bank } = info;
+
+  const cardNumbers = numbers.join('');
+  const brand = getCardBrand(cardNumbers);
+  const brandImg = brand !== undefined ? BRAND_SVG_MAP[brand] : '';
+
   const bankClassName = bank !== undefined ? BANK_RULES[bank].className : '';
 
   return (

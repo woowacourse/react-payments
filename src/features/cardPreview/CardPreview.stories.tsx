@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { CardPreview } from './CardPreview';
-import { BRAND } from '@/entities/card/model/brand';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -15,9 +14,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     info: {
-      brand: BRAND.UNKNOWN,
       bank: undefined,
-      cardNumbers: ['1234', '5678', '0000', '0000'],
+      numbers: ['1234', '5678', '0000', '0000'],
       expiryDate: { month: '04', year: '28' },
     },
   },
