@@ -2,6 +2,7 @@ import { http, HttpResponse } from "msw";
 import { BASE_URL } from "../constants";
 import type { PostCardRequestBody } from "../feature/CardRegister/api/card";
 import type { CardItemInformation } from "../feature/CardListPage/components/Success/CardItem/CardItem";
+import { CARD } from "../feature/CardRegister/constants";
 
 const cards: CardItemInformation[] = [];
 
@@ -24,6 +25,36 @@ const postCardHandler = http.post(`${BASE_URL}/cards`, async ({ request }) => {
     ...body,
   };
 
+  if (!validateCardBrand(body.number)) {
+    return HttpResponse.json(
+      {
+        code: "INVALID_CARD_NUMBER",
+        message: "유효하지 않은 카드 번호입니다.",
+      },
+      { status: 400 },
+    );
+  }
+
+  if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(body.expirationDate)) {
+    return HttpResponse.json(
+      {
+        code: "INVALID_EXPIRATION_DATE",
+        message: "유효하지 않은 만료일입니다.",
+      },
+      { status: 400 },
+    );
+  }
+
+  if (body.cvc === "000") {
+    return HttpResponse.json(
+      {
+        code: "INVALID_CVC",
+        message: "유효하지 않은 CVC입니다.",
+      },
+      { status: 400 },
+    );
+  }
+
   cards.push(card);
   // todo
   // 검증 로직에 따라 다른 에러처리 필요
@@ -34,6 +65,7 @@ const deleteCardHandler = http.delete(
   `${BASE_URL}/cards/:id`,
   async ({ params }) => {
     const { id } = params;
+
     const targetIndex = cards.findIndex((card) => card.id === id);
     if (targetIndex > -1) {
       cards.splice(targetIndex, 1);
@@ -48,3 +80,73 @@ export const handlers = [
   postCardHandler,
   deleteCardHandler,
 ];
+
+const validateCardBrand = (cardNumbers: string) => {
+  const masterCardPrefix = Number(
+    cardNumbers.slice(0, CARD.MASTERCARD.PREFIX.LENGTH),
+  );
+  const unionPayFirstPrefix = Number(
+    cardNumbers.slice(0, CARD.UNION_PAY.FIRST_PREFIX.LENGTH),
+  );
+  const unionPaySecondPrefix = Number(
+    cardNumbers.slice(0, CARD.UNION_PAY.SECOND_PREFIX.LENGTH),
+  );
+  const unionPayThirdPrefix = Number(
+    cardNumbers.slice(0, CARD.UNION_PAY.THIRD_PREFIX.LENGTH),
+  );
+
+  if (
+    cardNumbers.startsWith(CARD.VISA.PREFIX) &&
+    cardNumbers.length === CARD.VISA.LENGTH
+  ) {
+    return true;
+  }
+
+  if (
+    masterCardPrefix >= CARD.MASTERCARD.PREFIX.MIN &&
+    masterCardPrefix <= CARD.MASTERCARD.PREFIX.MAX &&
+    cardNumbers.length === CARD.MASTERCARD.LENGTH
+  ) {
+    return true;
+  }
+
+  if (
+    cardNumbers.startsWith(CARD.DINER.PREFIX) &&
+    cardNumbers.length === CARD.DINER.LENGTH
+  ) {
+    return true;
+  }
+
+  if (
+    CARD.AMEX.PREFIX.some((prefix) => cardNumbers.startsWith(prefix)) &&
+    cardNumbers.length === CARD.AMEX.LENGTH
+  ) {
+    return true;
+  }
+
+  if (
+    unionPayFirstPrefix >= CARD.UNION_PAY.FIRST_PREFIX.MIN &&
+    unionPayFirstPrefix <= CARD.UNION_PAY.FIRST_PREFIX.MAX &&
+    cardNumbers.length === CARD.UNION_PAY.LENGTH
+  ) {
+    return true;
+  }
+
+  if (
+    unionPaySecondPrefix >= CARD.UNION_PAY.SECOND_PREFIX.MIN &&
+    unionPaySecondPrefix <= CARD.UNION_PAY.SECOND_PREFIX.MAX &&
+    cardNumbers.length === CARD.UNION_PAY.LENGTH
+  ) {
+    return true;
+  }
+
+  if (
+    unionPayThirdPrefix >= CARD.UNION_PAY.THIRD_PREFIX.MIN &&
+    unionPayThirdPrefix <= CARD.UNION_PAY.THIRD_PREFIX.MAX &&
+    cardNumbers.length === CARD.UNION_PAY.LENGTH
+  ) {
+    return true;
+  }
+
+  return false;
+};
