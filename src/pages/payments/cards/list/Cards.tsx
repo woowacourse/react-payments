@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router';
+
 import { Title } from '@/core/components/title';
 import { ContentBox } from '@/core/components/contentBox';
 import { SymbolInfo } from '@/core/components/symbolInfo';
@@ -32,6 +34,12 @@ const formatCardNumberForMasking = (maskedNumber: string, mask: string = '*'): s
 
 export const Cards = () => {
   const { status, data: cards } = useCards();
+
+  const navigate = useNavigate();
+
+  const handleGoToRegiterCard = () => {
+    navigate('/payments/register');
+  };
 
   if (status === 'loading')
     return (
@@ -71,7 +79,7 @@ export const Cards = () => {
           symbol="info"
           description="아래 버튼을 눌러 첫 카드를 등록해보세요"
           action={
-            <Button variant="primary" block>
+            <Button variant="primary" block onClick={handleGoToRegiterCard}>
               + 카드 추가하기
             </Button>
           }
@@ -100,7 +108,7 @@ export const Cards = () => {
           );
         })}
       </List>
-      <Button variant="placeholder" block>
+      <Button variant="placeholder" block onClick={handleGoToRegiterCard}>
         + 카드 추가
       </Button>
     </ContentBox>
