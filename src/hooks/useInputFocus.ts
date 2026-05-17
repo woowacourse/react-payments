@@ -3,8 +3,12 @@ import { useRef } from 'react';
 export default function useInputFocus(count: number) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(count).fill(null));
 
-  const setRef = (index: number) => (el: HTMLInputElement | null) => {
+  const setRef = (index: number, externalRef?: React.Ref<HTMLInputElement>) => (el: HTMLInputElement | null) => {
     inputRefs.current[index] = el;
+    if (externalRef) {
+      if (typeof externalRef === 'function') externalRef(el);
+      else (externalRef as React.RefObject<HTMLInputElement | null>).current = el;
+    }
   };
 
   const focusNext = (index: number) => {
