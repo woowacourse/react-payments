@@ -12,7 +12,7 @@ export default function DeleteCardButton({ id, onDelete }: Props) {
   };
   return (
     <div>
-      <img src="/x.svg" onClick={handleClick} />
+      <img src={`${import.meta.env.BASE_URL}X.svg`} onClick={handleClick} />
     </div>
   );
 }

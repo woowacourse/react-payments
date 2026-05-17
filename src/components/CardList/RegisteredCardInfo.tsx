@@ -11,7 +11,7 @@ interface Props {
 export default function RegisteredCardInfo({ card, onDelete }: Props) {
   return (
     <Container>
-      <CardFirmColorBox color={CARD_COLORS[card.cardFrimLabel] ?? "#e0e0e0"} />
+      <CardFirmColorBox $color={CARD_COLORS[card.cardFrimLabel] ?? "#e0e0e0"} />
       <CardInfoContainer>
         <CardFirm>{card.cardFrimLabel}</CardFirm>
         <CardNumberPreview>
@@ -26,8 +26,8 @@ export default function RegisteredCardInfo({ card, onDelete }: Props) {
   );
 }
 
-const CardFirmColorBox = styled.div<{ color: string }>`
-  background-color: ${({ color }) => color};
+const CardFirmColorBox = styled.div<{ $color: string }>`
+  background-color: ${({ $color }) => $color};
   width: 64px;
   height: 40px;
   border-radius: 4px;
@@ -54,16 +54,19 @@ const CardFirm = styled.p`
   font-size: 14px;
   font-family: sans-serif;
   font-weight: bold;
+  margin: 2px;
 `;
 
 const CardNumberPreview = styled.p`
   font-size: 11px;
   font-family: sans-serif;
   color: #8c8c8c;
+  margin: 2px;
 `;
 
 const CardExpPreview = styled.p`
   font-size: 9.5px;
   font-family: sans-serif;
   color: #8c8c8c;
+  margin: 2px;
 `;

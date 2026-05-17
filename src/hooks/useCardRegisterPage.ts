@@ -58,10 +58,19 @@ export default function useCardRegisterPage() {
   };
 
   //완료 페이지 이동
-  const handleComplete = () => {
-    navigate("/complete", {
-      state: { first: cardNumbers.first, cardFirmLabel: cardFirm.label },
+  const handleComplete = async () => {
+    await fetch("/cards", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        first: cardNumbers.first,
+        fourth: cardNumbers.fourth,
+        cardFrimLabel: cardFirm.label,
+        expMm: expNumbers.mm,
+        expYy: expNumbers.yy,
+      }),
     });
+    navigate("/cards");
   };
 
   return {

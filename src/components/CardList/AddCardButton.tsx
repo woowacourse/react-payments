@@ -6,8 +6,10 @@ export default function AddCardButton() {
 }
 
 const Button = styled.button`
+  width: 320px;
   height: 40px;
   border-radius: 5px;
+  box-sizing: border-box;
   border: 1px;
   padding: 12px 16px;
   font-size: 13px;
