@@ -5,7 +5,7 @@ const EXP_MONTH_LENGTH_ERROR_MESSAGE =
 const EXP_YEAR_LENGTH_ERROR_MESSAGE =
   "유효기간 연도는 2개의 숫자로 이루어져야 합니다.";
 
-export const getEXPNumberErrorMessage = (values: {
+export const getExpNumberErrorMessage = (values: {
   mm: string;
   yy: string;
 }): { message: string; key: "mm" | "yy" } | null => {

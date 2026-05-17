@@ -1,18 +1,36 @@
 import styled from "@emotion/styled";
-import { getCardBrand } from "../../utils/getCardBrand";
 import Mastercard from "../../../public/Mastercard.svg";
 import Visa from "../../../public/Visa.svg";
+import Diners from "../../../public/Diners.svg";
+import Amex from "../../../public/Amex.svg";
+import Union from "../../../public/UnionPay.svg";
+import { CARD_COLORS } from "../../constants/cardConstants";
 
 interface Props {
   cardNumbers: { first: string; second: string; third: string; fourth: string };
   EXP: { mm: string; yy: string };
+  cardFirm: { value: string; label: string };
+  cardBrand: "visa" | "master" | "diners" | "amex" | "unionpay" | null;
 }
-const BRAND_LOGO = { visa: Visa, master: Mastercard };
 
-export default function CardPreview({ cardNumbers, EXP }: Props) {
-  const cardBrand = getCardBrand(cardNumbers);
+const BRAND_LOGO = {
+  visa: Visa,
+  master: Mastercard,
+  diners: Diners,
+  amex: Amex,
+  unionpay: Union,
+};
+
+export default function CardPreview({
+  cardNumbers,
+  EXP,
+  cardFirm,
+  cardBrand,
+}: Props) {
+  const cardColor = CARD_COLORS[cardFirm.value] ?? "#333333";
+
   return (
-    <CardPreviewContainer>
+    <CardPreviewContainer cardColor={cardColor}>
       <IcChip />
       <CardBrandLogo>
         {cardBrand && <CardBrandImage src={BRAND_LOGO[cardBrand]} />}
@@ -39,12 +57,12 @@ export default function CardPreview({ cardNumbers, EXP }: Props) {
   );
 }
 
-const CardPreviewContainer = styled.div`
+const CardPreviewContainer = styled.div<{ cardColor: string }>`
   width: 212px;
   height: 132px;
   position: relative;
   border-radius: 4px;
-  background-color: #333333;
+  background-color: ${({ cardColor }) => cardColor};
   box-shadow: 3px 3px 5px 0px #00000040;
 `;
 

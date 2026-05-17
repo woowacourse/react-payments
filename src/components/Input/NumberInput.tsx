@@ -2,12 +2,13 @@ import styled from "@emotion/styled";
 
 interface Props extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  "onChange" | "type" | "onError"
+  "onChange" | "onError"
 > {
   value: string;
-  setValue: (value: string) => void;
+  onChange: (value: string) => void;
   onError: (message: string | null) => void;
   hasError: boolean;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 interface InputStyleProps {
@@ -15,9 +16,10 @@ interface InputStyleProps {
 }
 
 export default function NumberInput({
-  setValue,
+  onChange,
   onError,
   hasError,
+  ref,
   ...props
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,9 +31,8 @@ export default function NumberInput({
       onError("숫자만 입력할 수 있습니다.");
       return;
     }
-
-    setValue(tmpValue);
     onError(null);
+    onChange(tmpValue);
   };
 
   return (
@@ -40,6 +41,7 @@ export default function NumberInput({
       type="text"
       inputMode="numeric"
       onChange={(e) => handleInputChange(e)}
+      {...(ref ? { ref } : {})}
       {...props}
     />
   );
