@@ -7,23 +7,31 @@ import FieldSection from './FieldSection';
 import SelectCardBrandField from './SelectCardBrandField';
 import PasswordField from './PasswordField';
 import Button from '../../../../common/components/Button';
-import type { CardFormFieldsType } from '../../hooks/useCardForm';
+import type {
+  CardFormFieldsType,
+  ServerFieldErrors,
+} from '../../hooks/useCardForm';
 
 const InfoInputSection = ({
   fields,
   cardFormInfo,
   currentStep,
   hasFormError,
+  clearServerFieldError,
+  serverFieldErrors,
   onRegisterComplete,
 }: {
   fields: CardFormFieldsType;
   cardFormInfo: CardFormInfoType;
   currentStep: number;
   hasFormError: boolean;
+  clearServerFieldError: (fieldName: string) => void;
+  serverFieldErrors?: ServerFieldErrors;
   onRegisterComplete: (cardFormInfo: CardFormInfoType) => void;
 }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     onRegisterComplete(cardFormInfo);
   };
 
@@ -40,7 +48,12 @@ const InfoInputSection = ({
         )}
         {currentStep >= 3 && (
           <FieldSection title="CVC 번호를 입력해 주세요">
-            <CvcField autoFocus field={fields.cvc} />
+            <CvcField
+              autoFocus
+              field={fields.cvc}
+              serverFieldError={serverFieldErrors.cvc}
+              onClearServerFieldError={() => clearServerFieldError('cvc')}
+            />
           </FieldSection>
         )}
         {currentStep >= 2 && (
@@ -48,7 +61,14 @@ const InfoInputSection = ({
             title="카드 유효기간을 입력해 주세요"
             description="월/년도(MMYY)를 순서대로 입력해 주세요."
           >
-            <ExpiryField autoFocus field={fields.expiry} />
+            <ExpiryField
+              autoFocus
+              field={fields.expiry}
+              serverFieldError={serverFieldErrors.expirationDate}
+              onClearServerFieldError={() =>
+                clearServerFieldError('expirationDate')
+              }
+            />
           </FieldSection>
         )}
         {currentStep >= 1 && (
@@ -63,7 +83,12 @@ const InfoInputSection = ({
           title="결제할 카드 번호를 입력해 주세요"
           description="본인 명의의 카드만 결제 가능합니다."
         >
-          <NumberField autoFocus field={fields.numbers} />
+          <NumberField
+            autoFocus
+            field={fields.numbers}
+            serverFieldError={serverFieldErrors.cardNumber}
+            onClearServerFieldError={() => clearServerFieldError('cardNumber')}
+          />
         </FieldSection>
       </FieldsWrapper>
 

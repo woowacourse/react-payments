@@ -21,6 +21,12 @@ export type CardFormFieldsType = {
   cardCompany: CardCompanyFieldType;
 };
 
+export type ServerFieldErrors = {
+  cardNumber?: string;
+  expirationDate?: string;
+  cvc?: string;
+};
+
 const CARD_FORM_STEP = {
   CARD_NUMBER: 0,
   CARD_COMPANY: 1,
@@ -54,6 +60,16 @@ export const useCardForm = () => {
     onComplete: () => advanceStep(CARD_FORM_STEP.SUBMIT),
   });
 
+  const [serverFieldErrors, setServerFieldErrors] = useState<ServerFieldErrors>(
+    {},
+  );
+  const clearServerFieldError = (fieldName: keyof ServerFieldErrors) => {
+    setServerFieldErrors((prev) => ({
+      ...prev,
+      [fieldName]: undefined,
+    }));
+  };
+
   const fields = {
     numbers: numbersField,
     cardCompany: cardCompanyField,
@@ -85,5 +101,8 @@ export const useCardForm = () => {
     cardFormInfo,
     currentStep,
     hasFormError,
+    serverFieldErrors,
+    setServerFieldErrors,
+    clearServerFieldError,
   };
 };

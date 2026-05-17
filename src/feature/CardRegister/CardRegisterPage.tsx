@@ -4,17 +4,41 @@ import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import { useNavigate } from 'react-router-dom';
 import { useCardForm } from './hooks/useCardForm';
 import type { CardFormInfoType } from '../../domain/card/types/card';
+import { postCard } from '../../api/cards';
+
+const SERVER_ERROR_FIELD_MAP = {
+  INVALID_CARD_NUMBER: 'cardNumber',
+  INVALID_EXPIRATION_DATE: 'expirationDate',
+  INVALID_CVC: 'cvc',
+} as const;
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
 
-  const { fields, cardPreviewInfo, cardFormInfo, currentStep, hasFormError } =
-    useCardForm();
+  const {
+    fields,
+    cardPreviewInfo,
+    cardFormInfo,
+    currentStep,
+    hasFormError,
+    serverFieldErrors,
+    setServerFieldErrors,
+    clearServerFieldError,
+  } = useCardForm();
 
-  const handleRegisterComplete = (cardFormInfo: CardFormInfoType) => {
-    navigate('/complete', {
-      state: cardFormInfo,
-    });
+  const handleRegisterComplete = async (cardFormInfo: CardFormInfoType) => {
+    try {
+      setServerFieldErrors({});
+      await postCard(cardFormInfo);
+
+      navigate('/cards', {
+        state: cardFormInfo,
+      });
+    } catch (error) {
+      setServerFieldErrors({
+        [SERVER_ERROR_FIELD_MAP[error.code]]: error.message,
+      });
+    }
   };
 
   return (
@@ -26,6 +50,8 @@ const CardRegisterPage = () => {
           cardFormInfo={cardFormInfo}
           currentStep={currentStep}
           hasFormError={hasFormError}
+          serverFieldErrors={serverFieldErrors}
+          clearServerFieldError={clearServerFieldError}
           onRegisterComplete={handleRegisterComplete}
         />
       </Container>

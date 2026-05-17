@@ -6,9 +6,13 @@ import type { NumbersFieldType } from '../../hooks/useNumbersField';
 const NumberField = ({
   autoFocus = false,
   field,
+  serverFieldError = '',
+  onClearServerFieldError,
 }: {
   autoFocus?: boolean;
   field: NumbersFieldType;
+  serverFieldError?: string;
+  onClearServerFieldError: () => void;
 }) => {
   return (
     <StyledField>
@@ -24,14 +28,17 @@ const NumberField = ({
             inputMode="numeric"
             maxLength={field.segmentLengths[index]}
             strokeMode={index === field.firstErrorIndex ? 'error' : 'default'}
-            onChange={(e) => field.handleNumbersChange(index, e.target.value)}
+            onChange={(e) => {
+              field.handleNumbersChange(index, e.target.value);
+              onClearServerFieldError();
+            }}
             onBlur={() => field.handleNumbersBlur(index)}
             onKeyDown={(event) => field.handleKeyDown(index, event)}
           />
         ))}
       </InputWrapper>
 
-      <ErrorMessage>{field.errorMessage}</ErrorMessage>
+      <ErrorMessage>{field.errorMessage || serverFieldError}</ErrorMessage>
     </StyledField>
   );
 };
