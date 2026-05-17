@@ -1,18 +1,19 @@
 import { http, HttpResponse } from 'msw';
 import { cards } from '../../datas/cards.ts';
-import type { Card } from '../../datas/cards.type.ts';
-import { categorizeCardBrand } from '../../../utils.ts';
+import { categorizeCardBrand, chunkString } from '../../../utils.ts';
+import type { SCard } from '../../datas/cards.type.ts';
 
-interface CreateCardRequest {
+export interface SCreateCardRequest {
+  issuerCode: string;
   number: string;
   expirationDate: string;
   cvc: string;
-  issuerCode: string;
 }
+export type SCreateCardResponse = Pick<SCard, 'id'>;
 
 // TODO: body type에 대한 검증/에러처리 필요할지
 export const handler = http.post(`${import.meta.env.BASE_URL}cards`, async ({ request }) => {
-  const body = (await request.json()) as CreateCardRequest;
+  const body = (await request.json()) as SCreateCardRequest;
 
   if (!validateCardNumber(body.number)) {
     return HttpResponse.json(
@@ -64,16 +65,17 @@ const validateExpirationMonth = (expirationDate: string) => {
   return Number(month) >= 1 && Number(month) <= 12;
 };
 
-const createCard = (request: CreateCardRequest) => {
+const createCard = (request: SCreateCardRequest) => {
   const card = createCardFromRequest(request);
   cards.push(card);
 };
 
-const createCardFromRequest = (request: CreateCardRequest): Card => {
+const createCardFromRequest = (request: SCreateCardRequest): SCard => {
   return {
     id: crypto.randomUUID(),
     issuerCode: request.issuerCode,
     number: request.number,
     expirationDate: request.expirationDate,
+    cvc: request.cvc,
   };
 };
