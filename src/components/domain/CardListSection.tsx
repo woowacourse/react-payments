@@ -11,7 +11,7 @@ import type { CardList as CardListType } from '../../apis/cards/type.ts';
 
 type ResponseStatus = 'idle' | 'loading' | 'success' | 'error';
 
-export default function CardListPage() {
+export default function CardListSection() {
   const [cards, setCards] = useState<CardListType>([]);
   const [responseStatus, setResponseStatus] = useState<ResponseStatus>('idle');
   const cardCount = cards.length;
