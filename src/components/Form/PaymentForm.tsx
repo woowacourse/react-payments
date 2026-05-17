@@ -114,8 +114,6 @@ export default function PaymentForm() {
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!e.target.value) return;
-
     navigate('/registration/completion', {
       state: {
         prefix: cardNumbers[0],
