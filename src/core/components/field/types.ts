@@ -1,7 +1,9 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, ComponentProps } from 'react';
 
-export interface FieldProps {
+interface FieldOwnProps {
   label?: string;
   children?: ReactNode;
-  errorMessage?: string;
+  errorMessage?: ReactNode;
 }
+
+export interface FieldProps extends Omit<ComponentProps<'div'>, keyof FieldOwnProps>, FieldOwnProps {}

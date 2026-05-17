@@ -1,9 +1,9 @@
 import './core/styles/index.css';
 
-import { Payments } from './pages/payments';
+import { AppRoutes } from './routes';
 
 function App() {
-  return <Payments />;
+  return <AppRoutes />;
 }
 
 export default App;

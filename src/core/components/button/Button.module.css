@@ -1,0 +1,47 @@
+.button {
+  display: inline-block;
+  border: 1px solid transparent;
+  background: transparent;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+.variant-default {
+  color: #353C49;
+}
+
+.variant-primary {
+  background: #333333;
+  color: #ffffff;
+}
+
+.edge-rounded {
+  border-radius: 5px;
+}
+
+.edge-flat {
+  border-radius: 0;  
+}
+
+.size-normal {
+  height: 44px;
+
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.size-large {
+  height: 52px;
+
+  padding: 16px 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.is-block {
+  width: 100%;
+}

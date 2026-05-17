@@ -9,6 +9,10 @@
   border: none;
 }
 
+.hide {
+  height: 0; padding: 0; overflow: hidden;
+}
+
 .titleContainer {
   display: flex;
   align-content: space-between;
