@@ -13,6 +13,7 @@ import {
   type CardFormState,
   type CardNumberSegments,
 } from "../../types";
+import { validateMonth, validateYear } from "../../utils/validators";
 
 const Title = styled.h3`
   font-size: 18px;
@@ -67,8 +68,8 @@ function CardForm(props: CardFormProps) {
 
   const isCardCompanySelected = !!props.formState.cardCompany;
   const isExpiryComplete =
-    props.formState.expiryMonth.length === 2 &&
-    props.formState.expiryYear.length === 2;
+    validateMonth(props.formState.expiryMonth) &&
+    validateYear(props.formState.expiryYear);
   const isCvcComplete = props.formState.cvc.length === 3;
 
   const cardCompanyRef = useRef<HTMLDivElement>(null);

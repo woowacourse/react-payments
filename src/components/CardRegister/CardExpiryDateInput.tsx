@@ -1,9 +1,10 @@
-import { forwardRef, useRef, type ChangeEvent } from "react";
+import { forwardRef, useEffect, useRef, type ChangeEvent } from "react";
 import type { CardFormState } from "../../types";
 import Flex from "../Common/Flex";
 import Label from "../Common/Label";
 import ValidationInput from "../Common/ValidationInput";
 import { expiryDateValidations } from "../../utils/validationRules";
+import { validateMonth } from "../../utils/validators";
 
 interface CardExpiryDateInputProps {
   value: Pick<CardFormState, "expiryMonth" | "expiryYear">;
@@ -16,11 +17,14 @@ const CardExpiryDateInput = forwardRef<
 >(function CardExpiryDateInput(props, ref) {
   const yearRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (props.value.expiryMonth.length === 2 && validateMonth(props.value.expiryMonth)) {
+      yearRef.current?.focus();
+    }
+  }, [props.value.expiryMonth]);
+
   const handleChangeMonth = (event: ChangeEvent<HTMLInputElement>) => {
     props.onChange([event.target.value, props.value.expiryYear]);
-    if (event.target.value.length === 2) {
-      setTimeout(() => yearRef.current?.focus(), 0);
-    }
   };
 
   const handleChangeYear = (event: ChangeEvent<HTMLInputElement>) => {
