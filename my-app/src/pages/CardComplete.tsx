@@ -1,13 +1,18 @@
 import { css } from "@emotion/react";
 import completeCheck from "../assets/completeCheck.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
 
 const CardComplete = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const numbers: string[] = state?.numbers ?? [];
-  const brand: string = state?.brand ?? "";
+  const numbers: string[] = state?.numbers;
+  const brand: string = state?.brand;
+
+  if (!numbers?.length || !brand) {
+    alert("카드 정보를 찾을 수 없습니다. 처음부터 다시 시도해주세요.");
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div
