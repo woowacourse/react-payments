@@ -16,6 +16,19 @@ const getCardNameByCard = (card: string) => {
   return current?.name;
 };
 
+const formatCardNumberForMasking = (maskedNumber: string, mask: string = '*'): string => {
+  const compact = maskedNumber.replace(/\s/g, '');
+
+  const visibleHead = compact.slice(0, 4);
+  const visibleTail = compact.slice(-4);
+
+  const maskLength = compact.length - visibleHead.length - visibleTail.length;
+
+  const displayNumber = `${visibleHead}${mask.repeat(maskLength)}${visibleTail}`;
+
+  return displayNumber.replace(/(.{4})/g, '$1 ').trim();
+};
+
 export const Cards = () => {
   const { status, data: cards } = useCards();
   return (
@@ -27,13 +40,14 @@ export const Cards = () => {
       <List>
         {cards?.map((card) => {
           const cardName = getCardNameByCard(card.card);
+          const maskedCardNumbers = formatCardNumberForMasking(card.cardNumbers);
           return (
             <List.Item
               key={card.id}
               left={<CreditCard size="small" />}
               right={<IconButton icon="close" />}
               title={cardName}
-              content={card.cardNumbers}
+              content={maskedCardNumbers}
               description={`${card.expirationDate.month}/${card.expirationDate.year}`}
             />
           );
