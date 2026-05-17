@@ -14,4 +14,5 @@ const Button = styled.button`
   padding: 12px 16px;
   font-size: 13px;
   font-family: sans-serif;
+  cursor: pointer;
 `;

@@ -26,22 +26,25 @@ export default function RegisteredCardInfo({ card, onDelete }: Props) {
   );
 }
 
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  width: 295px;
+  height: 73px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 12px;
+  gap: 12px;
+  margin: 0;
+`;
+
 const CardFirmColorBox = styled.div<{ $color: string }>`
   background-color: ${({ $color }) => $color};
   width: 64px;
   height: 40px;
   border-radius: 4px;
 `;
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  width: 320px;
-  height: 73px;
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
-  padding: 12px;
-  gap: 12px;
-`;
+
 const CardInfoContainer = styled.div`
   display: flex;
   flex-direction: column;

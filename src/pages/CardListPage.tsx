@@ -45,7 +45,7 @@ export default function CardListPage() {
   }, []);
 
   return (
-    <div>
+    <Container>
       <HavingCard>
         보유 카드{" "}
         {state.status === "success" &&
@@ -65,12 +65,27 @@ export default function CardListPage() {
       {state.status === "success" && state.data.length > 0 && (
         <CardList cards={state.data} onDelete={fetchCards} />
       )}
-    </div>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  width: 376px;
+  height: 700px;
+  gap: 16px;
+  border: 0.5px solid #e0e0e0;
+  box-sizing: border-box;
+  padding: 40px 28px 32px 28px;
+`;
 const HavingCard = styled.p`
   font-size: 18px;
   font-weight: 700;
   font-family: sans-serif;
+  margin: 0;
 `;
