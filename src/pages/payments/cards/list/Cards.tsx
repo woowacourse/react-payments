@@ -7,6 +7,15 @@ import { Button } from '@/core/components/button';
 
 import { useCards } from './hooks/useCards';
 
+import { ISSUER_CODE } from './constants';
+
+const getCardNameByCard = (card: string) => {
+  const current = Object.values(ISSUER_CODE).find((cardInfo) => {
+    return cardInfo.card === card;
+  });
+  return current?.name;
+};
+
 export const Cards = () => {
   const { status, data: cards } = useCards();
   return (
@@ -17,12 +26,13 @@ export const Cards = () => {
       {status === 'success' && !cards.length && <div>no data</div>}
       <List>
         {cards?.map((card) => {
+          const cardName = getCardNameByCard(card.card);
           return (
             <List.Item
               key={card.id}
               left={<CreditCard size="small" />}
               right={<IconButton icon="close" />}
-              title={card.card}
+              title={cardName}
               content={card.cardNumbers}
               description={`${card.expirationDate.month}/${card.expirationDate.year}`}
             />
