@@ -17,6 +17,7 @@ import useFormStep from "@/hooks/useFormStep";
 import { ADD_CARD_FORM_STEP } from "@/constants/cardForm";
 import { useNavigate } from "react-router";
 import { ROUTE_PATH } from "@/constants/routes";
+import PageLayout from "@/components/common/PageLayout";
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
@@ -55,60 +56,63 @@ const AddNewCardPage = () => {
   };
 
   return (
-    <PageWrapper>
-      <CardWrapper>
-        <Card
-          cardNumberUnits={cardNumber}
-          cardCompany={cardCompany}
-          validityPeriod={validityPeriod}
-        />
-      </CardWrapper>
-      <CardInfoForm onSubmit={handleCardFormSubmit}>
-        {isStepVisible("PASSWORD") && (
-          <CardPasswordInputField password={password} onChange={setPassword} />
-        )}
-        {isStepVisible("CVC") && (
-          <CardCVCInputField
-            CVC={CVC}
-            onChange={setCVC}
-            onNextStep={goToNextStep}
-          />
-        )}
-        {isStepVisible("VALIDITY_PERIOD") && (
-          <CardValidityPeriodInputField
-            validityPeriod={validityPeriod}
-            onChange={setValidityPeriod}
-            onNextStep={goToNextStep}
-          />
-        )}
-        {isStepVisible("COMPANY") && (
-          <CardCompanySelector
-            cardCompany={cardCompany}
-            onSelect={setCardCompany}
-            onNextStep={goToNextStep}
-          />
-        )}
-        {isStepVisible("CARD_NUMBER") && (
-          <CardNumberInputField
+    <PageLayout>
+      <PageWrapper>
+        <CardWrapper>
+          <Card
             cardNumberUnits={cardNumber}
-            onChange={setCardNumber}
-            onNextStep={goToNextStep}
+            cardCompany={cardCompany}
+            validityPeriod={validityPeriod}
           />
-        )}
+        </CardWrapper>
+        <CardInfoForm onSubmit={handleCardFormSubmit}>
+          {isStepVisible("PASSWORD") && (
+            <CardPasswordInputField
+              password={password}
+              onChange={setPassword}
+            />
+          )}
+          {isStepVisible("CVC") && (
+            <CardCVCInputField
+              CVC={CVC}
+              onChange={setCVC}
+              onNextStep={goToNextStep}
+            />
+          )}
+          {isStepVisible("VALIDITY_PERIOD") && (
+            <CardValidityPeriodInputField
+              validityPeriod={validityPeriod}
+              onChange={setValidityPeriod}
+              onNextStep={goToNextStep}
+            />
+          )}
+          {isStepVisible("COMPANY") && (
+            <CardCompanySelector
+              cardCompany={cardCompany}
+              onSelect={setCardCompany}
+              onNextStep={goToNextStep}
+            />
+          )}
+          {isStepVisible("CARD_NUMBER") && (
+            <CardNumberInputField
+              cardNumberUnits={cardNumber}
+              onChange={setCardNumber}
+              onNextStep={goToNextStep}
+            />
+          )}
 
-        {isFormValid && (
-          <Button type="submit" fixedBottom>
-            확인
-          </Button>
-        )}
-      </CardInfoForm>
-    </PageWrapper>
+          {isFormValid && (
+            <Button type="submit" fixedBottom>
+              확인
+            </Button>
+          )}
+        </CardInfoForm>
+      </PageWrapper>
+    </PageLayout>
   );
 };
 
 const PageWrapper = styled.div`
-  max-width: 23rem;
-  margin-inline: auto;
   padding-bottom: 4rem;
 `;
 
