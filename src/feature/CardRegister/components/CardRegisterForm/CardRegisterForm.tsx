@@ -27,6 +27,8 @@ import {
 import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
 import BaseButton from "../../../../common/components/Button/BaseButton";
+import { fetchCardRegister, type PostCardRequestBody } from "../../api/card";
+import { getIssuerCodeByCompanyName } from "../../utils/cardCompany";
 
 const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
   const cardBrand = getCardBrandName(cardInfo.cardNumbers);
@@ -162,18 +164,31 @@ const CardRegisterForm = ({
   };
   const isFormInputComplete = Object.values(fieldValidity).every(Boolean);
 
-  const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleCardInfoSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isFormInputComplete) {
       return;
     }
 
-    navigate("/register/complete", {
-      state: {
-        firstCardNumberChunk: cardNumbers[0],
-        cardCompany: selectedCardCompany,
-      },
-    });
+    const issuerCode = getIssuerCodeByCompanyName(selectedCardCompany);
+    if (!issuerCode) {
+      return;
+    }
+
+    const postCardInformation: PostCardRequestBody = {
+      number: cardInfo.cardNumbers.join(),
+      expirationDate: `${cardInfo.expiryMonth}/${cardInfo.expiryYear}`,
+      cvc: cardInputSectionInformation.cvcNumber,
+      issuerCode: issuerCode,
+    };
+
+    try {
+      const id = await fetchCardRegister(postCardInformation);
+    } catch (error) {
+      alert((error as Error).message);
+    }
+
+    navigate("/cards");
   };
 
   return (
