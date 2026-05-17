@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const CardListSkeleton = () => {
   return (
@@ -21,6 +21,16 @@ const CardListSkeleton = () => {
   );
 };
 
+const shimmer = keyframes`
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,7 +51,31 @@ const SkeletonItem = styled.div`
   padding: 18px 20px;
 
   border: 1px solid #e6e6e6;
-  border-radius: 6px;
+  border-radius: 3px;
+
+  position: relative;
+
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #ffffff;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    padding: 0%.5px;
+    border-radius: inherit;
+
+    background: linear-gradient(90deg, #f6f6f6 0%, #e8e8e8 50%, #f6f6f6 100%);
+    background-size: 200% 100%;
+    animation: ${shimmer} 1s ease-in-out infinite;
+
+    mask: linear-gradient(#ffffff 0 0) content-box, linear-gradient(#ffffff 0 0);
+    mask-composite: exclude;
+
+    pointer-events: none;
+  }
 `;
 
 const SkeletonInfoGroup = styled.div`
@@ -56,7 +90,9 @@ const SkeletonColorBox = styled.div`
 
   border-radius: 4px;
 
-  background-color: #ebebeb;
+  background: linear-gradient(90deg, #f6f6f6 0%, #e8e8e8 50%, #f6f6f6 100%);
+  background-size: 200% 100%;
+  animation: ${shimmer} 1s ease-in-out infinite;
 `;
 
 const SkeletonTextGroup = styled.div`
@@ -72,17 +108,21 @@ const SkeletonLine = styled.span<{ $width: string; $height: string }>`
 
   border-radius: 3px;
 
-  background-color: #ebebeb;
+  background: linear-gradient(90deg, #f6f6f6 0%, #e8e8e8 50%, #f6f6f6 100%);
+  background-size: 200% 100%;
+  animation: ${shimmer} 1s ease-in-out infinite;
 `;
 
 const SkeletonAddButton = styled.div`
   width: 100%;
   height: 40px;
 
-  background-color: #f7f7f7;
-
   border: 1px dashed #f0f0f0;
   border-radius: 4px;
+
+  background: linear-gradient(90deg, #f6f6f6 0%, #e8e8e8 50%, #f6f6f6 100%);
+  background-size: 200% 100%;
+  animation: ${shimmer} 1s ease-in-out infinite;
 `;
 
 export default CardListSkeleton;

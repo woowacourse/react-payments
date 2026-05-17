@@ -26,7 +26,7 @@ const cards: Card[] = [
 export const cardHandlers = [
   // GET 요청 모킹
   http.get('/cards', async () => {
-    await delay(1000);
+    await delay(2000);
 
     return HttpResponse.json(cards);
     // return HttpResponse.json(
