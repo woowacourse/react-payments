@@ -72,7 +72,6 @@ export default function CardNumbersField({
     updateErrorStatuses(index, validate(validationRules, 'onBlur', e.target.value) as ErrorStatus);
   };
 
-  const totalError = errorStatuses[4];
   const activeError = errorStatuses.find((e) => e !== null) ?? null;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
@@ -90,7 +89,7 @@ export default function CardNumbersField({
             <Input
               key={index}
               ref={setRef(index, index === 0 ? ref : undefined)}
-              variant={errorStatuses[index] !== null || totalError !== null ? 'error' : 'default'}
+              variant={errorStatuses[index] !== null ? 'error' : 'default'}
               value={number}
               type="text"
               inputMode="numeric"
