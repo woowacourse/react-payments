@@ -10,13 +10,16 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build && gh-pages -d dist"
+    "deploy": "vite build && gh-pages -d dist",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.15.0",
+    "react-select": "^5.10.2"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
@@ -39,7 +42,9 @@
     "eslint-plugin-storybook": "^10.3.5",
     "gh-pages": "^6.3.0",
     "globals": "^17.5.0",
+    "msw": "^2.14.5",
     "playwright": "^1.59.1",
+    "prettier": "^3.8.3",
     "storybook": "^10.3.5",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",

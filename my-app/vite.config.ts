@@ -13,12 +13,12 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   base: '/react-payments/',
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
   plugins: [
     react({
       jsxImportSource: '@emotion/react',
-      babel: {
-        plugins: ['@emotion/babel-plugin'],
-      },
     }),
   ],
   test: {
@@ -44,6 +44,15 @@ export default defineConfig({
               },
             ],
           },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          environment: 'node',
+          setupFiles: ['./vitest.setup.ts'],
+          include: ['test/**/*.{test,spec}.{ts,tsx}', 'src/**/*.{test,spec}.{ts,tsx}'],
         },
       },
     ],
