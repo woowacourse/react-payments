@@ -1,4 +1,5 @@
 import SkeletonCardSection from './SkeletonCardSection';
+import SkeletonBlock from './SkeletonBlock';
 
 export default function Skeleton() {
   return (
@@ -14,14 +15,7 @@ export default function Skeleton() {
       <SkeletonCardSection />
       <SkeletonCardSection />
       <SkeletonCardSection />
-      <div
-        css={(theme) => ({
-          width: '100%',
-          backgroundColor: theme.colors.loading,
-          height: '44px',
-          borderRadius: '5px',
-        })}
-      ></div>
+      <SkeletonBlock width="100%" height="44px" borderRadius="5px" />
     </div>
   );
 }

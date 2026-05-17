@@ -1,3 +1,5 @@
+import SkeletonBlock from './SkeletonBlock';
+
 export default function SkeletonCardSection() {
   return (
     <div
@@ -13,14 +15,7 @@ export default function SkeletonCardSection() {
         borderRadius: '5px',
       }}
     >
-      <div
-        css={(theme) => ({
-          width: '64px',
-          backgroundColor: theme.colors.loading,
-          height: '40px',
-          borderRadius: '4px',
-        })}
-      ></div>
+      <SkeletonBlock width="64px" height="40px" borderRadius="4px" />
       <div
         css={{
           display: 'flex',
@@ -29,30 +24,9 @@ export default function SkeletonCardSection() {
           height: '45px',
         }}
       >
-        <div
-          css={(theme) => ({
-            width: '80px',
-            backgroundColor: theme.colors.loading,
-            height: '14px',
-            borderRadius: '3px',
-          })}
-        ></div>
-        <div
-          css={(theme) => ({
-            width: '140px',
-            backgroundColor: theme.colors.loading,
-            height: '10px',
-            borderRadius: '3px',
-          })}
-        ></div>
-        <div
-          css={(theme) => ({
-            width: '60px',
-            backgroundColor: theme.colors.loading,
-            height: '9px',
-            borderRadius: '3px',
-          })}
-        ></div>
+        <SkeletonBlock width="80px" height="14px" borderRadius="3px" />
+        <SkeletonBlock width="140px" height="10px" borderRadius="3px" />
+        <SkeletonBlock width="60px" height="9px" borderRadius="3px" />
       </div>
     </div>
   );
