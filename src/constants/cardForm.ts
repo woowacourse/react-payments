@@ -21,7 +21,7 @@ export const CARD_REGISTER_FORM_STEP = {
   },
 } as const;
 
-export type AddCardFormStepKey = keyof typeof CARD_REGISTER_FORM_STEP;
+export type CardRegisterFormStepKey = keyof typeof CARD_REGISTER_FORM_STEP;
 
 export const CARD_FIELD_LENGTH = {
   CVC: 3,

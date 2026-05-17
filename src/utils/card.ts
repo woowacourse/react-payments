@@ -4,8 +4,8 @@ import {
   type CardBrand,
   type PrefixRange,
 } from "@/constants/cardBrands";
-import type { ValidityPeriod } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
-import type { CardNumberUnits } from "@/components/CardNumberInputField/CardNumberInputField";
+import type { ValidityPeriod } from "@/components/CardRegister/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import type { CardNumberUnits } from "@/components/CardRegister/CardNumberInputField/CardNumberInputField";
 
 export const detectCardBrand = (
   cardNumber: CardNumberUnits,

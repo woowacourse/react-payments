@@ -1,13 +1,13 @@
-import Card from "@/components/Card/Card";
-import CardCompanySelector from "@/components/CardCompanySelector/CardCompanySelector";
-import CardCVCInputField from "@/components/CardCVCInputField/CardCVCInputField";
+import Card from "@/components/CardRegister/Card/Card";
+import CardCompanySelector from "@/components/CardRegister/CardCompanySelector/CardCompanySelector";
+import CardCVCInputField from "@/components/CardRegister/CardCVCInputField/CardCVCInputField";
 import CardNumberInputField, {
   type CardNumberUnits,
-} from "@/components/CardNumberInputField/CardNumberInputField";
-import CardPasswordInputField from "@/components/CardPasswordInputField/CardPasswordInputField";
+} from "@/components/CardRegister/CardNumberInputField/CardNumberInputField";
+import CardPasswordInputField from "@/components/CardRegister/CardPasswordInputField/CardPasswordInputField";
 import CardValidityPeriodInputField, {
   type ValidityPeriod,
-} from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
+} from "@/components/CardRegister/CardValidityPeriodInputField/CardValidityPeriodInputField";
 import Button from "@/components/common/Button";
 import type { CardCompany } from "@/constants/cardCompanies";
 import styled from "@emotion/styled";

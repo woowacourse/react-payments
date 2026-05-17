@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within } from "storybook/test";
 
-import CardPasswordInputField from "@components/CardPasswordInputField/CardPasswordInputField";
+import CardPasswordInputField from "@/components/CardRegister/CardPasswordInputField/CardPasswordInputField";
 
 const meta = {
   title: "CardPasswordInputField",

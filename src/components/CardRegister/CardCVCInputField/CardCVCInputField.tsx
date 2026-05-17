@@ -3,12 +3,12 @@ import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
 import { useState } from "react";
 import { validateCVCInput } from "@/utils/validator";
-import type { AddCardFormStepKey } from "@/constants/cardForm";
+import type { CardRegisterFormStepKey } from "@/constants/cardForm";
 
 interface CardCVCInputFieldProps {
   CVC: string;
   onChange: (CVC: string) => void;
-  onNextStep: (currentStepKey: AddCardFormStepKey) => void;
+  onNextStep: (currentStepKey: CardRegisterFormStepKey) => void;
 }
 
 const CardCVCInputField = ({
