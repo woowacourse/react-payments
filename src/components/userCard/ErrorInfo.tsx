@@ -1,5 +1,5 @@
-import ErrorImg from '../assets/Error.png';
-import Button from './common/Button';
+import ErrorImg from '../../assets/Error.png';
+import Button from '../common/Button';
 
 type ErrorInfoProps = {
   message: string;
