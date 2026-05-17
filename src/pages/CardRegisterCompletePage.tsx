@@ -27,7 +27,7 @@ const CardRegisterCompletePage = () => {
           <br />
           {cardCompanyName}가 등록되었어요.
         </CompleteTitle>
-        <Button onClick={() => navigate(ROUTE_PATH.CARD_REGISTER)}>확인</Button>
+        <Button onClick={() => navigate(ROUTE_PATH.CARD_LIST)}>확인</Button>
       </PageWrapper>
     </PageLayout>
   );
