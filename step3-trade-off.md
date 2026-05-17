@@ -30,7 +30,9 @@
     2. card list section -> 카드 목록 조회에 대한 전체 흐름 제어 (loading, success, error, empty)
 
        -> card list section에 add card button이 있어야 하나?
+
        -> 아니면 페이지에서 card list section과 add card button을 조합해야 하나?
+
        -> api 응답 상태에 따라 add card button도 제어되어야 하니까 우선은 card list section에 같이 있어도 괜찮을 것 같다
 
 6. card list section 내부에서 api 응답 상태별 ui 컴포넌트의 계층 구조를 맞추려면 어떻게 해야 할까
@@ -49,3 +51,9 @@
     1. 공통 button 컴포넌트에 card list section에서 다시시도 로직 주입
     2. 별도의 retry button 구현
     3. 다시 시도 시 card list 조회 -> api 조회에 대한 책임은 card list section에 있는 게 맞음
+
+9. 클라이언트에서의 cardCompany를 서버의 issuerCode로 + companyName 변환 vs cardCompany를 기존처럼 사명으로 + dto 레이어에서 issuerCode <-> cardCompany 변환
+    1. 기존에 한글 key값을 사용하는 모호성 해결을 위해서는 어차피 클라단에서 issuer code든 en 이름이든 알아야 함
+    2. expiration date는 배열 <-> MM/YY 형식 변환해주는데, 그런 식이라면 cardCompany만 쓰는 게 자연스러운 것 같기도?
+
+       -> 이거를 cardCompany를 객체로 관리하기 위한 비용으로 봐야 할지(서버와 무관) 서버 연결을 위한 수정으로 봐야 할지를 결정해야 함
