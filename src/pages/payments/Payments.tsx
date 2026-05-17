@@ -1,9 +1,7 @@
 import styles from './Payments.module.css';
 
 import { CardForm } from '@/features/registerCard/ui/cardForm/CardForm';
-
 import { useState } from 'react';
-import { useExpiryDate } from '@/features/registerCard/hooks/useExpiryDate';
 import { CardPreview } from '@/features/cardPreview/CardPreview';
 import type { CardInfo } from '@/features/cardPreview/CardPreview';
 import type { Bank } from '@/entities/card/model/bank';
@@ -11,10 +9,14 @@ import { SubmitButton } from '@/features/submitButton/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import { validateFieldData } from '@/features/registerCard/lib/validateFieldData';
 import { FORM_ID, type FieldData } from '@/features/registerCard/model/payments';
+import type { ExpiryDate } from '@/entities/card/model/expiryDate';
 
 export const Payments = () => {
   const [numbers, setNumbers] = useState(['', '', '', '']);
-  const expiryField = useExpiryDate();
+  const [expiryDate, setExpiryDate] = useState<ExpiryDate>({
+    month: '',
+    year: '',
+  });
   const [cvc, setCvc] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [bank, setBank] = useState<Bank>();
@@ -24,7 +26,10 @@ export const Payments = () => {
       numbers,
       onChange: (v: string[]) => setNumbers(v),
     },
-    expiryField,
+    expiryField: {
+      expiryDate,
+      onChange: (v: ExpiryDate) => setExpiryDate(v),
+    },
     bankField: {
       value: bank,
       handleChange: (v: Bank | undefined) => setBank(v),
@@ -42,16 +47,12 @@ export const Payments = () => {
   const cardInfo: CardInfo = {
     numbers: numbers,
     bank: bank,
-    expiryDate: {
-      month: expiryField.month.value,
-      year: expiryField.year.value,
-    },
+    expiryDate: expiryDate,
   };
 
   const fieldData: FieldData = {
     numbers: numbers.join(''),
-    month: expiryField.month.value,
-    year: expiryField.year.value,
+    expiryDate,
     cvc,
     password,
     bank,

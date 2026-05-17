@@ -3,6 +3,7 @@ import { Input } from '@/core/components/input/Input';
 import { useInputFocus } from '@/core/hooks/useInputFocus';
 import { useState } from 'react';
 import {
+  filterInputCardNumber,
   getCardNumberFieldState,
   getNextCardNumberFieldState,
 } from '../../model/registerCardNumber';
@@ -29,6 +30,8 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
   });
 
   const handleChangeNumbers = (value: string, index: number) => {
+    if (filterInputCardNumber(value)) return;
+
     const next = [...numbers];
     next[index] = value;
     onChange(next);

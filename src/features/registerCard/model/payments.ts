@@ -1,4 +1,5 @@
 import type { Bank } from '@/entities/card/model/bank';
+import type { ExpiryDate } from '@/entities/card/model/expiryDate';
 
 export const FORM_ID = 'payments-form';
 
@@ -9,8 +10,7 @@ export interface FieldControl {
 
 export interface FieldData {
   numbers: string;
-  month: string;
-  year: string;
+  expiryDate: ExpiryDate;
   bank: Bank | undefined;
   cvc: string;
   password: string;

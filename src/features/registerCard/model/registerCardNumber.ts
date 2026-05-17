@@ -1,3 +1,4 @@
+import { isNumericString } from '@/core/utils/validator';
 import { getCardBrand, validateCardNumber, type CardBrand } from '@/entities/card/model/cardNumber';
 
 export const CARD_NUMBERS_ERROR_MESSAGES = {
@@ -13,6 +14,10 @@ export const CARD_BRAND_FORMAT: Record<CardBrand | 'UNKNOWN', number[]> = {
   AMEX: [4, 4, 4, 3],
   UNIONPAY: [4, 4, 4, 4],
   UNKNOWN: [4, 4, 4, 4],
+};
+
+export const filterInputCardNumber = (value: string) => {
+  return value !== '' && !isNumericString(value);
 };
 
 export const updateCardNumberInputs = (

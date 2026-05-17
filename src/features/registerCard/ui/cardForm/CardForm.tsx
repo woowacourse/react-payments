@@ -7,15 +7,14 @@ import {
 } from '@/features/registerCard/ui/fields/CardNumberField';
 import type { FieldControl } from '../../model/payments';
 import { PasswordField } from '../fields/PasswordField';
-import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
-import { ExpiryDateField } from '../fields/ExpiryDateField';
+import { ExpiryDateField, type ExpiryFieldControl } from '../fields/ExpiryDateField';
 import { BankSelectField, type BankFieldControl } from '../fields/BankSelectField';
 import { usePaymentStep } from '../../hooks/usePaymentsStep';
 import { STEP } from '../../model/payments';
 
 export interface CardFormProps {
   numbersField: CardNumberFieldControl;
-  expiryField: UseExpiryDateResult;
+  expiryField: ExpiryFieldControl;
   bankField: BankFieldControl;
   cvcField: FieldControl;
   passwordField: FieldControl;
