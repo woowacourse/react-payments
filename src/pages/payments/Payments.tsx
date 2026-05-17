@@ -1,55 +1,79 @@
 import styles from './Payments.module.css';
 
+import { CardForm } from '@/features/registerCard/ui/cardForm/CardForm';
+
 import { useState } from 'react';
-
-import type { ExpirationDate } from '@/entities/card/types';
-
-import type { CardInfo } from '@/features/cardPreview/CardPreview';
+import { useNumbers } from '@/features/registerCard/hooks/useNumbers';
+import { useExpiryDate } from '@/features/registerCard/hooks/useExpiryDate';
 import { CardPreview } from '@/features/cardPreview/CardPreview';
-
-import { CvcFormGroup } from '@/features/cardFormGroup/CvcFormGroup';
-import { CardNumberFormGroup } from '@/features/cardFormGroup/CardNumberFormGroup';
-import { ExpirationDateFormGroup } from '@/features/cardFormGroup/ExpirationDateFormGroup';
-import { CARD_BRAND_FORMAT } from '@/entities/card/brand';
+import type { CardInfo } from '@/features/cardPreview/CardPreview';
+import type { Bank } from '@/entities/card/model/bank';
+import { SubmitButton } from '@/features/submitButton/SubmitButton';
+import { useNavigate } from 'react-router-dom';
+import { validateFieldData } from '@/features/registerCard/lib/validateFieldData';
+import { FORM_ID, type FieldData } from '@/features/registerCard/model/payments';
 
 export const Payments = () => {
-  const [cardNumbers, setCardNumbers] = useState(CARD_BRAND_FORMAT.default.map(() => ''));
-  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({ month: '', year: '' });
-  const [cvc, setCvc] = useState('');
+  const numbersField = useNumbers();
+  const expiryField = useExpiryDate();
+  const [cvc, setCvc] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [bank, setBank] = useState<Bank>();
 
-  const handleChangeCardNumber = (cardNumber: string, index: number): void => {
-    const next = [...cardNumbers];
-    next[index] = cardNumber;
-    setCardNumbers(next);
-  };
-
-  const handleChangeExpirationDate = (key: keyof ExpirationDate, value: string): void => {
-    setExpirationDate((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleChangeCvc = (cvc: string): void => {
-    setCvc(cvc);
+  const fields = {
+    numbersField,
+    expiryField,
+    bankField: {
+      value: bank,
+      handleChange: (v: Bank | undefined) => setBank(v),
+    },
+    cvcField: {
+      value: cvc,
+      handleChange: (v: string) => setCvc(v),
+    },
+    passwordField: {
+      value: password,
+      handleChange: (v: string) => setPassword(v),
+    },
   };
 
   const cardInfo: CardInfo = {
-    cardNumbers,
-    expirationDate,
+    cardNumbers: numbersField.values,
+    bank: bank,
+    brand: numbersField.brand,
+    expiryDate: {
+      month: expiryField.month.value,
+      year: expiryField.year.value,
+    },
+  };
+
+  const fieldData: FieldData = {
+    numbers: numbersField.values.join(''),
+    month: expiryField.month.value,
+    year: expiryField.year.value,
+    cvc,
+    password,
+    bank,
+  };
+  const isFormValid = validateFieldData(fieldData);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate('/result', {
+      state: {
+        cardNumbers: numbersField.values,
+        bank: bank,
+      },
+    });
   };
 
   return (
     <div className={styles.payments}>
       <CardPreview info={cardInfo} />
-      <form>
-        <CardNumberFormGroup
-          cardNumbers={cardNumbers}
-          handleChangeCardNumber={handleChangeCardNumber}
-        />
-        <ExpirationDateFormGroup
-          expirationDate={expirationDate}
-          handleChangeExpirationDate={handleChangeExpirationDate}
-        />
-        <CvcFormGroup cvc={cvc} handleChangeCvc={handleChangeCvc} />
-      </form>
+      <CardForm handleSubmit={handleSubmit} formId={FORM_ID} {...fields} />
+      {isFormValid && <SubmitButton formId={FORM_ID} />}
     </div>
   );
 };
