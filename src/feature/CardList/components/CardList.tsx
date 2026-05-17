@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import Button from '../../../common/components/Button';
 import type { Card } from '../../../domain/card/types/card';
 import CardListItem from './CardListItem';
 import styled from 'styled-components';
@@ -25,7 +24,9 @@ const CardList = ({ cards, handleDeleteCard }: CardListProps) => {
           handleDeleteCard={handleDeleteCard}
         />
       ))}
-      <Button value="+ 카드 추가" onClick={handleMoveToRegisterClick} />
+      <AddCardButton onClick={handleMoveToRegisterClick}>
+        + 카드 추가
+      </AddCardButton>
     </Wrapper>
   );
 };
@@ -38,6 +39,20 @@ const Wrapper = styled.div`
   gap: 16px;
 
   width: 100%;
+`;
+
+const AddCardButton = styled.button`
+  width: 100%;
+  height: 40px;
+
+  border: 1px dashed #d9d9d9;
+  border-radius: 4px;
+
+  color: #8a8a8a;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
 `;
 
 export default CardList;
