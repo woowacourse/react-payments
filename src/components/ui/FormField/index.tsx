@@ -5,12 +5,11 @@ import FieldCaption from '../FieldCaption';
 export interface FormFieldProps {
   title: string;
   caption: string;
-  error: boolean;
   errorMessage: string;
   children: React.ReactNode;
 }
 
-export default function FormField({ title, caption, error, errorMessage, children }: FormFieldProps) {
+export default function FormField({ title, caption, errorMessage, children }: FormFieldProps) {
   return (
     <div css={formFieldStyle}>
       <div css={formFieldTitleWrapperStyle}>
@@ -19,7 +18,7 @@ export default function FormField({ title, caption, error, errorMessage, childre
       </div>
       <div css={formFieldInputWrapperStyle}>
         {children}
-        <FieldCaption variant={'error'}>{error ? errorMessage : '\u00A0'}</FieldCaption>
+        <FieldCaption variant={'error'}>{errorMessage || '\u00A0'}</FieldCaption>
       </div>
     </div>
   );
