@@ -5,9 +5,10 @@ import CardListItem from './CardListItem';
 
 type CardListProps = {
   cards: Card[];
+  handleDeleteCard: (cardId: string) => void;
 };
 
-const CardList = ({ cards }: CardListProps) => {
+const CardList = ({ cards, handleDeleteCard }: CardListProps) => {
   const navigate = useNavigate();
 
   const handleMoveToRegisterClick = () => {
@@ -17,7 +18,11 @@ const CardList = ({ cards }: CardListProps) => {
   return (
     <>
       {cards.map((card) => (
-        <CardListItem key={card.id} card={card} />
+        <CardListItem
+          key={card.id}
+          card={card}
+          handleDeleteCard={handleDeleteCard}
+        />
       ))}
       <Button value="+ 카드 추가" onClick={handleMoveToRegisterClick} />
     </>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getCards } from '../../api/cards';
+import { deleteCard, getCards } from '../../api/cards';
 import type { Card } from '../../domain/card/types/card';
 import type { cardFetchStatusType } from './types/cardFetchStatus';
 import Title from '../../common/components/Title';
@@ -14,29 +14,42 @@ const CardListPage = () => {
     useState<cardFetchStatusType>('idle');
   const [cardFetchErrorMessage, setCardFetchErrorMessage] = useState('');
 
+  const fetchCards = async () => {
+    setCardFetchStatus('idle');
+
+    try {
+      setCards([]);
+      setCardFetchStatus('loading');
+
+      const cards = await getCards();
+
+      setCards(cards);
+      setCardFetchStatus('success');
+      setCardFetchErrorMessage('');
+    } catch (error) {
+      console.log(error);
+      setCardFetchStatus('error');
+      setCardFetchErrorMessage(
+        error instanceof Error
+          ? error.message
+          : '카드 목록을 불러오지 못했습니다.',
+      );
+    }
+  };
+
+  const handleDeleteCard = async (cardId: string) => {
+    const confirmed = window.confirm('카드를 삭제하시겠습니까?');
+    if (!confirmed) return;
+
+    try {
+      await deleteCard(cardId);
+      await fetchCards();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchCards = async () => {
-      setCardFetchStatus('idle');
-
-      try {
-        setCardFetchStatus('loading');
-
-        const cards = await getCards();
-
-        setCards(cards);
-        setCardFetchStatus('success');
-        setCardFetchErrorMessage('');
-      } catch (error) {
-        console.log(error);
-        setCardFetchStatus('error');
-        setCardFetchErrorMessage(
-          error instanceof Error
-            ? error.message
-            : '카드 목록을 불러오지 못했습니다.',
-        );
-      }
-    };
-
     fetchCards();
   }, []);
 
@@ -48,7 +61,7 @@ const CardListPage = () => {
     if (cardFetchStatus === 'success' && cards.length === 0) {
       return <CardListEmptyState />;
     }
-    return <CardList cards={cards} />;
+    return <CardList cards={cards} handleDeleteCard={handleDeleteCard} />;
   };
 
   return (
