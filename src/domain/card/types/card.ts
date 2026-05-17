@@ -16,10 +16,17 @@ export type CardFormInfoType = {
   password: string;
 };
 
+export type PostedCard = {
+  number: string[];
+  expirationDate: string;
+  cvc: string;
+  issuerCode: CardCompanyId | null;
+};
+
 export type Card = {
   id: string;
-  cardNumbers: string[];
-  expiryMonth: string;
-  expiryYear: string;
-  cardCompanyId: CardCompanyId | null;
+  number: string[];
+  expirationDate: string;
+  cvc: string;
+  issuerCode: CardCompanyId | null;
 };

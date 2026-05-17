@@ -1,33 +1,58 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
+import type {
+  Card,
+  CardFormInfoType,
+  PostedCard,
+} from '../../domain/card/types/card';
+import { validatePostedCard } from '../../feature/CardList/utils/ValidatePostedCard';
 
-const cards = [
+const cards: Card[] = [
   {
     id: '1',
-    cardNumbers: ['1111', '2222', '3333', '4444'],
-    expiryMonth: '01',
-    expiryYear: '40',
-    cardCompanyId: 'bc',
+    number: ['1111', '2222', '3333', '4444'],
+    expirationDate: '01/40',
+    cvc: '123',
+    issuerCode: 'bc',
   },
   {
     id: '2',
-    cardNumbers: ['1234', '1234', '1234', '1234'],
-    expiryMonth: '05',
-    expiryYear: '50',
-    cardCompanyId: 'shinhan',
+    number: ['1234', '1234', '1234', '1234'],
+    expirationDate: '01/20',
+    cvc: '456',
+    issuerCode: 'shinhan',
   },
 ];
 
 export const cardHandlers = [
   // GET 요청 모킹
-  http.get('/cards', () => {
+  http.get('/cards', async () => {
+    await delay(1000);
+
     return HttpResponse.json(cards);
+    // return HttpResponse.json(
+    //   { message: '카드 목록을 불러올 수 없습니다.' },
+    //   { status: 500 },
+    // );
   }),
 
   // POST 요청 모킹
   http.post('/cards', async ({ request }) => {
-    const body = await request.json();
+    const body = (await request.json()) as CardFormInfoType;
 
-    return HttpResponse.json(body, { status: 201 });
+    const newCard: PostedCard = {
+      number: body.cardNumbers,
+      expirationDate: `${body.expiryMonth}/${body.expiryYear}`,
+      cvc: body.cvcNumber,
+      issuerCode: body.cardCompanyId, // cardCompanyId -> issuerCode로 변환 필요
+    };
+
+    const error = validatePostedCard(newCard);
+    if (error) return HttpResponse.json(error, { status: 400 });
+
+    const cardId = crypto.randomUUID();
+    cards.push({ id: cardId, ...newCard });
+
+    return HttpResponse.json(cardId, { status: 201 });
   }),
 
   // DELETE 요청 모킹
