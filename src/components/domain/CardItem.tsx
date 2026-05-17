@@ -1,11 +1,7 @@
-import type { CardCompany } from '../../types.ts';
 import { css } from '@emotion/react';
+import type { CardDto } from '../../apis/cards/type.ts';
 
-interface CardItemProps {
-  cardCompany: CardCompany;
-  cardNumbers: string[];
-  expirationPeriod: string[];
-}
+type CardItemProps = Omit<CardDto, 'cvc'>;
 
 export default function CardItem({ cardCompany, cardNumbers, expirationPeriod }: CardItemProps) {
   return (

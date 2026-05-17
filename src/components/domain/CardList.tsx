@@ -1,15 +1,9 @@
-import type { CardCompany } from '../../types.ts';
 import CardItem from './CardItem.tsx';
 import { css } from '@emotion/react';
-
-export interface Card {
-  cardCompany: CardCompany;
-  cardNumbers: string[];
-  expirationPeriod: string[];
-}
+import type { CardList } from '../../apis/cards/type.ts';
 
 interface CardListProps {
-  cards: Card[];
+  cards: CardList;
 }
 
 export default function CardList({ cards }: CardListProps) {

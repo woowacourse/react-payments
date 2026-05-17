@@ -1,36 +1,20 @@
 import { css } from '@emotion/react';
-import CardList, { type Card } from './CardList.tsx';
+import CardList from './CardList.tsx';
 import AddCardButton from './AddCardButton.tsx';
 import Error from '../../assets/error.tsx';
 import Button from '../ui/Button.tsx';
 import CardItemSkeleton from './CardItem.skeleton.tsx';
 import { useEffect, useState } from 'react';
 import ButtonSkeleton from '../ui/Button.skeleton.tsx';
-
-const mockCards: Card[] = [
-  {
-    cardCompany: '국민카드',
-    cardNumbers: ['1111', '1111', '1111', '1111'],
-    expirationPeriod: ['11', '11'],
-  },
-  {
-    cardCompany: '국민카드',
-    cardNumbers: ['1111', '1111', '1111', '1112'],
-    expirationPeriod: ['11', '11'],
-  },
-  {
-    cardCompany: '국민카드',
-    cardNumbers: ['1111', '1111', '1111', '1113'],
-    expirationPeriod: ['11', '11'],
-  },
-];
+import { getCards } from '../../apis/cards/api.ts';
+import type { CardList as CardListType } from '../../apis/cards/type.ts';
 
 type ResponseStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export default function CardListPage() {
-  const cards = mockCards;
+  const [cards, setCards] = useState<CardListType>([]);
+  const [responseStatus, setResponseStatus] = useState<ResponseStatus>('idle');
   const cardCount = cards.length;
-  const [responseStatus, setResponseStatus] = useState<ResponseStatus>('loading');
 
   const isPending = responseStatus === 'idle';
   const isLoading = responseStatus === 'loading';
@@ -39,12 +23,20 @@ export default function CardListPage() {
   const isError = responseStatus === 'error';
 
   useEffect(() => {
-    const getCards = async () => {
-      const response = await fetch(`${import.meta.env.BASE_URL}cards`);
-      console.log(await response.json());
+    const fetchData = async () => {
+      setResponseStatus('loading');
+
+      try {
+        const response = await getCards();
+        setCards(response);
+        setResponseStatus('success');
+      } catch (error) {
+        console.log(error);
+        setResponseStatus('error');
+      }
     };
 
-    getCards();
+    fetchData();
   }, []);
 
   return (
