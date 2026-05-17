@@ -45,6 +45,15 @@
       "@types/*": [
         "./src/types/*"
       ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@constants/*": [
+        "./src/constants/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ]
     }
   },
   "include": [

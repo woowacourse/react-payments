@@ -1,72 +1,10 @@
-import Card from "@/components/common/Card";
-import CardCVCInputField from "@/components/feature/CardCVCInputField";
-import CardNumberInputField from "@/components/feature/CardNumberInputField/CardNumberInputField";
-import CardValidityPeriodInputField, {
-  type ValidityPeriod,
-} from "@/components/feature/CardValidityPeriodInputField/CardValidityPeriodInputField";
-import styled from "@emotion/styled";
-import type { CardNumberUnits } from "@/types/card";
-import { detectCardBrand } from "@utils/card";
-import { useState } from "react";
+import PageWrapper from "@/components/common/PageWrapper";
+import CardInfoForm from "@/components/feature/CardInfoFormSection";
 
-const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
-const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
-
-const AddNewCardPage = () => {
-  const [cardNumber, setCardNumber] = useState(DEFAULT_CARD_NUMBER_UNITS);
-  const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
-  const [CVC, setCVC] = useState("");
-
-  return (
-    <PageWrapper>
-      <CardWrapper>
-        <Card
-          cardNumberUnits={cardNumber}
-          validityPeriod={validityPeriod}
-          brand={detectCardBrand(cardNumber)}
-        />
-      </CardWrapper>
-      <CardInfoForm>
-        <CardNumberInputField
-          cardNumberUnits={cardNumber}
-          onChange={(input) => {
-            setCardNumber(input);
-          }}
-        />
-        <CardValidityPeriodInputField
-          validityPeriod={validityPeriod}
-          onChange={(input) => {
-            setValidityPeriod(input);
-          }}
-        />
-        <CardCVCInputField
-          CVC={CVC}
-          onChange={(input) => {
-            setCVC(input);
-          }}
-        />
-      </CardInfoForm>
-    </PageWrapper>
-  );
-};
-
-const PageWrapper = styled.div`
-  max-width: 23rem;
-  margin-inline: auto;
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 4.8rem;
-  padding-bottom: 2.8rem;
-`;
-
-const CardInfoForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
+const AddNewCardPage = () => (
+  <PageWrapper>
+    <CardInfoForm />
+  </PageWrapper>
+);
 
 export default AddNewCardPage;
