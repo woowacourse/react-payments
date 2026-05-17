@@ -60,14 +60,7 @@ export const cardHandlers = [
     const cardId = String(params.id);
     const targetCardIndex = cards.findIndex((card) => card.id === cardId);
 
-    if (targetCardIndex === -1) {
-      return HttpResponse.json(
-        { code: 'CARD_NOT_FOUND', message: '카드를 찾을 수 없습니다.' },
-        { status: 404 },
-      );
-    }
-
-    cards.splice(targetCardIndex, 1);
+    if (targetCardIndex !== -1) cards.splice(targetCardIndex, 1);
 
     return new HttpResponse(null, { status: 204 });
   }),
