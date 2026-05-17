@@ -63,7 +63,6 @@ const ValidationInput = forwardRef<HTMLInputElement, ValidationInputProps>(
 
       if (failedValidation) {
         setInputError(new Error(failedValidation.message));
-        event.target.focus();
         return;
       }
 
