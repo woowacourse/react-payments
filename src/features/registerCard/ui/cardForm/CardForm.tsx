@@ -1,8 +1,10 @@
 import styles from './CardForm.module.css';
 
 import { CvcField } from '@/features/registerCard/ui/fields/CvcField';
-import { NumberField } from '@/features/registerCard/ui/fields/NumberField';
-import type { UseNumbersResults } from '../../hooks/useNumbers';
+import {
+  NumberField,
+  type CardNumberFieldControl,
+} from '@/features/registerCard/ui/fields/CardNumberField';
 import type { FieldControl } from '../../model/payments';
 import { PasswordField } from '../fields/PasswordField';
 import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
@@ -12,7 +14,7 @@ import { usePaymentStep } from '../../hooks/usePaymentsStep';
 import { STEP } from '../../model/payments';
 
 export interface CardFormProps {
-  numbersField: UseNumbersResults;
+  numbersField: CardNumberFieldControl;
   expiryField: UseExpiryDateResult;
   bankField: BankFieldControl;
   cvcField: FieldControl;

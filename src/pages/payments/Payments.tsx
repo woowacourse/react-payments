@@ -3,7 +3,6 @@ import styles from './Payments.module.css';
 import { CardForm } from '@/features/registerCard/ui/cardForm/CardForm';
 
 import { useState } from 'react';
-import { useNumbers } from '@/features/registerCard/hooks/useNumbers';
 import { useExpiryDate } from '@/features/registerCard/hooks/useExpiryDate';
 import { CardPreview } from '@/features/cardPreview/CardPreview';
 import type { CardInfo } from '@/features/cardPreview/CardPreview';
@@ -14,14 +13,17 @@ import { validateFieldData } from '@/features/registerCard/lib/validateFieldData
 import { FORM_ID, type FieldData } from '@/features/registerCard/model/payments';
 
 export const Payments = () => {
-  const numbersField = useNumbers();
+  const [numbers, setNumbers] = useState(['', '', '', '']);
   const expiryField = useExpiryDate();
   const [cvc, setCvc] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [bank, setBank] = useState<Bank>();
 
   const fields = {
-    numbersField,
+    numbersField: {
+      numbers,
+      onChange: (v: string[]) => setNumbers(v),
+    },
     expiryField,
     bankField: {
       value: bank,
@@ -38,9 +40,8 @@ export const Payments = () => {
   };
 
   const cardInfo: CardInfo = {
-    cardNumbers: numbersField.values,
+    numbers: numbers,
     bank: bank,
-    brand: numbersField.brand,
     expiryDate: {
       month: expiryField.month.value,
       year: expiryField.year.value,
@@ -48,7 +49,7 @@ export const Payments = () => {
   };
 
   const fieldData: FieldData = {
-    numbers: numbersField.values.join(''),
+    numbers: numbers.join(''),
     month: expiryField.month.value,
     year: expiryField.year.value,
     cvc,
@@ -63,7 +64,7 @@ export const Payments = () => {
     e.preventDefault();
     navigate('/result', {
       state: {
-        cardNumbers: numbersField.values,
+        cardNumbers: numbers.join(''),
         bank: bank,
       },
     });
