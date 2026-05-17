@@ -1,10 +1,9 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
 import { useState } from 'react';
-import { CVC_LENGTH } from '@/entities/card';
-import { getErrorCvc, validateCvc } from '@/entities/card/model/cvc';
-import { isNumericString } from '@/core/utils/validator';
+import { validateCvc } from '@/entities/card/model/cvc';
 import type { FieldControl } from '../../model/payments';
+import { getCvcFieldState, isValidInputCvc } from '../../model/registerCvc';
 
 interface CvcFieldProps {
   cvcField: FieldControl;
@@ -13,22 +12,21 @@ interface CvcFieldProps {
 }
 
 export const CvcField = ({ cvcField, setStepRef, onComplate }: CvcFieldProps) => {
-  const { handleChange, value } = cvcField;
+  const { value, handleChange } = cvcField;
   const [touched, setTouched] = useState<boolean>(false);
+
+  const { errorMessage, isError, maxLength } = getCvcFieldState({
+    value,
+    touched,
+  });
+
   const handleChangeCvc = (inputValue: string): void => {
-    if (inputValue !== '' && !isNumericString(inputValue)) return;
+    if (!isValidInputCvc(inputValue)) return;
+
     handleChange(inputValue);
-    setTouched(false);
 
     if (validateCvc(inputValue)) onComplate();
   };
-
-  const handleBlur = () => {
-    setTouched(true);
-  };
-
-  const error = !validateCvc(value);
-  const errorMessage = touched ? getErrorCvc(value) : undefined;
 
   return (
     <Field title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={errorMessage}>
@@ -37,11 +35,11 @@ export const CvcField = ({ cvcField, setStepRef, onComplate }: CvcFieldProps) =>
         type="text"
         inputMode="numeric"
         value={value}
-        maxLength={CVC_LENGTH}
+        maxLength={maxLength}
         placeholder="123"
-        isError={touched && error}
+        isError={isError}
         onChange={(e) => handleChangeCvc(e.target.value)}
-        onBlur={() => handleBlur()}
+        onBlur={() => setTouched(true)}
       />
     </Field>
   );

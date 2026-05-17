@@ -19,7 +19,7 @@ export interface CardFormProps {
   cvcField: FieldControl;
   passwordField: FieldControl;
   formId: string;
-  handleSubmit: (e: React.FormEvent) => void;
+  onRegister: () => void;
 }
 
 export const CardForm = ({
@@ -29,9 +29,14 @@ export const CardForm = ({
   cvcField,
   passwordField,
   formId,
-  handleSubmit,
+  onRegister,
 }: CardFormProps) => {
   const { step, toStep, setStepRef } = usePaymentStep();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onRegister();
+  };
 
   return (
     <form className={styles.form} id={formId} onSubmit={handleSubmit}>

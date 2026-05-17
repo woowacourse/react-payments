@@ -3,7 +3,7 @@ import { Input } from '@/core/components/input/Input';
 import { useInputFocus } from '@/core/hooks/useInputFocus';
 import { useState } from 'react';
 import {
-  filterInputCardNumber,
+  isValidCardNumberInput,
   getCardNumberFieldState,
   getNextCardNumberFieldState,
 } from '../../model/registerCardNumber';
@@ -19,6 +19,9 @@ interface CardNumberFieldProps {
   onComplate: () => void;
 }
 
+const numberPlaceHolder = (length: number) =>
+  Array.from({ length }, (_, index) => index + 1).join('');
+
 export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumberFieldProps) => {
   const { numbers, onChange } = numbersField;
   const { setInputRef, focusNext } = useInputFocus();
@@ -30,7 +33,7 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
   });
 
   const handleChangeNumbers = (value: string, index: number) => {
-    if (filterInputCardNumber(value)) return;
+    if (!isValidCardNumberInput(value)) return;
 
     const next = [...numbers];
     next[index] = value;
@@ -65,7 +68,7 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
           key={`${index}`}
           inputMode="numeric"
           value={number}
-          placeholder={Array.from({ length: format[index] }, (_, i) => i + 1).join('')}
+          placeholder={numberPlaceHolder(format[index])}
           maxLength={format[index]}
           isError={inputErrors[index] !== undefined}
           onChange={(e) => handleChangeNumbers(e.currentTarget.value, index)}

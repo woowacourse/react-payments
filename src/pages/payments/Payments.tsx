@@ -1,6 +1,7 @@
 import styles from './Payments.module.css';
 
 import { CardForm } from '@/features/registerCard/ui/cardForm/CardForm';
+
 import { useState } from 'react';
 import { CardPreview } from '@/features/cardPreview/CardPreview';
 import type { CardInfo } from '@/features/cardPreview/CardPreview';
@@ -12,6 +13,8 @@ import { FORM_ID, type FieldData } from '@/features/registerCard/model/payments'
 import type { ExpiryDate } from '@/entities/card/model/expiryDate';
 
 export const Payments = () => {
+  const navigate = useNavigate();
+
   const [numbers, setNumbers] = useState(['', '', '', '']);
   const [expiryDate, setExpiryDate] = useState<ExpiryDate>({
     month: '',
@@ -20,29 +23,6 @@ export const Payments = () => {
   const [cvc, setCvc] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [bank, setBank] = useState<Bank>();
-
-  const fields = {
-    numbersField: {
-      numbers,
-      onChange: (v: string[]) => setNumbers(v),
-    },
-    expiryField: {
-      expiryDate,
-      onChange: (v: ExpiryDate) => setExpiryDate(v),
-    },
-    bankField: {
-      value: bank,
-      handleChange: (v: Bank | undefined) => setBank(v),
-    },
-    cvcField: {
-      value: cvc,
-      handleChange: (v: string) => setCvc(v),
-    },
-    passwordField: {
-      value: password,
-      handleChange: (v: string) => setPassword(v),
-    },
-  };
 
   const cardInfo: CardInfo = {
     numbers: numbers,
@@ -57,24 +37,27 @@ export const Payments = () => {
     password,
     bank,
   };
-  const isFormValid = validateFieldData(fieldData);
 
-  const navigate = useNavigate();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onRegister = (fieldData: FieldData) => {
     navigate('/result', {
-      state: {
-        cardNumbers: numbers.join(''),
-        bank: bank,
-      },
+      state: fieldData,
     });
   };
+
+  const isFormValid = validateFieldData(fieldData);
 
   return (
     <div className={styles.payments}>
       <CardPreview info={cardInfo} />
-      <CardForm handleSubmit={handleSubmit} formId={FORM_ID} {...fields} />
+      <CardForm
+        numbersField={{ numbers, onChange: (v) => setNumbers(v) }}
+        expiryField={{ expiryDate, onChange: (v) => setExpiryDate(v) }}
+        bankField={{ value: bank, handleChange: (v) => setBank(v) }}
+        cvcField={{ value: cvc, handleChange: (v) => setCvc(v) }}
+        passwordField={{ value: password, handleChange: (v) => setPassword(v) }}
+        onRegister={() => onRegister(fieldData)}
+        formId={FORM_ID}
+      />
       {isFormValid && <SubmitButton formId={FORM_ID} />}
     </div>
   );
