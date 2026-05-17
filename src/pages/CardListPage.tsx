@@ -57,7 +57,10 @@ export default function CardListPage() {
         <CardListFallback type="error" onClick={handleRetry} />
       )}
       {state.status === "success" && state.data.length === 0 && (
-        <CardListFallback type="success" onClick={() => navigate("/")} />
+        <CardListFallback
+          type="success"
+          onClick={() => navigate("/register")}
+        />
       )}
       {state.status === "success" && state.data.length > 0 && (
         <CardList cards={state.data} onDelete={fetchCards} />
