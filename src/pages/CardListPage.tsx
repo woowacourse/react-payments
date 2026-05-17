@@ -1,3 +1,4 @@
+import CardListEmpty from "@/components/CardList/CardListEmpty/CardListEmpty";
 import PageLayout from "@/components/common/PageLayout";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
@@ -7,6 +8,7 @@ const CardListPage = () => {
     <PageLayout>
       <PageWrapper>
         <PageTitle>보유 카드</PageTitle>
+        <CardListEmpty />
       </PageWrapper>
     </PageLayout>
   );
