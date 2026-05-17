@@ -5,7 +5,7 @@ import CardCompanySelector from "@/components/CardRegister/CardCompanySelector/C
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
 
 const meta = {
-  title: "CardCompanySelector",
+  title: "CardRegister/CardCompanySelector",
   component: CardCompanySelector,
 } satisfies Meta<typeof CardCompanySelector>;
 
