@@ -17,19 +17,18 @@ const meta = {
   tags: ['autodocs'],
 
   argTypes: {
-    cardNumberList: {
+    fields: {
       control: 'object',
-      description: '카드번호 prop입니다',
-      table: {
-        type: { summary: 'string[]' },
-      },
+      description: '카드번호 및 유효기간 prop입니다',
     },
-    expirationDate: {
-      control: 'text',
-      description: '유효기간 prop입니다',
-      table: {
-        type: { summary: 'string' },
-      },
+    cardBrand: {
+      control: 'select',
+      options: ['VISA', 'MASTER', 'DINERS', 'AMEX', 'UNION_PAY', 'LOCAL'],
+      description: '카드 브랜드 prop입니다',
+    },
+    backgroundColor: {
+      control: 'color',
+      description: '카드 배경색 prop입니다',
     },
   },
 } satisfies Meta<typeof CardPreview>;
@@ -39,21 +38,33 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardNumberList: ['1234','1234','1234','1234'],
-    expirationDate: '12/31',
+    fields: {
+      cardNumbers: ['1234', '1234', '1234', '1234'],
+      expirationDate: '12/31',
+    },
+    cardBrand: 'LOCAL',
+    backgroundColor: '#333333',
   },
 };
 
 export const Visa: Story = {
   args: {
-    cardNumberList: ['4234','1234','1234','1234'],
-    expirationDate: '12/31',
+    fields: {
+      cardNumbers: ['4234', '1234', '1234', '1234'],
+      expirationDate: '12/31',
+    },
+    cardBrand: 'VISA',
+    backgroundColor: '#1a1f71',
   },
 };
 
 export const Master: Story = {
   args: {
-    cardNumberList: ['5134','1234','1234','1234'],
-    expirationDate: '12/31',
+    fields: {
+      cardNumbers: ['5134', '1234', '1234', '1234'],
+      expirationDate: '12/31',
+    },
+    cardBrand: 'MASTER',
+    backgroundColor: '#eb001b',
   },
 };

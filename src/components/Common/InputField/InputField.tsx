@@ -21,6 +21,6 @@ const Input = styled.input<{ $isError: boolean }>`
 
   &:focus {
     outline: none;
-    border: 1px solid #000;
+    border: 1px solid ${({ $isError }) => ($isError ? '#FF3D3D' : '#000')};
   }
 `;
