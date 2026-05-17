@@ -6,17 +6,17 @@ import { useLocation, useNavigate } from "react-router";
 import { ROUTE_PATH } from "@/constants/routes";
 import PageLayout from "@/components/common/PageLayout";
 
-export type AddCardCompletePageState = {
+export type CardRegisterCompletePageState = {
   cardNumberPrefix: string;
   cardCompanyName: string;
 };
 
-const AddCardCompletePage = () => {
+const CardRegisterCompletePage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
   const { cardNumberPrefix, cardCompanyName } =
-    state as AddCardCompletePageState;
+    state as CardRegisterCompletePageState;
 
   return (
     <PageLayout>
@@ -27,7 +27,7 @@ const AddCardCompletePage = () => {
           <br />
           {cardCompanyName}가 등록되었어요.
         </CompleteTitle>
-        <Button onClick={() => navigate(ROUTE_PATH.ADD_CARD)}>확인</Button>
+        <Button onClick={() => navigate(ROUTE_PATH.CARD_REGISTER)}>확인</Button>
       </PageWrapper>
     </PageLayout>
   );
@@ -55,4 +55,4 @@ const CompleteTitle = styled.h1`
   color: ${COLOR_PALETTE["BLACK-700"]};
 `;
 
-export default AddCardCompletePage;
+export default CardRegisterCompletePage;

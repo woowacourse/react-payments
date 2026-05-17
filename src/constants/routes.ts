@@ -1,5 +1,5 @@
 export const ROUTE_PATH = {
-  CARDS: "/cards",
-  ADD_CARD: "/add",
-  ADD_CARD_COMPLETE: "/complete",
+  CARD_LIST: "/cards",
+  CARD_REGISTER: "/register",
+  CARD_REGISTER_COMPLETE: "/complete",
 } as const;

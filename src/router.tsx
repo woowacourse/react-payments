@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import AddNewCardPage from "@/pages/AddNewCardPage";
-import AddCardCompletePage from "@/pages/AddCardCompletePage";
+import CardRegisterPage from "@/pages/CardRegisterPage";
+import CardRegisterCompletePage from "@/pages/CardRegisterCompletePage";
 import { ROUTE_PATH } from "@/constants/routes";
 import CardListPage from "./pages/CardListPage";
 
@@ -8,18 +8,18 @@ export const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: <Navigate to={ROUTE_PATH.CARDS} replace />,
+      element: <Navigate to={ROUTE_PATH.CARD_LIST} replace />,
     },
     {
-      path: ROUTE_PATH.ADD_CARD,
-      element: <AddNewCardPage />,
+      path: ROUTE_PATH.CARD_REGISTER,
+      element: <CardRegisterPage />,
     },
     {
-      path: ROUTE_PATH.ADD_CARD_COMPLETE,
-      element: <AddCardCompletePage />,
+      path: ROUTE_PATH.CARD_REGISTER_COMPLETE,
+      element: <CardRegisterCompletePage />,
     },
     {
-      path: ROUTE_PATH.CARDS,
+      path: ROUTE_PATH.CARD_LIST,
       element: <CardListPage />,
     },
   ],

@@ -1,4 +1,4 @@
-export const ADD_CARD_FORM_STEP = {
+export const CARD_REGISTER_FORM_STEP = {
   CARD_NUMBER: {
     order: 1,
     next: "COMPANY",
@@ -21,7 +21,7 @@ export const ADD_CARD_FORM_STEP = {
   },
 } as const;
 
-export type AddCardFormStepKey = keyof typeof ADD_CARD_FORM_STEP;
+export type AddCardFormStepKey = keyof typeof CARD_REGISTER_FORM_STEP;
 
 export const CARD_FIELD_LENGTH = {
   CVC: 3,

@@ -14,7 +14,7 @@ import styled from "@emotion/styled";
 import { useState, type ComponentProps } from "react";
 import { validateCardForm } from "@/utils/validator";
 import useFormStep from "@/hooks/useFormStep";
-import { ADD_CARD_FORM_STEP } from "@/constants/cardForm";
+import { CARD_REGISTER_FORM_STEP } from "@/constants/cardForm";
 import { useNavigate } from "react-router";
 import { ROUTE_PATH } from "@/constants/routes";
 import PageLayout from "@/components/common/PageLayout";
@@ -22,7 +22,7 @@ import PageLayout from "@/components/common/PageLayout";
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
 
-const AddNewCardPage = () => {
+const CardRegisterPage = () => {
   const [cardNumber, setCardNumber] = useState(DEFAULT_CARD_NUMBER_UNITS);
   const [cardCompany, setCardCompany] = useState<CardCompany | null>(null);
   const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
@@ -30,7 +30,7 @@ const AddNewCardPage = () => {
   const [password, setPassword] = useState("");
 
   const { goToNextStep, isStepVisible } = useFormStep(
-    ADD_CARD_FORM_STEP,
+    CARD_REGISTER_FORM_STEP,
     "CARD_NUMBER",
   );
 
@@ -47,7 +47,7 @@ const AddNewCardPage = () => {
   const handleCardFormSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
     event.preventDefault();
 
-    navigate(ROUTE_PATH.ADD_CARD_COMPLETE, {
+    navigate(ROUTE_PATH.CARD_REGISTER_COMPLETE, {
       state: {
         cardNumberPrefix: cardNumber[0],
         cardCompanyName: cardCompany?.name ?? "",
@@ -130,4 +130,4 @@ const CardInfoForm = styled.form`
   gap: 1rem;
 `;
 
-export default AddNewCardPage;
+export default CardRegisterPage;
