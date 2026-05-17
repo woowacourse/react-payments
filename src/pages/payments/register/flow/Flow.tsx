@@ -1,5 +1,7 @@
 import { Outlet, useNavigate } from 'react-router';
 
+import { ROUTES } from '@/constants/routes';
+
 import { useCardNumbers } from '../form/hooks/useCardNumbers';
 import { useCard } from '../form/hooks/useCard';
 import { useExpirationDate } from '../form/hooks/useExpirationDate';
@@ -32,7 +34,7 @@ export const Flow = () => {
   };
 
   const handleSubmit = () => {
-    navigate('/payments/register/complete');
+    navigate(ROUTES.PAYMENTS.REGISTER_COMPLETE);
   };
 
   return (

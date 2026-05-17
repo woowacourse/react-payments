@@ -8,6 +8,8 @@ import { CreditCard } from '@/core/components/creditCard';
 import { IconButton } from '@/core/components/iconButton';
 import { Button } from '@/core/components/button';
 
+import { ROUTES } from '@/constants/routes';
+
 import { useCards } from './hooks/useCards';
 
 import { ISSUER_CODE } from './constants';
@@ -38,7 +40,7 @@ export const Cards = () => {
   const navigate = useNavigate();
 
   const handleGoToRegiterCard = () => {
-    navigate('/payments/register');
+    navigate(ROUTES.PAYMENTS.REGISTER);
   };
 
   if (status === 'loading')
