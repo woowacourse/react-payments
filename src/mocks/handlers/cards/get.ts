@@ -1,13 +1,15 @@
 import { http, HttpResponse } from 'msw';
+import { cards } from '../../datas/cards.ts';
 
 export const handler = http.get(`${import.meta.env.BASE_URL}cards`, async () => {
-  // 전역 cards 객체 배열 순회하며 number에 maskNumber 반환값을 담아 전달
-  return HttpResponse.json([
-    {
-      id: '550e8400-e29b-41d4-a716-446655440000',
-      issuerCode: '31',
-      number: '551112******9012',
-      expirationDate: '12/28',
-    },
-  ]);
+  return HttpResponse.json(cards.map((card) => [{ ...card, number: maskNumber(card.number) }]));
 });
+
+const maskNumber = (number: string) => {
+  const [first, middle, last] = splitString(number);
+  return `${first}${'*'.repeat(middle.length)}${last}`;
+};
+
+const splitString = (value: string) => {
+  return [value.slice(0, 6), value.slice(6, -4), value.slice(-4)];
+};
