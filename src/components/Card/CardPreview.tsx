@@ -27,7 +27,7 @@ export default function CardPreview({
   cardFirm,
   cardBrand,
 }: Props) {
-  const cardColor = CARD_COLORS[cardFirm.value] ?? "#333333";
+  const cardColor = CARD_COLORS[cardFirm.label] ?? "#333333";
 
   return (
     <CardPreviewContainer cardColor={cardColor}>
