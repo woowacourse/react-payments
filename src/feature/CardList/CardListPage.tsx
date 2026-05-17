@@ -7,6 +7,7 @@ import CardListSkeleton from './components/CardListSkeleton';
 import CardListErrorState from './components/CardListErrorState';
 import CardListEmptyState from './components/CardListEmptyState';
 import CardList from './components/CardList';
+import styled from 'styled-components';
 
 const CardListPage = () => {
   const [cards, setCards] = useState<Card[]>([]);
@@ -29,11 +30,7 @@ const CardListPage = () => {
     } catch (error) {
       console.log(error);
       setCardFetchStatus('error');
-      setCardFetchErrorMessage(
-        error instanceof Error
-          ? error.message
-          : '카드 목록을 불러오지 못했습니다.',
-      );
+      setCardFetchErrorMessage(error.message);
     }
   };
 
@@ -65,13 +62,42 @@ const CardListPage = () => {
   };
 
   return (
-    <div>
-      <Title
-        value={`보유 카드${cards.length !== 0 ? '(' + cards.length + ')' : ''}`}
-      />
-      {비동기_상태에_따라_컴포넌트_보여주기()}
-    </div>
+    <Wrapper>
+      <Container>
+        <Title
+          value={`보유 카드${
+            cards.length !== 0 ? '(' + cards.length + ')' : ''
+          }`}
+        />
+        {비동기_상태에_따라_컴포넌트_보여주기()}
+      </Container>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 100vh;
+
+  background-color: #d3d3d3;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 376px;
+  height: min(700px, 100vh);
+  overflow: hidden;
+
+  padding: 40px 28px;
+  gap: 16px;
+
+  background-color: #ffffff;
+`;
 
 export default CardListPage;

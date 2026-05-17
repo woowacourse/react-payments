@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../../common/components/Button';
 import type { Card } from '../../../domain/card/types/card';
 import CardListItem from './CardListItem';
+import styled from 'styled-components';
 
 type CardListProps = {
   cards: Card[];
@@ -16,7 +17,7 @@ const CardList = ({ cards, handleDeleteCard }: CardListProps) => {
   };
 
   return (
-    <>
+    <Wrapper>
       {cards.map((card) => (
         <CardListItem
           key={card.id}
@@ -25,8 +26,18 @@ const CardList = ({ cards, handleDeleteCard }: CardListProps) => {
         />
       ))}
       <Button value="+ 카드 추가" onClick={handleMoveToRegisterClick} />
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 16px;
+
+  width: 100%;
+`;
 
 export default CardList;
