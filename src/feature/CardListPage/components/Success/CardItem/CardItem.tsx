@@ -46,7 +46,7 @@ const CardItem = ({ cardItemInformaiton, onDeleteCard }: CardItemProps) => {
       <CardIcon $color={cardCompany.COLOR} />
       <CardInformationBox>
         <CardCompany>{cardCompany.KOR}</CardCompany>
-        <CardNumber>{number}</CardNumber>
+        <CardNumber>{number.replace(/.{4}/g, "$& ")}</CardNumber>
         <ExpiryDate>유효기간 {expirationDate}</ExpiryDate>
       </CardInformationBox>
       <DeleteButton onClick={() => handleCardDeleteClick(id)}>X</DeleteButton>
