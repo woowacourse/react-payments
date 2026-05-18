@@ -15,3 +15,11 @@ export function maskSpecialCardNumbers(cardNumbers: string[]): string[] {
   maskedCardNumbers.push(cardNumbers[2].slice(2, 4) + cardNumbers[3]);
   return maskedCardNumbers;
 }
+
+export function maskFetchCardNumbers(cardNumbers: string): string {
+  let maskCardNumbers = '';
+  maskCardNumbers = maskCardNumbers + cardNumbers.slice(0, 6) + ' ';
+  maskCardNumbers = maskCardNumbers + '*'.repeat(6) + ' ';
+  maskCardNumbers = maskCardNumbers + cardNumbers.slice(12);
+  return maskCardNumbers;
+}

@@ -4,6 +4,7 @@ import { CARD_ISSUER_CODE } from '../constants/constant';
 import { isCardExpiryDateComplete } from '../utils/validate';
 import type { CardIssuerType } from '../types/cardStausTypes';
 import type { CardInfo } from '../types/cardStausTypes';
+import { maskFetchCardNumbers } from '../utils/maskCardNumbers';
 
 type CardRequest = Omit<CardInfo, 'id' | 'issuerCode'> & {
   issuerCode: CardIssuerType;
@@ -65,7 +66,16 @@ export const handlers = [
   http.get('/api/cards', async () => {
     await delay(500);
 
-    return HttpResponse.json(cardInfo);
+    return HttpResponse.json(
+      cardInfo.map(({ id, number, expirationDate, issuerCode }) => {
+        return {
+          id,
+          number: maskFetchCardNumbers(number),
+          expirationDate,
+          issuerCode,
+        };
+      }),
+    );
   }),
 
   // delete
