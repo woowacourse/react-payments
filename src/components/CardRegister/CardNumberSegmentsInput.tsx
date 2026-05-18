@@ -9,6 +9,7 @@ import Flex from "../Common/Flex";
 import Label from "../Common/Label";
 import InputErrorMessage from "../Common/InputErrorMessage";
 import ValidationInput from "../Common/ValidationInput";
+import { couldBeValidBrand } from "../../utils/getCardBrand";
 import {
   numberSegmentValidations,
   numericOnlyValidations,
@@ -90,7 +91,18 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             value={props.value[index] ?? ""}
             onChange={handleSegmentChange}
             isShowError={true}
-            validations={numberSegmentValidations(maxLength)}
+            validations={
+              index === 0
+                ? [
+                    ...numberSegmentValidations(maxLength),
+                    {
+                      type: "validateOnChange" as const,
+                      validator: couldBeValidBrand,
+                      message: "유효하지 않은 카드 번호입니다.",
+                    },
+                  ]
+                : numberSegmentValidations(maxLength)
+            }
             autoFocus={index === 0 && props.value[0].length < segmentLengths[0]}
           />
         ))}
