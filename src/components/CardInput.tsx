@@ -15,7 +15,7 @@ import type {
   CardPassword as CardPasswordType,
   CardPasswordHandler,
 } from '../types/cardStausTypes';
-import { isValidCardNumber } from '../utils/cardBrand';
+import { isValidCardNumber } from '../utils/card/cardBrand';
 
 type CardInputProps = {
   cardStatus: CardStatus;

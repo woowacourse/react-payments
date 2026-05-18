@@ -7,7 +7,7 @@ import {
   getCardNumberGroupLengths,
   hasPotentialCardBrand,
   isValidCardNumber,
-} from '../utils/cardBrand';
+} from '../utils/card/cardBrand';
 import { isNotNumber } from '../utils/util';
 
 function matchCardNumberGroupCount(cardNumbers: string[], cardBrand: CardStatus['cardBrand']) {
