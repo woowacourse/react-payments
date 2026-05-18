@@ -5,7 +5,7 @@ import Button from "../components/Button/Button";
 import OutlinedButton from "../components/Button/OutlinedButton";
 import CardListItem from "../components/CardListItem/CardListItem";
 import CardListItemSkeleton from "../components/SkeletonUI/CardListItemSkeleton";
-
+import EmptyState from "../components/common/EmptyState";
 type CardItem = {
   id: string;
   issuerCode: string;
@@ -22,7 +22,10 @@ const CardList = () => {
 
   useEffect(() => {
     fetch("/cards")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error();
+        return res.json();
+      })
       .then((data: CardItem[]) => {
         setCards(data);
         setStatus("success");
@@ -54,7 +57,7 @@ const CardList = () => {
           align-self: flex-start;
         `}
       >
-        보유 카드 ({cards.length})
+        보유 카드 {cards.length !== 0 && `(${cards.length})`}
       </h1>
 
       {status === "loading" && (
@@ -71,28 +74,52 @@ const CardList = () => {
           <Button isActivate={false}></Button>
         </div>
       )}
-      {status === "error" && <p>카드 정보를 불러오지 못했습니다.</p>}
+      {status === "error" && (
+        <>
+          <EmptyState
+            icon={
+              <div
+                css={css`
+                  width: 64px;
+                  height: 64px;
+                  border-radius: 50%;
+                  background: #353c49;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-size: 32px;
+                  font-weight: 700;
+                `}
+              >
+                !
+              </div>
+            }
+            title="카드 목록을 불러올 수 없어요"
+            description="잠시 후 다시 시도해 주세요."
+          ></EmptyState>
+
+          <Button onClick={() => navigate("/add")}>다시 시도</Button>
+        </>
+      )}
       {status === "success" && cards.length === 0 && (
         <>
-          <div
-            css={css`
-              width: 160px;
-              height: 100px;
-              background: #f5f5f5;
-              border: 1px dashed #d9d9d9;
-              border-radius: 5px;
-            `}
-          ></div>
-          <h2
-            css={css`
-              font-weight: 700;
-              font-style: Bold;
-              font-size: 20px;
-            `}
-          >
-            등록된 카드가 없습니다.
-          </h2>
-          <p>아래 버튼을 눌러 첫 카드를 등록해보세요</p>
+          <EmptyState
+            icon={
+              <div
+                css={css`
+                  width: 160px;
+                  height: 100px;
+                  background: #f5f5f5;
+                  border: 1px dashed #d9d9d9;
+                  border-radius: 5px;
+                `}
+              ></div>
+            }
+            title="등록된 카드가 없습니다"
+            description="아래 버튼을 눌러 첫 카드를 등록해보세요"
+          ></EmptyState>
+
           <Button onClick={() => navigate("/add")}>카드 추가하기</Button>
         </>
       )}
