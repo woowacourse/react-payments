@@ -28,14 +28,14 @@ const BrandMap = {
 };
 
 const cardColors = {
-  bc: '#F04651',
-  shinhan: '#0046FF',
-  kakao: '#FFE600',
-  hyundai: '#000000',
-  woori: '#007BC8',
-  lotte: '#ED1C24',
-  hana: '#009490',
-  kb: '#6A6056',
+  BC: '#F04651',
+  SHINHAN: '#0046FF',
+  KAKAOBANK: '#FFE600',
+  HYUNDAI: '#000000',
+  WOORI: '#007BC8',
+  LOTTE: '#ED1C24',
+  HANA: '#009490',
+  KOOKMIN: '#6A6056',
 };
 
 export const CreditCard = ({
