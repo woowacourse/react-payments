@@ -7,6 +7,7 @@ import {
 } from "../../types";
 import Flex from "../Common/Flex";
 import Label from "../Common/Label";
+import InputErrorMessage from "../Common/InputErrorMessage";
 import ValidationInput from "../Common/ValidationInput";
 import {
   numberSegmentValidations,
@@ -51,6 +52,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
   };
 
   if (!props.brand && props.value.length === 1) {
+    const showBrandError = props.value[0].length === 4;
     return (
       <Flex direction="column" gap={10}>
         <Label>카드 번호</Label>
@@ -61,9 +63,12 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
           value={props.value[0]}
           maxLength={4}
           onChange={handleSingleChange}
-          isShowError={true}
+          isShowError={false}
           validations={numericOnlyValidations}
         />
+        <InputErrorMessage>
+          {showBrandError ? "유효하지 않은 카드 번호입니다." : undefined}
+        </InputErrorMessage>
       </Flex>
     );
   }
