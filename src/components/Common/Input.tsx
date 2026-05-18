@@ -7,6 +7,13 @@ const Input = styled.input`
   padding: 8px;
   border: 1px solid var(--color-border);
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-500);
+    border-color: var(--color-gray-300);
+  }
+
   &:focus {
     border-color: var(--color-black);
     outline: 0;

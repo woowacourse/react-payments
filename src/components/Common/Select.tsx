@@ -14,6 +14,13 @@ const SelectBase = styled.select<SelectProps>`
   appearance: none;
   color: ${(props) => (props.value?.length ? 'var(--color-black)' : 'var(--color-description)')};
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-500);
+    border-color: var(--color-gray-300);
+  }
+
   &,
   &::picker(select) {
     appearance: base-select;
