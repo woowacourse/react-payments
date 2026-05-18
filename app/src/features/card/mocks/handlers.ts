@@ -3,13 +3,6 @@ import { CardSerializer } from "../Serializer";
 import db from "./db";
 
 export const handlers = [
-  http.get("https://api.example.com/user", () => {
-    return HttpResponse.json({
-      firstName: "John",
-      lastName: "Maverick",
-    });
-  }),
-
   http.get("https://api.autholibank.com/cards", () => {
     const cards = db.card.getAll();
     return HttpResponse.json({

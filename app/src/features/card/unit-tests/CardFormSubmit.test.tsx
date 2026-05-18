@@ -12,7 +12,7 @@ function renderCardCreate() {
     <MemoryRouter initialEntries={["/"]}>
       <Routes>
         <Route path="/" element={<CardCreate />} />
-        <Route path="/card/done" element={<div>카드 생성 완료</div>} />
+        <Route path="/card/create/done" element={<div>카드 생성 완료</div>} />
       </Routes>
     </MemoryRouter>,
   );

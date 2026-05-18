@@ -9,17 +9,6 @@ describe("handler test", () => {
     jest.restoreAllMocks();
   });
 
-  test("get user", async () => {
-    const response = await fetch("https://api.example.com/user");
-
-    expect(response.status).toBe(200);
-    expect(response.statusText).toBe("OK");
-    expect(await response.json()).toEqual({
-      firstName: "John",
-      lastName: "Maverick",
-    });
-  });
-
   test("create card", async () => {
     const body = JSON.stringify({
       number: "4321432143214321",
