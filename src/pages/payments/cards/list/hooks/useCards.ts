@@ -1,28 +1,12 @@
-import { useLoadData } from '@/services/core/useLoadData';
-import { useExecute } from '@/services/core/useExecute';
-
-import { getCards } from '@/services/apis/cards/cards';
-import { deleteCards } from '@/services/apis/cards/cards';
-
-import { mapCardsResponseDTOToModel } from '@/services/apis/cards/mapper';
-import type { Card } from '@/pages/payments/cards/list/model';
+import { useLoadCards } from './useLoadCards';
+import { useDeleteCards } from './useDeleteCard';
 
 export const useCards = () => {
   // read
-  const { status, refetch } = useLoadData<Card[]>({
-    queryFn: async () => {
-      const data = await getCards();
-      return mapCardsResponseDTOToModel(data);
-    },
-  });
+  const { status, refetch } = useLoadCards();
 
   // delete
-  const { mutate } = useExecute({
-    executeFn: deleteCards,
-    onSuccess: () => {
-      refetch();
-    },
-  });
+  const { mutate } = useDeleteCards({ onSuccess: refetch });
 
   return { status, deleteCard: mutate };
 };
