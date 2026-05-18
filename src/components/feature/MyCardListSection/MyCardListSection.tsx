@@ -1,27 +1,25 @@
+import useCards from "@hooks/feature/query/useCards";
 import CardItem from "@components/common/CardItem";
 import styled from "@emotion/styled";
 
 const MyCardListSection = () => {
-  const mock = [
-    {
-      id: "550e8400-e29b-41d4-a716-446655440000",
-      issuerCode: "31",
-      number: "551112******9012",
-      expirationDate: "12/28",
-    },
-    {
-      id: "550e8400-e29b-41d4-a716-446655440000",
-      issuerCode: "31",
-      number: "551112******9012",
-      expirationDate: "12/28",
-    },
-  ];
+  const { data, error, state } = useCards();
+
+  if (state === "loading") {
+    return <div>카드 정보를 불러오는 중입니다...</div>;
+  }
+
+  if (state === "error" || !data) {
+    return (
+      <div>카드 정보를 불러오는 중 오류가 발생했습니다: {error?.message}</div>
+    );
+  }
 
   return (
     <Wrapper>
       <Header>보유 카드</Header>
       <CardContainer>
-        {mock.map((props) => (
+        {data.map((props) => (
           <CardItem {...props} key={props.id} />
         ))}
       </CardContainer>

@@ -26,4 +26,5 @@ const useQuery = <ResponseType>({ queryFn }: UseQueryParams<ResponseType>) => {
 
   return { state, data, error };
 };
+
 export default useQuery;

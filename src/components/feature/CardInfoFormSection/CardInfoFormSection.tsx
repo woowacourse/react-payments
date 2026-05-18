@@ -27,6 +27,8 @@ const CardInfoFormSection = () => {
     const cvc = getValue("CVC");
     const { month, year } = getValue("validityPeriod");
     const expirationDate = `${month}/${year}`;
+
+    // TODO: 타입 안전하게 변경하기
     const issuerCode = CARD.COMPANY_SELECT_FIELD.find(
       (field) => field.value === cardCompany,
     )?.issuerCode;
@@ -35,7 +37,7 @@ const CardInfoFormSection = () => {
       number: cardNumber,
       expirationDate,
       cvc,
-      issuerCode,
+      issuerCode: issuerCode!,
     };
 
     registerCard(cardInfo, {
