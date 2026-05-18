@@ -6,6 +6,8 @@ import OutlinedButton from "@/components/Button/OutlinedButton";
 import CardListItem from "@/components/CardListItem/CardListItem";
 import CardListSkeleton from "@/components/SkeletonUI/CardListSkeleton";
 import EmptyState from "@/components/common/EmptyState";
+import ErrorIcon from "@/components/common/ErrorIcon";
+import EmptyCardIcon from "@/components/common/EmptyCardIcon";
 import { getCards, deleteCard, type CardItem } from "@/api/cards";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -58,24 +60,7 @@ const CardList = () => {
       {status === "error" && (
         <>
           <EmptyState
-            icon={
-              <div
-                css={css`
-                  width: 64px;
-                  height: 64px;
-                  border-radius: 50%;
-                  background: #353c49;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  color: white;
-                  font-size: 32px;
-                  font-weight: 700;
-                `}
-              >
-                !
-              </div>
-            }
+            icon={<ErrorIcon />}
             title="카드 목록을 불러올 수 없어요"
             description="잠시 후 다시 시도해 주세요."
           ></EmptyState>
@@ -86,17 +71,7 @@ const CardList = () => {
       {status === "success" && cards.length === 0 && (
         <>
           <EmptyState
-            icon={
-              <div
-                css={css`
-                  width: 160px;
-                  height: 100px;
-                  background: #f5f5f5;
-                  border: 1px dashed #d9d9d9;
-                  border-radius: 5px;
-                `}
-              ></div>
-            }
+            icon={<EmptyCardIcon />}
             title="등록된 카드가 없습니다"
             description="아래 버튼을 눌러 첫 카드를 등록해보세요"
           ></EmptyState>
