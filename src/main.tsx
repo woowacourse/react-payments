@@ -4,7 +4,9 @@ import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import AddCardCompletePage from './pages/AddCardCompletePage';
 import AddCardPage from './pages/AddCardPage';
+import CardListPage from './pages/CardListPage';
 import MobileLayout from './components/ui/MobileLayout';
+import { ROUTES } from './routes';
 
 if (import.meta.env.DEV) {
   const { worker } = await import('./msw/browser');
@@ -17,8 +19,9 @@ const router = createBrowserRouter(
       path: '/',
       Component: MobileLayout,
       children: [
-        { index: true, Component: AddCardPage },
-        { path: 'complete', Component: AddCardCompletePage },
+        { index: true, Component: CardListPage },
+        { path: ROUTES.addCard, Component: AddCardPage },
+        { path: ROUTES.addCardComplete, Component: AddCardCompletePage },
       ],
     },
   ],
