@@ -10,7 +10,7 @@ export default function CardListPage() {
       const allCards = await getCards();
       setCards(allCards);
     };
-    fetchCards;
+    fetchCards();
   }, []);
 
   return <CardList cards={cards} />;

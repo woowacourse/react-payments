@@ -40,13 +40,13 @@ export const WithCards: Story = {
       {
         id: "1234-1234-1234-1234-1235",
         issuerCode: "41",
-        number: "7733321003658888",
+        number: "4733321003658888",
         expirationDate: "12/28",
       },
       {
         id: "1234-1234-1234-1234-1236",
         issuerCode: "15",
-        number: "0919009998767129",
+        number: "36190099987671",
         expirationDate: "12/28",
       },
     ],
