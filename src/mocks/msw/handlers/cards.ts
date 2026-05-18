@@ -38,6 +38,8 @@ const validateExpirationDate = (value: unknown): boolean => {
   return monthNumber >= 1 && monthNumber <= 12;
 };
 
+let copiedCards = [...cards];
+
 export const handlers = [
   http.post('/cards', async ({ request }) => {
     const data = await request.clone().json();
@@ -69,9 +71,13 @@ export const handlers = [
     return HttpResponse.json({ id: crypto.randomUUID() }, { status: 201 });
   }),
   http.get('/cards', () => {
-    return HttpResponse.json(cards, { status: 201 });
+    return HttpResponse.json(copiedCards, { status: 201 });
   }),
-  http.delete('/cards/:id', () => {
+  http.delete('/cards/:id', ({ params }) => {
+    const { id } = params;
+
+    copiedCards = copiedCards.filter((card) => card.id !== id);
+
     return HttpResponse.json(undefined, { status: 204 });
   }),
 ];
