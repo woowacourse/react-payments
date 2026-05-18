@@ -1,7 +1,7 @@
 import { styled } from 'storybook/theming';
 import CardNumbers from './CardNumbers';
-import { CardNumbersType } from '../Form/PaymentForm';
-import { BRAND_ICON_MAP, CARD_BRAND } from '../../constants';
+import { BRAND_ICON_MAP, CARD_BRAND } from '../../../constants';
+import { CardNumbersType } from '../../Form/PaymentForm';
 
 export type CardBrand = (typeof CARD_BRAND)[keyof typeof CARD_BRAND];
 

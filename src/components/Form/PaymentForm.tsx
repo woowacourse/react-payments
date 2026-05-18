@@ -1,6 +1,5 @@
 import { ChangeEvent, SubmitEvent, useState } from 'react';
 import styled from '@emotion/styled';
-import CardPreview from '../CardPreview/CardPreview';
 import InputFieldLayout from '../Layout/InputFieldLayout';
 import {
   cardNumbersValidator,
@@ -21,6 +20,7 @@ import { detectCardBrand, getCardIssuerBackgroundColor } from '../../utils/cards
 import { getCardNumbersMaxLength } from '../../utils/fields';
 import Button from '../Common/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import CardPreview from '../Card/CardPreview/CardPreview';
 
 export type Step = 1 | 2 | 3 | 4 | 5 | 6;
 export type CardNumbersType = [string, string, string, string];
