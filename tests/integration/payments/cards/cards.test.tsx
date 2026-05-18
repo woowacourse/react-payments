@@ -7,6 +7,8 @@ import { http, HttpResponse } from 'msw';
 import { renderProvider } from '../../../utils/render';
 
 import { server } from '../../../../src/mocks/msw/server';
+import { cards } from '../../../../src/mocks/data/cards';
+
 import { AppRoutes } from '../../../../src/routes';
 
 describe('카드 목록 페이지 테스트', async () => {
@@ -57,5 +59,25 @@ describe('카드 목록 페이지 테스트', async () => {
 
     // ASSERT
     expect(await screen.findByText(/카드 목록을 불러올 수 없어요/)).toBeInTheDocument();
+  });
+
+  test('카드 삭제 시 카드 목록에서 삭제했던 카드가 삭제된다 ', async () => {
+    // ARRANGE
+    renderProvider(<AppRoutes />, { route: '/payments/cards' });
+
+    // ACT
+    const items = await screen.findAllByRole('button');
+    const firstItem = items[0];
+
+    userEvent.click(firstItem);
+
+    server.use(
+      http.get('/cards', () => {
+        return HttpResponse.json(cards.slice(1));
+      }),
+    );
+
+    // ASSERT
+    expect(await screen.findByText(cards[0].expirationDate)).not.toBeInTheDocument();
   });
 });
