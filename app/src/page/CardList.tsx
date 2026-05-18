@@ -15,6 +15,7 @@ export function CardList() {
     try {
       setCardListState({ status: 'loading' });
       const responseData = await getCards();
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setCardListState({ status: 'success', responseData: responseData });
     } catch (err) {
       if (err instanceof Error) {
@@ -24,7 +25,10 @@ export function CardList() {
   };
 
   useEffect(() => {
-    fetchCards();
+    const load = async () => {
+      await fetchCards();
+    };
+    load();
   }, []);
 
   const renderContent = () => {

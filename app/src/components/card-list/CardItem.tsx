@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 export function CardItem() {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <CardContainer>
@@ -12,7 +15,13 @@ export function CardItem() {
         </div>
         <button>✕</button>
       </CardContainer>
-      <AddCardButton>+ 카드 추가</AddCardButton>
+      <AddCardButton
+        onClick={() => {
+          navigate('/react-payments/add');
+        }}
+      >
+        + 카드 추가
+      </AddCardButton>
     </Container>
   );
 }
