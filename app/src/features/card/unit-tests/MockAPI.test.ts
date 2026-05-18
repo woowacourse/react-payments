@@ -1,4 +1,14 @@
+const FIXED_UUID = "123-123-123-123-123";
+
 describe("handler test", () => {
+  beforeAll(() => {
+    jest.spyOn(crypto, "randomUUID").mockReturnValue(FIXED_UUID);
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   test("get user", async () => {
     const response = await fetch("https://api.example.com/user");
 
@@ -23,7 +33,7 @@ describe("handler test", () => {
     });
     expect(response.status).toBe(201);
     expect(await response.json()).toEqual({
-      message: "카드 생성!",
+      id: FIXED_UUID,
     });
   });
 });

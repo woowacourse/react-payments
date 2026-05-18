@@ -19,8 +19,9 @@ export const handlers = [
     };
     const result = CardSerializer.validate(cardData);
     if (result.isValid) {
-      db.card.create({ ...cardData, id: crypto.randomUUID() });
-      return HttpResponse.json({ message: "카드 생성!" }, { status: 201 });
+      const id = crypto.randomUUID();
+      db.card.create({ ...cardData, id: id });
+      return HttpResponse.json({ id: id }, { status: 201 });
     } else {
       return HttpResponse.json(
         { errorMessages: result.errors },
