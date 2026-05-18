@@ -17,7 +17,7 @@ const meta = {
     },
     cardCompany: {
       control: 'inline-radio',
-      options: ['', 'bc', 'shinhan', 'kakao', 'hyundai', 'woori', 'lotte', 'nh', 'hana'],
+      options: ['', 'bc', 'shinhan', 'kakao', 'hyundai', 'woori', 'lotte', 'hana', 'kookmin'],
       description: '카드사',
     },
     cardNumber: {

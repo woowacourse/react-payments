@@ -21,8 +21,8 @@ export const CARD_COMPANY_OPTIONS = [
   { label: '현대카드', value: 'hyundai' },
   { label: '우리카드', value: 'woori' },
   { label: '롯데카드', value: 'lotte' },
-  { label: 'NH농협카드', value: 'nh' },
   { label: '하나카드', value: 'hana' },
+  { label: '국민카드', value: 'kookmin' },
 ] as const;
 
 export const FIELD_STEP = {

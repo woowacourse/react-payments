@@ -22,7 +22,6 @@ const CARD_COMPANY_COLORS: Partial<Record<string, string>> = {
   woori: 'var(--color-brand-woori-card)',
   lotte: 'var(--color-brand-lotte-card)',
   hana: 'var(--color-brand-hana-card)',
-  nh: 'var(--color-brand-kb-card)',
 };
 
 interface CardProps {
