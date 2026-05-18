@@ -103,11 +103,11 @@
 - [ ] MSW
   - [ ] MSW 핸들러 (GET, POST, DELETE)
     - [ ] 엔드포인트
-      - [ ] POST (/cards)
+      - [x] POST (/cards)
         - [ ] 400 시나리오(지원하지 않는 카드사 등)를 추가
-      - [ ] GET (/cards)
-      - [ ] DELETE (/cards/:id)
-  - [ ] worker 세팅
-  - [ ] db 파일 만들기
+      - [x] GET (/cards)
+      - [x] DELETE (/cards/:id)
+  - [x] worker 세팅
+  - [x] db 파일 만들기
   - [ ] 비동기 상태를 idle | loading | success | error 네 가지로 명시적으로 다루기
-    - [ ] AsyncState 타입 네 가지 유니온타입으로 만들기
+    - [x] AsyncState 타입 네 가지 유니온타입으로 만들기
