@@ -8,20 +8,7 @@ import { validatePostedCard } from '../../feature/CardList/utils/ValidatePostedC
 import { getCardIssuerCode } from '../../feature/CardList/utils/issuerCode';
 import { maskCardNumber } from '../../domain/card/utils/cardDisplay';
 
-const cards: Card[] = [
-  {
-    id: '550e8400-e29b-41d4-a716-446655440000',
-    issuerCode: '31',
-    number: '551112******9012',
-    expirationDate: '12/28',
-  },
-  {
-    id: '550e8400-e29b-41d4-a716-446655441234',
-    issuerCode: '41',
-    number: '121212******9012',
-    expirationDate: '06/32',
-  },
-];
+const cards: Card[] = [];
 
 export const cardHandlers = [
   // GET 요청 모킹
