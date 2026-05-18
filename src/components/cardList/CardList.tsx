@@ -10,7 +10,7 @@ type Connection = "idle" | "loading" | "success" | "error";
 export default function CardList() {
   const [connection, setConnection] = useState<Connection>("idle");
   const [data, setData] = useState<CardGetResponse[] | null>(null);
-  const fetchData = async () => {
+  const getFetchData = async () => {
     try {
       setConnection("loading");
       const response = await fetch("/cards");
@@ -31,7 +31,7 @@ export default function CardList() {
 
   useEffect(() => {
     setTimeout(() => {
-      fetchData();
+      getFetchData();
     }, 0);
   }, []);
 
@@ -42,7 +42,27 @@ export default function CardList() {
   };
 
   const retryButton = () => {
-    fetchData();
+    getFetchData();
+  };
+
+  const deleteFetchData = async (id: string) => {
+    if (window.confirm("해당 카드를 삭제하시겠습니까?")) {
+      try {
+        const response = await fetch(`/cards/${id}`, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) throw new Error(`오류 발생: ${response.status}`);
+      } catch (error) {
+        console.error("해당 카드 삭제 실패", error);
+        alert("카드 삭제에 실패했습니다. 다시 시도해주세요.");
+      }
+    }
+  };
+
+  const deleteCard = (id: string) => {
+    deleteFetchData(id);
+    getFetchData();
   };
 
   const findCardColor = (issuerCode: string) => {
@@ -131,7 +151,9 @@ export default function CardList() {
                 <p>{splitCardNumberAlongCardType(card.number)}</p>
                 <p>유효기간 {card.expirationDate}</p>
               </MyCardInfo>
-              <Delete type="button">x</Delete>
+              <Delete type="button" onClick={() => deleteCard(card.id)}>
+                x
+              </Delete>
             </IndividualCard>
           ))}
           <AddButton
@@ -296,6 +318,7 @@ const Delete = styled.button`
   height: 19px;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 `;
 
 const AddButton = styled.button`
