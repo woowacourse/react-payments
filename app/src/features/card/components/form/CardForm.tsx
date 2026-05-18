@@ -9,6 +9,7 @@ import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
 import { Button } from "../../style/Button";
 import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
+import { createCard } from "../../Api";
 import { joinCardNumber } from "../../Utils";
 import type { CardNumber, SetState } from "../../types";
 import type { ExpiryDate } from "../../ExpiryDate";
@@ -59,32 +60,23 @@ export function CardForm({
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const response = await fetch("https://api.antolibank.com/cards", {
-        method: "POST",
-        body: JSON.stringify({
-          number: joinCardNumber(cardNumber),
-          expirationDate: cardExpiryDate.toSlashFormat(),
-          cvc: cardCVC,
-          issuerCode: convertCardBrandToIssuerCode(cardBrand),
-        }),
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        const errorCodes = Object.values(
-          data.errorMessages as Record<string, { code: string } | null>,
-        )
-          .filter(Boolean)
-          .map((err) => (err as { code: string }).code);
-        setFormErrorCodes(errorCodes);
-        return;
-      }
-      gotoCreateCardDonePage();
-    } catch (err) {
-      // 임시처리 입니다.
-      // RTL과 함께 구현될 예정.
-      console.log(err);
+    const response = await createCard(
+      joinCardNumber(cardNumber),
+      cardExpiryDate.toSlashFormat(),
+      cardCVC,
+      convertCardBrandToIssuerCode(cardBrand),
+    );
+    const data = await response.json();
+    if (!response.ok) {
+      const errorCodes = Object.values(
+        data.errorMessages as Record<string, { code: string } | null>,
+      )
+        .filter(Boolean)
+        .map((err) => (err as { code: string }).code);
+      setFormErrorCodes(errorCodes);
+      return;
     }
+    gotoCreateCardDonePage();
   };
 
   return (
