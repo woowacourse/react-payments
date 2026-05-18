@@ -33,9 +33,13 @@ export const useLoadData = <T = unknown>({ queryFn }: Options): Result<T> => {
     }
   }, [queryFn]);
 
+  const refetch = useCallback(() => {
+    return fetchData();
+  }, [fetchData]);
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  return { status };
+  return { status, refetch };
 };

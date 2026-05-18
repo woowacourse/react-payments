@@ -32,4 +32,5 @@ export type Status<T = unknown> = IdleStatus | SuccessStatus<T> | ErrorStatus | 
 
 export type Result<T = unknown> = {
   status: Status<T>;
+  refetch: () => Promise<T | void>;
 };
