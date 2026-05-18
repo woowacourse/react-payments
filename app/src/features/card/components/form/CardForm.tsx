@@ -6,6 +6,7 @@ import { CardCVCInput } from "./CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput";
 import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
 import { Button } from "../../style/Button";
+import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
 import { joinCardNumber } from "../../Utils";
 import type { CardNumber, CardExpiryDate, SetState } from "../../types";
@@ -62,8 +63,7 @@ export function CardForm({
           // expiryDate를 MM/YY 형식으로 전환.
           cardExpiryDate: cardExpiryDate,
           cardCVC: cardCVC,
-          // issuerCode로 전환하는 로직 필요.
-          cardIssuerCode: cardBrand,
+          cardIssuerCode: convertCardBrandToIssuerCode(cardBrand),
         }),
       });
       gotoCreateCardDonePage();
