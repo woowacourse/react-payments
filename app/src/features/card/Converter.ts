@@ -18,3 +18,7 @@ export const errorCodeToErrorMessage = (
     )
     .filter(Boolean);
 };
+
+export const convertIssuerCodeToCardBrand = (code: string) => {
+  return Object.values(CARD_BRAND).find((brand) => brand.code === code);
+};

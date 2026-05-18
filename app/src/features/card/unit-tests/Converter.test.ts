@@ -1,4 +1,7 @@
-import { convertCardBrandToIssuerCode, errorCodeToErrorMessage } from "../Converter";
+import {
+  convertCardBrandToIssuerCode,
+  errorCodeToErrorMessage,
+} from "../Converter";
 
 describe("convertCardBrandToIssuerCode", () => {
   test("유효한 카드 브랜드를 전달하면 해당 issuer code를 반환한다.", () => {
@@ -24,12 +27,15 @@ describe("errorCodeToErrorMessage", () => {
       errorCodeToErrorMessage(["INVALID_CARD_NUMBER"], ["INVALID_CARD_NUMBER"]),
     ).toEqual(["유효하지 않은 카드 번호입니다."]);
 
-    expect(
-      errorCodeToErrorMessage(["INVALID_CVC"], ["INVALID_CVC"]),
-    ).toEqual(["유효하지 않은 CVC입니다."]);
+    expect(errorCodeToErrorMessage(["INVALID_CVC"], ["INVALID_CVC"])).toEqual([
+      "유효하지 않은 CVC입니다.",
+    ]);
 
     expect(
-      errorCodeToErrorMessage(["INVALID_EXPIRATION_DATE"], ["INVALID_EXPIRATION_DATE"]),
+      errorCodeToErrorMessage(
+        ["INVALID_EXPIRATION_DATE"],
+        ["INVALID_EXPIRATION_DATE"],
+      ),
     ).toEqual(["유효하지 않은 만료일입니다."]);
   });
 
@@ -50,14 +56,10 @@ describe("errorCodeToErrorMessage", () => {
   });
 
   test("codes가 빈 배열이면 빈 배열을 반환한다.", () => {
-    expect(
-      errorCodeToErrorMessage([], ["INVALID_CARD_NUMBER"]),
-    ).toEqual([]);
+    expect(errorCodeToErrorMessage([], ["INVALID_CARD_NUMBER"])).toEqual([]);
   });
 
   test("fieldCodes가 빈 배열이면 빈 배열을 반환한다.", () => {
-    expect(
-      errorCodeToErrorMessage(["INVALID_CARD_NUMBER"], []),
-    ).toEqual([]);
+    expect(errorCodeToErrorMessage(["INVALID_CARD_NUMBER"], [])).toEqual([]);
   });
 });

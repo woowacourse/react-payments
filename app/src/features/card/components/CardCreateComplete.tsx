@@ -17,8 +17,8 @@ export default function CardCreateComplete() {
           alt="card-create-complete"
         ></CreateCompleteSVG>
         <p>
-          {firstDigitsCardNumber}로 시작하는 {CARD_BRAND[cardBrand].title}
-          카드 가 등록되었어요.
+          {firstDigitsCardNumber}로 시작하는 {CARD_BRAND[cardBrand].title}가
+          등록되었어요.
         </p>
         <RadiusButton type="button" onClick={() => navigate("/card/")}>
           확인

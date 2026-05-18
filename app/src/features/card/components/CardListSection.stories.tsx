@@ -34,19 +34,19 @@ export const WithCards: Story = {
       {
         id: "1234-1234-1234-1234-1234",
         issuerCode: "31",
-        number: "551112******9012",
+        number: "5511128340239012",
         expirationDate: "12/28",
       },
       {
         id: "1234-1234-1234-1234-1235",
         issuerCode: "41",
-        number: "773332******8888",
+        number: "7733321003658888",
         expirationDate: "12/28",
       },
       {
         id: "1234-1234-1234-1234-1236",
         issuerCode: "15",
-        number: "091900******7129",
+        number: "0919009998767129",
         expirationDate: "12/28",
       },
     ],

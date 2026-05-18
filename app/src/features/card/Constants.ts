@@ -13,12 +13,12 @@ export const NETWORK_BRAND_RULE = {
 
 export const CARD_BRAND = {
   bc: {
-    title: "BC",
+    title: "BC카드",
     bgHex: "F04651",
     code: "31",
   },
   sinhan: {
-    title: "신한",
+    title: "신한카드",
     bgHex: "0046FF",
     code: "41",
   },
@@ -28,27 +28,27 @@ export const CARD_BRAND = {
     code: "15",
   },
   hyundai: {
-    title: "현대",
+    title: "현대카드",
     bgHex: "000000",
     code: "61",
   },
   woori: {
-    title: "우리",
+    title: "우리카드",
     bgHex: "007BC8",
     code: "W1",
   },
   lotte: {
-    title: "롯데",
+    title: "롯데카드",
     bgHex: "ED1C24",
     code: "71",
   },
   hana: {
-    title: "하나",
+    title: "하나카드",
     bgHex: "009490",
     code: "21",
   },
   kookmin: {
-    title: "국민",
+    title: "국민카드",
     bgHex: "6A6056",
     code: "11",
   },
