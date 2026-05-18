@@ -32,7 +32,7 @@ export function CardList() {
     //   return <CardListSkeleton />;
     // if (cardListState.status === 'error') return <CardListError />;
     // if (cardListState.responseData.length === 0) return <CardListEmpty />;
-    return <CardItem />;
+    return <CardListEmpty />;
   };
 
   return (
