@@ -1,8 +1,8 @@
 import { delay, http, HttpResponse } from "msw";
 import { BASE_URL } from "../shared/constants";
-import type { PostCardRequestBody } from "../feature/CardRegisterPage/api/card";
 import type { CardItemInformationType } from "../feature/CardListPage/types/cardItem";
 import { CARD } from "../feature/CardRegisterPage/constants";
+import type { PostCardRequestBody } from "../feature/CardRegisterPage/types/card";
 
 const cards: CardItemInformationType[] = [];
 

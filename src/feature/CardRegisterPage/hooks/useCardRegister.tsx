@@ -1,9 +1,7 @@
 import { useAsyncState } from "../../../shared/hooks/useAsyncState";
-import {
-  requestRegisterCard,
-  type ErrorInformation,
-  type PostCardRequestBody,
-} from "../api/card";
+import type { RequestErrorInformation } from "../../../shared/types/api";
+import { requestRegisterCard } from "../api/card";
+import type { PostCardRequestBody } from "../types/card";
 
 export const useCardRegister = () => {
   const { asyncState, setLoading, setSuccess, setError } = useAsyncState();
@@ -11,7 +9,7 @@ export const useCardRegister = () => {
   const registerCard = async (
     postCardInformation: PostCardRequestBody,
     onSuccess: () => void,
-    onError: (error: ErrorInformation | Error) => void,
+    onError: (error: RequestErrorInformation | Error) => void,
   ) => {
     try {
       setLoading();
@@ -21,7 +19,7 @@ export const useCardRegister = () => {
       onSuccess();
     } catch (error) {
       setError();
-      onError(error as ErrorInformation | Error);
+      onError(error as RequestErrorInformation | Error);
     }
   };
 

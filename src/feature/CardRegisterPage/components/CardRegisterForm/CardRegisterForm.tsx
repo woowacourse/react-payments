@@ -25,16 +25,14 @@ import {
 import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
 import BaseButton from "../../../../shared/components/Button/BaseButton";
-import {
-  type ErrorInformation,
-  type PostCardRequestBody,
-} from "../../api/card";
 import { useCardRegister } from "../../hooks/useCardRegister";
 import { useCardRegisterFormError } from "../../hooks/useCardRegisterFormError";
 import type { IssuerKoreanNameType } from "../../../../shared/types/Issuer";
 import { getIssuerCodeByName } from "../../../../shared/utils/issuer";
 import { useNavigate } from "react-router-dom";
 import { useFormStep } from "../../hooks/useFormStep";
+import type { RequestErrorInformation } from "../../../../shared/types/api";
+import type { PostCardRequestBody } from "../../types/card";
 
 const CardRegisterForm = ({
   cardInfo,
@@ -136,7 +134,7 @@ const CardRegisterForm = ({
     );
   };
 
-  const handleRegisterError = (error: Error | ErrorInformation) => {
+  const handleRegisterError = (error: Error | RequestErrorInformation) => {
     if (!("code" in error)) {
       alert("카드 등록 중 에러가 발생했습니다.");
       return;

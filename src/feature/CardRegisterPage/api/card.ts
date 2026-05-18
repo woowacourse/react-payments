@@ -1,18 +1,6 @@
 import { BASE_URL } from "../../../shared/constants";
-import type { IssuerCodeType } from "../../../shared/types/Issuer";
-
-// todo 위치 이동 필요
-export type PostCardRequestBody = {
-  number: string;
-  expirationDate: string;
-  cvc: string;
-  issuerCode: IssuerCodeType;
-};
-
-export type ErrorInformation = {
-  code: string;
-  message: string;
-};
+import type { RequestErrorInformation } from "../../../shared/types/api";
+import type { PostCardRequestBody } from "../types/card";
 
 export const requestRegisterCard = async (
   postCardInformation: PostCardRequestBody,
@@ -23,7 +11,7 @@ export const requestRegisterCard = async (
   });
 
   if (!response.ok) {
-    const error: ErrorInformation = await response.json();
+    const error: RequestErrorInformation = await response.json();
     throw error;
   }
 
