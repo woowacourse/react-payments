@@ -8,5 +8,5 @@ export const useCards = () => {
   // delete
   const { mutate } = useDeleteCards({ onSuccess: refetch });
 
-  return { status, deleteCard: mutate };
+  return { status, loadCard: refetch, deleteCard: mutate };
 };

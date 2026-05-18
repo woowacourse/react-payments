@@ -37,8 +37,13 @@ const formatCardNumberForMasking = (maskedNumber: string, mask: string = '*'): s
 export const Cards = () => {
   const {
     status: { status, data: cards },
+    loadCard,
     deleteCard,
   } = useCards();
+
+  const handleRetryClick = () => {
+    loadCard();
+  };
 
   const handleDeleteClick = async (id: string) => {
     const confirm = window.confirm('정말 삭제하시겠습니까?');
@@ -73,7 +78,7 @@ export const Cards = () => {
           symbol="info"
           description="잠시 후 다시 시도해 주세요."
           action={
-            <Button variant="primary" block>
+            <Button variant="primary" block onClick={handleRetryClick}>
               다시 시도
             </Button>
           }
