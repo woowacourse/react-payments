@@ -7,13 +7,16 @@ import { BrowserRouter } from "react-router-dom";
 async function enableMocking() {
   if (import.meta.env.DEV) {
     const { worker } = await import("./mocks/browser");
-    return worker.start({ onUnhandledRequest: "bypass" });
+    return worker.start({
+      serviceWorker: { url: "/react-payments/mockServiceWorker.js" },
+      onUnhandledRequest: "bypass",
+    });
   }
 }
 
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
-    <BrowserRouter>
+    <BrowserRouter basename="/react-payments">
       <StrictMode>
         <App />
       </StrictMode>

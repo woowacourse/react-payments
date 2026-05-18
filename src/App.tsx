@@ -1,6 +1,7 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { CardRegisterPage } from "./pages/CardRegisterPage";
 import { CardRegisterCompletePage } from "./pages/CardRegisterCompletePage";
+import CardDashboardPage from "./pages/CardDashboardPage";
 import { useCardForm } from "./hooks/useCardForm";
 
 function App() {
@@ -8,8 +9,10 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/cards" replace />} />
+      <Route path="/cards" element={<CardDashboardPage />} />
       <Route
-        path="/react-payments"
+        path="/cards/register"
         element={
           <CardRegisterPage
             cardFormState={cardFormState}
@@ -20,11 +23,7 @@ function App() {
       />
       <Route
         path="/react-payments/success"
-        element={
-          <CardRegisterCompletePage
-            cardFormState={cardFormState}
-          />
-        }
+        element={<CardRegisterCompletePage cardFormState={cardFormState} />}
       />
     </Routes>
   );
