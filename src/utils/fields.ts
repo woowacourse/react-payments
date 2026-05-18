@@ -1,4 +1,4 @@
-import { CardBrand } from '../components/CardPreview/CardPreview';
+import { CardBrand } from '../components/Card/CardPreview/CardPreview';
 import { CARD_BRAND } from '../constants';
 
 export const getCardNumbersMaxLength = (
