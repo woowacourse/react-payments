@@ -6,7 +6,7 @@ const INITIAL_CARD_INFO: CardInfo = {
   numbers: [],
   expiry: [],
   cvc: "",
-  company: "",
+  issuerCode: "",
   password: "",
 };
 
@@ -17,8 +17,8 @@ export const useCardInfo = () => {
     setCardInfo((prev) => ({ ...prev, ...partial }));
   };
 
-  const cardNumberHandler = (numbers: string[]) => setFields({ numbers, company: "" });
-  const cardCompanyHandler = (company: string) => setFields({ company });
+  const cardNumberHandler = (numbers: string[]) => setFields({ numbers, issuerCode: "" });
+  const cardIssuerHandler = (issuerCode: string) => setFields({ issuerCode });
   const expiryHandler = (expiry: string[]) => setFields({ expiry });
   const cvcHandler = (cvc: string) => setFields({ cvc });
   const passwordHandler = (password: string) => setFields({ password });
@@ -27,7 +27,7 @@ export const useCardInfo = () => {
     cardInfo,
     handlers: {
       cardNumber: cardNumberHandler,
-      cardCompany: cardCompanyHandler,
+      cardIssuer: cardIssuerHandler,
       expiry: expiryHandler,
       cvc: cvcHandler,
       password: passwordHandler,

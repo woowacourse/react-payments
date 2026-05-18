@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import CardCompanySelectSection from "./CardCompanySelectSection";
+import CardCompanySelectSection from "./CardIssuerSelectSection";
 
 const meta = {
   title: "Components/Card/CardCompanySelectSection",

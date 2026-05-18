@@ -7,7 +7,7 @@ import { ROUTES } from "../../../constants/routes";
 
 import Card from "../Card/Card";
 import PrimaryButton from "../../PrimaryButton/PrimaryButton";
-import CardCompanySelectSection from "../CardCompanySelectSection/CardCompanySelectSection";
+import CardCompanySelectSection from "../CardCompanySelectSection/CardIssuerSelectSection";
 import CardNumberInputSection from "../CardNumberInputSection/CardNumberInputSection";
 import CvcInputSection from "../CvcInputSection/CvcInputSection";
 import ExpiryDateInputSection from "../ExpiryDateInputSection/ExpiryDateInputSection";
@@ -15,7 +15,7 @@ import PasswordInputSection from "../PasswordInputSection/PasswordInputSection";
 
 const toPublicCardInfo = (cardInfo: CardDisplayInfo): PublicCardInfo => ({
   numberHead: cardInfo.numbers[0],
-  company: cardInfo.company,
+  issuerCode: cardInfo.issuerCode,
 });
 
 const CardForm = () => {
@@ -33,8 +33,8 @@ const CardForm = () => {
         <div css={sectionsStyle}>
           {completion.cvc && <PasswordInputSection onValueHandler={handlers.password} />}
           {completion.expiry && <CvcInputSection onValueHandler={handlers.cvc} />}
-          {completion.company && <ExpiryDateInputSection onValueHandler={handlers.expiry} />}
-          {completion.cardNumber && <CardCompanySelectSection onSelect={handlers.cardCompany} />}
+          {completion.issuerCode && <ExpiryDateInputSection onValueHandler={handlers.expiry} />}
+          {completion.cardNumber && <CardCompanySelectSection onSelect={handlers.cardIssuer} />}
           <CardNumberInputSection
             onValueHandler={handlers.cardNumber}
             maxLength={maxLength}

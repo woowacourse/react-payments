@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { CARD_COMPANIES, DEFAULT_CARD_COLOR, isCardCompany } from "../../../constants/cardCompany";
+import { ISSUERS, DEFAULT_CARD_COLOR, isIssuerCode } from "../../../constants/Issuers";
 import type { CardDisplayInfo } from "../../../types";
 import type { CardNetwork } from "../../../utils/cardNetwork";
 
@@ -24,8 +24,8 @@ const CARD_LAYOUT_COLOR = {
   shadow: "3px 3px 5px 0px rgba(0, 0, 0, 0.25)",
 } as const;
 
-const getCardColor = (company: string) => {
-  return isCardCompany(company) ? CARD_COMPANIES[company].color : DEFAULT_CARD_COLOR;
+const getCardColor = (issuerCode: string) => {
+  return isIssuerCode(issuerCode) ? ISSUERS[issuerCode].color : DEFAULT_CARD_COLOR;
 };
 
 type CardProps = {
@@ -34,7 +34,7 @@ type CardProps = {
 
 const Card = ({ cardInfo }: CardProps) => {
   return (
-    <div css={cardStyle(cardInfo.company)}>
+    <div css={cardStyle(cardInfo.issuerCode)}>
       <div css={cardHeaderStyle}>
         <div css={chipStyle}></div>
         {cardInfo.network !== "" && (
@@ -64,12 +64,12 @@ const Card = ({ cardInfo }: CardProps) => {
 
 export default Card;
 
-const cardStyle = (company: string) => css`
+const cardStyle = (issuerCode: string) => css`
   width: 212px;
   height: 132px;
   flex-shrink: 0;
   border-radius: 4px;
-  background-color: ${getCardColor(company)};
+  background-color: ${getCardColor(issuerCode)};
   box-shadow: ${CARD_LAYOUT_COLOR.shadow};
   padding: 8px 12px;
   display: flex;
