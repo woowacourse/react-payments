@@ -1,4 +1,4 @@
-import type { CardCompanyType } from "../../../common/types/CardCompany";
+import type { CardCompanyType } from "../../../shared/types/CardCompany";
 import { ERROR_MESSAGES } from "../constants";
 import type { ErrorInformationType } from "./ErrorInformationType";
 

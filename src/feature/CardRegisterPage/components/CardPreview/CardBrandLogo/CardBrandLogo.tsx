@@ -5,7 +5,7 @@ import amexImg from "../../../../../../public/images/AmericanExpress.png";
 import unionPayImg from "../../../../../../public/images/ChinaUnionPay.png";
 
 import styled from "styled-components";
-import type { CardBrandType } from "../../../../../common/types/CardBrand";
+import type { CardBrandType } from "../../../../../shared/types/CardBrand";
 
 const BRAND_ICON = {
   visa: visaImg,

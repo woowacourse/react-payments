@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CardItem, { type CardItemInformation } from "./CardItem/CardItem";
-import BaseButton from "../../../../common/components/Button/BaseButton";
+import BaseButton from "../../../../shared/components/Button/BaseButton";
 import { useNavigate } from "react-router-dom";
 
 const Success = ({

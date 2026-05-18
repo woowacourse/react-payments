@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import NextActionGuide from "../shared/NextActionGuide/NextActionGuide";
-import BaseButton from "../../../../common/components/Button/BaseButton";
+import BaseButton from "../../../../shared/components/Button/BaseButton";
 import { useNavigate } from "react-router-dom";
 
 const Empty = () => {

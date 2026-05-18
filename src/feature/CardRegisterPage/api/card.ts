@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../constants";
+import { BASE_URL } from "../../../shared/constants";
 import type { IssuerCodeType } from "../../CardListPage/types/CardCompay";
 
 // todo 위치 이동 필요

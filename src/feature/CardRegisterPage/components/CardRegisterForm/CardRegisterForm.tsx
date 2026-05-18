@@ -10,8 +10,8 @@ import PasswordField from "./PasswordField/PasswordField";
 import type {
   CardInfoType,
   CardNumberChunkType,
-} from "../../../../common/types/CardInfoType";
-import type { CardCompanyType } from "../../../../common/types/CardCompany";
+} from "../../../../shared/types/CardInfoType";
+import type { CardCompanyType } from "../../../../shared/types/CardCompany";
 import {
   getCardNumberChunkLengths,
   getCardBrandName,
@@ -25,7 +25,7 @@ import {
 } from "../../validators/expiryDate";
 import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
-import BaseButton from "../../../../common/components/Button/BaseButton";
+import BaseButton from "../../../../shared/components/Button/BaseButton";
 import { type PostCardRequestBody } from "../../api/card";
 import { getIssuerCodeByCompanyName } from "../../utils/cardCompany";
 import { useCardRegister } from "../../hooks/useCardRegister";

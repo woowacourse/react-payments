@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import CardRegisterForm from "./components/CardRegisterForm/CardRegisterForm";
 import styled from "styled-components";
-import type { CardInfoType } from "../../common/types/CardInfoType";
-import type { CardCompanyType } from "../../common/types/CardCompany";
+import type { CardInfoType } from "../../shared/types/CardInfoType";
+import type { CardCompanyType } from "../../shared/types/CardCompany";
 import CardPreview from "./components/CardPreview/CardPreview";
 
 const CardRegisterPage = () => {

@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CheckIcon from "../../../public/images/CheckIcon.png";
-import BaseButton from "../../common/components/Button/BaseButton";
+import BaseButton from "../../shared/components/Button/BaseButton";
 
 const CardRegisterCompletePage = () => {
   const location = useLocation();

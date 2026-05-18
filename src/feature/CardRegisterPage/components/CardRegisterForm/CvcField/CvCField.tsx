@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { CVC_INPUT_COUNT, CVC_MAX_LENGTH } from "../../../constants";
 import { validateCvc } from "../../../validators/cvc";
 import { isNumericInput } from "../../../validators/input";
-import useInputErrorState from "../../../../../hooks/useInputErrorState";
+import useInputErrorState from "../../../../../shared/hooks/useInputErrorState";
 import { getPlaceHolder } from "../../../utils/placeHolder";
 
 const CvcField = ({

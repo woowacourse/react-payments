@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../constants";
+import { BASE_URL } from "../../../shared/constants";
 
 export const deleteCard = async (id: string) => {
   const response = await fetch(`${BASE_URL}/cards/${id}`, {

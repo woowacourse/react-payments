@@ -7,8 +7,8 @@ import CardRegisterForm from "./CardRegisterForm";
 import type {
   CardInfoType,
   CardNumberChunkType,
-} from "../../../../common/types/CardInfoType";
-import type { CardCompanyType } from "../../../../common/types/CardCompany";
+} from "../../../../shared/types/CardInfoType";
+import type { CardCompanyType } from "../../../../shared/types/CardCompany";
 
 const meta = {
   title: "feature/CardRegister/components/CardRegisterForm",
@@ -107,7 +107,10 @@ export const CompleteStep: Story = {
     const canvas = within(canvasElement);
 
     await userEvent.type(canvas.getByLabelText("CVC"), "123");
-    await userEvent.type(await canvas.findByLabelText("비밀번호 앞 2자리"), "12");
+    await userEvent.type(
+      await canvas.findByLabelText("비밀번호 앞 2자리"),
+      "12",
+    );
   },
 };
 

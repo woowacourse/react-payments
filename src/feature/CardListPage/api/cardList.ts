@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../constants";
+import { BASE_URL } from "../../../shared/constants";
 
 export const fetchCardList = async () => {
   const response = await fetch(`${BASE_URL}/cards`);

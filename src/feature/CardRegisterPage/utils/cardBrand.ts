@@ -1,5 +1,5 @@
-import type { CardBrandType } from "../../../common/types/CardBrand";
-import type { CardNumberChunkType } from "../../../common/types/CardInfoType";
+import type { CardBrandType } from "../../../shared/types/CardBrand";
+import type { CardNumberChunkType } from "../../../shared/types/CardInfoType";
 import {
   CARD,
   type CardNumberChunkLengths,

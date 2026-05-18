@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
 
-import type { CardCompanyType } from "../../../../../common/types/CardCompany";
+import type { CardCompanyType } from "../../../../../shared/types/CardCompany";
 import CardCompanySelectField from "./CardCompanySelectField";
 
 const meta = {

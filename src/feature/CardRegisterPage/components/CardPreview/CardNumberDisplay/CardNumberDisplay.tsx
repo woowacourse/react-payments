@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import type { CardNumberChunkType } from "../../../../../common/types/CardInfoType";
+import type { CardNumberChunkType } from "../../../../../shared/types/CardInfoType";
 import {
   CARD_NUMBER_MASK_CHAR,
   CARD_NUMBER_MASK_START_INDEX,

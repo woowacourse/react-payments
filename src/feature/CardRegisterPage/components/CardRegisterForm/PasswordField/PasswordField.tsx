@@ -3,7 +3,7 @@ import { PASSWORD_INPUT_COUNT, PASSWORD_LENGTH } from "../../../constants";
 import { isNumericInput } from "../../../validators/input";
 import Label from "../shared/Label/Label";
 import Input from "../shared/Input/Input";
-import useInputErrorState from "../../../../../hooks/useInputErrorState";
+import useInputErrorState from "../../../../../shared/hooks/useInputErrorState";
 import { validatePassword } from "../../../validators/password";
 
 const PasswordField = ({

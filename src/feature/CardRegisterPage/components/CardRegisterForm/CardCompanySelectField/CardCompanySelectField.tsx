@@ -1,4 +1,4 @@
-import type { CardCompanyType } from "../../../../../common/types/CardCompany";
+import type { CardCompanyType } from "../../../../../shared/types/CardCompany";
 import styled from "styled-components";
 import { colors } from "../../../../../styles/color";
 

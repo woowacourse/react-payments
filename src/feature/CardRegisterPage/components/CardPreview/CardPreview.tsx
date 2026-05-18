@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import type { CardCompanyType } from "../../../../common/types/CardCompany";
-import type { CardInfoType } from "../../../../common/types/CardInfoType";
-import { cardColors } from "../../../../styles/color";
+import type { CardCompanyType } from "../../../../shared/types/CardCompany";
+import type { CardInfoType } from "../../../../shared/types/CardInfoType";
+
 import CardBrandLogo from "./CardBrandLogo/CardBrandLogo";
 import CardExpiryDateDisplay from "./CardExpiryDateDisplay/CardExpiryDateDisplay";
 import CardNumberDisplay from "./CardNumberDisplay/CardNumberDisplay";
 import { getCardBrandName } from "../../utils/cardBrand";
+import { cardColors } from "../../../../shared/constants";
 
 const getCardColor = (cardCompany: CardCompanyType | null) => {
   if (!cardCompany) {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { CardItemInformation } from "../components/Success/CardItem/CardItem";
 import { fetchCardList } from "../api/cardList";
 import { deleteCard } from "../api/card";
-import { useAsyncState } from "../../../hooks/useAsyncState";
+import { useAsyncState } from "../../../shared/hooks/useAsyncState";
 
 export const useCardList = () => {
   const { asyncState, setLoading, setSuccess, setError } = useAsyncState();

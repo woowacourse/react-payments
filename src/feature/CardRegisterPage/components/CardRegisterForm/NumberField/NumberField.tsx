@@ -1,15 +1,15 @@
 import Input from "../shared/Input/Input";
 import Label from "../shared/Label/Label";
 import styled from "styled-components";
-import type { CardNumberChunkType } from "../../../../../common/types/CardInfoType";
+import type { CardNumberChunkType } from "../../../../../shared/types/CardInfoType";
 import {
   CARD_NUMBER_INPUT_COUNT,
   type CardNumberChunkLengths,
 } from "../../../constants";
 import { isNumericInput } from "../../../validators/input";
 import { validateCardNumberChunk } from "../../../validators/cardNumber";
-import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
-import useInputErrorState from "../../../../../hooks/useInputErrorState";
+import useInputFocusGroup from "../../../../../shared/hooks/useInputFocusGroup";
+import useInputErrorState from "../../../../../shared/hooks/useInputErrorState";
 import { getPlaceHolder } from "../../../utils/placeHolder";
 
 const NumberField = ({

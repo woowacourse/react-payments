@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAsyncState } from "../../../hooks/useAsyncState";
+import { useAsyncState } from "../../../shared/hooks/useAsyncState";
 import {
   requestRegisterCard,
   type ErrorInformation,

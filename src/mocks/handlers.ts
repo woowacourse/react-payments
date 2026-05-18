@@ -1,5 +1,5 @@
 import { delay, http, HttpResponse } from "msw";
-import { BASE_URL } from "../constants";
+import { BASE_URL } from "../shared/constants";
 import type { PostCardRequestBody } from "../feature/CardRegisterPage/api/card";
 import type { CardItemInformation } from "../feature/CardListPage/components/Success/CardItem/CardItem";
 import { CARD } from "../feature/CardRegisterPage/constants";

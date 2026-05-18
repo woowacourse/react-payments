@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import NextActionGuide from "../shared/NextActionGuide/NextActionGuide";
-import BaseButton from "../../../../common/components/Button/BaseButton";
+import BaseButton from "../../../../shared/components/Button/BaseButton";
 
 const Error = ({ onRetry }: { onRetry: () => void }) => {
   return (

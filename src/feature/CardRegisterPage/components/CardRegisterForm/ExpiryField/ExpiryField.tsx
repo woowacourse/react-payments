@@ -8,8 +8,8 @@ import {
 } from "../../../constants";
 import { formatExpiryValue } from "../../../utils/expiryFormatter";
 import { isNumericInput } from "../../../validators/input";
-import useInputFocusGroup from "../../../../../hooks/useInputFocusGroup";
-import useInputErrorState from "../../../../../hooks/useInputErrorState";
+import useInputFocusGroup from "../../../../../shared/hooks/useInputFocusGroup";
+import useInputErrorState from "../../../../../shared/hooks/useInputErrorState";
 import {
   validateExpiryMonth,
   validateExpiryYear,
