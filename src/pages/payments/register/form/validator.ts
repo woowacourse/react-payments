@@ -93,7 +93,11 @@ export const validateCvc = ({ cvc }: { cvc: string }) => {
     cvc: [
       { type: 'isRequired', message: 'CVC는 필수값입니다' },
       { type: 'isNumericString', message: 'CVC는 숫자여야합니다' },
-      { type: 'length', message: 'CVC는 3자리여야합니다', options: { length: 3 } },
+      {
+        type: 'rangeLength',
+        message: 'CVC는 3자리 이상, 4자리 이하여야합니다',
+        options: { minLength: 3, maxLength: 4 },
+      },
     ],
   } satisfies FormValuesRules<{ cvc: string }>;
 
@@ -104,7 +108,7 @@ export const preventCvc = (cvc: string) => {
   if (isEmptyString(cvc)) return false;
 
   if (!isNumericString(cvc)) return true;
-  if (cvc.length > 3) return true;
+  if (cvc.length > 4) return true;
 
   return false;
 };

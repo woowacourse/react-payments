@@ -161,7 +161,7 @@ export const Form = () => {
                 type="tel"
                 id="cvc"
                 value={cvc.values.cvc}
-                maxLength={3}
+                maxLength={4}
                 placeholder="123"
                 isError={!!cvc.invalidAttemp.cvc || (cvc.blur.cvc && !cvc.errors.cvc.length)}
                 onChange={cvc.onChange}
