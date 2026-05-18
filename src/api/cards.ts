@@ -39,3 +39,13 @@ export const getCards = async (): Promise<CardListResponse> => {
 
   return response.json();
 };
+
+export const deleteCard = async (cardId: string): Promise<void> => {
+  const response = await fetch(`/cards/${cardId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("카드 삭제 실패");
+  }
+};

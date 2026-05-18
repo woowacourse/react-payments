@@ -8,6 +8,16 @@ interface RegisteredCard extends CardRegisterRequest {
 const cards: RegisteredCard[] = [];
 
 export const handlers = [
+  http.post("/cards", async ({ request }) => {
+    const card = (await request.json()) as CardRegisterRequest;
+    cards.push({
+      id: crypto.randomUUID(),
+      ...card,
+    });
+
+    return new HttpResponse(null, { status: 201 });
+  }),
+
   http.get("/cards", () => {
     const response = cards.map((card) => {
       return {
@@ -18,15 +28,18 @@ export const handlers = [
       };
     });
 
-    return HttpResponse.json(response);
+    return HttpResponse.json(response, { status: 200 });
   }),
-  http.post("/cards", async ({ request }) => {
-    const card = (await request.json()) as CardRegisterRequest;
-    cards.push({
-      id: crypto.randomUUID(),
-      ...card,
-    });
 
-    return HttpResponse.json(null, { status: 201 });
+  http.delete("/cards/:cardId", ({ params }) => {
+    const { cardId } = params;
+
+    const targetIndex = cards.findIndex((card) => card.id === cardId);
+
+    if (targetIndex !== -1) {
+      cards.splice(targetIndex, 1);
+    }
+
+    return new HttpResponse(null, { status: 204 });
   }),
 ];
