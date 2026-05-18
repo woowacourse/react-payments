@@ -47,4 +47,7 @@ export const handlers = [
     return HttpResponse.json({ id: newCard.id }, { status: 201 });
   }),
 
+  http.get("/cards", () => {
+    return HttpResponse.json(cardStore);
+  }),
 ];
