@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import CvcField from "./CvcField/CvCField";
 import ExpiryField from "./ExpiryField/ExpiryField";
 import CardRegisterStep from "./CardRegisterStep/CardRegisterStep";
@@ -27,12 +26,9 @@ import {
 import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
 import BaseButton from "../../../../common/components/Button/BaseButton";
-import {
-  registerCard,
-  type ErrorInformation,
-  type PostCardRequestBody,
-} from "../../api/card";
+import { type PostCardRequestBody } from "../../api/card";
 import { getIssuerCodeByCompanyName } from "../../utils/cardCompany";
+import { useCardRegister } from "../../hooks/useCardRegister";
 
 const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
   const cardBrand = getCardBrandName(cardInfo.cardNumbers);
@@ -68,13 +64,13 @@ const CardRegisterForm = ({
   updateExpiryYear: (expiryYear: string) => void;
   updateCardCompany: (cardCompany: CardCompanyType) => void;
 }) => {
-  const navigate = useNavigate();
-
   const [cardInputSectionInformation, setCardInputSectionInformation] =
     useState({
       cvcNumber: "",
       password: "",
     });
+
+  const { asyncState, cardRegisterError, registerCard } = useCardRegister();
 
   const [formErrorMessages, setFormErrorMessages] = useState<{
     cardNumber: string | null;
@@ -202,7 +198,7 @@ const CardRegisterForm = ({
   };
   const isFormInputComplete = Object.values(fieldValidity).every(Boolean);
 
-  const handleCardInfoSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isFormInputComplete) {
       return;
@@ -220,18 +216,27 @@ const CardRegisterForm = ({
       issuerCode: issuerCode,
     };
 
-    try {
-      const id = await registerCard(postCardInformation);
-      navigate("/cards");
-    } catch (error) {
-      if ((error as ErrorInformation).code === "INVALID_CARD_NUMBER") {
-        updateCardNumberErrorMessage((error as ErrorInformation).message);
-      }
-      if ((error as ErrorInformation).code === "INVALID_CVC") {
-        updateCvcErrorMessage((error as ErrorInformation).message);
-      }
-      if ((error as ErrorInformation).code === "INVALID_EXPIRATION_DATE") {
-        updateExpiryDateErrorMessage((error as ErrorInformation).message);
+    registerCard(postCardInformation);
+
+    if (cardRegisterError) {
+      if (
+        "code" in cardRegisterError &&
+        cardRegisterError.code === "INVALID_CARD_NUMBER"
+      ) {
+        updateCardNumberErrorMessage(cardRegisterError.message);
+      } else if (
+        "code" in cardRegisterError &&
+        cardRegisterError.code === "INVALID_CVC"
+      ) {
+        updateCvcErrorMessage(cardRegisterError.message);
+      } else if (
+        "code" in cardRegisterError &&
+        cardRegisterError.code === "INVALID_EXPIRATION_DATE"
+      ) {
+        updateExpiryDateErrorMessage(cardRegisterError.message);
+      } else {
+        // 예상치 못한 에러처리
+        alert("카드 등록 중 에러가 발생했습니다.");
       }
     }
   };
@@ -304,7 +309,11 @@ const CardRegisterForm = ({
         </CardRegisterStep>
       )}
 
-      {isFormInputComplete && <ConfirmButton type="submit">확인</ConfirmButton>}
+      {isFormInputComplete && (
+        <ConfirmButton type="submit" disabled={asyncState === "loading"}>
+          {asyncState === "loading" ? "등록중..." : "확인"}
+        </ConfirmButton>
+      )}
     </Form>
   );
 };
@@ -313,9 +322,8 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 30px;
-
   width: 100%;
+  padding: 30px;
 `;
 
 const ConfirmButton = styled(BaseButton)`
@@ -324,7 +332,6 @@ const ConfirmButton = styled(BaseButton)`
   bottom: 0;
   left: 0;
   z-index: 5;
-
   width: 100%;
 `;
 
