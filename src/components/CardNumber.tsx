@@ -3,12 +3,12 @@ import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
 import { getCardNumberGroupLengths } from '../utils/card/cardBrand';
 
 type CardNumbersProps = {
-  cardStatus: CardStatus;
+  cardNumber: CardStatus;
   setCardStatus: CardHandler;
 };
 
-export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersProps) {
-  const cardNumberGroupLengths = getCardNumberGroupLengths(cardStatus.cardBrand);
+export default function CardNumber({ cardNumber, setCardStatus }: CardNumbersProps) {
+  const cardNumberGroupLengths = getCardNumberGroupLengths(cardNumber.cardBrand);
 
   return (
     <div css={{ display: 'flex', flexDirection: 'column' }}>
@@ -45,7 +45,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             gap: '10px',
           }}
         >
-          {cardStatus.cardNumbers.map((cardNumber, index) => {
+          {cardNumber.cardNumbers.map((numberGroup, index) => {
             const maxLength = cardNumberGroupLengths[index];
 
             return (
@@ -55,7 +55,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                 placeholder={'123456'.slice(0, maxLength)}
                 maxLength={maxLength}
                 onChange={setCardStatus.handleCardNumbers(index)}
-                value={cardNumber}
+                value={numberGroup}
                 onBlur={setCardStatus.handleCardNumbersBlur}
                 inputMode="numeric"
                 css={(theme) => ({
@@ -64,7 +64,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
                   borderRadius: '2px',
                   border: `1.01px solid ${theme.colors.inactiveBorder}`,
                   borderColor:
-                    cardNumber.length < maxLength && cardStatus.cardNumberErrorMode !== null
+                    numberGroup.length < maxLength && cardNumber.cardNumberErrorMode !== null
                       ? theme.colors.error
                       : theme.colors.inactiveBorder,
                   padding: '8px',
@@ -80,8 +80,8 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             height: '12px',
           })}
         >
-          {cardStatus.cardNumberErrorMode !== null
-            ? CARD_ERROR_MESSAGE[cardStatus.cardNumberErrorMode]
+          {cardNumber.cardNumberErrorMode !== null
+            ? CARD_ERROR_MESSAGE[cardNumber.cardNumberErrorMode]
             : ' '}
         </p>
       </div>

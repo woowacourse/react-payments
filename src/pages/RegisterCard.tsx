@@ -15,7 +15,7 @@ export type RegisteredCard = {
 
 export default function RegisterCard() {
   const navigate = useNavigate();
-  const { cardStatus, cardNumberHandler } = useCardNumber();
+  const { cardNumber, cardNumberHandler } = useCardNumber();
   const { cardExpiry, expiryHandler } = useExpiryDate();
   const { cardCvc, cvcHandler } = useCardCvc();
   const { cardPassword, cardPasswordHandler } = useCardPassword();
@@ -31,7 +31,7 @@ export default function RegisterCard() {
     }
     navigate('/complete', {
       state: {
-        cardNumberPrefix: cardStatus.cardNumbers[0],
+        cardNumberPrefix: cardNumber.cardNumbers[0],
         cardCompany: cardCompanyStatus.cardCompany,
       } satisfies RegisteredCard,
     });
@@ -59,9 +59,9 @@ export default function RegisterCard() {
         }}
       >
         <CardPreview
-          cardNumbers={cardStatus.cardNumbers}
+          cardNumbers={cardNumber.cardNumbers}
           cardExpiryDate={cardExpiry.cardExpiryDate}
-          cardBrand={cardStatus.cardBrand}
+          cardBrand={cardNumber.cardBrand}
           cardCompany={cardCompanyStatus.cardCompany}
         />
       </div>
@@ -78,7 +78,7 @@ export default function RegisterCard() {
         }}
       >
         <CardInput
-          cardStatus={cardStatus}
+          cardNumber={cardNumber}
           setCardStatus={cardNumberHandler}
           cardExpiry={cardExpiry}
           setCardExpiry={expiryHandler}

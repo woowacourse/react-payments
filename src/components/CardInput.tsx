@@ -18,7 +18,7 @@ import type {
 import { isValidCardNumber } from '../utils/card/cardBrand';
 
 type CardInputProps = {
-  cardStatus: CardStatus;
+  cardNumber: CardStatus;
   setCardStatus: CardHandler;
   cardExpiry: CardExpiry;
   setCardExpiry: ExpireHandler;
@@ -32,7 +32,7 @@ type CardInputProps = {
 };
 
 export default function CardInput({
-  cardStatus,
+  cardNumber,
   setCardStatus,
   cardExpiry,
   setCardExpiry,
@@ -45,8 +45,8 @@ export default function CardInput({
   hasBottomAction = false,
 }: CardInputProps) {
   const isCardNumberComplete =
-    isValidCardNumber(cardStatus.cardNumbers, cardStatus.cardBrand) &&
-    cardStatus.cardNumberErrorMode === null;
+    isValidCardNumber(cardNumber.cardNumbers, cardNumber.cardBrand) &&
+    cardNumber.cardNumberErrorMode === null;
   const isCardCompanySelected = cardCompanyStatus.cardCompany !== '';
   const isExpiryDateComplete =
     cardExpiry.cardExpiryDate.every((date) => date.length === 2) &&
@@ -74,7 +74,7 @@ export default function CardInput({
       {isCardNumberComplete && (
         <CardCompany cardCompanyStatus={cardCompanyStatus} setCardCompany={setCardCompany} />
       )}
-      <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
+      <CardNumber cardNumber={cardNumber} setCardStatus={setCardStatus} />
     </form>
   );
 }
