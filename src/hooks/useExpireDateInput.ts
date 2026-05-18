@@ -13,6 +13,10 @@ export function useExpireDateInput() {
   );
   const yearInputRef = useRef<HTMLInputElement | null>(null);
 
+  const setExpireDateServerError = (message: string) => {
+    setExpireDate((prev) => ({ ...prev, month: message }));
+  };
+
   const handleMonthChange = (value: string) => {
     const onlyNumbers = value.replace(/[^0-9]/g, "");
     const sliceValue = onlyNumbers.substring(0, 2);
@@ -97,5 +101,6 @@ export function useExpireDateInput() {
     handleMonthBlur,
     handleYearBlur,
     yearInputRef,
+    setExpireDateServerError,
   };
 }

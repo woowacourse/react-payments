@@ -15,6 +15,10 @@ export function useCardNumberInput() {
   const { inputConfig, cardType } = selectCardType(cardNumber);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  const setCardNumberServerError = (message: string) => {
+    setCardNumberError([message, "", "", "", ""]);
+  };
+
   const handleCardNumberChange = (index: number, value: string) => {
     const newError = [...cardNumberError];
     const maxLength = inputConfig[index].maxLength;
@@ -59,5 +63,6 @@ export function useCardNumberInput() {
     inputConfig,
     cardType,
     inputRefs,
+    setCardNumberServerError,
   };
 }
