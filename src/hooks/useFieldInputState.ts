@@ -12,12 +12,19 @@ export const useFieldInputState = ({ values, setValue, validator, isFilled, fiel
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [hasTouched, setHasTouched] = useState(false);
     const refs = useRef<(HTMLInputElement | null)[]>(Array(fieldCount).fill(null));
+    const skipFocusClear = useRef(false);
 
     const getRef = (index: number) => (el: HTMLInputElement | null) => {
         refs.current[index] = el;
     };
 
     const focusFirst = useCallback(() => {
+        refs.current[0]?.focus();
+    }, []);
+
+    const focusWithError = useCallback((message: string) => {
+        skipFocusClear.current = true;
+        setErrorMessage(message);
         refs.current[0]?.focus();
     }, []);
 
@@ -34,9 +41,13 @@ export const useFieldInputState = ({ values, setValue, validator, isFilled, fiel
     };
 
     const handleFocus = () => {
+        if (skipFocusClear.current) {
+            skipFocusClear.current = false;
+            return;
+        }
         setHasTouched(false);
         setErrorMessage(null);
     };
 
-    return { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange };
+    return { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, focusWithError, handleChange };
 };
