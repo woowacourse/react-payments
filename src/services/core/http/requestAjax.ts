@@ -24,8 +24,9 @@ export const requestAjax = async (url: string, config?: Configs): Promise<Reques
     ...headers,
   };
 
+  let res;
   try {
-    const res = await fetch(finalUrl, {
+    res = await fetch(finalUrl, {
       method,
       ...(!!Object.values(customHeaders).filter(Boolean).length && {
         headers: {
@@ -37,26 +38,6 @@ export const requestAjax = async (url: string, config?: Configs): Promise<Reques
         body: data instanceof FormData ? data : JSON.stringify(data),
       }),
     });
-
-    let responseData;
-    try {
-      responseData = await res.json();
-    } catch (e) {
-      console.error(e);
-      responseData = await res.text();
-    }
-
-    const response = {
-      data: responseData,
-      status: res.status,
-      headers: customHeaders,
-      config,
-    };
-    if (res.ok) {
-      return response;
-    } else {
-      throw new RequestAjaxError(response);
-    }
   } catch (error) {
     const response = {
       data: error,
@@ -64,5 +45,25 @@ export const requestAjax = async (url: string, config?: Configs): Promise<Reques
       config,
     };
     throw new RequestNetworkError(response);
+  }
+
+  let responseData;
+  try {
+    responseData = await res.json();
+  } catch (e) {
+    console.error(e);
+    responseData = await res.text();
+  }
+
+  const response = {
+    data: responseData,
+    status: res.status,
+    headers: customHeaders,
+    config,
+  };
+  if (res.ok) {
+    return response;
+  } else {
+    throw new RequestAjaxError(response);
   }
 };
