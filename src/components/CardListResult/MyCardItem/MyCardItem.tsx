@@ -26,7 +26,10 @@ export default function MyCardItem({ cardIssuer, cardNumbers, EXPDate, onDelete,
         <CardItemContainer>
             <CardIssuerColorBox backgroundColor={CARD_ISSUER_COLOR[cardIssuer]} />
             <CardInfoContainer>
-                <CardIssuerName>{BRAND_SELECT_OPTIONS[cardIssuer]}</CardIssuerName>
+                <CardIssuerName>
+                    {/* TODO 매번 배열 순회해야해서 비효율적일 수 있으니 Record로 수정? -> 다른 곳도 다 바꿔야 함 */}
+                    {BRAND_SELECT_OPTIONS.find((option) => option.value === cardIssuer)?.label}
+                </CardIssuerName>
                 <CardNumbers>{cardNumbers}</CardNumbers>
                 <CardEXPInfo>유효기간 {EXPDate}</CardEXPInfo>
             </CardInfoContainer>

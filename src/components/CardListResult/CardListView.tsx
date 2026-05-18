@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import type { CardInfo } from '../../apis/getMyCard';
 import { ISSUER_CODE_MAP } from '../../constants/BRAND_SELECT_OPTIONS';
 import AddCardButton from './AddCardButton';
@@ -13,7 +14,7 @@ interface CardListViewProps {
 // TODO 그럼 삭제 훅을 분리하는 건 어떤지?? 고민해보기
 export default function CardListView({ cardItemInfos, onDelete }: CardListViewProps) {
     return (
-        <div>
+        <CardListViewStyle>
             {cardItemInfos.map((cardItem) => (
                 <MyCardItem
                     id={cardItem.id}
@@ -25,6 +26,13 @@ export default function CardListView({ cardItemInfos, onDelete }: CardListViewPr
                 />
             ))}
             <AddCardButton />
-        </div>
+        </CardListViewStyle>
     );
 }
+
+const CardListViewStyle = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 320px;
+`;
