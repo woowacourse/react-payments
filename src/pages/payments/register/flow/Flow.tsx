@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { Outlet, useNavigate } from 'react-router';
 
 import { useExecute } from '@/services/core/useExecute';
@@ -21,8 +19,10 @@ export const Flow = () => {
 
   const navigate = useNavigate();
 
-  const [serverError, setServerError] = useState<keyof typeof ERROR_CODE | null>(null);
-  const { mutate } = useExecute({
+  const {
+    status: { error },
+    mutate,
+  } = useExecute({
     executeFn: async () => {
       const data = mapCardModelToRequestDTO({
         card: card.values.card,
@@ -36,13 +36,10 @@ export const Flow = () => {
     onSuccess: () => {
       navigate(ROUTES.PAYMENTS.CARDS);
     },
-    onError: (error: unknown) => {
-      if (typeof error === 'object' && error !== null && 'code' in error) {
-        const errorCode = error.code as keyof typeof ERROR_CODE;
-        setServerError(errorCode);
-      }
-    },
   });
+
+  const serverError =
+    typeof error === 'object' && error !== null && 'code' in error && (error.code as keyof typeof ERROR_CODE);
 
   const handleSubmit = async () => {
     mutate();
