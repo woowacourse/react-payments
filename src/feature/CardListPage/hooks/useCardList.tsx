@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import type { CardItemInformation } from "../components/Success/CardItem/CardItem";
 import { fetchCardList } from "../api/cardList";
+import { useAsyncState } from "./useAsyncState";
 
 export const useCardList = () => {
-  const [asyncState, setAsyncState] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+  const { asyncState, setLoading, setSuccess, setError } = useAsyncState();
 
   const [cardList, setCardList] = useState<CardItemInformation[]>([]);
 
@@ -15,14 +14,13 @@ export const useCardList = () => {
   };
 
   const loadCardList = async () => {
-    // 이렇게 하니까 무슨 callback 쓰는 것처럼 쓰게 되는데, 이러면 useEffect를 쓰는 이유가...
     try {
-      setAsyncState("loading");
+      setLoading();
       const fetchedCardList = await fetchCardList();
       setCardList(fetchedCardList);
-      setAsyncState("success");
+      setSuccess();
     } catch {
-      setAsyncState("error");
+      setError();
     }
   };
 
