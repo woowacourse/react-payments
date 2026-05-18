@@ -174,7 +174,7 @@ function CardForm(props: CardFormProps) {
         <FormSection
           ref={cardCompanyRef}
           isVisible={isCardNumberComplete}
-          title="카드사를 선택해주세요"
+          title="카드사"
           description="현재 국내 카드사만 가능합니다."
         >
           <CardCompany
