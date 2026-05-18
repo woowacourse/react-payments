@@ -2,24 +2,42 @@ import { http, HttpResponse } from "msw";
 import { CARD } from "./cards";
 import { selectCardType } from "../utils/selectCardType";
 
-interface CardRequest {
+export interface CardPostRequest {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: string;
+}
+
+export interface Card extends CardPostRequest {
+  id: string;
+}
+
+export interface CardGetResponse {
   id: string;
   issuerCode: string;
   number: string;
   expirationDate: string;
-  cvc: string;
 }
 
-interface Card extends CardRequest {
-  id: string;
-}
+const filterCardNumber = (cardNumber: string) => {
+  const firstNonMasking = cardNumber.substring(0, 6);
+  const lastNonMasking = cardNumber.slice(-4);
+  const maskingNumberRange = cardNumber.substring(5, cardNumber.length - 5);
+  const maskedCardNumber = "*".repeat(maskingNumberRange.length);
+  return firstNonMasking + maskedCardNumber + lastNonMasking;
+};
 
 export const handlers = [
   http.get("/cards", () => {
-    return HttpResponse.json(CARD);
+    const maskedCard = CARD.map((value) => ({
+      ...value,
+      number: filterCardNumber(value.number),
+    }));
+    return HttpResponse.json(maskedCard);
   }),
   http.post("/cards", async ({ request }) => {
-    const requestData = (await request.clone().json()) as CardRequest;
+    const requestData = (await request.clone().json()) as CardPostRequest;
 
     const { cardType } = selectCardType(requestData.number);
 
