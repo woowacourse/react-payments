@@ -9,6 +9,7 @@ import PasswordInputSection from "@/components/CardForm/PasswordInputSection/Pas
 import CardFormLayout from "@/components/CardForm/CardFormLayout/CardFormLayout.tsx";
 import useCardForm from "@/hooks/useCardForm.ts";
 import { createCard } from "@/api/cards";
+import { ROUTES } from "@/constants/routes";
 import { useState } from "react";
 const CardForm = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const CardForm = () => {
         cvc: cardInfo.cvc,
         issuerCode: cardInfo.company,
       });
-      navigate("/complete", { state: { numbers: cardInfo.numbers[0], brand } });
+      navigate(ROUTES.COMPLETE, { state: { numbers: cardInfo.numbers[0], brand } });
     } catch (error) {
       const { code, message } = error as { code: string; message: string };
       setServerErrors({ [code]: message });

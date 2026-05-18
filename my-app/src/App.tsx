@@ -3,16 +3,17 @@ import Layout from "./components/Layout/Layout";
 import CardForm from "./pages/CardForm";
 import CardList from "./pages/CardList";
 import CardComplete from "./pages/CardComplete";
+import { ROUTES } from "./constants/routes";
 
 const App = () => {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<Navigate to="/cards" replace />} />
-          <Route path="/cards" element={<CardList />} />
-          <Route path="/add" element={<CardForm />} />
-          <Route path="/complete" element={<CardComplete />} />
+          <Route index element={<Navigate to={ROUTES.CARDS} replace />} />
+          <Route path={ROUTES.CARDS} element={<CardList />} />
+          <Route path={ROUTES.ADD} element={<CardForm />} />
+          <Route path={ROUTES.COMPLETE} element={<CardComplete />} />
         </Route>
       </Routes>
     </BrowserRouter>

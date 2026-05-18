@@ -9,6 +9,7 @@ import EmptyState from "@/components/common/EmptyState";
 import ErrorIcon from "@/components/CardListItem/ErrorIcon";
 import EmptyCardIcon from "@/components/CardListItem/EmptyCardIcon";
 import { getCards, deleteCard, type CardItem } from "@/api/cards";
+import { ROUTES } from "@/constants/routes";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -65,7 +66,7 @@ const CardList = () => {
             description="잠시 후 다시 시도해 주세요."
           ></EmptyState>
 
-          <Button onClick={() => navigate("/add")}>다시 시도</Button>
+          <Button onClick={() => navigate(ROUTES.ADD)}>다시 시도</Button>
         </>
       )}
       {status === "success" && cards.length === 0 && (
@@ -76,7 +77,7 @@ const CardList = () => {
             description="아래 버튼을 눌러 첫 카드를 등록해보세요"
           ></EmptyState>
 
-          <Button onClick={() => navigate("/add")}>카드 추가하기</Button>
+          <Button onClick={() => navigate(ROUTES.ADD)}>카드 추가하기</Button>
         </>
       )}
       {status === "success" && cards.length > 0 && (
@@ -119,7 +120,7 @@ const CardList = () => {
               </li>
             ))}
           </ul>
-          <OutlinedButton onClick={() => navigate("/add")}>+ 카드 추가하기</OutlinedButton>
+          <OutlinedButton onClick={() => navigate(ROUTES.ADD)}>+ 카드 추가하기</OutlinedButton>
         </div>
       )}
     </div>
