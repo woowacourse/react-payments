@@ -1,5 +1,5 @@
-import type { BaseValidationRule, ExpirationPeriodErrorStatus, ExpirationValidationRule } from './types';
-import { isNumber, isValidMonth, isValidYear, isValidMonthAndYear } from './utils';
+import type { BaseValidationRule, ExpirationPeriodErrorStatus } from './types';
+import { isNumber } from './utils';
 
 export const ERROR_MESSAGES: Record<Exclude<ExpirationPeriodErrorStatus, null>, string> = {
   required: '필수 입력 항목입니다.',
@@ -40,8 +40,6 @@ export const RULES = {
     fn: (v: string) => v === '' || isNumber(v),
     on: ['onChange'],
   } satisfies BaseValidationRule,
-  validMonth: { name: 'invalidMonth', fn: isValidMonth, on: ['onBlur'] } satisfies ExpirationValidationRule,
-  validYear: { name: 'invalidYear', fn: isValidYear, on: ['onBlur'] } satisfies ExpirationValidationRule,
   exactLength: (length: number): BaseValidationRule => ({
     name: 'invalidLength',
     fn: (v: string) => v.length === length,
@@ -52,9 +50,4 @@ export const RULES = {
     fn: (v: string) => v.length === length,
     on: ['onComplete'],
   }),
-  validMonthAndYear: {
-    name: 'invalidYear',
-    fn: (v: string) => isValidMonthAndYear(v.slice(0, 2), v.slice(2, 4)),
-    on: ['onComplete'],
-  } satisfies ExpirationValidationRule,
 };
