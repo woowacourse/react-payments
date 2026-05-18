@@ -31,15 +31,9 @@ const SkeletonBase = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: 376px;
-  height: 700px;
-  border-radius: 12px;
-  padding: 40px 28px 32px 28px;
-  gap: 16px;
-  background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  gap: 16px;
 `;
 
 const SkeletonContainer = styled.div`
