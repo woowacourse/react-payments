@@ -27,6 +27,7 @@ export interface CardNumberContextValue {
   inputConfig: InputConfig;
   cardType: string | null;
   inputRefs: React.RefObject<(HTMLInputElement | null)[]>;
+  setCardNumberServerError: (message: string) => void;
 }
 
 export interface ExpireDateContextValue {
@@ -37,6 +38,7 @@ export interface ExpireDateContextValue {
   handleMonthBlur: () => void;
   handleYearBlur: () => void;
   yearInputRef: React.RefObject<HTMLInputElement | null>;
+  setExpireDateServerError: (message: string) => void;
 }
 
 export interface CvcContextValue {
@@ -44,6 +46,7 @@ export interface CvcContextValue {
   cvcError: string;
   handleCvcChange: (value: string) => void;
   handleBlur: () => void;
+  setCvcServerError: (message: string) => void;
 }
 
 export interface CardBrandContextValue {
