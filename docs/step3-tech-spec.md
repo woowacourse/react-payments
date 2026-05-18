@@ -697,7 +697,7 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 
 ### 11.7 통합 테스트
 
-- [ ] vitest.setup.ts + @testing-library/react 셋업
+- [x] vitest.setup.ts + @testing-library/react 셋업
 - [ ] 시나리오 1~9 작성
 
 ---
