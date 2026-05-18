@@ -6,10 +6,19 @@ const variants = {
     border-radius: 8px;
     background: var(--color-card-background);
     color: var(--color-white);
+
+    &:disabled {
+      background: var(--color-gray-300);
+      color: var(--color-white);
+    }
   `,
   ghost: css`
     background: transparent;
-    color: var(--color-card-background);
+    color: var(--color-gray-900);
+
+    &:disabled {
+      color: var(--color-gray-300);
+    }
   `,
 };
 
