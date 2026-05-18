@@ -38,6 +38,7 @@ export const CardNumberInputSection: Story = {
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
+          formErrorCodes={[]}
         />
       </CardSection>
     );
@@ -47,7 +48,9 @@ export const CardNumberInputSection: Story = {
 export const CardExpiryDateInputSection: Story = {
   args: defaultArgs,
   render: () => {
-    const [cardExpiryDate, setCardExpiryDate] = useState(new ExpiryDate("", ""));
+    const [cardExpiryDate, setCardExpiryDate] = useState(
+      new ExpiryDate("", ""),
+    );
     return (
       <CardSection
         title="카드 유효기간을 입력해 주세요"
@@ -57,6 +60,7 @@ export const CardExpiryDateInputSection: Story = {
         <CardExpiryDateInput
           cardExpiryDate={cardExpiryDate}
           setCardExpiryDate={setCardExpiryDate}
+          formErrorCodes={[]}
         />
       </CardSection>
     );
