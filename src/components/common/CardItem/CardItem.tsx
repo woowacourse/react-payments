@@ -12,17 +12,30 @@ const findCompanyByIssuerCode = (issuerCode: string): CardCompany | null => {
   );
 };
 
-interface CardItemProps {
+interface CardItemData {
   issuerCode: string;
   number: string;
   expirationDate: string;
 }
 
+interface CardItemProps extends CardItemData {
+  onClickDelete?: (arg: CardItemData) => void;
+}
+
 const formatCardNumberIntoGroups = (cardNumber: string) =>
   cardNumber.match(/.{1,4}/g) ?? [];
 
-const CardItem = ({ issuerCode, number, expirationDate }: CardItemProps) => {
+const CardItem = ({
+  issuerCode,
+  number,
+  expirationDate,
+  onClickDelete,
+}: CardItemProps) => {
   const company = findCompanyByIssuerCode(issuerCode);
+
+  const handleDeleteClick = () => {
+    if (onClickDelete) onClickDelete({ issuerCode, number, expirationDate });
+  };
 
   return (
     <Wrapper>
@@ -36,7 +49,7 @@ const CardItem = ({ issuerCode, number, expirationDate }: CardItemProps) => {
         </CardItemInfoNumber>
         <CardItemInfoText>{expirationDate}</CardItemInfoText>
       </CardItemInfo>
-      <CardItemDeleteButton>x</CardItemDeleteButton>
+      <CardItemDeleteButton onClick={handleDeleteClick}>x</CardItemDeleteButton>
     </Wrapper>
   );
 };
