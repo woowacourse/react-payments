@@ -1,12 +1,12 @@
 const COMPANY_SELECT_FIELD = [
-  { value: "BC", label: "BC카드" },
-  { value: "sinhan", label: "신한카드" },
-  { value: "kakaobank", label: "카카오뱅크" },
-  { value: "hyundai", label: "현대카드" },
-  { value: "woori", label: "우리카드" },
-  { value: "lotte", label: "롯데카드" },
-  { value: "hana", label: "하나카드" },
-  { value: "kookmin", label: "국민카드" },
+  { value: "BC", label: "BC카드", issuerCode: "31" },
+  { value: "SHINHAN", label: "신한카드", issuerCode: "41" },
+  { value: "KAKAOBANK", label: "카카오뱅크", issuerCode: "15" },
+  { value: "HYUNDAI", label: "현대카드", issuerCode: "61" },
+  { value: "WOORI", label: "우리카드", issuerCode: "W1" },
+  { value: "LOTTE", label: "롯데카드", issuerCode: "71" },
+  { value: "HANA", label: "하나카드", issuerCode: "21" },
+  { value: "KOOKMIN", label: "국민카드", issuerCode: "11" },
 ] as const;
 
 const NUMBER_LENGTH_BY_BRAND = {
