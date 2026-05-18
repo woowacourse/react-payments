@@ -23,9 +23,7 @@ function renderDashboard() {
 
 describe("카드 목록 페이지 - 비동기 상태별 UI", () => {
   test("loading 상태: 스피너를 표시한다", () => {
-    server.use(
-      http.get("/react-payments/cards", () => new Promise(() => {})),
-    );
+    server.use(http.get("/react-payments/cards", () => new Promise(() => {})));
 
     renderDashboard();
 
@@ -34,9 +32,7 @@ describe("카드 목록 페이지 - 비동기 상태별 UI", () => {
 
   test("success 상태 (목록 있음): 카드 정보를 표시한다", async () => {
     server.use(
-      http.get("/react-payments/cards", () =>
-        HttpResponse.json([mockCard]),
-      ),
+      http.get("/react-payments/cards", () => HttpResponse.json([mockCard])),
     );
 
     renderDashboard();
@@ -46,24 +42,22 @@ describe("카드 목록 페이지 - 비동기 상태별 UI", () => {
   });
 
   test("error 상태: 에러 메시지와 다시 시도 버튼을 표시한다", async () => {
-    server.use(
-      http.get("/react-payments/cards", () => HttpResponse.error()),
-    );
+    server.use(http.get("/react-payments/cards", () => HttpResponse.error()));
 
     renderDashboard();
 
     expect(
       await screen.findByText(/카드 목록을 불러올 수 없/i),
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "다시 시도" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "다시 시도" }),
+    ).toBeInTheDocument();
   });
 });
 
 describe("카드 목록 페이지 - 빈 목록", () => {
   test("등록된 카드가 없을 때 안내 문구를 표시한다", async () => {
-    server.use(
-      http.get("/react-payments/cards", () => HttpResponse.json([])),
-    );
+    server.use(http.get("/react-payments/cards", () => HttpResponse.json([])));
 
     renderDashboard();
 
