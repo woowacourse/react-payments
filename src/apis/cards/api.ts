@@ -38,6 +38,6 @@ export const createCard = async (request: CreateCardRequest) => {
 
 // 카드 삭제
 export const deleteCard = async (cardId: string) => {
-  const response = await paymentsFetcher<null>(`cards/${cardId}`);
+  const response = await paymentsFetcher<null>(`cards/${cardId}`, { method: 'delete' });
   return response;
 };
