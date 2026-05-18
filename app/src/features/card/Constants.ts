@@ -53,3 +53,15 @@ export const CARD_BRAND = {
     code: "11",
   },
 };
+
+export const ERROR_CODE_TO_MESSAGE = {
+  INVALID_CARD_NUMBER: "유효하지 않은 카드 번호입니다.",
+  INVALID_CVC: "유효하지 않은 CVC입니다.",
+  INVALID_EXPIRATION_DATE: "유효하지 않은 만료일입니다.",
+};
+
+export const FIELD_ERROR_CODES = {
+  cardNumber: ["INVALID_CARD_NUMBER"],
+  cardCVC: ["INVALID_CVC"],
+  cardExpirationDate: ["INVALID_EXPIRATION_DATE"],
+};

@@ -7,6 +7,7 @@ import { CardCVCInput } from "./CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput";
 import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
 import { Button } from "../../style/Button";
+import { ERROR_CODE_TO_MESSAGE, FIELD_ERROR_CODES } from "../../Constants";
 import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
 import { joinCardNumber } from "../../Utils";
@@ -104,7 +105,7 @@ export function CardForm({
         <CardCVCInput
           cardCVC={cardCVC}
           setCardCVC={setCardCVC}
-          // formError={formError.cvc}
+          formErrorCodes={formErrorCodes}
         />
       </CardSection>
       <CardSection
@@ -115,7 +116,7 @@ export function CardForm({
         <CardExpiryDateInput
           cardExpiryDate={cardExpiryDate}
           setCardExpiryDate={setCardExpiryDate}
-          // formError={formError.expirationDate}
+          formErrorCodes={formErrorCodes}
         />
       </CardSection>
       <CardSection
@@ -133,7 +134,7 @@ export function CardForm({
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
-          // formError={formError.number}
+          formErrorCodes={formErrorCodes}
         />
       </CardSection>
       <Button type="submit" disabled={!allComplete}>

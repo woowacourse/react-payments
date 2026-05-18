@@ -6,17 +6,21 @@ import { CARD_INPUT } from "../../Constants";
 import useCardInputError from "../../hooks/useCardInputError";
 import { ErrorMessage } from "./ErrorMessage";
 import useFocusChain from "../../hooks/useFocusChain";
+import { errorCodeToErrorMessage } from "../../Converter";
+import { FIELD_ERROR_CODES } from "../../Constants";
 import type { SetState } from "../../types";
 import { ExpiryDate } from "../../ExpiryDate";
 
 interface CardExpiryDateInputProps {
   cardExpiryDate: ExpiryDate;
   setCardExpiryDate: SetState<ExpiryDate>;
+  formErrorCodes: string[];
 }
 
 export function CardExpiryDateInput({
   cardExpiryDate,
   setCardExpiryDate,
+  formErrorCodes,
 }: CardExpiryDateInputProps) {
   const [isError, handleChangeError, handleOnBlurError] = useCardInputError({
     expiryMonth: {
@@ -32,6 +36,11 @@ export function CardExpiryDateInput({
   const { ref, changeFocus } = useFocusChain(
     Object.keys(cardExpiryDate).length,
     CARD_INPUT.EACH_EXPIRY_DATE_LENGTH,
+  );
+
+  const formErrorMessages = errorCodeToErrorMessage(
+    formErrorCodes,
+    FIELD_ERROR_CODES.cardExpirationDate,
   );
 
   const changeCardExpiryMonth = (
@@ -100,9 +109,10 @@ export function CardExpiryDateInput({
         />
       </CardFieldset>
       <ErrorMessage
-        messages={sanitizeErrors(
-          Object.values(isError).map((err) => err.message),
-        )}
+        messages={sanitizeErrors([
+          ...formErrorMessages,
+          ...Object.values(isError).map((err) => err.message),
+        ])}
       />
     </>
   );

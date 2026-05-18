@@ -4,6 +4,8 @@ import { sanitizeErrors } from "../../Utils";
 import { CardInput } from "./CardInput";
 import useCardInputError from "../../hooks/useCardInputError";
 import { Validator } from "../../validators/CardValidator";
+import { FIELD_ERROR_CODES } from "../../Constants";
+import { errorCodeToErrorMessage } from "../../Converter";
 import {
   CardInputFieldContainer,
   CardInputLabel,
@@ -12,9 +14,14 @@ import {
 interface CardCVCInputProps {
   cardCVC: string;
   setCardCVC: (value: string) => void;
+  formErrorCodes: string[];
 }
 
-export function CardCVCInput({ cardCVC, setCardCVC }: CardCVCInputProps) {
+export function CardCVCInput({
+  cardCVC,
+  setCardCVC,
+  formErrorCodes,
+}: CardCVCInputProps) {
   const [isError, handleChangeError, handleOnBlurError] = useCardInputError({
     state: false,
     message: "",
@@ -26,6 +33,11 @@ export function CardCVCInput({ cardCVC, setCardCVC }: CardCVCInputProps) {
     if (errorReport.state) return;
     setCardCVC(value);
   };
+
+  const formErrorMessages = errorCodeToErrorMessage(
+    formErrorCodes,
+    FIELD_ERROR_CODES.cardCVC,
+  );
 
   return (
     <CardInputFieldContainer>
@@ -44,6 +56,9 @@ export function CardCVCInput({ cardCVC, setCardCVC }: CardCVCInputProps) {
         }
       />
       <ErrorMessage messages={sanitizeErrors([isError["message"]])} />
+      <ErrorMessage
+        messages={sanitizeErrors([...formErrorMessages, isError["message"]])}
+      />
     </CardInputFieldContainer>
   );
 }

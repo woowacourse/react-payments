@@ -2,11 +2,12 @@ import { CardInput } from "./CardInput";
 import { ErrorMessage } from "./ErrorMessage";
 import NetworkBrandErrorMessage from "./NetworkBrandErrorMessage";
 import useFocusChain from "../../hooks/useFocusChain";
-import { CARD_INPUT } from "../../Constants";
+import { CARD_INPUT, FIELD_ERROR_CODES } from "../../Constants";
 import { Validator } from "../../validators/CardValidator";
 import { CardInputChecker } from "../../Checker";
 import useCardInputError from "../../hooks/useCardInputError";
 import { sanitizeErrors, joinCardNumber } from "../../Utils";
+import { errorCodeToErrorMessage } from "../../Converter";
 import { CardFieldset, CardLegend } from "../../style/CardStyles";
 import type { CardNumber, SetState } from "../../types";
 
@@ -20,11 +21,13 @@ const CARD_NUMBER_FIELDS = [
 interface CardNumberInputProps {
   cardNumber: CardNumber;
   setCardNumber: SetState<CardNumber>;
+  formErrorCodes: string[];
 }
 
 export function CardNumberInput({
   cardNumber,
   setCardNumber,
+  formErrorCodes,
 }: CardNumberInputProps) {
   const [isError, handleChangeError, handleOnBlurError] = useCardInputError({
     firstDigits: { state: false, message: "" },
@@ -41,6 +44,11 @@ export function CardNumberInput({
   const { ref, changeFocus } = useFocusChain(
     Object.keys(cardNumber).length,
     CARD_INPUT.EACH_NUMBER_LENGTH,
+  );
+
+  const formErrorMessages = errorCodeToErrorMessage(
+    formErrorCodes,
+    FIELD_ERROR_CODES.cardNumber,
   );
 
   const changeCardNumber = (
@@ -128,9 +136,10 @@ export function CardNumberInput({
         message={networkBrandError["message"]}
       ></NetworkBrandErrorMessage>
       <ErrorMessage
-        messages={sanitizeErrors(
-          Object.values(isError).map((err) => err.message),
-        )}
+        messages={sanitizeErrors([
+          ...formErrorMessages,
+          ...Object.values(isError).map((err) => err.message),
+        ])}
       />
     </>
   );
