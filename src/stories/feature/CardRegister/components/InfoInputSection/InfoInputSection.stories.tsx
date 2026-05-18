@@ -91,6 +91,8 @@ const meta = {
     cardFormInfo: emptyCardFormInfo,
     currentStep: 0,
     hasFormError: true,
+    serverFieldErrors: {},
+    clearServerFieldError: fn(),
     onRegisterComplete: fn(),
   },
 } satisfies Meta<typeof InfoInputSection>;
