@@ -1,37 +1,32 @@
-import { useState } from 'react';
-import CardPreview from './components/CardPreview';
-import CardForm from './components/CardForm';
-import { useCardBrand } from './hooks/useCardBrand';
-import type { CardNumberSegments } from './types';
-import styled from '@emotion/styled';
-
-const View = styled.div`
-  width: 100%;
-  max-width: 376px;
-  margin: 0 auto;
-  padding: 16px 32px;
-`;
+import { Route, Routes } from "react-router-dom";
+import { CardRegisterPage } from "./pages/CardRegisterPage";
+import { CardRegisterCompletePage } from "./pages/CardRegisterCompletePage";
+import { useCardForm } from "./hooks/useCardForm";
 
 function App() {
-  const [formState, setFormState] = useState({
-    cardNumberSegments: ['', '', '', ''] as CardNumberSegments,
-    expiryMonth: '',
-    expiryYear: '',
-    cvc: '',
-  });
-
-  const brand = useCardBrand(formState.cardNumberSegments);
+  const { cardFormState, brand, handleSetFormState } = useCardForm();
 
   return (
-    <View>
-      <CardPreview
-        cardBrand={brand}
-        cardNumberSegments={formState.cardNumberSegments}
-        expiryMonth={formState.expiryMonth}
-        expiryYear={formState.expiryYear}
+    <Routes>
+      <Route
+        path="/react-payments"
+        element={
+          <CardRegisterPage
+            cardFormState={cardFormState}
+            brand={brand}
+            handleSetFormState={handleSetFormState}
+          />
+        }
       />
-      <CardForm formState={formState} setFormState={setFormState} />
-    </View>
+      <Route
+        path="/react-payments/success"
+        element={
+          <CardRegisterCompletePage
+            cardFormState={cardFormState}
+          />
+        }
+      />
+    </Routes>
   );
 }
 

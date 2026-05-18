@@ -1,3 +1,5 @@
+import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS, type CardBrand, type CardFormState } from "../types";
+
 export function validateNumberString(input: string) {
   return /^\d*$/.test(input);
 }
@@ -24,9 +26,22 @@ export function validateYear(input: string) {
   return monthArray.includes(input);
 }
 
-export function validateCVC(input: string) {
-  const monthArray = Array.from({ length: 1000 }).map((_, index) =>
-    String(index).padStart(3, "0"),
+export function isCardFormComplete(
+  formState: CardFormState,
+  brand: CardBrand | undefined,
+) {
+  const segmentLengths = brand
+    ? CARD_BRAND_CONFIGS[brand].segmentLengths
+    : DEFAULT_SEGMENT_LENGTHS;
+
+  return !!(
+    formState.cardCompany &&
+    segmentLengths.every(
+      (len, i) => formState.cardNumberSegments[i]?.length === len,
+    ) &&
+    formState.expiryMonth.length === 2 &&
+    formState.expiryYear.length === 2 &&
+    formState.cvc.length === 3 &&
+    formState.cardPassword.length === 2
   );
-  return monthArray.includes(input);
 }

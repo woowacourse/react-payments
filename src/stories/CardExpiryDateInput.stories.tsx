@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import CardExpiryDateInput from '../components/CardExpiryDateInput';
+import CardExpiryDateInput from '../components/CardRegister/CardExpiryDateInput';
 
 const meta = {
   title: 'Components/CardExpiryDateInput',

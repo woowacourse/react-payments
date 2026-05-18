@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import CardNumberSegmentsInput from '../components/CardNumberSegmentsInput';
+import CardNumberSegmentsInput from '../components/CardRegister/CardNumberSegmentsInput';
 import type { CardNumberSegments } from '../types';
 
 const meta = {
@@ -9,6 +9,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     value: ['', '', '', ''] as CardNumberSegments,
+    brand: undefined,
     onChange: () => {},
   },
 } satisfies Meta<typeof CardNumberSegmentsInput>;
@@ -21,6 +22,7 @@ function Wrapper({ initialValue }: { initialValue: CardNumberSegments }) {
   return (
     <CardNumberSegmentsInput
       value={value}
+      brand={undefined}
       onChange={(newValue) => setValue(newValue)}
     />
   );
