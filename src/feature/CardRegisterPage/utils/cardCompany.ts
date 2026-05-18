@@ -1,6 +1,8 @@
-import type { CardCompanyType } from "../../../shared/types/CardCompany";
+import type {
+  CardCompanyType,
+  IssuerCodeType,
+} from "../../../shared/types/CardCompany";
 import { CARD_COMPANY } from "../../CardListPage/constants";
-import type { IssuerCodeType } from "../../CardListPage/types/CardCompay";
 
 export const getIssuerCodeByCompanyName = (
   companyName: CardCompanyType | null,

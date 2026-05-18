@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-import type {
-  CardCompanyType,
-  IssuerCodeType,
-} from "../../../types/CardCompay";
+import type { CardCompanyType } from "../../../types/CardCompay";
 import { CARD_COMPANY } from "../../../constants";
+import type { IssuerCodeType } from "../../../../../shared/types/CardCompany";
 
 // todo: 타입 정의 상위로 올리기
 export type CardItemInformation = {

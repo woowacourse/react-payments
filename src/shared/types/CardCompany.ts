@@ -7,3 +7,13 @@ export type CardCompanyType =
   | "롯데카드"
   | "하나카드"
   | "국민카드";
+
+export type IssuerCodeType =
+  | "31"
+  | "41"
+  | "15"
+  | "61"
+  | "W1"
+  | "71"
+  | "21"
+  | "11";
