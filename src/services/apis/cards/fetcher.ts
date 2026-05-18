@@ -1,7 +1,10 @@
+import { requestAjax } from '@/services/core/http';
+
 import type { PostCardsRequestDTO, PostCardsResponseDTO, DeleteCardsRequestDTO } from './dto';
 
 export const getCards = async () => {
-  return await fetch('/cards').then((res) => res.json());
+  const response = await requestAjax('/cards');
+  return response.data;
 };
 
 export const postCards = async ({
@@ -10,29 +13,21 @@ export const postCards = async ({
   cvc,
   issuerCode,
 }: PostCardsRequestDTO): Promise<PostCardsResponseDTO> => {
-  const response = await fetch('/cards', {
+  const response = await requestAjax('/cards', {
     method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+    data: {
       number,
       expirationDate,
       cvc,
       issuerCode,
-    }),
+    },
   });
-
-  const data = await response.json();
-
-  if (response.ok) {
-    return data;
-  }
-  throw data;
+  return response.data;
 };
 
 export const deleteCards = async ({ id }: DeleteCardsRequestDTO) => {
-  return await fetch(`/cards/${id}`, {
+  return await requestAjax(`/cards`, {
     method: 'delete',
+    params: { id },
   });
 };
