@@ -6,11 +6,13 @@ export const COLOR_PALETTE = {
   GRAY: "#acacac",
   "BLACK-900": "#000000",
   "BLACK-800": "#333",
+  "BLACK-700": "#353C49",
+  "BLACK-600": "#8C8C8C",
   WHITE: "#ffffff",
 
   // card company colors
   BC: "#F04651",
-  SINHAN: "#0046FF",
+  SHINHAN: "#0046FF",
   KAKAOBANK: "#FFE600",
   HYUNDAI: "#000000",
   WOORI: "#007BC8",
