@@ -9,17 +9,18 @@ import CardNumberInputField from "./components/CardNumberInputField";
 import CardPasswordField from "./components/CardPasswordField";
 import CardPreview from "./components/CardPreview";
 import CardValidityPeriodInputField from "./components/CardValidityPeriodInputField";
-import { FormWrapper } from "./formContext";
+import { useFormValue, withFormWrapper } from "./formContext";
 import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
 
 const CardInfoFormSection = () => {
   const navigate = useNavigate();
+  const { getValue } = useFormValue();
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const cardNumber = formData.getAll("card-number").join("");
-    const cardCompany = (formData.get("card-company") ?? "").toString();
+
+    const cardNumber = getValue("cardNumber").join("");
+    const cardCompany = getValue("selectedCardCompany") ?? "";
 
     navigate("/complete", {
       state: { cardNumber, cardCompany },
@@ -27,7 +28,7 @@ const CardInfoFormSection = () => {
   };
 
   return (
-    <FormWrapper defaultValues={INITIAL_CARD_INFO_FORM_STATE}>
+    <>
       <CardPreview />
       <Container onSubmit={handleSubmit}>
         <StepFunnel>
@@ -85,7 +86,7 @@ const CardInfoFormSection = () => {
           </StepFunnel.Step>
         </StepFunnel>
       </Container>
-    </FormWrapper>
+    </>
   );
 };
 
@@ -103,4 +104,7 @@ const CardInfoFormSubmitButtonContainer = styled.div`
   left: 0;
 `;
 
-export default CardInfoFormSection;
+export default withFormWrapper(
+  CardInfoFormSection,
+  INITIAL_CARD_INFO_FORM_STATE,
+);
