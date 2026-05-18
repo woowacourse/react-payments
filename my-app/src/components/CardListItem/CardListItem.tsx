@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { getCardColor } from "../../constants/cardCompanies";
+import { getCardColor } from "@/constants/cardCompanies";
 
 type Props = {
   issuerCode: string;

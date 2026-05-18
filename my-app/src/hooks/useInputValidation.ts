@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ValidationResult } from "../types";
+import type { ValidationResult } from "@/types";
 
 const useInputValidation = <T>(validator: (v: T) => ValidationResult, inputValue: T) => {
   const [errorMessage, setErrorMessage] = useState("");

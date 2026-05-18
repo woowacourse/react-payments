@@ -1,5 +1,5 @@
-import { detectBrand } from "../constants/cardBrand";
-import type { ValidationResult } from "../types";
+import { detectBrand } from "@/constants/cardBrand";
+import type { ValidationResult } from "@/types";
 
 export const validateCardNumber = (values: string[]): ValidationResult => {
   for (let i = 0; i < values.length; i++) {

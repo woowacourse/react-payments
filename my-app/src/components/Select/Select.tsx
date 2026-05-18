@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { css } from "@emotion/react";
-import chevronDown from "../../assets/ic_chevron_down.svg";
-import chevronUp from "../../assets/ic_chevron_up.svg";
+import chevronDown from "@/assets/ic_chevron_down.svg";
+import chevronUp from "@/assets/ic_chevron_up.svg";
 
 type SelectProps = {
   value: string;

@@ -1,17 +1,12 @@
 import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button/Button";
-import OutlinedButton from "../components/Button/OutlinedButton";
-import CardListItem from "../components/CardListItem/CardListItem";
-import CardListItemSkeleton from "../components/SkeletonUI/CardListItemSkeleton";
-import EmptyState from "../components/common/EmptyState";
-type CardItem = {
-  id: string;
-  issuerCode: string;
-  number: string;
-  expirationDate: string;
-};
+import Button from "@/components/Button/Button";
+import OutlinedButton from "@/components/Button/OutlinedButton";
+import CardListItem from "@/components/CardListItem/CardListItem";
+import CardListItemSkeleton from "@/components/SkeletonUI/CardListItemSkeleton";
+import EmptyState from "@/components/common/EmptyState";
+import { getCards, deleteCard, type CardItem } from "@/api/cards";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -21,12 +16,8 @@ const CardList = () => {
   const [cards, setCards] = useState<CardItem[]>([]);
 
   useEffect(() => {
-    fetch("/cards")
-      .then((res) => {
-        if (!res.ok) throw new Error();
-        return res.json();
-      })
-      .then((data: CardItem[]) => {
+    getCards()
+      .then((data) => {
         setCards(data);
         setStatus("success");
       })
@@ -37,7 +28,7 @@ const CardList = () => {
     const isConfirmed = window.confirm("카드를 삭제하시겠습니까?");
     if (!isConfirmed) return;
 
-    await fetch(`/cards/${id}`, { method: "DELETE" });
+    await deleteCard(id);
     setCards((prev) => prev.filter((card) => card.id !== id));
   };
 

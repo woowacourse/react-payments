@@ -1,8 +1,8 @@
-import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
+import InputSectionLayout, { baseInputStyle } from "@/components/CardForm/InputSectionLayout/InputSectionLayout";
 import { useRef } from "react";
 import { css } from "@emotion/react";
-import { validateCardNumber } from "../../../utils/validators";
-import useInputValidation from "../../../hooks/useInputValidation";
+import { validateCardNumber } from "@/utils/validators";
+import useInputValidation from "@/hooks/useInputValidation";
 
 const CardNumberInputSection = ({
   onChange,

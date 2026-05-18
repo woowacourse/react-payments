@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { CardInfo } from "../types";
-import { detectBrand, getFieldConfig } from "../constants/cardBrand";
-import { validateCardNumber, validateExpiryDate } from "../utils/validators";
+import type { CardInfo } from "@/types";
+import { detectBrand, getFieldConfig } from "@/constants/cardBrand";
+import { validateCardNumber, validateExpiryDate } from "@/utils/validators";
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({

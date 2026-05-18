@@ -1,13 +1,14 @@
 import { css } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
-import Card from "../components/Card/Card";
-import CardNumberInputSection from "../components/CardForm/CardNumberInputSection/CardNumberInputSection.tsx";
-import CardCompanySelectSection from "../components/CardForm/CardCompanySelectSection/CardCompanySelectSection.tsx";
-import ExpiryDateInputSection from "../components/CardForm/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
-import CvcInputSection from "../components/CardForm/CvcInputSection/CvcInputSection.tsx";
-import PasswordInputSection from "../components/CardForm/PasswordInputSection/PasswordInputSection.tsx";
-import CardFormLayout from "../components/CardForm/CardFormLayout/CardFormLayout.tsx";
-import useCardForm from "../hooks/useCardForm.ts";
+import Card from "@/components/Card/Card";
+import CardNumberInputSection from "@/components/CardForm/CardNumberInputSection/CardNumberInputSection.tsx";
+import CardCompanySelectSection from "@/components/CardForm/CardCompanySelectSection/CardCompanySelectSection.tsx";
+import ExpiryDateInputSection from "@/components/CardForm/ExpiryDateInputSection/ExpiryDateInputSection.tsx";
+import CvcInputSection from "@/components/CardForm/CvcInputSection/CvcInputSection.tsx";
+import PasswordInputSection from "@/components/CardForm/PasswordInputSection/PasswordInputSection.tsx";
+import CardFormLayout from "@/components/CardForm/CardFormLayout/CardFormLayout.tsx";
+import useCardForm from "@/hooks/useCardForm.ts";
+import { createCard } from "@/api/cards";
 import { useState } from "react";
 const CardForm = () => {
   const navigate = useNavigate();
@@ -32,24 +33,18 @@ const CardForm = () => {
     e.preventDefault();
     if (!canSubmit) return;
 
-    const res = await fetch("/cards", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    try {
+      await createCard({
         number: cardInfo.numbers.join(" "),
         expirationDate: cardInfo.expiry.join("/"),
         cvc: cardInfo.cvc,
         issuerCode: cardInfo.company,
-      }),
-    });
-
-    if (!res.ok) {
-      const { code, message } = await res.json();
+      });
+      navigate("/complete", { state: { numbers: cardInfo.numbers[0], brand } });
+    } catch (error) {
+      const { code, message } = error as { code: string; message: string };
       setServerErrors({ [code]: message });
-      return;
     }
-
-    navigate("/complete", { state: { numbers: cardInfo.numbers[0], brand } });
   };
 
   const clearServerError = (key: string) => {

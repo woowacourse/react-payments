@@ -1,7 +1,7 @@
-import InputSectionLayout, { baseInputStyle } from "../InputSectionLayout/InputSectionLayout";
+import InputSectionLayout, { baseInputStyle } from "@/components/CardForm/InputSectionLayout/InputSectionLayout";
 import { css } from "@emotion/react";
-import { validateExpiryDate } from "../../../utils/validators";
-import useInputValidation from "../../../hooks/useInputValidation";
+import { validateExpiryDate } from "@/utils/validators";
+import useInputValidation from "@/hooks/useInputValidation";
 
 const ExpiryDateInputSection = ({
   onChange,
