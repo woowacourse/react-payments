@@ -14,7 +14,7 @@ export type ErrorInformation = {
   message: string;
 };
 
-export const registerCard = async (
+export const requestRegisterCard = async (
   postCardInformation: PostCardRequestBody,
 ) => {
   const response = await fetch(`${BASE_URL}/cards`, {
