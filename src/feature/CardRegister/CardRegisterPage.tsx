@@ -6,6 +6,7 @@ import { useCardForm } from './hooks/useCardForm';
 import type { CardFormInfoType } from '../../domain/card/types/card';
 import { postCard } from '../../api/cards';
 import { useRegisterServerError } from './hooks/useRegisterServerErrors';
+import { HTTPError, NetworkError } from '../../api/error';
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
@@ -25,8 +26,12 @@ const CardRegisterPage = () => {
         state: cardFormInfo,
       });
     } catch (error) {
-      // 네트워크 에러 처리 필요
-      serverErrors.setServerFieldError(error.code, error.message);
+      if (error instanceof HTTPError) {
+        serverErrors.setServerFieldError(error.code, error.message);
+      }
+      if (error instanceof NetworkError) {
+        serverErrors.setFormServerError(error.message);
+      }
     }
   };
 

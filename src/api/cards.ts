@@ -1,4 +1,5 @@
 import type { Card, CardFormInfoType } from '../domain/card/types/card';
+import { HTTPError, NetworkError } from './error';
 
 export const getCards = async (): Promise<Card[]> => {
   const response = await fetch('/cards');
@@ -11,17 +12,25 @@ export const getCards = async (): Promise<Card[]> => {
 export const postCard = async (
   cardFormInfo: CardFormInfoType,
 ): Promise<Card> => {
-  const response = await fetch('/cards', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(cardFormInfo),
-  });
+  let response;
 
+  try {
+    response = await fetch('/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cardFormInfo),
+    });
+  } catch {
+    // 1. 네트워크 에러인 경우
+    throw new NetworkError();
+  }
+
+  // 2. HTTP 에러인 경우
   if (!response.ok) {
     const error = await response.json();
-    throw error;
+    throw new HTTPError(error.code, error.message);
   }
 
   return response.json();

@@ -13,7 +13,7 @@ export type ServerFieldErrors = {
   form?: string;
 };
 
-type ServerErrorCode = keyof typeof SERVER_ERROR_FIELD_MAP;
+export type ServerErrorCode = keyof typeof SERVER_ERROR_FIELD_MAP;
 
 export const useRegisterServerError = () => {
   const [serverFieldErrors, setServerFieldErrors] = useState<ServerFieldErrors>(
