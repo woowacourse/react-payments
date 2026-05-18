@@ -1,6 +1,7 @@
 import CardItem from "@components/common/CardItem";
 import styled from "@emotion/styled";
 import useCards from "@hooks/feature/query/useCards";
+import useDeleteCard from "@hooks/feature/mutation/useDeleteCard";
 import { COLOR_PALETTE } from "@styles/colorPalette";
 
 import AddCardNavigateButton from "../AddCardNavigateButton/AddCardNavigateButton";
@@ -9,6 +10,7 @@ import MyCardListSectionLoader from "./MyCardListSectionLoader";
 
 const MyCardListSection = () => {
   const { data, state } = useCards();
+  const { mutate: deleteCard } = useDeleteCard();
 
   if (state === "loading" || state === "idle")
     return <MyCardListSectionLoader />;
@@ -22,7 +24,17 @@ const MyCardListSection = () => {
         <>
           <CardContainer>
             {data.map((props) => (
-              <CardItem {...props} key={props.id} />
+              <CardItem
+                {...props}
+                key={props.id}
+                onClickDelete={({ number }) => {
+                  if (!window.confirm(`${number} 카드를 삭제하시겠습니까?`))
+                    return;
+                  deleteCard(props.id, {
+                    onSuccess: () => window.location.reload(),
+                  });
+                }}
+              />
             ))}
           </CardContainer>
           <AddCardNavigateButton buttonType="dashed" />
