@@ -5,13 +5,17 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 
 async function main() {
-  const { worker } = await import("./mocks/browser");
-  await worker.start({
-    onUnhandledRequest: "bypass",
-    serviceWorker: {
-      url: "/react-payments/mockServiceWorker.js",
-    },
-  });
+  try {
+    const { worker } = await import("./mocks/browser");
+    await worker.start({
+      onUnhandledRequest: "bypass",
+      serviceWorker: {
+        url: "/react-payments/mockServiceWorker.js",
+      },
+    });
+  } catch (e) {
+    console.error("MSW 시작 실패:", e);
+  }
 
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
