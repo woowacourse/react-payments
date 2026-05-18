@@ -25,6 +25,7 @@ export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
 
     try {
       const response = await run(() => postCard(sendingData));
+      if (!response) return;
 
       // 라우팅 페이지 연결
       navigate('/card-add-success', {

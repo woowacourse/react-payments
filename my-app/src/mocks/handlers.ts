@@ -1,4 +1,4 @@
-import { delay, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 import {
   isCardNumberCorrect,
   isCvcCorrect,
