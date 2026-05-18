@@ -1,4 +1,4 @@
-import { InputFieldConfig } from '../types';
+import { InputFieldConfig } from '../types/field';
 
 export const SELECT_FIELD_CONFIG = {
   CARD_ISSUER: {

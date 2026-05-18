@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { InputFieldConfig } from '../../../types';
+import { InputFieldConfig } from '../../../types/field';
 import InputField from '../InputField/InputField';
 import { validateNaN } from '../../../utils/validate';
 
