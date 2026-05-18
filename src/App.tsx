@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import CardRegisterPage from "./feature/CardRegister/CardRegisterPage";
+import CardRegisterPage from "./feature/CardRegisterPage/CardRegisterPage";
 import CardRegisterCompletePage from "./feature/CardRegisterComplete/CardRegisterCompletePage";
 import styled from "styled-components";
 import CardListPage from "./feature/CardListPage/CardListPage";
