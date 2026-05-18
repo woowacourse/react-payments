@@ -55,7 +55,6 @@ export function CardCVCInput({
           ])
         }
       />
-      <ErrorMessage messages={sanitizeErrors([isError["message"]])} />
       <ErrorMessage
         messages={sanitizeErrors([...formErrorMessages, isError["message"]])}
       />

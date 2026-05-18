@@ -72,9 +72,11 @@ export function CardForm({
       });
       const data = await response.json();
       if (!response.ok) {
-        const errorCodes = Object.keys(data).map(
-          (key) => formErrorCodes[key].code,
-        );
+        const errorCodes = Object.values(
+          data.errorMessages as Record<string, { code: string } | null>,
+        )
+          .filter(Boolean)
+          .map((err) => (err as { code: string }).code);
         setFormErrorCodes(errorCodes);
         return;
       }

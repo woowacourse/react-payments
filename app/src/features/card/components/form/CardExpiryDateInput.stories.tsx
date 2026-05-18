@@ -20,6 +20,7 @@ type Story = StoryObj<typeof meta>;
 const defaultArgs = {
   cardExpiryDate: new ExpiryDate("", ""),
   setCardExpiryDate: () => {},
+  formErrorCodes: [],
 };
 
 const renderWithState: NonNullable<Story["render"]> = (args) => {
@@ -28,12 +29,18 @@ const renderWithState: NonNullable<Story["render"]> = (args) => {
     <CardExpiryDateInput
       cardExpiryDate={cardExpiryDate}
       setCardExpiryDate={setCardExpiryDate}
+      formErrorCodes={args.formErrorCodes}
     />
   );
 };
 
 export const Base: Story = {
   args: defaultArgs,
+  render: renderWithState,
+};
+
+export const WithFormError: Story = {
+  args: { ...defaultArgs, formErrorCodes: ["INVALID_EXPIRATION_DATE"] },
   render: renderWithState,
 };
 

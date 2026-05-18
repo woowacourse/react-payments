@@ -9,5 +9,6 @@ module.exports = {
   setupFilesAfterEnv: ["<rootDir>/src/test-setup.ts"],
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
+    "\\.(svg|png|jpg|jpeg|gif|webp)$": "<rootDir>/src/__mocks__/fileMock.cjs",
   },
 };

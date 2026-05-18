@@ -19,15 +19,27 @@ type Story = StoryObj<typeof meta>;
 const defaultArgs = {
   cardCVC: "",
   setCardCVC: () => {},
+  formErrorCodes: [],
 };
 
 const renderWithState: NonNullable<Story["render"]> = (args) => {
   const [cardCVC, setCardCVC] = useState(args.cardCVC);
-  return <CardCVCInput cardCVC={cardCVC} setCardCVC={setCardCVC} />;
+  return (
+    <CardCVCInput
+      cardCVC={cardCVC}
+      setCardCVC={setCardCVC}
+      formErrorCodes={args.formErrorCodes}
+    />
+  );
 };
 
 export const Base: Story = {
   args: defaultArgs,
+  render: renderWithState,
+};
+
+export const WithFormError: Story = {
+  args: { ...defaultArgs, formErrorCodes: ["INVALID_CVC"] },
   render: renderWithState,
 };
 
