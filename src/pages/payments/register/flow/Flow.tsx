@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Outlet, useNavigate } from 'react-router';
 
 import { ROUTES } from '@/constants/routes';
@@ -12,6 +14,8 @@ import { useCvc } from '../form/hooks/useCvc';
 import { usePassword } from '../form/hooks/usePassword';
 
 import { getBrandCard } from '../form/utils';
+
+import { ERROR_CODE } from './constants';
 
 export const Flow = () => {
   const cardNumbers = useCardNumbers();
@@ -36,6 +40,8 @@ export const Flow = () => {
     password.reset();
   };
 
+  const [serverError, setServerError] = useState<keyof typeof ERROR_CODE | null>(null);
+
   const handleSubmit = async () => {
     try {
       const data = mapCardModelToRequestDTO({
@@ -48,7 +54,10 @@ export const Flow = () => {
       await postCards(data);
       navigate(ROUTES.PAYMENTS.CARDS);
     } catch (error) {
-      console.log(error);
+      if (typeof error === 'object' && error !== null && 'code' in error) {
+        const errorCode = error.code as keyof typeof ERROR_CODE;
+        setServerError(errorCode);
+      }
     }
   };
 
@@ -63,6 +72,7 @@ export const Flow = () => {
         brandCard,
         handleSubmit,
         handleReset,
+        serverError,
       }}
     />
   );
