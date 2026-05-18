@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import CardFormFields from "./cardFormFields/CardFormFields";
 import CardPreview from "./cardPreview/CardPreview";
-import { Wrapper, ConfirmButton } from "./PaymentWidget.styles";
+import { ConfirmButton } from "./PaymentWidget.styles";
+import { Wrapper } from "./PageCard.styles";
 import { useCardForm } from "./useCardForm";
 import { useCardStep } from "./cardFormFields/useCardStep";
 import { CARD_BRANDS } from "../constants/constants";
