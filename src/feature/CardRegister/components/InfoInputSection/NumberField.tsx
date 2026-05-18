@@ -37,7 +37,7 @@ const NumberField = ({
           />
         ))}
       </InputWrapper>
-
+      {serverFieldError && <ServerErrorLine />}
       <ErrorMessage>{field.errorMessage || serverFieldError}</ErrorMessage>
     </StyledField>
   );
@@ -63,6 +63,15 @@ const CardNumberInput = styled(Input)`
   box-sizing: border-box;
   width: 100%;
   height: 32px;
+`;
+
+const ServerErrorLine = styled.div`
+  width: 100%;
+  height: 1px;
+  margin: 0;
+
+  border: 0;
+  background-color: #ff3d3d;
 `;
 
 const ErrorMessage = styled.span`
