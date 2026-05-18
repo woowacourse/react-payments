@@ -7,7 +7,6 @@ import { CardCVCInput } from "./CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput";
 import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
 import { Button } from "../../style/Button";
-import { ERROR_CODE_TO_MESSAGE, FIELD_ERROR_CODES } from "../../Constants";
 import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
 import { joinCardNumber } from "../../Utils";

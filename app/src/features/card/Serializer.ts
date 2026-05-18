@@ -16,7 +16,7 @@ export const CardSerializer = {
   validateNumber(value: string) {
     try {
       Validator.isValidNetworkBrand(value);
-    } catch (err) {
+    } catch {
       return {
         code: "INVALID_CARD_NUMBER",
         message: "유효하지 않은 카드 번호입니다.",
