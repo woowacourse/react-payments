@@ -1,11 +1,14 @@
 import Card from './Card';
 import type { CardResponse } from '../../types/cardStausTypes';
+import { useNavigate } from 'react-router-dom';
 
 type CardListProps = {
   cards: CardResponse[];
 };
 
 export default function CardList({ cards }: CardListProps) {
+  const navigate = useNavigate();
+
   return (
     <div
       css={{
@@ -29,6 +32,7 @@ export default function CardList({ cards }: CardListProps) {
           textAlign: 'center',
           border: `1px dashed ${theme.colors.cardSectionBorder}`,
         })}
+        onClick={() => navigate('/register')}
       >
         + 카드 추가
       </button>
