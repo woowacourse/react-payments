@@ -1,8 +1,3 @@
-export const CARD = [
-  {
-    id: "550e8400-e29b-41d4-a716-446655440000",
-    issuerCode: "31",
-    number: "551112******9012",
-    expirationDate: "12/28",
-  },
-];
+import type { Card } from "./handlers";
+
+export const CARD: Card[] = [];
