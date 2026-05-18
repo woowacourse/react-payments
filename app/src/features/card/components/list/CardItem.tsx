@@ -2,12 +2,18 @@ import styled from "@emotion/styled";
 import { maskCardNumber, splitCardNumber } from "../../Formatter";
 import CardItemDeleteSVG from "../../assets/card-item-delete.svg";
 import { detectCardNetwork } from "../../CardNetwork";
+import { deleteCard } from "../../Api";
 import { convertIssuerCodeToCardBrand } from "../../Converter";
 
 export default function CardItem({ cardData }) {
-  const { issuerCode, number, expirationDate } = cardData;
+  const { id, issuerCode, number, expirationDate } = cardData;
 
   const { title, bgHex } = convertIssuerCodeToCardBrand(issuerCode);
+
+  const handleDeleteCard = () => {
+    deleteCard(id);
+  };
+
   return (
     <CardItemContainer>
       <CardContentContainer>
@@ -24,7 +30,7 @@ export default function CardItem({ cardData }) {
             <p>유효기간 {expirationDate}</p>
           </div>
         </CardContent>
-        <CardItemDeleteButton type="button">
+        <CardItemDeleteButton type="button" onClick={handleDeleteCard}>
           <img src={CardItemDeleteSVG} />
         </CardItemDeleteButton>
       </CardContentContainer>

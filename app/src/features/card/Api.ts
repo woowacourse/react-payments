@@ -24,3 +24,11 @@ export const getCards = async () => {
     return data;
   } catch (err) {}
 };
+
+export const deleteCard = async (cardId: string) => {
+  try {
+    await fetch(`https://api.antolibank.com/cards/${cardId}`, {
+      method: "DELETE",
+    });
+  } catch (err) {}
+};
