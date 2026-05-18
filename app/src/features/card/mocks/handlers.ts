@@ -1,9 +1,6 @@
 import { http, HttpResponse } from "msw";
 import { CardSerializer } from "../Serializer";
-import { type CardInterface } from "../Card";
-import Card from "../Card";
-
-const cardStore: CardInterface[] = [];
+import db from "./db";
 
 export const handlers = [
   http.get("https://api.example.com/user", () => {
@@ -22,13 +19,7 @@ export const handlers = [
     };
     const result = CardSerializer.validate(cardData);
     if (result.isValid) {
-      const card = new Card(
-        cardData.number,
-        cardData.expirationDate,
-        cardData.cvc,
-        cardData.issuerCode,
-      );
-      cardStore.push(card);
+      db.card.create(cardData);
       return HttpResponse.json({ message: "카드 생성!" }, { status: 201 });
     } else {
       return HttpResponse.json(
