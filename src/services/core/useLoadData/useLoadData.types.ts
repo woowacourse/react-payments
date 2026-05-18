@@ -1,4 +1,4 @@
-export type Status = 'idle' | 'loading' | 'success' | 'error';
+export type StatusType = 'idle' | 'loading' | 'success' | 'error';
 
 export type Options<T = unknown> = {
   queryFn: () => Promise<T>;
@@ -28,4 +28,8 @@ type LoadingStatus = {
   error: null;
 };
 
-export type Result<T = unknown> = IdleStatus | SuccessStatus<T> | ErrorStatus | LoadingStatus;
+export type Status<T = unknown> = IdleStatus | SuccessStatus<T> | ErrorStatus | LoadingStatus;
+
+export type Result<T = unknown> = {
+  status: Status<T>;
+};

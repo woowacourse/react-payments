@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import type { Options, Result } from './useLoadData.types';
+import type { Options, Status, Result } from './useLoadData.types';
 
 export const useLoadData = <T = unknown>({ queryFn }: Options): Result<T> => {
-  const [status, setStatus] = useState<Result<T>>({
+  const [status, setStatus] = useState<Status<T>>({
     status: 'idle',
     data: null,
     error: null,
@@ -20,7 +20,7 @@ export const useLoadData = <T = unknown>({ queryFn }: Options): Result<T> => {
       const data = (await queryFn()) as T;
       setStatus({
         status: 'success',
-        data,
+        data: data,
         error: null,
       });
       return data;
@@ -37,5 +37,5 @@ export const useLoadData = <T = unknown>({ queryFn }: Options): Result<T> => {
     fetchData();
   }, []);
 
-  return status;
+  return { status };
 };

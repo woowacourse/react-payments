@@ -37,7 +37,9 @@ const formatCardNumberForMasking = (maskedNumber: string, mask: string = '*'): s
 };
 
 export const Cards = () => {
-  const { status, data: cards } = useCards();
+  const {
+    status: { status, data: cards },
+  } = useCards();
 
   const navigate = useNavigate();
 
