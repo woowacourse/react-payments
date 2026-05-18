@@ -8,6 +8,7 @@ type CardNumberInputSectionProps = {
   onValueHandler: (numbers: string[]) => void;
   maxLength: number;
   isSupportedNetwork: boolean;
+  serverErrorMessage?: string;
 };
 
 const CARD_NUMBER_INPUT_LABELS = [
@@ -17,7 +18,7 @@ const CARD_NUMBER_INPUT_LABELS = [
   "카드 번호 네번째 칸",
 ];
 
-const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork }: CardNumberInputSectionProps) => {
+const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork, serverErrorMessage }: CardNumberInputSectionProps) => {
   const {
     inputValues,
     errorMessage,
@@ -30,13 +31,15 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork 
     handlers,
   } = useCardNumberInput({ onValueHandler, maxLength, isSupportedNetwork });
 
+  const resolvedErrorMessage = errorMessage || serverErrorMessage;
+
   return (
     <InputSectionLayout
       title="결제할 카드 번호를 입력해 주세요"
       message="본인 명의의 카드만 결제 가능합니다."
       tag="카드 번호"
     >
-      <ValidatedInputGroup errorMessage={errorMessage} warningMessage={warningMessage} legend="카드 번호">
+      <ValidatedInputGroup errorMessage={resolvedErrorMessage} warningMessage={warningMessage} legend="카드 번호">
         {Array.from({ length: fieldCount }, (_, i) => (
           <input
             ref={(el) => {

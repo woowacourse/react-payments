@@ -8,16 +8,19 @@ import { validateNumeric } from "../../../utils/validators";
 
 type CvcInputSectionProps = {
   onValueHandler: (value: string) => void;
+  serverErrorMessage?: string;
 };
 
 const CVC_INPUT_LABEL = "CVC";
 
-const CvcInputSection = ({ onValueHandler }: CvcInputSectionProps) => {
+const CvcInputSection = ({ onValueHandler, serverErrorMessage }: CvcInputSectionProps) => {
   const { inputValue, errorMessage, handlers } = useSingleFieldInput({ onValueHandler, validate: validateNumeric });
+
+  const resolvedErrorMessage = errorMessage || serverErrorMessage;
 
   return (
     <InputSectionLayout title="CVC번호를 입력해 주세요" message="" tag="CVC">
-      <ValidatedInputGroup errorMessage={errorMessage} legend="CVC">
+      <ValidatedInputGroup errorMessage={resolvedErrorMessage} legend="CVC">
         <input
           type="text"
           aria-label={CVC_INPUT_LABEL}

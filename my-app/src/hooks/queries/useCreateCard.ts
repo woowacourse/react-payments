@@ -1,34 +1,35 @@
 import { useState } from "react";
 
+import { createCard } from "../../apis/cards";
 import type { ApiError } from "../../apis/cards";
 import type { CardInfo } from "../../types";
 
-import { createCard } from "../../apis/cards";
 import { toCreateCardRequest } from "../../utils/cardMapper";
 import { toFieldError } from "../../utils/apiErrorField";
 import { tryCatch } from "../../utils/tryCatch";
 
-type AsyncState<T> =
+type CreateCardState =
   | { status: "idle" }
   | { status: "loading" }
-  | { status: "success"; data: T }
+  | { status: "success"; data: { id: string }}
   | { status: "error"; field: string; message: string };
 
 export const useCreateCard = () => {
-  const [state, setState] = useState<AsyncState<{ id: string }>>({ status: "idle" });
+  const [state, setState] = useState<CreateCardState>({ status: "idle" });
 
   const submit = async (cardInfo: CardInfo) => {
     setState({ status: "loading" });
 
-    await tryCatch(
+    return await tryCatch(
       async () => {
-        const request = toCreateCardRequest(cardInfo);
-        const data = await createCard(request);
+        const data = await createCard(toCreateCardRequest(cardInfo));
         setState({ status: "success", data });
+        return { status: "success" as const };
       },
       (error) => {
         const { field, message } = toFieldError(error as ApiError);
         setState({ status: "error", field, message });
+        return { status: "error" as const };
       },
     );
   };

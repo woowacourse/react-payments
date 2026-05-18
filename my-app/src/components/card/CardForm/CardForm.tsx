@@ -1,8 +1,8 @@
 import { css } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
 
-import type { CardDisplayInfo, PublicCardInfo } from "../../../types";
 import { useCardForm } from "../../../hooks/useCardForm";
+import { useCreateCard } from "../../../hooks/queries/useCreateCard";
 import { ROUTES } from "../../../constants/routes";
 
 import Card from "../Card/Card";
@@ -13,18 +13,19 @@ import CvcInputSection from "../CvcInputSection/CvcInputSection";
 import ExpiryDateInputSection from "../ExpiryDateInputSection/ExpiryDateInputSection";
 import PasswordInputSection from "../PasswordInputSection/PasswordInputSection";
 
-const toPublicCardInfo = (cardInfo: CardDisplayInfo): PublicCardInfo => ({
-  numberHead: cardInfo.numbers[0],
-  issuerCode: cardInfo.issuerCode,
-});
-
 const CardForm = () => {
   const navigate = useNavigate();
   const { cardInfo, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
+  const { state, submit } = useCreateCard();
 
-  const handleConfirm = () => {
-    navigate(ROUTES.CARD_LIST, { state: toPublicCardInfo(cardInfo) });
+  const handleConfirm = async () => {
+    const result = await submit(cardInfo);
+    if (result.status === "success") {
+      navigate(ROUTES.CARD_LIST);
+    }
   };
+
+  const serverError = state.status === "error" ? state : null;
 
   return (
     <div css={formContainerStyle}>
@@ -32,17 +33,32 @@ const CardForm = () => {
         <Card cardInfo={cardInfo} />
         <div css={sectionsStyle}>
           {completion.cvc && <PasswordInputSection onValueHandler={handlers.password} />}
-          {completion.expiry && <CvcInputSection onValueHandler={handlers.cvc} />}
-          {completion.issuerCode && <ExpiryDateInputSection onValueHandler={handlers.expiry} />}
+          {completion.expiry && (
+            <CvcInputSection
+              onValueHandler={handlers.cvc}
+              serverErrorMessage={serverError?.field === "cvc" ? serverError.message : undefined}
+            />
+          )}
+          {completion.issuerCode && (
+            <ExpiryDateInputSection
+              onValueHandler={handlers.expiry}
+              serverErrorMessage={serverError?.field === "expiry" ? serverError.message : undefined}
+            />
+          )}
           {completion.cardNumber && <CardCompanySelectSection onSelect={handlers.cardIssuer} />}
           <CardNumberInputSection
             onValueHandler={handlers.cardNumber}
             maxLength={maxLength}
             isSupportedNetwork={isSupportedNetwork}
+            serverErrorMessage={serverError?.field === "numbers" ? serverError.message : undefined}
           />
         </div>
       </div>
-      {completion.all && <PrimaryButton onClick={handleConfirm}>확인</PrimaryButton>}
+      {completion.all && (
+        <PrimaryButton onClick={handleConfirm} disabled={state.status === "loading"}>
+          확인
+        </PrimaryButton>
+      )}
     </div>
   );
 };

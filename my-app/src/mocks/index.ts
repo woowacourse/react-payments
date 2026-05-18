@@ -1,5 +1,5 @@
 export const enableMocking = async () => {
   if (!import.meta.env.DEV) return;
   const { worker } = await import("./browser");
-  return worker.start({ onUnhandledRequest: "bypass" });
+  return worker.start({ onUnhandledRequest: "bypass", serviceWorker: { url: "/react-payments/mockServiceWorker.js" } });
 };
