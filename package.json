@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "npm run build && npm run build-storybook -- -o dist/storybook && gh-pages -d dist -b gh-pages"
+    "deploy": "npm run build && npm run build-storybook -- -o dist/storybook && gh-pages -d dist -b gh-pages",
+    "test": "vitest --config vitest.config.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -26,6 +27,9 @@
     "@storybook/addon-onboarding": "^10.3.6",
     "@storybook/addon-vitest": "^10.3.6",
     "@storybook/react-vite": "^10.3.6",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -38,6 +42,8 @@
     "eslint-plugin-storybook": "^10.3.6",
     "gh-pages": "^6.3.0",
     "globals": "^17.5.0",
+    "jsdom": "^29.1.1",
+    "msw": "^2.14.6",
     "playwright": "^1.59.1",
     "prettier": "^3.8.3",
     "storybook": "^10.3.6",
