@@ -10,6 +10,7 @@ import CardFormLayout from "@/components/CardForm/CardFormLayout/CardFormLayout.
 import useCardForm from "@/hooks/useCardForm.ts";
 import { createCard } from "@/api/cards";
 import { ROUTES } from "@/constants/routes";
+import { ERROR_CODES } from "@/constants/errorCodes";
 import { useState } from "react";
 const CardForm = () => {
   const navigate = useNavigate();
@@ -57,17 +58,17 @@ const CardForm = () => {
   };
 
   const handleCardNumberChange = (v: string[]) => {
-    clearServerError("INVALID_CARD_NUMBER");
+    clearServerError(ERROR_CODES.INVALID_CARD_NUMBER);
     cardNumberHandler(v);
   };
 
   const handleExpiryChange = (v: string[]) => {
-    clearServerError("INVALID_EXPIRATION_DATE");
+    clearServerError(ERROR_CODES.INVALID_EXPIRATION_DATE);
     expiryHandler(v);
   };
 
   const handleCvcChange = (v: string) => {
-    clearServerError("INVALID_CVC");
+    clearServerError(ERROR_CODES.INVALID_CVC);
     cvcHandler(v);
   };
 
@@ -95,13 +96,13 @@ const CardForm = () => {
         {step >= 3 && (
           <CvcInputSection
             onChange={handleCvcChange}
-            serverError={serverErrors["INVALID_CVC"]}
+            serverError={serverErrors[ERROR_CODES.INVALID_CVC]}
             inputValue={cardInfo.cvc}
           />
         )}
         {step >= 2 && (
           <ExpiryDateInputSection
-            serverError={serverErrors["INVALID_EXPIRATION_DATE"]}
+            serverError={serverErrors[ERROR_CODES.INVALID_EXPIRATION_DATE]}
             onChange={handleExpiryChange}
             inputValues={cardInfo.expiry}
           />
@@ -109,7 +110,7 @@ const CardForm = () => {
         {step >= 1 && <CardCompanySelectSection onChange={companyHandler} inputValue={cardInfo.company} />}
         <CardNumberInputSection
           onChange={handleCardNumberChange}
-          serverError={serverErrors["INVALID_CARD_NUMBER"]}
+          serverError={serverErrors[ERROR_CODES.INVALID_CARD_NUMBER]}
           inputValues={cardInfo.numbers}
           fieldConfig={fieldConfig}
         />
