@@ -8,7 +8,7 @@ interface Props {
   onDelete: (id: string) => void;
 }
 
-export default function RegisteredCard({ data, onDelete }: Props) {
+export default function RegisteredCardItem({ data, onDelete }: Props) {
   const issuer = Object.values(CARD_ISSUER_CONFIG).filter(
     (issuer) => issuer.issuerCode === data.issuerCode
   )[0];
