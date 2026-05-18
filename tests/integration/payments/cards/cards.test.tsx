@@ -1,3 +1,5 @@
+import { expect, test, vi } from 'vitest'; // Vitest 함수 임포트
+
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
@@ -62,6 +64,8 @@ describe('카드 목록 페이지 테스트', async () => {
   });
 
   test('카드 삭제 시 카드 목록에서 삭제했던 카드가 삭제된다 ', async () => {
+    vi.spyOn(window, 'confirm').mockImplementation(() => true);
+
     // ARRANGE
     renderProvider(<AppRoutes />, { route: '/payments/cards' });
 
