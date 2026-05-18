@@ -36,22 +36,30 @@ const CardListPage = () => {
     }
   };
 
+  const hasCards = cards.length > 0;
+  const isSuccess = status === "success";
+  const isLoading = status === "loading";
+  const isError = status === "error";
+  const isEmpty = isSuccess && !hasCards;
+
+  const pageTitle =
+    isSuccess && hasCards ? `보유 카드 (${cards.length})` : "보유 카드";
+
   return (
     <PageLayout>
       <PageWrapper>
-        <PageTitle>보유 카드</PageTitle>
-        {status === "loading" && <CardListLoading />}
-        {status === "success" && cards.length === 0 && (
-          <CardListEmpty onAddCard={handleAddCard} />
-        )}
-        {status === "success" && cards.length > 0 && (
+        <PageTitle>{pageTitle}</PageTitle>
+
+        {isLoading && <CardListLoading />}
+        {isEmpty && <CardListEmpty onAddCard={handleAddCard} />}
+        {isSuccess && hasCards && (
           <CardListSuccess
             cards={cards}
             onAddCard={handleAddCard}
             onDeleteCard={handleDeleteCard}
           />
         )}
-        {status === "error" && <CardListError onRetry={fetchCards} />}
+        {isError && <CardListError onRetry={fetchCards} />}
       </PageWrapper>
     </PageLayout>
   );
