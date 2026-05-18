@@ -7,4 +7,12 @@ export const handlers = [
       lastName: "Maverick",
     });
   }),
+
+  http.post("https://api.antolibank.com/cards", async ({ request }) => {
+    const _data = await request.formData();
+    return HttpResponse.json({
+      status: 201,
+      message: "create!",
+    });
+  }),
 ];
