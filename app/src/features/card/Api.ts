@@ -17,3 +17,10 @@ export const createCard = async (
     return response;
   } catch (err) {}
 };
+
+export const getCards = async () => {
+  try {
+    const response = await fetch("https://api.antolibank.com/cards");
+    return response;
+  } catch (err) {}
+};
