@@ -1,8 +1,10 @@
-import type { CardCompanyType } from "../../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../../shared/types/CardCompany";
 import { ERROR_MESSAGES } from "../constants";
 import type { ErrorInformationType } from "./ErrorInformationType";
 
-export const validateCardCompany = (cardCompany: CardCompanyType | null) => {
+export const validateCardCompany = (
+  cardCompany: IssuerKoreanNameType | null,
+) => {
   const errorInformation: ErrorInformationType = {
     isValid: true,
     errorMessage: null,

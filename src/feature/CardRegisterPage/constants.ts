@@ -1,3 +1,5 @@
+import type { IssuerKoreanNameType } from "../../shared/types/CardCompany";
+
 export const CARD_NUMBER_INPUT_COUNT = 4;
 export type CardNumberChunkLengths = readonly [number, number, number, number];
 export const CARD_NUMBER_MASK_START_INDEX = 2;
@@ -16,6 +18,17 @@ export const CVC_MAX_LENGTH = 4;
 
 export const PASSWORD_INPUT_COUNT = 1;
 export const PASSWORD_LENGTH = 2;
+
+export const ISSUER_LIST: IssuerKoreanNameType[] = [
+  "BC카드",
+  "신한카드",
+  "카카오뱅크",
+  "현대카드",
+  "우리카드",
+  "롯데카드",
+  "하나카드",
+  "국민카드",
+];
 
 export const ERROR_MESSAGES = {
   cardNumber: "카드 번호 4자리를 입력해 주세요",

@@ -1,4 +1,4 @@
-export type CardCompanyType =
+export type IssuerKoreanNameType =
   | "BC카드"
   | "신한카드"
   | "카카오뱅크"

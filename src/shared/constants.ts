@@ -1,8 +1,8 @@
+import type { IssuerKoreanNameType } from "./types/CardCompany";
+
 export const BASE_URL = "https://woowa.yiheon.com";
 
-import type { CardCompanyType } from "../shared/types/CardCompany";
-
-export const cardColors: Record<CardCompanyType | "default", string> = {
+export const cardColors: Record<IssuerKoreanNameType | "default", string> = {
   default: "#333333",
   BC카드: "#F04651",
   신한카드: "#0046FF",

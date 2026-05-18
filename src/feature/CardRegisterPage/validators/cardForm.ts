@@ -1,7 +1,7 @@
-import type { CardCompanyType } from "../../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../../shared/types/CardCompany";
 
 export const isCardCompanyFieldValid = (
-  cardCompany: CardCompanyType | null,
+  cardCompany: IssuerKoreanNameType | null,
 ) => {
   return cardCompany !== null;
 };

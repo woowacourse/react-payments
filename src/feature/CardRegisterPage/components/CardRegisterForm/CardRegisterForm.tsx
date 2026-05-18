@@ -11,7 +11,6 @@ import type {
   CardInfoType,
   CardNumberChunkType,
 } from "../../../../shared/types/CardInfoType";
-import type { CardCompanyType } from "../../../../shared/types/CardCompany";
 import {
   getCardNumberChunkLengths,
   getCardBrandName,
@@ -30,6 +29,7 @@ import { type PostCardRequestBody } from "../../api/card";
 import { getIssuerCodeByCompanyName } from "../../utils/cardCompany";
 import { useCardRegister } from "../../hooks/useCardRegister";
 import { useCardRegisterFormError } from "../../hooks/useCardRegisterFormError";
+import type { IssuerKoreanNameType } from "../../../../shared/types/CardCompany";
 
 const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
   const cardBrand = getCardBrandName(cardInfo.cardNumbers);
@@ -63,7 +63,7 @@ const CardRegisterForm = ({
   updateCardNumbers: (cardNumbers: CardNumberChunkType) => void;
   updateExpiryMonth: (expiryMonth: string) => void;
   updateExpiryYear: (expiryYear: string) => void;
-  updateCardCompany: (cardCompany: CardCompanyType) => void;
+  updateCardCompany: (cardCompany: IssuerKoreanNameType) => void;
 }) => {
   const [cardInputSectionInformation, setCardInputSectionInformation] =
     useState({
@@ -116,7 +116,7 @@ const CardRegisterForm = ({
     );
   };
 
-  const handleCardCompanyChange = (cardCompany: CardCompanyType) => {
+  const handleCardCompanyChange = (cardCompany: IssuerKoreanNameType) => {
     updateCardCompany(cardCompany);
     updateMaxUnlockedStep(CARD_FORM.RENDER_STEP.EXPIRY);
   };

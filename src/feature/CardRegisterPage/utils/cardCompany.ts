@@ -1,11 +1,11 @@
 import type {
-  CardCompanyType,
   IssuerCodeType,
+  IssuerKoreanNameType,
 } from "../../../shared/types/CardCompany";
 import { CARD_COMPANY } from "../../CardListPage/constants";
 
 export const getIssuerCodeByCompanyName = (
-  companyName: CardCompanyType | null,
+  companyName: IssuerKoreanNameType | null,
 ): IssuerCodeType | undefined => {
   if (!companyName) {
     console.log("카드사가 존재하지 않습니다.");

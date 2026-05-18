@@ -3,8 +3,8 @@ import { useState } from "react";
 import CardRegisterForm from "./components/CardRegisterForm/CardRegisterForm";
 import styled from "styled-components";
 import type { CardInfoType } from "../../shared/types/CardInfoType";
-import type { CardCompanyType } from "../../shared/types/CardCompany";
 import CardPreview from "./components/CardPreview/CardPreview";
+import type { IssuerKoreanNameType } from "../../shared/types/CardCompany";
 
 const CardRegisterPage = () => {
   const [cardInformation, setCardInformation] = useState<CardInfoType>({
@@ -33,7 +33,7 @@ const CardRegisterPage = () => {
     updateCardInformation({ expiryYear });
   };
 
-  const updateCardCompany = (selectedCardCompany: CardCompanyType) => {
+  const updateCardCompany = (selectedCardCompany: IssuerKoreanNameType) => {
     updateCardInformation({ selectedCardCompany });
   };
 

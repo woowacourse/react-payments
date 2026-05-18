@@ -1,38 +1,28 @@
-import type { CardCompanyType } from "../../../../../shared/types/CardCompany";
 import styled from "styled-components";
 import { colors } from "../../../../../styles/color";
-
-const mockCardCompany: CardCompanyType[] = [
-  "BC카드",
-  "신한카드",
-  "카카오뱅크",
-  "현대카드",
-  "우리카드",
-  "롯데카드",
-  "하나카드",
-  "국민카드",
-];
+import type { IssuerKoreanNameType } from "../../../../../shared/types/CardCompany";
+import { ISSUER_LIST } from "../../../constants";
 
 const CardCompanySelectField = ({
   selectedCardCompany,
   onSelect,
 }: {
-  selectedCardCompany: CardCompanyType | null;
-  onSelect: (cardCompany: CardCompanyType) => void;
+  selectedCardCompany: IssuerKoreanNameType | null;
+  onSelect: (cardCompany: IssuerKoreanNameType) => void;
 }) => {
   return (
     <CardSelectBox>
       <CardSelectTrigger
         required
         value={selectedCardCompany ?? ""}
-        onChange={(e) => onSelect(e.target.value as CardCompanyType)}
+        onChange={(e) => onSelect(e.target.value as IssuerKoreanNameType)}
         autoFocus
       >
         <option value={""} disabled hidden>
           카드사를 선택해주세요
         </option>
 
-        {mockCardCompany.map((cardCompany) => (
+        {ISSUER_LIST.map((cardCompany) => (
           <CardCompanyOption value={cardCompany} key={cardCompany}>
             {cardCompany}
           </CardCompanyOption>

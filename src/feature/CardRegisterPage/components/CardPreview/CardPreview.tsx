@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import type { CardCompanyType } from "../../../../shared/types/CardCompany";
+
 import type { CardInfoType } from "../../../../shared/types/CardInfoType";
 
 import CardBrandLogo from "./CardBrandLogo/CardBrandLogo";
@@ -7,8 +7,9 @@ import CardExpiryDateDisplay from "./CardExpiryDateDisplay/CardExpiryDateDisplay
 import CardNumberDisplay from "./CardNumberDisplay/CardNumberDisplay";
 import { getCardBrandName } from "../../utils/cardBrand";
 import { cardColors } from "../../../../shared/constants";
+import type { IssuerKoreanNameType } from "../../../../shared/types/CardCompany";
 
-const getCardColor = (cardCompany: CardCompanyType | null) => {
+const getCardColor = (cardCompany: IssuerKoreanNameType | null) => {
   if (!cardCompany) {
     return cardColors.default;
   }
@@ -35,7 +36,7 @@ const CardPreview = ({ cardInfo }: { cardInfo: CardInfoType }) => {
   );
 };
 
-const Container = styled.div<{ $cardCompany: CardCompanyType | null }>`
+const Container = styled.div<{ $cardCompany: IssuerKoreanNameType | null }>`
   display: flex;
   flex-direction: column;
   width: 212px;
