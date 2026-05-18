@@ -2,6 +2,10 @@ import { Outlet, useNavigate } from 'react-router';
 
 import { ROUTES } from '@/constants/routes';
 
+import { postCards } from '@/services/apis/cards/cards';
+
+import { ISSUER_CODE } from '@/pages/payments/cards/list/constants';
+
 import { useCardNumbers } from '../form/hooks/useCardNumbers';
 import { useCard } from '../form/hooks/useCard';
 import { useExpirationDate } from '../form/hooks/useExpirationDate';
@@ -33,8 +37,21 @@ export const Flow = () => {
     password.reset();
   };
 
-  const handleSubmit = () => {
-    navigate(ROUTES.PAYMENTS.REGISTER_COMPLETE);
+  const handleSubmit = async () => {
+    const issuerCode = Object.entries(ISSUER_CODE).find(([_, issuerCode]) => {
+      return issuerCode?.card === card.values.card;
+    });
+    if (!issuerCode) throw new Error();
+    const [issuerCodeKey] = issuerCode;
+
+    const body = {
+      number: Object.values(cardNumbers.values).join(''),
+      expirationDate: `${expirationDate.values.month}/${expirationDate.values.year}`,
+      cvc: cvc.values.cvc,
+      issuerCode: issuerCodeKey,
+    };
+    await postCards(body);
+    navigate(ROUTES.PAYMENTS.CARDS);
   };
 
   return (
