@@ -5,12 +5,12 @@ import { mapCardsResponseDTOToModel } from '@/services/apis/cards/mapper';
 import type { Card } from '@/pages/payments/cards/list/model';
 
 export const useCards = () => {
-  const { status } = useLoadData<Card[]>({
+  const { status, refetch } = useLoadData<Card[]>({
     queryFn: async () => {
       const data = await getCards();
       return mapCardsResponseDTOToModel(data);
     },
   });
 
-  return { status };
+  return { status, refetch };
 };

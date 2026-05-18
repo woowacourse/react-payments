@@ -39,6 +39,7 @@ const formatCardNumberForMasking = (maskedNumber: string, mask: string = '*'): s
 export const Cards = () => {
   const {
     status: { status, data: cards },
+    refetch,
   } = useCards();
 
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ export const Cards = () => {
 
   const handleDeleteClick = async (id: string) => {
     await deleteCards({ id });
+    refetch();
   };
 
   if (status === 'loading')
