@@ -1,5 +1,5 @@
 import { validateExpiryMonth, validateExpiryYear } from "@/utils/validator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MONTH_MAX_LENGTH,
   YEAR_MAX_LENGTH,
@@ -21,6 +21,7 @@ interface CardValidityPeriodInputFieldProps {
   onChange: (validityPeriod: ValidityPeriod) => void;
   onNextStep: (currentStepKey: CardRegisterFormStepKey) => void;
   serverErrorMessage?: string;
+  shouldFocus?: boolean;
 }
 
 type InputsStatuses = {
@@ -37,9 +38,10 @@ const CardValidityPeriodInputField = ({
   onChange,
   onNextStep,
   serverErrorMessage,
+  shouldFocus,
 }: CardValidityPeriodInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
-  const { registerInput, focusNextInput } = useInputFocus();
+  const { registerInput, focusNextInput, focusInput } = useInputFocus();
 
   const handleMonthChange = (input: string) => {
     const nextMonth = input.slice(0, MONTH_MAX_LENGTH);
@@ -115,6 +117,12 @@ const CardValidityPeriodInputField = ({
     }));
   };
 
+  useEffect(() => {
+    if (shouldFocus) {
+      focusInput(0);
+    }
+  }, [focusInput, shouldFocus]);
+
   return (
     <FormField
       title="카드 유효기간을 입력해 주세요"
@@ -138,9 +146,7 @@ const CardValidityPeriodInputField = ({
         onChange={(e) => handleMonthChange(e.target.value)}
         onBlur={(e) => handleValidityPeriodBlur("month", e.target.value)}
         state={
-          serverErrorMessage || status.month !== "DEFAULT"
-            ? "error"
-            : "default"
+          serverErrorMessage || status.month !== "DEFAULT" ? "error" : "default"
         }
       />
       <Input

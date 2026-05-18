@@ -116,6 +116,7 @@ const CardRegisterPage = () => {
               }}
               onNextStep={goToNextStep}
               serverErrorMessage={serverErrors.cvc}
+              shouldFocus={Boolean(serverErrors.cvc)}
             />
           )}
           {isStepVisible("VALIDITY_PERIOD") && (
@@ -130,6 +131,7 @@ const CardRegisterPage = () => {
               }}
               onNextStep={goToNextStep}
               serverErrorMessage={serverErrors.validityPeriod}
+              shouldFocus={Boolean(serverErrors.validityPeriod)}
             />
           )}
           {isStepVisible("COMPANY") && (
@@ -151,6 +153,7 @@ const CardRegisterPage = () => {
               }}
               onNextStep={goToNextStep}
               serverErrorMessage={serverErrors.cardNumber}
+              shouldFocus={Boolean(serverErrors.cardNumber)}
             />
           )}
 

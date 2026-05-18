@@ -2,7 +2,7 @@ import {
   validateCardNumberInput,
   validateCardNumberUnitInput,
 } from "@utils/validator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HELPER_MESSAGE, type InputStatus } from "./constants";
 import {
   detectCardBrand,
@@ -24,6 +24,7 @@ interface CardNumberInputFieldProps {
   onChange: (input: CardNumberUnits) => void;
   onNextStep: (currentStepKey: CardRegisterFormStepKey) => void;
   serverErrorMessage?: string;
+  shouldFocus?: boolean;
 }
 
 type InputsStatuses = InputStatus[];
@@ -40,9 +41,10 @@ const CardNumberInputField = ({
   onChange,
   onNextStep,
   serverErrorMessage,
+  shouldFocus,
 }: CardNumberInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
-  const { registerInput, focusNextInput } = useInputFocus();
+  const { registerInput, focusNextInput, focusInput } = useInputFocus();
 
   const cardBrand = detectCardBrand(cardNumberUnits.join(""));
   const cardNumberFormat = getCardNumberFormat(cardBrand);
@@ -110,6 +112,12 @@ const CardNumberInputField = ({
 
     updateInputStatus(index, validationStatus);
   };
+
+  useEffect(() => {
+    if (shouldFocus) {
+      focusInput(0);
+    }
+  }, [focusInput, shouldFocus]);
 
   return (
     <FormField
