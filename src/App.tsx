@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PaymentWidget from './components/PaymentWidget';
 import CompletePage from './components/completePage/CompletePage';
 import styled from '@emotion/styled';
@@ -9,8 +9,9 @@ function App() {
     <AppWrapper>
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
-          <Route path="/addCard" element={<PaymentWidget />} />
+          <Route path="/" element={<CardListPage />} />
           <Route path="/cards" element={<CardListPage />} />
+          <Route path="/addCard" element={<PaymentWidget />} />
           <Route path="/complete" element={<CompletePage />} />
         </Routes>
       </BrowserRouter>
