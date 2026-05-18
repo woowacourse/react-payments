@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import type { CardDisplayInfo, PublicCardInfo } from "../../../types";
 import { useCardForm } from "../../../hooks/useCardForm";
+import { ROUTES } from "../../../constants/routes";
 
 import Card from "../Card/Card";
-import SubmitButton from "../../SubmitButton/SubmitButton";
+import PrimaryButton from "../../PrimaryButton/PrimaryButton";
 import CardCompanySelectSection from "../CardCompanySelectSection/CardCompanySelectSection";
 import CardNumberInputSection from "../CardNumberInputSection/CardNumberInputSection";
 import CvcInputSection from "../CvcInputSection/CvcInputSection";
@@ -22,7 +23,7 @@ const CardForm = () => {
   const { cardInfo, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
 
   const handleConfirm = () => {
-    navigate("/completed", { state: toPublicCardInfo(cardInfo) });
+    navigate(ROUTES.CARD_LIST, { state: toPublicCardInfo(cardInfo) });
   };
 
   return (
@@ -41,7 +42,7 @@ const CardForm = () => {
           />
         </div>
       </div>
-      {completion.all && <SubmitButton onClick={handleConfirm}>확인</SubmitButton>}
+      {completion.all && <PrimaryButton onClick={handleConfirm}>확인</PrimaryButton>}
     </div>
   );
 };

@@ -1,21 +1,21 @@
 import { css } from "@emotion/react";
 
-type SubmitButtonProps = {
+type Props = {
   onClick: () => void;
   children: React.ReactNode;
 };
 
-const SubmitButton = ({ onClick, children }: SubmitButtonProps) => {
+const PrimaryButton = ({ onClick, children }: Props) => {
   return (
-    <button css={SubmitButtonStyle} onClick={onClick}>
+    <button css={primaryButtonStyle} onClick={onClick}>
       {children}
     </button>
   );
 };
 
-export default SubmitButton;
+export default PrimaryButton;
 
-const SubmitButtonStyle = css`
+const primaryButtonStyle = css`
   width: 100%;
   height: 52px;
   background-color: #333;
