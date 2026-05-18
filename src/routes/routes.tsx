@@ -10,13 +10,13 @@ import { Complete } from '@/pages/payments/register/complete';
 
 import { Cards } from '@/pages/payments/cards';
 
-interface Route {
+export interface RouteItem {
   path: string;
   element: ReactNode;
-  children?: Route[];
+  children?: RouteItem[];
 }
 
-export const routes: Route[] = [
+export const routes: RouteItem[] = [
   { path: ROUTES.HOME, element: <Navigate to={ROUTES.PAYMENTS.REGISTER} replace /> },
   {
     path: ROUTES.PAYMENTS.REGISTER,
