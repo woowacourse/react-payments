@@ -40,7 +40,8 @@ function isValidExpirationDate(expirationDate: string): boolean {
 
 export const handlers = [
   // GET /cards
-  http.get("/react-payments/cards", () => {
+  http.get("/react-payments/cards", async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const response = cards.map(
       ({ id, issuerCode, number, expirationDate }) => ({
         id,

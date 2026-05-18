@@ -9,7 +9,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/cards" replace />} />
+      <Route path="/" element={<Navigate to="/cards" />} />
       <Route path="/cards" element={<CardDashboardPage />} />
       <Route
         path="/cards/register"
