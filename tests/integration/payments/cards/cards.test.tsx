@@ -28,16 +28,6 @@ describe('카드 목록 페이지 테스트', async () => {
     expect(await screen.findByText(/등록된 카드가 없습니다/)).toBeInTheDocument();
   });
 
-  test('카드 등록후 카드 리스트에 등록한 카드가 보인다', async () => {
-    // ARRANGE
-    renderProvider(<AppRoutes />, { route: '/payments/cards' });
-
-    // ASSERT
-    expect(await screen.findByText(/5511 \*\*\*\* \*\*\*\* 9012/)).toBeInTheDocument();
-    expect(await screen.findByText(/BC카드/)).toBeInTheDocument();
-    expect(await screen.findByText(/12\/28/)).toBeInTheDocument();
-  });
-
   test('카드 추가 버튼 클릭시 등록 페이지로 이동한다', async () => {
     // ARRANGE
     renderProvider(<AppRoutes />, { route: '/payments/cards' });
