@@ -10,6 +10,19 @@ export const handlers = [
     });
   }),
 
+  http.delete("https://api.antolibank.com/cards/:id", ({ params }) => {
+    const { id } = params;
+    const card = db.card.findFirst({ where: { id: { equals: id as string } } });
+    if (!card) {
+      return HttpResponse.json(
+        { errorMessages: ["존재하지 않는 카드 입니다."] },
+        { status: 404 },
+      );
+    }
+    db.card.delete({ where: { id: { equals: id as string } } });
+    return new HttpResponse(null, { status: 204 });
+  }),
+
   http.post("https://api.antolibank.com/cards", async ({ request }) => {
     const cardData = (await request.json()) as {
       number: string;
