@@ -18,7 +18,10 @@ export default function CardList() {
 
         const result = await response.json();
         setData(result);
-        setConnection("success");
+
+        setTimeout(() => {
+          setConnection("success");
+        }, 1000);
       } catch (error) {
         console.error("데이터 불러오기 실패:", error);
         setConnection("error");
@@ -92,6 +95,11 @@ export default function CardList() {
       <Header>
         보유 카드 {data && data.length > 0 ? `(${data?.length})` : ""}
       </Header>
+      {connection === "loading" && (
+        <SpinnerWrapper>
+          <Loader />
+        </SpinnerWrapper>
+      )}
       {connection === "success" && data?.length === 0 && (
         <Container>
           <EmptyBox></EmptyBox>
@@ -273,4 +281,27 @@ const AddButton = styled.button`
   background-color: transparent;
   cursor: pointer;
   margin: 0;
+`;
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-top: 100px;
+`;
+
+const Loader = styled.div`
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e5e5;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;
