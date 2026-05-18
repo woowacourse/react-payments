@@ -1,3 +1,10 @@
+export interface CardRegisterRequest {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: string;
+}
+
 export interface CardListItem {
   id: string;
   issuerCode: string;
@@ -6,6 +13,22 @@ export interface CardListItem {
 }
 
 export type CardListResponse = CardListItem[];
+
+export const registerCard = async (card: CardRegisterRequest) => {
+  const response = await fetch("/cards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(card),
+  });
+
+  if (!response.ok) {
+    throw new Error("카드 등록 실패");
+  }
+
+  return response.json();
+};
 
 export const getCards = async (): Promise<CardListResponse> => {
   const response = await fetch("/cards");

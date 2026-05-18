@@ -1,6 +1,7 @@
 import CardListEmpty from "@/components/CardList/CardListEmpty";
 import CardListError from "@/components/CardList/CardListError";
 import CardListLoading from "@/components/CardList/CardListLoading";
+import CardListSuccess from "@/components/CardList/CardListSuccess";
 import PageLayout from "@/components/common/PageLayout";
 import { ROUTE_PATH } from "@/constants/routes";
 import useCardList from "@/hooks/useCardList";
@@ -29,8 +30,8 @@ const CardListPage = () => {
         {status === "success" && cards.length === 0 && (
           <CardListEmpty onAddCard={handleAddCard} />
         )}
-        {status === "success" && cards.length !== 0 && (
-          <CardListEmpty onAddCard={handleAddCard} />
+        {status === "success" && cards.length > 0 && (
+          <CardListSuccess cards={cards} onAddCard={handleAddCard} />
         )}
         {status === "error" && <CardListError onRetry={fetchCards} />}
       </PageWrapper>

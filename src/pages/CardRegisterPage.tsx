@@ -18,6 +18,8 @@ import { CARD_REGISTER_FORM_STEP } from "@/constants/cardForm";
 import { useNavigate } from "react-router";
 import { ROUTE_PATH } from "@/constants/routes";
 import PageLayout from "@/components/common/PageLayout";
+import { registerCard } from "@/api/cards";
+import { getFormattedValidityPeriodUnit } from "@/utils/card";
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
@@ -44,15 +46,28 @@ const CardRegisterPage = () => {
     password,
   );
 
-  const handleCardFormSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
+  const handleCardFormSubmit: ComponentProps<"form">["onSubmit"] = async (
+    event,
+  ) => {
     event.preventDefault();
 
-    navigate(ROUTE_PATH.CARD_REGISTER_COMPLETE, {
-      state: {
-        cardNumberPrefix: cardNumber[0],
-        cardCompanyName: cardCompany?.name ?? "",
-      },
-    });
+    try {
+      await registerCard({
+        number: cardNumber.join(""),
+        expirationDate: `${getFormattedValidityPeriodUnit(validityPeriod)}`,
+        cvc: CVC,
+        issuerCode: cardCompany?.issuerCode ?? "",
+      });
+
+      navigate(ROUTE_PATH.CARD_REGISTER_COMPLETE, {
+        state: {
+          cardNumberPrefix: cardNumber[0],
+          cardCompanyName: cardCompany?.name ?? "",
+        },
+      });
+    } catch {
+      // 에러 처리
+    }
   };
 
   return (
