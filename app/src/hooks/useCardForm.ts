@@ -6,6 +6,8 @@ import { postCard } from '../api/cardsAPI';
 import type { Card } from '../types/card';
 import { CARD_COMPANY_INFO } from '../constants/cardCompanyOptions';
 
+type ServerError = { code: string; message: string };
+
 export function useCardForm() {
   // input 상태 초기화
   const [cardCompany, setCardCompany] = useState<CardCompany>('');
@@ -50,9 +52,12 @@ export function useCardForm() {
     cardCVC.length === 3 &&
     cardPassword.length === 2;
 
+  // 서버에러 처리
+  const [serverError, setServerError] = useState<{ code: string; message: string } | null>(null);
+
   // Form 완료시 핸들러
   const navigate = useNavigate();
-  const handleFormSubmit = (e: React.SubmitEvent<HTMLFormElement>): void => {
+  const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (!isFormComplete) return;
 
@@ -63,11 +68,16 @@ export function useCardForm() {
       issuerCode: CARD_COMPANY_INFO[cardCompany].issuerCode,
     };
 
-    postCard(newCard);
+    try {
+      await postCard(newCard);
 
-    navigate('/react-payments/complete', {
-      state: { firstDigits: cardNumber[0], cardCompany: cardCompany },
-    });
+      navigate('/react-payments/complete', {
+        state: { firstDigits: cardNumber[0], cardCompany: cardCompany },
+      });
+    } catch (err) {
+      const serverError = err as ServerError;
+      setServerError({ code: serverError.code, message: serverError.message });
+    }
   };
 
   return {
@@ -80,6 +90,7 @@ export function useCardForm() {
     networkBrand,
     refs: { cardNumberFirstRef, expiryMonthRef, cardCVCRef, cardPasswordRef },
     currentStep,
+    serverError,
     onCardNumberComplete: () => setCurrentStep((s) => Math.max(s, 1)),
     onCardCompanySelected: () => setCurrentStep((s) => Math.max(s, 2)),
     onCardExpiryDateComplete: () => setCurrentStep((s) => Math.max(s, 3)),

@@ -12,9 +12,11 @@ const fields: Exclude<keyof cardNumberFieldError, 'message'>[] = [
 
 export function CardNumberInput({
   firstRef,
+  serverError,
   onCardNumberComplete,
 }: {
   firstRef: React.RefObject<HTMLInputElement | null>;
+  serverError: { code: string; message: string } | null;
   onCardNumberComplete: () => void;
 }) {
   const {
@@ -50,7 +52,9 @@ export function CardNumberInput({
           />
         ))}
       </CardFieldset>
-      <ErrorMessage message={fieldErrors['message']} />
+      <ErrorMessage
+        message={fieldErrors['message'] || (serverError?.code === 'INVALID_CARD_NUMBER' ? serverError.message : '')}
+      />
     </>
   );
 }

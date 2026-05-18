@@ -29,6 +29,7 @@ export function Card() {
           refs={cardForm.refs}
           currentStep={cardForm.currentStep}
           isFormComplete={cardForm.isFormComplete}
+          serverError={cardForm.serverError}
           onCardNumberComplete={cardForm.onCardNumberComplete}
           onCardCompanySelected={cardForm.onCardCompanySelected}
           onCardExpiryDateComplete={cardForm.onCardExpiryDateComplete}

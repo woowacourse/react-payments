@@ -7,6 +7,7 @@ export interface CardFormPropsType {
   };
   currentStep: number;
   isFormComplete: boolean;
+  serverError: { code: string; message: string } | null;
   onCardNumberComplete: () => void;
   onCardCompanySelected: () => void;
   onCardExpiryDateComplete: () => void;
