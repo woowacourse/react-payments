@@ -1,4 +1,4 @@
-import type { IssuerKoreanNameType } from "../../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../../shared/types/Issuer";
 
 export const isCardCompanyFieldValid = (
   cardCompany: IssuerKoreanNameType | null,

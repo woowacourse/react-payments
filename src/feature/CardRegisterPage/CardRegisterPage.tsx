@@ -4,7 +4,7 @@ import CardRegisterForm from "./components/CardRegisterForm/CardRegisterForm";
 import styled from "styled-components";
 import type { CardInfoType } from "../../shared/types/CardInfoType";
 import CardPreview from "./components/CardPreview/CardPreview";
-import type { IssuerKoreanNameType } from "../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../shared/types/Issuer";
 
 const CardRegisterPage = () => {
   const [cardInformation, setCardInformation] = useState<CardInfoType>({

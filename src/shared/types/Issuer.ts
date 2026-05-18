@@ -17,3 +17,9 @@ export type IssuerCodeType =
   | "71"
   | "21"
   | "11";
+
+export type IssuerInformationType = {
+  KOR: IssuerKoreanNameType;
+  ENG: string;
+  COLOR: string;
+};

@@ -8,7 +8,7 @@ import type {
   CardInfoType,
   CardNumberChunkType,
 } from "../../../../shared/types/CardInfoType";
-import type { CardCompanyType } from "../../../../shared/types/CardCompany";
+import type { CardCompanyType } from "../../../../shared/types/Issuer";
 
 const meta = {
   title: "feature/CardRegister/components/CardRegisterForm",

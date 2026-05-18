@@ -1,4 +1,4 @@
-import type { IssuerKoreanNameType } from "../../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../../shared/types/Issuer";
 import { ERROR_MESSAGES } from "../constants";
 import type { ErrorInformationType } from "./ErrorInformationType";
 

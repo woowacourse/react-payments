@@ -26,10 +26,10 @@ import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
 import BaseButton from "../../../../shared/components/Button/BaseButton";
 import { type PostCardRequestBody } from "../../api/card";
-import { getIssuerCodeByCompanyName } from "../../utils/cardCompany";
 import { useCardRegister } from "../../hooks/useCardRegister";
 import { useCardRegisterFormError } from "../../hooks/useCardRegisterFormError";
-import type { IssuerKoreanNameType } from "../../../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../../../shared/types/Issuer";
+import { getIssuerCodeByName } from "../../../../shared/utils/issuer";
 
 const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
   const cardBrand = getCardBrandName(cardInfo.cardNumbers);
@@ -180,7 +180,7 @@ const CardRegisterForm = ({
       return;
     }
 
-    const issuerCode = getIssuerCodeByCompanyName(selectedCardCompany);
+    const issuerCode = getIssuerCodeByName(selectedCardCompany);
     if (!issuerCode) {
       return;
     }

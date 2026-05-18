@@ -1,4 +1,4 @@
-import type { IssuerKoreanNameType } from "../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../shared/types/Issuer";
 
 export const CARD_NUMBER_INPUT_COUNT = 4;
 export type CardNumberChunkLengths = readonly [number, number, number, number];

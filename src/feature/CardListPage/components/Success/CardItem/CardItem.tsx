@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-import type { CardCompanyType } from "../../../types/CardCompay";
-import { CARD_COMPANY } from "../../../constants";
-import type { IssuerCodeType } from "../../../../../shared/types/CardCompany";
+import type { IssuerCodeType } from "../../../../../shared/types/Issuer";
+import { getIssuerByCode } from "../../../../../shared/utils/issuer";
 
 // todo: 타입 정의 상위로 올리기
 export type CardItemInformation = {
@@ -18,18 +17,13 @@ type CardItemProps = {
   deleteError: Error | null;
 };
 
-// todo: 유틸로 빼기
-const getCardCompanyByCode = (code: IssuerCodeType): CardCompanyType => {
-  return CARD_COMPANY[code];
-};
-
 const CardItem = ({
   cardItemInformaiton,
   onDeleteCard,
   deleteError,
 }: CardItemProps) => {
   const { id, issuerCode, number, expirationDate } = cardItemInformaiton;
-  const cardCompany = getCardCompanyByCode(issuerCode);
+  const issuer = getIssuerByCode(issuerCode);
 
   const handleCardDeleteClick = (cardId: string) => {
     const result = window.confirm("카드를 삭제하시겠습니까?");
@@ -45,9 +39,9 @@ const CardItem = ({
 
   return (
     <CardItemLayout>
-      <CardIcon $color={cardCompany.COLOR} />
+      <CardIcon $color={issuer.COLOR} />
       <CardInformationBox>
-        <CardCompany>{cardCompany.KOR}</CardCompany>
+        <Issuer>{issuer.KOR}</Issuer>
         <CardNumber>{number.replace(/.{4}/g, "$& ")}</CardNumber>
         <ExpiryDate>유효기간 {expirationDate}</ExpiryDate>
       </CardInformationBox>
@@ -83,7 +77,7 @@ const CardInformationBox = styled.div`
   flex-direction: column;
 `;
 
-const CardCompany = styled.span`
+const Issuer = styled.span`
   font-size: 14px;
   font-weight: 700;
   color: #353c49;

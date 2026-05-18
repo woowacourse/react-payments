@@ -1,4 +1,4 @@
-import type { IssuerKoreanNameType } from "./CardCompany";
+import type { IssuerKoreanNameType } from "./Issuer";
 
 export type CardNumberChunkType = [string, string, string, string];
 

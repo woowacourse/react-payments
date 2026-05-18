@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../../../../styles/color";
-import type { IssuerKoreanNameType } from "../../../../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../../../../shared/types/Issuer";
 import { ISSUER_LIST } from "../../../constants";
 
 const CardCompanySelectField = ({

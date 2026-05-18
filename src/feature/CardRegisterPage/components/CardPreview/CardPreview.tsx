@@ -6,15 +6,9 @@ import CardBrandLogo from "./CardBrandLogo/CardBrandLogo";
 import CardExpiryDateDisplay from "./CardExpiryDateDisplay/CardExpiryDateDisplay";
 import CardNumberDisplay from "./CardNumberDisplay/CardNumberDisplay";
 import { getCardBrandName } from "../../utils/cardBrand";
-import { cardColors } from "../../../../shared/constants";
-import type { IssuerKoreanNameType } from "../../../../shared/types/CardCompany";
+import type { IssuerKoreanNameType } from "../../../../shared/types/Issuer";
+import { getIssuerColor } from "../../../../shared/utils/issuer";
 
-const getCardColor = (cardCompany: IssuerKoreanNameType | null) => {
-  if (!cardCompany) {
-    return cardColors.default;
-  }
-  return cardColors[cardCompany];
-};
 const CardPreview = ({ cardInfo }: { cardInfo: CardInfoType }) => {
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
     cardInfo;
@@ -43,7 +37,7 @@ const Container = styled.div<{ $cardCompany: IssuerKoreanNameType | null }>`
   height: 132px;
   padding: 8px 10px;
   gap: 12px;
-  background-color: ${(props) => getCardColor(props.$cardCompany)};
+  background-color: ${(props) => getIssuerColor(props.$cardCompany)};
   border-radius: 4px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
 `;
