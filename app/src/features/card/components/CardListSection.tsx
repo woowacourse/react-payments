@@ -3,6 +3,7 @@ import EmptyCardList from "./list/EmptyCardList";
 import CardListPanel from "./list/CardListPanel";
 import CardListSkeleton from "./list/CardListSkeleton";
 import CardListError from "./list/CardListError";
+import type { Card } from "../types";
 
 export type CardListStatus = "pending" | "empty" | "success" | "error";
 
@@ -10,7 +11,7 @@ export default function CardListSection({
   cards,
   status,
 }: {
-  cards: object[];
+  cards: Card[];
   status: CardListStatus;
 }) {
   return (

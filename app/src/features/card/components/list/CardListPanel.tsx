@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router";
 import CardList from "./CardList";
+import type { Card } from "../../types";
 
-export default function CardListPanel({ cards }) {
+export default function CardListPanel({ cards }: { cards: Card[] }) {
   return (
     <div>
       <CardList cards={cards} />

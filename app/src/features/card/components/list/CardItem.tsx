@@ -4,11 +4,12 @@ import CardItemDeleteSVG from "../../assets/card-item-delete.svg";
 import { detectCardNetwork } from "../../CardNetwork";
 import { deleteCard } from "../../Api";
 import { convertIssuerCodeToCardBrand } from "../../Converter";
+import type { Card } from "../../types";
 
-export default function CardItem({ cardData }) {
+export default function CardItem({ cardData }: { cardData: Card }) {
   const { id, issuerCode, number, expirationDate } = cardData;
 
-  const { title, bgHex } = convertIssuerCodeToCardBrand(issuerCode);
+  const { title, bgHex } = convertIssuerCodeToCardBrand(issuerCode)!;
 
   const handleDeleteCard = () => {
     const result = window.confirm("카드를 제거하시겠습니까?");
@@ -25,7 +26,7 @@ export default function CardItem({ cardData }) {
             <p>
               {splitCardNumber(
                 maskCardNumber(number),
-                detectCardNetwork(number).title,
+                detectCardNetwork(number)?.title ?? "",
               )}
             </p>
             <p>유효기간 {expirationDate}</p>

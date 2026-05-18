@@ -68,7 +68,7 @@ export function CardForm({
         joinCardNumber(cardNumber),
         cardExpiryDate.toSlashFormat(),
         cardCVC,
-        convertCardBrandToIssuerCode(cardBrand),
+        convertCardBrandToIssuerCode(cardBrand!) ?? "",
       );
       gotoCreateCardDonePage();
     } catch (e) {

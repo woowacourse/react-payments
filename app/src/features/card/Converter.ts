@@ -2,7 +2,7 @@ import { CARD_BRAND, ERROR_CODE_TO_MESSAGE } from "./Constants";
 
 export const convertCardBrandToIssuerCode = (cardBrand: string) => {
   if (Object.keys(CARD_BRAND).includes(cardBrand)) {
-    return CARD_BRAND[cardBrand].code;
+    return CARD_BRAND[cardBrand as keyof typeof CARD_BRAND].code;
   }
 };
 

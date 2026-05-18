@@ -5,6 +5,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router";
 import CardListSection from "../components/CardListSection";
+import type { Card } from "../types";
 
 const CARDS = [
   {
@@ -23,7 +24,7 @@ const CARDS = [
   },
 ];
 
-function renderCardListSection(cards = [], status: "pending" | "empty" | "success" | "error" = cards.length ? "success" : "empty") {
+function renderCardListSection(cards: Card[] = [], status: "pending" | "empty" | "success" | "error" = cards.length ? "success" : "empty") {
   const user = userEvent.setup();
   render(
     <MemoryRouter initialEntries={["/"]}>
