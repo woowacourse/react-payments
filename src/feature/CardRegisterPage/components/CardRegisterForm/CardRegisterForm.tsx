@@ -29,6 +29,7 @@ import BaseButton from "../../../../common/components/Button/BaseButton";
 import { type PostCardRequestBody } from "../../api/card";
 import { getIssuerCodeByCompanyName } from "../../utils/cardCompany";
 import { useCardRegister } from "../../hooks/useCardRegister";
+import { useCardRegisterFormError } from "../../hooks/useCardRegisterFormError";
 
 const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
   const cardBrand = getCardBrandName(cardInfo.cardNumbers);
@@ -71,40 +72,15 @@ const CardRegisterForm = ({
     });
 
   const { asyncState, cardRegisterError, registerCard } = useCardRegister();
-
-  const [formErrorMessages, setFormErrorMessages] = useState<{
-    cardNumber: string | null;
-    expiryDate: string | null;
-    cvc: string | null;
-  }>({
-    cardNumber: null,
-    expiryDate: null,
-    cvc: null,
-  });
-
-  const updateCardNumberErrorMessage = (message: string) => {
-    setFormErrorMessages({ ...formErrorMessages, cardNumber: message });
-  };
-
-  const clearCardNumberErrorMessage = () => {
-    setFormErrorMessages({ ...formErrorMessages, cardNumber: null });
-  };
-
-  const updateExpiryDateErrorMessage = (message: string) => {
-    setFormErrorMessages({ ...formErrorMessages, expiryDate: message });
-  };
-
-  const clearExpiryDateErrorMessage = () => {
-    setFormErrorMessages({ ...formErrorMessages, expiryDate: null });
-  };
-
-  const updateCvcErrorMessage = (message: string) => {
-    setFormErrorMessages({ ...formErrorMessages, cvc: message });
-  };
-
-  const clearCvcErrorMessage = () => {
-    setFormErrorMessages({ ...formErrorMessages, cvc: null });
-  };
+  const {
+    formErrorMessages,
+    updateCardNumberErrorMessage,
+    updateCvcErrorMessage,
+    updateExpiryDateErrorMessage,
+    clearCardNumberErrorMessage,
+    clearCvcErrorMessage,
+    clearExpiryDateErrorMessage,
+  } = useCardRegisterFormError();
 
   // 한 번 렌더링 된 필드는 이전 단계에서 에러가 나도 사라지지 않게 하므로 state로!
   const [maxUnlockedStep, setMaxUnlockedStep] = useState(() =>
