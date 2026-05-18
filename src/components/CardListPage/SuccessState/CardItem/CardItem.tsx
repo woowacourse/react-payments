@@ -1,4 +1,5 @@
 import { CARD_BRANDS } from '../../../../constants/constants';
+import type { Card } from '../../../../types/card';
 import {
   BrandLabel,
   CardNumber,
@@ -8,15 +9,6 @@ import {
   Info,
   Row,
 } from './CardItem.styles';
-
-export type Card = {
-  id: string;
-  cardNumber: string;
-  cardBrand: string;
-  expireDate: string;
-  cvc: string;
-  cardPassword: string;
-};
 
 type Props = {
   card: Card;

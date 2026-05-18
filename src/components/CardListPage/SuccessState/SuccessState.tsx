@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { CardItem, type Card } from './CardItem/CardItem';
+import { CardItem } from './CardItem/CardItem';
+import type { Card } from '../../../types/card';
 import {
   CardPlaceholder,
   Container,

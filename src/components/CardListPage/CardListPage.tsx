@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { LoadingState } from './LoadingState/LoadingState';
 import { ErrorState } from './ErrorState/ErrorState';
 import { SuccessState } from './SuccessState/SuccessState';
-import type { Card } from './SuccessState/CardItem/CardItem';
+import type { Card } from '../../types/card';
+import { fetchCards, deleteCard } from '../../api/cards';
 import { Wrapper } from '../PageCard.styles';
 
 type State = 'idle' | 'loading' | 'success' | 'error';
@@ -14,9 +15,7 @@ export function CardListPage() {
   const loadCards = async () => {
     setState('loading');
     try {
-      const response = await fetch('/cards');
-      if (!response.ok) throw new Error('카드 목록을 불러오지 못했습니다');
-      const data = await response.json();
+      const data = await fetchCards();
       setSavedCard(data);
       setState('success');
     } catch {
@@ -26,8 +25,7 @@ export function CardListPage() {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`/cards/${id}`, { method: 'DELETE' });
-      if (!response.ok) throw new Error('카드 삭제에 실패했습니다');
+      await deleteCard(id);
       await loadCards();
     } catch (error) {
       console.error(error);
