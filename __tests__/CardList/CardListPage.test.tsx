@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom/vitest';
 
-import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { getCards } from '../../src/api/cards';
+import { getCards, deleteCard } from '../../src/api/cards';
 import type { Card } from '../../src/domain/card/types/card';
 import CardListPage from '../../src/feature/CardList/CardListPage';
 
@@ -31,10 +32,17 @@ const renderCardListPage = () => {
 };
 
 const mockedGetCards = vi.mocked(getCards);
+const mockedDeleteCard = vi.mocked(deleteCard);
 
 describe('CardListPage', () => {
+  afterEach(() => {
+    cleanup();
+    vi.restoreAllMocks();
+  });
+
   beforeEach(() => {
     mockedGetCards.mockReset();
+    mockedDeleteCard.mockReset();
   });
 
   it('카드 목록을 조회하는 경우, 요청하는 동안 스켈레톤 UI를 보여준다.', async () => {
@@ -85,5 +93,28 @@ describe('CardListPage', () => {
     expect(
       screen.getByRole('button', { name: '다시 시도' }),
     ).toBeInTheDocument();
+  });
+
+  it('카드 삭제 요청이 성공하면 카드가 목록에서 사라진다.', async () => {
+    const user = userEvent.setup();
+
+    mockedGetCards.mockResolvedValueOnce(mockCards).mockResolvedValueOnce([]);
+    mockedDeleteCard.mockResolvedValueOnce();
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+
+    renderCardListPage();
+
+    expect(await screen.findByText('BC카드')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: '카드 삭제' }));
+
+    expect(window.confirm).toHaveBeenCalledWith('카드를 삭제하시겠습니까?');
+    expect(mockedDeleteCard).toHaveBeenCalledWith(mockCards[0].id);
+    expect(mockedGetCards).toHaveBeenCalledTimes(2);
+
+    await waitFor(() => {
+      expect(screen.queryByText('BC카드')).not.toBeInTheDocument();
+    });
+    expect(screen.getByText('등록된 카드가 없습니다')).toBeInTheDocument();
   });
 });

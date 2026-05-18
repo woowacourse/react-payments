@@ -25,7 +25,10 @@ const CardListItem = ({ card, handleDeleteCard }: CardListItemProps) => {
         </CardTextGroup>
       </CardInfoGroup>
 
-      <DeleteButton onClick={() => handleDeleteCard(card.id)}>
+      <DeleteButton
+        aria-label="카드 삭제"
+        onClick={() => handleDeleteCard(card.id)}
+      >
         &times;
       </DeleteButton>
     </Wrapper>
@@ -73,7 +76,7 @@ const CardText = styled.span`
   color: #8c8c8c;
 `;
 
-const DeleteButton = styled.span`
+const DeleteButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
