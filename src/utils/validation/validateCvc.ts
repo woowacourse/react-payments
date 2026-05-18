@@ -1,9 +1,9 @@
 import { RULES } from '../../constants';
 import type { CardInfo } from '../../types';
 import { validate, validateAll } from '../../utils';
-import type { FormValue } from '../useAddCardForm';
+import type { FormValue } from '../../hooks/useAddCardForm';
 
-export default function useCvcValidation(cvcLength: number) {
+export function validateCvc(cvcLength: number) {
   const rules = [RULES.numberOnly, RULES.required, RULES.exactLengthOnComplete(cvcLength)];
 
   const runAllValidations = (value: CardInfo['cvc']): FormValue['cvc']['errorStatuses'] =>
