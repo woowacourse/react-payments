@@ -72,7 +72,7 @@ export function CardRegisterPage(props: CardRegisterPageProps) {
         }),
       });
       if (res.ok) {
-        navigate("/cards/register/success");
+        navigate("/cards");
       } else if (res.status === 400) {
         const { code, message } = await res.json();
         const field = CODE_TO_FIELD[code];
