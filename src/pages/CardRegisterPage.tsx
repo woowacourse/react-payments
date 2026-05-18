@@ -37,6 +37,22 @@ export function CardRegisterPage(props: CardRegisterPageProps) {
     INVALID_EXPIRATION_DATE: "expirationDate",
   };
 
+  const handleFormStateChange = (newState: CardFormState) => {
+    if (
+      newState.expiryMonth !== cardFormState.expiryMonth ||
+      newState.expiryYear !== cardFormState.expiryYear
+    ) {
+      setServerErrors((prev) => ({ ...prev, expirationDate: undefined }));
+    }
+    if (newState.cvc !== cardFormState.cvc) {
+      setServerErrors((prev) => ({ ...prev, cvc: undefined }));
+    }
+    if (newState.cardNumberSegments !== cardFormState.cardNumberSegments) {
+      setServerErrors((prev) => ({ ...prev, cardNumber: undefined }));
+    }
+    handleSetFormState(newState);
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     setServerErrors({});
@@ -78,7 +94,7 @@ export function CardRegisterPage(props: CardRegisterPageProps) {
       />
       <CardForm
         formState={cardFormState}
-        setFormState={handleSetFormState}
+        setFormState={handleFormStateChange}
         brand={brand}
         serverErrors={serverErrors}
       />
