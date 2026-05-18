@@ -9,7 +9,7 @@ export interface CardInfo {
 
 export type CardBrand = 'local' | 'visa' | 'mastercard' | 'amex' | 'diners' | 'unionpay';
 
-export type CardCompany = 'bc' | 'shinhan' | 'kakao' | 'hyundai' | 'woori' | 'lotte' | 'hana' | 'kookmin';
+export type CardCompany = '' | 'bc' | 'shinhan' | 'kakao' | 'hyundai' | 'woori' | 'lotte' | 'hana' | 'kookmin';
 
 export type ValidationTrigger = 'onChange' | 'onBlur' | 'onComplete';
 
