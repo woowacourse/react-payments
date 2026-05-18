@@ -6,6 +6,7 @@ import {
   isValidInputCardNumber,
   getCardNumberFieldState,
   getNextCardNumberFieldState,
+  sliceCardNumber,
 } from '../../model/registerCardNumber';
 
 export interface CardNumberFieldControl {
@@ -27,7 +28,7 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
   const { setInputRef, focusNext } = useInputFocus();
   const [touched, setTouched] = useState([false, false, false, false]);
 
-  const { format, inputErrors, totalErrorMessage } = getCardNumberFieldState({
+  const { format, inputErrors, totalErrorMessage, brand } = getCardNumberFieldState({
     numbers,
     touched,
   });
@@ -39,7 +40,12 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
     next[index] = value;
     onChange(next);
 
-    const { format, isValid } = getNextCardNumberFieldState(next);
+    const { format, isValid, nextBrand } = getNextCardNumberFieldState(next);
+
+    if (brand !== nextBrand) {
+      const sliced = sliceCardNumber(next, format);
+      onChange(sliced);
+    }
 
     if (isValid) onComplate();
     if (value.length === format[index]) focusNext(index + 1);

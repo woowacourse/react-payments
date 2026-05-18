@@ -100,14 +100,19 @@ export const getCardNumberFieldState = ({
     inputErrors,
     totalErrorMessage,
     isValid,
+    brand,
   };
 };
 
 export const getNextCardNumberFieldState = (numbers: string[]) => {
   const cardNumber = numbers.join('');
-  const brand = getCardBrand(cardNumber);
-  const format = getCardBrandFormat(brand);
+  const nextBrand = getCardBrand(cardNumber);
+  const format = getCardBrandFormat(nextBrand);
   const isValid = validateCardNumber(cardNumber);
 
-  return { cardNumber, brand, format, isValid };
+  return { cardNumber, nextBrand, format, isValid };
+};
+
+export const sliceCardNumber = (numbers: string[], format: number[]) => {
+  return numbers.map((number, idx) => number.slice(0, format[idx]));
 };
