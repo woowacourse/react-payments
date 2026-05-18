@@ -8,7 +8,7 @@ import ConfirmCircle from '../../public/Confirm Circle.svg';
 export default function CardAddCompletePage() {
     const { state } = useLocation();
 
-    if (!isCardAddCompleteState(state)) return <Navigate to="/" replace />;
+    if (!isCardAddCompleteState(state)) return <Navigate to="/list" replace />;
 
     const { cardNumberPrefix, cardBrand } = state;
     const brandLabel = BRAND_SELECT_OPTIONS.find((o) => o.value === cardBrand)?.label ?? '';
@@ -25,7 +25,7 @@ export default function CardAddCompletePage() {
                     {brandLabel}가 등록되었어요.
                 </Message>
             </ContentWrapper>
-            <ConfirmButton to="/" purpose="confirm" />
+            <ConfirmButton to="/list" purpose="confirm" />
         </Container>
     );
 }

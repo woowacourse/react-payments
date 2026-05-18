@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import CardAddPage from './pages/CardAddPage';
 import CardAddCompletePage from './pages/CardAddCompletePage';
 import CardListPage from './pages/CardListPage';
@@ -8,7 +8,8 @@ function App() {
     return (
         <AppContainer>
             <Routes>
-                <Route path="/" element={<CardAddPage />} />
+                <Route path="/" element={<Navigate to="/list" replace />} />
+                <Route path="/add-card" element={<CardAddPage />} />
                 <Route path="/list" element={<CardListPage />} />
                 <Route path="/complete" element={<CardAddCompletePage />} />
             </Routes>

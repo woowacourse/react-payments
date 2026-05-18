@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
-// TODO ConfirmButton 컴포넌트랑 합쳐서 도메인 버튼 컴포넌트 만들기
 export default function AddCardButton() {
-    return <AddCardButtonStyle to="/">+ 카드 추가</AddCardButtonStyle>;
+    return <AddCardButtonStyle to="/add-card">+ 카드 추가</AddCardButtonStyle>;
 }
 
 const AddCardButtonStyle = styled(Link)`
