@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 
 const CardListSkeleton = () => {
   return (
-    <Wrapper>
+    <Wrapper role="status" aria-label="카드 목록을 불러오는 중">
       {Array.from({ length: 3 }).map((_, index) => (
         <SkeletonItem key={index}>
           <SkeletonInfoGroup>

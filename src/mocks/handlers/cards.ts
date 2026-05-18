@@ -10,16 +10,16 @@ import { maskCardNumber } from '../../domain/card/utils/cardDisplay';
 
 const cards: Card[] = [
   {
-    id: '1',
+    id: '550e8400-e29b-41d4-a716-446655440000',
     issuerCode: '31',
-    number: '111122******4444',
-    expirationDate: '01/40',
+    number: '551112******9012',
+    expirationDate: '12/28',
   },
   {
-    id: '2',
+    id: '550e8400-e29b-41d4-a716-446655441234',
     issuerCode: '41',
-    number: '123412******1234',
-    expirationDate: '01/20',
+    number: '121212******9012',
+    expirationDate: '06/32',
   },
 ];
 
