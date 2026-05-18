@@ -15,7 +15,7 @@ export const useCardList = () => {
 
   const fetchCards = async () => {
     await run(async () => {
-      const response = await fetch('/cards');
+      const response = await fetch(`${import.meta.env.BASE_URL}cards`);
       if (!response.ok) {
         throw new Error('카드 목록 불러오기 실패!');
       }
@@ -37,7 +37,7 @@ export const useCardList = () => {
     }
 
     try {
-      const response = await fetch(`/cards/${id}`, {
+      const response = await fetch(`${import.meta.env.BASE_URL}cards/${id}`, {
         method: 'DELETE',
       });
 

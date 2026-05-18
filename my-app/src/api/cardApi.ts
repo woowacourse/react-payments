@@ -9,7 +9,7 @@ export interface SendingData {
 export const postCard = async (
   sendingData: SendingData,
 ): Promise<{ id: string }> => {
-  const response = await fetch('/cards', {  
+  const response = await fetch(`${import.meta.env.BASE_URL}cards`, {  
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(sendingData),

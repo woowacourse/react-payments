@@ -12,10 +12,11 @@ interface Card {
   expirationDate: string;
 }
 
+const API_BASE = import.meta.env.BASE_URL;
 const cards: Card[] = [];
 
 export const handlers = [
-  http.post('/cards', async ({ request }) => {
+  http.post(`${API_BASE}cards`, async ({ request }) => {
     const requestDetail = (await request.json()) as Record<string, string>;
     const { number, expirationDate, cvc, issuerCode } = requestDetail;
 
@@ -64,7 +65,7 @@ export const handlers = [
     return HttpResponse.json({ id: newCard.id }, { status: 201 });
   }),
 
-  http.get('/cards', async () => {
+  http.get(`${API_BASE}cards`, async () => {
     await delay(1000);
 
     const maskingCards = cards.map((card) => {
@@ -82,7 +83,7 @@ export const handlers = [
     return HttpResponse.json(maskingCards, { status: 200 });
   }),
 
-  http.delete('/cards/:id', ({ params }) => {
+  http.delete(`${API_BASE}cards/:id`, ({ params }) => {
     const id = params.id;
     const targetIndex = cards.findIndex((card) => card.id === id);
 

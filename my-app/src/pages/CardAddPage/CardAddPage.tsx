@@ -12,7 +12,7 @@ import { useCardSubmit } from './useCardSubmit';
 const CardAddPage = () => {
   const { formState, setters } = useCardFormState();
   const { isFormValid, canShowSteps } = useCardFormValidation(formState);
-  const { handleSubmit, status, serverError } = useCardSubmit(
+  const { handleSubmit, serverError } = useCardSubmit(
     formState,
     isFormValid,
   );
@@ -68,7 +68,7 @@ const CardAddPage = () => {
         />
 
         {isFormValid && (
-          <SubmitButton type="submit" disabled={status === 'loading'}>
+          <SubmitButton type="submit">
             확인
           </SubmitButton>
         )}

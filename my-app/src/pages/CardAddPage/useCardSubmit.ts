@@ -9,7 +9,7 @@ import type { FormState } from './useCardFormState';
 
 export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
   const navigate = useNavigate();
-  const { run, status, error } = useAsync<{ id: string }>();
+  const { run, error } = useAsync<{ id: string }>();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,5 +45,5 @@ export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
     message: string;
   } | null;
 
-  return { handleSubmit, status, serverError };
+  return { handleSubmit, serverError };
 };
