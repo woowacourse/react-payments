@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-type QueryState = "loading" | "success" | "error";
+type QueryState = "idle" | "loading" | "success" | "error";
 
 interface UseQueryParams<ResponseType> {
   queryFn: () => Promise<ResponseType>;
 }
 
 const useQuery = <ResponseType>({ queryFn }: UseQueryParams<ResponseType>) => {
-  const [state, setState] = useState<QueryState>("loading");
+  const [state, setState] = useState<QueryState>("idle");
   const [data, setData] = useState<ResponseType | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
