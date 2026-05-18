@@ -14,18 +14,21 @@ const CardListPage = () => {
   const [cardFetchStatus, setCardFetchStatus] =
     useState<cardFetchStatusType>('idle');
 
-  const fetchCards = async () => {
+  const fetchCards = async (signal?: AbortSignal) => {
     setCardFetchStatus('idle');
 
     try {
       setCards([]);
       setCardFetchStatus('loading');
 
-      const cards = await getCards();
+      const cards = await getCards(signal);
 
       setCards(cards);
       setCardFetchStatus('success');
-    } catch {
+    } catch (error) {
+      // Abort인 경우 무시
+      if (error instanceof Error && error.name === 'AbortError') return;
+
       setCardFetchStatus('error');
     }
   };
@@ -44,7 +47,12 @@ const CardListPage = () => {
   };
 
   useEffect(() => {
-    fetchCards();
+    const controller = new AbortController();
+
+    // eslint-disable-next-line
+    fetchCards(controller.signal);
+
+    return () => controller.abort();
   }, []);
 
   const 비동기_상태에_따라_컴포넌트_보여주기 = () => {

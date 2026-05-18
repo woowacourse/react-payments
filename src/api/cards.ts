@@ -1,8 +1,8 @@
 import type { Card, CardFormInfoType } from '../domain/card/types/card';
 import { HTTPError, NetworkError } from './error';
 
-export const getCards = async (): Promise<Card[]> => {
-  const response = await fetch('/cards');
+export const getCards = async (signal?: AbortSignal): Promise<Card[]> => {
+  const response = await fetch('/cards', { signal: signal });
 
   if (!response.ok) throw new Error('카드 목록을 불러오지 못했습니다.');
 
