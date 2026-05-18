@@ -20,7 +20,7 @@ export default App;
 
 const AppContainer = styled.div`
     width: 376px;
-    height: 700px;
+    height: 760px;
     margin: 0 auto;
     background-color: #ffffff;
     overflow: hidden;
