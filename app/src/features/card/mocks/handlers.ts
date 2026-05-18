@@ -10,6 +10,13 @@ export const handlers = [
     });
   }),
 
+  http.get("https://api.autholibank.com/cards", () => {
+    const cards = db.card.getAll();
+    return HttpResponse.json({
+      ...cards,
+    });
+  }),
+
   http.post("https://api.antolibank.com/cards", async ({ request }) => {
     const cardData = (await request.json()) as {
       number: string;
