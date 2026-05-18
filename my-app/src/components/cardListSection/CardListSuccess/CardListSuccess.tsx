@@ -39,4 +39,4 @@ const CardListSuccess = ({ cards, onClick, onDelete }: Props) => {
     );
 };
 
-export const CardListSuccess;
+export default CardListSuccess;

@@ -12,7 +12,7 @@ const CardListEmpty = ({ onClick }: Props) => {
             <EmptyCardIcon />
             <EmptyTitle>등록된 카드가 없습니다.</EmptyTitle>
             <EmptySubTitle>아래 버튼을 눌러 첫 카드를 등록해보세요</EmptySubTitle>
-            <CardAddButton onClick={onClick}>카드 추가하기</CardAddButton>
+            <CardAddButton onClick={onClick} aria-label='카드 추가 버튼'>카드 추가하기</CardAddButton>
         </EmptyListContainer>
       </CardListPageLayout>
     );
