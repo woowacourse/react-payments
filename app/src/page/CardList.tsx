@@ -2,6 +2,11 @@ import type { AsyncState } from '../types/asyncState';
 import { getCards } from '../api/cardsAPI';
 import { useEffect, useState } from 'react';
 import type { Card } from '../types/card';
+import { CardItem } from '../components/card-list/CardItem';
+import { CardListSkeleton } from '../components/card-list/CardListSkeleton';
+import { CardListEmpty } from '../components/card-list/CardListEmpty';
+import { CardListError } from '../components/card-list/CardListError';
+import styled from '@emotion/styled';
 
 export function CardList() {
   const [cardListState, setCardListState] = useState<AsyncState<Card[]>>({ status: 'idle' });
@@ -22,6 +27,33 @@ export function CardList() {
     fetchCards();
   }, []);
 
-  if (cardListState.status === 'success') console.log(cardListState.responseData);
-  return <div>안녕하세요</div>;
+  const renderContent = () => {
+    if (cardListState.status === 'idle' || cardListState.status === 'loading')
+      return <CardListSkeleton />;
+    if (cardListState.status === 'error') return <CardListError />;
+    if (cardListState.responseData.length === 0) return <CardListEmpty />;
+    return <CardItem />;
+  };
+
+  return (
+    <Container>
+      <Title>보유 카드</Title>
+      {renderContent()}
+    </Container>
+  );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 2.5rem 0 0 1.75rem;
+  background-color: blue;
+`;
+
+const Title = styled.h1`
+  font: 700;
+  font-size: 18px;
+`;

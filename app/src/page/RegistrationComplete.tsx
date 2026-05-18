@@ -1,14 +1,18 @@
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { cardCompanyOptions } from '../constants/cardCompanyOptions';
+import { CARD_COMPANY_INFO } from '../constants/cardCompanyOptions';
 import Check from '../assets/Check.svg';
 import styled from '@emotion/styled';
+import type { CardCompany } from '../context/CardContext';
 
 export function RegistrationComplete() {
   const location = useLocation();
   const navigate = useNavigate();
   if (!location.state) return <Navigate to="/react-payments" replace />;
-  const { firstDigits, cardCompany } = location.state;
-  const cardCompanyLabel = cardCompanyOptions.find((option) => option.value === cardCompany)?.label;
+  const { firstDigits, cardCompany } = location.state as {
+    firstDigits: string;
+    cardCompany: CardCompany;
+  };
+  const cardCompanyLabel = CARD_COMPANY_INFO[cardCompany].label;
 
   return (
     <Container>

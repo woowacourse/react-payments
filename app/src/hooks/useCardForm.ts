@@ -56,11 +56,10 @@ export function useCardForm() {
     if (!isFormComplete) return;
 
     const newCard: Omit<Card, 'id'> = {
-      cardCompany: cardCompany,
-      cardNumber: cardNumber,
-      cardExpiryDate: cardExpiryDate,
-      cardCVC: cardCVC,
-      cardPassword: cardPassword,
+      number: cardNumber.join(''),
+      expirationDate: [cardExpiryDate['expiry-month'], cardExpiryDate['expiry-year']].join('/'),
+      cvc: cardCVC,
+      issuerCode:,
     };
 
     postCard(newCard);

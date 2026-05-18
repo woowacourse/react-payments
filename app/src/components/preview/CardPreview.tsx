@@ -2,14 +2,14 @@ import styled from '@emotion/styled';
 import { useCardContext } from '../../hooks/useCardContext';
 import { CardNumber } from './CardNumber';
 import { CardExpiryDate } from './CardExpiryDate';
-import { CARD_COMPANY_COLOR } from '../../style/CardStyles';
+import { CARD_COMPANY_INFO } from '../../constants/cardCompanyOptions';
 import { CardNetworkBrand } from './CardNetworkBrand';
 
 export function CardPreview() {
   const { cardCompany, networkBrand } = useCardContext();
 
   return (
-    <CardContainer $CardCompanySelected={CARD_COMPANY_COLOR[cardCompany]}>
+    <CardContainer $CardCompanySelected={CARD_COMPANY_INFO[cardCompany].color}>
       <div className="card-meta">
         <div className="ic-chip"></div>
         {networkBrand && <CardNetworkBrand networkBrand={networkBrand} />}
