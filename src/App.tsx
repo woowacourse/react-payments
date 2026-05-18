@@ -1,10 +1,17 @@
-import PaymentWidget from "./components/PaymentWidget";
-import styled from "@emotion/styled";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PaymentWidget from './components/PaymentWidget';
+import CompletePage from './components/completePage/CompletePage';
+import styled from '@emotion/styled';
 
 function App() {
   return (
     <AppWrapper>
-      <PaymentWidget />
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <Routes>
+          <Route path="/" element={<PaymentWidget />} />
+          <Route path="/complete" element={<CompletePage />} />
+        </Routes>
+      </BrowserRouter>
     </AppWrapper>
   );
 }

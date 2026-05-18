@@ -7,8 +7,8 @@ export const Wrapper = styled.section`
   padding-top: 77px;
 `;
 
-export const Card = styled.div`
-  background-color: rgba(51, 51, 51, 1);
+export const Card = styled.div<{ backgroundColor?: string }>`
+  background-color: ${(props) => props.backgroundColor ?? "rgba(51, 51, 51, 1)"};
   box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   width: 212px;
