@@ -78,8 +78,6 @@ export const handlers = [
   }),
 
   http.get(`${API_BASE}cards`, async () => {
-    await delay(1000);
-
     const cards = getCards();
 
     const maskingCards = cards.map((card) => {

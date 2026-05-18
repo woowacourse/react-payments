@@ -36,7 +36,7 @@ export const useAsync = <T>() => {
         data: null,
         error: error as Error,
       });
-      throw error;
+      return undefined;
     }
   }, []);
 
