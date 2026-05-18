@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: 'default' | 'error';
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export default function Input({
@@ -10,11 +11,13 @@ export default function Input({
   type,
   onChange,
   variant = 'default',
+  ref,
   ...props
 }: InputProps) {
   return (
     <input
       {...props}
+      ref={ref}
       placeholder={placeholder}
       value={value}
       type={type}

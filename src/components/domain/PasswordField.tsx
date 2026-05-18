@@ -4,30 +4,25 @@ import Input from '../ui/Input';
 import type { ErrorStatus } from '../../types';
 import { validate } from '../../utils';
 import type { BaseValidationRule } from '../../types';
-import { ERROR_MESSAGES } from '../../constants';
+import { PASSWORD_LENGTH, ERROR_MESSAGES } from '../../constants';
 
-const MIN_CVC_LENGTH = 3;
-const MAX_CVC_LENGTH = 4;
-
-interface CVCFieldProps {
-  value: CardInfo['cvc'];
+interface PasswordFieldProps {
+  value: CardInfo['password'];
   errorStatuses: [ErrorStatus];
-  onUpdated: (value: CardInfo['cvc']) => void;
+  onUpdated: (value: CardInfo['password']) => void;
   onErrorUpdated: (errorStatuses: [ErrorStatus]) => void;
-  onValid: (value: CardInfo['cvc']) => void;
   validationRules: BaseValidationRule[];
   ref?: React.Ref<HTMLInputElement>;
 }
 
-export default function CVCField({
+export default function PasswordField({
   value,
   errorStatuses,
   onUpdated,
   onErrorUpdated,
-  onValid,
   validationRules,
   ref,
-}: CVCFieldProps) {
+}: PasswordFieldProps) {
   const errorStatus = errorStatuses[0];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,9 +30,7 @@ export default function CVCField({
     const error = validate(validationRules, 'onChange', inputValue);
     onErrorUpdated([error as ErrorStatus]);
     if (error) return;
-
     onUpdated(inputValue);
-    if (inputValue.length >= MIN_CVC_LENGTH) onValid(inputValue);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -45,24 +38,24 @@ export default function CVCField({
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
-    title: 'CVC 번호를 입력해 주세요',
-    caption: '',
+    title: '비밀번호를 입력해 주세요',
+    caption: `앞의 ${PASSWORD_LENGTH}자리를 입력해주세요`,
     errorMessage: errorStatus ? ERROR_MESSAGES[errorStatus] : '',
   };
 
   return (
     <FormField {...formFieldProps}>
-      <label htmlFor="cvc">CVC</label>
+      <label htmlFor="password">비밀번호 앞 {PASSWORD_LENGTH}자리</label>
       <Input
         ref={ref}
         autoFocus
         variant={errorStatus !== null ? 'error' : 'default'}
         value={value}
-        id="cvc"
-        type="text"
+        id="password"
+        type="password"
+        placeholder="••"
         inputMode="numeric"
-        placeholder="123"
-        maxLength={MAX_CVC_LENGTH}
+        maxLength={PASSWORD_LENGTH}
         onChange={handleChange}
         onBlur={handleBlur}
       />

@@ -1,69 +1,82 @@
 import { css } from '@emotion/react';
+import { useEffect } from 'react';
 import FormField, { type FormFieldProps } from '../ui/FormField';
 import Input from '../ui/Input';
 import type { CardInfo, ErrorStatus } from '../../types';
-import { isNumber } from '../../utils';
-import { useState } from 'react';
+import { validate } from '../../utils';
+import type { BaseValidationRule } from '../../types';
 import { CARD_NUMBER_LENGTH_PER_INPUT, ERROR_MESSAGES } from '../../constants';
+import useInputFocus from '../../hooks/useInputFocus';
+import type { FormValue } from '../../hooks/useAddCardForm';
+
+const MIN_CARD_NUMBERS_LENGTH = 14; // onValid로 넘어가기 위한 카드번호의 최소 길이
 
 interface CardNumbersFieldProps {
   value: CardInfo['cardNumbers'];
+  errorStatuses: FormValue['cardNumbers']['errorStatuses'];
   onUpdated: (value: CardInfo['cardNumbers']) => void;
+  onErrorUpdated: (errorStatuses: FormValue['cardNumbers']['errorStatuses']) => void;
+  onValid: (value: CardInfo['cardNumbers']) => void;
+  validationRules: BaseValidationRule[];
+  ref?: React.Ref<HTMLInputElement>;
 }
 
-export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldProps) {
-  const [errors, setErrors] = useState<[ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus]>([null, null, null, null]);
+export default function CardNumbersField({
+  value,
+  errorStatuses,
+  onUpdated,
+  onErrorUpdated,
+  onValid,
+  validationRules,
+  ref,
+}: CardNumbersFieldProps) {
+  const { setRef, focusNext, focusPrev, focusFirst } = useInputFocus(4);
 
-  const updateError = (index: number, status: ErrorStatus) => {
-    setErrors((prev) => {
-      const next = [...prev] as [ErrorStatus, ErrorStatus, ErrorStatus, ErrorStatus];
-      next[index] = status;
-      return next;
-    });
+  useEffect(() => {
+    focusFirst();
+  }, []);
+
+  const updateErrorStatuses = (index: number, status: ErrorStatus) => {
+    const newErrorStatuses = [...errorStatuses] as FormValue['cardNumbers']['errorStatuses'];
+    newErrorStatuses[index] = status;
+    onErrorUpdated(newErrorStatuses);
   };
 
-  // 입력 또는 삭제할 때마다 수행되어야하는 validation 수행.
-  // 1. required
-  // 2. numberOnly -> update 제외됨.
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-
-    if (inputValue !== '' && !isNumber(inputValue)) {
-      updateError(index, 'numberOnly');
-      return;
-    }
+    const error = validate(validationRules, 'onChange', inputValue);
+    updateErrorStatuses(index, error as ErrorStatus);
+    if (error) return;
 
     const newValue = [...value] as CardInfo['cardNumbers'];
     newValue[index] = inputValue;
     onUpdated(newValue);
-    updateError(index, inputValue === '' ? 'required' : null);
+
+    if (newValue.join('').length >= MIN_CARD_NUMBERS_LENGTH) {
+      onValid(newValue);
+      return;
+    }
+
+    if (inputValue.length === CARD_NUMBER_LENGTH_PER_INPUT) {
+      focusNext(index);
+    }
   };
 
-  // 포커스가 빠질때마다 수행되어야 하는 validation 수행.
-  // 1. required
-  // 2. invalidLength
+  const handleKeyUp = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && value[index] === '') {
+      focusPrev(index);
+    }
+  };
+
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-
-    if (inputValue === '') {
-      updateError(index, 'required');
-      return;
-    }
-
-    if (inputValue.length < CARD_NUMBER_LENGTH_PER_INPUT) {
-      updateError(index, 'invalidLength');
-      return;
-    }
-
-    updateError(index, null);
+    updateErrorStatuses(index, validate(validationRules, 'onBlur', e.target.value) as ErrorStatus);
   };
 
-  const activeError = errors.find((e) => e !== null) ?? null;
+  const activeError = errorStatuses.find((e) => e !== null) ?? null;
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '결제할 카드 번호를 입력해 주세요',
     caption: '본인 명의의 카드만 결제 가능합니다.',
-    error: activeError !== null,
     errorMessage: activeError ? ERROR_MESSAGES[activeError] : '',
   };
 
@@ -75,7 +88,8 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
           {value.map((number, index) => (
             <Input
               key={index}
-              variant={errors[index] !== null ? 'error' : 'default'}
+              ref={setRef(index, index === 0 ? ref : undefined)}
+              variant={errorStatuses[index] !== null ? 'error' : 'default'}
               value={number}
               type="text"
               inputMode="numeric"
@@ -83,6 +97,7 @@ export default function CardNumbersField({ value, onUpdated }: CardNumbersFieldP
               maxLength={CARD_NUMBER_LENGTH_PER_INPUT}
               onChange={(e) => handleChange(index, e)}
               onBlur={(e) => handleBlur(index, e)}
+              onKeyUp={(e) => handleKeyUp(index, e)}
             />
           ))}
         </div>

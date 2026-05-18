@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import Input from './Input';
+import Input from './index';
 import { fn } from 'storybook/test';
+
+type InputStoryArgs = React.ComponentProps<typeof Input>;
 
 const meta = {
   title: 'ui/Input',
@@ -25,7 +27,7 @@ export const Default: Story = {
     value: '1234',
     variant: 'default',
   },
-  render: (args) => <Input {...args} />,
+  render: (args: InputStoryArgs) => <Input {...args} />,
 };
 
 export const Error: Story = {
@@ -33,7 +35,7 @@ export const Error: Story = {
     value: '',
     variant: 'error',
   },
-  render: (args) => <Input {...args} />,
+  render: (args: InputStoryArgs) => <Input {...args} />,
 };
 
 export const Focus: Story = {
@@ -41,5 +43,5 @@ export const Focus: Story = {
     value: '',
     variant: 'default',
   },
-  render: (args) => <Input {...args} autoFocus />,
+  render: (args: InputStoryArgs) => <Input {...args} autoFocus />,
 };
