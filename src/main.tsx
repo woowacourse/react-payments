@@ -6,11 +6,11 @@ import AddCardCompletePage from './pages/AddCardCompletePage';
 import AddCardPage from './pages/AddCardPage';
 import CardListPage from './pages/CardListPage';
 import MobileLayout from './components/ui/MobileLayout';
-import { ROUTES } from './routes';
+import { BASE_PATH, ROUTES } from './routes';
 
 if (import.meta.env.DEV) {
   const { worker } = await import('./msw/browser');
-  await worker.start({ onUnhandledRequest: 'bypass' });
+  await worker.start({ onUnhandledRequest: 'bypass', serviceWorker: { url: `${BASE_PATH}/mockServiceWorker.js` } });
 }
 
 const router = createBrowserRouter(
@@ -25,7 +25,7 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  { basename: '/react-payments' },
+  { basename: BASE_PATH },
 );
 
 createRoot(document.getElementById('root')!).render(
