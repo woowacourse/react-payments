@@ -3,6 +3,7 @@ import CardItem from "@components/common/CardItem";
 import styled from "@emotion/styled";
 
 import MyCardListSectionLoader from "./MyCardListSectionLoader";
+import AddCardNavigateButton from "../AddCardNavigateButton/AddCardNavigateButton";
 
 const MyCardListSection = () => {
   const { data, error, state } = useCards();
@@ -25,6 +26,7 @@ const MyCardListSection = () => {
           <CardItem {...props} key={props.id} />
         ))}
       </CardContainer>
+      <AddCardNavigateButton />
     </Wrapper>
   );
 };

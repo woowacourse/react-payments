@@ -46,7 +46,7 @@ const Wrapper = styled.li`
   gap: 1rem;
   border: 1px solid ${COLOR_PALETTE.GRAY};
   border-radius: 8px;
-  width: 100%;
+  max-width: 100%;
   align-items: center;
   padding: 1rem;
 `;
