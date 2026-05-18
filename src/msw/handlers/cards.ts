@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw';
+import { API_ENDPOINTS } from '../../api/cards';
 
 type CardRequest = {
   number: string;
@@ -33,10 +34,29 @@ const isValidExpirationDate = (expirationDate: string) => {
 
 const maskCardNumber = (number: string) => `${number.slice(0, 6)}******${number.slice(-4)}`;
 
-const db: Card[] = [];
+const db: Card[] = [
+  {
+    id: crypto.randomUUID(),
+    issuerCode: '31',
+    number: maskCardNumber('5511123456789012'),
+    expirationDate: '12/28',
+  },
+  {
+    id: crypto.randomUUID(),
+    issuerCode: '41',
+    number: maskCardNumber('4111111111111111'),
+    expirationDate: '06/30',
+  },
+  {
+    id: crypto.randomUUID(),
+    issuerCode: '15',
+    number: maskCardNumber('5234123456787890'),
+    expirationDate: '09/27',
+  },
+];
 
 export const cardsHandlers = [
-  http.post('/cards', async ({ request }) => {
+  http.post(API_ENDPOINTS.cards, async ({ request }) => {
     const body = (await request.json()) as CardRequest;
 
     if (!isValidBin(body.number)) {
@@ -68,11 +88,11 @@ export const cardsHandlers = [
     return HttpResponse.json({ id: card.id }, { status: 201 });
   }),
 
-  http.get('/cards', () => {
+  http.get(API_ENDPOINTS.cards, () => {
     return HttpResponse.json(db);
   }),
 
-  http.delete('/cards/:id', ({ params }) => {
+  http.delete(API_ENDPOINTS.card(':id'), ({ params }) => {
     const index = db.findIndex((card) => card.id === params.id);
     if (index !== -1) db.splice(index, 1);
     return new HttpResponse(null, { status: 204 });

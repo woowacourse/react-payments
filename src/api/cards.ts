@@ -1,6 +1,6 @@
 import type { CardDTO } from '../hooks/useCardListData';
 
-const API_ENDPOINTS = {
+export const API_ENDPOINTS = {
   cards: '/cards',
   card: (id: string) => `/cards/${id}`,
 } as const;
