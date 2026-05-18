@@ -49,8 +49,9 @@ const CardForm = () => {
 
   const clearServerError = (key: string) => {
     setServerErrors((prev) => {
-      const { [key]: _, ...rest } = prev;
-      return rest;
+      const next = { ...prev };
+      delete next[key];
+      return next;
     });
   };
 
