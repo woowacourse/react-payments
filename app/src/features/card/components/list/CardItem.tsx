@@ -11,7 +11,8 @@ export default function CardItem({ cardData }) {
   const { title, bgHex } = convertIssuerCodeToCardBrand(issuerCode);
 
   const handleDeleteCard = () => {
-    deleteCard(id);
+    const result = window.confirm("카드를 제거하시겠습니까?");
+    if (result) deleteCard(id);
   };
 
   return (
