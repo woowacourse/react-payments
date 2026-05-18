@@ -26,7 +26,7 @@ const SAMPLE_CARDS = [
 
 const renderPage = () =>
   render(
-    <MemoryRouter initialEntries={['/cards']}>
+    <MemoryRouter initialEntries={['/']}>
       <CardListPage />
     </MemoryRouter>,
   );

@@ -10,7 +10,6 @@ function App() {
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<CardListPage />} />
-          <Route path="/cards" element={<CardListPage />} />
           <Route path="/addCard" element={<PaymentWidget />} />
           <Route path="/complete" element={<CompletePage />} />
         </Routes>

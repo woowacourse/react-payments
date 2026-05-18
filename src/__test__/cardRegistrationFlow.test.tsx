@@ -7,11 +7,11 @@ import PaymentWidget from '../components/PaymentWidget';
 import { CardListPage } from '../components/CardListPage/CardListPage';
 import CompletePage from '../components/completePage/CompletePage';
 
-const renderApp = (initialPath = '/cards') =>
+const renderApp = (initialPath = '/') =>
   render(
     <MemoryRouter initialEntries={[initialPath]}>
       <Routes>
-        <Route path="/cards" element={<CardListPage />} />
+        <Route path="/" element={<CardListPage />} />
         <Route path="/addCard" element={<PaymentWidget />} />
         <Route path="/complete" element={<CompletePage />} />
       </Routes>
@@ -37,7 +37,7 @@ const fillValidForm = () => {
 
 describe('카드 등록 한 사이클', () => {
   it('카드 추가 버튼 → 폼 제출 → 완료 페이지 → 확인 시 목록에 노출된다', async () => {
-    renderApp('/cards');
+    renderApp('/');
 
     const addButton = await screen.findByRole('button', { name: '카드 추가하기' });
     fireEvent.click(addButton);
