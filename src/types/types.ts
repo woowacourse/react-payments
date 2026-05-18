@@ -48,8 +48,8 @@ export interface CvcContextValue {
 
 export interface CardBrandContextValue {
   isOpen: boolean;
-  selectedItem: { brand: string; color: string };
-  options: { brand: string; color: string }[];
+  selectedItem: { brand: string; color: string; issuerCode: string };
+  options: { brand: string; color: string; issuerCode: string }[];
   toggleDropdown: () => void;
   handleItemClick: (option: { brand: string; color: string }) => void;
 }
