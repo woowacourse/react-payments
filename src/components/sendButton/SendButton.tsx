@@ -1,15 +1,23 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
+import { useCardNumberContext } from "../../context/cardNumber/CardNumberContext";
+import { useCardBrandContext } from "../../context/cardBrand/CardBrandContext";
 
 export default function SendButton() {
+  const { cardNumber } = useCardNumberContext();
+  const {
+    selectedItem: { brand },
+  } = useCardBrandContext();
   const navigate = useNavigate();
+  const sendResult = () => {
+    navigate("/react-payments/enrollment", {
+      state: { cardNumber, brand },
+    });
+  };
 
   return (
     <Wrapper>
-      <Button
-        type="button"
-        onClick={() => navigate("/react-payments/enrollment")}
-      >
+      <Button type="submit" onClick={sendResult}>
         확인
       </Button>
     </Wrapper>
