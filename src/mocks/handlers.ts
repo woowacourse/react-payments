@@ -8,6 +8,8 @@ interface RegisteredCard extends CardRegisterRequest {
 
 const cards: RegisteredCard[] = [];
 
+export const resetCards = () => cards.splice(0, cards.length);
+
 export const handlers = [
   http.post("/cards", async ({ request }) => {
     const card = (await request.json()) as CardRegisterRequest;

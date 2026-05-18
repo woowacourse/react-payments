@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 const SKELETON_ITEM_COUNT = 3;
 
 const CardListLoading = () => (
-  <Container>
+  <Container role="status" aria-label="카드 목록 불러오는 중">
     <List>
       {Array.from({ length: SKELETON_ITEM_COUNT }).map((_, index) => (
         <CardListItemSkeleton key={index} />

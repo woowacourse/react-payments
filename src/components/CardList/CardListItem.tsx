@@ -28,7 +28,11 @@ const CardListItem = ({ card, onDelete }: CardListItemProps) => {
         </CardInfo>
       </CardContent>
 
-      <DeleteButton onClick={() => onDelete(card.id)}>
+      <DeleteButton
+        type="button"
+        aria-label="카드 삭제"
+        onClick={() => onDelete(card.id)}
+      >
         <DeleteIcon src={deleteIcon} alt="" />
       </DeleteButton>
     </Item>

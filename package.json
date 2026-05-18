@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist",
-    "test": "vitest"
+    "test": "vitest --project app"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

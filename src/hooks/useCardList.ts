@@ -1,5 +1,5 @@
 import { deleteCard, getCards, type CardListResponse } from "@/api/cards";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export type CardListStatus = "idle" | "loading" | "success" | "error";
 
@@ -7,7 +7,7 @@ const useCardList = () => {
   const [cards, setCards] = useState<CardListResponse>([]);
   const [status, setStatus] = useState<CardListStatus>("idle");
 
-  const fetchCards = async () => {
+  const fetchCards = useCallback(async () => {
     setStatus("loading");
 
     try {
@@ -18,12 +18,12 @@ const useCardList = () => {
     } catch {
       setStatus("error");
     }
-  };
+  }, []);
 
-  const removeCard = async (cardId: string) => {
+  const removeCard = useCallback(async (cardId: string) => {
     await deleteCard(cardId);
     await fetchCards();
-  };
+  }, [fetchCards]);
 
   return {
     cards,
