@@ -24,7 +24,7 @@ export default function CardCreate() {
   const navigate = useNavigate();
 
   const gotoCreateCardDonePage = () => {
-    navigate("/card/done", {
+    navigate("/card/create/done", {
       state: { firstDigitsCardNumber: cardNumber.firstDigits, cardBrand },
     });
   };
