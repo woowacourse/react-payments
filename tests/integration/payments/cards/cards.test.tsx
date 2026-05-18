@@ -29,6 +29,12 @@ describe('카드 목록 페이지 테스트', async () => {
   });
 
   test('카드 추가 버튼 클릭시 등록 페이지로 이동한다', async () => {
+    server.use(
+      http.get('/cards', () => {
+        return HttpResponse.json(cards, { status: 201 });
+      }),
+    );
+
     // ARRANGE
     renderProvider(<AppRoutes />, { route: '/payments/cards' });
 
