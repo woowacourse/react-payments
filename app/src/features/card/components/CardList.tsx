@@ -1,8 +1,15 @@
 import styled from "@emotion/styled";
 import GhostCard from "../assets/Ghostcard.svg";
 import { RadiusButton } from "../style/Button";
+import { useNavigate } from "react-router";
 
 export default function CardList({ cards }) {
+  const navigate = useNavigate();
+
+  const gotoCardCreatePage = () => {
+    navigate("/card/create/");
+  };
+
   return (
     <CardListContainer>
       <h1>보유 카드</h1>
@@ -11,7 +18,9 @@ export default function CardList({ cards }) {
           <EmptyCardSVG src={GhostCard} alt="비어있는 카드" />
           <h3>등록된 카드가 없습니다</h3>
           <p>아래 버튼을 눌러 첫 카드를 등록해보세요</p>
-          <RadiusButton>카드 추가하기</RadiusButton>
+          <RadiusButton onClick={gotoCardCreatePage}>
+            카드 추가하기
+          </RadiusButton>
         </EmptyCardContent>
       </SomeContainer>
     </CardListContainer>
