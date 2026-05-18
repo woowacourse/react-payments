@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import CardPreview from '../components/CardForm/CardPreview';
+import CardPreview from '../components/AddCardForm/CardPreview';
 import { CARD_ISSUER, CARD_NETWORK } from '../constants';
 
 const meta = {

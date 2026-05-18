@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router';
-import CardForm from '../components/CardForm/CardForm';
+import CardsEmptyTemplate from '../components/Cards/CardsEmptyTemplate';
 
 const meta = {
-  title: 'Components/CardForm',
-  component: CardForm,
+  title: 'Cards/CardsEmptyTemplate',
+  component: CardsEmptyTemplate,
   tags: ['autodocs'],
   decorators: [
     (Story) => (
@@ -13,7 +13,7 @@ const meta = {
       </MemoryRouter>
     ),
   ],
-} satisfies Meta<typeof CardForm>;
+} satisfies Meta<typeof CardsEmptyTemplate>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
