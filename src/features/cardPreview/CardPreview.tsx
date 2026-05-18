@@ -7,13 +7,13 @@ import { BRAND_SVG_MAP } from '@/entities/card/config/brandSvgMap';
 import { getCardBrand, type CardBrand } from '@/entities/card/model/cardNumber';
 import { getPreviewCardNumbers } from './model/cardPreview';
 
-export interface CardInfo {
+export interface CardPreviewInfo {
   numbers: string[];
   expiryDate: ExpiryDate;
   bank: Bank | undefined;
 }
 interface CardPreviewProps {
-  info: CardInfo;
+  info: CardPreviewInfo;
 }
 
 const CardNumber = ({
@@ -42,7 +42,7 @@ export const CardPreview = ({ info }: CardPreviewProps) => {
   const brand = getCardBrand(cardNumbers);
   const brandImg = brand !== undefined ? BRAND_SVG_MAP[brand] : '';
 
-  const bankClassName = bank !== undefined ? BANK_RULES[bank].className : '';
+  const bankClassName = bank !== undefined ? BANK_RULES[bank].color : '';
 
   return (
     <div className={styles.cardPreview}>
