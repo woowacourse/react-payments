@@ -4,6 +4,7 @@ import { BrandValidator } from '../validators/BrandValidator';
 import { useNavigate } from 'react-router-dom';
 import { postCard } from '../api/cardsAPI';
 import type { Card } from '../types/card';
+import { CARD_COMPANY_INFO } from '../constants/cardCompanyOptions';
 
 export function useCardForm() {
   // input 상태 초기화
@@ -59,7 +60,7 @@ export function useCardForm() {
       number: cardNumber.join(''),
       expirationDate: [cardExpiryDate['expiry-month'], cardExpiryDate['expiry-year']].join('/'),
       cvc: cardCVC,
-      issuerCode:,
+      issuerCode: CARD_COMPANY_INFO[cardCompany].issuerCode,
     };
 
     postCard(newCard);
