@@ -2,11 +2,11 @@ import { css } from "@emotion/react";
 
 const CardFormLayout = ({
   children,
-  isValid,
+  canSubmit,
   onSubmit,
 }: {
   children: React.ReactNode;
-  isValid: boolean;
+  canSubmit: boolean;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   return (
@@ -29,7 +29,7 @@ const CardFormLayout = ({
           {children}
         </form>
       </div>
-      {isValid && (
+      {canSubmit && (
         <button
           form="card-form"
           css={css`

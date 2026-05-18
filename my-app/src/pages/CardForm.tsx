@@ -8,9 +8,11 @@ import CvcInputSection from "../components/CardForm/CvcInputSection/CvcInputSect
 import PasswordInputSection from "../components/CardForm/PasswordInputSection/PasswordInputSection.tsx";
 import CardFormLayout from "../components/CardForm/CardFormLayout/CardFormLayout.tsx";
 import useCardForm from "../hooks/useCardForm.ts";
-
+import { useState } from "react";
 const CardForm = () => {
   const navigate = useNavigate();
+  const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
+
   const {
     cardInfo,
     step,
@@ -23,10 +25,12 @@ const CardForm = () => {
     cvcHandler,
     passwordHandler,
   } = useCardForm();
+  const hasServerError = Object.keys(serverErrors).length > 0;
+  const canSubmit = isValid && !hasServerError;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isValid) return;
+    if (!canSubmit) return;
 
     const res = await fetch("/cards", {
       method: "POST",
@@ -40,12 +44,34 @@ const CardForm = () => {
     });
 
     if (!res.ok) {
-      const { message } = await res.json();
-      alert(message);
+      const { code, message } = await res.json();
+      setServerErrors({ [code]: message });
       return;
     }
 
     navigate("/complete", { state: { numbers: cardInfo.numbers[0], brand } });
+  };
+
+  const clearServerError = (key: string) => {
+    setServerErrors((prev) => {
+      const { [key]: _, ...rest } = prev;
+      return rest;
+    });
+  };
+
+  const handleCardNumberChange = (v: string[]) => {
+    clearServerError("INVALID_CARD_NUMBER");
+    cardNumberHandler(v);
+  };
+
+  const handleExpiryChange = (v: string[]) => {
+    clearServerError("INVALID_EXPIRATION_DATE");
+    expiryHandler(v);
+  };
+
+  const handleCvcChange = (v: string) => {
+    clearServerError("INVALID_CVC");
+    cvcHandler(v);
   };
 
   return (
@@ -67,19 +93,26 @@ const CardForm = () => {
         <Card cardInfo={cardInfo} brand={brand} />
       </div>
 
-      <CardFormLayout isValid={isValid} onSubmit={handleSubmit}>
-        {step >= 4 && (
-          <PasswordInputSection onChange={passwordHandler} inputValue={cardInfo.password} />
+      <CardFormLayout canSubmit={canSubmit} onSubmit={handleSubmit}>
+        {step >= 4 && <PasswordInputSection onChange={passwordHandler} inputValue={cardInfo.password} />}
+        {step >= 3 && (
+          <CvcInputSection
+            onChange={handleCvcChange}
+            serverError={serverErrors["INVALID_CVC"]}
+            inputValue={cardInfo.cvc}
+          />
         )}
-        {step >= 3 && <CvcInputSection onChange={cvcHandler} inputValue={cardInfo.cvc} />}
         {step >= 2 && (
-          <ExpiryDateInputSection onChange={expiryHandler} inputValues={cardInfo.expiry} />
+          <ExpiryDateInputSection
+            serverError={serverErrors["INVALID_EXPIRATION_DATE"]}
+            onChange={handleExpiryChange}
+            inputValues={cardInfo.expiry}
+          />
         )}
-        {step >= 1 && (
-          <CardCompanySelectSection onChange={companyHandler} inputValue={cardInfo.company} />
-        )}
+        {step >= 1 && <CardCompanySelectSection onChange={companyHandler} inputValue={cardInfo.company} />}
         <CardNumberInputSection
-          onChange={cardNumberHandler}
+          onChange={handleCardNumberChange}
+          serverError={serverErrors["INVALID_CARD_NUMBER"]}
           inputValues={cardInfo.numbers}
           fieldConfig={fieldConfig}
         />

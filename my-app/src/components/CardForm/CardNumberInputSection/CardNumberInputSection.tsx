@@ -8,15 +8,21 @@ const CardNumberInputSection = ({
   onChange,
   inputValues,
   fieldConfig,
+  serverError,
 }: {
   onChange: (value: string[]) => void;
   inputValues: string[];
   fieldConfig: number[];
+  serverError?: string;
 }) => {
   const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(
     validateCardNumber,
     inputValues,
   );
+  const displayError = errorMessage || serverError;
+  const hasError = Boolean(displayError);
+  const hasServerError = Boolean(serverError);
+
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleChange = (index: number, value: string) => {
@@ -37,28 +43,32 @@ const CardNumberInputSection = ({
       title="결제할 카드 번호를 입력해 주세요"
       message="본인 명의의 카드만 결제 가능합니다."
       tag="카드 번호"
-      errorMessage={errorMessage}
+      errorMessage={displayError}
     >
-      {fieldConfig.map((maxLen, i) => (
-        <input
-          key={i}
-          inputMode="numeric"
-          ref={(el) => {
-            inputRefs.current[i] = el;
-          }}
-          maxLength={maxLen}
-          value={inputValues[i] ?? ""}
-          onChange={(e) => handleChange(i, e.target.value)}
-          onBlur={handleBlur}
-          css={[
-            baseInputStyle,
-            css`
-              border: 1.01px solid ${errorIndex === i ? "#ff3d3d" : "#ACACAC"};
-            `,
-          ]}
-          placeholder={"1234"}
-        />
-      ))}
+      {fieldConfig.map((maxLen, i) => {
+        const shouldHighlight = hasError && (hasServerError || errorIndex < 0 || errorIndex === i);
+
+        return (
+          <input
+            key={i}
+            inputMode="numeric"
+            ref={(el) => {
+              inputRefs.current[i] = el;
+            }}
+            maxLength={maxLen}
+            value={inputValues[i] ?? ""}
+            onChange={(e) => handleChange(i, e.target.value)}
+            onBlur={handleBlur}
+            css={[
+              baseInputStyle,
+              css`
+                border: 1.01px solid ${shouldHighlight ? "#ff3d3d" : "#ACACAC"};
+              `,
+            ]}
+            placeholder={"1234"}
+          />
+        );
+      })}
     </InputSectionLayout>
   );
 };
