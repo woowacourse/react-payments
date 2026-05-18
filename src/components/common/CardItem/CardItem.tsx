@@ -2,14 +2,13 @@ import CARD from "@constants/card";
 import styled from "@emotion/styled";
 import { COLOR_PALETTE } from "@styles/colorPalette";
 
-type CardCompanyValue = (typeof CARD.COMPANY_SELECT_FIELD)[number]["value"];
+type CardCompany = (typeof CARD.COMPANY_SELECT_FIELD)[number];
+type CardCompanyValue = CardCompany["value"];
 
-const findCompanyByIssuerCode = (
-  issuerCode: string,
-): CardCompanyValue | null => {
+const findCompanyByIssuerCode = (issuerCode: string): CardCompany | null => {
   return (
-    CARD.COMPANY_SELECT_FIELD.find((item) => item.issuerCode === issuerCode)
-      ?.value ?? null
+    CARD.COMPANY_SELECT_FIELD.find((item) => item.issuerCode === issuerCode) ??
+    null
   );
 };
 
@@ -19,15 +18,25 @@ interface CardItemProps {
   expirationDate: string;
 }
 
+const formatCardNumberIntoGroups = (cardNumber: string) =>
+  cardNumber.match(/.{1,4}/g) ?? [];
+
 const CardItem = ({ issuerCode, number, expirationDate }: CardItemProps) => {
+  const company = findCompanyByIssuerCode(issuerCode);
+
   return (
     <Wrapper>
-      <CardItemMiniCard company={findCompanyByIssuerCode(issuerCode)} />
+      <CardItemMiniCard company={company?.value ?? null} />
       <CardItemInfo>
-        <CardItemInfoIssuerTitle>{issuerCode}</CardItemInfoIssuerTitle>
-        <CardItemInfoText>{number}</CardItemInfoText>
+        <CardItemInfoIssuerTitle>{company?.label}</CardItemInfoIssuerTitle>
+        <CardItemInfoNumber>
+          {formatCardNumberIntoGroups(number).map((group, index) => (
+            <span key={index}>{group}</span>
+          ))}
+        </CardItemInfoNumber>
         <CardItemInfoText>{expirationDate}</CardItemInfoText>
       </CardItemInfo>
+      <CardItemDeleteButton>x</CardItemDeleteButton>
     </Wrapper>
   );
 };
@@ -56,6 +65,7 @@ const CardItemInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  flex: 1;
 `;
 
 const CardItemInfoIssuerTitle = styled.p`
@@ -70,6 +80,20 @@ const CardItemInfoText = styled.p`
   font-size: 11px;
   color: ${COLOR_PALETTE["BLACK-600"]};
   margin: 0;
+`;
+
+const CardItemInfoNumber = styled(CardItemInfoText.withComponent("div"))`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const CardItemDeleteButton = styled.button`
+  background: none;
+  border: none;
+  color: ${COLOR_PALETTE["BLACK-600"]};
+  font-weight: 400;
+  font-size: 22px;
+  cursor: pointer;
 `;
 
 export default CardItem;
