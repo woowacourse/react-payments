@@ -1,4 +1,13 @@
-import { Container, Description, Error, Header, InputGroup, InputSection, Label, Title } from "./CommonSection.styles";
+import {
+  Container,
+  Description,
+  Error,
+  Header,
+  InputGroup,
+  InputSection,
+  Label,
+  Title,
+} from './CommonSection.styles';
 
 interface Props {
   title: string;
@@ -15,7 +24,7 @@ export default function CommonSection({
   label,
   children,
   errorMessage,
-  htmlFor
+  htmlFor,
 }: Props) {
   return (
     <Container>

@@ -10,7 +10,7 @@ export const CardListPageLayout = styled.div`
 export const Title = styled.p`
   font-size: 18px;
   font-weight: 700;
-  color: #353C49;
+  color: #353c49;
 `;
 
 export const EmptyListContainer = styled.div`
@@ -25,20 +25,20 @@ export const EmptyCardIcon = styled.div`
   width: 160px;
   height: 100px;
   border-radius: 5px;
-  border: 1px dashed #D9D9D9;
+  border: 1px dashed #d9d9d9;
   margin-top: 100px;
 `;
 
 export const EmptyTitle = styled.p`
   font-size: 20px;
   font-weight: 700;
-  color: #353C49;
-`
+  color: #353c49;
+`;
 
 export const EmptySubTitle = styled.p`
   font-size: 12px;
   font-weight: 400;
-  color: #8C8C8C;
+  color: #8c8c8c;
 `;
 
 export const CardAddButton = styled.button`
@@ -46,7 +46,7 @@ export const CardAddButton = styled.button`
   height: 44px;
   border-radius: 5px;
   background-color: #333333;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;

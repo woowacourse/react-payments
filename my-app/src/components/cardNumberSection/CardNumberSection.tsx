@@ -2,7 +2,11 @@ import { useId } from 'react';
 import CommonSection from '../common/commonSection/CommonSection';
 import NumberInput from '../common/numberInput/NumberInput';
 import { useCardNumber } from './useCardNumber';
-import { getCardBrand, getCardNumberArrayByBrand, getNumberPlaceholder } from '../../utils/Validation';
+import {
+  getCardBrand,
+  getCardNumberArrayByBrand,
+  getNumberPlaceholder,
+} from '../../utils/Validation';
 
 interface Props {
   value: string[];
@@ -12,7 +16,8 @@ interface Props {
 
 const CardNumberSection = ({ value, setValue, serverError }: Props) => {
   const cardNumberIds = useId();
-  const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } = useCardNumber({value, setValue});
+  const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } =
+    useCardNumber({ value, setValue });
   const currentBrand = getCardBrand(value.join(''));
   const format = getCardNumberArrayByBrand(currentBrand);
 
@@ -28,7 +33,9 @@ const CardNumberSection = ({ value, setValue, serverError }: Props) => {
         <NumberInput
           key={`${cardNumberIds}-${index}`}
           id={`${cardNumberIds}-${index}`}
-          ref={(el) => {inputRefs.current[index] = el;}}
+          ref={(el) => {
+            inputRefs.current[index] = el;
+          }}
           value={value[index] || ''}
           onChange={(v) => handleOnChange(v, index)}
           onBlur={(v) => handleOnBlur(v, index)}

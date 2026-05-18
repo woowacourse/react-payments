@@ -11,7 +11,10 @@ interface Props {
 
 const CvcSection = ({ value, setValue, serverError }: Props) => {
   const cvcInputId = useId();
-  const { error, handleOnChange, handleOnBlur, finalErrorMessage } = useCvc({value, setValue});
+  const { error, handleOnChange, handleOnBlur, finalErrorMessage } = useCvc({
+    value,
+    setValue,
+  });
 
   return (
     <CommonSection

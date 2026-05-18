@@ -1,4 +1,3 @@
-// src/pages/CardListPage/components/CardListLoading.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import CardListLoading from './CardListLoading';
 

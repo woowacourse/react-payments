@@ -1,12 +1,12 @@
-import { useState } from "react";
-import type { CardCompany } from "../../components/cardCompanySection/CardCompanyConstants";
+import { useState } from 'react';
+import type { CardCompany } from '../../components/cardCompanySection/CardCompanyConstants';
 
 export interface FormState {
-   cardNumber: string[],
-   cardCompany: CardCompany | '',
-   expirationDate: { month: string, year: string },
-   cvc: string,
-   password: string,
+  cardNumber: string[];
+  cardCompany: CardCompany | '';
+  expirationDate: { month: string; year: string };
+  cvc: string;
+  password: string;
 }
 
 export const useCardFormState = () => {
@@ -18,6 +18,12 @@ export const useCardFormState = () => {
 
   return {
     formState: { cardNumber, cardCompany, expirationDate, cvc, password },
-    setters: { setCardNumber, setCardCompany, setExpirationDate, setCvc, setPassword },
+    setters: {
+      setCardNumber,
+      setCardCompany,
+      setExpirationDate,
+      setCvc,
+      setPassword,
+    },
   };
 };

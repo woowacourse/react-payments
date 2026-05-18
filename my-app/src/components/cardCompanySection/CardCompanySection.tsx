@@ -4,7 +4,12 @@ import { useCardCompany } from './useCardCompany';
 import CommonSection from '../common/commonSection/CommonSection';
 import ChevronDown from '../../assets/ChevronDownIcon.svg';
 import ChevronUp from '../../assets/ChevronUpIcon.svg';
-import { DropdownButton, DropdownContainer, DropdownItem, DropdownList } from './CardCompanySection.styles';
+import {
+  DropdownButton,
+  DropdownContainer,
+  DropdownItem,
+  DropdownList,
+} from './CardCompanySection.styles';
 
 interface Props {
   value: CardCompany | '';
@@ -14,7 +19,8 @@ interface Props {
 const CardCompanySection = ({ value, setValue }: Props) => {
   const cardCompanySelectId = useId();
   const dropdownListId = useId();
-  const { isOpen, toggleDropdown, handleChooseCompany, handleKeyDown } = useCardCompany({ setValue });
+  const { isOpen, toggleDropdown, handleChooseCompany, handleKeyDown } =
+    useCardCompany({ setValue });
 
   return (
     <CommonSection
@@ -25,7 +31,14 @@ const CardCompanySection = ({ value, setValue }: Props) => {
       htmlFor={cardCompanySelectId}
     >
       <DropdownContainer>
-        <DropdownButton id={cardCompanySelectId} onClick={toggleDropdown} type="button" aria-haspopup="listbox" aria-expanded={isOpen} aria-controls={isOpen ? dropdownListId : undefined}>
+        <DropdownButton
+          id={cardCompanySelectId}
+          onClick={toggleDropdown}
+          type="button"
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          aria-controls={isOpen ? dropdownListId : undefined}
+        >
           <span style={{ color: value ? '#000000' : '#ACACAC' }}>
             {value || '카드사를 선택해주세요'}
           </span>
@@ -42,7 +55,14 @@ const CardCompanySection = ({ value, setValue }: Props) => {
         {isOpen && (
           <DropdownList id={dropdownListId} role="listbox">
             {CARD_COMPANIES.map((company) => (
-              <DropdownItem key={company} role="option" tabIndex={0} aria-selected={value === company} onClick={() => handleChooseCompany(company)} onKeyDown={(e) => handleKeyDown(e, company)}>
+              <DropdownItem
+                key={company}
+                role="option"
+                tabIndex={0}
+                aria-selected={value === company}
+                onClick={() => handleChooseCompany(company)}
+                onKeyDown={(e) => handleKeyDown(e, company)}
+              >
                 {company}
               </DropdownItem>
             ))}

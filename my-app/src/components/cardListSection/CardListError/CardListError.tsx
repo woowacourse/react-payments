@@ -1,5 +1,13 @@
 import ErrorIcon from '../../../assets/ErrorIcon.svg';
-import { CardListPageLayout, ErrorContentContainer, ErrorIconContainer, ErrorSubTitle, ErrorTitle, RetryButton, Title } from './CardListError.styles';
+import {
+  CardListPageLayout,
+  ErrorContentContainer,
+  ErrorIconContainer,
+  ErrorSubTitle,
+  ErrorTitle,
+  RetryButton,
+  Title,
+} from './CardListError.styles';
 
 interface Props {
   onClick: () => void;

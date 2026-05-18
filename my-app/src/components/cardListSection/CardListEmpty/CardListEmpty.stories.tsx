@@ -1,4 +1,3 @@
-// src/pages/CardListPage/components/CardListEmpty.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import CardListEmpty from './CardListEmpty';
 

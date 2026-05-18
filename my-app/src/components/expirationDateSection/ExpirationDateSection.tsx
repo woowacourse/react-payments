@@ -14,7 +14,8 @@ interface Props {
 
 const ExpirationDateSection = ({ value, setValue, serverError }: Props) => {
   const expirationDateIds = useId();
-  const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } = useExpirationDate({value, setValue});
+  const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } =
+    useExpirationDate({ value, setValue });
 
   return (
     <CommonSection
@@ -32,7 +33,9 @@ const ExpirationDateSection = ({ value, setValue, serverError }: Props) => {
         placeholder="MM"
         isError={errors[0]}
         maxLength={2}
-        ref={(el) => {inputRefs.current[0] = el;}}
+        ref={(el) => {
+          inputRefs.current[0] = el;
+        }}
       />
       <NumberInput
         id={`${expirationDateIds}-year`}
@@ -42,10 +45,12 @@ const ExpirationDateSection = ({ value, setValue, serverError }: Props) => {
         placeholder="YY"
         isError={errors[1]}
         maxLength={2}
-        ref={(el) => {inputRefs.current[1] = el;}}
+        ref={(el) => {
+          inputRefs.current[1] = el;
+        }}
       />
     </CommonSection>
   );
-}
+};
 
 export default ExpirationDateSection;

@@ -12,7 +12,10 @@ import { useCardSubmit } from './useCardSubmit';
 const CardAddPage = () => {
   const { formState, setters } = useCardFormState();
   const { isFormValid, canShowSteps } = useCardFormValidation(formState);
-  const { handleSubmit, status, serverError } = useCardSubmit(formState, isFormValid);
+  const { handleSubmit, status, serverError } = useCardSubmit(
+    formState,
+    isFormValid,
+  );
 
   return (
     <>
@@ -23,22 +26,52 @@ const CardAddPage = () => {
       />
       <FormLayout onSubmit={handleSubmit}>
         {canShowSteps.canShowPassword && (
-          <PasswordSection value={formState.password} setValue={setters.setPassword}/>
+          <PasswordSection
+            value={formState.password}
+            setValue={setters.setPassword}
+          />
         )}
-        {canShowSteps.canShowCvc && <CvcSection value={formState.cvc} setValue={setters.setCvc} serverError={serverError?.code === 'INVALID_CVC' ? serverError.message : ''} />}
+        {canShowSteps.canShowCvc && (
+          <CvcSection
+            value={formState.cvc}
+            setValue={setters.setCvc}
+            serverError={
+              serverError?.code === 'INVALID_CVC' ? serverError.message : ''
+            }
+          />
+        )}
         {canShowSteps.canShowExpirationDate && (
           <ExpirationDateSection
             value={formState.expirationDate}
             setValue={setters.setExpirationDate}
-            serverError={serverError?.code === 'INVALID_EXPIRATION_DATE' ? serverError.message : ''}
+            serverError={
+              serverError?.code === 'INVALID_EXPIRATION_DATE'
+                ? serverError.message
+                : ''
+            }
           />
         )}
         {canShowSteps.canShowCompany && (
-          <CardCompanySection value={formState.cardCompany} setValue={setters.setCardCompany} />
+          <CardCompanySection
+            value={formState.cardCompany}
+            setValue={setters.setCardCompany}
+          />
         )}
-        <CardNumberSection value={formState.cardNumber} setValue={setters.setCardNumber} serverError={serverError?.code === 'INVALID_CARD_NUMBER' ? serverError.message : ''}/>
+        <CardNumberSection
+          value={formState.cardNumber}
+          setValue={setters.setCardNumber}
+          serverError={
+            serverError?.code === 'INVALID_CARD_NUMBER'
+              ? serverError.message
+              : ''
+          }
+        />
 
-        {isFormValid && <SubmitButton type="submit" disabled={ status==='loading' }>확인</SubmitButton>}
+        {isFormValid && (
+          <SubmitButton type="submit" disabled={status === 'loading'}>
+            확인
+          </SubmitButton>
+        )}
       </FormLayout>
     </>
   );

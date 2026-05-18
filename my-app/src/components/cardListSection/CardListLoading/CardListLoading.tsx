@@ -1,4 +1,15 @@
-import { CardCompanySkeleton, CardDeleteSkeleton, CardInfoSkeleton, CardListPageLayout, CardNumberSkeleton, CardPreviewSkeleton, ExpirationDateSkeleton, ItemSkeleton, LoadingContainer, Title } from "./CardListLoading.styles";
+import {
+  CardCompanySkeleton,
+  CardDeleteSkeleton,
+  CardInfoSkeleton,
+  CardListPageLayout,
+  CardNumberSkeleton,
+  CardPreviewSkeleton,
+  ExpirationDateSkeleton,
+  ItemSkeleton,
+  LoadingContainer,
+  Title,
+} from './CardListLoading.styles';
 
 const CardItemSkeleton = () => {
   return (

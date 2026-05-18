@@ -30,7 +30,9 @@ export const useErrorTouched = <T>({
 
   return {
     errors: showErrors,
-    finalErrorMessage: showErrors.some((error) => error) ? errorMessageGenerator(value) : "",
+    finalErrorMessage: showErrors.some((error) => error)
+      ? errorMessageGenerator(value)
+      : '',
     markingTouched,
   };
 };

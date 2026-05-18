@@ -24,7 +24,7 @@ export const Visa: Story = {
   },
 };
 
-// 빈 카드 상태 
+// 빈 카드 상태
 export const Empty: Story = {
   args: {
     cardNumber: ['', '', '', ''],

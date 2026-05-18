@@ -6,7 +6,7 @@ interface Props {
   index: number;
 }
 
- const EachCardNumber = ({cardNumber, index}: Props) => {
+const EachCardNumber = ({ cardNumber, index }: Props) => {
   if (index >= 2) {
     return (
       <MaskingGroup>
@@ -24,6 +24,6 @@ interface Props {
       ))}
     </NumberGroup>
   );
-}
+};
 
-export default EachCardNumber
+export default EachCardNumber;

@@ -10,7 +10,7 @@ export const CardListPageLayout = styled.div`
 export const Title = styled.p`
   font-size: 18px;
   font-weight: 700;
-  color: #353C49;
+  color: #353c49;
 `;
 
 export const ErrorContentContainer = styled.div`
@@ -36,13 +36,13 @@ export const ErrorIconContainer = styled.div`
 export const ErrorTitle = styled.p`
   font-size: 20px;
   font-weight: 700;
-  color: #353C49;
+  color: #353c49;
 `;
 
 export const ErrorSubTitle = styled.p`
   font-size: 12px;
   font-weight: 400;
-  color: #8C8C8C;
+  color: #8c8c8c;
 `;
 
 export const RetryButton = styled.button`
@@ -51,7 +51,7 @@ export const RetryButton = styled.button`
   border: none;
   border-radius: 5px;
   background-color: #333333;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;

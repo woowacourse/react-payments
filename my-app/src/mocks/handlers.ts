@@ -89,7 +89,7 @@ export const handlers = [
     if (targetIndex !== -1) {
       cards.splice(targetIndex, 1);
     }
-    
+
     return new HttpResponse(null, { status: 204 });
   }),
 ];

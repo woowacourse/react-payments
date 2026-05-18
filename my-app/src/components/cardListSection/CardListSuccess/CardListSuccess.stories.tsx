@@ -1,4 +1,3 @@
-// src/pages/CardListPage/components/CardListSuccess.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import CardListSuccess from './CardListSuccess';
 
@@ -15,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 const mockCards = [
   {
     id: 'uuid-1',
-    issuerCode: '41', 
+    issuerCode: '41',
     number: '123456******7890', // 16자리
     expirationDate: '12/25',
   },
@@ -37,6 +36,7 @@ export const Default: Story = {
   args: {
     cards: mockCards,
     onClick: () => console.log('+ 카드 추가 버튼 클릭됨! (페이지 이동)'),
-    onDelete: (id: string) => console.log(`[삭제 액션] 카드 ID: ${id} 삭제 버튼 클릭됨!`),
+    onDelete: (id: string) =>
+      console.log(`[삭제 액션] 카드 ID: ${id} 삭제 버튼 클릭됨!`),
   },
 };
