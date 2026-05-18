@@ -19,5 +19,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/unit-tests"]
+  "include": ["src/**/unit-tests", "src/test-setup.ts"]
 }
