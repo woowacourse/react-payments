@@ -159,6 +159,19 @@ const RetryButton = styled.button`
   cursor: pointer;
 `;
 
+const AddCardButton = styled.button`
+  width: 100%;
+  height: 40px;
+  background-color: transparent;
+  border: 1px dashed #d9d9d9;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8c8c8c;
+  cursor: pointer;
+`;
+
 function CardDashboardPage() {
   const navigate = useNavigate();
   const [cards, setCards] = useState<Card[] | null | undefined>(undefined);
@@ -201,24 +214,29 @@ function CardDashboardPage() {
       ) : cards.length === 0 ? (
         <EmptyCardList />
       ) : (
-        <CardList>
-          {cards.map((card) => {
-            const info = ISSUER_INFO[card.issuerCode];
-            return (
-              <CardItem key={card.id}>
-                <CardThumbnail color={info.color} />
-                <CardInfo>
-                  <CardCompanyName>{info.name}</CardCompanyName>
-                  <CardNumber>{formatCardNumber(card.number)}</CardNumber>
-                  <CardExpiry>유효기간 {card.expirationDate}</CardExpiry>
-                </CardInfo>
-                <DeleteButton onClick={() => handleDelete(card.id)}>
-                  ✕
-                </DeleteButton>
-              </CardItem>
-            );
-          })}
-        </CardList>
+        <>
+          <CardList>
+            {cards.map((card) => {
+              const info = ISSUER_INFO[card.issuerCode];
+              return (
+                <CardItem key={card.id}>
+                  <CardThumbnail color={info.color} />
+                  <CardInfo>
+                    <CardCompanyName>{info.name}</CardCompanyName>
+                    <CardNumber>{formatCardNumber(card.number)}</CardNumber>
+                    <CardExpiry>유효기간 {card.expirationDate}</CardExpiry>
+                  </CardInfo>
+                  <DeleteButton onClick={() => handleDelete(card.id)}>
+                    ✕
+                  </DeleteButton>
+                </CardItem>
+              );
+            })}
+            <AddCardButton onClick={() => navigate("/cards/register")}>
+              + 카드 추가
+            </AddCardButton>
+          </CardList>
+        </>
       )}
     </View>
   );
