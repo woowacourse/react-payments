@@ -1,14 +1,6 @@
 import { Card } from '../types/card';
 
-let cards: Card[] = [
-  {
-    id: '550e8400-e29b-41d4-a716-446655440000',
-    issuerCode: '31',
-    number: '551112******9012',
-    expirationDate: '12/28',
-    cvc: '123',
-  },
-];
+let cards: Card[] = [];
 
 export const cardDB = {
   list: (): Card[] => cards,
