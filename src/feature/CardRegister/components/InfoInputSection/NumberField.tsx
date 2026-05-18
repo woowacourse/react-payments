@@ -12,7 +12,7 @@ const NumberField = ({
   autoFocus?: boolean;
   field: NumbersFieldType;
   serverFieldError?: string;
-  onClearServerFieldError: () => void;
+  onClearServerFieldError?: () => void;
 }) => {
   return (
     <StyledField>
@@ -30,7 +30,7 @@ const NumberField = ({
             strokeMode={index === field.firstErrorIndex ? 'error' : 'default'}
             onChange={(e) => {
               field.handleNumbersChange(index, e.target.value);
-              onClearServerFieldError();
+              onClearServerFieldError?.();
             }}
             onBlur={() => field.handleNumbersBlur(index)}
             onKeyDown={(event) => field.handleKeyDown(index, event)}

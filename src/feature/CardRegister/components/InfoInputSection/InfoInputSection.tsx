@@ -16,14 +16,14 @@ const InfoInputSection = ({
   currentStep,
   hasFormError,
   clearServerFieldError,
-  serverFieldErrors,
+  serverFieldErrors = {},
   onRegisterComplete,
 }: {
   fields: CardFormFieldsType;
   cardFormInfo: CardFormInfoType;
   currentStep: number;
   hasFormError: boolean;
-  clearServerFieldError: (fieldName: string) => void;
+  clearServerFieldError: (fieldName: keyof ServerFieldErrors) => void;
   serverFieldErrors?: ServerFieldErrors;
   onRegisterComplete: (cardFormInfo: CardFormInfoType) => void;
 }) => {

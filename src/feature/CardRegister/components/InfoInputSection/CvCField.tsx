@@ -12,7 +12,7 @@ const CvcField = ({
   autoFocus?: boolean;
   field: CvcFieldType;
   serverFieldError?: string;
-  onClearServerFieldError: () => void;
+  onClearServerFieldError?: () => void;
 }) => {
   return (
     <StyledField>
@@ -27,7 +27,7 @@ const CvcField = ({
           strokeMode={field.hasError ? 'error' : 'default'}
           onChange={(e) => {
             field.handleChange(e.target.value);
-            onClearServerFieldError();
+            onClearServerFieldError?.();
           }}
           onBlur={() => field.handleBlur()}
         />
