@@ -1,3 +1,4 @@
+import { deleteCard } from "@/api/cards";
 import CardListEmpty from "@/components/CardList/CardListEmpty";
 import CardListError from "@/components/CardList/CardListError";
 import CardListLoading from "@/components/CardList/CardListLoading";
@@ -14,13 +15,26 @@ const CardListPage = () => {
   const { cards, status, fetchCards } = useCardList();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetchCards();
+  }, [fetchCards]);
+
   const handleAddCard = () => {
     navigate(ROUTE_PATH.CARD_REGISTER);
   };
 
-  useEffect(() => {
-    fetchCards();
-  }, [fetchCards]);
+  const handleDeleteCard = async (cardId: string) => {
+    const isConfirmed = window.confirm("카드를 삭제하시겠습니까?");
+
+    if (!isConfirmed) return;
+
+    try {
+      await deleteCard(cardId);
+      await fetchCards();
+    } catch {
+      // 삭제 실패 처리
+    }
+  };
 
   return (
     <PageLayout>
@@ -31,7 +45,11 @@ const CardListPage = () => {
           <CardListEmpty onAddCard={handleAddCard} />
         )}
         {status === "success" && cards.length > 0 && (
-          <CardListSuccess cards={cards} onAddCard={handleAddCard} />
+          <CardListSuccess
+            cards={cards}
+            onAddCard={handleAddCard}
+            onDeleteCard={handleDeleteCard}
+          />
         )}
         {status === "error" && <CardListError onRetry={fetchCards} />}
       </PageWrapper>

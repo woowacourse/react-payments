@@ -154,9 +154,9 @@
 
 ### 카드 삭제
 
-- [ㅌ] 카드에 삭제 버튼 UI 구현하기
-- [ ] 삭제 버튼 클릭 시 `window.confirm()`으로 확인받기
-- [ ] 삭제 확인 시 `DELETE /cards/:id`로 요청하기
+- [x] 카드에 삭제 버튼 UI 구현하기
+- [x] 삭제 버튼 클릭 시 `window.confirm()`으로 확인받기
+- [x] 삭제 확인 시 `DELETE /cards/:id`로 요청하기
 
 ### MSW
 

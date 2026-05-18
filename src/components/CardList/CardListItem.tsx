@@ -2,25 +2,35 @@ import type { CardListItem as CardListItemType } from "@/api/cards";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
+import deleteIcon from "@/assets/deleteIcon.svg";
 
 interface CardListItemProps {
   card: CardListItemType;
+  onDelete: (cardId: string) => void;
 }
 
-const CardListItem = ({ card }: CardListItemProps) => {
+const CardListItem = ({ card, onDelete }: CardListItemProps) => {
   const cardCompany = CARD_COMPANIES.find(
     (company) => company.issuerCode === card.issuerCode,
   );
 
   return (
     <Item>
-      <CardImage $backgroundColor={cardCompany?.color} />
+      <CardContent>
+        <CardImage $backgroundColor={cardCompany?.color} />
 
-      <CardInfo>
-        <CardCompany>{cardCompany?.name}</CardCompany>
-        <CardNumber>{card.number}</CardNumber>
-        <CardExpirationDate>유효기간 {card.expirationDate}</CardExpirationDate>
-      </CardInfo>
+        <CardInfo>
+          <CardCompany>{cardCompany?.name}</CardCompany>
+          <CardNumber>{card.number}</CardNumber>
+          <CardExpirationDate>
+            유효기간 {card.expirationDate}
+          </CardExpirationDate>
+        </CardInfo>
+      </CardContent>
+
+      <DeleteButton onClick={() => onDelete(card.id)}>
+        <DeleteIcon src={deleteIcon} alt="" />
+      </DeleteButton>
     </Item>
   );
 };
@@ -28,11 +38,19 @@ const CardListItem = ({ card }: CardListItemProps) => {
 const Item = styled.li`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
   min-height: 4.25rem;
   padding: 0.75rem;
   border: 1px solid ${COLOR_PALETTE["GREY-200"]};
   border-radius: 0.35rem;
+`;
+
+const CardContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
 `;
 
 const CardImage = styled.div<{ $backgroundColor?: string }>`
@@ -66,6 +84,20 @@ const CardExpirationDate = styled.span`
   font-size: 0.6rem;
   font-weight: 400;
   color: ${COLOR_PALETTE["GREY-500"]};
+`;
+
+const DeleteButton = styled.button`
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+`;
+
+const DeleteIcon = styled.img`
+  width: 1rem;
+  height: 1rem;
 `;
 
 export default CardListItem;

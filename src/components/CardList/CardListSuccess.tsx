@@ -6,14 +6,23 @@ import CardListItem from "./CardListItem";
 interface CardListSuccessProps {
   cards: CardListResponse;
   onAddCard: () => void;
+  onDeleteCard: (cardId: string) => void;
 }
 
-const CardListSuccess = ({ cards, onAddCard }: CardListSuccessProps) => {
+const CardListSuccess = ({
+  cards,
+  onAddCard,
+  onDeleteCard,
+}: CardListSuccessProps) => {
   return (
     <Container>
       <List>
         {cards.map((card) => (
-          <CardListItem key={card.id} card={card} />
+          <CardListItem
+            key={card.id}
+            card={card}
+            onDelete={() => onDeleteCard(card.id)}
+          />
         ))}
       </List>
       <AddButtonWrapper>

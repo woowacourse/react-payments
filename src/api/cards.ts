@@ -26,8 +26,6 @@ export const registerCard = async (card: CardRegisterRequest) => {
   if (!response.ok) {
     throw new Error("카드 등록 실패");
   }
-
-  return response.json();
 };
 
 export const getCards = async (): Promise<CardListResponse> => {
