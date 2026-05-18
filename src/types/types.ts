@@ -55,7 +55,11 @@ export interface CardBrandContextValue {
   selectedItem: { brand: string; color: string; issuerCode: string };
   options: { brand: string; color: string; issuerCode: string }[];
   toggleDropdown: () => void;
-  handleItemClick: (option: { brand: string; color: string }) => void;
+  handleItemClick: (option: {
+    brand: string;
+    color: string;
+    issuerCode: string;
+  }) => void;
 }
 
 export interface PasswordContextValue {
