@@ -49,6 +49,9 @@ export const Cards = () => {
   };
 
   const handleDeleteClick = async (id: string) => {
+    const confirm = window.confirm('정말 삭제하시겠습니까?');
+    if (!confirm) return;
+
     await deleteCards({ id });
     refetch();
   };
