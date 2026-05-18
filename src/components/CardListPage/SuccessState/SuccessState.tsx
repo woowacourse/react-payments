@@ -38,6 +38,7 @@ export function SuccessState({ cards, onDelete }: Props) {
 
   const handleDelete = (id: string) => {
     if (!window.confirm('이 카드를 삭제하시겠습니까?')) return;
+
     onDelete(id);
   };
 

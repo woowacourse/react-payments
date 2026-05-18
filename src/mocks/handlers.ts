@@ -19,11 +19,15 @@ const isBrowser =
 
 const loadCards = (): StoredCard[] => {
   if (!isBrowser) return [...DEFAULT_CARDS];
+
   const raw = window.localStorage.getItem(STORAGE_KEY);
+
   if (!raw) {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_CARDS));
+
     return [...DEFAULT_CARDS];
   }
+
   try {
     return JSON.parse(raw) as StoredCard[];
   } catch {
@@ -33,6 +37,7 @@ const loadCards = (): StoredCard[] => {
 
 const saveCards = (cards: StoredCard[]) => {
   if (!isBrowser) return;
+
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
 };
 
@@ -57,6 +62,7 @@ export const handlers = [
     const card: StoredCard = { ...body, id: String(nextId) };
     cards.push(card);
     saveCards(cards);
+
     return HttpResponse.json(card, { status: 201 });
   }),
 
@@ -64,6 +70,7 @@ export const handlers = [
     const cards = loadCards();
     const filtered = cards.filter((c) => c.id !== params.id);
     saveCards(filtered);
+
     return new HttpResponse(null, { status: 204 });
   }),
 ];

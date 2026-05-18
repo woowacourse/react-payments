@@ -22,7 +22,9 @@ export default function CvcField({ field, serverError }: Props) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
+
     if (!isNumericInput(newValue)) return;
+
     setCvc(newValue);
   };
 

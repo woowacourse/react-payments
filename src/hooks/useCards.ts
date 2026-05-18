@@ -10,12 +10,14 @@ export function useCards() {
 
   const loadCards = async (signal?: AbortSignal) => {
     setState('loading');
+
     try {
       const data = await fetchCards(signal);
       setCards(data);
       setState('success');
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
+
       setState('error');
     }
   };

@@ -11,6 +11,7 @@ export function CardListPage() {
   useEffect(() => {
     const controller = new AbortController();
     loadCards(controller.signal);
+
     return () => {
       controller.abort();
     };

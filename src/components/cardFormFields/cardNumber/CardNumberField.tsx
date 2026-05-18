@@ -34,9 +34,12 @@ export default function CardNumberField({ field, serverError }: Props) {
     length: number,
   ) => {
     const newValue = e.target.value;
+
     if (!isNumericInput(newValue)) return;
+
     const updated = reshapeCardNumber(cardNumber, index, newValue);
     setCardNumber(updated);
+
     if (newValue.length === length && index + 1 < updated.length) {
       focusNext(index);
     }

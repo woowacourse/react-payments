@@ -24,6 +24,7 @@ function detectCardNetworkMatch(
       }
     }
   }
+
   return null;
 }
 
@@ -51,7 +52,9 @@ export function reshapeCardNumber(
     const match = detectCardNetworkMatch(joined);
     const result = Array(newSegments.length).fill('');
     result[0] = match ? joined.slice(0, match.matchedLength) : updated[0];
+
     return result;
   }
+
   return updated;
 }

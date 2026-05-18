@@ -28,10 +28,13 @@ export default function ExpireDateField({ field, serverError }: Props) {
     index: number,
   ) => {
     const newValue = e.target.value;
+
     if (!isNumericInput(newValue)) return;
+
     const updated = [...expireDate];
     updated[index] = newValue;
     setExpireDate(updated);
+
     if (newValue.length === 2 && index === 0) focusNext(0);
   };
 

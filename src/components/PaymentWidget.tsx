@@ -19,6 +19,7 @@ export default function PaymentWidget() {
 
   const handleConfirm = async () => {
     setSubmitError(null);
+
     const body = {
       cardNumber: cardForm.cardNumber.value.join(''),
       expireDate: cardForm.expireDate.value.join('/'),
@@ -29,6 +30,7 @@ export default function PaymentWidget() {
 
     try {
       const result = await createCard(body);
+
       if (result.ok) {
         navigate('/complete', {
           state: {
@@ -38,6 +40,7 @@ export default function PaymentWidget() {
         });
         return;
       }
+
       setSubmitError(result.error);
     } catch (error) {
       console.error(error);
