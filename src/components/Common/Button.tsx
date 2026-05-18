@@ -13,7 +13,7 @@ const variants = {
   `,
 };
 
-const Button = styled.button<{ variant: keyof typeof variants }>`
+const Button = styled.button<{ variant?: keyof typeof variants }>`
   border: 0;
   font-size: 14px;
   font-weight: 700;
