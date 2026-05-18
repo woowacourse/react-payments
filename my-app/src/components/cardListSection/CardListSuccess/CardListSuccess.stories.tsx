@@ -15,20 +15,20 @@ type Story = StoryObj<typeof meta>;
 const mockCards = [
   {
     id: 'uuid-1',
-    issuerCode: '41',
-    number: '123456******7890',
+    issuerCode: '41', 
+    number: '123456******7890', // 16자리
     expirationDate: '12/25',
   },
   {
     id: 'uuid-2',
-    issuerCode: '15',
-    number: '987654******3210',
+    issuerCode: '61',
+    number: '371234*****1234', // 15자리
     expirationDate: '08/28',
   },
   {
     id: 'uuid-3',
     issuerCode: 'W1',
-    number: '550011******9999',
+    number: '361234****1234', // 14자리
     expirationDate: '01/29',
   },
 ];
