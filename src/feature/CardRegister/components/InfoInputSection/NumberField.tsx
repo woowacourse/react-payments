@@ -24,7 +24,7 @@ const NumberField = ({
             ref={field.setInputRef(index)}
             value={chunk}
             autoFocus={autoFocus && index === 0}
-            placeholder="1234"
+            placeholder={'1234'.slice(0, field.segmentLengths[index])}
             inputMode="numeric"
             maxLength={field.segmentLengths[index]}
             strokeMode={index === field.firstErrorIndex ? 'error' : 'default'}
