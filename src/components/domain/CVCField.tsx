@@ -17,6 +17,7 @@ interface CVCFieldProps {
   onValid: (value: CardInfo['cvc']) => void;
   validationRules: BaseValidationRule[];
   ref?: React.Ref<HTMLInputElement>;
+  serverError?: string;
 }
 
 export default function CVCField({
@@ -27,6 +28,7 @@ export default function CVCField({
   onValid,
   validationRules,
   ref,
+  serverError,
 }: CVCFieldProps) {
   const errorStatus = errorStatuses[0];
 
@@ -47,7 +49,7 @@ export default function CVCField({
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: 'CVC 번호를 입력해 주세요',
     caption: '',
-    errorMessage: errorStatus ? ERROR_MESSAGES[errorStatus] : '',
+    errorMessage: serverError ?? (errorStatus ? ERROR_MESSAGES[errorStatus] : ''),
   };
 
   return (

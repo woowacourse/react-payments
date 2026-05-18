@@ -18,6 +18,7 @@ interface ExpirationPeriodFieldProps {
   onValid: (value: CardInfo['expirationPeriod']) => void;
   validationRules: [ExpirationValidationRule[], ExpirationValidationRule[]];
   ref?: React.Ref<HTMLInputElement>;
+  serverError?: string;
 }
 
 export default function ExpirationPeriodField({
@@ -28,6 +29,7 @@ export default function ExpirationPeriodField({
   onValid,
   validationRules,
   ref,
+  serverError,
 }: ExpirationPeriodFieldProps) {
   const { setRef, focusNext, focusPrev, focusFirst } = useInputFocus(2);
 
@@ -78,7 +80,7 @@ export default function ExpirationPeriodField({
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '카드 유효기간을 입력해 주세요',
     caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
-    errorMessage: activeError ? ERROR_MESSAGES[activeError] : '',
+    errorMessage: serverError ?? (activeError ? ERROR_MESSAGES[activeError] : ''),
   };
 
   return (

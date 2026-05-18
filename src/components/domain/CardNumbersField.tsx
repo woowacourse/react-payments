@@ -19,6 +19,7 @@ interface CardNumbersFieldProps {
   onValid: (value: CardInfo['cardNumbers']) => void;
   validationRules: BaseValidationRule[];
   ref?: React.Ref<HTMLInputElement>;
+  serverError?: string;
 }
 
 export default function CardNumbersField({
@@ -29,6 +30,7 @@ export default function CardNumbersField({
   onValid,
   validationRules,
   ref,
+  serverError,
 }: CardNumbersFieldProps) {
   const { setRef, focusNext, focusPrev, focusFirst } = useInputFocus(4);
 
@@ -77,7 +79,7 @@ export default function CardNumbersField({
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: '결제할 카드 번호를 입력해 주세요',
     caption: '본인 명의의 카드만 결제 가능합니다.',
-    errorMessage: activeError ? ERROR_MESSAGES[activeError] : '',
+    errorMessage: serverError ?? (activeError ? ERROR_MESSAGES[activeError] : ''),
   };
 
   return (
