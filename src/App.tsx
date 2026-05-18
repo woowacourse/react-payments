@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PaymentWidget from './components/PaymentWidget';
 import CompletePage from './components/completePage/CompletePage';
 import styled from '@emotion/styled';
-import { CardList } from './components/cardList/CardList';
+import { CardListPage } from './components/CardListPage/CardListPage';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/addCard" element={<PaymentWidget />} />
-          <Route path="/cards" element={<CardList />} />
+          <Route path="/cards" element={<CardListPage />} />
           <Route path="/complete" element={<CompletePage />} />
         </Routes>
       </BrowserRouter>

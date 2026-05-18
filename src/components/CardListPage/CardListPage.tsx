@@ -11,7 +11,7 @@ type Card = {
   cardPassword: string;
 };
 
-export function CardList() {
+export function CardListPage() {
   const [state, setState] = useState<State>('idle');
   const [savedCard, setSavedCard] = useState<Card[]>([]);
 

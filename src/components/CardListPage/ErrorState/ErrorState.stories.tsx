@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ErrorState } from './Error';
+import { ErrorState } from './ErrorState';
 
 const meta: Meta<typeof ErrorState> = {
-  title: 'Components/CardList/Error',
+  title: 'Components/CardListPage/ErrorState',
   component: ErrorState,
 };
 

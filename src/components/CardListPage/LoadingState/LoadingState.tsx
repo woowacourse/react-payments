@@ -7,11 +7,11 @@ import {
   List,
   Row,
   Title,
-} from './Loading.styles';
+} from './LoadingState.styles';
 
 const SKELETON_ROW_COUNT = 3;
 
-export function Loading() {
+export function LoadingState() {
   return (
     <Container>
       <Title>보유 카드</Title>

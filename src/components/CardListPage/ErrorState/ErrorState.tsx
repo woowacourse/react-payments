@@ -7,7 +7,7 @@ import {
   Heading,
   RetryButton,
   Title,
-} from './Error.styles';
+} from './ErrorState.styles';
 
 export function ErrorState() {
   const handler = () => {};
