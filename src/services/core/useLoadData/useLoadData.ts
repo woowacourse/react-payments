@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import type { Options, Result } from './useLoadDAta.types';
+import type { Options, Result } from './useLoadData.types';
 
 export const useLoadData = <T = unknown>({ queryFn }: Options): Result<T> => {
   const [status, setStatus] = useState<Result<T>>({
