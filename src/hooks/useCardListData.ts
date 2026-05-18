@@ -1,5 +1,5 @@
 import { use, useState } from 'react';
-import { CARD_COMPANY_OPTIONS } from '../constants';
+import { CARD_COMPANY_OPTIONS, ISSUER_CODE_TO_COMPANY } from '../constants';
 import { getCardListDTO, deleteCard } from '../api/cards';
 
 type CardCompany = (typeof CARD_COMPANY_OPTIONS)[number]['value'];
@@ -16,17 +16,6 @@ export type Card = {
   company: CardCompany;
   number: [string, string, string, string];
   expirationDate: [string, string];
-};
-
-const ISSUER_CODE_TO_COMPANY: Record<string, CardCompany> = {
-  '31': 'bc',
-  '41': 'shinhan',
-  '15': 'kakao',
-  '61': 'hyundai',
-  W1: 'woori',
-  '71': 'lotte',
-  '21': 'hana',
-  '11': 'kookmin',
 };
 
 const toCard = (dto: CardDTO): Card => {

@@ -1,4 +1,4 @@
-import type { BaseValidationRule, ExpirationPeriodErrorStatus } from './types';
+import type { BaseValidationRule, CardCompany, ExpirationPeriodErrorStatus } from './types';
 import { isNumber } from './utils';
 
 export const ERROR_MESSAGES: Record<Exclude<ExpirationPeriodErrorStatus, null>, string> = {
@@ -23,7 +23,22 @@ export const CARD_COMPANY_OPTIONS = [
   { label: '롯데카드', value: 'lotte' },
   { label: '하나카드', value: 'hana' },
   { label: '국민카드', value: 'kookmin' },
-] as const;
+] as const satisfies readonly { label: string; value: CardCompany | '' }[];
+
+export const ISSUER_CODE_TO_COMPANY: Record<string, CardCompany> = {
+  '31': 'bc',
+  '41': 'shinhan',
+  '15': 'kakao',
+  '61': 'hyundai',
+  W1: 'woori',
+  '71': 'lotte',
+  '21': 'hana',
+  '11': 'kookmin',
+};
+
+export const COMPANY_TO_ISSUER_CODE = Object.fromEntries(
+  Object.entries(ISSUER_CODE_TO_COMPANY).map(([k, v]) => [v, k]),
+) as Record<CardCompany, string>;
 
 export const FIELD_STEP = {
   cardNumbers: 0,

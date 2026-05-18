@@ -1,5 +1,3 @@
-import { CARD_COMPANY_OPTIONS } from './constants';
-
 export interface CardInfo {
   cardNumbers: [string, string, string, string];
   expirationPeriod: [string, string];
@@ -11,7 +9,7 @@ export interface CardInfo {
 
 export type CardBrand = 'local' | 'visa' | 'mastercard' | 'amex' | 'diners' | 'unionpay';
 
-export type CardCompany = (typeof CARD_COMPANY_OPTIONS)[number]['value'];
+export type CardCompany = 'bc' | 'shinhan' | 'kakao' | 'hyundai' | 'woori' | 'lotte' | 'hana' | 'kookmin';
 
 export type ValidationTrigger = 'onChange' | 'onBlur' | 'onComplete';
 
