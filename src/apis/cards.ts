@@ -8,7 +8,8 @@ export const registerCard = async (data: RegisterCardRequest): Promise<RegisterC
   return await http.post<RegisterCardResponse>(`/cards`, data);
 };
 
-export type CardListResponse = Omit<Card, 'cvc'>[];
+export type CardItemResponse = Omit<Card, 'cvc'>;
+export type CardListResponse = CardItemResponse[];
 
 export const getCardList = async (): Promise<CardListResponse> => {
   return await http.get<CardListResponse>(`/cards`);
