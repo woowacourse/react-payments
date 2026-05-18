@@ -7,6 +7,7 @@ const BASE_URL = "/api";
 
 const VALID_MONTH_REGEX = /^(0[1-9]|1[0-2])$/;
 const SUPPORTED_BIN_REGEX = /^(4|5[1-5]|3[47]|36|62)/;
+const INVALID_CVC_NUMBER = "000";
 
 const validateCreateCard = (body: CreateCardRequest) => {
   const [month] = body.expirationDate.split("/");
@@ -15,7 +16,7 @@ const validateCreateCard = (body: CreateCardRequest) => {
     return { code: "INVALID_EXPIRATION_DATE", message: "유효하지 않은 만료일입니다." };
   }
 
-  if (body.cvc === "000") {
+  if (body.cvc === INVALID_CVC_NUMBER) {
     return { code: "INVALID_CVC", message: "유효하지 않은 CVC입니다." };
   }
 
@@ -49,6 +50,6 @@ export const handlers = [
 
   http.delete(`${BASE_URL}/cards/:id`, ({ params }) => {
     store.remove(params.id as string);
-    return HttpResponse.json(null, { status: 204 });
+    return new HttpResponse(null, { status: 204 });
   }),
 ];
