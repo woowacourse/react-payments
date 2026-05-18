@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { useInputFocus } from '@/core/hooks/useInputFocus';
 
 export const usePaymentStep = () => {
@@ -13,25 +13,14 @@ export const usePaymentStep = () => {
     pendingFocus.current = null;
   }, [step, focusNext]);
 
-  const toStep = useCallback((focusIndex: number) => {
-    if (step > focusIndex) return;
+  const toStep = (focusIndex: number) => {
+    if (step < focusIndex) {
+      setStep(focusIndex);
+      pendingFocus.current = focusIndex;
+      return;
+    }
 
-    setStep(focusIndex);
-    pendingFocus.current = focusIndex;
-  }, [step]);
-
-  const focusStep = useCallback(
-    (focusIndex: number) => {
-      if (step < focusIndex) {
-        pendingFocus.current = focusIndex;
-        setStep(focusIndex);
-        return;
-      }
-
-      focusNext(focusIndex);
-    },
-    [focusNext, step],
-  );
-
-  return { step, toStep, focusStep, setStepRef: setInputRef };
+    focusNext(focusIndex);
+  };
+  return { step, toStep, setStepRef: setInputRef };
 };

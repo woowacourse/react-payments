@@ -48,13 +48,13 @@ export const CardForm = ({
   serverError,
   onRegister,
 }: CardFormProps) => {
-  const { step, toStep, focusStep, setStepRef } = usePaymentStep();
+  const { step, toStep, setStepRef } = usePaymentStep();
 
   useEffect(() => {
     if (serverError === null) return;
 
-    focusStep(SERVER_ERROR_STEP[serverError.field]);
-  }, [focusStep, serverError]);
+    toStep(SERVER_ERROR_STEP[serverError.field]);
+  }, [toStep, serverError]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
