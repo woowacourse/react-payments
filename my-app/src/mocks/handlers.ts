@@ -5,6 +5,8 @@ import {
   isExpirationDateCorrect,
 } from '../utils/Validation';
 
+const API_BASE = import.meta.env.BASE_URL;
+
 interface Card {
   id: string;
   issuerCode: string;
@@ -12,8 +14,16 @@ interface Card {
   expirationDate: string;
 }
 
-const API_BASE = import.meta.env.BASE_URL;
-const cards: Card[] = [];
+const STORAGE_KEY = 'mock-cards-DB';
+
+const getCards = (): Card[] => {
+  const storedData = localStorage.getItem(STORAGE_KEY);
+  return storedData ? JSON.parse(storedData) : [];
+}
+
+const saveCards = (cards: Card[]) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
+}
 
 export const handlers = [
   http.post(`${API_BASE}cards`, async ({ request }) => {
@@ -60,13 +70,17 @@ export const handlers = [
       expirationDate,
     };
 
+    const cards = getCards();
     cards.push(newCard);
+    saveCards(cards);
 
     return HttpResponse.json({ id: newCard.id }, { status: 201 });
   }),
 
   http.get(`${API_BASE}cards`, async () => {
     await delay(1000);
+
+    const cards = getCards();
 
     const maskingCards = cards.map((card) => {
       const prefix = card.number.slice(0, 6);
@@ -85,10 +99,12 @@ export const handlers = [
 
   http.delete(`${API_BASE}cards/:id`, ({ params }) => {
     const id = params.id;
+    const cards = getCards();
     const targetIndex = cards.findIndex((card) => card.id === id);
 
     if (targetIndex !== -1) {
       cards.splice(targetIndex, 1);
+      saveCards(cards);
     }
 
     return new HttpResponse(null, { status: 204 });
