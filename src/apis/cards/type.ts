@@ -1,6 +1,8 @@
+import type { CardCompany } from '../../types.ts';
+
 export interface CardDto {
   id: string;
-  cardCompany: string;
+  cardCompany: CardCompany;
   cardNumbers: string[];
   expirationPeriod: string[];
   cvc: string;

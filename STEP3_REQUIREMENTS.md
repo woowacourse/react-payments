@@ -50,7 +50,7 @@ DELETE /cards/:id 카드 삭제 204
 
 4. 세부 구현
 
-- [ ] 카드 삭제 시 리스트 리렌더
+- [x] 카드 삭제 시 리스트 리렌더
 - [ ] post 후 해당 error field로 포커싱
 - [ ] CardCompanies 기반으로 CardCompany 타입 수정
 - [ ] issuer code vs company name 관련 결정 및 수정

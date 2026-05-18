@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { CardBrand, CardCompany, CardInfo } from '../../types';
 import { CARD_COMPANIES } from '../../constants.ts';
+import { getIssuerCodeFromCardCompany } from '../../utils.ts';
 
 interface CardProps {
   cardNumber: CardInfo['cardNumbers'];
@@ -53,7 +54,8 @@ const cardStyle = css`
   padding: 8px 12px;
 `;
 
-const cardColor = (issuerCode: string) => {
+const cardColor = (cardCompany: CardCompany) => {
+  const issuerCode = getIssuerCodeFromCardCompany(cardCompany);
   return css`
     color: ${CARD_COMPANIES[issuerCode]?.color ?? 'var(--color-text-card)'};
     background-color: ${CARD_COMPANIES[issuerCode]?.backgroundColor ?? 'var(--color-background-card)'};

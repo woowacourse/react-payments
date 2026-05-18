@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import type { CardCompany, CardInfo, ErrorStatus } from '../../types.ts';
 import { CARD_COMPANIES } from '../../constants.ts';
 
-const options = Object.entries(CARD_COMPANIES).map(([issuerCode, { kr }]) => ({ label: issuerCode, value: kr }));
+const options = Object.values(CARD_COMPANIES).map(({ kr }) => kr);
 const placeholder = '카드사를 선택해주세요';
 
 interface CardCompanyFieldProps {
@@ -42,8 +42,8 @@ export default function CardCompanyField({ value, setFieldValue, onCompleted }: 
           {value ?? placeholder}
         </option>
         {options.map((option) => (
-          <option key={option.label} value={option.label} css={optionStyle}>
-            {option.value}
+          <option key={option} css={optionStyle}>
+            {option}
           </option>
         ))}
       </select>

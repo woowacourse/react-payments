@@ -1,7 +1,7 @@
 import { paymentsFetcher } from '../utils/paymentsFetcher.ts';
 import type { SGetCardsResponse } from '../../mocks/handlers/cards/get.ts';
 import type { CreateCardRequest, CreateCardResponse, GetCardsResponse } from './type.ts';
-import { chunkString } from '../../utils.ts';
+import { chunkString, getCardCompanyFromIssuerCode, getIssuerCodeFromCardCompany } from '../../utils.ts';
 import type { SCreateCardRequest, SCreateCardResponse } from '../../mocks/handlers/cards/post.ts';
 
 // 카드 목록 조회
@@ -11,7 +11,7 @@ export const getCards = async () => {
   const clientResponse: GetCardsResponse = response.map((card) => ({
     id: card.id,
     cardNumbers: chunkString(card.number, 4),
-    cardCompany: card.issuerCode,
+    cardCompany: getCardCompanyFromIssuerCode(card.issuerCode),
     expirationPeriod: card.expirationDate.split('/'),
   }));
 
@@ -22,7 +22,7 @@ export const getCards = async () => {
 export const createCard = async (request: CreateCardRequest) => {
   const serverRequest: SCreateCardRequest = {
     number: request.cardNumbers.join(''),
-    issuerCode: request.cardCompany,
+    issuerCode: getIssuerCodeFromCardCompany(request.cardCompany),
     expirationDate: request.expirationPeriod.join('/'),
     cvc: request.cvc,
   };
