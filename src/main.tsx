@@ -5,13 +5,11 @@ import "./styles/index.css";
 import { BrowserRouter } from "react-router-dom";
 
 async function enableMocking() {
-  if (import.meta.env.DEV) {
-    const { worker } = await import("./mocks/browser");
-    return worker.start({
-      serviceWorker: { url: "/react-payments/mockServiceWorker.js" },
-      onUnhandledRequest: "bypass",
-    });
-  }
+  const { worker } = await import("./mocks/browser");
+  return worker.start({
+    serviceWorker: { url: "/react-payments/mockServiceWorker.js" },
+    onUnhandledRequest: "bypass",
+  });
 }
 
 enableMocking().then(() => {
