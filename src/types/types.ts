@@ -47,6 +47,7 @@ export interface CvcContextValue {
   handleCvcChange: (value: string) => void;
   handleBlur: () => void;
   setCvcServerError: (message: string) => void;
+  inputRefs: React.RefObject<HTMLInputElement | null>;
 }
 
 export interface CardBrandContextValue {
