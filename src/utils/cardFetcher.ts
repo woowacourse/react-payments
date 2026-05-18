@@ -26,7 +26,7 @@ export const cardFetcher = async <ExpectedSuccessType>(endpoint: string, options
         );
         return response;
     } catch (error) {
-        if (isServerError(error)) return new CardAPiServerError(error);
+        if (isServerError(error)) throw new CardAPiServerError(error);
         throw error;
     }
 };

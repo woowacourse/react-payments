@@ -8,5 +8,5 @@ export interface CardInfo {
 }
 
 export const getMyCards = async () => {
-    return await cardFetcher<CardInfo>('/cards');
+    return await cardFetcher<CardInfo[]>('/cards');
 };

@@ -1,5 +1,5 @@
 import { cardFetcher } from '../utils/cardFetcher';
 
-export const deleteMyCard = async (id: string) => {
+export const deleteCard = async (id: string) => {
     return await cardFetcher(`/cards/:${id}`);
 };
