@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { CARD_ISSUER_CONFIG } from '../../../constants';
 import { CardItemResponse } from '../../../apis/cards';
 import deleteButton from '../../../assets/delete.svg';
+import { formatCardNumber } from '../../../utils/cards';
 
 interface Props {
   data: CardItemResponse;
@@ -19,8 +20,8 @@ export default function RegisteredCardItem({ data, onDelete }: Props) {
 
       <Content>
         <Name>{issuer.name}</Name>
-        <CardNumber>{data.number}</CardNumber>
-        <ExpirationDate>{data.expirationDate}</ExpirationDate>
+        <CardNumber>{formatCardNumber(data.number)}</CardNumber>
+        <ExpirationDate>유효기간 {data.expirationDate}</ExpirationDate>
       </Content>
 
       <DeleteButton onClick={() => onDelete(data.id)}>

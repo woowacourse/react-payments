@@ -15,3 +15,9 @@ export const detectCardBrand = (cardNumbers: CardNumbersType) => {
     CARD_BRAND['LOCAL']
   );
 };
+
+export const formatCardNumber = (number: string): string => {
+  const first = number.slice(0, 4);
+  const last = number.slice(-4);
+  return `${first} **** **** ${last}`;
+};
