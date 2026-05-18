@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import OutlinedButton from "@/components/Button/OutlinedButton";
 import CardListItem from "@/components/CardListItem/CardListItem";
-import CardListItemSkeleton from "@/components/SkeletonUI/CardListItemSkeleton";
+import CardListSkeleton from "@/components/SkeletonUI/CardListSkeleton";
 import EmptyState from "@/components/common/EmptyState";
 import { getCards, deleteCard, type CardItem } from "@/api/cards";
 
@@ -54,20 +54,7 @@ const CardList = () => {
         보유 카드 {cards.length !== 0 && `(${cards.length})`}
       </h1>
 
-      {status === "loading" && (
-        <div
-          css={css`
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-          `}
-        >
-          <CardListItemSkeleton />
-          <CardListItemSkeleton />
-          <CardListItemSkeleton />
-          <Button isActivate={false}></Button>
-        </div>
-      )}
+      {status === "loading" && <CardListSkeleton />}
       {status === "error" && (
         <>
           <EmptyState
