@@ -29,8 +29,7 @@ export default function CardListSection() {
         const response = await getCards();
         setCards(response);
         setResponseStatus('success');
-      } catch (error) {
-        console.log(error);
+      } catch {
         setResponseStatus('error');
       }
     };
