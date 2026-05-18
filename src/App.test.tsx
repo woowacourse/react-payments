@@ -4,6 +4,7 @@ import { http, HttpResponse } from "msw";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 import App from "./App";
+import { seedMockCards } from "./mocks/handlers";
 import { BASE_URL } from "./shared/constants";
 import { server } from "./test/server";
 
@@ -36,7 +37,7 @@ const fillRegisterForm = async ({ cvc }: { cvc: string }) => {
 };
 
 describe("카드 관리 통합 흐름", () => {
-  test("MSW 네트워크 경계에서 카드를 등록하고 목록 조회 후 삭제한다", async () => {
+  test("POST /cards 성공 후 GET /cards 목록 화면으로 이동한다", async () => {
     renderApp("/register");
 
     const user = await fillRegisterForm({ cvc: "123" });
@@ -48,6 +49,22 @@ describe("카드 관리 통합 흐름", () => {
       await screen.findByText("보유 카드 (1)", {}, { timeout: 5000 }),
     ).toBeInTheDocument();
     expect(screen.getByText("국민카드")).toBeInTheDocument();
+  });
+
+  test("DELETE /cards/:id 성공 후 카드가 목록에서 사라진다", async () => {
+    seedMockCards({
+      id: "card-1",
+      issuerCode: "11",
+      number: "4111111111111111",
+      expirationDate: "12/30",
+    });
+
+    renderApp("/cards");
+
+    expect(await screen.findByText("보유 카드 (1)")).toBeInTheDocument();
+    expect(screen.getByText("국민카드")).toBeInTheDocument();
+
+    const user = userEvent.setup();
 
     vi.spyOn(window, "confirm").mockReturnValue(true);
 
