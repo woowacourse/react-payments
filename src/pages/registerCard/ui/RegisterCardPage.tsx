@@ -2,7 +2,7 @@ import styles from './RegisterCardPage.module.css';
 
 import { CardForm } from '@/features/registerCard/ui/cardForm/CardForm';
 import { useState } from 'react';
-import { CardPreview } from '@/entities/card/ui/CardPreview';
+import { CardPreview } from '@/pages/registerCard/ui/cardPreview/CardPreview';
 import { SubmitButton } from './submitButton/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import { isRegisterCardErrorResponse, registerCard } from '@/entities/card/api/cards';
