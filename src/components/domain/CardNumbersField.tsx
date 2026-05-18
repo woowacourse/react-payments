@@ -39,7 +39,7 @@ export default function CardNumbersField({
   })();
 
   const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
-  const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
+  const isErrorActive = errorStatus.map((error) => error === activeErrorStatus);
 
   const onCompletedEvent = useEffectEvent(onCompleted);
 
@@ -104,7 +104,7 @@ export default function CardNumbersField({
               ref={(el) => registerInputRefs(el, index)}
               name="cardNumbers"
               autoFocus={index === 0}
-              variant={activeErrorIndex === index ? 'error' : 'default'}
+              variant={isErrorActive[index] ? 'error' : 'default'}
               value={number}
               onChange={(e) => handleChange(e, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}

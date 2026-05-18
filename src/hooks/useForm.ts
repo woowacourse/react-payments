@@ -47,9 +47,14 @@ export const useForm = <T extends object, E>(initialValues: T) => {
     setErrors((prev) => {
       const fieldError = prev[field];
 
-      if (Array.isArray(fieldError) && typeof index === 'number') {
-        const updatedFieldError = [...fieldError];
-        updatedFieldError[index] = errorStatus;
+      if (Array.isArray(fieldError)) {
+        let updatedFieldError = [...fieldError];
+
+        if (typeof index === 'number') {
+          updatedFieldError[index] = errorStatus;
+        } else {
+          updatedFieldError = updatedFieldError.map(() => errorStatus);
+        }
         return { ...prev, [field]: updatedFieldError as Errors<T, E>[K] };
       }
 

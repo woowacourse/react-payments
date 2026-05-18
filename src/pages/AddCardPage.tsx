@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import CardNumbersField from '../components/domain/CardNumbersField';
 import ExpirationPeriodField from '../components/domain/ExpirationPeriodField';
 import CVCField from '../components/domain/CVCField';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { categorizeCardBrand } from '../utils';
 import type { CardInfo, ErrorStatus, ExpirationPeriodErrorStatus, ResponseStatus } from '../types';
 import Card from '../components/ui/Card';
@@ -32,9 +32,26 @@ export default function AddCardPage() {
   >(initialValues);
 
   const [responseStatus, setResponseStatus] = useState<ResponseStatus>('idle');
+  const serverErrorFieldsRef = useRef<(keyof CardInfo)[]>([]);
   const isLoading = responseStatus === 'loading';
 
   const cardBrand = categorizeCardBrand(values.cardNumbers);
+
+  const setFieldErrorWithServerError = (
+    field: keyof CardInfo,
+    errorStatus: ErrorStatus | ExpirationPeriodErrorStatus,
+    index?: number,
+  ) => {
+    if (serverErrorFieldsRef.current.includes(field)) {
+      if (errorStatus === null) {
+        const fieldIndex = serverErrorFieldsRef.current.indexOf(field);
+        serverErrorFieldsRef.current.splice(fieldIndex, 1);
+      }
+      setFieldError(field, errorStatus);
+    } else {
+      setFieldError(field, errorStatus, index);
+    }
+  };
 
   const handleFieldComplete = (index: number) => {
     if (stepIndex === index) {
@@ -61,15 +78,19 @@ export default function AddCardPage() {
       });
     } catch (error) {
       if (error instanceof PaymentsError) {
+        setResponseStatus('error');
         const { code } = error;
 
         if (code === 'INVALID_CARD_NUMBER') {
+          serverErrorFieldsRef.current.push('cardNumbers');
           setFieldError('cardNumbers', 'invalidValue');
         }
         if (code === 'INVALID_CVC') {
+          serverErrorFieldsRef.current.push('cvc');
           setFieldError('cvc', 'invalidValue');
         }
         if (code === 'INVALID_EXPIRATION_DATE') {
+          serverErrorFieldsRef.current.push('expirationPeriod');
           setFieldError('expirationPeriod', 'invalidValue');
         }
       }
@@ -94,7 +115,7 @@ export default function AddCardPage() {
               value={values.password}
               errorStatus={errors.password as ErrorStatus}
               setFieldValue={setFieldValue}
-              setFieldError={setFieldError}
+              setFieldError={setFieldErrorWithServerError}
               onCompleted={() => handleFieldComplete(4)}
             />
           )}
@@ -104,7 +125,7 @@ export default function AddCardPage() {
               cardBrand={cardBrand}
               errorStatus={errors.cvc as ErrorStatus}
               setFieldValue={setFieldValue}
-              setFieldError={setFieldError}
+              setFieldError={setFieldErrorWithServerError}
               onCompleted={() => handleFieldComplete(3)}
             />
           )}
@@ -113,7 +134,7 @@ export default function AddCardPage() {
               value={values.expirationPeriod}
               errorStatus={errors.expirationPeriod as ExpirationPeriodErrorStatus[]}
               setFieldValue={setFieldValue}
-              setFieldError={setFieldError}
+              setFieldError={setFieldErrorWithServerError}
               onCompleted={() => handleFieldComplete(2)}
             />
           )}
@@ -131,7 +152,7 @@ export default function AddCardPage() {
               cardBrand={cardBrand}
               errorStatus={errors.cardNumbers as ErrorStatus[]}
               setFieldValue={setFieldValue}
-              setFieldError={setFieldError}
+              setFieldError={setFieldErrorWithServerError}
               onCompleted={() => handleFieldComplete(0)}
             />
           )}

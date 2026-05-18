@@ -26,7 +26,7 @@ export default function ExpirationPeriodField({
   const { registerInputRefs, moveToNext, handleKeyDown } = useInputs();
 
   const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
-  const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
+  const isErrorActive = errorStatus.map((error) => error === activeErrorStatus);
 
   const onCompletedEvent = useEffectEvent(onCompleted);
 
@@ -102,7 +102,7 @@ export default function ExpirationPeriodField({
             onChange={(e) => handleChange(e, 0)}
             onBlur={(e) => handleBlur(e, 0)}
             onKeyDown={(e) => handleKeyDown(e, 0)}
-            variant={activeErrorIndex === 0 ? 'error' : 'default'}
+            variant={isErrorActive[0] ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="MM"
@@ -115,7 +115,7 @@ export default function ExpirationPeriodField({
             onChange={(e) => handleChange(e, 1)}
             onBlur={(e) => handleBlur(e, 1)}
             onKeyDown={(e) => handleKeyDown(e, 1)}
-            variant={activeErrorIndex === 1 ? 'error' : 'default'}
+            variant={isErrorActive[1] ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="YY"
