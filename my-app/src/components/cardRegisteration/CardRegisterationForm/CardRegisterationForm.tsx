@@ -7,11 +7,11 @@ import { ROUTES } from "../../../constants/routes";
 
 import CardRegisterationPreview from "../CardRegisterationPreview/CardRegisterationPreview";
 import PrimaryButton from "../../PrimaryButton/PrimaryButton";
-import CardRegisterationIssuerSelectSection from "../CardCompanySelectSection/CardRegisterationIssuerSelectSection";
+import CardRegisterationIssuerSelectSection from "../CardRegisterationIssuerSelectSection/CardRegisterationIssuerSelectSection";
 import CardRegisterationNumberInputSection from "../CardRegisterationNumberInputSection/CardRegisterationNumberInputSection";
 import CvcRegisterationInputSection from "../CvcRegisterationInputSection/CvcRegisterationInputSection";
-import ExpiryDateRegisterationInputSection from "../ExpiryDateInputSection/ExpiryDateRegisterationInputSection";
-import PasswordRegisterationInputSection from "../PasswordInputSection/PasswordRegisterationInputSection";
+import ExpiryDateRegisterationInputSection from "../ExpiryDateRegisterationInputSection/ExpiryDateRegisterationInputSection";
+import PasswordRegisterationInputSection from "../PasswordRegisterationInputSection/PasswordRegisterationInputSection";
 
 const CardRegisterationForm = () => {
   const navigate = useNavigate();
