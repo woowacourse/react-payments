@@ -25,7 +25,10 @@ export const postCards = async ({
 
   const data = await response.json();
 
-  return data;
+  if (response.ok) {
+    return data;
+  }
+  throw data;
 };
 
 export const deleteCards = async ({ id }: DeleteCardsRequestDTO) => {
