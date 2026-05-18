@@ -36,7 +36,7 @@ export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
         },
       });
     } catch (err) {
-      console.error(err);
+      alert('카드 등록 중 서버 오류가 발생했습니다. 다시 시도해 주세요.');
     }
   };
 
