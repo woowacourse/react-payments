@@ -21,7 +21,7 @@ function matchCardNumberGroupCount(cardNumbers: string[], cardBrand: CardStatus[
   return nextCardNumbers;
 }
 
-export function useCardNumber(): [CardStatus, CardHandler] {
+export function useCardNumber(): { cardStatus: CardStatus; cardNumberHandler: CardHandler } {
   const [cardNumbers, setCardNumbers] = useState<string[]>(
     DEFAULT_CARD_NUMBER_GROUP_LENGTHS.map(() => ''),
   );
@@ -74,15 +74,15 @@ export function useCardNumber(): [CardStatus, CardHandler] {
     setCardNumberErrorMode(null);
   };
 
-  return [
-    {
-      cardNumbers: cardNumbers,
-      cardNumberErrorMode: cardNumberErrorMode,
-      cardBrand: cardBrand,
+  return {
+    cardStatus: {
+      cardNumbers,
+      cardNumberErrorMode,
+      cardBrand,
     },
-    {
-      handleCardNumbers: handleCardNumbers,
-      handleCardNumbersBlur: handleCardNumbersBlur,
+    cardNumberHandler: {
+      handleCardNumbers,
+      handleCardNumbersBlur,
     },
-  ];
+  };
 }

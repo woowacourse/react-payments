@@ -15,11 +15,11 @@ export type RegisteredCard = {
 
 export default function RegisterCard() {
   const navigate = useNavigate();
-  const [cardStatus, setCardStatus] = useCardNumber();
-  const [cardExpiry, setCardExpiry] = useExpiryDate();
-  const [cardCvc, setCardCvc] = useCardCvc();
-  const [cardPassword, setCardPassword] = useCardPassword();
-  const [cardCompanyStatus, setCardCompany] = useCardCompany();
+  const { cardStatus, cardNumberHandler } = useCardNumber();
+  const { cardExpiry, expiryHandler } = useExpiryDate();
+  const { cardCvc, cvcHandler } = useCardCvc();
+  const { cardPassword, cardPasswordHandler } = useCardPassword();
+  const { cardCompanyStatus, cardCompanyHandler } = useCardCompany();
   const isCvcComplete = cardCvc.cardCvc.length === 3 && cardCvc.cardCvcErrorMode === null;
   const isPasswordComplete =
     isCvcComplete &&
@@ -79,15 +79,15 @@ export default function RegisterCard() {
       >
         <CardInput
           cardStatus={cardStatus}
-          setCardStatus={setCardStatus}
+          setCardStatus={cardNumberHandler}
           cardExpiry={cardExpiry}
-          setCardExpiry={setCardExpiry}
+          setCardExpiry={expiryHandler}
           cardCvc={cardCvc}
-          setCardCvc={setCardCvc}
+          setCardCvc={cvcHandler}
           cardPassword={cardPassword}
-          setCardPassword={setCardPassword}
+          setCardPassword={cardPasswordHandler}
           cardCompanyStatus={cardCompanyStatus}
-          setCardCompany={setCardCompany}
+          setCardCompany={cardCompanyHandler}
           hasBottomAction={isPasswordComplete}
         />
       </div>

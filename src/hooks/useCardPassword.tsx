@@ -3,7 +3,7 @@ import type { PasswordError } from '../types/errorTypes';
 import type { CardPassword, CardPasswordHandler } from '../types/cardStausTypes';
 import { isNotNumber } from '../utils/util';
 
-export function useCardPassword(): [CardPassword, CardPasswordHandler] {
+export function useCardPassword(): { cardPassword: CardPassword; cardPasswordHandler: CardPasswordHandler } {
   const [cardPassword, setCardPassword] = useState<string>('');
   const [cardPasswordErrorMode, setCardPasswordErrorMode] = useState<PasswordError | null>(null);
 
@@ -24,14 +24,14 @@ export function useCardPassword(): [CardPassword, CardPasswordHandler] {
     setCardPasswordErrorMode(null);
   };
 
-  return [
-    {
+  return {
+    cardPassword: {
       cardPassword,
       cardPasswordErrorMode,
     },
-    {
+    cardPasswordHandler: {
       handleCardPassword,
       handlePasswordBlur,
     },
-  ];
+  };
 }

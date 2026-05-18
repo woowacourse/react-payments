@@ -3,7 +3,7 @@ import type { DateError, MonthError, YearError } from '../types/errorTypes';
 import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
 import { isNotNumber } from '../utils/util';
 
-export function useExpiryDate(): [CardExpiry, ExpireHandler] {
+export function useExpiryDate(): { cardExpiry: CardExpiry; expiryHandler: ExpireHandler } {
   const [cardExpiryDate, setCardExpiryDate] = useState<string[]>(['', '']);
   const [cardExpiryDateErrorMode, setCardExpiryDateErrorMode] = useState<
     DateError | MonthError | YearError | null
@@ -52,15 +52,15 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
     setCardExpiryDateErrorMode(null);
   };
 
-  return [
-    {
-      cardExpiryDate: cardExpiryDate,
-      cardExpiryDateErrorMode: cardExpiryDateErrorMode,
+  return {
+    cardExpiry: {
+      cardExpiryDate,
+      cardExpiryDateErrorMode,
     },
-    {
-      handleCardExpiryDate: handleCardExpiryDate,
-      handleYearBlur: handleYearBlur,
-      handleMonthBlur: handleMonthBlur,
+    expiryHandler: {
+      handleCardExpiryDate,
+      handleYearBlur,
+      handleMonthBlur,
     },
-  ];
+  };
 }

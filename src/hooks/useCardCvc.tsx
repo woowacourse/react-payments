@@ -3,7 +3,7 @@ import type { CvcError } from '../types/errorTypes';
 import type { Cvc, CvcHandler } from '../types/cardStausTypes';
 import { isNotNumber } from '../utils/util';
 
-export function useCardCvc(): [Cvc, CvcHandler] {
+export function useCardCvc(): { cardCvc: Cvc; cvcHandler: CvcHandler } {
   const [cardCvc, setCardCvc] = useState<string>('');
   const [cardCvcErrorMode, setCardCvcErrorMode] = useState<CvcError | null>(null);
 
@@ -24,14 +24,14 @@ export function useCardCvc(): [Cvc, CvcHandler] {
     setCardCvcErrorMode(null);
   };
 
-  return [
-    {
+  return {
+    cardCvc: {
       cardCvc,
       cardCvcErrorMode,
     },
-    {
+    cvcHandler: {
       handleCardCvc,
       handleCvcBlur,
     },
-  ];
+  };
 }
