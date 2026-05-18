@@ -27,7 +27,9 @@ const CardRegisterCompletePage = () => {
           <br />
           {cardCompanyName}가 등록되었어요.
         </CompleteTitle>
-        <Button onClick={() => navigate(ROUTE_PATH.CARD_LIST)}>확인</Button>
+        <Button fullWidth onClick={() => navigate(ROUTE_PATH.CARD_LIST)}>
+          확인
+        </Button>
       </PageWrapper>
     </PageLayout>
   );
@@ -39,6 +41,7 @@ const PageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 1.75rem;
 `;
 
 const CompleteCheckImage = styled.img`

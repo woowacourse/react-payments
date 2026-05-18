@@ -11,7 +11,9 @@ const CardListEmpty = ({ onAddCard }: CardListEmptyProps) => (
     <CardPlaceholder />
     <EmptyTitle>등록된 카드가 없습니다</EmptyTitle>
     <Description>아래 버튼을 눌러 첫 카드를 등록해보세요</Description>
-    <Button onClick={onAddCard}>카드 추가하기</Button>
+    <Button fullWidth onClick={onAddCard}>
+      카드 추가하기
+    </Button>
   </Container>
 );
 

@@ -17,7 +17,9 @@ const CardListSuccess = ({ cards, onAddCard }: CardListSuccessProps) => {
         ))}
       </List>
       <AddButtonWrapper>
-        <Button onClick={onAddCard}>+카드추가</Button>
+        <Button fullWidth onClick={onAddCard}>
+          +카드추가
+        </Button>
       </AddButtonWrapper>
     </Container>
   );

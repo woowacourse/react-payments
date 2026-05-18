@@ -2,11 +2,12 @@ import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
 
 interface ButtonProps {
+  fullWidth?: boolean;
   fixedBottom?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`
-  width: ${({ fixedBottom }) => (fixedBottom ? "100%" : "20rem")};
+  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
   height: ${({ fixedBottom }) => (fixedBottom ? "auto" : "2.8rem")};
   padding: ${({ fixedBottom }) => (fixedBottom ? "1.25rem" : "0.5rem")};
   border-radius: ${({ fixedBottom }) => (fixedBottom ? "0" : "0.3rem")};

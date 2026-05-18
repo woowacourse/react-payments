@@ -16,9 +16,17 @@ export const Default: Story = {
   },
 };
 
+export const FullWidth: Story = {
+  args: {
+    fullWidth: true,
+    children: "확인",
+  },
+};
+
 export const FixedBottom: Story = {
   args: {
     fixedBottom: true,
+    fullWidth: true,
     children: "확인",
   },
 };

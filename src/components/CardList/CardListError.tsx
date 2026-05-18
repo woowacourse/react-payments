@@ -12,7 +12,9 @@ const CardListError = ({ onRetry }: CardListErrorProps) => (
     <ErrorImage src={errorImage} alt="errorImage" />
     <ErrorTitle>카드 목록을 불러올 수 없어요</ErrorTitle>
     <Description>잠시 후 다시 시도해 주세요.</Description>
-    <Button onClick={onRetry}>다시 시도</Button>
+    <Button fullWidth onClick={onRetry}>
+      다시 시도
+    </Button>
   </Container>
 );
 
