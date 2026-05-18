@@ -6,9 +6,11 @@ import { ISSUER_LIST } from "../../../constants";
 const CardCompanySelectField = ({
   selectedCardCompany,
   onSelect,
+  disabledSelect,
 }: {
   selectedCardCompany: IssuerKoreanNameType | null;
   onSelect: (cardCompany: IssuerKoreanNameType) => void;
+  disabledSelect: boolean;
 }) => {
   return (
     <CardSelectBox>
@@ -17,6 +19,7 @@ const CardCompanySelectField = ({
         value={selectedCardCompany ?? ""}
         onChange={(e) => onSelect(e.target.value as IssuerKoreanNameType)}
         autoFocus
+        disabled={disabledSelect}
       >
         <option value={""} disabled hidden>
           카드사를 선택해주세요

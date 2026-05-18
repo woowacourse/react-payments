@@ -9,9 +9,11 @@ import { validatePassword } from "../../../validators/password";
 const PasswordField = ({
   password,
   onPasswordChange,
+  disabledInput,
 }: {
   password: string;
   onPasswordChange: (value: string) => void;
+  disabledInput: boolean;
 }) => {
   const {
     updateErrorMessage,
@@ -57,6 +59,7 @@ const PasswordField = ({
           type="password"
           id="password"
           value={password}
+          disabled={disabledInput}
           maxLength={PASSWORD_LENGTH}
           inputMode="numeric"
           placeholder="**"

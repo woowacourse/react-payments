@@ -22,6 +22,7 @@ const ExpiryField = ({
   onExpiryYearChange,
   formErrorMessage,
   clearFormErrorMessage,
+  disabledInput,
 }: {
   expiryMonth: string;
   expiryYear: string;
@@ -29,6 +30,7 @@ const ExpiryField = ({
   onExpiryYearChange: (value: string) => void;
   formErrorMessage: string | null;
   clearFormErrorMessage: () => void;
+  disabledInput: boolean;
 }) => {
   const {
     updateErrorMessage,
@@ -128,6 +130,7 @@ const ExpiryField = ({
           }}
           id="expiry-month"
           value={expiryMonth}
+          disabled={disabledInput}
           maxLength={EXPIRY_MONTH_LENGTH}
           inputMode="numeric"
           placeholder="MM"
@@ -142,6 +145,7 @@ const ExpiryField = ({
           }}
           id="expiry-year"
           value={expiryYear}
+          disabled={disabledInput}
           maxLength={EXPIRY_YEAR_LENGTH}
           placeholder="YY"
           inputMode="numeric"

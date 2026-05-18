@@ -205,6 +205,7 @@ const CardRegisterForm = ({
           <PasswordField
             password={cardInputSectionInformation.password}
             onPasswordChange={handlePasswordChange}
+            disabledInput={asyncState === "loading"}
           />
         </CardRegisterStep>
       )}
@@ -216,6 +217,7 @@ const CardRegisterForm = ({
             onCvcNumberChange={handleCvcNumberChange}
             formErrorMessage={formErrorMessages.cvc}
             clearFormErrorMessage={clearCvcErrorMessage}
+            disabledInput={asyncState === "loading"}
           />
         </CardRegisterStep>
       )}
@@ -232,6 +234,7 @@ const CardRegisterForm = ({
             onExpiryYearChange={handleExpiryYearChange}
             formErrorMessage={formErrorMessages.expiryDate}
             clearFormErrorMessage={clearExpiryDateErrorMessage}
+            disabledInput={asyncState === "loading"}
           />
         </CardRegisterStep>
       )}
@@ -244,6 +247,7 @@ const CardRegisterForm = ({
           <CardCompanySelectField
             selectedCardCompany={selectedCardCompany}
             onSelect={handleCardCompanyChange}
+            disabledSelect={asyncState === "loading"}
           />
         </CardRegisterStep>
       )}
@@ -259,6 +263,7 @@ const CardRegisterForm = ({
             chunkLengths={cardNumberChunkLengths}
             formErrorMessage={formErrorMessages.cardNumber}
             clearFormErrorMessage={clearCardNumberErrorMessage}
+            disabledInput={asyncState === "loading"}
           />
         </CardRegisterStep>
       )}

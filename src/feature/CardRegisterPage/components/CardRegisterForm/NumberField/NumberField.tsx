@@ -18,12 +18,14 @@ const NumberField = ({
   chunkLengths,
   formErrorMessage,
   clearFormErrorMessage,
+  disabledInput,
 }: {
   cardNumbers: CardNumberChunkType;
   onCardNumbersChange: (value: CardNumberChunkType) => void;
   chunkLengths: CardNumberChunkLengths;
   formErrorMessage: string | null;
   clearFormErrorMessage: () => void;
+  disabledInput: boolean;
 }) => {
   const {
     updateErrorMessage,
@@ -112,6 +114,7 @@ const NumberField = ({
             id={`card_number-${index}`}
             key={index}
             value={chunk}
+            disabled={disabledInput}
             placeholder={getPlaceHolder(chunkLengths[index])}
             inputMode="numeric"
             maxLength={chunkLengths[index]}

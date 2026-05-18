@@ -12,11 +12,13 @@ const CvcField = ({
   onCvcNumberChange,
   formErrorMessage,
   clearFormErrorMessage,
+  disabledInput,
 }: {
   cvcNumber: string;
   onCvcNumberChange: (value: string) => void;
   formErrorMessage: string | null;
   clearFormErrorMessage: () => void;
+  disabledInput: boolean;
 }) => {
   const {
     updateErrorMessage,
@@ -62,6 +64,7 @@ const CvcField = ({
         <CvcInput
           id="cvc"
           value={cvcNumber}
+          disabled={disabledInput}
           maxLength={CVC_MAX_LENGTH}
           inputMode="numeric"
           placeholder={getPlaceHolder(CVC_MAX_LENGTH)}
