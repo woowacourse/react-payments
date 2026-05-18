@@ -113,7 +113,7 @@
   - [x] 확인 버튼 라우트 변경(카드 목록)
 
 - [ ] 카드 목록 페이지
-  - [ ] 카드 가져오는 API 추가(Local Storage 기반 ..?)
+  - [x] 카드 가져오는 API 추가(Local Storage 기반 ..?)
   - [ ] 비동기 상태에 맞는 UI 표시
     - [ ] loading
     - [ ] success + 목록(x)
