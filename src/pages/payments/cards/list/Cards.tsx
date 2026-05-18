@@ -10,6 +10,8 @@ import { Button } from '@/core/components/button';
 
 import { ROUTES } from '@/constants/routes';
 
+import { deleteCards } from '@/services/apis/cards/cards';
+
 import { useCards } from './hooks/useCards';
 
 import { ISSUER_CODE } from './constants';
@@ -41,6 +43,10 @@ export const Cards = () => {
 
   const handleGoToRegiterCard = () => {
     navigate(ROUTES.PAYMENTS.REGISTER);
+  };
+
+  const handleDeleteClick = async (id: string) => {
+    await deleteCards({ id });
   };
 
   if (status === 'loading')
@@ -102,7 +108,14 @@ export const Cards = () => {
             <List.Item
               key={card.id}
               left={<CreditCard size="small" />}
-              right={<IconButton icon="close" />}
+              right={
+                <IconButton
+                  icon="close"
+                  onClick={() => {
+                    handleDeleteClick(card.id);
+                  }}
+                />
+              }
               title={cardName}
               content={maskedCardNumbers}
               description={`${card.expirationDate.month}/${card.expirationDate.year}`}
