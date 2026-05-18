@@ -38,13 +38,14 @@ const validateExpirationDate = (value: unknown): boolean => {
   return monthNumber >= 1 && monthNumber <= 12;
 };
 
-let copiedCards = [...cards];
+const copiedCards = [...cards];
+// let cards: Card[] = [];
 
 export const handlers = [
   http.post('/cards', async ({ request }) => {
     const data = await request.clone().json();
     // 400 - INVALID_CARD_NUMBER
-    const isValidBin = validateBin(data?.numbers);
+    const isValidBin = validateBin(data?.number);
     if (!isValidBin) {
       return HttpResponse.json(
         { code: 'INVALID_CARD_NUMBER', message: '유효하지 않은 카드 번호입니다.' },
