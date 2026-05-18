@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 import EmptyCardList from "../components/CardList/EmptyCardList";
 import Spinner from "../components/Common/Spinner";
 
@@ -47,8 +48,6 @@ const PageTitle = styled.h1`
 `;
 
 const CardList = styled.ul`
-  width: 320px;
-  height: 73px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -112,49 +111,114 @@ const DeleteButton = styled.button`
   }
 `;
 
+const ErrorWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+`;
+
+const ErrorIcon = styled.div`
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #333;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ErrorTitle = styled.p`
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+`;
+
+const ErrorDescription = styled.p`
+  font-size: 12px;
+  color: #8c8c8c;
+  margin: 0;
+`;
+
+const RetryButton = styled.button`
+  margin-top: 8px;
+  width: 100%;
+  height: 52px;
+  background: #333;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
 function CardDashboardPage() {
-  const [cards, setCards] = useState<Card[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const [cards, setCards] = useState<Card[] | null | undefined>(undefined);
+  const [fetchKey, setFetchKey] = useState(0);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}cards`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error();
+        return res.json();
+      })
       .then((data: Card[]) => setCards(data))
-      .finally(() => setIsLoading(false));
-  }, []);
+      .catch(() => setCards(null));
+  }, [fetchKey]);
+
+  const handleRetry = () => {
+    navigate("/cards");
+    setCards(undefined);
+    setFetchKey((k) => k + 1);
+  };
 
   const handleDelete = async (id: string) => {
     if (!window.confirm("카드를 삭제하시겠습니까?")) return;
     await fetch(`${import.meta.env.BASE_URL}cards/${id}`, { method: "DELETE" });
-    setCards((prev) => prev.filter((card) => card.id !== id));
+    setCards((prev) => (prev ?? []).filter((card) => card.id !== id));
   };
 
   return (
     <View>
-      <PageTitle>보유 카드 ({cards.length})</PageTitle>
-      {isLoading ? (
+      <PageTitle>보유 카드 ({cards?.length ?? 0})</PageTitle>
+      {cards === undefined ? (
         <Spinner />
+      ) : cards === null ? (
+        <ErrorWrapper>
+          <ErrorIcon>!</ErrorIcon>
+          <ErrorTitle>카드 목록을 불러올 수 없어요</ErrorTitle>
+          <ErrorDescription>잠시 후 다시 시도해 주세요.</ErrorDescription>
+          <RetryButton onClick={handleRetry}>다시 시도</RetryButton>
+        </ErrorWrapper>
       ) : cards.length === 0 ? (
         <EmptyCardList />
       ) : (
-        <>
-          <CardList>
-            {cards.map((card) => {
-              const info = ISSUER_INFO[card.issuerCode];
-              return (
-                <CardItem key={card.id}>
-                  <CardThumbnail color={info.color} />
-                  <CardInfo>
-                    <CardCompanyName>{info.name}</CardCompanyName>
-                    <CardNumber>{formatCardNumber(card.number)}</CardNumber>
-                    <CardExpiry>유효기간 {card.expirationDate}</CardExpiry>
-                  </CardInfo>
-                  <DeleteButton onClick={() => handleDelete(card.id)}>✕</DeleteButton>
-                </CardItem>
-              );
-            })}
-          </CardList>
-        </>
+        <CardList>
+          {cards.map((card) => {
+            const info = ISSUER_INFO[card.issuerCode];
+            return (
+              <CardItem key={card.id}>
+                <CardThumbnail color={info.color} />
+                <CardInfo>
+                  <CardCompanyName>{info.name}</CardCompanyName>
+                  <CardNumber>{formatCardNumber(card.number)}</CardNumber>
+                  <CardExpiry>유효기간 {card.expirationDate}</CardExpiry>
+                </CardInfo>
+                <DeleteButton onClick={() => handleDelete(card.id)}>
+                  ✕
+                </DeleteButton>
+              </CardItem>
+            );
+          })}
+        </CardList>
       )}
     </View>
   );

@@ -54,7 +54,7 @@ export const handlers = [
   }),
 
   // POST /cards
-  http.post("/cards", async ({ request }) => {
+  http.post("/react-payments/cards", async ({ request }) => {
     const body = (await request.json()) as {
       number: string;
       expirationDate: string;
@@ -101,7 +101,7 @@ export const handlers = [
   }),
 
   // DELETE /cards/:id
-  http.delete("/cards/:id", ({ params }) => {
+  http.delete("/react-payments/cards/:id", ({ params }) => {
     const index = cards.findIndex((card) => card.id === params.id);
     if (index !== -1) cards.splice(index, 1);
     return new HttpResponse(null, { status: 204 });
