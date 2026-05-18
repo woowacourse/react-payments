@@ -1,57 +1,11 @@
-import { useState, useEffect } from 'react';
-import type { CardResponse } from '../types/cardStausTypes';
 import ErrorInfo from '../components/userCard/ErrorInfo';
-import { requestCards } from '../api/requestCards';
 import Skeleton from '../components/skeleton/Skeleton';
 import Empty from '../components/userCard/Empty';
 import CardList from '../components/userCard/CardList';
+import { useUserCardList } from '../hooks/useUserCardList';
 
 export default function UserCardList() {
-  const [cards, setCards] = useState<CardResponse[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleRetry = async () => {
-    try {
-      setIsLoading(true);
-      setErrorMessage('');
-
-      const data = await requestCards();
-      setCards(data);
-    } catch (error) {
-      if (error instanceof DOMException && error.name === 'AbortError') {
-        return;
-      }
-
-      setErrorMessage('카드 목록을 불러올 수 없어요');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    const abortController = new AbortController();
-
-    requestCards(abortController.signal)
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((error) => {
-        if (error.name === 'AbortError') {
-          return;
-        }
-        setErrorMessage('카드 목록을 불러올 수 없어요');
-      })
-      .finally(() => {
-        if (!abortController.signal.aborted) {
-          setIsLoading(false);
-        }
-      });
-
-    return () => {
-      abortController.abort();
-    };
-  }, []);
+  const { cards, isLoading, errorMessage, handleRetry } = useUserCardList();
 
   return (
     <div
