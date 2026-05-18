@@ -2,11 +2,13 @@ import useCards from "@hooks/feature/query/useCards";
 import CardItem from "@components/common/CardItem";
 import styled from "@emotion/styled";
 
+import MyCardListSectionLoader from "./MyCardListSectionLoader";
+
 const MyCardListSection = () => {
   const { data, error, state } = useCards();
 
   if (state === "loading") {
-    return <div>카드 정보를 불러오는 중입니다...</div>;
+    return <MyCardListSectionLoader />;
   }
 
   if (state === "error" || !data) {
