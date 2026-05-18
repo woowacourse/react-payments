@@ -5,7 +5,7 @@ import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { type Bank, BANK_RULES } from '@/entities/card/model/bank';
 
 interface ResultState {
-  cardNumbers: string[];
+  numbers: string[];
   bank: Bank;
 }
 
@@ -14,7 +14,7 @@ export const Result = () => {
   const { state } = useLocation() as { state: ResultState };
   if (!state) return <Navigate to="/" replace />;
 
-  const firstFour = state.cardNumbers[0];
+  const firstFour = state.numbers[0];
   const bankLabel = BANK_RULES[state.bank].label;
 
   return (
