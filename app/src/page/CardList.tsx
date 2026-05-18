@@ -36,7 +36,7 @@ export function CardList() {
       return <CardListSkeleton />;
     if (cardListState.status === 'error') return <CardListError onRetry={fetchCards} />;
     if (cardListState.responseData.length === 0) return <CardListEmpty />;
-    return <CardItem />;
+    return <CardItem cards={cardListState.responseData} onDelete={fetchCards} />;
   };
 
   return (

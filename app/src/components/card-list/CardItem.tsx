@@ -1,20 +1,39 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
+import type { Card } from '../../types/card';
+import { CARD_COMPANY_INFO } from '../../constants/cardCompanyOptions';
+import { deleteCard } from '../../api/cardsAPI';
 
-export function CardItem() {
+export function CardItem({ cards, onDelete }: { cards: Card[]; onDelete: () => void }) {
   const navigate = useNavigate();
+  const handleDelete = async (id: string): Promise<void> => {
+    if (!window.confirm('삭제하시겠습니까?')) return;
+    await deleteCard(id);
+    onDelete();
+  };
 
   return (
     <Container>
-      <CardContainer>
-        <div className="colored-card" />
-        <div className="card-info-container">
-          <p className="card-name">BC카드</p>
-          <p className="card-number">5511 **** **** 9012</p>
-          <p className="card-expiration-date">유효기간 12/28</p>
-        </div>
-        <button>✕</button>
-      </CardContainer>
+      {cards.map((card) => {
+        const label =
+          Object.values(CARD_COMPANY_INFO).find((info) => info.issuerCode === card.issuerCode)
+            ?.label ?? card.issuerCode;
+        const color =
+          Object.values(CARD_COMPANY_INFO).find((info) => info.issuerCode === card.issuerCode)
+            ?.color ?? card.issuerCode;
+
+        return (
+          <CardContainer key={card.id} $CardColor={color}>
+            <div className="colored-card" />
+            <div className="card-info-container">
+              <p className="card-name">{label}</p>
+              <p className="card-number">{card.number.replace(/(.{4})/g, '$1 ').trim()}</p>
+              <p className="card-expiration-date">유효기간 {card.expirationDate}</p>
+            </div>
+            <button onClick={() => handleDelete(card.id)}>✕</button>
+          </CardContainer>
+        );
+      })}
       <AddCardButton
         onClick={() => {
           navigate('/react-payments/add');
@@ -26,6 +45,10 @@ export function CardItem() {
   );
 }
 
+type CardColor = {
+  $CardColor?: string;
+};
+
 const Container = styled.div`
   box-sizing: border-box;
   padding-top: 1rem;
@@ -34,7 +57,7 @@ const Container = styled.div`
   gap: 1rem;
 `;
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<CardColor>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,7 +67,7 @@ const CardContainer = styled.div`
   padding: 0.75rem 0.75rem 0.75rem 0.75rem;
 
   .colored-card {
-    background-color: #db4d4d;
+    background-color: ${(props) => props.$CardColor ?? '#333333'};
     width: 64px;
     height: 40px;
     border-radius: 4px;
