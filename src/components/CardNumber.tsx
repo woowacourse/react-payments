@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
 import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
 import { getCardNumberGroupLengths } from '../utils/card/cardBrand';
@@ -9,6 +10,7 @@ type CardNumbersProps = {
 
 export default function CardNumber({ cardNumber, setCardNumber }: CardNumbersProps) {
   const cardNumberGroupLengths = getCardNumberGroupLengths(cardNumber.cardBrand);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   return (
     <div css={{ display: 'flex', flexDirection: 'column' }}>
@@ -51,10 +53,16 @@ export default function CardNumber({ cardNumber, setCardNumber }: CardNumbersPro
             return (
               <input
                 key={index}
+                ref={(el) => { inputRefs.current[index] = el; }}
                 type="text"
                 placeholder={'123456'.slice(0, maxLength)}
                 maxLength={maxLength}
-                onChange={setCardNumber.handleCardNumbers(index)}
+                onChange={(e) => {
+                  setCardNumber.handleCardNumbers(index)(e);
+                  if (e.target.value.length >= maxLength) {
+                    inputRefs.current[index + 1]?.focus();
+                  }
+                }}
                 value={numberGroup}
                 onBlur={setCardNumber.handleCardNumbersBlur}
                 inputMode="numeric"
