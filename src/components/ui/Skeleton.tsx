@@ -5,7 +5,7 @@ interface SkeletonProps {
 }
 
 export default function Skeleton({ style }: SkeletonProps) {
-  return <div css={[skeletonStyle, style]} />;
+  return <div className="skeleton" css={[skeletonStyle, style]} />;
 }
 
 const skeletonStyle = css`
