@@ -15,6 +15,7 @@ import { useExpiryDate } from './useExpiryDate';
 import { useCardCvc } from './useCardCvc';
 import { useCardPassword } from './useCardPassword';
 import { useCardCompany } from './useCardCompany';
+import { isValidCardNumber } from '../utils/card/cardBrand';
 
 export type CardFormState = {
   cardNumber: CardStatus;
@@ -39,6 +40,13 @@ export function useCardForm() {
   const { cardPassword, cardPasswordHandler } = useCardPassword();
   const { cardCompanyStatus, cardCompanyHandler } = useCardCompany();
 
+  const isCardNumberComplete =
+    isValidCardNumber(cardNumber.cardNumbers, cardNumber.cardBrand) &&
+    cardNumber.cardNumberErrorMode === null;
+  const isCardCompanySelected = cardCompanyStatus.cardCompany !== '';
+  const isExpiryDateComplete =
+    cardExpiry.cardExpiryDate.every((date) => date.length === 2) &&
+    cardExpiry.cardExpiryDateErrorMode === null;
   const isCvcComplete = cardCvc.cardCvc.length === 3 && cardCvc.cardCvcErrorMode === null;
   const isComplete =
     isCvcComplete &&
@@ -60,6 +68,12 @@ export function useCardForm() {
       cardPasswordHandler,
       cardCompanyHandler,
     } satisfies CardFormHandlers,
-    isComplete,
+    completion: {
+      isCardNumberComplete,
+      isCardCompanySelected,
+      isExpiryDateComplete,
+      isCvcComplete,
+      isComplete,
+    },
   };
 }

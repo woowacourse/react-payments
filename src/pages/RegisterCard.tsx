@@ -11,7 +11,7 @@ export type RegisteredCard = {
 
 export default function RegisterCard() {
   const navigate = useNavigate();
-  const { form, handlers, isComplete } = useCardForm();
+  const { form, handlers, completion } = useCardForm();
   const handleComplete = () => {
     if (form.cardCompanyStatus.cardCompany === '') {
       return;
@@ -56,7 +56,7 @@ export default function RegisterCard() {
         css={{
           position: 'absolute',
           top: '296px',
-          bottom: isComplete ? '48px' : 0,
+          bottom: completion.isComplete ? '48px' : 0,
           left: '50%',
           transform: 'translateX(-50%)',
           width: '315px',
@@ -67,10 +67,11 @@ export default function RegisterCard() {
         <CardInput
           form={form}
           handlers={handlers}
-          hasBottomAction={isComplete}
+          completion={completion}
+          hasBottomAction={completion.isComplete}
         />
       </div>
-      {isComplete && (
+      {completion.isComplete && (
         <button
           type="button"
           onClick={handleComplete}

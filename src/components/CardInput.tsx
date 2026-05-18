@@ -4,26 +4,28 @@ import CardExpiryDate from './CardExpiryDate';
 import CardCompany from './CardCompany';
 import CardPassword from './CardPassword';
 import type { CardFormState, CardFormHandlers } from '../hooks/useCardForm';
-import { isValidCardNumber } from '../utils/card/cardBrand';
+
+type CardCompletion = {
+  isCardNumberComplete: boolean;
+  isCardCompanySelected: boolean;
+  isExpiryDateComplete: boolean;
+  isCvcComplete: boolean;
+  isComplete: boolean;
+};
 
 type CardInputProps = {
   form: CardFormState;
   handlers: CardFormHandlers;
+  completion: CardCompletion;
   hasBottomAction?: boolean;
 };
 
-export default function CardInput({ form, handlers, hasBottomAction = false }: CardInputProps) {
+export default function CardInput({ form, handlers, completion, hasBottomAction = false }: CardInputProps) {
   const { cardNumber, cardExpiry, cardCvc, cardPassword, cardCompanyStatus } = form;
   const { cardNumberHandler, expiryHandler, cvcHandler, cardPasswordHandler, cardCompanyHandler } =
     handlers;
-  const isCardNumberComplete =
-    isValidCardNumber(cardNumber.cardNumbers, cardNumber.cardBrand) &&
-    cardNumber.cardNumberErrorMode === null;
-  const isCardCompanySelected = cardCompanyStatus.cardCompany !== '';
-  const isExpiryDateComplete =
-    cardExpiry.cardExpiryDate.every((date) => date.length === 2) &&
-    cardExpiry.cardExpiryDateErrorMode === null;
-  const isCvcComplete = cardCvc.cardCvc.length === 3 && cardCvc.cardCvcErrorMode === null;
+  const { isCardNumberComplete, isCardCompanySelected, isExpiryDateComplete, isCvcComplete } =
+    completion;
 
   return (
     <form
