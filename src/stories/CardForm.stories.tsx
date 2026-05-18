@@ -1,14 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { MemoryRouter } from 'react-router';
 import CardForm from '../components/CardForm/CardForm';
 
 const meta = {
   title: 'Components/CardForm',
   component: CardForm,
   tags: ['autodocs'],
-  args: {
-    onSubmit: fn(),
-  },
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 } satisfies Meta<typeof CardForm>;
 
 export default meta;
