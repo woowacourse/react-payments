@@ -93,6 +93,8 @@ export default function AddCardPage() {
           serverErrorFieldsRef.current.push('expirationPeriod');
           setFieldError('expirationPeriod', 'invalidValue');
         }
+      } else {
+        alert('카드를 등록하는 중 문제가 발생했습니다.\n잠시 후 다시 시도해 주세요');
       }
     }
   };
