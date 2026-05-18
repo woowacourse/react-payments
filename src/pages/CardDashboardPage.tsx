@@ -11,6 +11,11 @@ interface Card {
   expirationDate: string;
 }
 
+type FetchState =
+  | { status: "loading" }
+  | { status: "success"; data: Card[] }
+  | { status: "error" };
+
 const ISSUER_INFO: Record<string, { name: string; color: string }> = {
   "31": { name: "BC카드", color: "#E14F4F" },
   "41": { name: "신한카드", color: "#2563EB" },
@@ -174,7 +179,7 @@ const AddCardButton = styled.button`
 
 function CardDashboardPage() {
   const navigate = useNavigate();
-  const [cards, setCards] = useState<Card[] | null | undefined>(undefined);
+  const [fetchState, setFetchState] = useState<FetchState>({ status: "loading" });
   const [fetchKey, setFetchKey] = useState(0);
 
   useEffect(() => {
@@ -183,60 +188,64 @@ function CardDashboardPage() {
         if (!res.ok) throw new Error();
         return res.json();
       })
-      .then((data: Card[]) => setCards(data))
-      .catch(() => setCards(null));
+      .then((data: Card[]) => setFetchState({ status: "success", data }))
+      .catch(() => setFetchState({ status: "error" }));
   }, [fetchKey]);
 
   const handleRetry = () => {
     navigate("/cards");
-    setCards(undefined);
+    setFetchState({ status: "loading" });
     setFetchKey((k) => k + 1);
   };
 
   const handleDelete = async (id: string) => {
     if (!window.confirm("카드를 삭제하시겠습니까?")) return;
     await fetch(`${import.meta.env.BASE_URL}cards/${id}`, { method: "DELETE" });
-    setCards((prev) => (prev ?? []).filter((card) => card.id !== id));
+    setFetchState((prev) =>
+      prev.status === "success"
+        ? { status: "success", data: prev.data.filter((card) => card.id !== id) }
+        : prev
+    );
   };
+
+  const cardCount = fetchState.status === "success" ? fetchState.data.length : 0;
 
   return (
     <View>
-      <PageTitle>보유 카드 ({cards?.length ?? 0})</PageTitle>
-      {cards === undefined ? (
+      <PageTitle>보유 카드 ({cardCount})</PageTitle>
+      {fetchState.status === "loading" ? (
         <Spinner />
-      ) : cards === null ? (
+      ) : fetchState.status === "error" ? (
         <ErrorWrapper>
           <ErrorIcon>!</ErrorIcon>
           <ErrorTitle>카드 목록을 불러올 수 없습니다.</ErrorTitle>
           <ErrorDescription>잠시 후 다시 시도해 주세요.</ErrorDescription>
           <RetryButton onClick={handleRetry}>다시 시도</RetryButton>
         </ErrorWrapper>
-      ) : cards.length === 0 ? (
+      ) : fetchState.data.length === 0 ? (
         <EmptyCardList />
       ) : (
-        <>
-          <CardList>
-            {cards.map((card) => {
-              const info = ISSUER_INFO[card.issuerCode];
-              return (
-                <CardItem key={card.id}>
-                  <CardThumbnail color={info.color} />
-                  <CardInfo>
-                    <CardCompanyName>{info.name}</CardCompanyName>
-                    <CardNumber>{formatCardNumber(card.number)}</CardNumber>
-                    <CardExpiry>유효기간 {card.expirationDate}</CardExpiry>
-                  </CardInfo>
-                  <DeleteButton onClick={() => handleDelete(card.id)}>
-                    ✕
-                  </DeleteButton>
-                </CardItem>
-              );
-            })}
-            <AddCardButton onClick={() => navigate("/cards/register")}>
-              + 카드 추가
-            </AddCardButton>
-          </CardList>
-        </>
+        <CardList>
+          {fetchState.data.map((card) => {
+            const info = ISSUER_INFO[card.issuerCode];
+            return (
+              <CardItem key={card.id}>
+                <CardThumbnail color={info.color} />
+                <CardInfo>
+                  <CardCompanyName>{info.name}</CardCompanyName>
+                  <CardNumber>{formatCardNumber(card.number)}</CardNumber>
+                  <CardExpiry>유효기간 {card.expirationDate}</CardExpiry>
+                </CardInfo>
+                <DeleteButton onClick={() => handleDelete(card.id)}>
+                  ✕
+                </DeleteButton>
+              </CardItem>
+            );
+          })}
+          <AddCardButton onClick={() => navigate("/cards/register")}>
+            + 카드 추가
+          </AddCardButton>
+        </CardList>
       )}
     </View>
   );
