@@ -23,9 +23,9 @@ export const useCvc = ({ value, setValue }: Props) => {
   });
 
   return {
-    error: errors[0],
     handleOnChange: (val: string) => handleOnChange(val, 0),
     handleOnBlur: () => markingTouched(0),
+    error: errors[0],
     finalErrorMessage,
   };
 };
