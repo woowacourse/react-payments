@@ -211,7 +211,6 @@ const CardRegisterForm = ({
       ) {
         updateExpiryDateErrorMessage(cardRegisterError.message);
       } else {
-        // 예상치 못한 에러처리
         alert("카드 등록 중 에러가 발생했습니다.");
       }
     }
