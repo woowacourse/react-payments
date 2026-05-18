@@ -1,3 +1,5 @@
+import { ApiError, type ApiErrorResponse } from "./error";
+
 export interface CardRegisterRequest {
   number: string;
   expirationDate: string;
@@ -24,7 +26,8 @@ export const registerCard = async (card: CardRegisterRequest) => {
   });
 
   if (!response.ok) {
-    throw new Error("카드 등록 실패");
+    const error = (await response.json()) as ApiErrorResponse;
+    throw new ApiError(error);
   }
 };
 

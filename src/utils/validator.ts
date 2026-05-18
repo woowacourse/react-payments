@@ -33,7 +33,7 @@ export const checkExpiredValidityPeriod = (month: string, year: string) => {
 };
 
 export const validateCardNumberInput = (cardNumber: CardNumberUnits) => {
-  const cardBrand = detectCardBrand(cardNumber);
+  const cardBrand = detectCardBrand(cardNumber.join(""));
   const cardNumberFormat = getCardNumberFormat(cardBrand);
 
   const invalidStatus = cardNumberFormat

@@ -7,32 +7,19 @@ import {
 import type { ValidityPeriod } from "@/components/CardRegister/CardValidityPeriodInputField/CardValidityPeriodInputField";
 import type { CardNumberUnits } from "@/components/CardRegister/CardNumberInputField/CardNumberInputField";
 
-export const detectCardBrand = (
-  cardNumber: CardNumberUnits,
-): CardBrand | null => {
-  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.Visa.prefixes))
+export const detectCardBrand = (cardNumber: string): CardBrand | null => {
+  if (checkPrefixMatches(cardNumber, CARD_BRANDS.Visa.prefixes))
     return "Visa";
 
-  if (
-    checkPrefixRangeMatches(
-      `${cardNumber[0]}`,
-      CARD_BRANDS.MasterCard.prefixRanges,
-    )
-  )
+  if (checkPrefixRangeMatches(cardNumber, CARD_BRANDS.MasterCard.prefixRanges))
     return "MasterCard";
 
-  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.AMEX.prefixes))
-    return "AMEX";
+  if (checkPrefixMatches(cardNumber, CARD_BRANDS.AMEX.prefixes)) return "AMEX";
 
-  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.Diners.prefixes))
+  if (checkPrefixMatches(cardNumber, CARD_BRANDS.Diners.prefixes))
     return "Diners";
 
-  if (
-    checkPrefixRangeMatches(
-      `${cardNumber[0]}${cardNumber[1]}`,
-      CARD_BRANDS.UnionPay.prefixRanges,
-    )
-  )
+  if (checkPrefixRangeMatches(cardNumber, CARD_BRANDS.UnionPay.prefixRanges))
     return "UnionPay";
 
   return null;

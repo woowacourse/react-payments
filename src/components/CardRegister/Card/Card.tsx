@@ -23,7 +23,7 @@ interface CardProps {
 }
 
 const Card = ({ cardNumberUnits, cardCompany, validityPeriod }: CardProps) => {
-  const cardBrand = detectCardBrand(cardNumberUnits);
+  const cardBrand = detectCardBrand(cardNumberUnits.join(""));
   const cardNumberFormat = getCardNumberFormat(cardBrand);
 
   const cardValidityPeriodUnitString =

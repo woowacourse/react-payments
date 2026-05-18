@@ -20,6 +20,7 @@ import { ROUTE_PATH } from "@/constants/routes";
 import PageLayout from "@/components/common/PageLayout";
 import { registerCard } from "@/api/cards";
 import { getFormattedValidityPeriodUnit } from "@/utils/card";
+import { ApiError } from "@/api/error";
 
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
@@ -65,8 +66,12 @@ const CardRegisterPage = () => {
           cardCompanyName: cardCompany?.name ?? "",
         },
       });
-    } catch {
-      // 에러 처리
+    } catch (error) {
+      if (error instanceof ApiError) {
+        const { code, message } = error;
+        console.log(code);
+        console.log(message);
+      }
     }
   };
 

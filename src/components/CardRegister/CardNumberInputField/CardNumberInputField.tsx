@@ -42,7 +42,7 @@ const CardNumberInputField = ({
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
   const { registerInput, focusNextInput } = useInputFocus();
 
-  const cardBrand = detectCardBrand(cardNumberUnits);
+  const cardBrand = detectCardBrand(cardNumberUnits.join(""));
   const cardNumberFormat = getCardNumberFormat(cardBrand);
 
   const updateInputStatus = (index: number, inputStatus: InputStatus) => {
@@ -79,7 +79,7 @@ const CardNumberInputField = ({
 
     updateInputStatus(index, "DEFAULT");
 
-    const newCardBrand = detectCardBrand(newCardNumberUnits);
+    const newCardBrand = detectCardBrand(newCardNumberUnits.join(""));
     const newCardNumberFormat = getCardNumberFormat(newCardBrand);
 
     if (isFormatChanged(cardNumberFormat, newCardNumberFormat)) {
