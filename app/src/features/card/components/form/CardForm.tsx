@@ -51,9 +51,26 @@ export function CardForm({
     cardPassword,
   });
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    gotoCreateCardDonePage();
+    try {
+      const response = await fetch("https://api.antolibank.com/cards", {
+        method: "POST",
+        body: JSON.stringify({
+          cardNumber: Object.values(cardNumber).join(""),
+          // expiryDate를 MM/YY 형식으로 전환.
+          cardExpiryDate: cardExpiryDate,
+          cardCVC: cardCVC,
+          // issuerCode로 전환하는 로직 필요.
+          cardIssuerCode: cardBrand,
+        }),
+      });
+      gotoCreateCardDonePage();
+    } catch (err) {
+      // 임시처리 입니다.
+      // RTL과 함께 구현될 예정.
+      console.log(err);
+    }
   };
 
   return (

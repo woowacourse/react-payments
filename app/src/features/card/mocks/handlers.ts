@@ -14,12 +14,11 @@ export const handlers = [
   }),
 
   http.post("https://api.antolibank.com/cards", async ({ request }) => {
-    const data = await request.formData();
-    const cardData = {
-      number: (data.get("cardNumber") as string) ?? "",
-      expirationDate: (data.get("cardExpiryDate") as string) ?? "",
-      cvc: (data.get("cardBrand") as string) ?? "",
-      issuerCode: (data.get("cardCVC") as string) ?? "",
+    const cardData = (await request.json()) as {
+      number: string;
+      expirationDate: string;
+      cvc: string;
+      issuerCode: string;
     };
     const result = CardSerializer.validate(cardData);
     if (result.isValid) {
