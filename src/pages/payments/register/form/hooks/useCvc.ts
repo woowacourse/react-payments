@@ -26,7 +26,7 @@ export const useCvc = () => {
   const [invalidAttemp, setInvalidAttemp] = useState({ cvc: false });
 
   const renderErrorMessage = () => {
-    if (invalidAttemp.cvc) return '유효한 CVC(숫자)를 입력해주세요';
+    if (invalidAttemp.cvc) return 'invalidAttemp';
     if (!blur.cvc) return '';
 
     const errorCvc = errors.cvc.filter((error) => !error.valid);

@@ -33,7 +33,7 @@ export const usePassword = () => {
   const [invalidAttemp, setInvalidAttemp] = useState({ password: false });
 
   const renderErrorMessage = () => {
-    if (invalidAttemp.password) return '유효한 비밀번호를 입력해주세요';
+    if (invalidAttemp.password) return 'invalidAttemp';
     if (!blur.password) return '';
 
     const errorPassword = errors.password.filter((error) => !error.valid);

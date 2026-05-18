@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest",
-    "deploy": "vite build --base=/react-payments/ --minify=false && npx gh-pages -d dist"
+    "deploy": "vite build --base=/react-payments/ --minify=false && cp dist/index.html dist/404.html && npx gh-pages -d dist"
   },
   "dependencies": {
     "classnames": "^2.5.1",

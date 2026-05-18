@@ -10,7 +10,7 @@ export const BRAND_NUMBER = {
   visa: { startNumber: ['4'], length: 16, lengths: [4, 4, 4, 4] },
   mastercard: { startNumber: toStringNumbers(getRangeNumber(51, 55)), length: 16, lengths: [4, 4, 4, 4] },
   diners: { startNumber: ['36'], length: 14, lengths: [4, 6, 4] },
-  amex: { startNumber: ['34', '35'], length: 15, lengths: [4, 6, 5] },
+  amex: { startNumber: ['34', '37'], length: 15, lengths: [4, 6, 5] },
   union: {
     startNumber: [
       ...toStringNumbers(getRangeNumber(624, 626)),

@@ -17,10 +17,17 @@ const validators: Validators = {
   maxLength,
 };
 
-export type Rule = {
+type ValidatorRule = {
   type: RuleType;
   message: ReactNode;
-} & {
+};
+type CustomRule = {
+  type: 'custom';
+  message: ReactNode;
+  validate: (value: unknown) => boolean;
+};
+
+export type Rule = (ValidatorRule | CustomRule) & {
   [optionKey in RuleType]?: number;
 };
 
@@ -28,14 +35,14 @@ export type FormValuesRules<TFormValues extends Record<string, unknown>> = {
   [FormKey in keyof TFormValues]: Rule[];
 };
 
-export interface ResultValid extends Rule {
+export type ResultValid = Rule & {
   valid: boolean;
-}
+};
 
 const validateFormValueRules = <T>(value: T, rules: Rule[]) => {
   return rules.map((rule) => {
-    const validator = validators[rule.type];
-    if (!validator) return { valid: true };
+    if (rule.type === 'custom') return { ...rule, valid: rule.validate(value) };
+    const validator = validators[rule.type as RuleType];
     return { ...rule, valid: validator(value, rule[rule.type]) };
   });
 };

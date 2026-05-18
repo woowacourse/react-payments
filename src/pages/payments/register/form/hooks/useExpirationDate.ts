@@ -40,7 +40,7 @@ export const useExpirationDate = () => {
   });
 
   const renderErrorMessage = () => {
-    if (Object.values(invalidAttemp).find(Boolean)) return '유효햔 유효기간(숫자)을 입력해주세요';
+    if (Object.values(invalidAttemp).find(Boolean)) return 'invalidAttemp';
     if (Object.values(blur).every((blur) => !blur)) return '';
 
     const errorMonth = errors.month.filter((error) => !error.valid);
