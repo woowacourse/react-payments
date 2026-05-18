@@ -21,6 +21,7 @@ import { getCardNumbersMaxLength } from '../../utils/fields';
 import Button from '../Common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import CardPreview from '../Card/CardPreview/CardPreview';
+import { registerCard } from '../../apis/cards';
 
 export type Step = 1 | 2 | 3 | 4 | 5 | 6;
 export type CardNumbersType = [string, string, string, string];
@@ -103,8 +104,19 @@ export default function PaymentForm() {
       setStep(2);
   };
 
-  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const issuer = Object.values(CARD_ISSUER_CONFIG).filter(
+      (issuer) => issuer.name === cardIssuer
+    )[0];
+
+    await registerCard({
+      number: cardNumbers.join(''),
+      expirationDate: `${expirationDate['month']}/${expirationDate['year']}`,
+      cvc,
+      issuerCode: issuer.issuerCode,
+    });
 
     navigate('/registration/completion', {
       state: {
