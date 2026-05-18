@@ -6,7 +6,10 @@ import type { CardIssuerType } from '../types/cardStausTypes';
 import type { CardInfo } from '../types/cardStausTypes';
 import { maskFetchCardNumbers } from '../utils/maskCardNumbers';
 
-type CardRequest = Omit<CardInfo, 'id' | 'issuerCode'> & {
+type CardRequest = {
+  number: string;
+  expirationDate: string;
+  cvc: string;
   issuerCode: CardIssuerType;
 };
 

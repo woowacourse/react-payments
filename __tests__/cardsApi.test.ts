@@ -5,6 +5,7 @@ import { server } from '../src/mocks/server';
 import { requestCards } from '../src/api/requestCards';
 import { postCard } from '../src/api/postCard';
 import { deleteCard } from '../src/api/deleteCard';
+import { HttpError, NetworkError } from '../src/errors/errors';
 
 import type { CardResponse } from '../src/types/cardStausTypes';
 
@@ -73,14 +74,15 @@ describe('cards api', () => {
       ),
     );
 
-    await expect(
-      postCard({
-        number: '1111111111111111',
-        expirationDate: '12/29',
-        cvc: '123',
-        issuerCode: 'bcCard',
-      }),
-    ).rejects.toThrow('유효하지 않은 카드 번호입니다.');
+    const promise = postCard({
+      number: '1111111111111111',
+      expirationDate: '12/29',
+      cvc: '123',
+      issuerCode: 'bcCard',
+    });
+
+    await expect(promise).rejects.toBeInstanceOf(HttpError);
+    await expect(promise).rejects.toThrow('유효하지 않은 카드 번호입니다.');
   });
 
   it('카드 등록 시 유효하지 않은 유효기간이면 서버 에러 메시지를 던진다.', async () => {
@@ -127,6 +129,20 @@ describe('cards api', () => {
         issuerCode: 'bcCard',
       }),
     ).rejects.toThrow('유효하지 않은 CVC입니다.');
+  });
+
+  it('카드 등록 요청 자체가 실패하면 네트워크 에러를 던진다.', async () => {
+    server.use(http.post('http://localhost/api/cards', () => HttpResponse.error()));
+
+    const promise = postCard({
+      number: '4111111111111111',
+      expirationDate: '12/29',
+      cvc: '123',
+      issuerCode: 'bcCard',
+    });
+
+    await expect(promise).rejects.toBeInstanceOf(NetworkError);
+    await expect(promise).rejects.toThrow('네트워크 연결에 실패했습니다.');
   });
 
   it('카드를 삭제한다.', async () => {

@@ -1,4 +1,5 @@
 import type { CardInfo } from '../types/cardStausTypes';
+import { HttpError, NetworkError } from '../errors/errors';
 
 type ErrorResponse = {
   code: string;
@@ -6,22 +7,28 @@ type ErrorResponse = {
 };
 
 export async function postCard(cardInfo: CardInfo): Promise<string> {
-  const response = await fetch('/api/cards', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      number: cardInfo.number,
-      expirationDate: cardInfo.expirationDate,
-      cvc: cardInfo.cvc,
-      issuerCode: cardInfo.issuerCode,
-    }),
-  });
+  let response: Response;
+
+  try {
+    response = await fetch('/api/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        number: cardInfo.number,
+        expirationDate: cardInfo.expirationDate,
+        cvc: cardInfo.cvc,
+        issuerCode: cardInfo.issuerCode,
+      }),
+    });
+  } catch {
+    throw new NetworkError('네트워크 연결에 실패했습니다.');
+  }
 
   if (!response.ok) {
     const errorData = (await response.json()) as ErrorResponse;
-    throw new Error(errorData.message);
+    throw new HttpError(errorData.message);
   }
   return response.json();
 }

@@ -16,6 +16,7 @@ import {
 } from '../utils/validate';
 import { formatCardExpiryDate } from '../utils/formatCardExpiryDate';
 import { postCard } from '../api/postCard';
+import { HttpError, NetworkError } from '../errors/errors';
 
 export function useRegisterCardForm() {
   const [cardStatus, cardNumberHandler] = useCardNumber();
@@ -99,7 +100,16 @@ export function useRegisterCardForm() {
         state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
       });
     } catch (error) {
-      alert(error instanceof Error ? error.message : '카드 등록에 실패했습니다.');
+      if (error instanceof HttpError) {
+        alert(error.message);
+        return;
+      }
+      if (error instanceof NetworkError) {
+        alert(error.message);
+        return;
+      }
+
+      alert('카드 등록에 실패했습니다.');
     }
   };
 
