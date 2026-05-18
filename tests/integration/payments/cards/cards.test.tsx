@@ -79,7 +79,7 @@ describe('카드 목록 페이지 테스트', async () => {
 
     // ASSERT
     await waitFor(() => {
-      expect(screen.getByText(cards[0].expirationDate)).not.toBeInTheDocument();
+      expect(screen.queryByText(cards[0].expirationDate)).not.toBeInTheDocument();
     });
   });
 });
