@@ -4,7 +4,7 @@ import Visa from "../../../public/Visa.svg";
 import Diners from "../../../public/Diners.svg";
 import Amex from "../../../public/Amex.svg";
 import Union from "../../../public/UnionPay.svg";
-import { CARD_COLORS } from "../../constants/cardConstants";
+import { ISSUER_CODE_TO_COLOR } from "../../constants/cardConstants";
 
 interface Props {
   cardNumbers: { first: string; second: string; third: string; fourth: string };
@@ -27,7 +27,7 @@ export default function CardPreview({
   cardFirm,
   cardBrand,
 }: Props) {
-  const cardColor = CARD_COLORS[cardFirm.label] ?? "#333333";
+  const cardColor = ISSUER_CODE_TO_COLOR[cardFirm.value] ?? "#333333";
 
   return (
     <CardPreviewContainer cardColor={cardColor}>
