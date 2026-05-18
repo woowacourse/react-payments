@@ -96,11 +96,14 @@ function AddCardFormTemplate() {
               </Text>
             )}
           </CardFormSection>
-          <CardFormSection isVisible={form.formStatus.isValid}>
-            <Button type="submit" style={{ position: 'sticky', bottom: '0', borderRadius: '0px', margin: '0 -32px' }}>
-              확인
-            </Button>
-          </CardFormSection>
+          <Button
+            type="submit"
+            style={{ position: 'sticky', bottom: '0', borderRadius: '0px', margin: '0 -32px' }}
+            disabled={mutation.status === 'loading'}
+            hidden={!form.formStatus.isValid}
+          >
+            확인
+          </Button>
         </Flex>
       </Form>
     </View>
