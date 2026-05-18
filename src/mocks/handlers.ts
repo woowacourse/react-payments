@@ -1,9 +1,9 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 import { CardListResponse, RegisterCardRequest, RegisterCardResponse } from '../apis/cards';
 import { cardDB } from './db';
 
 export const handlers = [
-  http.get('*/cards', () => {
+  http.get('*/cards', async () => {
     const list: CardListResponse = cardDB
       .list()
       .map(({ id, issuerCode, number, expirationDate }) => ({
@@ -12,6 +12,8 @@ export const handlers = [
         number,
         expirationDate,
       }));
+
+    await delay(1500);
     return HttpResponse.json(list, { status: 200 });
   }),
 
