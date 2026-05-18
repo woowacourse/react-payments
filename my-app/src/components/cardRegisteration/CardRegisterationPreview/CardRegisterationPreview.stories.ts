@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Card from "./Card";
+import CardRegisterationPreview from "./CardRegisterationPreview";
 
 const meta = {
-  title: "Components/Card/Card",
-  component: Card,
+  title: "Components/CardRegisteration/CardRegisterationPreview",
+  component: CardRegisterationPreview,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -11,150 +11,150 @@ const meta = {
   argTypes: {
     cardInfo: { control: "object" },
   },
-} satisfies Meta<typeof Card>;
+} satisfies Meta<typeof CardRegisterationPreview>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Empty: Story = {
   args: {
-    network: "",
     cardInfo: {
       numbers: [],
       expiry: [],
       cvc: "",
-      company: "",
+      issuerCode: "",
       password: "",
+      network: "",
     },
   },
 };
 
 export const Visa: Story = {
   args: {
-    network: "visa",
     cardInfo: {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["12", "26"],
       cvc: "123",
-      company: "",
+      issuerCode: "",
       password: "",
+      network: "visa",
     },
   },
 };
 
 export const Master: Story = {
   args: {
-    network: "master",
     cardInfo: {
       numbers: ["5123", "4567", "8901", "2345"],
       expiry: ["06", "27"],
       cvc: "456",
-      company: "",
+      issuerCode: "",
       password: "",
+      network: "master",
     },
   },
 };
 
 export const Shinhan: Story = {
   args: {
-    network: "visa",
     cardInfo: {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["12", "26"],
       cvc: "123",
-      company: "shinhan",
+      issuerCode: "41",
       password: "",
+      network: "visa",
     },
   },
 };
 
 export const BC: Story = {
   args: {
-    network: "master",
     cardInfo: {
       numbers: ["5123", "4567", "8901", "2345"],
       expiry: ["06", "27"],
       cvc: "456",
-      company: "bc",
+      issuerCode: "31",
       password: "",
+      network: "master",
     },
   },
 };
 
 export const Hyundai: Story = {
   args: {
-    network: "visa",
     cardInfo: {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["01", "28"],
       cvc: "123",
-      company: "hyundai",
+      issuerCode: "61",
       password: "",
+      network: "visa",
     },
   },
 };
 
 export const Kakaobank: Story = {
   args: {
-    network: "visa",
     cardInfo: {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["03", "27"],
       cvc: "123",
-      company: "kakaobank",
+      issuerCode: "15",
       password: "",
+      network: "visa",
     },
   },
 };
 
 export const Woori: Story = {
   args: {
-    network: "visa",
     cardInfo: {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["05", "26"],
       cvc: "123",
-      company: "woori",
+      issuerCode: "W1",
       password: "",
+      network: "visa",
     },
   },
 };
 
 export const Lotte: Story = {
   args: {
-    network: "visa",
     cardInfo: {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["07", "25"],
       cvc: "123",
-      company: "lotte",
+      issuerCode: "71",
       password: "",
+      network: "visa",
     },
   },
 };
 
 export const Hana: Story = {
   args: {
-    network: "visa",
     cardInfo: {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["09", "26"],
       cvc: "123",
-      company: "hana",
+      issuerCode: "21",
       password: "",
+      network: "visa",
     },
   },
 };
 
 export const Kookmin: Story = {
   args: {
-    network: "visa",
     cardInfo: {
       numbers: ["4123", "4567", "8901", "2345"],
       expiry: ["11", "27"],
       cvc: "123",
-      company: "kookmin",
+      issuerCode: "11",
       password: "",
+      network: "visa",
     },
   },
 };

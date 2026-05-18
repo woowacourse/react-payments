@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import PasswordInputSection from "./PasswordInputSection";
+import CvcRegisterationInputSection from "./CvcRegisterationInputSection";
 
 const meta = {
-  title: "Components/Card/PasswordInputSection",
-  component: PasswordInputSection,
+  title: "Components/CardRegisteration/CvcRegisterationInputSection",
+  component: CvcRegisterationInputSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -14,10 +14,10 @@ const meta = {
   },
   render: (args) => (
     <div style={{ width: 320 }}>
-      <PasswordInputSection {...args} />
+      <CvcRegisterationInputSection {...args} />
     </div>
   ),
-} satisfies Meta<typeof PasswordInputSection>;
+} satisfies Meta<typeof CvcRegisterationInputSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -27,18 +27,18 @@ export const Default: Story = {};
 export const FilledValid: Story = {
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByPlaceholderText("**");
+    const input = canvas.getByRole("textbox");
 
-    await userEvent.type(input, "12");
+    await userEvent.type(input, "123");
 
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith("12");
+    await expect(args.onValueHandler).toHaveBeenLastCalledWith("123");
   },
 };
 
 export const ErrorNonNumeric: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const input = canvas.getByPlaceholderText("**");
+    const input = canvas.getByRole("textbox");
 
     await userEvent.type(input, "ab");
     await userEvent.tab();

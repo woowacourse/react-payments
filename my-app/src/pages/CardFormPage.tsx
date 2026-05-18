@@ -1,16 +1,16 @@
 import { css } from "@emotion/react";
 
-import CardForm from "../components/card/CardForm/CardForm";
+import CardRegisterationForm from "../components/cardRegisteration/CardRegisterationForm/CardRegisterationForm.tsx";
 
-const CardFormPage = () => {
+const CardRegisterationFormPage = () => {
   return (
     <main css={pageStyle}>
-      <CardForm />
+      <CardRegisterationForm />
     </main>
   );
 };
 
-export default CardFormPage;
+export default CardRegisterationFormPage;
 
 const pageStyle = css`
   display: flex;

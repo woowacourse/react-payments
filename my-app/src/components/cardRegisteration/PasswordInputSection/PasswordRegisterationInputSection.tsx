@@ -6,13 +6,13 @@ import { useSingleFieldInput } from "../../../hooks/useSingleFieldInput";
 import { inputStyle } from "../../../styles/inputStyle";
 import { validateNumeric } from "../../../utils/validators";
 
-type PasswordInputSectionProps = {
+type PasswordRegisterationInputSectionProps = {
   onValueHandler: (value: string) => void;
 };
 
 const PASSWORD_INPUT_LABEL = "비밀번호 앞 2자리";
 
-const PasswordInputSection = ({ onValueHandler }: PasswordInputSectionProps) => {
+const PasswordRegisterationInputSection = ({ onValueHandler }: PasswordRegisterationInputSectionProps) => {
   const { inputValue, errorMessage, handlers } = useSingleFieldInput({ onValueHandler, validate: validateNumeric });
 
   return (
@@ -35,4 +35,4 @@ const PasswordInputSection = ({ onValueHandler }: PasswordInputSectionProps) => 
   );
 };
 
-export default PasswordInputSection;
+export default PasswordRegisterationInputSection;

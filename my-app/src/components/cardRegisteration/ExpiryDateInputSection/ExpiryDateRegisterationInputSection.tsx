@@ -4,14 +4,14 @@ import ValidatedInputGroup from "../../common/ValidatedInputGroup/ValidatedInput
 import { useExpiryDateInput } from "../../../hooks/useExpiryDateInput";
 import { inputStyle } from "../../../styles/inputStyle";
 
-type ExpiryDateInputSectionProps = {
+type ExpiryDateRegisterationInputSectionProps = {
   onValueHandler: (values: string[]) => void;
   serverErrorMessage?: string;
 };
 
 const EXPRIY_DATE_INPUT_LABELS = ["유효기간 월", "유효기간 년도"];
 
-const ExpiryDateInputSection = ({ onValueHandler, serverErrorMessage }: ExpiryDateInputSectionProps) => {
+const ExpiryDateRegisterationInputSection = ({ onValueHandler, serverErrorMessage }: ExpiryDateRegisterationInputSectionProps) => {
   const { inputValues, errorMessage, errorIndex, inputRefs, fieldCount, fieldMaxLength, handlers } = useExpiryDateInput(
     { onValueHandler },
   );
@@ -47,4 +47,4 @@ const ExpiryDateInputSection = ({ onValueHandler, serverErrorMessage }: ExpiryDa
   );
 };
 
-export default ExpiryDateInputSection;
+export default ExpiryDateRegisterationInputSection;

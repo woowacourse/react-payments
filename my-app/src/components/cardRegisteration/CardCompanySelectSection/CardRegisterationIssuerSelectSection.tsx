@@ -3,7 +3,7 @@ import Select from "react-select";
 import { ISSUERS, type IssuerCode } from "../../../constants/issuers.ts";
 import InputSectionLayout from "../../common/InputSectionLayout/InputSectionLayout.tsx";
 
-type CardIssuerSelectSectionProps = {
+type CardRegisterationIssuerSelectSectionProps = {
   onSelect: (issuerCode: IssuerCode) => void;
 };
 
@@ -12,7 +12,7 @@ const ISSUER_OPTIONS = Object.entries(ISSUERS).map(([value, { label }]) => ({
   label,
 }));
 
-const CardIssuerSelectSection = ({ onSelect }: CardIssuerSelectSectionProps) => {
+const CardRegisterationIssuerSelectSection = ({ onSelect }: CardRegisterationIssuerSelectSectionProps) => {
   return (
     <InputSectionLayout title="카드사를 선택해 주세요" message="현재 국내 카드사만 가능합니다.">
       <Select
@@ -28,4 +28,4 @@ const CardIssuerSelectSection = ({ onSelect }: CardIssuerSelectSectionProps) => 
   );
 };
 
-export default CardIssuerSelectSection;
+export default CardRegisterationIssuerSelectSection;

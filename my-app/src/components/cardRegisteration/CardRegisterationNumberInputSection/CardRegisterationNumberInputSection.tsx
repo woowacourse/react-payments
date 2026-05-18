@@ -4,7 +4,7 @@ import ValidatedInputGroup from "../../common/ValidatedInputGroup/ValidatedInput
 import { useCardNumberInput } from "../../../hooks/useCardNumberInput";
 import { inputStyle } from "../../../styles/inputStyle";
 
-type CardNumberInputSectionProps = {
+type CardRegisterationNumberInputSectionProps = {
   onValueHandler: (numbers: string[]) => void;
   maxLength: number;
   isSupportedNetwork: boolean;
@@ -18,7 +18,7 @@ const CARD_NUMBER_INPUT_LABELS = [
   "카드 번호 네번째 칸",
 ];
 
-const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork, serverErrorMessage }: CardNumberInputSectionProps) => {
+const CardRegisterationNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork, serverErrorMessage }: CardRegisterationNumberInputSectionProps) => {
   const {
     inputValues,
     errorMessage,
@@ -61,4 +61,4 @@ const CardNumberInputSection = ({ onValueHandler, maxLength, isSupportedNetwork,
   );
 };
 
-export default CardNumberInputSection;
+export default CardRegisterationNumberInputSection;

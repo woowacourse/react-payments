@@ -6,14 +6,14 @@ import { useSingleFieldInput } from "../../../hooks/useSingleFieldInput";
 import { inputStyle } from "../../../styles/inputStyle";
 import { validateNumeric } from "../../../utils/validators";
 
-type CvcInputSectionProps = {
+type CvcRegisterationInputSectionProps = {
   onValueHandler: (value: string) => void;
   serverErrorMessage?: string;
 };
 
 const CVC_INPUT_LABEL = "CVC";
 
-const CvcInputSection = ({ onValueHandler, serverErrorMessage }: CvcInputSectionProps) => {
+const CvcRegisterationInputSection = ({ onValueHandler, serverErrorMessage }: CvcRegisterationInputSectionProps) => {
   const { inputValue, errorMessage, handlers } = useSingleFieldInput({ onValueHandler, validate: validateNumeric });
 
   const resolvedErrorMessage = errorMessage || serverErrorMessage;
@@ -38,4 +38,4 @@ const CvcInputSection = ({ onValueHandler, serverErrorMessage }: CvcInputSection
   );
 };
 
-export default CvcInputSection;
+export default CvcRegisterationInputSection;

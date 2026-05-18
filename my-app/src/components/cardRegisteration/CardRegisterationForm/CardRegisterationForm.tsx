@@ -5,15 +5,15 @@ import { useCardForm } from "../../../hooks/useCardForm";
 import { useCreateCard } from "../../../hooks/queries/useCreateCard";
 import { ROUTES } from "../../../constants/routes";
 
-import Card from "../Card/Card";
+import CardRegisterationPreview from "../CardRegisterationPreview/CardRegisterationPreview";
 import PrimaryButton from "../../PrimaryButton/PrimaryButton";
-import CardCompanySelectSection from "../CardCompanySelectSection/CardIssuerSelectSection";
-import CardNumberInputSection from "../CardNumberInputSection/CardNumberInputSection";
-import CvcInputSection from "../CvcInputSection/CvcInputSection";
-import ExpiryDateInputSection from "../ExpiryDateInputSection/ExpiryDateInputSection";
-import PasswordInputSection from "../PasswordInputSection/PasswordInputSection";
+import CardRegisterationIssuerSelectSection from "../CardCompanySelectSection/CardRegisterationIssuerSelectSection";
+import CardRegisterationNumberInputSection from "../CardRegisterationNumberInputSection/CardRegisterationNumberInputSection";
+import CvcRegisterationInputSection from "../CvcRegisterationInputSection/CvcRegisterationInputSection";
+import ExpiryDateRegisterationInputSection from "../ExpiryDateInputSection/ExpiryDateRegisterationInputSection";
+import PasswordRegisterationInputSection from "../PasswordInputSection/PasswordRegisterationInputSection";
 
-const CardForm = () => {
+const CardRegisterationForm = () => {
   const navigate = useNavigate();
   const { cardInfo, maxLength, isSupportedNetwork, completion, handlers } = useCardForm();
   const { state, submit } = useCreateCard();
@@ -30,23 +30,23 @@ const CardForm = () => {
   return (
     <div css={formContainerStyle}>
       <div css={contentStyle}>
-        <Card cardInfo={cardInfo} />
+        <CardRegisterationPreview cardInfo={cardInfo} />
         <div css={sectionsStyle}>
-          {completion.cvc && <PasswordInputSection onValueHandler={handlers.password} />}
+          {completion.cvc && <PasswordRegisterationInputSection onValueHandler={handlers.password} />}
           {completion.expiry && (
-            <CvcInputSection
+            <CvcRegisterationInputSection
               onValueHandler={handlers.cvc}
               serverErrorMessage={serverError?.field === "cvc" ? serverError.message : undefined}
             />
           )}
           {completion.issuerCode && (
-            <ExpiryDateInputSection
+            <ExpiryDateRegisterationInputSection
               onValueHandler={handlers.expiry}
               serverErrorMessage={serverError?.field === "expiry" ? serverError.message : undefined}
             />
           )}
-          {completion.cardNumber && <CardCompanySelectSection onSelect={handlers.cardIssuer} />}
-          <CardNumberInputSection
+          {completion.cardNumber && <CardRegisterationIssuerSelectSection onSelect={handlers.cardIssuer} />}
+          <CardRegisterationNumberInputSection
             onValueHandler={handlers.cardNumber}
             maxLength={maxLength}
             isSupportedNetwork={isSupportedNetwork}
@@ -63,7 +63,7 @@ const CardForm = () => {
   );
 };
 
-export default CardForm;
+export default CardRegisterationForm;
 
 const formContainerStyle = css`
   width: 376px;

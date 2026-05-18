@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import ExpiryDateInputSection from "./ExpiryDateInputSection";
+import ExpiryDateRegisterationInputSection from "./ExpiryDateRegisterationInputSection";
 
 const meta = {
-  title: "Components/Card/ExpiryDateInputSection",
-  component: ExpiryDateInputSection,
+  title: "Components/CardRegisteration/ExpiryDateRegisterationInputSection",
+  component: ExpiryDateRegisterationInputSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
@@ -14,10 +14,10 @@ const meta = {
   },
   render: (args) => (
     <div style={{ width: 320 }}>
-      <ExpiryDateInputSection {...args} />
+      <ExpiryDateRegisterationInputSection {...args} />
     </div>
   ),
-} satisfies Meta<typeof ExpiryDateInputSection>;
+} satisfies Meta<typeof ExpiryDateRegisterationInputSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

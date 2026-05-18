@@ -32,7 +32,7 @@ type CardProps = {
   cardInfo: CardDisplayInfo;
 };
 
-const Card = ({ cardInfo }: CardProps) => {
+const CardRegisterationPreview = ({ cardInfo }: CardProps) => {
   return (
     <div css={cardStyle(cardInfo.issuerCode)}>
       <div css={cardHeaderStyle}>
@@ -62,7 +62,7 @@ const Card = ({ cardInfo }: CardProps) => {
   );
 };
 
-export default Card;
+export default CardRegisterationPreview;
 
 const cardStyle = (issuerCode: string) => css`
   width: 212px;
