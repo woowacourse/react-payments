@@ -2,17 +2,17 @@ import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
 
 const CardListItemSkeleton = () => (
-  <Container>
+  <Item>
     <CardImage />
     <CardInfo>
       <CardCompanySkeleton />
       <CardNumberSkeleton />
       <CardExpirationDateSkeleton />
     </CardInfo>
-  </Container>
+  </Item>
 );
 
-const Container = styled.div`
+const Item = styled.li`
   display: flex;
   align-items: center;
   gap: 0.75rem;
