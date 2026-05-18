@@ -1,30 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { useCardBrandContext } from "../context/cardBrand/CardBrandContext";
-import { useCardNumberContext } from "../context/cardNumber/CardNumberContext";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import { FaCheckCircle } from "react-icons/fa";
-import { useCvcContext } from "../context/cvc/CvcContext";
-import { useExpireDateContext } from "../context/expireDate/ExpireDateContext";
-import { usePasswordContext } from "../context/password/PasswordContext";
 
 export default function Enrollment() {
-  const { cardNumber, resetCardNumber } = useCardNumberContext();
-  const {
-    selectedItem: { brand },
-    resetCardBrand,
-  } = useCardBrandContext();
-  const { resetCvc } = useCvcContext();
-  const { resetExpireDate } = useExpireDateContext();
-  const { resetPassword } = usePasswordContext();
-
+  const location = useLocation();
   const navigate = useNavigate();
 
   const handleClick = () => {
-    resetCardNumber();
-    resetCardBrand();
-    resetCvc();
-    resetExpireDate();
-    resetPassword();
     navigate("/react-payments/");
   };
 
@@ -32,8 +14,8 @@ export default function Enrollment() {
     <Wrapper>
       <CheckIcon />
       <Phrase>
-        <span>{cardNumber[0]}로 시작하는</span>
-        <span>{brand}가 등록되었어요.</span>
+        <span>{location.state.cardNumber[0]}로 시작하는</span>
+        <span>{location.state.brand}가 등록되었어요.</span>
       </Phrase>
       <Button onClick={() => handleClick()}>확인</Button>
     </Wrapper>
