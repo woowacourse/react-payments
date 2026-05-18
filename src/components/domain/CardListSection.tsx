@@ -8,8 +8,7 @@ import { useEffect, useState } from 'react';
 import ButtonSkeleton from '../ui/Button.skeleton.tsx';
 import { getCards } from '../../apis/cards/api.ts';
 import type { CardList as CardListType } from '../../apis/cards/type.ts';
-
-type ResponseStatus = 'idle' | 'loading' | 'success' | 'error';
+import type { ResponseStatus } from '../../types.ts';
 
 export default function CardListSection() {
   const [cards, setCards] = useState<CardListType>([]);

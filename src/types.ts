@@ -6,6 +6,7 @@ export interface CardInfo {
   password: string;
 }
 
+// TODO: CardCompanies 기반으로 동기화 필요
 export type CardCompany =
   | null
   | 'BC카드'
@@ -28,3 +29,5 @@ export interface Validate<T> {
   rule: (inputValue: string, index?: number) => boolean;
   errorStatus: T;
 }
+
+export type ResponseStatus = 'idle' | 'loading' | 'success' | 'error';
