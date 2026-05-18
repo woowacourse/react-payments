@@ -116,8 +116,8 @@
   - [x] 카드 가져오는 API 추가(Local Storage 기반 ..?)
   - [ ] 비동기 상태에 맞는 UI 표시
     - [ ] loading
-    - [ ] success + 목록(x)
-    - [ ] success + 목록(o)
+    - [x] success + 목록(x)
+    - [x] success + 목록(o)
     - [ ] error
   - [ ] 카드 삭제 버튼
     - [ ] 버튼 클릭시 `window.confirm`을 통해 모달 제공 (확인시에만 제거)
