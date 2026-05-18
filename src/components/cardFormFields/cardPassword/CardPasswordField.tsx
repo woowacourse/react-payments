@@ -13,10 +13,11 @@ import useBlur from '../useBlur';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardPassword'];
+  serverError?: string | null;
 }
 
 // 카드 비밀번호 앞 2자리를 입력할 수 있는 컴포넌트
-export default function CardPasswordField({ field }: Props) {
+export default function CardPasswordField({ field, serverError }: Props) {
   const { value: password, set: setPassword } = field;
   const error = getCardPasswordError(password);
   const { touched, handleBlur } = useBlur();
@@ -44,7 +45,7 @@ export default function CardPasswordField({ field }: Props) {
           inputMode="numeric"
         />
       </InputContainer>
-      <ErrorMessage>{touched ? error : ''}</ErrorMessage>
+      <ErrorMessage>{serverError ?? (touched ? error : '')}</ErrorMessage>
     </Field>
   );
 }

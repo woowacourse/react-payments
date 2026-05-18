@@ -1,14 +1,15 @@
-import { Description, Field, Title } from '../CardFormFields.styles';
+import { Description, ErrorMessage, Field, Title } from '../CardFormFields.styles';
 import { Select } from './CardBrandField.styles';
 import { useCardForm } from '../../useCardForm';
 import { CARD_BRANDS } from '../../../constants/constants';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardBrand'];
+  serverError?: string | null;
 }
 
 // 카드사를 선택할 수 있는 컴포넌트
-export default function CardBrandField({ field }: Props) {
+export default function CardBrandField({ field, serverError }: Props) {
   const { value: cardBrand, set: setCardBrand } = field;
 
   return (
@@ -25,6 +26,7 @@ export default function CardBrandField({ field }: Props) {
           </option>
         ))}
       </Select>
+      <ErrorMessage>{serverError ?? ''}</ErrorMessage>
     </Field>
   );
 }

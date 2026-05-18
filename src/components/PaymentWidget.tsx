@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardFormFields from "./cardFormFields/CardFormFields";
 import CardPreview from "./cardPreview/CardPreview";
@@ -5,15 +6,19 @@ import { ConfirmButton } from "./PaymentWidget.styles";
 import { Wrapper } from "./PageCard.styles";
 import { useCardForm } from "./useCardForm";
 import { useCardStep } from "./cardFormFields/useCardStep";
-import { createCard } from "../api/cards";
+import { createCard, type CardRequest } from "../api/cards";
 import { CARD_BRANDS, type CardBrand } from "../constants/constants";
+
+type SubmitError = { code: keyof CardRequest; message: string };
 
 export default function PaymentWidget() {
   const cardForm = useCardForm();
   const step = useCardStep(cardForm);
   const navigate = useNavigate();
+  const [submitError, setSubmitError] = useState<SubmitError | null>(null);
 
   const handleConfirm = async () => {
+    setSubmitError(null);
     const body = {
       cardNumber: cardForm.cardNumber.value.join(''),
       expireDate: cardForm.expireDate.value.join('/'),
@@ -33,8 +38,7 @@ export default function PaymentWidget() {
         });
         return;
       }
-      // TODO: result.error.code를 해당 입력 필드 아래 메시지로 표시
-      alert(result.error.message);
+      setSubmitError(result.error);
     } catch (error) {
       console.error(error);
     }
@@ -43,7 +47,7 @@ export default function PaymentWidget() {
   return (
     <Wrapper>
       <CardPreview cardForm={cardForm} />
-      <CardFormFields cardForm={cardForm} step={step} />
+      <CardFormFields cardForm={cardForm} step={step} submitError={submitError} />
       {step >= 5 && <ConfirmButton onClick={handleConfirm}>확인</ConfirmButton>}
     </Wrapper>
   );
