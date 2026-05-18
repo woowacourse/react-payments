@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import OutlinedButton from "@/components/Button/OutlinedButton";
 import CardListItem from "@/components/CardListItem/CardListItem";
-import CardListSkeleton from "@/components/SkeletonUI/CardListSkeleton";
+import CardListSkeleton from "@/components/CardListItem/CardListSkeleton";
 import EmptyState from "@/components/common/EmptyState";
-import ErrorIcon from "@/components/common/ErrorIcon";
-import EmptyCardIcon from "@/components/common/EmptyCardIcon";
+import ErrorIcon from "@/components/CardListItem/ErrorIcon";
+import EmptyCardIcon from "@/components/CardListItem/EmptyCardIcon";
 import { getCards, deleteCard, type CardItem } from "@/api/cards";
 
 type Status = "idle" | "loading" | "success" | "error";
