@@ -66,16 +66,10 @@ const validateExpirationMonth = (expirationDate: string) => {
 };
 
 const createCard = (request: SCreateCardRequest) => {
-  const card = createCardFromRequest(request);
-  cards.push(card);
-};
-
-const createCardFromRequest = (request: SCreateCardRequest): SCard => {
-  return {
+  const card = {
+    ...request,
     id: crypto.randomUUID(),
-    issuerCode: request.issuerCode,
-    number: request.number,
-    expirationDate: request.expirationDate,
-    cvc: request.cvc,
   };
+
+  cards.push(card);
 };
