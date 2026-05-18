@@ -13,6 +13,7 @@ const meta = {
     onCvcNumberChange: fn(),
     formErrorMessage: null,
     clearFormErrorMessage: fn(),
+    disabledInput: false,
   },
 } satisfies Meta<typeof CvcField>;
 

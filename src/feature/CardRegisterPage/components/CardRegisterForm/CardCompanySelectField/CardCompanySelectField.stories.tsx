@@ -12,6 +12,7 @@ const meta = {
   args: {
     selectedCardCompany: null,
     onSelect: fn(),
+    disabledSelect: false,
   },
 } satisfies Meta<typeof CardCompanySelectField>;
 

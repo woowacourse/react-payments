@@ -15,6 +15,7 @@ const meta = {
     chunkLengths: CARD.DEFAULT.CHUNK_LENGTHS,
     formErrorMessage: null,
     clearFormErrorMessage: fn(),
+    disabledInput: false,
   },
 } satisfies Meta<typeof NumberField>;
 

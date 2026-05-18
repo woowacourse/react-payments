@@ -11,6 +11,7 @@ const meta = {
   args: {
     password: "",
     onPasswordChange: fn(),
+    disabledInput: false,
   },
 } satisfies Meta<typeof PasswordField>;
 

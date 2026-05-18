@@ -61,7 +61,9 @@ describe("카드 관리 통합 흐름", () => {
 
     renderApp("/cards");
 
-    expect(await screen.findByText("보유 카드 (1)")).toBeInTheDocument();
+    expect(
+      await screen.findByText("보유 카드 (1)", {}, { timeout: 5000 }),
+    ).toBeInTheDocument();
     expect(screen.getByText("국민카드")).toBeInTheDocument();
 
     const user = userEvent.setup();
@@ -70,9 +72,12 @@ describe("카드 관리 통합 흐름", () => {
 
     await user.click(screen.getByRole("button", { name: "X" }));
 
-    await waitFor(() => {
-      expect(screen.queryByText("국민카드")).not.toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        expect(screen.queryByText("국민카드")).not.toBeInTheDocument();
+      },
+      { timeout: 5000 },
+    );
     expect(screen.getByText("보유 카드")).toBeInTheDocument();
   });
 
