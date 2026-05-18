@@ -60,3 +60,13 @@ export const ErrorInvalidMonth: Story = {
     await expect(canvas.getByText("유효한 날짜를 입력해주세요")).toBeInTheDocument();
   },
 };
+
+export const ServerError: Story = {
+  args: {
+    serverError: "만료된 카드입니다.",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText("만료된 카드입니다.")).toBeInTheDocument();
+  },
+};
