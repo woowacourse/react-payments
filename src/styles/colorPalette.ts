@@ -8,6 +8,7 @@ export const COLOR_PALETTE = {
   "BLACK-800": "#333",
   "BLACK-700": "#353C49",
   "BLACK-600": "#8C8C8C",
+  "BLACK-500": "#F5F5F5",
   WHITE: "#ffffff",
 
   // card company colors
