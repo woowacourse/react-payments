@@ -40,3 +40,8 @@ export const maxLength = (value: unknown, { maxLength }: { maxLength?: number })
   if (!isString(value)) return false;
   return value.length <= (maxLength || 0);
 };
+
+export const rangeLength = (value: unknown, { minLength, maxLength }: { minLength: number; maxLength: number }) => {
+  if (!isString(value)) return false;
+  return value.length >= (minLength || 0) && value.length <= (maxLength || 0);
+};

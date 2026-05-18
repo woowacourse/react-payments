@@ -1,8 +1,23 @@
 import type { ReactNode } from 'react';
 
-import { isRequired, isNumericString, isValidMonth, length, minLength, maxLength } from '../utils/validator';
+import {
+  isRequired,
+  isNumericString,
+  isValidMonth,
+  length,
+  minLength,
+  maxLength,
+  rangeLength,
+} from '../utils/validator';
 
-type RuleType = 'isRequired' | 'isNumericString' | 'isValidMonth' | 'length' | 'minLength' | 'maxLength';
+type RuleType =
+  | 'isRequired'
+  | 'isNumericString'
+  | 'isValidMonth'
+  | 'length'
+  | 'minLength'
+  | 'maxLength'
+  | 'rangeLength';
 
 type Validators = {
   [type in RuleType]: (value: unknown, options?: any) => boolean;
@@ -15,6 +30,7 @@ const validators: Validators = {
   length,
   minLength,
   maxLength,
+  rangeLength,
 };
 
 type ValidatorRule = {
