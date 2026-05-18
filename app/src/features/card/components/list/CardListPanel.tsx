@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import CardList from "./CardList";
 
-export default function CardListPanel({ cards }) {
+export default function CardListPanel({ cards, gotoCardCreatePage }) {
   return (
-    <>
+    <div>
       <CardList cards={cards} />
-      <CardAddButton>+ 카드 추가</CardAddButton>
-    </>
+      <CardAddButton onClick={gotoCardCreatePage}>+ 카드 추가</CardAddButton>
+    </div>
   );
 }
 
@@ -20,4 +20,5 @@ const CardAddButton = styled.button`
   color: #8c8c8c;
   margin-top: 1rem;
   background-color: transparent;
+  cursor: pointer;
 `;

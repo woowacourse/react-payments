@@ -15,7 +15,10 @@ export default function CardListSection({ cards }) {
       <h1>보유 카드 {cards.length ? `(${cards.length})` : ""}</h1>
       <Content>
         {cards.length ? (
-          <CardListPanel cards={cards} />
+          <CardListPanel
+            cards={cards}
+            gotoCardCreatePage={gotoCardCreatePage}
+          />
         ) : (
           <EmptyCardList onClick={gotoCardCreatePage} />
         )}
