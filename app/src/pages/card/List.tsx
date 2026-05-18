@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCards } from "../../features/card/Api";
-import CardList from "../../features/card/components/CardList";
+import CardList from "../../features/card/components/CardListSection";
 
 export default function CardListPage() {
   const [cards, setCards] = useState([]);

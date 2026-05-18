@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router";
 import EmptyCardList from "./list/EmptyCardList";
+import CardList from "./list/CardList";
 
-export default function CardList({ cards }) {
+export default function CardListSection({ cards }) {
   const navigate = useNavigate();
 
   const gotoCardCreatePage = () => {
@@ -10,16 +11,20 @@ export default function CardList({ cards }) {
   };
 
   return (
-    <CardListContainer>
+    <CardListSectionContainer>
       <h1>보유 카드</h1>
-      <SomeContainer>
-        <EmptyCardList onClick={gotoCardCreatePage} />
-      </SomeContainer>
-    </CardListContainer>
+      <Content>
+        {cards ? (
+          <CardList cards={cards} />
+        ) : (
+          <EmptyCardList onClick={gotoCardCreatePage} />
+        )}
+      </Content>
+    </CardListSectionContainer>
   );
 }
 
-const CardListContainer = styled.div`
+const CardListSectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -32,7 +37,7 @@ const CardListContainer = styled.div`
   }
 `;
 
-const SomeContainer = styled.div`
+const Content = styled.div`
   flex: 1;
   display: flex;
   align-items: center;

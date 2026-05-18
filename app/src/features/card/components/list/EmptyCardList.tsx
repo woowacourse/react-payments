@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import GhostCard from "../assets/Ghostcard.svg";
+import GhostCard from "../../assets/Ghostcard.svg";
 import { RadiusButton } from "../../style/Button";
 
 export default function EmptyCardList({ onClick }) {
