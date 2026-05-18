@@ -38,17 +38,15 @@ export function CardRegisterPage(props: CardRegisterPageProps) {
   };
 
   const handleFormStateChange = (newState: CardFormState) => {
-    if (
+    if (newState.cardNumberSegments !== cardFormState.cardNumberSegments) {
+      setServerErrors({});
+    } else if (
       newState.expiryMonth !== cardFormState.expiryMonth ||
       newState.expiryYear !== cardFormState.expiryYear
     ) {
-      setServerErrors((prev) => ({ ...prev, expirationDate: undefined }));
-    }
-    if (newState.cvc !== cardFormState.cvc) {
+      setServerErrors((prev) => ({ ...prev, expirationDate: undefined, cvc: undefined }));
+    } else if (newState.cvc !== cardFormState.cvc) {
       setServerErrors((prev) => ({ ...prev, cvc: undefined }));
-    }
-    if (newState.cardNumberSegments !== cardFormState.cardNumberSegments) {
-      setServerErrors((prev) => ({ ...prev, cardNumber: undefined }));
     }
     handleSetFormState(newState);
   };
