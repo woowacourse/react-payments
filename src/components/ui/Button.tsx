@@ -18,6 +18,7 @@ export default function Button({
   return (
     <button
       type={props.type ?? 'button'}
+      disabled={props.disabled || loading}
       css={[buttonStyle, variants[variant], sizes[size], rounded ? roundedStyle : null, loading ? loadingStyle : null]}
       {...props}
     >
