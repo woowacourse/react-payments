@@ -14,7 +14,7 @@ export type ValidityPeriodStatus = {
   [K in keyof ValidityPeriod]: ValidityPeriodInputStatus;
 };
 
-export interface CardInfoFormState extends Record<string, unknown> {
+export interface CardInfoFormState {
   cardNumber: CardNumberUnits;
   validityPeriod: ValidityPeriod;
   CVC: string;

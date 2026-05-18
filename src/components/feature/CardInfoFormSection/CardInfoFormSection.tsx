@@ -1,5 +1,7 @@
 import StepFunnel from "@components/common/StepFunnel";
+import CARD from "@constants/card";
 import styled from "@emotion/styled";
+import useRegisterCard from "@hooks/feature/mutation/useRegisterCard";
 import useNavigateCompletePage from "@hooks/feature/navigation/useNavigateCompletePage";
 
 import CardCompanySelectField from "./components/CardCompanySelectField";
@@ -14,6 +16,7 @@ import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
 
 const CardInfoFormSection = () => {
   const navigateToCompletePage = useNavigateCompletePage();
+  const { mutate: registerCard } = useRegisterCard();
   const { getValue } = useFormValue();
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
@@ -21,8 +24,23 @@ const CardInfoFormSection = () => {
 
     const cardNumber = getValue("cardNumber").join("");
     const cardCompany = getValue("selectedCardCompany") ?? "";
+    const cvc = getValue("CVC");
+    const { month, year } = getValue("validityPeriod");
+    const expirationDate = `${month}/${year}`;
+    const issuerCode = CARD.COMPANY_SELECT_FIELD.find(
+      (field) => field.value === cardCompany,
+    )?.issuerCode;
 
-    navigateToCompletePage({ cardNumber, cardCompany });
+    const cardInfo = {
+      number: cardNumber,
+      expirationDate,
+      cvc,
+      issuerCode,
+    };
+
+    registerCard(cardInfo, {
+      onSuccess: () => navigateToCompletePage({ cardNumber, cardCompany }),
+    });
   };
 
   return (

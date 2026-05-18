@@ -1,10 +1,10 @@
 import Button from "@components/common/Button";
 import { useNavigate } from "react-router";
 
-const GoHomeButton = () => {
+const GoCardsButton = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/");
+    navigate("/cards");
   };
 
   return (
@@ -14,4 +14,4 @@ const GoHomeButton = () => {
   );
 };
 
-export default GoHomeButton;
+export default GoCardsButton;
