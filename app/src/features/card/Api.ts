@@ -3,9 +3,11 @@ const BASE_URL = "https://api.antolibank.com/cards";
 export class NetworkError extends Error {}
 export class HttpError extends Error {
   status: number;
-  constructor(status: number) {
+  errorMessages?: Record<string, { code: string; message: string } | null | undefined>;
+  constructor(status: number, errorMessages?: Record<string, { code: string; message: string } | null | undefined>) {
     super();
     this.status = status;
+    this.errorMessages = errorMessages;
   }
 }
 
@@ -16,7 +18,10 @@ const request = async (url: string, init?: RequestInit) => {
   } catch {
     throw new NetworkError();
   }
-  if (!response.ok) throw new HttpError(response.status);
+  if (!response.ok) {
+    const body = await response.json().catch(() => undefined);
+    throw new HttpError(response.status, body?.errorMessages);
+  }
   return response;
 };
 

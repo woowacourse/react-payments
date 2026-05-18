@@ -42,7 +42,7 @@ describe("CardListSection 통합 테스트", () => {
     renderCardListSection([]);
 
     expect(screen.getByText("등록된 카드가 없습니다")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "카드 추가하기" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "카드 추가하기" })).toBeInTheDocument();
   });
 
   test("카드가 있을 때 카드 목록이 렌더링된다", () => {
@@ -55,7 +55,7 @@ describe("CardListSection 통합 테스트", () => {
   test("빈 상태에서 카드 추가하기 클릭 시 카드 추가 페이지로 이동한다", async () => {
     const { user } = renderCardListSection([]);
 
-    await user.click(screen.getByRole("button", { name: "카드 추가하기" }));
+    await user.click(screen.getByRole("link", { name: "카드 추가하기" }));
 
     expect(screen.getByText("카드 추가 페이지")).toBeInTheDocument();
   });

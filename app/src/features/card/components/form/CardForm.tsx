@@ -57,12 +57,13 @@ export function CardForm({
     cardPassword,
   });
 
-  const [formErrorCodes] = useState<string[]>([]);
+  const [formErrorCodes, setFormErrorCodes] = useState<string[]>([]);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitError(null);
+    setFormErrorCodes([]);
     try {
       await createCard(
         joinCardNumber(cardNumber),
@@ -75,7 +76,14 @@ export function CardForm({
       if (e instanceof NetworkError) {
         setSubmitError("네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요.");
       } else if (e instanceof HttpError) {
-        setSubmitError("카드 등록에 실패했어요. 입력 정보를 확인해 주세요.");
+        if (e.errorMessages) {
+          const codes = Object.values(e.errorMessages)
+            .filter(Boolean)
+            .map((m) => m!.code);
+          setFormErrorCodes(codes);
+        } else {
+          setSubmitError("카드 등록에 실패했어요. 입력 정보를 확인해 주세요.");
+        }
       }
     }
   };
