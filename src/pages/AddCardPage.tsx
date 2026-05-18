@@ -10,6 +10,7 @@ import CardCompanySelect from '../components/domain/CardCompanySelect';
 import PasswordField from '../components/domain/PasswordField';
 import { FIELD_STEP } from '../constants';
 import useAddCardForm, { type AddCardFormFieldKey } from '../hooks/useAddCardForm';
+import { ROUTES } from '../routes';
 
 export default function AddCardPage() {
   const navigate = useNavigate();
@@ -62,7 +63,8 @@ export default function AddCardPage() {
       focusFirstErrorField();
       return;
     }
-    navigate('/complete', { state: buildCompletePageState() });
+    navigate(ROUTES.addCardComplete, { state: buildCompletePageState() });
+
   };
 
   const handleOpenNextStep = (currentStep: number) => {
