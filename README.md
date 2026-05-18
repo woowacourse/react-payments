@@ -97,3 +97,30 @@
 - [x] Validator를 변경할 Error상태를 반환하는 형태로 전환할지 고민
 - [x] ProgressManager의 Complete검증 메서드를 분리
 - [x] ProgressManager는 Complete된지 여부에 따라 Progress만 조정하여 반환하도록 전환
+
+## 페이먼츠 3단계 - MSW & Async & Testing
+
+### 기능 요구 사항
+
+- [ ] 카드 등록
+  - [ ] 카드 생성하는 API 추가
+    - [ ] 201 응답시 카드 생성 완료 페이지 이동
+    - [ ] 카드 저장 (로컬스토리지)
+  - [ ] 시리얼라이저 검증
+    - [ ] 필드별 에러메시지 렌더링
+
+- [ ] 카드 생성 완료 페이지
+  - [ ] 확인 버튼 라우트 변경(카드 목록)
+
+- [ ] 카드 목록 페이지
+  - [ ] 카드 가져오는 API 추가(Local Storage 기반 ..?)
+  - [ ] 비동기 상태에 맞는 UI 표시
+    - [ ] loading
+    - [ ] success + 목록(x)
+    - [ ] success + 목록(o)
+    - [ ] error
+  - [ ] 카드 삭제 버튼
+    - [ ] 버튼 클릭시 `window.confirm`을 통해 모달 제공 (확인시에만 제거)
+      - [ ] 확인시 제거 (o)
+      - [ ] 취소시 아무동작 (x)
+    - [ ] 제거시 DELETE API 요청 -> 카드 목록 갱신
