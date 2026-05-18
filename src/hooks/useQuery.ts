@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -9,35 +9,34 @@ interface UseQueryOptions<T> {
 export const useQuery = <T>({ queryFn }: UseQueryOptions<T>) => {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<Error | null>(null);
-
   const [data, setData] = useState<T>();
-
-  const fetchQuery = useCallback(async () => {
-    setStatus('loading');
-    try {
-      const res = await queryFn();
-
-      setData(res);
-      setStatus('success');
-      setError(null);
-    } catch (err) {
-      setError(err as Error);
-      setStatus('error');
-    }
-  }, [queryFn]);
+  const [refetchKey, setRefetchKey] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
-      await fetchQuery();
-      if (cancelled) setStatus('idle');
+      setStatus('loading');
+      try {
+        const res = await queryFn();
+        if (cancelled) return;
+
+        setData(res);
+        setStatus('success');
+      } catch (err) {
+        if (cancelled) return;
+
+        setError(err as Error);
+        setStatus('error');
+      }
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [fetchQuery]);
+  }, [refetchKey, queryFn]);
+
+  const flushRefetch = () => setRefetchKey((key) => key + 1);
 
   return {
     data,
@@ -47,6 +46,6 @@ export const useQuery = <T>({ queryFn }: UseQueryOptions<T>) => {
     isLoading: status === 'loading',
     isSuccess: status === 'success',
     isError: status === 'error',
-    refetch: fetchQuery,
+    refetch: flushRefetch,
   };
 };
