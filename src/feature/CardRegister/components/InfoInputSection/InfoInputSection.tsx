@@ -90,6 +90,10 @@ const InfoInputSection = ({
         </FieldSection>
       </FieldsWrapper>
 
+      {serverFieldErrors.form && (
+        <FormErrorMessage>{serverFieldErrors.form}</FormErrorMessage>
+      )}
+
       {!hasFormError && <SubmitButton type="submit">제출</SubmitButton>}
     </Container>
   );
@@ -116,6 +120,15 @@ const FieldsWrapper = styled.div`
   flex: 1;
   overflow-y: auto;
   box-sizing: border-box;
+`;
+
+const FormErrorMessage = styled.p`
+  margin: 0;
+  padding: 0 30px;
+
+  color: #ff3d3d;
+  font-size: 12px;
+  font-weight: 600;
 `;
 
 const SubmitButton = styled(Button)`
