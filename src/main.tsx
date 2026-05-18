@@ -4,13 +4,13 @@ import App from './App.tsx';
 import { HashRouter } from 'react-router-dom';
 
 async function enableMocking() {
-  if (!import.meta.env.DEV) {
-    return;
-  }
-
   const { worker } = await import('./mocks/browser');
 
-  return worker.start();
+  return worker.start({
+    serviceWorker: {
+      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+    },
+  });
 }
 
 enableMocking().then(() => {
