@@ -79,7 +79,7 @@ export default function RegisterCard() {
       >
         <CardInput
           cardNumber={cardNumber}
-          setCardStatus={cardNumberHandler}
+          setCardNumber={cardNumberHandler}
           cardExpiry={cardExpiry}
           setCardExpiry={expiryHandler}
           cardCvc={cardCvc}

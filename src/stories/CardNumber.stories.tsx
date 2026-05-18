@@ -27,42 +27,42 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     cardNumber: emptyCardStatus,
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
 export const FilledVisa: Story = {
   args: {
     cardNumber: visaCardStatus,
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
 export const FilledMastercard: Story = {
   args: {
     cardNumber: masterCardStatus,
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
 export const FilledDiners: Story = {
   args: {
     cardNumber: dinersCardStatus,
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
 export const FilledAMEX: Story = {
   args: {
     cardNumber: amexCardStatus,
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
 export const FilledUnionPay: Story = {
   args: {
     cardNumber: unionPayCardStatus,
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
@@ -73,7 +73,7 @@ export const Error: Story = {
       cardNumberErrorMode: 'notNumber',
       cardBrand: '',
     },
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
@@ -84,21 +84,21 @@ export const UnknownBrandError: Story = {
       cardNumberErrorMode: 'notExistBrand',
       cardBrand: '',
     },
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
 export const Interactive: Story = {
   args: {
     cardNumber: emptyCardStatus,
-    setCardStatus: createCardNumberHandlers(),
+    setCardNumber: createCardNumberHandlers(),
   },
   render: () => {
-    const [cardNumber, setCardStatus] = useCardNumber();
+    const { cardNumber, cardNumberHandler } = useCardNumber();
 
     return (
       <div>
-        <CardNumber cardNumber={cardNumber} setCardStatus={setCardStatus} />
+        <CardNumber cardNumber={cardNumber} setCardNumber={cardNumberHandler} />
 
         <div style={{ marginTop: '16px' }}>입력값: {cardNumber.cardNumbers.join(' - ')}</div>
       </div>

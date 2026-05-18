@@ -19,7 +19,7 @@ import { isValidCardNumber } from '../utils/card/cardBrand';
 
 type CardInputProps = {
   cardNumber: CardStatus;
-  setCardStatus: CardHandler;
+  setCardNumber: CardHandler;
   cardExpiry: CardExpiry;
   setCardExpiry: ExpireHandler;
   cardCvc: Cvc;
@@ -33,7 +33,7 @@ type CardInputProps = {
 
 export default function CardInput({
   cardNumber,
-  setCardStatus,
+  setCardNumber,
   cardExpiry,
   setCardExpiry,
   cardCvc,
@@ -74,7 +74,7 @@ export default function CardInput({
       {isCardNumberComplete && (
         <CardCompany cardCompanyStatus={cardCompanyStatus} setCardCompany={setCardCompany} />
       )}
-      <CardNumber cardNumber={cardNumber} setCardStatus={setCardStatus} />
+      <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
     </form>
   );
 }

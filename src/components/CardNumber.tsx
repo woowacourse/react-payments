@@ -4,10 +4,10 @@ import { getCardNumberGroupLengths } from '../utils/card/cardBrand';
 
 type CardNumbersProps = {
   cardNumber: CardStatus;
-  setCardStatus: CardHandler;
+  setCardNumber: CardHandler;
 };
 
-export default function CardNumber({ cardNumber, setCardStatus }: CardNumbersProps) {
+export default function CardNumber({ cardNumber, setCardNumber }: CardNumbersProps) {
   const cardNumberGroupLengths = getCardNumberGroupLengths(cardNumber.cardBrand);
 
   return (
@@ -54,9 +54,9 @@ export default function CardNumber({ cardNumber, setCardStatus }: CardNumbersPro
                 type="text"
                 placeholder={'123456'.slice(0, maxLength)}
                 maxLength={maxLength}
-                onChange={setCardStatus.handleCardNumbers(index)}
+                onChange={setCardNumber.handleCardNumbers(index)}
                 value={numberGroup}
-                onBlur={setCardStatus.handleCardNumbersBlur}
+                onBlur={setCardNumber.handleCardNumbersBlur}
                 inputMode="numeric"
                 css={(theme) => ({
                   width: `${maxLength * 17.75}px`,
