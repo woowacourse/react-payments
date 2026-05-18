@@ -44,9 +44,9 @@
 - [x] 위 조건을 만족하지 않으면 로고 미표시
 - [x] 실시간으로 브랜드 로고 업데이트
 
-#### 카드 브랜드 색상 (Card Brand Color)
+#### 카드사 색상 (Card Company Color)
 
-- [x] 카드 브랜드 선택 시 카드 색을 해당하는 색으로 표시 (기본값: `#333333`)
+- [x] 카드사 선택 시 카드 색을 해당하는 색으로 표시 (기본값: `#333333`)
   - **BC카드:** `#f64655`
   - **신한카드:** `#0046ff`
   - **카카오뱅크:** `#ffe100`
@@ -97,14 +97,14 @@
 
 #### CVC 번호 입력 (CVC Input)
 
-- [x] 입력 형식: 3자리 입력칸 (세 자리 숫자)
+- [x] 입력 형식: 3~4자리 입력칸
 - [x] 숫자만 입력 가능하며, 숫자 외 입력은 자동 차단
-- [x] 입력칸의 placeholder: `123`
+- [x] 입력칸의 placeholder: `1234`
 - [x] 입력 중인 칸의 테두리를 검은색(`#000000`)으로 강조
 - [x] 에러 발생 시 테두리를 빨간색(`#FF3D3D`)으로 표시
 - [x] 순차적 에러 유효성 검사:
   - **실시간 검증:** 숫자 하나 입력할 때마다 숫자인지 확인
-  - **필드 검증:** 필드 입력 완료 후마다 자릿수(3자리) 확인
+  - **필드 검증:** 필드 입력 완료 후마다 자릿수(3~4자리) 확인
 
 #### 카드사 선택 (Card Brand Select)
 
@@ -133,7 +133,8 @@
 ### 4. 기능 및 유효성 검사 (State Management & Readability)
 
 - [x] 폼 라이브러리 미사용
-- [x] 필드별 validation 상태는 `useFieldValidation` 커스텀 훅으로 관리
+- [x] 필드별 touched 기반 에러 표시는 `useTouchedFieldError` 커스텀 훅으로 관리
+- [x] 등록 실패 시 서버 필드 에러는 `useRegisterServerErrors` 커스텀 훅으로 관리
 - [x] 카드 타입, 카드사, 폼 유효성 검사 로직을 유틸 함수로 분리
 - [x] 각 입력 필드별 독립적인 상태 관리 및 실시간 유효성 검사
 - [x] styled-components를 활용한 동적 스타일링 적용
@@ -146,7 +147,50 @@
 
 ### 6. 폼 제출 기능
 
-- [x] '제출' 버튼을 누르면 사용자가 입력한 데이터(카드 번호 앞 4자리, 카드사)를 카드 등록 완료 페이지에 전달한다.
+- [x] '제출' 버튼을 누르면 사용자가 입력한 카드 정보를 `POST /cards`로 전송한다.
+- [x] 카드 등록 성공 시 카드 목록 페이지(`/cards`)로 이동한다.
+- [x] 서버가 `400 { code, message }`를 반환하면 `code`를 입력 필드에 매핑하여 해당 필드 아래에 에러 메시지를 표시한다.
+- [x] 네트워크 에러처럼 특정 필드에 속하지 않는 등록 실패는 제출 버튼 위의 form-level 에러로 표시한다.
+
+## 카드 목록 페이지
+
+등록된 카드 목록을 조회하고, 카드 추가 및 삭제 흐름을 제공하는 페이지입니다.
+
+### 1. 카드 목록 조회
+
+- [x] `/cards` 페이지 진입 시 `GET /cards` 요청을 보낸다.
+- [x] 카드 목록 조회 상태를 `idle | loading | success | error`로 관리한다.
+- [x] 로딩 중에는 카드 목록 레이아웃과 동일한 스켈레톤 UI를 표시한다.
+- [x] 조회 성공 시 등록된 카드 목록을 표시한다.
+- [x] 조회 성공 후 목록이 비어 있으면 빈 상태 UI를 표시한다.
+- [x] 조회 실패 시 에러 상태 UI와 `다시 시도` 버튼을 표시한다.
+- [x] `다시 시도` 버튼을 누르면 `GET /cards`를 다시 요청한다.
+
+### 2. 카드 목록 아이템
+
+- [x] 서버가 반환한 마스킹 카드 번호를 4자리 단위로 띄어 표시한다. (예: `5511 12** **** 9012`)
+- [x] 서버 응답의 `issuerCode`를 클라이언트 카드사 상수와 매핑하여 카드사 이름과 색상을 표시한다.
+- [x] 유효기간을 `MM/YY` 형식으로 표시한다.
+- [x] 각 카드 아이템에 삭제 버튼을 제공한다.
+
+### 3. 카드 삭제
+
+- [x] 삭제 버튼 클릭 시 `window.confirm()`으로 삭제 여부를 확인한다.
+- [x] 확인한 경우에만 `DELETE /cards/:id` 요청을 보낸다.
+- [x] 삭제 성공 시 카드 목록을 다시 조회한다.
+- [x] `DELETE /cards/:id`는 `204 No Content` 응답을 성공으로 처리한다.
+
+### 4. API 및 MSW 모킹
+
+- [x] MSW로 `GET /cards`, `POST /cards`, `DELETE /cards/:id` 응답을 모킹한다.
+- [x] `GET /cards` 응답은 서버 명세에 맞춰 `{ id, issuerCode, number, expirationDate }` 형태로 관리한다.
+- [x] `POST /cards` 요청 시 입력 폼 모델을 서버 요청 모델로 변환한다.
+  - `cardNumbers` → `number`
+  - `expiryMonth`, `expiryYear` → `expirationDate`
+  - `cardCompanyId` → `issuerCode`
+- [x] 등록된 카드 번호는 서버 응답 모델에서 앞 6자리와 뒤 4자리만 노출하고 중간은 마스킹한다.
+- [x] 카드 번호가 어떤 카드 브랜드 BIN 규칙과도 매칭되지 않으면 `INVALID_CARD_NUMBER` 400 응답을 반환한다.
+- [x] 등록 요청의 HTTP 에러는 `HTTPError`, 네트워크 에러는 `NetworkError`로 구분해 처리한다.
 
 ## 카드 등록 완료 페이지
 
@@ -191,12 +235,12 @@
 ### CVC 번호 입력
 
 - "CVC 번호를 입력해 주세요" 안내 텍스트 표시
-- 숫자 3자리만 입력 가능
+- 숫자 3~4자리 입력 가능
 - 숫자 외 입력은 자동 차단
 
-### 카드 브랜드 선택
+### 카드사 선택
 
-- 제공되는 카드 브랜드 중 하나 선택
+- 제공되는 카드사 중 하나 선택
 
 ### 비밀번호 입력
 
@@ -213,12 +257,31 @@
 ### 동적 UI
 
 - 입력 필드는 사용자의 입력이 완료되면 다음 필드로 자동으로 이동한다.
+- 카드 등록 성공 시 카드 목록 페이지로 이동한다.
+- 카드 목록 페이지에서는 조회/로딩/빈 목록/에러 상태를 구분해 보여준다.
+- 카드 삭제 시 확인창을 거친 뒤 목록을 갱신한다.
+
+## 테스트 전략
+
+### RTL 테스트 기준
+
+사용자가 실제로 보는 화면과 행동을 기준으로 테스트한다.
+
+- 카드 목록을 조회하는 경우, 요청하는 동안 스켈레톤 UI를 보여준다.
+- 카드 목록 조회 성공 시, 카드 목록이 존재하면 등록된 카드 목록을 표시한다.
+- 카드 목록 조회 성공 시, 카드 목록이 비어 있으면 빈 상태 UI와 카드 등록 버튼을 표시한다.
+- 카드 목록 조회 실패 시 에러 UI와 다시 시도 버튼을 표시한다.
+- 카드 삭제 요청이 성공하면 카드가 목록에서 사라진다.
+- 카드 등록 실패 시 서버 에러 메시지를 해당 필드 또는 form-level 영역에 표시한다.
 
 ## 폴더 구조
 
 ```
 src/
 ├── App.tsx
+├── api/
+│   ├── cards.ts
+│   └── error.ts
 ├── common/
 │   ├── components/
 │   │   ├── Button.tsx
@@ -226,20 +289,41 @@ src/
 │   │   ├── Input.tsx
 │   │   ├── Label.tsx
 │   │   └── Title.tsx
-│   ├── hooks/
-│   │   └── useFieldValidation.ts
-│   └── types/
-│       ├── CardPreview.ts
-│       └── CardPreviewInfoType.ts
+├── domain/
+│   └── card/
+│       ├── assets/
+│       │   ├── Amex.svg
+│       │   ├── Diners.svg
+│       │   ├── Mastercard.png
+│       │   ├── UnionPay.svg
+│       │   └── Visa.png
+│       ├── constant/
+│       │   ├── cardBrands.ts
+│       │   └── cardCompanies.ts
+│       ├── types/
+│       │   └── card.ts
+│       └── utils/
+│           ├── cardDisplay.ts
+│           └── cardInfo.ts
 ├── feature/
+│   ├── CardList/
+│   │   ├── CardListPage.tsx
+│   │   ├── assets/
+│   │   │   ├── Error_Icon.png
+│   │   │   └── Ghost_Card.png
+│   │   ├── components/
+│   │   │   ├── CardList.tsx
+│   │   │   ├── CardListEmptyState.tsx
+│   │   │   ├── CardListErrorState.tsx
+│   │   │   ├── CardListItem.tsx
+│   │   │   └── CardListSkeleton.tsx
+│   │   ├── types/
+│   │   │   └── cardFetchStatus.ts
+│   │   └── utils/
+│   │       ├── ValidatePostedCard.ts
+│   │       └── issuerCode.ts
 │   ├── CardRegister/
 │   │   ├── CardRegisterPage.tsx
-│   │   ├── assets/
-│   │   │   ├── Amex.svg
-│   │   │   ├── Diners.svg
-│   │   │   ├── Mastercard.png
-│   │   │   ├── UnionPay.svg
-│   │   │   └── Visa.png
 │   │   ├── components/
 │   │   │   ├── CardPreviewSection/
 │   │   │   │   ├── CardBrandLogo.tsx
@@ -255,17 +339,28 @@ src/
 │   │   │       ├── NumberField.tsx
 │   │   │       ├── PasswordField.tsx
 │   │   │       └── SelectCardBrandField.tsx
-│   │   ├── constant/
-│   │   │   └── CARD_BRANDS.ts
+│   │   ├── hooks/
+│   │   │   ├── useCardCompanyField.ts
+│   │   │   ├── useCardForm.ts
+│   │   │   ├── useCvcField.ts
+│   │   │   ├── useExpiryField.ts
+│   │   │   ├── useInputRefs.ts
+│   │   │   ├── useNumbersField.ts
+│   │   │   ├── usePasswordField.ts
+│   │   │   ├── useRegisterServerErrors.ts
+│   │   │   └── useTouchedFieldError.ts
 │   │   └── utils/
-│   │       ├── cardDisplay.ts
 │   │       ├── cardFormValidator.ts
-│   │       ├── cardInfo.ts
 │   │       └── validator.ts
 │   └── CardRegisterComplete/
 │       ├── CardRegisterCompletePage.tsx
 │       └── assets/
 │           └── Group 54.png
+├── mocks/
+│   ├── browser.ts
+│   ├── handlers.ts
+│   └── handlers/
+│       └── cards.ts
 ├── stories/
 │   ├── common/
 │   │   └── components/
@@ -308,6 +403,29 @@ src/
 - **Input**: 기본 입력 필드 (native input props, 에러 상태, 포커스 상태, ref 전달 지원)
 - **Button**: 기본 버튼 컴포넌트 (native button props 지원)
 
+### API / Mock
+
+- **api/cards.ts**: 카드 목록 조회, 카드 등록, 카드 삭제 요청 함수 관리
+- **api/error.ts**: HTTP 에러와 네트워크 에러를 구분하기 위한 커스텀 에러 타입 관리
+- **mocks/handlers/cards.ts**: MSW 기반 카드 API 모킹. `GET /cards`, `POST /cards`, `DELETE /cards/:id` 응답을 관리
+
+### Domain Card
+
+- **cardBrands.ts**: Visa, MasterCard, AMEX, Diners, UnionPay의 BIN 식별 규칙, 세그먼트 길이, 로고 이미지 관리
+- **cardCompanies.ts**: 카드사 id, issuerCode, 표시 이름, 카드 색상 관리
+- **card.ts**: 카드 입력 폼 모델, POST 요청 모델, GET 응답 모델 타입 관리
+- **cardDisplay.ts**: 카드 브랜드/카드사 표시 정보, 카드 번호 마스킹 및 표시 포맷 유틸 관리
+- **cardInfo.ts**: 카드 번호 기반 세그먼트 길이 계산 유틸 관리
+
+### Card List
+
+- **CardListPage**: 카드 목록 조회 상태(`idle | loading | success | error`)를 관리하고 상태별 UI 렌더링
+- **CardList**: 카드 목록 아이템과 카드 추가 버튼을 렌더링
+- **CardListItem**: 카드사 색상, 카드사 이름, 마스킹 카드 번호, 유효기간, 삭제 버튼을 표시
+- **CardListSkeleton**: 카드 목록 조회 로딩 중 표시하는 스켈레톤 UI
+- **CardListEmptyState**: 등록된 카드가 없을 때의 빈 상태 UI
+- **CardListErrorState**: 카드 목록 조회 실패 시 에러 메시지와 다시 시도 버튼을 표시
+
 ### Card Preview Section
 
 - **CardPreviewSection**: 카드 프리뷰 영역 전체 컴포넌트
@@ -323,9 +441,11 @@ src/
 - **NumberField**: 카드 번호 입력 (카드 타입별 세그먼트 길이 적용, 입력 완료 시 다음 칸 포커스 이동)
 - **SelectCardBrandField**: 카드사 선택 입력 (선택한 카드사 id를 상위 form 상태로 전달)
 - **ExpiryField**: 유효기간 입력 (2자리씩 2개 입력칸 - 월, 년)
-- **CvcField**: CVC 번호 입력 (3자리 입력칸)
+- **CvcField**: CVC 번호 입력 (3~4자리 입력칸)
 - **PasswordField**: 카드 비밀번호 앞 2자리 입력
+- **useCardForm**: 카드 등록 폼의 입력 상태, 클라이언트 검증, 단계 노출, 프리뷰/제출 모델 조합 관리
+- **useRegisterServerErrors**: 카드 등록 실패 시 서버 필드 에러와 form-level 에러 관리
 
 ### Card Register Complete
 
-- **CardRegisterCompletePage**: 카드 등록 완료 메시지를 표시하고 확인 버튼으로 등록 페이지로 이동
+- **CardRegisterCompletePage**: 카드 등록 완료 메시지를 표시하는 페이지
