@@ -39,7 +39,7 @@ describe('카드 목록 페이지 테스트', async () => {
     renderProvider(<AppRoutes />, { route: '/payments/cards' });
 
     // ACT
-    userEvent.click(screen.getByRole('button', { name: '+ 카드 추가' }));
+    userEvent.click(await screen.findByRole('button', { name: '+ 카드 추가' }));
 
     // ASSERT
     expect(await screen.findByText(/결제할 카드 번호를 입력해 주세요/)).toBeInTheDocument();
