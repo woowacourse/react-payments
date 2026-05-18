@@ -6,13 +6,15 @@ export default function AddCardButton() {
 }
 
 const Button = styled.button`
+  background-color: #ffffff;
   width: 320px;
   height: 40px;
   border-radius: 5px;
+  border: 1px dashed #e6e6e6;
   box-sizing: border-box;
-  border: 1px;
   padding: 12px 16px;
   font-size: 13px;
   font-family: sans-serif;
+  color: #e6e6e6;
   cursor: pointer;
 `;
