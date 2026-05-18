@@ -3,8 +3,7 @@ import { Outlet, useNavigate } from 'react-router';
 import { ROUTES } from '@/constants/routes';
 
 import { postCards } from '@/services/apis/cards/cards';
-
-import { ISSUER_CODE } from '@/pages/payments/cards/list/constants';
+import { mapCardModelToRequestDTO } from '@/services/apis/cards/mapper';
 
 import { useCardNumbers } from '../form/hooks/useCardNumbers';
 import { useCard } from '../form/hooks/useCard';
@@ -38,19 +37,14 @@ export const Flow = () => {
   };
 
   const handleSubmit = async () => {
-    const issuerCode = Object.entries(ISSUER_CODE).find(([_, issuerCode]) => {
-      return issuerCode?.card === card.values.card;
-    });
-    if (!issuerCode) throw new Error();
-    const [issuerCodeKey] = issuerCode;
-
-    const body = {
-      number: Object.values(cardNumbers.values).join(''),
-      expirationDate: `${expirationDate.values.month}/${expirationDate.values.year}`,
+    const data = mapCardModelToRequestDTO({
+      card: card.values.card,
+      cardNumbers: cardNumbers.values,
       cvc: cvc.values.cvc,
-      issuerCode: issuerCodeKey,
-    };
-    await postCards(body);
+      expirationDate: expirationDate.values,
+    });
+
+    await postCards(data);
     navigate(ROUTES.PAYMENTS.CARDS);
   };
 
