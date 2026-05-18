@@ -1,9 +1,9 @@
 import type { ValidityPeriod } from "@/types/card";
 import InputField from "@components/common/InputField";
-import useFocus from "@hooks/useFocus";
-import { useFormValue } from "../../formContext";
+import useFocus from "@hooks/common/useFocus";
 import { padValidityPeriodUnit } from "@utils/card";
 
+import { useFormValue } from "../../formContext";
 import { MONTH_MAX_LENGTH, YEAR_MAX_LENGTH } from "./constants";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus, formatValidityPeriod } from "./utils";
@@ -83,7 +83,10 @@ const CardValidityPeriodInputField = ({
           value: validityPeriod.month,
           onChange: (e) => handleValidityPeriodChange("month", e.target.value),
           onBlur: (e) => handleValidityPeriodBlur("month", e.target.value),
-          state: status.month === "DEFAULT" || status.month === "SUCCESS" ? "default" : "error",
+          state:
+            status.month === "DEFAULT" || status.month === "SUCCESS"
+              ? "default"
+              : "error",
           autoFocus: true,
         },
         {
@@ -95,7 +98,10 @@ const CardValidityPeriodInputField = ({
           value: validityPeriod.year,
           onChange: (e) => handleValidityPeriodChange("year", e.target.value),
           onBlur: (e) => handleValidityPeriodBlur("year", e.target.value),
-          state: status.year === "DEFAULT" || status.year === "SUCCESS" ? "default" : "error",
+          state:
+            status.year === "DEFAULT" || status.year === "SUCCESS"
+              ? "default"
+              : "error",
         },
       ]}
       helperMessage={

@@ -1,6 +1,5 @@
 import InputField from "@components/common/InputField";
-import useFocus from "@hooks/useFocus";
-import { useFormValue } from "../../formContext";
+import useFocus from "@/hooks/common/useFocus";
 import {
   detectCardBrand,
   formatCardNumberUnitByBrand,
@@ -11,6 +10,7 @@ import {
 import type { CardNumberStatusTuple } from "../../formState";
 import ERROR_MESSAGE from "./errorMessage";
 import { checkCardNumberInputStatus } from "./utils";
+import { useFormValue } from "../../formContext";
 
 interface CardNumberInputFieldProps {
   onComplete: () => void;
@@ -41,7 +41,9 @@ const CardNumberInputField = ({ onComplete }: CardNumberInputFieldProps) => {
       getCardNumberUnitMaxLengthByBrand(brand, index),
     );
     const blurStatus =
-      cardNumberInputStatus === "DEFAULT" ? "INCOMPLETE" : cardNumberInputStatus;
+      cardNumberInputStatus === "DEFAULT"
+        ? "INCOMPLETE"
+        : cardNumberInputStatus;
 
     setValue("cardNumberStatus", updateArray(status, index, blurStatus));
   };
