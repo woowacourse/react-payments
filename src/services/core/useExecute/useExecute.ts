@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 
 import type { Options, Result } from './useExecute.types';
+import { RequestAjaxError } from '../http/error';
 
 export const useExecute = <T = unknown>({ executeFn, onSuccess, onError }: Options) => {
   const [status, setStatus] = useState<Result<T>>({
@@ -29,7 +30,7 @@ export const useExecute = <T = unknown>({ executeFn, onSuccess, onError }: Optio
         setStatus({
           status: 'error',
           data: null,
-          error,
+          error: error instanceof RequestAjaxError ? error?.data : error,
         });
         onError?.(error);
       }
