@@ -51,13 +51,21 @@ const FormSection = forwardRef<HTMLDivElement, FormSectionProps>(
   },
 );
 
+interface ServerErrors {
+  cardNumber?: string;
+  cvc?: string;
+  expirationDate?: string;
+}
+
 interface CardFormProps {
   formState: CardFormState;
   setFormState: (value: CardFormState) => void;
   brand: CardBrand | undefined;
+  serverErrors?: ServerErrors;
 }
 
 function CardForm(props: CardFormProps) {
+  const { serverErrors = {} } = props;
   const segmentLengths = props.brand
     ? CARD_BRAND_CONFIGS[props.brand].segmentLengths
     : DEFAULT_SEGMENT_LENGTHS;
@@ -136,6 +144,7 @@ function CardForm(props: CardFormProps) {
             onChange={(value: string) =>
               props.setFormState({ ...props.formState, cvc: value })
             }
+            errorMessage={serverErrors.cvc}
           />
         </FormSection>
 
@@ -158,6 +167,7 @@ function CardForm(props: CardFormProps) {
                 expiryYear: value[1],
               })
             }
+            errorMessage={serverErrors.expirationDate}
           />
         </FormSection>
 
@@ -190,6 +200,7 @@ function CardForm(props: CardFormProps) {
                 cardNumberSegments: value,
               })
             }
+            errorMessage={serverErrors.cardNumber}
           />
         </Flex>
       </Flex>

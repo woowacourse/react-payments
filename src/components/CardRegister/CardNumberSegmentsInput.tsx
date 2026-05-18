@@ -19,6 +19,7 @@ interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;
   brand: CardBrand | undefined;
   onChange: (value: CardNumberSegments) => void;
+  errorMessage?: string;
 }
 
 function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
@@ -68,7 +69,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
           validations={numericOnlyValidations}
         />
         <InputErrorMessage>
-          {showBrandError ? "유효하지 않은 카드 번호입니다." : undefined}
+          {props.errorMessage ?? (showBrandError ? "유효하지 않은 카드 번호입니다." : undefined)}
         </InputErrorMessage>
       </Flex>
     );
