@@ -37,15 +37,19 @@ export const Flow = () => {
   };
 
   const handleSubmit = async () => {
-    const data = mapCardModelToRequestDTO({
-      card: card.values.card,
-      cardNumbers: cardNumbers.values,
-      cvc: cvc.values.cvc,
-      expirationDate: expirationDate.values,
-    });
+    try {
+      const data = mapCardModelToRequestDTO({
+        card: card.values.card,
+        cardNumbers: cardNumbers.values,
+        cvc: cvc.values.cvc,
+        expirationDate: expirationDate.values,
+      });
 
-    await postCards(data);
-    navigate(ROUTES.PAYMENTS.CARDS);
+      await postCards(data);
+      navigate(ROUTES.PAYMENTS.CARDS);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
