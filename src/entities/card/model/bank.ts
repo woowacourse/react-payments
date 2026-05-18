@@ -40,3 +40,7 @@ export const ISSUER_CODE_BANK: Record<Code, Bank> = {
   '21': 'HANA',
   '11': 'KOOKMIN',
 };
+
+export const getBankByIssuerCode = (issuerCode: string): Bank | undefined => {
+  return ISSUER_CODE_BANK[issuerCode as Code];
+};
