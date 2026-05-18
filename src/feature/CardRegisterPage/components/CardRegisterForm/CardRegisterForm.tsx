@@ -25,32 +25,16 @@ import {
 import { validateCardCompany } from "../../validators/cardCompany";
 import { validateCardNumber } from "../../validators/cardNumber";
 import BaseButton from "../../../../shared/components/Button/BaseButton";
-import { type PostCardRequestBody } from "../../api/card";
+import {
+  type ErrorInformation,
+  type PostCardRequestBody,
+} from "../../api/card";
 import { useCardRegister } from "../../hooks/useCardRegister";
 import { useCardRegisterFormError } from "../../hooks/useCardRegisterFormError";
 import type { IssuerKoreanNameType } from "../../../../shared/types/Issuer";
 import { getIssuerCodeByName } from "../../../../shared/utils/issuer";
-
-const getInitialMaxUnlockedStep = (cardInfo: CardInfoType) => {
-  const cardBrand = getCardBrandName(cardInfo.cardNumbers);
-
-  if (!validateCardNumber(cardInfo.cardNumbers.join(""), cardBrand).isValid) {
-    return CARD_FORM.RENDER_STEP.CARD_NUMBER;
-  }
-
-  if (!validateCardCompany(cardInfo.selectedCardCompany).isValid) {
-    return CARD_FORM.RENDER_STEP.CARD_COMPANY;
-  }
-
-  if (
-    !validateExpiryMonth(cardInfo.expiryMonth).isValid ||
-    !validateExpiryYear(cardInfo.expiryYear).isValid
-  ) {
-    return CARD_FORM.RENDER_STEP.EXPIRY;
-  }
-
-  return CARD_FORM.RENDER_STEP.CVC;
-};
+import { useNavigate } from "react-router-dom";
+import { useFormStep } from "../../hooks/useFormStep";
 
 const CardRegisterForm = ({
   cardInfo,
@@ -65,13 +49,14 @@ const CardRegisterForm = ({
   updateExpiryYear: (expiryYear: string) => void;
   updateCardCompany: (cardCompany: IssuerKoreanNameType) => void;
 }) => {
+  const navigate = useNavigate();
   const [cardInputSectionInformation, setCardInputSectionInformation] =
     useState({
       cvcNumber: "",
       password: "",
     });
 
-  const { asyncState, cardRegisterError, registerCard } = useCardRegister();
+  const { asyncState, registerCard } = useCardRegister();
   const {
     formErrorMessages,
     updateCardNumberErrorMessage,
@@ -82,27 +67,12 @@ const CardRegisterForm = ({
     clearExpiryDateErrorMessage,
   } = useCardRegisterFormError();
 
-  // 한 번 렌더링 된 필드는 이전 단계에서 에러가 나도 사라지지 않게 하므로 state로!
-  const [maxUnlockedStep, setMaxUnlockedStep] = useState(() =>
-    getInitialMaxUnlockedStep(cardInfo),
-  );
-
   const { cardNumbers, expiryMonth, expiryYear, selectedCardCompany } =
     cardInfo;
+  const { maxUnlockedStep, unlockNextStepIfFieldValid } = useFormStep(cardInfo);
 
   const cardBrand = getCardBrandName(cardNumbers);
   const cardNumberChunkLengths = getCardNumberChunkLengths(cardBrand);
-
-  // 한 번 열린 Step은 다시 닫히지 않는다.
-  const updateMaxUnlockedStep = (step: number) => {
-    setMaxUnlockedStep((previousStep) => Math.max(previousStep, step));
-  };
-
-  const unlockNextStepIfFieldValid = (isValid: boolean, nextStep: number) => {
-    if (isValid) {
-      updateMaxUnlockedStep(nextStep);
-    }
-  };
 
   const handleCardNumbersChange = (
     nextCardNumbers: CardInfoType["cardNumbers"],
@@ -118,7 +88,10 @@ const CardRegisterForm = ({
 
   const handleCardCompanyChange = (cardCompany: IssuerKoreanNameType) => {
     updateCardCompany(cardCompany);
-    updateMaxUnlockedStep(CARD_FORM.RENDER_STEP.EXPIRY);
+    unlockNextStepIfFieldValid(
+      validateCardCompany(cardCompany).isValid,
+      CARD_FORM.RENDER_STEP.EXPIRY,
+    );
   };
 
   const handleExpiryMonthChange = (nextExpiryMonth: string) => {
@@ -163,6 +136,29 @@ const CardRegisterForm = ({
     );
   };
 
+  const handleRegisterError = (error: Error | ErrorInformation) => {
+    if (!("code" in error)) {
+      alert("카드 등록 중 에러가 발생했습니다.");
+      return;
+    }
+
+    const fieldErrorHandlers = {
+      INVALID_CARD_NUMBER: updateCardNumberErrorMessage,
+      INVALID_CVC: updateCvcErrorMessage,
+      INVALID_EXPIRATION_DATE: updateExpiryDateErrorMessage,
+    };
+
+    const updateFieldError =
+      fieldErrorHandlers[error.code as keyof typeof fieldErrorHandlers];
+
+    if (updateFieldError) {
+      updateFieldError(error.message);
+      return;
+    }
+
+    alert("카드 등록 중 에러가 발생했습니다.");
+  };
+
   const joinedCardNumber = cardNumbers.join("");
   const fieldValidity = {
     cardNumber: validateCardNumber(joinedCardNumber, cardBrand).isValid,
@@ -192,28 +188,13 @@ const CardRegisterForm = ({
       issuerCode: issuerCode,
     };
 
-    registerCard(postCardInformation);
-
-    if (cardRegisterError) {
-      if (
-        "code" in cardRegisterError &&
-        cardRegisterError.code === "INVALID_CARD_NUMBER"
-      ) {
-        updateCardNumberErrorMessage(cardRegisterError.message);
-      } else if (
-        "code" in cardRegisterError &&
-        cardRegisterError.code === "INVALID_CVC"
-      ) {
-        updateCvcErrorMessage(cardRegisterError.message);
-      } else if (
-        "code" in cardRegisterError &&
-        cardRegisterError.code === "INVALID_EXPIRATION_DATE"
-      ) {
-        updateExpiryDateErrorMessage(cardRegisterError.message);
-      } else {
-        alert("카드 등록 중 에러가 발생했습니다.");
-      }
-    }
+    registerCard(
+      postCardInformation,
+      () => {
+        navigate("/cards");
+      },
+      handleRegisterError,
+    );
   };
 
   return (

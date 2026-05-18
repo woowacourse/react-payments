@@ -1,33 +1,29 @@
-import { useNavigate } from "react-router-dom";
 import { useAsyncState } from "../../../shared/hooks/useAsyncState";
 import {
   requestRegisterCard,
   type ErrorInformation,
   type PostCardRequestBody,
 } from "../api/card";
-import { useState } from "react";
 
 export const useCardRegister = () => {
-  const navigate = useNavigate();
-
   const { asyncState, setLoading, setSuccess, setError } = useAsyncState();
-  const [cardRegisterError, setCardRegisterError] = useState<
-    Error | ErrorInformation | null
-  >(null);
 
-  const registerCard = async (postCardInformation: PostCardRequestBody) => {
+  const registerCard = async (
+    postCardInformation: PostCardRequestBody,
+    onSuccess: () => void,
+    onError: (error: ErrorInformation | Error) => void,
+  ) => {
     try {
       setLoading();
-      const id = await requestRegisterCard(postCardInformation);
+      await requestRegisterCard(postCardInformation);
 
-      console.log(`카드 등록 성공!,id : ${id}`);
       setSuccess();
-      navigate("/cards");
+      onSuccess();
     } catch (error) {
       setError();
-      setCardRegisterError(error as Error | ErrorInformation);
+      onError(error as ErrorInformation | Error);
     }
   };
 
-  return { asyncState, cardRegisterError, registerCard };
+  return { asyncState, registerCard };
 };
