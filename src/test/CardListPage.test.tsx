@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import App from "@/App";
 import { server } from "@/mocks/server";
 import { delay, http, HttpResponse } from "msw";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const card = {
   id: "card-id",
@@ -82,5 +82,50 @@ describe("카드 목록 페이지", () => {
     await userEvent.click(screen.getByRole("button", { name: "다시 시도" }));
 
     expect(await screen.findByText("신한카드")).toBeInTheDocument();
+  });
+
+  it("삭제를 확인하면 카드를 목록에서 제거한다", async () => {
+    const cards = [card];
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
+
+    server.use(
+      http.get("/cards", () => HttpResponse.json(cards)),
+      http.delete("/cards/:cardId", ({ params }) => {
+        const { cardId } = params;
+        const targetIndex = cards.findIndex((card) => card.id === cardId);
+
+        if (targetIndex !== -1) {
+          cards.splice(targetIndex, 1);
+        }
+
+        return new HttpResponse(null, { status: 204 });
+      }),
+    );
+
+    render(<App />);
+
+    expect(await screen.findByText("신한카드")).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "카드 삭제" }));
+
+    expect(confirmSpy).toHaveBeenCalledWith("카드를 삭제하시겠습니까?");
+    expect(
+      await screen.findByText("등록된 카드가 없습니다"),
+    ).toBeInTheDocument();
+  });
+
+  it("삭제를 취소하면 카드를 목록에서 제거하지 않는다", async () => {
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(false);
+
+    server.use(http.get("/cards", () => HttpResponse.json([card])));
+
+    render(<App />);
+
+    expect(await screen.findByText("신한카드")).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "카드 삭제" }));
+
+    expect(confirmSpy).toHaveBeenCalledWith("카드를 삭제하시겠습니까?");
+    expect(screen.getByText("신한카드")).toBeInTheDocument();
   });
 });
