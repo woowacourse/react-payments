@@ -16,6 +16,8 @@ import { errorMessages } from './errorMessage';
 
 import { BRAND_NUMBER, CARD_OPTIONS } from './constant';
 
+import { ERROR_CODE, ERROR_MESSAGE } from '../flow/constants';
+
 import styles from './Form.module.css';
 
 export const Form = () => {
@@ -31,6 +33,8 @@ export const Form = () => {
     brandCard,
 
     handleSubmit,
+
+    serverError,
   } = outletContext;
 
   const prevFormValidsRefs = useRef<Record<string, boolean>>({});
@@ -97,6 +101,15 @@ export const Form = () => {
     if (cvc.isValid) setReleavedStep(4);
   }, [cardNumbers.isValid, card.isValid, expirationDate.isValid, cvc.isValid, password.isValid]);
 
+  const serverErrorMessage = ERROR_MESSAGE[serverError as keyof typeof ERROR_MESSAGE];
+  useEffect(() => {
+    if (!serverError) return;
+
+    if (serverError === ERROR_CODE.INVALID_CARD_NUMBER) return cardNumbers.refs.current[0].focus();
+    if (serverError === ERROR_CODE.INVALID_CVC) return cvc.refs.current.cvc.focus();
+    if (serverError === ERROR_CODE.INVALID_EXPIRATION_DATE) return expirationDate.current.refs.month.focus();
+  }, [serverError]);
+
   const branchNumberCard = BRAND_NUMBER?.[brandCard as keyof typeof BRAND_NUMBER];
 
   const isValid = cardNumbers.isValid && card.isValid && expirationDate.isValid && cvc.isValid && password.isValid;
@@ -137,7 +150,11 @@ export const Form = () => {
           <FormGroup title="CVC 번호를 입력해 주세요" hide={!(releavedStep >= 3)}>
             <Field
               label="CVC"
-              errorMessage={errorMessages?.cvc?.[cvc.renderErrorMessage()] || cvc.renderErrorMessage() || ''}
+              errorMessage={
+                serverError === ERROR_CODE.INVALID_CVC
+                  ? serverErrorMessage
+                  : errorMessages?.cvc?.[cvc.renderErrorMessage()] || cvc.renderErrorMessage() || ''
+              }
             >
               <Input
                 {...{ ref: cvc.ref }}
@@ -160,9 +177,11 @@ export const Form = () => {
             <Field
               label="유효기간"
               errorMessage={
-                errorMessages?.expirationDate?.[expirationDate.renderErrorMessage()] ||
-                expirationDate.renderErrorMessage() ||
-                ''
+                serverError === ERROR_CODE.INVALID_EXPIRATION_DATE
+                  ? serverErrorMessage
+                  : errorMessages?.expirationDate?.[expirationDate.renderErrorMessage()] ||
+                    expirationDate.renderErrorMessage() ||
+                    ''
               }
             >
               <Input
@@ -219,7 +238,11 @@ export const Form = () => {
             <Field
               label="카드 번호"
               errorMessage={
-                errorMessages?.cardNumbers?.[cardNumbers.renderErrorMessage()] || cardNumbers.renderErrorMessage() || ''
+                serverError === ERROR_CODE.INVALID_CARD_NUMBER
+                  ? serverErrorMessage
+                  : errorMessages?.cardNumbers?.[cardNumbers.renderErrorMessage()] ||
+                    cardNumbers.renderErrorMessage() ||
+                    ''
               }
               style={{ justifyContent: 'flex-start' }}
             >
