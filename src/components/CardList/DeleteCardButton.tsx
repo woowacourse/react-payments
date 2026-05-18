@@ -16,6 +16,7 @@ export default function DeleteCardButton({ id, onDelete }: Props) {
       <DeleteButton
         src={`${import.meta.env.BASE_URL}X.svg`}
         onClick={handleClick}
+        aria-label="삭제"
       />
     </div>
   );
