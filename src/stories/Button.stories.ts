@@ -23,6 +23,13 @@ export const FullWidth: Story = {
   },
 };
 
+export const Dashed: Story = {
+  args: {
+    dashed: true,
+    children: "+ 카드추가",
+  },
+};
+
 export const FixedBottom: Story = {
   args: {
     fixedBottom: true,
