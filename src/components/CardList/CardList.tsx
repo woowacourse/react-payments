@@ -1,6 +1,6 @@
 import type { Card } from "../../pages/CardListPage";
 import AddCardButton from "./AddCardButton";
-import RegisteredCardInfo from "./RegisteredCardInfo";
+import StoredCardInfo from "./StoredCardInfo";
 import styled from "@emotion/styled";
 
 interface Props {
@@ -12,7 +12,7 @@ export default function CardList({ cards, onDelete }: Props) {
   return (
     <CardListContainer>
       {cards.map((card) => (
-        <RegisteredCardInfo key={card.id} card={card} onDelete={onDelete} />
+        <StoredCardInfo key={card.id} card={card} onDelete={onDelete} />
       ))}
       <AddCardButton />
     </CardListContainer>

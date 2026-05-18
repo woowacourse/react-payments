@@ -33,7 +33,7 @@ export const handlers = [
         expirationDate,
       }),
     );
-    return HttpResponse.json(response); // ← 이거 추가
+    return HttpResponse.json(response);
   }),
 
   http.post("/cards", async ({ request }) => {

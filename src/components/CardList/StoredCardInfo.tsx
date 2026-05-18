@@ -11,7 +11,7 @@ interface Props {
   onDelete: () => void;
 }
 
-export default function RegisteredCardInfo({ card, onDelete }: Props) {
+export default function StoredCardInfo({ card, onDelete }: Props) {
   return (
     <Container>
       <CardFirmColorBox
