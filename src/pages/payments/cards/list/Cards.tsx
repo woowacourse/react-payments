@@ -10,6 +10,8 @@ import { Button } from '@/core/components/button';
 
 import { ROUTES } from '@/constants/routes';
 
+import { useExecute } from '@/services/core/useExecute';
+
 import { deleteCards } from '@/services/apis/cards/cards';
 
 import { useCards } from './hooks/useCards';
@@ -48,12 +50,18 @@ export const Cards = () => {
     navigate(ROUTES.PAYMENTS.REGISTER);
   };
 
+  const { mutate } = useExecute({
+    executeFn: deleteCards,
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
   const handleDeleteClick = async (id: string) => {
     const confirm = window.confirm('정말 삭제하시겠습니까?');
     if (!confirm) return;
 
-    await deleteCards({ id });
-    refetch();
+    mutate({ id });
   };
 
   if (status === 'loading')
