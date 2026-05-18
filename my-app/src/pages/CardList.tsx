@@ -34,6 +34,9 @@ const CardList = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
+    const isConfirmed = window.confirm("카드를 삭제하시겠습니까?");
+    if (!isConfirmed) return;
+
     await fetch(`/cards/${id}`, { method: "DELETE" });
     setCards((prev) => prev.filter((card) => card.id !== id));
   };
