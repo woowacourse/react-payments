@@ -169,8 +169,8 @@
 
 ### 테스트
 
-- [ ] React Testing Library 테스트 환경 설정하기
-- [ ] MSW 테스트 서버 설정하기
+- [x] React Testing Library 테스트 환경 설정하기
+- [x] MSW 테스트 서버 설정하기
 - [ ] 카드 목록 조회 성공 테스트 작성하기
 - [ ] 카드 목록 empty 상태 테스트 작성하기
 - [ ] 카드 목록 error 상태와 재시도 테스트 작성하기
