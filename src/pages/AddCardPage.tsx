@@ -11,11 +11,13 @@ import PasswordField from '../components/domain/PasswordField';
 import { FIELD_STEP } from '../constants';
 import useAddCardForm, { type AddCardFormFieldKey } from '../hooks/useAddCardForm';
 import { ROUTES } from '../routes';
+import useAddCard from '../hooks/useAddCard';
 
 export default function AddCardPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const {
+    formValue,
     formValue: { cardNumbers, cardCompany, expirationPeriod, cvc, password },
     derived: { cardBrand, areAllFieldErrorsClear },
     rules,
@@ -31,14 +33,18 @@ export default function AddCardPage() {
     },
   } = useAddCardForm();
 
+  const { requestAddCard, serverValidationError, clearServerValidationError } = useAddCard(formValue);
+
   const cardNumbersRef = useRef<HTMLInputElement>(null);
   const cardCompanyRef = useRef<HTMLSelectElement>(null);
   const expirationPeriodRef = useRef<HTMLInputElement>(null);
   const cvcRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const focusFirstErrorField = () => {
-    const fields = { cardNumbers, cardCompany, expirationPeriod, cvc, password };
+  const serverErrorOf = (field: AddCardFormFieldKey) =>
+    serverValidationError?.field === field ? serverValidationError.message : undefined;
+
+  const focusField = (field: AddCardFormFieldKey) => {
     const refs = {
       cardNumbers: cardNumbersRef,
       cardCompany: cardCompanyRef,
@@ -46,25 +52,34 @@ export default function AddCardPage() {
       cvc: cvcRef,
       password: passwordRef,
     };
-
-    const firstErrorField = Object.entries(FIELD_STEP)
-      .sort(([, a], [, b]) => b - a)
-      .find(([key]) => fields[key as AddCardFormFieldKey]?.errorStatuses.some((s) => s !== null))?.[0] as
-      | AddCardFormFieldKey
-      | undefined;
-
-    if (firstErrorField) refs[firstErrorField].current?.focus();
+    refs[field].current?.focus();
   };
 
-  const handleSubmitForm = (e: React.SubmitEvent) => {
+  const focusFirstErrorField = () => {
+    const firstErrorField = Object.entries(FIELD_STEP)
+      .sort(([, a], [, b]) => b - a)
+      .find(([key]) => formValue[key as AddCardFormFieldKey]?.errorStatuses.some((s) => s !== null))?.[0] as
+      | AddCardFormFieldKey
+      | undefined;
+    if (firstErrorField) focusField(firstErrorField);
+  };
+
+  const handleSubmitForm = async (e: React.SubmitEvent) => {
     e.preventDefault();
     const isValid = validateAllFields();
     if (!isValid) {
       focusFirstErrorField();
       return;
     }
-    navigate(ROUTES.addCardComplete, { state: buildCompletePageState() });
 
+    const result = await requestAddCard();
+    if (result.status === 'success') {
+      navigate(ROUTES.addCardComplete, { state: buildCompletePageState() });
+      return;
+    }
+    if (result.status === 'validationError') {
+      focusField(result.field);
+    }
   };
 
   const handleOpenNextStep = (currentStep: number) => {
@@ -105,10 +120,14 @@ export default function AddCardPage() {
             ref={cvcRef}
             value={cvc.value}
             errorStatuses={cvc.errorStatuses}
-            onUpdated={(value) => updateValue('cvc', value)}
+            onUpdated={(value) => {
+              updateValue('cvc', value);
+              clearServerValidationError();
+            }}
             onErrorUpdated={(errorStatuses) => updateErrors('cvc', errorStatuses)}
             validationRules={rules.cvc}
             onValid={runAndOpenNextStep('cvc', validateCvcOnComplete)}
+            serverError={serverErrorOf('cvc')}
           />
         )}
         {step >= FIELD_STEP.expirationPeriod && (
@@ -116,10 +135,14 @@ export default function AddCardPage() {
             ref={expirationPeriodRef}
             value={expirationPeriod.value}
             errorStatuses={expirationPeriod.errorStatuses}
-            onUpdated={(value) => updateValue('expirationPeriod', value)}
+            onUpdated={(value) => {
+              updateValue('expirationPeriod', value);
+              clearServerValidationError();
+            }}
             onErrorUpdated={(errorStatuses) => updateErrors('expirationPeriod', errorStatuses)}
             validationRules={rules.expirationPeriod}
             onValid={runAndOpenNextStep('expirationPeriod', validateExpirationPeriodOnComplete)}
+            serverError={serverErrorOf('expirationPeriod')}
           />
         )}
         {step >= FIELD_STEP.cardCompany && (
@@ -137,10 +160,14 @@ export default function AddCardPage() {
           ref={cardNumbersRef}
           value={cardNumbers.value}
           errorStatuses={cardNumbers.errorStatuses}
-          onUpdated={(value) => updateValue('cardNumbers', value)}
+          onUpdated={(value) => {
+            updateValue('cardNumbers', value);
+            clearServerValidationError();
+          }}
           onErrorUpdated={(errorStatuses) => updateErrors('cardNumbers', errorStatuses)}
           validationRules={rules.cardNumbers}
           onValid={runAndOpenNextStep('cardNumbers', validateCardNumbersOnComplete)}
+          serverError={serverErrorOf('cardNumbers')}
         />
       </form>
       {isFormValid && (
