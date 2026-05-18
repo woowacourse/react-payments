@@ -1,42 +1,19 @@
-import type { AsyncState } from '../types/asyncState';
-import { getCards } from '../api/cardsAPI';
-import { useEffect, useState } from 'react';
-import type { Card } from '../types/card';
 import { CardItem } from '../components/card-list/CardItem';
 import { CardListSkeleton } from '../components/card-list/CardListSkeleton';
 import { CardListEmpty } from '../components/card-list/CardListEmpty';
 import { CardListError } from '../components/card-list/CardListError';
 import styled from '@emotion/styled';
+import { useCardList } from '../hooks/useCardsList';
 
 export function CardList() {
-  const [cardListState, setCardListState] = useState<AsyncState<Card[]>>({ status: 'idle' });
-
-  const fetchCards = async () => {
-    try {
-      setCardListState({ status: 'loading' });
-      const responseData = await getCards();
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setCardListState({ status: 'success', responseData: responseData });
-    } catch (err) {
-      if (err instanceof Error) {
-        setCardListState({ status: 'error', message: err.message });
-      }
-    }
-  };
-
-  useEffect(() => {
-    const load = async () => {
-      await fetchCards();
-    };
-    load();
-  }, []);
+  const { cardListState, fetchCards, handleDelete } = useCardList();
 
   const renderContent = () => {
     if (cardListState.status === 'idle' || cardListState.status === 'loading')
       return <CardListSkeleton />;
     if (cardListState.status === 'error') return <CardListError onRetry={fetchCards} />;
     if (cardListState.responseData.length === 0) return <CardListEmpty />;
-    return <CardItem cards={cardListState.responseData} onDelete={fetchCards} />;
+    return <CardItem cards={cardListState.responseData} onDelete={handleDelete} />;
   };
 
   return (

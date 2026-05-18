@@ -2,15 +2,15 @@ import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import type { Card } from '../../types/card';
 import { CARD_COMPANY_INFO } from '../../constants/cardCompanyOptions';
-import { deleteCard } from '../../api/cardsAPI';
 
-export function CardItem({ cards, onDelete }: { cards: Card[]; onDelete: () => void }) {
+export function CardItem({
+  cards,
+  onDelete,
+}: {
+  cards: Card[];
+  onDelete: (id: string) => void;
+}) {
   const navigate = useNavigate();
-  const handleDelete = async (id: string): Promise<void> => {
-    if (!window.confirm('삭제하시겠습니까?')) return;
-    await deleteCard(id);
-    onDelete();
-  };
 
   return (
     <Container>
@@ -30,7 +30,7 @@ export function CardItem({ cards, onDelete }: { cards: Card[]; onDelete: () => v
               <p className="card-number">{card.number.replace(/(.{4})/g, '$1 ').trim()}</p>
               <p className="card-expiration-date">유효기간 {card.expirationDate}</p>
             </div>
-            <button onClick={() => handleDelete(card.id)}>✕</button>
+            <button onClick={() => onDelete(card.id)}>✕</button>
           </CardContainer>
         );
       })}
