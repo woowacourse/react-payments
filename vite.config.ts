@@ -34,9 +34,6 @@ export default defineConfig({
       },
       {
         extends: true,
-        define: {
-          'import.meta.env.BASE_URL': JSON.stringify('/react-payments/'),
-        },
         test: {
           name: 'unit',
           environment: 'jsdom',
