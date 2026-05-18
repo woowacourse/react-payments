@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import ErrorIcon from '../../../public/ErrorIcon.svg';
-import { Link } from 'react-router-dom';
+import ConfirmButton from '../ConfirmButton';
 
 export default function CardListError() {
     return (
@@ -10,8 +10,10 @@ export default function CardListError() {
                 <CardListErrorContent>카드 목록을 불러올 수 없어요</CardListErrorContent>
                 <CardListErrorDescription>잠시 후 다시 시도해 주세요.</CardListErrorDescription>
             </CardListErrorContentContainer>
-            {/* 버튼 추상화해서 재사용하기 */}
-            <Link to="/">다시 시도</Link>
+            {/* TODO 버튼 더 잘 추상화해서 재사용하기 */}
+            <ConfirmButton purpose="confirm" to="/list">
+                다시 시도
+            </ConfirmButton>
         </CardListErrorContainer>
     );
 }
