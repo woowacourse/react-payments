@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { CardItem, type Card } from './CardItem/CardItem';
 import {
   CardPlaceholder,
@@ -13,14 +14,19 @@ import {
 
 type Props = {
   cards: Card[];
+  onDelete: (id: string) => void;
 };
 
-export function SuccessState({ cards }: Props) {
+export function SuccessState({ cards, onDelete }: Props) {
   const isEmpty = cards.length === 0;
   const AddButton = isEmpty ? SolidAddButton : DashedAddButton;
   const addButtonLabel = isEmpty ? '카드 추가하기' : '+ 카드 추가';
 
-  const handleAdd = () => {};
+  const navigate = useNavigate();
+
+  const handleAdd = () => {
+    navigate('/addCard');
+  };
 
   return (
     <Container>
@@ -30,12 +36,14 @@ export function SuccessState({ cards }: Props) {
         <EmptyBox>
           <CardPlaceholder />
           <EmptyHeading>등록된 카드가 없습니다</EmptyHeading>
-          <EmptyDescription>아래 버튼을 눌러 첫 카드를 등록해보세요</EmptyDescription>
+          <EmptyDescription>
+            아래 버튼을 눌러 첫 카드를 등록해보세요
+          </EmptyDescription>
         </EmptyBox>
       ) : (
         <List>
           {cards.map((card) => (
-            <CardItem key={card.id} card={card} />
+            <CardItem key={card.id} card={card} onDelete={onDelete} />
           ))}
         </List>
       )}

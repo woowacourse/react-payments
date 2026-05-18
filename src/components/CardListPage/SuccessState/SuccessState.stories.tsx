@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<typeof SuccessState>;
 
 export const Empty: Story = {
-  render: () => <SuccessState cards={[]} />,
+  render: () => <SuccessState cards={[]} onDelete={() => {}} />,
 };
 
 export const WithCards: Story = {
@@ -43,6 +43,7 @@ export const WithCards: Story = {
           cardPassword: '',
         },
       ]}
+      onDelete={() => {}}
     />
   ),
 };

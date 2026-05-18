@@ -20,12 +20,16 @@ export type Card = {
 
 type Props = {
   card: Card;
+  onDelete: (id: string) => void;
 };
 
-export function CardItem({ card }: Props) {
+export function CardItem({ card, onDelete }: Props) {
   const brand = CARD_BRANDS[card.cardBrand];
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    if (!window.confirm('이 카드를 삭제하시겠습니까?')) return;
+    onDelete(card.id);
+  };
 
   return (
     <Row>

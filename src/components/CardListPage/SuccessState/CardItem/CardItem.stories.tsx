@@ -21,6 +21,7 @@ export const BC: Story = {
         cvc: '',
         cardPassword: '',
       }}
+      onDelete={() => {}}
     />
   ),
 };
@@ -36,6 +37,7 @@ export const Shinhan: Story = {
         cvc: '',
         cardPassword: '',
       }}
+      onDelete={() => {}}
     />
   ),
 };
@@ -51,6 +53,7 @@ export const Kakao: Story = {
         cvc: '',
         cardPassword: '',
       }}
+      onDelete={() => {}}
     />
   ),
 };
