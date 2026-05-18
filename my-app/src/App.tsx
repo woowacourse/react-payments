@@ -6,7 +6,7 @@ import CardListPage from './pages/CardListPage/CardListPage';
 
 const App = () => {
   return (
-    <BrowserRouter basename="/react-payments">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AppContainer>
         <Routes>
           <Route path="/" element={<CardListPage />} />
