@@ -7,7 +7,7 @@ import Empty from "./components/Empty/Empty";
 import { useCardList } from "./hooks/useCardList";
 
 const CardListPage = () => {
-  const { asyncState, cardList, deleteCardFromState, loadCardList } =
+  const { asyncState, cardList, deleteCardById, deleteError, loadCardList } =
     useCardList();
 
   return (
@@ -17,7 +17,11 @@ const CardListPage = () => {
       </HasCardCountSpan>
       {asyncState === "success" && cardList.length === 0 && <Empty />}
       {asyncState === "success" && cardList.length !== 0 && (
-        <Success cardList={cardList} deleteCard={deleteCardFromState} />
+        <Success
+          cardList={cardList}
+          deleteCard={deleteCardById}
+          deleteError={deleteError}
+        />
       )}
       {asyncState === "error" && <Error onRetry={loadCardList} />}
       {asyncState === "loading" && <Loading />}

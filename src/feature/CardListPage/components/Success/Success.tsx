@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 const Success = ({
   cardList,
   deleteCard,
+  deleteError,
 }: {
   cardList: CardItemInformation[];
   deleteCard: (cardId: string) => void;
+  deleteError: Error | null;
 }) => {
   const navigate = useNavigate();
   return (
@@ -18,6 +20,7 @@ const Success = ({
           key={card.id}
           cardItemInformaiton={card}
           onDeleteCard={deleteCard}
+          deleteError={deleteError}
         />
       ))}
       <AddCardButton onClick={() => navigate("/register")} style="rounded">

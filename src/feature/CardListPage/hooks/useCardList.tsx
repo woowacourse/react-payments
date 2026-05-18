@@ -2,15 +2,26 @@ import { useEffect, useState } from "react";
 import type { CardItemInformation } from "../components/Success/CardItem/CardItem";
 import { fetchCardList } from "../api/cardList";
 import { useAsyncState } from "./useAsyncState";
+import { deleteCard } from "../api/card";
 
 export const useCardList = () => {
   const { asyncState, setLoading, setSuccess, setError } = useAsyncState();
 
   const [cardList, setCardList] = useState<CardItemInformation[]>([]);
+  const [deleteError, setDeleteError] = useState<Error | null>(null);
 
   const deleteCardFromState = (cardId: string) => {
     const newCardList = cardList.filter((card) => card.id !== cardId);
     setCardList(newCardList);
+  };
+
+  const deleteCardById = async (cardId: string) => {
+    try {
+      await deleteCard(cardId);
+      deleteCardFromState(cardId);
+    } catch (error) {
+      setDeleteError(error as Error);
+    }
   };
 
   const loadCardList = async () => {
@@ -28,5 +39,11 @@ export const useCardList = () => {
     loadCardList();
   }, []);
 
-  return { asyncState, cardList, deleteCardFromState, loadCardList };
+  return {
+    asyncState,
+    cardList,
+    deleteCardById,
+    deleteError,
+    loadCardList,
+  };
 };
