@@ -4,7 +4,7 @@ import ExpirationPeriodField from '../components/domain/ExpirationPeriodField';
 import CVCField from '../components/domain/CVCField';
 import { useState } from 'react';
 import { categorizeCardBrand } from '../utils';
-import type { CardInfo, ErrorStatus, ExpirationPeriodErrorStatus } from '../types';
+import type { CardInfo, ErrorStatus, ExpirationPeriodErrorStatus, ResponseStatus } from '../types';
 import Card from '../components/ui/Card';
 import CardCompanyField from '../components/domain/CardCompanyField.tsx';
 import PasswordField from '../components/domain/PasswordField.tsx';
@@ -12,6 +12,8 @@ import SubmitButton from '../components/domain/SubmitButton.tsx';
 import { useForm } from '../hooks/useForm.ts';
 import { ROUTES } from '../constants.ts';
 import { useNavigate } from 'react-router';
+import { createCard } from '../apis/cards/api.ts';
+import PaymentsError from '../apis/utils/PaymentsError.ts';
 
 const initialValues: CardInfo = {
   cardNumbers: ['', '', '', ''],
@@ -29,6 +31,9 @@ export default function AddCardPage() {
     ErrorStatus | ExpirationPeriodErrorStatus
   >(initialValues);
 
+  const [responseStatus, setResponseStatus] = useState<ResponseStatus>('idle');
+  const isLoading = responseStatus === 'loading';
+
   const cardBrand = categorizeCardBrand(values.cardNumbers);
 
   const handleFieldComplete = (index: number) => {
@@ -37,18 +42,38 @@ export default function AddCardPage() {
     }
   };
 
-  const handleSubmit = (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     if (!isFormValid) {
       return;
     }
 
-    navigate(ROUTES.ADD_CARD_COMPLETE, {
-      state: {
-        firstCardNumbers: values.cardNumbers[0],
-        cardCompany: values.cardCompany,
-      },
-    });
+    setResponseStatus('loading');
+    try {
+      await createCard(values);
+      setResponseStatus('success');
+
+      navigate(ROUTES.ADD_CARD_COMPLETE, {
+        state: {
+          firstCardNumbers: values.cardNumbers[0],
+          cardCompany: values.cardCompany,
+        },
+      });
+    } catch (error) {
+      if (error instanceof PaymentsError) {
+        const { code } = error;
+
+        if (code === 'INVALID_CARD_NUMBER') {
+          setFieldError('cardNumbers', 'invalidValue');
+        }
+        if (code === 'INVALID_CVC') {
+          setFieldError('cvc', 'invalidValue');
+        }
+        if (code === 'INVALID_EXPIRATION_DATE') {
+          setFieldError('expirationPeriod', 'invalidValue');
+        }
+      }
+    }
   };
 
   return (
@@ -63,7 +88,7 @@ export default function AddCardPage() {
           />
         </div>
         <form onSubmit={handleSubmit} css={formLayout}>
-          {stepIndex >= 5 && <SubmitButton disabled={!isFormValid} />}
+          {stepIndex >= 5 && <SubmitButton disabled={!isFormValid} loading={isLoading} />}
           {stepIndex >= 4 && (
             <PasswordField
               value={values.password}

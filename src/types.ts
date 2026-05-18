@@ -20,7 +20,7 @@ export type CardCompany =
 
 export type CardBrand = 'local' | 'visa' | 'mastercard' | 'diners' | 'amex' | 'unionpay';
 
-export type ErrorStatus = null | 'required' | 'invalidLength' | 'numberOnly';
+export type ErrorStatus = null | 'required' | 'invalidLength' | 'numberOnly' | 'invalidValue';
 
 export type ExpirationPeriodErrorStatus = ErrorStatus | 'invalidMonth' | 'invalidYear';
 

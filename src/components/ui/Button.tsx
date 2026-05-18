@@ -4,13 +4,21 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: 'solid' | 'dashed';
   size?: 'lg' | 'md' | 'sm';
   rounded?: boolean;
+  loading?: boolean;
 }
 
-export default function Button({ variant = 'solid', size = 'md', rounded = true, children, ...props }: ButtonProps) {
+export default function Button({
+  variant = 'solid',
+  size = 'md',
+  rounded = true,
+  loading = false,
+  children,
+  ...props
+}: ButtonProps) {
   return (
     <button
       type={props.type ?? 'button'}
-      css={[buttonStyle, variants[variant], sizes[size], rounded ? roundedStyle : null]}
+      css={[buttonStyle, variants[variant], sizes[size], rounded ? roundedStyle : null, loading ? loadingStyle : null]}
       {...props}
     >
       {children}
@@ -27,6 +35,12 @@ const buttonStyle = css`
 
 const roundedStyle = css`
   border-radius: 5px;
+`;
+
+const loadingStyle = css`
+  background-color: var(--color-border-default);
+  pointer-events: none;
+  cursor: wait;
 `;
 
 const sizes = {
