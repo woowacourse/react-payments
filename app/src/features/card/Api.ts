@@ -14,13 +14,13 @@ export const createCard = async (
         issuerCode: cardBrand,
       }),
     });
-    return response;
   } catch (err) {}
 };
 
 export const getCards = async () => {
   try {
     const response = await fetch("https://api.antolibank.com/cards");
-    return response;
+    const data = await response.json();
+    return data;
   } catch (err) {}
 };
