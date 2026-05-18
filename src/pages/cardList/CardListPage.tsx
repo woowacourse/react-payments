@@ -1,43 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-interface TutorialResponse {
-  message: string;
-}
-
-const getBaseUrl = () => {
-  return import.meta.env.BASE_URL.endsWith('/')
-    ? import.meta.env.BASE_URL
-    : `${import.meta.env.BASE_URL}/`;
-};
+import { CardList } from './ui/CardList';
+import { useCardList } from './model/useCardListPage';
+import { CardListLoading } from './ui/CardListLoading';
+import { CardListError } from './ui/CardListError';
+import { CardListEmpty } from './ui/CardListEmpty';
 
 export const CardListPage = () => {
-  const [message, setMessage] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
+  const { cards, status, refetch, removeCard } = useCardList();
+  const handleAddCard = () => navigate('/register');
 
-  useEffect(() => {
-    const fetchTutorial = async () => {
-      try {
-        const response = await fetch(`${getBaseUrl()}api/tutorial`);
-        if (!response.ok) throw new Error('튜토리얼 API 호출에 실패했습니다.');
-
-        const data = (await response.json()) as TutorialResponse;
-        setMessage(data.message);
-      } catch (error) {
-        setErrorMessage(error instanceof Error ? error.message : '알 수 없는 오류가 발생했습니다.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    void fetchTutorial();
-  }, []);
+  if (status === 'idle') return <CardListLoading />;
+  if (status === 'loading') return <CardListLoading />;
+  if (status === 'error') return <CardListError onRetry={() => void refetch()} />;
+  if (cards.length === 0) return <CardListEmpty onAddCard={handleAddCard} />;
 
   return (
-    <main>
-      <h1>카드 목록</h1>
-      <p>MSW 튜토리얼 API 응답</p>
-      <div role="status">{isLoading ? '불러오는 중...' : errorMessage || message}</div>
-    </main>
+    <CardList
+      cards={cards}
+      onAddCard={handleAddCard}
+      onDelete={(cardId) => void removeCard(cardId)}
+    />
   );
 };

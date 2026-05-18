@@ -14,22 +14,28 @@ const enableMocking = async () => {
 
   const { worker } = await import('./mocks/browser');
   const baseUrl = getBaseUrl();
+  const workerUrl = `${baseUrl}mockServiceWorker.js`;
 
-  return worker.start({
-    serviceWorker: {
-      url: `${baseUrl}mockServiceWorker.js`,
-      options: {
-        scope: baseUrl,
+  try {
+    await worker.start({
+      serviceWorker: {
+        url: workerUrl,
+        options: {
+          scope: baseUrl,
+        },
       },
-    },
-    onUnhandledRequest: 'bypass',
-  });
+      onUnhandledRequest: 'bypass',
+    });
+    console.log('[MSW] Service worker registered at base URL:', workerUrl);
+  } catch (error) {
+    console.error('[MSW] Failed to start worker:', error);
+  }
 };
 
-await enableMocking();
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  );
+});

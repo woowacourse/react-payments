@@ -1,0 +1,136 @@
+.page {
+  width: 320px;
+  min-height: 590px;
+  margin: 24px auto;
+  padding: 28px 24px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.title {
+  margin: 0 0 18px;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.addButton {
+  width: 100%;
+  height: 36px;
+  border: 1px dashed #e5e7eb;
+  border-radius: 6px;
+  color: #8a8a8a;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.center {
+  display: flex;
+  min-height: 430px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.emptyImage {
+  width: 140px;
+  height: 84px;
+  margin-bottom: 18px;
+  border: 1px dashed #d6d6d6;
+  border-radius: 4px;
+  background: #f7f7f7;
+}
+
+.message {
+  margin: 0 0 8px;
+  color: #1f2937;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.description {
+  margin: 0 0 18px;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.primaryButton {
+  width: 100%;
+  height: 40px;
+  border: 0;
+  border-radius: 4px;
+  color: #ffffff;
+  font-weight: 700;
+  background: #333333;
+  cursor: pointer;
+}
+
+.errorIcon {
+  display: flex;
+  width: 52px;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  color: #ffffff;
+  background: #333333;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skeletonCard {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
+}
+
+.skeletonBox {
+  width: 58px;
+  height: 36px;
+  border-radius: 4px;
+  background: #e9e9e9;
+}
+
+.skeletonText {
+  flex: 1;
+}
+
+.skeletonLine {
+  height: 8px;
+  margin-bottom: 8px;
+  border-radius: 999px;
+  background: #e9e9e9;
+}
+
+.skeletonLineShort {
+  height: 8px;
+  width: 55%;
+  margin-bottom: 8px;
+  border-radius: 999px;
+  background: #e9e9e9;
+}
+
+.skeletonAdd {
+  height: 36px;
+  border-radius: 6px;
+  background: #f5f5f5;
+}
