@@ -10,7 +10,7 @@ import {
   InfoWrapper,
 } from "./CardPreview.styles";
 import { useCardForm } from "../useCardForm";
-import { CARD_BRANDS } from "../../constants/constants";
+import { CARD_BRANDS, type CardBrand } from "../../constants/constants";
 
 interface Props {
   cardForm: ReturnType<typeof useCardForm>;
@@ -21,7 +21,7 @@ export default function CardPreview({ cardForm }: Props) {
   const expireDate = cardForm.expireDate.value;
   const cardBrand = cardForm.cardBrand.value;
   const cardBrandLogoSrc = getCardBrandLogoSrc(cardNumber.join(''));
-  const backgroundColor = cardBrand ? CARD_BRANDS[cardBrand].color : undefined;
+  const backgroundColor = cardBrand ? CARD_BRANDS[cardBrand as CardBrand].color : undefined;
 
   return (
     <Wrapper>

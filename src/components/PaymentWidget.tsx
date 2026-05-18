@@ -6,7 +6,7 @@ import { Wrapper } from "./PageCard.styles";
 import { useCardForm } from "./useCardForm";
 import { useCardStep } from "./cardFormFields/useCardStep";
 import { createCard } from "../api/cards";
-import { CARD_BRANDS } from "../constants/constants";
+import { CARD_BRANDS, type CardBrand } from "../constants/constants";
 
 export default function PaymentWidget() {
   const cardForm = useCardForm();
@@ -28,7 +28,7 @@ export default function PaymentWidget() {
         navigate('/complete', {
           state: {
             cardNumberFirstSegment: cardForm.cardNumber.value[0],
-            cardBrand: CARD_BRANDS[cardForm.cardBrand.value].label,
+            cardBrand: CARD_BRANDS[cardForm.cardBrand.value as CardBrand].label,
           },
         });
         return;

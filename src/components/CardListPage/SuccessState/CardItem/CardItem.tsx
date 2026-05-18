@@ -1,4 +1,4 @@
-import { CARD_BRANDS } from '../../../../constants/constants';
+import { CARD_BRANDS, type CardBrand } from '../../../../constants/constants';
 import type { Card } from '../../../../types/card';
 import {
   BrandLabel,
@@ -16,7 +16,7 @@ type Props = {
 };
 
 export function CardItem({ card, onDelete }: Props) {
-  const brand = CARD_BRANDS[card.cardBrand];
+  const brand = CARD_BRANDS[card.cardBrand as CardBrand];
 
   const handleDelete = () => {
     if (!window.confirm('이 카드를 삭제하시겠습니까?')) return;
@@ -25,9 +25,9 @@ export function CardItem({ card, onDelete }: Props) {
 
   return (
     <Row>
-      <CardThumb color={brand?.color ?? '#cccccc'} />
+      <CardThumb color={brand.color} />
       <Info>
-        <BrandLabel>{brand?.label ?? card.cardBrand}</BrandLabel>
+        <BrandLabel>{brand.label}</BrandLabel>
         <CardNumber>{card.cardNumber}</CardNumber>
         <ExpireDate>유효기간 {card.expireDate}</ExpireDate>
       </Info>
