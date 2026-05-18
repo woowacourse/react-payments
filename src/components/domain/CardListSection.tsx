@@ -21,19 +21,20 @@ export default function CardListSection() {
   const isEmpty = cards.length === 0;
   const isError = responseStatus === 'error';
 
+  const fetchData = async () => {
+    setResponseStatus('loading');
+
+    try {
+      const response = await getCards();
+      setCards(response);
+      setResponseStatus('success');
+    } catch {
+      setResponseStatus('error');
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      setResponseStatus('loading');
-
-      try {
-        const response = await getCards();
-        setCards(response);
-        setResponseStatus('success');
-      } catch {
-        setResponseStatus('error');
-      }
-    };
-
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, []);
 
@@ -76,7 +77,7 @@ export default function CardListSection() {
             <Error />
             <span css={errorMessageTypography}>카드 목록을 불러올 수 없어요</span>
             <span css={errorCaptionTypography}>잠시 후 다시 시도해 주세요.</span>
-            <Button variant="solid" size="md">
+            <Button onClick={fetchData} variant="solid" size="md">
               다시 시도
             </Button>
           </div>
