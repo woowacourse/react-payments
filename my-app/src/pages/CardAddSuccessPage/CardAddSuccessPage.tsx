@@ -1,5 +1,5 @@
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import CardAddSuccessImage from '../assets/CardAddSuccessImage.svg';
+import CardAddSuccessImage from '../../assets/CardAddSuccessImage.svg';
 import {
   SuccessContainer,
   SuccessImage,
