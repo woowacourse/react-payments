@@ -3,37 +3,46 @@ import { useEffect, useState } from "react";
 import type { CardGetResponse } from "../../mocks/handlers";
 import { useNavigate } from "react-router-dom";
 import { options } from "../../hooks/useCardBrand";
+import ErrorImage from "../../assets/ErrorImage.svg";
+
+type Connection = "idle" | "loading" | "success" | "error";
 
 export default function CardList() {
-  const [connection, setConnection] = useState("idle");
+  const [connection, setConnection] = useState<Connection>("idle");
   const [data, setData] = useState<CardGetResponse[] | null>(null);
+  const fetchData = async () => {
+    try {
+      setConnection("loading");
+      const response = await fetch("/cards");
+
+      if (!response.ok) throw new Error("에러 발생");
+
+      const result = await response.json();
+      setData(result);
+
+      setTimeout(() => {
+        setConnection("success");
+      }, 1000);
+    } catch (error) {
+      console.error("데이터 불러오기 실패:", error);
+      setConnection("error");
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setConnection("loading");
-        const response = await fetch("/cards");
-
-        if (!response.ok) throw new Error();
-
-        const result = await response.json();
-        setData(result);
-
-        setTimeout(() => {
-          setConnection("success");
-        }, 1000);
-      } catch (error) {
-        console.error("데이터 불러오기 실패:", error);
-        setConnection("error");
-      }
-    };
-    fetchData();
+    setTimeout(() => {
+      fetchData();
+    }, 0);
   }, []);
 
   const navigate = useNavigate();
 
   const enrollNewCard = () => {
     navigate("/react-payments/add");
+  };
+
+  const retryButton = () => {
+    fetchData();
   };
 
   const findCardColor = (issuerCode: string) => {
@@ -137,6 +146,16 @@ export default function CardList() {
           </AddButton>
         </CardListContainer>
       )}
+      {connection === "error" && (
+        <Container>
+          <img src={ErrorImage} alt="error!"></img>
+          <h2>카드 목록을 불러올 수 없어요</h2>
+          <p>잠시 후 다시 시도해 주세요.</p>
+          <button type="button" onClick={retryButton}>
+            다시 시도
+          </button>
+        </Container>
+      )}
     </Wrapper>
   );
 }
@@ -192,6 +211,17 @@ const Container = styled.main`
     line-height: 100%;
     color: rgba(255, 255, 255, 1);
     margin: 0;
+    cursor: pointer;
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+    background: rgba(51, 51, 51, 1);
+    border: 1.5px solid rgba(217, 217, 217, 1);
+    border-radius: 100%;
+    padding: 13px 26px;
+    margin-bottom: 12px;
     cursor: pointer;
   }
 `;
