@@ -6,6 +6,11 @@ import AddCardCompletePage from './pages/AddCardCompletePage';
 import AddCardPage from './pages/AddCardPage';
 import MobileLayout from './components/ui/MobileLayout';
 
+if (import.meta.env.DEV) {
+  const { worker } = await import('./msw/browser');
+  await worker.start({ onUnhandledRequest: 'bypass' });
+}
+
 const router = createBrowserRouter(
   [
     {
