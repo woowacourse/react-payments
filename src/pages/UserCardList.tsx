@@ -25,7 +25,7 @@ export default function UserCardList() {
           color: theme.colors.completeText,
         })}
       >
-        보유 카드
+        보유 카드 {cards.length > 0 && <span>({cards.length})</span>}
       </p>
       {!errorMessage && (
         <>
