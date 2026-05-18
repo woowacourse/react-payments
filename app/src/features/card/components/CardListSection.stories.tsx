@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Loading: Story = {
   args: {
-    isPending: true,
+    status: "pending",
     cards: [
       {
         id: "1234-1234-1234-1234-1234",
@@ -56,12 +56,14 @@ export const Loading: Story = {
 
 export const Empty: Story = {
   args: {
+    status: "empty",
     cards: [],
   },
 };
 
 export const WithCards: Story = {
   args: {
+    status: "success",
     cards: [
       {
         id: "1234-1234-1234-1234-1234",

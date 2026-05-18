@@ -23,12 +23,12 @@ const CARDS = [
   },
 ];
 
-function renderCardListSection(cards = []) {
+function renderCardListSection(cards = [], status: "pending" | "empty" | "success" | "error" = cards.length ? "success" : "empty") {
   const user = userEvent.setup();
   render(
     <MemoryRouter initialEntries={["/"]}>
       <Routes>
-        <Route path="/" element={<CardListSection cards={cards} />} />
+        <Route path="/" element={<CardListSection cards={cards} status={status} />} />
         <Route path="/card/create/" element={<div>카드 추가 페이지</div>} />
       </Routes>
     </MemoryRouter>,
