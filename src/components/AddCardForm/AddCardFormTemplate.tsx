@@ -27,7 +27,7 @@ function AddCardFormTemplate() {
 
   const mutation = useMutation<AddCardSuccess | AddCardError>({
     method: 'POST',
-    url: '/cards',
+    url: `${import.meta.env.BASE_URL}cards`,
     onSuccess: () => navigate('/cards'),
   });
 

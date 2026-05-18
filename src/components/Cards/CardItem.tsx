@@ -31,7 +31,7 @@ export default function CardItem(props: { card: Card }) {
 
     if (!window.confirm(`${cardNumberSegments[0]}로 시작하는 카드를 삭제할게요`)) return;
 
-    fetch(`/cards/${id}`, {
+    fetch(`${import.meta.env.BASE_URL}cards/${id}`, {
       method: 'delete',
     })
       .then((res) => {

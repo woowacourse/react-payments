@@ -6,7 +6,7 @@ import CardsEmptyTemplate from '../components/Cards/CardsEmptyTemplate';
 import type { CardsResponse } from '../types/api';
 
 function CardsPage() {
-  const { status, data, error } = useQuery<CardsResponse>({ url: '/cards' });
+  const { status, data, error } = useQuery<CardsResponse>({ url: `${import.meta.env.BASE_URL}cards` });
 
   if (status === 'error' || error) return <CardsErrorTemplate />;
   if (status === 'success' && data?.length) return <CardsTemplate data={data} />;
