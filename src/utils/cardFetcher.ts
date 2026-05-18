@@ -10,13 +10,12 @@ const isServerError = (error: unknown): error is ServerError => {
     return error instanceof Object && 'code' in error && 'message' in error;
 };
 
-export const cardFetchError = async <ExpectedSuccessType>(endpoint: string, options: RequestInit = {}) => {
+export const cardFetcher = async <ExpectedSuccessType>(endpoint: string, options: RequestInit = {}) => {
     const defaultOptions = {
         method: 'GET',
         ...options,
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_API_BASE_URL}`,
             ...options.headers,
         },
     };
