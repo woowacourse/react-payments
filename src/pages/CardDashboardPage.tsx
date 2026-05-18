@@ -98,6 +98,20 @@ const CardExpiry = styled.span`
   color: #8c8c8c;
 `;
 
+const DeleteButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #8c8c8c;
+  padding: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+  &:hover {
+    color: #333;
+  }
+`;
+
 function CardDashboardPage() {
   const [cards, setCards] = useState<Card[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -108,6 +122,12 @@ function CardDashboardPage() {
       .then((data: Card[]) => setCards(data))
       .finally(() => setIsLoading(false));
   }, []);
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("카드를 삭제하시겠습니까?")) return;
+    await fetch(`${import.meta.env.BASE_URL}cards/${id}`, { method: "DELETE" });
+    setCards((prev) => prev.filter((card) => card.id !== id));
+  };
 
   return (
     <View>
@@ -129,6 +149,7 @@ function CardDashboardPage() {
                     <CardNumber>{formatCardNumber(card.number)}</CardNumber>
                     <CardExpiry>유효기간 {card.expirationDate}</CardExpiry>
                   </CardInfo>
+                  <DeleteButton onClick={() => handleDelete(card.id)}>✕</DeleteButton>
                 </CardItem>
               );
             })}
