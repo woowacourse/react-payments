@@ -4,6 +4,7 @@ export type DateError = 'emptyBoth';
 export type MonthError = 'emptyMonth' | 'notMonthRange' | 'notMonthNumber';
 export type YearError = 'emptyYear' | 'notYearNumber';
 export type CvcError = BaseError | 'cvcCount';
+export type PasswordError = BaseError | 'passwordCount';
 
 export type CardErrorType = {
   [key in CardError]: string;
@@ -23,4 +24,8 @@ export type YearErrorType = {
 
 export type CvcErrorType = {
   [key in CvcError]: string;
+};
+
+export type PasswordErrorType = {
+  [key in PasswordError]: string;
 };

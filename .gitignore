@@ -27,3 +27,6 @@ dist-ssr
 *.sw?
 
 *storybook.log
+
+# notion등 코드 리뷰에 필요한 파일
+/review/

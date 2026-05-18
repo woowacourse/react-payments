@@ -1,12 +1,17 @@
+import { useRef } from 'react';
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
+import type { CardHandler, CardStatus } from '../types/cardStatusTypes.ts';
+import { getCardNumberGroupLengths } from '../utils/card/cardBrand';
 
 type CardNumbersProps = {
-  cardStatus: CardStatus;
-  setCardStatus: CardHandler;
+  cardNumber: CardStatus;
+  setCardNumber: CardHandler;
 };
 
-export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersProps) {
+export default function CardNumber({ cardNumber, setCardNumber }: CardNumbersProps) {
+  const cardNumberGroupLengths = getCardNumberGroupLengths(cardNumber.cardBrand);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
   return (
     <div css={{ display: 'flex', flexDirection: 'column' }}>
       <div>
@@ -16,7 +21,7 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             color: theme.colors.black,
           })}
         >
-          결제한 카드 번호를 입력해주세요
+          결제할 카드 번호를 입력해주세요
         </h1>
         <p
           css={(theme) => ({
@@ -42,24 +47,32 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             gap: '10px',
           }}
         >
-          {cardStatus.cardNumbers.map((cardNumber, index) => {
+          {cardNumber.cardNumbers.map((numberGroup, index) => {
+            const maxLength = cardNumberGroupLengths[index];
+
             return (
               <input
                 key={index}
+                ref={(el) => { inputRefs.current[index] = el; }}
                 type="text"
-                placeholder="1234"
-                maxLength={4}
-                onChange={setCardStatus.handleCardNumbers(index)}
-                value={cardNumber}
-                onBlur={setCardStatus.handleCardNumbersBlur}
+                placeholder={'123456'.slice(0, maxLength)}
+                maxLength={maxLength}
+                onChange={(e) => {
+                  setCardNumber.handleCardNumbers(index)(e);
+                  if (e.target.value.length >= maxLength) {
+                    inputRefs.current[index + 1]?.focus();
+                  }
+                }}
+                value={numberGroup}
+                onBlur={setCardNumber.handleCardNumbersBlur}
                 inputMode="numeric"
                 css={(theme) => ({
-                  width: '71.25px',
+                  width: `${maxLength * 17.75}px`,
                   height: '32px',
                   borderRadius: '2px',
                   border: `1.01px solid ${theme.colors.inactiveBorder}`,
                   borderColor:
-                    cardNumber.length < 4 && cardStatus.cardNumberErrorMode !== 'normal'
+                    numberGroup.length < maxLength && cardNumber.cardNumberErrorMode !== null
                       ? theme.colors.error
                       : theme.colors.inactiveBorder,
                   padding: '8px',
@@ -75,8 +88,8 @@ export default function CardNumber({ cardStatus, setCardStatus }: CardNumbersPro
             height: '12px',
           })}
         >
-          {cardStatus.cardNumberErrorMode !== 'normal'
-            ? CARD_ERROR_MESSAGE[cardStatus.cardNumberErrorMode]
+          {cardNumber.cardNumberErrorMode !== null
+            ? CARD_ERROR_MESSAGE[cardNumber.cardNumberErrorMode]
             : ' '}
         </p>
       </div>

@@ -1,5 +1,5 @@
 import { CVC_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { Cvc, CvcHandler } from '../types/cardStausTypes.ts';
+import type { Cvc, CvcHandler } from '../types/cardStatusTypes.ts';
 
 type CardCvcProps = {
   cardCvc: Cvc;
@@ -15,7 +15,7 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
           color: theme.colors.black,
         })}
       >
-        <div>CVC 번호를 입력해 주세요</div>
+        CVC 번호를 입력해 주세요
       </h1>
       <div>
         <label
@@ -41,9 +41,7 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
               borderRadius: '2px',
               border: `1.01px solid ${theme.colors.inactiveBorder}`,
               borderColor: `${
-                cardCvc.cardCvcErrorMode !== 'normal'
-                  ? theme.colors.error
-                  : theme.colors.inactiveBorder
+                cardCvc.cardCvcErrorMode !== null ? theme.colors.error : theme.colors.inactiveBorder
               }`,
               padding: '8px',
             })}
@@ -56,9 +54,7 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
             height: '12px',
           })}
         >
-          {cardCvc.cardCvcErrorMode !== 'normal'
-            ? CVC_ERROR_MESSAGE[cardCvc.cardCvcErrorMode]
-            : ' '}
+          {cardCvc.cardCvcErrorMode !== null ? CVC_ERROR_MESSAGE[cardCvc.cardCvcErrorMode] : ' '}
         </p>
       </div>
     </div>

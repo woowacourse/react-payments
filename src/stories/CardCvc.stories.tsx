@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
 
 import CardCvc from '../components/CardCvc';
 import { useCardCvc } from '../hooks/useCardCvc';
+import { createCvcHandlers, emptyCvc, filledCvc } from './cardStoryFixtures';
 
 const meta = {
   title: 'Components/CardCvc',
@@ -19,27 +19,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardCvc: {
-      cardCvc: '',
-      cardCvcErrorMode: 'normal',
-    },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    cardCvc: emptyCvc,
+    setCardCvc: createCvcHandlers(),
   },
 };
 
 export const Filled: Story = {
   args: {
-    cardCvc: {
-      cardCvc: '123',
-      cardCvcErrorMode: 'normal',
-    },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    cardCvc: filledCvc,
+    setCardCvc: createCvcHandlers(),
   },
 };
 
@@ -49,10 +37,7 @@ export const NotNumberError: Story = {
       cardCvc: '1a',
       cardCvcErrorMode: 'notNumber',
     },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    setCardCvc: createCvcHandlers(),
   },
 };
 
@@ -62,23 +47,14 @@ export const CvcCountError: Story = {
       cardCvc: '12',
       cardCvcErrorMode: 'cvcCount',
     },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    setCardCvc: createCvcHandlers(),
   },
 };
 
 export const Interactive: Story = {
   args: {
-    cardCvc: {
-      cardCvc: '',
-      cardCvcErrorMode: 'normal',
-    },
-    setCardCvc: {
-      handleCardCvc: () => fn(),
-      handleCvcBlur: () => fn(),
-    },
+    cardCvc: emptyCvc,
+    setCardCvc: createCvcHandlers(),
   },
   render: () => {
     const [cardCvc, setCardCvc] = useCardCvc();

@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import type { CvcError } from '../types/errorTypes';
-import type { Cvc, CvcHandler } from '../types/cardStausTypes';
+import type { Cvc, CvcHandler } from '../types/cardStatusTypes';
 import { isNotNumber } from '../utils/util';
 
-export function useCardCvc(): [Cvc, CvcHandler] {
+export function useCardCvc(): { cardCvc: Cvc; cvcHandler: CvcHandler } {
   const [cardCvc, setCardCvc] = useState<string>('');
-  const [cardCvcErrorMode, setCardCvcErrorMode] = useState<CvcError | 'normal'>('normal');
+  const [cardCvcErrorMode, setCardCvcErrorMode] = useState<CvcError | null>(null);
 
   const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isNotNumber(Number(e.target.value), 'notNumber', setCardCvcErrorMode)) {
       return;
     }
 
-    setCardCvcErrorMode('normal');
+    setCardCvcErrorMode(null);
     setCardCvc(e.target.value);
   };
 
@@ -21,17 +21,17 @@ export function useCardCvc(): [Cvc, CvcHandler] {
       setCardCvcErrorMode('cvcCount');
       return;
     }
-    setCardCvcErrorMode('normal');
+    setCardCvcErrorMode(null);
   };
 
-  return [
-    {
+  return {
+    cardCvc: {
       cardCvc,
       cardCvcErrorMode,
     },
-    {
+    cvcHandler: {
       handleCardCvc,
       handleCvcBlur,
     },
-  ];
+  };
 }

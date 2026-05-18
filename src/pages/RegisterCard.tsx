@@ -1,41 +1,97 @@
+import { useNavigate } from 'react-router-dom';
 import CardPreview from '../components/CardPreview';
 import CardInput from '../components/CardInput';
-import { useCardNumber } from '../hooks/useCardNumber';
-import { useExpiryDate } from '../hooks/useExpiryDate';
-import { useCardCvc } from '../hooks/useCardCvc';
+import { useCardForm } from '../hooks/useCardForm';
+import type { CardCompany } from '../types/cardStatusTypes';
+
+export type RegisteredCard = {
+  cardNumberPrefix: string;
+  cardCompany: Exclude<CardCompany, ''>;
+};
 
 export default function RegisterCard() {
-  const [cardStatus, setCardStatus] = useCardNumber();
-  const [cardExpiry, setCardExpiry] = useExpiryDate();
-  const [cardCvc, setCardCvc] = useCardCvc();
+  const navigate = useNavigate();
+  const { form, handlers, completion } = useCardForm();
+  const handleComplete = () => {
+    if (form.cardCompanyStatus.cardCompany === '') {
+      return;
+    }
+    navigate('/complete', {
+      state: {
+        cardNumberPrefix: form.cardNumber.cardNumbers[0],
+        cardCompany: form.cardCompanyStatus.cardCompany,
+      } satisfies RegisteredCard,
+    });
+  };
 
   return (
     <div
       css={(theme) => ({
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '45px',
+        position: 'relative',
         backgroundColor: theme.colors.white,
         width: '376px',
         height: '100vh',
         margin: '0 auto',
+        boxSizing: 'border-box',
+        overflow: 'hidden',
       })}
     >
-      <CardPreview
-        cardNumbers={cardStatus.cardNumbers}
-        cardExpiryDate={cardExpiry.cardExpiryDate}
-        cardBrand={cardStatus.cardBrand}
-      />
-      <CardInput
-        cardStatus={cardStatus}
-        setCardStatus={setCardStatus}
-        cardExpiry={cardExpiry}
-        setCardExpiry={setCardExpiry}
-        cardCvc={cardCvc}
-        setCardCvc={setCardCvc}
-      />
+      <div
+        css={{
+          position: 'fixed',
+          top: '98px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 1,
+        }}
+      >
+        <CardPreview
+          cardNumbers={form.cardNumber.cardNumbers}
+          cardExpiryDate={form.cardExpiry.cardExpiryDate}
+          cardBrand={form.cardNumber.cardBrand}
+          cardCompany={form.cardCompanyStatus.cardCompany}
+        />
+      </div>
+      <div
+        css={{
+          position: 'absolute',
+          top: '296px',
+          bottom: completion.isComplete ? '48px' : 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '315px',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+        }}
+      >
+        <CardInput
+          form={form}
+          handlers={handlers}
+          completion={completion}
+          hasBottomAction={completion.isComplete}
+        />
+      </div>
+      {completion.isComplete && (
+        <button
+          type="button"
+          onClick={handleComplete}
+          css={(theme) => ({
+            width: '376px',
+            height: '48px',
+            border: 'none',
+            position: 'fixed',
+            bottom: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            backgroundColor: theme.colors.cardBackground,
+            color: theme.colors.white,
+            cursor: 'pointer',
+            zIndex: 1,
+          })}
+        >
+          확인
+        </button>
+      )}
     </div>
   );
 }

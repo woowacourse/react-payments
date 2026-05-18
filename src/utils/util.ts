@@ -1,6 +1,7 @@
 import type { DateError, MonthError, YearError } from '../types/errorTypes';
+import type { CardBrand } from '../types/cardStatusTypes';
 
-export function isMonthError(mode: DateError | MonthError | YearError | 'normal') {
+export function isMonthError(mode: DateError | MonthError | YearError | null) {
   if (
     mode === 'emptyBoth' ||
     mode === 'emptyMonth' ||
@@ -9,17 +10,17 @@ export function isMonthError(mode: DateError | MonthError | YearError | 'normal'
   ) {
     return true;
   }
-  if (mode === 'normal' || mode === 'emptyYear' || mode === 'notYearNumber') {
+  if (mode === null || mode === 'emptyYear' || mode === 'notYearNumber') {
     return false;
   }
 }
 
-export function isYearError(mode: DateError | MonthError | YearError | 'normal') {
+export function isYearError(mode: DateError | MonthError | YearError | null) {
   if (mode === 'emptyBoth' || mode === 'emptyYear' || mode === 'notYearNumber') {
     return true;
   }
   if (
-    mode === 'normal' ||
+    mode === null ||
     mode === 'emptyMonth' ||
     mode === 'notMonthRange' ||
     mode === 'notMonthNumber'
@@ -40,7 +41,7 @@ export function isNotNumber<T extends string>(
   return false;
 }
 
-export function setEmptyBrand(value: string[], setCardBrand: (brand: string) => void) {
+export function setEmptyBrand(value: string[], setCardBrand: (brand: CardBrand) => void) {
   if (value[0] === '') {
     setCardBrand('');
   }

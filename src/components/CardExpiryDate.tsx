@@ -4,19 +4,20 @@ import {
   YEAR_ERROR_MESSAGE,
 } from '../constants/messages.ts';
 import { isMonthError, isYearError } from '../utils/util.ts';
-import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
+import type { CardExpiry, ExpiryHandler } from '../types/cardStatusTypes';
 
 type CardExpiryDateProps = {
   cardExpiry: CardExpiry;
-  setCardExpiry: ExpireHandler;
+  setCardExpiry: ExpiryHandler;
+};
+
+const EXPIRY_ERROR_MESSAGE = {
+  ...DATE_ERROR_MESSAGE,
+  ...MONTH_ERROR_MESSAGE,
+  ...YEAR_ERROR_MESSAGE,
 };
 
 export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiryDateProps) {
-  const EXPIRY_ERROR_MESSAGE = {
-    ...DATE_ERROR_MESSAGE,
-    ...MONTH_ERROR_MESSAGE,
-    ...YEAR_ERROR_MESSAGE,
-  };
   return (
     <div css={{ display: 'flex', flexDirection: 'column' }}>
       <div>
@@ -102,7 +103,7 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             height: '12px',
           })}
         >
-          {cardExpiry.cardExpiryDateErrorMode !== 'normal'
+          {cardExpiry.cardExpiryDateErrorMode !== null
             ? EXPIRY_ERROR_MESSAGE[cardExpiry.cardExpiryDateErrorMode]
             : ' '}
         </p>

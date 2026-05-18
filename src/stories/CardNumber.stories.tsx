@@ -1,7 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
 import CardNumber from '../components/CardNumber';
 import { useCardNumber } from '../hooks/useCardNumber';
+import {
+  amexCardStatus,
+  createCardNumberHandlers,
+  dinersCardStatus,
+  emptyCardStatus,
+  masterCardStatus,
+  unionPayCardStatus,
+  visaCardStatus,
+} from './cardStoryFixtures';
 
 const meta = {
   title: 'Components/CardNumber',
@@ -18,66 +26,81 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    cardStatus: {
-      cardNumbers: ['', '', '', ''],
-      cardNumberErrorMode: 'normal',
-      cardBrand: '',
-    },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    cardNumber: emptyCardStatus,
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
-export const Filled: Story = {
+export const FilledVisa: Story = {
   args: {
-    cardStatus: {
-      cardNumbers: ['4123', '1234', '1234', '1234'],
-      cardNumberErrorMode: 'normal',
-      cardBrand: 'visa',
-    },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    cardNumber: visaCardStatus,
+    setCardNumber: createCardNumberHandlers(),
+  },
+};
+
+export const FilledMastercard: Story = {
+  args: {
+    cardNumber: masterCardStatus,
+    setCardNumber: createCardNumberHandlers(),
+  },
+};
+
+export const FilledDiners: Story = {
+  args: {
+    cardNumber: dinersCardStatus,
+    setCardNumber: createCardNumberHandlers(),
+  },
+};
+
+export const FilledAMEX: Story = {
+  args: {
+    cardNumber: amexCardStatus,
+    setCardNumber: createCardNumberHandlers(),
+  },
+};
+
+export const FilledUnionPay: Story = {
+  args: {
+    cardNumber: unionPayCardStatus,
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
 export const Error: Story = {
   args: {
-    cardStatus: {
+    cardNumber: {
       cardNumbers: ['412a', '1234', '1234', '1234'],
       cardNumberErrorMode: 'notNumber',
-      cardBrand: 'visa',
+      cardBrand: '',
     },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
+    setCardNumber: createCardNumberHandlers(),
+  },
+};
+
+export const UnknownBrandError: Story = {
+  args: {
+    cardNumber: {
+      cardNumbers: ['9912', '1234', '1234', '1234'],
+      cardNumberErrorMode: 'notExistBrand',
+      cardBrand: '',
     },
+    setCardNumber: createCardNumberHandlers(),
   },
 };
 
 export const Interactive: Story = {
   args: {
-    cardStatus: {
-      cardNumbers: ['', '', '', ''],
-      cardNumberErrorMode: 'normal',
-      cardBrand: '',
-    },
-    setCardStatus: {
-      handleCardNumbers: () => fn(),
-      handleCardNumbersBlur: () => fn(),
-    },
+    cardNumber: emptyCardStatus,
+    setCardNumber: createCardNumberHandlers(),
   },
   render: () => {
-    const [cardStatus, setCardStatus] = useCardNumber();
+    const { cardNumber, cardNumberHandler } = useCardNumber();
 
     return (
       <div>
-        <CardNumber cardStatus={cardStatus} setCardStatus={setCardStatus} />
+        <CardNumber cardNumber={cardNumber} setCardNumber={cardNumberHandler} />
 
-        <div style={{ marginTop: '16px' }}>입력값: {cardStatus.cardNumbers.join(' - ')}</div>
+        <div style={{ marginTop: '16px' }}>입력값: {cardNumber.cardNumbers.join(' - ')}</div>
       </div>
     );
   },

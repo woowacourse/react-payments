@@ -4,12 +4,13 @@ import type {
   MonthErrorType,
   YearErrorType,
   CvcErrorType,
+  PasswordErrorType,
 } from '../types/errorTypes';
 
 export const CARD_ERROR_MESSAGE: CardErrorType = {
   notNumber: '숫자만 입력 가능합니다',
   notExistBrand: '존재하는 카드 브랜드 번호가 아닙니다.',
-  cardNumberCount: '각 카드 번호 입력칸의 숫자는 4자리여야 합니다.',
+  cardNumberCount: '카드 번호 형식이 올바르지 않습니다.',
 };
 
 export const DATE_ERROR_MESSAGE: DateErrorType = {
@@ -30,4 +31,9 @@ export const YEAR_ERROR_MESSAGE: YearErrorType = {
 export const CVC_ERROR_MESSAGE: CvcErrorType = {
   notNumber: '숫자만 입력 가능합니다',
   cvcCount: 'CVC 번호는 3자리여야 합니다.',
+};
+
+export const PASSWORD_ERROR_MESSAGE: PasswordErrorType = {
+  notNumber: '숫자만 입력 가능합니다',
+  passwordCount: '비밀번호 앞 2자리를 입력해주세요.',
 };

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import type { DateError, MonthError, YearError } from '../types/errorTypes';
-import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
+import type { CardExpiry, ExpiryHandler } from '../types/cardStatusTypes';
 import { isNotNumber } from '../utils/util';
 
-export function useExpiryDate(): [CardExpiry, ExpireHandler] {
+export function useCardExpiry(): { cardExpiry: CardExpiry; expiryHandler: ExpiryHandler } {
   const [cardExpiryDate, setCardExpiryDate] = useState<string[]>(['', '']);
   const [cardExpiryDateErrorMode, setCardExpiryDateErrorMode] = useState<
-    DateError | MonthError | YearError | 'normal'
-  >('normal');
+    DateError | MonthError | YearError | null
+  >(null);
 
   const handleCardExpiryDate = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = [...cardExpiryDate];
@@ -23,7 +23,7 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
       }
     }
 
-    setCardExpiryDateErrorMode('normal');
+    setCardExpiryDateErrorMode(null);
     setCardExpiryDate(next);
   };
 
@@ -40,7 +40,7 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
       setCardExpiryDateErrorMode('emptyMonth');
       return;
     }
-    setCardExpiryDateErrorMode('normal');
+    setCardExpiryDateErrorMode(null);
   };
 
   const handleMonthBlur = () => {
@@ -49,18 +49,18 @@ export function useExpiryDate(): [CardExpiry, ExpireHandler] {
       return;
     }
 
-    setCardExpiryDateErrorMode('normal');
+    setCardExpiryDateErrorMode(null);
   };
 
-  return [
-    {
-      cardExpiryDate: cardExpiryDate,
-      cardExpiryDateErrorMode: cardExpiryDateErrorMode,
+  return {
+    cardExpiry: {
+      cardExpiryDate,
+      cardExpiryDateErrorMode,
     },
-    {
-      handleCardExpiryDate: handleCardExpiryDate,
-      handleYearBlur: handleYearBlur,
-      handleMonthBlur: handleMonthBlur,
+    expiryHandler: {
+      handleCardExpiryDate,
+      handleYearBlur,
+      handleMonthBlur,
     },
-  ];
+  };
 }
