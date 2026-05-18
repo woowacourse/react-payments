@@ -3,47 +3,19 @@ import CardNumber from './CardNumber';
 import CardExpiryDate from './CardExpiryDate';
 import CardCompany from './CardCompany';
 import CardPassword from './CardPassword';
-import type {
-  CardHandler,
-  CardStatus,
-  CardExpiry,
-  ExpireHandler,
-  Cvc,
-  CvcHandler,
-  CardCompanyHandler,
-  CardCompanyStatus,
-  CardPassword as CardPasswordType,
-  CardPasswordHandler,
-} from '../types/cardStausTypes';
+import type { CardFormState, CardFormHandlers } from '../hooks/useCardForm';
 import { isValidCardNumber } from '../utils/card/cardBrand';
 
 type CardInputProps = {
-  cardNumber: CardStatus;
-  setCardNumber: CardHandler;
-  cardExpiry: CardExpiry;
-  setCardExpiry: ExpireHandler;
-  cardCvc: Cvc;
-  setCardCvc: CvcHandler;
-  cardPassword: CardPasswordType;
-  setCardPassword: CardPasswordHandler;
-  cardCompanyStatus: CardCompanyStatus;
-  setCardCompany: CardCompanyHandler;
+  form: CardFormState;
+  handlers: CardFormHandlers;
   hasBottomAction?: boolean;
 };
 
-export default function CardInput({
-  cardNumber,
-  setCardNumber,
-  cardExpiry,
-  setCardExpiry,
-  cardCvc,
-  setCardCvc,
-  cardPassword,
-  setCardPassword,
-  cardCompanyStatus,
-  setCardCompany,
-  hasBottomAction = false,
-}: CardInputProps) {
+export default function CardInput({ form, handlers, hasBottomAction = false }: CardInputProps) {
+  const { cardNumber, cardExpiry, cardCvc, cardPassword, cardCompanyStatus } = form;
+  const { cardNumberHandler, expiryHandler, cvcHandler, cardPasswordHandler, cardCompanyHandler } =
+    handlers;
   const isCardNumberComplete =
     isValidCardNumber(cardNumber.cardNumbers, cardNumber.cardBrand) &&
     cardNumber.cardNumberErrorMode === null;
@@ -63,18 +35,18 @@ export default function CardInput({
       }}
     >
       {isCardNumberComplete && isCardCompanySelected && isExpiryDateComplete && isCvcComplete && (
-        <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />
+        <CardPassword cardPassword={cardPassword} setCardPassword={cardPasswordHandler} />
       )}
       {isCardNumberComplete && isCardCompanySelected && isExpiryDateComplete && (
-        <CardCvc cardCvc={cardCvc} setCardCvc={setCardCvc} />
+        <CardCvc cardCvc={cardCvc} setCardCvc={cvcHandler} />
       )}
       {isCardNumberComplete && isCardCompanySelected && (
-        <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={setCardExpiry} />
+        <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={expiryHandler} />
       )}
       {isCardNumberComplete && (
-        <CardCompany cardCompanyStatus={cardCompanyStatus} setCardCompany={setCardCompany} />
+        <CardCompany cardCompanyStatus={cardCompanyStatus} setCardCompany={cardCompanyHandler} />
       )}
-      <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
+      <CardNumber cardNumber={cardNumber} setCardNumber={cardNumberHandler} />
     </form>
   );
 }
