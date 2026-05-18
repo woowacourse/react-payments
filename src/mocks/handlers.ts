@@ -82,4 +82,11 @@ export const handlers = [
     CARD.push(newCard);
     return HttpResponse.json({ id: newId, status: 201 });
   }),
+  http.delete("/cards/:id", ({ params }) => {
+    const { id } = params;
+
+    const newCard = CARD.filter((value) => value.id !== id);
+    CARD.splice(0, CARD.length, ...newCard);
+    return new HttpResponse(null, { status: 204 });
+  }),
 ];
