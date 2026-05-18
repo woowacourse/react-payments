@@ -7,7 +7,7 @@ type PostCardError = {
 };
 
 export const validatePostedCard = (card: PostedCard): PostCardError | null => {
-  if (getCardBrandName(card.number.match(/.{1,4}/g)) === null) {
+  if (getCardBrandName(card.number.match(/.{1,4}/g) ?? []) === null) {
     return {
       code: 'INVALID_CARD_NUMBER',
       message: '유효하지 않은 카드 번호입니다.',

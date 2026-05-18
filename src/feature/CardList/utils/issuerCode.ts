@@ -10,14 +10,14 @@ export const getCardIssuerCode = (cardCompanyId: CardCompanyId | null) => {
   );
 };
 
-export const getCardCompanyNameByIssuerCode = (issuerCode: string) => {
+export const getCardCompanyNameByIssuerCode = (issuerCode: string | null) => {
   return (
     CARD_COMPANIES.find((company) => company.issuerCode === issuerCode)?.name ??
     ''
   );
 };
 
-export const getCardCompanyColorByIssuerCode = (issuerCode: string) => {
+export const getCardCompanyColorByIssuerCode = (issuerCode: string | null) => {
   return (
     CARD_COMPANIES.find((company) => company.issuerCode === issuerCode)
       ?.color ?? '#333333'
