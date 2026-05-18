@@ -1,4 +1,5 @@
 import { http, HttpResponse } from "msw";
+import { detectBrand, getFieldConfig } from "@/constants/cardBrand";
 
 type CardBody = {
   number: string;
@@ -16,7 +17,9 @@ export const handlers = [
     const { number, expirationDate, cvc, issuerCode } = (await request.json()) as CardBody;
 
     const numberDigits = number.replace(/[\s-]/g, "");
-    if (!/^\d{14,16}$/.test(numberDigits)) {
+    const brand = detectBrand(numberDigits);
+    const expectedLength = getFieldConfig(brand).reduce((sum, n) => sum + n, 0);
+    if (!brand || numberDigits.length !== expectedLength) {
       return HttpResponse.json(
         { code: "INVALID_CARD_NUMBER", message: "유효하지 않은 카드 번호입니다." },
         { status: 400 },
