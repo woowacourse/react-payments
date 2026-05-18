@@ -15,7 +15,7 @@ export const CARD_ISSUER = {
   21: '하나카드',
   kbCard: '국민카드',
   11: '국민카드',
-};
+} as const;
 
 export const CARD_ISSUER_CODE = {
   bcCard: '31',
@@ -34,4 +34,4 @@ export const CARD_ISSUER_CODE = {
   21: 'hanaCard',
   kbCard: '11',
   11: 'kbCard',
-};
+} as const;
