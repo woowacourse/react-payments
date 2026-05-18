@@ -14,6 +14,7 @@ export const createCard = async (
         issuerCode: cardBrand,
       }),
     });
+    return response;
   } catch (err) {}
 };
 
