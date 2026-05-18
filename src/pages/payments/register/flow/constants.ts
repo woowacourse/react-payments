@@ -1,0 +1,11 @@
+export const ERROR_CODE = {
+  INVALID_CARD_NUMBER: 'INVALID_CARD_NUMBER',
+  INVALID_CVC: 'INVALID_CVC',
+  INVALID_EXPIRATION_DATE: 'INVALID_EXPIRATION_DATE',
+};
+
+export const ERROR_MESSAGE = {
+  INVALID_CARD_NUMBER: '카드 번호를 다시 확인해주세요.',
+  INVALID_CVC: 'CVC를 확인해주세요.',
+  INVALID_EXPIRATION_DATE: '유효기간을 다시 입력해주세요.',
+};
