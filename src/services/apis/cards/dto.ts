@@ -6,3 +6,7 @@ interface CardRseponseDTO {
 }
 
 export type GetCardsResponseDTO = CardRseponseDTO[];
+
+export interface DeleteCardsRequestDTO {
+  id: string;
+}
