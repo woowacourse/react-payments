@@ -26,6 +26,7 @@ const meta = {
       },
     ],
     onAddCard: () => {},
+    onDeleteCard: () => {},
   },
 } satisfies Meta<typeof CardListSuccess>;
 
@@ -33,4 +34,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    onDeleteCard: () => {},
+  },
+};

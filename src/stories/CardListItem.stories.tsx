@@ -11,6 +11,7 @@ const meta = {
       number: "551112******9012",
       expirationDate: "12/28",
     },
+    onDelete: () => {},
   },
   decorators: [
     (Story) => (
@@ -25,4 +26,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    onDelete: () => {},
+  },
+};
