@@ -1,35 +1,42 @@
-export const createCard = async (
+const BASE_URL = "https://api.antolibank.com/cards";
+
+export class NetworkError extends Error {}
+export class HttpError extends Error {
+  status: number;
+  constructor(status: number) {
+    super();
+    this.status = status;
+  }
+}
+
+const request = async (url: string, init?: RequestInit) => {
+  let response: Response;
+  try {
+    response = await fetch(url, init);
+  } catch {
+    throw new NetworkError();
+  }
+  if (!response.ok) throw new HttpError(response.status);
+  return response;
+};
+
+export const createCard = (
   cardNumber: string,
   cardExpiryDate: string,
   cardCVC: string,
   cardBrand: string,
-) => {
-  try {
-    const response = await fetch("https://api.antolibank.com/cards", {
-      method: "POST",
-      body: JSON.stringify({
-        number: cardNumber,
-        expirationDate: cardExpiryDate,
-        cvc: cardCVC,
-        issuerCode: cardBrand,
-      }),
-    });
-    return response;
-  } catch (err) {}
-};
+) =>
+  request(BASE_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      number: cardNumber,
+      expirationDate: cardExpiryDate,
+      cvc: cardCVC,
+      issuerCode: cardBrand,
+    }),
+  });
 
-export const getCards = async () => {
-  try {
-    const response = await fetch("https://api.antolibank.com/cards");
-    const data = await response.json();
-    return data;
-  } catch (err) {}
-};
+export const getCards = () => request(BASE_URL).then((r) => r.json());
 
-export const deleteCard = async (cardId: string) => {
-  try {
-    await fetch(`https://api.antolibank.com/cards/${cardId}`, {
-      method: "DELETE",
-    });
-  } catch (err) {}
-};
+export const deleteCard = (cardId: string) =>
+  request(`${BASE_URL}/${cardId}`, { method: "DELETE" });

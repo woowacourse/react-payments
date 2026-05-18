@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn, userEvent, within, expect } from "storybook/test";
 import { useState } from "react";
 import { CardForm } from "./CardForm";
 import { withCardRouter } from "../storybook/decorators";
@@ -65,19 +66,64 @@ export const BaseCardForm: Story = {
   render: renderWithState,
 };
 
-export const CompleteCardForm: Story = {
-  args: {
-    ...defaultArgs,
-    cardNumber: {
-      firstDigits: "4321",
-      secondDigits: "4321",
-      thirdDigits: "4321",
-      fourthDigits: "4321",
-    },
-    cardExpiryDate: new ExpiryDate("01", "28"),
-    cardBrand: "kakao",
-    cardCVC: "111",
-    cardPassword: "12",
+const completeArgs = {
+  ...defaultArgs,
+  cardNumber: {
+    firstDigits: "4321",
+    secondDigits: "4321",
+    thirdDigits: "4321",
+    fourthDigits: "4321",
   },
+  cardExpiryDate: new ExpiryDate("01", "28"),
+  cardBrand: "kakao",
+  cardCVC: "111",
+  cardPassword: "12",
+};
+
+export const CompleteCardForm: Story = {
+  args: completeArgs,
   render: renderWithState,
+};
+
+export const NetworkErrorOnSubmit: Story = {
+  args: completeArgs,
+  render: renderWithState,
+  beforeEach() {
+    const original = globalThis.fetch;
+    globalThis.fetch = fn().mockRejectedValue(new TypeError("Failed to fetch"));
+    return () => {
+      globalThis.fetch = original;
+    };
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "확인" }));
+    await expect(
+      canvas.getByText("네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요."),
+    ).toBeInTheDocument();
+  },
+};
+
+export const ServerErrorOnSubmit: Story = {
+  args: completeArgs,
+  render: renderWithState,
+  beforeEach() {
+    const original = globalThis.fetch;
+    globalThis.fetch = fn().mockResolvedValue(
+      new Response(JSON.stringify({ errorMessages: ["서버 오류가 발생했습니다."] }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    return () => {
+      globalThis.fetch = original;
+    };
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "확인" }));
+    await expect(
+      canvas.getByText("카드 등록에 실패했어요. 입력 정보를 확인해 주세요."),
+    ).toBeInTheDocument();
+  },
 };
