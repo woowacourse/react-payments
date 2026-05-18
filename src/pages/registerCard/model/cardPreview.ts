@@ -1,4 +1,12 @@
 import { type CardBrand } from '@/entities/card/model/cardNumber';
+import type { Bank } from '@/entities/card/model/bank';
+import type { ExpiryDate } from '@/entities/card/model/expiryDate';
+
+export interface CardPreviewInfo {
+  numbers: string[];
+  expiryDate: ExpiryDate;
+  bank: Bank | undefined;
+}
 
 const STAR = '●';
 

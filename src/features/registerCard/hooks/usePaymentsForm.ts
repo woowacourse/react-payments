@@ -4,7 +4,7 @@ import { validateCvc } from '@/entities/card/model/cvc';
 import type { ExpiryDate } from '@/entities/card/model/expiryDate';
 import { validateExpiryMonth, validateExpiryYear } from '@/entities/card/model/expiryDate';
 import { validatePassword } from '@/entities/card/model/password';
-import type { CardPreviewInfo } from '@/entities/card/model/cardPreview';
+import type { CardPreviewInfo } from '@/pages/registerCard/model/cardPreview';
 import { type CardInfo } from '@/features/registerCard/model/registerCardForm';
 import { useState } from 'react';
 import type { CardNumberFieldControl } from '../ui/fields/CardNumberField';

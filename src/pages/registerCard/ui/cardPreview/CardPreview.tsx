@@ -1,17 +1,14 @@
 import styles from './CardPreview.module.css';
 import bankStyles from '@/entities/card/config/bank.module.css';
 
-import type { ExpiryDate } from '@/entities/card/model/expiryDate';
-import { BANK_RULES, type Bank } from '@/entities/card/model/bank';
+import { BANK_RULES } from '@/entities/card/model/bank';
 import { BRAND_SVG_MAP } from '@/entities/card/config/brandSvgMap';
 import { getCardBrand, type CardBrand } from '@/entities/card/model/cardNumber';
-import { getPreviewCardNumbers } from './model/cardPreview';
+import {
+  getPreviewCardNumbers,
+  type CardPreviewInfo,
+} from '@/pages/registerCard/model/cardPreview';
 
-export interface CardPreviewInfo {
-  numbers: string[];
-  expiryDate: ExpiryDate;
-  bank: Bank | undefined;
-}
 interface CardPreviewProps {
   info: CardPreviewInfo;
 }
