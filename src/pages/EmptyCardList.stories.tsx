@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardListFallback from "./CardListFallback";
+import EmptyCardList from "./EmptyCardList";
 
-const meta: Meta<typeof CardListFallback> = {
+const meta: Meta<typeof EmptyCardList> = {
   title: "Pages/EmptyCardList",
-  component: CardListFallback,
+  component: EmptyCardList,
 };
 
 export default meta;
-type Story = StoryObj<typeof CardListFallback>;
+type Story = StoryObj<typeof EmptyCardList>;
 
 export const Success: Story = {
   args: {

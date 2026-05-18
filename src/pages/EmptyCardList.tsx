@@ -21,7 +21,7 @@ const CONTENT = {
   },
 };
 
-export default function CardListFallback({ type, onClick }: Props) {
+export default function EmptyCardList({ type, onClick }: Props) {
   const { img, title, description, buttonLabel } = CONTENT[type];
   return (
     <Container>
