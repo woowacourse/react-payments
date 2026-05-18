@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
@@ -78,6 +78,8 @@ describe('카드 목록 페이지 테스트', async () => {
     );
 
     // ASSERT
-    expect(await screen.findByText(cards[0].expirationDate)).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(cards[0].expirationDate)).not.toBeInTheDocument();
+    });
   });
 });
