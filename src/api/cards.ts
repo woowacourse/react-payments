@@ -6,8 +6,8 @@ export type CreateCardResult =
   | { ok: true; card: Card }
   | { ok: false; error: { code: keyof CardRequest; message: string } };
 
-export const fetchCards = async (): Promise<Card[]> => {
-  const response = await fetch('/cards');
+export const fetchCards = async (signal?: AbortSignal): Promise<Card[]> => {
+  const response = await fetch('/cards', { signal });
   if (!response.ok) throw new Error('카드 목록을 불러오지 못했습니다');
   return response.json();
 };

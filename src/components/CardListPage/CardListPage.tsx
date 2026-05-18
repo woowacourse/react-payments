@@ -1,75 +1,56 @@
-import { useEffect, useState } from 'react';
 import { LoadingState } from './LoadingState/LoadingState';
 import { ErrorState } from './ErrorState/ErrorState';
 import { SuccessState } from './SuccessState/SuccessState';
+import { Wrapper } from '../PageCard.styles';
+import { useEffect, useState } from 'react';
 import type { Card } from '../../types/card';
 import { fetchCards, deleteCard } from '../../api/cards';
-import { Wrapper } from '../PageCard.styles';
 
 type State = 'idle' | 'loading' | 'success' | 'error';
 
 export function CardListPage() {
   const [state, setState] = useState<State>('idle');
-  const [savedCard, setSavedCard] = useState<Card[]>([]);
+  const [cards, setCards] = useState<Card[]>([]);
 
-  const loadCards = async () => {
-    setState('loading');
+  useEffect(() => {
+    const controller = new AbortController();
+    const loadCards = async () => {
+      try {
+        const data = await fetchCards(controller.signal);
+        setCards(data);
+        setState('success');
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError')
+          return;
+        setState('error');
+      }
+    };
+    loadCards();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  const remove = async (id: string) => {
     try {
-      const data = await fetchCards();
-      setSavedCard(data);
-      setState('success');
+      if (!window.confirm('이 카드를 삭제하시겠습니까?')) return;
+      await deleteCard(id);
+      setCards((prev) => prev.filter((card) => card.id !== id));
     } catch {
       setState('error');
     }
   };
 
-  const handleDelete = async (id: string) => {
-    try {
-      await deleteCard(id);
-      await loadCards();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  if (state === 'idle') setState('loading');
-
-  useEffect(() => {
-    let cancelled = false;
-
-    fetchCards()
-      .then((cards) => {
-        if (cancelled) return;
-        setSavedCard(cards);
-        setState('success');
-      })
-      .catch(() => {
-        if (cancelled) return;
-        setState('error');
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  if (state === 'idle') return <></>;
-  if (state === 'loading')
-    return (
-      <Wrapper>
+  return (
+    <Wrapper>
+      {state === 'idle' || state === 'loading' ? (
         <LoadingState />
-      </Wrapper>
-    );
-  if (state === 'success')
-    return (
-      <Wrapper>
-        <SuccessState cards={savedCard} onDelete={handleDelete} />
-      </Wrapper>
-    );
-  if (state === 'error')
-    return (
-      <Wrapper>
+      ) : state === 'success' ? (
+        <SuccessState cards={cards} onDelete={remove} />
+      ) : state === 'error' ? (
         <ErrorState />
-      </Wrapper>
-    );
+      ) : null}
+    </Wrapper>
+  );
 }
