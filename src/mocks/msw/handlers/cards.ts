@@ -2,7 +2,12 @@ import { http, HttpResponse } from 'msw';
 
 import { BRAND_NUMBER } from '@/pages/payments/register/form/constant';
 
-import { cards } from '@/mocks/data/cards';
+type Card = {
+  id: string;
+  issuerCode: string;
+  number: string;
+  expirationDate: string;
+};
 
 const validateBin = (numbers: unknown) => {
   if (typeof numbers !== 'string') return false;
@@ -38,8 +43,7 @@ const validateExpirationDate = (value: unknown): boolean => {
   return monthNumber >= 1 && monthNumber <= 12;
 };
 
-const copiedCards = [...cards];
-// let cards: Card[] = [];
+let cards: Card[] = [];
 
 export const handlers = [
   http.post('/cards', async ({ request }) => {
@@ -68,16 +72,26 @@ export const handlers = [
       );
     }
 
+    cards = [
+      ...cards,
+      {
+        id: crypto.randomUUID(),
+        issuerCode: data?.issuerCode,
+        number: data?.number,
+        expirationDate: data?.expirationDate,
+      },
+    ];
+
     // 201
     return HttpResponse.json({ id: crypto.randomUUID() }, { status: 201 });
   }),
   http.get('/cards', () => {
-    return HttpResponse.json(copiedCards, { status: 201 });
+    return HttpResponse.json(cards, { status: 201 });
   }),
   http.delete('/cards/:id', ({ params }) => {
     const { id } = params;
 
-    copiedCards = copiedCards.filter((card) => card.id !== id);
+    cards = cards.filter((card) => card.id !== id);
 
     return HttpResponse.json(undefined, { status: 204 });
   }),
