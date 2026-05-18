@@ -22,7 +22,12 @@ const router = createBrowserRouter(
         },
         {
           element: <CardListLayout />,
-          children: [{ path: 'list', element: <CardListPage /> }],
+          children: [
+            {
+              path: 'list',
+              element: <CardListPage />,
+            },
+          ],
         },
       ],
     },
