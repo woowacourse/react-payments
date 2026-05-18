@@ -7,6 +7,7 @@ import CardPasswordInput from "./CardPasswordInput";
 import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
 import { Button } from "../../style/Button";
 import CardBrandSelect from "./CardBrandSelect";
+import { joinCardNumber } from "../../Utils";
 import type { CardNumber, CardExpiryDate, SetState } from "../../types";
 
 interface CardFormProps {
@@ -44,7 +45,7 @@ export function CardForm({
     cardPasswordIsComplete,
     allComplete,
   } = calculateCreateCardCurrentProgress({
-    cardNumber: Object.values(cardNumber).join(""),
+    cardNumber: joinCardNumber(cardNumber),
     cardBrand,
     cardExpiryDate: Object.values(cardExpiryDate).join(""),
     cardCVC,
@@ -57,7 +58,7 @@ export function CardForm({
       const response = await fetch("https://api.antolibank.com/cards", {
         method: "POST",
         body: JSON.stringify({
-          cardNumber: Object.values(cardNumber).join(""),
+          cardNumber: joinCardNumber(cardNumber),
           // expiryDate를 MM/YY 형식으로 전환.
           cardExpiryDate: cardExpiryDate,
           cardCVC: cardCVC,
