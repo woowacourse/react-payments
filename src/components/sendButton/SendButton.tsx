@@ -6,12 +6,12 @@ import { useExpireDateContext } from "../../context/expireDate/ExpireDateContext
 import { useCvcContext } from "../../context/cvc/CvcContext";
 
 export default function SendButton() {
-  const { cardNumber } = useCardNumberContext();
+  const { cardNumber, setCardNumberServerError } = useCardNumberContext();
   const {
     selectedItem: { issuerCode },
   } = useCardBrandContext();
-  const { expireDate } = useExpireDateContext();
-  const { cvc } = useCvcContext();
+  const { expireDate, setExpireDateServerError } = useExpireDateContext();
+  const { cvc, setCvcServerError } = useCvcContext();
 
   const navigate = useNavigate();
   const sendResult = async () => {
@@ -59,9 +59,24 @@ export default function SendButton() {
       }
 
       const customError = error as { code?: string; message?: string };
-      if (customError.code) {
+      if (customError.code && customError.message) {
         console.error(`${customError.code}: ${customError.message}`);
         alert(customError.message);
+
+        switch (customError.code) {
+          case "INVALID_CARD_NUMBER":
+            setCardNumberServerError(customError.message);
+            break;
+          case "INVALID_CVC":
+            setCvcServerError(customError.message);
+            break;
+          case "INVALID_EXPIRATION_DATE":
+            setExpireDateServerError(customError.message);
+            break;
+          default:
+            console.error(`${customError.message}`);
+            alert(customError.message);
+        }
       } else {
         console.error("알 수 없는 에러 발생:", error);
         alert("카드 정보를 저장할 수 없습니다.");
