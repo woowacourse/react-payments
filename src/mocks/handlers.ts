@@ -40,13 +40,15 @@ function isValidExpirationDate(expirationDate: string): boolean {
 
 export const handlers = [
   // GET /cards
-  http.get("/cards", () => {
-    const response = cards.map(({ id, issuerCode, number, expirationDate }) => ({
-      id,
-      issuerCode,
-      number: maskNumber(number),
-      expirationDate,
-    }));
+  http.get("/react-payments/cards", () => {
+    const response = cards.map(
+      ({ id, issuerCode, number, expirationDate }) => ({
+        id,
+        issuerCode,
+        number: maskNumber(number),
+        expirationDate,
+      }),
+    );
     return HttpResponse.json(response);
   }),
 
@@ -61,27 +63,38 @@ export const handlers = [
 
     if (!isValidBin(body.number)) {
       return HttpResponse.json(
-        { code: "INVALID_CARD_NUMBER", message: "유효하지 않은 카드 번호입니다." },
-        { status: 400 }
+        {
+          code: "INVALID_CARD_NUMBER",
+          message: "유효하지 않은 카드 번호입니다.",
+        },
+        { status: 400 },
       );
     }
 
     if (body.cvc === "000") {
       return HttpResponse.json(
         { code: "INVALID_CVC", message: "유효하지 않은 CVC입니다." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!isValidExpirationDate(body.expirationDate)) {
       return HttpResponse.json(
-        { code: "INVALID_EXPIRATION_DATE", message: "유효하지 않은 만료일입니다." },
-        { status: 400 }
+        {
+          code: "INVALID_EXPIRATION_DATE",
+          message: "유효하지 않은 만료일입니다.",
+        },
+        { status: 400 },
       );
     }
 
     const id = crypto.randomUUID();
-    cards.push({ id, issuerCode: body.issuerCode, number: body.number, expirationDate: body.expirationDate });
+    cards.push({
+      id,
+      issuerCode: body.issuerCode,
+      number: body.number,
+      expirationDate: body.expirationDate,
+    });
 
     return HttpResponse.json({ id }, { status: 201 });
   }),
