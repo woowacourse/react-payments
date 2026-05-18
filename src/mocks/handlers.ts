@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse, delay } from "msw";
 import { getCardBrand } from "../utils/getCardBrand";
 
 type StoredCard = {
@@ -23,7 +23,8 @@ function maskNumber(number: string): string {
 }
 
 export const handlers = [
-  http.get("/cards", () => {
+  http.get("/cards", async () => {
+    await delay(1000);
     const response = cards.map(
       ({ id, issuerCode, number, expirationDate }) => ({
         id,
