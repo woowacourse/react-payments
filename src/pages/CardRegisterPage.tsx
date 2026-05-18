@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import CardForm from "../components/CardRegister/CardForm";
@@ -19,10 +19,14 @@ interface CardRegisterPageProps {
   cardFormState: CardFormState;
   brand: CardBrand | undefined;
   handleSetFormState: (newState: CardFormState) => void;
+  resetFormState: () => void;
 }
 
 export function CardRegisterPage(props: CardRegisterPageProps) {
-  const { cardFormState, brand, handleSetFormState } = props;
+  const { cardFormState, brand, handleSetFormState, resetFormState } = props;
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { resetFormState(); }, []);
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverErrors, setServerErrors] = useState<{

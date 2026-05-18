@@ -5,7 +5,7 @@ import CardDashboardPage from "./pages/CardDashboardPage";
 import { useCardForm } from "./hooks/useCardForm";
 
 function App() {
-  const { cardFormState, brand, handleSetFormState } = useCardForm();
+  const { cardFormState, brand, handleSetFormState, resetFormState } = useCardForm();
 
   return (
     <Routes>
@@ -18,11 +18,12 @@ function App() {
             cardFormState={cardFormState}
             brand={brand}
             handleSetFormState={handleSetFormState}
+            resetFormState={resetFormState}
           />
         }
       />
       <Route
-        path="/react-payments/success"
+        path="/cards/register/success"
         element={<CardRegisterCompletePage cardFormState={cardFormState} />}
       />
     </Routes>

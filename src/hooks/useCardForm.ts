@@ -30,5 +30,10 @@ export function useCardForm() {
     });
   };
 
-  return { cardFormState, brand, handleSetFormState };
+  const resetFormState = () => {
+    handleCardNumberChange([""]);
+    setFormState({ cardCompany: "", expiryMonth: "", expiryYear: "", cvc: "", cardPassword: "" });
+  };
+
+  return { cardFormState, brand, handleSetFormState, resetFormState };
 }
