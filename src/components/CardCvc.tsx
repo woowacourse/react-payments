@@ -15,7 +15,7 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
           color: theme.colors.black,
         })}
       >
-        <div>CVC 번호를 입력해 주세요</div>
+        CVC 번호를 입력해 주세요
       </h1>
       <div>
         <label
