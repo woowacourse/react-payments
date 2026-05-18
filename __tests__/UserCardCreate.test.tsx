@@ -5,13 +5,14 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { server } from '../src/mocks/server';
 import RegisterCard from '../src/pages/RegisterCard';
 import { theme } from '../src/styles/theme';
 
 import type { ReactElement } from 'react';
+import type { UserEvent } from '@testing-library/user-event';
 
 function renderWithProviders(ui: ReactElement) {
   return render(
@@ -20,6 +21,25 @@ function renderWithProviders(ui: ReactElement) {
     </MemoryRouter>,
   );
 }
+
+async function fillValidCardForm(user: UserEvent) {
+  await user.type(screen.getByLabelText('카드 번호 1번째 입력창'), '4123');
+  await user.type(screen.getByLabelText('카드 번호 2번째 입력창'), '5678');
+  await user.type(screen.getByLabelText('카드 번호 3번째 입력창'), '9875');
+  await user.type(screen.getByLabelText('카드 번호 4번째 입력창'), '1234');
+
+  await user.selectOptions(await screen.findByLabelText('카드사를 선택해 주세요'), 'kakaoCard');
+
+  await user.type(await screen.findByLabelText('카드 유효기간 월 입력창'), '12');
+  await user.type(screen.getByLabelText('카드 유효기간 연도 입력창'), '30');
+
+  await user.type(await screen.findByLabelText('CVC'), '123');
+  await user.type(await screen.findByLabelText('비밀번호 앞 2자리'), '12');
+}
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 describe('UserCardCreate', () => {
   it('카드 정보를 입력하고 확인하면 카드 등록 API를 호출한다.', async () => {
@@ -36,19 +56,7 @@ describe('UserCardCreate', () => {
 
     renderWithProviders(<RegisterCard />);
 
-    await user.type(screen.getByLabelText('카드 번호 1번째 입력창'), '4123');
-    await user.type(screen.getByLabelText('카드 번호 2번째 입력창'), '5678');
-    await user.type(screen.getByLabelText('카드 번호 3번째 입력창'), '9875');
-    await user.type(screen.getByLabelText('카드 번호 4번째 입력창'), '1234');
-
-    await user.selectOptions(await screen.findByLabelText('카드사를 선택해 주세요'), 'kakaoCard');
-
-    await user.type(await screen.findByLabelText('카드 유효기간 월 입력창'), '12');
-    await user.type(screen.getByLabelText('카드 유효기간 연도 입력창'), '30');
-
-    await user.type(await screen.findByLabelText('CVC'), '123');
-    await user.type(await screen.findByLabelText('비밀번호 앞 2자리'), '12');
-
+    await fillValidCardForm(user);
     await user.click(await screen.findByRole('button', { name: '확인' }));
 
     await waitFor(() => {
@@ -58,6 +66,32 @@ describe('UserCardCreate', () => {
         cvc: '123',
         issuerCode: 'kakaoCard',
       });
+    });
+  });
+
+  it('카드 등록 API가 실패하면 서버 에러 메시지를 alert로 보여준다.', async () => {
+    const user = userEvent.setup();
+    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
+
+    server.use(
+      http.post('http://localhost/api/cards', () =>
+        HttpResponse.json(
+          {
+            code: 'INVALID_CVC',
+            message: '유효하지 않은 CVC입니다.',
+          },
+          { status: 400 },
+        ),
+      ),
+    );
+
+    renderWithProviders(<RegisterCard />);
+
+    await fillValidCardForm(user);
+    await user.click(await screen.findByRole('button', { name: '확인' }));
+
+    await waitFor(() => {
+      expect(alertSpy).toHaveBeenCalledWith('유효하지 않은 CVC입니다.');
     });
   });
 });
