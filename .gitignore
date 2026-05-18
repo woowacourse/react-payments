@@ -30,3 +30,4 @@ dist-ssr
 storybook-static
 
 .env
+.env.test
