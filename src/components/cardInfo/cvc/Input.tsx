@@ -4,7 +4,8 @@ import { useRef } from "react";
 import { useFocusFirstInput } from "../../../hooks/useFocusFirstInput";
 
 export default function Input() {
-  const { cvc, handleBlur, handleCvcChange, cvcError } = useCvcContext();
+  const { cvc, handleBlur, handleCvcChange, cvcError, inputRefs } =
+    useCvcContext();
   const formRef = useRef<HTMLFormElement | null>(null);
   useFocusFirstInput(formRef);
 
@@ -12,6 +13,7 @@ export default function Input() {
     <Wrapper>
       <Container ref={formRef}>
         <InfoInput
+          ref={inputRefs}
           type="text"
           value={cvc}
           placeholder="123"

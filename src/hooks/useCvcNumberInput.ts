@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { isNumeric } from "../utils/validators";
+import { useRef } from "react";
 
 const initialState = {
   cvc: "",
@@ -9,8 +10,10 @@ const initialState = {
 export function useCvcNumberInput() {
   const [cvc, setCvc] = useState(initialState.cvc);
   const [cvcError, setCvcError] = useState(initialState.cvcError);
+  const inputRefs = useRef<HTMLInputElement | null>(null);
 
   const setCvcServerError = (message: string) => {
+    inputRefs.current?.focus();
     setCvcError(message);
   };
 
@@ -34,5 +37,12 @@ export function useCvcNumberInput() {
     }
   };
 
-  return { cvc, cvcError, handleCvcChange, handleBlur, setCvcServerError };
+  return {
+    cvc,
+    cvcError,
+    handleCvcChange,
+    handleBlur,
+    inputRefs,
+    setCvcServerError,
+  };
 }
