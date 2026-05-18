@@ -7,11 +7,13 @@ import type { CardItemInformationType } from "../../types/cardItem";
 const Success = ({
   cardList,
   deleteCard,
-  deleteError,
 }: {
   cardList: CardItemInformationType[];
-  deleteCard: (cardId: string) => void;
-  deleteError: Error | null;
+  deleteCard: (
+    cardId: string,
+    onSuccess: () => void,
+    onError: (error: Error) => void,
+  ) => void;
 }) => {
   const navigate = useNavigate();
   return (
@@ -21,7 +23,6 @@ const Success = ({
           key={card.id}
           cardItemInformaiton={card}
           onDeleteCard={deleteCard}
-          deleteError={deleteError}
         />
       ))}
       <AddCardButton onClick={() => navigate("/register")} style="rounded">

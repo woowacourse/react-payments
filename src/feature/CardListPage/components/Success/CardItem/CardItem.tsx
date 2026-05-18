@@ -5,15 +5,14 @@ import type { CardItemInformationType } from "../../../types/cardItem";
 
 type CardItemProps = {
   cardItemInformaiton: CardItemInformationType;
-  onDeleteCard: (cardId: string) => void;
-  deleteError: Error | null;
+  onDeleteCard: (
+    cardId: string,
+    onSuccess: () => void,
+    onError: (error: Error) => void,
+  ) => void;
 };
 
-const CardItem = ({
-  cardItemInformaiton,
-  onDeleteCard,
-  deleteError,
-}: CardItemProps) => {
+const CardItem = ({ cardItemInformaiton, onDeleteCard }: CardItemProps) => {
   const { id, issuerCode, number, expirationDate } = cardItemInformaiton;
   const issuer = getIssuerByCode(issuerCode);
 
@@ -22,11 +21,13 @@ const CardItem = ({
     if (!result) {
       return;
     }
-    onDeleteCard(cardId);
-
-    if (deleteError) {
-      alert("카드 삭제에 실패했습니다.");
-    }
+    onDeleteCard(
+      cardId,
+      () => {},
+      () => {
+        alert("카드 삭제에 실패했습니다.");
+      },
+    );
   };
 
   return (

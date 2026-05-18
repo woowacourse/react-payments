@@ -8,19 +8,23 @@ export const useCardList = () => {
   const { asyncState, setLoading, setSuccess, setError } = useAsyncState();
 
   const [cardList, setCardList] = useState<CardItemInformationType[]>([]);
-  const [deleteError, setDeleteError] = useState<Error | null>(null);
 
   const deleteCardFromState = (cardId: string) => {
     const newCardList = cardList.filter((card) => card.id !== cardId);
     setCardList(newCardList);
   };
 
-  const deleteCardById = async (cardId: string) => {
+  const deleteCardById = async (
+    cardId: string,
+    onSuccess: () => void,
+    onError: (error: Error) => void,
+  ) => {
     try {
       await deleteCard(cardId);
+      onSuccess();
       deleteCardFromState(cardId);
     } catch (error) {
-      setDeleteError(error as Error);
+      onError(error as Error);
     }
   };
 
@@ -43,7 +47,7 @@ export const useCardList = () => {
     asyncState,
     cardList,
     deleteCardById,
-    deleteError,
+
     loadCardList,
   };
 };
