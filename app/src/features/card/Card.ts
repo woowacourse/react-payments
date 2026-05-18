@@ -1,24 +1,37 @@
-class Card {
-  #number;
-  #brand;
-  #expiryYear;
-  #expiryMonth;
-  #cvc;
-  #password;
+export interface CardInterface {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: string;
+}
+
+class Card implements CardInterface {
+  #number: string;
+  #expirationDate: string;
+  #cvc: string;
+  #issuerCode: string;
   constructor(
     number: string,
-    brand: string,
-    expiryYear: string,
-    expiryMonth: string,
+    expirationDate: string,
     cvc: string,
-    password: string,
+    issuerCode: string,
   ) {
     this.#number = number;
-    this.#brand = brand;
-    this.#expiryYear = expiryYear;
-    this.#expiryMonth = expiryMonth;
+    this.#expirationDate = expirationDate;
     this.#cvc = cvc;
-    this.#password = password;
+    this.#issuerCode = issuerCode;
+  }
+  get number() {
+    return this.#number;
+  }
+  get expirationDate() {
+    return this.#expirationDate;
+  }
+  get cvc() {
+    return this.#cvc;
+  }
+  get issuerCode() {
+    return this.#issuerCode;
   }
 }
 
