@@ -13,6 +13,8 @@ const meta = {
     expiryYear: "",
     onExpiryMonthChange: fn(),
     onExpiryYearChange: fn(),
+    formErrorMessage: null,
+    clearFormErrorMessage: fn(),
   },
 } satisfies Meta<typeof ExpiryField>;
 

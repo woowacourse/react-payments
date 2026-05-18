@@ -4,12 +4,12 @@ import { fn } from "storybook/test";
 import Button from "./BaseButton";
 
 const meta = {
-  title: "common/components/Button",
+  title: "shared/components/Button",
   component: Button,
   tags: ["autodocs"],
   args: {
     children: "확인",
-    size: "block",
+    style: "base",
     onClick: fn(),
   },
 } satisfies Meta<typeof Button>;
@@ -21,12 +21,13 @@ export const Block: Story = {};
 
 export const Full: Story = {
   args: {
-    size: "full",
+    style: "rounded",
   },
 };
 
 export const Disabled: Story = {
   args: {
     disabled: true,
+    style: "base",
   },
 };

@@ -8,7 +8,7 @@ import type {
   CardInfoType,
   CardNumberChunkType,
 } from "../../../../shared/types/CardInfoType";
-import type { CardCompanyType } from "../../../../shared/types/Issuer";
+import type { IssuerKoreanNameType } from "../../../../shared/types/Issuer";
 
 const meta = {
   title: "feature/CardRegister/components/CardRegisterForm",
@@ -141,7 +141,7 @@ export const Interactive: Story = {
       setCardInfo((previousCardInfo) => ({ ...previousCardInfo, expiryYear }));
     };
 
-    const updateCardCompany = (selectedCardCompany: CardCompanyType) => {
+    const updateCardCompany = (selectedCardCompany: IssuerKoreanNameType) => {
       setCardInfo((previousCardInfo) => ({
         ...previousCardInfo,
         selectedCardCompany,

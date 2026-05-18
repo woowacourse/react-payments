@@ -1,10 +1,10 @@
 import { delay, http, HttpResponse } from "msw";
 import { BASE_URL } from "../shared/constants";
 import type { PostCardRequestBody } from "../feature/CardRegisterPage/api/card";
-import type { CardItemInformation } from "../feature/CardListPage/components/Success/CardItem/CardItem";
+import type { CardItemInformationType } from "../feature/CardListPage/types/cardItem";
 import { CARD } from "../feature/CardRegisterPage/constants";
 
-const cards: CardItemInformation[] = [];
+const cards: CardItemInformationType[] = [];
 
 const getCardListHandler = http.get(`${BASE_URL}/cards`, () => {
   const maskedCards = cards.map((card) => {
@@ -20,7 +20,7 @@ const postCardHandler = http.post(`${BASE_URL}/cards`, async ({ request }) => {
   const body = (await request.json()) as PostCardRequestBody;
   const id = crypto.randomUUID().toString();
 
-  const card: CardItemInformation = {
+  const card: CardItemInformationType = {
     id,
     ...body,
   };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
 
-import type { CardCompanyType } from "../../../../../shared/types/Issuer";
+import type { IssuerKoreanNameType } from "../../../../../shared/types/Issuer";
 import CardCompanySelectField from "./CardCompanySelectField";
 
 const meta = {
@@ -23,7 +23,7 @@ export const Default: Story = {};
 export const Interactive: Story = {
   render: function InteractiveCardCompanySelectField(args) {
     const [selectedCardCompany, setSelectedCardCompany] =
-      useState<CardCompanyType | null>(null);
+      useState<IssuerKoreanNameType | null>(null);
 
     return (
       <div>

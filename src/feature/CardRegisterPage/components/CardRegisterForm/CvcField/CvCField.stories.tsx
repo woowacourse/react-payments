@@ -11,6 +11,8 @@ const meta = {
   args: {
     cvcNumber: "",
     onCvcNumberChange: fn(),
+    formErrorMessage: null,
+    clearFormErrorMessage: fn(),
   },
 } satisfies Meta<typeof CvcField>;
 

@@ -13,6 +13,8 @@ const meta = {
     cardNumbers: ["", "", "", ""],
     onCardNumbersChange: fn(),
     chunkLengths: CARD.DEFAULT.CHUNK_LENGTHS,
+    formErrorMessage: null,
+    clearFormErrorMessage: fn(),
   },
 } satisfies Meta<typeof NumberField>;
 
