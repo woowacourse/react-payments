@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 import Delete from '../../../../public/Delete.svg';
-import type { CardBrandValue } from '../../../types/CardBrandValue';
 import { BRAND_SELECT_OPTIONS } from '../../../constants/BRAND_SELECT_OPTIONS';
 import { CARD_ISSUER_COLOR } from '../../../constants/CARD_ISSUER_COLOR';
 
 interface MyCardItemProps {
-    cardIssuer: CardBrandValue;
+    cardIssuer: string;
     cardNumbers: string;
     EXPDate: string;
-    onDelete: () => void;
+    onDelete: (id: string) => void;
+    id: string;
 }
 
 interface CardIssuerColorBoxProps {
@@ -21,7 +21,7 @@ interface CardIssuerColorBoxProps {
 // 전용 컴포넌트인 MyCardItem에서는 내부에서 하는 방향이 더 적절한 것 같은데..(x 버튼 눌렀을 때의 동작이 고정되며 이 Layout의 컴포넌트가 재사용될 곳이 없다고 판단)
 // 근데 이 컴포넌트는 props로 받은 값들을 가지고 보여주는 거지 MyCardItem만의 고유한 상태가 새롭게 있는게 아니라서 순수 표현 컴포넌트에 가깝고 그렇기 때문에
 // api를 호출하고 그 api 상태를 어쩌구 저쩌구 여기서 가지게 되면 다른 상태들은 주입받고, api 상태는 여기서 가지고 있는 셈이고 사이드 이펙트가 생기게 되니까 설계가 혼재된 느낌이 된다?
-export default function MyCardItem({ cardIssuer, cardNumbers, EXPDate, onDelete }: MyCardItemProps) {
+export default function MyCardItem({ cardIssuer, cardNumbers, EXPDate, onDelete, id }: MyCardItemProps) {
     return (
         <CardItemContainer>
             <CardIssuerColorBox backgroundColor={CARD_ISSUER_COLOR[cardIssuer]} />
@@ -30,7 +30,7 @@ export default function MyCardItem({ cardIssuer, cardNumbers, EXPDate, onDelete 
                 <CardNumbers>{cardNumbers}</CardNumbers>
                 <CardEXPInfo>유효기간 {EXPDate}</CardEXPInfo>
             </CardInfoContainer>
-            <CardDeleteBtn onClick={onDelete}>
+            <CardDeleteBtn onClick={() => onDelete(id)}>
                 <img src={Delete} />
             </CardDeleteBtn>
         </CardItemContainer>

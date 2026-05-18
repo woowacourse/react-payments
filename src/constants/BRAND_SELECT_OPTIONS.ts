@@ -15,3 +15,14 @@ export const BRAND_SELECT_OPTIONS: BrandSelectOption[] = [
     { value: 'HANA', label: '하나카드' },
     { value: 'KB', label: '국민카드' },
 ];
+
+export const ISSUER_CODE_MAP: Record<string, CardBrandValue> = {
+    '31': 'BC',
+    '41': 'SHINHAN',
+    '15': 'KAKAO',
+    '61': 'HYUNDAI',
+    W1: 'WOORI',
+    '71': 'LOTTE',
+    '21': 'HANA',
+    '11': 'KB',
+};

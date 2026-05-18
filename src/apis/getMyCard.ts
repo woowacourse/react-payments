@@ -2,7 +2,7 @@ import { cardFetcher } from '../utils/cardFetcher';
 
 export interface CardInfo {
     id: string;
-    issueCode: string;
+    issuerCode: string;
     number: string;
     expirationDate: string;
 }
