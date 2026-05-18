@@ -10,8 +10,7 @@ import { Button } from "../../style/Button";
 import { ErrorMessage } from "./ErrorMessage";
 import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
-import { extractErrorCodes } from "../../../common/Utils";
-import { createCard } from "../../Api";
+import { createCard, NetworkError, HttpError } from "../../Api";
 import { joinCardNumber } from "../../Utils";
 import type { CardNumber, SetState } from "../../types";
 import type { ExpiryDate } from "../../ExpiryDate";
@@ -58,29 +57,26 @@ export function CardForm({
     cardPassword,
   });
 
-  const [formErrorCodes, setFormErrorCodes] = useState<string[]>([]);
+  const [formErrorCodes] = useState<string[]>([]);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitError(null);
     try {
-      const response = await createCard(
+      await createCard(
         joinCardNumber(cardNumber),
         cardExpiryDate.toSlashFormat(),
         cardCVC,
         convertCardBrandToIssuerCode(cardBrand),
       );
-      const data = await response.json();
-      if (!response.ok) {
-        const errorCodes = extractErrorCodes(data.errorMessages);
-        setFormErrorCodes(errorCodes);
-        setSubmitError("카드 등록에 실패했어요. 입력 정보를 확인해 주세요.");
-        return;
-      }
       gotoCreateCardDonePage();
-    } catch {
-      setSubmitError("네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요.");
+    } catch (e) {
+      if (e instanceof NetworkError) {
+        setSubmitError("네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요.");
+      } else if (e instanceof HttpError) {
+        setSubmitError("카드 등록에 실패했어요. 입력 정보를 확인해 주세요.");
+      }
     }
   };
 
