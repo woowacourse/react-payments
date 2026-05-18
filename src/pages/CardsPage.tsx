@@ -1,9 +1,10 @@
+import MyCardListSection from "@components/feature/MyCardListSection";
 import PageWrapper from "@components/common/PageWrapper";
 
 const CardsPage = () => {
   return (
     <PageWrapper>
-      <h1>카드 목록 페이지</h1>
+      <MyCardListSection />
     </PageWrapper>
   );
 };

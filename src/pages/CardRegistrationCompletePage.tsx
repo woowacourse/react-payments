@@ -1,6 +1,6 @@
 import Check from "@assets/Check.png";
 import PageWrapper from "@components/common/PageWrapper";
-import GoHomeButton from "@components/feature/GoHomeButton";
+import GoCardsButton from "@components/feature/GoCardsButton";
 import CARD from "@constants/card";
 import styled from "@emotion/styled";
 import { useLocation } from "react-router";
@@ -24,7 +24,7 @@ const CardRegistrationCompletePage = () => {
         <Description>{cardNumberPrefix}로 시작하는</Description>
         <Description>{cardCompanyLabel}가 등록되었어요.</Description>
         <GoBackButtonContainer>
-          <GoHomeButton />
+          <GoCardsButton />
         </GoBackButtonContainer>
       </Wrapper>
     </PageWrapper>
