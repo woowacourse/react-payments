@@ -52,7 +52,7 @@ export function SubmitSuccess(props: SubmitSuccessprops) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/react-payments/");
+    navigate("/cards");
   };
 
   return (
