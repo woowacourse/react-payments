@@ -23,7 +23,7 @@ export interface CardGetResponse {
 const filterCardNumber = (cardNumber: string) => {
   const firstNonMasking = cardNumber.substring(0, 6);
   const lastNonMasking = cardNumber.slice(-4);
-  const maskingNumberRange = cardNumber.substring(5, cardNumber.length - 5);
+  const maskingNumberRange = cardNumber.substring(6, cardNumber.length - 4);
   const maskedCardNumber = "*".repeat(maskingNumberRange.length);
   return firstNonMasking + maskedCardNumber + lastNonMasking;
 };
