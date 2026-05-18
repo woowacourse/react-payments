@@ -11,5 +11,5 @@ export default meta;
 type Story = StoryObj<typeof ErrorState>;
 
 export const Default: Story = {
-  render: () => <ErrorState />,
+  render: () => <ErrorState onRetry={() => {}} />,
 };
