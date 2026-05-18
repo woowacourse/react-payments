@@ -32,9 +32,11 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
 
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
+    const prevValue = cardNumbers[index];
+    const isDeleting = value.length < prevValue.length;
 
     if (!isNumeric(value)) return;
-    if (!isWithinMaxLength(value, segmentLengths[index])) return;
+    if (!isWithinMaxLength(value, segmentLengths[index]) && !isDeleting) return;
 
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? value : chunk,
