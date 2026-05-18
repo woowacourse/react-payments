@@ -19,4 +19,10 @@ export default defineConfig([globalIgnores(['dist']), {
   languageOptions: {
     globals: globals.browser,
   },
+  rules: {
+    "react-refresh/only-export-components": [
+      "warn",
+      { extraHOCs: ["withFormWrapper"] },
+    ],
+  },
 }, ...storybook.configs["flat/recommended"]])
