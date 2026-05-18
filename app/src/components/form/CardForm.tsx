@@ -6,7 +6,7 @@ import { CardExpiryDateInput } from './CardExpiryDateInput';
 import { CardCVCInput } from './CardCVCInput';
 import { CardPasswordInput } from './CardPasswordInput';
 import { ConfirmButton } from './ConfirmButton';
-import type { CardFormPropsType } from '../../types/CardFormProps';
+import type { CardFormPropsType } from '../../types/cardFormProps';
 
 export function CardForm({
   refs,

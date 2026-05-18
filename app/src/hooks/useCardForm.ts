@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import type { CardCompany } from '../context/CardContext';
 import { BrandValidator } from '../validators/BrandValidator';
 import { useNavigate } from 'react-router-dom';
+import { postCard } from '../api/cardsAPI';
+import type { Card } from '../types/card';
 
 export function useCardForm() {
   // input 상태 초기화
@@ -47,12 +49,22 @@ export function useCardForm() {
     cardCVC.length === 3 &&
     cardPassword.length === 2;
 
-  // Form 완료시 navigate 방지 핸들러
-
+  // Form 완료시 핸들러
   const navigate = useNavigate();
   const handleFormSubmit = (e: React.SubmitEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (!isFormComplete) return;
+
+    const newCard: Omit<Card, 'id'> = {
+      cardCompany: cardCompany,
+      cardNumber: cardNumber,
+      cardExpiryDate: cardExpiryDate,
+      cardCVC: cardCVC,
+      cardPassword: cardPassword,
+    };
+
+    postCard(newCard);
+
     navigate('/react-payments/complete', {
       state: { firstDigits: cardNumber[0], cardCompany: cardCompany },
     });
