@@ -1,12 +1,23 @@
 import styled from '@emotion/styled';
+import { ReactNode } from 'react';
 
-export default function EmptyCardList({ onClick }: { onClick: () => void }) {
+interface Props {
+  icon: ReactNode;
+  title: string;
+  description: string;
+  action: {
+    label: string;
+    onClick: () => void;
+  };
+}
+
+export default function FallbackView({ icon, title, description, action }: Props) {
   return (
     <Container>
-      <Card />
-      <Title>등록된 카드가 없습니다</Title>
-      <HintText>아래 버튼을 눌러 첫 카드를 등록해보세요</HintText>
-      <RegisterButton onClick={onClick}>카드 추가하기</RegisterButton>
+      <IconWrapper>{icon}</IconWrapper>
+      <Title>{title}</Title>
+      <HintText>{description}</HintText>
+      <RegisterButton onClick={action.onClick}>{action.label}</RegisterButton>
     </Container>
   );
 }
@@ -21,12 +32,10 @@ const Container = styled.div`
   padding-top: 100px;
 `;
 
-const Card = styled.div`
-  width: 160px;
-  height: 100px;
-  border: 1px dashed #d9d9d9;
-  border-radius: 5px;
-  background-color: #f5f5f5;
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Title = styled.strong`
@@ -43,7 +52,7 @@ const HintText = styled.strong`
 
 const RegisterButton = styled.button`
   width: 320px;
-  height: 44px;
+  min-height: 44px;
   border-radius: 5px;
   background-color: #333;
   font-size: 15px;
