@@ -1,15 +1,13 @@
 import styles from './RegisterCardPage.module.css';
 
 import { CardForm } from '@/features/registerCard/ui/cardForm/CardForm';
-import { useState } from 'react';
 import { CardPreview } from '@/pages/registerCard/ui/cardPreview/CardPreview';
 import { SubmitButton } from './submitButton/SubmitButton';
 import { useNavigate } from 'react-router-dom';
-import { isRegisterCardErrorResponse, registerCard } from '@/entities/card/api/cards';
+import { registerCard } from '@/entities/card/api/cards';
 import { usePaymentsForm } from '@/features/registerCard/hooks/usePaymentsForm';
 import {
   FORM_ID,
-  SERVER_ERROR_FIELD_MAP,
   toRequestData,
   type CardInfo,
 } from '@/features/registerCard/model/registerCardForm';
