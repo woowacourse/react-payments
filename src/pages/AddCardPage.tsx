@@ -1,12 +1,7 @@
-import CardForm from '../components/CardForm/CardForm';
-import View from '../components/Common/View';
+import CardFormTemplate from '../components/AddCardForm/AddCardFormTemplate';
 
 function AddCardPage() {
-  return (
-    <View>
-      <CardForm />
-    </View>
-  );
+  return <CardFormTemplate />;
 }
 
 export default AddCardPage;
