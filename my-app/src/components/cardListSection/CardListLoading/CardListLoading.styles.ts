@@ -4,6 +4,7 @@ export const CardListPageLayout = styled.div`
   display: flex;
   flex-direction: column;
   padding: 40px 28px;
+  min-width: 320px;
   gap: 16px;
 `;
 
