@@ -133,3 +133,13 @@ export const getIssuerCodeInfo = (code: string) => {
   
   return { name: 'Default', color: '#333333' };
 };
+
+export const formatMaskingNumber = (maskingNumber: string) => {
+  const length = maskingNumber.length;
+
+  if (length === 15 || length === 14) {
+    return `${maskingNumber.slice(0,4)} ${maskingNumber.slice(4, 10)} ${maskingNumber.slice(10)}`;
+  }
+
+  return `${maskingNumber.slice(0,4)} ${maskingNumber.slice(4, 8)} ${maskingNumber.slice(8, 12)} ${maskingNumber.slice(12)}`;
+};
