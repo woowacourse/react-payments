@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import Title from '../../../common/components/Title';
 import Description from '../../../common/components/Description';
 import Button from '../../../common/components/Button';

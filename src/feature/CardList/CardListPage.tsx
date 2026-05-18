@@ -13,7 +13,6 @@ const CardListPage = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [cardFetchStatus, setCardFetchStatus] =
     useState<cardFetchStatusType>('idle');
-  const [cardFetchErrorMessage, setCardFetchErrorMessage] = useState('');
 
   const fetchCards = async () => {
     setCardFetchStatus('idle');
@@ -26,11 +25,8 @@ const CardListPage = () => {
 
       setCards(cards);
       setCardFetchStatus('success');
-      setCardFetchErrorMessage('');
-    } catch (error) {
-      console.log(error);
+    } catch {
       setCardFetchStatus('error');
-      setCardFetchErrorMessage(error.message);
     }
   };
 
