@@ -11,7 +11,7 @@ export default function CardItem({ cardData }) {
     <CardItemContainer>
       <MiniCard bgHex={bgHex} />
       <CardContent>
-        <p className="card-brand">{title}</p>
+        <p className="card-brand-name">{title}</p>
         <p>
           {splitCardNumber(
             maskCardNumber(number),
@@ -43,6 +43,11 @@ const MiniCard = styled.div<{ bgHex: string }>`
 `;
 
 const CardContent = styled.div`
+  .card-brand-name {
+    font-size: 14px;
+    color: #353c49;
+    font-weight: 700;
+  }
   p {
     font-size: 11px;
     color: #8c8c8c;
