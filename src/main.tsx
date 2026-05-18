@@ -5,7 +5,6 @@ import './reset.css';
 import router from './routes/routes.tsx';
 
 async function enableMocking() {
-  if (import.meta.env.MODE !== 'development') return;
   const { worker } = await import('../src/mocks/browser.ts');
   return worker.start({
     serviceWorker: {
