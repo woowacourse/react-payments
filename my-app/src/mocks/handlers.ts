@@ -5,19 +5,9 @@ import {
   isExpirationDateCorrect,
 } from '../utils/Validation';
 import type { Card } from '../types/card';
+import { mockDB } from './mockDB';
 
 const API_BASE = import.meta.env.BASE_URL;
-
-const STORAGE_KEY = 'mock-cards-DB';
-
-const getCards = (): Card[] => {
-  const storedData = localStorage.getItem(STORAGE_KEY);
-  return storedData ? JSON.parse(storedData) : [];
-}
-
-const saveCards = (cards: Card[]) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
-}
 
 export const handlers = [
   http.post(`${API_BASE}cards`, async ({ request }) => {
@@ -64,15 +54,13 @@ export const handlers = [
       expirationDate,
     };
 
-    const cards = getCards();
-    cards.push(newCard);
-    saveCards(cards);
+    mockDB.addCard(newCard);
 
     return HttpResponse.json({ id: newCard.id }, { status: 201 });
   }),
 
   http.get(`${API_BASE}cards`, async () => {
-    const cards = getCards();
+    const cards = mockDB.getCards();
 
     const maskingCards = cards.map((card) => {
       const prefix = card.number.slice(0, 6);
@@ -90,13 +78,10 @@ export const handlers = [
   }),
 
   http.delete(`${API_BASE}cards/:id`, ({ params }) => {
-    const id = params.id;
-    const cards = getCards();
-    const targetIndex = cards.findIndex((card) => card.id === id);
+    const isSuccess = mockDB.deleteCard(params.id as string);
 
-    if (targetIndex !== -1) {
-      cards.splice(targetIndex, 1);
-      saveCards(cards);
+    if (!isSuccess) {
+      return new HttpResponse(null, { status: 404 });
     }
 
     return new HttpResponse(null, { status: 204 });
