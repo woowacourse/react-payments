@@ -1,12 +1,23 @@
 import Delete from '../../assets/Delete.png';
 import type { CardResponse } from '../../types/cardStausTypes';
 import { CARD_ISSUER, CARD_ISSUER_CODE } from '../../constants/constant';
+import { deleteCard } from '../../api/deleteCard';
 
 type CardProps = {
   card: CardResponse;
 };
 
 export default function Card({ card }: CardProps) {
+  const handleDelete = async (id: string) => {
+    if (confirm('카드를 삭제하시겠습니까?')) {
+      try {
+        await deleteCard(id);
+        location.reload();
+      } catch (error) {
+        alert(error instanceof Error ? error.message : '카드 삭제에 실패했습니다.');
+      }
+    }
+  };
   return (
     <div
       css={(theme) => ({
@@ -67,7 +78,14 @@ export default function Card({ card }: CardProps) {
           유효 기간 {card.expirationDate}
         </p>
       </div>
-      <img src={Delete} alt="카드 삭제 아이콘" width={30} height={30} css={{ cursor: 'pointer' }} />
+      <img
+        src={Delete}
+        alt="카드 삭제 아이콘"
+        width={30}
+        height={30}
+        css={{ cursor: 'pointer' }}
+        onClick={() => handleDelete(card.id)}
+      />
     </div>
   );
 }
