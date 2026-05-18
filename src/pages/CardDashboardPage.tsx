@@ -207,7 +207,7 @@ function CardDashboardPage() {
       ) : cards === null ? (
         <ErrorWrapper>
           <ErrorIcon>!</ErrorIcon>
-          <ErrorTitle>카드 목록을 불러올 수 없어요</ErrorTitle>
+          <ErrorTitle>카드 목록을 불러올 수 없습니다.</ErrorTitle>
           <ErrorDescription>잠시 후 다시 시도해 주세요.</ErrorDescription>
           <RetryButton onClick={handleRetry}>다시 시도</RetryButton>
         </ErrorWrapper>
