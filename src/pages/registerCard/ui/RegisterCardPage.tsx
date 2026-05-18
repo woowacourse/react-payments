@@ -12,13 +12,7 @@ import {
   SERVER_ERROR_FIELD_MAP,
   toRequestData,
   type CardInfo,
-  type ServerErrorField,
 } from '@/features/registerCard/model/registerCardForm';
-
-type ServerError = {
-  field: ServerErrorField;
-  message: string;
-} | null;
 
 const initCardInfo: CardInfo = {
   numbers: ['', '', '', ''],
@@ -34,23 +28,11 @@ const initCardInfo: CardInfo = {
 export const RegisterCardPage = () => {
   const navigate = useNavigate();
   const paymentsForm = usePaymentsForm(initCardInfo);
-  const [serverError, setServerError] = useState<ServerError>(null);
 
   const onRegister = async () => {
-    setServerError(null);
-
-    try {
-      const { cardInfo } = paymentsForm;
-      await registerCard(toRequestData(cardInfo));
-      navigate('/cards');
-    } catch (error) {
-      if (isRegisterCardErrorResponse(error)) {
-        setServerError({
-          field: SERVER_ERROR_FIELD_MAP[error.code],
-          message: error.message,
-        });
-      }
-    }
+    const { cardInfo } = paymentsForm;
+    await registerCard(toRequestData(cardInfo));
+    navigate('/cards');
   };
 
   return (
@@ -63,7 +45,6 @@ export const RegisterCardPage = () => {
         bankField={paymentsForm.bankField}
         cvcField={paymentsForm.cvcField}
         passwordField={paymentsForm.passwordField}
-        serverError={serverError}
         onRegister={onRegister}
         formId={FORM_ID}
       />

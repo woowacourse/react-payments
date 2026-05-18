@@ -30,7 +30,6 @@ export const CvcField = ({
 
   const handleChange = (inputValue: string): void => {
     if (!isValidInputCvc(inputValue)) return;
-
     onChange(inputValue);
 
     if (shouldComplete(inputValue)) {
