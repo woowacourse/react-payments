@@ -22,6 +22,38 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Loading: Story = {
+  args: {
+    isPending: true,
+    cards: [
+      {
+        id: "1234-1234-1234-1234-1234",
+        issuerCode: "31",
+        number: "5511128340239012",
+        expirationDate: "12/28",
+      },
+      {
+        id: "1234-1234-1234-1234-1235",
+        issuerCode: "41",
+        number: "4733321003658888",
+        expirationDate: "12/28",
+      },
+      {
+        id: "1234-1234-1234-1234-1236",
+        issuerCode: "15",
+        number: "36190099987671",
+        expirationDate: "12/28",
+      },
+      {
+        id: "1234-1234-1234-1234-1237",
+        issuerCode: "W1",
+        number: "349412345328962",
+        expirationDate: "12/28",
+      },
+    ],
+  },
+};
+
 export const Empty: Story = {
   args: {
     cards: [],

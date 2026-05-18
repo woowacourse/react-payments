@@ -1,17 +1,20 @@
 import styled from "@emotion/styled";
 import EmptyCardList from "./list/EmptyCardList";
 import CardListPanel from "./list/CardListPanel";
+import CardListSkeleton from "./list/CardListSkeleton";
 
-export default function CardListSection({ cards }) {
+export default function CardListSection({ cards, isPending = false }) {
   return (
     <CardListSectionContainer>
-      <h1>보유 카드 {cards.length ? `(${cards.length})` : ""}</h1>
+      <h1>보유 카드 {!isPending && cards.length ? `(${cards.length})` : ""}</h1>
       <Content>
-        {cards.length ? (
+        {isPending && cards.length ? (
+          <CardListSkeleton count={cards.length} />
+        ) : !isPending && cards.length ? (
           <CardListPanel cards={cards} />
-        ) : (
+        ) : !isPending ? (
           <EmptyCardList />
-        )}
+        ) : null}
       </Content>
     </CardListSectionContainer>
   );
