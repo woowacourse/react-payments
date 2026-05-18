@@ -12,10 +12,11 @@ interface EXPInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string[];
     isRender?: boolean;
+    serverError?: string | null;
 }
 
-export default function EXPInputWrapper({ setValue, value, isRender }: EXPInputWrapperProps) {
-    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
+export default function EXPInputWrapper({ setValue, value, isRender, serverError }: EXPInputWrapperProps) {
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, focusWithError, handleChange } =
         useFieldInputState({
             values: value,
             setValue,
@@ -25,8 +26,13 @@ export default function EXPInputWrapper({ setValue, value, isRender }: EXPInputW
         });
 
     useEffect(() => {
-        focusFirst();
-    }, []);
+        if (isRender) focusFirst();
+    }, [isRender]);
+
+    useEffect(() => {
+        if (!serverError) return;
+        focusWithError(serverError);
+    }, [serverError]);
 
     return (
         <CardInfoSection

@@ -24,8 +24,8 @@ export default function PasswordInputWrapper({ setValue, value, isRender }: Pass
         });
 
     useEffect(() => {
-        focusFirst();
-    }, []);
+        if (isRender) focusFirst();
+    }, [isRender]);
 
     return (
         <CardInfoSection

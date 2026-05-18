@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
@@ -10,18 +11,25 @@ import { isFilledNumeric } from '../../utils/isFilledNumeric';
 interface CardNumberInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string[];
+    serverError?: string | null;
 }
 
-export default function CardNumberInputWrapper({ setValue, value }: CardNumberInputWrapperProps) {
+export default function CardNumberInputWrapper({ setValue, value, serverError }: CardNumberInputWrapperProps) {
     const maxLengths = getCardNumberMaxLengths(value[0]);
 
-    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, handleChange } = useFieldInputState({
-        values: value,
-        setValue,
-        validator: getCardNumberErrorMessage,
-        isFilled: (v, index) => isFilledNumeric(v, getCardNumberMaxLengths(value[0])[index]),
-        fieldCount: 4,
-    });
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusWithError, handleChange } =
+        useFieldInputState({
+            values: value,
+            setValue,
+            validator: getCardNumberErrorMessage,
+            isFilled: (v, index) => isFilledNumeric(v, getCardNumberMaxLengths(value[0])[index]),
+            fieldCount: 4,
+        });
+
+    useEffect(() => {
+        if (!serverError) return;
+        focusWithError(serverError);
+    }, [serverError, focusWithError]);
 
     return (
         <CardInfoSection

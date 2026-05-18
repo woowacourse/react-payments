@@ -11,10 +11,11 @@ interface CVCInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string;
     isRender?: boolean;
+    serverError?: string | null;
 }
 
-export default function CVCInputWrapper({ setValue, value, isRender }: CVCInputWrapperProps) {
-    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
+export default function CVCInputWrapper({ setValue, value, isRender, serverError }: CVCInputWrapperProps) {
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, focusWithError, handleChange } =
         useFieldInputState({
             values: [value],
             setValue,
@@ -24,8 +25,13 @@ export default function CVCInputWrapper({ setValue, value, isRender }: CVCInputW
         });
 
     useEffect(() => {
-        focusFirst();
-    }, []);
+        if (isRender) focusFirst();
+    }, [isRender]);
+
+    useEffect(() => {
+        if (!serverError) return;
+        focusWithError(serverError);
+    }, [serverError]);
 
     return (
         <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isRender}>
