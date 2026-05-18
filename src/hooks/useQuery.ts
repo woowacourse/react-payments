@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -12,39 +12,41 @@ export const useQuery = <T>({ queryFn }: UseQueryOptions<T>) => {
 
   const [data, setData] = useState<T>();
 
+  const fetchQuery = useCallback(async () => {
+    setStatus('loading');
+    try {
+      const res = await queryFn();
+
+      setData(res);
+      setStatus('success');
+      setError(null);
+    } catch (err) {
+      setError(err as Error);
+      setStatus('error');
+    }
+  }, [queryFn]);
+
   useEffect(() => {
     let cancelled = false;
 
-    const fetchQuery = async () => {
-      setStatus('loading');
-      try {
-        const res = await queryFn();
-        if (cancelled) return;
-
-        setData(res);
-
-        setStatus('success');
-      } catch (err) {
-        if (cancelled) return;
-        setError(err as Error);
-
-        setStatus('error');
-      }
-    };
-
-    fetchQuery();
+    (async () => {
+      await fetchQuery();
+      if (cancelled) setStatus('idle');
+    })();
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [fetchQuery]);
 
   return {
     data,
     error,
+    status,
     isIdle: status === 'idle',
     isLoading: status === 'loading',
     isSuccess: status === 'success',
     isError: status === 'error',
+    refetch: fetchQuery,
   };
 };

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { getCardList } from '../apis/cards';
+import { deleteCard, getCardList } from '../apis/cards';
 import RegisteredCardList from '../components/Card/CardList/RegisteredCardList';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '../hooks/useQuery';
@@ -10,9 +10,12 @@ import errorIcon from '../assets/error.svg';
 export default function CardListPage() {
   const navigate = useNavigate();
 
-  const { data, isLoading, isSuccess, isError } = useQuery({ queryFn: getCardList });
+  const { data, isLoading, isSuccess, isError, refetch } = useQuery({ queryFn: getCardList });
 
-  const handleDelete = (id: string) => {};
+  const handleDelete = async (id: string) => {
+    await deleteCard(id);
+    refetch();
+  };
 
   return (
     <Container>

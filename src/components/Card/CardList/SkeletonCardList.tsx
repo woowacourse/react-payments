@@ -5,8 +5,8 @@ export default function SkeletonCardList() {
   return (
     <Container>
       {Array.from({ length: 3 }).map((_, idx) => (
-        <Wrapper>
-          <Skeleton key={idx} width="64px" height="40px" />
+        <Wrapper key={idx}>
+          <Skeleton width="64px" height="40px" />
 
           <Content>
             <Skeleton width="80px" height="14px" />
