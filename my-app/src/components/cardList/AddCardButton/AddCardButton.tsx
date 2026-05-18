@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
-import { ROUTES } from "../../constants/routes";
-import PrimaryButton from "../PrimaryButton/PrimaryButton";
+import { ROUTES } from "../../../constants/routes";
+import PrimaryButton from "../../common/PrimaryButton/PrimaryButton";
 
 type Props = {
   variant: "primary" | "outline";

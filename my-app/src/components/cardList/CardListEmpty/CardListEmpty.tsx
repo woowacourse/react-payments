@@ -1,4 +1,4 @@
-import AddCardButton from "../../AddCardButton/AddCardButton";
+import AddCardButton from "../AddCardButton/AddCardButton";
 
 const CardListEmpty = () => {
   return (

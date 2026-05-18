@@ -6,7 +6,7 @@ import { useCreateCard } from "../../../hooks/queries/useCreateCard";
 import { ROUTES } from "../../../constants/routes";
 
 import CardRegisterationPreview from "../CardRegisterationPreview/CardRegisterationPreview";
-import PrimaryButton from "../../PrimaryButton/PrimaryButton";
+import PrimaryButton from "../../common/PrimaryButton/PrimaryButton";
 import CardRegisterationIssuerSelectSection from "../CardRegisterationIssuerSelectSection/CardRegisterationIssuerSelectSection";
 import CardRegisterationNumberInputSection from "../CardRegisterationNumberInputSection/CardRegisterationNumberInputSection";
 import CvcRegisterationInputSection from "../CvcRegisterationInputSection/CvcRegisterationInputSection";

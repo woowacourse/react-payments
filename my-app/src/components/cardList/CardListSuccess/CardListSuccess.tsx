@@ -1,6 +1,6 @@
 import type { CardListItem } from "../../../apis/cards";
 
-import AddCardButton from "../../AddCardButton/AddCardButton.tsx";
+import AddCardButton from "../AddCardButton/AddCardButton.tsx";
 import CardRow from "../CardRow/CardRow.tsx";
 
 type Props = {
