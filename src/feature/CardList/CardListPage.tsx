@@ -38,7 +38,8 @@ const CardListPage = () => {
       await deleteCard(cardId);
       await fetchCards();
     } catch (error) {
-      console.error(error);
+      // 네트워크 에러 - 카드 삭제 실패 메세지를 alert로 띄우기
+      window.alert(error);
     }
   };
 
