@@ -3,7 +3,7 @@ import { keyframes } from "@emotion/react";
 
 export default function CardListSkeleton() {
   return (
-    <Wrapper>
+    <Wrapper data-testid="card-list-skeleton">
       {Array.from({ length: 3 }).map((_, i) => (
         <SkeletonContainer key={i}>
           <MiniCardSkeleton />
