@@ -1,4 +1,4 @@
-import { getCards, type CardListResponse } from "@/api/cards";
+import { deleteCard, getCards, type CardListResponse } from "@/api/cards";
 import { useState } from "react";
 
 export type CardListStatus = "idle" | "loading" | "success" | "error";
@@ -20,10 +20,16 @@ const useCardList = () => {
     }
   };
 
+  const removeCard = async (cardId: string) => {
+    await deleteCard(cardId);
+    await fetchCards();
+  };
+
   return {
     cards,
     status,
     fetchCards,
+    removeCard,
   };
 };
 

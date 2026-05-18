@@ -1,4 +1,3 @@
-import { deleteCard } from "@/api/cards";
 import CardListEmpty from "@/components/CardList/CardListEmpty";
 import CardListError from "@/components/CardList/CardListError";
 import CardListLoading from "@/components/CardList/CardListLoading";
@@ -12,7 +11,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const CardListPage = () => {
-  const { cards, status, fetchCards } = useCardList();
+  const { cards, status, fetchCards, removeCard } = useCardList();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,8 +28,7 @@ const CardListPage = () => {
     if (!isConfirmed) return;
 
     try {
-      await deleteCard(cardId);
-      await fetchCards();
+      await removeCard(cardId);
     } catch (error) {
       window.alert(
         error instanceof Error ? error.message : "카드 삭제에 실패했습니다.",
