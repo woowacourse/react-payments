@@ -76,7 +76,7 @@ export function CardForm({
       if (e instanceof NetworkError) {
         setSubmitError("네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요.");
       } else if (e instanceof HttpError) {
-        if (e.errorMessages) {
+        if (e.status === 400 && e.errorMessages) {
           const codes = Object.values(e.errorMessages)
             .filter(Boolean)
             .map((m) => m!.code);
