@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAsync } from '../../components/common/commonHooks/useAsync';
 import { useNavigate } from 'react-router-dom';
 
-interface Card {
+export interface Card {
   id: string;
   issuerCode: string;
   number: string;

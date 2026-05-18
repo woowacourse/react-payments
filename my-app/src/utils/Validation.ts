@@ -1,3 +1,5 @@
+import { CARD_COMPANY_COLORS, ISSUER_CODES, type CardCompany } from "../components/cardCompanySection/CardCompanyConstants";
+
 export const isInputValidate = (value: string, maxLength: number): boolean => {
   const isNumberOnly = /^[0-9]*$/.test(value);
 
@@ -119,3 +121,15 @@ export const isExpirationDateCorrect = (expirationDate: string) => {
 export const isCvcCorrect = (cvc: string): boolean => {
   return cvc !== '000';
 }
+
+export const getIssuerCodeInfo = (code: string) => {
+  const companyName = (Object.keys(ISSUER_CODES) as CardCompany[]).find(
+    (name) => ISSUER_CODES[name] === code
+  );
+
+  if (companyName) {
+    return { name: companyName, color: CARD_COMPANY_COLORS[companyName] };
+  }
+  
+  return { name: 'Default', color: '#333333' };
+};
