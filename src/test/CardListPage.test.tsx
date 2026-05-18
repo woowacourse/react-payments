@@ -48,3 +48,23 @@ test("카드 목록이 있을 때 카드 리스트가 화면에 보인다", asyn
     await screen.findByText("신한카드", {}, { timeout: 3000 }),
   ).toBeInTheDocument();
 });
+
+test("카드 목록 조회에 실패하면 에러 안내가 표시된다", async () => {
+  server.use(
+    http.get("/cards", () => HttpResponse.json(null, { status: 500 })),
+  );
+
+  render(
+    <MemoryRouter>
+      <CardListPage />
+    </MemoryRouter>,
+  );
+
+  expect(
+    await screen.findByText(
+      "잠시 후 다시 시도해 주세요",
+      {},
+      { timeout: 3000 },
+    ),
+  ).toBeInTheDocument();
+});
