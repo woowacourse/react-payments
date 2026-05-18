@@ -31,8 +31,10 @@ const CardListPage = () => {
     try {
       await deleteCard(cardId);
       await fetchCards();
-    } catch {
-      // 삭제 실패 처리
+    } catch (error) {
+      window.alert(
+        error instanceof Error ? error.message : "카드 삭제에 실패했습니다.",
+      );
     }
   };
 

@@ -35,7 +35,7 @@ export const getCards = async (): Promise<CardListResponse> => {
   const response = await fetch("/cards");
 
   if (!response.ok) {
-    throw new Error("카드 목록 조회 실패");
+    throw new Error("카드 목록 조회에 실패했습니다.");
   }
 
   return response.json();
@@ -47,6 +47,6 @@ export const deleteCard = async (cardId: string): Promise<void> => {
   });
 
   if (!response.ok) {
-    throw new Error("카드 삭제 실패");
+    throw new Error("카드 삭제에 실패했습니다.");
   }
 };
