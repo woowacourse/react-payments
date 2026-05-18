@@ -26,3 +26,7 @@ export const ISSUER_CODE_MAP: Record<string, CardBrandValue> = {
     '21': 'HANA',
     '11': 'KB',
 };
+
+export const BRAND_VALUE_TO_ISSUER_CODE: Record<string, string> = Object.fromEntries(
+    Object.entries(ISSUER_CODE_MAP).map(([code, brand]) => [brand, code])
+);
