@@ -1,6 +1,6 @@
 export const errorMessages = {
   cardNumbers: {
-    invalidAttemp: '유효현 카드번호(숫자)를 입력해주세요',
+    invalidAttemp: '유효한 카드번호(숫자)를 입력해주세요',
     incomplete: '카드 번호를 전부 채워주세요',
   },
   card: {
