@@ -72,8 +72,8 @@
 - [v] 서버가 `400{ code, message }`를 반환하면 `code`를 해당 입력 필드로 매핑하여 그 필드 아래에 메시지를 표시한다.
 
 ### 카드 목록 (`/cards`)
-- [] 페이지 진입 시 `GET /cards`로 등록된 카드 목록을 조회한다.
-- [] 비동기 상태(`idle | loading | success | error`)에 맞는 UI를 표시한다.
+- [v] 페이지 진입 시 `GET /cards`로 등록된 카드 목록을 조회한다.
+- [v] 비동기 상태(`idle | loading | success | error`)에 맞는 UI를 표시한다.
   - loading: 스피너 또는 스켈레톤
   - success + 목록이 비어 있음: "등록된 카드가 없습니다" 안내
   - success + 목록이 있음: 카드 프리뷰 리스트
