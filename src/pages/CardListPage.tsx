@@ -1,37 +1,45 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
-import { CardListResponse, getCardList } from '../apis/cards';
+import { getCardList } from '../apis/cards';
 import RegisteredCardList from '../components/Card/CardList/RegisteredCardList';
 import { useNavigate } from 'react-router-dom';
-import EmptyCardList from '../components/Card/CardList/EmptyCardList';
+import { useQuery } from '../hooks/useQuery';
+import SkeletonCardList from '../components/Card/CardList/SkeletonCardList';
+import FabllbackView from '../components/Card/CardList/FabllbackView';
+import errorIcon from '../assets/error.svg';
 
 export default function CardListPage() {
   const navigate = useNavigate();
-  const [data, setData] = useState<CardListResponse>([]);
 
-  const fetchData = async () => {
-    const res = await getCardList();
-    setData(res);
-  };
+  const { data, isLoading, isSuccess, isError } = useQuery({ queryFn: getCardList });
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleDelete = (id: string) => {
-    console.log('id', id);
-  };
+  const handleDelete = (id: string) => {};
 
   return (
     <Container>
-      <Title>보유 카드 {data.length > 0 && `(${data.length})`}</Title>
+      <Title>보유 카드 {isSuccess && data && data.length > 0 && `(${data.length})`}</Title>
 
-      {data.length === 0 && <EmptyCardList onClick={() => navigate('/registration/completion')} />}
-      {data.length > 0 && (
+      {isLoading && <SkeletonCardList />}
+      {isSuccess && data && data.length === 0 && (
+        <FabllbackView
+          icon={<EmptyCard />}
+          title="등록된 카드가 없습니다"
+          description="아래 버튼을 눌러 첫 카드를 등록해보세요"
+          action={{ label: '카드 추가하기', onClick: () => navigate('/registration/completion') }}
+        />
+      )}
+      {isSuccess && data && data.length > 0 && (
         <RegisteredCardList
           data={data}
           onDelete={handleDelete}
           onClick={() => navigate('/registration/completion')}
+        />
+      )}
+      {isError && (
+        <FabllbackView
+          icon={<img src={errorIcon} alt="error-icon" />}
+          title="카드 목록을 불러올 수 없어요"
+          description="잠시 후 다시 시도해 주세요."
+          action={{ label: '다시 시도', onClick: () => navigate(0) }}
         />
       )}
     </Container>
@@ -48,4 +56,12 @@ const Title = styled.h1`
   font-size: 18px;
   font-wieght: 700;
   color: #353c49;
+`;
+
+const EmptyCard = styled.div`
+  width: 160px;
+  height: 100px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 5px;
+  background-color: #f5f5f5;
 `;
