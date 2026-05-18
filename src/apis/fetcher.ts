@@ -1,11 +1,29 @@
+import ApiError from "./ApiError";
+
+const DEFAULT_ERROR_MESSAGE = "알 수 없는 오류가 발생했습니다.";
+
+interface ApiErrorBody {
+  code?: string;
+  message?: string;
+}
+
+async function parseErrorBody(response: Response): Promise<ApiErrorBody> {
+  try {
+    return (await response.json()) as ApiErrorBody;
+  } catch {
+    return {};
+  }
+}
+
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
-    try {
-      const errorData = await response.json();
-      throw new Error(errorData); //TODO: 커스텀 에러 클래스 사용하기
-    } catch {
-      throw new Error("알 수 없는 오류가 발생했습니다.");
-    }
+    const { code, message } = await parseErrorBody(response);
+
+    throw new ApiError({
+      status: response.status,
+      code,
+      message: message ?? DEFAULT_ERROR_MESSAGE,
+    });
   }
 
   if (response.status === 204) {

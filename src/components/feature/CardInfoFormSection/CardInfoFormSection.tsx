@@ -1,3 +1,5 @@
+import { isCardErrorCode } from "@apis/api/cards";
+import ApiError from "@apis/ApiError";
 import StepFunnel from "@components/common/StepFunnel";
 import CARD from "@constants/card";
 import styled from "@emotion/styled";
@@ -17,7 +19,7 @@ import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
 const CardInfoFormSection = () => {
   const navigateToCompletePage = useNavigateCompletePage();
   const { mutate: registerCard } = useRegisterCard();
-  const { getValue } = useFormValue();
+  const { getValue, setValue } = useFormValue();
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,6 +44,30 @@ const CardInfoFormSection = () => {
 
     registerCard(cardInfo, {
       onSuccess: () => navigateToCompletePage({ cardNumber, cardCompany }),
+      onError: (error) => {
+        if (error instanceof ApiError && isCardErrorCode(error.code)) {
+          const { code } = error;
+          if (code === "INVALID_CARD_NUMBER") {
+            setValue("cardNumberStatus", [
+              "INVALID_BRAND",
+              "INVALID_BRAND",
+              "INVALID_BRAND",
+              "INVALID_BRAND",
+            ]);
+          }
+
+          if (code === "INVALID_CVC") {
+            setValue("CVCStatus", "ERROR");
+          }
+
+          if (code === "INVALID_EXPIRATION_DATE") {
+            setValue("validityPeriodStatus", {
+              month: "MONTH_RANGE_ERROR",
+              year: "YEAR_RANGE_ERROR",
+            });
+          }
+        }
+      },
     });
   };
 
