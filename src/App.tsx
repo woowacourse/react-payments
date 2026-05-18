@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<UserCardList />} />
         <Route path="/register" element={<RegisterCard />} />
-        <Route path="/complete" element={<CardRegistrationComplete />} />
+        <Route path="/complete/:id" element={<CardRegistrationComplete />} />
       </Routes>
     </ThemeProvider>
   );

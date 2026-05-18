@@ -14,6 +14,8 @@ import {
   isCardPasswordComplete,
   isNumericInput,
 } from '../utils/validate';
+import { formatCardExpiryDate } from '../utils/formatCardExpiryDate';
+import { postCard } from '../api/postCard';
 
 export function useRegisterCardForm() {
   const [cardStatus, cardNumberHandler] = useCardNumber();
@@ -22,6 +24,15 @@ export function useRegisterCardForm() {
   const [cardPassword, cardPasswordHandler] = useCardPassword();
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
   const [step, setStep] = useState(0);
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formData = {
+    number: cardStatus.cardNumbers.join(''),
+    expirationDate: formatCardExpiryDate(cardExpiry.cardExpiryDate),
+    cvc: cardCvc.cardCvc,
+    issuerCode: cardIssuer,
+  };
 
   const navigate = useNavigate();
 
@@ -76,16 +87,26 @@ export function useRegisterCardForm() {
     isCardPasswordComplete(cardPassword.cardPassword) &&
     cardPassword.cardPasswordErrorMode === 'normal';
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!isFormValid) {
       return;
     }
 
-    navigate('/complete', {
-      state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
-    });
+    try {
+      setIsSubmitting(true);
+      setSubmitError('');
+
+      const id = await postCard(formData);
+
+      navigate(`/complete/${id}`, {
+        state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
+      });
+    } catch {
+      setSubmitError('카드 등록에 실패했습니다.');
+      setIsSubmitting(false);
+    }
   };
 
   return {
@@ -107,5 +128,7 @@ export function useRegisterCardForm() {
     step,
     handleSubmit,
     isFormValid,
+    submitError,
+    isSubmitting,
   };
 }
