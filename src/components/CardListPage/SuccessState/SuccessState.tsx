@@ -1,14 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import { CardItem } from './CardItem/CardItem';
 import type { Card } from '../../../types/card';
+import { CARD_BRANDS, type CardBrand } from '../../../constants/constants';
 import {
+  BrandLabel,
+  CardNumber,
   CardPlaceholder,
+  CardThumb,
   Container,
   DashedAddButton,
+  DeleteButton,
   EmptyBox,
   EmptyDescription,
   EmptyHeading,
+  ExpireDate,
+  Info,
   List,
+  Row,
   SolidAddButton,
   Title,
 } from './SuccessState.styles';
@@ -29,6 +36,11 @@ export function SuccessState({ cards, onDelete }: Props) {
     navigate('/addCard');
   };
 
+  const handleDelete = (id: string) => {
+    if (!window.confirm('이 카드를 삭제하시겠습니까?')) return;
+    onDelete(id);
+  };
+
   return (
     <Container>
       <Title>보유 카드{isEmpty ? '' : ` (${cards.length})`}</Title>
@@ -43,9 +55,26 @@ export function SuccessState({ cards, onDelete }: Props) {
         </EmptyBox>
       ) : (
         <List>
-          {cards.map((card) => (
-            <CardItem key={card.id} card={card} onDelete={onDelete} />
-          ))}
+          {cards.map((card) => {
+            const brand = CARD_BRANDS[card.cardBrand as CardBrand];
+            return (
+              <Row key={card.id}>
+                <CardThumb color={brand.color} />
+                <Info>
+                  <BrandLabel>{brand.label}</BrandLabel>
+                  <CardNumber>{card.cardNumber}</CardNumber>
+                  <ExpireDate>유효기간 {card.expireDate}</ExpireDate>
+                </Info>
+                <DeleteButton
+                  type="button"
+                  onClick={() => handleDelete(card.id)}
+                  aria-label="카드 삭제"
+                >
+                  ×
+                </DeleteButton>
+              </Row>
+            );
+          })}
         </List>
       )}
 

@@ -22,7 +22,6 @@ export function useCards() {
 
   const remove = async (id: string) => {
     try {
-      if (!window.confirm('이 카드를 삭제하시겠습니까?')) return;
       await deleteCard(id);
       setCards((prev) => prev.filter((card) => card.id !== id));
     } catch {
