@@ -2,21 +2,40 @@ import { css } from "@emotion/react";
 import type { CardInfo } from "../../types";
 import masterLogo from "../../assets/masterLogo.png";
 import visaLogo from "../../assets/visaLogo.png";
+import amexLogo from "../../assets/amexLogo.png";
+import unionpayLogo from "../../assets/unionpayLogo.png";
+import dinersLogo from "../../assets/dinersLogo.png";
+import { getCardColor } from "../../constants/cardCompanies";
 
-const fixedCardNumberStyle = css`
+const LOGO_MAP: Record<string, string> = {
+  master: masterLogo,
+  visa: visaLogo,
+  amex: amexLogo,
+  diners: dinersLogo,
+  unionpay: unionpayLogo,
+};
+
+const cardTextStyle = css`
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const cardNumberSpanStyle = css`
   display: inline-block;
   min-width: 30px;
   font-family: "Inter";
 `;
 
 const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
+  const cardColor = getCardColor(cardInfo.company);
   return (
     <div
       css={css`
         width: 212px;
         height: 132px;
         border-radius: 4px;
-        background-color: #333333;
+        background-color: ${cardColor};
         box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.25);
         padding: 8px 12px;
         display: flex;
@@ -40,14 +59,15 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
             border-radius: 4px;
           `}
         ></div>
-        {brand && (
+
+        {LOGO_MAP[brand] && (
           <img
             alt="카드 브랜드 이미지"
             css={css`
               width: 36px;
               height: 22px;
             `}
-            src={brand === "master" ? masterLogo : visaLogo}
+            src={LOGO_MAP[brand]}
           />
         )}
       </div>
@@ -55,27 +75,28 @@ const Card = ({ cardInfo, brand }: { cardInfo: CardInfo; brand: string }) => {
       {/* 카드 정보 */}
       <div>
         <div
-          css={css`
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-          `}
+          css={[
+            cardTextStyle,
+            css`
+              display: flex;
+              flex-direction: row;
+              gap: 10px;
+            `,
+          ]}
         >
-          <span css={fixedCardNumberStyle}>{cardInfo.numbers[0]}</span>
-          <span css={fixedCardNumberStyle}>{cardInfo.numbers[1]}</span>
-          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[2]?.length ?? 0)}</span>
-          <span css={fixedCardNumberStyle}>{"•".repeat(cardInfo.numbers[3]?.length ?? 0)}</span>
+          {cardInfo.numbers.map((num, i) => (
+            <span key={i} css={cardNumberSpanStyle}>
+              {i < 2 ? num : "•".repeat(num?.length ?? 0)}
+            </span>
+          ))}
         </div>
         <p
-          css={css`
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: "Inter";
-          `}
+          css={[
+            cardTextStyle,
+            css`
+              font-family: "Inter";
+            `,
+          ]}
         >
           {cardInfo.expiry[0]}
           <span

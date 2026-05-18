@@ -3,14 +3,15 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import ExpiryDateInputSection from "./ExpiryDateInputSection";
 
 const meta = {
-  title: "Components/ExpiryDateInputSection",
+  title: "CardForm/ExpiryDateInputSection",
   component: ExpiryDateInputSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },
   args: {
-    onValueHandler: fn(),
+    onChange: fn(),
+    inputValues: ["", ""],
   },
   render: (args) => (
     <div style={{ width: 320 }}>
@@ -32,7 +33,7 @@ export const FilledValid: Story = {
     await userEvent.type(inputs[0], "08");
     await userEvent.type(inputs[1], "29");
 
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith(["08", "29"]);
+    await expect(args.onChange).toHaveBeenLastCalledWith(["08", "29"]);
   },
 };
 

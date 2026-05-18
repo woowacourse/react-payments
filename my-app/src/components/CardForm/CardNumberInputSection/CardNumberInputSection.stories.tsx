@@ -3,14 +3,16 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import CardNumberInputSection from "./CardNumberInputSection";
 
 const meta = {
-  title: "Components/CardNumberInputSection",
+  title: "CardForm/CardNumberInputSection",
   component: CardNumberInputSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },
   args: {
-    onValueHandler: fn(),
+    onChange: fn(),
+    inputValues: ["", "", "", ""],
+    fieldConfig: [4, 4, 4, 4],
   },
   render: (args) => (
     <div style={{ width: 320 }}>
@@ -34,7 +36,7 @@ export const FilledValid: Story = {
     await userEvent.type(inputs[2], "8901");
     await userEvent.type(inputs[3], "2345");
 
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith(["4123", "4567", "8901", "2345"]);
+    await expect(args.onChange).toHaveBeenLastCalledWith(["4123", "4567", "8901", "2345"]);
   },
 };
 

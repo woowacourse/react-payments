@@ -3,14 +3,15 @@ import { expect, fn, userEvent, within } from "storybook/test";
 import CvcInputSection from "./CvcInputSection";
 
 const meta = {
-  title: "Components/CvcInputSection",
+  title: "CardForm/CvcInputSection",
   component: CvcInputSection,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },
   args: {
-    onValueHandler: fn(),
+    onChange: fn(),
+    inputValue: "",
   },
   render: (args) => (
     <div style={{ width: 320 }}>
@@ -31,7 +32,7 @@ export const FilledValid: Story = {
 
     await userEvent.type(input, "123");
 
-    await expect(args.onValueHandler).toHaveBeenLastCalledWith("123");
+    await expect(args.onChange).toHaveBeenLastCalledWith("123");
   },
 };
 

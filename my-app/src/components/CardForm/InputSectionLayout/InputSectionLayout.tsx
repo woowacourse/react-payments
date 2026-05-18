@@ -1,4 +1,15 @@
 import { css } from "@emotion/react";
+import type { ReactNode } from "react";
+
+export const baseInputStyle = css`
+  flex: 1;
+  height: 32px;
+  border-radius: 2px;
+  min-width: 0;
+  padding: 8px;
+  box-sizing: border-box;
+`;
+
 const errorTextStyle = css`
   position: absolute;
   bottom: 2px;
@@ -13,10 +24,10 @@ const InputSectionLayout = ({
   tag,
   errorMessage,
 }: {
-  children?: React.ReactNode;
+  children?: ReactNode;
   title: string;
   message: string;
-  tag: string;
+  tag?: string;
   errorMessage?: string;
 }) => {
   return (
@@ -85,7 +96,7 @@ const InputSectionLayout = ({
             padding-bottom: 20px;
           `}
         >
-          <section
+          <div
             css={css`
               display: flex;
               flex-direction: row;
@@ -93,7 +104,7 @@ const InputSectionLayout = ({
             `}
           >
             {children}
-          </section>
+          </div>
           <span
             css={[
               errorTextStyle,
