@@ -31,6 +31,7 @@
     "@babel/preset-typescript": "^7.28.5",
     "@chromatic-com/storybook": "^5.1.2",
     "@eslint/js": "^10.0.1",
+    "@mswjs/data": "^0.16.2",
     "@react-router/dev": "^7.15.0",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
