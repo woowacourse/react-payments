@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import type { CardItemInformation } from "../components/Success/CardItem/CardItem";
 import { fetchCardList } from "../api/cardList";
 import { deleteCard } from "../api/card";
 import { useAsyncState } from "../../../shared/hooks/useAsyncState";
+import type { CardItemInformationType } from "../types/cardItem";
 
 export const useCardList = () => {
   const { asyncState, setLoading, setSuccess, setError } = useAsyncState();
 
-  const [cardList, setCardList] = useState<CardItemInformation[]>([]);
+  const [cardList, setCardList] = useState<CardItemInformationType[]>([]);
   const [deleteError, setDeleteError] = useState<Error | null>(null);
 
   const deleteCardFromState = (cardId: string) => {

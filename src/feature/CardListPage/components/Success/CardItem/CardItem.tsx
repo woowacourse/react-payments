@@ -1,18 +1,10 @@
 import styled from "styled-components";
 
-import type { IssuerCodeType } from "../../../../../shared/types/Issuer";
 import { getIssuerByCode } from "../../../../../shared/utils/issuer";
-
-// todo: 타입 정의 상위로 올리기
-export type CardItemInformation = {
-  id: string;
-  issuerCode: IssuerCodeType;
-  number: string;
-  expirationDate: string;
-};
+import type { CardItemInformationType } from "../../../types/cardItem";
 
 type CardItemProps = {
-  cardItemInformaiton: CardItemInformation;
+  cardItemInformaiton: CardItemInformationType;
   onDeleteCard: (cardId: string) => void;
   deleteError: Error | null;
 };

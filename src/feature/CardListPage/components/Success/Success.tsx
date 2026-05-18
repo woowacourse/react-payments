@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import CardItem, { type CardItemInformation } from "./CardItem/CardItem";
+import CardItem from "./CardItem/CardItem";
 import BaseButton from "../../../../shared/components/Button/BaseButton";
 import { useNavigate } from "react-router-dom";
+import type { CardItemInformationType } from "../../types/cardItem";
 
 const Success = ({
   cardList,
   deleteCard,
   deleteError,
 }: {
-  cardList: CardItemInformation[];
+  cardList: CardItemInformationType[];
   deleteCard: (cardId: string) => void;
   deleteError: Error | null;
 }) => {
