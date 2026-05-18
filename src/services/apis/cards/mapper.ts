@@ -1,4 +1,4 @@
-import type { GetCardsResponseDTO } from '@/services/apis/cards/dto';
+import type { GetCardsResponseDTO, PostCardsRequestDTO } from '@/services/apis/cards/dto';
 import type { Card } from '@/pages/payments/cards/list/model';
 
 import { ISSUER_CODE } from '@/pages/payments/cards/list/constants';
@@ -15,4 +15,24 @@ export const mapCardsResponseDTOToModel = (cards: GetCardsResponseDTO): Card[] =
       expirationDate: { month, year },
     };
   });
+};
+
+export const mapCardModelToRequestDTO = (card: {
+  cardNumbers: { [key in '0' | '1' | '2' | '3']: string };
+  card: string;
+  cvc: string;
+  expirationDate: { month: string; year: string };
+}): PostCardsRequestDTO => {
+  const issuerCode = Object.entries(ISSUER_CODE).find(([_, issuerCode]) => {
+    return issuerCode?.card === card.card;
+  });
+  if (!issuerCode) throw new Error();
+  const [issuerCodeKey] = issuerCode;
+
+  return {
+    number: Object.values(card.cardNumbers).join(''),
+    expirationDate: `${card.expirationDate.month}/${card.expirationDate.year}`,
+    cvc: card.cvc,
+    issuerCode: issuerCodeKey,
+  };
 };
