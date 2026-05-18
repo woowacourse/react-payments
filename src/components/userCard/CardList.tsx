@@ -1,0 +1,37 @@
+import Card from './Card';
+import type { CardResponse } from '../../types/cardStausTypes';
+
+type CardListProps = {
+  cards: CardResponse[];
+};
+
+export default function CardList({ cards }: CardListProps) {
+  return (
+    <div
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '16px',
+      }}
+    >
+      {cards.map((card) => {
+        return <Card key={card.id} card={card} />;
+      })}
+      <button
+        css={(theme) => ({
+          width: '100%',
+          height: '44px',
+          borderRadius: '5px',
+          ...theme.typography.info,
+          color: theme.colors.cardInfo,
+          textAlign: 'center',
+          border: `1px dashed ${theme.colors.cardSectionBorder}`,
+        })}
+      >
+        + 카드 추가
+      </button>
+    </div>
+  );
+}

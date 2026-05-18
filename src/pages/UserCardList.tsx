@@ -4,6 +4,7 @@ import ErrorInfo from '../components/userCard/ErrorInfo';
 import { requestCards } from '../api/requestCards';
 import Skeleton from '../components/skeleton/Skeleton';
 import Empty from '../components/userCard/Empty';
+import CardList from '../components/userCard/CardList';
 
 export default function UserCardList() {
   const [cards, setCards] = useState<CardResponse[]>([]);
@@ -59,7 +60,7 @@ export default function UserCardList() {
         flexDirection: 'column',
         backgroundColor: theme.colors.white,
         width: '376px',
-        height: '100vh',
+        minHeight: '100vh',
         margin: '0 auto',
         padding: '40px 28px',
       })}
@@ -76,6 +77,7 @@ export default function UserCardList() {
         <>
           {isLoading && <Skeleton />}
           {!isLoading && cards.length === 0 && <Empty />}
+          {!isLoading && cards.length > 0 && <CardList cards={cards} />}
         </>
       )}
       {errorMessage && <ErrorInfo message={errorMessage} handleRetry={handleRetry} />}
