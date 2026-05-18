@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
+import { keyframes } from "@emotion/react";
+
+const spin = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
 
 const Button = styled.button`
   background: #333333;
@@ -18,19 +23,34 @@ const Button = styled.button`
   line-height: 12px;
   letter-spacing: 0%;
   color: #f3f3f3;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+`;
+
+const ButtonSpinner = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #f3f3f3;
+  border-radius: 50%;
+  animation: ${spin} 0.8s linear infinite;
+  margin: 0 auto;
 `;
 
 interface SubmitButtonProps {
   isCardFormComplete: boolean;
+  isSubmitting: boolean;
+  onSubmit: () => void;
 }
 
-export function SubmitButton(props: SubmitButtonProps) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate("/react-payments/success");
-  };
-
-  if (!props.isCardFormComplete) return null;
-  return <Button onClick={handleClick}>확인</Button>;
+export function SubmitButton({
+  isCardFormComplete,
+  isSubmitting,
+  onSubmit,
+}: SubmitButtonProps) {
+  if (!isCardFormComplete) return null;
+  return (
+    <Button onClick={onSubmit} disabled={isSubmitting}>
+      {isSubmitting ? <ButtonSpinner /> : "확인"}
+    </Button>
+  );
 }
