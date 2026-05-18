@@ -69,7 +69,7 @@ describe('카드 목록 페이지 테스트', async () => {
     const items = await screen.findAllByRole('button');
     const firstItem = items[0];
 
-    userEvent.click(firstItem);
+    await userEvent.click(firstItem);
 
     server.use(
       http.get('/cards', () => {
