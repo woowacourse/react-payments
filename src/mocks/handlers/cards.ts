@@ -26,13 +26,9 @@ const cards: Card[] = [
 export const cardHandlers = [
   // GET 요청 모킹
   http.get('/cards', async () => {
-    await delay(2000);
+    await delay(1000);
 
     return HttpResponse.json(cards);
-    // return HttpResponse.json(
-    //   { message: '카드 목록을 불러올 수 없습니다.' },
-    //   { status: 500 },
-    // );
   }),
 
   // POST 요청 모킹
