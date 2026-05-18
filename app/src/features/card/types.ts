@@ -7,9 +7,5 @@ export type CardNumber = {
   fourthDigits: string;
 };
 
-export type CardExpiryDate = {
-  expiryMonth: string;
-  expiryYear: string;
-};
 
 export type SetState<T> = React.Dispatch<React.SetStateAction<T>>;

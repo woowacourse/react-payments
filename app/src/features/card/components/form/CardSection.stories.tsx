@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CardSection } from "./CardSection";
 import { CardNumberInput } from "./CardNumberInput";
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
+import { ExpiryDate } from "../../ExpiryDate";
 
 const meta = {
   title: "Card/Form/CardSection",
@@ -46,10 +47,7 @@ export const CardNumberInputSection: Story = {
 export const CardExpiryDateInputSection: Story = {
   args: defaultArgs,
   render: () => {
-    const [cardExpiryDate, setCardExpiryDate] = useState({
-      expiryMonth: "",
-      expiryYear: "",
-    });
+    const [cardExpiryDate, setCardExpiryDate] = useState(new ExpiryDate("", ""));
     return (
       <CardSection
         title="카드 유효기간을 입력해 주세요"

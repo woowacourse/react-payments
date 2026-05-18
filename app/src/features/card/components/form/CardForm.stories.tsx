@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { CardForm } from "./CardForm";
 import { withCardRouter } from "../storybook/decorators";
+import { ExpiryDate } from "../../ExpiryDate";
 
 const meta = {
   title: "Card/Form/CardForm",
@@ -24,10 +25,7 @@ const defaultArgs = {
     fourthDigits: "",
   },
   setCardNumber: () => {},
-  cardExpiryDate: {
-    expiryMonth: "",
-    expiryYear: "",
-  },
+  cardExpiryDate: new ExpiryDate("", ""),
   setCardExpiryDate: () => {},
   cardBrand: null as string | null,
   setCardBrand: () => {},
@@ -76,10 +74,7 @@ export const CompleteCardForm: Story = {
       thirdDigits: "4321",
       fourthDigits: "4321",
     },
-    cardExpiryDate: {
-      expiryMonth: "01",
-      expiryYear: "28",
-    },
+    cardExpiryDate: new ExpiryDate("01", "28"),
     cardBrand: "kakao",
     cardCVC: "111",
     cardPassword: "12",

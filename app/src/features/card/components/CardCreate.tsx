@@ -3,6 +3,7 @@ import { CardPreview } from "./preview/CardPreview.tsx";
 import { CardForm } from "./form/CardForm.tsx";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router";
+import { ExpiryDate } from "../ExpiryDate";
 
 export default function CardCreate() {
   const [cardNumber, setCardNumber] = useState({
@@ -12,10 +13,7 @@ export default function CardCreate() {
     fourthDigits: "",
   });
 
-  const [cardExpiryDate, setCardExpiryDate] = useState({
-    expiryMonth: "",
-    expiryYear: "",
-  });
+  const [cardExpiryDate, setCardExpiryDate] = useState(new ExpiryDate("", ""));
 
   const [cardBrand, setCardBrand] = useState<string | null>(null);
 

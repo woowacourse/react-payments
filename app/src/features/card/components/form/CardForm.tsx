@@ -9,13 +9,14 @@ import { Button } from "../../style/Button";
 import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
 import { joinCardNumber } from "../../Utils";
-import type { CardNumber, CardExpiryDate, SetState } from "../../types";
+import type { CardNumber, SetState } from "../../types";
+import type { ExpiryDate } from "../../ExpiryDate";
 
 interface CardFormProps {
   cardNumber: CardNumber;
   setCardNumber: SetState<CardNumber>;
-  cardExpiryDate: CardExpiryDate;
-  setCardExpiryDate: SetState<CardExpiryDate>;
+  cardExpiryDate: ExpiryDate;
+  setCardExpiryDate: SetState<ExpiryDate>;
   cardBrand: string | null;
   setCardBrand: (value: string) => void;
   cardCVC: string;
@@ -48,7 +49,7 @@ export function CardForm({
   } = calculateCreateCardCurrentProgress({
     cardNumber: joinCardNumber(cardNumber),
     cardBrand,
-    cardExpiryDate: Object.values(cardExpiryDate).join(""),
+    cardExpiryDate: cardExpiryDate.toMMYY(),
     cardCVC,
     cardPassword,
   });
@@ -60,8 +61,7 @@ export function CardForm({
         method: "POST",
         body: JSON.stringify({
           cardNumber: joinCardNumber(cardNumber),
-          // expiryDate를 MM/YY 형식으로 전환.
-          cardExpiryDate: cardExpiryDate,
+          cardExpiryDate: cardExpiryDate.toSlashFormat(),
           cardCVC: cardCVC,
           cardIssuerCode: convertCardBrandToIssuerCode(cardBrand),
         }),

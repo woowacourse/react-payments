@@ -3,6 +3,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
 
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
+import { ExpiryDate } from "../../ExpiryDate";
 
 const meta = {
   title: "Card/Form/CardExpiryDateInput",
@@ -17,10 +18,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  cardExpiryDate: {
-    expiryMonth: "",
-    expiryYear: "",
-  },
+  cardExpiryDate: new ExpiryDate("", ""),
   setCardExpiryDate: () => {},
 };
 
