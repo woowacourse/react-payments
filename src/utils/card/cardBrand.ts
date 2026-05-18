@@ -2,8 +2,8 @@ import {
   CARD_BRAND_NUMBER_GROUP_LENGTHS,
   CARD_BRAND_PREFIX_RANGES,
   DEFAULT_CARD_NUMBER_GROUP_LENGTHS,
-} from '../constants/cardBrands';
-import type { CardBrand } from '../types/cardStausTypes';
+} from '../../constants/cardBrands.ts';
+import type { CardBrand } from '../../types/cardStausTypes';
 
 function isPrefixInRange(cardNumber: string, start: string, end: string) {
   const prefixLength = Math.min(cardNumber.length, start.length);
