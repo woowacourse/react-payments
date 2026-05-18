@@ -1,6 +1,6 @@
 import { useExecute } from '@/services/core/useExecute';
 
-import { deleteCards } from '@/services/apis/cards/cards';
+import repository from '@/services/apis/cards/repository';
 
 interface Options {
   onSuccess: () => void;
@@ -9,7 +9,7 @@ interface Options {
 export const useDeleteCards = ({ onSuccess }: Options) => {
   // delete
   return useExecute({
-    executeFn: deleteCards,
+    executeFn: repository.deleteCards,
     onSuccess,
   });
 };

@@ -4,8 +4,7 @@ import { useExecute } from '@/services/core/useExecute';
 
 import { ROUTES } from '@/constants/routes';
 
-import { postCards } from '@/services/apis/cards/cards';
-import { mapCardModelToRequestDTO } from '@/services/apis/cards/mapper';
+import repository from '@/services/apis/cards/repository';
 
 import { ERROR_CODE } from '../constants';
 
@@ -26,14 +25,12 @@ export const useRegisterCardAction = ({ values: { cardNumbers, card, cvc, expira
     mutate,
   } = useExecute({
     executeFn: async () => {
-      const data = mapCardModelToRequestDTO({
+      return await repository.postCards({
         cardNumbers: cardNumbers.values,
         card: card.values.card,
         cvc: cvc.values.cvc,
         expirationDate: expirationDate.values,
       });
-
-      await postCards(data);
     },
     onSuccess: () => {
       navigate(ROUTES.PAYMENTS.CARDS);
