@@ -24,8 +24,6 @@ export function useRegisterCardForm() {
   const [cardPassword, cardPasswordHandler] = useCardPassword();
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
   const [step, setStep] = useState(0);
-  const [submitError, setSubmitError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formData = {
     number: cardStatus.cardNumbers.join(''),
@@ -95,17 +93,13 @@ export function useRegisterCardForm() {
     }
 
     try {
-      setIsSubmitting(true);
-      setSubmitError('');
-
       const id = await postCard(formData);
 
       navigate(`/complete/${id}`, {
         state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
       });
-    } catch {
-      setSubmitError('카드 등록에 실패했습니다.');
-      setIsSubmitting(false);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : '카드 등록에 실패했습니다.');
     }
   };
 
@@ -128,7 +122,5 @@ export function useRegisterCardForm() {
     step,
     handleSubmit,
     isFormValid,
-    submitError,
-    isSubmitting,
   };
 }
