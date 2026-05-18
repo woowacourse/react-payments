@@ -13,7 +13,7 @@ export default function CompletePage() {
   const navigate = useNavigate();
   const state = location.state as LocationState | null;
 
-  if (!state) return <Navigate to="/" replace />;
+  if (!state) return <Navigate to="/cards" replace />;
 
   const { cardNumberFirstSegment, cardBrand } = state;
 
@@ -25,7 +25,7 @@ export default function CompletePage() {
         <br />
         {cardBrand}가 등록되었어요.
       </Message>
-      <ConfirmButton onClick={() => navigate('/')}>확인</ConfirmButton>
+      <ConfirmButton onClick={() => navigate('/cards')}>확인</ConfirmButton>
     </Wrapper>
   );
 }
