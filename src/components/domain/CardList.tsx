@@ -10,7 +10,7 @@ export default function CardList({ cards }: CardListProps) {
   return (
     <ul css={listStyle}>
       {cards.map((card) => (
-        <li key={card.cardNumbers.join('')}>
+        <li key={card.id}>
           <CardItem {...card} />
         </li>
       ))}

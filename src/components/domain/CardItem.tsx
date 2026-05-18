@@ -1,9 +1,29 @@
 import { css } from '@emotion/react';
 import type { CardDto } from '../../apis/cards/type.ts';
+import { deleteCard } from '../../apis/cards/api.ts';
+import { useState } from 'react';
+import type { ResponseStatus } from '../../types.ts';
 
 type CardItemProps = Omit<CardDto, 'cvc'>;
 
-export default function CardItem({ cardCompany, cardNumbers, expirationPeriod }: CardItemProps) {
+export default function CardItem({ id, cardCompany, cardNumbers, expirationPeriod }: CardItemProps) {
+  const [responseStatus, setResponseStatus] = useState<ResponseStatus>('idle');
+  const isLoading = responseStatus === 'loading';
+
+  const handleClick = async () => {
+    const isConfirmed = window.confirm('정말로 카드를 삭제하시겠어요?');
+    if (!isConfirmed) return;
+
+    try {
+      setResponseStatus('loading');
+      await deleteCard(id);
+      setResponseStatus('success');
+    } catch (error) {
+      alert('카드를 삭제하는 중 문제가 발생했습니다.\n잠시 후 다시 시도해 주세요.');
+      setResponseStatus('error');
+    }
+  };
+
   return (
     <div css={cardItemStyle}>
       <div css={[cardGraphicStyle, cardColor[cardCompany]]} />
@@ -14,7 +34,9 @@ export default function CardItem({ cardCompany, cardNumbers, expirationPeriod }:
           유효기간 {expirationPeriod[0]}/{expirationPeriod[1]}
         </span>
       </div>
-      <button css={deleteButtonStyle}>x</button>
+      <button css={[deleteButtonStyle, isLoading ? loadingStyle : null]} onClick={handleClick}>
+        x
+      </button>
     </div>
   );
 }
@@ -46,6 +68,12 @@ const deleteButtonStyle = css`
   :active {
     background-color: #eeeeee;
   }
+`;
+
+const loadingStyle = css`
+  pointer-events: none;
+  cursor: wait;
+  background-color: #eeeeee;
 `;
 
 const cardInfoStyle = css`
