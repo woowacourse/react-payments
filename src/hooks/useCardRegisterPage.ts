@@ -64,23 +64,27 @@ export default function useCardRegisterPage() {
 
   //완료 페이지 이동
   const handleComplete = async () => {
-    const res = await fetch("/cards", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        number: Object.values(cardNumbers).join(""),
-        expirationDate: Object.values(expNumbers).join("/"),
-        cvc: cvcNumbers,
-        issuerCode: cardFirm.value,
-      }),
-    });
-    if (!res.ok) {
-      const error = await res.json();
-      setServerError(error);
-      return;
+    try {
+      const res = await fetch("/cards", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          number: Object.values(cardNumbers).join(""),
+          expirationDate: Object.values(expNumbers).join("/"),
+          cvc: cvcNumbers,
+          issuerCode: cardFirm.value,
+        }),
+      });
+      if (!res.ok) {
+        const error = await res.json();
+        setServerError(error);
+        return;
+      }
+      setServerError(null);
+      navigate("/cards");
+    } catch {
+      alert("네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
     }
-    setServerError(null);
-    navigate("/cards");
   };
 
   return {
