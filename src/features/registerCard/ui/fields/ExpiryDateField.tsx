@@ -5,7 +5,6 @@ import {
   EXPIRY_MONTH_LENGTH,
   EXPIRY_YEAR_LENGTH,
   validateExpiryMonth,
-  validateExpiryYear,
   type ExpiryDate,
 } from '@/entities/card/model/expiryDate';
 import {
@@ -18,17 +17,24 @@ import { useState } from 'react';
 
 export interface ExpiryFieldControl {
   expiryDate: ExpiryDate;
+  shouldComplete: (value: ExpiryDate) => boolean;
+  serverErrorMessage?: string;
   onChange: (value: ExpiryDate) => void;
 }
 
-interface ExpiryDateField {
-  expiryField: ExpiryFieldControl;
+export interface ExpiryDateFieldProps extends ExpiryFieldControl {
   setStepRef: (node: HTMLInputElement | null) => void;
-  onComplate: () => void;
+  onComplete?: () => void;
 }
 
-export const ExpiryDateField = ({ expiryField, onComplate, setStepRef }: ExpiryDateField) => {
-  const { expiryDate, onChange } = expiryField;
+export const ExpiryDateField = ({
+  expiryDate,
+  serverErrorMessage,
+  shouldComplete,
+  onChange,
+  onComplete,
+  setStepRef,
+}: ExpiryDateFieldProps) => {
   const { month, year } = expiryDate;
   const [touched, setTouched] = useState<ExpiryTouched>({
     month: false,
@@ -41,6 +47,7 @@ export const ExpiryDateField = ({ expiryField, onComplate, setStepRef }: ExpiryD
     expiryDate,
     touched,
   });
+  const visibleErrorMessage = serverErrorMessage ?? totalErrorMessage;
 
   const handleChangeMonth = (month: string) => {
     if (!isValidMonthInput(month)) return;
@@ -64,15 +71,16 @@ export const ExpiryDateField = ({ expiryField, onComplate, setStepRef }: ExpiryD
     };
     onChange(next);
 
-    if (validateExpiryMonth(next.month) && validateExpiryYear(next.year)) onComplate();
+    if (shouldComplete(next)) {
+      onComplete?.();
+    }
   };
-
   return (
     <Field
       title="카드 유효기간을 입력해 주세요"
       subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
       label="유효기간"
-      errorMessage={totalErrorMessage}
+      errorMessage={visibleErrorMessage}
     >
       <Input
         ref={(node) => {

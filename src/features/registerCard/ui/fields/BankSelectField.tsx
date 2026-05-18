@@ -5,18 +5,27 @@ import { BANK_RULES, BANKS, type Bank } from '@/entities/card/model/bank';
 
 export interface BankFieldControl {
   bank: Bank | undefined;
-  onChange: (v: Bank | undefined) => void;
+  shouldComplete: (value: Bank) => boolean;
+  onChange: (v: Bank) => void;
 }
-export interface BankSelectFieldProps {
-  bankField: BankFieldControl;
+export interface BankSelectFieldProps extends BankFieldControl {
   setStepRef: (node: HTMLSelectElement | null) => void;
-  onComplate: () => void;
+  onComplete: () => void;
 }
-export const BankSelectField = ({ bankField, setStepRef, onComplate }: BankSelectFieldProps) => {
-  const { bank, onChange } = bankField;
+
+export const BankSelectField = ({
+  bank,
+  onChange,
+  shouldComplete,
+  setStepRef,
+  onComplete,
+}: BankSelectFieldProps) => {
   const handleChange = (value: Bank) => {
     onChange(value);
-    if (value !== undefined) onComplate();
+
+    if (shouldComplete(value)) {
+      onComplete();
+    }
   };
   return (
     <Field title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다.">

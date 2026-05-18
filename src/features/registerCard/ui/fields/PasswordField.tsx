@@ -1,31 +1,39 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
 import { useState } from 'react';
-import { validatePassword } from '@/entities/card/model/password';
 import { getPasswordFieldState, isValidInputPassword } from '../../model/registerPassword';
 
 export interface PasswordFieldControl {
   password: string;
+  shouldComplete: (value: string) => boolean;
   onChange: (v: string) => void;
 }
-interface PasswordFieldProps {
-  passwordField: PasswordFieldControl;
+
+export interface PasswordFieldProps extends PasswordFieldControl {
   setStepRef: (node: HTMLInputElement | null) => void;
-  onComplate: () => void;
+  onComplete?: () => void;
+  serverErrorMessage?: string;
 }
 
-export const PasswordField = ({ passwordField, setStepRef, onComplate }: PasswordFieldProps) => {
-  const { password, onChange } = passwordField;
+export const PasswordField = ({
+  password,
+  shouldComplete,
+  onChange,
+  setStepRef,
+  onComplete,
+}: PasswordFieldProps) => {
   const [touched, setTouched] = useState<boolean>(false);
 
-  const { errorMessage, isValid, maxLength } = getPasswordFieldState(password, touched);
+  const { errorMessage, maxLength } = getPasswordFieldState(password, touched);
 
   const handleChange = (inputValue: string): void => {
     if (!isValidInputPassword(inputValue)) return;
 
     onChange(inputValue);
 
-    if (validatePassword(inputValue)) onComplate();
+    if (shouldComplete(inputValue)) {
+      onComplete?.();
+    }
   };
 
   return (
@@ -42,7 +50,7 @@ export const PasswordField = ({ passwordField, setStepRef, onComplate }: Passwor
         value={password}
         maxLength={maxLength}
         placeholder="**"
-        isError={!isValid}
+        isError={touched && errorMessage !== undefined}
         onChange={(e) => handleChange(e.target.value)}
         onBlur={() => setTouched(true)}
       />

@@ -15,7 +15,6 @@ export const getPasswordFieldState = (value: string, touched: boolean) => {
 
   return {
     errorMessage: visibleErrorMessage,
-    isValid: visibleErrorMessage === undefined,
     maxLength: PASSWORD_LENGTH,
   };
 };

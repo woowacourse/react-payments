@@ -15,7 +15,6 @@ export const getCvcFieldState = (value: string, touched: boolean) => {
 
   return {
     errorMessage: visibleErrorMessage,
-    isValid: visibleErrorMessage === undefined,
     maxLength: CVC_LENGTH,
   };
 };

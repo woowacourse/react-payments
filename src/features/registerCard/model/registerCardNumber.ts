@@ -99,7 +99,6 @@ export const getCardNumberFieldState = ({
     format,
     inputErrors,
     totalErrorMessage,
-    isValid,
     brand,
   };
 };

@@ -1,36 +1,45 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
 import { useState } from 'react';
-import { validateCvc } from '@/entities/card/model/cvc';
 import { getCvcFieldState, isValidInputCvc } from '../../model/registerCvc';
 
 export interface CvcFieldControl {
   cvc: string;
+  shouldComplete: (value: string) => boolean;
   onChange: (v: string) => void;
 }
 
-interface CvcFieldProps {
-  cvcField: CvcFieldControl;
+export interface CvcFieldProps extends CvcFieldControl {
   setStepRef: (node: HTMLInputElement | null) => void;
-  onComplate: () => void;
+  onComplete: () => void;
+  serverErrorMessage?: string;
 }
 
-export const CvcField = ({ cvcField, setStepRef, onComplate }: CvcFieldProps) => {
-  const { cvc, onChange } = cvcField;
+export const CvcField = ({
+  cvc,
+  serverErrorMessage,
+  shouldComplete,
+  onChange,
+  setStepRef,
+  onComplete,
+}: CvcFieldProps) => {
   const [touched, setTouched] = useState<boolean>(false);
 
-  const { errorMessage, isValid, maxLength } = getCvcFieldState(cvc, touched);
+  const { errorMessage, maxLength } = getCvcFieldState(cvc, touched);
+  const visibleErrorMessage = serverErrorMessage ?? errorMessage;
 
   const handleChange = (inputValue: string): void => {
     if (!isValidInputCvc(inputValue)) return;
 
     onChange(inputValue);
 
-    if (validateCvc(inputValue)) onComplate();
+    if (shouldComplete(inputValue)) {
+      onComplete();
+    }
   };
 
   return (
-    <Field title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={errorMessage}>
+    <Field title="CVC 번호를 입력해 주세요" label="CVC" errorMessage={visibleErrorMessage}>
       <Input
         ref={setStepRef}
         type="text"
@@ -38,7 +47,7 @@ export const CvcField = ({ cvcField, setStepRef, onComplate }: CvcFieldProps) =>
         value={cvc}
         maxLength={maxLength}
         placeholder="123"
-        isError={!isValid}
+        isError={visibleErrorMessage !== undefined}
         onChange={(e) => handleChange(e.target.value)}
         onBlur={() => setTouched(true)}
       />

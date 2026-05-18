@@ -48,8 +48,6 @@ export const getExpiryDateFieldState = ({
   return {
     visibleMonthError,
     visibleYearError,
-
     totalErrorMessage: visibleMonthError ?? visibleYearError,
-    isValid: monthError === undefined && yearError === undefined,
   };
 };

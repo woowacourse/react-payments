@@ -11,20 +11,27 @@ import {
 
 export interface CardNumberFieldControl {
   numbers: string[];
+  shouldComplete: (value: string[]) => boolean;
   onChange: (v: string[]) => void;
 }
 
-interface CardNumberFieldProps {
-  numbersField: CardNumberFieldControl;
+export interface CardNumberFieldProps extends CardNumberFieldControl {
   setStepRef: (node: HTMLInputElement | null) => void;
-  onComplate: () => void;
+  onComplete: () => void;
+  serverErrorMessage?: string;
 }
 
 const numberPlaceHolder = (length: number) =>
   Array.from({ length }, (_, index) => index + 1).join('');
 
-export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumberFieldProps) => {
-  const { numbers, onChange } = numbersField;
+export const NumberField = ({
+  numbers,
+  serverErrorMessage,
+  onChange,
+  setStepRef,
+  onComplete,
+  shouldComplete,
+}: CardNumberFieldProps) => {
   const { setInputRef, focusNext } = useInputFocus();
   const [touched, setTouched] = useState([false, false, false, false]);
 
@@ -32,23 +39,25 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
     numbers,
     touched,
   });
+  const visibleErrorMessage = serverErrorMessage ?? totalErrorMessage;
+  const visibleInputErrors =
+    serverErrorMessage !== undefined ? numbers.map(() => serverErrorMessage) : inputErrors;
 
   const handleChangeNumbers = (value: string, index: number) => {
     if (!isValidInputCardNumber(value)) return;
 
     const next = [...numbers];
     next[index] = value;
-    onChange(next);
+    const { format, nextBrand } = getNextCardNumberFieldState(next);
 
-    const { format, isValid, nextBrand } = getNextCardNumberFieldState(next);
+    const nextNumbers = brand !== nextBrand ? sliceCardNumber(next, format) : next;
+    onChange(nextNumbers);
 
-    if (brand !== nextBrand) {
-      const sliced = sliceCardNumber(next, format);
-      onChange(sliced);
-    }
-
-    if (isValid) onComplate();
     if (value.length === format[index]) focusNext(index + 1);
+
+    if (shouldComplete(nextNumbers)) {
+      onComplete();
+    }
   };
 
   const handleBlur = (index: number) => {
@@ -62,13 +71,15 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
       title="결제할 카드 번호를 입력해 주세요"
       subTitle="본인 명의의 카드만 결제 가능합니다."
       label={`카드 번호`}
-      errorMessage={totalErrorMessage}
+      errorMessage={visibleErrorMessage}
     >
       {numbers.map((number, index) => (
         <Input
           ref={(node) => {
             setInputRef(node, index);
-            setStepRef(node);
+            if (index === 0) {
+              setStepRef(node);
+            }
           }}
           type="text"
           key={`${index}`}
@@ -76,7 +87,7 @@ export const NumberField = ({ numbersField, setStepRef, onComplate }: CardNumber
           value={number}
           placeholder={numberPlaceHolder(format[index])}
           maxLength={format[index]}
-          isError={inputErrors[index] !== undefined}
+          isError={visibleInputErrors[index] !== undefined}
           onChange={(e) => handleChangeNumbers(e.currentTarget.value, index)}
           onBlur={() => handleBlur(index)}
         />
