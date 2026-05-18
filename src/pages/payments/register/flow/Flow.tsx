@@ -2,13 +2,14 @@ import { useState } from 'react';
 
 import { Outlet, useNavigate } from 'react-router';
 
+import { useExecute } from '@/services/core/useExecute';
+
 import { ROUTES } from '@/constants/routes';
 
 import { postCards } from '@/services/apis/cards/cards';
 import { mapCardModelToRequestDTO } from '@/services/apis/cards/mapper';
 
 import { useRegisterCardForm } from '../form/hooks/useRegisterCardForm';
-
 import { getBrandCard } from '../form/utils';
 
 import { ERROR_CODE } from './constants';
@@ -21,9 +22,8 @@ export const Flow = () => {
   const navigate = useNavigate();
 
   const [serverError, setServerError] = useState<keyof typeof ERROR_CODE | null>(null);
-
-  const handleSubmit = async () => {
-    try {
+  const { mutate } = useExecute({
+    executeFn: async () => {
       const data = mapCardModelToRequestDTO({
         card: card.values.card,
         cardNumbers: cardNumbers.values,
@@ -32,13 +32,20 @@ export const Flow = () => {
       });
 
       await postCards(data);
+    },
+    onSuccess: () => {
       navigate(ROUTES.PAYMENTS.CARDS);
-    } catch (error) {
+    },
+    onError: (error: unknown) => {
       if (typeof error === 'object' && error !== null && 'code' in error) {
         const errorCode = error.code as keyof typeof ERROR_CODE;
         setServerError(errorCode);
       }
-    }
+    },
+  });
+
+  const handleSubmit = async () => {
+    mutate();
   };
 
   return (
