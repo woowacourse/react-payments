@@ -6,6 +6,15 @@ import type { PostCardRequestBody } from "../feature/CardRegisterPage/types/card
 
 const cards: CardItemInformationType[] = [];
 
+export const resetMockCards = () => {
+  cards.splice(0, cards.length);
+};
+
+export const seedMockCards = (...mockCards: CardItemInformationType[]) => {
+  resetMockCards();
+  cards.push(...mockCards);
+};
+
 const getCardListHandler = http.get(`${BASE_URL}/cards`, () => {
   const maskedCards = cards.map((card) => {
     return {
