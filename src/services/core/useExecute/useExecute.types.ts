@@ -21,7 +21,7 @@ type SuccessStatus<T> = {
 type ErrorStatus = {
   status: 'error';
   data: null;
-  error: true;
+  error: unknown;
 };
 
 type LoadingStatus = {

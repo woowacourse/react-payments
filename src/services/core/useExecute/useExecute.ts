@@ -29,7 +29,7 @@ export const useExecute = <T = unknown>({ executeFn, onSuccess, onError }: Optio
         setStatus({
           status: 'error',
           data: null,
-          error: true,
+          error,
         });
         onError?.(error);
       }
