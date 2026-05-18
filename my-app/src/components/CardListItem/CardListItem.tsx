@@ -5,9 +5,10 @@ type Props = {
   issuerCode: string;
   number: string;
   expirationDate: string;
+  onDelete?: () => void;
 };
 
-const CardListItem = ({ issuerCode, number, expirationDate }: Props) => {
+const CardListItem = ({ issuerCode, number, expirationDate, onDelete }: Props) => {
   const color = getCardColor(issuerCode);
   const maskCardNumber = (number: string) => {
     const parts = number.split(" ");
@@ -76,6 +77,7 @@ const CardListItem = ({ issuerCode, number, expirationDate }: Props) => {
         </span>
       </div>
       <button
+        onClick={onDelete}
         css={css`
           width: 30px;
           height: 27px;

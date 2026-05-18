@@ -30,6 +30,11 @@ const CardList = () => {
       .catch(() => setStatus("error"));
   }, []);
 
+  const handleDelete = async (id: string) => {
+    await fetch(`/cards/${id}`, { method: "DELETE" });
+    setCards((prev) => prev.filter((card) => card.id !== id));
+  };
+
   return (
     <div
       css={css`
@@ -126,6 +131,7 @@ const CardList = () => {
                   issuerCode={card.issuerCode}
                   number={card.number}
                   expirationDate={card.expirationDate}
+                  onDelete={() => handleDelete(card.id)}
                 />
               </li>
             ))}
