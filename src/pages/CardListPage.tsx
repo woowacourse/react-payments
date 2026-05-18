@@ -19,7 +19,7 @@ const CardListPage = () => {
 
   useEffect(() => {
     fetchCards();
-  }, []);
+  }, [fetchCards]);
 
   return (
     <PageLayout>
@@ -27,6 +27,9 @@ const CardListPage = () => {
         <PageTitle>보유 카드</PageTitle>
         {status === "loading" && <CardListLoading />}
         {status === "success" && cards.length === 0 && (
+          <CardListEmpty onAddCard={handleAddCard} />
+        )}
+        {status === "success" && cards.length !== 0 && (
           <CardListEmpty onAddCard={handleAddCard} />
         )}
         {status === "error" && <CardListError onRetry={fetchCards} />}
