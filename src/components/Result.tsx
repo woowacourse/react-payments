@@ -30,7 +30,7 @@ export default function Result(props: ResultProps) {
     <Container direction="column" alignItems="center" justifyContent="center" gap={25}>
       <Image alt={`${props.type} icon`} src={`${import.meta.env.BASE_URL}${props.type}.svg`} />
       <Flex direction="column">
-        <Text size="xl" weight="bold" align="center">
+        <Text size="2xl" weight="bold" align="center">
           {props.message}
         </Text>
         <Text size="s" color="description" align="center">

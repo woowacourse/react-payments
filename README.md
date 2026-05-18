@@ -45,7 +45,7 @@
 
 ### 카드 목록 (`/cards`)
 
-- [ ] 페이지 진입 시 `GET /cards`로 등록된 카드 목록을 조회한다.
+- [x] 페이지 진입 시 `GET /cards`로 등록된 카드 목록을 조회한다.
   - 비동기 상태(`idle | loading | success | error`)에 맞는 UI를 표시한다.
   - loading: 스피너 또는 스켈레톤
   - success + 목록이 비어 있음: "등록된 카드가 없습니다" 안내
