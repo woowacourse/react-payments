@@ -30,6 +30,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  margin-top: 110px;
   gap: 15px;
 
   width: 100%;
