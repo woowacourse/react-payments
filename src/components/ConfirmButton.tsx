@@ -3,15 +3,25 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 type ConfirmButtonProps<TState = unknown> =
-    | { purpose: 'confirm'; to: string; state?: TState; onClick?: never }
-    | { purpose: 'submit'; to?: never; state?: never; onClick: () => void | Promise<void> };
+    | { purpose: 'confirm'; to: string; state?: TState; onClick?: never; children?: React.ReactNode }
+    | { purpose: 'submit'; to?: never; state?: never; onClick: () => void | Promise<void>; children?: React.ReactNode };
 
-export default function ConfirmButton<TState = unknown>({ purpose, to, state, onClick }: ConfirmButtonProps<TState>) {
+export default function ConfirmButton<TState = unknown>({
+    purpose,
+    to,
+    state,
+    onClick,
+    children,
+}: ConfirmButtonProps<TState>) {
     if (purpose === 'submit') {
-        return <SubmitButton onClick={onClick}>확인</SubmitButton>;
+        return <SubmitButton onClick={onClick}>{children ?? '확인'}</SubmitButton>;
     }
 
-    return <ConfirmLink to={to} state={state}>확인</ConfirmLink>;
+    return (
+        <ConfirmLink to={to} state={state}>
+            {children ?? '확인'}
+        </ConfirmLink>
+    );
 }
 
 const sharedStyles = css`

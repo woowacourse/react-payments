@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import ConfirmButton from '../ConfirmButton';
 
 export default function CardListEmpty() {
     return (
@@ -7,8 +7,10 @@ export default function CardListEmpty() {
             <EmptyCard />
             <EmptyCardContent>등록된 카드가 없습니다</EmptyCardContent>
             <EmptyCardDescription>아래 버튼을 눌러 첫 카드를 등록해보세요</EmptyCardDescription>
-            {/* 버튼 추상화해서 재사용하기 */}
-            <Link to="/">카드 추가하기</Link>
+            {/* TODO 버튼 더 잘 추상화해서 재사용하기 */}
+            <ConfirmButton purpose="confirm" to="/add-card">
+                카드 추가하기
+            </ConfirmButton>
         </CardListEmptyContainer>
     );
 }
