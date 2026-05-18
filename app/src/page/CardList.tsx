@@ -11,28 +11,28 @@ import styled from '@emotion/styled';
 export function CardList() {
   const [cardListState, setCardListState] = useState<AsyncState<Card[]>>({ status: 'idle' });
 
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        setCardListState({ status: 'loading' });
-        const responseData = await getCards();
-        setCardListState({ status: 'success', responseData: responseData });
-      } catch (err) {
-        if (err instanceof Error) {
-          setCardListState({ status: 'error', message: err.message });
-        }
+  const fetchCards = async () => {
+    try {
+      setCardListState({ status: 'loading' });
+      const responseData = await getCards();
+      setCardListState({ status: 'success', responseData: responseData });
+    } catch (err) {
+      if (err instanceof Error) {
+        setCardListState({ status: 'error', message: err.message });
       }
-    };
+    }
+  };
 
+  useEffect(() => {
     fetchCards();
   }, []);
 
   const renderContent = () => {
-    // if (cardListState.status === 'idle' || cardListState.status === 'loading')
-    //   return <CardListSkeleton />;
-    // if (cardListState.status === 'error') return <CardListError />;
-    // if (cardListState.responseData.length === 0) return <CardListEmpty />;
-    return <CardListEmpty />;
+    if (cardListState.status === 'idle' || cardListState.status === 'loading')
+      return <CardListSkeleton />;
+    if (cardListState.status === 'error') return <CardListError onRetry={fetchCards} />;
+    if (cardListState.responseData.length === 0) return <CardListEmpty />;
+    return <CardItem />;
   };
 
   return (
