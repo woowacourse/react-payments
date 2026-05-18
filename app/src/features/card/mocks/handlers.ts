@@ -5,9 +5,7 @@ import db from "./db";
 export const handlers = [
   http.get("https://api.antolibank.com/cards", () => {
     const cards = db.card.getAll();
-    return HttpResponse.json({
-      ...cards,
-    });
+    return HttpResponse.json(cards);
   }),
 
   http.delete("https://api.antolibank.com/cards/:id", ({ params }) => {
