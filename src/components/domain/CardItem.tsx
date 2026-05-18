@@ -4,21 +4,24 @@ import { deleteCard } from '../../apis/cards/api.ts';
 import { useState } from 'react';
 import type { ResponseStatus } from '../../types.ts';
 
-type CardItemProps = Omit<CardDto, 'cvc'>;
+interface CardItemProps extends Omit<CardDto, 'cvc'> {
+  onDelete: (cardId: string) => void;
+}
 
-export default function CardItem({ id, cardCompany, cardNumbers, expirationPeriod }: CardItemProps) {
+export default function CardItem({ id, cardCompany, cardNumbers, expirationPeriod, onDelete }: CardItemProps) {
   const [responseStatus, setResponseStatus] = useState<ResponseStatus>('idle');
   const isLoading = responseStatus === 'loading';
 
-  const handleClick = async () => {
+  const handleDeleteClick = async () => {
     const isConfirmed = window.confirm('정말로 카드를 삭제하시겠어요?');
     if (!isConfirmed) return;
 
     try {
       setResponseStatus('loading');
       await deleteCard(id);
+      onDelete(id);
       setResponseStatus('success');
-    } catch (error) {
+    } catch {
       alert('카드를 삭제하는 중 문제가 발생했습니다.\n잠시 후 다시 시도해 주세요.');
       setResponseStatus('error');
     }
@@ -34,7 +37,7 @@ export default function CardItem({ id, cardCompany, cardNumbers, expirationPerio
           유효기간 {expirationPeriod[0]}/{expirationPeriod[1]}
         </span>
       </div>
-      <button css={[deleteButtonStyle, isLoading ? loadingStyle : null]} onClick={handleClick}>
+      <button css={[deleteButtonStyle, isLoading ? loadingStyle : null]} onClick={handleDeleteClick}>
         x
       </button>
     </div>

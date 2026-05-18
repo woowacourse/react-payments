@@ -38,6 +38,10 @@ export default function CardListSection() {
     fetchData();
   }, []);
 
+  const handleDelete = (cardId: string) => {
+    setCards((prev) => prev.filter((card) => card.id !== cardId));
+  };
+
   return (
     <div css={layout}>
       <h1 css={headerTypography}>보유 카드 {cardCount > 0 ? ` (${cardCount})` : ''}</h1>
@@ -62,7 +66,7 @@ export default function CardListSection() {
         )}
         {isSuccess && !isEmpty && (
           <div css={successWrapperStyle}>
-            <CardList cards={cards} />
+            <CardList cards={cards} onDelete={handleDelete} />
             <AddCardButton variant="dashed" size="sm">
               + 카드 추가
             </AddCardButton>
