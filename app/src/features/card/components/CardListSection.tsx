@@ -1,26 +1,16 @@
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router";
 import EmptyCardList from "./list/EmptyCardList";
 import CardListPanel from "./list/CardListPanel";
 
 export default function CardListSection({ cards }) {
-  const navigate = useNavigate();
-
-  const gotoCardCreatePage = () => {
-    navigate("/card/create/");
-  };
-
   return (
     <CardListSectionContainer>
       <h1>보유 카드 {cards.length ? `(${cards.length})` : ""}</h1>
       <Content>
         {cards.length ? (
-          <CardListPanel
-            cards={cards}
-            gotoCardCreatePage={gotoCardCreatePage}
-          />
+          <CardListPanel cards={cards} />
         ) : (
-          <EmptyCardList onClick={gotoCardCreatePage} />
+          <EmptyCardList />
         )}
       </Content>
     </CardListSectionContainer>
