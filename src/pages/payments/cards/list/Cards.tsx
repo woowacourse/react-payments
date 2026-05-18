@@ -10,10 +10,6 @@ import { Button } from '@/core/components/button';
 
 import { ROUTES } from '@/constants/routes';
 
-import { useExecute } from '@/services/core/useExecute';
-
-import { deleteCards } from '@/services/apis/cards/cards';
-
 import { useCards } from './hooks/useCards';
 
 import { ISSUER_CODE } from './constants';
@@ -41,27 +37,20 @@ const formatCardNumberForMasking = (maskedNumber: string, mask: string = '*'): s
 export const Cards = () => {
   const {
     status: { status, data: cards },
-    refetch,
+    deleteCard,
   } = useCards();
-
-  const navigate = useNavigate();
-
-  const handleGoToRegiterCard = () => {
-    navigate(ROUTES.PAYMENTS.REGISTER);
-  };
-
-  const { mutate } = useExecute({
-    executeFn: deleteCards,
-    onSuccess: () => {
-      refetch();
-    },
-  });
 
   const handleDeleteClick = async (id: string) => {
     const confirm = window.confirm('정말 삭제하시겠습니까?');
     if (!confirm) return;
 
-    mutate({ id });
+    deleteCard({ id });
+  };
+
+  const navigate = useNavigate();
+
+  const handleGoToRegiterCard = () => {
+    navigate(ROUTES.PAYMENTS.REGISTER);
   };
 
   if (status === 'loading')
