@@ -1,4 +1,4 @@
-import type { Card, SendingData } from "./HttpCardRepository";
+import type { Card, SendingData } from "../types/card";
 
 export interface CardRepositoryShell {
   getCards(): Promise<Card[]>;

@@ -1,18 +1,5 @@
+import type { Card, SendingData } from '../types/card';
 import type { CardRepositoryShell } from './CardRepositoryShell';
-
-export interface SendingData {
-  number: string;
-  expirationDate: string;
-  cvc: string;
-  issuerCode: string;
-}
-
-export interface Card {
-  id: string;
-  issuerCode: string;
-  number: string;
-  expirationDate: string;
-}
 
 export class HttpCardRepository implements CardRepositoryShell {
   private API_BASE = import.meta.env.BASE_URL;

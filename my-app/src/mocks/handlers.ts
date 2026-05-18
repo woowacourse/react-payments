@@ -4,15 +4,9 @@ import {
   isCvcCorrect,
   isExpirationDateCorrect,
 } from '../utils/Validation';
+import type { Card } from '../types/card';
 
 const API_BASE = import.meta.env.BASE_URL;
-
-interface Card {
-  id: string;
-  issuerCode: string;
-  number: string;
-  expirationDate: string;
-}
 
 const STORAGE_KEY = 'mock-cards-DB';
 

@@ -1,4 +1,3 @@
-import type { Card } from '../../../pages/CardListPage/useCardList';
 import {
   formatMaskingNumber,
   getIssuerCodeInfo,
@@ -17,6 +16,7 @@ import {
   ExpirationDate,
   Title,
 } from './CardListSuccess.styles';
+import type { Card } from '../../../types/card';
 
 interface Props {
   cards: Card[];

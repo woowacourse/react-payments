@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useAsync } from '../../components/common/commonHooks/useAsync';
 import { useNavigate } from 'react-router-dom';
-import { deleteCard, getCards, type Card } from '../../api/cardApi';
+import { cardRepository } from '../../repository/RepositoryChanger';
+import type { Card } from '../../types/card';
 
 export const useCardList = () => {
   const navigate = useNavigate();
   const { run, status, data } = useAsync<Card[]>();
 
   const fetchCards = async () => {
-    await run(getCards);
+    await run(() => cardRepository.getCards());
   };
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export const useCardList = () => {
     }
 
     try {
-      await deleteCard(id);
+      await cardRepository.deleteCard(id);
       alert('카드가 삭제되었습니다.');
       fetchCards();
     } catch (error) {
