@@ -52,9 +52,10 @@ DELETE /cards/:id 카드 삭제 204
 
 - [x] 카드 삭제 시 리스트 리렌더
 - [ ] post 후 해당 error field로 포커싱
-- [ ] CardCompanies 기반으로 CardCompany 타입 수정
-- [ ] issuer code vs company name 관련 결정 및 수정
+- [x] CardCompanies 기반으로 CardCompany 타입 수정
+- [x] issuer code vs company name 관련 결정 및 수정
     - card item
     - card add complete
+    - card company라는 이름을 쓰고 있었으므로 card company 유지 -> 서버 통신 시 dto 레이어에서 issuer code <-> card company 변환
 - [ ] RTL 테스트 추가
 - [ ] 서버 응답별 스토리 추가
