@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { useState } from 'react';
 
-import CardIssuer from '../components/CardIssuer';
+import CardIssuer from '../components/cardInfo/CardIssuer';
 import type { CardIssuerType } from '../types/cardStausTypes';
 
 const meta = {

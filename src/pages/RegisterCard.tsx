@@ -1,5 +1,5 @@
 import CardPreview from '../components/CardPreview';
-import CardInput from '../components/CardInput';
+import CardInput from '../components/userCard/CardInput';
 import { useRegisterCardForm } from '../hooks/useRegisterCardForm';
 
 export default function RegisterCard() {

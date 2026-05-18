@@ -8,6 +8,8 @@ type CardProps = {
 };
 
 export default function Card({ card }: CardProps) {
+  type CardIssuerServerCode = '31' | '41' | '15' | '61' | 'W1' | '71' | '21' | '11';
+
   const handleDelete = async (id: string) => {
     if (confirm('카드를 삭제하시겠습니까?')) {
       try {
@@ -18,6 +20,10 @@ export default function Card({ card }: CardProps) {
       }
     }
   };
+
+  const cardIssuerKey = card.issuerCode as CardIssuerServerCode;
+  const cardColorKey = CARD_ISSUER_CODE[cardIssuerKey];
+
   return (
     <div
       css={(theme) => ({
@@ -37,7 +43,7 @@ export default function Card({ card }: CardProps) {
           width: '64px',
           height: '40px',
           borderRadius: '4px',
-          backgroundColor: theme.colors[CARD_ISSUER_CODE[card.issuerCode]],
+          backgroundColor: theme.colors[cardColorKey],
         })}
       />
       <div
@@ -56,7 +62,7 @@ export default function Card({ card }: CardProps) {
             margin: 0,
           })}
         >
-          {CARD_ISSUER[card.issuerCode]}
+          {CARD_ISSUER[cardIssuerKey]}
         </p>
         <p
           css={(theme) => ({

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
-import CardPassword from '../components/CardPassword';
+import CardPassword from '../components/cardInfo/CardPassword';
 import { useCardPassword } from '../hooks/useCardPassword';
 
 const meta = {

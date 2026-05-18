@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
-import CardExpiryDate from '../components/CardExpiryDate';
+import CardExpiryDate from '../components/cardInfo/CardExpiryDate';
 import { useExpiryDate } from '../hooks/useExpiryDate';
 
 const meta = {

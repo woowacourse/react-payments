@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react';
-import type { CardIssuerType } from '../types/cardStausTypes';
+import type { CardIssuerType } from '../../types/cardStausTypes';
 
 type CardIssuerProps = {
   cardIssuer: CardIssuerType | '';
