@@ -26,17 +26,17 @@ export const isValidMonth = (month: unknown) => {
   return regex.test(month);
 };
 
-export const length = (value: unknown, length?: number) => {
+export const length = (value: unknown, { length }: { length?: number }) => {
   if (!isString(value)) return false;
   return value.length === length;
 };
 
-export const minLength = (value: unknown, minLength?: number) => {
+export const minLength = (value: unknown, { minLength }: { minLength?: number }) => {
   if (!isString(value)) return false;
   return value.length >= (minLength || 0);
 };
 
-export const maxLength = (value: unknown, maxLength?: number) => {
+export const maxLength = (value: unknown, { maxLength }: { maxLength?: number }) => {
   if (!isString(value)) return false;
   return value.length <= (maxLength || 0);
 };

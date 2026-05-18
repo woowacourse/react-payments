@@ -5,7 +5,7 @@ import { isRequired, isNumericString, isValidMonth, length, minLength, maxLength
 type RuleType = 'isRequired' | 'isNumericString' | 'isValidMonth' | 'length' | 'minLength' | 'maxLength';
 
 type Validators = {
-  [type in RuleType]: (value: unknown, payload?: number) => boolean;
+  [type in RuleType]: (value: unknown, options?: any) => boolean;
 };
 
 const validators: Validators = {
@@ -28,7 +28,7 @@ type CustomRule = {
 };
 
 export type Rule = (ValidatorRule | CustomRule) & {
-  [optionKey in RuleType]?: number;
+  options?: unknown;
 };
 
 export type FormValuesRules<TFormValues extends Record<string, unknown>> = {
@@ -43,7 +43,7 @@ const validateFormValueRules = <T>(value: T, rules: Rule[]) => {
   return rules.map((rule) => {
     if (rule.type === 'custom') return { ...rule, valid: rule.validate(value) };
     const validator = validators[rule.type as RuleType];
-    return { ...rule, valid: validator(value, rule[rule.type]) };
+    return { ...rule, valid: validator(value, rule.options || {}) };
   });
 };
 
