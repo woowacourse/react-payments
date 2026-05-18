@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardPreview from '../components/CardPreview';
 import CardInput from '../components/CardInput';
 import { useCardForm } from '../hooks/useCardForm';
+import { useRegisterCard } from '../hooks/useRegisterCard';
 import type { CardCompany } from '../types/cardStatusTypes';
 
 export type RegisteredCard = {
@@ -12,17 +14,27 @@ export type RegisteredCard = {
 export default function RegisterCard() {
   const navigate = useNavigate();
   const { form, handlers, completion } = useCardForm();
+  const { state, register } = useRegisterCard();
+
+  const apiError = state.status === 'error' ? state.error : null;
+
   const handleComplete = () => {
-    if (form.cardCompanyStatus.cardCompany === '') {
-      return;
-    }
-    navigate('/complete', {
-      state: {
-        cardNumberPrefix: form.cardNumber.cardNumbers[0],
-        cardCompany: form.cardCompanyStatus.cardCompany,
-      } satisfies RegisteredCard,
+    if (form.cardCompanyStatus.cardCompany === '') return;
+
+    register({
+      cardNumbers: form.cardNumber.cardNumbers,
+      expiryDate: form.cardExpiry.cardExpiryDate,
+      cvc: form.cardCvc.cardCvc,
+      cardCompany: form.cardCompanyStatus.cardCompany,
+      password: form.cardPassword.cardPassword,
     });
   };
+
+  useEffect(() => {
+    if (state.status === 'success') {
+      navigate('/cards');
+    }
+  }, [state.status, navigate]);
 
   return (
     <div
@@ -69,12 +81,14 @@ export default function RegisterCard() {
           handlers={handlers}
           completion={completion}
           hasBottomAction={completion.isComplete}
+          apiError={apiError}
         />
       </div>
       {completion.isComplete && (
         <button
           type="button"
           onClick={handleComplete}
+          disabled={state.status === 'loading'}
           css={(theme) => ({
             width: '376px',
             height: '48px',
@@ -85,11 +99,12 @@ export default function RegisterCard() {
             transform: 'translateX(-50%)',
             backgroundColor: theme.colors.cardBackground,
             color: theme.colors.white,
-            cursor: 'pointer',
+            cursor: state.status === 'loading' ? 'not-allowed' : 'pointer',
+            opacity: state.status === 'loading' ? 0.6 : 1,
             zIndex: 1,
           })}
         >
-          확인
+          {state.status === 'loading' ? '등록 중...' : '확인'}
         </button>
       )}
     </div>

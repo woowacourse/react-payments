@@ -14,8 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<RegisterCard />} />
           <Route path="/complete" element={<RegisterComplete />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/cards" element={<CardList />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

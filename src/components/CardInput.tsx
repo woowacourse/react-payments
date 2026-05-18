@@ -4,6 +4,7 @@ import CardExpiryDate from './CardExpiryDate';
 import CardCompany from './CardCompany';
 import CardPassword from './CardPassword';
 import type { CardFormState, CardFormHandlers } from '../hooks/useCardForm';
+import type { ApiError } from '../types/api';
 
 type CardCompletion = {
   isCardNumberComplete: boolean;
@@ -18,9 +19,19 @@ type CardInputProps = {
   handlers: CardFormHandlers;
   completion: CardCompletion;
   hasBottomAction?: boolean;
+  apiError?: ApiError | null;
 };
 
-export default function CardInput({ form, handlers, completion, hasBottomAction = false }: CardInputProps) {
+function ApiErrorMessage({ apiError, code }: { apiError?: ApiError | null; code: ApiError['code'] }) {
+  if (!apiError || apiError.code !== code) return null;
+  return (
+    <p css={(theme) => ({ ...theme.typography.caption, color: theme.colors.error, margin: 0 })}>
+      {apiError.message}
+    </p>
+  );
+}
+
+export default function CardInput({ form, handlers, completion, hasBottomAction = false, apiError }: CardInputProps) {
   const { cardNumber, cardExpiry, cardCvc, cardPassword, cardCompanyStatus } = form;
   const { cardNumberHandler, expiryHandler, cvcHandler, cardPasswordHandler, cardCompanyHandler } =
     handlers;
@@ -37,10 +48,16 @@ export default function CardInput({ form, handlers, completion, hasBottomAction 
       }}
     >
       {isCardNumberComplete && isCardCompanySelected && isExpiryDateComplete && isCvcComplete && (
-        <CardPassword cardPassword={cardPassword} setCardPassword={cardPasswordHandler} />
+        <>
+          <CardPassword cardPassword={cardPassword} setCardPassword={cardPasswordHandler} />
+          <ApiErrorMessage apiError={apiError} code="password" />
+        </>
       )}
       {isCardNumberComplete && isCardCompanySelected && isExpiryDateComplete && (
-        <CardCvc cardCvc={cardCvc} setCardCvc={cvcHandler} />
+        <>
+          <CardCvc cardCvc={cardCvc} setCardCvc={cvcHandler} />
+          <ApiErrorMessage apiError={apiError} code="cvc" />
+        </>
       )}
       {isCardNumberComplete && isCardCompanySelected && (
         <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={expiryHandler} />
@@ -49,6 +66,7 @@ export default function CardInput({ form, handlers, completion, hasBottomAction 
         <CardCompany cardCompanyStatus={cardCompanyStatus} setCardCompany={cardCompanyHandler} />
       )}
       <CardNumber cardNumber={cardNumber} setCardNumber={cardNumberHandler} />
+      <ApiErrorMessage apiError={apiError} code="cardNumbers" />
     </form>
   );
 }
