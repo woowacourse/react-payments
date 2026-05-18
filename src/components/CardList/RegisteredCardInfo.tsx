@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
-import { CARD_COLORS } from "../../constants/cardConstants";
+import {
+  ISSUER_CODE_TO_LABEL,
+  ISSUER_CODE_TO_COLOR,
+} from "../../constants/cardConstants";
 import type { Card } from "../../pages/CardListPage";
 import DeleteCardButton from "./DeleteCardButton";
 
@@ -11,15 +14,13 @@ interface Props {
 export default function RegisteredCardInfo({ card, onDelete }: Props) {
   return (
     <Container>
-      <CardFirmColorBox $color={CARD_COLORS[card.cardFrimLabel] ?? "#e0e0e0"} />
+      <CardFirmColorBox
+        $color={ISSUER_CODE_TO_COLOR[card.issuerCode] ?? "#e0e0e0"}
+      />
       <CardInfoContainer>
-        <CardFirm>{card.cardFrimLabel}</CardFirm>
-        <CardNumberPreview>
-          {card.first} **** **** {card.fourth}
-        </CardNumberPreview>
-        <CardExpPreview>
-          {card.expMm} / {card.expYy}
-        </CardExpPreview>
+        <CardFirm>{ISSUER_CODE_TO_LABEL[card.issuerCode]}</CardFirm>
+        <CardNumberPreview>{card.number}</CardNumberPreview>
+        <CardExpPreview>{card.expirationDate}</CardExpPreview>
       </CardInfoContainer>
       <DeleteCardButton id={card.id} onDelete={onDelete} />
     </Container>

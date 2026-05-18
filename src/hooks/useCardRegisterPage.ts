@@ -36,6 +36,11 @@ export default function useCardRegisterPage() {
     getCvcNumberErrorMessage(cvcNumbers) === null &&
     getPasswordErrorMessage(passwordNumbers) === null;
 
+  const [serverError, setServerError] = useState<{
+    code: string;
+    message: string;
+  } | null>(null);
+
   const navigate = useNavigate();
 
   // 각 인풋 상태값 업데이트
@@ -59,7 +64,7 @@ export default function useCardRegisterPage() {
 
   //완료 페이지 이동
   const handleComplete = async () => {
-    await fetch("/cards", {
+    const res = await fetch("/cards", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -69,6 +74,12 @@ export default function useCardRegisterPage() {
         issuerCode: cardFirm.value,
       }),
     });
+    if (!res.ok) {
+      const error = await res.json();
+      setServerError(error);
+      return;
+    }
+    setServerError(null);
     navigate("/cards");
   };
 
@@ -92,5 +103,6 @@ export default function useCardRegisterPage() {
     onExpNumberComplete,
     onCvcNumberComplete,
     handleComplete,
+    serverError,
   };
 }

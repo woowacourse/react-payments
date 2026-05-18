@@ -30,6 +30,7 @@ export default function CardRegisterPage() {
     onExpNumberComplete,
     onCvcNumberComplete,
     handleComplete,
+    serverError,
   } = useCardRegisterPage();
 
   return (
@@ -61,6 +62,9 @@ export default function CardRegisterPage() {
               onChange={onCvcNumberChange}
               value={cvcNumbers}
               onComplete={onCvcNumberComplete}
+              serverErrorMessage={
+                serverError?.code === "INVALID_CVC" ? serverError.message : null
+              }
             />
           </CardInfoSection>
         )}
@@ -75,6 +79,11 @@ export default function CardRegisterPage() {
               onChange={onExpNumberChange}
               value={expNumbers}
               onComplete={onExpNumberComplete}
+              serverErrorMessage={
+                serverError?.code === "INVALID_EXPIRATION_DATE"
+                  ? serverError.message
+                  : null
+              }
             />
           </CardInfoSection>
         )}
@@ -98,6 +107,11 @@ export default function CardRegisterPage() {
             value={cardNumbers}
             onComplete={onCardNumberComplete}
             cardBrand={cardBrand}
+            serverErrorMessage={
+              serverError?.code === "INVALID_CARD_NUMBER"
+                ? serverError.message
+                : null
+            }
           />
         </CardInfoSection>
       </InputSectionContainer>

@@ -10,9 +10,15 @@ interface Props {
   onChange: (value: ExpNumber) => void;
   value: ExpNumber;
   onComplete: (isCompleted: boolean) => void;
+  serverErrorMessage: string | null;
 }
 
-export default function ExpNumberField({ onChange, value, onComplete }: Props) {
+export default function ExpNumberField({
+  onChange,
+  value,
+  onComplete,
+  serverErrorMessage,
+}: Props) {
   const { inputErrors, setError, errorMessage } = useFieldErrors(["mm", "yy"]);
 
   const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
@@ -42,7 +48,7 @@ export default function ExpNumberField({ onChange, value, onComplete }: Props) {
     };
 
   return (
-    <InputGroup errorMessage={errorMessage}>
+    <InputGroup errorMessage={errorMessage || serverErrorMessage}>
       {Object.entries(value).map(([expKey, expValue]) => (
         <NumberInput
           key={`${expKey}-input`}

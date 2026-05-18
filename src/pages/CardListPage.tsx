@@ -7,11 +7,9 @@ import styled from "@emotion/styled";
 
 export type Card = {
   id: string;
-  first: string;
-  fourth: string;
-  cardFrimLabel: string;
-  expMm: string;
-  expYy: string;
+  issuerCode: string;
+  number: string;
+  expirationDate: string;
 };
 
 type AsyncState<T> =

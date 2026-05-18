@@ -17,6 +17,7 @@ interface Props {
   cardBrand: CardBrand;
   onChange: (value: CardNumbers) => void;
   onComplete: (isCompleted: boolean) => void;
+  serverErrorMessage: string | null;
 }
 
 export default function CardNumberField({
@@ -24,6 +25,7 @@ export default function CardNumberField({
   value,
   onComplete,
   cardBrand,
+  serverErrorMessage,
 }: Props) {
   const { inputErrors, setError, errorMessage } = useFieldErrors([
     "first",
@@ -65,7 +67,7 @@ export default function CardNumberField({
     };
 
   return (
-    <InputGroup errorMessage={errorMessage}>
+    <InputGroup errorMessage={errorMessage || serverErrorMessage}>
       {Object.entries(value).map(([cardKey, cardValue]) => (
         <NumberInput
           key={`${cardKey}-input`}
