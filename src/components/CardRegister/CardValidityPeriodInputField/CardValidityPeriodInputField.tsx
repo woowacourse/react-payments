@@ -20,6 +20,7 @@ interface CardValidityPeriodInputFieldProps {
   validityPeriod: ValidityPeriod;
   onChange: (validityPeriod: ValidityPeriod) => void;
   onNextStep: (currentStepKey: CardRegisterFormStepKey) => void;
+  serverErrorMessage?: string;
 }
 
 type InputsStatuses = {
@@ -35,6 +36,7 @@ const CardValidityPeriodInputField = ({
   validityPeriod,
   onChange,
   onNextStep,
+  serverErrorMessage,
 }: CardValidityPeriodInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
   const { registerInput, focusNextInput } = useInputFocus();
@@ -119,9 +121,10 @@ const CardValidityPeriodInputField = ({
       caption="월/년도(MMYY)를 순서대로 입력해 주세요."
       label="유효기간"
       helperMessage={
-        status.month !== "DEFAULT"
+        serverErrorMessage ??
+        (status.month !== "DEFAULT"
           ? HELPER_MESSAGE[status.month]
-          : HELPER_MESSAGE[status.year]
+          : HELPER_MESSAGE[status.year])
       }
     >
       <Input
@@ -134,7 +137,11 @@ const CardValidityPeriodInputField = ({
         value={validityPeriod.month}
         onChange={(e) => handleMonthChange(e.target.value)}
         onBlur={(e) => handleValidityPeriodBlur("month", e.target.value)}
-        state={status.month === "DEFAULT" ? "default" : "error"}
+        state={
+          serverErrorMessage || status.month !== "DEFAULT"
+            ? "error"
+            : "default"
+        }
       />
       <Input
         ref={registerInput(1)}
@@ -145,7 +152,9 @@ const CardValidityPeriodInputField = ({
         value={validityPeriod.year}
         onChange={(e) => handleYearChange(e.target.value)}
         onBlur={(e) => handleValidityPeriodBlur("year", e.target.value)}
-        state={status.year === "DEFAULT" ? "default" : "error"}
+        state={
+          serverErrorMessage || status.year !== "DEFAULT" ? "error" : "default"
+        }
       />
     </FormField>
   );

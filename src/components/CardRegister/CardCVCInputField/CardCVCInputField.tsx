@@ -9,12 +9,14 @@ interface CardCVCInputFieldProps {
   CVC: string;
   onChange: (CVC: string) => void;
   onNextStep: (currentStepKey: CardRegisterFormStepKey) => void;
+  serverErrorMessage?: string;
 }
 
 const CardCVCInputField = ({
   CVC,
   onChange,
   onNextStep,
+  serverErrorMessage,
 }: CardCVCInputFieldProps) => {
   const [status, setStatus] = useState<InputStatus>("DEFAULT");
 
@@ -47,7 +49,7 @@ const CardCVCInputField = ({
     <FormField
       title="CVC 번호를 입력해 주세요"
       label="CVC"
-      helperMessage={HELPER_MESSAGE[status]}
+      helperMessage={serverErrorMessage ?? HELPER_MESSAGE[status]}
     >
       <Input
         autoFocus
@@ -64,7 +66,7 @@ const CardCVCInputField = ({
           const input = e.target.value;
           handleCVCBlur(input);
         }}
-        state={status === "DEFAULT" ? "default" : "error"}
+        state={serverErrorMessage || status !== "DEFAULT" ? "error" : "default"}
       />
     </FormField>
   );

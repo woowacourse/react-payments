@@ -23,6 +23,7 @@ interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
   onChange: (input: CardNumberUnits) => void;
   onNextStep: (currentStepKey: CardRegisterFormStepKey) => void;
+  serverErrorMessage?: string;
 }
 
 type InputsStatuses = InputStatus[];
@@ -38,6 +39,7 @@ const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
   onNextStep,
+  serverErrorMessage,
 }: CardNumberInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
   const { registerInput, focusNextInput } = useInputFocus();
@@ -115,6 +117,7 @@ const CardNumberInputField = ({
       caption="본인 명의의 카드만 결제 가능합니다."
       label="카드 번호"
       helperMessage={
+        serverErrorMessage ??
         HELPER_MESSAGE[
           status.find((inputStatus) => inputStatus !== "DEFAULT") ?? "DEFAULT"
         ]
@@ -138,7 +141,11 @@ const CardNumberInputField = ({
             const input = e.target.value;
             handleCardNumberBlur(index, input);
           }}
-          state={status[index] === "DEFAULT" ? "default" : "error"}
+          state={
+            serverErrorMessage || status[index] !== "DEFAULT"
+              ? "error"
+              : "default"
+          }
         />
       ))}
     </FormField>

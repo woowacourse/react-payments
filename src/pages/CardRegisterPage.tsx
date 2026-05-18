@@ -25,12 +25,22 @@ import { ApiError } from "@/api/error";
 const DEFAULT_CARD_NUMBER_UNITS: CardNumberUnits = ["", "", "", ""];
 const DEFAULT_VALIDITY_PERIOD: ValidityPeriod = { month: "", year: "" };
 
+type CardRegisterField = "cardNumber" | "cvc" | "validityPeriod";
+type ServerErrors = Partial<Record<CardRegisterField, string>>;
+
+const SERVER_ERROR_FIELD_BY_CODE = {
+  INVALID_CARD_NUMBER: "cardNumber",
+  INVALID_CVC: "cvc",
+  INVALID_EXPIRATION_DATE: "validityPeriod",
+} as const;
+
 const CardRegisterPage = () => {
   const [cardNumber, setCardNumber] = useState(DEFAULT_CARD_NUMBER_UNITS);
   const [cardCompany, setCardCompany] = useState<CardCompany | null>(null);
   const [validityPeriod, setValidityPeriod] = useState(DEFAULT_VALIDITY_PERIOD);
   const [CVC, setCVC] = useState("");
   const [password, setPassword] = useState("");
+  const [serverErrors, setServerErrors] = useState<ServerErrors>({});
 
   const { goToNextStep, isStepVisible } = useFormStep(
     CARD_REGISTER_FORM_STEP,
@@ -68,9 +78,14 @@ const CardRegisterPage = () => {
       });
     } catch (error) {
       if (error instanceof ApiError) {
-        const { code, message } = error;
-        console.log(code);
-        console.log(message);
+        const field =
+          SERVER_ERROR_FIELD_BY_CODE[
+            error.code as keyof typeof SERVER_ERROR_FIELD_BY_CODE
+          ];
+
+        if (field) {
+          setServerErrors({ [field]: error.message });
+        }
       }
     }
   };
@@ -95,15 +110,26 @@ const CardRegisterPage = () => {
           {isStepVisible("CVC") && (
             <CardCVCInputField
               CVC={CVC}
-              onChange={setCVC}
+              onChange={(nextCVC) => {
+                setCVC(nextCVC);
+                setServerErrors((prev) => ({ ...prev, cvc: undefined }));
+              }}
               onNextStep={goToNextStep}
+              serverErrorMessage={serverErrors.cvc}
             />
           )}
           {isStepVisible("VALIDITY_PERIOD") && (
             <CardValidityPeriodInputField
               validityPeriod={validityPeriod}
-              onChange={setValidityPeriod}
+              onChange={(nextValidityPeriod) => {
+                setValidityPeriod(nextValidityPeriod);
+                setServerErrors((prev) => ({
+                  ...prev,
+                  validityPeriod: undefined,
+                }));
+              }}
               onNextStep={goToNextStep}
+              serverErrorMessage={serverErrors.validityPeriod}
             />
           )}
           {isStepVisible("COMPANY") && (
@@ -116,8 +142,15 @@ const CardRegisterPage = () => {
           {isStepVisible("CARD_NUMBER") && (
             <CardNumberInputField
               cardNumberUnits={cardNumber}
-              onChange={setCardNumber}
+              onChange={(nextCardNumber) => {
+                setCardNumber(nextCardNumber);
+                setServerErrors((prev) => ({
+                  ...prev,
+                  cardNumber: undefined,
+                }));
+              }}
               onNextStep={goToNextStep}
+              serverErrorMessage={serverErrors.cardNumber}
             />
           )}
 
