@@ -50,4 +50,10 @@ export const handlers = [
   http.get("/cards", () => {
     return HttpResponse.json(cardStore);
   }),
+
+  http.delete("/cards/:id", ({ params }) => {
+    const index = cardStore.findIndex((card) => card.id === params.id);
+    if (index !== -1) cardStore.splice(index, 1);
+    return new HttpResponse(null, { status: 204 });
+  }),
 ];
