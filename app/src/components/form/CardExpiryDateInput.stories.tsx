@@ -14,6 +14,7 @@ const meta = {
   tags: ["autodocs"],
   args: {
     expiryMonthRef: { current: null },
+    serverError: null,
     onCardExpiryDateComplete: () => {},
   },
 } satisfies Meta<typeof CardExpiryDateInput>;
@@ -43,7 +44,7 @@ const renderWithContext = () => {
         networkBrand: '',
       }}
     >
-      <CardExpiryDateInput expiryMonthRef={firstRef} onCardExpiryDateComplete={() => {}} />
+      <CardExpiryDateInput expiryMonthRef={firstRef} serverError={null} onCardExpiryDateComplete={() => {}} />
     </CardContext>
   );
 };
