@@ -67,24 +67,23 @@ export default function useQuery<T>(option: QueryOption) {
           signal: controller.signal,
         });
       })
-      .then((res) => {
+      .then(async (res) => {
+        const data = await parseJsonResponse<T>(res);
+
+        if (controller.signal.aborted) return;
+
+        setData(data);
+
         if (!res.ok) {
           throw new Error(`HTTP error: ${res.status}`);
         }
 
-        return parseJsonResponse<T>(res);
-      })
-      .then((data) => {
-        if (controller.signal.aborted) return;
-
-        setData(data);
         setStatus("success");
       })
       .catch((reason) => {
         if (controller.signal.aborted) return;
 
         setStatus("error");
-        setData(null);
         setError(reason instanceof Error ? reason : new Error(String(reason)));
       });
 
