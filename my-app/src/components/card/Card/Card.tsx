@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { ISSUERS, DEFAULT_CARD_COLOR, isIssuerCode } from "../../../constants/Issuers";
+import { ISSUERS, DEFAULT_CARD_COLOR, isIssuerCode } from "../../../constants/issuers";
 import type { CardDisplayInfo } from "../../../types";
 import type { CardNetwork } from "../../../utils/cardNetwork";
 

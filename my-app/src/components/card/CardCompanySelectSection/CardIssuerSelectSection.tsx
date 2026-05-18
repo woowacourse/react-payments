@@ -1,6 +1,6 @@
 import Select from "react-select";
 
-import { ISSUERS, type IssuerCode } from "../../../constants/Issuers.ts";
+import { ISSUERS, type IssuerCode } from "../../../constants/issuers.ts";
 import InputSectionLayout from "../../common/InputSectionLayout/InputSectionLayout.tsx";
 
 type CardIssuerSelectSectionProps = {
