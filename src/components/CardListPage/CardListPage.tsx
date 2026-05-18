@@ -32,8 +32,25 @@ export function CardListPage() {
     }
   };
 
+  if (state === 'idle') setState('loading');
+
   useEffect(() => {
-    loadCards();
+    let cancelled = false;
+
+    fetchCards()
+      .then((cards) => {
+        if (cancelled) return;
+        setSavedCard(cards);
+        setState('success');
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setState('error');
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   if (state === 'idle') return <></>;
