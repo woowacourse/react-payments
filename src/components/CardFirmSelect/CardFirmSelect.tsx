@@ -13,14 +13,14 @@ interface Props {
 }
 
 const CARD_OPTIONS = [
-  { value: "BC", label: "BC카드" },
-  { value: "신한", label: "신한카드" },
-  { value: "카뱅", label: "카카오뱅크" },
-  { value: "현대", label: "현대카드" },
-  { value: "우리", label: "우리카드" },
-  { value: "롯데", label: "롯데카드" },
-  { value: "하나", label: "하나카드" },
-  { value: "국민", label: "국민카드" },
+  { value: "31", label: "BC카드" },
+  { value: "41", label: "신한카드" },
+  { value: "15", label: "카카오뱅크" },
+  { value: "61", label: "현대카드" },
+  { value: "W1", label: "우리카드" },
+  { value: "71", label: "롯데카드" },
+  { value: "21", label: "하나카드" },
+  { value: "11", label: "국민카드" },
 ];
 
 export default function CardFirmSelect({ onChange }: Props) {

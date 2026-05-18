@@ -63,11 +63,10 @@ export default function useCardRegisterPage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        first: cardNumbers.first,
-        fourth: cardNumbers.fourth,
-        cardFrimLabel: cardFirm.label,
-        expMm: expNumbers.mm,
-        expYy: expNumbers.yy,
+        number: Object.values(cardNumbers).join(""),
+        expirationDate: Object.values(expNumbers).join("/"),
+        cvc: cvcNumbers,
+        issuerCode: cardFirm.value,
       }),
     });
     navigate("/cards");
