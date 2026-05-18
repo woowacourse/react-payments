@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import EmptyCardList from "./list/EmptyCardList";
 import CardListPanel from "./list/CardListPanel";
 import CardListSkeleton from "./list/CardListSkeleton";
+import CardListError from "./list/CardListError";
 
 export type CardListStatus = "pending" | "empty" | "success" | "error";
 
@@ -19,6 +20,7 @@ export default function CardListSection({
         {status === "pending" && <CardListSkeleton count={cards.length} />}
         {status === "empty" && <EmptyCardList />}
         {status === "success" && <CardListPanel cards={cards} />}
+        {status === "error" && <CardListError></CardListError>}
       </Content>
     </CardListSectionContainer>
   );

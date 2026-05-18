@@ -86,3 +86,10 @@ export const WithCards: Story = {
     ],
   },
 };
+
+export const Error: Story = {
+  args: {
+    status: "error",
+    cards: [],
+  },
+};
