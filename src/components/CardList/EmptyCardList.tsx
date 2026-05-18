@@ -34,6 +34,7 @@ const AddButton = styled.button`
   cursor: pointer;
   font-family: Noto Sans KR;
   font-style: Bold;
+  font-size: 15px;
   leading-trim: NONE;
   line-height: 100%;
   letter-spacing: 0%;
