@@ -15,11 +15,6 @@ export function useCardNumberInput() {
   const { inputConfig, cardType } = selectCardType(cardNumber);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const resetCardNumber = () => {
-    setCardNumber(initialState.cardNumber);
-    setCardNumberError(initialState.cardNumberError);
-  };
-
   const handleCardNumberChange = (index: number, value: string) => {
     const newError = [...cardNumberError];
     const maxLength = inputConfig[index].maxLength;
@@ -63,7 +58,6 @@ export function useCardNumberInput() {
     handleBlur,
     inputConfig,
     cardType,
-    resetCardNumber,
     inputRefs,
   };
 }

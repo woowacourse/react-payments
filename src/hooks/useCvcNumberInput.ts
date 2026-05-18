@@ -10,11 +10,6 @@ export function useCvcNumberInput() {
   const [cvc, setCvc] = useState(initialState.cvc);
   const [cvcError, setCvcError] = useState(initialState.cvcError);
 
-  const resetCvc = () => {
-    setCvc(initialState.cvc);
-    setCvcError(initialState.cvcError);
-  };
-
   const handleCvcChange = (value: string) => {
     const onlyNumbers = value.replace(/[^0-9]/g, "");
     const sliceValue = onlyNumbers.substring(0, 3);
@@ -35,5 +30,5 @@ export function useCvcNumberInput() {
     }
   };
 
-  return { cvc, cvcError, handleCvcChange, handleBlur, resetCvc };
+  return { cvc, cvcError, handleCvcChange, handleBlur };
 }

@@ -20,11 +20,6 @@ export function useCardBrand() {
   const [isOpen, setIsOpen] = useState(initialState.isOpen);
   const [selectedItem, setSelectedItem] = useState(initialState.selectedItem);
 
-  const resetCardBrand = () => {
-    setIsOpen(initialState.isOpen);
-    setSelectedItem(initialState.selectedItem);
-  };
-
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleItemClick = (option: { brand: string; color: string }) => {
@@ -38,6 +33,5 @@ export function useCardBrand() {
     options,
     toggleDropdown,
     handleItemClick,
-    resetCardBrand,
   };
 }
