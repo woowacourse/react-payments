@@ -1,0 +1,1 @@
+export { requestAjax } from './requestAjax';
