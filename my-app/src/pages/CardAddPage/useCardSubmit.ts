@@ -1,11 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useAsync } from '../../components/common/commonHooks/useAsync';
-import {
-  ISSUER_CODES,
-  type CardCompany,
-} from '../../components/cardCompanySection/CardCompanyConstants';
 import { postCard } from '../../api/cardApi';
 import type { FormState } from './useCardFormState';
+import { sendingDataFormatter } from '../../utils/SendingDataFormatter';
 
 export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
   const navigate = useNavigate();
@@ -15,13 +12,8 @@ export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
     e.preventDefault();
     if (!isFormValid) return;
 
-    // 서버에 보낼 데이터 정리
-    const sendingData = {
-      number: formState.cardNumber.join(''),
-      expirationDate: `${formState.expirationDate.month}/${formState.expirationDate.year}`,
-      cvc: formState.cvc,
-      issuerCode: ISSUER_CODES[formState.cardCompany as CardCompany],
-    };
+    // 서버에 보낼 데이터 포매팅
+    const sendingData = sendingDataFormatter(formState);
 
     try {
       const response = await run(() => postCard(sendingData));
