@@ -21,7 +21,7 @@ const CvcField = ({
         <CvcInput
           value={field.cvcNumber}
           autoFocus={autoFocus}
-          maxLength={3}
+          maxLength={4}
           inputMode="numeric"
           placeholder="123"
           strokeMode={field.hasError ? 'error' : 'default'}
