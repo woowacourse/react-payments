@@ -7,7 +7,11 @@ import App from "./App";
 
 async function enableMocking() {
   const { worker } = await import("./mocks/browser"); //Dynamic import하는 것이 눈에 띄였다.
-  return worker.start();
+  return worker.start({
+    serviceWorker: {
+      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+    },
+  });
 }
 enableMocking().then(() =>
   createRoot(document.getElementById("root")!).render(
