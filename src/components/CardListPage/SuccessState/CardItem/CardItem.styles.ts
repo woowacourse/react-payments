@@ -1,29 +1,5 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  gap: 16px;
-  width: 100%;
-  max-width: 376px;
-`;
-
-export const Title = styled.h2`
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0;
-`;
-
-export const List = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
 export const Row = styled.li`
   display: flex;
   align-items: center;
@@ -31,6 +7,7 @@ export const Row = styled.li`
   padding: 16px;
   background: rgba(247, 247, 247, 1);
   border-radius: 8px;
+  list-style: none;
 `;
 
 export const CardThumb = styled.div<{ color: string }>`
@@ -76,22 +53,5 @@ export const DeleteButton = styled.button`
 
   &:hover {
     color: rgba(80, 80, 80, 1);
-  }
-`;
-
-export const AddButton = styled.button`
-  width: 100%;
-  padding: 16px 0;
-  background: transparent;
-  color: rgba(80, 80, 80, 1);
-  border: 1.5px dashed rgba(200, 200, 200, 1);
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-
-  &:hover {
-    border-color: rgba(140, 140, 140, 1);
-    color: rgba(20, 20, 20, 1);
   }
 `;
