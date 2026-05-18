@@ -24,9 +24,27 @@ const CardForm = () => {
     passwordHandler,
   } = useCardForm();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isValid) return;
+
+    const res = await fetch("/cards", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        number: cardInfo.numbers.join(" "),
+        expirationDate: cardInfo.expiry.join("/"),
+        cvc: cardInfo.cvc,
+        issuerCode: cardInfo.company,
+      }),
+    });
+
+    if (!res.ok) {
+      const { message } = await res.json();
+      alert(message);
+      return;
+    }
+
     navigate("/complete", { state: { numbers: cardInfo.numbers[0], brand } });
   };
 
