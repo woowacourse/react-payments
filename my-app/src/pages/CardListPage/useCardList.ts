@@ -1,26 +1,14 @@
 import { useEffect } from 'react';
 import { useAsync } from '../../components/common/commonHooks/useAsync';
 import { useNavigate } from 'react-router-dom';
-
-export interface Card {
-  id: string;
-  issuerCode: string;
-  number: string;
-  expirationDate: string;
-}
+import { deleteCard, getCards, type Card } from '../../api/cardApi';
 
 export const useCardList = () => {
   const navigate = useNavigate();
   const { run, status, data } = useAsync<Card[]>();
 
   const fetchCards = async () => {
-    await run(async () => {
-      const response = await fetch(`${import.meta.env.BASE_URL}cards`);
-      if (!response.ok) {
-        throw new Error('카드 목록 불러오기 실패!');
-      }
-      return response.json();
-    });
+    await run(getCards);
   };
 
   useEffect(() => {
@@ -37,14 +25,7 @@ export const useCardList = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.BASE_URL}cards/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('카드 삭제에 실패했습니다.');
-      }
-
+      await deleteCard(id);
       alert('카드가 삭제되었습니다.');
       fetchCards();
     } catch (error) {
