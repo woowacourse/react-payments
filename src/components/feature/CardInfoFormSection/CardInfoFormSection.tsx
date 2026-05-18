@@ -1,6 +1,6 @@
 import StepFunnel from "@components/common/StepFunnel";
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router";
+import useNavigateCompletePage from "@hooks/feature/navigation/useNavigateCompletePage";
 
 import CardCompanySelectField from "./components/CardCompanySelectField";
 import CardCVCInputField from "./components/CardCVCInputField";
@@ -13,7 +13,7 @@ import { useFormValue, withFormWrapper } from "./formContext";
 import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
 
 const CardInfoFormSection = () => {
-  const navigate = useNavigate();
+  const navigateToCompletePage = useNavigateCompletePage();
   const { getValue } = useFormValue();
 
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
@@ -22,9 +22,7 @@ const CardInfoFormSection = () => {
     const cardNumber = getValue("cardNumber").join("");
     const cardCompany = getValue("selectedCardCompany") ?? "";
 
-    navigate("/complete", {
-      state: { cardNumber, cardCompany },
-    });
+    navigateToCompletePage({ cardNumber, cardCompany });
   };
 
   return (
