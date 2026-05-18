@@ -15,13 +15,15 @@ export const seedMockCards = (...mockCards: CardItemInformationType[]) => {
   cards.push(...mockCards);
 };
 
-const getCardListHandler = http.get(`${BASE_URL}/cards`, () => {
+const getCardListHandler = http.get(`${BASE_URL}/cards`, async () => {
   const maskedCards = cards.map((card) => {
     return {
       ...card,
       number: card.number.slice(0, 6) + "******" + card.number.slice(12),
     };
   });
+
+  await delay(1200);
   return HttpResponse.json(maskedCards);
 });
 
@@ -34,7 +36,7 @@ const postCardHandler = http.post(`${BASE_URL}/cards`, async ({ request }) => {
     ...body,
   };
 
-  await delay(2000);
+  await delay(1200);
 
   if (!validateCardBrand(body.number)) {
     return HttpResponse.json(
@@ -80,6 +82,8 @@ const deleteCardHandler = http.delete(
     if (targetIndex > -1) {
       cards.splice(targetIndex, 1);
     }
+
+    await delay(1200);
 
     return HttpResponse.json(null, { status: 204 });
   },
