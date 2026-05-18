@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 import { getCardNumberErrorMessage } from '../utils/getCardNumberErrorMessage';
 import { getCVCumberErrorMessage } from '../utils/getCVCNumberErrorMessage';
 import { getEXPNumberErrorMessage } from '../utils/getEXPNumberErrorMessage';
@@ -13,15 +12,10 @@ import PasswordInputWrapper from '../components/InputWrapper/PasswordInputWrappe
 import CardBrandInputWrapper from '../components/InputWrapper/CardBrandInputWrapper';
 import { getPasswordErrorMessage } from '../utils/getPasswordErrorMessage';
 import type { CardBrandValue } from '../types/CardBrandValue';
-import type { CardAddCompleteState } from '../types/CardAddCompleteState';
 import ConfirmButton from '../components/ConfirmButton';
-import { createCard } from '../apis/createCard';
-import { CardAPiServerError } from '../CardApiServerError';
-import { BRAND_VALUE_TO_ISSUER_CODE } from '../constants/BRAND_SELECT_OPTIONS';
+import { useCardSubmit } from '../hooks/useCardSubmit';
 
 export default function CardAddPage() {
-    const navigate = useNavigate();
-
     const {
         values: cardNumberValues,
         setValue: setCardNumberValue,
@@ -57,34 +51,15 @@ export default function CardAddPage() {
         fieldCount: 1,
     });
 
-    const [cardNumberServerError, setCardNumberServerError] = useState<string | null>(null);
-    const [expServerError, setExpServerError] = useState<string | null>(null);
-    const [cvcServerError, setCvcServerError] = useState<string | null>(null);
+    const { cardNumberServerError, expServerError, cvcServerError, handleSubmit } = useCardSubmit({
+        cardNumberValues,
+        expValues,
+        cvcValues,
+        cardBrand,
+    });
 
     const isCardBrandSatisfy = !!cardBrand;
     const isAllSatisfy = isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy && isCVCSatisfy && isPasswordSatisfy;
-
-    const handleSubmit = async () => {
-        setCardNumberServerError(null);
-        setExpServerError(null);
-        setCvcServerError(null);
-
-        try {
-            await createCard({
-                number: cardNumberValues.join(''),
-                expirationDate: `${expValues[0]}/${expValues[1]}`,
-                cvc: cvcValues[0],
-                issuerCode: BRAND_VALUE_TO_ISSUER_CODE[cardBrand],
-            });
-            const state: CardAddCompleteState = { cardNumberPrefix: cardNumberValues[0], cardBrand };
-            navigate('/complete', { state });
-        } catch (error) {
-            if (!(error instanceof CardAPiServerError)) return;
-            if (error.code === 'INVALID_CARD_NUMBER') setCardNumberServerError(error.message);
-            else if (error.code === 'INVALID_EXPIRATION_DATE') setExpServerError(error.message);
-            else if (error.code === 'INVALID_CVC') setCvcServerError(error.message);
-        }
-    };
 
     return (
         <MainContainer>
