@@ -1,10 +1,20 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import { FaCheckCircle } from "react-icons/fa";
+import { options } from "../hooks/useCardBrand";
 
 export default function Enrollment() {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const { cardNumber, issuerCode } = location.state || {};
+  const displayedCardNumber = cardNumber?.substring(0, 4) ?? "";
+  const matchedCardBrand = options.find(
+    (option) => option.issuerCode === issuerCode,
+  );
+  const displayedBrand = matchedCardBrand
+    ? matchedCardBrand.brand
+    : "알 수 없는 카드";
 
   const handleClick = () => {
     navigate("/react-payments/");
@@ -14,8 +24,8 @@ export default function Enrollment() {
     <Wrapper>
       <CheckIcon />
       <Phrase>
-        <span>{location.state.cardNumber[0]}로 시작하는</span>
-        <span>{location.state.brand}가 등록되었어요.</span>
+        <span>{displayedCardNumber}로 시작하는</span>
+        <span>{displayedBrand}가 등록되었어요.</span>
       </Phrase>
       <Button onClick={() => handleClick()}>확인</Button>
     </Wrapper>
