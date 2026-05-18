@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { CardSection } from "./CardSection";
+import { useState } from "react";
 import { CardNumberInput } from "./CardNumberInput";
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
 import { CardCVCInput } from "./CardCVCInput";
@@ -54,6 +55,8 @@ export function CardForm({
     cardPassword,
   });
 
+  const [formErrorCodes, setFormErrorCodes] = useState<string[]>([]);
+
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -66,6 +69,14 @@ export function CardForm({
           issuerCode: convertCardBrandToIssuerCode(cardBrand),
         }),
       });
+      const data = await response.json();
+      if (!response.ok) {
+        const errorCodes = Object.keys(data).map(
+          (key) => formErrorCodes[key].code,
+        );
+        setFormErrorCodes(errorCodes);
+        return;
+      }
       gotoCreateCardDonePage();
     } catch (err) {
       // 임시처리 입니다.
@@ -90,7 +101,11 @@ export function CardForm({
         title={"CVC 번호를 입력해 주세요"}
         display={cardCVCIsComplete}
       >
-        <CardCVCInput cardCVC={cardCVC} setCardCVC={setCardCVC} />
+        <CardCVCInput
+          cardCVC={cardCVC}
+          setCardCVC={setCardCVC}
+          // formError={formError.cvc}
+        />
       </CardSection>
       <CardSection
         title={"카드 유효기간을 입력해 주세요"}
@@ -100,6 +115,7 @@ export function CardForm({
         <CardExpiryDateInput
           cardExpiryDate={cardExpiryDate}
           setCardExpiryDate={setCardExpiryDate}
+          // formError={formError.expirationDate}
         />
       </CardSection>
       <CardSection
@@ -117,6 +133,7 @@ export function CardForm({
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
+          // formError={formError.number}
         />
       </CardSection>
       <Button type="submit" disabled={!allComplete}>
