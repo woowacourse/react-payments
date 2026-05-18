@@ -12,16 +12,18 @@ describe("handler test", () => {
 
   test("create card", async () => {
     const formData = new FormData();
-    formData.append("cardNumber", "1234");
+    formData.append("cardNumber", "4321432143214321");
+    formData.append("cardBrand", "kakao");
+    formData.append("cardExpiryDate", "1228");
+    formData.append("cardCVC", "777");
+    formData.append("cardPassword", "77");
     const response = await fetch("https://api.antolibank.com/cards", {
       method: "POST",
       body: formData,
     });
-
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
     expect(await response.json()).toEqual({
-      status: 201,
-      message: "create!",
+      message: "카드 생성!",
     });
   });
 });
