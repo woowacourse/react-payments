@@ -9,6 +9,7 @@ import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
 import { Button } from "../../style/Button";
 import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
+import { extractErrorCodes } from "../../../common/Utils";
 import { createCard } from "../../Api";
 import { joinCardNumber } from "../../Utils";
 import type { CardNumber, SetState } from "../../types";
@@ -68,11 +69,7 @@ export function CardForm({
     );
     const data = await response.json();
     if (!response.ok) {
-      const errorCodes = Object.values(
-        data.errorMessages as Record<string, { code: string } | null>,
-      )
-        .filter(Boolean)
-        .map((err) => (err as { code: string }).code);
+      const errorCodes = extractErrorCodes(data.errorMessages);
       setFormErrorCodes(errorCodes);
       return;
     }
