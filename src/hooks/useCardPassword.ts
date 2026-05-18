@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { PasswordError } from '../types/errorTypes';
-import type { CardPassword, CardPasswordHandler } from '../types/cardStausTypes';
+import type { CardPassword, CardPasswordHandler } from '../types/cardStatusTypes';
 import { isNotNumber } from '../utils/util';
 
 export function useCardPassword(): { cardPassword: CardPassword; cardPasswordHandler: CardPasswordHandler } {

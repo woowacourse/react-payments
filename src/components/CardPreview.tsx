@@ -1,5 +1,5 @@
 import { CARD_BRAND_IMAGE } from '../constants/cardBrandImages';
-import type { CardBrand, CardCompany } from '../types/cardStausTypes';
+import type { CardBrand, CardCompany } from '../types/cardStatusTypes';
 
 type CardPreviewProps = {
   cardBrand?: CardBrand;

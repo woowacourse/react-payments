@@ -1,5 +1,5 @@
 import type { DateError, MonthError, YearError } from '../types/errorTypes';
-import type { CardBrand } from '../types/cardStausTypes';
+import type { CardBrand } from '../types/cardStatusTypes';
 
 export function isMonthError(mode: DateError | MonthError | YearError | null) {
   if (

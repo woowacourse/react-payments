@@ -2,16 +2,16 @@ import type {
   CardStatus,
   CardHandler,
   CardExpiry,
-  ExpireHandler,
+  ExpiryHandler,
   Cvc,
   CvcHandler,
   CardPassword,
   CardPasswordHandler,
   CardCompanyStatus,
   CardCompanyHandler,
-} from '../types/cardStausTypes';
+} from '../types/cardStatusTypes';
 import { useCardNumber } from './useCardNumber';
-import { useExpiryDate } from './useExpiryDate';
+import { useCardExpiry } from './useCardExpiry';
 import { useCardCvc } from './useCardCvc';
 import { useCardPassword } from './useCardPassword';
 import { useCardCompany } from './useCardCompany';
@@ -27,7 +27,7 @@ export type CardFormState = {
 
 export type CardFormHandlers = {
   cardNumberHandler: CardHandler;
-  expiryHandler: ExpireHandler;
+  expiryHandler: ExpiryHandler;
   cvcHandler: CvcHandler;
   cardPasswordHandler: CardPasswordHandler;
   cardCompanyHandler: CardCompanyHandler;
@@ -35,7 +35,7 @@ export type CardFormHandlers = {
 
 export function useCardForm() {
   const { cardNumber, cardNumberHandler } = useCardNumber();
-  const { cardExpiry, expiryHandler } = useExpiryDate();
+  const { cardExpiry, expiryHandler } = useCardExpiry();
   const { cardCvc, cvcHandler } = useCardCvc();
   const { cardPassword, cardPasswordHandler } = useCardPassword();
   const { cardCompanyStatus, cardCompanyHandler } = useCardCompany();

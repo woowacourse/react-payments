@@ -1,5 +1,5 @@
 import { PASSWORD_ERROR_MESSAGE } from '../constants/messages';
-import type { CardPassword, CardPasswordHandler } from '../types/cardStausTypes';
+import type { CardPassword, CardPasswordHandler } from '../types/cardStatusTypes';
 
 type CardPasswordProps = {
   cardPassword: CardPassword;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { CvcError } from '../types/errorTypes';
-import type { Cvc, CvcHandler } from '../types/cardStausTypes';
+import type { Cvc, CvcHandler } from '../types/cardStatusTypes';
 import { isNotNumber } from '../utils/util';
 
 export function useCardCvc(): { cardCvc: Cvc; cvcHandler: CvcHandler } {

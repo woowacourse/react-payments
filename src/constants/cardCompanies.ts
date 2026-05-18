@@ -1,4 +1,4 @@
-import type { CardCompany } from '../types/cardStausTypes';
+import type { CardCompany } from '../types/cardStatusTypes';
 
 export const CARD_COMPANIES: { value: Exclude<CardCompany, ''>; label: string }[] = [
   { value: 'bc', label: 'BC카드' },

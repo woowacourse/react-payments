@@ -9,8 +9,8 @@ import type {
   CardStatus,
   Cvc,
   CvcHandler,
-  ExpireHandler,
-} from '../types/cardStausTypes';
+  ExpiryHandler,
+} from '../types/cardStatusTypes';
 
 export const createCardNumberHandlers = (): CardHandler => ({
   handleCardNumbers: () => fn(),
@@ -21,7 +21,7 @@ export const createCardCompanyHandler = (): CardCompanyHandler => ({
   handleCardCompany: fn(),
 });
 
-export const createExpiryHandlers = (): ExpireHandler => ({
+export const createExpiryHandlers = (): ExpiryHandler => ({
   handleCardExpiryDate: () => fn(),
   handleYearBlur: fn(),
   handleMonthBlur: fn(),

@@ -1,5 +1,5 @@
 import { CARD_COMPANIES } from '../constants/cardCompanies';
-import type { CardCompanyHandler, CardCompanyStatus } from '../types/cardStausTypes';
+import type { CardCompanyHandler, CardCompanyStatus } from '../types/cardStatusTypes';
 
 type CardCompanyProps = {
   cardCompanyStatus: CardCompanyStatus;

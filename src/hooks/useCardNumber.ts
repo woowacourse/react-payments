@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { DEFAULT_CARD_NUMBER_GROUP_LENGTHS } from '../constants/cardBrands';
 import type { CardError } from '../types/errorTypes';
-import type { CardStatus, CardHandler } from '../types/cardStausTypes';
+import type { CardStatus, CardHandler } from '../types/cardStatusTypes';
 import {
   getCardBrand,
   getCardNumberGroupLengths,

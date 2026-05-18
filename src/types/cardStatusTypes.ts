@@ -44,7 +44,7 @@ export interface CardExpiry {
   cardExpiryDateErrorMode: DateError | MonthError | YearError | null;
 }
 
-export interface ExpireHandler {
+export interface ExpiryHandler {
   handleCardExpiryDate: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleYearBlur: () => void;
   handleMonthBlur: () => void;
@@ -69,3 +69,9 @@ export interface CardPasswordHandler {
   handleCardPassword: (value: string) => void;
   handlePasswordBlur: () => void;
 }
+
+export type CardBrandRange = {
+  brand: Exclude<CardBrand, ''>;
+  end: string;
+  start: string;
+};

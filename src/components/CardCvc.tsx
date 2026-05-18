@@ -1,5 +1,5 @@
 import { CVC_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { Cvc, CvcHandler } from '../types/cardStausTypes.ts';
+import type { Cvc, CvcHandler } from '../types/cardStatusTypes.ts';
 
 type CardCvcProps = {
   cardCvc: Cvc;

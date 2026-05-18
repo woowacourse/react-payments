@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import type { DateError, MonthError, YearError } from '../types/errorTypes';
-import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
+import type { CardExpiry, ExpiryHandler } from '../types/cardStatusTypes';
 import { isNotNumber } from '../utils/util';
 
-export function useExpiryDate(): { cardExpiry: CardExpiry; expiryHandler: ExpireHandler } {
+export function useCardExpiry(): { cardExpiry: CardExpiry; expiryHandler: ExpiryHandler } {
   const [cardExpiryDate, setCardExpiryDate] = useState<string[]>(['', '']);
   const [cardExpiryDateErrorMode, setCardExpiryDateErrorMode] = useState<
     DateError | MonthError | YearError | null

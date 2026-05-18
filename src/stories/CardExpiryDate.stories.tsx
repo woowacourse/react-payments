@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import CardExpiryDate from '../components/CardExpiryDate';
-import { useExpiryDate } from '../hooks/useExpiryDate';
+import { useCardExpiry } from '../hooks/useCardExpiry';
 import { createExpiryHandlers, emptyExpiry, filledExpiry } from './cardStoryFixtures';
 
 const meta = {
@@ -86,7 +86,7 @@ export const Interactive: Story = {
     setCardExpiry: createExpiryHandlers(),
   },
   render: () => {
-    const [cardExpiry, setCardExpiry] = useExpiryDate();
+    const [cardExpiry, setCardExpiry] = useCardExpiry();
 
     return (
       <div>

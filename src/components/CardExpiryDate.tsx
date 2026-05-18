@@ -4,11 +4,11 @@ import {
   YEAR_ERROR_MESSAGE,
 } from '../constants/messages.ts';
 import { isMonthError, isYearError } from '../utils/util.ts';
-import type { CardExpiry, ExpireHandler } from '../types/cardStausTypes';
+import type { CardExpiry, ExpiryHandler } from '../types/cardStatusTypes';
 
 type CardExpiryDateProps = {
   cardExpiry: CardExpiry;
-  setCardExpiry: ExpireHandler;
+  setCardExpiry: ExpiryHandler;
 };
 
 const EXPIRY_ERROR_MESSAGE = {

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { CardHandler, CardStatus } from '../types/cardStausTypes.ts';
+import type { CardHandler, CardStatus } from '../types/cardStatusTypes.ts';
 import { getCardNumberGroupLengths } from '../utils/card/cardBrand';
 
 type CardNumbersProps = {

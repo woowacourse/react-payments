@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { CardCompanyHandler, CardCompanyStatus } from '../types/cardStausTypes';
+import type { CardCompanyHandler, CardCompanyStatus } from '../types/cardStatusTypes';
 
 export function useCardCompany(): { cardCompanyStatus: CardCompanyStatus; cardCompanyHandler: CardCompanyHandler } {
   const [cardCompany, setCardCompany] = useState<CardCompanyStatus['cardCompany']>('');

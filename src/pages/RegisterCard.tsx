@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import CardPreview from '../components/CardPreview';
 import CardInput from '../components/CardInput';
 import { useCardForm } from '../hooks/useCardForm';
-import type { CardCompany } from '../types/cardStausTypes';
+import type { CardCompany } from '../types/cardStatusTypes';
 
 export type RegisteredCard = {
   cardNumberPrefix: string;

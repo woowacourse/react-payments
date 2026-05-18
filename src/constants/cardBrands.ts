@@ -1,4 +1,4 @@
-import type { CardBrand } from '../types/cardStausTypes';
+import type { CardBrand, CardBrandRange } from '../types/cardStatusTypes';
 
 export const DEFAULT_CARD_NUMBER_GROUP_LENGTHS = [4, 4, 4, 4];
 
@@ -8,12 +8,6 @@ export const CARD_BRAND_NUMBER_GROUP_LENGTHS: Record<Exclude<CardBrand, ''>, num
   diners: [4, 6, 4],
   amex: [4, 6, 5],
   unionpay: [4, 4, 4, 4],
-};
-
-export type CardBrandRange = {
-  brand: Exclude<CardBrand, ''>;
-  end: string;
-  start: string;
 };
 
 export const CARD_BRAND_PREFIX_RANGES: CardBrandRange[] = [
