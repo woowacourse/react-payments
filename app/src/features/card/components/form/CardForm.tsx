@@ -60,10 +60,10 @@ export function CardForm({
       const response = await fetch("https://api.antolibank.com/cards", {
         method: "POST",
         body: JSON.stringify({
-          cardNumber: joinCardNumber(cardNumber),
-          cardExpiryDate: cardExpiryDate.toSlashFormat(),
-          cardCVC: cardCVC,
-          cardIssuerCode: convertCardBrandToIssuerCode(cardBrand),
+          number: joinCardNumber(cardNumber),
+          expirationDate: cardExpiryDate.toSlashFormat(),
+          cvc: cardCVC,
+          issuerCode: convertCardBrandToIssuerCode(cardBrand),
         }),
       });
       gotoCreateCardDonePage();
