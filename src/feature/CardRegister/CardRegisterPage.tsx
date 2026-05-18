@@ -25,6 +25,7 @@ const CardRegisterPage = () => {
         state: cardFormInfo,
       });
     } catch (error) {
+      // 네트워크 에러 처리 필요
       serverErrors.setServerFieldError(error.code, error.message);
     }
   };

@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import { CVC_LENGTH, validateCvcNumber } from '../utils/cardFormValidator';
-import { isNumeric, isWithinMaxLength } from '../utils/validator';
+import { isLengthBetween, isNumeric } from '../utils/validator';
 import useTouchedFieldError from './useTouchedFieldError';
+import {
+  CVC_MAX_LENGTH,
+  CVC_MIN_LENGTH,
+  validateCvcNumber,
+} from '../utils/cardFormValidator';
 
 type UseCvcFieldParams = {
   onComplete?: () => void;
@@ -24,7 +28,7 @@ export const useCvcField = ({ onComplete }: UseCvcFieldParams) => {
     const value = rawValue.trim();
 
     if (!isNumeric(value)) return;
-    if (!isWithinMaxLength(value, CVC_LENGTH)) return;
+    if (!isLengthBetween(value, CVC_MIN_LENGTH, CVC_MAX_LENGTH)) return;
 
     setCvcNumber(value);
 
