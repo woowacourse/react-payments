@@ -9,14 +9,12 @@ import {
   Title,
 } from './LoadingState.styles';
 
-const SKELETON_ROW_COUNT = 3;
-
 export function LoadingState() {
   return (
     <Container>
       <Title>보유 카드</Title>
       <List>
-        {Array.from({ length: SKELETON_ROW_COUNT }).map((_, index) => (
+        {Array.from({ length: 3 }).map((_, index) => (
           <Row key={index}>
             <CardThumb />
             <Lines>

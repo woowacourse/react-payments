@@ -9,9 +9,11 @@ import {
   Title,
 } from './ErrorState.styles';
 
-export function ErrorState() {
-  const handler = () => {};
+interface ErrorStateProps {
+  onRetry: () => void;
+}
 
+export function ErrorState({ onRetry }: ErrorStateProps) {
   return (
     <Container>
       <Title>보유 카드</Title>
@@ -19,7 +21,7 @@ export function ErrorState() {
         <ErrorIcon src={exclamationSrc} alt="에러" />
         <Heading>카드 목록을 불러올 수 없어요</Heading>
         <Description>잠시 후 다시 시도해 주세요.</Description>
-        <RetryButton type="button" onClick={handler}>
+        <RetryButton type="button" onClick={onRetry}>
           다시 시도
         </RetryButton>
       </ErrorBox>
