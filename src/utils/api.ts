@@ -1,26 +1,10 @@
-import { HttpResponse } from 'msw';
-import { CARD_EXPIRY_YEAR_LENGTH, CARD_ISSUER_CODES, CARD_NETWORK } from '../constants';
-import {
-  getCardNetwork,
-  validateDigits,
-  validateMonth,
-  validateStringLength,
-} from '../utils';
+import { HttpResponse } from "msw";
+import { ERROR_MESSAGE } from "../constants/api";
+import type { AddCardErrorCode } from "../types/api";
+import { getCardNetwork, validateDigits, validateMonth, validateStringLength } from ".";
+import { CARD_EXPIRY_YEAR_LENGTH, CARD_ISSUER_CODES, CARD_NETWORK } from "../constants";
 
-export type ErrorCode =
-  | 'INVALID_CARD_NUMBER'
-  | 'INVALID_CVC'
-  | 'INVALID_EXPIRATION_DATE'
-  | 'INVALID_ISSUER_CODE';
-
-const ERROR_MESSAGE: Record<ErrorCode, string> = {
-  INVALID_CARD_NUMBER: '유효하지 않은 카드 번호입니다.',
-  INVALID_CVC: '유효하지 않은 CVC입니다.',
-  INVALID_EXPIRATION_DATE: '유효하지 않은 만료일입니다.',
-  INVALID_ISSUER_CODE: '지원하지 않는 카드사입니다.',
-};
-
-export function createErrorResponse(code: ErrorCode) {
+export function createErrorResponse(code: AddCardErrorCode) {
   return HttpResponse.json({ code, message: ERROR_MESSAGE[code] }, { status: 400 });
 }
 

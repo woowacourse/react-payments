@@ -3,7 +3,7 @@ import CardsErrorTemplate from '../components/Cards/CardsErrorTemplate';
 import CardsTemplate from '../components/Cards/CardsTemplate';
 import CardsSkeletonTemplate from '../components/Cards/CardsSkeletonTemplate';
 import CardsEmptyTemplate from '../components/Cards/CardsEmptyTemplate';
-import type { CardsResponse } from '../types';
+import type { CardsResponse } from '../types/api';
 
 function CardsPage() {
   const { status, data, error } = useQuery<CardsResponse>({ url: '/cards' });

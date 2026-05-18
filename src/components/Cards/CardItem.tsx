@@ -4,7 +4,7 @@ import Button from '../Common/Button';
 import Flex from '../Common/Flex';
 import Text from '../Common/Text';
 import { useNavigate } from 'react-router';
-import type { Card } from '../../types';
+import type { Card } from '../../types/api';
 
 export default function CardItem(props: { card: Card }) {
   const navigate = useNavigate();

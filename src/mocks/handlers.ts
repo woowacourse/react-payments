@@ -6,7 +6,7 @@ import {
   validateCardIssuerCode,
   validateCardNumber,
   validateExpirationDate,
-} from './utils';
+} from './../utils/api';
 
 type CardRequestBody = {
   number: string;

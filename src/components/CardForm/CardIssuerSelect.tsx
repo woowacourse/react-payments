@@ -21,9 +21,11 @@ function CardIssuerSelect({ field }: CardIssuerSelectProps) {
           </Select.Option>
         ))}
       </Select>
-      <Text size="s" color="error" role="alert">
-        {field.error}
-      </Text>
+      {field.error && (
+        <Text size="s" color="error" role="alert">
+          {field.error}
+        </Text>
+      )}
     </Flex>
   );
 }

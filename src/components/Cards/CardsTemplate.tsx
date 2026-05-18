@@ -3,7 +3,7 @@ import Flex from '../Common/Flex';
 import Text from '../Common/Text';
 import CardItem from './CardItem';
 import { Link } from 'react-router';
-import type { CardsResponse } from '../../types';
+import type { CardsResponse } from '../../types/api';
 
 export default function CardsTemplate(props: { data: CardsResponse }) {
   return (

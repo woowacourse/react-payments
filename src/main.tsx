@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import './styles/index.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import AddCardPage from './pages/AddCardPage';
-import ResultPage from './pages/ResultPage';
 import CardsPage from './pages/CardsPage';
 
 async function enableMocking() {
@@ -26,7 +25,6 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<AddCardPage />} />
         <Route path="/cards" element={<CardsPage />} />
-        <Route path="/result" element={<ResultPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

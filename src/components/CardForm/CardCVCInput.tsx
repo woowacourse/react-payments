@@ -22,9 +22,11 @@ function CardCVCInput({ field }: CardCVCInputProps) {
         value={field.value}
         {...field.register()}
       />
-      <Text size="s" color="error" role="alert">
-        {field.error}
-      </Text>
+      {field.error && (
+        <Text size="s" color="error" role="alert">
+          {field.error}
+        </Text>
+      )}
     </Flex>
   );
 }
