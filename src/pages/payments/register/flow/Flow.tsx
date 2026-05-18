@@ -7,38 +7,18 @@ import { ROUTES } from '@/constants/routes';
 import { postCards } from '@/services/apis/cards/cards';
 import { mapCardModelToRequestDTO } from '@/services/apis/cards/mapper';
 
-import { useCardNumbers } from '../form/hooks/useCardNumbers';
-import { useCard } from '../form/hooks/useCard';
-import { useExpirationDate } from '../form/hooks/useExpirationDate';
-import { useCvc } from '../form/hooks/useCvc';
-import { usePassword } from '../form/hooks/usePassword';
+import { useRegisterCardForm } from '../form/hooks/useRegisterCardForm';
 
 import { getBrandCard } from '../form/utils';
 
 import { ERROR_CODE } from './constants';
 
 export const Flow = () => {
-  const cardNumbers = useCardNumbers();
-
-  const card = useCard();
-
-  const expirationDate = useExpirationDate();
-
-  const cvc = useCvc();
-
-  const password = usePassword();
+  const { cardNumbers, card, expirationDate, cvc, password } = useRegisterCardForm();
 
   const brandCard = getBrandCard(Object.values(cardNumbers.values));
 
   const navigate = useNavigate();
-
-  const handleReset = () => {
-    cardNumbers.reset();
-    card.reset();
-    expirationDate.reset();
-    cvc.reset();
-    password.reset();
-  };
 
   const [serverError, setServerError] = useState<keyof typeof ERROR_CODE | null>(null);
 
@@ -71,7 +51,6 @@ export const Flow = () => {
         password,
         brandCard,
         handleSubmit,
-        handleReset,
         serverError,
       }}
     />
