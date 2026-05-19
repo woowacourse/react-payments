@@ -26,7 +26,10 @@ const router = createBrowserRouter(
 async function enableMocking() {
   const { worker } = await import('./msw/browser');
   return worker.start({
-    serviceWorker: { url: `${BASE_PATH}/mockServiceWorker.js` },
+    serviceWorker: {
+      url: `${BASE_PATH}/mockServiceWorker.js`,
+      options: { scope: `${BASE_PATH}/` },
+    },
   });
 }
 
