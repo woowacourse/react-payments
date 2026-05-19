@@ -30,7 +30,7 @@ const CvcRegisterationInputSection = ({ onValueHandler, serverErrorMessage }: Cv
           value={inputValue}
           onChange={(e) => handlers.onChange(e.target.value)}
           onBlur={handlers.handleBlur}
-          css={[inputStyle(!!errorMessage), { flex: 1 }]}
+          css={[inputStyle(!!resolvedErrorMessage), { flex: 1 }]}
           placeholder="123"
         />
       </ValidatedInputGroup>
