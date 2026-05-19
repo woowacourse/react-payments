@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardCompany } from '../context/CardContext';
 import { BrandValidator } from '../validators/BrandValidator';
 import { useNavigate } from 'react-router-dom';
@@ -38,19 +38,25 @@ export function useCardForm() {
   }, [currentStep]);
 
   // Form 완료 검증 로직
-  const networkBrand =
-    cardNumber[0].length > 0 ? BrandValidator.detectNetworkBrand(cardNumber.join('')).brand : '';
+  const networkBrand = useMemo(() => {
+    return cardNumber[0].length > 0
+      ? BrandValidator.detectNetworkBrand(cardNumber.join('')).brand
+      : '';
+  }, [cardNumber]);
   const lastDigitLength = networkBrand === 'diners' ? 2 : networkBrand === 'amex' ? 3 : 4;
-  const isFormComplete =
-    cardCompany !== '' &&
-    cardNumber[0].length === 4 &&
-    cardNumber[1].length === 4 &&
-    cardNumber[2].length === 4 &&
-    cardNumber[3].length === lastDigitLength &&
-    cardExpiryDate['expiry-month'].length === 2 &&
-    cardExpiryDate['expiry-year'].length === 2 &&
-    cardCVC.length === 3 &&
-    cardPassword.length === 2;
+  const isFormComplete = useMemo(() => {
+    return (
+      cardCompany !== '' &&
+      cardNumber[0].length === 4 &&
+      cardNumber[1].length === 4 &&
+      cardNumber[2].length === 4 &&
+      cardNumber[3].length === lastDigitLength &&
+      cardExpiryDate['expiry-month'].length === 2 &&
+      cardExpiryDate['expiry-year'].length === 2 &&
+      cardCVC.length === 3 &&
+      cardPassword.length === 2
+    );
+  }, [cardCompany, cardNumber, cardExpiryDate, cardCVC, cardPassword, lastDigitLength]);
 
   // 서버에러 처리
   const [serverError, setServerError] = useState<{ code: string; message: string } | null>(null);
