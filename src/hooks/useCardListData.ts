@@ -1,8 +1,7 @@
 import { use, useState } from 'react';
-import { CARD_COMPANY_OPTIONS, ISSUER_CODE_TO_COMPANY } from '../constants';
+import { ISSUER_CODE_TO_COMPANY } from '../constants';
 import { getCardListDTO, deleteCard } from '../api/cards';
-
-type CardCompany = (typeof CARD_COMPANY_OPTIONS)[number]['value'];
+import type { CardCompany } from '../types';
 
 export type CardDTO = {
   id: string;
