@@ -14,22 +14,23 @@ import {
   type ExpiryTouched,
 } from '../../model/registerExpiryDate';
 import { useState } from 'react';
+import type { FieldServerError } from '../../model/registerCardForm';
 
 export interface ExpiryFieldControl {
   expiryDate: ExpiryDate;
   shouldComplete: (value: ExpiryDate) => boolean;
-  serverErrorMessage?: string;
   onChange: (value: ExpiryDate) => void;
 }
 
 export interface ExpiryDateFieldProps extends ExpiryFieldControl {
   setStepRef: (node: HTMLInputElement | null) => void;
   onComplete?: () => void;
+  serverError?: FieldServerError;
 }
 
 export const ExpiryDateField = ({
   expiryDate,
-  serverErrorMessage,
+  serverError,
   shouldComplete,
   onChange,
   onComplete,
@@ -47,23 +48,25 @@ export const ExpiryDateField = ({
     expiryDate,
     touched,
   });
-  const visibleErrorMessage = serverErrorMessage ?? totalErrorMessage;
+  const visibleErrorMessage = serverError?.message ?? totalErrorMessage;
 
   const handleChangeMonth = (month: string) => {
     if (!isValidMonthInput(month)) return;
+    serverError?.onClear();
+
     const next = {
       ...expiryDate,
       month,
     };
     onChange(next);
 
-    if (validateExpiryMonth(month)) {
-      focusNext(1);
-    }
+    if (validateExpiryMonth(month)) focusNext(1);
+    if (shouldComplete(next)) onComplete?.();
   };
 
   const handleChangeYear = (year: string) => {
     if (!isValidYearInput(year)) return;
+    serverError?.onClear();
 
     const next = {
       ...expiryDate,
@@ -71,9 +74,7 @@ export const ExpiryDateField = ({
     };
     onChange(next);
 
-    if (shouldComplete(next)) {
-      onComplete?.();
-    }
+    if (shouldComplete(next)) onComplete?.();
   };
   return (
     <Field

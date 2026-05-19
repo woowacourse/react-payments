@@ -8,6 +8,7 @@ import {
   getNextCardNumberFieldState,
   sliceCardNumber,
 } from '../../model/registerCardNumber';
+import type { FieldServerError } from '../../model/registerCardForm';
 
 export interface CardNumberFieldControl {
   numbers: string[];
@@ -18,7 +19,7 @@ export interface CardNumberFieldControl {
 export interface CardNumberFieldProps extends CardNumberFieldControl {
   setStepRef: (node: HTMLInputElement | null) => void;
   onComplete: () => void;
-  serverErrorMessage?: string;
+  serverError?: FieldServerError;
 }
 
 const numberPlaceHolder = (length: number) =>
@@ -26,7 +27,7 @@ const numberPlaceHolder = (length: number) =>
 
 export const NumberField = ({
   numbers,
-  serverErrorMessage,
+  serverError,
   onChange,
   setStepRef,
   onComplete,
@@ -39,12 +40,14 @@ export const NumberField = ({
     numbers,
     touched,
   });
-  const visibleErrorMessage = serverErrorMessage ?? totalErrorMessage;
+  const visibleErrorMessage = serverError?.message ?? totalErrorMessage;
   const visibleInputErrors =
-    serverErrorMessage !== undefined ? numbers.map(() => serverErrorMessage) : inputErrors;
+    serverError?.message !== undefined ? numbers.map(() => serverError?.message) : inputErrors;
 
   const handleChangeNumbers = (value: string, index: number) => {
     if (!isValidInputCardNumber(value)) return;
+
+    serverError?.onClear();
 
     const next = [...numbers];
     next[index] = value;
@@ -55,9 +58,7 @@ export const NumberField = ({
 
     if (value.length === format[index]) focusNext(index + 1);
 
-    if (shouldComplete(nextNumbers)) {
-      onComplete();
-    }
+    if (shouldComplete(nextNumbers)) onComplete();
   };
 
   const handleBlur = (index: number) => {

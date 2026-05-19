@@ -59,7 +59,10 @@ export const CardForm = ({
     toStep(SERVER_ERROR_STEP[serverError.field]);
   }, [toStep, serverError]);
 
-  const clearServerError = () => setServerError(null);
+  const getServerError = (field: ServerErrorField) =>
+    serverError?.field === field
+      ? { message: serverError.message, onClear: () => setServerError(null) }
+      : undefined;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -84,26 +87,18 @@ export const CardForm = ({
       {step >= STEP.CVC && (
         <CvcField
           {...cvcField}
-          serverErrorMessage={serverError?.field === 'cvc' ? serverError.message : undefined}
+          serverError={getServerError('cvc')}
           onComplete={() => toStep(STEP.PASSWORD)}
           setStepRef={(node) => setStepRef(node, STEP.CVC)}
-          onChange={(v) => {
-            cvcField.onChange(v);
-            clearServerError();
-          }}
         />
       )}
 
       {step >= STEP.EXPIRY && (
         <ExpiryDateField
           {...expiryField}
-          serverErrorMessage={serverError?.field === 'expiryDate' ? serverError.message : undefined}
           onComplete={() => toStep(STEP.CVC)}
           setStepRef={(node) => setStepRef(node, STEP.EXPIRY)}
-          onChange={(v) => {
-            expiryField.onChange(v);
-            clearServerError();
-          }}
+          serverError={getServerError('expiryDate')}
         />
       )}
 
@@ -117,13 +112,9 @@ export const CardForm = ({
 
       <NumberField
         {...numbersField}
-        serverErrorMessage={serverError?.field === 'numbers' ? serverError.message : undefined}
         onComplete={() => toStep(STEP.BANK)}
         setStepRef={(node) => setStepRef(node, STEP.NUMBERS)}
-        onChange={(v) => {
-          numbersField.onChange(v);
-          clearServerError();
-        }}
+        serverError={getServerError('numbers')}
       />
     </form>
   );

@@ -26,6 +26,11 @@ export type ServerError = {
   message: string;
 } | null;
 
+export type FieldServerError = {
+  message: string;
+  onClear: () => void;
+};
+
 export type ServerErrorField = 'numbers' | 'expiryDate' | 'cvc';
 export type ServerFieldErrors = Partial<Record<ServerErrorField, string>>;
 export const SERVER_ERROR_FIELD_MAP: Record<RegisterCardErrorCode, ServerErrorField> = {

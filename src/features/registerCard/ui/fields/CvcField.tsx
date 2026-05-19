@@ -2,6 +2,7 @@ import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
 import { useState } from 'react';
 import { getCvcFieldState, isValidInputCvc } from '../../model/registerCvc';
+import type { FieldServerError } from '../../model/registerCardForm';
 
 export interface CvcFieldControl {
   cvc: string;
@@ -12,29 +13,28 @@ export interface CvcFieldControl {
 export interface CvcFieldProps extends CvcFieldControl {
   setStepRef: (node: HTMLInputElement | null) => void;
   onComplete: () => void;
-  serverErrorMessage?: string;
+  serverError?: FieldServerError;
 }
 
 export const CvcField = ({
   cvc,
-  serverErrorMessage,
   shouldComplete,
   onChange,
   setStepRef,
   onComplete,
+  serverError,
 }: CvcFieldProps) => {
   const [touched, setTouched] = useState<boolean>(false);
 
   const { errorMessage, maxLength } = getCvcFieldState(cvc, touched);
-  const visibleErrorMessage = serverErrorMessage ?? errorMessage;
+  const visibleErrorMessage = serverError?.message ?? errorMessage;
 
   const handleChange = (inputValue: string): void => {
     if (!isValidInputCvc(inputValue)) return;
     onChange(inputValue);
+    serverError?.onClear();
 
-    if (shouldComplete(inputValue)) {
-      onComplete();
-    }
+    if (shouldComplete(inputValue)) onComplete();
   };
 
   return (
