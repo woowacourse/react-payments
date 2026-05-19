@@ -8,9 +8,6 @@ import CardListPage from './pages/CardListPage';
 import MobileLayout from './components/ui/MobileLayout';
 import { BASE_PATH, ROUTES } from './routes';
 
-const { worker } = await import('./msw/browser');
-await worker.start({ onUnhandledRequest: 'bypass', serviceWorker: { url: `${BASE_PATH}/mockServiceWorker.js` } });
-
 const router = createBrowserRouter(
   [
     {
@@ -26,8 +23,17 @@ const router = createBrowserRouter(
   { basename: BASE_PATH },
 );
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-);
+async function enableMocking() {
+  const { worker } = await import('./msw/browser');
+  return worker.start({
+    serviceWorker: { url: `${BASE_PATH}/mockServiceWorker.js` },
+  });
+}
+
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  );
+});
