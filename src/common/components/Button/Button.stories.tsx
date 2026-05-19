@@ -26,13 +26,6 @@ export const Primary: Story = {
   },
 };
 
-export const Submit: Story = {
-  args: {
-    children: '확인',
-    variant: 'submit',
-  },
-};
-
 export const Dashed: Story = {
   args: {
     children: '+ 카드 추가',
@@ -43,7 +36,7 @@ export const Dashed: Story = {
 export const Disabled: Story = {
   args: {
     children: '등록 중...',
-    variant: 'submit',
+    variant: 'primary',
     disabled: true,
   },
 };
@@ -52,15 +45,12 @@ export const Variants: Story = {
   render: () => (
     <Container>
       <Button variant='primary' onClick={fn()}>
-        카드 추가하기
-      </Button>
-      <Button variant='submit' onClick={fn()}>
         확인
       </Button>
       <Button variant='dashed' onClick={fn()}>
         + 카드 추가
       </Button>
-      <Button variant='submit' disabled onClick={fn()}>
+      <Button variant='primary' disabled onClick={fn()}>
         등록 중...
       </Button>
     </Container>

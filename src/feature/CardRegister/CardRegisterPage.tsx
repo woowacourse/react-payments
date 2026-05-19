@@ -67,10 +67,12 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
-const SubmitButton = styled(Button).attrs({variant: 'submit'})`
+const SubmitButton = styled(Button).attrs({variant: 'primary'})`
   flex-shrink: 0;
   width: 100%;
   padding: 16px;
+  border-radius: 0;
+  font-size: 14px;
 `;
 
 const SubmitErrorMessage = styled.p`

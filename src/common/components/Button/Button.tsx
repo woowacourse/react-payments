@@ -1,7 +1,7 @@
 import type {ComponentPropsWithoutRef} from 'react';
 import styled, {css} from 'styled-components';
 
-type ButtonVariant = 'primary' | 'submit' | 'dashed';
+type ButtonVariant = 'primary' | 'dashed';
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   variant?: ButtonVariant;
@@ -18,13 +18,6 @@ const VARIANT_STYLES = {
     border: none;
     border-radius: 5px;
     font-size: 15px;
-  `,
-  submit: css`
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    border-radius: 0;
-    font-size: 14px;
   `,
   dashed: css`
     background-color: transparent;
