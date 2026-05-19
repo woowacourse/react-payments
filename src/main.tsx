@@ -8,10 +8,8 @@ import CardListPage from './pages/CardListPage';
 import MobileLayout from './components/ui/MobileLayout';
 import { BASE_PATH, ROUTES } from './routes';
 
-if (import.meta.env.DEV) {
-  const { worker } = await import('./msw/browser');
-  await worker.start({ onUnhandledRequest: 'bypass', serviceWorker: { url: `${BASE_PATH}/mockServiceWorker.js` } });
-}
+const { worker } = await import('./msw/browser');
+await worker.start({ onUnhandledRequest: 'bypass', serviceWorker: { url: `${BASE_PATH}/mockServiceWorker.js` } });
 
 const router = createBrowserRouter(
   [
