@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import type { CardListItem, ApiError } from "../../apis/cards";
 
@@ -13,24 +13,26 @@ type AsyncState<T> =
 
 export const useCardList = () => {
   const [state, setState] = useState<AsyncState<CardListItem[]>>({ status: "loading" });
+  const ignoreRef = useRef(false);
 
   const loadCards = () => {
-    const ignore = { current: false };
+    ignoreRef.current = false;
 
     tryCatch(
       async () => {
         const data = await getCards();
-        if (!ignore.current) setState({ status: "success", data });
+        if (!ignoreRef.current) setState({ status: "success", data });
       },
       (error) => {
-        if (!ignore.current) setState({ status: "error", error: error as ApiError });
+        if (!ignoreRef.current) setState({ status: "error", error: error as ApiError });
       },
     );
-
-    return () => { ignore.current = true; };
   };
 
-  useEffect(() => loadCards(), []);
+  useEffect(() => {
+    loadCards();
+    return () => { ignoreRef.current = true; };
+  }, []);
 
   const retry = () => {
     setState({ status: "loading" });
