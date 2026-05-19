@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { createCard } from '../apis/createCard';
 import { CardAPiServerError } from '../CardApiServerError';
 import { BRAND_VALUE_TO_ISSUER_CODE } from '../constants/BRAND_SELECT_OPTIONS';

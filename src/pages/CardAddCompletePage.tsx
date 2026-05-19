@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Navigate, useLocation } from 'react-router';
+import { Navigate, useLocation } from 'react-router-dom';
 import ConfirmButton from '../components/ConfirmButton';
 import { BRAND_SELECT_OPTIONS } from '../constants/BRAND_SELECT_OPTIONS';
 import { isCardAddCompleteState } from '../types/CardAddCompleteState';
