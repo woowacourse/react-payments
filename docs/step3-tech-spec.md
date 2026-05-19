@@ -1,6 +1,26 @@
 # Step-3 Tech Spec: MSW, Async, Testing
 
-이번 단계의 목표, 설계 철학, 도메인 모델, 컴포넌트 아키텍처, 그리고 실제 구현 결과까지 한 문서에 정리한다. 사고 흐름과 결정 근거가 같이 남아 있어야 step-3가 끝난 뒤에도 왜 그렇게 짰는지를 재구성할 수 있다.
+카드 등록/조회/삭제 기능을 서버와 연동하고, 비동기 상태 관리와 통합 테스트를 붙인 단계의 설계 기록이다. 사고 흐름과 결정 근거가 같이 남아 있어야 이 코드를 처음 보는 사람도 왜 이렇게 짰는지를 재구성할 수 있다.
+
+---
+
+## 목차
+
+- [1. 개요](#1-개요)
+- [2. 전체 구조](#2-전체-구조)
+- [3. 도메인 모델](#3-도메인-모델)
+- [4. 설계 원칙](#4-설계-원칙)
+- [5. API 레이어](#5-api-레이어)
+- [6. MSW 셋업](#6-msw-셋업)
+- [7. 비동기 훅](#7-비동기-훅)
+- [8. 컴포넌트 아키텍처](#8-컴포넌트-아키텍처)
+- [9. 라우팅](#9-라우팅)
+- [10. 에러 처리 전략](#10-에러-처리-전략)
+- [11. 테스트 전략](#11-테스트-전략)
+- [12. 구현 완료 체크리스트](#12-구현-완료-체크리스트)
+- [13. 결정 로그](#13-결정-로그-open-questions--closed)
+- [14. 이외 트러블슈팅](#14-이외-트러블슈팅)
+- [15. 참고 자료](#15-참고-자료)
 
 ---
 
@@ -8,9 +28,10 @@
 
 ### 1.1 목적
 
+이 단계에서 새로 다루는 기술 영역은 세 가지다.
+
 - MSW로 네트워크 경계를 모킹하고, 프론트엔드가 보는 서버의 모습을 명시적으로 설계한다.
 - 비동기 상태를 `idle | loading | success | error` 네 가지로 명시적으로 관리한다. `isLoading`/`error` boolean 분리는 사용하지 않는다.
-- 서버-클라이언트 계약을 코드로 표현한다. 요청,응답,에러 모양이 타입으로 드러나야 한다.
 - 사용자 관점의 통합 테스트를 RTL + MSW로 작성한다.
 
 ### 1.2 핵심 학습 키워드
@@ -22,108 +43,75 @@
 - 에러 코드 → UI 필드 매핑
 - 고차 함수 (higher-order function): tryCatch 패턴
 
-### 1.3 산출물
+### 1.3 문서 내 용어 정의
+
+카드 네트워크는 카드 번호의 앞자리로 판별되는 국제 결제 네트워크를 의미한다. Visa, Mastercard, AMEX, Diners, UnionPay가 여기에 해당한다.
+
+카드사(issuer)는 사용자가 직접 선택하는 국내 카드 발급사를 의미한다. BC카드, 신한카드, 현대카드, 우리카드, 롯데카드, 하나카드, 국민카드가 여기에 해당한다. 서버 도메인에서는 `issuerCode`로 식별한다.
+
+지원 카드 네트워크는 현재 서비스에서 입력을 허용하는 카드 네트워크를 의미한다. 카드 번호가 지원 카드 네트워크로 판별되지 않으면 warning 메시지를 보여주고 다음 입력 단계로 진행하지 않는다.
+
+입력 섹션은 카드 번호, 카드사, 유효기간, CVC, 비밀번호처럼 하나의 입력 단계를 구성하는 UI 단위를 의미한다.
+
+### 1.4 산출물
 
 - `/cards` 페이지 (카드 목록 조회/삭제)
 - 카드 등록 시 POST `/cards` 연동 + 400 에러 필드 매핑
 - MSW handler (POST/GET/DELETE 및 400 시나리오)
 - 비동기 4상태 패턴이 적용된 데이터 페칭 훅
-- 통합 테스트 (등록,조회,삭제,에러 시나리오)
+- 통합 테스트 (등록, 조회, 삭제, 에러 시나리오)
 
 ---
 
-## 2. 설계
+## 2. 전체 구조
 
-step-2에서 학습한 원칙을 step-3에 그대로 이어가며, 새 영역(비동기,테스트)에서도 같은 사고를 적용한다.
+코드를 읽기 전에 앱의 전체 구조를 먼저 파악한다.
 
-### 2.1 변경 이유 기준 책임 분리 (SRP)
+### 2.1 페이지 트리
 
-하나의 책임이란 하나의 변경 이유를 의미한다.
+컴포넌트 옆 `[ ]`는 해당 컴포넌트에서 직접 호출하는 훅이다.
 
-각 컴포넌트, 훅, 함수는 어떤 변경 이유 때문에 수정되는가라는 질문에 한 문장으로 답할 수 있어야 한다. 답이 둘 이상으로 갈리면 모듈이 잘못 묶여 있는 신호다.
-
-### 2.2 자기 도메인의 완결성
-
-step-2 리뷰에서 합의된 패턴: 폼이 자기 도메인의 완결 흐름(submit + 라우팅)을 책임진다.
-
-step-3에서도 동일하게 적용한다.
-
-- `CardRegisterationForm`은 등록 후 어디로 갈지(목록 페이지로 navigate)까지 자기 안에서 끝낸다.
-- `AddCardButton`은 카드 추가 페이지로의 navigate 동작까지 자기 안에서 끝낸다.
-- `DeleteButton`은 confirm + DELETE 요청 + onDelete 콜백 호출까지 자기 안에서 끝낸다.
-
-페이지(`*Page`)는 진입점일 뿐이다. 페이지에 책임이 쏠리지 않게 한다.
-
-### 2.3 도메인-인프라 분리
-
-- 도메인 = 카드 등록,조회,삭제 정책 (어떤 카드를 어떻게 다루는가)
-- 인프라 = fetch, MSW, react-router 같은 기술 도구
-
-도메인 코드가 인프라 도구에 직접 의존하지 않게, 인프라는 얇은 레이어로 격리한다.
-
-- `apis/cards.ts`가 fetch를 감싸고, 도메인 코드는 함수 시그니처만 안다.
-- MSW handler는 서버 동작 명세이지 도메인 정책이 아니다.
-
-### 2.4 명시적 상태 (Discriminated Union)
-
-```ts
-type AsyncState<T, E = ApiError> =
-  | { status: "idle" }
-  | { status: "loading" }
-  | { status: "success"; data: T }
-  | { status: "error"; error: E };
+```
+App
+├─ CardRegisterationFormPage (/cards/new)
+│  └─ CardRegisterationForm              [useCardForm, useCreateCard, useNavigate]
+│     ├─ CardRegisterationPreview
+│     ├─ CardRegisterationNumberInputSection   [useCardNumberInput]
+│     ├─ CardRegisterationIssuerSelectSection
+│     ├─ ExpiryDateRegisterationInputSection  [useExpiryDateInput]
+│     ├─ CvcRegisterationInputSection         [useSingleFieldInput]
+│     ├─ PasswordRegisterationInputSection    [useSingleFieldInput]
+│     └─ PrimaryButton ("확인")
+│
+└─ CardListPage (/cards)
+   └─ CardList                           [useCardList]
+      ├─ CardListLoading     (idle | loading 상태)
+      ├─ CardListEmpty       (success + data.length === 0)
+      │  └─ AddCardButton variant="primary"   [useNavigate]
+      ├─ CardListSuccess     (success + data.length > 0)
+      │  ├─ CardRow (반복)
+      │  │  └─ DeleteButton                  [useDeleteCard]
+      │  └─ AddCardButton variant="outline"  [useNavigate]
+      └─ CardListError       (error 상태)
 ```
 
-`isLoading` + `error` + `data` 같은 분리된 boolean은 유효하지 않은 상태 조합(`isLoading=true`인데 `data`가 있음 등)을 표현 가능하게 만든다. discriminated union은 한 시점에는 한 상태만 존재한다는 사실을 타입으로 강제한다.
+`useCardForm`은 `useCardInfo`와 `getCardCompletion`을 조합해 `CardRegisterationForm`에 카드 상태와 완료 여부를 한 번에 제공한다. `useCreateCard`는 POST 요청과 비동기 상태를 담당하고, 결과를 직접 반환해 submit 직후 navigate 처리를 가능하게 한다.
 
-컴포넌트에서 `switch (state.status)`로 분기하면 TypeScript가 각 분기 안에서 `data`/`error`의 존재 여부를 자동으로 좁혀준다.
+### 2.2 사용자 흐름
 
-### 2.5 점진적 추상화 (YAGNI + Rule of Three)
+```
+[/cards] CardListPage
+  ├─ empty → [카드 추가하기] → [/cards/new]
+  ├─ success → [+ 카드 추가] → [/cards/new]
+  ├─ success → [× 삭제] → confirm → DELETE → 같은 페이지에서 재조회
+  └─ error → [다시 시도] → 같은 페이지에서 재조회
 
-- 지금 한 곳에서만 쓰이면 추상화하지 않는다.
-- 두 번째 사용처가 나오면 일단 복붙해도 좋다 (의도된 중복).
-- 세 번째에서 패턴이 명확해지면 그때 추출한다.
-- 절반의 추상화는 피한다: 추출한 추상화는 모든 사용처에 일관되게 적용한다.
-
-실제 결정: `useCreateCard`, `useDeleteCard`, `useCardList` 세 훅의 비동기 패턴이 미묘하게 달라 `useAsync<T>` 공통 추상화를 하지 않았다. `useCardList`는 자동 실행 + 레이스 컨디션 처리, `useCreateCard`는 결과 반환, `useDeleteCard`는 단순 trigger로 각 훅의 관심사가 달랐다.
-
-### 2.6 이름과 실체 일치
-
-- 이름이 실제로 하는 일을 정확히 표현해야 한다.
-- 이름이 의도된 사용처를 좁히지 않는다.
-
-실제 적용:
-- `SubmitButton` → `PrimaryButton` (메인 CTA 범용 버튼으로 개명)
-- `CardCompany` → `IssuerCode` (서버 도메인과 일치하도록)
-- `CardListItem` 컴포넌트 → `CardRow` (타입명 `CardListItem`과 충돌 방지, 역할도 "행"으로 명확화)
-- `CardForm` → `CardRegisterationForm` (카드 목록 컴포넌트들과 구분)
-
-### 2.7 사용자 실수 vs 시스템 제약 (UX 톤)
-
-- 빨간 에러 = 사용자가 고칠 수 있는 실수 (CVC에 한글, 만료일 형식 오류 등)
-- 노란 warning / 회색 정보 = 사용자 실수가 아닌 시스템,정책 제약 (미지원 카드사, 한도 초과 등)
-
-400 `INVALID_*` 응답은 사용자 실수 → 빨간 에러로 매핑. 미래의 한도 초과 같은 정책 제약은 차분한 안내 톤.
-
-### 2.8 고차 함수로 가독성 높이기
-
-try-catch 패턴을 `tryCatch` 고차 함수로 추출했다. 함수를 값으로 다루는 JavaScript의 일급 함수 특성을 활용한 것으로, 호출하는 쪽이 에러 처리 구현보다 성공하면 무엇을, 실패하면 무엇을이라는 의도에 집중하게 한다.
-
-```ts
-// utils/tryCatch.ts
-export const tryCatch = async <T, E>(
-  f: () => Promise<T>,
-  onError: (error: unknown) => E,
-): Promise<T | E> => {
-  try {
-    return await f();
-  } catch (error) {
-    return onError(error);
-  }
-};
+[/cards/new] CardRegisterationFormPage
+  └─ 입력 완료 + 확인 → POST /cards (201) → [/cards]
+                     → POST /cards (400) → 같은 페이지에서 필드별 에러 표시
 ```
 
-`parseApiError`에 적용한 결과: try 안의 성공 흐름과 catch의 폴백을 분리해서 각 함수가 하나의 관심사만 다루게 되었다.
+모든 미매칭 경로는 `/cards`로 리다이렉트된다. 앱 진입 시 카드 목록을 먼저 보여주는 것이 자연스럽다.
 
 ---
 
@@ -131,7 +119,7 @@ export const tryCatch = async <T, E>(
 
 ### 3.1 모델의 두 측면 (UI ↔ 서버)
 
-UI 모델과 서버 모델이 다르다. 이 사실이 step-3의 핵심 학습 포인트이다.
+UI 모델과 서버 모델이 다르다.
 
 | 항목 | UI 모델 (입력 시) | 서버 모델 (요청 시) | 서버 모델 (응답 시) |
 |------|------------------|---------------------|---------------------|
@@ -162,8 +150,6 @@ export type CardDisplayInfo = CardInfo & {
   network: CardNetwork;
 };
 ```
-
-`company`라는 기존 필드명은 의미가 모호하고 서버 모델과 정합하지 않아 `issuerCode`로 통일했다.
 
 #### 서버 요청/응답 모델 (apis/cards.ts)
 
@@ -230,7 +216,7 @@ export const toFieldError = (error: ApiError): { field: CardFormField; message: 
 
 ### 3.5 ISSUERS 상수 (constants/issuers.ts)
 
-기존 `CARD_COMPANIES`는 키가 `bc`, `shinhan` 같은 이름 기반이었다. 서버 도메인은 `31`, `41` 같은 코드 기반이므로 키를 issuerCode로 통일했다.
+카드사 식별자는 이름(`bc`, `shinhan`) 기반이 아닌 서버 도메인 기준의 코드(`31`, `41`) 기반으로 관리한다. UI에서 표시 이름과 색상이 필요할 때 이 상수에서 조회한다.
 
 ```ts
 export const ISSUERS = {
@@ -256,9 +242,108 @@ export const isIssuerCode = (value: string): value is IssuerCode =>
 
 ---
 
-## 4. API 레이어
+## 4. 설계 원칙
 
-### 4.1 엔드포인트
+### 4.1 변경 이유 기준 책임 분리 (SRP)
+
+하나의 책임이란 하나의 변경 이유를 의미한다.
+
+각 컴포넌트, 훅, 함수는 어떤 변경 이유 때문에 수정되는가라는 질문에 한 문장으로 답할 수 있어야 한다. 답이 둘 이상으로 갈리면 모듈이 잘못 묶여 있는 신호다.
+
+### 4.2 자기 도메인의 완결성
+
+각 컴포넌트는 자신이 책임지는 동작의 시작부터 끝까지를 자기 안에서 처리한다. 바깥에 흐름을 위임하지 않는다.
+
+- `CardRegisterationForm`은 등록 후 어디로 갈지(목록 페이지로 navigate)까지 자기 안에서 끝낸다.
+- `AddCardButton`은 카드 추가 페이지로의 navigate 동작까지 자기 안에서 끝낸다.
+- `DeleteButton`은 confirm + DELETE 요청 + onDelete 콜백 호출까지 자기 안에서 끝낸다.
+
+페이지(`*Page`)는 진입점일 뿐이다. 페이지에 책임이 쏠리지 않게 한다.
+
+### 4.3 도메인-인프라 분리
+
+- 도메인 = 카드 등록, 조회, 삭제 정책 (어떤 카드를 어떻게 다루는가)
+- 인프라 = fetch, MSW, react-router 같은 기술 도구
+
+도메인 코드가 인프라 도구에 직접 의존하지 않게, 인프라는 얇은 레이어로 격리한다.
+
+- `apis/cards.ts`가 fetch를 감싸고, 도메인 코드는 함수 시그니처만 안다.
+- MSW handler는 서버 동작 명세이지 도메인 정책이 아니다.
+
+### 4.4 명시적 상태 (Discriminated Union)
+
+```ts
+type AsyncState<T, E = ApiError> =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: E };
+```
+
+`isLoading` + `error` + `data` 같은 분리된 boolean은 유효하지 않은 상태 조합(`isLoading=true`인데 `data`가 있음 등)을 표현 가능하게 만든다. discriminated union은 한 시점에는 한 상태만 존재한다는 사실을 타입으로 강제한다.
+
+컴포넌트에서 `switch (state.status)`로 분기하면 TypeScript가 각 분기 안에서 `data`/`error`의 존재 여부를 자동으로 좁혀준다.
+
+### 4.5 점진적 추상화 (YAGNI + Rule of Three)
+
+- 지금 한 곳에서만 쓰이면 추상화하지 않는다.
+- 두 번째 사용처가 나오면 일단 복붙해도 좋다 (의도된 중복).
+- 세 번째에서 패턴이 명확해지면 그때 추출한다.
+- 절반의 추상화는 피한다: 추출한 추상화는 모든 사용처에 일관되게 적용한다.
+
+실제 결정: `useCreateCard`, `useDeleteCard`, `useCardList` 세 훅의 비동기 패턴이 미묘하게 달라 `useAsync<T>` 공통 추상화를 하지 않았다. `useCardList`는 자동 실행 + 레이스 컨디션 처리, `useCreateCard`는 결과 반환, `useDeleteCard`는 단순 trigger로 각 훅의 관심사가 달랐다.
+
+### 4.6 이름과 실체 일치
+
+- 이름이 실제로 하는 일을 정확히 표현해야 한다.
+- 이름이 의도된 사용처를 좁히지 않는다.
+
+실제 적용:
+- `SubmitButton` → `PrimaryButton` (메인 CTA 범용 버튼으로 개명)
+- `CardCompany` → `IssuerCode` (서버 도메인과 일치하도록)
+- `CardListItem` 컴포넌트 → `CardRow` (타입명 `CardListItem`과 충돌 방지, 역할도 "행"으로 명확화)
+- `CardForm` → `CardRegisterationForm` (카드 목록 컴포넌트들과 구분)
+
+### 4.7 사용자 실수 vs 시스템 제약 (UX 톤)
+
+- 빨간 에러 = 사용자가 고칠 수 있는 실수 (CVC에 한글, 만료일 형식 오류 등)
+- 노란 warning / 회색 정보 = 사용자 실수가 아닌 시스템, 정책 제약 (미지원 카드사, 한도 초과 등)
+
+400 `INVALID_*` 응답은 사용자 실수 → 빨간 에러로 매핑. 미래의 한도 초과 같은 정책 제약은 차분한 안내 톤.
+
+### 4.8 파생값은 순수 함수로 계산한다
+
+카드 번호 완료 여부, 카드 네트워크, 최대 입력 길이, 폼 전체 완료 여부는 모두 입력값에서 계산할 수 있는 파생값이다. 이를 별도 `useState`로 저장하면 원본 입력값과 파생 상태가 어긋날 수 있다. 그래서 `useEffect`나 별도 state 없이 `getCardCompletion` 같은 순수 함수로 매 렌더마다 계산한다.
+
+UI 모델 → 서버 요청 모델 변환(`toCreateCardRequest`)이나 에러 코드 → 필드 매핑(`toFieldError`)도 같은 원칙으로 순수 함수로만 처리했다. 두 함수 모두 입력이 같으면 항상 같은 출력을 반환하고, 부수 효과가 없다.
+
+계산 비용이 작기 때문에 `useMemo`도 적용하지 않았다. `useMemo`를 추가하면 오히려 의존성 배열 관리 비용이 생기고, 성능 문제가 실측되지 않은 상황에서 추가하는 최적화는 코드를 복잡하게 만들 뿐이다.
+
+### 4.9 고차 함수로 가독성 높이기
+
+try-catch 패턴을 `tryCatch` 고차 함수로 추출했다. 함수를 값으로 다루는 JavaScript의 일급 함수 특성을 활용한 것으로, 호출하는 쪽이 에러 처리 구현보다 성공하면 무엇을, 실패하면 무엇을이라는 의도에 집중하게 한다.
+
+```ts
+// utils/tryCatch.ts
+export const tryCatch = async <T, E>(
+  f: () => Promise<T>,
+  onError: (error: unknown) => E,
+): Promise<T | E> => {
+  try {
+    return await f();
+  } catch (error) {
+    return onError(error);
+  }
+};
+```
+
+`parseApiError`에 적용한 결과: try 안의 성공 흐름과 catch의 폴백을 분리해서 각 함수가 하나의 관심사만 다루게 되었다.
+
+---
+
+## 5. API 레이어
+
+### 5.1 엔드포인트
 
 | Method | Path | 설명 | 성공 status |
 |--------|------|-----|------------|
@@ -266,7 +351,7 @@ export const isIssuerCode = (value: string): value is IssuerCode =>
 | GET | `/cards` | 카드 목록 조회 | 200 |
 | DELETE | `/cards/:id` | 카드 삭제 (멱등) | 204 |
 
-### 4.2 클라이언트 함수 (apis/cards.ts)
+### 5.2 클라이언트 함수 (apis/cards.ts)
 
 각 엔드포인트당 함수 하나. 이름은 도메인 동작을 표현한다 (`fetchCards` 같은 인프라 이름이 아니라 `getCards`/`createCard`/`deleteCard`).
 
@@ -294,9 +379,9 @@ fetch는 네트워크 연결 실패만 reject하고, 400/500 응답은 정상 re
 
 ---
 
-## 5. MSW 셋업
+## 6. MSW 셋업
 
-### 5.1 파일 구조
+### 6.1 파일 구조
 
 ```
 mocks/
@@ -307,7 +392,7 @@ mocks/
 └─ cardStore.ts    ← 인메모리 카드 저장소
 ```
 
-### 5.2 enableMocking 패턴 (mocks/index.ts)
+### 6.2 enableMocking 패턴 (mocks/index.ts)
 
 `main.tsx`가 MSW 세부사항을 모르게 하기 위해 별도 파일로 분리했다.
 
@@ -321,7 +406,7 @@ export const enableMocking = async () => {
 
 `main.tsx`는 `enableMocking().then(() => { render })` 형태로 MSW가 준비된 뒤 렌더링을 시작한다. basename이 `/react-payments`이므로 `serviceWorker.url`을 명시적으로 지정해야 한다.
 
-### 5.3 검증 시나리오 (handler.ts)
+### 6.3 검증 시나리오 (handler.ts)
 
 | 카드 번호 | CVC | 만료일 | 결과 |
 |-----------|-----|--------|-----|
@@ -333,7 +418,7 @@ export const enableMocking = async () => {
 
 검증 순서: 만료일 → CVC → BIN 매칭. 앞 조건이 실패하면 뒤는 보지 않는다.
 
-### 5.4 인메모리 저장소 (mocks/cardStore.ts)
+### 6.4 인메모리 저장소 (mocks/cardStore.ts)
 
 카드 번호는 원본을 저장하고 응답 시 마스킹한다. 마스킹 형식: 앞 6자리 + `******` + 뒤 4자리. 앞 6자리(BIN)까지 노출하는 것은 PCI-DSS 표시 상한이자 ISO 7812 BIN 식별 범위와 정렬하기 위함이다.
 
@@ -341,9 +426,9 @@ export const enableMocking = async () => {
 
 ---
 
-## 6. 비동기 훅
+## 7. 비동기 훅
 
-### 6.1 useCardList (hooks/queries/useCardList.ts)
+### 7.1 useCardList (hooks/queries/useCardList.ts)
 
 페이지 진입 시 자동으로 GET `/cards`를 호출한다. 레이스 컨디션을 `ignore` 패턴으로 처리한다.
 
@@ -371,7 +456,7 @@ useEffect(() => loadCards(), []);
 
 `retry`를 `useCallback` 없이 일반 함수로 둔 이유: 외부에 노출되는 함수이지만 deps가 없어서 `useCallback`의 이득이 없다. 렌더마다 새로 만들어지는 함수를 굳이 메모이제이션하지 않는다.
 
-### 6.2 useCreateCard (hooks/queries/useCreateCard.ts)
+### 7.2 useCreateCard (hooks/queries/useCreateCard.ts)
 
 `submit` 함수가 결과를 직접 반환하도록 설계했다. 호출하는 쪽에서 `await submit(cardInfo)` 직후 결과에 따라 navigate할 수 있기 때문이다.
 
@@ -397,15 +482,15 @@ const submit = async (cardInfo: CardInfo) => {
 
 `tryCatch`의 제네릭을 `<T, E>`로 분리한 이유: 성공 반환 타입과 에러 반환 타입이 달라도 되도록 하기 위해서다.
 
-### 6.3 useDeleteCard (hooks/queries/useDeleteCard.ts)
+### 7.3 useDeleteCard (hooks/queries/useDeleteCard.ts)
 
 삭제는 단순하다. `remove(id)` 호출 후 성공/실패는 `DeleteButton` 컴포넌트에서 `onDelete` 콜백으로 처리한다.
 
 ---
 
-## 7. 컴포넌트 아키텍처
+## 8. 컴포넌트 아키텍처
 
-### 7.1 폴더 구조
+### 8.1 폴더 구조
 
 ```
 components/
@@ -436,31 +521,7 @@ components/
 
 각 폴더 안에는 폴더명과 동일한 파일 하나만 둔다. 예: `CardRow/CardRow.tsx`.
 
-### 7.2 페이지 트리
-
-```
-App
-├─ CardRegisterationFormPage (/cards/new)  → 어떤 경로든 /cards로 리다이렉트
-│  └─ CardRegisterationForm
-│     ├─ CardRegisterationPreview (미리보기)
-│     ├─ *InputSection (5종)
-│     └─ PrimaryButton ("확인")
-│
-└─ CardListPage (/cards)
-   └─ CardList
-      ├─ CardListLoading     (idle | loading 상태)
-      ├─ CardListEmpty       (success + data.length === 0)
-      │  └─ AddCardButton variant="primary"
-      ├─ CardListSuccess     (success + data.length > 0)
-      │  ├─ CardRow (반복)
-      │  │  └─ DeleteButton
-      │  └─ AddCardButton variant="outline"
-      └─ CardListError       (error 상태)
-```
-
-`CardRegistrationCompletePage`는 이번 단계에서 제거했다. 등록 후 `/cards`로 바로 이동하므로 완료 페이지가 불필요해졌다.
-
-### 7.3 책임 명세
+### 8.2 책임 명세
 
 각 컴포넌트의 책임과 변경 이유:
 
@@ -488,21 +549,21 @@ AddCardButton: 카드 추가 화면으로의 진입점을 제공한다. 이 컴�
 
 PrimaryButton: 메인 CTA의 시각적 형태를 제공한다. 이 컴포넌트는 메인 CTA의 표현 방식이 바뀔 때 변경된다.
 
-### 7.4 설계 결정: CardRow와 DeleteButton 분리
+### 8.3 설계 결정: CardRow와 DeleteButton 분리
 
 초기에는 `CardRow` 안에 DELETE 요청 흐름(window.confirm + DELETE `/cards/:id` + onDelete 콜백)이 있었다. `CardRow`가 카드 정보 표시와 삭제 동작 두 가지 책임을 동시에 가지는 구조였다.
 
-`AddCardButton`이 POST `/cards/new` navigate까지 자기 완결로 처리하듯, `DeleteButton`도 DELETE `/cards/:id`의 완결 흐름을 책임지는 방향으로 분리해 일관성을 맞췄다.
+`AddCardButton`이 navigate까지 자기 완결로 처리하듯, `DeleteButton`도 DELETE `/cards/:id`의 완결 흐름을 책임지는 방향으로 분리해 일관성을 맞췄다.
 
-### 7.5 설계 결정: CardList를 Form과 Page 사이에 둔 이유
+### 8.4 설계 결정: CardList를 Form과 Page 사이에 둔 이유
 
 `CardRegisterationFormPage` → `CardRegisterationForm` 구조처럼 카드 목록도 `CardListPage` → `CardList` 구조를 취했다. 페이지는 레이아웃(배경, 패딩)만 담당하고, 도메인 로직(`useCardList`, 상태 분기)은 `CardList`가 담당한다.
 
 ---
 
-## 8. 라우팅
+## 9. 라우팅
 
-### 8.1 경로 상수 (constants/routes.ts)
+### 9.1 경로 상수 (constants/routes.ts)
 
 ```ts
 export const ROUTES = {
@@ -513,35 +574,11 @@ export const ROUTES = {
 
 라우팅 경로 문자열을 코드 곳곳에 박지 않고 상수화한다. 변경 시 한 곳만 수정.
 
-### 8.2 기본 진입 경로
-
-모든 미매칭 경로는 `/cards`로 리다이렉트된다.
-
-```tsx
-<Route path="*" element={<Navigate to={ROUTES.CARD_LIST} replace />} />
-```
-
-앱 진입 시 카드 목록 먼저 보여주는 것이 자연스럽다.
-
-### 8.3 흐름
-
-```
-[/cards] CardListPage
-  ├─ empty → [카드 추가하기] → [/cards/new]
-  ├─ success → [+ 카드 추가] → [/cards/new]
-  ├─ success → [× 삭제] → confirm → DELETE → 같은 페이지에서 재조회
-  └─ error → [다시 시도] → 같은 페이지에서 재조회
-
-[/cards/new] CardRegisterationFormPage
-  └─ 입력 완료 + 확인 → POST /cards (201) → [/cards]
-                     → POST /cards (400) → 같은 페이지에서 필드별 에러 표시
-```
-
 ---
 
-## 9. 에러 처리 전략
+## 10. 에러 처리 전략
 
-### 9.1 서버 에러를 입력 필드로 매핑하는 흐름
+### 10.1 서버 에러를 입력 필드로 매핑하는 흐름
 
 ```
 POST /cards (400)
@@ -552,7 +589,7 @@ POST /cards (400)
 
 각 InputSection은 내부 유효성 검사 에러(`errorMessage`)와 서버 에러(`serverErrorMessage`)를 합쳐서 표시한다. 내부 에러가 있으면 서버 에러보다 우선한다.
 
-### 9.2 에러 vs 경고 톤
+### 10.2 에러 vs 경고 톤
 
 | 케이스 | 톤 | 위치 |
 |--------|----|----|
@@ -564,7 +601,7 @@ POST /cards (400)
 
 미지원 BIN이 입력 중에는 warning이지만 등록 시도하면 400 에러로 빨강이 된다. 사용자가 등록을 시도한 시점부터는 실수로 간주하기 때문이다.
 
-### 9.3 삭제 confirm
+### 10.3 삭제 confirm
 
 - 위치: `DeleteButton` 내부 (삭제 동작의 완결 흐름을 책임)
 - 방식: `window.confirm()` (미션 요구사항)
@@ -573,9 +610,9 @@ POST /cards (400)
 
 ---
 
-## 10. 테스트 전략
+## 11. 테스트 전략
 
-### 10.1 통합 테스트 시나리오
+### 11.1 통합 테스트 시나리오
 
 사용자 관점의 흐름을 기준으로:
 
@@ -597,7 +634,7 @@ POST /cards (400)
 
 9. 목록 조회 에러 + 재시도: GET 실패 → 에러 화면 → "다시 시도" → 정상 데이터 로드
 
-### 10.2 RTL 탐색 우선순위
+### 11.2 RTL 탐색 우선순위
 
 1. `getByRole` (또는 `findByRole` for async)
 2. `getByText`
@@ -606,7 +643,7 @@ POST /cards (400)
 
 `data-testid`는 쿼리할 다른 방법이 정말 없을 때만. 보통은 `role` + `name` 조합으로 진행한다.
 
-### 10.3 MSW handler runtime override
+### 11.3 MSW handler runtime override
 
 테스트 시나리오마다 다른 응답이 필요할 때 `server.use()` 패턴을 사용한다.
 
@@ -623,23 +660,25 @@ test("목록 조회 실패 시 에러 + 재시도", async () => {
 
 `{ once: true }`로 다음 호출은 기본 핸들러로 복귀 처리한다.
 
-### 10.4 테스트 환경
+### 11.4 테스트 환경
 
-Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vitest가 자연스럽다.
+Vitest + jsdom + @testing-library/react 조합을 선택했다.
+
+Jest 대신 Vitest를 선택한 이유는 세 가지다. 첫째, 이 프로젝트는 Vite 기반이라 `vite.config.ts` 하나에서 빌드와 테스트 설정을 함께 관리할 수 있다. Jest를 쓰면 별도 `jest.config.ts`와 Babel/ts-jest 설정이 추가로 필요하다. 둘째, Vitest는 ESM을 네이티브로 지원해 MSW v2와의 호환성 문제가 없다. MSW v2는 ESM 전용 패키지라 Jest에서 쓰려면 변환 설정이 복잡해진다. 셋째, Vitest의 API는 Jest와 거의 동일해 기존 테스트 작성 방식을 그대로 가져올 수 있다.
 
 `beforeEach`에서 `store.reset()`을 호출해 각 테스트가 독립적인 상태에서 시작하게 한다.
 
 ---
 
-## 11. 구현 완료 체크리스트
+## 12. 구현 완료 체크리스트
 
-### 11.0 워밍업
+### 12.0 워밍업
 
 - [x] `SubmitButton` → `PrimaryButton` 개명, `common/` 폴더로 이동
 - [x] 라우팅 경로 상수화 (`constants/routes.ts`)
 - [x] `navigate("/completed")` 등 raw 문자열 제거
 
-### 11.1 도메인 모델 재설계
+### 12.1 도메인 모델 재설계
 
 - [x] `CardInfo` 타입: `company` → `issuerCode`
 - [x] `ISSUERS` 상수 신설 (`constants/issuers.ts`)
@@ -648,7 +687,7 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 - [x] `CardRegisterationPreview` 색상 표시를 `ISSUERS` 기준으로 변경
 - [x] `CardRegisterationIssuerSelectSection`: issuerCode 기반으로 변경
 
-### 11.2 API 레이어
+### 12.2 API 레이어
 
 - [x] `apis/cards.ts` (`createCard`, `getCards`, `deleteCard`)
 - [x] `parseApiError`: `toApiError` + `tryCatch` 분리
@@ -656,7 +695,7 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 - [x] `utils/cardMapper.ts` (`toCreateCardRequest`)
 - [x] `utils/apiErrorField.ts` (`toFieldError`)
 
-### 11.3 MSW 셋업
+### 12.3 MSW 셋업
 
 - [x] MSW 설치
 - [x] `mocks/cardStore.ts` (인메모리)
@@ -666,20 +705,20 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 - [x] `mocks/index.ts` (`enableMocking`: 환경 분기)
 - [x] `main.tsx`에서 MSW 활성화
 
-### 11.4 비동기 훅
+### 12.4 비동기 훅
 
 - [x] `useCardList` (자동 fetch + retry + 레이스 컨디션 처리)
 - [x] `useCreateCard` (수동 trigger, 결과 반환)
 - [x] `useDeleteCard` (수동 trigger)
 
-### 11.5 카드 등록 서버 연동
+### 12.5 카드 등록 서버 연동
 
 - [x] `CardRegisterationForm`이 `useCreateCard`를 호출
 - [x] 201 응답 시 `navigate(ROUTES.CARD_LIST)`
 - [x] 400 응답 시 `toFieldError`로 변환 → 해당 InputSection에 `serverErrorMessage` 전달
 - [x] 등록 중 버튼 비활성화 (`loading` 상태)
 
-### 11.6 카드 목록 페이지
+### 12.6 카드 목록 페이지
 
 - [x] `pages/CardListPage.tsx`
 - [x] `components/cardList/CardList/` (비동기 상태 분기)
@@ -693,24 +732,10 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 - [x] `/cards` 라우트 등록, 기본 진입 경로 설정
 - [x] `CardRegistrationCompletePage` 제거
 
-### 11.7 통합 테스트
+### 12.7 통합 테스트
 
 - [x] vitest.setup.ts + @testing-library/react 셋업
 - [x] 시나리오 1~9 작성
-s
----
-
-## 12. step-2 패턴 연속성
-
-| step-2 학습 | step-3에서 어떻게 이어지는가 |
-|------------|-----------------------------|
-| 변경 이유로 책임을 가른다 | 컴포넌트/훅/매퍼 모두 변경 이유 기준으로 분리. DeleteButton 분리도 같은 사고 |
-| 훅 vs 함수: useState/useEffect 없으면 함수 | `toCreateCardRequest`, `toFieldError`는 함수로 둠 |
-| 이름과 실체 일치 | `SubmitButton` → `PrimaryButton`, `CardCompany` → `IssuerCode`, `CardListItem` → `CardRow` |
-| 절반의 추상화는 피한다 | `useAsync` 추출 포기: 세 훅의 패턴이 충분히 같지 않았다 |
-| 자기 도메인의 완결 흐름 | `CardRegisterationForm`은 navigate까지, `AddCardButton`도 navigate까지, `DeleteButton`도 confirm + DELETE까지 |
-| 사용자 실수 vs 시스템 제약 | 400 에러는 빨강, 입력 중 미지원 BIN은 노랑 |
-| 도메인 vs 표시 데이터 분리 | 서버 모델 vs UI 모델 명시적 분리, 매퍼 함수로 변환 |
 
 ---
 
