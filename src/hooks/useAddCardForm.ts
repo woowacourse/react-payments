@@ -40,7 +40,7 @@ export default function useAddCardForm() {
   } = useCardFormValidation({ formValue, setFormValue, updateErrors, cardNumbersTotalLength, cvcLength });
 
   const buildCompletePageState = (): CompletePageState => ({
-    firstFourDigits: formValue.cardNumbers.value[0],
+    firstFourDigits: formValue.cardNumbers.value.join('').slice(0, 4),
     cardCompany: CARD_COMPANY_OPTIONS.find((option) => option.value === formValue.cardCompany.value)?.label ?? '카드',
   });
 
