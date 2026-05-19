@@ -47,9 +47,14 @@ export const useCardRegisterSubmit = () => {
 
   // 서버 에러 응답을 필드 에러 상태로 반영
   const applyServerError = (error: CardErrorResponse) => {
-    const fieldName = getServerFieldName(error.code);
-
     setSubmitStatus('error');
+
+    if (error.type !== 'field') {
+      setSubmitError(SUBMIT_ERROR_MESSAGE);
+      return;
+    }
+
+    const fieldName = getServerFieldName(error.code);
 
     if (!fieldName) {
       setSubmitError(SUBMIT_ERROR_MESSAGE);

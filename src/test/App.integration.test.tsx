@@ -209,6 +209,17 @@ describe('카드 결제 흐름', () => {
     await waitFor(() => expect(expiryInput).toHaveFocus());
   });
 
+  test('카드 등록 중 알 수 없는 서버 에러가 발생하면 공통 에러 메시지를 보여준다', async () => {
+    server.use(http.post('/cards', () => HttpResponse.text('server error', {status: 500})));
+    renderApp('/register');
+
+    const user = await fillValidCardForm();
+    await user.click(screen.getByRole('button', {name: '확인'}));
+
+    expect(await screen.findByText('카드 정보를 다시 확인해 주세요')).toBeInTheDocument();
+    expect(screen.queryByText('카드 요청에 실패했습니다.')).not.toBeInTheDocument();
+  });
+
   test('등록된 카드가 여러 장이면 개수와 카드 정보를 함께 보여준다', async () => {
     addBcCard();
     addShinhanCard();

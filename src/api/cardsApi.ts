@@ -1,10 +1,20 @@
 import type {CardErrorResponse, CardResponse, CreateCardRequest, CreateCardResponse} from '@/domain/card/cardApi.types';
+import type {CardErrorCode} from '@/domain/card/cardApi.types';
 
 const CARDS_ENDPOINT = '/cards';
-const CARD_REQUEST_ERROR: CardErrorResponse = {
-  code: 'INVALID_CARD_NUMBER',
+const CARD_FIELD_ERROR_CODES: CardErrorCode[] = [
+  'INVALID_CARD_NUMBER',
+  'INVALID_CVC',
+  'INVALID_EXPIRATION_DATE',
+  'INVALID_ISSUER_CODE',
+];
+const UNKNOWN_CARD_API_ERROR: CardErrorResponse = {
+  type: 'unknown',
   message: '카드 요청에 실패했습니다.',
 };
+
+const isCardErrorCode = (value: unknown): value is CardErrorCode =>
+  typeof value === 'string' && CARD_FIELD_ERROR_CODES.includes(value as CardErrorCode);
 
 const hasCardResponseFields = (card: unknown) => {
   if (!card || typeof card !== 'object') return false;
@@ -15,7 +25,7 @@ const hasCardResponseFields = (card: unknown) => {
 };
 
 const parseCardListResponse = (value: unknown): CardResponse[] => {
-  if (!Array.isArray(value) || !value.every(hasCardResponseFields)) throw CARD_REQUEST_ERROR;
+  if (!Array.isArray(value) || !value.every(hasCardResponseFields)) throw UNKNOWN_CARD_API_ERROR;
 
   return value as CardResponse[];
 };
@@ -25,12 +35,15 @@ const readCardApiError = async (response: Response): Promise<CardErrorResponse> 
   try {
     const error = await response.json();
 
+    if (!isCardErrorCode(error.code) || typeof error.message !== 'string') return UNKNOWN_CARD_API_ERROR;
+
     return {
-      code: error.code ?? 'INVALID_CARD_NUMBER',
-      message: error.message ?? '카드 요청에 실패했습니다.',
+      type: 'field',
+      code: error.code,
+      message: error.message,
     };
   } catch {
-    return CARD_REQUEST_ERROR;
+    return UNKNOWN_CARD_API_ERROR;
   }
 };
 

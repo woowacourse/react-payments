@@ -22,7 +22,15 @@ export type CardErrorCode =
   | 'INVALID_EXPIRATION_DATE'
   | 'INVALID_ISSUER_CODE';
 
-export type CardErrorResponse = {
+export type CardFieldErrorResponse = {
+  type: 'field';
   code: CardErrorCode;
   message: string;
 };
+
+export type UnknownCardApiError = {
+  type: 'unknown';
+  message: string;
+};
+
+export type CardErrorResponse = CardFieldErrorResponse | UnknownCardApiError;
