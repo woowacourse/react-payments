@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import type {Decorator} from '@storybook/react-vite';
+import {useEffect} from 'react';
 import {MemoryRouter} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -30,21 +31,33 @@ const createErrorResponse = () =>
 
 const withMockFetch = (fetchCards: () => Promise<Response>): Decorator => {
   return (Story) => {
-    window.fetch = async (_input, init) => {
-      if (init?.method === 'DELETE') return new Response(null, {status: 204});
+    const MockedFetchStory = () => {
+      useEffect(() => {
+        const originalFetch = window.fetch;
 
-      return fetchCards();
+        window.fetch = async (_input, init) => {
+          if (init?.method === 'DELETE') return new Response(null, {status: 204});
+
+          return fetchCards();
+        };
+
+        return () => {
+          window.fetch = originalFetch;
+        };
+      }, []);
+
+      return (
+        <StoryBackground>
+          <PhoneFrame>
+            <MemoryRouter initialEntries={['/cards']}>
+              <Story />
+            </MemoryRouter>
+          </PhoneFrame>
+        </StoryBackground>
+      );
     };
 
-    return (
-      <StoryBackground>
-        <PhoneFrame>
-          <MemoryRouter initialEntries={['/cards']}>
-            <Story />
-          </MemoryRouter>
-        </PhoneFrame>
-      </StoryBackground>
-    );
+    return <MockedFetchStory />;
   };
 };
 
