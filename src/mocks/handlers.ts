@@ -1,18 +1,18 @@
 import {http, HttpResponse} from 'msw';
 
-import type {CreateCardRequest} from '@/domain/card/cardApi.types';
+import {CARD_ERROR_MESSAGES} from '@/domain/card/cardApi.types';
+import type {CardErrorCode, CreateCardRequest} from '@/domain/card/cardApi.types';
 import {addMockCard, deleteMockCard, getMockCards} from './cardStore';
-import {ERROR_MESSAGES, validateCreateCardRequest} from './validators/cardRequestValidator';
-import type {ErrorCode} from './validators/cardRequestValidator';
+import {validateCreateCardRequest} from './validators/cardRequestValidator';
 
 const CARDS_ENDPOINT = '/cards';
 
 // API 스펙의 400 응답 형식으로 에러를 생성
-const createErrorResponse = (code: ErrorCode) =>
+const createErrorResponse = (code: CardErrorCode) =>
   HttpResponse.json(
     {
       code,
-      message: ERROR_MESSAGES[code],
+      message: CARD_ERROR_MESSAGES[code],
     },
     {status: 400}
   );

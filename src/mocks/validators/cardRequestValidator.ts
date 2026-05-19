@@ -1,4 +1,4 @@
-import type {CreateCardRequest} from '@/domain/card/cardApi.types';
+import type {CardErrorCode, CreateCardRequest} from '@/domain/card/cardApi.types';
 import {getBrandName, getFormatByBrand} from '@/domain/card/cardBrand';
 import {getCompanyByIssuerCode} from '@/domain/card/cardCompany';
 
@@ -12,15 +12,6 @@ const MIN_CVC_DIGIT = 3;
 const MAX_CVC_DIGIT = 4;
 
 const INVALID_TEST_CVC = '000';
-
-export const ERROR_MESSAGES = {
-  INVALID_CARD_NUMBER: '유효하지 않은 카드 번호입니다.',
-  INVALID_CVC: '유효하지 않은 CVC입니다.',
-  INVALID_EXPIRATION_DATE: '유효하지 않은 만료일입니다.',
-  INVALID_ISSUER_CODE: '지원하지 않는 카드사입니다.',
-};
-
-export type ErrorCode = keyof typeof ERROR_MESSAGES;
 
 // 카드 번호가 브랜드 조건을 충족하고 해당 브랜드 자릿수 규칙을 만족하는지 확인
 const isSupportedCardNumber = (number: string) => {
@@ -53,7 +44,12 @@ const isValidCvc = (cvc: string) => {
 };
 
 // 카드 등록 요청을 검증하고 첫 번째 실패 code를 반환
-export const validateCreateCardRequest = ({number, expirationDate, cvc, issuerCode}: Partial<CreateCardRequest>) => {
+export const validateCreateCardRequest = ({
+  number,
+  expirationDate,
+  cvc,
+  issuerCode,
+}: Partial<CreateCardRequest>): CardErrorCode | null => {
   if (!number || !isSupportedCardNumber(number)) return 'INVALID_CARD_NUMBER';
   if (!cvc || !isValidCvc(cvc)) return 'INVALID_CVC';
   if (!expirationDate || !isValidExpirationDate(expirationDate)) return 'INVALID_EXPIRATION_DATE';
