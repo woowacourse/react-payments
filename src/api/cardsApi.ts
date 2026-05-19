@@ -1,6 +1,24 @@
 import type {CardErrorResponse, CardResponse, CreateCardRequest, CreateCardResponse} from '@/domain/card/cardApi.types';
 
 const CARDS_ENDPOINT = '/cards';
+const CARD_REQUEST_ERROR: CardErrorResponse = {
+  code: 'INVALID_CARD_NUMBER',
+  message: '카드 요청에 실패했습니다.',
+};
+
+const hasCardResponseFields = (card: unknown) => {
+  if (!card || typeof card !== 'object') return false;
+
+  const {id, issuerCode, number, expirationDate} = card as Record<string, unknown>;
+
+  return [id, issuerCode, number, expirationDate].every((value) => typeof value === 'string');
+};
+
+const parseCardListResponse = (value: unknown): CardResponse[] => {
+  if (!Array.isArray(value) || !value.every(hasCardResponseFields)) throw CARD_REQUEST_ERROR;
+
+  return value as CardResponse[];
+};
 
 // 실패 응답 body를 에러 객체 형식에 맞게 생성
 const readCardApiError = async (response: Response): Promise<CardErrorResponse> => {
@@ -12,10 +30,7 @@ const readCardApiError = async (response: Response): Promise<CardErrorResponse> 
       message: error.message ?? '카드 요청에 실패했습니다.',
     };
   } catch {
-    return {
-      code: 'INVALID_CARD_NUMBER',
-      message: '카드 요청에 실패했습니다.',
-    };
+    return CARD_REQUEST_ERROR;
   }
 };
 
@@ -40,7 +55,7 @@ export const getCards = async (): Promise<CardResponse[]> => {
 
   if (!response.ok) throw await readCardApiError(response);
 
-  return response.json();
+  return parseCardListResponse(await response.json());
 };
 
 // 일치하는 id의 카드 삭제

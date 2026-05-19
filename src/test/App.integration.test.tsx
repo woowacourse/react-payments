@@ -264,6 +264,14 @@ describe('카드 결제 흐름', () => {
     expect(screen.getByRole('button', {name: '다시 시도'})).toBeInTheDocument();
   });
 
+  test('카드 목록 응답 형식이 올바르지 않으면 에러 화면을 보여준다', async () => {
+    server.use(http.get('/cards', () => HttpResponse.json([{id: '1'}])));
+    renderApp('/cards');
+
+    expect(await screen.findByText('카드 목록을 불러오지 못했습니다.')).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: '다시 시도'})).toBeInTheDocument();
+  });
+
   test('카드 목록 조회 실패 후 다시 시도하면 목록을 다시 보여준다', async () => {
     let getRequestCount = 0;
     server.use(
