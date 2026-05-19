@@ -1,6 +1,6 @@
-# Step-3 Tech Spec — MSW, Async, Testing
+# Step-3 Tech Spec: MSW, Async, Testing
 
-이번 단계의 목표, 설계 철학, 도메인 모델, 컴포넌트 아키텍처, 그리고 실제 구현 결과까지 한 문서에 정리한다. 작성자의 사고 흐름과 결정 근거가 같이 남아 있어야 step-3가 끝난 뒤에도 왜 그렇게 짰는지를 재구성할 수 있다.
+이번 단계의 목표, 설계 철학, 도메인 모델, 컴포넌트 아키텍처, 그리고 실제 구현 결과까지 한 문서에 정리한다. 사고 흐름과 결정 근거가 같이 남아 있어야 step-3가 끝난 뒤에도 왜 그렇게 짰는지를 재구성할 수 있다.
 
 ---
 
@@ -20,7 +20,7 @@
 - React Testing Library (사용자 관점 통합 테스트)
 - 도메인 매핑 (UI 모델 ↔ 서버 모델)
 - 에러 코드 → UI 필드 매핑
-- 고차 함수 (higher-order function) — tryCatch 패턴
+- 고차 함수 (higher-order function): tryCatch 패턴
 
 ### 1.3 산출물
 
@@ -32,15 +32,15 @@
 
 ---
 
-## 2. 설계 철학
+## 2. 설계
 
 step-2에서 학습한 원칙을 step-3에 그대로 이어가며, 새 영역(비동기,테스트)에서도 같은 사고를 적용한다.
 
 ### 2.1 변경 이유 기준 책임 분리 (SRP)
 
-하나의 책임이란 적은 코드가 아니라 하나의 변경 이유를 의미한다.
+하나의 책임이란 하나의 변경 이유를 의미한다.
 
-각 컴포넌트,훅,함수는 이 모듈은 어떤 변경 이유 때문에 수정되는가라는 질문에 한 문장으로 답할 수 있어야 한다. 답이 둘 이상으로 갈리면 모듈이 잘못 묶여 있는 신호다.
+각 컴포넌트, 훅, 함수는 어떤 변경 이유 때문에 수정되는가라는 질문에 한 문장으로 답할 수 있어야 한다. 답이 둘 이상으로 갈리면 모듈이 잘못 묶여 있는 신호다.
 
 ### 2.2 자기 도메인의 완결성
 
@@ -83,14 +83,14 @@ type AsyncState<T, E = ApiError> =
 - 지금 한 곳에서만 쓰이면 추상화하지 않는다.
 - 두 번째 사용처가 나오면 일단 복붙해도 좋다 (의도된 중복).
 - 세 번째에서 패턴이 명확해지면 그때 추출한다.
-- 절반의 추상화는 피한다 — 추출한 추상화는 모든 사용처에 일관되게 적용한다.
+- 절반의 추상화는 피한다: 추출한 추상화는 모든 사용처에 일관되게 적용한다.
 
 실제 결정: `useCreateCard`, `useDeleteCard`, `useCardList` 세 훅의 비동기 패턴이 미묘하게 달라 `useAsync<T>` 공통 추상화를 하지 않았다. `useCardList`는 자동 실행 + 레이스 컨디션 처리, `useCreateCard`는 결과 반환, `useDeleteCard`는 단순 trigger로 각 훅의 관심사가 달랐다.
 
 ### 2.6 이름과 실체 일치
 
 - 이름이 실제로 하는 일을 정확히 표현해야 한다.
-- 이름이 의도된 사용처를 좁히면 안 된다.
+- 이름이 의도된 사용처를 좁히지 않는다.
 
 실제 적용:
 - `SubmitButton` → `PrimaryButton` (메인 CTA 범용 버튼으로 개명)
@@ -123,7 +123,7 @@ export const tryCatch = async <T, E>(
 };
 ```
 
-`parseApiError`에 적용한 결과: try 안의 성공 흐름과 catch의 폴백을 분리해서 각 함수가 하나의 관심사만 다루게 했다.
+`parseApiError`에 적용한 결과: try 안의 성공 흐름과 catch의 폴백을 분리해서 각 함수가 하나의 관심사만 다루게 되었다.
 
 ---
 
@@ -131,7 +131,7 @@ export const tryCatch = async <T, E>(
 
 ### 3.1 모델의 두 측면 (UI ↔ 서버)
 
-UI 모델과 서버 모델이 다르다. 이 사실이 step-3의 핵심 학습 포인트다.
+UI 모델과 서버 모델이 다르다. 이 사실이 step-3의 핵심 학습 포인트이다.
 
 | 항목 | UI 모델 (입력 시) | 서버 모델 (요청 시) | 서버 모델 (응답 시) |
 |------|------------------|---------------------|---------------------|
@@ -205,11 +205,9 @@ export const toCreateCardRequest = (cardInfo: CardInfo): CreateCardRequest => ({
   expirationDate: `${cardInfo.expiry[0]}/${cardInfo.expiry[1]}`,
   cvc: cardInfo.cvc,
   issuerCode: cardInfo.issuerCode,
-  // password는 의도적으로 제외 — 서버에 보내지 않음
+  // password는 의도적으로 제외: 서버에 보내지 않음
 });
 ```
-
-비밀번호가 서버로 가지 않는다는 사실이 이 함수에 한 줄 코멘트로 명시되어 있다. 도메인 지식의 흔적이다.
 
 ### 3.4 에러 코드 → 필드 매핑 (utils/apiErrorField.ts)
 
@@ -254,7 +252,7 @@ export const isIssuerCode = (value: string): value is IssuerCode =>
 
 ### 3.6 네이밍 참고: network vs brand
 
-스펙 문서에서는 Visa/Mastercard 등을 "brand", 앞 6자리를 "BIN"이라 부른다. 코드에서는 `CardNetwork`, `detectCardNetwork`처럼 "network"라는 용어를 사용했다. 같은 개념이며, PR에 이 결정 사유를 명시한다.
+스펙 문서에서는 Visa/Mastercard 등을 "brand", 앞 6자리를 "BIN"이라 부른다. 코드에서는 `CardNetwork`, `detectCardNetwork`처럼 "network"라는 용어를 사용했다.
 
 ---
 
@@ -583,19 +581,19 @@ POST /cards (400)
 
 1. 해피 패스 (카드 등록): 카드 정보 모두 입력 → 확인 클릭 → `/cards` 페이지로 이동 + 등록된 카드 보임
 
-2. 400 에러 매핑 — 카드 번호: `9999123456789012` 입력 → 확인 → 카드 번호 필드 아래 에러 메시지
+2. 400 에러 매핑: 카드 번호: `9999123456789012` 입력 → 확인 → 카드 번호 필드 아래 에러 메시지
 
-3. 400 에러 매핑 — CVC: 정상 카드 + CVC `000` → 확인 → CVC 필드 아래 에러 메시지
+3. 400 에러 매핑: CVC: 정상 카드 + CVC `000` → 확인 → CVC 필드 아래 에러 메시지
 
-4. 400 에러 매핑 — 만료일: 정상 카드 + 만료일 `1328` → 확인 → 만료일 필드 아래 에러 메시지
+4. 400 에러 매핑: 만료일: 정상 카드 + 만료일 `1328` → 확인 → 만료일 필드 아래 에러 메시지
 
 5. 카드 목록 빈 상태: `/cards` 진입 → "등록된 카드가 없습니다" 표시 + 카드 추가하기 버튼
 
 6. 카드 목록 정상 상태: 등록된 카드 있을 때 `/cards` 진입 → 카드 행들 표시 + "+ 카드 추가" 버튼
 
-7. 카드 삭제 — confirm 확인: 삭제 버튼 → confirm 확인 → 행 사라짐
+7. 카드 삭제: confirm 확인: 삭제 버튼 → confirm 확인 → 행 사라짐
 
-8. 카드 삭제 — confirm 취소: 삭제 버튼 → confirm 취소 → 요청 안 감, 행 그대로
+8. 카드 삭제: confirm 취소: 삭제 버튼 → confirm 취소 → 요청 안 감, 행 그대로
 
 9. 목록 조회 에러 + 재시도: GET 실패 → 에러 화면 → "다시 시도" → 정상 데이터 로드
 
@@ -606,7 +604,7 @@ POST /cards (400)
 3. `getByLabelText`
 4. `getByTestId` (최후의 수단)
 
-`data-testid`는 쿼리할 다른 방법이 정말 없을 때만. 보통은 `role` + `name` 조합으로 거의 다 잡힌다.
+`data-testid`는 쿼리할 다른 방법이 정말 없을 때만. 보통은 `role` + `name` 조합으로 진행한다.
 
 ### 10.3 MSW handler runtime override
 
@@ -648,13 +646,13 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 - [x] `isIssuerCode` 타입 가드
 - [x] `CARD_COMPANIES` 사용처 전체 마이그레이션
 - [x] `CardRegisterationPreview` 색상 표시를 `ISSUERS` 기준으로 변경
-- [x] `CardRegisterationIssuerSelectSection` — issuerCode 기반으로 변경
+- [x] `CardRegisterationIssuerSelectSection`: issuerCode 기반으로 변경
 
 ### 11.2 API 레이어
 
 - [x] `apis/cards.ts` (`createCard`, `getCards`, `deleteCard`)
-- [x] `parseApiError` — `toApiError` + `tryCatch` 분리
-- [x] `utils/tryCatch.ts` — 고차 함수
+- [x] `parseApiError`: `toApiError` + `tryCatch` 분리
+- [x] `utils/tryCatch.ts`: 고차 함수
 - [x] `utils/cardMapper.ts` (`toCreateCardRequest`)
 - [x] `utils/apiErrorField.ts` (`toFieldError`)
 
@@ -665,7 +663,7 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 - [x] `mocks/handler.ts` (POST/GET/DELETE + 400 시나리오)
 - [x] `mocks/browser.ts` (dev용)
 - [x] `mocks/server.ts` (test용)
-- [x] `mocks/index.ts` (`enableMocking` — 환경 분기)
+- [x] `mocks/index.ts` (`enableMocking`: 환경 분기)
 - [x] `main.tsx`에서 MSW 활성화
 
 ### 11.4 비동기 훅
@@ -698,8 +696,8 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 ### 11.7 통합 테스트
 
 - [x] vitest.setup.ts + @testing-library/react 셋업
-- [ ] 시나리오 1~9 작성
-
+- [x] 시나리오 1~9 작성
+s
 ---
 
 ## 12. step-2 패턴 연속성
@@ -707,9 +705,9 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 | step-2 학습 | step-3에서 어떻게 이어지는가 |
 |------------|-----------------------------|
 | 변경 이유로 책임을 가른다 | 컴포넌트/훅/매퍼 모두 변경 이유 기준으로 분리. DeleteButton 분리도 같은 사고 |
-| 훅 vs 함수 — useState/useEffect 없으면 함수 | `toCreateCardRequest`, `toFieldError`는 함수로 둠 |
+| 훅 vs 함수: useState/useEffect 없으면 함수 | `toCreateCardRequest`, `toFieldError`는 함수로 둠 |
 | 이름과 실체 일치 | `SubmitButton` → `PrimaryButton`, `CardCompany` → `IssuerCode`, `CardListItem` → `CardRow` |
-| 절반의 추상화는 피한다 | `useAsync` 추출 포기 — 세 훅의 패턴이 충분히 같지 않았다 |
+| 절반의 추상화는 피한다 | `useAsync` 추출 포기: 세 훅의 패턴이 충분히 같지 않았다 |
 | 자기 도메인의 완결 흐름 | `CardRegisterationForm`은 navigate까지, `AddCardButton`도 navigate까지, `DeleteButton`도 confirm + DELETE까지 |
 | 사용자 실수 vs 시스템 제약 | 400 에러는 빨강, 입력 중 미지원 BIN은 노랑 |
 | 도메인 vs 표시 데이터 분리 | 서버 모델 vs UI 모델 명시적 분리, 매퍼 함수로 변환 |
@@ -728,7 +726,7 @@ Vitest + jsdom + @testing-library/react 조합. Vite 프로젝트이므로 Vites
 
 ---
 
-## 14. 트러블슈팅
+## 14. 이외 트러블슈팅
 
 ### 14.1 MSW Service Worker 404
 
@@ -750,15 +748,33 @@ worker.start({ onUnhandledRequest: "bypass", serviceWorker: { url: "/react-payme
 
 해결: 컴포넌트명을 `CardRow`로 변경했다. "카드 목록의 한 행"이라는 역할을 더 정확히 표현하기도 하고, 타입 `CardListItem`과의 충돌도 해소됐다.
 
+### 14.3 RTL에서 fieldset 바깥에 렌더링된 에러 메시지를 within으로 잡으려 한 문제
+
+CVC 서버 에러 메시지가 CVC 필드에 표시됐는지 확인하려고 `within(screen.getByRole("group", { name: "CVC" })).getByText(...)` 쿼리를 작성했는데 요소를 찾지 못했다.
+
+원인: `ValidatedInputGroup`은 `fieldset` 안에 input만 넣고, 에러 메시지 span은 `fieldset` 바깥의 sibling으로 렌더링한다. `getByRole("group")`은 `fieldset`을 가리키므로 `within` 범위 안에 에러 span이 포함되지 않았다.
+
+```html
+<div>
+  <fieldset>  ← getByRole("group")의 범위
+    <legend>CVC</legend>
+    <input aria-label="CVC" />
+  </fieldset>
+  <span>유효하지 않은 CVC입니다.</span>  ← 여기에 렌더링됨
+</div>
+```
+
+해결: `within` 없이 `screen.findByText("유효하지 않은 CVC입니다.")`로 DOM 전체에서 찾도록 변경했다. 에러 메시지가 고유한 문자열이라 오탐 위험이 없으므로 이 방식으로 충분하다.
+
 ---
 
 ## 15. 참고 자료
 
 - [MSW Getting Started](https://mswjs.io/docs/getting-started)
-- [React — Synchronizing with Effects](https://react.dev/learn/synchronizing-with-effects)
-- [React — useEffect](https://react.dev/reference/react/useEffect)
-- [Kent C. Dodds — Stop mocking fetch](https://kentcdodds.com/blog/stop-mocking-fetch)
-- [Kent C. Dodds — Write tests. Not too many. Mostly integration.](https://kentcdodds.com/blog/write-tests)
-- [Kent C. Dodds — Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
-- [Toss Payments — Card 객체](https://docs.tosspayments.com/resources/glossary/card)
-- [React — Rendering Lists (keys)](https://react.dev/learn/rendering-lists)
+- [React: Synchronizing with Effects](https://react.dev/learn/synchronizing-with-effects)
+- [React: useEffect](https://react.dev/reference/react/useEffect)
+- [Kent C. Dodds: Stop mocking fetch](https://kentcdodds.com/blog/stop-mocking-fetch)
+- [Kent C. Dodds: Write tests. Not too many. Mostly integration.](https://kentcdodds.com/blog/write-tests)
+- [Kent C. Dodds: Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+- [Toss Payments: Card 객체](https://docs.tosspayments.com/resources/glossary/card)
+- [React: Rendering Lists (keys)](https://react.dev/learn/rendering-lists)
