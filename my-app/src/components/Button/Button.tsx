@@ -4,6 +4,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 type Props = { isActivate?: boolean } & ButtonProps;
 
 const Button = ({ isActivate = true, children, ...props }: Props) => {
+
   return (
     <button
       {...props}
@@ -16,7 +17,6 @@ const Button = ({ isActivate = true, children, ...props }: Props) => {
         font-size: 15px;
         font-weight: 700;
         cursor: ${isActivate ? "pointer" : "default"};
-
         border: ${isActivate ? "none" : " 1px dashed #F0F0F0"};
       `}
     >
