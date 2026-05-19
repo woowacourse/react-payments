@@ -24,6 +24,7 @@
     "@chromatic-com/storybook": "^5.1.2",
     "@emotion/babel-plugin": "^11.13.5",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-onboarding": "^10.3.5",
