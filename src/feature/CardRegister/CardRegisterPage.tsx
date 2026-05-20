@@ -42,7 +42,7 @@ const CardRegisterPage = () => {
         <CardPreviewSection previewSlot={<CardPreviewContainer {...cardPreview} />} />
         <InfoInputSection slots={inputSteps.map(({slot}) => slot)} />
       </Content>
-      {submitError && <SubmitErrorMessage>{submitError}</SubmitErrorMessage>}
+      {submitError && <SubmitErrorMessage role='alert'>{submitError}</SubmitErrorMessage>}
       {isFormComplete && (
         <SubmitButton onClick={handleSubmit} disabled={submitStatus === 'loading'}>
           {submitStatus === 'loading' ? '등록 중...' : '확인'}
