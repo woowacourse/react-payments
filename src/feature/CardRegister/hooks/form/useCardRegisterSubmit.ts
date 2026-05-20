@@ -31,6 +31,17 @@ const focusServerErrorField = (fieldName: ServerFieldName) => {
   });
 };
 
+const isCardErrorResponse = (error: unknown): error is CardErrorResponse => {
+  if (!error || typeof error !== 'object') return false;
+
+  const {type, code, message} = error as Record<string, unknown>;
+
+  if (type === 'unknown') return typeof message === 'string';
+  if (type === 'field') return typeof code === 'string' && typeof message === 'string';
+
+  return false;
+};
+
 export const useCardRegisterSubmit = () => {
   const navigate = useNavigate();
   const [submitError, setSubmitError] = useState('');
@@ -68,6 +79,11 @@ export const useCardRegisterSubmit = () => {
     focusServerErrorField(fieldName);
   };
 
+  const applyUnknownError = () => {
+    setSubmitStatus('error');
+    setSubmitError(SUBMIT_ERROR_MESSAGE);
+  };
+
   // 카드 등록 요청 후 성공 시 목록 페이지로 이동
   const submitCard = async ({isFormComplete, cardRequestParams}: SubmitCardParams) => {
     if (!isFormComplete || !cardRequestParams) {
@@ -84,7 +100,12 @@ export const useCardRegisterSubmit = () => {
       setSubmitStatus('success');
       navigate('/cards');
     } catch (error) {
-      applyServerError(error as CardErrorResponse);
+      if (isCardErrorResponse(error)) {
+        applyServerError(error);
+        return;
+      }
+
+      applyUnknownError();
     }
   };
 
