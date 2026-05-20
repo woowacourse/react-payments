@@ -5,13 +5,15 @@ import {CARD_COMPANIES, DEFAULT_CARD_COLOR, getCompanyByIssuerCode} from '@/doma
 
 type CardListItemProps = {
   card: CardResponse;
+  isDeleting: boolean;
   onDeleteCard: (id: string) => void;
 };
 
-const CardListItem = ({card, onDeleteCard}: CardListItemProps) => {
+const CardListItem = ({card, isDeleting, onDeleteCard}: CardListItemProps) => {
   const company = getCompanyByIssuerCode(card.issuerCode);
   const cardColor = company ? CARD_COMPANIES[company].backgroundColor : DEFAULT_CARD_COLOR;
   const companyName = company ? CARD_COMPANIES[company].name : '알 수 없는 카드';
+  const deleteButtonLabel = `${companyName} ${isDeleting ? '삭제 중' : '삭제'}`;
 
   return (
     <Item>
@@ -21,7 +23,7 @@ const CardListItem = ({card, onDeleteCard}: CardListItemProps) => {
         <CardNumber>{card.number}</CardNumber>
         <ExpirationDate>유효기간 {card.expirationDate}</ExpirationDate>
       </Info>
-      <DeleteButton type='button' aria-label={`${companyName} 삭제`} onClick={() => onDeleteCard(card.id)}>
+      <DeleteButton type='button' aria-label={deleteButtonLabel} disabled={isDeleting} onClick={() => onDeleteCard(card.id)}>
         <DeleteIcon src='/images/delete_icon.svg' alt='' />
       </DeleteButton>
     </Item>
@@ -83,6 +85,11 @@ const DeleteButton = styled.button`
   width: 32px;
   height: 32px;
   flex-shrink: 0;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
 `;
 
 const DeleteIcon = styled.img`

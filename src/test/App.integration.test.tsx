@@ -266,6 +266,31 @@ describe('카드 결제 흐름', () => {
     expect(screen.getByRole('heading', {name: '보유 카드 (1)'})).toBeInTheDocument();
   });
 
+  test('카드 삭제 중에는 해당 삭제 버튼을 비활성화한다', async () => {
+    addBcCard();
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    server.use(http.delete('/cards/:id', () => new Promise(() => {})));
+    renderApp('/cards');
+
+    const user = userEvent.setup();
+    await user.click(await screen.findByRole('button', {name: 'BC카드 삭제'}));
+
+    expect(await screen.findByRole('button', {name: 'BC카드 삭제 중'})).toBeDisabled();
+  });
+
+  test('카드 삭제 실패 시 에러 화면을 보여준다', async () => {
+    addBcCard();
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    server.use(http.delete('/cards/:id', () => HttpResponse.json({message: 'error'}, {status: 500})));
+    renderApp('/cards');
+
+    const user = userEvent.setup();
+    await user.click(await screen.findByRole('button', {name: 'BC카드 삭제'}));
+
+    expect(await screen.findByText('카드 삭제에 실패했습니다.')).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: '다시 시도'})).toBeInTheDocument();
+  });
+
   test('카드 목록 조회 실패 시 에러 화면과 재시도 버튼을 보여준다', async () => {
     server.use(http.get('/cards', () => HttpResponse.json({message: 'error'}, {status: 500})));
     renderApp('/cards');

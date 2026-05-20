@@ -9,7 +9,7 @@ import {useCards} from './hooks/useCards';
 
 const CardListPage = () => {
   const navigate = useNavigate();
-  const {state, refetch, removeCard} = useCards();
+  const {state, deletingCardId, refetch, removeCard} = useCards();
   const cardCount = state.status === 'success' ? state.cards.length : null;
 
   const handleAddCard = () => {
@@ -21,7 +21,14 @@ const CardListPage = () => {
     if (state.status === 'error') return <CardListError message={state.message} onRetry={refetch} />;
     if (state.cards.length === 0) return <CardListEmpty onAddCard={handleAddCard} />;
 
-    return <CardListSuccess cards={state.cards} onAddCard={handleAddCard} onDeleteCard={removeCard} />;
+    return (
+      <CardListSuccess
+        cards={state.cards}
+        deletingCardId={deletingCardId}
+        onAddCard={handleAddCard}
+        onDeleteCard={removeCard}
+      />
+    );
   };
 
   return (
