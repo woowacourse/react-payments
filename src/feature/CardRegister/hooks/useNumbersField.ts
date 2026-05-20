@@ -41,7 +41,13 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? value : chunk,
     );
-    setCardNumbers(newChunks);
+
+    // 브랜드 세그먼트에 따라 최대 길이를 벗어나는 경우 숫자 자르기
+    const nomalizedNewChuks = newChunks.map((chunk, index) =>
+      chunk.slice(0, segmentLengths[index]),
+    );
+
+    setCardNumbers(nomalizedNewChuks);
 
     if (value.length === segmentLengths[index]) focusNextInput(index);
 
