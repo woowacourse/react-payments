@@ -53,9 +53,20 @@ export const useCards = () => {
   };
 
   useEffect(() => {
-    // idle 상태를 한 번 거친 뒤 목록 조회 시작 (지금 바로 말고, 이번 턴 끝나자마자 fetchCards 실행)
-    Promise.resolve().then(fetchCards);
-  }, [fetchCards]);
+    let isActive = true;
+
+    void getCards()
+      .then((cards) => {
+        if (isActive) setState({status: 'success', cards});
+      })
+      .catch(() => {
+        if (isActive) setState({status: 'error', message: LOAD_CARDS_ERROR_MESSAGE});
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   return {
     state,
