@@ -7,10 +7,17 @@ type CardListItemProps = {
   onDelete: (id: string) => void;
 };
 
+function formatMaskedCardNumber(number: string) {
+  return number
+    .match(/.{1,4}/g)!
+    .map((group) => (group.includes('*') ? '*'.repeat(group.length) : group))
+    .join(' ');
+}
+
 export default function CardListItem({ card, onDelete }: CardListItemProps) {
   const company = ISSUER_CODE_CARD_COMPANY[card.issuerCode];
   const companyLabel = company ? CARD_COMPANY_LABEL[company] : card.issuerCode;
-  const maskedNumbers = `${card.number.slice(0, 6)} ${card.number.slice(6, 12)} ${card.number.slice(12)}`;
+  const maskedNumbers = formatMaskedCardNumber(card.number);
 
   return (
     <article

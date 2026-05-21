@@ -67,7 +67,7 @@ describe('카드 목록', () => {
     await waitFor(() => {
       expect(screen.getByText('보유 카드')).toBeInTheDocument();
       expect(screen.getByText('BC카드')).toBeInTheDocument();
-      expect(screen.getByText('411111 ****** 1111')).toBeInTheDocument();
+      expect(screen.getByText('4111 **** **** 1111')).toBeInTheDocument();
       expect(screen.getByText('유효 기간 12/26')).toBeInTheDocument();
     });
   });
@@ -86,13 +86,13 @@ describe('카드 목록', () => {
     renderCardList();
 
     await waitFor(() => {
-      expect(screen.getByText('411111 ****** 1111')).toBeInTheDocument();
+      expect(screen.getByText('4111 **** **** 1111')).toBeInTheDocument();
     });
 
     await user.click(screen.getByRole('button', { name: '카드 삭제' }));
 
     await waitFor(() => {
-      expect(screen.queryByText('411111 ****** 1111')).not.toBeInTheDocument();
+      expect(screen.queryByText('4111 **** **** 1111')).not.toBeInTheDocument();
     });
   });
 });
