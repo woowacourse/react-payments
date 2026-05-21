@@ -89,7 +89,7 @@
 
 - [x] Storybook 테스트
 
-## step2
+## step3
 
 ### 기능 요구사항
 
