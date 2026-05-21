@@ -1,13 +1,16 @@
 import styled from "@emotion/styled";
 interface Props {
   onClick: () => void;
+  disabled?: boolean;
   children?: React.ReactNode;
 }
 
-export default function CheckBtn({ onClick, children }: Props) {
+export default function CheckBtn({ onClick, children, disabled }: Props) {
   return (
     <ButtonWrapper>
-      <Button onClick={onClick}>{children ?? "확인"}</Button>
+      <Button onClick={onClick} disabled={disabled}>
+        {children ?? "확인"}
+      </Button>
     </ButtonWrapper>
   );
 }

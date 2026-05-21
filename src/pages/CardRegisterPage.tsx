@@ -32,7 +32,7 @@ export default function CardRegisterPage() {
     onCvcNumberComplete,
   } = useCardRegisterForm();
 
-  const { handleComplete, serverError } = useCardSubmit({
+  const { handleComplete, serverError, isSubmitting } = useCardSubmit({
     cardNumbers,
     expNumbers,
     cvcNumbers,
@@ -121,7 +121,9 @@ export default function CardRegisterPage() {
           />
         </CardInfoSection>
       </InputSectionContainer>
-      {isAllValid && <CheckBtn onClick={handleComplete} />}
+      {isAllValid && (
+        <CheckBtn onClick={handleComplete} disabled={isSubmitting} />
+      )}
     </MainContainer>
   );
 }
