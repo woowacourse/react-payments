@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { CardNumbers } from "../components/InputField/CardNumberField";
 import type { ExpNumber } from "../components/InputField/ExpNumberField";
+import { cardsApi } from "../api/cardsApi";
 
 export default function useCardSubmit({
   cardNumbers,
@@ -28,15 +29,11 @@ export default function useCardSubmit({
     try {
       setIsSubmitting(true);
 
-      const res = await fetch("/cards", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          number: Object.values(cardNumbers).join(""),
-          expirationDate: Object.values(expNumbers).join("/"),
-          cvc: cvcNumbers,
-          issuerCode: cardFirm.value,
-        }),
+      const res = await cardsApi.post({
+        number: Object.values(cardNumbers).join(""),
+        expirationDate: Object.values(expNumbers).join("/"),
+        cvc: cvcNumbers,
+        issuerCode: cardFirm.value,
       });
 
       if (!res.ok) {

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { cardsApi } from "../../api/cardsApi";
 interface Props {
   id: string;
   onDelete: () => void;
@@ -9,7 +10,7 @@ export default function DeleteCardButton({ id, onDelete }: Props) {
     if (!window.confirm("카드를 삭제할까요?")) return;
 
     try {
-      const res = await fetch(`/cards/${id}`, { method: "DELETE" });
+      const res = await cardsApi.delete(id);
       if (!res.ok) throw new Error();
       onDelete();
     } catch {

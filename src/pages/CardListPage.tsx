@@ -4,6 +4,7 @@ import CardListSkeleton from "../components/skeleton/CardListSkeleton";
 import EmptyCardList from "./EmptyCardList";
 import CardList from "../components/CardList/CardList";
 import styled from "@emotion/styled";
+import { cardsApi } from "../api/cardsApi";
 
 export type Card = {
   id: string;
@@ -24,7 +25,7 @@ export default function CardListPage() {
 
   const fetchCards = async () => {
     try {
-      const res = await fetch("/cards");
+      const res = await cardsApi.get();
       if (!res.ok) throw new Error("서버 에러");
       const data = await res.json();
       setState({ status: "success", data });
