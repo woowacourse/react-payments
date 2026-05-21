@@ -11,6 +11,9 @@ export const requestRegisterCard = async (
 ) => {
   const response = await fetch(`${BASE_URL}/cards`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(postCardInformation),
   });
 
