@@ -3,10 +3,8 @@ import CardPreviewSection from './components/CardPreviewSection/CardPreviewSecti
 import InfoInputSection from './components/InfoInputSection/InfoInputSection';
 import { useNavigate } from 'react-router-dom';
 import { useCardForm } from './hooks/useCardForm';
-import type { CardFormInfoType } from '../../domain/card/types/card';
-import { postCard } from '../../api/cards';
 import { useRegisterServerError } from './hooks/useRegisterServerErrors';
-import { HTTPError, NetworkError } from '../../api/error';
+import { useCardRegisterSubmit } from './hooks/useCardRegisterSubmit';
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
@@ -17,23 +15,14 @@ const CardRegisterPage = () => {
   // 서버에서 내려주는 에러 핸들링 커스텀 훅
   const serverErrors = useRegisterServerError();
 
-  const handleRegisterComplete = async (cardFormInfo: CardFormInfoType) => {
-    try {
-      serverErrors.resetServerFieldErrors();
-      await postCard(cardFormInfo);
-
+  const { handleSubmitCard } = useCardRegisterSubmit({
+    serverErrors,
+    onSuccess: (cardFormInfo) => {
       navigate('/cards', {
         state: cardFormInfo,
       });
-    } catch (error) {
-      if (error instanceof HTTPError) {
-        serverErrors.setServerFieldError(error.code, error.message);
-      }
-      if (error instanceof NetworkError) {
-        serverErrors.setFormServerError(error.message);
-      }
-    }
-  };
+    },
+  });
 
   return (
     <Wrapper>
@@ -46,7 +35,7 @@ const CardRegisterPage = () => {
           hasFormError={hasFormError}
           serverFieldErrors={serverErrors.serverFieldErrors}
           clearServerFieldError={serverErrors.clearServerFieldError}
-          onRegisterComplete={handleRegisterComplete}
+          onRegisterComplete={handleSubmitCard}
         />
       </Container>
     </Wrapper>

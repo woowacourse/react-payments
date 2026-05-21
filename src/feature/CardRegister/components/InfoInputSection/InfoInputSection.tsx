@@ -8,7 +8,7 @@ import SelectCardBrandField from './SelectCardBrandField';
 import PasswordField from './PasswordField';
 import Button from '../../../../common/components/Button';
 import type { CardFormFieldsType } from '../../hooks/useCardForm';
-import type { ServerFieldErrors } from '../../hooks/useRegisterServerErrors';
+import type { ServerFieldErrors } from '../../types/error';
 
 const InfoInputSection = ({
   fields,

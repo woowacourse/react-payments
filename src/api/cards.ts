@@ -6,7 +6,11 @@ export const getCards = async (signal?: AbortSignal): Promise<Card[]> => {
 
   try {
     response = await fetch('/cards', { signal });
-  } catch {
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw error;
+    }
+
     throw new NetworkError();
   }
 

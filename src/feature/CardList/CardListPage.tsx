@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { deleteCard, getCards } from '../../api/cards';
 import type { Card } from '../../domain/card/types/card';
-import type { cardFetchStatusType } from './types/cardFetchStatus';
 import Title from '../../common/components/Title';
 import CardListSkeleton from './components/CardListSkeleton';
 import CardListErrorState from './components/CardListErrorState';
 import CardListEmptyState from './components/CardListEmptyState';
 import CardList from './components/CardList';
 import styled from 'styled-components';
+import type { CardFetchStatusType } from './types/cardFetchStatus';
 
 const CardListPage = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [cardFetchStatus, setCardFetchStatus] =
-    useState<cardFetchStatusType>('idle');
+    useState<CardFetchStatusType>('idle');
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchCards = async (signal?: AbortSignal) => {
     setCardFetchStatus('idle');
@@ -34,15 +36,20 @@ const CardListPage = () => {
   };
 
   const handleDeleteCard = async (cardId: string) => {
+    if (isDeleting) return;
+
     const confirmed = window.confirm('카드를 삭제하시겠습니까?');
     if (!confirmed) return;
 
     try {
+      setIsDeleting(true);
       await deleteCard(cardId);
       await fetchCards();
     } catch (error) {
       // 네트워크 에러 - 카드 삭제 실패 메세지를 alert로 띄우기
       window.alert(error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
