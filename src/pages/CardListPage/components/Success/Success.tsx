@@ -53,7 +53,7 @@ const AddCardButton = styled(BaseButton)`
   color: #8c8c8c;
   font-size: 13px;
 
-  &: hover {
+  &:hover {
     background-color: #e6e6e6;
   }
 `;
