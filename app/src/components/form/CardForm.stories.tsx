@@ -22,6 +22,7 @@ const meta = {
     },
     currentStep: 0,
     isFormComplete: false,
+    serverError: null,
     onCardNumberComplete: () => {},
     onCardCompanySelected: () => {},
     onCardExpiryDateComplete: () => {},
@@ -70,6 +71,7 @@ export const Base: Story = {
             refs={refs}
             currentStep={0}
             isFormComplete={false}
+            serverError={null}
             onCardNumberComplete={() => {}}
             onCardCompanySelected={() => {}}
             onCardExpiryDateComplete={() => {}}

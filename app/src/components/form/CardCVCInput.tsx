@@ -6,9 +6,11 @@ import { useSingleInput } from '../../hooks/useSingleInput';
 
 export function CardCVCInput({
   cardCVCRef,
+  serverError,
   onCardCVCComplete,
 }: {
   cardCVCRef: React.RefObject<HTMLInputElement | null>;
+  serverError: { code: string; message: string } | null;
   onCardCVCComplete: () => void;
 }) {
   const { cardCVC, setCardCVC } = useCardContext();
@@ -39,7 +41,9 @@ export function CardCVCInput({
         $fieldErrors={fieldErrors.state}
         ref={cardCVCRef}
       />
-      <ErrorMessage message={fieldErrors['message']} />
+      <ErrorMessage
+        message={fieldErrors['message'] || (serverError?.code === 'INVALID_CVC' ? serverError.message : '')}
+      />
     </CardSingleFieldContainer>
   );
 }

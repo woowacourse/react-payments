@@ -13,6 +13,7 @@ const meta = {
   tags: ["autodocs"],
   args: {
     cardCVCRef: { current: null },
+    serverError: null,
     onCardCVCComplete: () => {},
   },
 } satisfies Meta<typeof CardCVCInput>;
@@ -39,7 +40,7 @@ const renderWithContext = () => {
         networkBrand: '',
       }}
     >
-      <CardCVCInput cardCVCRef={cardCVCRef} onCardCVCComplete={() => {}} />
+      <CardCVCInput cardCVCRef={cardCVCRef} serverError={null} onCardCVCComplete={() => {}} />
     </CardContext>
   );
 };

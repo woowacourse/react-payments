@@ -6,12 +6,13 @@ import { CardExpiryDateInput } from './CardExpiryDateInput';
 import { CardCVCInput } from './CardCVCInput';
 import { CardPasswordInput } from './CardPasswordInput';
 import { ConfirmButton } from './ConfirmButton';
-import type { CardFormPropsType } from '../../types/CardFormProps';
+import type { CardFormPropsType } from '../../types/cardFormProps';
 
 export function CardForm({
   refs,
   currentStep,
   isFormComplete,
+  serverError,
   onCardNumberComplete,
   onCardCompanySelected,
   onCardExpiryDateComplete,
@@ -27,6 +28,7 @@ export function CardForm({
         <CardNumberInput
           firstRef={refs.cardNumberFirstRef}
           onCardNumberComplete={onCardNumberComplete}
+          serverError={serverError}
         />
       </CardSection>
       {currentStep >= 1 && (
@@ -42,12 +44,17 @@ export function CardForm({
           <CardExpiryDateInput
             expiryMonthRef={refs.expiryMonthRef}
             onCardExpiryDateComplete={onCardExpiryDateComplete}
+            serverError={serverError}
           />
         </CardSection>
       )}
       {currentStep >= 3 && (
         <CardSection title={'CVC 번호를 입력해 주세요'}>
-          <CardCVCInput cardCVCRef={refs.cardCVCRef} onCardCVCComplete={onCardCVCComplete} />
+          <CardCVCInput
+            cardCVCRef={refs.cardCVCRef}
+            onCardCVCComplete={onCardCVCComplete}
+            serverError={serverError}
+          />
         </CardSection>
       )}
       {currentStep >= 4 && (

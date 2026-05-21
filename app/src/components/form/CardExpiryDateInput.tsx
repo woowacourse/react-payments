@@ -4,9 +4,11 @@ import { ErrorMessage } from './ErrorMessage';
 
 export function CardExpiryDateInput({
   expiryMonthRef,
+  serverError,
   onCardExpiryDateComplete,
 }: {
   expiryMonthRef: React.RefObject<HTMLInputElement | null>;
+  serverError: { code: string; message: string } | null;
   onCardExpiryDateComplete: () => void;
 }) {
   const {
@@ -47,7 +49,12 @@ export function CardExpiryDateInput({
           ref={expiryYearRef}
         />
       </CardFieldset>
-      <ErrorMessage message={fieldErrors['message']} />
+      <ErrorMessage
+        message={
+          fieldErrors['message'] ||
+          (serverError?.code === 'INVALID_EXPIRY_DATE' ? serverError.message : '')
+        }
+      />
     </>
   );
 }

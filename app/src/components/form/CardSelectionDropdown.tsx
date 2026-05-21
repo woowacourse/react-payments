@@ -3,13 +3,14 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import chevronUp from '../../assets/chevron-up.svg';
 import chevronDown from '../../assets/chevron-down.svg';
-import { cardCompanyOptions } from '../../constants/cardCompanyOptions';
+import type { CardCompany } from '../../context/CardContext';
+import { CARD_COMPANY_INFO } from '../../constants/cardCompanyOptions';
 
 export function CardSelectionDropdown({ onSelect }: { onSelect: () => void }) {
   const { cardCompany, setCardCompany } = useCardContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const selectedLabel = cardCompanyOptions.find((option) => option.value === cardCompany)?.label;
+  const selectedLabel = CARD_COMPANY_INFO[cardCompany].label;
 
   return (
     <Wrapper>
@@ -27,18 +28,20 @@ export function CardSelectionDropdown({ onSelect }: { onSelect: () => void }) {
       </DropwdownBox>
       {isDropdownOpen && (
         <OptionsBox>
-          {cardCompanyOptions.map((option) => (
-            <OptionItem
-              key={option.value}
-              onClick={() => {
-                setCardCompany(option.value);
-                setIsDropdownOpen(false);
-                onSelect();
-              }}
-            >
-              {option.label}
-            </OptionItem>
-          ))}
+          {Object.entries(CARD_COMPANY_INFO)
+            .filter(([key]) => key !== '')
+            .map(([key, { label }]) => (
+              <OptionItem
+                key={key}
+                onClick={() => {
+                  setCardCompany(key as CardCompany);
+                  setIsDropdownOpen(false);
+                  onSelect();
+                }}
+              >
+                {label}
+              </OptionItem>
+            ))}
         </OptionsBox>
       )}
     </Wrapper>

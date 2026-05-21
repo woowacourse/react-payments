@@ -83,3 +83,31 @@
   - [x] 사용하여 Form 관리 로직을 UI와 분리하기 (구현 완료 후)
     - [x] 입력값, 에러 상태, onChange, onBlur 패턴 공통 커스텀훅으로 추출 (검증 메서드 주입)
     - [x] focus 관련 훅들 커스텀 훅으로 모아놓기
+
+---
+
+## Step3
+
+## 기능 요구사항
+
+- [x] 페이지
+  - [x] 카드 목록
+
+- [x] 컴포넌트
+  - [x] 카드 스켈레톤
+  - [x] 카드 비어있을 때
+  - [x] 카드 에러
+  - [x] 카드 목록 (카드정보, 삭제 버튼)
+    - [x] 삭제 버튼 클릭 시 `window.confirm()`으로 확인 받고 보내기
+
+- [x] MSW
+  - [x] MSW 핸들러 (GET, POST, DELETE)
+    - [x] 엔드포인트
+      - [x] POST (/cards)
+        - [x] 400 시나리오(지원하지 않는 카드사 등)를 추가
+      - [x] GET (/cards)
+      - [x] DELETE (/cards/:id)
+  - [x] worker 세팅
+  - [x] db 파일 만들기
+  - [x] 비동기 상태를 idle | loading | success | error 네 가지로 명시적으로 다루기
+    - [x] AsyncState 타입 네 가지 유니온타입으로 만들기
