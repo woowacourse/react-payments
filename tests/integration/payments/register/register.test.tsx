@@ -8,12 +8,51 @@ import { renderProvider } from '../../../utils/render';
 
 import { AppRoutes } from '../../../../src/routes';
 
+interface FillRegisterCardForm {
+  cardNumbers?: string[];
+  card?: string;
+  expirationDate?: { month: string; year: string };
+  cvc?: string;
+  password?: string;
+}
+
 const DUMMY_FORM_DATA = {
   cardNumbers: ['3700', '1234', '5678', '9012'],
-  card: /신한카드/,
+  card: '신한카드',
   expirationDate: { month: '12', year: '12' },
   cvc: '234',
   password: '12',
+};
+
+const fillRegisterCardForm = async ({
+  cardNumbers = DUMMY_FORM_DATA.cardNumbers,
+  card = DUMMY_FORM_DATA.card,
+  expirationDate = DUMMY_FORM_DATA.expirationDate,
+  cvc = DUMMY_FORM_DATA.cvc,
+  password = DUMMY_FORM_DATA.password,
+}: FillRegisterCardForm = {}) => {
+  // (cardNumber)
+  const cardInputs = await screen.findAllByPlaceholderText('1234'); // [input, input, input, input]
+  for (const [index, input] of cardInputs.entries()) {
+    await userEvent.type(input, cardNumbers[index]);
+  }
+
+  // (card)
+  await userEvent.click(screen.getByText(/카드사를 선택해주세요/));
+  await userEvent.click(screen.getByText(card));
+
+  // (expirationDate)
+  await userEvent.type(screen.getByPlaceholderText(/MM/), expirationDate.month);
+  await userEvent.type(screen.getByPlaceholderText(/YY/), expirationDate.year);
+
+  // (cvc)
+  await userEvent.type(screen.getByPlaceholderText('123'), cvc);
+
+  // (password)
+  const passwordInput = document.querySelector('input[type="password"]');
+  if (passwordInput) await userEvent.type(passwordInput, password);
+
+  userEvent.click(await screen.getByRole('button'));
 };
 
 describe('카드 등록 페이지 테스트', async () => {
@@ -22,28 +61,7 @@ describe('카드 등록 페이지 테스트', async () => {
     renderProvider(<AppRoutes />, { route: '/payments/register' });
 
     // ACT
-    // (cardNumber)
-    const cardInputs = await screen.findAllByPlaceholderText('1234'); // [input, input, input, input]
-    for (const [index, input] of cardInputs.entries()) {
-      await userEvent.type(input, DUMMY_FORM_DATA.cardNumbers[index]);
-    }
-
-    // (card)
-    await userEvent.click(screen.getByText(/카드사를 선택해주세요/));
-    await userEvent.click(screen.getByText(DUMMY_FORM_DATA.card));
-
-    // (expirationDate)
-    await userEvent.type(screen.getByPlaceholderText(/MM/), DUMMY_FORM_DATA.expirationDate.month);
-    await userEvent.type(screen.getByPlaceholderText(/YY/), DUMMY_FORM_DATA.expirationDate.year);
-
-    // (cvc)
-    await userEvent.type(screen.getByPlaceholderText('123'), DUMMY_FORM_DATA.cvc);
-
-    // (password)
-    const passwordInput = document.querySelector('input[type="password"]');
-    if (passwordInput) await userEvent.type(passwordInput, DUMMY_FORM_DATA.password);
-
-    userEvent.click(await screen.getByRole('button'));
+    await fillRegisterCardForm();
 
     // ASSERT
     expect(await screen.findByText('3700')).toBeInTheDocument();
