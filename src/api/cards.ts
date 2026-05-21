@@ -2,9 +2,17 @@ import type { Card, CardFormInfoType } from '../domain/card/types/card';
 import { HTTPError, NetworkError } from './error';
 
 export const getCards = async (signal?: AbortSignal): Promise<Card[]> => {
-  const response = await fetch('/cards', { signal: signal });
+  let response;
 
-  if (!response.ok) throw new Error('카드 목록을 불러오지 못했습니다.');
+  try {
+    response = await fetch('/cards', { signal });
+  } catch {
+    throw new NetworkError();
+  }
+
+  if (!response.ok) {
+    throw new HTTPError('GET_CARDS_FAILED', '카드 목록을 불러오지 못했습니다.');
+  }
 
   return response.json();
 };
@@ -37,11 +45,17 @@ export const postCard = async (
 };
 
 export const deleteCard = async (cardId: string): Promise<void> => {
-  const response = await fetch(`/cards/${cardId}`, {
-    method: 'DELETE',
-  });
+  let response;
+
+  try {
+    response = await fetch(`/cards/${cardId}`, {
+      method: 'DELETE',
+    });
+  } catch {
+    throw new NetworkError();
+  }
 
   if (!response.ok) {
-    throw new Error('카드 삭제에 실패했습니다.');
+    throw new HTTPError('DELETE_CARD_FAILED', '카드 삭제에 실패했습니다.');
   }
 };
