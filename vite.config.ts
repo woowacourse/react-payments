@@ -12,6 +12,7 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  base: '/react-payments/',
   plugins: [
     react({
       jsxImportSource: '@emotion/react',
@@ -19,6 +20,16 @@ export default defineConfig({
   ],
   test: {
     projects: [
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          environment: 'jsdom',
+          globals: true,
+          include: ['src/**/*.test.{ts,tsx}'],
+          setupFiles: ['src/test/setup.ts'],
+        },
+      },
       {
         extends: true,
         plugins: [

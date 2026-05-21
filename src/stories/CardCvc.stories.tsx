@@ -57,7 +57,7 @@ export const Interactive: Story = {
     setCardCvc: createCvcHandlers(),
   },
   render: () => {
-    const [cardCvc, setCardCvc] = useCardCvc();
+    const { cardCvc, cvcHandler: setCardCvc } = useCardCvc();
 
     return (
       <div>

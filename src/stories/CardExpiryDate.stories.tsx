@@ -86,7 +86,7 @@ export const Interactive: Story = {
     setCardExpiry: createExpiryHandlers(),
   },
   render: () => {
-    const [cardExpiry, setCardExpiry] = useCardExpiry();
+    const { cardExpiry, expiryHandler: setCardExpiry } = useCardExpiry();
 
     return (
       <div>

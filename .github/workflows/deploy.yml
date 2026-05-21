@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - step1
+      - step3
   workflow_dispatch:
 
 permissions:
@@ -34,7 +35,12 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          VITE_ENABLE_MSW: true
         run: npm run build
+
+      - name: Add SPA fallback
+        run: cp dist/index.html dist/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -55,7 +55,7 @@ export default function RegisterComplete() {
         </p>
         <button
           type="button"
-          onClick={() => navigate('/', { replace: true })}
+          onClick={() => navigate('/cards', { replace: true })}
           css={(theme) => ({
             width: '100%',
             height: '44px',

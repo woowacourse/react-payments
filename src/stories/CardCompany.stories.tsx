@@ -56,7 +56,7 @@ export const Interactive: Story = {
     setCardCompany: createCardCompanyHandler(),
   },
   render: () => {
-    const [cardCompanyStatus, setCardCompany] = useCardCompany();
+    const { cardCompanyStatus, cardCompanyHandler: setCardCompany } = useCardCompany();
 
     return <CardCompany cardCompanyStatus={cardCompanyStatus} setCardCompany={setCardCompany} />;
   },

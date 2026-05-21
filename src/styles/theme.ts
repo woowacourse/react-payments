@@ -20,6 +20,7 @@ const colors = {
     kookmin: '#6A6056',
   },
   chipBackground: '#DDCD78',
+  cardListInfo: '#8C8C8C',
 };
 
 const typography = {
@@ -74,6 +75,14 @@ const typography = {
     fontFamily: 'Noto Sans KR',
     fontWeight: '700',
     fontSize: '15px',
+    letterSpacing: '0%',
+  },
+  cardListInfo: {
+    fontFamily: 'Inter',
+    fontWeight: '400',
+    fontStyle: 'Regular',
+    fontSize: '11px',
+    lineHeight: '100%',
     letterSpacing: '0%',
   },
 };
