@@ -37,4 +37,4 @@ export const CARD_ERROR_CODE = {
 export type CardErrorCode = (typeof CARD_ERROR_CODE)[keyof typeof CARD_ERROR_CODE];
 
 export const isCardErrorCode = (code: unknown): code is CardErrorCode =>
-  typeof code === "string" && code in CARD_ERROR_CODE;
+  typeof code === "string" && Object.hasOwn(CARD_ERROR_CODE, code);
