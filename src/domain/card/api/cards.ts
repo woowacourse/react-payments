@@ -1,4 +1,8 @@
-import type { CardRegisterError, CardRegisterRequestBody } from "./cards.types";
+import type {
+  CardListResponseItem,
+  CardRegisterError,
+  CardRegisterRequestBody,
+} from "./cards.types";
 
 const BASE_URL = "https://woowa.yiheon.com";
 
@@ -18,7 +22,7 @@ export const requestRegisterCard = async (
   return response.json();
 };
 
-export const fetchCardList = async () => {
+export const fetchCardList = async (): Promise<CardListResponseItem[]> => {
   const response = await fetch(`${BASE_URL}/cards`);
 
   if (!response.ok) {
