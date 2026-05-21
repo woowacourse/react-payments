@@ -8,30 +8,40 @@ import { renderProvider } from '../../../utils/render';
 
 import { AppRoutes } from '../../../../src/routes';
 
+const DUMMY_FORM_DATA = {
+  cardNumbers: ['3700', '1234', '5678', '9012'],
+  card: /신한카드/,
+  expirationDate: { month: '12', year: '12' },
+  cvc: '234',
+  password: '12',
+};
+
 describe('카드 등록 페이지 테스트', async () => {
   test('카드 등록을 위한 유효한 데이터를 다 입력 후 등록 버튼을 누르면 카드 목록 페이지로 이동하고 추가한 카드가 목록에 보인다', async () => {
     // ARRANGE
     renderProvider(<AppRoutes />, { route: '/payments/register' });
 
     // ACT
+    // (cardNumber)
     const cardInputs = screen.getAllByPlaceholderText('1234'); // [input, input, input, input]
+    Array.from({ length: 4 }).forEach(async (_, index) => {
+      await userEvent.type(cardInputs[index], DUMMY_FORM_DATA.cardNumbers[index]);
+    });
 
-    // cardNumber
-    await userEvent.type(cardInputs[0], '3700'); // 첫 번째 칸
-    await userEvent.type(cardInputs[1], '1234'); // 두 번째 칸
-    await userEvent.type(cardInputs[2], '5678'); // 세 번째 칸
-    await userEvent.type(cardInputs[3], '9012'); // 네 번째 칸
-
+    // (card)
     await userEvent.click(screen.getByText(/카드사를 선택해주세요/));
-    await userEvent.click(screen.getByText(/신한카드/));
+    await userEvent.click(screen.getByText(DUMMY_FORM_DATA.card));
 
-    await userEvent.type(screen.getByPlaceholderText(/MM/), '12');
-    await userEvent.type(screen.getByPlaceholderText(/YY/), '12');
+    // (expirationDate)
+    await userEvent.type(screen.getByPlaceholderText(/MM/), DUMMY_FORM_DATA.expirationDate.month);
+    await userEvent.type(screen.getByPlaceholderText(/YY/), DUMMY_FORM_DATA.expirationDate.year);
 
-    await userEvent.type(screen.getByPlaceholderText('123'), '234');
+    // (cvc)
+    await userEvent.type(screen.getByPlaceholderText('123'), DUMMY_FORM_DATA.cvc);
 
+    // (password)
     const passwordInput = document.querySelector('input[type="password"]');
-    if (passwordInput) await userEvent.type(passwordInput, '12');
+    if (passwordInput) await userEvent.type(passwordInput, DUMMY_FORM_DATA.password);
 
     userEvent.click(await screen.getByRole('button'));
 
