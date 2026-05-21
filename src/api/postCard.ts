@@ -1,4 +1,4 @@
-import type { CardInfo } from '../types/cardStausTypes';
+import type { CardRequest } from '../types/cardStausTypes';
 import { HttpError, NetworkError } from '../errors/errors';
 
 type ErrorResponse = {
@@ -10,7 +10,7 @@ type PostCardResponse = {
   id: string;
 };
 
-export async function postCard(cardInfo: CardInfo): Promise<PostCardResponse> {
+export async function postCard(cardInfo: CardRequest): Promise<PostCardResponse> {
   let response: Response;
 
   try {

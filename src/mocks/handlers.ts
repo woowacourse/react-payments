@@ -2,7 +2,7 @@ import { delay, http, HttpResponse } from 'msw';
 import { getCardBrand } from '../utils/cardBrand';
 import { isCardExpiryDateComplete } from '../utils/validate';
 import type { CardIssuerServerCode } from '../types/cardStausTypes';
-import type { CardInfo } from '../types/cardStausTypes';
+import type { StoredCard } from '../types/cardStausTypes';
 import { maskFetchCardNumbers } from '../utils/maskCardNumbers';
 
 type CardRequest = {
@@ -12,7 +12,7 @@ type CardRequest = {
   issuerCode: CardIssuerServerCode;
 };
 
-let cardInfo: CardInfo[] = [];
+let cardInfo: StoredCard[] = [];
 
 const ERROR_MESSAGE = {
   INVALID_CARD_NUMBER: '유효하지 않은 카드 번호입니다.',
@@ -49,7 +49,7 @@ export const handlers = [
       return createErrorResponse('INVALID_EXPIRATION_DATE');
     }
 
-    const newCardInfo: CardInfo = {
+    const newCardInfo: StoredCard = {
       id: crypto.randomUUID(),
       number: body.number,
       expirationDate: body.expirationDate,

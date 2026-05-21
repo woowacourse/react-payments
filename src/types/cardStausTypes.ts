@@ -61,8 +61,8 @@ export type CardIssuerType =
   | 'hanaCard'
   | 'kbCard';
 
-export type CardInfo = {
-  id?: string;
+export type StoredCard = {
+  id: string;
   number: string;
   expirationDate: string;
   cvc: string;
