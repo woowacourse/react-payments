@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { Property } from 'csstype';
-import { SPACING, type SpacingToken } from '../../styles/tokens';
+import { SPACING, type SpacingToken } from '../../tokens';
 
 interface FlexProps {
   direction?: Property.FlexDirection;

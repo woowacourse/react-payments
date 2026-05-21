@@ -1,6 +1,6 @@
-export type SpacingToken = 4 | 6 | 8 | 10 | 12 | 14 | 16 | 32 | 45;
+// This file is auto-generated. Run `npm run sync-tokens` to update.
 
-export const SPACING: Record<SpacingToken, string> = {
+export const SPACING = {
   4: 'var(--spacing-4)',
   6: 'var(--spacing-6)',
   8: 'var(--spacing-8)',
@@ -10,7 +10,9 @@ export const SPACING: Record<SpacingToken, string> = {
   16: 'var(--spacing-16)',
   32: 'var(--spacing-32)',
   45: 'var(--spacing-45)',
-};
+} as const;
+
+export type SpacingToken = keyof typeof SPACING;
 
 export const FONT_SIZE = {
   xs: 'var(--font-size-xs)',
@@ -33,8 +35,8 @@ export type FontWeightToken = keyof typeof FONT_WEIGHT;
 export const FONT_COLOR = {
   black: 'var(--color-black)',
   white: 'var(--color-white)',
-  description: 'var(--color-description)',
-  error: 'var(--color-error)',
+  description: 'var(--color-gray-400)',
+  error: 'var(--color-red-500)',
 } as const;
 
 export type FontColorToken = keyof typeof FONT_COLOR;

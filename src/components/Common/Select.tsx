@@ -16,7 +16,7 @@ const SelectBase = styled.select<SelectProps>`
   background: no-repeat calc(100% - var(--spacing-8)) 50% url(${import.meta.env.BASE_URL}select_icon.svg);
   appearance: none;
   /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
-  color: ${(props) => (props.value?.length ? 'var(--color-black)' : 'var(--color-description)')};
+  color: ${(props) => (props.value?.length ? 'var(--color-black)' : 'var(--color-gray-400)')};
 
   &,
   &::picker(select) {

@@ -1,0 +1,75 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-border: var(--color-gray-400);
+  --color-error: var(--color-red-500);
+
+  /* gray */
+  --color-gray-50: #fdfdfd;
+  --color-gray-100: #fafafa;
+  --color-gray-200: #e6e6e6;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #8b95a1;
+  --color-gray-500: #6b7685;
+  --color-gray-600: #515c6b;
+  --color-gray-700: #3b4453;
+  --color-gray-800: #272e3b;
+  --color-gray-900: #181d27;
+  --color-gray-950: #0e1118;
+
+  /* red */
+  --color-red-50: #fff5f5;
+  --color-red-100: #ffe0e0;
+  --color-red-200: #ffc1c1;
+  --color-red-300: #ff9494;
+  --color-red-400: #ff6b6b;
+  --color-red-500: #ff3d3d;
+  --color-red-600: #e52222;
+  --color-red-700: #c41a1a;
+  --color-red-800: #9e1515;
+  --color-red-900: #7c1111;
+  --color-red-950: #4a0a0a;
+
+  /* card issuer colors */
+  --color-card-chip: #ddcd78;
+  --color-card-background: #333;
+  --color-card-bc: #f04651;
+  --color-card-shinhan: #0046ff;
+  --color-card-kakao: #ffe600;
+  --color-card-hyundai: #000;
+  --color-card-woori: #007bc8;
+  --color-card-lotte: #ed1c24;
+  --color-card-hana: #009490;
+  --color-card-kookmin: #6a6056;
+
+  /* spacing */
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-16: 16px;
+  --spacing-32: 32px;
+  --spacing-45: 45px;
+
+  /* border-radius */
+  --radius-s: 3px;
+  --radius-m: 4px;
+  --radius-l: 8px;
+
+  /* shadow */
+  --shadow-card: 3px 3px 5px 0 #00000040;
+
+  /* font-size */
+  --font-size-xs: 10px;
+  --font-size-s: 12px;
+  --font-size-m: 14px;
+  --font-size-l: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+
+  /* font-weight */
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}

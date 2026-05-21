@@ -12,7 +12,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "deploy": "vite build --mode gh-pages --minify=false && npx gh-pages -d dist",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sync-token": "node --experimental-strip-types sync-tokens.ts"
   },
   "homepage": "https://bel1c10ud.github.io/react-payments",
   "dependencies": {
@@ -68,6 +69,10 @@
     ]
   },
   "lint-staged": {
+    "tokens.config.ts": [
+      "npm run sync-token",
+      "git add src/styles/token.css src/tokens.ts"
+    ],
     "*.{js,jsx,ts,tsx}": [
       "stylelint --fix"
     ]

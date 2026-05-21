@@ -8,7 +8,7 @@ import {
   type FontColorToken,
   type FontSizeToken,
   type FontWeightToken,
-} from '../../styles/tokens';
+} from '../../tokens';
 
 interface CommonTextProps {
   size?: FontSizeToken;
