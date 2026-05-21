@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { requestCards } from '../api/requestCards';
+import { deleteCard } from '../api/deleteCard';
 import type { CardResponse } from '../types/cardStausTypes';
 
 export function useUserCardList() {
@@ -23,6 +24,19 @@ export function useUserCardList() {
       setErrorMessage('카드 목록을 불러올 수 없어요');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('카드를 삭제하시겠습니까?')) {
+      return;
+    }
+
+    try {
+      await deleteCard(id);
+      setCards((prev) => prev.filter((card) => card.id !== id));
+    } catch (error) {
+      alert(error instanceof Error ? error.message : '카드 삭제에 실패했습니다.');
     }
   };
 
@@ -55,5 +69,6 @@ export function useUserCardList() {
     isLoading,
     errorMessage,
     handleRetry,
+    handleDelete,
   };
 }

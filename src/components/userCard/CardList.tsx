@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 type CardListProps = {
   cards: CardResponse[];
+  handleDelete: (id: string) => void;
 };
 
-export default function CardList({ cards }: CardListProps) {
+export default function CardList({ cards, handleDelete }: CardListProps) {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +21,7 @@ export default function CardList({ cards }: CardListProps) {
       }}
     >
       {cards.map((card) => {
-        return <Card key={card.id} card={card} />;
+        return <Card key={card.id} card={card} handleDelete={handleDelete} />;
       })}
       <button
         css={(theme) => ({

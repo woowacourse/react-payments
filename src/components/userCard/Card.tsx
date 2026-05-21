@@ -1,25 +1,14 @@
 import Delete from '../../assets/Delete.png';
 import type { CardResponse } from '../../types/cardStausTypes';
 import { CARD_ISSUER, CARD_ISSUER_CODE } from '../../constants/constant';
-import { deleteCard } from '../../api/deleteCard';
 
 type CardProps = {
   card: CardResponse;
+  handleDelete: (id: string) => void;
 };
 
-export default function Card({ card }: CardProps) {
+export default function Card({ card, handleDelete }: CardProps) {
   type CardIssuerServerCode = '31' | '41' | '15' | '61' | 'W1' | '71' | '21' | '11';
-
-  const handleDelete = async (id: string) => {
-    if (confirm('카드를 삭제하시겠습니까?')) {
-      try {
-        await deleteCard(id);
-        location.reload();
-      } catch (error) {
-        alert(error instanceof Error ? error.message : '카드 삭제에 실패했습니다.');
-      }
-    }
-  };
 
   const cardIssuerKey = card.issuerCode as CardIssuerServerCode;
   const cardColorKey = CARD_ISSUER_CODE[cardIssuerKey];

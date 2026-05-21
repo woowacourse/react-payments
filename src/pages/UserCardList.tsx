@@ -5,7 +5,7 @@ import CardList from '../components/userCard/CardList';
 import { useUserCardList } from '../hooks/useUserCardList';
 
 export default function UserCardList() {
-  const { cards, isLoading, errorMessage, handleRetry } = useUserCardList();
+  const { cards, isLoading, errorMessage, handleRetry, handleDelete } = useUserCardList();
 
   return (
     <div
@@ -31,7 +31,7 @@ export default function UserCardList() {
         <>
           {isLoading && <Skeleton />}
           {!isLoading && cards.length === 0 && <Empty />}
-          {!isLoading && cards.length > 0 && <CardList cards={cards} />}
+          {!isLoading && cards.length > 0 && <CardList cards={cards} handleDelete={handleDelete} />}
         </>
       )}
       {errorMessage && <ErrorInfo message={errorMessage} handleRetry={handleRetry} />}
