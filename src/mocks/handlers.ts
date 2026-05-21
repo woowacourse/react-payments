@@ -2,7 +2,7 @@ import { delay, http, HttpResponse } from 'msw';
 import { getCardBrand } from '../utils/cardBrand';
 import { CARD_ISSUER_CODE } from '../constants/constant';
 import { isCardExpiryDateComplete } from '../utils/validate';
-import type { CardIssuerType } from '../types/cardStausTypes';
+import type { CardIssuerServerCode } from '../types/cardStausTypes';
 import type { CardInfo } from '../types/cardStausTypes';
 import { maskFetchCardNumbers } from '../utils/maskCardNumbers';
 
@@ -10,7 +10,7 @@ type CardRequest = {
   number: string;
   expirationDate: string;
   cvc: string;
-  issuerCode: CardIssuerType;
+  issuerCode: CardIssuerServerCode;
 };
 
 let cardInfo: CardInfo[] = [];

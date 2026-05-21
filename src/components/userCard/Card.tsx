@@ -8,9 +8,7 @@ type CardProps = {
 };
 
 export default function Card({ card, handleDelete }: CardProps) {
-  type CardIssuerServerCode = '31' | '41' | '15' | '61' | 'W1' | '71' | '21' | '11';
-
-  const cardIssuerKey = card.issuerCode as CardIssuerServerCode;
+  const cardIssuerKey = card.issuerCode;
   const cardColorKey = CARD_ISSUER_CODE[cardIssuerKey];
 
   return (

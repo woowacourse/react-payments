@@ -71,7 +71,9 @@ export type CardInfo = {
 
 export type CardResponse = {
   id: string;
-  issuerCode: string;
+  issuerCode: CardIssuerServerCode;
   number: string;
   expirationDate: string;
 };
+
+export type CardIssuerServerCode = '31' | '41' | '15' | '61' | 'W1' | '71' | '21' | '11';
