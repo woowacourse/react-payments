@@ -60,9 +60,12 @@ export const handlers = [
 
     cardInfo.push(newCardInfo);
 
-    return HttpResponse.json(newCardInfo.id, {
-      status: 201,
-    });
+    return HttpResponse.json(
+      { id: newCardInfo.id },
+      {
+        status: 201,
+      },
+    );
   }),
 
   // get

@@ -6,7 +6,11 @@ type ErrorResponse = {
   message: string;
 };
 
-export async function postCard(cardInfo: CardInfo): Promise<string> {
+type PostCardResponse = {
+  id: string;
+};
+
+export async function postCard(cardInfo: CardInfo): Promise<PostCardResponse> {
   let response: Response;
 
   try {

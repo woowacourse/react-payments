@@ -94,7 +94,7 @@ export function useRegisterCardForm() {
     }
 
     try {
-      const id = await postCard(formData);
+      const { id } = await postCard(formData);
 
       navigate(`/complete/${id}`, {
         state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
