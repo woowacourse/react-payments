@@ -22,7 +22,13 @@ export default defineConfig({
         test: {
           name: 'unit',
           environment: 'jsdom',
+          environmentOptions: {
+            jsdom: {
+              url: 'http://localhost/',
+            },
+          },
           include: ['__tests__/**/*.test.{ts,tsx}'],
+          setupFiles: ['./src/mocks/testSetup.ts'],
         },
       },
       {

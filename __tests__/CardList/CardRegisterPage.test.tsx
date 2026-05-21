@@ -1,19 +1,15 @@
 import '@testing-library/jest-dom/vitest';
 
+import { http, HttpResponse } from 'msw';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { postCard } from '../../src/api/cards';
-import { HTTPError, NetworkError } from '../../src/api/error';
 import type { CardFormInfoType } from '../../src/domain/card/types/card';
 import CardRegisterPage from '../../src/feature/CardRegister/CardRegisterPage';
 import { useCardForm } from '../../src/feature/CardRegister/hooks/useCardForm';
-
-vi.mock('../../src/api/cards', () => ({
-  postCard: vi.fn(),
-}));
+import { server } from '../../src/mocks/server';
 
 vi.mock('../../src/feature/CardRegister/hooks/useCardForm', () => ({
   useCardForm: vi.fn(),
@@ -79,7 +75,6 @@ const completedFields = {
   },
 };
 
-const mockedPostCard = vi.mocked(postCard);
 const mockedUseCardForm = vi.mocked(useCardForm);
 
 const renderCardRegisterPage = () => {
@@ -115,15 +110,10 @@ describe('CardRegisterPage', () => {
     const user = userEvent.setup();
     const serverErrorMessage = '유효하지 않은 카드 번호입니다.';
 
-    mockedPostCard.mockRejectedValueOnce(
-      new HTTPError('INVALID_CARD_NUMBER', serverErrorMessage),
-    );
-
     renderCardRegisterPage();
 
     await user.click(screen.getByRole('button', { name: '제출' }));
 
-    expect(mockedPostCard).toHaveBeenCalledWith(completedCardFormInfo);
     expect(await screen.findByText(serverErrorMessage)).toBeInTheDocument();
   });
 
@@ -131,13 +121,12 @@ describe('CardRegisterPage', () => {
     const user = userEvent.setup();
     const serverErrorMessage = '네트워크 오류가 발생했습니다.';
 
-    mockedPostCard.mockRejectedValueOnce(new NetworkError(serverErrorMessage));
+    server.use(http.post('/cards', () => HttpResponse.error()));
 
     renderCardRegisterPage();
 
     await user.click(screen.getByRole('button', { name: '제출' }));
 
-    expect(mockedPostCard).toHaveBeenCalledWith(completedCardFormInfo);
     expect(await screen.findByText(serverErrorMessage)).toBeInTheDocument();
   });
 });

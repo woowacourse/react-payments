@@ -1,18 +1,14 @@
 import '@testing-library/jest-dom/vitest';
 
+import { delay, http, HttpResponse } from 'msw';
 import userEvent from '@testing-library/user-event';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { getCards, deleteCard } from '../../src/api/cards';
 import type { Card } from '../../src/domain/card/types/card';
 import CardListPage from '../../src/feature/CardList/CardListPage';
-
-vi.mock('../../src/api/cards', () => ({
-  getCards: vi.fn(),
-  deleteCard: vi.fn(),
-}));
+import { server } from '../../src/mocks/server';
 
 const mockCards: Card[] = [
   {
@@ -31,22 +27,18 @@ const renderCardListPage = () => {
   );
 };
 
-const mockedGetCards = vi.mocked(getCards);
-const mockedDeleteCard = vi.mocked(deleteCard);
-
 describe('CardListPage', () => {
   afterEach(() => {
     cleanup();
     vi.restoreAllMocks();
   });
 
-  beforeEach(() => {
-    mockedGetCards.mockReset();
-    mockedDeleteCard.mockReset();
-  });
-
   it('카드 목록을 조회하는 경우, 요청하는 동안 스켈레톤 UI를 보여준다.', async () => {
-    mockedGetCards.mockImplementation(() => new Promise<Card[]>(() => {}));
+    server.use(
+      http.get('/cards', async () => {
+        await delay('infinite');
+      }),
+    );
 
     renderCardListPage();
 
@@ -58,7 +50,7 @@ describe('CardListPage', () => {
   });
 
   it('카드 목록 조회 성공 시, 카드 목록이 존재하면 등록된 카드 목록을 표시한다.', async () => {
-    mockedGetCards.mockResolvedValueOnce(mockCards);
+    server.use(http.get('/cards', () => HttpResponse.json(mockCards)));
 
     renderCardListPage();
 
@@ -68,7 +60,7 @@ describe('CardListPage', () => {
   });
 
   it('카드 목록 조회 성공 시, 카드 목록이 비어 있으면 빈 상태 UI와 카드 등록 버튼을 표시한다.', async () => {
-    mockedGetCards.mockResolvedValueOnce([]);
+    server.use(http.get('/cards', () => HttpResponse.json([])));
 
     renderCardListPage();
 
@@ -81,8 +73,13 @@ describe('CardListPage', () => {
   });
 
   it('카드 목록 조회 실패 시 에러 UI와 다시 시도 버튼을 표시한다.', async () => {
-    mockedGetCards.mockRejectedValueOnce(
-      new Error('카드 목록을 불러오지 못했습니다.'),
+    server.use(
+      http.get('/cards', () =>
+        HttpResponse.json(
+          { message: '카드 목록을 불러오지 못했습니다.' },
+          { status: 500 },
+        ),
+      ),
     );
 
     renderCardListPage();
@@ -97,9 +94,19 @@ describe('CardListPage', () => {
 
   it('카드 삭제 요청이 성공하면 카드가 목록에서 사라진다.', async () => {
     const user = userEvent.setup();
+    const cards = [...mockCards];
 
-    mockedGetCards.mockResolvedValueOnce(mockCards).mockResolvedValueOnce([]);
-    mockedDeleteCard.mockResolvedValueOnce();
+    server.use(
+      http.get('/cards', () => HttpResponse.json(cards)),
+      http.delete('/cards/:id', ({ params }) => {
+        const cardId = String(params.id);
+        const targetIndex = cards.findIndex((card) => card.id === cardId);
+
+        if (targetIndex !== -1) cards.splice(targetIndex, 1);
+
+        return new HttpResponse(null, { status: 204 });
+      }),
+    );
     vi.spyOn(window, 'confirm').mockReturnValue(true);
 
     renderCardListPage();
@@ -109,8 +116,6 @@ describe('CardListPage', () => {
     await user.click(screen.getByRole('button', { name: '카드 삭제' }));
 
     expect(window.confirm).toHaveBeenCalledWith('카드를 삭제하시겠습니까?');
-    expect(mockedDeleteCard).toHaveBeenCalledWith(mockCards[0].id);
-    expect(mockedGetCards).toHaveBeenCalledTimes(2);
 
     await waitFor(() => {
       expect(screen.queryByText('BC카드')).not.toBeInTheDocument();
