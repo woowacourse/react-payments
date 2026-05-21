@@ -1,4 +1,4 @@
-import { PASSWORD_ERROR_MESSAGE } from '../../constants/messages.ts';
+import { PASSWORD_ERROR_MESSAGE } from '../../constants/messages';
 import type { Password } from '../../types/cardStausTypes';
 
 type CardPasswordProps = {

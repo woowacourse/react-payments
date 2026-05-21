@@ -2,10 +2,10 @@ import {
   DATE_ERROR_MESSAGE,
   MONTH_ERROR_MESSAGE,
   YEAR_ERROR_MESSAGE,
-} from '../../constants/messages.ts';
-import { isMonthError, isYearError } from '../../utils/error.ts';
-import { isNumericInput } from '../../utils/validate.ts';
-import type { CardExpiry } from '../../types/cardStausTypes.ts';
+} from '../../constants/messages';
+import { isMonthError, isYearError } from '../../utils/error';
+import { isNumericInput } from '../../utils/validate';
+import type { CardExpiry } from '../../types/cardStausTypes';
 import { useRef } from 'react';
 
 type CardExpiryDateProps = {
