@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
-import { beforeAll, afterEach, afterAll, describe, it, expect } from 'vitest';
+import { beforeAll, afterEach, afterAll, describe, it, expect, vi } from 'vitest';
 import { server } from '../mocks/node';
 import { db } from '../mocks/db';
 import { theme } from '../styles/theme';

@@ -56,7 +56,7 @@ export const Interactive: Story = {
     setCardPassword: createPasswordHandlers(),
   },
   render: () => {
-    const [cardPassword, setCardPassword] = useCardPassword();
+    const { cardPassword, cardPasswordHandler: setCardPassword } = useCardPassword();
 
     return <CardPassword cardPassword={cardPassword} setCardPassword={setCardPassword} />;
   },
