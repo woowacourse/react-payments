@@ -43,6 +43,22 @@ const validateExpirationDate = (value: unknown): boolean => {
   return monthNumber >= 1 && monthNumber <= 12;
 };
 
+export function formatMaskCardNumber(cardNumber: string): string {
+  const cleaned = cardNumber.replace(/\D/g, '');
+
+  if (cleaned.length < 14 || cleaned.length > 16) {
+    throw new Error('올바른 카드 번호 형식이 아닙니다. (14~16자리의 숫자가 필요합니다.)');
+  }
+
+  const front = cleaned.slice(0, 6); // 앞 6자리
+  const back = cleaned.slice(-4); // 뒤 4자리
+
+  const maskLength = cleaned.length - 10;
+  const maskedSection = '*'.repeat(maskLength);
+
+  return `${front}${maskedSection}${back}`;
+}
+
 let cards: Card[] = [];
 
 export const handlers = [
@@ -86,7 +102,12 @@ export const handlers = [
     return HttpResponse.json({ id: crypto.randomUUID() }, { status: 201 });
   }),
   http.get('/cards', () => {
-    return HttpResponse.json(cards, { status: 200 });
+    return HttpResponse.json(
+      cards.map((card) => {
+        return { ...card, number: formatMaskCardNumber(card.number) };
+      }),
+      { status: 200 },
+    );
   }),
   http.delete('/cards/:id', ({ params }) => {
     const { id } = params;
