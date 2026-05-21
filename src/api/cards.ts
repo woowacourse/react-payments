@@ -11,7 +11,11 @@ export const getCards = async (signal?: AbortSignal): Promise<Card[]> => {
   }
 
   if (!response.ok) {
-    throw new HTTPError('GET_CARDS_FAILED', '카드 목록을 불러오지 못했습니다.');
+    throw new HTTPError(
+      response.status,
+      'GET_CARDS_FAILED',
+      '카드 목록을 불러오지 못했습니다.',
+    );
   }
 
   return response.json();
@@ -38,7 +42,7 @@ export const postCard = async (
   // 2. HTTP 에러인 경우
   if (!response.ok) {
     const error = await response.json();
-    throw new HTTPError(error.code, error.message);
+    throw new HTTPError(response.status, error.code, error.message);
   }
 
   return response.json();
@@ -56,6 +60,10 @@ export const deleteCard = async (cardId: string): Promise<void> => {
   }
 
   if (!response.ok) {
-    throw new HTTPError('DELETE_CARD_FAILED', '카드 삭제에 실패했습니다.');
+    throw new HTTPError(
+      response.status,
+      'DELETE_CARD_FAILED',
+      '카드 삭제에 실패했습니다.',
+    );
   }
 };

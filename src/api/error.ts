@@ -1,8 +1,10 @@
 export class HTTPError<TCode extends string> extends Error {
+  status: number;
   code: TCode;
 
-  constructor(code: TCode, message: string) {
+  constructor(status: number, code: TCode, message: string) {
     super(message);
+    this.status = status;
     this.code = code;
   }
 }
