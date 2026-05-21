@@ -2,7 +2,11 @@ import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 export default function AddCardButton() {
   const navigate = useNavigate();
-  return <Button onClick={() => navigate("/register")}>+카드 추가</Button>;
+  return (
+    <Button type="button" onClick={() => navigate("/register")}>
+      +카드 추가
+    </Button>
+  );
 }
 
 const Button = styled.button`
