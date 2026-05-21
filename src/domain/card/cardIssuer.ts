@@ -67,7 +67,7 @@ export const getIssuerInformationByCode = (
 
 export const getIssuerColor = (issuerName: IssuerKoreanName | null) => {
   const foundIssuer = Object.entries(ISSUER).find(
-    ([_, issuerInformation]) => issuerInformation.KOR === issuerName,
+    ([, issuerInformation]) => issuerInformation.KOR === issuerName,
   );
 
   if (!foundIssuer) {
@@ -85,7 +85,7 @@ export const getIssuerCodeByName = (
     return;
   }
   const foundIssuer = Object.entries(ISSUER).find(
-    ([_, information]) => information.KOR === companyName,
+    ([, information]) => information.KOR === companyName,
   );
 
   if (!foundIssuer) {
