@@ -35,6 +35,8 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          VITE_ENABLE_MSW: true
         run: npm run build
 
       - name: Add SPA fallback
