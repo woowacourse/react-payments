@@ -17,7 +17,7 @@ async function enableMocking() {
   });
 }
 
-await enableMocking();
+await enableMocking().catch((err) => console.error('MSW init failed:', err));
 
 const isSubPath = import.meta.env.BASE_URL !== '/';
 
