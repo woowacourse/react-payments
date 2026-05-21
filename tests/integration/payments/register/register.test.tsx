@@ -13,8 +13,6 @@ describe('카드 등록 페이지 테스트', async () => {
     // ARRANGE
     renderProvider(<AppRoutes />, { route: '/payments/register' });
 
-    screen.debug();
-
     // ACT
     const cardInputs = screen.getAllByPlaceholderText('1234'); // [input, input, input, input]
 
