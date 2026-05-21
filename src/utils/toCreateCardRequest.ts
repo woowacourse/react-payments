@@ -6,7 +6,7 @@ export function toCreateCardRequest(
   cardNumbers: string[],
   cardExpiryDate: string[],
   cardCvc: string,
-  cardIssuer: CardIssuerType | '',
+  cardIssuer: CardIssuerType,
 ): CardRequest {
   return {
     number: cardNumbers.join(''),

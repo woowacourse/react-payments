@@ -65,7 +65,7 @@ export function useUserCardList() {
     loadCardsEvent();
 
     return () => {
-      abortRef.current.abort();
+      abortRef.current?.abort();
     };
   }, []);
 

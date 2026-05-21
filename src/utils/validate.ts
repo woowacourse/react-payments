@@ -34,7 +34,7 @@ export function isCardExpiryDateComplete(cardExpiryDate: string[]): boolean {
   );
 }
 
-export function isCardIssuerSelected(cardIssuer: CardIssuerType | ''): boolean {
+export function isCardIssuerSelected(cardIssuer: CardIssuerType | ''): cardIssuer is CardIssuerType {
   return cardIssuer !== '';
 }
 
