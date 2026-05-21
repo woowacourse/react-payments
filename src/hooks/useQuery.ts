@@ -45,61 +45,59 @@ export default function useQuery<T>(option: QueryOption) {
 
   const { method: rawMethod, url, params, headers, body, enabled } = option;
 
-  const requset = useCallback(() => {
-    const controller = new AbortController();
+  const request = useCallback(async (signal?: AbortSignal) => {
     const method = rawMethod?.toUpperCase() ?? "GET";
     const hasBody = method !== "GET" && body !== undefined;
 
-    Promise.resolve()
-      .then(() => {
-        if (controller.signal.aborted) {
-          throw new Error("Aborted");
-        }
+    setStatus("loading");
+    setData(null);
+    setError(null);
 
-        setStatus("loading");
-        setData(null);
-        setError(null);
-
-        return fetch(createUrl(url, params), {
-          method,
-          headers,
-          body: hasBody ? JSON.stringify(body) : undefined,
-          signal: controller.signal,
-        });
-      })
-      .then(async (res) => {
-        const data = await parseJsonResponse<T>(res);
-
-        if (controller.signal.aborted) return;
-
-        setData(data);
-
-        if (!res.ok) {
-          throw new Error(`HTTP error: ${res.status}`);
-        }
-
-        setStatus("success");
-      })
-      .catch((reason) => {
-        if (controller.signal.aborted) return;
-
-        setStatus("error");
-        setError(reason instanceof Error ? reason : new Error(String(reason)));
+    try {
+      const res = await fetch(createUrl(url, params), {
+        method,
+        headers,
+        body: hasBody ? JSON.stringify(body) : undefined,
+        signal,
       });
 
-    return () => {
-      controller.abort();
-    };
+      const data = await parseJsonResponse<T>(res);
+
+      if (signal?.aborted) return;
+
+      setData(data);
+
+      if (!res.ok) {
+        throw new Error(`HTTP error: ${res.status}`);
+      }
+
+      setStatus("success");
+    } catch (reason) {
+      if (signal?.aborted) return;
+      setStatus("error");
+      setError(reason instanceof Error ? reason : new Error(String(reason)));
+    }
   }, [rawMethod, url, params, headers, body]);
 
   useEffect(() => {
     if (enabled === false) return;
-    return requset();
-  }, [requset, enabled]);
+
+    const controller = new AbortController();
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    request(controller.signal);
+
+    return () => {
+      controller.abort();
+    };
+
+  }, [request, enabled]);
 
   const refetch = useCallback(() => {
-    requset();
-  }, [requset]);
+    const controller = new AbortController();
+
+    request(controller.signal);
+  }, [request]);
 
   return {
     status,
