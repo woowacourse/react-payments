@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardListItem from '../components/CardListItem';
+import FetchErrorCard from '../components/FetchErrorCard';
+import NoRegisteredCard from '../components/NoRegisteredCard';
 import { deleteCard, getCards } from '../api/cards';
 import type { CardResponse } from '../api/api';
 
@@ -85,6 +87,8 @@ export default function CardList() {
   }, []);
 
   const refreshCards = async () => {
+    setState({ status: 'loading' });
+
     try {
       const data = await getCards();
       setState({ status: 'success', data });
@@ -128,16 +132,15 @@ export default function CardList() {
       </h1>
       <div css={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {state.status === 'loading' && <CardListSkeleton />}
-        {state.status === 'error' && (
-          <p css={(theme) => ({ ...theme.typography.caption, color: theme.colors.error, margin: 0 })}>
-            {state.message}
-          </p>
+        {state.status === 'error' && <FetchErrorCard onRetry={refreshCards} />}
+        {state.status === 'success' && state.data.length === 0 && (
+          <NoRegisteredCard onAddCard={() => navigate('/register')} />
         )}
         {state.status === 'success' &&
           state.data.map((card) => (
             <CardListItem key={card.id} card={card} onDelete={handleDeleteCard} />
           ))}
-        {state.status !== 'loading' && (
+        {state.status === 'success' && state.data.length > 0 && (
           <button
             type="button"
             onClick={() => navigate('/register')}

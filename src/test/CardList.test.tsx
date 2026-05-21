@@ -49,7 +49,9 @@ describe('카드 목록', () => {
 
     await waitFor(() => {
       expect(screen.getByText('보유 카드')).toBeInTheDocument();
-      expect(screen.getByText('+ 카드 추가')).toBeInTheDocument();
+      expect(screen.getByText('등록된 카드가 없습니다')).toBeInTheDocument();
+      expect(screen.getByText('아래 버튼을 눌러 첫 카드를 등록해보세요')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: '카드 추가하기' })).toBeInTheDocument();
     });
   });
 
@@ -70,6 +72,37 @@ describe('카드 목록', () => {
       expect(screen.getByText('BC카드')).toBeInTheDocument();
       expect(screen.getByText('4111 **** **** 1111')).toBeInTheDocument();
       expect(screen.getByText('유효 기간 12/26')).toBeInTheDocument();
+    });
+  });
+
+  it('카드 목록을 불러오지 못하면 에러 화면을 표시하고 다시 시도할 수 있다', async () => {
+    const { http, HttpResponse } = await import('msw');
+    const user = userEvent.setup();
+    let requestCount = 0;
+
+    server.use(
+      http.get('/cards', () => {
+        requestCount += 1;
+
+        if (requestCount === 1) {
+          return HttpResponse.json(null, { status: 500 });
+        }
+
+        return HttpResponse.json(db.getCards());
+      }),
+    );
+
+    renderCardList();
+
+    await waitFor(() => {
+      expect(screen.getByText('카드 목록을 불러올 수 없어요')).toBeInTheDocument();
+      expect(screen.getByText('잠시 후 다시 시도해 주세요.')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByRole('button', { name: '다시 시도' }));
+
+    await waitFor(() => {
+      expect(screen.getByText('등록된 카드가 없습니다')).toBeInTheDocument();
     });
   });
 
