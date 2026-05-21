@@ -55,7 +55,7 @@ export default function CardList() {
           state.data.map((card) => <CardListItem key={card.id} card={card} />)}
         <button
           type="button"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/register')}
           css={(theme) => ({
             width: '320px',
             height: '40px',

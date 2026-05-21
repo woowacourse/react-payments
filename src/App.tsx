@@ -12,10 +12,11 @@ function App() {
       <Global styles={globalStyles} />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<RegisterCard />} />
+          <Route path="/" element={<Navigate to="/cards" replace />} />
+          <Route path="/register" element={<RegisterCard />} />
           <Route path="/complete" element={<RegisterComplete />} />
           <Route path="/cards" element={<CardList />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/cards" replace />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
