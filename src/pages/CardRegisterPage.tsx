@@ -7,7 +7,8 @@ import CvcNumberField from "../components/InputField/CvcNumberField";
 import CardFirmSelect from "../components/CardFirmSelect/CardFirmSelect";
 import PasswordNumberField from "../components/InputField/PasswordNumberField";
 import CheckBtn from "../components/button/CheckBtn";
-import useCardRegisterPage from "../hooks/useCardRegisterPage";
+import useCardRegisterForm from "../hooks/useCardRegisterForm";
+import useCardSubmit from "../hooks/useCardSubmit";
 
 export default function CardRegisterPage() {
   const {
@@ -29,9 +30,14 @@ export default function CardRegisterPage() {
     onCardNumberComplete,
     onExpNumberComplete,
     onCvcNumberComplete,
-    handleComplete,
-    serverError,
-  } = useCardRegisterPage();
+  } = useCardRegisterForm();
+
+  const { handleComplete, serverError } = useCardSubmit({
+    cardNumbers,
+    expNumbers,
+    cvcNumbers,
+    cardFirm,
+  });
 
   return (
     <MainContainer>
