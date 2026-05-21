@@ -28,13 +28,13 @@ export default function PasswordField({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     const error = validate(validationRules, 'onChange', inputValue);
-    onErrorUpdated([error as ErrorStatus]);
+    onErrorUpdated([error]);
     if (error) return;
     onUpdated(inputValue);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    onErrorUpdated([validate(validationRules, 'onBlur', e.target.value) as ErrorStatus]);
+    onErrorUpdated([validate(validationRules, 'onBlur', e.target.value)]);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {

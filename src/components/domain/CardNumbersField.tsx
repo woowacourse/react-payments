@@ -47,7 +47,7 @@ export default function CardNumbersField({
   const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     const error = validate(validationRules, 'onChange', inputValue);
-    updateErrorStatuses(index, error as ErrorStatus);
+    updateErrorStatuses(index, error);
     if (error) return;
 
     const newValue = [...value] as CardInfo['cardNumbers'];
@@ -71,7 +71,7 @@ export default function CardNumbersField({
   };
 
   const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
-    updateErrorStatuses(index, validate(validationRules, 'onBlur', e.target.value) as ErrorStatus);
+    updateErrorStatuses(index, validate(validationRules, 'onBlur', e.target.value));
   };
 
   const activeError = errorStatuses.find((e) => e !== null) ?? null;
