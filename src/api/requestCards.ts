@@ -1,6 +1,6 @@
 import type { CardResponse } from '../types/cardStausTypes';
 
-export async function requestCards(signal?: AbortSignal): Promise<CardResponse[]> {
+export async function requestCards(signal: AbortSignal): Promise<CardResponse[]> {
   const response = await fetch('/api/cards', {
     signal,
   });
@@ -9,5 +9,7 @@ export async function requestCards(signal?: AbortSignal): Promise<CardResponse[]
     throw new Error('카드 목록을 불러오지 못했습니다.');
   }
 
-  return (await response.json()) as CardResponse[];
+  const data = await response.json();
+
+  return data;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useEffectEvent, useRef } from 'react';
 
 import { requestCards } from '../api/requestCards';
 import { deleteCard } from '../api/deleteCard';
@@ -8,23 +8,42 @@ export function useUserCardList() {
   const [cards, setCards] = useState<CardResponse[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const abortRef = useRef<AbortController | null>(null);
 
-  const handleRetry = async () => {
-    try {
-      setIsLoading(true);
-      setErrorMessage('');
+  const loadCards = useCallback(() => {
+    abortRef.current?.abort();
 
-      const data = await requestCards();
-      setCards(data);
-    } catch (error) {
-      if (error instanceof DOMException && error.name === 'AbortError') {
-        return;
-      }
+    const abortController = new AbortController();
+    abortRef.current = abortController;
 
-      setErrorMessage('카드 목록을 불러올 수 없어요');
-    } finally {
-      setIsLoading(false);
-    }
+    requestCards(abortController.signal)
+      .then((data) => {
+        setCards(data);
+        setErrorMessage('');
+      })
+      .catch((error) => {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          return;
+        }
+
+        setErrorMessage('카드 목록을 불러올 수 없어요');
+      })
+      .finally(() => {
+        if (!abortController.signal.aborted) {
+          setIsLoading(false);
+        }
+
+        if (abortRef.current === abortController) {
+          abortRef.current = null;
+        }
+      });
+  }, []);
+
+  const handleRetry = () => {
+    setIsLoading(true);
+    setErrorMessage('');
+
+    loadCards();
   };
 
   const handleDelete = async (id: string) => {
@@ -40,27 +59,13 @@ export function useUserCardList() {
     }
   };
 
-  useEffect(() => {
-    const abortController = new AbortController();
+  const loadCardsEvent = useEffectEvent(() => loadCards());
 
-    requestCards(abortController.signal)
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((error) => {
-        if (error.name === 'AbortError') {
-          return;
-        }
-        setErrorMessage('카드 목록을 불러올 수 없어요');
-      })
-      .finally(() => {
-        if (!abortController.signal.aborted) {
-          setIsLoading(false);
-        }
-      });
+  useEffect(() => {
+    loadCardsEvent();
 
     return () => {
-      abortController.abort();
+      abortRef.current.abort();
     };
   }, []);
 
