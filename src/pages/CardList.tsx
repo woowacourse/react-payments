@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardListItem from '../components/CardListItem';
 import { deleteCard, getCards } from '../api/cards';
-import type { CardResponse } from '../types/api';
+import type { CardResponse } from '../api/api';
 
 type FetchState =
   | { status: 'loading' }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { postCard } from '../api/cards';
-import type { CardFormApiError, RegisterCardRequest, RegisterCardResponse } from '../types/api';
+import type { CardFormApiError, RegisterCardRequest, RegisterCardResponse } from '../api/api';
 
 type AsyncState =
   | { status: 'idle' }

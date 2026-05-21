@@ -1,5 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
-import type { RegisterCardRequest } from '../types/api';
+import type { RegisterCardRequest } from '../api/api';
 import { db } from './db';
 import { getCardBrand } from '../utils/card/cardBrand';
 

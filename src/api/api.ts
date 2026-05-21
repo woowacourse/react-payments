@@ -15,10 +15,7 @@ export type CardResponse = RegisterCardResponse & {
   expirationDate: string;
 };
 
-export type CardApiErrorCode =
-  | 'INVALID_CARD_NUMBER'
-  | 'INVALID_CVC'
-  | 'INVALID_EXPIRATION_DATE';
+export type CardApiErrorCode = 'INVALID_CARD_NUMBER' | 'INVALID_CVC' | 'INVALID_EXPIRATION_DATE';
 
 export type CardApiError = {
   code: CardApiErrorCode;

@@ -4,7 +4,7 @@ import CardExpiryDate from './CardExpiryDate';
 import CardCompany from './CardCompany';
 import CardPassword from './CardPassword';
 import type { CardFormState, CardFormHandlers } from '../hooks/useCardForm';
-import type { CardFormApiError } from '../types/api';
+import type { CardFormApiError } from '../api/api';
 
 type CardCompletion = {
   isCardNumberComplete: boolean;

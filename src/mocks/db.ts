@@ -1,4 +1,4 @@
-import type { CardResponse } from '../types/api';
+import type { CardResponse } from '../api/api';
 
 const STORAGE_KEY = 'react-payments:cards';
 let cards: CardResponse[] = [];

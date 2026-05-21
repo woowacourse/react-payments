@@ -4,7 +4,7 @@ import type {
   CardResponse,
   RegisterCardRequest,
   RegisterCardResponse,
-} from '../types/api';
+} from './api';
 
 function mapCardApiError(error: CardApiError): CardFormApiError {
   const codeByApiCode: Record<CardApiError['code'], CardFormApiError['code']> = {

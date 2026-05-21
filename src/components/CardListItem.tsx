@@ -1,6 +1,6 @@
 import DeleteMark from '../assets/DeleteMark.png';
 import { CARD_COMPANY_LABEL, ISSUER_CODE_CARD_COMPANY } from '../constants/cardCompanies';
-import type { CardResponse } from '../types/api';
+import type { CardResponse } from '../api/api';
 
 type CardListItemProps = {
   card: CardResponse;
@@ -33,7 +33,9 @@ export default function CardListItem({ card, onDelete }: CardListItemProps) {
     >
       <div
         css={(theme) => ({
-          backgroundColor: theme.colors.black,
+          backgroundColor: company
+            ? theme.colors.cardCompanyBackground[company]
+            : theme.colors.cardBackground,
           width: '64px',
           height: '40px',
           borderRadius: '4px',
