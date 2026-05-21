@@ -4,9 +4,10 @@ import type { CardResponse } from '../types/api';
 
 type CardListItemProps = {
   card: CardResponse;
+  onDelete: (id: string) => void;
 };
 
-export default function CardListItem({ card }: CardListItemProps) {
+export default function CardListItem({ card, onDelete }: CardListItemProps) {
   const company = ISSUER_CODE_CARD_COMPANY[card.issuerCode];
   const companyLabel = company ? CARD_COMPANY_LABEL[company] : card.issuerCode;
   const maskedNumbers = `${card.number.slice(0, 6)} ${card.number.slice(6, 12)} ${card.number.slice(12)}`;
@@ -60,7 +61,12 @@ export default function CardListItem({ card }: CardListItemProps) {
           유효 기간 {card.expirationDate}
         </p>
       </div>
-      <button type="button" aria-label="카드 삭제" css={{ alignSelf: 'center' }}>
+      <button
+        type="button"
+        aria-label="카드 삭제"
+        onClick={() => onDelete(card.id)}
+        css={{ alignSelf: 'center' }}
+      >
         <img src={DeleteMark} alt="" aria-hidden="true" css={{ width: '30px', height: '27px' }} />
       </button>
     </article>

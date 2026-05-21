@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import { beforeAll, afterEach, afterAll, describe, it, expect } from 'vitest';
@@ -68,6 +69,30 @@ describe('카드 목록', () => {
       expect(screen.getByText('BC카드')).toBeInTheDocument();
       expect(screen.getByText('411111 ****** 1111')).toBeInTheDocument();
       expect(screen.getByText('유효 기간 12/26')).toBeInTheDocument();
+    });
+  });
+
+  it('카드 삭제 버튼을 누르면 등록된 카드가 목록에서 삭제된다', async () => {
+    const { http, HttpResponse } = await import('msw');
+    const user = userEvent.setup();
+    db.addCard({
+      id: '1',
+      issuerCode: '31',
+      number: '411111******1111',
+      expirationDate: '12/26',
+    });
+    server.use(http.get('/cards', () => HttpResponse.json(db.getCards())));
+
+    renderCardList();
+
+    await waitFor(() => {
+      expect(screen.getByText('411111 ****** 1111')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByRole('button', { name: '카드 삭제' }));
+
+    await waitFor(() => {
+      expect(screen.queryByText('411111 ****** 1111')).not.toBeInTheDocument();
     });
   });
 });

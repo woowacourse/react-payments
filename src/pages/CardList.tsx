@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardListItem from '../components/CardListItem';
-import { getCards } from '../api/cards';
+import { deleteCard, getCards } from '../api/cards';
 import type { CardResponse } from '../types/api';
 
 type FetchState =
@@ -84,6 +84,22 @@ export default function CardList() {
       .catch((e: Error) => setState({ status: 'error', message: e.message }));
   }, []);
 
+  const handleDeleteCard = async (id: string) => {
+    try {
+      await deleteCard(id);
+      setState((currentState) => {
+        if (currentState.status !== 'success') return currentState;
+
+        return {
+          status: 'success',
+          data: currentState.data.filter((card) => card.id !== id),
+        };
+      });
+    } catch (e) {
+      setState({ status: 'error', message: (e as Error).message });
+    }
+  };
+
   return (
     <div
       css={(theme) => ({
@@ -113,7 +129,9 @@ export default function CardList() {
           </p>
         )}
         {state.status === 'success' &&
-          state.data.map((card) => <CardListItem key={card.id} card={card} />)}
+          state.data.map((card) => (
+            <CardListItem key={card.id} card={card} onDelete={handleDeleteCard} />
+          ))}
         {state.status !== 'loading' && (
           <button
             type="button"
