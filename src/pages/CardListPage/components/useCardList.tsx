@@ -13,8 +13,7 @@ export const useCardList = () => {
   const [cardList, setCardList] = useState<CardListResponseItem[]>([]);
 
   const deleteCardFromState = (cardId: string) => {
-    const newCardList = cardList.filter((card) => card.id !== cardId);
-    setCardList(newCardList);
+    setCardList((prev) => prev.filter((card) => card.id !== cardId));
   };
 
   const deleteCardById = async (
