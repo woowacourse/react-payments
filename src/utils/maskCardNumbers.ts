@@ -17,9 +17,5 @@ export function maskSpecialCardNumbers(cardNumbers: string[]): string[] {
 }
 
 export function maskFetchCardNumbers(cardNumbers: string): string {
-  let maskCardNumbers = '';
-  maskCardNumbers = maskCardNumbers + cardNumbers.slice(0, 6) + ' ';
-  maskCardNumbers = maskCardNumbers + '*'.repeat(6) + ' ';
-  maskCardNumbers = maskCardNumbers + cardNumbers.slice(12);
-  return maskCardNumbers;
+  return `${cardNumbers.slice(0, 6)}${'*'.repeat(6)}${cardNumbers.slice(-4)}`;
 }
