@@ -3,18 +3,23 @@ import CardItem from "./CardItem/CardItem";
 import BaseButton from "../../../../shared/components/Button/BaseButton";
 import { useNavigate } from "react-router-dom";
 import type { CardListResponseItem } from "../../../../domain/card/api/cards.types";
+import type { AsyncState } from "../../../../shared/hooks/useAsyncState";
 
-const Success = ({
-  cardList,
-  deleteCard,
-}: {
+type SuccessProps = {
   cardList: CardListResponseItem[];
   deleteCard: (
     cardId: string,
     onSuccess: () => void,
     onError: (error: Error) => void,
   ) => void;
-}) => {
+  deleteCardAsyncState: AsyncState;
+};
+
+const Success = ({
+  cardList,
+  deleteCard,
+  deleteCardAsyncState,
+}: SuccessProps) => {
   const navigate = useNavigate();
   return (
     <SuccessLayout>
@@ -23,6 +28,7 @@ const Success = ({
           key={card.id}
           cardItemInformaiton={card}
           onDeleteCard={deleteCard}
+          deleteCardAsyncState={deleteCardAsyncState}
         />
       ))}
       <AddCardButton onClick={() => navigate("/register")} style="rounded">

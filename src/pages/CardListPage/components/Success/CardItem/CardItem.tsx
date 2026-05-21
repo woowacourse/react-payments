@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { getIssuerInformationByCode } from "../../../../../domain/card/cardIssuer";
 import type { CardListResponseItem } from "../../../../../domain/card/api/cards.types";
+import type { AsyncState } from "../../../../../shared/hooks/useAsyncState";
 
 type CardItemProps = {
   cardItemInformaiton: CardListResponseItem;
@@ -10,9 +11,14 @@ type CardItemProps = {
     onSuccess: () => void,
     onError: (error: Error) => void,
   ) => void;
+  deleteCardAsyncState: AsyncState;
 };
 
-const CardItem = ({ cardItemInformaiton, onDeleteCard }: CardItemProps) => {
+const CardItem = ({
+  cardItemInformaiton,
+  onDeleteCard,
+  deleteCardAsyncState,
+}: CardItemProps) => {
   const { id, issuerCode, number, expirationDate } = cardItemInformaiton;
   const issuer = getIssuerInformationByCode(issuerCode);
 
@@ -42,7 +48,12 @@ const CardItem = ({ cardItemInformaiton, onDeleteCard }: CardItemProps) => {
         <CardNumber>{number.replace(/.{4}/g, "$& ")}</CardNumber>
         <ExpiryDate>유효기간 {expirationDate}</ExpiryDate>
       </CardInformationBox>
-      <DeleteButton onClick={() => handleCardDeleteClick(id)}>X</DeleteButton>
+      <DeleteButton
+        onClick={() => handleCardDeleteClick(id)}
+        disabled={deleteCardAsyncState === "loading"}
+      >
+        X
+      </DeleteButton>
     </CardItemLayout>
   );
 };

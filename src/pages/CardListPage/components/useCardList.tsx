@@ -8,7 +8,8 @@ import {
 } from "../../../domain/card/api/cards";
 
 export const useCardList = () => {
-  const { asyncState, setLoading, setSuccess, setError } = useAsyncState();
+  const fetchCardListAsyncState = useAsyncState();
+  const deleteCardAsyncState = useAsyncState();
 
   const [cardList, setCardList] = useState<CardListResponseItem[]>([]);
 
@@ -21,16 +22,21 @@ export const useCardList = () => {
     onSuccess: () => void,
     onError: (error: Error) => void,
   ) => {
+    const { setLoading, setSuccess, setError } = deleteCardAsyncState;
     try {
+      setLoading();
       await requestDeleteCard(cardId);
       onSuccess();
+      setSuccess();
       deleteCardFromState(cardId);
     } catch (error) {
       onError(error as Error);
+      setError();
     }
   };
 
   const loadCardList = async () => {
+    const { setLoading, setSuccess, setError } = fetchCardListAsyncState;
     try {
       setLoading();
       const fetchedCardList = await fetchCardList();
@@ -46,10 +52,10 @@ export const useCardList = () => {
   }, []);
 
   return {
-    asyncState,
+    fetchCardListAsyncState: fetchCardListAsyncState.asyncState,
+    deleteCardAsyncState: deleteCardAsyncState.asyncState,
     cardList,
     deleteCardById,
-
     loadCardList,
   };
 };

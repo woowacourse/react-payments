@@ -7,19 +7,31 @@ import Empty from "./components/Empty/Empty";
 import { useCardList } from "./components/useCardList";
 
 const CardListPage = () => {
-  const { asyncState, cardList, deleteCardById, loadCardList } = useCardList();
+  const {
+    fetchCardListAsyncState,
+    deleteCardAsyncState,
+    cardList,
+    deleteCardById,
+    loadCardList,
+  } = useCardList();
 
   return (
     <CardListPageLayout>
       <HasCardCountSpan>
         보유 카드 {cardList && cardList.length !== 0 && `(${cardList.length})`}
       </HasCardCountSpan>
-      {asyncState === "success" && cardList.length === 0 && <Empty />}
-      {asyncState === "success" && cardList.length !== 0 && (
-        <Success cardList={cardList} deleteCard={deleteCardById} />
+      {fetchCardListAsyncState === "success" && cardList.length === 0 && (
+        <Empty />
       )}
-      {asyncState === "error" && <Error onRetry={loadCardList} />}
-      {asyncState === "loading" && <Loading />}
+      {fetchCardListAsyncState === "success" && cardList.length !== 0 && (
+        <Success
+          cardList={cardList}
+          deleteCard={deleteCardById}
+          deleteCardAsyncState={deleteCardAsyncState}
+        />
+      )}
+      {fetchCardListAsyncState === "error" && <Error onRetry={loadCardList} />}
+      {fetchCardListAsyncState === "loading" && <Loading />}
     </CardListPageLayout>
   );
 };
