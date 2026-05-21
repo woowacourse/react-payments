@@ -86,7 +86,7 @@ export const handlers = [
     return HttpResponse.json({ id: crypto.randomUUID() }, { status: 201 });
   }),
   http.get('/cards', () => {
-    return HttpResponse.json(cards, { status: 201 });
+    return HttpResponse.json(cards, { status: 200 });
   }),
   http.delete('/cards/:id', ({ params }) => {
     const { id } = params;
