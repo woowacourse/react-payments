@@ -8,7 +8,7 @@ type CardListItemProps = {
 
 export default function CardListItem({ card }: CardListItemProps) {
   const maskedNumbers = card.cardNumbers
-    .map((group, i) => (i < 2 ? group : '*'.repeat(group.length)))
+    .map((group, i) => (i === 1 || i === 2 ? '*'.repeat(group.length) : group))
     .join(' ');
   const companyLabel = CARD_COMPANY_LABEL[card.cardCompany as keyof typeof CARD_COMPANY_LABEL] ?? card.cardCompany;
   const expiry = `${card.expiryDate[0]}/${card.expiryDate[1]}`;

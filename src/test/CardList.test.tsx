@@ -51,7 +51,7 @@ describe('카드 목록', () => {
     await waitFor(() => {
       expect(screen.getByText('보유 카드 (1)')).toBeInTheDocument();
       expect(screen.getByText('BC카드')).toBeInTheDocument();
-      expect(screen.getByText('4111 1111 **** ****')).toBeInTheDocument();
+      expect(screen.getByText('4111 **** **** 1111')).toBeInTheDocument();
       expect(screen.getByText('유효 기간 12/26')).toBeInTheDocument();
     });
   });
