@@ -30,6 +30,10 @@ const CardItem = ({ cardItemInformaiton, onDeleteCard }: CardItemProps) => {
     );
   };
 
+  if (!issuer) {
+    return <div>일치하는 카드를 찾을 수 없습니다.</div>;
+  }
+
   return (
     <CardItemLayout>
       <CardIcon $color={issuer.COLOR} />
