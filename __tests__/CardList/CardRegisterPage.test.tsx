@@ -24,13 +24,12 @@ const completedCardFormInfo: CardFormInfoType = {
   password: '12',
 };
 
-const noop = vi.fn();
-const setInputRef = () => noop;
+const setInputRef = () => () => {};
 
 const completedFields = {
   numbers: {
     cardNumbers: completedCardFormInfo.cardNumbers,
-    segmentLengths: [4, 4, 4, 4],
+    segmentLengths: [4, 4, 4, 4] as const,
     firstErrorIndex: -1,
     errorMessage: '',
     isComplete: true,

@@ -7,7 +7,7 @@ import CardListEmptyState from './components/CardListEmptyState';
 import CardList from './components/CardList';
 import styled from 'styled-components';
 import type { CardResponse } from '../../domain/card/types/card';
-import type { CardFetchStatusType } from './types/cardFetchStatus';
+import type { CardFetchStatusType } from './types/CardFetchStatus';
 
 const CardListPage = () => {
   const [cards, setCards] = useState<CardResponse[]>([]);
