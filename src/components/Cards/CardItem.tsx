@@ -3,12 +3,17 @@ import { CARD_ISSUER } from '../../constants';
 import Button from '../Common/Button';
 import Flex from '../Common/Flex';
 import Text from '../Common/Text';
-import { useNavigate } from 'react-router';
 import type { Card } from '../../types/api';
 import { css } from '@emotion/react';
+import useMutation from '../../hooks/useMutation';
 
-export default function CardItem(props: { data: Card; refetcher: () => void }) {
-  const navigate = useNavigate();
+export default function CardItem(props: { data: Card; onDelete: () => void }) {
+  const mutation = useMutation({
+    method: 'delete',
+    url: `${import.meta.env.BASE_URL}cards/${props.data.id}`,
+    onSuccess: props.onDelete,
+    onError: () => window.alert('카드를 삭제하지 못했어요'),
+  });
 
   const issuer = useMemo(() => {
     return Object.entries(CARD_ISSUER).find(([, info]) => info.issuerCode === props.data.issuerCode);
@@ -28,21 +33,9 @@ export default function CardItem(props: { data: Card; refetcher: () => void }) {
   }, [props.data.number]);
 
   const handleDelete = useCallback(() => {
-    const id = props.data.id;
-
     if (!window.confirm(`${cardNumberSegments[0]}로 시작하는 카드를 삭제할게요`)) return;
-
-    fetch(`${import.meta.env.BASE_URL}cards/${id}`, {
-      method: 'delete',
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
-        props.refetcher();
-      })
-      .catch(() => {
-        window.alert('카드를 삭제하지 못했어요');
-      });
-  }, [cardNumberSegments, navigate, props.data.id]);
+    mutation.mutate();
+  }, [cardNumberSegments, mutation]);
 
   return (
     <Flex

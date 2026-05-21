@@ -22,8 +22,8 @@ export default function CardsTemplate(props: { data: CardsResponse; refetcher: (
         </Text.H1>
         <Flex direction="column" gap={16}>
           <Flex direction="column" gap={16}>
-            {props.data.map((card, index) => (
-              <CardItem key={index} data={card} refetcher={props.refetcher} />
+            {props.data.map((card) => (
+              <CardItem key={card.id} data={card} onDelete={props.refetcher} />
             ))}
           </Flex>
           <Link to="/" style={{ textDecoration: 'none' }}>
