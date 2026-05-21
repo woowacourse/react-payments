@@ -1,1 +1,1 @@
-export type cardFetchStatusType = 'idle' | 'loading' | 'error' | 'success';
+export type CardFetchStatusType = 'idle' | 'loading' | 'error' | 'success';
