@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CardListSkeleton from "../components/skeleton/CardListSkeleton";
+import CardListSkeleton from "./CardListSkeleton";
 import EmptyCardList from "./EmptyCardList";
 import CardList from "../components/CardList/CardList";
 import styled from "@emotion/styled";
