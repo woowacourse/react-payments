@@ -12,7 +12,8 @@ export type Card = {
 };
 
 const toCard = (dto: CardDTO): Card => {
-  const [mm, yy] = dto.expirationDate.split('/') as [string, string];
+  const parts = dto.expirationDate.split('/');
+  const [mm, yy]: [string, string] = parts.length === 2 ? [parts[0], parts[1]] : ['', ''];
   const n = dto.number.replace(/\s/g, '');
 
   return {
