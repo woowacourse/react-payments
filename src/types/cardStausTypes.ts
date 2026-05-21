@@ -1,5 +1,3 @@
-import type { UUID } from 'crypto';
-
 import type {
   CardError,
   DateError,
@@ -64,7 +62,7 @@ export type CardIssuerType =
   | 'kbCard';
 
 export type CardInfo = {
-  id?: UUID;
+  id?: string;
   number: string;
   expirationDate: string;
   cvc: string;
@@ -72,7 +70,7 @@ export type CardInfo = {
 };
 
 export type CardResponse = {
-  id: UUID;
+  id: string;
   issuerCode: string;
   number: string;
   expirationDate: string;
