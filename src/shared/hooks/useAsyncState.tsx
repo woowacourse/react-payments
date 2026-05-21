@@ -1,9 +1,9 @@
 import { useState } from "react";
 
+export type AsyncState = "idle" | "loading" | "success" | "error";
+
 export const useAsyncState = () => {
-  const [asyncState, setAsyncState] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+  const [asyncState, setAsyncState] = useState<AsyncState>("idle");
 
   const setLoading = () => {
     setAsyncState("loading");
