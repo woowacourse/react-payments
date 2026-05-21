@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { setupServer } from 'msw/node';
@@ -108,13 +108,16 @@ describe('카드 삭제', () => {
     expect(screen.getByText('보유 카드 (2)')).toBeInTheDocument();
   });
 
-  test('삭제 확인 시 해당 카드 ID로 DELETE 요청이 전송된다', async () => {
+  test('삭제 확인 시 카드 목록이 갱신되며 해당 카드가 목록에서 사라진다.', async () => {
     const user = userEvent.setup();
     vi.spyOn(window, 'confirm').mockReturnValue(true);
 
     let deletedId: string | undefined;
     server.use(
-      http.get('/cards', () => HttpResponse.json(initialCards, { status: 200 })),
+      http.get('/cards', () => {
+        const cards = deletedId ? initialCards.filter((c) => c.id !== deletedId) : initialCards;
+        return HttpResponse.json(cards, { status: 200 });
+      }),
       http.delete('/cards/:id', ({ params }) => {
         deletedId = params.id as string;
         return new HttpResponse(null, { status: 204 });
@@ -124,9 +127,15 @@ describe('카드 삭제', () => {
     renderCardsPage();
     await waitFor(() => expect(screen.getByText('보유 카드 (2)')).toBeInTheDocument());
 
-    await user.click(screen.getAllByRole('button', { name: '✕' })[0]);
+    const targetButton = screen.getAllByRole('button', { name: '✕' })[0];
+    const targetCard = targetButton.closest<HTMLElement>('[data-id]')!;
+    const targetText = within(targetCard).getByText(/유효기간/).textContent!;
 
-    await waitFor(() => expect(deletedId).toBe('1'));
+    await user.click(targetButton);
+
+    await waitFor(() => {
+      expect(screen.queryByText(targetText)).not.toBeInTheDocument();
+    });
   });
 
   test('삭제 요청 실패 시 "카드를 삭제하지 못했어요" 알림이 표시된다', async () => {
