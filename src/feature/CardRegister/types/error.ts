@@ -2,7 +2,6 @@ export type ServerFieldErrors = {
   cardNumber?: string;
   expirationDate?: string;
   cvc?: string;
-  form?: string;
 };
 
 export const SERVER_ERROR_FIELD_MAP = {

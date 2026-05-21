@@ -17,6 +17,7 @@ const InfoInputSection = ({
   hasFormError,
   clearServerFieldError,
   serverFieldErrors = {},
+  networkError,
   onRegisterComplete,
 }: {
   fields: CardFormFieldsType;
@@ -25,6 +26,7 @@ const InfoInputSection = ({
   hasFormError: boolean;
   clearServerFieldError: (fieldName: keyof ServerFieldErrors) => void;
   serverFieldErrors?: ServerFieldErrors;
+  networkError?: Error | null;
   onRegisterComplete: (cardFormInfo: CardFormInfoType) => void;
 }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -90,8 +92,8 @@ const InfoInputSection = ({
         </FieldSection>
       </FieldsWrapper>
 
-      {serverFieldErrors.form && (
-        <FormErrorMessage>{serverFieldErrors.form}</FormErrorMessage>
+      {networkError && (
+        <FormErrorMessage>{networkError.message}</FormErrorMessage>
       )}
 
       {!hasFormError && <SubmitButton type="submit">제출</SubmitButton>}

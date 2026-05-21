@@ -34,6 +34,7 @@ const CardRegisterPage = () => {
           currentStep={currentStep}
           hasFormError={hasFormError}
           serverFieldErrors={serverErrors.serverFieldErrors}
+          networkError={serverErrors.networkError}
           clearServerFieldError={serverErrors.clearServerFieldError}
           onRegisterComplete={handleSubmitCard}
         />

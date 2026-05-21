@@ -31,7 +31,7 @@ export const useCardRegisterSubmit = ({
       }
 
       if (error instanceof NetworkError) {
-        serverErrors.setFormServerError(error.message);
+        serverErrors.setFormServerError(error);
       }
     } finally {
       setIsSubmitting(false);
