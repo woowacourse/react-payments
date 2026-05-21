@@ -24,6 +24,9 @@ export function useRegisterCardForm() {
   const [cardCvc, cardCvcHandler] = useCardCvc();
   const [cardPassword, cardPasswordHandler] = useCardPassword();
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
+  const [serverFieldErrors, setServerFieldErrors] = useState({
+    cvc: '',
+  });
   const [step, setStep] = useState(0);
 
   const navigate = useNavigate();
@@ -61,6 +64,7 @@ export function useRegisterCardForm() {
   };
 
   const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setServerFieldErrors((prev) => ({ ...prev, cvc: '' }));
     cardCvcHandler.handleCardCvc(e);
 
     if (isCardCvcComplete(e.target.value)) {
@@ -82,7 +86,7 @@ export function useRegisterCardForm() {
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isFormValid) {
+    if (!isFormValid || !isCardIssuerSelected(cardIssuer)) {
       return;
     }
 
@@ -101,6 +105,11 @@ export function useRegisterCardForm() {
       });
     } catch (error) {
       if (error instanceof HttpError) {
+        if (error.code === 'INVALID_CVC') {
+          setServerFieldErrors((prev) => ({ ...prev, cvc: error.message }));
+          return;
+        }
+
         alert(error.message);
         return;
       }
@@ -129,6 +138,7 @@ export function useRegisterCardForm() {
     onBlurCardPassword: cardPasswordHandler.handlePasswordBlur,
     cardIssuer,
     handleCardIssuer,
+    serverFieldErrors,
     step,
     handleSubmit,
     isFormValid,

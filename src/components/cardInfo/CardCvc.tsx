@@ -5,9 +5,15 @@ type CardCvcProps = {
   cardCvc: Cvc;
   onChangeCardCvc: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlurCardCvc: () => void;
+  serverErrorMessage?: string;
 };
 
-export default function CardCvc({ cardCvc, onChangeCardCvc, onBlurCardCvc }: CardCvcProps) {
+export default function CardCvc({
+  cardCvc,
+  onChangeCardCvc,
+  onBlurCardCvc,
+  serverErrorMessage = '',
+}: CardCvcProps) {
   return (
     <fieldset css={{ display: 'flex', flexDirection: 'column', border: 'none', padding: 0 }}>
       <legend
@@ -44,7 +50,7 @@ export default function CardCvc({ cardCvc, onChangeCardCvc, onBlurCardCvc }: Car
             borderRadius: '2px',
             border: `1.01px solid ${theme.colors.inactiveBorder}`,
             borderColor: `${
-              cardCvc.cardCvcErrorMode !== 'normal'
+              serverErrorMessage || cardCvc.cardCvcErrorMode !== 'normal'
                 ? theme.colors.error
                 : theme.colors.inactiveBorder
             }`,
@@ -52,7 +58,7 @@ export default function CardCvc({ cardCvc, onChangeCardCvc, onBlurCardCvc }: Car
           })}
           id="card-cvc"
           autoFocus
-          aria-invalid={cardCvc.cardCvcErrorMode !== 'normal'}
+          aria-invalid={serverErrorMessage !== '' || cardCvc.cardCvcErrorMode !== 'normal'}
           aria-describedby="card-cvc-error"
         />
         <p
@@ -63,9 +69,10 @@ export default function CardCvc({ cardCvc, onChangeCardCvc, onBlurCardCvc }: Car
           })}
           id="card-cvc-error"
         >
-          {cardCvc.cardCvcErrorMode !== 'normal'
+          {serverErrorMessage ||
+          (cardCvc.cardCvcErrorMode !== 'normal'
             ? CVC_ERROR_MESSAGE[cardCvc.cardCvcErrorMode]
-            : ' '}
+            : ' ')}
         </p>
       </div>
     </fieldset>

@@ -32,7 +32,7 @@ export async function postCard(cardInfo: CardRequest): Promise<PostCardResponse>
 
   if (!response.ok) {
     const errorData = (await response.json()) as ErrorResponse;
-    throw new HttpError(errorData.message);
+    throw new HttpError(errorData.message, errorData.code);
   }
   return response.json();
 }

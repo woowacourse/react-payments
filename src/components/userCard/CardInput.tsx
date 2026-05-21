@@ -32,6 +32,9 @@ type CardInputProps = {
   step: number;
   handleSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
   isFormValid: boolean;
+  serverFieldErrors: {
+    cvc: string;
+  };
 };
 
 export default function CardInput({
@@ -53,6 +56,7 @@ export default function CardInput({
   step,
   handleSubmit,
   isFormValid,
+  serverFieldErrors,
 }: CardInputProps) {
   return (
     <form onSubmit={handleSubmit} css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -68,6 +72,7 @@ export default function CardInput({
           cardCvc={cardCvc}
           onChangeCardCvc={onChangeCardCvc}
           onBlurCardCvc={onBlurCardCvc}
+          serverErrorMessage={serverFieldErrors.cvc}
         />
       )}
       {step >= 2 && (
