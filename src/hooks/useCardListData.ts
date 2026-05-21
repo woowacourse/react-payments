@@ -1,14 +1,8 @@
 import { use, useState } from 'react';
 import { ISSUER_CODE_TO_COMPANY } from '../constants';
 import { getCardListDTO, deleteCard } from '../api/cards';
+import type { CardDTO } from '../api/cards';
 import type { CardCompany } from '../types';
-
-export type CardDTO = {
-  id: string;
-  issuerCode: string;
-  number: string;
-  expirationDate: string;
-};
 
 export type Card = {
   id: string;

@@ -1,4 +1,9 @@
-import type { CardDTO } from '../hooks/useCardListData';
+export type CardDTO = {
+  id: string;
+  issuerCode: string;
+  number: string;
+  expirationDate: string;
+};
 
 export const API_ENDPOINTS = {
   cards: '/cards',
