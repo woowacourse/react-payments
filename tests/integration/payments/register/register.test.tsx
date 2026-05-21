@@ -8,6 +8,8 @@ import { renderProvider } from '../../../utils/render';
 
 import { AppRoutes } from '../../../../src/routes';
 
+import { ERROR_MESSAGE } from '../../../../src/pages/payments/register/flow/constants';
+
 interface FillRegisterCardFormValues {
   cardNumbers?: string[];
   card?: string;
@@ -17,7 +19,7 @@ interface FillRegisterCardFormValues {
 }
 
 const DUMMY_FORM_DATA = {
-  cardNumbers: ['3700', '1234', '5678', '9012'],
+  cardNumbers: ['4400', '1234', '5678', '9012'],
   card: '신한카드',
   expirationDate: { month: '12', year: '12' },
   cvc: '234',
@@ -52,8 +54,6 @@ const fillRegisterCardForm = async (formValues: FillRegisterCardFormValues = {})
   // (password)
   const passwordInput = document.querySelector('input[type="password"]');
   if (passwordInput) await userEvent.type(passwordInput, password);
-
-  userEvent.click(await screen.getByRole('button'));
 };
 
 describe('카드 등록 페이지 테스트', async () => {
@@ -64,9 +64,48 @@ describe('카드 등록 페이지 테스트', async () => {
     // ACT
     await fillRegisterCardForm();
 
+    userEvent.click(await screen.getByRole('button'));
+
     // ASSERT
-    expect(await screen.findByText('3700')).toBeInTheDocument();
+    expect(await screen.findByText('4400')).toBeInTheDocument();
     expect(await screen.findByText('12/12')).toBeInTheDocument();
     expect(await screen.findByText('신한카드')).toBeInTheDocument();
+  });
+
+  test('카드 번호를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(서버 에러)', async () => {
+    // ARRANGE
+    renderProvider(<AppRoutes />, { route: '/payments/register' });
+
+    // ACT
+    await fillRegisterCardForm({ cardNumbers: ['0000', '1234', '1234', '0000'] });
+
+    userEvent.click(await screen.getByRole('button'));
+
+    // ASSERT
+    expect(await screen.findByText(ERROR_MESSAGE.INVALID_CARD_NUMBER)).toBeInTheDocument();
+  });
+
+  test('CVC를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(서버 에러)', async () => {
+    // ARRANGE
+    renderProvider(<AppRoutes />, { route: '/payments/register' });
+
+    // ACT
+    await fillRegisterCardForm({ cvc: '000' });
+
+    userEvent.click(await screen.getByRole('button'));
+
+    // ASSERT
+    expect(await screen.findByText(ERROR_MESSAGE.INVALID_CVC)).toBeInTheDocument();
+  });
+
+  test('유효기간(월을 13으로)를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(프론트 에러)', async () => {
+    // ARRANGE
+    renderProvider(<AppRoutes />, { route: '/payments/register' });
+
+    // ACT
+    await fillRegisterCardForm({ expirationDate: { month: '13', year: '12' } });
+
+    // ASSERT
+    expect(await screen.findByText('유효기간(월)는 01부터 12까지의 숫자여야합니다')).toBeInTheDocument();
   });
 });
