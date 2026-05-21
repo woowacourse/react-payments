@@ -4,6 +4,7 @@ import SkeletonBlock from './SkeletonBlock';
 export default function Skeleton() {
   return (
     <div
+      data-testid="card-list-skeleton"
       css={{
         display: 'flex',
         flexDirection: 'column',

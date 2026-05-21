@@ -59,4 +59,35 @@ describe('UserCardDelete', () => {
       expect(deletedCardId).toBe('00000000-0000-4000-8000-000000000003');
     });
   });
+
+  it('삭제 확인을 취소하면 카드 삭제 API를 호출하지 않는다.', async () => {
+    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    let deleteRequestCount = 0;
+
+    server.use(
+      http.get('http://localhost/api/cards', () =>
+        HttpResponse.json([
+          {
+            id: '00000000-0000-4000-8000-000000000004',
+            number: '123456******1234',
+            expirationDate: '12/29',
+            issuerCode: '31',
+          },
+        ]),
+      ),
+      http.delete('http://localhost/api/cards/:id', () => {
+        deleteRequestCount += 1;
+
+        return new HttpResponse(null, { status: 204 });
+      }),
+    );
+
+    renderWithProviders(<UserCardList />);
+
+    await screen.findByText('BC카드');
+    await userEvent.click(screen.getByAltText('카드 삭제 아이콘'));
+
+    expect(confirmSpy).toHaveBeenCalledWith('카드를 삭제하시겠습니까?');
+    expect(deleteRequestCount).toBe(0);
+  });
 });

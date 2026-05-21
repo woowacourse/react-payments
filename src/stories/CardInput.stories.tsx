@@ -68,6 +68,9 @@ export const Interactive: Story = {
     step: 0,
     handleSubmit: fn(),
     isFormValid: false,
+    serverFieldErrors: {
+      cvc: '',
+    },
   },
   render: () => <CardInputWithState />,
   play: async ({ canvasElement }) => {

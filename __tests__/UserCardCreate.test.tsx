@@ -7,6 +7,7 @@ import { http, HttpResponse } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
+import App from '../src/App';
 import { server } from '../src/mocks/server';
 import RegisterCard from '../src/pages/RegisterCard';
 import { theme } from '../src/styles/theme';
@@ -18,6 +19,14 @@ function renderWithProviders(ui: ReactElement) {
   return render(
     <MemoryRouter>
       <ThemeProvider theme={theme}>{ui}</ThemeProvider>
+    </MemoryRouter>,
+  );
+}
+
+function renderAppAt(path: string) {
+  return render(
+    <MemoryRouter initialEntries={[path]}>
+      <App />
     </MemoryRouter>,
   );
 }
@@ -50,7 +59,7 @@ describe('UserCardCreate', () => {
       http.post('http://localhost/api/cards', async ({ request }) => {
         postedBody = await request.json();
 
-        return HttpResponse.json('created-card-id', { status: 201 });
+        return HttpResponse.json({ id: 'created-card-id' }, { status: 201 });
       }),
     );
 
@@ -64,12 +73,30 @@ describe('UserCardCreate', () => {
         number: '4123567898751234',
         expirationDate: '12/30',
         cvc: '123',
-        issuerCode: 'kakaoCard',
+        issuerCode: '15',
       });
     });
   });
 
-  it('카드 등록 API가 실패하면 서버 에러 메시지를 alert로 보여준다.', async () => {
+  it('카드 등록에 성공하면 완료 페이지로 이동한다.', async () => {
+    const user = userEvent.setup();
+
+    server.use(
+      http.post('http://localhost/api/cards', () =>
+        HttpResponse.json({ id: 'created-card-id' }, { status: 201 }),
+      ),
+    );
+
+    renderAppAt('/register');
+
+    await fillValidCardForm(user);
+    await user.click(await screen.findByRole('button', { name: '확인' }));
+
+    expect(await screen.findByText(/4123로 시작하는/)).toBeInTheDocument();
+    expect(screen.getByText(/카카오뱅크가 등록되었어요./)).toBeInTheDocument();
+  });
+
+  it('카드 등록 API가 400을 응답하면 서버 에러 메시지를 필드 아래에 보여준다.', async () => {
     const user = userEvent.setup();
     const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {});
 
@@ -90,8 +117,8 @@ describe('UserCardCreate', () => {
     await fillValidCardForm(user);
     await user.click(await screen.findByRole('button', { name: '확인' }));
 
-    await waitFor(() => {
-      expect(alertSpy).toHaveBeenCalledWith('유효하지 않은 CVC입니다.');
-    });
+    expect(await screen.findByText('유효하지 않은 CVC입니다.')).toBeInTheDocument();
+    expect(screen.getByLabelText('CVC')).toHaveAttribute('aria-invalid', 'true');
+    expect(alertSpy).not.toHaveBeenCalled();
   });
 });

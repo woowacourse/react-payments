@@ -23,6 +23,18 @@ function renderWithProviders(ui: ReactElement) {
 }
 
 describe('UserCardList', () => {
+  it('카드 목록을 불러오는 동안 로딩 스켈레톤을 보여준다.', () => {
+    server.use(
+      http.get('http://localhost/api/cards', async () => {
+        await new Promise(() => {});
+      }),
+    );
+
+    renderWithProviders(<UserCardList />);
+
+    expect(screen.getByTestId('card-list-skeleton')).toBeInTheDocument();
+  });
+
   it('카드 목록을 불러와 화면에 보여준다.', async () => {
     const cards: CardResponse[] = [
       {
