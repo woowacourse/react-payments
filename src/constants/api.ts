@@ -6,3 +6,7 @@ export const ERROR_MESSAGE: Record<AddCardErrorCode, string> = {
   INVALID_EXPIRATION_DATE: '유효하지 않은 만료일입니다.',
   INVALID_ISSUER_CODE: '지원하지 않는 카드사입니다.',
 };
+
+export const UNMASKED_CARD_NUMBER_START_COUNT = 6;
+
+export const UNMASKED_CARD_NUMBER_END_COUNT = 4;
