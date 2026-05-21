@@ -20,7 +20,7 @@ export default function AddCardCompletePage() {
           <br />
           {cardCompanyContent}가 등록되었어요.
         </span>
-        <Button onClick={() => navigate(ROUTES.ADD_CARD, { replace: true })}>확인</Button>
+        <Button onClick={() => navigate(ROUTES.CARD_LIST, { replace: true })}>확인</Button>
       </div>
     </div>
   );

@@ -1,4 +1,15 @@
-import type { CardBrand, CardInfo } from './types';
+import type { CardBrand, CardCompany, CardInfo } from './types';
+import { CARD_COMPANIES } from './constants.ts';
+
+export const chunkString = (value: string, size: number) => {
+  const chunked: string[] = [];
+
+  for (let i = 0; i < value.length; i += size) {
+    chunked.push(value.slice(i, i + size));
+  }
+
+  return chunked;
+};
 
 export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardBrand => {
   const numbers = cardNumbers.join('');
@@ -44,4 +55,12 @@ const parsePrefixNumber = (str: string, n: number) => Number.parseInt(str.slice(
 
 export const sanitizeNumber = (input: string) => {
   return input.replace(/[^0-9]/g, '');
+};
+
+export const getCardCompanyFromIssuerCode = (issuerCode: string) => {
+  return CARD_COMPANIES[issuerCode].kr;
+};
+
+export const getIssuerCodeFromCardCompany = (cardCompany: CardCompany) => {
+  return Object.keys(CARD_COMPANIES).find((key) => CARD_COMPANIES[key].kr === cardCompany) ?? null;
 };

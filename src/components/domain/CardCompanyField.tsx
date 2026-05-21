@@ -1,8 +1,9 @@
 import FormField, { type FormFieldProps } from '../ui/FormField.tsx';
 import { css } from '@emotion/react';
 import type { CardCompany, CardInfo, ErrorStatus } from '../../types.ts';
+import { CARD_COMPANIES } from '../../constants.ts';
 
-const options = ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'];
+const options = Object.values(CARD_COMPANIES).map(({ kr }) => kr);
 const placeholder = '카드사를 선택해주세요';
 
 interface CardCompanyFieldProps {

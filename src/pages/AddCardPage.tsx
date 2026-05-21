@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import CardNumbersField from '../components/domain/CardNumbersField';
 import ExpirationPeriodField from '../components/domain/ExpirationPeriodField';
 import CVCField from '../components/domain/CVCField';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { categorizeCardBrand } from '../utils';
-import type { CardInfo, ErrorStatus, ExpirationPeriodErrorStatus } from '../types';
+import type { CardInfo, ErrorStatus, ExpirationPeriodErrorStatus, ResponseStatus } from '../types';
 import Card from '../components/ui/Card';
 import CardCompanyField from '../components/domain/CardCompanyField.tsx';
 import PasswordField from '../components/domain/PasswordField.tsx';
@@ -12,6 +12,8 @@ import SubmitButton from '../components/domain/SubmitButton.tsx';
 import { useForm } from '../hooks/useForm.ts';
 import { ROUTES } from '../constants.ts';
 import { useNavigate } from 'react-router';
+import { createCard } from '../apis/cards/api.ts';
+import PaymentsError from '../apis/utils/PaymentsError.ts';
 
 const initialValues: CardInfo = {
   cardNumbers: ['', '', '', ''],
@@ -29,7 +31,27 @@ export default function AddCardPage() {
     ErrorStatus | ExpirationPeriodErrorStatus
   >(initialValues);
 
+  const [responseStatus, setResponseStatus] = useState<ResponseStatus>('idle');
+  const serverErrorFieldsRef = useRef<(keyof CardInfo)[]>([]);
+  const isLoading = responseStatus === 'loading';
+
   const cardBrand = categorizeCardBrand(values.cardNumbers);
+
+  const setFieldErrorWithServerError = (
+    field: keyof CardInfo,
+    errorStatus: ErrorStatus | ExpirationPeriodErrorStatus,
+    index?: number,
+  ) => {
+    if (serverErrorFieldsRef.current.includes(field)) {
+      if (errorStatus === null) {
+        const fieldIndex = serverErrorFieldsRef.current.indexOf(field);
+        serverErrorFieldsRef.current.splice(fieldIndex, 1);
+      }
+      setFieldError(field, errorStatus);
+    } else {
+      setFieldError(field, errorStatus, index);
+    }
+  };
 
   const handleFieldComplete = (index: number) => {
     if (stepIndex === index) {
@@ -37,18 +59,44 @@ export default function AddCardPage() {
     }
   };
 
-  const handleSubmit = (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     if (!isFormValid) {
       return;
     }
 
-    navigate(ROUTES.ADD_CARD_COMPLETE, {
-      state: {
-        firstCardNumbers: values.cardNumbers[0],
-        cardCompany: values.cardCompany,
-      },
-    });
+    setResponseStatus('loading');
+    try {
+      await createCard(values);
+      setResponseStatus('success');
+
+      navigate(ROUTES.ADD_CARD_COMPLETE, {
+        state: {
+          firstCardNumbers: values.cardNumbers[0],
+          cardCompany: values.cardCompany,
+        },
+      });
+    } catch (error) {
+      if (error instanceof PaymentsError) {
+        setResponseStatus('error');
+        const { code } = error;
+
+        if (code === 'INVALID_CARD_NUMBER') {
+          serverErrorFieldsRef.current.push('cardNumbers');
+          setFieldError('cardNumbers', 'invalidValue');
+        }
+        if (code === 'INVALID_CVC') {
+          serverErrorFieldsRef.current.push('cvc');
+          setFieldError('cvc', 'invalidValue');
+        }
+        if (code === 'INVALID_EXPIRATION_DATE') {
+          serverErrorFieldsRef.current.push('expirationPeriod');
+          setFieldError('expirationPeriod', 'invalidValue');
+        }
+      } else {
+        alert('카드를 등록하는 중 문제가 발생했습니다.\n잠시 후 다시 시도해 주세요');
+      }
+    }
   };
 
   return (
@@ -63,41 +111,37 @@ export default function AddCardPage() {
           />
         </div>
         <form onSubmit={handleSubmit} css={formLayout}>
-          {stepIndex >= 5 && <SubmitButton key="step-5" disabled={!isFormValid} />}
+          {stepIndex >= 5 && <SubmitButton disabled={!isFormValid} loading={isLoading} />}
           {stepIndex >= 4 && (
             <PasswordField
-              key="step-4"
               value={values.password}
               errorStatus={errors.password as ErrorStatus}
               setFieldValue={setFieldValue}
-              setFieldError={setFieldError}
+              setFieldError={setFieldErrorWithServerError}
               onCompleted={() => handleFieldComplete(4)}
             />
           )}
           {stepIndex >= 3 && (
             <CVCField
-              key="step-3"
               value={values.cvc}
               cardBrand={cardBrand}
               errorStatus={errors.cvc as ErrorStatus}
               setFieldValue={setFieldValue}
-              setFieldError={setFieldError}
+              setFieldError={setFieldErrorWithServerError}
               onCompleted={() => handleFieldComplete(3)}
             />
           )}
           {stepIndex >= 2 && (
             <ExpirationPeriodField
-              key="step-2"
               value={values.expirationPeriod}
               errorStatus={errors.expirationPeriod as ExpirationPeriodErrorStatus[]}
               setFieldValue={setFieldValue}
-              setFieldError={setFieldError}
+              setFieldError={setFieldErrorWithServerError}
               onCompleted={() => handleFieldComplete(2)}
             />
           )}
           {stepIndex >= 1 && (
             <CardCompanyField
-              key="step-1"
               value={values.cardCompany}
               errorStatus={errors.cardCompany as ErrorStatus}
               setFieldValue={setFieldValue}
@@ -106,12 +150,11 @@ export default function AddCardPage() {
           )}
           {stepIndex >= 0 && (
             <CardNumbersField
-              key="step-0"
               value={values.cardNumbers}
               cardBrand={cardBrand}
               errorStatus={errors.cardNumbers as ErrorStatus[]}
               setFieldValue={setFieldValue}
-              setFieldError={setFieldError}
+              setFieldError={setFieldErrorWithServerError}
               onCompleted={() => handleFieldComplete(0)}
             />
           )}

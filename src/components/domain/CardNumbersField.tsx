@@ -39,7 +39,7 @@ export default function CardNumbersField({
   })();
 
   const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
-  const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
+  const isErrorActive = errorStatus.map((error) => error === activeErrorStatus);
 
   const onCompletedEvent = useEffectEvent(onCompleted);
 
@@ -68,12 +68,13 @@ export default function CardNumbersField({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
+    const sanitizedValue = sanitizeNumber(inputValue);
     const error = validate('change', inputValue, index);
 
     setFieldError('cardNumbers', error, index);
-    setFieldValue('cardNumbers', sanitizeNumber(inputValue), index);
+    setFieldValue('cardNumbers', sanitizedValue, index);
 
-    if (inputValue.length === cardNumbersLength[index]) {
+    if (sanitizedValue.length === cardNumbersLength[index]) {
       moveToNext(index);
     }
   };
@@ -82,9 +83,7 @@ export default function CardNumbersField({
     const inputValue = e.target.value;
     const error = validate('blur', inputValue, index);
 
-    if (error) {
-      setFieldError('cardNumbers', error, index);
-    }
+    setFieldError('cardNumbers', error, index);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
@@ -105,7 +104,7 @@ export default function CardNumbersField({
               ref={(el) => registerInputRefs(el, index)}
               name="cardNumbers"
               autoFocus={index === 0}
-              variant={activeErrorIndex === index ? 'error' : 'default'}
+              variant={isErrorActive[index] ? 'error' : 'default'}
               value={number}
               onChange={(e) => handleChange(e, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}

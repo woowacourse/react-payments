@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import type { CardBrand, CardCompany, CardInfo } from '../../types';
+import { CARD_COMPANIES } from '../../constants.ts';
+import { getIssuerCodeFromCardCompany } from '../../utils.ts';
 
 interface CardProps {
   cardNumber: CardInfo['cardNumbers'];
@@ -18,7 +20,7 @@ export default function Card({ cardNumber, expirationPeriod, cardBrand, cardComp
   };
 
   return (
-    <div css={[cardStyle, cardColor[cardCompany ?? 'default']]}>
+    <div css={[cardStyle, cardColor(cardCompany)]}>
       <div css={cardHeaderStyle}>
         <div css={cardChipStyle} />
         {cardBrand !== 'local' && (
@@ -52,43 +54,12 @@ const cardStyle = css`
   padding: 8px 12px;
 `;
 
-const cardColor = {
-  default: css`
-    color: var(--color-text-card);
-    background-color: var(--color-background-card);
-  `,
-  BC카드: css`
-    color: var(--color-text-card);
-    background-color: var(--color-brand-bc-card);
-  `,
-  신한카드: css`
-    color: var(--color-text-card);
-    background-color: var(--color-brand-shinhan-card);
-  `,
-  카카오뱅크: css`
-    color: var(--color-text-default);
-    background-color: var(--color-brand-kakaobank);
-  `,
-  현대카드: css`
-    color: var(--color-text-card);
-    background-color: var(--color-brand-hyundai-card);
-  `,
-  우리카드: css`
-    color: var(--color-text-card);
-    background-color: var(--color-brand-woori-card);
-  `,
-  롯데카드: css`
-    color: var(--color-text-card);
-    background-color: var(--color-brand-lotte-card);
-  `,
-  하나카드: css`
-    color: var(--color-text-card);
-    background-color: var(--color-brand-hana-card);
-  `,
-  국민카드: css`
-    color: var(--color-text-card);
-    background-color: var(--color-brand-kb-card);
-  `,
+const cardColor = (cardCompany: CardCompany) => {
+  const issuerCode = getIssuerCodeFromCardCompany(cardCompany);
+  return css`
+    color: ${CARD_COMPANIES[issuerCode]?.color ?? 'var(--color-text-card)'};
+    background-color: ${CARD_COMPANIES[issuerCode]?.backgroundColor ?? 'var(--color-background-card)'};
+  `;
 };
 
 const cardHeaderStyle = css`

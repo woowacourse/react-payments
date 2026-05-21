@@ -12,7 +12,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'radio',
-      options: ['primary'],
+      options: ['solid', 'dashed'],
     },
   },
 } satisfies Meta<typeof Button>;
@@ -23,7 +23,7 @@ type Story = StoryObj<typeof Button>;
 export const Primary: Story = {
   args: {
     children: '확인',
-    variant: 'primary',
+    variant: 'solid',
     size: 'md',
     rounded: true,
     disabled: false,
@@ -38,7 +38,7 @@ export const Primary: Story = {
 export const Large: Story = {
   args: {
     children: '확인',
-    variant: 'primary',
+    variant: 'solid',
     size: 'lg',
     rounded: true,
     disabled: false,
@@ -53,7 +53,7 @@ export const Large: Story = {
 export const Rectangular: Story = {
   args: {
     children: '확인',
-    variant: 'primary',
+    variant: 'solid',
     size: 'lg',
     rounded: false,
     disabled: false,
@@ -68,7 +68,7 @@ export const Rectangular: Story = {
 export const Disabled: Story = {
   args: {
     children: '확인',
-    variant: 'primary',
+    variant: 'solid',
     size: 'lg',
     rounded: true,
     disabled: true,

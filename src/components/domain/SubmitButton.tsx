@@ -3,12 +3,13 @@ import { css } from '@emotion/react';
 
 interface SubmitButtonProps {
   disabled?: boolean;
+  loading?: boolean;
 }
 
-export default function SubmitButton({ disabled = false }: SubmitButtonProps) {
+export default function SubmitButton({ disabled = false, loading = false }: SubmitButtonProps) {
   return (
     <div css={buttonWrapperStyle}>
-      <Button disabled={disabled} size="lg" rounded={false}>
+      <Button type="submit" disabled={disabled || loading} loading={loading} size="lg" rounded={false}>
         확인
       </Button>
     </div>

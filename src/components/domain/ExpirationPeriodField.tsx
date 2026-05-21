@@ -26,7 +26,7 @@ export default function ExpirationPeriodField({
   const { registerInputRefs, moveToNext, handleKeyDown } = useInputs();
 
   const activeErrorStatus = errorStatus.filter((error) => !!error)[0];
-  const activeErrorIndex = errorStatus.findIndex((error) => error === activeErrorStatus);
+  const isErrorActive = errorStatus.map((error) => error === activeErrorStatus);
 
   const onCompletedEvent = useEffectEvent(onCompleted);
 
@@ -64,12 +64,13 @@ export default function ExpirationPeriodField({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const inputValue = e.target.value;
+    const sanitizedValue = sanitizeNumber(inputValue);
     const error = validate('change', inputValue, index);
 
     setFieldError('expirationPeriod', error, index);
-    setFieldValue('expirationPeriod', sanitizeNumber(inputValue), index);
+    setFieldValue('expirationPeriod', sanitizedValue, index);
 
-    if (inputValue.length === EXPIRATION_PERIOD_LENGTH[index]) {
+    if (sanitizedValue.length === EXPIRATION_PERIOD_LENGTH[index]) {
       moveToNext(index);
     }
   };
@@ -78,9 +79,7 @@ export default function ExpirationPeriodField({
     const inputValue = e.target.value;
     const error = validate('blur', inputValue, index);
 
-    if (error) {
-      setFieldError('expirationPeriod', error, index);
-    }
+    setFieldError('expirationPeriod', error, index);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
@@ -103,7 +102,7 @@ export default function ExpirationPeriodField({
             onChange={(e) => handleChange(e, 0)}
             onBlur={(e) => handleBlur(e, 0)}
             onKeyDown={(e) => handleKeyDown(e, 0)}
-            variant={activeErrorIndex === 0 ? 'error' : 'default'}
+            variant={isErrorActive[0] ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="MM"
@@ -116,7 +115,7 @@ export default function ExpirationPeriodField({
             onChange={(e) => handleChange(e, 1)}
             onBlur={(e) => handleBlur(e, 1)}
             onKeyDown={(e) => handleKeyDown(e, 1)}
-            variant={activeErrorIndex === 1 ? 'error' : 'default'}
+            variant={isErrorActive[1] ? 'error' : 'default'}
             type="text"
             inputMode="numeric"
             placeholder="YY"
