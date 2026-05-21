@@ -15,7 +15,14 @@ export const cardHandlers = [
   http.get('/cards', async () => {
     await delay(1000);
 
-    return HttpResponse.json(cards);
+    const cardResponses: Card[] = cards.map((card) => ({
+      id: card.id,
+      issuerCode: card.issuerCode,
+      number: maskCardNumber(card.number), // 원본을 마스킹해서 응답
+      expirationDate: card.expirationDate,
+    }));
+
+    return HttpResponse.json(cardResponses);
   }),
 
   // POST 요청 모킹
@@ -37,7 +44,7 @@ export const cardHandlers = [
     const card: Card = {
       id: cardId,
       issuerCode: postedCard.issuerCode,
-      number: maskCardNumber(postedCard.number),
+      number: postedCard.number, // 번호 원본 저장
       expirationDate: postedCard.expirationDate,
     };
     cards.push(card);

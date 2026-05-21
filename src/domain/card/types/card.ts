@@ -31,3 +31,18 @@ export type Card = {
   number: string;
   expirationDate: string;
 };
+// 요청 저장용
+export type StoredCard = {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: string | null;
+};
+
+// 요청 응답용
+export type CardResponse = {
+  id: string;
+  issuerCode: string | null;
+  number: string;
+  expirationDate: string;
+};

@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { deleteCard, getCards } from '../../api/cards';
-import type { Card } from '../../domain/card/types/card';
 import Title from '../../common/components/Title';
 import CardListSkeleton from './components/CardListSkeleton';
 import CardListErrorState from './components/CardListErrorState';
@@ -8,9 +7,10 @@ import CardListEmptyState from './components/CardListEmptyState';
 import CardList from './components/CardList';
 import styled from 'styled-components';
 import type { CardFetchStatusType } from './types/cardFetchStatus';
+import type { CardResponse } from '../../domain/card/types/card';
 
 const CardListPage = () => {
-  const [cards, setCards] = useState<Card[]>([]);
+  const [cards, setCards] = useState<CardResponse[]>([]);
   const [cardFetchStatus, setCardFetchStatus] =
     useState<CardFetchStatusType>('loading');
 
