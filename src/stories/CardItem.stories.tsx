@@ -41,13 +41,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { card: shinhanCard },
+  args: { data: shinhanCard, refetcher: () => {} },
 };
 
 export const BCCard: Story = {
-  args: { card: bcCard },
+  args: { data: bcCard, refetcher: () => {} },
 };
 
 export const UnknownIssuer: Story = {
-  args: { card: unknownCard },
+  args: { data: unknownCard, refetcher: () => {} },
 };

@@ -26,9 +26,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { data: mockCards },
+  args: { data: mockCards, refetcher: () => {} },
 };
 
 export const SingleCard: Story = {
-  args: { data: [mockCards[0]] },
+  args: { data: [mockCards[0]], refetcher: () => {} },
 };

@@ -5,7 +5,7 @@ import CardItem from './CardItem';
 import { Link } from 'react-router';
 import type { CardsResponse } from '../../types/api';
 
-export default function CardsTemplate(props: { data: CardsResponse }) {
+export default function CardsTemplate(props: { data: CardsResponse; refetcher: () => void }) {
   return (
     <View>
       <Flex direction="column" gap={16} style={{ width: '100%', height: '100%' }}>
@@ -15,7 +15,7 @@ export default function CardsTemplate(props: { data: CardsResponse }) {
         <Flex direction="column" gap={16}>
           <Flex direction="column" gap={16}>
             {props.data.map((card, index) => (
-              <CardItem key={index} card={card} />
+              <CardItem key={index} data={card} refetcher={props.refetcher} />
             ))}
           </Flex>
           <Link to="/" style={{ textDecoration: 'none' }}>
