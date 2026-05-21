@@ -9,6 +9,71 @@ type FetchState =
   | { status: 'success'; data: CardResponse[] }
   | { status: 'error'; message: string };
 
+function SkeletonBlock({
+  width,
+  height,
+  borderRadius = '3px',
+}: {
+  width: string;
+  height: string;
+  borderRadius?: string;
+}) {
+  return (
+    <div
+      css={{
+        width,
+        height,
+        borderRadius,
+        backgroundColor: '#EDEDED',
+      }}
+    />
+  );
+}
+
+function CardListSkeleton() {
+  return (
+    <>
+      {Array.from({ length: 3 }, (_, index) => (
+        <article
+          key={index}
+          aria-hidden="true"
+          data-testid="card-list-skeleton-item"
+          css={{
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'center',
+            width: '320px',
+            height: '73px',
+            padding: '12px',
+            boxSizing: 'border-box',
+            border: '1px solid #E6E6E6',
+            borderRadius: '5px',
+          }}
+        >
+          <SkeletonBlock width="64px" height="40px" />
+          <div css={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
+            <SkeletonBlock width="80px" height="12px" />
+            <SkeletonBlock width="140px" height="9px" />
+            <SkeletonBlock width="60px" height="9px" />
+          </div>
+        </article>
+      ))}
+      <div
+        aria-hidden="true"
+        data-testid="card-list-skeleton-action"
+        css={{
+          width: '320px',
+          height: '40px',
+          borderRadius: '5px',
+          backgroundColor: '#FAFAFA',
+          border: '1px dashed #EFEFEF',
+          boxSizing: 'border-box',
+        }}
+      />
+    </>
+  );
+}
+
 export default function CardList() {
   const navigate = useNavigate();
   const [state, setState] = useState<FetchState>({ status: 'loading' });
@@ -38,14 +103,10 @@ export default function CardList() {
           margin: '0 0 16px 0',
         })}
       >
-        보유 카드 ({state.status === 'success' ? state.data.length : 0})
+        보유 카드
       </h1>
       <div css={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {state.status === 'loading' && (
-          <p css={(theme) => ({ ...theme.typography.caption, color: theme.colors.description, margin: 0 })}>
-            불러오는 중...
-          </p>
-        )}
+        {state.status === 'loading' && <CardListSkeleton />}
         {state.status === 'error' && (
           <p css={(theme) => ({ ...theme.typography.caption, color: theme.colors.error, margin: 0 })}>
             {state.message}
@@ -53,22 +114,24 @@ export default function CardList() {
         )}
         {state.status === 'success' &&
           state.data.map((card) => <CardListItem key={card.id} card={card} />)}
-        <button
-          type="button"
-          onClick={() => navigate('/register')}
-          css={(theme) => ({
-            width: '320px',
-            height: '40px',
-            border: `1px dashed ${theme.colors.inactiveBorder}`,
-            borderRadius: '5px',
-            backgroundColor: 'transparent',
-            color: theme.colors.description,
-            ...theme.typography.label,
-            cursor: 'pointer',
-          })}
-        >
-          + 카드 추가
-        </button>
+        {state.status !== 'loading' && (
+          <button
+            type="button"
+            onClick={() => navigate('/register')}
+            css={(theme) => ({
+              width: '320px',
+              height: '40px',
+              border: `1px dashed ${theme.colors.inactiveBorder}`,
+              borderRadius: '5px',
+              backgroundColor: 'transparent',
+              color: theme.colors.description,
+              ...theme.typography.label,
+              cursor: 'pointer',
+            })}
+          >
+            + 카드 추가
+          </button>
+        )}
       </div>
     </div>
   );
