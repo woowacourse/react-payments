@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import {
   DATE_ERROR_MESSAGE,
   MONTH_ERROR_MESSAGE,
@@ -18,6 +19,8 @@ const EXPIRY_ERROR_MESSAGE = {
 };
 
 export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiryDateProps) {
+  const yearInputRef = useRef<HTMLInputElement | null>(null);
+
   return (
     <div css={{ display: 'flex', flexDirection: 'column' }}>
       <div>
@@ -57,7 +60,14 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             type="text"
             placeholder="MM"
             value={cardExpiry.cardExpiryDate[0]}
-            onChange={setCardExpiry.handleCardExpiryDate(0)}
+            onChange={(e) => {
+              setCardExpiry.handleCardExpiryDate(0)(e);
+
+              const month = Number(e.target.value);
+              if (e.target.value.length === 2 && month >= 1 && month <= 12) {
+                yearInputRef.current?.focus();
+              }
+            }}
             onBlur={setCardExpiry.handleMonthBlur}
             maxLength={2}
             inputMode="numeric"
@@ -75,6 +85,7 @@ export default function CardExpiryDate({ cardExpiry, setCardExpiry }: CardExpiry
             })}
           ></input>
           <input
+            ref={yearInputRef}
             type="text"
             placeholder="YY"
             value={cardExpiry.cardExpiryDate[1]}

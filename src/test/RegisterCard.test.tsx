@@ -7,6 +7,8 @@ import { server } from '../mocks/node';
 import { db } from '../mocks/db';
 import { theme } from '../styles/theme';
 import RegisterCard from '../pages/RegisterCard';
+import CardExpiryDate from '../components/CardExpiryDate';
+import { useCardExpiry } from '../hooks/useCardExpiry';
 
 beforeAll(() => server.listen());
 afterEach(() => {
@@ -31,6 +33,20 @@ function renderRegisterCard() {
   );
 }
 
+function CardExpiryDateTestHarness() {
+  const { cardExpiry, expiryHandler } = useCardExpiry();
+
+  return <CardExpiryDate cardExpiry={cardExpiry} setCardExpiry={expiryHandler} />;
+}
+
+function renderCardExpiryDate() {
+  return render(
+    <ThemeProvider theme={theme}>
+      <CardExpiryDateTestHarness />
+    </ThemeProvider>,
+  );
+}
+
 async function fillCardNumber(user: ReturnType<typeof userEvent.setup>, cardNumber: string) {
   const inputs = screen.getAllByRole('textbox');
   await user.type(inputs[0], cardNumber.slice(0, 4));
@@ -40,6 +56,19 @@ async function fillCardNumber(user: ReturnType<typeof userEvent.setup>, cardNumb
 }
 
 describe('카드 등록', () => {
+  it('카드 유효기간 월을 입력하면 년도 입력으로 포커스가 이동한다', async () => {
+    const user = userEvent.setup();
+    renderCardExpiryDate();
+
+    const expiryInputs = screen.getAllByRole('textbox');
+    const monthInput = expiryInputs.find((el) => el.getAttribute('placeholder') === 'MM')!;
+    const yearInput = expiryInputs.find((el) => el.getAttribute('placeholder') === 'YY')!;
+
+    await user.type(monthInput, '12');
+
+    expect(yearInput).toHaveFocus();
+  });
+
   it('카드 정보를 모두 입력하고 확인 버튼을 누르면 /cards로 이동한다', async () => {
     const user = userEvent.setup();
     renderRegisterCard();
