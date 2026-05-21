@@ -158,7 +158,7 @@ const CardRegisterPage = () => {
           )}
 
           {isFormValid && (
-            <Button type="submit" fullWidth fixedBottom>
+            <Button type="submit" fixedBottom>
               확인
             </Button>
           )}

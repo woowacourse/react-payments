@@ -8,7 +8,8 @@ interface ButtonProps {
 }
 
 const Button = styled.button<ButtonProps>`
-  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
+  width: ${({ fixedBottom, fullWidth }) =>
+    fixedBottom || fullWidth ? "100%" : "auto"};
   height: ${({ fixedBottom }) => (fixedBottom ? "auto" : "2.8rem")};
   padding: ${({ fixedBottom }) => (fixedBottom ? "1.25rem" : "0.5rem")};
   border-radius: ${({ fixedBottom }) => (fixedBottom ? "0" : "0.3rem")};
