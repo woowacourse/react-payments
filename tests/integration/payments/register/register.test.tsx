@@ -1,4 +1,4 @@
-import { expect, test } from 'vitest'; // Vitest 함수 임포트
+import { describe, expect, test } from 'vitest'; // Vitest 함수 임포트
 
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -56,56 +56,64 @@ const fillRegisterCardForm = async (formValues: FillRegisterCardFormValues = {})
   if (passwordInput) await userEvent.type(passwordInput, password);
 };
 
-describe('카드 등록 페이지 테스트', async () => {
-  test('카드 등록을 위한 유효한 데이터를 다 입력 후 등록 버튼을 누르면 카드 목록 페이지로 이동하고 추가한 카드가 목록에 보인다', async () => {
-    // ARRANGE
-    renderProvider(<AppRoutes />, { route: '/payments/register' });
+describe('카드 등록 페이지 테스트', () => {
+  describe('성공 케이스', () => {
+    test('카드 등록을 위한 유효한 데이터를 다 입력 후 등록 버튼을 누르면 카드 목록 페이지로 이동하고 추가한 카드가 목록에 보인다', async () => {
+      // ARRANGE
+      renderProvider(<AppRoutes />, { route: '/payments/register' });
 
-    // ACT
-    await fillRegisterCardForm();
+      // ACT
+      await fillRegisterCardForm();
 
-    userEvent.click(await screen.getByRole('button'));
+      userEvent.click(await screen.getByRole('button'));
 
-    // ASSERT
-    expect(await screen.findByText('4400')).toBeInTheDocument();
-    expect(await screen.findByText('12/12')).toBeInTheDocument();
-    expect(await screen.findByText('신한카드')).toBeInTheDocument();
+      // ASSERT
+      expect(await screen.findByText('4400')).toBeInTheDocument();
+      expect(await screen.findByText('12/12')).toBeInTheDocument();
+      expect(await screen.findByText('신한카드')).toBeInTheDocument();
+    });
   });
 
-  test('카드 번호를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(서버 에러)', async () => {
-    // ARRANGE
-    renderProvider(<AppRoutes />, { route: '/payments/register' });
+  describe('실패 케이스', () => {
+    describe('프론트 유효성 검사', () => {
+      test('카드 번호를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(서버 에러)', async () => {
+        // ARRANGE
+        renderProvider(<AppRoutes />, { route: '/payments/register' });
 
-    // ACT
-    await fillRegisterCardForm({ cardNumbers: ['0000', '1234', '1234', '0000'] });
+        // ACT
+        await fillRegisterCardForm({ cardNumbers: ['0000', '1234', '1234', '0000'] });
 
-    userEvent.click(await screen.getByRole('button'));
+        userEvent.click(await screen.getByRole('button'));
 
-    // ASSERT
-    expect(await screen.findByText(ERROR_MESSAGE.INVALID_CARD_NUMBER)).toBeInTheDocument();
-  });
+        // ASSERT
+        expect(await screen.findByText(ERROR_MESSAGE.INVALID_CARD_NUMBER)).toBeInTheDocument();
+      });
 
-  test('CVC를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(서버 에러)', async () => {
-    // ARRANGE
-    renderProvider(<AppRoutes />, { route: '/payments/register' });
+      test('CVC를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(서버 에러)', async () => {
+        // ARRANGE
+        renderProvider(<AppRoutes />, { route: '/payments/register' });
 
-    // ACT
-    await fillRegisterCardForm({ cvc: '000' });
+        // ACT
+        await fillRegisterCardForm({ cvc: '000' });
 
-    userEvent.click(await screen.getByRole('button'));
+        userEvent.click(await screen.getByRole('button'));
 
-    // ASSERT
-    expect(await screen.findByText(ERROR_MESSAGE.INVALID_CVC)).toBeInTheDocument();
-  });
+        // ASSERT
+        expect(await screen.findByText(ERROR_MESSAGE.INVALID_CVC)).toBeInTheDocument();
+      });
+    });
 
-  test('유효기간(월을 13으로)를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(프론트 에러)', async () => {
-    // ARRANGE
-    renderProvider(<AppRoutes />, { route: '/payments/register' });
+    describe('서버 에러 처리', () => {
+      test('유효기간(월을 13으로)를 잘못 입력시 에러 메시지가 보이고 포커스 처리된다(프론트 에러)', async () => {
+        // ARRANGE
+        renderProvider(<AppRoutes />, { route: '/payments/register' });
 
-    // ACT
-    await fillRegisterCardForm({ expirationDate: { month: '13', year: '12' } });
+        // ACT
+        await fillRegisterCardForm({ expirationDate: { month: '13', year: '12' } });
 
-    // ASSERT
-    expect(await screen.findByText('유효기간(월)는 01부터 12까지의 숫자여야합니다')).toBeInTheDocument();
+        // ASSERT
+        expect(await screen.findByText('유효기간(월)는 01부터 12까지의 숫자여야합니다')).toBeInTheDocument();
+      });
+    });
   });
 });
