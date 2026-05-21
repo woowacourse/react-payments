@@ -63,6 +63,7 @@ export default function CardPassword({ cardPassword, setCardPassword }: CardPass
             maxLength={2}
             onBlur={setCardPassword.handlePasswordBlur}
             inputMode="numeric"
+            autoFocus
             css={(theme) => ({
               width: '315px',
               height: '32px',

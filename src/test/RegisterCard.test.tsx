@@ -69,6 +69,34 @@ describe('카드 등록', () => {
     expect(yearInput).toHaveFocus();
   });
 
+  it('유효기간 년도와 CVC 입력을 완료하면 다음 입력 칸으로 포커스가 이동한다', async () => {
+    const user = userEvent.setup();
+    renderRegisterCard();
+
+    await fillCardNumber(user, '4111111111111111');
+
+    const companySelect = screen.getByRole('combobox');
+    await user.selectOptions(companySelect, 'bc');
+
+    const expiryInputs = screen.getAllByRole('textbox');
+    const monthInput = expiryInputs.find((el) => el.getAttribute('placeholder') === 'MM')!;
+    const yearInput = expiryInputs.find((el) => el.getAttribute('placeholder') === 'YY')!;
+    await user.type(monthInput, '12');
+    await user.type(yearInput, '26');
+
+    const cvcInput = screen.getByPlaceholderText('123');
+    await waitFor(() => {
+      expect(cvcInput).toHaveFocus();
+    });
+
+    await user.type(cvcInput, '123');
+
+    const passwordInput = screen.getByPlaceholderText('**');
+    await waitFor(() => {
+      expect(passwordInput).toHaveFocus();
+    });
+  });
+
   it('카드 정보를 모두 입력하고 확인 버튼을 누르면 /cards로 이동한다', async () => {
     const user = userEvent.setup();
     renderRegisterCard();

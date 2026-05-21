@@ -35,6 +35,7 @@ export default function CardCvc({ cardCvc, setCardCvc }: CardCvcProps) {
             maxLength={3}
             onBlur={setCardCvc.handleCvcBlur}
             inputMode="numeric"
+            autoFocus
             css={(theme) => ({
               width: '315px',
               height: '32px',
