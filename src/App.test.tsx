@@ -4,8 +4,7 @@ import { http, HttpResponse } from "msw";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 import App from "./App";
-import { seedMockCards } from "./mocks/handlers";
-import { BASE_URL } from "./shared/constants";
+import { BASE_URL, seedMockCards } from "./mocks/handlers";
 import { server } from "./test/server";
 
 const renderApp = (initialRoute: string) => {

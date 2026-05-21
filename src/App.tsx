@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 
 import styled from "styled-components";
-import CardListPage from "./feature/CardListPage/CardListPage";
-import CardRegisterPage from "./feature/CardRegisterPage/CardRegisterPage";
-import CardRegisterCompletePage from "./feature/CardRegisterCompletePage/CardRegisterCompletePage";
+import CardListPage from "./pages/CardListPage/CardListPage";
+import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage";
+import CardRegisterCompletePage from "./pages/CardRegisterCompletePage/CardRegisterCompletePage";
 
 const App = () => {
   return (
