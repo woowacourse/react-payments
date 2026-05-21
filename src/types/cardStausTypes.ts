@@ -66,7 +66,14 @@ export type CardInfo = {
   number: string;
   expirationDate: string;
   cvc: string;
-  issuerCode: string;
+  issuerCode: CardIssuerServerCode;
+};
+
+export type CardRequest = {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: CardIssuerServerCode;
 };
 
 export type CardResponse = {

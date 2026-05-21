@@ -1,6 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
 import { getCardBrand } from '../utils/cardBrand';
-import { CARD_ISSUER_CODE } from '../constants/constant';
 import { isCardExpiryDateComplete } from '../utils/validate';
 import type { CardIssuerServerCode } from '../types/cardStausTypes';
 import type { CardInfo } from '../types/cardStausTypes';
@@ -55,7 +54,7 @@ export const handlers = [
       number: body.number,
       expirationDate: body.expirationDate,
       cvc: body.cvc,
-      issuerCode: CARD_ISSUER_CODE[body.issuerCode],
+      issuerCode: body.issuerCode,
     };
 
     cardInfo.push(newCardInfo);

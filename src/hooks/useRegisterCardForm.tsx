@@ -14,9 +14,9 @@ import {
   isCardPasswordComplete,
   isNumericInput,
 } from '../utils/validate';
-import { formatCardExpiryDate } from '../utils/formatCardExpiryDate';
 import { postCard } from '../api/postCard';
 import { HttpError, NetworkError } from '../errors/errors';
+import { toCreateCardRequest } from '../utils/toCreateCardRequest';
 
 export function useRegisterCardForm() {
   const [cardStatus, cardNumberHandler] = useCardNumber();
@@ -25,13 +25,6 @@ export function useRegisterCardForm() {
   const [cardPassword, cardPasswordHandler] = useCardPassword();
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
   const [step, setStep] = useState(0);
-
-  const formData = {
-    number: cardStatus.cardNumbers.join(''),
-    expirationDate: formatCardExpiryDate(cardExpiry.cardExpiryDate),
-    cvc: cardCvc.cardCvc,
-    issuerCode: cardIssuer,
-  };
 
   const navigate = useNavigate();
 
@@ -92,6 +85,13 @@ export function useRegisterCardForm() {
     if (!isFormValid) {
       return;
     }
+
+    const formData = toCreateCardRequest(
+      cardStatus.cardNumbers,
+      cardExpiry.cardExpiryDate,
+      cardCvc.cardCvc,
+      cardIssuer,
+    );
 
     try {
       const { id } = await postCard(formData);
