@@ -8,7 +8,7 @@ import { renderProvider } from '../../../utils/render';
 
 import { AppRoutes } from '../../../../src/routes';
 
-interface FillRegisterCardForm {
+interface FillRegisterCardFormValues {
   cardNumbers?: string[];
   card?: string;
   expirationDate?: { month: string; year: string };
@@ -24,13 +24,14 @@ const DUMMY_FORM_DATA = {
   password: '12',
 };
 
-const fillRegisterCardForm = async ({
-  cardNumbers = DUMMY_FORM_DATA.cardNumbers,
-  card = DUMMY_FORM_DATA.card,
-  expirationDate = DUMMY_FORM_DATA.expirationDate,
-  cvc = DUMMY_FORM_DATA.cvc,
-  password = DUMMY_FORM_DATA.password,
-}: FillRegisterCardForm = {}) => {
+const fillRegisterCardForm = async (formValues: FillRegisterCardFormValues = {}) => {
+  const resolvedFormValues = {
+    ...DUMMY_FORM_DATA,
+    ...formValues,
+  };
+
+  const { cardNumbers, card, expirationDate, cvc, password } = resolvedFormValues;
+
   // (cardNumber)
   const cardInputs = await screen.findAllByPlaceholderText('1234'); // [input, input, input, input]
   for (const [index, input] of cardInputs.entries()) {
