@@ -13,6 +13,7 @@ const renderApp = () => {
 
 async function main() {
   try {
+    // 미션 데모용 mock API를 사용하기 위해 MSW를 항상 실행
     const { worker } = await import("./mocks/browser");
 
     await worker.start({
