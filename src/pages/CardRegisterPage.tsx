@@ -68,7 +68,7 @@ export default function CardRegisterPage() {
               onChange={onCvcNumberChange}
               value={cvcNumbers}
               onComplete={onCvcNumberComplete}
-              serverErrorMessage={
+              errorMessage={
                 serverError?.code === "INVALID_CVC" ? serverError.message : null
               }
             />
@@ -85,7 +85,7 @@ export default function CardRegisterPage() {
               onChange={onExpNumberChange}
               value={expNumbers}
               onComplete={onExpNumberComplete}
-              serverErrorMessage={
+              errorMessage={
                 serverError?.code === "INVALID_EXPIRATION_DATE"
                   ? serverError.message
                   : null
@@ -113,7 +113,7 @@ export default function CardRegisterPage() {
             value={cardNumbers}
             onComplete={onCardNumberComplete}
             cardBrand={cardBrand}
-            serverErrorMessage={
+            errorMessage={
               serverError?.code === "INVALID_CARD_NUMBER"
                 ? serverError.message
                 : null

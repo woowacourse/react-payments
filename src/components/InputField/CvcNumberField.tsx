@@ -8,14 +8,14 @@ interface Props {
   onChange: (value: string) => void;
   value: string;
   onComplete: (isCompleted: boolean) => void;
-  serverErrorMessage: string | null;
+  errorMessage: string | null;
 }
 
 export default function CvcNumberField({
   onChange,
   value,
   onComplete,
-  serverErrorMessage,
+  errorMessage,
 }: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
@@ -31,7 +31,7 @@ export default function CvcNumberField({
   };
 
   return (
-    <InputGroup errorMessage={inputError || serverErrorMessage}>
+    <InputGroup errorMessage={inputError || errorMessage}>
       <NumberInput
         value={value}
         onChange={handleOnChange}
