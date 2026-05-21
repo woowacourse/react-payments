@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 import type { RegisterCardRequest } from '../api/api';
 import { db } from './db';
 import { getCardBrand } from '../utils/card/cardBrand';
@@ -12,7 +12,8 @@ function maskCardNumber(number: string) {
 }
 
 export const handlers = [
-  http.get('/cards', () => {
+  http.get('/cards', async () => {
+    await delay(500);
     return HttpResponse.json(db.getCards());
   }),
 
