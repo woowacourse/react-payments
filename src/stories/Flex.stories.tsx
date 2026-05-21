@@ -55,7 +55,14 @@ export const Column: Story = {
 export const JustifyCenter: Story = {
   args: { direction: 'row', justifyContent: 'center', gap: 10 },
   render: (args) => (
-    <Flex {...args} customStyle={css`width: 100%; border: 1px dashed #ccc; padding: 8px;`}>
+    <Flex
+      {...args}
+      customStyle={css`
+        width: 100%;
+        border: 1px dashed #ccc;
+        padding: var(--spacing-8);
+      `}
+    >
       <Box label="A" />
       <Box label="B" color="#2196F3" />
     </Flex>
@@ -65,7 +72,14 @@ export const JustifyCenter: Story = {
 export const JustifySpaceBetween: Story = {
   args: { direction: 'row', justifyContent: 'space-between' },
   render: (args) => (
-    <Flex {...args} customStyle={css`width: 100%; border: 1px dashed #ccc; padding: 8px;`}>
+    <Flex
+      {...args}
+      customStyle={css`
+        width: 100%;
+        border: 1px dashed #ccc;
+        padding: var(--spacing-8);
+      `}
+    >
       <Box label="A" />
       <Box label="B" color="#2196F3" />
       <Box label="C" color="#FF5722" />

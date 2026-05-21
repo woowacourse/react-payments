@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 const variants = {
   default: css`
-    border-radius: 8px;
+    border-radius: var(--radius-l);
     background: var(--color-card-background);
     color: var(--color-white);
 
@@ -24,10 +24,10 @@ const variants = {
 
 const Button = styled.button<{ variant?: keyof typeof variants; style?: never; customStyle?: SerializedStyles }>`
   border: 0;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
   height: 52px;
-  padding: 0 14px;
+  padding: 0 var(--spacing-14);
 
   ${({ variant }) => variants[variant ?? 'default']}
 

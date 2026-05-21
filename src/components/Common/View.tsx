@@ -6,7 +6,7 @@ const View = styled.div<{ style?: never; customStyle?: SerializedStyles }>`
   height: 100dvh;
   max-width: 376px;
   margin: 0 auto;
-  padding: 16px 32px 0 32px;
+  padding: var(--spacing-16) var(--spacing-32) 0;
   ${(props) => props.customStyle}
 `;
 

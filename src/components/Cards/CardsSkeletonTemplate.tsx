@@ -23,7 +23,7 @@ export default function CardsSkeletonTemplate() {
             width: 100%;
             height: 44px;
             border: 1px dashed var(--color-gray-200);
-            border-radius: 3px;
+            border-radius: var(--radius-s);
             background-color: var(--color-gray-100);
           `}
         ></Flex>

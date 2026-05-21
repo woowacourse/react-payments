@@ -50,8 +50,8 @@ export default function CardItem(props: { data: Card; refetcher: () => void }) {
       alignItems="center"
       customStyle={css`
         border: 1px solid var(--color-gray-200);
-        border-radius: 3px;
-        padding: 14px;
+        border-radius: var(--radius-s);
+        padding: var(--spacing-14);
       `}
       data-id={props.data.id}
     >
@@ -59,7 +59,7 @@ export default function CardItem(props: { data: Card; refetcher: () => void }) {
         customStyle={css`
           width: 64px;
           height: 40px;
-          border-radius: 3px;
+          border-radius: var(--radius-s);
           background-color: var(--color-card-${issuer?.[0]}, var(--color-gray-400));
         `}
       ></Flex>

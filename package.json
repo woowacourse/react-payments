@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint-style": "stylelint \"src/**/*.{js,jsx,ts,tsx}\"",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --mode gh-pages --minify=false && npx gh-pages -d dist"
+    "deploy": "vite build --mode gh-pages --minify=false && npx gh-pages -d dist",
+    "prepare": "husky"
   },
   "homepage": "https://bel1c10ud.github.io/react-payments",
   "dependencies": {
@@ -44,9 +46,17 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-storybook": "^10.3.5",
     "globals": "^17.5.0",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^16.4.0",
     "playwright": "^1.59.1",
+    "postcss": "^8.5.15",
+    "postcss-styled-syntax": "^0.7.1",
     "storybook": "^10.3.5",
+    "stylelint": "^17.12.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-declaration-strict-value": "^1.11.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
     "vite": "^8.0.10",
@@ -55,6 +65,11 @@
   "msw": {
     "workerDirectory": [
       "public"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "stylelint --fix"
     ]
   }
 }

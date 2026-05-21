@@ -7,6 +7,7 @@ const VisuallyHidden = styled.div<{ style?: never; customStyle?: SerializedStyle
   height: 1px;
   margin: -1px;
   overflow: hidden;
+  /* stylelint-disable-next-line property-no-deprecated */
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   ${(props) => props.customStyle}

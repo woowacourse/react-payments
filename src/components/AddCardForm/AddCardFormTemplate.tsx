@@ -103,7 +103,7 @@ function AddCardFormTemplate() {
               position: sticky;
               bottom: 0;
               border-radius: 0;
-              margin: 0 -32px;
+              margin: 0 calc(var(--spacing-32) * -1);
             `}
             disabled={mutation.status === 'loading'}
             hidden={!form.formStatus.isValid}

@@ -1,40 +1,30 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { Property } from 'csstype';
-
-const FONT_SIZE = {
-  xs: '10px',
-  s: '12px',
-  m: '14px',
-  l: '18px',
-  xl: '20px',
-  '2xl': '24px',
-} as const;
-
-const FONT_WEIGHT = {
-  medium: '500',
-  bold: '700',
-} as const;
-
-const FONT_COLOR = {
-  black: 'var(--color-black, black)',
-  white: 'var(--color-white, white)',
-  description: 'var(--color-description, #8b95a1)',
-  error: 'var(--color-error, #ff3d3d)',
-} as const;
+import {
+  FONT_COLOR,
+  FONT_SIZE,
+  FONT_WEIGHT,
+  type FontColorToken,
+  type FontSizeToken,
+  type FontWeightToken,
+} from '../../styles/tokens';
 
 interface CommonTextProps {
-  size?: keyof typeof FONT_SIZE;
-  weight?: keyof typeof FONT_WEIGHT;
-  color?: keyof typeof FONT_COLOR;
+  size?: FontSizeToken;
+  weight?: FontWeightToken;
+  color?: FontColorToken;
   align?: Property.TextAlign;
   style?: never;
   customStyle?: SerializedStyles;
 }
 
 const textStyles = (props: CommonTextProps) => css`
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   font-size: ${FONT_SIZE[props.size ?? 'm']};
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   font-weight: ${FONT_WEIGHT[props.weight ?? 'medium']};
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   color: ${FONT_COLOR[props.color ?? 'black']};
   ${props.align ? `text-align: ${props.align};` : ''}
   ${props.customStyle}

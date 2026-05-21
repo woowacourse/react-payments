@@ -9,20 +9,14 @@ interface SelectProps {
 
 const SelectBase = styled.select<SelectProps>`
   width: 100%;
-  font-size: 14px;
-  border-radius: 3px;
-  padding: 8px;
+  font-size: var(--font-size-m);
+  border-radius: var(--radius-s);
+  padding: var(--spacing-8);
   border: 1px solid var(--color-border);
-  background: no-repeat calc(100% - 8px) 50% url(${import.meta.env.BASE_URL}select_icon.svg);
+  background: no-repeat calc(100% - var(--spacing-8)) 50% url(${import.meta.env.BASE_URL}select_icon.svg);
   appearance: none;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   color: ${(props) => (props.value?.length ? 'var(--color-black)' : 'var(--color-description)')};
-
-  &:disabled {
-    cursor: not-allowed;
-    background-color: var(--color-gray-100);
-    color: var(--color-gray-500);
-    border-color: var(--color-gray-300);
-  }
 
   &,
   &::picker(select) {
@@ -37,19 +31,9 @@ const SelectBase = styled.select<SelectProps>`
     display: flex;
     flex-direction: column;
     border-color: var(--color-border);
-    margin: 5px 0;
+    margin: var(--spacing-4) 0;
     padding: 0;
-    border-radius: 3px;
-  }
-
-  & option {
-    gap: 0;
-    padding: 8px;
-    font-size: 14px;
-  }
-
-  & option::checkmark {
-    display: none;
+    border-radius: var(--radius-s);
   }
 
   &:focus {
@@ -58,8 +42,25 @@ const SelectBase = styled.select<SelectProps>`
     outline: 0;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-500);
+    border-color: var(--color-gray-300);
+  }
+
   &[data-is-error='true'] {
     border-color: var(--color-error);
+  }
+
+  & option {
+    gap: 0;
+    padding: var(--spacing-8);
+    font-size: var(--font-size-m);
+  }
+
+  & option::checkmark {
+    display: none;
   }
 
   ${(props) => props.customStyle}
