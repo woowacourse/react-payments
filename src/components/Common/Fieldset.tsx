@@ -1,5 +1,5 @@
 import { type SerializedStyles } from '@emotion/react';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const Fieldset = styled.fieldset<{ style?: never; customStyle?: SerializedStyles }>`
   border: 0;
@@ -8,4 +8,4 @@ const Fieldset = styled.fieldset<{ style?: never; customStyle?: SerializedStyles
   ${(props) => props.customStyle}
 `;
 
-export default Fieldset
+export default Fieldset;
