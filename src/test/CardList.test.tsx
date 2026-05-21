@@ -30,26 +30,41 @@ function renderCardList() {
 }
 
 describe('카드 목록', () => {
+  it('카드 목록을 불러오는 동안 스켈레톤 UI가 표시된다', () => {
+    renderCardList();
+
+    expect(screen.getByText('보유 카드')).toBeInTheDocument();
+    expect(screen.getAllByTestId('card-list-skeleton-item')).toHaveLength(3);
+    expect(screen.getByTestId('card-list-skeleton-action')).toBeInTheDocument();
+    expect(screen.queryByText('+ 카드 추가')).not.toBeInTheDocument();
+  });
+
   it('등록된 카드가 없으면 카드 항목이 표시되지 않는다', async () => {
+    const { http, HttpResponse } = await import('msw');
+    server.use(http.get('/cards', () => HttpResponse.json(db.getCards())));
+
     renderCardList();
 
     await waitFor(() => {
-      expect(screen.getByText('보유 카드 (0)')).toBeInTheDocument();
+      expect(screen.getByText('보유 카드')).toBeInTheDocument();
+      expect(screen.getByText('+ 카드 추가')).toBeInTheDocument();
     });
   });
 
   it('등록된 카드가 있으면 목록에 카드 정보가 표시된다', async () => {
+    const { http, HttpResponse } = await import('msw');
     db.addCard({
       id: '1',
       cardNumbers: ['4111', '1111', '1111', '1111'],
       cardCompany: 'bc',
       expiryDate: ['12', '26'],
     });
+    server.use(http.get('/cards', () => HttpResponse.json(db.getCards())));
 
     renderCardList();
 
     await waitFor(() => {
-      expect(screen.getByText('보유 카드 (1)')).toBeInTheDocument();
+      expect(screen.getByText('보유 카드')).toBeInTheDocument();
       expect(screen.getByText('BC카드')).toBeInTheDocument();
       expect(screen.getByText('4111 **** **** 1111')).toBeInTheDocument();
       expect(screen.getByText('유효 기간 12/26')).toBeInTheDocument();

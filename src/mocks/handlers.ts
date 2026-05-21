@@ -1,9 +1,11 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 import type { RegisterCardRequest } from '../types/api';
 import { db } from './db';
 
 export const handlers = [
-  http.get('/cards', () => {
+  http.get('/cards', async () => {
+    await delay(1000);
+
     return HttpResponse.json(db.getCards());
   }),
 
