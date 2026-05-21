@@ -62,6 +62,8 @@ const CardRegisterPage = () => {
   ) => {
     event.preventDefault();
 
+    if (!isFormValid) return;
+
     try {
       await registerCard({
         number: cardNumber.join(""),
