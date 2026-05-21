@@ -23,10 +23,10 @@ describe('카드 등록 페이지 테스트', async () => {
 
     // ACT
     // (cardNumber)
-    const cardInputs = screen.getAllByPlaceholderText('1234'); // [input, input, input, input]
-    Array.from({ length: 4 }).forEach(async (_, index) => {
-      await userEvent.type(cardInputs[index], DUMMY_FORM_DATA.cardNumbers[index]);
-    });
+    const cardInputs = await screen.findAllByPlaceholderText('1234'); // [input, input, input, input]
+    for (const [index, input] of cardInputs.entries()) {
+      await userEvent.type(input, DUMMY_FORM_DATA.cardNumbers[index]);
+    }
 
     // (card)
     await userEvent.click(screen.getByText(/카드사를 선택해주세요/));
