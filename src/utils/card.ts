@@ -8,8 +8,7 @@ import type { ValidityPeriod } from "@/components/CardRegister/CardValidityPerio
 import type { CardNumberUnits } from "@/components/CardRegister/CardNumberInputField/CardNumberInputField";
 
 export const detectCardBrand = (cardNumber: string): CardBrand | null => {
-  if (checkPrefixMatches(cardNumber, CARD_BRANDS.Visa.prefixes))
-    return "Visa";
+  if (checkPrefixMatches(cardNumber, CARD_BRANDS.Visa.prefixes)) return "Visa";
 
   if (checkPrefixRangeMatches(cardNumber, CARD_BRANDS.MasterCard.prefixRanges))
     return "MasterCard";
@@ -76,4 +75,8 @@ export const updateCardNumberUnitsFormat = (
 
 export const getCardNumberPlaceholder = (length: number) => {
   return "1234567890".slice(0, length);
+};
+
+export const formatCardNumberByFour = (cardNumber: string) => {
+  return cardNumber.match(/.{1,4}/g)?.join(" ") ?? cardNumber;
 };

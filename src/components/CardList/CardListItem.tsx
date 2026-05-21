@@ -3,6 +3,7 @@ import { CARD_COMPANIES } from "@/constants/cardCompanies";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import styled from "@emotion/styled";
 import deleteIcon from "@/assets/deleteIcon.svg";
+import { formatCardNumberByFour } from "@/utils/card";
 
 interface CardListItemProps {
   card: CardListItemType;
@@ -21,7 +22,7 @@ const CardListItem = ({ card, onDelete }: CardListItemProps) => {
 
         <CardInfo>
           <CardCompany>{cardCompany?.name}</CardCompany>
-          <CardNumber>{card.number}</CardNumber>
+          <CardNumber>{formatCardNumberByFour(card.maskedNumber)}</CardNumber>
           <CardExpirationDate>
             유효기간 {card.expirationDate}
           </CardExpirationDate>

@@ -57,7 +57,7 @@ export const handlers = [
       return {
         id: card.id,
         issuerCode: card.issuerCode,
-        number: card.number,
+        maskedNumber: maskCardNumber(card.number),
         expirationDate: card.expirationDate,
       };
     });
@@ -77,3 +77,7 @@ export const handlers = [
     return new HttpResponse(null, { status: 204 });
   }),
 ];
+
+const maskCardNumber = (cardNumber: string) => {
+  return `${cardNumber.slice(0, 6)}******${cardNumber.slice(-4)}`;
+};

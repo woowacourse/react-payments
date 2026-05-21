@@ -8,7 +8,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const card = {
   id: "card-id",
   issuerCode: "41",
-  number: "411111******1111",
+  maskedNumber: "551112******9012",
   expirationDate: "12/28",
 };
 
@@ -54,7 +54,7 @@ describe("카드 목록 페이지", () => {
 
     expect(await screen.findByText("보유 카드 (1)")).toBeInTheDocument();
     expect(screen.getByText("신한카드")).toBeInTheDocument();
-    expect(screen.getByText("411111******1111")).toBeInTheDocument();
+    expect(screen.getByText("5511 12** **** 9012")).toBeInTheDocument();
     expect(screen.getByText("유효기간 12/28")).toBeInTheDocument();
   });
 

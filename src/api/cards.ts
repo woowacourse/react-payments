@@ -10,7 +10,7 @@ export interface CardRegisterRequest {
 export interface CardListItem {
   id: string;
   issuerCode: string;
-  number: string;
+  maskedNumber: string;
   expirationDate: string;
 }
 
