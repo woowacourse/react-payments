@@ -15,9 +15,9 @@ export type RegisteredCard = {
 export default function RegisterCard() {
   const navigate = useNavigate();
   const { form, handlers, completion } = useCardForm();
-  const { state, register } = useRegisterCard();
+  const { registerCardState, register } = useRegisterCard();
 
-  const apiError = state.status === 'error' ? state.error : null;
+  const apiError = registerCardState.status === 'error' ? registerCardState.error : null;
 
   const handleComplete = () => {
     if (form.cardCompanyStatus.cardCompany === '') return;
@@ -31,10 +31,10 @@ export default function RegisterCard() {
   };
 
   useEffect(() => {
-    if (state.status === 'success') {
+    if (registerCardState.status === 'success') {
       navigate('/cards');
     }
-  }, [state.status, navigate]);
+  }, [registerCardState.status, navigate]);
 
   return (
     <div
@@ -88,7 +88,7 @@ export default function RegisterCard() {
         <button
           type="button"
           onClick={handleComplete}
-          disabled={state.status === 'loading'}
+          disabled={registerCardState.status === 'loading'}
           css={(theme) => ({
             width: '376px',
             height: '48px',
@@ -99,12 +99,12 @@ export default function RegisterCard() {
             transform: 'translateX(-50%)',
             backgroundColor: theme.colors.cardBackground,
             color: theme.colors.white,
-            cursor: state.status === 'loading' ? 'not-allowed' : 'pointer',
-            opacity: state.status === 'loading' ? 0.6 : 1,
+            cursor: registerCardState.status === 'loading' ? 'not-allowed' : 'pointer',
+            opacity: registerCardState.status === 'loading' ? 0.6 : 1,
             zIndex: 1,
           })}
         >
-          {state.status === 'loading' ? '등록 중...' : '확인'}
+          {registerCardState.status === 'loading' ? '등록 중...' : '확인'}
         </button>
       )}
     </div>
