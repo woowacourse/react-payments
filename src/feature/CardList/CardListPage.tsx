@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { deleteCard, getCards } from '../../api/cards';
 import type { Card } from '../../domain/card/types/card';
 import Title from '../../common/components/Title';
@@ -12,17 +12,12 @@ import type { CardFetchStatusType } from './types/cardFetchStatus';
 const CardListPage = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [cardFetchStatus, setCardFetchStatus] =
-    useState<CardFetchStatusType>('idle');
+    useState<CardFetchStatusType>('loading');
 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const fetchCards = async (signal?: AbortSignal) => {
-    setCardFetchStatus('idle');
-
+  const loadCards = useCallback(async (signal?: AbortSignal) => {
     try {
-      setCards([]);
-      setCardFetchStatus('loading');
-
       const cards = await getCards(signal);
 
       setCards(cards);
@@ -33,7 +28,23 @@ const CardListPage = () => {
 
       setCardFetchStatus('error');
     }
+  }, []);
+
+  const retryFetchCards = async () => {
+    setCards([]);
+    setCardFetchStatus('loading');
+
+    await loadCards();
   };
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    // eslint-disable-next-line
+    loadCards(controller.signal);
+
+    return () => controller.abort();
+  }, [loadCards]);
 
   const handleDeleteCard = async (cardId: string) => {
     if (isDeleting) return;
@@ -44,7 +55,7 @@ const CardListPage = () => {
     try {
       setIsDeleting(true);
       await deleteCard(cardId);
-      await fetchCards();
+      await loadCards();
     } catch (error) {
       // 네트워크 에러 - 카드 삭제 실패 메세지를 alert로 띄우기
       window.alert(error);
@@ -53,21 +64,12 @@ const CardListPage = () => {
     }
   };
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    // eslint-disable-next-line
-    fetchCards(controller.signal);
-
-    return () => controller.abort();
-  }, []);
-
   const 비동기_상태에_따라_컴포넌트_보여주기 = () => {
     if (cardFetchStatus === 'loading') return <CardListSkeleton />;
     if (cardFetchStatus === 'error') {
       return (
         <CardListErrorState
-          handleRetryFetchCards={async () => await fetchCards()}
+          handleRetryFetchCards={async () => await retryFetchCards()}
         />
       );
     }
