@@ -32,9 +32,22 @@ export default function RegisterCard() {
 
   useEffect(() => {
     if (registerCardState.status === 'success') {
-      navigate('/cards');
+      const cardCompany = form.cardCompanyStatus.cardCompany;
+      if (cardCompany === '') return;
+
+      navigate('/complete', {
+        state: {
+          cardNumberPrefix: form.cardNumber.cardNumbers[0],
+          cardCompany,
+        },
+      });
     }
-  }, [registerCardState.status, navigate]);
+  }, [
+    form.cardCompanyStatus.cardCompany,
+    form.cardNumber.cardNumbers,
+    navigate,
+    registerCardState.status,
+  ]);
 
   return (
     <div

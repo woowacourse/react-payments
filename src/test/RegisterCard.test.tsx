@@ -97,7 +97,7 @@ describe('카드 등록', () => {
     });
   });
 
-  it('카드 정보를 모두 입력하고 확인 버튼을 누르면 /cards로 이동한다', async () => {
+  it('카드 정보를 모두 입력하고 확인 버튼을 누르면 /complete로 등록 카드 정보를 전달한다', async () => {
     const user = userEvent.setup();
     renderRegisterCard();
 
@@ -122,7 +122,12 @@ describe('카드 등록', () => {
     await user.click(submitButton);
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith('/cards');
+      expect(mockNavigate).toHaveBeenCalledWith('/complete', {
+        state: {
+          cardNumberPrefix: '4111',
+          cardCompany: 'bc',
+        },
+      });
     });
   });
 
