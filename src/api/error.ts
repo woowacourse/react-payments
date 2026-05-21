@@ -1,9 +1,7 @@
-import type { ServerErrorCode } from '../feature/CardRegister/hooks/useRegisterServerErrors';
+export class HTTPError<TCode extends string> extends Error {
+  code: TCode;
 
-export class HTTPError extends Error {
-  code: ServerErrorCode;
-
-  constructor(code: ServerErrorCode, message: string) {
+  constructor(code: TCode, message: string) {
     super(message);
     this.code = code;
   }

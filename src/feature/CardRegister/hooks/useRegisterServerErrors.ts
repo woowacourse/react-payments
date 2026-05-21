@@ -1,19 +1,6 @@
 import { useState } from 'react';
-
-const SERVER_ERROR_FIELD_MAP = {
-  INVALID_CARD_NUMBER: 'cardNumber',
-  INVALID_EXPIRATION_DATE: 'expirationDate',
-  INVALID_CVC: 'cvc',
-} as const;
-
-export type ServerFieldErrors = {
-  cardNumber?: string;
-  expirationDate?: string;
-  cvc?: string;
-  form?: string;
-};
-
-export type ServerErrorCode = keyof typeof SERVER_ERROR_FIELD_MAP;
+import { SERVER_ERROR_FIELD_MAP, type ServerFieldErrors } from '../types/error';
+import type { CardRegisterServerErrorCode } from '../../../api/card/error';
 
 export const useRegisterServerError = () => {
   const [serverFieldErrors, setServerFieldErrors] = useState<ServerFieldErrors>(
@@ -31,7 +18,10 @@ export const useRegisterServerError = () => {
     }));
   };
 
-  const setServerFieldError = (code: ServerErrorCode, message: string) => {
+  const setServerFieldError = (
+    code: CardRegisterServerErrorCode,
+    message: string,
+  ) => {
     setServerFieldErrors({
       [SERVER_ERROR_FIELD_MAP[code]]: message,
     });
