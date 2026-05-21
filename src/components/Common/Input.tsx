@@ -1,6 +1,7 @@
+import type { SerializedStyles } from '@emotion/react';
 import styled from '@emotion/styled';
 
-const Input = styled.input`
+const Input = styled.input<{ style?: never; customStyle?: SerializedStyles }>`
   width: 100%;
   font-size: 14px;
   border-radius: 3px;
@@ -22,6 +23,8 @@ const Input = styled.input`
   &[data-is-error='true'] {
     border-color: var(--color-error);
   }
+
+  ${(props) => props.customStyle}
 `;
 
 export default Input;

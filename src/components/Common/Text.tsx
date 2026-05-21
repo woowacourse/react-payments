@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { Property } from 'csstype';
 
@@ -28,6 +28,8 @@ interface CommonTextProps {
   weight?: keyof typeof FONT_WEIGHT;
   color?: keyof typeof FONT_COLOR;
   align?: Property.TextAlign;
+  style?: never;
+  customStyle?: SerializedStyles;
 }
 
 const textStyles = (props: CommonTextProps) => css`
@@ -35,6 +37,7 @@ const textStyles = (props: CommonTextProps) => css`
   font-weight: ${FONT_WEIGHT[props.weight ?? 'medium']};
   color: ${FONT_COLOR[props.color ?? 'black']};
   ${props.align ? `text-align: ${props.align};` : ''}
+  ${props.customStyle}
 `;
 
 const TextBase = styled.p<CommonTextProps>`

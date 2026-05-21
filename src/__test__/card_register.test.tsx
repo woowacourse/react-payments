@@ -109,6 +109,15 @@ test.each([
     expectedError: '유효하지 않은 카드 번호입니다.',
   },
   {
+    description: '카드 유효기간이 잘못된 경우 카드 유효기간 입력 필드 아래 에러 메시지가 출력된다',
+    segments: ['5511', '1234', '5678', '9012'],
+    cvc: '123',
+    month: '13',
+    year: '28',
+    sectionTitle: '결제할 카드 번호를 입력해 주세요',
+    expectedError: '유효하지 않은 카드 번호입니다.',
+  },
+  {
     description: 'CVC가 잘못된 경우 CVC 입력 필드 아래 에러 메시지가 출력된다',
     segments: ['4111', '1111', '1111', '1111'],
     cvc: '000',

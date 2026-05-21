@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import useCardForm from '../../hooks/useCardForm';
 import Flex from '../Common/Flex';
 import Input from '../Common/Input';
@@ -25,6 +26,13 @@ function CardNumberSegmentsInput({ field }: CardNumberSegmentsInputProps) {
             {...field.register({
               index: segmentIndex,
             })}
+            customStyle={css`
+              color: red;
+
+              &:hover {
+                color: blue;
+              }
+            `}
           />
         ))}
       </Flex>

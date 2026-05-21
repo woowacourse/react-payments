@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import View from '../Common/View';
 import Text from '../Common/Text';
 import Flex from '../Common/Flex';
@@ -18,13 +19,13 @@ export default function CardsSkeletonTemplate() {
           ))}
         </Flex>
         <Flex
-          style={{
-            width: '100%',
-            height: '44px',
-            border: '1px dashed var(--color-gray-200)',
-            borderRadius: '3px',
-            backgroundColor: 'var(--color-gray-100)',
-          }}
+          customStyle={css`
+            width: 100%;
+            height: 44px;
+            border: 1px dashed var(--color-gray-200);
+            border-radius: 3px;
+            background-color: var(--color-gray-100);
+          `}
         ></Flex>
       </Flex>
     </View>

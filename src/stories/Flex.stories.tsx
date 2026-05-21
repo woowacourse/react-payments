@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Flex from '../components/Common/Flex';
 
@@ -54,7 +55,7 @@ export const Column: Story = {
 export const JustifyCenter: Story = {
   args: { direction: 'row', justifyContent: 'center', gap: 10 },
   render: (args) => (
-    <Flex {...args} style={{ width: '100%', border: '1px dashed #ccc', padding: 8 }}>
+    <Flex {...args} customStyle={css`width: 100%; border: 1px dashed #ccc; padding: 8px;`}>
       <Box label="A" />
       <Box label="B" color="#2196F3" />
     </Flex>
@@ -64,7 +65,7 @@ export const JustifyCenter: Story = {
 export const JustifySpaceBetween: Story = {
   args: { direction: 'row', justifyContent: 'space-between' },
   render: (args) => (
-    <Flex {...args} style={{ width: '100%', border: '1px dashed #ccc', padding: 8 }}>
+    <Flex {...args} customStyle={css`width: 100%; border: 1px dashed #ccc; padding: 8px;`}>
       <Box label="A" />
       <Box label="B" color="#2196F3" />
       <Box label="C" color="#FF5722" />

@@ -1,7 +1,10 @@
+import { type SerializedStyles } from '@emotion/react';
 import styled from '@emotion/styled';
 
 interface SelectProps {
   value?: string;
+  style?: never;
+  customStyle?: SerializedStyles;
 }
 
 const SelectBase = styled.select<SelectProps>`
@@ -58,6 +61,8 @@ const SelectBase = styled.select<SelectProps>`
   &[data-is-error='true'] {
     border-color: var(--color-error);
   }
+
+  ${(props) => props.customStyle}
 `;
 
 const Option = styled.option``;

@@ -5,6 +5,7 @@ import Flex from '../Common/Flex';
 import Text from '../Common/Text';
 import { useNavigate } from 'react-router';
 import type { Card } from '../../types/api';
+import { css } from '@emotion/react';
 
 export default function CardItem(props: { data: Card; refetcher: () => void }) {
   const navigate = useNavigate();
@@ -47,20 +48,20 @@ export default function CardItem(props: { data: Card; refetcher: () => void }) {
     <Flex
       gap={12}
       alignItems="center"
-      style={{
-        border: '1px solid var(--color-gray-200)',
-        borderRadius: '3px',
-        padding: '14px',
-      }}
+      customStyle={css`
+        border: 1px solid var(--color-gray-200);
+        border-radius: 3px;
+        padding: 14px;
+      `}
       data-id={props.data.id}
     >
       <Flex
-        style={{
-          width: '64px',
-          height: '40px',
-          borderRadius: '3px',
-          backgroundColor: `var(--color-card-${issuer?.[0]}, var(--color-gray-400))`,
-        }}
+        customStyle={css`
+          width: 64px;
+          height: 40px;
+          border-radius: 3px;
+          background-color: var(--color-card-${issuer?.[0]}, var(--color-gray-400));
+        `}
       ></Flex>
       <Flex direction="column" flexGrow={1}>
         <Text size="l">{issuer?.[1].label ?? '알 수 없는 카드'}</Text>

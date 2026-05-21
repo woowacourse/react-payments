@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { getCardNetwork } from '../../utils';
 import Flex from '../Common/Flex';
 import CardPreview from './CardPreview';
@@ -98,7 +99,12 @@ function AddCardFormTemplate() {
           </CardFormSection>
           <Button
             type="submit"
-            style={{ position: 'sticky', bottom: '0', borderRadius: '0px', margin: '0 -32px' }}
+            customStyle={css`
+              position: sticky;
+              bottom: 0;
+              border-radius: 0;
+              margin: 0 -32px;
+            `}
             disabled={mutation.status === 'loading'}
             hidden={!form.formStatus.isValid}
           >

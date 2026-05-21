@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, type SerializedStyles } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const variants = {
@@ -22,7 +22,7 @@ const variants = {
   `,
 };
 
-const Button = styled.button<{ variant?: keyof typeof variants }>`
+const Button = styled.button<{ variant?: keyof typeof variants; style?: never; customStyle?: SerializedStyles }>`
   border: 0;
   font-size: 14px;
   font-weight: 700;
@@ -34,6 +34,8 @@ const Button = styled.button<{ variant?: keyof typeof variants }>`
   &:hover {
     cursor: pointer;
   }
+
+  ${({ customStyle }) => customStyle}
 `;
 
 export default Button;

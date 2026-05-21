@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Button from '../components/Common/Button';
 
@@ -19,6 +20,6 @@ export const Default: Story = {
 export const Wide: Story = {
   args: {
     children: '다음',
-    style: { width: '100%' },
+    customStyle: css`width: 100%;`,
   },
 };
