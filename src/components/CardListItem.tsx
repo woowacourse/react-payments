@@ -1,5 +1,5 @@
 import DeleteMark from '../assets/DeleteMark.png';
-import { CARD_COMPANY_LABEL } from '../constants/cardCompanies';
+import { CARD_COMPANY_LABEL, ISSUER_CODE_CARD_COMPANY } from '../constants/cardCompanies';
 import type { CardResponse } from '../types/api';
 
 type CardListItemProps = {
@@ -7,11 +7,9 @@ type CardListItemProps = {
 };
 
 export default function CardListItem({ card }: CardListItemProps) {
-  const maskedNumbers = card.cardNumbers
-    .map((group, i) => (i === 1 || i === 2 ? '*'.repeat(group.length) : group))
-    .join(' ');
-  const companyLabel = CARD_COMPANY_LABEL[card.cardCompany as keyof typeof CARD_COMPANY_LABEL] ?? card.cardCompany;
-  const expiry = `${card.expiryDate[0]}/${card.expiryDate[1]}`;
+  const company = ISSUER_CODE_CARD_COMPANY[card.issuerCode];
+  const companyLabel = company ? CARD_COMPANY_LABEL[company] : card.issuerCode;
+  const maskedNumbers = `${card.number.slice(0, 6)} ${card.number.slice(6, 12)} ${card.number.slice(12)}`;
 
   return (
     <article
@@ -59,7 +57,7 @@ export default function CardListItem({ card }: CardListItemProps) {
             margin: 0,
           })}
         >
-          유효 기간 {expiry}
+          유효 기간 {card.expirationDate}
         </p>
       </div>
       <button type="button" aria-label="카드 삭제" css={{ alignSelf: 'center' }}>

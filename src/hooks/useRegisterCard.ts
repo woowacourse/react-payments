@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { postCard } from '../api/cards';
-import type { ApiError, CardResponse, RegisterCardRequest } from '../types/api';
+import type { CardFormApiError, RegisterCardRequest, RegisterCardResponse } from '../types/api';
 
 type AsyncState =
   | { status: 'idle' }
   | { status: 'loading' }
-  | { status: 'success'; data: CardResponse }
-  | { status: 'error'; error: ApiError };
+  | { status: 'success'; data: RegisterCardResponse }
+  | { status: 'error'; error: CardFormApiError };
 
 export function useRegisterCard() {
   const [state, setState] = useState<AsyncState>({ status: 'idle' });
@@ -17,7 +17,7 @@ export function useRegisterCard() {
       const data = await postCard(body);
       setState({ status: 'success', data });
     } catch (error) {
-      setState({ status: 'error', error: error as ApiError });
+      setState({ status: 'error', error: error as CardFormApiError });
     }
   };
 

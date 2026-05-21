@@ -131,7 +131,7 @@ describe('카드 등록', () => {
     server.use(
       http.post('/cards', () =>
         HttpResponse.json(
-          { code: 'cardNumbers', message: '유효하지 않은 카드 번호입니다.' },
+          { code: 'INVALID_CARD_NUMBER', message: '유효하지 않은 카드 번호입니다.' },
           { status: 400 },
         ),
       ),

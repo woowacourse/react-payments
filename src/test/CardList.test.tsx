@@ -55,9 +55,9 @@ describe('카드 목록', () => {
     const { http, HttpResponse } = await import('msw');
     db.addCard({
       id: '1',
-      cardNumbers: ['4111', '1111', '1111', '1111'],
-      cardCompany: 'bc',
-      expiryDate: ['12', '26'],
+      issuerCode: '31',
+      number: '411111******1111',
+      expirationDate: '12/26',
     });
     server.use(http.get('/cards', () => HttpResponse.json(db.getCards())));
 
@@ -66,7 +66,7 @@ describe('카드 목록', () => {
     await waitFor(() => {
       expect(screen.getByText('보유 카드')).toBeInTheDocument();
       expect(screen.getByText('BC카드')).toBeInTheDocument();
-      expect(screen.getByText('4111 **** **** 1111')).toBeInTheDocument();
+      expect(screen.getByText('411111 ****** 1111')).toBeInTheDocument();
       expect(screen.getByText('유효 기간 12/26')).toBeInTheDocument();
     });
   });

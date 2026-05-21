@@ -4,6 +4,7 @@ import CardPreview from '../components/CardPreview';
 import CardInput from '../components/CardInput';
 import { useCardForm } from '../hooks/useCardForm';
 import { useRegisterCard } from '../hooks/useRegisterCard';
+import { CARD_COMPANY_ISSUER_CODE } from '../constants/cardCompanies';
 import type { CardCompany } from '../types/cardStatusTypes';
 
 export type RegisteredCard = {
@@ -22,11 +23,10 @@ export default function RegisterCard() {
     if (form.cardCompanyStatus.cardCompany === '') return;
 
     register({
-      cardNumbers: form.cardNumber.cardNumbers,
-      expiryDate: form.cardExpiry.cardExpiryDate,
+      number: form.cardNumber.cardNumbers.join(''),
+      expirationDate: form.cardExpiry.cardExpiryDate.join('/'),
       cvc: form.cardCvc.cardCvc,
-      cardCompany: form.cardCompanyStatus.cardCompany,
-      password: form.cardPassword.cardPassword,
+      issuerCode: CARD_COMPANY_ISSUER_CODE[form.cardCompanyStatus.cardCompany],
     });
   };
 

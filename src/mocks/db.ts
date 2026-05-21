@@ -8,6 +8,9 @@ export const db = {
     cards.push(card);
     return card;
   },
+  deleteCard: (id: string) => {
+    cards = cards.filter((card) => card.id !== id);
+  },
   reset: () => {
     cards = [];
   },

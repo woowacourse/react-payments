@@ -4,7 +4,7 @@ import CardExpiryDate from './CardExpiryDate';
 import CardCompany from './CardCompany';
 import CardPassword from './CardPassword';
 import type { CardFormState, CardFormHandlers } from '../hooks/useCardForm';
-import type { ApiError } from '../types/api';
+import type { CardFormApiError } from '../types/api';
 
 type CardCompletion = {
   isCardNumberComplete: boolean;
@@ -19,10 +19,16 @@ type CardInputProps = {
   handlers: CardFormHandlers;
   completion: CardCompletion;
   hasBottomAction?: boolean;
-  apiError?: ApiError | null;
+  apiError?: CardFormApiError | null;
 };
 
-function ApiErrorMessage({ apiError, code }: { apiError?: ApiError | null; code: ApiError['code'] }) {
+function ApiErrorMessage({
+  apiError,
+  code,
+}: {
+  apiError?: CardFormApiError | null;
+  code: CardFormApiError['code'];
+}) {
   if (!apiError || apiError.code !== code) return null;
   return (
     <p css={(theme) => ({ ...theme.typography.caption, color: theme.colors.error, margin: 0 })}>

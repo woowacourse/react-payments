@@ -18,3 +18,18 @@ export const CARD_COMPANY_LABEL: Record<Exclude<CardCompany, ''>, string> = CARD
   }),
   {} as Record<Exclude<CardCompany, ''>, string>,
 );
+
+export const CARD_COMPANY_ISSUER_CODE: Record<Exclude<CardCompany, ''>, string> = {
+  bc: '31',
+  shinhan: '41',
+  kakao: '15',
+  hyundai: '61',
+  woori: 'W1',
+  lotte: '71',
+  hana: '21',
+  kookmin: '11',
+};
+
+export const ISSUER_CODE_CARD_COMPANY = Object.fromEntries(
+  Object.entries(CARD_COMPANY_ISSUER_CODE).map(([company, issuerCode]) => [issuerCode, company]),
+) as Record<string, Exclude<CardCompany, ''>>;

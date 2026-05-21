@@ -1,19 +1,31 @@
 export type RegisterCardRequest = {
-  cardNumbers: string[];
-  expiryDate: string[];
+  number: string;
+  expirationDate: string;
   cvc: string;
-  cardCompany: string;
-  password: string;
+  issuerCode: string;
 };
 
-export type CardResponse = {
+export type RegisterCardResponse = {
   id: string;
-  cardNumbers: string[];
-  cardCompany: string;
-  expiryDate: string[];
 };
 
-export type ApiError = {
+export type CardResponse = RegisterCardResponse & {
+  issuerCode: string;
+  number: string;
+  expirationDate: string;
+};
+
+export type CardApiErrorCode =
+  | 'INVALID_CARD_NUMBER'
+  | 'INVALID_CVC'
+  | 'INVALID_EXPIRATION_DATE';
+
+export type CardApiError = {
+  code: CardApiErrorCode;
+  message: string;
+};
+
+export type CardFormApiError = {
   code: 'cardNumbers' | 'expiryDate' | 'cvc' | 'password';
   message: string;
 };
