@@ -84,17 +84,22 @@ export default function CardList() {
       .catch((e: Error) => setState({ status: 'error', message: e.message }));
   }, []);
 
+  const refreshCards = async () => {
+    try {
+      const data = await getCards();
+      setState({ status: 'success', data });
+    } catch (e) {
+      setState({ status: 'error', message: (e as Error).message });
+    }
+  };
+
   const handleDeleteCard = async (id: string) => {
+    const isConfirmed = window.confirm('카드를 삭제하시겠습니까?');
+    if (!isConfirmed) return;
+
     try {
       await deleteCard(id);
-      setState((currentState) => {
-        if (currentState.status !== 'success') return currentState;
-
-        return {
-          status: 'success',
-          data: currentState.data.filter((card) => card.id !== id),
-        };
-      });
+      await refreshCards();
     } catch (e) {
       setState({ status: 'error', message: (e as Error).message });
     }

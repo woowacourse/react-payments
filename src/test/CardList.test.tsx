@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
-import { beforeAll, afterEach, afterAll, describe, it, expect } from 'vitest';
+import { beforeAll, afterEach, afterAll, describe, it, expect, vi } from 'vitest';
 import { server } from '../mocks/node';
 import { db } from '../mocks/db';
 import { theme } from '../styles/theme';
@@ -12,6 +12,7 @@ beforeAll(() => server.listen());
 afterEach(() => {
   server.resetHandlers();
   db.reset();
+  vi.restoreAllMocks();
 });
 afterAll(() => server.close());
 
@@ -72,16 +73,27 @@ describe('카드 목록', () => {
     });
   });
 
-  it('카드 삭제 버튼을 누르면 등록된 카드가 목록에서 삭제된다', async () => {
+  it('카드 삭제 확인 시 삭제 요청 후 목록을 갱신한다', async () => {
     const { http, HttpResponse } = await import('msw');
     const user = userEvent.setup();
+    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true);
+    let deleteRequestCount = 0;
+
     db.addCard({
       id: '1',
       issuerCode: '31',
       number: '411111******1111',
       expirationDate: '12/26',
     });
-    server.use(http.get('/cards', () => HttpResponse.json(db.getCards())));
+    server.use(
+      http.get('/cards', () => HttpResponse.json(db.getCards())),
+      http.delete('/cards/:id', ({ params }) => {
+        deleteRequestCount += 1;
+        db.deleteCard(String(params.id));
+
+        return new HttpResponse(null, { status: 204 });
+      }),
+    );
 
     renderCardList();
 
@@ -94,5 +106,40 @@ describe('카드 목록', () => {
     await waitFor(() => {
       expect(screen.queryByText('4111 **** **** 1111')).not.toBeInTheDocument();
     });
+    expect(confirmSpy).toHaveBeenCalled();
+    expect(deleteRequestCount).toBe(1);
+  });
+
+  it('카드 삭제 취소 시 삭제 요청을 보내지 않는다', async () => {
+    const { http, HttpResponse } = await import('msw');
+    const user = userEvent.setup();
+    vi.spyOn(window, 'confirm').mockReturnValue(false);
+    let deleteRequestCount = 0;
+
+    db.addCard({
+      id: '1',
+      issuerCode: '31',
+      number: '411111******1111',
+      expirationDate: '12/26',
+    });
+    server.use(
+      http.get('/cards', () => HttpResponse.json(db.getCards())),
+      http.delete('/cards/:id', () => {
+        deleteRequestCount += 1;
+
+        return new HttpResponse(null, { status: 204 });
+      }),
+    );
+
+    renderCardList();
+
+    await waitFor(() => {
+      expect(screen.getByText('4111 **** **** 1111')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByRole('button', { name: '카드 삭제' }));
+
+    expect(deleteRequestCount).toBe(0);
+    expect(screen.getByText('4111 **** **** 1111')).toBeInTheDocument();
   });
 });
