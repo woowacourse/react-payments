@@ -87,8 +87,13 @@ const CardRegisterPage = () => {
 
         if (field) {
           setServerErrors({ [field]: error.message });
+          return;
         }
       }
+
+      window.alert(
+        error instanceof Error ? error.message : "카드 등록에 실패했습니다.",
+      );
     }
   };
 

@@ -7,6 +7,10 @@ export interface CardRegisterRequest {
   issuerCode: string;
 }
 
+export interface CardRegisterResponse {
+  id: string;
+}
+
 export interface CardListItem {
   id: string;
   issuerCode: string;
@@ -16,7 +20,9 @@ export interface CardListItem {
 
 export type CardListResponse = CardListItem[];
 
-export const registerCard = async (card: CardRegisterRequest) => {
+export const registerCard = async (
+  card: CardRegisterRequest,
+): Promise<CardRegisterResponse> => {
   const response = await fetch("/cards", {
     method: "POST",
     headers: {
@@ -26,9 +32,15 @@ export const registerCard = async (card: CardRegisterRequest) => {
   });
 
   if (!response.ok) {
-    const error = (await response.json()) as ApiErrorResponse;
-    throw new ApiError(error);
+    if (response.status === 400) {
+      const error = (await response.json()) as ApiErrorResponse;
+      throw new ApiError(error);
+    }
+
+    throw new Error("카드 등록에 실패했습니다.");
   }
+
+  return response.json();
 };
 
 export const getCards = async (): Promise<CardListResponse> => {
