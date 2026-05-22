@@ -1,7 +1,8 @@
 import type { IssuerCode } from "../cardIssuer";
+import type { CardRegisterErrorCode } from "./cards.error";
 
-export type CardRegisterError = {
-  code: string;
+export type CardRegisterErrorResponse = {
+  code: CardRegisterErrorCode;
   message: string;
 };
 

@@ -1,6 +1,7 @@
+import { CardRegisterError } from "./cards.error";
 import type {
   CardListResponseItem,
-  CardRegisterError,
+  CardRegisterErrorResponse,
   CardRegisterRequestBody,
 } from "./cards.types";
 
@@ -18,8 +19,8 @@ export const requestRegisterCard = async (
   });
 
   if (!response.ok) {
-    const error: CardRegisterError = await response.json();
-    throw error;
+    const errorResponse: CardRegisterErrorResponse = await response.json();
+    throw new CardRegisterError(errorResponse.message, errorResponse.code);
   }
 
   return response.json();

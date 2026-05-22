@@ -31,10 +31,8 @@ import {
   getcardNumberEachChunkLength,
   type CardNumber,
 } from "../../../../domain/card/cardNumber";
-import type {
-  CardRegisterError,
-  CardRegisterRequestBody,
-} from "../../../../domain/card/api/cards.types";
+import { type CardRegisterRequestBody } from "../../../../domain/card/api/cards.types";
+import { CardRegisterError } from "../../../../domain/card/api/cards.error";
 
 const CardRegisterForm = ({
   cardInfo,
@@ -134,27 +132,24 @@ const CardRegisterForm = ({
     );
   };
 
-  const handleRegisterError = (error: Error | CardRegisterError) => {
-    if (!("code" in error)) {
-      alert("카드 등록 중 에러가 발생했습니다.");
-      return;
+  const handleRegisterError = (error: CardRegisterError) => {
+    switch (error.code) {
+      case "INVALID_CVC":
+        updateCvcErrorMessage(error.message);
+        break;
+
+      case "INVALID_CARD_NUMBER":
+        updateCardNumberErrorMessage(error.message);
+        break;
+
+      case "INVALID_EXPIRATION_DATE":
+        updateExpiryDateErrorMessage(error.message);
+        break;
+
+      default:
+        alert("일치하는 에러코드가 존재하지 않습니다.");
+        break;
     }
-
-    const fieldErrorHandlers = {
-      INVALID_CARD_NUMBER: updateCardNumberErrorMessage,
-      INVALID_CVC: updateCvcErrorMessage,
-      INVALID_EXPIRATION_DATE: updateExpiryDateErrorMessage,
-    };
-
-    const updateFieldError =
-      fieldErrorHandlers[error.code as keyof typeof fieldErrorHandlers];
-
-    if (updateFieldError) {
-      updateFieldError(error.message);
-      return;
-    }
-
-    alert("카드 등록 중 에러가 발생했습니다.");
   };
 
   const joinedCardNumber = cardNumbers.join("");
