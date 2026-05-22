@@ -1,7 +1,7 @@
 const initMsw = async () => {
-  // if (process.env.NODE_ENV !== 'development') {
-  //   return;
-  // }
+  if (import.meta.env.VITE_ENABLE_MSW !== 'true') {
+    return;
+  }
 
   const { worker } = await import('./browser');
   return worker.start({
