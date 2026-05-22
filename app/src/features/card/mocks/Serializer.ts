@@ -1,4 +1,4 @@
-import { Validator } from "./validators/CardValidator";
+import { Validator } from "../validators/CardValidator";
 
 export const CardSerializer = {
   validate(data: { number: string; expirationDate: string; cvc: string }) {

@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { CardSerializer } from "../Serializer";
+import { CardSerializer } from "./Serializer";
 import db from "./db";
 
 export const handlers = [
