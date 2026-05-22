@@ -41,7 +41,7 @@ export function createDigitFieldValidations(length: number): ValidationRule[] {
   ]
 }
 
-export function getCardNetwork(cardNumberSegments: CardNumberSegments): CardNetwork | null {
+export function getCardNetwork(cardNumberSegments: CardNumberSegments): CardNetwork | undefined {
   const cardNumber = cardNumberSegments.join("");
 
   for (const [network, config] of Object.entries(CARD_NETWORK)) {
@@ -51,6 +51,6 @@ export function getCardNetwork(cardNumberSegments: CardNumberSegments): CardNetw
     if (matches) return network as CardNetwork;
   }
 
-  return null;
+  return undefined;
 }
 

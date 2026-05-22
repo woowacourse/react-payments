@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { CARD_ISSUER } from '../../constants';
+import { CARD_ISSUER, CARD_ISSUER_CODE_ALIAS_MAPPER } from '../../constants';
 import Button from '../Common/Button';
 import Flex from '../Common/Flex';
 import Text from '../Common/Text';
@@ -16,7 +16,8 @@ export default function CardItem(props: { data: Card; onDelete: () => void }) {
   });
 
   const issuer = useMemo(() => {
-    return Object.entries(CARD_ISSUER).find(([, info]) => info.issuerCode === props.data.issuerCode);
+    const alias = CARD_ISSUER_CODE_ALIAS_MAPPER[props.data.issuerCode];
+    return alias ? CARD_ISSUER[alias] : undefined;
   }, [props.data.issuerCode]);
 
   const cardNumberSegments = useMemo(() => {
@@ -53,11 +54,12 @@ export default function CardItem(props: { data: Card; onDelete: () => void }) {
           width: 64px;
           height: 40px;
           border-radius: var(--radius-s);
-          background-color: var(--color-card-${issuer?.[0]}, var(--color-gray-400));
+          /* stylelint-disable-next-line custom-property-pattern */
+          background-color: var(--color-card-${issuer?.alias ?? 'background'}, var(--color-card-background));
         `}
       ></Flex>
       <Flex direction="column" flexGrow={1}>
-        <Text size="l">{issuer?.[1].label ?? '알 수 없는 카드'}</Text>
+        <Text size="l">{issuer?.label ?? '알 수 없는 카드'}</Text>
         <Flex gap={4}>
           {cardNumberSegments.map((segment, segmentIndex) => (
             <Text.Span key={segmentIndex} size="s" color="description">

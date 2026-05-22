@@ -11,7 +11,7 @@ export function createErrorResponse(code: AddCardErrorCode) {
 export function validateCardNumber(cardNumber: string) {
   const cardNetwork = getCardNetwork([cardNumber]);
 
-  if (cardNetwork === null) return false;
+  if (cardNetwork === undefined) return false;
 
   return validateDigits(cardNumber)
     && validateStringLength(cardNumber, CARD_NETWORK[cardNetwork].cardNumberLength);

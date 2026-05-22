@@ -17,20 +17,23 @@ export const DEFAULT_CARD_NUMBER_SEGMENT_LENGTH = 4;
 export const UNMASKED_CARD_NUMBER_SEGMENT_COUNT = 2;
 
 export const CARD_ISSUER = {
-  bc: { issuerCode: "31", label: "BC카드" },
-  shinhan: { issuerCode: "41", label: "신한카드" },
-  kakao: { issuerCode: "15", label: "카카오뱅크" },
-  hyundai: { issuerCode: "61", label: "현대카드" },
-  woori: { issuerCode: "W1", label: "우리카드" },
-  lotte: { issuerCode: "71", label: "롯데카드" },
-  hana: { issuerCode: "21", label: "하나카드" },
-  kookmin: { issuerCode: "11", label: "국민카드" },
+  bc: { alias: "bc", issuerCode: "31", label: "BC카드" },
+  shinhan: { alias: "shinhan", issuerCode: "41", label: "신한카드" },
+  kakao: { alias: "kakao", issuerCode: "15", label: "카카오뱅크" },
+  hyundai: { alias: "hyundai", issuerCode: "61", label: "현대카드" },
+  woori: { alias: "woori", issuerCode: "W1", label: "우리카드" },
+  lotte: { alias: "lotte", issuerCode: "71", label: "롯데카드" },
+  hana: { alias: "hana", issuerCode: "21", label: "하나카드" },
+  kookmin: { alias: "kookmin", issuerCode: "11", label: "국민카드" },
 } as const
 
 export const CARD_ISSUER_CODES = Object.values(CARD_ISSUER).map(({ issuerCode }) => issuerCode);
 
+export const CARD_ISSUER_CODE_ALIAS_MAPPER = Object.fromEntries(Object.values(CARD_ISSUER).map((info) => [info["issuerCode"], info["alias"]]));
+
 export const CARD_NETWORK = {
   "VISA": {
+    alias: "visa",
     startPatterns: [{
       regex: /^4/,
       minMatchLength: 1,
@@ -40,6 +43,7 @@ export const CARD_NETWORK = {
     cardNumberLength: 16,
   },
   "MasterCard": {
+    alias: "mastercard",
     startPatterns: [{
       regex: /^(51|52|53|54|55)/,
       minMatchLength: 2,
@@ -49,6 +53,7 @@ export const CARD_NETWORK = {
     cardNumberLength: 16,
   },
   "Diners": {
+    alias: "diners",
     startPatterns: [{
       regex: /^36/,
       minMatchLength: 2,
@@ -58,6 +63,7 @@ export const CARD_NETWORK = {
     cardNumberLength: 14,
   },
   "AMEX": {
+    alias: "amex",
     startPatterns: [{
       regex: /^(34|37)/,
       minMatchLength: 2,
@@ -67,6 +73,7 @@ export const CARD_NETWORK = {
     cardNumberLength: 15,
   },
   "UnionPay": {
+    alias: "unionpay",
     startPatterns: [
       {
         regex: /^(62[4-6])/,

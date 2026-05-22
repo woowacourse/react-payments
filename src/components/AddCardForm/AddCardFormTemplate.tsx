@@ -16,6 +16,8 @@ import useMutation from '../../hooks/useMutation';
 import Text from '../Common/Text';
 import View from '../Common/View';
 import Form from '../Common/Form';
+import { CARD_ISSUER, CARD_ISSUER_CODE_ALIAS_MAPPER } from '../../constants';
+import { useMemo } from 'react';
 
 function isErrorResponse(data: AddCardSuccess | AddCardError | null): data is AddCardError {
   return data && Object.prototype.hasOwnProperty.call(data, 'code') ? true : false;
@@ -32,6 +34,11 @@ function AddCardFormTemplate() {
     onSuccess: () => navigate('/cards'),
   });
 
+  const issuer = useMemo(() => {
+    const alias = form.cardIssuer.value !== '' ? CARD_ISSUER_CODE_ALIAS_MAPPER[form.cardIssuer.value] : undefined;
+    return alias ? CARD_ISSUER[alias] : undefined;
+  }, [form.cardIssuer.value]);
+
   const handleFormAction = async () => {
     const requestBody = {
       number: form.formValue.cardNumberSegments.join(''),
@@ -47,7 +54,7 @@ function AddCardFormTemplate() {
     <View>
       <Form action={handleFormAction} disabled={mutation.status === 'loading'}>
         <CardPreview
-          issuer={form.formValue.cardIssuer}
+          issuer={issuer?.alias}
           network={getCardNetwork(form.formValue.cardNumberSegments)}
           numberSegments={form.formValue.cardNumberSegments}
           expiryDate={form.formValue.cardExpiryDate}

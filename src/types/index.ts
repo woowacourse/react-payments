@@ -12,7 +12,7 @@ export interface CardFormState {
   cardPassword: string;
   cardValidationCode: string;
   cardExpiryDate: CardExpiryDate
-  cardIssuer: CardIssuer | null;
+  cardIssuer: CardIssuer | "";
   cardNumberSegments: CardNumberSegments;
 };
 

@@ -33,8 +33,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    issuer: null,
-    network: null,
+    issuer: undefined,
+    network: undefined,
     numberSegments: ['', '', '', ''],
     expiryDate: ['', ''],
   },
@@ -70,7 +70,7 @@ export const AMEX: Story = {
 export const UnknownNetwork: Story = {
   args: {
     issuer: 'kakao',
-    network: null,
+    network: undefined,
     numberSegments: ['9999', '1234', '5678', '9012'],
     expiryDate: ['03', '30'],
   },
@@ -78,7 +78,7 @@ export const UnknownNetwork: Story = {
 
 export const PartiallyFilled: Story = {
   args: {
-    issuer: null,
+    issuer: undefined,
     network: 'VISA',
     numberSegments: ['4123', '4567', '', ''],
     expiryDate: ['12', ''],
