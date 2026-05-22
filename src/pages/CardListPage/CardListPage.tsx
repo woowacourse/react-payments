@@ -4,7 +4,7 @@ import Error from "./components/Error/Error";
 import Loading from "./components/Loading/Loading";
 import Empty from "./components/Empty/Empty";
 
-import { useCardList } from "./components/useCardList";
+import { useCardList } from "./components/useCardListQuery";
 
 const CardListPage = () => {
   const {
