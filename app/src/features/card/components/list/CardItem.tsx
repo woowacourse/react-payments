@@ -36,7 +36,7 @@ export default function CardItem({
           type="button"
           onClick={() => handleDeleteCard(id)}
         >
-          <img src={CardItemDeleteSVG} />
+          <img src={CardItemDeleteSVG} alt="카드 삭제" />
         </CardItemDeleteButton>
       </CardContentContainer>
     </CardItemContainer>
