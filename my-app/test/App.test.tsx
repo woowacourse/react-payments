@@ -10,6 +10,7 @@ import CardListPage from '../src/pages/CardListPage/CardListPage';
 import CardAddPage from '../src/pages/CardAddPage/CardAddPage';
 import { mockDB } from '../src/mocks/mockDB';
 import CardAddSuccessPage from '../src/pages/CardAddSuccessPage/CardAddSuccessPage';
+import * as confirmDialog from '../src/utils/confirmDialog';
 
 const API_BASE = import.meta.env.BASE_URL;
 
@@ -155,7 +156,7 @@ describe('카드 리스트 페이지 통합 테스트', () => {
     mockDB.saveCards(mockCards);
 
     // window.confirm이 뜨면 무조건 확인
-    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    vi.spyOn(confirmDialog, 'confirmDialog').mockResolvedValue(true);
 
     render(
       <MemoryRouter initialEntries={['/']}>
@@ -177,7 +178,7 @@ describe('카드 리스트 페이지 통합 테스트', () => {
     await userEvent.click(deleteButtons[0]);
 
     // 컨펌 창이 떴는지 확인
-    expect(window.confirm).toHaveBeenCalledWith('카드를 삭제하시겠습니까?');
+    expect(confirmDialog.confirmDialog).toHaveBeenCalledWith('카드를 삭제하시겠습니까?');
 
     // 첫 번째 카드가 지워지고 1개만 남았는지, 상단 개수 텍스트가 (1)로 변했는지 확인
     await waitFor(() => {

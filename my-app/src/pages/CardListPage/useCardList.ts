@@ -3,6 +3,7 @@ import { useAsync } from '../../components/common/commonHooks/useAsync';
 import { useNavigate } from 'react-router-dom';
 import { cardRepository } from '../../repository/RepositoryChanger';
 import type { Card } from '../../types/card';
+import { confirmDialog } from '../../utils/confirmDialog';
 
 export const useCardList = () => {
   const navigate = useNavigate();
@@ -21,9 +22,8 @@ export const useCardList = () => {
   };
 
   const handleCardDelete = async (id: string) => {
-    if (!window.confirm('카드를 삭제하시겠습니까?')) {
-      return;
-    }
+    const isConfirmed = await confirmDialog('카드를 삭제하시겠습니까?');
+    if (!isConfirmed) return;
 
     try {
       await cardRepository.deleteCard(id);
