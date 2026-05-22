@@ -181,6 +181,10 @@ const CardRegisterForm = ({
             updateExpiryDateErrorMessage(error.message);
             break;
 
+          case "INVALID_ISSUER_CODE":
+            alert(error.message);
+            break;
+
           default:
             alert("일치하는 에러코드가 존재하지 않습니다.");
             break;

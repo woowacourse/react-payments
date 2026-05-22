@@ -1,5 +1,6 @@
 import { delay, http, HttpResponse } from "msw";
 import { CARD_BRAND } from "../domain/card/cardBrand";
+import { ISSUER, type IssuerCode } from "../domain/card/cardIssuer";
 import type {
   CardListResponseItem,
   CardRegisterRequestBody,
@@ -34,14 +35,17 @@ const postCardHandler = http.post(`${BASE_URL}/cards`, async ({ request }) => {
   const body = (await request.json()) as CardRegisterRequestBody;
   const id = crypto.randomUUID().toString();
 
-  const card: CardListResponseItem = {
-    id,
-    issuerCode: body.issuerCode,
-    number: body.number,
-    expirationDate: body.expirationDate,
-  };
-
   await delay(1200);
+
+  if (!isIssuerCode(body.issuerCode)) {
+    return HttpResponse.json(
+      {
+        code: "INVALID_ISSUER_CODE",
+        message: "유효하지 않은 카드사입니다.",
+      },
+      { status: 400 },
+    );
+  }
 
   if (!validateCardBrand(body.number)) {
     return HttpResponse.json(
@@ -73,6 +77,13 @@ const postCardHandler = http.post(`${BASE_URL}/cards`, async ({ request }) => {
     );
   }
 
+  const card: CardListResponseItem = {
+    id,
+    issuerCode: body.issuerCode,
+    number: body.number,
+    expirationDate: body.expirationDate,
+  };
+
   cards.push(card);
 
   return HttpResponse.json({ id: id }, { status: 201 });
@@ -99,6 +110,10 @@ export const handlers = [
   postCardHandler,
   deleteCardHandler,
 ];
+
+const isIssuerCode = (issuerCode: string): issuerCode is IssuerCode => {
+  return issuerCode in ISSUER;
+};
 
 const validateCardBrand = (cardNumbers: string) => {
   const masterCardPrefix = Number(

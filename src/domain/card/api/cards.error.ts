@@ -1,7 +1,8 @@
 export type CardRegisterErrorCode =
   | "INVALID_CARD_NUMBER"
   | "INVALID_CVC"
-  | "INVALID_EXPIRATION_DATE";
+  | "INVALID_EXPIRATION_DATE"
+  | "INVALID_ISSUER_CODE";
 
 export class CardRegisterError extends Error {
   code: CardRegisterErrorCode;
