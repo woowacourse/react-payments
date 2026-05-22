@@ -1,7 +1,7 @@
 import type { Card, SendingData } from '../types/card';
-import type { CardRepositoryShell } from './CardRepositoryShell';
+import type { CardRepository } from './CardRepository';
 
-export class HttpCardRepository implements CardRepositoryShell {
+export class HttpCardRepository implements CardRepository {
   private API_BASE = import.meta.env.BASE_URL;
 
   async getCards(): Promise<Card[]> {

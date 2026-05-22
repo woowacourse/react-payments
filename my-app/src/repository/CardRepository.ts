@@ -1,6 +1,6 @@
 import type { Card, SendingData } from "../types/card";
 
-export interface CardRepositoryShell {
+export interface CardRepository {
   getCards(): Promise<Card[]>;
   postCard(sendingData: SendingData): Promise<{ id: string }>;
   deleteCard(id: string): Promise<void>;
