@@ -1,5 +1,5 @@
 import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
-import type CARD from "@constants/card";
+import type { CompanyKey } from "@constants/card";
 
 import type { CVCInputStatus } from "./components/CardCVCInputField/types";
 import type { InputStatus as CardNumberInputStatus } from "./components/CardNumberInputField/errorMessage";
@@ -7,7 +7,12 @@ import type { PasswordInputStatus } from "./components/CardPasswordField/types";
 import type { InputStatus as ValidityPeriodInputStatus } from "./components/CardValidityPeriodInputField/errorMessage";
 
 export type CardNumberStatusTuple =
-  | [CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus]
+  | [
+      CardNumberInputStatus,
+      CardNumberInputStatus,
+      CardNumberInputStatus,
+      CardNumberInputStatus,
+    ]
   | [CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus];
 
 export type ValidityPeriodStatus = {
@@ -19,9 +24,7 @@ export interface CardInfoFormState {
   validityPeriod: ValidityPeriod;
   CVC: string;
   password: string;
-  selectedCardCompany:
-    | (typeof CARD.COMPANY_SELECT_FIELD)[number]["value"]
-    | null;
+  selectedCardCompany: CompanyKey | null;
 
   cardNumberStatus: CardNumberStatusTuple;
   validityPeriodStatus: ValidityPeriodStatus;

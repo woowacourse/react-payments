@@ -1,13 +1,19 @@
-const COMPANY_SELECT_FIELD = [
-  { value: "BC", label: "BC카드", issuerCode: "31" },
-  { value: "SHINHAN", label: "신한카드", issuerCode: "41" },
-  { value: "KAKAOBANK", label: "카카오뱅크", issuerCode: "15" },
-  { value: "HYUNDAI", label: "현대카드", issuerCode: "61" },
-  { value: "WOORI", label: "우리카드", issuerCode: "W1" },
-  { value: "LOTTE", label: "롯데카드", issuerCode: "71" },
-  { value: "HANA", label: "하나카드", issuerCode: "21" },
-  { value: "KOOKMIN", label: "국민카드", issuerCode: "11" },
-] as const;
+const COMPANY_INFO = {
+  BC: { label: "BC카드", issuerCode: "31" },
+  SHINHAN: { label: "신한카드", issuerCode: "41" },
+  KAKAOBANK: { label: "카카오뱅크", issuerCode: "15" },
+  HYUNDAI: { label: "현대카드", issuerCode: "61" },
+  WOORI: { label: "우리카드", issuerCode: "W1" },
+  LOTTE: { label: "롯데카드", issuerCode: "71" },
+  HANA: { label: "하나카드", issuerCode: "21" },
+  KOOKMIN: { label: "국민카드", issuerCode: "11" },
+} as const;
+
+export type CompanyKey = keyof typeof COMPANY_INFO;
+
+const COMPANY_SELECT_FIELD = (Object.keys(COMPANY_INFO) as CompanyKey[]).map(
+  (key) => ({ value: key, ...COMPANY_INFO[key] }),
+);
 
 const NUMBER_LENGTH_BY_BRAND = {
   Visa: 16,
@@ -26,6 +32,7 @@ const UNIT_LENGTHS_BY_BRAND = {
 } as const;
 
 const CARD = {
+  COMPANY_INFO,
   COMPANY_SELECT_FIELD,
   NUMBER_LENGTH_BY_BRAND,
   UNIT_LENGTHS_BY_BRAND,

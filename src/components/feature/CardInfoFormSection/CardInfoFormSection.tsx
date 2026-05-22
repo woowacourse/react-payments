@@ -25,25 +25,27 @@ const CardInfoFormSection = () => {
     event.preventDefault();
 
     const cardNumber = getValue("cardNumber").join("");
-    const cardCompany = getValue("selectedCardCompany") ?? "";
+    const selectedCardCompany = getValue("selectedCardCompany");
+    if (!selectedCardCompany) return;
     const cvc = getValue("CVC");
     const { month, year } = getValue("validityPeriod");
     const expirationDate = `${month}/${year}`;
 
-    // TODO: 타입 안전하게 변경하기
-    const issuerCode = CARD.COMPANY_SELECT_FIELD.find(
-      (field) => field.value === cardCompany,
-    )?.issuerCode;
+    const { issuerCode } = CARD.COMPANY_INFO[selectedCardCompany];
 
     const cardInfo = {
       number: cardNumber,
       expirationDate,
       cvc,
-      issuerCode: issuerCode!,
+      issuerCode,
     };
 
     registerCard(cardInfo, {
-      onSuccess: () => navigateToCompletePage({ cardNumber, cardCompany }),
+      onSuccess: () =>
+        navigateToCompletePage({
+          cardNumber,
+          cardCompany: selectedCardCompany,
+        }),
       onError: (error) => {
         if (error instanceof ApiError && isCardErrorCode(error.code)) {
           const { code } = error;

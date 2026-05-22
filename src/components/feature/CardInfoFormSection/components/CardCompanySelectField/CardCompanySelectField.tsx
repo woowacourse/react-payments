@@ -1,9 +1,7 @@
 import SelectField from "@components/common/SelectField";
-import { default as CARD } from "@constants/card";
+import CARD, { type CompanyKey } from "@constants/card";
 
 import { useFormValue } from "../../formContext";
-
-type CardCompanySelectFieldOption = (typeof CARD.COMPANY_SELECT_FIELD)[number];
 
 interface CardCompanySelectFieldProps {
   onComplete?: () => void;
@@ -17,7 +15,7 @@ const CardCompanySelectField = ({
 
   return (
     <>
-      <SelectField<CardCompanySelectFieldOption["value"]>
+      <SelectField<CompanyKey>
         title="카드사를 선택해 주세요"
         caption="현재 국내 카드사만 가능합니다."
         options={[...CARD.COMPANY_SELECT_FIELD]}
