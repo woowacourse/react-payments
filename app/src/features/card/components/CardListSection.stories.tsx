@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Loading: Story = {
   args: {
-    status: "pending",
+    status: "loading",
     cards: [
       {
         id: "1234-1234-1234-1234-1234",
@@ -62,7 +62,7 @@ export const Loading: Story = {
 
 export const Empty: Story = {
   args: {
-    status: "empty",
+    status: "success",
     cards: [],
     handleDeleteCard: fn(),
   },

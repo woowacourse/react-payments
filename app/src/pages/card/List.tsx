@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { getCards, deleteCard } from "../../features/card/Api";
 import CardListSection from "../../features/card/components/CardListSection";
-import type { CardListStatus } from "../../features/card/components/CardListSection";
+import { type AsyncStatus } from "../../features/common/Types";
 
 export default function CardListPage() {
   const [cards, setCards] = useState([]);
-  const [status, setStatus] = useState<CardListStatus>("pending");
+  const [status, setStatus] = useState<AsyncStatus>("idle");
 
   const fetchCards = async () => {
+    setStatus("loading");
     try {
       const allCards = await getCards();
       const fetched = allCards ?? [];
       setCards(fetched);
-      setStatus(fetched.length ? "success" : "empty");
+      setStatus("success");
     } catch {
       setStatus("error");
     }

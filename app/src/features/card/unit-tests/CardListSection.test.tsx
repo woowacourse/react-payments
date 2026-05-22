@@ -5,6 +5,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router";
 import CardListSection from "../components/CardListSection";
+import { type AsyncStatus } from "../../common/Types";
 import type { Card } from "../types";
 
 const CARDS = [
@@ -24,12 +25,7 @@ const CARDS = [
   },
 ];
 
-function renderCardListSection(
-  cards: Card[] = [],
-  status: "pending" | "empty" | "success" | "error" = cards.length
-    ? "success"
-    : "empty",
-) {
+function renderCardListSection(cards: Card[] = [], status: AsyncStatus) {
   const user = userEvent.setup();
   render(
     <MemoryRouter initialEntries={["/"]}>
@@ -53,7 +49,7 @@ function renderCardListSection(
 
 describe("CardListSection 통합 테스트", () => {
   test("카드가 없을 때 빈 상태 UI가 렌더링된다", () => {
-    renderCardListSection([]);
+    renderCardListSection([], "success");
 
     expect(screen.getByText("등록된 카드가 없습니다")).toBeInTheDocument();
     expect(
@@ -62,7 +58,7 @@ describe("CardListSection 통합 테스트", () => {
   });
 
   test("카드가 있을 때 카드 목록이 렌더링된다", () => {
-    renderCardListSection(CARDS);
+    renderCardListSection(CARDS, "success");
 
     expect(
       screen.queryByText("등록된 카드가 없습니다"),
@@ -71,7 +67,7 @@ describe("CardListSection 통합 테스트", () => {
   });
 
   test("빈 상태에서 카드 추가하기 클릭 시 카드 추가 페이지로 이동한다", async () => {
-    const { user } = renderCardListSection([]);
+    const { user } = renderCardListSection([], "success");
 
     await user.click(screen.getByRole("link", { name: "카드 추가하기" }));
 

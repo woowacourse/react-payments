@@ -3,9 +3,8 @@ import EmptyCardList from "./list/EmptyCardList";
 import CardListPanel from "./list/CardListPanel";
 import CardListSkeleton from "./list/CardListSkeleton";
 import CardListError from "./list/CardListError";
+import { type AsyncStatus } from "../../common/Types";
 import type { Card } from "../types";
-
-export type CardListStatus = "pending" | "empty" | "success" | "error";
 
 export default function CardListSection({
   cards,
@@ -13,18 +12,20 @@ export default function CardListSection({
   handleDeleteCard,
 }: {
   cards: Card[];
-  status: CardListStatus;
+  status: AsyncStatus;
   handleDeleteCard: (id: string) => void;
 }) {
   return (
     <CardListSectionContainer>
       <h1>보유 카드 {status === "success" ? `(${cards.length})` : ""}</h1>
       <Content>
-        {status === "pending" && <CardListSkeleton count={cards.length} />}
-        {status === "empty" && <EmptyCardList />}
-        {status === "success" && (
-          <CardListPanel handleDeleteCard={handleDeleteCard} cards={cards} />
-        )}
+        {status === "loading" && <CardListSkeleton count={cards.length} />}
+        {status === "success" &&
+          (cards.length ? (
+            <CardListPanel handleDeleteCard={handleDeleteCard} cards={cards} />
+          ) : (
+            <EmptyCardList />
+          ))}
         {status === "error" && <CardListError></CardListError>}
       </Content>
     </CardListSectionContainer>
