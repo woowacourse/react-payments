@@ -92,7 +92,6 @@ export default function CardAddPage() {
                     value={cardNumberValues}
                     serverError={cardNumberServerError}
                 />
-                {isAllSatisfy && <ConfirmButtonSpacer />}
             </InputSectionContainer>
             {isAllSatisfy && (
                 <ConfirmButtonContainer>
@@ -103,35 +102,31 @@ export default function CardAddPage() {
     );
 }
 
+const MainContainer = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    padding-top: 77px;
+    overflow: hidden;
+`;
+
 const InputSectionContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
     overflow-y: auto;
-    max-height: 60vh;
-`;
-
-const ConfirmButtonSpacer = styled.div`
-    height: 44px;
-    flex-shrink: 0;
-`;
-
-const MainContainer = styled.main`
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 45px;
-    top: 77px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 375px;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    margin-top: 45px;
+    padding: 0 16px 16px;
+    box-sizing: border-box;
 `;
 
 const ConfirmButtonContainer = styled.div`
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 375px;
+    flex-shrink: 0;
+    width: 100%;
 `;
