@@ -63,6 +63,9 @@ export const handlers = [
     const cards = mockDB.getCards();
 
     const maskingCards = cards.map((card) => {
+      if (card.number.length <= 10) {
+        return card;
+      }
       const prefix = card.number.slice(0, 6);
       const suffix = card.number.slice(-4);
       const maskingLength = card.number.length - 10;
