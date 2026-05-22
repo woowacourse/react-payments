@@ -2,26 +2,16 @@ import styled from "styled-components";
 
 import { getIssuerInformationByCode } from "../../../../../domain/card/cardIssuer";
 import type { CardListResponseItem } from "../../../../../domain/card/api/cards.types";
-import type { AsyncState } from "../../../../../shared/hooks/useAsyncState";
+import { useDeleteCardMutation } from "./useDeleteCardMutation";
 
 type CardItemProps = {
   cardItemInformaiton: CardListResponseItem;
-  onDeleteCard: (
-    cardId: string,
-    options?: {
-      onSuccess?: () => void;
-      onError?: (error: Error) => void;
-    },
-  ) => void;
-  deleteCardAsyncState: AsyncState;
+  onDeleteCard: (cardId: string) => void;
 };
 
-const CardItem = ({
-  cardItemInformaiton,
-  onDeleteCard,
-  deleteCardAsyncState,
-}: CardItemProps) => {
+const CardItem = ({ cardItemInformaiton, onDeleteCard }: CardItemProps) => {
   const { id, issuerCode, number, expirationDate } = cardItemInformaiton;
+  const { asyncState, deleteCardById } = useDeleteCardMutation();
   const issuer = getIssuerInformationByCode(issuerCode);
 
   const handleCardDeleteClick = (cardId: string) => {
@@ -29,8 +19,9 @@ const CardItem = ({
     if (!result) {
       return;
     }
-    onDeleteCard(cardId, {
+    deleteCardById(cardId, {
       onError: () => alert("카드 삭제에 실패했습니다."),
+      onSuccess: () => onDeleteCard(cardId),
     });
   };
 
@@ -48,7 +39,7 @@ const CardItem = ({
       </CardInformationBox>
       <DeleteButton
         onClick={() => handleCardDeleteClick(id)}
-        disabled={deleteCardAsyncState === "loading"}
+        disabled={asyncState === "loading"}
       >
         X
       </DeleteButton>

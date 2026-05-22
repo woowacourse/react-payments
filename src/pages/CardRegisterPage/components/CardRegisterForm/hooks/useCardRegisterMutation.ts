@@ -3,7 +3,7 @@ import { CardRegisterError } from "../../../../../domain/card/api/cards.error";
 import type { CardRegisterRequestBody } from "../../../../../domain/card/api/cards.types";
 import { useAsyncState } from "../../../../../shared/hooks/useAsyncState";
 
-export const useCardRegister = () => {
+export const useCardRegisterMutation = () => {
   const { asyncState, setLoading, setSuccess, setError } = useAsyncState();
 
   const registerCard = async (

@@ -3,35 +3,26 @@ import styled from "styled-components";
 import Error from "./components/Error/Error";
 import Loading from "./components/Loading/Loading";
 import Empty from "./components/Empty/Empty";
-
-import { useCardList } from "./components/useCardListQuery";
+import { useCardListQuery } from "./components/useCardListQuery";
 
 const CardListPage = () => {
-  const {
-    fetchCardListAsyncState,
-    deleteCardAsyncState,
-    cardList,
-    deleteCardById,
-    loadCardList,
-  } = useCardList();
+  const { asyncState, cardList, loadCardList, deleteCardFromState } =
+    useCardListQuery();
 
   return (
     <CardListPageLayout>
       <HasCardCountSpan>
         보유 카드 {cardList && cardList.length !== 0 && `(${cardList.length})`}
       </HasCardCountSpan>
-      {fetchCardListAsyncState === "success" && cardList.length === 0 && (
-        <Empty />
-      )}
-      {fetchCardListAsyncState === "success" && cardList.length !== 0 && (
+      {asyncState === "success" && cardList.length === 0 && <Empty />}
+      {asyncState === "success" && cardList.length !== 0 && (
         <Success
           cardList={cardList}
-          deleteCard={deleteCardById}
-          deleteCardAsyncState={deleteCardAsyncState}
+          deleteCardFromState={deleteCardFromState}
         />
       )}
-      {fetchCardListAsyncState === "error" && <Error onRetry={loadCardList} />}
-      {fetchCardListAsyncState === "loading" && <Loading />}
+      {asyncState === "error" && <Error onRetry={loadCardList} />}
+      {asyncState === "loading" && <Loading />}
     </CardListPageLayout>
   );
 };

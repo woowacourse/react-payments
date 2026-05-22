@@ -6,7 +6,6 @@ import NumberField from "./CardNumberField/CardNumberField";
 import CardCompanySelectField from "./IssuerField/IssuerField";
 import PasswordField from "./PasswordField/PasswordField";
 import BaseButton from "../../../../shared/components/Button/BaseButton";
-import { useCardRegister } from "./hooks/useCardRegister";
 import { useCardRegisterFormError } from "./hooks/useCardRegisterFormError";
 import { useNavigate } from "react-router-dom";
 import { useFormStep } from "./hooks/useFormStep";
@@ -33,6 +32,7 @@ import {
 } from "../../../../domain/card/cardNumber";
 import { type CardRegisterRequestBody } from "../../../../domain/card/api/cards.types";
 import { CardRegisterError } from "../../../../domain/card/api/cards.error";
+import { useCardRegisterMutation } from "./hooks/useCardRegisterMutation";
 
 const CardRegisterForm = ({
   cardInfo,
@@ -54,7 +54,7 @@ const CardRegisterForm = ({
       password: "",
     });
 
-  const { asyncState, registerCard } = useCardRegister();
+  const { asyncState, registerCard } = useCardRegisterMutation();
   const {
     formErrorMessages,
     updateCardNumberErrorMessage,
