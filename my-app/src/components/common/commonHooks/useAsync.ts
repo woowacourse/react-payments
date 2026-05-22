@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 type AsyncStatus = 'idle' | 'loading' | 'success' | 'error';
 
@@ -15,7 +15,11 @@ export const useAsync = <T>() => {
     error: null,
   });
 
+  const idRef = useRef(0);
+
   const run = useCallback(async (asyncFunction: () => Promise<T>) => {
+    const currentIdRef = ++idRef.current;
+
     setState({
       status: 'loading',
       data: null,
@@ -24,6 +28,9 @@ export const useAsync = <T>() => {
 
     try {
       const data = await asyncFunction();
+
+      if (currentIdRef !== idRef.current) return undefined;
+
       setState({
         status: 'success',
         data,
@@ -31,6 +38,7 @@ export const useAsync = <T>() => {
       });
       return data;
     } catch (error) {
+      if (currentIdRef !== idRef.current) return undefined;
       setState({
         status: 'error',
         data: null,
