@@ -35,7 +35,10 @@ const toRequestBody = (formValue: FormValue) => ({
 export default function useAddCard(formValue: FormValue) {
   const [serverValidationError, setServerValidationError] = useState<ServerValidationError>(null);
 
+  const clearServerValidationError = () => setServerValidationError(null);
+
   const requestAddCard = async (): Promise<AddCardResult> => {
+    clearServerValidationError();
     try {
       await addCard(toRequestBody(formValue));
       return { status: 'success' };
@@ -49,8 +52,6 @@ export default function useAddCard(formValue: FormValue) {
       return { status: 'error' };
     }
   };
-
-  const clearServerValidationError = () => setServerValidationError(null);
 
   return { requestAddCard, serverValidationError, clearServerValidationError };
 }
