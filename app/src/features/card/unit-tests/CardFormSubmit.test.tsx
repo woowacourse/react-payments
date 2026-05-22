@@ -4,14 +4,14 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router";
-import CardCreate from "../components/CardCreate";
+import CardRegisterSection from "../components/CardRegisterSection";
 
 function renderCardCreate() {
   const user = userEvent.setup();
   render(
     <MemoryRouter initialEntries={["/"]}>
       <Routes>
-        <Route path="/" element={<CardCreate />} />
+        <Route path="/" element={<CardRegisterSection />} />
         <Route path="/card/create/done" element={<div>카드 생성 완료</div>} />
       </Routes>
     </MemoryRouter>,

@@ -3,14 +3,15 @@ import { CARD_BRAND } from "../Constants";
 import styled from "@emotion/styled";
 import { RadiusButton } from "../style/Button";
 import CreateCompleteCheck from "../../../app/assets/check.svg";
-export default function CardCreateComplete() {
+
+export default function CardRegisterCompleteSection() {
   const { firstDigitsCardNumber, cardBrand } = (useLocation().state ?? {}) as {
     firstDigitsCardNumber: string;
     cardBrand: keyof typeof CARD_BRAND;
   };
   const navigate = useNavigate();
   return (
-    <RootContainer>
+    <CardRegisterCompleteSectionContainer>
       <CardCreateCompleteContent>
         <CreateCompleteSVG
           src={CreateCompleteCheck}
@@ -24,11 +25,11 @@ export default function CardCreateComplete() {
           확인
         </RadiusButton>
       </CardCreateCompleteContent>
-    </RootContainer>
+    </CardRegisterCompleteSectionContainer>
   );
 }
 
-const RootContainer = styled.div`
+const CardRegisterCompleteSectionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

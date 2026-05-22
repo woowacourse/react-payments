@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within, expect } from "storybook/test";
 
-import CardCreate from "./CardCreate";
+import CardRegisterSection from "./CardRegisterSection";
 import { withCardRouter } from "./storybook/decorators";
 
 const meta = {
-  title: "Card/CardCreate",
-  component: CardCreate,
+  title: "Card/CardRegisterSection",
+  component: CardRegisterSection,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CardCreate>;
+} satisfies Meta<typeof CardRegisterSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -82,7 +82,9 @@ export const AmexBrandDetection: Story = {
     const firstDigitsInput =
       canvasElement.querySelector<HTMLInputElement>("#first-digits")!;
     await userEvent.type(firstDigitsInput, "34");
-    let brandLogo: HTMLElement | null = canvas.getByAltText("amex-network-brand-logo");
+    let brandLogo: HTMLElement | null = canvas.getByAltText(
+      "amex-network-brand-logo",
+    );
     await expect(brandLogo).toBeInTheDocument();
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(
@@ -105,7 +107,9 @@ export const DinersBrandDetection: Story = {
     const firstDigitsInput =
       canvasElement.querySelector<HTMLInputElement>("#first-digits")!;
     await userEvent.type(firstDigitsInput, "36");
-    let brandLogo: HTMLElement | null = canvas.getByAltText("diners-network-brand-logo");
+    let brandLogo: HTMLElement | null = canvas.getByAltText(
+      "diners-network-brand-logo",
+    );
     await expect(brandLogo).toBeInTheDocument();
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(

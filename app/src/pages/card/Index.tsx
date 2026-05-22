@@ -3,7 +3,7 @@ import { getCards, deleteCard } from "../../features/card/Api";
 import CardListSection from "../../features/card/components/CardListSection";
 import { type AsyncStatus } from "../../features/common/Types";
 
-export default function CardListPage() {
+export default function CardIndexPage() {
   const [cards, setCards] = useState([]);
   const [status, setStatus] = useState<AsyncStatus>("idle");
 

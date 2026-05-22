@@ -5,7 +5,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import db from "../mocks/db";
-import CardListPage from "../../../pages/card/List";
+import CardIndexPage from "../../../pages/card/Index";
 
 const TEST_CARD = {
   id: "delete-test-card-id",
@@ -27,7 +27,7 @@ function renderCardItem() {
   const user = userEvent.setup();
   render(
     <MemoryRouter>
-      <CardListPage />
+      <CardIndexPage />
     </MemoryRouter>,
   );
   return { user };

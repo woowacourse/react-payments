@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { useNavigate } from "react-router";
 import { ExpiryDate } from "../ExpiryDate";
 
-export default function CardCreate() {
+export default function CardRegisterSection() {
   const [cardNumber, setCardNumber] = useState({
     firstDigits: "",
     secondDigits: "",
@@ -30,7 +30,7 @@ export default function CardCreate() {
   };
 
   return (
-    <CardContainer>
+    <CardRegisterSectionContainer>
       <CardPreview
         cardNumber={cardNumber}
         cardExpiryDate={cardExpiryDate}
@@ -49,11 +49,11 @@ export default function CardCreate() {
         setCardPassword={setCardPassword}
         gotoCreateCardDonePage={gotoCreateCardDonePage}
       />
-    </CardContainer>
+    </CardRegisterSectionContainer>
   );
 }
 
-const CardContainer = styled.div`
+const CardRegisterSectionContainer = styled.section`
   margin-bottom: auto;
   margin-top: auto;
 `;
