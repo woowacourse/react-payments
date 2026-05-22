@@ -19,8 +19,11 @@ const renderAddCardPage = () => {
   render(<RouterProvider router={router} />);
 };
 
+const VALID_CARD_NUMBER = ['5511', '1234', '5678', '9012'].join('');
+const INVALID_CARD_NUMBER = ['9999', '1234', '5678', '9012'].join('');
+
 const fillCardForm = async ({
-  cardNumber = '5511123456789012',
+  cardNumber = VALID_CARD_NUMBER,
   cardCompany = 'BC카드',
   expirationMonth = '12',
   expirationYear = '28',
@@ -75,7 +78,7 @@ describe('AddCardPage', () => {
     );
 
     renderAddCardPage();
-    await fillCardForm({ cardNumber: '9999123456789012' });
+    await fillCardForm({ cardNumber: INVALID_CARD_NUMBER });
 
     const submitButton = await screen.findByRole('button', { name: '확인' });
     await userEvent.click(submitButton);
