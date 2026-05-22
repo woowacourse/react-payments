@@ -2,11 +2,21 @@ import styled from "@emotion/styled";
 import CardItem from "./CardItem";
 import type { Card } from "../../types";
 
-export default function CardList({ cards }: { cards: Card[] }) {
+export default function CardList({
+  cards,
+  handleDeleteCard,
+}: {
+  cards: Card[];
+  handleDeleteCard: (id: string) => void;
+}) {
   return (
     <CardListContainer>
       {cards.map((cardData: Card) => (
-        <CardItem cardData={cardData} key={cardData.id} />
+        <CardItem
+          cardData={cardData}
+          key={cardData.id}
+          handleDeleteCard={handleDeleteCard}
+        />
       ))}
     </CardListContainer>
   );

@@ -10,9 +10,11 @@ export type CardListStatus = "pending" | "empty" | "success" | "error";
 export default function CardListSection({
   cards,
   status,
+  handleDeleteCard,
 }: {
   cards: Card[];
   status: CardListStatus;
+  handleDeleteCard: (id: string) => void;
 }) {
   return (
     <CardListSectionContainer>
@@ -20,7 +22,9 @@ export default function CardListSection({
       <Content>
         {status === "pending" && <CardListSkeleton count={cards.length} />}
         {status === "empty" && <EmptyCardList />}
-        {status === "success" && <CardListPanel cards={cards} />}
+        {status === "success" && (
+          <CardListPanel handleDeleteCard={handleDeleteCard} cards={cards} />
+        )}
         {status === "error" && <CardListError></CardListError>}
       </Content>
     </CardListSectionContainer>

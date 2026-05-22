@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 import { MemoryRouter } from "react-router";
 
 import CardListSection from "./CardListSection";
@@ -55,6 +56,7 @@ export const Loading: Story = {
         cvc: "000",
       },
     ],
+    handleDeleteCard: fn(),
   },
 };
 
@@ -62,6 +64,7 @@ export const Empty: Story = {
   args: {
     status: "empty",
     cards: [],
+    handleDeleteCard: fn(),
   },
 };
 
@@ -91,6 +94,7 @@ export const WithCards: Story = {
         cvc: "000",
       },
     ],
+    handleDeleteCard: fn(),
   },
 };
 
@@ -98,5 +102,6 @@ export const Error: Story = {
   args: {
     status: "error",
     cards: [],
+    handleDeleteCard: fn(),
   },
 };

@@ -24,12 +24,26 @@ const CARDS = [
   },
 ];
 
-function renderCardListSection(cards: Card[] = [], status: "pending" | "empty" | "success" | "error" = cards.length ? "success" : "empty") {
+function renderCardListSection(
+  cards: Card[] = [],
+  status: "pending" | "empty" | "success" | "error" = cards.length
+    ? "success"
+    : "empty",
+) {
   const user = userEvent.setup();
   render(
     <MemoryRouter initialEntries={["/"]}>
       <Routes>
-        <Route path="/" element={<CardListSection cards={cards} status={status} />} />
+        <Route
+          path="/"
+          element={
+            <CardListSection
+              cards={cards}
+              status={status}
+              handleDeleteCard={jest.fn()}
+            />
+          }
+        />
         <Route path="/card/create/" element={<div>카드 추가 페이지</div>} />
       </Routes>
     </MemoryRouter>,
@@ -42,13 +56,17 @@ describe("CardListSection 통합 테스트", () => {
     renderCardListSection([]);
 
     expect(screen.getByText("등록된 카드가 없습니다")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "카드 추가하기" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "카드 추가하기" }),
+    ).toBeInTheDocument();
   });
 
   test("카드가 있을 때 카드 목록이 렌더링된다", () => {
     renderCardListSection(CARDS);
 
-    expect(screen.queryByText("등록된 카드가 없습니다")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("등록된 카드가 없습니다"),
+    ).not.toBeInTheDocument();
     expect(screen.getAllByRole("button")).toHaveLength(CARDS.length);
   });
 
