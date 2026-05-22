@@ -87,14 +87,11 @@ const EmptyCard = styled.div`
   border-radius: 5px;
   border-width: 1px;
   border-style: dashed;
-  dashes: 6, 4;
-  angle: 0 deg;
   opacity: 1;
 `;
 
 const EmptyStateHeading = styled.p`
   font-weight: 700;
-  font-style: Bold;
   font-size: 20px;
   margin: 0;
 `;
