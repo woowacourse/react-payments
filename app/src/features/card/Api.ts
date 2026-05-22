@@ -3,8 +3,17 @@ const BASE_URL = "https://api.antolibank.com/cards";
 export class NetworkError extends Error {}
 export class HttpError extends Error {
   status: number;
-  errorMessages?: Record<string, { code: string; message: string } | null | undefined>;
-  constructor(status: number, errorMessages?: Record<string, { code: string; message: string } | null | undefined>) {
+  errorMessages?: Record<
+    string,
+    { code: string; message: string } | null | undefined
+  >;
+  constructor(
+    status: number,
+    errorMessages?: Record<
+      string,
+      { code: string; message: string } | null | undefined
+    >,
+  ) {
     super();
     this.status = status;
     this.errorMessages = errorMessages;
@@ -39,6 +48,9 @@ export const createCard = (
       cvc: cardCVC,
       issuerCode: cardBrand,
     }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
 export const getCards = () => request(BASE_URL).then((r) => r.json());
