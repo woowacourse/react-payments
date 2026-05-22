@@ -1,12 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
 
-type AsyncStatus = 'idle' | 'loading' | 'success' | 'error';
-
-interface AsyncState<T> {
-  status: AsyncStatus;
-  data: T | null;
-  error: Error | null;
-}
+type AsyncState<T> =
+  | { status: 'idle'; data: null; error: null }
+  | { status: 'loading'; data: null; error: null }
+  | { status: 'success'; data: T; error: null }
+  | { status: 'error'; data: null; error: Error };
 
 export const useAsync = <T>() => {
   const [state, setState] = useState<AsyncState<T>>({
