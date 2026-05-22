@@ -27,5 +27,9 @@ export const mockDB = {
       return true;
     }
     return false;
-  }
+  },
+
+  clearCards: () => {
+    localStorage.removeItem(STORAGE_KEY);
+  },
 };

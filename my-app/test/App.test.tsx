@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { describe, it, expect, beforeEach, afterEach, vi, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 import userEvent from '@testing-library/user-event';
@@ -8,16 +8,13 @@ import { http, HttpResponse } from 'msw';
 import { server } from '../src/mocks/server';
 import CardListPage from '../src/pages/CardListPage/CardListPage';
 import CardAddPage from '../src/pages/CardAddPage/CardAddPage';
+import { mockDB } from '../src/mocks/mockDB';
 
 const API_BASE = import.meta.env.BASE_URL;
-const STORAGE_KEY = 'mock-cards-DB';
 
 describe('카드 리스트 페이지 통합 테스트', () => {
-  beforeAll(() => server.listen());
-
   beforeEach(() => {
-    localStorage.removeItem(STORAGE_KEY);
-    server.resetHandlers();
+    mockDB.clearCards();
     vi.spyOn(window, 'alert').mockImplementation(() => {});
   });
 
@@ -26,8 +23,6 @@ describe('카드 리스트 페이지 통합 테스트', () => {
     server.resetHandlers();
     vi.restoreAllMocks();
   });
-
-  afterAll(() => server.close());
 
   // 카드 목록이 비어있는 경우
   it('처음 진입 시 스켈레톤 노출, 빈 페이지 UI가 표시, 카드 추가 페이지로 이동하는 시나리오', async () => {
@@ -85,7 +80,7 @@ describe('카드 리스트 페이지 통합 테스트', () => {
         expirationDate: '08/28',
       },
     ];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(mockCards));
+    mockDB.saveCards(mockCards);
 
     // window.confirm이 뜨면 무조건 확인
     vi.spyOn(window, 'confirm').mockReturnValue(true);

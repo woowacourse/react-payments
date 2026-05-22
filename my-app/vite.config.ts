@@ -9,6 +9,7 @@ export default defineConfig({
   test: {
     projects: [{
       extends: true,
-    }]
+    }],
+    setupFiles: ['./vitest.setup.ts'],
   }
 });
