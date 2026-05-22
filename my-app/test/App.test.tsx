@@ -9,6 +9,7 @@ import { server } from '../src/mocks/server';
 import CardListPage from '../src/pages/CardListPage/CardListPage';
 import CardAddPage from '../src/pages/CardAddPage/CardAddPage';
 import { mockDB } from '../src/mocks/mockDB';
+import CardAddSuccessPage from '../src/pages/CardAddSuccessPage/CardAddSuccessPage';
 
 const API_BASE = import.meta.env.BASE_URL;
 
@@ -61,6 +62,77 @@ describe('카드 리스트 페이지 통합 테스트', () => {
     expect(
       screen.getByText('결제할 카드 번호를 입력해주세요'),
     ).toBeInTheDocument();
+  });
+
+  // 카드 등록 사용자 흐름
+  it('카드 등록 폼을 순차적으로 채우고 제출하면, 성공 페이지를 거쳐 목록에 카드가 추가되는 시나리오', async () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<CardListPage />} />
+          <Route path="/card-add" element={<CardAddPage />} />
+          <Route path="/card-add-success" element={<CardAddSuccessPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    // 카드 리스트 페이지에서 카드 추가 버튼 클릭하여 이동
+    const addCardButton = await screen.findByRole('button', {
+      name: '카드 추가 버튼',
+    });
+    await userEvent.click(addCardButton);
+    expect(
+      screen.getByText('결제할 카드 번호를 입력해주세요'),
+    ).toBeInTheDocument();
+
+    // 카드 번호 입력
+    const cardNumInputs = screen.getAllByRole('textbox');
+    await userEvent.type(cardNumInputs[0], '4111'); // Visa 카드
+    await userEvent.type(cardNumInputs[1], '2222');
+    await userEvent.type(cardNumInputs[2], '3333');
+    await userEvent.type(cardNumInputs[3], '4444');
+
+    // 카드사 선택
+    const companyButton = await screen.findByText('카드사를 선택해주세요');
+    await userEvent.click(companyButton);
+    const companySelect = await screen.findByText('신한카드');
+    await userEvent.click(companySelect);
+
+    // 유효기간 입력
+    const monthInput = await screen.findByPlaceholderText('MM');
+    const yearInput = await screen.findByPlaceholderText('YY');
+    await userEvent.type(monthInput, '12');
+    await userEvent.type(yearInput, '25');
+
+    // CVC 입력
+    const cvcInput = await screen.findByRole('textbox', { name: /CVC/ });
+    await userEvent.type(cvcInput, '123');
+
+    // 비밀번호 입력
+    const pwdInput = await screen.findByLabelText(/비밀번호/);
+    await userEvent.type(pwdInput, '12');
+
+    // 확인 버튼이 활성화 확인 및 제출
+    const submitButton = await screen.findByRole('button', { name: '확인' });
+    expect(submitButton).toBeEnabled();
+    await userEvent.click(submitButton);
+
+    // 성공 페이지의 텍스트를 검증
+    await waitFor(() => {
+      expect(
+        screen.getByText(/4111로 시작하는 신한카드가 등록되었어요/),
+      ).toBeInTheDocument();
+    });
+
+    // 성공 페이지에서 확인 버튼을 눌러 카드 리스트 페이지로 복귀
+    const confirmButton = await screen.findByRole('button', { name: '확인' });
+    await userEvent.click(confirmButton);
+
+    // 카드 리스트에 방금 추가한 카드가 포맷팅되어 렌더링되었는지 최종 확인!
+    await waitFor(() => {
+      expect(screen.getByText('보유 카드 (1)')).toBeInTheDocument();
+      expect(screen.getByText('4111 22** **** 4444')).toBeInTheDocument();
+    });
   });
 
   // 카드 목록이 있고, 삭제하는 경우
