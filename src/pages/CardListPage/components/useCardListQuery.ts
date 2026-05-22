@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAsyncState } from "../../../shared/hooks/useAsyncState";
 import type { CardListResponseItem } from "../../../domain/card/api/cards.types";
 import { fetchCardList } from "../../../domain/card/api/cards";
@@ -12,7 +12,7 @@ export const useCardListQuery = () => {
     setCardList((prev) => prev.filter((card) => card.id !== cardId));
   };
 
-  const loadCardList = async () => {
+  const loadCardList = useCallback(async () => {
     try {
       setLoading();
       const fetchedCardList = await fetchCardList();
@@ -21,9 +21,11 @@ export const useCardListQuery = () => {
     } catch {
       setError();
     }
-  };
+  }, [setError, setLoading, setSuccess]);
 
   useEffect(() => {
+    setLoading();
+
     fetchCardList()
       .then((cards) => {
         setCardList(cards);
@@ -32,7 +34,7 @@ export const useCardListQuery = () => {
       .catch(() => {
         setError();
       });
-  }, []);
+  }, [setError, setLoading, setSuccess]);
 
   return {
     asyncState,

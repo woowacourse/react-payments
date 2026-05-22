@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export type AsyncState = "idle" | "loading" | "success" | "error";
 
 export const useAsyncState = () => {
   const [asyncState, setAsyncState] = useState<AsyncState>("idle");
 
-  const setLoading = () => {
+  const setLoading = useCallback(() => {
     setAsyncState("loading");
-  };
+  }, []);
 
-  const setSuccess = () => {
+  const setSuccess = useCallback(() => {
     setAsyncState("success");
-  };
+  }, []);
 
-  const setError = () => {
+  const setError = useCallback(() => {
     setAsyncState("error");
-  };
+  }, []);
 
   return {
     asyncState,
