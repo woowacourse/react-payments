@@ -14,7 +14,8 @@ export const errorCodeToErrorMessage = (
     .filter((code) => fieldCodes.includes(code))
     .map(
       (code) =>
-        ERROR_CODE_TO_MESSAGE[code as keyof typeof ERROR_CODE_TO_MESSAGE] ?? "",
+        ERROR_CODE_TO_MESSAGE[code as keyof typeof ERROR_CODE_TO_MESSAGE] ??
+        "알 수 없는 오류가 발생했습니다.",
     )
     .filter(Boolean);
 };

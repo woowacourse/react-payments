@@ -62,4 +62,10 @@ describe("errorCodeToErrorMessage", () => {
   test("fieldCodes가 빈 배열이면 빈 배열을 반환한다.", () => {
     expect(errorCodeToErrorMessage(["INVALID_CARD_NUMBER"], [])).toEqual([]);
   });
+
+  test("코드와 매핑되는 메시지가 존재하지 않을때는 고정된 메시지를 반환한다.", () => {
+    expect(
+      errorCodeToErrorMessage(["INVALID_PASSWORD"], ["INVALID_PASSWORD"]),
+    ).toEqual(["알 수 없는 오류가 발생했습니다."]);
+  });
 });
