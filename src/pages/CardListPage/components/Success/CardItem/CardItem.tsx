@@ -8,8 +8,10 @@ type CardItemProps = {
   cardItemInformaiton: CardListResponseItem;
   onDeleteCard: (
     cardId: string,
-    onSuccess: () => void,
-    onError: (error: Error) => void,
+    options?: {
+      onSuccess?: () => void;
+      onError?: (error: Error) => void;
+    },
   ) => void;
   deleteCardAsyncState: AsyncState;
 };
@@ -27,13 +29,9 @@ const CardItem = ({
     if (!result) {
       return;
     }
-    onDeleteCard(
-      cardId,
-      () => {},
-      () => {
-        alert("카드 삭제에 실패했습니다.");
-      },
-    );
+    onDeleteCard(cardId, {
+      onError: () => alert("카드 삭제에 실패했습니다."),
+    });
   };
 
   if (!issuer) {

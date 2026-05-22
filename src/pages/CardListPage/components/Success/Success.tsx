@@ -9,8 +9,10 @@ type SuccessProps = {
   cardList: CardListResponseItem[];
   deleteCard: (
     cardId: string,
-    onSuccess: () => void,
-    onError: (error: Error) => void,
+    options?: {
+      onSuccess?: () => void;
+      onError?: (error: Error) => void;
+    },
   ) => void;
   deleteCardAsyncState: AsyncState;
 };

@@ -8,19 +8,21 @@ export const useCardRegister = () => {
 
   const registerCard = async (
     postCardInformation: CardRegisterRequestBody,
-    onSuccess: () => void,
-    onError: (error: CardRegisterError) => void,
+    options?: {
+      onSuccess?: () => void;
+      onError?: (error: CardRegisterError) => void;
+    },
   ) => {
     try {
       setLoading();
       await requestRegisterCard(postCardInformation);
 
       setSuccess();
-      onSuccess();
+      options?.onSuccess?.();
     } catch (error) {
       setError();
       if (error instanceof CardRegisterError) {
-        onError(error as CardRegisterError);
+        options?.onError?.(error);
         return;
       }
 

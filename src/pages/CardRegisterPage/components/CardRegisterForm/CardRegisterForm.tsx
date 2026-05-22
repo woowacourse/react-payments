@@ -90,7 +90,9 @@ const CardRegisterForm = ({
     );
   };
 
-  const handleExpiryMonthChange = (nextExpiryMonth: string) => {
+  const handleExpiryMonthChange = (
+    nextExpiryMonth: CardRegisterInputInformation["expiryMonth"],
+  ) => {
     updateExpiryMonth(nextExpiryMonth);
     unlockNextStepIfFieldValid(
       validateExpiryMonth(nextExpiryMonth).isValid &&
@@ -99,7 +101,9 @@ const CardRegisterForm = ({
     );
   };
 
-  const handleExpiryYearChange = (nextExpiryYear: string) => {
+  const handleExpiryYearChange = (
+    nextExpiryYear: CardRegisterInputInformation["expiryYear"],
+  ) => {
     updateExpiryYear(nextExpiryYear);
     unlockNextStepIfFieldValid(
       validateExpiryMonth(expiryMonth).isValid &&
@@ -132,26 +136,6 @@ const CardRegisterForm = ({
     );
   };
 
-  const handleRegisterError = (error: CardRegisterError) => {
-    switch (error.code) {
-      case "INVALID_CVC":
-        updateCvcErrorMessage(error.message);
-        break;
-
-      case "INVALID_CARD_NUMBER":
-        updateCardNumberErrorMessage(error.message);
-        break;
-
-      case "INVALID_EXPIRATION_DATE":
-        updateExpiryDateErrorMessage(error.message);
-        break;
-
-      default:
-        alert("일치하는 에러코드가 존재하지 않습니다.");
-        break;
-    }
-  };
-
   const joinedCardNumber = cardNumbers.join("");
   const fieldValidity = {
     cardNumber: validateCardNumber(joinedCardNumber, cardBrand).isValid,
@@ -181,13 +165,28 @@ const CardRegisterForm = ({
       issuerCode: issuerCode,
     };
 
-    registerCard(
-      postCardInformation,
-      () => {
-        navigate("/cards");
+    registerCard(postCardInformation, {
+      onSuccess: () => navigate("/cards"),
+      onError: (error: CardRegisterError) => {
+        switch (error.code) {
+          case "INVALID_CVC":
+            updateCvcErrorMessage(error.message);
+            break;
+
+          case "INVALID_CARD_NUMBER":
+            updateCardNumberErrorMessage(error.message);
+            break;
+
+          case "INVALID_EXPIRATION_DATE":
+            updateExpiryDateErrorMessage(error.message);
+            break;
+
+          default:
+            alert("일치하는 에러코드가 존재하지 않습니다.");
+            break;
+        }
       },
-      handleRegisterError,
-    );
+    });
   };
 
   return (

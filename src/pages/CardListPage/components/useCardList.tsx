@@ -19,19 +19,23 @@ export const useCardList = () => {
 
   const deleteCardById = async (
     cardId: string,
-    onSuccess: () => void,
-    onError: (error: Error) => void,
+    options?: {
+      onSuccess?: () => void;
+      onError?: (error: Error) => void;
+    },
   ) => {
     const { setLoading, setSuccess, setError } = deleteCardAsyncState;
     try {
       setLoading();
       await requestDeleteCard(cardId);
-      onSuccess();
       setSuccess();
       deleteCardFromState(cardId);
+      options?.onSuccess?.();
     } catch (error) {
-      onError(error as Error);
       setError();
+      if (error instanceof Error) {
+        options?.onError?.(error);
+      }
     }
   };
 
