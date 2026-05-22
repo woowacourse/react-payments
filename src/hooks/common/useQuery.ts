@@ -10,30 +10,41 @@ const useQuery = <ResponseType>({ queryFn }: UseQueryParams<ResponseType>) => {
   const [state, setState] = useState<QueryState>("idle");
   const [data, setData] = useState<ResponseType | null>(null);
   const [error, setError] = useState<Error | null>(null);
+  const [fetchTrigger, setFetchTrigger] = useState(0);
 
-  function reload() {
-    setState("loading");
-    setData(null);
-    setError(null);
-  }
+  const reload = () => {
+    setFetchTrigger((prev) => prev + 1);
+  };
 
   useEffect(() => {
-    Promise.resolve().then(() => {
-      if (state === "loading") return;
-      setState("loading");
-    });
+    let cancelled = false;
 
-    (async () => {
+    Promise.resolve().then(async () => {
+      if (!cancelled) {
+        setState("loading");
+        setData(null);
+        setError(null);
+      }
+
       try {
         const response = await queryFn();
-        setData(response);
-        setState("success");
+
+        if (!cancelled) {
+          setData(response);
+          setState("success");
+        }
       } catch (err) {
-        setError(err instanceof Error ? err : new Error(String(err)));
-        setState("error");
+        if (!cancelled) {
+          setError(err instanceof Error ? err : new Error(String(err)));
+          setState("error");
+        }
       }
-    })();
-  }, [queryFn, state]);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [queryFn, fetchTrigger]);
 
   return { state, data, error, reload };
 };
