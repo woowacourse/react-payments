@@ -3,5 +3,5 @@
   "compilerOptions": {
     "types": ["vite/client", "vitest/globals"]
   },
-  "include": ["src"]
+  "include": ["src/**/*.test.{js,jsx,ts,tsx}"]
 }
