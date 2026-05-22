@@ -24,7 +24,14 @@ export const useCardListQuery = () => {
   };
 
   useEffect(() => {
-    loadCardList();
+    fetchCardList()
+      .then((cards) => {
+        setCardList(cards);
+        setSuccess();
+      })
+      .catch(() => {
+        setError();
+      });
   }, []);
 
   return {
