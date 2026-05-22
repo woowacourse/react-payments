@@ -19,7 +19,7 @@ const CardItem = ({ cardItemInformaiton, onDeleteCard }: CardItemProps) => {
     if (!result) {
       return;
     }
-    deleteCardById(cardId, {
+    void deleteCardById(cardId, {
       onError: () => alert("카드 삭제에 실패했습니다."),
       onSuccess: () => onDeleteCard(cardId),
     });

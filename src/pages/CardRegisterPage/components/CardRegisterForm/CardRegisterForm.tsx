@@ -165,7 +165,7 @@ const CardRegisterForm = ({
       issuerCode: issuerCode,
     };
 
-    registerCard(postCardInformation, {
+    void registerCard(postCardInformation, {
       onSuccess: () => navigate("/cards"),
       onError: (error: CardRegisterError) => {
         switch (error.code) {
