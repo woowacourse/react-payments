@@ -51,7 +51,7 @@ export default function CardAddPage() {
         fieldCount: 1,
     });
 
-    const { cardNumberServerError, expServerError, cvcServerError, handleSubmit } = useCardSubmit({
+    const { serverError, handleSubmit } = useCardSubmit({
         cardNumberValues,
         expValues,
         cvcValues,
@@ -74,13 +74,13 @@ export default function CardAddPage() {
                     setValue={setCVCValue}
                     value={cvcValues[0]}
                     isRender={isCardNumberSatisfy && isCardBrandSatisfy && isExpSatisfy}
-                    serverError={cvcServerError}
+                    serverError={serverError}
                 />
                 <EXPInputWrapper
                     setValue={setExpValue}
                     value={expValues}
                     isRender={isCardNumberSatisfy && isCardBrandSatisfy}
-                    serverError={expServerError}
+                    serverError={serverError}
                 />
                 <CardBrandInputWrapper
                     selectedValue={cardBrand}
@@ -90,7 +90,7 @@ export default function CardAddPage() {
                 <CardNumberInputWrapper
                     setValue={setCardNumberValue}
                     value={cardNumberValues}
-                    serverError={cardNumberServerError}
+                    serverError={serverError}
                 />
             </InputSectionContainer>
             {isAllSatisfy && (

@@ -6,12 +6,14 @@ import CardInfoSection from '../CardInfoSection';
 import { useFieldInputState } from '../../hooks/useFieldInputState';
 import { getCVCumberErrorMessage } from '../../utils/getCVCNumberErrorMessage';
 import { isFilledNumeric } from '../../utils/isFilledNumeric';
+import { SERVER_ERROR_CODES } from '../../constants/SERVER_ERROR_CODES';
+import type { CardServerError } from '../../hooks/useCardSubmit';
 
 interface CVCInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string;
     isRender?: boolean;
-    serverError?: string | null;
+    serverError?: CardServerError | null;
 }
 
 export default function CVCInputWrapper({ setValue, value, isRender, serverError }: CVCInputWrapperProps) {
@@ -29,8 +31,8 @@ export default function CVCInputWrapper({ setValue, value, isRender, serverError
     }, [isRender]);
 
     useEffect(() => {
-        if (!serverError) return;
-        focusWithError(serverError);
+        if (serverError?.code !== SERVER_ERROR_CODES.INVALID_CVC) return;
+        focusWithError(serverError.message);
     }, [serverError]);
 
     return (

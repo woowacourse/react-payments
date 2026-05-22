@@ -6,6 +6,8 @@ import type { CardBrandValue } from '../types/CardBrandValue';
 import type { CardAddCompleteState } from '../types/CardAddCompleteState';
 import { createCard } from '../apis/client/createCard';
 
+export type CardServerError = { code: string; message: string };
+
 interface UseCardSubmitProps {
     cardNumberValues: string[];
     expValues: string[];
@@ -15,14 +17,10 @@ interface UseCardSubmitProps {
 
 export const useCardSubmit = ({ cardNumberValues, expValues, cvcValues, cardBrand }: UseCardSubmitProps) => {
     const navigate = useNavigate();
-    const [cardNumberServerError, setCardNumberServerError] = useState<string | null>(null);
-    const [expServerError, setExpServerError] = useState<string | null>(null);
-    const [cvcServerError, setCvcServerError] = useState<string | null>(null);
+    const [serverError, setServerError] = useState<CardServerError | null>(null);
 
     const handleSubmit = async () => {
-        setCardNumberServerError(null);
-        setExpServerError(null);
-        setCvcServerError(null);
+        setServerError(null);
 
         try {
             await createCard({
@@ -35,11 +33,9 @@ export const useCardSubmit = ({ cardNumberValues, expValues, cvcValues, cardBran
             navigate('/complete', { state });
         } catch (error) {
             if (!(error instanceof CardAPiServerError)) return;
-            if (error.code === 'INVALID_CARD_NUMBER') setCardNumberServerError(error.message);
-            else if (error.code === 'INVALID_EXPIRATION_DATE') setExpServerError(error.message);
-            else if (error.code === 'INVALID_CVC') setCvcServerError(error.message);
+            setServerError({ code: error.code, message: error.message });
         }
     };
 
-    return { cardNumberServerError, expServerError, cvcServerError, handleSubmit };
+    return { serverError, handleSubmit };
 };

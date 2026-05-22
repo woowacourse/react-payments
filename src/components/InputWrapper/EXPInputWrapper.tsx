@@ -7,12 +7,14 @@ import CardInfoSection from '../CardInfoSection';
 import { useFieldInputState } from '../../hooks/useFieldInputState';
 import { getEXPNumberErrorMessage } from '../../utils/getEXPNumberErrorMessage';
 import { isFilledNumeric } from '../../utils/isFilledNumeric';
+import { SERVER_ERROR_CODES } from '../../constants/SERVER_ERROR_CODES';
+import type { CardServerError } from '../../hooks/useCardSubmit';
 
 interface EXPInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string[];
     isRender?: boolean;
-    serverError?: string | null;
+    serverError?: CardServerError | null;
 }
 
 export default function EXPInputWrapper({ setValue, value, isRender, serverError }: EXPInputWrapperProps) {
@@ -30,8 +32,8 @@ export default function EXPInputWrapper({ setValue, value, isRender, serverError
     }, [isRender]);
 
     useEffect(() => {
-        if (!serverError) return;
-        focusWithError(serverError);
+        if (serverError?.code !== SERVER_ERROR_CODES.INVALID_EXPIRATION_DATE) return;
+        focusWithError(serverError.message);
     }, [serverError]);
 
     return (

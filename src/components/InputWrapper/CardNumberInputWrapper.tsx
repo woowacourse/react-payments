@@ -7,11 +7,13 @@ import { useFieldInputState } from '../../hooks/useFieldInputState';
 import { getCardNumberErrorMessage } from '../../utils/getCardNumberErrorMessage';
 import { getCardNumberMaxLengths } from '../../utils/getCardNumberMaxLengths';
 import { isFilledNumeric } from '../../utils/isFilledNumeric';
+import { SERVER_ERROR_CODES } from '../../constants/SERVER_ERROR_CODES';
+import type { CardServerError } from '../../hooks/useCardSubmit';
 
 interface CardNumberInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string[];
-    serverError?: string | null;
+    serverError?: CardServerError | null;
 }
 
 export default function CardNumberInputWrapper({ setValue, value, serverError }: CardNumberInputWrapperProps) {
@@ -27,8 +29,8 @@ export default function CardNumberInputWrapper({ setValue, value, serverError }:
         });
 
     useEffect(() => {
-        if (!serverError) return;
-        focusWithError(serverError);
+        if (serverError?.code !== SERVER_ERROR_CODES.INVALID_CARD_NUMBER) return;
+        focusWithError(serverError.message);
     }, [serverError, focusWithError]);
 
     return (
