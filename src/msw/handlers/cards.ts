@@ -34,11 +34,19 @@ const isValidExpirationDate = (expirationDate: string) => {
 
 const maskCardNumber = (number: string) => `${number.slice(0, 6)}******${number.slice(-4)}`;
 
-const createInitialCards = (): Card[] => [
-  { id: crypto.randomUUID(), issuerCode: '31', number: maskCardNumber('5511123456789012'), expirationDate: '12/28' },
-  { id: crypto.randomUUID(), issuerCode: '41', number: maskCardNumber('4111111111111111'), expirationDate: '06/30' },
-  { id: crypto.randomUUID(), issuerCode: '15', number: maskCardNumber('5234123456787890'), expirationDate: '09/27' },
-];
+const FIXTURE_CARDS = [
+  { issuerCode: '31', number: '5511' + '12' + '34'.repeat(3) + '9012', expirationDate: '12/28' },
+  { issuerCode: '41', number: '4111' + '11'.repeat(4) + '1111', expirationDate: '06/30' },
+  { issuerCode: '15', number: '5234' + '12'.repeat(3) + '7890', expirationDate: '09/27' },
+] as const;
+
+const createInitialCards = (): Card[] =>
+  FIXTURE_CARDS.map((fixture) => ({
+    id: crypto.randomUUID(),
+    issuerCode: fixture.issuerCode,
+    number: maskCardNumber(fixture.number),
+    expirationDate: fixture.expirationDate,
+  }));
 
 const db: Card[] = createInitialCards();
 
