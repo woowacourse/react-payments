@@ -11,6 +11,12 @@ const useQuery = <ResponseType>({ queryFn }: UseQueryParams<ResponseType>) => {
   const [data, setData] = useState<ResponseType | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
+  function reload() {
+    setState("loading");
+    setData(null);
+    setError(null);
+  }
+
   useEffect(() => {
     Promise.resolve().then(() => {
       if (state === "loading") return;
@@ -29,7 +35,7 @@ const useQuery = <ResponseType>({ queryFn }: UseQueryParams<ResponseType>) => {
     })();
   }, [queryFn, state]);
 
-  return { state, data, error };
+  return { state, data, error, reload };
 };
 
 export default useQuery;
