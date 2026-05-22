@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAsync } from '../../components/common/commonHooks/useAsync';
 import type { FormState } from './useCardFormState';
 import { sendingDataFormatter } from '../../utils/SendingDataFormatter';
-import { cardRepository } from '../../repository/RepositoryChanger';
+import { cardRepositoryInstance } from '../../repository/cardRepositoryInstance';
 
 export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
     // 서버에 보낼 데이터 포매팅
     const sendingData = sendingDataFormatter(formState);
 
-    const response = await run(() => cardRepository.postCard(sendingData));
+    const response = await run(() => cardRepositoryInstance.postCard(sendingData));
     if (!response) return;
 
     // 라우팅 페이지 연결

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAsync } from '../../components/common/commonHooks/useAsync';
 import { useNavigate } from 'react-router-dom';
-import { cardRepository } from '../../repository/RepositoryChanger';
+import { cardRepositoryInstance } from '../../repository/cardRepositoryInstance';
 import type { Card } from '../../types/card';
 import { confirmDialog } from '../../utils/confirmDialog';
 
@@ -10,7 +10,7 @@ export const useCardList = () => {
   const { run, status, data } = useAsync<Card[]>();
 
   const fetchCards = async () => {
-    await run(() => cardRepository.getCards());
+    await run(() => cardRepositoryInstance.getCards());
   };
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const useCardList = () => {
     if (!isConfirmed) return;
 
     try {
-      await cardRepository.deleteCard(id);
+      await cardRepositoryInstance.deleteCard(id);
       alert('카드가 삭제되었습니다.');
       fetchCards();
     } catch (error) {
