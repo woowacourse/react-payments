@@ -23,7 +23,7 @@ export const CARD_COMPANY_OPTIONS = [
   { label: '롯데카드', value: 'lotte' },
   { label: '하나카드', value: 'hana' },
   { label: '국민카드', value: 'kookmin' },
-] as const satisfies readonly { label: string; value: CardCompany }[];
+] as const satisfies readonly { label: string; value: CardCompany | '' }[];
 
 export const ISSUER_CODE_TO_COMPANY: Record<string, CardCompany> = {
   '31': 'bc',

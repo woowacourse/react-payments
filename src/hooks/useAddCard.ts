@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { addCard } from '../api/cards';
 import { COMPANY_TO_ISSUER_CODE } from '../constants';
 import type { AddCardFormFieldKey, FormValue } from './useAddCardForm';
+import type { CardCompany } from '../types';
 
 type ServerValidationError = {
   field: AddCardFormFieldKey;
@@ -28,7 +29,7 @@ const toRequestBody = (formValue: FormValue) => ({
   number: formValue.cardNumbers.value.join(''),
   expirationDate: formValue.expirationPeriod.value.join('/'),
   cvc: formValue.cvc.value,
-  issuerCode: COMPANY_TO_ISSUER_CODE[formValue.cardCompany.value] ?? '',
+  issuerCode: (COMPANY_TO_ISSUER_CODE as Record<CardCompany | '', string>)[formValue.cardCompany.value] ?? '',
 });
 
 export default function useAddCard(formValue: FormValue) {
