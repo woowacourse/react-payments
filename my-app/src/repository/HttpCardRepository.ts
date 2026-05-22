@@ -18,12 +18,10 @@ export class HttpCardRepository implements CardRepository {
     });
     
     if (!response.ok) {
-      try {
-        const errorData = await response.json();
-        throw errorData;
-      } catch (error) {
-        throw new Error('서버 통신에 에러가 발생했습니다!');
-      }
+      const errorData = await response.json().catch(() => null);
+      const errorMessage = errorData?.message ?? '서버 통신에 에러가 발생했습니다!';
+
+      throw new Error(errorMessage);
     }
 
     return response.json();

@@ -29,10 +29,7 @@ export const useCardSubmit = (formState: FormState, isFormValid: boolean) => {
     });
   };
 
-  const serverError = error as unknown as {
-    code: string;
-    message: string;
-  } | null;
+  const serverErrorMessage = error instanceof Error ? error.message : null;
 
-  return { handleSubmit, serverError };
+  return { handleSubmit, serverError: serverErrorMessage };
 };
