@@ -16,9 +16,17 @@ export class HttpCardRepository implements CardRepository {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(sendingData),
     });
-    const data = await response.json();
-    if (!response.ok) throw data;
-    return data;
+    
+    if (!response.ok) {
+      try {
+        const errorData = await response.json();
+        throw errorData;
+      } catch (error) {
+        throw new Error('서버 통신에 에러가 발생했습니다!');
+      }
+    }
+
+    return response.json();
   }
 
   async deleteCard(id: string): Promise<void> {
