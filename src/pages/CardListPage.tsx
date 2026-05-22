@@ -61,7 +61,9 @@ const CardListPage = () => {
             onDeleteCard={handleDeleteCard}
           />
         )}
-        {isError && <CardListError onRetry={fetchCards} />}
+        {isError && (
+          <CardListError message={cardListState.message} onRetry={fetchCards} />
+        )}
       </PageWrapper>
     </PageLayout>
   );

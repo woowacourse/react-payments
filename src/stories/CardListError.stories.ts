@@ -5,6 +5,7 @@ const meta = {
   title: "CardList/CardListError",
   component: CardListError,
   args: {
+    message: "카드 목록을 불러올 수 없어요",
     onRetry: () => {},
   },
 } satisfies Meta<typeof CardListError>;

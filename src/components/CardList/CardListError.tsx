@@ -4,13 +4,14 @@ import errorImage from "@/assets/ErrorImage.png";
 import Button from "../common/Button";
 
 interface CardListErrorProps {
+  message: string;
   onRetry: () => void;
 }
 
-const CardListError = ({ onRetry }: CardListErrorProps) => (
+const CardListError = ({ message, onRetry }: CardListErrorProps) => (
   <Container>
     <ErrorImage src={errorImage} alt="errorImage" />
-    <ErrorTitle>카드 목록을 불러올 수 없어요</ErrorTitle>
+    <ErrorTitle>{message}</ErrorTitle>
     <Description>잠시 후 다시 시도해 주세요.</Description>
     <Button fullWidth onClick={onRetry}>
       다시 시도

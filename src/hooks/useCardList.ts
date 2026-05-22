@@ -6,7 +6,7 @@ export type CardListStatus = "idle" | "loading" | "success" | "error";
 export type CardListState =
   | { status: "loading" }
   | { status: "success"; data: CardListResponse }
-  | { status: "error" };
+  | { status: "error"; message: string };
 
 const useCardList = () => {
   const [cardListState, setCardListState] = useState<CardListState>({
@@ -19,7 +19,10 @@ const useCardList = () => {
 
       setCardListState({ status: "success", data: cards });
     } catch {
-      setCardListState({ status: "error" });
+      setCardListState({
+        status: "error",
+        message: "카드 목록을 불러올 수 없어요",
+      });
     }
   }, []);
 
