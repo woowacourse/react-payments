@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const CardListPage = () => {
-  const { cards, status, fetchCards, removeCard } = useCardList();
+  const { cardListState, fetchCards, removeCard } = useCardList();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,14 +36,16 @@ const CardListPage = () => {
     }
   };
 
-  const hasCards = cards.length > 0;
-  const isSuccess = status === "success";
-  const isLoading = status === "loading";
-  const isError = status === "error";
+  const isSuccess = cardListState.status === "success";
+  const isLoading = cardListState.status === "loading";
+  const isError = cardListState.status === "error";
+  const hasCards = isSuccess && cardListState.data.length > 0;
   const isEmpty = isSuccess && !hasCards;
 
   const pageTitle =
-    isSuccess && hasCards ? `보유 카드 (${cards.length})` : "보유 카드";
+    isSuccess && hasCards
+      ? `보유 카드 (${cardListState.data.length})`
+      : "보유 카드";
 
   return (
     <PageLayout>
@@ -54,7 +56,7 @@ const CardListPage = () => {
         {isEmpty && <CardListEmpty onAddCard={handleAddCard} />}
         {isSuccess && hasCards && (
           <CardListSuccess
-            cards={cards}
+            cards={cardListState.data}
             onAddCard={handleAddCard}
             onDeleteCard={handleDeleteCard}
           />
