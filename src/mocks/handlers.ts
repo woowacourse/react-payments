@@ -44,12 +44,14 @@ export const handlers = [
       );
     }
 
+    const id = crypto.randomUUID();
+
     cards.push({
-      id: crypto.randomUUID(),
+      id,
       ...card,
     });
 
-    return new HttpResponse(null, { status: 201 });
+    return HttpResponse.json({ id }, { status: 201 });
   }),
 
   http.get("/cards", () => {

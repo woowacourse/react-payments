@@ -33,8 +33,13 @@ export const registerCard = async (
 
   if (!response.ok) {
     if (response.status === 400) {
-      const error = (await response.json()) as ApiErrorResponse;
-      throw new ApiError(error);
+      const error: ApiErrorResponse | null = await response
+        .json()
+        .catch(() => null);
+
+      if (error) {
+        throw new ApiError(error);
+      }
     }
 
     throw new Error("카드 등록에 실패했습니다.");
