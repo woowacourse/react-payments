@@ -5,8 +5,9 @@ import "./styles/reset.css";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
 
+// 미션 제출을 위해 배포 환경에서도 MSW를 이용해 mocking 실시
 async function enableMocking() {
-  const { worker } = await import("./mocks/browser"); //Dynamic import하는 것이 눈에 띄였다.
+  const { worker } = await import("./mocks/browser");
   return worker.start({
     serviceWorker: {
       url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
