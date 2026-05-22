@@ -13,6 +13,11 @@ interface CardListViewProps {
 // onDelete 전달받기로
 // TODO 그럼 삭제 훅을 분리하는 건 어떤지?? 고민해보기
 export default function CardListView({ cardItemInfos, onDelete }: CardListViewProps) {
+    const handleDelete = (id: string) => {
+        if (!window.confirm('카드를 삭제하시겠습니까?')) return;
+        onDelete(id);
+    };
+
     return (
         <CardListViewStyle>
             {cardItemInfos.map((cardItem) => (
@@ -22,7 +27,7 @@ export default function CardListView({ cardItemInfos, onDelete }: CardListViewPr
                     cardIssuer={ISSUER_CODE_MAP[cardItem.issuerCode]}
                     cardNumbers={cardItem.number}
                     EXPDate={cardItem.expirationDate}
-                    onDelete={onDelete}
+                    onDelete={handleDelete}
                 />
             ))}
             <AddCardButton />
