@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import type { CardInfo } from '../../apis/getMyCard';
 import { ISSUER_CODE_MAP } from '../../constants/BRAND_SELECT_OPTIONS';
 import AddCardButton from './AddCardButton';
 import MyCardItem from './MyCardItem/MyCardItem';
+import type { CardInfo } from '../../types/CardListItemDTO';
 
 interface CardListViewProps {
     cardItemInfos: CardInfo[];

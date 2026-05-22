@@ -1,8 +1,6 @@
-import type { CardBrandValue } from './CardBrandValue';
-
-export interface CardListItemDTO {
-    id: number;
-    cardNumber: number;
-    expDate: string;
-    cardIssuer: CardBrandValue;
+export interface CardInfo {
+    id: string;
+    issuerCode: string;
+    number: string;
+    expirationDate: string;
 }
