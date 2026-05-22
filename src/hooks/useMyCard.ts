@@ -1,13 +1,15 @@
-import { getMyCards, type CardInfo } from '../apis/getMyCard';
 import { useCallback, useEffect, useState } from 'react';
 import { CardAPiServerError } from '../CardApiServerError';
-import { deleteCard } from '../apis/deleteCard';
+import type { CardInfo } from '../types/CardListItemDTO';
+import { getMyCards } from '../apis/client/getMyCard';
+import { deleteCard } from '../apis/client/deleteCard';
 
 export const useMyCard = () => {
     const [myCards, setMyCards] = useState<CardInfo[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
+    // TODO callback 지워도 됨!
     const fetchMyCards = useCallback(async () => {
         setIsLoading(true);
         setIsError(false);
@@ -34,7 +36,7 @@ export const useMyCard = () => {
         // 함수를 내부에서 직접 선언하여 해결할 수도 있었지만 deleteMyCard에서도 fetchMyCards를 호출하기 때문에 불필요한 중복을 만드는 것 보다는 해결된 상황에서 없어지지 않는 경고를 무시하는 편이 더욱 나은 판단이라고 생각했습니다.
         // eslint-disable-next-line react-hooks/set-state-in-effect
         fetchMyCards();
-    }, [fetchMyCards]);
+    }, []);
 
     return { myCards, isLoading, isError, deleteMyCard };
 };

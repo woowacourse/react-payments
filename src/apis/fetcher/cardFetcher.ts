@@ -1,4 +1,4 @@
-import { CardAPiServerError } from '../CardApiServerError';
+import { CardAPiServerError } from '../../CardApiServerError';
 import { fetcher } from './fetcher';
 
 export interface ServerError {

@@ -1,4 +1,4 @@
-import { cardFetcher } from '../utils/cardFetcher';
+import { cardFetcher } from '../fetcher/cardFetcher';
 
 interface CreatedCardInfo {
     number: string;

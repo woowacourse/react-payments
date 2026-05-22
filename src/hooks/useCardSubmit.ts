@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createCard } from '../apis/createCard';
 import { CardAPiServerError } from '../CardApiServerError';
 import { BRAND_VALUE_TO_ISSUER_CODE } from '../constants/BRAND_SELECT_OPTIONS';
 import type { CardBrandValue } from '../types/CardBrandValue';
 import type { CardAddCompleteState } from '../types/CardAddCompleteState';
+import { createCard } from '../apis/client/createCard';
 
 interface UseCardSubmitProps {
     cardNumberValues: string[];
