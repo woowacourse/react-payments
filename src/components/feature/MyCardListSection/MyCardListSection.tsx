@@ -9,30 +9,28 @@ import MyCardListSectionErrorFallback from "./MyCardListSectionErrorFallback";
 import MyCardListSectionLoader from "./MyCardListSectionLoader";
 
 const MyCardListSection = () => {
-  const { data, state } = useCards();
+  const { data: cards, state, reload } = useCards();
   const { mutate: deleteCard } = useDeleteCard();
 
   if (state === "loading" || state === "idle")
     return <MyCardListSectionLoader />;
 
-  if (state === "error" || !data) return <MyCardListSectionErrorFallback />;
+  if (state === "error" || !cards) return <MyCardListSectionErrorFallback />;
 
   return (
     <Wrapper>
-      <Header>보유 카드 ({data.length})</Header>
-      {data.length > 0 && (
+      <Header>보유 카드 ({cards.length})</Header>
+      {cards.length > 0 && (
         <>
           <CardContainer>
-            {data.map((props) => (
+            {cards.map((props) => (
               <CardItem
                 {...props}
                 key={props.id}
                 onClickDelete={({ number }) => {
                   if (!window.confirm(`${number} 카드를 삭제하시겠습니까?`))
                     return;
-                  deleteCard(props.id, {
-                    onSuccess: () => window.location.reload(),
-                  });
+                  deleteCard(props.id, { onSuccess: () => reload() });
                 }}
               />
             ))}
@@ -40,7 +38,7 @@ const MyCardListSection = () => {
           <AddCardNavigateButton buttonType="dashed" />
         </>
       )}
-      {data.length === 0 && (
+      {cards.length === 0 && (
         <EmptyStateContainer>
           <EmptyCard />
           <EmptyStateHeading>등록된 카드가 없습니다.</EmptyStateHeading>
