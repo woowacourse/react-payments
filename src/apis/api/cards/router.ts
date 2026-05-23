@@ -1,6 +1,6 @@
 import fetcher from "@apis/fetcher";
 
-const API_URL = "/api/cards";
+const API_URL = `${import.meta.env.BASE_URL}api/cards`;
 
 interface Card {
   id: string;
