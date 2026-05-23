@@ -69,9 +69,6 @@ export default function SendButton() {
 
       const customError = error as { code?: string; message?: string };
       if (customError.code && customError.message) {
-        console.error(`${customError.code}: ${customError.message}`);
-        alert(customError.message);
-
         switch (customError.code) {
           case "INVALID_CARD_NUMBER":
             setCardNumberServerError(customError.message);
@@ -83,7 +80,7 @@ export default function SendButton() {
             setExpireDateServerError(customError.message);
             break;
           default:
-            console.error(`${customError.message}`);
+            console.error(`${customError.code}: ${customError.message}`);
             alert(customError.message);
         }
       } else {
