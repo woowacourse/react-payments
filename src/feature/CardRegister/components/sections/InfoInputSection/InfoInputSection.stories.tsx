@@ -34,7 +34,7 @@ const expirySlot = (
   />
 );
 
-const cvcSlot = <CvcField inputProps={createInputProps('', 3, '123')} errorMessage='' />;
+const cvcSlot = <CvcField inputProps={createInputProps('', 4, '123')} errorMessage='' />;
 
 const passwordSlot = <PasswordField inputProps={{...createInputProps('', 2, ''), type: 'password'}} errorMessage='' />;
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Button from '@/common/components/Button/Button';
 import CardPreviewSection from './components/sections/CardPreviewSection/CardPreviewSection';
 import InfoInputSection from './components/sections/InfoInputSection/InfoInputSection';
 
@@ -15,7 +16,8 @@ import {useCardRegisterForm} from './hooks/form/useCardRegisterForm';
 import {useStepFocus} from './hooks/ui/useStepFocus';
 
 const CardRegisterPage = () => {
-  const {cardPreview, visibleFields, fieldProps, isFormComplete, submitError, handleSubmit} = useCardRegisterForm();
+  const {cardPreview, visibleFields, fieldProps, isFormComplete, submitStatus, submitError, handleSubmit} =
+    useCardRegisterForm();
 
   // 새 필드가 위에 쌓이는 UX라 화면 렌더 순서도 입력 순서의 반대로 둔다.
   const inputSteps = [
@@ -40,8 +42,12 @@ const CardRegisterPage = () => {
         <CardPreviewSection previewSlot={<CardPreviewContainer {...cardPreview} />} />
         <InfoInputSection slots={inputSteps.map(({slot}) => slot)} />
       </Content>
-      {submitError && <SubmitErrorMessage>{submitError}</SubmitErrorMessage>}
-      {isFormComplete && <SubmitButton onClick={handleSubmit}>확인</SubmitButton>}
+      {submitError && <SubmitErrorMessage role='alert'>{submitError}</SubmitErrorMessage>}
+      {isFormComplete && (
+        <SubmitButton onClick={handleSubmit} disabled={submitStatus === 'loading'}>
+          {submitStatus === 'loading' ? '등록 중...' : '확인'}
+        </SubmitButton>
+      )}
     </Wrapper>
   );
 };
@@ -61,15 +67,12 @@ const Content = styled.div`
   overflow-y: auto;
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled(Button).attrs({variant: 'primary'})`
   flex-shrink: 0;
   width: 100%;
   padding: 16px;
-  background-color: #000;
-  color: #fff;
+  border-radius: 0;
   font-size: 14px;
-  border: none;
-  cursor: pointer;
 `;
 
 const SubmitErrorMessage = styled.p`

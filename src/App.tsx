@@ -1,13 +1,18 @@
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import styled from 'styled-components';
+
 import CardRegisterPage from './feature/CardRegister/CardRegisterPage';
 import CardRegisterCompletePage from './feature/CardRegisterComplete/CardRegisterCompletePage';
+import CardListPage from './feature/CardList/CardListPage';
 
 const App = () => (
   <PhoneFrame>
     <Routes>
-      <Route path='/' element={<CardRegisterPage />} />
+      <Route path='/' element={<Navigate to='/cards' replace />} />
+      <Route path='/register' element={<CardRegisterPage />} />
       <Route path='/complete' element={<CardRegisterCompletePage />} />
+      <Route path='/cards' element={<CardListPage />} />
+      <Route path='*' element={<Navigate to='/cards' replace />} />
     </Routes>
   </PhoneFrame>
 );

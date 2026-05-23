@@ -1,0 +1,77 @@
+import {useCallback, useEffect, useState} from 'react';
+
+import {deleteCard, getCards} from '@/api/cardsApi';
+import type {CardResponse} from '@/domain/card/cardApi.types';
+
+type CardsState =
+  | {status: 'idle'}
+  | {status: 'loading'}
+  | {status: 'success'; cards: CardResponse[]}
+  | {status: 'error'; message: string};
+
+const LOAD_CARDS_ERROR_MESSAGE = '카드 목록을 불러오지 못했습니다.';
+const DELETE_CARD_ERROR_MESSAGE = '카드 삭제에 실패했습니다.';
+
+export const useCards = () => {
+  const [state, setState] = useState<CardsState>({status: 'idle'});
+  const [deletingCardId, setDeletingCardId] = useState<string | null>(null);
+
+  const runCardsFetch = useCallback(async () => {
+    setState({status: 'loading'});
+
+    try {
+      const cards = await getCards();
+      setState({status: 'success', cards});
+    } catch {
+      setState({status: 'error', message: LOAD_CARDS_ERROR_MESSAGE});
+    }
+  }, []);
+
+  // 서버에 저장된 카드 목록을 다시 조회
+  const fetchCards = useCallback(async () => {
+    await runCardsFetch();
+  }, [runCardsFetch]);
+
+  // 삭제 확인 후 서버 카드 삭제
+  const removeCard = async (id: string) => {
+    if (deletingCardId === id) return;
+
+    const isConfirmed = window.confirm('카드를 삭제할까요?');
+
+    if (!isConfirmed) return;
+
+    setDeletingCardId(id);
+
+    try {
+      await deleteCard(id);
+      await runCardsFetch();
+    } catch {
+      setState({status: 'error', message: DELETE_CARD_ERROR_MESSAGE});
+    } finally {
+      setDeletingCardId(null);
+    }
+  };
+
+  useEffect(() => {
+    let isActive = true;
+
+    void getCards()
+      .then((cards) => {
+        if (isActive) setState({status: 'success', cards});
+      })
+      .catch(() => {
+        if (isActive) setState({status: 'error', message: LOAD_CARDS_ERROR_MESSAGE});
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  return {
+    state,
+    deletingCardId,
+    refetch: fetchCards,
+    removeCard,
+  };
+};

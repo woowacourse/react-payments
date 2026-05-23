@@ -1,15 +1,23 @@
 import {useNavigate, useLocation, Navigate} from 'react-router-dom';
 import styled from 'styled-components';
 
+import Button from '@/common/components/Button/Button';
 import type {CardRegisterCompleteState} from './routeState.types';
+
+// complete 페이지에서 사용할 route state 형식 확인
+const isCardRegisterCompleteState = (state: unknown): state is CardRegisterCompleteState => {
+  const completeState = state as CardRegisterCompleteState;
+
+  return typeof completeState?.cardPrefix === 'string' && typeof completeState?.companyName === 'string';
+};
 
 const CardRegisterCompletePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as CardRegisterCompleteState | null;
+  const state = location.state;
 
-  // complete 페이지 진입 시 state가 없으면, 메인으로 redirect하고 히스토리를 덮어써서 뒤로가기를 방지함
-  if (!state) return <Navigate to='/' replace />;
+  // complete 페이지 진입 시 state가 유효하지 않으면 메인으로 redirect
+  if (!isCardRegisterCompleteState(state)) return <Navigate to='/cards' replace />;
 
   return (
     <Wrapper>
@@ -20,7 +28,7 @@ const CardRegisterCompletePage = () => {
           <br />
           {state.companyName}가 등록되었어요.
         </Message>
-        <ConfirmButton onClick={() => navigate('/')}>확인</ConfirmButton>
+        <ConfirmButton onClick={() => navigate('/cards')}>확인</ConfirmButton>
       </Content>
     </Wrapper>
   );
@@ -59,21 +67,12 @@ const Message = styled.p`
   margin: 0;
 `;
 
-const ConfirmButton = styled.button`
+const ConfirmButton = styled(Button).attrs({variant: 'primary'})`
   flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 90%;
   height: 42px;
   padding: 16px;
-  background-color: #333333;
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
-  border: none;
   border-radius: 6px;
-  cursor: pointer;
 `;
 
 export default CardRegisterCompletePage;

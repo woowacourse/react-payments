@@ -10,6 +10,8 @@ type PasswordFieldProps = {
 };
 
 const PasswordField = ({inputProps, errorMessage}: PasswordFieldProps) => {
+  const errorMessageId = errorMessage ? 'card-password-error' : undefined;
+
   return (
     <InputContainer
       title='비밀번호를 입력해 주세요'
@@ -19,9 +21,17 @@ const PasswordField = ({inputProps, errorMessage}: PasswordFieldProps) => {
     >
       <FieldLayout>
         <InputWrapper>
-          <PasswordInput id='card-password' {...inputProps} strokeMode={errorMessage ? 'error' : 'default'} />
+          <PasswordInput
+            id='card-password'
+            {...inputProps}
+            aria-invalid={errorMessage ? 'true' : undefined}
+            aria-describedby={errorMessageId}
+            strokeMode={errorMessage ? 'error' : 'default'}
+          />
         </InputWrapper>
-        <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
+        <FieldErrorMessage id={errorMessageId} role='alert'>
+          {errorMessage}
+        </FieldErrorMessage>
       </FieldLayout>
     </InputContainer>
   );
