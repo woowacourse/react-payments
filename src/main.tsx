@@ -5,14 +5,14 @@ import App from "./App.tsx";
 
 async function enableMocking() {
   const { worker } = await import("./mocks/browser");
-  return worker.start({
+  return await worker.start({
     serviceWorker: {
       url: "/react-payments/mockServiceWorker.js",
     },
   });
 }
 
-enableMocking().then(() => {
+enableMocking().finally(() => {
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
       <App />
