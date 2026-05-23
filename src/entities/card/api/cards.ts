@@ -53,7 +53,7 @@ export const deleteCard = async (id: string): Promise<DeleteCardResponse> => {
     method: 'DELETE',
   });
 
-  if (response.status !== 204) {
+  if (!response.ok) {
     throw new Error('카드 삭제에 실패했습니다.');
   }
 };
