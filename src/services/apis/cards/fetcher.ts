@@ -28,6 +28,6 @@ export const postCards = async ({
 export const deleteCards = async ({ id }: DeleteCardsRequestDTO) => {
   return await requestAjax(`/cards`, {
     method: 'delete',
-    params: { id },
+    pathParams: { id },
   });
 };
