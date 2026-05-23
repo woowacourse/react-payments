@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useRef, type ReactNode } from "react";
 import CardCVCInput from "./CardCVCInput";
+import CardNumberSingleInput from "./CardNumberSingleInput";
 import CardNumberSegmentsInput from "./CardNumberSegmentsInput";
 import styled from "@emotion/styled";
 import CardExpiryDateInput from "./CardExpiryDateInput";
@@ -191,17 +192,30 @@ function CardForm(props: CardFormProps) {
             <Title>결제할 카드 번호를 입력해 주세요</Title>
             <Description>본인 명의의 카드만 결제 가능합니다.</Description>
           </Flex>
-          <CardNumberSegmentsInput
-            value={props.formState.cardNumberSegments}
-            brand={props.brand}
-            onChange={(value: CardNumberSegments) =>
-              props.setFormState({
-                ...props.formState,
-                cardNumberSegments: value,
-              })
-            }
-            errorMessage={serverErrors.cardNumber}
-          />
+          {!props.brand && props.formState.cardNumberSegments.length === 1 ? (
+            <CardNumberSingleInput
+              value={props.formState.cardNumberSegments[0]}
+              onChange={(value: string) =>
+                props.setFormState({
+                  ...props.formState,
+                  cardNumberSegments: [value],
+                })
+              }
+              errorMessage={serverErrors.cardNumber}
+            />
+          ) : props.brand ? (
+            <CardNumberSegmentsInput
+              value={props.formState.cardNumberSegments}
+              brand={props.brand}
+              onChange={(value: CardNumberSegments) =>
+                props.setFormState({
+                  ...props.formState,
+                  cardNumberSegments: value,
+                })
+              }
+              errorMessage={serverErrors.cardNumber}
+            />
+          ) : null}
         </Flex>
       </Flex>
     </form>
