@@ -7,8 +7,6 @@ import type { Card } from '@/pages/payments/cards/list/model';
 export const useLoadCards = () => {
   // read
   return useLoadData<Card[]>({
-    queryFn: async () => {
-      return await repository.getCards();
-    },
+    queryFn: repository.getCards,
   });
 };
