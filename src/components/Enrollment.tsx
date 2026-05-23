@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { FaCheckCircle } from "react-icons/fa";
 import { options } from "../hooks/useCardBrand";
@@ -19,6 +19,10 @@ export default function Enrollment() {
   const handleClick = () => {
     navigate("/react-payments/");
   };
+
+  if (!cardNumber || !issuerCode) {
+    return <Navigate to="/react-payments/" replace />;
+  }
 
   return (
     <Wrapper>
