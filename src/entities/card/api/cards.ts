@@ -5,15 +5,10 @@ import type {
   RegisterCardErrorResponse,
   RegisterCardRequest,
   RegisterCardResponse,
+  RegisterCardResult,
 } from '@/entities/card/model/card';
 
-export const isRegisterCardErrorResponse = (error: unknown): error is RegisterCardErrorResponse => {
-  if (error === null || typeof error !== 'object') return false;
-
-  return 'code' in error && 'message' in error;
-};
-
-export const registerCard = async (payload: RegisterCardRequest): Promise<RegisterCardResponse> => {
+export const registerCard = async (payload: RegisterCardRequest): Promise<RegisterCardResult> => {
   const response = await fetch(getApiUrl('/cards'), {
     method: 'POST',
     headers: {
@@ -23,12 +18,21 @@ export const registerCard = async (payload: RegisterCardRequest): Promise<Regist
   });
 
   if (response.status === 201) {
-    return response.json() as Promise<RegisterCardResponse>;
+    const data = (await response.json()) as RegisterCardResponse;
+
+    return {
+      ok: true,
+      data,
+    };
   }
 
   if (response.status === 400) {
     const error = (await response.json()) as RegisterCardErrorResponse;
-    throw error;
+
+    return {
+      ok: false,
+      error,
+    };
   }
 
   throw new Error('카드 등록에 실패했습니다.');

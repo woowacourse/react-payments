@@ -4,13 +4,9 @@ import { CardForm } from '@/features/registerCard/ui/cardForm/CardForm';
 import { CardPreview } from '@/pages/registerCard/ui/cardPreview/CardPreview';
 import { SubmitButton } from './submitButton/SubmitButton';
 import { useNavigate } from 'react-router-dom';
-import { registerCard } from '@/entities/card/api/cards';
 import { usePaymentsForm } from '@/features/registerCard/hooks/usePaymentsForm';
-import {
-  FORM_ID,
-  toRequestData,
-  type CardInfo,
-} from '@/features/registerCard/model/registerCardForm';
+import { FORM_ID, type CardInfo } from '@/features/registerCard/model/registerCardForm';
+import type { CardPreviewInfo } from '../model/cardPreview';
 
 const initCardInfo: CardInfo = {
   numbers: ['', '', '', ''],
@@ -27,23 +23,19 @@ export const RegisterCardPage = () => {
   const navigate = useNavigate();
   const paymentsForm = usePaymentsForm(initCardInfo);
 
-  const onRegister = async () => {
-    const { cardInfo } = paymentsForm;
-    await registerCard(toRequestData(cardInfo));
-    navigate('/cards');
+  const cardPreviewInfo: CardPreviewInfo = {
+    numbers: paymentsForm.cardInfo.numbers,
+    expiryDate: paymentsForm.cardInfo.expiryDate,
+    bank: paymentsForm.cardInfo.bank,
   };
 
   return (
     <div className={styles.payments}>
-      <CardPreview info={paymentsForm.cardPreviewInfo} />
+      <CardPreview info={cardPreviewInfo} />
 
       <CardForm
-        numbersField={paymentsForm.numbersField}
-        expiryField={paymentsForm.expiryField}
-        bankField={paymentsForm.bankField}
-        cvcField={paymentsForm.cvcField}
-        passwordField={paymentsForm.passwordField}
-        onRegister={onRegister}
+        paymentsForm={paymentsForm}
+        onRegister={() => navigate('/cards')}
         formId={FORM_ID}
       />
 

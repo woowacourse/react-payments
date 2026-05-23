@@ -1,5 +1,5 @@
 import { BANK_RULES, type Bank } from '@/entities/card/model/bank';
-import type { RegisterCardRequest } from '@/entities/card/model/card';
+import type { RegisterCardErrorResponse, RegisterCardRequest } from '@/entities/card/model/card';
 import type { ExpiryDate } from '@/entities/card/model/expiryDate';
 import type { RegisterCardErrorCode } from '@/entities/card/model/card';
 
@@ -32,12 +32,17 @@ export type FieldServerError = {
 };
 
 export type ServerErrorField = 'numbers' | 'expiryDate' | 'cvc';
-export type ServerFieldErrors = Partial<Record<ServerErrorField, string>>;
-export const SERVER_ERROR_FIELD_MAP: Record<RegisterCardErrorCode, ServerErrorField> = {
+
+const SERVER_ERROR_FIELD_MAP: Record<RegisterCardErrorCode, ServerErrorField> = {
   INVALID_CARD_NUMBER: 'numbers',
   INVALID_EXPIRATION_DATE: 'expiryDate',
   INVALID_CVC: 'cvc',
 };
+
+export const toServerError = (error: RegisterCardErrorResponse): ServerError => ({
+  field: SERVER_ERROR_FIELD_MAP[error.code],
+  message: error.message,
+});
 
 export const toRequestData = (cardInfo: CardInfo): RegisterCardRequest => {
   if (cardInfo.bank === undefined) {

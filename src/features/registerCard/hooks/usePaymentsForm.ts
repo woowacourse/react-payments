@@ -4,7 +4,6 @@ import { validateCvc } from '@/entities/card/model/cvc';
 import type { ExpiryDate } from '@/entities/card/model/expiryDate';
 import { validateExpiryMonth, validateExpiryYear } from '@/entities/card/model/expiryDate';
 import { validatePassword } from '@/entities/card/model/password';
-import type { CardPreviewInfo } from '@/pages/registerCard/model/cardPreview';
 import { type CardInfo } from '@/features/registerCard/model/registerCardForm';
 import { useState } from 'react';
 import type { CardNumberFieldControl } from '../ui/fields/CardNumberField';
@@ -13,16 +12,20 @@ import type { BankFieldControl } from '../ui/fields/BankSelectField';
 import type { CvcFieldControl } from '../ui/fields/CvcField';
 import type { PasswordFieldControl } from '../ui/fields/PasswordField';
 
-export const usePaymentsForm = (initalValue: CardInfo) => {
+export interface UsePaymentsFormResult {
+  cardInfo: CardInfo;
+  isFormValid: boolean;
+  numbersField: CardNumberFieldControl;
+  expiryField: ExpiryFieldControl;
+  bankField: BankFieldControl;
+  cvcField: CvcFieldControl;
+  passwordField: PasswordFieldControl;
+}
+
+export const usePaymentsForm = (initalValue: CardInfo): UsePaymentsFormResult => {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initalValue);
 
   const { numbers, expiryDate, cvc, password, bank } = cardInfo;
-
-  const cardPreviewInfo: CardPreviewInfo = {
-    numbers,
-    expiryDate,
-    bank,
-  };
 
   const handleChangeNumbers = (value: string[]) => {
     setCardInfo((prev) => ({ ...prev, numbers: value }));
@@ -87,7 +90,6 @@ export const usePaymentsForm = (initalValue: CardInfo) => {
 
   return {
     cardInfo,
-    cardPreviewInfo,
     isFormValid,
     numbersField,
     expiryField,
