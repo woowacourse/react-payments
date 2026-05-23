@@ -59,16 +59,30 @@ describe("CardsPage", () => {
     ).toBeInTheDocument();
   });
 
-  it("삭제 버튼 클릭 시 confirm을 확인하면 DELETE 요청을 보내고 페이지를 새로고침한다", async () => {
+  it("삭제 버튼 클릭 시 confirm을 확인하면 DELETE 요청을 보내고 목록을 다시 불러온다", async () => {
     vi.spyOn(window, "confirm").mockReturnValue(true);
-    const reloadSpy = vi.fn();
-    Object.defineProperty(window, "location", {
-      configurable: true,
-      value: { ...window.location, reload: reloadSpy },
-    });
 
+    const getSpy = vi.fn();
     const deleteSpy = vi.fn();
+
     server.use(
+      http.get("/api/cards", () => {
+        getSpy();
+        return HttpResponse.json([
+          {
+            id: "550e8400-e29b-41d4-a716-446655440000",
+            issuerCode: "31",
+            number: "551112******9012",
+            expirationDate: "12/28",
+          },
+          {
+            id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+            issuerCode: "41",
+            number: "551112******9012",
+            expirationDate: "12/28",
+          },
+        ]);
+      }),
       http.delete("/api/cards/:id", ({ params }) => {
         deleteSpy(params.id);
         return new HttpResponse(null, { status: 204 });
@@ -89,7 +103,10 @@ describe("CardsPage", () => {
         "550e8400-e29b-41d4-a716-446655440000",
       );
     });
-    expect(reloadSpy).toHaveBeenCalledTimes(1);
+
+    await waitFor(() => {
+      expect(getSpy).toHaveBeenCalledTimes(2);
+    });
   });
 
   it("삭제 버튼 클릭 시 confirm을 취소하면 DELETE 요청을 보내지 않는다", async () => {
