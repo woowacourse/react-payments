@@ -26,3 +26,11 @@ export const isPrefixInRange = (
 
   return prefix >= start && prefix <= end;
 };
+
+export const isLengthBetween = (
+  value: string,
+  minLength: number,
+  maxLength: number,
+) => {
+  return value.length >= minLength && value.length <= maxLength;
+};

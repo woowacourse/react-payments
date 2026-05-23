@@ -6,9 +6,13 @@ import type { NumbersFieldType } from '../../hooks/useNumbersField';
 const NumberField = ({
   autoFocus = false,
   field,
+  serverFieldError = '',
+  onClearServerFieldError,
 }: {
   autoFocus?: boolean;
   field: NumbersFieldType;
+  serverFieldError?: string;
+  onClearServerFieldError?: () => void;
 }) => {
   return (
     <StyledField>
@@ -20,18 +24,21 @@ const NumberField = ({
             ref={field.setInputRef(index)}
             value={chunk}
             autoFocus={autoFocus && index === 0}
-            placeholder="1234"
+            placeholder={'1234'.slice(0, field.segmentLengths[index])}
             inputMode="numeric"
             maxLength={field.segmentLengths[index]}
             strokeMode={index === field.firstErrorIndex ? 'error' : 'default'}
-            onChange={(e) => field.handleNumbersChange(index, e.target.value)}
+            onChange={(e) => {
+              field.handleNumbersChange(index, e.target.value);
+              onClearServerFieldError?.();
+            }}
             onBlur={() => field.handleNumbersBlur(index)}
             onKeyDown={(event) => field.handleKeyDown(index, event)}
           />
         ))}
       </InputWrapper>
-
-      <ErrorMessage>{field.errorMessage}</ErrorMessage>
+      {serverFieldError && <ServerErrorLine />}
+      <ErrorMessage>{field.errorMessage || serverFieldError}</ErrorMessage>
     </StyledField>
   );
 };
@@ -56,6 +63,15 @@ const CardNumberInput = styled(Input)`
   box-sizing: border-box;
   width: 100%;
   height: 32px;
+`;
+
+const ServerErrorLine = styled.div`
+  width: 100%;
+  height: 1px;
+  margin: 0;
+
+  border: 0;
+  background-color: #ff3d3d;
 `;
 
 const ErrorMessage = styled.span`

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type { CardPreviewInfoType } from '../../types/CardPreviewInfoType';
+import type { CardPreviewInfoType } from '../../../../domain/card/types/card';
 import CardPreviewContainer from './CardPreviewContainer';
 
 const CardPreviewSection = ({

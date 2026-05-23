@@ -6,9 +6,13 @@ import type { CvcFieldType } from '../../hooks/useCvcField';
 const CvcField = ({
   autoFocus = false,
   field,
+  serverFieldError = '',
+  onClearServerFieldError,
 }: {
   autoFocus?: boolean;
   field: CvcFieldType;
+  serverFieldError?: string;
+  onClearServerFieldError?: () => void;
 }) => {
   return (
     <StyledField>
@@ -17,15 +21,20 @@ const CvcField = ({
         <CvcInput
           value={field.cvcNumber}
           autoFocus={autoFocus}
-          maxLength={3}
+          maxLength={4}
           inputMode="numeric"
           placeholder="123"
           strokeMode={field.hasError ? 'error' : 'default'}
-          onChange={(e) => field.handleChange(e.target.value)}
+          onChange={(e) => {
+            field.handleChange(e.target.value);
+            onClearServerFieldError?.();
+          }}
           onBlur={() => field.handleBlur()}
         />
       </InputWrapper>
-      <ErrorMessage>{field.errorMessage}</ErrorMessage>
+
+      {serverFieldError && <ServerErrorLine />}
+      <ErrorMessage>{field.errorMessage || serverFieldError}</ErrorMessage>
     </StyledField>
   );
 };
@@ -50,6 +59,15 @@ const CvcInput = styled(Input)`
   box-sizing: border-box;
   width: 100%;
   height: 32px;
+`;
+
+const ServerErrorLine = styled.div`
+  width: 100%;
+  height: 1px;
+  margin: 0;
+
+  border: 0;
+  background-color: #ff3d3d;
 `;
 
 const ErrorMessage = styled.span`

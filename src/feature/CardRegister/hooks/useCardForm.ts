@@ -11,7 +11,7 @@ import {
 import type {
   CardFormInfoType,
   CardPreviewInfoType,
-} from '../types/CardPreviewInfoType';
+} from '../../../domain/card/types/card';
 
 export type CardFormFieldsType = {
   numbers: NumbersFieldType;
@@ -31,6 +31,13 @@ const CARD_FORM_STEP = {
 } as const;
 
 export const useCardForm = () => {
+  const [currentStep, setCurrentStep] = useState<number>(
+    CARD_FORM_STEP.CARD_NUMBER,
+  );
+  const advanceStep = (nextStep: number) => {
+    setCurrentStep((prev) => Math.max(prev, nextStep));
+  };
+
   const numbersField = useNumbersField({
     onComplete: () => advanceStep(CARD_FORM_STEP.CARD_COMPANY),
   });
@@ -46,13 +53,6 @@ export const useCardForm = () => {
   const passwordField = usePasswordField({
     onComplete: () => advanceStep(CARD_FORM_STEP.SUBMIT),
   });
-
-  const [currentStep, setCurrentStep] = useState<number>(
-    CARD_FORM_STEP.CARD_NUMBER,
-  );
-  const advanceStep = (nextStep: number) => {
-    setCurrentStep((prev) => Math.max(prev, nextStep));
-  };
 
   const fields = {
     numbers: numbersField,

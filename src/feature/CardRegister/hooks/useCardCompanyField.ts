@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { CARD_COMPANIES, type CardCompanyId } from '../constant/cardCompanies';
+import {
+  CARD_COMPANIES,
+  type CardCompanyId,
+} from '../../../domain/card/constant/cardCompanies';
 
 type UseCardCompanyFieldParams = {
   onComplete?: () => void;

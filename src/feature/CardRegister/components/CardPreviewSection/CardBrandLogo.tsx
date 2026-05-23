@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import type { CardBrandName } from '../../constant/cardBrands';
-import { getCardBrandImage } from '../../utils/cardDisplay';
+import type { CardBrandName } from '../../../../domain/card/constant/cardBrands';
+import { getCardBrandImage } from '../../../../domain/card/utils/cardDisplay';
 
 const CardBrandLogo = ({ brandName }: { brandName: CardBrandName | null }) => {
   if (brandName === null) return null;

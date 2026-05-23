@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
 import InfoInputSection from '../../../../../feature/CardRegister/components/InfoInputSection/InfoInputSection';
-import { CARD_COMPANIES } from '../../../../../feature/CardRegister/constant/cardCompanies';
+import { CARD_COMPANIES } from '../../../../../domain/card/constant/cardCompanies';
 import { useCardForm } from '../../../../../feature/CardRegister/hooks/useCardForm';
 import type { CardFormFieldsType } from '../../../../../feature/CardRegister/hooks/useCardForm';
-import type { CardFormInfoType } from '../../../../../feature/CardRegister/types/CardPreviewInfoType';
+import type { CardFormInfoType } from '../../../../../domain/card/types/card';
 
 const cardCompanyOptions = CARD_COMPANIES.map((cardCompany) => ({
   value: cardCompany.id,
@@ -91,6 +91,8 @@ const meta = {
     cardFormInfo: emptyCardFormInfo,
     currentStep: 0,
     hasFormError: true,
+    serverFieldErrors: {},
+    clearServerFieldError: fn(),
     onRegisterComplete: fn(),
   },
 } satisfies Meta<typeof InfoInputSection>;

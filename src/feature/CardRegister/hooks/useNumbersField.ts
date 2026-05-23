@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   hasCardNumbersError,
   validateCardNumbers,
 } from '../utils/cardFormValidator';
 import { isNumeric, isWithinMaxLength } from '../utils/validator';
-import { getCardNumberSegmentLengths } from '../utils/cardInfo';
+import { getCardNumberSegmentLengths } from '../../../domain/card/utils/cardInfo';
 import useTouchedFieldError from './useTouchedFieldError';
+import { useInputRefs } from './useInputRefs';
 
 type UseNumbersFieldParams = {
   onComplete?: () => void;
@@ -26,29 +27,27 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
 
   const isComplete = !hasCardNumbersError(cardNumbers);
 
-  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
-
-  const setInputRef = (index: number) => (element: HTMLInputElement | null) => {
-    inputRefs.current[index] = element;
-  };
-
-  const focusNextInput = (index: number) => {
-    inputRefs.current[index + 1]?.focus();
-  };
-  const focusPreviousInput = (index: number) => {
-    inputRefs.current[index - 1]?.focus();
-  };
+  const { setInputRef, focusNextInput, handleKeyDown } =
+    useInputRefs(cardNumbers);
 
   const handleNumbersChange = (index: number, eValue: string) => {
     const value = eValue.trim();
+    const prevValue = cardNumbers[index];
+    const isDeleting = value.length < prevValue.length;
 
     if (!isNumeric(value)) return;
-    if (!isWithinMaxLength(value, segmentLengths[index])) return;
+    if (!isWithinMaxLength(value, segmentLengths[index]) && !isDeleting) return;
 
     const newChunks = cardNumbers.map((chunk, i) =>
       i === index ? value : chunk,
     );
-    setCardNumbers(newChunks);
+
+    // 브랜드 세그먼트에 따라 최대 길이를 벗어나는 경우 숫자 자르기
+    const nomalizedNewChuks = newChunks.map((chunk, index) =>
+      chunk.slice(0, segmentLengths[index]),
+    );
+
+    setCardNumbers(nomalizedNewChuks);
 
     if (value.length === segmentLengths[index]) focusNextInput(index);
 
@@ -57,18 +56,6 @@ export const useNumbersField = ({ onComplete }: UseNumbersFieldParams) => {
 
   const handleNumbersBlur = (index: number) => {
     touch(index);
-  };
-
-  const handleKeyDown = (
-    index: number,
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
-    if (event.key !== 'Backspace') return;
-
-    if (cardNumbers[index] !== '') return;
-    if (index === 0) return;
-
-    focusPreviousInput(index);
   };
 
   return {

@@ -6,9 +6,13 @@ import type { ExpiryFieldType } from '../../hooks/useExpiryField';
 const ExpiryField = ({
   autoFocus = false,
   field,
+  serverFieldError = '',
+  onClearServerFieldError,
 }: {
   autoFocus?: boolean;
   field: ExpiryFieldType;
+  serverFieldError?: string;
+  onClearServerFieldError?: () => void;
 }) => {
   return (
     <StyledField>
@@ -22,7 +26,10 @@ const ExpiryField = ({
           inputMode="numeric"
           placeholder="MM"
           strokeMode={0 === field.firstErrorIndex ? 'error' : 'default'}
-          onChange={(e) => field.handleMonthChange(e.target.value)}
+          onChange={(e) => {
+            field.handleMonthChange(e.target.value);
+            onClearServerFieldError?.();
+          }}
           onBlur={(e) => field.handleExpiryBlur(0, e.target.value, 'month')}
         />
         <ExpiryInput
@@ -32,13 +39,17 @@ const ExpiryField = ({
           placeholder="YY"
           inputMode="numeric"
           strokeMode={1 === field.firstErrorIndex ? 'error' : 'default'}
-          onChange={(e) => field.handleYearChange(e.target.value)}
+          onChange={(e) => {
+            field.handleYearChange(e.target.value);
+            onClearServerFieldError?.();
+          }}
           onBlur={(e) => field.handleExpiryBlur(1, e.target.value, 'year')}
           onKeyDown={(event) => field.handleKeyDown(1, event)}
         />
       </InputWrapper>
 
-      <ErrorMessage>{field.errorMessage}</ErrorMessage>
+      {serverFieldError && <ServerErrorLine />}
+      <ErrorMessage>{field.errorMessage || serverFieldError}</ErrorMessage>
     </StyledField>
   );
 };
@@ -63,6 +74,15 @@ const ExpiryInput = styled(Input)`
   box-sizing: border-box;
   width: 100%;
   height: 32px;
+`;
+
+const ServerErrorLine = styled.div`
+  width: 100%;
+  height: 1px;
+  margin: 0;
+
+  border: 0;
+  background-color: #ff3d3d;
 `;
 
 const ErrorMessage = styled.span`

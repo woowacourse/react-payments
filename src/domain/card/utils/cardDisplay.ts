@@ -1,6 +1,16 @@
 import { CARD_BRANDS, type CardBrandName } from '../constant/cardBrands';
 import { CARD_COMPANIES, type CardCompanyId } from '../constant/cardCompanies';
-import { isPrefixInRange } from './validator';
+
+const isPrefixInRange = (
+  fullNumber: string,
+  digitCount: number,
+  start: number,
+  end: number,
+) => {
+  const prefix = Number(fullNumber.slice(0, digitCount));
+
+  return prefix >= start && prefix <= end;
+};
 
 export const getCardBrandName = (
   cardNumbers: string[],
@@ -8,7 +18,7 @@ export const getCardBrandName = (
   const fullNumber = cardNumbers.join('');
 
   const matchedBrand = CARD_BRANDS.find((brand) =>
-    brand.prefixRules.some((rule) =>
+    brand.prefixRules.some((rule: Record<string, number>) =>
       isPrefixInRange(fullNumber, rule.digitCount, rule.start, rule.end),
     ),
   );
@@ -34,4 +44,8 @@ export const getCardCompanyName = (cardCompanyId: CardCompanyId | null) => {
   );
 
   return selectedCardCompany?.name ?? '';
+};
+
+export const maskCardNumber = (cardNumbers: string) => {
+  return `${cardNumbers.slice(0, 6)}******${cardNumbers.slice(-4)}`;
 };

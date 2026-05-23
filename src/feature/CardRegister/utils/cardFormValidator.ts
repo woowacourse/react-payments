@@ -1,10 +1,13 @@
-import type { CardCompanyId } from '../constant/cardCompanies';
-import { getCardNumberSegmentLengths } from './cardInfo';
-import { isExactLength, isValidMonth } from './validator';
+import type { CardCompanyId } from '../../../domain/card/constant/cardCompanies';
+import { getCardNumberSegmentLengths } from '../../../domain/card/utils/cardInfo';
+import { isExactLength, isLengthBetween, isValidMonth } from './validator';
 
 export const NUMBER_LENGTH = 4;
 export const EXPIRY_LENGTH = 2;
-export const CVC_LENGTH = 3;
+
+export const CVC_MIN_LENGTH = 3;
+export const CVC_MAX_LENGTH = 4;
+
 export const PASSWORD_LENGTH = 2;
 
 export const validateCardNumbers = (value: string[]) => {
@@ -46,8 +49,8 @@ export const validateExpiryYear = (value: string) => {
 };
 
 export const validateCvcNumber = (value: string) => {
-  if (!isExactLength(value, CVC_LENGTH)) {
-    return 'CVC 번호 3자리를 입력해 주세요';
+  if (!isLengthBetween(value, CVC_MIN_LENGTH, CVC_MAX_LENGTH)) {
+    return 'CVC 번호 3~4자리를 입력해 주세요';
   }
 
   return null;

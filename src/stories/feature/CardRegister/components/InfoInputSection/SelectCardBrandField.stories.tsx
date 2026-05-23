@@ -3,10 +3,10 @@ import { fn } from 'storybook/test';
 
 import SelectCardBrandField from '../../../../../feature/CardRegister/components/InfoInputSection/SelectCardBrandField';
 import {
-  UseCardCompanyField,
+  useCardCompanyField,
   type CardCompanyFieldType,
 } from '../../../../../feature/CardRegister/hooks/useCardCompanyField';
-import { CARD_COMPANIES } from '../../../../../feature/CardRegister/constant/cardCompanies';
+import { CARD_COMPANIES } from '../../../../../domain/card/constant/cardCompanies';
 
 const cardCompanyOptions = CARD_COMPANIES.map((cardCompany) => ({
   value: cardCompany.id,
@@ -48,7 +48,7 @@ export const Selected: Story = {
 
 export const Interactive: Story = {
   render: function InteractiveSelectCardBrandField() {
-    const field = UseCardCompanyField({});
+    const field = useCardCompanyField({});
 
     return <SelectCardBrandField field={field} />;
   },
