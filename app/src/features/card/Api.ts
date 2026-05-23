@@ -1,19 +1,11 @@
 import { BASE_URL } from "../common/Constants";
+import { type APIErrorMessages } from "../common/Types";
 
 export class NetworkError extends Error {}
 export class HttpError extends Error {
   status: number;
-  errorMessages?: Record<
-    string,
-    { code: string; message: string } | null | undefined
-  >;
-  constructor(
-    status: number,
-    errorMessages?: Record<
-      string,
-      { code: string; message: string } | null | undefined
-    >,
-  ) {
+  errorMessages?: APIErrorMessages;
+  constructor(status: number, errorMessages?: APIErrorMessages) {
     super();
     this.status = status;
     this.errorMessages = errorMessages;

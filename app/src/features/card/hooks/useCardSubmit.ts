@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { NetworkError, HttpError } from "../Api";
-import { createCard } from "../Api";
+import { NetworkError, HttpError, createCard } from "../Api";
+import { type APIErrorMessages } from "../../common/Types";
 
 export default function useCardSubmit() {
   const [formErrorCodes, setFormErrorCodes] = useState<string[]>([]);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const getCodes = (
-    errorMessages: Record<
-      string,
-      { code: string; message: string } | null | undefined
-    >,
-  ) => Object.values(errorMessages).filter(Boolean).map((message) => message!.code);
+  const getCodes = (errorMessages: APIErrorMessages) =>
+    Object.values(errorMessages)
+      .filter(Boolean)
+      .map((message) => message!.code);
 
   const submitCard = async (
     cardNumber: string,
