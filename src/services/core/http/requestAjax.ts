@@ -47,12 +47,11 @@ export const requestAjax = async (url: string, config?: Configs): Promise<Reques
     throw new RequestNetworkError(response);
   }
 
-  let responseData;
+  let responseData = await res.text();
   try {
-    responseData = await res.json();
+    responseData = JSON.parse(responseData);
   } catch (e) {
     console.error(e);
-    responseData = await res.text();
   }
 
   const response = {
