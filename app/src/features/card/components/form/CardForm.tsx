@@ -74,7 +74,7 @@ export function CardForm({
       gotoCreateCardDonePage();
     } catch (e) {
       if (e instanceof NetworkError) {
-        setSubmitError("네트워크 오류가 발생했어요. 잠시 후 다시 시도해 주세요.");
+        setSubmitError(e.message);
       } else if (e instanceof HttpError) {
         if (e.status === 400 && e.errorMessages) {
           const codes = Object.values(e.errorMessages)
@@ -142,12 +142,15 @@ export function CardForm({
       <Button type="submit" disabled={!allComplete}>
         확인
       </Button>
-      {submitError && <ErrorMessage messages={[submitError]} style={{ textAlign: "center" }} />}
+      {submitError && (
+        <ErrorMessage
+          messages={[submitError]}
+          style={{ textAlign: "center" }}
+        />
+      )}
     </CardFormContainer>
   );
 }
-
-
 
 const CardFormContainer = styled.form`
   display: flex;

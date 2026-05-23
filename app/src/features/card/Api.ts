@@ -25,7 +25,9 @@ const request = async (url: string, init?: RequestInit) => {
   try {
     response = await fetch(url, init);
   } catch {
-    throw new NetworkError();
+    throw new NetworkError(
+      "네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
+    );
   }
   if (!response.ok) {
     const body = await response.json().catch(() => undefined);
