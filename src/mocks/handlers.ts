@@ -80,7 +80,7 @@ export const handlers = [
     };
 
     CARD.push(newCard);
-    return HttpResponse.json({ id: newId, status: 201 });
+    return HttpResponse.json({ id: newId }, { status: 201 });
   }),
   http.delete("/cards/:id", ({ params }) => {
     const { id } = params;
