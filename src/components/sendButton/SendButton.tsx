@@ -1,11 +1,17 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCardNumberContext } from "../../context/cardNumber/CardNumberContext";
 import { useCardBrandContext } from "../../context/cardBrand/CardBrandContext";
 import { useExpireDateContext } from "../../context/expireDate/ExpireDateContext";
 import { useCvcContext } from "../../context/cvc/CvcContext";
 
+type Connection = "idle" | "loading" | "success" | "error";
+
 export default function SendButton() {
+  const [connection, setConnection] = useState<Connection>("idle");
+  const navigate = useNavigate();
+
   const { cardNumber, setCardNumberServerError } = useCardNumberContext();
   const {
     selectedItem: { issuerCode },
@@ -13,8 +19,9 @@ export default function SendButton() {
   const { expireDate, setExpireDateServerError } = useExpireDateContext();
   const { cvc, setCvcServerError } = useCvcContext();
 
-  const navigate = useNavigate();
   const sendResult = async () => {
+    setConnection("loading");
+
     try {
       const requestCardNumber = cardNumber.join("");
       const requestExpirationDate = `${expireDate.month}/${expireDate.year}`;
@@ -45,6 +52,7 @@ export default function SendButton() {
         }
       }
 
+      setConnection("success");
       navigate("/react-payments/enrollment", {
         state: {
           cardNumber: requestCardNumber,
@@ -52,6 +60,7 @@ export default function SendButton() {
         },
       });
     } catch (error) {
+      setConnection("error");
       if (error instanceof Error) {
         console.error("에러 발생:", error);
         alert(error.message || "카드 정보를 저장할 수 없습니다.");
@@ -86,7 +95,11 @@ export default function SendButton() {
 
   return (
     <Wrapper>
-      <Button type="submit" onClick={sendResult}>
+      <Button
+        type="submit"
+        disabled={connection === "success" || connection === "loading"}
+        onClick={sendResult}
+      >
         확인
       </Button>
     </Wrapper>
