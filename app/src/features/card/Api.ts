@@ -53,8 +53,11 @@ export const createCard = (
     },
   });
 
-export const getCards = () =>
-  request(`${BASE_URL}/cards/`).then((r) => r.json());
+export const getCards = async () => {
+  const response = await request(`${BASE_URL}/cards/`);
+  const data = await response.json();
+  return data;
+};
 
 export const deleteCard = (cardId: string) =>
   request(`${BASE_URL}/cards/${cardId}/`, { method: "DELETE" });
