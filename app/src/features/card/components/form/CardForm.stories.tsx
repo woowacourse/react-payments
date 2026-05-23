@@ -99,7 +99,7 @@ export const NetworkErrorOnSubmit: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "확인" }));
     await expect(
-      canvas.getByText(
+      await canvas.findByText(
         "네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
       ),
     ).toBeInTheDocument();
@@ -112,13 +112,7 @@ export const ServerErrorOnSubmit: Story = {
   beforeEach() {
     const original = globalThis.fetch;
     globalThis.fetch = fn().mockResolvedValue(
-      new Response(
-        JSON.stringify({ errorMessages: ["서버 오류가 발생했습니다."] }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json" },
-        },
-      ),
+      new Response(null, { status: 500 }),
     );
     return () => {
       globalThis.fetch = original;
@@ -128,7 +122,7 @@ export const ServerErrorOnSubmit: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "확인" }));
     await expect(
-      canvas.getByText("카드 등록에 실패했어요. 입력 정보를 확인해 주세요."),
+      await canvas.findByText("카드 등록에 실패했어요. 입력 정보를 확인해 주세요."),
     ).toBeInTheDocument();
   },
 };

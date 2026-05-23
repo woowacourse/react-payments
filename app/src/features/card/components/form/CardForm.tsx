@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { CardSection } from "./CardSection";
-import { useState } from "react";
 import { CardNumberInput } from "./CardNumberInput";
 import { CardExpiryDateInput } from "./CardExpiryDateInput";
 import { CardCVCInput } from "./CardCVCInput";
@@ -10,9 +9,9 @@ import { Button } from "../../style/Button";
 import { ErrorMessage } from "./ErrorMessage";
 import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
-import { createCard, NetworkError, HttpError } from "../../Api";
 import { joinCardNumber } from "../../Utils";
 import type { CardNumber, SetState } from "../../types";
+import useCardSubmit from "../../hooks/useCardSubmit";
 import type { ExpiryDate } from "../../ExpiryDate";
 
 interface CardFormProps {
@@ -42,6 +41,9 @@ export function CardForm({
   setCardPassword,
   gotoCreateCardDonePage,
 }: CardFormProps) {
+  const fullCardNumber = joinCardNumber(cardNumber);
+  const issuerCode = convertCardBrandToIssuerCode(cardBrand!) ?? "";
+
   const {
     cardNumberIsComplete,
     cardBrandIsComplete,
@@ -50,42 +52,24 @@ export function CardForm({
     cardPasswordIsComplete,
     allComplete,
   } = calculateCreateCardCurrentProgress({
-    cardNumber: joinCardNumber(cardNumber),
+    cardNumber: fullCardNumber,
     cardBrand,
     cardExpiryDate: cardExpiryDate.toMMYY(),
     cardCVC,
     cardPassword,
   });
 
-  const [formErrorCodes, setFormErrorCodes] = useState<string[]>([]);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const { formErrorCodes, submitError, submitCard } = useCardSubmit();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitError(null);
-    setFormErrorCodes([]);
-    try {
-      await createCard(
-        joinCardNumber(cardNumber),
-        cardExpiryDate.toSlashFormat(),
-        cardCVC,
-        convertCardBrandToIssuerCode(cardBrand!) ?? "",
-      );
-      gotoCreateCardDonePage();
-    } catch (e) {
-      if (e instanceof NetworkError) {
-        setSubmitError(e.message);
-      } else if (e instanceof HttpError) {
-        if (e.status === 400 && e.errorMessages) {
-          const codes = Object.values(e.errorMessages)
-            .filter(Boolean)
-            .map((m) => m!.code);
-          setFormErrorCodes(codes);
-        } else {
-          setSubmitError("카드 등록에 실패했어요. 입력 정보를 확인해 주세요.");
-        }
-      }
-    }
+    const success = await submitCard(
+      fullCardNumber,
+      cardExpiryDate.toSlashFormat(),
+      cardCVC,
+      issuerCode,
+    );
+    if (success) gotoCreateCardDonePage();
   };
 
   return (
