@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { Card } from '../../../types/card';
 import { CARD_BRANDS, type CardBrand } from '../../../constants/constants';
+import { Wrapper } from '../../PageCard.styles';
 import {
   BrandLabel,
   CardNumber,
@@ -43,45 +44,47 @@ export function SuccessState({ cards, onDelete }: Props) {
   };
 
   return (
-    <Container>
-      <Title>보유 카드{isEmpty ? '' : ` (${cards.length})`}</Title>
+    <Wrapper>
+      <Container>
+        <Title>보유 카드{isEmpty ? '' : ` (${cards.length})`}</Title>
 
-      {isEmpty ? (
-        <EmptyBox>
-          <CardPlaceholder />
-          <EmptyHeading>등록된 카드가 없습니다</EmptyHeading>
-          <EmptyDescription>
-            아래 버튼을 눌러 첫 카드를 등록해보세요
-          </EmptyDescription>
-        </EmptyBox>
-      ) : (
-        <List>
-          {cards.map((card) => {
-            const brand = CARD_BRANDS[card.cardBrand as CardBrand];
-            return (
-              <Row key={card.id}>
-                <CardThumb color={brand.color} />
-                <Info>
-                  <BrandLabel>{brand.label}</BrandLabel>
-                  <CardNumber>{card.cardNumber}</CardNumber>
-                  <ExpireDate>유효기간 {card.expireDate}</ExpireDate>
-                </Info>
-                <DeleteButton
-                  type="button"
-                  onClick={() => handleDelete(card.id)}
-                  aria-label="카드 삭제"
-                >
-                  ×
-                </DeleteButton>
-              </Row>
-            );
-          })}
-        </List>
-      )}
+        {isEmpty ? (
+          <EmptyBox>
+            <CardPlaceholder />
+            <EmptyHeading>등록된 카드가 없습니다</EmptyHeading>
+            <EmptyDescription>
+              아래 버튼을 눌러 첫 카드를 등록해보세요
+            </EmptyDescription>
+          </EmptyBox>
+        ) : (
+          <List>
+            {cards.map((card) => {
+              const brand = CARD_BRANDS[card.cardBrand as CardBrand];
+              return (
+                <Row key={card.id}>
+                  <CardThumb color={brand.color} />
+                  <Info>
+                    <BrandLabel>{brand.label}</BrandLabel>
+                    <CardNumber>{card.cardNumber}</CardNumber>
+                    <ExpireDate>유효기간 {card.expireDate}</ExpireDate>
+                  </Info>
+                  <DeleteButton
+                    type="button"
+                    onClick={() => handleDelete(card.id)}
+                    aria-label="카드 삭제"
+                  >
+                    ×
+                  </DeleteButton>
+                </Row>
+              );
+            })}
+          </List>
+        )}
 
-      <AddButton type="button" onClick={handleAdd}>
-        {addButtonLabel}
-      </AddButton>
-    </Container>
+        <AddButton type="button" onClick={handleAdd}>
+          {addButtonLabel}
+        </AddButton>
+      </Container>
+    </Wrapper>
   );
 }

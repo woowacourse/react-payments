@@ -1,7 +1,6 @@
 import { LoadingState } from './LoadingState/LoadingState';
 import { ErrorState } from './ErrorState/ErrorState';
 import { SuccessState } from './SuccessState/SuccessState';
-import { Wrapper } from '../PageCard.styles';
 import { useEffect } from 'react';
 import { useCards } from '../../hooks/useCards';
 
@@ -18,15 +17,8 @@ export function CardListPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <Wrapper>
-      {state === 'idle' || state === 'loading' ? (
-        <LoadingState />
-      ) : state === 'success' ? (
-        <SuccessState cards={cards} onDelete={remove} />
-      ) : state === 'error' ? (
-        <ErrorState onRetry={() => loadCards()} />
-      ) : null}
-    </Wrapper>
-  );
+  if (state === 'idle' || state === 'loading') return <LoadingState />;
+  if (state === 'error') return <ErrorState onRetry={() => loadCards()} />;
+
+  return <SuccessState cards={cards} onDelete={remove} />;
 }
