@@ -108,6 +108,7 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
           />
         ))}
       </Flex>
+      <InputErrorMessage>{props.errorMessage}</InputErrorMessage>
     </Flex>
   );
 }
