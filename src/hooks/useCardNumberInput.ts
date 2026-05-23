@@ -17,7 +17,7 @@ export function useCardNumberInput() {
 
   const setCardNumberServerError = (message: string) => {
     inputRefs.current[0]?.focus();
-    setCardNumberError([message, "", "", "", ""]);
+    setCardNumberError([message, "", "", ""]);
   };
 
   const handleCardNumberChange = (index: number, value: string) => {
