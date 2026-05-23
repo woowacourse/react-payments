@@ -16,6 +16,11 @@ export default function CardItem({
 
   const { title, bgHex } = convertIssuerCodeToCardBrand(issuerCode)!;
 
+  const cardNumberForDisplay = splitCardNumber(
+    maskCardNumber(number),
+    detectCardNetwork(number)?.title ?? "",
+  );
+
   return (
     <CardItemContainer>
       <CardContentContainer>
@@ -23,12 +28,7 @@ export default function CardItem({
           <MiniCard bgHex={bgHex} />
           <div className="card-info">
             <p className="card-brand-name">{title}</p>
-            <p>
-              {splitCardNumber(
-                maskCardNumber(number),
-                detectCardNetwork(number)?.title ?? "",
-              )}
-            </p>
+            <p>{cardNumberForDisplay}</p>
             <p>유효기간 {expirationDate}</p>
           </div>
         </CardContent>
