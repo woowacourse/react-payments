@@ -5,11 +5,11 @@ import { CARD_BRANDS } from '../../../constants/constants';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardBrand'];
-  serverError?: string | null;
+  errorMessage?: string | null;
 }
 
 // 카드사를 선택할 수 있는 컴포넌트
-export default function CardBrandField({ field, serverError }: Props) {
+export default function CardBrandField({ field, errorMessage }: Props) {
   const { value: cardBrand, set: setCardBrand } = field;
 
   return (
@@ -26,7 +26,7 @@ export default function CardBrandField({ field, serverError }: Props) {
           </option>
         ))}
       </Select>
-      <ErrorMessage>{serverError ?? ''}</ErrorMessage>
+      <ErrorMessage>{errorMessage ?? ''}</ErrorMessage>
     </Field>
   );
 }

@@ -22,25 +22,25 @@ export default function CardFormFields({ cardForm, step, submitError }: Props) {
       {step >= 4 && (
         <CardPasswordField
           field={cardForm.cardPassword}
-          serverError={errorOf('cardPassword')}
+          errorMessage={errorOf('cardPassword')}
         />
       )}
-      {step >= 3 && <CvcField field={cardForm.cvc} serverError={errorOf('cvc')} />}
+      {step >= 3 && <CvcField field={cardForm.cvc} errorMessage={errorOf('cvc')} />}
       {step >= 2 && (
         <ExpireDateField
           field={cardForm.expireDate}
-          serverError={errorOf('expireDate')}
+          errorMessage={errorOf('expireDate')}
         />
       )}
       {step >= 1 && (
         <CardBrandField
           field={cardForm.cardBrand}
-          serverError={errorOf('cardBrand')}
+          errorMessage={errorOf('cardBrand')}
         />
       )}
       <CardNumberField
         field={cardForm.cardNumber}
-        serverError={errorOf('cardNumber')}
+        errorMessage={errorOf('cardNumber')}
       />
     </Wrapper>
   );

@@ -18,10 +18,10 @@ import useBlur from '../useBlur';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cardNumber'];
-  serverError?: string | null;
+  errorMessage?: string | null;
 }
 //카드 번호를 입력할수 있는 컴포넌트
-export default function CardNumberField({ field, serverError }: Props) {
+export default function CardNumberField({ field, errorMessage }: Props) {
   const { value: cardNumber, set: setCardNumber } = field;
   const segments = getCardNumberSegments(cardNumber.join(''));
   const { setRef, focusNext } = useAutoFocus();
@@ -65,7 +65,7 @@ export default function CardNumberField({ field, serverError }: Props) {
           />
         ))}
       </InputContainer>
-      <ErrorMessage>{serverError ?? (touched ? error : '')}</ErrorMessage>
+      <ErrorMessage>{errorMessage ?? (touched ? error : '')}</ErrorMessage>
     </Field>
   );
 }
