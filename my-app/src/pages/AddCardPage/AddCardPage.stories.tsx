@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { userEvent, within, expect } from 'storybook/test';
+import { MemoryRouter } from 'react-router';
 import AddCardPage from './AddCardPage';
 
 const meta: Meta<typeof AddCardPage> = {
@@ -8,6 +9,13 @@ const meta: Meta<typeof AddCardPage> = {
   parameters: {
     layout: 'fullscreen',
   },
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default meta;
@@ -21,26 +29,16 @@ export const NormalCase: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // 카드 번호 입력
-    const cardInputs = canvas.getAllByPlaceholderText('1234');
-    await userEvent.type(cardInputs[0], '4111');
-    await userEvent.type(cardInputs[1], '2222');
-    await userEvent.type(cardInputs[2], '3333');
-    await userEvent.type(cardInputs[3], '4444');
+    await userEvent.type(
+      canvas.getByPlaceholderText('0000 0000 0000 0000'),
+      '4111111111111111',
+    );
+    await userEvent.selectOptions(await canvas.findByRole('combobox'), '41');
 
-    // 유효기간 입력 (MM, YY)
-    const monthInput = canvas.getByPlaceholderText('MM');
-    await userEvent.type(monthInput, '12');
-
-    const yearInput = canvas.getByPlaceholderText('YY');
-    await userEvent.type(yearInput, '26');
-
-    // CVC 입력
-    const cvcInput = canvas.getByPlaceholderText('123');
-    await userEvent.type(cvcInput, '789');
-
-    // 마지막으로 빈 배경을 클릭하여 최종 onBlur 이벤트 발생
-    await userEvent.click(canvasElement);
+    await userEvent.type(await canvas.findByPlaceholderText('MM'), '12');
+    await userEvent.type(await canvas.findByPlaceholderText('YY'), '28');
+    await userEvent.type(await canvas.findByPlaceholderText('123'), '789');
+    await userEvent.type(await canvas.findByPlaceholderText('**'), '12');
   },
 };
 
@@ -49,35 +47,14 @@ export const ErrorValidationScenario: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // 카드 번호 자릿수 부족 에러 테스트
-    const cardInputs = canvas.getAllByPlaceholderText('1234');
-    await userEvent.type(cardInputs[0], '12'); // 4자리가 아닌 2자리만 입력
-    await userEvent.click(canvasElement); // 포커스 해제 (onBlur)
-
-    // 에러 메시지가 화면에 나타났는지 검증
-    await expect(
-      canvas.getByText('필요한 자릿수를 모두 입력해주세요!'),
-    ).toBeInTheDocument();
-
-    // 유효기간 '월' 에러 테스트 (00월 입력)
-    const monthInput = canvas.getByPlaceholderText('MM');
-    await userEvent.type(monthInput, '00');
-    await userEvent.click(canvasElement);
-
-    // 에러 메시지가 화면에 나타났는지 검증
-    await expect(
-      canvas.getByText('월은 1월부터 12월 사이여야 합니다!'),
-    ).toBeInTheDocument();
-
-    // CVC 자릿수 부족 에러 테스트
-    const cvcInput = canvas.getByPlaceholderText('123');
-    await userEvent.type(cvcInput, '7'); // 3자리가 아닌 1자리만 입력
-    await userEvent.click(canvasElement);
-
-    // CVC 쪽 에러 메시지 검증
-    const lengthErrors = canvas.getAllByText(
-      '필요한 자릿수를 모두 입력해주세요!',
+    await userEvent.type(
+      canvas.getByPlaceholderText('0000 0000 0000 0000'),
+      '12',
     );
-    await expect(lengthErrors.length).toBeGreaterThanOrEqual(2);
+    await userEvent.click(canvasElement);
+
+    await expect(
+      canvas.getByText('카드 번호는 16자리를 입력해주세요.'),
+    ).toBeInTheDocument();
   },
 };

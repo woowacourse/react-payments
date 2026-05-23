@@ -17,5 +17,6 @@ export const Default: Story = {
       number: '551112******9012',
       expirationDate: '12/28',
     },
+    onDelete: () => {},
   },
 };
