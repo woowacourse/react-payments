@@ -5,12 +5,12 @@ import type { Configs, RequestFetchResponse } from './requestAjax.types';
 import { RequestAjaxError, RequestNetworkError } from './error';
 
 export const requestAjax = async (url: string, config?: Configs): Promise<RequestFetchResponse> => {
-  const { method = 'get', url: configUrl, params, query, data, headers } = config || {};
+  const { method = 'get', url: configUrl, pathParams, query, data, headers } = config || {};
 
   let finalUrl = `${ENV.API_URL || ''}${configUrl || url}`;
 
-  if (params) {
-    const paramsstring = Object.values(params).join('/');
+  if (pathParams) {
+    const paramsstring = Object.values(pathParams).join('/');
     finalUrl += `/${paramsstring}`;
   }
 

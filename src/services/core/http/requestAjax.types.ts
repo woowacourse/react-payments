@@ -3,7 +3,7 @@ type Method = 'get' | 'post' | 'put' | 'delete';
 export type Configs = {
   method?: Method | undefined;
   url?: string | undefined;
-  params?: Record<string, unknown> | undefined;
+  pathParams?: Record<string, unknown> | undefined;
   query?: Record<string, unknown> | undefined;
   data?: Record<string, unknown> | undefined;
   headers?: Record<string, unknown> | undefined;
