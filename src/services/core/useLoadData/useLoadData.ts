@@ -38,8 +38,8 @@ export const useLoadData = <T = unknown>({ queryFn }: Options): Result<T> => {
   }, [fetchData]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    refetch();
+  }, [refetch]);
 
   return { status, refetch };
 };
