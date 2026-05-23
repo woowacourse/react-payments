@@ -205,7 +205,11 @@ function CardDashboardPage() {
 
   const handleDelete = async (id: string) => {
     if (!window.confirm("카드를 삭제하시겠습니까?")) return;
-    await fetch(`${import.meta.env.BASE_URL}cards/${id}`, { method: "DELETE" });
+    const res = await fetch(`${import.meta.env.BASE_URL}cards/${id}`, { method: "DELETE" });
+    if (!res.ok) {
+      alert("카드 삭제에 실패했습니다. 다시 시도해 주세요.");
+      return;
+    }
     setFetchState((prev) =>
       prev.status === "success"
         ? {
