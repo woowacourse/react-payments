@@ -152,7 +152,11 @@ export default function CardList() {
                 <p>{splitCardNumberAlongCardType(card.number)}</p>
                 <p>유효기간 {card.expirationDate}</p>
               </MyCardInfo>
-              <Delete type="button" onClick={() => deleteCard(card.id)}>
+              <Delete
+                type="button"
+                aria-label={`${findCardBrand(card.issuerCode)} 삭제`}
+                onClick={() => deleteCard(card.id)}
+              >
                 x
               </Delete>
             </IndividualCard>
