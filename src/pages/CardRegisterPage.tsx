@@ -9,6 +9,7 @@ import PasswordNumberField from "../components/InputField/PasswordNumberField";
 import CheckBtn from "../components/button/CheckBtn";
 import useCardRegisterForm from "../hooks/useCardRegisterForm";
 import useCardSubmit from "../hooks/useCardSubmit";
+import { useNavigate } from "react-router-dom";
 
 export default function CardRegisterPage() {
   const {
@@ -32,11 +33,14 @@ export default function CardRegisterPage() {
     onCvcNumberComplete,
   } = useCardRegisterForm();
 
+  const navigate = useNavigate();
+
   const { handleComplete, serverError, isSubmitting } = useCardSubmit({
     cardNumbers,
     expNumbers,
     cvcNumbers,
     cardFirm,
+    onSuccess: () => navigate("/cards"),
   });
 
   return (
