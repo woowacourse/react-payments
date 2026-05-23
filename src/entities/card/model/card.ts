@@ -29,3 +29,7 @@ export interface RegisterCardErrorResponse {
   code: RegisterCardErrorCode;
   message: string;
 }
+
+export type RegisterCardResult =
+  | { ok: true; data: RegisterCardResponse }
+  | { ok: false; error: RegisterCardErrorResponse };
