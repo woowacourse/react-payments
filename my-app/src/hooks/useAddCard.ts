@@ -4,8 +4,8 @@ import { postCardItem } from '../apis/card';
 import { getCardIssuerByCode } from '../constants/cardIssuer';
 import {
   CARD_SERVER_ERROR_FIELD,
+  isCardServerErrorResponse,
   type CardServerErrorField,
-  type CardServerErrorResponse,
   type CardServerErrors,
 } from '../constants/serverError';
 import type { CardFormTypes } from '../types/card';
@@ -41,7 +41,11 @@ function useAddCard(cardForm: CardFormTypes) {
         },
       });
     } catch (error) {
-      const serverError = error as CardServerErrorResponse;
+      if (!isCardServerErrorResponse(error)) {
+        return;
+      }
+
+      const serverError = error;
       const field = CARD_SERVER_ERROR_FIELD[serverError.code];
 
       setServerErrors({

@@ -41,13 +41,25 @@ function CardForm({
 }: Props) {
   const { step, openStep } = useFormStep();
 
+  function updateField<K extends keyof CardFormTypes>(
+    field: K,
+    value: CardFormTypes[K],
+    serverErrorField?: CardServerErrorField,
+  ) {
+    if (serverErrorField) {
+      clearServerError(serverErrorField);
+    }
+
+    updateCardForm(field, value);
+  }
+
   return (
     <StyledForm onSubmit={handleOnSubmit}>
       {step >= FORM_STEP.PASSWORD && (
         <CardPasswordSection
           value={cardForm.cardPassword}
           updateValue={(value) => {
-            updateCardForm('cardPassword', value);
+            updateField('cardPassword', value);
 
             if (!getCardPasswordError(value).error) {
               openStep(FORM_STEP.SUBMIT);
@@ -60,8 +72,7 @@ function CardForm({
           value={cardForm.cardCvc}
           serverErrorMessage={serverErrors.cardCvc}
           updateValue={(value) => {
-            clearServerError('cardCvc');
-            updateCardForm('cardCvc', value);
+            updateField('cardCvc', value, 'cardCvc');
 
             if (!getCardCvcError(value).error) {
               openStep(FORM_STEP.PASSWORD);
@@ -74,8 +85,7 @@ function CardForm({
           value={cardForm.cardExpirationDate}
           serverErrorMessage={serverErrors.cardExpirationDate}
           updateValue={(value) => {
-            clearServerError('cardExpirationDate');
-            updateCardForm('cardExpirationDate', value);
+            updateField('cardExpirationDate', value, 'cardExpirationDate');
 
             if (
               !getCardMonthError(value.month).error &&
@@ -90,7 +100,7 @@ function CardForm({
         <CardIssuerSection
           value={cardForm.cardIssuer}
           updateValue={(value) => {
-            updateCardForm('cardIssuer', value);
+            updateField('cardIssuer', value);
 
             if (!getCardIssuerError(value).error) {
               openStep(FORM_STEP.EXPIRATION_DATE);
@@ -103,8 +113,7 @@ function CardForm({
           value={cardForm.cardNumber}
           serverErrorMessage={serverErrors.cardNumber}
           updateValue={(value) => {
-            clearServerError('cardNumber');
-            updateCardForm('cardNumber', value);
+            updateField('cardNumber', value, 'cardNumber');
 
             if (!getCardNumberError(value).error) {
               openStep(FORM_STEP.CARD_ISSUER);
