@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const CardListItemContainer = styled.div`
+export const CardListItemContainer = styled.li`
   width: 100%;
   padding: 12px;
   box-sizing: border-box;

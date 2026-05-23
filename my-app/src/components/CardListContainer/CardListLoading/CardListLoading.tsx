@@ -12,7 +12,7 @@ const SKELETON_ITEMS = Array.from({ length: 3 });
 
 function CardListLoading() {
   return (
-    <CardListLoadingContainer>
+    <CardListLoadingContainer data-testid="card-list-loading">
       <GlobalAnimation />
       {SKELETON_ITEMS.map((_, index) => (
         <SkeletonCardItem key={index}>

@@ -1,6 +1,6 @@
 import AddCardButton from './AddCardButton/AddCardButton';
 import CardListItem from './CardListItem/CardListItem';
-import { CardListContainer } from './CardList.styles';
+import { CardListContainer, CardItemList } from './CardList.styles';
 import { deleteCardItem } from '../../../apis/card';
 
 interface Props {
@@ -25,9 +25,11 @@ function CardList({ cardList, onRefresh }: Props) {
 
   return (
     <CardListContainer>
-      {cardList.map((card) => (
-        <CardListItem key={card.id} card={card} onDelete={handleDelete} />
-      ))}
+      <CardItemList>
+        {cardList.map((card) => (
+          <CardListItem key={card.id} card={card} onDelete={handleDelete} />
+        ))}
+      </CardItemList>
       <AddCardButton />
     </CardListContainer>
   );
