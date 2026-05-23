@@ -32,6 +32,24 @@ function maskNumber(number: string): string {
   return number.slice(0, 6) + "******" + number.slice(-4);
 }
 
+interface CardRequestBody {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: string;
+}
+
+function isValidCardRequestBody(body: unknown): body is CardRequestBody {
+  if (typeof body !== "object" || body === null) return false;
+  const b = body as Record<string, unknown>;
+  return (
+    typeof b.number === "string" &&
+    typeof b.expirationDate === "string" &&
+    typeof b.cvc === "string" &&
+    typeof b.issuerCode === "string"
+  );
+}
+
 function isValidExpirationDate(expirationDate: string): boolean {
   if (!/^\d{2}\/\d{2}$/.test(expirationDate)) return false;
   const month = parseInt(expirationDate.slice(0, 2));
@@ -55,12 +73,14 @@ export const handlers = [
 
   // POST /cards
   http.post("/react-payments/cards", async ({ request }) => {
-    const body = (await request.json()) as {
-      number: string;
-      expirationDate: string;
-      cvc: string;
-      issuerCode: string;
-    };
+    const body = await request.json();
+
+    if (!isValidCardRequestBody(body)) {
+      return HttpResponse.json(
+        { code: "BAD_REQUEST", message: "필수 필드가 누락되었습니다." },
+        { status: 400 },
+      );
+    }
 
     if (!isValidBin(body.number)) {
       return HttpResponse.json(
