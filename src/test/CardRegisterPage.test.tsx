@@ -65,7 +65,7 @@ describe("카드 등록 페이지", () => {
     expect(await screen.findByText(/보유 카드/)).toBeInTheDocument();
   });
 
-  test("등록 실패(400) 시 code에 매핑된 필드 아래에 에러 메시지를 표시한다", async () => {
+  test("등록 실패(400) INVALID_CVC: CVC 필드에 에러 메시지를 표시한다", async () => {
     const user = userEvent.setup();
 
     server.use(
@@ -84,6 +84,50 @@ describe("카드 등록 페이지", () => {
 
     expect(
       await screen.findByText("유효하지 않은 CVC입니다."),
+    ).toBeInTheDocument();
+  });
+
+  test("등록 실패(400) INVALID_CARD_NUMBER: 카드 번호 필드에 에러 메시지를 표시한다", async () => {
+    const user = userEvent.setup();
+
+    server.use(
+      http.post("/react-payments/cards", () =>
+        HttpResponse.json(
+          { code: "INVALID_CARD_NUMBER", message: "유효하지 않은 카드 번호입니다." },
+          { status: 400 },
+        ),
+      ),
+    );
+
+    renderRegisterPage();
+    await fillCardForm(user);
+
+    await user.click(screen.getByRole("button", { name: "확인" }));
+
+    expect(
+      await screen.findByText("유효하지 않은 카드 번호입니다."),
+    ).toBeInTheDocument();
+  });
+
+  test("등록 실패(400) INVALID_EXPIRATION_DATE: 만료일 필드에 에러 메시지를 표시한다", async () => {
+    const user = userEvent.setup();
+
+    server.use(
+      http.post("/react-payments/cards", () =>
+        HttpResponse.json(
+          { code: "INVALID_EXPIRATION_DATE", message: "유효하지 않은 만료일입니다." },
+          { status: 400 },
+        ),
+      ),
+    );
+
+    renderRegisterPage();
+    await fillCardForm(user);
+
+    await user.click(screen.getByRole("button", { name: "확인" }));
+
+    expect(
+      await screen.findByText("유효하지 않은 만료일입니다."),
     ).toBeInTheDocument();
   });
 });
