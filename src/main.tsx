@@ -8,10 +8,12 @@ async function enableMocking() {
   return worker.start({ onUnhandledRequest: "bypass" });
 }
 
-enableMocking().then(() => {
-  createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  );
-});
+enableMocking()
+  .catch((e) => console.error("MSW 초기화 실패:", e))
+  .finally(() => {
+    createRoot(document.getElementById("root")!).render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    );
+  });
