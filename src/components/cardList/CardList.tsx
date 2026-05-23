@@ -46,23 +46,24 @@ export default function CardList() {
   };
 
   const deleteFetchData = async (id: string) => {
-    if (window.confirm("해당 카드를 삭제하시겠습니까?")) {
-      try {
-        const response = await fetch(`/cards/${id}`, {
-          method: "DELETE",
-        });
+    const response = await fetch(`/cards/${id}`, {
+      method: "DELETE",
+    });
 
-        if (!response.ok) throw new Error(`오류 발생: ${response.status}`);
-      } catch (error) {
-        console.error("해당 카드 삭제 실패", error);
-        alert("카드 삭제에 실패했습니다. 다시 시도해주세요.");
-      }
-    }
+    if (!response.ok) throw new Error(`오류 발생: ${response.status}`);
   };
 
-  const deleteCard = (id: string) => {
-    deleteFetchData(id);
-    getFetchData();
+  const deleteCard = async (id: string) => {
+    if (!window.confirm("해당 카드를 삭제하시겠습니가?")) return;
+
+    try {
+      await deleteFetchData(id);
+    } catch (error) {
+      console.error("해당 카드 삭제 실패", error);
+      alert("카드 삭제에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      await getFetchData();
+    }
   };
 
   const findCardColor = (issuerCode: string) => {
