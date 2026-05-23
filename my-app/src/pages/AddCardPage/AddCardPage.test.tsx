@@ -1,45 +1,22 @@
-import '@testing-library/jest-dom/vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { setupServer } from 'msw/node';
-import {
-  createMemoryRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from 'react-router';
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { createMemoryRouter, RouterProvider } from 'react-router';
+import { describe, expect, it } from 'vitest';
 import App from '../../App';
-import { handlers } from '../../mocks/handlers';
-import { cards } from '../../mocks/mockDB';
 import SuccessPage from '../SuccessPage/SuccessPage';
 import AddCardPage from './AddCardPage';
 
-const server = setupServer(...handlers);
-
-beforeAll(() => {
-  server.listen();
-});
-
-afterEach(() => {
-  cleanup();
-  server.resetHandlers();
-  cards.length = 0;
-});
-
-afterAll(() => {
-  server.close();
-});
-
 function renderAddCardPage() {
-  const router = createMemoryRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<App />}>
-        <Route index element={<AddCardPage />} />
-        <Route path="success" element={<SuccessPage />} />
-      </Route>,
-    ),
-  );
+  const router = createMemoryRouter([
+    {
+      path: '/',
+      element: <App />,
+      children: [
+        { index: true, element: <AddCardPage /> },
+        { path: 'success', element: <SuccessPage /> },
+      ],
+    },
+  ]);
 
   render(<RouterProvider router={router} />);
 }
