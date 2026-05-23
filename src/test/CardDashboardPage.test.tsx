@@ -90,6 +90,27 @@ describe("카드 삭제", () => {
     expect(screen.queryByText("신한카드")).not.toBeInTheDocument();
   });
 
+  test("서버 실패 시 카드가 목록에서 제거되지 않고 실패 알림을 표시한다", async () => {
+    const user = userEvent.setup();
+    const alertSpy = vi.spyOn(window, "alert").mockImplementation(() => {});
+
+    server.use(
+      http.get("/react-payments/cards", () => HttpResponse.json([mockCard])),
+      http.delete("/react-payments/cards/card-1", () =>
+        new HttpResponse(null, { status: 500 }),
+      ),
+    );
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+
+    renderDashboard();
+
+    await screen.findByText("신한카드");
+    await user.click(screen.getByRole("button", { name: "✕" }));
+
+    expect(alertSpy).toHaveBeenCalledWith("카드 삭제에 실패했습니다. 다시 시도해 주세요.");
+    expect(screen.getByText("신한카드")).toBeInTheDocument();
+  });
+
   test("취소 클릭 시 DELETE 요청을 보내지 않는다", async () => {
     const user = userEvent.setup();
     let deleteWasCalled = false;
