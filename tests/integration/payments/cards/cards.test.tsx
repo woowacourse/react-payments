@@ -62,6 +62,12 @@ describe('카드 목록 페이지 테스트', async () => {
   test('카드 삭제 시 카드 목록에서 삭제했던 카드가 삭제된다 ', async () => {
     vi.spyOn(window, 'confirm').mockImplementation(() => true);
 
+    server.use(
+      http.get('/cards', () => {
+        return HttpResponse.json(cards);
+      }),
+    );
+
     // ARRANGE
     renderProvider(<AppRoutes />, { route: '/payments/cards' });
 
@@ -69,13 +75,13 @@ describe('카드 목록 페이지 테스트', async () => {
     const items = await screen.findAllByRole('button');
     const firstItem = items[0];
 
-    await userEvent.click(firstItem);
-
     server.use(
       http.get('/cards', () => {
         return HttpResponse.json(cards.slice(1));
       }),
     );
+
+    await userEvent.click(firstItem);
 
     // ASSERT
     await waitFor(() => {
