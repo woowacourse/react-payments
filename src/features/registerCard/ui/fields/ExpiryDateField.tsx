@@ -5,6 +5,7 @@ import {
   EXPIRY_MONTH_LENGTH,
   EXPIRY_YEAR_LENGTH,
   validateExpiryMonth,
+  validateExpiryYear,
   type ExpiryDate,
 } from '@/entities/card/model/expiryDate';
 import {
@@ -18,7 +19,6 @@ import type { FieldServerError } from '../../model/registerCardForm';
 
 export interface ExpiryFieldControl {
   expiryDate: ExpiryDate;
-  shouldComplete: (value: ExpiryDate) => boolean;
   onChange: (value: ExpiryDate) => void;
 }
 
@@ -31,7 +31,6 @@ export interface ExpiryDateFieldProps extends ExpiryFieldControl {
 export const ExpiryDateField = ({
   expiryDate,
   serverError,
-  shouldComplete,
   onChange,
   onComplete,
   setStepRef,
@@ -61,7 +60,7 @@ export const ExpiryDateField = ({
     onChange(next);
 
     if (validateExpiryMonth(month)) focusNext(1);
-    if (shouldComplete(next)) onComplete?.();
+    if (validateExpiryMonth(next.month) && validateExpiryYear(next.year)) onComplete?.();
   };
 
   const handleChangeYear = (year: string) => {
@@ -74,7 +73,7 @@ export const ExpiryDateField = ({
     };
     onChange(next);
 
-    if (shouldComplete(next)) onComplete?.();
+    if (validateExpiryMonth(next.month) && validateExpiryYear(next.year)) onComplete?.();
   };
   return (
     <Field

@@ -1,11 +1,11 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
+import { validatePassword } from '@/entities/card/model/password';
 import { useState } from 'react';
 import { getPasswordFieldState, isValidInputPassword } from '../../model/registerPassword';
 
 export interface PasswordFieldControl {
   password: string;
-  shouldComplete: (value: string) => boolean;
   onChange: (v: string) => void;
 }
 
@@ -17,7 +17,6 @@ export interface PasswordFieldProps extends PasswordFieldControl {
 
 export const PasswordField = ({
   password,
-  shouldComplete,
   onChange,
   setStepRef,
   onComplete,
@@ -31,7 +30,7 @@ export const PasswordField = ({
 
     onChange(inputValue);
 
-    if (shouldComplete(inputValue)) {
+    if (validatePassword(inputValue)) {
       onComplete?.();
     }
   };

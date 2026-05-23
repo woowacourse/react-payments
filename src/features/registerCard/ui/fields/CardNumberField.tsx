@@ -1,6 +1,7 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
 import { useInputFocus } from '@/core/hooks/useInputFocus';
+import { validateCardNumber } from '@/entities/card/model/cardNumber';
 import { useState } from 'react';
 import {
   isValidInputCardNumber,
@@ -12,7 +13,6 @@ import type { FieldServerError } from '../../model/registerCardForm';
 
 export interface CardNumberFieldControl {
   numbers: string[];
-  shouldComplete: (value: string[]) => boolean;
   onChange: (v: string[]) => void;
 }
 
@@ -31,7 +31,6 @@ export const NumberField = ({
   onChange,
   setStepRef,
   onComplete,
-  shouldComplete,
 }: CardNumberFieldProps) => {
   const { setInputRef, focusNext } = useInputFocus();
   const [touched, setTouched] = useState([false, false, false, false]);
@@ -58,7 +57,7 @@ export const NumberField = ({
 
     if (value.length === format[index]) focusNext(index + 1);
 
-    if (shouldComplete(nextNumbers)) onComplete();
+    if (validateCardNumber(nextNumbers.join(''))) onComplete();
   };
 
   const handleBlur = (index: number) => {

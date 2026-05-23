@@ -5,7 +5,6 @@ import { BANK_RULES, BANKS, type Bank } from '@/entities/card/model/bank';
 
 export interface BankFieldControl {
   bank: Bank | undefined;
-  shouldComplete: (value: Bank) => boolean;
   onChange: (v: Bank) => void;
 }
 export interface BankSelectFieldProps extends BankFieldControl {
@@ -16,16 +15,12 @@ export interface BankSelectFieldProps extends BankFieldControl {
 export const BankSelectField = ({
   bank,
   onChange,
-  shouldComplete,
   setStepRef,
   onComplete,
 }: BankSelectFieldProps) => {
   const handleChange = (value: Bank) => {
     onChange(value);
-
-    if (shouldComplete(value)) {
-      onComplete();
-    }
+    onComplete();
   };
   return (
     <Field title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다.">

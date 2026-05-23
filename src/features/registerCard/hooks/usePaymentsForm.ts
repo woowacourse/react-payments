@@ -49,32 +49,26 @@ export const usePaymentsForm = (initalValue: CardInfo): UsePaymentsFormResult =>
 
   const numbersField: CardNumberFieldControl = {
     numbers,
-    shouldComplete: (value: string[]) => validateCardNumber(value.join('')),
     onChange: handleChangeNumbers,
   };
 
   const expiryField: ExpiryFieldControl = {
     expiryDate,
-    shouldComplete: (value: ExpiryDate) =>
-      validateExpiryMonth(value.month) && validateExpiryYear(value.year),
     onChange: handleChangeExpiryDate,
   };
 
   const bankField: BankFieldControl = {
     bank,
-    shouldComplete: (value: Bank | undefined) => value !== undefined,
     onChange: handleChangeBank,
   };
 
   const cvcField: CvcFieldControl = {
     cvc,
-    shouldComplete: (value: string) => validateCvc(value),
     onChange: handleChangeCvc,
   };
 
   const passwordField: PasswordFieldControl = {
     password,
-    shouldComplete: (value: string) => validatePassword(value),
     onChange: handleChangePassword,
   };
 
