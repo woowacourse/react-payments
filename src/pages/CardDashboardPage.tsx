@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import EmptyCardList from "../components/CardList/EmptyCardList";
@@ -179,10 +179,11 @@ const AddCardButton = styled.button`
 
 function CardDashboardPage() {
   const navigate = useNavigate();
-  const [fetchState, setFetchState] = useState<FetchState>({ status: "loading" });
-  const [fetchKey, setFetchKey] = useState(0);
+  const [fetchState, setFetchState] = useState<FetchState>({
+    status: "loading",
+  });
 
-  useEffect(() => {
+  const fetchCards = useCallback(() => {
     fetch(`${import.meta.env.BASE_URL}cards`)
       .then((res) => {
         if (!res.ok) throw new Error();
@@ -190,12 +191,16 @@ function CardDashboardPage() {
       })
       .then((data: Card[]) => setFetchState({ status: "success", data }))
       .catch(() => setFetchState({ status: "error" }));
-  }, [fetchKey]);
+  }, []);
+
+  useEffect(() => {
+    fetchCards();
+  }, [fetchCards]);
 
   const handleRetry = () => {
     navigate("/cards");
     setFetchState({ status: "loading" });
-    setFetchKey((k) => k + 1);
+    fetchCards();
   };
 
   const handleDelete = async (id: string) => {
@@ -203,12 +208,16 @@ function CardDashboardPage() {
     await fetch(`${import.meta.env.BASE_URL}cards/${id}`, { method: "DELETE" });
     setFetchState((prev) =>
       prev.status === "success"
-        ? { status: "success", data: prev.data.filter((card) => card.id !== id) }
-        : prev
+        ? {
+            status: "success",
+            data: prev.data.filter((card) => card.id !== id),
+          }
+        : prev,
     );
   };
 
-  const cardCount = fetchState.status === "success" ? fetchState.data.length : 0;
+  const cardCount =
+    fetchState.status === "success" ? fetchState.data.length : 0;
 
   return (
     <View>
