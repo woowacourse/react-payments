@@ -1,3 +1,15 @@
+export interface Card {
+  id: string;
+  issuerCode: string;
+  number: string;
+  expirationDate: string;
+}
+
+export type FetchState =
+  | { status: "loading" }
+  | { status: "success"; data: Card[] }
+  | { status: "error" };
+
 export type CardBrand = "VISA" | "MasterCard" | "Diners" | "AMEX" | "UnionPay";
 
 export interface CardBrandConfig {
