@@ -8,6 +8,8 @@ import repository from '@/services/apis/cards/repository';
 
 import { ERROR_CODE } from '../constants';
 
+import type { RegisterCardModel } from '../model';
+
 interface Options {
   values: {
     cardNumbers: { values: { [key in '0' | '1' | '2' | '3']: string } };
@@ -25,12 +27,13 @@ export const useRegisterCardAction = ({ values: { cardNumbers, card, cvc, expira
     mutate,
   } = useExecute({
     executeFn: async () => {
-      return await repository.postCards({
+      const data: RegisterCardModel = {
         cardNumbers: cardNumbers.values,
         card: card.values.card,
         cvc: cvc.values.cvc,
         expirationDate: expirationDate.values,
-      });
+      };
+      return await repository.postCards(data);
     },
     onSuccess: () => {
       navigate(ROUTES.PAYMENTS.CARDS);
