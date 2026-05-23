@@ -21,11 +21,11 @@ export default defineConfig({
     }),
   ],
   test: {
-    globals: true,
     projects: [
       {
         test: {
           name: "integration",
+          globals: true,
           environment: "jsdom",
           setupFiles: "./src/setupTests.ts",
           include: ["src/**/*.test.{ts,tsx}"],
