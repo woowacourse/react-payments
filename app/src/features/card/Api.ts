@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.antolibank.com/cards";
+import { BASE_URL } from "../common/Constants";
 
 export class NetworkError extends Error {}
 export class HttpError extends Error {
@@ -40,7 +40,7 @@ export const createCard = (
   cardCVC: string,
   cardBrand: string,
 ) =>
-  request(BASE_URL, {
+  request(`${BASE_URL}/cards/`, {
     method: "POST",
     body: JSON.stringify({
       number: cardNumber,
@@ -53,7 +53,8 @@ export const createCard = (
     },
   });
 
-export const getCards = () => request(BASE_URL).then((r) => r.json());
+export const getCards = () =>
+  request(`${BASE_URL}/cards/`).then((r) => r.json());
 
 export const deleteCard = (cardId: string) =>
-  request(`${BASE_URL}/${cardId}`, { method: "DELETE" });
+  request(`${BASE_URL}/cards/${cardId}/`, { method: "DELETE" });

@@ -1,14 +1,15 @@
 import { http, HttpResponse } from "msw";
 import { CardSerializer } from "./Serializer";
+import { BASE_URL } from "../../common/Constants";
 import db from "./db";
 
 export const handlers = [
-  http.get("https://api.antolibank.com/cards", () => {
+  http.get(`${BASE_URL}/cards/`, () => {
     const cards = db.card.getAll();
     return HttpResponse.json(cards);
   }),
 
-  http.delete("https://api.antolibank.com/cards/:id", ({ params }) => {
+  http.delete(`${BASE_URL}/cards/:id/`, ({ params }) => {
     const { id } = params;
     const card = db.card.findFirst({ where: { id: { equals: id as string } } });
     if (!card) {
@@ -21,7 +22,7 @@ export const handlers = [
     return new HttpResponse(null, { status: 204 });
   }),
 
-  http.post("https://api.antolibank.com/cards", async ({ request }) => {
+  http.post(`${BASE_URL}/cards/`, async ({ request }) => {
     const cardData = (await request.json()) as {
       number: string;
       expirationDate: string;

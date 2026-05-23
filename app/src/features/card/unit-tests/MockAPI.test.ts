@@ -16,7 +16,7 @@ describe("handler test", () => {
       cvc: "777",
       issuerCode: "31",
     });
-    const response = await fetch("https://api.antolibank.com/cards", {
+    const response = await fetch("https://api.antolibank.com/cards/", {
       method: "POST",
       body: body,
     });
