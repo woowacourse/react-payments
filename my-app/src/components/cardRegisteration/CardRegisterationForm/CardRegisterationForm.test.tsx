@@ -3,10 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Navigate, Route, Routes } from "react-router-dom";
 import { beforeEach, describe, expect, it } from "vitest";
 
-import { ROUTES } from "../src/constants/routes";
-import { store } from "../src/mocks/cardStore";
-import CardListPage from "../src/pages/CardListPage";
-import CardRegisterationFormPage from "../src/pages/CardRegisterationFormPage";
+import { ROUTES } from "../../../constants/routes";
+import { store } from "../../../mocks/cardStore";
+import CardListPage from "../../../pages/CardListPage";
+import CardRegisterationFormPage from "../../../pages/CardRegisterationFormPage";
 
 const renderApp = (initialPath = ROUTES.CARD_FORM) =>
   render(
