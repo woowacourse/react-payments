@@ -2,6 +2,9 @@ import { useNavigate, useOutletContext } from 'react-router';
 
 import { SymbolInfo } from '@/core/components/symbolInfo';
 import { Button } from '@/core/components/button';
+
+import { ROUTES } from '@/constants/routes';
+
 import { CARD_OPTIONS } from '../../register/form/constant';
 
 export const Complete = () => {
@@ -23,7 +26,7 @@ export const Complete = () => {
 
   const handleClick = () => {
     handleReset();
-    navigate('/payments/register');
+    navigate(ROUTES.PAYMENTS.REGISTER);
   };
 
   return (

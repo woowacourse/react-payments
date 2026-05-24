@@ -22,6 +22,33 @@ export const Symbol: Story = {
   },
 };
 
+export const Info: Story = {
+  args: {
+    symbol: 'info',
+    children: '제목 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, assumenda voluptatum!',
+    // description: '설명 Lorem ipsum dolor sit,'
+    action: <Button>button</Button>,
+  },
+};
+
+export const GhostCard: Story = {
+  args: {
+    symbol: 'ghostCard',
+    children: '제목 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, assumenda voluptatum!',
+    // description: '설명 Lorem ipsum dolor sit,'
+    action: <Button>button</Button>,
+  },
+};
+
+export const Description: Story = {
+  args: {
+    symbol: 'complete',
+    children: '제목 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, assumenda voluptatum!',
+    description: '설명 Lorem ipsum dolor sit,',
+    action: <Button>button</Button>,
+  },
+};
+
 export const Full: Story = {
   args: {
     full: true,

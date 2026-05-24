@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "test": "vitest",
     "deploy": "vite build --base=/react-payments/ --minify=false && cp dist/index.html dist/404.html && npx gh-pages -d dist"
   },
   "dependencies": {
@@ -25,6 +26,9 @@
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-vitest": "^10.3.5",
     "@storybook/react-vite": "^10.3.5",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -37,6 +41,8 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-storybook": "^10.3.5",
     "globals": "^17.5.0",
+    "jsdom": "^29.1.1",
+    "msw": "^2.14.6",
     "playwright": "^1.59.1",
     "prettier": "^3.8.3",
     "storybook": "^10.3.5",
@@ -45,5 +51,10 @@
     "vite": "^8.0.10",
     "vite-plugin-svgr": "^5.2.0",
     "vitest": "^4.1.5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

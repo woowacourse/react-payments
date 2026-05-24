@@ -20,3 +20,10 @@ export const Default: Story = {
     expirationDate: ['04', '28'],
   },
 };
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const SizeSmall: Story = {
+  args: {
+    size: 'small',
+  },
+};

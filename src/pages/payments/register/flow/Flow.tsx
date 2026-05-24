@@ -1,38 +1,22 @@
-import { Outlet, useNavigate } from 'react-router';
+import { Outlet } from 'react-router';
 
-import { useCardNumbers } from '../form/hooks/useCardNumbers';
-import { useCard } from '../form/hooks/useCard';
-import { useExpirationDate } from '../form/hooks/useExpirationDate';
-import { useCvc } from '../form/hooks/useCvc';
-import { usePassword } from '../form/hooks/usePassword';
+import { useRegisterCardForm } from '../form/hooks/useRegisterCardForm';
+import { useRegisterCardAction } from './hooks/useRegisterCardAction';
 
 import { getBrandCard } from '../form/utils';
 
 export const Flow = () => {
-  const cardNumbers = useCardNumbers();
-
-  const card = useCard();
-
-  const expirationDate = useExpirationDate();
-
-  const cvc = useCvc();
-
-  const password = usePassword();
-
+  // form
+  const { cardNumbers, card, expirationDate, cvc, password } = useRegisterCardForm();
   const brandCard = getBrandCard(Object.values(cardNumbers.values));
 
-  const navigate = useNavigate();
+  // submit(action)
+  const { mutate: register, serverError } = useRegisterCardAction({
+    values: { cardNumbers, card, expirationDate, cvc },
+  });
 
-  const handleReset = () => {
-    cardNumbers.reset();
-    card.reset();
-    expirationDate.reset();
-    cvc.reset();
-    password.reset();
-  };
-
-  const handleSubmit = () => {
-    navigate('/payments/register/complete');
+  const handleSubmit = async () => {
+    register();
   };
 
   return (
@@ -43,9 +27,11 @@ export const Flow = () => {
         expirationDate,
         cvc,
         password,
+
         brandCard,
+
         handleSubmit,
-        handleReset,
+        serverError,
       }}
     />
   );

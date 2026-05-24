@@ -1,17 +1,18 @@
-import { Navigate, Routes, Route } from 'react-router';
+import { Routes, Route } from 'react-router';
 
-import { Flow } from '@/pages/payments/register/flow';
-import { Form } from '@/pages/payments/register/form';
-import { Complete } from '@/pages/payments/register/complete';
+import { routes } from './routes';
+import type { RouteItem } from './routes';
+
+const renderRoutes = (routes: RouteItem[]) => {
+  return routes.map((route) => {
+    return (
+      <Route path={route.path} element={route.element}>
+        {route.children && renderRoutes(route.children)}
+      </Route>
+    );
+  });
+};
 
 export const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/payments/register" replace />} />
-      <Route path="/payments/register" element={<Flow />}>
-        <Route index element={<Form />} />
-        <Route path="complete" element={<Complete />} />
-      </Route>
-    </Routes>
-  );
+  return <Routes>{renderRoutes(routes)}</Routes>;
 };

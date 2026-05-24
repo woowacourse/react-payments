@@ -25,6 +25,20 @@ export const VariantPrimary: Story = {
   },
 };
 
+export const VariantPlaceholder: Story = {
+  args: {
+    children: '+ button',
+    variant: 'placeholder',
+  },
+};
+
+export const VariantPlaceholderDisabled: Story = {
+  args: {
+    variant: 'placeholder',
+    disabled: true,
+  },
+};
+
 export const EdgeRounded: Story = {
   args: {
     children: 'button',

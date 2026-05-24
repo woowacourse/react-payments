@@ -24,12 +24,12 @@ export const BRAND_NUMBER = {
 
 export const CARD_OPTIONS = [
   { value: '', text: '카드사를 선택해주세요' },
-  { value: 'bc', text: 'BC카드' },
-  { value: 'shinhan', text: '신한카드' },
-  { value: 'kakao', text: '카카오뱅크' },
-  { value: 'hyundai', text: '현대카드' },
-  { value: 'woori', text: '우리카드' },
-  { value: 'lotte', text: '롯데카드' },
-  { value: 'hana', text: '하나카드' },
-  { value: 'kb', text: '국만카드' },
+  { value: 'BC', text: 'BC카드' },
+  { value: 'SHINHAN', text: '신한카드' },
+  { value: 'KAKAOBANK', text: '카카오뱅크' },
+  { value: 'HYUNDAI', text: '현대카드' },
+  { value: 'WOORI', text: '우리카드' },
+  { value: 'LOTTE', text: '롯데카드' },
+  { value: 'HANA', text: '하나카드' },
+  { value: 'KOOKMIN', text: '국만카드' },
 ];

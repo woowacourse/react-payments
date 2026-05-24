@@ -38,7 +38,7 @@ export const useCardNumbers = () => {
   const renderErrorMessage = () => {
     if (invalidAttemp.find(Boolean)) return 'invalidAttemp';
     if (Object.values(blur).every((blur) => !blur)) return '';
-    if (Object.values(blur).some((cardNumber) => cardNumber.length !== 4)) return 'incomplete';
+    if (Object.values(values).some((cardNumber) => cardNumber.length !== 4)) return 'incomplete';
     return '';
   };
 

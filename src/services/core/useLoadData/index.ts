@@ -1,0 +1,1 @@
+export { useLoadData } from './useLoadData';

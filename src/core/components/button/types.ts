@@ -6,7 +6,7 @@ export type AS = 'button' | 'a';
 
 export type ButtonOwnProps = {
   shape?: 'default';
-  variant?: 'default' | 'primary';
+  variant?: 'default' | 'primary' | 'placeholder';
   edge?: 'rounded' | 'flat';
   size?: 'normal' | 'large';
   block?: boolean;
