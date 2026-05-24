@@ -7,16 +7,19 @@ import { getCvcNumberErrorMessage } from "../../utils/getCvcNumberErrorMessage";
 interface Props {
   onChange: (value: string) => void;
   value: string;
-  onComplete: (isCompleted: boolean) => void;
+  errorMessage: string | null;
 }
 
-export default function CvcNumberField({ onChange, value, onComplete }: Props) {
+export default function CvcNumberField({
+  onChange,
+  value,
+  errorMessage,
+}: Props) {
   const [inputError, setInputError] = useState<string | null>(null);
 
   const handleOnChange = (newValue: string) => {
     setInputError(null);
     onChange(newValue);
-    onComplete(getCvcNumberErrorMessage(newValue) === null);
   };
 
   const handleOnBlur = () => {
@@ -25,7 +28,7 @@ export default function CvcNumberField({ onChange, value, onComplete }: Props) {
   };
 
   return (
-    <InputGroup errorMessage={inputError}>
+    <InputGroup errorMessage={inputError || errorMessage}>
       <NumberInput
         value={value}
         onChange={handleOnChange}

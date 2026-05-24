@@ -9,11 +9,19 @@ export type ExpNumber = { mm: string; yy: string };
 interface Props {
   onChange: (value: ExpNumber) => void;
   value: ExpNumber;
-  onComplete: (isCompleted: boolean) => void;
+  errorMessage: string | null;
 }
 
-export default function ExpNumberField({ onChange, value, onComplete }: Props) {
-  const { inputErrors, setError, errorMessage } = useFieldErrors(["mm", "yy"]);
+export default function ExpNumberField({
+  onChange,
+  value,
+  errorMessage,
+}: Props) {
+  const {
+    inputErrors,
+    setError,
+    errorMessage: localError,
+  } = useFieldErrors(["mm", "yy"]);
 
   const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
@@ -21,7 +29,6 @@ export default function ExpNumberField({ onChange, value, onComplete }: Props) {
     setError(expKey)(null);
     const newExpNumbers = { ...value, [expKey]: newValue };
     onChange(newExpNumbers);
-    onComplete(getExpNumberErrorMessage(newExpNumbers) === null);
 
     if (expKey === "mm" && newValue.length === 2) {
       const result = getExpNumberErrorMessage({ mm: newValue, yy: value.yy });
@@ -42,7 +49,7 @@ export default function ExpNumberField({ onChange, value, onComplete }: Props) {
     };
 
   return (
-    <InputGroup errorMessage={errorMessage}>
+    <InputGroup errorMessage={localError || errorMessage}>
       {Object.entries(value).map(([expKey, expValue]) => (
         <NumberInput
           key={`${expKey}-input`}

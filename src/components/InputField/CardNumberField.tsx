@@ -16,21 +16,20 @@ interface Props {
   value: CardNumbers;
   cardBrand: CardBrand;
   onChange: (value: CardNumbers) => void;
-  onComplete: (isCompleted: boolean) => void;
+  errorMessage: string | null;
 }
 
 export default function CardNumberField({
   onChange,
   value,
-  onComplete,
   cardBrand,
+  errorMessage,
 }: Props) {
-  const { inputErrors, setError, errorMessage } = useFieldErrors([
-    "first",
-    "second",
-    "third",
-    "fourth",
-  ]);
+  const {
+    inputErrors,
+    setError,
+    errorMessage: localError,
+  } = useFieldErrors(["first", "second", "third", "fourth"]);
 
   const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
@@ -41,8 +40,6 @@ export default function CardNumberField({
     setError(cardKey)(null);
     const newCardNumbers = { ...value, [cardKey]: newValue };
     onChange(newCardNumbers);
-
-    onComplete(getCardNumberErrorMessage(newCardNumbers, cardBrand) === null);
 
     const maxLen = cardKey === "fourth" ? fourthMaxLength : 4;
     const nextKey: Record<string, string> = {
@@ -65,7 +62,7 @@ export default function CardNumberField({
     };
 
   return (
-    <InputGroup errorMessage={errorMessage}>
+    <InputGroup errorMessage={localError || errorMessage}>
       {Object.entries(value).map(([cardKey, cardValue]) => (
         <NumberInput
           key={`${cardKey}-input`}

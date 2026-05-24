@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
+
 import CardInfoSection from "../components/CardInfoSection";
 import CardPreview from "../components/Card/CardPreview";
 import CardNumberField from "../components/InputField/CardNumberField";
@@ -7,30 +9,44 @@ import CvcNumberField from "../components/InputField/CvcNumberField";
 import CardFirmSelect from "../components/CardFirmSelect/CardFirmSelect";
 import PasswordNumberField from "../components/InputField/PasswordNumberField";
 import CheckBtn from "../components/button/CheckBtn";
-import useCardRegisterPage from "../hooks/useCardRegisterPage";
+
+import useCardNumberField from "../hooks/useCardNumberField";
+import useCardFirmField from "../hooks/useCardFirmField";
+import useExpNumberField from "../hooks/useExpNumberField";
+import useCvcNumberField from "../hooks/useCvcNumberField";
+import usePasswordNumberField from "../hooks/usePasswordNumberField";
+import useCardSubmit from "../hooks/useCardSubmit";
 
 export default function CardRegisterPage() {
-  const {
+  const { cardNumbers, cardBrand, onCardNumberChange, isCardNumberValid } =
+    useCardNumberField();
+
+  const { expNumbers, onExpNumberChange, isExpNumberValid } =
+    useExpNumberField();
+
+  const { cvcNumbers, onCvcNumberChange, isCvcNumberValid } =
+    useCvcNumberField();
+
+  const { cardFirm, onCardFirmChange, isCardFirmValid } = useCardFirmField();
+
+  const { passwordNumbers, onPasswordNumberChange, isPasswordNumberValid } =
+    usePasswordNumberField();
+
+  const isAllValid =
+    isCardNumberValid &&
+    isCardFirmValid &&
+    isExpNumberValid &&
+    isCvcNumberValid &&
+    isPasswordNumberValid;
+  const navigate = useNavigate();
+
+  const { handleComplete, serverError, isSubmitting } = useCardSubmit({
     cardNumbers,
     expNumbers,
     cvcNumbers,
     cardFirm,
-    passwordNumbers,
-    cardBrand,
-    isCardNumberCompleted,
-    isExpNumberCompleted,
-    isCvcNumberCompleted,
-    isAllValid,
-    onCardNumberChange,
-    onExpNumberChange,
-    onCvcNumberChange,
-    onCardFirmChange,
-    onPasswordNumberChange,
-    onCardNumberComplete,
-    onExpNumberComplete,
-    onCvcNumberComplete,
-    handleComplete,
-  } = useCardRegisterPage();
+    onSuccess: () => navigate("/cards"),
+  });
 
   return (
     <MainContainer>
@@ -42,7 +58,7 @@ export default function CardRegisterPage() {
       />
 
       <InputSectionContainer>
-        {isCvcNumberCompleted && (
+        {isCvcNumberValid && (
           <CardInfoSection
             title="비밀번호를 입력해 주세요"
             caption="앞의 2자리를 입력해주세요"
@@ -55,17 +71,19 @@ export default function CardRegisterPage() {
           </CardInfoSection>
         )}
 
-        {isExpNumberCompleted && (
+        {isExpNumberValid && (
           <CardInfoSection title="CVC 번호를 입력해 주세요" label="CVC">
             <CvcNumberField
               onChange={onCvcNumberChange}
               value={cvcNumbers}
-              onComplete={onCvcNumberComplete}
+              errorMessage={
+                serverError?.code === "INVALID_CVC" ? serverError.message : null
+              }
             />
           </CardInfoSection>
         )}
 
-        {cardFirm.value && (
+        {isCardFirmValid && (
           <CardInfoSection
             title="카드 유효기간을 입력해 주세요"
             caption="월/년도(MMYY)를 순서대로 입력해 주세요"
@@ -74,12 +92,16 @@ export default function CardRegisterPage() {
             <ExpNumberField
               onChange={onExpNumberChange}
               value={expNumbers}
-              onComplete={onExpNumberComplete}
+              errorMessage={
+                serverError?.code === "INVALID_EXPIRATION_DATE"
+                  ? serverError.message
+                  : null
+              }
             />
           </CardInfoSection>
         )}
 
-        {isCardNumberCompleted && (
+        {isCardNumberValid && (
           <CardInfoSection
             title="카드사를 선택해 주세요"
             caption="현재 국내 카드사만 가능합니다."
@@ -96,12 +118,18 @@ export default function CardRegisterPage() {
           <CardNumberField
             onChange={onCardNumberChange}
             value={cardNumbers}
-            onComplete={onCardNumberComplete}
             cardBrand={cardBrand}
+            errorMessage={
+              serverError?.code === "INVALID_CARD_NUMBER"
+                ? serverError.message
+                : null
+            }
           />
         </CardInfoSection>
       </InputSectionContainer>
-      {isAllValid && <CheckBtn onClick={handleComplete} />}
+      {isAllValid && (
+        <CheckBtn onClick={handleComplete} disabled={isSubmitting} />
+      )}
     </MainContainer>
   );
 }
