@@ -18,13 +18,17 @@ const CardList = () => {
   const [status, setStatus] = useState<Status>("loading");
   const [cards, setCards] = useState<CardItem[]>([]);
 
-  useEffect(() => {
+  const fetchCards = () => {
     getCards()
       .then((data) => {
         setCards(data);
         setStatus("success");
       })
       .catch(() => setStatus("error"));
+  };
+
+  useEffect(() => {
+    fetchCards();
   }, []);
 
   const handleDelete = async (id: string) => {
@@ -66,7 +70,7 @@ const CardList = () => {
             description="잠시 후 다시 시도해 주세요."
           ></EmptyState>
 
-          <Button onClick={() => navigate(ROUTES.ADD)}>다시 시도</Button>
+          <Button onClick={() => { setStatus("loading"); fetchCards(); }}>다시 시도</Button>
         </>
       )}
       {status === "success" && cards.length === 0 && (
