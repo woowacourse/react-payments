@@ -53,6 +53,9 @@
       ],
       "@styles/*": [
         "./src/styles/*"
+      ],
+      "@apis/*": [
+        "./src/apis/*"
       ]
     }
   },

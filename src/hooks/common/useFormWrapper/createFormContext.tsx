@@ -2,13 +2,15 @@ import {
   createContext,
   useContext,
   useState,
+  type ComponentType,
   type PropsWithChildren,
 } from "react";
 
 import type { FormWrapperValue } from "./types";
 
-export interface FormWrapperProps<T extends Record<string, unknown>>
-  extends PropsWithChildren {
+export interface FormWrapperProps<
+  T extends Record<string, unknown>,
+> extends PropsWithChildren {
   defaultValues: T;
 }
 
@@ -41,6 +43,16 @@ export const createFormContext = <T extends Record<string, unknown>>() => {
     return context;
   };
 
-  return { FormWrapper, useFormValue };
-};
+  const withFormWrapper = <P extends object>(
+    Component: ComponentType<P>,
+    defaultValues: T,
+  ) => {
+    return (props: P) => (
+      <FormWrapper defaultValues={defaultValues}>
+        <Component {...props} />
+      </FormWrapper>
+    );
+  };
 
+  return { FormWrapper, useFormValue, withFormWrapper };
+};

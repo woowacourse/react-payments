@@ -1,6 +1,14 @@
+import { isCardErrorCode } from "@apis/api/cards";
+import ApiError from "@apis/ApiError";
 import StepFunnel from "@components/common/StepFunnel";
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router";
+import useRegisterCard from "@hooks/feature/mutation/useRegisterCard";
+import useNavigateCompletePage from "@hooks/feature/navigation/useNavigateCompletePage";
+import {
+  getIssuerCode,
+  toApiCardNumber,
+  toApiExpirationDate,
+} from "@utils/card";
 
 import CardCompanySelectField from "./components/CardCompanySelectField";
 import CardCVCInputField from "./components/CardCVCInputField";
@@ -9,25 +17,57 @@ import CardNumberInputField from "./components/CardNumberInputField";
 import CardPasswordField from "./components/CardPasswordField";
 import CardPreview from "./components/CardPreview";
 import CardValidityPeriodInputField from "./components/CardValidityPeriodInputField";
-import { FormWrapper } from "./formContext";
-import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
+import { useFormValue, withFormWrapper } from "./formContext";
+import {
+  getFormStateByErrorCode,
+  INITIAL_CARD_INFO_FORM_STATE,
+} from "./formState";
 
 const CardInfoFormSection = () => {
-  const navigate = useNavigate();
+  const navigateToCompletePage = useNavigateCompletePage();
+  const { mutate: registerCard } = useRegisterCard();
+  const { getValue, setValue } = useFormValue();
 
-  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const cardNumber = formData.getAll("card-number").join("");
-    const cardCompany = (formData.get("card-company") ?? "").toString();
 
-    navigate("/complete", {
-      state: { cardNumber, cardCompany },
+    const selectedCardCompany = getValue("selectedCardCompany");
+    if (!selectedCardCompany) return;
+
+    const cardNumber = toApiCardNumber(getValue("cardNumber"));
+    const expirationDate = toApiExpirationDate(getValue("validityPeriod"));
+    const cvc = getValue("CVC");
+    const issuerCode = getIssuerCode(selectedCardCompany);
+
+    const cardInfo = {
+      number: cardNumber,
+      expirationDate,
+      cvc,
+      issuerCode,
+    };
+
+    registerCard(cardInfo, {
+      onSuccess: () =>
+        navigateToCompletePage({
+          cardNumber,
+          cardCompany: selectedCardCompany,
+        }),
+      onError: (error) => {
+        if (error instanceof ApiError && isCardErrorCode(error.code)) {
+          const patch = getFormStateByErrorCode(error.code);
+          if ("cardNumberStatus" in patch && patch.cardNumberStatus)
+            setValue("cardNumberStatus", patch.cardNumberStatus);
+          if ("CVCStatus" in patch && patch.CVCStatus)
+            setValue("CVCStatus", patch.CVCStatus);
+          if ("validityPeriodStatus" in patch && patch.validityPeriodStatus)
+            setValue("validityPeriodStatus", patch.validityPeriodStatus);
+        }
+      },
     });
   };
 
   return (
-    <FormWrapper defaultValues={INITIAL_CARD_INFO_FORM_STATE}>
+    <>
       <CardPreview />
       <Container onSubmit={handleSubmit}>
         <StepFunnel>
@@ -85,7 +125,7 @@ const CardInfoFormSection = () => {
           </StepFunnel.Step>
         </StepFunnel>
       </Container>
-    </FormWrapper>
+    </>
   );
 };
 
@@ -103,4 +143,7 @@ const CardInfoFormSubmitButtonContainer = styled.div`
   left: 0;
 `;
 
-export default CardInfoFormSection;
+export default withFormWrapper(
+  CardInfoFormSection,
+  INITIAL_CARD_INFO_FORM_STATE,
+);

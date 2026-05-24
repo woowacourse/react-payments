@@ -1,18 +1,16 @@
 import Check from "@assets/Check.png";
 import PageWrapper from "@components/common/PageWrapper";
-import GoHomeButton from "@components/feature/GoHomeButton";
+import GoCardsButton from "@components/feature/GoCardsButton";
 import CARD from "@constants/card";
 import styled from "@emotion/styled";
-import { useLocation } from "react-router";
+import { useCompletePageState } from "@hooks/feature/navigation/useNavigateCompletePage";
 
 const CARD_COMPANY_LABEL_MAP = Object.fromEntries(
   CARD.COMPANY_SELECT_FIELD.map(({ value, label }) => [value, label]),
 );
 
 const CardRegistrationCompletePage = () => {
-  const { state } = useLocation();
-  const cardNumber: string = state?.cardNumber ?? "";
-  const cardCompany: string = state?.cardCompany ?? "";
+  const { cardNumber, cardCompany } = useCompletePageState();
 
   const cardNumberPrefix = cardNumber.slice(0, 4);
   const cardCompanyLabel = CARD_COMPANY_LABEL_MAP[cardCompany] ?? "";
@@ -24,7 +22,7 @@ const CardRegistrationCompletePage = () => {
         <Description>{cardNumberPrefix}로 시작하는</Description>
         <Description>{cardCompanyLabel}가 등록되었어요.</Description>
         <GoBackButtonContainer>
-          <GoHomeButton />
+          <GoCardsButton />
         </GoBackButtonContainer>
       </Wrapper>
     </PageWrapper>

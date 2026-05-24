@@ -1,6 +1,6 @@
-import { createFormContext } from "@hooks/useFormWrapper";
+import { createFormContext } from "@hooks/common/useFormWrapper";
 
 import type { CardInfoFormState } from "./formState";
 
-export const { FormWrapper, useFormValue } =
+export const { withFormWrapper, useFormValue } =
   createFormContext<CardInfoFormState>();

@@ -1,5 +1,6 @@
 import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
-import type CARD from "@constants/card";
+import type { CardErrorCode } from "@apis/api/cards";
+import type { CompanyKey } from "@constants/card";
 
 import type { CVCInputStatus } from "./components/CardCVCInputField/types";
 import type { InputStatus as CardNumberInputStatus } from "./components/CardNumberInputField/errorMessage";
@@ -7,21 +8,24 @@ import type { PasswordInputStatus } from "./components/CardPasswordField/types";
 import type { InputStatus as ValidityPeriodInputStatus } from "./components/CardValidityPeriodInputField/errorMessage";
 
 export type CardNumberStatusTuple =
-  | [CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus]
+  | [
+      CardNumberInputStatus,
+      CardNumberInputStatus,
+      CardNumberInputStatus,
+      CardNumberInputStatus,
+    ]
   | [CardNumberInputStatus, CardNumberInputStatus, CardNumberInputStatus];
 
 export type ValidityPeriodStatus = {
   [K in keyof ValidityPeriod]: ValidityPeriodInputStatus;
 };
 
-export interface CardInfoFormState extends Record<string, unknown> {
+export interface CardInfoFormState {
   cardNumber: CardNumberUnits;
   validityPeriod: ValidityPeriod;
   CVC: string;
   password: string;
-  selectedCardCompany:
-    | (typeof CARD.COMPANY_SELECT_FIELD)[number]["value"]
-    | null;
+  selectedCardCompany: CompanyKey | null;
 
   cardNumberStatus: CardNumberStatusTuple;
   validityPeriodStatus: ValidityPeriodStatus;
@@ -41,3 +45,30 @@ export const INITIAL_CARD_INFO_FORM_STATE: CardInfoFormState = {
   CVCStatus: "DEFAULT",
   passwordStatus: "DEFAULT",
 };
+
+const ERROR_FORM_STATE_MAP: Record<
+  CardErrorCode,
+  Partial<CardInfoFormState>
+> = {
+  INVALID_CARD_NUMBER: {
+    cardNumberStatus: [
+      "INVALID_BRAND",
+      "INVALID_BRAND",
+      "INVALID_BRAND",
+      "INVALID_BRAND",
+    ],
+  },
+  INVALID_CVC: {
+    CVCStatus: "ERROR",
+  },
+  INVALID_EXPIRATION_DATE: {
+    validityPeriodStatus: {
+      month: "MONTH_RANGE_ERROR",
+      year: "YEAR_RANGE_ERROR",
+    },
+  },
+};
+
+export const getFormStateByErrorCode = (
+  code: CardErrorCode,
+): Partial<CardInfoFormState> => ERROR_FORM_STATE_MAP[code];

@@ -15,6 +15,7 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  base: process.env.NODE_ENV === "production" ? "/react-payments/" : "/",
   plugins: [
     react(),
     babel({
@@ -51,6 +52,16 @@ export default defineConfig({
           },
         },
       },
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          environment: "jsdom",
+          globals: true,
+          setupFiles: ["./src/test/setup.ts"],
+          include: ["src/**/*.{test,spec}.{ts,tsx}"],
+        },
+      },
     ],
   },
   resolve: {
@@ -68,6 +79,7 @@ export default defineConfig({
       { find: "@hooks", replacement: resolve(dirname, "src/hooks") },
       { find: "@constants", replacement: resolve(dirname, "src/constants") },
       { find: "@styles", replacement: resolve(dirname, "src/styles") },
+      { find: "@apis", replacement: resolve(dirname, "src/apis") },
     ],
   },
 });

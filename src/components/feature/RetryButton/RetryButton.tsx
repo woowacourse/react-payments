@@ -1,17 +1,15 @@
 import Button from "@components/common/Button";
-import { useNavigate } from "react-router";
 
-const GoHomeButton = () => {
-  const navigate = useNavigate();
+const RetryButton = () => {
   const handleClick = () => {
-    navigate("/");
+    window.location.reload();
   };
 
   return (
     <Button rounded fullWidth onClick={handleClick}>
-      확인
+      다시 시도
     </Button>
   );
 };
 
-export default GoHomeButton;
+export default RetryButton;
