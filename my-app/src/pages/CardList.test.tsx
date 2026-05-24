@@ -131,6 +131,30 @@ describe("CardList", () => {
     await screen.findByText("BC카드");
   });
 
+  it("삭제 API 실패 시 alert를 보여주고 카드가 목록에 유지된다", async () => {
+    const user = userEvent.setup();
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+    server.use(
+      http.get("/cards", () =>
+        HttpResponse.json([
+          { id: "card-fail", issuerCode: "BC카드", number: "4111 1111 1111 1111", expirationDate: "01/25" },
+        ])
+      ),
+      http.delete("/cards/:id", () => HttpResponse.json({ message: "서버 오류" }, { status: 500 }))
+    );
+
+    renderCardList();
+
+    await screen.findByText("BC카드");
+    await user.click(screen.getByRole("button", { name: "✕" }));
+
+    await waitFor(() =>
+      expect(alertMock).toHaveBeenCalledWith("카드 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.")
+    );
+    expect(screen.getByText("BC카드")).toBeInTheDocument();
+  });
+
   it("카드 추가 버튼이 여러 장일 때도 렌더링된다", async () => {
     server.use(
       http.get("/cards", () =>

@@ -82,6 +82,34 @@ describe("validateExpiryDate", () => {
       message: "",
     });
   });
+
+  it("MM이 13이면 errorIndex 0을 반환한다", () => {
+    expect(validateExpiryDate(["13", "25"])).toEqual({
+      errorIndex: 0,
+      message: "유효하지 않은 월입니다",
+    });
+  });
+
+  it("MM이 00이면 errorIndex 0을 반환한다", () => {
+    expect(validateExpiryDate(["00", "25"])).toEqual({
+      errorIndex: 0,
+      message: "유효하지 않은 월입니다",
+    });
+  });
+
+  it("MM이 경계값 01이면 유효 결과를 반환한다", () => {
+    expect(validateExpiryDate(["01", "25"])).toEqual({
+      errorIndex: -1,
+      message: "",
+    });
+  });
+
+  it("MM이 경계값 12이면 유효 결과를 반환한다", () => {
+    expect(validateExpiryDate(["12", "25"])).toEqual({
+      errorIndex: -1,
+      message: "",
+    });
+  });
 });
 
 describe("validateCvc", () => {

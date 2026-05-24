@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
@@ -263,6 +263,69 @@ describe("CardForm", () => {
     await user.click(screen.getByRole("button", { name: "확인" }));
 
     await screen.findByText("유효하지 않은 만료일입니다.");
+  });
+
+  it("비밀번호 입력 없이 blur 시 에러 메시지가 표시된다", async () => {
+    const user = userEvent.setup();
+    renderCardForm();
+
+    await fillCardNumber(user);
+    await screen.findByText("카드사를 선택해 주세요.");
+    await selectCompany(user);
+    await screen.findByText("카드 유효기간을 입력해주세요");
+    await fillExpiryDate(user);
+    await screen.findByText("CVC번호를 입력해 주세요");
+    await fillCvc(user);
+    await screen.findByText("비밀번호를 입력해 주세요");
+
+    const passwordGroup = screen.getByRole("group", { name: "비밀번호 앞 2자리" });
+    const passwordInput = passwordGroup.querySelector("input[type='password']")!;
+    await user.click(passwordInput);
+    await user.tab();
+
+    await screen.findByText("비밀번호를 입력해주세요");
+  });
+
+  it("서버에서 알 수 없는 오류 반환 시 alert가 표시된다", async () => {
+    const user = userEvent.setup();
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+    server.use(
+      http.post("/cards", () =>
+        HttpResponse.json({ code: "SERVER_ERROR", message: "내부 서버 오류" }, { status: 500 })
+      )
+    );
+
+    renderCardForm();
+
+    await fillCardNumber(user);
+    await screen.findByText("카드사를 선택해 주세요.");
+    await selectCompany(user);
+    await screen.findByText("카드 유효기간을 입력해주세요");
+    await fillExpiryDate(user);
+    await screen.findByText("CVC번호를 입력해 주세요");
+    await fillCvc(user);
+    await screen.findByText("비밀번호를 입력해 주세요");
+    await fillPassword(user);
+
+    await user.click(screen.getByRole("button", { name: "확인" }));
+
+    await waitFor(() =>
+      expect(alertMock).toHaveBeenCalledWith("카드 등록에 실패했습니다. 잠시 후 다시 시도해주세요.")
+    );
+  });
+
+  it("amex 번호 입력 시 카드 번호 필드가 3개로 변경된다", async () => {
+    const user = userEvent.setup();
+    renderCardForm();
+
+    expect(screen.getAllByPlaceholderText("1234")).toHaveLength(4);
+
+    const firstInput = screen.getAllByPlaceholderText("1234")[0];
+    await user.type(firstInput, "3477");
+
+    await waitFor(() => {
+      expect(screen.getAllByPlaceholderText("1234")).toHaveLength(3);
+    });
   });
 
   it("서버 CVC 오류 발생 후 CVC 수정 시 에러 메시지가 사라진다", async () => {
