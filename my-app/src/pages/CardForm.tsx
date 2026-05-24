@@ -54,7 +54,7 @@ const CardForm = () => {
       if (fieldErrorCodes.includes(code)) {
         setServerErrors({ [code]: message });
       } else {
-        alert(message); 
+        alert("카드 등록에 실패했습니다. 잠시 후 다시 시도해주세요.");
       }
       setStatus("error");
     }
