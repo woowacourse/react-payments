@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import CardForm from "./pages/CardForm";
 import CardList from "./pages/CardList";
@@ -8,7 +8,7 @@ import { ROUTES } from "./constants/routes";
 
 const App = () => {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <HashRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Navigate to={ROUTES.CARDS} replace />} />
@@ -18,7 +18,7 @@ const App = () => {
 
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
