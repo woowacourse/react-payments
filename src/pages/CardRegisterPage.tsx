@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import CardForm from "../components/CardRegister/CardForm";
 import CardPreview from "../components/CardRegister/CardPreview";
-import { SubmitButton } from "../components/CardRegisterComplete/SubmitButton";
 import { isCardFormComplete } from "../utils/validators";
 import type { CardBrand, CardFormState } from "../types";
 import { ISSUER_CODE_MAP } from "../types";
+import { SubmitButton } from "../components/CardRegister/SubmitButton";
 
 const View = styled.div`
   width: 100%;
@@ -26,7 +26,9 @@ export function CardRegisterPage(props: CardRegisterPageProps) {
   const { cardFormState, brand, handleSetFormState, resetFormState } = props;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { resetFormState(); }, []);
+  useEffect(() => {
+    resetFormState();
+  }, []);
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverErrors, setServerErrors] = useState<{
@@ -48,7 +50,11 @@ export function CardRegisterPage(props: CardRegisterPageProps) {
       newState.expiryMonth !== cardFormState.expiryMonth ||
       newState.expiryYear !== cardFormState.expiryYear
     ) {
-      setServerErrors((prev) => ({ ...prev, expirationDate: undefined, cvc: undefined }));
+      setServerErrors((prev) => ({
+        ...prev,
+        expirationDate: undefined,
+        cvc: undefined,
+      }));
     } else if (newState.cvc !== cardFormState.cvc) {
       setServerErrors((prev) => ({ ...prev, cvc: undefined }));
     }
