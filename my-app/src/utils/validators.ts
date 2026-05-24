@@ -2,8 +2,8 @@ import type { ValidationResult } from "@/types";
 
 const VALID: ValidationResult = { errorIndex: -1, message: "" };
 
-export const validateCardNumber = (values: string[]): ValidationResult => {
-  const errorIndex = values.findIndex((v) => !v);
+export const validateCardNumber = (values: string[], fieldConfig: number[]): ValidationResult => {
+  const errorIndex = values.findIndex((v, i) => !v || v.length < fieldConfig[i]);
   if (errorIndex !== -1) return { errorIndex, message: "카드 번호를 입력해주세요" };
   return VALID;
 };
