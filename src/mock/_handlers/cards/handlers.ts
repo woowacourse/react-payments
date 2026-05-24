@@ -1,26 +1,12 @@
 import { http, HttpResponse } from "msw";
 
+import { cardStore } from "./store";
 import { isValidBin, isValidExpirationDate } from "./utils";
 
 const ENDPOINT = "api/cards";
 
 export const getCards = http.get(ENDPOINT, () => {
-  const cards = [
-    {
-      id: "550e8400-e29b-41d4-a716-446655440000",
-      issuerCode: "31",
-      number: "551112******9012",
-      expirationDate: "12/28",
-    },
-    {
-      id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
-      issuerCode: "41",
-      number: "551112******9012",
-      expirationDate: "12/28",
-    },
-  ];
-
-  return HttpResponse.json(cards, { status: 200 });
+  return HttpResponse.json(cardStore.getAll(), { status: 200 });
 });
 
 export const registerCard = http.post(ENDPOINT, async ({ request }) => {
@@ -59,6 +45,12 @@ export const registerCard = http.post(ENDPOINT, async ({ request }) => {
   }
 
   const id = crypto.randomUUID();
+  cardStore.add({
+    id,
+    issuerCode: body.issuerCode,
+    rawNumber: body.number,
+    expirationDate: body.expirationDate,
+  });
 
   return HttpResponse.json({ id }, { status: 201 });
 });
