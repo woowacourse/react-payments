@@ -11,6 +11,12 @@ export const validateCardNumber = (values: string[], fieldConfig: number[]): Val
 export const validateExpiryDate = (values: string[]): ValidationResult => {
   const errorIndex = values.findIndex((v) => !v || v.length < 2);
   if (errorIndex !== -1) return { errorIndex, message: "유효기간을 입력해주세요" };
+
+  const month = parseInt(values[0], 10);
+  if (month < 1 || month > 12) {
+    return { errorIndex: 0, message: "유효하지 않은 월입니다" };
+  }
+
   return VALID;
 };
 
