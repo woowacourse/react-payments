@@ -1,14 +1,11 @@
 import Button from "@components/common/Button";
-import { useNavigate } from "react-router";
+import useNavigateCardsPage from "@hooks/feature/navigation/useNavigateCardsPage";
 
 const GoCardsButton = () => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/cards");
-  };
+  const navigateToCardsPage = useNavigateCardsPage();
 
   return (
-    <Button rounded fullWidth onClick={handleClick}>
+    <Button rounded fullWidth onClick={navigateToCardsPage}>
       확인
     </Button>
   );
