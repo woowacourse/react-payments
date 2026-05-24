@@ -25,7 +25,7 @@ export async function getCards(): Promise<CardItem[]> {
   return res.json();
 }
 
-export async function createCard(body: CreateCardBody): Promise<{ id: string }> {
+export async function createCard(body: CreateCardBody): Promise<void> {
   const res = await fetch(BASE_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -33,11 +33,11 @@ export async function createCard(body: CreateCardBody): Promise<{ id: string }> 
   });
 
   if (!res.ok) {
-    const error: ApiError = await res.json();
+    const text = await res.text();
+    const error: ApiError = text ? JSON.parse(text) : { code: "UNKNOWN", message: "알 수 없는 오류가 발생했습니다." };
     throw error;
   }
 
-  return res.json();
 }
 
 export async function deleteCard(id: string): Promise<void> {
