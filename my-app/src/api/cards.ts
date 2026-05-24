@@ -41,5 +41,6 @@ export async function createCard(body: CreateCardBody): Promise<void> {
 }
 
 export async function deleteCard(id: string): Promise<void> {
-  await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
+  const res = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
+  if (!res.ok) throw new Error("카드 삭제를 실패하였습니다.");
 }
