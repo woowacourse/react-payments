@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
+
 import CardInfoSection from "../components/CardInfoSection";
 import CardPreview from "../components/Card/CardPreview";
 import CardNumberField from "../components/InputField/CardNumberField";
@@ -7,32 +9,51 @@ import CvcNumberField from "../components/InputField/CvcNumberField";
 import CardFirmSelect from "../components/CardFirmSelect/CardFirmSelect";
 import PasswordNumberField from "../components/InputField/PasswordNumberField";
 import CheckBtn from "../components/button/CheckBtn";
-import useCardRegisterForm from "../hooks/useCardRegisterForm";
+
+import useCardNumberField from "../hooks/useCardNumberField";
+import useCardFirmField from "../hooks/useCardFirmField";
+import useExpNumberField from "../hooks/useExpNumberField";
+import useCvcNumberField from "../hooks/useCvcNumberField";
+import usePasswordNumberField from "../hooks/usePasswordNumberField";
 import useCardSubmit from "../hooks/useCardSubmit";
-import { useNavigate } from "react-router-dom";
 
 export default function CardRegisterPage() {
   const {
     cardNumbers,
-    expNumbers,
-    cvcNumbers,
-    cardFirm,
-    passwordNumbers,
-    cardBrand,
     isCardNumberCompleted,
-    isExpNumberCompleted,
-    isCvcNumberCompleted,
-    isAllValid,
+    cardBrand,
     onCardNumberChange,
-    onExpNumberChange,
-    onCvcNumberChange,
-    onCardFirmChange,
-    onPasswordNumberChange,
     onCardNumberComplete,
-    onExpNumberComplete,
-    onCvcNumberComplete,
-  } = useCardRegisterForm();
+    isCardNumberValid,
+  } = useCardNumberField();
 
+  const {
+    expNumbers,
+    isExpNumberCompleted,
+    onExpNumberChange,
+    onExpNumberComplete,
+    isExpNumberValid,
+  } = useExpNumberField();
+
+  const {
+    cvcNumbers,
+    isCvcNumberCompleted,
+    onCvcNumberChange,
+    onCvcNumberComplete,
+    isCvcNumberValid,
+  } = useCvcNumberField();
+
+  const { cardFirm, onCardFirmChange, isCardFirmValid } = useCardFirmField();
+
+  const { passwordNumbers, onPasswordNumberChange, isPasswordNumberValid } =
+    usePasswordNumberField();
+
+  const isAllValid =
+    isCardNumberValid &&
+    isCardFirmValid &&
+    isExpNumberValid &&
+    isCvcNumberValid &&
+    isPasswordNumberValid;
   const navigate = useNavigate();
 
   const { handleComplete, serverError, isSubmitting } = useCardSubmit({
