@@ -1,37 +1,23 @@
-import { isNumericString, isValidMonth } from '@/core/utils/validator';
+import { isNumericString } from '@/core/utils/validator';
 
 export interface ExpiryDate {
   month: string;
   year: string;
 }
 
-export const MONTH_CONSTAND = {
-  LENGTH: 2,
-};
-export const YEAR_CONSTAND = {
-  LENGTH: 2,
-};
+export const EXPIRY_MONTH_LENGTH = 2;
+export const EXPIRY_YEAR_LENGTH = 2;
 
-const ERROR_MESSAGE = {
-  TYPE: '숫자만 입력 가능합니다.',
-  RANGE: '01~12 사이로 입력해 주세요.',
-  EMPTY: '유효기간을 전부 채워주세요.',
-};
-
-export const isValidFormatMonth = (month: string): boolean => {
-  if (!isValidMonth(month)) return false;
+export const isValidMonth = (month: string) => {
+  if (month.length === 1) return /^[0-1]$/.test(month);
+  if (month.length === 2) return /^(0[1-9]|1[0-2])$/.test(month);
   return true;
 };
 
-export const validateMonth = (month: string): string | undefined => {
-  if (month.length !== MONTH_CONSTAND.LENGTH) return ERROR_MESSAGE.EMPTY;
-  if (!isValidMonth(month)) return ERROR_MESSAGE.RANGE;
-  if (!isNumericString(month)) return ERROR_MESSAGE.TYPE;
-  return;
+export const validateExpiryMonth = (month: string): boolean => {
+  return isNumericString(month) && isValidMonth(month) && month.length === EXPIRY_MONTH_LENGTH;
 };
 
-export const validateYear = (year: string): string | undefined => {
-  if (year.length !== YEAR_CONSTAND.LENGTH) return ERROR_MESSAGE.EMPTY;
-  if (!isNumericString(year)) return ERROR_MESSAGE.TYPE;
-  return;
+export const validateExpiryYear = (year: string): boolean => {
+  return isNumericString(year) && year.length === EXPIRY_YEAR_LENGTH;
 };

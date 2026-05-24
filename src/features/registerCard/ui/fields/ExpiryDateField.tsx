@@ -1,38 +1,86 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
-import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 import { useInputFocus } from '@/core/hooks/useInputFocus';
-import { validateMonth, validateYear } from '@/entities/card/model/expiryDate';
+import {
+  EXPIRY_MONTH_LENGTH,
+  EXPIRY_YEAR_LENGTH,
+  validateExpiryMonth,
+  validateExpiryYear,
+  type ExpiryDate,
+} from '@/entities/card/model/expiryDate';
+import {
+  isValidMonthInput,
+  isValidYearInput,
+  getExpiryDateFieldState,
+  type ExpiryTouched,
+} from '../../model/registerExpiryDate';
+import { useState } from 'react';
+import type { FieldServerError } from '../../model/registerCardForm';
 
-interface ExpiryDateField {
-  expiryField: UseExpiryDateResult;
-  setStepRef: (node: HTMLInputElement | null) => void;
-  onComplate: () => void;
+export interface ExpiryFieldControl {
+  expiryDate: ExpiryDate;
+  onChange: (value: ExpiryDate) => void;
 }
 
-export const ExpiryDateField = ({ expiryField, onComplate, setStepRef }: ExpiryDateField) => {
-  const { month, year } = expiryField;
+export interface ExpiryDateFieldProps extends ExpiryFieldControl {
+  setStepRef: (node: HTMLInputElement | null) => void;
+  onComplete?: () => void;
+  serverError?: FieldServerError;
+}
+
+export const ExpiryDateField = ({
+  expiryDate,
+  serverError,
+  onChange,
+  onComplete,
+  setStepRef,
+}: ExpiryDateFieldProps) => {
+  const { month, year } = expiryDate;
+  const [touched, setTouched] = useState<ExpiryTouched>({
+    month: false,
+    year: false,
+  });
 
   const { setInputRef, focusNext } = useInputFocus();
 
-  const handleChangeMonth = (value: string) => {
-    month.handleChange(value);
-    if (validateMonth(value) === undefined) focusNext(1);
+  const { visibleMonthError, visibleYearError, totalErrorMessage } = getExpiryDateFieldState({
+    expiryDate,
+    touched,
+  });
+  const visibleErrorMessage = serverError?.message ?? totalErrorMessage;
+
+  const handleChangeMonth = (month: string) => {
+    if (!isValidMonthInput(month)) return;
+    serverError?.onClear();
+
+    const next = {
+      ...expiryDate,
+      month,
+    };
+    onChange(next);
+
+    if (validateExpiryMonth(month)) focusNext(1);
+    if (validateExpiryMonth(next.month) && validateExpiryYear(next.year)) onComplete?.();
   };
 
-  const handleChangeYear = (value: string) => {
-    year.handleChange(value);
-    const monthError = validateMonth(expiryField.month.value);
-    const yearError = validateYear(value);
-    if (!monthError && !yearError) onComplate();
-  };
+  const handleChangeYear = (year: string) => {
+    if (!isValidYearInput(year)) return;
+    serverError?.onClear();
 
+    const next = {
+      ...expiryDate,
+      year,
+    };
+    onChange(next);
+
+    if (validateExpiryMonth(next.month) && validateExpiryYear(next.year)) onComplete?.();
+  };
   return (
     <Field
       title="카드 유효기간을 입력해 주세요"
       subTitle="월/년도(MMYY)를 순서대로 입력해 주세요"
       label="유효기간"
-      errorMessage={month.errorMessage || year.errorMessage}
+      errorMessage={visibleErrorMessage}
     >
       <Input
         ref={(node) => {
@@ -40,12 +88,17 @@ export const ExpiryDateField = ({ expiryField, onComplate, setStepRef }: ExpiryD
         }}
         type="text"
         inputMode="numeric"
-        value={month.value}
-        maxLength={month.maxLength}
+        value={month}
+        maxLength={EXPIRY_MONTH_LENGTH}
         placeholder="MM"
-        isError={month.errorMessage !== undefined}
+        isError={visibleMonthError !== undefined}
         onChange={(e) => handleChangeMonth(e.target.value)}
-        onBlur={() => month.handleBlur()}
+        onBlur={() =>
+          setTouched((prev) => ({
+            ...prev,
+            month: true,
+          }))
+        }
       />
       <Input
         ref={(node) => {
@@ -53,12 +106,17 @@ export const ExpiryDateField = ({ expiryField, onComplate, setStepRef }: ExpiryD
         }}
         type="text"
         inputMode="numeric"
-        value={year.value}
-        maxLength={year.maxLength}
+        value={year}
+        maxLength={EXPIRY_YEAR_LENGTH}
         placeholder="YY"
-        isError={year.errorMessage !== undefined}
+        isError={visibleYearError !== undefined}
         onChange={(e) => handleChangeYear(e.target.value)}
-        onBlur={() => year.handleBlur()}
+        onBlur={() =>
+          setTouched((prev) => ({
+            ...prev,
+            year: true,
+          }))
+        }
       />
     </Field>
   );

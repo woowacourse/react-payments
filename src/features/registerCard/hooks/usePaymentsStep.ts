@@ -14,11 +14,13 @@ export const usePaymentStep = () => {
   }, [step, focusNext]);
 
   const toStep = (focusIndex: number) => {
-    if (step > focusIndex) return;
+    if (step < focusIndex) {
+      setStep(focusIndex);
+      pendingFocus.current = focusIndex;
+      return;
+    }
 
-    setStep(focusIndex);
-    pendingFocus.current = focusIndex;
+    focusNext(focusIndex);
   };
-
   return { step, toStep, setStepRef: setInputRef };
 };

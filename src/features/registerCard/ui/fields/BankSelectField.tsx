@@ -4,19 +4,23 @@ import { Field } from '@/core/components/field/Field';
 import { BANK_RULES, BANKS, type Bank } from '@/entities/card/model/bank';
 
 export interface BankFieldControl {
-  value: Bank | undefined;
-  handleChange: (v: Bank | undefined) => void;
+  bank: Bank | undefined;
+  onChange: (v: Bank) => void;
 }
-export interface BankSelectFieldProps {
-  bankField: BankFieldControl;
+export interface BankSelectFieldProps extends BankFieldControl {
   setStepRef: (node: HTMLSelectElement | null) => void;
-  onComplate: () => void;
+  onComplete: () => void;
 }
-export const BankSelectField = ({ bankField, setStepRef, onComplate }: BankSelectFieldProps) => {
-  const { value, handleChange } = bankField;
-  const handleChangeBank = (value: Bank) => {
-    handleChange(value);
-    if (value !== undefined) onComplate();
+
+export const BankSelectField = ({
+  bank,
+  onChange,
+  setStepRef,
+  onComplete,
+}: BankSelectFieldProps) => {
+  const handleChange = (value: Bank) => {
+    onChange(value);
+    onComplete();
   };
   return (
     <Field title="카드사를 선택해 주세요" subTitle="현재 국내 카드사만 가능합니다.">
@@ -24,10 +28,9 @@ export const BankSelectField = ({ bankField, setStepRef, onComplate }: BankSelec
         <select
           ref={setStepRef}
           className={styles.button}
-          value={value ?? ''}
-          onChange={(e) => handleChangeBank(e.target.value as Bank)}
+          value={bank ?? ''}
+          onChange={(e) => handleChange(e.target.value as Bank)}
         >
-          {' '}
           <option value="" disabled>
             카드사를 선택해 주세요
           </option>

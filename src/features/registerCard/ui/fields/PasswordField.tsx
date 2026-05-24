@@ -1,37 +1,40 @@
 import { Field } from '@/core/components/field/Field';
 import { Input } from '@/core/components/input/Input';
-import type { FieldControl } from '../../model/payments';
+import { validatePassword } from '@/entities/card/model/password';
 import { useState } from 'react';
-import { isNumericString } from '@/core/utils/validator';
-import {
-  getErrorPassword,
-  PASSWORD_LENGTH,
-  validatePassword,
-} from '@/entities/card/model/password';
+import { getPasswordFieldState, isValidInputPassword } from '../../model/registerPassword';
 
-interface PasswordFieldProps {
-  passwordField: FieldControl;
-  setStepRef: (node: HTMLInputElement | null) => void;
-  onComplate: () => void;
+export interface PasswordFieldControl {
+  password: string;
+  onChange: (v: string) => void;
 }
 
-export const PasswordField = ({ passwordField, setStepRef, onComplate }: PasswordFieldProps) => {
-  const { value, handleChange } = passwordField;
+export interface PasswordFieldProps extends PasswordFieldControl {
+  setStepRef: (node: HTMLInputElement | null) => void;
+  onComplete?: () => void;
+  serverErrorMessage?: string;
+}
+
+export const PasswordField = ({
+  password,
+  onChange,
+  setStepRef,
+  onComplete,
+}: PasswordFieldProps) => {
   const [touched, setTouched] = useState<boolean>(false);
 
-  const handleChangePW = (inputValue: string): void => {
-    if (inputValue !== '' && !isNumericString(inputValue)) return;
-    handleChange(inputValue);
-    setTouched(false);
-    if (validatePassword(inputValue)) onComplate();
+  const { errorMessage, maxLength } = getPasswordFieldState(password, touched);
+
+  const handleChange = (inputValue: string): void => {
+    if (!isValidInputPassword(inputValue)) return;
+
+    onChange(inputValue);
+
+    if (validatePassword(inputValue)) {
+      onComplete?.();
+    }
   };
 
-  const handleBlur = () => {
-    setTouched(true);
-  };
-
-  const error = validatePassword(value);
-  const errorMessage = touched ? getErrorPassword(value) : undefined;
   return (
     <Field
       title="비밀번호를 입력해 주세요"
@@ -40,15 +43,15 @@ export const PasswordField = ({ passwordField, setStepRef, onComplate }: Passwor
       errorMessage={errorMessage}
     >
       <Input
-        ref={(node) => setStepRef(node)}
+        ref={setStepRef}
         type="password"
         inputMode="numeric"
-        value={value}
-        maxLength={PASSWORD_LENGTH}
+        value={password}
+        maxLength={maxLength}
         placeholder="**"
-        isError={touched && error}
-        onChange={(e) => handleChangePW(e.target.value)}
-        onBlur={() => handleBlur()}
+        isError={touched && errorMessage !== undefined}
+        onChange={(e) => handleChange(e.target.value)}
+        onBlur={() => setTouched(true)}
       />
     </Field>
   );

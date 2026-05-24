@@ -1,71 +1,112 @@
 import styles from './CardForm.module.css';
 
 import { CvcField } from '@/features/registerCard/ui/fields/CvcField';
-import { NumberField } from '@/features/registerCard/ui/fields/NumberField';
-import type { UseNumbersResults } from '../../hooks/useNumbers';
-import type { FieldControl } from '../../model/payments';
+import { NumberField } from '@/features/registerCard/ui/fields/CardNumberField';
 import { PasswordField } from '../fields/PasswordField';
-import type { UseExpiryDateResult } from '../../hooks/useExpiryDate';
 import { ExpiryDateField } from '../fields/ExpiryDateField';
-import { BankSelectField, type BankFieldControl } from '../fields/BankSelectField';
+import { BankSelectField } from '../fields/BankSelectField';
 import { usePaymentStep } from '../../hooks/usePaymentsStep';
-import { STEP } from '../../model/payments';
+import {
+  toRequestData,
+  toServerError,
+  type ServerError,
+  type ServerErrorField,
+} from '../../model/registerCardForm';
+import { useEffect, useState, type FormEvent } from 'react';
+import { registerCard } from '@/entities/card/api/cards';
+import type { UsePaymentsFormResult } from '../../hooks/usePaymentsForm';
+
+const STEP = {
+  NUMBERS: 0,
+  BANK: 1,
+  EXPIRY: 2,
+  CVC: 3,
+  PASSWORD: 4,
+  BUTTON: 5,
+} as const;
+
+const SERVER_ERROR_STEP: Record<ServerErrorField, number> = {
+  numbers: STEP.NUMBERS,
+  expiryDate: STEP.EXPIRY,
+  cvc: STEP.CVC,
+};
 
 export interface CardFormProps {
-  numbersField: UseNumbersResults;
-  expiryField: UseExpiryDateResult;
-  bankField: BankFieldControl;
-  cvcField: FieldControl;
-  passwordField: FieldControl;
+  paymentsForm: UsePaymentsFormResult;
   formId: string;
-  handleSubmit: (e: React.FormEvent) => void;
+  onRegister: () => void | Promise<void>;
 }
 
-export const CardForm = ({
-  numbersField,
-  expiryField,
-  bankField,
-  cvcField,
-  passwordField,
-  formId,
-  handleSubmit,
-}: CardFormProps) => {
+export const CardForm = ({ paymentsForm, formId, onRegister }: CardFormProps) => {
   const { step, toStep, setStepRef } = usePaymentStep();
+  const [serverError, setServerError] = useState<ServerError>(null);
+
+  const { cardInfo, numbersField, expiryField, bankField, cvcField, passwordField } = paymentsForm;
+
+  useEffect(() => {
+    if (serverError === null) return;
+    toStep(SERVER_ERROR_STEP[serverError.field]);
+  }, [toStep, serverError]);
+
+  const getServerError = (field: ServerErrorField) => {
+    if (serverError?.field !== field) return undefined;
+
+    return {
+      message: serverError.message,
+      onClear: () => setServerError(null),
+    };
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const result = await registerCard(toRequestData(cardInfo));
+
+    if (!result.ok) {
+      setServerError(toServerError(result.error));
+      return;
+    }
+
+    onRegister();
+  };
 
   return (
     <form className={styles.form} id={formId} onSubmit={handleSubmit}>
-      {step >= 4 && (
-        <PasswordField
-          passwordField={passwordField}
-          setStepRef={(node) => setStepRef(node, STEP.PASSWORD)}
-          onComplate={() => {}}
-        />
+      {step >= STEP.PASSWORD && (
+        <PasswordField {...passwordField} setStepRef={(node) => setStepRef(node, STEP.PASSWORD)} />
       )}
-      {step >= 3 && (
+
+      {step >= STEP.CVC && (
         <CvcField
-          cvcField={cvcField}
+          {...cvcField}
+          serverError={getServerError('cvc')}
+          onComplete={() => toStep(STEP.PASSWORD)}
           setStepRef={(node) => setStepRef(node, STEP.CVC)}
-          onComplate={() => toStep(STEP.PASSWORD)}
         />
       )}
-      {step >= 2 && (
+
+      {step >= STEP.EXPIRY && (
         <ExpiryDateField
-          expiryField={expiryField}
+          {...expiryField}
+          onComplete={() => toStep(STEP.CVC)}
           setStepRef={(node) => setStepRef(node, STEP.EXPIRY)}
-          onComplate={() => toStep(STEP.CVC)}
+          serverError={getServerError('expiryDate')}
         />
       )}
-      {step >= 1 && (
+
+      {step >= STEP.BANK && (
         <BankSelectField
-          bankField={bankField}
+          {...bankField}
+          onComplete={() => toStep(STEP.EXPIRY)}
           setStepRef={(node) => setStepRef(node, STEP.BANK)}
-          onComplate={() => toStep(STEP.EXPIRY)}
         />
       )}
+
       <NumberField
-        numbersField={numbersField}
+        {...numbersField}
+        onComplete={() => toStep(STEP.BANK)}
         setStepRef={(node) => setStepRef(node, STEP.NUMBERS)}
-        onComplate={() => toStep(STEP.BANK)}
+        serverError={getServerError('numbers')}
       />
     </form>
   );

@@ -1,0 +1,45 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.colorChip {
+  flex: 0 0 auto;
+  width: 58px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+.content {
+  min-width: 0;
+  flex: 1;
+}
+
+.bank {
+  margin: 0 0 2px;
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.number,
+.expirationDate {
+  margin: 0;
+  color: #8a8a8a;
+  font-size: 10px;
+}
+
+.deleteButton {
+  border: 0;
+  color: #9ca3af;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
