@@ -35,8 +35,12 @@ const CardList = () => {
     const isConfirmed = window.confirm("카드를 삭제하시겠습니까?");
     if (!isConfirmed) return;
 
-    await deleteCard(id);
-    setCards((prev) => prev.filter((card) => card.id !== id));
+    try {
+      await deleteCard(id);
+      setCards((prev) => prev.filter((card) => card.id !== id));
+    } catch {
+      alert("카드 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.");
+    }
   };
 
   return (
