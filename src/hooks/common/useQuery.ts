@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type QueryState = "idle" | "loading" | "success" | "error";
 
@@ -12,9 +12,15 @@ const useQuery = <ResponseType>({ queryFn }: UseQueryParams<ResponseType>) => {
   const [error, setError] = useState<Error | null>(null);
   const [fetchTrigger, setFetchTrigger] = useState(0);
 
+  const queryFnRef = useRef(queryFn);
+
   const reload = () => {
     setFetchTrigger((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    queryFnRef.current = queryFn;
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -27,7 +33,7 @@ const useQuery = <ResponseType>({ queryFn }: UseQueryParams<ResponseType>) => {
       }
 
       try {
-        const response = await queryFn();
+        const response = await queryFnRef.current();
 
         if (!cancelled) {
           setData(response);
@@ -44,7 +50,7 @@ const useQuery = <ResponseType>({ queryFn }: UseQueryParams<ResponseType>) => {
     return () => {
       cancelled = true;
     };
-  }, [queryFn, fetchTrigger]);
+  }, [fetchTrigger]);
 
   return { state, data, error, reload };
 };
