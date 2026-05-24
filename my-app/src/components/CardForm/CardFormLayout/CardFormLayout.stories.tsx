@@ -21,6 +21,7 @@ const meta = {
   args: {
     canSubmit: false,
     onSubmit: fn(),
+    status: "idle",
     children: (
       <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 16 }}>
         <label>
