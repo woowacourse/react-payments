@@ -1,5 +1,5 @@
 import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
-import CARD, { type CardBrand } from "@constants/card";
+import CARD, { type CardBrand, type CompanyKey } from "@constants/card";
 
 export const detectCardBrand = (cardNumber: string): CardBrand | null => {
   const VISA_PREFIX = "4";
@@ -136,4 +136,16 @@ export const isCardNumberComplete = (
 export const padValidityPeriodUnit = (value: string) => {
   if (value.length === 1) return `0${value}`;
   return value;
+};
+
+export const toApiCardNumber = (units: CardNumberUnits): string => {
+  return units.join("");
+};
+
+export const toApiExpirationDate = (period: ValidityPeriod): string => {
+  return `${period.month}/${period.year}`;
+};
+
+export const getIssuerCode = (companyKey: CompanyKey): string => {
+  return CARD.COMPANY_INFO[companyKey].issuerCode;
 };

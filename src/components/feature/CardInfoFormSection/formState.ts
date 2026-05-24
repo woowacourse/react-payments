@@ -1,4 +1,5 @@
 import type { CardNumberUnits, ValidityPeriod } from "@/types/card";
+import type { CardErrorCode } from "@apis/api/cards";
 import type { CompanyKey } from "@constants/card";
 
 import type { CVCInputStatus } from "./components/CardCVCInputField/types";
@@ -44,3 +45,30 @@ export const INITIAL_CARD_INFO_FORM_STATE: CardInfoFormState = {
   CVCStatus: "DEFAULT",
   passwordStatus: "DEFAULT",
 };
+
+const ERROR_FORM_STATE_MAP: Record<
+  CardErrorCode,
+  Partial<CardInfoFormState>
+> = {
+  INVALID_CARD_NUMBER: {
+    cardNumberStatus: [
+      "INVALID_BRAND",
+      "INVALID_BRAND",
+      "INVALID_BRAND",
+      "INVALID_BRAND",
+    ],
+  },
+  INVALID_CVC: {
+    CVCStatus: "ERROR",
+  },
+  INVALID_EXPIRATION_DATE: {
+    validityPeriodStatus: {
+      month: "MONTH_RANGE_ERROR",
+      year: "YEAR_RANGE_ERROR",
+    },
+  },
+};
+
+export const getFormStateByErrorCode = (
+  code: CardErrorCode,
+): Partial<CardInfoFormState> => ERROR_FORM_STATE_MAP[code];

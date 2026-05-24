@@ -1,10 +1,14 @@
 import { isCardErrorCode } from "@apis/api/cards";
 import ApiError from "@apis/ApiError";
 import StepFunnel from "@components/common/StepFunnel";
-import CARD from "@constants/card";
 import styled from "@emotion/styled";
 import useRegisterCard from "@hooks/feature/mutation/useRegisterCard";
 import useNavigateCompletePage from "@hooks/feature/navigation/useNavigateCompletePage";
+import {
+  getIssuerCode,
+  toApiCardNumber,
+  toApiExpirationDate,
+} from "@utils/card";
 
 import CardCompanySelectField from "./components/CardCompanySelectField";
 import CardCVCInputField from "./components/CardCVCInputField";
@@ -14,24 +18,26 @@ import CardPasswordField from "./components/CardPasswordField";
 import CardPreview from "./components/CardPreview";
 import CardValidityPeriodInputField from "./components/CardValidityPeriodInputField";
 import { useFormValue, withFormWrapper } from "./formContext";
-import { INITIAL_CARD_INFO_FORM_STATE } from "./formState";
+import {
+  getFormStateByErrorCode,
+  INITIAL_CARD_INFO_FORM_STATE,
+} from "./formState";
 
 const CardInfoFormSection = () => {
   const navigateToCompletePage = useNavigateCompletePage();
   const { mutate: registerCard } = useRegisterCard();
   const { getValue, setValue } = useFormValue();
 
-  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const cardNumber = getValue("cardNumber").join("");
     const selectedCardCompany = getValue("selectedCardCompany");
     if (!selectedCardCompany) return;
-    const cvc = getValue("CVC");
-    const { month, year } = getValue("validityPeriod");
-    const expirationDate = `${month}/${year}`;
 
-    const { issuerCode } = CARD.COMPANY_INFO[selectedCardCompany];
+    const cardNumber = toApiCardNumber(getValue("cardNumber"));
+    const expirationDate = toApiExpirationDate(getValue("validityPeriod"));
+    const cvc = getValue("CVC");
+    const issuerCode = getIssuerCode(selectedCardCompany);
 
     const cardInfo = {
       number: cardNumber,
@@ -48,26 +54,13 @@ const CardInfoFormSection = () => {
         }),
       onError: (error) => {
         if (error instanceof ApiError && isCardErrorCode(error.code)) {
-          const { code } = error;
-          if (code === "INVALID_CARD_NUMBER") {
-            setValue("cardNumberStatus", [
-              "INVALID_BRAND",
-              "INVALID_BRAND",
-              "INVALID_BRAND",
-              "INVALID_BRAND",
-            ]);
-          }
-
-          if (code === "INVALID_CVC") {
-            setValue("CVCStatus", "ERROR");
-          }
-
-          if (code === "INVALID_EXPIRATION_DATE") {
-            setValue("validityPeriodStatus", {
-              month: "MONTH_RANGE_ERROR",
-              year: "YEAR_RANGE_ERROR",
-            });
-          }
+          const patch = getFormStateByErrorCode(error.code);
+          if ("cardNumberStatus" in patch && patch.cardNumberStatus)
+            setValue("cardNumberStatus", patch.cardNumberStatus);
+          if ("CVCStatus" in patch && patch.CVCStatus)
+            setValue("CVCStatus", patch.CVCStatus);
+          if ("validityPeriodStatus" in patch && patch.validityPeriodStatus)
+            setValue("validityPeriodStatus", patch.validityPeriodStatus);
         }
       },
     });
