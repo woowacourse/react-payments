@@ -12,9 +12,12 @@ import { createCard } from "@/api/cards";
 import { ROUTES } from "@/constants/routes";
 import { ERROR_CODES } from "@/constants/errorCodes";
 import { useState } from "react";
+type Status = "idle" | "loading" | "success" | "error";
+
 const CardForm = () => {
   const navigate = useNavigate();
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<Status>("idle");
 
   const {
     cardInfo,
@@ -33,7 +36,8 @@ const CardForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!canSubmit) return;
+    if (!canSubmit || status === "loading") return;
+    setStatus("loading");
 
     try {
       await createCard({
@@ -42,10 +46,17 @@ const CardForm = () => {
         cvc: cardInfo.cvc,
         issuerCode: cardInfo.company,
       });
+      setStatus("success");
       navigate(ROUTES.COMPLETE, { state: { numbers: cardInfo.numbers[0], brand } });
     } catch (error) {
       const { code, message } = error as { code: string; message: string };
-      setServerErrors({ [code]: message });
+      const fieldErrorCodes = Object.values(ERROR_CODES) as string[];
+      if (fieldErrorCodes.includes(code)) {
+        setServerErrors({ [code]: message });
+      } else {
+        alert(message); 
+      }
+      setStatus("error");
     }
   };
 
@@ -91,7 +102,7 @@ const CardForm = () => {
         <Card cardInfo={cardInfo} brand={brand} />
       </div>
 
-      <CardFormLayout canSubmit={canSubmit} onSubmit={handleSubmit}>
+      <CardFormLayout canSubmit={canSubmit} onSubmit={handleSubmit} status={status}>
         {step >= 4 && <PasswordInputSection onChange={passwordHandler} inputValue={cardInfo.password} />}
         {step >= 3 && (
           <CvcInputSection
