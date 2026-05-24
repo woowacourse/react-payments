@@ -6,18 +6,22 @@ import { useCvc } from './useCvc';
 interface Props {
   value: string;
   setValue: (value: string) => void;
+  serverError?: string;
 }
 
-const CvcSection = ({ value, setValue }: Props) => {
+const CvcSection = ({ value, setValue, serverError }: Props) => {
   const cvcInputId = useId();
-  const { error, handleOnChange, handleOnBlur, finalErrorMessage } = useCvc({value, setValue});
+  const { error, handleOnChange, handleOnBlur, finalErrorMessage } = useCvc({
+    value,
+    setValue,
+  });
 
   return (
     <CommonSection
       title="CVC 번호를 입력해주세요"
       description=""
       label="CVC"
-      errorMessage={finalErrorMessage}
+      errorMessage={serverError || finalErrorMessage}
       htmlFor={cvcInputId}
     >
       <NumberInput

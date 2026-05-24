@@ -6,7 +6,7 @@ import {
   getMonthError,
   getPasswordError,
   getYearError,
-} from '../utils/Validation';
+} from '../../utils/Validation';
 
 interface FormState {
   cardNumber: string[];

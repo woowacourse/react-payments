@@ -5,10 +5,11 @@ import react from '@vitejs/plugin-react';
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [react()],
-  base: '/react-payments',
+  base: '/react-payments/',
   test: {
     projects: [{
       extends: true,
-    }]
+    }],
+    setupFiles: ['./vitest.setup.ts'],
   }
 });

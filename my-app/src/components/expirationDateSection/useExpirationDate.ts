@@ -38,9 +38,9 @@ export const useExpirationDate = ({ value, setValue }: Props) => {
 
   return {
     inputRefs,
-    errors,
-    finalErrorMessage,
     handleOnChange,
     handleOnBlur: (_val: string, index: number) => markingTouched(index),
+    errors,
+    finalErrorMessage,
   };
 };

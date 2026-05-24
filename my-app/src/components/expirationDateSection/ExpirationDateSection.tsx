@@ -9,18 +9,20 @@ interface Props {
     year: string;
   };
   setValue: (value: { month: string; year: string }) => void;
+  serverError?: string;
 }
 
-const ExpirationDateSection = ({ value, setValue }: Props) => {
+const ExpirationDateSection = ({ value, setValue, serverError }: Props) => {
   const expirationDateIds = useId();
-  const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } = useExpirationDate({value, setValue});
+  const { errors, inputRefs, handleOnChange, handleOnBlur, finalErrorMessage } =
+    useExpirationDate({ value, setValue });
 
   return (
     <CommonSection
       title="카드 유효기간을 입력해 주세요"
       description="월/년도(MMYY)를 순서대로 입력해 주세요."
       label="유효기간"
-      errorMessage={finalErrorMessage}
+      errorMessage={serverError || finalErrorMessage}
       htmlFor={`${expirationDateIds}-month`}
     >
       <NumberInput
@@ -31,7 +33,9 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         placeholder="MM"
         isError={errors[0]}
         maxLength={2}
-        ref={(el) => {inputRefs.current[0] = el;}}
+        ref={(el) => {
+          inputRefs.current[0] = el;
+        }}
       />
       <NumberInput
         id={`${expirationDateIds}-year`}
@@ -41,10 +45,12 @@ const ExpirationDateSection = ({ value, setValue }: Props) => {
         placeholder="YY"
         isError={errors[1]}
         maxLength={2}
-        ref={(el) => {inputRefs.current[1] = el;}}
+        ref={(el) => {
+          inputRefs.current[1] = el;
+        }}
       />
     </CommonSection>
   );
-}
+};
 
 export default ExpirationDateSection;
