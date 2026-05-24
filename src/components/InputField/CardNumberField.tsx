@@ -16,14 +16,12 @@ interface Props {
   value: CardNumbers;
   cardBrand: CardBrand;
   onChange: (value: CardNumbers) => void;
-  onComplete: (isCompleted: boolean) => void;
   errorMessage: string | null;
 }
 
 export default function CardNumberField({
   onChange,
   value,
-  onComplete,
   cardBrand,
   errorMessage,
 }: Props) {
@@ -42,8 +40,6 @@ export default function CardNumberField({
     setError(cardKey)(null);
     const newCardNumbers = { ...value, [cardKey]: newValue };
     onChange(newCardNumbers);
-
-    onComplete(getCardNumberErrorMessage(newCardNumbers, cardBrand) === null);
 
     const maxLen = cardKey === "fourth" ? fourthMaxLength : 4;
     const nextKey: Record<string, string> = {

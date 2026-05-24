@@ -11,25 +11,17 @@ export default function useCardNumberField() {
     fourth: "",
   });
 
-  const [isCardNumberCompleted, setIsCardNumberCompleted] = useState(false);
-
   const cardBrand = getCardBrand(cardNumbers);
 
   const onCardNumberChange = (value: CardNumbers) => setCardNumbers(value);
-
-  const onCardNumberComplete = (isCompleted: boolean) => {
-    if (isCompleted) setIsCardNumberCompleted(true);
-  };
 
   const isCardNumberValid =
     getCardNumberErrorMessage(cardNumbers, cardBrand) === null;
 
   return {
     cardNumbers,
-    isCardNumberCompleted,
     cardBrand,
     onCardNumberChange,
-    onCardNumberComplete,
     isCardNumberValid,
   };
 }
