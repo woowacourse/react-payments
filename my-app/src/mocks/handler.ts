@@ -2,8 +2,7 @@ import { http, HttpResponse } from "msw";
 
 import { store } from "./cardStore.ts";
 import type { CreateCardRequest } from "../apis/cards";
-
-const BASE_URL = "/api";
+import { API } from "../apis/endpoints";
 
 const VALID_MONTH_REGEX = /^(0[1-9]|1[0-2])$/;
 const SUPPORTED_BIN_REGEX = /^(4|5[1-5]|3[47]|36|62)/;
@@ -27,7 +26,7 @@ const validateCreateCard = (body: CreateCardRequest) => {
 };
 
 export const handlers = [
-  http.post(`${BASE_URL}/cards`, async ({ request }) => {
+  http.post(API.createCard.pattern, async ({ request }) => {
     const body = (await request.json()) as CreateCardRequest;
     const error = validateCreateCard(body);
 
@@ -44,11 +43,11 @@ export const handlers = [
     return HttpResponse.json({ id }, { status: 201 });
   }),
 
-  http.get(`${BASE_URL}/cards`, () => {
+  http.get(API.listCards.pattern, () => {
     return HttpResponse.json(store.list());
   }),
 
-  http.delete(`${BASE_URL}/cards/:id`, ({ params }) => {
+  http.delete(API.deleteCard.pattern, ({ params }) => {
     store.remove(params.id as string);
     return new HttpResponse(null, { status: 204 });
   }),

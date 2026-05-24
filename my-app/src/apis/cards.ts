@@ -1,6 +1,5 @@
 import { tryCatch } from "../utils/tryCatch";
-
-const BASE_URL = "/api";
+import { API, fillPath } from "./endpoints";
 
 export type ApiErrorCode = "INVALID_CARD_NUMBER" | "INVALID_CVC" | "INVALID_EXPIRATION_DATE";
 
@@ -44,8 +43,8 @@ const parseApiError = (res: Response): Promise<ApiError> =>
   tryCatch(() => toApiError(res), () => FALLBACK_ERROR);
 
 export const createCard = async (request: CreateCardRequest): Promise<CreateCardResponse> => {
-  const res = await fetch(`${BASE_URL}/cards`, {
-    method: "POST",
+  const res = await fetch(API.createCard.pattern, {
+    method: API.createCard.method,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(request),
   });
@@ -55,12 +54,14 @@ export const createCard = async (request: CreateCardRequest): Promise<CreateCard
 };
 
 export const getCards = async (): Promise<CardListItem[]> => {
-  const res = await fetch(`${BASE_URL}/cards`);
+  const res = await fetch(API.listCards.pattern, { method: API.listCards.method });
   if (!res.ok) throw await parseApiError(res);
   return res.json();
 };
 
 export const deleteCard = async (id: string): Promise<void> => {
-  const res = await fetch(`${BASE_URL}/cards/${id}`, { method: "DELETE" });
+  const res = await fetch(fillPath(API.deleteCard.pattern, { id }), {
+    method: API.deleteCard.method,
+  });
   if (!res.ok) throw await parseApiError(res);
 };
