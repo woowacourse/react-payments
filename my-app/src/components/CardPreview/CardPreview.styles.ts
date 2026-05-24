@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const CardContainer = styled.div<{ backgroundColor: string }>`
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;

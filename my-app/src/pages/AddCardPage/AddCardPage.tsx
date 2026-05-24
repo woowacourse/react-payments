@@ -1,21 +1,16 @@
 import { StyledContainer } from './AddCardPage.styles';
 import CardPreview from '../../components/CardPreview/CardPreview';
-import { useNavigate } from 'react-router';
 import CardForm from '../../components/CardForm/CardForm';
 import useCardForm from '../../hooks/useCardForm';
+import useAddCard from '../../hooks/useAddCard';
 
 function AddCardPage() {
-  const navigate = useNavigate();
   const { cardForm, updateCardForm } = useCardForm();
+  const { serverErrors, clearServerError, addCardItem } = useAddCard(cardForm);
 
-  function handleOnSubmit(e: React.SubmitEvent) {
+  async function handleOnSubmit(e: React.SubmitEvent) {
     e.preventDefault();
-    navigate('/success', {
-      state: {
-        firstNumber: cardForm.cardNumber.slice(0, 4),
-        issuer: cardForm.cardIssuer,
-      },
-    });
+    await addCardItem();
   }
 
   return (
@@ -29,6 +24,8 @@ function AddCardPage() {
         cardForm={cardForm}
         updateCardForm={updateCardForm}
         handleOnSubmit={handleOnSubmit}
+        serverErrors={serverErrors}
+        clearServerError={clearServerError}
       />
     </StyledContainer>
   );

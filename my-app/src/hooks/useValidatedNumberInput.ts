@@ -10,6 +10,7 @@ interface Props {
   updateValue: (value: string) => void;
   validate: (value: string) => ValidationResult;
   invalidMessage: string;
+  serverErrorMessage?: string;
 }
 
 function useValidatedNumberInput({
@@ -17,6 +18,7 @@ function useValidatedNumberInput({
   updateValue,
   validate,
   invalidMessage,
+  serverErrorMessage,
 }: Props) {
   const [validation, setValidation] = useState<ValidationResult>({
     error: false,
@@ -44,8 +46,8 @@ function useValidatedNumberInput({
   }
 
   return {
-    error: validation.error,
-    errorMessage: validation.message,
+    error: validation.error || !!serverErrorMessage,
+    errorMessage: validation.message || serverErrorMessage || '',
     handleOnChange,
     handleOnBlur,
   };

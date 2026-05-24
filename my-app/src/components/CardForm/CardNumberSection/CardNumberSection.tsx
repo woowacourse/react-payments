@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import CommonSection from '../../../common/CommonSection/CommonSection';
 import NumberInput from '../../../common/NumberInput/NumberInput';
+import useFocusOnError from '../../../hooks/useFocusOnError';
 import useFormattedInputCursor from '../../../hooks/useFormattedInputCursor';
 import useValidatedNumberInput from '../../../hooks/useValidatedNumberInput';
 import { getCardNumberInfo } from '../../../utils/cardBrand';
@@ -9,14 +10,20 @@ import { getCardNumberError } from '../../../utils/validation';
 interface Props {
   value: string;
   updateValue: (value: string) => void;
+  serverErrorMessage?: string;
 }
 
-export default function CardNumberSection({ value, updateValue }: Props) {
+export default function CardNumberSection({
+  value,
+  updateValue,
+  serverErrorMessage,
+}: Props) {
   const { formattedMaxLength, formattedValue, maxLength } =
     getCardNumberInfo(value);
 
   const { inputRef, rememberCursorPosition } =
     useFormattedInputCursor(formattedValue);
+  useFocusOnError(inputRef, serverErrorMessage);
 
   const { error, errorMessage, handleOnChange, handleOnBlur } =
     useValidatedNumberInput({
@@ -24,6 +31,7 @@ export default function CardNumberSection({ value, updateValue }: Props) {
       updateValue,
       validate: getCardNumberError,
       invalidMessage: '카드번호는 숫자만 입력 가능합니다.',
+      serverErrorMessage,
     });
 
   useEffect(() => {

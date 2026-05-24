@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "test:unit": "vitest run --project unit",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -27,6 +29,9 @@
     "@storybook/addon-onboarding": "^10.3.6",
     "@storybook/addon-vitest": "^10.3.6",
     "@storybook/react-vite": "^10.3.6",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -42,6 +47,8 @@
     "eslint-plugin-storybook": "^10.3.6",
     "gh-pages": "^6.3.0",
     "globals": "^17.5.0",
+    "jsdom": "^29.1.1",
+    "msw": "^2.14.6",
     "playwright": "^1.59.1",
     "prettier": "^3.8.3",
     "storybook": "^10.3.6",
@@ -49,5 +56,10 @@
     "typescript-eslint": "^8.58.2",
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

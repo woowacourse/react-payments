@@ -16,6 +16,10 @@ import {
   getCardPasswordError,
   getCardYearError,
 } from '../../utils/validation';
+import type {
+  CardServerErrorField,
+  CardServerErrors,
+} from '../../constants/serverError';
 
 interface Props {
   cardForm: CardFormTypes;
@@ -24,19 +28,38 @@ interface Props {
     value: CardFormTypes[K],
   ) => void;
   handleOnSubmit: (e: React.SubmitEvent) => void;
+  serverErrors: CardServerErrors;
+  clearServerError: (field: CardServerErrorField) => void;
 }
 
-function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
+function CardForm({
+  cardForm,
+  updateCardForm,
+  handleOnSubmit,
+  serverErrors,
+  clearServerError,
+}: Props) {
   const { step, openStep } = useFormStep();
+
+  function updateField<K extends keyof CardFormTypes>(
+    field: K,
+    value: CardFormTypes[K],
+    serverErrorField?: CardServerErrorField,
+  ) {
+    if (serverErrorField) {
+      clearServerError(serverErrorField);
+    }
+
+    updateCardForm(field, value);
+  }
 
   return (
     <StyledForm onSubmit={handleOnSubmit}>
-      {step >= FORM_STEP.SUBMIT && <SubmitButtonSection cardForm={cardForm} />}
       {step >= FORM_STEP.PASSWORD && (
         <CardPasswordSection
           value={cardForm.cardPassword}
           updateValue={(value) => {
-            updateCardForm('cardPassword', value);
+            updateField('cardPassword', value);
 
             if (!getCardPasswordError(value).error) {
               openStep(FORM_STEP.SUBMIT);
@@ -47,8 +70,9 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
       {step >= FORM_STEP.CVC && (
         <CvcSection
           value={cardForm.cardCvc}
+          serverErrorMessage={serverErrors.cardCvc}
           updateValue={(value) => {
-            updateCardForm('cardCvc', value);
+            updateField('cardCvc', value, 'cardCvc');
 
             if (!getCardCvcError(value).error) {
               openStep(FORM_STEP.PASSWORD);
@@ -59,8 +83,9 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
       {step >= FORM_STEP.EXPIRATION_DATE && (
         <ExpirationDateSection
           value={cardForm.cardExpirationDate}
+          serverErrorMessage={serverErrors.cardExpirationDate}
           updateValue={(value) => {
-            updateCardForm('cardExpirationDate', value);
+            updateField('cardExpirationDate', value, 'cardExpirationDate');
 
             if (
               !getCardMonthError(value.month).error &&
@@ -75,7 +100,7 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
         <CardIssuerSection
           value={cardForm.cardIssuer}
           updateValue={(value) => {
-            updateCardForm('cardIssuer', value);
+            updateField('cardIssuer', value);
 
             if (!getCardIssuerError(value).error) {
               openStep(FORM_STEP.EXPIRATION_DATE);
@@ -86,8 +111,9 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
       {step >= FORM_STEP.CARD_NUMBER && (
         <CardNumberSection
           value={cardForm.cardNumber}
+          serverErrorMessage={serverErrors.cardNumber}
           updateValue={(value) => {
-            updateCardForm('cardNumber', value);
+            updateField('cardNumber', value, 'cardNumber');
 
             if (!getCardNumberError(value).error) {
               openStep(FORM_STEP.CARD_ISSUER);
@@ -95,6 +121,7 @@ function CardForm({ cardForm, updateCardForm, handleOnSubmit }: Props) {
           }}
         />
       )}
+      {step >= FORM_STEP.SUBMIT && <SubmitButtonSection cardForm={cardForm} />}
     </StyledForm>
   );
 }

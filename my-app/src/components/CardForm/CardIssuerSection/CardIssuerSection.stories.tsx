@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { SelectedCardIssuer } from '../../../constants/cardIssuer';
+import type { SelectedCardIssuerCode } from '../../../constants/cardIssuer';
 import CardIssuerSection from './CardIssuerSection';
 
 const meta: Meta<typeof CardIssuerSection> = {
@@ -13,7 +13,7 @@ type Story = StoryObj<typeof CardIssuerSection>;
 
 export const Default: Story = {
   render: () => {
-    const [value, setValue] = useState<SelectedCardIssuer>('');
+    const [value, setValue] = useState<SelectedCardIssuerCode>('');
 
     return <CardIssuerSection value={value} updateValue={setValue} />;
   },

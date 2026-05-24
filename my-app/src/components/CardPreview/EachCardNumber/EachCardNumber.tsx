@@ -7,11 +7,13 @@ interface Props {
 }
 
 export default function EachCardNumber({ cardNumber, index }: Props) {
+  const digits = Array.from(cardNumber);
+
   if (index >= 2) {
     return (
       <MaskingGroup>
-        {Array.from(cardNumber).map(() => (
-          <img src={MaskingImg} alt="masking-img" />
+        {digits.map((_, digitIndex) => (
+          <img key={digitIndex} src={MaskingImg} alt="masking-img" />
         ))}
       </MaskingGroup>
     );
@@ -19,8 +21,8 @@ export default function EachCardNumber({ cardNumber, index }: Props) {
 
   return (
     <NumberGroup>
-      {Array.from(cardNumber).map((number) => (
-        <p>{number}</p>
+      {digits.map((number, digitIndex) => (
+        <p key={digitIndex}>{number}</p>
       ))}
     </NumberGroup>
   );

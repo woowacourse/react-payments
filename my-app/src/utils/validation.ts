@@ -23,17 +23,12 @@ export function isExactLength(value: string, length: number): boolean {
 export function getCardNumberError(cardNumber: string): ErrorResponse {
   const { brand, maxLength } = getCardNumberInfo(cardNumber);
 
-  if (!brand) {
-    return {
-      error: true,
-      message: '유효한 카드 정보가 없습니다.',
-    };
-  }
-
   if (!isExactLength(cardNumber, maxLength)) {
+    const cardName = brand ? CARD_BRAND_NAMES[brand] : '카드';
+
     return {
       error: true,
-      message: `${CARD_BRAND_NAMES[brand]}의 번호는 ${maxLength}자리를 입력해주세요.`,
+      message: `${cardName} 번호는 ${maxLength}자리를 입력해주세요.`,
     };
   }
 

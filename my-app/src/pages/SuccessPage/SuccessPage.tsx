@@ -1,10 +1,7 @@
 import { useLocation, useNavigate } from 'react-router';
 import SuccessLogo from '../../assets/SuccessLogo.png';
-import {
-  StyledButton,
-  StyledContainer,
-  StyledText,
-} from './SuccessPage.styles';
+import { StyledContainer, StyledText } from './SuccessPage.styles';
+import CommonButton from '../../common/CommonButton/CommonButton';
 
 function SuccessPage() {
   const location = useLocation();
@@ -22,7 +19,7 @@ function SuccessPage() {
         <br />
         {location.state.issuer}가 등록되었어요.
       </StyledText>
-      <StyledButton onClick={handleOnClick}>확인</StyledButton>
+      <CommonButton handleOnClick={handleOnClick} label="확인" />
     </StyledContainer>
   );
 }
