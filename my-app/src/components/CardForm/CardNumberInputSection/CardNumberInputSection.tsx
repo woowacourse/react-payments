@@ -1,4 +1,6 @@
-import InputSectionLayout, { baseInputStyle } from "@/components/CardForm/InputSectionLayout/InputSectionLayout";
+import InputSectionLayout, {
+  baseInputStyle,
+} from "@/components/CardForm/InputSectionLayout/InputSectionLayout";
 import { useRef } from "react";
 import { css } from "@emotion/react";
 import { validateCardNumber } from "@/utils/validators";
@@ -15,8 +17,8 @@ const CardNumberInputSection = ({
   fieldConfig: number[];
   serverError?: string;
 }) => {
-  const { errorMessage, errorIndex, clearError, handleBlur } = useInputValidation(
-    validateCardNumber,
+  const { errorMessage, errorIndex, clearError, handleBlur, validate } = useInputValidation(
+    (values) => validateCardNumber(values, fieldConfig),
     inputValues,
   );
   const displayError = errorMessage || serverError;
@@ -24,6 +26,7 @@ const CardNumberInputSection = ({
   const hasServerError = Boolean(serverError);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const skipNextBlurRef = useRef(false);
 
   const handleChange = (index: number, value: string) => {
     const newValues = [...inputValues];
@@ -34,8 +37,18 @@ const CardNumberInputSection = ({
 
     // 현재 칸이 꽉 찼고, 마지막 칸이 아닐 때 다음칸 Input Dom에 포커스 이동.
     if (value.length === fieldConfig[index] && index < fieldConfig.length - 1) {
+      validate(newValues);
+      skipNextBlurRef.current = true;
       inputRefs.current[index + 1]?.focus();
     }
+  };
+
+  const handleBlurSafe = () => {
+    if (skipNextBlurRef.current) {
+      skipNextBlurRef.current = false;
+      return;
+    }
+    handleBlur();
   };
 
   return (
@@ -58,7 +71,7 @@ const CardNumberInputSection = ({
             maxLength={maxLen}
             value={inputValues[i] ?? ""}
             onChange={(e) => handleChange(i, e.target.value)}
-            onBlur={handleBlur}
+            onBlur={handleBlurSafe}
             css={[
               baseInputStyle,
               css`
