@@ -1,7 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import CardRegisterPage from "./feature/CardRegister/CardRegisterPage";
-import CardRegisterCompletePage from "./feature/CardRegisterComplete/CardRegisterCompletePage";
+
 import styled from "styled-components";
+import CardListPage from "./pages/CardListPage/CardListPage";
+import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage";
+import CardRegisterCompletePage from "./pages/CardRegisterCompletePage/CardRegisterCompletePage";
 
 const App = () => {
   return (
@@ -12,6 +14,7 @@ const App = () => {
           path="register/complete"
           element={<CardRegisterCompletePage />}
         />
+        <Route path="cards" element={<CardListPage />} />
       </Routes>
     </RootLayout>
   );
@@ -27,4 +30,5 @@ const RootLayout = styled.div`
   max-width: 376px;
   min-height: 100vh;
   margin: 0 auto;
+  padding: 50px 0;
 `;

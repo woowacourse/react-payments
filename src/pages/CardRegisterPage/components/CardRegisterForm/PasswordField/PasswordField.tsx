@@ -1,0 +1,106 @@
+import styled from "styled-components";
+import Label from "../shared/Label/Label";
+import Input from "../shared/Input/Input";
+import useInputErrorState from "../shared/useInputErrorState";
+import { validatePassword } from "../utils/passwordValidator";
+import { isNumeric } from "../shared/isNumeric";
+import { PASSWORD_INPUT_COUNT, PASSWORD_LENGTH } from "./constants";
+
+const PasswordField = ({
+  password,
+  onPasswordChange,
+  disabledInput,
+}: {
+  password: string;
+  onPasswordChange: (value: string) => void;
+  disabledInput: boolean;
+}) => {
+  const {
+    updateErrorMessage,
+    clearErrorMessage,
+    firstErrorIndex,
+    firstErrorMessage,
+    isTouched,
+    touchField,
+  } = useInputErrorState(PASSWORD_INPUT_COUNT);
+
+  const handlePasswordChange = (index: number, eValue: string) => {
+    const value = eValue.trim();
+
+    if (!isNumeric(value)) {
+      return;
+    }
+
+    onPasswordChange(value);
+
+    if (isTouched[index] && validatePassword(value).isValid) {
+      clearErrorMessage(index);
+    }
+  };
+
+  const handlePasswordBlur = (index: number, eValue: string) => {
+    const value = eValue.trim();
+
+    touchField(index);
+
+    const { errorMessage } = validatePassword(value);
+    if (errorMessage) {
+      updateErrorMessage(index, errorMessage);
+    } else {
+      clearErrorMessage(index);
+    }
+  };
+
+  return (
+    <StyledField>
+      <Label htmlFor="password">비밀번호 앞 2자리</Label>
+      <InputWrapper>
+        <PasswordInput
+          type="password"
+          id="password"
+          value={password}
+          disabled={disabledInput}
+          maxLength={PASSWORD_LENGTH}
+          inputMode="numeric"
+          placeholder="**"
+          strokeMode={0 === firstErrorIndex ? "error" : "default"}
+          onChange={(e) => handlePasswordChange(0, e.target.value)}
+          onBlur={(e) => handlePasswordBlur(0, e.target.value)}
+          autoFocus
+        />
+      </InputWrapper>
+      <ErrorMessage>{firstErrorMessage}</ErrorMessage>
+    </StyledField>
+  );
+};
+
+const StyledField = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin-top: 12px;
+
+  width: 100%;
+`;
+
+const InputWrapper = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+`;
+
+const PasswordInput = styled(Input)`
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+`;
+
+const ErrorMessage = styled.span`
+  min-height: 20px;
+  font-size: 9.5px;
+  font-weight: 400;
+  color: #ff3d3d;
+`;
+
+export default PasswordField;

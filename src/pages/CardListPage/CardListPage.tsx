@@ -1,0 +1,45 @@
+import Success from "./components/Success/Success";
+import styled from "styled-components";
+import Error from "./components/Error/Error";
+import Loading from "./components/Loading/Loading";
+import Empty from "./components/Empty/Empty";
+import { useCardListQuery } from "./components/useCardListQuery";
+
+const CardListPage = () => {
+  const { asyncState, cardList, loadCardList, deleteCardFromState } =
+    useCardListQuery();
+
+  return (
+    <CardListPageLayout>
+      <HasCardCountSpan>
+        보유 카드 {cardList && cardList.length !== 0 && `(${cardList.length})`}
+      </HasCardCountSpan>
+      {asyncState === "success" && cardList.length === 0 && <Empty />}
+      {asyncState === "success" && cardList.length !== 0 && (
+        <Success
+          cardList={cardList}
+          deleteCardFromState={deleteCardFromState}
+        />
+      )}
+      {asyncState === "error" && <Error onRetry={loadCardList} />}
+      {asyncState === "loading" && <Loading />}
+    </CardListPageLayout>
+  );
+};
+
+export default CardListPage;
+
+const CardListPageLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-height: 700px;
+  padding: 0 28px;
+`;
+
+const HasCardCountSpan = styled.span`
+  font-size: 18px;
+  font-weight: 700;
+  color: #353c49;
+`;
