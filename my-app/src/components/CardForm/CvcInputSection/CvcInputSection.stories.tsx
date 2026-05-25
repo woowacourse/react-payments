@@ -47,3 +47,13 @@ export const ErrorNonNumeric: Story = {
     await expect(canvas.getByText("숫자만 입력 가능합니다")).toBeInTheDocument();
   },
 };
+
+export const ServerError: Story = {
+  args: {
+    serverError: "CVC 번호가 올바르지 않습니다.",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText("CVC 번호가 올바르지 않습니다.")).toBeInTheDocument();
+  },
+};

@@ -1,13 +1,15 @@
 import { css } from "@emotion/react";
-
+type Status = "idle" | "loading" | "success" | "error";
 const CardFormLayout = ({
   children,
-  isValid,
+  canSubmit,
   onSubmit,
+  status,
 }: {
   children: React.ReactNode;
-  isValid: boolean;
+  canSubmit: boolean;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  status: Status;
 }) => {
   return (
     <>
@@ -29,15 +31,22 @@ const CardFormLayout = ({
           {children}
         </form>
       </div>
-      {isValid && (
+      {canSubmit && (
         <button
           form="card-form"
+          disabled={status === "loading"}
           css={css`
             width: calc(100% + 60px);
             margin-bottom: -30px;
             background: #333333;
             color: #f3f3f3;
             height: 52px;
+
+            &:disabled {
+              background: #cccccc;
+              color: #888888;
+              cursor: not-allowed;
+            }
           `}
         >
           확인

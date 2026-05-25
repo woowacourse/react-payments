@@ -1,0 +1,138 @@
+import { css } from "@emotion/react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "@/components/Button/Button";
+import OutlinedButton from "@/components/Button/OutlinedButton";
+import CardListItem from "@/components/CardListItem/CardListItem";
+import CardListSkeleton from "@/components/CardListItem/CardListSkeleton";
+import EmptyState from "@/components/common/EmptyState";
+import ErrorIcon from "@/components/CardListItem/ErrorIcon";
+import EmptyCardIcon from "@/components/CardListItem/EmptyCardIcon";
+import { getCards, deleteCard, type CardItem } from "@/api/cards";
+import { ROUTES } from "@/constants/routes";
+
+type Status = "idle" | "loading" | "success" | "error";
+
+const CardList = () => {
+  const navigate = useNavigate();
+  const [status, setStatus] = useState<Status>("loading");
+  const [cards, setCards] = useState<CardItem[]>([]);
+
+  const fetchCards = () => {
+    getCards()
+      .then((data) => {
+        setCards(data);
+        setStatus("success");
+      })
+      .catch(() => setStatus("error"));
+  };
+
+  useEffect(() => {
+    fetchCards();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    const isConfirmed = window.confirm("카드를 삭제하시겠습니까?");
+    if (!isConfirmed) return;
+
+    try {
+      await deleteCard(id);
+      setCards((prev) => prev.filter((card) => card.id !== id));
+    } catch {
+      alert("카드 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.");
+    }
+  };
+
+  return (
+    <div
+      css={css`
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 40px 30px;
+      `}
+    >
+      <h1
+        css={css`
+          font-weight: 700;
+          font-style: Bold;
+          font-size: 18px;
+          align-self: flex-start;
+        `}
+      >
+        보유 카드 {cards.length !== 0 && `(${cards.length})`}
+      </h1>
+
+      {status === "loading" && <CardListSkeleton />}
+      {status === "error" && (
+        <>
+          <EmptyState
+            icon={<ErrorIcon />}
+            title="카드 목록을 불러올 수 없어요"
+            description="잠시 후 다시 시도해 주세요."
+          ></EmptyState>
+
+          <Button onClick={() => { setStatus("loading"); fetchCards(); }}>다시 시도</Button>
+        </>
+      )}
+      {status === "success" && cards.length === 0 && (
+        <>
+          <EmptyState
+            icon={<EmptyCardIcon />}
+            title="등록된 카드가 없습니다"
+            description="아래 버튼을 눌러 첫 카드를 등록해보세요"
+          ></EmptyState>
+
+          <Button onClick={() => navigate(ROUTES.ADD)}>카드 추가하기</Button>
+        </>
+      )}
+      {status === "success" && cards.length > 0 && (
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 16px;
+            overflow: hidden;
+          `}
+        >
+          <ul
+            css={css`
+              display: flex;
+              flex-direction: column;
+              gap: 16px;
+              padding: 0;
+              flex: 1;
+              overflow-y: auto;
+              scrollbar-width: none;
+              &::-webkit-scrollbar {
+                display: none;
+              }
+            `}
+          >
+            {cards.map((card) => (
+              <li
+                key={card.id}
+                css={css`
+                  list-style: none;
+                `}
+              >
+                <CardListItem
+                  issuerCode={card.issuerCode}
+                  number={card.number}
+                  expirationDate={card.expirationDate}
+                  onDelete={() => handleDelete(card.id)}
+                />
+              </li>
+            ))}
+          </ul>
+          <OutlinedButton onClick={() => navigate(ROUTES.ADD)}>+ 카드 추가하기</OutlinedButton>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CardList;

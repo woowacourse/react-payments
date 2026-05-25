@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ValidationResult } from "../types";
+import type { ValidationResult } from "@/types";
 
 const useInputValidation = <T>(validator: (v: T) => ValidationResult, inputValue: T) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -9,13 +9,15 @@ const useInputValidation = <T>(validator: (v: T) => ValidationResult, inputValue
     setErrorMessage("");
     setErrorIndex(-1);
   };
-  const handleBlur = () => {
-    const { errorIndex, message } = validator(inputValue);
+  const validate = (value: T) => {
+    const { errorIndex, message } = validator(value);
     setErrorIndex(errorIndex);
     setErrorMessage(message);
   };
 
-  return { errorMessage, errorIndex, clearError, handleBlur };
+  const handleBlur = () => validate(inputValue);
+
+  return { errorMessage, errorIndex, clearError, handleBlur, validate };
 };
 
 export default useInputValidation;

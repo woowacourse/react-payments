@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { CardInfo } from "../types";
-import { detectBrand, getFieldConfig } from "../constants/cardBrand";
-import { validateCardNumber, validateExpiryDate } from "../utils/validators";
+import type { CardInfo } from "@/types";
+import { detectBrand, getFieldConfig } from "@/constants/cardBrand";
+import { validateCardNumber, validateExpiryDate } from "@/utils/validators";
 
 const useCardForm = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -28,7 +28,7 @@ const useCardForm = () => {
     setCardInfo((prev) => ({ ...prev, numbers: adjustedNumbers }));
 
     const isNumbersComplete = newConfig.every((len, i) => adjustedNumbers[i]?.length === len);
-    if (isNumbersComplete && validateCardNumber(adjustedNumbers).errorIndex === -1) {
+    if (isNumbersComplete && validateCardNumber(adjustedNumbers, newConfig).errorIndex === -1) {
       setStep((prev) => Math.max(prev, 1));
     }
   };
@@ -57,7 +57,7 @@ const useCardForm = () => {
   };
 
   const validationMap = {
-    numbers: () => validateCardNumber(cardInfo.numbers).errorIndex === -1,
+    numbers: () => validateCardNumber(cardInfo.numbers, fieldConfig).errorIndex === -1,
     company: () => cardInfo.company !== "",
     expiry: () => validateExpiryDate(cardInfo.expiry).errorIndex === -1,
     cvc: () => cardInfo.cvc.length === 3,

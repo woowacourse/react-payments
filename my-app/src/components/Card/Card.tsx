@@ -1,11 +1,11 @@
 import { css } from "@emotion/react";
-import type { CardInfo } from "../../types";
-import masterLogo from "../../assets/masterLogo.png";
-import visaLogo from "../../assets/visaLogo.png";
-import amexLogo from "../../assets/amexLogo.png";
-import unionpayLogo from "../../assets/unionpayLogo.png";
-import dinersLogo from "../../assets/dinersLogo.png";
-import { getCardColor } from "../../constants/cardCompanies";
+import type { CardInfo } from "@/types";
+import masterLogo from "@/assets/masterLogo.png";
+import visaLogo from "@/assets/visaLogo.png";
+import amexLogo from "@/assets/amexLogo.png";
+import unionpayLogo from "@/assets/unionpayLogo.png";
+import dinersLogo from "@/assets/dinersLogo.png";
+import { getCardColor } from "@/constants/cardCompanies";
 
 const LOGO_MAP: Record<string, string> = {
   master: masterLogo,

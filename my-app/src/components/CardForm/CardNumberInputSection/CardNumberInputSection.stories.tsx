@@ -63,3 +63,13 @@ export const ErrorUnsupportedBrand: Story = {
     await expect(canvas.getByText("이 카드 브랜드는 지원하지 않습니다.")).toBeInTheDocument();
   },
 };
+
+export const ServerError: Story = {
+  args: {
+    serverError: "이미 등록된 카드 번호입니다.",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText("이미 등록된 카드 번호입니다.")).toBeInTheDocument();
+  },
+};

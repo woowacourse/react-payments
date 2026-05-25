@@ -1,6 +1,6 @@
-import InputSectionLayout from "../InputSectionLayout/InputSectionLayout";
-import Select from "../../Select/Select";
-import { CARD_COMPANIES } from "../../../constants/cardCompanies";
+import InputSectionLayout from "@/components/CardForm/InputSectionLayout/InputSectionLayout";
+import Select from "@/components/Select/Select";
+import { CARD_COMPANIES } from "@/constants/cardCompanies";
 
 const COMPANY_NAMES = CARD_COMPANIES.map(({ name }) => name);
 
