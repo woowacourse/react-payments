@@ -1,72 +1,43 @@
 import { useEffect, useRef, type ChangeEvent } from "react";
 import {
   CARD_BRAND_CONFIGS,
-  DEFAULT_SEGMENT_LENGTHS,
   type CardBrand,
   type CardNumberSegments,
 } from "../../types";
 import Flex from "../Common/Flex";
 import Label from "../Common/Label";
+import InputErrorMessage from "../Common/InputErrorMessage";
 import ValidationInput from "../Common/ValidationInput";
-import {
-  numberSegmentValidations,
-  numericOnlyValidations,
-} from "../../utils/validationRules";
+import { couldBeValidBrand } from "../../utils/getCardBrand";
+import { numberSegmentValidations } from "../../utils/validationRules";
 
 interface CardNumberSegmentsInputProps {
   value: CardNumberSegments;
-  brand: CardBrand | undefined;
+  brand: CardBrand;
   onChange: (value: CardNumberSegments) => void;
+  errorMessage?: string;
 }
 
-function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
+function CardNumberSegmentsInput({ value, brand, onChange, errorMessage }: CardNumberSegmentsInputProps) {
   const segmentInputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const prevSegmentCountRef = useRef(props.value.length);
-  const segmentLengths = props.brand
-    ? CARD_BRAND_CONFIGS[props.brand].segmentLengths
-    : DEFAULT_SEGMENT_LENGTHS;
+  const segmentLengths = CARD_BRAND_CONFIGS[brand].segmentLengths;
 
   useEffect(() => {
-    if (prevSegmentCountRef.current === 1 && props.value.length > 1) {
-      const isFirstSegmentComplete =
-        props.value[0].length === segmentLengths[0];
-      segmentInputRefs.current[isFirstSegmentComplete ? 1 : 0]?.focus();
-    }
-    prevSegmentCountRef.current = props.value.length;
-  }, [props.value, segmentLengths]);
-
-  const handleSingleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    props.onChange([event.target.value]);
-  };
+    const isFirstComplete = value[0]?.length === segmentLengths[0];
+    segmentInputRefs.current[isFirstComplete ? 1 : 0]?.focus();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputIndex = Number(event.target.dataset.index);
-    const newSegments = [...props.value];
+    const newSegments = [...value];
     newSegments[inputIndex] = event.target.value;
-    props.onChange(newSegments);
+    onChange(newSegments);
 
     if (event.target.value.length === segmentLengths[inputIndex]) {
       segmentInputRefs.current[inputIndex + 1]?.focus();
     }
   };
-
-  if (!props.brand && props.value.length === 1) {
-    return (
-      <Flex direction="column" gap={10}>
-        <Label>카드 번호</Label>
-        <ValidationInput
-          type="text"
-          inputMode="numeric"
-          placeholder="카드 번호를 입력해 주세요"
-          value={props.value[0]}
-          maxLength={4}
-          onChange={handleSingleChange}
-          isShowError={true}
-          validations={numericOnlyValidations}
-        />
-      </Flex>
-    );
-  }
 
   return (
     <Flex direction="column" gap={10}>
@@ -82,14 +53,25 @@ function CardNumberSegmentsInput(props: CardNumberSegmentsInputProps) {
             type="text"
             inputMode="numeric"
             placeholder={"1".repeat(maxLength)}
-            value={props.value[index] ?? ""}
+            value={value[index] ?? ""}
             onChange={handleSegmentChange}
             isShowError={true}
-            validations={numberSegmentValidations(maxLength)}
-            autoFocus={index === 0 && props.value[0].length < segmentLengths[0]}
+            validations={
+              index === 0
+                ? [
+                    ...numberSegmentValidations(maxLength),
+                    {
+                      type: "validateOnChange" as const,
+                      validator: couldBeValidBrand,
+                      message: "유효하지 않은 카드 번호입니다.",
+                    },
+                  ]
+                : numberSegmentValidations(maxLength)
+            }
           />
         ))}
       </Flex>
+      <InputErrorMessage>{errorMessage}</InputErrorMessage>
     </Flex>
   );
 }

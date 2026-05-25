@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useRef, type ChangeEvent } from "react";
 import type { CardFormState } from "../../types";
 import Flex from "../Common/Flex";
+import InputErrorMessage from "../Common/InputErrorMessage";
 import Label from "../Common/Label";
 import ValidationInput from "../Common/ValidationInput";
 import { expiryDateValidations } from "../../utils/validationRules";
@@ -9,6 +10,7 @@ import { validateMonth } from "../../utils/validators";
 interface CardExpiryDateInputProps {
   value: Pick<CardFormState, "expiryMonth" | "expiryYear">;
   onChange: (value: [string, string]) => void;
+  errorMessage?: string;
 }
 
 const CardExpiryDateInput = forwardRef<
@@ -58,6 +60,9 @@ const CardExpiryDateInput = forwardRef<
           validations={expiryDateValidations("year")}
         />
       </Flex>
+      {props.errorMessage && (
+        <InputErrorMessage>{props.errorMessage}</InputErrorMessage>
+      )}
     </Flex>
   );
 });

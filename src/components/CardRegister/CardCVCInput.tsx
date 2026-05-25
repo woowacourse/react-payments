@@ -1,5 +1,6 @@
 import { forwardRef, type ChangeEvent } from "react";
 import Flex from "../Common/Flex";
+import InputErrorMessage from "../Common/InputErrorMessage";
 import Label from "../Common/Label";
 import ValidationInput from "../Common/ValidationInput";
 import { cvcValidations } from "../../utils/validationRules";
@@ -7,6 +8,7 @@ import { cvcValidations } from "../../utils/validationRules";
 interface CardCVCInputProps {
   value: string;
   onChange: (value: string) => void;
+  errorMessage?: string;
 }
 
 const CardCVCInput = forwardRef<HTMLInputElement, CardCVCInputProps>(
@@ -26,9 +28,12 @@ const CardCVCInput = forwardRef<HTMLInputElement, CardCVCInputProps>(
           inputMode="numeric"
           autoComplete="cc-exp-csc"
           placeholder="CVC"
-          isShowError={true}
+          isShowError={false}
           validations={cvcValidations}
         />
+        {props.errorMessage && (
+          <InputErrorMessage>{props.errorMessage}</InputErrorMessage>
+        )}
       </Flex>
     );
   },

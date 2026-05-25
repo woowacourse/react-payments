@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getCardBrand } from "../utils/getCardBrand";
-import { CARD_BRAND_CONFIGS, DEFAULT_SEGMENT_LENGTHS } from "../types";
+import { CARD_BRAND_CONFIGS } from "../types";
 
 function splitIntoSegments(fullNumber: string, lengths: number[]): string[] {
   const segments: string[] = [];
@@ -32,10 +32,12 @@ export function useCardNumberSegments() {
       return;
     }
 
-    const segmentLengths = brand
-      ? CARD_BRAND_CONFIGS[brand].segmentLengths
-      : DEFAULT_SEGMENT_LENGTHS;
-    setSegments(splitIntoSegments(fullNumber, segmentLengths));
+    if (!brand) {
+      setSegments([fullNumber]);
+      return;
+    }
+
+    setSegments(splitIntoSegments(fullNumber, CARD_BRAND_CONFIGS[brand].segmentLengths));
   };
 
   return { segments, brand, handleChange };
