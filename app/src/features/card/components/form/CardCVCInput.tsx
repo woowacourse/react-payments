@@ -2,8 +2,10 @@ import { ErrorMessage } from "./ErrorMessage";
 import { CARD_INPUT } from "../../Constants";
 import { sanitizeErrors } from "../../Utils";
 import { CardInput } from "./CardInput";
-import useCardInputError from "../../hooks/useCardInputError";
+import useValidatedInput from "../../hooks/useValidatedInput";
 import { Validator } from "../../validators/CardValidator";
+import { FIELD_ERROR_CODES } from "../../Constants";
+import { errorCodeToErrorMessage } from "../../Converter";
 import {
   CardInputFieldContainer,
   CardInputLabel,
@@ -12,20 +14,26 @@ import {
 interface CardCVCInputProps {
   cardCVC: string;
   setCardCVC: (value: string) => void;
+  formErrorCodes: string[];
 }
 
-export function CardCVCInput({ cardCVC, setCardCVC }: CardCVCInputProps) {
-  const [isError, handleChangeError, handleOnBlurError] = useCardInputError({
-    state: false,
-    message: "",
+export function CardCVCInput({
+  cardCVC,
+  setCardCVC,
+  formErrorCodes,
+}: CardCVCInputProps) {
+  const { isError, onChange, onBlur } = useValidatedInput({
+    setValue: setCardCVC,
+    changeValidators: (value: string) => [() => Validator.isNumber(value)],
+    blurValidators: (value: string) => [
+      () => Validator.isValidCardCVCLength(value),
+    ],
   });
 
-  const changeCardCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const errorReport = handleChangeError([() => Validator.isNumber(value)]);
-    if (errorReport.state) return;
-    setCardCVC(value);
-  };
+  const formErrorMessages = errorCodeToErrorMessage(
+    formErrorCodes,
+    FIELD_ERROR_CODES.cardCVC,
+  );
 
   return (
     <CardInputFieldContainer>
@@ -36,14 +44,12 @@ export function CardCVCInput({ cardCVC, setCardCVC }: CardCVCInputProps) {
         placeholder="123"
         id="card-cvc-input"
         value={cardCVC}
-        onChange={changeCardCVC}
-        onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-          handleOnBlurError([
-            () => Validator.isValidCardCVCLength(e.target.value),
-          ])
-        }
+        onChange={onChange}
+        onBlur={onBlur}
       />
-      <ErrorMessage messages={sanitizeErrors([isError["message"]])} />
+      <ErrorMessage
+        messages={sanitizeErrors([...formErrorMessages, isError["message"]])}
+      />
     </CardInputFieldContainer>
   );
 }

@@ -24,17 +24,27 @@ const defaultArgs = {
     fourthDigits: "",
   },
   setCardNumber: () => {},
+  formErrorCodes: [],
 };
 
 const renderWithState: NonNullable<Story["render"]> = (args) => {
   const [cardNumber, setCardNumber] = useState(args.cardNumber);
   return (
-    <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
+    <CardNumberInput
+      cardNumber={cardNumber}
+      setCardNumber={setCardNumber}
+      formErrorCodes={args.formErrorCodes}
+    />
   );
 };
 
 export const Base: Story = {
   args: defaultArgs,
+  render: renderWithState,
+};
+
+export const WithFormError: Story = {
+  args: { ...defaultArgs, formErrorCodes: ["INVALID_CARD_NUMBER"] },
   render: renderWithState,
 };
 

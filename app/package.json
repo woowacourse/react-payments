@@ -20,10 +20,10 @@
   "dependencies": {
     "@emotion/styled": "^11.14.1",
     "@react-router/node": "^7.15.0",
+    "isbot": "^5",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-router": "^7.15.0",
-    "isbot": "^5"
+    "react-router": "^7.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -31,12 +31,15 @@
     "@babel/preset-typescript": "^7.28.5",
     "@chromatic-com/storybook": "^5.1.2",
     "@eslint/js": "^10.0.1",
+    "@mswjs/data": "^0.16.2",
     "@react-router/dev": "^7.15.0",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-vitest": "^10.3.5",
     "@storybook/react-vite": "^10.3.5",
     "@storybook/test-runner": "^0.24.3",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
@@ -51,6 +54,7 @@
     "eslint-plugin-storybook": "^10.3.5",
     "globals": "^17.5.0",
     "husky": "^9.1.7",
+    "msw": "^2.14.6",
     "playwright": "^1.59.1",
     "storybook": "^10.3.5",
     "ts-jest": "^29.4.9",

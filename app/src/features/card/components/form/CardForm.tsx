@@ -6,14 +6,19 @@ import { CardCVCInput } from "./CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput";
 import { calculateCreateCardCurrentProgress } from "../../ProgressManager";
 import { Button } from "../../style/Button";
+import { ErrorMessage } from "./ErrorMessage";
+import { convertCardBrandToIssuerCode } from "../../Converter";
 import CardBrandSelect from "./CardBrandSelect";
-import type { CardNumber, CardExpiryDate, SetState } from "../../types";
+import { joinCardNumber } from "../../Utils";
+import type { CardNumber, SetState } from "../../types";
+import useCardSubmit from "../../hooks/useCardSubmit";
+import type { ExpiryDate } from "../../ExpiryDate";
 
 interface CardFormProps {
   cardNumber: CardNumber;
   setCardNumber: SetState<CardNumber>;
-  cardExpiryDate: CardExpiryDate;
-  setCardExpiryDate: SetState<CardExpiryDate>;
+  cardExpiryDate: ExpiryDate;
+  setCardExpiryDate: SetState<ExpiryDate>;
   cardBrand: string | null;
   setCardBrand: (value: string) => void;
   cardCVC: string;
@@ -36,6 +41,9 @@ export function CardForm({
   setCardPassword,
   gotoCreateCardDonePage,
 }: CardFormProps) {
+  const fullCardNumber = joinCardNumber(cardNumber);
+  const issuerCode = convertCardBrandToIssuerCode(cardBrand!) ?? "";
+
   const {
     cardNumberIsComplete,
     cardBrandIsComplete,
@@ -44,16 +52,24 @@ export function CardForm({
     cardPasswordIsComplete,
     allComplete,
   } = calculateCreateCardCurrentProgress({
-    cardNumber: Object.values(cardNumber).join(""),
+    cardNumber: fullCardNumber,
     cardBrand,
-    cardExpiryDate: Object.values(cardExpiryDate).join(""),
+    cardExpiryDate: cardExpiryDate.toMMYY(),
     cardCVC,
     cardPassword,
   });
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const { formErrorCodes, submitError, submitCard } = useCardSubmit();
+
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    gotoCreateCardDonePage();
+    const success = await submitCard(
+      fullCardNumber,
+      cardExpiryDate.toSlashFormat(),
+      cardCVC,
+      issuerCode,
+    );
+    if (success) gotoCreateCardDonePage();
   };
 
   return (
@@ -72,7 +88,11 @@ export function CardForm({
         title={"CVC 번호를 입력해 주세요"}
         display={cardCVCIsComplete}
       >
-        <CardCVCInput cardCVC={cardCVC} setCardCVC={setCardCVC} />
+        <CardCVCInput
+          cardCVC={cardCVC}
+          setCardCVC={setCardCVC}
+          formErrorCodes={formErrorCodes}
+        />
       </CardSection>
       <CardSection
         title={"카드 유효기간을 입력해 주세요"}
@@ -82,6 +102,7 @@ export function CardForm({
         <CardExpiryDateInput
           cardExpiryDate={cardExpiryDate}
           setCardExpiryDate={setCardExpiryDate}
+          formErrorCodes={formErrorCodes}
         />
       </CardSection>
       <CardSection
@@ -99,11 +120,18 @@ export function CardForm({
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
+          formErrorCodes={formErrorCodes}
         />
       </CardSection>
       <Button type="submit" disabled={!allComplete}>
         확인
       </Button>
+      {submitError && (
+        <ErrorMessage
+          messages={[submitError]}
+          style={{ textAlign: "center" }}
+        />
+      )}
     </CardFormContainer>
   );
 }

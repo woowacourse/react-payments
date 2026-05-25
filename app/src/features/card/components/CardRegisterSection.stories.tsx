@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within, expect } from "storybook/test";
 
-import CardCreate from "./CardCreate";
+import CardRegisterSection from "./CardRegisterSection";
 import { withCardRouter } from "./storybook/decorators";
 
 const meta = {
-  title: "Card/CardCreate",
-  component: CardCreate,
+  title: "Card/CardRegisterSection",
+  component: CardRegisterSection,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CardCreate>;
+} satisfies Meta<typeof CardRegisterSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -82,7 +82,9 @@ export const AmexBrandDetection: Story = {
     const firstDigitsInput =
       canvasElement.querySelector<HTMLInputElement>("#first-digits")!;
     await userEvent.type(firstDigitsInput, "34");
-    let brandLogo: HTMLElement | null = canvas.getByAltText("amex-network-brand-logo");
+    let brandLogo: HTMLElement | null = canvas.getByAltText(
+      "amex-network-brand-logo",
+    );
     await expect(brandLogo).toBeInTheDocument();
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(
@@ -105,7 +107,9 @@ export const DinersBrandDetection: Story = {
     const firstDigitsInput =
       canvasElement.querySelector<HTMLInputElement>("#first-digits")!;
     await userEvent.type(firstDigitsInput, "36");
-    let brandLogo: HTMLElement | null = canvas.getByAltText("diners-network-brand-logo");
+    let brandLogo: HTMLElement | null = canvas.getByAltText(
+      "diners-network-brand-logo",
+    );
     await expect(brandLogo).toBeInTheDocument();
     const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
       canvasElement.querySelectorAll<HTMLInputElement>(
@@ -376,46 +380,5 @@ export const PreviousFieldsHideWhenCardNumberBecomesIncomplete: Story = {
     await expect(cvcInput).not.toBeVisible();
     const passwordInput = canvas.getByPlaceholderText("비밀번호");
     await expect(passwordInput).not.toBeVisible();
-  },
-};
-
-export const NavigateToCardCreateDonePage: Story = {
-  decorators: defaultDecorators,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const [firstInput, secondInput, thirdInput, fourthInput] = Array.from(
-      canvasElement.querySelectorAll<HTMLInputElement>(
-        "#card-number-input-container input",
-      ),
-    );
-    await userEvent.type(firstInput, "3612");
-    await userEvent.type(secondInput, "3612");
-    await userEvent.type(thirdInput, "3612");
-    await userEvent.type(fourthInput, "36");
-
-    const brandSelect =
-      canvasElement.querySelector<HTMLSelectElement>("#card-brand-select")!;
-    await userEvent.selectOptions(brandSelect, "bc");
-
-    const expiryMonthInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-month")!;
-    const expiryYearInput =
-      canvasElement.querySelector<HTMLInputElement>("#expiry-year")!;
-    await userEvent.type(expiryMonthInput, "12");
-    await userEvent.type(expiryYearInput, "26");
-
-    const cvcInput =
-      canvasElement.querySelector<HTMLInputElement>("#card-cvc-input")!;
-    await userEvent.type(cvcInput, "123");
-
-    const passwordInput = canvas.getByPlaceholderText("비밀번호");
-    await userEvent.type(passwordInput, "12");
-
-    const submitButton = canvas.getByRole("button", { name: "확인" });
-    await userEvent.click(submitButton);
-
-    await expect(
-      canvas.getByText("3612로 시작하는 BC카드 가 등록되었어요."),
-    ).toBeInTheDocument();
   },
 };

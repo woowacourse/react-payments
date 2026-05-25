@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
-export function ErrorMessage({ messages }: { messages: string[] }) {
+export function ErrorMessage({ messages, style }: { messages: string[]; style?: React.CSSProperties }) {
   return (
     messages && (
-      <ErrorMessageList>
+      <ErrorMessageList style={style}>
         {messages.map((message, index) => (
           <ErrorMessageItem key={index}>{message}</ErrorMessageItem>
         ))}

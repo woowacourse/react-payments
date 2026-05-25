@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CardPreview } from "./CardPreview";
+import { ExpiryDate } from "../../ExpiryDate";
 
 const meta = {
   title: "Card/Preview/CardPreview",
@@ -20,7 +21,7 @@ const defaultArgs = {
     thirdDigits: "",
     fourthDigits: "",
   },
-  cardExpiryDate: { expiryMonth: "", expiryYear: "" },
+  cardExpiryDate: new ExpiryDate("", ""),
   cardBrand: null,
 };
 
@@ -55,20 +56,14 @@ export const CardNumberFullyFilled: Story = {
 export const ExpiryDateFilled: Story = {
   args: {
     ...defaultArgs,
-    cardExpiryDate: {
-      expiryMonth: "12",
-      expiryYear: "26",
-    },
+    cardExpiryDate: new ExpiryDate("12", "26"),
   },
 };
 
 export const ExpiryDateDisplayDivideLine: Story = {
   args: {
     ...defaultArgs,
-    cardExpiryDate: {
-      expiryMonth: "12",
-      expiryYear: "",
-    },
+    cardExpiryDate: new ExpiryDate("12", ""),
   },
 };
 
@@ -81,10 +76,7 @@ export const FullyFilled: Story = {
       thirdDigits: "9012",
       fourthDigits: "3456",
     },
-    cardExpiryDate: {
-      expiryMonth: "12",
-      expiryYear: "26",
-    },
+    cardExpiryDate: new ExpiryDate("12", "26"),
   },
 };
 

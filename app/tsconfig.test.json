@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2023",
-    "lib": ["ES2023"],
+    "lib": ["ES2023", "DOM"],
     "module": "esnext",
+    "jsx": "react-jsx",
     "types": ["jest", "node"],
     "skipLibCheck": true,
 
@@ -19,5 +20,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/unit-tests"]
+  "include": ["src/**/unit-tests", "src/test-setup.ts", "src/declarations.d.ts"]
 }

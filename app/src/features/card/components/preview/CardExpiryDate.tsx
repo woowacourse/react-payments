@@ -1,21 +1,21 @@
 import styled from "@emotion/styled";
-import type { CardExpiryDate as CardExpiryDateType } from "../../types";
+import type { ExpiryDate } from "../../ExpiryDate";
 
 export function CardExpiryDate({
   cardExpiryDate,
 }: {
-  cardExpiryDate: CardExpiryDateType;
+  cardExpiryDate: ExpiryDate;
 }) {
   return (
     <CardExpiryDateContainer>
       <span id="preview-card-expiry-date-month">
-        {cardExpiryDate.expiryMonth}
+        {cardExpiryDate.month}
       </span>
-      {cardExpiryDate.expiryMonth.length === 2 && (
+      {cardExpiryDate.month.length === 2 && (
         <span id="preview-card-expiry-date-divide-line"> / </span>
       )}
       <span id="preview-card-expiry-date-year">
-        {cardExpiryDate.expiryYear}
+        {cardExpiryDate.year}
       </span>
     </CardExpiryDateContainer>
   );

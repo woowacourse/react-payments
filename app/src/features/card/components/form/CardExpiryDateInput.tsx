@@ -6,16 +6,21 @@ import { CARD_INPUT } from "../../Constants";
 import useCardInputError from "../../hooks/useCardInputError";
 import { ErrorMessage } from "./ErrorMessage";
 import useFocusChain from "../../hooks/useFocusChain";
-import type { CardExpiryDate, SetState } from "../../types";
+import { errorCodeToErrorMessage } from "../../Converter";
+import { FIELD_ERROR_CODES } from "../../Constants";
+import type { SetState } from "../../types";
+import { ExpiryDate } from "../../ExpiryDate";
 
 interface CardExpiryDateInputProps {
-  cardExpiryDate: CardExpiryDate;
-  setCardExpiryDate: SetState<CardExpiryDate>;
+  cardExpiryDate: ExpiryDate;
+  setCardExpiryDate: SetState<ExpiryDate>;
+  formErrorCodes: string[];
 }
 
 export function CardExpiryDateInput({
   cardExpiryDate,
   setCardExpiryDate,
+  formErrorCodes,
 }: CardExpiryDateInputProps) {
   const [isError, handleChangeError, handleOnBlurError] = useCardInputError({
     expiryMonth: {
@@ -33,6 +38,11 @@ export function CardExpiryDateInput({
     CARD_INPUT.EACH_EXPIRY_DATE_LENGTH,
   );
 
+  const formErrorMessages = errorCodeToErrorMessage(
+    formErrorCodes,
+    FIELD_ERROR_CODES.cardExpirationDate,
+  );
+
   const changeCardExpiryMonth = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
@@ -43,7 +53,7 @@ export function CardExpiryDateInput({
       "expiryMonth",
     );
     if (errorReport.state) return;
-    setCardExpiryDate({ ...cardExpiryDate, expiryMonth: value });
+    setCardExpiryDate(new ExpiryDate(value, cardExpiryDate.year));
     changeFocus(e, index);
   };
 
@@ -57,7 +67,7 @@ export function CardExpiryDateInput({
       "expiryYear",
     );
     if (errorReport.state) return;
-    setCardExpiryDate({ ...cardExpiryDate, expiryYear: value });
+    setCardExpiryDate(new ExpiryDate(cardExpiryDate.month, value));
     changeFocus(e, index);
   };
 
@@ -77,7 +87,7 @@ export function CardExpiryDateInput({
             )
           }
           maxLength={CARD_INPUT.EACH_EXPIRY_DATE_LENGTH}
-          value={cardExpiryDate.expiryMonth}
+          value={cardExpiryDate.month}
           isError={isError.expiryMonth.state}
           placeholder="MM"
         />
@@ -93,15 +103,16 @@ export function CardExpiryDateInput({
             )
           }
           maxLength={CARD_INPUT.EACH_EXPIRY_DATE_LENGTH}
-          value={cardExpiryDate.expiryYear}
+          value={cardExpiryDate.year}
           isError={isError.expiryYear.state}
           placeholder="YY"
         />
       </CardFieldset>
       <ErrorMessage
-        messages={sanitizeErrors(
-          Object.values(isError).map((err) => err.message),
-        )}
+        messages={sanitizeErrors([
+          ...formErrorMessages,
+          ...Object.values(isError).map((err) => err.message),
+        ])}
       />
     </>
   );

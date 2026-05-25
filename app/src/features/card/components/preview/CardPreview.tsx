@@ -3,14 +3,12 @@ import { CardNetworkBrand } from "./CardNetworkBrand";
 import { CardNumber } from "./CardNumber";
 import { CardExpiryDate } from "./CardExpiryDate";
 import { CARD_BRAND } from "../../Constants";
-import type {
-  CardNumber as CardNumberType,
-  CardExpiryDate as CardExpiryDateType,
-} from "../../types";
+import type { CardNumber as CardNumberType } from "../../types";
+import type { ExpiryDate } from "../../ExpiryDate";
 
 interface CardPreviewProps {
   cardNumber: CardNumberType;
-  cardExpiryDate: CardExpiryDateType;
+  cardExpiryDate: ExpiryDate;
   cardBrand: string | null;
 }
 

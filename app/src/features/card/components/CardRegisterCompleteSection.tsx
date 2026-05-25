@@ -3,32 +3,33 @@ import { CARD_BRAND } from "../Constants";
 import styled from "@emotion/styled";
 import { RadiusButton } from "../style/Button";
 import CreateCompleteCheck from "../../../app/assets/check.svg";
-export default function CardCreateComplete() {
+
+export default function CardRegisterCompleteSection() {
   const { firstDigitsCardNumber, cardBrand } = (useLocation().state ?? {}) as {
     firstDigitsCardNumber: string;
     cardBrand: keyof typeof CARD_BRAND;
   };
   const navigate = useNavigate();
   return (
-    <RootContainer>
+    <CardRegisterCompleteSectionContainer>
       <CardCreateCompleteContent>
         <CreateCompleteSVG
           src={CreateCompleteCheck}
           alt="card-create-complete"
         ></CreateCompleteSVG>
         <p>
-          {firstDigitsCardNumber}로 시작하는 {CARD_BRAND[cardBrand].title}
-          카드 가 등록되었어요.
+          {firstDigitsCardNumber}로 시작하는 {CARD_BRAND[cardBrand].title}가
+          등록되었어요.
         </p>
         <RadiusButton type="button" onClick={() => navigate("/card/")}>
           확인
         </RadiusButton>
       </CardCreateCompleteContent>
-    </RootContainer>
+    </CardRegisterCompleteSectionContainer>
   );
 }
 
-const RootContainer = styled.div`
+const CardRegisterCompleteSectionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
