@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import CardInfoInput from '../Input/CardInfoInput';
 import CardInputWrapper from './CardInputWrapper';
 import { isNumeric } from '../../utils/isNumeric';
@@ -6,22 +7,31 @@ import { useFieldInputState } from '../../hooks/useFieldInputState';
 import { getCardNumberErrorMessage } from '../../utils/getCardNumberErrorMessage';
 import { getCardNumberMaxLengths } from '../../utils/getCardNumberMaxLengths';
 import { isFilledNumeric } from '../../utils/isFilledNumeric';
+import { SERVER_ERROR_CODES } from '../../constants/SERVER_ERROR_CODES';
+import type { CardServerError } from '../../hooks/useCardSubmit';
 
 interface CardNumberInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string[];
+    serverError?: CardServerError | null;
 }
 
-export default function CardNumberInputWrapper({ setValue, value }: CardNumberInputWrapperProps) {
+export default function CardNumberInputWrapper({ setValue, value, serverError }: CardNumberInputWrapperProps) {
     const maxLengths = getCardNumberMaxLengths(value[0]);
 
-    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, handleChange } = useFieldInputState({
-        values: value,
-        setValue,
-        validator: getCardNumberErrorMessage,
-        isFilled: (v, index) => isFilledNumeric(v, getCardNumberMaxLengths(value[0])[index]),
-        fieldCount: 4,
-    });
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusWithError, handleChange } =
+        useFieldInputState({
+            values: value,
+            setValue,
+            validator: getCardNumberErrorMessage,
+            isFilled: (v, index) => isFilledNumeric(v, getCardNumberMaxLengths(value[0])[index]),
+            fieldCount: 4,
+        });
+
+    useEffect(() => {
+        if (serverError?.code !== SERVER_ERROR_CODES.INVALID_CARD_NUMBER) return;
+        focusWithError(serverError.message);
+    }, [serverError, focusWithError]);
 
     return (
         <CardInfoSection

@@ -1,6 +1,4 @@
-import type { CardBrandValue } from '../types/CardBrandValue';
-
-export const CARD_ISSUER_COLOR: Record<CardBrandValue, string> = {
+export const CARD_ISSUER_COLOR: Record<string, string> = {
     BC: '#F04651',
     SHINHAN: '#0046FF',
     KAKAO: '#FFE600',

@@ -1,33 +1,50 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
-interface ConfirmButtonProps<TState = unknown> {
-    to: string;
-    purpose: 'submit' | 'confirm';
-    state?: TState;
-}
+type ConfirmButtonProps<TState = unknown> =
+    | { purpose: 'confirm'; to: string; state?: TState; onClick?: never; children?: React.ReactNode }
+    | { purpose: 'submit'; to?: never; state?: never; onClick: () => void | Promise<void>; children?: React.ReactNode };
 
-export default function ConfirmButton<TState = unknown>({ to, purpose, state }: ConfirmButtonProps<TState>) {
+export default function ConfirmButton<TState = unknown>({
+    purpose,
+    to,
+    state,
+    onClick,
+    children,
+}: ConfirmButtonProps<TState>) {
+    if (purpose === 'submit') {
+        return <SubmitButton onClick={onClick}>{children ?? '확인'}</SubmitButton>;
+    }
+
     return (
-        <ConfirmButtonStyled purpose={purpose} to={to} state={state}>
-            확인
-        </ConfirmButtonStyled>
+        <ConfirmLink to={to} state={state}>
+            {children ?? '확인'}
+        </ConfirmLink>
     );
 }
 
-const BUTTON_SIZE = {
-    submit: { width: '100%', height: '44px', borderRadius: '0px' },
-    confirm: { width: '320px', height: '44px', borderRadius: '5px' },
-};
-
-const ConfirmButtonStyled = styled(Link)<{ isRounded?: boolean; purpose: 'submit' | 'confirm' }>`
-    width: ${({ purpose }) => BUTTON_SIZE[purpose].width};
-    height: ${({ purpose }) => BUTTON_SIZE[purpose].height};
-    border-radius: ${({ purpose }) => BUTTON_SIZE[purpose].borderRadius};
+const sharedStyles = css`
     background-color: #333333;
     color: #f3f3f3;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+`;
+
+const SubmitButton = styled.button`
+    ${sharedStyles}
+    width: 100%;
+    border-radius: 0;
+`;
+
+const ConfirmLink = styled(Link)`
+    ${sharedStyles}
+    width: 320px;
+    border-radius: 5px;
 `;

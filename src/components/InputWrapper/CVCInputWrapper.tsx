@@ -6,15 +6,18 @@ import CardInfoSection from '../CardInfoSection';
 import { useFieldInputState } from '../../hooks/useFieldInputState';
 import { getCVCumberErrorMessage } from '../../utils/getCVCNumberErrorMessage';
 import { isFilledNumeric } from '../../utils/isFilledNumeric';
+import { SERVER_ERROR_CODES } from '../../constants/SERVER_ERROR_CODES';
+import type { CardServerError } from '../../hooks/useCardSubmit';
 
 interface CVCInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string;
     isRender?: boolean;
+    serverError?: CardServerError | null;
 }
 
-export default function CVCInputWrapper({ setValue, value, isRender }: CVCInputWrapperProps) {
-    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
+export default function CVCInputWrapper({ setValue, value, isRender, serverError }: CVCInputWrapperProps) {
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, focusWithError, handleChange } =
         useFieldInputState({
             values: [value],
             setValue,
@@ -24,8 +27,13 @@ export default function CVCInputWrapper({ setValue, value, isRender }: CVCInputW
         });
 
     useEffect(() => {
-        focusFirst();
-    }, []);
+        if (isRender) focusFirst();
+    }, [isRender]);
+
+    useEffect(() => {
+        if (serverError?.code !== SERVER_ERROR_CODES.INVALID_CVC) return;
+        focusWithError(serverError.message);
+    }, [serverError]);
 
     return (
         <CardInfoSection title="CVC 번호를 입력해 주세요" inputLabel="CVC" isRender={isRender}>

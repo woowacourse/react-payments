@@ -7,15 +7,18 @@ import CardInfoSection from '../CardInfoSection';
 import { useFieldInputState } from '../../hooks/useFieldInputState';
 import { getEXPNumberErrorMessage } from '../../utils/getEXPNumberErrorMessage';
 import { isFilledNumeric } from '../../utils/isFilledNumeric';
+import { SERVER_ERROR_CODES } from '../../constants/SERVER_ERROR_CODES';
+import type { CardServerError } from '../../hooks/useCardSubmit';
 
 interface EXPInputWrapperProps {
     setValue: (index: number) => (value: string) => void;
     value: string[];
     isRender?: boolean;
+    serverError?: CardServerError | null;
 }
 
-export default function EXPInputWrapper({ setValue, value, isRender }: EXPInputWrapperProps) {
-    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, handleChange } =
+export default function EXPInputWrapper({ setValue, value, isRender, serverError }: EXPInputWrapperProps) {
+    const { errorMessage, setErrorMessage, hasTouched, handleBlur, handleFocus, getRef, focusFirst, focusWithError, handleChange } =
         useFieldInputState({
             values: value,
             setValue,
@@ -25,8 +28,13 @@ export default function EXPInputWrapper({ setValue, value, isRender }: EXPInputW
         });
 
     useEffect(() => {
-        focusFirst();
-    }, []);
+        if (isRender) focusFirst();
+    }, [isRender]);
+
+    useEffect(() => {
+        if (serverError?.code !== SERVER_ERROR_CODES.INVALID_EXPIRATION_DATE) return;
+        focusWithError(serverError.message);
+    }, [serverError]);
 
     return (
         <CardInfoSection

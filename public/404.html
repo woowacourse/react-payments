@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            const path = window.location.pathname.replace('/react-payments', '') || '/';
+            sessionStorage.setItem('redirect', path + window.location.search);
+            window.location.replace('/react-payments/');
+        </script>
+    </head>
+</html>

@@ -13,8 +13,8 @@ type Story = StoryObj<typeof ConfirmButton>;
 
 export const Submit: Story = {
     args: {
-        to: '/',
         purpose: 'submit',
+        onClick: () => {},
     },
 };
 
