@@ -9,7 +9,7 @@ export async function requestCards(signal: AbortSignal): Promise<CardResponse[]>
     throw new Error('카드 목록을 불러오지 못했습니다.');
   }
 
-  const data = await response.json();
+  const data: CardResponse[] = await response.json();
 
   return data;
 }
