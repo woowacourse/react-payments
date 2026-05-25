@@ -46,12 +46,10 @@ export function validateExpirationPeriod() {
   ];
 
   const runAllValidations = (value: CardInfo['expirationPeriod']): FormValue['expirationPeriod']['errorStatuses'] => {
-    const monthError = validate(rules[0], 'onBlur', value[0]) as FormValue['expirationPeriod']['errorStatuses'][0];
-    const yearError = validate(rules[1], 'onBlur', value[1]) as FormValue['expirationPeriod']['errorStatuses'][1];
+    const monthError = validate(rules[0], 'onBlur', value[0]);
+    const yearError = validate(rules[1], 'onBlur', value[1]);
     const hasIndividualError = monthError !== null || yearError !== null;
-    const totalError = hasIndividualError
-      ? null
-      : (validate(rules[1], 'onComplete', value.join('')) as FormValue['expirationPeriod']['errorStatuses'][2]);
+    const totalError = hasIndividualError ? null : validate(rules[1], 'onComplete', value.join(''));
     return [monthError, yearError, totalError];
   };
 
@@ -61,11 +59,7 @@ export function validateExpirationPeriod() {
     errorStatuses: FormValue['expirationPeriod']['errorStatuses'];
     isValid: boolean;
   } => {
-    const totalError = validate(
-      rules[1],
-      'onComplete',
-      value.join(''),
-    ) as FormValue['expirationPeriod']['errorStatuses'][2];
+    const totalError = validate(rules[1], 'onComplete', value.join(''));
     return {
       errorStatuses: [null, null, totalError],
       isValid: totalError === null,

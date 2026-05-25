@@ -7,7 +7,7 @@ export function validateCardCompany() {
   const rules = [RULES.required];
 
   const runAllValidations = (value: CardInfo['cardCompany']): FormValue['cardCompany']['errorStatuses'] =>
-    [validateAll(rules, value)] as FormValue['cardCompany']['errorStatuses'];
+    [validateAll(rules, value)];
 
   const validateOnComplete = (
     value: CardInfo['cardCompany'],
@@ -15,7 +15,7 @@ export function validateCardCompany() {
     errorStatuses: FormValue['cardCompany']['errorStatuses'];
     isValid: boolean;
   } => {
-    const errorStatus = validate(rules, 'onComplete', value) as FormValue['cardCompany']['errorStatuses'][0];
+    const errorStatus = validate(rules, 'onComplete', value);
     return {
       errorStatuses: [errorStatus],
       isValid: errorStatus === null,

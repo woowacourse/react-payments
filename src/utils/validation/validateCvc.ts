@@ -7,7 +7,7 @@ export function validateCvc(cvcLength: number) {
   const rules = [RULES.numberOnly, RULES.required, RULES.exactLengthOnComplete(cvcLength)];
 
   const runAllValidations = (value: CardInfo['cvc']): FormValue['cvc']['errorStatuses'] =>
-    [validateAll(rules, value)] as FormValue['cvc']['errorStatuses'];
+    [validateAll(rules, value)];
 
   const validateOnComplete = (
     value: CardInfo['cvc'],
@@ -15,7 +15,7 @@ export function validateCvc(cvcLength: number) {
     errorStatuses: FormValue['cvc']['errorStatuses'];
     isValid: boolean;
   } => {
-    const errorStatus = validate(rules, 'onComplete', value) as FormValue['cvc']['errorStatuses'][0];
+    const errorStatus = validate(rules, 'onComplete', value);
     return {
       errorStatuses: [errorStatus],
       isValid: errorStatus === null,
