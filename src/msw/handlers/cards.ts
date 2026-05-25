@@ -15,6 +15,10 @@ type Card = {
   expirationDate: string;
 };
 
+const VALID_ISSUER_CODES = new Set(['31', '41', '15', '61', 'W1', '71', '21', '11']);
+
+const isValidIssuerCode = (issuerCode: string) => VALID_ISSUER_CODES.has(issuerCode);
+
 const VALID_BIN_PATTERNS = [
   /^4/, // Visa
   /^5[1-5]/, // Mastercard
@@ -57,6 +61,13 @@ export const resetCards = () => {
 export const cardsHandlers = [
   http.post(API_ENDPOINTS.cards, async ({ request }) => {
     const body = (await request.json()) as CardRequest;
+
+    if (!isValidIssuerCode(body.issuerCode)) {
+      return HttpResponse.json(
+        { code: 'INVALID_ISSUER_CODE', message: '지원하지 않는 카드사입니다.' },
+        { status: 400 },
+      );
+    }
 
     if (!isValidBin(body.number)) {
       return HttpResponse.json(

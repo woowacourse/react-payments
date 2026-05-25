@@ -102,6 +102,24 @@ describe('AddCardPage', () => {
     expect(await screen.findByText('유효하지 않은 CVC입니다.')).toBeInTheDocument();
   });
 
+  it('지원하지 않는 카드사 에러 시 alert가 표시됩니다', async () => {
+    server.use(
+      http.post(API_ENDPOINTS.cards, () =>
+        HttpResponse.json({ code: 'INVALID_ISSUER_CODE', message: '지원하지 않는 카드사입니다.' }, { status: 400 }),
+      ),
+    );
+
+    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
+    renderAddCardPage();
+    await fillCardForm();
+
+    const submitButton = await screen.findByRole('button', { name: '확인' });
+    await userEvent.click(submitButton);
+
+    expect(alertMock).toHaveBeenCalledWith('카드 등록에 실패했습니다. 다시 시도해주세요.');
+    alertMock.mockRestore();
+  });
+
   it('서버에서 유효하지 않은 만료일 에러 시 에러 메시지가 표시됩니다', async () => {
     server.use(
       http.post(API_ENDPOINTS.cards, () =>
