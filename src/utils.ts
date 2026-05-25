@@ -57,4 +57,3 @@ export const categorizeCardBrand = (cardNumbers: CardInfo['cardNumbers']): CardB
 export const isNumber = (value: string) => {
   return /^\d+$/.test(value);
 };
-
