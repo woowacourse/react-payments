@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Card } from '../types/card';
 import { fetchCards, deleteCard } from '../api/cards';
 
@@ -21,6 +21,14 @@ export function useCards() {
       setState('error');
     }
   };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadCards(controller.signal);
+
+    return () => controller.abort();
+  }, []);
 
   const remove = async (id: string) => {
     try {
