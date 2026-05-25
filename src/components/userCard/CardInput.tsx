@@ -1,7 +1,9 @@
-import CardCvc from './CardCvc';
-import CardNumber from './CardNumber';
-import CardExpiryDate from './CardExpiryDate';
-import CardPassword from './CardPassword';
+import CardCvc from '../cardInfo/CardCvc';
+import CardNumber from '../cardInfo/CardNumber';
+import CardExpiryDate from '../cardInfo/CardExpiryDate';
+import CardPassword from '../cardInfo/CardPassword';
+import CardIssuer from '../cardInfo/CardIssuer';
+import Button from '../common/Button';
 
 import type {
   CardStatus,
@@ -9,9 +11,7 @@ import type {
   Cvc,
   CardIssuerType,
   Password,
-} from '../types/cardStausTypes';
-import CardIssuer from './CardIssuer';
-import Button from './common/Button';
+} from '../../types/cardStausTypes';
 
 type CardInputProps = {
   cardStatus: CardStatus;
@@ -32,6 +32,9 @@ type CardInputProps = {
   step: number;
   handleSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
   isFormValid: boolean;
+  serverFieldErrors: {
+    cvc: string;
+  };
 };
 
 export default function CardInput({
@@ -53,6 +56,7 @@ export default function CardInput({
   step,
   handleSubmit,
   isFormValid,
+  serverFieldErrors,
 }: CardInputProps) {
   return (
     <form onSubmit={handleSubmit} css={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -68,6 +72,7 @@ export default function CardInput({
           cardCvc={cardCvc}
           onChangeCardCvc={onChangeCardCvc}
           onBlurCardCvc={onBlurCardCvc}
+          serverErrorMessage={serverFieldErrors.cvc}
         />
       )}
       {step >= 2 && (

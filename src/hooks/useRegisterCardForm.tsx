@@ -14,6 +14,9 @@ import {
   isCardPasswordComplete,
   isNumericInput,
 } from '../utils/validate';
+import { postCard } from '../api/postCard';
+import { HttpError, NetworkError } from '../errors/errors';
+import { toCreateCardRequest } from '../utils/toCreateCardRequest';
 
 export function useRegisterCardForm() {
   const [cardStatus, cardNumberHandler] = useCardNumber();
@@ -21,6 +24,9 @@ export function useRegisterCardForm() {
   const [cardCvc, cardCvcHandler] = useCardCvc();
   const [cardPassword, cardPasswordHandler] = useCardPassword();
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | ''>('');
+  const [serverFieldErrors, setServerFieldErrors] = useState({
+    cvc: '',
+  });
   const [step, setStep] = useState(0);
 
   const navigate = useNavigate();
@@ -58,6 +64,7 @@ export function useRegisterCardForm() {
   };
 
   const handleCardCvc = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setServerFieldErrors((prev) => ({ ...prev, cvc: '' }));
     cardCvcHandler.handleCardCvc(e);
 
     if (isCardCvcComplete(e.target.value)) {
@@ -76,16 +83,43 @@ export function useRegisterCardForm() {
     isCardPasswordComplete(cardPassword.cardPassword) &&
     cardPassword.cardPasswordErrorMode === 'normal';
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isFormValid) {
+    if (!isFormValid || !isCardIssuerSelected(cardIssuer)) {
       return;
     }
 
-    navigate('/complete', {
-      state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
-    });
+    const formData = toCreateCardRequest(
+      cardStatus.cardNumbers,
+      cardExpiry.cardExpiryDate,
+      cardCvc.cardCvc,
+      cardIssuer,
+    );
+
+    try {
+      const { id } = await postCard(formData);
+
+      navigate(`/complete/${id}`, {
+        state: { cardIssuer: cardIssuer, cardNumber: cardStatus.cardNumbers[0] },
+      });
+    } catch (error) {
+      if (error instanceof HttpError) {
+        if (error.code === 'INVALID_CVC') {
+          setServerFieldErrors((prev) => ({ ...prev, cvc: error.message }));
+          return;
+        }
+
+        alert(error.message);
+        return;
+      }
+      if (error instanceof NetworkError) {
+        alert(error.message);
+        return;
+      }
+
+      alert('카드 등록에 실패했습니다.');
+    }
   };
 
   return {
@@ -104,6 +138,7 @@ export function useRegisterCardForm() {
     onBlurCardPassword: cardPasswordHandler.handlePasswordBlur,
     cardIssuer,
     handleCardIssuer,
+    serverFieldErrors,
     step,
     handleSubmit,
     isFormValid,

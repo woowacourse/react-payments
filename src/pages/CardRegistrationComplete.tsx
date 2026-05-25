@@ -3,30 +3,22 @@ import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { CARD_ISSUER } from '../constants/constant';
 import Button from '../components/common/Button';
 
-function isCardIssuer(cardIssuer: string): cardIssuer is keyof typeof CARD_ISSUER {
-  return cardIssuer in CARD_ISSUER;
-}
+type CompletePageState = {
+  cardIssuer: keyof typeof CARD_ISSUER;
+  cardNumber: string;
+};
 
 export default function CardRegistrationComplete() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const state: unknown = location.state;
+  const state = location.state as CompletePageState | null;
 
-  if (
-    typeof state !== 'object' ||
-    state === null ||
-    !('cardIssuer' in state) ||
-    !('cardNumber' in state)
-  ) {
+  if (!state) {
     return <Navigate to="/" replace />;
   }
 
   const { cardIssuer, cardNumber } = state;
-
-  if (typeof cardIssuer !== 'string' || !isCardIssuer(cardIssuer) || typeof cardNumber !== 'string') {
-    return <Navigate to="/" replace />;
-  }
 
   return (
     <div

@@ -1,0 +1,96 @@
+import { delay, http, HttpResponse } from 'msw';
+import { getCardBrand } from '../utils/cardBrand';
+import { isCardExpiryDateComplete } from '../utils/validate';
+import type { CardIssuerServerCode } from '../types/cardStausTypes';
+import type { StoredCard } from '../types/cardStausTypes';
+import { maskFetchCardNumbers } from '../utils/maskCardNumbers';
+
+type CardRequest = {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: CardIssuerServerCode;
+};
+
+let cardInfo: StoredCard[] = [];
+
+const ERROR_MESSAGE = {
+  INVALID_CARD_NUMBER: '유효하지 않은 카드 번호입니다.',
+  INVALID_CVC: '유효하지 않은 CVC입니다.',
+  INVALID_EXPIRATION_DATE: '유효하지 않은 만료일입니다.',
+};
+
+function createErrorResponse(code: keyof typeof ERROR_MESSAGE) {
+  return HttpResponse.json(
+    {
+      code,
+      message: ERROR_MESSAGE[code],
+    },
+    {
+      status: 400,
+    },
+  );
+}
+
+export const handlers = [
+  // post
+  http.post('/api/cards', async ({ request }) => {
+    const body = (await request.json()) as CardRequest;
+
+    if (getCardBrand(body.number) === 'unknown') {
+      return createErrorResponse('INVALID_CARD_NUMBER');
+    }
+
+    if (body.cvc === '000') {
+      return createErrorResponse('INVALID_CVC');
+    }
+
+    if (!isCardExpiryDateComplete(body.expirationDate.split('/'))) {
+      return createErrorResponse('INVALID_EXPIRATION_DATE');
+    }
+
+    const newCardInfo: StoredCard = {
+      id: crypto.randomUUID(),
+      number: body.number,
+      expirationDate: body.expirationDate,
+      cvc: body.cvc,
+      issuerCode: body.issuerCode,
+    };
+
+    cardInfo.push(newCardInfo);
+
+    return HttpResponse.json(
+      { id: newCardInfo.id },
+      {
+        status: 201,
+      },
+    );
+  }),
+
+  // get
+  http.get('/api/cards', async () => {
+    await delay(500);
+
+    return HttpResponse.json(
+      cardInfo.map(({ id, number, expirationDate, issuerCode }) => {
+        return {
+          id,
+          number: maskFetchCardNumbers(number),
+          expirationDate,
+          issuerCode,
+        };
+      }),
+    );
+  }),
+
+  // delete
+  http.delete('/api/cards/:id', ({ params }) => {
+    const { id } = params;
+
+    cardInfo = cardInfo.filter((card) => card.id !== id);
+
+    return new HttpResponse(null, {
+      status: 204,
+    });
+  }),
+];

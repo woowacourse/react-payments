@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
-import CardInput from '../components/CardInput';
+import CardInput from '../components/userCard/CardInput';
 import { useRegisterCardForm } from '../hooks/useRegisterCardForm';
 
 const meta = {
@@ -68,6 +68,9 @@ export const Interactive: Story = {
     step: 0,
     handleSubmit: fn(),
     isFormValid: false,
+    serverFieldErrors: {
+      cvc: '',
+    },
   },
   render: () => <CardInputWithState />,
   play: async ({ canvasElement }) => {

@@ -60,3 +60,27 @@ export type CardIssuerType =
   | 'lotteCard'
   | 'hanaCard'
   | 'kbCard';
+
+export type StoredCard = {
+  id: string;
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: CardIssuerServerCode;
+};
+
+export type CardRequest = {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: CardIssuerServerCode;
+};
+
+export type CardResponse = {
+  id: string;
+  issuerCode: CardIssuerServerCode;
+  number: string;
+  expirationDate: string;
+};
+
+export type CardIssuerServerCode = '31' | '41' | '15' | '61' | 'W1' | '71' | '21' | '11';

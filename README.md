@@ -88,3 +88,44 @@
 #### Test
 
 - [x] Storybook 테스트
+
+## step3
+
+### 기능 요구사항
+
+#### 카드 등록 (서버 연동)
+
+- 등록 버튼 클릭 시 POST /cards로 카드 정보를 전송한다.
+- 201 응답 수신 시 카드 목록 페이지(/cards)로 이동한다.
+- 서버가 400 { code, message }를 반환하면 code를 해당 입력 필드로 매핑하여 그 필드 아래에 메시지를 표시한다.
+
+#### 카드 목록 (/cards)
+
+- 페이지 진입 시 GET /cards로 등록된 카드 목록을 조회한다.
+- 비동기 상태(idle | loading | success | error)에 맞는 UI를 표시한다.
+- loading: 스피너 또는 스켈레톤
+- success + 목록이 비어 있음: "등록된 카드가 없습니다" 안내
+- success + 목록이 있음: 카드 프리뷰 리스트
+- error: 에러 메시지와 재시도 버튼
+
+#### 카드 삭제
+
+- 각 카드에 삭제 버튼을 제공한다.
+- 삭제 버튼 클릭 시 window.confirm()으로 확인을 받고, 사용자가 확인한 경우에만 삭제를 진행한다.
+- 확인 시 DELETE /cards/:id로 요청하고 목록을 갱신한다. 취소 시 아무 요청도 보내지 않는다.
+
+### 프로그래밍 요구사항
+
+#### MSW
+
+- POST /cards, GET /cards, DELETE /cards/:id handler를 작성한다.
+- POST /cards에 400 시나리오(지원하지 않는 카드사 등)를 추가한다.
+
+#### Async State
+
+- 비동기 상태를 idle | loading | success | error 네 가지로 명시적으로 다룬다.
+- isLoading, error를 별도 boolean으로 분리하지 않는다.
+
+#### Test
+
+- MSW와 RTL로 사용자 관점의 통합 테스트를 작성한다.

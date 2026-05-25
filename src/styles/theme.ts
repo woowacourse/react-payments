@@ -16,6 +16,10 @@ const colors = {
   lotteCard: '#ED1C24',
   hanaCard: '#009490',
   kbCard: '#6A6056',
+  loading: '#EBEBEB',
+  empty: '#F5F5F5',
+  cardInfo: '#8C8C8C',
+  cardSectionBorder: '#E6E6E6',
 };
 
 const typography = {

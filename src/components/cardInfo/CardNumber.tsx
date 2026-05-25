@@ -1,8 +1,8 @@
-import { CARD_ERROR_MESSAGE } from '../constants/messages.ts';
-import type { CardStatus } from '../types/cardStausTypes.ts';
+import { CARD_ERROR_MESSAGE } from '../../constants/messages';
+import type { CardStatus } from '../../types/cardStausTypes';
 import { useRef } from 'react';
-import { getCardNumberGroups } from '../utils/cardBrand.ts';
-import { isNumericInput } from '../utils/validate.ts';
+import { getCardNumberGroups } from '../../utils/cardBrand';
+import { isNumericInput } from '../../utils/validate';
 
 type CardNumbersProps = {
   cardStatus: CardStatus;

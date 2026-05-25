@@ -13,7 +13,7 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  base: './',
+  base: process.env.NODE_ENV === 'production' ? '/react-payments/' : '/',
   build: {
     outDir: 'docs',
   },
@@ -27,6 +27,24 @@ export default defineConfig({
   ],
   test: {
     projects: [
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          environment: 'node',
+          setupFiles: ['./src/mocks/setupTests.ts'],
+          include: ['__tests__/**/*.test.ts', 'src/**/__tests__/**/*.test.ts'],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'dom',
+          environment: 'jsdom',
+          setupFiles: ['./src/mocks/setupTests.ts'],
+          include: ['__tests__/**/*.test.tsx'],
+        },
+      },
       {
         extends: true,
         plugins: [

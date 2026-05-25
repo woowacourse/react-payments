@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
-import CardCvc from '../components/CardCvc';
+import CardCvc from '../components/cardInfo/CardCvc';
 import { useCardCvc } from '../hooks/useCardCvc';
 
 const meta = {
