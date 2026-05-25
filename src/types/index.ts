@@ -1,4 +1,4 @@
-import { CARD_ISSUER } from "./constants";
+import { CARD_ISSUER } from "../constants";
 
 export type CardNetwork = "VISA" | "MasterCard" | "Diners" | "AMEX" | "UnionPay";
 
@@ -12,7 +12,7 @@ export interface CardFormState {
   cardPassword: string;
   cardValidationCode: string;
   cardExpiryDate: CardExpiryDate
-  cardIssuer: CardIssuer | null;
+  cardIssuer: CardIssuer | "";
   cardNumberSegments: CardNumberSegments;
 };
 
@@ -21,3 +21,5 @@ export interface ValidationRule {
   validator: (input: string) => boolean;
   message: string
 }
+
+

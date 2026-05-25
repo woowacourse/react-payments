@@ -1,24 +1,7 @@
-import { useNavigate } from 'react-router';
-import CardForm from '../components/CardForm/CardForm';
-import View from '../components/Common/View';
+import CardFormTemplate from '../components/AddCardForm/AddCardFormTemplate';
 
 function AddCardPage() {
-  const navigate = useNavigate();
-
-  return (
-    <View>
-      <CardForm
-        onSubmit={(formData) => {
-          const state = {
-            type: 'success',
-            issuer: formData.cardIssuer,
-            firstSegment: formData.cardNumberSegments[0],
-          };
-          navigate('/add-card-result', { state });
-        }}
-      />
-    </View>
-  );
+  return <CardFormTemplate />;
 }
 
 export default AddCardPage;

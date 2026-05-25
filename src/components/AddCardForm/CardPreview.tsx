@@ -4,17 +4,17 @@ import Flex from '../Common/Flex';
 import { UNMASKED_CARD_NUMBER_SEGMENT_COUNT } from '../../constants';
 
 const CardContainer = styled(Flex)`
-  margin: 45px 0;
+  margin: var(--spacing-45) 0;
   width: 100%;
 `;
 
-const Card = styled(Flex)<{ issuer: CardIssuer | null }>`
+const Card = styled(Flex)<{ issuer?: CardIssuer }>`
   width: 212px;
   height: 132px;
   color: var(--color-white);
-  border-radius: 4px;
-  box-shadow: 3px 3px 5px 0px #00000040;
-  padding: 8px 12px;
+  border-radius: var(--radius-m);
+  box-shadow: 3px 3px 5px 0 #00000040;
+  padding: var(--spacing-8) var(--spacing-12);
   ${(props) => `background-color: var(--color-card-${props.issuer ?? 'background'}, var(--color-card-background));`}
 `;
 
@@ -24,14 +24,14 @@ const CardImage = styled.img`
 `;
 
 const CardText = styled.span`
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-medium);
   letter-spacing: 8%;
 `;
 
 interface CardPreviewProps {
-  issuer: CardIssuer | null;
-  network: CardNetwork | null;
+  issuer?: CardIssuer;
+  network?: CardNetwork;
   numberSegments: CardNumberSegments;
   expiryDate: CardExpiryDate;
 }

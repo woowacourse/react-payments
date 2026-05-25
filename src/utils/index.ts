@@ -1,5 +1,5 @@
-import { CARD_EXPIRY_MONTH_RANGE, CARD_ISSUER, CARD_NETWORK } from './constants';
-import type { CardNetwork, CardNumberSegments, ValidationRule } from './types';
+import { CARD_EXPIRY_MONTH_RANGE, CARD_ISSUER_CODES, CARD_NETWORK } from '../constants';
+import type { CardNetwork, CardNumberSegments, ValidationRule } from '../types';
 
 export function validateDigits(input: string) {
   return /^\d+$/.test(input);
@@ -18,7 +18,7 @@ export function validateMonth(input: string) {
 }
 
 export function validateCardIssuer(input: string) {
-  return Object.prototype.hasOwnProperty.call(CARD_ISSUER, input);
+  return (CARD_ISSUER_CODES as string[]).includes(input);
 }
 
 export function createDigitFieldValidations(length: number): ValidationRule[] {
@@ -41,7 +41,7 @@ export function createDigitFieldValidations(length: number): ValidationRule[] {
   ]
 }
 
-export function getCardNetwork(cardNumberSegments: CardNumberSegments): CardNetwork | null {
+export function getCardNetwork(cardNumberSegments: CardNumberSegments): CardNetwork | undefined {
   const cardNumber = cardNumberSegments.join("");
 
   for (const [network, config] of Object.entries(CARD_NETWORK)) {
@@ -51,6 +51,6 @@ export function getCardNetwork(cardNumberSegments: CardNumberSegments): CardNetw
     if (matches) return network as CardNetwork;
   }
 
-  return null;
+  return undefined;
 }
 

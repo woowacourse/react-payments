@@ -20,6 +20,7 @@
 body {
   /* 4. Increase line-height */
   line-height: 1.5;
+
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
 }
@@ -57,6 +58,7 @@ h6 {
 p {
   text-wrap: pretty;
 }
+
 h1,
 h2,
 h3,
@@ -70,6 +72,7 @@ h6 {
   10. Create a root stacking context
 */
 #root,
+/* stylelint-disable-next-line selector-id-pattern */
 #__next {
   isolation: isolate;
 }

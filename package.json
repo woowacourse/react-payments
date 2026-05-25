@@ -7,15 +7,20 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint-style": "stylelint \"src/**/*.{js,jsx,ts,tsx}\"",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --minify=false && npx gh-pages -d dist"
+    "deploy": "vite build --mode gh-pages --minify=false && npx gh-pages -d dist",
+    "prepare": "husky",
+    "sync-token": "node --experimental-strip-types sync-tokens.ts"
   },
   "homepage": "https://bel1c10ud.github.io/react-payments",
   "dependencies": {
+    "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "msw": "^2.14.6",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "^7.15.0"
@@ -28,6 +33,9 @@
     "@storybook/addon-onboarding": "^10.3.5",
     "@storybook/addon-vitest": "^10.3.5",
     "@storybook/react-vite": "^10.3.5",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -39,11 +47,34 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-storybook": "^10.3.5",
     "globals": "^17.5.0",
+    "husky": "^9.1.7",
+    "jsdom": "^29.1.1",
+    "lint-staged": "^16.4.0",
     "playwright": "^1.59.1",
+    "postcss": "^8.5.15",
+    "postcss-styled-syntax": "^0.7.1",
     "storybook": "^10.3.5",
+    "stylelint": "^17.12.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-declaration-strict-value": "^1.11.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  },
+  "lint-staged": {
+    "tokens.config.ts": [
+      "npm run sync-token",
+      "git add src/styles/token.css src/tokens.ts"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "stylelint --fix"
+    ]
   }
 }

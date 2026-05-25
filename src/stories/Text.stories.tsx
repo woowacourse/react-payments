@@ -8,7 +8,7 @@ const meta = {
   argTypes: {
     size: {
       control: { type: 'select' },
-      options: ['xs', 's', 'm', 'l', 'xl'],
+      options: ['xs', 's', 'm', 'l', 'xl', '2xl'],
     },
     weight: {
       control: { type: 'select' },

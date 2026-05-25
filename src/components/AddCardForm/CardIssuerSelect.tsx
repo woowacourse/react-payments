@@ -15,15 +15,17 @@ function CardIssuerSelect({ field }: CardIssuerSelectProps) {
         <Select.Option value="" disabled hidden>
           카드사를 선택해 주세요
         </Select.Option>
-        {Object.entries(CARD_ISSUER).map(([issuer, { label }]) => (
-          <Select.Option key={issuer} value={issuer}>
+        {Object.entries(CARD_ISSUER).map(([, { issuerCode, label }]) => (
+          <Select.Option key={issuerCode} value={issuerCode}>
             {label}
           </Select.Option>
         ))}
       </Select>
-      <Text size="s" color="error" role="alert">
-        {field.error}
-      </Text>
+      {field.error && (
+        <Text size="s" color="error" role="alert">
+          {field.error}
+        </Text>
+      )}
     </Flex>
   );
 }
