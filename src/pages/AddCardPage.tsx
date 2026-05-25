@@ -13,6 +13,14 @@ import useAddCardForm, { type AddCardFormFieldKey } from '../hooks/useAddCardFor
 import { ROUTES } from '../routes';
 import useAddCard from '../hooks/useAddCard';
 
+const FORM_FIELDS_DESCENDING_STEP: AddCardFormFieldKey[] = [
+  'password',
+  'cvc',
+  'expirationPeriod',
+  'cardCompany',
+  'cardNumbers',
+];
+
 export default function AddCardPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
@@ -56,11 +64,9 @@ export default function AddCardPage() {
   };
 
   const focusFirstErrorField = () => {
-    const firstErrorField = Object.entries(FIELD_STEP)
-      .sort(([, a], [, b]) => b - a)
-      .find(([key]) => formValue[key as AddCardFormFieldKey]?.errorStatuses.some((s) => s !== null))?.[0] as
-      | AddCardFormFieldKey
-      | undefined;
+    const firstErrorField = FORM_FIELDS_DESCENDING_STEP.find((field) =>
+      formValue[field].errorStatuses.some((status) => status !== null),
+    );
     if (firstErrorField) focusField(firstErrorField);
   };
 
@@ -79,7 +85,9 @@ export default function AddCardPage() {
     }
     if (result.status === 'validationError') {
       focusField(result.field);
+      return;
     }
+    window.alert('카드 등록에 실패했습니다. 다시 시도해주세요.');
   };
 
   const handleOpenNextStep = (currentStep: number) => {
