@@ -17,23 +17,48 @@ type CardRequestBody = {
   issuerCode: string;
 };
 
-export const getCardListDTO = (): Promise<CardDTO[]> =>
-  fetch(API_ENDPOINTS.cards).then((res) => {
-    if (!res.ok) throw new Error('카드 목록을 불러오지 못했습니다.');
-    return res.json() as Promise<CardDTO[]>;
-  });
+export class ApiError extends Error {
+  code: string;
+  constructor(code: string, message: string) {
+    super(message);
+    this.code = code;
+  }
+}
+
+const fetcher = async (url: RequestInfo, options?: RequestInit): Promise<Response> => {
+  let res: Response;
+  try {
+    res = await fetch(url, options);
+  } catch {
+    throw new ApiError('NETWORK_ERROR', '네트워크 연결을 확인해주세요.');
+  }
+
+  if (res.status >= 500) {
+    throw new ApiError(`${res.status}`, res.statusText);
+  }
+
+  if (res.status >= 400 && res.status < 500) {
+    const { code, message } = await res.json();
+    throw new ApiError(code, message);
+  }
+
+  return res;
+};
+
+export const getCardListDTO = async (): Promise<CardDTO[]> => {
+  const response = await fetcher(API_ENDPOINTS.cards);
+  return response.json();
+};
 
 export const addCard = async (body: CardRequestBody): Promise<{ id: string }> => {
-  const res = await fetch(API_ENDPOINTS.cards, {
+  const response = await fetcher(API_ENDPOINTS.cards, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
-  if (!res.ok) throw await res.json();
-  return res.json();
+  return response.json();
 };
 
-export const deleteCard = (id: string): Promise<void> =>
-  fetch(API_ENDPOINTS.card(id), { method: 'DELETE' }).then((res) => {
-    if (!res.ok) throw new Error();
-  });
+export const deleteCard = async (id: string): Promise<void> => {
+  await fetcher(API_ENDPOINTS.card(id), { method: 'DELETE' });
+};
