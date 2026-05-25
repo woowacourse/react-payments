@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CardFormFields from "./cardFormFields/CardFormFields";
-import CardPreview from "./cardPreview/CardPreview";
-import { ConfirmButton } from "./PaymentWidget.styles";
-import { Wrapper } from "./PageCard.styles";
-import { useCardForm } from "./useCardForm";
-import { useCardStep } from "./cardFormFields/useCardStep";
-import { createCard, type CardRequest } from "../api/cards";
-import { CARD_BRANDS, type CardBrand } from "../constants/constants";
+import CardFormFields from "../cardFormFields/CardFormFields";
+import CardPreview from "../cardPreview/CardPreview";
+import { ConfirmButton } from "./AddCardPage.styles";
+import { Wrapper } from "../PageCard.styles";
+import { useCardForm } from "../useCardForm";
+import { useCardStep } from "../cardFormFields/useCardStep";
+import { createCard, type CardRequest } from "../../api/cards";
+import { CARD_BRANDS, type CardBrand } from "../../constants/constants";
 
 type SubmitError = { code: keyof CardRequest; message: string };
 
-export default function PaymentWidget() {
+export default function AddCardPage() {
   const cardForm = useCardForm();
   const step = useCardStep(cardForm);
   const navigate = useNavigate();

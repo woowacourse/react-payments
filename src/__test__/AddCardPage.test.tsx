@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/node';
-import PaymentWidget from '../components/PaymentWidget';
+import AddCardPage from '../components/AddCardPage/AddCardPage';
 
 const fillValidForm = () => {
   const numberInputs = screen.getAllByPlaceholderText('1234');
@@ -22,7 +22,7 @@ const fillValidForm = () => {
   fireEvent.change(screen.getByPlaceholderText('**'), { target: { value: '12' } });
 };
 
-describe('PaymentWidget', () => {
+describe('AddCardPage', () => {
   it('등록 400 응답을 받으면 해당 필드 아래에 메시지를 표시한다', async () => {
     server.use(
       http.post('/cards', () =>
@@ -35,7 +35,7 @@ describe('PaymentWidget', () => {
 
     render(
       <MemoryRouter initialEntries={['/addCard']}>
-        <PaymentWidget />
+        <AddCardPage />
       </MemoryRouter>,
     );
 

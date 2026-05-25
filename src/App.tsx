@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PaymentWidget from './components/PaymentWidget';
+import AddCardPage from './components/AddCardPage/AddCardPage';
 import CompletePage from './components/completePage/CompletePage';
 import styled from '@emotion/styled';
 import { CardListPage } from './components/CardListPage/CardListPage';
@@ -10,7 +10,7 @@ function App() {
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<CardListPage />} />
-          <Route path="/addCard" element={<PaymentWidget />} />
+          <Route path="/addCard" element={<AddCardPage />} />
           <Route path="/complete" element={<CompletePage />} />
         </Routes>
       </BrowserRouter>

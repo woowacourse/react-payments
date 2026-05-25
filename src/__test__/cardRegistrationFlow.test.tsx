@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/node';
-import PaymentWidget from '../components/PaymentWidget';
+import AddCardPage from '../components/AddCardPage/AddCardPage';
 import { CardListPage } from '../components/CardListPage/CardListPage';
 import CompletePage from '../components/completePage/CompletePage';
 
@@ -12,7 +12,7 @@ const renderApp = (initialPath = '/') =>
     <MemoryRouter initialEntries={[initialPath]}>
       <Routes>
         <Route path="/" element={<CardListPage />} />
-        <Route path="/addCard" element={<PaymentWidget />} />
+        <Route path="/addCard" element={<AddCardPage />} />
         <Route path="/complete" element={<CompletePage />} />
       </Routes>
     </MemoryRouter>,
