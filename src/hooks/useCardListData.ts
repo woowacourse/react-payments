@@ -36,8 +36,9 @@ export default function useCardListData(cardsPromise: Promise<Card[]>) {
 
     try {
       await deleteCard(id);
-    } catch {
+    } catch (error) {
       setCardList(() => prev);
+      throw error;
     }
   };
 
