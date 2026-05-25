@@ -58,7 +58,7 @@ export default function CVCField({
       <Input
         ref={ref}
         autoFocus
-        variant={errorStatus !== null ? 'error' : 'default'}
+        variant={errorStatus !== null || serverError !== null ? 'error' : 'default'}
         value={value}
         id="cvc"
         type="text"
