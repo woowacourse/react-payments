@@ -22,6 +22,7 @@ import Button from '../Common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import CardPreview from '../Card/CardPreview/CardPreview';
 import { registerCard } from '../../apis/cards';
+import { ApiError } from '../../apis/api';
 
 export type Step = 1 | 2 | 3 | 4 | 5 | 6;
 export type CardNumbersType = [string, string, string, string];
@@ -111,20 +112,29 @@ export default function PaymentForm() {
       (issuer) => issuer.name === cardIssuer
     )[0];
 
-    await registerCard({
-      number: cardNumbers.join(''),
-      expirationDate: `${expirationDate['month']}/${expirationDate['year']}`,
-      cvc,
-      issuerCode: issuer.issuerCode,
-    });
+    try {
+      await registerCard({
+        number: cardNumbers.join(''),
+        expirationDate: `${expirationDate['month']}/${expirationDate['year']}`,
+        cvc,
+        issuerCode: issuer.issuerCode,
+      });
 
-    navigate('/registration/completion', {
-      state: {
-        prefix: cardNumbers[0],
-        cardIssuer,
-      },
-      replace: true,
-    });
+      navigate('/registration/completion', {
+        state: {
+          prefix: cardNumbers[0],
+          cardIssuer,
+        },
+        replace: true,
+      });
+    } catch (err) {
+      if (err instanceof ApiError) {
+        alert(err.message);
+        // TODO: 에러 입력 필드 매핑 로직 추가
+      } else {
+        alert('일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요');
+      }
+    }
   };
 
   return (
