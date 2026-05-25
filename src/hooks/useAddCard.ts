@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { addCard } from '../api/cards';
+import { addCard, ApiError } from '../api/cards';
 import { COMPANY_TO_ISSUER_CODE } from '../constants';
 import type { AddCardFormFieldKey, FormValue } from './useAddCardForm';
 import type { CardCompany } from '../types';
@@ -8,11 +8,6 @@ type ServerValidationError = {
   field: AddCardFormFieldKey;
   message: string;
 } | null;
-
-type ApiError = {
-  code: string;
-  message: string;
-};
 
 export type AddCardResult =
   | { status: 'success' }
@@ -43,12 +38,14 @@ export default function useAddCard(formValue: FormValue) {
       await addCard(toRequestBody(formValue));
       return { status: 'success' };
     } catch (error) {
-      const { code, message } = error as ApiError;
-      const field = API_ERROR_FIELD_MAP[code];
+      if (!(error instanceof ApiError)) return { status: 'error' };
+
+      const field = API_ERROR_FIELD_MAP[error.code];
       if (field) {
-        setServerValidationError({ field, message });
+        setServerValidationError({ field, message: error.message });
         return { status: 'validationError', field };
       }
+
       return { status: 'error' };
     }
   };
