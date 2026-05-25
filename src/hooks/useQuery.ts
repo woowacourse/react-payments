@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useEffectEvent, useState } from 'react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -12,29 +12,35 @@ export const useQuery = <T>({ queryFn }: UseQueryOptions<T>) => {
   const [data, setData] = useState<T>();
   const [refetchKey, setRefetchKey] = useState(0);
 
+  const runQuery = useEffectEvent(async (signal: { cancelled: boolean }) => {
+    setStatus('loading');
+
+    try {
+      const res = await queryFn();
+      if (signal.cancelled) return;
+
+      setData(res);
+      setStatus('success');
+      setError(null);
+    } catch (err) {
+      if (signal.cancelled) return;
+
+      setError(err as Error);
+      setStatus('error');
+    }
+  });
+
   useEffect(() => {
-    let cancelled = false;
+    const signal = { cancelled: false };
 
-    (async () => {
-      setStatus('loading');
-      try {
-        const res = await queryFn();
-        if (cancelled) return;
-
-        setData(res);
-        setStatus('success');
-      } catch (err) {
-        if (cancelled) return;
-
-        setError(err as Error);
-        setStatus('error');
-      }
-    })();
+    // refetchKey만 deps에 포함되기 때문에 cascade render가 구조적으로 발생하지 않음.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    runQuery(signal);
 
     return () => {
-      cancelled = true;
+      signal.cancelled = true;
     };
-  }, [refetchKey, queryFn]);
+  }, [refetchKey]);
 
   const flushRefetch = () => setRefetchKey((key) => key + 1);
 
