@@ -27,14 +27,14 @@ export default function CardListPage() {
           icon={<EmptyCard />}
           title="등록된 카드가 없습니다"
           description="아래 버튼을 눌러 첫 카드를 등록해보세요"
-          action={{ label: '카드 추가하기', onClick: () => navigate('/registration/completion') }}
+          action={{ label: '카드 추가하기', onClick: () => navigate('/registration') }}
         />
       )}
       {isSuccess && data && data.length > 0 && (
         <RegisteredCardList
           data={data}
           onDelete={handleDelete}
-          onClick={() => navigate('/registration/completion')}
+          onClick={() => navigate('/registration')}
         />
       )}
       {isError && (
