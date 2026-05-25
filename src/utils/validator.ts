@@ -1,7 +1,7 @@
-import type { CardNumberUnits } from "@/components/CardNumberInputField/CardNumberInputField";
+import type { CardNumberUnits } from "@/components/CardRegister/CardNumberInputField/CardNumberInputField";
 import { detectCardBrand, getCardNumberFormat } from "./card";
 import type { CardCompany } from "@/constants/cardCompanies";
-import type { ValidityPeriod } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import type { ValidityPeriod } from "@/components/CardRegister/CardValidityPeriodInputField/CardValidityPeriodInputField";
 import { CARD_FIELD_LENGTH } from "@/constants/cardForm";
 
 export const checkIsOnlyDigits = (input: string) => /^\d*$/.test(input);
@@ -33,7 +33,7 @@ export const checkExpiredValidityPeriod = (month: string, year: string) => {
 };
 
 export const validateCardNumberInput = (cardNumber: CardNumberUnits) => {
-  const cardBrand = detectCardBrand(cardNumber);
+  const cardBrand = detectCardBrand(cardNumber.join(""));
   const cardNumberFormat = getCardNumberFormat(cardBrand);
 
   const invalidStatus = cardNumberFormat

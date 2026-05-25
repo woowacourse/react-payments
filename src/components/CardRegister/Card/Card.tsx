@@ -8,8 +8,8 @@ import diners from "@assets/Diners.png";
 import amex from "@assets/AMEX.png";
 import unionPay from "@assets/UnionPay.png";
 import maskingImg from "@assets/MaskingImg.png";
-import type { CardNumberUnits } from "@/components/CardNumberInputField/CardNumberInputField";
-import type { ValidityPeriod } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import type { CardNumberUnits } from "@/components/CardRegister/CardNumberInputField/CardNumberInputField";
+import type { ValidityPeriod } from "@/components/CardRegister/CardValidityPeriodInputField/CardValidityPeriodInputField";
 import SwitchCase from "@components/common/SwitchCase";
 import styled from "@emotion/styled";
 import { detectCardBrand } from "@utils/card";
@@ -23,7 +23,7 @@ interface CardProps {
 }
 
 const Card = ({ cardNumberUnits, cardCompany, validityPeriod }: CardProps) => {
-  const cardBrand = detectCardBrand(cardNumberUnits);
+  const cardBrand = detectCardBrand(cardNumberUnits.join(""));
   const cardNumberFormat = getCardNumberFormat(cardBrand);
 
   const cardValidityPeriodUnitString =

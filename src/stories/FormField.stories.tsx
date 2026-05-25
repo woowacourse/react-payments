@@ -4,7 +4,7 @@ import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
 
 const meta = {
-  title: "FormField",
+  title: "Common/FormField",
   component: FormField,
 } satisfies Meta<typeof FormField>;
 

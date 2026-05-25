@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within } from "storybook/test";
 
-import CardNumberInputField from "@components/CardNumberInputField/CardNumberInputField";
+import CardNumberInputField from "@/components/CardRegister/CardNumberInputField/CardNumberInputField";
 
 const meta = {
-  title: "CardNumberInputField",
+  title: "CardRegister/CardNumberInputField",
   component: CardNumberInputField,
 } satisfies Meta<typeof CardNumberInputField>;
 

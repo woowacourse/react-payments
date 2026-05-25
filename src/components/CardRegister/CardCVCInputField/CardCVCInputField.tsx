@@ -1,22 +1,28 @@
 import { CVC_MAX_LENGTH, HELPER_MESSAGE, type InputStatus } from "./constants";
 import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validateCVCInput } from "@/utils/validator";
-import type { AddCardFormStepKey } from "@/constants/cardForm";
+import type { CardRegisterFormStepKey } from "@/constants/cardForm";
+import useInputFocus from "@/hooks/useInputFocus";
 
 interface CardCVCInputFieldProps {
   CVC: string;
   onChange: (CVC: string) => void;
-  onNextStep: (currentStepKey: AddCardFormStepKey) => void;
+  onNextStep: (currentStepKey: CardRegisterFormStepKey) => void;
+  serverErrorMessage?: string;
+  shouldFocus?: boolean;
 }
 
 const CardCVCInputField = ({
   CVC,
   onChange,
   onNextStep,
+  serverErrorMessage,
+  shouldFocus,
 }: CardCVCInputFieldProps) => {
   const [status, setStatus] = useState<InputStatus>("DEFAULT");
+  const { registerInput, focusInput } = useInputFocus();
 
   const handleCVCChange = (input: string) => {
     const nextCVC = input.slice(0, CVC_MAX_LENGTH);
@@ -43,14 +49,21 @@ const CardCVCInputField = ({
     setStatus(validationStatus);
   };
 
+  useEffect(() => {
+    if (shouldFocus) {
+      focusInput(0);
+    }
+  }, [focusInput, shouldFocus]);
+
   return (
     <FormField
       title="CVC 번호를 입력해 주세요"
       label="CVC"
-      helperMessage={HELPER_MESSAGE[status]}
+      helperMessage={serverErrorMessage ?? HELPER_MESSAGE[status]}
     >
       <Input
         autoFocus
+        ref={registerInput(0)}
         placeholder="123"
         inputMode="numeric"
         maxLength={CVC_MAX_LENGTH}
@@ -64,7 +77,7 @@ const CardCVCInputField = ({
           const input = e.target.value;
           handleCVCBlur(input);
         }}
-        state={status === "DEFAULT" ? "default" : "error"}
+        state={serverErrorMessage || status !== "DEFAULT" ? "error" : "default"}
       />
     </FormField>
   );

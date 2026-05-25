@@ -2,7 +2,7 @@ import {
   validateCardNumberInput,
   validateCardNumberUnitInput,
 } from "@utils/validator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HELPER_MESSAGE, type InputStatus } from "./constants";
 import {
   detectCardBrand,
@@ -14,7 +14,7 @@ import {
 import useInputFocus from "@/hooks/useInputFocus";
 import FormField from "@components/common/FormField";
 import Input from "@components/common/Input";
-import type { AddCardFormStepKey } from "@/constants/cardForm";
+import type { CardRegisterFormStepKey } from "@/constants/cardForm";
 
 export type CardNumberUnits = string[];
 export type CardNumberFormat = number[];
@@ -22,7 +22,9 @@ export type CardNumberFormat = number[];
 interface CardNumberInputFieldProps {
   cardNumberUnits: CardNumberUnits;
   onChange: (input: CardNumberUnits) => void;
-  onNextStep: (currentStepKey: AddCardFormStepKey) => void;
+  onNextStep: (currentStepKey: CardRegisterFormStepKey) => void;
+  serverErrorMessage?: string;
+  shouldFocus?: boolean;
 }
 
 type InputsStatuses = InputStatus[];
@@ -38,11 +40,13 @@ const CardNumberInputField = ({
   cardNumberUnits,
   onChange,
   onNextStep,
+  serverErrorMessage,
+  shouldFocus,
 }: CardNumberInputFieldProps) => {
   const [status, setStatus] = useState<InputsStatuses>(INPUTS_STATUSES);
-  const { registerInput, focusNextInput } = useInputFocus();
+  const { registerInput, focusNextInput, focusInput } = useInputFocus();
 
-  const cardBrand = detectCardBrand(cardNumberUnits);
+  const cardBrand = detectCardBrand(cardNumberUnits.join(""));
   const cardNumberFormat = getCardNumberFormat(cardBrand);
 
   const updateInputStatus = (index: number, inputStatus: InputStatus) => {
@@ -79,7 +83,7 @@ const CardNumberInputField = ({
 
     updateInputStatus(index, "DEFAULT");
 
-    const newCardBrand = detectCardBrand(newCardNumberUnits);
+    const newCardBrand = detectCardBrand(newCardNumberUnits.join(""));
     const newCardNumberFormat = getCardNumberFormat(newCardBrand);
 
     if (isFormatChanged(cardNumberFormat, newCardNumberFormat)) {
@@ -109,12 +113,19 @@ const CardNumberInputField = ({
     updateInputStatus(index, validationStatus);
   };
 
+  useEffect(() => {
+    if (shouldFocus) {
+      focusInput(0);
+    }
+  }, [focusInput, shouldFocus]);
+
   return (
     <FormField
       title="결제할 카드 번호를 입력해 주세요"
       caption="본인 명의의 카드만 결제 가능합니다."
       label="카드 번호"
       helperMessage={
+        serverErrorMessage ??
         HELPER_MESSAGE[
           status.find((inputStatus) => inputStatus !== "DEFAULT") ?? "DEFAULT"
         ]
@@ -138,7 +149,11 @@ const CardNumberInputField = ({
             const input = e.target.value;
             handleCardNumberBlur(index, input);
           }}
-          state={status[index] === "DEFAULT" ? "default" : "error"}
+          state={
+            serverErrorMessage || status[index] !== "DEFAULT"
+              ? "error"
+              : "default"
+          }
         />
       ))}
     </FormField>

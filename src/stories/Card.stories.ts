@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import Card from "@components/Card/Card";
+import Card from "@/components/CardRegister/Card/Card";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
 
 const meta = {
-  title: "Card",
+  title: "CardRegister/Card",
   component: Card,
 } satisfies Meta<typeof Card>;
 

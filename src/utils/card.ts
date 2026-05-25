@@ -4,35 +4,21 @@ import {
   type CardBrand,
   type PrefixRange,
 } from "@/constants/cardBrands";
-import type { ValidityPeriod } from "@/components/CardValidityPeriodInputField/CardValidityPeriodInputField";
-import type { CardNumberUnits } from "@/components/CardNumberInputField/CardNumberInputField";
+import type { ValidityPeriod } from "@/components/CardRegister/CardValidityPeriodInputField/CardValidityPeriodInputField";
+import type { CardNumberUnits } from "@/components/CardRegister/CardNumberInputField/CardNumberInputField";
 
-export const detectCardBrand = (
-  cardNumber: CardNumberUnits,
-): CardBrand | null => {
-  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.Visa.prefixes))
-    return "Visa";
+export const detectCardBrand = (cardNumber: string): CardBrand | null => {
+  if (checkPrefixMatches(cardNumber, CARD_BRANDS.Visa.prefixes)) return "Visa";
 
-  if (
-    checkPrefixRangeMatches(
-      `${cardNumber[0]}`,
-      CARD_BRANDS.MasterCard.prefixRanges,
-    )
-  )
+  if (checkPrefixRangeMatches(cardNumber, CARD_BRANDS.MasterCard.prefixRanges))
     return "MasterCard";
 
-  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.AMEX.prefixes))
-    return "AMEX";
+  if (checkPrefixMatches(cardNumber, CARD_BRANDS.AMEX.prefixes)) return "AMEX";
 
-  if (checkPrefixMatches(`${cardNumber[0]}`, CARD_BRANDS.Diners.prefixes))
+  if (checkPrefixMatches(cardNumber, CARD_BRANDS.Diners.prefixes))
     return "Diners";
 
-  if (
-    checkPrefixRangeMatches(
-      `${cardNumber[0]}${cardNumber[1]}`,
-      CARD_BRANDS.UnionPay.prefixRanges,
-    )
-  )
+  if (checkPrefixRangeMatches(cardNumber, CARD_BRANDS.UnionPay.prefixRanges))
     return "UnionPay";
 
   return null;
@@ -89,4 +75,8 @@ export const updateCardNumberUnitsFormat = (
 
 export const getCardNumberPlaceholder = (length: number) => {
   return "1234567890".slice(0, length);
+};
+
+export const formatCardNumberByFour = (cardNumber: string) => {
+  return cardNumber.match(/.{1,4}/g)?.join(" ") ?? cardNumber;
 };

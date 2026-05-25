@@ -15,9 +15,14 @@ const useInputFocus = () => {
     inputRefs.current[index + 1]?.focus();
   };
 
+  const focusInput = (index: number) => {
+    inputRefs.current[index]?.focus();
+  };
+
   return {
     registerInput,
     focusNextInput,
+    focusInput,
   };
 };
 

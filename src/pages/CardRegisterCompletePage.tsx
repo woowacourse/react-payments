@@ -4,42 +4,44 @@ import styled from "@emotion/styled";
 import { COLOR_PALETTE } from "@/styles/colorPalette";
 import { useLocation, useNavigate } from "react-router";
 import { ROUTE_PATH } from "@/constants/routes";
+import PageLayout from "@/components/common/PageLayout";
 
-export type AddCardCompletePageState = {
+export type CardRegisterCompletePageState = {
   cardNumberPrefix: string;
   cardCompanyName: string;
 };
 
-const AddCardCompletePage = () => {
+const CardRegisterCompletePage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
   const { cardNumberPrefix, cardCompanyName } =
-    state as AddCardCompletePageState;
+    state as CardRegisterCompletePageState;
 
   return (
-    <PageWrapper>
-      <CompleteCheckImage src={completeCheckImage} alt="completeCheckImage" />
-      <CompleteTitle>
-        {cardNumberPrefix}로 시작하는
-        <br />
-        {cardCompanyName}가 등록되었어요.
-      </CompleteTitle>
-      <Button onClick={() => navigate(ROUTE_PATH.ADD_CARD)}>확인</Button>
-    </PageWrapper>
+    <PageLayout>
+      <PageWrapper>
+        <CompleteCheckImage src={completeCheckImage} alt="completeCheckImage" />
+        <CompleteTitle>
+          {cardNumberPrefix}로 시작하는
+          <br />
+          {cardCompanyName}가 등록되었어요.
+        </CompleteTitle>
+        <Button fullWidth onClick={() => navigate(ROUTE_PATH.CARD_LIST)}>
+          확인
+        </Button>
+      </PageWrapper>
+    </PageLayout>
   );
 };
 
 const PageWrapper = styled.div`
-  max-width: 23rem;
   min-height: 100vh;
-  margin-inline: auto;
-  padding-bottom: 4rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 1.75rem;
 `;
 
 const CompleteCheckImage = styled.img`
@@ -56,4 +58,4 @@ const CompleteTitle = styled.h1`
   color: ${COLOR_PALETTE["BLACK-700"]};
 `;
 
-export default AddCardCompletePage;
+export default CardRegisterCompletePage;

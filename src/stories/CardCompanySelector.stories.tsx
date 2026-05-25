@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within } from "storybook/test";
 
-import CardCompanySelector from "@components/CardCompanySelector/CardCompanySelector";
+import CardCompanySelector from "@/components/CardRegister/CardCompanySelector/CardCompanySelector";
 import { CARD_COMPANIES } from "@/constants/cardCompanies";
 
 const meta = {
-  title: "CardCompanySelector",
+  title: "CardRegister/CardCompanySelector",
   component: CardCompanySelector,
 } satisfies Meta<typeof CardCompanySelector>;
 
