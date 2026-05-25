@@ -42,7 +42,7 @@ export default function CardListPage() {
           icon={<img src={errorIcon} alt="error-icon" />}
           title="카드 목록을 불러올 수 없어요"
           description="잠시 후 다시 시도해 주세요."
-          action={{ label: '다시 시도', onClick: () => navigate(0) }}
+          action={{ label: '다시 시도', onClick: () => refetch() }}
         />
       )}
     </Container>
