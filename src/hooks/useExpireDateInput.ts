@@ -13,9 +13,8 @@ export function useExpireDateInput() {
   );
   const yearInputRef = useRef<HTMLInputElement | null>(null);
 
-  const resetExpireDate = () => {
-    setExpireDate(initialState.expireDate);
-    setExpireDateError(initialState.expireDateError);
+  const setExpireDateServerError = (message: string) => {
+    setExpireDateError((prev) => ({ ...prev, month: message }));
   };
 
   const handleMonthChange = (value: string) => {
@@ -101,7 +100,7 @@ export function useExpireDateInput() {
     handleYearChange,
     handleMonthBlur,
     handleYearBlur,
-    resetExpireDate,
     yearInputRef,
+    setExpireDateServerError,
   };
 }

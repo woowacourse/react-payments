@@ -1,39 +1,35 @@
-import { useNavigate } from "react-router-dom";
-import { useCardBrandContext } from "../context/cardBrand/CardBrandContext";
-import { useCardNumberContext } from "../context/cardNumber/CardNumberContext";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { FaCheckCircle } from "react-icons/fa";
-import { useCvcContext } from "../context/cvc/CvcContext";
-import { useExpireDateContext } from "../context/expireDate/ExpireDateContext";
-import { usePasswordContext } from "../context/password/PasswordContext";
+import { options } from "../hooks/useCardBrand";
 
 export default function Enrollment() {
-  const { cardNumber, resetCardNumber } = useCardNumberContext();
-  const {
-    selectedItem: { brand },
-    resetCardBrand,
-  } = useCardBrandContext();
-  const { resetCvc } = useCvcContext();
-  const { resetExpireDate } = useExpireDateContext();
-  const { resetPassword } = usePasswordContext();
-
+  const location = useLocation();
   const navigate = useNavigate();
 
+  const { cardNumber, issuerCode } = location.state || {};
+  const displayedCardNumber = cardNumber?.substring(0, 4) ?? "";
+  const matchedCardBrand = options.find(
+    (option) => option.issuerCode === issuerCode,
+  );
+  const displayedBrand = matchedCardBrand
+    ? matchedCardBrand.brand
+    : "알 수 없는 카드";
+
   const handleClick = () => {
-    resetCardNumber();
-    resetCardBrand();
-    resetCvc();
-    resetExpireDate();
-    resetPassword();
     navigate("/react-payments/");
   };
+
+  if (!cardNumber || !issuerCode) {
+    return <Navigate to="/react-payments/" replace />;
+  }
 
   return (
     <Wrapper>
       <CheckIcon />
       <Phrase>
-        <span>{cardNumber[0]}로 시작하는</span>
-        <span>{brand}가 등록되었어요.</span>
+        <span>{displayedCardNumber}로 시작하는</span>
+        <span>{displayedBrand}가 등록되었어요.</span>
       </Phrase>
       <Button onClick={() => handleClick()}>확인</Button>
     </Wrapper>

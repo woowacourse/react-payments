@@ -26,8 +26,8 @@ export interface CardNumberContextValue {
   handleBlur: (index: number) => void;
   inputConfig: InputConfig;
   cardType: string | null;
-  resetCardNumber: () => void;
   inputRefs: React.RefObject<(HTMLInputElement | null)[]>;
+  setCardNumberServerError: (message: string) => void;
 }
 
 export interface ExpireDateContextValue {
@@ -37,8 +37,8 @@ export interface ExpireDateContextValue {
   handleYearChange: (value: string) => void;
   handleMonthBlur: () => void;
   handleYearBlur: () => void;
-  resetExpireDate: () => void;
   yearInputRef: React.RefObject<HTMLInputElement | null>;
+  setExpireDateServerError: (message: string) => void;
 }
 
 export interface CvcContextValue {
@@ -46,16 +46,20 @@ export interface CvcContextValue {
   cvcError: string;
   handleCvcChange: (value: string) => void;
   handleBlur: () => void;
-  resetCvc: () => void;
+  setCvcServerError: (message: string) => void;
+  inputRefs: React.RefObject<HTMLInputElement | null>;
 }
 
 export interface CardBrandContextValue {
   isOpen: boolean;
-  selectedItem: { brand: string; color: string };
-  options: { brand: string; color: string }[];
+  selectedItem: { brand: string; color: string; issuerCode: string };
+  options: { brand: string; color: string; issuerCode: string }[];
   toggleDropdown: () => void;
-  handleItemClick: (option: { brand: string; color: string }) => void;
-  resetCardBrand: () => void;
+  handleItemClick: (option: {
+    brand: string;
+    color: string;
+    issuerCode: string;
+  }) => void;
 }
 
 export interface PasswordContextValue {
@@ -63,5 +67,4 @@ export interface PasswordContextValue {
   passwordError: string;
   handlePasswordChange: (value: string) => void;
   handleBlur: () => void;
-  resetPassword: () => void;
 }

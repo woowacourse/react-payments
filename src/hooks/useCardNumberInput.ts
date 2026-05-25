@@ -15,9 +15,9 @@ export function useCardNumberInput() {
   const { inputConfig, cardType } = selectCardType(cardNumber);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const resetCardNumber = () => {
-    setCardNumber(initialState.cardNumber);
-    setCardNumberError(initialState.cardNumberError);
+  const setCardNumberServerError = (message: string) => {
+    inputRefs.current[0]?.focus();
+    setCardNumberError([message, "", "", ""]);
   };
 
   const handleCardNumberChange = (index: number, value: string) => {
@@ -63,7 +63,7 @@ export function useCardNumberInput() {
     handleBlur,
     inputConfig,
     cardType,
-    resetCardNumber,
     inputRefs,
+    setCardNumberServerError,
   };
 }

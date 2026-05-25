@@ -12,11 +12,6 @@ export function usePasswordInput() {
     initialState.passwordError,
   );
 
-  const resetPassword = () => {
-    setPassword(initialState.password);
-    setPasswordError(initialState.passwordError);
-  };
-
   const handlePasswordChange = (value: string) => {
     const onlyNumbers = value.replace(/[^0-9]/g, "");
     const sliceValue = onlyNumbers.substring(0, 2);
@@ -42,6 +37,5 @@ export function usePasswordInput() {
     passwordError,
     handlePasswordChange,
     handleBlur,
-    resetPassword,
   };
 }
