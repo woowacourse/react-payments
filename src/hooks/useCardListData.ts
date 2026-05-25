@@ -31,13 +31,13 @@ export default function useCardListData(cardsPromise: Promise<Card[]>) {
   const [cardList, setCardList] = useState(initialCards);
 
   const handleDeleteCard = async (id: string) => {
-    const prev = cardList;
+    const target = cardList.find((card) => card.id === id);
     setCardList((list) => list.filter((card) => card.id !== id));
 
     try {
       await deleteCard(id);
     } catch (error) {
-      setCardList(() => prev);
+      if (target) setCardList((list) => [...list, target]);
       throw error;
     }
   };
