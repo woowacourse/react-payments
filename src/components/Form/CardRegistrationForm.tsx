@@ -11,7 +11,7 @@ import {
   ROUTES,
   VALIDATION_RULE,
 } from '../../constants';
-import { KoreanCardCompany } from '../../types';
+import { ApiError, KoreanCardCompany } from '../../types';
 import { isCardCompanyComplete, isPasswordComplete } from '../../utils/formStatus';
 import CardCompanyField from './CardCompanyField';
 import { useNavigate } from 'react-router';
@@ -19,9 +19,16 @@ import SubmitButton from '../Common/Button/SubmitButton';
 import useCardNumbers from '../../hooks/useCardNumbers';
 import useExpirationDate from '../../hooks/useExpirationDate';
 import useCvc from '../../hooks/useCvc';
+import { postCard } from '../../api/cards';
+import { joinUntilEmpty } from '../../utils/cardBrand';
+import { ApiResponseError } from '../../api/errors';
 
-export default function PaymentForm() {
+export default function CardRegistrationForm() {
   const navigate = useNavigate();
+
+  const [serverError, setServerError] = useState<ApiError | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
   const cardNumbers = useCardNumbers();
   const [cardCompany, setCardCompany] = useState<KoreanCardCompany | null>(null);
   const expirationDate = useExpirationDate();
@@ -45,15 +52,30 @@ export default function PaymentForm() {
     setPassword(value);
   };
 
-  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isFormValid || !cardCompany) return;
-    navigate(ROUTES.COMPLETE, {
-      state: {
-        cardNumberPrefix: cardNumbers.value[0],
-        cardCompanyName: KOREAN_CARD_COMPANIES[cardCompany].label,
-      },
-    });
+    if (!isFormValid || !cardCompany || submitting) return;
+
+    setSubmitting(true);
+    setServerError(null);
+
+    try {
+      await postCard({
+        number: joinUntilEmpty(cardNumbers.value),
+        expirationDate: `${expirationDate.value.month}/${expirationDate.value.year}`,
+        cvc: cvc.value,
+        issuerCode: KOREAN_CARD_COMPANIES[cardCompany].issuerCode,
+      });
+      navigate(ROUTES.CARDS);
+    } catch (err) {
+      if (err instanceof ApiResponseError) {
+        setServerError(err.apiError);
+      } else {
+        console.error(err);
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -76,6 +98,9 @@ export default function PaymentForm() {
             placeholders={INPUT_FIELD_CONFIG['CARD_NUMBERS'].placeholder}
             fieldMaxLengths={cardNumbers.segmentLengths}
             values={cardNumbers.value}
+            serverErrorMessage={
+              serverError?.code === 'INVALID_CARD_NUMBER' ? serverError.message : undefined
+            }
             validator={cardNumbers.validator}
             onChange={cardNumbers.handleSegmentChange}
           />
@@ -104,6 +129,9 @@ export default function PaymentForm() {
               placeholders={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].placeholder}
               fieldMaxLengths={[2, 2]}
               values={expirationDate.expirationDateSegments}
+              serverErrorMessage={
+                serverError?.code === 'INVALID_EXPIRATION_DATE' ? serverError.message : undefined
+              }
               validator={expirationDate.validator}
               onChange={expirationDate.handleSegmentChange}
             />
@@ -118,6 +146,9 @@ export default function PaymentForm() {
               placeholders={INPUT_FIELD_CONFIG['CVC'].placeholder}
               fieldMaxLengths={[cvc.maxLength]}
               values={[cvc.value]}
+              serverErrorMessage={
+                serverError?.code === 'INVALID_CVC' ? serverError.message : undefined
+              }
               validator={cvc.validator}
               onChange={cvc.handleChange}
             />
@@ -145,8 +176,8 @@ export default function PaymentForm() {
 
       {isFormValid && (
         <SubmitButtonContainer>
-          <SubmitButton disabled={!isFormValid}>
-            확인
+          <SubmitButton disabled={!isFormValid || submitting}>
+            {submitting ? '등록중' : '확인'}
           </SubmitButton>
         </SubmitButtonContainer>
       )}

@@ -13,6 +13,7 @@ interface InputFieldGroupProps {
   fieldMaxLengths: readonly number[];
   values: readonly string[];
   inputType?: 'text' | 'password';
+  serverErrorMessage?: string;
   validator: (inputValue: string, index: number) => ValidatorResult;
   onChange: (value: string, index: number) => void;
   inputBlocker?: (value: string) => boolean;
@@ -25,11 +26,13 @@ export default function InputFieldGroup({
   fieldMaxLengths,
   values,
   inputType = 'text',
+  serverErrorMessage,
   validator,
   onChange,
   inputBlocker = isNonDigit,
 }: InputFieldGroupProps) {
-  const { errorMessage, isErrors, refCallback, handleInputFieldChange, handleFocus, handleBlur } = useInputFieldGroup({values, fieldMaxLengths, validator, onChange, inputBlocker});
+  const { errorMessage, isErrors, refCallback, handleInputFieldChange, handleFocus, handleBlur } =
+    useInputFieldGroup({ values, fieldMaxLengths, validator, onChange, inputBlocker });
 
   return (
     <GroupContainer>
@@ -45,7 +48,7 @@ export default function InputFieldGroup({
             maxLength={fieldMaxLengths[index]}
             inputMode="numeric"
             autoComplete="off"
-            ref={(el) => refCallback(el,index)}
+            ref={(el) => refCallback(el, index)}
             value={value}
             placeholder={placeholders[index]}
             onChange={(e) => handleInputFieldChange(e.target.value, index)}
@@ -55,7 +58,9 @@ export default function InputFieldGroup({
         ))}
       </InputFieldWrapper>
 
-      <ErrorMessage>{errorMessage.trim().length > 0 && errorMessage}</ErrorMessage>
+      <ErrorMessage>
+        {serverErrorMessage || (errorMessage.trim().length > 0 && errorMessage)}
+      </ErrorMessage>
     </GroupContainer>
   );
 }

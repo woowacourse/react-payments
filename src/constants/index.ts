@@ -61,16 +61,27 @@ export const BRAND_LOGO_MAP: Record<CardBrandOrNone, string> = {
 export const DEFAULT_SEGMENT_LENGTHS = [4, 4, 4, 4] as const;
 export const DEFAULT_CVC_LENGTH = 3 as const;
 
-export const KOREAN_CARD_COMPANIES: Record<KoreanCardCompany, { label: string; color: string }> = {
-  BC: { label: 'BC카드', color: '#F04651' },
-  SHINHAN: { label: '신한카드', color: '#0046FF' },
-  KAKAO_BANK: { label: '카카오뱅크', color: '#FFE600' },
-  HYUNDAI: { label: '현대카드', color: '#000000' },
-  WOORI: { label: '우리카드', color: '#007BC8' },
-  LOTTE: { label: '롯데카드', color: '#ED1C24' },
-  HANA: { label: '하나카드', color: '#009490' },
-  KB: { label: '국민카드', color: '#6A6056' },
+export const KOREAN_CARD_COMPANIES: Record<
+  KoreanCardCompany,
+  { label: string; color: string; issuerCode: string }
+> = {
+  BC: { label: 'BC카드', color: '#F04651', issuerCode: '31' },
+  SHINHAN: { label: '신한카드', color: '#0046FF', issuerCode: '41' },
+  KAKAO_BANK: { label: '카카오뱅크', color: '#FFE600', issuerCode: '15' },
+  HYUNDAI: { label: '현대카드', color: '#000000', issuerCode: '61' },
+  WOORI: { label: '우리카드', color: '#007BC8', issuerCode: 'W1' },
+  LOTTE: { label: '롯데카드', color: '#ED1C24', issuerCode: '71' },
+  HANA: { label: '하나카드', color: '#009490', issuerCode: '21' },
+  KB: { label: '국민카드', color: '#6A6056', issuerCode: '11' },
 } as const;
+
+export function getCompanyByIssuerCode(issuerCode: string) {
+  const company = Object.values(KOREAN_CARD_COMPANIES).find((e) => e.issuerCode === issuerCode);
+  if (!company) {
+    throw new Error(`알 수 없는 issuerCode(${issuerCode})입니다.`);
+  }
+  return company;
+}
 
 export const ERROR_MESSAGE = {
   INVALID_CARD_BRAND_NUMBER: '유효한 카드 브랜드 번호를 입력해주세요.',
@@ -120,5 +131,7 @@ export const VALIDATION_RULE = {
 
 export const ROUTES = {
   HOME: '/',
-  COMPLETE: '/complete',
+  CARDS: '/cards',
 } as const;
+
+export const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');

@@ -1,5 +1,5 @@
 import ServiceLayout from '../components/Layout/ServiceLayout';
 
-export default function PaymentPage() {
+export default function CardRegistrationPage() {
   return <ServiceLayout />;
 }

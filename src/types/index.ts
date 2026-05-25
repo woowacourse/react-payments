@@ -38,3 +38,22 @@ export type ValidatorResult = {
 export type ValidationResult = ValidatorResult & {
   block: boolean;
 };
+
+export interface Card {
+  id: string;
+  issuerCode: string;
+  number: string;
+  expirationDate: string;
+}
+
+export interface CreateCardRequest {
+  number: string;
+  expirationDate: string;
+  cvc: string;
+  issuerCode: string;
+}
+
+export interface ApiError {
+  code: 'INVALID_CARD_NUMBER' | 'INVALID_CVC' | 'INVALID_EXPIRATION_DATE';
+  message: string;
+}

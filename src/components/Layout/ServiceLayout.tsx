@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import PaymentForm from '../Form/PaymentForm';
+import CardRegistrationForm from '../Form/CardRegistrationForm';
 
 export default function ServiceLayout() {
   return (
     <Layout>
-      <PaymentForm />
+      <CardRegistrationForm />
     </Layout>
   );
 }
