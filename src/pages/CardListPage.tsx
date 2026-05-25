@@ -20,7 +20,7 @@ export default function CardListPage() {
       <main css={mainStyle}>
         <ErrorBoundary fallback={<ErrorList onRetryFetch={handleRetryFetch} />}>
           <Suspense fallback={<SkeletonList />}>
-            <CardList cardsPromise={cardsPromise} onCountChange={(count) => setCardCount(count)} />
+            <CardList cardsPromise={cardsPromise} onCountChange={setCardCount} />
           </Suspense>
         </ErrorBoundary>
       </main>
