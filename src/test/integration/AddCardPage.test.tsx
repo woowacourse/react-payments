@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { http, HttpResponse } from 'msw';
@@ -135,5 +135,27 @@ describe('AddCardPage', () => {
     await userEvent.click(submitButton);
 
     expect(await screen.findByText('유효하지 않은 만료일입니다.')).toBeInTheDocument();
+  });
+
+  it('submit 중에는 확인 버튼이 비활성화됩니다', async () => {
+    let resolvePost: () => void;
+    server.use(
+      http.post(
+        API_ENDPOINTS.cards,
+        () =>
+          new Promise((resolve) => {
+            resolvePost = () => resolve(HttpResponse.json({ id: 'new-id' }, { status: 201 }));
+          }),
+      ),
+    );
+
+    renderAddCardPage();
+    await fillCardForm();
+
+    const submitButton = await screen.findByRole('button', { name: '확인' });
+    userEvent.click(submitButton);
+
+    await waitFor(() => expect(submitButton).toBeDisabled());
+    resolvePost!();
   });
 });

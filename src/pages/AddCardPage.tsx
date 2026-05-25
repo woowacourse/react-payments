@@ -41,7 +41,7 @@ export default function AddCardPage() {
     },
   } = useAddCardForm();
 
-  const { requestAddCard, serverValidationError, clearServerValidationError } = useAddCard(formValue);
+  const { requestAddCard, serverValidationError, clearServerValidationError, isLoading } = useAddCard(formValue);
 
   const cardNumbersRef = useRef<HTMLInputElement>(null);
   const cardCompanyRef = useRef<HTMLSelectElement>(null);
@@ -180,7 +180,7 @@ export default function AddCardPage() {
       </form>
       {isFormValid && (
         <div css={submitButtonWrapperStyle}>
-          <Button type="submit" form="add-card-form">
+          <Button type="submit" form="add-card-form" disabled={isLoading}>
             확인
           </Button>
         </div>
