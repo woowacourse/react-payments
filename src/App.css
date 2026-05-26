@@ -18,6 +18,9 @@
   --color-background-card: #333333;
   --color-background-chip: #ddcd78;
   --color-shadow-card: #0000001a;
+  --color-background-skeleton: #ebebeb;
+  --color-background-skeleton-highlight: #d6d6d6;
+  --color-border-skeleton: #f0f0f0;
 
   --color-brand-bc-card: #f04651;
   --color-brand-shinhan-card: #0046ff;

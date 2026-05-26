@@ -29,14 +29,14 @@ export default function CardCompanySelect({
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const inputValue = e.target.value;
     const error = validate(validationRules, 'onChange', inputValue);
-    onErrorUpdated([error as ErrorStatus]);
+    onErrorUpdated([error]);
     if (error) return;
     onUpdated(inputValue as CardInfo['cardCompany']);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLSelectElement>) => {
     const inputValue = e.target.value as CardInfo['cardCompany'];
-    const errorStatus = validate(validationRules, 'onBlur', inputValue) as ErrorStatus;
+    const errorStatus = validate(validationRules, 'onBlur', inputValue);
     onErrorUpdated([errorStatus]);
     if (!errorStatus) onValid(inputValue);
   };

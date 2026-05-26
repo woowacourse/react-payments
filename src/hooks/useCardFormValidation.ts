@@ -1,10 +1,12 @@
 import type { CardInfo } from '../types';
 import type { FormValue } from './useAddCardForm';
-import useCardNumbersValidation from './validation/useCardNumbersValidation';
-import useExpirationPeriodValidation from './validation/useExpirationPeriodValidation';
-import useCvcValidation from './validation/useCvcValidation';
-import useCardCompanyValidation from './validation/useCardCompanyValidation';
-import usePasswordValidation from './validation/usePasswordValidation';
+import {
+  validateCardNumbers,
+  validateExpirationPeriod,
+  validateCvc,
+  validateCardCompany,
+  validatePassword,
+} from '../utils/validation';
 
 type UseCardFormValidationParams = {
   formValue: FormValue;
@@ -21,11 +23,11 @@ export default function useCardFormValidation({
   cardNumbersTotalLength,
   cvcLength,
 }: UseCardFormValidationParams) {
-  const cardNumbers = useCardNumbersValidation(cardNumbersTotalLength);
-  const expirationPeriod = useExpirationPeriodValidation();
-  const cvc = useCvcValidation(cvcLength);
-  const cardCompany = useCardCompanyValidation();
-  const password = usePasswordValidation();
+  const cardNumbers = validateCardNumbers(cardNumbersTotalLength);
+  const expirationPeriod = validateExpirationPeriod();
+  const cvc = validateCvc(cvcLength);
+  const cardCompany = validateCardCompany();
+  const password = validatePassword();
 
   const validateCardNumbersOnComplete = (value: CardInfo['cardNumbers']) => {
     const { errorStatuses, isValid } = cardNumbers.validateOnComplete(value);

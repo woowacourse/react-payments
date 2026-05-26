@@ -1,5 +1,5 @@
-import type { BaseValidationRule, ExpirationPeriodErrorStatus, ExpirationValidationRule } from './types';
-import { isNumber, isValidMonth, isValidYear, isValidMonthAndYear } from './utils';
+import type { BaseValidationRule, CardCompany, ExpirationPeriodErrorStatus } from './types';
+import { isNumber } from './utils';
 
 export const ERROR_MESSAGES: Record<Exclude<ExpirationPeriodErrorStatus, null>, string> = {
   required: '필수 입력 항목입니다.',
@@ -21,9 +21,24 @@ export const CARD_COMPANY_OPTIONS = [
   { label: '현대카드', value: 'hyundai' },
   { label: '우리카드', value: 'woori' },
   { label: '롯데카드', value: 'lotte' },
-  { label: 'NH농협카드', value: 'nh' },
   { label: '하나카드', value: 'hana' },
-] as const;
+  { label: '국민카드', value: 'kookmin' },
+] as const satisfies readonly { label: string; value: CardCompany | '' }[];
+
+export const ISSUER_CODE_TO_COMPANY: Record<string, CardCompany> = {
+  '31': 'bc',
+  '41': 'shinhan',
+  '15': 'kakao',
+  '61': 'hyundai',
+  W1: 'woori',
+  '71': 'lotte',
+  '21': 'hana',
+  '11': 'kookmin',
+};
+
+export const COMPANY_TO_ISSUER_CODE = Object.fromEntries(
+  Object.entries(ISSUER_CODE_TO_COMPANY).map(([k, v]) => [v, k]),
+) as Record<CardCompany, string>;
 
 export const FIELD_STEP = {
   cardNumbers: 0,
@@ -40,8 +55,6 @@ export const RULES = {
     fn: (v: string) => v === '' || isNumber(v),
     on: ['onChange'],
   } satisfies BaseValidationRule,
-  validMonth: { name: 'invalidMonth', fn: isValidMonth, on: ['onBlur'] } satisfies ExpirationValidationRule,
-  validYear: { name: 'invalidYear', fn: isValidYear, on: ['onBlur'] } satisfies ExpirationValidationRule,
   exactLength: (length: number): BaseValidationRule => ({
     name: 'invalidLength',
     fn: (v: string) => v.length === length,
@@ -52,9 +65,4 @@ export const RULES = {
     fn: (v: string) => v.length === length,
     on: ['onComplete'],
   }),
-  validMonthAndYear: {
-    name: 'invalidYear',
-    fn: (v: string) => isValidMonthAndYear(v.slice(0, 2), v.slice(2, 4)),
-    on: ['onComplete'],
-  } satisfies ExpirationValidationRule,
 };

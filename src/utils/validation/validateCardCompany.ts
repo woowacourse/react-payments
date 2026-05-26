@@ -1,13 +1,14 @@
 import { RULES } from '../../constants';
 import type { CardInfo } from '../../types';
 import { validate, validateAll } from '../../utils';
-import type { FormValue } from '../useAddCardForm';
+import type { FormValue } from '../../hooks/useAddCardForm';
 
-export default function useCardCompanyValidation() {
+export function validateCardCompany() {
   const rules = [RULES.required];
 
-  const runAllValidations = (value: CardInfo['cardCompany']): FormValue['cardCompany']['errorStatuses'] =>
-    [validateAll(rules, value)] as FormValue['cardCompany']['errorStatuses'];
+  const runAllValidations = (value: CardInfo['cardCompany']): FormValue['cardCompany']['errorStatuses'] => [
+    validateAll(rules, value),
+  ];
 
   const validateOnComplete = (
     value: CardInfo['cardCompany'],
@@ -15,7 +16,7 @@ export default function useCardCompanyValidation() {
     errorStatuses: FormValue['cardCompany']['errorStatuses'];
     isValid: boolean;
   } => {
-    const errorStatus = validate(rules, 'onComplete', value) as FormValue['cardCompany']['errorStatuses'][0];
+    const errorStatus = validate(rules, 'onComplete', value);
     return {
       errorStatuses: [errorStatus],
       isValid: errorStatus === null,

@@ -17,6 +17,7 @@ interface CVCFieldProps {
   onValid: (value: CardInfo['cvc']) => void;
   validationRules: BaseValidationRule[];
   ref?: React.Ref<HTMLInputElement>;
+  serverError?: string;
 }
 
 export default function CVCField({
@@ -27,13 +28,14 @@ export default function CVCField({
   onValid,
   validationRules,
   ref,
+  serverError,
 }: CVCFieldProps) {
   const errorStatus = errorStatuses[0];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     const error = validate(validationRules, 'onChange', inputValue);
-    onErrorUpdated([error as ErrorStatus]);
+    onErrorUpdated([error]);
     if (error) return;
 
     onUpdated(inputValue);
@@ -41,13 +43,13 @@ export default function CVCField({
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    onErrorUpdated([validate(validationRules, 'onBlur', e.target.value) as ErrorStatus]);
+    onErrorUpdated([validate(validationRules, 'onBlur', e.target.value)]);
   };
 
   const formFieldProps: Omit<FormFieldProps, 'children'> = {
     title: 'CVC 번호를 입력해 주세요',
     caption: '',
-    errorMessage: errorStatus ? ERROR_MESSAGES[errorStatus] : '',
+    errorMessage: serverError ?? (errorStatus ? ERROR_MESSAGES[errorStatus] : ''),
   };
 
   return (
@@ -56,7 +58,7 @@ export default function CVCField({
       <Input
         ref={ref}
         autoFocus
-        variant={errorStatus !== null ? 'error' : 'default'}
+        variant={errorStatus !== null || serverError !== null ? 'error' : 'default'}
         value={value}
         id="cvc"
         type="text"

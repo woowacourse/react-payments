@@ -4,7 +4,9 @@ import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import AddCardCompletePage from './pages/AddCardCompletePage';
 import AddCardPage from './pages/AddCardPage';
+import CardListPage from './pages/CardListPage';
 import MobileLayout from './components/ui/MobileLayout';
+import { BASE_PATH, ROUTES } from './routes';
 
 const router = createBrowserRouter(
   [
@@ -12,16 +14,29 @@ const router = createBrowserRouter(
       path: '/',
       Component: MobileLayout,
       children: [
-        { index: true, Component: AddCardPage },
-        { path: 'complete', Component: AddCardCompletePage },
+        { index: true, Component: CardListPage },
+        { path: ROUTES.addCard, Component: AddCardPage },
+        { path: ROUTES.addCardComplete, Component: AddCardCompletePage },
       ],
     },
   ],
-  { basename: '/react-payments' },
+  { basename: BASE_PATH },
 );
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-);
+async function enableMocking() {
+  const { worker } = await import('./msw/browser');
+  return worker.start({
+    serviceWorker: {
+      url: `${BASE_PATH}/mockServiceWorker.js`,
+      options: { scope: `${BASE_PATH}/` },
+    },
+  });
+}
+
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  );
+});

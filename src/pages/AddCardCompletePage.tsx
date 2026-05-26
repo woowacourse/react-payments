@@ -2,6 +2,7 @@ import Button from '../components/ui/Button';
 import CheckIcon from '../components/ui/CheckIcon';
 import { css } from '@emotion/react';
 import { useLocation, Navigate, useNavigate } from 'react-router';
+import { ROUTES } from '../routes';
 
 interface LocationState {
   firstFourDigits: string;
@@ -21,7 +22,7 @@ export default function AddCardCompletePage() {
 
   const { firstFourDigits, cardCompany } = state as LocationState;
 
-  const handleConfirm = () => navigate('/');
+  const handleConfirm = () => navigate(ROUTES.cards);
 
   return (
     <main css={mainStyle}>
