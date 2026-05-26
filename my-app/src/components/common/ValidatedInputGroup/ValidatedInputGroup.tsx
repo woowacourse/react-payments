@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 type ValidatedInputGroupProps = {
-  errorMessage: string;
+  errorMessage?: string;
   warningMessage?: string;
   legend: string;
   children: React.ReactNode;

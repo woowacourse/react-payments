@@ -1,9 +1,2 @@
 {
-  "dependencies": {
-    "react-select": "^5.10.2",
-    "vitest": "^4.1.5"
-  },
-  "devDependencies": {
-    "msw": "^2.14.5"
-  }
 }

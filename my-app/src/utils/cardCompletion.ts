@@ -10,14 +10,14 @@ export const getCardCompletion = (cardInfo: CardInfo) => {
   const isSupportedNetwork = network !== "";
 
   const isCardNumber = cardInfo.numbers.join("").length === maxLength && isSupportedNetwork;
-  const isCompany = cardInfo.company !== "";
+  const isIssuerCode = cardInfo.issuerCode !== "";
   const isExpiry =
     cardInfo.expiry[0]?.length === EXPIRY_FIELD_MAX_LENGTH &&
     cardInfo.expiry[1]?.length === EXPIRY_FIELD_MAX_LENGTH &&
     validateExpiry(cardInfo.expiry).message === "";
   const isCvc = cardInfo.cvc.length === CVC_LENGTH;
   const isPassword = cardInfo.password.length === PASSWORD_LENGTH;
-  const isAll = isCardNumber && isCompany && isExpiry && isCvc && isPassword;
+  const isAll = isCardNumber && isIssuerCode && isExpiry && isCvc && isPassword;
 
   return {
     network,
@@ -25,7 +25,7 @@ export const getCardCompletion = (cardInfo: CardInfo) => {
     isSupportedNetwork,
     completion: {
       cardNumber: isCardNumber,
-      company: isCompany,
+      issuerCode: isIssuerCode,
       expiry: isExpiry,
       cvc: isCvc,
       password: isPassword,
