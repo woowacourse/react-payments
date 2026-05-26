@@ -12,16 +12,19 @@ import useBlur from '../useBlur';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['cvc'];
+  errorMessage?: string | null;
 }
 //cvc를 입력할 수 있는 컴포넌트
-export default function CvcField({ field }: Props) {
+export default function CvcField({ field, errorMessage }: Props) {
   const { value: cvc, set: setCvc } = field;
   const error = getCvcError(cvc);
   const { touched, handleBlur } = useBlur();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
+
     if (!isNumericInput(newValue)) return;
+
     setCvc(newValue);
   };
 
@@ -40,7 +43,7 @@ export default function CvcField({ field }: Props) {
           inputMode="numeric"
         />
       </InputContainer>
-      <ErrorMessage>{touched ? error : ''}</ErrorMessage>
+      <ErrorMessage>{errorMessage ?? (touched ? error : '')}</ErrorMessage>
     </Field>
   );
 }

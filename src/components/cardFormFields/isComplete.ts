@@ -8,7 +8,9 @@ import { getCardNumberSegments } from '../../utils/cardNetwork';
 
 export const isCardNumberComplete = (cardNumber: string[]): boolean => {
   const segments = getCardNumberSegments(cardNumber.join(''));
+
   if (cardNumber.length !== segments.length) return false;
+
   return (
     cardNumber.every((string, i) => string.length === segments[i]) &&
     cardNumber.every((string) => validateNumber(string).state) &&

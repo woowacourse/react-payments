@@ -16,6 +16,6 @@ export const Default: Story = {
   render: () => {
     const cardForm = useCardForm();
     const step = useCardStep(cardForm);
-    return <CardFormFields cardForm={cardForm} step={step} />;
+    return <CardFormFields cardForm={cardForm} step={step} submitError={null} />;
   },
 };

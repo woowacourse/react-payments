@@ -15,6 +15,8 @@ const NETWORK_LOGO_SRC: Record<string, string> = {
 
 export function getCardBrandLogoSrc(cardNumber: string): string {
   const network = detectCardNetwork(cardNumber);
+
   if (!network) return '';
+
   return NETWORK_LOGO_SRC[network] ?? '';
 }

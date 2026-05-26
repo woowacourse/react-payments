@@ -14,9 +14,10 @@ import useBlur from '../useBlur';
 
 interface Props {
   field: ReturnType<typeof useCardForm>['expireDate'];
+  errorMessage?: string | null;
 }
 //유효기간을 적을수 있는 컴포넌트
-export default function ExpireDateField({ field }: Props) {
+export default function ExpireDateField({ field, errorMessage }: Props) {
   const { value: expireDate, set: setExpireDate } = field;
   const { setRef, focusNext } = useAutoFocus();
   const error = getExpireDateError(expireDate);
@@ -27,10 +28,13 @@ export default function ExpireDateField({ field }: Props) {
     index: number,
   ) => {
     const newValue = e.target.value;
+
     if (!isNumericInput(newValue)) return;
+
     const updated = [...expireDate];
     updated[index] = newValue;
     setExpireDate(updated);
+
     if (newValue.length === 2 && index === 0) focusNext(0);
   };
 
@@ -60,7 +64,7 @@ export default function ExpireDateField({ field }: Props) {
           inputMode="numeric"
         />
       </InputContainer>
-      <ErrorMessage>{touched ? error : ''}</ErrorMessage>
+      <ErrorMessage>{errorMessage ?? (touched ? error : '')}</ErrorMessage>
     </Field>
   );
 }

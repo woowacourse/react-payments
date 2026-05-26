@@ -144,3 +144,17 @@ constants/
 - ~~중복 로직 확인 후 Form 관리 로직을 hook으로 분리~~
 
 - ~~자동 포커스~~
+
+### step3 구현 가이드
+
+- msw 연결
+- /cards 라우팅 추가 + 등록 후 이동 경로를 /cards로 변경
+- cardList 컴포넌트 구현 (status: idle | loading | success | error 분기)
+- Loading 컴포넌트 구현
+- Error 컴포넌트 구현 (재시도 버튼 포함)
+- success + 목록이 비어 있음 컴포넌트 구현
+- success + 목록이 있음 컴포넌트 구현 (각 카드에 삭제 버튼)
+- 카드 삭제 흐름 구현 (window.confirm → DELETE /cards/:id → 목록 갱신)
+- 카드 등록 흐름 구현 (등록 버튼 클릭 → POST /cards, 201 → /cards 이동, 400 { code, message } → 해당 입력 필드 아래 메시지
+  표시)
+- RTL 설치 및 사용자 관점 통합 테스트 작성 (MSW + RTL)

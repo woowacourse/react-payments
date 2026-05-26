@@ -2,15 +2,18 @@ import { getCardNumberSegments } from "../../utils/cardNetwork";
 
 export const validateNumber = (newValue: string) => {
   const errorValue = { state: true, message: "" };
+
   if (!/^\d+$/.test(newValue) && newValue) {
     errorValue.state = false;
     errorValue.message = "숫자만 입력 가능합니다";
   }
+
   return errorValue;
 }
 
 export const validateMonth = (newValue: string) => {
   const errorValue = { state: true, message: "" };
+
   if (newValue) {
     const month = Number(newValue);
 
@@ -43,6 +46,7 @@ export const validateCardNumberLength = (cardNumber: string[]) => {
   if (cardNumber.some((value, index) => value.length > 0 && value.length < segments[index])) {
     errorValue.state = false;
     errorValue.message = "카드 번호 각 칸을 모두 입력해 주세요.";
+
     return errorValue;
   }
 
@@ -102,24 +106,29 @@ export const isNumericInput = (value: string): boolean => /^\d*$/.test(value);
 
 export const getCardNumberError = (cardNumber: string[]): string => {
   const result = validateCardNumberLength(cardNumber);
+
   return result.state ? "" : result.message;
 }
 
 export const getExpireDateError = (expireDate: string[]): string => {
   const monthResult = validateMonth(expireDate[0]);
+
   if (!monthResult.state) return monthResult.message;
 
   const dateResult = validateExpireDateNotPast(expireDate);
+
   return dateResult.state ? "" : dateResult.message;
 }
 
 export const getCvcError = (cvc: string): string => {
   const result = validateCvcLength(cvc);
+
   return result.state ? "" : result.message;
 }
 
 export const getCardPasswordError = (cardPassword: string): string => {
   const result = validateCardPasswordLength(cardPassword);
+
   return result.state ? "" : result.message;
 }
 
