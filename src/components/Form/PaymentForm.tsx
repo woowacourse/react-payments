@@ -1,12 +1,7 @@
 import { ChangeEvent, SubmitEvent, useState } from 'react';
 import styled from '@emotion/styled';
 import InputFieldLayout from '../Layout/InputFieldLayout';
-import {
-  cardNumbersValidator,
-  cvcValidator,
-  expirationDateValidator,
-  passwordValidator,
-} from '../../utils/validate';
+import { expirationDateValidator } from '../../utils/validate';
 import InputFieldForm from '../Common/Form/InputFieldForm';
 import {
   CARD_ISSUER_CONFIG,
@@ -18,7 +13,11 @@ import {
 import { convertValueFormat } from '../../utils/convert';
 import CardSelect from '../Select/CardSelect';
 import { detectCardBrand, getCardIssuerBackgroundColor } from '../../utils/cards';
-import { getCardNumbersMaxLength } from '../../utils/fields';
+import {
+  getCardNumbersMaxLength,
+  isCardRegistrationComplete,
+  isFieldComplete,
+} from '../../utils/fields';
 import Button from '../Common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import CardPreview from '../Card/CardPreview/CardPreview';
@@ -46,24 +45,14 @@ export default function PaymentForm() {
   } | null>(null);
 
   const isValid =
-    cardNumbers.every(
-      (value, index) =>
-        !cardNumbersValidator(
-          value,
-          getCardNumbersMaxLength(detectCardBrand(cardNumbers), cardNumbers.length, index)
-        ).error
-    ) &&
-    cardIssuer &&
-    Object.values(expirationDate).every((value, i) => !expirationDateValidator(value, i).error) &&
-    !cvcValidator(cvc).error &&
-    !passwordValidator(password).error;
+    isCardRegistrationComplete({ cardNumbers, expirationDate, cvc, password, cardIssuer }) &&
+    !serverError;
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-
     setPassword(e.target.value);
 
-    if (!passwordValidator(value).error) setStep(6);
+    if (isFieldComplete(value, VALIDATION_RULE.PASSWORD_LENGTH)) setStep(6);
   };
 
   const handleCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +61,7 @@ export default function PaymentForm() {
 
     setCVC(value);
 
-    if (!cvcValidator(value).error) setStep(5);
+    if (isFieldComplete(value, VALIDATION_RULE.CVC_LENGTH)) setStep(5);
   };
 
   const handleExpirationDateChange =
@@ -103,16 +92,11 @@ export default function PaymentForm() {
     newCardNumbers[index] = e.target.value;
     setCardNumbers(newCardNumbers);
 
-    if (
-      newCardNumbers.every(
-        (value, index) =>
-          !cardNumbersValidator(
-            value,
-            getCardNumbersMaxLength(detectCardBrand(cardNumbers), cardNumbers.length, index)
-          ).error
-      )
-    )
-      setStep(2);
+    const brand = detectCardBrand(newCardNumbers);
+    const allComplete = newCardNumbers.every((value, i) =>
+      isFieldComplete(value, getCardNumbersMaxLength(brand, newCardNumbers.length, i))
+    );
+    if (allComplete) setStep(2);
   };
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
@@ -155,13 +139,13 @@ export default function PaymentForm() {
   const withServerError = (
     field: InputFieldConfigType,
     value: string,
-    errorField: { error: boolean; errorMessage: string }
+    localErrorField: { error: boolean; errorMessage: string } = { error: false, errorMessage: '' }
   ) => {
     const hasServerError = serverError?.field === field;
     return {
       touched: hasServerError || !!value,
-      error: hasServerError || errorField.error,
-      errorMessage: hasServerError ? serverError.message : errorField.errorMessage,
+      error: hasServerError || localErrorField.error,
+      errorMessage: hasServerError ? serverError.message : localErrorField.errorMessage,
     };
   };
 
@@ -187,7 +171,8 @@ export default function PaymentForm() {
                 value,
                 maxLength: VALIDATION_RULE.PASSWORD_LENGTH,
                 touched: !!value,
-                ...passwordValidator(value),
+                error: false,
+                errorMessage: '',
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['PASSWORD']}
               onChanges={[handlePasswordChange]}
@@ -201,7 +186,7 @@ export default function PaymentForm() {
               fields={convertValueFormat(cvc).map((value) => ({
                 value,
                 maxLength: VALIDATION_RULE.CVC_LENGTH,
-                ...withServerError('CVC', value, cvcValidator(value)),
+                ...withServerError('CVC', value),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['CVC']}
               onChanges={[handleCVCChange]}
@@ -253,7 +238,7 @@ export default function PaymentForm() {
               return {
                 value,
                 maxLength,
-                ...withServerError('CARD_NUMBERS', value, cardNumbersValidator(value, maxLength)),
+                ...withServerError('CARD_NUMBERS', value),
               };
             })}
             fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
@@ -261,7 +246,9 @@ export default function PaymentForm() {
           />
         </InputFieldLayout>
 
-        {step >= 6 && <Button disabled={!isValid}>확인</Button>}
+        {isCardRegistrationComplete({ cardNumbers, expirationDate, cvc, password, cardIssuer }) && (
+          <Button disabled={!isValid}>확인</Button>
+        )}
       </FormWrapper>
     </Container>
   );
