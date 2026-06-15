@@ -9,6 +9,7 @@ export const SELECT_FIELD_CONFIG = {
   },
 } as const;
 
+export type InputFieldConfigType = keyof typeof INPUT_FIELD_CONFIG;
 export const INPUT_FIELD_CONFIG = {
   CARD_NUMBERS: {
     id: 'cardNumbers',

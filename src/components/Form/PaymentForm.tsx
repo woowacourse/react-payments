@@ -11,6 +11,7 @@ import InputFieldForm from '../Common/Form/InputFieldForm';
 import {
   CARD_ISSUER_CONFIG,
   INPUT_FIELD_CONFIG,
+  InputFieldConfigType,
   SELECT_FIELD_CONFIG,
   VALIDATION_RULE,
 } from '../../constants';
@@ -22,7 +23,7 @@ import Button from '../Common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import CardPreview from '../Card/CardPreview/CardPreview';
 import { registerCard } from '../../apis/cards';
-import { ApiError } from '../../apis/api';
+import { ApiError, getFieldByErrorCode } from '../../apis/api';
 
 export type Step = 1 | 2 | 3 | 4 | 5 | 6;
 export type CardNumbersType = [string, string, string, string];
@@ -38,6 +39,11 @@ export default function PaymentForm() {
   const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({ month: '', year: '' });
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType | null>(null);
   const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
+
+  const [serverError, setServerError] = useState<{
+    field: InputFieldConfigType;
+    message: string;
+  } | null>(null);
 
   const isValid =
     cardNumbers.every(
@@ -61,6 +67,7 @@ export default function PaymentForm() {
   };
 
   const handleCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
+    clearServerError('CVC');
     const value = e.target.value;
 
     setCVC(value);
@@ -70,6 +77,7 @@ export default function PaymentForm() {
 
   const handleExpirationDateChange =
     (field: keyof ExpirationDateType) => (e: ChangeEvent<HTMLInputElement>) => {
+      clearServerError('EXPIRATION_DATE');
       const newExpirationDate = { ...expirationDate };
       newExpirationDate[field] = e.target.value;
       setExpirationDate(newExpirationDate);
@@ -78,8 +86,9 @@ export default function PaymentForm() {
         Object.values(newExpirationDate).every(
           (value, i) => !expirationDateValidator(value, i).error
         )
-      )
+      ) {
         setStep(4);
+      }
     };
 
   const handleCardIssuerSelect = (value: CardIssuerType | null) => {
@@ -89,6 +98,7 @@ export default function PaymentForm() {
   };
 
   const handleCardNumbersChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+    clearServerError('CARD_NUMBERS');
     const newCardNumbers = [...cardNumbers] as CardNumbersType;
     newCardNumbers[index] = e.target.value;
     setCardNumbers(newCardNumbers);
@@ -129,12 +139,30 @@ export default function PaymentForm() {
       });
     } catch (err) {
       if (err instanceof ApiError) {
-        alert(err.message);
-        // TODO: 에러 입력 필드 매핑 로직 추가
+        const field = getFieldByErrorCode(err.code);
+        if (field) setServerError({ field, message: err.message });
+        else alert('일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요');
       } else {
         alert('일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요');
       }
     }
+  };
+
+  const clearServerError = (field: InputFieldConfigType) => {
+    if (serverError?.field === field) setServerError(null);
+  };
+
+  const withServerError = (
+    field: InputFieldConfigType,
+    value: string,
+    errorField: { error: boolean; errorMessage: string }
+  ) => {
+    const hasServerError = serverError?.field === field;
+    return {
+      touched: hasServerError || !!value,
+      error: hasServerError || errorField.error,
+      errorMessage: hasServerError ? serverError.message : errorField.errorMessage,
+    };
   };
 
   return (
@@ -157,8 +185,8 @@ export default function PaymentForm() {
             <InputFieldForm
               fields={convertValueFormat(password).map((value) => ({
                 value,
-                touched: !!value,
                 maxLength: VALIDATION_RULE.PASSWORD_LENGTH,
+                touched: !!value,
                 ...passwordValidator(value),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['PASSWORD']}
@@ -172,9 +200,8 @@ export default function PaymentForm() {
             <InputFieldForm
               fields={convertValueFormat(cvc).map((value) => ({
                 value,
-                touched: !!value,
                 maxLength: VALIDATION_RULE.CVC_LENGTH,
-                ...cvcValidator(value),
+                ...withServerError('CVC', value, cvcValidator(value)),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['CVC']}
               onChanges={[handleCVCChange]}
@@ -190,9 +217,8 @@ export default function PaymentForm() {
             <InputFieldForm
               fields={convertValueFormat(expirationDate).map((value, index) => ({
                 value,
-                touched: !!value,
                 maxLength: VALIDATION_RULE.EXPIRATION_DATE_LENGTH,
-                ...expirationDateValidator(value, index),
+                ...withServerError('EXPIRATION_DATE', value, expirationDateValidator(value, index)),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['EXPIRATION_DATE']}
               onChanges={[handleExpirationDateChange('month'), handleExpirationDateChange('year')]}
@@ -226,9 +252,8 @@ export default function PaymentForm() {
 
               return {
                 value,
-                touched: !!value,
                 maxLength,
-                ...cardNumbersValidator(value, maxLength),
+                ...withServerError('CARD_NUMBERS', value, cardNumbersValidator(value, maxLength)),
               };
             })}
             fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
