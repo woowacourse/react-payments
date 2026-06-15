@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ChangeEvent, KeyboardEvent, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useRef } from 'react';
 import Label from '../Label/Label';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { InputFieldConfig } from '../../../types/field';
@@ -21,9 +21,8 @@ interface Props {
 export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const [activeFieldIdx, setActiveFieldIdx] = useState<number | null>(null);
-
-  const errorMessage = activeFieldIdx !== null ? fields[activeFieldIdx].errorMessage : '';
+  const errorField = fields.find(({ touched, error }) => touched && error);
+  const errorMessage = errorField?.errorMessage ?? '';
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -78,14 +77,12 @@ export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props
             value={value}
             placeholder={fieldConfig.placeholder[index]}
             onChange={(e) => handleChange(e, index, onChanges[index], maxLength)}
-            onFocus={() => setActiveFieldIdx(index)}
-            onBlur={() => setActiveFieldIdx(null)}
             onKeyDown={(e) => handleKeyDown(e, index)}
           />
         ))}
       </InputFieldWrapper>
 
-      {errorMessage.length > 0 && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </FormContainer>
   );
 }
