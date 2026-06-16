@@ -1,4 +1,9 @@
+import { CardNumbersType, ExpirationDateType } from '../components/Form/PaymentForm';
 import { InputFieldConfig } from '../types/field';
+import { detectCardBrand } from '../utils/cards';
+import { getCardNumbersMaxLength, isFieldComplete } from '../utils/fields';
+import { expirationDateValidator } from '../utils/validate';
+import { VALIDATION_RULE } from './validation';
 
 export const SELECT_FIELD_CONFIG = {
   CARD_ISSUER: {
@@ -43,3 +48,32 @@ export const INPUT_FIELD_CONFIG = {
     placeholder: ['**'],
   },
 } satisfies Record<string, InputFieldConfig>;
+
+export const FIELD_STEP_SEQUENCE = [
+  {
+    name: 'cardNumbers',
+    isComplete: (cardNumbers: CardNumbersType) => {
+      const brand = detectCardBrand(cardNumbers);
+      return cardNumbers.every((value, i) =>
+        isFieldComplete(value, getCardNumbersMaxLength(brand, cardNumbers.length, i))
+      );
+    },
+  },
+  {
+    name: 'cardIssuer',
+    isComplete: (value: string | null) => !!value,
+  },
+  {
+    name: 'expirationDate',
+    isComplete: (expirationDate: ExpirationDateType) =>
+      Object.values(expirationDate).every((value, i) => !expirationDateValidator(value, i).error),
+  },
+  {
+    name: 'cvc',
+    isComplete: (value: string) => isFieldComplete(value, VALIDATION_RULE.CVC_LENGTH),
+  },
+  {
+    name: 'password',
+    isComplete: (value: string) => isFieldComplete(value, VALIDATION_RULE.PASSWORD_LENGTH),
+  },
+];

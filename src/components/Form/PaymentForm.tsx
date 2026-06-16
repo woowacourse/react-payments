@@ -5,6 +5,7 @@ import { expirationDateValidator } from '../../utils/validate';
 import InputFieldForm from '../Common/Form/InputFieldForm';
 import {
   CARD_ISSUER_CONFIG,
+  FIELD_STEP_SEQUENCE,
   INPUT_FIELD_CONFIG,
   InputFieldConfigType,
   SELECT_FIELD_CONFIG,
@@ -13,18 +14,13 @@ import {
 import { convertValueFormat } from '../../utils/convert';
 import CardSelect from '../Select/CardSelect';
 import { detectCardBrand, getCardIssuerBackgroundColor } from '../../utils/cards';
-import {
-  getCardNumbersMaxLength,
-  isCardRegistrationComplete,
-  isFieldComplete,
-} from '../../utils/fields';
+import { getCardNumbersMaxLength, isCardRegistrationComplete } from '../../utils/fields';
 import Button from '../Common/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import CardPreview from '../Card/CardPreview/CardPreview';
 import { registerCard } from '../../apis/cards';
 import { ApiError, getFieldByErrorCode } from '../../apis/api';
 
-export type Step = 1 | 2 | 3 | 4 | 5 | 6;
 export type CardNumbersType = [string, string, string, string];
 export type ExpirationDateType = { month: string; year: string };
 export type CardIssuerType = (typeof CARD_ISSUER_CONFIG)[keyof typeof CARD_ISSUER_CONFIG]['name'];
@@ -32,7 +28,7 @@ export type CardIssuerType = (typeof CARD_ISSUER_CONFIG)[keyof typeof CARD_ISSUE
 export default function PaymentForm() {
   const navigate = useNavigate();
 
-  const [step, setStep] = useState<Step>(1);
+  const [step, setStep] = useState<number>(1);
   const [password, setPassword] = useState<string>('');
   const [cvc, setCVC] = useState<string>('');
   const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({ month: '', year: '' });
@@ -52,16 +48,15 @@ export default function PaymentForm() {
     const value = e.target.value;
     setPassword(e.target.value);
 
-    if (isFieldComplete(value, VALIDATION_RULE.PASSWORD_LENGTH)) setStep(6);
+    advanceStep('password', value);
   };
 
   const handleCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
     clearServerError('CVC');
     const value = e.target.value;
-
     setCVC(value);
 
-    if (isFieldComplete(value, VALIDATION_RULE.CVC_LENGTH)) setStep(5);
+    advanceStep('cvc', value);
   };
 
   const handleExpirationDateChange =
@@ -71,19 +66,12 @@ export default function PaymentForm() {
       newExpirationDate[field] = e.target.value;
       setExpirationDate(newExpirationDate);
 
-      if (
-        Object.values(newExpirationDate).every(
-          (value, i) => !expirationDateValidator(value, i).error
-        )
-      ) {
-        setStep(4);
-      }
+      advanceStep('expirationDate', newExpirationDate);
     };
 
   const handleCardIssuerSelect = (value: CardIssuerType | null) => {
     setCardIssuer(value);
-
-    if (value) setStep(3);
+    advanceStep('cardIssuer', value);
   };
 
   const handleCardNumbersChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
@@ -92,11 +80,7 @@ export default function PaymentForm() {
     newCardNumbers[index] = e.target.value;
     setCardNumbers(newCardNumbers);
 
-    const brand = detectCardBrand(newCardNumbers);
-    const allComplete = newCardNumbers.every((value, i) =>
-      isFieldComplete(value, getCardNumbersMaxLength(brand, newCardNumbers.length, i))
-    );
-    if (allComplete) setStep(2);
+    advanceStep('cardNumbers', newCardNumbers);
   };
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
@@ -130,6 +114,12 @@ export default function PaymentForm() {
         alert('일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요');
       }
     }
+  };
+
+  const advanceStep = <T,>(fieldName: string, value: T) => {
+    const index = FIELD_STEP_SEQUENCE.findIndex((f) => f.name === fieldName);
+
+    if (FIELD_STEP_SEQUENCE[index].isComplete(value)) setStep(index + 2);
   };
 
   const clearServerError = (field: InputFieldConfigType) => {
