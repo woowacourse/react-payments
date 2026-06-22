@@ -18,7 +18,7 @@ interface Props {
   onChanges: ((e: ChangeEvent<HTMLInputElement>) => void)[];
 }
 
-export default function InputFieldForm({ fields, fieldConfig, onChanges }: Props) {
+export default function FieldSet({ fields, fieldConfig, onChanges }: Props) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const errorField = fields.find(({ touched, error }) => touched && error);

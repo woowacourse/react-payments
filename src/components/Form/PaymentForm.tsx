@@ -1,8 +1,8 @@
 import { ChangeEvent, SubmitEvent } from 'react';
 import styled from '@emotion/styled';
-import InputFieldLayout from '../Layout/InputFieldLayout';
+import FieldLayout from '../Layout/FieldLayout';
 import { expirationDateValidator } from '../../utils/validate';
-import InputFieldForm from '../Common/Form/InputFieldForm';
+import FieldSet from '../Common/Form/FieldSet';
 import {
   CARD_ISSUER_CONFIG,
   INPUT_FIELD_CONFIG,
@@ -98,11 +98,11 @@ export default function PaymentForm() {
 
       <FormWrapper onSubmit={handleSubmit}>
         {step >= 5 && (
-          <InputFieldLayout
+          <FieldLayout
             sectionTitle={INPUT_FIELD_CONFIG['password'].sectionTitle}
             hintText={INPUT_FIELD_CONFIG['password'].hintText}
           >
-            <InputFieldForm
+            <FieldSet
               fields={convertValueFormat(values.password).map((value) => ({
                 value,
                 maxLength: VALIDATION_RULE.PASSWORD_LENGTH,
@@ -113,12 +113,12 @@ export default function PaymentForm() {
               fieldConfig={INPUT_FIELD_CONFIG['password']}
               onChanges={[(e: ChangeEvent<HTMLInputElement>) => handleTextChange('password')(e)]}
             />
-          </InputFieldLayout>
+          </FieldLayout>
         )}
 
         {step >= 4 && (
-          <InputFieldLayout sectionTitle={INPUT_FIELD_CONFIG['cvc'].sectionTitle}>
-            <InputFieldForm
+          <FieldLayout sectionTitle={INPUT_FIELD_CONFIG['cvc'].sectionTitle}>
+            <FieldSet
               fields={convertValueFormat(values.cvc).map((value) => ({
                 value,
                 maxLength: VALIDATION_RULE.CVC_LENGTH,
@@ -127,15 +127,15 @@ export default function PaymentForm() {
               fieldConfig={INPUT_FIELD_CONFIG['cvc']}
               onChanges={[(e: ChangeEvent<HTMLInputElement>) => handleTextChange('cvc')(e)]}
             />
-          </InputFieldLayout>
+          </FieldLayout>
         )}
 
         {step >= 3 && (
-          <InputFieldLayout
+          <FieldLayout
             sectionTitle={INPUT_FIELD_CONFIG['expirationDate'].sectionTitle}
             hintText={INPUT_FIELD_CONFIG['expirationDate'].hintText}
           >
-            <InputFieldForm
+            <FieldSet
               fields={convertValueFormat(values.expirationDate).map((value, index) => ({
                 value,
                 maxLength: VALIDATION_RULE.EXPIRATION_DATE_LENGTH,
@@ -144,11 +144,11 @@ export default function PaymentForm() {
               fieldConfig={INPUT_FIELD_CONFIG['expirationDate']}
               onChanges={[handleExpirationChange('month'), handleExpirationChange('year')]}
             />
-          </InputFieldLayout>
+          </FieldLayout>
         )}
 
         {step >= 2 && (
-          <InputFieldLayout
+          <FieldLayout
             sectionTitle={SELECT_FIELD_CONFIG['cardIssuer'].sectionTitle}
             hintText={SELECT_FIELD_CONFIG['cardIssuer'].hintText}
           >
@@ -156,14 +156,14 @@ export default function PaymentForm() {
               fieldConfig={SELECT_FIELD_CONFIG['cardIssuer']}
               onChange={selectCardIssuer}
             />
-          </InputFieldLayout>
+          </FieldLayout>
         )}
 
-        <InputFieldLayout
+        <FieldLayout
           sectionTitle={INPUT_FIELD_CONFIG['cardNumbers'].sectionTitle}
           hintText={INPUT_FIELD_CONFIG['cardNumbers'].hintText}
         >
-          <InputFieldForm
+          <FieldSet
             fields={convertValueFormat(values.cardNumbers).map((value, index) => {
               const maxLength = getCardNumbersMaxLength(
                 detectCardBrand(values.cardNumbers),
@@ -180,7 +180,7 @@ export default function PaymentForm() {
             fieldConfig={INPUT_FIELD_CONFIG['cardNumbers']}
             onChanges={[0, 1, 2, 3].map(handleCardNumberChange)}
           />
-        </InputFieldLayout>
+        </FieldLayout>
 
         {isCardRegistrationComplete({
           cardNumbers: values.cardNumbers,
