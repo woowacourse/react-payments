@@ -1,11 +1,10 @@
-import { ChangeEvent, SubmitEvent, useState } from 'react';
+import { ChangeEvent, SubmitEvent } from 'react';
 import styled from '@emotion/styled';
 import InputFieldLayout from '../Layout/InputFieldLayout';
 import { expirationDateValidator } from '../../utils/validate';
 import InputFieldForm from '../Common/Form/InputFieldForm';
 import {
   CARD_ISSUER_CONFIG,
-  FIELD_STEP_SEQUENCE,
   INPUT_FIELD_CONFIG,
   InputFieldConfigType,
   SELECT_FIELD_CONFIG,
@@ -20,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import CardPreview from '../Card/CardPreview/CardPreview';
 import { registerCard } from '../../apis/cards';
 import { ApiError, getFieldByErrorCode } from '../../apis/api';
+import useCardForm from '../../hooks/useCardForm';
 
 export type CardNumbersType = [string, string, string, string];
 export type ExpirationDateType = { month: string; year: string };
@@ -27,81 +27,37 @@ export type CardIssuerType = (typeof CARD_ISSUER_CONFIG)[keyof typeof CARD_ISSUE
 
 export default function PaymentForm() {
   const navigate = useNavigate();
-
-  const [step, setStep] = useState<number>(1);
-  const [password, setPassword] = useState<string>('');
-  const [cvc, setCVC] = useState<string>('');
-  const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({ month: '', year: '' });
-  const [cardIssuer, setCardIssuer] = useState<CardIssuerType | null>(null);
-  const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
-
-  const [serverError, setServerError] = useState<{
-    field: InputFieldConfigType;
-    message: string;
-  } | null>(null);
-
-  const isValid =
-    isCardRegistrationComplete({ cardNumbers, expirationDate, cvc, password, cardIssuer }) &&
-    !serverError;
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setPassword(e.target.value);
-
-    advanceStep('password', value);
-  };
-
-  const handleCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
-    clearServerError('CVC');
-    const value = e.target.value;
-    setCVC(value);
-
-    advanceStep('cvc', value);
-  };
-
-  const handleExpirationDateChange =
-    (field: keyof ExpirationDateType) => (e: ChangeEvent<HTMLInputElement>) => {
-      clearServerError('EXPIRATION_DATE');
-      const newExpirationDate = { ...expirationDate };
-      newExpirationDate[field] = e.target.value;
-      setExpirationDate(newExpirationDate);
-
-      advanceStep('expirationDate', newExpirationDate);
-    };
-
-  const handleCardIssuerSelect = (value: CardIssuerType | null) => {
-    setCardIssuer(value);
-    advanceStep('cardIssuer', value);
-  };
-
-  const handleCardNumbersChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-    clearServerError('CARD_NUMBERS');
-    const newCardNumbers = [...cardNumbers] as CardNumbersType;
-    newCardNumbers[index] = e.target.value;
-    setCardNumbers(newCardNumbers);
-
-    advanceStep('cardNumbers', newCardNumbers);
-  };
+  const {
+    values,
+    step,
+    serverError,
+    setServerError,
+    isValid,
+    handleCardNumberChange,
+    handleExpirationChange,
+    handleTextChange,
+    selectCardIssuer,
+  } = useCardForm();
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const issuer = Object.values(CARD_ISSUER_CONFIG).filter(
-      (issuer) => issuer.name === cardIssuer
+      (issuer) => issuer.name === values.cardIssuer
     )[0];
 
     try {
       await registerCard({
-        number: cardNumbers.join(''),
-        expirationDate: `${expirationDate['month']}/${expirationDate['year']}`,
-        cvc,
+        number: values.cardNumbers.join(''),
+        expirationDate: `${values.expirationDate['month']}/${values.expirationDate['year']}`,
+        cvc: values.cvc,
         issuerCode: issuer.issuerCode,
       });
 
       navigate('/registration/completion', {
         state: {
-          prefix: cardNumbers[0],
-          cardIssuer,
+          prefix: values.cardNumbers[0],
+          cardIssuer: values.cardIssuer,
         },
         replace: true,
       });
@@ -114,16 +70,6 @@ export default function PaymentForm() {
         alert('일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요');
       }
     }
-  };
-
-  const advanceStep = <T,>(fieldName: string, value: T) => {
-    const index = FIELD_STEP_SEQUENCE.findIndex((f) => f.name === fieldName);
-
-    if (FIELD_STEP_SEQUENCE[index].isComplete(value)) setStep(index + 2);
-  };
-
-  const clearServerError = (field: InputFieldConfigType) => {
-    if (serverError?.field === field) setServerError(null);
   };
 
   const withServerError = (
@@ -143,11 +89,11 @@ export default function PaymentForm() {
     <Container>
       <CardPreview
         fields={{
-          cardNumbers,
-          expirationDate: `${expirationDate['month']}/${expirationDate['year']}`,
+          cardNumbers: values.cardNumbers,
+          expirationDate: `${values.expirationDate['month']}/${values.expirationDate['year']}`,
         }}
-        cardBrand={detectCardBrand(cardNumbers)}
-        backgroundColor={getCardIssuerBackgroundColor(cardIssuer)}
+        cardBrand={detectCardBrand(values.cardNumbers)}
+        backgroundColor={getCardIssuerBackgroundColor(values.cardIssuer)}
       />
 
       <FormWrapper onSubmit={handleSubmit}>
@@ -157,7 +103,7 @@ export default function PaymentForm() {
             hintText={INPUT_FIELD_CONFIG['PASSWORD'].hintText}
           >
             <InputFieldForm
-              fields={convertValueFormat(password).map((value) => ({
+              fields={convertValueFormat(values.password).map((value) => ({
                 value,
                 maxLength: VALIDATION_RULE.PASSWORD_LENGTH,
                 touched: !!value,
@@ -165,7 +111,7 @@ export default function PaymentForm() {
                 errorMessage: '',
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['PASSWORD']}
-              onChanges={[handlePasswordChange]}
+              onChanges={[(e: ChangeEvent<HTMLInputElement>) => handleTextChange('password')(e)]}
             />
           </InputFieldLayout>
         )}
@@ -173,13 +119,13 @@ export default function PaymentForm() {
         {step >= 4 && (
           <InputFieldLayout sectionTitle={INPUT_FIELD_CONFIG['CVC'].sectionTitle}>
             <InputFieldForm
-              fields={convertValueFormat(cvc).map((value) => ({
+              fields={convertValueFormat(values.cvc).map((value) => ({
                 value,
                 maxLength: VALIDATION_RULE.CVC_LENGTH,
                 ...withServerError('CVC', value),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['CVC']}
-              onChanges={[handleCVCChange]}
+              onChanges={[(e: ChangeEvent<HTMLInputElement>) => handleTextChange('cvc')(e)]}
             />
           </InputFieldLayout>
         )}
@@ -190,13 +136,13 @@ export default function PaymentForm() {
             hintText={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].hintText}
           >
             <InputFieldForm
-              fields={convertValueFormat(expirationDate).map((value, index) => ({
+              fields={convertValueFormat(values.expirationDate).map((value, index) => ({
                 value,
                 maxLength: VALIDATION_RULE.EXPIRATION_DATE_LENGTH,
                 ...withServerError('EXPIRATION_DATE', value, expirationDateValidator(value, index)),
               }))}
               fieldConfig={INPUT_FIELD_CONFIG['EXPIRATION_DATE']}
-              onChanges={[handleExpirationDateChange('month'), handleExpirationDateChange('year')]}
+              onChanges={[handleExpirationChange('month'), handleExpirationChange('year')]}
             />
           </InputFieldLayout>
         )}
@@ -208,7 +154,7 @@ export default function PaymentForm() {
           >
             <CardSelect
               fieldConfig={SELECT_FIELD_CONFIG['CARD_ISSUER']}
-              onChange={handleCardIssuerSelect}
+              onChange={selectCardIssuer}
             />
           </InputFieldLayout>
         )}
@@ -218,10 +164,10 @@ export default function PaymentForm() {
           hintText={INPUT_FIELD_CONFIG['CARD_NUMBERS'].hintText}
         >
           <InputFieldForm
-            fields={convertValueFormat(cardNumbers).map((value, index) => {
+            fields={convertValueFormat(values.cardNumbers).map((value, index) => {
               const maxLength = getCardNumbersMaxLength(
-                detectCardBrand(cardNumbers),
-                cardNumbers.length,
+                detectCardBrand(values.cardNumbers),
+                values.cardNumbers.length,
                 index
               );
 
@@ -232,13 +178,17 @@ export default function PaymentForm() {
               };
             })}
             fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
-            onChanges={[0, 1, 2, 3].map(handleCardNumbersChange)}
+            onChanges={[0, 1, 2, 3].map(handleCardNumberChange)}
           />
         </InputFieldLayout>
 
-        {isCardRegistrationComplete({ cardNumbers, expirationDate, cvc, password, cardIssuer }) && (
-          <Button disabled={!isValid}>확인</Button>
-        )}
+        {isCardRegistrationComplete({
+          cardNumbers: values.cardNumbers,
+          expirationDate: values.expirationDate,
+          cvc: values.cvc,
+          password: values.password,
+          cardIssuer: values.cardIssuer,
+        }) && <Button disabled={!isValid}>확인</Button>}
       </FormWrapper>
     </Container>
   );
