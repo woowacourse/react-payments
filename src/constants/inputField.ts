@@ -6,7 +6,7 @@ import { expirationDateValidator } from '../utils/validate';
 import { VALIDATION_RULE } from './validation';
 
 export const SELECT_FIELD_CONFIG = {
-  CARD_ISSUER: {
+  cardIssuer: {
     id: 'cardIssuer',
     sectionTitle: '카드사를 선택해 주세요',
     hintText: '현재 국내 카드사만 가능합니다',
@@ -16,7 +16,7 @@ export const SELECT_FIELD_CONFIG = {
 
 export type InputFieldConfigType = keyof typeof INPUT_FIELD_CONFIG;
 export const INPUT_FIELD_CONFIG = {
-  CARD_NUMBERS: {
+  cardNumbers: {
     id: 'cardNumbers',
     type: 'text',
     sectionTitle: '결제할 카드 번호를 입력해 주세요',
@@ -24,7 +24,7 @@ export const INPUT_FIELD_CONFIG = {
     label: '카드 번호',
     placeholder: ['1234', '1234', '1234', '1234'],
   },
-  EXPIRATION_DATE: {
+  expirationDate: {
     id: 'expirationDate',
     type: 'text',
     sectionTitle: '카드 유효기간을 입력해 주세요',
@@ -32,14 +32,14 @@ export const INPUT_FIELD_CONFIG = {
     label: '유효 기간',
     placeholder: ['MM', 'YY'],
   },
-  CVC: {
+  cvc: {
     id: 'cvc',
     type: 'text',
     sectionTitle: 'CVC 번호를 입력해 주세요',
     label: 'CVC',
     placeholder: ['123'],
   },
-  PASSWORD: {
+  password: {
     id: 'password',
     type: 'password',
     sectionTitle: '비밀번호를 입력해 주세요',

@@ -99,8 +99,8 @@ export default function PaymentForm() {
       <FormWrapper onSubmit={handleSubmit}>
         {step >= 5 && (
           <InputFieldLayout
-            sectionTitle={INPUT_FIELD_CONFIG['PASSWORD'].sectionTitle}
-            hintText={INPUT_FIELD_CONFIG['PASSWORD'].hintText}
+            sectionTitle={INPUT_FIELD_CONFIG['password'].sectionTitle}
+            hintText={INPUT_FIELD_CONFIG['password'].hintText}
           >
             <InputFieldForm
               fields={convertValueFormat(values.password).map((value) => ({
@@ -110,21 +110,21 @@ export default function PaymentForm() {
                 error: false,
                 errorMessage: '',
               }))}
-              fieldConfig={INPUT_FIELD_CONFIG['PASSWORD']}
+              fieldConfig={INPUT_FIELD_CONFIG['password']}
               onChanges={[(e: ChangeEvent<HTMLInputElement>) => handleTextChange('password')(e)]}
             />
           </InputFieldLayout>
         )}
 
         {step >= 4 && (
-          <InputFieldLayout sectionTitle={INPUT_FIELD_CONFIG['CVC'].sectionTitle}>
+          <InputFieldLayout sectionTitle={INPUT_FIELD_CONFIG['cvc'].sectionTitle}>
             <InputFieldForm
               fields={convertValueFormat(values.cvc).map((value) => ({
                 value,
                 maxLength: VALIDATION_RULE.CVC_LENGTH,
-                ...withServerError('CVC', value),
+                ...withServerError('cvc', value),
               }))}
-              fieldConfig={INPUT_FIELD_CONFIG['CVC']}
+              fieldConfig={INPUT_FIELD_CONFIG['cvc']}
               onChanges={[(e: ChangeEvent<HTMLInputElement>) => handleTextChange('cvc')(e)]}
             />
           </InputFieldLayout>
@@ -132,16 +132,16 @@ export default function PaymentForm() {
 
         {step >= 3 && (
           <InputFieldLayout
-            sectionTitle={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].sectionTitle}
-            hintText={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].hintText}
+            sectionTitle={INPUT_FIELD_CONFIG['expirationDate'].sectionTitle}
+            hintText={INPUT_FIELD_CONFIG['expirationDate'].hintText}
           >
             <InputFieldForm
               fields={convertValueFormat(values.expirationDate).map((value, index) => ({
                 value,
                 maxLength: VALIDATION_RULE.EXPIRATION_DATE_LENGTH,
-                ...withServerError('EXPIRATION_DATE', value, expirationDateValidator(value, index)),
+                ...withServerError('expirationDate', value, expirationDateValidator(value, index)),
               }))}
-              fieldConfig={INPUT_FIELD_CONFIG['EXPIRATION_DATE']}
+              fieldConfig={INPUT_FIELD_CONFIG['expirationDate']}
               onChanges={[handleExpirationChange('month'), handleExpirationChange('year')]}
             />
           </InputFieldLayout>
@@ -149,19 +149,19 @@ export default function PaymentForm() {
 
         {step >= 2 && (
           <InputFieldLayout
-            sectionTitle={SELECT_FIELD_CONFIG['CARD_ISSUER'].sectionTitle}
-            hintText={SELECT_FIELD_CONFIG['CARD_ISSUER'].hintText}
+            sectionTitle={SELECT_FIELD_CONFIG['cardIssuer'].sectionTitle}
+            hintText={SELECT_FIELD_CONFIG['cardIssuer'].hintText}
           >
             <CardSelect
-              fieldConfig={SELECT_FIELD_CONFIG['CARD_ISSUER']}
+              fieldConfig={SELECT_FIELD_CONFIG['cardIssuer']}
               onChange={selectCardIssuer}
             />
           </InputFieldLayout>
         )}
 
         <InputFieldLayout
-          sectionTitle={INPUT_FIELD_CONFIG['CARD_NUMBERS'].sectionTitle}
-          hintText={INPUT_FIELD_CONFIG['CARD_NUMBERS'].hintText}
+          sectionTitle={INPUT_FIELD_CONFIG['cardNumbers'].sectionTitle}
+          hintText={INPUT_FIELD_CONFIG['cardNumbers'].hintText}
         >
           <InputFieldForm
             fields={convertValueFormat(values.cardNumbers).map((value, index) => {
@@ -174,10 +174,10 @@ export default function PaymentForm() {
               return {
                 value,
                 maxLength,
-                ...withServerError('CARD_NUMBERS', value),
+                ...withServerError('cardNumbers', value),
               };
             })}
-            fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
+            fieldConfig={INPUT_FIELD_CONFIG['cardNumbers']}
             onChanges={[0, 1, 2, 3].map(handleCardNumberChange)}
           />
         </InputFieldLayout>

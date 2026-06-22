@@ -4,9 +4,9 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export type ApiErrorCode = 'INVALID_CARD_NUMBER' | 'INVALID_CVC' | 'INVALID_EXPIRATION_DATE';
 export const ERROR_CODE_TO_FIELD: Record<ApiErrorCode, InputFieldConfigType> = {
-  INVALID_CARD_NUMBER: 'CARD_NUMBERS',
-  INVALID_CVC: 'CVC',
-  INVALID_EXPIRATION_DATE: 'EXPIRATION_DATE',
+  INVALID_CARD_NUMBER: 'cardNumbers',
+  INVALID_CVC: 'cvc',
+  INVALID_EXPIRATION_DATE: 'expirationDate',
 };
 
 export const getFieldByErrorCode = (code: string): InputFieldConfigType | null =>

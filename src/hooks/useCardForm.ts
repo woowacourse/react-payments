@@ -17,12 +17,6 @@ type FormValues = {
 
 type ServerError = { field: InputFieldConfigType; message: string } | null;
 
-const SERVER_ERROR_FIELD: Partial<Record<keyof FormValues, InputFieldConfigType>> = {
-  cardNumbers: 'CARD_NUMBERS',
-  expirationDate: 'EXPIRATION_DATE',
-  cvc: 'CVC',
-};
-
 const useCardForm = () => {
   const [values, setValues] = useState<FormValues>({
     cardNumbers: ['', '', '', ''],
@@ -63,8 +57,7 @@ const useCardForm = () => {
   };
 
   const clearServerError = (name: keyof FormValues) => {
-    const field = SERVER_ERROR_FIELD[name];
-    if (field && serverError?.field === field) setServerError(null);
+    if (serverError?.field === name) setServerError(null);
   };
 
   const isValid = isCardRegistrationComplete(values) && !serverError;
