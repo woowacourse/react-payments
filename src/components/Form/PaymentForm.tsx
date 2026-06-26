@@ -1,220 +1,194 @@
-import { ChangeEvent, SubmitEvent, useState } from 'react';
+import { ChangeEvent, SubmitEvent } from 'react';
 import styled from '@emotion/styled';
-import CardPreview from '../CardPreview/CardPreview';
-import InputFieldLayout from '../Layout/InputFieldLayout';
-import {
-  cardNumbersValidator,
-  cvcValidator,
-  expirationDateValidator,
-  passwordValidator,
-} from '../../utils/validate';
-import InputFieldForm from '../Common/Form/InputFieldForm';
+import FieldLayout from '../Layout/FieldLayout';
+import { expirationDateValidator } from '../../utils/validate';
+import FieldSet from '../Common/Form/FieldSet';
 import {
   CARD_ISSUER_CONFIG,
   INPUT_FIELD_CONFIG,
+  InputFieldConfigType,
   SELECT_FIELD_CONFIG,
   VALIDATION_RULE,
 } from '../../constants';
 import { convertValueFormat } from '../../utils/convert';
 import CardSelect from '../Select/CardSelect';
 import { detectCardBrand, getCardIssuerBackgroundColor } from '../../utils/cards';
-import { getCardNumbersMaxLength } from '../../utils/fields';
+import { getCardNumbersMaxLength, isCardRegistrationComplete } from '../../utils/fields';
 import Button from '../Common/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import CardPreview from '../Card/CardPreview/CardPreview';
+import { registerCard } from '../../apis/cards';
+import { ApiError, getFieldByErrorCode } from '../../apis/api';
+import useCardForm from '../../hooks/useCardForm';
 
-export type Step = 1 | 2 | 3 | 4 | 5 | 6;
 export type CardNumbersType = [string, string, string, string];
 export type ExpirationDateType = { month: string; year: string };
 export type CardIssuerType = (typeof CARD_ISSUER_CONFIG)[keyof typeof CARD_ISSUER_CONFIG]['name'];
 
 export default function PaymentForm() {
   const navigate = useNavigate();
+  const {
+    values,
+    step,
+    serverError,
+    setServerError,
+    isValid,
+    handleCardNumberChange,
+    handleExpirationChange,
+    handleTextChange,
+    selectCardIssuer,
+  } = useCardForm();
 
-  const [step, setStep] = useState<Step>(1);
-  const [password, setPassword] = useState<string>('');
-  const [cvc, setCVC] = useState<string>('');
-  const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({ month: '', year: '' });
-  const [cardIssuer, setCardIssuer] = useState<CardIssuerType | null>(null);
-  const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(['', '', '', '']);
-
-  const isValid =
-    cardNumbers.every(
-      (value, index) =>
-        !cardNumbersValidator(
-          value,
-          getCardNumbersMaxLength(detectCardBrand(cardNumbers), cardNumbers.length, index)
-        ).error
-    ) &&
-    cardIssuer &&
-    Object.values(expirationDate).every((value, i) => !expirationDateValidator(value, i).error) &&
-    !cvcValidator(cvc).error &&
-    !passwordValidator(password).error;
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
-    setPassword(e.target.value);
-
-    if (!passwordValidator(value).error) setStep(6);
-  };
-
-  const handleCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
-    setCVC(value);
-
-    if (!cvcValidator(value).error) setStep(5);
-  };
-
-  const handleExpirationDateChange =
-    (field: keyof ExpirationDateType) => (e: ChangeEvent<HTMLInputElement>) => {
-      const newExpirationDate = { ...expirationDate };
-      newExpirationDate[field] = e.target.value;
-      setExpirationDate(newExpirationDate);
-
-      if (
-        Object.values(newExpirationDate).every(
-          (value, i) => !expirationDateValidator(value, i).error
-        )
-      )
-        setStep(4);
-    };
-
-  const handleCardIssuerSelect = (value: CardIssuerType | null) => {
-    setCardIssuer(value);
-
-    if (value) setStep(3);
-  };
-
-  const handleCardNumbersChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-    const newCardNumbers = [...cardNumbers] as CardNumbersType;
-    newCardNumbers[index] = e.target.value;
-    setCardNumbers(newCardNumbers);
-
-    if (
-      newCardNumbers.every(
-        (value, index) =>
-          !cardNumbersValidator(
-            value,
-            getCardNumbersMaxLength(detectCardBrand(cardNumbers), cardNumbers.length, index)
-          ).error
-      )
-    )
-      setStep(2);
-  };
-
-  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    navigate('/registration/completion', {
-      state: {
-        prefix: cardNumbers[0],
-        cardIssuer,
-      },
-      replace: true,
-    });
+    const issuer = Object.values(CARD_ISSUER_CONFIG).filter(
+      (issuer) => issuer.name === values.cardIssuer
+    )[0];
+
+    try {
+      await registerCard({
+        number: values.cardNumbers.join(''),
+        expirationDate: `${values.expirationDate['month']}/${values.expirationDate['year']}`,
+        cvc: values.cvc,
+        issuerCode: issuer.issuerCode,
+      });
+
+      navigate('/registration/completion', {
+        state: {
+          prefix: values.cardNumbers[0],
+          cardIssuer: values.cardIssuer,
+        },
+        replace: true,
+      });
+    } catch (err) {
+      if (err instanceof ApiError) {
+        const field = getFieldByErrorCode(err.code);
+        if (field) setServerError({ field, message: err.message });
+        else alert('일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요');
+      } else {
+        alert('일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요');
+      }
+    }
+  };
+
+  const withServerError = (
+    field: InputFieldConfigType,
+    value: string,
+    localErrorField: { error: boolean; errorMessage: string } = { error: false, errorMessage: '' }
+  ) => {
+    const hasServerError = serverError?.field === field;
+    return {
+      touched: hasServerError || !!value,
+      error: hasServerError || localErrorField.error,
+      errorMessage: hasServerError ? serverError.message : localErrorField.errorMessage,
+    };
   };
 
   return (
     <Container>
       <CardPreview
         fields={{
-          cardNumbers,
-          expirationDate: `${expirationDate['month']}/${expirationDate['year']}`,
+          cardNumbers: values.cardNumbers,
+          expirationDate: `${values.expirationDate['month']}/${values.expirationDate['year']}`,
         }}
-        cardBrand={detectCardBrand(cardNumbers)}
-        backgroundColor={getCardIssuerBackgroundColor(cardIssuer)}
+        cardBrand={detectCardBrand(values.cardNumbers)}
+        backgroundColor={getCardIssuerBackgroundColor(values.cardIssuer)}
       />
 
       <FormWrapper onSubmit={handleSubmit}>
         {step >= 5 && (
-          <InputFieldLayout
-            sectionTitle={INPUT_FIELD_CONFIG['PASSWORD'].sectionTitle}
-            hintText={INPUT_FIELD_CONFIG['PASSWORD'].hintText}
+          <FieldLayout
+            sectionTitle={INPUT_FIELD_CONFIG['password'].sectionTitle}
+            hintText={INPUT_FIELD_CONFIG['password'].hintText}
           >
-            <InputFieldForm
-              fields={convertValueFormat(password).map((value) => ({
+            <FieldSet
+              fields={convertValueFormat(values.password).map((value) => ({
                 value,
-                touched: !!value,
                 maxLength: VALIDATION_RULE.PASSWORD_LENGTH,
-                ...passwordValidator(value),
+                touched: !!value,
+                error: false,
+                errorMessage: '',
               }))}
-              fieldConfig={INPUT_FIELD_CONFIG['PASSWORD']}
-              onChanges={[handlePasswordChange]}
+              fieldConfig={INPUT_FIELD_CONFIG['password']}
+              onChanges={[(e: ChangeEvent<HTMLInputElement>) => handleTextChange('password')(e)]}
             />
-          </InputFieldLayout>
+          </FieldLayout>
         )}
 
         {step >= 4 && (
-          <InputFieldLayout sectionTitle={INPUT_FIELD_CONFIG['CVC'].sectionTitle}>
-            <InputFieldForm
-              fields={convertValueFormat(cvc).map((value) => ({
+          <FieldLayout sectionTitle={INPUT_FIELD_CONFIG['cvc'].sectionTitle}>
+            <FieldSet
+              fields={convertValueFormat(values.cvc).map((value) => ({
                 value,
-                touched: !!value,
                 maxLength: VALIDATION_RULE.CVC_LENGTH,
-                ...cvcValidator(value),
+                ...withServerError('cvc', value),
               }))}
-              fieldConfig={INPUT_FIELD_CONFIG['CVC']}
-              onChanges={[handleCVCChange]}
+              fieldConfig={INPUT_FIELD_CONFIG['cvc']}
+              onChanges={[(e: ChangeEvent<HTMLInputElement>) => handleTextChange('cvc')(e)]}
             />
-          </InputFieldLayout>
+          </FieldLayout>
         )}
 
         {step >= 3 && (
-          <InputFieldLayout
-            sectionTitle={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].sectionTitle}
-            hintText={INPUT_FIELD_CONFIG['EXPIRATION_DATE'].hintText}
+          <FieldLayout
+            sectionTitle={INPUT_FIELD_CONFIG['expirationDate'].sectionTitle}
+            hintText={INPUT_FIELD_CONFIG['expirationDate'].hintText}
           >
-            <InputFieldForm
-              fields={convertValueFormat(expirationDate).map((value, index) => ({
+            <FieldSet
+              fields={convertValueFormat(values.expirationDate).map((value, index) => ({
                 value,
-                touched: !!value,
                 maxLength: VALIDATION_RULE.EXPIRATION_DATE_LENGTH,
-                ...expirationDateValidator(value, index),
+                ...withServerError('expirationDate', value, expirationDateValidator(value, index)),
               }))}
-              fieldConfig={INPUT_FIELD_CONFIG['EXPIRATION_DATE']}
-              onChanges={[handleExpirationDateChange('month'), handleExpirationDateChange('year')]}
+              fieldConfig={INPUT_FIELD_CONFIG['expirationDate']}
+              onChanges={[handleExpirationChange('month'), handleExpirationChange('year')]}
             />
-          </InputFieldLayout>
+          </FieldLayout>
         )}
 
         {step >= 2 && (
-          <InputFieldLayout
-            sectionTitle={SELECT_FIELD_CONFIG['CARD_ISSUER'].sectionTitle}
-            hintText={SELECT_FIELD_CONFIG['CARD_ISSUER'].hintText}
+          <FieldLayout
+            sectionTitle={SELECT_FIELD_CONFIG['cardIssuer'].sectionTitle}
+            hintText={SELECT_FIELD_CONFIG['cardIssuer'].hintText}
           >
             <CardSelect
-              fieldConfig={SELECT_FIELD_CONFIG['CARD_ISSUER']}
-              onChange={handleCardIssuerSelect}
+              fieldConfig={SELECT_FIELD_CONFIG['cardIssuer']}
+              onChange={selectCardIssuer}
             />
-          </InputFieldLayout>
+          </FieldLayout>
         )}
 
-        <InputFieldLayout
-          sectionTitle={INPUT_FIELD_CONFIG['CARD_NUMBERS'].sectionTitle}
-          hintText={INPUT_FIELD_CONFIG['CARD_NUMBERS'].hintText}
+        <FieldLayout
+          sectionTitle={INPUT_FIELD_CONFIG['cardNumbers'].sectionTitle}
+          hintText={INPUT_FIELD_CONFIG['cardNumbers'].hintText}
         >
-          <InputFieldForm
-            fields={convertValueFormat(cardNumbers).map((value, index) => {
+          <FieldSet
+            fields={convertValueFormat(values.cardNumbers).map((value, index) => {
               const maxLength = getCardNumbersMaxLength(
-                detectCardBrand(cardNumbers),
-                cardNumbers.length,
+                detectCardBrand(values.cardNumbers),
+                values.cardNumbers.length,
                 index
               );
 
               return {
                 value,
-                touched: !!value,
                 maxLength,
-                ...cardNumbersValidator(value, maxLength),
+                ...withServerError('cardNumbers', value),
               };
             })}
-            fieldConfig={INPUT_FIELD_CONFIG['CARD_NUMBERS']}
-            onChanges={[0, 1, 2, 3].map(handleCardNumbersChange)}
+            fieldConfig={INPUT_FIELD_CONFIG['cardNumbers']}
+            onChanges={[0, 1, 2, 3].map(handleCardNumberChange)}
           />
-        </InputFieldLayout>
+        </FieldLayout>
 
-        {step >= 6 && <Button disabled={!isValid}>확인</Button>}
+        {isCardRegistrationComplete({
+          cardNumbers: values.cardNumbers,
+          expirationDate: values.expirationDate,
+          cvc: values.cvc,
+          password: values.password,
+          cardIssuer: values.cardIssuer,
+        }) && <Button disabled={!isValid}>확인</Button>}
       </FormWrapper>
     </Container>
   );

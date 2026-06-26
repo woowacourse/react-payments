@@ -8,7 +8,11 @@ export default function RegistrationCompletionPage() {
   const state = location.state;
   const navigate = useNavigate();
 
-  if (!state) return <Navigate to="/registration" />;
+  const handleNavigate = () => {
+    navigate('/list', { replace: true });
+  };
+
+  if (!state) return <Navigate to="/registration" replace />;
 
   return (
     <Container>
@@ -22,7 +26,7 @@ export default function RegistrationCompletionPage() {
         {`${state.cardIssuer}가 등록되었어요.`}
       </CompletedMessage>
 
-      <Button onClick={() => navigate('/registration')}>확인</Button>
+      <Button onClick={handleNavigate}>확인</Button>
     </Container>
   );
 }

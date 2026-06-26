@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import ServiceLayout from './components/Layout/ServiceLayout';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <RootLayout>
-      <ServiceLayout />
+      <Outlet />
     </RootLayout>
   );
 }

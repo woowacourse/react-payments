@@ -1,34 +1,42 @@
 export const CARD_ISSUER_CONFIG = {
   BC: {
     name: 'BC카드',
+    issuerCode: '31',
     color: '#F04651',
   },
   SHINHAN: {
     name: '신한카드',
+    issuerCode: '41',
     color: '#0046FF',
   },
-  KAKAO: {
+  KAKAOBANK: {
     name: '카카오뱅크',
+    issuerCode: '15',
     color: '#FFE600',
   },
   HYUNDAI: {
     name: '현대카드',
+    issuerCode: '61',
     color: '#000000',
   },
   WOORI: {
     name: '우리카드',
+    issuerCode: 'W1',
     color: '#007BC8',
   },
   LOTTE: {
     name: '롯데카드',
+    issuerCode: '71',
     color: '#ED1C24',
   },
   HANA: {
     name: '하나카드',
+    issuerCode: '21',
     color: '#009490',
   },
-  KB: {
+  KOOKMIN: {
     name: '국민카드',
+    issuerCode: '11',
     color: '#6A6056',
   },
 } as const;

@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 import { CARD_ISSUER_CONFIG } from '../../constants';
-import { SelectFieldConfig } from '../../types';
+import { SelectFieldConfig } from '../../types/field';
 import { CardIssuerType } from '../Form/PaymentForm';
 
 interface Props {

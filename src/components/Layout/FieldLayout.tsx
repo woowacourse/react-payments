@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import SectionTitle from '../Common/SectionTitle/SectionTitle';
 import HintText from '../Common/HintText/HintText';
 
-export default function InputFieldLayout({
+export default function FieldLayout({
   sectionTitle,
   hintText,
   children,

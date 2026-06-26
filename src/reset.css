@@ -45,7 +45,8 @@ h6 {
 }
 
 ol,
-ul {
+ul,
+li {
   list-style: none;
 }
 
